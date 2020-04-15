@@ -47,13 +47,13 @@ export default function ModifyIntro ({ nextStep, prevStep }) {
     return () => {
       document.removeEventListener('keydown', listener)
     }
-  }, [])
+  })
 
   return (
     <div>
       <Box mx={1}>
         <form onSubmit={onFormSubmit}>
-          <Typography
+          <Typography variant="body1"
             dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}
           />
           <div className={classes.actionsContainer}>

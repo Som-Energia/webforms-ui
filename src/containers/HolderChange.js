@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Container from '@material-ui/core/Container'
@@ -27,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 class HolderChange extends Component {
   render () {
-    // const classes = useStyles()
+    const classes = useStyles()
     return (
-      <Container maxWidth="md">
+      <Container maxWidth="md" className={classes.root}>
         <Paper elevation={3} className="holder-change wizard__step">
           <Typography className="step__title" variant="h5" component="h6">Holder Change</Typography>
           <p className="step__desc">Aquest formulari permet realitzar un canvi de titularitat d’un contracte actiu amb Som Energia.</p>
@@ -41,7 +40,7 @@ class HolderChange extends Component {
             fullWidth
           />
           <p className="small">Si no disposes de NIE i tens passaport, pots enviar-nos un correu a modifica@somenergia.coop amb les dades del punt de subministrament que vols canviar (número de contracte i CUPS), les dades de la nova persona titular (nom, cognoms, passaport adjunt, correu electrònic i telèfon de contacte) i dades IBAN de pagament.</p>
-          
+
           <Button variant="contained" color="primary">Següent pas</Button>
         </Paper>
       </Container>
