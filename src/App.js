@@ -47,7 +47,7 @@ const App = () => {
           <Grid item xs={12}>
             <Router>
               <Switch>
-                <Route exact path="/" component={Contract} />
+                <Route exact path="/" component={ModifyContract} />
                 <Route path="/new-contract" component={Contract} />
                 <Route path="/modify-contract" component={ModifyContract} />
                 <Route path="/holder-change" component={HolderChange} />
