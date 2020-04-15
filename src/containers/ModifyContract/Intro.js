@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -27,40 +27,50 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyIntro ( { nextStep, prevStep } ) {
+export default function ModifyIntro ({ nextStep, prevStep }) {
   const { t } = useTranslation()
   const classes = useStyles()
+
+  const onFormSubmit = event => {
+    console.log('submit!')
+    event.preventDefault()
+    nextStep()
+  }
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        onFormSubmit(event)
+      }
+    }
+    document.addEventListener('keydown', listener)
+    return () => {
+      document.removeEventListener('keydown', listener)
+    }
+  }, [])
 
   return (
     <div>
       <Box mx={1}>
-        <Typography
-          dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}
-        />
+        <form onSubmit={onFormSubmit}>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}
+          />
+          <div className={classes.actionsContainer}>
+            {
+              nextStep &&
+              <Button
+                type="submit"
+                className={classes.button}
+                variant="contained"
+                color="primary"
+              >
+                {t('SEGUENT_PAS')}
+              </Button>
+            }
+          </div>
+        </form>
       </Box>
-      <div className={classes.actionsContainer}>
-        {
-          prevStep &&
-          <Button
-            onClick={prevStep}
-            className={classes.button}
-            variant="contained"
-          >
-            {t('PAS_ANTERIOR')}
-          </Button>
-        }
-        {
-          nextStep &&
-          <Button
-            onClick={nextStep}
-            className={classes.button}
-            variant="contained"
-            color="primary"
-          >
-            {t('SEGUENT_PAS')}
-          </Button>
-        }
-      </div>
     </div>
   )
 }
