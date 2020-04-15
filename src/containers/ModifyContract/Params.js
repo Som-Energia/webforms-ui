@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
+function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -62,19 +62,24 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
   return (
     <div>
       <Formik
-        initialValues={{
-          changePhases: false,
-          phases: '',
-          changePower: false,
-          power: '',
-          moreThan15Kw: false,
-          changeFare: false,
-          fare: ''
-        }}
+        initialValues={
+          {
+            ...{
+              changePhases: false,
+              phases: '',
+              changePower: false,
+              power: '',
+              moreThan15Kw: false,
+              changeFare: false,
+              fare: ''
+            },
+            ...params
+          }
+        }
         validationSchema={ModifySchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values)
-          handleStepChanges(values)
+          handleStepChanges({ modify: values })
           nextStep()
         }}
       >
@@ -106,7 +111,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
                           onChange={event => handleChange(event)}
                           inputProps={{ 'aria-label': 'primary checkbox' }}
                           color="primary"
-                          value={values.changePhases}
+                          checked={values.changePhases}
                         />
                       </Grid>
                       <Grid item>{t('SI')}</Grid>
@@ -159,7 +164,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
                           onChange={event => handleChange(event)}
                           inputProps={{ 'aria-label': 'primary checkbox' }}
                           color="primary"
-                          value={values.changePower}
+                          checked={values.changePower}
                         />
                       </Grid>
                       <Grid item>{t('SI')}</Grid>
@@ -177,7 +182,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
               <TextField
                 id="power"
                 name="power"
-                label="Quina potència vols contractar? *"
+                label={t('POTENCIA_A_CONTRACTAR') + ' *'}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">kW</InputAdornment>,
                   startAdornment: (values.moreThan15Kw ? (<InputAdornment position="start">P1</InputAdornment>) : null)
@@ -195,7 +200,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
                 <TextField
                   id="power2"
                   name="power2"
-                  label="Quina potència vols contractar? *"
+                  label={t('POTENCIA_A_CONTRACTAR') + ' *'}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">P2</InputAdornment>,
                     endAdornment: <InputAdornment position="end">kW</InputAdornment>,
@@ -214,7 +219,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
                 <TextField
                   id="power3"
                   name="power3"
-                  label="Quina potència vols contractar? *"
+                  label={t('POTENCIA_A_CONTRACTAR') + ' *'}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">P3</InputAdornment>,
                     endAdornment: <InputAdornment position="end">kW</InputAdornment>,
@@ -252,7 +257,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges }) {
                           onChange={event => handleChange(event)}
                           inputProps={{ 'aria-label': 'primary checkbox' }}
                           color="primary"
-                          value={values.changeFare}
+                          checked={values.changeFare}
                         />
                       </Grid>
                       <Grid item>{t('SI')}</Grid>

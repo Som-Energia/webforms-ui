@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -48,8 +48,11 @@ function ModifyContract () {
     'REVISIO_CONFIRMACIO_DADES'
   ]
 
+  useEffect(() => {
+    console.log(data)
+  })
+
   const handleStepChanges = (params) => {
-    console.log('params', params)
     setData({ ...data, ...params })
   }
 
@@ -65,12 +68,14 @@ function ModifyContract () {
           nextStep={nextStep}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
+          params={data?.modify}
         />
       case 2:
         return <Contact
           nextStep={nextStep}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
+          params={data?.contact}
         />
       default:
         return <Resume

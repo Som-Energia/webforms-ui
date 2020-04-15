@@ -41,6 +41,7 @@ const resources = {
       TRIFASICA: 'Trifàsica',
       HELP_INSTALL_TYPE: 'Com identificar si una instal·lació és <a target="_blank" href="{{url}}">trifàsica o monofàsica</a>',
       HELP_INSTALL_TYPE_URL: 'http://ca.support.somenergia.coop/article/479-tinc-una-instal-lacio-monofasica-o-trifasica',
+      POTENCIA_A_CONTRACTAR: 'Quina potència vols contractar?',
       DISCRIMINACIO_HORARIA: 'Vols discriminació horària?',
       SENSE_DISCRIMINACIO_HORARIA: 'Sense discriminació horària',
       HELP_POTENCIA: 'Com esbrinar <a target="_blank" href="{{url}}">la potència que necessito</a>',
@@ -57,7 +58,14 @@ const resources = {
       INVALID_POWER_21: 'La potència per tarifes 2.1 hauria ha d\'estar entre 10kW i 15kW',
       INVALID_POWER_30: 'Al menys un període ha de tenir una potència superior o igual a 15kW',
       NO_HOURLY_DISCRIMINATION_CHOSEN: 'No has especificat si vols fer discriminació horària',
-      MES_GRAN_DE_15KW: 'Superior a 15kW'
+      MES_GRAN_DE_15KW: 'Superior a 15kW',
+      NAME: 'Nom',
+      SURNAME: 'Cognoms',
+      PHONE: 'Telèfon',
+      NO_NAME: 'No has especificat el nom',
+      NO_SURNAME: 'No has especificat els cognoms',
+      NO_PHONE: 'No has especificat un telèfon correcte'
+
     }
   }
 }
