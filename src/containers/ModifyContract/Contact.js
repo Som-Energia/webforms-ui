@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
+
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,10 +31,15 @@ const useStyles = makeStyles(theme => ({
 export default function ModifyParams ({ nextStep, prevStep, handleChange }) {
   const classes = useStyles()
   const { t } = useTranslation()
+
   return (
     <div>
-      MODIFY_POTTAR_CONTACT
-      <Box mx={3} mb={3}>
+      <Box mx={1} mt={2} mb={1}>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: t('HELP_CONTACT_INFO') }}
+        />
+      </Box>
+      <Box mx={1} mb={3}>
         <TextField
           id="contact_name"
           name="contact_name"
@@ -45,8 +52,6 @@ export default function ModifyParams ({ nextStep, prevStep, handleChange }) {
           variant="outlined"
           margin="normal"
         />
-      </Box>
-      <Box mx={3} mb={3}>
         <TextField
           id="contact_surname"
           name="contact_surname"
@@ -59,8 +64,6 @@ export default function ModifyParams ({ nextStep, prevStep, handleChange }) {
           variant="outlined"
           margin="normal"
         />
-      </Box>
-      <Box mx={3} mb={3}>
         <TextField
           id="phone"
           name="phone"

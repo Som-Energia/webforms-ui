@@ -9,10 +9,10 @@ import StepContent from '@material-ui/core/StepContent'
 // import Paper from '@material-ui/core/Paper'
 // import Typography from '@material-ui/core/Typography'
 
-import ModifyIntro from './ModifyContract/ModifyIntro'
-import ModifyParams from './ModifyContract/ModifyParams'
-import ModifyContact from './ModifyContract/ModifyContact'
-import ModifyResume from './ModifyContract/ModifyResume'
+import Intro from './ModifyContract/Intro'
+import Params from './ModifyContract/Params'
+import Contact from './ModifyContract/Contact'
+import Resume from './ModifyContract/Resume'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,38 +48,35 @@ function ModifyContract () {
     'REVISIO_CONFIRMACIO_DADES'
   ]
 
-  const handleChange = (event) => {
-    console.log(event.target.name, event.target.value)
-    const value = {}
-    value[event.target.name] = event.target.value
-    setData({ ...data, ...value })
-    console.log(data)
+  const handleStepChanges = (params) => {
+    console.log('params', params)
+    setData({ ...data, ...params })
   }
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <ModifyIntro
+        return <Intro
           nextStep={nextStep}
-          handleChange={handleChange}
+          handleStepChanges={handleStepChanges}
         />
       case 1:
-        return <ModifyParams
+        return <Params
           nextStep={nextStep}
           prevStep={prevStep}
-          handleChange={handleChange}
+          handleStepChanges={handleStepChanges}
         />
       case 2:
-        return <ModifyContact
+        return <Contact
           nextStep={nextStep}
           prevStep={prevStep}
-          handleChange={handleChange}
+          handleStepChanges={handleStepChanges}
         />
       default:
-        return <ModifyResume
+        return <Resume
           nextStep={nextStep}
           prevStep={prevStep}
-          handleChange={handleChange}
+          handleStepChanges={handleStepChanges}
         />
     }
   }

@@ -2,8 +2,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+
+import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,7 +33,11 @@ export default function ModifyIntro ( { nextStep, prevStep } ) {
 
   return (
     <div>
-      <Typography dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}></Typography>
+      <Box mx={1}>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}
+        />
+      </Box>
       <div className={classes.actionsContainer}>
         {
           prevStep &&

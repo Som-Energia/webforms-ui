@@ -47,7 +47,17 @@ const resources = {
       HELP_POTENCIA_URL: 'http://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito',
       AMB_DISCRIMINACIO_HORARIA: 'Amb discriminació horària',
       HELP_DISCRIMINACIO_HORARIA: 'Com puc saber <a target="_blank" href="{{url}}">si em convé discriminació horària o no</a>',
-      HELP_DISCRIMINACIO_HORARIA_URL: 'http://ca.support.somenergia.coop/article/270-com-puc-saber-si-em-surt-a-compte-tenir-discriminacio-horaria'
+      HELP_DISCRIMINACIO_HORARIA_URL: 'http://ca.support.somenergia.coop/article/270-com-puc-saber-si-em-surt-a-compte-tenir-discriminacio-horaria',
+      NO_MONOPHASE_CHOICE: 'No has especificat si la instal·lació és de tipus monofàsica o trifàsica',
+      NO_FARE_CHOSEN: 'No has especificat la tarifa',
+      NO_POWER_CHOSEN: 'No has especificat la potència',
+      NO_POWER_CHOSEN_P2: 'No has especificat la potència pel període P2',
+      NO_POWER_CHOSEN_P3: 'No has especificat la potència pel període P3',
+      INVALID_POWER_20: 'La potència per tarifes 2.0 ha de ser inferior a 10kW',
+      INVALID_POWER_21: 'La potència per tarifes 2.1 hauria ha d\'estar entre 10kW i 15kW',
+      INVALID_POWER_30: 'Al menys un període ha de tenir una potència superior o igual a 15kW',
+      NO_HOURLY_DISCRIMINATION_CHOSEN: 'No has especificat si vols fer discriminació horària',
+      MES_GRAN_DE_15KW: 'Superior a 15kW'
     }
   }
 }
