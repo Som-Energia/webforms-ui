@@ -47,8 +47,6 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       .when('changePower', {
         is: true,
         then: Yup.number()
-          .min(1, 'Too Short!')
-          .max(3, 'Too Long!')
           .required(t('NO_POWER_CHOSEN'))
       }),
     fare: Yup.string()
@@ -58,6 +56,21 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           .required(t('NO_HOURLY_DISCRIMINATION_CHOSEN'))
       })
   })
+
+  const handleChangePower = (event, setFieldValue, { moreThan15Kw, power, power2, power3 }) => {
+    const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
+    const regexMoreThan15 = /^\d*([.,'])?\d{0,3}/g
+    const regex = moreThan15Kw ? regexMoreThan15 : regexLessThan15
+
+    const match = regex.exec(event.target.value)
+    let result = match[0].replace(',', '.')
+    result = result.replace('\'', '.')
+
+    result = (!moreThan15Kw && result <= 15) ? result
+      : (moreThan15Kw && result < 450) ? result : result.slice(0, -1)
+
+    setFieldValue(event.target.name, result)
+  }
 
   return (
     <div>
@@ -69,6 +82,8 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               phases: '',
               changePower: false,
               power: '',
+              power2: '',
+              power3: '',
               moreThan15Kw: false,
               changeFare: false,
               fare: ''
@@ -77,8 +92,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           }
         }
         validationSchema={ModifySchema}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values)
+        onSubmit={(values) => {
           handleStepChanges({ modify: values })
           nextStep()
         }}
@@ -90,7 +104,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          setFieldValue
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
@@ -108,7 +122,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                       <Grid item>
                         <Switch
                           name="changePhases"
-                          onChange={event => handleChange(event)}
+                          onChange={handleChange}
                           inputProps={{ 'aria-label': 'primary checkbox' }}
                           color="primary"
                           checked={values.changePhases}
@@ -129,7 +143,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                 label={t('TIPUS_INSTALLACIO')}
                 variant="outlined"
                 fullWidth
-                onChange={event => handleChange(event)}
+                onChange={handleChange}
                 value={values.phases}
                 error={(errors.phases && touched.phases)}
                 helperText={(touched.phases && errors.phases)}
@@ -161,7 +175,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                       <Grid item>
                         <Switch
                           name="changePower"
-                          onChange={event => handleChange(event)}
+                          onChange={handleChange}
                           inputProps={{ 'aria-label': 'primary checkbox' }}
                           color="primary"
                           checked={values.changePower}
@@ -187,8 +201,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   endAdornment: <InputAdornment position="end">kW</InputAdornment>,
                   startAdornment: (values.moreThan15Kw ? (<InputAdornment position="start">P1</InputAdornment>) : null)
                 }}
-                onChange={event => handleChange(event)}
-                onBlur={handleBlur}
+                onChange={event => handleChangePower(event, setFieldValue, values)}
                 value={values.power}
                 fullWidth
                 variant="outlined"
@@ -203,9 +216,9 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   label={t('POTENCIA_A_CONTRACTAR') + ' *'}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">P2</InputAdornment>,
-                    endAdornment: <InputAdornment position="end">kW</InputAdornment>,
+                    endAdornment: <InputAdornment position="end">kW</InputAdornment>
                   }}
-                  onChange={event => handleChange(event)}
+                  onChange={event => handleChangePower(event, setFieldValue, values)}
                   onBlur={handleBlur}
                   value={values.power2}
                   fullWidth
@@ -222,9 +235,9 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   label={t('POTENCIA_A_CONTRACTAR') + ' *'}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">P3</InputAdornment>,
-                    endAdornment: <InputAdornment position="end">kW</InputAdornment>,
+                    endAdornment: <InputAdornment position="end">kW</InputAdornment>
                   }}
-                  onChange={event => handleChange(event)}
+                  onChange={event => handleChangePower(event, setFieldValue, values)}
                   onBlur={handleBlur}
                   value={values.power3}
                   fullWidth
