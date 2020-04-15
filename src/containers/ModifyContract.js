@@ -82,6 +82,7 @@ function ModifyContract () {
           nextStep={nextStep}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
+          params={data}
         />
     }
   }

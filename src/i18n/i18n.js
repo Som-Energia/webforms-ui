@@ -11,6 +11,7 @@ const resources = {
       SEGUENT_PAS: 'Següent pas',
       PAS_ANTERIOR: 'Pas anterior',
       ENVIAR: 'Enviar',
+      ENVIANT: 'Enviant',
       SELECCIONA: 'Selecciona',
       CONTRACT_MODIFICATION_FORM: 'Modificacions de potència i/o tarifa',
       MODIFY_POTTAR_INTRO_TITLE: 'Avís important',
@@ -64,8 +65,12 @@ const resources = {
       PHONE: 'Telèfon',
       NO_NAME: 'No has especificat el nom',
       NO_SURNAME: 'No has especificat els cognoms',
-      NO_PHONE: 'No has especificat un telèfon correcte'
-
+      NO_PHONE: 'No has especificat un telèfon correcte',
+      MODIFY_POTTAR: 'Petició de canvi de Tarifa i/o Potència',
+      POWER: 'Potència',
+      FARE: 'Tarifa',
+      CONTACT_PHONE: 'Telèfon de contacte per accedir al comptador',
+      REVIEW_DATA_AND_CONFIRM: 'Reviseu les dades. Per confirmar-les, premeu el botó del final.'
     }
   }
 }
