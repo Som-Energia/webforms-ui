@@ -41,11 +41,9 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
     contact_surname: Yup.string()
       .required(t('NO_SURNAME')),
     phone: Yup.string()
+      .matches(/^\d{9}$/, t('NO_PHONE'))
       .required(t('NO_PHONE'))
   })
-
-  console.log('render contact!')
-  console.log(params)
 
   return (
     <div>
