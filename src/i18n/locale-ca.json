@@ -63,5 +63,6 @@
   "POWER": "Potència",
   "FARE": "Tarifa",
   "CONTACT_PHONE": "Contacte per accedir al comptador",
-  "REVIEW_DATA_AND_CONFIRM": "Reviseu les dades. Per confirmar-les, premeu el botó del final."
+  "REVIEW_DATA_AND_CONFIRM": "Reviseu les dades. Per confirmar-les, premeu el botó del final.",
+  "INVALID_FIELD": "Hi ha algun camp incorrecte"
 }
