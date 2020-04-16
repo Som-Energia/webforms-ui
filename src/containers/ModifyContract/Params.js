@@ -12,9 +12,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
+import Paper from '@material-ui/core/Paper'
 import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,10 +28,14 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   actionsContainer: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(1)
   },
   resetContainer: {
     padding: theme.spacing(3)
+  },
+  paperContainer: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2)
   }
 }))
 
@@ -48,6 +55,26 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
         is: true,
         then: Yup.number()
           .required(t('NO_POWER_CHOSEN'))
+      }),
+    power2: Yup.number()
+      .when('changePower', {
+        is: true,
+        then: Yup.number()
+          .when('moreThan15Kw', {
+            is: true,
+            then: Yup.number()
+              .required(t('NO_POWER_CHOSEN'))
+          })
+      }),
+    power3: Yup.number()
+      .when('changePower', {
+        is: true,
+        then: Yup.number()
+          .when('moreThan15Kw', {
+            is: true,
+            then: Yup.number()
+              .required(t('NO_POWER_CHOSEN'))
+          })
       }),
     fare: Yup.string()
       .when('changeFare', {
@@ -73,7 +100,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
   }
 
   return (
-    <div>
+    <Paper className={classes.paperContainer} elevation={0}>
       <Formik
         initialValues={
           {
@@ -325,6 +352,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   className={classes.button}
                   variant="contained"
                   color="primary"
+                  endIcon={<ArrowForwardIosIcon />}
                   disabled={!values.changePhases && !values.changePower && !values.changeFare}
                 >
                   {t('SEGUENT_PAS')}
@@ -334,7 +362,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           </form>
         )}
       </Formik>
-    </div>
+    </Paper>
   )
 }
 

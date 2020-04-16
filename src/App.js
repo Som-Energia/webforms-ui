@@ -16,13 +16,19 @@ import ModifyContract from './containers/ModifyContract'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#bac92a'
+      main: '#96b633'
     },
     secondary: {
-      main: '#8a8990'
+      main: '#a1a1a1'
     },
-    contrastThreshold: 3,
-    tonalOffset: 0.2
+    contrastThreshold: 1,
+    tonalOffset: 0.1
+  },
+  typography: {
+    color: '#4d4d4d'
+  },
+  shape: {
+    borderRadius: '0'
   }
 })
 
@@ -33,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    color: theme.palette.text.secondary
+    color: '#4d4d4d'
   }
 }))
 

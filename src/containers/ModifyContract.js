@@ -16,21 +16,22 @@ import Resume from './ModifyContract/Resume'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
+    width: '100%',
+    backgroundColor: '#f2f2f2'
   },
   actionsContainer: {
     marginBottom: theme.spacing(2)
   },
   resetContainer: {
-    padding: theme.spacing(3)
+    padding: theme.spacing(2)
+  },
+  stepper: {
+    backgroundColor: '#f2f2f2',
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1)
   },
   stepLabel: {
-    fontSize: '1.5rem',
-    color: 'red'
+    fontSize: '1.25rem'
   }
 }))
 
@@ -97,10 +98,10 @@ function ModifyContract () {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel className={classes.stepLabel}>{t(label)}</StepLabel>
+            <StepLabel><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
             <StepContent>
               {getStepContent(index)}
             </StepContent>

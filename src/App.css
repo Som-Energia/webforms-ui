@@ -1,7 +1,11 @@
 body {
   font-family: 'Roboto';
   background: #f2f2f2;
-  color: #4d4d4d;  
+  color: #4d4d4d;
+}
+
+a {
+  color: #707a1a
 }
 
 .wizard__step {

@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 import SendIcon from '@material-ui/icons/Send'
@@ -19,51 +19,59 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   actionsContainer: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(1)
   },
   resetContainer: {
     padding: theme.spacing(3)
+  },
+  paperContainer: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2)
   }
 }))
 
 export default function ModifyResume ({ prevStep, nextStep, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
+
+  const handleSubmit = event => {
+    console.log('final submit!')
+    console.log(params)
+  }
+
   return (
-    <div>
+    <Paper className={classes.paperContainer} elevation={0}>
       <Box mt={2} mx={1}>
-        <Typography variant="h6" gutterBottom>
-          {t('MODIFY_POTTAR')}
-        </Typography>
         <Typography gutterBottom>
           {t('REVIEW_DATA_AND_CONFIRM')}
         </Typography>
       </Box>
-      <Box mt={2} mx={1}>
-        <Typography variant="subtitle2">
-          {t('FARE')}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {params?.modify?.fare}
-        </Typography>
-      </Box>
-      <Box mt={2} mx={1}>
-        <Typography variant="subtitle2">
-          {t('POWER')}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {params?.modify?.power} kW
-        </Typography>
-      </Box>
+      { params.modify?.fare &&
+        <Box mt={2} mx={1}>
+          <Typography variant="subtitle2">
+            {t('FARE')}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {params.modify?.fare}
+          </Typography>
+        </Box>
+      }
+      { params.modify?.power &&
+        <Box mt={2} mx={1}>
+          <Typography variant="subtitle2">
+            {t('POWER')}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {params.modify?.power} kW
+          </Typography>
+        </Box>
+      }
       <Box mt={2} mb={2} mx={1}>
         <Typography variant="subtitle2">
           {t('CONTACT_PHONE')}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          {params?.contact?.phone}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {params?.contact?.name} {params?.contact?.surname}
+          {params.contact?.phone} ({params.contact?.contact_name} {params.contact?.contact_surname})
         </Typography>
       </Box>
       <div className={classes.actionsContainer}>
@@ -79,7 +87,7 @@ export default function ModifyResume ({ prevStep, nextStep, params }) {
         {
           nextStep &&
           <Button
-            onClick={nextStep}
+            onClick={handleSubmit}
             className={classes.button}
             color="primary"
             variant="contained"
@@ -89,6 +97,6 @@ export default function ModifyResume ({ prevStep, nextStep, params }) {
           </Button>
         }
       </div>
-    </div>
+    </Paper>
   )
 }

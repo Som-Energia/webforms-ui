@@ -8,8 +8,11 @@ import * as Yup from 'yup'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   actionsContainer: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(1)
   },
   resetContainer: {
     padding: theme.spacing(3)
@@ -28,6 +31,10 @@ const useStyles = makeStyles(theme => ({
   stepLabel: {
     fontSize: '1.5rem',
     color: 'red'
+  },
+  paperContainer: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2)
   }
 }))
 
@@ -46,7 +53,7 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
   })
 
   return (
-    <div>
+    <Paper className={classes.paperContainer} elevation={0}>
       <Formik
         initialValues={
           {
@@ -138,6 +145,7 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                   className={classes.button}
                   color="primary"
                   variant="contained"
+                  endIcon={<ArrowForwardIosIcon />}
                 >
                   {t('SEGUENT_PAS')}
                 </Button>
@@ -146,6 +154,6 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
           </form>
         )}
       </Formik>
-    </div>
+    </Paper>
   )
 }

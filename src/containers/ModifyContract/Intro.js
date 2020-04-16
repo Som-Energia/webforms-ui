@@ -5,7 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   actionsContainer: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(1)
   },
   resetContainer: {
     padding: theme.spacing(3)
@@ -24,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   stepLabel: {
     fontSize: '1.5rem',
     color: 'red'
+  },
+  paperContainer: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2)
   }
 }))
 
@@ -50,7 +57,7 @@ export default function ModifyIntro ({ nextStep, prevStep }) {
   })
 
   return (
-    <div>
+    <Paper className={classes.paperContainer} elevation={0}>
       <Box mx={1}>
         <form onSubmit={onFormSubmit}>
           <Typography variant="body1"
@@ -64,6 +71,7 @@ export default function ModifyIntro ({ nextStep, prevStep }) {
                 className={classes.button}
                 variant="contained"
                 color="primary"
+                endIcon={<ArrowForwardIosIcon />}
               >
                 {t('SEGUENT_PAS')}
               </Button>
@@ -71,6 +79,6 @@ export default function ModifyIntro ({ nextStep, prevStep }) {
           </div>
         </form>
       </Box>
-    </div>
+    </Paper>
   )
 }
