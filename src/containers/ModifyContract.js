@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
+
+import Alert from '@material-ui/lab/Alert'
+import AlertTitle from '@material-ui/lab/AlertTitle'
+
+import Grow from '@material-ui/core/Grow'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
-// import Paper from '@material-ui/core/Paper'
-// import Typography from '@material-ui/core/Typography'
 
 import Intro from './ModifyContract/Intro'
 import Params from './ModifyContract/Params'
@@ -25,10 +28,14 @@ const useStyles = makeStyles(theme => ({
   resetContainer: {
     padding: theme.spacing(2)
   },
+  responseContainer: {
+    padding: theme.spacing(1)
+  },
   stepper: {
     backgroundColor: '#f2f2f2',
     paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1)
+    paddingRight: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
   },
   stepLabel: {
     fontSize: '1.25rem'
@@ -101,13 +108,29 @@ function ModifyContract () {
       <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+            <StepLabel error={ (index === steps.length - 1) && data?.error } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
             <StepContent>
               {getStepContent(index)}
             </StepContent>
           </Step>
         ))}
       </Stepper>
+      <Grow in={data?.error}>
+        <div className={classes.responseContainer}>
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {t(data?.error?.code)}
+          </Alert>
+        </div>
+      </Grow>
+      <Grow in={data?.response}>
+        <div className={classes.responseContainer}>
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            {t(data?.response?.code)}
+          </Alert>
+        </div>
+      </Grow>
     </div>
   )
 }

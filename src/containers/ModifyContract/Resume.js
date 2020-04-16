@@ -3,6 +3,8 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
+import { modifyContract } from '../../services/api'
+
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
@@ -30,13 +32,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyResume ({ prevStep, nextStep, params }) {
+export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
 
   const handleSubmit = event => {
     console.log('final submit!')
-    console.log(params)
+    modifyContract(params)
+      .then(response => {
+        console.log('response 2')
+        console.log(response)
+        handleStepChanges({ response: response.data })
+        nextStep()
+      })
+      .catch(error => {
+        console.log('error catch!')
+        console.log(error)
+        handleStepChanges({ error: error?.response?.data?.error })
+        nextStep()
+      })
   }
 
   return (
@@ -66,7 +80,7 @@ export default function ModifyResume ({ prevStep, nextStep, params }) {
           </Typography>
         </Box>
       }
-      <Box mt={2} mb={2} mx={1}>
+      <Box mt={2} mb={3} mx={1}>
         <Typography variant="subtitle2">
           {t('CONTACT_PHONE')}
         </Typography>
@@ -85,7 +99,6 @@ export default function ModifyResume ({ prevStep, nextStep, params }) {
           </Button>
         }
         {
-          nextStep &&
           <Button
             onClick={handleSubmit}
             className={classes.button}
