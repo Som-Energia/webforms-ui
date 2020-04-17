@@ -7,6 +7,7 @@ import { modifyContract } from '../../services/api'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
@@ -55,28 +56,62 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
-      <Box mt={2} mx={1}>
+      <Box mt={2} mx={1} mb={2}>
         <Typography gutterBottom>
           {t('REVIEW_DATA_AND_CONFIRM')}
         </Typography>
       </Box>
+      { params.modify?.phases &&
+        <Box mt={2} mx={1}>
+          <Typography variant="subtitle2">
+            {t('TIPUS_INSTALLACIO')}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {(params.modify?.phases === 'mono') ? t('MONOFASICA_NORMAL') : t('TRIFASICA')}
+          </Typography>
+        </Box>
+      }
+      { params.modify?.power &&
+        <Box mt={2} mx={1}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Typography variant="subtitle2">
+                {t('POWER')}{(params?.modify?.moreThan15Kw ? ' P1' : null)}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {params.modify?.power} kW
+              </Typography>
+            </Grid>
+            { params?.modify?.moreThan15Kw &&
+            <Grid item>
+              <Typography variant="subtitle2">
+                {t('POWER')} P2
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {params.modify?.power2} kW
+              </Typography>
+            </Grid>
+            }
+            { params?.modify?.moreThan15Kw &&
+            <Grid item>
+              <Typography variant="subtitle2">
+                {t('POWER')} P3
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {params.modify?.power3} kW
+              </Typography>
+            </Grid>
+            }
+          </Grid>
+        </Box>
+      }
       { params.modify?.fare &&
         <Box mt={2} mx={1}>
           <Typography variant="subtitle2">
             {t('FARE')}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            {params.modify?.fare}
-          </Typography>
-        </Box>
-      }
-      { params.modify?.power &&
-        <Box mt={2} mx={1}>
-          <Typography variant="subtitle2">
-            {t('POWER')}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            {params.modify?.power} kW
+            {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
           </Typography>
         </Box>
       }
