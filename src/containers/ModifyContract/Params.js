@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import Paper from '@material-ui/core/Paper'
@@ -36,6 +35,15 @@ const useStyles = makeStyles(theme => ({
   paperContainer: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
+  },
+  paramTitle: {
+    fontSize: '1.15rem'
+  },
+  switch: {
+    marginLeft: theme.spacing(2)
+  },
+  switchLabel: {
+    marginLeft: 0
   }
 }))
 
@@ -55,7 +63,12 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
         is: true,
         then: Yup.number()
           .required(t('NO_POWER_CHOSEN'))
-      }),
+      })
+      .test('oneMoreThan15Kw',
+        t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+        function (item) {
+          return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
+        }),
     power2: Yup.number()
       .when('changePower', {
         is: true,
@@ -65,7 +78,12 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
             then: Yup.number()
               .required(t('NO_POWER_CHOSEN'))
           })
-      }),
+      })
+      .test('oneMoreThan15Kw',
+        t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+        function (item) {
+          return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
+        }),
     power3: Yup.number()
       .when('changePower', {
         is: true,
@@ -75,7 +93,12 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
             then: Yup.number()
               .required(t('NO_POWER_CHOSEN'))
           })
-      }),
+      })
+      .test('oneMoreThan15Kw',
+        t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+        function (item) {
+          return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
+        }),
     fare: Yup.string()
       .when('changeFare', {
         is: true,
@@ -119,9 +142,11 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           }
         }
         validationSchema={ModifySchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true)
           handleStepChanges({ modify: values })
           nextStep()
+          setSubmitting(false)
         }}
       >
         {({
@@ -131,35 +156,28 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           handleChange,
           handleBlur,
           handleSubmit,
-          setFieldValue
-          /* and other goodies */
+          setFieldValue,
+          isSubmitting
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <Box mx={1} mt={2} mb={1}>
-              <Grid component="div" container alignItems="center" spacing={3}>
-                <Grid item>
-                  <Typography variant="h6">
+              <FormControlLabel
+                className={classes.switchLabel}
+                label={
+                  <Typography variant="h6" className={classes.paramTitle}>
                     {t('MODIFY_ANSWER_INSTAL_TYPE')}
                   </Typography>
-                </Grid>
-                <Grid item>
-                  <div>
-                    <Grid component="label" container alignItems="center" spacing={1}>
-                      <Grid item>{t('NO')}</Grid>
-                      <Grid item>
-                        <Switch
-                          name="changePhases"
-                          onChange={handleChange}
-                          inputProps={{ 'aria-label': 'primary checkbox' }}
-                          color="primary"
-                          checked={values.changePhases}
-                        />
-                      </Grid>
-                      <Grid item>{t('SI')}</Grid>
-                    </Grid>
-                  </div>
-                </Grid>
-              </Grid>
+                }
+                labelPlacement="start"
+                control={<Switch
+                  name="changePhases"
+                  className={classes.switch}
+                  onChange={handleChange}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  color="primary"
+                  checked={values.changePhases}
+                />}
+              />
             </Box>
             {values.changePhases &&
             <Box mx={1} mt={2} mb={2}>
@@ -188,42 +206,36 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>
             </Box>
 
-            <Box mx={1} mb={0}>
-              <Grid component="div" container alignItems="center" spacing={3}>
-                <Grid item>
-                  <Typography variant="h6">
+            <Box mx={1} mb={1}>
+              <FormControlLabel
+                className={classes.switchLabel}
+                label={
+                  <Typography variant="h6" className={classes.paramTitle}>
                     {t('MODIFY_ANSWER_POWER')}
                   </Typography>
-                </Grid>
-                <Grid item>
-                  <div>
-                    <Grid component="label" container alignItems="center" spacing={1}>
-                      <Grid item>{t('NO')}</Grid>
-                      <Grid item>
-                        <Switch
-                          name="changePower"
-                          onChange={handleChange}
-                          inputProps={{ 'aria-label': 'primary checkbox' }}
-                          color="primary"
-                          checked={values.changePower}
-                        />
-                      </Grid>
-                      <Grid item>{t('SI')}</Grid>
-                    </Grid>
-                  </div>
-                </Grid>
-              </Grid>
+                }
+                labelPlacement="start"
+                control={<Switch
+                  name="changePower"
+                  className={classes.switch}
+                  onChange={handleChange}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  color="primary"
+                  checked={values.changePower}
+                />}
+              />
             </Box>
             {values.changePower &&
             <Box mx={1} mb={1}>
               <FormControlLabel
-                control={<Checkbox onChange={handleChange} name="moreThan15Kw" color="primary" />}
+                control={<Checkbox checked={values.moreThan15Kw} onChange={handleChange} name="moreThan15Kw" color="primary" />}
                 label={t('MES_GRAN_DE_15KW')}
               />
               <TextField
+                required
                 id="power"
                 name="power"
-                label={t('POTENCIA_A_CONTRACTAR') + ' *'}
+                label={t('POTENCIA_A_CONTRACTAR')}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">kW</InputAdornment>,
                   startAdornment: (values.moreThan15Kw ? (<InputAdornment position="start">P1</InputAdornment>) : null)
@@ -281,33 +293,26 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
             </Box>
 
             <Box mx={1} mb={1}>
-              <Grid component="div" container alignItems="center" spacing={3}>
-                <Grid item>
-                  <Typography variant="h6">
+              <FormControlLabel
+                className={classes.switchLabel}
+                label={
+                  <Typography variant="h6" className={classes.paramTitle}>
                     {t('MODIFY_ANSWER_FARE')}
                   </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography component="div">
-                    <Grid component="label" container alignItems="center" spacing={1}>
-                      <Grid item>{t('NO')}</Grid>
-                      <Grid item>
-                        <Switch
-                          name="changeFare"
-                          onChange={event => handleChange(event)}
-                          inputProps={{ 'aria-label': 'primary checkbox' }}
-                          color="primary"
-                          checked={values.changeFare}
-                        />
-                      </Grid>
-                      <Grid item>{t('SI')}</Grid>
-                    </Grid>
-                  </Typography>
-                </Grid>
-              </Grid>
+                }
+                labelPlacement="start"
+                control={<Switch
+                  name="changeFare"
+                  className={classes.switch}
+                  onChange={handleChange}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  color="primary"
+                  checked={values.changeFare}
+                />}
+              />
             </Box>
             {values.changeFare &&
-              <Box mx={1} mt={1} mb={2}>
+              <Box mx={1} mt={2} mb={2}>
                 <TextField
                   select
                   id="fare"
@@ -353,7 +358,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   variant="contained"
                   color="primary"
                   endIcon={<ArrowForwardIosIcon />}
-                  disabled={!values.changePhases && !values.changePower && !values.changeFare}
+                  disabled={(!values.changePhases && !values.changePower && !values.changeFare) || isSubmitting}
                 >
                   {t('SEGUENT_PAS')}
                 </Button>
