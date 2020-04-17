@@ -79,7 +79,6 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
           handleBlur,
           handleSubmit,
           isSubmitting
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
             <Box mx={1} mt={2} mb={1}>
@@ -91,7 +90,7 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
               <TextField
                 id="contact_name"
                 name="contact_name"
-                label={t('NAME') + ' *'}
+                label={t('NAME')}
                 error={(errors.contact_name && touched.contact_name)}
                 helperText={(touched.contact_name && errors.contact_name)}
                 onChange={handleChange}
@@ -100,11 +99,13 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 fullWidth
                 variant="outlined"
                 margin="normal"
+                required
+                autoFocus
               />
               <TextField
                 id="contact_surname"
                 name="contact_surname"
-                label={t('SURNAME') + ' *'}
+                label={t('SURNAME')}
                 error={(errors.contact_surname && touched.contact_surname)}
                 helperText={(touched.contact_surname && errors.contact_surname)}
                 onChange={handleChange}
@@ -113,11 +114,12 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 fullWidth
                 variant="outlined"
                 margin="normal"
+                required
               />
               <TextField
                 id="phone"
                 name="phone"
-                label={t('PHONE') + ' *'}
+                label={t('PHONE')}
                 error={(errors.phone && touched.phone)}
                 helperText={(touched.phone && errors.phone)}
                 onChange={handleChange}
@@ -126,6 +128,7 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 fullWidth
                 variant="outlined"
                 margin="normal"
+                required
               />
             </Box>
             <div className={classes.actionsContainer}>

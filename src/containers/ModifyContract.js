@@ -104,22 +104,22 @@ function ModifyContract () {
       <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel error={ (index === steps.length - 1) && data?.error } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+            <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
             <StepContent>
               {getStepContent(index)}
             </StepContent>
           </Step>
         ))}
       </Stepper>
-      <Grow in={data?.error}>
+      <Grow in={data?.error !== undefined}>
         <div className={classes.responseContainer}>
           <Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
+            <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
             {t(data?.error?.code)}
           </Alert>
         </div>
       </Grow>
-      <Grow in={data?.response}>
+      <Grow in={data?.response !== undefined}>
         <div className={classes.responseContainer}>
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
