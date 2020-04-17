@@ -57,7 +57,18 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
         is: true,
         then: Yup.string()
           .required(t('NO_MONOPHASE_CHOICE'))
+      })
+      .test('noMoreThan15KwForMono',
+        t('NO_MORE_THAN_15KW_FOR_MONO'),
+        function (item) {
+          return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
       }),
+    moreThan15Kw: Yup.boolean()
+      .test('noMoreThan15KwForMono',
+      t('NO_MORE_THAN_15KW_FOR_MONO'),
+      function (item) {
+        return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
+    }),
     power: Yup.number()
       .when('changePower', {
         is: true,
@@ -106,6 +117,25 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           .required(t('NO_HOURLY_DISCRIMINATION_CHOSEN'))
       })
   })
+
+  const handleChangeModify = (event, setFieldValue, values) => {
+    if (!values.changePhases) {
+      setFieldValue('phases', '')
+    }
+    if (!values.changePower) {
+      setFieldValue('power', '')
+      setFieldValue('power2', '')
+      setFieldValue('power3', '')
+      setFieldValue('moreThan15Kw', false)
+    }
+    if (!values.changeFare) {
+      setFieldValue('fare', '')
+    }
+  }
+
+  const calculateTariff = (setFieldValue, values) => {
+
+  }
 
   const handleChangePower = (event, setFieldValue, { moreThan15Kw, power, power2, power3 }) => {
     const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
@@ -169,14 +199,16 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   </Typography>
                 }
                 labelPlacement="start"
-                control={<Switch
-                  name="changePhases"
-                  className={classes.switch}
-                  onChange={handleChange}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  color="primary"
-                  checked={values.changePhases}
-                />}
+                control={
+                  <Switch
+                    name="changePhases"
+                    className={classes.switch}
+                    onChange={event => handleChange(event) & handleChangeModify(event, setFieldValue, values)}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    color="primary"
+                    checked={values.changePhases}
+                  />
+                }
               />
             </Box>
             {values.changePhases &&
@@ -189,13 +221,14 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                 variant="outlined"
                 fullWidth
                 onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.phases}
                 error={(errors.phases && touched.phases)}
                 helperText={(touched.phases && errors.phases)}
               >
                 <MenuItem value="mono">
                   {t('MONOFASICA_NORMAL')}
-                </MenuItem>f
+                </MenuItem>
                 <MenuItem value="tri">
                   {t('TRIFASICA')}
                 </MenuItem>
@@ -215,14 +248,16 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   </Typography>
                 }
                 labelPlacement="start"
-                control={<Switch
-                  name="changePower"
-                  className={classes.switch}
-                  onChange={handleChange}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  color="primary"
-                  checked={values.changePower}
-                />}
+                control={
+                  <Switch
+                    name="changePower"
+                    className={classes.switch}
+                    onChange={event => handleChange(event) & handleChangeModify(event, setFieldValue, values)}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    color="primary"
+                    checked={values.changePower}
+                  />
+                }
               />
             </Box>
             {values.changePower &&
@@ -241,6 +276,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   startAdornment: (values.moreThan15Kw ? (<InputAdornment position="start">P1</InputAdornment>) : null)
                 }}
                 onChange={event => handleChangePower(event, setFieldValue, values)}
+                onBlur={handleBlur}
                 value={values.power}
                 fullWidth
                 variant="outlined"
@@ -250,9 +286,10 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
               { values.moreThan15Kw &&
                 <TextField
+                  required
                   id="power2"
                   name="power2"
-                  label={t('POTENCIA_A_CONTRACTAR') + ' *'}
+                  label={t('POTENCIA_A_CONTRACTAR')}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">P2</InputAdornment>,
                     endAdornment: <InputAdornment position="end">kW</InputAdornment>
@@ -260,6 +297,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   onChange={event => handleChangePower(event, setFieldValue, values)}
                   onBlur={handleBlur}
                   value={values.power2}
+                  disabled={!values.moreThan15Kw}
                   fullWidth
                   variant="outlined"
                   margin="normal"
@@ -269,9 +307,10 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               }
               { values.moreThan15Kw &&
                 <TextField
+                  required
                   id="power3"
                   name="power3"
-                  label={t('POTENCIA_A_CONTRACTAR') + ' *'}
+                  label={t('POTENCIA_A_CONTRACTAR')}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">P3</InputAdornment>,
                     endAdornment: <InputAdornment position="end">kW</InputAdornment>
@@ -279,6 +318,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   onChange={event => handleChangePower(event, setFieldValue, values)}
                   onBlur={handleBlur}
                   value={values.power3}
+                  disabled={!values.moreThan15Kw}
                   fullWidth
                   variant="outlined"
                   margin="normal"
@@ -301,17 +341,20 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   </Typography>
                 }
                 labelPlacement="start"
-                control={<Switch
-                  name="changeFare"
-                  className={classes.switch}
-                  onChange={handleChange}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  color="primary"
-                  checked={values.changeFare}
-                />}
+                control={
+                  <Switch
+                    name="changeFare"
+                    className={classes.switch}
+                    onChange={event => handleChange(event) & handleChangeModify(event, setFieldValue, values)}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    color="primary"
+                    checked={(!values.moreThan15Kw) ? values.changeFare : false}
+                    disabled={values.moreThan15Kw}
+                  />
+                }
               />
             </Box>
-            {values.changeFare &&
+            {(values.changeFare && !values.moreThan15Kw) &&
               <Box mx={1} mt={2} mb={2}>
                 <TextField
                   select
@@ -321,7 +364,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   onChange={event => handleChange(event)}
                   variant="outlined"
                   fullWidth
-                  value={values.fare}
+                  value={ (!values.moreThan15Kw) ? values.fare : ''}
                   error={(errors.fare && touched.fare)}
                   helperText={(touched.fare && errors.fare)}
                 >
