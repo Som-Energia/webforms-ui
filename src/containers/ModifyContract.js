@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(1)
   },
   stepLabel: {
-    fontSize: '1.25rem'
+    fontSize: '1.15rem'
   }
 }))
 
@@ -55,10 +55,6 @@ function ModifyContract () {
     'MODIFY_POTTAR_CONTACT_TITLE',
     'REVISIO_CONFIRMACIO_DADES'
   ]
-
-  useEffect(() => {
-    console.log(data)
-  })
 
   const handleStepChanges = (params) => {
     setData({ ...data, ...params })
