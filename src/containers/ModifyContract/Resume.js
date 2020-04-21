@@ -56,7 +56,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
-      <Box mt={2} mx={1} mb={2}>
+      <Box mt={1} mx={1} mb={1}>
         <Typography gutterBottom>
           {t('REVIEW_DATA_AND_CONFIRM')}
         </Typography>

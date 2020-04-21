@@ -190,7 +190,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           isSubmitting
         }) => (
           <form onSubmit={handleSubmit} noValidate>
-            <Box mx={1} mt={2} mb={1}>
+            <Box mx={1} mt={1} mb={1}>
               <FormControlLabel
                 className={classes.switchLabel}
                 label={
@@ -212,7 +212,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
             {values.changePhases &&
-            <Box mx={1} mt={2} mb={2}>
+            <Box mx={1} mt={1} mb={2}>
               <TextField
                 select
                 id="phases"
@@ -235,11 +235,11 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               </TextField>
             </Box>
             }
-            <Box mx={1} mb={5}>
+            <Box mx={1} mb={3}>
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>
             </Box>
 
-            <Box mx={1} mb={1}>
+            <Box mx={1} mb={0}>
               <FormControlLabel
                 className={classes.switchLabel}
                 label={
@@ -261,7 +261,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
             {values.changePower &&
-            <Box mx={1} mb={1}>
+            <Box mx={1} mb={0}>
               <FormControlLabel
                 control={<Checkbox checked={values.moreThan15Kw} onChange={handleChange} name="moreThan15Kw" color="primary" />}
                 label={t('MES_GRAN_DE_15KW')}
@@ -328,7 +328,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               }
             </Box>
             }
-            <Box mx={1} mb={5}>
+            <Box mx={1} mt={1} mb={3}>
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
             </Box>
 
@@ -355,7 +355,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
             {(values.changeFare && !values.moreThan15Kw) &&
-              <Box mx={1} mt={2} mb={2}>
+              <Box mx={1} mt={1} mb={2}>
                 <TextField
                   select
                   id="fare"
@@ -377,7 +377,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                 </TextField>
               </Box>
             }
-            <Box mx={1} mb={5}>
+            <Box mx={1} mb={3}>
               <FormHelperText
                 dangerouslySetInnerHTML={{ __html: t('HELP_DISCRIMINACIO_HORARIA', { url: t('HELP_DISCRIMINACIO_HORARIA_URL') }) }}
               />
