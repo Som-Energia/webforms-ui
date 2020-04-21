@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid'
 import './i18n/i18n'
 
 import './App.css'
-import 'typeface-roboto'
 
 import Contract from './containers/Contract'
 import HolderChange from './containers/HolderChange'
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const App = () => {
+const App = ({ token = '' }) => {
   const classes = useStyles()
 
   return (
@@ -55,8 +54,8 @@ const App = () => {
               <Switch>
                 <Route exact path="/" component={ModifyContract} />
                 <Route path="/new-contract" component={Contract} />
-                <Route path="/modify-contract" component={ModifyContract} />
-                <Route path="/:language/contract/modification/" component={ModifyContract} />
+                <Route path="/modify-contract" render={(props) => <ModifyContract {...props} token={token} />} />
+                <Route path="/:language/contract/modification/" render={(props) => <ModifyContract {...props} token={token} />} />
                 <Route path="/holder-change" component={HolderChange} />
               </Switch>
             </Router>
