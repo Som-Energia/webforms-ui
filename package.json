@@ -18,15 +18,16 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "standard": "^14.3.3",
-    "typeface-roboto": "^0.0.75",
     "yup": "^0.28.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn run build-rename",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-rename": "yarn run build-rename-js && yarn run build-rename-css",
+    "build-rename-js": "renamer --find '/((runtime-)?main)\\.\\w*(\\.chunk)?(.js(.map)?)/i' --replace '$1$4' build/static/js/*.* && renamer --find '/\\w\\.\\w*(\\.chunk)?(.js(.map)?)/i' --replace 'vendors$2' build/static/js/*.*",
+    "build-rename-css": "renamer --find '/(main)\\.\\w*(\\.chunk)?(.css(.map)?)/i' --replace '$1$3' build/static/css/*.* && renamer --find '/\\w\\.\\w*(\\.chunk)?(.css(.map)?)/i' --replace 'vendor$2' build/static/css/*.*"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "renamer": "^2.0.0",
+    "standard": "^14.3.3"
   }
 }
