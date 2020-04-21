@@ -21,8 +21,8 @@ const theme = createMuiTheme({
     secondary: {
       main: '#a1a1a1'
     },
-    contrastThreshold: 1,
-    tonalOffset: 0.1
+    contrastThreshold: 2,
+    tonalOffset: 0.2
   },
   typography: {
     color: '#4d4d4d'
@@ -56,6 +56,7 @@ const App = () => {
                 <Route exact path="/" component={ModifyContract} />
                 <Route path="/new-contract" component={Contract} />
                 <Route path="/modify-contract" component={ModifyContract} />
+                <Route path="/:language/contract/modification/" component={ModifyContract} />
                 <Route path="/holder-change" component={HolderChange} />
               </Switch>
             </Router>
