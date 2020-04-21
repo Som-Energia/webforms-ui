@@ -81,12 +81,12 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
           isSubmitting
         }) => (
           <form onSubmit={handleSubmit}>
-            <Box mx={1} mt={2} mb={1}>
+            <Box mx={1} mt={1} mb={1}>
               <Typography
                 dangerouslySetInnerHTML={{ __html: t('HELP_CONTACT_INFO') }}
               />
             </Box>
-            <Box mx={1} mb={3}>
+            <Box mx={1} mb={1}>
               <TextField
                 id="contact_name"
                 name="contact_name"
