@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -37,24 +37,15 @@ const useStyles = makeStyles(theme => ({
 export default function ModifyIntro ({ nextStep, prevStep }) {
   const { t } = useTranslation()
   const classes = useStyles()
+  const [isSubmitting, setSubmitting] = useState(false)
 
   const onFormSubmit = event => {
-    console.log('submit!')
     event.preventDefault()
-    nextStep()
+    if (!isSubmitting) {
+      setSubmitting(true)
+      nextStep()
+    }
   }
-
-  useEffect(() => {
-    const listener = event => {
-      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
-        onFormSubmit(event)
-      }
-    }
-    document.addEventListener('keydown', listener)
-    return () => {
-      document.removeEventListener('keydown', listener)
-    }
-  })
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
@@ -72,6 +63,7 @@ export default function ModifyIntro ({ nextStep, prevStep }) {
                 variant="contained"
                 color="primary"
                 endIcon={<ArrowForwardIosIcon />}
+                disabled={isSubmitting}
               >
                 {t('SEGUENT_PAS')}
               </Button>
