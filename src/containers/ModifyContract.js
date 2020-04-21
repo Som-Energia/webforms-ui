@@ -42,9 +42,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function ModifyContract () {
+function ModifyContract (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    const language = props.match.params.language
+    i18n.changeLanguage(language)
+  }, [])
 
   const [activeStep, setActiveStep] = useState(0)
   const [data, setData] = useState({})
