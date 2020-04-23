@@ -4,12 +4,14 @@ import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
+import Badge from '@material-ui/core/Badge'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import Paper from '@material-ui/core/Paper'
 import Switch from '@material-ui/core/Switch'
@@ -62,13 +64,13 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
         t('NO_MORE_THAN_15KW_FOR_MONO'),
         function (item) {
           return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
-      }),
+        }),
     moreThan15Kw: Yup.boolean()
       .test('noMoreThan15KwForMono',
-      t('NO_MORE_THAN_15KW_FOR_MONO'),
-      function (item) {
-        return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
-    }),
+        t('NO_MORE_THAN_15KW_FOR_MONO'),
+        function (item) {
+          return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
+        }),
     power: Yup.number()
       .when('changePower', {
         is: true,
@@ -133,8 +135,29 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
     }
   }
 
-  const calculateTariff = (setFieldValue, values) => {
+  const calculateTariff = (values) => {
+    const {
+      changePower,
+      power,
+      moreThan15Kw,
+      changeFare,
+      fare
+    } = values
 
+    let tariff
+
+    if (changePower) {
+      if (!moreThan15Kw) {
+        tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
+        if (changeFare) {
+          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
+        }
+      } else {
+        tariff = '3.0A'
+      }
+    }
+
+    return tariff
   }
 
   const handleChangePower = (event, setFieldValue, { moreThan15Kw, power, power2, power3 }) => {
@@ -382,6 +405,15 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                 dangerouslySetInnerHTML={{ __html: t('HELP_DISCRIMINACIO_HORARIA', { url: t('HELP_DISCRIMINACIO_HORARIA_URL') }) }}
               />
             </Box>
+
+            { (values.changePower && values.power) &&
+              <Box mx={1} mb={3}>
+                <Grid container spacing={4}>
+                  <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
+                  <Grid item>&nbsp;<Badge color="primary" badgeContent={calculateTariff(values)} /></Grid>
+                </Grid>
+              </Box>
+            }
 
             <div className={classes.actionsContainer}>
               {
