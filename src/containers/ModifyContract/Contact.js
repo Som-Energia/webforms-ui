@@ -39,9 +39,9 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
   const { t } = useTranslation()
 
   const ContactSchema = Yup.object().shape({
-    contact_name: Yup.string()
+    contactName: Yup.string()
       .required(t('NO_NAME')),
-    contact_surname: Yup.string()
+    contactSurname: Yup.string()
       .required(t('NO_SURNAME')),
     phone: Yup.string()
       .matches(/^\d{9}$/, t('NO_PHONE'))
@@ -54,8 +54,8 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
         initialValues={
           {
             ...{
-              contact_name: '',
-              contact_surname: '',
+              contactName: '',
+              contactSurname: '',
               phone: ''
             },
             ...params
@@ -84,14 +84,14 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
             </Box>
             <Box mx={1} mb={1}>
               <TextField
-                id="contact_name"
-                name="contact_name"
+                id="contactName"
+                name="contactName"
                 label={t('NAME')}
-                error={(errors.contact_name && touched.contact_name)}
-                helperText={(touched.contact_name && errors.contact_name)}
+                error={(errors.contactName && touched.contactName)}
+                helperText={(touched.contactName && errors.contactName)}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.contact_name}
+                value={values.contactName}
                 fullWidth
                 variant="outlined"
                 margin="normal"
@@ -99,14 +99,14 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 autoFocus
               />
               <TextField
-                id="contact_surname"
-                name="contact_surname"
+                id="contactSurname"
+                name="contactSurname"
                 label={t('SURNAME')}
-                error={(errors.contact_surname && touched.contact_surname)}
-                helperText={(touched.contact_surname && errors.contact_surname)}
+                error={(errors.contactSurname && touched.contactSurname)}
+                helperText={(touched.contactSurname && errors.contactSurname)}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.contact_surname}
+                value={values.contactSurname}
                 fullWidth
                 variant="outlined"
                 margin="normal"
