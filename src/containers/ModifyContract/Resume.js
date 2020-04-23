@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
   paperContainer: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
+  },
+  resumeLabel: {
+    textTransform: 'uppercase'
   }
 }))
 
@@ -56,14 +59,14 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
-      <Box mt={1} mx={1} mb={1}>
+      <Box mt={1} mx={1} mb={3}>
         <Typography gutterBottom>
           {t('REVIEW_DATA_AND_CONFIRM')}
         </Typography>
       </Box>
       { params.modify?.phases &&
         <Box mt={2} mx={1}>
-          <Typography variant="subtitle2">
+          <Typography className={classes.resumeLabel} variant="subtitle2">
             {t('TIPUS_INSTALLACIO')}
           </Typography>
           <Typography variant="body1" gutterBottom>
@@ -73,9 +76,9 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       }
       { params.modify?.power &&
         <Box mt={2} mx={1}>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid item>
-              <Typography variant="subtitle2">
+              <Typography className={classes.resumeLabel} variant="subtitle2">
                 {t('POWER')}{(params?.modify?.moreThan15Kw ? ' P1' : null)}
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -84,7 +87,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
             </Grid>
             { params?.modify?.moreThan15Kw &&
             <Grid item>
-              <Typography variant="subtitle2">
+              <Typography className={classes.resumeLabel} variant="subtitle2">
                 {t('POWER')} P2
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -94,7 +97,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
             }
             { params?.modify?.moreThan15Kw &&
             <Grid item>
-              <Typography variant="subtitle2">
+              <Typography className={classes.resumeLabel} variant="subtitle2">
                 {t('POWER')} P3
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -107,7 +110,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       }
       { params.modify?.fare &&
         <Box mt={2} mx={1}>
-          <Typography variant="subtitle2">
+          <Typography className={classes.resumeLabel} variant="subtitle2">
             {t('FARE')}
           </Typography>
           <Typography variant="body1" gutterBottom>
@@ -116,7 +119,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         </Box>
       }
       <Box mt={2} mb={3} mx={1}>
-        <Typography variant="subtitle2">
+        <Typography className={classes.resumeLabel} variant="subtitle2">
           {t('CONTACT_PHONE')}
         </Typography>
         <Typography variant="body1" gutterBottom>
