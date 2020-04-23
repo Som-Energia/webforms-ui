@@ -46,10 +46,12 @@ function ModifyContract (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
+  console.log(props)
+
   useEffect(() => {
     const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [])
+  }, [props.match.params.language, i18n])
 
   const [activeStep, setActiveStep] = useState(0)
   const [data, setData] = useState({})
@@ -69,26 +71,25 @@ function ModifyContract (props) {
     switch (step) {
       case 0:
         return <Intro
-          nextStep={nextStep}
+          nextStep={() => nextStep(1)}
           handleStepChanges={handleStepChanges}
         />
       case 1:
         return <Params
-          nextStep={nextStep}
+          nextStep={() => nextStep(2)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
           params={data?.modify}
         />
       case 2:
         return <Contact
-          nextStep={nextStep}
+          nextStep={() => nextStep(3)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
           params={data?.contact}
         />
       default:
         return <Resume
-          nextStep={nextStep}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
           params={data}
@@ -96,8 +97,8 @@ function ModifyContract (props) {
     }
   }
 
-  const nextStep = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  const nextStep = (step) => {
+    setActiveStep(step)
   }
 
   const prevStep = () => {
