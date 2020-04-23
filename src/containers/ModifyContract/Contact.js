@@ -28,10 +28,6 @@ const useStyles = makeStyles(theme => ({
   resetContainer: {
     padding: theme.spacing(3)
   },
-  stepLabel: {
-    fontSize: '1.5rem',
-    color: 'red'
-  },
   paperContainer: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
@@ -80,7 +76,7 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
           handleSubmit,
           isSubmitting
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <Box mx={1} mt={1} mb={1}>
               <Typography
                 dangerouslySetInnerHTML={{ __html: t('HELP_CONTACT_INFO') }}
