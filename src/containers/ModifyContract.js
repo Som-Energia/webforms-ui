@@ -46,15 +46,13 @@ function ModifyContract (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  console.log(props)
-
   useEffect(() => {
     const language = props.match.params.language
     i18n.changeLanguage(language)
   }, [props.match.params.language, i18n])
 
   const [activeStep, setActiveStep] = useState(0)
-  const [data, setData] = useState({})
+  const [data, setData] = useState({ token: props?.token })
 
   const steps = [
     'MODIFY_POTTAR_INTRO_TITLE',
@@ -90,6 +88,7 @@ function ModifyContract (props) {
         />
       default:
         return <Resume
+          nextStep={() => nextStep(4)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
           params={data}
