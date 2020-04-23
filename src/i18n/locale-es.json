@@ -36,13 +36,14 @@
   "HELP_INSTALL_TYPE": "Cómo identificar si una instalación es <a target=\"_blank\" href=\"{{url}}\">trifásica o monofásica</a>",
   "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
   "POTENCIA_A_CONTRACTAR": "¿Qué potencia quieres contratar?",
+  "HELP_POTENCIA": "Cómo averiguar <a target=\"_blank\" href=\"{{url}}\">la potencia que necesito</a>",
+  "HELP_POTENCIA_URL": "http://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
   "DISCRIMINACIO_HORARIA": "¿Quieres discriminación horaria?",
   "SENSE_DISCRIMINACIO_HORARIA": "Sin discriminación horaria",
   "AMB_DISCRIMINACIO_HORARIA": "Con discriminación horaria",
   "HELP_DISCRIMINACIO_HORARIA": "Como puedo saber <a target=\"_blank\" href=\"{{url}}\">si me conviene discriminación horaria o no</a>",
   "HELP_DISCRIMINACIO_HORARIA_URL": "http://es.support.somenergia.coop/article/283-como-puedo-saber-si-me-sale-a-cuenta-tener-discriminacion-horaria",
-  "HELP_POTENCIA": "Cómo averiguar <a target=\"_blank\" href=\"{{url}}\">la potencia que necesito</a>",
-  "HELP_POTENCIA_URL": "http://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
+  "LA_TEVA_TARIFA_ES": "Tu tarifa será",
   "NO_MONOPHASE_CHOICE": "No has especificado si la instalación es de tipo monofásico o trifásico",
   "NO_FARE_CHOSEN": "No has especificado la tarifa",
   "NO_POWER_CHOSEN": "No has especificado la potencia",
@@ -64,5 +65,6 @@
   "FARE": "Tarifa",
   "CONTACT_PHONE": "Teléfono de contacto para acceder al contador",
   "REVIEW_DATA_AND_CONFIRM": "Revisa los datos. Para confirmarlos, pulsa el botón del final.",
-  "INVALID_FIELD": "Hay algun campo incorrecto"
+  "INVALID_FIELD": "Hay algun campo incorrecto.",
+  "BADTOKEN": "La sesión ha expirado. Te recomendamos volver a acceder desde la lista de contratos e intentarlo otra vez."
 }

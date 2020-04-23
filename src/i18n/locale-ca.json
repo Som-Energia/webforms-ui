@@ -22,8 +22,6 @@
   "MODIFY_POTTAR_NOT_ALLOWED_DETAILS": "Vols venir a treballar amb nosaltres? ;-)",
   "MODIFY_POTTAR_INACTIVE_CONTRACT": "El contracte a modificar no està d'alta.",
   "MODIFY_POTTAR_INACTIVE_CONTRACT_DETAILS": "Només es poden modificar els contractes que estan d'alta.",
-  "MODIFY_POTTAR_BAD_TOKEN": "La sessió ha expirat.",
-  "MODIFY_POTTAR_BAD_TOKEN_DETAILS": "Et recomanem tornar a accedir des de la llista de contractes i intentar-ho de nou.",
   "MODIFY_POTTAR_UNEXPECTED": "S'ha produït un error inesperat.",
   "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Poseu-vos en contacte amb modifica@somenergia.coop per a que us podem donar un cop de mà. Per identificar-vos necessitarem saber el vostre NIF i el número del contracte que voleu modificar.",
   "MODIFY_ANSWER_INSTAL_TYPE": "Modificar la tensió",
@@ -36,13 +34,14 @@
   "HELP_INSTALL_TYPE": "Com identificar si una instal·lació és <a target=\"_blank\" href=\"{{url}}\">trifàsica o monofàsica</a>",
   "HELP_INSTALL_TYPE_URL": "http://ca.support.somenergia.coop/article/479-tinc-una-instal-lacio-monofasica-o-trifasica",
   "POTENCIA_A_CONTRACTAR": "Quina potència vols contractar?",
-  "DISCRIMINACIO_HORARIA": "Vols discriminació horària?",
-  "SENSE_DISCRIMINACIO_HORARIA": "Sense discriminació horària",
   "HELP_POTENCIA": "Com esbrinar <a target=\"_blank\" href=\"{{url}}\">la potència que necessito</a>",
   "HELP_POTENCIA_URL": "http://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito",
+  "DISCRIMINACIO_HORARIA": "Vols discriminació horària?",
+  "SENSE_DISCRIMINACIO_HORARIA": "Sense discriminació horària",
   "AMB_DISCRIMINACIO_HORARIA": "Amb discriminació horària",
   "HELP_DISCRIMINACIO_HORARIA": "Com puc saber <a target=\"_blank\" href=\"{{url}}\">si em convé discriminació horària o no</a>",
   "HELP_DISCRIMINACIO_HORARIA_URL": "http://ca.support.somenergia.coop/article/270-com-puc-saber-si-em-surt-a-compte-tenir-discriminacio-horaria",
+  "LA_TEVA_TARIFA_ES": "La teva tarifa serà",
   "NO_MONOPHASE_CHOICE": "No has especificat si la instal·lació és de tipus monofàsica o trifàsica",
   "NO_FARE_CHOSEN": "No has especificat la tarifa",
   "NO_POWER_CHOSEN": "No has especificat la potència",
@@ -66,5 +65,6 @@
   "FARE": "Tarifa",
   "CONTACT_PHONE": "Contacte per accedir al comptador",
   "REVIEW_DATA_AND_CONFIRM": "Reviseu les dades. Per confirmar-les, premeu el botó del final.",
-  "INVALID_FIELD": "Hi ha algun camp incorrecte"
+  "INVALID_FIELD": "Hi ha algun camp incorrecte.",
+  "BADTOKEN": "La sessió ha expirat. Et recomanem tornar a accedir des de la llista de contractes i intentar-ho de nou."
 }
