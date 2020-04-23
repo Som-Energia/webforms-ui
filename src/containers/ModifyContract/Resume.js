@@ -40,9 +40,27 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
   const classes = useStyles()
   const { t } = useTranslation()
 
-  const handleSubmit = event => {
+  const handleSubmit = () => {
     console.log('final submit!')
-    modifyContract(params)
+    console.log(params)
+
+    const { modify, contact, token } = params
+    const THOUSANDS_CONVERSION_FACTOR = 1000
+
+    const data = {
+      tarifa: modify?.rate,
+      potencia: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
+      potencia_p2: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR) : undefined,
+      potencia_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
+      contact_name: contact?.contactName,
+      contact_surname: contact?.contactSurname,
+      contact_phone: contact?.phone,
+      token: token
+    }
+
+    console.log(data)
+
+    modifyContract(data)
       .then(response => {
         console.log('response 2')
         console.log(response)
@@ -123,7 +141,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
           {t('CONTACT_PHONE')}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          {params.contact?.phone} ({params.contact?.contact_name} {params.contact?.contact_surname})
+          {params.contact?.phone} ({params.contact?.contactName} {params.contact?.contactSurname})
         </Typography>
       </Box>
       <div className={classes.actionsContainer}>
