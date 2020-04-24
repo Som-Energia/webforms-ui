@@ -144,13 +144,15 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       fare
     } = values
 
-    let tariff
+    let tariff = null
 
     if (changePower) {
       if (!moreThan15Kw) {
-        tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
         if (changeFare) {
-          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
+          tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
+          if (fare) {
+            tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
+          }
         }
       } else {
         tariff = '3.0A'
@@ -160,7 +162,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
     return tariff
   }
 
-  const handleChangePower = (event, setFieldValue, { moreThan15Kw, power, power2, power3 }) => {
+  const handleChangePower = (event, setFieldValue, { moreThan15Kw }) => {
     const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
     const regexMoreThan15 = /^\d*([.,'])?\d{0,3}/g
     const regex = moreThan15Kw ? regexMoreThan15 : regexLessThan15
@@ -189,7 +191,8 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               power3: '',
               moreThan15Kw: false,
               changeFare: false,
-              fare: ''
+              fare: '',
+              tariff: ''
             },
             ...params
           }
@@ -197,7 +200,8 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
         validationSchema={ModifySchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true)
-          handleStepChanges({ modify: values })
+          const tariff = calculateTariff(values)
+          handleStepChanges({ modify: { ...values, tariff: tariff } })
           nextStep()
           setSubmitting(false)
         }}
@@ -406,7 +410,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
 
-            { (values.changePower && values.power) &&
+            { (values.changePower && values.power && values.fare) &&
               <Box mx={1} mb={3}>
                 <Grid container spacing={4}>
                   <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
