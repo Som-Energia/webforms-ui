@@ -22,7 +22,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yarn run build-rename",
+    "build": "react-scripts build",
+    "build:rename": "react-scripts build && yarn run build-rename",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-rename": "yarn run build-rename-js && yarn run build-rename-css",
