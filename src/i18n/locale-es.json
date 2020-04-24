@@ -13,11 +13,6 @@
   "MODIFY_POTTAR_SELECT_TITLE": "Selecciona la modificación/modificaciones que quieres",
   "MODIFY_POTTAR_CONTACT_TITLE": "Datos de contacto, para acceder al contador",
   "HELP_CONTACT_INFO_URL": "http://es.support.somenergia.coop/article/656-las-distribuidoras-de-electricidad",
-  "MODIFY_POTTAR_SUCCESS_TITTLE": "Enhorabuena. En breve recibirás un correo electrónico con los datos de tu solicitud.",
-  "MODIFY_POTTAR_SUCCESS_MESSAGE": "Enviaremos tu solicitud a la distribuidora de tu zona que se encargará de validarla y hacerla efectiva. En el caso que sea necesario, haznos llegar la documentación relacionada con este trámite, adjuntándola respondiendo al correo de confirmación que recibirás en pocos minutos.",
-  "ERROR_POST_MODIFY": "Se ha detectado un error",
-  "MODIFY_POTTAR_UNEXPECTED": "Se ha producido un error inesperado.",
-  "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Ponte en contacto con modifica@somenergia.coop para que te podamos echar una mano. Para identificarte necesitaremos tu NIF y el número del contrato que quieres modificar.",
   "MODIFY_ANSWER_INSTAL_TYPE": "Modificar la tensión",
   "MODIFY_ANSWER_POWER": "Modificar la potencia",
   "MODIFY_ANSWER_FARE": "Modificar la tarifa",
@@ -61,5 +56,10 @@
   "BADTOKEN": "La sesión ha expirado. Te recomendamos volver a acceder desde la lista de contratos e intentarlo otra vez.",
   "NOTALLOWED": "No estás autorizado/a para hacer esta operación.",
   "INACTIVECONTRACT": "El contrato a modificar no está dado de alta.",
-  "ONGOINGPROCESS": "El contrato indicado tiene otro proceso pendiente de resolución."
+  "ONGOINGPROCESS": "El contrato indicado tiene otro proceso pendiente de resolución.",
+  "MODIFY_POTTAR_SUCCESS_TITTLE": "Enhorabuena. En breve recibirás un correo electrónico con los datos de tu solicitud.",
+  "MODIFY_POTTAR_SUCCESS_MESSAGE": "Enviaremos tu solicitud a la distribuidora de tu zona que se encargará de validarla y hacerla efectiva. En el caso que sea necesario, haznos llegar la documentación relacionada con este trámite, adjuntándola respondiendo al correo de confirmación que recibirás en pocos minutos.",
+  "ERROR_POST_MODIFY": "Se ha detectado un error",
+  "MODIFY_POTTAR_UNEXPECTED": "Se ha producido un error inesperado.",
+  "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Ponte en contacto con modifica@somenergia.coop para que te podamos echar una mano. Para identificarte necesitaremos tu NIF y el número del contrato que quieres modificar."
 }

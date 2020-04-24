@@ -13,11 +13,6 @@
   "MODIFY_POTTAR_SELECT_TITLE": "Selecciona la modificació/modificacions que vols",
   "MODIFY_POTTAR_CONTACT_TITLE": "Dades de contacte, per accedir al comptador",
   "HELP_CONTACT_INFO_URL": "http://ca.support.somenergia.coop/article/655-les-distribuidores-d-electricitat",
-  "MODIFY_POTTAR_SUCCESS_TITTLE": "Enhorabona. En breu rebràs un correu electrònic amb les dades de la teva sol·licitud.",
-  "MODIFY_POTTAR_SUCCESS_MESSAGE": "Enviarem la teva sol·licitud a la distribuïdora de la teva zona que s’encarregarà de validar-la i fer-la efectiva. En el cas que sigui necessari fer-nos arribar documentació relacionada amb aquesta tramitació, adjunta-la responent al correu de confirmació que rebràs en pocs minuts.",
-  "ERROR_POST_MODIFY": "S'ha detectat un error",
-  "MODIFY_POTTAR_UNEXPECTED": "S'ha produït un error inesperat.",
-  "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Poseu-vos en contacte amb modifica@somenergia.coop per a que us podem donar un cop de mà. Per identificar-vos necessitarem saber el vostre NIF i el número del contracte que voleu modificar.",
   "MODIFY_ANSWER_INSTAL_TYPE": "Modificar la tensió",
   "MODIFY_ANSWER_POWER": "Modificar la potència",
   "MODIFY_ANSWER_FARE": "Modificar la tarifa",
@@ -63,5 +58,10 @@
   "BADTOKEN": "La sessió ha expirat. Et recomanem tornar a accedir des de la llista de contractes i intentar-ho de nou.",
   "NOTALLOWED": "No estàs autoritzat a fer aquesta operació.",
   "INACTIVECONTRACT": "El contracte a modificar no està d'alta.",
-  "ONGOINGPROCESS": "Aquest contracte té un altre procés pendent de resoldre."
+  "ONGOINGPROCESS": "Aquest contracte té un altre procés pendent de resoldre.",
+  "MODIFY_POTTAR_SUCCESS_TITTLE": "Enhorabona. En breu rebràs un correu electrònic amb les dades de la teva sol·licitud.",
+  "MODIFY_POTTAR_SUCCESS_MESSAGE": "Enviarem la teva sol·licitud a la distribuïdora de la teva zona que s’encarregarà de validar-la i fer-la efectiva.",
+  "ERROR_POST_MODIFY": "S'ha detectat un error",
+  "MODIFY_POTTAR_UNEXPECTED": "S'ha produït un error inesperat.",
+  "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Poseu-vos en contacte amb modifica@somenergia.coop per a que us podem donar un cop de mà. Per identificar-vos necessitarem saber el vostre NIF i el número del contracte que voleu modificar."
 }
