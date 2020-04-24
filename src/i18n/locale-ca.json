@@ -16,12 +16,6 @@
   "MODIFY_POTTAR_SUCCESS_TITTLE": "Enhorabona. En breu rebràs un correu electrònic amb les dades de la teva sol·licitud.",
   "MODIFY_POTTAR_SUCCESS_MESSAGE": "Enviarem la teva sol·licitud a la distribuïdora de la teva zona que s’encarregarà de validar-la i fer-la efectiva. En el cas que sigui necessari fer-nos arribar documentació relacionada amb aquesta tramitació, adjunta-la responent al correu de confirmació que rebràs en pocs minuts.",
   "ERROR_POST_MODIFY": "S'ha detectat un error",
-  "MODIFY_POTTAR_ONGOING_PROCESS": "Aquest contracte té un altre procés pendent de resoldre.",
-  "MODIFY_POTTAR_ONGOING_PROCESS_DETAILS": "No es poden començar nous processos si n'hi ha cap de pendent. Torna a intentar-ho un cop hagis rebut per correu la resolució del procés pendent.",
-  "MODIFY_POTTAR_NOT_ALLOWED": "No estàs autoritzat a fer aquesta operació.",
-  "MODIFY_POTTAR_NOT_ALLOWED_DETAILS": "Vols venir a treballar amb nosaltres? ;-)",
-  "MODIFY_POTTAR_INACTIVE_CONTRACT": "El contracte a modificar no està d'alta.",
-  "MODIFY_POTTAR_INACTIVE_CONTRACT_DETAILS": "Només es poden modificar els contractes que estan d'alta.",
   "MODIFY_POTTAR_UNEXPECTED": "S'ha produït un error inesperat.",
   "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Poseu-vos en contacte amb modifica@somenergia.coop per a que us podem donar un cop de mà. Per identificar-vos necessitarem saber el vostre NIF i el número del contracte que voleu modificar.",
   "MODIFY_ANSWER_INSTAL_TYPE": "Modificar la tensió",
@@ -66,5 +60,8 @@
   "CONTACT_PHONE": "Contacte per accedir al comptador",
   "REVIEW_DATA_AND_CONFIRM": "Reviseu les dades. Per confirmar-les, premeu el botó del final.",
   "INVALID_FIELD": "Hi ha algun camp incorrecte.",
-  "BADTOKEN": "La sessió ha expirat. Et recomanem tornar a accedir des de la llista de contractes i intentar-ho de nou."
+  "BADTOKEN": "La sessió ha expirat. Et recomanem tornar a accedir des de la llista de contractes i intentar-ho de nou.",
+  "NOTALLOWED": "No estàs autoritzat a fer aquesta operació.",
+  "INACTIVECONTRACT": "El contracte a modificar no està d'alta.",
+  "ONGOINGPROCESS": "Aquest contracte té un altre procés pendent de resoldre."
 }
