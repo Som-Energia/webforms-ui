@@ -41,14 +41,13 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
   const { t } = useTranslation()
 
   const handleSubmit = () => {
-    console.log('final submit!')
     console.log(params)
 
     const { modify, contact, token } = params
     const THOUSANDS_CONVERSION_FACTOR = 1000
 
     const data = {
-      tarifa: modify?.rate,
+      tarifa: (modify?.tariff) ? modify?.tariff : modify?.fare,
       potencia: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
       potencia_p2: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR) : undefined,
       potencia_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
@@ -84,7 +83,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       </Box>
       { params.modify?.phases &&
         <Box mt={2} mx={1}>
-          <Typography className={classes.resumeLabel} variant="subtitle2">
+          <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
             {t('TIPUS_INSTALLACIO')}
           </Typography>
           <Typography variant="body1" gutterBottom>
@@ -96,7 +95,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         <Box mt={2} mx={1}>
           <Grid container spacing={4}>
             <Grid item>
-              <Typography className={classes.resumeLabel} variant="subtitle2">
+              <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
                 {t('POWER')}{(params?.modify?.moreThan15Kw ? ' P1' : null)}
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -105,7 +104,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
             </Grid>
             { params?.modify?.moreThan15Kw &&
             <Grid item>
-              <Typography className={classes.resumeLabel} variant="subtitle2">
+              <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
                 {t('POWER')} P2
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -115,7 +114,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
             }
             { params?.modify?.moreThan15Kw &&
             <Grid item>
-              <Typography className={classes.resumeLabel} variant="subtitle2">
+              <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
                 {t('POWER')} P3
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -128,12 +127,23 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       }
       { params.modify?.fare &&
         <Box mt={2} mx={1}>
-          <Typography className={classes.resumeLabel} variant="subtitle2">
+          <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
             {t('FARE')}
           </Typography>
-          <Typography variant="body1" gutterBottom>
-            {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
-          </Typography>
+          <Grid container spacing={2}>
+            { params.modify?.tariff &&
+              <Grid item>
+                <Typography variant="body1" gutterBottom>
+                  {params.modify?.tariff}
+                </Typography>
+              </Grid>
+            }
+            <Grid item>
+              <Typography variant="body1" gutterBottom>
+                {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
+              </Typography>
+            </Grid>
+          </Grid>
         </Box>
       }
       <Box mt={2} mb={3} mx={1}>
