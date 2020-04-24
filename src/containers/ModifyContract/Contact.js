@@ -115,6 +115,7 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
               <TextField
                 id="phone"
                 name="phone"
+                type="tel"
                 label={t('PHONE')}
                 error={(errors.phone && touched.phone)}
                 helperText={(touched.phone && errors.phone)}
