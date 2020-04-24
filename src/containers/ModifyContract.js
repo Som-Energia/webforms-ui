@@ -127,8 +127,8 @@ function ModifyContract (props) {
       <Grow in={data?.response !== undefined}>
         <div className={classes.responseContainer}>
           <Alert severity="success">
-            <AlertTitle>Success</AlertTitle>
-            {t(data?.response?.code)}
+            <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
+            {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
           </Alert>
         </div>
       </Grow>

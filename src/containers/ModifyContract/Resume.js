@@ -41,8 +41,6 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
   const { t } = useTranslation()
 
   const handleSubmit = () => {
-    console.log(params)
-
     const { modify, contact, token } = params
     const THOUSANDS_CONVERSION_FACTOR = 1000
 
@@ -57,8 +55,6 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       token: token
     }
 
-    console.log(data)
-
     modifyContract(data)
       .then(response => {
         console.log('response 2')
@@ -67,8 +63,6 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         nextStep()
       })
       .catch(error => {
-        console.log('error catch!')
-        console.log(error)
         handleStepChanges({ error: error?.response?.data?.error })
         nextStep()
       })
