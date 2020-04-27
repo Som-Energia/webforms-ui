@@ -116,22 +116,26 @@ function ModifyContract (props) {
           </Step>
         ))}
       </Stepper>
-      <Grow in={data?.error !== undefined}>
-        <div className={classes.responseContainer}>
-          <Alert severity="error">
-            <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
-            {t(data?.error?.code)}
-          </Alert>
-        </div>
-      </Grow>
-      <Grow in={data?.response !== undefined}>
-        <div className={classes.responseContainer}>
-          <Alert severity="success">
-            <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
-            {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
-          </Alert>
-        </div>
-      </Grow>
+      { data?.error &&
+        <Grow in={data?.error !== undefined}>
+          <div className={classes.responseContainer}>
+            <Alert severity="error">
+              <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
+              {t(data?.error?.code)}
+            </Alert>
+          </div>
+        </Grow>
+      }
+      { data?.response &&
+        <Grow in={data?.response !== undefined}>
+          <div className={classes.responseContainer}>
+            <Alert severity="success">
+              <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
+              {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
+            </Alert>
+          </div>
+        </Grow>
+      }
     </div>
   )
 }
