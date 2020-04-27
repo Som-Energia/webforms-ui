@@ -57,13 +57,12 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
 
     modifyContract(data)
       .then(response => {
-        console.log('response 2')
         console.log(response)
         handleStepChanges({ response: response.data })
         nextStep()
       })
       .catch(error => {
-        handleStepChanges({ error: error?.response?.data?.error })
+        handleStepChanges({ error: error?.response?.data?.error ? error?.response?.data?.error : { code: 'MODIFY_POTTAR_UNEXPECTED' } })
         nextStep()
       })
   }
