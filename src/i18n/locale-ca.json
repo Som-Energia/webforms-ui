@@ -20,6 +20,7 @@
   "TIPUS_INSTALLACIO": "Quin canvi vols fer?",
   "MONOFASICA_NORMAL": "Trifàsica a Monofàsica",
   "TRIFASICA": "Monofàsica a Trifàsica",
+  "INSTALL_TYPE_ATTACHMENTS" : "L'empresa de distribució elèctrica sol·licita obligatòriament la presentació del butlletí elèctric on consti el canvi de tensió efectuat",
   "HELP_INSTALL_TYPE": "Com identificar si una instal·lació és <a target=\"_blank\" href=\"{{url}}\">trifàsica o monofàsica</a>",
   "HELP_INSTALL_TYPE_URL": "http://ca.support.somenergia.coop/article/479-tinc-una-instal-lacio-monofasica-o-trifasica",
   "POTENCIA_A_CONTRACTAR": "Quina potència vols contractar?",
