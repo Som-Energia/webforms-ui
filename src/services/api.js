@@ -9,7 +9,7 @@ export function modifyContract (data) {
     data: data
   })
     .then(response => {
-      // response.data
-      console.log('api log:', response)
+      console.log('response log:', response)
+      return response
     })
 }
