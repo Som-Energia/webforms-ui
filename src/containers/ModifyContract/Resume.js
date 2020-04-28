@@ -58,7 +58,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
     modifyContract(data)
       .then(response => {
         console.log(response)
-        handleStepChanges({ response: response.data })
+        handleStepChanges({ response: response })
         nextStep()
       })
       .catch(error => {
