@@ -24,7 +24,8 @@ const theme = createMuiTheme({
     tonalOffset: 0.2
   },
   typography: {
-    color: '#4d4d4d'
+    color: '#4d4d4d',
+    htmlFontSize: 16
   },
   shape: {
     borderRadius: '0'

@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -19,6 +20,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import PublishIcon from '@material-ui/icons/Publish'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -185,6 +187,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
             ...{
               changePhases: false,
               phases: '',
+              phases_attachments: [],
               changePower: false,
               power: '',
               power2: '',
@@ -239,28 +242,37 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
             {values.changePhases &&
-            <Box mx={1} mt={1} mb={2}>
-              <TextField
-                select
-                id="phases"
-                name="phases"
-                label={t('TIPUS_INSTALLACIO')}
-                variant="outlined"
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.phases}
-                error={(errors.phases && touched.phases)}
-                helperText={(touched.phases && errors.phases)}
-              >
-                <MenuItem value="mono">
-                  {t('MONOFASICA_NORMAL')}
-                </MenuItem>
-                <MenuItem value="tri">
-                  {t('TRIFASICA')}
-                </MenuItem>
-              </TextField>
-            </Box>
+            <>
+              <Box mx={1} mt={1} mb={2}>
+                <TextField
+                  select
+                  id="phases"
+                  name="phases"
+                  label={t('TIPUS_INSTALLACIO')}
+                  variant="outlined"
+                  fullWidth
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phases}
+                  error={(errors.phases && touched.phases)}
+                  helperText={(touched.phases && errors.phases)}
+                >
+                  <MenuItem value="mono">
+                    {t('MONOFASICA_NORMAL')}
+                  </MenuItem>
+                  <MenuItem value="tri">
+                    {t('TRIFASICA')}
+                  </MenuItem>
+                </TextField>
+              </Box>
+              <Box mt={2} mx={1} mb={2}>
+                <FormHelperText>
+                  {t('INSTALL_TYPE_ATTACHMENTS')}
+                </FormHelperText>
+              </Box>
+              <Box mx={1} mt={1} mb={2}>
+              </Box>
+            </>
             }
             <Box mx={1} mb={3}>
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>

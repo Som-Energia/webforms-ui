@@ -20,6 +20,7 @@
   "TIPUS_INSTALLACIO": "Que cambio quieres solicitar?",
   "MONOFASICA_NORMAL": "Trifásica a Monofásica",
   "TRIFASICA": "Monofásica a Trifásica",
+  "INSTALL_TYPE_ATTACHMENTS": "La empresa de distribución eléctrica solicita de manera obligatoria la presentación del boletín eléctrico dónde conste el cambio de tensión efectuado",
   "HELP_INSTALL_TYPE": "Cómo identificar si una instalación es <a target=\"_blank\" href=\"{{url}}\">trifásica o monofásica</a>",
   "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
   "POTENCIA_A_CONTRACTAR": "¿Qué potencia quieres contratar?",
