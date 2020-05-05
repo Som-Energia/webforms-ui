@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { modifyContract } from '../../services/api'
+import { normalizeFormData } from '../../services/utils'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -39,33 +40,28 @@ const useStyles = makeStyles(theme => ({
 export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
+  const [sending, setSending] = useState(false)
 
-  const handleSubmit = () => {
-    const { modify, contact, token } = params
-    const THOUSANDS_CONVERSION_FACTOR = 1000
+  const handleSubmit = async () => {
+    setSending(true)
+    const data = normalizeFormData(params)
 
-    const data = {
-      tarifa: modify?.tariff,
-      potencia: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
-      potencia_p2: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-      potencia_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-      discriminacio: modify?.fare,
-      contact_name: contact?.contactName,
-      contact_surname: contact?.contactSurname,
-      contact_phone: contact?.phone,
-      token: token
-    }
-
-    modifyContract(data)
+    await modifyContract(data)
       .then(response => {
-        console.log(response)
-        handleStepChanges({ response: response?.data })
+        handleStepChanges({ response: response })
         nextStep()
       })
       .catch(error => {
-        handleStepChanges({ error: error?.response?.data?.error ? error?.response?.data?.error : { code: 'MODIFY_POTTAR_UNEXPECTED' } })
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error?.response?.data?.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
         nextStep()
       })
+
+    setSending(false)
   }
 
   return (
@@ -78,7 +74,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       { params.modify?.phases &&
         <Box mt={2} mx={1}>
           <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
-            {t('TIPUS_INSTALLACIO')}
+            {t('INSTALL_TYPE')}
           </Typography>
           <Typography variant="body1" gutterBottom>
             {(params.modify?.phases === 'mono') ? t('MONOFASICA_NORMAL') : t('TRIFASICA')}
@@ -165,6 +161,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
             color="primary"
             variant="contained"
             startIcon={<SendIcon />}
+            disabled={sending}
           >
             {t('ENVIAR')}
           </Button>
