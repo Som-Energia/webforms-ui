@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -20,7 +19,8 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import PublishIcon from '@material-ui/icons/Publish'
+
+import Uploader from '../../components/Uploader'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,6 +67,12 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
         function (item) {
           return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
         }),
+    attachments: Yup.array()
+      .when('changePhases', {
+        is: true,
+        then: Yup.array()
+          .required(t('NO_ATTACHMENTS'))
+      }),
     moreThan15Kw: Yup.boolean()
       .test('noMoreThan15KwForMono',
         t('NO_MORE_THAN_15KW_FOR_MONO'),
@@ -125,6 +131,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
   const handleChangeModify = (event, setFieldValue, values) => {
     if (!values.changePhases) {
       setFieldValue('phases', '')
+      setFieldValue('attachments', [])
     }
     if (!values.changePower) {
       setFieldValue('power', '')
@@ -186,16 +193,17 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           {
             ...{
               changePhases: false,
-              phases: '',
-              phases_attachments: [],
+              phases: null,
+              attachments: [],
               changePower: false,
-              power: '',
-              power2: '',
-              power3: '',
+              power: null,
+              power2: null,
+              power3: null,
+              power_attachments: [],
               moreThan15Kw: false,
               changeFare: false,
-              fare: '',
-              tariff: ''
+              fare: null,
+              tariff: null
             },
             ...params
           }
@@ -265,12 +273,18 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   </MenuItem>
                 </TextField>
               </Box>
-              <Box mt={2} mx={1} mb={2}>
-                <FormHelperText>
+
+              <Box mt={3} mx={1} mb={1}>
+                <Typography>
                   {t('INSTALL_TYPE_ATTACHMENTS')}
-                </FormHelperText>
+                </Typography>
               </Box>
               <Box mx={1} mt={1} mb={2}>
+                <Uploader
+                  fieldError={errors.attachments && touched.attachments && errors.attachments}
+                  callbackFn={ values => { setFieldValue('attachments', values) } }
+                  values={values.attachments}
+                />
               </Box>
             </>
             }
@@ -365,6 +379,18 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   helperText={(touched.power3 && errors.power3)}
                 />
               }
+              <Box mt={3} mb={1}>
+                <Typography>
+                  {t('POWER_ATTACHMENTS')}
+                </Typography>
+              </Box>
+              <Box mt={1} mb={2}>
+                <Uploader
+                  fieldError={errors.power_attachments && touched.power_attachments && errors.power_attachments}
+                  callbackFn={ values => { setFieldValue('power_attachments', values) } }
+                  values={values.power_attachments}
+                />
+              </Box>
             </Box>
             }
             <Box mx={1} mt={1} mb={3}>
