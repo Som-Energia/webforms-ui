@@ -10,8 +10,6 @@ export const modifyContract = async (data) => {
   })
     .then(response => {
       return response?.data
-    }).catch(error => {
-      throw new TypeError(error)
     })
 }
 

@@ -54,7 +54,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       .catch(error => {
         const errorObj = {
           error: error?.response?.data?.error
-            ? error?.response?.data?.error
+            ? error.response.data.error
             : { code: 'MODIFY_POTTAR_UNEXPECTED' }
         }
         handleStepChanges(errorObj)
