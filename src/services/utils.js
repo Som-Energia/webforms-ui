@@ -5,7 +5,7 @@ export const normalizeFormData = (params) => {
 
   const data = {
     tarifa: modify?.tariff,
-    tension: modify?.phases,
+    tensio: modify?.phases,
     attachments: [...modify?.attachments, ...modify?.power_attachments],
     potencia: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
     potencia_p2: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR) : undefined,
