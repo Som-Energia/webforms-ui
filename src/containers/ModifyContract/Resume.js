@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import SendIcon from '@material-ui/icons/Send'
 
@@ -34,6 +35,13 @@ const useStyles = makeStyles(theme => ({
   },
   resumeLabel: {
     textTransform: 'uppercase'
+  },
+  buttonProgress: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12
   }
 }))
 
@@ -155,16 +163,18 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
           </Button>
         }
         {
-          <Button
-            onClick={handleSubmit}
-            className={classes.button}
-            color="primary"
-            variant="contained"
-            startIcon={<SendIcon />}
-            disabled={sending}
-          >
-            {t('ENVIAR')}
-          </Button>
+          <>
+            <Button
+              onClick={handleSubmit}
+              className={classes.button}
+              color="primary"
+              variant="contained"
+              startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
+              disabled={sending}
+            >
+              {t('ENVIAR')}
+            </Button>
+          </>
         }
       </div>
     </Paper>
