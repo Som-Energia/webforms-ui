@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -32,7 +31,7 @@ const Uploader = (props) => {
 
   useEffect(() => {
     callbackFn(uploads)
-  }, [uploads])
+  }, [uploads, callbackFn])
 
   const handleChange = async (event) => {
     setUploading(true)
