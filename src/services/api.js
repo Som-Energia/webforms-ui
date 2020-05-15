@@ -37,3 +37,14 @@ export const uploadFile = async (name, file) => {
       return response?.data
     })
 }
+
+export const checkVat = async (vat) => {
+  return axios({
+    method: 'GET',
+    url: `${API_URL}check/vat/exists/${vat}`
+  })
+    .then(response => {
+      console.log(response)
+      return response?.data
+    })
+}
