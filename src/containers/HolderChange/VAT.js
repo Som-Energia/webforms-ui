@@ -41,15 +41,10 @@ function VAT (props) {
 
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
-  const [isValidated, setValidated] = useState(false)
 
   const handleChange = (event) => {
     setValue(event.target.value)
   }
-
-  useEffect(() => {
-    validate(isValidated)
-  }, [isValidated, validate])
 
   useEffect(() => {
     console.log('check value!', value)
@@ -58,7 +53,7 @@ function VAT (props) {
         .then(response => {
           console.log(response)
           setError((response?.data?.valid !== true))
-          setValidated((response?.data?.valid === true))
+          // setValidated((response?.data?.valid === true))
         }
         )
       : setError(value.length !== 0)
@@ -73,14 +68,17 @@ function VAT (props) {
       <Box mt={3} mb={1}>
         <TextField
           id="nif"
+          name="nif"
           label={t('VAT_LABEL')}
           variant="outlined"
           fullWidth
           required
           autoFocus
-          value={value}
-          onChange={handleChange}
-          error={error}
+          value={props.values.nif}
+          onChange={props.handleChange}
+          onBlur={props.handleBlur}
+          error={props.errors.nif && props.touched.nif}
+          helperText={props.errors.nif && props.touched.nif && props.errors.nif}
         />
       </Box>
       <Box mt={4} mb={3}>
