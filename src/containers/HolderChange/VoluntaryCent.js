@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+
+import Chooser from '../../components/Chooser'
+import StepHeader from '../../components/StepHeader'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,15 +49,28 @@ function VoluntaryCent (props) {
 
   return (
     <>
-      <Typography className={classes.title} variant="h5">{t('VOLUNTARY_CENT_TITLE')}</Typography>
+      <StepHeader title={t('VOLUNTARY_CENT_TITLE')} />
       <Typography variant="body1"
         dangerouslySetInnerHTML={{ __html: t('VOLUNTARY_CENT_PRESENTATION') }}
       />
       <Box mt={3} mb={4}>
-        <Typography variant="h6"
-          dangerouslySetInnerHTML={{ __html: t('VOLUNTARY_CENT_QUESTION') }}
+        <Chooser
+          question={t('VOLUNTARY_CENT_QUESTION')}
+          options={[
+            {
+              value: 'yes',
+              label: t('VOLUNTARY_CENT_YES_LABEL'),
+              description: t('VOLUNTARY_CENT_YES_DESCRIPTION')
+            },
+            {
+              value: 'no',
+              label: t('VOLUNTARY_CENT_NO_LABEL'),
+              description: t('VOLUNTARY_CENT_NO_DESCRIPTION')
+            }
+          ]}
         />
       </Box>
+
     </>
   )
 }
