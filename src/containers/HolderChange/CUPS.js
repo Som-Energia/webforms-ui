@@ -10,6 +10,8 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import StepHeader from '../../components/StepHeader'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -63,7 +65,7 @@ function CUPS (props) {
 
   return (
     <>
-      <Typography className={classes.title} variant="h5">{t('CUPS_TITLE')}</Typography>
+      <StepHeader title={t('CUPS_TITLE')} />
       <Typography variant="body1"
         dangerouslySetInnerHTML={{ __html: t('FILL_CUPS') }}
       />

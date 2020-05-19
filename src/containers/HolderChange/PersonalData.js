@@ -19,6 +19,8 @@ import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined'
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
 
+import StepHeader from '../../components/StepHeader'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -72,7 +74,7 @@ function PersonalData (props) {
 
   return (
     <>
-      <Typography className={classes.title} variant="h5">{t('HOLDER_PERSONAL_DATA')}</Typography>
+      <StepHeader title={t('HOLDER_PERSONAL_DATA')} />
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <TextField
