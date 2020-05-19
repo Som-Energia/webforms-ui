@@ -167,6 +167,7 @@
   "VOLUNTARY_CENT_NO_LABEL": "No",
   "VOLUNTARY_CENT_NO_DESCRIPTION": "Siempre que quieras podrás activar o desactivar este donativo al instante desde la Oficina Virtual.",
   "NO_VOLUNTARY_DONATION_CHOICE_TAKEN": "Es necesario especificar si quieres hacer o no el donativo voluntario",
+
   "PAYMENT_TITLE": "Datos de pago",
   "IBAN_LABEL": "IBAN (cuenta bancaria)",
   "IBAN_HELP": "Ejemplo: ES11 2222 3333 4444 5555 6666",
