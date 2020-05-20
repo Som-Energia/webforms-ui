@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
   stepContainer: {
     marginTop: theme.spacing(4),
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column'
   },
   actionsContainer: {
     display: 'flex',
@@ -73,10 +75,16 @@ function HolderChange (props) {
 
   const validationSchemas = [
     Yup.object().shape({
-      nif: Yup.string().required(t('FILL_NIF'))
+      holder: Yup.object().shape({
+        vat: Yup.string().required(t('FILL_NIF')),
+        vatvalid: Yup.bool().required(t('FILL_NIF'))
+          .oneOf([true], t('FILL_NIF'))
+      })
     }),
     Yup.object().shape({
-      field2: Yup.string().required('Field1 Is Required')
+      supply_point: Yup.object().shape({
+        cups: Yup.string().required(t('INVALID_SUPPLY_POINT_CUPS'))
+      })
     })
   ]
 
@@ -113,15 +121,26 @@ function HolderChange (props) {
       <Formik
         onSubmit={handleSubmit}
         enableReinitialize
-        initialValues={{ nif: '', cups: '' }}
+        initialValues={{
+          holder: {
+            vat: '',
+            vatvalid: undefined
+          },
+          supply_point: {
+            cups: '',
+            status: undefined,
+            address: ''
+          }
+        }}
         validationSchema={validationSchemas[activeStep]}
+        validateOnMount={true}
         render={props => (
-          <Form>
+          <Form noValidate>
             {
               getWizardSteps(props).map((step, index) => (
                 <Slide key={index} direction="right" in={showAll || index === activeStep}>
                   <Paper elevation={3} className={classes.stepContainer}>
-                    <Box mx={4} my={3}>
+                    <Box mx={4} mb={3}>
                       {step}
                     </Box>
                     <Box mx={4} my={3}>
