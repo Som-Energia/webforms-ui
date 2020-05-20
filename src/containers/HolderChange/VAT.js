@@ -7,8 +7,12 @@ import { checkVat } from '../../services/api'
 
 import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
+import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import StepHeader from '../../components/StepHeader'
 
@@ -36,28 +40,25 @@ const useStyles = makeStyles((theme) => ({
 
 function VAT (props) {
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
-  const { validate } = props
+  const { t } = useTranslation()
 
-  const [value, setValue] = useState('')
-  const [error, setError] = useState(false)
-
-  const handleChange = (event) => {
-    setValue(event.target.value)
-  }
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    console.log('check value!', value)
-    value.length >= 8
-      ? checkVat(value)
+    const value = props.values.holder.vat
+    if (value.length > 8) {
+      setIsLoading(true)
+      checkVat(value)
         .then(response => {
-          console.log(response)
-          setError((response?.data?.valid !== true))
-          // setValidated((response?.data?.valid === true))
-        }
-        )
-      : setError(value.length !== 0)
-  }, [value])
+          const validVat = response?.data?.valid === true
+          props.setFieldValue('holder.vatvalid', validVat)
+          props.validateForm()
+          setIsLoading(false)
+        })
+    } else {
+      props.setFieldValue('holder.vatvalid', false)
+    }
+  }, [props.values.holder.vat])
 
   return (
     <>
@@ -67,18 +68,40 @@ function VAT (props) {
       />
       <Box mt={3} mb={1}>
         <TextField
-          id="nif"
-          name="nif"
+          id="vat"
+          name="holder.vat"
           label={t('VAT_LABEL')}
           variant="outlined"
           fullWidth
           required
           autoFocus
-          value={props.values.nif}
+          value={props.values.holder.vat}
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          error={props.errors.nif && props.touched.nif}
-          helperText={props.errors.nif && props.touched.nif && props.errors.nif}
+          error={(props.errors?.holder?.vat && props.touched?.holder?.vat) ||
+            (props.touched?.holder?.vat && props.values?.holder?.vatvalid === false)
+          }
+          helperText={(props.touched?.holder?.vat && props.errors?.holder?.vat) ||
+            (props.touched?.holder?.vat && props.errors?.holder?.vatvalid)
+          }
+          InputProps={{
+            endAdornment:
+              <InputAdornment position="end">
+                { isLoading &&
+                  <CircularProgress size={24} />
+                }
+                { !isLoading && props.values.holder.vatvalid &&
+                  <CheckOutlinedIcon color="primary" />
+                }
+              </InputAdornment>
+          }}
+        />
+        <input
+          type="hidden"
+          id="vatvalid"
+          name="holder.vatvalid"
+          onChange={props.handleChange}
+          value={props.values.holder.vatvalid}
         />
       </Box>
       <Box mt={4} mb={3}>
