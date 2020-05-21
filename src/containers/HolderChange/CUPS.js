@@ -1,67 +1,60 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
-
-import { checkVat } from '../../services/api'
-
 import Box from '@material-ui/core/Box'
+import Checkbox from '@material-ui/core/Checkbox'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+
+import { checkCups } from '../../services/api'
 import StepHeader from '../../components/StepHeader'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3)
-  },
-  textField: {
-    width: '25ch'
-  }
-}))
-
 function CUPS (props) {
-  const classes = useStyles()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
-  const { validate } = props
-
-  const [value, setValue] = useState('')
-  const [error, setError] = useState(false)
-  const [isValidated, setValidated] = useState(false)
-
-  const handleChange = (event) => {
-    setValue(event.target.value)
-  }
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    validate(isValidated)
-  }, [isValidated, validate])
-
-  useEffect(() => {
-    console.log('check value!', value)
-    value.length >= 10
-      ? checkVat(value)
+    const value = props.values.supply_point.cups
+    if (value.length > 18) {
+      setIsLoading(true)
+      checkCups(value)
         .then(response => {
           console.log(response)
-          setError((response?.data?.valid !== true))
-          console.log('validated?', response?.data?.valid)
-          setValidated((response?.data?.valid === true))
-        }
-        )
-      : setError(value.length !== 0)
-  }, [value])
+          const status = response?.data?.status
+          props.setFieldValue('supply_point.status', status)
+          if (status === 'active') {
+            props.setFieldValue('supply_point.address', response?.data?.address)
+          }
+          props.validateForm()
+          setIsLoading(false)
+        })
+        .catch(error => {
+          console.log(error.response)
+          const errorStatus = error?.response?.data?.data?.status ? error?.response?.data?.data?.status : 'error'
+          props.setFieldValue('supply_point.status', errorStatus)
+          setIsLoading(false)
+        })
+    } else {
+      props.setFieldValue('supply_point.status', false)
+    }
+  }, [props.values.supply_point.cups])
+
+  const CupsHelperText = () => (
+    <a
+      href={t('CUPS_HELP_URL')}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t('CUPS_HELP')}
+    </a>
+  )
 
   return (
     <>
@@ -72,22 +65,28 @@ function CUPS (props) {
       <Box mt={3} mb={1}>
         <TextField
           id="cups"
+          name="supply_point.cups"
           label={t('CUPS_LABEL')}
           variant="outlined"
           fullWidth
           autoFocus
           required
-          helperText={
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={t('CUPS_HELP_URL')}>
-              {t('CUPS_HELP')}
-            </a>
-          }
-          value={value}
-          onChange={handleChange}
-          error={error}
+          value={props.values.supply_point.cups}
+          onChange={props.handleChange}
+          onBlur={props.handleBlur}
+          error={props.errors?.supply_point?.cups && props.touched?.supply_point?.cups}
+          helperText={(props.touched?.supply_point?.cups && props.errors?.supply_point?.cups) || <CupsHelperText />}
+          InputProps={{
+            endAdornment:
+              <InputAdornment position="end">
+                { isLoading &&
+                  <CircularProgress size={24} />
+                }
+                { !isLoading && props.values.supply_point.cupsvalid &&
+                  <CheckOutlinedIcon color="primary" />
+                }
+              </InputAdornment>
+          }}
         />
       </Box>
       <Box mt={3} mb={1}>
@@ -97,10 +96,21 @@ function CUPS (props) {
           variant="outlined"
           fullWidth
           disabled
-          value={value}
+          value={props.values.supply_point.address}
+          helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
         />
       </Box>
-      <Box mt={4} mb={3}>
+      <Box ml={1} mt={4} mb={2}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              color="primary"
+            />
+          }
+          label={t('CUPS_VERIFY_LABEL')}
+        />
+      </Box>
+      <Box mt={4} mb={1}>
         <FormHelperText dangerouslySetInnerHTML={{ __html: t('CUPS_NO_VERIFY_HELP') }}></FormHelperText>
       </Box>
     </>

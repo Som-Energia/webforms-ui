@@ -47,29 +47,17 @@ function HolderChange (props) {
 
   const [showAll, setShowAll] = useState(true)
   const [activeStep, setActiveStep] = useState(0)
-  const [isValidated, setValidated] = useState(true)
-
-  const wizardSteps = [
-    <VAT validate={setValidated} />,
-    <CUPS validate={setValidated} />,
-    <PersonalData validate={setValidated} />,
-    <BecomeMember validate={setValidated} />,
-    <VoluntaryCent validate={setValidated} />,
-    <SpecialCases validate={setValidated} />,
-    <IBAN validate={setValidated} />,
-    <Review validate={setValidated} />
-  ]
 
   const getWizardSteps = (props) => {
     return [
-      <VAT validate={setValidated} {...props} />,
-      <CUPS validate={setValidated} {...props} />,
-      <PersonalData validate={setValidated} {...props} />,
-      <BecomeMember validate={setValidated} {...props} />,
-      <VoluntaryCent validate={setValidated} {...props} />,
-      <SpecialCases validate={setValidated} {...props} />,
-      <IBAN validate={setValidated} {...props} />,
-      <Review validate={setValidated} {...props} />
+      <VAT {...props} />,
+      <CUPS {...props} />,
+      <PersonalData {...props} />,
+      <BecomeMember {...props} />,
+      <VoluntaryCent {...props} />,
+      <SpecialCases {...props} />,
+      <IBAN {...props} />,
+      <Review {...props} />
     ]
   }
 
@@ -83,7 +71,20 @@ function HolderChange (props) {
     }),
     Yup.object().shape({
       supply_point: Yup.object().shape({
-        cups: Yup.string().required(t('INVALID_SUPPLY_POINT_CUPS'))
+        cups: Yup.string().required(t('CUPS_INVALID'))
+          .min(18, t('CUPS_INVALID'))
+          .test('statusError',
+            t('CUPS_INVALID'),
+            function () { return !(this.parent.status === 'error') })
+          .test('statusError',
+            t('CUPS_IN_PROCESS'),
+            function () { return !(this.parent.status === 'busy') })
+          .test('statusNew',
+            t('CUPS_SHOULD_BE_ACTIVE'),
+            function () { return !(this.parent.status === 'new') })
+          .test('statusInvalid',
+            t('INVALID_SUPPLY_POINT_CUPS'),
+            function () { return !(this.parent.status === 'invalid') })
       })
     })
   ]
@@ -91,12 +92,12 @@ function HolderChange (props) {
   useEffect(() => {
     const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [props.match.params.language])
 
   const nextStep = props => {
     console.log('Next step')
     const next = activeStep + 1
-    const last = wizardSteps.length - 1
+    const last = getWizardSteps().length - 1
     props.submitForm().then(() => {
       if (props.isValid) {
         props.validateForm()
@@ -124,17 +125,18 @@ function HolderChange (props) {
         initialValues={{
           holder: {
             vat: '',
-            vatvalid: undefined
+            vatvalid: false
           },
           supply_point: {
             cups: '',
-            status: undefined,
+            status: false,
             address: ''
           }
         }}
         validationSchema={validationSchemas[activeStep]}
         validateOnMount={true}
-        render={props => (
+      >
+        {props => (
           <Form noValidate>
             {
               getWizardSteps(props).map((step, index) => (
@@ -177,7 +179,7 @@ function HolderChange (props) {
             <DisplayFormikState {...props} />
           </Form>
         )}
-      />
+      </Formik>
     </Container>
   )
 }
