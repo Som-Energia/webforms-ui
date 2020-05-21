@@ -48,3 +48,13 @@ export const checkVat = async (vat) => {
       return response?.data
     })
 }
+
+export const checkCups = async (cups) => {
+  return axios({
+    method: 'GET',
+    url: `${API_URL}check/cups/status/${cups}`
+  })
+    .then(response => {
+      return response?.data
+    })
+}
