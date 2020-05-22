@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { checkVat } from '../../services/api'
+import { isPhisicalVAT } from '../../services/utils'
 
 import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
@@ -52,6 +53,17 @@ function VAT (props) {
         .then(response => {
           const validVat = response?.data?.valid === true
           props.setFieldValue('holder.vatvalid', validVat)
+
+          const phisicalVAT = isPhisicalVAT(props.values.holder.vat)
+          props.setFieldValue('holder.isphisical', phisicalVAT)
+
+          props.validateForm()
+          setIsLoading(false)
+        })
+        .catch(error => {
+          console.log(error.response)
+          const errorStatus = error?.response?.data?.data?.valid ? error?.response?.data?.data?.valid : false
+          props.setFieldValue('holder.vatvalid', errorStatus)
           props.validateForm()
           setIsLoading(false)
         })
@@ -95,13 +107,6 @@ function VAT (props) {
                 }
               </InputAdornment>
           }}
-        />
-        <input
-          type="hidden"
-          id="vatvalid"
-          name="holder.vatvalid"
-          onChange={props.handleChange}
-          value={props.values.holder.vatvalid}
         />
       </Box>
       <Box mt={4} mb={3}>

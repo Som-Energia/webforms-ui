@@ -20,6 +20,10 @@ function CUPS (props) {
 
   const [isLoading, setIsLoading] = useState(false)
 
+  const isActiveCups = () => {
+    return props.values.supply_point.status === 'active'
+  }
+
   useEffect(() => {
     const value = props.values.supply_point.cups
     if (value.length > 18) {
@@ -39,6 +43,7 @@ function CUPS (props) {
           console.log(error.response)
           const errorStatus = error?.response?.data?.data?.status ? error?.response?.data?.data?.status : 'error'
           props.setFieldValue('supply_point.status', errorStatus)
+          props.validateForm()
           setIsLoading(false)
         })
     } else {
@@ -82,7 +87,7 @@ function CUPS (props) {
                 { isLoading &&
                   <CircularProgress size={24} />
                 }
-                { !isLoading && props.values.supply_point.cupsvalid &&
+                { !isLoading && isActiveCups() &&
                   <CheckOutlinedIcon color="primary" />
                 }
               </InputAdornment>
@@ -100,17 +105,21 @@ function CUPS (props) {
           helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
         />
       </Box>
-      <Box ml={1} mt={4} mb={2}>
+      <Box ml={1} mt={4} mb={1}>
         <FormControlLabel
+          disabled={!isActiveCups()}
           control={
             <Checkbox
+              name="supply_point.verified"
+              onChange={props.handleChange}
+              value={props.values.supply_point.verified}
               color="primary"
             />
           }
           label={t('CUPS_VERIFY_LABEL')}
         />
       </Box>
-      <Box mt={4} mb={1}>
+      <Box ml={1}>
         <FormHelperText dangerouslySetInnerHTML={{ __html: t('CUPS_NO_VERIFY_HELP') }}></FormHelperText>
       </Box>
     </>
