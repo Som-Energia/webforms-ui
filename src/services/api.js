@@ -58,3 +58,23 @@ export const checkCups = async (cups) => {
       return response?.data
     })
 }
+
+export const getProvincies = async () => {
+  return axios({
+    method: 'GET',
+    url: `${API_URL}data/provincies`
+  })
+    .then(response => {
+      return response?.data
+    })
+}
+
+export const getMunicipis = async (provincia) => {
+  return axios({
+    method: 'GET',
+    url: `${API_URL}data/municipis/${provincia}`
+  })
+    .then(response => {
+      return response?.data
+    })
+}
