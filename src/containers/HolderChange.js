@@ -84,7 +84,9 @@ function HolderChange (props) {
             function () { return !(this.parent.status === 'new') })
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') })
+            function () { return !(this.parent.status === 'invalid') }),
+        verified: Yup.bool().required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
+          .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX'))
       })
     })
   ]
@@ -100,9 +102,9 @@ function HolderChange (props) {
     const last = getWizardSteps().length - 1
     props.submitForm().then(() => {
       if (props.isValid) {
+        setActiveStep(Math.min(next, last))
         props.validateForm()
         props.setTouched({})
-        setActiveStep(Math.min(next, last))
       }
     })
   }
@@ -125,12 +127,16 @@ function HolderChange (props) {
         initialValues={{
           holder: {
             vat: '',
-            vatvalid: false
+            vatvalid: false,
+            isphisical: true,
+            state: '',
+            city: ''
           },
           supply_point: {
             cups: '',
             status: false,
-            address: ''
+            address: '',
+            verified: false
           }
         }}
         validationSchema={validationSchemas[activeStep]}

@@ -19,3 +19,9 @@ export const normalizeFormData = (params) => {
 
   return data
 }
+
+export const isPhisicalVAT = (vat) => {
+  if (vat === undefined) return undefined
+  var firstchar = vat[0]
+  return '0123456789KLMXYZ'.indexOf(firstchar) !== -1
+}
