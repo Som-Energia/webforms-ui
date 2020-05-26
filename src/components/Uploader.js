@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { useTranslation } from 'react-i18next'
@@ -23,7 +23,7 @@ import { uploadFile } from '../services/api'
 const Uploader = (props) => {
   const { name, callbackFn, fieldError, values } = props
   const { t } = useTranslation()
-  const [value, setValue] = useState()
+
   const [uploads, setUploads] = useState([...values])
   const [inputKey, setInputKey] = useState(Date.now())
   const [isUploading, setUploading] = useState(false)
@@ -31,17 +31,9 @@ const Uploader = (props) => {
 
   useEffect(() => {
     callbackFn(uploads)
-  }, [uploads, callbackFn])
+  }, [uploads])
 
-  const handleChange = async (event) => {
-    setUploading(true)
-    const name = event.target.name
-    const file = event.target.files[0]
-    await upload(name, file)
-    setUploading(false)
-  }
-
-  const upload = async (name, file) => {
+  const upload = useCallback(async (name, file) => {
     return uploadFile(name, file)
       .then(response => {
         if (response?.data?.code === 'UPLOAD_OK') {
@@ -60,20 +52,26 @@ const Uploader = (props) => {
           : 'MODIFY_POTTAR_UNEXPECTED'
         setError(errorMsg)
       })
-  }
+  }, [uploads, error])
+
+  const handleChange = useCallback(async (event) => {
+    setUploading(true)
+    const name = event.target.name
+    const file = event.target.files[0]
+    await upload(name, file)
+    setUploading(false)
+  }, [upload])
 
   const handleClean = event => {
-    event.preventDefault()
     setError(false)
     setInputKey(Date.now())
   }
 
-  const handleDelete = (event, index) => {
-    event.preventDefault()
+  const handleDelete = useCallback((event, index) => {
     const uploadsToDelete = uploads
     uploadsToDelete.splice(index, 1)
     setUploads([...uploadsToDelete])
-  }
+  }, [uploads])
 
   return (
     <>
@@ -85,7 +83,6 @@ const Uploader = (props) => {
         name={name}
         variant="outlined"
         onChange={handleChange}
-        value={value}
         fullWidth
         InputProps={{
           endAdornment:
@@ -94,7 +91,7 @@ const Uploader = (props) => {
                 isUploading
                   ? <CircularProgress size={24} />
                   : error ? <IconButton onClick={handleClean}><HighlightOffIcon /></IconButton>
-                    : <IconButton><PublishIcon /></IconButton>
+                    : <PublishIcon />
               }
             </InputAdornment>
         }}
@@ -136,4 +133,4 @@ Uploader.defaultProps = {
   values: []
 }
 
-export default Uploader
+export default React.memo(Uploader)
