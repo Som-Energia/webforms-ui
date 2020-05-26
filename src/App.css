@@ -8,6 +8,10 @@ a {
   color: #707a1a
 }
 
+/*
+Modify Contract
+*/
+
 .wizard__step {
   margin-top: 32px;
   padding: 20px 24px;
@@ -15,8 +19,57 @@ a {
 
 .MuiStepLabel-label {
   font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.MuiStepLabel-label.MuiStepLabel-completed {
+  font-weight: 400 !important;
 }
 
 .MuiStepLabel-label.Mui-error {
   color: rgb(97, 26, 21) !important;
+}
+
+/*
+StepHeader Component
+*/
+
+.header {
+  align-items: stretch;
+  -webkit-align-items: stretch;
+  box-align: stretch;
+  -webkit-box-align: stretch;
+  box-flex: 1;
+  -webkit-box-flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.header__container {
+  background-color: rgba(150, 182, 51, 0.70);
+  margin-left: -32px;
+  min-width: 0%;
+  padding: 8px 8px 8px 32px;
+}
+
+.header__text {
+  color: rgba(0, 0, 0, 60);
+  font-size: 21px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.header__after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 10 10' preserveAspectRatio='none' style='height: 100%25; width: 90%25; overflow: visible; position: absolute;'%3E%3Cpolygon class='freebirdSolidFill' style='fill: rgba(150, 182, 51, 0.75); stroke-width: 0;' points='0,0 10,0 0,10'%3E%3C/polygon%3E%3C/svg%3E");
+  flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+  overflow: visible;
+  position: relative;
+  width: 18px;
 }

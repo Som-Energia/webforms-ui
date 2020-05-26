@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -42,6 +42,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const steps = [
+  'MODIFY_POTTAR_INTRO_TITLE',
+  'MODIFY_POTTAR_SELECT_TITLE',
+  'MODIFY_POTTAR_CONTACT_TITLE',
+  'REVISIO_CONFIRMACIO_DADES'
+]
+
 function ModifyContract (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
@@ -54,16 +61,9 @@ function ModifyContract (props) {
   const [activeStep, setActiveStep] = useState(0)
   const [data, setData] = useState({ token: props?.token })
 
-  const steps = [
-    'MODIFY_POTTAR_INTRO_TITLE',
-    'MODIFY_POTTAR_SELECT_TITLE',
-    'MODIFY_POTTAR_CONTACT_TITLE',
-    'REVISIO_CONFIRMACIO_DADES'
-  ]
-
-  const handleStepChanges = (params) => {
+  const handleStepChanges = useCallback((params) => {
     setData({ ...data, ...params })
-  }
+  }, [data])
 
   const getStepContent = (step) => {
     switch (step) {
@@ -75,14 +75,14 @@ function ModifyContract (props) {
       case 1:
         return <Params
           nextStep={() => nextStep(2)}
-          prevStep={prevStep}
+          prevStep={() => prevStep()}
           handleStepChanges={handleStepChanges}
           params={data?.modify}
         />
       case 2:
         return <Contact
           nextStep={() => nextStep(3)}
-          prevStep={prevStep}
+          prevStep={() => prevStep()}
           handleStepChanges={handleStepChanges}
           params={data?.contact}
         />
