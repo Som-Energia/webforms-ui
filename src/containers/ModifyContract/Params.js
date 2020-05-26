@@ -8,6 +8,7 @@ import Badge from '@material-ui/core/Badge'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
+import Divider from '@material-ui/core/Divider'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -19,6 +20,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 import Uploader from '../../components/Uploader'
 
@@ -31,7 +33,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   actionsContainer: {
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   resetContainer: {
     padding: theme.spacing(3)
@@ -64,7 +68,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       })
       .test('noMoreThan15KwForMono',
         t('NO_MORE_THAN_15KW_FOR_MONO'),
-        function (item) {
+        function () {
           return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
         }),
     attachments: Yup.array()
@@ -76,7 +80,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
     moreThan15Kw: Yup.boolean()
       .test('noMoreThan15KwForMono',
         t('NO_MORE_THAN_15KW_FOR_MONO'),
-        function (item) {
+        function () {
           return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
         }),
     power: Yup.number()
@@ -87,7 +91,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       })
       .test('oneMoreThan15Kw',
         t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-        function (item) {
+        function () {
           return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
         }),
     power2: Yup.number()
@@ -102,7 +106,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       })
       .test('oneMoreThan15Kw',
         t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-        function (item) {
+        function () {
           return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
         }),
     power3: Yup.number()
@@ -117,7 +121,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       })
       .test('oneMoreThan15Kw',
         t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-        function (item) {
+        function () {
           return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
         }),
     fare: Yup.string()
@@ -282,7 +286,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               <Box mx={1} mt={1} mb={2}>
                 <Uploader
                   fieldError={errors.attachments && touched.attachments && errors.attachments}
-                  callbackFn={ values => { setFieldValue('attachments', values) } }
+                  callbackFn={attachments => setFieldValue('attachments', attachments)}
                   values={values.attachments}
                 />
               </Box>
@@ -290,6 +294,10 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
             }
             <Box mx={1} mb={3}>
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>
+            </Box>
+
+            <Box mx={1} mb={2}>
+              <Divider />
             </Box>
 
             <Box mx={1} mb={0}>
@@ -397,6 +405,10 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
             </Box>
 
+            <Box mx={1} mb={2}>
+              <Divider />
+            </Box>
+
             <Box mx={1} mb={1}>
               <FormControlLabel
                 className={classes.switchLabel}
@@ -463,6 +475,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                 <Button
                   onClick={prevStep}
                   className={classes.button}
+                  startIcon={<ArrowBackIosIcon />}
                 >
                   {t('PAS_ANTERIOR')}
                 </Button>
