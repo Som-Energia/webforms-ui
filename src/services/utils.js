@@ -1,6 +1,6 @@
 const THOUSANDS_CONVERSION_FACTOR = 1000
 
-export const normalizeFormData = (params) => {
+export const normalizeModifyData = (params) => {
   const { modify, contact, token } = params
 
   const data = {
@@ -16,6 +16,10 @@ export const normalizeFormData = (params) => {
     contact_phone: contact?.phone,
     token: token
   }
+
+  Object.keys(data).forEach(
+    (key) => (data[key] == null || data[key] === '') && delete data[key]
+  )
 
   return data
 }
