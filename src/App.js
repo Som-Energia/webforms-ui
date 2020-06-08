@@ -8,7 +8,6 @@ import './i18n/i18n'
 
 import './App.css'
 
-import Contract from './containers/Contract'
 import HolderChange from './containers/HolderChange'
 import ModifyContract from './containers/ModifyContract'
 
@@ -54,10 +53,9 @@ const App = ({ token = '' }) => {
             <Router>
               <Switch>
                 <Route exact path="/" component={ModifyContract} />
-                <Route path="/new-contract" component={Contract} />
-                <Route path="/modify-contract" render={(props) => <ModifyContract {...props} token={token} />} />
+                <Route exact path="/modify-contract" render={(props) => <ModifyContract {...props} token={token} />} />
                 <Route path="/:language/contract/modification/" render={(props) => <ModifyContract {...props} token={token} />} />
-                <Route path="/holder-change" component={HolderChange} />
+                <Route exact path="/holder-change" component={HolderChange} />
               </Switch>
             </Router>
           </Grid>
