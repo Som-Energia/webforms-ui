@@ -1,10 +1,9 @@
 import React from 'react'
 
-
+import Paper from '@material-ui/core/Paper'
 
 const DisplayFormikState = props => (
-  <div style={{ margin: '1rem 0' }}>
-    <h3 style={{ fontFamily: 'monospace' }} />
+  <Paper elevation={3} style={{ margin: '1rem 0' }}>
     <pre
       style={{
         background: '#fff',
@@ -15,7 +14,7 @@ const DisplayFormikState = props => (
       <strong>props</strong> ={' '}
       {JSON.stringify(props, null, 2)}
     </pre>
-  </div>
+  </Paper>
 )
 
 export default DisplayFormikState
