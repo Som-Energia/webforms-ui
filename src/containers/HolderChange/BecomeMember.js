@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
 import Typography from '@material-ui/core/Typography'
 
 import Chooser from '../../components/Chooser'
@@ -46,19 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function BecomeMember (props) {
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
-  const { validate } = props
-
-  const [value, setValue] = useState('')
-  const [isValidated, setValidated] = useState(false)
-
-  const handleChange = (event) => {
-    setValue(event.target.value)
-  }
-
-  useEffect(() => {
-    validate(isValidated)
-  }, [isValidated, validate])
+  const { t } = useTranslation()
 
   return (
     <>
