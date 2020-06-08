@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
-import Slide from '@material-ui/core/Slide'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
@@ -22,18 +21,23 @@ import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
 import Review from './HolderChange/Review'
 
+import { checkVat } from '../services/api'
+
 import DisplayFormikState from '../components/DisplayFormikState'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    position: 'relative'
   },
   stepContainer: {
     marginTop: theme.spacing(4),
     width: '100%',
     display: 'flex',
     flexDirection: 'column'
+  },
+  step: {
+    position: 'absolute',
+    width: '100%'
   },
   actionsContainer: {
     display: 'flex',
@@ -45,21 +49,8 @@ function HolderChange (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showAll, setShowAll] = useState(true)
+  const [showAll, setShowAll] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
-
-  const getWizardSteps = (props) => {
-    return [
-      <VAT {...props} />,
-      <CUPS {...props} />,
-      <PersonalData {...props} />,
-      <BecomeMember {...props} />,
-      <VoluntaryCent {...props} />,
-      <SpecialCases {...props} />,
-      <IBAN {...props} />,
-      <Review {...props} />
-    ]
-  }
 
   const validationSchemas = [
     Yup.object().shape({
@@ -88,8 +79,93 @@ function HolderChange (props) {
         verified: Yup.bool().required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
           .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX'))
       })
+    }),
+    Yup.object().shape({
+      privacy_policy_accepted: Yup.bool()
+        .required(t('UNACCEPTED_PRIVACY_POLICY'))
+        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY')),
+      holder: Yup.object().shape({
+        name: Yup.string()
+          .required(t('NO_NAME')),
+        surname1: Yup.string()
+          .when('isphisical', {
+            is: true,
+            then: Yup.string()
+              .required(t('NO_SURNAME1'))
+          }),
+        proxyname: Yup.string()
+          .when('isphisical', {
+            is: false,
+            then: Yup.string()
+              .required(t('NO_PROXY_NAME'))
+          }),
+        proxynif: Yup.string()
+          .when('isphisical', {
+            is: false,
+            then: Yup.string()
+              .required(t('NO_PROXY_NIF'))
+          }),
+        proxynif_valid: Yup.bool()
+          .when('isphisical', {
+            is: false,
+            then: Yup.bool().required(t('FILL_NIF'))
+              .oneOf([true], t('FILL_NIF'))
+          }),
+        address: Yup.string()
+          .required(t('NO_ADDRESS')),
+        postal_code: Yup.string()
+          .required(t('NO_POSTALCODE')),
+        state: Yup.string()
+          .required(t('NO_STATE')),
+        city: Yup.string()
+          .required(t('NO_CITY')),
+        email: Yup.string()
+          .required(t('NO_EMAIL'))
+          .email(t('NO_EMAIL')),
+        email2: Yup.string()
+          .test('repeatEmail',
+            t('NO_REPEATED_EMAIL'),
+            function () {
+              return this.parent.email === this.parent.email2
+            }),
+        phone1: Yup.string()
+          .min(9, t('NO_PHONE'))
+          .required(t('NO_PHONE')),
+        language: Yup.string().required(t('NO_LANGUAGE'))
+      })
     })
   ]
+
+  const MAX_STEP_NUMBER = 7
+
+  const getActiveStep = (props) => {
+    return <>
+      { activeStep === 0 &&
+        <VAT {...props} />
+      }
+      { activeStep === 1 &&
+        <CUPS {...props} />
+      }
+      { activeStep === 2 &&
+        <PersonalData {...props} />
+      }
+      { activeStep === 3 &&
+        <BecomeMember {...props} />
+      }
+      { activeStep === 4 &&
+        <VoluntaryCent {...props} />
+      }
+      { activeStep === 5 &&
+        <SpecialCases {...props} />
+      }
+      { activeStep === 6 &&
+        <IBAN {...props} />
+      }
+      { activeStep === 7 &&
+        <Review {...props} />
+      }
+    </>
+  }
 
   useEffect(() => {
     const language = props.match.params.language
@@ -97,9 +173,8 @@ function HolderChange (props) {
   }, [props.match.params.language])
 
   const nextStep = props => {
-    console.log('Next step')
     const next = activeStep + 1
-    const last = getWizardSteps().length - 1
+    const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
       if (props.isValid) {
         setActiveStep(Math.min(next, last))
@@ -109,47 +184,53 @@ function HolderChange (props) {
     })
   }
 
-  const prevStep = () => {
-    console.log('Prev step')
+  const prevStep = props => {
     const prev = activeStep - 1
     setActiveStep(Math.max(0, prev))
+    props.submitForm().then(() => {
+      props.validateForm()
+      props.setTouched({})
+    })
   }
 
   const handleSubmit = props => {
-    console.log(props)
+    console.log('submit', props)
   }
 
   return (
-    <Container maxWidth="md" className={classes.root}>
+    <Container maxWidth="md">
       <Formik
         onSubmit={handleSubmit}
         enableReinitialize
         initialValues={{
           holder: {
-            vat: '',
+            vat: 'C35875459',
             vatvalid: false,
             isphisical: true,
+            proxynif_valid: false,
             state: '',
-            city: ''
+            city: '',
+            language: i18n.language
           },
           supply_point: {
-            cups: '',
+            cups: 'ES0031101322018013GN0F',
             status: false,
             address: '',
             verified: false
-          }
+          },
+          privacy_policy_accepted: false
         }}
         validationSchema={validationSchemas[activeStep]}
         validateOnMount={true}
       >
         {props => (
-          <Form noValidate>
-            {
-              getWizardSteps(props).map((step, index) => (
-                <Slide key={index} direction="right" in={showAll || index === activeStep}>
+          <>
+            <div>
+              <Form className={classes.root} noValidate>
+                {
                   <Paper elevation={3} className={classes.stepContainer}>
                     <Box mx={4} mb={3}>
-                      {step}
+                      {getActiveStep(props)}
                     </Box>
                     <Box mx={4} my={3}>
                       <div className={classes.actionsContainer}>
@@ -158,7 +239,7 @@ function HolderChange (props) {
                             className={classes.button}
                             startIcon={<ArrowBackIosIcon />}
                             disabled={(activeStep === 0)}
-                            onClick={prevStep}
+                            onClick={() => prevStep(props)}
                           >
                             {t('PAS_ANTERIOR')}
                           </Button>
@@ -171,7 +252,7 @@ function HolderChange (props) {
                             color="primary"
                             endIcon={<ArrowForwardIosIcon />}
                             disabled={!props.isValid}
-                            onClick={ () => nextStep(props)}
+                            onClick={() => nextStep(props)}
                           >
                             {t('SEGUENT_PAS')}
                           </Button>
@@ -179,11 +260,11 @@ function HolderChange (props) {
                       </div>
                     </Box>
                   </Paper>
-                </Slide>
-              ))
-            }
+                }
+              </Form>
+            </div>
             <DisplayFormikState {...props} />
-          </Form>
+          </>
         )}
       </Formik>
     </Container>
