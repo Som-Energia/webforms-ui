@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
+import clsx from 'clsx'
+
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Grid from '@material-ui/core/Grid'
 import Radio from '@material-ui/core/Radio'
@@ -14,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap'
   },
   margin: {
-    margin: theme.spacing(1)
+    marginTop: theme.spacing(3)
   },
   title: {
     marginBottom: theme.spacing(3),
@@ -26,19 +28,31 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     cursor: 'pointer',
     minHeight: '124px',
-    marginTop: theme.spacing(3),
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(3),
     paddingLeft: theme.spacing(3),
     border: '2px solid rgba(0, 0, 0, 0.12)',
     '&:hover': {
-      border: '2px solid rgba(0, 0, 0, 0.87)'
+      border: '2px solid rgba(0, 0, 0, 0.87)',
+      backgroundColor: 'rgba(0, 0, 0, 0.03)'
+    }
+  },
+  chooserItemSelected: {
+    border: '2px solid #96b633',
+    backgroundColor: 'rgba(150, 182, 51, 0.08)',
+    '&:hover': {
+      border: '2px solid #96b633',
+      backgroundColor: 'rgba(150, 182, 51, 0.08)'
     }
   },
   chooserItemTitle: {
     display: 'flex',
     alignItems: 'center'
+  },
+  chooserItemDesc: {
+    marginTop: theme.spacing(1),
+    paddingLeft: theme.spacing(1)
   }
 }))
 
@@ -46,21 +60,31 @@ const Chooser = (props) => {
   const classes = useStyles()
   const { question, options, onChange } = props
 
+  const [selectedOption, setSelectedOption] = useState()
+
+  const handleClick = (event, value) => {
+    event.preventDefault()
+    selectedOption !== value ? setSelectedOption(value) : setSelectedOption()
+  }
+
   return (
     <>
       <Typography variant="h6"
         dangerouslySetInnerHTML={{ __html: question }}
       />
-      <RadioGroup onChange={onChange} defaultValue="">
+      <RadioGroup className={classes.margin} defaultValue="">
         <Grid container spacing={3}>
           { options.map((option, index) =>
             <Grid key={index} item xs={12} sm={6}>
-              <label className={classes.chooserItem}>
+              <label
+                onClick={event => handleClick(event, option.value)}
+                className={clsx(classes.chooserItem, selectedOption === option.value && classes.chooserItemSelected)}
+              >
                 <div className={classes.chooserItemTitle}>
-                  <Radio value={option.value} color="primary" />
+                  <Radio value={option.value} color="primary" checked={selectedOption === option.value} />
                   <Typography>{option.label}</Typography>
                 </div>
-                <FormHelperText dangerouslySetInnerHTML={{ __html: option.description }} />
+                <FormHelperText className={classes.chooserItemDesc} dangerouslySetInnerHTML={{ __html: option.description }} />
               </label>
             </Grid>
           ) }
@@ -71,7 +95,7 @@ const Chooser = (props) => {
 }
 
 Chooser.defaultProps = {
-  onChange: event => console.log(event.target.value)
+  onChange: event => console.log('foo')
 }
 
 export default Chooser
