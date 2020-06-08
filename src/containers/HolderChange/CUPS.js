@@ -21,7 +21,7 @@ function CUPS (props) {
   const [isLoading, setIsLoading] = useState(false)
 
   const isActiveCups = () => {
-    return props.values.supply_point.status === 'active'
+    return props.values?.supply_point?.status === 'active'
   }
 
   useEffect(() => {
@@ -30,7 +30,6 @@ function CUPS (props) {
       setIsLoading(true)
       checkCups(value)
         .then(response => {
-          console.log(response)
           const status = response?.data?.status
           props.setFieldValue('supply_point.status', status)
           if (status === 'active') {
@@ -41,7 +40,9 @@ function CUPS (props) {
         })
         .catch(error => {
           console.log(error.response)
-          const errorStatus = error?.response?.data?.data?.status ? error?.response?.data?.data?.status : 'error'
+          const errorStatus = error?.response?.data?.data?.status
+            ? error?.response?.data?.data?.status
+            : 'error'
           props.setFieldValue('supply_point.status', errorStatus)
           props.validateForm()
           setIsLoading(false)
@@ -49,7 +50,7 @@ function CUPS (props) {
     } else {
       props.setFieldValue('supply_point.status', false)
     }
-  }, [props.values.supply_point.cups])
+  }, [props?.values?.supply_point.cups])
 
   const CupsHelperText = () => (
     <a
@@ -76,7 +77,7 @@ function CUPS (props) {
           fullWidth
           autoFocus
           required
-          value={props.values.supply_point.cups}
+          value={props?.values?.supply_point?.cups}
           onChange={props.handleChange}
           onBlur={props.handleBlur}
           error={props.errors?.supply_point?.cups && props.touched?.supply_point?.cups}
@@ -101,7 +102,7 @@ function CUPS (props) {
           variant="outlined"
           fullWidth
           disabled
-          value={props.values.supply_point.address}
+          value={props?.values?.supply_point?.address}
           helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
         />
       </Box>
@@ -112,7 +113,7 @@ function CUPS (props) {
             <Checkbox
               name="supply_point.verified"
               onChange={props.handleChange}
-              value={props.values.supply_point.verified}
+              checked={props?.values?.supply_point?.verified}
               color="primary"
             />
           }
