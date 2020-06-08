@@ -51,7 +51,13 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2)
   },
   switchLabel: {
-    marginLeft: 0
+    marginLeft: 0,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   }
 }))
 
@@ -460,7 +466,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
 
-            { (values.changePower && values.power && values.fare) &&
+            { (values.changePower && values.power && values.changeFare && values.fare) &&
               <Box mx={1} mb={3}>
                 <Grid container spacing={4}>
                   <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
@@ -501,4 +507,4 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
   )
 }
 
-export default ModifyParams
+export default React.memo(ModifyParams)

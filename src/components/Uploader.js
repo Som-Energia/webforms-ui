@@ -52,7 +52,7 @@ const Uploader = (props) => {
           : 'MODIFY_POTTAR_UNEXPECTED'
         setError(errorMsg)
       })
-  }, [uploads, error])
+  }, [uploads])
 
   const handleChange = useCallback(async (event) => {
     setUploading(true)
@@ -63,6 +63,7 @@ const Uploader = (props) => {
   }, [upload])
 
   const handleClean = event => {
+    event.preventDefault()
     setError(false)
     setInputKey(Date.now())
   }
