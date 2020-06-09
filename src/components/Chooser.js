@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -58,13 +58,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Chooser = (props) => {
   const classes = useStyles()
-  const { question, options, onChange } = props
+  const { question, options, onChange, value } = props
 
-  const [selectedOption, setSelectedOption] = useState()
+  const [selectedOption, setSelectedOption] = useState(value)
 
   const handleClick = (event, value) => {
     event.preventDefault()
     selectedOption !== value ? setSelectedOption(value) : setSelectedOption()
+    onChange({ option: value })
   }
 
   return (
@@ -95,7 +96,7 @@ const Chooser = (props) => {
 }
 
 Chooser.defaultProps = {
-  onChange: event => console.log('foo')
+  onChange: event => console.log('change!')
 }
 
 export default Chooser
