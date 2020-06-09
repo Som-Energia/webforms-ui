@@ -21,7 +21,7 @@ import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
 import Review from './HolderChange/Review'
 
-import { checkVat } from '../services/api'
+import data from '../data/HolderChange/data.json'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
@@ -133,6 +133,42 @@ function HolderChange (props) {
           .required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       })
+    }),
+    Yup.object().shape({
+    }),
+    Yup.object().shape({
+      payment: Yup.object().shape({
+        voluntary_cent: Yup.bool()
+          .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
+          .oneOf([false, true], t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
+      })
+    }),
+    Yup.object().shape({
+      especial_cases: Yup.object().shape({
+        attachments: Yup.object()
+          .when('reason_death', {
+            is: true,
+            then: Yup.object().shape({
+              death: Yup.array()
+                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+            })
+          })
+          .when('reason_electrodep', {
+            is: true,
+            then: Yup.object().shape({
+              medical: Yup.array()
+                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+              resident: Yup.array()
+                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+            })
+          })
+      })
     })
   ]
 
@@ -197,29 +233,45 @@ function HolderChange (props) {
     console.log('submit', props)
   }
 
+  const initialValues = {
+    holder: {
+      vat: 'C35875459',
+      vatvalid: false,
+      isphisical: true,
+      proxynif_valid: false,
+      state: '',
+      city: '',
+      language: i18n.language
+    },
+    supply_point: {
+      cups: 'ES0031101322018013GN0F',
+      status: false,
+      address: '',
+      verified: false
+    },
+    member: {
+      become_member: ''
+    },
+    payment: {
+      iban: '',
+      sepa_accepted: false,
+      voluntary_cent: false
+    },
+    especial_cases: {
+      reason_death: false,
+      reason_merge: false,
+      reason_electrodep: false,
+      attachments: {}
+    },
+    privacy_policy_accepted: false
+  }
+
   return (
     <Container maxWidth="md">
       <Formik
         onSubmit={handleSubmit}
         enableReinitialize
-        initialValues={{
-          holder: {
-            vat: 'C35875459',
-            vatvalid: false,
-            isphisical: true,
-            proxynif_valid: false,
-            state: '',
-            city: '',
-            language: i18n.language
-          },
-          supply_point: {
-            cups: 'ES0031101322018013GN0F',
-            status: false,
-            address: '',
-            verified: false
-          },
-          privacy_policy_accepted: false
-        }}
+        initialValues={{ ...initialValues, ...data }}
         validationSchema={validationSchemas[activeStep]}
         validateOnMount={true}
       >
@@ -232,7 +284,7 @@ function HolderChange (props) {
                     <Box mx={4} mb={3}>
                       {getActiveStep(props)}
                     </Box>
-                    <Box mx={4} my={3}>
+                    <Box mx={4} mt={1} mb={3}>
                       <div className={classes.actionsContainer}>
                         {
                           <Button
