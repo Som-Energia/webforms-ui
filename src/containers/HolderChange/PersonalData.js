@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { makeStyles } from '@material-ui/core/styles'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
@@ -20,15 +18,7 @@ import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
 import VATField from '../../components/VATField'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}))
-
 function PersonalData (props) {
-  const classes = useStyles()
   const { t } = useTranslation()
 
   const onChangeProxyVAT = ({ vat, valid }) => {
