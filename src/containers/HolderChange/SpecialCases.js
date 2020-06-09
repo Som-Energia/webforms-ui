@@ -1,23 +1,67 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
+import clsx from 'clsx'
+
 import Box from '@material-ui/core/Box'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormGroup from '@material-ui/core/FormGroup'
 import Typography from '@material-ui/core/Typography'
 
 import StepHeader from '../../components/StepHeader'
+import Uploader from '../../components/Uploader'
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  margin: {
+    marginTop: theme.spacing(3)
+  },
+  container: {
+    width: '100%'
+  },
+  chooserItem: {
+    display: 'block',
+    cursor: 'pointer',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    paddingRight: theme.spacing(3),
+    paddingLeft: theme.spacing(3),
+    marginRight: 0,
+    marginLeft: 0,
+    marginBottom: theme.spacing(2),
+    border: '2px solid rgba(0, 0, 0, 0.12)',
+    '&:not(.Mui-disabled):hover': {
+      border: '2px solid rgba(0, 0, 0, 0.87)',
+      backgroundColor: 'rgba(0, 0, 0, 0.03)'
+    }
+  },
+  chooserItemSelected: {
+    border: '2px solid #96b633',
+    backgroundColor: 'rgba(150, 182, 51, 0.08)',
+    '&:not(.Mui-disabled):hover': {
+      border: '2px solid #96b633',
+      backgroundColor: 'rgba(150, 182, 51, 0.08)'
+    }
+  },
+  chooserItemTitle: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  chooserItemDesc: {
+    marginTop: theme.spacing(1),
+    paddingLeft: theme.spacing(1)
   }
 }))
 
-const SpecialCases = () => {
+const SpecialCases = (props) => {
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
+  const { handleChange, values, errors, touched, setFieldValue } = props
 
   return (
     <>
@@ -25,12 +69,64 @@ const SpecialCases = () => {
       <Typography variant="body1"
         dangerouslySetInnerHTML={{ __html: t('SPECIAL_CASES_QUESTION') }}
       />
-      <Box mt={3} mb={1}>
-        <ul>
-          <li>{t('SPECIAL_CASES_REASON_DEATH')}</li>
-          <li>{t('SPECIAL_CASES_REASON_MERGE')}</li>
-          <li>{t('SPECIAL_CASES_REASON_ELECTRODEP')}</li>
-        </ul>
+      <Box mt={3} mb={0}>
+        <FormControl component="fieldset" className={classes.container}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={values.especial_cases?.reason_death} onChange={handleChange} name="especial_cases.reason_death" color="primary" />}
+              label={t('SPECIAL_CASES_REASON_DEATH')}
+              className={clsx(classes.chooserItem, values.especial_cases?.reason_death && classes.chooserItemSelected)}
+            />
+            { values.especial_cases?.reason_death &&
+              <>
+                <Typography>
+                  {t('CERT_ATTACH_DEATH')}
+                </Typography>
+                <Box mt={1} mb={2}>
+                  <Uploader
+                    fieldError={errors.especial_cases?.attachments && touched.especial_cases?.attachments && errors.especial_cases?.attachments}
+                    callbackFn={attachments => setFieldValue('especial_cases.attachments.death', attachments)}
+                    values={values.especial_cases.attachments?.death}
+                  />
+                </Box>
+              </>
+            }
+            <FormControlLabel
+              control={<Checkbox checked={values.especial_cases?.reason_merge} onChange={handleChange} name="especial_cases.reason_merge" color="primary" />}
+              label={t('SPECIAL_CASES_REASON_MERGE')}
+              className={clsx(classes.chooserItem, values.especial_cases?.reason_merge && classes.chooserItemSelected)}
+            />
+            <FormControlLabel disabled={values.especial_cases?.reason_merge}
+              control={<Checkbox checked={values.especial_cases?.reason_electrodep} onChange={handleChange} name="especial_cases.reason_electrodep" color="primary" />}
+              label={t('SPECIAL_CASES_REASON_ELECTRODEP')}
+              className={clsx(classes.chooserItem, values.especial_cases?.reason_electrodep && classes.chooserItemSelected)}
+            />
+            { values.especial_cases?.reason_electrodep &&
+              <>
+                <Typography>
+                  {t('ELECTRODEP_ATTACH_MEDICAL')}
+                </Typography>
+                <Box mt={1} mb={1}>
+                  <Uploader
+                    fieldError={errors.attachments && touched.attachments && errors.attachments}
+                    callbackFn={attachments => setFieldValue('especial_cases.attachments.medical', attachments)}
+                    values={values.especial_cases.attachments?.medical}
+                  />
+                </Box>
+                <Typography>
+                  {t('ELECTRODEP_ATTACH_RESIDENT')}
+                </Typography>
+                <Box mt={1} mb={0}>
+                  <Uploader
+                    fieldError={errors.attachments && touched.attachments && errors.attachments}
+                    callbackFn={attachments => setFieldValue('especial_cases.attachments.resident', attachments)}
+                    values={values.especial_cases.attachments?.resident}
+                  />
+                </Box>
+              </>
+            }
+          </FormGroup>
+        </FormControl>
       </Box>
     </>
   )
