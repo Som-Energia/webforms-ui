@@ -1,47 +1,19 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
-
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  margin: {
-    margin: theme.spacing(1)
-  },
-  title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
-  },
-  chooserItem: {
-    display: 'block',
-    cursor: 'pointer',
-    minHeight: '124px',
-    marginTop: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-    paddingRight: theme.spacing(3),
-    paddingLeft: theme.spacing(3),
-    border: '2px solid rgba(0, 0, 0, 0.12)',
-    '&:hover': {
-      border: '2px solid rgba(0, 0, 0, 0.87)'
-    }
-  }
-}))
-
 function BecomeMember (props) {
-  const classes = useStyles()
   const { t } = useTranslation()
+
+  const handleChange = ({ option }) => {
+    props.setFieldValue('member.become_member', option)
+    props.validateForm()
+  }
 
   return (
     <>
@@ -52,14 +24,16 @@ function BecomeMember (props) {
       <Box mt={3} mb={4}>
         <Chooser
           question={t('BECOME_MEMBER_QUESTION')}
+          onChange={handleChange}
+          value={props.values.member.become_member}
           options={[
             {
-              value: 'yes',
+              value: true,
               label: t('BECOME_MEMBER_YES_LABEL'),
               description: t('BECOME_MEMBER_YES_DESCRIPTION')
             },
             {
-              value: 'no',
+              value: false,
               label: t('BECOME_MEMBER_NO_LABEL'),
               description: t('BECOME_MEMBER_NO_DESCRIPTION')
             }

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
@@ -9,43 +7,13 @@ import Typography from '@material-ui/core/Typography'
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  margin: {
-    margin: theme.spacing(1)
-  },
-  title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3)
-  },
-  textField: {
-    width: '25ch'
-  }
-}))
-
 function VoluntaryCent (props) {
-  const classes = useStyles()
-  const { t, i18n } = useTranslation()
-  const { validate } = props
+  const { t } = useTranslation()
 
-  const [value, setValue] = useState('')
-  const [isValidated, setValidated] = useState(false)
-
-  const handleChange = (event) => {
-    setValue(event.target.value)
+  const handleChange = ({ option }) => {
+    props.setFieldValue('payment.voluntary_cent', option)
+    props.validateForm()
   }
-
-  useEffect(() => {
-    validate(isValidated)
-  }, [isValidated, validate])
 
   return (
     <>
@@ -56,14 +24,16 @@ function VoluntaryCent (props) {
       <Box mt={3} mb={4}>
         <Chooser
           question={t('VOLUNTARY_CENT_QUESTION')}
+          onChange={handleChange}
+          value={props.values.payment.voluntary_cent}
           options={[
             {
-              value: 'yes',
+              value: true,
               label: t('VOLUNTARY_CENT_YES_LABEL'),
               description: t('VOLUNTARY_CENT_YES_DESCRIPTION')
             },
             {
-              value: 'no',
+              value: false,
               label: t('VOLUNTARY_CENT_NO_LABEL'),
               description: t('VOLUNTARY_CENT_NO_DESCRIPTION')
             }
