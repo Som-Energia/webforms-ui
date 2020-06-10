@@ -6,11 +6,13 @@ import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import SendIcon from '@material-ui/icons/Send'
 
 import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
@@ -51,6 +53,7 @@ function HolderChange (props) {
 
   const [showAll, setShowAll] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
+  const [sending, setSending] = useState(false)
 
   const validationSchemas = [
     Yup.object().shape({
@@ -169,6 +172,19 @@ function HolderChange (props) {
             })
           })
       })
+    }),
+    Yup.object().shape({
+      payment: Yup.object().shape({
+        iban: Yup.string().required(t('IBAN_ERROR')),
+        iban_valid: Yup.bool().required(t('IBAN_ERROR'))
+          .oneOf([true], t('IBAN_ERROR')),
+        sepa_accepted: Yup.bool().required(t('IBAN_ERROR'))
+          .oneOf([true], t('IBAN_ERROR'))
+      })
+    }),
+    Yup.object().shape({
+      terms_accepted: Yup.bool().required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
 
@@ -263,7 +279,8 @@ function HolderChange (props) {
       reason_electrodep: false,
       attachments: {}
     },
-    privacy_policy_accepted: false
+    privacy_policy_accepted: false,
+    terms_accepted: false
   }
 
   return (
@@ -297,17 +314,29 @@ function HolderChange (props) {
                           </Button>
                         }
                         {
-                          <Button
-                            type="button"
-                            className={classes.button}
-                            variant="contained"
-                            color="primary"
-                            endIcon={<ArrowForwardIosIcon />}
-                            disabled={!props.isValid}
-                            onClick={() => nextStep(props)}
-                          >
-                            {t('SEGUENT_PAS')}
-                          </Button>
+                          activeStep < MAX_STEP_NUMBER
+                            ? <Button
+                              type="button"
+                              className={classes.button}
+                              variant="contained"
+                              color="primary"
+                              endIcon={<ArrowForwardIosIcon />}
+                              disabled={!props.isValid}
+                              onClick={() => nextStep(props)}
+                            >
+                              {t('SEGUENT_PAS')}
+                            </Button>
+                            : <Button
+                              type="button"
+                              className={classes.button}
+                              variant="contained"
+                              color="primary"
+                              startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
+                              disabled={sending || !props.isValid}
+                              onClick={() => console.log('SEND!')}
+                            >
+                              {t('SEND')}
+                            </Button>
                         }
                       </div>
                     </Box>

@@ -1,93 +1,89 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
-
-import { checkVat } from '../../services/api'
+import { checkIban } from '../../services/api'
 
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+
+import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
+import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import StepHeader from '../../components/StepHeader'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  margin: {
-    margin: theme.spacing(1)
-  },
-  title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3)
-  },
-  textField: {
-    width: '25ch'
-  }
-}))
-
 function IBAN (props) {
-  const classes = useStyles()
-  const { t, i18n } = useTranslation()
-  const { validate } = props
+  const { t } = useTranslation()
+  const { values, handleChange, handleBlur, setFieldValue, errors, touched } = props
 
-  const [value, setValue] = useState('')
-  const [error, setError] = useState(false)
-  const [isValidated, setValidated] = useState(false)
-
-  const handleChange = (event) => {
-    setValue(event.target.value)
-  }
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    validate(isValidated)
-  }, [isValidated, validate])
-
-  useEffect(() => {
-    console.log('check value!', value)
-    value.length >= 8
-      ? checkVat(value)
+    if (values.payment.iban.length > 8) {
+      setIsLoading(true)
+      checkIban(values.payment.iban)
         .then(response => {
           console.log(response)
-          setError((response?.data?.valid !== true))
-          setValidated((response?.data?.valid === true))
-        }
-        )
-      : setError(value.length !== 0)
-  }, [value])
+          setFieldValue('payment.iban_valid', response?.state === true)
+          setIsLoading(false)
+        })
+        .catch(error => {
+          console.log(error.response)
+          const errorStatus = error?.response?.data?.state ? error?.response?.data?.state : false
+          setFieldValue('payment.iban_valid', errorStatus)
+          setIsLoading(false)
+        })
+    } else {
+      setFieldValue('payment.iban_valid', values.payment.iban.length !== 0)
+    }
+  }, [values.payment.iban, setFieldValue])
 
   return (
     <>
       <StepHeader title={t('PAYMENT_TITLE')} />
-      <Box mt={3} mb={1}>
+      <Box mt={5} mb={1}>
         <TextField
           id="iban"
           label={t('IBAN_LABEL')}
+          name="payment.iban"
+          value={values.payment.iban}
           variant="outlined"
           fullWidth
           required
           autoFocus
-          value={value}
+          InputProps={{
+            startAdornment:
+              <InputAdornment position="start">
+                <AccountBalanceOutlinedIcon />
+              </InputAdornment>,
+            endAdornment:
+            <InputAdornment position="end">
+              { isLoading &&
+                <CircularProgress size={24} />
+              }
+              { !isLoading && values.payment?.iban_valid &&
+                <CheckOutlinedIcon color="primary" />
+              }
+            </InputAdornment>
+          }}
           onChange={handleChange}
-          error={error}
-          helperText={t('IBAN_HELP')}
+          onBlur={handleBlur}
+          error={(errors?.payment?.iban || errors?.payment?.iban_valid) && touched?.payment?.iban}
+          helperText={(touched?.payment?.iban && (errors?.payment?.iban || errors?.payment?.iban_valid)) || t('IBAN_HELP')}
         />
       </Box>
       <Box mt={4} mb={3}>
         <FormControlLabel
           control={
             <Checkbox
+              name="payment.sepa_accepted"
+              checked={values.payment.sepa_accepted}
+              onChange={handleChange}
               color="primary"
+              value={true}
             />
           }
           label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
