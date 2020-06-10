@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { checkVat } from '../../services/api'
-import { isPhisicalVAT } from '../../services/utils'
 
 import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import CircularProgress from '@material-ui/core/CircularProgress'
-
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
 function VAT (props) {
-  const { values, setFieldValue, validateForm, handleChange, handleBlur } = props
+  const { values, setFieldValue, handleBlur } = props
   const { t } = useTranslation()
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
