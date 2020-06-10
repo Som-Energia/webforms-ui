@@ -78,3 +78,13 @@ export const getMunicipis = async (provincia) => {
       return response?.data
     })
 }
+
+export const checkIban = async (iban) => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}check/iban/${iban}`
+  })
+    .then(response => {
+      return response?.data
+    })
+}

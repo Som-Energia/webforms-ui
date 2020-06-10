@@ -201,9 +201,12 @@
   "VOLUNTARY_CENT": "Donativo voluntario",
   "ACCEPT_TERMS": "He leído y acepto las condiciones de Som Energia",
   "UNACCEPTED_TERMS": "Tienes que aceptar las condiciones",
+  "GENERAL_TERMS": "Condiciones generales",
   "SEND": "Enviar",
   "YES": "Sí",
   "NO": "No",
+  "I_DECLINE": "Rechazo",
+  "I_ACCEPT": "Acepto",
 
   "SPECIAL_CASES_TITLE": "Casos especiales",
   "SPECIAL_CASES_QUESTION": "Por favor, indica si alguna de las opcions siguientes se dan en tu caso para llevar a cabo el cambio de titular. En caso contrario, puedes continuar sin marcar ninguna opción.",
