@@ -17,25 +17,26 @@ import StepHeader from '../../components/StepHeader'
 
 function CUPS (props) {
   const { t } = useTranslation()
+  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
 
   const isActiveCups = () => {
-    return props.values?.supply_point?.status === 'active'
+    return values?.supply_point?.status === 'active'
   }
 
   useEffect(() => {
-    const value = props.values.supply_point.cups
+    const value = values.supply_point.cups
     if (value.length > 18) {
       setIsLoading(true)
       checkCups(value)
         .then(response => {
           const status = response?.data?.status
-          props.setFieldValue('supply_point.status', status)
+          setFieldValue('supply_point.status', status)
           if (status === 'active') {
-            props.setFieldValue('supply_point.address', response?.data?.address)
+            setFieldValue('supply_point.address', response?.data?.address)
           }
-          props.validateForm()
+          validateForm()
           setIsLoading(false)
         })
         .catch(error => {
@@ -43,14 +44,14 @@ function CUPS (props) {
           const errorStatus = error?.response?.data?.data?.status
             ? error?.response?.data?.data?.status
             : 'error'
-          props.setFieldValue('supply_point.status', errorStatus)
-          props.validateForm()
+          setFieldValue('supply_point.status', errorStatus)
+          validateForm()
           setIsLoading(false)
         })
     } else {
-      props.setFieldValue('supply_point.status', false)
+      setFieldValue('supply_point.status', false)
     }
-  }, [props?.values?.supply_point.cups])
+  }, [values.supply_point.cups, setFieldValue, validateForm])
 
   const CupsHelperText = () => (
     <a
@@ -77,11 +78,11 @@ function CUPS (props) {
           fullWidth
           autoFocus
           required
-          value={props?.values?.supply_point?.cups}
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          error={props.errors?.supply_point?.cups && props.touched?.supply_point?.cups}
-          helperText={(props.touched?.supply_point?.cups && props.errors?.supply_point?.cups) || <CupsHelperText />}
+          value={values?.supply_point?.cups}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors?.supply_point?.cups && touched?.supply_point?.cups}
+          helperText={(touched?.supply_point?.cups && errors?.supply_point?.cups) || <CupsHelperText />}
           InputProps={{
             endAdornment:
               <InputAdornment position="end">
@@ -102,7 +103,7 @@ function CUPS (props) {
           variant="outlined"
           fullWidth
           disabled
-          value={props?.values?.supply_point?.address}
+          value={values?.supply_point?.address}
           helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
         />
       </Box>
@@ -112,8 +113,8 @@ function CUPS (props) {
           control={
             <Checkbox
               name="supply_point.verified"
-              onChange={props.handleChange}
-              checked={props?.values?.supply_point?.verified}
+              onChange={handleChange}
+              checked={values?.supply_point?.verified}
               color="primary"
             />
           }
