@@ -27,11 +27,9 @@ function PersonalData (props) {
     props.validateForm()
   }
 
-  const onChangeStateCity = ({ state, city, stateName, cityName }) => {
+  const onChangeStateCity = ({ state, city }) => {
     props.setFieldValue('holder.state', state)
-    props.setFieldValue('holder.state_name', stateName)
     props.setFieldValue('holder.city', city)
-    props.setFieldValue('holder.city_name', cityName)
     props.validateForm()
   }
 

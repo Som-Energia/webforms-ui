@@ -25,7 +25,9 @@ const StateCity = (props) => {
     setIsLoadingStates(true)
     getProvincies()
       .then(response => {
-        setStates(response?.data?.provincies)
+        const provincies = {}
+        const aux = response?.data?.provincies.map(({ id, name }) => provincies[id] = name)
+        setStates(provincies)
         setIsLoadingStates(false)
       }).catch(error => {
         console.log(error)
@@ -36,9 +38,11 @@ const StateCity = (props) => {
   useEffect(() => {
     if (state) {
       setIsLoadingCities(true)
-      getMunicipis(state)
+      getMunicipis(state.id)
         .then(response => {
-          setCities(response?.data?.municipis)
+          const municipis = {}
+          const aux = response?.data?.municipis.map(({ id, name }) => municipis[id] = name)
+          setCities(municipis)
           setIsLoadingCities(false)
         }).catch(error => {
           console.log(error)
@@ -47,34 +51,22 @@ const StateCity = (props) => {
     }
   }, [state])
 
-  const getStateName = (value) => {
-    const state = states.find(state => value === state.id)
-    return state?.name
-  }
-
-  const getCityName = (value) => {
-    const city = cities.find(city => value === city.id)
-    return city?.name
-  }
-
   const handleStateChange = (event) => {
-    setState(event.target.value)
-    setCity('')
+    const newState = { id: event.target.value, name: states[event.target.value] }
+    setState(newState)
+    setCity({})
     onChange({
-      state: event.target.value,
-      city: '',
-      stateName: '',
-      cityName: ''
+      state: newState,
+      city: {}
     })
   }
 
   const handleCityChange = (event) => {
-    setCity(event.target.value)
+    const newCity = { id: event.target.value, name: cities[event.target.value] }
+    setCity(newCity)
     onChange({
       state: state,
-      city: event.target.value,
-      stateName: getStateName(state),
-      cityName: getCityName(event.target.value)
+      city: newCity
     })
   }
 
@@ -90,8 +82,8 @@ const StateCity = (props) => {
           onChange={handleStateChange}
           required
           fullWidth
-          disabled={!states.length}
-          value={state}
+          disabled={!Object.keys(states).length}
+          value={state?.id}
           error={stateError}
           helperText={stateHelperText}
           InputProps={{
@@ -105,7 +97,7 @@ const StateCity = (props) => {
         >
           <MenuItem key="0" value="">{t('STATE')}</MenuItem>
           {
-            states.map(state => <MenuItem key={state.id} value={state.id}>{state.name}</MenuItem>)
+            Object.keys(states).map(id => <MenuItem key={id} value={id}>{states[id]}</MenuItem>)
           }
         </TextField>
       </Grid>
@@ -119,8 +111,8 @@ const StateCity = (props) => {
           onChange={handleCityChange}
           required
           fullWidth
-          disabled={!cities.length}
-          value={city}
+          disabled={!Object.keys(cities).length}
+          value={city?.id}
           error={cityError}
           helperText={cityHelperText}
           InputProps={{
@@ -134,7 +126,7 @@ const StateCity = (props) => {
         >
           <MenuItem key="0" value="">{t('CITY')}</MenuItem>
           {
-            cities.map(city => <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>)
+            Object.keys(cities).map(id => <MenuItem key={id} value={id}>{cities[id]}</MenuItem>)
           }
         </TextField>
       </Grid>

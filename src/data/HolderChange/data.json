@@ -27,10 +27,7 @@
     "email2": "perico@gmail.com",
     "phone1": "672555212",
     "phone2": "555555555",
-    "language": {
-      "code": "ca_ES",
-      "name": "Català"
-    },
+    "language": "es",
     "isphisical": true
   },
   "payment": {
