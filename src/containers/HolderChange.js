@@ -84,9 +84,6 @@ function HolderChange (props) {
       })
     }),
     Yup.object().shape({
-      privacy_policy_accepted: Yup.bool()
-        .required(t('UNACCEPTED_PRIVACY_POLICY'))
-        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY')),
       holder: Yup.object().shape({
         name: Yup.string()
           .required(t('NO_NAME')),
@@ -134,7 +131,10 @@ function HolderChange (props) {
         phone1: Yup.string()
           .min(9, t('NO_PHONE'))
           .required(t('NO_PHONE')),
-        language: Yup.string().required(t('NO_LANGUAGE'))
+        language: Yup.string().required(t('NO_LANGUAGE')),
+        privacy_policy_accepted: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
       })
     }),
     Yup.object().shape({

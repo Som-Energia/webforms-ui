@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -16,21 +16,44 @@ import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined'
 
 import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
+import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
+
+import { languages } from '../../services/utils'
+
+import generalTerms from '../../data/HolderChange/generalterms'
 
 function PersonalData (props) {
   const { t } = useTranslation()
+  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched } = props
+
+  const [open, setOpen] = useState(false)
 
   const onChangeProxyVAT = ({ vat, valid }) => {
-    props.setFieldValue('holder.proxynif', vat)
-    props.setFieldValue('holder.proxynif_valid', valid)
-    props.validateForm()
+    setFieldValue('holder.proxynif', vat)
+    setFieldValue('holder.proxynif_valid', valid)
+    validateForm()
   }
 
   const onChangeStateCity = ({ state, city }) => {
-    props.setFieldValue('holder.state', state)
-    props.setFieldValue('holder.city', city)
-    props.validateForm()
+    setFieldValue('holder.state', state)
+    setFieldValue('holder.city', city)
+    validateForm()
+  }
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('holder.privacy_policy_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('holder.privacy_policy_accepted', false)
   }
 
   return (
@@ -41,19 +64,19 @@ function PersonalData (props) {
           <TextField
             id="holder_name"
             name="holder.name"
-            label={props.values.holder.isphisical ? t('HOLDER_NAME') : t('BUSINESS_NAME') }
+            label={values.holder.isphisical ? t('HOLDER_NAME') : t('BUSINESS_NAME') }
             variant="outlined"
             fullWidth
             autoFocus
             required
-            value={props.values?.holder?.name}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.name && props.touched?.holder?.name}
-            helperText={(props.touched?.holder?.name && props.errors?.holder?.name)}
+            value={values?.holder?.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.name && touched?.holder?.name}
+            helperText={(touched?.holder?.name && errors?.holder?.name)}
           />
         </Grid>
-        { props.values.holder.isphisical
+        { values.holder.isphisical
           ? <>
             <Grid item xs={4}>
               <TextField
@@ -63,11 +86,11 @@ function PersonalData (props) {
                 variant="outlined"
                 fullWidth
                 required
-                value={props.values?.holder?.surname1}
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                error={props.errors?.holder?.surname1 && props.touched?.holder?.surname1}
-                helperText={(props.touched?.holder?.surname1 && props.errors?.holder?.surname1)}
+                value={values?.holder?.surname1}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors?.holder?.surname1 && touched?.holder?.surname1}
+                helperText={(touched?.holder?.surname1 && errors?.holder?.surname1)}
               />
             </Grid>
             <Grid item xs={4}>
@@ -77,11 +100,11 @@ function PersonalData (props) {
                 label={t('HOLDER_SURNAME2')}
                 variant="outlined"
                 fullWidth
-                value={props.values?.holder?.surname2}
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                error={props.errors?.holder?.surname2 && props.touched?.holder?.surname2}
-                helperText={(props.touched?.holder?.surname2 && props.errors?.holder?.surname2)}
+                value={values?.holder?.surname2}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors?.holder?.surname2 && touched?.holder?.surname2}
+                helperText={(touched?.holder?.surname2 && errors?.holder?.surname2)}
               />
             </Grid>
           </>
@@ -92,14 +115,14 @@ function PersonalData (props) {
                 name="holder.proxyname"
                 label={t('PROXY_NAME')}
                 required
-                values={props.values.holder.proxyname}
+                values={values.holder.proxyname}
                 variant="outlined"
                 fullWidth
-                value={props.values?.holder?.proxyname}
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                error={props.errors?.holder?.proxyname && props.touched?.holder?.proxyname}
-                helperText={(props.touched?.holder?.proxyname && props.errors?.holder?.proxyname)}
+                value={values?.holder?.proxyname}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors?.holder?.proxyname && touched?.holder?.proxyname}
+                helperText={(touched?.holder?.proxyname && errors?.holder?.proxyname)}
               />
             </Grid>
             <Grid item xs={4}>
@@ -110,14 +133,14 @@ function PersonalData (props) {
                 variant="outlined"
                 fullWidth
                 required
-                value={props.values?.holder?.proxynif}
+                value={values?.holder?.proxynif}
                 onChange={onChangeProxyVAT}
-                onBlur={props.handleBlur}
-                error={(props.errors?.holder?.proxynif && props.touched?.holder?.proxynif) ||
-                  (props.touched?.holder?.proxynif && props.values?.holder?.proxynif_valid === false)
+                onBlur={handleBlur}
+                error={(errors?.holder?.proxynif && touched?.holder?.proxynif) ||
+                  (touched?.holder?.proxynif && values?.holder?.proxynif_valid === false)
                 }
-                helperText={(props.touched?.holder?.proxynif && props.errors?.holder?.proxynif) ||
-                  (props.touched?.holder?.proxynif && props.errors?.holder?.proxynif_valid)
+                helperText={(touched?.holder?.proxynif && errors?.holder?.proxynif) ||
+                  (touched?.holder?.proxynif && errors?.holder?.proxynif_valid)
                 }
               />
             </Grid>
@@ -137,11 +160,11 @@ function PersonalData (props) {
                 </InputAdornment>
             }}
             fullWidth
-            value={props.values?.holder?.address}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.address && props.touched?.holder?.address}
-            helperText={(props.touched?.holder?.address && props.errors?.holder?.address)}
+            value={values?.holder?.address}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.address && touched?.holder?.address}
+            helperText={(touched?.holder?.address && errors?.holder?.address)}
           />
         </Grid>
         <Grid item xs={4}>
@@ -152,25 +175,25 @@ function PersonalData (props) {
             variant="outlined"
             required
             fullWidth
-            value={props.values?.holder?.postal_code}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.postal_code && props.touched?.holder?.postal_code}
-            helperText={props.touched?.holder?.postal_code && props.errors?.holder?.postal_code}
+            value={values?.holder?.postal_code}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.postal_code && touched?.holder?.postal_code}
+            helperText={touched?.holder?.postal_code && errors?.holder?.postal_code}
           />
         </Grid>
 
         <StateCity
           stateId="holder_state"
           stateName="holder.state"
-          stateInitial={props.values?.holder?.state}
-          stateError={props.errors?.holder?.state && props.touched?.holder?.state}
-          stateHelperText={props.touched?.holder?.state && props.errors?.holder?.state}
+          stateInitial={values?.holder?.state}
+          stateError={errors?.holder?.state && touched?.holder?.state}
+          stateHelperText={touched?.holder?.state && errors?.holder?.state}
           cityId="holder_city"
           cityName="holder.city"
-          cityInitial={props.values?.holder?.city}
-          cityError={props.errors?.holder?.city && props.touched?.holder?.city}
-          cityHelperText={props.touched?.holder?.city && props.errors?.holder?.city}
+          cityInitial={values?.holder?.city}
+          cityError={errors?.holder?.city && touched?.holder?.city}
+          cityHelperText={touched?.holder?.city && errors?.holder?.city}
           onChange={onChangeStateCity}
         />
 
@@ -188,11 +211,11 @@ function PersonalData (props) {
             }}
             required
             fullWidth
-            value={props.values?.holder?.email}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.email && props.touched?.holder?.email}
-            helperText={(props.touched?.holder?.email && props.errors?.holder?.email)}
+            value={values?.holder?.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.email && touched?.holder?.email}
+            helperText={(touched?.holder?.email && errors?.holder?.email)}
           />
         </Grid>
         <Grid item xs={6}>
@@ -209,11 +232,11 @@ function PersonalData (props) {
             }}
             required
             fullWidth
-            value={props.values?.holder?.email2}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.email2 && props.touched?.holder?.email2}
-            helperText={(props.touched?.holder?.email2 && props.errors?.holder?.email2)}
+            value={values?.holder?.email2}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.email2 && touched?.holder?.email2}
+            helperText={(touched?.holder?.email2 && errors?.holder?.email2)}
           />
         </Grid>
         <Grid item xs={6}>
@@ -230,11 +253,11 @@ function PersonalData (props) {
             }}
             required
             fullWidth
-            value={props.values?.holder?.phone1}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.phone1 && props.touched?.holder?.phone1}
-            helperText={(props.touched?.holder?.phone1 && props.errors?.holder?.phone1)}
+            value={values?.holder?.phone1}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.phone1 && touched?.holder?.phone1}
+            helperText={(touched?.holder?.phone1 && errors?.holder?.phone1)}
           />
         </Grid>
         <Grid item xs={6}>
@@ -250,11 +273,11 @@ function PersonalData (props) {
                 </InputAdornment>
             }}
             fullWidth
-            value={props.values?.holder?.phone2}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.phone2 && props.touched?.holder?.phone2}
-            helperText={(props.touched?.holder?.phone2 && props.errors?.holder?.phone2)}
+            value={values?.holder?.phone2}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.phone2 && touched?.holder?.phone2}
+            helperText={(touched?.holder?.phone2 && errors?.holder?.phone2)}
           />
         </Grid>
 
@@ -266,11 +289,11 @@ function PersonalData (props) {
             id="holder_lang"
             name="holder.language"
             label={t('LANGUAGE')}
-            value={props.values?.holder?.language}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            error={props.errors?.holder?.phone2 && props.touched?.holder?.phone2}
-            helperText={(props.touched?.holder?.phone2 && props.errors?.holder?.phone2) ? props.errors?.holder?.phone2 : t('HOLDER_LANGUAGE_HELP')}
+            value={values?.holder?.language}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors?.holder?.phone2 && touched?.holder?.phone2}
+            helperText={(touched?.holder?.phone2 && errors?.holder?.phone2) ? errors?.holder?.phone2 : t('HOLDER_LANGUAGE_HELP')}
             InputProps={{
               startAdornment:
                 <InputAdornment position="start">
@@ -279,10 +302,21 @@ function PersonalData (props) {
             }}
             variant="outlined"
           >
-            <MenuItem key="es" value="es">Español</MenuItem>
-            <MenuItem key="ca" value="ca">Català</MenuItem>
+            {
+              Object.keys(languages).map(id => (
+                <MenuItem key={id} value={id}>{languages[id]}</MenuItem>
+              ))
+            }
           </TextField>
         </Grid>
+
+        <TermsDialog
+          title={t('PRIVACY_POLICY_TITLE')}
+          content={generalTerms}
+          open={open}
+          onAccept={handleAccept}
+          onClose={handleClose}
+        />
 
         <Grid item xs={12}>
           <FormGroup row>
@@ -291,9 +325,9 @@ function PersonalData (props) {
                 <Checkbox
                   id="privacy_policy_accepted"
                   color="primary"
-                  name="privacy_policy_accepted"
-                  onChange={props.handleChange}
-                  checked={props?.values?.privacy_policy_accepted}
+                  name="holder.privacy_policy_accepted"
+                  onClick={handleClick}
+                  checked={values?.holder?.privacy_policy_accepted}
                 />
               }
               label={t('ACCEPT_PRIVACY_POLICY')}
