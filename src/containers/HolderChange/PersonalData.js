@@ -60,7 +60,7 @@ function PersonalData (props) {
     <>
       <StepHeader title={t('HOLDER_PERSONAL_DATA')} />
       <Grid container spacing={3}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="holder_name"
             name="holder.name"
@@ -78,7 +78,7 @@ function PersonalData (props) {
         </Grid>
         { values.holder.isphisical
           ? <>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 id="holder_surname1"
                 name="holder.surname1"
@@ -93,7 +93,7 @@ function PersonalData (props) {
                 helperText={(touched?.holder?.surname1 && errors?.holder?.surname1)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 id="holder_surname2"
                 name="holder.surname2"
@@ -109,7 +109,7 @@ function PersonalData (props) {
             </Grid>
           </>
           : <>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 id="proxyname"
                 name="holder.proxyname"
@@ -125,7 +125,7 @@ function PersonalData (props) {
                 helperText={(touched?.holder?.proxyname && errors?.holder?.proxyname)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <VATField
                 id="proxynif"
                 name="holder.proxynif"
@@ -146,7 +146,7 @@ function PersonalData (props) {
             </Grid>
           </>
         }
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={8}>
           <TextField
             id="holder_address"
             name="holder.address"
@@ -167,7 +167,7 @@ function PersonalData (props) {
             helperText={(touched?.holder?.address && errors?.holder?.address)}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="holder_postalcode"
             name="holder.postal_code"
@@ -197,7 +197,7 @@ function PersonalData (props) {
           onChange={onChangeStateCity}
         />
 
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="holder_email"
             name="holder.email"
@@ -218,7 +218,7 @@ function PersonalData (props) {
             helperText={(touched?.holder?.email && errors?.holder?.email)}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="holder_email2"
             name="holder.email2"
@@ -239,7 +239,7 @@ function PersonalData (props) {
             helperText={(touched?.holder?.email2 && errors?.holder?.email2)}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="holder_phone"
             name="holder.phone1"
@@ -260,7 +260,7 @@ function PersonalData (props) {
             helperText={(touched?.holder?.phone1 && errors?.holder?.phone1)}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="holder_phone2"
             name="holder.phone2"
@@ -281,7 +281,7 @@ function PersonalData (props) {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={12}>
           <TextField
             select
             required

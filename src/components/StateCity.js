@@ -72,7 +72,7 @@ const StateCity = (props) => {
 
   return (
     <>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextField
           select
           id={stateId}
@@ -101,7 +101,7 @@ const StateCity = (props) => {
           }
         </TextField>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextField
           select
           id={cityId}
