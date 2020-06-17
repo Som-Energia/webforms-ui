@@ -61,7 +61,32 @@ const useStyles = makeStyles((theme) => ({
 const SpecialCases = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { handleChange, values, errors, touched, setFieldValue } = props
+  const { handleChange, values, errors, touched, setFieldValue, validateForm } = props
+
+  const specialHandleChange = (event) => {
+    if (event.target.name === 'especial_cases.reason_death') {
+      if (values.especial_cases.reason_death === true) {
+        setFieldValue('especial_cases.attachments.death', [])
+      }
+      if (values.especial_cases?.reason_merge === true) {
+        setFieldValue('especial_cases.reason_merge', false)
+      }
+      setFieldValue('especial_cases.reason_death', !values.especial_cases?.reason_death)
+    } else if (event.target.name === 'especial_cases.reason_merge') {
+      if (values.especial_cases?.reason_death === true) {
+        setFieldValue('especial_cases.reason_death', false)
+        setFieldValue('especial_cases.attachments.death', [])
+      }
+      setFieldValue('especial_cases.reason_merge', !values.especial_cases?.reason_merge)
+    } else if (event.target.name === 'especial_cases.reason_electrodep') {
+      if (values.especial_cases.reason_electrodep === true) {
+        setFieldValue('especial_cases.attachments.medical', [])
+        setFieldValue('especial_cases.attachments.resident', [])
+      }
+      setFieldValue('especial_cases.reason_electrodep', !values.especial_cases?.reason_electrodep)
+    }
+    validateForm()
+  }
 
   return (
     <>
@@ -73,7 +98,14 @@ const SpecialCases = (props) => {
         <FormControl component="fieldset" className={classes.container}>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox checked={values.especial_cases?.reason_death} onChange={handleChange} name="especial_cases.reason_death" color="primary" />}
+              control={
+                <Checkbox
+                  checked={values.especial_cases?.reason_death}
+                  onChange={specialHandleChange}
+                  name="especial_cases.reason_death"
+                  color="primary"
+                />
+              }
               label={t('SPECIAL_CASES_REASON_DEATH')}
               className={clsx(classes.chooserItem, values.especial_cases?.reason_death && classes.chooserItemSelected)}
             />
@@ -92,12 +124,23 @@ const SpecialCases = (props) => {
               </>
             }
             <FormControlLabel
-              control={<Checkbox checked={values.especial_cases?.reason_merge} onChange={handleChange} name="especial_cases.reason_merge" color="primary" />}
+              control={
+                <Checkbox checked={values.especial_cases?.reason_merge}
+                  onChange={specialHandleChange}
+                  name="especial_cases.reason_merge"
+                  color="primary"
+                />
+              }
               label={t('SPECIAL_CASES_REASON_MERGE')}
               className={clsx(classes.chooserItem, values.especial_cases?.reason_merge && classes.chooserItemSelected)}
             />
             <FormControlLabel disabled={values.especial_cases?.reason_merge}
-              control={<Checkbox checked={values.especial_cases?.reason_electrodep} onChange={handleChange} name="especial_cases.reason_electrodep" color="primary" />}
+              control={
+                <Checkbox checked={values.especial_cases?.reason_electrodep}
+                  onChange={specialHandleChange}
+                  name="especial_cases.reason_electrodep"
+                  color="primary" />
+              }
               label={t('SPECIAL_CASES_REASON_ELECTRODEP')}
               className={clsx(classes.chooserItem, values.especial_cases?.reason_electrodep && classes.chooserItemSelected)}
             />
