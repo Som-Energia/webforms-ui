@@ -1,0 +1,10 @@
+{
+  "phases": "mono",
+  "power": 5.5,
+  "fare": "dh",
+  "name": "Aitor",
+  "surname": "Menta",
+  "phone": "606605445",
+  "phoneIncomplete": "606",
+  "certificate": "certificate.jpg"
+}
