@@ -14,12 +14,32 @@ import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutline
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import StepHeader from '../../components/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
+
+import generalTerms from '../../data/HolderChange/generalterms'
 
 function IBAN (props) {
   const { t } = useTranslation()
   const { values, handleChange, handleBlur, setFieldValue, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('payment.sepa_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('payment.sepa_accepted', false)
+  }
+
 
   useEffect(() => {
     if (values.payment.iban.length > 8) {
@@ -81,7 +101,7 @@ function IBAN (props) {
             <Checkbox
               name="payment.sepa_accepted"
               checked={values.payment.sepa_accepted}
-              onChange={handleChange}
+              onClick={handleClick}
               color="primary"
               value={true}
             />
@@ -89,6 +109,14 @@ function IBAN (props) {
           label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
         />
       </Box>
+
+      <TermsDialog
+        title={t('GENERAL_TERMS')}
+        content={generalTerms}
+        open={open}
+        onAccept={handleAccept}
+        onClose={handleClose}
+      />
     </>
   )
 }
