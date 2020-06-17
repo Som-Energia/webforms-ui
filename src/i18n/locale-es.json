@@ -219,5 +219,13 @@
   "ELECTRODEP_ATTACH_REQUIRED": "Tienes que adjuntar el certificado especificado",
   "SPECIAL_CASES_DEATH": "Defunción",
   "SPECIAL_CASES_MERGE": "Fusión de empresas",
-  "SPECIAL_CASES_ELECTRODEP": "Electrodependiente"
+  "SPECIAL_CASES_ELECTRODEP": "Electrodependiente",
+
+  "FAILURE_TITLE": "¡Ups!",
+  "FAILURE_TEXT": "Lo sentimos, no ha sido posible realizar el contrato",
+  "UNEXPECTED_POSTERROR": "Se ha producido un error inesperado!<br>{{error_message}}",
+
+  "SUCCESS_TITLE": "Enhorabuena",
+  "SUCCESS_TEXT": "Tu contrato con número {{contract_number}} está en trámite",
+  "SUCCESS_NOTE": "Consulta el estado de la tramitación en la <a target=\"_blank\" href=\"%{urlov}\">Oficina Virtual</a></strong> de Som Energia."
 }

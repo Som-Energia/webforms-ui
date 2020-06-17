@@ -22,10 +22,14 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
 import Review from './HolderChange/Review'
+import Success from './HolderChange/Success'
+import Failure from './HolderChange/Failure'
 
 import data from '../data/HolderChange/data.json'
 
 import DisplayFormikState from '../components/DisplayFormikState'
+
+import { holderChange } from '../services/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -131,11 +135,11 @@ function HolderChange (props) {
         phone1: Yup.string()
           .min(9, t('NO_PHONE'))
           .required(t('NO_PHONE')),
-        language: Yup.string().required(t('NO_LANGUAGE')),
-        privacy_policy_accepted: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
+        language: Yup.string().required(t('NO_LANGUAGE'))
+      }),
+      privacy_policy_accepted: Yup.bool()
+        .required(t('UNACCEPTED_PRIVACY_POLICY'))
+        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     }),
     Yup.object().shape({
     }),
@@ -249,6 +253,13 @@ function HolderChange (props) {
     console.log('submit', props)
   }
 
+  const handleSend = props => {
+    console.log('send', props)
+    setSending(true)
+    //const data =
+    holderChange()
+  }
+
   const initialValues = {
     holder: {
       vat: 'C35875459',
@@ -333,12 +344,14 @@ function HolderChange (props) {
                               color="primary"
                               startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
                               disabled={sending || !props.isValid}
-                              onClick={() => console.log('SEND!')}
+                              onClick={handleSend}
                             >
                               {t('SEND')}
                             </Button>
                         }
                       </div>
+                      <Success />
+                      <Failure />
                     </Box>
                   </Paper>
                 }

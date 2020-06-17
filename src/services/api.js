@@ -88,3 +88,14 @@ export const checkIban = async (iban) => {
       return response?.data
     })
 }
+
+export const holderChange = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}form/holderchange`,
+    data: data
+  })
+    .then(response => {
+      return response?.data
+    })
+}
