@@ -9,14 +9,15 @@ import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
 function VAT (props) {
-  const { values, setFieldValue, handleBlur } = props
+  const { values, setFieldValue, handleBlur, touched, errors } = props
   const { t } = useTranslation()
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
     setFieldValue('holder.vat', vat)
-    setFieldValue('holder.vatvalid', valid)
     setFieldValue('holder.isphisical', isPhisical)
-    props.validateForm()
+    setFieldValue('holder.vatvalid', valid)
+    props.setFieldTouched('holder.vat', true)
+    //props.validateField('holder.vat')
   }
 
   return (
@@ -37,11 +38,11 @@ function VAT (props) {
           value={values?.holder?.vat}
           onChange={onChangeVAT}
           onBlur={handleBlur}
-          error={(props.errors?.holder?.vat && props.touched?.holder?.vat) ||
-            (props.touched?.holder?.vat && props.values?.holder?.vatvalid === false)
+          error={(errors?.holder?.vat && touched?.holder?.vat) ||
+            (touched?.holder?.vat && values?.holder?.vatvalid === false)
           }
-          helperText={(props.touched?.holder?.vat && props.errors?.holder?.vat) ||
-            (props.touched?.holder?.vat && props.errors?.holder?.vatvalid)
+          helperText={(touched?.holder?.vat && errors?.holder?.vat) ||
+            (touched?.holder?.vat && errors?.holder?.vatvalid)
           }
         />
       </Box>
