@@ -48,12 +48,12 @@ function PersonalData (props) {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('holder.privacy_policy_accepted', true)
+    setFieldValue('privacy_policy_accepted', true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('holder.privacy_policy_accepted', false)
+    setFieldValue('privacy_policy_accepted', false)
   }
 
   return (
@@ -325,9 +325,9 @@ function PersonalData (props) {
                 <Checkbox
                   id="privacy_policy_accepted"
                   color="primary"
-                  name="holder.privacy_policy_accepted"
+                  name="privacy_policy_accepted"
                   onClick={handleClick}
-                  checked={values?.holder?.privacy_policy_accepted}
+                  checked={values?.privacy_policy_accepted}
                 />
               }
               label={t('ACCEPT_PRIVACY_POLICY')}
