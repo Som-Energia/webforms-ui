@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionTitle: {
     fontSize: '18px',
-    fontWeight: 400,
+    fontWeight: 500,
     textTransform: 'uppercase',
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(1.2)
