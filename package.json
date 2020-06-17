@@ -50,6 +50,8 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^4.8.0",
+    "cypress-file-upload": "^4.0.7",
     "renamer": "^2.0.0",
     "standard": "^14.3.3"
   }

@@ -91,7 +91,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
           <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
             {t('INSTALL_TYPE')}
           </Typography>
-          <Typography variant="body1" gutterBottom>
+          <Typography data-cy={params.modify?.phases} variant="body1" gutterBottom>
             {(params.modify?.phases === 'mono') ? t('MONOFASICA_NORMAL') : t('TRIFASICA')}
           </Typography>
         </Box>
@@ -103,7 +103,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
               <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
                 {t('POWER')}{(params?.modify?.moreThan15Kw ? ' P1' : null)}
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography data-cy="power" variant="body1" gutterBottom>
                 {params.modify?.power} kW
               </Typography>
             </Grid>
@@ -144,7 +144,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
               </Grid>
             }
             <Grid item>
-              <Typography variant="body1" gutterBottom>
+              <Typography data-cy={params.modify?.fare} variant="body1" gutterBottom>
                 {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
               </Typography>
             </Grid>
@@ -155,7 +155,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         <Typography className={classes.resumeLabel} variant="subtitle2">
           {t('CONTACT_PHONE')}
         </Typography>
-        <Typography variant="body1" gutterBottom>
+        <Typography data-cy="contact" variant="body1" gutterBottom>
           {params.contact?.phone} ({params.contact?.contactName} {params.contact?.contactSurname})
         </Typography>
       </Box>
@@ -178,6 +178,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         {
           <>
             <Button
+              type="submit"
               onClick={handleSubmit}
               className={classes.button}
               color="primary"
