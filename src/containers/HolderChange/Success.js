@@ -6,6 +6,8 @@ import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
+
 import StepHeader from '../../components/StepHeader'
 import cuca from '../../images/cuca.svg'
 
@@ -20,6 +22,14 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: '300px',
     margin: theme.spacing(2)
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  icon: {
+    color: 'rgba(0, 0, 0, 0.87)'
   }
 }))
 
@@ -28,13 +38,15 @@ function Success (props) {
   const { t } = useTranslation()
   const classes = useStyles()
 
+  const SuccessTitle = () => <><CheckCircleOutlineIcon fontSize="large" className={classes.icon} />&nbsp; {t('SUCCESS_TEXT')}</>
+
   return (
     <>
       <StepHeader title={t('SUCCESS_TITLE')} />
       <div className={classes.container}>
-        <Typography variant="h6"
-          dangerouslySetInnerHTML={{ __html: t('SUCCESS_TEXT') }}
-        />
+        <Typography className={classes.title} variant="h6">
+          <SuccessTitle />
+        </Typography>
         <Typography className={classes.margin} variant="body1"
           dangerouslySetInnerHTML={{ __html: t('SUCCESS_NOTE') }}
         />

@@ -30,6 +30,7 @@ import data from '../data/HolderChange/data.json'
 import DisplayFormikState from '../components/DisplayFormikState'
 
 import { holderChange } from '../services/api'
+import { normalizeHolderChange } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,6 +59,8 @@ function HolderChange (props) {
   const [showAll, setShowAll] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
+  const [completed, setCompleted] = useState(false)
+  const [error, setError] = useState(false)
 
   const validationSchemas = [
     Yup.object().shape({
@@ -243,21 +246,38 @@ function HolderChange (props) {
   const prevStep = props => {
     const prev = activeStep - 1
     setActiveStep(Math.max(0, prev))
+    if (completed) {
+      setCompleted(false)
+      setError(false)
+    }
     props.submitForm().then(() => {
       props.validateForm()
       props.setTouched({})
     })
   }
 
-  const handleSubmit = props => {
-    console.log('submit', props)
-  }
-
-  const handleSend = props => {
-    console.log('send', props)
+  const handlePost = async (values) => {
     setSending(true)
-    //const data =
-    holderChange()
+    let data = JSON.parse(JSON.stringify(values))
+    data = normalizeHolderChange(values)
+    await holderChange(data)
+      .then(response => {
+        console.log(response)
+        setError(false)
+        setCompleted(true)
+        // handleStepChanges({ response: response })
+      })
+      .catch(error => {
+        console.log(error?.response?.data?.data)
+        const errorResp =
+          error?.response?.data?.data
+            ? error?.response?.data?.data
+            : { code: 'UNEXPECTED' }
+        setError(errorResp)
+        setCompleted(true)
+        // handleStepChanges(errorObj)
+      })
+    setSending(false)
   }
 
   const initialValues = {
@@ -297,7 +317,7 @@ function HolderChange (props) {
   return (
     <Container maxWidth="md">
       <Formik
-        onSubmit={handleSubmit}
+        onSubmit={() => {}}
         enableReinitialize
         initialValues={{ ...initialValues, ...data }}
         validationSchema={validationSchemas[activeStep]}
@@ -310,7 +330,12 @@ function HolderChange (props) {
                 {
                   <Paper elevation={3} className={classes.stepContainer}>
                     <Box mx={4} mb={3}>
-                      {getActiveStep(props)}
+                      { completed
+                        ? error
+                          ? <Failure error={error} />
+                          : <Success />
+                        : getActiveStep(props)
+                      }
                     </Box>
                     <Box mx={4} mt={1} mb={3}>
                       <div className={classes.actionsContainer}>
@@ -318,7 +343,7 @@ function HolderChange (props) {
                           <Button
                             className={classes.button}
                             startIcon={<ArrowBackIosIcon />}
-                            disabled={(activeStep === 0)}
+                            disabled={(activeStep === 0) || sending}
                             onClick={() => prevStep(props)}
                           >
                             {t('PAS_ANTERIOR')}
@@ -337,21 +362,19 @@ function HolderChange (props) {
                             >
                               {t('SEGUENT_PAS')}
                             </Button>
-                            : <Button
+                            : !completed && <Button
                               type="button"
                               className={classes.button}
                               variant="contained"
                               color="primary"
                               startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
                               disabled={sending || !props.isValid}
-                              onClick={handleSend}
+                              onClick={() => handlePost(props.values)}
                             >
                               {t('SEND')}
                             </Button>
                         }
                       </div>
-                      <Success />
-                      <Failure />
                     </Box>
                   </Paper>
                 }
