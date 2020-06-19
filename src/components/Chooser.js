@@ -64,8 +64,13 @@ const Chooser = (props) => {
 
   const handleClick = (event, value) => {
     event.preventDefault()
-    selectedOption !== value ? setSelectedOption(value) : setSelectedOption()
-    onChange({ option: value })
+    if (selectedOption !== value) {
+      setSelectedOption(value)
+      onChange({ option: value })
+    } else {
+      setSelectedOption(undefined)
+      onChange({ option: undefined })
+    }
   }
 
   return (
@@ -96,7 +101,7 @@ const Chooser = (props) => {
 }
 
 Chooser.defaultProps = {
-  onChange: event => console.log('change!')
+  onChange: event => console.log('change', event.value)
 }
 
 export default Chooser
