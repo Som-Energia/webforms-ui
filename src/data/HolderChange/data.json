@@ -9,7 +9,6 @@
     "vat": "58291270R",
     "vatvalid": true,
     "vatexists": false,
-    "privacy_policy_accepted": true,
     "name": "Perico",
     "surname1": "Palote",
     "surname2": "Romero",
@@ -39,5 +38,7 @@
     "is_member": false,
     "invite_token" : false,
     "become_member": true
-  }
+  },
+  "privacy_policy_accepted": true,
+  "terms_accepted": true
 }
