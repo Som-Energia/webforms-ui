@@ -223,7 +223,9 @@
 
   "FAILURE_TITLE": "¡Ups!",
   "FAILURE_TEXT": "Lo sentimos, no ha sido posible realizar el contrato",
-  "UNEXPECTED_POSTERROR": "Se ha producido un error inesperado!<br>{{error_message}}",
+  "UNEXPECTED_POSTERROR": "Se ha producido un error!<br>{{error_message}}",
+  "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
+  "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
 
   "SUCCESS_TITLE": "Enhorabuena",
   "SUCCESS_TEXT": "Tu contrato con número {{contract_number}} está en trámite",
