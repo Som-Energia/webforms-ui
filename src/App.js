@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -42,25 +43,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const keyMap = {
+  SAMPLE_DATA: 'ctrl+shift+1',
+  SHOW_INSPECTOR: 'ctrl+shift+d'
+}
+
 const App = ({ token = '' }) => {
   const classes = useStyles()
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <Grid container>
-          <Grid item xs={12}>
-            <Router>
-              <Switch>
-                <Route exact path="/" component={ModifyContract} />
-                <Route exact path="/modify-contract" render={(props) => <ModifyContract {...props} token={token} />} />
-                <Route path="/:language/contract/modification/" render={(props) => <ModifyContract {...props} token={token} />} />
-                <Route exact path="/holder-change" component={HolderChange} />
-              </Switch>
-            </Router>
+      <GlobalHotKeys keyMap={keyMap}>
+        <div className={classes.root}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={ModifyContract} />
+                  <Route exact path="/modify-contract" render={(props) => <ModifyContract {...props} token={token} />} />
+                  <Route path="/:language/contract/modification/" render={(props) => <ModifyContract {...props} token={token} />} />
+                  <Route exact path="/holder-change" component={HolderChange} />
+                </Switch>
+              </Router>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      </GlobalHotKeys>
     </ThemeProvider>
   )
 }
