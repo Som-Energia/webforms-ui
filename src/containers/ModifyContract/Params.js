@@ -466,7 +466,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
               />
             </Box>
 
-            { (values.changePower && values.power && values.changeFare && values.fare) &&
+            { (values.changePower && values.power && ((values.changeFare && values.fare) || values.moreThan15Kw)) &&
               <Box mx={1} mb={3}>
                 <Grid container spacing={4}>
                   <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>

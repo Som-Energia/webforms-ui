@@ -112,7 +112,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
               <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
                 {t('POWER')} P2
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography data-cy="power2" variant="body1" gutterBottom>
                 {params.modify?.power2} kW
               </Typography>
             </Grid>
@@ -122,7 +122,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
               <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
                 {t('POWER')} P3
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography data-cy="power3" variant="body1" gutterBottom>
                 {params.modify?.power3} kW
               </Typography>
             </Grid>
@@ -130,7 +130,10 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
           </Grid>
         </Box>
       }
-      { params.modify?.fare &&
+      {
+        console.log(params)
+      }{
+        (params.modify?.fare || params.modify?.moreThan15Kw) &&
         <Box mt={2} mx={1}>
           <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
             {t('FARE')}
@@ -138,16 +141,18 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
           <Grid container spacing={2}>
             { params.modify?.tariff &&
               <Grid item>
-                <Typography variant="body1" gutterBottom>
+                <Typography data-cy="tariff" variant="body1" gutterBottom>
                   {params.modify?.tariff}
                 </Typography>
               </Grid>
             }
-            <Grid item>
-              <Typography data-cy={params.modify?.fare} variant="body1" gutterBottom>
-                {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
-              </Typography>
-            </Grid>
+            { params.modify?.fare &&
+              <Grid item>
+                <Typography data-cy={params.modify?.fare} variant="body1" gutterBottom>
+                  {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
+                </Typography>
+              </Grid>
+            }
           </Grid>
         </Box>
       }
