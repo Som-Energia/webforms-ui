@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
@@ -57,10 +58,21 @@ function HolderChange (props) {
   const { t, i18n } = useTranslation()
 
   const [showAll, setShowAll] = useState(false)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
+
+  const handlers = {
+    SAMPLE_DATA: () => {
+      const values = { ...initialValues, ...data }
+      console.log(values)
+    },
+    SHOW_INSPECTOR: () => {
+      setShowInspector(true)
+    }
+  }
 
   const validationSchemas = [
     Yup.object().shape({
@@ -262,27 +274,23 @@ function HolderChange (props) {
     data = normalizeHolderChange(values)
     await holderChange(data)
       .then(response => {
-        console.log(response)
         setError(false)
         setCompleted(true)
-        // handleStepChanges({ response: response })
       })
       .catch(error => {
-        console.log(error?.response?.data?.data)
         const errorResp =
           error?.response?.data?.data
             ? error?.response?.data?.data
             : { code: 'UNEXPECTED' }
         setError(errorResp)
         setCompleted(true)
-        // handleStepChanges(errorObj)
       })
     setSending(false)
   }
 
   const initialValues = {
     holder: {
-      vat: 'C35875459',
+      vat: '',
       vatvalid: false,
       isphisical: true,
       proxynif_valid: false,
@@ -291,7 +299,7 @@ function HolderChange (props) {
       language: i18n.language
     },
     supply_point: {
-      cups: 'ES0031101322018013GN0F',
+      cups: '',
       status: false,
       address: '',
       verified: false
@@ -315,76 +323,82 @@ function HolderChange (props) {
   }
 
   return (
-    <Container maxWidth="md">
-      <Formik
-        onSubmit={() => {}}
-        enableReinitialize
-        initialValues={{ ...initialValues, ...data }}
-        validationSchema={validationSchemas[activeStep]}
-        validateOnMount={true}
-      >
-        {props => (
-          <>
-            <div>
-              <Form className={classes.root} noValidate>
-                {
-                  <Paper elevation={3} className={classes.stepContainer}>
-                    <Box mx={4} mb={3}>
-                      { completed
-                        ? error
-                          ? <Failure error={error} />
-                          : <Success />
-                        : getActiveStep(props)
-                      }
-                    </Box>
-                    <Box mx={4} mt={1} mb={3}>
-                      <div className={classes.actionsContainer}>
-                        {
-                          <Button
-                            className={classes.button}
-                            startIcon={<ArrowBackIosIcon />}
-                            disabled={(activeStep === 0) || sending}
-                            onClick={() => prevStep(props)}
-                          >
-                            {t('PAS_ANTERIOR')}
-                          </Button>
+    <GlobalHotKeys handlers={handlers}>
+      <Container maxWidth="md">
+        <Formik
+          onSubmit={() => {}}
+          enableReinitialize
+          initialValues={initialValues}
+          validationSchema={validationSchemas[activeStep]}
+          validateOnMount={true}
+        >
+          {props => (
+            <>
+              <div>
+                <Form className={classes.root} noValidate>
+                  {
+                    <Paper elevation={3} className={classes.stepContainer}>
+                      <Box mx={4} mb={3}>
+                        { completed
+                          ? error
+                            ? <Failure error={error} />
+                            : <Success />
+                          : getActiveStep(props)
                         }
-                        {
-                          activeStep < MAX_STEP_NUMBER
-                            ? <Button
-                              type="button"
+                      </Box>
+                      <Box mx={4} mt={1} mb={3}>
+                        <div className={classes.actionsContainer}>
+                          {
+                            <Button
+                              data-cy="prev"
                               className={classes.button}
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
-                              disabled={!props.isValid}
-                              onClick={() => nextStep(props)}
+                              startIcon={<ArrowBackIosIcon />}
+                              disabled={(activeStep === 0) || sending}
+                              onClick={() => prevStep(props)}
                             >
-                              {t('SEGUENT_PAS')}
+                              {t('PAS_ANTERIOR')}
                             </Button>
-                            : !completed && <Button
-                              type="button"
-                              className={classes.button}
-                              variant="contained"
-                              color="primary"
-                              startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
-                              disabled={sending || !props.isValid}
-                              onClick={() => handlePost(props.values)}
-                            >
-                              {t('SEND')}
-                            </Button>
-                        }
-                      </div>
-                    </Box>
-                  </Paper>
-                }
-              </Form>
-            </div>
-            <DisplayFormikState {...props} />
-          </>
-        )}
-      </Formik>
-    </Container>
+                          }
+                          {
+                            activeStep < MAX_STEP_NUMBER
+                              ? <Button
+                                type="button"
+                                data-cy="next"
+                                className={classes.button}
+                                variant="contained"
+                                color="primary"
+                                endIcon={<ArrowForwardIosIcon />}
+                                disabled={!props.isValid}
+                                onClick={() => nextStep(props)}
+                              >
+                                {t('SEGUENT_PAS')}
+                              </Button>
+                              : !completed && <Button
+                                type="button"
+                                className={classes.button}
+                                variant="contained"
+                                color="primary"
+                                startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
+                                disabled={sending || !props.isValid}
+                                onClick={() => handlePost(props.values)}
+                              >
+                                {t('SEND')}
+                              </Button>
+                          }
+                        </div>
+                      </Box>
+                    </Paper>
+                  }
+                </Form>
+              </div>
+              { showInspector &&
+                <DisplayFormikState {...props} />
+              }
+            </>
+          )}
+        </Formik>
+      </Container>
+    </GlobalHotKeys>
   )
 }
 
