@@ -1,8 +1,8 @@
 const THOUSANDS_CONVERSION_FACTOR = 1000
 
 export const languages = {
-  es: 'Español',
-  ca: 'Català'
+  es_ES: 'Español',
+  ca_ES: 'Català'
 }
 
 export const normalizeModifyData = (params) => {
