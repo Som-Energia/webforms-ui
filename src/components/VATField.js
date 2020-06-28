@@ -40,7 +40,7 @@ const VATField = (props) => {
       setIsValidVAT(false)
       onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: false })
     }
-  }, [valueVAT])
+  }, [valueVAT, isPhisicalVAT, isValidVAT])
 
   const handleChange = (event) => {
     setValueVAT(event.target.value)
