@@ -27,7 +27,7 @@ function CUPS (props) {
 
   useEffect(() => {
     const value = values.supply_point.cups
-    if (value.length > 18) {
+    if (value.length > 16) {
       setIsLoading(true)
       checkCups(value)
         .then(response => {
@@ -49,7 +49,11 @@ function CUPS (props) {
           setIsLoading(false)
         })
     } else {
-      setFieldValue('supply_point.status', false)
+      setFieldValue('supply_point.status', 'error')
+    }
+
+    if (values.supply_point?.verified) {
+      setFieldValue('supply_point.verified', false)
     }
   }, [values.supply_point.cups, setFieldValue, validateForm])
 
