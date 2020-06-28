@@ -17,7 +17,7 @@ import StepHeader from '../../components/StepHeader'
 
 function CUPS (props) {
   const { t } = useTranslation()
-  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched } = props
+  const { values, setFieldValue, setTouched, validateForm, handleChange, handleBlur, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -32,10 +32,11 @@ function CUPS (props) {
       checkCups(value)
         .then(response => {
           const status = response?.data?.status
-          setFieldValue('supply_point.status', status)
           if (status === 'active') {
-            setFieldValue('supply_point.address', response?.data?.address)
+            setFieldValue('supply_point.address', response?.data?.address, false)
           }
+          setTouched({ supply_point: { cups: true } }, false)
+          setFieldValue('supply_point.status', status, true)
           validateForm()
           setIsLoading(false)
         })
