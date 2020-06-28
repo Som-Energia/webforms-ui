@@ -66,24 +66,24 @@ const SpecialCases = (props) => {
   const specialHandleChange = (event) => {
     if (event.target.name === 'especial_cases.reason_death') {
       if (values.especial_cases.reason_death === true) {
-        setFieldValue('especial_cases.attachments.death', [])
+        setFieldValue('especial_cases.attachments.death', [], false)
       }
-      if (values.especial_cases?.reason_merge === true) {
-        setFieldValue('especial_cases.reason_merge', false)
+      if (values.especial_cases.reason_merge === true) {
+        setFieldValue('especial_cases.reason_merge', false, false)
       }
-      setFieldValue('especial_cases.reason_death', !values.especial_cases?.reason_death)
+      setFieldValue('especial_cases.reason_death', !values.especial_cases.reason_death, true)
     } else if (event.target.name === 'especial_cases.reason_merge') {
-      if (values.especial_cases?.reason_death === true) {
-        setFieldValue('especial_cases.reason_death', false)
-        setFieldValue('especial_cases.attachments.death', [])
+      if (values.especial_cases.reason_death === true) {
+        setFieldValue('especial_cases.reason_death', false, false)
+        setFieldValue('especial_cases.attachments.death', [], false)
       }
-      setFieldValue('especial_cases.reason_merge', !values.especial_cases?.reason_merge)
+      setFieldValue('especial_cases.reason_merge', !values.especial_cases.reason_merge, true)
     } else if (event.target.name === 'especial_cases.reason_electrodep') {
       if (values.especial_cases.reason_electrodep === true) {
-        setFieldValue('especial_cases.attachments.medical', [])
-        setFieldValue('especial_cases.attachments.resident', [])
+        setFieldValue('especial_cases.attachments.medical', [], false)
+        setFieldValue('especial_cases.attachments.resident', [], false)
       }
-      setFieldValue('especial_cases.reason_electrodep', !values.especial_cases?.reason_electrodep)
+      setFieldValue('especial_cases.reason_electrodep', !values.especial_cases.reason_electrodep, true)
     }
     validateForm()
   }
