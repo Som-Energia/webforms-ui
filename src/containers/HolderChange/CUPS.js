@@ -17,12 +17,20 @@ import StepHeader from '../../components/StepHeader'
 
 function CUPS (props) {
   const { t } = useTranslation()
-  const { values, setFieldValue, setTouched, validateForm, handleChange, handleBlur, errors, touched } = props
+  const { values, setFieldValue, setTouched, handleChange, validateForm, handleBlur, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
 
   const isActiveCups = () => {
     return values?.supply_point?.status === 'active'
+  }
+
+  const handleInputCups = (event) => {
+    if (values.supply_point?.verified) {
+      setFieldValue('supply_point.verified', false)
+    }
+    const value = event.target.value.toUpperCase()
+    setFieldValue('supply_point.cups', value, true)
   }
 
   useEffect(() => {
@@ -52,10 +60,6 @@ function CUPS (props) {
     } else {
       setFieldValue('supply_point.status', 'error')
     }
-
-    if (values.supply_point?.verified) {
-      setFieldValue('supply_point.verified', false)
-    }
   }, [values.supply_point.cups, setFieldValue, validateForm])
 
   const CupsHelperText = () => (
@@ -84,7 +88,7 @@ function CUPS (props) {
           autoFocus
           required
           value={values?.supply_point?.cups}
-          onChange={handleChange}
+          onChange={handleInputCups}
           onBlur={handleBlur}
           error={errors?.supply_point?.cups && touched?.supply_point?.cups}
           helperText={(touched?.supply_point?.cups && errors?.supply_point?.cups) || <CupsHelperText />}
