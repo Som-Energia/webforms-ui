@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next'
 
 import LOCALE_CA from './locale-ca.json'
 import LOCALE_ES from './locale-es.json'
+import LOCALE_GL from './locale-gl.json'
+import LOCALE_EU from './locale-eu.json'
 
 const resources = {
   ca: {
@@ -10,6 +12,12 @@ const resources = {
   },
   es: {
     translation: LOCALE_ES
+  },
+  gl: {
+    translation: LOCALE_GL
+  },
+  eu: {
+    translation: LOCALE_EU
   }
 }
 
