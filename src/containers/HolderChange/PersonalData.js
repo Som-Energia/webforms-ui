@@ -56,6 +56,13 @@ function PersonalData (props) {
     setFieldValue('privacy_policy_accepted', false)
   }
 
+  const handleChangePhone = (event) => {
+    let value = event.target.value
+    value = value.match(/[0-9]{0,14}/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   return (
     <>
       <StepHeader title={t('HOLDER_PERSONAL_DATA')} />
@@ -254,7 +261,7 @@ function PersonalData (props) {
             required
             fullWidth
             value={values?.holder?.phone1}
-            onChange={handleChange}
+            onChange={handleChangePhone}
             onBlur={handleBlur}
             error={errors?.holder?.phone1 && touched?.holder?.phone1}
             helperText={(touched?.holder?.phone1 && errors?.holder?.phone1)}
@@ -274,7 +281,7 @@ function PersonalData (props) {
             }}
             fullWidth
             value={values?.holder?.phone2}
-            onChange={handleChange}
+            onChange={handleChangePhone}
             onBlur={handleBlur}
             error={errors?.holder?.phone2 && touched?.holder?.phone2}
             helperText={(touched?.holder?.phone2 && errors?.holder?.phone2)}

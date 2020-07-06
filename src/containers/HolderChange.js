@@ -133,6 +133,7 @@ function HolderChange (props) {
         address: Yup.string()
           .required(t('NO_ADDRESS')),
         postal_code: Yup.string()
+          .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
         state: Yup.string()
           .required(t('NO_STATE')),
