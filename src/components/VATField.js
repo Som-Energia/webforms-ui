@@ -40,10 +40,11 @@ const VATField = (props) => {
       setIsValidVAT(false)
       onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: false })
     }
-  }, [valueVAT, isPhisicalVAT, isValidVAT])
+  }, [valueVAT])
 
   const handleChange = (event) => {
-    const value = event.target.value.toUpperCase()
+    let value = event.target.value.match(/[0-9A-Za-z]{0,9}/)
+    value = value[0].toUpperCase()
     setValueVAT(value)
   }
 

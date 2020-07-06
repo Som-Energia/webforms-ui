@@ -29,7 +29,8 @@ function CUPS (props) {
     if (values.supply_point?.verified) {
       setFieldValue('supply_point.verified', false)
     }
-    const value = event.target.value.toUpperCase()
+    let value = event.target.value.match(/[0-9A-Za-z]{0,22}/)
+    value = value[0].toUpperCase()
     setFieldValue('supply_point.cups', value, true)
   }
 
