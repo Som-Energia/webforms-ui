@@ -90,7 +90,7 @@ const Review = (props) => {
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PROCESS')}</Typography>
           <ReviewField label={t('PROCESS_TYPE')} value={t('PROCESS_TYPE_HOLDER_CHANGE')} />
-          <ReviewField label={t('RELATED_MEMBER')} value={ values?.member?.become_member ? (`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`) : t('RELATED_MEMBER_PENDING')} />
+          <ReviewField label={t('RELATED_MEMBER')} value={ values?.member?.become_member === false ? t('RELATED_MEMBER_PENDING') : (`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`)} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUPPLY')}</Typography>
