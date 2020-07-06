@@ -43,7 +43,8 @@ const VATField = (props) => {
   }, [valueVAT, isPhisicalVAT, isValidVAT])
 
   const handleChange = (event) => {
-    setValueVAT(event.target.value)
+    const value = event.target.value.toUpperCase()
+    setValueVAT(value)
   }
 
   const handleBlur = (event) => {
