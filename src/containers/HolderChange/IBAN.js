@@ -40,6 +40,17 @@ function IBAN (props) {
     setFieldValue('payment.sepa_accepted', false)
   }
 
+  const handleInputChange = event => {
+    let value = event.target.value
+    if (value) {
+      value = value.match(/[\s0-9A-Za-z]{0,29}/)
+      value = value[0].toUpperCase()
+      value = value.split(' ').join('')
+      value = value.match(/.{1,4}/g).join(' ')
+    }
+    setFieldValue('payment.sepa_accepted', false, false)
+    setFieldValue('payment.iban', value)
+  }
 
   useEffect(() => {
     if (values.payment.iban.length > 8) {
@@ -51,13 +62,12 @@ function IBAN (props) {
           setIsLoading(false)
         })
         .catch(error => {
-          console.log(error.response)
           const errorStatus = error?.response?.data?.state ? error?.response?.data?.state : false
           setFieldValue('payment.iban_valid', errorStatus)
           setIsLoading(false)
         })
     } else {
-      setFieldValue('payment.iban_valid', values.payment.iban.length !== 0)
+      setFieldValue('payment.iban_valid', false)
     }
   }, [values.payment.iban, setFieldValue])
 
@@ -89,7 +99,7 @@ function IBAN (props) {
               }
             </InputAdornment>
           }}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           error={(errors?.payment?.iban || errors?.payment?.iban_valid) && touched?.payment?.iban}
           helperText={(touched?.payment?.iban && (errors?.payment?.iban || errors?.payment?.iban_valid)) || t('IBAN_HELP')}
@@ -99,6 +109,7 @@ function IBAN (props) {
         <FormControlLabel
           control={
             <Checkbox
+              disabled={values.payment?.iban_valid !== true}
               name="payment.sepa_accepted"
               checked={values.payment.sepa_accepted}
               onClick={handleClick}
