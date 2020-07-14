@@ -36,7 +36,7 @@ function CUPS (props) {
 
   useEffect(() => {
     const value = values.supply_point.cups
-    if (value.length > 16) {
+    if (value.length > 18) {
       setIsLoading(true)
       checkCups(value)
         .then(response => {

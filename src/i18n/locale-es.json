@@ -226,6 +226,7 @@
   "UNEXPECTED_POSTERROR": "Se ha producido un error!<br>{{error_message}}",
   "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
   "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
+  "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
 
   "SUCCESS_TITLE": "Enhorabuena",
   "SUCCESS_TEXT": "Tu contrato con número {{contract_number}} está en trámite",

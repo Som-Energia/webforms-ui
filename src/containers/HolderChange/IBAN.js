@@ -53,7 +53,7 @@ function IBAN (props) {
   }
 
   useEffect(() => {
-    if (values.payment.iban.length > 8) {
+    if (values.payment.iban.length > 27) {
       setIsLoading(true)
       checkIban(values.payment.iban)
         .then(response => {

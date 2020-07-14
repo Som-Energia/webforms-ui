@@ -19,6 +19,7 @@ const StateCity = (props) => {
 
   const [city, setCity] = useState(cityInitial)
   const [cities, setCities] = useState([])
+  const [citiesNames, setCitiesNames] = useState([])
   const [isLoadingCities, setIsLoadingCities] = useState(false)
 
   useEffect(() => {
@@ -36,13 +37,16 @@ const StateCity = (props) => {
   }, [])
 
   useEffect(() => {
-    if (state) {
+    if (state && state?.id !== '') {
       setIsLoadingCities(true)
       getMunicipis(state.id)
         .then(response => {
-          const municipis = {}
-          const aux = response?.data?.municipis.map(({ id, name }) => municipis[id] = name)
-          setCities(municipis)
+          const municipisNames = {}
+          const aux = response?.data?.municipis.map(({ id, name }) => {
+            municipisNames[id] = name
+          })
+          setCities(response?.data?.municipis)
+          setCitiesNames(municipisNames)
           setIsLoadingCities(false)
         }).catch(error => {
           console.log(error)
@@ -52,17 +56,19 @@ const StateCity = (props) => {
   }, [state])
 
   const handleStateChange = (event) => {
+    event.preventDefault()
     const newState = { id: event.target.value, name: states[event.target.value] }
     setState(newState)
-    setCity({})
+    setCity(cityInitial)
     onChange({
       state: newState,
-      city: {}
+      city: cityInitial
     })
   }
 
   const handleCityChange = (event) => {
-    const newCity = { id: event.target.value, name: cities[event.target.value] }
+    event.preventDefault()
+    const newCity = { id: event.target.value, name: citiesNames[event.target.value] }
     setCity(newCity)
     onChange({
       state: state,
@@ -126,7 +132,7 @@ const StateCity = (props) => {
         >
           <MenuItem key="0" value="">{t('CITY')}</MenuItem>
           {
-            Object.keys(cities).map(id => <MenuItem key={id} value={id}>{cities[id]}</MenuItem>)
+            cities.map(({ id, name }) => <MenuItem key={id} value={id}>{name}</MenuItem>)
           }
         </TextField>
       </Grid>

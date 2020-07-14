@@ -57,7 +57,7 @@ function HolderChange (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showAll, setShowAll] = useState(false)
+  // const [showAll, setShowAll] = useState(false)
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
@@ -242,7 +242,7 @@ function HolderChange (props) {
   useEffect(() => {
     const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language])
+  }, [props.match.params.language, i18n])
 
   const nextStep = props => {
     const next = activeStep + 1
@@ -271,8 +271,7 @@ function HolderChange (props) {
 
   const handlePost = async (values) => {
     setSending(true)
-    let data = JSON.parse(JSON.stringify(values))
-    data = normalizeHolderChange(values)
+    const data = normalizeHolderChange(values)
     await holderChange(data)
       .then(response => {
         setError(false)
@@ -295,9 +294,20 @@ function HolderChange (props) {
       vatvalid: false,
       isphisical: true,
       proxynif_valid: false,
-      state: '',
-      city: '',
-      language: i18n.language
+      state: { id: '' },
+      city: { id: '' },
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      address: '',
+      postal_code: '',
+      surname1: '',
+      surname2: '',
+      email: '',
+      email2: '',
+      phone1: '',
+      phone2: '',
+      language: `${i18n.language}_ES`
     },
     supply_point: {
       cups: '',
@@ -306,7 +316,8 @@ function HolderChange (props) {
       verified: false
     },
     member: {
-      become_member: ''
+      become_member: '',
+      invite_token: false
     },
     payment: {
       iban: '',
