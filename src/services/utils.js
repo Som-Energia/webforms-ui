@@ -36,51 +36,72 @@ export const checkPhisicalVAT = (vat) => {
 }
 
 export const normalizeHolderChange = (contract) => {
-  const normalContract = { ...contract }
+  const normalContract = JSON.parse(JSON.stringify(contract))
 
   if (normalContract?.supply_point?.verified !== undefined) {
     delete normalContract.supply_point.verified
   }
+
   if (normalContract?.supply_point?.status !== undefined) {
     delete normalContract.supply_point.status
   }
+
   if (normalContract?.holder?.language?.code !== undefined) {
     normalContract.holder.language = normalContract.holder.language.code
   }
+
   if (normalContract?.holder?.state?.id !== undefined) {
-    normalContract.holder.state = normalContract.holder.state.id
+    normalContract.holder.state = parseInt(normalContract.holder.state.id)
   }
+
   if (normalContract?.holder?.city?.id !== undefined) {
-    normalContract.holder.city = normalContract.holder.city.id
+    normalContract.holder.city = parseInt(normalContract.holder.city.id)
   }
+
   if (normalContract?.holder?.vatexists !== undefined) {
     delete normalContract.holder.vatexists
   }
+
   if (normalContract?.holder?.vatvalid !== undefined) {
     delete normalContract.holder.vatvalid
   }
+
   if (normalContract?.holder?.isphisical !== undefined) {
+    if (normalContract?.holder?.isphisical === true) {
+      delete normalContract.holder.proxynif
+      delete normalContract.holder.proxyname
+    } else {
+      delete normalContract.holder.surname1
+      delete normalContract.holder.surname2
+    }
     delete normalContract.holder.isphisical
   }
+
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
   }
+
   if (normalContract?.holder?.proxynif_valid !== undefined) {
     delete normalContract.holder.proxynif_valid
   }
-  if (normalContract?.member?.become_member === undefined) {
+
+  if (normalContract?.member?.become_member === undefined ||
+    normalContract?.member?.become_member === '') {
     if (normalContract?.member === undefined) {
       normalContract.member = {}
     }
     normalContract.member.is_member = true
     normalContract.member.become_member = false
   }
+
   if (normalContract?.payment?.iban) {
     normalContract.payment.iban = normalContract.payment.iban.split(' ').join('')
   }
+
   if (normalContract?.payment?.iban_valid !== undefined) {
     delete normalContract?.payment?.iban_valid
   }
+
   return normalContract
 }
 

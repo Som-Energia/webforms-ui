@@ -76,7 +76,7 @@ function PersonalData (props) {
             fullWidth
             autoFocus
             required
-            value={values?.holder?.name}
+            value={values.holder.name}
             onChange={handleChange}
             onBlur={handleBlur}
             error={errors?.holder?.name && touched?.holder?.name}
@@ -299,8 +299,8 @@ function PersonalData (props) {
             value={values?.holder?.language}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.phone2 && touched?.holder?.phone2}
-            helperText={(touched?.holder?.phone2 && errors?.holder?.phone2) ? errors?.holder?.phone2 : t('HOLDER_LANGUAGE_HELP')}
+            error={errors?.holder?.language && touched?.holder?.language}
+            helperText={(touched?.holder?.language && errors?.holder?.language) ? errors?.holder?.language : t('HOLDER_LANGUAGE_HELP')}
             InputProps={{
               startAdornment:
                 <InputAdornment position="start">
