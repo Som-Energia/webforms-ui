@@ -6,6 +6,7 @@ describe('Holder Change', () => {
     cy.fixture('holderChange.json').as('data')
   })
 
+  /*
   describe('Enter VAT', function () {
     it('Enter invalid VAT', function () {
       cy.get('[name="holder.vat"]')
@@ -53,6 +54,7 @@ describe('Holder Change', () => {
       cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
     })
   })
+  */
 
   describe('Enter personal data', function () {
     beforeEach(function () {
@@ -74,17 +76,52 @@ describe('Holder Change', () => {
         .type(this.data.name).should('have.value', this.data.name)
 
       cy.get('[name="holder.surname1"]')
-      .type(this.data.surname1).should('have.value', this.data.surname1)
+        .type(this.data.surname1).should('have.value', this.data.surname1)
 
       cy.get('[name="holder.surname2"]')
-      .type(this.data.surname2).should('have.value', this.data.surname2)
+        .type(this.data.surname2).should('have.value', this.data.surname2)
 
       cy.get('[name="holder.address"]')
-      .type(this.data.address).should('have.value', this.data.address)
+        .type(this.data.address).should('have.value', this.data.address)
 
       cy.get('[name="holder.postal_code"]')
-      .type(this.data.postalCode).should('have.value', this.data.postalCode)
+        .type(this.data.postalCode).should('have.value', this.data.postalCode)
 
+      cy.get('#holder_state').click()
+      cy.get(`[data-value="${this.data.stateCode}"]`).click()
+
+      cy.get('#holder_city').click()
+      cy.get(`[data-value="${this.data.cityCode}"]`).click()
+
+      cy.get('[name="holder.email"]')
+        .type(this.data.email).should('have.value', this.data.email)
+
+      cy.get('[name="holder.email2"]')
+        .type(this.data.email).should('have.value', this.data.email)
+
+      cy.get('[name="holder.phone1"]')
+        .type(this.data.phone).should('have.value', this.data.phone)
+
+      cy.get('#holder_lang').click()
+      cy.get('[data-value="ca_ES"]').click()
+
+      cy.get('[name="privacy_policy_accepted"]').click()
+
+      cy.get('[data-cy=accept]').click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('[name="payment.iban"]')
+        .type(this.data.iban).should('have.value', this.data.iban)
+      cy.get('[name="payment.sepa_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
+      cy.get('[data-cy=next]').click()
     })
   })
 })
