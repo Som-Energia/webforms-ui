@@ -229,6 +229,6 @@
   "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
 
   "SUCCESS_TITLE": "Enhorabuena",
-  "SUCCESS_TEXT": "Tu contrato con número {{contract_number}} está en trámite",
-  "SUCCESS_NOTE": "Consulta el estado de la tramitación en la <a target=\"_blank\" href=\"%{urlov}\">Oficina Virtual</a></strong> de Som Energia."
+  "SUCCESS_TEXT": "Estamos tramitando el cambio de titularidad",
+  "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el cambio sea efectivo."
 }
