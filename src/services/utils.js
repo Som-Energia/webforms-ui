@@ -92,6 +92,8 @@ export const normalizeHolderChange = (contract) => {
     }
     normalContract.member.is_member = true
     normalContract.member.become_member = false
+  } else {
+    normalContract.member.is_member = false
   }
 
   if (normalContract?.payment?.iban) {
