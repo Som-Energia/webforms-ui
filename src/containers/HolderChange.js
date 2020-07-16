@@ -63,6 +63,7 @@ function HolderChange (props) {
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
+  const [result, setResult] = useState({})
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -274,6 +275,9 @@ function HolderChange (props) {
     const data = normalizeHolderChange(values)
     await holderChange(data)
       .then(response => {
+        console.log(response?.data)
+        const responseData = response?.data ? response.data : {}
+        setResult(responseData)
         setError(false)
         setCompleted(true)
       })
@@ -354,13 +358,14 @@ function HolderChange (props) {
                         { completed
                           ? error
                             ? <Failure error={error} />
-                            : <Success />
+                            : <Success result={result} />
                           : getActiveStep(props)
                         }
                       </Box>
                       <Box mx={4} mt={1} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
+                            result?.contract_number === undefined &&
                             <Button
                               data-cy="prev"
                               className={classes.button}
@@ -370,6 +375,7 @@ function HolderChange (props) {
                             >
                               {t('PAS_ANTERIOR')}
                             </Button>
+
                           }
                           {
                             activeStep < MAX_STEP_NUMBER
