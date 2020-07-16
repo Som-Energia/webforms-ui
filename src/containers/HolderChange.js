@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   stepContainer: {
     marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
     flexDirection: 'column'
