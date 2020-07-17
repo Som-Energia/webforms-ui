@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 const SpecialCases = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { handleChange, values, errors, touched, setFieldValue, validateForm } = props
+  const { values, errors, touched, setFieldValue, validateForm } = props
 
   const specialHandleChange = (event) => {
     if (event.target.name === 'especial_cases.reason_death') {

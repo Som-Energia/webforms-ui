@@ -20,7 +20,7 @@ import generalTerms from '../../data/HolderChange/generalterms'
 
 function IBAN (props) {
   const { t } = useTranslation()
-  const { values, handleChange, handleBlur, setFieldValue, errors, touched } = props
+  const { values, handleBlur, setFieldValue, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
   const [open, setOpen] = useState(false)
