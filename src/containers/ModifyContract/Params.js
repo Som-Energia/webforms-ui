@@ -61,7 +61,63 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
+const calculateTariff = (values) => {
+  const {
+    changePower,
+    power,
+    moreThan15Kw,
+    changeFare,
+    fare
+  } = values
+
+  let tariff = null
+
+  if (changePower) {
+    if (!moreThan15Kw) {
+      if (changeFare) {
+        tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
+        if (fare) {
+          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
+        }
+      }
+    } else {
+      tariff = '3.0A'
+    }
+  }
+  return tariff
+}
+
+const handleChangeModify = (event, setFieldValue, values) => {
+  if (event.target.name === 'changePhases' && values.changePhases) {
+    setFieldValue('phases', '')
+    setFieldValue('attachments', [])
+  } else if (event.target.name === 'changePower' && values.changePower) {
+    setFieldValue('power', '')
+    setFieldValue('power2', '')
+    setFieldValue('power3', '')
+    setFieldValue('moreThan15Kw', false)
+  } else if (event.target.name === 'changeFare' && values.changeFare) {
+    setFieldValue('fare', '')
+  }
+  setFieldValue(event.target.name, event.target.checked)
+}
+
+const handleChangePower = (event, setFieldValue, { moreThan15Kw }) => {
+  const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
+  const regexMoreThan15 = /^\d*([.,'])?\d{0,3}/g
+  const regex = moreThan15Kw ? regexMoreThan15 : regexLessThan15
+
+  const match = regex.exec(event.target.value)
+  let result = match[0].replace(',', '.')
+  result = result.replace('\'', '.')
+
+  result = (!moreThan15Kw && result <= 15) ? result
+    : (moreThan15Kw && result < 450) ? result : result.slice(0, -1)
+
+  setFieldValue(event.target.name, result)
+}
+
+const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -138,64 +194,6 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
       })
   })
 
-  const handleChangeModify = (event, setFieldValue, values) => {
-    if (!values.changePhases) {
-      setFieldValue('phases', '')
-      setFieldValue('attachments', [])
-    }
-    if (!values.changePower) {
-      setFieldValue('power', '')
-      setFieldValue('power2', '')
-      setFieldValue('power3', '')
-      setFieldValue('moreThan15Kw', false)
-    }
-    if (!values.changeFare) {
-      setFieldValue('fare', '')
-    }
-  }
-
-  const calculateTariff = (values) => {
-    const {
-      changePower,
-      power,
-      moreThan15Kw,
-      changeFare,
-      fare
-    } = values
-
-    let tariff = null
-
-    if (changePower) {
-      if (!moreThan15Kw) {
-        if (changeFare) {
-          tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
-          if (fare) {
-            tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
-          }
-        }
-      } else {
-        tariff = '3.0A'
-      }
-    }
-
-    return tariff
-  }
-
-  const handleChangePower = (event, setFieldValue, { moreThan15Kw }) => {
-    const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
-    const regexMoreThan15 = /^\d*([.,'])?\d{0,3}/g
-    const regex = moreThan15Kw ? regexMoreThan15 : regexLessThan15
-
-    const match = regex.exec(event.target.value)
-    let result = match[0].replace(',', '.')
-    result = result.replace('\'', '.')
-
-    result = (!moreThan15Kw && result <= 15) ? result
-      : (moreThan15Kw && result < 450) ? result : result.slice(0, -1)
-
-    setFieldValue(event.target.name, result)
-  }
-
   return (
     <Paper className={classes.paperContainer} elevation={0}>
       <Formik
@@ -203,17 +201,17 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
           {
             ...{
               changePhases: false,
-              phases: null,
+              phases: '',
               attachments: [],
               changePower: false,
-              power: null,
-              power2: null,
-              power3: null,
+              power: '',
+              power2: '',
+              power3: '',
               power_attachments: [],
               moreThan15Kw: false,
               changeFare: false,
-              fare: null,
-              tariff: null
+              fare: '',
+              tariff: ''
             },
             ...params
           }
@@ -251,7 +249,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   <Switch
                     name="changePhases"
                     className={classes.switch}
-                    onChange={event => handleChange(event) & handleChangeModify(event, setFieldValue, values)}
+                    onChange={ event => handleChangeModify(event, setFieldValue, values)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                     color="primary"
                     checked={values.changePhases}
@@ -275,6 +273,8 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   error={(errors.phases && touched.phases)}
                   helperText={(touched.phases && errors.phases)}
                 >
+                  <MenuItem value="">
+                  </MenuItem>
                   <MenuItem value="mono">
                     {t('MONOFASICA_NORMAL')}
                   </MenuItem>
@@ -319,7 +319,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   <Switch
                     name="changePower"
                     className={classes.switch}
-                    onChange={event => handleChange(event) & handleChangeModify(event, setFieldValue, values)}
+                    onChange={event => handleChangeModify(event, setFieldValue, values)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                     color="primary"
                     checked={values.changePower}
@@ -428,7 +428,7 @@ function ModifyParams ({ nextStep, prevStep, handleStepChanges, params }) {
                   <Switch
                     name="changeFare"
                     className={classes.switch}
-                    onChange={event => handleChange(event) & handleChangeModify(event, setFieldValue, values)}
+                    onChange={event => handleChangeModify(event, setFieldValue, values)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                     color="primary"
                     checked={(!values.moreThan15Kw) ? values.changeFare : false}
