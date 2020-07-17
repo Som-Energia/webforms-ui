@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline'
