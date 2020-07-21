@@ -54,10 +54,10 @@ StepHeader Component
 }
 
 .header__container {
-  background-color: rgba(150, 182, 51, 0.70);
+  background-color: rgba(150, 182, 51, 0.90);
   margin-left: -32px;
   min-width: 0%;
-  padding: 8px 8px 8px 32px;
+  padding: 10px 8px 10px 32px;
 }
 
 .header__text {
@@ -68,7 +68,7 @@ StepHeader Component
 }
 
 .header__after {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 10 10' preserveAspectRatio='none' style='height: 100%25; width: 90%25; overflow: visible; position: absolute;'%3E%3Cpolygon class='freebirdSolidFill' style='fill: rgba(150, 182, 51, 0.75); stroke-width: 0;' points='0,0 10,0 0,10'%3E%3C/polygon%3E%3C/svg%3E");
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 10 10' preserveAspectRatio='none' style='height: 100%25; width: 90%25; overflow: visible; position: absolute;'%3E%3Cpolygon class='freebirdSolidFill' style='fill: rgba(150, 182, 51, 0.90); stroke-width: 0;' points='0,0 10,0 0,10'%3E%3C/polygon%3E%3C/svg%3E");
   flex-shrink: 0;
   -webkit-flex-shrink: 0;
   overflow: visible;
