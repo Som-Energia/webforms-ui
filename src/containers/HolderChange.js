@@ -276,7 +276,6 @@ function HolderChange (props) {
     const data = normalizeHolderChange(values)
     await holderChange(data)
       .then(response => {
-        console.log(response?.data)
         const responseData = response?.data ? response.data : {}
         setResult(responseData)
         setError(false)
@@ -354,7 +353,7 @@ function HolderChange (props) {
               <div>
                 <Form className={classes.root} noValidate>
                   {
-                    <Paper elevation={3} className={classes.stepContainer}>
+                    <Paper elevation={0} className={classes.stepContainer}>
                       <Box mx={4} mb={3}>
                         { completed
                           ? error
