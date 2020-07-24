@@ -67,7 +67,7 @@ const App = ({ token = '' }) => {
               <Suspense fallback ={<Loading />}>
                 <Router>
                   <Switch>
-                    <Route exact path="/" component={ lazy(() => import('./containers/HolderChange')) } />
+                    <Route exact path="/" component={ lazy(() => import('./containers/Contract')) } />
                     <Route exact path="/modify-contract" render={loadModifyContract} />
                     <Route path="/:language/contract/modification/" render={loadModifyContract} />
                     <Route path="/holder-change" component={lazy(() => import('./containers/HolderChange'))} />
