@@ -17,6 +17,13 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
+import PowerFare from './Contract/PowerFare'
+import VoluntaryCent from './HolderChange/VoluntaryCent'
+import IBAN from './HolderChange/IBAN'
+import Review from './Contract/Review'
+
+import { getRates } from '../services/api'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative'
@@ -42,12 +49,14 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showInspector, setShowInspector] = useState(false)
+  const [showInspector, setShowInspector] = useState(true)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+
+  const [rates] = useState(getRates())
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -61,20 +70,92 @@ const Contract = (props) => {
 
   const validationSchemas = [
     Yup.object().shape({
-      holder: Yup.object().shape({
-        vat: Yup.string().required(t('FILL_NIF')),
-        vatvalid: Yup.bool().required(t('FILL_NIF'))
-          .oneOf([true], t('FILL_NIF'))
+      contract: Yup.object().shape({
+        rate: Yup.string()
+          .required(t('NO_FARE_CHOSEN')),
+        power: Yup.number()
+          .required(t('NO_POWER_CHOSEN'))
+          .test('minPowerValue',
+            t('POWER_NO_LESS_THAN'),
+            function () {
+              return this.parent.power > rates[this.parent.rate]?.min_power
+            })
+          .test('maxPowerValue',
+            t('POWER_NO_MORE_THAN'),
+            function () {
+              return this.parent.power < rates[this.parent.rate]?.max_power
+            }),
+        power2: Yup.number()
+          .test('required',
+            t('NO_POWER_CHOSEN_P2'),
+            function () {
+              return !(rates[this.parent.rate]?.num_power_periods > 1 && this.parent.power2)
+            })
+          .test('minPowerValue',
+            t('POWER_NO_LESS_THAN'),
+            function () {
+              return this.parent.power2 > rates[this.parent.rate]?.min_power
+            })
+          .test('maxPowerValue',
+            t('POWER_NO_MORE_THAN'),
+            function () {
+              return this.parent.power2 < rates[this.parent.rate]?.max_power
+            }),
+        power3: Yup.number()
+          .test('required',
+            t('NO_POWER_CHOSEN_P3'),
+            function () {
+              return rates[this.parent.rate]?.num_power_periods > 1 && this.parent.power3
+            })
+          .test('minPowerValue',
+            t('POWER_NO_LESS_THAN'),
+            function () {
+              return this.parent.power3 > rates[this.parent.rate]?.min_power
+            })
+          .test('maxPowerValue',
+            t('POWER_NO_MORE_THAN'),
+            function () {
+              return this.parent.power3 < rates[this.parent.rate]?.max_power
+            })
       })
+    }),
+    Yup.object().shape({
+      payment: Yup.object().shape({
+        voluntary_cent: Yup.bool()
+          .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
+          .oneOf([false, true], t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
+      })
+    }),
+    Yup.object().shape({
+      payment: Yup.object().shape({
+        iban: Yup.string().required(t('IBAN_ERROR')),
+        iban_valid: Yup.bool().required(t('IBAN_ERROR'))
+          .oneOf([true], t('IBAN_ERROR')),
+        sepa_accepted: Yup.bool().required(t('IBAN_ERROR'))
+          .oneOf([true], t('IBAN_ERROR'))
+      })
+    }),
+    Yup.object().shape({
+      terms_accepted: Yup.bool().required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
 
-  const MAX_STEP_NUMBER = 2
+  const MAX_STEP_NUMBER = 3
 
   const getActiveStep = (props) => {
     return <>
       { activeStep === 0 &&
-        <div {...props} />
+        <PowerFare rates={rates} {...props} />
+      }
+      { activeStep === 1 &&
+        <VoluntaryCent {...props} />
+      }
+      { activeStep === 2 &&
+        <IBAN {...props} />
+      }
+      { activeStep === 3 &&
+        <Review {...props} />
       }
     </>
   }
@@ -110,6 +191,47 @@ const Contract = (props) => {
   }
 
   const initialValues = {
+    holder: {
+      vat: '',
+      vatvalid: false,
+      isphisical: true,
+      proxynif_valid: false,
+      state: { id: '' },
+      city: { id: '' },
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      address: '',
+      postal_code: '',
+      surname1: '',
+      surname2: '',
+      email: '',
+      email2: '',
+      phone1: '',
+      phone2: '',
+      language: `${i18n.language}_ES`
+    },
+    supply_point: {
+      cups: '',
+      status: false,
+      address: '',
+      verified: false
+    },
+    contract: {
+      rate: '',
+      power: ''
+    },
+    member: {
+      become_member: '',
+      invite_token: false
+    },
+    payment: {
+      iban: '',
+      sepa_accepted: false,
+      voluntary_cent: ''
+    },
+    privacy_policy_accepted: false,
+    terms_accepted: false
 
   }
 

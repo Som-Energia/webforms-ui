@@ -57,7 +57,7 @@ StepHeader Component
   background-color: rgba(150, 182, 51, 0.90);
   margin-left: -32px;
   min-width: 0%;
-  padding: 10px 8px 10px 32px;
+  padding: 8px 8px 8px 32px;
 }
 
 .header__text {
