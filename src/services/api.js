@@ -99,3 +99,44 @@ export const holderChange = async (data) => {
       return response?.data
     })
 }
+
+export const getRates = (data) => {
+  const rates = {
+    '2.0A': {
+      num_power_periods: 1,
+      min_power: 0,
+      max_power: 10
+    },
+    '2.0DHA': {
+      num_power_periods: 1,
+      min_power: 0,
+      max_power: 10
+    },
+    '2.0DHS': {
+      num_power_periods: 1,
+      min_power: 0,
+      max_power: 10
+    },
+    '2.1A': {
+      num_power_periods: 1,
+      min_power: 10.001,
+      max_power: 15
+    },
+    '2.1DHA': {
+      num_power_periods: 1,
+      min_power: 10.001,
+      max_power: 15
+    },
+    '2.1DHS': {
+      num_power_periods: 1,
+      min_power: 10.001,
+      max_power: 15
+    },
+    '3.0A': {
+      num_power_periods: 3,
+      min_power: 15.001,
+      max_power: 500
+    }
+  }
+  return rates
+}

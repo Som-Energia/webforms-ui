@@ -230,5 +230,18 @@
 
   "SUCCESS_TITLE": "Enhorabuena",
   "SUCCESS_TEXT": "Estamos tramitando el cambio de titularidad",
-  "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el cambio sea efectivo."
+  "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el cambio sea efectivo.",
+
+  "TARIFA_I_POTENCIA": "Tarifa y potencia",
+  "HELP_TARIFA_CANVI_COMERCIALITZADORA": "Para evitar problemas de tramitación, ponga <b>la misma tarifa y potencia que aparece en la factura actual</b>. Podrá solicitar el cambio de tarifa o potencia una vez esté el contrato activado con nosotros.",
+  "QUINA_POTENCIA_TENS_CONTRACTADA": "¿Qué potencia tienes contratada?",
+  "HELP_POPOVER_POWER": "Anota la potencia ACTUAL de tu contrato",
+  "QUINA_TARIFA_TENS_CONTRACTADA": "¿Qué tarifa tienes contratada?",
+  "CURRENT_RATE": "Selecciona la tarifa ACTUAL de tu contracto",
+  "SELECCIONAR": "Seleccionar",
+  "POWER_NO_MORE_THAN": "La potencia no puede ser superior a {{value}}kW",
+  "NO_FARE_CHOSEN": "No has especificado la tarifa",
+  "NO_POWER_CHOSEN": "No has especificado la potencia",
+  "NO_POWER_CHOSEN_P2": "No has especificado la potencia para el período P2",
+  "NO_POWER_CHOSEN_P3": "No has especificado la potencia para el período P3"
 }
