@@ -104,80 +104,62 @@ export const getRates = (data) => {
   const rates = {
     '2.0A': {
       num_power_periods: 1,
-      min_power: 0,
-      max_power: 10
+      min_power: { power: 0, num_periods_apply: 1 },
+      max_power: { power: 10, num_periods_apply: 1 }
     },
     '2.0DHA': {
       num_power_periods: 1,
-      min_power: 0,
-      max_power: 10
+      min_power: { power: 0, num_periods_apply: 1 },
+      max_power: { power: 10, num_periods_apply: 1 }
     },
     '2.0DHS': {
       num_power_periods: 1,
-      min_power: 0,
-      max_power: 10
+      min_power: { power: 0, num_periods_apply: 1 },
+      max_power: { power: 10, num_periods_apply: 1 }
     },
     '2.1A': {
       num_power_periods: 1,
-      min_power: 10.001,
-      max_power: 15
+      min_power: { power: 10.001, num_periods_apply: 1 },
+      max_power: { power: 15, num_periods_apply: 1 }
     },
     '2.1DHA': {
       num_power_periods: 1,
-      min_power: 10.001,
-      max_power: 15
+      min_power: { power: 10.001, num_periods_apply: 1 },
+      max_power: { power: 15, num_periods_apply: 1 }
     },
     '2.1DHS': {
       num_power_periods: 1,
-      min_power: 10.001,
-      max_power: 15
+      min_power: { power: 10.001, num_periods_apply: 1 },
+      max_power: { power: 15, num_periods_apply: 1 }
     },
     '3.0A': {
       num_power_periods: 3,
-      min_power: 15.001,
-      max_power: 500
+      min_power: { power: 15.001, num_periods_apply: 1 },
+      max_power: { power: 500, num_periods_apply: 3 }
     }
   }
+
   return rates
 }
 
+export const checkMemberVat = async (vat) => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}check/vat/${vat}`
+  })
+    .then(response => {
+      console.log(response)
+      return response?.data
+    })
+}
 
-
-
-const rates = {
-  '2.0A': {
-    num_power_periods: 1,
-    min_power: { power: 0, num_periods_apply: 1 },
-    max_power: { power: 10, num_periods_apply: 1 }
-  },
-  '2.0DHA': {
-    num_power_periods: 1,
-    min_power: { power: 0, num_periods_apply: 1 },
-    max_power: { power: 10, num_periods_apply: 1 }
-  },
-  '2.0DHS': {
-    num_power_periods: 1,
-    min_power: { power: 0, num_periods_apply: 1 },
-    max_power: { power: 10, num_periods_apply: 1 }
-  },
-  '2.1A': {
-    num_power_periods: 1,
-    min_power: { power: 10.001, num_periods_apply: 1 },
-    max_power: { power: 15, num_periods_apply: 1 }
-  },
-  '2.1DHA': {
-    num_power_periods: 1,
-    min_power: { power: 10.001, num_periods_apply: 1 },
-    max_power: { power: 15, num_periods_apply: 1 }
-  },
-  '2.1DHS': {
-    num_power_periods: 1,
-    min_power: { power: 10.001, num_periods_apply: 1 },
-    max_power: { power: 15, num_periods_apply: 1 }
-  },
-  '3.0A': {
-    num_power_periods: 3,
-    min_power: { power: 15.001, num_periods_apply: 1 },
-    max_power: { power: 500, num_periods_apply: 3 }
-  }
+export const checkMember = async (number, vat) => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}data/soci/${number}/${vat}`
+  })
+    .then(response => {
+      console.log(response)
+      return response?.data
+    })
 }
