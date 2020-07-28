@@ -17,6 +17,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
+import MemberIdentifier from './Contract/MemberIdentifier'
 import PowerFare from './Contract/PowerFare'
 import VoluntaryCent from './HolderChange/VoluntaryCent'
 import IBAN from './HolderChange/IBAN'
@@ -68,71 +69,93 @@ const Contract = (props) => {
     }
   }
 
+  const testPowerForPeriods = (rates, values, limit = 'min_power', createError) => {
+    const rate = values?.rate
+    let valids = 0
+    if (rates[rate] === undefined) return true
+    for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
+      const attr = (i === 1) ? 'power' : `power${i}`
+      const inLimit = limit.match('min') ? values[attr] >= rates[rate][limit]?.power : values[attr] <= rates[rate][limit]?.power
+      if (inLimit) valids++
+    }
+
+    if (valids >= rates[rate][limit]?.num_periods_apply) {
+      return true
+    }
+
+    const lessThan = rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply ? 'SOME_PERIOD_MORE_THAN' : 'POWER_NO_LESS_THAN'
+
+    return createError({
+      message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', { value: rates[rate][limit]?.power })
+    })
+  }
+
   const validationSchemas = [
+    Yup.object().shape({
+      member: Yup.object().shape({
+        number: Yup.string()
+          .required(t('NO_MEMBER_NUMBER')),
+        vat: Yup.string()
+          .required(t('NO_MEMBER_VAT')),
+        checked: Yup.bool()
+          .required(t('NO_MEMBER_MATCH'))
+          .oneOf([true], t('NO_MEMBER_MATCH'))
+      })
+    }),
     Yup.object().shape({
       contract: Yup.object().shape({
         rate: Yup.string()
           .required(t('NO_FARE_CHOSEN')),
         power: Yup.number()
           .required(t('NO_POWER_CHOSEN'))
-          .test('minPowerValue',
-            t('POWER_NO_LESS_THAN'),
-            function () {
-              return this.parent.power > rates[this.parent.rate]?.min_power
-            })
-          .test('maxPowerValue',
-            t('POWER_NO_MORE_THAN'),
-            function () {
-              return this.parent.power < rates[this.parent.rate]?.max_power
-            })
-          .test('nondomestic',
-            t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-            function () {
-              return !(this.parent.rate != '3.0A' && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
-            }),
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+            }
+          }),
         power2: Yup.number()
           .test('required',
             t('NO_POWER_CHOSEN_P2'),
             function () {
-              return !(rates[this.parent.rate]?.num_power_periods > 1 && this.parent.power2)
+              return rates[this.parent.rate]?.num_power_periods >= 2 ? this.parent.power2 : true
             })
-          .test('minPowerValue',
-            t('POWER_NO_LESS_THAN'),
-            function () {
-              return this.parent.power2 > rates[this.parent.rate]?.min_power
-            })
-          .test('maxPowerValue',
-            t('POWER_NO_MORE_THAN'),
-            function () {
-              return this.parent.power2 < rates[this.parent.rate]?.max_power
-            })
-          .test('nondomestic',
-            t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-            function () {
-              return !(this.parent.rate != '3.0A' && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
-            }),
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+            }
+          }),
         power3: Yup.number()
           .test('required',
             t('NO_POWER_CHOSEN_P3'),
             function () {
-              return rates[this.parent.rate]?.num_power_periods > 1 && this.parent.power3
+              return rates[this.parent.rate]?.num_power_periods >= 3 ? this.parent.power3 : true
             })
-          .test('minPowerValue',
-            t('POWER_NO_LESS_THAN'),
-            function () {
-              return this.parent.power3 > rates[this.parent.rate]?.min_power
-            })
-          .test('maxPowerValue',
-            t('POWER_NO_MORE_THAN'),
-            function () {
-              return this.parent.power3 < rates[this.parent.rate]?.max_power
-            })
-          .test('nondomestic',
-            t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-            function () {
-              console.log(this.parent.rate)
-              return !(this.parent.rate != '3.0A' && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
-            })
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+            }
+          })
       })
     }),
     Yup.object().shape({
@@ -157,20 +180,23 @@ const Contract = (props) => {
     })
   ]
 
-  const MAX_STEP_NUMBER = 3
+  const MAX_STEP_NUMBER = 4
 
   const getActiveStep = (props) => {
     return <>
       { activeStep === 0 &&
-        <PowerFare rates={rates} {...props} />
+        <MemberIdentifier {...props} />
       }
       { activeStep === 1 &&
-        <VoluntaryCent {...props} />
+        <PowerFare rates={rates} {...props} />
       }
       { activeStep === 2 &&
-        <IBAN {...props} />
+        <VoluntaryCent {...props} />
       }
       { activeStep === 3 &&
+        <IBAN {...props} />
+      }
+      { activeStep === 4 &&
         <Review {...props} />
       }
     </>
@@ -240,8 +266,10 @@ const Contract = (props) => {
       power3: ''
     },
     member: {
-      become_member: '',
-      invite_token: false
+      number: '',
+      vat: '',
+      full_name: '',
+      checked: false
     },
     payment: {
       iban: '',

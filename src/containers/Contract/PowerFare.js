@@ -10,9 +10,49 @@ import Typography from '@material-ui/core/Typography'
 
 import StepHeader from '../../components/StepHeader'
 
+const PowerInputs = (props) => {
+  const { t } = useTranslation()
+  const { values, handleBlur, errors, touched, numInputs = 1, setFieldValue } = props
+
+  const handleChangePower = (event, setFieldValue, { moreThan15Kw }) => {
+    const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
+    const regexMoreThan15 = /^\d*([.,'])?\d{0,3}/g
+    const regex = moreThan15Kw ? regexMoreThan15 : regexLessThan15
+
+    const match = regex.exec(event.target.value)
+    let result = match[0].replace(',', '.')
+    result = result.replace('\'', '.')
+
+    setFieldValue(event.target.name, result)
+  }
+
+  return Array.from(Array(numInputs).keys()).map(inputNum => {
+    const attr = (inputNum === 0) ? 'power' : `power${inputNum + 1}`
+    return (<TextField
+      required
+      key={attr}
+      id={attr}
+      name={`contract.${attr}`}
+      label={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
+      InputProps={{
+        endAdornment: <InputAdornment position="end">kW</InputAdornment>,
+        startAdornment: (numInputs > 1 ? (<InputAdornment position="start">{`P${inputNum + 1}`}</InputAdornment>) : null)
+      }}
+      onChange={event => handleChangePower(event, setFieldValue, { moreThan15Kw: true })}
+      onBlur={handleBlur}
+      value={values.contract[attr]}
+      fullWidth
+      variant="outlined"
+      margin="normal"
+      error={(errors?.contract && errors?.contract[attr] && touched?.contract && touched?.contract[attr])}
+      helperText={(touched?.contract && touched?.contract[attr] && errors.contract && errors?.contract[attr]) || t('HELP_POPOVER_POWER')}
+    />)
+  })
+}
+
 const PowerFare = (props) => {
   const { t } = useTranslation()
-  const { values, handleBlur, handleChange, setFieldValue, errors, touched, rates } = props
+  const { values, handleBlur, handleChange, errors, touched, rates } = props
 
   return (
     <>
@@ -42,64 +82,7 @@ const PowerFare = (props) => {
           }
         </TextField>
 
-        <TextField
-          required
-          id="power"
-          name="contract.power"
-          label={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
-          InputProps={{
-            endAdornment: <InputAdornment position="end">kW</InputAdornment>,
-            startAdornment: (rates[values.contract.rate]?.num_power_periods > 1 ? (<InputAdornment position="start">P1</InputAdornment>) : null)
-          }}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.contract.power}
-          fullWidth
-          variant="outlined"
-          margin="normal"
-          error={(errors?.contract?.power && touched?.contract?.power)}
-          helperText={(touched?.contract?.power && errors?.contract?.power) || t('HELP_POPOVER_POWER')}
-        />
-        { rates[values.contract.rate]?.num_power_periods > 1 &&
-          <TextField
-            required
-            id="power2"
-            name="contract.power2"
-            label={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">P2</InputAdornment>,
-              endAdornment: <InputAdornment position="end">kW</InputAdornment>
-            }}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.contract?.power2}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            error={(errors?.contract?.power2 && touched?.contract?.power2)}
-            helperText={(touched?.contract?.power2 && errors?.contract?.power2) || t('HELP_POPOVER_POWER')}
-          />
-        }
-        { rates[values.contract.rate]?.num_power_periods > 1 &&
-          <TextField
-            required
-            id="power3"
-            name="contract.power3"
-            label={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">P3</InputAdornment>,
-              endAdornment: <InputAdornment position="end">kW</InputAdornment>
-            }}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.contract?.power3}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            error={(errors?.contract?.power3 && touched?.contract?.power3)}
-            helperText={(touched?.contract?.power3 && errors?.contract?.power3) || t('HELP_POPOVER_POWER')}
-          />
-        }
+        <PowerInputs numInputs={rates[values.contract.rate]?.num_power_periods} {...props} />
       </Box>
     </>
   )
