@@ -140,3 +140,44 @@ export const getRates = (data) => {
   }
   return rates
 }
+
+
+
+
+const rates = {
+  '2.0A': {
+    num_power_periods: 1,
+    min_power: { power: 0, num_periods_apply: 1 },
+    max_power: { power: 10, num_periods_apply: 1 }
+  },
+  '2.0DHA': {
+    num_power_periods: 1,
+    min_power: { power: 0, num_periods_apply: 1 },
+    max_power: { power: 10, num_periods_apply: 1 }
+  },
+  '2.0DHS': {
+    num_power_periods: 1,
+    min_power: { power: 0, num_periods_apply: 1 },
+    max_power: { power: 10, num_periods_apply: 1 }
+  },
+  '2.1A': {
+    num_power_periods: 1,
+    min_power: { power: 10.001, num_periods_apply: 1 },
+    max_power: { power: 15, num_periods_apply: 1 }
+  },
+  '2.1DHA': {
+    num_power_periods: 1,
+    min_power: { power: 10.001, num_periods_apply: 1 },
+    max_power: { power: 15, num_periods_apply: 1 }
+  },
+  '2.1DHS': {
+    num_power_periods: 1,
+    min_power: { power: 10.001, num_periods_apply: 1 },
+    max_power: { power: 15, num_periods_apply: 1 }
+  },
+  '3.0A': {
+    num_power_periods: 3,
+    min_power: { power: 15.001, num_periods_apply: 1 },
+    max_power: { power: 500, num_periods_apply: 3 }
+  }
+}
