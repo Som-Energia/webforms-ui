@@ -84,6 +84,11 @@ const Contract = (props) => {
             t('POWER_NO_MORE_THAN'),
             function () {
               return this.parent.power < rates[this.parent.rate]?.max_power
+            })
+          .test('nondomestic',
+            t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+            function () {
+              return !(this.parent.rate != '3.0A' && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
             }),
         power2: Yup.number()
           .test('required',
@@ -100,6 +105,11 @@ const Contract = (props) => {
             t('POWER_NO_MORE_THAN'),
             function () {
               return this.parent.power2 < rates[this.parent.rate]?.max_power
+            })
+          .test('nondomestic',
+            t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+            function () {
+              return !(this.parent.rate != '3.0A' && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
             }),
         power3: Yup.number()
           .test('required',
@@ -116,6 +126,12 @@ const Contract = (props) => {
             t('POWER_NO_MORE_THAN'),
             function () {
               return this.parent.power3 < rates[this.parent.rate]?.max_power
+            })
+          .test('nondomestic',
+            t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+            function () {
+              console.log(this.parent.rate)
+              return !(this.parent.rate != '3.0A' && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
             })
       })
     }),
@@ -219,7 +235,9 @@ const Contract = (props) => {
     },
     contract: {
       rate: '',
-      power: ''
+      power: '',
+      power2: '',
+      power3: ''
     },
     member: {
       become_member: '',
