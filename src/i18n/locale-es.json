@@ -239,6 +239,8 @@
   "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu nº de socio/a?</a>.",
   "HELP_POPOVER_NIF": "Ejemplo NIF: 12345678P (con letra final)",
   "SOCIA_TROBADA": "Soci/a encontrado/a",
+  "NO_MEMBER_VAT": "No has introducido un NIF correcto",
+  "NO_MEMBER_NUMBER": "No has introducido un numero de socio/a",
 
   "TARIFA_I_POTENCIA": "Tarifa y potencia",
   "HELP_TARIFA_CANVI_COMERCIALITZADORA": "Para evitar problemas de tramitación, ponga <b>la misma tarifa y potencia que aparece en la factura actual</b>. Podrá solicitar el cambio de tarifa o potencia una vez esté el contrato activado con nosotros.",
