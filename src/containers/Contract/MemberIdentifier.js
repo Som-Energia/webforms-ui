@@ -43,6 +43,7 @@ const MemberIdentifier = (props) => {
         const member = await checkMember(values.member.number, values.member.vat)
         console.log(member)
         if (member?.data?.soci?.nom) {
+          setError(null)
           setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
           setFieldValue('member.checked', true)
         }
@@ -96,7 +97,7 @@ const MemberIdentifier = (props) => {
                   ? error ? t('API_ERROR') : <span
                     dangerouslySetInnerHTML={{ __html: t('HELP_POPOVER_SOCIA') }}
                   />
-                  : <span className={classes.memberChecked}>`${t('SOCIA_TROBADA')}: ${values?.member?.full_name}`</span>
+                  : <span className={classes.memberChecked}>{t('SOCIA_TROBADA')}: {values?.member?.full_name}</span>
                 )}
             />
           </Grid>

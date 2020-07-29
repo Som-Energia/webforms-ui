@@ -233,11 +233,11 @@
   "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el cambio sea efectivo.",
 
   "CONTRACT_TITLE": "Contratación",
-  "MEMBER_IDENTIFIER_DESC": "Introduce el numbero y el NIF del <b>socio tomador</b> del contrato.",
+  "MEMBER_IDENTIFIER_DESC": "<p>Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma.</p><p>Introduce el numbero y el NIF del <b>socio tomador</b> del contrato.</p>",
   "NUMERO_SOCI": "Número de socio/a",
   "VAT": "NIF",
   "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu nº de socio/a?</a>.",
-  "HELP_POPOVER_NIF": "Ejemplo NIF: 12345678P (con letra final)",
+  "HELP_POPOVER_NIF": "Ejemplo: 12345678P (con letra final)",
   "SOCIA_TROBADA": "Soci/a encontrado/a",
   "NO_MEMBER_VAT": "No has introducido un NIF correcto",
   "NO_MEMBER_NUMBER": "No has introducido un numero de socio/a",
