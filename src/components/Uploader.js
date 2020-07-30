@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { useTranslation } from 'react-i18next'
+import { makeStyles } from '@material-ui/core/styles'
 
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -20,9 +21,21 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import { uploadFile } from '../services/api'
 
+const useStyles = makeStyles((theme) => ({
+  input: {
+    '& input': {
+      color: 'rgba(0, 0, 0, 0.54)'
+    },
+    '& path': {
+      color: 'rgba(0, 0, 0, 0.54)'
+    }
+  }
+}))
+
 const Uploader = (props) => {
   const { name, callbackFn, fieldError, values } = props
   const { t } = useTranslation()
+  const classes = useStyles()
 
   const [uploads, setUploads] = useState([...values])
   const [inputKey, setInputKey] = useState(Date.now())
@@ -80,6 +93,7 @@ const Uploader = (props) => {
         key={inputKey}
         type="file"
         label=""
+        className={classes.input}
         required
         name={name}
         variant="outlined"
