@@ -1,4 +1,19 @@
 {
+  "member": {
+    "number": "38434",
+    "vat": "40323835M"
+  },
+  "supply_point": {
+    "cups": "ES0824987817389148BZ",
+    "has_service": false,
+    "address": "Pedro López",
+    "number": "13",
+    "postal_code": "17003",
+    "state": "20",
+    "city": "5386",
+    "is_housing": true,
+    "cnae": "9820"
+  },
   "fare20A": "2.0A",
   "fare21": "2.1DHA",
   "fare30A": "3.0A",

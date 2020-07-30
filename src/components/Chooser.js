@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   chooserItem: {
     display: 'block',
     cursor: 'pointer',
-    minHeight: '124px',
+    minHeight: '100px',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(3),
@@ -46,6 +46,15 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(150, 182, 51, 0.08)'
     }
   },
+  chooserItemDisabled: {
+    cursor: 'not-allowed',
+    color: 'rgba(0, 0, 0, 0.54)',
+    '&:hover': {
+      border: '2px solid rgba(0, 0, 0, 0.12)',
+      backgroundColor: 'inherit'
+    }
+
+  },
   chooserItemTitle: {
     display: 'flex',
     alignItems: 'center'
@@ -58,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Chooser = (props) => {
   const classes = useStyles()
-  const { question, options, onChange, value } = props
+  const { question, options, onChange, value, disabled } = props
 
   const [selectedOption, setSelectedOption] = useState(value)
 
@@ -83,11 +92,12 @@ const Chooser = (props) => {
           { options.map((option, index) =>
             <Grid key={index} item xs={12} sm={6}>
               <label
-                onClick={event => handleClick(event, option.value)}
-                className={clsx(classes.chooserItem, selectedOption === option.value && classes.chooserItemSelected)}
+                data-cy={`option${index}`}
+                onClick={event => !disabled && handleClick(event, option.value)}
+                className={clsx(classes.chooserItem, selectedOption === option.value && classes.chooserItemSelected, disabled && classes.chooserItemDisabled)}
               >
                 <div className={classes.chooserItemTitle}>
-                  <Radio value={option.value} color="primary" checked={selectedOption === option.value} />
+                  <Radio disabled={disabled} value={option.value} color="primary" checked={selectedOption === option.value} />
                   <Typography>{option.label}</Typography>
                 </div>
                 <FormHelperText className={classes.chooserItemDesc} dangerouslySetInnerHTML={{ __html: option.description }} />

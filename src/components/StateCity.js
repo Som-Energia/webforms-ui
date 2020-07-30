@@ -11,7 +11,7 @@ import { getProvincies, getMunicipis } from '../services/api'
 
 const StateCity = (props) => {
   const { t } = useTranslation()
-  const { stateName, stateId, stateInitial, cityName, cityId, cityInitial, stateError, stateHelperText, cityError, cityHelperText, onChange } = props
+  const { stateName, stateId, stateInitial, cityName, cityId, cityInitial, stateError, stateHelperText, cityError, cityHelperText, onChange, onBlur } = props
 
   const [state, setState] = useState(stateInitial)
   const [states, setStates] = useState([])
@@ -27,7 +27,10 @@ const StateCity = (props) => {
     getProvincies()
       .then(response => {
         const provincies = {}
-        const aux = response?.data?.provincies.map(({ id, name }) => provincies[id] = name)
+        response?.data?.provincies &&
+          response.data.provincies.forEach(({ id, name }) => {
+            provincies[id] = name
+          })
         setStates(provincies)
         setIsLoadingStates(false)
       }).catch(error => {
@@ -42,9 +45,10 @@ const StateCity = (props) => {
       getMunicipis(state.id)
         .then(response => {
           const municipisNames = {}
-          const aux = response?.data?.municipis.map(({ id, name }) => {
-            municipisNames[id] = name
-          })
+          response?.data?.municipis &&
+            response.data.municipis.forEach(({ id, name }) => {
+              municipisNames[id] = name
+            })
           setCities(response?.data?.municipis)
           setCitiesNames(municipisNames)
           setIsLoadingCities(false)
@@ -86,6 +90,7 @@ const StateCity = (props) => {
           label={t('STATE')}
           variant="outlined"
           onChange={handleStateChange}
+          onBlur={onBlur}
           required
           fullWidth
           disabled={!Object.keys(states).length}
@@ -115,6 +120,7 @@ const StateCity = (props) => {
           label={t('CITY')}
           variant="outlined"
           onChange={handleCityChange}
+          onBlur={onBlur}
           required
           fullWidth
           disabled={!Object.keys(cities).length}

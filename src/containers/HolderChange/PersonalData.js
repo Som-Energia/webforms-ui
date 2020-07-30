@@ -36,9 +36,8 @@ function PersonalData (props) {
   }
 
   const onChangeStateCity = ({ state, city }) => {
-    setFieldValue('holder.state', state)
+    setFieldValue('holder.state', state, false)
     setFieldValue('holder.city', city)
-    validateForm()
   }
 
   const handleClick = (event) => {
@@ -241,7 +240,6 @@ function PersonalData (props) {
             fullWidth
             value={values?.holder?.email2}
             onChange={handleChange}
-            onBlur={handleBlur}
             error={errors?.holder?.email2 && touched?.holder?.email2}
             helperText={(touched?.holder?.email2 && errors?.holder?.email2)}
           />

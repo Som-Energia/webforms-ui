@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     '& div': {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'flex-end',
+      justifyContent: 'flex-end'
     }
   },
   main: {
@@ -247,7 +247,7 @@ const SomSolet = () => {
     {
       id: 'preinforme',
       title: 'Pre-Informe',
-      content: <>Descarrega el <a href="#">pre-informe</a></>
+      content: <>Descarrega el pre-informe</>
     },
     {
       id: 'datetechnicalvisit',
@@ -325,9 +325,9 @@ const SomSolet = () => {
 
   const classes = useStyles()
   const [activeOption, setActiveOption] = useState(0)
-  const [currentPhase, setCurrentPhase] = useState('preinforme')
-  const [prevPhase, setPrevPhase] = useState('about')
-  const [nextPhase, setNextPhase] = useState('datetechnicalvisit')
+  const [currentPhase] = useState('preinforme')
+  const [prevPhase] = useState('about')
+  const [nextPhase] = useState('datetechnicalvisit')
   let afterCurrent = false
 
   return (
@@ -393,7 +393,7 @@ const SomSolet = () => {
               <h2>Gir Solar</h2>
               <div className={classes.mainHeaderInfo}>
                 <div><RoomOutlinedIcon fontSize="small" />&nbsp;Alt Empordà, Baix Empordà, Garrotxa, Gironès i Pla de l’Estany</div>
-                <div><WbSunnyOutlinedIcon fontSize="small" />&nbsp;150 instal·lacions &nbsp;<SettingsOutlinedIcon fontSize="small" />&nbsp;<a href="#">Audit Energia</a></div>
+                <div><WbSunnyOutlinedIcon fontSize="small" />&nbsp;150 instal·lacions &nbsp;<SettingsOutlinedIcon fontSize="small" />&nbsp;Audit Energia</div>
               </div>
             </div>
             <div className={clsx(classes.column, classes.main)}>

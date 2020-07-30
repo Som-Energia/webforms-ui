@@ -58,7 +58,7 @@ const MemberIdentifier = (props) => {
       values?.member?.vat && values.member.vat.length >= 8) {
       checkIsMember()
     }
-  }, [values.member.number, values.member.vat])
+  }, [values.member.number, values.member.vat, setFieldValue])
 
   return (
     <>

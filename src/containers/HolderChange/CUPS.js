@@ -61,7 +61,7 @@ function CUPS (props) {
     } else {
       setFieldValue('supply_point.status', 'error')
     }
-  }, [values.supply_point.cups, setFieldValue, validateForm])
+  }, [values.supply_point.cups, setFieldValue, validateForm, setTouched])
 
   const CupsHelperText = () => (
     <a
