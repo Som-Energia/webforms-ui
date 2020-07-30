@@ -18,12 +18,16 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
 import MemberIdentifier from './Contract/MemberIdentifier'
+import CUPS from './Contract/CUPS'
+import SupplyPoint from './Contract/SupplyPoint'
 import PowerFare from './Contract/PowerFare'
 import VoluntaryCent from './HolderChange/VoluntaryCent'
 import IBAN from './HolderChange/IBAN'
 import Review from './Contract/Review'
 
 import { getRates } from '../services/api'
+import { CNAE_HOUSING } from '../services/utils'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +59,7 @@ const Contract = (props) => {
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result, setResult] = useState({})
+  const [result] = useState({})
 
   const [rates] = useState(getRates())
 
@@ -100,6 +104,56 @@ const Contract = (props) => {
         checked: Yup.bool()
           .required(t('NO_MEMBER_MATCH'))
           .oneOf([true], t('NO_MEMBER_MATCH'))
+      })
+    }),
+    Yup.object().shape({
+      supply_point: Yup.object().shape({
+        cups: Yup.string()
+          .required(t('CUPS_INVALID'))
+          .min(18, t('CUPS_INVALID'))
+          .test('statusError',
+            t('CUPS_INVALID'),
+            function () { return !(this.parent.status === 'error') })
+          .test('statusError',
+            t('CUPS_IN_PROCESS'),
+            function () { return !(this.parent.status === 'busy') })
+          .test('statusNew',
+            t('CUPS_SHOULD_BE_ACTIVE'),
+            function () { return !(this.parent.status === 'active') })
+          .test('statusInvalid',
+            t('INVALID_SUPPLY_POINT_CUPS'),
+            function () { return !(this.parent.status === 'invalid') }),
+        has_service: Yup.bool()
+          .required(t('UNSELECTED_NEW_SUPPLY_POINT'))
+          .oneOf([true, false], t('UNSELECTED_NEW_SUPPLY_POINT'))
+      })
+    }),
+    Yup.object().shape({
+      supply_point: Yup.object().shape({
+        address: Yup.string()
+          .required(t('NO_ADDRESS')),
+        number: Yup.string()
+          .required(t('NO_NUMBER')),
+        postal_code: Yup.string()
+          .matches(/^\d*$/, t('NO_POSTALCODE'))
+          .required(t('NO_POSTALCODE'))
+          .min(5, t('NO_POSTALCODE')),
+        state: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_STATE'))
+        }),
+        city: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_CITY'))
+        }),
+        is_housing: Yup.bool()
+          .oneOf([true, false], t('NO_IS_HOUSING')),
+        cnae: Yup.string()
+          .required(t('INVALID_SUPPLY_POINT_CNAE'))
+          .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
+          .test('CnaeNoHousing',
+            t('INVALID_CNAE_NO_HOUSING'),
+            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) })
       })
     }),
     Yup.object().shape({
@@ -180,7 +234,7 @@ const Contract = (props) => {
     })
   ]
 
-  const MAX_STEP_NUMBER = 4
+  const MAX_STEP_NUMBER = 6
 
   const getActiveStep = (props) => {
     return <>
@@ -188,15 +242,21 @@ const Contract = (props) => {
         <MemberIdentifier {...props} />
       }
       { activeStep === 1 &&
-        <PowerFare rates={rates} {...props} />
+        <CUPS {...props} />
       }
       { activeStep === 2 &&
-        <VoluntaryCent {...props} />
+        <SupplyPoint {...props} />
       }
       { activeStep === 3 &&
-        <IBAN {...props} />
+        <PowerFare rates={rates} {...props} />
       }
       { activeStep === 4 &&
+        <VoluntaryCent {...props} />
+      }
+      { activeStep === 5 &&
+        <IBAN {...props} />
+      }
+      { activeStep === 6 &&
         <Review {...props} />
       }
     </>
@@ -238,8 +298,6 @@ const Contract = (props) => {
       vatvalid: false,
       isphisical: true,
       proxynif_valid: false,
-      state: { id: '' },
-      city: { id: '' },
       proxynif: '',
       proxyname: '',
       name: '',
@@ -254,10 +312,19 @@ const Contract = (props) => {
       language: `${i18n.language}_ES`
     },
     supply_point: {
-      cups: '',
+      cups: 'ES0824987817389148BZ',
       status: false,
+      has_service: '',
       address: '',
-      verified: false
+      number: '',
+      floor: '',
+      door: '',
+      postal_code: '',
+      state: { id: '' },
+      city: { id: '' },
+      is_housing: '',
+      cnae: '',
+      attachments: []
     },
     contract: {
       rate: '',
@@ -266,8 +333,8 @@ const Contract = (props) => {
       power3: ''
     },
     member: {
-      number: '',
-      vat: '',
+      number: '38434',
+      vat: '40323835M',
       full_name: '',
       checked: false
     },
@@ -278,7 +345,6 @@ const Contract = (props) => {
     },
     privacy_policy_accepted: false,
     terms_accepted: false
-
   }
 
   const handlePost = async (values) => {

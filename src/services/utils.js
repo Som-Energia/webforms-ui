@@ -1,5 +1,7 @@
 const THOUSANDS_CONVERSION_FACTOR = 1000
 
+export const CNAE_HOUSING = '9820'
+
 export const languages = {
   es_ES: 'Español',
   ca_ES: 'Català'
