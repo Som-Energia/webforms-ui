@@ -337,7 +337,7 @@ const Contract = (props) => {
       language: `${i18n.language}_ES`
     },
     supply_point: {
-      cups: 'ES0824987817389148BZ',
+      cups: '',
       status: false,
       has_service: '',
       address: '',
@@ -358,8 +358,8 @@ const Contract = (props) => {
       power3: ''
     },
     member: {
-      number: '38434',
-      vat: '40323835M',
+      number: '',
+      vat: '',
       full_name: '',
       checked: false
     },
