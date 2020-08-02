@@ -1,17 +1,33 @@
 {
+  "holder": {
+    "vat": "58291270R",
+    "previousHolder": false,
+    "name": "David",
+    "surname1": "Palomo",
+    "surname2": "Romero",
+    "postalCode": "17003",
+    "address": "Percebe, nº 13",
+    "stateCode": "20",
+    "cityCode": "5386",
+    "email": "david.palomo@somenergia.coop",
+    "phone": "636696969",
+    "language": "ca_ES",
+    "voluntaryCent": true,
+    "iban": "ES77 1234 1234 1612 3456 7890"
+  },
   "member": {
     "number": "38434",
     "vat": "40323835M"
   },
-  "supply_point": {
+  "supplyPoint": {
     "cups": "ES0824987817389148BZ",
-    "has_service": false,
+    "hasService": true,
     "address": "Pedro López",
     "number": "13",
-    "postal_code": "17003",
+    "postalCode": "17003",
     "state": "20",
     "city": "5386",
-    "is_housing": true,
+    "isHousing": true,
     "cnae": "9820"
   },
   "fare20A": "2.0A",
