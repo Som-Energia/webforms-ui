@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { makeStyles } from '@material-ui/core/styles'
+
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -23,8 +25,17 @@ import { languages } from '../../services/utils'
 
 import generalTerms from '../../data/HolderChange/generalterms'
 
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    '& path': {
+      color: 'rgba(0, 0, 0, 0.54)'
+    }
+  }
+}))
+
 function PersonalData (props) {
   const { t } = useTranslation()
+  const classes = useStyles()
   const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched } = props
 
   const [open, setOpen] = useState(false)
@@ -157,6 +168,7 @@ function PersonalData (props) {
             id="holder_address"
             name="holder.address"
             label={t('HOLDER_ADDRESS')}
+            className={classes.icon}
             required
             variant="outlined"
             InputProps={{
@@ -207,6 +219,7 @@ function PersonalData (props) {
           <TextField
             id="holder_email"
             name="holder.email"
+            className={classes.icon}
             label={t('HOLDER_EMAIL')}
             variant="outlined"
             InputProps={{
@@ -228,6 +241,7 @@ function PersonalData (props) {
           <TextField
             id="holder_email2"
             name="holder.email2"
+            className={classes.icon}
             label={t('HOLDER_EMAIL_2')}
             variant="outlined"
             InputProps={{
@@ -248,6 +262,7 @@ function PersonalData (props) {
           <TextField
             id="holder_phone"
             name="holder.phone1"
+            className={classes.icon}
             label={t('HOLDER_PHONE')}
             variant="outlined"
             InputProps={{
@@ -269,6 +284,7 @@ function PersonalData (props) {
           <TextField
             id="holder_phone2"
             name="holder.phone2"
+            className={classes.icon}
             label={t('HOLDER_PHONE_2')}
             variant="outlined"
             InputProps={{
@@ -291,6 +307,7 @@ function PersonalData (props) {
             select
             required
             fullWidth
+            className={classes.icon}
             id="holder_lang"
             name="holder.language"
             label={t('LANGUAGE')}

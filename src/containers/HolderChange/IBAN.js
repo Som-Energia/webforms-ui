@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { makeStyles } from '@material-ui/core/styles'
+
 import { checkIban } from '../../services/api'
 
 import Box from '@material-ui/core/Box'
@@ -18,8 +20,17 @@ import TermsDialog from '../../components/TermsDialog'
 
 import generalTerms from '../../data/HolderChange/generalterms'
 
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    '& path': {
+      color: 'rgba(0, 0, 0, 0.54)'
+    }
+  }
+}))
+
 function IBAN (props) {
   const { t } = useTranslation()
+  const classes = useStyles()
   const { values, handleBlur, setFieldValue, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
@@ -77,6 +88,7 @@ function IBAN (props) {
       <Box mt={5} mb={1}>
         <TextField
           id="iban"
+          className={classes.icon}
           label={t('IBAN_LABEL')}
           name="payment.iban"
           value={values.payment.iban}
