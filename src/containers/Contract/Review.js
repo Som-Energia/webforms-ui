@@ -127,16 +127,16 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
-          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
-          <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
           <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
           <ReviewField label={t('EMAIL')} value={values?.holder?.email} />
           <ReviewField label={t('LANGUAGE')} value={languages[values?.holder?.language]} />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
+          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+          <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
         </Grid>
 
         <Grid item xs={12}>

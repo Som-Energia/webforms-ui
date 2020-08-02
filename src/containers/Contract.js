@@ -230,7 +230,59 @@ const Contract = (props) => {
       })
     }),
     Yup.object().shape({
-
+      holder: Yup.object().shape({
+        name: Yup.string()
+          .required(t('NO_NAME')),
+        surname1: Yup.string()
+          .when('isphisical', {
+            is: true,
+            then: Yup.string()
+              .required(t('NO_SURNAME1'))
+          }),
+        proxyname: Yup.string()
+          .when('isphisical', {
+            is: false,
+            then: Yup.string()
+              .required(t('NO_PROXY_NAME'))
+          }),
+        proxynif: Yup.string()
+          .when('isphisical', {
+            is: false,
+            then: Yup.string()
+              .required(t('NO_PROXY_NIF'))
+          }),
+        proxynif_valid: Yup.bool()
+          .when('isphisical', {
+            is: false,
+            then: Yup.bool().required(t('FILL_NIF'))
+              .oneOf([true], t('FILL_NIF'))
+          }),
+        address: Yup.string()
+          .required(t('NO_ADDRESS')),
+        postal_code: Yup.string()
+          .matches(/^\d*$/, t('NO_POSTALCODE'))
+          .required(t('NO_POSTALCODE')),
+        state: Yup.string()
+          .required(t('NO_STATE')),
+        city: Yup.string()
+          .required(t('NO_CITY')),
+        email: Yup.string()
+          .required(t('NO_EMAIL'))
+          .email(t('NO_EMAIL')),
+        email2: Yup.string()
+          .test('repeatEmail',
+            t('NO_REPEATED_EMAIL'),
+            function () {
+              return this.parent.email === this.parent.email2
+            }),
+        phone1: Yup.string()
+          .min(9, t('NO_PHONE'))
+          .required(t('NO_PHONE')),
+        language: Yup.string().required(t('NO_LANGUAGE'))
+      }),
+      privacy_policy_accepted: Yup.bool()
+        .required(t('UNACCEPTED_PRIVACY_POLICY'))
+        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
