@@ -87,9 +87,8 @@ const Review = (props) => {
       />
       <Grid container>
         <Grid item xs={12}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PROCESS')}</Typography>
-          <ReviewField label={t('PROCESS_TYPE')} value={ values?.supply_point?.has_service
-            ? (values?.holder?.previous_holder ? t('CANVI_DE_COMERCIALITZADORA') : t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')) : t('ALTA') } />
+          <Typography className={classes.sectionTitle} variant="h6">{ values?.supply_point?.has_service
+            ? (values?.holder?.previous_holder ? t('CANVI_DE_COMERCIALITZADORA') : t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')) : t('ALTA') }</Typography>
           <ReviewField label={t('RELATED_MEMBER')} value={`${values?.member?.full_name}`} />
         </Grid>
 
