@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
+
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { makeStyles } from '@material-ui/core/styles'
+
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
+
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
@@ -29,8 +33,6 @@ import Review from './Contract/Review'
 
 import { getRates } from '../services/api'
 import { CNAE_HOUSING } from '../services/utils'
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -411,6 +413,7 @@ const Contract = (props) => {
                 <Form className={classes.root} noValidate>
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
+                      <LinearProgress variant="determinate" value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
                       <Box mx={4} mb={3}>
                         { completed
                           ? error
