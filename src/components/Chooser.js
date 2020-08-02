@@ -92,7 +92,7 @@ const Chooser = (props) => {
           { options.map((option, index) =>
             <Grid key={index} item xs={12} sm={6}>
               <label
-                data-cy={`option${index}`}
+                data-value={option.value}
                 onClick={event => !disabled && handleClick(event, option.value)}
                 className={clsx(classes.chooserItem, selectedOption === option.value && classes.chooserItemSelected, disabled && classes.chooserItemDisabled)}
               >

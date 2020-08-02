@@ -233,7 +233,7 @@
   "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el cambio sea efectivo.",
 
   "CONTRACT_TITLE": "Contratación",
-  "MEMBER_IDENTIFIER_DESC": "<p>Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma.</p><p>Introduce el numbero y el NIF del <b>socio tomador</b> del contrato.</p>",
+  "MEMBER_IDENTIFIER_DESC": "<p>Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma.</p><p>Introduce el <b>número y NIF del socio tomador</b> del contrato.</p>",
   "NUMERO_SOCI": "Número de socio/a",
   "VAT": "NIF",
   "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu nº de socio/a?</a>.",
@@ -243,7 +243,7 @@
   "NO_MEMBER_NUMBER": "No has introducido un numero de socio/a",
 
   "CUPS_TITLE": "Identifica el punto de suministro",
-  "FILL_CUPS": "Indica el código CUPS (Código Universal de Punto de Suministro):",
+  "FILL_CUPS": "Indica el código <b>CUPS</b> (Código Universal de Punto de Suministro):",
   "CUPS_LABEL": "CUPS",
   "CUPS_HELP": "¿Dónde puedo encontrar el código CUPS?",
   "CUPS_HELP_URL": "https://es.support.somenergia.coop/article/210-que-es-el-cups",
@@ -269,7 +269,7 @@
   "NO_IS_HOUSING": "No has especificado si la dirección corresponde a una vivienda",
   "INVALID_SUPPLY_POINT_CNAE": "No has especificado un código CNAE válido",
   "INVALID_CNAE_NO_HOUSING": "El punto de suministro no es una vivienda, el CNAE no puede ser 9820",
-  "ADJUNTAR_ULTIMA_FACTURA": "Adjuntar la última factura eléctrica",
+  "ADJUNTAR_ULTIMA_FACTURA": "Adjuntar la última factura eléctrica (opcional)",
 
   "TARIFA_I_POTENCIA": "Tarifa y potencia",
   "HELP_TARIFA_CANVI_COMERCIALITZADORA": "Para evitar problemas de tramitación, ponga <b>la misma tarifa y potencia que aparece en la factura actual</b>. Podrá solicitar el cambio de tarifa o potencia una vez esté el contrato activado con nosotros.",
@@ -284,5 +284,19 @@
   "NO_POWER_CHOSEN_P3": "No has especificado la potencia para el período P3",
   "POWER_NO_LESS_THAN": "La potencia debe ser superior a {{value}}kW",
   "POWER_NO_MORE_THAN": "La potencia debe ser inferior a {{value}}kW",
-  "SOME_PERIOD_MORE_THAN": "Alguno de los periodos debe ser superior a {{value}}kW"
+  "SOME_PERIOD_MORE_THAN": "Alguno de los periodos debe ser superior a {{value}}kW",
+
+  "HOLDER_IDENTIFIER_TITLE": "Identificación del titular",
+  "HOLDER_IDENTIFIER_DESC": "<p>Introduce el <b>NIF de la persona o entidad jurídica que será la titular</b> del contrato:</p>",
+  "PREVIOUS_HOLDER": "¿Eras el titular con la anterior distribuidora?",
+  "FILL_PREVIOUS_HOLDER": "No has especificado si era el titular con la anterior distribuidora",
+  "PREVIOUS_HOLDER_YES_LABEL": "Sí, era la persona titular",
+  "PREVIOUS_HOLDER_NO_LABEL": "No, no era la persona titular",
+  "PREVIOUS_HOLDER_YES_DESC": "Era la persona titular del contrato con la anterior distribuidora",
+  "PREVIOUS_HOLDER_NO_DESC": "No era la persona titular del contrato con la anterior distribuidora",
+
+  "ALTA": "Alta de un punto sin suministro",
+  "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Cambio de comercializadora modificando la persona titular",
+  "CANVI_DE_COMERCIALITZADORA": "Cambio de comercializadora manteniendo la persona titular"
+
 }
