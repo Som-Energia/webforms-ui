@@ -21,12 +21,15 @@ import MemberIdentifier from './Contract/MemberIdentifier'
 import CUPS from './Contract/CUPS'
 import SupplyPoint from './Contract/SupplyPoint'
 import PowerFare from './Contract/PowerFare'
+import HolderIdentifier from './Contract/HolderIdentifier'
+import PersonalData from './HolderChange/PersonalData'
 import VoluntaryCent from './HolderChange/VoluntaryCent'
 import IBAN from './HolderChange/IBAN'
 import Review from './Contract/Review'
 
 import { getRates } from '../services/api'
 import { CNAE_HOUSING } from '../services/utils'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -213,6 +216,21 @@ const Contract = (props) => {
       })
     }),
     Yup.object().shape({
+      holder: Yup.object().shape({
+        previous_holder: Yup.bool()
+          .required(t('FILL_PREVIOUS_HOLDER'))
+          .oneOf([true, false], t('FILL_PREVIOUS_HOLDER')),
+        vat: Yup.string()
+          .required(t('FILL_NIF')),
+        vatvalid: Yup.bool()
+          .required(t('FILL_NIF'))
+          .oneOf([true], t('FILL_NIF'))
+      })
+    }),
+    Yup.object().shape({
+
+    }),
+    Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
           .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
@@ -234,7 +252,7 @@ const Contract = (props) => {
     })
   ]
 
-  const MAX_STEP_NUMBER = 6
+  const MAX_STEP_NUMBER = 8
 
   const getActiveStep = (props) => {
     return <>
@@ -251,12 +269,18 @@ const Contract = (props) => {
         <PowerFare rates={rates} {...props} />
       }
       { activeStep === 4 &&
-        <VoluntaryCent {...props} />
+        <HolderIdentifier {...props} />
       }
       { activeStep === 5 &&
-        <IBAN {...props} />
+        <PersonalData {...props} />
       }
       { activeStep === 6 &&
+        <VoluntaryCent {...props} />
+      }
+      { activeStep === 7 &&
+        <IBAN {...props} />
+      }
+      { activeStep === 8 &&
         <Review {...props} />
       }
     </>
@@ -296,6 +320,7 @@ const Contract = (props) => {
     holder: {
       vat: '',
       vatvalid: false,
+      previous_holder: '',
       isphisical: true,
       proxynif_valid: false,
       proxynif: '',

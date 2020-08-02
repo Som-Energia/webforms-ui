@@ -86,18 +86,31 @@ const Review = (props) => {
         dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
       />
       <Grid container>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PROCESS')}</Typography>
-          <ReviewField label={t('PROCESS_TYPE')} value={t('PROCESS_TYPE_CONTRACT')} />
-          <ReviewField label={t('RELATED_MEMBER')} value={ values?.member?.become_member === false ? t('RELATED_MEMBER_PENDING') : (`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`)} />
+          <ReviewField label={t('PROCESS_TYPE')} value={ values?.supply_point?.has_service
+            ? (values?.holder?.previous_holder ? t('CANVI_DE_COMERCIALITZADORA') : t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')) : t('ALTA') } />
+          <ReviewField label={t('RELATED_MEMBER')} value={`${values?.member?.full_name}`} />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUPPLY')}</Typography>
           <ReviewField label={t('CUPS_LABEL')} value={values?.supply_point?.cups} />
-          <ReviewField label={t('ADDRESS')} value={values?.supply_point?.address} />
-          <ReviewField label={t('CITY')} value={values?.supply_point?.city} />
+          <ReviewField
+            label={t('ADDRESS')}
+            value={`${values?.supply_point?.address}, ${values?.supply_point?.number} ${values?.supply_point?.floor} ${values?.supply_point?.door}`}
+          />
+          <ReviewField label={t('CITY')} value={`${values?.supply_point?.city.name} (${values?.supply_point?.postal_code}) ${values?.supply_point?.state.name}`} />
           <ReviewField label={t('CNAE')} value={values?.supply_point?.cnae} />
         </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_TECHNICAL')}</Typography>
+          <ReviewField label={t('FARE')} value={t('FARE_SAME')} />
+          <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
+          <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }} />
+        </Grid>
+
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('HOLDER')}</Typography>
           <ReviewField label={'NIF'} value={values?.holder?.vat} />
@@ -113,26 +126,24 @@ const Review = (props) => {
           <ReviewField label={t('ADDRESS')} value={values?.holder?.address} />
           <ReviewField label={t('CITY')} value={`${values?.holder?.city.name} (${values?.holder?.postal_code}) ${values?.holder?.state.name}`} />
         </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
+          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+          <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
+        </Grid>
+
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
           <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
           <ReviewField label={t('EMAIL')} value={values?.holder?.email} />
           <ReviewField label={t('LANGUAGE')} value={languages[values?.holder?.language]} />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_TECHNICAL')}</Typography>
-          <ReviewField label={t('FARE')} value={t('FARE_SAME')} />
-          <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
-          <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
-          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
-          <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
-        </Grid>
+
         <Grid item xs={12}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PRICES')}</Typography>
         </Grid>
+
       </Grid>
 
       <TermsDialog
