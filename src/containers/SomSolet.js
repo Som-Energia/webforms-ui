@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -17,6 +17,12 @@ import RedoOutlinedIcon from '@material-ui/icons/RedoOutlined'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import UndoOutlinedIcon from '@material-ui/icons/UndoOutlined'
 import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined'
+
+import Loading from '../components/Loading'
+
+// services
+import { getCampaign, getProject } from '../services/api'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    paddingBottom: '16px',
     flexWrap: 'wrap',
     '& h2': {
       fontSize: '32px',
@@ -86,10 +91,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.85rem',
     lineHeight: '1.25rem',
     '& div': {
-      display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end'
     }
+  },
+  engineeringInfo: {
+    display: 'flex',
+    paddingTop: '8px'
   },
   main: {
     marginTop: theme.spacing(2),
@@ -174,15 +182,15 @@ const OptionField = ({ label, value }) => {
   )
 }
 
-const SupplyPoint = () => {
+const SupplyPoint = (props) => {
+  const { supplyPointInfo } = props
   const supplypoint = {
-    CUPS: 'ES0031406238503002SCX',
-    Direcció: 'Tramuntana, 4, 1r 1a',
-    Població: 'Fornells de la Selva',
-    'Potència contractada': '4.6 kW',
-    'Tarifa d\'accès': '2.0 DHA'
+    CUPS: supplyPointInfo.cups,
+    Direcció: supplyPointInfo.address?.street,
+    Població: `${supplyPointInfo.address?.town} (${supplyPointInfo.address?.municipality})`,
+    'Potència contractada': `${supplyPointInfo.power} kW`,
+    'Tarifa d\'accès': supplyPointInfo.tariff
   }
-
   return (
     Object.entries(supplypoint)
       .map(([label, value]) => (
@@ -191,152 +199,198 @@ const SupplyPoint = () => {
   )
 }
 
-const SomSolet = () => {
-  const optionsList = [
-    {
-      id: 'supplypoint',
-      title: 'Punt de suministrament',
-      content: <SupplyPoint />
-    },
-    {
-      id: 'project',
-      title: 'Projecte',
-      content: <></>
-    },
-    {
-      id: 'person',
-      title: 'Persona inscrita',
-      content: <></>
-    },
-    {
-      id: 'inscription',
-      title: 'Inscripció inicial',
-      content: <></>
-    },
-    {
-      id: 'final',
-      title: 'Proposta final',
-      content: <></>
-    }
-  ]
+const Project = (props) => {
+  const { projectInfo } = props
+  const project = {
+    Nom: projectInfo.name,
+    Campanya: projectInfo.campaign,
+    'Data inici': projectInfo.dateStart
+  }
+  return (
+    Object.entries(project)
+      .map(([label, value]) => (
+        <OptionField key={label} label={label} value={value} />
+      ))
+  )
+}
 
-  const getPhase = (phasesList, phaseId, withContent = false) => {
-    const { title, content } = phasesList.find(({ id }) => phaseId === id)
+const RegisteredPerson = (props) => {
+  const { registeredPersonInfo } = props
+  const registeredPerson = {
+    Nom: registeredPersonInfo.name,
+    Email: registeredPersonInfo.email,
+    Telèfon: registeredPersonInfo.phoneNumber,
+    Idioma: registeredPersonInfo.language
+  }
+  return (
+    Object.entries(registeredPerson)
+      .map(([label, value]) => (
+        <OptionField key={label} label={label} value={value} />
+      ))
+  )
+}
+
+const Preregistration = (props) => {
+  const { preregistrationInfo } = props
+  const preregisrtation = {
+    Data: preregistrationInfo.date,
+    Pagat: preregistrationInfo.paid ? "Sí" : "No"
+  }
+  return (
+    Object.entries(preregisrtation)
+      .map(([label, value]) => (
+        <OptionField key={label} label={label} value={value} />
+      ))
+  )
+}
+
+const Registered = (props) => {
+  const { registeredInfo } = props
+  const registered = {
+    Data: registeredInfo.date
+  }
+  return (
+    Object.entries(registered)
+      .map(([label, value]) => (
+        <OptionField key={label} label={label} value={value} />
+      ))
+  )
+}
+
+const SomSolet = (props) => {
+
+  // const { stageInitial } = props
+
+  const classes = useStyles()
+  const [stages, setStages] = useState([])
+  const [campaign, setCampaign] = useState([])
+  const [isLoadingCampaign, setIsLoadingCampaign] = useState(true)
+  const [project, setProject] = useState([])
+  const [isLoadingProject, setIsLoadingProject] = useState(true)
+  const [activeOption, setActiveOption] = useState(0)
+  const [currentPhase, setCurrentPhase] = useState('preinforme')
+  const [prevPhase] = useState('prereport')
+  const [nextPhase] = useState('technicalVisit')
+  let afterCurrent = false
+
+  useEffect(() => {
+    setIsLoadingCampaign(true)
+    getCampaign()
+      .then(response => {
+        const campaign = response?.data[0]  // TODO: to check
+        setCampaign(campaign)
+        setIsLoadingCampaign(false)
+      }).catch(error => {
+        console.log(error)
+        setIsLoadingCampaign(false)
+      })
+  }, [])
+
+  useEffect(() => {
+    setIsLoadingProject(true)
+    getProject()
+      .then(response => {
+        const projectInfo = response.data[0]  // TODO: to check
+        const projectDescription = projectInfo.description
+        const project = getProjectList(projectDescription)
+        setProject(project)
+        const stages = projectInfo.stages
+        const phasesList = getPhasesList(stages)
+        setStages(phasesList)
+        setCurrentPhase(stages?.stageId)
+        setIsLoadingProject(false)
+      }).catch(error => {
+        console.log(error)
+        setIsLoadingProject(false)
+      })
+  }, [])
+
+  const getPhasesList = (stages) => {
+    const phasesist = []
+    Object.entries(stages).map(([ key, value ], index) => {
+      if (key !== "stageId" && key !== "discardedType") {
+        const title = getPhaseTitle(key)
+        const content = getOptionContent(key, value)
+        const info = {
+          id: key,
+          title: title,
+          content: content
+        }
+        phasesist.push(info)
+      }
+    });
+    return phasesist
+  }
+
+  const getProjectList = (projectDescription) => {
+    const project = []
+        Object.entries(projectDescription).map(([ key, value ], index) => {
+          const content = getOptionContent(key, value)
+          const title = getOptionTitle(key)
+          const info = {
+            id: key,
+            title: title,
+            content: content
+          }
+          project.push(info)
+        });
+    return project
+  }
+
+  const getOptionTitle = (key) => {  // TODO: Refactor
+    if (key === "supplyPoint") return "Punt de Subministrament"
+    if (key === "project") return "Projecte"
+    if (key === "registeredPerson") return "Persona inscrita"
+    if (key === "preregistration") return "Inscripció inicial"
+    if (key === "registered") return "Proposta final"
+    return ""
+  }
+
+  const getOptionContent = (key, value) => {  // TODO: Refactor
+    if (key === "supplyPoint") return <SupplyPoint supplyPointInfo={value}/>
+    if (key === "project") return <Project projectInfo={value}/>
+    if (key === "registeredPerson") return <RegisteredPerson registeredPersonInfo={value}/>
+    if (key === "preregistration") return <Preregistration preregistrationInfo={value}/>
+    if (key === "registered") return <Registered registeredInfo={value}/>
+    return <></>
+  }
+
+  const getPhaseTitle = (key) => {  // TODO: Refactor
+    if (key === "prereport") return "Preinforme"
+    if (key === "technicalVisit") return "Informe visita tècnica"
+    if (key === "report") return "Report ???"
+    if (key === "offer") return "Proposta d'oferta final"
+    if (key === "constructionPermit") return "Permís d'obra"
+    if (key === "installation") return "Instal·lació ???"
+    if (key === "deliveryCertificate") return "Acta de recepció"
+    if (key === "legalRegistration") return "Acte de recepció ??"
+    if (key === "legalization") return "Legalització"
+    if (key === "invoice") return "Factura ??"
+    if (key === "signature") return "Signatura Contracte Clau en mà"
+    return ""
+  }
+
+  const getPhase = (stages, phaseId, withContent = false) => {
+    console.log(stages)
+    console.log(phaseId)
+    console.log(withContent)
+    const { title, content } = stages.find(({ id }) => phaseId === id)
     return <>
       <h3>{title}</h3>
-      {
-        withContent &&
-        <div>
-          { content }
-        </div>
-      }
+      { withContent && <div> { content } </div> }
     </>
   }
 
-  const phasesList = [
-    {
-      id: 'welcome',
-      title: 'Benvinguda i Condicions Generals',
-      content: <></>
-    },
-    {
-      id: 'about',
-      title: 'Presentació empresa instal·ladora',
-      content: <></>
-    },
-    {
-      id: 'preinforme',
-      title: 'Pre-Informe',
-      content: <>Descarrega el pre-informe</>
-    },
-    {
-      id: 'datetechnicalvisit',
-      title: 'Acordar data i hora visita tècnica',
-      content: <></>
-    },
-    {
-      id: 'technicalvisitinform',
-      title: 'Informe visita Tècnica',
-      content: <></>
-    },
-    {
-      id: 'finaloffert',
-      title: 'Proposta d\'oferta final',
-      content: <></>
-    },
-    {
-      id: 'contractsign',
-      title: 'Signatura Contracte Clau en mà',
-      content: <></>
-    },
-    {
-      id: 'midprojectinvoice',
-      title: 'Factura 50%',
-      content: <></>
-    },
-
-    {
-      id: 'workpermit',
-      title: 'Permís d\'obra',
-      content: <></>
-    },
-    {
-      id: 'choosedate',
-      title: 'Acordar data d\'obra',
-      content: <></>
-    },
-    {
-      id: 'reception',
-      title: 'Acta de recepció',
-      content: <></>
-    },
-
-    {
-      id: 'invoice40',
-      title: 'Factura 40%',
-      content: <></>
-    },
-    {
-      id: 'legalization',
-      title: 'Legalització',
-      content: <></>
-    },
-    {
-      id: 'documentation',
-      title: 'Descarrega documentació',
-      content: <></>
-    },
-    {
-      id: 'invoice10',
-      title: 'Factura 10%',
-      content: <></>
-    },
-    {
-      id: 'poll',
-      title: 'Enquesta de satisfacció',
-      content: <></>
-    },
-    {
-      id: 'thanks',
-      title: 'Agraïments i comiat',
-      content: <></>
-    }
-  ]
-
-  const classes = useStyles()
-  const [activeOption, setActiveOption] = useState(0)
-  const [currentPhase] = useState('preinforme')
-  const [prevPhase] = useState('about')
-  const [nextPhase] = useState('datetechnicalvisit')
-  let afterCurrent = false
-
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <Grid container>
-        <Grid item sm={3} xs={12}>
-          <div className={classes.column}>
-            {
-              optionsList.map(({ title, content }, index) => (
+    isLoadingCampaign || isLoadingProject
+    ? <Loading/>
+    :
+      <Container maxWidth="lg" className={classes.root}>
+        <Grid container>
+          <Grid item sm={3} xs={12}>
+            <div className={classes.column}>
+              {
+              project.map(({ title, content }, index) => (
                 <div key={title}>
                   <div
                     className={clsx(classes.option, activeOption === index && classes.activeOption)}
@@ -356,93 +410,111 @@ const SomSolet = () => {
                 </div>
               ))
             }
+              <div className={classes.separator}> </div>
 
-            <div className={classes.separator}> </div>
-
-            <div className={classes.option}>
-              <div className={classes.phaseIcon}>
-                <MailOutlinedIcon fontSize="small" />
+              <div className={classes.option}>
+                <div className={classes.phaseIcon}>
+                  <MailOutlinedIcon fontSize="small" />
+                </div>
+                <div className={classes.phaseName}>
+                  Contacte instal·ladora
+                </div>
               </div>
-              <div className={classes.phaseName}>
-                Contacte instal·ladora
+
+              <div className={classes.option}>
+                <div className={classes.phaseIcon}>
+                  <ReportProblemOutlinedIcon fontSize="small" />
+                </div>
+                <div className={classes.phaseName}>
+                  Notifica incidència
+                </div>
+              </div>
+
+              <div className={classes.option}>
+                <div className={classes.phaseIcon}>
+                  <PowerSettingsNewOutlinedIcon fontSize="small" />
+                </div>
+                <div className={classes.phaseName}>
+                  &nbsp;&nbsp;Donar-se de baixa
+                </div>
               </div>
             </div>
-
-            <div className={classes.option}>
-              <div className={classes.phaseIcon}>
-                <ReportProblemOutlinedIcon fontSize="small" />
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <div className="">
+              <div className={clsx(classes.column, classes.mainHeader)}>
+                <h2> {campaign.name} </h2>
+                <div className={classes.mainHeaderInfo}>
+                  <div> <WbSunnyOutlinedIcon fontSize="small" />
+                    &nbsp; {campaign.installations?.completed}
+                    &nbsp; <RoomOutlinedIcon fontSize="small" />
+                    &nbsp; {campaign.region?.geographicalRegion},
+                    &nbsp; {campaign.region?.autonomousCommunity}
+                  </div>
+                  <div> {campaign.engineering.map(
+                      ({ name, address, email, phoneNumber }) => {
+                        return (
+                          <div key={name} className={classes.engineeringInfo}>
+                            <SettingsOutlinedIcon fontSize="small" />
+                            &nbsp; <div>
+                              <a href={address} target="_blank">{name}</a>
+                              &nbsp; {email}
+                            </div>
+                          </div>
+                        )
+                      }
+                    )}
+                    &nbsp;
+                  </div>
+                </div>
               </div>
-              <div className={classes.phaseName}>
-                Notifica incidència
-              </div>
-            </div>
-
-            <div className={classes.option}>
-              <div className={classes.phaseIcon}>
-                <PowerSettingsNewOutlinedIcon fontSize="small" />
-              </div>
-              <div className={classes.phaseName}>
-                &nbsp;&nbsp;Donar-se de baixa
-              </div>
-            </div>
-          </div>
-        </Grid>
-        <Grid item sm={6} xs={12}>
-          <div className="">
-            <div className={clsx(classes.column, classes.mainHeader)}>
-              <h2>Gir Solar</h2>
-              <div className={classes.mainHeaderInfo}>
-                <div><RoomOutlinedIcon fontSize="small" />&nbsp;Alt Empordà, Baix Empordà, Garrotxa, Gironès i Pla de l’Estany</div>
-                <div><WbSunnyOutlinedIcon fontSize="small" />&nbsp;150 instal·lacions &nbsp;<SettingsOutlinedIcon fontSize="small" />&nbsp;Audit Energia</div>
-              </div>
-            </div>
-            <div className={clsx(classes.column, classes.main)}>
-              <div className={{}}>
+              <div className={clsx(classes.column, classes.main)}>
+                <div className={{}}>
+                  <div className={classes.phaseTitle}>
+                    {
+                      getPhase(stages, prevPhase)
+                    }
+                    <UndoOutlinedIcon />
+                  </div>
+                  <div className={clsx(classes.phaseTitle, classes.mainPhase)}>
+                    {
+                      getPhase(stages, currentPhase, true)
+                    }
+                  </div>
+                </div>
                 <div className={classes.phaseTitle}>
                   {
-                    getPhase(phasesList, prevPhase)
+                    getPhase(stages, nextPhase)
                   }
-                  <UndoOutlinedIcon />
+                  <RedoOutlinedIcon />
                 </div>
-                <div className={clsx(classes.phaseTitle, classes.mainPhase)}>
-                  {
-                    getPhase(phasesList, currentPhase, true)
-                  }
-                </div>
-              </div>
-              <div className={classes.phaseTitle}>
-                {
-                  getPhase(phasesList, nextPhase)
-                }
-                <RedoOutlinedIcon />
               </div>
             </div>
-          </div>
-        </Grid>
-        <Grid item sm={3} xs={12}>
-          <div className={classes.column}>
-            {
-              phasesList.map(({ id, title }) => {
-                afterCurrent = afterCurrent || currentPhase === id
-                return (
-                  <div
-                    key={id}
-                    className={clsx(classes.phase, afterCurrent && classes.futurePhase, currentPhase === id && classes.currentPhase)}
-                  >
-                    <div className={classes.phaseIcon}>
-                      { afterCurrent ? <CheckBoxOutlineBlankOutlinedIcon /> : <CheckBoxOutlinedIcon /> }
+          </Grid>
+          <Grid item sm={3} xs={12}>
+            <div className={classes.column}>
+              {
+                stages.map(({ id, title }) => {
+                  afterCurrent = afterCurrent || currentPhase === id
+                  return (
+                    <div
+                      key={id}
+                      className={clsx(classes.phase, afterCurrent && classes.futurePhase, currentPhase === id && classes.currentPhase)}
+                    >
+                      <div className={classes.phaseIcon}>
+                        { afterCurrent ? <CheckBoxOutlineBlankOutlinedIcon /> : <CheckBoxOutlinedIcon /> }
+                      </div>
+                      <div className={classes.phaseName}>
+                        { title }
+                      </div>
                     </div>
-                    <div className={classes.phaseName}>
-                      { title }
-                    </div>
-                  </div>
-                )
-              })
-            }
-          </div>
+                  )
+                })
+              }
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
   )
 }
 
