@@ -92,12 +92,13 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '1.25rem',
     '& div': {
       alignItems: 'center',
-      justifyContent: 'flex-end'
+      justifyContent: 'flex-end',
+      display: 'flex'
     }
   },
   engineeringInfo: {
-    display: 'flex',
-    paddingTop: '8px'
+    paddingTop: '8px',
+    paddingBottom: '16px'
   },
   main: {
     marginTop: theme.spacing(2),
@@ -455,10 +456,10 @@ const SomSolet = (props) => {
                       ({ name, address, email, phoneNumber }) => {
                         return (
                           <div key={name} className={classes.engineeringInfo}>
-                            <SettingsOutlinedIcon fontSize="small" />
+                            &nbsp; <SettingsOutlinedIcon fontSize="small" />
                             &nbsp; <div>
                               <a href={address} target="_blank">{name}</a>
-                              &nbsp; {email}
+                              &nbsp; ({phoneNumber})
                             </div>
                           </div>
                         )
