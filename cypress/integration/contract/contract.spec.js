@@ -116,7 +116,16 @@ describe('Contract', () => {
     cy.get('[data-cy=next]').click()
 
     cy.get('[name="payment.iban"]')
+      .clear()
+      .type(this.data.holder.bad_iban).should('have.value', this.data.holder.bad_iban)
+      .blur()
+
+    cy.contains('IBAN incorrecto')
+
+    cy.get('[name="payment.iban"]')
+      .clear()
       .type(this.data.holder.iban).should('have.value', this.data.holder.iban)
+
     cy.get('[name="payment.sepa_accepted"]').click()
     cy.get('[data-cy=accept]').click()
     cy.get('[data-cy=next]').click()
