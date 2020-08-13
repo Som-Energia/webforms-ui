@@ -254,6 +254,7 @@ function PersonalData (props) {
             fullWidth
             value={values?.holder?.email2}
             onChange={handleChange}
+            onBlur={handleBlur}
             error={errors?.holder?.email2 && touched?.holder?.email2}
             helperText={(touched?.holder?.email2 && errors?.holder?.email2)}
           />

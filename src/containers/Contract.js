@@ -270,6 +270,7 @@ const Contract = (props) => {
           .required(t('NO_EMAIL'))
           .email(t('NO_EMAIL')),
         email2: Yup.string()
+          .required(t('NO_EMAIL'))
           .test('repeatEmail',
             t('NO_REPEATED_EMAIL'),
             function () {
