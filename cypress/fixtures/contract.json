@@ -14,11 +14,13 @@
     "language": "ca_ES",
     "voluntaryCent": true,
     "iban": "ES77 1234 1234 1612 3456 7890",
-    "bad_iban": "ES77 1234 1234 1612 3456 AAAA"
+    "badIban": "ES77 1234 1234 1612 3456 AAAA",
+    "badEmail": "davidpalomosomenergiacoop"
   },
   "member": {
     "number": "38434",
-    "vat": "40323835M"
+    "vat": "40323835M",
+    "badVat": "58291270J"
   },
   "supplyPoint": {
     "cups": "ES0824987817389148BZ",
@@ -29,7 +31,10 @@
     "state": "20",
     "city": "5386",
     "isHousing": true,
-    "cnae": "9820"
+    "cnae": "9820",
+    "badCups": "ESO8249878173OO148BZ",
+    "invalidCups": "ES4023386283350973BR0F",
+    "validCups": "ES0031406156230007ZJ0F"
   },
   "fare20A": "2.0A",
   "fare21": "2.1DHA",
