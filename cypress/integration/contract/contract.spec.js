@@ -354,10 +354,10 @@ describe('Contract', () => {
       .clear()
       .type(this.data.holder.email).should('have.value', this.data.holder.email)
 
-    // cy.get('[name="holder.email2"]')
-    //   .type(this.data.holder.badEmail).should('have.value', this.data.holder.badEmail)
-    //   .blur()
-    //   cy.contains('email no válido')
+    cy.get('[name="holder.email2"]')
+      .type(this.data.holder.badEmail).should('have.value', this.data.holder.badEmail)
+      .blur()
+      cy.contains('No has repetido el correo electrónico correctamente')
 
     cy.get('[name="holder.email2"]')
       .clear()
