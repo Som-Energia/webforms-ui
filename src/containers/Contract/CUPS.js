@@ -109,7 +109,7 @@ const CUPS = (props) => {
                     { isLoading &&
                       <CircularProgress size={24} />
                     }
-                    { !isLoading && values?.supply_point?.status === 'new' &&
+                    { !isLoading && (values?.supply_point?.status === 'new' || values?.supply_point?.status === 'inactive') &&
                       <CheckOutlinedIcon color="primary" />
                     }
                   </InputAdornment>
@@ -129,7 +129,7 @@ const CUPS = (props) => {
           question={t('HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT')}
           onChange={handleChangeService}
           value={values.supply_point.has_service}
-          disabled={values.supply_point.status !== 'new'}
+          disabled={(values.supply_point.status !== 'new' && values.supply_point.status !== 'inactive')}
           options={[
             {
               value: true,
