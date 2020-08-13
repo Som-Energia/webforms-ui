@@ -51,6 +51,8 @@ const Review = (props) => {
 
   const [open, setOpen] = useState(false)
 
+  const holder = values.holder.vat === values.member.vat ? values.member : values.holder
+
   const handleClick = (event) => {
     event.preventDefault()
     setOpen(true)
@@ -115,22 +117,20 @@ const Review = (props) => {
           <ReviewField label={'NIF'} value={values?.holder?.vat} />
           { values?.holder?.isphisical
             ? <>
-              <ReviewField label={t('NAME')} value={`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`} />
+              <ReviewField label={t('NAME')} value={`${holder?.name} ${holder?.surname1} ${holder?.surname2}`} />
             </>
             : <>
-              <ReviewField label={t('LEGAL_NAME')} value={values?.holder?.name} />
-              <ReviewField label={t('PROXY')} value={`${values?.holder.proxyname}(${values?.holder?.proxyvat})`} />
+              <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
+              <ReviewField label={t('PROXY')} value={`${holder?.proxyname}(${holder?.proxyvat})`} />
             </>
           }
-          <ReviewField label={t('ADDRESS')} value={values?.holder?.address} />
-          <ReviewField label={t('CITY')} value={`${values?.holder?.city.name} (${values?.holder?.postal_code}) ${values?.holder?.state.name}`} />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
-          <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
-          <ReviewField label={t('EMAIL')} value={values?.holder?.email} />
-          <ReviewField label={t('LANGUAGE')} value={languages[values?.holder?.language]} />
+          <ReviewField label={t('PHONE')} value={holder?.phone1} />
+          <ReviewField label={t('EMAIL')} value={holder?.email} />
+          <ReviewField label={t('LANGUAGE')} value={languages[holder?.language]} />
         </Grid>
 
         <Grid item xs={12} sm={6}>
