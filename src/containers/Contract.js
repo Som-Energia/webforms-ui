@@ -347,7 +347,10 @@ const Contract = (props) => {
   }, [props.match.params.language, i18n])
 
   const nextStep = props => {
-    const next = activeStep + 1
+    let next = activeStep + 1
+    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat) {
+      next++
+    }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
       if (props.isValid) {
@@ -359,7 +362,10 @@ const Contract = (props) => {
   }
 
   const prevStep = props => {
-    const prev = activeStep - 1
+    let prev = activeStep - 1
+    if (activeStep === 6 && props.values.holder.vat === props.values.member.vat) {
+      prev--
+    }
     setActiveStep(Math.max(0, prev))
     if (completed) {
       setCompleted(false)
@@ -416,7 +422,19 @@ const Contract = (props) => {
       number: '',
       vat: '',
       full_name: '',
-      checked: false
+      checked: false,
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      address: '',
+      postal_code: '',
+      surname1: '',
+      surname2: '',
+      email: '',
+      email2: '',
+      phone1: '',
+      phone2: '',
+      language: `${i18n.language}_ES`
     },
     payment: {
       iban: '',

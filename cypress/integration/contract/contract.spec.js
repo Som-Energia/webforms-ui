@@ -67,45 +67,6 @@ describe('Contract', () => {
 
       cy.get('[data-cy=next]').click()
 
-      // cy.get('[name="holder.name"]')
-      //   .type(this.data.holder.name).should('have.value', this.data.holder.name)
-
-      // cy.get('[name="holder.surname1"]')
-      //   .type(this.data.holder.surname1).should('have.value', this.data.holder.surname1)
-
-      // cy.get('[name="holder.surname2"]')
-      //   .type(this.data.holder.surname2).should('have.value', this.data.holder.surname2)
-
-      // cy.get('[name="holder.address"]')
-      //   .type(this.data.holder.address).should('have.value', this.data.holder.address)
-
-      // cy.get('[name="holder.postal_code"]')
-      //   .type(this.data.holder.postalCode).should('have.value', this.data.holder.postalCode)
-
-      // cy.get('#holder_state').click()
-      // cy.get(`[data-value="${this.data.holder.stateCode}"]`).click()
-
-      // cy.get('#holder_city').click()
-      // cy.get(`[data-value="${this.data.holder.cityCode}"]`).click()
-
-      // cy.get('[name="holder.email"]')
-      //   .type(this.data.holder.email).should('have.value', this.data.holder.email)
-
-      // cy.get('[name="holder.email2"]')
-      //   .type(this.data.holder.email).should('have.value', this.data.holder.email)
-
-      // cy.get('[name="holder.phone1"]')
-      //   .type(this.data.holder.phone).should('have.value', this.data.holder.phone)
-
-      // cy.get('#holder_lang').click()
-      // cy.get('[data-value="ca_ES"]').click()
-
-      // cy.get('[name="privacy_policy_accepted"]').click()
-
-      // cy.get('[data-cy=accept]').click()
-
-      cy.get('[data-cy=next]').click()
-
       cy.get(`[data-value="${this.data.holder.voluntaryCent}"]`).click()
 
       cy.get('[data-cy=next]').click()
