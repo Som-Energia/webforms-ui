@@ -106,11 +106,12 @@ const MemberIdentifier = (props) => {
               error={(errors?.member?.number && touched?.member?.number) || error}
               helperText={(touched?.member?.number && errors?.member?.number) ||
                 (!values?.member?.checked
-                  ? error ? t('SOCIA_NO_TROBADA') : <span
-                    dangerouslySetInnerHTML={{ __html: t('HELP_POPOVER_SOCIA') }}
-                  />
+                  ? error
+                    ? <span dangerouslySetInnerHTML={{ __html: t('SOCIA_NO_TROBADA') }} />
+                    : <span dangerouslySetInnerHTML={{ __html: t('HELP_POPOVER_SOCIA') }} />
                   : <span className={classes.memberChecked}>{t('SOCIA_TROBADA')}: {values?.member?.full_name}</span>
-                )}
+                )
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6}>

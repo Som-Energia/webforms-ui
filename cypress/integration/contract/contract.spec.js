@@ -196,12 +196,12 @@ describe('Contract', () => {
       .type(this.data.member.number)
       .should('have.value', this.data.member.number)
 
-    // cy.get('#vat')
-    //   .clear()
-    //   .type(this.data.member.badVat)
-    //   .should('have.value', this.data.member.badVat)
+    cy.get('#vat')
+      .clear()
+      .type(this.data.member.badVat)
+      .should('have.value', this.data.member.badVat)
 
-    //   cy.contains('No encontramos ningún socio/a')
+      cy.contains('No se ha encontrado ningún socio/a ')
 
     cy.get('#vat')
       .clear()
