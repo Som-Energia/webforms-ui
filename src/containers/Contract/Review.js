@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -48,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     paddingTop: '8px',
+  },
+  separatedField: {
+    flexDirection: 'column',
+    alignItems: 'flex-start'
+  },
+  separatedValues: {
+    marginLeft: theme.spacing(1.6),
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5)
   }
 }))
 
@@ -89,34 +99,30 @@ const Review = (props) => {
     setFieldValue('terms_accepted', false)
   }
 
-  const ReviewField = ({ label, value }) => {
+  const ReviewField = ({ label, value, multipleValues=false }) => {
     return (
-      <div className={classes.field}>
+      <div className={clsx(classes.field, multipleValues && classes.separatedField)}>
         <div className="field__title">
           <Typography className={classes.label} variant="subtitle2">{label}</Typography>
         </div>
-        <div className="field__value">
+        <div className={clsx("field__value", multipleValues && classes.separatedValues)}>
           <Typography className={classes.value} variant="body2">{value}</Typography>
         </div>
       </div>
     )
   }
 
-  const Prices = ({ concept, name }) => {  // P1 -> .value .uom
-    let Ps = []
+  const Prices = ({ concept, name }) => {
+    let periods = []
     Object.entries(concept).forEach(entry => {
       const [key, value] = entry
-      if (name == "bo_social") {
-        console.log(key)
-        console.log(value)
-      }
-      Ps.push(
-        <div key={`${name}:${key}`} className="field__value">
+      periods.push(
+        <div key={`${name}:${key}`}>
           <Typography className={classes.value} variant="body2">{`${value?.value} ${value?.uom}`}</Typography>
         </div>
       )
     })
-    return Ps
+    return periods
   }
 
   return (
@@ -179,11 +185,11 @@ const Review = (props) => {
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.sectionTitle} variant="h6">{t('PREUS_AMB_IMPOSTOS')}</Typography>
-          <ReviewField label={t('TERME_ENERGIA')} value={<Prices concept={prices?.te} name="te"/>} />
-          <ReviewField label={t('GENERATION')} value={<Prices concept={prices?.gkwh} name="gkwh"/>} />
-          <ReviewField label={t('TERME_POTENCIA')} value={<Prices concept={prices?.tp} name="tp"/>} />
-          <ReviewField label={t('AUTOCONSUM')} value={<Prices concept={prices?.ac} name="ac"/>} />
-          <ReviewField label={t('BO_SOCIAL')} value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`} />
+          <ReviewField label={t('TERME_ENERGIA')} value={<Prices concept={prices?.te} name="te"/>} multipleValues={true} />
+          <ReviewField label={t('GENERATION')} value={<Prices concept={prices?.gkwh} name="gkwh"/>} multipleValues={true} />
+          <ReviewField label={t('TERME_POTENCIA')} value={<Prices concept={prices?.tp} name="tp"/>} multipleValues={true} />
+          <ReviewField label={t('AUTOCONSUM')} value={<Prices concept={prices?.ac} name="ac"/>} multipleValues={true} />
+          <ReviewField label={t('BO_SOCIAL')} value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`} multipleValues={true} />
           <br/>
           <div className="field__value">
             <Typography className={classes.value} variant="body2">{t('CONCEPTES_EXTRES')} </Typography>

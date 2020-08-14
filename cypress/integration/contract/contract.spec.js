@@ -78,6 +78,8 @@ describe('Contract', () => {
       cy.get('[name="payment.sepa_accepted"]').click()
       cy.get('[data-cy=accept]').click()
       cy.get('[data-cy=next]').click()
+
+      cy.contains('€/kWh')
     })
 
     it('Contract 2.0A', function () {
