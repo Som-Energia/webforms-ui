@@ -239,6 +239,7 @@
   "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu nº de socio/a?</a>.",
   "HELP_POPOVER_NIF": "Ejemplo: 12345678P (con letra final)",
   "SOCIA_TROBADA": "Soci/a encontrado/a",
+  "SOCIA_NO_TROBADA": "Soci/a no encontrado/a",
   "NO_MEMBER_VAT": "No has introducido un NIF correcto",
   "NO_MEMBER_NUMBER": "No has introducido un numero de socio/a",
 
@@ -297,6 +298,7 @@
 
   "ALTA": "Alta de un punto sin suministro",
   "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Cambio de comercializadora modificando la persona titular",
-  "CANVI_DE_COMERCIALITZADORA": "Cambio de comercializadora manteniendo la persona titular"
+  "CANVI_DE_COMERCIALITZADORA": "Cambio de comercializadora manteniendo la persona titular",
 
+  "API_ERROR": "Error"
 }
