@@ -43,18 +43,22 @@ const MemberIdentifier = (props) => {
         const member = await checkMember(values.member.number, values.member.vat)
         console.log(member)
         if (member?.data?.soci?.nom) {
-          setError(null)
-          setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
           setFieldValue('member.checked', true)
-          setFieldValue('member.name', member?.data?.soci?.nom)
-          setFieldValue('member.address', member?.data?.soci?.adreca)
-          setFieldValue('member.postal_code', member?.data?.soci?.cp)
-          setFieldValue('member.surname1', member?.data?.soci?.cognom)
-          setFieldValue('member.email', member?.data?.soci?.email)
-          setFieldValue('member.phone1', member?.data?.soci?.tel)
-          setFieldValue('member.phone2', member?.data?.soci?.tel2)
-          setFieldValue('member.language', member?.data?.soci?.lang)
+          setError(null)
         }
+        else {
+          setFieldValue('member.checked', false)
+        }
+        setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
+        setFieldValue('member.name', member?.data?.soci?.nom, '')
+        setFieldValue('member.address', member?.data?.soci?.adreca, '')
+        setFieldValue('member.postal_code', member?.data?.soci?.cp, '')
+        setFieldValue('member.surname1', member?.data?.soci?.cognom, '')
+        setFieldValue('member.email', member?.data?.soci?.email, '')
+        setFieldValue('member.phone1', member?.data?.soci?.tel, '')
+        setFieldValue('member.phone2', member?.data?.soci?.tel2, '')
+        setFieldValue('member.language', member?.data?.soci?.lang, '')
+
       } catch (error) {
         console.log(error)
         setError(error)
@@ -102,7 +106,7 @@ const MemberIdentifier = (props) => {
               error={(errors?.member?.number && touched?.member?.number) || error}
               helperText={(touched?.member?.number && errors?.member?.number) ||
                 (!values?.member?.checked
-                  ? error ? t('API_ERROR') : <span
+                  ? error ? t('SOCIA_NO_TROBADA') : <span
                     dangerouslySetInnerHTML={{ __html: t('HELP_POPOVER_SOCIA') }}
                   />
                   : <span className={classes.memberChecked}>{t('SOCIA_TROBADA')}: {values?.member?.full_name}</span>
