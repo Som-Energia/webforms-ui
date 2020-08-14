@@ -163,3 +163,13 @@ export const checkMember = async (number, vat) => {
       return response?.data
     })
 }
+
+export const getPrices = async (tariff, vat, cnae, city_id) => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}data/prices?tariff=${tariff}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
+  })
+    .then(response => {
+      return response?.data
+    })
+}

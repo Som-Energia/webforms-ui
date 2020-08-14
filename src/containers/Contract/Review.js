@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -8,6 +8,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import ListItem from '@material-ui/core/ListItem'
+import List from '@material-ui/core/List'
 
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
@@ -15,6 +17,8 @@ import TermsDialog from '../../components/TermsDialog'
 import { languages } from '../../services/utils'
 
 import generalTerms from '../../data/HolderChange/generalterms'
+
+import { getPrices } from '../../services/api'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
@@ -41,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
   },
   value: {
     fontSize: '16px'
+  },
+  listItem: {
+    paddingTop: '8px',
   }
 }))
 
@@ -50,8 +57,22 @@ const Review = (props) => {
   const { values, setFieldValue } = props
 
   const [open, setOpen] = useState(false)
+  const [prices, setPrices] = useState({})
+  const [loading, setLoading] = useState(true)
 
   const holder = values.holder.vat === values.member.vat ? values.member : values.holder
+
+  useEffect(() => {
+    setLoading(true)
+    getPrices(values.contract.rate, holder.vat, values.supply_point.cnae, values.supply_point.city.id)
+      .then(response => {
+        const tariffPrices = response?.data
+        setPrices(tariffPrices)
+        setLoading(false)
+      }).catch(error => {
+        setLoading(false)
+      })
+  }, [])
 
   const handleClick = (event) => {
     event.preventDefault()
@@ -81,7 +102,25 @@ const Review = (props) => {
     )
   }
 
+  const Prices = ({ concept, name }) => {  // P1 -> .value .uom
+    let Ps = []
+    Object.entries(concept).forEach(entry => {
+      const [key, value] = entry
+      if (name == "bo_social") {
+        console.log(key)
+        console.log(value)
+      }
+      Ps.push(
+        <div key={`${name}:${key}`} className="field__value">
+          <Typography className={classes.value} variant="body2">{`${value?.value} ${value?.uom}`}</Typography>
+        </div>
+      )
+    })
+    return Ps
+  }
+
   return (
+    loading ? <div>Loading...</div> :
     <>
       <StepHeader title={t('REVIEW_TITLE')} />
       <Typography variant="body1"
@@ -138,11 +177,27 @@ const Review = (props) => {
           <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
           <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
         </Grid>
-
         <Grid item xs={12}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PRICES')}</Typography>
+          <Typography className={classes.sectionTitle} variant="h6">{t('PREUS_AMB_IMPOSTOS')}</Typography>
+          <ReviewField label={t('TERME_ENERGIA')} value={<Prices concept={prices?.te} name="te"/>} />
+          <ReviewField label={t('GENERATION')} value={<Prices concept={prices?.gkwh} name="gkwh"/>} />
+          <ReviewField label={t('TERME_POTENCIA')} value={<Prices concept={prices?.tp} name="tp"/>} />
+          <ReviewField label={t('AUTOCONSUM')} value={<Prices concept={prices?.ac} name="ac"/>} />
+          <ReviewField label={t('BO_SOCIAL')} value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`} />
+          <br/>
+          <div className="field__value">
+            <Typography className={classes.value} variant="body2">{t('CONCEPTES_EXTRES')} </Typography>
+          </div>
+          <List>
+            <ListItem className={classes.listItem}>
+              <span dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }} />
+            </ListItem>
+            <ListItem className={classes.listItem}>
+              <span dangerouslySetInnerHTML={{ __html: t('LLOGUER_COMPTADOR') }} />
+              &nbsp;{`${prices?.comptador?.value} ${prices?.comptador?.uom}`}
+            </ListItem>
+          </List>
         </Grid>
-
       </Grid>
 
       <TermsDialog
