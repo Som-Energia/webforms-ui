@@ -351,6 +351,7 @@ const Contract = (props) => {
     let next = activeStep + 1
     if (activeStep === 4 && props.values.holder.vat === props.values.member.vat) {
       next++
+      props.values.privacy_policy_accepted = true
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
@@ -366,6 +367,7 @@ const Contract = (props) => {
     let prev = activeStep - 1
     if (activeStep === 6 && props.values.holder.vat === props.values.member.vat) {
       prev--
+      props.values.privacy_policy_accepted = false
     }
     setActiveStep(Math.max(0, prev))
     if (completed) {
