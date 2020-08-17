@@ -310,6 +310,7 @@ const Contract = (props) => {
   const MAX_STEP_NUMBER = 8
 
   const getActiveStep = (props) => {
+    const url = t("DATA_PROTECTION_CONTRACT_URL")
     return <>
       { activeStep === 0 &&
         <MemberIdentifier {...props} />
@@ -327,7 +328,7 @@ const Contract = (props) => {
         <HolderIdentifier {...props} />
       }
       { activeStep === 5 &&
-        <PersonalData {...props} />
+        <PersonalData url={url} {...props} />
       }
       { activeStep === 6 &&
         <VoluntaryCent {...props} />

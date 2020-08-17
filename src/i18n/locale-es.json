@@ -129,8 +129,10 @@
   "HOLDER_PHONE_2_HELP": "Teléfono alternativo",
   "HOLDER_LANGUAGE_HELP": "Idioma para la comunicación con Som Energia",
 
+  "DATA_PROTECTION_HOLDERCHANGE_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-cambio-de-titular",
+  "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-contacto",
   "PRIVACY_POLICY_TITLE": "Política de Protección de Datos",
-  "ACCEPT_PRIVACY_POLICY":"He leído y acepto la política de privacidad de Som Energia",
+  "ACCEPT_PRIVACY_POLICY":"He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>",
   "ACCEPT_PRIVACY_POLICY_URL":"//www.somenergia.coop/es/aviso-legal/",
 
   "NO_NAME": "No has especificado el nombre",

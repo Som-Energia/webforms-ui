@@ -213,6 +213,7 @@ function HolderChange (props) {
   const MAX_STEP_NUMBER = 7
 
   const getActiveStep = (props) => {
+    const url = t("DATA_PROTECTION_HOLDERCHANGE_URL")
     return <>
       { activeStep === 0 &&
         <VAT {...props} />
@@ -221,7 +222,7 @@ function HolderChange (props) {
         <CUPS {...props} />
       }
       { activeStep === 2 &&
-        <PersonalData {...props} />
+        <PersonalData url={url} {...props} />
       }
       { activeStep === 3 &&
         <BecomeMember {...props} />
