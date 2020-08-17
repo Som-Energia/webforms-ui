@@ -47,6 +47,7 @@ const MemberIdentifier = (props) => {
           setError(null)
         }
         else {
+          setError(true)
           setFieldValue('member.checked', false)
         }
         setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
@@ -69,6 +70,9 @@ const MemberIdentifier = (props) => {
     if (values?.member?.number &&
       values?.member?.vat && values.member.vat.length >= 8) {
       checkIsMember()
+    }
+    else {
+      setFieldValue('member.checked', false)
     }
   }, [values.member.number, values.member.vat, setFieldValue])
 
