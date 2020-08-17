@@ -107,8 +107,6 @@ describe('Holder Change', () => {
 
       cy.get('[name="privacy_policy_accepted"]').click()
 
-      cy.get('[data-cy=accept]').click()
-
       cy.get('[data-cy=next]').click()
 
       cy.get('[data-cy=next]').click()

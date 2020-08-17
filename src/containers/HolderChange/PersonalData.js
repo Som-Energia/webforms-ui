@@ -18,7 +18,6 @@ import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined'
 
 import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
-import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 function PersonalData (props) {
   const { t } = useTranslation()
   const classes = useStyles()
-  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched } = props
+  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched, url } = props
 
   const [open, setOpen] = useState(false)
 
@@ -52,18 +51,8 @@ function PersonalData (props) {
   }
 
   const handleClick = (event) => {
-    event.preventDefault()
-    setOpen(true)
-  }
-
-  const handleAccept = () => {
-    setOpen(false)
-    setFieldValue('privacy_policy_accepted', true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-    setFieldValue('privacy_policy_accepted', false)
+    const privacy_policy_accepted = values?.privacy_policy_accepted
+    setFieldValue('privacy_policy_accepted', !privacy_policy_accepted)
   }
 
   const handleChangePhone = (event) => {
@@ -333,14 +322,6 @@ function PersonalData (props) {
           </TextField>
         </Grid>
 
-        <TermsDialog
-          title={t('PRIVACY_POLICY_TITLE')}
-          content={generalTerms}
-          open={open}
-          onAccept={handleAccept}
-          onClose={handleClose}
-        />
-
         <Grid item xs={12}>
           <FormGroup row>
             <FormControlLabel
@@ -353,7 +334,7 @@ function PersonalData (props) {
                   checked={values?.privacy_policy_accepted}
                 />
               }
-              label={t('ACCEPT_PRIVACY_POLICY')}
+              label={ <label dangerouslySetInnerHTML={{ __html: t('ACCEPT_PRIVACY_POLICY', { url: url }) }} /> }
               labelPlacement="end"
             />
           </FormGroup>
