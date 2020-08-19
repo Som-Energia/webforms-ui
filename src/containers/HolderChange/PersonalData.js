@@ -11,6 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
@@ -22,13 +23,19 @@ import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
 
-import generalTerms from '../../data/HolderChange/generalterms'
+import firstLayer  from '../../data/HolderChange/generalterms'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     '& path': {
       color: 'rgba(0, 0, 0, 0.54)'
     }
+  },
+  termsFirstLayer: {
+    paddingRight: '12px',
+    fontSize: '12px',
+    fontWeight: 400,
+    color: 'rgba(0, 0, 0, 0.54)'
   }
 }))
 
@@ -320,6 +327,10 @@ function PersonalData (props) {
               ))
             }
           </TextField>
+        </Grid>
+
+        <Grid item xs={12} sm={12} className={classes.termsFirstLayer}>
+          <Typography dangerouslySetInnerHTML={{ __html: firstLayer }} />
         </Grid>
 
         <Grid item xs={12}>
