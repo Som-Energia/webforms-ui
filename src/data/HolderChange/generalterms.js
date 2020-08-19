@@ -164,4 +164,8 @@ C / Pic de Peguera, 11 17003 Girona</em></li>
 <p>18.2 La declaración de cualquiera de estas Condiciones Generales como inválida o ineficaz no afectará la validez o eficacia de las restantes, que continuarán siendo vinculantes para las Partes, que se comprometen en dicho caso a sustituir la cláusula afectada por otra válida de efecto equivalente según principios de buena fe y equilibrio de contraprestaciones. La renuncia por cualquiera de las Partes a exigir en un momento determinado el cumplimiento de cualquiera de las Condiciones Generales aquí estipuladas, no implicará una renuncia de carácter general ni creará un derecho adquirido para la otra parte.</p>
 `
 
-export default generalTerms
+const firstLayer = `
+<b>Finalidades</b>: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín, newsletter y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. <b>Derechos</b>: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. <b>Información adicional</b>: <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-cambio-de-titular\"> política de privacidad de Som Energia</a>.
+`
+
+export default firstLayer
