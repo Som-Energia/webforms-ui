@@ -6,12 +6,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
@@ -23,7 +23,6 @@ import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
 
-import firstLayer  from '../../data/HolderChange/generalterms'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -32,10 +31,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   termsFirstLayer: {
-    paddingRight: '12px',
-    fontSize: '12px',
-    fontWeight: 400,
-    color: 'rgba(0, 0, 0, 0.54)'
+    textAlign: 'justify',
+    marginTop: theme.spacing(2)
   }
 }))
 
@@ -329,8 +326,13 @@ function PersonalData (props) {
           </TextField>
         </Grid>
 
-        <Grid item xs={12} sm={12} className={classes.termsFirstLayer}>
-          <Typography dangerouslySetInnerHTML={{ __html: firstLayer }} />
+        <Grid item mt={4} mb={3}>
+          <FormHelperText
+            className={classes.termsFirstLayer}
+            dangerouslySetInnerHTML={
+              { __html: url === t("DATA_PROTECTION_HOLDERCHANGE_URL") ? t('PRIVACY_POLICY_HOLDERCHANGE', { url: url }) : t('PRIVACY_POLICY_CONTRACT', { url: url })}
+            }
+          />
         </Grid>
 
         <Grid item xs={12}>
