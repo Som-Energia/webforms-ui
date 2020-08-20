@@ -109,6 +109,89 @@ export const normalizeHolderChange = (contract) => {
   return normalContract
 }
 
+
+export const normalizeContract = (contract) => {
+
+  const finalContract = {}
+  const normalContract = JSON.parse(JSON.stringify(contract))
+  const holder = normalContract.holder.vat === normalContract.member.vat ? normalContract.member : normalContract.holder
+
+  if (normalContract?.holder?.previous_holder) {
+    finalContract.canvi_titular = '0'
+  }
+  else {
+    finalContract.canvi_titular = '1'
+  }
+
+  finalContract.cnae = normalContract?.supply_point?.cnae
+
+  finalContract.compte_adreca = ''
+  finalContract.compte_cognom = ''
+  finalContract.compte_cp = ''
+  finalContract.compte_dni = ''
+  finalContract.compte_email = ''
+  finalContract.compte_lang = ''
+  finalContract.compte_municipi = ''
+  finalContract.compte_nom = ''
+  finalContract.compte_provincia = ''
+  finalContract.compte_representant_dni = ''
+  finalContract.compte_representant_nom = ''
+  finalContract.compte_tel = ''
+  finalContract.compte_tel2 = ''
+  finalContract.compte_tipus_persona = '0'
+
+  finalContract.condicions = normalContract?.payment?.sepa_accepted
+  finalContract.condicions_privacitat = normalContract?.privacy_policy_accepted
+  finalContract.condicions_titular = normalContract?.terms_accepted
+  finalContract.consum = ''
+  
+  finalContract.cups = normalContract?.supply_point?.cups
+  finalContract.cups_adreca = normalContract?.supply_point?.address
+  finalContract.cups_municipi = normalContract?.supply_point?.city?.id
+  finalContract.cups_provincia = normalContract?.supply_point?.state?.id
+  
+  finalContract.dni = holder?.vat
+  finalContract.donatiu = normalContract?.payment?.voluntary_cent
+  finalContract.escull_pagador = 'titular'
+  finalContract.id_soci = normalContract?.member?.number
+  finalContract.payment_iban = normalContract?.payment?.iban
+  finalContract.potencia = normalContract?.contract?.power
+  finalContract.potencia_p2 = normalContract?.contract?.power2
+  finalContract.potencia_p3 = normalContract?.contract?.power3
+  
+  if (!normalContract?.supply_point?.has_service) {
+    finalContract.proces = 'A3'
+  }
+  else if(normalContract?.holder?.previous_holder) {
+    finalContract.proces = 'C1'
+  }
+  else {
+    finalContract.proces = 'C2'
+  }
+
+  finalContract.referencia = ''
+  finalContract.representant_dni = holder?.proxynif
+  finalContract.representant_nom = holder?.proxyname
+
+  finalContract.soci_titular = normalContract.holder.vat === normalContract.member.vat ? '1' : '0'
+
+  finalContract.tarifa = normalContract?.contract?.rate
+  finalContract.tipus_persona = normalContract?.holder?.isphisical ? '0' : '1'
+  finalContract.titular_adreca = holder?.address
+  finalContract.titular_cognom = `${holder?.surname1} ${holder?.surname2}`
+  finalContract.titular_cp = holder?.postal_code
+  finalContract.titular_dni = holder?.vat
+  finalContract.titular_email = holder?.email
+  finalContract.titular_lang = holder?.language
+  finalContract.titular_municipi = holder?.city?.id
+  finalContract.titular_nom = holder?.name
+  finalContract.titular_provincia = holder?.state?.id
+  finalContract.titular_tel = holder?.phone1
+  finalContract.titular_tel2 = holder?.phone2
+
+  return finalContract
+}
+
 export const specialCaseType = (specialCases) => {
   if (specialCases.reason_death) return 'SPECIAL_CASES_DEATH'
   else if (specialCases.reason_merge) return 'SPECIAL_CASES_MERGE'

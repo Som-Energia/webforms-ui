@@ -173,3 +173,14 @@ export const getPrices = async (tariff, vat, cnae, city_id) => {
       return response?.data
     })
 }
+
+export const contract = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}form/contractacio`,
+    data: data
+  })
+    .then(response => {
+      return response?.data
+    })
+}

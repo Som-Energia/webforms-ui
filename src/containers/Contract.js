@@ -31,8 +31,10 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import IBAN from './HolderChange/IBAN'
 import Review from './Contract/Review'
 
-import { getRates } from '../services/api'
+import { getRates, contract } from '../services/api'
 import { CNAE_HOUSING } from '../services/utils'
+
+import { normalizeContract } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -392,6 +394,8 @@ const Contract = (props) => {
       name: '',
       address: '',
       postal_code: '',
+      state: { id: '' },
+      city: { id: '' },
       surname1: '',
       surname2: '',
       email: '',
@@ -431,6 +435,8 @@ const Contract = (props) => {
       name: '',
       address: '',
       postal_code: '',
+      state: { id: '' },
+      city: { id: '' },
       surname1: '',
       surname2: '',
       email: '',
@@ -450,23 +456,24 @@ const Contract = (props) => {
 
   const handlePost = async (values) => {
     setSending(true)
+    const data = normalizeContract(values)
+    await contract(data)
+    .then(response => {
+      const responseData = response?.data ? response.data : {}
+      // setResult(responseData)
+      setError(false)
+      setCompleted(true)
+    })
+    .catch(error => {
+      console.log(error)
+      const errorResp =
+      error?.response?.data?.data
+      ? error?.response?.data?.data
+      : { code: 'UNEXPECTED' }
+      setError(errorResp)
+      setCompleted(true)
+    })
     /*
-    const data = normalizeHolderChange(values)
-    await holderChange(data)
-      .then(response => {
-        const responseData = response?.data ? response.data : {}
-        setResult(responseData)
-        setError(false)
-        setCompleted(true)
-      })
-      .catch(error => {
-        const errorResp =
-          error?.response?.data?.data
-            ? error?.response?.data?.data
-            : { code: 'UNEXPECTED' }
-        setError(errorResp)
-        setCompleted(true)
-      })
     */
     setSending(false)
   }

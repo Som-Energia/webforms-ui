@@ -54,6 +54,8 @@ const MemberIdentifier = (props) => {
         setFieldValue('member.name', member?.data?.soci?.nom, '')
         setFieldValue('member.address', member?.data?.soci?.adreca, '')
         setFieldValue('member.postal_code', member?.data?.soci?.cp, '')
+        setFieldValue('member.state.id', member?.data?.soci?.provincia, '')
+        setFieldValue('member.city.id', member?.data?.soci?.municipi, '')
         setFieldValue('member.surname1', member?.data?.soci?.cognom, '')
         setFieldValue('member.email', member?.data?.soci?.email, '')
         setFieldValue('member.phone1', member?.data?.soci?.tel, '')
