@@ -14,7 +14,6 @@ import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
-
 import DisplayFormikState from '../components/DisplayFormikState'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
@@ -31,10 +30,11 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import IBAN from './HolderChange/IBAN'
 import Review from './Contract/Review'
 
-import { getRates, contract } from '../services/api'
-import { CNAE_HOUSING } from '../services/utils'
+import Success from './HolderChange/Success'
+import Failure from './HolderChange/Failure'
 
-import { normalizeContract } from '../services/utils'
+import { getRates, contract } from '../services/api'
+import { CNAE_HOUSING, normalizeContract } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +66,7 @@ const Contract = (props) => {
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result] = useState({})
+  const [result, setResult] = useState({})
 
   const [rates] = useState(getRates())
 
@@ -130,7 +130,7 @@ const Contract = (props) => {
             function () { return !(this.parent.status === 'active') })
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') }),
+            function () { return !(this.parent.status === 'invalid') })
       }),
       contract: Yup.object().shape({
         has_service: Yup.bool()
@@ -472,23 +472,25 @@ const Contract = (props) => {
     setSending(true)
     const data = normalizeContract(values)
     await contract(data)
-    .then(response => {
-      const responseData = response?.data ? response.data : {}
-      // setResult(responseData)
-      setError(false)
-      setCompleted(true)
-    })
-    .catch(error => {
-      console.log(error)
-      const errorResp =
-      error?.response?.data?.data
-      ? error?.response?.data?.data
-      : { code: 'UNEXPECTED' }
-      setError(errorResp)
-      setCompleted(true)
-    })
-    /*
-    */
+      .then(response => {
+        console.log(response)
+        if (response?.state === true) {
+          setError(false)
+          setResult({ contract_number: response?.data?.contract_id })
+        } else {
+          setError(true)
+        }
+        setCompleted(true)
+      })
+      .catch(error => {
+        console.log(error)
+        const errorResp =
+        error?.response?.data?.data
+          ? error?.response?.data?.data
+          : { code: 'UNEXPECTED' }
+        setError(errorResp)
+        setCompleted(true)
+      })
     setSending(false)
   }
 
@@ -508,18 +510,19 @@ const Contract = (props) => {
                 <Form className={classes.root} noValidate>
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress variant="determinate" value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
                       <Box mx={4} mb={3}>
                         { completed
                           ? error
-                            ? <div error={error} />
-                            : <div result={result} />
+                            ? <Failure error={error} />
+                            : <Success result={result} />
                           : getActiveStep(props)
                         }
                       </Box>
                       <Box mx={4} mt={1} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
+                            result?.contract_number === undefined &&
                             <Button
                               data-cy="prev"
                               className={classes.button}

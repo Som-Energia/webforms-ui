@@ -234,8 +234,8 @@
   "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
 
   "SUCCESS_TITLE": "Enhorabuena",
-  "SUCCESS_TEXT": "Estamos tramitando el cambio de titularidad",
-  "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el cambio sea efectivo.",
+  "SUCCESS_TEXT": "Estamos tramitando tu solicitud",
+  "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el trámite sea efectivo.",
 
   "CONTRACT_TITLE": "Contratación",
   "MEMBER_IDENTIFIER_DESC": "<p>Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma. ¿No eres socio/a? Hazte socio/a <a href=\"//www.somenergia.coop/es/hazte-socio-a/\" target=\"_blank\">aquí</a>!</p><p>Introduce el <b>número y NIF del socio tomador</b> del contrato.</p>",

@@ -109,21 +109,14 @@ export const normalizeHolderChange = (contract) => {
   return normalContract
 }
 
-
 export const normalizeContract = (contract) => {
 
   const finalContract = {}
-  const normalContract = JSON.parse(JSON.stringify(contract))
-  const holder = normalContract.holder.vat === normalContract.member.vat ? normalContract.member : normalContract.holder
+  const holder = contract.holder.vat === contract.member.vat ? contract.member : contract.holder
 
-  if (normalContract?.holder?.previous_holder) {
-    finalContract.canvi_titular = '0'
-  }
-  else {
-    finalContract.canvi_titular = '1'
-  }
+  contract?.holder?.previous_holder === true ? finalContract.canvi_titular = '0' : finalContract.canvi_titular = '1'
 
-  finalContract.cnae = normalContract?.supply_point?.cnae
+  finalContract.cnae = contract?.supply_point?.cnae
 
   finalContract.compte_adreca = ''
   finalContract.compte_cognom = ''
@@ -140,29 +133,29 @@ export const normalizeContract = (contract) => {
   finalContract.compte_tel2 = ''
   finalContract.compte_tipus_persona = '0'
 
-  finalContract.condicions = normalContract?.payment?.sepa_accepted
-  finalContract.condicions_privacitat = normalContract?.privacy_policy_accepted
-  finalContract.condicions_titular = normalContract?.terms_accepted
+  finalContract.condicions = contract?.payment?.sepa_accepted
+  finalContract.condicions_privacitat = contract?.privacy_policy_accepted
+  finalContract.condicions_titular = contract?.terms_accepted
   finalContract.consum = ''
 
-  finalContract.cups = normalContract?.supply_point?.cups
-  finalContract.cups_adreca = normalContract?.supply_point?.address
-  finalContract.cups_municipi = normalContract?.supply_point?.city?.id
-  finalContract.cups_provincia = normalContract?.supply_point?.state?.id
+  finalContract.cups = contract?.supply_point?.cups
+  finalContract.cups_adreca = contract?.supply_point?.address
+  finalContract.cups_municipi = contract?.supply_point?.city?.id
+  finalContract.cups_provincia = contract?.supply_point?.state?.id
 
   finalContract.dni = holder?.vat
-  finalContract.donatiu = normalContract?.payment?.voluntary_cent
+  finalContract.donatiu = contract?.payment?.voluntary_cent === true ? '1' : '0'
   finalContract.escull_pagador = 'titular'
-  finalContract.id_soci = normalContract?.member?.number
-  finalContract.payment_iban = normalContract?.payment?.iban
-  finalContract.potencia = normalContract?.contract?.power
-  finalContract.potencia_p2 = normalContract?.contract?.power2
-  finalContract.potencia_p3 = normalContract?.contract?.power3
+  finalContract.id_soci = contract?.member?.number
+  finalContract.payment_iban = contract?.payment?.iban
+  finalContract.potencia = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.potencia_p2 = contract?.contract?.power2 && Math.round(contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.potencia_p3 = contract?.contract?.power3 && Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
 
-  if (!normalContract?.supply_point?.has_service) {
+  if (!contract?.contract?.has_service) {
     finalContract.proces = 'A3'
   }
-  else if(normalContract?.holder?.previous_holder) {
+  else if(contract?.holder?.previous_holder) {
     finalContract.proces = 'C1'
   }
   else {
@@ -173,10 +166,10 @@ export const normalizeContract = (contract) => {
   finalContract.representant_dni = holder?.proxynif
   finalContract.representant_nom = holder?.proxyname
 
-  finalContract.soci_titular = normalContract.holder.vat === normalContract.member.vat ? '1' : '0'
+  finalContract.soci_titular = contract.holder.vat === contract.member.vat ? '1' : '0'
 
-  finalContract.tarifa = normalContract?.contract?.rate
-  finalContract.tipus_persona = normalContract?.holder?.isphisical ? '0' : '1'
+  finalContract.tarifa = contract?.contract?.rate
+  finalContract.tipus_persona = contract?.holder?.isphisical ? '0' : '1'
   finalContract.titular_adreca = holder?.address
   finalContract.titular_cognom = `${holder?.surname1} ${holder?.surname2}`
   finalContract.titular_cp = holder?.postal_code
