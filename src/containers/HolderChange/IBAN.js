@@ -18,8 +18,6 @@ import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
 
-import generalTerms from '../../data/HolderChange/generalterms'
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     '& path': {
@@ -134,8 +132,8 @@ function IBAN (props) {
       </Box>
 
       <TermsDialog
-        title={t('GENERAL_TERMS')}
-        content={generalTerms}
+        title={t('SEPA_TITLE')}
+        content={t('SEPA')}
         open={open}
         onAccept={handleAccept}
         onClose={handleClose}
