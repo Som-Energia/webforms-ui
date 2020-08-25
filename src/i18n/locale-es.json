@@ -322,6 +322,8 @@
   "DISCRIMINACIO_HORARIA_CONTRACTACIO": "¿Quieres discriminación horaria?",
   "MES_GRAN_DE_15KW_CONTRACTACIO": "Potencia superior a 15kW",
   "PHASE_MONO": "Monofásica",
-  "PHASE_TRI": "Trifásica"
+  "PHASE_TRI": "Trifásica",
 
+  "SEPA_TITLE": "Orden de domiciliación de adeudo directo SEPA",
+  "SEPA": "<p>Mediante la firma de esta orden de domiciliación, el deudor autoriza (A) al acreedor a enviar instrucciones a la entidad del deudor para adeudar su cuenta y (B) a la entidad para efectuar los adeudos en su cuenta siguiendo las instrucciones del acreedor.</p><p>Como parte de sus derechos, el deudor está legitimado al reembolso por su entidad en los términos y condiciones del contrato suscrito con la misma.</p><p>La solicitud de reembolso deberá efectuarse dentro de las ocho semanas que siguen a la fecha de adeudo en cuenta.</p><p>Puede obtener información adicional sobre sus derechos en su entidad financiera.</p>"
 }
