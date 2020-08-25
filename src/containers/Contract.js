@@ -87,7 +87,8 @@ const Contract = (props) => {
     for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
       const attr = (i === 1) ? 'power' : `power${i}`
       const inLimit = limit.match('min') ? values[attr] >= rates[rate][limit]?.power : values[attr] <= rates[rate][limit]?.power
-      if (inLimit) valids++
+      inLimit && valids++
+      values[attr] === undefined && valids++
     }
 
     if (valids >= rates[rate][limit]?.num_periods_apply) {
@@ -130,6 +131,8 @@ const Contract = (props) => {
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
             function () { return !(this.parent.status === 'invalid') }),
+      }),
+      contract: Yup.object().shape({
         has_service: Yup.bool()
           .required(t('UNSELECTED_NEW_SUPPLY_POINT'))
           .oneOf([true, false], t('UNSELECTED_NEW_SUPPLY_POINT'))
@@ -165,8 +168,16 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
+        fare: Yup.string()
+          .when('has_service', {
+            is: false,
+            then: Yup.string().required(t('NO_FARE_CHOSEN'))
+          }),
         rate: Yup.string()
-          .required(t('NO_FARE_CHOSEN')),
+          .when('has_service', {
+            is: true,
+            then: Yup.string().required(t('NO_FARE_CHOSEN'))
+          }),
         power: Yup.number()
           .required(t('NO_POWER_CHOSEN'))
           .test({
@@ -407,7 +418,6 @@ const Contract = (props) => {
     supply_point: {
       cups: '',
       status: false,
-      has_service: '',
       address: '',
       number: '',
       floor: '',
@@ -420,10 +430,14 @@ const Contract = (props) => {
       attachments: []
     },
     contract: {
+      has_service: '',
       rate: '',
       power: '',
       power2: '',
-      power3: ''
+      power3: '',
+      phases: '',
+      fare: '',
+      moreThan15kWh: false
     },
     member: {
       number: '',

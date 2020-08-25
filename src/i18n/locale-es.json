@@ -30,7 +30,7 @@
   "DISCRIMINACIO_HORARIA": "¿Quieres discriminación horaria?",
   "SENSE_DISCRIMINACIO_HORARIA": "Sin discriminación horaria",
   "AMB_DISCRIMINACIO_HORARIA": "Con discriminación horaria",
-  "HELP_DISCRIMINACIO_HORARIA": "Como puedo saber <a target=\"_blank\" href=\"{{url}}\">si me conviene discriminación horaria o no</a>",
+  "HELP_DISCRIMINACIO_HORARIA": "Cómo puedo saber <a target=\"_blank\" href=\"{{url}}\">si me conviene discriminación horaria o no</a>",
   "HELP_DISCRIMINACIO_HORARIA_URL": "http://es.support.somenergia.coop/article/283-como-puedo-saber-si-me-sale-a-cuenta-tener-discriminacion-horaria",
   "LA_TEVA_TARIFA_ES": "Tu tarifa será",
   "NO_MONOPHASE_CHOICE": "No has especificado si la instalación es de tipo monofásico o trifásico",
@@ -314,6 +314,14 @@
   "AUTOCONSUM": "Compensación Autoproducción",
   "BO_SOCIAL": "Bono social",
   "CONCEPTES_EXTRES": "A estos precios se les debe sumar los siguientes conceptos:",
-  "EXTRA_REACTIVA": "En determinadas condiciones de la instalación en estos precios se puede añadir <b>un recargo por energía reactiva</b>",
-  "LLOGUER_COMPTADOR": "<b>Alquiler contador</b>: Depende cada caso. En general, {{valor}} {{uom}} con impuesto"
+  "EXTRA_REACTIVA": "En determinadas condiciones de la instalación en estos precios se puede añadir <b>un recargo por energía reactiva</b>.",
+  "LLOGUER_COMPTADOR": "<b>Alquiler contador</b>: Depende cada caso. En general, {{valor}} {{uom}} con impuesto",
+
+  "TIPUS_INSTALLACIO_CONTRACTACIO": "¿Qué tipo de instalación tienes?",
+  "POTENCIA_A_CONTRACTAR_CONTRACTACIO": "¿Qué potencia quieres contratar?",
+  "DISCRIMINACIO_HORARIA_CONTRACTACIO": "¿Quieres discriminación horaria?",
+  "MES_GRAN_DE_15KW_CONTRACTACIO": "Potencia superior a 15kW",
+  "PHASE_MONO": "Monofásica",
+  "PHASE_TRI": "Trifásica"
+
 }

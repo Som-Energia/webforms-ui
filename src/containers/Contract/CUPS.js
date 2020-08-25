@@ -44,7 +44,7 @@ const CUPS = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const { values, handleBlur, errors, touched, setFieldValue, setFieldTouched } = props
+  const { values, handleBlur, errors, touched, setFieldValue, setFieldTouched, setFields } = props
   const [isLoading, setLoading] = useState(false)
 
   const handleInputCups = (event) => {
@@ -54,7 +54,17 @@ const CUPS = (props) => {
   }
 
   const handleChangeService = ({ option }) => {
-    setFieldValue('supply_point.has_service', option)
+
+    setFieldValue('contract', {
+      rate: '',
+      power: '',
+      power2: '',
+      power3: '',
+      fare: '',
+      phases: '',
+      moreThan15kWh: false
+    }, false)
+    setFieldValue('contract.has_service', option)
   }
 
   useEffect(() => {
@@ -128,7 +138,7 @@ const CUPS = (props) => {
         <Chooser
           question={t('HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT')}
           onChange={handleChangeService}
-          value={values.supply_point.has_service}
+          value={values.contract.has_service}
           disabled={(values.supply_point.status !== 'new' && values.supply_point.status !== 'inactive')}
           options={[
             {

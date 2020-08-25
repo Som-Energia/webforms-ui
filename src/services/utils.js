@@ -144,12 +144,12 @@ export const normalizeContract = (contract) => {
   finalContract.condicions_privacitat = normalContract?.privacy_policy_accepted
   finalContract.condicions_titular = normalContract?.terms_accepted
   finalContract.consum = ''
-  
+
   finalContract.cups = normalContract?.supply_point?.cups
   finalContract.cups_adreca = normalContract?.supply_point?.address
   finalContract.cups_municipi = normalContract?.supply_point?.city?.id
   finalContract.cups_provincia = normalContract?.supply_point?.state?.id
-  
+
   finalContract.dni = holder?.vat
   finalContract.donatiu = normalContract?.payment?.voluntary_cent
   finalContract.escull_pagador = 'titular'
@@ -158,7 +158,7 @@ export const normalizeContract = (contract) => {
   finalContract.potencia = normalContract?.contract?.power
   finalContract.potencia_p2 = normalContract?.contract?.power2
   finalContract.potencia_p3 = normalContract?.contract?.power3
-  
+
   if (!normalContract?.supply_point?.has_service) {
     finalContract.proces = 'A3'
   }
@@ -197,4 +197,21 @@ export const specialCaseType = (specialCases) => {
   else if (specialCases.reason_merge) return 'SPECIAL_CASES_MERGE'
   else if (specialCases.reason_electrodep) return 'SPECIAL_CASES_ELECTRODEP'
   else return ''
+}
+
+export const calculateTariff = ({ changePower = true, power, moreThan15Kw, changeFare = true, fare }) => {
+  let tariff = null
+  if (changePower) {
+    if (!moreThan15Kw) {
+      if (changeFare) {
+        tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
+        if (fare) {
+          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
+        }
+      }
+    } else {
+      tariff = '3.0A'
+    }
+  }
+  return tariff
 }
