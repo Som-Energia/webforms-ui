@@ -273,8 +273,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   error={(errors.phases && touched.phases)}
                   helperText={(touched.phases && errors.phases)}
                 >
-                  <MenuItem value="">
-                  </MenuItem>
                   <MenuItem value="mono">
                     {t('MONOFASICA_NORMAL')}
                   </MenuItem>
