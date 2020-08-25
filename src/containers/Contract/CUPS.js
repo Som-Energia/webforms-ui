@@ -54,7 +54,6 @@ const CUPS = (props) => {
   }
 
   const handleChangeService = ({ option }) => {
-
     setFieldValue('contract', {
       rate: '',
       power: '',
@@ -64,6 +63,7 @@ const CUPS = (props) => {
       phases: '',
       moreThan15kWh: false
     }, false)
+    option === false ? setFieldValue('holder.previous_holder', false, false) : setFieldValue('holder.previous_holder', '', false)
     setFieldValue('contract.has_service', option)
   }
 
