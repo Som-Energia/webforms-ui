@@ -41,27 +41,25 @@ const MemberIdentifier = (props) => {
 
       try {
         const member = await checkMember(values.member.number, values.member.vat)
-        console.log(member)
         if (member?.data?.soci?.nom) {
+          setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
+          setFieldValue('member.name', member?.data?.soci?.nom, false)
+          setFieldValue('member.address', member?.data?.soci?.adreca, false)
+          setFieldValue('member.postal_code', member?.data?.soci?.cp, false)
+          setFieldValue('member.state.id', member?.data?.soci?.provincia, false)
+          setFieldValue('member.city.id', member?.data?.soci?.municipi, false)
+          setFieldValue('member.surname1', member?.data?.soci?.cognom, false)
+          setFieldValue('member.email', member?.data?.soci?.email, false)
+          setFieldValue('member.phone1', member?.data?.soci?.tel, false)
+          setFieldValue('member.phone2', member?.data?.soci?.tel2, false)
+          setFieldValue('member.language', member?.data?.soci?.lang, false)
+
           setFieldValue('member.checked', true)
           setError(null)
-        }
-        else {
+        } else {
           setError(true)
           setFieldValue('member.checked', false)
         }
-        setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
-        setFieldValue('member.name', member?.data?.soci?.nom, '')
-        setFieldValue('member.address', member?.data?.soci?.adreca, '')
-        setFieldValue('member.postal_code', member?.data?.soci?.cp, '')
-        setFieldValue('member.state.id', member?.data?.soci?.provincia, '')
-        setFieldValue('member.city.id', member?.data?.soci?.municipi, '')
-        setFieldValue('member.surname1', member?.data?.soci?.cognom, '')
-        setFieldValue('member.email', member?.data?.soci?.email, '')
-        setFieldValue('member.phone1', member?.data?.soci?.tel, '')
-        setFieldValue('member.phone2', member?.data?.soci?.tel2, '')
-        setFieldValue('member.language', member?.data?.soci?.lang, '')
-
       } catch (error) {
         console.log(error)
         setError(error)
@@ -72,8 +70,7 @@ const MemberIdentifier = (props) => {
     if (values?.member?.number &&
       values?.member?.vat && values.member.vat.length >= 8) {
       checkIsMember()
-    }
-    else {
+    } else {
       setFieldValue('member.checked', false)
     }
   }, [values.member.number, values.member.vat, setFieldValue])
@@ -109,7 +106,7 @@ const MemberIdentifier = (props) => {
                     }
                   </InputAdornment>
               }}
-              error={(errors?.member?.number && touched?.member?.number) || error}
+              error={error !== false || (errors?.member?.number && touched?.member?.number)}
               helperText={(touched?.member?.number && errors?.member?.number) ||
                 (!values?.member?.checked
                   ? error
