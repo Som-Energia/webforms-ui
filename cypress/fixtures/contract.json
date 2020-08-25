@@ -25,6 +25,7 @@
   "supplyPoint": {
     "cups": "ES0824987817389148BZ",
     "hasService": true,
+    "hasNoService": false,
     "address": "Pedro López",
     "number": "13",
     "postalCode": "17003",
@@ -41,6 +42,8 @@
   "fare30A": "3.0A",
   "power": 4.4,
   "power2": 16,
-  "power3": 10
+  "power3": 10,
+  "phase": "mono",
+  "fare": "nodh"
 }
 
