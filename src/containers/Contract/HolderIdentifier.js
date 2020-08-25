@@ -62,13 +62,12 @@ const HolderIdentifier = (props) => {
           }
         />
       </Box>
-
       <Box mt={1} mb={1} className={classes.chooserContainer}>
         <Chooser
           question={t('PREVIOUS_HOLDER')}
           onChange={handleChangePreviousHolder}
-          value={values.holder.previous_holder}
-          disabled={values.holder.vatvalid !== true}
+          value={ values.contract.has_service === false ? false : values.holder.previous_holder}
+          disabled={values.holder.vatvalid !== true || values.contract.has_service === false}
           options={[
             {
               value: true,

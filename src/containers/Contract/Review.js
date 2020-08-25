@@ -128,18 +128,9 @@ const Review = (props) => {
   }
 
   const Prices = ({ concept, name }) => {
-    const periods = []
-    if (concept) {
-      Object.entries(concept).forEach(entry => {
-        const [key, value] = entry
-        periods.push(
-          <div key={`${name}:${key}`}>
-            <Typography className={classes.value} variant="body2">{`${value?.value} ${value?.uom}`}</Typography>
-          </div>
-        )
-      })
-    }
-    return periods
+    return concept && Object.entries(concept).map(([key, value]) =>
+      <span key={`${name}:${key}`}>{`${value?.value} ${value?.uom}`}</span>
+    )
   }
 
   return (

@@ -54,14 +54,13 @@ const MemberIdentifier = (props) => {
           setFieldValue('member.phone2', member?.data?.soci?.tel2, false)
           setFieldValue('member.language', member?.data?.soci?.lang, false)
 
+          setError(false)
           setFieldValue('member.checked', true)
-          setError(null)
         } else {
           setError(true)
           setFieldValue('member.checked', false)
         }
       } catch (error) {
-        console.log(error)
         setError(error)
       }
 
