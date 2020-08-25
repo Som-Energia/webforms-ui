@@ -4,6 +4,101 @@ describe('Contract', () => {
     cy.fixture('contract.json').as('data')
   })
 
+  describe('Correct data: no service', function () {
+    beforeEach(function () {
+      cy.get('#memberNumber')
+        .clear()
+        .type(this.data.member.number)
+        .should('have.value', this.data.member.number)
+
+      cy.get('#vat')
+        .clear()
+        .type(this.data.member.vat)
+        .should('have.value', this.data.member.vat)
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('#cups')
+        .clear()
+        .type(this.data.supplyPoint.cups)
+        .should('have.value', this.data.supplyPoint.cups)
+
+      cy.wait(500)
+      cy.get(`[data-value="${this.data.supplyPoint.hasNoService}"]`).click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('#supply_point_address')
+        .clear()
+        .type(this.data.supplyPoint.address)
+        .should('have.value', this.data.supplyPoint.address)
+
+      cy.get('#supply_point_number')
+        .clear()
+        .type(this.data.supplyPoint.number)
+        .should('have.value', this.data.supplyPoint.number)
+
+      cy.get('#supply_point_postal_code')
+        .clear()
+        .type(this.data.supplyPoint.postalCode)
+        .should('have.value', this.data.supplyPoint.postalCode)
+
+      cy.get('#supply_point_state').click()
+      cy.get(`[data-value="${this.data.supplyPoint.state}"]`).click()
+
+      cy.get('#supply_point_city').click()
+      cy.get(`[data-value="${this.data.supplyPoint.city}"]`).click()
+
+      cy.get('#supply_point_is_housing').click()
+      cy.get(`[data-value="${this.data.supplyPoint.isHousing}"]`).click()
+
+      cy.get('#supply_point_cnae')
+        .should('have.value', this.data.supplyPoint.cnae)
+
+      cy.get('[data-cy=next]').click()
+    })
+
+    afterEach(function () {
+      cy.get('[name="holder.vat"]')
+        .type(this.data.member.vat).should('have.value', this.data.member.vat)
+
+      cy.wait(600)
+      cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get(`[data-value="${this.data.holder.voluntaryCent}"]`).click()
+
+      cy.get('[data-cy=next]').click()
+
+      cy.get('[name="payment.iban"]')
+        .clear()
+        .type(this.data.holder.iban).should('have.value', this.data.holder.iban)
+
+      cy.get('[name="payment.sepa_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
+      cy.get('[data-cy=next]').click()
+
+      cy.contains('€/kWh')
+    })
+
+    it('Monofasica no DH', function () {
+
+      cy.get('#phases').click()
+      cy.get(`[data-value="${this.data.phase}"]`).click()
+
+      cy.get('[name="contract.power"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('#fare').click()
+      cy.get(`[data-value="${this.data.fare}"]`).click()
+
+      cy.get('[data-cy=next]').click()
+    })
+
+  })
+
   describe('Correct data', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
