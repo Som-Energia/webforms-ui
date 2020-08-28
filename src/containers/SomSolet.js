@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 
+import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 
@@ -27,7 +28,7 @@ import { getCampaign, getProject } from '../services/api'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: '4px',
-    paddingRight: '4px'
+    paddingRight: '4px',
   },
   column: {
     margin: theme.spacing(1),
@@ -35,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: '#4d4d4d',
     backgroundColor: '#ffffff'
+  },
+  fullHeight: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: 'calc(100vh - 34px)'
   },
   option: {
     display: 'flex',
@@ -135,7 +141,8 @@ const useStyles = makeStyles((theme) => ({
   },
   currentPhase: {
     backgroundColor: '#96b633',
-    color: '#fff'
+    color: '#fff',
+    cursor: 'pointer'
   },
   phaseName: {
     paddingLeft: '8px'
@@ -150,6 +157,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f2f2f2',
     color: 'rgba(77, 77, 77, 0.65)',
     padding: '0 16px 0 16px',
+    cursor: 'pointer',
     '& h3': {
       fontSize: '1em',
       margin: '16px 0 16px 0',
@@ -162,6 +170,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#4d4d4d',
     backgroundColor: '#fff',
     margin: '24px 0',
+    padding: '0 16px 0 16px',
     '& h3': {
       fontSize: '1.25em',
       fontWeight: 600,
@@ -169,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   separator: {
-    marginTop: '64px'
+    flexGrow: 1
   }
 }))
 
@@ -180,6 +189,69 @@ const OptionField = ({ label, value }) => {
       <div className={classes.label}>{label}</div>
       <div className={classes.value}>{value}</div>
     </div>
+  )
+}
+
+const PhaseInfo = ({ data }) => {
+  return (
+    Object.entries(data)
+      .map(([label, value]) => {
+        switch (label) {
+          case 'file':
+            return <OptionField 
+              key={label}
+              label={''}
+              value={
+                <Button 
+                  size='small'
+                  variant='contained'
+                  color='primary'
+                  target='_blank'
+                  href={value}
+                >
+                    Descarrega
+                </Button>
+              }
+            />
+          case 'action':
+            return <OptionField 
+            key={label}
+            label={''}
+            value={
+              <Button 
+                size='small'
+                variant='contained'
+                color='primary'
+                target='_blank'
+                href={value}
+              >
+                Som-hi!
+              </Button>
+            }
+          />
+          case 'date':
+            return <OptionField key={label} label={'Data'} value={value} />
+          default:
+            if (`${value}`.match('https:')) {
+              return <OptionField 
+                key={label}
+                label={''}
+                value={
+                  <Button 
+                    size='small'
+                    variant='contained'
+                    color='primary'
+                    target='_blank'
+                    href={value}
+                  >
+                    { label }
+                  </Button>
+                }
+              />
+            }
+            return <OptionField key={label} label={label} value={value ? 'Sí' : 'No'} />
+        }
+      })
   )
 }
 
@@ -235,7 +307,7 @@ const Preregistration = (props) => {
   const { preregistrationInfo } = props
   const preregisrtation = {
     Data: preregistrationInfo.date,
-    Pagat: preregistrationInfo.paid ? "Sí" : "No"
+    Pagat: preregistrationInfo.paid ? 'Sí' : 'No'
   }
   return (
     Object.entries(preregisrtation)
@@ -269,9 +341,10 @@ const SomSolet = (props) => {
   const [project, setProject] = useState([])
   const [isLoadingProject, setIsLoadingProject] = useState(true)
   const [activeOption, setActiveOption] = useState(0)
+  const [activePhase, setActivePhase] = useState(0)
   const [currentPhase, setCurrentPhase] = useState('preinforme')
-  const [prevPhase] = useState('prereport')
-  const [nextPhase] = useState('technicalVisit')
+  const [prevPhase, setPrevPhase] = useState('prereport')
+  const [nextPhase, setNextPhase] = useState('technicalVisit')
   let afterCurrent = false
 
   useEffect(() => {
@@ -294,11 +367,12 @@ const SomSolet = (props) => {
         const projectInfo = response.data[0]  // TODO: to check
         const projectDescription = projectInfo.description
         const project = getProjectList(projectDescription)
-        setProject(project)
+        setProject(project.reverse())
         const stages = projectInfo.stages
         const phasesList = getPhasesList(stages)
         setStages(phasesList)
         setCurrentPhase(stages?.stageId)
+        setActivePhase(stages?.stageId)
         setIsLoadingProject(false)
       }).catch(error => {
         console.log(error)
@@ -306,12 +380,27 @@ const SomSolet = (props) => {
       })
   }, [])
 
+  useEffect(() => {
+    
+    if (stages.length) {
+      const itemPhase = stages.find((item) => item.id === activePhase)
+      const indexPhase = stages.indexOf(itemPhase)
+      console.log(stages)
+      console.log(indexPhase)
+      const prevIndexPhase = indexPhase - 1
+      const nextIndexPhase = indexPhase + 1
+      console.log(prevIndexPhase, nextIndexPhase)
+      setPrevPhase(prevIndexPhase >= 0 ?  stages[prevIndexPhase]?.id : false)
+      setNextPhase(nextIndexPhase <= stages.length ? stages[nextIndexPhase]?.id : false)  
+    }
+  }, [activePhase, stages])
+
   const getPhasesList = (stages) => {
     const phasesist = []
     Object.entries(stages).map(([ key, value ], index) => {
-      if (key !== "stageId" && key !== "discardedType") {
+      if (key !== 'stageId' && key !== 'discardedType') {
         const title = getPhaseTitle(key)
-        const content = getOptionContent(key, value)
+        const content = getPhaseContent(key, value)
         const info = {
           id: key,
           title: title,
@@ -325,50 +414,54 @@ const SomSolet = (props) => {
 
   const getProjectList = (projectDescription) => {
     const project = []
-        Object.entries(projectDescription).map(([ key, value ], index) => {
-          const content = getOptionContent(key, value)
-          const title = getOptionTitle(key)
-          const info = {
-            id: key,
-            title: title,
-            content: content
-          }
-          project.push(info)
-        });
+    Object.entries(projectDescription).map(([ key, value ], index) => {
+      const content = getOptionContent(key, value)
+      const title = getOptionTitle(key)
+      const info = {
+        id: key,
+        title: title,
+        content: content
+      }
+      project.push(info)
+    })
     return project
   }
 
   const getOptionTitle = (key) => {  // TODO: Refactor
-    if (key === "supplyPoint") return "Punt de Subministrament"
-    if (key === "project") return "Projecte"
-    if (key === "registeredPerson") return "Persona inscrita"
-    if (key === "preregistration") return "Inscripció inicial"
-    if (key === "registered") return "Proposta final"
-    return ""
+    if (key === 'supplyPoint') return 'Punt de Subministrament'
+    if (key === 'project') return 'Projecte'
+    if (key === 'registeredPerson') return 'Persona inscrita'
+    if (key === 'preregistration') return 'Inscripció inicial'
+    if (key === 'registered') return 'Proposta final'
+    return ''
   }
 
   const getOptionContent = (key, value) => {  // TODO: Refactor
-    if (key === "supplyPoint") return <SupplyPoint supplyPointInfo={value}/>
-    if (key === "project") return <Project projectInfo={value}/>
-    if (key === "registeredPerson") return <RegisteredPerson registeredPersonInfo={value}/>
-    if (key === "preregistration") return <Preregistration preregistrationInfo={value}/>
-    if (key === "registered") return <Registered registeredInfo={value}/>
+    if (key === 'supplyPoint') return <SupplyPoint supplyPointInfo={value}/>
+    if (key === 'project') return <Project projectInfo={value}/>
+    if (key === 'registeredPerson') return <RegisteredPerson registeredPersonInfo={value}/>
+    if (key === 'preregistration') return <Preregistration preregistrationInfo={value}/>
+    if (key === 'registered') return <Registered registeredInfo={value}/>
     return <></>
   }
 
   const getPhaseTitle = (key) => {  // TODO: Refactor
-    if (key === "prereport") return "Preinforme"
-    if (key === "technicalVisit") return "Informe visita tècnica"
-    if (key === "report") return "Report ???"
-    if (key === "offer") return "Proposta d'oferta final"
-    if (key === "constructionPermit") return "Permís d'obra"
-    if (key === "installation") return "Instal·lació ???"
-    if (key === "deliveryCertificate") return "Acta de recepció"
-    if (key === "legalRegistration") return "Acte de recepció ??"
-    if (key === "legalization") return "Legalització"
-    if (key === "invoice") return "Factura ??"
-    if (key === "signature") return "Signatura Contracte Clau en mà"
-    return ""
+    if (key === 'prereport') return 'Preinforme'
+    if (key === 'technicalVisit') return 'Informe visita tècnica'
+    if (key === 'report') return 'Report'
+    if (key === 'offer') return 'Proposta d\'oferta final'
+    if (key === 'constructionPermit') return 'Permís d\'obra'
+    if (key === 'installation') return 'Instal·lació'
+    if (key === 'deliveryCertificate') return 'Acta de recepció'
+    if (key === 'legalRegistration') return 'Acte de recepció'
+    if (key === 'legalization') return 'Legalització'
+    if (key === 'invoice') return 'Factura'
+    if (key === 'signature') return 'Signatura Contracte Clau en mà'
+    return ''
+  }
+
+  const getPhaseContent = (key, value) => {  // TODO: Refactor
+    return <PhaseInfo data={value}/>
   }
 
   const getPhase = (stages, phaseId, withContent = false) => {
@@ -386,19 +479,20 @@ const SomSolet = (props) => {
     isLoadingCampaign || isLoadingProject
     ? <Loading/>
     :
-      <Container maxWidth="lg" className={classes.root}>
+      <Container maxWidth='lg' className={classes.root}>
         <Grid container>
           <Grid item sm={3} xs={12}>
-            <div className={classes.column}>
+            <div className={clsx(classes.column, classes.fullHeight)}>
               {
               project.map(({ title, content }, index) => (
-                <div key={title}>
+                <>
                   <div
+                    key={title}
                     className={clsx(classes.option, activeOption === index && classes.activeOption)}
                     onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
                   >
                     {
-                      activeOption === index ? <ArrowDropDownIcon fontSize="small" /> : <ArrowRightIcon fontSize="small" />
+                      activeOption === index ? <ArrowDropDownIcon fontSize='small' /> : <ArrowRightIcon fontSize='small' />
                     }
                     &nbsp;{title}
                   </div>
@@ -408,14 +502,14 @@ const SomSolet = (props) => {
                       { content }
                     </div>
                   }
-                </div>
+                </>
               ))
             }
               <div className={classes.separator}> </div>
 
               <div className={classes.option}>
                 <div className={classes.phaseIcon}>
-                  <MailOutlinedIcon fontSize="small" />
+                  <MailOutlinedIcon fontSize='small' />
                 </div>
                 <div className={classes.phaseName}>
                   Contacte instal·ladora
@@ -424,7 +518,7 @@ const SomSolet = (props) => {
 
               <div className={classes.option}>
                 <div className={classes.phaseIcon}>
-                  <ReportProblemOutlinedIcon fontSize="small" />
+                  <ReportProblemOutlinedIcon fontSize='small' />
                 </div>
                 <div className={classes.phaseName}>
                   Notifica incidència
@@ -433,7 +527,7 @@ const SomSolet = (props) => {
 
               <div className={classes.option}>
                 <div className={classes.phaseIcon}>
-                  <PowerSettingsNewOutlinedIcon fontSize="small" />
+                  <PowerSettingsNewOutlinedIcon fontSize='small' />
                 </div>
                 <div className={classes.phaseName}>
                   &nbsp;&nbsp;Donar-se de baixa
@@ -442,23 +536,24 @@ const SomSolet = (props) => {
             </div>
           </Grid>
           <Grid item sm={6} xs={12}>
-            <div className="">
+            <div className=''>
               <div className={clsx(classes.column, classes.mainHeader)}>
                 <h2> {campaign.name} </h2>
                 <div className={classes.mainHeaderInfo}>
-                  <div> <WbSunnyOutlinedIcon fontSize="small" />
-                    &nbsp; {campaign.installations?.completed}
-                    &nbsp; <RoomOutlinedIcon fontSize="small" />
-                    &nbsp; {campaign.region?.geographicalRegion},
-                    &nbsp; {campaign.region?.autonomousCommunity}
+                  <div> <WbSunnyOutlinedIcon fontSize='small' />
+                    &nbsp;{campaign.installations?.completed}
+                    &nbsp;instal·lacions
+                    &nbsp;<RoomOutlinedIcon fontSize='small' />
+                    &nbsp;{campaign.region?.geographicalRegion},
+                    &nbsp;{campaign.region?.autonomousCommunity}
                   </div>
                   <div> {campaign.engineering.map(
                       ({ name, address, email, phoneNumber }) => {
                         return (
                           <div key={name} className={classes.engineeringInfo}>
-                            &nbsp; <SettingsOutlinedIcon fontSize="small" />
+                            &nbsp; <SettingsOutlinedIcon fontSize='small' />
                             &nbsp; <div>
-                              <a href={address} target="_blank">{name}</a>
+                              <a href={address} target='_blank'>{name}</a>
                               &nbsp; ({phoneNumber})
                             </div>
                           </div>
@@ -470,37 +565,46 @@ const SomSolet = (props) => {
                 </div>
               </div>
               <div className={clsx(classes.column, classes.main)}>
-                <div className={{}}>
-                  <div className={classes.phaseTitle}>
-                    {
-                      getPhase(stages, prevPhase)
-                    }
-                    <UndoOutlinedIcon />
-                  </div>
-                  <div className={clsx(classes.phaseTitle, classes.mainPhase)}>
-                    {
-                      getPhase(stages, currentPhase, true)
-                    }
-                  </div>
-                </div>
-                <div className={classes.phaseTitle}>
+                <div>
                   {
-                    getPhase(stages, nextPhase)
+                    prevPhase &&
+                    <div
+                      className={classes.phaseTitle}
+                      onClick={(event) => setActivePhase(prevPhase)}
+                    >
+                      { getPhase(stages, prevPhase) }
+                      <UndoOutlinedIcon />
+                    </div>
                   }
-                  <RedoOutlinedIcon />
+
+                  <div className={classes.mainPhase}>
+                    { getPhase(stages, activePhase, true) }
+                  </div>
                 </div>
+                {
+                  nextPhase &&
+                  <div
+                    className={classes.phaseTitle}
+                    onClick={(event) => currentPhase == activePhase ? "" : setActivePhase(nextPhase)}
+                  >
+                    { getPhase(stages, nextPhase) }
+                    <RedoOutlinedIcon />
+                  </div>
+                }
               </div>
             </div>
           </Grid>
           <Grid item sm={3} xs={12}>
             <div className={classes.column}>
               {
-                stages.map(({ id, title }) => {
+                stages && stages.map(({ id, title }) => {
+                  const isClickable = !afterCurrent
                   afterCurrent = afterCurrent || currentPhase === id
                   return (
                     <div
                       key={id}
                       className={clsx(classes.phase, afterCurrent && classes.futurePhase, currentPhase === id && classes.currentPhase)}
+                      onClick={(event) => isClickable && setActivePhase(id) }
                     >
                       <div className={classes.phaseIcon}>
                         { afterCurrent ? <CheckBoxOutlineBlankOutlinedIcon /> : <CheckBoxOutlinedIcon /> }
