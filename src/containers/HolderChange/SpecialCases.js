@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
   chooserItemDesc: {
     marginTop: theme.spacing(1),
     paddingLeft: theme.spacing(1)
+  },
+  attachmentTitle: {
+    paddingLeft: theme.spacing(1)
   }
 }))
 
@@ -111,7 +114,7 @@ const SpecialCases = (props) => {
             />
             { values.especial_cases?.reason_death &&
               <>
-                <Typography>
+                <Typography className={classes.attachmentTitle}>
                   {t('CERT_ATTACH_DEATH')}
                 </Typography>
                 <Box mt={1} mb={2}>
@@ -146,7 +149,7 @@ const SpecialCases = (props) => {
             />
             { values.especial_cases?.reason_electrodep &&
               <>
-                <Typography>
+                <Typography className={classes.attachmentTitle}>
                   {t('ELECTRODEP_ATTACH_MEDICAL')}
                 </Typography>
                 <Box mt={1} mb={1}>
@@ -156,7 +159,7 @@ const SpecialCases = (props) => {
                     values={values.especial_cases.attachments?.medical}
                   />
                 </Box>
-                <Typography>
+                <Typography className={classes.attachmentTitle}>
                   {t('ELECTRODEP_ATTACH_RESIDENT')}
                 </Typography>
                 <Box mt={1} mb={0}>

@@ -158,7 +158,7 @@
   "BECOME_MEMBER_PRESENTATION": "<p>Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma.</p><p>Si ya eres socio o socia de Som Energia, no es necesario que marques ninguna opción y puedes seguir adelante con el formulario.</p>",
   "BECOME_MEMBER_QUESTION": "Quieres ser persona sòcia de la cooperativa?",
   "BECOME_MEMBER_YES_LABEL": "Sí, quiero ser persona socia de la cooperativa",
-  "BECOME_MEMBER_YES_DESCRIPTION": "Para serlo debes llevar a cabo una aportación única al capital social de <b>100€</b>, que <b>se devuelven</b> en caso de que te des de baja.",
+  "BECOME_MEMBER_YES_DESCRIPTION": "Debes llevar a cabo una aportación única al capital social de <b>100€</b>, que <b>se devuelven</b> en caso de que te des de baja.",
   "BECOME_MEMBER_NO_LABEL": "No, todavía no quiero serlo",
   "BECOME_MEMBER_NO_DESCRIPTION": "Si todavía no te has decidido, te damos el tiempo necesario para que puedas valorar hacer este paso más adelante.",
   "BECOME_MEMBER_NOTE": "''",
@@ -168,7 +168,7 @@
   "VOLUNTARY_CENT_PRESENTATION": "Somos una cooperativa sin ánimo de lucro con el objetivo firme de cambiar el modelo energético. Los socios y socias que lo deseen pueden realizar un donativo voluntario de 0,01€/kWh destinado a apoyar y facilitar la acción social y voluntaria de los más de 50 Grupos Locales repartidos por el territorio.",
   "VOLUNTARY_CENT_QUESTION": "Quieres participar con tu energía para hacerlo posible?",
   "VOLUNTARY_CENT_YES_LABEL": "Sí, quiero hacer un donativo voluntario de 0,01€/kWh",
-  "VOLUNTARY_CENT_YES_DESCRIPTION": "Por un consumo medio de una família (aproximadamente 300kWh/mes) esto representa un incremento de 3€ mensuales.",
+  "VOLUNTARY_CENT_YES_DESCRIPTION": "Por un consumo medio de una família (aprox. 300kWh/mes) esto representa un incremento de 3€ mensuales.",
   "VOLUNTARY_CENT_NO_LABEL": "No",
   "VOLUNTARY_CENT_NO_DESCRIPTION": "Siempre que quieras podrás activar o desactivar este donativo al instante desde la Oficina Virtual.",
   "NO_VOLUNTARY_DONATION_CHOICE_TAKEN": "Es necesario especificar si quieres hacer o no el donativo voluntario",
@@ -324,6 +324,6 @@
   "PHASE_MONO": "Monofásica",
   "PHASE_TRI": "Trifásica",
 
-  "SEPA_TITLE": "Orden de domiciliación de adeudo directo SEPA",
-  "SEPA": "<p>Mediante la firma de esta orden de domiciliación, el deudor autoriza (A) al acreedor a enviar instrucciones a la entidad del deudor para adeudar su cuenta y (B) a la entidad para efectuar los adeudos en su cuenta siguiendo las instrucciones del acreedor.</p><p>Como parte de sus derechos, el deudor está legitimado al reembolso por su entidad en los términos y condiciones del contrato suscrito con la misma.</p><p>La solicitud de reembolso deberá efectuarse dentro de las ocho semanas que siguen a la fecha de adeudo en cuenta.</p><p>Puede obtener información adicional sobre sus derechos en su entidad financiera.</p>"
+  "SEPA_TITLE": "Condiciones de pago",
+  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>"
 }
