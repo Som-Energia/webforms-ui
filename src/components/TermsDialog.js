@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
@@ -10,17 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 const TermsDialog = (props) => {
   const { t } = useTranslation()
-  const { open, onClose, onAccept, title, content } = props
-  const descriptionElementRef = useRef(null)
-
-  useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef
-      if (descriptionElement !== null) {
-        descriptionElement.focus()
-      }
-    }
-  }, [open])
+  const { open, onClose, onAccept, title } = props
 
   return (
     <>
@@ -30,15 +20,14 @@ const TermsDialog = (props) => {
         scroll="paper"
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
+        maxWidth="md"
       >
         <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
         <DialogContent dividers={true}>
           <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
             tabIndex={-1}
-            dangerouslySetInnerHTML={{ __html: content }}
           >
+            {props.children}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
