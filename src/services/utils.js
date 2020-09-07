@@ -1,4 +1,4 @@
-const THOUSANDS_CONVERSION_FACTOR = 1000
+export const THOUSANDS_CONVERSION_FACTOR = 1000
 
 export const CNAE_HOUSING = '9820'
 
@@ -106,6 +106,16 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract?.payment?.iban_valid
   }
 
+  if (normalContract?.especial_cases && normalContract?.especial_cases?.attachments) {
+    const hasSpecialCases = Object.keys(normalContract.especial_cases)
+      .map(prop => prop.indexOf('reason') === 0 && normalContract.especial_cases[prop] === true)
+      .reduce((prev, current) => !prev ? current : prev)
+
+    if (!hasSpecialCases) {
+      delete normalContract.especial_cases.attachments
+    }
+  }
+
   return normalContract
 }
 
@@ -197,7 +207,7 @@ export const calculateTariff = ({ changePower = true, power, moreThan15Kw, chang
   if (changePower) {
     if (!moreThan15Kw) {
       if (changeFare) {
-        tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
+        tariff = parseFloat(power) <= 10 ? '2.0' : '2.1'
         if (fare) {
           tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
         }
