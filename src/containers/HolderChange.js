@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
@@ -210,7 +211,7 @@ function HolderChange (props) {
     })
   ]
 
-  const MAX_STEP_NUMBER = 7
+  const MAX_STEP_NUMBER = 8
 
   const getActiveStep = (props) => {
     const url = t("DATA_PROTECTION_HOLDERCHANGE_URL")
@@ -283,13 +284,16 @@ function HolderChange (props) {
         setCompleted(true)
       })
       .catch(error => {
+        console.log(error?.response)
         const errorResp =
           error?.response?.data?.data
             ? error?.response?.data?.data
             : { code: 'UNEXPECTED' }
+        console.log(errorResp)
         setError(errorResp)
         setCompleted(true)
       })
+    setActiveStep(MAX_STEP_NUMBER)
     setSending(false)
   }
 
@@ -327,7 +331,7 @@ function HolderChange (props) {
     payment: {
       iban: '',
       sepa_accepted: false,
-      voluntary_cent: false
+      voluntary_cent: ''
     },
     especial_cases: {
       reason_death: false,
@@ -355,6 +359,7 @@ function HolderChange (props) {
                 <Form className={classes.root} noValidate>
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
+                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
                       <Box mx={4} mb={3}>
                         { completed
                           ? error
@@ -379,7 +384,7 @@ function HolderChange (props) {
 
                           }
                           {
-                            activeStep < MAX_STEP_NUMBER
+                            activeStep < MAX_STEP_NUMBER - 1
                               ? <Button
                                 type="button"
                                 data-cy="next"
