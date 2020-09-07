@@ -133,11 +133,12 @@ function IBAN (props) {
 
       <TermsDialog
         title={t('SEPA_TITLE')}
-        content={t('SEPA')}
         open={open}
         onAccept={handleAccept}
         onClose={handleClose}
-      />
+      >
+        <span dangerouslySetInnerHTML={{ __html: t('SEPA') }} />
+      </TermsDialog>
     </>
   )
 }

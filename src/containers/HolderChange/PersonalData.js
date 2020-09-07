@@ -23,7 +23,6 @@ import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
 
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     '& path': {
