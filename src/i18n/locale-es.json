@@ -130,13 +130,13 @@
   "HOLDER_LANGUAGE_HELP": "Idioma para la comunicación con Som Energia",
 
   "DATA_PROTECTION_HOLDERCHANGE_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-cambio-de-titular",
-  "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-contacto",
+  "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-del-contrato-luz",
   "PRIVACY_POLICY_TITLE": "Política de Protección de Datos",
   "ACCEPT_PRIVACY_POLICY": "He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>",
   "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/es/aviso-legal/",
   "PRIVACY_POLICY_HOLDERCHANGE": "<b>Finalidades</b>: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín, newsletter y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. <b>Derechos</b>: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. <b>Información adicional</b>: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
+  "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "En caso de proporcionar datos personales de terceros, declaras responsablemente que cuentas con su consentimiento y que les has proporcionado toda la información necesaria acerca de las finalidades y la forma en la que serán tratados sus datos personales.",
   "PRIVACY_POLICY_CONTRACT": "<b>Finalidades</b>: gestionar tu contrato de suministro de luz y darte de alta como abonado/a. <b>Derechos</b>: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. <b>Información adicional</b>: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
-
 
   "NO_NAME": "No has especificado el nombre",
   "NO_SURNAME1": "No has especificado el primer apellido",
@@ -161,7 +161,7 @@
   "BECOME_MEMBER_YES_DESCRIPTION": "Debes llevar a cabo una aportación única al capital social de <b>100€</b>, que <b>se devuelven</b> en caso de que te des de baja.",
   "BECOME_MEMBER_NO_LABEL": "No, todavía no quiero serlo",
   "BECOME_MEMBER_NO_DESCRIPTION": "Si todavía no te has decidido, te damos el tiempo necesario para que puedas valorar hacer este paso más adelante.",
-  "BECOME_MEMBER_NOTE": "''",
+  "BECOME_MEMBER_NOTE": " ",
   "BECOME_MEMBER_UNSELECTED": "Es necesario indicar si quieres o no hacerte socia",
 
   "VOLUNTARY_CENT_TITLE": "Donativo voluntario",
@@ -227,14 +227,14 @@
   "SPECIAL_CASES_ELECTRODEP": "Electrodependiente",
 
   "FAILURE_TITLE": "¡Ups!",
-  "FAILURE_TEXT": "Lo sentimos, no ha sido posible realizar el contrato",
+  "FAILURE_TEXT": "Lo sentimos, no ha sido posible realizar tu solicitud",
   "UNEXPECTED_POSTERROR": "Se ha producido un error!<br>{{error_message}}",
   "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
   "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
   "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
 
   "SUCCESS_TITLE": "Enhorabuena",
-  "SUCCESS_TEXT": "Estamos tramitando tu solicitud",
+  "SUCCESS_TEXT": "Hemos tramitado con éxito tu solicitud",
   "SUCCESS_NOTE": "El nuevo contrato tendrà el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el trámite sea efectivo.",
 
   "CONTRACT_TITLE": "Contratación",

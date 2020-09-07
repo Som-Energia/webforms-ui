@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
       color: 'rgba(0, 0, 0, 0.54)'
     }
   },
-  termsFirstLayer: {
-    textAlign: 'justify',
+  noteText: {
     marginTop: theme.spacing(2)
   }
 }))
@@ -326,15 +325,26 @@ function PersonalData (props) {
           </TextField>
         </Grid>
 
-        <Grid item mt={4} mb={3}>
+        <Grid item mt={1} mb={0}>
           <FormHelperText
-            className={classes.termsFirstLayer}
             dangerouslySetInnerHTML={
-              { __html: url === t("DATA_PROTECTION_HOLDERCHANGE_URL") ? t('PRIVACY_POLICY_HOLDERCHANGE', { url: url }) : t('PRIVACY_POLICY_CONTRACT', { url: url })}
+              { __html: values?.contract?.has_service === undefined
+                ? t('PRIVACY_POLICY_HOLDERCHANGE', { url: t("DATA_PROTECTION_HOLDERCHANGE_URL") })
+                : t('PRIVACY_POLICY_CONTRACT', { url: t("DATA_PROTECTION_CONTRACT_URL") })
+              }
             }
           />
+          {
+            values?.contract?.has_service === undefined
+              ? <FormHelperText
+                className={classes.noteText}
+                dangerouslySetInnerHTML={
+                  { __html: t('PRIVACY_POLICY_HOLDERCHANGE_NOTE') }
+                }
+              />
+              : <></>
+          }
         </Grid>
-
         <Grid item xs={12}>
           <FormGroup row>
             <FormControlLabel
@@ -347,11 +357,16 @@ function PersonalData (props) {
                   checked={values?.privacy_policy_accepted}
                 />
               }
-              label={ <label dangerouslySetInnerHTML={{ __html: t('ACCEPT_PRIVACY_POLICY', { url: url }) }} /> }
+              label={
+                <label dangerouslySetInnerHTML={
+                  { __html: t('ACCEPT_PRIVACY_POLICY', { url: values?.contract?.has_service === undefined ? t("DATA_PROTECTION_HOLDERCHANGE_URL") : t("DATA_PROTECTION_CONTRACT_URL") }) }
+                }/>
+              }
               labelPlacement="end"
             />
           </FormGroup>
         </Grid>
+
       </Grid>
     </>
   )
