@@ -51,7 +51,7 @@ function Failure (props) {
           <FailureTitle />
         </Typography>
         <Typography className={classes.margin} variant="body1"
-          dangerouslySetInnerHTML={{ __html: t('UNEXPECTED_POSTERROR', { error_message: t(error?.code) }) }}
+          dangerouslySetInnerHTML={{ __html: t('UNEXPECTED_POSTERROR', { error_message: error?.code ? t(error?.code) : error?.error }) }}
         />
         <Box mt={3} mb={1}>
           <img className={classes.logo} alt="Cuca KO de Som Energia" src={cuca} />
