@@ -24,6 +24,8 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 import Uploader from '../../components/Uploader'
 
+import { calculateTariff } from '../../services/utils'
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
@@ -60,32 +62,6 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }))
-
-const calculateTariff = (values) => {
-  const {
-    changePower,
-    power,
-    moreThan15Kw,
-    changeFare,
-    fare
-  } = values
-
-  let tariff = null
-
-  if (changePower) {
-    if (!moreThan15Kw) {
-      if (changeFare) {
-        tariff = parseFloat(power) < 10 ? '2.0' : '2.1'
-        if (fare) {
-          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
-        }
-      }
-    } else {
-      tariff = '3.0A'
-    }
-  }
-  return tariff
-}
 
 const handleChangeModify = (event, setFieldValue, values) => {
   if (event.target.name === 'changePhases' && values.changePhases) {
