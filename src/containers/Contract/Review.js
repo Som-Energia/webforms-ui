@@ -9,15 +9,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import ListItem from '@material-ui/core/ListItem'
-import List from '@material-ui/core/List'
 
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
 
 import { languages } from '../../services/utils'
 
-import generalTerms from '../../data/HolderChange/generalterms'
+import GeneralTerms from '../../components/GeneralTerms'
 
 import { getPrices, getRates } from '../../services/api'
 
@@ -48,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px'
   },
   listItem: {
-    paddingTop: '8px',
+    paddingTop: '8px'
   },
   separatedField: {
     flexDirection: 'column',
@@ -82,6 +80,7 @@ const Review = (props) => {
         setPrices(tariffPrices)
         setLoading(false)
       }).catch(error => {
+        console.log(error)
         setLoading(false)
       })
   }, [])
@@ -221,11 +220,12 @@ const Review = (props) => {
 
         <TermsDialog
           title={t('GENERAL_TERMS')}
-          content={generalTerms}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}
-        />
+        >
+          <GeneralTerms />
+        </TermsDialog>
 
         <Box mt={3}>
           <FormControlLabel

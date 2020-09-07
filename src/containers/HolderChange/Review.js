@@ -15,7 +15,7 @@ import TermsDialog from '../../components/TermsDialog'
 import { languages } from '../../services/utils'
 
 // import generalTerms from '../../data/HolderChange/generalterms-es.html'
-import generalTerms from '../../data/HolderChange/generalterms'
+import GeneralTerms from '../../components/GeneralTerms'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
@@ -144,11 +144,12 @@ const Review = (props) => {
 
       <TermsDialog
         title={t('GENERAL_TERMS')}
-        content={generalTerms}
         open={open}
         onAccept={handleAccept}
         onClose={handleClose}
-      />
+      >
+        <GeneralTerms />
+      </TermsDialog>
 
       <Box mt={3}>
         <FormControlLabel
