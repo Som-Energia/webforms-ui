@@ -65,18 +65,14 @@ function D1Detail (props) {
 
   const [activeStep, setActiveStep] = useState(0)
   const [data, setData] = useState(props?.templateProps)
-  const { setFieldValue } = props
 
   const handleStepChanges = useCallback((params) => {
     setData({ ...data, ...params })
   }, [data])
 
-  const handlePost = async (values) => {
-    data.sending = true
-    //setFieldValue('data.sending', true)
+  const handlePost = async () => {
     console.log("SENDING TO API")
-    data.sending = false
-    //setFieldValue('data.sending', false)
+    console.log(data)
   }
 
   const getStepContent = (step) => {
@@ -95,6 +91,7 @@ function D1Detail (props) {
             nextStep={() => nextStep(2)}
             handlePost={() => handlePost()}
             handleStepChanges={handleStepChanges}
+            params={data}
           />
         }
         else {

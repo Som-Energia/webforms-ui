@@ -254,5 +254,8 @@
   "CIL": "CIL",
   "CAU": "CAU",
   "DATOS_AUTOCONSUMO": "Dades autoconsum",
-  "DATOS_GENERADORES": "Dades generadors"
+  "DATOS_GENERADORES": "Dades generadors",
+  "APROFITAR_LA_MODIFICACIO": "Vols aprofitar la modificació contractual?",
+  "AVIS_APROFITAR_M1": "Vull modificar la tensió, tarifa o potència",
+  "AVIS_NO_APROFITAR_M1": "No vull modificar la tensió, tarifa o potència"
 }
