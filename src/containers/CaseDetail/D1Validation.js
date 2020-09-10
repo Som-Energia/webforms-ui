@@ -171,34 +171,36 @@ function D1Validation ({ handleAcceptClick, handleRefuseClick, handleStepChanges
         </Box>
       </Box>
 
-      <div className={classes.actionsContainer}>
-        {
-          <Button
-            onClick={event => handleRefuseClick(event, params)}
-            style={{
-              backgroundColor: '#ba3329'
-            }}
-            variant="contained"
-            startIcon={<HighlightOff />}
-          >
-            {t('REBUTJAR')}
-          </Button>
-        }
-        {
-          <>
+      { params?.to_validate && <>
+        <div className={classes.actionsContainer}>
+          {
             <Button
-              type="submit"
-              onClick={event => handleAcceptClick(event, params)}
-              className={classes.button}
-              color="primary"
+              onClick={event => handleRefuseClick(event, params)}
+              style={{
+                backgroundColor: '#ba3329'
+              }}
               variant="contained"
-              startIcon={<CheckCircleOutlineIcon />}
+              startIcon={<HighlightOff />}
             >
-              {t('ACCEPTAR')}
+              {t('REBUTJAR')}
             </Button>
-          </>
-        }
-      </div>
+          }
+          {
+            <>
+              <Button
+                type="submit"
+                onClick={event => handleAcceptClick(event, params)}
+                className={classes.button}
+                color="primary"
+                variant="contained"
+                startIcon={<CheckCircleOutlineIcon />}
+              >
+                {t('ACCEPTAR')}
+              </Button>
+            </>
+          }
+        </div>
+      </> }
 
     </Paper>
   )

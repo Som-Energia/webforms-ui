@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Formik } from 'formik'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -10,10 +11,13 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Chooser from '../../components/Chooser'
 
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
+
+import Uploader from '../../components/Uploader'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,55 +42,121 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function AcceptD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges, params }) {
+function AcceptD1 ({ prevStep, handlePost, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
-
-      { params?.to_validate && <>
-        <Box mt={1} mx={1} mb={2}>
-          <Typography variant="body1"
-            dangerouslySetInnerHTML={{ __html: t('REVIEW_DATA_D1') }}
-          />
-        </Box>
-        <Box mx={1} mb={1}>
-          <Divider />
-        </Box>
-      </> }
-
-      <Box mx={1} mb={4}>
-      </Box>
-
-      <div className={classes.actionsContainer}>
-        {
-          <Button
-            data-cy="prev"
-            className={classes.button}
-            startIcon={<ArrowBackIosIcon />}
-            disabled={params?.sending}
-            onClick={() => prevStep(params)}
-          >
-            {t('PAS_ANTERIOR')}
-          </Button>
+      <Formik
+        initialValues={
+          {
+            ...{
+              attachments: [],
+              m1: ''
+            },
+            ...params
+          }
         }
-        {
-          <>
-            <Button
-              type="submit"
-              onClick={event => handlePost(event, params)}
-              className={classes.button}
-              color="primary"
-              variant="contained"
-              startIcon={<CheckCircleOutlineIcon />}
-            >
-              {t('ACCEPTAR')}
-            </Button>
-          </>
-        }
-      </div>
+        // validationSchema={ModifySchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true)
 
+          handlePost()
+          // nextStep()
+          setSubmitting(false)
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          setFieldValue,
+          isSubmitting
+        }) => (
+          <form onSubmit={handleSubmit} noValidate>
+
+            { params?.to_validate && <>
+              <Box mt={1} mx={1} mb={2}>
+                <Typography variant="body1"
+                  dangerouslySetInnerHTML={{ __html: t('REVIEW_DATA_D1') }}
+                />
+              </Box>
+              <Box mx={1} mb={1}>
+                <Divider />
+              </Box>
+            </> }
+
+            <Box mt={3} mb={1}>
+
+              <Box mt={3} mx={1} mb={1}>
+                <Typography>
+                  {t('D1_ATTACHMENTS')}
+                </Typography>
+              </Box>
+              <Box mx={3} mt={1} mb={1}>
+                <Uploader
+                  fieldError={false /*errors.attachments && touched.attachments && errors.attachments*/}
+                  callbackFn={attachments => setFieldValue('attachments', attachments)}
+                  values={values.attachments}
+                />
+              </Box>
+
+            </Box>
+
+            <Box mt={1} mb={1} className={classes.chooserContainer}>
+              <Chooser
+                question={t('APROFITAR_LA_MODIFICACIO')}
+                onChange={ option => setFieldValue('m1', option.option)}
+                value={values.m1}
+                options={[
+                  {
+                    value: true,
+                    label: t('SI'),
+                    description: t('AVIS_APROFITAR_M1')
+                  },
+                  {
+                    value: false,
+                    label: t('NO'),
+                    description: t('AVIS_NO_APROFITAR_M1')
+                  }
+                ]}
+              />
+            </Box>
+
+
+            <div className={classes.actionsContainer}>
+              {
+                <Button
+                  data-cy="prev"
+                  className={classes.button}
+                  startIcon={<ArrowBackIosIcon />}
+                  disabled={params?.sending}
+                  onClick={() => prevStep(params)}
+                >
+                  {t('PAS_ANTERIOR')}
+                </Button>
+              }
+              {
+                <>
+                  <Button
+                    type="submit"
+                    className={classes.button}
+                    color="primary"
+                    variant="contained"
+                    startIcon={<CheckCircleOutlineIcon />}
+                  >
+                    {t('ACCEPTAR')}
+                  </Button>
+                </>
+              }
+            </div>
+          </form>
+        )}
+      </Formik>
     </Paper>
   )
 }
