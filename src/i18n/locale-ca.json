@@ -238,5 +238,21 @@
     "SUCCESS_NOTE": "El nou contracte tindrà el número {{contract_number}}.<br> T'informarem per correu electrònic quan el tràmit sigui efectiu.",
 
     "SEPA_TITLE": "Condicions de pagament",
-    "SEPA": "<p>El pagament de les factures s'ha d'efectuar mitjançant domiciliació bancària al compte designat a aquest efecte per la contractant al formulari de contractació que consta a les condicions particulars, i s'ha de poder fer efectiu a partir dels 7 dies posteriors a la data de la factura.</p><p>La contractant declara i garanteix haver realitzat els tràmits necessaris davant l'entitat bancària, amb l'objectiu que aquestes condicions de pagament siguin efectives durant el període íntegre de vigència del contracte actual.</p>"
+    "SEPA": "<p>El pagament de les factures s'ha d'efectuar mitjançant domiciliació bancària al compte designat a aquest efecte per la contractant al formulari de contractació que consta a les condicions particulars, i s'ha de poder fer efectiu a partir dels 7 dies posteriors a la data de la factura.</p><p>La contractant declara i garanteix haver realitzat els tràmits necessaris davant l'entitat bancària, amb l'objectiu que aquestes condicions de pagament siguin efectives durant el període íntegre de vigència del contracte actual.</p>",
+
+  "DETAIL_D1_TITLE": "Detalls del tràmit d'autoconsum",
+  "ACCEPT_OR_REFUSE_TITLE": "Acceptació / Rebuig del tràmit",
+  "MODIFY_POTTAR_WITH_D1_TITLE": "Avís important",
+  "REVIEW_DATA_D1": "Revisa les dades que hem rebut. Si tot és correcte prem <b>acceptar</b>, altrament <b>rebutjar</b>.",
+  "INSTALLATION_TYPE": "Tipus d'instal·lació",
+  "GENERATOR_TECHNOLOGY": "Tecnologia de generació",
+  "SSAA": "SSAA",
+  "INSTALLED_POWER": "Potència instal·lada",
+  "REGISTER_SECTION": "Secció registrada",
+  "SUBSECTION": "Subsecció",
+  "COLLECTIVE": "Col·lectiu",
+  "CIL": "CIL",
+  "CAU": "CAU",
+  "DATOS_AUTOCONSUMO": "Dades autoconsum",
+  "DATOS_GENERADORES": "Dades generadors"
 }
