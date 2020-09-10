@@ -44,7 +44,6 @@ export const checkVat = async (vat) => {
     url: `${API_BASE_URL}check/vat/exists/${vat}`
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
@@ -148,7 +147,6 @@ export const checkMemberVat = async (vat) => {
     url: `${API_BASE_URL}check/vat/${vat}`
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
@@ -159,7 +157,6 @@ export const checkMember = async (number, vat) => {
     url: `${API_BASE_URL}data/soci/${number}/${vat}`
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
@@ -186,7 +183,6 @@ export const contract = async (data) => {
     data: formData
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
