@@ -103,7 +103,7 @@ export const normalizeHolderChange = (contract) => {
   }
 
   if (normalContract?.payment?.iban_valid !== undefined) {
-    delete normalContract?.payment?.iban_valid
+    delete normalContract.payment.iban_valid
   }
 
   if (normalContract?.especial_cases && normalContract?.especial_cases?.attachments) {
@@ -113,19 +113,28 @@ export const normalizeHolderChange = (contract) => {
 
     if (!hasSpecialCases) {
       delete normalContract.especial_cases.attachments
+    } else {
+      if (normalContract?.especial_cases?.attachments?.death) {
+        normalContract.especial_cases.attachments.death = normalContract?.especial_cases?.attachments?.death[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.medical) {
+        normalContract.especial_cases.attachments.medical = normalContract?.especial_cases?.attachments?.medical[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.resident) {
+        normalContract.especial_cases.attachments.resident = normalContract?.especial_cases?.attachments?.resident[0]
+      }
     }
   }
-
   return normalContract
 }
 
 export const normalizeContract = (contract) => {
-
   const finalContract = {}
   const holder = contract.holder.vat === contract.member.vat ? contract.member : contract.holder
 
   contract?.holder?.previous_holder === true ? finalContract.canvi_titular = '0' : finalContract.canvi_titular = '1'
-
   finalContract.cnae = contract?.supply_point?.cnae
 
   finalContract.compte_adreca = ''
