@@ -325,5 +325,20 @@
   "PHASE_TRI": "Trifásica",
 
   "SEPA_TITLE": "Condiciones de pago",
-  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>"
+  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>",
+
+  "DETAIL_D1_TITLE": "Detalles del trámite de autoconsumo",
+  "ACCEPT_OR_REFUSE_TITLE": "Acceptacion / Rechazo del trámite",
+  "MODIFY_POTTAR_WITH_D1_TITLE": "Aviso importante",
+  "INSTALLATION_TYPE": "Tipo de instalación",
+  "GENERATOR_TECHNOLOGY": "Tecnología de generación",
+  "SSAA": "SSAA",
+  "INSTALLED_POWER": "Potencia instalada",
+  "REGISTER_SECTION": "Sección registrada",
+  "SUBSECTION": "Subsección",
+  "COLLECTIVE": "Colectivo",
+  "CIL": "CIL",
+  "CAU": "CAU",
+  "REBUTJAR": "Rebutjar",
+  "ACCEPTAR": "Acceptar"
 }
