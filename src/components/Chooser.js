@@ -32,13 +32,15 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(3),
     paddingLeft: theme.spacing(3),
-    border: '2px solid rgba(0, 0, 0, 0.12)',
+    border: '1px solid rgba(0, 0, 0, 0.12)',
+    margin: '1px 1px 9px 1px',
     '&:hover': {
-      border: '2px solid rgba(0, 0, 0, 0.87)',
+      border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
     }
   },
   chooserItemSelected: {
+    margin: '0 0 8px 0',
     border: '2px solid #96b633',
     backgroundColor: 'rgba(150, 182, 51, 0.08)',
     '&:hover': {
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'not-allowed',
     color: 'rgba(0, 0, 0, 0.54)',
     '&:hover': {
-      border: '2px solid rgba(0, 0, 0, 0.12)',
+      border: '1px solid rgba(0, 0, 0, 0.12)',
       backgroundColor: 'inherit'
     }
 
