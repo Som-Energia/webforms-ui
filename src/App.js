@@ -50,12 +50,33 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-const App = ({ token = '' }) => {
+const App = ({ token = '', installed_power = '', cil = '', installation_type = '',
+  subsection = '',  cau = '', collective = '', generator_technology = '', ssaa = '',
+  register_section = '', to_validate = '' }) => {
   const classes = useStyles()
 
   const loadModifyContract = (props) => {
     const ModifyContract = lazy(() => import('./containers/ModifyContract'))
     return <ModifyContract {...props} token={token} />
+  }
+
+  const loadD1Detail = (props) => {
+    const D1Detail = lazy(() => import('./containers/D1Detail'))
+    var templateProps = {
+      token: token,
+      installed_power: installed_power,
+      cil: cil,
+      installation_type: installation_type,
+      subsection: subsection,
+      cau: cau,
+      collective: collective === "true",
+      generator_technology: generator_technology,
+      ssaa: ssaa === "true",
+      register_section: register_section,
+      to_validate: to_validate === "true"
+    }
+
+    return <D1Detail {...props} templateProps={templateProps} />
   }
 
   return (
@@ -74,6 +95,7 @@ const App = ({ token = '' }) => {
                     <Route path="/:language/change-ownership/" component={lazy(() => import('./containers/HolderChange'))} />
                     <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
                     <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
+                    <Route path="/d1-detail" render={loadD1Detail} />
                   </Switch>
                 </Router>
               </Suspense>
