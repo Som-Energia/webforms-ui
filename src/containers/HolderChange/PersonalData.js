@@ -37,24 +37,22 @@ const useStyles = makeStyles((theme) => ({
 function PersonalData (props) {
   const { t } = useTranslation()
   const classes = useStyles()
-  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched, url } = props
-
-  const [open, setOpen] = useState(false)
+  const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched, entity = 'holder' } = props
 
   const onChangeProxyVAT = ({ vat, valid }) => {
-    setFieldValue('holder.proxynif', vat)
-    setFieldValue('holder.proxynif_valid', valid)
+    setFieldValue(`${entity}.proxynif`, vat)
+    setFieldValue(`${entity}.proxynif_valid`, valid)
     validateForm()
   }
 
   const onChangeStateCity = ({ state, city }) => {
-    setFieldValue('holder.state', state, false)
-    setFieldValue('holder.city', city)
+    setFieldValue(`${entity}.state`, state, false)
+    setFieldValue(`${entity}.city`, city)
   }
 
   const handleClick = (event) => {
-    const privacy_policy_accepted = values?.privacy_policy_accepted
-    setFieldValue('privacy_policy_accepted', !privacy_policy_accepted)
+    const privacyPolicyAccepted = values?.privacy_policy_accepted
+    setFieldValue('privacy_policy_accepted', !privacyPolicyAccepted)
   }
 
   const handleChangePhone = (event) => {
@@ -70,49 +68,49 @@ function PersonalData (props) {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4}>
           <TextField
-            id="holder_name"
-            name="holder.name"
-            label={values.holder.isphisical ? t('HOLDER_NAME') : t('BUSINESS_NAME') }
+            id={`${entity}_name`}
+            name={`${entity}.name`}
+            label={values[entity]?.isphisical ? t('HOLDER_NAME') : t('BUSINESS_NAME') }
             variant="outlined"
             fullWidth
             autoFocus
             required
-            value={values.holder.name}
+            value={values[entity]?.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.name && touched?.holder?.name}
-            helperText={(touched?.holder?.name && errors?.holder?.name)}
+            error={errors[entity]?.name && touched[entity]?.name}
+            helperText={(touched[entity]?.name && errors[entity]?.name)}
           />
         </Grid>
-        { values.holder.isphisical
+        { values[entity].isphisical
           ? <>
             <Grid item xs={12} sm={4}>
               <TextField
-                id="holder_surname1"
-                name="holder.surname1"
+                id={`${entity}_surname1`}
+                name={`${entity}.surname1`}
                 label={t('HOLDER_SURNAME1')}
                 variant="outlined"
                 fullWidth
                 required
-                value={values?.holder?.surname1}
+                value={values[entity]?.surname1}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={errors?.holder?.surname1 && touched?.holder?.surname1}
-                helperText={(touched?.holder?.surname1 && errors?.holder?.surname1)}
+                error={errors[entity]?.surname1 && touched[entity]?.surname1}
+                helperText={(touched[entity]?.surname1 && errors[entity]?.surname1)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
-                id="holder_surname2"
-                name="holder.surname2"
+                id={`${entity}_surname2`}
+                name={`${entity}.surname2`}
                 label={t('HOLDER_SURNAME2')}
                 variant="outlined"
                 fullWidth
-                value={values?.holder?.surname2}
+                value={values[entity]?.surname2}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={errors?.holder?.surname2 && touched?.holder?.surname2}
-                helperText={(touched?.holder?.surname2 && errors?.holder?.surname2)}
+                error={errors[entity]?.surname2 && touched[entity]?.surname2}
+                helperText={(touched[entity]?.surname2 && errors[entity]?.surname2)}
               />
             </Grid>
           </>
@@ -120,35 +118,34 @@ function PersonalData (props) {
             <Grid item xs={12} sm={4}>
               <TextField
                 id="proxyname"
-                name="holder.proxyname"
+                name={`${entity}.proxyname`}
                 label={t('PROXY_NAME')}
                 required
-                values={values.holder.proxyname}
+                value={values[entity]?.proxyname}
                 variant="outlined"
                 fullWidth
-                value={values?.holder?.proxyname}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={errors?.holder?.proxyname && touched?.holder?.proxyname}
-                helperText={(touched?.holder?.proxyname && errors?.holder?.proxyname)}
+                error={errors[entity]?.proxyname && touched[entity]?.proxyname}
+                helperText={(touched[entity]?.proxyname && errors[entity]?.proxyname)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <VATField
                 id="proxynif"
-                name="holder.proxynif"
+                name={`${entity}.proxynif`}
                 label={t('PROXY_NIF')}
                 variant="outlined"
                 fullWidth
                 required
-                value={values?.holder?.proxynif}
+                value={values[entity]?.proxynif}
                 onChange={onChangeProxyVAT}
                 onBlur={handleBlur}
-                error={(errors?.holder?.proxynif && touched?.holder?.proxynif) ||
-                  (touched?.holder?.proxynif && values?.holder?.proxynif_valid === false)
+                error={(errors[entity]?.proxynif && touched[entity]?.proxynif) ||
+                  (touched[entity]?.proxynif && values[entity]?.proxynif_valid === false)
                 }
-                helperText={(touched?.holder?.proxynif && errors?.holder?.proxynif) ||
-                  (touched?.holder?.proxynif && errors?.holder?.proxynif_valid)
+                helperText={(touched[entity]?.proxynif && errors[entity]?.proxynif) ||
+                  (touched[entity]?.proxynif && errors[entity]?.proxynif_valid)
                 }
               />
             </Grid>
@@ -156,8 +153,8 @@ function PersonalData (props) {
         }
         <Grid item xs={12} sm={8}>
           <TextField
-            id="holder_address"
-            name="holder.address"
+            id={`${entity}_address`}
+            name={`${entity}.address`}
             label={t('HOLDER_ADDRESS')}
             className={classes.icon}
             required
@@ -169,47 +166,47 @@ function PersonalData (props) {
                 </InputAdornment>
             }}
             fullWidth
-            value={values?.holder?.address}
+            value={values[entity]?.address}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.address && touched?.holder?.address}
-            helperText={(touched?.holder?.address && errors?.holder?.address)}
+            error={errors[entity]?.address && touched[entity]?.address}
+            helperText={(touched[entity]?.address && errors[entity]?.address)}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            id="holder_postalcode"
-            name="holder.postal_code"
+            id={`${entity}_postalcode`}
+            name={`${entity}.postal_code`}
             label={t('HOLDER_POSTALCODE')}
             variant="outlined"
             required
             fullWidth
-            value={values?.holder?.postal_code}
+            value={values[entity]?.postal_code}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.postal_code && touched?.holder?.postal_code}
-            helperText={touched?.holder?.postal_code && errors?.holder?.postal_code}
+            error={errors[entity]?.postal_code && touched[entity]?.postal_code}
+            helperText={touched[entity]?.postal_code && errors[entity]?.postal_code}
           />
         </Grid>
 
         <StateCity
-          stateId="holder_state"
-          stateName="holder.state"
-          stateInitial={values?.holder?.state}
-          stateError={errors?.holder?.state && touched?.holder?.state}
-          stateHelperText={touched?.holder?.state && errors?.holder?.state}
-          cityId="holder_city"
-          cityName="holder.city"
-          cityInitial={values?.holder?.city}
-          cityError={errors?.holder?.city && touched?.holder?.city}
-          cityHelperText={touched?.holder?.city && errors?.holder?.city}
+          stateId={`${entity}_state`}
+          stateName={`${entity}.state`}
+          stateInitial={values[entity]?.state}
+          stateError={errors[entity]?.state && touched[entity]?.state}
+          stateHelperText={touched[entity]?.state && errors[entity]?.state}
+          cityId={`${entity}_city`}
+          cityName={`${entity}.city`}
+          cityInitial={values[entity]?.city}
+          cityError={errors[entity]?.city && touched[entity]?.city}
+          cityHelperText={touched[entity]?.city && errors[entity]?.city}
           onChange={onChangeStateCity}
         />
 
         <Grid item xs={12} sm={6}>
           <TextField
-            id="holder_email"
-            name="holder.email"
+            id={`${entity}_email`}
+            name={`${entity}.email`}
             className={classes.icon}
             label={t('HOLDER_EMAIL')}
             variant="outlined"
@@ -221,17 +218,17 @@ function PersonalData (props) {
             }}
             required
             fullWidth
-            value={values?.holder?.email}
+            value={values[entity]?.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.email && touched?.holder?.email}
-            helperText={(touched?.holder?.email && errors?.holder?.email)}
+            error={errors[entity]?.email && touched[entity]?.email}
+            helperText={(touched[entity]?.email && errors[entity]?.email)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="holder_email2"
-            name="holder.email2"
+            id={`${entity}_email2`}
+            name={`${entity}.email2`}
             className={classes.icon}
             label={t('HOLDER_EMAIL_2')}
             variant="outlined"
@@ -243,17 +240,17 @@ function PersonalData (props) {
             }}
             required
             fullWidth
-            value={values?.holder?.email2}
+            value={values[entity]?.email2}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.email2 && touched?.holder?.email2}
-            helperText={(touched?.holder?.email2 && errors?.holder?.email2)}
+            error={errors[entity]?.email2 && touched[entity]?.email2}
+            helperText={(touched[entity]?.email2 && errors[entity]?.email2)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="holder_phone"
-            name="holder.phone1"
+            id={`${entity}_phone`}
+            name={`${entity}.phone1`}
             className={classes.icon}
             label={t('HOLDER_PHONE')}
             variant="outlined"
@@ -265,17 +262,17 @@ function PersonalData (props) {
             }}
             required
             fullWidth
-            value={values?.holder?.phone1}
+            value={values[entity]?.phone1}
             onChange={handleChangePhone}
             onBlur={handleBlur}
-            error={errors?.holder?.phone1 && touched?.holder?.phone1}
-            helperText={(touched?.holder?.phone1 && errors?.holder?.phone1)}
+            error={errors[entity]?.phone1 && touched[entity]?.phone1}
+            helperText={(touched[entity]?.phone1 && errors[entity]?.phone1)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="holder_phone2"
-            name="holder.phone2"
+            id={`${entity}_phone2`}
+            name={`${entity}.phone2`}
             className={classes.icon}
             label={t('HOLDER_PHONE_2')}
             variant="outlined"
@@ -286,11 +283,11 @@ function PersonalData (props) {
                 </InputAdornment>
             }}
             fullWidth
-            value={values?.holder?.phone2}
+            value={values[entity]?.phone2}
             onChange={handleChangePhone}
             onBlur={handleBlur}
-            error={errors?.holder?.phone2 && touched?.holder?.phone2}
-            helperText={(touched?.holder?.phone2 && errors?.holder?.phone2)}
+            error={errors[entity]?.phone2 && touched[entity]?.phone2}
+            helperText={(touched[entity]?.phone2 && errors[entity]?.phone2)}
           />
         </Grid>
 
@@ -300,14 +297,14 @@ function PersonalData (props) {
             required
             fullWidth
             className={classes.icon}
-            id="holder_lang"
-            name="holder.language"
+            id={`${entity}_lang`}
+            name={`${entity}.language`}
             label={t('LANGUAGE')}
-            value={values?.holder?.language}
+            value={values[entity]?.language}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors?.holder?.language && touched?.holder?.language}
-            helperText={(touched?.holder?.language && errors?.holder?.language) ? errors?.holder?.language : t('HOLDER_LANGUAGE_HELP')}
+            error={errors[entity]?.language && touched[entity]?.language}
+            helperText={(touched[entity]?.language && errors[entity]?.language) ? errors[entity]?.language : t('HOLDER_LANGUAGE_HELP')}
             InputProps={{
               startAdornment:
                 <InputAdornment position="start">
@@ -328,8 +325,10 @@ function PersonalData (props) {
           <FormHelperText
             dangerouslySetInnerHTML={
               { __html: values?.contract?.has_service === undefined
-                ? t('PRIVACY_POLICY_HOLDERCHANGE', { url: t("DATA_PROTECTION_HOLDERCHANGE_URL") })
-                : t('PRIVACY_POLICY_CONTRACT', { url: t("DATA_PROTECTION_CONTRACT_URL") })
+                ? entity === 'holder'
+                  ? t('PRIVACY_POLICY_HOLDERCHANGE', { url: t('DATA_PROTECTION_HOLDERCHANGE_URL') })
+                  : t('PRIVACY_POLICY_NEWMEMBER', { url: t('DATA_PROTECTION_NEWMEMBER_URL') })
+                : t('PRIVACY_POLICY_CONTRACT', { url: t('DATA_PROTECTION_CONTRACT_URL') })
               }
             }
           />
@@ -358,14 +357,21 @@ function PersonalData (props) {
               }
               label={
                 <label dangerouslySetInnerHTML={
-                  { __html: t('ACCEPT_PRIVACY_POLICY', { url: values?.contract?.has_service === undefined ? t("DATA_PROTECTION_HOLDERCHANGE_URL") : t("DATA_PROTECTION_CONTRACT_URL") }) }
+                  { __html: t('ACCEPT_PRIVACY_POLICY',
+                    {
+                      url: values?.contract?.has_service === undefined
+                        ? entity === 'holder'
+                          ? t('DATA_PROTECTION_HOLDERCHANGE_URL')
+                          : t('DATA_PROTECTION_NEWMEMBER_URL')
+                        : t('DATA_PROTECTION_CONTRACT_URL')
+                    })
+                  }
                 }/>
               }
               labelPlacement="end"
             />
           </FormGroup>
         </Grid>
-
       </Grid>
     </>
   )
