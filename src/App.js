@@ -74,6 +74,7 @@ const App = ({ token = '' }) => {
                     <Route path="/:language/change-ownership/" component={lazy(() => import('./containers/HolderChange'))} />
                     <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
                     <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
+                    <Route path="/new-member" component={lazy(() => import('./containers/Member'))} />
                   </Switch>
                 </Router>
               </Suspense>
