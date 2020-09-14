@@ -9,18 +9,8 @@ import Typography from '@material-ui/core/Typography'
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 
-const useStyles = makeStyles((theme) => ({
-  chooserContainer: {
-    '& h6': {
-      fontSize: '1rem',
-      marginTop: theme.spacing(2)
-    }
-  }
-}))
-
 function VoluntaryCent (props) {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const handleChange = ({ option }) => {
     props.setFieldValue('payment.voluntary_cent', option)
@@ -33,7 +23,7 @@ function VoluntaryCent (props) {
       <Typography variant="body1"
         dangerouslySetInnerHTML={{ __html: t('VOLUNTARY_CENT_PRESENTATION') }}
       />
-      <Box mt={3} mb={4} className={classes.chooserContainer}>
+      <Box mt={3} mb={4}>
         <Chooser
           question={t('VOLUNTARY_CENT_QUESTION')}
           onChange={handleChange}
