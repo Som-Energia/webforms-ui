@@ -79,8 +79,7 @@ function D1Detail (props) {
     switch (step) {
       case 0:
         return <D1Validation
-          handleRefuseClick={handleRefuseClick}
-          handleAcceptClick={handleAcceptClick}
+          handleAcceptClick={() => nextStep(1)}
           handleStepChanges={handleStepChanges}
           params={data}
         />
@@ -132,12 +131,12 @@ function D1Detail (props) {
   }
 
   const handleRefuseClick = () => {
-    data.validate = false
+    console.log(data)
     nextStep(1)
   }
 
   const handleAcceptClick = () => {
-    data.validate = true
+    console.log(data)
     nextStep(1)
   }
 

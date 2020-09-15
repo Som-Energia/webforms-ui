@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function AcceptD1 ({ prevStep, handlePost, handleStepChanges, params }) {
+function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -60,11 +60,16 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, params }) {
         }
         // validationSchema={ModifySchema}
         onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true)
-
-          handlePost()
-          // nextStep()
-          setSubmitting(false)
+          console.log("onSubmit", values?.attachments)
+          handleStepChanges({ attachments: values?.attachments })
+          if (values?.m1) {
+            nextStep()
+          }
+          else {
+            setSubmitting(true)
+            handlePost()
+            setSubmitting(false)
+          }
         }}
       >
         {({
@@ -79,16 +84,15 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, params }) {
         }) => (
           <form onSubmit={handleSubmit} noValidate>
 
-            { params?.to_validate && <>
-              <Box mt={1} mx={1} mb={2}>
-                <Typography variant="body1"
-                  dangerouslySetInnerHTML={{ __html: t('REVIEW_DATA_D1') }}
-                />
-              </Box>
-              <Box mx={1} mb={1}>
-                <Divider />
-              </Box>
-            </> }
+            <Box mt={1} mx={1} mb={2}>
+              <Typography variant="body1"
+                dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO') }}
+              />
+            </Box>
+            <Box mx={1} mb={1}>
+              <Divider />
+            </Box>
+
 
             <Box mt={3} mb={1}>
 
@@ -107,7 +111,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, params }) {
 
             </Box>
 
-            <Box mt={1} mb={1} className={classes.chooserContainer}>
+            <Box mt={1} mb={1}>
               <Chooser
                 question={t('APROFITAR_LA_MODIFICACIO')}
                 onChange={ option => setFieldValue('m1', option.option)}
