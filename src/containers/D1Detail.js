@@ -13,7 +13,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
 
 import D1Validation from './CaseDetail/D1Validation'
-import Intro from './CaseDetail/Intro'
+import ModifyIntro from './CaseDetail/Intro'
 import Params from './ModifyContract/Params'
 import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 const steps = [
   'DETAIL_D1_TITLE',
   'ACCEPT_OR_REFUSE_TITLE',
+  'MODIFY_POTTAR_INTRO_TITLE',
   'MODIFY_POTTAR_SELECT_TITLE',
   'MODIFY_POTTAR_CONTACT_TITLE',
   'REVISIO_CONFIRMACIO_DADES'
@@ -100,44 +101,34 @@ function D1Detail (props) {
             handleStepChanges={handleStepChanges}
           />
         }
-      case 3:
-        return <Intro
+      case 2:
+        return <ModifyIntro
           prevStep={() => prevStep()}
-          nextStep={() => nextStep(2)}
+          nextStep={() => nextStep(3)}
           handleStepChanges={handleStepChanges}
         />
-      case 4:
+      case 3:
         return <Params
-          nextStep={() => nextStep(3)}
+          nextStep={() => nextStep(4)}
           prevStep={() => prevStep()}
           handleStepChanges={handleStepChanges}
           params={data?.modify}
         />
-      case 5:
+      case 4:
         return <Contact
-          nextStep={() => nextStep(4)}
+          nextStep={() => nextStep(5)}
           prevStep={() => prevStep()}
           handleStepChanges={handleStepChanges}
           params={data?.contact}
         />
       default:
         return <Resume
-          nextStep={() => nextStep(5)}
+          nextStep={() => nextStep(6)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
           params={data}
         />
     }
-  }
-
-  const handleRefuseClick = () => {
-    console.log(data)
-    nextStep(1)
-  }
-
-  const handleAcceptClick = () => {
-    console.log(data)
-    nextStep(1)
   }
 
   const nextStep = (step) => {
