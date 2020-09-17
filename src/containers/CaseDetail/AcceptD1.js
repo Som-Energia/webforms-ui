@@ -47,9 +47,10 @@ const useStyles = makeStyles(theme => ({
 function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
+  const [sending, setSending] = useState(false)
 
   const AcceptD1Schema = Yup.object().shape({
-    attachment: Yup.string()
+    attachments: Yup.string()
       .required(t('NO_NAME')),
     m1: Yup.bool()
       .required(t('UNACCEPTED_PRIVACY_POLICY'))
@@ -69,16 +70,16 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
           }
         }
         validationSchema={AcceptD1Schema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={ async (values) => {
           console.log("onSubmit", values?.attachments)
-          handleStepChanges({ attachments: values?.attachments })
+          handleStepChanges({ attachments: values?.attachments, m1: values?.m1 })
           if (values?.m1) {
             nextStep()
           }
           else {
-            setSubmitting(true)
-            handlePost()
-            setSubmitting(false)
+            setSending(true)
+            await handlePost()
+            setSending(false)
           }
         }}
       >
@@ -87,11 +88,8 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
           errors,
           touched,
           isValid,
-          handleChange,
-          handleBlur,
           handleSubmit,
-          setFieldValue,
-          isSubmitting
+          setFieldValue
         }) => (
           <form onSubmit={handleSubmit} noValidate>
 
@@ -115,7 +113,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
               <Box mx={3} mt={1} mb={1}>
                 <Uploader
                   fieldError={errors?.attachments && touched?.attachments && errors?.attachments}
-                  callbackFn={attachments => setFieldValue('attachment', attachments)}
+                  callbackFn={attachments => setFieldValue('attachments', attachments)}
                   values={values.attachments}
                 />
               </Box>
@@ -141,15 +139,13 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                 ]}
               />
             </Box>
-
-
             <div className={classes.actionsContainer}>
               {
                 <Button
                   data-cy="prev"
                   className={classes.button}
                   startIcon={<ArrowBackIosIcon />}
-                  disabled={values?.sending}
+                  disabled={sending}
                   onClick={() => prevStep(params)}
                 >
                   {t('PAS_ANTERIOR')}
@@ -161,8 +157,9 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                   className={classes.button}
                   color="primary"
                   variant="contained"
-                  disabled={!isValid}
-                  startIcon={ values?.m1 === false && <SendIcon/> || <ArrowForwardIosIcon/>}
+                  disabled={!isValid || sending}
+                  startIcon={ sending && <CircularProgress size={24} /> || 
+                    (values?.m1 === false && <SendIcon/> || <ArrowForwardIosIcon/>)}
                 >
                   {values?.m1 === false && t('ENVIAR') || t('SEGUENT_PAS')}
                 </Button>
