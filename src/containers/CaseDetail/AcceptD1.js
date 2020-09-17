@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -13,7 +14,8 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Chooser from '../../components/Chooser'
 
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
@@ -46,6 +48,14 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
   const classes = useStyles()
   const { t } = useTranslation()
 
+  const AcceptD1Schema = Yup.object().shape({
+    attachment: Yup.string()
+      .required(t('NO_NAME')),
+    m1: Yup.bool()
+      .required(t('UNACCEPTED_PRIVACY_POLICY'))
+      .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+  })
+
   return (
     <Paper className={classes.paperContainer} elevation={0}>
       <Formik
@@ -58,7 +68,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
             ...params
           }
         }
-        // validationSchema={ModifySchema}
+        validationSchema={AcceptD1Schema}
         onSubmit={(values, { setSubmitting }) => {
           console.log("onSubmit", values?.attachments)
           handleStepChanges({ attachments: values?.attachments })
@@ -76,6 +86,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
           values,
           errors,
           touched,
+          isValid,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -103,8 +114,8 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
               </Box>
               <Box mx={3} mt={1} mb={1}>
                 <Uploader
-                  fieldError={false /*errors.attachments && touched.attachments && errors.attachments*/}
-                  callbackFn={attachments => setFieldValue('attachments', attachments)}
+                  fieldError={errors?.attachments && touched?.attachments && errors?.attachments}
+                  callbackFn={attachments => setFieldValue('attachment', attachments)}
                   values={values.attachments}
                 />
               </Box>
@@ -138,24 +149,23 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                   data-cy="prev"
                   className={classes.button}
                   startIcon={<ArrowBackIosIcon />}
-                  disabled={params?.sending}
+                  disabled={values?.sending}
                   onClick={() => prevStep(params)}
                 >
                   {t('PAS_ANTERIOR')}
                 </Button>
               }
               {
-                <>
-                  <Button
-                    type="submit"
-                    className={classes.button}
-                    color="primary"
-                    variant="contained"
-                    startIcon={<CheckCircleOutlineIcon />}
-                  >
-                    {t('ACCEPTAR')}
-                  </Button>
-                </>
+                <Button
+                  type="submit"
+                  className={classes.button}
+                  color="primary"
+                  variant="contained"
+                  disabled={!isValid}
+                  startIcon={ values?.m1 === false && <SendIcon/> || <ArrowForwardIosIcon/>}
+                >
+                  {values?.m1 === false && t('ENVIAR') || t('SEGUENT_PAS')}
+                </Button>
               }
             </div>
           </form>
