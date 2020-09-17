@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import TextField from '@material-ui/core/TextField'
 
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
@@ -45,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
+  const [sending, setSending] = useState(false)
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
@@ -58,12 +58,13 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
           }
         }
         // validationSchema={ModifySchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={ async (values) => {
           console.log("onSubmit", values?.refuseReason)
           handleStepChanges({ refuseReason: values?.refuseReason })
-          setSubmitting(true)
-          handlePost()
-          setSubmitting(false)
+          setSending(true)
+          await handlePost()
+          console.log("he tornat")
+          setSending(false)
         }}
       >
         {({
@@ -73,8 +74,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
           handleChange,
           handleBlur,
           handleSubmit,
-          setFieldValue,
-          isSubmitting
+          setFieldValue
         }) => (
           <form onSubmit={handleSubmit} noValidate>
 
@@ -139,7 +139,8 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                     className={classes.button}
                     color="primary"
                     variant="contained"
-                    startIcon={<CheckCircleOutlineIcon />}
+                    disabled={sending}
+                    startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
                   >
                     {t('ACCEPTAR')}
                   </Button>
