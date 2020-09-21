@@ -204,6 +204,12 @@ export const normalizeContract = (contract) => {
   return finalContract
 }
 
+export const normalizeMember = (member) => {
+  const finalMember = {}
+
+  return finalMember
+}
+
 export const specialCaseType = (specialCases) => {
   if (specialCases.reason_death) return 'SPECIAL_CASES_DEATH'
   else if (specialCases.reason_merge) return 'SPECIAL_CASES_MERGE'

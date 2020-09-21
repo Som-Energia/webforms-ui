@@ -14,7 +14,6 @@ import TermsDialog from '../../components/TermsDialog'
 
 import { languages } from '../../services/utils'
 
-// import generalTerms from '../../data/HolderChange/generalterms-es.html'
 import GeneralTerms from '../../components/GeneralTerms'
 
 const useStyles = makeStyles((theme) => ({
@@ -82,63 +81,39 @@ const Review = (props) => {
 
   return (
     <>
-      <StepHeader title={t('REVIEW_TITLE')} />
+      <StepHeader title={t('REVIEW_MEMBER_TITLE')} />
       <Typography variant="body1"
         dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PROCESS')}</Typography>
-          <ReviewField label={t('PROCESS_TYPE')} value={t('PROCESS_TYPE_HOLDER_CHANGE')} />
-          { values?.especial_cases?.reason_death &&
-            <ReviewField label={t('SPECIAL_CASES_TITLE')} value={t('SPECIAL_CASES_DEATH')} />
-          }
-          {
-            values?.especial_cases?.reason_merge &&
-            <ReviewField label={t('SPECIAL_CASES_TITLE')} value={t('SPECIAL_CASES_MERGE')} />
-          }
-          {
-            values?.especial_cases?.reason_electrodep &&
-            <ReviewField label={t('SPECIAL_CASES_TITLE')} value={t('SPECIAL_CASES_ELECTRODEP')} />
-          }
-          <ReviewField label={t('RELATED_MEMBER')} value={ values?.member?.become_member === false ? t('RELATED_MEMBER_PENDING') : (`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`)} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUPPLY')}</Typography>
-          <ReviewField label={t('CUPS_LABEL')} value={values?.supply_point?.cups} />
-          <ReviewField label={t('ADDRESS')} value={values?.supply_point?.address} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('HOLDER')}</Typography>
-          <ReviewField label={'NIF'} value={values?.holder?.vat} />
-          { values?.holder?.isphisical
+          <Typography className={classes.sectionTitle} variant="h6">{t('MEMBER')}</Typography>
+          <ReviewField label={'NIF'} value={values?.member?.vat} />
+          { values?.member?.isphisical
             ? <>
-              <ReviewField label={t('NAME')} value={`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`} />
+              <ReviewField label={t('NAME')} value={`${values?.member?.name} ${values?.member?.surname1} ${values?.member?.surname2}`} />
             </>
             : <>
-              <ReviewField label={t('LEGAL_NAME')} value={values?.holder?.name} />
-              <ReviewField label={t('PROXY')} value={`${values?.holder.proxyname}(${values?.holder?.proxyvat})`} />
+              <ReviewField label={t('LEGAL_NAME')} value={values?.member?.name} />
+              <ReviewField label={t('PROXY')} value={`${values?.member.proxyname}(${values?.member?.proxyvat})`} />
             </>
           }
-          <ReviewField label={t('ADDRESS')} value={values?.holder?.address} />
-          <ReviewField label={t('CITY')} value={`${values?.holder?.city.name} (${values?.holder?.postal_code}) ${values?.holder?.state.name}`} />
+          <ReviewField label={t('ADDRESS')} value={values?.member?.address} />
+          <ReviewField label={t('CITY')} value={`${values?.member?.city.name} (${values?.member?.postal_code}) ${values?.member?.state.name}`} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
-          <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
-          <ReviewField label={t('EMAIL')} value={values?.holder?.email} />
-          <ReviewField label={t('LANGUAGE')} value={languages[values?.holder?.language]} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_TECHNICAL')}</Typography>
-          <ReviewField label={t('FARE')} value={t('FARE_SAME')} />
-          <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
-          <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }} />
+          <ReviewField label={t('PHONE')} value={values?.member?.phone1} />
+          <ReviewField label={t('EMAIL')} value={values?.member?.email} />
+          <ReviewField label={t('LANGUAGE')} value={languages[values?.member?.language]} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
-          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
-          <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
+          <ReviewField label={t('PAYMENT_METHOD')} value={t(values?.payment?.payment_method.toUpperCase())} />
+          { values?.payment?.payment_method === 'iban' &&
+            <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+          }
+
         </Grid>
       </Grid>
 
@@ -160,7 +135,7 @@ const Review = (props) => {
               color="primary"
             />
           }
-          label={t('ACCEPT_TERMS')}
+          label={t('COMENTAR_AMB_JURIDIC')}
         />
       </Box>
     </>

@@ -1,37 +1,48 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-import { checkIban } from '../../services/api'
-
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-
-import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import StepHeader from '../../components/StepHeader'
 import Chooser from '../../components/Chooser'
+import IBANField from '../../components/IBANField'
 import TermsDialog from '../../components/TermsDialog'
-
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  }
-}))
 
 function Payment (props) {
   const { t } = useTranslation()
-  const classes = useStyles()
-  const { values, handleBlur, setFieldValue, errors, touched, handleChange } = props
+  const { values, handleBlur, setFieldValue, errors, touched } = props
+  const [open, setOpen] = useState(false)
+
+  const handleChange = ({ option }) => {
+    setFieldValue('payment.payment_method', option)
+  }
+
+  const handleIBANChange = ({ IBAN, IBANValid }) => {
+    setFieldValue('payment.sepa_accepted', false, false)
+    setFieldValue('payment.iban', IBAN, false)
+    setFieldValue('payment.iban_valid', IBANValid)
+  }
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('payment.sepa_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('payment.sepa_accepted', false)
+  }
+
   return (
     <>
       <StepHeader title={t('PAYMENT_METHOD_TITLE')} />
@@ -42,7 +53,6 @@ function Payment (props) {
         <Chooser
           question={t('PAYMENT_METHOD')}
           onChange={handleChange}
-          onBlur={handleBlur}
           value={values.payment.payment_method}
           options={[
             {
@@ -58,9 +68,48 @@ function Payment (props) {
           ]}
         />
       </Box>
-      <Box mt={5}>
+      {
+        values.payment.payment_method === 'iban' &&
+          <>
+            <Box mt={6}>
+              <IBANField
+                id="iban"
+                name="payment.iban"
+                label={t('IBAN')}
+                onChange={handleIBANChange}
+                onBlur={handleBlur}
+                value={values?.payment?.iban}
+                error={(errors?.payment?.iban || errors?.payment?.iban_valid) && touched?.payment?.iban}
+                helperText={(touched?.payment?.iban && (errors?.payment?.iban || errors?.payment?.iban_valid)) || t('IBAN_HELP')}
+                variant="outlined"
+              />
+            </Box>
+            <Box mt={3} mb={0}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    disabled={values.payment?.iban_valid !== true}
+                    name="payment.sepa_accepted"
+                    checked={values.payment?.sepa_accepted}
+                    onClick={handleClick}
+                    color="primary"
+                    value={true}
+                  />
+                }
+                label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
+              />
+            </Box>
 
-      </Box>
+            <TermsDialog
+              title={t('SEPA_TITLE')}
+              open={open}
+              onAccept={handleAccept}
+              onClose={handleClose}
+            >
+              <span dangerouslySetInnerHTML={{ __html: t('SEPA') }} />
+            </TermsDialog>
+          </>
+      }
     </>
   )
 }

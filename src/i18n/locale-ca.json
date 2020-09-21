@@ -193,7 +193,7 @@
     "VOLUNTARY_CENT": "Donatiu voluntari",
     "ACCEPT_TERMS": "He llegit i accepto les condicions de Som Energia",
     "UNACCEPTED_TERMS": "Has d'acceptar les condicions",
-    "GENERAL_TERMS": "",
+    "GENERAL_TERMS": "Condicions Generals",
     "SEND": "Enviar",
     "YES": "Sí",
     "I_DECLINE": "Rebutjo",
@@ -235,5 +235,11 @@
     "PAYMENT_METHOD_IBAN": "Rebut domiciliat",
     "PAYMENT_METHOD_IBAN_DESC": "Sense cost per la cooperativa",
     "PAYMENT_METHOD_CCARD": "Targeta de crèdit/dèbit",
-    "PAYMENT_METHOD_CCARD_DESC": "Cost de 1,80€ per la cooperativa"
+    "PAYMENT_METHOD_CCARD_DESC": "Cost de 1,80€ per la cooperativa",
+
+    "REVIEW_MEMBER_TITLE": "Revisa i confirma les dades",
+    "IBAN": "Rebut domiciliat",
+    "CREDIT_CARD": "Targeta de crèdit/dèbit",
+
+    "INVALID_PAYMENT_METHOD": "Mètode de pagament incorrecte"
 }
