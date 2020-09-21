@@ -28,8 +28,9 @@ import Review from './Member/Review'
 import Success from './HolderChange/Success'
 import Failure from './HolderChange/Failure'
 
-import { getRates, contract } from '../services/api'
-import { CNAE_HOUSING, normalizeContract } from '../services/utils'
+import { member } from '../services/api'
+
+import { normalizeMember } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +63,7 @@ const Member = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+  const [data, setData] = useState()
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -257,13 +259,14 @@ const Member = (props) => {
 
   const handlePost = async (values) => {
     setSending(true)
-    const data = normalizeContract(values)
-    await contract(data)
+    const data = normalizeMember(values)
+    await member(data)
       .then(response => {
         console.log(response)
         if (response?.state === true) {
           setError(false)
-          setResult({ contract_number: response?.data?.contract_id })
+          setData(response?.data)
+          // setResult({ contract_number: response?.data?.contract_id })
         } else {
           setError(true)
         }
@@ -358,6 +361,14 @@ const Member = (props) => {
             </>
           )}
         </Formik>
+        {
+          data?.payment_data &&
+          <form action={data.endpoint} method="POST">
+            { Object.keys(data.payment_data).map(key =>
+              <input key={key} type="hidden" name={key} value={data.payment_data[key]} />
+            )}
+          </form>
+        }
       </Container>
     </GlobalHotKeys>
   )
