@@ -507,7 +507,7 @@ const Contract = (props) => {
           {props => (
             <>
               <div>
-                <Form className={classes.root} noValidate>
+                <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
                       <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
