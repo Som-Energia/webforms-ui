@@ -142,7 +142,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                     disabled={sending}
                     startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
                   >
-                    {t('ACCEPTAR')}
+                    {t('ENVIAR')}
                   </Button>
                 </>
               }

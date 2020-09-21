@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { useTranslation } from 'react-i18next'
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function D1Validation ({ handleAcceptClick, params }) {
+function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -60,26 +60,29 @@ function D1Validation ({ handleAcceptClick, params }) {
 
   const ValidationSchema = Yup.object().shape({
     validate: Yup.boolean()
-      .required(t('NO_NAME'))
-      .oneOf([true, false], t('UNSELECTED_NEW_SUPPLY_POINT'))
+      .required(t('CHOOSER_REQUIRED'))
+      .oneOf([true, false], t('INVALID_CHOOSER_OPTION'))
   })
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
+
       <Formik
+        enableReinitialize
         initialValues={
           {
-            ...{
-              validate: ''
-            },
-            ...params
+            ...params,
+            validate: ''
           }
         }
+        isInitialValid={false}
         validationSchema={ValidationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={ (values) => {
           console.log("onSubmit", values)
+          handleStepChanges({ validate: values?.validate})
           handleAcceptClick()
         }}
+        validateOnMount={true}
       >
         {({
           values,
@@ -89,7 +92,7 @@ function D1Validation ({ handleAcceptClick, params }) {
           handleSubmit,
           setFieldValue
         }) => (
-          <form onSubmit={handleSubmit} noValidate>
+          <Form onSubmit={handleSubmit} noValidate autoComplete="off">
 
             { values?.to_validate && <>
               <Box mt={1} mx={1} mb={2}>
@@ -190,23 +193,23 @@ function D1Validation ({ handleAcceptClick, params }) {
               </Box>
             </Box>
 
-            { values?.to_validate && <>
-
+            { values?.to_validate &&
+            <>
               <Box mt={1} mb={1}>
                 <Chooser
-                  question={t('APROFITAR_LA_MODIFICACIO')}
+                  question={t('ACCEPTACIO_AUTO')}
                   onChange={ option => handleValidateD1(setFieldValue, errors, option?.option) }
                   value={ values?.validate }
                   options={[
                     {
                       value: true,
                       label: t('SI'),
-                      description: t('AVIS_APROFITAR_M1')
+                      description: t('AVIS_ACCEPTACIO_AUTO')
                     },
                     {
                       value: false,
                       label: t('NO'),
-                      description: t('AVIS_NO_APROFITAR_M1')
+                      description: t('AVIS_REBUIG_AUTO')
                     }
                   ]}
                 />
@@ -218,7 +221,7 @@ function D1Validation ({ handleAcceptClick, params }) {
                     className={classes.button}
                     variant="contained"
                     color="primary"
-                    disabled={ !touched?.validate && !isValid}
+                    disabled={!isValid}
                     endIcon={<ArrowForwardIosIcon />}
                   >
                     {t('SEGUENT_PAS')}
@@ -226,8 +229,7 @@ function D1Validation ({ handleAcceptClick, params }) {
                 }
               </div>
             </> }
-
-          </form>
+          </Form>
         )}
       </Formik>
     </Paper>
