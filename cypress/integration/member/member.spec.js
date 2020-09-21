@@ -51,6 +51,20 @@ describe('New Member', () => {
       cy.get('[name="privacy_policy_accepted"]').click()
 
       cy.get('[data-cy=next]').click()
+
+      // Payment method
+
+      cy.get('[data-value="iban"]').click()
+
+      cy.get('[name="payment.iban"]')
+        .type(this.data.iban).should('have.value', this.data.iban)
+
+      cy.get('[name="payment.sepa_accepted"]').click()
+
+      cy.get('[data-cy=accept]').click()
+
+      cy.get('[data-cy=next]').click()
+
     })
   })
 })
