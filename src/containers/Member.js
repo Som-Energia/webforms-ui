@@ -138,14 +138,30 @@ const Member = (props) => {
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
-        iban: Yup.string().required(t('IBAN_ERROR')),
-        iban_valid: Yup.bool().required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR')),
-        sepa_accepted: Yup.bool().required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR'))
+        payment_method: Yup.string()
+          .oneOf(['iban', 'credit_card'], t('INVALID_PAYMENT_METHOD')),
+        iban: Yup.string()
+          .when('payment.payment_method', {
+            is: 'iban',
+            then: Yup.string().required(t('IBAN_ERROR'))
+          }),
+        iban_valid: Yup.bool()
+          .when('payment.payment_method', {
+            is: 'iban',
+            then: Yup.bool().required(t('IBAN_ERROR'))
+              .oneOf([true], t('IBAN_ERROR'))
+          }),
+        sepa_accepted: Yup.bool()
+          .when('payment.payment_method', {
+            is: 'iban',
+            then: Yup.bool().required(t('IBAN_ERROR'))
+              .oneOf([true], t('IBAN_ERROR'))
+          })
       })
     }),
     Yup.object().shape({
+      terms_accepted: Yup.bool().required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
 
@@ -235,7 +251,8 @@ const Member = (props) => {
       sepa_accepted: false,
       payment_method: ''
     },
-    privacy_policy_accepted: false
+    privacy_policy_accepted: false,
+    terms_accepted: false
   }
 
   const handlePost = async (values) => {
@@ -277,7 +294,7 @@ const Member = (props) => {
           {props => (
             <>
               <div>
-                <Form className={classes.root} noValidate>
+                <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
                       <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
