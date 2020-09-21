@@ -22,13 +22,12 @@ import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined'
 import Loading from '../components/Loading'
 
 // services
-import { getCampaign, getProject } from '../services/api'
-
+import { getCampaign, getProject } from '../services/somsolet/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: '4px',
-    paddingRight: '4px',
+    paddingRight: '4px'
   },
   column: {
     margin: theme.spacing(1),
@@ -198,11 +197,11 @@ const PhaseInfo = ({ data }) => {
       .map(([label, value]) => {
         switch (label) {
           case 'file':
-            return <OptionField 
+            return <OptionField
               key={label}
               label={''}
               value={
-                <Button 
+                <Button
                   size='small'
                   variant='contained'
                   color='primary'
@@ -214,30 +213,30 @@ const PhaseInfo = ({ data }) => {
               }
             />
           case 'action':
-            return <OptionField 
-            key={label}
-            label={''}
-            value={
-              <Button 
-                size='small'
-                variant='contained'
-                color='primary'
-                target='_blank'
-                href={value}
-              >
-                Som-hi!
-              </Button>
-            }
-          />
+            return <OptionField
+              key={label}
+              label={''}
+              value={
+                <Button
+                  size='small'
+                  variant='contained'
+                  color='primary'
+                  target='_blank'
+                  href={value}
+                >
+                  Som-hi!
+                </Button>
+              }
+            />
           case 'date':
             return <OptionField key={label} label={'Data'} value={value} />
           default:
             if (`${value}`.match('https:')) {
-              return <OptionField 
+              return <OptionField
                 key={label}
                 label={''}
                 value={
-                  <Button 
+                  <Button
                     size='small'
                     variant='contained'
                     color='primary'
@@ -331,9 +330,6 @@ const Registered = (props) => {
 }
 
 const SomSolet = (props) => {
-
-  // const { stageInitial } = props
-
   const classes = useStyles()
   const [stages, setStages] = useState([])
   const [campaign, setCampaign] = useState([])
@@ -351,7 +347,7 @@ const SomSolet = (props) => {
     setIsLoadingCampaign(true)
     getCampaign()
       .then(response => {
-        const campaign = response?.data[0]  // TODO: to check
+        const campaign = response?.data[0] // TODO: to check
         setCampaign(campaign)
         setIsLoadingCampaign(false)
       }).catch(error => {
@@ -364,7 +360,7 @@ const SomSolet = (props) => {
     setIsLoadingProject(true)
     getProject()
       .then(response => {
-        const projectInfo = response.data[0]  // TODO: to check
+        const projectInfo = response?.data[0] // TODO: to check
         const projectDescription = projectInfo.description
         const project = getProjectList(projectDescription)
         setProject(project.reverse())
@@ -381,7 +377,6 @@ const SomSolet = (props) => {
   }, [])
 
   useEffect(() => {
-    
     if (stages.length) {
       const itemPhase = stages.find((item) => item.id === activePhase)
       const indexPhase = stages.indexOf(itemPhase)
@@ -390,14 +385,14 @@ const SomSolet = (props) => {
       const prevIndexPhase = indexPhase - 1
       const nextIndexPhase = indexPhase + 1
       console.log(prevIndexPhase, nextIndexPhase)
-      setPrevPhase(prevIndexPhase >= 0 ?  stages[prevIndexPhase]?.id : false)
-      setNextPhase(nextIndexPhase <= stages.length ? stages[nextIndexPhase]?.id : false)  
+      setPrevPhase(prevIndexPhase >= 0 ? stages[prevIndexPhase]?.id : false)
+      setNextPhase(nextIndexPhase <= stages.length ? stages[nextIndexPhase]?.id : false)
     }
   }, [activePhase, stages])
 
   const getPhasesList = (stages) => {
     const phasesist = []
-    Object.entries(stages).map(([ key, value ], index) => {
+    Object.entries(stages).map(([key, value], index) => {
       if (key !== 'stageId' && key !== 'discardedType') {
         const title = getPhaseTitle(key)
         const content = getPhaseContent(key, value)
@@ -408,13 +403,13 @@ const SomSolet = (props) => {
         }
         phasesist.push(info)
       }
-    });
+    })
     return phasesist
   }
 
   const getProjectList = (projectDescription) => {
     const project = []
-    Object.entries(projectDescription).map(([ key, value ], index) => {
+    Object.entries(projectDescription).map(([key, value], index) => {
       const content = getOptionContent(key, value)
       const title = getOptionTitle(key)
       const info = {
@@ -427,7 +422,8 @@ const SomSolet = (props) => {
     return project
   }
 
-  const getOptionTitle = (key) => {  // TODO: Refactor
+  // TODO: Refactor
+  const getOptionTitle = (key) => {
     if (key === 'supplyPoint') return 'Punt de Subministrament'
     if (key === 'project') return 'Projecte'
     if (key === 'registeredPerson') return 'Persona inscrita'
@@ -436,7 +432,8 @@ const SomSolet = (props) => {
     return ''
   }
 
-  const getOptionContent = (key, value) => {  // TODO: Refactor
+  // TODO: Refactor
+  const getOptionContent = (key, value) => {
     if (key === 'supplyPoint') return <SupplyPoint supplyPointInfo={value}/>
     if (key === 'project') return <Project projectInfo={value}/>
     if (key === 'registeredPerson') return <RegisteredPerson registeredPersonInfo={value}/>
@@ -445,7 +442,8 @@ const SomSolet = (props) => {
     return <></>
   }
 
-  const getPhaseTitle = (key) => {  // TODO: Refactor
+  // TODO: Refactor
+  const getPhaseTitle = (key) => {
     if (key === 'prereport') return 'Preinforme'
     if (key === 'technicalVisit') return 'Informe visita tècnica'
     if (key === 'report') return 'Report'
@@ -460,14 +458,12 @@ const SomSolet = (props) => {
     return ''
   }
 
-  const getPhaseContent = (key, value) => {  // TODO: Refactor
+  // TODO: Refactor
+  const getPhaseContent = (key, value) => {
     return <PhaseInfo data={value}/>
   }
 
   const getPhase = (stages, phaseId, withContent = false) => {
-    console.log(stages)
-    console.log(phaseId)
-    console.log(withContent)
     const { title, content } = stages.find(({ id }) => phaseId === id)
     return <>
       <h3>{title}</h3>
@@ -477,34 +473,33 @@ const SomSolet = (props) => {
 
   return (
     isLoadingCampaign || isLoadingProject
-    ? <Loading/>
-    :
-      <Container maxWidth='lg' className={classes.root}>
+      ? <Loading/>
+      : <Container maxWidth='lg' className={classes.root}>
         <Grid container>
           <Grid item sm={3} xs={12}>
             <div className={clsx(classes.column, classes.fullHeight)}>
               {
-              project.map(({ title, content }, index) => (
-                <>
-                  <div
-                    key={title}
-                    className={clsx(classes.option, activeOption === index && classes.activeOption)}
-                    onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
-                  >
-                    {
-                      activeOption === index ? <ArrowDropDownIcon fontSize='small' /> : <ArrowRightIcon fontSize='small' />
-                    }
-                    &nbsp;{title}
-                  </div>
-                  {
-                    activeOption === index &&
-                    <div className={classes.optionContent}>
-                      { content }
+                project.map(({ title, content }, index) => (
+                  <>
+                    <div
+                      key={title}
+                      className={clsx(classes.option, activeOption === index && classes.activeOption)}
+                      onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
+                    >
+                      {
+                        activeOption === index ? <ArrowDropDownIcon fontSize='small' /> : <ArrowRightIcon fontSize='small' />
+                      }
+                      &nbsp;{title}
                     </div>
-                  }
-                </>
-              ))
-            }
+                    {
+                      activeOption === index &&
+                      <div className={classes.optionContent}>
+                        { content }
+                      </div>
+                    }
+                  </>
+                ))
+              }
               <div className={classes.separator}> </div>
 
               <div className={classes.option}>
@@ -548,18 +543,18 @@ const SomSolet = (props) => {
                     &nbsp;{campaign.region?.autonomousCommunity}
                   </div>
                   <div> {campaign.engineering.map(
-                      ({ name, address, email, phoneNumber }) => {
-                        return (
-                          <div key={name} className={classes.engineeringInfo}>
-                            &nbsp; <SettingsOutlinedIcon fontSize='small' />
-                            &nbsp; <div>
-                              <a href={address} target='_blank'>{name}</a>
-                              &nbsp; ({phoneNumber})
-                            </div>
+                    ({ name, address, email, phoneNumber }) => {
+                      return (
+                        <div key={name} className={classes.engineeringInfo}>
+                          &nbsp; <SettingsOutlinedIcon fontSize='small' />
+                          &nbsp; <div>
+                            <a href={`mailto:${address}`} target="_blank" rel="noopener noreferrer">{name}</a>
+                            &nbsp; ({phoneNumber})
                           </div>
-                        )
-                      }
-                    )}
+                        </div>
+                      )
+                    }
+                  )}
                     &nbsp;
                   </div>
                 </div>
@@ -585,7 +580,7 @@ const SomSolet = (props) => {
                   nextPhase &&
                   <div
                     className={classes.phaseTitle}
-                    onClick={(event) => currentPhase == activePhase ? "" : setActivePhase(nextPhase)}
+                    onClick={(event) => currentPhase === activePhase ? '' : setActivePhase(nextPhase)}
                   >
                     { getPhase(stages, nextPhase) }
                     <RedoOutlinedIcon />
