@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const { API_BASE_URL } = window.config
-const API_SOMSOLET_URL = "http://0.0.0.0:5001/"
 
 export const modifyContract = async (data) => {
   return axios({
@@ -185,39 +184,6 @@ export const contract = async (data) => {
     method: 'POST',
     url: `${API_BASE_URL}form/contractacio`,
     data: formData
-  })
-    .then(response => {
-      console.log(response)
-      return response?.data
-    })
-}
-
-export const getStages = async (data) => {
-  return axios({
-    method: 'GET',
-    url: `${API_SOMSOLET_URL}stages`
-  })
-    .then(response => {
-      console.log(response)
-      return response?.data
-    })
-}
-
-export const getCampaign = async (data) => {
-  return axios({
-    method: 'GET',
-    url: `${API_SOMSOLET_URL}campaign`
-  })
-    .then(response => {
-      console.log(response)
-      return response?.data
-    })
-}
-
-export const getProject = async (data) => {
-  return axios({
-    method: 'GET',
-    url: `${API_SOMSOLET_URL}project`
   })
     .then(response => {
       console.log(response)
