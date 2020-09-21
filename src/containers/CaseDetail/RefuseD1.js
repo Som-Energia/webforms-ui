@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -17,6 +18,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
 import Uploader from '../../components/Uploader'
+import DisplayFormikState from '../../components/DisplayFormikState'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,21 +48,28 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
+  const RefuseSchema = Yup.object().shape({
+    refuseReason: Yup.string()
+      .required(t('NO_REFUSE_REASON'))
+      .max(500, t('REFUSE_REASON_TOO_LONG'))
+  })
+
   return (
     <Paper className={classes.paperContainer} elevation={0}>
       <Formik
         initialValues={
           {
             ...{
-              refuseReason: '',
+              d1Attachments: [],
+              refuseReason: ''
             },
             ...params
           }
         }
-        // validationSchema={ModifySchema}
+        validationSchema={RefuseSchema}
         onSubmit={ async (values) => {
           console.log("onSubmit", values?.refuseReason)
-          handleStepChanges({ refuseReason: values?.refuseReason })
+          await handleStepChanges({ refuseReason: values?.refuseReason, d1Attachments: values?.d1Attachments })
           setSending(true)
           await handlePost()
           console.log("he tornat")
@@ -71,12 +80,13 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
           values,
           errors,
           touched,
+          isValid,
           handleChange,
           handleBlur,
           handleSubmit,
           setFieldValue
-        }) => (
-          <form onSubmit={handleSubmit} noValidate>
+        }) => (<>
+          <Form onSubmit={handleSubmit} noValidate>
 
             <Box mt={1} mx={1} mb={2}>
               <Typography variant="body1"
@@ -95,9 +105,9 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
               </Box>
               <Box mx={3} mt={1} mb={1}>
                 <Uploader
-                  fieldError={false /*errors.attachments && touched.attachments && errors.attachments*/}
-                  callbackFn={attachments => setFieldValue('attachments', attachments)}
-                  values={values.attachments}
+                  fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
+                  callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
+                  values={values.d1Attachments}
                 />
               </Box>
             </Box>
@@ -107,8 +117,8 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                 id="refuseReason"
                 name="refuseReason"
                 label={t('REFUSE_REASON')}
-                error={(errors.contactName && touched.contactName)}
-                helperText={(touched.contactName && errors.contactName)}
+                error={(errors?.refuseReason && touched?.refuseReason)}
+                helperText={(touched?.refuseReason && errors?.refuseReason)}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.refuseReason}
@@ -116,7 +126,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                 variant="outlined"
                 margin="normal"
                 required
-                autoFocus
+                inputProps={{ maxLength: 500 }}
               />
             </Box>
 
@@ -139,7 +149,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                     className={classes.button}
                     color="primary"
                     variant="contained"
-                    disabled={sending}
+                    disabled={!isValid || sending}
                     startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
                   >
                     {t('ENVIAR')}
@@ -147,7 +157,9 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                 </>
               }
             </div>
-          </form>
+          </Form>
+	<DisplayFormikState props={{values:values, errors:errors, touched:touched}} />
+	</>
         )}
       </Formik>
     </Paper>
