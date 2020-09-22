@@ -59,20 +59,17 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
       <Formik
         initialValues={
           {
-            ...{
-              d1Attachments: [],
-              refuseReason: ''
-            },
-            ...params
+            ...params,
+            d1Attachments: [],
+            refuseReason: ''
           }
         }
         validationSchema={RefuseSchema}
         onSubmit={ async (values) => {
-          console.log("onSubmit", values?.refuseReason)
+          console.log("onSubmit", values)
           await handleStepChanges({ refuseReason: values?.refuseReason, d1Attachments: values?.d1Attachments })
           setSending(true)
-          await handlePost()
-          console.log("he tornat")
+          await handlePost(values)
           setSending(false)
         }}
       >

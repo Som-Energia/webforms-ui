@@ -71,14 +71,14 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
         }
         validationSchema={AcceptD1Schema}
         onSubmit={ async (values) => {
-          console.log("onSubmit", values?.d1_attachments)
+          console.log("onSubmit", values)
           handleStepChanges({ d1_attachments: values?.d1_attachments, m1: values?.m1 })
           if (values?.m1) {
             nextStep()
           }
           else {
             setSending(true)
-            await handlePost()
+            await handlePost(values)
             setSending(false)
           }
         }}

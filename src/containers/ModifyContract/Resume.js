@@ -49,28 +49,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, params }) {
+export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, postSubmit, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
   const handleSubmit = async () => {
     setSending(true)
-    const data = normalizeModifyData(params)
-    await modifyContract(data)
-      .then(response => {
-        handleStepChanges({ response: response })
-        nextStep()
-      })
-      .catch(error => {
-        const errorObj = {
-          error: error?.response?.data?.error
-            ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
-        }
-        handleStepChanges(errorObj)
-        nextStep()
-      })
+    await postSubmit(params)
     setSending(false)
   }
 

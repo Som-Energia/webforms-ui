@@ -71,9 +71,13 @@ function D1Detail (props) {
     setData({ ...data, ...params })
   }, [data])
 
-  const handlePost = async () => {
+  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+  const handlePost = async (values) => {
+    console.log("NormalizeData")
     console.log("SENDING TO API")
-    console.log(data)
+    console.log(values)
+    await sleep(1000)
+    console.log("REQUEST SENDED")
   }
 
   const getStepContent = (step) => {
@@ -89,16 +93,17 @@ function D1Detail (props) {
           return <AcceptD1
             prevStep={() => prevStep()}
             nextStep={() => nextStep(2)}
-            handlePost={() => handlePost()}
+            handlePost={handlePost}
             handleStepChanges={handleStepChanges}
             params={data}
           />
         }
         else {
           return <RefuseD1
-            handlePost={() => handlePost()}
+            handlePost={handlePost}
             prevStep={() => prevStep()}
             handleStepChanges={handleStepChanges}
+            params={data}
           />
         }
       case 2:
@@ -126,6 +131,7 @@ function D1Detail (props) {
           nextStep={() => nextStep(6)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
+          postSubmit={handlePost}
           params={data}
         />
     }
