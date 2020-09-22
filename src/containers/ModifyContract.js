@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
+import { modifyContract } from '../services/api'
+import { normalizeModifyData } from '../services/utils'
 
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
@@ -65,6 +67,24 @@ function ModifyContract (props) {
     setData({ ...data, ...params })
   }, [data])
 
+  const handlePost = async (values) => {
+    const data = normalizeModifyData(values)
+    await modifyContract(data)
+      .then(response => {
+        handleStepChanges({ response: response })
+        nextStep()
+      })
+      .catch(error => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
+        nextStep()
+      })
+  }
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -91,6 +111,7 @@ function ModifyContract (props) {
           nextStep={() => nextStep(4)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
+          postSubmit={handlePost}
           params={data}
         />
     }
