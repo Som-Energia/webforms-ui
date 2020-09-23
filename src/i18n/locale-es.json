@@ -344,5 +344,6 @@
 
   "APROFITAR_LA_MODIFICACIO": "¿Quieres aprovechar la modificacion contractual?",
   "AVIS_APROFITAR_M1": "Quiero modificar la tension, tarifa o poténcia",
-  "AVIS_NO_APROFITAR_M1": "No quiero modificar la tension, tarifa o poténcia"
+  "AVIS_NO_APROFITAR_M1": "No quiero modificar la tension, tarifa o poténcia",
+  "ATTACHMENTS_D1_INTRO": "Bla bla <b>bla</b>"
 }

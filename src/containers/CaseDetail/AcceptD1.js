@@ -95,7 +95,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
 
             <Box mt={1} mx={1} mb={2}>
               <Typography variant="body1"
-                dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO') }}
+                dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_ACCEPT') }}
               />
             </Box>
             <Box mx={1} mb={1}>
@@ -107,7 +107,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
 
               <Box mt={3} mx={1} mb={1}>
                 <Typography>
-                  {t('D1_ATTACHMENTS')}
+                  {t('D1_ATTACHMENTS_ACCEPT')}
                 </Typography>
               </Box>
               <Box mx={3} mt={1} mb={1}>
