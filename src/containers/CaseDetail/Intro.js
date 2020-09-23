@@ -56,7 +56,7 @@ export default function ModifyIntro ({ nextStep, prevStep, handleStepChanges }) 
     <Paper className={classes.paperContainer} elevation={0}>
       <Box mx={1}>
         <Typography variant="body1"
-          dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}
+          dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTARAUTO_INTRO') }}
         />
         <div className={classes.actionsContainer}>
           {

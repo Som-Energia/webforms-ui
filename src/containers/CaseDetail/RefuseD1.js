@@ -87,7 +87,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
 
             <Box mt={1} mx={1} mb={2}>
               <Typography variant="body1"
-                dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO') }}
+                dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_REFUSE') }}
               />
             </Box>
             <Box mx={1} mb={1}>
@@ -97,7 +97,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
             <Box mt={3} mb={1}>
               <Box mt={3} mx={1} mb={1}>
                 <Typography>
-                  {t('D1_ATTACHMENTS')}
+                  {t('D1_ATTACHMENTS_REFUSE')}
                 </Typography>
               </Box>
               <Box mx={3} mt={1} mb={1}>
