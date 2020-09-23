@@ -72,6 +72,21 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         <Divider />
       </Box>
 
+      { params?.subsection &&
+      <Box mt={2} mx={1}>
+        <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
+          {t('SUBSECTION_AUTO')}
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Typography data-cy="tariff" variant="body1" gutterBottom>
+              {params.subsection}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+      }
+
       { params.modify?.phases &&
         <Box mt={2} mx={1}>
           <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
