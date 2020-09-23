@@ -166,6 +166,12 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         </Typography>
       </Box>
 
+      <Box mt={1} mx={1} mb={2}>
+        <Typography gutterBottom>
+          {t('REVIEW_DATA_INFO')}
+        </Typography>
+      </Box>
+
       <Box mx={1} mb={1}>
         <Divider />
       </Box>
