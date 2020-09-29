@@ -75,7 +75,7 @@ function Payment (props) {
               <IBANField
                 id="iban"
                 name="payment.iban"
-                label={t('IBAN')}
+                label={t('IBAN_LABEL')}
                 onChange={handleIBANChange}
                 onBlur={handleBlur}
                 value={values?.payment?.iban}
