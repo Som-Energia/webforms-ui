@@ -14,5 +14,9 @@
   "email": "david.palomo@somenergia.coop",
   "phone": "636696969",
   "language": "ca_ES",
-  "iban": "ES77 1234 1234 1612 3456 7890"
+  "paymentMethod": "credit_card",
+  "iban": "ES77 1234 1234 1612 3456 7890",
+
+  "cif": "Q1077272A",
+  "legalName": "Los Pollos Hermanos"
 }
