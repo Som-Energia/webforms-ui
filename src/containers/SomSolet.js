@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
+import { useTranslation } from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
@@ -178,6 +179,18 @@ const useStyles = makeStyles((theme) => ({
   },
   separator: {
     flexGrow: 1
+  },
+  noResults: {
+    fontSize: '1rem',
+    fontWeight: 400,
+    margin: 0
+  },
+  noResultsContainer: {
+    marginTop: '32px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '24px'
   }
 }))
 
@@ -202,7 +215,7 @@ const PhaseInfo = ({ data }) => {
               label={''}
               value={
                 <Button
-                  size='small'
+                  size="small"
                   variant='contained'
                   color='primary'
                   target='_blank'
@@ -218,7 +231,7 @@ const PhaseInfo = ({ data }) => {
               label={''}
               value={
                 <Button
-                  size='small'
+                  size="small"
                   variant='contained'
                   color='primary'
                   target='_blank'
@@ -237,7 +250,7 @@ const PhaseInfo = ({ data }) => {
                 label={''}
                 value={
                   <Button
-                    size='small'
+                    size="small"
                     variant='contained'
                     color='primary'
                     target='_blank'
@@ -331,6 +344,7 @@ const Registered = (props) => {
 
 const SomSolet = (props) => {
   const classes = useStyles()
+  const { t, i18n } = useTranslation()
   const [stages, setStages] = useState([])
   const [campaign, setCampaign] = useState([])
   const [isLoadingCampaign, setIsLoadingCampaign] = useState(true)
@@ -342,6 +356,11 @@ const SomSolet = (props) => {
   const [prevPhase, setPrevPhase] = useState('prereport')
   const [nextPhase, setNextPhase] = useState('technicalVisit')
   let afterCurrent = false
+
+  useEffect(() => {
+    const language = props.match.params.language
+    i18n.changeLanguage(language)
+  }, [props.match.params.language, i18n])
 
   useEffect(() => {
     setIsLoadingCampaign(true)
@@ -380,11 +399,8 @@ const SomSolet = (props) => {
     if (stages.length) {
       const itemPhase = stages.find((item) => item.id === activePhase)
       const indexPhase = stages.indexOf(itemPhase)
-      console.log(stages)
-      console.log(indexPhase)
       const prevIndexPhase = indexPhase - 1
       const nextIndexPhase = indexPhase + 1
-      console.log(prevIndexPhase, nextIndexPhase)
       setPrevPhase(prevIndexPhase >= 0 ? stages[prevIndexPhase]?.id : false)
       setNextPhase(nextIndexPhase <= stages.length ? stages[nextIndexPhase]?.id : false)
     }
@@ -409,16 +425,17 @@ const SomSolet = (props) => {
 
   const getProjectList = (projectDescription) => {
     const project = []
-    Object.entries(projectDescription).map(([key, value], index) => {
-      const content = getOptionContent(key, value)
-      const title = getOptionTitle(key)
-      const info = {
-        id: key,
-        title: title,
-        content: content
-      }
-      project.push(info)
-    })
+    Object.entries(projectDescription)
+      .map(([key, value]) => {
+        const content = getOptionContent(key, value)
+        const title = getOptionTitle(key)
+        const info = {
+          id: key,
+          title: title,
+          content: content
+        }
+        project.push(info)
+      })
     return project
   }
 
@@ -464,155 +481,167 @@ const SomSolet = (props) => {
   }
 
   const getPhase = (stages, phaseId, withContent = false) => {
-    const { title, content } = stages.find(({ id }) => phaseId === id)
-    return <>
-      <h3>{title}</h3>
-      { withContent && <div> { content } </div> }
-    </>
+    if (stages.length) {
+      const { title, content } = stages.find(({ id }) => phaseId === id)
+      return <>
+        <h3>{title}</h3>
+        { withContent && <div> { content } </div> }
+      </>
+    }
   }
 
   return (
     isLoadingCampaign || isLoadingProject
-      ? <Loading/>
-      : <Container maxWidth='lg' className={classes.root}>
+      ? <Loading />
+      : <Container maxWidth="lg" className={classes.root}>
         <Grid container>
-          <Grid item sm={3} xs={12}>
-            <div className={clsx(classes.column, classes.fullHeight)}>
-              {
-                project.map(({ title, content }, index) => (
-                  <>
-                    <div
-                      key={title}
-                      className={clsx(classes.option, activeOption === index && classes.activeOption)}
-                      onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
-                    >
-                      {
-                        activeOption === index ? <ArrowDropDownIcon fontSize='small' /> : <ArrowRightIcon fontSize='small' />
-                      }
-                      &nbsp;{title}
-                    </div>
+          {
+            project
+              ? <Grid item xs={12}>
+                <div className={clsx(classes.column, classes.noResultsContainer)}>
+                  <h3 className={classes.noResults}>No tens compres col·lectives actives</h3>
+                </div>
+              </Grid>
+              : <>
+                <Grid item sm={3} xs={12}>
+                  <div className={clsx(classes.column, classes.fullHeight)}>
                     {
-                      activeOption === index &&
-                      <div className={classes.optionContent}>
-                        { content }
-                      </div>
-                    }
-                  </>
-                ))
-              }
-              <div className={classes.separator}> </div>
-
-              <div className={classes.option}>
-                <div className={classes.phaseIcon}>
-                  <MailOutlinedIcon fontSize='small' />
-                </div>
-                <div className={classes.phaseName}>
-                  Contacte instal·ladora
-                </div>
-              </div>
-
-              <div className={classes.option}>
-                <div className={classes.phaseIcon}>
-                  <ReportProblemOutlinedIcon fontSize='small' />
-                </div>
-                <div className={classes.phaseName}>
-                  Notifica incidència
-                </div>
-              </div>
-
-              <div className={classes.option}>
-                <div className={classes.phaseIcon}>
-                  <PowerSettingsNewOutlinedIcon fontSize='small' />
-                </div>
-                <div className={classes.phaseName}>
-                  &nbsp;&nbsp;Donar-se de baixa
-                </div>
-              </div>
-            </div>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <div className=''>
-              <div className={clsx(classes.column, classes.mainHeader)}>
-                <h2> {campaign.name} </h2>
-                <div className={classes.mainHeaderInfo}>
-                  <div> <WbSunnyOutlinedIcon fontSize='small' />
-                    &nbsp;{campaign.installations?.completed}
-                    &nbsp;instal·lacions
-                    &nbsp;<RoomOutlinedIcon fontSize='small' />
-                    &nbsp;{campaign.region?.geographicalRegion},
-                    &nbsp;{campaign.region?.autonomousCommunity}
-                  </div>
-                  <div> {campaign.engineering.map(
-                    ({ name, address, email, phoneNumber }) => {
-                      return (
-                        <div key={name} className={classes.engineeringInfo}>
-                          &nbsp; <SettingsOutlinedIcon fontSize='small' />
-                          &nbsp; <div>
-                            <a href={`mailto:${address}`} target="_blank" rel="noopener noreferrer">{name}</a>
-                            &nbsp; ({phoneNumber})
+                      project.map(({ title, content }, index) => (
+                        <>
+                          <div
+                            key={title}
+                            className={clsx(classes.option, activeOption === index && classes.activeOption)}
+                            onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
+                          >
+                            {
+                              activeOption === index ? <ArrowDropDownIcon fontSize="small" /> : <ArrowRightIcon fontSize="small" />
+                            }
+                            &nbsp;{title}
                           </div>
-                        </div>
-                      )
+                          {
+                            activeOption === index &&
+                            <div className={classes.optionContent}>
+                              { content }
+                            </div>
+                          }
+                        </>
+                      ))
                     }
-                  )}
-                    &nbsp;
-                  </div>
-                </div>
-              </div>
-              <div className={clsx(classes.column, classes.main)}>
-                <div>
-                  {
-                    prevPhase &&
-                    <div
-                      className={classes.phaseTitle}
-                      onClick={(event) => setActivePhase(prevPhase)}
-                    >
-                      { getPhase(stages, prevPhase) }
-                      <UndoOutlinedIcon />
-                    </div>
-                  }
+                    <div className={classes.separator}> </div>
 
-                  <div className={classes.mainPhase}>
-                    { getPhase(stages, activePhase, true) }
-                  </div>
-                </div>
-                {
-                  nextPhase &&
-                  <div
-                    className={classes.phaseTitle}
-                    onClick={(event) => currentPhase === activePhase ? '' : setActivePhase(nextPhase)}
-                  >
-                    { getPhase(stages, nextPhase) }
-                    <RedoOutlinedIcon />
-                  </div>
-                }
-              </div>
-            </div>
-          </Grid>
-          <Grid item sm={3} xs={12}>
-            <div className={classes.column}>
-              {
-                stages && stages.map(({ id, title }) => {
-                  const isClickable = !afterCurrent
-                  afterCurrent = afterCurrent || currentPhase === id
-                  return (
-                    <div
-                      key={id}
-                      className={clsx(classes.phase, afterCurrent && classes.futurePhase, currentPhase === id && classes.currentPhase)}
-                      onClick={(event) => isClickable && setActivePhase(id) }
-                    >
+                    <div className={classes.option}>
                       <div className={classes.phaseIcon}>
-                        { afterCurrent ? <CheckBoxOutlineBlankOutlinedIcon /> : <CheckBoxOutlinedIcon /> }
+                        <MailOutlinedIcon fontSize="small" />
                       </div>
                       <div className={classes.phaseName}>
-                        { title }
+                        Contacte instal·ladora
                       </div>
                     </div>
-                  )
-                })
-              }
-            </div>
-          </Grid>
+
+                    <div className={classes.option}>
+                      <div className={classes.phaseIcon}>
+                        <ReportProblemOutlinedIcon fontSize="small" />
+                      </div>
+                      <div className={classes.phaseName}>
+                        Notifica incidència
+                      </div>
+                    </div>
+
+                    <div className={classes.option}>
+                      <div className={classes.phaseIcon}>
+                        <PowerSettingsNewOutlinedIcon fontSize="small" />
+                      </div>
+                      <div className={classes.phaseName}>
+                        &nbsp;&nbsp;Donar-se de baixa
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                  <div className="">
+                    <div className={clsx(classes.column, classes.mainHeader)}>
+                      <h2> {campaign.name} </h2>
+                      <div className={classes.mainHeaderInfo}>
+                        <div> <WbSunnyOutlinedIcon fontSize="small" />
+                          &nbsp;{campaign.installations?.completed}
+                          &nbsp;instal·lacions
+                          &nbsp;<RoomOutlinedIcon fontSize="small" />
+                          &nbsp;{campaign.region?.geographicalRegion},
+                          &nbsp;{campaign.region?.autonomousCommunity}
+                        </div>
+                        <div> {campaign?.engineering && campaign.engineering.map(
+                          ({ name, address, email, phoneNumber }) => {
+                            return (
+                              <div key={name} className={classes.engineeringInfo}>
+                                &nbsp; <SettingsOutlinedIcon fontSize="small" />
+                                &nbsp; <div>
+                                  <a href={`mailto:${address}`} target="_blank" rel="noopener noreferrer">{name}</a>
+                                  &nbsp; ({phoneNumber})
+                                </div>
+                              </div>
+                            )
+                          }
+                        )}
+                          &nbsp;
+                        </div>
+                      </div>
+                    </div>
+                    <div className={clsx(classes.column, classes.main)}>
+                      <div>
+                        {
+                          prevPhase &&
+                          <div
+                            className={classes.phaseTitle}
+                            onClick={(event) => setActivePhase(prevPhase)}
+                          >
+                            { getPhase(stages, prevPhase) }
+                            <UndoOutlinedIcon />
+                          </div>
+                        }
+
+                        <div className={classes.mainPhase}>
+                          { getPhase(stages, activePhase, true) }
+                        </div>
+                      </div>
+                      {
+                        nextPhase &&
+                        <div
+                          className={classes.phaseTitle}
+                          onClick={(event) => currentPhase === activePhase ? '' : setActivePhase(nextPhase)}
+                        >
+                          { getPhase(stages, nextPhase) }
+                          <RedoOutlinedIcon />
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item sm={3} xs={12}>
+                  <div className={classes.column}>
+                    {
+                      stages && stages.map(({ id, title }) => {
+                        const isClickable = !afterCurrent
+                        afterCurrent = afterCurrent || currentPhase === id
+                        return (
+                          <div
+                            key={id}
+                            className={clsx(classes.phase, afterCurrent && classes.futurePhase, currentPhase === id && classes.currentPhase)}
+                            onClick={(event) => isClickable && setActivePhase(id) }
+                          >
+                            <div className={classes.phaseIcon}>
+                              { afterCurrent ? <CheckBoxOutlineBlankOutlinedIcon /> : <CheckBoxOutlinedIcon /> }
+                            </div>
+                            <div className={classes.phaseName}>
+                              { title }
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                </Grid>
+              </>
+          }
         </Grid>
       </Container>
   )
