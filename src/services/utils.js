@@ -1,6 +1,10 @@
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
 export const CNAE_HOUSING = '9820'
+export const PAYMENT_METHOD_PAYMENT_ORDER = 'remesa'
+export const PAYMENT_METHOD_CREDIT_CARD = 'tpv'
+export const USER_TYPE_PERSON = 'fisica'
+export const USER_TYPE_COMPANY = 'juridica'
 
 export const languages = {
   es_ES: 'Español',
@@ -204,8 +208,37 @@ export const normalizeContract = (contract) => {
   return finalContract
 }
 
-export const normalizeMember = (member) => {
-  const finalMember = {}
+export const normalizeMember = (data) => {
+  const finalMember = { }
+
+  finalMember.tipuspersona = data.member.isphisical ? USER_TYPE_PERSON : USER_TYPE_COMPANY
+  finalMember.nom = data.member.name
+  finalMember.dni = data.member.vat
+  finalMember.tel = data.member.phone1
+  finalMember.tel2 = data.member.phone2 || ''
+  finalMember.email = data.member.email
+  finalMember.cp = data.member.postal_code
+  finalMember.provincia = data.member.state.id
+  finalMember.adreca = data.member.address
+  finalMember.municipi = data.member.city.id
+  finalMember.idioma = data.member.language
+
+  finalMember.payment_method =
+    data.payment.payment_method === 'iban' ? PAYMENT_METHOD_PAYMENT_ORDER : (
+      data.payment.payment_method === 'credit_card' ? PAYMENT_METHOD_CREDIT_CARD
+        : PAYMENT_METHOD_PAYMENT_ORDER
+    )
+
+  finalMember.payment_iban = data.payment.iban
+  finalMember.urlok = 'NEWMEMBER_OK_REDIRECT_URL'
+  finalMember.urlko = 'NEWMEMBER_KO_REDIRECT_URL'
+
+  if (data.member.isphisical) {
+    finalMember.cognom = `${data.member.surname1} ${data.member.surname2}`
+  } else {
+    finalMember.representant_nom = data.member.proxyname
+    finalMember.representant_dni = data.member.proxynif
+  }
 
   return finalMember
 }
