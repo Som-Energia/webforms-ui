@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -28,7 +28,7 @@ import Review from './Member/Review'
 import Success from './HolderChange/Success'
 import Failure from './HolderChange/Failure'
 
-import { member } from '../services/api'
+import { member, memberPayment } from '../services/api'
 
 import { normalizeMember } from '../services/utils'
 
@@ -56,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
 const Member = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+
+  const formTPV = useRef(null)
 
   const [showInspector, setShowInspector] = useState(true)
   const [activeStep, setActiveStep] = useState(0)
@@ -229,8 +231,6 @@ const Member = (props) => {
       number: '',
       vat: '',
       vatvalid: false,
-      full_name: '',
-      checked: false,
       isphisical: true,
       proxynif_valid: false,
       proxynif: '',
@@ -265,12 +265,17 @@ const Member = (props) => {
         console.log(response)
         if (response?.state === true) {
           setError(false)
-          setData(response?.data)
+          if (response?.data?.endpoint) {
+            setData(response?.data)
+            formTPV.current.submit()
+          } else {
+            setCompleted(true)
+          }
           // setResult({ contract_number: response?.data?.contract_id })
         } else {
           setError(true)
         }
-        setCompleted(true)
+
       })
       .catch(error => {
         console.log(error)
@@ -363,7 +368,7 @@ const Member = (props) => {
         </Formik>
         {
           data?.payment_data &&
-          <form action={data.endpoint} method="POST">
+          <form ref={formTPV} action={data.endpoint} method="POST">
             { Object.keys(data.payment_data).map(key =>
               <input key={key} type="hidden" name={key} value={data.payment_data[key]} />
             )}
