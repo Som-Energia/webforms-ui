@@ -50,10 +50,11 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-const App = ({ token = '', installed_power = '', cil = '', installation_type = '',
-  subsection = '',  cau = '', collective = '', generator_technology = '', ssaa = '',
-  register_section = '', to_validate = '' }) => {
+const App = (props) => {
   const classes = useStyles()
+  const { token = '', installed_power = '', cil = '', installation_type = '',
+  subsection = '',  cau = '', collective = '', generator_technology = '', ssaa = '',
+  register_section = '', to_validate = '', case_id = '' } = props
 
   const loadModifyContract = (props) => {
     const ModifyContract = lazy(() => import('./containers/ModifyContract'))
@@ -73,7 +74,8 @@ const App = ({ token = '', installed_power = '', cil = '', installation_type = '
       generator_technology: generator_technology,
       ssaa: ssaa === "true",
       register_section: register_section,
-      to_validate: to_validate === "true"
+      to_validate: to_validate === "true",
+      case_id: case_id,
     }
 
     return <D1Detail {...props} templateProps={templateProps} />

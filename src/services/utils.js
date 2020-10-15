@@ -31,6 +31,19 @@ export const normalizeModifyData = (params) => {
   return data
 }
 
+export const normalizeD1ConfirmationData = (values) => {
+  const data = {
+    confirm: values?.validate,
+    attachments: values?.d1Attachments,
+    refuse_reason: values?.refuseReason
+  }
+
+  Object.keys(data).forEach(
+    (key) => (data[key] == null || data[key] === '') && delete data[key]
+  )
+  return data
+}
+
 export const checkPhisicalVAT = (vat) => {
   if (vat === undefined) return undefined
   var firstchar = vat[0]

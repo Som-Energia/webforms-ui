@@ -50,7 +50,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
   const [sending, setSending] = useState(false)
 
   const AcceptD1Schema = Yup.object().shape({
-    d1_attachments: Yup.string()
+    d1Attachments: Yup.string()
       .required(t('REQUIRED_ATTACHMENTS')),
     m1: Yup.bool()
       .required(t('UNACCEPTED_PRIVACY_POLICY'))
@@ -63,7 +63,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
         initialValues={
           {
             ...{
-              d1_attachments: [],
+              d1Attachments: [],
               m1: ''
             },
             ...params
@@ -72,7 +72,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
         validationSchema={AcceptD1Schema}
         onSubmit={ async (values) => {
           console.log("onSubmit", values)
-          handleStepChanges({ d1_attachments: values?.d1_attachments, m1: values?.m1 })
+          handleStepChanges({ d1Attachments: values?.d1Attachments, m1: values?.m1 })
           if (values?.m1) {
             nextStep()
           }
@@ -112,9 +112,9 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
               </Box>
               <Box mx={3} mt={1} mb={1}>
                 <Uploader
-                  fieldError={errors?.d1_attachments && touched?.d1_attachments && errors?.d1_attachments}
-                  callbackFn={d1_attachments => setFieldValue('d1_attachments', d1_attachments)}
-                  values={values.d1_attachments}
+                  fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
+                  callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
+                  values={values.d1Attachments}
                 />
               </Box>
 
