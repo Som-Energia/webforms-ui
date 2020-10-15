@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import { makeStyles } from '@material-ui/core/styles'
+import { normalizeD1ConfirmationData } from '../services/utils'
+import { confirmD1Case } from '../services/api'
 
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
@@ -74,9 +77,23 @@ function D1Detail (props) {
   const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
   const handlePost = async (values) => {
     console.log("NormalizeData")
+    const data = normalizeD1ConfirmationData(values)
     console.log("SENDING TO API")
-    console.log(values)
-    await sleep(1000)
+    await confirmD1Case(data, values?.case_id, values?.token)
+      .then(response => {
+        handleStepChanges({ response: response.data })
+        nextStep()
+      })
+      .catch(error => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
+        nextStep()
+      })
+
     console.log("REQUEST SENDED")
   }
 
