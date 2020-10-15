@@ -52,30 +52,29 @@ const keyMap = {
 
 const App = (props) => {
   const classes = useStyles()
-  const { token = '', installed_power = '', cil = '', installation_type = '',
-  subsection = '',  cau = '', collective = '', generator_technology = '', ssaa = '',
-  register_section = '', to_validate = '', case_id = '' } = props
+  const { d1 = {} } = props
+  const d1_data = JSON.parse(d1)
 
   const loadModifyContract = (props) => {
     const ModifyContract = lazy(() => import('./containers/ModifyContract'))
-    return <ModifyContract {...props} token={token} />
+    return <ModifyContract {...props} token={d1_data?.token} />
   }
 
   const loadD1Detail = (props) => {
     const D1Detail = lazy(() => import('./containers/D1Detail'))
     var templateProps = {
-      token: token,
-      installed_power: installed_power,
-      cil: cil,
-      installation_type: installation_type,
-      subsection: subsection,
-      cau: cau,
-      collective: collective === "true",
-      generator_technology: generator_technology,
-      ssaa: ssaa === "true",
-      register_section: register_section,
-      to_validate: to_validate === "true",
-      case_id: case_id,
+      token: d1_data?.token,
+      installed_power: d1_data?.installed_power,
+      cil: d1_data?.cil,
+      installation_type: d1_data?.installation_type,
+      subsection: d1_data?.subsection,
+      cau: d1_data?.cau,
+      collective: d1_data?.collective === "true",
+      generator_technology: d1_data?.generator_technology,
+      ssaa: d1_data?.ssaa === "true",
+      register_section: d1_data?.register_section,
+      to_validate: d1_data?.to_validate === "true",
+      case_id: d1_data?.case_id,
     }
 
     return <D1Detail {...props} templateProps={templateProps} />
