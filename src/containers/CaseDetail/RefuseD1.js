@@ -90,24 +90,6 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                 dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_REFUSE') }}
               />
             </Box>
-            <Box mx={1} mb={1}>
-              <Divider />
-            </Box>
-
-            <Box mt={3} mb={1}>
-              <Box mt={3} mx={1} mb={1}>
-                <Typography>
-                  {t('D1_ATTACHMENTS_REFUSE')}
-                </Typography>
-              </Box>
-              <Box mx={3} mt={1} mb={1}>
-                <Uploader
-                  fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
-                  callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
-                  values={values.d1Attachments}
-                />
-              </Box>
-            </Box>
 
             <Box mx={1} mb={2}>
               <TextField
@@ -125,6 +107,21 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
                 required
                 inputProps={{ maxLength: 500 }}
               />
+            </Box>
+
+            <Box mt={2} mb={1}>
+              <Box mt={3} mx={1} mb={1}>
+                <Typography>
+                  {t('D1_ATTACHMENTS_REFUSE')}
+                </Typography>
+              </Box>
+              <Box mx={1} mt={1} mb={1}>
+                <Uploader
+                  fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
+                  callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
+                  values={values.d1Attachments}
+                />
+              </Box>
             </Box>
 
             <div className={classes.actionsContainer}>
