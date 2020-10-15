@@ -68,13 +68,20 @@ const App = ({ token = '' }) => {
                 <Router>
                   <Switch>
                     <Route exact path="/" component={ lazy(() => import('./containers/Contract')) } />
+
                     <Route exact path="/modify-contract" render={loadModifyContract} />
                     <Route path="/:language/contract/modification/" render={loadModifyContract} />
+
                     <Route path="/holder-change" component={lazy(() => import('./containers/HolderChange'))} />
                     <Route path="/:language/change-ownership/" component={lazy(() => import('./containers/HolderChange'))} />
+
                     <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
-                    <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
+
                     <Route path="/new-member" component={lazy(() => import('./containers/Member'))} />
+                    <Route path="/:language/fes-te-n-soci-a/" component={lazy(() => import('./containers/Member'))} />
+                    <Route path="/:language/hazte-socio-a/" component={lazy(() => import('./containers/Member'))} />
+                    <Route path="/:language/izan-zaitez-bazkide/" component={lazy(() => import('./containers/Member'))} />
+                    <Route path="/:language/faite-socio-a/" component={lazy(() => import('./containers/Member'))} />
                   </Switch>
                 </Router>
               </Suspense>
