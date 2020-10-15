@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '18px',
     fontWeight: 500,
     textTransform: 'uppercase',
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2)
   },
   label: {
@@ -46,6 +46,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: '14px',
     fontWeight: 400,
     color: 'rgba(0, 0, 0, 0.54)'
+  },
+  chooserLabelBox: {
+    '& label': {
+      minHeight: 'auto'
+    }
   }
 }))
 
@@ -108,8 +113,8 @@ function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
             <Box mx={1} mb={4}>
               <Typography className={classes.sectionTitle} variant="h6">{t('DATOS_AUTOCONSUMO')}</Typography>
 
-              <Box mb={1}>
-                <Grid container spacing={4}>
+              <Box mb={0}>
+                <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Typography className={classes.label} variant="subtitle2" gutterBottom>
                       {t('REGISTER_SECTION')}
@@ -154,8 +159,8 @@ function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
               </Box>
 
               <Typography className={classes.sectionTitle} variant="h6">{t('DATOS_GENERADORES')}</Typography>
-              <Box mb={1}>
-                <Grid container spacing={4}>
+              <Box mb={0}>
+                <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Typography className={classes.label} variant="subtitle2" gutterBottom>
                       {t('INSTALLATION_TYPE')}
@@ -195,7 +200,10 @@ function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
 
             { values?.to_validate &&
             <>
-              <Box mt={1} mb={1}>
+              <Box mx={1} mb={2}>
+                <Divider />
+              </Box>
+              <Box mx={1} mb={2} className={classes.chooserLabelBox}>
                 <Chooser
                   question={t('ACCEPTACIO_AUTO')}
                   onChange={ option => handleValidateD1(setFieldValue, errors, option?.option) }

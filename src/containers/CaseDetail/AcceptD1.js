@@ -41,7 +41,13 @@ const useStyles = makeStyles(theme => ({
   paperContainer: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
+  },
+  chooserLabelBox: {
+    '& label': {
+      minHeight: '110px'
+    }
   }
+
 }))
 
 function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }) {
@@ -98,19 +104,14 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                 dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_ACCEPT') }}
               />
             </Box>
-            <Box mx={1} mb={1}>
-              <Divider />
-            </Box>
-
 
             <Box mt={3} mb={1}>
-
               <Box mt={3} mx={1} mb={1}>
                 <Typography>
                   {t('D1_ATTACHMENTS_ACCEPT')}
                 </Typography>
               </Box>
-              <Box mx={3} mt={1} mb={1}>
+              <Box mx={1} mt={3} mb={1}>
                 <Uploader
                   fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
                   callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
@@ -120,7 +121,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
 
             </Box>
 
-            <Box mt={1} mb={1}>
+            <Box mx={1} mt={1} mb={2} className={classes.chooserLabelBox}>
               <Chooser
                 question={t('APROFITAR_LA_MODIFICACIO')}
                 onChange={ option => setFieldValue('m1', option.option)}
