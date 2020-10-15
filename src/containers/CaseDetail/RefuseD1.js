@@ -7,8 +7,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -66,7 +64,6 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
         }
         validationSchema={RefuseSchema}
         onSubmit={ async (values) => {
-          console.log("onSubmit", values)
           await handleStepChanges({ refuseReason: values?.refuseReason, d1Attachments: values?.d1Attachments })
           setSending(true)
           await handlePost(values)
@@ -152,8 +149,8 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
               }
             </div>
           </Form>
-	<DisplayFormikState props={{values:values, errors:errors, touched:touched}} />
-	</>
+          <DisplayFormikState props={{ values: values, errors: errors, touched: touched }} />
+        </>
         )}
       </Formik>
     </Paper>
