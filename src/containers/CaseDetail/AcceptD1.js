@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { useTranslation } from 'react-i18next'
@@ -7,13 +7,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Chooser from '../../components/Chooser'
-
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
@@ -47,7 +44,6 @@ const useStyles = makeStyles(theme => ({
       minHeight: '110px'
     }
   }
-
 }))
 
 function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }) {
@@ -77,12 +73,10 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
         }
         validationSchema={AcceptD1Schema}
         onSubmit={ async (values) => {
-          console.log("onSubmit", values)
           handleStepChanges({ d1Attachments: values?.d1Attachments, m1: values?.m1 })
           if (values?.m1) {
             nextStep()
-          }
-          else {
+          } else {
             setSending(true)
             await handlePost(values)
             setSending(false)
@@ -97,8 +91,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
           handleSubmit,
           setFieldValue
         }) => (
-          <form onSubmit={handleSubmit} noValidate>
-
+          <Form onSubmit={handleSubmit} noValidate>
             <Box mt={1} mx={1} mb={2}>
               <Typography variant="body1"
                 dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_ACCEPT') }}
@@ -159,14 +152,14 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                   color="primary"
                   variant="contained"
                   disabled={!isValid || sending}
-                  endIcon={ sending && <CircularProgress size={24} /> ||
-                    (values?.m1 === false && <SendIcon/> || <ArrowForwardIosIcon/>)}
+                  endIcon={ (sending && <CircularProgress size={24} />) ||
+                    ((values?.m1 === false && <SendIcon/>) || <ArrowForwardIosIcon/>)}
                 >
-                  {values?.m1 === false && t('ENVIAR') || t('SEGUENT_PAS')}
+                  {(values?.m1 === false && t('ENVIAR')) || t('SEGUENT_PAS')}
                 </Button>
               }
             </div>
-          </form>
+          </Form>
         )}
       </Formik>
     </Paper>

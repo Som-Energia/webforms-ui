@@ -58,9 +58,8 @@ function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
 
-  const handleValidateD1 = ( setFieldValue, errors, option ) => {
+  const handleValidateD1 = (setFieldValue, errors, option) => {
     setFieldValue('validate', option)
-    console.log("errors", errors)
   }
 
   const ValidationSchema = Yup.object().shape({
@@ -83,7 +82,6 @@ function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
         isInitialValid={false}
         validationSchema={ValidationSchema}
         onSubmit={ (values) => {
-          console.log("onSubmit", values)
           handleStepChanges({ validate: values?.validate})
           handleAcceptClick()
         }}
