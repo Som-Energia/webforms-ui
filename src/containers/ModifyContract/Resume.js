@@ -71,9 +71,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       <Box mx={1} mb={1}>
         <Divider />
       </Box>
-      {
-        console.log(d1CaseData)
-      }
+
       { d1CaseData?.subsection &&
       <Box mt={2} mx={1}>
         <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
