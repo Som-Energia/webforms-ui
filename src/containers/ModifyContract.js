@@ -53,7 +53,7 @@ const steps = [
 ]
 
 function ModifyContract (props) {
-  const fromD1 = props?.location?.state?.d1CaseData !== undefined
+  const fromD1 = props?.location?.state?.d1CaseData?.m1
   const d1CaseData = props?.location?.state?.d1CaseData
 
   const classes = useStyles()
