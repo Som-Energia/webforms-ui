@@ -104,7 +104,7 @@ const App = (props) => {
                     <Route path="/:language/change-ownership/" component={lazy(() => import('./containers/HolderChange'))} />
                     <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
                     <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
-                    <Route path="/d1-detail" render={loadD1Detail} />
+                    <Route path="/:language/d1-detail" render={loadD1Detail} />
                   </Switch>
                 </Router>
               </Suspense>
