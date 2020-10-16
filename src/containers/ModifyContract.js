@@ -52,6 +52,11 @@ const steps = [
   'REVISIO_CONFIRMACIO_DADES'
 ]
 
+const d1_steps = [
+  'ACCEPT_OR_REFUSE_TITLE',
+  'DETAIL_D1_TITLE'
+]
+
 function ModifyContract (props) {
   const fromD1 = props?.location?.state?.d1CaseData?.m1
   const d1CaseData = props?.location?.state?.d1CaseData
@@ -102,6 +107,7 @@ function ModifyContract (props) {
           fromD1
             ? <IntroFromD1
               nextStep={() => nextStep(1)}
+              prevStep={() => prevStep()}
               handleStepChanges={handleStepChanges}
             />
             : <Intro
@@ -141,10 +147,23 @@ function ModifyContract (props) {
 
   const prevStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    if (fromD1 && activeStep === 0) {
+      console.log("redirect to d1 details")
+    }
   }
 
   return (
     <div className={classes.root}>
+      {
+        fromD1 &&
+        <Stepper className={classes.stepper} activeStep={3} orientation="vertical">
+          {d1_steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      }
       <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
