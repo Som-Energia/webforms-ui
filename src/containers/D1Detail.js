@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import  { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 
@@ -52,9 +53,6 @@ const useStyles = makeStyles(theme => ({
 const steps = [
   'DETAIL_D1_TITLE',
   'ACCEPT_OR_REFUSE_TITLE',
-  'MODIFY_POTTAR_INTRO_TITLE',
-  'MODIFY_POTTAR_SELECT_TITLE',
-  'MODIFY_POTTAR_CONTACT_TITLE',
   'REVISIO_CONFIRMACIO_DADES'
 ]
 
@@ -123,34 +121,9 @@ function D1Detail (props) {
             params={data}
           />
         }
-      case 2:
-        return <ModifyIntro
-          prevStep={() => prevStep()}
-          nextStep={() => nextStep(3)}
-          handleStepChanges={handleStepChanges}
-        />
-      case 3:
-        return <Params
-          nextStep={() => nextStep(4)}
-          prevStep={() => prevStep()}
-          handleStepChanges={handleStepChanges}
-          params={data?.modify}
-        />
-      case 4:
-        return <Contact
-          nextStep={() => nextStep(5)}
-          prevStep={() => prevStep()}
-          handleStepChanges={handleStepChanges}
-          params={data?.contact}
-        />
       default:
-        return <Resume
-          nextStep={() => nextStep(6)}
-          prevStep={prevStep}
-          handleStepChanges={handleStepChanges}
-          postSubmit={handlePost}
-          params={data}
-        />
+        const language = props.match.params.language
+        return ( <Redirect to={{ pathname: `/${language}/contract/modification`, state: { d1CaseData: data }}}/> )
     }
   }
 

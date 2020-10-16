@@ -15,6 +15,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
 
 import Intro from './ModifyContract/Intro'
+import IntroFromD1 from './CaseDetail/Intro'
 import Params from './ModifyContract/Params'
 import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
@@ -52,6 +53,9 @@ const steps = [
 ]
 
 function ModifyContract (props) {
+  const fromD1 = props?.location?.state?.d1CaseData !== undefined
+  const d1CaseData = props?.location?.state?.d1CaseData
+
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
@@ -68,30 +72,43 @@ function ModifyContract (props) {
   }, [data])
 
   const handlePost = async (values) => {
-    const data = normalizeModifyData(values)
-    await modifyContract(data)
-      .then(response => {
-        handleStepChanges({ response: response })
-        nextStep()
-      })
-      .catch(error => {
-        const errorObj = {
-          error: error?.response?.data?.error
-            ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
-        }
-        handleStepChanges(errorObj)
-        nextStep()
-      })
+    if (fromD1) {
+      console.log("normalize data")
+      console.log("post")
+    }
+    else {
+      const data = normalizeModifyData(values)
+      await modifyContract(data)
+        .then(response => {
+          handleStepChanges({ response: response })
+          nextStep()
+        })
+        .catch(error => {
+          const errorObj = {
+            error: error?.response?.data?.error
+              ? error.response.data.error
+              : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+          }
+          handleStepChanges(errorObj)
+          nextStep()
+        })
+    }
   }
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <Intro
-          nextStep={() => nextStep(1)}
-          handleStepChanges={handleStepChanges}
-        />
+        return (
+          fromD1
+            ? <IntroFromD1
+              nextStep={() => nextStep(1)}
+              handleStepChanges={handleStepChanges}
+            />
+            : <Intro
+              nextStep={() => nextStep(1)}
+              handleStepChanges={handleStepChanges}
+            />
+        )
       case 1:
         return <Params
           nextStep={() => nextStep(2)}
@@ -113,6 +130,7 @@ function ModifyContract (props) {
           handleStepChanges={handleStepChanges}
           postSubmit={handlePost}
           params={data}
+          d1CaseData={fromD1 ? d1CaseData : false}
         />
     }
   }
