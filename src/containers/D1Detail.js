@@ -72,11 +72,8 @@ function D1Detail (props) {
     setData({ ...data, ...params })
   }, [data])
 
-  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
   const handlePost = async (values) => {
-    console.log("NormalizeData")
     const data = normalizeD1ConfirmationData(values)
-    console.log("SENDING TO API")
     await confirmD1Case(data, values?.case_id, values?.token)
       .then(response => {
         handleStepChanges({ response: response.data })
@@ -91,8 +88,6 @@ function D1Detail (props) {
         handleStepChanges(errorObj)
         nextStep()
       })
-
-    console.log("REQUEST SENDED")
   }
 
   const getStepContent = (step) => {
