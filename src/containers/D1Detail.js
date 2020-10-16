@@ -170,8 +170,8 @@ function D1Detail (props) {
             {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
-                <StepContent>
-                  {getStepContent(index)}
+                  <StepContent>
+                    { data?.error === undefined && data?.response === undefined && getStepContent(index) }
                 </StepContent>
               </Step>
             ))}
