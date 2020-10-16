@@ -51,17 +51,25 @@ const keyMap = {
 }
 
 const App = (props) => {
+  const { d1 = "" } = props
+  let d1_token = ""
   const classes = useStyles()
-  const { d1 = {} } = props
-  const d1_data = JSON.parse(d1)
 
   const loadModifyContract = (props) => {
     const ModifyContract = lazy(() => import('./containers/ModifyContract'))
-    return <ModifyContract {...props} token={d1_data?.token} />
+    return <ModifyContract {...props} token={d1_token} />
   }
 
   const loadD1Detail = (props) => {
     const D1Detail = lazy(() => import('./containers/D1Detail'))
+
+    let d1_data = {}
+    if (typeof d1 === "string" && d1 !== "") {
+      d1_data = JSON.parse(d1)
+    }
+
+    d1_token = d1_data?.token
+
     var templateProps = {
       token: d1_data?.token,
       installed_power: d1_data?.installed_power,
