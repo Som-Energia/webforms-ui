@@ -10,6 +10,36 @@ a {
   color: #707a1a
 }
 
+input[type="text"],
+input[type="password"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="range"],
+input[type="date"],
+textarea {
+  border: 0 !important;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: rgba(0, 0, 0, 0.87) !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  font-size: 16px !important;
+  padding: 18.5px 14px !important;
+  height: 1.1876em !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
+  box-sizing: content-box !important;
+}
+
+#root {
+  padding-right: 8px;
+}
+
 /*
 Modify Contract
 */
@@ -38,6 +68,16 @@ StepHeader Component
 */
 
 .header {
+  margin-bottom: 24px;
+}
+
+.header__text {
+  color: #b5cc00;
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.ov-theme .header {
   align-items: stretch;
   -webkit-align-items: stretch;
   box-align: stretch;
@@ -53,21 +93,21 @@ StepHeader Component
   margin-bottom: 24px;
 }
 
-.header__container {
+.ov-theme .header__container {
   background-color: rgba(150, 182, 51, 0.90);
   margin-left: -32px;
   min-width: 0%;
   padding: 8px 8px 8px 32px;
 }
 
-.header__text {
+.ov-theme .header__text {
   color: rgba(0, 0, 0, 60);
   font-size: 21px;
   font-weight: 400;
   text-transform: uppercase;
 }
 
-.header__after {
+.ov-theme .header__after {
   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 10 10' preserveAspectRatio='none' style='height: 100%25; width: 90%25; overflow: visible; position: absolute;'%3E%3Cpolygon class='freebirdSolidFill' style='fill: rgba(150, 182, 51, 0.90); stroke-width: 0;' points='0,0 10,0 0,10'%3E%3C/polygon%3E%3C/svg%3E");
   flex-shrink: 0;
   -webkit-flex-shrink: 0;

@@ -87,7 +87,7 @@ const Review = (props) => {
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('MEMBER')}</Typography>
+          <Typography className={classes.sectionTitle} variant="h6">{t('NEW_MEMBER')}</Typography>
           <ReviewField label={'NIF'} value={values?.member?.vat} />
           { values?.member?.isphisical
             ? <>

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative'
   },
   stepContainer: {
-    marginTop: theme.spacing(4),
+    marginTop: 0,
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
@@ -59,7 +59,7 @@ const Member = (props) => {
 
   const formTPV = useRef(null)
 
-  const [showInspector, setShowInspector] = useState(true)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -143,20 +143,21 @@ const Member = (props) => {
     Yup.object().shape({
       payment: Yup.object().shape({
         payment_method: Yup.string()
+          .required(t('INVALID_PAYMENT_METHOD'))
           .oneOf(['iban', 'credit_card'], t('INVALID_PAYMENT_METHOD')),
         iban: Yup.string()
-          .when('payment.payment_method', {
+          .when('payment_method', {
             is: 'iban',
             then: Yup.string().required(t('IBAN_ERROR'))
           }),
         iban_valid: Yup.bool()
-          .when('payment.payment_method', {
+          .when('payment_method', {
             is: 'iban',
             then: Yup.bool().required(t('IBAN_ERROR'))
               .oneOf([true], t('IBAN_ERROR'))
           }),
         sepa_accepted: Yup.bool()
-          .when('payment.payment_method', {
+          .when('payment_method', {
             is: 'iban',
             then: Yup.bool().required(t('IBAN_ERROR'))
               .oneOf([true], t('IBAN_ERROR'))
@@ -170,6 +171,7 @@ const Member = (props) => {
   ]
 
   const MAX_STEP_NUMBER = 3
+  const showProgress = false
 
   const getActiveStep = (props) => {
     return <>
@@ -262,7 +264,6 @@ const Member = (props) => {
     const data = normalizeMember(values)
     await member(data)
       .then(response => {
-        console.log(response)
         if (response?.state === true) {
           setError(false)
           if (response?.data?.endpoint) {
@@ -275,7 +276,6 @@ const Member = (props) => {
         } else {
           setError(true)
         }
-
       })
       .catch(error => {
         console.log(error)
@@ -291,7 +291,7 @@ const Member = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers}>
-      <Container maxWidth="md">
+      <Container maxWidth="md" disableGutters={true}>
         <Formik
           onSubmit={() => {}}
           enableReinitialize
@@ -305,8 +305,12 @@ const Member = (props) => {
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
-                      <Box mx={4} mb={3}>
+                      {
+                        showProgress &&
+                          <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      }
+
+                      <Box mx={0} mb={3}>
                         { completed
                           ? error
                             ? <Failure error={error} />
@@ -314,7 +318,7 @@ const Member = (props) => {
                           : getActiveStep(props)
                         }
                       </Box>
-                      <Box mx={4} mt={1} mb={3}>
+                      <Box mx={0} mt={0} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
                             result?.contract_number === undefined &&
