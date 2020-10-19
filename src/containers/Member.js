@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -25,7 +26,6 @@ import PersonalData from './HolderChange/PersonalData'
 import Payment from './Member/Payment'
 import Review from './Member/Review'
 
-import Success from './HolderChange/Success'
 import Failure from './HolderChange/Failure'
 
 import { member, memberPayment } from '../services/api'
@@ -275,6 +275,7 @@ const Member = (props) => {
           // setResult({ contract_number: response?.data?.contract_id })
         } else {
           setError(true)
+          setCompleted(true)
         }
       })
       .catch(error => {
@@ -314,7 +315,7 @@ const Member = (props) => {
                         { completed
                           ? error
                             ? <Failure error={error} />
-                            : <Success result={result} />
+                            : <Redirect to={t('NEWMEMBER_OK_REDIRECT_URL')} />
                           : getActiveStep(props)
                         }
                       </Box>
