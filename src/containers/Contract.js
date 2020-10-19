@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative'
   },
   stepContainer: {
-    marginTop: theme.spacing(4),
+    marginTop: 0,
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
@@ -61,7 +61,7 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showInspector, setShowInspector] = useState(true)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -496,7 +496,7 @@ const Contract = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers}>
-      <Container maxWidth="md">
+      <Container maxWidth="md" disableGutters={true}>
         <Formik
           onSubmit={() => {}}
           enableReinitialize

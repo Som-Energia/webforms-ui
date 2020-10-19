@@ -355,7 +355,7 @@ function HolderChange (props) {
         >
           {props => (
             <>
-              <div>
+              <div className="ov-theme">
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
