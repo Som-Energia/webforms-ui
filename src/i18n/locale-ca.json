@@ -240,5 +240,7 @@
     "REVIEW_MEMBER_TITLE": "Revisa i confirma les dades",
     "CREDIT_CARD": "Targeta de crèdit/dèbit",
 
-    "INVALID_PAYMENT_METHOD": "Mètode de pagament incorrecte"
+    "INVALID_PAYMENT_METHOD": "Mètode de pagament incorrecte",
+
+    "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-realitzat/"
 }
