@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import  { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -70,6 +71,7 @@ function ModifyContract (props) {
   }, [props.match.params.language, i18n])
 
   const [activeStep, setActiveStep] = useState(0)
+  const [activeD1Step, setActiveD1Step] = useState(2)
   const [data, setData] = useState({ token: props?.token })
 
   const handleStepChanges = useCallback((params) => {
@@ -148,7 +150,7 @@ function ModifyContract (props) {
   const prevStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
     if (fromD1 && activeStep === 0) {
-      console.log("redirect to d1 details")
+      setActiveD1Step((activeD1Step) => activeD1Step - 1)
     }
   }
 
@@ -156,10 +158,13 @@ function ModifyContract (props) {
     <div className={classes.root}>
       {
         fromD1 &&
-        <Stepper className={classes.stepper} activeStep={3} orientation="vertical">
+        <Stepper className={classes.stepper} activeStep={activeD1Step} orientation="vertical">
           {d1_steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+              <StepLabel error={ (index === d1_steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+              <StepContent>
+                <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail` }}/>
+              </StepContent>
             </Step>
           ))}
         </Stepper>
