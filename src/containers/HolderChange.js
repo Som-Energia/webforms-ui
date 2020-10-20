@@ -102,7 +102,10 @@ function HolderChange (props) {
             t('INVALID_SUPPLY_POINT_CUPS'),
             function () { return !(this.parent.status === 'invalid') }),
         verified: Yup.bool().required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
-          .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX'))
+          .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX')),
+        supply_point_accepted: Yup.bool()
+          .required(t('CUPS_VERIFY_LABEL'))
+          .oneOf([true], t('CUPS_VERIFY_LABEL'))
       })
     }),
     Yup.object().shape({
@@ -322,7 +325,8 @@ function HolderChange (props) {
       cups: '',
       status: false,
       address: '',
-      verified: false
+      verified: false,
+      supply_point_accepted : false
     },
     member: {
       become_member: '',

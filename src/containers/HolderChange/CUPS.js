@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
@@ -23,6 +25,11 @@ function CUPS (props) {
 
   const isActiveCups = () => {
     return values?.supply_point?.status === 'active'
+  }
+
+  const handleClick = (event) => {
+    const supply_point_accepted = values?.supply_point?.supply_point_accepted
+    setFieldValue('supply_point.supply_point_accepted', !supply_point_accepted)
   }
 
   const handleInputCups = (event) => {
@@ -134,6 +141,33 @@ function CUPS (props) {
       <Box ml={1}>
         <FormHelperText dangerouslySetInnerHTML={{ __html: t('CUPS_NO_VERIFY_HELP') }}></FormHelperText>
       </Box>
+
+      <Box ml={1} mt={4} mb={1}>
+        <FormHelperText
+          dangerouslySetInnerHTML={
+            { __html: t('PRIVACY_POLICY_SUPLYPOINT') }
+          }
+        />
+      </Box>
+      <Box ml={1}>
+      <FormGroup row>
+        <FormControlLabel
+          disabled={!isActiveCups()}
+          control={
+            <Checkbox
+              id="supply_point_accepted"
+              color="primary"
+              name="supply_point_accepted"
+              onClick={handleClick}
+              checked={values?.supply_point?.supply_point_accepted}
+            />
+          }
+          label={t('ACCEPT_TERMS')}
+          labelPlacement="end"
+        />
+        </FormGroup>
+      </Box>
+
     </>
   )
 }
