@@ -130,7 +130,10 @@ const Contract = (props) => {
             function () { return !(this.parent.status === 'active') })
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') })
+            function () { return !(this.parent.status === 'invalid') }),
+        supply_point_accepted: Yup.bool()
+          .required(t('CUPS_VERIFY_LABEL'))
+          .oneOf([true], t('CUPS_VERIFY_LABEL'))
       }),
       contract: Yup.object().shape({
         has_service: Yup.bool()
@@ -427,7 +430,8 @@ const Contract = (props) => {
       city: { id: '' },
       is_housing: '',
       cnae: '',
-      attachments: []
+      attachments: [],
+      supply_point_accepted : false
     },
     contract: {
       has_service: '',

@@ -325,5 +325,7 @@
   "PHASE_TRI": "Trifásica",
 
   "SEPA_TITLE": "Condiciones de pago",
-  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>"
+  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>",
+
+  "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablemente que yo (o la entidad a la que represento) dispongo de un justo título sobre la vivienda o local (contrato de arrendamiento, escritura de propiedad u otro) relacionado con el punto de suministro y / o CUPS de referencia del cual soy usuario efectivo, asumiendo toda la responsabilidad en relación a la veracidad de los datos aportados. Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa del mencionado justo título cuando me sea requerida"
 }
