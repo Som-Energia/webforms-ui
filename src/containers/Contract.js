@@ -130,10 +130,7 @@ const Contract = (props) => {
             function () { return !(this.parent.status === 'active') })
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') }),
-        supply_point_accepted: Yup.bool()
-          .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL'))
+            function () { return !(this.parent.status === 'invalid') })
       }),
       contract: Yup.object().shape({
         has_service: Yup.bool()
@@ -166,7 +163,10 @@ const Contract = (props) => {
           .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
           .test('CnaeNoHousing',
             t('INVALID_CNAE_NO_HOUSING'),
-            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) })
+            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) }),
+        supply_point_accepted: Yup.bool()
+          .required(t('CUPS_VERIFY_LABEL'))
+          .oneOf([true], t('CUPS_VERIFY_LABEL'))
       })
     }),
     Yup.object().shape({
