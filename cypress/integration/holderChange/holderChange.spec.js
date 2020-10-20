@@ -69,6 +69,7 @@ describe('Holder Change', () => {
       cy.get('[name="supply_point.verified"]').click()
 
       cy.get('[name="supply_point_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
 
       cy.get('[data-cy=next]').click()
     })

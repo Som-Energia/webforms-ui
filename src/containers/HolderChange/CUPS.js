@@ -16,20 +16,33 @@ import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import { checkCups } from '../../services/api'
 import StepHeader from '../../components/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
+
 
 function CUPS (props) {
   const { t } = useTranslation()
   const { values, setFieldValue, setTouched, handleChange, validateForm, handleBlur, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('supply_point.supply_point_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('supply_point.supply_point_accepted', false)
+  }
 
   const isActiveCups = () => {
     return values?.supply_point?.status === 'active'
-  }
-
-  const handleClick = (event) => {
-    const supply_point_accepted = values?.supply_point?.supply_point_accepted
-    setFieldValue('supply_point.supply_point_accepted', !supply_point_accepted)
   }
 
   const handleInputCups = (event) => {
@@ -142,15 +155,7 @@ function CUPS (props) {
         <FormHelperText dangerouslySetInnerHTML={{ __html: t('CUPS_NO_VERIFY_HELP') }}></FormHelperText>
       </Box>
 
-      <Box ml={1} mt={4} mb={1}>
-        <FormHelperText
-          dangerouslySetInnerHTML={
-            { __html: t('PRIVACY_POLICY_SUPLYPOINT') }
-          }
-        />
-      </Box>
-      <Box ml={1}>
-      <FormGroup row>
+      <Box mt={1} mb={2} mx={1}>
         <FormControlLabel
           disabled={!isActiveCups()}
           control={
@@ -160,13 +165,22 @@ function CUPS (props) {
               name="supply_point_accepted"
               onClick={handleClick}
               checked={values?.supply_point?.supply_point_accepted}
+              value={true}
             />
           }
-          label={t('ACCEPT_TERMS')}
-          labelPlacement="end"
+          label={t('FAIR_TITLE_LABEL')}
         />
-        </FormGroup>
       </Box>
+
+      <TermsDialog
+        title={t('FAIR_TITLE')}
+        open={open}
+        onAccept={handleAccept}
+        onClose={handleClose}
+        maxWidth="sm"
+      >
+        <span dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }} />
+      </TermsDialog>
 
     </>
   )
