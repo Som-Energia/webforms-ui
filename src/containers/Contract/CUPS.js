@@ -5,10 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
@@ -50,11 +46,6 @@ const CUPS = (props) => {
 
   const { values, handleBlur, errors, touched, setFieldValue, setFieldTouched, setFields } = props
   const [isLoading, setLoading] = useState(false)
-
-  const handleClick = (event) => {
-    const supply_point_accepted = values?.supply_point?.supply_point_accepted
-    setFieldValue('supply_point.supply_point_accepted', !supply_point_accepted)
-  }
 
   const handleInputCups = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,22}/)
@@ -163,34 +154,6 @@ const CUPS = (props) => {
           ]}
         />
       </Box>
-
-      <Grid container spacing={3}>
-        <Grid item mt={1} mb={0}>
-          <FormHelperText
-            dangerouslySetInnerHTML={
-              { __html: t('PRIVACY_POLICY_SUPLYPOINT') }
-            }
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="supply_point_accepted"
-                  color="primary"
-                  name="supply_point_accepted"
-                  onClick={handleClick}
-                  checked={values?.supply_point?.supply_point_accepted}
-                />
-              }
-              label={t('ACCEPT_TERMS')}
-              labelPlacement="end"
-            />
-          </FormGroup>
-        </Grid>
-      </Grid>
 
     </>
   )

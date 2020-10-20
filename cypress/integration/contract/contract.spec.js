@@ -26,8 +26,6 @@ describe('Contract', () => {
       cy.wait(500)
       cy.get(`[data-value="${this.data.supplyPoint.hasNoService}"]`).click()
 
-      cy.get('[name="supply_point_accepted"]').click()
-
       cy.get('[data-cy=next]').click()
 
       cy.get('#supply_point_address')
@@ -56,6 +54,9 @@ describe('Contract', () => {
 
       cy.get('#supply_point_cnae')
         .should('have.value', this.data.supplyPoint.cnae)
+
+      cy.get('[name="supply_point_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
 
       cy.get('[data-cy=next]').click()
     })
@@ -123,8 +124,6 @@ describe('Contract', () => {
       cy.wait(500)
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
-      cy.get('[name="supply_point_accepted"]').click()
-
       cy.get('[data-cy=next]').click()
 
       cy.get('#supply_point_address')
@@ -153,6 +152,9 @@ describe('Contract', () => {
 
       cy.get('#supply_point_cnae')
         .should('have.value', this.data.supplyPoint.cnae)
+
+      cy.get('[name="supply_point_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
 
       cy.get('[data-cy=next]').click()
     })
@@ -231,8 +233,6 @@ describe('Contract', () => {
       cy.wait(500)
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
-      cy.get('[name="supply_point_accepted"]').click()
-
       cy.get('[data-cy=next]').click()
 
       cy.get('#supply_point_address')
@@ -261,6 +261,9 @@ describe('Contract', () => {
 
       cy.get('#supply_point_cnae')
         .should('have.value', this.data.supplyPoint.cnae)
+
+      cy.get('[name="supply_point_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
 
       cy.get('[data-cy=next]').click()
     })
@@ -341,8 +344,6 @@ describe('Contract', () => {
     cy.wait(500)
     cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
-    cy.get('[name="supply_point_accepted"]').click()
-
     cy.get('[data-cy=next]').click()
 
     cy.get('#supply_point_address')
@@ -371,6 +372,9 @@ describe('Contract', () => {
 
     cy.get('#supply_point_cnae')
       .should('have.value', this.data.supplyPoint.cnae)
+
+    cy.get('[name="supply_point_accepted"]').click()
+    cy.get('[data-cy=accept]').click()
 
     cy.get('[data-cy=next]').click()
 
