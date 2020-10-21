@@ -4,11 +4,13 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +26,22 @@ const HolderIdentifier = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
   const { values, handleBlur, handleChange, errors, touched, setFieldValue, setFieldTouched } = props
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('holder.legal_person_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('holder.legal_person_accepted', false)
+  }
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
     setFieldValue('holder.vat', vat)
@@ -82,6 +100,39 @@ const HolderIdentifier = (props) => {
           ]}
         />
       </Box>
+
+      {
+        !values?.holder?.isphisical && values?.holder?.vatvalid && values?.holder.vat[0].toUpperCase().match(/([A-J]|[N-W])/i) &&
+        <>
+          <Box mt={1} mb={2} mx={1}>
+            <FormControlLabel
+              // disabled={!isActiveCups()}
+              control={
+                <Checkbox
+                  id="legal_person_accepted"
+                  color="primary"
+                  name="legal_person_accepted"
+                  onClick={handleClick}
+                  checked={values?.holder?.legal_person_accepted}
+                  value={true}
+                />
+              }
+              label={t('LEGAL_PERSON_TITLE_LABEL')}
+            />
+          </Box>
+
+          <TermsDialog
+            title={t('LEGAL_PERSON_TITLE')}
+            open={open}
+            onAccept={handleAccept}
+            onClose={handleClose}
+            maxWidth="sm"
+          >
+            <span dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_LEGAL_PERSON') }} />
+          </TermsDialog>
+        </>
+      }
+
     </>
   )
 }
