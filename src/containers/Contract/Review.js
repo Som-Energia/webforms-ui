@@ -155,7 +155,7 @@ const Review = (props) => {
               </>
               : <>
                 <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
-                <ReviewField label={t('PROXY')} value={`${holder?.proxyname}(${holder?.proxyvat})`} />
+                <ReviewField label={t('PROXY')} value={`${holder?.proxyname} (${holder?.proxynif})`} />
               </>
             }
           </Grid>
