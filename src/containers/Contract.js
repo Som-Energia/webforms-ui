@@ -242,7 +242,14 @@ const Contract = (props) => {
           .required(t('FILL_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
-          .oneOf([true], t('FILL_NIF'))
+          .oneOf([true], t('FILL_NIF')),
+        legal_person_accepted: Yup.bool()
+          .when('isphisical', {
+            is: false,
+            then: Yup.bool()
+              .required(t('ACCEPT_LEGAL_PERSON'))
+              .oneOf([true], t('ACCEPT_LEGAL_PERSON'))
+          }),
       })
     }),
     Yup.object().shape({
@@ -416,7 +423,8 @@ const Contract = (props) => {
       email2: '',
       phone1: '',
       phone2: '',
-      language: `${i18n.language}_ES`
+      language: `${i18n.language}_ES`,
+      legal_person_accepted: false
     },
     supply_point: {
       cups: '',
