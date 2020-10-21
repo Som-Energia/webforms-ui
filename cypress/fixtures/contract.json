@@ -44,6 +44,17 @@
   "power2": 16,
   "power3": 10,
   "phase": "mono",
-  "fare": "nodh"
+  "fare": "nodh",
+  "juridic_member": {
+    "number": "",
+    "vat": ""
+  },
+  "juridic_holder": {
+    "vat": "",
+    "proxynif": "",
+    "previousHolder": true,
+    "proxyname": "David Palomo",
+    "name": "Nom Empresa"
+  }
 }
 
