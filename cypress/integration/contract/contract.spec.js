@@ -23,7 +23,7 @@ describe('Contract', () => {
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(500)
+      cy.wait(800)
       cy.get(`[data-value="${this.data.supplyPoint.hasNoService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -118,7 +118,7 @@ describe('Contract', () => {
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(500)
+      cy.wait(800)
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -224,7 +224,7 @@ describe('Contract', () => {
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(500)
+      cy.wait(800)
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -332,7 +332,7 @@ describe('Contract', () => {
       .type(this.data.supplyPoint.cups)
       .should('have.value', this.data.supplyPoint.cups)
 
-    cy.wait(500)
+    cy.wait(800)
     cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
     cy.get('[data-cy=next]').click()
