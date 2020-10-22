@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
@@ -11,18 +10,8 @@ import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
-const useStyles = makeStyles((theme) => ({
-  chooserContainer: {
-    '& h6': {
-      fontSize: '1rem',
-      marginTop: theme.spacing(2)
-    }
-  }
-}))
-
 const HolderIdentifier = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const { values, handleBlur, handleChange, errors, touched, setFieldValue, setFieldTouched } = props
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
@@ -62,7 +51,7 @@ const HolderIdentifier = (props) => {
           }
         />
       </Box>
-      <Box mt={1} mb={1} className={classes.chooserContainer}>
+      <Box mt={1} mb={1}>
         <Chooser
           question={t('PREVIOUS_HOLDER')}
           onChange={handleChangePreviousHolder}

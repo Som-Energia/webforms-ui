@@ -19,10 +19,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3)
   },
   title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
+    fontSize: '1rem',
+    marginTop: theme.spacing(2)
   },
   chooserItem: {
     display: 'block',
@@ -41,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
   chooserItemSelected: {
     margin: '0 0 8px 0',
-    border: '2px solid #96b633',
+    border: '1px solid #96b633',
     backgroundColor: 'rgba(150, 182, 51, 0.08)',
     '&:hover': {
-      border: '2px solid #96b633',
+      border: '1px solid #96b633',
       backgroundColor: 'rgba(150, 182, 51, 0.08)'
     }
   },
@@ -86,7 +84,7 @@ const Chooser = (props) => {
 
   return (
     <>
-      <Typography variant="h6"
+      <Typography variant="h6" className={classes.title}
         dangerouslySetInnerHTML={{ __html: question }}
       />
       <RadioGroup className={classes.margin} defaultValue="">
