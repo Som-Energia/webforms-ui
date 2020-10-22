@@ -326,5 +326,24 @@
   "PHASE_TRI": "Trifásica",
 
   "SEPA_TITLE": "Condiciones de pago",
-  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>"
+  "SEPA": "<p>El pago de las facturas se efectuará mediante domiciliación bancaria a la cuenta designada a estos efectos por la Contratante en el formulario de contratación que consta en las Condiciones Particulares, y deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura.</p><p>La Contratante declara y garantiza haber realizado los trámites necesarios ante la entidad bancaria, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.</p>",
+
+  "NEW_MEMBER": "Nueva persona socia",
+  "NEW_MEMBER_DESC": "<p>Hacerse socio/a de Som Energia es rápido y fácil. Solo hay que rellenar este formulario y realizar la aportación inicial de 100 € al capital social para disfrutar de los servicios de la cooperativa y formar parte de un movimiento social de transformación del modelo energético.</p><p>Introduce el <b>NIF de la nueva persona socia</b>:</p>",
+  "NEW_MEMBER_NO_VAT_HELP": "¿Qué hago si no tengo NIF?",
+
+  "PAYMENT_METHOD_TITLE": "Pago de la aportación",
+  "PAYMENT_METHOD_DESC": "Para ser persona socia es necesaria una aportació única al capital social de <b>100 €</b>, que <b>se devuelven</b> en el supuesto que algun dia quieras darte de baja.",
+  "PAYMENT_METHOD": "Método de pago",
+  "PAYMENT_METHOD_IBAN": "Recibo domiciliado",
+  "PAYMENT_METHOD_IBAN_DESC": "Sin coste para la cooperativa",
+  "PAYMENT_METHOD_CCARD": "Tarjeta de crédito/débito",
+  "PAYMENT_METHOD_CCARD_DESC": "Coste de 1,80€ para la cooperativa",
+
+  "REVIEW_MEMBER_TITLE": "Revisa y confirma los datos",
+  "CREDIT_CARD": "Tarjeta de crédito/débito",
+
+  "INVALID_PAYMENT_METHOD": "Método de pago incorrecto",
+
+  "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/es/pago-realizado/"
 }
