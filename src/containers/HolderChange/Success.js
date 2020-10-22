@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1),
     textAlign: 'center'
   },
-  margin: {
-    marginTop: theme.spacing(2)
+  message: {
+    marginTop: theme.spacing(2),
+    lineHeight: '1.75'
   },
   logo: {
     width: '300px',
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   icon: {
-    color: 'rgba(0, 0, 0, 0.87)'
+    fontSize: '1.85rem'
   }
 }))
 
@@ -42,9 +43,9 @@ const Success = (props) => {
       <StepHeader title={t('SUCCESS_TITLE')} />
       <div className={classes.container}>
         <Typography className={classes.title} variant="h6">
-          <CheckCircleOutlineIcon fontSize="large" className={classes.icon} />&nbsp; {t('SUCCESS_TEXT')}
+          <span className={classes.icon} role="img">🎉</span>&nbsp; {t('SUCCESS_TEXT')}
         </Typography>
-        <Typography className={classes.margin} variant="body1"
+        <Typography className={classes.message} variant="body1"
           dangerouslySetInnerHTML={{ __html: t('SUCCESS_NOTE', result) }}
         />
         <Box mt={3} mb={1}>

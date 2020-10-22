@@ -208,7 +208,7 @@
 
     "FAILURE_TITLE": "Ups!",
     "FAILURE_TEXT": "Ho sentim, no ha estat possible realitzar la teva sol·licitud",
-    "UNEXPECTED_POSTERROR": "S'ha produit un error!<br>{{error_message}}",
+    "UNEXPECTED_POSTERROR": "S'ha produït un error!<br>{{error_message}}",
     "ADDITIONAL_PROPERTIES": "Hem rebut camps inesperats",
     "UNEXPECTED_VALUE": "Hem rebut valors inesperats",
     "MISSING_REQUIRED_FIELDS": "No s'han rebut alguns camps requerits",
