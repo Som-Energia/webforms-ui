@@ -81,6 +81,9 @@ const App = ({ token = '' }) => {
                 <Route path="/:language/hazte-socio-a/" component={lazy(() => import('./containers/Member'))} />
                 <Route path="/:language/izan-zaitez-bazkide/" component={lazy(() => import('./containers/Member'))} />
                 <Route path="/:language/faite-socio-a/" component={lazy(() => import('./containers/Member'))} />
+
+                <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
+                <Route path="/:language/collective-purchases/" component={lazy(() => import('./containers/SomSolet'))} />
               </Switch>
             </Router>
           </Suspense>
