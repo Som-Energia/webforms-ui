@@ -59,7 +59,7 @@ const Member = (props) => {
 
   const formTPV = useRef(null)
 
-  const [showInspector, setShowInspector] = useState(false)
+  const [showInspector, setShowInspector] = useState(true)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -118,10 +118,14 @@ const Member = (props) => {
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
-        state: Yup.string()
-          .required(t('NO_STATE')),
-        city: Yup.string()
-          .required(t('NO_CITY')),
+        state: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_STATE'))
+        }),
+        city: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_CITY'))
+        }),
         email: Yup.string()
           .required(t('NO_EMAIL'))
           .email(t('NO_EMAIL')),

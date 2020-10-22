@@ -63,10 +63,10 @@ const StateCity = (props) => {
     event.preventDefault()
     const newState = { id: event.target.value, name: states[event.target.value] }
     setState(newState)
-    setCity(cityInitial)
+    setCity({ id: '' })
     onChange({
       state: newState,
-      city: cityInitial
+      city: { id: '' }
     })
   }
 

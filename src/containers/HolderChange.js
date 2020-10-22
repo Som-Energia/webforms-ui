@@ -138,10 +138,14 @@ function HolderChange (props) {
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
-        state: Yup.string()
-          .required(t('NO_STATE')),
-        city: Yup.string()
-          .required(t('NO_CITY')),
+        state: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_STATE'))
+        }),
+        city: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_CITY'))
+        }),
         email: Yup.string()
           .required(t('NO_EMAIL'))
           .email(t('NO_EMAIL')),
