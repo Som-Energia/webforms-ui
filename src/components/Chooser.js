@@ -39,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
   chooserItemSelected: {
     margin: '0 0 8px 0',
-    border: '2px solid #96b633',
+    border: '1px solid #96b633',
     backgroundColor: 'rgba(150, 182, 51, 0.08)',
     '&:hover': {
-      border: '2px solid #96b633',
+      border: '1px solid #96b633',
       backgroundColor: 'rgba(150, 182, 51, 0.08)'
     }
   },
