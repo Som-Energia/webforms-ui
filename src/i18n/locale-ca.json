@@ -117,18 +117,23 @@
     "HOLDER_POSTALCODE_HELP": "Codi postal de la persona titular",
     "HOLDER_EMAIL": "Adreça electrònica",
     "HOLDER_EMAIL_HELP": "Adreça electrònica de la persona titular",
-    "HOLDER_EMAIL_2": "Adreça electrònica (repeteix l'adreça electrònica)",
+    "HOLDER_EMAIL_2": "Repeteix l'adreça electrònica",
     "HOLDER_EMAIL_2_HELP": "Repeteix l'adreça electrònica",
     "HOLDER_PHONE": "Telèfon",
     "HOLDER_PHONE_HELP": "Telèfon de la persona titular",
     "HOLDER_PHONE_2": "Telèfon alternatiu",
     "HOLDER_PHONE_2_HELP": "Telèfon alternatiu",
     "HOLDER_LANGUAGE_HELP": "Idioma de comunicació amb Som Energia",
+    "DATA_PROTECTION_HOLDERCHANGE_URL": "https://www.somenergia.coop/ca/politica-de-privacitat/#formulari-del-canvi-de-titular",
+    "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/ca/politica-de-privacitat/#formulari-del-contracte-de-la-llum",
+    "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/ca/politica-de-privacitat/#formulari-fer-te-n-soci",
     "PRIVACY_POLICY_TITLE": "Política de protecció de dades",
-    "ACCEPT_PRIVACY_POLICY": "He llegit i accepto la política de privacitat de Som Energia",
+    "ACCEPT_PRIVACY_POLICY": "He llegit i accepto la <a target=\"_blank\" href={{url}}>política de privacitat</a> de Som Energia",
     "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/ca/avis-legal/",
-    "PRIVACY_POLICY_HOLDERCHANGE": "<b>Finalitats</b>: tramitar la nova titularitat del contracte, així com enviar-te el nostre butlletí, newsletter, i altres comunicacions informatives i comercials sobre els nostres productes, serveis i esdeveniments. <b>Drets</b>: et pots oposar a l’enviament d’informacions de Som Energia, així com accedir, rectificar i suprimir les teves dades i altres drets a somenergia@delegado-datos.com. <b>Informació addicional</b>: <a target=\"_blank\" href={{url}}>Política de privacitat</a>.",
+    "PRIVACY_POLICY_HOLDERCHANGE": "Finalitats: tramitar la nova titularitat del contracte, així com enviar-te el nostre butlletí, newsletter, i altres comunicacions informatives i comercials sobre els nostres productes, serveis i esdeveniments. Drets: et pots oposar a l’enviament d’informacions de Som Energia, així com accedir, rectificar i suprimir les teves dades i altres drets a somenergia@delegado-datos.com. Informació addicional: <a target=\"_blank\" href={{url}}>Política de privacitat</a>.",
     "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "Si proporciones dades personals de terceres persones, declares responsablement que comptes amb el seu consentiment i que els has proporcionat tota la informació necessària sobre les finalitats i la manera com seran tractades les seves dades personals.",
+    "PRIVACY_POLICY_NEWMEMBER": "Finalitats: formalitzar la teva alta com a persona sòcia i remetre't comunicacions informatives relacionades amb el nostre àmbit. Drets: pots accedir, rectificar i suprimir les teves dades i altres drets a somenergia@delegado-datos.com. Informació addicional: <a target=\"_blank\" href={{url}}>Política de privacitat</a>.",
+
     "NO_SURNAME1": "No has especificat el primer cognom",
     "NO_NIF": "No has especificat el NIF",
     "NO_PROXY_NAME": "No has especificat el nom de la persona representant",
@@ -188,7 +193,7 @@
     "VOLUNTARY_CENT": "Donatiu voluntari",
     "ACCEPT_TERMS": "He llegit i accepto les condicions de Som Energia",
     "UNACCEPTED_TERMS": "Has d'acceptar les condicions",
-    "GENERAL_TERMS": "",
+    "GENERAL_TERMS": "Condicions Generals",
     "SEND": "Enviar",
     "YES": "Sí",
     "I_DECLINE": "Rebutjo",
@@ -306,5 +311,24 @@
     "PHASE_TRI": "Trifàsica",
 
     "SEPA_TITLE": "Condicions de pagament",
-    "SEPA": "<p>El pagament de les factures s'ha d'efectuar mitjançant domiciliació bancària al compte designat a aquest efecte per la contractant al formulari de contractació que consta a les condicions particulars, i s'ha de poder fer efectiu a partir dels 7 dies posteriors a la data de la factura.</p><p>La contractant declara i garanteix haver realitzat els tràmits necessaris davant l'entitat bancària, amb l'objectiu que aquestes condicions de pagament siguin efectives durant el període íntegre de vigència del contracte actual.</p>"
+    "SEPA": "<p>El pagament de les factures s'ha d'efectuar mitjançant domiciliació bancària al compte designat a aquest efecte per la contractant al formulari de contractació que consta a les condicions particulars, i s'ha de poder fer efectiu a partir dels 7 dies posteriors a la data de la factura.</p><p>La contractant declara i garanteix haver realitzat els tràmits necessaris davant l'entitat bancària, amb l'objectiu que aquestes condicions de pagament siguin efectives durant el període íntegre de vigència del contracte actual.</p>",
+
+    "NEW_MEMBER": "Nova persona sòcia",
+    "NEW_MEMBER_DESC": "<p>Fer-se soci/a a Som Energia és ràpid i senzill. Només cal omplir aquest formulari i formalitzar l’aportació inicial al capital social per gaudir dels serveis de la cooperativa i per formar part d’un moviment social de transformació del model energètic.</p><p>Introdueix el <b>NIF de la nova persona sòcia</b>:</p>",
+    "NEW_MEMBER_NO_VAT_HELP": "Que faig si no tinc NIF?",
+
+    "PAYMENT_METHOD_TITLE": "Pagament de l'aportació",
+    "PAYMENT_METHOD_DESC": "Per poder ser persona sòcia cal fer una aportació única al capital social de <b>100 €</b>, que <b>es retornen</b> en el cas que qualsevol dia vulguis donar-te'n de baixa.",
+    "PAYMENT_METHOD": "Mètode de pagament",
+    "PAYMENT_METHOD_IBAN": "Rebut domiciliat",
+    "PAYMENT_METHOD_IBAN_DESC": "Sense cost per la cooperativa",
+    "PAYMENT_METHOD_CCARD": "Targeta de crèdit/dèbit",
+    "PAYMENT_METHOD_CCARD_DESC": "Cost de 1,80€ per la cooperativa",
+
+    "REVIEW_MEMBER_TITLE": "Revisa i confirma les dades",
+    "CREDIT_CARD": "Targeta de crèdit/dèbit",
+
+    "INVALID_PAYMENT_METHOD": "Mètode de pagament incorrecte",
+
+    "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-realitzat/"
 }

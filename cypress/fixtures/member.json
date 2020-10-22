@@ -1,0 +1,22 @@
+{
+  "vat": "58291270R",
+  "vatInvalid": "000",
+  "cups": "ES0031101322018013GN0F",
+  "cupsInvalid": "ES00311013220",
+  "cupsAddress": "Pedro López 13 BJO-E",
+  "name": "David",
+  "surname1": "Palomo",
+  "surname2": "Romero",
+  "postalCode": "17003",
+  "address": "Percebe, nº 13",
+  "stateCode": "20",
+  "cityCode": "5386",
+  "email": "david.palomo@somenergia.coop",
+  "phone": "636696969",
+  "language": "ca_ES",
+  "paymentMethod": "credit_card",
+  "iban": "ES77 1234 1234 1612 3456 7890",
+
+  "cif": "Q1077272A",
+  "legalName": "Los Pollos Hermanos"
+}

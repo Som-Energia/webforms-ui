@@ -186,3 +186,35 @@ export const contract = async (data) => {
       return response?.data
     })
 }
+
+export const member = async (data) => {
+  var formData = new FormData()
+  for (var key in data) {
+    formData.append(key, data[key])
+  }
+
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}form/soci/alta`,
+    data: formData
+  })
+    .then(response => {
+      return response?.data
+    })
+}
+
+export const memberPayment = async (data) => {
+  var formData = new FormData()
+  for (var key in data) {
+    formData.append(key, data[key])
+  }
+
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}pagament/redirectiondata`,
+    data: formData
+  })
+    .then(response => {
+      return response?.data
+    })
+}
