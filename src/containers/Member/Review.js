@@ -95,7 +95,7 @@ const Review = (props) => {
             </>
             : <>
               <ReviewField label={t('LEGAL_NAME')} value={values?.member?.name} />
-              <ReviewField label={t('PROXY')} value={`${values?.member.proxyname}(${values?.member?.proxyvat})`} />
+              <ReviewField label={t('PROXY')} value={`${values?.member.proxyname} (${values?.member?.proxynif})`} />
             </>
           }
           <ReviewField label={t('ADDRESS')} value={values?.member?.address} />
