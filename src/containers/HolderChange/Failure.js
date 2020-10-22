@@ -15,8 +15,11 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1),
     textAlign: 'center'
   },
-  margin: {
-    marginTop: theme.spacing(2)
+  message: {
+    marginTop: theme.spacing(2),
+    color: '#dc4338',
+    fontWeight: '400',
+    lineHeight: '1.75'
   },
   logo: {
     width: '300px',
@@ -28,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   icon: {
-    color: 'rgba(0, 0, 0, 0.87)'
+    fontSize: '1.85rem'
   }
 }))
 
@@ -39,7 +42,7 @@ function Failure (props) {
 
   const FailureTitle = () => (
     <>
-      <ErrorOutlineIcon fontSize="large" className={classes.icon} />&nbsp; {t('FAILURE_TEXT')}
+      <span className={classes.icon} role="img">🙈</span>&nbsp; {t('FAILURE_TEXT')}
     </>
   )
 
@@ -50,7 +53,7 @@ function Failure (props) {
         <Typography className={classes.title} variant="h6">
           <FailureTitle />
         </Typography>
-        <Typography className={classes.margin} variant="body1"
+        <Typography className={classes.message} variant="body1"
           dangerouslySetInnerHTML={{ __html: t('UNEXPECTED_POSTERROR', { error_message: error?.code ? t(error?.code) : error?.error }) }}
         />
         <Box mt={3} mb={1}>
