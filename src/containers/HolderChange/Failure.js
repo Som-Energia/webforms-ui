@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline'
-
 import StepHeader from '../../components/StepHeader'
 import cuca from '../../images/cuca-marejada.svg'
 
@@ -18,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   message: {
     marginTop: theme.spacing(2),
     color: '#dc4338',
-    fontWeight: '400',
+    fontWeight: '500',
     lineHeight: '1.75'
   },
   logo: {
@@ -42,7 +40,7 @@ function Failure (props) {
 
   const FailureTitle = () => (
     <>
-      <span className={classes.icon} role="img">🙈</span>&nbsp; {t('FAILURE_TEXT')}
+      <span className={classes.icon} role="img" aria-label="error">🙈</span>&nbsp; {t('FAILURE_TEXT')}
     </>
   )
 

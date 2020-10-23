@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
-
 import StepHeader from '../../components/StepHeader'
 import cuca from '../../images/cuca.svg'
 
@@ -43,7 +41,7 @@ const Success = (props) => {
       <StepHeader title={t('SUCCESS_TITLE')} />
       <div className={classes.container}>
         <Typography className={classes.title} variant="h6">
-          <span className={classes.icon} role="img">🎉</span>&nbsp; {t('SUCCESS_TEXT')}
+          <span className={classes.icon} role="img" aria-label="felicitats">🎉</span>&nbsp; {t('SUCCESS_TEXT')}
         </Typography>
         <Typography className={classes.message} variant="body1"
           dangerouslySetInnerHTML={{ __html: t('SUCCESS_NOTE', result) }}
