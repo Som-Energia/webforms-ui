@@ -65,8 +65,8 @@ function D1Detail (props) {
     i18n.changeLanguage(language)
   }, [props.match.params.language, i18n])
 
-  const [activeStep, setActiveStep] = useState(0)
-  const [data, setData] = useState(props?.templateProps)
+  const [activeStep, setActiveStep] = useState(props?.location?.state?.d1CaseData ? 1 : 0)
+  const [data, setData] = useState(props?.location?.state?.d1CaseData || props?.templateProps)
 
   const handleStepChanges = useCallback((params) => {
     setData({ ...data, ...params })
@@ -117,8 +117,7 @@ function D1Detail (props) {
           />
         }
       default:
-        const language = props.match.params.language
-        return ( <Redirect to={{ pathname: `/${language}/contract/modification`, state: { d1CaseData: data }}}/> )
+        return <Redirect to={{ pathname: `/${props.match.params.language}/contract/modification`, state: { d1CaseData: data } }}/>
     }
   }
 
@@ -138,8 +137,8 @@ function D1Detail (props) {
             {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
-                  <StepContent>
-                    { data?.error === undefined && data?.response === undefined && getStepContent(index) }
+                <StepContent>
+                  { data?.error === undefined && data?.response === undefined && getStepContent(index) }
                 </StepContent>
               </Step>
             ))}

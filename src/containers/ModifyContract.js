@@ -163,7 +163,7 @@ function ModifyContract (props) {
             <Step key={label}>
               <StepLabel error={ (index === d1_steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
               <StepContent>
-                <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail` }}/>
+                <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail`, state: { d1CaseData: d1CaseData } }}/>
               </StepContent>
             </Step>
           ))}
