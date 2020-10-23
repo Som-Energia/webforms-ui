@@ -75,6 +75,9 @@ const App = ({ token = '' }) => {
 
                 <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
                 <Route path="/:language/contracta-la-llum/" component={lazy(() => import('./containers/Contract'))} />
+                <Route path="/:language/contrata-la-luz/" component={lazy(() => import('./containers/Contract'))} />
+                <Route path="/:language/kontrata-ezazu-argia/" component={lazy(() => import('./containers/Contract'))} />
+                <Route path="/:language/contrata-a-luz/" component={lazy(() => import('./containers/Contract'))} />
 
                 <Route path="/new-member" component={lazy(() => import('./containers/Member'))} />
                 <Route path="/:language/fes-te-n-soci-a/" component={lazy(() => import('./containers/Member'))} />
