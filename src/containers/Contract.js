@@ -324,10 +324,11 @@ const Contract = (props) => {
     })
   ]
 
+  const showProgress = false
   const MAX_STEP_NUMBER = 8
 
   const getActiveStep = (props) => {
-    const url = t("DATA_PROTECTION_CONTRACT_URL")
+    const url = t('DATA_PROTECTION_CONTRACT_URL')
     return <>
       { activeStep === 0 &&
         <MemberIdentifier {...props} />
@@ -514,7 +515,11 @@ const Contract = (props) => {
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      {
+                        showProgress &&
+                        <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      }
+
                       <Box mx={4} mb={3}>
                         { completed
                           ? error
