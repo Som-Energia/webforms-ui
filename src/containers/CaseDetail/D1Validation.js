@@ -75,17 +75,16 @@ function D1Validation ({ handleAcceptClick, handleStepChanges, params }) {
         enableReinitialize
         initialValues={
           {
-            ...params,
-            validate: ''
+            validate: '',
+            ...params
           }
         }
-        isInitialValid={false}
+        validateOnMount={true}
         validationSchema={ValidationSchema}
         onSubmit={ (values) => {
-          handleStepChanges({ validate: values?.validate})
+          handleStepChanges({ validate: values?.validate })
           handleAcceptClick()
         }}
-        validateOnMount={true}
       >
         {({
           values,

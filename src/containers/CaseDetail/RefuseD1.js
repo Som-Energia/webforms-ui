@@ -57,9 +57,9 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
       <Formik
         initialValues={
           {
-            ...params,
             d1Attachments: [],
-            refuseReason: ''
+            refuseReason: '',
+            ...params
           }
         }
         validationSchema={RefuseSchema}
