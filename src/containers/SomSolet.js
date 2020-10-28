@@ -21,9 +21,11 @@ import UndoOutlinedIcon from '@material-ui/icons/UndoOutlined'
 import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined'
 
 import Loading from '../components/Loading'
+import ContactDialog from '../containers/SomSolet/ContactDialog'
+import IncidenceDialog from '../containers/SomSolet/IncidenceDialog'
 
 // services
-import { getCampaign, getProject } from '../services/somsolet/api'
+import { getCampaign, getProject, sendContact, sendIncidence } from '../services/somsolet/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -345,6 +347,7 @@ const Registered = (props) => {
 const SomSolet = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+
   const [stages, setStages] = useState([])
   const [campaign, setCampaign] = useState([])
   const [isLoadingCampaign, setIsLoadingCampaign] = useState(true)
@@ -355,6 +358,11 @@ const SomSolet = (props) => {
   const [currentPhase, setCurrentPhase] = useState('preinforme')
   const [prevPhase, setPrevPhase] = useState('prereport')
   const [nextPhase, setNextPhase] = useState('technicalVisit')
+
+  const [openContact, setOpenContact] = useState(false)
+  const [openIncidence, setOpenIncidence] = useState(false)
+  const [isSending, setSending] = useState(false)
+
   let afterCurrent = false
 
   useEffect(() => {
@@ -363,35 +371,40 @@ const SomSolet = (props) => {
   }, [props.match.params.language, i18n])
 
   useEffect(() => {
+    setIsLoadingProject(true)
+    console.log('getProject')
+    getProject({ dni: '' }) // TODO: find vat from OV
+      .then(response => {
+        const projectInfo = response[0] // TODO: to check
+        console.log('projectInfo', projectInfo)
+        const projectDescription = projectInfo.description
+        const project = getProjectList(projectDescription)
+        console.log('project', project)
+        setProject(project.reverse())
+        const stages = projectInfo.stages
+        const phasesList = getPhasesList(stages)
+        setStages(phasesList)
+        console.log('phasesList', phasesList)
+        setCurrentPhase(projectDescription?.stageId)
+        setActivePhase(projectDescription?.stageId)
+        console.log(projectDescription?.stageId)
+        setIsLoadingProject(false)
+      }).catch(error => {
+        console.log(error)
+        setIsLoadingProject(false)
+      })
+  }, [])
+
+  useEffect(() => {
     setIsLoadingCampaign(true)
     getCampaign()
       .then(response => {
-        const campaign = response?.data[0] // TODO: to check
+        const campaign = response[0] // TODO: to check
         setCampaign(campaign)
         setIsLoadingCampaign(false)
       }).catch(error => {
         console.log(error)
         setIsLoadingCampaign(false)
-      })
-  }, [])
-
-  useEffect(() => {
-    setIsLoadingProject(true)
-    getProject()
-      .then(response => {
-        const projectInfo = response?.data[0] // TODO: to check
-        const projectDescription = projectInfo.description
-        const project = getProjectList(projectDescription)
-        setProject(project.reverse())
-        const stages = projectInfo.stages
-        const phasesList = getPhasesList(stages)
-        setStages(phasesList)
-        setCurrentPhase(stages?.stageId)
-        setActivePhase(stages?.stageId)
-        setIsLoadingProject(false)
-      }).catch(error => {
-        console.log(error)
-        setIsLoadingProject(false)
       })
   }, [])
 
@@ -441,38 +454,66 @@ const SomSolet = (props) => {
 
   // TODO: Refactor
   const getOptionTitle = (key) => {
-    if (key === 'supplyPoint') return 'Punt de Subministrament'
-    if (key === 'project') return 'Projecte'
-    if (key === 'registeredPerson') return 'Persona inscrita'
-    if (key === 'preregistration') return 'Inscripció inicial'
-    if (key === 'registered') return 'Proposta final'
-    return ''
+    switch (key) {
+      case 'supplyPoint':
+        return 'Punt de Subministrament'
+      case 'project':
+        return 'Projecte'
+      case 'registeredPerson':
+        return 'Persona inscrita'
+      case 'preregistration':
+        return 'Inscripció inicial'
+      case 'registered':
+        return 'Proposta final'
+      default:
+        return ''
+    }
   }
 
-  // TODO: Refactor
   const getOptionContent = (key, value) => {
-    if (key === 'supplyPoint') return <SupplyPoint supplyPointInfo={value}/>
-    if (key === 'project') return <Project projectInfo={value}/>
-    if (key === 'registeredPerson') return <RegisteredPerson registeredPersonInfo={value}/>
-    if (key === 'preregistration') return <Preregistration preregistrationInfo={value}/>
-    if (key === 'registered') return <Registered registeredInfo={value}/>
-    return <></>
+    switch (key) {
+      case 'supplyPoint':
+        return <SupplyPoint supplyPointInfo={value}/>
+      case 'project':
+        return <Project projectInfo={value}/>
+      case 'registeredPerson':
+        return <RegisteredPerson registeredPersonInfo={value}/>
+      case 'preregistration':
+        return <Preregistration preregistrationInfo={value}/>
+      case 'registered':
+        return <Registered registeredInfo={value}/>
+      default:
+        return <></>
+    }
   }
 
-  // TODO: Refactor
   const getPhaseTitle = (key) => {
-    if (key === 'prereport') return 'Preinforme'
-    if (key === 'technicalVisit') return 'Informe visita tècnica'
-    if (key === 'report') return 'Report'
-    if (key === 'offer') return 'Proposta d\'oferta final'
-    if (key === 'constructionPermit') return 'Permís d\'obra'
-    if (key === 'installation') return 'Instal·lació'
-    if (key === 'deliveryCertificate') return 'Acta de recepció'
-    if (key === 'legalRegistration') return 'Acte de recepció'
-    if (key === 'legalization') return 'Legalització'
-    if (key === 'invoice') return 'Factura'
-    if (key === 'signature') return 'Signatura Contracte Clau en mà'
-    return ''
+    switch (key) {
+      case 'prereport':
+        return 'Preinforme'
+      case 'technicalVisit':
+        return 'Informe visita tècnica'
+      case 'report':
+        return 'Report'
+      case 'offer':
+        return 'Proposta d\'oferta final'
+      case 'constructionPermit':
+        return 'Permís d\'obra'
+      case 'installation':
+        return 'Instal·lació'
+      case 'deliveryCertificate':
+        return 'Acta de recepció'
+      case 'legalRegistration':
+        return 'Registre Legal'
+      case 'legalization':
+        return 'Legalització'
+      case 'invoice':
+        return 'Factura'
+      case 'signature':
+        return 'Signatura Contracte Clau en mà'
+      default:
+        return ''
+    }
   }
 
   // TODO: Refactor
@@ -490,13 +531,39 @@ const SomSolet = (props) => {
     }
   }
 
+  const handleSendContact = async (data) => {
+    try {
+      console.log(data)
+      setSending(true)
+      await sendContact(data)
+    } catch (exception) {
+      // report error
+      console.log(exception)
+    }
+    setSending(false)
+    setOpenContact(false)
+  }
+
+  const handleSendIncidence = async (data) => {
+    try {
+      console.log(data)
+      setSending(true)
+      await sendIncidence(data)
+    } catch (exception) {
+      // report error
+      console.log(exception)
+    }
+    setSending(false)
+    setOpenIncidence(false)
+  }
+
   return (
     isLoadingCampaign || isLoadingProject
       ? <Loading />
       : <Container maxWidth="lg" className={classes.root}>
         <Grid container>
           {
-            project
+            !project || project.length === 0
               ? <Grid item xs={12}>
                 <div className={clsx(classes.column, classes.noResultsContainer)}>
                   <h3 className={classes.noResults}>No tens compres col·lectives actives</h3>
@@ -509,7 +576,7 @@ const SomSolet = (props) => {
                       project.map(({ title, content }, index) => (
                         <>
                           <div
-                            key={title}
+                            key={`${index}-${title}`}
                             className={clsx(classes.option, activeOption === index && classes.activeOption)}
                             onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
                           >
@@ -529,7 +596,7 @@ const SomSolet = (props) => {
                     }
                     <div className={classes.separator}> </div>
 
-                    <div className={classes.option}>
+                    <div role="button" className={classes.option} onClick={ () => setOpenContact(true) }>
                       <div className={classes.phaseIcon}>
                         <MailOutlinedIcon fontSize="small" />
                       </div>
@@ -538,7 +605,7 @@ const SomSolet = (props) => {
                       </div>
                     </div>
 
-                    <div className={classes.option}>
+                    <div role="button" className={classes.option} onClick={ () => setOpenIncidence(true) }>
                       <div className={classes.phaseIcon}>
                         <ReportProblemOutlinedIcon fontSize="small" />
                       </div>
@@ -570,17 +637,14 @@ const SomSolet = (props) => {
                           &nbsp;{campaign.region?.autonomousCommunity}
                         </div>
                         <div> {campaign?.engineering && campaign.engineering.map(
-                          ({ name, address, email, phoneNumber }) => {
-                            return (
-                              <div key={name} className={classes.engineeringInfo}>
-                                &nbsp; <SettingsOutlinedIcon fontSize="small" />
-                                &nbsp; <div>
-                                  <a href={`mailto:${address}`} target="_blank" rel="noopener noreferrer">{name}</a>
-                                  &nbsp; ({phoneNumber})
-                                </div>
+                          ({ name, address, email, phoneNumber }) =>
+                            <div key={name} className={classes.engineeringInfo}>
+                              &nbsp; <SettingsOutlinedIcon fontSize="small" />
+                              &nbsp; <div>
+                                <a href={`mailto:${address}`} target="_blank" rel="noopener noreferrer">{name}</a>
+                                &nbsp; ({phoneNumber})
                               </div>
-                            )
-                          }
+                            </div>
                         )}
                           &nbsp;
                         </div>
@@ -643,6 +707,8 @@ const SomSolet = (props) => {
               </>
           }
         </Grid>
+        <ContactDialog open={openContact} handleClose={ () => setOpenContact(false) } isSending={isSending} handleSend={handleSendContact} />
+        <IncidenceDialog open={openIncidence} handleClose={ () => setOpenIncidence(false) } isSending={isSending} handleSend={handleSendIncidence} />
       </Container>
   )
 }

@@ -1,0 +1,8 @@
+// runtime-config.js
+window.config = {
+  API_BASE_URL: '',
+
+  API_SOMSOLET_URL: '',
+  SOMSOLET_API_USERNAME: '',
+  SOMSOLET_API_PASSWORD: ''
+}
