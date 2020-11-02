@@ -137,7 +137,25 @@ function CUPS (props) {
           helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
         />
       </Box>
-      <Box ml={1} mt={4} mb={1}>
+
+      <Box mt={3} mb={0} mx={1}>
+        <FormControlLabel
+          disabled={!isActiveCups()}
+          control={
+            <Checkbox
+              id="supply_point_accepted"
+              color="primary"
+              name="supply_point_accepted"
+              onClick={handleClick}
+              checked={values?.supply_point?.supply_point_accepted}
+              value={true}
+            />
+          }
+          label={t('FAIR_TITLE_LABEL')}
+        />
+      </Box>
+
+      <Box mx={1} mt={0} mb={2}>
         <FormControlLabel
           disabled={!isActiveCups()}
           control={
@@ -153,23 +171,6 @@ function CUPS (props) {
       </Box>
       <Box ml={1}>
         <FormHelperText dangerouslySetInnerHTML={{ __html: t('CUPS_NO_VERIFY_HELP') }}></FormHelperText>
-      </Box>
-
-      <Box mt={1} mb={2} mx={1}>
-        <FormControlLabel
-          disabled={!isActiveCups()}
-          control={
-            <Checkbox
-              id="supply_point_accepted"
-              color="primary"
-              name="supply_point_accepted"
-              onClick={handleClick}
-              checked={values?.supply_point?.supply_point_accepted}
-              value={true}
-            />
-          }
-          label={t('FAIR_TITLE_LABEL')}
-        />
       </Box>
 
       <TermsDialog
