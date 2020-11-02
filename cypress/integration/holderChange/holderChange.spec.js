@@ -114,6 +114,7 @@ describe('Holder Change', () => {
 
       cy.get('[data-cy=next]').click()
 
+      cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()
       cy.get('[data-cy=next]').click()
 
       cy.get('[data-cy=next]').click()
