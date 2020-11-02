@@ -80,26 +80,6 @@ const HolderIdentifier = (props) => {
           }
         />
       </Box>
-      <Box mt={1} mb={1} className={classes.chooserContainer}>
-        <Chooser
-          question={t('PREVIOUS_HOLDER')}
-          onChange={handleChangePreviousHolder}
-          value={ values.contract.has_service === false ? false : values.holder.previous_holder}
-          disabled={values.holder.vatvalid !== true || values.contract.has_service === false}
-          options={[
-            {
-              value: true,
-              label: t('PREVIOUS_HOLDER_YES_LABEL'),
-              description: t('PREVIOUS_HOLDER_YES_DESC')
-            },
-            {
-              value: false,
-              label: t('PREVIOUS_HOLDER_NO_LABEL'),
-              description: t('PREVIOUS_HOLDER_NO_DESC')
-            }
-          ]}
-        />
-      </Box>
 
       {
         !values?.holder?.isphisical && values?.holder?.vatvalid && values?.holder.vat[0].toUpperCase().match(/([A-J]|[N-W])/i) &&
@@ -133,6 +113,26 @@ const HolderIdentifier = (props) => {
         </>
       }
 
+      <Box mt={1} mb={1} className={classes.chooserContainer}>
+        <Chooser
+          question={t('PREVIOUS_HOLDER')}
+          onChange={handleChangePreviousHolder}
+          value={ values.contract.has_service === false ? false : values.holder.previous_holder}
+          disabled={values.holder.vatvalid !== true || values.contract.has_service === false}
+          options={[
+            {
+              value: true,
+              label: t('PREVIOUS_HOLDER_YES_LABEL'),
+              description: t('PREVIOUS_HOLDER_YES_DESC')
+            },
+            {
+              value: false,
+              label: t('PREVIOUS_HOLDER_NO_LABEL'),
+              description: t('PREVIOUS_HOLDER_NO_DESC')
+            }
+          ]}
+        />
+      </Box>
     </>
   )
 }
