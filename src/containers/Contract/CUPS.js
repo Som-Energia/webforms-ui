@@ -20,13 +20,18 @@ const useStyles = makeStyles((theme) => ({
   memberChecked: {
     fontWeight: 500,
     color: theme.palette.primary.main
+  },
+  chooserContainer: {
+    '& h6': {
+      fontSize: '1rem',
+      marginTop: theme.spacing(2)
+    }
   }
 }))
 
 const CupsHelperText = () => {
   const { t } = useTranslation()
-  return <a
-    href={t('CUPS_HELP_URL')}
+  return <a href={t('CUPS_HELP_URL')}
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -128,7 +133,7 @@ const CUPS = (props) => {
         </Grid>
       </Box>
 
-      <Box mt={1} mb={1}>
+      <Box mt={1} mb={2} className={classes.chooserContainer}>
         <Chooser
           question={t('HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT')}
           onChange={handleChangeService}
@@ -148,6 +153,7 @@ const CUPS = (props) => {
           ]}
         />
       </Box>
+
     </>
   )
 }

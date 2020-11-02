@@ -48,6 +48,10 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.supply_point.verified
   }
 
+  if (normalContract?.supply_point?.supply_point_accepted !== undefined) {
+    delete normalContract.supply_point.supply_point_accepted
+  }
+
   if (normalContract?.supply_point?.status !== undefined) {
     delete normalContract.supply_point.status
   }

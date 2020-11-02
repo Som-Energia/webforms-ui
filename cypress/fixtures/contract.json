@@ -23,7 +23,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES8308971225549495AE",
+    "cups": "ES4023386283350973BR0F",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -44,6 +44,17 @@
   "power2": 16,
   "power3": 10,
   "phase": "mono",
-  "fare": "nodh"
+  "fare": "nodh",
+  "juridic_member": {
+    "number": "",
+    "vat": ""
+  },
+  "juridic_holder": {
+    "vat": "",
+    "proxynif": "",
+    "previousHolder": true,
+    "proxyname": "David Palomo",
+    "name": "Nom Empresa"
+  }
 }
 
