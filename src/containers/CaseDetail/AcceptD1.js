@@ -52,8 +52,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
   const [sending, setSending] = useState(false)
 
   const AcceptD1Schema = Yup.object().shape({
-    d1Attachments: Yup.string()
-      .required(t('REQUIRED_ATTACHMENTS')),
+    d1Attachments: Yup.string(),
     m1: Yup.bool()
       .required(t('UNACCEPTED_PRIVACY_POLICY'))
       .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
