@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
@@ -11,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 
 import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
+import TermsDialog from '../../components/TermsDialog'
 import Uploader from '../../components/Uploader'
 
 import { CNAE_HOUSING } from '../../services/utils'
@@ -35,6 +38,22 @@ const SupplyPoint = (props) => {
   const classes = useStyles()
 
   const { values, handleBlur, handleChange, errors, touched, setFieldValue } = props
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('supply_point.supply_point_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('supply_point.supply_point_accepted', false)
+  }
 
   const onChangeStateCity = ({ state, city }) => {
     setFieldValue('supply_point.state', state, false)
@@ -197,6 +216,32 @@ const SupplyPoint = (props) => {
           </Grid>
         </Grid>
       </Box>
+
+      <Box mt={1} mb={2}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              id="supply_point_accepted"
+              color="primary"
+              name="supply_point_accepted"
+              onClick={handleClick}
+              checked={values?.supply_point?.supply_point_accepted}
+              value={true}
+            />
+          }
+          label={t('FAIR_TITLE_LABEL')}
+        />
+      </Box>
+
+      <TermsDialog
+        title={t('FAIR_TITLE')}
+        open={open}
+        onAccept={handleAccept}
+        onClose={handleClose}
+        maxWidth="sm"
+      >
+        <span dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }} />
+      </TermsDialog>
     </>
   )
 }

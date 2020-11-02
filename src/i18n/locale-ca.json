@@ -330,5 +330,13 @@
 
     "INVALID_PAYMENT_METHOD": "Mètode de pagament incorrecte",
 
-    "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-realitzat/"
+    "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-realitzat/",
+
+    "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablement que jo (o l'entitat que represento) disposo d'un just títol sobre la vivenda o local (contracte d'arrendament, escriptura de propietat o altre) relacionat amb el punt de subministrament i/o CUPS de referència del qual en sóc usuari efectiu, assumint tota la responsabilitat referent a la veracitat de les dades aportades. Així mateix, declaro que estic en disposició d'aportar la documentació acreditativa del mencionat just títol quan em sigui requerida.",
+    "PRIVACY_POLICY_LEGAL_PERSON": "Declaro responsablement que disposo dels poders o autorització suficients per actuar en nom de la persona jurídica o entitat que represento (incloses comunitats de propietaris, empreses, associacions, administracions públiques, etc.), assumint tota la responsabilitat referent a la veracitat de les dades aportades. Així mateix, declaro que estic en disposició d'aportar la documentació acreditativa de l'autorització atorgada per actuar en nom de l'entitat/persona jurídica quan em sigui requerida (escriptura de poders, certificat d'acta de la junta de propietaris, etc.). En tot cas, la persona jurídica o entitat titular del contracte de subministrament seguirà sent la responsable, a efectes legals, davant Som Energia per a qualsevol canvi en la gestió o incompliment de les condicions contractuals.",
+
+    "FAIR_TITLE_LABEL": "Declaració responsable just títol",
+    "FAIR_TITLE": "Declaració responsable just títol",
+    "LEGAL_PERSON_TITLE_LABEL": "Declaració responsable persona jurídica",
+    "LEGAL_PERSON_TITLE": "Declaració responsable persona jurídica"
 }

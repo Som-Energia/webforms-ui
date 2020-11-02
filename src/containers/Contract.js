@@ -163,7 +163,10 @@ const Contract = (props) => {
           .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
           .test('CnaeNoHousing',
             t('INVALID_CNAE_NO_HOUSING'),
-            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) })
+            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) }),
+        supply_point_accepted: Yup.bool()
+          .required(t('CUPS_VERIFY_LABEL'))
+          .oneOf([true], t('CUPS_VERIFY_LABEL'))
       })
     }),
     Yup.object().shape({
@@ -239,7 +242,14 @@ const Contract = (props) => {
           .required(t('FILL_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
-          .oneOf([true], t('FILL_NIF'))
+          .oneOf([true], t('FILL_NIF')),
+        legal_person_accepted: Yup.bool()
+          .when('isphisical', {
+            is: false,
+            then: Yup.bool()
+              .required(t('ACCEPT_LEGAL_PERSON'))
+              .oneOf([true], t('ACCEPT_LEGAL_PERSON'))
+          }),
       })
     }),
     Yup.object().shape({
@@ -418,7 +428,8 @@ const Contract = (props) => {
       email2: '',
       phone1: '',
       phone2: '',
-      language: `${i18n.language}_ES`
+      language: `${i18n.language}_ES`,
+      legal_person_accepted: false
     },
     supply_point: {
       cups: '',
@@ -432,7 +443,8 @@ const Contract = (props) => {
       city: { id: '' },
       is_housing: '',
       cnae: '',
-      attachments: []
+      attachments: [],
+      supply_point_accepted : false
     },
     contract: {
       has_service: '',
