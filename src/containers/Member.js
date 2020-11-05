@@ -59,7 +59,7 @@ const Member = (props) => {
 
   const formTPV = useRef(null)
 
-  const [showInspector, setShowInspector] = useState(true)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -140,6 +140,14 @@ const Member = (props) => {
           .required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
+      legal_person_accepted: Yup.bool()
+        .test({
+          name: 'isTheMemberVat',
+          message: t('ACCEPT_LEGAL_PERSON'),
+          test: function () {
+            return !(this.parent.member.isphisical === false && this.parent.legal_person_accepted !== true)
+          }
+        }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -260,7 +268,8 @@ const Member = (props) => {
       payment_method: ''
     },
     privacy_policy_accepted: false,
-    terms_accepted: false
+    terms_accepted: false,
+    legal_person_accepted: false
   }
 
   const handlePost = async (values) => {

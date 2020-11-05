@@ -135,7 +135,7 @@ const Review = (props) => {
               color="primary"
             />
           }
-          label={t('COMENTAR_AMB_JURIDIC')}
+          label={t('ACCEPT_TERMS')}
         />
       </Box>
     </>

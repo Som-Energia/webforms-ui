@@ -48,6 +48,9 @@ describe('New Member', () => {
       cy.get('#member_lang').click()
       cy.get('[data-value="ca_ES"]').click()
 
+      cy.get('[name="legal_person_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
+
       cy.get('[name="privacy_policy_accepted"]').click()
 
       cy.get('[data-cy=next]').click()
@@ -58,7 +61,7 @@ describe('New Member', () => {
 
       if (this.data.paymentMethod === 'iban') {
         cy.get('[name="payment.iban"]')
-        .type(this.data.iban).should('have.value', this.data.iban)
+          .type(this.data.iban).should('have.value', this.data.iban)
 
         cy.get('[name="payment.sepa_accepted"]').click()
       }

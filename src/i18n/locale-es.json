@@ -137,7 +137,7 @@
   "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/es/aviso-legal/",
   "PRIVACY_POLICY_HOLDERCHANGE": "Finalidades: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín, newsletter y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. Derechos: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
   "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "En caso de proporcionar datos personales de terceros, declaras responsablemente que cuentas con su consentimiento y que les has proporcionado toda la información necesaria acerca de las finalidades y la forma en la que serán tratados sus datos personales.",
-  "PRIVACY_POLICY_CONTRACT": "Finalidades: gestionar tu contrato de suministro de luz y darte de alta como abonado/a. Derechos: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
+  "PRIVACY_POLICY_CONTRACT": "Finalidades: gestionar tu contrato de suministro de luz y darte de alta como abonado/a. Enviarte nuestro boletín y comunicaciones informativas sobre nuestros productos, servicios y actividades. Derechos: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
   "PRIVACY_POLICY_NEWMEMBER": "Finalidades: formalizar tu alta como persona socia y remitirte comunicaciones informativas relacionadas con nuestro ámbito. Derechos: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}>Política de privacidad</a>.",
 
   "NO_NAME": "No has especificado el nombre",
@@ -350,9 +350,12 @@
 
   "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablemente que yo (o la entidad a la que represento) dispongo de un justo título sobre la vivienda o local (contrato de arrendamiento, escritura de propiedad u otro) relacionado con el punto de suministro y / o CUPS de referencia del cual soy usuario efectivo, asumiendo toda la responsabilidad en relación a la veracidad de los datos aportados. Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa del mencionado justo título cuando me sea requerida.",
   "PRIVACY_POLICY_LEGAL_PERSON": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica o entidad que represento (incluidas comunidades de propietarios, empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados . Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la entidad / persona jurídica cuando me sea requerida (escritura de poderes, certificado de acta de la junta de propietarios, etc .). En todo caso, la persona jurídica o entidad titular del contrato de suministro seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier cambio en la gestión o incumplimiento de las condiciones contractuales.",
+  "PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica que represento (incluidas  empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados . Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la persona jurídica cuando me sea requerida (escritura de poderes, etc .). En todo caso, la persona jurídica seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier aspecto relacionado con su condición de persona socia.",
 
-  "FAIR_TITLE_LABEL": "Declaración responsable justo título",
-  "FAIR_TITLE": "Declaración responsable justo título",
-  "LEGAL_PERSON_TITLE_LABEL": "Declaración responsable persona jurídica",
-  "LEGAL_PERSON_TITLE": "Declaración responsable persona jurídica"
+  "FAIR_TITLE_LABEL": "Declaración responsable del justo título",
+  "FAIR_TITLE": "Declaración responsable del justo título",
+
+  "LEGAL_PERSON_TITLE_LABEL": "Declaración responsable de la representante de la persona jurídica",
+  "LEGAL_PERSON_TITLE": "Declaración responsable de la representante de la persona jurídica",
+  "ACCEPT_LEGAL_PERSON": "No has aceptado la declaración"
 }

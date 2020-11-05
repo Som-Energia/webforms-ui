@@ -242,14 +242,7 @@ const Contract = (props) => {
           .required(t('FILL_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
-          .oneOf([true], t('FILL_NIF')),
-        legal_person_accepted: Yup.bool()
-          .when('isphisical', {
-            is: false,
-            then: Yup.bool()
-              .required(t('ACCEPT_LEGAL_PERSON'))
-              .oneOf([true], t('ACCEPT_LEGAL_PERSON'))
-          }),
+          .oneOf([true], t('FILL_NIF'))
       })
     }),
     Yup.object().shape({
@@ -308,6 +301,14 @@ const Contract = (props) => {
           .required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
+      legal_person_accepted: Yup.bool()
+        .test({
+          name: 'isTheMemberVat',
+          message: t('ACCEPT_LEGAL_PERSON'),
+          test: function () {
+            return !(this.parent.holder.isphisical === false && this.parent.legal_person_accepted !== true)
+          }
+        }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -377,7 +378,7 @@ const Contract = (props) => {
 
   const nextStep = props => {
     let next = activeStep + 1
-    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat) {
+    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
       next++
       props.values.privacy_policy_accepted = true
     }
@@ -428,8 +429,7 @@ const Contract = (props) => {
       email2: '',
       phone1: '',
       phone2: '',
-      language: `${i18n.language}_ES`,
-      legal_person_accepted: false
+      language: `${i18n.language}_ES`
     },
     supply_point: {
       cups: '',
@@ -482,7 +482,8 @@ const Contract = (props) => {
       voluntary_cent: ''
     },
     privacy_policy_accepted: false,
-    terms_accepted: false
+    terms_accepted: false,
+    legal_person_accepted: false
   }
 
   const handlePost = async (values) => {
@@ -490,7 +491,6 @@ const Contract = (props) => {
     const data = normalizeContract(values)
     await contract(data)
       .then(response => {
-        console.log(response)
         if (response?.state === true) {
           setError(false)
           setResult({ contract_number: response?.data?.contract_id })

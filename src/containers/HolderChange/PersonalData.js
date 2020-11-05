@@ -19,6 +19,7 @@ import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined'
 
 import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
+import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
@@ -38,6 +39,7 @@ function PersonalData (props) {
   const { t } = useTranslation()
   const classes = useStyles()
   const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched, entity = 'holder' } = props
+  const [openLegal, setOpenLegal] = useState(false)
 
   const onChangeProxyVAT = ({ vat, valid }) => {
     setFieldValue(`${entity}.proxynif`, vat)
@@ -50,7 +52,23 @@ function PersonalData (props) {
     setFieldValue(`${entity}.city`, city)
   }
 
+  const handleClickLegal = (event) => {
+    event.preventDefault()
+    setOpenLegal(true)
+  }
+
+  const handleAccept = () => {
+    setOpenLegal(false)
+    setFieldValue('legal_person_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpenLegal(false)
+    setFieldValue('legal_person_accepted', false)
+  }
+
   const handleClick = (event) => {
+    event.preventDefault()
     const privacyPolicyAccepted = values?.privacy_policy_accepted
     setFieldValue('privacy_policy_accepted', !privacyPolicyAccepted)
   }
@@ -371,6 +389,36 @@ function PersonalData (props) {
               labelPlacement="end"
             />
           </FormGroup>
+          {
+            !values[entity]?.isphisical && values[entity]?.vatvalid &&
+            <>
+              <FormGroup row>
+                <FormControlLabel
+                  // disabled={!isActiveCups()}
+                  control={
+                    <Checkbox
+                      id="legal_person_accepted"
+                      color="primary"
+                      name="legal_person_accepted"
+                      onClick={handleClickLegal}
+                      checked={values?.legal_person_accepted}
+                    />
+                  }
+                  label={t('LEGAL_PERSON_TITLE_LABEL')}
+                />
+              </FormGroup>
+
+              <TermsDialog
+                title={t('LEGAL_PERSON_TITLE')}
+                open={openLegal}
+                onAccept={handleAccept}
+                onClose={handleClose}
+                maxWidth="sm"
+              >
+                <span dangerouslySetInnerHTML={{ __html: entity === 'holder' ? t('PRIVACY_POLICY_LEGAL_PERSON') : t('PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER') }} />
+              </TermsDialog>
+            </>
+          }
         </Grid>
       </Grid>
     </>

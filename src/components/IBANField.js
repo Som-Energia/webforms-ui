@@ -46,7 +46,6 @@ function IBANField (props) {
       setIsLoading(true)
       checkIban(IBAN)
         .then(response => {
-          console.log(response)
           onChange({ IBAN: IBAN, IBANValid: response?.state === true })
           setIsValidIBAN(response?.state === true)
           setIsLoading(false)
