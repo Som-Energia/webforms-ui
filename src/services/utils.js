@@ -106,6 +106,10 @@ export const normalizeHolderChange = (contract) => {
     normalContract.member.is_member = false
   }
 
+  if (normalContract?.legal_person_accepted !== undefined) {
+    delete normalContract.legal_person_accepted
+  }
+
   if (normalContract?.payment?.iban) {
     normalContract.payment.iban = normalContract.payment.iban.split(' ').join('')
   }
@@ -213,7 +217,7 @@ export const normalizeContract = (contract) => {
 }
 
 export const normalizeMember = (data) => {
-  const finalMember = { }
+  const finalMember = {}
 
   finalMember.tipuspersona = data.member.isphisical ? USER_TYPE_PERSON : USER_TYPE_COMPANY
   finalMember.nom = data.member.name

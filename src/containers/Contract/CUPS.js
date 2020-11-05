@@ -72,7 +72,6 @@ const CUPS = (props) => {
       setLoading(true)
       checkCups(value)
         .then(response => {
-          console.log(response)
           const status = response?.data?.status
           setFieldValue('supply_point.status', status)
           setFieldTouched('supply_point.cups', true)

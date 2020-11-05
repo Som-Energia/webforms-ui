@@ -117,7 +117,6 @@ const Review = (props) => {
     return <>
       { rates[values?.contract?.rate]?.num_power_periods > 1
         ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map((value, index) => {
-          console.log(index)
           const attr = (index + 1 === 1) ? 'power' : `power${index + 1}`
           return <span>{`P${index + 1}: ${values?.contract[attr]} kW `}</span>
         })

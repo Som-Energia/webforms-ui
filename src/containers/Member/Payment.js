@@ -23,7 +23,6 @@ function Payment (props) {
   }
 
   const handleIBANChange = ({ IBAN, IBANValid }) => {
-    setFieldValue('payment.sepa_accepted', false, false)
     setFieldValue('payment.iban', IBAN, false)
     setFieldValue('payment.iban_valid', IBANValid)
   }
@@ -93,7 +92,6 @@ function Payment (props) {
                     checked={values.payment?.sepa_accepted}
                     onClick={handleClick}
                     color="primary"
-                    value={true}
                   />
                 }
                 label={t('IBAN_ACCEPT_DIRECT_DEBIT')}

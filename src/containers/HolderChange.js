@@ -163,6 +163,14 @@ function HolderChange (props) {
           .required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
+      legal_person_accepted: Yup.bool()
+        .test({
+          name: 'isTheMemberVat',
+          message: t('ACCEPT_LEGAL_PERSON'),
+          test: function () {
+            return !(this.parent.holder.isphisical === false && this.parent.legal_person_accepted !== true)
+          }
+        }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -221,7 +229,7 @@ function HolderChange (props) {
   const MAX_STEP_NUMBER = 8
 
   const getActiveStep = (props) => {
-    const url = t("DATA_PROTECTION_HOLDERCHANGE_URL")
+    const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
     return <>
       { activeStep === 0 &&
         <VAT {...props} />
@@ -348,7 +356,8 @@ function HolderChange (props) {
       attachments: {}
     },
     privacy_policy_accepted: false,
-    terms_accepted: false
+    terms_accepted: false,
+    legal_person_accepted: false
   }
 
   return (
