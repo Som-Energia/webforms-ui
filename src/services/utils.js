@@ -238,8 +238,8 @@ export const normalizeMember = (data) => {
     )
 
   finalMember.payment_iban = data.payment.iban
-  finalMember.urlok = 'NEWMEMBER_OK_REDIRECT_URL'
-  finalMember.urlko = 'NEWMEMBER_KO_REDIRECT_URL'
+  finalMember.urlok = data.urlok
+  finalMember.urlko = data.urlko
 
   if (data.member.isphisical) {
     finalMember.cognom = `${data.member.surname1} ${data.member.surname2}`

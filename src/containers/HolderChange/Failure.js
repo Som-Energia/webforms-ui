@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
   message: {
     marginTop: theme.spacing(2),
-    color: '#dc4338',
     fontWeight: '500',
     lineHeight: '1.75'
   },

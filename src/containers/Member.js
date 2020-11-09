@@ -269,7 +269,20 @@ const Member = (props) => {
     },
     privacy_policy_accepted: false,
     terms_accepted: false,
-    legal_person_accepted: false
+    legal_person_accepted: false,
+    urlok: t('NEWMEMBER_OK_REDIRECT_URL'),
+    urlko: t('NEWMEMBER_KO_REDIRECT_URL')
+  }
+
+  const handleError = (error) => {
+    let errorCode = 'UNEXPECTED'
+    if (error?.data?.invalid_fields.length &&
+      error?.data?.invalid_fields[0]?.field &&
+      error?.data?.invalid_fields[0]?.error) {
+      errorCode = `${error?.data?.invalid_fields[0]?.field}_${error?.data?.invalid_fields[0].error}`
+    }
+    setError({ code: errorCode.toUpperCase() })
+    setCompleted(true)
   }
 
   const handlePost = async (values) => {
@@ -285,20 +298,12 @@ const Member = (props) => {
           } else {
             setCompleted(true)
           }
-          // setResult({ contract_number: response?.data?.contract_id })
         } else {
-          setError(true)
-          setCompleted(true)
+          handleError(response)
         }
       })
       .catch(error => {
-        console.log(error)
-        const errorResp =
-        error?.response?.data?.data
-          ? error?.response?.data?.data
-          : { code: 'UNEXPECTED' }
-        setError(errorResp)
-        setCompleted(true)
+        handleError(error?.response?.data)
       })
     setSending(false)
   }
