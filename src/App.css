@@ -1,25 +1,21 @@
 html, body {
   font-family: 'Roboto', sans-serif;
-  background: #f2f2f2;
+  background: transparent;
   color: #4d4d4d;
   font-size: 16px;
   height: 100%;
 }
 
-a {
-  color: #707a1a
-}
-
-input[type="text"],
-input[type="password"],
-input[type="search"],
-input[type="email"],
-input[type="url"],
-input[type="tel"],
-input[type="number"],
-input[type="range"],
-input[type="date"],
-textarea {
+#root input[type="text"],
+#root input[type="password"],
+#root input[type="search"],
+#root input[type="email"],
+#root input[type="url"],
+#root input[type="tel"],
+#root input[type="number"],
+#root input[type="range"],
+#root input[type="date"],
+#root textarea {
   border: 0 !important;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -37,7 +33,16 @@ textarea {
 }
 
 #root {
-  padding-right: 8px;
+  padding-right: 24px;
+  font-family: 'Roboto', sans-serif;
+  background: #fafafa;
+  color:#747474;
+  font-size: 16px;
+}
+
+a {
+  color: #707a1a;
+  font-weight: 500;
 }
 
 /*
@@ -68,13 +73,18 @@ StepHeader Component
 */
 
 .header {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .header__text {
-  color: #b5cc00;
+  color: #444444;
   font-size: 21px;
   font-weight: 400;
+}
+
+.ov-theme {
+  background: #f2f2f2;
+  color: #4d4d4d;
 }
 
 .ov-theme .header {

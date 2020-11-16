@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { GlobalHotKeys } from 'react-hotkeys'
 
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 import Loading from './components/Loading'
 
@@ -22,26 +22,24 @@ const theme = createMuiTheme({
     secondary: {
       main: '#a1a1a1'
     },
+    backgroundColor: '#fafafa',
     contrastThreshold: 2,
     tonalOffset: 0.2
   },
   typography: {
-    color: '#4d4d4d',
     htmlFontSize: 16
   },
   shape: {
     borderRadius: '0'
+  },
+  text: {
+    primary: '#4d4d4d'
   }
 })
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: '#4d4d4d'
   }
 }))
 
@@ -61,6 +59,7 @@ const App = ({ token = '' }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalHotKeys keyMap={keyMap}>
+        <CssBaseline />
         <div className={classes.root}>
           <Suspense fallback ={<Loading />}>
             <Router>

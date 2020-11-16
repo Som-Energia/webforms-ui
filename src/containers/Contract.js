@@ -38,14 +38,16 @@ import { CNAE_HOUSING, normalizeContract } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'relative'
+    position: 'relative',
+    color: theme.palette.text.primary
   },
   stepContainer: {
     marginTop: 0,
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: theme.palette.backgroundColor
   },
   step: {
     position: 'absolute',
@@ -532,7 +534,7 @@ const Contract = (props) => {
                         <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
                       }
 
-                      <Box mx={4} mb={3}>
+                      <Box mx={0} mb={3}>
                         { completed
                           ? error
                             ? <Failure error={error} />
@@ -540,7 +542,7 @@ const Contract = (props) => {
                           : getActiveStep(props)
                         }
                       </Box>
-                      <Box mx={4} mt={1} mb={3}>
+                      <Box mx={0} mt={1} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
                             result?.contract_number === undefined &&
