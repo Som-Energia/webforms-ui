@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: theme.palette.backgroundColor
   },
   step: {
     position: 'absolute',
