@@ -41,9 +41,10 @@ function PersonalData (props) {
   const { values, setFieldValue, validateForm, handleChange, handleBlur, errors, touched, entity = 'holder' } = props
   const [openLegal, setOpenLegal] = useState(false)
 
-  const onChangeProxyVAT = ({ vat, valid }) => {
+  const onChangeProxyVAT = ({ vat, isPhisical, valid }) => {
     setFieldValue(`${entity}.proxynif`, vat)
     setFieldValue(`${entity}.proxynif_valid`, valid)
+    setFieldValue(`${entity}.proxynif_phisical`, isPhisical)
     validateForm()
   }
 
@@ -159,11 +160,12 @@ function PersonalData (props) {
                 value={values[entity]?.proxynif}
                 onChange={onChangeProxyVAT}
                 onBlur={handleBlur}
-                error={(errors[entity]?.proxynif && touched[entity]?.proxynif) ||
+                error={((errors[entity]?.proxynif || errors[entity]?.proxynif_phisical) && touched[entity]?.proxynif) ||
                   (touched[entity]?.proxynif && values[entity]?.proxynif_valid === false)
                 }
                 helperText={(touched[entity]?.proxynif && errors[entity]?.proxynif) ||
-                  (touched[entity]?.proxynif && errors[entity]?.proxynif_valid)
+                  (touched[entity]?.proxynif && errors[entity]?.proxynif_valid) ||
+                  (touched[entity]?.proxynif && errors[entity]?.proxynif_phisical)
                 }
               />
             </Grid>

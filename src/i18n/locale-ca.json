@@ -111,6 +111,7 @@
     "PROXY_NAME_HELP": "Nom i cognoms del representant legal",
     "PROXY_NIF": "NIF del representant legal",
     "PROXY_NIF_HELP": "NIF del representant legal",
+    "PROXY_NIF_PHISICAL": "El representant legal ha de ser una persona física",
     "HOLDER_ADDRESS": "Adreça",
     "HOLDER_ADDRESS_HELP": "Adreça de la persona titular",
     "HOLDER_POSTALCODE": "Codi postal",
@@ -281,12 +282,12 @@
 
     "HOLDER_IDENTIFIER_TITLE": "Identificació del titular",
     "HOLDER_IDENTIFIER_DESC": "<p>Introdueix el <b>NIF de la persona o entitat jurídica que serà la titular</b> del contracte:</p>",
-    "PREVIOUS_HOLDER": "Eres el titular amb l'anterior distribuïdora?",
-    "FILL_PREVIOUS_HOLDER": "No has especificat si era el titular amb l'anterior distribuïdora",
+    "PREVIOUS_HOLDER": "Eres el titular amb l'anterior comercialitzadora?",
+    "FILL_PREVIOUS_HOLDER": "No has especificat si era el titular amb l'anterior comercialitzadora",
     "PREVIOUS_HOLDER_YES_LABEL": "Sí, era la persona titular",
     "PREVIOUS_HOLDER_NO_LABEL": "No, no era la persona titular",
-    "PREVIOUS_HOLDER_YES_DESC": "Era la persona titular del contracte amb l'anterior distribuïdora",
-    "PREVIOUS_HOLDER_NO_DESC": "No era la persona titular del contracte con l'anterior distribuïdora",
+    "PREVIOUS_HOLDER_YES_DESC": "Era la persona titular del contracte amb l'anterior comercialitzadora",
+    "PREVIOUS_HOLDER_NO_DESC": "No era la persona titular del contracte con l'anterior comercialitzadora",
 
     "ALTA": "Alta d'un punt sense subministrament",
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Canvi de comercialitzadora modificant la persona titular",
@@ -319,7 +320,7 @@
     "NEW_MEMBER_NO_VAT_HELP": "Que faig si no tinc NIF?",
 
     "PAYMENT_METHOD_TITLE": "Pagament de l'aportació",
-    "PAYMENT_METHOD_DESC": "Per poder ser persona sòcia cal fer una aportació única al capital social de <b>100 €</b>, que <b>es retornen</b> en el cas que qualsevol dia vulguis donar-te'n de baixa.",
+    "PAYMENT_METHOD_DESC": "Per poder ser persona sòcia cal fer una aportació única al capital social de <b>100 €</b>, que es retornen en el cas que qualsevol dia vulguis donar-te'n de baixa.",
     "PAYMENT_METHOD": "Mètode de pagament",
     "PAYMENT_METHOD_IBAN": "Rebut domiciliat",
     "PAYMENT_METHOD_IBAN_DESC": "Sense cost per la cooperativa",
