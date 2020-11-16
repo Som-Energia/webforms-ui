@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
+import Divider from '@material-ui/core/Divider'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -57,6 +58,16 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1.6),
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5)
+  },
+  divider: {
+    marginTop: '12px',
+    marginLeft: 0,
+    marginRight: '32px'
+  },
+  dividerBottom: {
+    marginTop: '24px',
+    marginLeft: 0,
+    marginRight: '32px'
   }
 }))
 
@@ -140,8 +151,8 @@ const Review = (props) => {
         />
         <Grid container>
           <Grid item xs={12} sm={6}>
-            <Typography className={classes.sectionTitle} variant="h6">{ values?.contract?.has_service
-              ? (values?.holder?.previous_holder ? t('CANVI_DE_COMERCIALITZADORA') : t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')) : t('ALTA') }</Typography>
+            <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PROCESS')}</Typography>
+            <ReviewField label={t('PROCESS_TYPE')} value={values?.contract?.has_service ? (values?.holder?.previous_holder ? t('CANVI_DE_COMERCIALITZADORA') : t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')) : t('ALTA')} />
             <ReviewField label={t('RELATED_MEMBER')} value={`${values?.member?.full_name}`} />
           </Grid>
 
@@ -160,6 +171,8 @@ const Review = (props) => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
+            <Divider variant="middle" className={classes.divider} />
+
             <Typography className={classes.sectionTitle} variant="h6">{t('SUPPLY')}</Typography>
             <ReviewField label={t('CUPS_LABEL')} value={values?.supply_point?.cups} />
             <ReviewField
@@ -171,6 +184,8 @@ const Review = (props) => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
+            <Divider variant="middle" className={classes.divider} />
+
             <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_TECHNICAL')}</Typography>
             <ReviewField label={t('FARE')} value={ values?.contract?.has_service ? t('FARE_SAME') : values?.contract?.rate } />
             { values?.contract?.has_service
@@ -181,6 +196,8 @@ const Review = (props) => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
+            <Divider variant="middle" className={classes.divider} />
+
             <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
             <ReviewField label={t('PHONE')} value={holder?.phone1} />
             <ReviewField label={t('EMAIL')} value={holder?.email} />
@@ -188,11 +205,16 @@ const Review = (props) => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
+            <Divider variant="middle" className={classes.divider} />
+
             <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
             <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
           </Grid>
+
           <Grid item xs={12}>
+            <Divider variant="middle" className={classes.divider} />
+
             <Typography className={classes.sectionTitle} variant="h6">{t('PREUS_AMB_IMPOSTOS')}</Typography>
             <Grid container>
               <Grid item xs={12} sm={6}>
@@ -212,8 +234,10 @@ const Review = (props) => {
               </Grid>
             </Grid>
             <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }} />
-            <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }} />
-            <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: `${t('LLOGUER_COMPTADOR')} &nbsp; ${prices?.comptador?.value} ${prices?.comptador?.uom}.` }} />
+            <FormHelperText dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }} />
+            <FormHelperText dangerouslySetInnerHTML={{ __html: `${t('LLOGUER_COMPTADOR')} &nbsp; ${prices?.comptador?.value} ${prices?.comptador?.uom}.` }} />
+
+            <Divider variant="middle" className={classes.dividerBottom} />
           </Grid>
         </Grid>
 
@@ -226,7 +250,7 @@ const Review = (props) => {
           <GeneralTerms />
         </TermsDialog>
 
-        <Box mt={3}>
+        <Box mt={2}>
           <FormControlLabel
             control={
               <Checkbox
