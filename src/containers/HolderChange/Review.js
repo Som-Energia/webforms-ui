@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
+import Divider from '@material-ui/core/Divider'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     fontWeight: 500,
     textTransform: 'uppercase',
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1.2)
   },
   field: {
@@ -42,6 +43,16 @@ const useStyles = makeStyles((theme) => ({
   },
   value: {
     fontSize: '16px'
+  },
+  divider: {
+    marginTop: '12px',
+    marginLeft: 0,
+    marginRight: '32px'
+  },
+  dividerBottom: {
+    marginTop: '24px',
+    marginLeft: 0,
+    marginRight: '32px'
   }
 }))
 
@@ -109,6 +120,7 @@ const Review = (props) => {
           <ReviewField label={t('ADDRESS')} value={values?.supply_point?.address} />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">{t('HOLDER')}</Typography>
           <ReviewField label={'NIF'} value={values?.holder?.vat} />
           { values?.holder?.isphisical
@@ -124,23 +136,28 @@ const Review = (props) => {
           <ReviewField label={t('CITY')} value={`${values?.holder?.city.name} (${values?.holder?.postal_code}) ${values?.holder?.state.name}`} />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
           <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
           <ReviewField label={t('EMAIL')} value={values?.holder?.email} />
           <ReviewField label={t('LANGUAGE')} value={languages[values?.holder?.language]} />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_TECHNICAL')}</Typography>
           <ReviewField label={t('FARE')} value={t('FARE_SAME')} />
           <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
           <FormHelperText className={classes.withoutLabel} dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }} />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
           <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
           <ReviewField label={t('VOLUNTARY_CENT')} value={values?.payment?.voluntary_cent ? t('YES') : t('NO')} />
         </Grid>
       </Grid>
+
+      <Divider variant="middle" className={classes.dividerBottom} />
 
       <TermsDialog
         title={t('GENERAL_TERMS')}
@@ -151,7 +168,7 @@ const Review = (props) => {
         <GeneralTerms />
       </TermsDialog>
 
-      <Box mt={3}>
+      <Box mt={2}>
         <FormControlLabel
           control={
             <Checkbox

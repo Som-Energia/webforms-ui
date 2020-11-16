@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
+import Divider from '@material-ui/core/Divider'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import FormHelperText from '@material-ui/core/FormHelperText'
 
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
@@ -41,7 +41,18 @@ const useStyles = makeStyles((theme) => ({
   },
   value: {
     fontSize: '16px'
+  },
+  divider: {
+    marginTop: '12px',
+    marginLeft: 0,
+    marginRight: '32px'
+  },
+  dividerBottom: {
+    marginTop: '24px',
+    marginLeft: 0,
+    marginRight: '32px'
   }
+
 }))
 
 const Review = (props) => {
@@ -108,12 +119,13 @@ const Review = (props) => {
           <ReviewField label={t('LANGUAGE')} value={languages[values?.member?.language]} />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
           <ReviewField label={t('PAYMENT_METHOD')} value={t(values?.payment?.payment_method.toUpperCase())} />
           { values?.payment?.payment_method === 'iban' &&
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
           }
-
+          <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
       </Grid>
 
@@ -126,7 +138,7 @@ const Review = (props) => {
         <GeneralTerms />
       </TermsDialog>
 
-      <Box mt={3}>
+      <Box mt={2}>
         <FormControlLabel
           control={
             <Checkbox
