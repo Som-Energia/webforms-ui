@@ -136,6 +136,12 @@ function HolderChange (props) {
             then: Yup.bool().required(t('FILL_NIF'))
               .oneOf([true], t('FILL_NIF'))
           }),
+        proxynif_phisical: Yup.bool()
+          .when('isphisical', {
+            is: false,
+            then: Yup.bool().required(t('PROXY_NIF_PHISICAL'))
+              .oneOf([true], t('PROXY_NIF_PHISICAL'))
+          }),
         address: Yup.string()
           .required(t('NO_ADDRESS')),
         postal_code: Yup.string()
@@ -288,6 +294,19 @@ function HolderChange (props) {
     })
   }
 
+  const handleError = async (error) => {
+    let errorCode = error?.response?.data?.data?.code || 'UNEXPECTED'
+    const errorResp = error?.response?.data?.data || {}
+
+    if (error?.response?.data?.data?.invalid_fields) {
+      errorCode = Object.keys(error?.response?.data?.data?.invalid_fields[0])[0].toUpperCase() + '_' + errorCode
+    }
+    errorResp.code = errorCode
+    console.log(errorResp)
+    setError(errorResp)
+    setCompleted(true)
+  }
+
   const handlePost = async (values) => {
     setSending(true)
     const data = normalizeHolderChange(values)
@@ -300,13 +319,7 @@ function HolderChange (props) {
       })
       .catch(error => {
         console.log(error?.response)
-        const errorResp =
-          error?.response?.data?.data
-            ? error?.response?.data?.data
-            : { code: 'UNEXPECTED' }
-        console.log(errorResp)
-        setError(errorResp)
-        setCompleted(true)
+        handleError(error)
       })
     setActiveStep(MAX_STEP_NUMBER)
     setSending(false)
@@ -318,6 +331,7 @@ function HolderChange (props) {
       vatvalid: false,
       isphisical: true,
       proxynif_valid: false,
+      proxynif_phisical: true,
       state: { id: '' },
       city: { id: '' },
       proxynif: '',
