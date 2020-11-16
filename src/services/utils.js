@@ -174,7 +174,7 @@ export const normalizeContract = (contract) => {
   finalContract.cups_municipi = contract?.supply_point?.city?.id
   finalContract.cups_provincia = contract?.supply_point?.state?.id
 
-  finalContract.dni = holder?.vat
+  finalContract.dni = contract?.member?.vat
   finalContract.donatiu = contract?.payment?.voluntary_cent === true ? '1' : '0'
   finalContract.escull_pagador = 'titular'
   finalContract.id_soci = contract?.member?.number
