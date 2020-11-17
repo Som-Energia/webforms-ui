@@ -341,7 +341,7 @@ const Contract = (props) => {
   ]
 
   const showProgress = false
-  const MAX_STEP_NUMBER = 8
+  const MAX_STEP_NUMBER = 9
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
@@ -520,6 +520,7 @@ const Contract = (props) => {
         setCompleted(true)
       })
     setSending(false)
+    setActiveStep(MAX_STEP_NUMBER)
   }
 
   return (
@@ -566,7 +567,7 @@ const Contract = (props) => {
                             </Button>
                           }
                           {
-                            activeStep < MAX_STEP_NUMBER
+                            activeStep < MAX_STEP_NUMBER - 1
                               ? <Button
                                 type="button"
                                 data-cy="next"
