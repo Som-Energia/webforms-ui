@@ -183,7 +183,7 @@ const Member = (props) => {
     })
   ]
 
-  const MAX_STEP_NUMBER = 3
+  const MAX_STEP_NUMBER = 4
   const showProgress = false
 
   const getActiveStep = (props) => {
@@ -307,6 +307,7 @@ const Member = (props) => {
         handleError(error?.response?.data)
       })
     setSending(false)
+    setActiveStep(MAX_STEP_NUMBER)
   }
 
   return (
@@ -353,7 +354,7 @@ const Member = (props) => {
                             </Button>
                           }
                           {
-                            activeStep < MAX_STEP_NUMBER
+                            activeStep < MAX_STEP_NUMBER - 1
                               ? <Button
                                 type="button"
                                 data-cy="next"
