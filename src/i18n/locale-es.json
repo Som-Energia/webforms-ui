@@ -231,7 +231,7 @@
 
   "FAILURE_TITLE": "¡Ups!",
   "FAILURE_TEXT": "Lo sentimos, no ha sido posible realizar tu solicitud",
-  "UNEXPECTED_POSTERROR": "Se ha producido un error!<br>{{error_message}}",
+  "UNEXPECTED_POSTERROR": "{{error_message}}",
   "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
   "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
   "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",

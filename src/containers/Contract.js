@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import ReactGA from 'react-ga'
+
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
@@ -35,6 +37,7 @@ import Failure from './HolderChange/Failure'
 
 import { getRates, contract } from '../services/api'
 import { CNAE_HOUSING, normalizeContract } from '../services/utils'
+const { GA_TRAKING_ID } = window.config
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -488,6 +491,11 @@ const Contract = (props) => {
     legal_person_accepted: false
   }
 
+  const trackSucces = () => {
+    ReactGA.initialize(GA_TRAKING_ID)
+    ReactGA.pageview('/es/contratacion-realizada/')
+  }
+
   const handlePost = async (values) => {
     setSending(true)
     const data = normalizeContract(values)
@@ -496,6 +504,7 @@ const Contract = (props) => {
         if (response?.state === true) {
           setError(false)
           setResult({ contract_number: response?.data?.contract_id })
+          trackSucces()
         } else {
           setError(true)
         }
