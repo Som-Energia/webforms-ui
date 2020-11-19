@@ -131,7 +131,7 @@ const Contract = (props) => {
             t('CUPS_IN_PROCESS'),
             function () { return !(this.parent.status === 'busy') })
           .test('statusNew',
-            t('CUPS_SHOULD_BE_ACTIVE'),
+            t('CUPS_IS_ACTIVE'),
             function () { return !(this.parent.status === 'active') })
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
