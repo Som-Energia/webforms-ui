@@ -243,6 +243,7 @@
 
     "SUPPLY": "Punt de subministrament",
     "FILL_SUPPLY_POINT": "Indica les dadades del punt de subministrament:",
+    "CUPS_IS_ACTIVE": "Aquest CUPS ja té un contracte actiu a Som Energia. Per sol·licitar un canvi de titular pots fer-ho <a href=\"//oficinavirtual.somenergia.coop/ca/change-ownership/\" target=\"_blank\">aquí</a>.",
 
     "ADRECA": "Adreça",
     "NUMBER": "Número",

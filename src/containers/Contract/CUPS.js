@@ -123,7 +123,7 @@ const CUPS = (props) => {
                   </InputAdornment>
               }}
               error={ errors?.supply_point?.cups && touched?.supply_point?.cups }
-              helperText={(touched?.supply_point?.cups && errors?.supply_point?.cups) ||
+              helperText={(touched?.supply_point?.cups && <div dangerouslySetInnerHTML={{ __html: errors?.supply_point?.cups }} />) ||
                 <CupsHelperText />
               }
             />
