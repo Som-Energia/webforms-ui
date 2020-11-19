@@ -8,11 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Loading from './components/Loading'
 
 import './i18n/i18n'
-
 import './App.css'
-
-// import HolderChange from './containers/HolderChange'
-// import ModifyContract from './containers/ModifyContract'
 
 const theme = createMuiTheme({
   palette: {
@@ -34,6 +30,9 @@ const theme = createMuiTheme({
   },
   text: {
     primary: '#4d4d4d'
+  },
+  zIndex: {
+    modal: 1600
   }
 })
 
