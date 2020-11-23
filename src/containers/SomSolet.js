@@ -26,6 +26,7 @@ import IncidenceDialog from '../containers/SomSolet/IncidenceDialog'
 
 // services
 import { getCampaign, getProject, sendContact, sendIncidence } from '../services/somsolet/api'
+import i18next from 'i18next'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -150,6 +151,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '8px'
   },
   phaseIcon: {
+    display: 'flex',
+    alignItems: 'center',
     opacity: '0.7'
   },
   phaseTitle: {
@@ -373,7 +376,7 @@ const SomSolet = (props) => {
   useEffect(() => {
     setIsLoadingProject(true)
     console.log('getProject')
-    getProject({ dni: '' }) // TODO: find vat from OV
+    getProject({ dni: '', language: props.match.params.language }) // TODO: find vat from OV
       .then(response => {
         const projectInfo = response[0] // TODO: to check
         console.log('projectInfo', projectInfo)
@@ -566,7 +569,7 @@ const SomSolet = (props) => {
             !project || project.length === 0
               ? <Grid item xs={12}>
                 <div className={clsx(classes.column, classes.noResultsContainer)}>
-                  <h3 className={classes.noResults}>No tens compres col·lectives actives</h3>
+                  <h3 className={classes.noResults}> { t('NOT_COLLECTIVE_PURCHASES') } </h3>
                 </div>
               </Grid>
               : <>
@@ -574,7 +577,7 @@ const SomSolet = (props) => {
                   <div className={clsx(classes.column, classes.fullHeight)}>
                     {
                       project.map(({ title, content }, index) => (
-                        <>
+                        <div key={`${index}-${title}`}>
                           <div
                             key={`${index}-${title}`}
                             className={clsx(classes.option, activeOption === index && classes.activeOption)}
@@ -591,7 +594,7 @@ const SomSolet = (props) => {
                               { content }
                             </div>
                           }
-                        </>
+                        </div>
                       ))
                     }
                     <div className={classes.separator}> </div>
@@ -601,7 +604,7 @@ const SomSolet = (props) => {
                         <MailOutlinedIcon fontSize="small" />
                       </div>
                       <div className={classes.phaseName}>
-                        Contacte instal·ladora
+                        { t('CONTACT_INSTALL') }
                       </div>
                     </div>
 
@@ -610,7 +613,7 @@ const SomSolet = (props) => {
                         <ReportProblemOutlinedIcon fontSize="small" />
                       </div>
                       <div className={classes.phaseName}>
-                        Notifica incidència
+                        { t('NOTIFY_INCIDENCE') }
                       </div>
                     </div>
 
@@ -619,7 +622,7 @@ const SomSolet = (props) => {
                         <PowerSettingsNewOutlinedIcon fontSize="small" />
                       </div>
                       <div className={classes.phaseName}>
-                        &nbsp;&nbsp;Donar-se de baixa
+                        { t('UNSUBSCRIBE') }
                       </div>
                     </div>
                   </div>
@@ -631,7 +634,7 @@ const SomSolet = (props) => {
                       <div className={classes.mainHeaderInfo}>
                         <div> <WbSunnyOutlinedIcon fontSize="small" />
                           &nbsp;{campaign.installations?.completed}
-                          &nbsp;instal·lacions
+                          &nbsp; { t('INSTALLATIONS') }
                           &nbsp;<RoomOutlinedIcon fontSize="small" />
                           &nbsp;{campaign.region?.geographicalRegion},
                           &nbsp;{campaign.region?.autonomousCommunity}
