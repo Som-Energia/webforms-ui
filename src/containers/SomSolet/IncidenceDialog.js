@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Button from '@material-ui/core/Button'
@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
 const IncidenceDialog = (props) => {
   const classes = useStyles()
+  const { t } = useTranslation()
+
   const { open, handleClose, handleSend, isSending } = props
 
   const [subject, setSubject] = useState('')
@@ -37,17 +39,17 @@ const IncidenceDialog = (props) => {
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-contact">
       <DialogTitle className={classes.title}>
         <ReportProblemOutlinedIcon fontSize="normal" />
-        <span>&nbsp;Notifica incidència</span>
+        <span>&nbsp; { t('NOTIFY_INCIDENCE') } </span>
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Notificar incidència a Som Energia.
+          { t('NOTIFY_INCIDENCE_SOM') }
         </DialogContentText>
         <TextField
           autoFocus
           margin="normal"
           id="subject"
-          label="Assumpte"
+          label={ t('SUBJECT') }
           type="text"
           variant="outlined"
           fullWidth
@@ -57,7 +59,7 @@ const IncidenceDialog = (props) => {
         <TextField
           margin="normal"
           id="body"
-          label="Escriu el teu missatge..."
+          label={ t('WRITE_MESSAGE') }
           type="text"
           multiline
           rows={6}
@@ -69,7 +71,7 @@ const IncidenceDialog = (props) => {
       </DialogContent>
       <DialogActions className={classes.actions}>
         <Button onClick={handleClose} variant="contained">
-          Tancar
+          { t('CLOSE') }
         </Button>
         <Button
           onClick={() => handleSend({ subject, message })}
@@ -77,7 +79,7 @@ const IncidenceDialog = (props) => {
           color="primary"
           disabled={isSending}
         >
-          Enviar
+          { t('SEND') }
         </Button>
       </DialogActions>
     </Dialog>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Button from '@material-ui/core/Button'
@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ContactDialog = (props) => {
   const classes = useStyles()
+  const { t } = useTranslation()
+
   const { open, handleClose, handleSend, isSending } = props
 
   const [subject, setSubject] = useState('')
@@ -37,13 +39,13 @@ const ContactDialog = (props) => {
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-contact">
       <DialogTitle className={classes.title}>
         <MailOutlinedIcon fontSize="normal" />
-        <span>&nbsp;Contacte amb la instal·ladora</span>
+        <span>&nbsp; { t('INSTALLER_CONTACT') } </span>
       </DialogTitle>
       <DialogContent>
         <TextField
           id="subject"
           margin="normal"
-          label="Assumpte"
+          label={ t('SUBJECT') }
           type="text"
           variant="outlined"
           fullWidth
@@ -53,7 +55,7 @@ const ContactDialog = (props) => {
         <TextField
           margin="normal"
           id="message"
-          label="Escriu el teu missatge..."
+          label={ t('WRITE_MESSAGE') }
           type="text"
           multiline
           rows={8}
@@ -65,7 +67,7 @@ const ContactDialog = (props) => {
       </DialogContent>
       <DialogActions className={classes.actions}>
         <Button onClick={handleClose} variant="contained">
-          Tancar
+          { t('CLOSE') }
         </Button>
         <Button
           onClick={() => handleSend({ subject, message })}
@@ -73,7 +75,7 @@ const ContactDialog = (props) => {
           color="primary"
           disabled={isSending}
         >
-          Enviar
+          { t('SEND') }
         </Button>
       </DialogActions>
     </Dialog>
