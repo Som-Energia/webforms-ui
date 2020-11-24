@@ -39,6 +39,11 @@ import { getRates, contract } from '../services/api'
 import { CNAE_HOUSING, normalizeContract } from '../services/utils'
 const { GA_TRAKING_ID } = window.config
 
+const keyMap = {
+  SAMPLE_DATA: 'ctrl+shift+1',
+  SHOW_INSPECTOR: 'ctrl+shift+d'
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
@@ -81,7 +86,7 @@ const Contract = (props) => {
       console.log(values)
     },
     SHOW_INSPECTOR: () => {
-      setShowInspector(true)
+      showInspector ? setShowInspector(false) : setShowInspector(true)
     }
   }
 
@@ -168,7 +173,9 @@ const Contract = (props) => {
           .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
           .test('CnaeNoHousing',
             t('INVALID_CNAE_NO_HOUSING'),
-            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) }),
+            function () {
+              return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING)
+            }),
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
           .oneOf([true], t('CUPS_VERIFY_LABEL'))
@@ -177,10 +184,11 @@ const Contract = (props) => {
     Yup.object().shape({
       contract: Yup.object().shape({
         fare: Yup.string()
-          .when('has_service', {
-            is: false,
-            then: Yup.string().required(t('NO_FARE_CHOSEN'))
-          }),
+          .test('required',
+            t('NO_FARE_CHOSEN'),
+            function () {
+              return this.parent.has_service ? true : this.parent.moreThan15Kw ? true : (this.parent.fare === 'dh' || this.parent.fare === 'nodh')
+            }),
         rate: Yup.string()
           .when('has_service', {
             is: true,
@@ -459,7 +467,7 @@ const Contract = (props) => {
       power3: '',
       phases: '',
       fare: '',
-      moreThan15kWh: false
+      moreThan15Kw: false
     },
     member: {
       number: '',
@@ -524,7 +532,7 @@ const Contract = (props) => {
   }
 
   return (
-    <GlobalHotKeys handlers={handlers}>
+    <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
           onSubmit={() => {}}
