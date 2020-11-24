@@ -42,11 +42,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const keyMap = {
-  SAMPLE_DATA: 'ctrl+shift+1',
-  SHOW_INSPECTOR: 'ctrl+shift+d'
-}
-
 const App = ({ token = '' }) => {
   const classes = useStyles()
 
@@ -57,39 +52,37 @@ const App = ({ token = '' }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalHotKeys keyMap={keyMap}>
-        <CssBaseline />
-        <div className={classes.root}>
-          <Suspense fallback ={<Loading />}>
-            <Router>
-              <Switch>
-                <Route exact path="/" component={ lazy(() => import('./containers/Contract')) } />
+      <CssBaseline />
+      <div className={classes.root}>
+        <Suspense fallback ={<Loading />}>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={ lazy(() => import('./containers/Contract')) } />
 
-                <Route exact path="/modify-contract" render={loadModifyContract} />
-                <Route path="/:language/contract/modification/" render={loadModifyContract} />
+              <Route exact path="/modify-contract" render={loadModifyContract} />
+              <Route path="/:language/contract/modification/" render={loadModifyContract} />
 
-                <Route path="/holder-change" component={lazy(() => import('./containers/HolderChange'))} />
-                <Route path="/:language/change-ownership/" component={lazy(() => import('./containers/HolderChange'))} />
+              <Route path="/holder-change" component={lazy(() => import('./containers/HolderChange'))} />
+              <Route path="/:language/change-ownership/" component={lazy(() => import('./containers/HolderChange'))} />
 
-                <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
-                <Route path="/:language/contracta-la-llum/" component={lazy(() => import('./containers/Contract'))} />
-                <Route path="/:language/contrata-la-luz/" component={lazy(() => import('./containers/Contract'))} />
-                <Route path="/:language/kontrata-ezazu-argia/" component={lazy(() => import('./containers/Contract'))} />
-                <Route path="/:language/contrata-a-luz/" component={lazy(() => import('./containers/Contract'))} />
+              <Route exact path="/contract" component={ lazy(() => import('./containers/Contract')) } />
+              <Route path="/:language/contracta-la-llum/" component={lazy(() => import('./containers/Contract'))} />
+              <Route path="/:language/contrata-la-luz/" component={lazy(() => import('./containers/Contract'))} />
+              <Route path="/:language/kontrata-ezazu-argia/" component={lazy(() => import('./containers/Contract'))} />
+              <Route path="/:language/contrata-a-luz/" component={lazy(() => import('./containers/Contract'))} />
 
-                <Route path="/new-member" component={lazy(() => import('./containers/Member'))} />
-                <Route path="/:language/fes-te-n-soci-a/" component={lazy(() => import('./containers/Member'))} />
-                <Route path="/:language/hazte-socio-a/" component={lazy(() => import('./containers/Member'))} />
-                <Route path="/:language/izan-zaitez-bazkide/" component={lazy(() => import('./containers/Member'))} />
-                <Route path="/:language/faite-socio-a/" component={lazy(() => import('./containers/Member'))} />
+              <Route path="/new-member" component={lazy(() => import('./containers/Member'))} />
+              <Route path="/:language/fes-te-n-soci-a/" component={lazy(() => import('./containers/Member'))} />
+              <Route path="/:language/hazte-socio-a/" component={lazy(() => import('./containers/Member'))} />
+              <Route path="/:language/izan-zaitez-bazkide/" component={lazy(() => import('./containers/Member'))} />
+              <Route path="/:language/faite-socio-a/" component={lazy(() => import('./containers/Member'))} />
 
-                <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
-                <Route path="/:language/collective-purchases/" component={lazy(() => import('./containers/SomSolet'))} />
-              </Switch>
-            </Router>
-          </Suspense>
-        </div>
-      </GlobalHotKeys>
+              <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
+              <Route path="/:language/collective-purchases/" component={lazy(() => import('./containers/SomSolet'))} />
+            </Switch>
+          </Router>
+        </Suspense>
+      </div>
     </ThemeProvider>
   )
 }
