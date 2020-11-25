@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(3),
     paddingLeft: theme.spacing(3),
     border: '1px solid rgba(0, 0, 0, 0.12)',
-    margin: '1px 1px 9px 1px',
+    margin: '0 0 8px 0',
     '&:hover': {
       border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
