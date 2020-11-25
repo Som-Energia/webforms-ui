@@ -35,7 +35,6 @@ const MemberIdentifier = (props) => {
       try {
         await checkMemberVat(values.member.vat)
       } catch (error) {
-        console.log(error)
         setError(error)
       }
 
@@ -67,7 +66,7 @@ const MemberIdentifier = (props) => {
       setLoading(false)
     }
     if (values?.member?.number &&
-      values?.member?.vat && values.member.vat.length >= 8) {
+      values?.member?.vat && values.member.vat.length >= 9) {
       checkIsMember()
     } else {
       setFieldValue('member.checked', false)
