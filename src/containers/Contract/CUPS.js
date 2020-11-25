@@ -60,7 +60,7 @@ const CUPS = (props) => {
       power3: '',
       fare: '',
       phases: '',
-      moreThan15kWh: false
+      moreThan15Kw: false
     }, false)
     option === false ? setFieldValue('holder.previous_holder', false, false) : setFieldValue('holder.previous_holder', '', false)
     setFieldValue('contract.has_service', option)
@@ -123,7 +123,7 @@ const CUPS = (props) => {
                   </InputAdornment>
               }}
               error={ errors?.supply_point?.cups && touched?.supply_point?.cups }
-              helperText={(touched?.supply_point?.cups && <div dangerouslySetInnerHTML={{ __html: errors?.supply_point?.cups }} />) ||
+              helperText={(touched?.supply_point?.cups && <span dangerouslySetInnerHTML={{ __html: errors?.supply_point?.cups }} />) ||
                 <CupsHelperText />
               }
             />
