@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   message: {
     marginTop: theme.spacing(2),
     fontWeight: '400',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     lineHeight: '1.75',
     textAlign: 'center',
     color: '#6f6262'
@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2)
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: '1.15rem'
   },
   icon: {
     fontSize: '1.85rem'
