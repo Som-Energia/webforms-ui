@@ -13,6 +13,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
+import Loading from '../../components/Loading'
 
 import { languages } from '../../services/utils'
 
@@ -91,8 +92,8 @@ const Review = (props) => {
         setPrices(tariffPrices)
         setLoading(false)
       }).catch(error => {
-        console.log(error)
         setLoading(false)
+        console.log(error)
       })
   }, [])
 
@@ -143,7 +144,7 @@ const Review = (props) => {
   }
 
   return (
-    loading ? <div>Loading...</div>
+    loading ? <Loading />
       : <>
         <StepHeader title={t('REVIEW_TITLE')} />
         <Typography variant="body1"
@@ -254,6 +255,7 @@ const Review = (props) => {
           <FormControlLabel
             control={
               <Checkbox
+                name="terms_accepted"
                 onClick={handleClick}
                 checked={values.terms_accepted}
                 color="primary"
