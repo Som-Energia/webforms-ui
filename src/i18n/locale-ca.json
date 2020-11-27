@@ -84,7 +84,7 @@
     "VAT_HELP": "I si no disposo d'un NIF?",
     "NO_VAT_HELP": "Si no disposes de NIE i tens passaport, ens pots enviar un correu a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> amb les dades del punt de subministrament que vols canviar (número de contracte i CUPS), les dades de la nova persona titular (nom, cognoms, passaport adjunt, correu electrònic i telèfon de contacte) i dades IBAN de pagament.",
     "CUPS_TITLE": "Identifica el punt de subministrament",
-    "FILL_CUPS": "Indica el codi CUPS (codi universal de punt de subministrament):",
+    "FILL_CUPS": "Indica el <b>codi CUPS</b> (codi universal de punt de subministrament):",
     "CUPS_LABEL": "CUPS",
     "CUPS_HELP": "On puc trobar el CUPS?",
     "CUPS_HELP_URL": "https://ca.support.somenergia.coop/article/173-que-es-el-cups",
@@ -347,5 +347,10 @@
     "LEGAL_PERSON_TITLE": "Declaració responsable de la representant de la persona jurídica",
     "ACCEPT_LEGAL_PERSON": "No has acceptat la declaració",
 
-    "DNI_EXIST": "Ja existeix un soci amb aquest NIF/CIF"
+    "DNI_EXIST": "Ja existeix un soci amb aquest NIF/CIF",
+
+    "API_SERVER_ERROR": "Hi ha hagut un error en connectar al servidor",
+    "API_SERVER_ERROR_DETAILS": "El vostre navegador té problemes al connectar-se a la web de Som Energia. Comproveu que la connexió a Internet està funcionant correctament. Si no és aquest el problema, contacteu amb Som Energia per verificar que el tràmit s'ha processat correctament.",
+    "API_SERVER_OFFLINE": "Els nostres servidors no responen",
+    "API_SERVER_OFFLINE_DETAILS": "És possible que estiguem fent tasques de manteniment. Torneu a provar-ho més tard. Perdoneu les molèsties."
 }

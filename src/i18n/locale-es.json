@@ -252,7 +252,7 @@
   "NO_MEMBER_NUMBER": "No has introducido un numero de socio/a",
 
   "CUPS_TITLE": "Identifica el punto de suministro",
-  "FILL_CUPS": "Indica el código <b>CUPS</b> (Código Universal de Punto de Suministro):",
+  "FILL_CUPS": "Indica el <b>código CUPS</b> (Código Universal de Punto de Suministro):",
   "CUPS_LABEL": "CUPS",
   "CUPS_HELP": "¿Dónde puedo encontrar el código CUPS?",
   "CUPS_HELP_URL": "https://es.support.somenergia.coop/article/210-que-es-el-cups",
@@ -363,5 +363,10 @@
   "LEGAL_PERSON_TITLE": "Declaración responsable de la representante de la persona jurídica",
   "ACCEPT_LEGAL_PERSON": "No has aceptado la declaración",
 
-  "DNI_EXIST": "Ya existe un socio/a con este NIF/CIF"
+  "DNI_EXIST": "Ya existe un socio/a con este NIF/CIF",
+
+  "API_SERVER_ERROR": "Error conectando al servidor",
+  "API_SERVER_ERROR_DETAILS": "Tu navegador tiene problemas para conectarse a la web de Som Energia. Comprueba que la conexión a internet funcione correctamente. Si no fuera ese el problema, contacta con Som Energia para verificar si se pudo procesar el trámite correctamente.",
+  "API_SERVER_OFFLINE": "Nuestros servidores no responden",
+  "API_SERVER_OFFLINE_DETAILS": "Es posible que se estén haciendo tareas de mantenimiento. Vuelve a probar más tarde. Perdona las molestias."
 }

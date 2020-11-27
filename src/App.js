@@ -1,11 +1,12 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { GlobalHotKeys } from 'react-hotkeys'
 
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
+
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import Loading from './components/Loading'
+import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
 import './App.css'
@@ -82,6 +83,7 @@ const App = ({ token = '' }) => {
             </Switch>
           </Router>
         </Suspense>
+        <ApiStatus />
       </div>
     </ThemeProvider>
   )
