@@ -218,3 +218,10 @@ export const memberPayment = async (data) => {
       return response?.data
     })
 }
+
+export const apiStatus = async () => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}ping`
+  })
+}
