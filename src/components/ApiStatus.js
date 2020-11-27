@@ -21,7 +21,7 @@ const ApiStatus = () => {
         response?.data?.status
           ? response?.data?.status === 'OFFLINE'
             ? setApiOffline(true)
-            : setApiOffline(false)
+            : setApiOffline(false) && setNoConnection(false)
           : setNoConnection(true)
       })
       .catch(error => {
