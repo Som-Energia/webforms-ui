@@ -13,7 +13,7 @@ import cuca from '../../images/cuca-marejada.svg'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: theme.spacing(1),
+    paddingTop: 0,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.15rem'
   },
   error: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(6),
+    height: theme.spacing(6),
     color: '#fe6444',
     backgroundColor: 'transparent',
     border: '2px solid #fe6444',
