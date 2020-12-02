@@ -16,7 +16,6 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
 import Uploader from '../../components/Uploader'
-import DisplayFormikState from '../../components/DisplayFormikState'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -149,7 +148,6 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
               }
             </div>
           </Form>
-          <DisplayFormikState props={{ values: values, errors: errors, touched: touched }} />
         </>
         )}
       </Formik>
