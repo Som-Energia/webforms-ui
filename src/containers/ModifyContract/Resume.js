@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, postSubmit, params, d1CaseData = false }) {
+export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, postSubmit, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
@@ -72,7 +72,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         <Divider />
       </Box>
 
-      { d1CaseData?.subsection &&
+      { params?.subsection &&
       <Box mt={2} mx={1}>
         <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
           {t('SUBSECTION_AUTO')}
@@ -80,7 +80,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         <Grid container spacing={2}>
           <Grid item>
             <Typography data-cy="tariff" variant="body1" gutterBottom>
-              {d1CaseData?.subsection}
+              {params.subsection}
             </Typography>
           </Grid>
         </Grid>
