@@ -53,7 +53,7 @@ const steps = [
   'REVISIO_CONFIRMACIO_DADES'
 ]
 
-const d1_steps = [
+const d1Steps = [
   'ACCEPT_OR_REFUSE_TITLE',
   'DETAIL_D1_TITLE'
 ]
@@ -145,7 +145,7 @@ function ModifyContract (props) {
         />
       default:
         return <Resume
-          nextStep={() => nextStep(4)}
+          nextStep={() => nextStep()}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
           postSubmit={fromD1 ? handleD1Post : handlePost}
@@ -154,8 +154,8 @@ function ModifyContract (props) {
     }
   }
 
-  const nextStep = (step) => {
-    setActiveStep(step)
+  const nextStep = (step = false) => {
+    step ? setActiveStep(step) : setActiveStep(activeStep + 1)
   }
 
   const prevStep = () => {
@@ -170,9 +170,9 @@ function ModifyContract (props) {
       {
         fromD1 &&
         <Stepper className={classes.stepper} activeStep={activeD1Step} orientation="vertical">
-          {d1_steps.map((label, index) => (
+          {d1Steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel error={ (index === d1_steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+              <StepLabel><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
               <StepContent>
                 <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail`, state: { d1CaseData: d1CaseData } }}/>
               </StepContent>
