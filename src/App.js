@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const App = (props) => 
+const App = (props) => {
   const classes = useStyles()
   const { d1 = '', token = '' } = props
 
