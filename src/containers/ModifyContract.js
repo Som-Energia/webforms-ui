@@ -3,8 +3,8 @@ import  { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { modifyContract } from '../services/api'
-import { normalizeModifyData } from '../services/utils'
+import { modifyContract, confirmD1Case } from '../services/api'
+import { normalizeModifyData, normalizeD1ConfirmationData } from '../services/utils'
 
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
@@ -79,27 +79,39 @@ function ModifyContract (props) {
   }, [data])
 
   const handlePost = async (values) => {
-    if (fromD1) {
-      console.log("normalize data")
-      console.log("post")
-    }
-    else {
-      const data = normalizeModifyData(values)
-      await modifyContract(data)
-        .then(response => {
-          handleStepChanges({ response: response })
-          nextStep()
-        })
-        .catch(error => {
-          const errorObj = {
-            error: error?.response?.data?.error
-              ? error.response.data.error
-              : { code: 'MODIFY_POTTAR_UNEXPECTED' }
-          }
-          handleStepChanges(errorObj)
-          nextStep()
-        })
-    }
+    const data = normalizeModifyData(values)
+    await modifyContract(data)
+      .then(response => {
+        handleStepChanges({ response: response })
+        nextStep()
+      })
+      .catch(error => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
+        nextStep()
+      })
+  }
+
+  const handleD1Post = async (values) => {
+    const data = normalizeD1ConfirmationData(values)
+    await confirmD1Case(data, values?.case_id, values?.token)
+      .then(response => {
+        handleStepChanges({ response: response.data })
+        nextStep()
+      })
+      .catch(error => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
+        nextStep()
+      })
   }
 
   const getStepContent = (step) => {
@@ -136,9 +148,8 @@ function ModifyContract (props) {
           nextStep={() => nextStep(4)}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
-          postSubmit={handlePost}
-          params={data}
-          d1CaseData={fromD1 ? d1CaseData : false}
+          postSubmit={fromD1 ? handleD1Post : handlePost}
+          params={fromD1 ? { ...data, ...d1CaseData } : data}
         />
     }
   }
