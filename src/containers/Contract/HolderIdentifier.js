@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 
 import Chooser from '../../components/Chooser'
@@ -12,6 +11,10 @@ import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
 const useStyles = makeStyles((theme) => ({
+  memberChecked: {
+    fontWeight: 500,
+    color: theme.palette.primary.main
+  },
   chooserContainer: {
     '& h6': {
       fontSize: '1rem',
@@ -62,26 +65,30 @@ const HolderIdentifier = (props) => {
           }
         />
       </Box>
-      <Box mt={1} mb={1} className={classes.chooserContainer}>
-        <Chooser
-          question={t('PREVIOUS_HOLDER')}
-          onChange={handleChangePreviousHolder}
-          value={ values.contract.has_service === false ? false : values.holder.previous_holder}
-          disabled={values.holder.vatvalid !== true || values.contract.has_service === false}
-          options={[
-            {
-              value: true,
-              label: t('PREVIOUS_HOLDER_YES_LABEL'),
-              description: t('PREVIOUS_HOLDER_YES_DESC')
-            },
-            {
-              value: false,
-              label: t('PREVIOUS_HOLDER_NO_LABEL'),
-              description: t('PREVIOUS_HOLDER_NO_DESC')
-            }
-          ]}
-        />
-      </Box>
+
+      {
+        values?.contract?.has_service !== false &&
+        <Box mt={1} mb={1} className={classes.chooserContainer}>
+          <Chooser
+            question={t('PREVIOUS_HOLDER')}
+            onChange={handleChangePreviousHolder}
+            value={ values.contract.has_service === false ? false : values.holder.previous_holder}
+            disabled={values.holder.vatvalid !== true || values.contract.has_service === false}
+            options={[
+              {
+                value: true,
+                label: t('PREVIOUS_HOLDER_YES_LABEL'),
+                description: t('PREVIOUS_HOLDER_YES_DESC')
+              },
+              {
+                value: false,
+                label: t('PREVIOUS_HOLDER_NO_LABEL'),
+                description: t('PREVIOUS_HOLDER_NO_DESC')
+              }
+            ]}
+          />
+        </Box>
+      }
     </>
   )
 }

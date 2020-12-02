@@ -18,6 +18,8 @@ const VATField = (props) => {
   const [valueVAT, setValueVAT] = useState(value)
 
   useEffect(() => {
+    setIsValidVAT(false)
+    onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: false })
     if (valueVAT.length > 8) {
       setIsLoading(true)
       checkVat(valueVAT)
@@ -36,20 +38,16 @@ const VATField = (props) => {
           setIsLoading(false)
           onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: isValidVAT })
         })
-    } else {
-      setIsValidVAT(false)
-      onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: false })
     }
   }, [valueVAT])
 
   const handleChange = (event) => {
-    let value = event.target.value.match(/[0-9A-Za-z]{0,9}/)
+    let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
     setValueVAT(value)
   }
 
   const handleBlur = (event) => {
-    // onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: isValidVAT })
     onBlur(event)
   }
 

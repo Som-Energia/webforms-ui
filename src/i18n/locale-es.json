@@ -115,6 +115,7 @@
   "PROXY_NAME_HELP": "Nombre y apellidos del representante legal",
   "PROXY_NIF": "NIF del representante legal",
   "PROXY_NIF_HELP": "NIF del representante legal",
+  "PROXY_NIF_PHISICAL": "El representante legal debe ser una persona física",
   "HOLDER_ADDRESS": "Dirección",
   "HOLDER_ADDRESS_HELP": "Dirección de la persona titular",
   "HOLDER_POSTALCODE": "Código postal",
@@ -131,12 +132,14 @@
 
   "DATA_PROTECTION_HOLDERCHANGE_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-cambio-de-titular",
   "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-del-contrato-luz",
+  "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-registro-hazte-socio-socia",
   "PRIVACY_POLICY_TITLE": "Política de Protección de Datos",
-  "ACCEPT_PRIVACY_POLICY": "He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>",
+  "ACCEPT_PRIVACY_POLICY": "He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad</a> de Som Energia",
   "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/es/aviso-legal/",
-  "PRIVACY_POLICY_HOLDERCHANGE": "<b>Finalidades</b>: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín, newsletter y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. <b>Derechos</b>: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. <b>Información adicional</b>: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
+  "PRIVACY_POLICY_HOLDERCHANGE": "Finalidades: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín, newsletter y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. Derechos: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
   "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "En caso de proporcionar datos personales de terceros, declaras responsablemente que cuentas con su consentimiento y que les has proporcionado toda la información necesaria acerca de las finalidades y la forma en la que serán tratados sus datos personales.",
-  "PRIVACY_POLICY_CONTRACT": "<b>Finalidades</b>: gestionar tu contrato de suministro de luz y darte de alta como abonado/a. <b>Derechos</b>: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. <b>Información adicional</b>: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
+  "PRIVACY_POLICY_CONTRACT": "Finalidades: gestionar tu contrato de suministro de luz y darte de alta como abonado/a. Enviarte nuestro boletín y comunicaciones informativas sobre nuestros productos, servicios y actividades. Derechos: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
+  "PRIVACY_POLICY_NEWMEMBER": "Finalidades: formalizar tu alta como persona socia y remitirte comunicaciones informativas relacionadas con nuestro ámbito. Derechos: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}>Política de privacidad</a>.",
 
   "NO_NAME": "No has especificado el nombre",
   "NO_SURNAME1": "No has especificado el primer apellido",
@@ -158,7 +161,7 @@
   "BECOME_MEMBER_PRESENTATION": "<p>Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma.</p><p>Si ya eres socio o socia de Som Energia, no es necesario que marques ninguna opción y puedes seguir adelante con el formulario.</p>",
   "BECOME_MEMBER_QUESTION": "Quieres ser persona sòcia de la cooperativa?",
   "BECOME_MEMBER_YES_LABEL": "Sí, quiero ser persona socia de la cooperativa",
-  "BECOME_MEMBER_YES_DESCRIPTION": "Debes llevar a cabo una aportación única al capital social de <b>100€</b>, que <b>se devuelven</b> en caso de que te des de baja.",
+  "BECOME_MEMBER_YES_DESCRIPTION": "Debes llevar a cabo una aportación única al capital social de <b>100€</b>, que se devuelven en caso de que te des de baja.",
   "BECOME_MEMBER_NO_LABEL": "No, todavía no quiero serlo",
   "BECOME_MEMBER_NO_DESCRIPTION": "Si todavía no te has decidido, te damos el tiempo necesario para que puedas valorar hacer este paso más adelante.",
   "BECOME_MEMBER_NOTE": " ",
@@ -228,7 +231,7 @@
 
   "FAILURE_TITLE": "¡Ups!",
   "FAILURE_TEXT": "Lo sentimos, no ha sido posible realizar tu solicitud",
-  "UNEXPECTED_POSTERROR": "Se ha producido un error!<br>{{error_message}}",
+  "UNEXPECTED_POSTERROR": "{{error_message}}",
   "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
   "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
   "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
@@ -249,13 +252,15 @@
   "NO_MEMBER_NUMBER": "No has introducido un numero de socio/a",
 
   "CUPS_TITLE": "Identifica el punto de suministro",
-  "FILL_CUPS": "Indica el código <b>CUPS</b> (Código Universal de Punto de Suministro):",
+  "FILL_CUPS": "Indica el <b>código CUPS</b> (Código Universal de Punto de Suministro):",
   "CUPS_LABEL": "CUPS",
   "CUPS_HELP": "¿Dónde puedo encontrar el código CUPS?",
   "CUPS_HELP_URL": "https://es.support.somenergia.coop/article/210-que-es-el-cups",
 
   "SUPPLY": "Datos del Punto de suministro",
   "FILL_SUPPLY_POINT": "Indica los datos del punto de suministro:",
+  "CUPS_IS_ACTIVE": "El CUPS ya tiene un contrato activo con Som Energia. Para solicitar un cambio de titular puedes hacerlo <a href=\"//oficinavirtual.somenergia.coop/es/change-ownership/\" target=\"_blank\">aquí</a>.",
+
   "ADRECA": "Dirección",
   "NUMBER": "Número",
   "FLOOR": "Piso",
@@ -294,12 +299,12 @@
 
   "HOLDER_IDENTIFIER_TITLE": "Identificación del titular",
   "HOLDER_IDENTIFIER_DESC": "<p>Introduce el <b>NIF de la persona o entidad jurídica que será la titular</b> del contrato:</p>",
-  "PREVIOUS_HOLDER": "¿Eras el titular con la anterior distribuidora?",
-  "FILL_PREVIOUS_HOLDER": "No has especificado si era el titular con la anterior distribuidora",
+  "PREVIOUS_HOLDER": "¿Eras el titular con la anterior comercializadora?",
+  "FILL_PREVIOUS_HOLDER": "No has especificado si era el titular con la anterior comercializadora",
   "PREVIOUS_HOLDER_YES_LABEL": "Sí, era la persona titular",
   "PREVIOUS_HOLDER_NO_LABEL": "No, no era la persona titular",
-  "PREVIOUS_HOLDER_YES_DESC": "Era la persona titular del contrato con la anterior distribuidora",
-  "PREVIOUS_HOLDER_NO_DESC": "No era la persona titular del contrato con la anterior distribuidora",
+  "PREVIOUS_HOLDER_YES_DESC": "Era la persona titular del contrato con la anterior comercializadora",
+  "PREVIOUS_HOLDER_NO_DESC": "No era la persona titular del contrato con la anterior comercializadora",
 
   "ALTA": "Alta de un punto sin suministro",
   "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Cambio de comercializadora modificando la persona titular",
@@ -357,4 +362,42 @@
   "AVIS_REBUIG_AUTO": "Rechazar el trámite",
   "REVIEW_DATA_INFO": "Una vez aceptada la modificación por parte de la distribuidora ésta dispone de 15 días (hábiles) para hacerla efectiva. Te informaremos del estado de la misma mediante correo electrónico."
 
+  "NEW_MEMBER": "Nueva persona socia",
+  "NEW_MEMBER_DESC": "<p>Hacerse socio/a de Som Energia es rápido y fácil. Solo hay que rellenar este formulario y realizar la aportación inicial de 100 € al capital social para disfrutar de los servicios de la cooperativa y formar parte de un movimiento social de transformación del modelo energético.</p><p>Introduce el <b>NIF de la nueva persona socia</b>:</p>",
+  "NEW_MEMBER_NO_VAT_HELP": "¿Qué hago si no tengo NIF?",
+
+  "PAYMENT_METHOD_TITLE": "Pago de la aportación",
+  "PAYMENT_METHOD_DESC": "Para ser persona socia es necesaria una aportació única al capital social de <b>100 €</b>, que <b>se devuelven</b> en el supuesto que algun dia quieras darte de baja.",
+  "PAYMENT_METHOD": "Método de pago",
+  "PAYMENT_METHOD_IBAN": "Recibo domiciliado",
+  "PAYMENT_METHOD_IBAN_DESC": "Sin coste para la cooperativa",
+  "PAYMENT_METHOD_CCARD": "Tarjeta de crédito/débito",
+  "PAYMENT_METHOD_CCARD_DESC": "Coste de 1,80€ para la cooperativa",
+
+  "REVIEW_MEMBER_TITLE": "Revisa y confirma los datos",
+  "CREDIT_CARD": "Tarjeta de crédito/débito",
+
+  "INVALID_PAYMENT_METHOD": "Método de pago incorrecto",
+
+  "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/es/pago-realizado/",
+  "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/es/pago-cancelado/",
+
+  "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablemente que yo (o la entidad a la que represento) dispongo de un justo título sobre la vivienda o local (contrato de arrendamiento, escritura de propiedad u otro) relacionado con el punto de suministro y / o CUPS de referencia del cual soy usuario efectivo, asumiendo toda la responsabilidad en relación a la veracidad de los datos aportados. Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa del mencionado justo título cuando me sea requerida.",
+  "PRIVACY_POLICY_LEGAL_PERSON": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica o entidad que represento (incluidas comunidades de propietarios, empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados . Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la entidad / persona jurídica cuando me sea requerida (escritura de poderes, certificado de acta de la junta de propietarios, etc .). En todo caso, la persona jurídica o entidad titular del contrato de suministro seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier cambio en la gestión o incumplimiento de las condiciones contractuales.",
+  "PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica que represento (incluidas  empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados . Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la persona jurídica cuando me sea requerida (escritura de poderes, etc .). En todo caso, la persona jurídica seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier aspecto relacionado con su condición de persona socia.",
+
+  "FAIR_TITLE_LABEL": "Declaración responsable del justo título",
+  "FAIR_TITLE": "Declaración responsable del justo título",
+
+  "LEGAL_PERSON_TITLE_LABEL": "Declaración responsable de la representante de la persona jurídica",
+  "LEGAL_PERSON_TITLE": "Declaración responsable de la representante de la persona jurídica",
+  "ACCEPT_LEGAL_PERSON": "No has aceptado la declaración",
+
+  "DNI_EXIST": "Ya existe un socio/a con este NIF/CIF",
+
+  "API_SERVER_ERROR": "Error conectando al servidor",
+  "API_SERVER_ERROR_DETAILS": "Tu navegador tiene problemas para conectarse a la web de Som Energia. Comprueba que la conexión a internet funcione correctamente. Si no fuera ese el problema, contacta con Som Energia para verificar si se pudo procesar el trámite correctamente.",
+  "API_SERVER_OFFLINE": "Nuestros servidores no responden",
+  "API_SERVER_OFFLINE_DETAILS": "Es posible que se estén haciendo tareas de mantenimiento. Vuelve a probar más tarde. Perdona las molestias."
 }
+

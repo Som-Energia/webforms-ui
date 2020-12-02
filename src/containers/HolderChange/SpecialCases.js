@@ -31,18 +31,17 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(3),
     paddingLeft: theme.spacing(3),
-    marginRight: 0,
-    marginLeft: 0,
-    marginBottom: theme.spacing(2),
-    border: '2px solid rgba(0, 0, 0, 0.12)',
+    margin: '1px 1px 9px 1px',
+    border: '1px solid rgba(0, 0, 0, 0.12)',
     '&:not(.Mui-disabled):hover': {
-      border: '2px solid rgba(0, 0, 0, 0.87)',
+      border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
     }
   },
   chooserItemSelected: {
     border: '2px solid #96b633',
     backgroundColor: 'rgba(150, 182, 51, 0.08)',
+    margin: '0 0 8px 0',
     '&:not(.Mui-disabled):hover': {
       border: '2px solid #96b633',
       backgroundColor: 'rgba(150, 182, 51, 0.08)'

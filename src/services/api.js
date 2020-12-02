@@ -44,7 +44,6 @@ export const checkVat = async (vat) => {
     url: `${API_BASE_URL}check/vat/exists/${vat}`
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
@@ -148,7 +147,6 @@ export const checkMemberVat = async (vat) => {
     url: `${API_BASE_URL}check/vat/${vat}`
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
@@ -159,7 +157,6 @@ export const checkMember = async (number, vat) => {
     url: `${API_BASE_URL}data/soci/${number}/${vat}`
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
@@ -186,10 +183,10 @@ export const contract = async (data) => {
     data: formData
   })
     .then(response => {
-      console.log(response)
       return response?.data
     })
 }
+
 
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
@@ -202,3 +199,45 @@ export const confirmD1Case = async (data, case_id, token) => {
       return response?.data
     })
 }
+
+
+export const member = async (data) => {
+  var formData = new FormData()
+  for (var key in data) {
+    formData.append(key, data[key])
+  }
+
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}form/soci/alta`,
+    data: formData
+  })
+    .then(response => {
+      return response?.data
+    })
+}
+
+export const memberPayment = async (data) => {
+  var formData = new FormData()
+  for (var key in data) {
+    formData.append(key, data[key])
+  }
+
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}pagament/redirectiondata`,
+    data: formData
+  })
+    .then(response => {
+      return response?.data
+    })
+}
+
+
+export const apiStatus = async () => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}ping`
+  })
+}
+
