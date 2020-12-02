@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import  { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
+import { modifyContract, confirmD1Case } from '../services/api'
+import { normalizeModifyData, normalizeD1ConfirmationData } from '../services/utils'
 
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
@@ -13,6 +16,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
 
 import Intro from './ModifyContract/Intro'
+import IntroFromD1 from './CaseDetail/Intro'
 import Params from './ModifyContract/Params'
 import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
@@ -49,7 +53,15 @@ const steps = [
   'REVISIO_CONFIRMACIO_DADES'
 ]
 
+const d1Steps = [
+  'ACCEPT_OR_REFUSE_TITLE',
+  'DETAIL_D1_TITLE'
+]
+
 function ModifyContract (props) {
+  const fromD1 = props?.location?.state?.d1CaseData?.m1
+  const d1CaseData = props?.location?.state?.d1CaseData
+
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
@@ -59,19 +71,64 @@ function ModifyContract (props) {
   }, [props.match.params.language, i18n])
 
   const [activeStep, setActiveStep] = useState(0)
+  const [activeD1Step, setActiveD1Step] = useState(2)
   const [data, setData] = useState({ token: props?.token })
 
   const handleStepChanges = useCallback((params) => {
     setData({ ...data, ...params })
   }, [data])
 
+  const handlePost = async (values) => {
+    const data = normalizeModifyData(values)
+    await modifyContract(data)
+      .then(response => {
+        handleStepChanges({ response: response })
+        nextStep()
+      })
+      .catch(error => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
+        nextStep()
+      })
+  }
+
+  const handleD1Post = async (values) => {
+    const data = normalizeD1ConfirmationData(values)
+    await confirmD1Case(data, values?.case_id, values?.token)
+      .then(response => {
+        handleStepChanges({ response: response.data })
+        nextStep()
+      })
+      .catch(error => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        handleStepChanges(errorObj)
+        nextStep()
+      })
+  }
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <Intro
-          nextStep={() => nextStep(1)}
-          handleStepChanges={handleStepChanges}
-        />
+        return (
+          fromD1
+            ? <IntroFromD1
+              nextStep={() => nextStep(1)}
+              prevStep={() => prevStep()}
+              handleStepChanges={handleStepChanges}
+            />
+            : <Intro
+              nextStep={() => nextStep(1)}
+              handleStepChanges={handleStepChanges}
+            />
+        )
       case 1:
         return <Params
           nextStep={() => nextStep(2)}
@@ -88,24 +145,41 @@ function ModifyContract (props) {
         />
       default:
         return <Resume
-          nextStep={() => nextStep(4)}
+          nextStep={() => nextStep()}
           prevStep={prevStep}
           handleStepChanges={handleStepChanges}
-          params={data}
+          postSubmit={fromD1 ? handleD1Post : handlePost}
+          params={fromD1 ? { ...data, ...d1CaseData } : data}
         />
     }
   }
 
-  const nextStep = (step) => {
-    setActiveStep(step)
+  const nextStep = (step = false) => {
+    step ? setActiveStep(step) : setActiveStep(activeStep + 1)
   }
 
   const prevStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    if (fromD1 && activeStep === 0) {
+      setActiveD1Step((activeD1Step) => activeD1Step - 1)
+    }
   }
 
   return (
     <div className={classes.root}>
+      {
+        fromD1 &&
+        <Stepper className={classes.stepper} activeStep={activeD1Step} orientation="vertical">
+          {d1Steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+              <StepContent>
+                <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail`, state: { d1CaseData: d1CaseData } }}/>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+      }
       <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>

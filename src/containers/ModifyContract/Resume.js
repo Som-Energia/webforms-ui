@@ -49,28 +49,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, params }) {
+export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, postSubmit, params }) {
   const classes = useStyles()
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
   const handleSubmit = async () => {
     setSending(true)
-    const data = normalizeModifyData(params)
-    await modifyContract(data)
-      .then(response => {
-        handleStepChanges({ response: response })
-        nextStep()
-      })
-      .catch(error => {
-        const errorObj = {
-          error: error?.response?.data?.error
-            ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
-        }
-        handleStepChanges(errorObj)
-        nextStep()
-      })
+    await postSubmit(params)
     setSending(false)
   }
 
@@ -85,6 +71,21 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
       <Box mx={1} mb={1}>
         <Divider />
       </Box>
+
+      { params?.subsection &&
+      <Box mt={2} mx={1}>
+        <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
+          {t('SUBSECTION_AUTO')}
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Typography data-cy="tariff" variant="body1" gutterBottom>
+              {params.subsection}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+      }
 
       { params.modify?.phases &&
         <Box mt={2} mx={1}>
@@ -160,6 +161,12 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         </Typography>
         <Typography data-cy="contact" variant="body1" gutterBottom>
           {params.contact?.phone} ({params.contact?.contactName} {params.contact?.contactSurname})
+        </Typography>
+      </Box>
+
+      <Box mt={1} mx={1} mb={2}>
+        <Typography gutterBottom>
+          {t('REVIEW_DATA_INFO')}
         </Typography>
       </Box>
 

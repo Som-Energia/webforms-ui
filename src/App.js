@@ -43,12 +43,37 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const App = ({ token = '' }) => {
+
+const App = (props) => 
   const classes = useStyles()
+  const { d1 = '', token = '' } = props
 
   const loadModifyContract = (props) => {
     const ModifyContract = lazy(() => import('./containers/ModifyContract'))
     return <ModifyContract {...props} token={token} />
+  }
+
+  const loadD1Detail = (props) => {
+    const D1Detail = lazy(() => import('./containers/D1Detail'))
+
+    const d1Data = (typeof d1 === 'string' && d1 !== '') ? JSON.parse(d1) : {}
+
+    var templateProps = {
+      token: d1Data?.token,
+      installed_power: d1Data?.installed_power,
+      cil: d1Data?.cil,
+      installation_type: d1Data?.installation_type,
+      subsection: d1Data?.subsection,
+      cau: d1Data?.cau,
+      collective: d1Data?.collective === 'true',
+      generator_technology: d1Data?.generator_technology,
+      ssaa: d1Data?.ssaa === 'true',
+      register_section: d1Data?.register_section,
+      to_validate: d1Data?.to_validate === 'true',
+      case_id: d1Data?.case_id,
+    }
+
+    return <D1Detail {...props} templateProps={templateProps} />
   }
 
   return (
@@ -80,6 +105,8 @@ const App = ({ token = '' }) => {
 
               <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
               <Route path="/:language/collective-purchases/" component={lazy(() => import('./containers/SomSolet'))} />
+      
+              <Route path="/:language/d1-detail" render={loadD1Detail} />
             </Switch>
           </Router>
         </Suspense>
