@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import ReactGA from 'react-ga'
+
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
@@ -35,17 +37,25 @@ import Failure from './HolderChange/Failure'
 
 import { getRates, contract } from '../services/api'
 import { CNAE_HOUSING, normalizeContract } from '../services/utils'
+const { GA_TRAKING_ID } = window.config
+
+const keyMap = {
+  SAMPLE_DATA: 'ctrl+shift+1',
+  SHOW_INSPECTOR: 'ctrl+shift+d'
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'relative'
+    position: 'relative',
+    color: theme.palette.text.primary
   },
   stepContainer: {
-    marginTop: theme.spacing(4),
+    marginTop: 0,
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: theme.palette.backgroundColor
   },
   step: {
     position: 'absolute',
@@ -61,7 +71,7 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showInspector, setShowInspector] = useState(true)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -76,7 +86,7 @@ const Contract = (props) => {
       console.log(values)
     },
     SHOW_INSPECTOR: () => {
-      setShowInspector(true)
+      showInspector ? setShowInspector(false) : setShowInspector(true)
     }
   }
 
@@ -126,7 +136,7 @@ const Contract = (props) => {
             t('CUPS_IN_PROCESS'),
             function () { return !(this.parent.status === 'busy') })
           .test('statusNew',
-            t('CUPS_SHOULD_BE_ACTIVE'),
+            t('CUPS_IS_ACTIVE'),
             function () { return !(this.parent.status === 'active') })
           .test('statusInvalid',
             t('INVALID_SUPPLY_POINT_CUPS'),
@@ -163,16 +173,22 @@ const Contract = (props) => {
           .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
           .test('CnaeNoHousing',
             t('INVALID_CNAE_NO_HOUSING'),
-            function () { return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING) })
+            function () {
+              return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING)
+            }),
+        supply_point_accepted: Yup.bool()
+          .required(t('CUPS_VERIFY_LABEL'))
+          .oneOf([true], t('CUPS_VERIFY_LABEL'))
       })
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
         fare: Yup.string()
-          .when('has_service', {
-            is: false,
-            then: Yup.string().required(t('NO_FARE_CHOSEN'))
-          }),
+          .test('required',
+            t('NO_FARE_CHOSEN'),
+            function () {
+              return this.parent.has_service ? true : this.parent.moreThan15Kw ? true : (this.parent.fare === 'dh' || this.parent.fare === 'nodh')
+            }),
         rate: Yup.string()
           .when('has_service', {
             is: true,
@@ -275,10 +291,14 @@ const Contract = (props) => {
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
-        state: Yup.string()
-          .required(t('NO_STATE')),
-        city: Yup.string()
-          .required(t('NO_CITY')),
+        state: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_STATE'))
+        }),
+        city: Yup.object().shape({
+          id: Yup.number()
+            .required(t('NO_CITY'))
+        }),
         email: Yup.string()
           .required(t('NO_EMAIL'))
           .email(t('NO_EMAIL')),
@@ -294,6 +314,14 @@ const Contract = (props) => {
           .required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
+      legal_person_accepted: Yup.bool()
+        .test({
+          name: 'isTheMemberVat',
+          message: t('ACCEPT_LEGAL_PERSON'),
+          test: function () {
+            return !(this.parent.holder.isphisical === false && this.parent.legal_person_accepted !== true)
+          }
+        }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -320,10 +348,11 @@ const Contract = (props) => {
     })
   ]
 
-  const MAX_STEP_NUMBER = 8
+  const showProgress = false
+  const MAX_STEP_NUMBER = 9
 
   const getActiveStep = (props) => {
-    const url = t("DATA_PROTECTION_CONTRACT_URL")
+    const url = t('DATA_PROTECTION_CONTRACT_URL')
     return <>
       { activeStep === 0 &&
         <MemberIdentifier {...props} />
@@ -362,7 +391,7 @@ const Contract = (props) => {
 
   const nextStep = props => {
     let next = activeStep + 1
-    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat) {
+    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
       next++
       props.values.privacy_policy_accepted = true
     }
@@ -427,7 +456,8 @@ const Contract = (props) => {
       city: { id: '' },
       is_housing: '',
       cnae: '',
-      attachments: []
+      attachments: [],
+      supply_point_accepted : false
     },
     contract: {
       has_service: '',
@@ -437,7 +467,7 @@ const Contract = (props) => {
       power3: '',
       phases: '',
       fare: '',
-      moreThan15kWh: false
+      moreThan15Kw: false
     },
     member: {
       number: '',
@@ -465,7 +495,13 @@ const Contract = (props) => {
       voluntary_cent: ''
     },
     privacy_policy_accepted: false,
-    terms_accepted: false
+    terms_accepted: false,
+    legal_person_accepted: false
+  }
+
+  const trackSucces = () => {
+    ReactGA.initialize(GA_TRAKING_ID)
+    ReactGA.pageview('/es/contratacion-realizada/')
   }
 
   const handlePost = async (values) => {
@@ -473,10 +509,10 @@ const Contract = (props) => {
     const data = normalizeContract(values)
     await contract(data)
       .then(response => {
-        console.log(response)
         if (response?.state === true) {
           setError(false)
           setResult({ contract_number: response?.data?.contract_id })
+          trackSucces()
         } else {
           setError(true)
         }
@@ -492,11 +528,12 @@ const Contract = (props) => {
         setCompleted(true)
       })
     setSending(false)
+    setActiveStep(MAX_STEP_NUMBER)
   }
 
   return (
-    <GlobalHotKeys handlers={handlers}>
-      <Container maxWidth="md">
+    <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+      <Container maxWidth="md" disableGutters={true}>
         <Formik
           onSubmit={() => {}}
           enableReinitialize
@@ -507,11 +544,15 @@ const Contract = (props) => {
           {props => (
             <>
               <div>
-                <Form className={classes.root} noValidate>
+                <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
-                      <Box mx={4} mb={3}>
+                      {
+                        showProgress &&
+                        <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      }
+
+                      <Box mx={0} mb={3}>
                         { completed
                           ? error
                             ? <Failure error={error} />
@@ -519,7 +560,7 @@ const Contract = (props) => {
                           : getActiveStep(props)
                         }
                       </Box>
-                      <Box mx={4} mt={1} mb={3}>
+                      <Box mx={0} mt={1} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
                             result?.contract_number === undefined &&
@@ -534,7 +575,7 @@ const Contract = (props) => {
                             </Button>
                           }
                           {
-                            activeStep < MAX_STEP_NUMBER
+                            activeStep < MAX_STEP_NUMBER - 1
                               ? <Button
                                 type="button"
                                 data-cy="next"

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Redirect } from 'react-router-dom'
+
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { makeStyles } from '@material-ui/core/styles'
+
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -12,38 +15,34 @@ import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
+import DisplayFormikState from '../components/DisplayFormikState'
+
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
-import VAT from './HolderChange/VAT'
-import CUPS from './HolderChange/CUPS'
+import VAT from './Member/VAT'
 import PersonalData from './HolderChange/PersonalData'
-import BecomeMember from './HolderChange/BecomeMember'
-import VoluntaryCent from './HolderChange/VoluntaryCent'
-import SpecialCases from './HolderChange/SpecialCases'
-import IBAN from './HolderChange/IBAN'
-import Review from './HolderChange/Review'
-import Success from './HolderChange/Success'
+import Payment from './Member/Payment'
+import Review from './Member/Review'
+
 import Failure from './HolderChange/Failure'
 
-import data from '../data/HolderChange/data.json'
+import { member, memberPayment } from '../services/api'
 
-import DisplayFormikState from '../components/DisplayFormikState'
-
-import { holderChange } from '../services/api'
-import { normalizeHolderChange } from '../services/utils'
+import { normalizeMember } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative'
   },
   stepContainer: {
-    marginTop: theme.spacing(4),
+    marginTop: 0,
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: theme.palette.backgroundColor
   },
   step: {
     position: 'absolute',
@@ -55,21 +54,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function HolderChange (props) {
+const Member = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  // const [showAll, setShowAll] = useState(false)
+  const formTPV = useRef(null)
+
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+  const [data, setData] = useState()
 
   const handlers = {
     SAMPLE_DATA: () => {
-      const values = { ...initialValues, ...data }
+      const values = { ...initialValues }
       console.log(values)
     },
     SHOW_INSPECTOR: () => {
@@ -79,37 +80,14 @@ function HolderChange (props) {
 
   const validationSchemas = [
     Yup.object().shape({
-      holder: Yup.object().shape({
+      member: Yup.object().shape({
         vat: Yup.string().required(t('FILL_NIF')),
         vatvalid: Yup.bool().required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
       })
     }),
     Yup.object().shape({
-      supply_point: Yup.object().shape({
-        cups: Yup.string().required(t('CUPS_INVALID'))
-          .min(18, t('CUPS_INVALID'))
-          .test('statusError',
-            t('CUPS_INVALID'),
-            function () { return !(this.parent.status === 'error') })
-          .test('statusError',
-            t('CUPS_IN_PROCESS'),
-            function () { return !(this.parent.status === 'busy') })
-          .test('statusNew',
-            t('CUPS_SHOULD_BE_ACTIVE'),
-            function () { return !(this.parent.status === 'new') })
-          .test('statusInvalid',
-            t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') }),
-        verified: Yup.bool().required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
-          .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX')),
-        supply_point_accepted: Yup.bool()
-          .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL'))
-      })
-    }),
-    Yup.object().shape({
-      holder: Yup.object().shape({
+      member: Yup.object().shape({
         name: Yup.string()
           .required(t('NO_NAME')),
         surname1: Yup.string()
@@ -135,12 +113,6 @@ function HolderChange (props) {
             is: false,
             then: Yup.bool().required(t('FILL_NIF'))
               .oneOf([true], t('FILL_NIF'))
-          }),
-        proxynif_phisical: Yup.bool()
-          .when('isphisical', {
-            is: false,
-            then: Yup.bool().required(t('PROXY_NIF_PHISICAL'))
-              .oneOf([true], t('PROXY_NIF_PHISICAL'))
           }),
         address: Yup.string()
           .required(t('NO_ADDRESS')),
@@ -174,7 +146,7 @@ function HolderChange (props) {
           name: 'isTheMemberVat',
           message: t('ACCEPT_LEGAL_PERSON'),
           test: function () {
-            return !(this.parent.holder.isphisical === false && this.parent.legal_person_accepted !== true)
+            return !(this.parent.member.isphisical === false && this.parent.legal_person_accepted !== true)
           }
         }),
       privacy_policy_accepted: Yup.bool()
@@ -182,48 +154,27 @@ function HolderChange (props) {
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     }),
     Yup.object().shape({
-    }),
-    Yup.object().shape({
       payment: Yup.object().shape({
-        voluntary_cent: Yup.bool()
-          .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
-          .oneOf([false, true], t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
-      })
-    }),
-    Yup.object().shape({
-      especial_cases: Yup.object().shape({
-        attachments: Yup.object()
-          .when('reason_death', {
-            is: true,
-            then: Yup.object().shape({
-              death: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-            })
+        payment_method: Yup.string()
+          .required(t('INVALID_PAYMENT_METHOD'))
+          .oneOf(['iban', 'credit_card'], t('INVALID_PAYMENT_METHOD')),
+        iban: Yup.string()
+          .when('payment_method', {
+            is: 'iban',
+            then: Yup.string().required(t('IBAN_ERROR'))
+          }),
+        iban_valid: Yup.bool()
+          .when('payment_method', {
+            is: 'iban',
+            then: Yup.bool().required(t('IBAN_ERROR'))
+              .oneOf([true], t('IBAN_ERROR'))
+          }),
+        sepa_accepted: Yup.bool()
+          .when('payment_method', {
+            is: 'iban',
+            then: Yup.bool().required(t('IBAN_ERROR'))
+              .oneOf([true], t('IBAN_ERROR'))
           })
-          .when('reason_electrodep', {
-            is: true,
-            then: Yup.object().shape({
-              medical: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
-              resident: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-            })
-          })
-      })
-    }),
-    Yup.object().shape({
-      payment: Yup.object().shape({
-        iban: Yup.string().required(t('IBAN_ERROR')),
-        iban_valid: Yup.bool().required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR')),
-        sepa_accepted: Yup.bool().required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR'))
       })
     }),
     Yup.object().shape({
@@ -232,33 +183,21 @@ function HolderChange (props) {
     })
   ]
 
-  const MAX_STEP_NUMBER = 8
+  const MAX_STEP_NUMBER = 4
+  const showProgress = false
 
   const getActiveStep = (props) => {
-    const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
     return <>
       { activeStep === 0 &&
         <VAT {...props} />
       }
       { activeStep === 1 &&
-        <CUPS {...props} />
+        <PersonalData entity='member' {...props} />
       }
       { activeStep === 2 &&
-        <PersonalData url={url} {...props} />
+        <Payment {...props} />
       }
       { activeStep === 3 &&
-        <BecomeMember {...props} />
-      }
-      { activeStep === 4 &&
-        <VoluntaryCent {...props} />
-      }
-      { activeStep === 5 &&
-        <SpecialCases {...props} />
-      }
-      { activeStep === 6 &&
-        <IBAN {...props} />
-      }
-      { activeStep === 7 &&
         <Review {...props} />
       }
     </>
@@ -270,7 +209,11 @@ function HolderChange (props) {
   }, [props.match.params.language, i18n])
 
   const nextStep = props => {
-    const next = activeStep + 1
+    let next = activeStep + 1
+    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat) {
+      next++
+      props.values.privacy_policy_accepted = true
+    }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
       if (props.isValid) {
@@ -282,7 +225,11 @@ function HolderChange (props) {
   }
 
   const prevStep = props => {
-    const prev = activeStep - 1
+    let prev = activeStep - 1
+    if (activeStep === 6 && props.values.holder.vat === props.values.member.vat) {
+      prev--
+      props.values.privacy_policy_accepted = false
+    }
     setActiveStep(Math.max(0, prev))
     if (completed) {
       setCompleted(false)
@@ -294,51 +241,20 @@ function HolderChange (props) {
     })
   }
 
-  const handleError = async (error) => {
-    let errorCode = error?.response?.data?.data?.code || 'UNEXPECTED'
-    const errorResp = error?.response?.data?.data || {}
-
-    if (error?.response?.data?.data?.invalid_fields) {
-      errorCode = Object.keys(error?.response?.data?.data?.invalid_fields[0])[0].toUpperCase() + '_' + errorCode
-    }
-    errorResp.code = errorCode
-    console.log(errorResp)
-    setError(errorResp)
-    setCompleted(true)
-  }
-
-  const handlePost = async (values) => {
-    setSending(true)
-    const data = normalizeHolderChange(values)
-    await holderChange(data)
-      .then(response => {
-        const responseData = response?.data ? response.data : {}
-        setResult(responseData)
-        setError(false)
-        setCompleted(true)
-      })
-      .catch(error => {
-        console.log(error?.response)
-        handleError(error)
-      })
-    setActiveStep(MAX_STEP_NUMBER)
-    setSending(false)
-  }
-
   const initialValues = {
-    holder: {
+    member: {
+      number: '',
       vat: '',
       vatvalid: false,
       isphisical: true,
       proxynif_valid: false,
-      proxynif_phisical: true,
-      state: { id: '' },
-      city: { id: '' },
       proxynif: '',
       proxyname: '',
       name: '',
       address: '',
       postal_code: '',
+      state: { id: '' },
+      city: { id: '' },
       surname1: '',
       surname2: '',
       email: '',
@@ -347,36 +263,56 @@ function HolderChange (props) {
       phone2: '',
       language: `${i18n.language}_ES`
     },
-    supply_point: {
-      cups: '',
-      status: false,
-      address: '',
-      verified: false,
-      supply_point_accepted : false
-    },
-    member: {
-      become_member: '',
-      invite_token: false
-    },
     payment: {
       iban: '',
       sepa_accepted: false,
-      voluntary_cent: ''
-    },
-    especial_cases: {
-      reason_death: false,
-      reason_merge: false,
-      reason_electrodep: false,
-      attachments: {}
+      payment_method: ''
     },
     privacy_policy_accepted: false,
     terms_accepted: false,
-    legal_person_accepted: false
+    legal_person_accepted: false,
+    urlok: t('NEWMEMBER_OK_REDIRECT_URL'),
+    urlko: t('NEWMEMBER_KO_REDIRECT_URL')
+  }
+
+  const handleError = (error) => {
+    let errorCode = 'UNEXPECTED'
+    if (error?.data?.invalid_fields.length &&
+      error?.data?.invalid_fields[0]?.field &&
+      error?.data?.invalid_fields[0]?.error) {
+      errorCode = `${error?.data?.invalid_fields[0]?.field}_${error?.data?.invalid_fields[0].error}`
+    }
+    setError({ code: errorCode.toUpperCase() })
+    setCompleted(true)
+  }
+
+  const handlePost = async (values) => {
+    setSending(true)
+    const data = normalizeMember(values)
+    await member(data)
+      .then(response => {
+        if (response?.state === true) {
+          setError(false)
+          if (response?.data?.endpoint) {
+            setData(response?.data)
+            formTPV.current.submit()
+          } else {
+            setCompleted(true)
+          }
+        } else {
+          handleError(response)
+        }
+      })
+      .catch(error => {
+        handleError(error?.response?.data)
+      })
+    setSending(false)
+    setActiveStep(MAX_STEP_NUMBER)
   }
 
   return (
     <GlobalHotKeys handlers={handlers}>
-      <Container maxWidth="md">
+      <Container maxWidth="md" disableGutters={true}>
         <Formik
           onSubmit={() => {}}
           enableReinitialize
@@ -386,20 +322,24 @@ function HolderChange (props) {
         >
           {props => (
             <>
-              <div className="ov-theme">
+              <div>
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
-                      <Box mx={4} mb={3}>
+                      {
+                        showProgress &&
+                          <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      }
+
+                      <Box mx={0} mb={3}>
                         { completed
                           ? error
                             ? <Failure error={error} />
-                            : <Success result={result} />
+                            : <Redirect to={t('NEWMEMBER_OK_REDIRECT_URL')} />
                           : getActiveStep(props)
                         }
                       </Box>
-                      <Box mx={4} mt={1} mb={3}>
+                      <Box mx={0} mt={0} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
                             result?.contract_number === undefined &&
@@ -412,7 +352,6 @@ function HolderChange (props) {
                             >
                               {t('PAS_ANTERIOR')}
                             </Button>
-
                           }
                           {
                             activeStep < MAX_STEP_NUMBER - 1
@@ -452,9 +391,17 @@ function HolderChange (props) {
             </>
           )}
         </Formik>
+        {
+          data?.payment_data &&
+          <form ref={formTPV} action={data.endpoint} method="POST">
+            { Object.keys(data.payment_data).map(key =>
+              <input key={key} type="hidden" name={key} value={data.payment_data[key]} />
+            )}
+          </form>
+        }
       </Container>
     </GlobalHotKeys>
   )
 }
 
-export default HolderChange
+export default Member

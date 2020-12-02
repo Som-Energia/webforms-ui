@@ -23,7 +23,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES9803463008824117ZQ",
+    "cups": "ES4023386283350973BR0F",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -34,7 +34,7 @@
     "isHousing": true,
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
-    "invalidCups": "ES4023386283350973BR0F",
+    "invalidCups": "ES9803463008824117ZQ",
     "validCups": "ES0031406156230007ZJ0F"
   },
   "fare20A": "2.0A",
@@ -44,6 +44,17 @@
   "power2": 16,
   "power3": 10,
   "phase": "mono",
-  "fare": "nodh"
+  "fare": "nodh",
+  "juridic_member": {
+    "number": "",
+    "vat": ""
+  },
+  "juridic_holder": {
+    "vat": "",
+    "proxynif": "",
+    "previousHolder": true,
+    "proxyname": "David Palomo",
+    "name": "Nom Empresa"
+  }
 }
 

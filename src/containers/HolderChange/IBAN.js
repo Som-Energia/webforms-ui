@@ -66,7 +66,6 @@ function IBAN (props) {
       setIsLoading(true)
       checkIban(values.payment.iban)
         .then(response => {
-          console.log(response)
           setFieldValue('payment.iban_valid', response?.state === true)
           setIsLoading(false)
         })

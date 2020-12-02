@@ -132,8 +132,6 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         </Box>
       }
       {
-        console.log(params)
-      }{
         (params.modify?.fare || params.modify?.moreThan15Kw) &&
         <Box mt={2} mx={1}>
           <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>

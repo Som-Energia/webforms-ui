@@ -1,7 +1,7 @@
 {
   "vat": "58291270R",
   "vatInvalid": "000",
-  "cups": "ES0031406238503003AP0F",
+  "cups": "ES0031101322018013GN0F",
   "cupsInvalid": "ES00311013220",
   "cupsAddress": "Pedro López 13 BJO-E",
   "name": "David",
@@ -14,6 +14,9 @@
   "email": "david.palomo@somenergia.coop",
   "phone": "636696969",
   "language": "ca_ES",
+  "paymentMethod": "iban",
   "iban": "ES77 1234 1234 1612 3456 7890",
-  "voluntaryCent": true
+
+  "cif": "Q1077272A",
+  "legalName": "Los Pollos Hermanos"
 }

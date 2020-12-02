@@ -31,8 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CupsHelperText = () => {
   const { t } = useTranslation()
-  return <a
-    href={t('CUPS_HELP_URL')}
+  return <a href={t('CUPS_HELP_URL')}
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -61,7 +60,7 @@ const CUPS = (props) => {
       power3: '',
       fare: '',
       phases: '',
-      moreThan15kWh: false
+      moreThan15Kw: false
     }, false)
     option === false ? setFieldValue('holder.previous_holder', false, false) : setFieldValue('holder.previous_holder', '', false)
     setFieldValue('contract.has_service', option)
@@ -73,7 +72,6 @@ const CUPS = (props) => {
       setLoading(true)
       checkCups(value)
         .then(response => {
-          console.log(response)
           const status = response?.data?.status
           setFieldValue('supply_point.status', status)
           setFieldTouched('supply_point.cups', true)
@@ -125,7 +123,7 @@ const CUPS = (props) => {
                   </InputAdornment>
               }}
               error={ errors?.supply_point?.cups && touched?.supply_point?.cups }
-              helperText={(touched?.supply_point?.cups && errors?.supply_point?.cups) ||
+              helperText={(touched?.supply_point?.cups && <span dangerouslySetInnerHTML={{ __html: errors?.supply_point?.cups }} />) ||
                 <CupsHelperText />
               }
             />
@@ -134,7 +132,7 @@ const CUPS = (props) => {
         </Grid>
       </Box>
 
-      <Box mt={1} mb={1} className={classes.chooserContainer}>
+      <Box mt={1} mb={2} className={classes.chooserContainer}>
         <Chooser
           question={t('HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT')}
           onChange={handleChangeService}
@@ -154,6 +152,7 @@ const CUPS = (props) => {
           ]}
         />
       </Box>
+
     </>
   )
 }

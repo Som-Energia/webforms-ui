@@ -19,10 +19,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3)
   },
   title: {
-    marginBottom: theme.spacing(3),
-    color: '#96b633',
-    textTransform: 'uppercase',
-    fontWeight: 500
+    fontSize: '1rem',
+    marginTop: theme.spacing(2)
   },
   chooserItem: {
     display: 'block',
@@ -32,17 +30,19 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(3),
     paddingLeft: theme.spacing(3),
-    border: '2px solid rgba(0, 0, 0, 0.12)',
+    border: '1px solid rgba(0, 0, 0, 0.12)',
+    margin: '0 0 8px 0',
     '&:hover': {
-      border: '2px solid rgba(0, 0, 0, 0.87)',
+      border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
     }
   },
   chooserItemSelected: {
-    border: '2px solid #96b633',
+    margin: '0 0 8px 0',
+    border: '1px solid #96b633',
     backgroundColor: 'rgba(150, 182, 51, 0.08)',
     '&:hover': {
-      border: '2px solid #96b633',
+      border: '1px solid #96b633',
       backgroundColor: 'rgba(150, 182, 51, 0.08)'
     }
   },
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'not-allowed',
     color: 'rgba(0, 0, 0, 0.54)',
     '&:hover': {
-      border: '2px solid rgba(0, 0, 0, 0.12)',
+      border: '1px solid rgba(0, 0, 0, 0.12)',
       backgroundColor: 'inherit'
     }
 
@@ -84,7 +84,7 @@ const Chooser = (props) => {
 
   return (
     <>
-      <Typography variant="h6"
+      <Typography variant="h6" className={classes.title}
         dangerouslySetInnerHTML={{ __html: question }}
       />
       <RadioGroup className={classes.margin} defaultValue="">

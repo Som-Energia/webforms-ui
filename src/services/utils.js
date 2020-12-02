@@ -1,6 +1,10 @@
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
 export const CNAE_HOUSING = '9820'
+export const PAYMENT_METHOD_PAYMENT_ORDER = 'remesa'
+export const PAYMENT_METHOD_CREDIT_CARD = 'tpv'
+export const USER_TYPE_PERSON = 'fisica'
+export const USER_TYPE_COMPANY = 'juridica'
 
 export const languages = {
   es_ES: 'Español',
@@ -66,6 +70,10 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.supply_point.verified
   }
 
+  if (normalContract?.supply_point?.supply_point_accepted !== undefined) {
+    delete normalContract.supply_point.supply_point_accepted
+  }
+
   if (normalContract?.supply_point?.status !== undefined) {
     delete normalContract.supply_point.status
   }
@@ -120,12 +128,16 @@ export const normalizeHolderChange = (contract) => {
     normalContract.member.is_member = false
   }
 
+  if (normalContract?.legal_person_accepted !== undefined) {
+    delete normalContract.legal_person_accepted
+  }
+
   if (normalContract?.payment?.iban) {
     normalContract.payment.iban = normalContract.payment.iban.split(' ').join('')
   }
 
   if (normalContract?.payment?.iban_valid !== undefined) {
-    delete normalContract?.payment?.iban_valid
+    delete normalContract.payment.iban_valid
   }
 
   if (normalContract?.especial_cases && normalContract?.especial_cases?.attachments) {
@@ -135,19 +147,28 @@ export const normalizeHolderChange = (contract) => {
 
     if (!hasSpecialCases) {
       delete normalContract.especial_cases.attachments
+    } else {
+      if (normalContract?.especial_cases?.attachments?.death) {
+        normalContract.especial_cases.attachments.death = normalContract?.especial_cases?.attachments?.death[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.medical) {
+        normalContract.especial_cases.attachments.medical = normalContract?.especial_cases?.attachments?.medical[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.resident) {
+        normalContract.especial_cases.attachments.resident = normalContract?.especial_cases?.attachments?.resident[0]
+      }
     }
   }
-
   return normalContract
 }
 
 export const normalizeContract = (contract) => {
-
   const finalContract = {}
   const holder = contract.holder.vat === contract.member.vat ? contract.member : contract.holder
 
   contract?.holder?.previous_holder === true ? finalContract.canvi_titular = '0' : finalContract.canvi_titular = '1'
-
   finalContract.cnae = contract?.supply_point?.cnae
 
   finalContract.compte_adreca = ''
@@ -175,7 +196,7 @@ export const normalizeContract = (contract) => {
   finalContract.cups_municipi = contract?.supply_point?.city?.id
   finalContract.cups_provincia = contract?.supply_point?.state?.id
 
-  finalContract.dni = holder?.vat
+  finalContract.dni = contract?.member?.vat
   finalContract.donatiu = contract?.payment?.voluntary_cent === true ? '1' : '0'
   finalContract.escull_pagador = 'titular'
   finalContract.id_soci = contract?.member?.number
@@ -215,6 +236,41 @@ export const normalizeContract = (contract) => {
   finalContract.titular_tel2 = holder?.phone2
 
   return finalContract
+}
+
+export const normalizeMember = (data) => {
+  const finalMember = {}
+
+  finalMember.tipuspersona = data.member.isphisical ? USER_TYPE_PERSON : USER_TYPE_COMPANY
+  finalMember.nom = data.member.name
+  finalMember.dni = data.member.vat
+  finalMember.tel = data.member.phone1
+  finalMember.tel2 = data.member.phone2 || ''
+  finalMember.email = data.member.email
+  finalMember.cp = data.member.postal_code
+  finalMember.provincia = data.member.state.id
+  finalMember.adreca = data.member.address
+  finalMember.municipi = data.member.city.id
+  finalMember.idioma = data.member.language
+
+  finalMember.payment_method =
+    data.payment.payment_method === 'iban' ? PAYMENT_METHOD_PAYMENT_ORDER : (
+      data.payment.payment_method === 'credit_card' ? PAYMENT_METHOD_CREDIT_CARD
+        : PAYMENT_METHOD_PAYMENT_ORDER
+    )
+
+  finalMember.payment_iban = data.payment.iban
+  finalMember.urlok = data.urlok
+  finalMember.urlko = data.urlko
+
+  if (data.member.isphisical) {
+    finalMember.cognom = `${data.member.surname1} ${data.member.surname2}`
+  } else {
+    finalMember.representant_nom = data.member.proxyname
+    finalMember.representant_dni = data.member.proxynif
+  }
+
+  return finalMember
 }
 
 export const specialCaseType = (specialCases) => {
