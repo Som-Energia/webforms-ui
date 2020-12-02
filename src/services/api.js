@@ -187,6 +187,20 @@ export const contract = async (data) => {
     })
 }
 
+
+export const confirmD1Case = async (data, case_id, token) => {
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}form/confirm_d1/${case_id}`,
+    headers: { Authorization: token },
+    data: data
+  })
+    .then(response => {
+      return response?.data
+    })
+}
+
+
 export const member = async (data) => {
   var formData = new FormData()
   for (var key in data) {
@@ -219,9 +233,11 @@ export const memberPayment = async (data) => {
     })
 }
 
+
 export const apiStatus = async () => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}ping`
   })
 }
+

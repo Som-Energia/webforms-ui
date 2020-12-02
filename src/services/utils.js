@@ -11,8 +11,14 @@ export const languages = {
   ca_ES: 'Català'
 }
 
-export const normalizeModifyData = (params) => {
-  const { modify, contact, token } = params
+const sanitizeData = (data) => {
+  return Object.keys(data).forEach(
+    (key) => (data[key] == null || data[key] === '') && delete data[key]
+  )
+}
+
+const normalizeCommonModifyData = (params) => {
+  const { modify, contact } = params
 
   const data = {
     tarifa: modify?.tariff,
@@ -24,15 +30,31 @@ export const normalizeModifyData = (params) => {
     discriminacio: modify?.fare,
     contact_name: contact?.contactName,
     contact_surname: contact?.contactSurname,
-    contact_phone: contact?.phone,
-    token: token
+    contact_phone: contact?.phone
   }
 
-  Object.keys(data).forEach(
-    (key) => (data[key] == null || data[key] === '') && delete data[key]
-  )
-
   return data
+}
+
+export const normalizeModifyData = (params) => {
+  const { token } = params
+
+  const data = { ...normalizeCommonModifyData(params), token: token }
+  return sanitizeData(data)
+}
+
+export const normalizeD1ConfirmationData = (values) => {
+  const contractModification = normalizeCommonModifyData(values)
+
+  const data = {
+    confirm: values?.validate,
+    attachments: values?.d1Attachments,
+    refuse_reason: values?.refuseReason,
+    contract_modification: values?.modify ? contractModification : null
+  }
+
+  console.log('NORMALIZE D1 CONFIRMATION DATA', sanitizeData(data))
+  return sanitizeData(data)
 }
 
 export const checkPhisicalVAT = (vat) => {
