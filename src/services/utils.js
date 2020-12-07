@@ -12,9 +12,10 @@ export const languages = {
 }
 
 const sanitizeData = (data) => {
-  return Object.keys(data).forEach(
+  Object.keys(data).forEach(
     (key) => (data[key] == null || data[key] === '') && delete data[key]
   )
+  return data
 }
 
 const normalizeCommonModifyData = (params) => {
