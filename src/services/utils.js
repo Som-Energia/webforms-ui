@@ -47,7 +47,7 @@ export const normalizeModifyData = (params) => {
 export const normalizeD1ConfirmationData = (values) => {
   let contractModification = null
   if (values?.modify) {
-    contractModification = normalizeCommonModifyData(values)
+    contractModification = sanitizeData(normalizeCommonModifyData(values))
   }
 
   const data = {
