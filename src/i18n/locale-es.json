@@ -364,7 +364,7 @@
 
   "NEW_MEMBER": "Nueva persona socia",
   "NEW_MEMBER_DESC": "<p>Hacerse socio/a de Som Energia es rápido y fácil. Solo hay que rellenar este formulario y realizar la aportación inicial de 100 € al capital social para disfrutar de los servicios de la cooperativa y formar parte de un movimiento social de transformación del modelo energético.</p><p>Introduce el <b>NIF de la nueva persona socia</b>:</p>",
-  "NEW_MEMBER_NO_VAT_HELP": "¿Qué hago si no tengo NIF?",
+  "NEW_MEMBER_NO_VAT_HELP": "Si no dispones de NIE y tienes pasaporte, puedes enviarnos un correo a <a target=\"_blank\" href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> con los datos de la nueva persona socia (nombre, apellidos, pasaporte adjunto, correo electrónico, dirección y teléfono de contacto) y datos IBAN de pago.",
 
   "PAYMENT_METHOD_TITLE": "Pago de la aportación",
   "PAYMENT_METHOD_DESC": "Para ser persona socia es necesaria una aportació única al capital social de <b>100 €</b>, que <b>se devuelven</b> en el supuesto que algun dia quieras darte de baja.",
@@ -381,6 +381,11 @@
 
   "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/es/pago-realizado/",
   "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/es/pago-cancelado/",
+
+  "CONTACT_HELP_URL": "http://es.support.somenergia.coop/article/471-como-puedo-contactar-con-la-cooperativa-mail-telefono-etc",
+
+  "NEWMEMBER_OK_DESCRIPTION": "En breve recibirás un mensaje al correo electrónico que nos has facilitado, con tu número de socio/a confirmando que tu aportación se ha realizado correctamente.",
+  "NEWMEMBER_KO_DESCRIPTION": "Por favor, vuelve a iniciar el proceso. Si el problema persiste, <a target=\"_blank\" href=\"{{url}}\">contacta con nosotros</a>. <br />Gracias y disculpa las molestias.",
 
   "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablemente que yo (o la entidad a la que represento) dispongo de un justo título sobre la vivienda o local (contrato de arrendamiento, escritura de propiedad u otro) relacionado con el punto de suministro y / o CUPS de referencia del cual soy usuario efectivo, asumiendo toda la responsabilidad en relación a la veracidad de los datos aportados. Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa del mencionado justo título cuando me sea requerida.",
   "PRIVACY_POLICY_LEGAL_PERSON": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica o entidad que represento (incluidas comunidades de propietarios, empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados . Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la entidad / persona jurídica cuando me sea requerida (escritura de poderes, certificado de acta de la junta de propietarios, etc .). En todo caso, la persona jurídica o entidad titular del contrato de suministro seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier cambio en la gestión o incumplimiento de las condiciones contractuales.",

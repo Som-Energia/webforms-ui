@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-
 const App = (props) => {
   const classes = useStyles()
   const { d1 = '', token = '' } = props
@@ -70,10 +69,20 @@ const App = (props) => {
       ssaa: d1Data?.ssaa === 'true',
       register_section: d1Data?.register_section,
       to_validate: d1Data?.to_validate === 'true',
-      case_id: d1Data?.case_id,
+      case_id: d1Data?.case_id
     }
 
     return <D1Detail {...props} templateProps={templateProps} />
+  }
+
+  const loadSuccess = (props) => {
+    const Success = lazy(() => import('./containers/Success'))
+    return <Success {...props} description={'NEWMEMBER_OK_DESCRIPTION'} />
+  }
+
+  const loadFailure = (props) => {
+    const Failure = lazy(() => import('./containers/Failure'))
+    return <Failure {...props} />
   }
 
   return (
@@ -105,8 +114,14 @@ const App = (props) => {
 
               <Route path="/somsolet" component={lazy(() => import('./containers/SomSolet'))} />
               <Route path="/:language/collective-purchases/" component={lazy(() => import('./containers/SomSolet'))} />
-      
+
               <Route path="/:language/d1-detail" render={loadD1Detail} />
+
+              <Route path="/:language/pagament-realitzat" render={loadSuccess} />
+              <Route path="/:language/pago-realizado" render={loadSuccess} />
+
+              <Route path="/:language/pagament-cancellat" render={loadFailure} />
+              <Route path="/:language/pago-cancelado" render={loadFailure} />
             </Switch>
           </Router>
         </Suspense>

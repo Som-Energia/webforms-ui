@@ -24,8 +24,8 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
 import Review from './HolderChange/Review'
-import Success from './HolderChange/Success'
-import Failure from './HolderChange/Failure'
+import Success from './Success'
+import Failure from './Failure'
 
 import data from '../data/HolderChange/data.json'
 
