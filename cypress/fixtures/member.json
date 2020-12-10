@@ -1,5 +1,6 @@
 {
-  "vat": "58291270R",
+  "vat": "31959788T",
+  "cif": "D23852064",
   "vatInvalid": "000",
   "cups": "ES0031101322018013GN0F",
   "cupsInvalid": "ES00311013220",
@@ -17,6 +18,6 @@
   "paymentMethod": "iban",
   "iban": "ES77 1234 1234 1612 3456 7890",
 
-  "cif": "Q1077272A",
+  "existingCif": "Q1077272A",
   "legalName": "Los Pollos Hermanos"
 }
