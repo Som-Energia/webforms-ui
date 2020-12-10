@@ -53,8 +53,8 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^5.5.0",
-    "cypress-file-upload": "^4.0.7",
+    "cypress": "^6.0.0",
+    "cypress-file-upload": "^4.1.1",
     "renamer": "^2.0.0",
     "standard": "^14.3.3"
   }
