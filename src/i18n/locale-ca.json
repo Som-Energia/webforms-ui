@@ -348,7 +348,7 @@
 
     "NEW_MEMBER": "Nova persona sòcia",
     "NEW_MEMBER_DESC": "<p>Fer-se soci/a a Som Energia és ràpid i senzill. Només cal omplir aquest formulari i formalitzar l’aportació inicial al capital social per gaudir dels serveis de la cooperativa i per formar part d’un moviment social de transformació del model energètic.</p><p>Introdueix el <b>NIF de la nova persona sòcia</b>:</p>",
-    "NEW_MEMBER_NO_VAT_HELP": "Que faig si no tinc NIF?",
+    "NEW_MEMBER_NO_VAT_HELP": "Si no disposes de NIE i tens passaport, ens pots enviar un correu a <a target=\"_blank\" href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> amb les dades de la nova persona sòcia (nom, cognoms, passaport adjunt, correu electrònic, adreça i telèfon de contacte) i dades IBAN de pagament.",
 
     "PAYMENT_METHOD_TITLE": "Pagament de l'aportació",
     "PAYMENT_METHOD_DESC": "Per poder ser persona sòcia cal fer una aportació única al capital social de <b>100 €</b>, que es retornen en el cas que qualsevol dia vulguis donar-te'n de baixa.",
@@ -365,6 +365,11 @@
 
     "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-realitzat/",
     "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-cancellat/",
+
+    "CONTACT_HELP_URL": "https://ca.support.somenergia.coop/article/470-com-puc-contactar-amb-la-cooperativa-mail-telefon-etc",
+
+    "NEWMEMBER_OK_DESCRIPTION": "Ben aviat rebràs un missatge al correu electrònic que ens has facilitat, amb el teu número de soci/a confirmant que la teva aportació s’ha realitzat correctament.",
+    "NEWMEMBER_KO_DESCRIPTION": "Si us plau, torna a iniciar el procès. Si l'error persisteix, <a target=\"_blank\" href=\"{{url}}\">contacta amb nosaltres</a>. <br />Gràcies i disculpa les molèsties.",
 
     "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablement que jo (o l'entitat que represento) disposo d'un just títol sobre la vivenda o local (contracte d'arrendament, escriptura de propietat o altre) relacionat amb el punt de subministrament i/o CUPS de referència del qual en sóc usuari efectiu, assumint tota la responsabilitat referent a la veracitat de les dades aportades. Així mateix, declaro que estic en disposició d'aportar la documentació acreditativa del mencionat just títol quan em sigui requerida.",
     "PRIVACY_POLICY_LEGAL_PERSON": "Declaro responsablement que disposo dels poders o autorització suficients per actuar en nom de la persona jurídica o entitat que represento (incloses comunitats de propietaris, empreses, associacions, administracions públiques, etc.), assumint tota la responsabilitat referent a la veracitat de les dades aportades. Així mateix, declaro que estic en disposició d'aportar la documentació acreditativa de l'autorització atorgada per actuar en nom de l'entitat/persona jurídica quan em sigui requerida (escriptura de poders, certificat d'acta de la junta de propietaris, etc.). En tot cas, la persona jurídica o entitat titular del contracte de subministrament seguirà sent la responsable, a efectes legals, davant Som Energia per a qualsevol canvi en la gestió o incompliment de les condicions contractuals.",

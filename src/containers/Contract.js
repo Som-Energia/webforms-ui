@@ -32,8 +32,8 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import IBAN from './HolderChange/IBAN'
 import Review from './Contract/Review'
 
-import Success from './HolderChange/Success'
-import Failure from './HolderChange/Failure'
+import Success from './Success'
+import Failure from './Failure'
 
 import { getRates, contract } from '../services/api'
 import { CNAE_HOUSING, normalizeContract } from '../services/utils'
@@ -516,19 +516,17 @@ const Contract = (props) => {
         } else {
           setError(true)
         }
-        setCompleted(true)
       })
       .catch(error => {
-        console.log(error)
         const errorResp =
         error?.response?.data?.data
           ? error?.response?.data?.data
           : { code: 'UNEXPECTED' }
         setError(errorResp)
-        setCompleted(true)
       })
     setSending(false)
     setActiveStep(MAX_STEP_NUMBER)
+    setCompleted(true)
   }
 
   return (
@@ -590,6 +588,7 @@ const Contract = (props) => {
                               </Button>
                               : !completed && <Button
                                 type="button"
+                                data-cy="submit"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"

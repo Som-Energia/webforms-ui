@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Redirect } from 'react-router-dom'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -26,10 +25,10 @@ import PersonalData from './HolderChange/PersonalData'
 import Payment from './Member/Payment'
 import Review from './Member/Review'
 
-import Failure from './HolderChange/Failure'
+import Failure from './Failure'
+import Success from './Success'
 
 import { member, memberPayment } from '../services/api'
-
 import { normalizeMember } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
@@ -335,14 +334,14 @@ const Member = (props) => {
                         { completed
                           ? error
                             ? <Failure error={error} />
-                            : <Redirect to={t('NEWMEMBER_OK_REDIRECT_URL')} />
+                            : <Success description={t('NEWMEMBER_OK_DESCRIPTION')} />
                           : getActiveStep(props)
                         }
                       </Box>
                       <Box mx={0} mt={0} mb={3}>
                         <div className={classes.actionsContainer}>
                           {
-                            result?.contract_number === undefined &&
+                            (!completed || error) &&
                             <Button
                               data-cy="prev"
                               className={classes.button}
@@ -369,6 +368,7 @@ const Member = (props) => {
                               </Button>
                               : !completed && <Button
                                 type="button"
+                                data-cy="submit"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"
