@@ -10,11 +10,8 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
 import StepHeader from '../../components/StepHeader'
-import TermsDialog from '../../components/TermsDialog'
 
 import { languages } from '../../services/utils'
-
-import GeneralTerms from '../../components/GeneralTerms'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
@@ -60,21 +57,9 @@ const Review = (props) => {
   const { t } = useTranslation()
   const { values, setFieldValue } = props
 
-  const [open, setOpen] = useState(false)
-
   const handleClick = (event) => {
     event.preventDefault()
-    setOpen(true)
-  }
-
-  const handleAccept = () => {
-    setOpen(false)
-    setFieldValue('terms_accepted', true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-    setFieldValue('terms_accepted', false)
+    setFieldValue('terms_accepted', !values.terms_accepted)
   }
 
   const ReviewField = ({ label, value }) => {
@@ -129,19 +114,11 @@ const Review = (props) => {
         </Grid>
       </Grid>
 
-      <TermsDialog
-        title={t('GENERAL_TERMS')}
-        open={open}
-        onAccept={handleAccept}
-        onClose={handleClose}
-      >
-        <GeneralTerms />
-      </TermsDialog>
-
       <Box mt={2}>
         <FormControlLabel
           control={
             <Checkbox
+              name="terms_accepted"
               onClick={handleClick}
               checked={values.terms_accepted}
               color="primary"
