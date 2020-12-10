@@ -38,20 +38,40 @@ export const uploadFile = async (name, file) => {
     })
 }
 
+let cancelTokenVat
+
 export const checkVat = async (vat) => {
+  if (typeof cancelTokenVat !== typeof undefined) {
+    cancelTokenVat.cancel('Operation canceled due to new request')
+  }
+
+  // Save the cancel token for the current request
+  cancelTokenVat = axios.CancelToken.source()
+
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/vat/exists/${vat}`
+    url: `${API_BASE_URL}check/vat/exists/${vat}`,
+    cancelToken: cancelTokenVat.token
   })
     .then(response => {
       return response?.data
     })
 }
 
+let cancelTokenCups
+
 export const checkCups = async (cups) => {
+  if (typeof cancelTokenCups !== typeof undefined) {
+    cancelTokenCups.cancel('Operation canceled due to new request')
+  }
+
+  // Save the cancel token for the current request
+  cancelTokenCups = axios.CancelToken.source()
+
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/cups/status/${cups}`
+    url: `${API_BASE_URL}check/cups/status/${cups}`,
+    cancelToken: cancelTokenCups.token
   })
     .then(response => {
       return response?.data
@@ -78,10 +98,20 @@ export const getMunicipis = async (provincia) => {
     })
 }
 
+let cancelTokenIban
+
 export const checkIban = async (iban) => {
+  if (typeof cancelTokenIban !== typeof undefined) {
+    cancelTokenIban.cancel('Operation canceled due to new request')
+  }
+
+  // Save the cancel token for the current request
+  cancelTokenIban = axios.CancelToken.source()
+
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/iban/${iban}`
+    url: `${API_BASE_URL}check/iban/${iban}`,
+    cancelToken: cancelTokenIban.token
   })
     .then(response => {
       return response?.data
@@ -141,20 +171,38 @@ export const getRates = (data) => {
   return rates
 }
 
+let cancelTokenMemberVat
+
 export const checkMemberVat = async (vat) => {
+  if (typeof cancelTokenMemberVat !== typeof undefined) {
+    cancelTokenMemberVat.cancel('Operation canceled due to new request')
+  }
+
+  cancelTokenMemberVat = axios.CancelToken.source()
+
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/vat/${vat}`
+    url: `${API_BASE_URL}check/vat/${vat}`,
+    cancelToken: cancelTokenMemberVat.token
   })
     .then(response => {
       return response?.data
     })
 }
 
+let cancelTokenMember
+
 export const checkMember = async (number, vat) => {
+  if (typeof cancelTokenMember !== typeof undefined) {
+    cancelTokenMember.cancel('Operation canceled due to new request')
+  }
+
+  cancelTokenMember = axios.CancelToken.source()
+
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}data/soci/${number}/${vat}`
+    url: `${API_BASE_URL}data/soci/${number}/${vat}`,
+    cancelToken: cancelTokenMember.token
   })
     .then(response => {
       return response?.data
@@ -187,7 +235,6 @@ export const contract = async (data) => {
     })
 }
 
-
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',
@@ -199,7 +246,6 @@ export const confirmD1Case = async (data, case_id, token) => {
       return response?.data
     })
 }
-
 
 export const member = async (data) => {
   var formData = new FormData()
@@ -233,11 +279,9 @@ export const memberPayment = async (data) => {
     })
 }
 
-
 export const apiStatus = async () => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}ping`
   })
 }
-
