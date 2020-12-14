@@ -15,7 +15,6 @@ const ApiStatus = () => {
   const [noConnection, setNoConnection] = useState(false)
 
   const checkApiStatus = async () => {
-    console.log('checking API status...')
     apiStatus()
       .then(response => {
         response?.data?.status
@@ -32,7 +31,7 @@ const ApiStatus = () => {
 
   useEffect(() => {
     checkApiStatus()
-    const interval = setInterval(() => checkApiStatus(), 30000)
+    const interval = setInterval(() => checkApiStatus(), 1200000)
     return () => clearInterval(interval)
   }, [])
 
