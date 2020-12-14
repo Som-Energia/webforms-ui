@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const { API_BASE_URL } = window.config
+const API_BASE_URL = window?.config?.API_BASE_URL
 
 export const modifyContract = async (data) => {
   return axios({
