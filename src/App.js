@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     secondary: {
       main: '#a1a1a1'
     },
-    backgroundColor: '#fafafa',
+    backgroundColor: '#ffffff',
     contrastThreshold: 2,
     tonalOffset: 0.2
   },
