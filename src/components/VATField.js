@@ -64,8 +64,8 @@ const VATField = (props) => {
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={error}
-        helperText={helperText}
+        error={!isLoading && error}
+        helperText={!isLoading && helperText}
         InputProps={{
           endAdornment:
             <InputAdornment position="end">

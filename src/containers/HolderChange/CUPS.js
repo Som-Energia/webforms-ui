@@ -111,8 +111,8 @@ function CUPS (props) {
           value={values?.supply_point?.cups}
           onChange={handleInputCups}
           onBlur={handleBlur}
-          error={errors?.supply_point?.cups && touched?.supply_point?.cups}
-          helperText={(touched?.supply_point?.cups && errors?.supply_point?.cups) || <CupsHelperText />}
+          error={ !isLoading && errors?.supply_point?.cups && touched?.supply_point?.cups}
+          helperText={(!isLoading && touched?.supply_point?.cups && errors?.supply_point?.cups) || <CupsHelperText />}
           InputProps={{
             endAdornment:
               <InputAdornment position="end">
