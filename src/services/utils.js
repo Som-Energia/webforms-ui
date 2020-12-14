@@ -197,7 +197,8 @@ export const normalizeContract = (contract) => {
   finalContract.consum = ''
 
   finalContract.cups = contract?.supply_point?.cups
-  finalContract.cups_adreca = contract?.supply_point?.address
+  finalContract.cups_adreca = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`
+  finalContract.cups_adreca = finalContract.cups_adreca.trim()
   finalContract.cups_municipi = contract?.supply_point?.city?.id
   finalContract.cups_provincia = contract?.supply_point?.state?.id
 
