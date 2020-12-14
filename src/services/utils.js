@@ -111,6 +111,7 @@ export const normalizeHolderChange = (contract) => {
       delete normalContract.holder.surname2
     }
     delete normalContract.holder.isphisical
+    delete normalContract.holder.proxynif_phisical
   }
 
   if (normalContract?.holder?.phone2 === '') {
