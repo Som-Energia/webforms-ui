@@ -122,6 +122,8 @@ const App = (props) => {
 
               <Route path="/:language/pagament-cancellat" render={loadFailure} />
               <Route path="/:language/pago-cancelado" render={loadFailure} />
+
+              <Route path="/mail-subscriptions" component={lazy(() => import('./containers/Subscriptions'))} />
             </Switch>
           </Router>
         </Suspense>
