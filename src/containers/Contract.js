@@ -37,7 +37,7 @@ import Failure from './Failure'
 
 import { getRates, contract } from '../services/api'
 import { CNAE_HOUSING, normalizeContract } from '../services/utils'
-const { GA_TRAKING_ID } = window.config
+const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
   SAMPLE_DATA: 'ctrl+shift+1',
@@ -500,7 +500,7 @@ const Contract = (props) => {
   }
 
   const trackSucces = () => {
-    ReactGA.initialize(GA_TRAKING_ID)
+    ReactGA.initialize(GA_TRACKING_ID)
     ReactGA.pageview('/es/contratacion-realizada/')
   }
 
