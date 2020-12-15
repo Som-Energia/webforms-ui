@@ -171,7 +171,9 @@ export const normalizeHolderChange = (contract) => {
 
 export const normalizeContract = (contract) => {
   const finalContract = {}
-  const holder = contract.holder.vat === contract.member.vat ? contract.member : contract.holder
+
+  const holder = (contract.holder.vat === contract.member.vat &&
+    contract.holder.isphisical === true) ? contract.member : contract.holder
 
   contract?.holder?.previous_holder === true ? finalContract.canvi_titular = '0' : finalContract.canvi_titular = '1'
   finalContract.cnae = contract?.supply_point?.cnae

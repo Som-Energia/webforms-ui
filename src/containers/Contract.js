@@ -391,7 +391,9 @@ const Contract = (props) => {
 
   const nextStep = props => {
     let next = activeStep + 1
-    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
+    if (activeStep === 4 &&
+      props.values.holder.vat === props.values.member.vat &&
+      props.values.holder.isphisical === true) {
       next++
       props.values.privacy_policy_accepted = true
     }
