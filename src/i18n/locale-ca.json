@@ -345,6 +345,7 @@
     "AVIS_ACCEPTACIO_AUTO": "Acceptar el tràmit",
     "AVIS_REBUIG_AUTO": "Rebutjar el tràmit",
     "REVIEW_DATA_INFO": "Un cop acceptada la modificació per part de la distribuïdora aquesta disposa de 15 dies (hàbils) per fer-la efectiva. T’informarem de l’estat de la mateixa mitjançant correu electrònic.",
+    "REFUSE_SUCCESS_TITTLE": "Gràcies, hem rebut el teu rebuig correctament. En breu rebràs un correu electrònic al respecte.",
 
     "NEW_MEMBER": "Nova persona sòcia",
     "NEW_MEMBER_DESC": "<p>Fer-se soci/a a Som Energia és ràpid i senzill. Només cal omplir aquest formulari i formalitzar l’aportació inicial al capital social per gaudir dels serveis de la cooperativa i per formar part d’un moviment social de transformació del model energètic.</p><p>Introdueix el <b>NIF de la nova persona sòcia</b>:</p>",
