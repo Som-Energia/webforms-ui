@@ -157,7 +157,10 @@ function D1Detail (props) {
             <Grow in={data?.response !== undefined}>
               <div className={classes.responseContainer}>
                 <Alert severity="success">
-                  <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
+                  {data?.validate &&
+                    <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
+                    ||
+                    <AlertTitle>{t('REFUSE_SUCCESS_TITTLE')}</AlertTitle>}
                   {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
                 </Alert>
               </div>
