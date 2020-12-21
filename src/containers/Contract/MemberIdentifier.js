@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -22,12 +23,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search)
+}
+
 const MemberIdentifier = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
+  const query = useQuery()
+
   const { values, handleBlur, handleChange, errors, touched, setFieldValue } = props
+
   const [isLoading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     const checkIsMember = async () => {
@@ -65,6 +74,7 @@ const MemberIdentifier = (props) => {
 
       setLoading(false)
     }
+
     if (values?.member?.number &&
       values?.member?.vat && values.member.vat.length >= 9) {
       checkIsMember()
@@ -72,6 +82,20 @@ const MemberIdentifier = (props) => {
       setFieldValue('member.checked', false)
     }
   }, [values.member.number, values.member.vat, setFieldValue])
+
+  useEffect(() => {
+    let hash = query.get('h')
+    try {
+      hash = hash && atob(hash).split(';')
+      if (hash && hash.length > 1) {
+        setFieldValue('member.number', hash[0], false)
+        setFieldValue('member.vat', hash[1])
+        setDisabled(true)
+      }
+    } catch (error) {
+      console.log('Invalid hash code')
+    }
+  }, [query.get('h'), values, setFieldValue])
 
   return (
     <>
@@ -91,6 +115,7 @@ const MemberIdentifier = (props) => {
               onBlur={handleBlur}
               value={values.member.number}
               fullWidth
+              disabled={disabled}
               variant="outlined"
               margin="normal"
               InputProps={{
@@ -125,6 +150,7 @@ const MemberIdentifier = (props) => {
               onBlur={handleBlur}
               value={values.member.vat}
               fullWidth
+              disabled={disabled}
               variant="outlined"
               margin="normal"
               error={(errors?.member?.vat && touched?.member?.vat)}
