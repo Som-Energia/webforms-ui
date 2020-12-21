@@ -149,17 +149,17 @@ export const getRates = (data) => {
   const rates = {
     '2.0A': {
       num_power_periods: 1,
-      min_power: { power: 0, num_periods_apply: 1 },
+      min_power: { power: 0.1, num_periods_apply: 1 },
       max_power: { power: 10, num_periods_apply: 1 }
     },
     '2.0DHA': {
       num_power_periods: 1,
-      min_power: { power: 0, num_periods_apply: 1 },
+      min_power: { power: 0.1, num_periods_apply: 1 },
       max_power: { power: 10, num_periods_apply: 1 }
     },
     '2.0DHS': {
       num_power_periods: 1,
-      min_power: { power: 0, num_periods_apply: 1 },
+      min_power: { power: 0.1, num_periods_apply: 1 },
       max_power: { power: 10, num_periods_apply: 1 }
     },
     '2.1A': {
