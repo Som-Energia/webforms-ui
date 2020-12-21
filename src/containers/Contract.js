@@ -176,6 +176,9 @@ const Contract = (props) => {
             function () {
               return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING)
             }),
+        cnae_valid: Yup.bool()
+          .required(t('INVALID_SUPPLY_POINT_CNAE'))
+          .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
           .oneOf([true], t('CUPS_VERIFY_LABEL'))
@@ -458,6 +461,7 @@ const Contract = (props) => {
       city: { id: '' },
       is_housing: '',
       cnae: '',
+      cnae_valid: false,
       attachments: [],
       supply_point_accepted : false
     },
