@@ -15,6 +15,7 @@ import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
 import TermsDialog from '../../components/TermsDialog'
 import Uploader from '../../components/Uploader'
+import CnaeField from '../../components/CnaeField'
 
 import { CNAE_HOUSING } from '../../services/utils'
 
@@ -37,7 +38,7 @@ const SupplyPoint = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue } = props
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue, setFieldTouched } = props
   const [open, setOpen] = useState(false)
 
   const handleClick = (event) => {
@@ -64,8 +65,14 @@ const SupplyPoint = (props) => {
     event.preventDefault()
     const isHousing = event.target.value
     setFieldValue('supply_point.is_housing', event.target.value, false)
-    isHousing ? setFieldValue('supply_point.cnae', CNAE_HOUSING, true) : setFieldValue('supply_point.cnae', '', true)
-    // validateForm()
+    isHousing ? onChangeCnae({ cnae: CNAE_HOUSING, valid: true, touched: true }) : onChangeCnae({ cnae: '', valid: false, touched: false })
+  }
+
+  const onChangeCnae = ({ cnae, valid, touched = true }) => {
+    console.log('changeCnae')
+    setFieldTouched('supply_point.cnae', touched)
+    setFieldValue('supply_point.cnae', cnae)
+    setFieldValue('supply_point.cnae_valid', valid)
   }
 
   return (
@@ -187,19 +194,19 @@ const SupplyPoint = (props) => {
             </TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              id="supply_point_cnae"
+            <CnaeField
               name="supply_point.cnae"
               label={t('CNAE')}
               required
               disabled={!(values.supply_point.is_housing === false)}
               variant="outlined"
+              id="supply_point_cnae"
               fullWidth
               value={values?.supply_point?.cnae}
-              onChange={handleChange}
+              onChange={onChangeCnae}
               onBlur={handleBlur}
-              error={errors?.supply_point?.cnae && touched?.supply_point?.cnae}
-              helperText={(touched?.supply_point?.cnae && errors?.supply_point?.cnae) || <CnaeHelperText />}
+              error={errors?.supply_point?.cnae_valid && touched?.supply_point?.cnae}
+              helperText={(touched?.supply_point?.cnae && errors?.supply_point?.cnae_valid) || <CnaeHelperText />}
             />
           </Grid>
           <Grid item xs={12} className={classes.noPaddingTop}>

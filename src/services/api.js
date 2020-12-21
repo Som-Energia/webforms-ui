@@ -45,7 +45,6 @@ export const checkVat = async (vat) => {
     cancelTokenVat.cancel('Operation canceled due to new request')
   }
 
-  // Save the cancel token for the current request
   cancelTokenVat = axios.CancelToken.source()
 
   return axios({
@@ -65,13 +64,31 @@ export const checkCups = async (cups) => {
     cancelTokenCups.cancel('Operation canceled due to new request')
   }
 
-  // Save the cancel token for the current request
   cancelTokenCups = axios.CancelToken.source()
 
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}check/cups/status/${cups}`,
     cancelToken: cancelTokenCups.token
+  })
+    .then(response => {
+      return response?.data
+    })
+}
+
+let cancelTokenCnae
+
+export const checkCnae = async (cnae) => {
+  if (typeof cancelTokenCnae !== typeof undefined) {
+    cancelTokenCnae.cancel('Operation canceled due to new request')
+  }
+
+  cancelTokenCnae = axios.CancelToken.source()
+
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}check/cnae/${cnae}`,
+    cancelToken: cancelTokenCnae.token
   })
     .then(response => {
       return response?.data
@@ -105,7 +122,6 @@ export const checkIban = async (iban) => {
     cancelTokenIban.cancel('Operation canceled due to new request')
   }
 
-  // Save the cancel token for the current request
   cancelTokenIban = axios.CancelToken.source()
 
   return axios({
