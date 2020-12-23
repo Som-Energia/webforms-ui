@@ -272,7 +272,8 @@ export const normalizeMember = (data) => {
   finalMember.urlko = data.urlko
 
   if (data.member.isphisical) {
-    finalMember.cognom = `${data.member.surname1} ${data.member.surname2}`
+    const cognoms = `${data.member.surname1} ${data.member.surname2}`
+    finalMember.cognom = cognoms.trim()
   } else {
     finalMember.representant_nom = data.member.proxyname
     finalMember.representant_dni = data.member.proxynif

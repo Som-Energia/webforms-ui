@@ -38,6 +38,12 @@ const MemberIdentifier = (props) => {
   const [error, setError] = useState(false)
   const [disabled, setDisabled] = useState(false)
 
+  const handleChangeVat = (event) => {
+    let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
+    value = value[0].toUpperCase()
+    setFieldValue('member.vat', value)
+  }
+
   useEffect(() => {
     const checkIsMember = async () => {
       setLoading(true)
@@ -146,7 +152,7 @@ const MemberIdentifier = (props) => {
               id="vat"
               name="member.vat"
               label={t('VAT')}
-              onChange={handleChange}
+              onChange={handleChangeVat}
               onBlur={handleBlur}
               value={values.member.vat}
               fullWidth
