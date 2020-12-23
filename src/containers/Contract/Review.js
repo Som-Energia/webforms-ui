@@ -138,9 +138,9 @@ const Review = (props) => {
   }
 
   const Prices = ({ concept, name }) => {
-    return concept && Object.entries(concept).map(([key, value]) =>
+    return concept ? Object.entries(concept).map(([key, value]) =>
       <span key={`${name}:${key}`}>{`${value?.value} ${value?.uom}`}</span>
-    ) || <></>
+    ) : <></>
   }
 
   return (
