@@ -265,6 +265,7 @@
     "INVALID_SUPPLY_POINT_CNAE": "No has especificat un <b>codi CNAE</b> vàlid pel punt de subministrament",
     "INVALID_CNAE_NO_HOUSING": "El punt de subministrament no és un habitatge, el CNAE no pot ser 9820",
     "ADJUNTAR_ULTIMA_FACTURA": "Adjuntar última factura elèctrica (PDF o JPG)",
+    "ADJUNTAR_DOCUMENTACIO": "Adjuntar la documentació per l'alta de subministrament (PDF o JPG) - 10Mb màxim",
 
     "TARIFA_I_POTENCIA": "Tarifa i potència",
     "HELP_TARIFA_CANVI_COMERCIALITZADORA": "Per evitar problemes de tramitació, poseu <b>la mateixa tarifa i potència que apareix a la factura actual</b>. Ens podreu sol·licitar canvis de tarifa o potència una vegada estigui el contracte activat amb nosaltres.",

@@ -210,9 +210,14 @@ const SupplyPoint = (props) => {
             />
           </Grid>
           <Grid item xs={12} className={classes.noPaddingTop}>
-            <Typography>
-              {t('ADJUNTAR_ULTIMA_FACTURA')}
-            </Typography>
+            { values?.contract?.has_service
+              ? <Typography>
+                {t('ADJUNTAR_ULTIMA_FACTURA')}
+              </Typography>
+              : <Typography>
+                {t("ADJUNTAR_DOCUMENTACIO")}
+              </Typography>
+            }
             <Box mt={1} mb={1}>
               <Uploader
                 fieldError={errors.supply_point?.attachments && touched.supply_point?.attachments && errors.supply_point?.attachments}
