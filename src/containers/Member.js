@@ -80,7 +80,9 @@ const Member = (props) => {
   const validationSchemas = [
     Yup.object().shape({
       member: Yup.object().shape({
-        vat: Yup.string().required(t('FILL_NIF')),
+        vat: Yup.string()
+          .required(t('FILL_NIF'))
+          .matches(/(^[A-GI-Z0-9])/, t('FILL_NIF')),
         vatvalid: Yup.bool().required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
       })
