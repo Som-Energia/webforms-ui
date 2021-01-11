@@ -38,7 +38,7 @@ const PowerInputs = (props) => {
       key={attr}
       id={attr}
       name={`contract.${attr}`}
-      label={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
+      label={ !values?.contract?.has_service ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO') : t('QUINA_POTENCIA_TENS_CONTRACTADA') }
       InputProps={{
         autoComplete: 'off',
         endAdornment: <InputAdornment position="end">kW</InputAdornment>,
@@ -51,7 +51,7 @@ const PowerInputs = (props) => {
       variant="outlined"
       margin="normal"
       error={(errors?.contract && errors?.contract[attr] && touched?.contract && touched?.contract[attr])}
-      helperText={(touched?.contract && touched?.contract[attr] && errors.contract && errors?.contract[attr]) || t('HELP_POPOVER_POWER')}
+      helperText={(touched?.contract && touched?.contract[attr] && errors.contract && errors?.contract[attr]) || (values?.contract?.has_service && t('HELP_POPOVER_POWER'))}
     />)
   })
 }
