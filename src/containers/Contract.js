@@ -167,7 +167,12 @@ const Contract = (props) => {
             .required(t('NO_CITY'))
         }),
         is_housing: Yup.bool()
-          .oneOf([true, false], t('NO_IS_HOUSING')),
+          .oneOf([true, false], t('NO_IS_HOUSING'))
+          .test('CnaeNoHousing',
+            t('INVALID_CNAE_NO_HOUSING'),
+            function () {
+              return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING)
+            }),
         cnae: Yup.string()
           .required(t('INVALID_SUPPLY_POINT_CNAE'))
           .min(3, t('INVALID_SUPPLY_POINT_CNAE'))

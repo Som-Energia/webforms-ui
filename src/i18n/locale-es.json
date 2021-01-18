@@ -85,6 +85,7 @@
   "VAT_LABEL": "Número de Identificación Fiscal (NIF)",
   "VAT_HELP": "¿Y si no dispongo de NIF?",
   "NO_VAT_HELP": "Si no dispones de NIE y tienes pasaporte, puedes enviarnos un correo a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> con los datos del punto de suministro que quieres cambiar (número de contrato y CUPS) y los datos de la nueva persona titular (nombre, apellidos, pasaporte adjunto, correo electrónico y teléfono de contacto) y datos IBAN de pago.",
+  "CIF_COMMUNITY_OWNERS": "Lamentablemente, por ley, las comunidades de vecinos no pueden hacerse socias de cooperativas. Os invitamos a que sea un miembro de la comunidad de vecinos, o bien la persona administradora de fincas, quien se haga socia de Som Energia. Para más información, podéis consultar el Centro de Ayuda.",
 
   "CUPS_TITLE": "Identifica el punto de suministro",
   "FILL_CUPS": "Indica el código CUPS (Código Universal de Punto de Suministro):",
@@ -281,6 +282,7 @@
   "INVALID_SUPPLY_POINT_CNAE": "No has especificado un código CNAE válido",
   "INVALID_CNAE_NO_HOUSING": "El punto de suministro no es una vivienda, el CNAE no puede ser 9820",
   "ADJUNTAR_ULTIMA_FACTURA": "Adjuntar la última factura eléctrica (opcional)",
+  "ADJUNTAR_DOCUMENTACIO": "Adjuntar la documentación para el alta de suministro (PDF o JPG) - 10Mb máximo",
 
   "TARIFA_I_POTENCIA": "Tarifa y potencia",
   "HELP_TARIFA_CANVI_COMERCIALITZADORA": "Para evitar problemas de tramitación, ponga <b>la misma tarifa y potencia que aparece en la factura actual</b>. Podrá solicitar el cambio de tarifa o potencia una vez esté el contrato activado con nosotros.",
