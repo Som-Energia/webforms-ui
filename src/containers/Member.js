@@ -82,7 +82,7 @@ const Member = (props) => {
       member: Yup.object().shape({
         vat: Yup.string()
           .required(t('FILL_NIF'))
-          .matches(/(^[A-GI-Z0-9])/, t('FILL_NIF')),
+          .matches(/(^[A-GI-Z0-9])/, t('CIF_COMMUNITY_OWNERS')),
         vatvalid: Yup.bool().required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
       })
