@@ -83,6 +83,7 @@
     "VAT_LABEL": "Número d'identificació fiscal (NIF)",
     "VAT_HELP": "I si no disposo d'un NIF?",
     "NO_VAT_HELP": "Si no disposes de NIE i tens passaport, ens pots enviar un correu a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> amb les dades del punt de subministrament que vols canviar (número de contracte i CUPS), les dades de la nova persona titular (nom, cognoms, passaport adjunt, correu electrònic i telèfon de contacte) i dades IBAN de pagament.",
+    "CIF_COMMUNITY_OWNERS": "Lamentablement, per llei, les comunitats veïnals no poden fer-se sòcies de cooperatives. Us convidem a que sigui un membre de la comunitat veïnal, o bé la persona administradora de finques, qui es faci sòcia de Som Energia. Per a més informació, podeu consultar el Centre d’Ajuda.",
     "CUPS_TITLE": "Identifica el punt de subministrament",
     "FILL_CUPS": "Indica el <b>codi CUPS</b> (codi universal de punt de subministrament):",
     "CUPS_LABEL": "CUPS",
@@ -265,6 +266,7 @@
     "INVALID_SUPPLY_POINT_CNAE": "No has especificat un <b>codi CNAE</b> vàlid pel punt de subministrament",
     "INVALID_CNAE_NO_HOUSING": "El punt de subministrament no és un habitatge, el CNAE no pot ser 9820",
     "ADJUNTAR_ULTIMA_FACTURA": "Adjuntar última factura elèctrica (PDF o JPG)",
+    "ADJUNTAR_DOCUMENTACIO": "Adjuntar la documentació per l'alta de subministrament (PDF o JPG) - 10Mb màxim",
 
     "TARIFA_I_POTENCIA": "Tarifa i potència",
     "HELP_TARIFA_CANVI_COMERCIALITZADORA": "Per evitar problemes de tramitació, poseu <b>la mateixa tarifa i potència que apareix a la factura actual</b>. Ens podreu sol·licitar canvis de tarifa o potència una vegada estigui el contracte activat amb nosaltres.",
