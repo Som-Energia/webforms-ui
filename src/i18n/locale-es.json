@@ -402,6 +402,7 @@
   "ACCEPT_LEGAL_PERSON": "No has aceptado la declaración",
 
   "DNI_EXIST": "Ya existe un socio/a con este NIF/CIF",
+  "SAME_OWNER": "El NIF del nuevo titular no puede ser el mismo que el del actual",
 
   "API_SERVER_ERROR": "Error conectando al servidor",
   "API_SERVER_ERROR_DETAILS": "Tu navegador tiene problemas para conectarse a la web de Som Energia. Comprueba que la conexión a internet funcione correctamente. Si no fuera ese el problema, contacta con Som Energia para verificar si se pudo procesar el trámite correctamente.",
