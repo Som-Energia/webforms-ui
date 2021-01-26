@@ -175,73 +175,55 @@ export const normalizeContract = (contract) => {
   const holder = (contract.holder.vat === contract.member.vat &&
     contract.holder.isphisical === true) ? contract.member : contract.holder
 
-  contract?.holder?.previous_holder === true ? finalContract.canvi_titular = '0' : finalContract.canvi_titular = '1'
-  finalContract.cnae = contract?.supply_point?.cnae
-
-  finalContract.compte_adreca = ''
-  finalContract.compte_cognom = ''
-  finalContract.compte_cp = ''
-  finalContract.compte_dni = ''
-  finalContract.compte_email = ''
-  finalContract.compte_lang = ''
-  finalContract.compte_municipi = ''
-  finalContract.compte_nom = ''
-  finalContract.compte_provincia = ''
-  finalContract.compte_representant_dni = ''
-  finalContract.compte_representant_nom = ''
-  finalContract.compte_tel = ''
-  finalContract.compte_tel2 = ''
-  finalContract.compte_tipus_persona = '0'
-
-  finalContract.condicions = contract?.payment?.sepa_accepted
-  finalContract.condicions_privacitat = contract?.privacy_policy_accepted
-  finalContract.condicions_titular = contract?.terms_accepted
-  finalContract.consum = ''
-
+  finalContract.member_number = contract?.member?.number
+  finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
-  finalContract.cups_adreca = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`
-  finalContract.cups_adreca = finalContract.cups_adreca.trim()
-  finalContract.cups_municipi = contract?.supply_point?.city?.id
-  finalContract.cups_provincia = contract?.supply_point?.state?.id
+  finalContract.tariff = contract?.contract?.rate
+  finalContract.power = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p2 = Math.round(contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.cups_address = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
+  finalContract.city_id = contract?.supply_point?.city?.id
+  finalContract.cups_state_id = contract?.supply_point?.state?.id
+  finalContract.cnae = contract?.supply_point?.cnae
+  finalContract.owner_person_type = contract?.holder?.isphisical ? 'phisical' : 'juridic'
+  finalContract.owner_vat = holder?.vat
+  finalContract.owner_name = holder?.name
+  finalContract.owner_surname1 = `${holder?.surname1} ${holder?.surname2}`
+  finalContract.owner_proxy_vat = !contract?.holder?.isphisical ? holder?.proxynif : undefined
+  finalContract.owner_proxy_name = !contract?.holder?.isphisical ? holder?.proxyname : undefined
+  finalContract.owner_address = holder?.address
+  finalContract.owner_city_id = holder?.city?.id
+  finalContract.owner_state_id = holder?.state?.id
+  finalContract.owner_postal_code = holder?.postal_code
+  finalContract.owner_email = holder?.email
+  finalContract.owner_phone = holder?.phone1
+  finalContract.owner_lang = holder?.language
+  finalContract.owner_is_payer = true
 
-  finalContract.dni = contract?.member?.vat
-  finalContract.donatiu = contract?.payment?.voluntary_cent === true ? '1' : '0'
-  finalContract.escull_pagador = 'titular'
-  finalContract.id_soci = contract?.member?.number
+  finalContract.payer_person_type = finalContract.owner_person_type
+  finalContract.payer_name = finalContract.owner_name
+  finalContract.payer_surname1 = finalContract.owner_surname1
+  finalContract.payer_vat = finalContract.owner_vat
+  finalContract.payer_address = finalContract.owner_address
+  finalContract.payer_city_id = finalContract.owner_city_id
+  finalContract.payer_state_id = finalContract.owner_state_id
+  finalContract.payer_postal_code = finalContract.owner_postal_code
+  finalContract.payer_email = finalContract.owner_email
+  finalContract.payer_phone = finalContract.owner_phone
+  finalContract.payer_lang = finalContract.owner_lang
+
   finalContract.payment_iban = contract?.payment?.iban
-  finalContract.potencia = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.potencia_p2 = contract?.contract?.power2 && Math.round(contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.potencia_p3 = contract?.contract?.power3 && Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.sepa_conditions = contract?.payment?.sepa_accepted
+  finalContract.donation = contract?.payment?.voluntary_cent
 
-  if (!contract?.contract?.has_service) {
-    finalContract.proces = 'A3'
-  }
-  else if(contract?.holder?.previous_holder) {
-    finalContract.proces = 'C1'
-  }
-  else {
-    finalContract.proces = 'C2'
-  }
+  finalContract.process = !contract?.contract?.has_service
+    ? contract?.holder?.previous_holder ? 'C1' : 'C2'
+    : 'A3'
 
-  finalContract.referencia = ''
-  finalContract.representant_dni = holder?.proxynif
-  finalContract.representant_nom = holder?.proxyname
+  finalContract.privacy_conditions = contract?.privacy_policy_accepted
+  finalContract.contract_conditions = contract?.terms_accepted
 
-  finalContract.soci_titular = contract.holder.vat === contract.member.vat ? '1' : '0'
-
-  finalContract.tarifa = contract?.contract?.rate
-  finalContract.tipus_persona = contract?.holder?.isphisical ? '0' : '1'
-  finalContract.titular_adreca = holder?.address
-  finalContract.titular_cognom = `${holder?.surname1} ${holder?.surname2}`
-  finalContract.titular_cp = holder?.postal_code
-  finalContract.titular_dni = holder?.vat
-  finalContract.titular_email = holder?.email
-  finalContract.titular_lang = holder?.language
-  finalContract.titular_municipi = holder?.city?.id
-  finalContract.titular_nom = holder?.name
-  finalContract.titular_provincia = holder?.state?.id
-  finalContract.titular_tel = holder?.phone1
-  finalContract.titular_tel2 = holder?.phone2
+  Object.keys(finalContract).forEach(key => finalContract[key] === undefined && delete finalContract[key])
 
   return finalContract
 }
@@ -290,18 +272,5 @@ export const specialCaseType = (specialCases) => {
 }
 
 export const calculateTariff = ({ changePower = true, power, moreThan15Kw, changeFare = true, fare }) => {
-  let tariff = null
-  if (changePower) {
-    if (!moreThan15Kw) {
-      if (changeFare) {
-        tariff = parseFloat(power) <= 10 ? '2.0' : '2.1'
-        if (fare) {
-          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
-        }
-      }
-    } else {
-      tariff = '3.0A'
-    }
-  }
-  return tariff
+  return (moreThan15Kw) ? '3.0TD' : '2.0TD'
 }
