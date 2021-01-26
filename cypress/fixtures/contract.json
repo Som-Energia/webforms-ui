@@ -23,7 +23,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES4023386283350973BR0F",
+    "cups": "ES1348390314052303XT",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -35,7 +35,7 @@
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
     "invalidCups": "ES9803463008824117ZQ",
-    "validCups": "ES0031406156230007ZJ0F"
+    "validCups": "ES1348390314052303XT"
   },
   "fare20A": "2.0A",
   "fare21": "2.1DHA",
@@ -43,6 +43,7 @@
   "power": 4.4,
   "power2": 16,
   "power3": 10,
+  "power6": 16,
   "phase": "mono",
   "fare": "nodh",
   "juridic_member": {
