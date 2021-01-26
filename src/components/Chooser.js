@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2)
   },
   chooserItem: {
-    display: 'block',
     cursor: 'pointer',
     minHeight: '100px',
     paddingTop: theme.spacing(2),
@@ -35,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
-    }
+    },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   chooserItemSelected: {
     margin: '0 0 8px 0',
@@ -100,7 +102,10 @@ const Chooser = (props) => {
                   <Radio disabled={disabled} value={option.value} color="primary" checked={selectedOption === option.value} />
                   <Typography>{option.label}</Typography>
                 </div>
-                <FormHelperText className={classes.chooserItemDesc} dangerouslySetInnerHTML={{ __html: option.description }} />
+                {
+                  option.description &&
+                    <FormHelperText className={classes.chooserItemDesc} dangerouslySetInnerHTML={{ __html: option.description }} />
+                }
               </label>
             </Grid>
           ) }
