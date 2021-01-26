@@ -232,13 +232,15 @@ export const normalizeContract = (contract) => {
   finalContract.tarifa = contract?.contract?.rate
   finalContract.tipus_persona = contract?.holder?.isphisical ? '0' : '1'
   finalContract.titular_adreca = holder?.address
-  finalContract.titular_cognom = `${holder?.surname1} ${holder?.surname2}`
+  finalContract.titular_cognom = holder?.surname2
+    ? `${holder?.surname1.trim()} ${holder?.surname2.trim()}`
+    : holder?.surname1.trim()
   finalContract.titular_cp = holder?.postal_code
   finalContract.titular_dni = holder?.vat
   finalContract.titular_email = holder?.email
   finalContract.titular_lang = holder?.language
   finalContract.titular_municipi = holder?.city?.id
-  finalContract.titular_nom = holder?.name
+  finalContract.titular_nom = holder?.name.trim()
   finalContract.titular_provincia = holder?.state?.id
   finalContract.titular_tel = holder?.phone1
   finalContract.titular_tel2 = holder?.phone2
