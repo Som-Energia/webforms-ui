@@ -147,40 +147,17 @@ export const holderChange = async (data) => {
 
 export const getRates = (data) => {
   const rates = {
-    '2.0A': {
-      num_power_periods: 1,
-      min_power: { power: 0.1, num_periods_apply: 1 },
-      max_power: { power: 10, num_periods_apply: 1 }
+    '2.0TD': {
+      num_power_periods: 2,
+      min_power: { power: 0.1, num_periods_apply: 2 },
+      max_power: { power: 15, num_periods_apply: 2 },
+      increasing: false
     },
-    '2.0DHA': {
-      num_power_periods: 1,
-      min_power: { power: 0.1, num_periods_apply: 1 },
-      max_power: { power: 10, num_periods_apply: 1 }
-    },
-    '2.0DHS': {
-      num_power_periods: 1,
-      min_power: { power: 0.1, num_periods_apply: 1 },
-      max_power: { power: 10, num_periods_apply: 1 }
-    },
-    '2.1A': {
-      num_power_periods: 1,
-      min_power: { power: 10.001, num_periods_apply: 1 },
-      max_power: { power: 15, num_periods_apply: 1 }
-    },
-    '2.1DHA': {
-      num_power_periods: 1,
-      min_power: { power: 10.001, num_periods_apply: 1 },
-      max_power: { power: 15, num_periods_apply: 1 }
-    },
-    '2.1DHS': {
-      num_power_periods: 1,
-      min_power: { power: 10.001, num_periods_apply: 1 },
-      max_power: { power: 15, num_periods_apply: 1 }
-    },
-    '3.0A': {
-      num_power_periods: 3,
+    '3.0TD': {
+      num_power_periods: 6,
       min_power: { power: 15.001, num_periods_apply: 1 },
-      max_power: { power: 500, num_periods_apply: 3 }
+      max_power: { power: 450, num_periods_apply: 6 },
+      increasing: true
     }
   }
 

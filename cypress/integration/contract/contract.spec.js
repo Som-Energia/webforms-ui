@@ -4,7 +4,7 @@ describe('Contract', () => {
     cy.fixture('contract.json').as('data')
   })
 
-  describe('Correct data: no service', function () {
+  describe('No previous service', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
         .clear()
@@ -66,7 +66,7 @@ describe('Contract', () => {
         .type(this.data.member.vat).should('have.value', this.data.member.vat)
 
       cy.wait(600)
-      cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
+      // cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
 
@@ -82,10 +82,15 @@ describe('Contract', () => {
       cy.get('[data-cy=accept]').click()
       cy.get('[data-cy=next]').click()
 
+      cy.get('[name="terms_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
+
       cy.contains('€/kWh')
+
+      // cy.get('[data-cy=submit]').click()
     })
 
-    it('Monofasica no DH', function () {
+    it('2.0TD', function () {
 
       cy.get('#phases').click()
       cy.get(`[data-value="${this.data.phase}"]`).click()
@@ -94,15 +99,48 @@ describe('Contract', () => {
         .clear()
         .type(this.data.power).should('have.value', this.data.power)
 
-      cy.get('#fare').click()
-      cy.get(`[data-value="${this.data.fare}"]`).click()
+      cy.get('[name="contract.power2"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('[data-cy=next]').click()
+    })
+
+    it('3.0TD', function () {
+
+      cy.get('#phases').click()
+      cy.get(`[data-value="${this.data.phase}"]`).click()
+
+      cy.get('[name="contract.power"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('[name="contract.power2"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('[name="contract.power3"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('[name="contract.power4"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('[name="contract.power5"]')
+        .clear()
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('[name="contract.power6"]')
+        .clear()
+        .type(this.data.power6).should('have.value', this.data.power6)
 
       cy.get('[data-cy=next]').click()
     })
 
   })
 
-  describe('Correct data', function () {
+  describe('With previous service', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
         .clear()
@@ -180,23 +218,25 @@ describe('Contract', () => {
       cy.get('[data-cy=accept]').click()
       cy.get('[data-cy=next]').click()
 
+      cy.get('[name="terms_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
+
       cy.contains('€/kWh')
+
+      // cy.get('[data-cy=submit]').click()
     })
 
-    it('Contract 2.0A', function () {
-      cy.get('#rate').click()
-      cy.get(`[data-value="${this.data.fare20A}"]`).click()
-
+    it('2.0TD', function () {
       cy.get('#power')
+        .type(this.data.power).should('have.value', this.data.power)
+
+      cy.get('#power2')
         .type(this.data.power).should('have.value', this.data.power)
 
       cy.get('[data-cy=next]').click()
     })
 
-    it('Contract 3.0A', function () {
-      cy.get('#rate').click()
-      cy.get(`[data-value="${this.data.fare30A}"]`).click()
-
+    it('3.0TD', function () {
       cy.get('#power')
         .type(this.data.power).should('have.value', this.data.power)
 
@@ -206,11 +246,20 @@ describe('Contract', () => {
       cy.get('#power3')
         .type(this.data.power3).should('have.value', this.data.power3)
 
+      cy.get('#power4')
+        .type(this.data.power3).should('have.value', this.data.power3)
+
+      cy.get('#power5')
+        .type(this.data.power3).should('have.value', this.data.power3)
+
+      cy.get('#power6')
+        .type(this.data.power6).should('have.value', this.data.power6)
+
       cy.get('[data-cy=next]').click()
     })
-
   })
 
+  /*
   describe('Wrong power', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
@@ -462,7 +511,9 @@ describe('Contract', () => {
     cy.get('[data-cy=accept]').click()
     cy.get('[data-cy=next]').click()
   })
+  */
 
+  /*
   describe('Juridic Person', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
@@ -606,5 +657,6 @@ describe('Contract', () => {
     })
 
   })
+  */
 
 })
