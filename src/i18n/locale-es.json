@@ -410,6 +410,8 @@
 
   "POWER_QUESTION": "¿Que potencia tienes contratada?",
   "MENOR_IGUAL_A_15KW_CONTRACTACIO": "Potencia inferior o igual a 15kW",
-  "NO_POWER_INCREASING": "La potencia de este periodo no puede ser inferior al anterior"
+  "NO_POWER_INCREASING": "La potencia de este periodo no puede ser inferior al anterior",
+  "HELP_MORE_THAN_15KW": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 6 períodos de potencia.</p><p>En el P1 deberás indicar la misma potencia que tienes contratada actualmente en el mismo período. En relación al P2, P3, P4 y P5, deberás indicar la potencia que tienes contratada en el P2 actual. Finalmente, en el P6, deberás indicar la potencia que tienes contratada en el P3 actual.</p>",
+  "HELP_LESS_THAN_15KW": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 2 períodos de potencia si tienes contratada una tarifa 2.0A/2.0DHA u bien 2.1A/2.0DHA.</p><p>En los dos períodos debes indicar la misma potencia que tienes contratada actualmente, pues según lo previsto en la Circular 3/2020 de la CNMC, la potencia del P2 será igual a la potencia contratada anteriormente.</p>"
 }
 

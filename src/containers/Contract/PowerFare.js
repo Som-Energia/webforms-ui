@@ -126,7 +126,13 @@ const PowerFare = (props) => {
           ]}
         />
       </Box>
-
+      <Box mt={3}>
+        <Typography variant="body1"
+          dangerouslySetInnerHTML={{ __html: t(
+            values?.contract?.moreThan15Kw ? 'HELP_MORE_THAN_15KW' : 'HELP_LESS_THAN_15KW'
+          )}}
+        />
+      </Box>
       <Box mt={2} mb={1}>
         <PowerInputs numInputs={rates[values?.contract?.rate]?.num_power_periods} {...props} />
       </Box>
