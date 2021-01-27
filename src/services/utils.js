@@ -271,6 +271,6 @@ export const specialCaseType = (specialCases) => {
   else return ''
 }
 
-export const calculateTariff = ({ changePower = true, power, moreThan15Kw, changeFare = true, fare }) => {
+export const calculateTariff = ({ moreThan15Kw }) => {
   return (moreThan15Kw) ? '3.0TD' : '2.0TD'
 }
