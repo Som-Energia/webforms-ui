@@ -179,16 +179,21 @@ export const normalizeContract = (contract) => {
   finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
   finalContract.tariff = contract?.contract?.rate
-  finalContract.power = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p1 = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
   finalContract.power_p2 = Math.round(contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p3 = contract?.contract?.power3 && Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p4 = contract?.contract?.power4 && Math.round(contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p5 = contract?.contract?.power5 && Math.round(contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p6 = contract?.contract?.power6 && Math.round(contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR)
   finalContract.cups_address = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
   finalContract.city_id = contract?.supply_point?.city?.id
   finalContract.cups_state_id = contract?.supply_point?.state?.id
   finalContract.cnae = contract?.supply_point?.cnae
-  finalContract.owner_person_type = contract?.holder?.isphisical ? 'phisical' : 'juridic'
+  finalContract.owner_is_juridical = !contract?.holder?.isphisical
   finalContract.owner_vat = holder?.vat
   finalContract.owner_name = holder?.name
-  finalContract.owner_surname1 = `${holder?.surname1} ${holder?.surname2}`
+  finalContract.owner_surname1 = holder?.surname1
+  finalContract.owner_surname2 = holder?.surname2
   finalContract.owner_proxy_vat = !contract?.holder?.isphisical ? holder?.proxynif : undefined
   finalContract.owner_proxy_name = !contract?.holder?.isphisical ? holder?.proxyname : undefined
   finalContract.owner_address = holder?.address
@@ -197,20 +202,28 @@ export const normalizeContract = (contract) => {
   finalContract.owner_postal_code = holder?.postal_code
   finalContract.owner_email = holder?.email
   finalContract.owner_phone = holder?.phone1
+  finalContract.owner_phone2 = holder?.phone2
   finalContract.owner_lang = holder?.language
   finalContract.owner_is_payer = true
 
-  finalContract.payer_person_type = finalContract.owner_person_type
-  finalContract.payer_name = finalContract.owner_name
-  finalContract.payer_surname1 = finalContract.owner_surname1
-  finalContract.payer_vat = finalContract.owner_vat
-  finalContract.payer_address = finalContract.owner_address
-  finalContract.payer_city_id = finalContract.owner_city_id
-  finalContract.payer_state_id = finalContract.owner_state_id
-  finalContract.payer_postal_code = finalContract.owner_postal_code
-  finalContract.payer_email = finalContract.owner_email
-  finalContract.payer_phone = finalContract.owner_phone
-  finalContract.payer_lang = finalContract.owner_lang
+  if (!finalContract.owner_is_payer) {
+    finalContract.payer_person_type = finalContract.owner_person_type
+    finalContract.payer_is_juridical = finalContract.owner_is_juridical
+    finalContract.payer_name = finalContract.owner_name
+    finalContract.payer_surname1 = finalContract.owner_surname1
+    finalContract.payer_surname2 = finalContract.owner_surname2
+    finalContract.payer_proxy_vat = finalContract.owner_proxy_vat
+    finalContract.payer_proxy_name = finalContract.owner_proxy_name
+    finalContract.payer_vat = finalContract.owner_vat
+    finalContract.payer_address = finalContract.owner_address
+    finalContract.payer_city_id = finalContract.owner_city_id
+    finalContract.payer_state_id = finalContract.owner_state_id
+    finalContract.payer_postal_code = finalContract.owner_postal_code
+    finalContract.payer_email = finalContract.owner_email
+    finalContract.payer_phone = finalContract.owner_phone
+    finalContract.payer_phone2 = finalContract.phone2
+    finalContract.payer_lang = finalContract.owner_lang
+  }
 
   finalContract.payment_iban = contract?.payment?.iban
   finalContract.sepa_conditions = contract?.payment?.sepa_accepted
