@@ -72,8 +72,6 @@ const handleChangeModify = (event, setFieldValue, values) => {
     setFieldValue('power2', '')
     setFieldValue('power3', '')
     setFieldValue('moreThan15Kw', false)
-  } else if (event.target.name === 'changeFare' && values.changeFare) {
-    setFieldValue('fare', '')
   }
   setFieldValue(event.target.name, event.target.checked)
 }
@@ -161,13 +159,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
         t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
         function () {
           return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
-        }),
-    fare: Yup.string()
-      .when('changeFare', {
-        is: true,
-        then: Yup.string()
-          .required(t('NO_HOURLY_DISCRIMINATION_CHOSEN'))
-      })
+        })
   })
 
   return (
@@ -185,8 +177,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               power3: '',
               power_attachments: [],
               moreThan15Kw: false,
-              changeFare: false,
-              fare: '',
               tariff: ''
             },
             ...params
@@ -385,62 +375,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
             </Box>
 
-            <Box mx={1} mb={2}>
-              <Divider />
-            </Box>
-
-            <Box mx={1} mb={1}>
-              <FormControlLabel
-                className={classes.switchLabel}
-                label={
-                  <Typography variant="h6" className={classes.paramTitle}>
-                    {t('MODIFY_ANSWER_FARE')}
-                  </Typography>
-                }
-                labelPlacement="start"
-                control={
-                  <Switch
-                    name="changeFare"
-                    className={classes.switch}
-                    onChange={event => handleChangeModify(event, setFieldValue, values)}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                    color="primary"
-                    checked={(!values.moreThan15Kw) ? values.changeFare : false}
-                    disabled={values.moreThan15Kw}
-                  />
-                }
-              />
-            </Box>
-            {(values.changeFare && !values.moreThan15Kw) &&
-              <Box mx={1} mt={1} mb={2}>
-                <TextField
-                  select
-                  id="fare"
-                  name="fare"
-                  label={t('DISCRIMINACIO_HORARIA')}
-                  onChange={event => handleChange(event)}
-                  variant="outlined"
-                  fullWidth
-                  value={ (!values.moreThan15Kw) ? values.fare : ''}
-                  error={(errors.fare && touched.fare)}
-                  helperText={(touched.fare && errors.fare)}
-                >
-                  <MenuItem value="nodh">
-                    {t('SENSE_DISCRIMINACIO_HORARIA')}
-                  </MenuItem>
-                  <MenuItem value="dh">
-                    {t('AMB_DISCRIMINACIO_HORARIA')}
-                  </MenuItem>
-                </TextField>
-              </Box>
-            }
-            <Box mx={1} mb={3}>
-              <FormHelperText
-                dangerouslySetInnerHTML={{ __html: t('HELP_DISCRIMINACIO_HORARIA', { url: t('HELP_DISCRIMINACIO_HORARIA_URL') }) }}
-              />
-            </Box>
-
-            { (values.changePower && values.power && ((values.changeFare && values.fare) || values.moreThan15Kw)) &&
+            { values.changePower && values.power &&
               <Box mx={1} mb={3}>
                 <Grid container spacing={4}>
                   <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
@@ -468,7 +403,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   variant="contained"
                   color="primary"
                   endIcon={<ArrowForwardIosIcon />}
-                  disabled={(!values.changePhases && !values.changePower && !values.changeFare) || isSubmitting}
+                  disabled={(!values.changePhases && !values.changePower) || isSubmitting}
                 >
                   {t('SEGUENT_PAS')}
                 </Button>
