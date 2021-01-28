@@ -66,7 +66,7 @@ describe('Contract', () => {
         .type(this.data.member.vat).should('have.value', this.data.member.vat)
 
       cy.wait(600)
-      cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
+      // cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
 
@@ -418,6 +418,7 @@ describe('Contract', () => {
     cy.get('[name="holder.email"]')
       .type(this.data.holder.badEmail).should('have.value', this.data.holder.badEmail)
       .blur()
+
       cy.contains("No has especificado un correo electrónico correcto")
 
     cy.get('[name="holder.email"]')
@@ -427,6 +428,7 @@ describe('Contract', () => {
     cy.get('[name="holder.email2"]')
       .type(this.data.holder.badEmail).should('have.value', this.data.holder.badEmail)
       .blur()
+
       cy.contains('No has repetido el correo electrónico correctamente')
 
     cy.get('[name="holder.email2"]')
@@ -464,16 +466,19 @@ describe('Contract', () => {
   })
 
   describe('Juridic Person', function () {
+
     beforeEach(function () {
       cy.get('#memberNumber')
         .clear()
-        .type(this.data.juridic_member.number)
-        .should('have.value', this.data.juridic_member.number)
+        .type(this.data.juridicMember.number)
+        .should('have.value', this.data.juridicMember.number)
 
       cy.get('#vat')
         .clear()
-        .type(this.data.juridic_member.vat)
-        .should('have.value', this.data.juridic_member.vat)
+        .type(this.data.juridicMember.vat)
+        .should('have.value', this.data.juridicMember.vat)
+
+      cy.wait(800)
 
       cy.get('[data-cy=next]').click()
 
@@ -526,24 +531,29 @@ describe('Contract', () => {
         .type(this.data.power).should('have.value', this.data.power)
 
       cy.get('[data-cy=next]').click()
-
     })
 
     afterEach(function () {
+
       cy.get('[name="holder.name"]')
-      .type(this.data.juridic_holder.name).should('have.value', this.data.juridic_holder.name)
+        .type(this.data.juridicHolder.name)
+        .should('have.value', this.data.juridicHolder.name)
 
       cy.get('[name="holder.proxyname"]')
-      .type(this.data.juridic_holder.proxyname).should('have.value', this.data.juridic_holder.proxyname)
+        .type(this.data.juridicHolder.proxyname)
+        .should('have.value', this.data.juridicHolder.proxyname)
 
       cy.get('[name="holder.proxynif"]')
-      .type(this.data.juridic_holder.proxynif).should('have.value', this.data.juridic_holder.proxynif)
+        .type(this.data.juridicHolder.proxynif)
+        .should('have.value', this.data.juridicHolder.proxynif)
 
       cy.get('[name="holder.address"]')
-      .type(this.data.holder.address).should('have.value', this.data.holder.address)
+        .type(this.data.holder.address)
+        .should('have.value', this.data.holder.address)
 
       cy.get('[name="holder.postal_code"]')
-      .type(this.data.holder.postalCode).should('have.value', this.data.holder.postalCode)
+        .type(this.data.holder.postalCode)
+        .should('have.value', this.data.holder.postalCode)
 
       cy.get('#holder_state').click()
       cy.get(`[data-value="${this.data.holder.stateCode}"]`).click()
@@ -574,6 +584,7 @@ describe('Contract', () => {
 
       cy.get(`[data-value="${this.data.holder.voluntaryCent}"]`).click()
       cy.get('[data-cy=next]').click()
+
       cy.get('[name="payment.iban"]')
         .clear()
         .type(this.data.holder.iban).should('have.value', this.data.holder.iban)
@@ -586,10 +597,13 @@ describe('Contract', () => {
     })
 
     it('Same juridic person', function () {
+
       cy.get('[name="holder.vat"]')
-        .type(this.data.juridic_member.vat).should('have.value', this.data.juridic_member.vat)
+        .type(this.data.juridicMember.vat)
+        .should('have.value', this.data.juridicMember.vat)
+
       cy.wait(800)
-      cy.get(`[data-value="${this.data.juridic_holder.previousHolder}"]`).click()
+      cy.get(`[data-value="${this.data.juridicHolder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
 
@@ -597,9 +611,9 @@ describe('Contract', () => {
 
     it('Different juridic person', function () {
       cy.get('[name="holder.vat"]')
-        .type(this.data.juridic_holder.vat).should('have.value', this.data.juridic_holder.vat)
+        .type(this.data.juridicHolder.vat).should('have.value', this.data.juridicHolder.vat)
       cy.wait(800)
-      cy.get(`[data-value="${this.data.juridic_holder.previousHolder}"]`).click()
+      cy.get(`[data-value="${this.data.juridicHolder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
 
