@@ -215,13 +215,14 @@ export const normalizeContract = (contract) => {
 
   if (!contract?.contract?.has_service) {
     finalContract.proces = 'A3'
-  }
-  else if(contract?.holder?.previous_holder) {
+  } else if (contract?.holder?.previous_holder) {
     finalContract.proces = 'C1'
-  }
-  else {
+  } else {
     finalContract.proces = 'C2'
   }
+
+  const attachmentsAttr = contract?.contract?.has_service ? 'fitxer' : 'documentacio_alta'
+  finalContract[attachmentsAttr] = contract?.supply_point?.attachments
 
   finalContract.referencia = ''
   finalContract.representant_dni = holder?.proxynif
