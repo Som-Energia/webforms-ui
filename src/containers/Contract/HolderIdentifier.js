@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const HolderIdentifier = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue, setFieldTouched } = props
+  const { values, handleBlur, errors, touched, setFieldValue, setFieldTouched } = props
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
     setFieldValue('holder.vat', vat)

@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useTranslation } from 'react-i18next'
 
 import Paper from '@material-ui/core/Paper'
 import Switch from '@material-ui/core/Switch'
@@ -23,7 +22,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const OptionSwitch = (props) => {
-  const { t } = useTranslation()
   const classes = useStyles()
 
   const { title = '', description = '' } = props

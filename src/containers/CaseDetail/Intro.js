@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -40,7 +40,6 @@ const useStyles = makeStyles(theme => ({
 export default function ModifyIntro ({ nextStep, prevStep, handleStepChanges }) {
   const { t } = useTranslation()
   const classes = useStyles()
-  const [isSubmitting, setSubmitting] = useState(false)
 
   const onNextStep = event => {
     event.preventDefault()
@@ -78,7 +77,6 @@ export default function ModifyIntro ({ nextStep, prevStep, handleStepChanges }) 
                 color="primary"
                 endIcon={<ArrowForwardIosIcon />}
                 onClick={event => onNextStep(event)}
-                disabled={isSubmitting}
               >
                 {t('SEGUENT_PAS')}
               </Button>
