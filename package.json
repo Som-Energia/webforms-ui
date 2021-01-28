@@ -1,6 +1,6 @@
 {
   "name": "webforms-ui",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": false,
   "__homepage": "/wp-content/plugins/react-wordpress/webforms/build",
   "dependencies": {
@@ -25,9 +25,9 @@
     "yup": "^0.28.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:rename": "react-scripts build && yarn run build-rename",
+    "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
+    "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
+    "build:rename": "yarn run build && yarn run build-rename",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-rename": "yarn run build-rename-js && yarn run build-rename-css",
