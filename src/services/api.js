@@ -236,9 +236,11 @@ export const getPrices = async (tariff, vat, cnae, city_id) => {
 }
 
 export const contract = async (data) => {
-  var formData = new FormData()
-  for (var key in data) {
-    formData.append(key, data[key])
+  const formData = new FormData()
+  for (const key in data) {
+    Array.isArray(data[key])
+      ? data[key].forEach(value => formData.append(key + '[]', value))
+      : formData.append(key, data[key])
   }
 
   return axios({
