@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Uploader = (props) => {
-  const { name, callbackFn, fieldError, values } = props
+  const { name, callbackFn, fieldError, values, maxFiles } = props
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -98,6 +98,7 @@ const Uploader = (props) => {
         name={name}
         variant="outlined"
         onChange={handleChange}
+        disabled={ maxFiles <= uploads.length }
         fullWidth
         InputProps={{
           endAdornment:
@@ -140,12 +141,14 @@ const Uploader = (props) => {
 
 Uploader.propTypes = {
   name: PropTypes.string,
-  values: PropTypes.array
+  values: PropTypes.array,
+  maxFiles: PropTypes.number
 }
 
 Uploader.defaultProps = {
   name: 'uploads',
-  values: []
+  values: [],
+  maxFiles: 1
 }
 
 export default React.memo(Uploader)
