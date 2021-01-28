@@ -28,7 +28,7 @@ import Review from './Member/Review'
 import Failure from './Failure'
 import Success from './Success'
 
-import { member, memberPayment } from '../services/api'
+import { member } from '../services/api'
 import { normalizeMember } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,6 @@ const Member = (props) => {
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result, setResult] = useState({})
   const [data, setData] = useState()
 
   const handlers = {
@@ -211,9 +210,9 @@ const Member = (props) => {
 
   const nextStep = props => {
     let next = activeStep + 1
-    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat) {
+    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
       next++
-      props.values.privacy_policy_accepted = true
+      props.setFieldValue('privacy_policy_accepted', true)
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
@@ -227,9 +226,9 @@ const Member = (props) => {
 
   const prevStep = props => {
     let prev = activeStep - 1
-    if (activeStep === 6 && props.values.holder.vat === props.values.member.vat) {
+    if (activeStep === 6 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
       prev--
-      props.values.privacy_policy_accepted = false
+      props.setFieldValue('privacy_policy_accepted', false)
     }
     setActiveStep(Math.max(0, prev))
     if (completed) {
