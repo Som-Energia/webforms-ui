@@ -13,7 +13,8 @@ if (root) {
     (name, index) => { props[name] = root.dataset[name] }
   )
 
-  console.log(`version: ${process.env.REACT_APP_VERSION}`)
+  props.version = process.env.REACT_APP_VERSION
+  console.log(`webforms-ui version: ${process.env.REACT_APP_VERSION}`)
 
   ReactDOM.render(<App {...props} />, document.getElementById('root'))
 }
