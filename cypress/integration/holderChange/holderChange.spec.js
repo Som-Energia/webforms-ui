@@ -6,7 +6,6 @@ describe('Holder Change', () => {
     cy.fixture('holderChange.json').as('data')
   })
 
-  /*
   describe('Enter VAT', function () {
     it('Enter invalid VAT', function () {
       cy.get('[name="holder.vat"]')
@@ -21,7 +20,7 @@ describe('Holder Change', () => {
       cy.get('[name="holder.vat"]')
         .type(this.data.vat).should('have.value', this.data.vat)
 
-        cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
     })
   })
 
@@ -49,12 +48,14 @@ describe('Holder Change', () => {
 
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
 
+      cy.get('[name="supply_point_accepted"]').click()
+      cy.get('[data-cy=accept]').click()
+
       cy.get('[name="supply_point.verified"]').click()
 
       cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
     })
   })
-  */
 
   describe('Enter personal data', function () {
     beforeEach(function () {
@@ -66,10 +67,10 @@ describe('Holder Change', () => {
       cy.get('[name="supply_point.cups"]')
         .type(this.data.cups).should('have.value', this.data.cups)
 
-      cy.get('[name="supply_point.verified"]').click()
-
       cy.get('[name="supply_point_accepted"]').click()
       cy.get('[data-cy=accept]').click()
+
+      cy.get('[name="supply_point.verified"]').click()
 
       cy.get('[data-cy=next]').click()
     })
