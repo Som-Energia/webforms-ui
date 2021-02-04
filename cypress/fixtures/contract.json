@@ -23,7 +23,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES4023386283350973BR0F",
+    "cups": "ES0318363477145938GE",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -35,7 +35,7 @@
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
     "invalidCups": "ES9803463008824117ZQ",
-    "validCups": "ES0031406156230007ZJ0F"
+    "validCups": "ES0318363477145938GE"
   },
   "fare20A": "2.0A",
   "fare21": "2.1DHA",
@@ -45,16 +45,16 @@
   "power3": 10,
   "phase": "mono",
   "fare": "nodh",
-  "juridic_member": {
-    "number": "",
-    "vat": ""
+  "juridicMember": {
+    "number": "61444",
+    "vat": "B07121528"
   },
-  "juridic_holder": {
-    "vat": "",
-    "proxynif": "",
+  "juridicHolder": {
+    "vat": "B07121528",
+    "proxynif": "40323835M",
     "previousHolder": true,
     "proxyname": "David Palomo",
-    "name": "Nom Empresa"
+    "name": "Testing, SL"
   }
 }
 
