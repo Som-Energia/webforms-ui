@@ -268,6 +268,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   fieldError={errors.attachments && touched.attachments && errors.attachments}
                   callbackFn={attachments => setFieldValue('attachments', attachments)}
                   values={values.attachments}
+                  maxFiles={5}
                 />
               </Box>
             </>
@@ -377,6 +378,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   fieldError={errors.power_attachments && touched.power_attachments && errors.power_attachments}
                   callbackFn={ values => { setFieldValue('power_attachments', values) } }
                   values={values.power_attachments}
+                  maxFiles={5}
                 />
               </Box>
             </Box>
