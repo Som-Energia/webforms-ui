@@ -287,3 +287,25 @@ export const specialCaseType = (specialCases) => {
 export const calculateTariff = ({ moreThan15Kw }) => {
   return (moreThan15Kw) ? '3.0TD' : '2.0TD'
 }
+
+export const testPowerForPeriods = (rates, values, limit = 'min_power', createError, t) => {
+  const rate = values?.rate || values?.tariff
+  let valids = 0
+  if (rates[rate] === undefined) return true
+  for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
+    const attr = (i === 1) ? 'power' : `power${i}`
+    const inLimit = limit.match('min') ? values[attr] >= rates[rate][limit]?.power : values[attr] <= rates[rate][limit]?.power
+    inLimit && valids++
+    values[attr] === undefined && valids++
+  }
+
+  if (valids >= rates[rate][limit]?.num_periods_apply) {
+    return true
+  }
+
+  const lessThan = rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply ? 'SOME_PERIOD_MORE_THAN' : 'POWER_NO_LESS_THAN'
+
+  return createError({
+    message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', { value: rates[rate][limit]?.power })
+  })
+}

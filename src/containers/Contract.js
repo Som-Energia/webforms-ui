@@ -36,7 +36,7 @@ import Success from './Success'
 import Failure from './Failure'
 
 import { getRates, contract } from '../services/api'
-import { CNAE_HOUSING, normalizeContract } from '../services/utils'
+import { CNAE_HOUSING, normalizeContract, testPowerForPeriods } from '../services/utils'
 const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
@@ -88,28 +88,6 @@ const Contract = (props) => {
     SHOW_INSPECTOR: () => {
       showInspector ? setShowInspector(false) : setShowInspector(true)
     }
-  }
-
-  const testPowerForPeriods = (rates, values, limit = 'min_power', createError) => {
-    const rate = values?.rate
-    let valids = 0
-    if (rates[rate] === undefined) return true
-    for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
-      const attr = (i === 1) ? 'power' : `power${i}`
-      const inLimit = limit.match('min') ? values[attr] >= rates[rate][limit]?.power : values[attr] <= rates[rate][limit]?.power
-      inLimit && valids++
-      values[attr] === undefined && valids++
-    }
-
-    if (valids >= rates[rate][limit]?.num_periods_apply) {
-      return true
-    }
-
-    const lessThan = rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply ? 'SOME_PERIOD_MORE_THAN' : 'POWER_NO_LESS_THAN'
-
-    return createError({
-      message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', { value: rates[rate][limit]?.power })
-    })
   }
 
   const validationSchemas = [
@@ -202,17 +180,17 @@ const Contract = (props) => {
             then: Yup.string().required(t('NO_FARE_CHOSEN'))
           }),
         power: Yup.number()
-          .required(t('NO_POWER_CHOSEN'))
+          .required(t('NO_POWER_CHOSEN_PX', { P: 'P1' }))
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
             }
           }),
         power2: Yup.number()
@@ -232,13 +210,13 @@ const Contract = (props) => {
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
             }
           }),
         power3: Yup.number()
@@ -258,13 +236,13 @@ const Contract = (props) => {
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
             }
           }),
         power4: Yup.number()
@@ -284,13 +262,13 @@ const Contract = (props) => {
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
             }
           }),
         power5: Yup.number()
@@ -310,13 +288,13 @@ const Contract = (props) => {
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
             }
           }),
         power6: Yup.number()
@@ -336,13 +314,13 @@ const Contract = (props) => {
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
             }
           })
 

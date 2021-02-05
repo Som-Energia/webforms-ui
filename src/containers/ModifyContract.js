@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { modifyContract, confirmD1Case } from '../services/api'
@@ -20,6 +21,8 @@ import IntroFromD1 from './CaseDetail/Intro'
 import Params from './ModifyContract/Params'
 import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
+
+import DisplayFormikState from '../components/DisplayFormikState'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,6 +49,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const keyMap = {
+  SHOW_INSPECTOR: 'ctrl+shift+d'
+}
+
 const steps = [
   'MODIFY_POTTAR_INTRO_TITLE',
   'MODIFY_POTTAR_SELECT_TITLE',
@@ -65,11 +72,18 @@ function ModifyContract (props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
+  const handlers = {
+    SHOW_INSPECTOR: () => {
+      setShowInspector(!showInspector)
+    }
+  }
+
   useEffect(() => {
     const language = props.match.params.language
     i18n.changeLanguage(language)
   }, [props.match.params.language, i18n])
 
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [activeD1Step, setActiveD1Step] = useState(2)
   const [data, setData] = useState({ token: props?.token })
@@ -166,51 +180,56 @@ function ModifyContract (props) {
   }
 
   return (
-    <div className={classes.root}>
-      {
-        fromD1 &&
-        <Stepper className={classes.stepper} activeStep={activeD1Step} orientation="vertical">
-          {d1Steps.map((label, index) => (
+    <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+      <div className={classes.root}>
+        {
+          fromD1 &&
+          <Stepper className={classes.stepper} activeStep={activeD1Step} orientation="vertical">
+            {d1Steps.map((label, index) => (
+              <Step key={label}>
+                <StepLabel><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+                <StepContent>
+                  <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail`, state: { d1CaseData: d1CaseData } }}/>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        }
+        <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
+          {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
+              <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
               <StepContent>
-                <Redirect to={{ pathname: `/${props.match.params.language}/d1-detail`, state: { d1CaseData: d1CaseData } }}/>
+                {getStepContent(index)}
               </StepContent>
             </Step>
           ))}
         </Stepper>
-      }
-      <Stepper className={classes.stepper} activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel error={ (index === steps.length - 1) && (data?.error !== undefined) } ><span className={classes.stepLabel}>{t(label)}</span></StepLabel>
-            <StepContent>
-              {getStepContent(index)}
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      { data?.error &&
-        <Grow in={data?.error !== undefined}>
-          <div className={classes.responseContainer}>
-            <Alert severity="error">
-              <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
-              {t(data?.error?.code)}
-            </Alert>
-          </div>
-        </Grow>
-      }
-      { data?.response &&
-        <Grow in={data?.response !== undefined}>
-          <div className={classes.responseContainer}>
-            <Alert severity="success">
-              <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
-              {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
-            </Alert>
-          </div>
-        </Grow>
-      }
-    </div>
+        { data?.error &&
+          <Grow in={data?.error !== undefined}>
+            <div className={classes.responseContainer}>
+              <Alert severity="error">
+                <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
+                {t(data?.error?.code)}
+              </Alert>
+            </div>
+          </Grow>
+        }
+        { data?.response &&
+          <Grow in={data?.response !== undefined}>
+            <div className={classes.responseContainer}>
+              <Alert severity="success">
+                <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
+                {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
+              </Alert>
+            </div>
+          </Grow>
+        }
+        { showInspector &&
+          <DisplayFormikState {...data} />
+        }
+      </div>
+    </GlobalHotKeys>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
@@ -23,8 +23,10 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 import Uploader from '../../components/Uploader'
+import PowerInputs from '../../components/PowerInputs'
 
-import { calculateTariff } from '../../services/utils'
+import { calculateTariff, testPowerForPeriods } from '../../services/utils'
+import { getRates } from '../../services/api'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,37 +67,35 @@ const useStyles = makeStyles(theme => ({
 
 const handleChangeModify = (event, setFieldValue, values) => {
   if (event.target.name === 'changePhases' && values.changePhases) {
-    setFieldValue('phases', '')
-    setFieldValue('attachments', [])
+    setFieldValue('phases', '', false)
+    setFieldValue('attachments', [], false)
   } else if (event.target.name === 'changePower' && values.changePower) {
-    setFieldValue('power', '')
-    setFieldValue('power2', '')
-    setFieldValue('power3', '')
+    setFieldValue('power', '', false)
+    setFieldValue('power2', '', false)
+    setFieldValue('power3', '', false)
+    setFieldValue('power4', '', false)
+    setFieldValue('power5', '', false)
+    setFieldValue('power6', '', false)
     setFieldValue('moreThan15Kw', false)
+    setFieldValue('tariff', '2.0TD', false)
   }
   setFieldValue(event.target.name, event.target.checked)
 }
 
-const handleChangePower = (event, setFieldValue, { moreThan15Kw }) => {
-  const regexLessThan15 = /^\d*([.,'])?\d{0,1}/g
-  const regexMoreThan15 = /^\d*([.,'])?\d{0,3}/g
-  const regex = moreThan15Kw ? regexMoreThan15 : regexLessThan15
-
-  const match = regex.exec(event.target.value)
-  let result = match[0].replace(',', '.')
-  result = result.replace('\'', '.')
-
-  result = (!moreThan15Kw && result <= 15) ? result
-    : (moreThan15Kw && result < 450) ? result : result.slice(0, -1)
-
-  setFieldValue(event.target.name, result)
+const handleChangeMoreThan15 = (values, setFieldValue) => {
+  const tariff = calculateTariff({ moreThan15Kw: !values.moreThan15Kw })
+  setFieldValue('tariff', tariff, false)
+  setFieldValue('moreThan15Kw', !values.moreThan15Kw)
 }
 
 const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
   const classes = useStyles()
   const { t } = useTranslation()
+  const rates = getRates()
 
   const ModifySchema = Yup.object().shape({
+    changePower: Yup.bool(),
+    changePhases: Yup.bool(),
     phases: Yup.string()
       .when('changePhases', {
         is: true,
@@ -120,46 +120,154 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
           return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
         }),
     power: Yup.number()
-      .when('changePower', {
-        is: true,
-        then: Yup.number()
-          .required(t('NO_POWER_CHOSEN'))
-      })
-      .test('oneMoreThan15Kw',
-        t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
+      .test('required',
+        t('NO_POWER_CHOSEN_PX', { P: 'P1' }),
         function () {
-          return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
-        }),
-    power2: Yup.number()
-      .when('changePower', {
-        is: true,
-        then: Yup.number()
-          .when('moreThan15Kw', {
-            is: true,
-            then: Yup.number()
-              .required(t('NO_POWER_CHOSEN'))
-          })
-      })
-      .test('oneMoreThan15Kw',
-        t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-        function () {
-          return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
-        }),
-    power3: Yup.number()
-      .when('changePower', {
-        is: true,
-        then: Yup.number()
-          .when('moreThan15Kw', {
-            is: true,
-            then: Yup.number()
-              .required(t('NO_POWER_CHOSEN'))
-          })
-      })
-      .test('oneMoreThan15Kw',
-        t('ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15'),
-        function () {
-          return !(this.parent.moreThan15Kw && this.parent.power <= 15 && this.parent.power2 <= 15 && this.parent.power3 <= 15)
+          return this.parent.changePower && rates[this.parent.tariff]?.num_power_periods >= 1
+            ? this.parent.power : true
         })
+      .test({
+        name: 'minPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
+        }
+      })
+      .test({
+        name: 'maxPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
+        }
+      }),
+    power2: Yup.number()
+      .test('required',
+        t('NO_POWER_CHOSEN_PX', { P: 'P2' }),
+        function () {
+          return this.parent.changePower && rates[this.parent.tariff]?.num_power_periods >= 2
+            ? this.parent.power2 : true
+        })
+      .test('increasing',
+        t('NO_POWER_INCREASING'),
+        function () {
+          return rates[this.parent.tariff]?.increasing
+            ? parseInt(this.parent.power2) >= parseInt(this.parent.power)
+            : true
+        })
+      .test({
+        name: 'minPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
+        }
+      })
+      .test({
+        name: 'maxPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
+        }
+      }),
+    power3: Yup.number()
+      .test('required',
+        t('NO_POWER_CHOSEN_PX', { P: 'P3' }),
+        function () {
+          return this.parent.changePower && rates[this.parent.tariff]?.num_power_periods >= 3
+            ? this.parent.power3 : true
+        })
+      .test('increasing',
+        t('NO_POWER_INCREASING'),
+        function () {
+          return rates[this.parent.tariff]?.increasing
+            ? parseInt(this.parent.power3) >= parseInt(this.parent.power2)
+            : true
+        })
+      .test({
+        name: 'minPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
+        }
+      })
+      .test({
+        name: 'maxPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
+        }
+      }),
+    power4: Yup.number()
+      .test('required',
+        t('NO_POWER_CHOSEN_PX', { P: 'P4' }),
+        function () {
+          return this.parent.changePower && rates[this.parent.tariff]?.num_power_periods >= 4
+            ? this.parent.power4 : true
+        })
+      .test('increasing',
+        t('NO_POWER_INCREASING'),
+        function () {
+          return rates[this.parent.tariff]?.increasing
+            ? parseInt(this.parent.power4) >= parseInt(this.parent.power3)
+            : true
+        })
+      .test({
+        name: 'minPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
+        }
+      })
+      .test({
+        name: 'maxPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
+        }
+      }),
+    power5: Yup.number()
+      .test('required',
+        t('NO_POWER_CHOSEN_PX', { P: 'P5' }),
+        function () {
+          return this.parent.changePower && rates[this.parent.tariff]?.num_power_periods >= 5
+            ? this.parent.power5 : true
+        })
+      .test('increasing',
+        t('NO_POWER_INCREASING'),
+        function () {
+          return rates[this.parent.tariff]?.increasing
+            ? parseInt(this.parent.power5) >= parseInt(this.parent.power4)
+            : true
+        })
+      .test({
+        name: 'minPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
+        }
+      })
+      .test({
+        name: 'maxPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
+        }
+      }),
+    power6: Yup.number()
+      .test('required',
+        t('NO_POWER_CHOSEN_PX', { P: 'P6' }),
+        function () {
+          return this.parent.changePower && rates[this.parent.tariff]?.num_power_periods >= 6
+            ? this.parent.power6 : true
+        })
+      .test('increasing',
+        t('NO_POWER_INCREASING'),
+        function () {
+          return rates[this.parent.tariff]?.increasing
+            ? parseInt(this.parent.power6) >= parseInt(this.parent.power5)
+            : true
+        })
+      .test({
+        name: 'minPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'min_power', this.createError, t)
+        }
+      })
+      .test({
+        name: 'maxPowerValue',
+        test: function () {
+          return testPowerForPeriods(rates, this.parent, 'max_power', this.createError, t)
+        }
+      })
   })
 
   return (
@@ -175,9 +283,12 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               power: '',
               power2: '',
               power3: '',
+              power4: '',
+              power5: '',
+              power6: '',
               power_attachments: [],
               moreThan15Kw: false,
-              tariff: ''
+              tariff: '2.0TD'
             },
             ...params
           }
@@ -191,226 +302,173 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
           setSubmitting(false)
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          setFieldValue,
-          isSubmitting
-        }) => (
-          <form onSubmit={handleSubmit} noValidate>
-            <Box mx={1} mt={1} mb={1}>
-              <FormControlLabel
-                className={classes.switchLabel}
-                label={
-                  <Typography variant="h6" className={classes.paramTitle}>
-                    {t('MODIFY_ANSWER_INSTAL_TYPE')}
+        {(props) => {
+          const {
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setFieldValue,
+            isSubmitting
+          } = props
+
+          return (
+            <form onSubmit={handleSubmit} noValidate>
+              <Box mx={1} mt={1} mb={1}>
+                <FormControlLabel
+                  className={classes.switchLabel}
+                  label={
+                    <Typography variant="h6" className={classes.paramTitle}>
+                      {t('MODIFY_ANSWER_INSTAL_TYPE')}
+                    </Typography>
+                  }
+                  labelPlacement="start"
+                  control={
+                    <Switch
+                      name="changePhases"
+                      className={classes.switch}
+                      onChange={ event => handleChangeModify(event, setFieldValue, values)}
+                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                      color="primary"
+                      checked={values.changePhases}
+                    />
+                  }
+                />
+              </Box>
+              { values.changePhases &&
+              <>
+                <Box mx={1} mt={1} mb={2}>
+                  <TextField
+                    select
+                    id="phases"
+                    name="phases"
+                    label={t('TIPUS_INSTALLACIO')}
+                    variant="outlined"
+                    fullWidth
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.phases}
+                    error={(errors.phases && touched.phases)}
+                    helperText={(touched.phases && errors.phases)}
+                  >
+                    <MenuItem value="mono">
+                      {t('MONOFASICA_NORMAL')}
+                    </MenuItem>
+                    <MenuItem value="tri">
+                      {t('TRIFASICA')}
+                    </MenuItem>
+                  </TextField>
+                </Box>
+
+                <Box mt={3} mx={1} mb={1}>
+                  <Typography>
+                    {t('INSTALL_TYPE_ATTACHMENTS')}
                   </Typography>
-                }
-                labelPlacement="start"
-                control={
-                  <Switch
-                    name="changePhases"
-                    className={classes.switch}
-                    onChange={ event => handleChangeModify(event, setFieldValue, values)}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                    color="primary"
-                    checked={values.changePhases}
+                </Box>
+                <Box mx={1} mt={1} mb={2}>
+                  <Uploader
+                    fieldError={errors.attachments && touched.attachments && errors.attachments}
+                    callbackFn={attachments => setFieldValue('attachments', attachments)}
+                    values={values.attachments}
                   />
-                }
-              />
-            </Box>
-            {values.changePhases &&
-            <>
-              <Box mx={1} mt={1} mb={2}>
-                <TextField
-                  select
-                  id="phases"
-                  name="phases"
-                  label={t('TIPUS_INSTALLACIO')}
-                  variant="outlined"
-                  fullWidth
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.phases}
-                  error={(errors.phases && touched.phases)}
-                  helperText={(touched.phases && errors.phases)}
-                >
-                  <MenuItem value="mono">
-                    {t('MONOFASICA_NORMAL')}
-                  </MenuItem>
-                  <MenuItem value="tri">
-                    {t('TRIFASICA')}
-                  </MenuItem>
-                </TextField>
-              </Box>
-
-              <Box mt={3} mx={1} mb={1}>
-                <Typography>
-                  {t('INSTALL_TYPE_ATTACHMENTS')}
-                </Typography>
-              </Box>
-              <Box mx={1} mt={1} mb={2}>
-                <Uploader
-                  fieldError={errors.attachments && touched.attachments && errors.attachments}
-                  callbackFn={attachments => setFieldValue('attachments', attachments)}
-                  values={values.attachments}
-                />
-              </Box>
-            </>
-            }
-            <Box mx={1} mb={3}>
-              <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>
-            </Box>
-
-            <Box mx={1} mb={2}>
-              <Divider />
-            </Box>
-
-            <Box mx={1} mb={0}>
-              <FormControlLabel
-                className={classes.switchLabel}
-                label={
-                  <Typography variant="h6" className={classes.paramTitle}>
-                    {t('MODIFY_ANSWER_POWER')}
-                  </Typography>
-                }
-                labelPlacement="start"
-                control={
-                  <Switch
-                    name="changePower"
-                    className={classes.switch}
-                    onChange={event => handleChangeModify(event, setFieldValue, values)}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                    color="primary"
-                    checked={values.changePower}
-                  />
-                }
-              />
-            </Box>
-            {values.changePower &&
-            <Box mx={1} mb={0}>
-              <FormControlLabel
-                control={<Checkbox checked={values.moreThan15Kw} onChange={handleChange} name="moreThan15Kw" color="primary" />}
-                label={t('MES_GRAN_DE_15KW')}
-              />
-              <TextField
-                required
-                id="power"
-                name="power"
-                label={t('POTENCIA_A_CONTRACTAR')}
-                InputProps={{
-                  endAdornment: <InputAdornment position="end">kW</InputAdornment>,
-                  startAdornment: (values.moreThan15Kw ? (<InputAdornment position="start">P1</InputAdornment>) : null)
-                }}
-                onChange={event => handleChangePower(event, setFieldValue, values)}
-                onBlur={handleBlur}
-                value={values.power}
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                error={(errors.power && touched.power)}
-                helperText={(touched.power && errors.power)}
-              />
-              { values.moreThan15Kw &&
-                <TextField
-                  required
-                  id="power2"
-                  name="power2"
-                  label={t('POTENCIA_A_CONTRACTAR')}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">P2</InputAdornment>,
-                    endAdornment: <InputAdornment position="end">kW</InputAdornment>
-                  }}
-                  onChange={event => handleChangePower(event, setFieldValue, values)}
-                  onBlur={handleBlur}
-                  value={values.power2}
-                  disabled={!values.moreThan15Kw}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  error={(errors.power2 && touched.power2)}
-                  helperText={(touched.power2 && errors.power2)}
-                />
+                </Box>
+              </>
               }
-              { values.moreThan15Kw &&
-                <TextField
-                  required
-                  id="power3"
-                  name="power3"
-                  label={t('POTENCIA_A_CONTRACTAR')}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">P3</InputAdornment>,
-                    endAdornment: <InputAdornment position="end">kW</InputAdornment>
-                  }}
-                  onChange={event => handleChangePower(event, setFieldValue, values)}
-                  onBlur={handleBlur}
-                  value={values.power3}
-                  disabled={!values.moreThan15Kw}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  error={(errors.power3 && touched.power3)}
-                  helperText={(touched.power3 && errors.power3)}
-                />
-              }
-              <Box mt={3} mb={1}>
-                <Typography>
-                  {t('POWER_ATTACHMENTS')}
-                </Typography>
-              </Box>
-              <Box mt={1} mb={2}>
-                <Uploader
-                  fieldError={errors.power_attachments && touched.power_attachments && errors.power_attachments}
-                  callbackFn={ values => { setFieldValue('power_attachments', values) } }
-                  values={values.power_attachments}
-                />
-              </Box>
-            </Box>
-            }
-            <Box mx={1} mt={1} mb={3}>
-              <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
-            </Box>
-
-            { values.changePower && values.power &&
               <Box mx={1} mb={3}>
-                <Grid container spacing={4}>
-                  <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
-                  <Grid item>&nbsp;<Badge color="primary" badgeContent={calculateTariff(values)} /></Grid>
-                </Grid>
+                <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>
               </Box>
-            }
 
-            <div className={classes.actionsContainer}>
-              {
-                prevStep &&
-                <Button
-                  onClick={prevStep}
-                  className={classes.button}
-                  startIcon={<ArrowBackIosIcon />}
-                >
-                  {t('PAS_ANTERIOR')}
-                </Button>
+              <Box mx={1} mb={2}>
+                <Divider />
+              </Box>
+
+              <Box mx={1} mb={0}>
+                <FormControlLabel
+                  className={classes.switchLabel}
+                  label={
+                    <Typography variant="h6" className={classes.paramTitle}>
+                      {t('MODIFY_ANSWER_POWER')}
+                    </Typography>
+                  }
+                  labelPlacement="start"
+                  control={
+                    <Switch
+                      name="changePower"
+                      className={classes.switch}
+                      onChange={event => handleChangeModify(event, setFieldValue, values)}
+                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                      color="primary"
+                      checked={values.changePower}
+                    />
+                  }
+                />
+              </Box>
+              { values.changePower &&
+              <Box mx={1} mb={0}>
+                <FormControlLabel
+                  control={<Checkbox checked={values.moreThan15Kw} onChange={(event) => handleChangeMoreThan15(values, setFieldValue)} name="moreThan15Kw" color="primary" />}
+                  label={t('MES_GRAN_DE_15KW')}
+                />
+
+                <PowerInputs numInputs={rates[values?.tariff]?.num_power_periods} {...props} />
+
+                <Box mt={3} mb={1}>
+                  <Typography>
+                    {t('POWER_ATTACHMENTS')}
+                  </Typography>
+                </Box>
+                <Box mt={1} mb={2}>
+                  <Uploader
+                    fieldError={errors.power_attachments && touched.power_attachments && errors.power_attachments}
+                    callbackFn={ values => { setFieldValue('power_attachments', values) } }
+                    values={values.power_attachments}
+                  />
+                </Box>
+              </Box>
               }
-              {
-                nextStep &&
-                <Button
-                  type="submit"
-                  className={classes.button}
-                  variant="contained"
-                  color="primary"
-                  endIcon={<ArrowForwardIosIcon />}
-                  disabled={(!values.changePhases && !values.changePower) || isSubmitting}
-                >
-                  {t('SEGUENT_PAS')}
-                </Button>
+              <Box mx={1} mt={1} mb={3}>
+                <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
+              </Box>
+
+              { values.changePower && values.power &&
+                <Box mx={1} mb={3}>
+                  <Grid container spacing={4}>
+                    <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
+                    <Grid item>&nbsp;<Badge color="primary" badgeContent={calculateTariff(values)} /></Grid>
+                  </Grid>
+                </Box>
               }
-            </div>
-          </form>
-        )}
+
+              <div className={classes.actionsContainer}>
+                {
+                  prevStep &&
+                  <Button
+                    onClick={prevStep}
+                    className={classes.button}
+                    startIcon={<ArrowBackIosIcon />}
+                  >
+                    {t('PAS_ANTERIOR')}
+                  </Button>
+                }
+                {
+                  nextStep &&
+                  <Button
+                    type="submit"
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    endIcon={<ArrowForwardIosIcon />}
+                    disabled={(!values.changePhases && !values.changePower) || isSubmitting}
+                  >
+                    {t('SEGUENT_PAS')}
+                  </Button>
+                }
+              </div>
+            </form>
+          )
+        }}
       </Formik>
     </Paper>
   )

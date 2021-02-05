@@ -293,7 +293,7 @@
   "SELECCIONAR": "Seleccionar",
   "NO_FARE_CHOSEN": "No has especificado la tarifa",
   "NO_POWER_CHOSEN": "No has especificado la potencia",
-  "NO_POWER_CHOSEN_PX": "No has especificat la potencia para el período {{P}}",
+  "NO_POWER_CHOSEN_PX": "No has especificado la potencia para el periodo {{P}}",
   "POWER_NO_LESS_THAN": "La potencia debe ser superior a {{value}}kW",
   "POWER_NO_MORE_THAN": "La potencia debe ser inferior a {{value}}kW",
   "SOME_PERIOD_MORE_THAN": "Alguno de los periodos debe ser superior a {{value}}kW",

@@ -46,6 +46,10 @@ const useStyles = makeStyles(theme => ({
     left: '50%',
     marginTop: -12,
     marginLeft: -12
+  },
+  powerPeriod: {
+    marginRight: theme.spacing(1),
+    color: 'gray'
   }
 }))
 
@@ -97,66 +101,70 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
           </Typography>
         </Box>
       }
+
       { params.modify?.power &&
         <Box mt={2} mx={1}>
+          <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
+            {t('POWER')}
+          </Typography>
+
           <Grid container spacing={4}>
             <Grid item>
-              <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
-                {t('POWER')}{(params?.modify?.moreThan15Kw ? ' P1' : null)}
-              </Typography>
               <Typography data-cy="power" variant="body1" gutterBottom>
-                {params.modify?.power} kW
+                <span className={classes.powerPeriod}>P1</span> {params.modify?.power}kW
               </Typography>
             </Grid>
-            { params?.modify?.moreThan15Kw &&
             <Grid item>
-              <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
-                {t('POWER')} P2
-              </Typography>
               <Typography data-cy="power2" variant="body1" gutterBottom>
-                {params.modify?.power2} kW
+                <span className={classes.powerPeriod}>P2</span> {params.modify?.power2}kW
               </Typography>
             </Grid>
-            }
+
             { params?.modify?.moreThan15Kw &&
+            <>
+              <Grid item>
+                <Typography data-cy="power3" variant="body1" gutterBottom>
+                  <span className={classes.powerPeriod}>P3</span> {params.modify?.power3}kW
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography data-cy="power4" variant="body1" gutterBottom>
+                  <span className={classes.powerPeriod}>P4</span> {params.modify?.power4}kW
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography data-cy="power5" variant="body1" gutterBottom>
+                  <span className={classes.powerPeriod}>P5</span> {params.modify?.power5}kW
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography data-cy="power6" variant="body1" gutterBottom>
+                  <span className={classes.powerPeriod}>P6</span> {params.modify?.power6}kW
+                </Typography>
+              </Grid>
+            </>
+            }
+          </Grid>
+        </Box>
+      }
+
+      <Box mt={2} mx={1}>
+        <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
+          {t('FARE')}
+        </Typography>
+        <Grid container spacing={4}>
+          { params.modify?.tariff &&
             <Grid item>
-              <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
-                {t('POWER')} P3
-              </Typography>
-              <Typography data-cy="power3" variant="body1" gutterBottom>
-                {params.modify?.power3} kW
+              <Typography data-cy="tariff" variant="body1" gutterBottom>
+                {params.modify?.tariff}
               </Typography>
             </Grid>
-            }
-          </Grid>
-        </Box>
-      }
-      {
-        (params.modify?.fare || params.modify?.moreThan15Kw) &&
-        <Box mt={2} mx={1}>
-          <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
-            {t('FARE')}
-          </Typography>
-          <Grid container spacing={2}>
-            { params.modify?.tariff &&
-              <Grid item>
-                <Typography data-cy="tariff" variant="body1" gutterBottom>
-                  {params.modify?.tariff}
-                </Typography>
-              </Grid>
-            }
-            { params.modify?.fare &&
-              <Grid item>
-                <Typography data-cy={params.modify?.fare} variant="body1" gutterBottom>
-                  {(params.modify?.fare === 'dh') ? t('AMB_DISCRIMINACIO_HORARIA') : t('SENSE_DISCRIMINACIO_HORARIA')}
-                </Typography>
-              </Grid>
-            }
-          </Grid>
-        </Box>
-      }
+          }
+        </Grid>
+      </Box>
+
       <Box mt={2} mb={3} mx={1}>
-        <Typography className={classes.resumeLabel} variant="subtitle2">
+        <Typography className={classes.resumeLabel} variant="subtitle2" gutterBottom>
           {t('CONTACT_PHONE')}
         </Typography>
         <Typography data-cy="contact" variant="body1" gutterBottom>
@@ -164,7 +172,7 @@ export default function ModifyResume ({ prevStep, nextStep, handleStepChanges, p
         </Typography>
       </Box>
 
-      <Box mt={1} mx={1} mb={2}>
+      <Box mt={1} mx={1} mb={1}>
         <Typography gutterBottom>
           {t('REVIEW_DATA_INFO')}
         </Typography>
