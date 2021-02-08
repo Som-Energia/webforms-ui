@@ -411,7 +411,11 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   control={<Checkbox checked={values.moreThan15Kw} onChange={(event) => handleChangeMoreThan15(values, setFieldValue)} name="moreThan15Kw" color="primary" />}
                   label={t('MES_GRAN_DE_15KW')}
                 />
-
+                <Box mt={3} mb={1}>
+                  <Typography variant="body1">
+                    {t('NEW_TOLLS_AND_TARIFF_INFO')}
+                  </Typography>
+                </Box>
                 <PowerInputs numInputs={rates[values?.tariff]?.num_power_periods} {...props} />
 
                 <Box mt={3} mb={1}>

@@ -22,13 +22,14 @@ const normalizeCommonModifyData = (params) => {
   const { modify, contact } = params
 
   const data = {
-    tarifa: modify?.tariff,
-    tensio: modify?.phases,
+    phases: modify?.phases,
     attachments: [...modify?.attachments, ...modify?.power_attachments],
-    potencia: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    potencia_p2: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    potencia_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    discriminacio: modify?.fare,
+    power_p1: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
+    power_p2: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
+    power_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
+    power_p4: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power4 * THOUSANDS_CONVERSION_FACTOR) : undefined,
+    power_p5: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power5 * THOUSANDS_CONVERSION_FACTOR) : undefined,
+    power_p6: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power6 * THOUSANDS_CONVERSION_FACTOR) : undefined,
     contact_name: contact?.contactName,
     contact_surname: contact?.contactSurname,
     contact_phone: contact?.phone
