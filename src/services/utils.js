@@ -22,7 +22,6 @@ const normalizeCommonModifyData = (params) => {
   const { modify, contact } = params
 
   const data = {
-    tariff: modify?.tariff,
     phases: modify?.phases,
     attachments: [...modify?.attachments, ...modify?.power_attachments],
     power_p1: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
