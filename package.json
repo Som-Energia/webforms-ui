@@ -1,6 +1,6 @@
 {
   "name": "webforms-ui",
-  "version": "0.1.0",
+  "version": "1.2.0",
   "private": false,
   "__homepage": "/wp-content/plugins/react-wordpress/webforms/build",
   "dependencies": {
