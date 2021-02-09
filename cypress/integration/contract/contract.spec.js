@@ -1,4 +1,9 @@
 describe('Contract', () => {
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    return false
+  })
+
   beforeEach(() => {
     cy.visit('/contract')
     cy.fixture('contract.json').as('data')

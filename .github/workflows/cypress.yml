@@ -12,8 +12,8 @@ jobs:
           browser: chrome
           record: true
           start: yarn start
-          wait-on: 'http://10.1.0.4'
-          config: baseUrl=http://10.1.0.4
+          wait-on: 'http://localhost:3000'
+          config: baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Pass GitHub token to allow accurately detecting a build vs a re-run build
