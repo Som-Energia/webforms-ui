@@ -9,11 +9,13 @@ jobs:
       - uses: actions/checkout@v1
       - uses: cypress-io/github-action@v2
         with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+        with:
           browser: chrome
           record: true
-          config: baseUrl=https://testapi-nonpersistence.somenergia.coop:4433/
+          config: baseUrl=http://localhost:3000
         env:
-          CYPRESS_BASE_URL: ${{ secrets.CYPRESS_BASE_URL }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
