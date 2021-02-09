@@ -4,6 +4,7 @@ jobs:
   cypress-run:
     runs-on: ubuntu-20.04
     name: cypress webforms-ui on chrome
+    environment: cypress
     steps:
       - uses: actions/checkout@v1
       - uses: cypress-io/github-action@v2
