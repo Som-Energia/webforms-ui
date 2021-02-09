@@ -2,7 +2,7 @@
 
 describe('Modify Contract', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/modify-contract')
+    cy.visit('/modify-contract')
     cy.fixture('modifyContract.json').as('data')
   })
 
