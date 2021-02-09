@@ -11,11 +11,11 @@ jobs:
         with:
           browser: chrome
           record: true
-          start: yarn start
+          start: REACT_APP_API_BASE_URL=${{secrets.API_BASE_URL}} yarn start
           wait-on: 'http://localhost:3000'
           config: baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          # REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
           # Pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
