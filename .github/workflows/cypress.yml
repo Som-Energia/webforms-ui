@@ -1,5 +1,7 @@
 name: cypress webforms-ui
 on: [push]
+env:
+  REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
@@ -11,11 +13,10 @@ jobs:
         with:
           browser: chrome
           record: true
-          start: REACT_APP_API_BASE_URL=${{secrets.API_BASE_URL}} yarn start
+          start: yarn start
           wait-on: 'http://localhost:3000'
           config: baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
           # Pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
