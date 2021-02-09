@@ -1,0 +1,14 @@
+name: webforms-ui on chrome
+on:
+  push:
+    branches:
+      - master
+jobs:
+  cypress-run:
+    runs-on: ubuntu-20.04
+    name: webforms-ui on chrome
+    steps:
+      - uses: actions/checkout@v1
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
