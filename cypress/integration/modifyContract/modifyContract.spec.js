@@ -31,7 +31,7 @@ describe('Modify Contract', () => {
     cy.get('[data-cy=power]').should('contain', this.data.power)
     cy.get('[data-cy=power2]').should('contain', this.data.power2)
 
-    cy.get(`[data-cy=tariff]`).should('contain', this.data.tariff20)
+    cy.get('[data-cy=tariff]').should('contain', this.data.tariff20)
 
     cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
 
@@ -81,7 +81,7 @@ describe('Modify Contract', () => {
     cy.get('[data-cy=power5]').should('contain', this.data.power5)
     cy.get('[data-cy=power6]').should('contain', this.data.power6)
 
-    cy.get(`[data-cy=tariff]`).should('contain', this.data.tariff30)
+    cy.get('[data-cy=tariff]').should('contain', this.data.tariff30)
 
     cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
 
