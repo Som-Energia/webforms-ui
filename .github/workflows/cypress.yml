@@ -1,14 +1,17 @@
-name: webforms-ui on chrome
-on:
-  push:
-    branches:
-      - master
+name: cypress webforms-ui
+on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
-    name: webforms-ui on chrome
+    name: cypress webforms-ui on chrome
     steps:
       - uses: actions/checkout@v1
       - uses: cypress-io/github-action@v2
         with:
           browser: chrome
+          record: true
+        env:
+          CYPRESS_BASE_URL: ${{ secrets.CYPRESS_BASE_URL }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

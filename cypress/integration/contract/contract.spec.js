@@ -1,6 +1,6 @@
 describe('Contract', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/contract')
+    cy.visit('/contract')
     cy.fixture('contract.json').as('data')
   })
 
