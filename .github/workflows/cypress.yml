@@ -11,7 +11,7 @@ jobs:
         with:
           browser: chrome
           record: true
-          config: baseUrl=http://localhost:3000
+          config: baseUrl=https://testapi-nonpersistence.somenergia.coop:4433/
         env:
           CYPRESS_BASE_URL: ${{ secrets.CYPRESS_BASE_URL }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
