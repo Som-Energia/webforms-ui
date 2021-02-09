@@ -4,17 +4,19 @@ jobs:
   cypress-run:
     runs-on: ubuntu-20.04
     name: cypress webforms-ui on chrome
-    environment: cypress
     steps:
       - uses: actions/checkout@v1
+      - name: Install yarn and start
+        run: |
+          yarn
+          yarn start
       - uses: cypress-io/github-action@v2
         with:
-          start: npm start
           wait-on: 'http://localhost:3000'
           browser: chrome
           record: true
           config: baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          # Pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
