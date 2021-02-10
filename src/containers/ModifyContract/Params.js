@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
@@ -7,11 +7,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import Badge from '@material-ui/core/Badge'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import Checkbox from '@material-ui/core/Checkbox'
 import Divider from '@material-ui/core/Divider'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import Paper from '@material-ui/core/Paper'
@@ -24,6 +22,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 import Uploader from '../../components/Uploader'
 import PowerInputs from '../../components/PowerInputs'
+import Chooser from '../../components/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
 import { getRates } from '../../services/api'
@@ -407,11 +406,25 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               </Box>
               { values.changePower &&
               <Box mx={1} mb={0}>
-                <FormControlLabel
-                  control={<Checkbox checked={values.moreThan15Kw} onChange={(event) => handleChangeMoreThan15(values, setFieldValue)} name="moreThan15Kw" color="primary" />}
-                  label={t('MES_GRAN_DE_15KW')}
+                <Chooser
+                  name="moreThan15Kw"
+                  condensed
+                  question={t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')}
+                  onChange={(event) => handleChangeMoreThan15(values, setFieldValue)}
+                  value={values.moreThan15Kw}
+                  options={[
+                    {
+                      value: false,
+                      label: t('MENOR_IGUAL_A_15KW_CONTRACTACIO')
+                    },
+                    {
+                      value: true,
+                      label: t('MES_GRAN_DE_15KW_CONTRACTACIO')
+                    }
+                  ]}
                 />
-                <Box mt={3} mb={1}>
+
+                <Box mt={2} mb={2}>
                   <Typography variant="body1">
                     {t('NEW_TOLLS_AND_TARIFF_INFO')}
                   </Typography>
@@ -432,9 +445,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 </Box>
               </Box>
               }
-              <Box mx={1} mt={1} mb={3}>
-                <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
-              </Box>
 
               { values.changePower && values.power &&
                 <Box mx={1} mb={3}>
@@ -444,6 +454,10 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   </Grid>
                 </Box>
               }
+
+              <Box mx={1} mt={1} mb={3}>
+                <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') }) }}></FormHelperText>
+              </Box>
 
               <div className={classes.actionsContainer}>
                 {

@@ -25,12 +25,15 @@ const PowerInputs = (props) => {
 
   return Array.from(Array(numInputs).keys()).map(inputNum => {
     const attr = (inputNum === 0) ? 'power' : `power${inputNum + 1}`
+    const name = `${namePrefix ? (namePrefix + '.') : ''}${attr}`
+    const label = !values?.has_service ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO') : t('QUINA_POTENCIA_TENS_CONTRACTADA')
+
     return (<TextField
       required
       key={attr}
       id={attr}
-      name={`${namePrefix ? (namePrefix + '.') : ''}${attr}`}
-      label={ !values?.has_service ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO') : t('QUINA_POTENCIA_TENS_CONTRACTADA') }
+      name={name}
+      label={label}
       InputProps={{
         autoComplete: 'off',
         endAdornment: <InputAdornment position="end">kW</InputAdornment>,
@@ -38,12 +41,12 @@ const PowerInputs = (props) => {
       }}
       onChange={event => handleChangePower(event, setFieldValue, { moreThan15Kw: true })}
       onBlur={handleBlur}
-      value={values[attr]}
+      value={values?.[attr]}
+      error={(errors?.[attr] && touched?.[attr])}
+      helperText={(touched?.[attr] && errors?.[attr]) || (values.has_service && t('HELP_POPOVER_POWER'))}
       fullWidth
       variant="outlined"
       margin="normal"
-      error={(errors[attr] && touched[attr])}
-      helperText={(touched[attr] && errors[attr]) || (values.has_service && t('HELP_POPOVER_POWER'))}
     />)
   })
 }
