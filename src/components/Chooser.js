@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center'
   },
+  chooserItemCondensed: {
+    minHeight: '40px',
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
+  },
   chooserItemSelected: {
     margin: '0 0 8px 0',
     border: '1px solid #96b633',
@@ -69,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Chooser = (props) => {
   const classes = useStyles()
-  const { question, options, onChange, value, disabled } = props
+  const { question, options, onChange, value, disabled, name, condensed = false } = props
 
   const [selectedOption, setSelectedOption] = useState(value)
 
@@ -89,14 +94,14 @@ const Chooser = (props) => {
       <Typography variant="h6" className={classes.title}
         dangerouslySetInnerHTML={{ __html: question }}
       />
-      <RadioGroup className={classes.margin} defaultValue="">
+      <RadioGroup className={classes.margin} defaultValue="" name={name} data-cy={name}>
         <Grid container spacing={3}>
           { options.map((option, index) =>
             <Grid key={index} item xs={12} sm={6}>
               <label
                 data-value={option.value}
                 onClick={event => !disabled && handleClick(event, option.value)}
-                className={clsx(classes.chooserItem, selectedOption === option.value && classes.chooserItemSelected, disabled && classes.chooserItemDisabled)}
+                className={clsx(classes.chooserItem, condensed && classes.chooserItemCondensed, selectedOption === option.value && classes.chooserItemSelected, disabled && classes.chooserItemDisabled)}
               >
                 <div className={classes.chooserItemTitle}>
                   <Radio disabled={disabled} value={option.value} color="primary" checked={selectedOption === option.value} />
