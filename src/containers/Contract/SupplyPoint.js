@@ -215,7 +215,7 @@ const SupplyPoint = (props) => {
                 {t('ADJUNTAR_ULTIMA_FACTURA')}
               </Typography>
               : <Typography>
-                {t("ADJUNTAR_DOCUMENTACIO")}
+                {t('ADJUNTAR_DOCUMENTACIO')}
               </Typography>
             }
             <Box mt={1} mb={1}>
@@ -223,6 +223,7 @@ const SupplyPoint = (props) => {
                 fieldError={errors.supply_point?.attachments && touched.supply_point?.attachments && errors.supply_point?.attachments}
                 callbackFn={attachments => setFieldValue('supply_point.attachments', attachments)}
                 values={values.supply_point.attachments}
+                maxFiles={values?.contract?.has_service ? 1 : 5}
               />
             </Box>
           </Grid>

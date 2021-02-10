@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-const API_BASE_URL = window?.config?.API_BASE_URL
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL ||
+  window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
 export const modifyContract = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}form/modificacio`,
+    url: `${API_BASE_URL}/form/modificacio`,
     data: data
   })
     .then(response => {
@@ -29,7 +30,7 @@ export const uploadFile = async (name, file) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}form/upload_attachment`,
+    url: `${API_BASE_URL}/form/upload_attachment`,
     data: data,
     config: config
   })
@@ -49,7 +50,7 @@ export const checkVat = async (vat) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/vat/exists/${vat}`,
+    url: `${API_BASE_URL}/check/vat/exists/${vat}`,
     cancelToken: cancelTokenVat.token
   })
     .then(response => {
@@ -68,7 +69,7 @@ export const checkCups = async (cups) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/cups/status/${cups}`,
+    url: `${API_BASE_URL}/check/cups/status/${cups}`,
     cancelToken: cancelTokenCups.token
   })
     .then(response => {
@@ -87,7 +88,7 @@ export const checkCnae = async (cnae) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/cnae/${cnae}`,
+    url: `${API_BASE_URL}/check/cnae/${cnae}`,
     cancelToken: cancelTokenCnae.token
   })
     .then(response => {
@@ -98,7 +99,7 @@ export const checkCnae = async (cnae) => {
 export const getProvincies = async () => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}data/provincies`
+    url: `${API_BASE_URL}/data/provincies`
   })
     .then(response => {
       return response?.data
@@ -108,7 +109,7 @@ export const getProvincies = async () => {
 export const getMunicipis = async (provincia) => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}data/municipis/${provincia}`
+    url: `${API_BASE_URL}/data/municipis/${provincia}`
   })
     .then(response => {
       return response?.data
@@ -126,7 +127,7 @@ export const checkIban = async (iban) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/iban/${iban}`,
+    url: `${API_BASE_URL}/check/iban/${iban}`,
     cancelToken: cancelTokenIban.token
   })
     .then(response => {
@@ -137,7 +138,7 @@ export const checkIban = async (iban) => {
 export const holderChange = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}form/holderchange`,
+    url: `${API_BASE_URL}/form/holderchange`,
     data: data
   })
     .then(response => {
@@ -175,7 +176,7 @@ export const checkMemberVat = async (vat) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}check/vat/${vat}`,
+    url: `${API_BASE_URL}/check/vat/${vat}`,
     cancelToken: cancelTokenMemberVat.token
   })
     .then(response => {
@@ -194,7 +195,7 @@ export const checkMember = async (number, vat) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}data/soci/${number}/${vat}`,
+    url: `${API_BASE_URL}/data/soci/${number}/${vat}`,
     cancelToken: cancelTokenMember.token
   })
     .then(response => {
@@ -205,7 +206,7 @@ export const checkMember = async (number, vat) => {
 export const getPrices = async (tariff, vat, cnae, city_id) => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}data/prices?tariff=${tariff}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
+    url: `${API_BASE_URL}/data/prices?tariff=${tariff}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
   })
     .then(response => {
       return response?.data
@@ -213,9 +214,11 @@ export const getPrices = async (tariff, vat, cnae, city_id) => {
 }
 
 export const contract = async (data) => {
-  var formData = new FormData()
-  for (var key in data) {
-    formData.append(key, data[key])
+  const formData = new FormData()
+  for (const key in data) {
+    Array.isArray(data[key])
+      ? data[key].forEach(value => formData.append(key + '[]', value))
+      : formData.append(key, data[key])
   }
 
   return axios({
@@ -231,7 +234,7 @@ export const contract = async (data) => {
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}form/confirm_d1/${case_id}`,
+    url: `${API_BASE_URL}/form/confirm_d1/${case_id}`,
     headers: { Authorization: token },
     data: data
   })
@@ -248,7 +251,7 @@ export const member = async (data) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}form/soci/alta`,
+    url: `${API_BASE_URL}/form/soci/alta`,
     data: formData
   })
     .then(response => {
@@ -264,7 +267,7 @@ export const memberPayment = async (data) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}pagament/redirectiondata`,
+    url: `${API_BASE_URL}/pagament/redirectiondata`,
     data: formData
   })
     .then(response => {
@@ -275,6 +278,6 @@ export const memberPayment = async (data) => {
 export const apiStatus = async () => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}ping`
+    url: `${API_BASE_URL}/ping`
   })
 }

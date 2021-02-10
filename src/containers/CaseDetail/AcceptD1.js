@@ -105,6 +105,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
               </Box>
               <Box mx={1} mt={3} mb={1}>
                 <Uploader
+                  maxFiles={5}
                   fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
                   callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
                   values={values.d1Attachments}
