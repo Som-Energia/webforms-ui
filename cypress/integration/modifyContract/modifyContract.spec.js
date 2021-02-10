@@ -43,7 +43,8 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]').click()
+    cy.get('[name=moreThan15Kw]')
+      .get('[data-value="true"]').click()
 
     cy.get('[name=power]')
       .type(this.data.power).should('have.value', this.data.power)
@@ -93,7 +94,8 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]').click()
+    cy.get('[name=moreThan15Kw]')
+      .get('[data-value="true"]').click()
 
     cy.get('[name=power]')
       .type(this.data.power).should('have.value', this.data.power)
@@ -135,7 +137,8 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]').click()
+    cy.get('[name=moreThan15Kw]')
+      .get('[data-value="true"]').click()
 
     cy.get('[type=submit]').click()
 
