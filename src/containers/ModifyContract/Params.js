@@ -336,6 +336,19 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   }
                 />
               </Box>
+              <Box mt={3} mx={1} mb={1}>
+                <Typography>
+                  {t('INSTALL_TYPE_ATTACHMENTS')}
+                </Typography>
+              </Box>
+              <Box mx={1} mt={1} mb={2}>
+                <Uploader
+                  fieldError={errors.attachments && touched.attachments && errors.attachments}
+                  callbackFn={attachments => setFieldValue('attachments', attachments)}
+                  values={values.attachments}
+                  maxFiles={5}
+                />
+              </Box>
               { values.changePhases &&
               <>
                 <Box mx={1} mt={1} mb={2}>
@@ -441,6 +454,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     fieldError={errors.power_attachments && touched.power_attachments && errors.power_attachments}
                     callbackFn={ values => { setFieldValue('power_attachments', values) } }
                     values={values.power_attachments}
+                    maxFiles={5}
                   />
                 </Box>
               </Box>

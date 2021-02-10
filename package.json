@@ -2,7 +2,7 @@
   "name": "webforms-ui",
   "version": "1.2.0",
   "private": false,
-  "__homepage": "/wp-content/plugins/react-wordpress/webforms/build",
+  "homepage": "/wp-content/plugins/react-wordpress/webforms/build",
   "dependencies": {
     "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.9.1",
@@ -14,6 +14,7 @@
     "clsx": "^1.1.1",
     "formik": "^2.1.4",
     "i18next": "^19.8.3",
+    "preval.macro": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-ga": "^3.2.1",
@@ -25,9 +26,9 @@
     "yup": "^0.28.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:rename": "react-scripts build && yarn run build-rename",
+    "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
+    "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
+    "build:rename": "yarn run build && yarn run build-rename",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-rename": "yarn run build-rename-js && yarn run build-rename-css",
@@ -37,7 +38,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "standard"
+      "standard",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -53,8 +55,9 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^6.0.0",
-    "cypress-file-upload": "^4.1.1",
+    "cypress": "^6.4.0",
+    "cypress-file-upload": "^5.0.2",
+    "eslint-plugin-cypress": "^2.11.2",
     "renamer": "^2.0.0",
     "standard": "^14.3.3"
   }

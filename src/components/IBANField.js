@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -21,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function IBANField (props) {
-  const { t } = useTranslation()
   const classes = useStyles()
   const { name, id, label, variant, value = '', onChange, onBlur, error, helperText, autoFocus = false } = props
 

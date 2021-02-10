@@ -85,6 +85,11 @@ const App = (props) => {
     return <Failure {...props} />
   }
 
+  const loadHome = () => {
+    const Home = lazy(() => import('./containers/Home'))
+    return <Home {...props} />
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -92,7 +97,7 @@ const App = (props) => {
         <Suspense fallback ={<Loading />}>
           <Router>
             <Switch>
-              <Route exact path="/" component={ lazy(() => import('./containers/Contract')) } />
+              <Route exact path="/" render={loadHome} />
 
               <Route exact path="/modify-contract" render={loadModifyContract} />
               <Route path="/:language/contract/modification/" render={loadModifyContract} />

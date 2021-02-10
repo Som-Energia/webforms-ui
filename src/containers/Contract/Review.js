@@ -82,7 +82,7 @@ const Review = (props) => {
   const [rates] = useState(getRates())
   const [loading, setLoading] = useState(true)
 
-  const holder = values.holder.vat === values.member.vat ? values.member : values.holder
+  const holder = values.holder.vat === values.member.vat && values.holder.isphisical ? values.member : values.holder
 
   useEffect(() => {
     setLoading(true)
