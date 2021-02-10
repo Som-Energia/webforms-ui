@@ -1,11 +1,22 @@
+
 describe('Contract', () => {
+  const WAIT_TIME = 2000
+
+  Cypress.on('uncaught:exception', (error, runnable) => {
+    console.log(error)
+    return false
+  })
+
   beforeEach(() => {
-    cy.visit('http://localhost:3000/contract')
+    cy.visit('/contract')
     cy.fixture('contract.json').as('data')
   })
 
-  describe('No previous service', function () {
+  describe('Contract whith CUPS has no service', function () {
     beforeEach(function () {
+      cy.intercept('GET', '/data/soci/')
+        .as('checkMember')
+
       cy.get('#memberNumber')
         .clear()
         .type(this.data.member.number)
@@ -16,14 +27,23 @@ describe('Contract', () => {
         .type(this.data.member.vat)
         .should('have.value', this.data.member.vat)
 
+      cy.wait('@checkMember')
+
       cy.get('[data-cy=next]').click()
+
+      cy.intercept('GET', '/check/cups/')
+        .as('checkCups')
 
       cy.get('#cups')
         .clear()
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(800)
+      // https://github.com/cypress-io/cypress/issues/9549
+      // cy.wait('@checkCups')
+
+      cy.wait(WAIT_TIME)
+
       cy.get(`[data-value="${this.data.supplyPoint.hasNoService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -65,7 +85,7 @@ describe('Contract', () => {
       cy.get('[name="holder.vat"]')
         .type(this.data.member.vat).should('have.value', this.data.member.vat)
 
-      cy.wait(600)
+      cy.wait(WAIT_TIME)
       // cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -80,18 +100,17 @@ describe('Contract', () => {
 
       cy.get('[name="payment.sepa_accepted"]').click()
       cy.get('[data-cy=accept]').click()
+
       cy.get('[data-cy=next]').click()
 
       cy.get('[name="terms_accepted"]').click()
       cy.get('[data-cy=accept]').click()
 
-      cy.contains('€/kWh')
-
-      // cy.get('[data-cy=submit]').click()
+      // No prices defined yet
+      //cy.contains('€/kWh')
     })
 
-    it('2.0TD', function () {
-
+    it('Monofasic 2.0TD', function () {
       cy.get('#phases').click()
       cy.get(`[data-value="${this.data.phase}"]`).click()
 
@@ -106,10 +125,12 @@ describe('Contract', () => {
       cy.get('[data-cy=next]').click()
     })
 
-    it('3.0TD', function () {
-
+    it('Monofasic 3.0TD', function () {
       cy.get('#phases').click()
       cy.get(`[data-value="${this.data.phase}"]`).click()
+
+      cy.get('[data-cy="moreThan15Kw"]')
+        .get('[data-value="true"]').click()
 
       cy.get('[name="contract.power"]')
         .clear()
@@ -117,19 +138,19 @@ describe('Contract', () => {
 
       cy.get('[name="contract.power2"]')
         .clear()
-        .type(this.data.power).should('have.value', this.data.power)
+        .type(this.data.power2).should('have.value', this.data.power2)
 
       cy.get('[name="contract.power3"]')
         .clear()
-        .type(this.data.power).should('have.value', this.data.power)
+        .type(this.data.power3).should('have.value', this.data.power3)
 
       cy.get('[name="contract.power4"]')
         .clear()
-        .type(this.data.power).should('have.value', this.data.power)
+        .type(this.data.power6).should('have.value', this.data.power6)
 
       cy.get('[name="contract.power5"]')
         .clear()
-        .type(this.data.power).should('have.value', this.data.power)
+        .type(this.data.power6).should('have.value', this.data.power6)
 
       cy.get('[name="contract.power6"]')
         .clear()
@@ -137,11 +158,15 @@ describe('Contract', () => {
 
       cy.get('[data-cy=next]').click()
     })
-
   })
 
-  describe('With previous service', function () {
+  /*
+
+  describe('Correct data', function () {
     beforeEach(function () {
+      cy.intercept('GET', '/data/soci/')
+        .as('checkMember')
+
       cy.get('#memberNumber')
         .clear()
         .type(this.data.member.number)
@@ -152,6 +177,8 @@ describe('Contract', () => {
         .type(this.data.member.vat)
         .should('have.value', this.data.member.vat)
 
+      cy.wait('@checkMember')
+
       cy.get('[data-cy=next]').click()
 
       cy.get('#cups')
@@ -159,7 +186,10 @@ describe('Contract', () => {
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(800)
+      // https://github.com/cypress-io/cypress/issues/9549
+      // cy.wait('@checkCups')
+      cy.wait(WAIT_TIME)
+
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -198,10 +228,15 @@ describe('Contract', () => {
     })
 
     afterEach(function () {
+
+      cy.intercept('GET', '/check/vat/')
+        .as('checkVat')
+
       cy.get('[name="holder.vat"]')
         .type(this.data.member.vat).should('have.value', this.data.member.vat)
 
-      cy.wait(600)
+      cy.wait('@checkVat')
+
       cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -216,27 +251,26 @@ describe('Contract', () => {
 
       cy.get('[name="payment.sepa_accepted"]').click()
       cy.get('[data-cy=accept]').click()
+
       cy.get('[data-cy=next]').click()
 
-      cy.get('[name="terms_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
       cy.contains('€/kWh')
-
-      // cy.get('[data-cy=submit]').click()
     })
 
-    it('2.0TD', function () {
+    it('Contract 2.0A', function () {
+      cy.get('#rate').click()
+      cy.get(`[data-value="${this.data.fare20A}"]`).click()
+
       cy.get('#power')
         .type(this.data.power).should('have.value', this.data.power)
 
-      cy.get('#power2')
-        .type(this.data.power).should('have.value', this.data.power)
-
       cy.get('[data-cy=next]').click()
     })
 
-    it('3.0TD', function () {
+    it('Contract 3.0A', function () {
+      cy.get('#rate').click()
+      cy.get(`[data-value="${this.data.fare30A}"]`).click()
+
       cy.get('#power')
         .type(this.data.power).should('have.value', this.data.power)
 
@@ -246,22 +280,16 @@ describe('Contract', () => {
       cy.get('#power3')
         .type(this.data.power3).should('have.value', this.data.power3)
 
-      cy.get('#power4')
-        .type(this.data.power3).should('have.value', this.data.power3)
-
-      cy.get('#power5')
-        .type(this.data.power3).should('have.value', this.data.power3)
-
-      cy.get('#power6')
-        .type(this.data.power6).should('have.value', this.data.power6)
-
       cy.get('[data-cy=next]').click()
     })
+
   })
 
-  /*
   describe('Wrong power', function () {
     beforeEach(function () {
+      cy.intercept('GET', '/data/soci/')
+        .as('checkMember')
+
       cy.get('#memberNumber')
         .clear()
         .type(this.data.member.number)
@@ -272,14 +300,22 @@ describe('Contract', () => {
         .type(this.data.member.vat)
         .should('have.value', this.data.member.vat)
 
+      cy.wait('@checkMember')
+
       cy.get('[data-cy=next]').click()
+
+      cy.intercept('GET', '/check/cups/')
+        .as('checkCups')
 
       cy.get('#cups')
         .clear()
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(800)
+      // https://github.com/cypress-io/cypress/issues/9549
+      // cy.wait('@checkCups')
+      cy.wait(WAIT_TIME)
+
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -346,6 +382,10 @@ describe('Contract', () => {
   })
 
   it('Check some fields error detection: VAT, CUPS, email, IBAN', function () {
+
+    cy.intercept('GET', '/data/soci/')
+      .as('checkMember')
+
     cy.get('#memberNumber')
       .clear()
       .type(this.data.member.number)
@@ -356,7 +396,9 @@ describe('Contract', () => {
       .type(this.data.member.badVat)
       .should('have.value', this.data.member.badVat)
 
-      cy.contains('No se ha encontrado ningún socio/a ')
+    cy.wait('@checkMember')
+
+    cy.contains('No se ha encontrado ningún socio/a ')
 
     cy.get('#vat')
       .clear()
@@ -390,7 +432,7 @@ describe('Contract', () => {
       .type(this.data.supplyPoint.cups)
       .should('have.value', this.data.supplyPoint.cups)
 
-    cy.wait(800)
+    cy.wait(WAIT_TIME)
     cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
     cy.get('[data-cy=next]').click()
@@ -438,7 +480,7 @@ describe('Contract', () => {
     cy.get('[name="holder.vat"]')
       .type(this.data.holder.vat).should('have.value', this.data.holder.vat)
 
-    cy.wait(800)
+    cy.wait(WAIT_TIME)
     cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
 
     cy.get('[data-cy=next]').click()
@@ -467,7 +509,8 @@ describe('Contract', () => {
     cy.get('[name="holder.email"]')
       .type(this.data.holder.badEmail).should('have.value', this.data.holder.badEmail)
       .blur()
-      cy.contains("No has especificado un correo electrónico correcto")
+
+    cy.contains('No has especificado un correo electrónico correcto')
 
     cy.get('[name="holder.email"]')
       .clear()
@@ -476,6 +519,7 @@ describe('Contract', () => {
     cy.get('[name="holder.email2"]')
       .type(this.data.holder.badEmail).should('have.value', this.data.holder.badEmail)
       .blur()
+
       cy.contains('No has repetido el correo electrónico correctamente')
 
     cy.get('[name="holder.email2"]')
@@ -511,20 +555,20 @@ describe('Contract', () => {
     cy.get('[data-cy=accept]').click()
     cy.get('[data-cy=next]').click()
   })
-  */
 
-  /*
   describe('Juridic Person', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
         .clear()
-        .type(this.data.juridic_member.number)
-        .should('have.value', this.data.juridic_member.number)
+        .type(this.data.juridicMember.number)
+        .should('have.value', this.data.juridicMember.number)
 
       cy.get('#vat')
         .clear()
-        .type(this.data.juridic_member.vat)
-        .should('have.value', this.data.juridic_member.vat)
+        .type(this.data.juridicMember.vat)
+        .should('have.value', this.data.juridicMember.vat)
+
+      cy.wait(WAIT_TIME)
 
       cy.get('[data-cy=next]').click()
 
@@ -533,7 +577,7 @@ describe('Contract', () => {
         .type(this.data.supplyPoint.cups)
         .should('have.value', this.data.supplyPoint.cups)
 
-      cy.wait(800)
+      cy.wait(WAIT_TIME)
       cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -577,24 +621,28 @@ describe('Contract', () => {
         .type(this.data.power).should('have.value', this.data.power)
 
       cy.get('[data-cy=next]').click()
-
     })
 
     afterEach(function () {
       cy.get('[name="holder.name"]')
-      .type(this.data.juridic_holder.name).should('have.value', this.data.juridic_holder.name)
+        .type(this.data.juridicHolder.name)
+        .should('have.value', this.data.juridicHolder.name)
 
       cy.get('[name="holder.proxyname"]')
-      .type(this.data.juridic_holder.proxyname).should('have.value', this.data.juridic_holder.proxyname)
+        .type(this.data.juridicHolder.proxyname)
+        .should('have.value', this.data.juridicHolder.proxyname)
 
       cy.get('[name="holder.proxynif"]')
-      .type(this.data.juridic_holder.proxynif).should('have.value', this.data.juridic_holder.proxynif)
+        .type(this.data.juridicHolder.proxynif)
+        .should('have.value', this.data.juridicHolder.proxynif)
 
       cy.get('[name="holder.address"]')
-      .type(this.data.holder.address).should('have.value', this.data.holder.address)
+        .type(this.data.holder.address)
+        .should('have.value', this.data.holder.address)
 
       cy.get('[name="holder.postal_code"]')
-      .type(this.data.holder.postalCode).should('have.value', this.data.holder.postalCode)
+        .type(this.data.holder.postalCode)
+        .should('have.value', this.data.holder.postalCode)
 
       cy.get('#holder_state').click()
       cy.get(`[data-value="${this.data.holder.stateCode}"]`).click()
@@ -603,15 +651,15 @@ describe('Contract', () => {
       cy.get(`[data-value="${this.data.holder.cityCode}"]`).click()
 
       cy.get('[name="holder.email"]')
-      .clear()
-      .type(this.data.holder.email).should('have.value', this.data.holder.email)
+        .clear()
+        .type(this.data.holder.email).should('have.value', this.data.holder.email)
 
       cy.get('[name="holder.email2"]')
-      .clear()
-      .type(this.data.holder.email).should('have.value', this.data.holder.email)
+        .clear()
+        .type(this.data.holder.email).should('have.value', this.data.holder.email)
 
       cy.get('[name="holder.phone1"]')
-      .type(this.data.holder.phone).should('have.value', this.data.holder.phone)
+        .type(this.data.holder.phone).should('have.value', this.data.holder.phone)
 
       cy.get('#holder_lang').click()
       cy.get('[data-value="ca_ES"]').click()
@@ -625,6 +673,7 @@ describe('Contract', () => {
 
       cy.get(`[data-value="${this.data.holder.voluntaryCent}"]`).click()
       cy.get('[data-cy=next]').click()
+
       cy.get('[name="payment.iban"]')
         .clear()
         .type(this.data.holder.iban).should('have.value', this.data.holder.iban)
@@ -638,25 +687,23 @@ describe('Contract', () => {
 
     it('Same juridic person', function () {
       cy.get('[name="holder.vat"]')
-        .type(this.data.juridic_member.vat).should('have.value', this.data.juridic_member.vat)
-      cy.wait(800)
-      cy.get(`[data-value="${this.data.juridic_holder.previousHolder}"]`).click()
+        .type(this.data.juridicMember.vat)
+        .should('have.value', this.data.juridicMember.vat)
+
+      cy.wait(WAIT_TIME)
+      cy.get(`[data-value="${this.data.juridicHolder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
-
     })
 
     it('Different juridic person', function () {
       cy.get('[name="holder.vat"]')
-        .type(this.data.juridic_holder.vat).should('have.value', this.data.juridic_holder.vat)
-      cy.wait(800)
-      cy.get(`[data-value="${this.data.juridic_holder.previousHolder}"]`).click()
+        .type(this.data.juridicHolder.vat).should('have.value', this.data.juridicHolder.vat)
+      cy.wait(WAIT_TIME)
+      cy.get(`[data-value="${this.data.juridicHolder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
-
     })
-
   })
   */
-
 })
