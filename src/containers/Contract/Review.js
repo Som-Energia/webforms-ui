@@ -126,15 +126,15 @@ const Review = (props) => {
   }
 
   const PowerValues = () => {
-    return <>
+    return <Grid container>
       { rates[values?.contract?.rate]?.num_power_periods > 1
         ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map((value, index) => {
           const attr = (index + 1 === 1) ? 'power' : `power${index + 1}`
-          return <span>{`P${index + 1}: ${values?.contract[attr]} kW `}</span>
+          return <Grid item xs={4}>{`P${index + 1} ${values?.contract[attr]} kW `}</Grid>
         })
         : `${values?.contract?.power} kW`
       }
-    </>
+    </Grid>
   }
 
   const Prices = ({ concept, name }) => {
