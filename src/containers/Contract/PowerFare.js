@@ -67,6 +67,8 @@ const PowerFare = (props) => {
       }
       <Box mt={3} mb={1}>
         <Chooser
+          name="moreThan15Kw"
+          condensed
           question={t('POWER_QUESTION')}
           onChange={handleChangeChooser}
           value={values?.contract?.moreThan15Kw}
@@ -90,7 +92,14 @@ const PowerFare = (props) => {
         />
       </Box>
       <Box mt={2} mb={1}>
-        <PowerInputs numInputs={rates[values?.contract?.rate]?.num_power_periods} {...props} namePrefix='contract' values={values?.contract} errors={errors?.contract} touched={touched?.contract}/>
+        <PowerInputs
+          namePrefix="contract"
+          numInputs={rates[values?.contract?.rate]?.num_power_periods}
+          {...props}
+          values={values?.contract}
+          errors={errors?.contract}
+          touched={touched?.contract}
+        />
       </Box>
     </>
   )
