@@ -230,16 +230,14 @@ export const normalizeContract = (contract) => {
   finalContract.sepa_conditions = contract?.payment?.sepa_accepted
   finalContract.donation = contract?.payment?.voluntary_cent
 
-  finalContract.process = !contract?.contract?.has_service
+  finalContract.process = contract?.contract?.has_service
     ? contract?.holder?.previous_holder ? 'C1' : 'C2'
     : 'A3'
 
   finalContract.privacy_conditions = contract?.privacy_policy_accepted
   finalContract.contract_conditions = contract?.terms_accepted
 
-  Object.keys(finalContract).forEach(key => finalContract[key] === undefined && delete finalContract[key])
-
-  return finalContract
+  return sanitizeData(finalContract)
 }
 
 export const normalizeMember = (data) => {
