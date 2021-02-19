@@ -387,6 +387,7 @@
 
     "DNI_EXIST": "Ja existeix un soci amb aquest NIF/CIF",
     "SAME_OWNER": "El NIF del nou titular no pot ser el mateix que el de l'actual",
+    "CANT_CONFIRM_D1": "No s'ha pogut realitzar el tràmit. Si us plau, posa't en contacte amb nosaltres",
 
     "API_SERVER_ERROR": "Hi ha hagut un error en connectar al servidor",
     "API_SERVER_ERROR_DETAILS": "El vostre navegador té problemes al connectar-se a la web de Som Energia. Comproveu que la connexió a Internet està funcionant correctament. Si no és aquest el problema, contacteu amb Som Energia per verificar que el tràmit s'ha processat correctament.",
