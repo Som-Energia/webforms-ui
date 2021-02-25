@@ -396,7 +396,8 @@
     "MENOR_IGUAL_A_15KW_CONTRACTACIO": "Potència inferior o igual a 15kW",
     "NO_POWER_INCREASING": "La potència d'aquest periode no pot ser inferior al anterior",
     "HELP_MORE_THAN_15KW": "<p>Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, veuràs que ara has d’indicar 6 períodes de potència.</p><p>En el P1 hauràs d’indicar la mateixa potència que hi tens contractada actualment en el període P1. En relació al P2, P3, P4 i P5 hauràs d’indicar la potència que tens contractada al P2 actual. Finalment, al P6 hauràs d’indicar la potència que tenies contractada al P3 actual.</p>",
-    "HELP_LESS_THAN_15KW": "<p>Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, veuràs que ara has d’indicar 2 períodes de potència si tenies una tarifa contractada de 2.0A/2.0DHA o bé 2.1A/2.0DHA.</p><p>En els dos períodes has d’indicar la mateixa potència que tinguis contractada actualment, doncs segons el que preveu la Circular 3/2020 de la CNMC, la potencia del P2 serà igual a la potència contractada anteriorment.</p>",
+    "HELP_LESS_THAN_15KW": "<p>Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, veuràs que ara has d’indicar 2 períodes de potència si tenies una tarifa contractada de 2.0A/2.0DHA o bé 2.1A/2.0DHA.</p>",
+    "HELP_LESS_THAN_15KW_HAS_SERVICE": "<p>En els dos períodes has d’indicar la mateixa potència que tinguis contractada actualment, doncs segons el que preveu la Circular 3/2020 de la CNMC, la potencia del P2 serà igual a la potència contractada anteriorment.</p>",
     "NEW_TOLLS_AND_TARIFF_INFO": "Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, podem canviar les potències contractades sense cost des de l’1 d’abril fins al 30 de setembre de 2021, encara que durant els darrers 12 mesos hagis modificat el teu contracte i sempre i quan no es tracti d’un augment de potència."
   }
 
