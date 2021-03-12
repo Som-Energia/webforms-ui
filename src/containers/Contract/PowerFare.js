@@ -16,7 +16,15 @@ import { calculateTariff } from '../../services/utils'
 
 const PowerFare = (props) => {
   const { t } = useTranslation()
-  const { values, handleBlur, handleChange, errors, touched, rates, setFieldValue } = props
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    rates,
+    setFieldValue
+  } = props
 
   const handleChangeChooser = ({ option }) => {
     setFieldValue('contract.moreThan15Kw', option)
@@ -29,13 +37,22 @@ const PowerFare = (props) => {
 
   return (
     <>
-      <StepHeader title={t('TARIFA_I_POTENCIA')} />
-      { values?.contract?.has_service === true &&
-        <Typography variant="body1"
-          dangerouslySetInnerHTML={{ __html: t('HELP_TARIFA_CANVI_COMERCIALITZADORA') }}
-        />
-      }
-      { values?.contract?.has_service === false &&
+      <StepHeader
+        title={t(
+          values?.contract?.has_service === true ? 'POWER' : 'TENSION_AND_POWER'
+        )}
+      />
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: t(
+            values?.contract?.has_service === true
+              ? 'HELP_POWER_CANVI'
+              : 'HELP_TENSION_POWER_ALTA'
+          )
+        }}
+      />
+      {values?.contract?.has_service === false && (
         <>
           <Box mt={3} mb={0}>
             <TextField
@@ -50,28 +67,34 @@ const PowerFare = (props) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values?.contract?.phases}
-              error={(errors?.contract?.phases && touched?.contract?.phases)}
-              helperText={(touched?.contract?.phases && errors?.contract?.phases)}
-            >
-              <MenuItem value="mono">
-                {t('PHASE_MONO')}
-              </MenuItem>
-              <MenuItem value="tri">
-                {t('PHASE_TRI')}
-              </MenuItem>
+              error={errors?.contract?.phases && touched?.contract?.phases}
+              helperText={
+                touched?.contract?.phases && errors?.contract?.phases
+              }>
+              <MenuItem value="mono">{t('PHASE_MONO')}</MenuItem>
+              <MenuItem value="tri">{t('PHASE_TRI')}</MenuItem>
             </TextField>
           </Box>
 
           <Box mx={1} mt={0} mb={1}>
-            <FormHelperText dangerouslySetInnerHTML={{ __html: t('HELP_INSTALL_TYPE', { url: t('HELP_INSTALL_TYPE_URL') }) }}></FormHelperText>
+            <FormHelperText
+              dangerouslySetInnerHTML={{
+                __html: t('HELP_INSTALL_TYPE', {
+                  url: t('HELP_INSTALL_TYPE_URL')
+                })
+              }}></FormHelperText>
           </Box>
         </>
-      }
+      )}
       <Box mt={3} mb={1}>
         <Chooser
           name="moreThan15Kw"
           condensed
-          question={t('POWER_QUESTION')}
+          question={t(
+            !values?.contract?.has_service
+              ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')
+              : t('QUINA_POTENCIA_TENS_CONTRACTADA')
+          )}
           onChange={handleChangeChooser}
           value={values?.contract?.moreThan15Kw}
           options={[
@@ -87,16 +110,26 @@ const PowerFare = (props) => {
         />
       </Box>
       <Box mt={3}>
-        <Typography variant="body1"
+        <Typography
+          variant="body1"
           dangerouslySetInnerHTML={{
-            __html: t(values?.contract?.moreThan15Kw ? 'HELP_MORE_THAN_15KW' : 'HELP_LESS_THAN_15KW')
+            __html: t(
+              values?.contract?.moreThan15Kw
+                ? values?.contract?.has_sevice
+                  ? 'HELP_MORE_THAN_15KW_HAS_SERVICE'
+                  : 'HELP_MORE_THAN_15KW_HASNOT_SERVICE'
+                : values?.contract?.has_sevice
+                ? 'HELP_LESS_THAN_15KW_HAS_SERVICE'
+                : 'HELP_LESS_THAN_15KW'
+            )
           }}
         />
-        { values?.contract?.has_service === true &&
-          <Typography variant="body1"
-            dangerouslySetInnerHTML={{ __html: t('HELP_LESS_THAN_15KW_HAS_SERVICE') }}
-          />
-        }
+        <Typography
+          variant="body1"
+          dangerouslySetInnerHTML={{
+            __html: t('POWER_PERIODS_MORE_INFO')
+          }}
+        />
       </Box>
       <Box mt={2} mb={1}>
         <PowerInputs
