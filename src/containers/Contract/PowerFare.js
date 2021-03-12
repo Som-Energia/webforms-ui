@@ -30,9 +30,11 @@ const PowerFare = (props) => {
   return (
     <>
       <StepHeader title={t('TARIFA_I_POTENCIA')} />
-      <Typography variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('HELP_TARIFA_CANVI_COMERCIALITZADORA') }}
-      />
+      { values?.contract?.has_service === true &&
+        <Typography variant="body1"
+          dangerouslySetInnerHTML={{ __html: t('HELP_TARIFA_CANVI_COMERCIALITZADORA') }}
+        />
+      }
       { values?.contract?.has_service === false &&
         <>
           <Box mt={3} mb={0}>
@@ -90,6 +92,11 @@ const PowerFare = (props) => {
             __html: t(values?.contract?.moreThan15Kw ? 'HELP_MORE_THAN_15KW' : 'HELP_LESS_THAN_15KW')
           }}
         />
+        { values?.contract?.has_service === true &&
+          <Typography variant="body1"
+            dangerouslySetInnerHTML={{ __html: t('HELP_LESS_THAN_15KW_HAS_SERVICE') }}
+          />
+        }
       </Box>
       <Box mt={2} mb={1}>
         <PowerInputs
