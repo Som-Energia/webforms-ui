@@ -24,12 +24,29 @@ const normalizeCommonModifyData = (params) => {
   const data = {
     phases: modify?.phases,
     attachments: [...modify?.attachments, ...modify?.power_attachments],
-    power_p1: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    power_p2: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    power_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    power_p4: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power4 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    power_p5: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power5 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    power_p6: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power6 * THOUSANDS_CONVERSION_FACTOR) : undefined,
+    power_p1: modify?.changePower
+      ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
+      : undefined,
+    power_p2: modify?.changePower
+      ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
+      : undefined,
+    power_p3:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    power_p4:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power4 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    power_p5:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power5 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    power_p6:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power6 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    tariff: modify?.tariff,
     contact_name: contact?.contactName,
     contact_surname: contact?.contactSurname,
     contact_phone: contact?.phone
@@ -123,8 +140,10 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.holder.proxynif_valid
   }
 
-  if (normalContract?.member?.become_member === undefined ||
-    normalContract?.member?.become_member === '') {
+  if (
+    normalContract?.member?.become_member === undefined ||
+    normalContract?.member?.become_member === ''
+  ) {
     if (normalContract?.member === undefined) {
       normalContract.member = {}
     }
@@ -139,31 +158,43 @@ export const normalizeHolderChange = (contract) => {
   }
 
   if (normalContract?.payment?.iban) {
-    normalContract.payment.iban = normalContract.payment.iban.split(' ').join('')
+    normalContract.payment.iban = normalContract.payment.iban
+      .split(' ')
+      .join('')
   }
 
   if (normalContract?.payment?.iban_valid !== undefined) {
     delete normalContract.payment.iban_valid
   }
 
-  if (normalContract?.especial_cases && normalContract?.especial_cases?.attachments) {
+  if (
+    normalContract?.especial_cases &&
+    normalContract?.especial_cases?.attachments
+  ) {
     const hasSpecialCases = Object.keys(normalContract.especial_cases)
-      .map(prop => prop.indexOf('reason') === 0 && normalContract.especial_cases[prop] === true)
-      .reduce((prev, current) => !prev ? current : prev)
+      .map(
+        (prop) =>
+          prop.indexOf('reason') === 0 &&
+          normalContract.especial_cases[prop] === true
+      )
+      .reduce((prev, current) => (!prev ? current : prev))
 
     if (!hasSpecialCases) {
       delete normalContract.especial_cases.attachments
     } else {
       if (normalContract?.especial_cases?.attachments?.death) {
-        normalContract.especial_cases.attachments.death = normalContract?.especial_cases?.attachments?.death[0]
+        normalContract.especial_cases.attachments.death =
+          normalContract?.especial_cases?.attachments?.death[0]
       }
 
       if (normalContract?.especial_cases?.attachments?.medical) {
-        normalContract.especial_cases.attachments.medical = normalContract?.especial_cases?.attachments?.medical[0]
+        normalContract.especial_cases.attachments.medical =
+          normalContract?.especial_cases?.attachments?.medical[0]
       }
 
       if (normalContract?.especial_cases?.attachments?.resident) {
-        normalContract.especial_cases.attachments.resident = normalContract?.especial_cases?.attachments?.resident[0]
+        normalContract.especial_cases.attachments.resident =
+          normalContract?.especial_cases?.attachments?.resident[0]
       }
     }
   }
@@ -173,19 +204,34 @@ export const normalizeHolderChange = (contract) => {
 export const normalizeContract = (contract) => {
   const finalContract = {}
 
-  const holder = (contract.holder.vat === contract.member.vat &&
-    contract.holder.isphisical === true) ? contract.member : contract.holder
+  const holder =
+    contract.holder.vat === contract.member.vat &&
+    contract.holder.isphisical === true
+      ? contract.member
+      : contract.holder
 
   finalContract.member_number = contract?.member?.number
   finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
   finalContract.tariff = contract?.contract?.rate
-  finalContract.power_p1 = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.power_p2 = Math.round(contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.power_p3 = contract?.contract?.power3 && Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.power_p4 = contract?.contract?.power4 && Math.round(contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.power_p5 = contract?.contract?.power5 && Math.round(contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.power_p6 = contract?.contract?.power6 && Math.round(contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p1 = Math.round(
+    contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR
+  )
+  finalContract.power_p2 = Math.round(
+    contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR
+  )
+  finalContract.power_p3 =
+    contract?.contract?.power3 &&
+    Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p4 =
+    contract?.contract?.power4 &&
+    Math.round(contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p5 =
+    contract?.contract?.power5 &&
+    Math.round(contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.power_p6 =
+    contract?.contract?.power6 &&
+    Math.round(contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR)
   finalContract.cups_address = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
   finalContract.city_id = contract?.supply_point?.city?.id
   finalContract.cups_state_id = contract?.supply_point?.state?.id
@@ -195,8 +241,12 @@ export const normalizeContract = (contract) => {
   finalContract.owner_name = holder?.name
   finalContract.owner_surname1 = holder?.surname1
   finalContract.owner_surname2 = holder?.surname2
-  finalContract.owner_proxy_vat = !contract?.holder?.isphisical ? holder?.proxynif : undefined
-  finalContract.owner_proxy_name = !contract?.holder?.isphisical ? holder?.proxyname : undefined
+  finalContract.owner_proxy_vat = !contract?.holder?.isphisical
+    ? holder?.proxynif
+    : undefined
+  finalContract.owner_proxy_name = !contract?.holder?.isphisical
+    ? holder?.proxyname
+    : undefined
   finalContract.owner_address = holder?.address
   finalContract.owner_city_id = holder?.city?.id
   finalContract.owner_state_id = holder?.state?.id
@@ -231,9 +281,12 @@ export const normalizeContract = (contract) => {
   finalContract.donation = contract?.payment?.voluntary_cent
 
   finalContract.process = contract?.contract?.has_service
-    ? contract?.holder?.previous_holder ? 'C1' : 'C2'
+    ? contract?.holder?.previous_holder
+      ? 'C1'
+      : 'C2'
     : 'A3'
 
+  finalContract.attachments = contract?.supply_point?.attachments
   finalContract.privacy_conditions = contract?.privacy_policy_accepted
   finalContract.contract_conditions = contract?.terms_accepted
 
@@ -243,7 +296,9 @@ export const normalizeContract = (contract) => {
 export const normalizeMember = (data) => {
   const finalMember = {}
 
-  finalMember.tipuspersona = data.member.isphisical ? USER_TYPE_PERSON : USER_TYPE_COMPANY
+  finalMember.tipuspersona = data.member.isphisical
+    ? USER_TYPE_PERSON
+    : USER_TYPE_COMPANY
   finalMember.nom = data.member.name
   finalMember.dni = data.member.vat
   finalMember.tel = data.member.phone1
@@ -256,10 +311,11 @@ export const normalizeMember = (data) => {
   finalMember.idioma = data.member.language
 
   finalMember.payment_method =
-    data.payment.payment_method === 'iban' ? PAYMENT_METHOD_PAYMENT_ORDER : (
-      data.payment.payment_method === 'credit_card' ? PAYMENT_METHOD_CREDIT_CARD
-        : PAYMENT_METHOD_PAYMENT_ORDER
-    )
+    data.payment.payment_method === 'iban'
+      ? PAYMENT_METHOD_PAYMENT_ORDER
+      : data.payment.payment_method === 'credit_card'
+      ? PAYMENT_METHOD_CREDIT_CARD
+      : PAYMENT_METHOD_PAYMENT_ORDER
 
   finalMember.payment_iban = data.payment.iban
   finalMember.urlok = data.urlok
@@ -284,16 +340,24 @@ export const specialCaseType = (specialCases) => {
 }
 
 export const calculateTariff = ({ moreThan15Kw }) => {
-  return (moreThan15Kw) ? '3.0TD' : '2.0TD'
+  return moreThan15Kw ? '3.0TD' : '2.0TD'
 }
 
-export const testPowerForPeriods = (rates, values, limit = 'min_power', createError, t) => {
+export const testPowerForPeriods = (
+  rates,
+  values,
+  limit = 'min_power',
+  createError,
+  t
+) => {
   const rate = values?.rate || values?.tariff
   let valids = 0
   if (rates[rate] === undefined) return true
   for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
-    const attr = (i === 1) ? 'power' : `power${i}`
-    const inLimit = limit.match('min') ? values[attr] >= rates[rate][limit]?.power : values[attr] <= rates[rate][limit]?.power
+    const attr = i === 1 ? 'power' : `power${i}`
+    const inLimit = limit.match('min')
+      ? values[attr] >= rates[rate][limit]?.power
+      : values[attr] <= rates[rate][limit]?.power
     inLimit && valids++
     values[attr] === undefined && valids++
   }
@@ -302,9 +366,14 @@ export const testPowerForPeriods = (rates, values, limit = 'min_power', createEr
     return true
   }
 
-  const lessThan = rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply ? 'SOME_PERIOD_MORE_THAN' : 'POWER_NO_LESS_THAN'
+  const lessThan =
+    rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
+      ? 'SOME_PERIOD_MORE_THAN'
+      : 'POWER_NO_LESS_THAN'
 
   return createError({
-    message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', { value: rates[rate][limit]?.power })
+    message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', {
+      value: rates[rate][limit]?.power
+    })
   })
 }
