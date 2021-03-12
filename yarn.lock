@@ -9487,6 +9487,11 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
+prettier-config-standard@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/prettier-config-standard/-/prettier-config-standard-4.0.0.tgz#4cb82b87249e248bf47c69efbe3f9179abd16f70"
+  integrity sha512-K5J34NKeGyJvVVHUg4cAWDhtVYzT7UIRE9GbFyqHNZd61Pr0DHNTMsgoID7IVDmKc0QaLswYwKaNR2apbUJvkg==
+
 pretty-bytes@^5.1.0, pretty-bytes@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.4.1.tgz#cd89f79bbcef21e3d21eb0da68ffe93f803e884b"
