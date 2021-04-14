@@ -58,20 +58,24 @@ const Home = (props) => {
         <Toolbar>
           <Typography variant="h6">
             webforms-ui
+            <span className={classes.subtitle}>Nous Peatges Edition</span>
           </Typography>
         </Toolbar>
       </AppBar>
       <Container className={classes.content}>
         <div className={classes.build}>Build date: {dateTimeStamp}</div>
         <div className={classes.build}>Last commit hash: {version}</div>
-        {
-          options.map(option => (
-            <Paper key={option.href} className={classes.formPaper} onClick={ () => { history.push(option.href) } }>
-              <Typography variant="h6">{ option.title }</Typography>
-              <ArrowForwardIosIcon />
-            </Paper>
-          ))
-        }
+        {options.map((option) => (
+          <Paper
+            key={option.href}
+            className={classes.formPaper}
+            onClick={() => {
+              history.push(option.href)
+            }}>
+            <Typography variant="h6">{option.title}</Typography>
+            <ArrowForwardIosIcon />
+          </Paper>
+        ))}
       </Container>
     </>
   )
