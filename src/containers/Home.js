@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
   build: {
     fontSize: '0.85rem',
     fontWeight: '500'
+  },
+  subtitle: {
+    fontSize: '0.9rem',
+    textTransform: 'uppercase',
+    paddingLeft: '10px'
   }
 }))
 
