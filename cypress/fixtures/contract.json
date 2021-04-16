@@ -55,6 +55,15 @@
     "previousHolder": true,
     "proxyname": "David Palomo",
     "name": "Testing, SL"
+  },
+  "selfConsumption": {
+    "have_installation": true,
+    "cau": "000123456789",
+    "collective_installation": true,
+    "installation_power": "3.5",
+    "installation_situation": 31,
+    "aux_services": false,
+    "rac_attachment": ["file.png"],
+    "technology": 4
   }
 }
-
