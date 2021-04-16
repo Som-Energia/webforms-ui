@@ -408,6 +408,12 @@
   "API_SERVER_ERROR": "Error conectando al servidor",
   "API_SERVER_ERROR_DETAILS": "Tu navegador tiene problemas para conectarse a la web de Som Energia. Comprueba que la conexión a internet funcione correctamente. Si no fuera ese el problema, contacta con Som Energia para verificar si se pudo procesar el trámite correctamente.",
   "API_SERVER_OFFLINE": "Nuestros servidores no responden",
-  "API_SERVER_OFFLINE_DETAILS": "Es posible que se estén haciendo tareas de mantenimiento. Vuelve a probar más tarde. Perdona las molestias."
-}
+  "API_SERVER_OFFLINE_DETAILS": "Es posible que se estén haciendo tareas de mantenimiento. Vuelve a probar más tarde. Perdona las molestias.",
 
+  "SELFCONSUMPTION_TITLE": "Autoconsumo",
+  "SELFCONSUMPTION_QUESTION": "¿Tienes una instalación de autoproducción?",
+  "SELFCONSUMPTION_YES_LABEL": "Sí, tengo autoproducción",
+  "SELFCONSUMPTION_NO_LABEL": "No, no tengo autoproducción",
+  "SELFCONSUMPTION_HELP": "¿Qué es la autoproducción?",
+  "SELFCONSUMPTION_HELP_URL": "https://es.support.somenergia.coop/article/780-que-es-la-autoproduccion?utm_source=linkidiomes&utm_medium=cda&utm_campaign=castellano"
+}
