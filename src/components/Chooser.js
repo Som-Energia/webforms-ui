@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid rgba(0, 0, 0, 0.12)',
       backgroundColor: 'inherit'
     }
-
   },
   chooserItemTitle: {
     display: 'flex',
@@ -66,8 +65,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Chooser = (props) => {
-  const classes = useStyles()
-  const { question, options, onChange, value, disabled } = props
+  const { question, options, onChange, value, disabled, className } = props
+  const classes = { ...useStyles(), ...className }
 
   const [selectedOption, setSelectedOption] = useState(value)
 
@@ -83,35 +82,52 @@ const Chooser = (props) => {
   }
 
   return (
-    <>
-      <Typography variant="h6" className={classes.title}
+    <div className={className}>
+      <Typography
+        variant="h6"
+        className={classes.title}
         dangerouslySetInnerHTML={{ __html: question }}
       />
       <RadioGroup className={classes.margin} defaultValue="">
         <Grid container spacing={3}>
-          { options.map((option, index) =>
+          {options.map((option, index) => (
             <Grid key={index} item xs={12} sm={6}>
               <label
                 data-value={option.value}
-                onClick={event => !disabled && handleClick(event, option.value)}
-                className={clsx(classes.chooserItem, selectedOption === option.value && classes.chooserItemSelected, disabled && classes.chooserItemDisabled)}
-              >
+                onClick={(event) =>
+                  !disabled && handleClick(event, option.value)
+                }
+                className={clsx(
+                  classes.chooserItem,
+                  selectedOption === option.value &&
+                    classes.chooserItemSelected,
+                  disabled && classes.chooserItemDisabled
+                )}>
                 <div className={classes.chooserItemTitle}>
-                  <Radio disabled={disabled} value={option.value} color="primary" checked={selectedOption === option.value} />
+                  <Radio
+                    disabled={disabled}
+                    value={option.value}
+                    color="primary"
+                    checked={selectedOption === option.value}
+                  />
                   <Typography>{option.label}</Typography>
                 </div>
-                <FormHelperText className={classes.chooserItemDesc} dangerouslySetInnerHTML={{ __html: option.description }} />
+                <FormHelperText
+                  className={classes.chooserItemDesc}
+                  dangerouslySetInnerHTML={{ __html: option.description }}
+                />
               </label>
+              {option.helper}
             </Grid>
-          ) }
+          ))}
         </Grid>
       </RadioGroup>
-    </>
+    </div>
   )
 }
 
 Chooser.defaultProps = {
-  onChange: event => console.log('change', event.value)
+  onChange: (event) => console.log('change', event.value)
 }
 
 export default Chooser
