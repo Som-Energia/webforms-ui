@@ -411,26 +411,26 @@ const Contract = (props) => {
   ]
 
   const showProgress = false
-  const MAX_STEP_NUMBER = 9
+
+  const steps = [
+    <MemberIdentifier />,
+    <CUPS />,
+    <SupplyPoint />,
+    <PowerFare rates={rates} />,
+    <SelfConsumption />,
+    <SelfConsumptionDetails />,
+    <HolderIdentifier />,
+    <PersonalData url={t('DATA_PROTECTION_CONTRACT_URL')} />,
+    <VoluntaryCent />,
+    <IBAN />,
+    <Review />
+  ]
+
+  const maxStepNumber = steps.length
 
   const getActiveStep = (props) => {
-    const url = t('DATA_PROTECTION_CONTRACT_URL')
-
-    const steps = [
-      <MemberIdentifier {...props} />,
-      <CUPS {...props} />,
-      <SupplyPoint {...props} />,
-      <PowerFare rates={rates} {...props} />,
-      <SelfConsumption {...props} />,
-      <SelfConsumptionDetails {...props} />,
-      <HolderIdentifier {...props} />,
-      <PersonalData url={url} {...props} />,
-      <VoluntaryCent {...props} />,
-      <IBAN {...props} />,
-      <Review {...props} />
-    ]
-
-    return steps[activeStep] || <></>
+    const step = steps[activeStep]
+    return React.cloneElement(step, { ...props })
   }
 
   useEffect(() => {
@@ -457,7 +457,7 @@ const Contract = (props) => {
       props.setFieldValue('privacy_policy_accepted', true)
     }
 
-    const last = MAX_STEP_NUMBER
+    const last = maxStepNumber
     props.submitForm().then(() => {
       if (props.isValid) {
         setActiveStep(Math.min(next, last))
@@ -601,7 +601,7 @@ const Contract = (props) => {
         setError(errorResp)
       })
     setSending(false)
-    setActiveStep(MAX_STEP_NUMBER)
+    setActiveStep(maxStepNumber)
     setCompleted(true)
   }
 
@@ -623,7 +623,7 @@ const Contract = (props) => {
                       {showProgress && (
                         <LinearProgress
                           variant={sending ? 'indeterminate' : 'determinate'}
-                          value={(activeStep / MAX_STEP_NUMBER) * 100}
+                          value={(activeStep / maxStepNumber) * 100}
                         />
                       )}
 
@@ -650,7 +650,7 @@ const Contract = (props) => {
                               {t('PAS_ANTERIOR')}
                             </Button>
                           )}
-                          {activeStep < MAX_STEP_NUMBER - 1 ? (
+                          {activeStep < maxStepNumber - 1 ? (
                             <Button
                               type="button"
                               data-cy="next"
