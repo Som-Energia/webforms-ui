@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   chooserContainer: {
     '& h6': {
       fontSize: '1rem',
+      fontWeight: 400,
       marginTop: theme.spacing(2)
     }
   }
@@ -26,7 +27,14 @@ const useStyles = makeStyles((theme) => ({
 const HolderIdentifier = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
-  const { values, handleBlur, errors, touched, setFieldValue, setFieldTouched } = props
+  const {
+    values,
+    handleBlur,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched
+  } = props
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
     setFieldValue('holder.vat', vat)
@@ -42,7 +50,8 @@ const HolderIdentifier = (props) => {
   return (
     <>
       <StepHeader title={t('HOLDER_IDENTIFIER_TITLE')} />
-      <Typography variant="body1"
+      <Typography
+        variant="body1"
         dangerouslySetInnerHTML={{ __html: t('HOLDER_IDENTIFIER_DESC') }}
       />
       <Box mt={3} mb={3}>
@@ -57,23 +66,31 @@ const HolderIdentifier = (props) => {
           value={values?.holder?.vat}
           onChange={onChangeVAT}
           onBlur={handleBlur}
-          error={(errors?.holder?.vat && touched?.holder?.vat) ||
+          error={
+            (errors?.holder?.vat && touched?.holder?.vat) ||
             (touched?.holder?.vat && values?.holder?.vatvalid === false)
           }
-          helperText={(touched?.holder?.vat && errors?.holder?.vat) ||
+          helperText={
+            (touched?.holder?.vat && errors?.holder?.vat) ||
             (touched?.holder?.vat && errors?.holder?.vatvalid)
           }
         />
       </Box>
 
-      {
-        values?.contract?.has_service !== false &&
+      {values?.contract?.has_service !== false && (
         <Box mt={1} mb={1} className={classes.chooserContainer}>
           <Chooser
             question={t('PREVIOUS_HOLDER')}
             onChange={handleChangePreviousHolder}
-            value={ values.contract.has_service === false ? false : values.holder.previous_holder}
-            disabled={values.holder.vatvalid !== true || values.contract.has_service === false}
+            value={
+              values.contract.has_service === false
+                ? false
+                : values.holder.previous_holder
+            }
+            disabled={
+              values.holder.vatvalid !== true ||
+              values.contract.has_service === false
+            }
             options={[
               {
                 value: true,
@@ -88,7 +105,7 @@ const HolderIdentifier = (props) => {
             ]}
           />
         </Box>
-      }
+      )}
     </>
   )
 }
