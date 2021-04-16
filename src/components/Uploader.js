@@ -16,8 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 import PublishIcon from '@material-ui/icons/Publish'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
-import FileIcon from '@material-ui/icons/Description'
-import DeleteIcon from '@material-ui/icons/Delete'
+import FileIcon from '@material-ui/icons/DescriptionOutlined'
+import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
 
 import { uploadFile } from '../services/api'
 
@@ -46,46 +46,55 @@ const Uploader = (props) => {
     callbackFn(uploads)
   }, [uploads])
 
-  const upload = useCallback(async (name, file) => {
-    return uploadFile(name, file)
-      .then(response => {
-        if (response?.data?.code === 'UPLOAD_OK') {
-          setUploads([...uploads, response?.data?.file_hash])
-          setInputKey(Date.now())
-        } else {
-          const errorMsg = response?.data?.code
-            ? response?.data?.code
+  const upload = useCallback(
+    async (name, file) => {
+      return uploadFile(name, file)
+        .then((response) => {
+          if (response?.data?.code === 'UPLOAD_OK') {
+            setUploads([...uploads, response?.data?.file_hash])
+            setInputKey(Date.now())
+          } else {
+            const errorMsg = response?.data?.code
+              ? response?.data?.code
+              : 'MODIFY_POTTAR_UNEXPECTED'
+            setError(errorMsg)
+          }
+        })
+        .catch((error) => {
+          const errorMsg = error?.response?.data?.code
+            ? error.response.data.code
             : 'MODIFY_POTTAR_UNEXPECTED'
           setError(errorMsg)
-        }
-      })
-      .catch(error => {
-        const errorMsg = error?.response?.data?.code
-          ? error.response.data.code
-          : 'MODIFY_POTTAR_UNEXPECTED'
-        setError(errorMsg)
-      })
-  }, [uploads])
+        })
+    },
+    [uploads]
+  )
 
-  const handleChange = useCallback(async (event) => {
-    setUploading(true)
-    const name = event.target.name
-    const file = event.target.files[0]
-    await upload(name, file)
-    setUploading(false)
-  }, [upload])
+  const handleChange = useCallback(
+    async (event) => {
+      setUploading(true)
+      const name = event.target.name
+      const file = event.target.files[0]
+      await upload(name, file)
+      setUploading(false)
+    },
+    [upload]
+  )
 
-  const handleClean = event => {
+  const handleClean = (event) => {
     event.preventDefault()
     setError(false)
     setInputKey(Date.now())
   }
 
-  const handleDelete = useCallback((event, index) => {
-    const uploadsToDelete = uploads
-    uploadsToDelete.splice(index, 1)
-    setUploads([...uploadsToDelete])
-  }, [uploads])
+  const handleDelete = useCallback(
+    (event, index) => {
+      const uploadsToDelete = uploads
+      uploadsToDelete.splice(index, 1)
+      setUploads([...uploadsToDelete])
+    },
+    [uploads]
+  )
 
   return (
     <>
@@ -98,42 +107,49 @@ const Uploader = (props) => {
         name={name}
         variant="outlined"
         onChange={handleChange}
-        disabled={ maxFiles <= uploads.length }
+        disabled={maxFiles <= uploads.length}
         fullWidth
         InputProps={{
-          endAdornment:
+          endAdornment: (
             <InputAdornment position="end">
-              {
-                isUploading
-                  ? <CircularProgress size={24} />
-                  : error ? <IconButton onClick={handleClean}><HighlightOffIcon /></IconButton>
-                    : <PublishIcon />
-              }
+              {isUploading ? (
+                <CircularProgress size={24} />
+              ) : error ? (
+                <IconButton onClick={handleClean}>
+                  <HighlightOffIcon />
+                </IconButton>
+              ) : (
+                <PublishIcon />
+              )}
             </InputAdornment>
+          )
         }}
         error={(error || fieldError) && true}
-        helperText={error ? t(error) : (fieldError) ? t(fieldError) : t('INSTALL_TYPE_ATTACHMENTS_INFO')}
+        helperText={
+          error
+            ? t(error)
+            : fieldError
+            ? t(fieldError)
+            : t('INSTALL_TYPE_ATTACHMENTS_INFO')
+        }
       />
       <List>
-        {
-          uploads.map((upload, index) => (
-            <ListItem key={upload}>
-              <ListItemIcon>
-                <FileIcon />
-              </ListItemIcon>
-              <ListItemText>{upload}</ListItemText>
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={event => handleDelete(event, index)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))
-        }
+        {uploads.map((upload, index) => (
+          <ListItem key={upload}>
+            <ListItemIcon>
+              <FileIcon />
+            </ListItemIcon>
+            <ListItemText>{upload}</ListItemText>
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={(event) => handleDelete(event, index)}>
+                <DeleteIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
       </List>
     </>
   )
