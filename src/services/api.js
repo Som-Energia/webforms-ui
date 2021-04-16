@@ -289,3 +289,41 @@ export const apiStatus = async () => {
     url: `${API_BASE_URL}/ping`
   })
 }
+
+export const getSelfConsumptionSituations = async () => {
+  /*
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/data/selfconsumption/technologies`
+  }).then((response) => {
+    return response?.data
+  })
+  */
+  const situations = [
+    { value: 'interior', title: 'Instal·lació interior' },
+    { value: 'exterior', title: 'Instal·lació exterior' }
+  ]
+
+  return new Promise((resolve, reject) => {
+    resolve({ data: { situations: situations } })
+  })
+}
+
+export const getSelfConsumptionTechnologies = async () => {
+  /*
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/data/selfconsumption/technologies`
+  }).then((response) => {
+    return response?.data
+  })
+  */
+  const technologies = [
+    { value: 'techno1', title: 'Tecnologia 1' },
+    { value: 'techno2', title: 'Tecnologia 2' }
+  ]
+
+  return new Promise((resolve, reject) => {
+    resolve({ data: { technologies: technologies } })
+  })
+}

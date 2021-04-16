@@ -26,6 +26,8 @@ import MemberIdentifier from './Contract/MemberIdentifier'
 import CUPS from './Contract/CUPS'
 import SupplyPoint from './Contract/SupplyPoint'
 import PowerFare from './Contract/PowerFare'
+import SelfConsumption from './Contract/SelfConsumption'
+import SelfConsumptionDetails from './Contract/SelfConsumptionDetails'
 import HolderIdentifier from './Contract/HolderIdentifier'
 import PersonalData from './HolderChange/PersonalData'
 import VoluntaryCent from './HolderChange/VoluntaryCent'
@@ -90,13 +92,20 @@ const Contract = (props) => {
     }
   }
 
-  const testPowerForPeriods = (rates, values, limit = 'min_power', createError) => {
+  const testPowerForPeriods = (
+    rates,
+    values,
+    limit = 'min_power',
+    createError
+  ) => {
     const rate = values?.rate
     let valids = 0
     if (rates[rate] === undefined) return true
     for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
-      const attr = (i === 1) ? 'power' : `power${i}`
-      const inLimit = limit.match('min') ? values[attr] >= rates[rate][limit]?.power : values[attr] <= rates[rate][limit]?.power
+      const attr = i === 1 ? 'power' : `power${i}`
+      const inLimit = limit.match('min')
+        ? values[attr] >= rates[rate][limit]?.power
+        : values[attr] <= rates[rate][limit]?.power
       inLimit && valids++
       values[attr] === undefined && valids++
     }
@@ -105,20 +114,23 @@ const Contract = (props) => {
       return true
     }
 
-    const lessThan = rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply ? 'SOME_PERIOD_MORE_THAN' : 'POWER_NO_LESS_THAN'
+    const lessThan =
+      rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
+        ? 'SOME_PERIOD_MORE_THAN'
+        : 'POWER_NO_LESS_THAN'
 
     return createError({
-      message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', { value: rates[rate][limit]?.power })
+      message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', {
+        value: rates[rate][limit]?.power
+      })
     })
   }
 
   const validationSchemas = [
     Yup.object().shape({
       member: Yup.object().shape({
-        number: Yup.string()
-          .required(t('NO_MEMBER_NUMBER')),
-        vat: Yup.string()
-          .required(t('NO_MEMBER_VAT')),
+        number: Yup.string().required(t('NO_MEMBER_NUMBER')),
+        vat: Yup.string().required(t('NO_MEMBER_VAT')),
         checked: Yup.bool()
           .required(t('NO_MEMBER_MATCH'))
           .oneOf([true], t('NO_MEMBER_MATCH'))
@@ -129,18 +141,18 @@ const Contract = (props) => {
         cups: Yup.string()
           .required(t('CUPS_INVALID'))
           .min(18, t('CUPS_INVALID'))
-          .test('statusError',
-            t('CUPS_INVALID'),
-            function () { return !(this.parent.status === 'error') })
-          .test('statusError',
-            t('CUPS_IN_PROCESS'),
-            function () { return !(this.parent.status === 'busy') })
-          .test('statusNew',
-            t('CUPS_IS_ACTIVE'),
-            function () { return !(this.parent.status === 'active') })
-          .test('statusInvalid',
-            t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') })
+          .test('statusError', t('CUPS_INVALID'), function () {
+            return !(this.parent.status === 'error')
+          })
+          .test('statusError', t('CUPS_IN_PROCESS'), function () {
+            return !(this.parent.status === 'busy')
+          })
+          .test('statusNew', t('CUPS_IS_ACTIVE'), function () {
+            return !(this.parent.status === 'active')
+          })
+          .test('statusInvalid', t('INVALID_SUPPLY_POINT_CUPS'), function () {
+            return !(this.parent.status === 'invalid')
+          })
       }),
       contract: Yup.object().shape({
         has_service: Yup.bool()
@@ -150,37 +162,35 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       supply_point: Yup.object().shape({
-        address: Yup.string()
-          .required(t('NO_ADDRESS')),
-        number: Yup.string()
-          .required(t('NO_NUMBER')),
+        address: Yup.string().required(t('NO_ADDRESS')),
+        number: Yup.string().required(t('NO_NUMBER')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE'))
           .min(5, t('NO_POSTALCODE')),
         state: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_STATE'))
+          id: Yup.number().required(t('NO_STATE'))
         }),
         city: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_CITY'))
+          id: Yup.number().required(t('NO_CITY'))
         }),
         is_housing: Yup.bool()
           .oneOf([true, false], t('NO_IS_HOUSING'))
-          .test('CnaeNoHousing',
-            t('INVALID_CNAE_NO_HOUSING'),
-            function () {
-              return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING)
-            }),
+          .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
+            return !(
+              this.parent.is_housing === false &&
+              this.parent.cnae === CNAE_HOUSING
+            )
+          }),
         cnae: Yup.string()
           .required(t('INVALID_SUPPLY_POINT_CNAE'))
           .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
-          .test('CnaeNoHousing',
-            t('INVALID_CNAE_NO_HOUSING'),
-            function () {
-              return !(this.parent.is_housing === false && this.parent.cnae === CNAE_HOUSING)
-            }),
+          .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
+            return !(
+              this.parent.is_housing === false &&
+              this.parent.cnae === CNAE_HOUSING
+            )
+          }),
         cnae_valid: Yup.bool()
           .required(t('INVALID_SUPPLY_POINT_CNAE'))
           .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
@@ -191,67 +201,125 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
-        fare: Yup.string()
-          .test('required',
-            t('NO_FARE_CHOSEN'),
-            function () {
-              return this.parent.has_service ? true : this.parent.moreThan15Kw ? true : (this.parent.fare === 'dh' || this.parent.fare === 'nodh')
-            }),
-        rate: Yup.string()
-          .when('has_service', {
-            is: true,
-            then: Yup.string().required(t('NO_FARE_CHOSEN'))
-          }),
+        fare: Yup.string().test('required', t('NO_FARE_CHOSEN'), function () {
+          return this.parent.has_service
+            ? true
+            : this.parent.moreThan15Kw
+            ? true
+            : this.parent.fare === 'dh' || this.parent.fare === 'nodh'
+        }),
+        rate: Yup.string().when('has_service', {
+          is: true,
+          then: Yup.string().required(t('NO_FARE_CHOSEN'))
+        }),
         power: Yup.number()
           .required(t('NO_POWER_CHOSEN'))
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError
+              )
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError
+              )
             }
           }),
         power2: Yup.number()
-          .test('required',
-            t('NO_POWER_CHOSEN_P2'),
-            function () {
-              return rates[this.parent.rate]?.num_power_periods >= 2 ? this.parent.power2 : true
-            })
+          .test('required', t('NO_POWER_CHOSEN_P2'), function () {
+            return rates[this.parent.rate]?.num_power_periods >= 2
+              ? this.parent.power2
+              : true
+          })
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError
+              )
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError
+              )
             }
           }),
         power3: Yup.number()
-          .test('required',
-            t('NO_POWER_CHOSEN_P3'),
-            function () {
-              return rates[this.parent.rate]?.num_power_periods >= 3 ? this.parent.power3 : true
-            })
+          .test('required', t('NO_POWER_CHOSEN_P3'), function () {
+            return rates[this.parent.rate]?.num_power_periods >= 3
+              ? this.parent.power3
+              : true
+          })
           .test({
             name: 'minPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'min_power', this.createError)
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError
+              )
             }
           })
           .test({
             name: 'maxPowerValue',
             test: function () {
-              return testPowerForPeriods(rates, this.parent, 'max_power', this.createError)
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError
+              )
             }
           })
+      })
+    }),
+    Yup.object().shape({
+      self_consumption: Yup.object().shape({
+        have_installation: Yup.bool().required(
+          t('FILL_SELFCONSUMPTION_QUESTION')
+        )
+      })
+    }),
+    Yup.object().shape({
+      self_consumption: Yup.object().shape({
+        cau: Yup.string().required(t('FILL_SELFCONSUMPTION_CAU')),
+        collective_installation: Yup.bool().required(
+          t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
+        ),
+        installation_power: Yup.number().required(
+          t('FILL_SELFCONSUMPTION_INSTALLATION_POWER')
+        ),
+        installation_situation: Yup.string().required(
+          t('FILL_SELFCONSUMPTION_INSTALLATION_SITUATION')
+        ),
+        technology: Yup.string().required(t('FILL_SELFCONSUMPTION_TECHNOLOGY')),
+        aux_services: Yup.bool().required(
+          t('FILL_SELFCONSUMPTION_AUX_SERVICES')
+        ),
+        rac_attachment: Yup.array()
+          .required()
+          .min(1, t('FILL_SELFCONSUMPTION_RAC_ATTACHMENT'))
       })
     }),
     Yup.object().shape({
@@ -259,8 +327,7 @@ const Contract = (props) => {
         previous_holder: Yup.bool()
           .required(t('FILL_PREVIOUS_HOLDER'))
           .oneOf([true, false], t('FILL_PREVIOUS_HOLDER')),
-        vat: Yup.string()
-          .required(t('FILL_NIF')),
+        vat: Yup.string().required(t('FILL_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
@@ -268,68 +335,52 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       holder: Yup.object().shape({
-        name: Yup.string()
-          .required(t('NO_NAME')),
-        surname1: Yup.string()
-          .when('isphisical', {
-            is: true,
-            then: Yup.string()
-              .required(t('NO_SURNAME1'))
-          }),
-        proxyname: Yup.string()
-          .when('isphisical', {
-            is: false,
-            then: Yup.string()
-              .required(t('NO_PROXY_NAME'))
-          }),
-        proxynif: Yup.string()
-          .when('isphisical', {
-            is: false,
-            then: Yup.string()
-              .required(t('NO_PROXY_NIF'))
-          }),
-        proxynif_valid: Yup.bool()
-          .when('isphisical', {
-            is: false,
-            then: Yup.bool().required(t('FILL_NIF'))
-              .oneOf([true], t('FILL_NIF'))
-          }),
-        address: Yup.string()
-          .required(t('NO_ADDRESS')),
+        name: Yup.string().required(t('NO_NAME')),
+        surname1: Yup.string().when('isphisical', {
+          is: true,
+          then: Yup.string().required(t('NO_SURNAME1'))
+        }),
+        proxyname: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NAME'))
+        }),
+        proxynif: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NIF'))
+        }),
+        proxynif_valid: Yup.bool().when('isphisical', {
+          is: false,
+          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+        }),
+        address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
         state: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_STATE'))
+          id: Yup.number().required(t('NO_STATE'))
         }),
         city: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_CITY'))
+          id: Yup.number().required(t('NO_CITY'))
         }),
-        email: Yup.string()
-          .required(t('NO_EMAIL'))
-          .email(t('NO_EMAIL')),
+        email: Yup.string().required(t('NO_EMAIL')).email(t('NO_EMAIL')),
         email2: Yup.string()
           .required(t('NO_EMAIL'))
-          .test('repeatEmail',
-            t('NO_REPEATED_EMAIL'),
-            function () {
-              return this.parent.email === this.parent.email2
-            }),
-        phone1: Yup.string()
-          .min(9, t('NO_PHONE'))
-          .required(t('NO_PHONE')),
+          .test('repeatEmail', t('NO_REPEATED_EMAIL'), function () {
+            return this.parent.email === this.parent.email2
+          }),
+        phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
-      legal_person_accepted: Yup.bool()
-        .test({
-          name: 'isTheMemberVat',
-          message: t('ACCEPT_LEGAL_PERSON'),
-          test: function () {
-            return !(this.parent.holder.isphisical === false && this.parent.legal_person_accepted !== true)
-          }
-        }),
+      legal_person_accepted: Yup.bool().test({
+        name: 'isTheMemberVat',
+        message: t('ACCEPT_LEGAL_PERSON'),
+        test: function () {
+          return !(
+            this.parent.holder.isphisical === false &&
+            this.parent.legal_person_accepted !== true
+          )
+        }
+      }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -344,14 +395,17 @@ const Contract = (props) => {
     Yup.object().shape({
       payment: Yup.object().shape({
         iban: Yup.string().required(t('IBAN_ERROR')),
-        iban_valid: Yup.bool().required(t('IBAN_ERROR'))
+        iban_valid: Yup.bool()
+          .required(t('IBAN_ERROR'))
           .oneOf([true], t('IBAN_ERROR')),
-        sepa_accepted: Yup.bool().required(t('IBAN_ERROR'))
+        sepa_accepted: Yup.bool()
+          .required(t('IBAN_ERROR'))
           .oneOf([true], t('IBAN_ERROR'))
       })
     }),
     Yup.object().shape({
-      terms_accepted: Yup.bool().required(t('UNACCEPTED_TERMS'))
+      terms_accepted: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
@@ -361,35 +415,22 @@ const Contract = (props) => {
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
-    return <>
-      { activeStep === 0 &&
-        <MemberIdentifier {...props} />
-      }
-      { activeStep === 1 &&
-        <CUPS {...props} />
-      }
-      { activeStep === 2 &&
-        <SupplyPoint {...props} />
-      }
-      { activeStep === 3 &&
-        <PowerFare rates={rates} {...props} />
-      }
-      { activeStep === 4 &&
-        <HolderIdentifier {...props} />
-      }
-      { activeStep === 5 &&
-        <PersonalData url={url} {...props} />
-      }
-      { activeStep === 6 &&
-        <VoluntaryCent {...props} />
-      }
-      { activeStep === 7 &&
-        <IBAN {...props} />
-      }
-      { activeStep === 8 &&
-        <Review {...props} />
-      }
-    </>
+
+    const steps = [
+      <MemberIdentifier {...props} />,
+      <CUPS {...props} />,
+      <SupplyPoint {...props} />,
+      <PowerFare rates={rates} {...props} />,
+      <SelfConsumption {...props} />,
+      <SelfConsumptionDetails {...props} />,
+      <HolderIdentifier {...props} />,
+      <PersonalData url={url} {...props} />,
+      <VoluntaryCent {...props} />,
+      <IBAN {...props} />,
+      <Review {...props} />
+    ]
+
+    return steps[activeStep] || <></>
   }
 
   useEffect(() => {
@@ -397,14 +438,25 @@ const Contract = (props) => {
     i18n.changeLanguage(language)
   }, [props.match.params.language, i18n])
 
-  const nextStep = props => {
+  const nextStep = (props) => {
     let next = activeStep + 1
-    if (activeStep === 4 &&
+
+    if (
+      activeStep === 4 &&
+      props.values.self_consumption.have_installation === false
+    ) {
+      next++
+    }
+
+    if (
+      activeStep === 6 &&
       props.values.holder.vat === props.values.member.vat &&
-      props.values.holder.isphisical) {
+      props.values.holder.isphisical
+    ) {
       next++
       props.setFieldValue('privacy_policy_accepted', true)
     }
+
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
       if (props.isValid) {
@@ -415,9 +467,20 @@ const Contract = (props) => {
     })
   }
 
-  const prevStep = props => {
+  const prevStep = (props) => {
     let prev = activeStep - 1
-    if (activeStep === 6 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
+    if (
+      activeStep === 6 &&
+      props.values.self_consumption.have_installation === false
+    ) {
+      prev--
+    }
+
+    if (
+      activeStep === 8 &&
+      props.values.holder.vat === props.values.member.vat &&
+      props.values.holder.isphisical
+    ) {
       prev--
       props.setFieldValue('privacy_policy_accepted', false)
     }
@@ -470,6 +533,9 @@ const Contract = (props) => {
       attachments: [],
       supply_point_accepted: false
     },
+    self_consumption: {
+      have_installation: ''
+    },
     contract: {
       has_service: '',
       rate: '',
@@ -519,7 +585,7 @@ const Contract = (props) => {
     setSending(true)
     const data = normalizeContract(values)
     await contract(data)
-      .then(response => {
+      .then((response) => {
         if (response?.state === true) {
           setError(false)
           setResult({ contract_number: response?.data?.contract_id })
@@ -528,9 +594,8 @@ const Contract = (props) => {
           setError(true)
         }
       })
-      .catch(error => {
-        const errorResp =
-        error?.response?.data?.data
+      .catch((error) => {
+        const errorResp = error?.response?.data?.data
           ? error?.response?.data?.data
           : { code: 'UNEXPECTED' }
         setError(errorResp)
@@ -548,77 +613,83 @@ const Contract = (props) => {
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}
-        >
-          {props => (
+          validateOnMount={true}>
+          {(props) => (
             <>
               <div>
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      {
-                        showProgress &&
-                        <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
-                      }
+                      {showProgress && (
+                        <LinearProgress
+                          variant={sending ? 'indeterminate' : 'determinate'}
+                          value={(activeStep / MAX_STEP_NUMBER) * 100}
+                        />
+                      )}
 
                       <Box mx={0} mb={3}>
-                        { completed
-                          ? error
-                            ? <Failure error={error} />
-                            : <Success result={result} />
-                          : getActiveStep(props)
-                        }
+                        {completed ? (
+                          error ? (
+                            <Failure error={error} />
+                          ) : (
+                            <Success result={result} />
+                          )
+                        ) : (
+                          getActiveStep(props)
+                        )}
                       </Box>
                       <Box mx={0} mt={1} mb={3}>
                         <div className={classes.actionsContainer}>
-                          {
-                            result?.contract_number === undefined &&
+                          {result?.contract_number === undefined && (
                             <Button
                               data-cy="prev"
                               className={classes.button}
                               startIcon={<ArrowBackIosIcon />}
-                              disabled={(activeStep === 0) || sending}
-                              onClick={() => prevStep(props)}
-                            >
+                              disabled={activeStep === 0 || sending}
+                              onClick={() => prevStep(props)}>
                               {t('PAS_ANTERIOR')}
                             </Button>
-                          }
-                          {
-                            activeStep < MAX_STEP_NUMBER - 1
-                              ? <Button
-                                type="button"
-                                data-cy="next"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                endIcon={<ArrowForwardIosIcon />}
-                                disabled={!props.isValid}
-                                onClick={() => nextStep(props)}
-                              >
-                                {t('SEGUENT_PAS')}
-                              </Button>
-                              : !completed && <Button
+                          )}
+                          {activeStep < MAX_STEP_NUMBER - 1 ? (
+                            <Button
+                              type="button"
+                              data-cy="next"
+                              className={classes.button}
+                              variant="contained"
+                              color="primary"
+                              endIcon={<ArrowForwardIosIcon />}
+                              disabled={!props.isValid}
+                              onClick={() => nextStep(props)}>
+                              {t('SEGUENT_PAS')}
+                            </Button>
+                          ) : (
+                            !completed && (
+                              <Button
                                 type="button"
                                 data-cy="submit"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"
-                                startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
+                                startIcon={
+                                  sending ? (
+                                    <CircularProgress size={24} />
+                                  ) : (
+                                    <SendIcon />
+                                  )
+                                }
                                 disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}
-                              >
+                                onClick={() => handlePost(props.values)}>
                                 {t('SEND')}
                               </Button>
-                          }
+                            )
+                          )}
                         </div>
                       </Box>
                     </Paper>
                   }
                 </Form>
               </div>
-              { showInspector &&
-                <DisplayFormikState {...props} />
-              }
+              {showInspector && <DisplayFormikState {...props} />}
             </>
           )}
         </Formik>
