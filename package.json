@@ -2,7 +2,6 @@
   "name": "webforms-ui",
   "version": "1.1.0",
   "private": false,
-  "homepage": "/wp-content/plugins/react-wordpress/webforms/build",
   "dependencies": {
     "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.9.1",
@@ -42,6 +41,7 @@
       "plugin:cypress/recommended"
     ]
   },
+  "prettier": "prettier-config-standard",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -55,9 +55,10 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^6.4.0",
+    "cypress": "^7.1.0",
     "cypress-file-upload": "^5.0.2",
     "eslint-plugin-cypress": "^2.11.2",
+    "prettier-config-standard": "^4.0.0",
     "renamer": "^2.0.0",
     "standard": "^14.3.3"
   }
