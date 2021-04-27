@@ -395,7 +395,7 @@
   "API_SERVER_OFFLINE_DETAILS": "És possible que estiguem fent tasques de manteniment. Torneu a provar-ho més tard. Perdoneu les molèsties.",
 
   "SELFCONSUMPTION_TITLE": "Autoconsum",
-  "SELFCONSUMPTION_QUESTION": "Tens una instal·lació d'autoproducció?",
+  "SELFCONSUMPTION_QUESTION": "Tens alguna modalitat d'autoconsum activada pel teu contracte?",
   "SELFCONSUMPTION_YES_LABEL": "Sí, tinc autoproducció",
   "SELFCONSUMPTION_NO_LABEL": "No, no tinc autoproducció",
   "SELFCONSUMPTION_HELP": "Què és l'autoproducció?",
@@ -424,9 +424,7 @@
   "SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL": " Sí, tinc serveis auxiliars",
   "SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION": "Exemple bateries o altres acumuladors",
   "SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_NO_LABEL": "No, no tinc serveis auxiliars",
-  "SELFCONSUMPTION_RAC": "Adjunta el document del RAC *",
-  "SELFCONSUMPTION_RAC_HELP": "Què és el RAC?",
-  "SELFCONSUMPTION_RAC_HELP_URL": "",
+  "SELFCONSUMPTION_ATTACHMENTS": "Adjunta la documentació relacionada",
 
   "FILL_SELFCONSUMPTION_QUESTION": "Indica si tens instal·lació d'autoconsum",
   "FILL_SELFCONSUMPTION_CAU": "Indica el CAU",
@@ -435,5 +433,9 @@
   "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situació de la instal·lació",
   "FILL_SELFCONSUMPTION_TECHNOLOGY": "Indica la tecnologia de la instal·lació",
   "FILL_SELFCONSUMPTION_AUX_SERVICES": "Indica els si tens serveis auxiliars",
-  "FILL_SELFCONSUMPTION_RAC_ATTACHMENT": "Adjunta el fitxer del RAC"
+
+  "SELFCONSUMPTION_B11_RADIACIO_SOLAR": "B11 - Radiació solar",
+  "SELFCONSUMPTION_B12_TERMICA": "B12 - Tèrmica",
+  "SELFCONSUMPTION_B21_EOLICA": "B21 - Èolica en terra",
+  "SELFCONSUMPTION_ALTRES": "Altres"
 }

@@ -316,10 +316,7 @@ const Contract = (props) => {
         technology: Yup.string().required(t('FILL_SELFCONSUMPTION_TECHNOLOGY')),
         aux_services: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_AUX_SERVICES')
-        ),
-        rac_attachment: Yup.array()
-          .required()
-          .min(1, t('FILL_SELFCONSUMPTION_RAC_ATTACHMENT'))
+        )
       })
     }),
     Yup.object().shape({

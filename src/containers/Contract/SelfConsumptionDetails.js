@@ -206,7 +206,7 @@ const SelfConsumptionDetails = (props) => {
             }>
             {situations.map((situation) => (
               <MenuItem key={situation.value} value={situation.value}>
-                {situation.title}
+                {t(situation.title)}
               </MenuItem>
             ))}
           </TextField>
@@ -249,7 +249,7 @@ const SelfConsumptionDetails = (props) => {
             }>
             {technologies.map((technology) => (
               <MenuItem key={technology.value} value={technology.value}>
-                {technology.title}
+                {t(technology.title)}
               </MenuItem>
             ))}
           </TextField>
@@ -280,31 +280,23 @@ const SelfConsumptionDetails = (props) => {
           <Typography
             variant="body1"
             dangerouslySetInnerHTML={{
-              __html: t('SELFCONSUMPTION_RAC')
+              __html: t('SELFCONSUMPTION_ATTACHMENTS')
             }}
             className={classes.fieldTitle}
           />
 
           <Uploader
-            maxFiles={1}
+            maxFiles={5}
             fieldError={
-              errors?.self_consumption?.rac_attachment &&
-              touched?.self_consumption?.rac_attachment &&
-              errors?.self_consumption?.rac_attachment
+              errors?.self_consumption?.attachments &&
+              touched?.self_consumption?.attachments &&
+              errors?.self_consumption?.attachments
             }
             callbackFn={(attachments) =>
-              setFieldValue('self_consumption.rac_attachment', attachments)
+              setFieldValue('self_consumption.attachments', attachments)
             }
-            values={values?.self_consumption?.rac_attachment || []}
+            values={values?.self_consumption?.attachments || []}
           />
-          <FormHelperText variant="outlined">
-            <a
-              href={t('SELFCONSUMPTION_RAC_HELP_URL')}
-              target="_blank"
-              rel="noopener noreferrer">
-              {t('SELFCONSUMPTION_RAC_HELP')}
-            </a>
-          </FormHelperText>
         </Grid>
       </Grid>
     </>
