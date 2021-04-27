@@ -300,8 +300,12 @@ export const getSelfConsumptionSituations = async () => {
   })
   */
   const situations = [
-    { value: 'interior', title: 'Instal·lació interior' },
-    { value: 'exterior', title: 'Instal·lació exterior' }
+    { value: 'xarxa-interior', title: 'Xarxa interior' },
+    {
+      value: 'xarxa-interior-varis',
+      title: 'Xarxa interior diversos consumidors'
+    },
+    { value: 'proxima', title: 'Pròxima a través de xarxa' }
   ]
 
   return new Promise((resolve, reject) => {
@@ -310,17 +314,11 @@ export const getSelfConsumptionSituations = async () => {
 }
 
 export const getSelfConsumptionTechnologies = async () => {
-  /*
-  return axios({
-    method: 'GET',
-    url: `${API_BASE_URL}/data/selfconsumption/technologies`
-  }).then((response) => {
-    return response?.data
-  })
-  */
   const technologies = [
-    { value: 'techno1', title: 'Tecnologia 1' },
-    { value: 'techno2', title: 'Tecnologia 2' }
+    { value: 'B11', title: 'SELFCONSUMPTION_B11_RADIACIO_SOLAR' },
+    { value: 'B12', title: 'SELFCONSUMPTION_B12_TERMICA' },
+    { value: 'B21', title: 'SELFCONSUMPTION_B21_EOLICA' },
+    { value: 'others', title: 'SELFCONSUMPTION_ALTRES' }
   ]
 
   return new Promise((resolve, reject) => {

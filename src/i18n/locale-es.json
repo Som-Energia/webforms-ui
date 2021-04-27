@@ -411,7 +411,7 @@
   "API_SERVER_OFFLINE_DETAILS": "Es posible que se estén haciendo tareas de mantenimiento. Vuelve a probar más tarde. Perdona las molestias.",
 
   "SELFCONSUMPTION_TITLE": "Autoconsumo",
-  "SELFCONSUMPTION_QUESTION": "¿Tienes una instalación de autoproducción?",
+  "SELFCONSUMPTION_QUESTION": "¿Tienes alguna modalidad de autoconsumo activa para tu contrato?",
   "SELFCONSUMPTION_YES_LABEL": "Sí, tengo autoproducción",
   "SELFCONSUMPTION_NO_LABEL": "No, no tengo autoproducción",
   "SELFCONSUMPTION_HELP": "¿Qué es la autoproducción?",

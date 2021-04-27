@@ -63,7 +63,7 @@
     "installation_power": "3.5",
     "installation_situation": 31,
     "aux_services": false,
-    "rac_attachment": ["file.png"],
+    "attachments": ["file.png"],
     "technology": 4
   }
 }
