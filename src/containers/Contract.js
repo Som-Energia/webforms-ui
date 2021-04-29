@@ -438,6 +438,11 @@ const Contract = (props) => {
   const nextStep = (props) => {
     let next = activeStep + 1
 
+    if (activeStep === 3 && props.values.contract.has_service === false) {
+      next++
+      next++
+    }
+
     if (
       activeStep === 4 &&
       props.values.self_consumption.have_installation === false
@@ -471,6 +476,7 @@ const Contract = (props) => {
       props.values.self_consumption.have_installation === false
     ) {
       prev--
+      props.values.contract.has_service === false && prev--
     }
 
     if (

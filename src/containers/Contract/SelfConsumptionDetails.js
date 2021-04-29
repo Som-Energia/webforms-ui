@@ -140,7 +140,7 @@ const SelfConsumptionDetails = (props) => {
           />
           <TextField
             required
-            id="self_consumption_intall_power"
+            id="self_consumption_install_power"
             name="self_consumption.installation_power"
             label={t('SELFCONSUMPTION_INSTALL_POWER')}
             variant="outlined"

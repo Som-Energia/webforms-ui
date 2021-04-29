@@ -73,9 +73,16 @@ const CUPS = (props) => {
       },
       false
     )
-    option === false
-      ? setFieldValue('holder.previous_holder', false, false)
-      : setFieldValue('holder.previous_holder', '', false)
+
+    setFieldValue(
+      'holder.previous_holder',
+      option === false ? false : '',
+      false
+    )
+
+    option === false &&
+      setFieldValue('self_consumption.have_installation', false, false)
+
     setFieldValue('contract.has_service', option)
   }
 
