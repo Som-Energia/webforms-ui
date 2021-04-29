@@ -2,7 +2,6 @@
   "name": "webforms-ui",
   "version": "1.1.0",
   "private": false,
-  "homepage": "/wp-content/plugins/react-wordpress/webforms/build",
   "dependencies": {
     "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.9.1",
@@ -27,7 +26,10 @@
   },
   "scripts": {
     "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
-    "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
+    "build": "sh -ac '. .env.${REACT_APP_ENV}; export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build'",
+    "build:ov": "export REACT_APP_ENV=ov && yarn run build:rename",
+    "build:staging": "export REACT_APP_ENV=staging && yarn run build",
+    "build:wp": "export REACT_APP_ENV=wp && yarn run build",
     "build:rename": "yarn run build && yarn run build-rename",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -54,10 +56,12 @@
       "last 1 safari version"
     ]
   },
+  "prettier": "prettier-config-standard",
   "devDependencies": {
     "cypress": "^6.4.0",
     "cypress-file-upload": "^5.0.2",
     "eslint-plugin-cypress": "^2.11.2",
+    "prettier-config-standard": "^4.0.0",
     "renamer": "^2.0.0",
     "standard": "^14.3.3"
   }
