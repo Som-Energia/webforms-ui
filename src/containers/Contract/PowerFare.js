@@ -124,12 +124,12 @@ const PowerFare = (props) => {
             )
           }}
         />
-        <Typography
-          variant="body1"
+        <FormHelperText
           dangerouslySetInnerHTML={{
-            __html: t('POWER_PERIODS_MORE_INFO')
-          }}
-        />
+            __html: t('POWER_PERIODS_MORE_INFO', {
+              url: t('POWER_PERIODS_MORE_INFO_URL')
+            })
+          }}></FormHelperText>
       </Box>
       <Box mt={2} mb={1}>
         <PowerInputs

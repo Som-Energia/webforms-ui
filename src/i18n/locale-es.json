@@ -22,15 +22,15 @@
   "MONOFASICA_NORMAL": "Trifásica a Monofásica",
   "TRIFASICA": "Monofásica a Trifásica",
   "INSTALL_TYPE_ATTACHMENTS": "La distribuidora eléctrica solicita de manera obligatoria la presentación del boletín eléctrico dónde conste el cambio de tensión efectuado",
-  "HELP_INSTALL_TYPE": "Cómo identificar si una instalación es <a target=\"_blank\" href=\"{{url}}\">trifásica o monofásica</a>",
+  "HELP_INSTALL_TYPE": "<a target=\"_blank\" href=\"{{url}}\">Cómo identificar si una instalación es trifásica o monofásica</a>",
   "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
   "POTENCIA_A_CONTRACTAR": "¿Qué potencia quieres contratar?",
-  "HELP_POTENCIA": "Cómo averiguar <a target=\"_blank\" href=\"{{url}}\">la potencia que necesito</a>",
+  "HELP_POTENCIA": "<a target=\"_blank\" href=\"{{url}}\">Cómo averiguar la potencia que necesito</a>",
   "HELP_POTENCIA_URL": "http://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
   "DISCRIMINACIO_HORARIA": "¿Quieres discriminación horaria?",
   "SENSE_DISCRIMINACIO_HORARIA": "Sin discriminación horaria",
   "AMB_DISCRIMINACIO_HORARIA": "Con discriminación horaria",
-  "HELP_DISCRIMINACIO_HORARIA": "Cómo puedo saber <a target=\"_blank\" href=\"{{url}}\">si me conviene discriminación horaria o no</a>",
+  "HELP_DISCRIMINACIO_HORARIA": "<a target=\"_blank\" href=\"{{url}}\">Cómo puedo saber si me conviene discriminación horaria o no</a>",
   "HELP_DISCRIMINACIO_HORARIA_URL": "http://es.support.somenergia.coop/article/283-como-puedo-saber-si-me-sale-a-cuenta-tener-discriminacion-horaria",
   "LA_TEVA_TARIFA_ES": "Tu tarifa será",
   "NO_MONOPHASE_CHOICE": "No has especificado si la instalación es de tipo monofásico o trifásico",
@@ -285,7 +285,7 @@
   "ADJUNTAR_DOCUMENTACIO": "Adjuntar la documentación para el alta de suministro (PDF o JPG) - 10Mb máximo",
 
   "TENSION_AND_POWER": "Tensión y potencia",
-  "HELP_POWER_CANVI": "Para evitar problemas de tramitación, pon <b>la misma potencia que aparece en la factura actual</b>. Podrás solicitar el cambio de potencia una vez esté el contrato activado con nosotros.",
+  "HELP_POWER_CANVI": "<p>Para evitar problemas de tramitación, pon <b>la misma potencia que aparece en la factura actual</b>. Si en tu factura solamente aparece un periodo de potencia, deberás indicar la misma en los dos apartados.</p><p>Podrás solicitar el cambio de potencia una vez esté el contrato activado con Som Energia.</p>",
   "HELP_TENSION_POWER_ALTA": "Indica qué tipo de instalación tienes y qué potencia quieres contratar.",
   "QUINA_POTENCIA_TENS_CONTRACTADA": "¿Qué potencia tienes contratada?",
   "HELP_POPOVER_POWER": "Anota la potencia ACTUAL de tu contrato",
@@ -298,6 +298,7 @@
   "POWER_NO_LESS_THAN": "La potencia debe ser superior a {{value}}kW",
   "POWER_NO_MORE_THAN": "La potencia debe ser inferior a {{value}}kW",
   "SOME_PERIOD_MORE_THAN": "Alguno de los periodos debe ser superior a {{value}}kW",
+  "MORE_THAN_15KW_ADVICE": "Al menos un periodo debe ser superior a 15 kW. La potencia de cada periodo debe ser igual o superior a la del periodo anterior.",
 
   "HOLDER_IDENTIFIER_TITLE": "Identificación del titular",
   "HOLDER_IDENTIFIER_DESC": "<p>Introduce el <b>NIF de la persona o entidad jurídica que será la titular</b> del contrato:</p>",
@@ -414,7 +415,8 @@
   "HELP_MORE_THAN_15KW_HASNOT_SERVICE": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 6 períodos de potencia.</p><p>Al menos un periodo debe ser superior a 15 kW. La potencia de cada periodo debe ser  igual o superior a la potencia del periodo anterior.</p>",
   "HELP_LESS_THAN_15KW": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 2 períodos de potencia.</p>",
   "HELP_LESS_THAN_15KW_HAS_SERVICE": "<p>En los dos períodos debes indicar la misma potencia que tienes contratada actualmente, pues según lo previsto en la Circular 3/2020 de la CNMC, la potencia del P2 será igual a la potencia contratada anteriormente.</p>",
-  "POWER_PERIODS_MORE_INFO": "<p>Aquí encontrarás <a href=\"#\" target=\"_blank\">más información sobre los periodos de las potencias</a>.</p>",
+  "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">Más información sobre los periodos de las potencias</a>.</p>",
+  "POWER_PERIODS_MORE_INFO_URL": "#",
   "HELP_MORE_THAN_15KW_HAS_SERVICE": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 6 períodos de potencia.</p><p>En el P1 deberás indicar la misma potencia que tienes contratada actualmente en el mismo período. En relación al P2, P3, P4 y P5, deberás indicar la potencia que tienes contratada en el P2 actual. Finalmente, en el P6, deberás indicar la potencia que tienes contratada en el P3 actual.</p>",
-  "NEW_TOLLS_AND_TARIFF_INFO": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, podemos cambiar las potencias contratadas sin coste desde el 1 de junio hasta el 30 de septiembre de 2021, aunque durante los 12 meses anteriores hayas modificado tu contrato y siempre y cuando no se trate de un aumento de potencia."
+  "NEW_TOLLS_AND_TARIFF_INFO": "Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, podemos cambiar las potencias contratadas sin coste desde el 1 de junio hasta el 30 de septiembre de 2021, aunque durante los 12 meses anteriores hayas modificado tu contrato y siempre y cuando no se trate de un aumento de potencia."
 }
