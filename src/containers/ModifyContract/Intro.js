@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%'
   },
@@ -36,12 +36,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyIntro ({ nextStep, prevStep }) {
+export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()
   const classes = useStyles()
   const [isSubmitting, setSubmitting] = useState(false)
 
-  const onFormSubmit = event => {
+  const onFormSubmit = (event) => {
     event.preventDefault()
     if (!isSubmitting) {
       setSubmitting(true)
@@ -53,23 +53,26 @@ export default function ModifyIntro ({ nextStep, prevStep }) {
     <Paper className={classes.paperContainer} elevation={0}>
       <Box mx={1}>
         <form onSubmit={onFormSubmit}>
-          <Typography variant="body1"
-            dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTAR_INTRO') }}
+          <Typography
+            variant="body1"
+            dangerouslySetInnerHTML={{
+              __html: t('MODIFY_POTTAR_INTRO', {
+                url: t('MODIFY_POTTAR_INTRO_URL')
+              })
+            }}
           />
           <div className={classes.actionsContainer}>
-            {
-              nextStep &&
+            {nextStep && (
               <Button
                 type="submit"
                 className={classes.button}
                 variant="contained"
                 color="primary"
                 endIcon={<ArrowForwardIosIcon />}
-                disabled={isSubmitting}
-              >
+                disabled={isSubmitting}>
                 {t('SEGUENT_PAS')}
               </Button>
-            }
+            )}
           </div>
         </form>
       </Box>
