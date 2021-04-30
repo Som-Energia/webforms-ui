@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%'
   },
@@ -37,16 +37,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ModifyIntro ({ nextStep, prevStep, handleStepChanges }) {
+export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const onNextStep = event => {
+  const onNextStep = (event) => {
     event.preventDefault()
     nextStep()
   }
 
-  const onPrevStep = event => {
+  const onPrevStep = (event) => {
     event.preventDefault()
     prevStep()
   }
@@ -54,33 +54,35 @@ export default function ModifyIntro ({ nextStep, prevStep, handleStepChanges }) 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
       <Box mx={1}>
-        <Typography variant="body1"
-          dangerouslySetInnerHTML={{ __html: t('MODIFY_POTTARAUTO_INTRO') }}
+        <Typography
+          variant="body1"
+          component="div"
+          dangerouslySetInnerHTML={{
+            __html: t('MODIFY_POTTARAUTO_INTRO', {
+              url: t('MODIFY_POTTAR_INTRO_URL')
+            })
+          }}
         />
         <div className={classes.actionsContainer}>
-          {
-            prevStep &&
-              <Button
-                className={classes.button}
-                startIcon={<ArrowBackIosIcon />}
-                onClick={ event => onPrevStep(event)}
-              >
-                {t('PAS_ANTERIOR')}
-              </Button>
-          }
-          {
-            nextStep &&
-              <Button
-                type="submit"
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                endIcon={<ArrowForwardIosIcon />}
-                onClick={event => onNextStep(event)}
-              >
-                {t('SEGUENT_PAS')}
-              </Button>
-          }
+          {prevStep && (
+            <Button
+              className={classes.button}
+              startIcon={<ArrowBackIosIcon />}
+              onClick={(event) => onPrevStep(event)}>
+              {t('PAS_ANTERIOR')}
+            </Button>
+          )}
+          {nextStep && (
+            <Button
+              type="submit"
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              endIcon={<ArrowForwardIosIcon />}
+              onClick={(event) => onNextStep(event)}>
+              {t('SEGUENT_PAS')}
+            </Button>
+          )}
         </div>
       </Box>
     </Paper>
