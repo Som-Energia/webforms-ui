@@ -414,11 +414,27 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     ]}
                   />
 
+                  {values.moreThan15Kw && (
+                    <Box mt={2} mb={2}>
+                      <Typography variant="body1">
+                        {t('MORE_THAN_15KW_ADVICE')}
+                      </Typography>
+                    </Box>
+                  )}
+
                   <Box mt={2} mb={2}>
                     <Typography variant="body1">
                       {t('NEW_TOLLS_AND_TARIFF_INFO')}
                     </Typography>
+
+                    <FormHelperText
+                      dangerouslySetInnerHTML={{
+                        __html: t('POWER_PERIODS_MORE_INFO', {
+                          url: t('POWER_PERIODS_MORE_INFO_URL')
+                        })
+                      }}></FormHelperText>
                   </Box>
+
                   <PowerInputs
                     numInputs={rates[values?.tariff]?.num_power_periods}
                     {...props}
