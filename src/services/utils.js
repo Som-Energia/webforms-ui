@@ -216,64 +216,82 @@ export const normalizeContract = (contract) => {
   finalContract.tariff = contract?.contract?.rate
   finalContract.power_p1 = Math.round(
     contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR
-  )
+  ).toString()
   finalContract.power_p2 = Math.round(
     contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR
-  )
+  ).toString()
   finalContract.power_p3 =
     contract?.contract?.power3 &&
-    Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
+    Math.round(
+      contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
   finalContract.power_p4 =
     contract?.contract?.power4 &&
-    Math.round(contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR)
+    Math.round(
+      contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
   finalContract.power_p5 =
     contract?.contract?.power5 &&
-    Math.round(contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR)
+    Math.round(
+      contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
   finalContract.power_p6 =
     contract?.contract?.power6 &&
-    Math.round(contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR)
+    Math.round(
+      contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
+
   finalContract.cups_address = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
-  finalContract.city_id = contract?.supply_point?.city?.id
+  finalContract.cups_city_id = contract?.supply_point?.city?.id
+    ? parseInt(contract?.supply_point?.city?.id)
+    : 0
   finalContract.cups_state_id = contract?.supply_point?.state?.id
+    ? parseInt(contract?.supply_point?.state?.id)
+    : 0
   finalContract.cnae = contract?.supply_point?.cnae
-  finalContract.owner_is_juridical = !contract?.holder?.isphisical
-  finalContract.owner_vat = holder?.vat
-  finalContract.owner_name = holder?.name
-  finalContract.owner_surname1 = holder?.surname1
-  finalContract.owner_surname2 = holder?.surname2
-  finalContract.owner_proxy_vat = !contract?.holder?.isphisical
+  finalContract.supply_point_accepted =
+    contract?.supply_point?.supply_point_accepted
+
+  finalContract.is_juridical = !contract?.holder?.isphisical
+  finalContract.contract_owner = {}
+  finalContract.contract_owner.vat = holder?.vat
+  finalContract.contract_owner.name = holder?.name
+  finalContract.contract_owner.surname1 = holder?.surname1
+  finalContract.contract_owner.surname2 = holder?.surname2
+  finalContract.contract_owner.proxy_vat = !contract?.holder?.isphisical
     ? holder?.proxynif
     : undefined
-  finalContract.owner_proxy_name = !contract?.holder?.isphisical
+  finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
     ? holder?.proxyname
     : undefined
-  finalContract.owner_address = holder?.address
-  finalContract.owner_city_id = holder?.city?.id
-  finalContract.owner_state_id = holder?.state?.id
-  finalContract.owner_postal_code = holder?.postal_code
-  finalContract.owner_email = holder?.email
-  finalContract.owner_phone = holder?.phone1
-  finalContract.owner_phone2 = holder?.phone2
-  finalContract.owner_lang = holder?.language
+  finalContract.contract_owner.address = holder?.address
+  finalContract.contract_owner.city_id = holder?.city?.id
+  finalContract.contract_owner.state_id = holder?.state?.id
+  finalContract.contract_owner.postal_code = holder?.postal_code
+  finalContract.contract_owner.email = holder?.email
+  finalContract.contract_owner.phone = holder?.phone1
+  finalContract.contract_owner.phone2 = holder?.phone2
+  finalContract.contract_owner.lang = holder?.language
   finalContract.owner_is_payer = true
 
   if (!finalContract.owner_is_payer) {
-    finalContract.payer_person_type = finalContract.owner_person_type
-    finalContract.payer_is_juridical = finalContract.owner_is_juridical
-    finalContract.payer_name = finalContract.owner_name
-    finalContract.payer_surname1 = finalContract.owner_surname1
-    finalContract.payer_surname2 = finalContract.owner_surname2
-    finalContract.payer_proxy_vat = finalContract.owner_proxy_vat
-    finalContract.payer_proxy_name = finalContract.owner_proxy_name
-    finalContract.payer_vat = finalContract.owner_vat
-    finalContract.payer_address = finalContract.owner_address
-    finalContract.payer_city_id = finalContract.owner_city_id
-    finalContract.payer_state_id = finalContract.owner_state_id
-    finalContract.payer_postal_code = finalContract.owner_postal_code
-    finalContract.payer_email = finalContract.owner_email
-    finalContract.payer_phone = finalContract.owner_phone
-    finalContract.payer_phone2 = finalContract.phone2
-    finalContract.payer_lang = finalContract.owner_lang
+    finalContract.contract_payer = {}
+    finalContract.contract_payer.person_type = finalContract.owner_person_type
+    finalContract.contract_payer.is_juridical = finalContract.owner_is_juridical
+    finalContract.contract_payer.name = finalContract.owner_name
+    finalContract.contract_payer.surname1 = finalContract.owner_surname1
+    finalContract.contract_payer.surname2 = finalContract.owner_surname2
+    finalContract.contract_payer.proxy_vat = finalContract.owner_proxy_vat
+    finalContract.contract_payer.proxy_name = finalContract.owner_proxy_name
+    finalContract.contract_payer.vat = finalContract.owner_vat
+    finalContract.contract_payer.address = finalContract.owner_address
+    finalContract.contract_payer.city_id = finalContract.owner_city_id
+    finalContract.contract_payer.state_id = finalContract.owner_state_id
+    finalContract.contract_payer.postal_code = finalContract.owner_postal_code
+    finalContract.contract_payer.email = finalContract.owner_email
+    finalContract.contract_payer.phone = finalContract.owner_phone
+    finalContract.contract_payer.phone2 = finalContract.phone2
+    finalContract.contract_payer.lang = finalContract.owner_lang
   }
 
   finalContract.payment_iban = contract?.payment?.iban
