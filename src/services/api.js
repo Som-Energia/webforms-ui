@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL ||
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
 export const modifyContract = async (data) => {
@@ -8,10 +9,9 @@ export const modifyContract = async (data) => {
     method: 'POST',
     url: `${API_BASE_URL}/form/modificacio`,
     data: data
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const uploadFile = async (name, file) => {
@@ -33,10 +33,9 @@ export const uploadFile = async (name, file) => {
     url: `${API_BASE_URL}/form/upload_attachment`,
     data: data,
     config: config
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 let cancelTokenVat
@@ -52,10 +51,9 @@ export const checkVat = async (vat) => {
     method: 'GET',
     url: `${API_BASE_URL}/check/vat/exists/${vat}`,
     cancelToken: cancelTokenVat.token
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 let cancelTokenCups
@@ -71,10 +69,9 @@ export const checkCups = async (cups) => {
     method: 'GET',
     url: `${API_BASE_URL}/check/cups/status/${cups}`,
     cancelToken: cancelTokenCups.token
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 let cancelTokenCnae
@@ -90,30 +87,27 @@ export const checkCnae = async (cnae) => {
     method: 'GET',
     url: `${API_BASE_URL}/check/cnae/${cnae}`,
     cancelToken: cancelTokenCnae.token
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const getProvincies = async () => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}/data/provincies`
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const getMunicipis = async (provincia) => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}/data/municipis/${provincia}`
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 let cancelTokenIban
@@ -129,10 +123,9 @@ export const checkIban = async (iban) => {
     method: 'GET',
     url: `${API_BASE_URL}/check/iban/${iban}`,
     cancelToken: cancelTokenIban.token
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const holderChange = async (data) => {
@@ -140,10 +133,9 @@ export const holderChange = async (data) => {
     method: 'POST',
     url: `${API_BASE_URL}/form/holderchange`,
     data: data
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const getRates = (data) => {
@@ -178,10 +170,9 @@ export const checkMemberVat = async (vat) => {
     method: 'GET',
     url: `${API_BASE_URL}/check/vat/${vat}`,
     cancelToken: cancelTokenMemberVat.token
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 let cancelTokenMember
@@ -197,31 +188,28 @@ export const checkMember = async (number, vat) => {
     method: 'GET',
     url: `${API_BASE_URL}/data/soci/${number}/${vat}`,
     cancelToken: cancelTokenMember.token
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const getPrices = async (tariff, vat, cnae, city_id) => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}/data/prices?tariff=${tariff}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const contract = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}form/contractacio`,
+    url: `${API_BASE_URL}/procedures/contract`,
     data: data
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const confirmD1Case = async (data, case_id, token) => {
@@ -230,10 +218,9 @@ export const confirmD1Case = async (data, case_id, token) => {
     url: `${API_BASE_URL}/form/confirm_d1/${case_id}`,
     headers: { Authorization: token },
     data: data
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const member = async (data) => {
@@ -246,10 +233,9 @@ export const member = async (data) => {
     method: 'POST',
     url: `${API_BASE_URL}/form/soci/alta`,
     data: formData
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const memberPayment = async (data) => {
@@ -262,10 +248,9 @@ export const memberPayment = async (data) => {
     method: 'POST',
     url: `${API_BASE_URL}/pagament/redirectiondata`,
     data: formData
+  }).then((response) => {
+    return response?.data
   })
-    .then(response => {
-      return response?.data
-    })
 }
 
 export const apiStatus = async () => {
