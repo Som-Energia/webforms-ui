@@ -13,7 +13,11 @@ export const languages = {
 
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
-    (key) => (data[key] == null || data[key] === '') && delete data[key]
+    (key) =>
+      (data[key] == null ||
+        data[key] === '' ||
+        (Array.isArray(data[key]) && !data[key].length)) &&
+      delete data[key]
   )
   return data
 }
@@ -56,9 +60,7 @@ const normalizeCommonModifyData = (params) => {
 }
 
 export const normalizeModifyData = (params) => {
-  const { token } = params
-
-  const data = { ...normalizeCommonModifyData(params), token: token }
+  const data = { ...normalizeCommonModifyData(params) }
   return sanitizeData(data)
 }
 

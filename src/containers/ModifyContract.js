@@ -49,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
   },
   stepLabel: {
     fontSize: '1.15rem'
+  },
+  warningMessage: {
+    '& p': {
+      marginTop: 0,
+      marginBottom: '8px'
+    },
+    '& a': {
+      color: 'rgb(102, 60, 0) !important'
+    }
   }
 }))
 
@@ -96,8 +105,9 @@ function ModifyContract(props) {
   )
 
   const handlePost = async (values) => {
+    const { token } = values
     const data = normalizeModifyData(values)
-    await modifyContract(data)
+    await modifyContract(data, token)
       .then((response) => {
         handleStepChanges({ response: response })
         nextStep()
@@ -191,6 +201,11 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <div className={classes.root}>
+        <Alert severity="warning" style={{ marginTop: '8px' }}>
+          <div
+            className={classes.warningMessage}
+            dangerouslySetInnerHTML={{ __html: t('MODIFY_NP_ADVICE') }}></div>
+        </Alert>
         {fromD1 && (
           <Stepper
             className={classes.stepper}

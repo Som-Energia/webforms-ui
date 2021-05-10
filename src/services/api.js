@@ -4,10 +4,13 @@ const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
-export const modifyContract = async (data) => {
+export const modifyContract = async (data, token) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/modificacio`,
+    url: `${API_BASE_URL}/procedures/contract_modification`,
+    headers: {
+      Authorization: token
+    },
     data: data
   }).then((response) => {
     return response?.data
