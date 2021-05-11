@@ -18,7 +18,7 @@ import SendIcon from '@material-ui/icons/Send'
 
 import Uploader from '../../components/Uploader'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%'
@@ -46,7 +46,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }) {
+function AcceptD1({
+  prevStep,
+  handlePost,
+  handleStepChanges,
+  nextStep,
+  params
+}) {
   const classes = useStyles()
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
@@ -61,18 +67,19 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
   return (
     <Paper className={classes.paperContainer} elevation={0}>
       <Formik
-        initialValues={
-          {
-            ...{
-              d1Attachments: [],
-              m1: ''
-            },
-            ...params
-          }
-        }
+        initialValues={{
+          ...{
+            d1Attachments: [],
+            m1: ''
+          },
+          ...params
+        }}
         validationSchema={AcceptD1Schema}
-        onSubmit={ async (values) => {
-          handleStepChanges({ d1Attachments: values?.d1Attachments, m1: values?.m1 })
+        onSubmit={async (values) => {
+          handleStepChanges({
+            d1Attachments: values?.d1Attachments,
+            m1: values?.m1
+          })
           if (values?.m1) {
             nextStep()
           } else {
@@ -80,8 +87,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
             await handlePost(values)
             setSending(false)
           }
-        }}
-      >
+        }}>
         {({
           values,
           errors,
@@ -92,32 +98,44 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
         }) => (
           <Form onSubmit={handleSubmit} noValidate>
             <Box mt={1} mx={1} mb={2}>
-              <Typography variant="body1"
-                dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_ACCEPT') }}
+              <Typography
+                variant="body1"
+                dangerouslySetInnerHTML={{
+                  __html: t('ATTACHMENTS_D1_INTRO_ACCEPT')
+                }}
               />
             </Box>
 
             <Box mt={3} mb={1}>
               <Box mt={3} mx={1} mb={1}>
-                <Typography>
-                  {t('D1_ATTACHMENTS_ACCEPT')}
-                </Typography>
+                <Typography
+                  variant="body1"
+                  component="div"
+                  dangerouslySetInnerHTML={{
+                    __html: t('D1_ATTACHMENTS_ACCEPT')
+                  }}
+                />
               </Box>
               <Box mx={1} mt={3} mb={1}>
                 <Uploader
                   maxFiles={5}
-                  fieldError={errors?.d1Attachments && touched?.d1Attachments && errors?.d1Attachments}
-                  callbackFn={d1Attachments => setFieldValue('d1Attachments', d1Attachments)}
+                  fieldError={
+                    errors?.d1Attachments &&
+                    touched?.d1Attachments &&
+                    errors?.d1Attachments
+                  }
+                  callbackFn={(d1Attachments) =>
+                    setFieldValue('d1Attachments', d1Attachments)
+                  }
                   values={values.d1Attachments}
                 />
               </Box>
-
             </Box>
 
             <Box mx={1} mt={1} mb={2} className={classes.chooserLabelBox}>
               <Chooser
                 question={t('APROFITAR_LA_MODIFICACIO')}
-                onChange={ option => setFieldValue('m1', option.option)}
+                onChange={(option) => setFieldValue('m1', option.option)}
                 value={values.m1}
                 options={[
                   {
@@ -140,8 +158,7 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                   className={classes.button}
                   startIcon={<ArrowBackIosIcon />}
                   disabled={sending}
-                  onClick={() => prevStep(params)}
-                >
+                  onClick={() => prevStep(params)}>
                   {t('PAS_ANTERIOR')}
                 </Button>
               }
@@ -152,9 +169,12 @@ function AcceptD1 ({ prevStep, handlePost, handleStepChanges, nextStep, params }
                   color="primary"
                   variant="contained"
                   disabled={!isValid || sending}
-                  endIcon={ (sending && <CircularProgress size={24} />) ||
-                    ((values?.m1 === false && <SendIcon/>) || <ArrowForwardIosIcon/>)}
-                >
+                  endIcon={
+                    (sending && <CircularProgress size={24} />) ||
+                    (values?.m1 === false && <SendIcon />) || (
+                      <ArrowForwardIosIcon />
+                    )
+                  }>
                   {(values?.m1 === false && t('ENVIAR')) || t('SEGUENT_PAS')}
                 </Button>
               }

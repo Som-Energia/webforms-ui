@@ -32,7 +32,14 @@ const MemberIdentifier = (props) => {
   const classes = useStyles()
   const query = useQuery()
 
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue } = props
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    setFieldValue
+  } = props
 
   const [isLoading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -54,9 +61,16 @@ const MemberIdentifier = (props) => {
       }
 
       try {
-        const member = await checkMember(values.member.number, values.member.vat)
-        if (member?.data?.soci?.nom) {
-          setFieldValue('member.full_name', `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`, false)
+        const member = await checkMember(
+          values.member.number,
+          values.member.vat
+        )
+        if (member?.state === true && member?.data?.soci?.nom) {
+          setFieldValue(
+            'member.full_name',
+            `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`,
+            false
+          )
           setFieldValue('member.name', member?.data?.soci?.nom, false)
           setFieldValue('member.address', member?.data?.soci?.adreca, false)
           setFieldValue('member.postal_code', member?.data?.soci?.cp, false)
@@ -81,8 +95,11 @@ const MemberIdentifier = (props) => {
       setLoading(false)
     }
 
-    if (values?.member?.number &&
-      values?.member?.vat && values.member.vat.length >= 9) {
+    if (
+      values?.member?.number &&
+      values?.member?.vat &&
+      values.member.vat.length >= 9
+    ) {
       checkIsMember()
     } else {
       setFieldValue('member.checked', false)
@@ -106,7 +123,8 @@ const MemberIdentifier = (props) => {
   return (
     <>
       <StepHeader title={t('CONTRACT_TITLE')} />
-      <Typography variant="body1"
+      <Typography
+        variant="body1"
         dangerouslySetInnerHTML={{ __html: t('MEMBER_IDENTIFIER_DESC') }}
       />
       <Box mt={3} mb={1}>
@@ -125,24 +143,40 @@ const MemberIdentifier = (props) => {
               variant="outlined"
               margin="normal"
               InputProps={{
-                endAdornment:
+                endAdornment: (
                   <InputAdornment position="end">
-                    { isLoading &&
-                      <CircularProgress size={24} />
-                    }
-                    { !isLoading && values?.member?.checked &&
+                    {isLoading && <CircularProgress size={24} />}
+                    {!isLoading && values?.member?.checked && (
                       <CheckOutlinedIcon color="primary" />
-                    }
+                    )}
                   </InputAdornment>
-              }}
-              error={error !== false || (errors?.member?.number && touched?.member?.number)}
-              helperText={(touched?.member?.number && errors?.member?.number) ||
-                (!values?.member?.checked
-                  ? error
-                    ? <span dangerouslySetInnerHTML={{ __html: t('SOCIA_NO_TROBADA') }} />
-                    : <span dangerouslySetInnerHTML={{ __html: t('HELP_POPOVER_SOCIA') }} />
-                  : <span className={classes.memberChecked}>{t('SOCIA_TROBADA')}: {values?.member?.full_name}</span>
                 )
+              }}
+              error={
+                error !== false ||
+                (errors?.member?.number && touched?.member?.number)
+              }
+              helperText={
+                (touched?.member?.number && errors?.member?.number) ||
+                (!values?.member?.checked ? (
+                  error ? (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: t('SOCIA_NO_TROBADA')
+                      }}
+                    />
+                  ) : (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: t('HELP_POPOVER_SOCIA')
+                      }}
+                    />
+                  )
+                ) : (
+                  <span className={classes.memberChecked}>
+                    {t('SOCIA_TROBADA')}: {values?.member?.full_name}
+                  </span>
+                ))
               }
             />
           </Grid>
@@ -159,8 +193,11 @@ const MemberIdentifier = (props) => {
               disabled={disabled}
               variant="outlined"
               margin="normal"
-              error={(errors?.member?.vat && touched?.member?.vat)}
-              helperText={(touched?.member?.vat && errors?.member?.vat) || t('HELP_POPOVER_NIF')}
+              error={errors?.member?.vat && touched?.member?.vat}
+              helperText={
+                (touched?.member?.vat && errors?.member?.vat) ||
+                t('HELP_POPOVER_NIF')
+              }
             />
           </Grid>
         </Grid>

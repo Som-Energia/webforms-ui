@@ -397,3 +397,19 @@ export const testPowerForPeriods = (
     })
   })
 }
+
+export const fakeD1Data = {
+  token: 'no-token',
+  installed_power: '3.5',
+  cil: 'ES13984U932824DF',
+  installation_type: 'Red interior',
+  subsection: 'Con excedentes y mecanismo de compensación simplificado',
+  cau: 'ES1334985UDSFW984U932824DF',
+  collective: false,
+  generator_technology:
+    '[B11] - Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la tecnología fotovoltaica',
+  ssaa: 'true',
+  register_section: 'Con excedentes',
+  to_validate: true,
+  case_id: ''
+}
