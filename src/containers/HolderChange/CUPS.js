@@ -18,10 +18,18 @@ import { checkCups } from '../../services/api'
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
 
-
-function CUPS (props) {
+function CUPS(props) {
   const { t } = useTranslation()
-  const { values, setFieldValue, setTouched, handleChange, validateForm, handleBlur, errors, touched } = props
+  const {
+    values,
+    setFieldValue,
+    setTouched,
+    handleChange,
+    validateForm,
+    handleBlur,
+    errors,
+    touched
+  } = props
 
   const [isLoading, setIsLoading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -59,17 +67,21 @@ function CUPS (props) {
     if (value.length > 18) {
       setIsLoading(true)
       checkCups(value)
-        .then(response => {
+        .then((response) => {
           const status = response?.data?.status
           if (status === 'active') {
-            setFieldValue('supply_point.address', response?.data?.address, false)
+            setFieldValue(
+              'supply_point.address',
+              response?.data?.address,
+              false
+            )
           }
           setTouched({ supply_point: { cups: true } }, false)
           setFieldValue('supply_point.status', status, true)
           validateForm()
           setIsLoading(false)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response)
           const errorStatus = error?.response?.data?.data?.status
             ? error?.response?.data?.data?.status
@@ -84,11 +96,7 @@ function CUPS (props) {
   }, [values.supply_point.cups, setFieldValue, validateForm, setTouched])
 
   const CupsHelperText = () => (
-    <a
-      href={t('CUPS_HELP_URL')}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a href={t('CUPS_HELP_URL')} target="_blank" rel="noopener noreferrer">
       {t('CUPS_HELP')}
     </a>
   )
@@ -96,7 +104,8 @@ function CUPS (props) {
   return (
     <>
       <StepHeader title={t('CUPS_TITLE')} />
-      <Typography variant="body1"
+      <Typography
+        variant="body1"
         dangerouslySetInnerHTML={{ __html: t('FILL_CUPS') }}
       />
       <Box mt={3} mb={1}>
@@ -106,23 +115,29 @@ function CUPS (props) {
           label={t('CUPS_LABEL')}
           variant="outlined"
           fullWidth
-          autoFocus
           required
           value={values?.supply_point?.cups}
           onChange={handleInputCups}
           onBlur={handleBlur}
-          error={ !isLoading && errors?.supply_point?.cups && touched?.supply_point?.cups}
-          helperText={(!isLoading && touched?.supply_point?.cups && errors?.supply_point?.cups) || <CupsHelperText />}
+          error={
+            !isLoading &&
+            errors?.supply_point?.cups &&
+            touched?.supply_point?.cups
+          }
+          helperText={
+            (!isLoading &&
+              touched?.supply_point?.cups &&
+              errors?.supply_point?.cups) || <CupsHelperText />
+          }
           InputProps={{
-            endAdornment:
+            endAdornment: (
               <InputAdornment position="end">
-                { isLoading &&
-                  <CircularProgress size={24} />
-                }
-                { !isLoading && isActiveCups() &&
+                {isLoading && <CircularProgress size={24} />}
+                {!isLoading && isActiveCups() && (
                   <CheckOutlinedIcon color="primary" />
-                }
+                )}
               </InputAdornment>
+            )
           }}
         />
       </Box>
@@ -170,7 +185,10 @@ function CUPS (props) {
         />
       </Box>
       <Box ml={1}>
-        <FormHelperText dangerouslySetInnerHTML={{ __html: t('CUPS_NO_VERIFY_HELP') }}></FormHelperText>
+        <FormHelperText
+          dangerouslySetInnerHTML={{
+            __html: t('CUPS_NO_VERIFY_HELP')
+          }}></FormHelperText>
       </Box>
 
       <TermsDialog
@@ -178,11 +196,11 @@ function CUPS (props) {
         open={open}
         onAccept={handleAccept}
         onClose={handleClose}
-        maxWidth="sm"
-      >
-        <span dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }} />
+        maxWidth="sm">
+        <span
+          dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }}
+        />
       </TermsDialog>
-
     </>
   )
 }
