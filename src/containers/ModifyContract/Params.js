@@ -109,7 +109,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       ),
     attachments: Yup.array().when('changePhases', {
       is: true,
-      then: Yup.array().required(t('NO_ATTACHMENTS'))
+      then: Yup.array().min(1, t('NO_ATTACHMENTS'))
     }),
     moreThan15Kw: Yup.boolean().test(
       'noMoreThan15KwForMono',
@@ -486,7 +486,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 <Divider />
               </Box>
 
-              <Box mx={1} mt={1} mb={1}>
+              <Box mx={1} mt={1} mb={3}>
                 <FormControlLabel
                   className={classes.switchLabel}
                   label={
