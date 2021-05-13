@@ -12,12 +12,19 @@ import {
 
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 import Grow from '@material-ui/core/Grow'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
+import Typography from '@material-ui/core/Typography'
 
 import Intro from './ModifyContract/Intro'
 import IntroFromD1 from './CaseDetail/Intro'
@@ -56,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '8px'
     },
     '& a': {
-      color: 'rgb(102, 60, 0) !important'
+      color: theme.palette.primary.dark
     }
   }
 }))
@@ -96,6 +103,8 @@ function ModifyContract(props) {
   const [activeStep, setActiveStep] = useState(0)
   const [activeD1Step, setActiveD1Step] = useState(2)
   const [data, setData] = useState({ token: props?.token })
+
+  const [adviceOpen, setAdviceOpen] = useState(true)
 
   const handleStepChanges = useCallback(
     (params) => {
@@ -201,11 +210,29 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <div className={classes.root}>
-        <Alert severity="warning" style={{ marginTop: '8px' }}>
-          <div
-            className={classes.warningMessage}
-            dangerouslySetInnerHTML={{ __html: t('MODIFY_NP_ADVICE') }}></div>
-        </Alert>
+        <Dialog
+          open={adviceOpen}
+          onClose={() => setAdviceOpen(false)}
+          maxWidth="md">
+          <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <Typography
+                className={classes.warningMessage}
+                dangerouslySetInnerHTML={{
+                  __html: t('MODIFY_NP_ADVICE')
+                }}></Typography>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => setAdviceOpen(false)}
+              color="primary"
+              variant="contained">
+              {t('I_ACCEPT')}
+            </Button>
+          </DialogActions>
+        </Dialog>
         {fromD1 && (
           <Stepper
             className={classes.stepper}
