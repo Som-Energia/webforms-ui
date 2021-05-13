@@ -401,7 +401,7 @@
   "HELP_MORE_THAN_15KW_HASNOT_SERVICE": "<p>Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, veuràs que ara has d’indicar 6 períodes de potència.</p><p>Com a minim un periode ha de ser superior a 15kW. La potència de cada periode ha de ser superior o igual a la potència del periode anterior.</p>",
   "HELP_LESS_THAN_15KW": "<p>Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, veuràs que ara has d’indicar 2 períodes de potència.</p>",
   "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">Més informació sobre els periodes de les potències de la tarifa {{tariff}}</a>.</p>",
-  "POWER_PERIODS_20TD_MORE_INFO_URL": "#",
+  "POWER_PERIODS_20TD_MORE_INFO_URL": "https://ca.support.somenergia.coop/article/1003-la-tarifa-2-0td",
   "POWER_PERIODS_30TD_MORE_INFO_URL": "https://ca.support.somenergia.coop/article/1115-la-tarifa-3-0td",
   "HELP_LESS_THAN_15KW_HAS_SERVICE": "<p>En els dos períodes has d’indicar la mateixa potència que tinguis contractada actualment, doncs segons el que preveu la Circular 3/2020 de la CNMC, la potencia del P2 serà igual a la potència contractada anteriorment.</p>",
   "HELP_MORE_THAN_15KW_HAS_SERVICE": "<p>Com a conseqüència del canvi de peatges i tarifes proposat per la CNMC, veuràs que ara has d’indicar 6 períodes de potència.</p><p>En el P1 hauràs d’indicar la mateixa potència que hi tens contractada actualment en el període P1. En relació al P2, P3, P4 i P5 hauràs d’indicar la potència que tens contractada al P2 actual. Finalment, al P6 hauràs d’indicar la potència que tenies contractada al P3 actual.</p>",

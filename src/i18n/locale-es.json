@@ -418,7 +418,7 @@
   "HELP_LESS_THAN_15KW": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 2 períodos de potencia.</p>",
   "HELP_LESS_THAN_15KW_HAS_SERVICE": "<p>En los dos períodos debes indicar la misma potencia que tienes contratada actualmente, pues según lo previsto en la Circular 3/2020 de la CNMC, la potencia del P2 será igual a la potencia contratada anteriormente.</p>",
   "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">Más información sobre los periodos de las potencias de la tarifa {{tariff}}</a>.</p>",
-  "POWER_PERIODS_20TD_MORE_INFO_URL": "#",
+  "POWER_PERIODS_20TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1004-la-tarifa-2-0td",
   "POWER_PERIODS_30TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1116-la-tarifa-3-0td",
   "HELP_MORE_THAN_15KW_HAS_SERVICE": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 6 períodos de potencia.</p><p>En el P1 deberás indicar la misma potencia que tienes contratada actualmente en el mismo período. En relación al P2, P3, P4 y P5, deberás indicar la potencia que tienes contratada en el P2 actual. Finalmente, en el P6, deberás indicar la potencia que tienes contratada en el P3 actual.</p>",
   "NEW_TOLLS_AND_TARIFF_INFO": "Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, podemos cambiar las potencias contratadas sin coste desde el 1 de junio de 2021 hasta el 1 de junio de 2022, aunque durante los 12 meses anteriores hayas modificado tu contrato y siempre y cuando no se trate de un aumento de potencia.",
