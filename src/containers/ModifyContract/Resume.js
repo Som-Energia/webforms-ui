@@ -207,7 +207,7 @@ export default function ModifyResume({
         </Typography>
       </Box>
 
-      <Box mt={1} mx={1} mb={1}>
+      <Box mt={1} mx={1} mb={2}>
         <Typography gutterBottom>{t('REVIEW_DATA_INFO')}</Typography>
       </Box>
 

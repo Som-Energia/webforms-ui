@@ -32,7 +32,7 @@ const normalizeCommonModifyData = (params) => {
       ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
       : undefined,
     power_p2: modify?.changePower
-      ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
+      ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR)
       : undefined,
     power_p3:
       modify?.changePower && modify?.moreThan15Kw
@@ -243,7 +243,8 @@ export const normalizeContract = (contract) => {
       contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
     ).toString()
 
-  finalContract.cups_address = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
+  finalContract.cups_address =
+    `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
   finalContract.cups_city_id = contract?.supply_point?.city?.id
     ? parseInt(contract?.supply_point?.city?.id)
     : 0
