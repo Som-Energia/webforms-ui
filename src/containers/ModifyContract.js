@@ -215,7 +215,7 @@ function ModifyContract(props) {
           onClose={() => setAdviceOpen(false)}
           maxWidth="md">
           <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
-          <DialogContent>
+          <DialogContent dividers={true}>
             <DialogContentText>
               <Typography
                 className={classes.warningMessage}
