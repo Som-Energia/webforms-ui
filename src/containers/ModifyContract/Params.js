@@ -422,15 +422,20 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     </Box>
                   )}
 
-                  <Box mt={2} mb={2}>
+                  <Box mt={2} mb={0}>
                     <Typography variant="body1">
                       {t('NEW_TOLLS_AND_TARIFF_INFO')}
                     </Typography>
+                  </Box>
 
+                  <Box my={2}>
                     <FormHelperText
                       dangerouslySetInnerHTML={{
                         __html: t('POWER_PERIODS_MORE_INFO', {
-                          url: t('POWER_PERIODS_MORE_INFO_URL')
+                          tariff: values?.tariff,
+                          url: values?.moreThan15Kw
+                            ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
+                            : t('POWER_PERIODS_20TD_MORE_INFO_URL')
                         })
                       }}></FormHelperText>
                   </Box>
@@ -486,7 +491,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 <Divider />
               </Box>
 
-              <Box mx={1} mt={1} mb={3}>
+              <Box mx={1} mt={1} mb={0}>
                 <FormControlLabel
                   className={classes.switchLabel}
                   label={
@@ -548,7 +553,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   </Box>
                 </>
               )}
-              <Box mx={1} mb={3}>
+              <Box mx={1} mt={1} mb={3}>
                 <FormHelperText
                   dangerouslySetInnerHTML={{
                     __html: t('HELP_INSTALL_TYPE', {
