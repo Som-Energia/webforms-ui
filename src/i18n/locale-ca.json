@@ -410,9 +410,10 @@
 
   "UNAUTHORIZED": "La sessió ha expirat. Et recomanem tornar a accedir des de la llista de contractes i intentar-ho de nou.",
   "NOTFOUND": "No s'ha trobat el contracte a modificar",
-  "ATR_CASE": "No s'ha pogut generar el cas",
+  "ATR_CASE": "No s'ha pogut generar el cas ATR, aquest contracte ja té un procés en curs",
   "OPEN_CASES": "Aquest contracte ja té un procés en curs",
   "ATTACHMENT_ERROR": "No s'han pogut carregar els adjunts",
+  "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals",
 
   "WARNING_NP_TITLE": "Avís canvi de peatges",
   "MODIFY_NP_ADVICE": "<p>Degut al canvi de peatges que s'aplica aquest proper mes de juny, hem actualitzat aquest formulari per poder sol·licitar modificacions en relació al nou sistema de peatges, que s'aplicaran a partir de l'1 de juny de 2021 i que no tenen cost sempre i quan no es tracti d'un augment de la potència contractada.</p><p>Des de la cooperativa recomanem esperar a 1 de juny per a sol·licitar les modificacions que no siguin urgents.</p><p>Excepcionalment, si necessites dur a terme un augment de potència de manera urgent abans d'aquesta data, pots escriure un correu a <a href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a>.</p>"

@@ -426,9 +426,10 @@
 
   "UNAUTHORIZED": "La sesión ha expirado. Te recomendamos volver a acceder desde la lista de contratos e intentarlo otra vez.",
   "NOTFOUND": "No hemos encontrado el contrato a modificar",
-  "ATR_CASE": "No hemos podido generar el caso",
+  "ATR_CASE": "No hemos podido generar el caso ATR, este contrato ya tiene un proceso en curso",
   "OPEN_CASES": "Este contrato ya tiene un proceso en curso",
   "ATTACHMENT_ERROR": "No hemos podido cargar los archivos adjuntos",
+  "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales",
 
   "WARNING_NP_TITLE": "Aviso cambio de peajes",
   "MODIFY_NP_ADVICE": "<p>Debido al cambio de peajes que se aplica este próximo mes de junio, hemos actualizado este formulario para poder sol·licitar modificaciones en relación al nuevo sistema de peajes, que se aplicarán a partir del 1 de junio de 2021 y que no tienen coste, siempre y cuando no se trate de un aumento de la potencia contratada.</p><p>Desde la cooperativa recomendamos esperar al 1 de junio para solicitar las modificaciones que no sean urgentes.</p><p>Excepcionalmente, si necesitas llevar a cabo un aumento de potencia de forma urgente antes de esta fecha, puedes escribir un correo a <a href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop.</p>"
