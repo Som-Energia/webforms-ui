@@ -87,7 +87,6 @@ const Contract = (props) => {
   const handlers = {
     SAMPLE_DATA: () => {
       const values = { ...initialValues }
-      console.log(values)
     },
     SHOW_INSPECTOR: () => {
       showInspector ? setShowInspector(false) : setShowInspector(true)
@@ -624,7 +623,7 @@ const Contract = (props) => {
       .then((response) => {
         if (response?.state === true) {
           setError(false)
-          setResult({ contract_number: response?.data?.contract_id })
+          setResult({ contract_number: response?.data?.contract_number })
           trackSucces()
         } else {
           setError(true)
