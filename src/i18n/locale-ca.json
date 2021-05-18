@@ -223,7 +223,7 @@
 
   "SUCCESS_TITLE": "Enhorabona",
   "SUCCESS_TEXT": "Hem tramitat amb èxit la teva sol·licitud",
-  "SUCCESS_NOTE": "El nou contracte tindrà la ID {{contract_number}}.<br> T'informarem per correu electrònic quan el tràmit sigui efectiu.",
+  "SUCCESS_NOTE": "El nou contracte tindrà el número {{contract_number}}.<br> T'informarem per correu electrònic quan el tràmit sigui efectiu.",
 
   "CONTRACT_TITLE": "Contractació",
   "MEMBER_IDENTIFIER_DESC": "<p>Contractar la llum amb Som Energia és ràpid, senzill i no requereix cap canvi a la instal·lació. Només cal ser soci o sòcia de la cooperativa i omplir aquest formulari. No ets soci/a? Fes-te soci/a <a href=\"//www.somenergia.coop/ca/fes-te-n-soci-a/\" target=\"_blank\">aquí</a>!</p><p>Introdueix el <b>número de soci/a i NIF del prenedor</b> del contracte.</p>",
