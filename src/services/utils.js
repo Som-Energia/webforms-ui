@@ -255,12 +255,12 @@ export const normalizeContract = (contract) => {
   finalContract.supply_point_accepted =
     contract?.supply_point?.supply_point_accepted
 
-  finalContract.is_juridical = !contract?.holder?.isphisical
   finalContract.contract_owner = {}
+  finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
   finalContract.contract_owner.vat = holder?.vat
   finalContract.contract_owner.name = holder?.name
-  finalContract.contract_owner.surname1 = holder?.surname1
-  finalContract.contract_owner.surname2 = holder?.surname2
+  finalContract.contract_owner.surname =
+    `${holder?.surname1} ${holder?.surname2}`.trim()
   finalContract.contract_owner.proxy_vat = !contract?.holder?.isphisical
     ? holder?.proxynif
     : undefined
@@ -275,26 +275,13 @@ export const normalizeContract = (contract) => {
   finalContract.contract_owner.phone = holder?.phone1
   finalContract.contract_owner.phone2 = holder?.phone2
   finalContract.contract_owner.lang = holder?.language
+  finalContract.contract_owner.privacy_conditions =
+    contract?.privacy_policy_accepted
+
   finalContract.owner_is_payer = true
 
   if (!finalContract.owner_is_payer) {
     finalContract.contract_payer = {}
-    finalContract.contract_payer.person_type = finalContract.owner_person_type
-    finalContract.contract_payer.is_juridical = finalContract.owner_is_juridical
-    finalContract.contract_payer.name = finalContract.owner_name
-    finalContract.contract_payer.surname1 = finalContract.owner_surname1
-    finalContract.contract_payer.surname2 = finalContract.owner_surname2
-    finalContract.contract_payer.proxy_vat = finalContract.owner_proxy_vat
-    finalContract.contract_payer.proxy_name = finalContract.owner_proxy_name
-    finalContract.contract_payer.vat = finalContract.owner_vat
-    finalContract.contract_payer.address = finalContract.owner_address
-    finalContract.contract_payer.city_id = finalContract.owner_city_id
-    finalContract.contract_payer.state_id = finalContract.owner_state_id
-    finalContract.contract_payer.postal_code = finalContract.owner_postal_code
-    finalContract.contract_payer.email = finalContract.owner_email
-    finalContract.contract_payer.phone = finalContract.owner_phone
-    finalContract.contract_payer.phone2 = finalContract.phone2
-    finalContract.contract_payer.lang = finalContract.owner_lang
   }
 
   finalContract.payment_iban = contract?.payment?.iban
@@ -308,7 +295,6 @@ export const normalizeContract = (contract) => {
     : 'A3'
 
   finalContract.attachments = contract?.supply_point?.attachments
-  finalContract.privacy_conditions = contract?.privacy_policy_accepted
   finalContract.contract_conditions = contract?.terms_accepted
 
   return sanitizeData(finalContract)
