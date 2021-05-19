@@ -58,7 +58,7 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
           variant="body1"
           component="div"
           dangerouslySetInnerHTML={{
-            __html: t('MODIFY_POTTARAUTO_INTRO', {
+            __html: t('MODIFY_POTTAR_INTRO', {
               url: t('MODIFY_POTTAR_INTRO_URL')
             })
           }}
