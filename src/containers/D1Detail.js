@@ -15,6 +15,14 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
 
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Typography from '@material-ui/core/Typography'
+
 import D1Validation from './CaseDetail/D1Validation'
 import RefuseD1 from './CaseDetail/RefuseD1'
 import AcceptD1 from './CaseDetail/AcceptD1'
@@ -67,6 +75,8 @@ function D1Detail(props) {
   const [data, setData] = useState(
     props?.location?.state?.d1CaseData || templateProps
   )
+
+  const [adviceOpen, setAdviceOpen] = useState(true)
 
   const handleStepChanges = useCallback(
     (params) => {
@@ -148,6 +158,30 @@ function D1Detail(props) {
     <div className={classes.root}>
       {(data?.to_validate && (
         <>
+          <Dialog
+            open={adviceOpen}
+            onClose={() => setAdviceOpen(false)}
+            maxWidth="sm">
+            <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
+            <DialogContent dividers={true}>
+              <DialogContentText>
+                <Typography
+                  className={classes.warningMessage}
+                  dangerouslySetInnerHTML={{
+                    __html: t('NP_FORM_WARNING')
+                  }}></Typography>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setAdviceOpen(false)}
+                color="primary"
+                variant="contained">
+                {t('I_ACCEPT')}
+              </Button>
+            </DialogActions>
+          </Dialog>
+
           <Stepper
             className={classes.stepper}
             activeStep={activeStep}

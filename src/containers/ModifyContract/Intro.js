@@ -8,6 +8,12 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
   paperContainer: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
+  },
+  warningMessage: {
+    '& p': {
+      marginTop: 0,
+      marginBottom: '8px'
+    },
+    '& a': {
+      color: theme.palette.primary.dark
+    }
   }
 }))
 
@@ -40,6 +55,8 @@ export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()
   const classes = useStyles()
   const [isSubmitting, setSubmitting] = useState(false)
+
+  const [adviceOpen, setAdviceOpen] = useState(true)
 
   const onFormSubmit = (event) => {
     event.preventDefault()
@@ -76,6 +93,29 @@ export default function ModifyIntro({ nextStep, prevStep }) {
           </div>
         </form>
       </Box>
+      <Dialog
+        open={adviceOpen}
+        onClose={() => setAdviceOpen(false)}
+        maxWidth="md">
+        <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
+        <DialogContent dividers={true}>
+          <DialogContentText>
+            <Typography
+              className={classes.warningMessage}
+              dangerouslySetInnerHTML={{
+                __html: t('MODIFY_NP_ADVICE')
+              }}></Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setAdviceOpen(false)}
+            color="primary"
+            variant="contained">
+            {t('I_ACCEPT')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Paper>
   )
 }
