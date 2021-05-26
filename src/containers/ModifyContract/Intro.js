@@ -103,7 +103,7 @@ export default function ModifyIntro({ nextStep, prevStep }) {
             <Typography
               className={classes.warningMessage}
               dangerouslySetInnerHTML={{
-                __html: t('MODIFY_NP_ADVICE')
+                __html: t('NP_FORM_WARNING')
               }}></Typography>
           </DialogContentText>
         </DialogContent>
