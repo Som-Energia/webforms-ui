@@ -77,7 +77,6 @@ export const normalizeD1ConfirmationData = (values) => {
     contract_modification: values?.modify ? contractModification : null
   }
 
-  console.log('NORMALIZE D1 CONFIRMATION DATA', sanitizeData(data))
   return sanitizeData(data)
 }
 
@@ -269,7 +268,11 @@ export const normalizeContract = (contract) => {
     : undefined
   finalContract.contract_owner.address = holder?.address
   finalContract.contract_owner.city_id = holder?.city?.id
+    ? parseInt(holder?.city?.id)
+    : 0
   finalContract.contract_owner.state_id = holder?.state?.id
+    ? parseInt(holder?.state?.id)
+    : 0
   finalContract.contract_owner.postal_code = holder?.postal_code
   finalContract.contract_owner.email = holder?.email
   finalContract.contract_owner.phone = holder?.phone1
@@ -277,6 +280,8 @@ export const normalizeContract = (contract) => {
   finalContract.contract_owner.lang = holder?.language
   finalContract.contract_owner.privacy_conditions =
     contract?.privacy_policy_accepted
+
+  finalContract.contract_owner = sanitizeData(finalContract.contract_owner)
 
   finalContract.owner_is_payer = true
 
