@@ -413,8 +413,5 @@
   "ATR_CASE": "No s'ha pogut generar el cas ATR, aquest contracte ja té un procés en curs",
   "OPEN_CASES": "Aquest contracte ja té un procés en curs",
   "ATTACHMENT_ERROR": "No s'han pogut carregar els adjunts",
-  "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals",
-
-  "WARNING_NP_TITLE": "Avís canvi de peatges",
-  "NP_FORM_WARNING": "Degut al canvi de peatges que s'aplica aquest proper mes de juny no podrem gestionar fins el proper dimarts 01/06/2021 la teva sol·licitud. Així doncs, el temps de gestió d'aquest tràmit pot ser més llarg del que està habitualment previst."
+  "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals"
 }
