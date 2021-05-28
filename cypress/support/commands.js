@@ -76,6 +76,60 @@ Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('noIncrementalPowers', (phase, moreThan15Kw, powers) => {
+  cy.get('#phases').click()
+  cy.get(`[data-value="${phase}"]`).click()
+
+  cy.get('[data-cy="moreThan15Kw"]')
+    .get(`[data-value="${moreThan15Kw}"]`)
+    .click()
+
+  powers.forEach((power, index) => {
+    cy.get(`[name="contract.power${index > 0 ? index + 1 : ''}"]`)
+      .clear()
+      .type(power)
+      .should('have.value', power)
+      .blur()
+  })
+
+  cy.contains(
+    'La potencia de este periodo no puede ser inferior al anterior'
+  )
+})
+
+Cypress.Commands.add('identifyOwner', (ownerVat) => {
+  cy.intercept('GET', '/check/vat/exists/**').as('checkVat')
+
+  cy.get('[name="holder.vat"]')
+    .type(ownerVat)
+    .should('have.value', ownerVat)
+
+  cy.wait('@checkVat')
+
+  cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('enterVoluntaryCent', (voluntaryCent) => {
+  cy.get(`[data-value="${voluntaryCent}"]`).click()
+
+  cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('enterPaymentData', (paymentIban) => {
+  cy.get('[name="payment.iban"]')
+    .clear()
+    .type(paymentIban)
+    .should('have.value', paymentIban)
+
+  cy.get('[name="payment.sepa_accepted"]').click()
+  cy.get('[data-cy=accept]').click()
+  cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('reviewAndConfirmData', () => {
+  cy.contains('€/kWh')
+})
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
