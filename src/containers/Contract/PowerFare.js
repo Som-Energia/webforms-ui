@@ -90,6 +90,7 @@ const PowerFare = (props) => {
         <Chooser
           name="moreThan15Kw"
           condensed
+          canBeEmpty={false}
           question={t(
             !values?.contract?.has_service
               ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')

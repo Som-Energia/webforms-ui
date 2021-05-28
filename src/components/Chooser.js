@@ -80,14 +80,15 @@ const Chooser = (props) => {
     disabled,
     className,
     name,
-    condensed = false
+    condensed = false,
+    canBeEmpty = true
   } = props
   const classes = { ...useStyles(), ...className }
   const [selectedOption, setSelectedOption] = useState(value)
 
   const handleClick = (event, value) => {
     event.preventDefault()
-    if (selectedOption !== value) {
+    if (!canBeEmpty || selectedOption !== value) {
       setSelectedOption(value)
       onChange({ option: value })
     } else {
