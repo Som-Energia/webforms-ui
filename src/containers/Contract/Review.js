@@ -35,7 +35,10 @@ const useStyles = makeStyles((theme) => ({
   field: {
     display: 'flex',
     alignItems: 'center',
-    marginBottom: theme.spacing(0.8)
+    marginBottom: theme.spacing(0.8),
+    '& .field__value': {
+      flexGrow: 1
+    }
   },
   label: {
     textTransform: 'uppercase',
@@ -148,18 +151,25 @@ const Review = (props) => {
 
   const PowerValues = () => {
     return (
-      <>
+      <Grid container>
         {rates[values?.contract?.rate]?.num_power_periods > 1
           ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
               (value, index) => {
                 const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+                const label = values?.contract?.moreThan15Kw
+                  ? `P${index + 1}`
+                  : index === 0
+                  ? 'P1-2'
+                  : 'P3'
                 return (
-                  <span>{`P${index + 1}: ${values?.contract[attr]} kW `}</span>
+                  <Grid
+                    item
+                    xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
                 )
               }
             )
           : `${values?.contract?.power} kW`}
-      </>
+      </Grid>
     )
   }
 

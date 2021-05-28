@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2)
   },
   chooserItem: {
-    display: 'block',
     cursor: 'pointer',
     minHeight: '100px',
     paddingTop: theme.spacing(2),
@@ -35,7 +34,15 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
-    }
+    },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  chooserItemCondensed: {
+    minHeight: '40px',
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
   },
   chooserItemSelected: {
     margin: '0 0 8px 0',
@@ -65,9 +72,17 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Chooser = (props) => {
-  const { question, options, onChange, value, disabled, className } = props
+  const {
+    question,
+    options,
+    onChange,
+    value,
+    disabled,
+    className,
+    name,
+    condensed = false
+  } = props
   const classes = { ...useStyles(), ...className }
-
   const [selectedOption, setSelectedOption] = useState(value)
 
   const handleClick = (event, value) => {
@@ -88,7 +103,11 @@ const Chooser = (props) => {
         className={classes.title}
         dangerouslySetInnerHTML={{ __html: question }}
       />
-      <RadioGroup className={classes.margin} defaultValue="">
+      <RadioGroup
+        className={classes.margin}
+        defaultValue=""
+        name={name}
+        data-cy={name}>
         <Grid container spacing={3}>
           {options.map((option, index) => (
             <Grid key={index} item xs={12} sm={6}>
@@ -99,6 +118,7 @@ const Chooser = (props) => {
                 }
                 className={clsx(
                   classes.chooserItem,
+                  condensed && classes.chooserItemCondensed,
                   selectedOption === option.value &&
                     classes.chooserItemSelected,
                   disabled && classes.chooserItemDisabled
@@ -112,10 +132,12 @@ const Chooser = (props) => {
                   />
                   <Typography>{option.label}</Typography>
                 </div>
-                <FormHelperText
-                  className={classes.chooserItemDesc}
-                  dangerouslySetInnerHTML={{ __html: option.description }}
-                />
+                {option.description && (
+                  <FormHelperText
+                    className={classes.chooserItemDesc}
+                    dangerouslySetInnerHTML={{ __html: option.description }}
+                  />
+                )}
               </label>
               {option.helper}
             </Grid>

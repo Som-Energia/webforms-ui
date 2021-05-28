@@ -1,47 +1,50 @@
 {
   "name": "webforms-ui",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "private": false,
   "dependencies": {
-    "@material-ui/core": "^4.11.1",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.2",
     "@testing-library/user-event": "^10.0.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "clsx": "^1.1.1",
-    "formik": "^2.1.4",
+    "formik": "^2.2.6",
     "i18next": "^19.8.3",
     "preval.macro": "^5.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-ga": "^3.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-ga": "^3.3.0",
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^11.7.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "yup": "^0.28.5"
+    "react-scripts": "^4.0.3",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
-    "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
+    "build": "sh -ac '. .env.${REACT_APP_ENV}; export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build'",
+    "build:ov": "export REACT_APP_ENV=ov && yarn run build:rename",
+    "build:staging": "export REACT_APP_ENV=staging && yarn run build",
+    "build:wp": "export REACT_APP_ENV=wp && yarn run build",
     "build:rename": "yarn run build && yarn run build-rename",
     "test": "react-scripts test",
+    "cypress": "./node_modules/.bin/cypress open",
     "eject": "react-scripts eject",
     "build-rename": "yarn run build-rename-js && yarn run build-rename-css",
     "build-rename-js": "renamer --find '/((runtime-)?main)\\.\\w*(\\.chunk)?(.js(.map)?)/i' --replace '$1$4' build/static/js/*.*",
     "build-rename-css": "renamer --find '/(main)\\.\\w*(\\.chunk)?(.css(.map)?)/i' --replace '$1$3' build/static/css/*.*"
   },
+  "prettier": "prettier-config-standard",
   "eslintConfig": {
     "extends": [
       "react-app",
-      "standard",
       "plugin:cypress/recommended"
     ]
   },
-  "prettier": "prettier-config-standard",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -55,9 +58,8 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^7.1.0",
-    "cypress-file-upload": "^5.0.2",
-    "eslint-plugin-cypress": "^2.11.2",
+    "cypress": "^7.3.0",
+    "cypress-file-upload": "^5.0.7",
     "prettier-config-standard": "^4.0.0",
     "renamer": "^2.0.0",
     "standard": "^14.3.3"

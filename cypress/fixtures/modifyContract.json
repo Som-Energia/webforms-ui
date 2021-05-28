@@ -1,13 +1,17 @@
 {
   "phases": "mono",
   "power": 5.5,
-  "power2": 15.1,
-  "power3": 12,
+  "power2": 5.75,
+  "power3": 10,
+  "power4": 10,
+  "power5": 15,
+  "power6": 16,
   "fare": "dh",
   "name": "Aitor",
   "surname": "Menta",
   "phone": "606605445",
   "phoneIncomplete": "606",
   "certificate": "certificate.jpg",
-  "tariff30": "3.0A"
+  "tariff20": "2.0TD",
+  "tariff30": "3.0TD"
 }

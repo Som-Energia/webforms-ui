@@ -6,21 +6,63 @@ describe('Modify Contract', () => {
     cy.fixture('modifyContract.json').as('data')
   })
 
-  it('Change power 3.0', function () {
+  it('Change power 2.0TD', function () {
     cy.get('[type=submit]').click()
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]').click()
+    cy.get('[name=power]')
+      .type(this.data.power).should('have.value', this.data.power)
+
+    cy.get('[name=power2]')
+      .type(this.data.power2).should('have.value', this.data.power2)
+
+    cy.get('[type=submit]').click()
+
+    cy.get('[name=contactName]')
+      .type(this.data.name).should('have.value', this.data.name)
+    cy.get('[name=contactSurname]')
+      .type(this.data.surname).should('have.value', this.data.surname)
+    cy.get('[name=phone]')
+      .type(this.data.phone).should('have.value', this.data.phone)
+
+    cy.get('[type=submit]').click()
+
+    cy.get('[data-cy=power]').should('contain', this.data.power)
+    cy.get('[data-cy=power2]').should('contain', this.data.power2)
+
+    cy.get('[data-cy=tariff]').should('contain', this.data.tariff20)
+
+    cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
+
+    // cy.get('[type=submit]').click({ multiple: true })
+  })
+
+  it('Change power 3.0TD', function () {
+    cy.get('[type=submit]').click()
+
+    cy.get('[name=changePower]').click()
+
+    cy.get('[name=moreThan15Kw]')
+      .get('[data-value="true"]').click()
 
     cy.get('[name=power]')
       .type(this.data.power).should('have.value', this.data.power)
 
-      cy.get('[name=power2]')
+    cy.get('[name=power2]')
       .type(this.data.power2).should('have.value', this.data.power2)
 
-      cy.get('[name=power3]')
+    cy.get('[name=power3]')
       .type(this.data.power3).should('have.value', this.data.power3)
+
+    cy.get('[name=power4]')
+      .type(this.data.power4).should('have.value', this.data.power4)
+
+    cy.get('[name=power5]')
+      .type(this.data.power5).should('have.value', this.data.power5)
+
+    cy.get('[name=power6]')
+      .type(this.data.power6).should('have.value', this.data.power6)
 
     cy.get('[type=submit]').click()
 
@@ -36,111 +78,71 @@ describe('Modify Contract', () => {
     cy.get('[data-cy=power]').should('contain', this.data.power)
     cy.get('[data-cy=power2]').should('contain', this.data.power2)
     cy.get('[data-cy=power3]').should('contain', this.data.power3)
+    cy.get('[data-cy=power4]').should('contain', this.data.power4)
+    cy.get('[data-cy=power5]').should('contain', this.data.power5)
+    cy.get('[data-cy=power6]').should('contain', this.data.power6)
 
-    cy.get(`[data-cy=tariff]`).should('contain', this.data.tariff30)
+    cy.get('[data-cy=tariff]').should('contain', this.data.tariff30)
 
     cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
 
     // cy.get('[type=submit]').click({ multiple: true })
   })
 
-  it('Change power 3.0 no more 15kW', function () {
+  it('Change power 3.0TD no more 15kW', function () {
     cy.get('[type=submit]').click()
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]').click()
+    cy.get('[name=moreThan15Kw]')
+      .get('[data-value="true"]').click()
 
     cy.get('[name=power]')
       .type(this.data.power).should('have.value', this.data.power)
 
-      cy.get('[name=power2]')
-      .type(this.data.power3).should('have.value', this.data.power3)
+    cy.get('[name=power2]')
+      .type(this.data.power2).should('have.value', this.data.power2)
 
-      cy.get('[name=power3]')
-      .type(this.data.power3).should('have.value', this.data.power3)
+    cy.get('[name=power3]')
+      .type(this.data.power2).should('have.value', this.data.power2)
+
+    cy.get('[name=power4]')
+      .type(this.data.power2).should('have.value', this.data.power2)
+
+    cy.get('[name=power5]')
+      .type(this.data.power2).should('have.value', this.data.power2)
+
+    cy.get('[name=power6]')
+      .type(this.data.power2).should('have.value', this.data.power2)
 
     cy.get('[type=submit]').click()
 
-    cy.contains('Alguno de los tres periodos debe tener más de 15kW')
+    cy.contains('Alguno de los periodos debe ser superior a 15.001kW')
   })
 
-  it('Change power 3.0 no values', function () {
+  it('Change power 2.0TD no values', function () {
     cy.get('[type=submit]').click()
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]').click()
+    cy.wait(500)
 
     cy.get('[type=submit]').click()
 
     cy.contains('No has especificado la potencia')
   })
 
-
-  it('Change power', function () {
+  it('Change power 3.0TD no values', function () {
     cy.get('[type=submit]').click()
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=power]')
-      .type(this.data.power).should('have.value', this.data.power)
+    cy.get('[name=moreThan15Kw]')
+      .get('[data-value="true"]').click()
 
     cy.get('[type=submit]').click()
 
-    cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
-    cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
-    cy.get('[name=phone]')
-      .type(this.data.phone).should('have.value', this.data.phone)
-
-    cy.get('[type=submit]').click()
-
-    cy.get('[data-cy=power]').should('contain', this.data.power)
-    cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
-
-    // cy.get('[type=submit]').click({ multiple: true })
-  })
-
-  it('Change phases', function () {
-    cy.get('[type=submit]').click()
-
-    cy.get('[name=changePhases]').click()
-
-    cy.get('#phases').click()
-    cy.get(`[data-value=${this.data.phases}]`).click()
-
-    const fileName = this.data.certificate
-
-    cy.fixture(fileName, 'binary')
-      .then(Cypress.Blob.binaryStringToBlob)
-      .then((fileContent) =>
-        cy.get('[name=uploads]').attachFile({
-          fileContent,
-          fileName,
-          mimeType: 'image/jpg',
-          encoding: 'utf8'
-        })
-      )
-
-    cy.wait(500)
-
-    cy.get('[type=submit]').click()
-
-    cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
-    cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
-    cy.get('[name=phone]')
-      .type(this.data.phone).should('have.value', this.data.phone)
-
-    cy.get('[type=submit]').click()
-
-    cy.get(`[data-cy=${this.data.phases}]`).should('exist')
-    cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
-
-    // cy.get('[type=submit]').click({ multiple: true })
+    cy.contains('No has especificado la potencia')
   })
 
   it('Change phases attachment required', function () {
@@ -156,45 +158,25 @@ describe('Modify Contract', () => {
     cy.contains('No has adjuntado la documentación requerida')
   })
 
-  it('Change fare', function () {
-    cy.get('[type=submit]').click()
-
-    cy.get('[name=changeFare]').click()
-
-    cy.get('#fare').click()
-    cy.get(`[data-value=${this.data.fare}]`).click()
-
-    cy.get('[type=submit]').click()
-
-    cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
-    cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
-    cy.get('[name=phone]')
-      .type(this.data.phone).should('have.value', this.data.phone)
-
-    cy.get('[type=submit]').click()
-
-    cy.get(`[data-cy=${this.data.fare}]`).should('exist')
-    cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
-
-    // cy.get('[type=submit]').click({ multiple: true })
-  })
-
   it('Incorrect phone number', function () {
     cy.get('[type=submit]').click()
 
-    cy.get('[name=changeFare]').click()
+    cy.get('[name=changePower]').click()
 
-    cy.get('#fare').click()
-    cy.get('[data-value=dh]').click()
+    cy.get('[name=power]')
+      .type(this.data.power).should('have.value', this.data.power)
+
+    cy.get('[name=power2]')
+      .type(this.data.power2).should('have.value', this.data.power2)
 
     cy.get('[type=submit]').click()
 
     cy.get('[name=contactName]')
       .type(this.data.name).should('have.value', this.data.name)
+
     cy.get('[name=contactSurname]')
       .type(this.data.surname).should('have.value', this.data.surname)
+
     cy.get('[name=phone]')
       .type(this.data.phoneIncomplete).should('have.value', this.data.phoneIncomplete)
       .blur()

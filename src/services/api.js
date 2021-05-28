@@ -4,10 +4,13 @@ const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
-export const modifyContract = async (data) => {
+export const modifyContract = async (data, token) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/modificacio`,
+    url: `${API_BASE_URL}/procedures/contract_modification`,
+    headers: {
+      Authorization: token
+    },
     data: data
   }).then((response) => {
     return response?.data
@@ -140,40 +143,17 @@ export const holderChange = async (data) => {
 
 export const getRates = (data) => {
   const rates = {
-    '2.0A': {
-      num_power_periods: 1,
-      min_power: { power: 0.1, num_periods_apply: 1 },
-      max_power: { power: 10, num_periods_apply: 1 }
+    '2.0TD': {
+      num_power_periods: 2,
+      min_power: { power: 0.1, num_periods_apply: 2 },
+      max_power: { power: 15, num_periods_apply: 2 },
+      increasing: false
     },
-    '2.0DHA': {
-      num_power_periods: 1,
-      min_power: { power: 0.1, num_periods_apply: 1 },
-      max_power: { power: 10, num_periods_apply: 1 }
-    },
-    '2.0DHS': {
-      num_power_periods: 1,
-      min_power: { power: 0.1, num_periods_apply: 1 },
-      max_power: { power: 10, num_periods_apply: 1 }
-    },
-    '2.1A': {
-      num_power_periods: 1,
-      min_power: { power: 10.001, num_periods_apply: 1 },
-      max_power: { power: 15, num_periods_apply: 1 }
-    },
-    '2.1DHA': {
-      num_power_periods: 1,
-      min_power: { power: 10.001, num_periods_apply: 1 },
-      max_power: { power: 15, num_periods_apply: 1 }
-    },
-    '2.1DHS': {
-      num_power_periods: 1,
-      min_power: { power: 10.001, num_periods_apply: 1 },
-      max_power: { power: 15, num_periods_apply: 1 }
-    },
-    '3.0A': {
-      num_power_periods: 3,
+    '3.0TD': {
+      num_power_periods: 6,
       min_power: { power: 15.001, num_periods_apply: 1 },
-      max_power: { power: 500, num_periods_apply: 3 }
+      max_power: { power: 450, num_periods_apply: 6 },
+      increasing: true
     }
   }
 
@@ -226,17 +206,10 @@ export const getPrices = async (tariff, vat, cnae, city_id) => {
 }
 
 export const contract = async (data) => {
-  const formData = new FormData()
-  for (const key in data) {
-    Array.isArray(data[key])
-      ? data[key].forEach((value) => formData.append(key + '[]', value))
-      : formData.append(key, data[key])
-  }
-
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/contractacio`,
-    data: formData
+    url: `${API_BASE_URL}/procedures/contract`,
+    data: data
   }).then((response) => {
     return response?.data
   })
@@ -245,7 +218,7 @@ export const contract = async (data) => {
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/confirm_d1/${case_id}`,
+    url: `${API_BASE_URL}/procedures/d1_confirmation/${case_id}`,
     headers: { Authorization: token },
     data: data
   }).then((response) => {

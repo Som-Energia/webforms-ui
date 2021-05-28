@@ -13,7 +13,11 @@ export const languages = {
 
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
-    (key) => (data[key] == null || data[key] === '') && delete data[key]
+    (key) =>
+      (data[key] == null ||
+        data[key] === '' ||
+        (Array.isArray(data[key]) && !data[key].length)) &&
+      delete data[key]
   )
   return data
 }
@@ -22,13 +26,31 @@ const normalizeCommonModifyData = (params) => {
   const { modify, contact } = params
 
   const data = {
-    tarifa: modify?.tariff,
-    tensio: modify?.phases,
+    phases: modify?.phases,
     attachments: [...modify?.attachments, ...modify?.power_attachments],
-    potencia: modify?.changePower ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    potencia_p2: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    potencia_p3: modify?.changePower && modify?.moreThan15Kw ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR) : undefined,
-    discriminacio: modify?.fare,
+    power_p1: modify?.changePower
+      ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
+      : undefined,
+    power_p2: modify?.changePower
+      ? Math.round(modify?.power2 * THOUSANDS_CONVERSION_FACTOR)
+      : undefined,
+    power_p3:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power3 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    power_p4:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power4 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    power_p5:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power5 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    power_p6:
+      modify?.changePower && modify?.moreThan15Kw
+        ? Math.round(modify?.power6 * THOUSANDS_CONVERSION_FACTOR)
+        : undefined,
+    tariff: modify?.tariff,
     contact_name: contact?.contactName,
     contact_surname: contact?.contactSurname,
     contact_phone: contact?.phone
@@ -38,9 +60,7 @@ const normalizeCommonModifyData = (params) => {
 }
 
 export const normalizeModifyData = (params) => {
-  const { token } = params
-
-  const data = { ...normalizeCommonModifyData(params), token: token }
+  const data = { ...normalizeCommonModifyData(params) }
   return sanitizeData(data)
 }
 
@@ -57,7 +77,6 @@ export const normalizeD1ConfirmationData = (values) => {
     contract_modification: values?.modify ? contractModification : null
   }
 
-  console.log('NORMALIZE D1 CONFIRMATION DATA', sanitizeData(data))
   return sanitizeData(data)
 }
 
@@ -122,8 +141,10 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.holder.proxynif_valid
   }
 
-  if (normalContract?.member?.become_member === undefined ||
-    normalContract?.member?.become_member === '') {
+  if (
+    normalContract?.member?.become_member === undefined ||
+    normalContract?.member?.become_member === ''
+  ) {
     if (normalContract?.member === undefined) {
       normalContract.member = {}
     }
@@ -138,31 +159,43 @@ export const normalizeHolderChange = (contract) => {
   }
 
   if (normalContract?.payment?.iban) {
-    normalContract.payment.iban = normalContract.payment.iban.split(' ').join('')
+    normalContract.payment.iban = normalContract.payment.iban
+      .split(' ')
+      .join('')
   }
 
   if (normalContract?.payment?.iban_valid !== undefined) {
     delete normalContract.payment.iban_valid
   }
 
-  if (normalContract?.especial_cases && normalContract?.especial_cases?.attachments) {
+  if (
+    normalContract?.especial_cases &&
+    normalContract?.especial_cases?.attachments
+  ) {
     const hasSpecialCases = Object.keys(normalContract.especial_cases)
-      .map(prop => prop.indexOf('reason') === 0 && normalContract.especial_cases[prop] === true)
-      .reduce((prev, current) => !prev ? current : prev)
+      .map(
+        (prop) =>
+          prop.indexOf('reason') === 0 &&
+          normalContract.especial_cases[prop] === true
+      )
+      .reduce((prev, current) => (!prev ? current : prev))
 
     if (!hasSpecialCases) {
       delete normalContract.especial_cases.attachments
     } else {
       if (normalContract?.especial_cases?.attachments?.death) {
-        normalContract.especial_cases.attachments.death = normalContract?.especial_cases?.attachments?.death[0]
+        normalContract.especial_cases.attachments.death =
+          normalContract?.especial_cases?.attachments?.death[0]
       }
 
       if (normalContract?.especial_cases?.attachments?.medical) {
-        normalContract.especial_cases.attachments.medical = normalContract?.especial_cases?.attachments?.medical[0]
+        normalContract.especial_cases.attachments.medical =
+          normalContract?.especial_cases?.attachments?.medical[0]
       }
 
       if (normalContract?.especial_cases?.attachments?.resident) {
-        normalContract.especial_cases.attachments.resident = normalContract?.especial_cases?.attachments?.resident[0]
+        normalContract.especial_cases.attachments.resident =
+          normalContract?.especial_cases?.attachments?.resident[0]
       }
     }
   }
@@ -172,87 +205,112 @@ export const normalizeHolderChange = (contract) => {
 export const normalizeContract = (contract) => {
   const finalContract = {}
 
-  const holder = (contract.holder.vat === contract.member.vat &&
-    contract.holder.isphisical === true) ? contract.member : contract.holder
+  const holder =
+    contract.holder.vat === contract.member.vat &&
+    contract.holder.isphisical === true
+      ? contract.member
+      : contract.holder
 
-  contract?.holder?.previous_holder === true ? finalContract.canvi_titular = '0' : finalContract.canvi_titular = '1'
-  finalContract.cnae = contract?.supply_point?.cnae
-
-  finalContract.compte_adreca = ''
-  finalContract.compte_cognom = ''
-  finalContract.compte_cp = ''
-  finalContract.compte_dni = ''
-  finalContract.compte_email = ''
-  finalContract.compte_lang = ''
-  finalContract.compte_municipi = ''
-  finalContract.compte_nom = ''
-  finalContract.compte_provincia = ''
-  finalContract.compte_representant_dni = ''
-  finalContract.compte_representant_nom = ''
-  finalContract.compte_tel = ''
-  finalContract.compte_tel2 = ''
-  finalContract.compte_tipus_persona = '0'
-
-  finalContract.condicions = contract?.payment?.sepa_accepted
-  finalContract.condicions_privacitat = contract?.privacy_policy_accepted
-  finalContract.condicions_titular = contract?.terms_accepted
-  finalContract.consum = ''
-
+  finalContract.member_number = contract?.member?.number
+  finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
-  finalContract.cups_adreca = `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`
-  finalContract.cups_adreca = finalContract.cups_adreca.trim()
-  finalContract.cups_municipi = contract?.supply_point?.city?.id
-  finalContract.cups_provincia = contract?.supply_point?.state?.id
+  finalContract.tariff = contract?.contract?.rate
+  finalContract.power_p1 = Math.round(
+    contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR
+  ).toString()
+  finalContract.power_p2 = Math.round(
+    contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR
+  ).toString()
+  finalContract.power_p3 =
+    contract?.contract?.power3 &&
+    Math.round(
+      contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
+  finalContract.power_p4 =
+    contract?.contract?.power4 &&
+    Math.round(
+      contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
+  finalContract.power_p5 =
+    contract?.contract?.power5 &&
+    Math.round(
+      contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
+  finalContract.power_p6 =
+    contract?.contract?.power6 &&
+    Math.round(
+      contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
+    ).toString()
 
-  finalContract.dni = contract?.member?.vat
-  finalContract.donatiu = contract?.payment?.voluntary_cent === true ? '1' : '0'
-  finalContract.escull_pagador = 'titular'
-  finalContract.id_soci = contract?.member?.number
-  finalContract.payment_iban = contract?.payment?.iban
-  finalContract.potencia = Math.round(contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.potencia_p2 = contract?.contract?.power2 && Math.round(contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR)
-  finalContract.potencia_p3 = contract?.contract?.power3 && Math.round(contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR)
+  finalContract.cups_address =
+    `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
+  finalContract.cups_city_id = contract?.supply_point?.city?.id
+    ? parseInt(contract?.supply_point?.city?.id)
+    : 0
+  finalContract.cups_state_id = contract?.supply_point?.state?.id
+    ? parseInt(contract?.supply_point?.state?.id)
+    : 0
+  finalContract.cnae = contract?.supply_point?.cnae
+  finalContract.supply_point_accepted =
+    contract?.supply_point?.supply_point_accepted
 
-  if (!contract?.contract?.has_service) {
-    finalContract.proces = 'A3'
-  } else if (contract?.holder?.previous_holder) {
-    finalContract.proces = 'C1'
-  } else {
-    finalContract.proces = 'C2'
+  finalContract.contract_owner = {}
+  finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
+  finalContract.contract_owner.vat = holder?.vat
+  finalContract.contract_owner.name = holder?.name
+  finalContract.contract_owner.surname =
+    `${holder?.surname1} ${holder?.surname2}`.trim()
+  finalContract.contract_owner.proxy_vat = !contract?.holder?.isphisical
+    ? holder?.proxynif
+    : undefined
+  finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
+    ? holder?.proxyname
+    : undefined
+  finalContract.contract_owner.address = holder?.address
+  finalContract.contract_owner.city_id = holder?.city?.id
+    ? parseInt(holder?.city?.id)
+    : 0
+  finalContract.contract_owner.state_id = holder?.state?.id
+    ? parseInt(holder?.state?.id)
+    : 0
+  finalContract.contract_owner.postal_code = holder?.postal_code
+  finalContract.contract_owner.email = holder?.email
+  finalContract.contract_owner.phone = holder?.phone1
+  finalContract.contract_owner.phone2 = holder?.phone2
+  finalContract.contract_owner.lang = holder?.language
+  finalContract.contract_owner.privacy_conditions =
+    contract?.privacy_policy_accepted
+
+  finalContract.contract_owner = sanitizeData(finalContract.contract_owner)
+
+  finalContract.owner_is_payer = true
+
+  if (!finalContract.owner_is_payer) {
+    finalContract.contract_payer = {}
   }
 
-  const attachmentsAttr = contract?.contract?.has_service ? 'fitxer' : 'documentacio_alta'
-  finalContract[attachmentsAttr] = contract?.supply_point?.attachments
+  finalContract.payment_iban = contract?.payment?.iban
+  finalContract.sepa_conditions = contract?.payment?.sepa_accepted
+  finalContract.donation = contract?.payment?.voluntary_cent
 
-  finalContract.referencia = ''
-  finalContract.representant_dni = holder?.proxynif
-  finalContract.representant_nom = holder?.proxyname
+  finalContract.process = contract?.contract?.has_service
+    ? contract?.holder?.previous_holder
+      ? 'C1'
+      : 'C2'
+    : 'A3'
 
-  finalContract.soci_titular = contract.holder.vat === contract.member.vat ? '1' : '0'
+  finalContract.attachments = contract?.supply_point?.attachments
+  finalContract.contract_conditions = contract?.terms_accepted
 
-  finalContract.tarifa = contract?.contract?.rate
-  finalContract.tipus_persona = contract?.holder?.isphisical ? '0' : '1'
-  finalContract.titular_adreca = holder?.address
-  finalContract.titular_cognom = holder?.surname2
-    ? `${holder?.surname1.trim()} ${holder?.surname2.trim()}`
-    : holder?.surname1.trim()
-  finalContract.titular_cp = holder?.postal_code
-  finalContract.titular_dni = holder?.vat
-  finalContract.titular_email = holder?.email
-  finalContract.titular_lang = holder?.language
-  finalContract.titular_municipi = holder?.city?.id
-  finalContract.titular_nom = holder?.name.trim()
-  finalContract.titular_provincia = holder?.state?.id
-  finalContract.titular_tel = holder?.phone1
-  finalContract.titular_tel2 = holder?.phone2
-
-  return finalContract
+  return sanitizeData(finalContract)
 }
 
 export const normalizeMember = (data) => {
   const finalMember = {}
 
-  finalMember.tipuspersona = data.member.isphisical ? USER_TYPE_PERSON : USER_TYPE_COMPANY
+  finalMember.tipuspersona = data.member.isphisical
+    ? USER_TYPE_PERSON
+    : USER_TYPE_COMPANY
   finalMember.nom = data.member.name
   finalMember.dni = data.member.vat
   finalMember.tel = data.member.phone1
@@ -265,10 +323,11 @@ export const normalizeMember = (data) => {
   finalMember.idioma = data.member.language
 
   finalMember.payment_method =
-    data.payment.payment_method === 'iban' ? PAYMENT_METHOD_PAYMENT_ORDER : (
-      data.payment.payment_method === 'credit_card' ? PAYMENT_METHOD_CREDIT_CARD
-        : PAYMENT_METHOD_PAYMENT_ORDER
-    )
+    data.payment.payment_method === 'iban'
+      ? PAYMENT_METHOD_PAYMENT_ORDER
+      : data.payment.payment_method === 'credit_card'
+      ? PAYMENT_METHOD_CREDIT_CARD
+      : PAYMENT_METHOD_PAYMENT_ORDER
 
   finalMember.payment_iban = data.payment.iban
   finalMember.urlok = data.urlok
@@ -292,19 +351,57 @@ export const specialCaseType = (specialCases) => {
   else return ''
 }
 
-export const calculateTariff = ({ changePower = true, power, moreThan15Kw, changeFare = true, fare }) => {
-  let tariff = null
-  if (changePower) {
-    if (!moreThan15Kw) {
-      if (changeFare) {
-        tariff = parseFloat(power) <= 10 ? '2.0' : '2.1'
-        if (fare) {
-          tariff += { nodh: 'A', dh: 'DHA', dhs: 'DHS' }[fare]
-        }
-      }
-    } else {
-      tariff = '3.0A'
-    }
+export const calculateTariff = ({ moreThan15Kw }) => {
+  return moreThan15Kw ? '3.0TD' : '2.0TD'
+}
+
+export const testPowerForPeriods = (
+  rates,
+  values,
+  limit = 'min_power',
+  createError,
+  t
+) => {
+  const rate = values?.rate || values?.tariff
+  let valids = 0
+  if (rates[rate] === undefined) return true
+  for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
+    const attr = i === 1 ? 'power' : `power${i}`
+    const inLimit = limit.match('min')
+      ? values[attr] >= rates[rate][limit]?.power
+      : values[attr] <= rates[rate][limit]?.power
+    inLimit && valids++
+    values[attr] === undefined && valids++
   }
-  return tariff
+
+  if (valids >= rates[rate][limit]?.num_periods_apply) {
+    return true
+  }
+
+  const lessThan =
+    rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
+      ? 'SOME_PERIOD_MORE_THAN'
+      : 'POWER_NO_LESS_THAN'
+
+  return createError({
+    message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', {
+      value: rates[rate][limit]?.power
+    })
+  })
+}
+
+export const fakeD1Data = {
+  token: 'no-token',
+  installed_power: '3.5',
+  cil: 'ES13984U932824DF',
+  installation_type: 'Red interior',
+  subsection: 'Con excedentes y mecanismo de compensación simplificado',
+  cau: 'ES1334985UDSFW984U932824DF',
+  collective: false,
+  generator_technology:
+    '[B11] - Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la tecnología fotovoltaica',
+  ssaa: 'true',
+  register_section: 'Con excedentes',
+  to_validate: true,
+  case_id: ''
 }
