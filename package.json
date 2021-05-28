@@ -32,6 +32,7 @@
     "build:wp": "export REACT_APP_ENV=wp && yarn run build",
     "build:rename": "yarn run build && yarn run build-rename",
     "test": "react-scripts test",
+    "cypress": "./node_modules/.bin/cypress open",
     "eject": "react-scripts eject",
     "build-rename": "yarn run build-rename-js && yarn run build-rename-css",
     "build-rename-js": "renamer --find '/((runtime-)?main)\\.\\w*(\\.chunk)?(.js(.map)?)/i' --replace '$1$4' build/static/js/*.*",
