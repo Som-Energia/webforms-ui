@@ -20,8 +20,8 @@ describe('Contract', () => {
       )
       cy.enterSupplyPointData(this.data.supplyPoint)
 
-      const powers = [this.data.power, this.data.power2]
       const moreThan15Kw = false
+      const powers = [this.data.power, this.data.power2]
 
       cy.enterPowerFare(this.data.phase, moreThan15Kw, powers)
     })
