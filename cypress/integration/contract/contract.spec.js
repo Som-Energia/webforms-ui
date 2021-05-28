@@ -12,78 +12,36 @@ describe('Contract', () => {
   })
 
   describe('Contract with CUPS has no service', function () {
-    it.only('Contract with 2.0TD', function () {
+
+    beforeEach(function () {
       cy.identifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasNoService
       )
       cy.enterSupplyPointData(this.data.supplyPoint)
+    })
 
+    it('Contract with 2.0TD', function () {
       const moreThan15Kw = false
       const powers = [this.data.power, this.data.power2]
 
       cy.enterPowerFare(this.data.phase, moreThan15Kw, powers)
+
+      cy.identifyOwner(this.data.member.vat)
+
+      cy.enterVoluntaryCent(this.data.holder.voluntaryCent)
+
+      cy.enterPaymentData(this.data.holder.iban)
+
+      cy.reviewAndConfirmData()
     })
 
-    /*
-      cy.get('#memberNumber')
-        .clear()
-        .type(this.data.member.number)
-        .should('have.value', this.data.member.number)
-
-      cy.intercept('GET', '/data/soci/**').as('checkMember')
-
-      cy.get('#vat')
-        .clear()
-        .type(this.data.member.vat)
-        .should('have.value', this.data.member.vat)
-
-      cy.wait('@checkMember')
-
-      cy.get('[data-cy=next]').click()
-      */
-
     it('3.0TD no incremental powers', function () {
-      cy.get('#phases').click()
-      cy.get(`[data-value="${this.data.phase}"]`).click()
+      const moreThan15Kw = true
+      const powers = [this.data.power, this.data.power2, this.data.power3, this.data.power6, this.data.power6, this.data.power]
 
-      cy.get('[data-cy="moreThan15Kw"]').get('[data-value="true"]').click()
-
-      cy.get('[name="contract.power"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-
-      cy.get('[name="contract.power2"]')
-        .clear()
-        .type(this.data.power2)
-        .should('have.value', this.data.power2)
-
-      cy.get('[name="contract.power3"]')
-        .clear()
-        .type(this.data.power3)
-        .should('have.value', this.data.power3)
-
-      cy.get('[name="contract.power4"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[name="contract.power5"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[name="contract.power6"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-        .blur()
-
-      cy.contains(
-        'La potencia de este periodo no puede ser inferior al anterior'
-      )
+      cy.noIncrementalPowers(this.data.phase, moreThan15Kw, powers)
     })
   })
 
