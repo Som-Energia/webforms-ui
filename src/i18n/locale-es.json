@@ -429,8 +429,5 @@
   "ATR_CASE": "No hemos podido generar el caso ATR, este contrato ya tiene un proceso en curso",
   "OPEN_CASES": "Este contrato ya tiene un proceso en curso",
   "ATTACHMENT_ERROR": "No hemos podido cargar los archivos adjuntos",
-  "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales",
-
-  "WARNING_NP_TITLE": "Aviso cambio de peajes",
-  "NP_FORM_WARNING": "Debido al cambio de peajes que se aplica este próximo mes de junio no podremos gestionar tu solicitud hasta el martes 01/06/2021. Así pues, el tiempo de gestión de este trámite puede demorarse más de lo que está previsto habitualmente."
+  "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales"
 }
