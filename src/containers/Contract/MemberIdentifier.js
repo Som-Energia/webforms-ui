@@ -32,14 +32,8 @@ const MemberIdentifier = (props) => {
   const classes = useStyles()
   const query = useQuery()
 
-  const {
-    values,
-    handleBlur,
-    handleChange,
-    errors,
-    touched,
-    setFieldValue
-  } = props
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
+    props
 
   const [isLoading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -68,7 +62,11 @@ const MemberIdentifier = (props) => {
         if (member?.state === true && member?.data?.soci?.nom) {
           setFieldValue(
             'member.full_name',
-            `${member?.data?.soci?.nom} ${member?.data?.soci?.cognom}`,
+            `${member?.data?.soci?.nom} ${
+              member?.data?.soci?.cognom !== member?.data?.soci?.nom
+                ? member?.data?.soci?.cognom
+                : ''
+            }`,
             false
           )
           setFieldValue('member.name', member?.data?.soci?.nom, false)

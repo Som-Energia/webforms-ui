@@ -12,6 +12,13 @@ import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Typography from '@material-ui/core/Typography'
+
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
@@ -55,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function HolderChange (props) {
+function HolderChange(props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
@@ -66,6 +73,8 @@ function HolderChange (props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+
+  const [adviceOpen, setAdviceOpen] = useState(true)
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -81,27 +90,30 @@ function HolderChange (props) {
     Yup.object().shape({
       holder: Yup.object().shape({
         vat: Yup.string().required(t('FILL_NIF')),
-        vatvalid: Yup.bool().required(t('FILL_NIF'))
+        vatvalid: Yup.bool()
+          .required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
       })
     }),
     Yup.object().shape({
       supply_point: Yup.object().shape({
-        cups: Yup.string().required(t('CUPS_INVALID'))
+        cups: Yup.string()
+          .required(t('CUPS_INVALID'))
           .min(18, t('CUPS_INVALID'))
-          .test('statusError',
-            t('CUPS_INVALID'),
-            function () { return !(this.parent.status === 'error') })
-          .test('statusError',
-            t('CUPS_IN_PROCESS'),
-            function () { return !(this.parent.status === 'busy') })
-          .test('statusNew',
-            t('CUPS_SHOULD_BE_ACTIVE'),
-            function () { return !(this.parent.status === 'new') })
-          .test('statusInvalid',
-            t('INVALID_SUPPLY_POINT_CUPS'),
-            function () { return !(this.parent.status === 'invalid') }),
-        verified: Yup.bool().required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
+          .test('statusError', t('CUPS_INVALID'), function () {
+            return !(this.parent.status === 'error')
+          })
+          .test('statusError', t('CUPS_IN_PROCESS'), function () {
+            return !(this.parent.status === 'busy')
+          })
+          .test('statusNew', t('CUPS_SHOULD_BE_ACTIVE'), function () {
+            return !(this.parent.status === 'new')
+          })
+          .test('statusInvalid', t('INVALID_SUPPLY_POINT_CUPS'), function () {
+            return !(this.parent.status === 'invalid')
+          }),
+        verified: Yup.bool()
+          .required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
           .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX')),
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
@@ -110,79 +122,65 @@ function HolderChange (props) {
     }),
     Yup.object().shape({
       holder: Yup.object().shape({
-        name: Yup.string()
-          .required(t('NO_NAME')),
-        surname1: Yup.string()
-          .when('isphisical', {
-            is: true,
-            then: Yup.string()
-              .required(t('NO_SURNAME1'))
-          }),
-        proxyname: Yup.string()
-          .when('isphisical', {
-            is: false,
-            then: Yup.string()
-              .required(t('NO_PROXY_NAME'))
-          }),
-        proxynif: Yup.string()
-          .when('isphisical', {
-            is: false,
-            then: Yup.string()
-              .required(t('NO_PROXY_NIF'))
-          }),
-        proxynif_valid: Yup.bool()
-          .when('isphisical', {
-            is: false,
-            then: Yup.bool().required(t('FILL_NIF'))
-              .oneOf([true], t('FILL_NIF'))
-          }),
-        proxynif_phisical: Yup.bool()
-          .when('isphisical', {
-            is: false,
-            then: Yup.bool().required(t('PROXY_NIF_PHISICAL'))
-              .oneOf([true], t('PROXY_NIF_PHISICAL'))
-          }),
-        address: Yup.string()
-          .required(t('NO_ADDRESS')),
+        name: Yup.string().required(t('NO_NAME')),
+        surname1: Yup.string().when('isphisical', {
+          is: true,
+          then: Yup.string().required(t('NO_SURNAME1'))
+        }),
+        proxyname: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NAME'))
+        }),
+        proxynif: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NIF'))
+        }),
+        proxynif_valid: Yup.bool().when('isphisical', {
+          is: false,
+          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+        }),
+        proxynif_phisical: Yup.bool().when('isphisical', {
+          is: false,
+          then: Yup.bool()
+            .required(t('PROXY_NIF_PHISICAL'))
+            .oneOf([true], t('PROXY_NIF_PHISICAL'))
+        }),
+        address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
         state: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_STATE'))
+          id: Yup.number().required(t('NO_STATE'))
         }),
         city: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_CITY'))
+          id: Yup.number().required(t('NO_CITY'))
         }),
-        email: Yup.string()
-          .required(t('NO_EMAIL'))
-          .email(t('NO_EMAIL')),
-        email2: Yup.string()
-          .test('repeatEmail',
-            t('NO_REPEATED_EMAIL'),
-            function () {
-              return this.parent.email === this.parent.email2
-            }),
-        phone1: Yup.string()
-          .min(9, t('NO_PHONE'))
-          .required(t('NO_PHONE')),
+        email: Yup.string().required(t('NO_EMAIL')).email(t('NO_EMAIL')),
+        email2: Yup.string().test(
+          'repeatEmail',
+          t('NO_REPEATED_EMAIL'),
+          function () {
+            return this.parent.email === this.parent.email2
+          }
+        ),
+        phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
-      legal_person_accepted: Yup.bool()
-        .test({
-          name: 'isTheMemberVat',
-          message: t('ACCEPT_LEGAL_PERSON'),
-          test: function () {
-            return !(this.parent.holder.isphisical === false && this.parent.legal_person_accepted !== true)
-          }
-        }),
+      legal_person_accepted: Yup.bool().test({
+        name: 'isTheMemberVat',
+        message: t('ACCEPT_LEGAL_PERSON'),
+        test: function () {
+          return !(
+            this.parent.holder.isphisical === false &&
+            this.parent.legal_person_accepted !== true
+          )
+        }
+      }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     }),
-    Yup.object().shape({
-    }),
+    Yup.object().shape({}),
     Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
@@ -220,14 +218,17 @@ function HolderChange (props) {
     Yup.object().shape({
       payment: Yup.object().shape({
         iban: Yup.string().required(t('IBAN_ERROR')),
-        iban_valid: Yup.bool().required(t('IBAN_ERROR'))
+        iban_valid: Yup.bool()
+          .required(t('IBAN_ERROR'))
           .oneOf([true], t('IBAN_ERROR')),
-        sepa_accepted: Yup.bool().required(t('IBAN_ERROR'))
+        sepa_accepted: Yup.bool()
+          .required(t('IBAN_ERROR'))
           .oneOf([true], t('IBAN_ERROR'))
       })
     }),
     Yup.object().shape({
-      terms_accepted: Yup.bool().required(t('UNACCEPTED_TERMS'))
+      terms_accepted: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
@@ -236,32 +237,18 @@ function HolderChange (props) {
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
-    return <>
-      { activeStep === 0 &&
-        <VAT {...props} />
-      }
-      { activeStep === 1 &&
-        <CUPS {...props} />
-      }
-      { activeStep === 2 &&
-        <PersonalData url={url} {...props} />
-      }
-      { activeStep === 3 &&
-        <BecomeMember {...props} />
-      }
-      { activeStep === 4 &&
-        <VoluntaryCent {...props} />
-      }
-      { activeStep === 5 &&
-        <SpecialCases {...props} />
-      }
-      { activeStep === 6 &&
-        <IBAN {...props} />
-      }
-      { activeStep === 7 &&
-        <Review {...props} />
-      }
-    </>
+    return (
+      <>
+        {activeStep === 0 && <VAT {...props} />}
+        {activeStep === 1 && <CUPS {...props} />}
+        {activeStep === 2 && <PersonalData url={url} {...props} />}
+        {activeStep === 3 && <BecomeMember {...props} />}
+        {activeStep === 4 && <VoluntaryCent {...props} />}
+        {activeStep === 5 && <SpecialCases {...props} />}
+        {activeStep === 6 && <IBAN {...props} />}
+        {activeStep === 7 && <Review {...props} />}
+      </>
+    )
   }
 
   useEffect(() => {
@@ -269,7 +256,7 @@ function HolderChange (props) {
     i18n.changeLanguage(language)
   }, [props.match.params.language, i18n])
 
-  const nextStep = props => {
+  const nextStep = (props) => {
     const next = activeStep + 1
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
@@ -281,7 +268,7 @@ function HolderChange (props) {
     })
   }
 
-  const prevStep = props => {
+  const prevStep = (props) => {
     const prev = activeStep - 1
     setActiveStep(Math.max(0, prev))
     if (completed) {
@@ -299,7 +286,12 @@ function HolderChange (props) {
     const errorResp = error?.response?.data?.data || {}
 
     if (error?.response?.data?.data?.invalid_fields) {
-      errorCode = Object.keys(error?.response?.data?.data?.invalid_fields[0])[0].toUpperCase() + '_' + errorCode
+      errorCode =
+        Object.keys(
+          error?.response?.data?.data?.invalid_fields[0]
+        )[0].toUpperCase() +
+        '_' +
+        errorCode
     }
 
     errorResp.code = errorCode
@@ -312,13 +304,13 @@ function HolderChange (props) {
     setSending(true)
     const data = normalizeHolderChange(values)
     await holderChange(data)
-      .then(response => {
+      .then((response) => {
         const responseData = response?.data ? response.data : {}
         setResult(responseData)
         setError(false)
         setCompleted(true)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error?.response)
         handleError(error)
       })
@@ -353,7 +345,7 @@ function HolderChange (props) {
       status: false,
       address: '',
       verified: false,
-      supply_point_accepted : false
+      supply_point_accepted: false
     },
     member: {
       become_member: '',
@@ -377,79 +369,109 @@ function HolderChange (props) {
 
   return (
     <GlobalHotKeys handlers={handlers}>
+      <Dialog
+        open={adviceOpen}
+        onClose={() => setAdviceOpen(false)}
+        maxWidth="sm">
+        <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
+        <DialogContent dividers={true}>
+          <DialogContentText>
+            <Typography
+              className={classes.warningMessage}
+              dangerouslySetInnerHTML={{
+                __html: t('NP_FORM_WARNING')
+              }}></Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setAdviceOpen(false)}
+            color="primary"
+            variant="contained">
+            {t('I_ACCEPT')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Container maxWidth="md">
         <Formik
           onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}
-        >
-          {props => (
+          validateOnMount={true}>
+          {(props) => (
             <>
               <div className="ov-theme">
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
+                      <LinearProgress
+                        variant={sending ? 'indeterminate' : 'determinate'}
+                        value={(activeStep / MAX_STEP_NUMBER) * 100}
+                      />
                       <Box mx={4} mb={3}>
-                        { completed
-                          ? error
-                            ? <Failure error={error} />
-                            : <Success result={result} />
-                          : getActiveStep(props)
-                        }
+                        {completed ? (
+                          error ? (
+                            <Failure error={error} />
+                          ) : (
+                            <Success result={result} />
+                          )
+                        ) : (
+                          getActiveStep(props)
+                        )}
                       </Box>
                       <Box mx={4} mt={1} mb={3}>
                         <div className={classes.actionsContainer}>
-                          {
-                            result?.contract_number === undefined &&
+                          {result?.contract_number === undefined && (
                             <Button
                               data-cy="prev"
                               className={classes.button}
                               startIcon={<ArrowBackIosIcon />}
-                              disabled={(activeStep === 0) || sending}
-                              onClick={() => prevStep(props)}
-                            >
+                              disabled={activeStep === 0 || sending}
+                              onClick={() => prevStep(props)}>
                               {t('PAS_ANTERIOR')}
                             </Button>
-
-                          }
-                          {
-                            activeStep < MAX_STEP_NUMBER - 1
-                              ? <Button
+                          )}
+                          {activeStep < MAX_STEP_NUMBER - 1 ? (
+                            <Button
+                              type="button"
+                              data-cy="next"
+                              className={classes.button}
+                              variant="contained"
+                              color="primary"
+                              endIcon={<ArrowForwardIosIcon />}
+                              disabled={!props.isValid}
+                              onClick={() => nextStep(props)}>
+                              {t('SEGUENT_PAS')}
+                            </Button>
+                          ) : (
+                            !completed && (
+                              <Button
                                 type="button"
-                                data-cy="next"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"
-                                endIcon={<ArrowForwardIosIcon />}
-                                disabled={!props.isValid}
-                                onClick={() => nextStep(props)}
-                              >
-                                {t('SEGUENT_PAS')}
-                              </Button>
-                              : !completed && <Button
-                                type="button"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
+                                startIcon={
+                                  sending ? (
+                                    <CircularProgress size={24} />
+                                  ) : (
+                                    <SendIcon />
+                                  )
+                                }
                                 disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}
-                              >
+                                onClick={() => handlePost(props.values)}>
                                 {t('SEND')}
                               </Button>
-                          }
+                            )
+                          )}
                         </div>
                       </Box>
                     </Paper>
                   }
                 </Form>
               </div>
-              { showInspector &&
-                <DisplayFormikState {...props} />
-              }
+              {showInspector && <DisplayFormikState {...props} />}
             </>
           )}
         </Formik>

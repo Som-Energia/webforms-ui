@@ -16,6 +16,13 @@ import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Typography from '@material-ui/core/Typography'
+
 import DisplayFormikState from '../components/DisplayFormikState'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
@@ -38,7 +45,11 @@ import Success from './Success'
 import Failure from './Failure'
 
 import { getRates, contract } from '../services/api'
-import { CNAE_HOUSING, normalizeContract } from '../services/utils'
+import {
+  CNAE_HOUSING,
+  normalizeContract,
+  testPowerForPeriods
+} from '../services/utils'
 const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
@@ -80,50 +91,17 @@ const Contract = (props) => {
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
 
+  const [adviceOpen, setAdviceOpen] = useState(true)
+
   const [rates] = useState(getRates())
 
   const handlers = {
     SAMPLE_DATA: () => {
       const values = { ...initialValues }
-      console.log(values)
     },
     SHOW_INSPECTOR: () => {
       showInspector ? setShowInspector(false) : setShowInspector(true)
     }
-  }
-
-  const testPowerForPeriods = (
-    rates,
-    values,
-    limit = 'min_power',
-    createError
-  ) => {
-    const rate = values?.rate
-    let valids = 0
-    if (rates[rate] === undefined) return true
-    for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
-      const attr = i === 1 ? 'power' : `power${i}`
-      const inLimit = limit.match('min')
-        ? values[attr] >= rates[rate][limit]?.power
-        : values[attr] <= rates[rate][limit]?.power
-      inLimit && valids++
-      values[attr] === undefined && valids++
-    }
-
-    if (valids >= rates[rate][limit]?.num_periods_apply) {
-      return true
-    }
-
-    const lessThan =
-      rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
-        ? 'SOME_PERIOD_MORE_THAN'
-        : 'POWER_NO_LESS_THAN'
-
-    return createError({
-      message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', {
-        value: rates[rate][limit]?.power
-      })
-    })
   }
 
   const validationSchemas = [
@@ -201,19 +179,16 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
-        fare: Yup.string().test('required', t('NO_FARE_CHOSEN'), function () {
-          return this.parent.has_service
-            ? true
-            : this.parent.moreThan15Kw
-            ? true
-            : this.parent.fare === 'dh' || this.parent.fare === 'nodh'
+        phases: Yup.string().when('has_service', {
+          is: false,
+          then: Yup.string().required(t('NO_MONOPHASE_CHOICE'))
         }),
         rate: Yup.string().when('has_service', {
           is: true,
           then: Yup.string().required(t('NO_FARE_CHOSEN'))
         }),
         power: Yup.number()
-          .required(t('NO_POWER_CHOSEN'))
+          .required(t('NO_POWER_CHOSEN_PX'))
           .test({
             name: 'minPowerValue',
             test: function () {
@@ -221,7 +196,8 @@ const Contract = (props) => {
                 rates,
                 this.parent,
                 'min_power',
-                this.createError
+                this.createError,
+                t
               )
             }
           })
@@ -232,42 +208,20 @@ const Contract = (props) => {
                 rates,
                 this.parent,
                 'max_power',
-                this.createError
+                this.createError,
+                t
               )
             }
           }),
         power2: Yup.number()
-          .test('required', t('NO_POWER_CHOSEN_P2'), function () {
+          .test('required', t('NO_POWER_CHOSEN_PX'), function () {
             return rates[this.parent.rate]?.num_power_periods >= 2
               ? this.parent.power2
               : true
           })
-          .test({
-            name: 'minPowerValue',
-            test: function () {
-              return testPowerForPeriods(
-                rates,
-                this.parent,
-                'min_power',
-                this.createError
-              )
-            }
-          })
-          .test({
-            name: 'maxPowerValue',
-            test: function () {
-              return testPowerForPeriods(
-                rates,
-                this.parent,
-                'max_power',
-                this.createError
-              )
-            }
-          }),
-        power3: Yup.number()
-          .test('required', t('NO_POWER_CHOSEN_P3'), function () {
-            return rates[this.parent.rate]?.num_power_periods >= 3
-              ? this.parent.power3
+          .test('increasing', t('NO_POWER_INCREASING'), function () {
+            return rates[this.parent.rate]?.increasing
+              ? parseInt(this.parent.power2) >= parseInt(this.parent.power)
               : true
           })
           .test({
@@ -277,7 +231,8 @@ const Contract = (props) => {
                 rates,
                 this.parent,
                 'min_power',
-                this.createError
+                this.createError,
+                t
               )
             }
           })
@@ -288,7 +243,148 @@ const Contract = (props) => {
                 rates,
                 this.parent,
                 'max_power',
-                this.createError
+                this.createError,
+                t
+              )
+            }
+          }),
+        power3: Yup.number()
+          .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+            return rates[this.parent.rate]?.num_power_periods >= 3
+              ? this.parent.power3
+              : true
+          })
+          .test('increasing', t('NO_POWER_INCREASING'), function () {
+            return rates[this.parent.rate]?.increasing
+              ? parseInt(this.parent.power3) >= parseInt(this.parent.power2)
+              : true
+          })
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError,
+                t
+              )
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError,
+                t
+              )
+            }
+          }),
+        power4: Yup.number()
+          .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+            return rates[this.parent.rate]?.num_power_periods >= 4
+              ? this.parent.power4
+              : true
+          })
+          .test('increasing', t('NO_POWER_INCREASING'), function () {
+            return rates[this.parent.rate]?.increasing
+              ? parseInt(this.parent.power4) >= parseInt(this.parent.power3)
+              : true
+          })
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError,
+                t
+              )
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError,
+                t
+              )
+            }
+          }),
+        power5: Yup.number()
+          .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+            return rates[this.parent.rate]?.num_power_periods >= 5
+              ? this.parent.power5
+              : true
+          })
+          .test('increasing', t('NO_POWER_INCREASING'), function () {
+            return rates[this.parent.rate]?.increasing
+              ? parseInt(this.parent.power5) >= parseInt(this.parent.power4)
+              : true
+          })
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError,
+                t
+              )
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError,
+                t
+              )
+            }
+          }),
+        power6: Yup.number()
+          .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+            return rates[this.parent.rate]?.num_power_periods >= 6
+              ? this.parent.power6
+              : true
+          })
+          .test('increasing', t('NO_POWER_INCREASING'), function () {
+            return rates[this.parent.rate]?.increasing
+              ? parseInt(this.parent.power6) >= parseInt(this.parent.power5)
+              : true
+          })
+          .test({
+            name: 'minPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'min_power',
+                this.createError,
+                t
+              )
+            }
+          })
+          .test({
+            name: 'maxPowerValue',
+            test: function () {
+              return testPowerForPeriods(
+                rates,
+                this.parent,
+                'max_power',
+                this.createError,
+                t
               )
             }
           })
@@ -591,13 +687,14 @@ const Contract = (props) => {
       .then((response) => {
         if (response?.state === true) {
           setError(false)
-          setResult({ contract_number: response?.data?.contract_id })
+          setResult({ contract_number: response?.data?.contract_number })
           trackSucces()
         } else {
           setError(true)
         }
       })
       .catch((error) => {
+        console.error(error)
         const errorResp = error?.response?.data?.data
           ? error?.response?.data?.data
           : { code: 'UNEXPECTED' }
@@ -610,6 +707,30 @@ const Contract = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+      <Dialog
+        open={adviceOpen}
+        onClose={() => setAdviceOpen(false)}
+        maxWidth="sm">
+        <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
+        <DialogContent dividers={true}>
+          <DialogContentText>
+            <Typography
+              className={classes.warningMessage}
+              dangerouslySetInnerHTML={{
+                __html: t('NP_FORM_WARNING')
+              }}></Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setAdviceOpen(false)}
+            color="primary"
+            variant="contained">
+            {t('I_ACCEPT')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Container maxWidth="md" disableGutters={true}>
         <Formik
           onSubmit={() => {}}
