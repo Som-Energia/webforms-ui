@@ -430,6 +430,8 @@
   "OPEN_CASES": "Este contrato ya tiene un proceso en curso",
   "ATTACHMENT_ERROR": "No hemos podido cargar los archivos adjuntos",
   "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales",
+  "INVALID_MEMBER": "No hemos podido validar la persona socia",
+  "UNAVAILABLE": "No disponible",
 
   "SELFCONSUMPTION_TITLE": "Autoconsumo",
   "SELFCONSUMPTION_QUESTION": "¿Tienes alguna modalidad de autoconsumo activa para tu contrato?",
