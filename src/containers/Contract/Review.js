@@ -72,6 +72,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '24px',
     marginLeft: 0,
     marginRight: '32px'
+  },
+  prices: {
+    marginBottom: '10px',
+    '& span': {
+      paddingRight: '16px'
+    }
   }
 }))
 
@@ -175,12 +181,17 @@ const Review = (props) => {
   }
 
   const Prices = ({ concept, name }) => {
-    return concept ? (
-      Object.entries(concept).map(([key, value]) => (
-        <span key={`${name}:${key}`}>{`${value?.value} ${value?.uom}`}</span>
-      ))
-    ) : (
-      <></>
+    return (
+      <div className={classes.prices}>
+        {concept ? (
+          Object.entries(concept).map(([key, value]) => (
+            <span
+              key={`${name}:${key}`}>{`${value?.value} ${value?.uom}`}</span>
+          ))
+        ) : (
+          <>{t('UNAVAILABLE')}</>
+        )}
+      </div>
     )
   }
 
@@ -348,7 +359,11 @@ const Review = (props) => {
             <Grid item xs={12} sm={6}>
               <ReviewField
                 label={t('BO_SOCIAL')}
-                value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                value={
+                  prices?.bo_social?.value
+                    ? `${prices?.bo_social?.value} ${prices?.bo_social?.uom}`
+                    : t('UNAVAILABLE')
+                }
                 multipleValues={true}
               />
             </Grid>

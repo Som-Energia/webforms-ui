@@ -413,5 +413,6 @@
   "ATR_CASE": "No s'ha pogut generar el cas ATR, aquest contracte ja té un procés en curs",
   "OPEN_CASES": "Aquest contracte ja té un procés en curs",
   "ATTACHMENT_ERROR": "No s'han pogut carregar els adjunts",
-  "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals"
+  "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals",
+  "UNAVAILABLE": "No disponible"
 }
