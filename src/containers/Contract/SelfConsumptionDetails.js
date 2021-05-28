@@ -17,7 +17,6 @@ import {
   getSelfConsumptionSituations,
   getSelfConsumptionTechnologies
 } from '../../services/api'
-import { FormHelperText } from '@material-ui/core'
 
 const SelfConsumptionDetails = (props) => {
   const {
