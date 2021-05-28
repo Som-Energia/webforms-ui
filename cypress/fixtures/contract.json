@@ -23,7 +23,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES0031534687925238WL",
+    "cups": "ES0353501028615353EE",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -35,7 +35,7 @@
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
     "invalidCups": "ES9803463008824117ZQ",
-    "validCups": "ES0031534687925238WL"
+    "validCups": "ES0353501028615353EE"
   },
   "fare20A": "2.0A",
   "fare21": "2.1DHA",

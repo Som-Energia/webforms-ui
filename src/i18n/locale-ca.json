@@ -414,6 +414,8 @@
   "OPEN_CASES": "Aquest contracte ja té un procés en curs",
   "ATTACHMENT_ERROR": "No s'han pogut carregar els adjunts",
   "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals",
+  "INVALID_MEMBER": "No s'ha pogut validar la persona socia",
+  "UNAVAILABLE": "No disponible",
 
   "SELFCONSUMPTION_TITLE": "Autoconsum",
   "SELFCONSUMPTION_QUESTION": "Tens alguna modalitat d'autoconsum activada pel teu contracte?",
