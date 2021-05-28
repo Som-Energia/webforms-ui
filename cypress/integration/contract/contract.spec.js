@@ -9,7 +9,6 @@ describe('Contract', () => {
   beforeEach(() => {
     cy.visit('/contract')
     cy.fixture('contract.json').as('data')
-    cy.contains('Acepto').click()
   })
 
   describe('Contract whith CUPS has no service', function () {

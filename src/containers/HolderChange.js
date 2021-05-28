@@ -12,13 +12,6 @@ import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Typography from '@material-ui/core/Typography'
-
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
@@ -73,8 +66,6 @@ function HolderChange(props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
-
-  const [adviceOpen, setAdviceOpen] = useState(true)
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -369,30 +360,6 @@ function HolderChange(props) {
 
   return (
     <GlobalHotKeys handlers={handlers}>
-      <Dialog
-        open={adviceOpen}
-        onClose={() => setAdviceOpen(false)}
-        maxWidth="sm">
-        <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
-        <DialogContent dividers={true}>
-          <DialogContentText>
-            <Typography
-              className={classes.warningMessage}
-              dangerouslySetInnerHTML={{
-                __html: t('NP_FORM_WARNING')
-              }}></Typography>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setAdviceOpen(false)}
-            color="primary"
-            variant="contained">
-            {t('I_ACCEPT')}
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       <Container maxWidth="md">
         <Formik
           onSubmit={() => {}}

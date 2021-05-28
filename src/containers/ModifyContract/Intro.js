@@ -8,12 +8,6 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 const useStyles = makeStyles((theme) => ({
@@ -56,8 +50,6 @@ export default function ModifyIntro({ nextStep, prevStep }) {
   const classes = useStyles()
   const [isSubmitting, setSubmitting] = useState(false)
 
-  const [adviceOpen, setAdviceOpen] = useState(true)
-
   const onFormSubmit = (event) => {
     event.preventDefault()
     if (!isSubmitting) {
@@ -93,29 +85,6 @@ export default function ModifyIntro({ nextStep, prevStep }) {
           </div>
         </form>
       </Box>
-      <Dialog
-        open={adviceOpen}
-        onClose={() => setAdviceOpen(false)}
-        maxWidth="md">
-        <DialogTitle>⚠️&nbsp;&nbsp;{t('WARNING_NP_TITLE')}</DialogTitle>
-        <DialogContent dividers={true}>
-          <DialogContentText>
-            <Typography
-              className={classes.warningMessage}
-              dangerouslySetInnerHTML={{
-                __html: t('NP_FORM_WARNING')
-              }}></Typography>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setAdviceOpen(false)}
-            color="primary"
-            variant="contained">
-            {t('I_ACCEPT')}
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Paper>
   )
 }
