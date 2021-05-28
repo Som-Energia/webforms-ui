@@ -11,8 +11,22 @@ describe('Contract', () => {
     cy.fixture('contract.json').as('data')
   })
 
-  describe('Contract whith CUPS has no service', function () {
-    beforeEach(function () {
+  describe('Contract with CUPS has no service', function () {
+    it.only('Contract with 2.0TD', function () {
+      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.identifySupplyPoint(
+        this.data.supplyPoint.cups,
+        this.data.supplyPoint.hasNoService
+      )
+      cy.enterSupplyPointData(this.data.supplyPoint)
+
+      const powers = [this.data.power, this.data.power2]
+      const moreThan15Kw = false
+
+      cy.enterPowerFare(this.data.phase, moreThan15Kw, powers)
+    })
+
+    /*
       cy.get('#memberNumber')
         .clear()
         .type(this.data.member.number)
@@ -28,184 +42,53 @@ describe('Contract', () => {
       cy.wait('@checkMember')
 
       cy.get('[data-cy=next]').click()
+      */
 
-      cy.intercept('GET', '/check/cups/**').as('checkCups')
+    it('3.0TD no incremental powers', function () {
+      cy.get('#phases').click()
+      cy.get(`[data-value="${this.data.phase}"]`).click()
 
-      cy.get('#cups')
+      cy.get('[data-cy="moreThan15Kw"]').get('[data-value="true"]').click()
+
+      cy.get('[name="contract.power"]')
         .clear()
-        .type(this.data.supplyPoint.cups)
-        .should('have.value', this.data.supplyPoint.cups)
+        .type(this.data.power)
+        .should('have.value', this.data.power)
 
-      cy.wait('@checkCups')
-
-      cy.get(`[data-value="${this.data.supplyPoint.hasNoService}"]`).click()
-
-      cy.get('[data-cy=next]').click()
-
-      cy.get('#supply_point_address')
+      cy.get('[name="contract.power2"]')
         .clear()
-        .type(this.data.supplyPoint.address)
-        .should('have.value', this.data.supplyPoint.address)
+        .type(this.data.power2)
+        .should('have.value', this.data.power2)
 
-      cy.get('#supply_point_number')
+      cy.get('[name="contract.power3"]')
         .clear()
-        .type(this.data.supplyPoint.number)
-        .should('have.value', this.data.supplyPoint.number)
+        .type(this.data.power3)
+        .should('have.value', this.data.power3)
 
-      cy.get('#supply_point_postal_code')
+      cy.get('[name="contract.power4"]')
         .clear()
-        .type(this.data.supplyPoint.postalCode)
-        .should('have.value', this.data.supplyPoint.postalCode)
+        .type(this.data.power6)
+        .should('have.value', this.data.power6)
 
-      cy.get('#supply_point_state').click()
-      cy.get(`[data-value="${this.data.supplyPoint.state}"]`).click()
+      cy.get('[name="contract.power5"]')
+        .clear()
+        .type(this.data.power6)
+        .should('have.value', this.data.power6)
 
-      cy.get('#supply_point_city').click()
-      cy.get(`[data-value="${this.data.supplyPoint.city}"]`).click()
+      cy.get('[name="contract.power6"]')
+        .clear()
+        .type(this.data.power)
+        .should('have.value', this.data.power)
+        .blur()
 
-      cy.get('#supply_point_is_housing').click()
-      cy.get(`[data-value="${this.data.supplyPoint.isHousing}"]`).click()
-
-      cy.get('#supply_point_cnae').should(
-        'have.value',
-        this.data.supplyPoint.cnae
+      cy.contains(
+        'La potencia de este periodo no puede ser inferior al anterior'
       )
-
-      cy.get('[name="supply_point_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
-      cy.get('[data-cy=next]').click()
-    })
-
-    afterEach(function () {
-      cy.get('[data-value=false]').click()
-
-      cy.get('[data-cy=next]').click()
-
-      cy.get('[name="holder.vat"]')
-        .type(this.data.member.vat)
-        .should('have.value', this.data.member.vat)
-
-      // cy.wait(WAIT_TIME)
-
-      cy.get('[data-cy=next]').click()
-
-      cy.get(`[data-value="${this.data.holder.voluntaryCent}"]`).click()
-
-      cy.get('[data-cy=next]').click()
-
-      cy.get('[name="payment.iban"]')
-        .clear()
-        .type(this.data.holder.iban)
-        .should('have.value', this.data.holder.iban)
-
-      cy.get('[name="payment.sepa_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
-      cy.get('[data-cy=next]').click()
-
-      cy.get('[name="terms_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
-      // No prices defined yet
-      //cy.contains('€/kWh')
-    })
-
-    it('Monofasic 2.0TD', function () {
-      cy.get('#phases').click()
-      cy.get(`[data-value="${this.data.phase}"]`).click()
-
-      cy.get('[name="contract.power"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-
-      cy.get('[name="contract.power2"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-
-      cy.get('[data-cy=next]').click()
-    })
-
-    it('Monofasic 3.0TD', function () {
-      cy.get('#phases').click()
-      cy.get(`[data-value="${this.data.phase}"]`).click()
-
-      cy.get('[data-cy="moreThan15Kw"]').get('[data-value="true"]').click()
-
-      cy.get('[name="contract.power"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-
-      cy.get('[name="contract.power2"]')
-        .clear()
-        .type(this.data.power2)
-        .should('have.value', this.data.power2)
-
-      cy.get('[name="contract.power3"]')
-        .clear()
-        .type(this.data.power3)
-        .should('have.value', this.data.power3)
-
-      cy.get('[name="contract.power4"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[name="contract.power5"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[name="contract.power6"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[data-cy=next]').click()
-    })
-
-    it.only('3.0TD no incremental powers', function () {
-      cy.get('#phases').click()
-      cy.get(`[data-value="${this.data.phase}"]`).click()
-
-      cy.get('[data-cy="moreThan15Kw"]').get('[data-value="true"]').click()
-
-      cy.get('[name="contract.power"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-
-      cy.get('[name="contract.power2"]')
-        .clear()
-        .type(this.data.power2)
-        .should('have.value', this.data.power2)
-
-      cy.get('[name="contract.power3"]')
-        .clear()
-        .type(this.data.power3)
-        .should('have.value', this.data.power3)
-
-      cy.get('[name="contract.power4"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[name="contract.power5"]')
-        .clear()
-        .type(this.data.power6)
-        .should('have.value', this.data.power6)
-
-      cy.get('[name="contract.power6"]')
-        .clear()
-        .type(this.data.power)
-        .should('have.value', this.data.power)
-
-      cy.get('[data-cy=next]').click()
     })
   })
+
+  // No prices defined yet
+  //cy.contains('€/kWh')
 
   /*
 
