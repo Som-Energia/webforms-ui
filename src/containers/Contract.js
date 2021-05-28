@@ -178,6 +178,7 @@ const Contract = (props) => {
           is: true,
           then: Yup.string().required(t('NO_FARE_CHOSEN'))
         }),
+        moreThan15Kw: Yup.boolean().required(),
         power: Yup.number()
           .required(t('NO_POWER_CHOSEN_PX'))
           .test({
