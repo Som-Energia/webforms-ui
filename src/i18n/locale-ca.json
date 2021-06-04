@@ -457,6 +457,7 @@
 
   "FILL_SELFCONSUMPTION_QUESTION": "Indica si tens instal·lació d'autoconsum",
   "FILL_SELFCONSUMPTION_CAU": "Indica el CAU",
+  "CAU_INVALID": "CAU incorrecte",
   "FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION": "Indica el com és la teva instal·lació",
   "FILL_SELFCONSUMPTION_INSTALLATION_POWER": "Indica la potència d'instal·lació",
   "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situació de la instal·lació",

@@ -321,7 +321,7 @@ const Review = (props) => {
               <Grid item xs={12} sm={6}>
                 <ReviewField
                   label={t('SELFCONSUMPTION_SITUATION')}
-                  value={values?.self_consumption?.installation_situation}
+                  value={values?.self_consumption?.installation_type}
                 />
                 <ReviewField
                   label={t('SELFCONSUMPTION_TECHNOLOGY')}

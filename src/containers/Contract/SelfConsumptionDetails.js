@@ -41,6 +41,16 @@ const SelfConsumptionDetails = (props) => {
     validateForm()
   }
 
+  const handleChangeInstallPower = (event) => {
+    const regex = /^\d*([.,'])?\d{0,3}/g
+
+    const match = regex.exec(event.target.value)
+    let result = match[0].replace(',', '.')
+    result = result.replace("'", '.')
+
+    setFieldValue(event.target.name, result)
+  }
+
   const [situations, setSituations] = useState([])
   const [isLoadingSituations, setLoadingSituations] = useState(false)
 
@@ -111,6 +121,7 @@ const SelfConsumptionDetails = (props) => {
         </Grid>
         <Grid item xs={12}>
           <Chooser
+            name="self_consumption.collective_installation"
             className={classes.chooserQuestion}
             question={t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_QUESTION')}
             onChange={handleCollectiveInstallation}
@@ -148,7 +159,7 @@ const SelfConsumptionDetails = (props) => {
               endAdornment: <InputAdornment position="end">kWp</InputAdornment>
             }}
             value={values.self_consumption.installation_power}
-            onChange={handleChange}
+            onChange={handleChangeInstallPower}
             onBlur={handleBlur}
             error={
               errors?.self_consumption?.installation_power &&
@@ -179,22 +190,22 @@ const SelfConsumptionDetails = (props) => {
           <TextField
             select
             required
-            id="self_consumption_situation"
-            name="self_consumption.installation_situation"
+            id="self_consumption_installation_type"
+            name="self_consumption.installation_type"
             label={t('SELFCONSUMPTION_INSTALLATION_SITUATION_QUESTION')}
             variant="outlined"
             fullWidth
-            value={values?.self_consumption?.installation_situation || ''}
+            value={values?.self_consumption?.installation_type || ''}
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={isLoadingSituations}
             error={
-              errors?.self_consumption?.installation_situation &&
-              touched?.self_consumption?.installation_situation
+              errors?.self_consumption?.installation_type &&
+              touched?.self_consumption?.installation_type
             }
             helperText={
-              (touched?.self_consumption?.installation_situation &&
-                errors?.self_consumption?.installation_situation) || (
+              (touched?.self_consumption?.installation_type &&
+                errors?.self_consumption?.installation_type) || (
                 <a
                   href={t('SELFCONSUMPTION_INSTALLATION_SITUATION_HELP_URL')}
                   target="_blank"
@@ -256,6 +267,7 @@ const SelfConsumptionDetails = (props) => {
 
         <Grid item xs={12}>
           <Chooser
+            name="self_consumption.aux_services"
             className={classes.chooserQuestion}
             question={t('SELFCONSUMPTION_DETAILS_QUESTION_AUXILIARY_SERVICE')}
             onChange={handleAuxiliaryService}

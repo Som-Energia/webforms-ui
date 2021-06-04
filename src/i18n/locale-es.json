@@ -473,6 +473,7 @@
 
   "FILL_SELFCONSUMPTION_QUESTION": "Indica si tienes instalación de autoconsumo",
   "FILL_SELFCONSUMPTION_CAU": "Indica el CAU",
+  "CAU_INVALID": "CAU incorrecto",
   "FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION": "Indica cómo es tu instalación",
   "FILL_SELFCONSUMPTION_INSTALLATION_POWER": "Indica la potencia de la instalación",
   "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situación de la instalación",
