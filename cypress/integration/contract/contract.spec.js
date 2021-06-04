@@ -11,8 +11,39 @@ describe('Contract', () => {
     cy.fixture('contract.json').as('data')
   })
 
-  describe('Contract with CUPS has no service', function () {
+  describe('Contract with selfconsumption', function () {
+    it.only('2.0TD', function () {
+      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.identifySupplyPoint(
+        this.data.supplyPoint.cups,
+        this.data.supplyPoint.hasService
+      )
+      cy.enterSupplyPointData(this.data.supplyPoint)
+      const moreThan15Kw = false
+      const powers = [this.data.power, this.data.power2]
 
+      cy.enterPowerFare(
+        this.data.supplyPoint.hasService ? undefined : this.data.phase,
+        moreThan15Kw,
+        powers
+      )
+
+      cy.enterSelfConsumption(
+        this.data.selfConsumption.have_installation,
+        this.data.selfConsumption
+      )
+
+      cy.identifyOwner(this.data.member.vat, this.data.holder.previousHolder)
+
+      cy.enterVoluntaryCent(this.data.holder.voluntaryCent)
+
+      cy.enterPaymentData(this.data.holder.iban)
+
+      cy.reviewAndConfirmData()
+    })
+  })
+
+  describe('Contract with CUPS has no service', function () {
     beforeEach(function () {
       cy.identifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
@@ -39,7 +70,14 @@ describe('Contract', () => {
 
     it('3.0TD no incremental powers', function () {
       const moreThan15Kw = true
-      const powers = [this.data.power, this.data.power2, this.data.power3, this.data.power6, this.data.power6, this.data.power]
+      const powers = [
+        this.data.power,
+        this.data.power2,
+        this.data.power3,
+        this.data.power6,
+        this.data.power6,
+        this.data.power
+      ]
 
       cy.noIncrementalPowers(this.data.phase, moreThan15Kw, powers)
     })

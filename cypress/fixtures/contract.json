@@ -1,7 +1,7 @@
 {
   "holder": {
     "vat": "58291270R",
-    "previousHolder": false,
+    "previousHolder": true,
     "name": "David",
     "surname1": "Palomo",
     "surname2": "Romero",
@@ -59,12 +59,12 @@
   },
   "selfConsumption": {
     "have_installation": true,
-    "cau": "000123456789",
+    "cau": "ES0353501028615353EEA0001",
     "collective_installation": true,
     "installation_power": "3.5",
-    "installation_situation": 31,
+    "installation_type": "xarxa-interior",
     "aux_services": false,
     "attachments": ["file.png"],
-    "technology": 4
+    "technology": "B11"
   }
 }
