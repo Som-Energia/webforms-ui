@@ -391,14 +391,16 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       self_consumption: Yup.object().shape({
-        cau: Yup.string().required(t('FILL_SELFCONSUMPTION_CAU')),
+        cau: Yup.string()
+          .required(t('FILL_SELFCONSUMPTION_CAU'))
+          .min(22, t('CAU_INVALID')),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),
         installation_power: Yup.number().required(
           t('FILL_SELFCONSUMPTION_INSTALLATION_POWER')
         ),
-        installation_situation: Yup.string().required(
+        installation_type: Yup.string().required(
           t('FILL_SELFCONSUMPTION_INSTALLATION_SITUATION')
         ),
         technology: Yup.string().required(t('FILL_SELFCONSUMPTION_TECHNOLOGY')),
@@ -515,7 +517,7 @@ const Contract = (props) => {
 
   const getActiveStep = (props) => {
     const step = steps[activeStep]
-    return React.cloneElement(step, { ...props })
+    return step !== undefined ? React.cloneElement(step, { ...props }) : <></>
   }
 
   useEffect(() => {
