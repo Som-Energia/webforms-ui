@@ -79,6 +79,11 @@ const App = (props) => {
     return <Home {...props} />
   }
 
+  const loadMailSubscriptions = () => {
+    const MailSubscriptions = lazy(() => import('./containers/Subscriptions'))
+    return <MailSubscriptions {...props} />
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -175,8 +180,8 @@ const App = (props) => {
               <Route path="/:language/pago-cancelado" render={loadFailure} />
 
               <Route
-                path="/mail-subscriptions"
-                component={lazy(() => import('./containers/Subscriptions'))}
+                path="/:language/mail-subscriptions"
+                render={loadMailSubscriptions}
               />
             </Switch>
           </Router>
