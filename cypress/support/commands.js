@@ -59,9 +59,10 @@ Cypress.Commands.add('enterSupplyPointData', (supplyPoint) => {
 })
 
 Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
-  cy.get('#phases').click()
-  cy.get(`[data-value="${phase}"]`).click()
-
+  if (phase !== undefined) {
+    cy.get('#phases').click()
+    cy.get(`[data-value="${phase}"]`).click()
+  }
   cy.get('[data-cy="moreThan15Kw"]')
     .get(`[data-value="${moreThan15Kw}"]`)
     .click()
@@ -75,6 +76,42 @@ Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
 
   cy.get('[data-cy=next]').click()
 })
+
+Cypress.Commands.add(
+  'enterSelfConsumption',
+  (haveSelfConsumption, selfConsumptionData) => {
+    cy.get(`[data-value="${haveSelfConsumption}"]`).click()
+    cy.get('[data-cy=next]').click()
+
+    if (haveSelfConsumption) {
+      cy.get('#self_consumption_cau')
+        .clear()
+        .type(selfConsumptionData.cau)
+        .should('have.value', selfConsumptionData.cau)
+
+      cy.get('[data-cy="self_consumption.collective_installation"]')
+        .find(`[data-value="${selfConsumptionData.collective_installation}"]`)
+        .click()
+
+      cy.get('#self_consumption_install_power')
+        .clear()
+        .type(selfConsumptionData.installation_power)
+        .should('have.value', selfConsumptionData.installation_power)
+
+      cy.get('#self_consumption_installation_type').click()
+      cy.get(`[data-value="${selfConsumptionData.installation_type}"]`).click()
+
+      cy.get('#self_consumption_technology').click()
+      cy.get(`[data-value="${selfConsumptionData.technology}"]`).click()
+
+      cy.get('[data-cy="self_consumption.aux_services"]')
+        .find(`[data-value="${selfConsumptionData.aux_services}"]`)
+        .click()
+
+      cy.get('[data-cy=next]').click()
+    }
+  }
+)
 
 Cypress.Commands.add('noIncrementalPowers', (phase, moreThan15Kw, powers) => {
   cy.get('#phases').click()
@@ -92,19 +129,18 @@ Cypress.Commands.add('noIncrementalPowers', (phase, moreThan15Kw, powers) => {
       .blur()
   })
 
-  cy.contains(
-    'La potencia de este periodo no puede ser inferior al anterior'
-  )
+  cy.contains('La potencia de este periodo no puede ser inferior al anterior')
 })
 
-Cypress.Commands.add('identifyOwner', (ownerVat) => {
+Cypress.Commands.add('identifyOwner', (ownerVat, previousHolder) => {
   cy.intercept('GET', '/check/vat/exists/**').as('checkVat')
 
-  cy.get('[name="holder.vat"]')
-    .type(ownerVat)
-    .should('have.value', ownerVat)
+  cy.get('[name="holder.vat"]').type(ownerVat).should('have.value', ownerVat)
 
   cy.wait('@checkVat')
+  if (previousHolder !== undefined) {
+    cy.get(`[data-value="${previousHolder}"]`).click()
+  }
 
   cy.get('[data-cy=next]').click()
 })
