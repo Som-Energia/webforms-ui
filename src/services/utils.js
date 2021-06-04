@@ -302,6 +302,23 @@ export const normalizeContract = (contract) => {
   finalContract.attachments = contract?.supply_point?.attachments
   finalContract.contract_conditions = contract?.terms_accepted
 
+  if (contract?.self_consumption?.have_installation) {
+    finalContract.self_consumption = {}
+    finalContract.self_consumption.cau = contract?.self_consumption?.cau
+    finalContract.self_consumption.collective_installation =
+      contract?.self_consumption?.collective_installation
+    finalContract.self_consumption.installation_power =
+      contract?.self_consumption?.installation_power
+    finalContract.self_consumption.installation_type =
+      contract?.self_consumption?.installation_type
+    finalContract.self_consumption.technology =
+      contract?.self_consumption?.technology
+    finalContract.self_consumption.aux_services =
+      contract?.self_consumption?.aux_services
+    finalContract.self_consumption.attachments =
+      contract?.self_consumption?.attachments
+  }
+
   return sanitizeData(finalContract)
 }
 
