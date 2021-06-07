@@ -467,5 +467,9 @@
   "SELFCONSUMPTION_B11_RADIACIO_SOLAR": "B11 - Radiació solar",
   "SELFCONSUMPTION_B12_TERMICA": "B12 - Tèrmica",
   "SELFCONSUMPTION_B21_EOLICA": "B21 - Èolica en terra",
-  "SELFCONSUMPTION_ALTRES": "Altres"
+  "SELFCONSUMPTION_ALTRES": "Altres",
+
+  "SELFCONSUMPTION_INTERNAL_NET": "Xarxa interior",
+  "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Xarxa interior diversos consumidors",
+  "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Pròxima a través de xarxa"
 }

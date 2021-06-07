@@ -273,12 +273,12 @@ export const getSelfConsumptionSituations = async () => {
   })
   */
   const situations = [
-    { value: 'xarxa-interior', title: 'Xarxa interior' },
+    { value: 'INTERNAL_NET', title: 'SELFCONSUMPTION_INTERNAL_NET' },
     {
-      value: 'xarxa-interior-varis',
-      title: 'Xarxa interior diversos consumidors'
+      value: 'INTERNAL_NET_VARIOUS',
+      title: 'SELFCONSUMPTION_INTERNAL_NET_VARIOUS'
     },
-    { value: 'proxima', title: 'Pròxima a través de xarxa' }
+    { value: 'NEXT_VIA_NETWORK', title: 'SELFCONSUMPTION_NEXT_VIA_NETWORK' }
   ]
 
   return new Promise((resolve, reject) => {
