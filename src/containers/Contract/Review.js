@@ -302,7 +302,7 @@ const Review = (props) => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <ReviewField
-                  label={t('SELFCONSUMPTION_CAU')}
+                  label={t('CAU')}
                   value={values?.self_consumption?.cau}
                 />
                 <ReviewField
