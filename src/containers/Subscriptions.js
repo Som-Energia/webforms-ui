@@ -12,7 +12,7 @@ import OptionSwitch from '../components/OptionSwitch'
 
 import { Typography } from '@material-ui/core'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     backgroundColor: '#f2f2f2'
@@ -31,6 +31,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const mailLists = [
+  { title: 'BLOG_NEWS', description: 'BLOG_NEWS_DESC', initialValue: true },
+  {
+    title: 'PRESS_RELEASES',
+    description: 'PRESS_RELEASES_DESC',
+    initialValue: false
+  },
+  {
+    title: 'PARTNER_NEWS',
+    description: 'PARTNER_NEWS_DESC',
+    initialValue: false
+  },
+  {
+    title: 'COLLECTIVE_PURCHASES',
+    description: 'COLLECTIVE_PURCHASES_DESC',
+    initialValue: false
+  }
+]
+
 const Subscriptions = () => {
   const { t } = useTranslation()
   const classes = useStyles()
@@ -39,19 +58,11 @@ const Subscriptions = () => {
     <div className={classes.root}>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Paper className={classes.subsPaper} elevation={0}>
-              <Typography variant="h3">{ t('SUBSCRIPTIONS_TITLE') }</Typography>
-              <Typography variant="subtitle1">{ t('SUBSCRIPTIONS_DESC') }</Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12}>
-            <OptionSwitch
-              title={t('BLOG_NEWS')}
-              description={t('BLOG_NEWS_DESC')}
-            />
-          </Grid>
+          {mailLists.map((list) => (
+            <Grid item xs={12}>
+              <OptionSwitch {...list} />
+            </Grid>
+          ))}
           <Grid item xs={12}>
             <OptionSwitch
               title={t('BLOG_LOCALS_NEWS')}
@@ -77,11 +88,13 @@ const Subscriptions = () => {
             />
           </Grid>
           <Grid item xs={12} className={classes.controls}>
-            <Button className={classes.button} variant="contained" color="primary">
-              { t('DESAR') }
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary">
+              {t('DESAR')}
             </Button>
           </Grid>
-
         </Grid>
       </Container>
     </div>
