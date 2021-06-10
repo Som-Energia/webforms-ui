@@ -84,6 +84,14 @@ const handleChangeModify = (event, setFieldValue, values) => {
 const handleChangeMoreThan15 = (values, setFieldValue) => {
   const tariff = calculateTariff({ moreThan15Kw: !values.moreThan15Kw })
   setFieldValue('tariff', tariff, false)
+
+  setFieldValue('power', '', false)
+  setFieldValue('power2', '', false)
+  setFieldValue('power3', '', false)
+  setFieldValue('power4', '', false)
+  setFieldValue('power5', '', false)
+  setFieldValue('power6', '', false)
+
   setFieldValue('moreThan15Kw', !values.moreThan15Kw)
 }
 

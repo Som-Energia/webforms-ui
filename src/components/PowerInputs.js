@@ -65,7 +65,9 @@ const PowerInputs = (props) => {
         }}
         onChange={(event) =>
           handleChangePower(event, setFieldValue, {
-            moreThanOneDecimal: values?.has_service || values?.changePower,
+            moreThanOneDecimal:
+              values?.has_service ||
+              (values?.changePower && values?.moreThan15Kw),
             moreThan15Kw: values?.moreThan15Kw
           })
         }
