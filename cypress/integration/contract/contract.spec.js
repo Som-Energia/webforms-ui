@@ -1,6 +1,4 @@
 describe('Contract', () => {
-  const WAIT_TIME = 2000
-
   Cypress.on('uncaught:exception', (error, runnable) => {
     console.log(error)
     return false
