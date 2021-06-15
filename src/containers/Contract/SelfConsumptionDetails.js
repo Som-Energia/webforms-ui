@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 import {
   getSelfConsumptionSituations,
@@ -278,6 +279,16 @@ const SelfConsumptionDetails = (props) => {
                 label: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
                 description: t(
                   'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
+                ),
+                helper: (
+                  <FormHelperText variant="outlined">
+                    <a
+                      href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
+                    </a>
+                  </FormHelperText>
                 )
               },
               {
