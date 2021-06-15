@@ -210,7 +210,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power2) >= parseInt(this.parent.power)
+              ? parseFloat(this.parent.power2) >= parseFloat(this.parent.power)
               : true
           })
           .test({
@@ -245,7 +245,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power3) >= parseInt(this.parent.power2)
+              ? parseFloat(this.parent.power3) >= parseFloat(this.parent.power2)
               : true
           })
           .test({
@@ -280,7 +280,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power4) >= parseInt(this.parent.power3)
+              ? parseFloat(this.parent.power4) >= parseFloat(this.parent.power3)
               : true
           })
           .test({
@@ -315,7 +315,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power5) >= parseInt(this.parent.power4)
+              ? parseFloat(this.parent.power5) >= parseFloat(this.parent.power4)
               : true
           })
           .test({
@@ -350,7 +350,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power6) >= parseInt(this.parent.power5)
+              ? parseFloat(this.parent.power6) >= parseFloat(this.parent.power5)
               : true
           })
           .test({
