@@ -42,6 +42,16 @@ const SelfConsumptionDetails = (props) => {
     validateForm()
   }
 
+  const handleChangeSelect = (event) => {
+    console.log(event.currentTarget)
+    setFieldValue(
+      `${event.target.name}_title`,
+      event.currentTarget.getAttribute('data-title'),
+      false
+    )
+    setFieldValue(event.target.name, event.target.value)
+  }
+
   const handleChangeInstallPower = (event) => {
     const regex = /^\d*([.,'])?\d{0,3}/g
 
@@ -129,12 +139,12 @@ const SelfConsumptionDetails = (props) => {
             value={props.values.self_consumption.collective_installation}
             options={[
               {
-                value: true,
+                value: false,
                 label: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_LABEL'),
                 description: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_HELP')
               },
               {
-                value: false,
+                value: true,
                 label: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_LABEL'),
                 description: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
               }
@@ -197,7 +207,7 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values?.self_consumption?.installation_type || ''}
-            onChange={handleChange}
+            onChange={handleChangeSelect}
             onBlur={handleBlur}
             disabled={isLoadingSituations}
             error={
@@ -216,7 +226,10 @@ const SelfConsumptionDetails = (props) => {
               )
             }>
             {situations.map((situation) => (
-              <MenuItem key={situation.value} value={situation.value}>
+              <MenuItem
+                key={situation.value}
+                value={situation.value}
+                data-title={situation.title}>
                 {t(situation.title)}
               </MenuItem>
             ))}
@@ -240,7 +253,7 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values?.self_consumption?.technology || ''}
-            onChange={handleChange}
+            onChange={handleChangeSelect}
             onBlur={handleBlur}
             disabled={isLoadingTechnologies}
             error={
@@ -259,7 +272,10 @@ const SelfConsumptionDetails = (props) => {
               )
             }>
             {technologies.map((technology) => (
-              <MenuItem key={technology.value} value={technology.value}>
+              <MenuItem
+                key={technology.value}
+                value={technology.value}
+                data-title={technology.title}>
                 {t(technology.title)}
               </MenuItem>
             ))}
@@ -285,6 +301,7 @@ const SelfConsumptionDetails = (props) => {
                     <a
                       href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
                       target="_blank"
+                      technology
                       rel="noopener noreferrer">
                       {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
                     </a>
