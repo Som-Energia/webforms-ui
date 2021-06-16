@@ -598,7 +598,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   </Button>
                 )}
               </div>
-              <DisplayFormikState {...errors} />
             </form>
           )
         }}
