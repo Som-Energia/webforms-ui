@@ -132,7 +132,7 @@ export default function ModifyResume({
                 <span className={classes.powerPeriod}>
                   {params?.modify?.moreThan15Kw ? 'P1' : 'P1-2'}
                 </span>{' '}
-                {params.modify?.power}kW
+                {params.modify?.power} kW
               </Typography>
             </Grid>
             <Grid item>
@@ -140,7 +140,7 @@ export default function ModifyResume({
                 <span className={classes.powerPeriod}>
                   {params?.modify?.moreThan15Kw ? 'P2' : 'P3'}
                 </span>{' '}
-                {params.modify?.power2}kW
+                {params.modify?.power2} kW
               </Typography>
             </Grid>
 
@@ -149,25 +149,25 @@ export default function ModifyResume({
                 <Grid item>
                   <Typography data-cy="power3" variant="body1" gutterBottom>
                     <span className={classes.powerPeriod}>P3</span>{' '}
-                    {params.modify?.power3}kW
+                    {params.modify?.power3} kW
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography data-cy="power4" variant="body1" gutterBottom>
                     <span className={classes.powerPeriod}>P4</span>{' '}
-                    {params.modify?.power4}kW
+                    {params.modify?.power4} kW
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography data-cy="power5" variant="body1" gutterBottom>
                     <span className={classes.powerPeriod}>P5</span>{' '}
-                    {params.modify?.power5}kW
+                    {params.modify?.power5} kW
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography data-cy="power6" variant="body1" gutterBottom>
                     <span className={classes.powerPeriod}>P6</span>{' '}
-                    {params.modify?.power6}kW
+                    {params.modify?.power6} kW
                   </Typography>
                 </Grid>
               </>
