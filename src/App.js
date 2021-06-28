@@ -79,9 +79,17 @@ const App = (props) => {
     return <Home {...props} />
   }
 
-  const loadMailSubscriptions = () => {
-    const MailSubscriptions = lazy(() => import('./containers/Subscriptions'))
-    return <MailSubscriptions {...props} />
+  const loadMailSubscriptions = (props) => {
+    const MailSubscriptions = lazy(() =>
+      import('./containers/MailSubscriptions')
+    )
+
+    const mailListsData =
+      typeof props.mailLists === 'string' && props.mailLists !== ''
+        ? JSON.parse(props.mailLists)
+        : []
+
+    return <MailSubscriptions {...props} mailLists={mailListsData} />
   }
 
   return (
