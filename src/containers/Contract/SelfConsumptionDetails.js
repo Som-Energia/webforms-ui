@@ -72,7 +72,7 @@ const SelfConsumptionDetails = (props) => {
     setLoadingTechnologies(true)
     getSelfConsumptionTechnologies()
       .then((response) => {
-        setTechnologies(response?.data?.technologies)
+        setTechnologies(response?.data)
         setLoadingTechnologies(false)
       })
       .catch((error) => {
@@ -85,7 +85,7 @@ const SelfConsumptionDetails = (props) => {
     setLoadingSituations(true)
     getSelfConsumptionSituations()
       .then((response) => {
-        setSituations(response?.data?.situations)
+        setSituations(response?.data)
         setLoadingSituations(false)
       })
       .catch((error) => {
@@ -227,10 +227,10 @@ const SelfConsumptionDetails = (props) => {
             }>
             {situations.map((situation) => (
               <MenuItem
-                key={situation.value}
-                value={situation.value}
-                data-title={situation.title}>
-                {t(situation.title)}
+                key={situation.id}
+                value={situation.id}
+                data-title={situation.name}>
+                {t(situation.name)}
               </MenuItem>
             ))}
           </TextField>
@@ -273,10 +273,10 @@ const SelfConsumptionDetails = (props) => {
             }>
             {technologies.map((technology) => (
               <MenuItem
-                key={technology.value}
-                value={technology.value}
-                data-title={technology.title}>
-                {t(technology.title)}
+                key={technology.id}
+                value={technology.id}
+                data-title={technology.name}>
+                {t(technology.name)}
               </MenuItem>
             ))}
           </TextField>

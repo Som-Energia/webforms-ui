@@ -264,37 +264,19 @@ export const apiStatus = async () => {
 }
 
 export const getSelfConsumptionSituations = async () => {
-  /*
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/selfconsumption/technologies`
+    url: `${API_BASE_URL}/data/installation_types`
   }).then((response) => {
     return response?.data
-  })
-  */
-  const situations = [
-    { value: 'INTERNAL_NET', title: 'SELFCONSUMPTION_INTERNAL_NET' },
-    {
-      value: 'INTERNAL_NET_VARIOUS',
-      title: 'SELFCONSUMPTION_INTERNAL_NET_VARIOUS'
-    },
-    { value: 'NEXT_VIA_NETWORK', title: 'SELFCONSUMPTION_NEXT_VIA_NETWORK' }
-  ]
-
-  return new Promise((resolve, reject) => {
-    resolve({ data: { situations: situations } })
   })
 }
 
 export const getSelfConsumptionTechnologies = async () => {
-  const technologies = [
-    { value: 'B11', title: 'SELFCONSUMPTION_B11_RADIACIO_SOLAR' },
-    { value: 'B12', title: 'SELFCONSUMPTION_B12_TERMICA' },
-    { value: 'B21', title: 'SELFCONSUMPTION_B21_EOLICA' },
-    { value: 'others', title: 'SELFCONSUMPTION_ALTRES' }
-  ]
-
-  return new Promise((resolve, reject) => {
-    resolve({ data: { technologies: technologies } })
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/data/generator_technologies`
+  }).then((response) => {
+    return response?.data
   })
 }
