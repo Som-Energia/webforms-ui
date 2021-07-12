@@ -137,11 +137,13 @@ const Review = (props) => {
           classes.field,
           multipleValues && classes.separatedField
         )}>
-        <div className="field__title">
-          <Typography className={classes.label} variant="subtitle2">
-            {label}
-          </Typography>
-        </div>
+        {label !== false && (
+          <div className="field__title">
+            <Typography className={classes.label} variant="subtitle2">
+              {label}
+            </Typography>
+          </div>
+        )}
         <div
           className={clsx(
             'field__value',
@@ -210,7 +212,7 @@ const Review = (props) => {
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
           <ReviewField
-            label={t('PROCESS_TYPE')}
+            label={false}
             value={
               values?.contract?.has_service
                 ? values?.holder?.previous_holder
