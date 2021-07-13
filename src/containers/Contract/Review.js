@@ -319,6 +319,12 @@ const Review = (props) => {
                   label={t('SELFCONSUMPTION_INSTALLPOWER')}
                   value={`${values?.self_consumption?.installation_power} kW`}
                 />
+                <ReviewField
+                  label={t('SELFCONSUMPTION_AUXILIARY_SERVICE')}
+                  value={
+                    values?.self_consumption?.aux_services ? t('YES') : t('NO')
+                  }
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <ReviewField
@@ -328,12 +334,6 @@ const Review = (props) => {
                 <ReviewField
                   label={t('SELFCONSUMPTION_TECHNOLOGY')}
                   value={t(values?.self_consumption?.technology_title)}
-                />
-                <ReviewField
-                  label={t('SELFCONSUMPTION_AUXILIARY_SERVICE')}
-                  value={
-                    values?.self_consumption?.aux_services ? t('YES') : t('NO')
-                  }
                 />
               </Grid>
             </Grid>
