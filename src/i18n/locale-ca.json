@@ -471,7 +471,11 @@
   "SELFCONSUMPTION_B21_EOLICA": "B21 - Èolica en terra",
   "SELFCONSUMPTION_ALTRES": "Altres",
 
-  "SELFCONSUMPTION_INTERNAL_NET": "Xarxa interior",
-  "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Xarxa interior diversos consumidors",
-  "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Pròxima a través de xarxa"
+  "Red interior da varios consumidores (instalaci\u00f3n de enlace)": "Xarxa interior de varis consumidors (instal·lació d'enllaç)",
+  "Pr\u00f3xima a trav\u00e9s de red": "Pròxima a través de xarxa",
+  "Red interior": "Xarxa interior",
+
+  "[B11] - Instalaciones que \u00fanicamente utilicen la radiaci\u00f3n solar como energ\u00eda primaria mediante la tecnolog\u00eda fotovoltaica.": "[B11] - Instal·lacions que utilitzen únicament la radiació solar com a energia primària mitjançant la tecnologia fotovoltaica.",
+  "[B21] - Instalaciones e\u00f3licas ubicadas en tierra.": "Instal·lacions èoliques ubicades a terra",
+  "Otras tecnologias": "Altres tecnologies"
 }
