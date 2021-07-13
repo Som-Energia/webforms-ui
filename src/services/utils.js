@@ -317,6 +317,10 @@ export const normalizeContract = (contract) => {
       contract?.self_consumption?.aux_services
     finalContract.self_consumption.attachments =
       contract?.self_consumption?.attachments
+
+    finalContract.self_consumption = sanitizeData(
+      finalContract.self_consumption
+    )
   }
 
   return sanitizeData(finalContract)
