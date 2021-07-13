@@ -393,7 +393,8 @@ const Contract = (props) => {
       self_consumption: Yup.object().shape({
         cau: Yup.string()
           .required(t('FILL_SELFCONSUMPTION_CAU'))
-          .min(22, t('CAU_INVALID')),
+          .min(22, t('CAU_INVALID'))
+          .max(26, t('CAU_INVALID')),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),
