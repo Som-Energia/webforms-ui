@@ -307,8 +307,12 @@ export const normalizeContract = (contract) => {
     finalContract.self_consumption.cau = contract?.self_consumption?.cau
     finalContract.self_consumption.collective_installation =
       contract?.self_consumption?.collective_installation
-    finalContract.self_consumption.installation_power =
-      contract?.self_consumption?.installation_power
+
+    finalContract.self_consumption.installation_power = Math.round(
+      contract?.self_consumption?.installation_power *
+        THOUSANDS_CONVERSION_FACTOR
+    ).toString()
+
     finalContract.self_consumption.installation_type =
       contract?.self_consumption?.installation_type
     finalContract.self_consumption.technology =
