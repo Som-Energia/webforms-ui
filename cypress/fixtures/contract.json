@@ -62,9 +62,9 @@
     "cau": "ES0353501028615353EEA0001",
     "collective_installation": true,
     "installation_power": "3.5",
-    "installation_type": "INTERNAL_NET",
+    "installation_type": "01",
     "aux_services": false,
     "attachments": ["file.png"],
-    "technology": "B11"
+    "technology": "b11"
   }
 }
