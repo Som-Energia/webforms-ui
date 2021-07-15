@@ -45,7 +45,8 @@ const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
   SAMPLE_DATA: 'ctrl+shift+1',
-  SHOW_INSPECTOR: 'ctrl+shift+d'
+  SHOW_INSPECTOR: 'ctrl+shift+d',
+  SHOW_ALL_STEPS: 'ctrl+shift+a'
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +77,7 @@ const Contract = (props) => {
   const { t, i18n } = useTranslation()
 
   const [showInspector, setShowInspector] = useState(false)
+  const [showAllSteps, setShowAllSteps] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -89,7 +91,10 @@ const Contract = (props) => {
       const values = { ...initialValues }
     },
     SHOW_INSPECTOR: () => {
-      showInspector ? setShowInspector(false) : setShowInspector(true)
+      setShowInspector(!showInspector)
+    },
+    SHOW_ALL_STEPS: () => {
+      setShowAllSteps(!showAllSteps)
     }
   }
 
@@ -474,15 +479,19 @@ const Contract = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
-        {activeStep === 0 && <MemberIdentifier {...props} />}
-        {activeStep === 1 && <CUPS {...props} />}
-        {activeStep === 2 && <SupplyPoint {...props} />}
-        {activeStep === 3 && <PowerFare rates={rates} {...props} />}
-        {activeStep === 4 && <HolderIdentifier {...props} />}
-        {activeStep === 5 && <PersonalData url={url} {...props} />}
-        {activeStep === 6 && <VoluntaryCent {...props} />}
-        {activeStep === 7 && <IBAN {...props} />}
-        {activeStep === 8 && <Review {...props} />}
+        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} />}
+        {(showAllSteps || activeStep === 1) && <CUPS {...props} />}
+        {(showAllSteps || activeStep === 2) && <SupplyPoint {...props} />}
+        {(showAllSteps || activeStep === 3) && (
+          <PowerFare rates={rates} {...props} />
+        )}
+        {(showAllSteps || activeStep === 4) && <HolderIdentifier {...props} />}
+        {(showAllSteps || activeStep === 5) && (
+          <PersonalData url={url} {...props} />
+        )}
+        {(showAllSteps || activeStep === 6) && <VoluntaryCent {...props} />}
+        {(showAllSteps || activeStep === 7) && <IBAN {...props} />}
+        {(showAllSteps || activeStep === 8) && <Review {...props} />}
       </>
     )
   }
