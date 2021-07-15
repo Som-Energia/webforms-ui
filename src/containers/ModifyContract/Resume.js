@@ -130,7 +130,7 @@ export default function ModifyResume({
             <Grid item>
               <Typography data-cy="power" variant="body1" gutterBottom>
                 <span className={classes.powerPeriod}>
-                  {params?.modify?.moreThan15Kw ? 'P1' : 'P1-2'}
+                  {params?.modify?.moreThan15Kw ? 'P1' : t('PUNTA')}
                 </span>{' '}
                 {params.modify?.power} kW
               </Typography>
@@ -138,7 +138,7 @@ export default function ModifyResume({
             <Grid item>
               <Typography data-cy="power2" variant="body1" gutterBottom>
                 <span className={classes.powerPeriod}>
-                  {params?.modify?.moreThan15Kw ? 'P2' : 'P3'}
+                  {params?.modify?.moreThan15Kw ? 'P2' : t('VALLE')}
                 </span>{' '}
                 {params.modify?.power2} kW
               </Typography>
@@ -146,30 +146,20 @@ export default function ModifyResume({
 
             {params?.modify?.moreThan15Kw && (
               <>
-                <Grid item>
-                  <Typography data-cy="power3" variant="body1" gutterBottom>
-                    <span className={classes.powerPeriod}>P3</span>{' '}
-                    {params.modify?.power3} kW
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography data-cy="power4" variant="body1" gutterBottom>
-                    <span className={classes.powerPeriod}>P4</span>{' '}
-                    {params.modify?.power4} kW
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography data-cy="power5" variant="body1" gutterBottom>
-                    <span className={classes.powerPeriod}>P5</span>{' '}
-                    {params.modify?.power5} kW
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography data-cy="power6" variant="body1" gutterBottom>
-                    <span className={classes.powerPeriod}>P6</span>{' '}
-                    {params.modify?.power6} kW
-                  </Typography>
-                </Grid>
+                {[...Array(4).keys()].map((item) => {
+                  const num = item + 3
+                  return (
+                    <Grid item>
+                      <Typography
+                        data-cy={`power${num}`}
+                        variant="body1"
+                        gutterBottom>
+                        <span className={classes.powerPeriod}>{`P${num}`}</span>{' '}
+                        {params.modify?.[`power${num}`]} kW
+                      </Typography>
+                    </Grid>
+                  )
+                })}
               </>
             )}
           </Grid>
