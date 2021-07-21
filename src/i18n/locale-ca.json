@@ -416,6 +416,7 @@
   "STATE_CONFLICT": "Aquest contracte no permet realitzar modificacions contractuals",
   "INVALID_MEMBER": "No s'ha pogut validar la persona socia",
   "UNAVAILABLE": "No disponible",
+  "SELFCONSUMPTION_ERROR": "Error en les dades d'autoconsum",
 
   "SELFCONSUMPTION_TITLE": "Autoconsum",
   "SELFCONSUMPTION_QUESTION": "Tens alguna modalitat d'autoconsum activada pel teu contracte?",
@@ -460,6 +461,7 @@
   "FILL_SELFCONSUMPTION_QUESTION": "Indica si tens instal·lació d'autoconsum",
   "FILL_SELFCONSUMPTION_CAU": "Indica el CAU",
   "CAU_INVALID": "CAU incorrecte",
+  "CAU_INVALID_FORMAT": "El format del CAU és incorrecte",
   "FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION": "Indica el com és la teva instal·lació",
   "FILL_SELFCONSUMPTION_INSTALLATION_POWER": "Indica la potència d'instal·lació",
   "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situació de la instal·lació",
