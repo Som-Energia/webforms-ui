@@ -432,6 +432,7 @@
   "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales",
   "INVALID_MEMBER": "No hemos podido validar la persona socia",
   "UNAVAILABLE": "No disponible",
+  "SELFCONSUMPTION_ERROR": "Error en los datos de autoconsumo",
 
   "SELFCONSUMPTION_TITLE": "Autoconsumo",
   "SELFCONSUMPTION_QUESTION": "¿Tienes alguna modalidad de autoconsumo activa para tu contrato?",
@@ -476,6 +477,7 @@
   "FILL_SELFCONSUMPTION_QUESTION": "Indica si tienes instalación de autoconsumo",
   "FILL_SELFCONSUMPTION_CAU": "Indica el CAU",
   "CAU_INVALID": "CAU incorrecto",
+  "CAU_INVALID_FORMAT": "El formato del CAU es incorrecto",
   "FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION": "Indica cómo es tu instalación",
   "FILL_SELFCONSUMPTION_INSTALLATION_POWER": "Indica la potencia de la instalación",
   "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situación de la instalación",

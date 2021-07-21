@@ -394,7 +394,8 @@ const Contract = (props) => {
         cau: Yup.string()
           .required(t('FILL_SELFCONSUMPTION_CAU'))
           .min(22, t('CAU_INVALID'))
-          .max(26, t('CAU_INVALID')),
+          .max(31, t('CAU_INVALID'))
+          .matches(/A\d{1,3}$/, t('CAU_INVALID_FORMAT')),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),

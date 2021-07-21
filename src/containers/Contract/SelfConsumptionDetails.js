@@ -43,7 +43,6 @@ const SelfConsumptionDetails = (props) => {
   }
 
   const handleChangeSelect = (event) => {
-    console.log(event.currentTarget)
     setFieldValue(
       `${event.target.name}_title`,
       event.currentTarget.getAttribute('data-title'),
