@@ -1,4 +1,5 @@
 import axios from 'axios'
+import postalCode2Ine from '../data/zip-ine.json'
 
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
@@ -261,4 +262,35 @@ export const apiStatus = async () => {
     method: 'GET',
     url: `${API_BASE_URL}/ping`
   })
+}
+
+let cancelPostalCode
+
+export const getMunicipisByPostalCode = async (postalCode) => {
+  console.log('getMunicipisByPostalCode')
+  if (typeof cancelPostalCode !== typeof undefined) {
+    cancelPostalCode.cancel('Operation canceled due to new request')
+  }
+
+  cancelPostalCode = axios.CancelToken.source()
+
+  const ines = postalCode2Ine.filter((item) =>
+    Object.keys(item).includes(postalCode)
+  )
+
+  const municipis = ines.map((item) => {
+    const ineCode = item[postalCode]
+    return axios({
+      method: 'GET',
+      url: `${API_BASE_URL}/data/ine/${ineCode}`,
+      cancelToken: cancelPostalCode.token
+    }).then((response) => {
+      return response?.data
+    })
+  })
+
+  const responses = await axios.all(municipis)
+  console.log(responses)
+
+  return responses.filter((item) => item?.state).map((item) => item?.data)
 }

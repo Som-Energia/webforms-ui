@@ -23,6 +23,11 @@ const StateCity = (props) => {
   const [isLoadingCities, setIsLoadingCities] = useState(false)
 
   useEffect(() => {
+    setState(stateInitial)
+    setCity(cityInitial)
+  }, [stateInitial, cityInitial])
+
+  useEffect(() => {
     setIsLoadingStates(true)
     getProvincies()
       .then(response => {
