@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -18,6 +18,7 @@ import Uploader from '../../components/Uploader'
 import CnaeField from '../../components/CnaeField'
 
 import { CNAE_HOUSING } from '../../services/utils'
+import { getMunicipisByPostalCode } from '../../services/api'
 
 const useStyles = makeStyles((theme) => ({
   memberChecked: {
@@ -83,6 +84,20 @@ const SupplyPoint = (props) => {
     setFieldValue('supply_point.cnae', cnae)
     setFieldValue('supply_point.cnae_valid', valid)
   }
+
+  useEffect(() => {
+    const setMunicipisWithPostalCode = async (postalCode) => {
+      const municipis = await getMunicipisByPostalCode(postalCode)
+      if (municipis.length === 1) {
+        setFieldValue('supply_point.state', municipis[0][0]?.provincia)
+        setFieldValue('supply_point.city', municipis[0][0]?.municipi)
+      }
+    }
+    const postalCode = values?.supply_point?.postal_code
+    if (postalCode.length > 4) {
+      setMunicipisWithPostalCode(postalCode)
+    }
+  }, [values?.supply_point?.postal_code])
 
   return (
     <>
