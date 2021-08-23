@@ -234,7 +234,7 @@
   "UNEXPECTED_POSTERROR": "{{error_message}}",
   "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
   "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
-  "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
+  "MISSING_REQUIRED_FIELDS": "Campo requerido",
 
   "SUCCESS_TITLE": "Enhorabuena",
   "SUCCESS_TEXT": "Hemos tramitado con éxito tu solicitud",

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { normalizeD1ConfirmationData, fakeD1Data } from '../services/utils'
+import { normalizeD1ConfirmationData, templateData } from '../services/utils'
 import { confirmD1Case } from '../services/api'
 
 import Alert from '@material-ui/lab/Alert'
@@ -54,7 +54,7 @@ function D1Detail(props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { templateProps = fakeD1Data } = props
+  const { templateProps = templateData } = props
 
   useEffect(() => {
     const language = props.match.params.language
