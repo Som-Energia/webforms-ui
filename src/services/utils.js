@@ -244,6 +244,7 @@ export const normalizeContract = (contract) => {
 
   finalContract.cups_address =
     `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
+  finalContract.cups_postal_code = contract?.supply_point?.postal_code
   finalContract.cups_city_id = contract?.supply_point?.city?.id
     ? parseInt(contract?.supply_point?.city?.id)
     : 0
