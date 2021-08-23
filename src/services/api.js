@@ -267,7 +267,6 @@ export const apiStatus = async () => {
 let cancelPostalCode
 
 export const getMunicipisByPostalCode = async (postalCode) => {
-  console.log('getMunicipisByPostalCode')
   if (typeof cancelPostalCode !== typeof undefined) {
     cancelPostalCode.cancel('Operation canceled due to new request')
   }

@@ -88,13 +88,13 @@ const SupplyPoint = (props) => {
   useEffect(() => {
     const setMunicipisWithPostalCode = async (postalCode) => {
       const municipis = await getMunicipisByPostalCode(postalCode)
-      if (municipis.length === 1) {
+      if (municipis.length > 0) {
         setFieldValue('supply_point.state', municipis[0][0]?.provincia)
         setFieldValue('supply_point.city', municipis[0][0]?.municipi)
       }
     }
     const postalCode = values?.supply_point?.postal_code
-    if (postalCode.length > 4) {
+    if (postalCode.length > 4 && values?.supply_point?.city?.id === '') {
       setMunicipisWithPostalCode(postalCode)
     }
   }, [values?.supply_point?.postal_code])
