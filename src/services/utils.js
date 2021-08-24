@@ -390,7 +390,7 @@ export const testPowerForPeriods = (
   })
 }
 
-export const fakeD1Data = {
+export const templateData = {
   token: 'no-token',
   installed_power: '3.5',
   cil: 'ES13984U932824DF',
@@ -403,5 +403,6 @@ export const fakeD1Data = {
   ssaa: 'true',
   register_section: 'Con excedentes',
   to_validate: true,
-  case_id: ''
+  case_id: '',
+  its_endesa: true
 }

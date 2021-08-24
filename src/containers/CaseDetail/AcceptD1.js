@@ -60,7 +60,11 @@ function AcceptD1({
   const AcceptD1Schema = Yup.object().shape({
     m1: Yup.bool()
       .required(t('UNACCEPTED_PRIVACY_POLICY'))
-      .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+      .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY')),
+    d1Attachments: Yup.array().when('its_endesa', {
+      is: true,
+      then: Yup.array().min(1, t('MISSING_REQUIRED_ATTACHMENT'))
+    })
   })
 
   return (
@@ -120,7 +124,7 @@ function AcceptD1({
                   maxFiles={5}
                   fieldError={
                     errors?.d1Attachments &&
-                    touched?.d1Attachments &&
+                    (touched?.d1Attachments || values?.m1 !== "") &&
                     errors?.d1Attachments
                   }
                   callbackFn={(d1Attachments) =>
