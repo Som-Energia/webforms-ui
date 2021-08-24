@@ -124,7 +124,7 @@ function AcceptD1({
                   maxFiles={5}
                   fieldError={
                     errors?.d1Attachments &&
-                    (touched?.d1Attachments || values?.m1 === false || values?.m1 === true) &&
+                    (touched?.d1Attachments || values?.m1 !== "") &&
                     errors?.d1Attachments
                   }
                   callbackFn={(d1Attachments) =>
