@@ -219,6 +219,7 @@
   "UNEXPECTED_POSTERROR": "{{error_message}}",
   "ADDITIONAL_PROPERTIES": "Hem rebut camps inesperats",
   "UNEXPECTED_VALUE": "Hem rebut valors inesperats",
+  "MISSING_REQUIRED_FIELDS": "No s'han rebut alguns camps requerits",
   "MISSING_REQUIRED_ATTACHMENT": "Adjunt requerit",
 
   "SUCCESS_TITLE": "Enhorabona",
