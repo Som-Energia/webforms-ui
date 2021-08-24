@@ -640,8 +640,8 @@ const Contract = (props) => {
       })
       .catch((error) => {
         console.error(error)
-        const errorResp = error?.response?.data?.data
-          ? error?.response?.data?.data
+        const errorResp = error?.response?.data?.error
+          ? error?.response?.data?.error
           : { code: 'UNEXPECTED' }
         setError(errorResp)
       })
