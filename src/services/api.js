@@ -289,7 +289,5 @@ export const getMunicipisByPostalCode = async (postalCode) => {
   })
 
   const responses = await axios.all(municipis)
-  console.log(responses)
-
   return responses.filter((item) => item?.state).map((item) => item?.data)
 }
