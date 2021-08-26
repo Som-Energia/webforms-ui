@@ -67,6 +67,7 @@
   "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Ponte en contacto con modifica@somenergia.coop para que te podamos echar una mano. Para identificarte necesitaremos tu NIF y el número del contrato que quieres modificar.",
   "INSTALL_TYPE_ATTACHMENTS_INFO": "Formatos permitidos (pdf, jpg, jpeg). Tamaño máximo 5 MB.",
   "UNEXPECTED": "Se ha producido un error inesperado.",
+  "UNEXPECTED_ERROR": "Se ha producido un error inesperado.",
   "INVALID_FILETYPE": "Formato de archivo no permitido. Formatos permitidos (pdf, jpg, jpeg).",
   "NO_ATTACHMENTS": "No has adjuntado la documentación requerida",
 

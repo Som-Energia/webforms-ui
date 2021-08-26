@@ -68,6 +68,7 @@
   "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Poseu-vos en contacte amb modifica@somenergia.coop per a que us podem donar un cop de mà. Per identificar-vos necessitarem saber el vostre NIF i el número del contracte que voleu modificar.",
   "INSTALL_TYPE_ATTACHMENTS_INFO": "Formats permesos (pdf, jpg, jpeg). Mida màxima permesa 5 MB.",
   "UNEXPECTED": "S'ha produït un error inesperat",
+  "UNEXPECTED_ERROR": "S'ha produït un error inesperat",
   "INVALID_FILETYPE": "Format de fitxer no permès. Formats permesos (pdf, jpg, jpeg).",
   "NO_ATTACHMENTS": "No has adjuntat la documentació requerida",
   "STATE": "Província",
