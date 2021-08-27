@@ -82,7 +82,7 @@ function RefuseD1 ({ prevStep, handlePost, handleRefuseClick, handleStepChanges,
           <Form onSubmit={handleSubmit} noValidate>
 
             <Box mt={1} mx={1} mb={2}>
-              <Typography variant="body1"
+              <Typography component="div" variant="body1"
                 dangerouslySetInnerHTML={{ __html: t('ATTACHMENTS_D1_INTRO_REFUSE') }}
               />
             </Box>
