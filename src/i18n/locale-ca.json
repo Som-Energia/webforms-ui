@@ -419,11 +419,12 @@
   "SELFCONSUMPTION_ERROR": "Error en les dades d'autoconsum",
 
   "SELFCONSUMPTION_TITLE": "Autoconsum",
-  "SELFCONSUMPTION_QUESTION": "Tens alguna modalitat d'autoconsum activada pel teu contracte?",
-  "SELFCONSUMPTION_YES_LABEL": "Sí, tinc autoproducció",
-  "SELFCONSUMPTION_NO_LABEL": "No, no tinc autoproducció",
+  "SELFCONSUMPTION_QUESTION": "Al teu contracte actual, tens activa alguna modalitat d'autoconsum?",
+  "SELFCONSUMPTION_YES_LABEL": "Sí, tinc una modalitat d'autoconsum activa",
+  "SELFCONSUMPTION_NO_LABEL": "No, no tinc cap modalitat d'autoconsum activa",
   "SELFCONSUMPTION_HELP": "Què és l'autoproducció?",
   "SELFCONSUMPTION_HELP_URL": "https://ca.support.somenergia.coop/article/778-que-es-l-autoproduccio",
+  "SELFCONSUMPTION_WARNING": "No indiquis aquesta opció si encara no has finalitzat els tràmits amb la comercialitzadora actual, encara que tinguis la instal·lació realitzada i registrada a la teva CCAA.",
 
   "SELFCONSUMPTION_DETAILS_TITLE": "Dades de la instal·lació d'autoconsum",
   "SELFCONSUMPTION_CAU_CODE": "Indica el codi CAU (Codi d'Autoconsum Unificat)",

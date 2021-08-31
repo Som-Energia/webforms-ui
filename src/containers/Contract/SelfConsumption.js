@@ -22,7 +22,7 @@ const SelfConsumption = (props) => {
   return (
     <>
       <StepHeader title={t('SELFCONSUMPTION_TITLE')} />
-      <Box mt={3} mb={4}>
+      <Box mt={3} mb={2}>
         <Chooser
           className={classes.chooserQuestion}
           question={t('SELFCONSUMPTION_QUESTION')}
@@ -49,6 +49,15 @@ const SelfConsumption = (props) => {
             }
           ]}
         />
+        {
+          props.values.self_consumption.have_installation &&
+          <Box mt={3} mb={0}>
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{ __html: t('SELFCONSUMPTION_WARNING') }}
+            />
+          </Box>
+        }
       </Box>
     </>
   )
