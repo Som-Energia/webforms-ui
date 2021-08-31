@@ -116,10 +116,10 @@ const PowerFare = (props) => {
           dangerouslySetInnerHTML={{
             __html: t(
               values?.contract?.moreThan15Kw
-                ? values?.contract?.has_sevice
+                ? values?.contract?.has_service
                   ? 'HELP_MORE_THAN_15KW_HAS_SERVICE'
                   : 'HELP_MORE_THAN_15KW_HASNOT_SERVICE'
-                : values?.contract?.has_sevice
+                : values?.contract?.has_service
                 ? 'HELP_LESS_THAN_15KW_HAS_SERVICE'
                 : 'HELP_LESS_THAN_15KW'
             )

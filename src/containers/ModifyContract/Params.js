@@ -4,6 +4,8 @@ import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
+import DisplayFormikState from '../../components/DisplayFormikState'
+
 import Badge from '@material-ui/core/Badge'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -84,6 +86,14 @@ const handleChangeModify = (event, setFieldValue, values) => {
 const handleChangeMoreThan15 = (values, setFieldValue) => {
   const tariff = calculateTariff({ moreThan15Kw: !values.moreThan15Kw })
   setFieldValue('tariff', tariff, false)
+
+  setFieldValue('power', '', false)
+  setFieldValue('power2', '', false)
+  setFieldValue('power3', '', false)
+  setFieldValue('power4', '', false)
+  setFieldValue('power5', '', false)
+  setFieldValue('power6', '', false)
+
   setFieldValue('moreThan15Kw', !values.moreThan15Kw)
 }
 
@@ -119,7 +129,9 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       }
     ),
     power: Yup.number()
-      .required(t('NO_POWER_CHOSEN_PX'))
+      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+        return this.parent.changePower ? this.parent.power : true
+      })
       .test({
         name: 'minPowerValue',
         test: function () {
@@ -153,7 +165,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       })
       .test('increasing', t('NO_POWER_INCREASING'), function () {
         return rates[this.parent.tariff]?.increasing
-          ? parseInt(this.parent.power2) >= parseInt(this.parent.power)
+          ? parseFloat(this.parent.power2) >= parseFloat(this.parent.power)
           : true
       })
       .test({
@@ -189,7 +201,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       })
       .test('increasing', t('NO_POWER_INCREASING'), function () {
         return rates[this.parent.tariff]?.increasing
-          ? parseInt(this.parent.power3) >= parseInt(this.parent.power2)
+          ? parseFloat(this.parent.power3) >= parseFloat(this.parent.power2)
           : true
       })
       .test({
@@ -225,7 +237,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       })
       .test('increasing', t('NO_POWER_INCREASING'), function () {
         return rates[this.parent.tariff]?.increasing
-          ? parseInt(this.parent.power4) >= parseInt(this.parent.power3)
+          ? parseFloat(this.parent.power4) >= parseFloat(this.parent.power3)
           : true
       })
       .test({
@@ -261,7 +273,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       })
       .test('increasing', t('NO_POWER_INCREASING'), function () {
         return rates[this.parent.tariff]?.increasing
-          ? parseInt(this.parent.power5) >= parseInt(this.parent.power4)
+          ? parseFloat(this.parent.power5) >= parseFloat(this.parent.power4)
           : true
       })
       .test({
@@ -297,7 +309,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       })
       .test('increasing', t('NO_POWER_INCREASING'), function () {
         return rates[this.parent.tariff]?.increasing
-          ? parseInt(this.parent.power6) >= parseInt(this.parent.power5)
+          ? parseFloat(this.parent.power6) >= parseFloat(this.parent.power5)
           : true
       })
       .test({

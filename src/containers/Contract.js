@@ -47,7 +47,8 @@ const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
   SAMPLE_DATA: 'ctrl+shift+1',
-  SHOW_INSPECTOR: 'ctrl+shift+d'
+  SHOW_INSPECTOR: 'ctrl+shift+d',
+  SHOW_ALL_STEPS: 'ctrl+shift+a'
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -78,6 +79,7 @@ const Contract = (props) => {
   const { t, i18n } = useTranslation()
 
   const [showInspector, setShowInspector] = useState(false)
+  const [showAllSteps, setShowAllSteps] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -91,7 +93,10 @@ const Contract = (props) => {
       const values = { ...initialValues }
     },
     SHOW_INSPECTOR: () => {
-      showInspector ? setShowInspector(false) : setShowInspector(true)
+      setShowInspector(!showInspector)
+    },
+    SHOW_ALL_STEPS: () => {
+      setShowAllSteps(!showAllSteps)
     }
   }
 
@@ -213,7 +218,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power2) >= parseInt(this.parent.power)
+              ? parseFloat(this.parent.power2) >= parseFloat(this.parent.power)
               : true
           })
           .test({
@@ -248,7 +253,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power3) >= parseInt(this.parent.power2)
+              ? parseFloat(this.parent.power3) >= parseFloat(this.parent.power2)
               : true
           })
           .test({
@@ -283,7 +288,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power4) >= parseInt(this.parent.power3)
+              ? parseFloat(this.parent.power4) >= parseFloat(this.parent.power3)
               : true
           })
           .test({
@@ -318,7 +323,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power5) >= parseInt(this.parent.power4)
+              ? parseFloat(this.parent.power5) >= parseFloat(this.parent.power4)
               : true
           })
           .test({
@@ -353,7 +358,7 @@ const Contract = (props) => {
           })
           .test('increasing', t('NO_POWER_INCREASING'), function () {
             return rates[this.parent.rate]?.increasing
-              ? parseInt(this.parent.power6) >= parseInt(this.parent.power5)
+              ? parseFloat(this.parent.power6) >= parseFloat(this.parent.power5)
               : true
           })
           .test({
@@ -691,8 +696,8 @@ const Contract = (props) => {
       })
       .catch((error) => {
         console.error(error)
-        const errorResp = error?.response?.data?.data
-          ? error?.response?.data?.data
+        const errorResp = error?.response?.data?.error
+          ? error?.response?.data?.error
           : { code: 'UNEXPECTED' }
         setError(errorResp)
       })

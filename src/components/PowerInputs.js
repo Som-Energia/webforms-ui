@@ -56,16 +56,19 @@ const PowerInputs = (props) => {
         InputProps={{
           autoComplete: 'off',
           endAdornment: <InputAdornment position="end">kW</InputAdornment>,
-          startAdornment:
-            numInputs > 1 ? (
-              <InputAdornment position="start">{`P${
-                numInputs <= 2 ? (inputNum === 0 ? `1-2` : '3') : inputNum + 1
-              }`}</InputAdornment>
-            ) : null
+          startAdornment: numInputs > 1 && (
+            <InputAdornment position="start">
+              {numInputs <= 2
+                ? inputNum === 0
+                  ? t('PUNTA')
+                  : t('VALLE')
+                : `P${inputNum + 1}`}
+            </InputAdornment>
+          )
         }}
         onChange={(event) =>
           handleChangePower(event, setFieldValue, {
-            moreThanOneDecimal: values?.has_service || values?.changePower,
+            moreThanOneDecimal: values?.has_service || values?.moreThan15Kw,
             moreThan15Kw: values?.moreThan15Kw
           })
         }

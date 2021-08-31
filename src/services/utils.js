@@ -244,6 +244,7 @@ export const normalizeContract = (contract) => {
 
   finalContract.cups_address =
     `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
+  finalContract.cups_postal_code = contract?.supply_point?.postal_code
   finalContract.cups_city_id = contract?.supply_point?.city?.id
     ? parseInt(contract?.supply_point?.city?.id)
     : 0
@@ -415,7 +416,7 @@ export const testPowerForPeriods = (
   })
 }
 
-export const fakeD1Data = {
+export const templateData = {
   token: 'no-token',
   installed_power: '3.5',
   cil: 'ES13984U932824DF',
@@ -428,5 +429,6 @@ export const fakeD1Data = {
   ssaa: 'true',
   register_section: 'Con excedentes',
   to_validate: true,
-  case_id: ''
+  case_id: '',
+  its_endesa: true
 }
