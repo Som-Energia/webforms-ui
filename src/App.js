@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const App = (props) => {
   const classes = useStyles()
-  const { d1 = '', token = '' } = props
+  const { d1 = '', token = '', cups = '' } = props
 
   const loadModifyContract = (props) => {
     const ModifyContract = lazy(() => import('./containers/ModifyContract'))
@@ -61,7 +61,10 @@ const App = (props) => {
 
     const d1Data =
       typeof d1 === 'string' && d1 !== '' ? JSON.parse(d1) : undefined
-    return <D1Detail {...props} templateProps={d1Data} />
+    const cupsData =
+      typeof cups === 'string' && cups !== '' ? JSON.parse(cups) : undefined
+    const templateData = d1Data || cupsData ? {...d1Data, ...cupsData} : undefined
+    return <D1Detail {...props} templateProps={templateData} />
   }
 
   const loadSuccess = (props) => {
@@ -79,9 +82,17 @@ const App = (props) => {
     return <Home {...props} />
   }
 
-  const loadMailSubscriptions = () => {
-    const MailSubscriptions = lazy(() => import('./containers/Subscriptions'))
-    return <MailSubscriptions {...props} />
+  const loadMailSubscriptions = (props) => {
+    const MailSubscriptions = lazy(() =>
+      import('./containers/MailSubscriptions')
+    )
+
+    const mailListsData =
+      typeof props.mailLists === 'string' && props.mailLists !== ''
+        ? JSON.parse(props.mailLists)
+        : []
+
+    return <MailSubscriptions {...props} mailLists={mailListsData} />
   }
 
   return (
