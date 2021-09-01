@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -23,6 +23,7 @@ import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
+import { getMunicipisByPostalCode } from '../../services/api'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -80,6 +81,20 @@ function PersonalData (props) {
     value = value[0]
     setFieldValue(event.target.name, value)
   }
+
+  useEffect(() => {
+    const setMunicipisWithPostalCode = async (postalCode) => {
+      const municipis = await getMunicipisByPostalCode(postalCode)
+      if (municipis.length > 0) {
+        setFieldValue(`${entity}.state`, municipis[0][0]?.provincia)
+        setFieldValue(`${entity}.city`, municipis[0][0]?.municipi)
+      }
+    }
+    const postalCode = values[entity]?.postal_code
+    if (postalCode?.length > 4 &&  (!values[entity]?.city?.id || values[entity]?.city?.id === '')) {
+      setMunicipisWithPostalCode(postalCode)
+    }
+  }, [values[entity]?.postal_code])
 
   return (
     <>
@@ -171,7 +186,7 @@ function PersonalData (props) {
             </Grid>
           </>
         }
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id={`${entity}_address`}
             name={`${entity}.address`}
@@ -193,7 +208,64 @@ function PersonalData (props) {
             helperText={(touched[entity]?.address && errors[entity]?.address)}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+
+        <Grid item xs={4} sm={2}>
+            <TextField
+              id={`${entity}_number`}
+              name={`${entity}.number`}
+              label={t('NUMBER')}
+              required
+              variant="outlined"
+              fullWidth
+              value={values[entity]?.number}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={
+                errors[entity]?.number && touched[entity]?.number
+              }
+              helperText={
+                touched[entity]?.number && errors[entity]?.number
+              }
+            />
+          </Grid>
+
+          <Grid item xs={4} sm={2}>
+            <TextField
+              id={`${entity}floor`}
+              name={`${entity}.floor`}
+              label={t('FLOOR')}
+              variant="outlined"
+              fullWidth
+              value={values[entity].floor}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={
+                errors[entity]?.floor && touched[entity]?.floor
+              }
+              helperText={
+                touched[entity]?.floor && errors[entity]?.floor
+              }
+            />
+          </Grid>
+
+          <Grid item xs={4} sm={2}>
+            <TextField
+              id={`${entity}door`}
+              name={`${entity}.door`}
+              label={t('DOOR')}
+              variant="outlined"
+              fullWidth
+              value={values[entity]?.door}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors[entity]?.door && touched[entity]?.door}
+              helperText={
+                touched[entity]?.door && errors[entity]?.door
+              }
+            />
+          </Grid>
+
+        <Grid item xs={12} sm={3}>
           <TextField
             id={`${entity}_postalcode`}
             name={`${entity}.postal_code`}
@@ -209,19 +281,23 @@ function PersonalData (props) {
           />
         </Grid>
 
-        <StateCity
-          stateId={`${entity}_state`}
-          stateName={`${entity}.state`}
-          stateInitial={values[entity]?.state}
-          stateError={errors[entity]?.state && touched[entity]?.state}
-          stateHelperText={touched[entity]?.state && errors[entity]?.state}
-          cityId={`${entity}_city`}
-          cityName={`${entity}.city`}
-          cityInitial={values[entity]?.city}
-          cityError={errors[entity]?.city && touched[entity]?.city}
-          cityHelperText={touched[entity]?.city && errors[entity]?.city}
-          onChange={onChangeStateCity}
-        />
+        <Grid item xs={12} sm={9}>
+          <Grid container spacing={3}>
+            <StateCity
+              stateId={`${entity}_state`}
+              stateName={`${entity}.state`}
+              stateInitial={values[entity]?.state}
+              stateError={errors[entity]?.state && touched[entity]?.state}
+              stateHelperText={touched[entity]?.state && errors[entity]?.state}
+              cityId={`${entity}_city`}
+              cityName={`${entity}.city`}
+              cityInitial={values[entity]?.city}
+              cityError={errors[entity]?.city && touched[entity]?.city}
+              cityHelperText={touched[entity]?.city && errors[entity]?.city}
+              onChange={onChangeStateCity}
+            />
+          </Grid>
+        </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField

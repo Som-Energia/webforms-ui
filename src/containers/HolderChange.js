@@ -137,9 +137,12 @@ function HolderChange(props) {
             .oneOf([true], t('PROXY_NIF_PHISICAL'))
         }),
         address: Yup.string().required(t('NO_ADDRESS')),
+        number: Yup.string().required(t('NO_NUMBER')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE')),
+          .required(t('NO_POSTALCODE'))
+          .min(5, t('NO_POSTALCODE'))
+          .max(5, t('NO_POSTALCODE')),
         state: Yup.object().shape({
           id: Yup.number().required(t('NO_STATE'))
         }),
