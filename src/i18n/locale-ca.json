@@ -219,6 +219,7 @@
     "ADDITIONAL_PROPERTIES": "Hem rebut camps inesperats",
     "UNEXPECTED_VALUE": "Hem rebut valors inesperats",
     "MISSING_REQUIRED_FIELDS": "No s'han rebut alguns camps requerits",
+    "REQUIRED_FIELD": "No s'han rebut alguns camps requerits",
     "SUCCESS_TITLE": "Enhorabona",
     "SUCCESS_TEXT": "Hem tramitat amb èxit la teva sol·licitud",
     "SUCCESS_NOTE": "El nou contracte tindrà el número {{contract_number}}.<br> T'informarem per correu electrònic quan el tràmit sigui efectiu.",
