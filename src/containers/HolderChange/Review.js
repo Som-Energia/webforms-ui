@@ -132,7 +132,7 @@ const Review = (props) => {
               <ReviewField label={t('PROXY')} value={`${values?.holder.proxyname}(${values?.holder?.proxynif})`} />
             </>
           }
-          <ReviewField label={t('ADDRESS')} value={values?.holder?.address} />
+          <ReviewField label={t('ADDRESS')} value={`${values?.holder?.address}, ${values?.holder?.number} ${values?.holder?.floor} ${values?.holder?.door}`} />
           <ReviewField label={t('CITY')} value={`${values?.holder?.city.name} (${values?.holder?.postal_code}) ${values?.holder?.state.name}`} />
         </Grid>
         <Grid item xs={12} sm={6}>
