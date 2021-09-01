@@ -220,6 +220,7 @@
     "ADDITIONAL_PROPERTIES": "Hemos recibido campos inesperados",
     "UNEXPECTED_VALUE": "Hemos recibido valores inesperados",
     "MISSING_REQUIRED_FIELDS": "No se han recibido algunos campos requeridos",
+    "REQUIRED_FIELD": "No se han recibido algunos campos requeridos",
     "SUCCESS_TITLE": "Enhorabuena",
     "SUCCESS_TEXT": "Hemos tramitado con éxito tu solicitud",
     "SUCCESS_NOTE": "El nuevo contrato tendrá el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el trámite sea efectivo.",
