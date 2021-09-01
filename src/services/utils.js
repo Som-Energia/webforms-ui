@@ -133,6 +133,11 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.holder.proxynif_phisical
   }
 
+  normalContract.holder.address = `${normalContract.holder?.address}, ${normalContract.holder?.number} ${normalContract.holder?.floor} ${normalContract.holder?.door}`.trim()
+  normalContract.holder?.number && delete normalContract.holder?.number
+  normalContract.holder?.floor && delete normalContract.holder?.floor
+  normalContract.holder?.door && delete normalContract.holder?.door
+
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
   }
@@ -267,7 +272,7 @@ export const normalizeContract = (contract) => {
   finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
     ? holder?.proxyname
     : undefined
-  finalContract.contract_owner.address = holder?.address
+  finalContract.contract_owner.address = `${holder?.address}, ${holder?.number} ${holder?.floor} ${holder?.door}`.trim()
   finalContract.contract_owner.city_id = holder?.city?.id
     ? parseInt(holder?.city?.id)
     : 0
@@ -319,7 +324,7 @@ export const normalizeMember = (data) => {
   finalMember.email = data.member.email
   finalMember.cp = data.member.postal_code
   finalMember.provincia = data.member.state.id
-  finalMember.adreca = data.member.address
+  finalMember.adreca = `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
   finalMember.municipi = data.member.city.id
   finalMember.idioma = data.member.language
 
