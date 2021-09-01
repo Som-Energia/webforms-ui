@@ -134,6 +134,7 @@
     "HOLDER_CHANGE": "Titularra aldatzea",
     "CITY_HELP": "Udalerria",
     "VAT_LABEL": "Identifikazio fiskaleko zenbakia (IFZ)",
+    "VAT_HOLDERCHANGE_LABEL": "Identifikazio fiskaleko zenbakia (IFZ)",
     "VAT_HELP": "Eta ez badut IFZrik?",
     "PHASE_MONO": "Monofasikoa",
     "CUPS_LABEL": "CUPS",
