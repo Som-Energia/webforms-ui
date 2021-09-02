@@ -272,6 +272,11 @@ export const normalizeContract = (contract) => {
   finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
     ? holder?.proxyname
     : undefined
+
+  holder.number ??= ''
+  holder.floor ??= ''
+  holder.door ??= ''
+
   finalContract.contract_owner.address = `${holder?.address}, ${holder?.number} ${holder?.floor} ${holder?.door}`.trim()
   finalContract.contract_owner.city_id = holder?.city?.id
     ? parseInt(holder?.city?.id)
