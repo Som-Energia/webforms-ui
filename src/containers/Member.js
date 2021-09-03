@@ -244,7 +244,6 @@ const Member = (props) => {
 
   const initialValues = {
     member: {
-      number: '',
       vat: '',
       vatvalid: false,
       isphisical: true,
@@ -253,6 +252,9 @@ const Member = (props) => {
       proxyname: '',
       name: '',
       address: '',
+      number: '',
+      floor: '',
+      door: '',
       postal_code: '',
       state: { id: '' },
       city: { id: '' },
