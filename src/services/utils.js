@@ -133,10 +133,17 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.holder.proxynif_phisical
   }
 
-  normalContract.holder.address = `${normalContract.holder?.address}, ${normalContract.holder?.number} ${normalContract.holder?.floor} ${normalContract.holder?.door}`.trim()
-  normalContract.holder?.number && delete normalContract.holder?.number
-  normalContract.holder?.floor && delete normalContract.holder?.floor
-  normalContract.holder?.door && delete normalContract.holder?.door
+  normalContract.holder.address =
+    `${normalContract.holder?.address}, ${normalContract.holder?.number} ${normalContract.holder?.floor} ${normalContract.holder?.door}`.trim()
+
+  normalContract.holder?.number !== undefined &&
+    delete normalContract.holder?.number
+
+  normalContract.holder?.floor !== undefined &&
+    delete normalContract.holder?.floor
+
+  normalContract.holder?.door !== undefined &&
+    delete normalContract.holder?.door
 
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
@@ -273,9 +280,11 @@ export const normalizeContract = (contract) => {
     ? holder?.proxyname
     : undefined
 
-  finalContract.contract_owner.address = (contract.holder.vat === contract.member.vat && contract.holder.isphisical === true)
-  ? contract.member.address
-  : `${contract.holder?.address}, ${contract.holder?.number} ${contract.holder?.floor} ${contract.holder?.door}`.trim()
+  finalContract.contract_owner.address =
+    contract.holder.vat === contract.member.vat &&
+    contract.holder.isphisical === true
+      ? contract.member.address
+      : `${contract.holder?.address}, ${contract.holder?.number} ${contract.holder?.floor} ${contract.holder?.door}`.trim()
 
   finalContract.contract_owner.city_id = holder?.city?.id
     ? parseInt(holder?.city?.id)
@@ -284,7 +293,7 @@ export const normalizeContract = (contract) => {
   finalContract.contract_owner.state_id = holder?.state?.id
     ? parseInt(holder?.state?.id)
     : 0
-    
+
   finalContract.contract_owner.postal_code = holder?.postal_code
   finalContract.contract_owner.email = holder?.email
   finalContract.contract_owner.phone = holder?.phone1
@@ -330,7 +339,8 @@ export const normalizeMember = (data) => {
   finalMember.email = data.member.email
   finalMember.cp = data.member.postal_code
   finalMember.provincia = data.member.state.id
-  finalMember.adreca = `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
+  finalMember.adreca =
+    `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
   finalMember.municipi = data.member.city.id
   finalMember.idioma = data.member.language
 
