@@ -234,26 +234,29 @@ export const normalizeContract = (contract) => {
     contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR
   ).toString()
   finalContract.power_p3 =
-    contract?.contract?.power3 &&
-    Math.round(
-      contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
+    contract?.contract?.power3 && contract?.contract?.tariff === '3.0A'
+      ? Math.round(
+          contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR
+        ).toString()
+      : null
   finalContract.power_p4 =
-    contract?.contract?.power4 &&
-    Math.round(
-      contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
+    contract?.contract?.power4 && contract?.contract?.tariff === '3.0A'
+      ? Math.round(
+          contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR
+        ).toString()
+      : null
   finalContract.power_p5 =
-    contract?.contract?.power5 &&
-    Math.round(
-      contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
+    contract?.contract?.power5 && contract?.contract?.tariff === '3.0A'
+      ? Math.round(
+          contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR
+        ).toString()
+      : null
   finalContract.power_p6 =
-    contract?.contract?.power6 &&
-    Math.round(
-      contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
-
+    contract?.contract?.power6 && contract?.contract?.tariff === '3.0A'
+      ? Math.round(
+          contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
+        ).toString()
+      : null
   finalContract.cups_address =
     `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
   finalContract.cups_postal_code = contract?.supply_point?.postal_code
