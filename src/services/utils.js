@@ -1,3 +1,5 @@
+import { getRates } from '../services/api'
+
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
 export const CNAE_HOUSING = '9820'
@@ -227,36 +229,20 @@ export const normalizeContract = (contract) => {
   finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
   finalContract.tariff = contract?.contract?.rate
-  finalContract.power_p1 = Math.round(
-    contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR
-  ).toString()
-  finalContract.power_p2 = Math.round(
-    contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR
-  ).toString()
-  finalContract.power_p3 =
-    contract?.contract?.power3 && contract?.contract?.tariff === '3.0A'
-      ? Math.round(
-          contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR
-        ).toString()
-      : null
-  finalContract.power_p4 =
-    contract?.contract?.power4 && contract?.contract?.tariff === '3.0A'
-      ? Math.round(
-          contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR
-        ).toString()
-      : null
-  finalContract.power_p5 =
-    contract?.contract?.power5 && contract?.contract?.tariff === '3.0A'
-      ? Math.round(
-          contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR
-        ).toString()
-      : null
-  finalContract.power_p6 =
-    contract?.contract?.power6 && contract?.contract?.tariff === '3.0A'
-      ? Math.round(
-          contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
-        ).toString()
-      : null
+
+  const rates = getRates()
+  const rate = rates?.[finalContract.tariff]
+
+  if (rate?.num_power_periods) {
+    for (let period = 1; period <= rate?.num_power_periods; period++) {
+      const periodAttr = `power_p${period}`
+      const periodKey = `power${period > 1 ? period : ''}`
+      finalContract[periodAttr] = Math.round(
+        contract?.contract?.[periodKey] * THOUSANDS_CONVERSION_FACTOR
+      ).toString()
+    }
+  }
+
   finalContract.cups_address =
     `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
   finalContract.cups_postal_code = contract?.supply_point?.postal_code
