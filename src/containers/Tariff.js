@@ -46,13 +46,13 @@ const Tariff = (props) => {
                 Object.keys(prices?.tp)
                   .reverse()
                   .map((key) => (
-                    <>
+                    <span key={key}>
                       {tariff === '2.0TD'
                         ? t(`TERME_POTENCIA_${key}_${tariff}`)
                         : key}{' '}
                       {prices.tp[key]?.value} {prices.tp[key]?.uom}
                       <br />
-                    </>
+                    </span>
                   ))}
             </p>
           </div>
@@ -63,13 +63,13 @@ const Tariff = (props) => {
                 Object.keys(prices?.te)
                   .reverse()
                   .map((key) => (
-                    <>
+                    <span key={key}>
                       {tariff === '2.0TD'
                         ? t(`TERME_ENERGIA_${key}_${tariff}`)
                         : key}{' '}
                       {prices.te[key]?.value} {prices.te[key]?.uom}
                       <br />
-                    </>
+                    </span>
                   ))}
             </p>
           </div>
@@ -85,13 +85,13 @@ const Tariff = (props) => {
                 Object.keys(prices?.gkwh)
                   .reverse()
                   .map((key) => (
-                    <>
+                    <span key={key}>
                       {tariff === '2.0TD'
                         ? t(`TERME_ENERGIA_${key}_${tariff}`)
                         : key}{' '}
                       {prices.gkwh[key]?.value} {prices.gkwh[key]?.uom}
                       <br />
-                    </>
+                    </span>
                   ))}
             </p>
           </div>
@@ -107,10 +107,10 @@ const Tariff = (props) => {
                 Object.keys(prices?.ac)
                   .reverse()
                   .map((key) => (
-                    <>
+                    <span key={key}>
                       {prices.ac[key]?.value} {prices.ac[key]?.uom}
                       <br />
-                    </>
+                    </span>
                   ))}
             </p>
           </div>
