@@ -57,6 +57,7 @@
   "devDependencies": {
     "cypress": "^7.3.0",
     "cypress-file-upload": "^5.0.7",
+    "eslint-plugin-cypress": "^2.12.1",
     "prettier-config-standard": "^4.0.0",
     "standard": "^14.3.3"
   }
