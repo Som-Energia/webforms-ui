@@ -30,7 +30,7 @@
     "build:ov": "export REACT_APP_ENV=ov && yarn run build && cd scripts && ./rename-assets-ov.sh",
     "build:staging": "export REACT_APP_ENV=staging && yarn run build",
     "build:wp": "export REACT_APP_ENV=wp && yarn run build",
-    "build:vercel": "yarn run build",
+    "build:vercel": "react-scripts build",
     "test": "react-scripts test",
     "cypress": "./node_modules/.bin/cypress open",
     "eject": "react-scripts eject"
