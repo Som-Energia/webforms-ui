@@ -392,5 +392,6 @@
   "ATTACHMENT_ERROR": "No s'han pogut carregar els arxius adjunts",
   "STATE_CONFLICT": "Aquest contracte no permet fer modificacions contractuals",
   "UNAVAILABLE": "No disponible",
-  "NO_MAIL_LISTS": "No hi ha llistes de correu a gestionar"
+  "NO_MAIL_LISTS": "No hi ha llistes de correu a gestionar",
+  "TARIFF_NOT_AVAILABLE": "En aquests moments no és possible contractar nous subministraments de Potència superior a 15 kW mitjançant aquest formulari. Podeu posar-vos en contacte amb nosaltres al correu <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a>."
 }
