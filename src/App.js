@@ -88,6 +88,11 @@ const App = (props) => {
     return <Tariff {...props} {...compProps} />
   }
 
+  const loadCancellation = (compProps) => {
+    const Cancellation = lazy(() => import('./containers/Cancellation'))
+    return <Cancellation {...props} {...compProps} />
+  }
+
   const loadMailSubscriptions = (props) => {
     const MailSubscriptions = lazy(() =>
       import('./containers/MailSubscriptions')
@@ -200,6 +205,8 @@ const App = (props) => {
                 path="/:language/mail-subscriptions"
                 render={loadMailSubscriptions}
               />
+
+              <Route path="/cancellation" render={loadCancellation} />
 
               <Route exact path="/tariff" render={loadTariff} />
               <Route
