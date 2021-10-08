@@ -6,6 +6,7 @@
   "ENVIAR": "Enviar",
   "ENVIANT": "Enviando",
   "SELECCIONA": "Selecciona",
+  "CONTRACT": "Contrato",
   "CONTRACT_MODIFICATION_FORM": "Modificaciones de potencia y/o tarifa",
   "MODIFY_POTTAR_INTRO_TITLE": "Aviso importante",
   "MODIFY_POTTAR_INTRO": "<p>El cambio de potencia lo valida, aplica y cobra (a través de nuestra factura) la <a target=\"_blank\" href={{url}}>distribuidora de tu zona</a>.</p><p>El <b>coste regulado</b> es:</p><ul><li>10,94&nbsp;€ (IVA incluido) por solicitud.</li><li> En caso de <b>aumentar la potencia</b>, 44,86&nbsp;€ por kW de incremento.</li><li> En caso de haber bajado la potencia contratada, durante los siguientes tres años podrás volver a aumentarla hasta el valor anteriormente contratado pagando 23,84 € por kW de aumento, en vez de los 44,86 € citados.</li><li> Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, puedes modificar las potencias contratadas sin coste desde el 1 de junio de 2021 hasta el 1 de junio de 2022, aunque durante los meses anteriores hayas modificado tu contrato, y siempre y cuando no se trate de un aumento de potencia.</li></ul><p> En el caso de aumentar la potencia contratada, la compañía de distribución eléctrica puede pedir el boletín o certificado de la instalación si ya está caducado o si marca una potencia máxima inferior a la nueva solicitada. Si es así, te informaremos por correo electrónico.</p>",
@@ -384,5 +385,12 @@
   "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales",
   "UNAVAILABLE": "No disponible",
   "NO_MAIL_LISTS": "No hay listas de correo a gestionar",
-  "TARIFF_NOT_AVAILABLE": "En estos momentos no es posible contratar nuevos suministros de potencia superior a 15 kW mediante este formulario. Pueden ponerse en contacto con nosotros al correo <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a>."
+  "TARIFF_NOT_AVAILABLE": "En estos momentos no es posible contratar nuevos suministros de potencia superior a 15 kW mediante este formulario. Pueden ponerse en contacto con nosotros al correo <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a>.",
+  "CANCELLATION_INTRO_TITLE": "Información importante",
+  "CANCELLATION_INTRO_BODY": "<p>La baixa de subministrament elèctric implica el tall de servei, a l’habitatge o local associat a un contracte. És a dir, l’espai quedarà sense electricitat i també es deixaran de generar factures.</p><p>Si en algun moment posterior es decideix tornar a donar d'alta el subministrament, s'hauran d'afrontar les despeses regulades que apliquen les companyies distribuïdores. Es recomana sol·licitar la baixa si un punt de subministrament ha de quedar deshabitat o sense ús durant un període de temps considerable.</p><p>Si no vols deixar sense llum el punt de subministrament, tens l’opció de gestionar un canvi de titularitat cap a les noves usuàries del servei. Trobaràs més informació en aquest enllaç.</p>",
+  "CANCELLATION_DETAILS_TITLE": "Detalles de la baja de suministro",
+  "CANCELLATION_DATE": "Fecha de baja",
+  "CANCELLATION_DATE_HELPER": "Recuerda que pueden pasar unas horas o hasta 6 dias laborales a hacerse efectivo el corte",
+  "CANCELLATION_PHONE_HELPER": "Lo usará la distribuidora para avisar en el caso que el personal técnico encargado requiera acceder al contador",
+  "CANCELLATION_TERMS": "He leído y acepto las condiciones de baja"
 }
