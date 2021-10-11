@@ -93,6 +93,11 @@ const App = (props) => {
     return <Cancellation {...props} {...compProps} />
   }
 
+  const loadContribution = (compProps) => {
+    const Contribution = lazy(() => import('./containers/Contribution'))
+    return <Contribution {...props} {...compProps} />
+  }
+
   const loadMailSubscriptions = (props) => {
     const MailSubscriptions = lazy(() =>
       import('./containers/MailSubscriptions')
@@ -207,6 +212,8 @@ const App = (props) => {
               />
 
               <Route path="/cancellation" render={loadCancellation} />
+
+              <Route path="/contribution" render={loadContribution} />
 
               <Route exact path="/tariff" render={loadTariff} />
               <Route

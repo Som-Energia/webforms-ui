@@ -13,6 +13,12 @@ export const languages = {
   ca_ES: 'Català'
 }
 
+export const contributionParams = {
+  minContribution: 100,
+  maxContribution: 5000,
+  contributionStep: 100
+}
+
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
     (key) =>
