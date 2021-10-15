@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import StepHeader from '../../components/StepHeader'
 import IBANField from '../../components/IBANField'
-import TermsDialog from '../../components/TermsDialog'
 
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -39,35 +38,14 @@ const ContributionDetails = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const [open, setOpen] = useState(false)
-
-  console.log(contributionParams)
-
   const handleIBANChange = ({ IBAN, IBANValid }) => {
-    setFieldValue('contribution.iban', IBAN, false)
-    setFieldValue('contribution.iban_valid', IBANValid)
+    setFieldValue('payment.iban', IBAN, false)
+    setFieldValue('payment.iban_valid', IBANValid)
   }
 
-  const handleClickTerms = (event) => {
+  const handleClickSepa = (event) => {
     event.preventDefault()
-    setFieldValue(
-      'contribution.terms_accepted',
-      !values?.contribution?.terms_accepted
-    )
-  }
-
-  const handleClickSepa = () => {
-    setOpen(true)
-  }
-
-  const handleAccept = () => {
-    setFieldValue('contribution.sepa_accepted', true)
-    setOpen(false)
-  }
-
-  const handleClose = () => {
-    setFieldValue('contribution.sepa_accepted', false)
-    setOpen(false)
+    setFieldValue('payment.sepa_accepted', !values?.payment?.sepa_accepted)
   }
 
   return (
@@ -76,7 +54,11 @@ const ContributionDetails = (props) => {
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: t('WELCOME', { name: values.member.full_name })
+          __html: t('WELCOME', {
+            name: values?.member.is_member
+              ? values.member.full_name
+              : `${values.member.name} ${values.member.surname1}`
+          })
         }}
       />
 
@@ -85,13 +67,13 @@ const ContributionDetails = (props) => {
           variant="body1"
           dangerouslySetInnerHTML={{
             __html: t('CONTRIBUTION_REMEMBER', {
-              min: new Intl.NumberFormat('es-ES').format(
+              min: new Intl.NumberFormat('ca').format(
                 contributionParams?.minContribution
               ),
-              max: new Intl.NumberFormat('es-ES').format(
+              max: new Intl.NumberFormat('ca').format(
                 contributionParams?.maxContribution
               ),
-              step: new Intl.NumberFormat('es-ES').format(
+              step: new Intl.NumberFormat('ca').format(
                 contributionParams?.contributionStep
               )
             })
@@ -113,19 +95,19 @@ const ContributionDetails = (props) => {
         <TextField
           required
           id="amount"
-          name="contribution.amount"
+          name="payment.amount"
           variant="outlined"
           className={classes.icon}
           fullWidth
           label={t('CONTRIBUTION_AMOUNT')}
-          value={values?.contribution?.amount}
+          value={values?.payment?.amount}
           margin="normal"
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors?.contribution?.amount && touched?.contribution?.amount}
+          error={errors?.payment?.amount && touched?.payment?.amount}
           helperText={
-            t('CONTRIBUTION_AMOUNT_HELPER') ||
-            (touched?.contribution?.amount && errors?.contribution?.amount)
+            (touched?.payment?.amount && errors?.payment?.amount) ||
+            t('CONTRIBUTION_AMOUNT_HELPER')
           }
           InputProps={{
             startAdornment: (
@@ -136,6 +118,7 @@ const ContributionDetails = (props) => {
           }}
         />
       </Box>
+
       <Box pt={1} mb={0}>
         <Typography
           variant="h6"
@@ -148,29 +131,28 @@ const ContributionDetails = (props) => {
         />
         <IBANField
           id="iban"
-          name="contribution.iban"
+          name="payment.iban"
           label={t('IBAN_LABEL')}
           onChange={handleIBANChange}
           onBlur={handleBlur}
-          value={values?.contribution?.iban}
+          value={values?.payment?.iban}
           error={
-            (errors?.contribution?.iban || errors?.contribution?.iban_valid) &&
-            touched?.contribution?.iban
+            (errors?.payment?.iban || errors?.payment?.iban_valid) &&
+            touched?.payment?.iban
           }
           helperText={
-            (touched?.contribution?.iban &&
-              (errors?.contribution?.iban ||
-                errors?.contribution?.iban_valid)) ||
+            (touched?.payment?.iban &&
+              (errors?.payment?.iban || errors?.payment?.iban_valid)) ||
             t('IBAN_HELP')
           }
           variant="outlined"
         />
       </Box>
-      <Box mt={2} mb={2}>
+      <Box mt={2} mb={1}>
         <FormControlLabel
           control={
             <Checkbox
-              checked={values?.contribution?.sepa_accepted}
+              checked={values?.payment?.sepa_accepted}
               onClick={handleClickSepa}
               color="primary"
               value={true}
@@ -178,35 +160,7 @@ const ContributionDetails = (props) => {
           }
           label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
         />
-
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={values?.contribution?.terms_accepted}
-              onClick={handleClickTerms}
-              color="primary"
-              value={true}
-            />
-          }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('CONTRIBUTION_GENERAL_TERMS', {
-                  url: t('CONTRIBUTION_GENERAL_TERMS_URL')
-                })
-              }}
-            />
-          }
-        />
       </Box>
-
-      <TermsDialog
-        title={t('SEPA_TITLE')}
-        open={open}
-        onAccept={handleAccept}
-        onClose={handleClose}>
-        <span dangerouslySetInnerHTML={{ __html: t('SEPA') }} />
-      </TermsDialog>
     </>
   )
 }
