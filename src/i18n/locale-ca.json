@@ -103,6 +103,7 @@
   "CUPS_STATE_UNEXPECTED": "No s'ha pogut identificar l'estat del CUPS (error intern)",
   "CUPS_PARTIAL_ADDRESS_NOTICE": "Per motius de seguretat, no mostrem l'adreça completa. La podràs consultar a l'Oficina Virtual.",
   "CUPS_INVALID": "CUPS incorrecte",
+  "MEMBER_PERSONAL_DATA": "Dades personals de la nova persona sòcia",
   "HOLDER_PERSONAL_DATA": "Dades personals de la nova persona titular",
   "HOLDER_NAME": "Nom",
   "HOLDER_NAME_HELP": "Nom de la persona titular",

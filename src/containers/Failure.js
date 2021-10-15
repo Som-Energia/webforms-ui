@@ -24,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
     lineHeight: '1.75',
     textAlign: 'center',
-    color: '#6f6262'
+    color: '#6f6262',
+    '& a': {
+      color: '#fe6444 !important'
+    }
   },
   logo: {
     width: '220px',

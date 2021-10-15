@@ -8,6 +8,8 @@ export const PAYMENT_METHOD_CREDIT_CARD = 'tpv'
 export const USER_TYPE_PERSON = 'fisica'
 export const USER_TYPE_COMPANY = 'juridica'
 
+export const NEW_MEMBER_CONTRIB_AMOUNT = 100
+
 export const languages = {
   es_ES: 'Español',
   ca_ES: 'Català'
@@ -422,4 +424,15 @@ export const templateData = {
   to_validate: true,
   case_id: '',
   its_endesa: true
+}
+
+export const normalizeContribution = (data) => {
+  const contribution = {}
+  contribution.socinumber = data?.member?.number
+  contribution.dni = data?.member?.vat
+  contribution.accountbankiban = data?.payment?.iban
+  contribution.amount = data?.payment?.amount
+  contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
+
+  return contribution
 }
