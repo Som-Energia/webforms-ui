@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     marginRight: '32px'
   }
-
 }))
 
 const Review = (props) => {
@@ -66,10 +65,14 @@ const Review = (props) => {
     return (
       <div className={classes.field}>
         <div className="field__title">
-          <Typography className={classes.label} variant="subtitle2">{label}</Typography>
+          <Typography className={classes.label} variant="subtitle2">
+            {label}
+          </Typography>
         </div>
         <div className="field__value">
-          <Typography className={classes.value} variant="body2">{value}</Typography>
+          <Typography className={classes.value} variant="body2">
+            {value}
+          </Typography>
         </div>
       </div>
     )
@@ -78,38 +81,69 @@ const Review = (props) => {
   return (
     <>
       <StepHeader title={t('REVIEW_MEMBER_TITLE')} />
-      <Typography variant="body1"
+      <Typography
+        variant="body1"
         dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('NEW_MEMBER')}</Typography>
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('NEW_MEMBER')}
+          </Typography>
           <ReviewField label={'NIF'} value={values?.member?.vat} />
-          { values?.member?.isphisical
-            ? <>
-              <ReviewField label={t('NAME')} value={`${values?.member?.name} ${values?.member?.surname1} ${values?.member?.surname2}`} />
+          {values?.member?.isphisical ? (
+            <>
+              <ReviewField
+                label={t('NAME')}
+                value={`${values?.member?.name} ${values?.member?.surname1} ${values?.member?.surname2}`}
+              />
             </>
-            : <>
-              <ReviewField label={t('LEGAL_NAME')} value={values?.member?.name} />
-              <ReviewField label={t('PROXY')} value={`${values?.member.proxyname} (${values?.member?.proxynif})`} />
+          ) : (
+            <>
+              <ReviewField
+                label={t('LEGAL_NAME')}
+                value={values?.member?.name}
+              />
+              <ReviewField
+                label={t('PROXY')}
+                value={`${values?.member.proxyname} (${values?.member?.proxynif})`}
+              />
             </>
-          }
-          <ReviewField label={t('ADDRESS')} value={`${values?.member?.address}, ${values?.member?.number} ${values?.member?.floor} ${values?.member?.door}`} />
-          <ReviewField label={t('CITY')} value={`${values?.member?.city.name} (${values?.member?.postal_code}) ${values?.member?.state.name}`} />
+          )}
+          <ReviewField
+            label={t('ADDRESS')}
+            value={`${values?.member?.address}, ${values?.member?.number} ${
+              values?.member?.floor || ''
+            } ${values?.member?.door || ''}`}
+          />
+          <ReviewField
+            label={t('CITY')}
+            value={`${values?.member?.city.name} (${values?.member?.postal_code}) ${values?.member?.state.name}`}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">{t('CONTACT')}</Typography>
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('CONTACT')}
+          </Typography>
           <ReviewField label={t('PHONE')} value={values?.member?.phone1} />
           <ReviewField label={t('EMAIL')} value={values?.member?.email} />
-          <ReviewField label={t('LANGUAGE')} value={languages[values?.member?.language]} />
+          <ReviewField
+            label={t('LANGUAGE')}
+            value={languages[values?.member?.language]}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Divider variant="middle" className={classes.divider} />
-          <Typography className={classes.sectionTitle} variant="h6">{t('SUMMARY_GROUP_PAYMENT')}</Typography>
-          <ReviewField label={t('PAYMENT_METHOD')} value={t(values?.payment?.payment_method.toUpperCase())} />
-          { values?.payment?.payment_method === 'iban' &&
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('SUMMARY_GROUP_PAYMENT')}
+          </Typography>
+          <ReviewField
+            label={t('PAYMENT_METHOD')}
+            value={t(values?.payment?.payment_method.toUpperCase())}
+          />
+          {values?.payment?.payment_method === 'iban' && (
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
-          }
+          )}
           <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
       </Grid>
