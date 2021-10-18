@@ -127,6 +127,7 @@ const Cancellation = (props) => {
                       variant="contained"
                       color="primary"
                       endIcon={<ArrowForwardIosIcon />}
+                      disabled={!props.isValid}
                       onClick={() => nextStep(props)}>
                       {t('SEGUENT_PAS')}
                     </Button>
