@@ -139,6 +139,7 @@ const Member = (props) => {
         phone1: Yup.string()
           .min(9, t('NO_PHONE'))
           .required(t('NO_PHONE')),
+        phone2: Yup.string().min(9, t('NO_PHONE')),    
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
       legal_person_accepted: Yup.bool()
@@ -243,7 +244,6 @@ const Member = (props) => {
 
   const initialValues = {
     member: {
-      number: '',
       vat: '',
       vatvalid: false,
       isphisical: true,
@@ -252,6 +252,9 @@ const Member = (props) => {
       proxyname: '',
       name: '',
       address: '',
+      number: '',
+      floor: '',
+      door: '',
       postal_code: '',
       state: { id: '' },
       city: { id: '' },

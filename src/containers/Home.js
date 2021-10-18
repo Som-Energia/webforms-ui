@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const options = [
+  { title: 'Baixa punt de suministrament', href: '/cancellation' },
+  { title: 'Aportació al capital social', href: '/contribution' },
   { title: 'Contractació', href: '/contract' },
   { title: 'Alta persona socia', href: '/new-member' },
   { title: 'Canvi de titular', href: '/holder-change' },

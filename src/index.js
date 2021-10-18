@@ -4,19 +4,25 @@ import './index.css'
 import App from './App'
 // import * as serviceWorker from './serviceWorker'
 
-const root = document.getElementById('root')
-const props = {}
+// const root = document.getElementById('root')
+const root = document.querySelectorAll("[id='root']")
 
 if (root) {
-  const attrs = Object.keys(root.dataset)
-  attrs.forEach(
-    (name, index) => { props[name] = root.dataset[name] }
-  )
+  root.forEach((item, index) => {
+    const props = {}
+    const attrs = Object.keys(item.dataset)
+    attrs.forEach((name, index) => {
+      props[name] = item.dataset[name]
+    })
 
-  props.version = process.env.REACT_APP_VERSION
-  console.log(`webforms-ui version: ${process.env.REACT_APP_VERSION}`)
+    props.version = process.env.REACT_APP_VERSION
+    console.log(`webforms-ui version: ${process.env.REACT_APP_VERSION}`)
 
-  ReactDOM.render(<App {...props} />, document.getElementById('root'))
+    ReactDOM.render(
+      <App {...props} />,
+      document.querySelectorAll("[id='root']")[index]
+    )
+  })
 }
 
 // If you want your app to work offline and load faster, you can change

@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid rgba(0, 0, 0, 0.12)',
       backgroundColor: 'inherit'
     }
-
   },
   chooserItemTitle: {
     display: 'flex',
@@ -74,13 +73,22 @@ const useStyles = makeStyles((theme) => ({
 
 const Chooser = (props) => {
   const classes = useStyles()
-  const { question, options, onChange, value, disabled, name, condensed = false } = props
+  const {
+    question,
+    options,
+    onChange,
+    value,
+    disabled,
+    name,
+    condensed = false,
+    canBeEmpty = true
+  } = props
 
   const [selectedOption, setSelectedOption] = useState(value)
 
   const handleClick = (event, value) => {
     event.preventDefault()
-    if (selectedOption !== value) {
+    if (!canBeEmpty || selectedOption !== value) {
       setSelectedOption(value)
       onChange({ option: value })
     } else {
@@ -91,29 +99,49 @@ const Chooser = (props) => {
 
   return (
     <>
-      <Typography variant="h6" className={classes.title}
+      <Typography
+        variant="h6"
+        className={classes.title}
         dangerouslySetInnerHTML={{ __html: question }}
       />
-      <RadioGroup className={classes.margin} defaultValue="" name={name} data-cy={name}>
+      <RadioGroup
+        className={classes.margin}
+        defaultValue=""
+        name={name}
+        data-cy={name}>
         <Grid container spacing={3}>
-          { options.map((option, index) =>
+          {options.map((option, index) => (
             <Grid key={index} item xs={12} sm={6}>
               <label
                 data-value={option.value}
-                onClick={event => !disabled && handleClick(event, option.value)}
-                className={clsx(classes.chooserItem, condensed && classes.chooserItemCondensed, selectedOption === option.value && classes.chooserItemSelected, disabled && classes.chooserItemDisabled)}
-              >
+                onClick={(event) =>
+                  !disabled && handleClick(event, option.value)
+                }
+                className={clsx(
+                  classes.chooserItem,
+                  condensed && classes.chooserItemCondensed,
+                  selectedOption === option.value &&
+                    classes.chooserItemSelected,
+                  disabled && classes.chooserItemDisabled
+                )}>
                 <div className={classes.chooserItemTitle}>
-                  <Radio disabled={disabled} value={option.value} color="primary" checked={selectedOption === option.value} />
+                  <Radio
+                    disabled={disabled}
+                    value={option.value}
+                    color="primary"
+                    checked={selectedOption === option.value}
+                  />
                   <Typography>{option.label}</Typography>
                 </div>
-                {
-                  option.description &&
-                    <FormHelperText className={classes.chooserItemDesc} dangerouslySetInnerHTML={{ __html: option.description }} />
-                }
+                {option.description && (
+                  <FormHelperText
+                    className={classes.chooserItemDesc}
+                    dangerouslySetInnerHTML={{ __html: option.description }}
+                  />
+                )}
               </label>
             </Grid>
-          ) }
+          ))}
         </Grid>
       </RadioGroup>
     </>
@@ -121,7 +149,7 @@ const Chooser = (props) => {
 }
 
 Chooser.defaultProps = {
-  onChange: event => console.log('change', event.value)
+  onChange: (event) => console.log('change', event.value)
 }
 
 export default Chooser
