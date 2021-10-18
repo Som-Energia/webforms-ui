@@ -10,7 +10,18 @@ import { checkVat } from '../services/api'
 import { checkPhisicalVAT } from '../services/utils'
 
 const VATField = (props) => {
-  const { name, id, label, variant, value = '', onChange, onBlur, error, helperText, autoFocus = false } = props
+  const {
+    name,
+    id,
+    label,
+    variant,
+    value = '',
+    onChange,
+    onBlur,
+    error,
+    helperText,
+    autoFocus = false
+  } = props
 
   const [isLoading, setIsLoading] = useState(false)
   const [isValidVAT, setIsValidVAT] = useState(false)
@@ -23,20 +34,31 @@ const VATField = (props) => {
     if (valueVAT.length > 8) {
       setIsLoading(true)
       checkVat(valueVAT)
-        .then(response => {
+        .then((response) => {
           const validVat = response?.data?.valid === true
           setIsValidVAT(validVat)
           const phisicalVAT = checkPhisicalVAT(valueVAT)
           setIsPhisicalVAT(phisicalVAT)
           setIsLoading(false)
-          onChange({ vat: valueVAT, isPhisical: phisicalVAT, valid: validVat })
+          onChange({
+            vat: valueVAT,
+            isPhisical: phisicalVAT,
+            valid: validVat,
+            exists: response?.data?.exists
+          })
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response)
-          const errorStatus = error?.response?.data?.data?.valid ? error?.response?.data?.data?.valid : false
+          const errorStatus = error?.response?.data?.data?.valid
+            ? error?.response?.data?.data?.valid
+            : false
           setIsValidVAT(errorStatus)
           setIsLoading(false)
-          onChange({ vat: valueVAT, isPhisical: isPhisicalVAT, valid: isValidVAT })
+          onChange({
+            vat: valueVAT,
+            isPhisical: isPhisicalVAT,
+            valid: isValidVAT
+          })
         })
     }
   }, [valueVAT])
@@ -67,15 +89,14 @@ const VATField = (props) => {
         error={!isLoading && error}
         helperText={!isLoading && helperText}
         InputProps={{
-          endAdornment:
+          endAdornment: (
             <InputAdornment position="end">
-              { isLoading &&
-                <CircularProgress size={24} />
-              }
-              { !isLoading && isValidVAT &&
-                <CheckOutlinedIcon color="primary" />
-              }
+              {isLoading && <CircularProgress size={24} />}
+              {!isLoading && isValidVAT && (
+                <CheckOutlinedIcon color={error ? 'error' : 'primary'} />
+              )}
             </InputAdornment>
+          )
         }}
       />
     </>

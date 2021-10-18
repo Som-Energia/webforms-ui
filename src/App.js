@@ -63,7 +63,8 @@ const App = (props) => {
       typeof d1 === 'string' && d1 !== '' ? JSON.parse(d1) : undefined
     const cupsData =
       typeof cups === 'string' && cups !== '' ? JSON.parse(cups) : undefined
-    const templateData = d1Data || cupsData ? {...d1Data, ...cupsData} : undefined
+    const templateData =
+      d1Data || cupsData ? { ...d1Data, ...cupsData } : undefined
     return <D1Detail {...props} templateProps={templateData} />
   }
 
@@ -80,6 +81,21 @@ const App = (props) => {
   const loadHome = () => {
     const Home = lazy(() => import('./containers/Home'))
     return <Home {...props} />
+  }
+
+  const loadTariff = (compProps) => {
+    const Tariff = lazy(() => import('./containers/Tariff'))
+    return <Tariff {...props} {...compProps} />
+  }
+
+  const loadCancellation = (compProps) => {
+    const Cancellation = lazy(() => import('./containers/Cancellation'))
+    return <Cancellation {...props} {...compProps} />
+  }
+
+  const loadContribution = (compProps) => {
+    const Contribution = lazy(() => import('./containers/Contribution'))
+    return <Contribution {...props} {...compProps} />
   }
 
   const loadMailSubscriptions = (props) => {
@@ -193,6 +209,28 @@ const App = (props) => {
               <Route
                 path="/:language/mail-subscriptions"
                 render={loadMailSubscriptions}
+              />
+
+              <Route path="/cancellation" render={loadCancellation} />
+
+              <Route path="/contribution" render={loadContribution} />
+
+              <Route exact path="/tariff" render={loadTariff} />
+              <Route
+                path="/:language/tarifes-d-electricitat"
+                render={loadTariff}
+              />
+              <Route
+                path="/:language/tarifas-de-electricidad"
+                render={loadTariff}
+              />
+              <Route
+                path="/:language/elektrizitate-tarifak"
+                render={loadTariff}
+              />
+              <Route
+                path="/:language/tarifas-de-electricidade"
+                render={loadTariff}
               />
             </Switch>
           </Router>

@@ -19,15 +19,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function IBANField (props) {
+function IBANField(props) {
   const classes = useStyles()
-  const { name, id, label, variant, value = '', onChange, onBlur, error, helperText, autoFocus = false } = props
+  const {
+    name,
+    id,
+    label,
+    variant,
+    value = '',
+    onChange,
+    onBlur,
+    error,
+    helperText,
+    autoFocus = false
+  } = props
 
   const [isLoading, setIsLoading] = useState(false)
   const [isValidIBAN, setIsValidIBAN] = useState(false)
   const [IBAN, setIBAN] = useState(value)
 
-  const handleChangeIBAN = event => {
+  const handleChangeIBAN = (event) => {
     let value = event.target.value
     if (value) {
       value = value.match(/[\s0-9A-Za-z]{0,29}/)
@@ -43,13 +54,15 @@ function IBANField (props) {
     if (IBAN.length > 27) {
       setIsLoading(true)
       checkIban(IBAN)
-        .then(response => {
+        .then((response) => {
           onChange({ IBAN: IBAN, IBANValid: response?.state === true })
           setIsValidIBAN(response?.state === true)
           setIsLoading(false)
         })
-        .catch(error => {
-          const errorStatus = error?.response?.data?.state ? error?.response?.data?.state : false
+        .catch((error) => {
+          const errorStatus = error?.response?.data?.state
+            ? error?.response?.data?.state
+            : false
           setIsValidIBAN(errorStatus)
           setIsLoading(false)
           onChange({ IBAN: IBAN, IBANValid: errorStatus })
@@ -69,7 +82,6 @@ function IBANField (props) {
         variant={variant}
         fullWidth
         required
-        className={classes.icon}
         autoFocus={autoFocus}
         value={value}
         onChange={handleChangeIBAN}
@@ -77,19 +89,19 @@ function IBANField (props) {
         error={error}
         helperText={helperText}
         InputProps={{
-          startAdornment:
-            <InputAdornment position="start">
+          startAdornment: (
+            <InputAdornment className={classes.icon} position="start">
               <AccountBalanceOutlinedIcon />
-            </InputAdornment>,
-          endAdornment:
-          <InputAdornment position="end">
-            { isLoading &&
-              <CircularProgress size={24} />
-            }
-            { !isLoading && isValidIBAN &&
-              <CheckOutlinedIcon color="primary" />
-            }
-          </InputAdornment>
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              {isLoading && <CircularProgress size={24} />}
+              {!isLoading && isValidIBAN && (
+                <CheckOutlinedIcon color="primary" />
+              )}
+            </InputAdornment>
+          )
         }}
       />
     </>

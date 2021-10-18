@@ -1,3 +1,5 @@
+import { getRates } from '../services/api'
+
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
 export const CNAE_HOUSING = '9820'
@@ -6,9 +8,17 @@ export const PAYMENT_METHOD_CREDIT_CARD = 'tpv'
 export const USER_TYPE_PERSON = 'fisica'
 export const USER_TYPE_COMPANY = 'juridica'
 
+export const NEW_MEMBER_CONTRIB_AMOUNT = 100
+
 export const languages = {
   es_ES: 'Español',
   ca_ES: 'Català'
+}
+
+export const contributionParams = {
+  minContribution: 100,
+  maxContribution: 5000,
+  contributionStep: 100
 }
 
 const sanitizeData = (data) => {
@@ -26,7 +36,7 @@ const normalizeCommonModifyData = (params) => {
   const { modify, contact } = params
 
   const data = {
-    phases: modify?.phases,
+    phase: modify?.phases,
     attachments: [...modify?.attachments, ...modify?.power_attachments],
     power_p1: modify?.changePower
       ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
@@ -50,7 +60,7 @@ const normalizeCommonModifyData = (params) => {
       modify?.changePower && modify?.moreThan15Kw
         ? Math.round(modify?.power6 * THOUSANDS_CONVERSION_FACTOR)
         : undefined,
-    tariff: modify?.tariff,
+    tariff: modify?.changePower ? modify?.tariff : undefined,
     contact_name: contact?.contactName,
     contact_surname: contact?.contactSurname,
     contact_phone: contact?.phone
@@ -132,6 +142,18 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.holder.isphisical
     delete normalContract.holder.proxynif_phisical
   }
+
+  normalContract.holder.address =
+    `${normalContract.holder?.address}, ${normalContract.holder?.number} ${normalContract.holder?.floor} ${normalContract.holder?.door}`.trim()
+
+  normalContract.holder?.number !== undefined &&
+    delete normalContract.holder?.number
+
+  normalContract.holder?.floor !== undefined &&
+    delete normalContract.holder?.floor
+
+  normalContract.holder?.door !== undefined &&
+    delete normalContract.holder?.door
 
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
@@ -215,32 +237,19 @@ export const normalizeContract = (contract) => {
   finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
   finalContract.tariff = contract?.contract?.rate
-  finalContract.power_p1 = Math.round(
-    contract?.contract?.power * THOUSANDS_CONVERSION_FACTOR
-  ).toString()
-  finalContract.power_p2 = Math.round(
-    contract?.contract?.power2 * THOUSANDS_CONVERSION_FACTOR
-  ).toString()
-  finalContract.power_p3 =
-    contract?.contract?.power3 &&
-    Math.round(
-      contract?.contract?.power3 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
-  finalContract.power_p4 =
-    contract?.contract?.power4 &&
-    Math.round(
-      contract?.contract?.power4 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
-  finalContract.power_p5 =
-    contract?.contract?.power5 &&
-    Math.round(
-      contract?.contract?.power5 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
-  finalContract.power_p6 =
-    contract?.contract?.power6 &&
-    Math.round(
-      contract?.contract?.power6 * THOUSANDS_CONVERSION_FACTOR
-    ).toString()
+
+  const rates = getRates()
+  const rate = rates?.[finalContract.tariff]
+
+  if (rate?.num_power_periods) {
+    for (let period = 1; period <= rate?.num_power_periods; period++) {
+      const periodAttr = `power_p${period}`
+      const periodKey = `power${period > 1 ? period : ''}`
+      finalContract[periodAttr] = Math.round(
+        contract?.contract?.[periodKey] * THOUSANDS_CONVERSION_FACTOR
+      ).toString()
+    }
+  }
 
   finalContract.cups_address =
     `${contract?.supply_point?.address}, ${contract?.supply_point?.number} ${contract?.supply_point?.floor} ${contract?.supply_point?.door}`.trim()
@@ -267,13 +276,21 @@ export const normalizeContract = (contract) => {
   finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
     ? holder?.proxyname
     : undefined
-  finalContract.contract_owner.address = holder?.address
+
+  finalContract.contract_owner.address =
+    contract.holder.vat === contract.member.vat &&
+    contract.holder.isphisical === true
+      ? contract.member.address
+      : `${contract.holder?.address}, ${contract.holder?.number} ${contract.holder?.floor} ${contract.holder?.door}`.trim()
+
   finalContract.contract_owner.city_id = holder?.city?.id
     ? parseInt(holder?.city?.id)
     : 0
+
   finalContract.contract_owner.state_id = holder?.state?.id
     ? parseInt(holder?.state?.id)
     : 0
+
   finalContract.contract_owner.postal_code = holder?.postal_code
   finalContract.contract_owner.email = holder?.email
   finalContract.contract_owner.phone = holder?.phone1
@@ -319,7 +336,8 @@ export const normalizeMember = (data) => {
   finalMember.email = data.member.email
   finalMember.cp = data.member.postal_code
   finalMember.provincia = data.member.state.id
-  finalMember.adreca = data.member.address
+  finalMember.adreca =
+    `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
   finalMember.municipi = data.member.city.id
   finalMember.idioma = data.member.language
 
@@ -406,4 +424,15 @@ export const templateData = {
   to_validate: true,
   case_id: '',
   its_endesa: true
+}
+
+export const normalizeContribution = (data) => {
+  const contribution = {}
+  contribution.socinumber = data?.member?.number
+  contribution.dni = data?.member?.vat
+  contribution.accountbankiban = data?.payment?.iban
+  contribution.amount = data?.payment?.amount
+  contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
+
+  return contribution
 }
