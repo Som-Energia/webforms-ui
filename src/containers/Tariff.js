@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { getPrices } from '../services/api'
 
 const Tariff = (props) => {
-  const { tariff } = props
+  const { tariff, taxes = true, taxValue = 21 } = props
   const { t, i18n } = useTranslation()
   const [loading, setLoading] = useState()
   const [prices, setPrices] = useState()
+  const [taxType, setTaxType] = useState(taxValue)
 
   useEffect(() => {
     const language = props.match.params.language
@@ -17,10 +18,11 @@ const Tariff = (props) => {
   useEffect(() => {
     const VAT = '40323835M'
     const CNAE = '9820'
-    const CITY = 20
+    const CITY_TAX_21 = 20
+    const CITY_TAX_10 = 37
 
     setLoading(true)
-    getPrices(tariff, VAT, CNAE, CITY)
+    getPrices(tariff, VAT, CNAE, taxType === 21 ? CITY_TAX_21 : CITY_TAX_10)
       .then((response) => {
         const tariffPrices = response?.data
         console.log(tariffPrices)
@@ -31,14 +33,41 @@ const Tariff = (props) => {
         setLoading(false)
         console.log(error)
       })
-  }, [])
+  }, [taxType])
+
+  const btnTaxStyle = {
+    width: '120px',
+    height: '40px',
+    lineHeight: '40px',
+    fontSize: '1em'
+  }
 
   return (
-    <div>
+    <div className="tariff-table">
       {loading ? (
-        'Cargando...'
+        ''
       ) : (
         <>
+          {taxes && (
+            <div className="triaimpost">
+              <ul style={{ display: 'flex', marginBottom: '16px' }}>
+                <li
+                  id="tab_deu"
+                  className={taxType === 10 ? 'deu_triat' : 'deu_notriat'}
+                  style={{ ...btnTaxStyle }}
+                  onClick={(event) => setTaxType(10)}>
+                  10% IVA
+                </li>
+                <li
+                  id="tab_vintiu"
+                  className={taxType === 21 ? 'vintiu_triat' : 'vintiu_notriat'}
+                  style={{ ...btnTaxStyle }}
+                  onClick={(event) => setTaxType(21)}>
+                  21% IVA
+                </li>
+              </ul>
+            </div>
+          )}
           <div className="tp">
             <h4>{t('TERME_POTENCIA')}</h4>
             <p className="titol">
