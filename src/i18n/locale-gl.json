@@ -77,7 +77,7 @@
     "ATTACHMENTS_D1_INTRO_ACCEPT": "Unha vez aceptada a información relativa á túa instalación de autoconsumo, hai que modificar o contrato para que a distribuidora aplique a modalidade elixida. Imos iniciar o proceso de modificación contractual e manterémoste informada sobre o trámite. Se queres, podes aproveitar este mesmo trámite para modificar a potencia, a tarifa e/ou a tensión de subministración.",
     "REFUSE_REASON": "Indica brevemente o motivo de desconformidade",
     "D1_ATTACHMENTS_REFUSE": "Documentación acreditativa da inscrición no rexistro da comunidade autónoma",
-    "ATTACHMENTS_D1_INTRO_REFUSE": "Precisamos que nos indiques cal é o motivo polo que non estás conforme coa información que nos trasladan. Se se trata dun erro por parte da distribuidora, volverán enviarnos unha nova comunicación corrixida. Porén, se se trata dun erro no momento do rexistro na comunidade autónoma, deberás volver facer o rexistro para corrixilo. Podes facilitarnos a documentación presentada no rexistro para comprobar os datos que constan.",
+    "ATTACHMENTS_D1_INTRO_REFUSE": "<p>Ten en conta que, se rexeitas os datos, deberás volver rexistrar a túa instalación xeradora na túa comunidade autónoma. Se tes algunha dúbida, antes de continuar con este trámite, recomendámosche que revises os datos coa túa empresa instaladora.</p><p>Precisamos que nos indiques cal é o motivo polo cal non estás conforme coa información que nos trasladan. Podes facilitarnos a documentación presentada no rexistro para comprobar os datos que constan.</p>",
     "AVIS_NO_APROFITAR_M1": "Non, non quero modificar nada máis do contrato (lembra que a empresa de distribución eléctrica aplicará un custo de 10,94 € (IVE incluído) para facer efectiva a modificación).",
     "AVIS_APROFITAR_M1": "Quero aproveitar para modificar tamén a tarifa, potencia e/ou a tensión",
     "APROFITAR_LA_MODIFICACIO": "Queres pedir algunha outra modificación do contrato aproveitando o trámite?",
@@ -301,7 +301,7 @@
     "MARK_ADDRESS_CONFIRMATION_BOX": "Verifica que o enderezo asociado a este CUPS sexa o correcto",
     "CUPS_IN_PROCESS": "Actualmente este CUPS está nun proceso",
     "INVALID_SUPPLY_POINT_CUPS": "Non introduciches un <b>identificador CUPS</b> válido para o punto de subministración",
-    "CUPS_NO_VERIFY_HELP": "Se o enderezo postal non se corresponde, podes pórte en contacto connosco no enderezo <a href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a>.",
+    "CUPS_NO_VERIFY_HELP": "Se o enderezo postal non corresponde, podes pórte en contacto connosco no enderezo <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a>.",
     "CUPS_VERIFY_LABEL": "Confirmo que o enderezo se corresponde co CUPS que quero contratar",
     "CUPS_HELP_URL": "https://gl.support.somenergia.coop/article/417-que-e-o-cups",
     "CUPS_HELP": "Onde podo atopar o código CUPS?",
@@ -336,7 +336,7 @@
     "INACTIVECONTRACT": "O contrato para modificar non está dado de alta.",
     "NOTALLOWED": "Non tes autorización para facer esta operación.",
     "BADTOKEN": "A sesión caducou. Recomendámosche que accedas desde a listaxe de contratos e que o volvas tentar.",
-    "INVALID_FIELD": "Hai algún campo incorrecto",
+    "INVALID_FIELD": "O campo \"{{field_name}}\" ten un valor incorrecto",
     "REVIEW_DATA_AND_CONFIRM": "Xa case está! Revisa os datos introducidos e preme o botón de enviar.\n",
     "CONTACT_PHONE": "Teléfono de contacto para acceder ao contador",
     "FARE": "Tarifa",
@@ -374,5 +374,42 @@
     "TIPUS_INSTALLACIO": "Que cambio queres facer?",
     "REVISIO_CONFIRMACIO_DADES": "Revisión e confirmación dos datos",
     "MODIFY_ANSWER_FARE": "Modificar a tarifa",
-    "MODIFY_ANSWER_POWER": "Modificar a potencia"
+    "MODIFY_ANSWER_POWER": "Modificar a potencia",
+    "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": ".CONTRIBUTION_MEMBER_IDENTIFIER_DESC",
+    "CONTRIBUTION_GENERAL_TERMS_URL": "https://www.somenergia.coop/gl/condicions-xerais-achega/",
+    "CANCELLATION_PHONE_HELPER": "Usarao a distribuidora para avisarte en caso de que o persoal técnico encargado precise acceder ao contador",
+    "CANCELLATION_DATE_HELPER": "Lembra que o corte pode tardar unhas horas ou até 6 días laborábeis en facerse efectivo",
+    "CANCELLATION_DATE": "Data de baixa",
+    "CANCELLATION_DETAILS_TITLE": "Detalles da baixa de subministración",
+    "CANCELLATION_INTRO_BODY": "<p>A baixa de subministración eléctrica implica cortar o servizo, na vivenda ou no local asociado a un contrato. É dicir, o espazo quedará sen electricidade e tamén se deixarán de xerar facturas.</p><p>Se nalgún momento posterior decídese a dar de alta a subministración, deberán afrontarse os gastos regulados que apliquen as compañías distribuídoras. Recoméndase solicitar a baixa se un punto de subministración vai quedar deshabitado ou sen uso durante un período de tempo considerábel.</p><p>Se non queres deixar sen luz o punto de subministración, tes a opción de xestionar un cambio de titularidade para as novas usuarias do servizo. Atoparás máis información nesta ligazón.</p>",
+    "CANCELLATION_INTRO_TITLE": "Información importante",
+    "TARIFF_NOT_AVAILABLE": "Nestes momentos non é posíbel contratar novas subministracións de Potencia superior a 15 kW mediante este formulario. Podedes pórvos en contacto connosco no correo <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a>.",
+    "NO_MAIL_LISTS": "Non ha listaxes de correo para xestionar",
+    "FAQ_AUTOCONSUM_URL": "https://gl.support.somenergia.coop/article/981-a-compensacion-simplificada-de-excedentes-en-autoproducion",
+    "AUTOCONSUM_WITH_FAQ": "Compensación <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Autoprodución</a>",
+    "TERME_POTENCIA_P2_2": {
+        "0TD": "Período val"
+    },
+    "TERME_POTENCIA_P1_2": {
+        "0TD": "Período punta-chan"
+    },
+    "GENERATION_URL": "https://www.generationkwh.org/ca/",
+    "TERME_ENERGIA_GENERATIONKWH": "Termo de enerxía tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
+    "TERME_ENERGIA_P3_2": {
+        "0TD": "Período val"
+    },
+    "TERME_ENERGIA_P2_2": {
+        "0TD": "Período chan"
+    },
+    "TERME_ENERGIA_P1_2": {
+        "0TD": "Período punta"
+    },
+    "VALLE": "Val",
+    "PUNTA": "Punta",
+    "REQUIRED_FIELD": "Non se recibiron algúns campos requiridos",
+    "MEMBER_PERSONAL_DATA": "Datos persoais da nova persoa socia",
+    "VAT_HOLDERCHANGE_LABEL": "NIF da nova titular",
+    "UNEXPECTED_ERROR": "Produciuse un erro inesperado",
+    "UNKNOWN_DISTRIBUTOR": "O código CUPS que iniciaches corresponde a unha empresa de distribución eléctrica que precisamos validar. Para que poidamos seguir coa contractación, envía un correo electrónico a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> achegando unha factura recente ou indicando o enderezo do punto de subministración e o código CUPS.",
+    "CONTRACT": "Contrato"
 }
