@@ -413,7 +413,7 @@
     "CANCELLATION_DATE_HELPER": "Recorda que poden passar unes hores o fins a 6 dies laborables a fer-se efectiu el tall",
     "CANCELLATION_PHONE_HELPER": "L'utilitzarà la distribuïdora per avisar-te en cas que el personal tècnic encarregat necessiti accedir al comptador",
     "CONTRIBUTION": "Formulari d'aportació",
-    "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Tingues en compte que per poder ser titular d'un contracte amb la cooperativa cal que siguis una persona sòcia. No ho ets? Associa-t'hi  <a href=\\\"//www.somenergia.coop/es/hazte-socio-a/\\\" target=\\\"_blank\\\">aquí</a>!</p><p>Introdueix el <b>número i NIF de la sòcia o soci prenedor</b> del contracte.</p>",
+    "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder ser titular de un contrato con la cooperativa es necesario que seas persona socia de la misma. ¿No eres socio/a? ¡Hazte socio/a <a href=\\\"//www.somenergia.coop/es/hazte-socio-a/\\\" target=\\\"_blank\\\">aquí</a>!</p><p>Introduce el <b>número y NIF del socio tomador</b> del contrato.</p>",
     "CONTRIBUTION_MEMBER_QUESTION": "¿Cuál es tu caso?",
     "CONTRIBUTION_MEMBER_YES": "Ya soy socio/a",
     "CONTRIBUTION_MEMBER_NO": "Quiero ser socio/a",
