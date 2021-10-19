@@ -411,5 +411,6 @@
     "VAT_HOLDERCHANGE_LABEL": "NIF da nova titular",
     "UNEXPECTED_ERROR": "Produciuse un erro inesperado",
     "UNKNOWN_DISTRIBUTOR": "O código CUPS que iniciaches corresponde a unha empresa de distribución eléctrica que precisamos validar. Para que poidamos seguir coa contractación, envía un correo electrónico a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> achegando unha factura recente ou indicando o enderezo do punto de subministración e o código CUPS.",
-    "CONTRACT": "Contrato"
+    "CONTRACT": "Contrato",
+    "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica"
 }
