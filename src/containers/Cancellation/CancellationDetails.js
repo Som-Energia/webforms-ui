@@ -3,11 +3,15 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import IconButton from '@material-ui/core/IconButton'
+
+import { DatePicker } from '@material-ui/pickers'
+
+import TodayOutlinedIcon from '@material-ui/icons/TodayOutlined'
 
 import Header from '../../components/oficinavirtual/Header'
 import Card from '../../components/oficinavirtual/Card'
@@ -15,11 +19,12 @@ import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 import TermsDialog from '../../components/TermsDialog'
 import GeneralTerms from '../../components/GeneralTerms'
 
-const CancellationDetails = () => {
+const CancellationDetails = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
   const [open, setOpen] = useState(false)
+  const [selectedDate, handleDateChange] = useState()
 
   const handleCheckBoxClick = (event) => {
     event.preventDefault()
@@ -41,7 +46,27 @@ const CancellationDetails = () => {
         <TextField id="cups" fullWidth variant="outlined" size="small" />
       </LabelFieldRow>
       <LabelFieldRow label={t('CANCELLATION_DATE')}>
-        <TextField id="date" fullWidth variant="outlined" size="small" />
+        <DatePicker
+          id="date"
+          fullWidth
+          className={classes.icon}
+          inputVariant="outlined"
+          variant="inline"
+          autoOk
+          disableToolbar
+          minDate={new Date()}
+          size="small"
+          format="DD/MM/YYYY"
+          value={selectedDate}
+          onChange={handleDateChange}
+          InputProps={{
+            startAdornment: (
+              <IconButton edge="start" size="small">
+                <TodayOutlinedIcon />
+              </IconButton>
+            )
+          }}
+        />
         <FormHelperText
           className={classes.helper}
           dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
@@ -118,6 +143,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '0.75rem 1.5rem',
     '& .MuiFormControlLabel-label': {
       fontSize: '14px !important'
+    }
+  },
+  icon: {
+    '& path': {
+      color: 'rgba(0, 0, 0, 0.54)'
     }
   }
 }))
