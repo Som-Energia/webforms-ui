@@ -14,7 +14,10 @@ const CancellationIntro = () => {
       <Card>
         <div
           dangerouslySetInnerHTML={{
-            __html: t('CANCELLATION_INTRO_BODY')
+            __html: t('CANCELLATION_INTRO_BODY', {
+              url_new: t('FAQ_ALTA_SUMINISTRAMENT_URL'),
+              url_holderchange: t('FAQ_HOLDERCHANGE_URL')
+            })
           }}
         />
       </Card>

@@ -11,9 +11,11 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Paper from '@material-ui/core/Paper'
+import Alert from '@material-ui/lab/Alert'
+import Typography from '@material-ui/core/Typography'
+
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import DayjsUtils from '@date-io/dayjs'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
@@ -95,69 +97,83 @@ const Cancellation = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Formik
-        onSubmit={() => {}}
-        enableReinitialize
-        initialValues={initialValues}
-        validationSchema={validationSchemas[activeStep]}
-        validateOnMount={true}>
-        {(props) => (
-          <Form className={classes.root} noValidate autoComplete="off">
-            <Container maxWidth="md" disableGutters={true}>
-              <ContractDetails {...props.values} />
-              {activeStep === 0 && <CancellationIntro />}
-              {activeStep === 1 && <CancellationDetails />}
-              <Box mx={0} mt={1} mb={3}>
-                <div className={classes.actionsContainer}>
-                  {result?.contract_number === undefined && (
-                    <Button
-                      data-cy="prev"
-                      className={classes.button}
-                      startIcon={<ArrowBackIosIcon />}
-                      disabled={activeStep === 0 || sending}
-                      onClick={() => prevStep(props)}>
-                      {t('PAS_ANTERIOR')}
-                    </Button>
-                  )}
-                  {activeStep < MAX_STEP_NUMBER - 1 ? (
-                    <Button
-                      type="button"
-                      data-cy="next"
-                      className={classes.button}
-                      variant="contained"
-                      color="primary"
-                      endIcon={<ArrowForwardIosIcon />}
-                      disabled={!props.isValid}
-                      onClick={() => nextStep(props)}>
-                      {t('SEGUENT_PAS')}
-                    </Button>
-                  ) : (
-                    !completed && (
+      <MuiPickersUtilsProvider utils={DayjsUtils}>
+        <Formik
+          onSubmit={() => {}}
+          enableReinitialize
+          initialValues={initialValues}
+          validationSchema={validationSchemas[activeStep]}
+          validateOnMount={true}>
+          {(props) => (
+            <Form className={classes.root} noValidate autoComplete="off">
+              <Container maxWidth="md" disableGutters={true}>
+                <ContractDetails {...props.values} />
+                {activeStep === 0 && <CancellationIntro />}
+                {activeStep === 1 && <CancellationDetails />}
+                <Box mt={1}>
+                  <Alert severity="warning">
+                    <Typography
+                      className={classes.disclaimer}
+                      variant="body1"
+                      dangerouslySetInnerHTML={{
+                        __html: t('CANCELLATION_DISCLAIMER')
+                      }}
+                    />
+                  </Alert>
+                </Box>
+
+                <Box mx={0} mt={1} mb={3}>
+                  <div className={classes.actionsContainer}>
+                    {result?.contract_number === undefined && (
+                      <Button
+                        data-cy="prev"
+                        className={classes.button}
+                        startIcon={<ArrowBackIosIcon />}
+                        disabled={activeStep === 0 || sending}
+                        onClick={() => prevStep(props)}>
+                        {t('PAS_ANTERIOR')}
+                      </Button>
+                    )}
+                    {activeStep < MAX_STEP_NUMBER - 1 ? (
                       <Button
                         type="button"
-                        data-cy="submit"
+                        data-cy="next"
                         className={classes.button}
                         variant="contained"
                         color="primary"
-                        startIcon={
-                          sending ? (
-                            <CircularProgress size={24} />
-                          ) : (
-                            <SendIcon />
-                          )
-                        }
-                        disabled={sending || !props.isValid}
-                        onClick={() => handlePost(props.values)}>
-                        {t('SEND')}
+                        endIcon={<ArrowForwardIosIcon />}
+                        disabled={!props.isValid}
+                        onClick={() => nextStep(props)}>
+                        {t('SEGUENT_PAS')}
                       </Button>
-                    )
-                  )}
-                </div>
-              </Box>
-            </Container>
-          </Form>
-        )}
-      </Formik>
+                    ) : (
+                      !completed && (
+                        <Button
+                          type="button"
+                          data-cy="submit"
+                          className={classes.button}
+                          variant="contained"
+                          color="primary"
+                          startIcon={
+                            sending ? (
+                              <CircularProgress size={24} />
+                            ) : (
+                              <SendIcon />
+                            )
+                          }
+                          disabled={sending || !props.isValid}
+                          onClick={() => handlePost(props.values)}>
+                          {t('TRAMITAR_BAJA')}
+                        </Button>
+                      )
+                    )}
+                  </div>
+                </Box>
+              </Container>
+            </Form>
+          )}
+        </Formik>
+      </MuiPickersUtilsProvider>
     </GlobalHotKeys>
   )
 }
@@ -187,5 +203,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     paddingTop: '0.25rem'
+  },
+  disclaimer: {
+    fontSize: '14px',
+    fontWeight: 400
   }
 }))
