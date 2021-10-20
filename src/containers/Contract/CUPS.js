@@ -31,19 +31,26 @@ const useStyles = makeStyles((theme) => ({
 
 const CupsHelperText = () => {
   const { t } = useTranslation()
-  return <a href={t('CUPS_HELP_URL')}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {t('CUPS_HELP')}
-  </a>
+  return (
+    <a href={t('CUPS_HELP_URL')} target="_blank" rel="noopener noreferrer">
+      {t('CUPS_HELP')}
+    </a>
+  )
 }
 
 const CUPS = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const { values, handleBlur, errors, touched, setFieldValue, setFieldTouched, setFields } = props
+  const {
+    values,
+    handleBlur,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched,
+    setFields
+  } = props
   const [isLoading, setLoading] = useState(false)
 
   const handleInputCups = (event) => {
@@ -53,16 +60,22 @@ const CUPS = (props) => {
   }
 
   const handleChangeService = ({ option }) => {
-    setFieldValue('contract', {
-      rate: '',
-      power: '',
-      power2: '',
-      power3: '',
-      fare: '',
-      phases: '',
-      moreThan15Kw: false
-    }, false)
-    option === false ? setFieldValue('holder.previous_holder', false, false) : setFieldValue('holder.previous_holder', '', false)
+    setFieldValue(
+      'contract',
+      {
+        rate: '',
+        power: '',
+        power2: '',
+        power3: '',
+        fare: '',
+        phases: '',
+        moreThan15Kw: false
+      },
+      false
+    )
+    option === false
+      ? setFieldValue('holder.previous_holder', false, false)
+      : setFieldValue('holder.previous_holder', '', false)
     setFieldValue('contract.has_service', option)
   }
 
@@ -71,13 +84,13 @@ const CUPS = (props) => {
     if (value.length > 18) {
       setLoading(true)
       checkCups(value)
-        .then(response => {
+        .then((response) => {
           const status = response?.data?.status
           setFieldValue('supply_point.status', status)
           setFieldTouched('supply_point.cups', true)
           setLoading(false)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response)
           const errorStatus = error?.response?.data?.data?.status
             ? error?.response?.data?.data?.status
@@ -88,16 +101,16 @@ const CUPS = (props) => {
     } else {
       setFieldValue('supply_point.status', 'error')
     }
-  }
-  , [values.supply_point.cups, setFieldValue, setFieldTouched])
+  }, [values.supply_point.cups, setFieldValue, setFieldTouched])
 
   return (
     <>
       <StepHeader title={t('CUPS_TITLE')} />
-      <Typography variant="body1"
+      <Typography
+        variant="body1"
         dangerouslySetInnerHTML={{ __html: t('FILL_CUPS') }}
       />
-      <Box mt={3} mb={1}>
+      <Box mt={1} mb={1}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -112,22 +125,28 @@ const CUPS = (props) => {
               variant="outlined"
               margin="normal"
               InputProps={{
-                endAdornment:
+                endAdornment: (
                   <InputAdornment position="end">
-                    { isLoading &&
-                      <CircularProgress size={24} />
-                    }
-                    { !isLoading && (values?.supply_point?.status === 'new' || values?.supply_point?.status === 'inactive') &&
-                      <CheckOutlinedIcon color="primary" />
-                    }
+                    {isLoading && <CircularProgress size={24} />}
+                    {!isLoading &&
+                      (values?.supply_point?.status === 'new' ||
+                        values?.supply_point?.status === 'inactive') && (
+                        <CheckOutlinedIcon color="primary" />
+                      )}
                   </InputAdornment>
+                )
               }}
-              error={ errors?.supply_point?.cups && touched?.supply_point?.cups }
-              helperText={(touched?.supply_point?.cups && <span dangerouslySetInnerHTML={{ __html: errors?.supply_point?.cups }} />) ||
-                <CupsHelperText />
+              error={errors?.supply_point?.cups && touched?.supply_point?.cups}
+              helperText={
+                (touched?.supply_point?.cups && (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: errors?.supply_point?.cups
+                    }}
+                  />
+                )) || <CupsHelperText />
               }
             />
-
           </Grid>
         </Grid>
       </Box>
@@ -137,7 +156,10 @@ const CUPS = (props) => {
           question={t('HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT')}
           onChange={handleChangeService}
           value={values.contract.has_service}
-          disabled={(values.supply_point.status !== 'new' && values.supply_point.status !== 'inactive')}
+          disabled={
+            values.supply_point.status !== 'new' &&
+            values.supply_point.status !== 'inactive'
+          }
           options={[
             {
               value: true,
@@ -152,7 +174,6 @@ const CUPS = (props) => {
           ]}
         />
       </Box>
-
     </>
   )
 }
