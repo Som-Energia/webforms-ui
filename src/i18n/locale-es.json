@@ -395,7 +395,7 @@
     "CANCELLATION_PHONE_HELPER": "Lo usará la distribuidora para avisar en el caso que el personal técnico encargado requiera acceder al contador",
     "CANCELLATION_TERMS": "He leído y acepto las condiciones de baja",
     "CONTRIBUTION": "Formulario de aportación",
-    "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder aportar a la cooperativa, es necesario que seas persona socia. ¿No lo eres? Asóciate  <a href=\\\"//www.somenergia.coop/es/hazte-socio-a/\\\" target=\\\"_blank\\\">aquí</a>!</p><p>Introduce el <b>número y NIF de la persona tomadora</b> del contrato.</p>",
+    "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder aportar a la cooperativa, es necesario que seas persona socia. ",
     "CONTRIBUTION_MEMBER_QUESTION": "¿Cuál es tu caso?",
     "CONTRIBUTION_MEMBER_YES": "Ya soy socio/a",
     "CONTRIBUTION_MEMBER_NO": "Quiero ser socio/a",
