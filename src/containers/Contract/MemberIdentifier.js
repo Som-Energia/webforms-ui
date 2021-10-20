@@ -19,7 +19,7 @@ const MemberIdentifier = (props) => {
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('MEMBER_IDENTIFIER_DESC') }}
       />
-      <Box mt={3} mb={1}>
+      <Box mt={0} mb={1}>
         <MemberIdentifierFields {...props} />
       </Box>
     </>
