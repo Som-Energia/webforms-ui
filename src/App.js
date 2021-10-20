@@ -214,6 +214,23 @@ const App = (props) => {
               <Route path="/cancellation" render={loadCancellation} />
 
               <Route path="/contribution" render={loadContribution} />
+              <Route path="/:language/contribution" render={loadContribution} />
+              <Route
+                path="/:language/produeix-energia-renovable/aporta-al-capital-social"
+                render={loadContribution}
+              />
+              <Route
+                path="/:language/produce-energia-renovable/aporta-al-capital-social"
+                render={loadContribution}
+              />
+              <Route
+                path="/:language/produce-energia-renovable/egin-zure-ekarpena-kapital-sozialean"
+                render={loadContribution}
+              />
+              <Route
+                path="/:language/produce-energia-renovable/achegar-ao-capital-social"
+                render={loadContribution}
+              />
 
               <Route exact path="/tariff" render={loadTariff} />
               <Route

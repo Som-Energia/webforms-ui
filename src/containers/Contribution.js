@@ -46,7 +46,7 @@ const Contribution = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showInspector, setShowInspector] = useState(true)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
