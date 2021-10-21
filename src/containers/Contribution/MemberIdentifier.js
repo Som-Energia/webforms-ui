@@ -50,7 +50,7 @@ const MemberIdentifier = (props) => {
     const { vat, isPhisical, valid, exists } = params
     setFieldValue('member.isphisical', isPhisical, false)
     setFieldValue('member.vatvalid', valid, false)
-    setFieldValue('member.exists', exists, false)
+    setFieldValue('member.exists', false, false)
     setFieldValue('member.vat', vat)
     if (vat !== '') {
       setFieldTouched('member.vat', true)
