@@ -67,7 +67,9 @@ const Cancellation = (props) => {
     setActiveStep(Math.max(0, prev))
   }
 
-  const handlePost = {}
+  const handlePost = () => {
+    document.getElementById('cancelForm').submit()
+  }
 
   useEffect(() => {
     const language = props.match.params.language
@@ -105,8 +107,13 @@ const Cancellation = (props) => {
           validationSchema={validationSchemas[activeStep]}
           validateOnMount={true}>
           {(props) => (
-            <Form className={classes.root} noValidate autoComplete="off">
-              <Container maxWidth="md" disableGutters={true}>
+            <Form
+              id="cancelForm"
+              method="POST"
+              className={classes.root}
+              noValidate
+              autoComplete="off">
+              <Container maxWidth="lg" disableGutters={true}>
                 <ContractDetails {...props.values} />
                 {activeStep === 0 && <CancellationIntro />}
                 {activeStep === 1 && <CancellationDetails />}
