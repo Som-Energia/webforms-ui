@@ -212,6 +212,7 @@ const App = (props) => {
                 />
 
                 <Route path="/cancellation" render={loadCancellation} />
+                <Route path="/:language/cancel" render={loadCancellation} />
 
                 <Route path="/contribution" render={loadContribution} />
                 <Route
