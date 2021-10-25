@@ -431,7 +431,7 @@ export const normalizeContribution = (data) => {
   contribution.socinumber = data?.member?.number
   contribution.dni = data?.member?.vat
   contribution.accountbankiban = data?.payment?.iban
-  contribution.amount = data?.payment?.amount
+  contribution.amount = parseInt(data?.payment?.amount)
   contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
 
   return contribution
