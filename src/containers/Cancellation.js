@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -16,6 +17,10 @@ import Typography from '@material-ui/core/Typography'
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DayjsUtils from '@date-io/dayjs'
+
+import dayjs from 'dayjs'
+import 'dayjs/locale/ca'
+import 'dayjs/locale/es'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
@@ -38,7 +43,10 @@ const Cancellation = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const [showInspector, setShowInspector] = useState(false)
+  const { token, contract } = props
+  const { language } = useParams()
+
+  const [showInspector, setShowInspector] = useState(true)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -52,19 +60,41 @@ const Cancellation = (props) => {
   }
 
   const initialValues = {
-    contract_number: '0091821',
-    cups_address: 'Tramuntana, 4, 1r 1a 17162 (Bescanó)'
+    contract_number: contract?.name,
+    contract_cups: contract?.cups,
+    cups_address: contract?.address,
+    cups: '',
+    privacy_policy: false,
+    terms_accepted: false,
+    phone: '',
+    validation_cups: '',
+    date_action: dayjs().add(1, 'd').format('DD/MM/YYYY')
   }
 
-  const nextStep = () => {
+  const nextStep = (props) => {
     const next = activeStep + 1
     const last = MAX_STEP_NUMBER
-    setActiveStep(Math.min(next, last))
+    props.submitForm().then(() => {
+      if (props.isValid) {
+        setActiveStep(Math.min(next, last))
+        props.validateForm()
+        props.setTouched({})
+      }
+    })
   }
 
-  const prevStep = () => {
+  const prevStep = (props) => {
     const prev = activeStep - 1
     setActiveStep(Math.max(0, prev))
+
+    if (completed) {
+      setCompleted(false)
+      setError(false)
+    }
+    props.submitForm().then(() => {
+      props.validateForm()
+      props.setTouched({})
+    })
   }
 
   const handlePost = () => {
@@ -72,9 +102,9 @@ const Cancellation = (props) => {
   }
 
   useEffect(() => {
-    const language = props.match.params.language
-    i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+    language && i18n.changeLanguage(language)
+    language ? dayjs.locale(language) : dayjs.locale('es')
+  }, [language, i18n])
 
   const validationSchemas = [
     Yup.object().shape({}),
@@ -82,18 +112,19 @@ const Cancellation = (props) => {
       cups: Yup.string()
         .required(t('CUPS_INVALID'))
         .min(18, t('CUPS_INVALID'))
-        .test('statusError', t('CUPS_INVALID'), function () {
-          return !(this.parent.status === 'error')
-        })
-        .test('statusError', t('CUPS_IN_PROCESS'), function () {
-          return !(this.parent.status === 'busy')
-        })
-        .test('statusNew', t('CUPS_IS_ACTIVE'), function () {
-          return !(this.parent.status === 'active')
-        })
-        .test('statusInvalid', t('INVALID_SUPPLY_POINT_CUPS'), function () {
-          return !(this.parent.status === 'invalid')
-        })
+        .test('sameCups', t('CUPS_NO_MATCHING'), function () {
+          return !(this.parent.contract_cups !== this.parent.cups)
+        }),
+      phone: Yup.string()
+        .required(t('NO_PHONE'))
+        .min(9, t('NO_PHONE'))
+        .max(9, t('NO_PHONE')),
+      privacy_policy: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS')),
+      terms_accepted: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
 
@@ -106,78 +137,82 @@ const Cancellation = (props) => {
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
           validateOnMount={true}>
-          {(props) => (
-            <Form
-              id="cancelForm"
-              method="POST"
-              className={classes.root}
-              noValidate
-              autoComplete="off">
-              <Container maxWidth="lg" disableGutters={true}>
-                <ContractDetails {...props.values} />
-                {activeStep === 0 && <CancellationIntro />}
-                {activeStep === 1 && <CancellationDetails />}
-                <Box mt={1}>
-                  <Alert severity="warning">
-                    <Typography
-                      className={classes.disclaimer}
-                      variant="body1"
-                      dangerouslySetInnerHTML={{
-                        __html: t('CANCELLATION_DISCLAIMER')
-                      }}
-                    />
-                  </Alert>
-                </Box>
+          {(formikProps) => (
+            <>
+              <Form
+                id="cancelForm"
+                method="POST"
+                className={classes.root}
+                noValidate
+                autoComplete="off">
+                <Container maxWidth="lg" disableGutters={true}>
+                  <ContractDetails {...formikProps.values} />
+                  {activeStep === 0 && <CancellationIntro {...formikProps} />}
+                  {activeStep === 1 && <CancellationDetails {...formikProps} />}
+                  <Box mt={1}>
+                    <Alert severity="warning">
+                      <Typography
+                        className={classes.disclaimer}
+                        variant="body1"
+                        dangerouslySetInnerHTML={{
+                          __html: t('CANCELLATION_DISCLAIMER')
+                        }}
+                      />
+                    </Alert>
+                  </Box>
 
-                <Box mx={0} mt={1} mb={3}>
-                  <div className={classes.actionsContainer}>
-                    {result?.contract_number === undefined && (
-                      <Button
-                        data-cy="prev"
-                        className={classes.button}
-                        startIcon={<ArrowBackIosIcon />}
-                        disabled={activeStep === 0 || sending}
-                        onClick={() => prevStep(props)}>
-                        {t('PAS_ANTERIOR')}
-                      </Button>
-                    )}
-                    {activeStep < MAX_STEP_NUMBER - 1 ? (
-                      <Button
-                        type="button"
-                        data-cy="next"
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        endIcon={<ArrowForwardIosIcon />}
-                        disabled={!props.isValid}
-                        onClick={() => nextStep(props)}>
-                        {t('SEGUENT_PAS')}
-                      </Button>
-                    ) : (
-                      !completed && (
+                  <Box mx={0} mt={1} mb={3}>
+                    <div className={classes.actionsContainer}>
+                      {result?.contract_number === undefined && (
+                        <Button
+                          data-cy="prev"
+                          className={classes.button}
+                          startIcon={<ArrowBackIosIcon />}
+                          disabled={activeStep === 0 || sending}
+                          onClick={() => prevStep(formikProps)}>
+                          {t('PAS_ANTERIOR')}
+                        </Button>
+                      )}
+                      {activeStep < MAX_STEP_NUMBER - 1 ? (
                         <Button
                           type="button"
-                          data-cy="submit"
+                          data-cy="next"
                           className={classes.button}
                           variant="contained"
                           color="primary"
-                          startIcon={
-                            sending ? (
-                              <CircularProgress size={24} />
-                            ) : (
-                              <SendIcon />
-                            )
-                          }
-                          disabled={sending || !props.isValid}
-                          onClick={() => handlePost(props.values)}>
-                          {t('TRAMITAR_BAJA')}
+                          endIcon={<ArrowForwardIosIcon />}
+                          disabled={!formikProps.isValid}
+                          onClick={() => nextStep(formikProps)}>
+                          {t('SEGUENT_PAS')}
                         </Button>
-                      )
-                    )}
-                  </div>
-                </Box>
-              </Container>
-            </Form>
+                      ) : (
+                        !completed && (
+                          <Button
+                            type="button"
+                            data-cy="submit"
+                            className={classes.button}
+                            variant="contained"
+                            color="primary"
+                            startIcon={
+                              sending ? (
+                                <CircularProgress size={24} />
+                              ) : (
+                                <SendIcon />
+                              )
+                            }
+                            disabled={sending || !formikProps.isValid}
+                            onClick={() => handlePost(formikProps.values)}>
+                            {t('TRAMITAR_BAJA')}
+                          </Button>
+                        )
+                      )}
+                    </div>
+                  </Box>
+                </Container>
+                <input type="hidden" name="csrfmiddlewaretoken" value={token} />
+              </Form>
+              {showInspector && <DisplayFormikState {...formikProps} />}
+            </>
           )}
         </Formik>
       </MuiPickersUtilsProvider>

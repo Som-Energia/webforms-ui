@@ -397,6 +397,8 @@
   "CANCELLATION_PHONE_HELPER": "Lo usará la distribuidora para avisar en el caso que el personal técnico encargado requiera acceder al contador",
   "CANCELLATION_TERMS": "He leído y acepto las condiciones de baja",
   "CANCELLATION_DISCLAIMER": "<b>Recuerda que este trámite implica el corte del servicio</b>",
+  "CUPS_NO_MATCHING": "El CUPS no coincide con el del contrato",
+  "TRAMITAR_BAJA": "Tramitar baja",
 
   "CONTRIBUTION": "Formulario de aportación",
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder aportar a la cooperativa, es necesario que seas persona socia. ",

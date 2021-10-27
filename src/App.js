@@ -90,7 +90,12 @@ const App = (props) => {
 
   const loadCancellation = (compProps) => {
     const Cancellation = lazy(() => import('./containers/Cancellation'))
-    return <Cancellation {...props} {...compProps} />
+    const contractData =
+      typeof props.contract === 'string' && props.contract !== ''
+        ? JSON.parse(props.contract)
+        : []
+
+    return <Cancellation {...props} {...compProps} contract={contractData} />
   }
 
   const loadContribution = (compProps) => {
