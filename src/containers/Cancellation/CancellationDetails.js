@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import dayjs from 'dayjs'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
@@ -19,12 +20,20 @@ import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 import TermsDialog from '../../components/TermsDialog'
 import GeneralTerms from '../../components/GeneralTerms'
 
+import { nationalHolidays } from '../../services/utils'
+
 const CancellationDetails = (props) => {
+  const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
+    props
   const classes = useStyles()
   const { t } = useTranslation()
+  const tomorrow = dayjs().add(1, 'd')
 
   const [open, setOpen] = useState(false)
-  const [selectedDate, handleDateChange] = useState()
+
+  const handleDateChange = (date) => {
+    setFieldValue('date_action', date.format('DD/MM/YYYY'))
+  }
 
   const handleCheckBoxClick = (event) => {
     event.preventDefault()
@@ -33,32 +42,70 @@ const CancellationDetails = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
+    setFieldValue('terms_accepted', true)
   }
 
   const handleClose = () => {
     setOpen(false)
+    setFieldValue('terms_accepted', false)
+  }
+
+  const handlePrivacyPolicy = () => {
+    setFieldValue('privacy_policy', !values?.privacy_policy)
+  }
+
+  const shouldDisableDate = (date) => {
+    if (dayjs().isSame(date)) {
+      return true
+    }
+    if (date.day() === 0 || date.day() === 6) {
+      return true
+    }
+    if (nationalHolidays.includes(date.format('DD/MM'))) {
+      return true
+    }
+    return false
   }
 
   return (
     <div className={classes.root}>
       <Header>{t('CANCELLATION_DETAILS_TITLE')}</Header>
       <LabelFieldRow label={t('CUPS')}>
-        <TextField id="cups" fullWidth variant="outlined" size="small" />
+        <TextField
+          id="cups"
+          name="cups"
+          fullWidth
+          variant="outlined"
+          size="small"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors?.cups && touched?.cups}
+          helperText={
+            touched?.cups && (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: errors?.cups
+                }}
+              />
+            )
+          }
+        />
       </LabelFieldRow>
       <LabelFieldRow label={t('CANCELLATION_DATE')}>
         <DatePicker
-          id="date"
+          name="date_action"
           fullWidth
           className={classes.icon}
           inputVariant="outlined"
           variant="inline"
           autoOk
           disableToolbar
-          minDate={new Date()}
+          minDate={tomorrow}
           size="small"
           format="DD/MM/YYYY"
-          value={selectedDate}
+          value={dayjs(values.date_action, 'DD/MM/YYYY')}
           onChange={handleDateChange}
+          shouldDisableDate={shouldDisableDate}
           InputProps={{
             startAdornment: (
               <IconButton edge="start" size="small">
@@ -73,10 +120,32 @@ const CancellationDetails = (props) => {
         />
       </LabelFieldRow>
       <LabelFieldRow label={t('PHONE')}>
-        <TextField id="phone" fullWidth variant="outlined" size="small" />
-        <FormHelperText
-          className={classes.helper}
-          dangerouslySetInnerHTML={{ __html: t('CANCELLATION_PHONE_HELPER') }}
+        <TextField
+          id="phone"
+          name="phone"
+          fullWidth
+          variant="outlined"
+          size="small"
+          value={values.phone}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors?.phone && touched?.phone}
+          helperText={
+            (touched?.phone && (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: errors?.phone
+                }}
+              />
+            )) || (
+              <FormHelperText
+                className={classes.helper}
+                dangerouslySetInnerHTML={{
+                  __html: t('CANCELLATION_PHONE_HELPER')
+                }}
+              />
+            )
+          }
         />
       </LabelFieldRow>
       <Card className={classes.legalChecks}>
@@ -92,7 +161,8 @@ const CancellationDetails = (props) => {
           control={
             <Checkbox
               name="privacy_policy"
-              onClick={() => false}
+              checked={values.privacy_policy}
+              onClick={handlePrivacyPolicy}
               color="primary"
             />
           }
@@ -111,6 +181,7 @@ const CancellationDetails = (props) => {
           control={
             <Checkbox
               name="terms_accepted"
+              checked={values.terms_accepted}
               onClick={handleCheckBoxClick}
               color="primary"
             />
