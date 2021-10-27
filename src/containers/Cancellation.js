@@ -46,7 +46,7 @@ const Cancellation = (props) => {
   const { token, contract } = props
   const { language } = useParams()
 
-  const [showInspector, setShowInspector] = useState(true)
+  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -127,6 +127,20 @@ const Cancellation = (props) => {
         .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
+
+  if (!contract?.name || !contract?.cups) {
+    return (
+      <Alert severity="error">
+        <Typography
+          className={classes.disclaimer}
+          variant="body1"
+          dangerouslySetInnerHTML={{
+            __html: t('CANCELLATION_NO_AVAILABLE')
+          }}
+        />
+      </Alert>
+    )
+  }
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>

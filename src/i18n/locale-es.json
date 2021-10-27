@@ -398,6 +398,7 @@
   "CANCELLATION_TERMS": "He leído y acepto las condiciones de baja",
   "CANCELLATION_DISCLAIMER": "<b>Recuerda que este trámite implica el corte del servicio</b>",
   "CUPS_NO_MATCHING": "El CUPS no coincide con el del contrato",
+  "CANCELLATION_NO_AVAILABLE": "Faltan datos para la tramitación de la baja o no está disponible",
   "TRAMITAR_BAJA": "Tramitar baja",
 
   "CONTRIBUTION": "Formulario de aportación",
