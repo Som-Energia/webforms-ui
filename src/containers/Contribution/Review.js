@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 
 import StepHeader from '../../components/StepHeader'
 
-import { languages } from '../../services/utils'
+import { languages, NEW_MEMBER_CONTRIB_AMOUNT } from '../../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
@@ -56,9 +56,9 @@ const Review = (props) => {
   const { t } = useTranslation()
   const { values, setFieldValue } = props
 
-  const handleClick = (event) => {
+  const handleClickTerms = (event) => {
     event.preventDefault()
-    setFieldValue('terms_accepted', !values.terms_accepted)
+    setFieldValue('terms_accepted', !values?.terms_accepted)
   }
 
   const ReviewField = ({ label, value }) => {
@@ -80,7 +80,7 @@ const Review = (props) => {
 
   return (
     <>
-      <StepHeader title={t('REVIEW_MEMBER_TITLE')} />
+      <StepHeader title={t('CONTRIBUTION')} />
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
@@ -88,38 +88,58 @@ const Review = (props) => {
       <Grid container>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">
-            {t('NEW_MEMBER')}
+            {t(
+              values?.member?.is_member ? 'REVIEW_PERSONAL_DATA' : 'NEW_MEMBER'
+            )}
           </Typography>
           <ReviewField label={'NIF'} value={values?.member?.vat} />
-          {values?.member?.isphisical ? (
+
+          {values?.member?.is_member && (
             <>
+              <ReviewField
+                label={t('NUMERO_SOCI')}
+                value={`${values?.member?.number}`}
+              />
               <ReviewField
                 label={t('NAME')}
-                value={`${values?.member?.name} ${values?.member?.surname1} ${values?.member?.surname2}`}
-              />
-            </>
-          ) : (
-            <>
-              <ReviewField
-                label={t('LEGAL_NAME')}
-                value={values?.member?.name}
-              />
-              <ReviewField
-                label={t('PROXY')}
-                value={`${values?.member.proxyname} (${values?.member?.proxynif})`}
+                value={`${values?.member?.full_name}`}
               />
             </>
           )}
-          <ReviewField
-            label={t('ADDRESS')}
-            value={`${values?.member?.address}, ${values?.member?.number} ${
-              values?.member?.floor || ''
-            } ${values?.member?.door || ''}`}
-          />
-          <ReviewField
-            label={t('CITY')}
-            value={`${values?.member?.city.name} (${values?.member?.postal_code}) ${values?.member?.state.name}`}
-          />
+
+          {!values?.member?.is_member && (
+            <>
+              {values?.member?.isphisical ? (
+                <>
+                  <ReviewField
+                    label={t('NAME')}
+                    value={`${values?.member?.name} ${values?.member?.surname1} ${values?.member?.surname2}`}
+                  />
+                </>
+              ) : (
+                <>
+                  <ReviewField
+                    label={t('LEGAL_NAME')}
+                    value={values?.member?.name}
+                  />
+                  <ReviewField
+                    label={t('PROXY')}
+                    value={`${values?.member.proxyname} (${values?.member?.proxynif})`}
+                  />
+                </>
+              )}
+              <ReviewField
+                label={t('ADDRESS')}
+                value={`${values?.member?.address}, ${values?.member?.number} ${
+                  values?.member?.floor || ''
+                } ${values?.member?.door || ''}`}
+              />
+              <ReviewField
+                label={t('CITY')}
+                value={`${values?.member?.city.name} (${values?.member?.postal_code}) ${values?.member?.state.name}`}
+              />
+            </>
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">
@@ -132,33 +152,60 @@ const Review = (props) => {
             value={languages[values?.member?.language]}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
           <ReviewField
-            label={t('PAYMENT_METHOD')}
-            value={t(values?.payment?.payment_method.toUpperCase())}
+            label={t('CONTRIBUTION_AMOUNT')}
+            value={`${new Intl.NumberFormat('ca').format(
+              values?.payment?.amount
+            )} €`}
           />
-          {values?.payment?.payment_method === 'iban' && (
-            <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+          {!values?.member?.is_member && (
+            <>
+              <ReviewField
+                label={t('CONTRIBUTION_NEW_MEMBER_CONTRIB')}
+                value={`${new Intl.NumberFormat('ca').format(
+                  NEW_MEMBER_CONTRIB_AMOUNT
+                )} €`}
+              />
+              <ReviewField
+                label={t('CONTRIBUTION_TOTAL_AMOUNT')}
+                value={`${new Intl.NumberFormat('ca').format(
+                  parseInt(NEW_MEMBER_CONTRIB_AMOUNT) +
+                    parseInt(values?.payment?.amount)
+                )} €`}
+              />
+            </>
           )}
+
+          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+
           <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
       </Grid>
 
-      <Box mt={2}>
+      <Box mt={2} mb={1}>
         <FormControlLabel
           control={
             <Checkbox
-              name="terms_accepted"
-              onClick={handleClick}
-              checked={values.terms_accepted}
+              checked={values?.terms_accepted}
+              onClick={handleClickTerms}
               color="primary"
+              value={true}
             />
           }
-          label={t('ACCEPT_TERMS')}
+          label={
+            <label
+              dangerouslySetInnerHTML={{
+                __html: t('CONTRIBUTION_GENERAL_TERMS', {
+                  url: t('CONTRIBUTION_GENERAL_TERMS_URL')
+                })
+              }}
+            />
+          }
         />
       </Box>
     </>

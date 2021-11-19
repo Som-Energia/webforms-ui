@@ -309,3 +309,18 @@ export const getMunicipisByPostalCode = async (postalCode) => {
   const responses = await axios.all(municipis)
   return responses.filter((item) => item?.state).map((item) => item?.data)
 }
+
+export const contribution = async (data) => {
+  var formData = new FormData()
+  for (var key in data) {
+    formData.append(key, data[key])
+  }
+
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}/form/inversio`,
+    data: formData
+  }).then((response) => {
+    return response?.data
+  })
+}

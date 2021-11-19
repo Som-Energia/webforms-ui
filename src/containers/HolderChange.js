@@ -137,9 +137,12 @@ function HolderChange(props) {
             .oneOf([true], t('PROXY_NIF_PHISICAL'))
         }),
         address: Yup.string().required(t('NO_ADDRESS')),
+        number: Yup.string().required(t('NO_NUMBER')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE')),
+          .required(t('NO_POSTALCODE'))
+          .min(5, t('NO_POSTALCODE'))
+          .max(5, t('NO_POSTALCODE')),
         state: Yup.object().shape({
           id: Yup.number().required(t('NO_STATE'))
         }),
@@ -155,6 +158,7 @@ function HolderChange(props) {
           }
         ),
         phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
+        phone2: Yup.string().min(9, t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
       legal_person_accepted: Yup.bool().test({
@@ -322,6 +326,9 @@ function HolderChange(props) {
       proxyname: '',
       name: '',
       address: '',
+      number: '',
+      floor: '',
+      door: '',
       postal_code: '',
       surname1: '',
       surname2: '',
