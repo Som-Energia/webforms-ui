@@ -525,8 +525,26 @@ const Contract = (props) => {
   const maxStepNumber = steps.length
 
   const getActiveStep = (props) => {
-    const step = steps[activeStep]
-    return step !== undefined ? React.cloneElement(step, { ...props }) : <></>
+    const url = t('DATA_PROTECTION_CONTRACT_URL')
+    return (
+      <>
+        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} />}
+        {(showAllSteps || activeStep === 1) && <CUPS {...props} />}
+        {(showAllSteps || activeStep === 2) && <SupplyPoint {...props} />}
+        {(showAllSteps || activeStep === 3) && (
+          <PowerFare rates={rates} {...props} />
+        )}
+        {(showAllSteps || activeStep === 4) && <SelfConsumption {...props} />}
+        {(showAllSteps || activeStep === 5) && <SelfConsumptionDetails {...props} />}
+        {(showAllSteps || activeStep === 6) && <HolderIdentifier {...props} />}
+        {(showAllSteps || activeStep === 7) && (
+          <PersonalData url={url} {...props} />
+        )}
+        {(showAllSteps || activeStep === 8) && <VoluntaryCent {...props} />}
+        {(showAllSteps || activeStep === 9) && <IBAN {...props} />}
+        {(showAllSteps || activeStep === 10) && <Review {...props} />}
+      </>
+    )
   }
 
   useEffect(() => {
