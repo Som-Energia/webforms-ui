@@ -141,7 +141,8 @@ const Contract = (props) => {
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE'))
-          .min(5, t('NO_POSTALCODE')),
+          .min(5, t('NO_POSTALCODE'))
+          .max(5, t('NO_POSTALCODE')),
         state: Yup.object().shape({
           id: Yup.number().required(t('NO_STATE'))
         }),
@@ -463,6 +464,7 @@ const Contract = (props) => {
             return this.parent.email === this.parent.email2
           }),
         phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
+        phone2: Yup.string().min(9, t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
       legal_person_accepted: Yup.bool().test({
@@ -606,6 +608,9 @@ const Contract = (props) => {
       proxyname: '',
       name: '',
       address: '',
+      number: '',
+      floor: '',
+      door: '',
       postal_code: '',
       state: { id: '' },
       city: { id: '' },

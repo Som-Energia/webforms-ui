@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: 'Roboto', sans-serif;
   background: transparent;
   color: #4d4d4d;
@@ -6,15 +7,15 @@ html, body {
   height: 100%;
 }
 
-#root input[type="text"],
-#root input[type="password"],
-#root input[type="search"],
-#root input[type="email"],
-#root input[type="url"],
-#root input[type="tel"],
-#root input[type="number"],
-#root input[type="range"],
-#root input[type="date"],
+#root input[type='text'],
+#root input[type='password'],
+#root input[type='search'],
+#root input[type='email'],
+#root input[type='url'],
+#root input[type='tel'],
+#root input[type='number'],
+#root input[type='range'],
+#root input[type='date'],
 #root textarea {
   border: 0 !important;
   -webkit-border-radius: 3px;
@@ -35,7 +36,7 @@ html, body {
 #root {
   font-family: 'Roboto', sans-serif;
   background: transparent;
-  color:#747474;
+  color: #747474;
   font-size: 16px;
 }
 
@@ -80,7 +81,7 @@ StepHeader Component
 */
 
 .header {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .header__text {
@@ -111,7 +112,7 @@ StepHeader Component
 }
 
 .ov-theme .header__container {
-  background-color: rgba(150, 182, 51, 0.90);
+  background-color: rgba(150, 182, 51, 0.9);
   margin-left: -32px;
   min-width: 0%;
   padding: 8px 8px 8px 32px;

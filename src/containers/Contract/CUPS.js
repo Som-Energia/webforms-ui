@@ -49,7 +49,8 @@ const CUPS = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldTouched
+    setFieldTouched,
+    setFields
   } = props
   const [isLoading, setLoading] = useState(false)
 
@@ -73,16 +74,9 @@ const CUPS = (props) => {
       },
       false
     )
-
-    setFieldValue(
-      'holder.previous_holder',
-      option === false ? false : '',
-      false
-    )
-
-    option === false &&
-      setFieldValue('self_consumption.have_installation', false, false)
-
+    option === false
+      ? setFieldValue('holder.previous_holder', false, false)
+      : setFieldValue('holder.previous_holder', '', false)
     setFieldValue('contract.has_service', option)
   }
 
@@ -117,7 +111,7 @@ const CUPS = (props) => {
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('FILL_CUPS') }}
       />
-      <Box mt={1} mb={2}>
+      <Box mt={1} mb={1}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField

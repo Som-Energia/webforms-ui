@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
+import Alert from '@material-ui/lab/Alert'
 import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -98,6 +99,7 @@ const PowerFare = (props) => {
           )}
           onChange={handleChangeChooser}
           value={values?.contract?.moreThan15Kw}
+          canBeEmpty={false}
           options={[
             {
               value: false,
@@ -110,41 +112,59 @@ const PowerFare = (props) => {
           ]}
         />
       </Box>
-      <Box mt={3}>
-        <Typography
-          variant="body1"
-          dangerouslySetInnerHTML={{
-            __html: t(
-              values?.contract?.moreThan15Kw
-                ? values?.contract?.has_service
-                  ? 'HELP_MORE_THAN_15KW_HAS_SERVICE'
-                  : 'HELP_MORE_THAN_15KW_HASNOT_SERVICE'
-                : values?.contract?.has_service
-                ? 'HELP_LESS_THAN_15KW_HAS_SERVICE'
-                : 'HELP_LESS_THAN_15KW'
-            )
-          }}
-        />
-        <FormHelperText
-          dangerouslySetInnerHTML={{
-            __html: t('POWER_PERIODS_MORE_INFO', {
-              tariff: values?.contract?.rate,
-              url: values?.contract?.moreThan15Kw
-                ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
-                : t('POWER_PERIODS_20TD_MORE_INFO_URL')
-            })
-          }}></FormHelperText>
-      </Box>
-      <Box mt={2} mb={1}>
-        <PowerInputs
-          namePrefix="contract"
-          numInputs={rates[values?.contract?.rate]?.num_power_periods}
-          {...props}
-          values={values?.contract}
-          errors={errors?.contract}
-          touched={touched?.contract}
-        />
-      </Box>
+      {values?.contract?.moreThan15Kw && (
+        <>
+          <Box mt={3}>
+            <Alert severity="warning">
+              <Typography
+                variant="body1"
+                dangerouslySetInnerHTML={{
+                  __html: t('TARIFF_NOT_AVAILABLE')
+                }}
+              />
+            </Alert>
+          </Box>
+        </>
+      )}
+      {!values?.contract?.moreThan15Kw && (
+        <>
+          <Box mt={3}>
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  values?.contract?.moreThan15Kw
+                    ? values?.contract?.has_service
+                      ? 'HELP_MORE_THAN_15KW_HAS_SERVICE'
+                      : 'HELP_MORE_THAN_15KW_HASNOT_SERVICE'
+                    : values?.contract?.has_service
+                    ? 'HELP_LESS_THAN_15KW_HAS_SERVICE'
+                    : 'HELP_LESS_THAN_15KW'
+                )
+              }}
+            />
+            <FormHelperText
+              dangerouslySetInnerHTML={{
+                __html: t('POWER_PERIODS_MORE_INFO', {
+                  tariff: values?.contract?.rate,
+                  url: values?.contract?.moreThan15Kw
+                    ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
+                    : t('POWER_PERIODS_20TD_MORE_INFO_URL')
+                })
+              }}></FormHelperText>
+          </Box>
+          <Box mt={2} mb={1}>
+            <PowerInputs
+              namePrefix="contract"
+              numInputs={rates[values?.contract?.rate]?.num_power_periods}
+              {...props}
+              values={values?.contract}
+              errors={errors?.contract}
+              touched={touched?.contract}
+            />
+          </Box>
+        </>
+      )}
     </>
   )
 }

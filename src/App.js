@@ -7,7 +7,7 @@ import {
   makeStyles
 } from '@material-ui/core/styles'
 
-import CssBaseline from '@material-ui/core/CssBaseline'
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline'
 
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
@@ -63,7 +63,8 @@ const App = (props) => {
       typeof d1 === 'string' && d1 !== '' ? JSON.parse(d1) : undefined
     const cupsData =
       typeof cups === 'string' && cups !== '' ? JSON.parse(cups) : undefined
-    const templateData = d1Data || cupsData ? {...d1Data, ...cupsData} : undefined
+    const templateData =
+      d1Data || cupsData ? { ...d1Data, ...cupsData } : undefined
     return <D1Detail {...props} templateProps={templateData} />
   }
 
@@ -82,6 +83,26 @@ const App = (props) => {
     return <Home {...props} />
   }
 
+  const loadTariff = (compProps) => {
+    const Tariff = lazy(() => import('./containers/Tariff'))
+    return <Tariff {...props} {...compProps} />
+  }
+
+  const loadCancellation = (compProps) => {
+    const Cancellation = lazy(() => import('./containers/Cancellation'))
+    const contractData =
+      typeof props.contract === 'string' && props.contract !== ''
+        ? JSON.parse(props.contract)
+        : []
+
+    return <Cancellation {...props} {...compProps} contract={contractData} />
+  }
+
+  const loadContribution = (compProps) => {
+    const Contribution = lazy(() => import('./containers/Contribution'))
+    return <Contribution {...props} {...compProps} />
+  }
+
   const loadMailSubscriptions = (props) => {
     const MailSubscriptions = lazy(() =>
       import('./containers/MailSubscriptions')
@@ -97,108 +118,152 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className={classes.root}>
-        <Suspense fallback={<Loading />}>
-          <Router>
-            <Switch>
-              <Route exact path="/" render={loadHome} />
+      <ScopedCssBaseline>
+        <div className={classes.root}>
+          <Suspense fallback={<Loading />}>
+            <Router>
+              <Switch>
+                <Route exact path="/" render={loadHome} />
 
-              <Route
-                exact
-                path="/modify-contract"
-                render={loadModifyContract}
-              />
-              <Route
-                path="/:language/contract/modification/"
-                render={loadModifyContract}
-              />
+                <Route
+                  exact
+                  path="/modify-contract"
+                  render={loadModifyContract}
+                />
+                <Route
+                  path="/:language/contract/modification/"
+                  render={loadModifyContract}
+                />
 
-              <Route
-                path="/holder-change"
-                component={lazy(() => import('./containers/HolderChange'))}
-              />
-              <Route
-                path="/:language/change-ownership/"
-                component={lazy(() => import('./containers/HolderChange'))}
-              />
+                <Route
+                  path="/holder-change"
+                  component={lazy(() => import('./containers/HolderChange'))}
+                />
+                <Route
+                  path="/:language/change-ownership/"
+                  component={lazy(() => import('./containers/HolderChange'))}
+                />
 
-              <Route
-                exact
-                path="/contract"
-                component={lazy(() => import('./containers/Contract'))}
-              />
-              <Route
-                path="/:language/contracta-la-llum/"
-                component={lazy(() => import('./containers/Contract'))}
-              />
-              <Route
-                path="/:language/contrata-la-luz/"
-                component={lazy(() => import('./containers/Contract'))}
-              />
-              <Route
-                path="/:language/kontrata-ezazu-argia/"
-                component={lazy(() => import('./containers/Contract'))}
-              />
-              <Route
-                path="/:language/contrata-a-luz/"
-                component={lazy(() => import('./containers/Contract'))}
-              />
+                <Route
+                  exact
+                  path="/contract"
+                  component={lazy(() => import('./containers/Contract'))}
+                />
+                <Route
+                  path="/:language/contracta-la-llum/"
+                  component={lazy(() => import('./containers/Contract'))}
+                />
+                <Route
+                  path="/:language/contrata-la-luz/"
+                  component={lazy(() => import('./containers/Contract'))}
+                />
+                <Route
+                  path="/:language/kontrata-ezazu-argia/"
+                  component={lazy(() => import('./containers/Contract'))}
+                />
+                <Route
+                  path="/:language/contrata-a-luz/"
+                  component={lazy(() => import('./containers/Contract'))}
+                />
 
-              <Route
-                path="/new-member"
-                component={lazy(() => import('./containers/Member'))}
-              />
-              <Route
-                path="/:language/fes-te-n-soci-a/"
-                component={lazy(() => import('./containers/Member'))}
-              />
-              <Route
-                path="/:language/hazte-socio-a/"
-                component={lazy(() => import('./containers/Member'))}
-              />
-              <Route
-                path="/:language/izan-zaitez-bazkide/"
-                component={lazy(() => import('./containers/Member'))}
-              />
-              <Route
-                path="/:language/faite-socio-a/"
-                component={lazy(() => import('./containers/Member'))}
-              />
+                <Route
+                  path="/new-member"
+                  component={lazy(() => import('./containers/Member'))}
+                />
+                <Route
+                  path="/:language/fes-te-n-soci-a/"
+                  component={lazy(() => import('./containers/Member'))}
+                />
+                <Route
+                  path="/:language/hazte-socio-a/"
+                  component={lazy(() => import('./containers/Member'))}
+                />
+                <Route
+                  path="/:language/izan-zaitez-bazkide/"
+                  component={lazy(() => import('./containers/Member'))}
+                />
+                <Route
+                  path="/:language/faite-socio-a/"
+                  component={lazy(() => import('./containers/Member'))}
+                />
 
-              <Route
-                path="/somsolet"
-                component={lazy(() => import('./containers/SomSolet'))}
-              />
-              <Route
-                path="/:language/collective-purchases/"
-                component={lazy(() => import('./containers/SomSolet'))}
-              />
+                <Route
+                  path="/somsolet"
+                  component={lazy(() => import('./containers/SomSolet'))}
+                />
+                <Route
+                  path="/:language/collective-purchases/"
+                  component={lazy(() => import('./containers/SomSolet'))}
+                />
 
-              <Route path="/d1-detail" render={loadD1Detail} />
-              <Route path="/:language/d1-detail" render={loadD1Detail} />
+                <Route path="/d1-detail" render={loadD1Detail} />
+                <Route path="/:language/d1-detail" render={loadD1Detail} />
 
-              <Route
-                path="/:language/pagament-realitzat"
-                render={loadSuccess}
-              />
-              <Route path="/:language/pago-realizado" render={loadSuccess} />
+                <Route
+                  path="/:language/pagament-realitzat"
+                  render={loadSuccess}
+                />
+                <Route path="/:language/pago-realizado" render={loadSuccess} />
 
-              <Route
-                path="/:language/pagament-cancellat"
-                render={loadFailure}
-              />
-              <Route path="/:language/pago-cancelado" render={loadFailure} />
+                <Route
+                  path="/:language/pagament-cancellat"
+                  render={loadFailure}
+                />
+                <Route path="/:language/pago-cancelado" render={loadFailure} />
 
-              <Route
-                path="/:language/mail-subscriptions"
-                render={loadMailSubscriptions}
-              />
-            </Switch>
-          </Router>
-        </Suspense>
-        <ApiStatus />
-      </div>
+                <Route
+                  path="/:language/mail-subscriptions"
+                  render={loadMailSubscriptions}
+                />
+
+                <Route path="/cancellation" render={loadCancellation} />
+                <Route path="/:language/cancel" render={loadCancellation} />
+
+                <Route path="/contribution" render={loadContribution} />
+                <Route
+                  path="/:language/contribution"
+                  render={loadContribution}
+                />
+                <Route
+                  path="/:language/produeix-energia-renovable/aporta-al-capital-social"
+                  render={loadContribution}
+                />
+                <Route
+                  path="/:language/produce-energia-renovable/aporta-al-capital-social"
+                  render={loadContribution}
+                />
+                <Route
+                  path="/:language/produce-energia-renovable/egin-zure-ekarpena-kapital-sozialean"
+                  render={loadContribution}
+                />
+                <Route
+                  path="/:language/produce-energia-renovable/achegar-ao-capital-social"
+                  render={loadContribution}
+                />
+
+                <Route exact path="/tariff" render={loadTariff} />
+                <Route
+                  path="/:language/tarifes-d-electricitat"
+                  render={loadTariff}
+                />
+                <Route
+                  path="/:language/tarifas-de-electricidad"
+                  render={loadTariff}
+                />
+                <Route
+                  path="/:language/elektrizitate-tarifak"
+                  render={loadTariff}
+                />
+                <Route
+                  path="/:language/tarifas-de-electricidade"
+                  render={loadTariff}
+                />
+              </Switch>
+            </Router>
+          </Suspense>
+          <ApiStatus />
+        </div>
+      </ScopedCssBaseline>
     </ThemeProvider>
   )
 }

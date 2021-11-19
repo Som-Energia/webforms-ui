@@ -72,18 +72,17 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Chooser = (props) => {
+  const classes = useStyles()
   const {
     question,
     options,
     onChange,
     value,
     disabled,
-    className,
     name,
     condensed = false,
     canBeEmpty = true
   } = props
-  const classes = { ...useStyles(), ...className }
   const [selectedOption, setSelectedOption] = useState(value)
 
   const handleClick = (event, value) => {
@@ -98,7 +97,7 @@ const Chooser = (props) => {
   }
 
   return (
-    <div className={className}>
+    <>
       <Typography
         variant="h6"
         className={classes.title}
@@ -145,7 +144,7 @@ const Chooser = (props) => {
           ))}
         </Grid>
       </RadioGroup>
-    </div>
+    </>
   )
 }
 

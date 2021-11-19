@@ -37,7 +37,7 @@ function VAT(props) {
         <VATField
           id="vat"
           name="holder.vat"
-          label={t('VAT_LABEL')}
+          label={t('VAT_HOLDERCHANGE_LABEL')}
           variant="outlined"
           fullWidth
           required

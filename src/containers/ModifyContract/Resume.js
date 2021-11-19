@@ -165,24 +165,25 @@ export default function ModifyResume({
           </Grid>
         </Box>
       )}
-
-      <Box mt={2} mx={1}>
-        <Typography
-          className={classes.resumeLabel}
-          variant="subtitle2"
-          gutterBottom>
-          {t('FARE')}
-        </Typography>
-        <Grid container spacing={4}>
-          {params.modify?.tariff && (
-            <Grid item>
-              <Typography data-cy="tariff" variant="body1" gutterBottom>
-                {params.modify?.tariff}
-              </Typography>
-            </Grid>
-          )}
-        </Grid>
-      </Box>
+      { params.modify?.changePower &&
+        <Box mt={2} mx={1}>
+          <Typography
+            className={classes.resumeLabel}
+            variant="subtitle2"
+            gutterBottom>
+            {t('FARE')}
+          </Typography>
+          <Grid container spacing={4}>
+            { params.modify?.tariff && (
+              <Grid item>
+                <Typography data-cy="tariff" variant="body1" gutterBottom>
+                  {params.modify?.tariff}
+                </Typography>
+              </Grid>
+            )}
+          </Grid>
+        </Box>
+      }
 
       <Box mt={2} mb={3} mx={1}>
         <Typography
