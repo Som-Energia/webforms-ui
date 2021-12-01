@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { modifyContract } from '../../services/api'
-import { normalizeModifyData } from '../../services/utils'
-
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
@@ -165,7 +162,7 @@ export default function ModifyResume({
           </Grid>
         </Box>
       )}
-      { params.modify?.changePower &&
+      {params.modify?.changePower && (
         <Box mt={2} mx={1}>
           <Typography
             className={classes.resumeLabel}
@@ -174,7 +171,7 @@ export default function ModifyResume({
             {t('FARE')}
           </Typography>
           <Grid container spacing={4}>
-            { params.modify?.tariff && (
+            {params.modify?.tariff && (
               <Grid item>
                 <Typography data-cy="tariff" variant="body1" gutterBottom>
                   {params.modify?.tariff}
@@ -183,7 +180,7 @@ export default function ModifyResume({
             )}
           </Grid>
         </Box>
-      }
+      )}
 
       <Box mt={2} mb={3} mx={1}>
         <Typography
