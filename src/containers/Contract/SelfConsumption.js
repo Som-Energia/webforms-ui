@@ -15,7 +15,7 @@ const SelfConsumption = (props) => {
   const { t } = useTranslation()
 
   const handleChange = ({ option }) => {
-    props.setFieldValue('self_consumption', { have_installation: option })
+    props.setFieldValue('self_consumption.have_installation', option)
     props.validateForm()
   }
 
@@ -50,15 +50,14 @@ const SelfConsumption = (props) => {
             }
           ]}
         />
-        {
-          props.values.self_consumption.have_installation &&
+        {props.values.self_consumption.have_installation && (
           <Box mt={3} mb={0}>
             <Typography
               variant="body1"
               dangerouslySetInnerHTML={{ __html: t('SELFCONSUMPTION_WARNING') }}
             />
           </Box>
-        }
+        )}
       </Box>
     </>
   )
