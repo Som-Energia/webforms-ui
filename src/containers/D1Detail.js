@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -126,7 +126,7 @@ function D1Detail(props) {
         }
       default:
         return (
-          <Redirect
+          <Navigate
             to={{
               pathname: `/${props.match.params.language}/contract/modification`,
               state: { d1CaseData: data }
