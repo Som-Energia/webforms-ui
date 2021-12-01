@@ -16,7 +16,6 @@ const SelfConsumption = (props) => {
 
   const handleChange = ({ option }) => {
     props.setFieldValue('self_consumption.have_installation', option)
-    props.validateForm()
   }
 
   return (
