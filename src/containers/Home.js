@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import preval from 'preval.macro'
 
 import AppBar from '@material-ui/core/AppBar'
@@ -55,7 +55,7 @@ const options = [
 const Home = (props) => {
   const { version } = props
   const classes = useStyles()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
 
@@ -77,7 +77,7 @@ const Home = (props) => {
             key={option.href}
             className={classes.formPaper}
             onClick={() => {
-              history.push(option.href)
+              navigate(option.href)
             }}>
             <Typography variant="h6">{option.title}</Typography>
             <ArrowForwardIosIcon />

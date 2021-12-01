@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 
@@ -203,7 +203,7 @@ function ModifyContract(props) {
                   <span className={classes.stepLabel}>{t(label)}</span>
                 </StepLabel>
                 <StepContent>
-                  <Redirect
+                  <Navigate
                     to={{
                       pathname: `/${props.match.params.language}/d1-detail`,
                       state: { d1CaseData: d1CaseData }
