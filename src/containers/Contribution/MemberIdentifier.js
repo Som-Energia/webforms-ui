@@ -33,7 +33,6 @@ const MemberIdentifier = (props) => {
   const {
     values,
     handleBlur,
-    handleChange,
     errors,
     touched,
     setFieldValue,
@@ -47,7 +46,7 @@ const MemberIdentifier = (props) => {
   }
 
   const onChangeVAT = (params) => {
-    const { vat, isPhisical, valid, exists } = params
+    const { vat, isPhisical, valid } = params
     setFieldValue('member.isphisical', isPhisical, false)
     setFieldValue('member.vatvalid', valid, false)
     setFieldValue('member.exists', false, false)
