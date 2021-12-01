@@ -99,7 +99,6 @@ const PowerFare = (props) => {
           )}
           onChange={handleChangeChooser}
           value={values?.contract?.moreThan15Kw}
-          canBeEmpty={false}
           options={[
             {
               value: false,

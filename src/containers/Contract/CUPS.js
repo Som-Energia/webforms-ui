@@ -49,8 +49,7 @@ const CUPS = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldTouched,
-    setFields
+    setFieldTouched
   } = props
   const [isLoading, setLoading] = useState(false)
 
