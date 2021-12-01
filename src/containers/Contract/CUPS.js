@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   chooserContainer: {
     '& h6': {
       fontSize: '1rem',
-      fontWeight: 400,
+      fontWeight: 500,
       marginTop: theme.spacing(2)
     }
   }
