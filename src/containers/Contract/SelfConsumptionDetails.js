@@ -345,11 +345,11 @@ export default SelfConsumptionDetails
 
 const useStyles = makeStyles((theme) => ({
   fieldTitle: {
+    fontWeight: 500,
     marginBottom: theme.spacing(2)
   },
   chooserQuestion: {
     '& h6': {
-      fontWeight: 400,
       marginBottom: theme.spacing(0)
     },
     '& > div': {
