@@ -4,8 +4,6 @@ import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
-import DisplayFormikState from '../../components/DisplayFormikState'
-
 import Badge from '@material-ui/core/Badge'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
