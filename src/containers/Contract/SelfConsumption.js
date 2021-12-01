@@ -28,6 +28,7 @@ const SelfConsumption = (props) => {
           question={t('SELFCONSUMPTION_QUESTION')}
           onChange={handleChange}
           value={props.values.self_consumption.have_installation}
+          canBeEmpty={false}
           options={[
             {
               value: true,
