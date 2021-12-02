@@ -206,7 +206,7 @@ function ModifyContract(props) {
                 <StepContent>
                   <Navigate
                     to={{
-                      pathname: `/${props.match.params.language}/d1-detail`,
+                      pathname: `/${params.language}/d1-detail`,
                       state: { d1CaseData: d1CaseData }
                     }}
                   />

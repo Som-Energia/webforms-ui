@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 function HolderChange(props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+  const { language } = useParams()
 
   // const [showAll, setShowAll] = useState(false)
   const [showInspector, setShowInspector] = useState(false)
@@ -247,9 +249,8 @@ function HolderChange(props) {
   }
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
   const nextStep = (props) => {
     const next = activeStep + 1

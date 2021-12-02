@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
@@ -25,8 +26,12 @@ import ContactDialog from '../containers/SomSolet/ContactDialog'
 import IncidenceDialog from '../containers/SomSolet/IncidenceDialog'
 
 // services
-import { getCampaign, getProject, sendContact, sendIncidence } from '../services/somsolet/api'
-import i18next from 'i18next'
+import {
+  getCampaign,
+  getProject,
+  sendContact,
+  sendIncidence
+} from '../services/somsolet/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -130,8 +135,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     fontWeight: 500,
     color: '#fff',
-    '&:hover': {
-    },
+    '&:hover': {},
     '& div': {
       display: 'flex',
       alignItems: 'center'
@@ -210,66 +214,68 @@ const OptionField = ({ label, value }) => {
 }
 
 const PhaseInfo = ({ data }) => {
-  return (
-    Object.entries(data)
-      .map(([label, value]) => {
-        switch (label) {
-          case 'file':
-            return <OptionField
-              key={label}
-              label={''}
-              value={
-                <Button
-                  size="small"
-                  variant='contained'
-                  color='primary'
-                  target='_blank'
-                  href={value}
-                >
-                    Descarrega
-                </Button>
-              }
-            />
-          case 'action':
-            return <OptionField
-              key={label}
-              label={''}
-              value={
-                <Button
-                  size="small"
-                  variant='contained'
-                  color='primary'
-                  target='_blank'
-                  href={value}
-                >
-                  Som-hi!
-                </Button>
-              }
-            />
-          case 'date':
-            return <OptionField key={label} label={'Data'} value={value} />
-          default:
-            if (`${value}`.match('https:')) {
-              return <OptionField
-                key={label}
-                label={''}
-                value={
-                  <Button
-                    size="small"
-                    variant='contained'
-                    color='primary'
-                    target='_blank'
-                    href={value}
-                  >
-                    { label }
-                  </Button>
-                }
-              />
+  return Object.entries(data).map(([label, value]) => {
+    switch (label) {
+      case 'file':
+        return (
+          <OptionField
+            key={label}
+            label={''}
+            value={
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                target="_blank"
+                href={value}>
+                Descarrega
+              </Button>
             }
-            return <OptionField key={label} label={label} value={value ? 'Sí' : 'No'} />
+          />
+        )
+      case 'action':
+        return (
+          <OptionField
+            key={label}
+            label={''}
+            value={
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                target="_blank"
+                href={value}>
+                Som-hi!
+              </Button>
+            }
+          />
+        )
+      case 'date':
+        return <OptionField key={label} label={'Data'} value={value} />
+      default:
+        if (`${value}`.match('https:')) {
+          return (
+            <OptionField
+              key={label}
+              label={''}
+              value={
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  target="_blank"
+                  href={value}>
+                  {label}
+                </Button>
+              }
+            />
+          )
         }
-      })
-  )
+        return (
+          <OptionField key={label} label={label} value={value ? 'Sí' : 'No'} />
+        )
+    }
+  })
 }
 
 const SupplyPoint = (props) => {
@@ -279,14 +285,11 @@ const SupplyPoint = (props) => {
     Direcció: supplyPointInfo.address?.street,
     Població: `${supplyPointInfo.address?.town} (${supplyPointInfo.address?.municipality})`,
     'Potència contractada': `${supplyPointInfo.power} kW`,
-    'Tarifa d\'accès': supplyPointInfo.tariff
+    "Tarifa d'accès": supplyPointInfo.tariff
   }
-  return (
-    Object.entries(supplypoint)
-      .map(([label, value]) => (
-        <OptionField key={label} label={label} value={value} />
-      ))
-  )
+  return Object.entries(supplypoint).map(([label, value]) => (
+    <OptionField key={label} label={label} value={value} />
+  ))
 }
 
 const Project = (props) => {
@@ -296,12 +299,9 @@ const Project = (props) => {
     Campanya: projectInfo.campaign,
     'Data inici': projectInfo.dateStart
   }
-  return (
-    Object.entries(project)
-      .map(([label, value]) => (
-        <OptionField key={label} label={label} value={value} />
-      ))
-  )
+  return Object.entries(project).map(([label, value]) => (
+    <OptionField key={label} label={label} value={value} />
+  ))
 }
 
 const RegisteredPerson = (props) => {
@@ -312,12 +312,9 @@ const RegisteredPerson = (props) => {
     Telèfon: registeredPersonInfo.phoneNumber,
     Idioma: registeredPersonInfo.language
   }
-  return (
-    Object.entries(registeredPerson)
-      .map(([label, value]) => (
-        <OptionField key={label} label={label} value={value} />
-      ))
-  )
+  return Object.entries(registeredPerson).map(([label, value]) => (
+    <OptionField key={label} label={label} value={value} />
+  ))
 }
 
 const Preregistration = (props) => {
@@ -326,12 +323,9 @@ const Preregistration = (props) => {
     Data: preregistrationInfo.date,
     Pagat: preregistrationInfo.paid ? 'Sí' : 'No'
   }
-  return (
-    Object.entries(preregisrtation)
-      .map(([label, value]) => (
-        <OptionField key={label} label={label} value={value} />
-      ))
-  )
+  return Object.entries(preregisrtation).map(([label, value]) => (
+    <OptionField key={label} label={label} value={value} />
+  ))
 }
 
 const Registered = (props) => {
@@ -339,17 +333,15 @@ const Registered = (props) => {
   const registered = {
     Data: registeredInfo.date
   }
-  return (
-    Object.entries(registered)
-      .map(([label, value]) => (
-        <OptionField key={label} label={label} value={value} />
-      ))
-  )
+  return Object.entries(registered).map(([label, value]) => (
+    <OptionField key={label} label={label} value={value} />
+  ))
 }
 
 const SomSolet = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+  const { language } = useParams()
 
   const [stages, setStages] = useState([])
   const [campaign, setCampaign] = useState([])
@@ -369,15 +361,14 @@ const SomSolet = (props) => {
   let afterCurrent = false
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
   useEffect(() => {
     setIsLoadingProject(true)
     console.log('getProject')
-    getProject({ dni: '', language: props.match.params.language }) // TODO: find vat from OV
-      .then(response => {
+    getProject({ dni: '', language: language }) // TODO: find vat from OV
+      .then((response) => {
         const projectInfo = response[0] // TODO: to check
         console.log('projectInfo', projectInfo)
         const projectDescription = projectInfo.description
@@ -392,7 +383,8 @@ const SomSolet = (props) => {
         setActivePhase(projectDescription?.stageId)
         console.log(projectDescription?.stageId)
         setIsLoadingProject(false)
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log(error)
         setIsLoadingProject(false)
       })
@@ -401,11 +393,12 @@ const SomSolet = (props) => {
   useEffect(() => {
     setIsLoadingCampaign(true)
     getCampaign()
-      .then(response => {
+      .then((response) => {
         const campaign = response[0] // TODO: to check
         setCampaign(campaign)
         setIsLoadingCampaign(false)
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log(error)
         setIsLoadingCampaign(false)
       })
@@ -418,7 +411,9 @@ const SomSolet = (props) => {
       const prevIndexPhase = indexPhase - 1
       const nextIndexPhase = indexPhase + 1
       setPrevPhase(prevIndexPhase >= 0 ? stages[prevIndexPhase]?.id : false)
-      setNextPhase(nextIndexPhase <= stages.length ? stages[nextIndexPhase]?.id : false)
+      setNextPhase(
+        nextIndexPhase <= stages.length ? stages[nextIndexPhase]?.id : false
+      )
     }
   }, [activePhase, stages])
 
@@ -441,17 +436,16 @@ const SomSolet = (props) => {
 
   const getProjectList = (projectDescription) => {
     const project = []
-    Object.entries(projectDescription)
-      .map(([key, value]) => {
-        const content = getOptionContent(key, value)
-        const title = getOptionTitle(key)
-        const info = {
-          id: key,
-          title: title,
-          content: content
-        }
-        project.push(info)
-      })
+    Object.entries(projectDescription).map(([key, value]) => {
+      const content = getOptionContent(key, value)
+      const title = getOptionTitle(key)
+      const info = {
+        id: key,
+        title: title,
+        content: content
+      }
+      project.push(info)
+    })
     return project
   }
 
@@ -476,15 +470,15 @@ const SomSolet = (props) => {
   const getOptionContent = (key, value) => {
     switch (key) {
       case 'supplyPoint':
-        return <SupplyPoint supplyPointInfo={value}/>
+        return <SupplyPoint supplyPointInfo={value} />
       case 'project':
-        return <Project projectInfo={value}/>
+        return <Project projectInfo={value} />
       case 'registeredPerson':
-        return <RegisteredPerson registeredPersonInfo={value}/>
+        return <RegisteredPerson registeredPersonInfo={value} />
       case 'preregistration':
-        return <Preregistration preregistrationInfo={value}/>
+        return <Preregistration preregistrationInfo={value} />
       case 'registered':
-        return <Registered registeredInfo={value}/>
+        return <Registered registeredInfo={value} />
       default:
         return <></>
     }
@@ -499,9 +493,9 @@ const SomSolet = (props) => {
       case 'report':
         return 'Report'
       case 'offer':
-        return 'Proposta d\'oferta final'
+        return "Proposta d'oferta final"
       case 'constructionPermit':
-        return 'Permís d\'obra'
+        return "Permís d'obra"
       case 'installation':
         return 'Instal·lació'
       case 'deliveryCertificate':
@@ -521,16 +515,18 @@ const SomSolet = (props) => {
 
   // TODO: Refactor
   const getPhaseContent = (key, value) => {
-    return <PhaseInfo data={value}/>
+    return <PhaseInfo data={value} />
   }
 
   const getPhase = (stages, phaseId, withContent = false) => {
     if (stages.length) {
       const { title, content } = stages.find(({ id }) => phaseId === id)
-      return <>
-        <h3>{title}</h3>
-        { withContent && <div> { content } </div> }
-      </>
+      return (
+        <>
+          <h3>{title}</h3>
+          {withContent && <div> {content} </div>}
+        </>
+      )
     }
   }
 
@@ -560,159 +556,196 @@ const SomSolet = (props) => {
     setOpenIncidence(false)
   }
 
-  return (
-    isLoadingCampaign || isLoadingProject
-      ? <Loading />
-      : <Container maxWidth="lg" className={classes.root}>
-        <Grid container>
-          {
-            !project || project.length === 0
-              ? <Grid item xs={12}>
-                <div className={clsx(classes.column, classes.noResultsContainer)}>
-                  <h3 className={classes.noResults}> { t('NOT_COLLECTIVE_PURCHASES') } </h3>
-                </div>
-              </Grid>
-              : <>
-                <Grid item sm={3} xs={12}>
-                  <div className={clsx(classes.column, classes.fullHeight)}>
-                    {
-                      project.map(({ title, content }, index) => (
-                        <div key={`${index}-${title}`}>
-                          <div
-                            key={`${index}-${title}`}
-                            className={clsx(classes.option, activeOption === index && classes.activeOption)}
-                            onClick={ event => { activeOption === index ? setActiveOption(false) : setActiveOption(index) }}
-                          >
-                            {
-                              activeOption === index ? <ArrowDropDownIcon fontSize="small" /> : <ArrowRightIcon fontSize="small" />
-                            }
-                            &nbsp;{title}
-                          </div>
-                          {
-                            activeOption === index &&
-                            <div className={classes.optionContent}>
-                              { content }
-                            </div>
-                          }
-                        </div>
-                      ))
-                    }
-                    <div className={classes.separator}> </div>
-
-                    <div role="button" className={classes.option} onClick={ () => setOpenContact(true) }>
-                      <div className={classes.phaseIcon}>
-                        <MailOutlinedIcon fontSize="small" />
-                      </div>
-                      <div className={classes.phaseName}>
-                        { t('CONTACT_INSTALL') }
-                      </div>
+  return isLoadingCampaign || isLoadingProject ? (
+    <Loading />
+  ) : (
+    <Container maxWidth="lg" className={classes.root}>
+      <Grid container>
+        {!project || project.length === 0 ? (
+          <Grid item xs={12}>
+            <div className={clsx(classes.column, classes.noResultsContainer)}>
+              <h3 className={classes.noResults}>
+                {' '}
+                {t('NOT_COLLECTIVE_PURCHASES')}{' '}
+              </h3>
+            </div>
+          </Grid>
+        ) : (
+          <>
+            <Grid item sm={3} xs={12}>
+              <div className={clsx(classes.column, classes.fullHeight)}>
+                {project.map(({ title, content }, index) => (
+                  <div key={`${index}-${title}`}>
+                    <div
+                      key={`${index}-${title}`}
+                      className={clsx(
+                        classes.option,
+                        activeOption === index && classes.activeOption
+                      )}
+                      onClick={(event) => {
+                        activeOption === index
+                          ? setActiveOption(false)
+                          : setActiveOption(index)
+                      }}>
+                      {activeOption === index ? (
+                        <ArrowDropDownIcon fontSize="small" />
+                      ) : (
+                        <ArrowRightIcon fontSize="small" />
+                      )}
+                      &nbsp;{title}
                     </div>
-
-                    <div role="button" className={classes.option} onClick={ () => setOpenIncidence(true) }>
-                      <div className={classes.phaseIcon}>
-                        <ReportProblemOutlinedIcon fontSize="small" />
-                      </div>
-                      <div className={classes.phaseName}>
-                        { t('NOTIFY_INCIDENCE') }
-                      </div>
-                    </div>
-
-                    <div className={classes.option}>
-                      <div className={classes.phaseIcon}>
-                        <PowerSettingsNewOutlinedIcon fontSize="small" />
-                      </div>
-                      <div className={classes.phaseName}>
-                        { t('UNSUBSCRIBE') }
-                      </div>
-                    </div>
+                    {activeOption === index && (
+                      <div className={classes.optionContent}>{content}</div>
+                    )}
                   </div>
-                </Grid>
-                <Grid item sm={6} xs={12}>
-                  <div className="">
-                    <div className={clsx(classes.column, classes.mainHeader)}>
-                      <h2> {campaign.name} </h2>
-                      <div className={classes.mainHeaderInfo}>
-                        <div> <WbSunnyOutlinedIcon fontSize="small" />
-                          &nbsp;{campaign.installations?.completed}
-                          &nbsp; { t('INSTALLATIONS') }
-                          &nbsp;<RoomOutlinedIcon fontSize="small" />
-                          &nbsp;{campaign.region?.geographicalRegion},
-                          &nbsp;{campaign.region?.autonomousCommunity}
-                        </div>
-                        <div> {campaign?.engineering && campaign.engineering.map(
-                          ({ name, address, email, phoneNumber }) =>
+                ))}
+                <div className={classes.separator}> </div>
+
+                <div
+                  role="button"
+                  className={classes.option}
+                  onClick={() => setOpenContact(true)}>
+                  <div className={classes.phaseIcon}>
+                    <MailOutlinedIcon fontSize="small" />
+                  </div>
+                  <div className={classes.phaseName}>
+                    {t('CONTACT_INSTALL')}
+                  </div>
+                </div>
+
+                <div
+                  role="button"
+                  className={classes.option}
+                  onClick={() => setOpenIncidence(true)}>
+                  <div className={classes.phaseIcon}>
+                    <ReportProblemOutlinedIcon fontSize="small" />
+                  </div>
+                  <div className={classes.phaseName}>
+                    {t('NOTIFY_INCIDENCE')}
+                  </div>
+                </div>
+
+                <div className={classes.option}>
+                  <div className={classes.phaseIcon}>
+                    <PowerSettingsNewOutlinedIcon fontSize="small" />
+                  </div>
+                  <div className={classes.phaseName}>{t('UNSUBSCRIBE')}</div>
+                </div>
+              </div>
+            </Grid>
+            <Grid item sm={6} xs={12}>
+              <div className="">
+                <div className={clsx(classes.column, classes.mainHeader)}>
+                  <h2> {campaign.name} </h2>
+                  <div className={classes.mainHeaderInfo}>
+                    <div>
+                      {' '}
+                      <WbSunnyOutlinedIcon fontSize="small" />
+                      &nbsp;{campaign.installations?.completed}
+                      &nbsp; {t('INSTALLATIONS')}
+                      &nbsp;
+                      <RoomOutlinedIcon fontSize="small" />
+                      &nbsp;{campaign.region?.geographicalRegion}, &nbsp;
+                      {campaign.region?.autonomousCommunity}
+                    </div>
+                    <div>
+                      {' '}
+                      {campaign?.engineering &&
+                        campaign.engineering.map(
+                          ({ name, address, email, phoneNumber }) => (
                             <div key={name} className={classes.engineeringInfo}>
                               &nbsp; <SettingsOutlinedIcon fontSize="small" />
-                              &nbsp; <div>
-                                <a href={`mailto:${address}`} target="_blank" rel="noopener noreferrer">{name}</a>
+                              &nbsp;{' '}
+                              <div>
+                                <a
+                                  href={`mailto:${address}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer">
+                                  {name}
+                                </a>
                                 &nbsp; ({phoneNumber})
                               </div>
                             </div>
+                          )
                         )}
-                          &nbsp;
-                        </div>
-                      </div>
+                      &nbsp;
                     </div>
-                    <div className={clsx(classes.column, classes.main)}>
-                      <div>
-                        {
-                          prevPhase &&
-                          <div
-                            className={classes.phaseTitle}
-                            onClick={(event) => setActivePhase(prevPhase)}
-                          >
-                            { getPhase(stages, prevPhase) }
-                            <UndoOutlinedIcon />
-                          </div>
-                        }
+                  </div>
+                </div>
+                <div className={clsx(classes.column, classes.main)}>
+                  <div>
+                    {prevPhase && (
+                      <div
+                        className={classes.phaseTitle}
+                        onClick={(event) => setActivePhase(prevPhase)}>
+                        {getPhase(stages, prevPhase)}
+                        <UndoOutlinedIcon />
+                      </div>
+                    )}
 
-                        <div className={classes.mainPhase}>
-                          { getPhase(stages, activePhase, true) }
-                        </div>
-                      </div>
-                      {
-                        nextPhase &&
-                        <div
-                          className={classes.phaseTitle}
-                          onClick={(event) => currentPhase === activePhase ? '' : setActivePhase(nextPhase)}
-                        >
-                          { getPhase(stages, nextPhase) }
-                          <RedoOutlinedIcon />
-                        </div>
-                      }
+                    <div className={classes.mainPhase}>
+                      {getPhase(stages, activePhase, true)}
                     </div>
                   </div>
-                </Grid>
-                <Grid item sm={3} xs={12}>
-                  <div className={classes.column}>
-                    {
-                      stages && stages.map(({ id, title }) => {
-                        const isClickable = !afterCurrent
-                        afterCurrent = afterCurrent || currentPhase === id
-                        return (
-                          <div
-                            key={id}
-                            className={clsx(classes.phase, afterCurrent && classes.futurePhase, currentPhase === id && classes.currentPhase)}
-                            onClick={(event) => isClickable && setActivePhase(id) }
-                          >
-                            <div className={classes.phaseIcon}>
-                              { afterCurrent ? <CheckBoxOutlineBlankOutlinedIcon /> : <CheckBoxOutlinedIcon /> }
-                            </div>
-                            <div className={classes.phaseName}>
-                              { title }
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
-                  </div>
-                </Grid>
-              </>
-          }
-        </Grid>
-        <ContactDialog open={openContact} handleClose={ () => setOpenContact(false) } isSending={isSending} handleSend={handleSendContact} />
-        <IncidenceDialog open={openIncidence} handleClose={ () => setOpenIncidence(false) } isSending={isSending} handleSend={handleSendIncidence} />
-      </Container>
+                  {nextPhase && (
+                    <div
+                      className={classes.phaseTitle}
+                      onClick={(event) =>
+                        currentPhase === activePhase
+                          ? ''
+                          : setActivePhase(nextPhase)
+                      }>
+                      {getPhase(stages, nextPhase)}
+                      <RedoOutlinedIcon />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Grid>
+            <Grid item sm={3} xs={12}>
+              <div className={classes.column}>
+                {stages &&
+                  stages.map(({ id, title }) => {
+                    const isClickable = !afterCurrent
+                    afterCurrent = afterCurrent || currentPhase === id
+                    return (
+                      <div
+                        key={id}
+                        className={clsx(
+                          classes.phase,
+                          afterCurrent && classes.futurePhase,
+                          currentPhase === id && classes.currentPhase
+                        )}
+                        onClick={(event) => isClickable && setActivePhase(id)}>
+                        <div className={classes.phaseIcon}>
+                          {afterCurrent ? (
+                            <CheckBoxOutlineBlankOutlinedIcon />
+                          ) : (
+                            <CheckBoxOutlinedIcon />
+                          )}
+                        </div>
+                        <div className={classes.phaseName}>{title}</div>
+                      </div>
+                    )
+                  })}
+              </div>
+            </Grid>
+          </>
+        )}
+      </Grid>
+      <ContactDialog
+        open={openContact}
+        handleClose={() => setOpenContact(false)}
+        isSending={isSending}
+        handleSend={handleSendContact}
+      />
+      <IncidenceDialog
+        open={openIncidence}
+        handleClose={() => setOpenIncidence(false)}
+        isSending={isSending}
+        handleSend={handleSendIncidence}
+      />
+    </Container>
   )
 }
 

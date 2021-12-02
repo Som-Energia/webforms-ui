@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -77,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
 const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+  const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -85,8 +87,11 @@ const Contract = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
-
   const [rates] = useState(getRates())
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [language, i18n])
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -535,7 +540,9 @@ const Contract = (props) => {
           <PowerFare rates={rates} {...props} />
         )}
         {(showAllSteps || activeStep === 4) && <SelfConsumption {...props} />}
-        {(showAllSteps || activeStep === 5) && <SelfConsumptionDetails {...props} />}
+        {(showAllSteps || activeStep === 5) && (
+          <SelfConsumptionDetails {...props} />
+        )}
         {(showAllSteps || activeStep === 6) && <HolderIdentifier {...props} />}
         {(showAllSteps || activeStep === 7) && (
           <PersonalData url={url} {...props} />
@@ -546,11 +553,6 @@ const Contract = (props) => {
       </>
     )
   }
-
-  useEffect(() => {
-    const language = props.match.params.language
-    i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
 
   const nextStep = (props) => {
     let next = activeStep + 1

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -44,6 +45,7 @@ const keyMap = {
 const Contribution = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+  const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
@@ -53,9 +55,8 @@ const Contribution = (props) => {
   const [result, setResult] = useState({})
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
   const handlers = {
     SHOW_INSPECTOR: () => {

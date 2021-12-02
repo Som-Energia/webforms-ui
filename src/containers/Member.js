@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -56,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 const Member = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+  const { language } = useParams()
 
   const formTPV = useRef(null)
 
@@ -82,74 +84,62 @@ const Member = (props) => {
         vat: Yup.string()
           .required(t('FILL_NIF'))
           .matches(/(^[A-GI-Z0-9])/, t('CIF_COMMUNITY_OWNERS')),
-        vatvalid: Yup.bool().required(t('FILL_NIF'))
+        vatvalid: Yup.bool()
+          .required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
       })
     }),
     Yup.object().shape({
       member: Yup.object().shape({
-        name: Yup.string()
-          .required(t('NO_NAME')),
-        surname1: Yup.string()
-          .when('isphisical', {
-            is: true,
-            then: Yup.string()
-              .required(t('NO_SURNAME1'))
-          }),
-        proxyname: Yup.string()
-          .when('isphisical', {
-            is: false,
-            then: Yup.string()
-              .required(t('NO_PROXY_NAME'))
-          }),
-        proxynif: Yup.string()
-          .when('isphisical', {
-            is: false,
-            then: Yup.string()
-              .required(t('NO_PROXY_NIF'))
-          }),
-        proxynif_valid: Yup.bool()
-          .when('isphisical', {
-            is: false,
-            then: Yup.bool().required(t('FILL_NIF'))
-              .oneOf([true], t('FILL_NIF'))
-          }),
-        address: Yup.string()
-          .required(t('NO_ADDRESS')),
+        name: Yup.string().required(t('NO_NAME')),
+        surname1: Yup.string().when('isphisical', {
+          is: true,
+          then: Yup.string().required(t('NO_SURNAME1'))
+        }),
+        proxyname: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NAME'))
+        }),
+        proxynif: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NIF'))
+        }),
+        proxynif_valid: Yup.bool().when('isphisical', {
+          is: false,
+          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+        }),
+        address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
           .required(t('NO_POSTALCODE')),
         state: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_STATE'))
+          id: Yup.number().required(t('NO_STATE'))
         }),
         city: Yup.object().shape({
-          id: Yup.number()
-            .required(t('NO_CITY'))
+          id: Yup.number().required(t('NO_CITY'))
         }),
-        email: Yup.string()
-          .required(t('NO_EMAIL'))
-          .email(t('NO_EMAIL')),
-        email2: Yup.string()
-          .test('repeatEmail',
-            t('NO_REPEATED_EMAIL'),
-            function () {
-              return this.parent.email === this.parent.email2
-            }),
-        phone1: Yup.string()
-          .min(9, t('NO_PHONE'))
-          .required(t('NO_PHONE')),
-        phone2: Yup.string().min(9, t('NO_PHONE')),    
+        email: Yup.string().required(t('NO_EMAIL')).email(t('NO_EMAIL')),
+        email2: Yup.string().test(
+          'repeatEmail',
+          t('NO_REPEATED_EMAIL'),
+          function () {
+            return this.parent.email === this.parent.email2
+          }
+        ),
+        phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
+        phone2: Yup.string().min(9, t('NO_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
-      legal_person_accepted: Yup.bool()
-        .test({
-          name: 'isTheMemberVat',
-          message: t('ACCEPT_LEGAL_PERSON'),
-          test: function () {
-            return !(this.parent.member.isphisical === false && this.parent.legal_person_accepted !== true)
-          }
-        }),
+      legal_person_accepted: Yup.bool().test({
+        name: 'isTheMemberVat',
+        message: t('ACCEPT_LEGAL_PERSON'),
+        test: function () {
+          return !(
+            this.parent.member.isphisical === false &&
+            this.parent.legal_person_accepted !== true
+          )
+        }
+      }),
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -159,27 +149,27 @@ const Member = (props) => {
         payment_method: Yup.string()
           .required(t('INVALID_PAYMENT_METHOD'))
           .oneOf(['iban', 'credit_card'], t('INVALID_PAYMENT_METHOD')),
-        iban: Yup.string()
-          .when('payment_method', {
-            is: 'iban',
-            then: Yup.string().required(t('IBAN_ERROR'))
-          }),
-        iban_valid: Yup.bool()
-          .when('payment_method', {
-            is: 'iban',
-            then: Yup.bool().required(t('IBAN_ERROR'))
-              .oneOf([true], t('IBAN_ERROR'))
-          }),
-        sepa_accepted: Yup.bool()
-          .when('payment_method', {
-            is: 'iban',
-            then: Yup.bool().required(t('IBAN_ERROR'))
-              .oneOf([true], t('IBAN_ERROR'))
-          })
+        iban: Yup.string().when('payment_method', {
+          is: 'iban',
+          then: Yup.string().required(t('IBAN_ERROR'))
+        }),
+        iban_valid: Yup.bool().when('payment_method', {
+          is: 'iban',
+          then: Yup.bool()
+            .required(t('IBAN_ERROR'))
+            .oneOf([true], t('IBAN_ERROR'))
+        }),
+        sepa_accepted: Yup.bool().when('payment_method', {
+          is: 'iban',
+          then: Yup.bool()
+            .required(t('IBAN_ERROR'))
+            .oneOf([true], t('IBAN_ERROR'))
+        })
       })
     }),
     Yup.object().shape({
-      terms_accepted: Yup.bool().required(t('UNACCEPTED_TERMS'))
+      terms_accepted: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
@@ -188,30 +178,27 @@ const Member = (props) => {
   const showProgress = false
 
   const getActiveStep = (props) => {
-    return <>
-      { activeStep === 0 &&
-        <VAT {...props} />
-      }
-      { activeStep === 1 &&
-        <PersonalData entity='member' {...props} />
-      }
-      { activeStep === 2 &&
-        <Payment {...props} />
-      }
-      { activeStep === 3 &&
-        <Review {...props} />
-      }
-    </>
+    return (
+      <>
+        {activeStep === 0 && <VAT {...props} />}
+        {activeStep === 1 && <PersonalData entity="member" {...props} />}
+        {activeStep === 2 && <Payment {...props} />}
+        {activeStep === 3 && <Review {...props} />}
+      </>
+    )
   }
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
-  const nextStep = props => {
+  const nextStep = (props) => {
     let next = activeStep + 1
-    if (activeStep === 4 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
+    if (
+      activeStep === 4 &&
+      props.values.holder.vat === props.values.member.vat &&
+      props.values.holder.isphisical
+    ) {
       next++
       props.setFieldValue('privacy_policy_accepted', true)
     }
@@ -225,9 +212,13 @@ const Member = (props) => {
     })
   }
 
-  const prevStep = props => {
+  const prevStep = (props) => {
     let prev = activeStep - 1
-    if (activeStep === 6 && props.values.holder.vat === props.values.member.vat && props.values.holder.isphisical) {
+    if (
+      activeStep === 6 &&
+      props.values.holder.vat === props.values.member.vat &&
+      props.values.holder.isphisical
+    ) {
       prev--
       props.setFieldValue('privacy_policy_accepted', false)
     }
@@ -280,9 +271,11 @@ const Member = (props) => {
 
   const handleError = (error) => {
     let errorCode = 'UNEXPECTED'
-    if (error?.data?.invalid_fields.length &&
+    if (
+      error?.data?.invalid_fields.length &&
       error?.data?.invalid_fields[0]?.field &&
-      error?.data?.invalid_fields[0]?.error) {
+      error?.data?.invalid_fields[0]?.error
+    ) {
       errorCode = `${error?.data?.invalid_fields[0]?.field}_${error?.data?.invalid_fields[0].error}`
     }
     setError({ code: errorCode.toUpperCase() })
@@ -293,7 +286,7 @@ const Member = (props) => {
     setSending(true)
     const data = normalizeMember(values)
     await member(data)
-      .then(response => {
+      .then((response) => {
         if (response?.state === true) {
           setError(false)
           if (response?.data?.endpoint) {
@@ -306,7 +299,7 @@ const Member = (props) => {
           handleError(response)
         }
       })
-      .catch(error => {
+      .catch((error) => {
         handleError(error?.response?.data)
       })
     setSending(false)
@@ -321,88 +314,100 @@ const Member = (props) => {
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}
-        >
-          {props => (
+          validateOnMount={true}>
+          {(props) => (
             <>
               <div>
                 <Form className={classes.root} noValidate autoComplete="off">
                   {
                     <Paper elevation={0} className={classes.stepContainer}>
-                      {
-                        showProgress &&
-                          <LinearProgress variant={sending ? 'indeterminate' : 'determinate'} value={ (activeStep / MAX_STEP_NUMBER) * 100 } />
-                      }
+                      {showProgress && (
+                        <LinearProgress
+                          variant={sending ? 'indeterminate' : 'determinate'}
+                          value={(activeStep / MAX_STEP_NUMBER) * 100}
+                        />
+                      )}
 
                       <Box mx={0} mb={3}>
-                        { completed
-                          ? error
-                            ? <Failure error={error} />
-                            : <Success description={t('NEWMEMBER_OK_DESCRIPTION')} />
-                          : getActiveStep(props)
-                        }
+                        {completed ? (
+                          error ? (
+                            <Failure error={error} />
+                          ) : (
+                            <Success
+                              description={t('NEWMEMBER_OK_DESCRIPTION')}
+                            />
+                          )
+                        ) : (
+                          getActiveStep(props)
+                        )}
                       </Box>
                       <Box mx={0} mt={0} mb={3}>
                         <div className={classes.actionsContainer}>
-                          {
-                            (!completed || error) &&
+                          {(!completed || error) && (
                             <Button
                               data-cy="prev"
                               className={classes.button}
                               startIcon={<ArrowBackIosIcon />}
-                              disabled={(activeStep === 0) || sending}
-                              onClick={() => prevStep(props)}
-                            >
+                              disabled={activeStep === 0 || sending}
+                              onClick={() => prevStep(props)}>
                               {t('PAS_ANTERIOR')}
                             </Button>
-                          }
-                          {
-                            activeStep < MAX_STEP_NUMBER - 1
-                              ? <Button
-                                type="button"
-                                data-cy="next"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                endIcon={<ArrowForwardIosIcon />}
-                                disabled={!props.isValid}
-                                onClick={() => nextStep(props)}
-                              >
-                                {t('SEGUENT_PAS')}
-                              </Button>
-                              : !completed && <Button
+                          )}
+                          {activeStep < MAX_STEP_NUMBER - 1 ? (
+                            <Button
+                              type="button"
+                              data-cy="next"
+                              className={classes.button}
+                              variant="contained"
+                              color="primary"
+                              endIcon={<ArrowForwardIosIcon />}
+                              disabled={!props.isValid}
+                              onClick={() => nextStep(props)}>
+                              {t('SEGUENT_PAS')}
+                            </Button>
+                          ) : (
+                            !completed && (
+                              <Button
                                 type="button"
                                 data-cy="submit"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"
-                                startIcon={ sending ? <CircularProgress size={24} /> : <SendIcon /> }
+                                startIcon={
+                                  sending ? (
+                                    <CircularProgress size={24} />
+                                  ) : (
+                                    <SendIcon />
+                                  )
+                                }
                                 disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}
-                              >
+                                onClick={() => handlePost(props.values)}>
                                 {t('SEND')}
                               </Button>
-                          }
+                            )
+                          )}
                         </div>
                       </Box>
                     </Paper>
                   }
                 </Form>
               </div>
-              { showInspector &&
-                <DisplayFormikState {...props} />
-              }
+              {showInspector && <DisplayFormikState {...props} />}
             </>
           )}
         </Formik>
-        {
-          data?.payment_data &&
+        {data?.payment_data && (
           <form ref={formTPV} action={data.endpoint} method="POST">
-            { Object.keys(data.payment_data).map(key =>
-              <input key={key} type="hidden" name={key} value={data.payment_data[key]} />
-            )}
+            {Object.keys(data.payment_data).map((key) => (
+              <input
+                key={key}
+                type="hidden"
+                name={key}
+                value={data.payment_data[key]}
+              />
+            ))}
           </form>
-        }
+        )}
       </Container>
     </GlobalHotKeys>
   )
