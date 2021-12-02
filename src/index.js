@@ -16,7 +16,11 @@ if (root) {
     })
 
     props.version = process.env.REACT_APP_VERSION
-    console.log(`webforms-ui version: ${process.env.REACT_APP_VERSION}`)
+    console.log(
+      `webforms-ui version: ${
+        process.env.REACT_APP_VERSION || process.env.VERCEL_GIT_COMMIT_SHA
+      }`
+    )
 
     ReactDOM.render(
       <App {...props} />,
