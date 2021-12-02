@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 import { getPrices } from '../services/api'
 
 const Tariff = (props) => {
   const { tariff, taxes = true, taxValue = 21 } = props
+  const { language } = useParams()
   const { t, i18n } = useTranslation()
   const [loading, setLoading] = useState()
   const [prices, setPrices] = useState()
   const [taxType, setTaxType] = useState(taxValue)
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
   useEffect(() => {
     const VAT = '40323835M'

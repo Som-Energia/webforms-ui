@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -53,13 +53,13 @@ const steps = [
 function D1Detail(props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
+  const { language } = useParams()
 
   const { templateProps = templateData } = props
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
   const [activeStep, setActiveStep] = useState(
     props?.location?.state?.d1CaseData ? 1 : 0
@@ -128,7 +128,7 @@ function D1Detail(props) {
         return (
           <Navigate
             to={{
-              pathname: `/${props.match.params.language}/contract/modification`,
+              pathname: `/${language}/contract/modification`,
               state: { d1CaseData: data }
             }}
           />

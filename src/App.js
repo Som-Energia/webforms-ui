@@ -49,49 +49,50 @@ const useStyles = makeStyles((theme) => ({
 
 const App = (props) => {
   const classes = useStyles()
-  const { d1 = '', token = '', cups = '' } = props
-
-  const loadD1Detail = (props) => {
-    const D1Detail = lazy(() => import('./containers/D1Detail'))
-
-    const d1Data =
-      typeof d1 === 'string' && d1 !== '' ? JSON.parse(d1) : undefined
-    const cupsData =
-      typeof cups === 'string' && cups !== '' ? JSON.parse(cups) : undefined
-    const templateData =
-      d1Data || cupsData ? { ...d1Data, ...cupsData } : undefined
-    return <D1Detail {...props} templateProps={templateData} />
-  }
+  const { token = '' } = props
 
   const Home = lazy(() => import('./containers/Home'))
-
+  const Contract = lazy(() => import('./containers/Contract'))
   const Contribution = lazy(() => import('./containers/Contribution'))
+  const Cancellation = lazy(() => import('./containers/Cancellation'))
+  const D1Detail = lazy(() => import('./containers/D1Detail'))
+  const HolderChange = lazy(() => import('./containers/HolderChange'))
+  const Member = lazy(() => import('./containers/Member'))
   const Failure = lazy(() => import('./containers/Failure'))
   const Success = lazy(() => import('./containers/Success'))
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
   const Tariff = lazy(() => import('./containers/Tariff'))
+  const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
+  const SomSolet = lazy(() => import('./containers/SomSolet'))
 
-  const loadCancellation = (compProps) => {
-    const Cancellation = lazy(() => import('./containers/Cancellation'))
+  const loadContractData = () => {
     const contractData =
       typeof props.contract === 'string' && props.contract !== ''
         ? JSON.parse(props.contract)
         : []
 
-    return <Cancellation {...props} {...compProps} contract={contractData} />
+    return contractData
   }
 
-  const loadMailSubscriptions = (props) => {
-    const MailSubscriptions = lazy(() =>
-      import('./containers/MailSubscriptions')
-    )
+  const loadD1Data = () => {
+    const d1Data =
+      typeof props.d1 === 'string' && props.d1 !== ''
+        ? JSON.parse(props.d1)
+        : {}
+    const cupsData =
+      typeof props.cups === 'string' && props.cups !== ''
+        ? JSON.parse(props.cups)
+        : {}
+    return { ...d1Data, ...cupsData }
+  }
 
+  const loadMailLists = () => {
     const mailListsData =
       typeof props.mailLists === 'string' && props.mailLists !== ''
         ? JSON.parse(props.mailLists)
         : []
 
-    return <MailSubscriptions {...props} mailLists={mailListsData} />
+    return mailListsData
   }
 
   return (
@@ -115,67 +116,68 @@ const App = (props) => {
 
                 <Route
                   path="/holder-change"
-                  element={lazy(() => import('./containers/HolderChange'))}
+                  element={<HolderChange {...props} />}
                 />
                 <Route
                   path="/:language/change-ownership/"
-                  element={lazy(() => import('./containers/HolderChange'))}
+                  element={<HolderChange {...props} />}
                 />
 
                 <Route
                   exact
                   path="/contract"
-                  element={lazy(() => import('./containers/Contract'))}
+                  element={<Contract {...props} />}
                 />
                 <Route
                   path="/:language/contracta-la-llum/"
-                  element={lazy(() => import('./containers/Contract'))}
+                  element={<Contract {...props} />}
                 />
                 <Route
                   path="/:language/contrata-la-luz/"
-                  element={lazy(() => import('./containers/Contract'))}
+                  element={<Contract {...props} />}
                 />
                 <Route
                   path="/:language/kontrata-ezazu-argia/"
-                  element={lazy(() => import('./containers/Contract'))}
+                  element={<Contract {...props} />}
                 />
                 <Route
                   path="/:language/contrata-a-luz/"
-                  element={lazy(() => import('./containers/Contract'))}
+                  element={<Contract {...props} />}
                 />
 
-                <Route
-                  path="/new-member"
-                  element={lazy(() => import('./containers/Member'))}
-                />
+                <Route path="/new-member" element={<Member {...props} />} />
+
                 <Route
                   path="/:language/fes-te-n-soci-a/"
-                  element={lazy(() => import('./containers/Member'))}
+                  element={<Member {...props} />}
                 />
                 <Route
                   path="/:language/hazte-socio-a/"
-                  element={lazy(() => import('./containers/Member'))}
+                  element={<Member {...props} />}
                 />
                 <Route
                   path="/:language/izan-zaitez-bazkide/"
-                  element={lazy(() => import('./containers/Member'))}
+                  element={<Member {...props} />}
                 />
                 <Route
                   path="/:language/faite-socio-a/"
-                  element={lazy(() => import('./containers/Member'))}
+                  element={<Member {...props} />}
                 />
 
-                <Route
-                  path="/somsolet"
-                  element={lazy(() => import('./containers/SomSolet'))}
-                />
+                <Route path="/somsolet" element={<SomSolet {...props} />} />
                 <Route
                   path="/:language/collective-purchases/"
-                  element={lazy(() => import('./containers/SomSolet'))}
+                  element={<SomSolet {...props} />}
                 />
 
-                <Route path="/d1-detail" render={loadD1Detail} />
-                <Route path="/:language/d1-detail" render={loadD1Detail} />
+                <Route
+                  path="/d1-detail"
+                  element={<D1Detail {...props} templateProps={loadD1Data} />}
+                />
+                <Route
+                  path="/:language/d1-detail"
+                  element={<D1Detail {...props} templateProps={loadD1Data} />}
+                />
 
                 <Route
                   path="/:language/pagament-realitzat"
@@ -207,11 +209,23 @@ const App = (props) => {
 
                 <Route
                   path="/:language/mail-subscriptions"
-                  render={loadMailSubscriptions}
+                  element={
+                    <MailSubscriptions {...props} mailLists={loadMailLists} />
+                  }
                 />
 
-                <Route path="/cancellation" render={loadCancellation} />
-                <Route path="/:language/cancel" render={loadCancellation} />
+                <Route
+                  path="/cancellation"
+                  element={
+                    <Cancellation {...props} contract={loadContractData} />
+                  }
+                />
+                <Route
+                  path="/:language/cancel"
+                  element={
+                    <Cancellation {...props} contract={loadContractData} />
+                  }
+                />
 
                 <Route
                   path="/contribution"

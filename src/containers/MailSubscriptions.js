@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
@@ -53,11 +54,11 @@ const MailSubscriptions = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { mailLists = defaultLists } = props
+  const { language } = useParams()
 
   useEffect(() => {
-    const language = props.match.params.language
     i18n.changeLanguage(language)
-  }, [props.match.params.language, i18n])
+  }, [language, i18n])
 
   return (
     <div className={classes.root}>
