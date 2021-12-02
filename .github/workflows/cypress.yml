@@ -1,7 +1,7 @@
 name: cypress webforms-ui
 on: [push]
 env:
-  REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+  NEXT_PUBLIC_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04

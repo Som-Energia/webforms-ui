@@ -2,7 +2,7 @@ import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
 export const modifyContract = async (data, token) => {
