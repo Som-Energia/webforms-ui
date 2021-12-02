@@ -18,7 +18,8 @@ if (root) {
     props.version = process.env.REACT_APP_VERSION
     console.log(
       `webforms-ui version: ${
-        process.env.REACT_APP_VERSION || process.env.VERCEL_GIT_COMMIT_SHA
+        process.env.REACT_APP_VERSION ||
+        process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
       }`
     )
 
