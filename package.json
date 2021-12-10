@@ -28,7 +28,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
+    "start": "sh -ac '. .env.${REACT_APP_ENV}; export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start'",
     "build": "sh -ac '. .env.${REACT_APP_ENV}; export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build'",
     "build:ov": "export REACT_APP_ENV=ov && yarn run build && cd scripts && ./rename-assets-ov.sh",
     "build:staging": "export REACT_APP_ENV=staging && yarn run build",
