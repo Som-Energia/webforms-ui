@@ -1,5 +1,10 @@
 import React, { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate
+} from 'react-router-dom'
 
 import {
   createTheme,
@@ -143,6 +148,11 @@ const App = (props) => {
                 <Route
                   path="/:language/contrata-a-luz/"
                   element={<Contract {...props} />}
+                />
+
+                <Route
+                  path="/:language/contract-30/"
+                  element={<Contract is30ContractEnabled={true} {...props} />}
                 />
 
                 <Route path="/new-member" element={<Member {...props} />} />

@@ -79,6 +79,7 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
+  const { is30ContractEnabled = false } = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -517,7 +518,7 @@ const Contract = (props) => {
     <MemberIdentifier />,
     <CUPS />,
     <SupplyPoint />,
-    <PowerFare rates={rates} />,
+    <PowerFare rates={rates} is30ContractEnabled={is30ContractEnabled} />,
     <SelfConsumption />,
     <SelfConsumptionDetails />,
     <HolderIdentifier />,
@@ -537,7 +538,11 @@ const Contract = (props) => {
         {(showAllSteps || activeStep === 1) && <CUPS {...props} />}
         {(showAllSteps || activeStep === 2) && <SupplyPoint {...props} />}
         {(showAllSteps || activeStep === 3) && (
-          <PowerFare rates={rates} {...props} />
+          <PowerFare
+            rates={rates}
+            is30ContractEnabled={is30ContractEnabled}
+            {...props}
+          />
         )}
         {(showAllSteps || activeStep === 4) && <SelfConsumption {...props} />}
         {(showAllSteps || activeStep === 5) && (

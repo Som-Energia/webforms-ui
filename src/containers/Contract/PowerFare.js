@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 import Alert from '@material-ui/lab/Alert'
 import Box from '@material-ui/core/Box'
@@ -24,7 +25,8 @@ const PowerFare = (props) => {
     errors,
     touched,
     rates,
-    setFieldValue
+    setFieldValue,
+    is30ContractEnabled = false
   } = props
 
   const handleChangeChooser = ({ option }) => {
@@ -34,7 +36,7 @@ const PowerFare = (props) => {
   useEffect(() => {
     const tariff = calculateTariff(values.contract)
     setFieldValue('contract.rate', tariff)
-  }, [values.contract.moreThan15Kw])
+  }, [values.contract, values.contract.moreThan15Kw])
 
   return (
     <>
@@ -111,7 +113,7 @@ const PowerFare = (props) => {
           ]}
         />
       </Box>
-      {values?.contract?.moreThan15Kw && (
+      {values?.contract?.moreThan15Kw && !is30ContractEnabled && (
         <>
           <Box mt={3}>
             <Alert severity="warning">
@@ -125,7 +127,7 @@ const PowerFare = (props) => {
           </Box>
         </>
       )}
-      {!values?.contract?.moreThan15Kw && (
+      {(!values?.contract?.moreThan15Kw || is30ContractEnabled) && (
         <>
           <Box mt={3}>
             <Typography

@@ -67,8 +67,8 @@ const d1Steps = ['ACCEPT_OR_REFUSE_TITLE', 'DETAIL_D1_TITLE']
 
 function ModifyContract(props) {
   const params = useParams()
-  const fromD1 = props?.location?.state?.d1CaseData?.m1
-  const d1CaseData = props?.location?.state?.d1CaseData
+  const fromD1 = params?.state?.d1CaseData?.m1
+  const d1CaseData = params?.state?.d1CaseData
 
   const classes = useStyles()
   const { t, i18n } = useTranslation()
