@@ -248,6 +248,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                 </Box>
                 <Box mx={1} mb={2} className={classes.chooserLabelBox}>
                   <Chooser
+                    canBeEmpty={false}
                     question={t('ACCEPTACIO_AUTO')}
                     onChange={(option) =>
                       handleValidateD1(setFieldValue, errors, option?.option)

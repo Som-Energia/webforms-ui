@@ -27,6 +27,7 @@ function VoluntaryCent(props) {
           question={t('VOLUNTARY_CENT_QUESTION')}
           onChange={handleChange}
           value={props.values.payment.voluntary_cent}
+          canBeEmpty={false}
           options={[
             {
               value: true,
