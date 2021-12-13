@@ -48,8 +48,8 @@ const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
   SAMPLE_DATA: 'ctrl+shift+1',
-  SHOW_INSPECTOR: 'ctrl+shift+d',
-  SHOW_ALL_STEPS: 'ctrl+shift+a'
+  SHOW_INSPECTOR: 'ctrl+alt+shift+d',
+  SHOW_ALL_STEPS: 'ctrl+alt+shift+a'
 }
 
 const useStyles = makeStyles((theme) => ({
