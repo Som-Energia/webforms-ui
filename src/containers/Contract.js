@@ -820,7 +820,17 @@ const Contract = (props) => {
                   }
                 </Form>
               </div>
-              {showInspector && <DisplayFormikState {...props} />}
+              {showInspector && (
+                <>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => setShowAllSteps(!showAllSteps)}>
+                    Show all steps
+                  </Button>
+                  <DisplayFormikState {...props} />
+                </>
+              )}
             </>
           )}
         </Formik>
