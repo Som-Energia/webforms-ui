@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 
@@ -67,8 +67,10 @@ const d1Steps = ['ACCEPT_OR_REFUSE_TITLE', 'DETAIL_D1_TITLE']
 
 function ModifyContract(props) {
   const params = useParams()
-  const fromD1 = params?.state?.d1CaseData?.m1
-  const d1CaseData = params?.state?.d1CaseData
+  const { state } = useLocation()
+
+  const fromD1 = state?.d1CaseData?.m1
+  const d1CaseData = state?.d1CaseData
 
   const classes = useStyles()
   const { t, i18n } = useTranslation()
@@ -206,9 +208,9 @@ function ModifyContract(props) {
                 <StepContent>
                   <Navigate
                     to={{
-                      pathname: `/${params.language}/d1-detail`,
-                      state: { d1CaseData: d1CaseData }
+                      pathname: `/${params.language}/d1-detail`
                     }}
+                    state={{ d1CaseData: d1CaseData }}
                   />
                 </StepContent>
               </Step>

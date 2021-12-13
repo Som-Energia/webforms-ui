@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -54,6 +54,7 @@ function D1Detail(props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
+  const { state } = useLocation()
 
   const { templateProps = templateData } = props
 
@@ -61,12 +62,8 @@ function D1Detail(props) {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  const [activeStep, setActiveStep] = useState(
-    props?.location?.state?.d1CaseData ? 1 : 0
-  )
-  const [data, setData] = useState(
-    props?.location?.state?.d1CaseData || templateProps
-  )
+  const [activeStep, setActiveStep] = useState(state?.d1CaseData ? 1 : 0)
+  const [data, setData] = useState(state?.d1CaseData || templateProps)
 
   const handleStepChanges = useCallback(
     (params) => {
@@ -128,9 +125,9 @@ function D1Detail(props) {
         return (
           <Navigate
             to={{
-              pathname: `/${language}/contract/modification`,
-              state: { d1CaseData: data }
+              pathname: `/${language}/contract/modification`
             }}
+            state={{ d1CaseData: data }}
           />
         )
     }
