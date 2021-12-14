@@ -1,8 +1,6 @@
 import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
 
-console.log('REACT_APP_API_BASE_URL: ', process.env.REACT_APP_API_BASE_URL)
-
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
