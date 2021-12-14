@@ -26,7 +26,6 @@ const Tariff = (props) => {
     getPrices(tariff, VAT, CNAE, taxType === 21 ? CITY_TAX_21 : CITY_TAX_10)
       .then((response) => {
         const tariffPrices = response?.data
-        console.log(tariffPrices)
         setPrices(tariffPrices)
         setLoading(false)
       })
