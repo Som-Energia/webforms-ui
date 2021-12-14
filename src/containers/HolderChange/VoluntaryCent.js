@@ -12,7 +12,7 @@ function VoluntaryCent(props) {
 
   const handleChange = ({ option }) => {
     props.setFieldValue('payment.voluntary_cent', option)
-    props.validateForm()
+    //props.validateForm()
   }
 
   return (
