@@ -78,7 +78,9 @@ function Failure(props) {
                 ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
                   ? t(error?.data?.[0]?.field.toUpperCase())
                   : t('INVALID_FIELD', { field_name: error?.data?.[0]?.field })
-                : t('UNEXPECTED_POSTERROR', {
+                : error?.code === 'INVOICE_ERROR'
+                  ? error?.error
+                  : t('UNEXPECTED_POSTERROR', {
                     error_message: error?.code ? t(error?.code) : error?.error
                   })
           }}
