@@ -100,6 +100,15 @@ const App = (props) => {
     return mailListsData
   }
 
+  const loadInvoiceErrorsData = () => {
+    const invoiceErrorsData =
+      typeof props.errors === 'string' && props.errors !== ''
+        ? JSON.parse(props.errors)
+        : {}
+    console.log(invoiceErrorsData, props)
+    return invoiceErrorsData
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <ScopedCssBaseline>
@@ -278,6 +287,14 @@ const App = (props) => {
                 <Route
                   path="/:language/tarifas-de-electricidade"
                   element={<Tariff {...props} />}
+                />
+                <Route
+                  path="/:language/invoices/:invoice_id/actions/payment_request"
+                  element={
+                  <Failure
+                    {...props}
+                    error={{ code: 'INVOICE_ERROR', error: loadInvoiceErrorsData() }}
+                  />}
                 />
               </Routes>
             </Router>
