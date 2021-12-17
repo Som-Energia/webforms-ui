@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 function Failure(props) {
   const { t, i18n } = useTranslation()
   const classes = useStyles()
-  const { error = false, description = 'NEWMEMBER_KO_DESCRIPTION' } = props
+  const { error = false, description = 'NEWMEMBER_KO_DESCRIPTION', showTitle = true } = props
 
   useEffect(() => {
     const language = props?.match?.params?.language
@@ -59,7 +59,7 @@ function Failure(props) {
 
   return (
     <>
-      <StepHeader title={t('FAILURE_TITLE')} />
+      { showTitle && <StepHeader title={t('FAILURE_TITLE')} /> }
       <div className={classes.container}>
         <Avatar className={classes.error}>
           <CloseIcon fontSize="large" />

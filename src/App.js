@@ -100,6 +100,11 @@ const App = (props) => {
     return mailListsData
   }
 
+  const loadInvoicePaymentData = () => {
+    const data = typeof props.invoicePayment === 'string' && props.invoicePayment !== '' ? JSON.parse(props.invoicePayment) : {}
+    return data
+  }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -281,11 +286,21 @@ const App = (props) => {
                   element={<Tariff {...props} />}
                 />
                 <Route
-                  path="/:language/invoices/:invoice_id/actions/payment_request"
+                  path="/:language/invoices/:invoice_id/payment_ko"
                   element={
                   <Failure
+                    showTitle={false}
                     {...props}
-                    error={{ code: 'INVOICE_ERROR', error: props?.error }}
+                    error={loadInvoicePaymentData()}
+                  />}
+                />
+                <Route
+                  path="/:language/invoices/:invoice_id/payment_ok"
+                  element={
+                  <Success
+                    showTitle={false}
+                    {...props}
+                    {...loadInvoicePaymentData()}
                   />}
                 />
               </Routes>
