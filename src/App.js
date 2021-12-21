@@ -76,7 +76,7 @@ const App = (props) => {
         ? JSON.parse(props.contract)
         : []
 
-    return contractData
+    return { ...contractData }
   }
 
   const loadD1Data = () => {
@@ -227,13 +227,13 @@ const App = (props) => {
                 <Route
                   path="/cancellation"
                   element={
-                    <Cancellation {...props} contract={loadContractData} />
+                    <Cancellation {...props} contract={loadContractData()} />
                   }
                 />
                 <Route
-                  path="/:language/cancel"
+                  path="/:language/contract/:contract_id/cancel"
                   element={
-                    <Cancellation {...props} contract={loadContractData} />
+                    <Cancellation {...props} contract={loadContractData()} />
                   }
                 />
 

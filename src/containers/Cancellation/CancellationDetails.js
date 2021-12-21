@@ -20,14 +20,14 @@ import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 import TermsDialog from '../../components/TermsDialog'
 import GeneralTerms from '../../components/GeneralTerms'
 
-import { nationalHolidays } from '../../services/utils'
+import { nationalHolidays, getNextBussinessDay } from '../../services/utils'
 
 const CancellationDetails = (props) => {
   const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
     props
   const classes = useStyles()
   const { t } = useTranslation()
-  const tomorrow = dayjs().add(1, 'd')
+  const nextBussinesDay = getNextBussinessDay()
 
   const [open, setOpen] = useState(false)
 
@@ -100,7 +100,7 @@ const CancellationDetails = (props) => {
           variant="inline"
           autoOk
           disableToolbar
-          minDate={tomorrow}
+          minDate={nextBussinesDay}
           size="small"
           format="DD/MM/YYYY"
           value={dayjs(values.date_action, 'DD/MM/YYYY')}
@@ -115,6 +115,7 @@ const CancellationDetails = (props) => {
           }}
         />
         <FormHelperText
+          component="span"
           className={classes.helper}
           dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
         />
@@ -131,7 +132,7 @@ const CancellationDetails = (props) => {
           onBlur={handleBlur}
           error={errors?.phone && touched?.phone}
           helperText={
-            (touched?.phone && (
+            (errors?.phone && touched?.phone && (
               <span
                 dangerouslySetInnerHTML={{
                   __html: errors?.phone
@@ -139,6 +140,7 @@ const CancellationDetails = (props) => {
               />
             )) || (
               <FormHelperText
+                component="span"
                 className={classes.helper}
                 dangerouslySetInnerHTML={{
                   __html: t('CANCELLATION_PHONE_HELPER')
@@ -209,6 +211,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '-0.25rem !important'
   },
   legalChecks: {
+    marginTop: '4px',
     display: 'flex',
     flexDirection: 'column',
     padding: '0.75rem 1.5rem',

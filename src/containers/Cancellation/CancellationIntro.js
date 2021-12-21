@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import Header from '../../components/oficinavirtual/Header'
 import Card from '../../components/oficinavirtual/Card'
+import CancellationWarning from './CancellationWarning'
 
 const CancellationIntro = () => {
   const classes = useStyles()
