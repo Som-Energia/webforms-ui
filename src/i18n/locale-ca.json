@@ -479,6 +479,8 @@
   "CANCELLATION_DATE_HELPER": "Recorda que poden passar unes hores o fins a 6 dies laborables a fer-se efectiu el tall",
   "CANCELLATION_PHONE_HELPER": "L'utilitzarà la distribuïdora per avisar-te en cas que el personal tècnic encarregat necessiti accedir al comptador",
   "CANCELLATION_DISCLAIMER": "<b>Recorda que aquest trámit comporta el tall del servei</b>",
+  "CANCELLATION_SUCCESS_TITLE": "Revisa el teu correu",
+  "CANCELLATION_SUCCESS_DESC": "<p>Hem enviat un correu a la persona titular del contracte, sol·licitant la confirmació del tràmit. És molt important que hi accedeixis per tal que la baixa es faci efectiva.</p><p>Si no rebem la confirmació en els propers 14 dies, cancel·larem el tràmit.</p>",
   "CONTRIBUTION": "Formulari d'aportació",
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Tingues en compte que per poder aportar a la cooperativa, cal que en siguis persona sòcia.",
   "CONTRIBUTION_MEMBER_QUESTION": "Quin és el teu cas?",

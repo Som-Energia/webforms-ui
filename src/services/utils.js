@@ -1,4 +1,5 @@
 import { getRates } from '../services/api'
+import dayjs from 'dayjs'
 
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
@@ -473,4 +474,18 @@ export const normalizeContribution = (data) => {
   contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
 
   return contribution
+}
+
+export const getNextBussinessDay = (day) => {
+  var isoWeek = require('dayjs/plugin/isoWeek')
+  dayjs.extend(isoWeek)
+  const nextBussinesDay = dayjs(day).add(1, 'd')
+
+  if (nextBussinesDay.isoWeekday() === 6) {
+    return dayjs(nextBussinesDay).add(2, 'd')
+  } else if (nextBussinesDay.isoWeekday() === 7) {
+    return dayjs(nextBussinesDay).add(1, 'd')
+  } else {
+    return nextBussinesDay
+  }
 }
