@@ -4,6 +4,8 @@ import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
+import Alert from '@material-ui/lab/Alert'
+import AlertTitle from '@material-ui/lab/AlertTitle'
 import Badge from '@material-ui/core/Badge'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -454,6 +456,20 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     numInputs={rates[values?.tariff]?.num_power_periods}
                     {...props}
                   />
+
+                  {!values?.moreThan15Kw &&
+                    values.power &&
+                    values.power2 &&
+                    values.power > values.power2 && (
+                      <Box mt={1}>
+                        <Alert severity="warning">
+                          <AlertTitle>
+                            {t('WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE')}
+                          </AlertTitle>
+                          {t('WARNING_POWER_VALLEY_SMALLER_THAN_PEAK')}
+                        </Alert>
+                      </Box>
+                    )}
 
                   <Box mt={3} mb={1}>
                     <Typography>{t('POWER_ATTACHMENTS')}</Typography>
