@@ -253,7 +253,13 @@ function HolderChange(props) {
   }, [language, i18n])
 
   const nextStep = (props) => {
-    const next = activeStep + 1
+    let next = activeStep + 1
+    console.log(props, next)
+    if (next === 3 && props?.values?.holder?.ismember) {
+      props.values.member.become_member = props.values.holder.ismember
+      next++
+      console.log(next)
+    }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
       if (props.isValid) {
