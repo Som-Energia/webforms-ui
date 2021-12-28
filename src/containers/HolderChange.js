@@ -177,7 +177,13 @@ function HolderChange(props) {
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     }),
-    Yup.object().shape({}),
+    Yup.object().shape({
+      member: Yup.object().shape({
+        become_member: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+      }),
+    }),
     Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
@@ -353,7 +359,7 @@ function HolderChange(props) {
       supply_point_accepted: false
     },
     member: {
-      become_member: '',
+      become_member: false,
       invite_token: false
     },
     payment: {
