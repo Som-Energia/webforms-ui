@@ -24,6 +24,7 @@ function VAT(props) {
     setFieldValue('holder.isphisical', isPhisical)
     setFieldValue('holder.vatvalid', valid)
     setFieldTouched('holder.vat', true)
+    setFieldValue('holder.ismember', false) // TODO: from API
   }
 
   return (
