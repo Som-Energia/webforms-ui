@@ -260,11 +260,9 @@ function HolderChange(props) {
 
   const nextStep = (props) => {
     let next = activeStep + 1
-    console.log(props, next)
     if (next === 3 && props?.values?.holder?.ismember) {
-      props.values.member.become_member = props.values.holder.ismember
+      props.values.member.become_member = false  // already a member
       next++
-      console.log(next)
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
