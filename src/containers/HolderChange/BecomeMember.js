@@ -29,9 +29,9 @@ function BecomeMember (props) {
           <FormControlLabel
             control={
               <Checkbox
-                id="legal_person_accepted"
+                id="become_member_accepted"
                 color="primary"
-                name="legal_person_accepted"
+                name="become_member_accepted"
                 onClick={handleClick}
                 checked={props?.values?.member?.become_member}
               />
