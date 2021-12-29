@@ -36,7 +36,7 @@ function BecomeMember (props) {
                 checked={props?.values?.member?.become_member}
               />
             }
-            label={t('LEGAL_PERSON_TITLE_LABEL')}
+            label={t('BECOME_MEMBER_YES_LABEL')}
           />
         </FormGroup>
       </Box>
