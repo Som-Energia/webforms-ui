@@ -56,6 +56,8 @@ describe('Modify Contract', () => {
     cy.get('[name=changePower]').click()
     cy.get('[name=power]')
       .type(this.data.power).should('have.value', this.data.power)
+    cy.get('[name=power2]')
+      .type(this.data.power).should('have.value', this.data.power)
     cy.get('[type=submit]').click()
 
     cy.get('[name=contactName]')
