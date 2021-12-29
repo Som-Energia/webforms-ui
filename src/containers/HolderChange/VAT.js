@@ -19,12 +19,12 @@ function VAT(props) {
   } = props
   const { t } = useTranslation()
 
-  const onChangeVAT = ({ vat, isPhisical, valid }) => {
+  const onChangeVAT = ({ vat, isPhisical, valid, isMember }) => {
     setFieldValue('holder.vat', vat)
     setFieldValue('holder.isphisical', isPhisical)
     setFieldValue('holder.vatvalid', valid)
     setFieldTouched('holder.vat', true)
-    setFieldValue('holder.ismember', false) // TODO: from API
+    setFieldValue('holder.ismember', isMember)
   }
 
   return (
