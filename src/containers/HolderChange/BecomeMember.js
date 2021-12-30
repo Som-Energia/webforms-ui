@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Chooser from '../../components/Chooser'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import StepHeader from '../../components/StepHeader'
 
 function BecomeMember (props) {
@@ -39,6 +39,12 @@ function BecomeMember (props) {
             label={t('BECOME_MEMBER_YES_LABEL')}
           />
         </FormGroup>
+      </Box>
+      <Box mt={4} mb={3}>
+        <FormHelperText
+          dangerouslySetInnerHTML={{
+            __html: t('BECOME_MEMBER_HELP_TEXT')
+          }}></FormHelperText>
       </Box>
     </>
   )

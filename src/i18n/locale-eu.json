@@ -439,5 +439,6 @@
   "TARIFF_NOT_AVAILABLE": "Uneotan, ezin dira inprimaki honen bidez 15 kW-tik gorako potentzia duten hornidura berriak kontratatu. Jarri gurekin harremanetan, <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a> helbidean.",
   "NO_MAIL_LISTS": "Ez dago posta-zerrendarik kudeatzeko",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Gomendatzen dizugu sakonuneko potentzia ez izatea puntako aldikoa baino txikiagoa",
-  "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Kontuan izan sakonuneak ordutegi-tarte hauek hartzen dituela barne: lanegunetan, 00:00etatik goizeko 8:00etara, eta asteburuetan eta jaiegun estataletan, egun osoa."
+  "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Kontuan izan sakonuneak ordutegi-tarte hauek hartzen dituela barne: lanegunetan, 00:00etatik goizeko 8:00etara, eta asteburuetan eta jaiegun estataletan, egun osoa.",
+  "BECOME_MEMBER_HELP_TEXT": "<p>Kontratua beste bazkide bati atxiki nahi badiozu, <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> helbidera mezua idatz dezakezu. Honako hauek bidali beharko dituzu: kooperatibako bazkidearen kodea eta NAN/IFZ, aldatu beharreko hornidura-puntuaren datuak (kontratu-zenbakia eta CUPS), titular berriaren datuak (izen-abizenak, NAN/IFZ agiria erantsita, helbide elektronikoa eta harremanetarako telefono-zenbakia) eta ordainketarako IBAN datuak.</p>"
 }
