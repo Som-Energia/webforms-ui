@@ -156,6 +156,7 @@
   "UNACCEPTED_PRIVACY_POLICY": "Has d'acceptar la política de privacitat",
   "BECOME_MEMBER_TITLE": "Fer-se soci/sòcia",
   "BECOME_MEMBER_PRESENTATION": "<p>Per poder ser titular d’un contracte amb la cooperativa, cal que en siguis soci o sòcia.</p><p>Per ser-ho, has de fer una aportació única al capital social de <b>100 €</b>, que <b>es retornen</b> en el cas que et donis de baixa.</p>",
+  "BECOME_MEMBER_HELP_TEXT": "<p>Si vols vincular el contracte a una altra persona sòcia, ens pots enviar un correu a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> amb el codi i DNI de la persona sòcia de la cooperativa, les dades del punt de subministrament que vols canviar (número de contracte i CUPS), les dades de la nova persona titular (nom, cognoms, DNI/NIF adjunt, correu electrònic i telèfon de contacte) i dades IBAN de pagament.</p>",
   "BECOME_MEMBER_QUESTION": "Vols associar-te a la cooperativa?",
   "BECOME_MEMBER_YES_LABEL": "Sí, vull ser persona sòcia de la cooperativa",
   "BECOME_MEMBER_YES_DESCRIPTION": "Per ser-ho, has de fer una aportació única al capital social de <b>100 €</b>, que <b>es retornen</b> en el cas que et donis de baixa.",
