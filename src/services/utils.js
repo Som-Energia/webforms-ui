@@ -168,6 +168,9 @@ export const normalizeHolderChange = (contract) => {
   normalContract.holder?.door !== undefined &&
     delete normalContract.holder?.door
 
+  "ismember" in normalContract?.holder &&
+    delete normalContract.holder.ismember
+
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
   }
