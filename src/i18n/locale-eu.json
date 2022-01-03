@@ -216,7 +216,7 @@
   "REVIEW_DATA_AND_CONFIRM": "Oso gutxi falta da! Berrikusi adierazitako datuak, eta sakatu \"Bidali\" botoia.\n",
   "NO_EMAIL": "Ez duzu helbide elektronikoa adierazi ",
   "PROXY_NAME": "Legezko ordezkariaren izena",
-  "BECOME_MEMBER_PRESENTATION": "<p>Kooperatiban kontratu baten titular izateko, bazkidetu behar zara.</p><p>Dagoeneko Som Energiako bazkidea bazara, ez markatu aukerarik, eta jarraitu inprimakiarekin.</p>",
+  "BECOME_MEMBER_PRESENTATION": "<p>Kooperatiban kontratu baten titular izateko, bazkidetu behar zara.</p><p>Horretarako, kapital sozialera <b>100 euroko</b> ekarpen bakarra egin behar duzu. Baja ematen baduzu, dirua <b>itzuliko</b> dizugu.</p>",
   "PROXY_NIF_HELP": "Legezko ordezkariaren IFZ",
   "HOLDER_ADDRESS_HELP": "Titularraren helbidea",
   "HOLDER_EMAIL_2": "Errepikatu helbide elektronikoa",
@@ -439,5 +439,6 @@
   "TARIFF_NOT_AVAILABLE": "Uneotan, ezin dira inprimaki honen bidez 15 kW-tik gorako potentzia duten hornidura berriak kontratatu. Jarri gurekin harremanetan, <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a> helbidean.",
   "NO_MAIL_LISTS": "Ez dago posta-zerrendarik kudeatzeko",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Gomendatzen dizugu sakonuneko potentzia ez izatea puntako aldikoa baino txikiagoa",
-  "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Kontuan izan sakonuneak ordutegi-tarte hauek hartzen dituela barne: lanegunetan, 00:00etatik goizeko 8:00etara, eta asteburuetan eta jaiegun estataletan, egun osoa."
+  "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Kontuan izan sakonuneak ordutegi-tarte hauek hartzen dituela barne: lanegunetan, 00:00etatik goizeko 8:00etara, eta asteburuetan eta jaiegun estataletan, egun osoa.",
+  "BECOME_MEMBER_HELP_TEXT": "<p>Kontratua beste bazkide bati atxiki nahi badiozu, <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> helbidera mezua idatz dezakezu. Honako hauek bidali beharko dituzu: kooperatibako bazkidearen kodea eta NAN/IFZ, aldatu beharreko hornidura-puntuaren datuak (kontratu-zenbakia eta CUPS), titular berriaren datuak (izen-abizenak, NAN/IFZ agiria erantsita, helbide elektronikoa eta harremanetarako telefono-zenbakia) eta ordainketarako IBAN datuak.</p>"
 }

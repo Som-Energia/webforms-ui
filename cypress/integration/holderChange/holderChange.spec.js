@@ -11,7 +11,7 @@ describe('Holder Change', () => {
       cy.get('[name="holder.vat"]')
         .type(this.data.vatInvalid).should('have.value', this.data.vatInvalid)
 
-      cy.contains('No has introducido un NIF correcto')
+      cy.contains('El NIF no es correcto')
 
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
     })
@@ -44,7 +44,7 @@ describe('Holder Change', () => {
       cy.get('[name="supply_point.cups"]')
         .type(this.data.cups).should('have.value', this.data.cups)
 
-      cy.get('#cupsaddress').should('have.value', this.data.cupsAddress)
+      // cy.get('#cupsaddress').should('have.value', this.data.cupsAddress)
 
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
 
@@ -88,6 +88,9 @@ describe('Holder Change', () => {
       cy.get('[name="holder.address"]')
         .type(this.data.address).should('have.value', this.data.address)
 
+      cy.get('[name="holder.number"]')
+        .type(this.data.number).should('have.value', this.data.number)
+
       cy.get('[name="holder.postal_code"]')
         .type(this.data.postalCode).should('have.value', this.data.postalCode)
 
@@ -113,6 +116,7 @@ describe('Holder Change', () => {
 
       cy.get('[data-cy=next]').click()
 
+      cy.get('[name="become_member_accepted"]').click()
       cy.get('[data-cy=next]').click()
 
       cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()

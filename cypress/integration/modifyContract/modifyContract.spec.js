@@ -117,7 +117,7 @@ describe('Modify Contract', () => {
 
     cy.get('[type=submit]').click()
 
-    cy.contains('Alguno de los periodos debe ser superior a 15.001kW')
+    cy.contains('Alguno de los periodos debe ser superior a 15.001 kW')
   })
 
   it('Change power 2.0TD no values', function () {
@@ -129,7 +129,7 @@ describe('Modify Contract', () => {
 
     cy.get('[type=submit]').click()
 
-    cy.contains('No has especificado la potencia')
+    cy.contains('No has introducido la potencia para el periodo')
   })
 
   it('Change power 3.0TD no values', function () {
@@ -142,7 +142,7 @@ describe('Modify Contract', () => {
 
     cy.get('[type=submit]').click()
 
-    cy.contains('No has especificado la potencia')
+    cy.contains('No has introducido la potencia para el periodo')
   })
 
   it('Change phases attachment required', function () {
