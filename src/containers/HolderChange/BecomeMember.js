@@ -4,15 +4,18 @@ import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
-import Chooser from '../../components/Chooser'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import StepHeader from '../../components/StepHeader'
 
 function BecomeMember (props) {
   const { t } = useTranslation()
 
-  const handleChange = ({ option }) => {
-    props.setFieldValue('member.become_member', option)
-    props.validateForm()
+  const handleClick = (event) => {
+    event.preventDefault()
+    props.setFieldValue('member.become_member', !props?.values?.member?.become_member)
   }
 
   return (
@@ -22,23 +25,26 @@ function BecomeMember (props) {
         dangerouslySetInnerHTML={{ __html: t('BECOME_MEMBER_PRESENTATION') }}
       />
       <Box mt={3} mb={4}>
-        <Chooser
-          question={t('BECOME_MEMBER_QUESTION')}
-          onChange={handleChange}
-          value={props.values.member.become_member}
-          options={[
-            {
-              value: true,
-              label: t('BECOME_MEMBER_YES_LABEL'),
-              description: t('BECOME_MEMBER_YES_DESCRIPTION')
-            },
-            {
-              value: false,
-              label: t('BECOME_MEMBER_NO_LABEL'),
-              description: t('BECOME_MEMBER_NO_DESCRIPTION')
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="become_member_accepted"
+                color="primary"
+                name="become_member_accepted"
+                onClick={handleClick}
+                checked={props?.values?.member?.become_member}
+              />
             }
-          ]}
-        />
+            label={t('BECOME_MEMBER_YES_LABEL')}
+          />
+        </FormGroup>
+      </Box>
+      <Box mt={4} mb={3}>
+        <FormHelperText
+          dangerouslySetInnerHTML={{
+            __html: t('BECOME_MEMBER_HELP_TEXT')
+          }}></FormHelperText>
       </Box>
     </>
   )

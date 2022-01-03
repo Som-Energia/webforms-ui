@@ -43,6 +43,7 @@ const VATField = (props) => {
           onChange({
             vat: valueVAT,
             isPhisical: phisicalVAT,
+            isMember: response?.data?.is_member,
             valid: validVat,
             exists: response?.data?.exists
           })

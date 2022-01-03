@@ -177,7 +177,13 @@ function HolderChange(props) {
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     }),
-    Yup.object().shape({}),
+    Yup.object().shape({
+      member: Yup.object().shape({
+        become_member: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+      }),
+    }),
     Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
@@ -253,7 +259,11 @@ function HolderChange(props) {
   }, [language, i18n])
 
   const nextStep = (props) => {
-    const next = activeStep + 1
+    let next = activeStep + 1
+    if (next === 3 && props?.values?.holder?.ismember) {
+      props.values.member.become_member = false  // already a member
+      next++
+    }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
       if (props.isValid) {
@@ -347,7 +357,7 @@ function HolderChange(props) {
       supply_point_accepted: false
     },
     member: {
-      become_member: '',
+      become_member: false,
       invite_token: false
     },
     payment: {
