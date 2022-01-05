@@ -267,7 +267,7 @@ function HolderChange(props) {
       next += 2
     }
     if (next === 4 && props?.values?.member?.become_member) {
-      next ++
+      next++
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
@@ -280,7 +280,13 @@ function HolderChange(props) {
   }
 
   const prevStep = (props) => {
-    const prev = activeStep - 1
+    let prev = activeStep - 1
+    if (prev === 4 && props?.values?.member?.become_member) {
+      prev--
+    }
+    if (prev === 3 && props?.values?.holder?.ismember) {
+      prev--
+    }
     setActiveStep(Math.max(0, prev))
     if (completed) {
       setCompleted(false)
