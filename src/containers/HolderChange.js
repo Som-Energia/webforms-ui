@@ -25,6 +25,7 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
 import Review from './HolderChange/Review'
+import MemberIdentifier from './HolderChange/MemberIdentifier'
 import Success from './Success'
 import Failure from './Failure'
 
@@ -181,7 +182,7 @@ function HolderChange(props) {
       member: Yup.object().shape({
         become_member: Yup.bool()
           .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
       }),
     }),
     Yup.object().shape({
@@ -246,10 +247,11 @@ function HolderChange(props) {
         {activeStep === 1 && <CUPS {...props} />}
         {activeStep === 2 && <PersonalData url={url} {...props} />}
         {activeStep === 3 && <BecomeMember {...props} />}
-        {activeStep === 4 && <VoluntaryCent {...props} />}
-        {activeStep === 5 && <SpecialCases {...props} />}
-        {activeStep === 6 && <IBAN {...props} />}
-        {activeStep === 7 && <Review {...props} />}
+        {activeStep === 4 && <MemberIdentifier {...props} />}
+        {activeStep === 5 && <VoluntaryCent {...props} />}
+        {activeStep === 6 && <SpecialCases {...props} />}
+        {activeStep === 7 && <IBAN {...props} />}
+        {activeStep === 8 && <Review {...props} />}
       </>
     )
   }
@@ -262,7 +264,10 @@ function HolderChange(props) {
     let next = activeStep + 1
     if (next === 3 && props?.values?.holder?.ismember) {
       props.values.member.become_member = false  // already a member
-      next++
+      next += 2
+    }
+    if (next === 4 && props?.values?.member?.become_member) {
+      next ++
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
@@ -357,7 +362,7 @@ function HolderChange(props) {
       supply_point_accepted: false
     },
     member: {
-      become_member: false,
+      become_member: '',
       invite_token: false
     },
     payment: {
