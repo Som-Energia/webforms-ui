@@ -112,6 +112,7 @@
   "HOLDER_SURNAME1_HELP": "Primer apellido de la persona titular",
   "HOLDER_SURNAME2": "Segundo apellido",
   "HOLDER_SURNAME2_HELP": "Segundo apellido de la persona titular",
+  "HOLDER_MEMBER_IDENTIFIER_DESC": "<p>Introduce el número de socio/a y su DNI:</p>",
   "BUSINESS_NAME": "Razón social",
   "BUSINESS_NAME_HELP": "Razón social",
   "PROXY_NAME": "Nombre del representante legal",

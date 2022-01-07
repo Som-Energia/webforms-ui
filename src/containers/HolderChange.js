@@ -186,6 +186,12 @@ function HolderChange(props) {
       }),
     }),
     Yup.object().shape({
+      member: Yup.object().shape({
+        checked: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+      }),
+    }),Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
           .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
@@ -237,7 +243,7 @@ function HolderChange(props) {
     })
   ]
 
-  const MAX_STEP_NUMBER = 8
+  const MAX_STEP_NUMBER = 9
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
@@ -369,7 +375,8 @@ function HolderChange(props) {
     },
     member: {
       become_member: '',
-      invite_token: false
+      invite_token: false,
+      checked: false
     },
     payment: {
       iban: '',

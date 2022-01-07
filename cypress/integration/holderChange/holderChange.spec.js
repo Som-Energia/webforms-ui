@@ -6,56 +6,56 @@ describe('Holder Change', () => {
     cy.fixture('holderChange.json').as('data')
   })
 
-  describe('Enter VAT', function () {
-    it('Enter invalid VAT', function () {
-      cy.get('[name="holder.vat"]')
-        .type(this.data.vatInvalid).should('have.value', this.data.vatInvalid)
+  // describe('Enter VAT', function () {
+  //   it('Enter invalid VAT', function () {
+  //     cy.get('[name="holder.vat"]')
+  //       .type(this.data.vatInvalid).should('have.value', this.data.vatInvalid)
 
-      cy.contains('El NIF no es correcto')
+  //     cy.contains('El NIF no es correcto')
 
-      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
-    })
+  //     cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+  //   })
 
-    it('Enter valid VAT', function () {
-      cy.get('[name="holder.vat"]')
-        .type(this.data.vat).should('have.value', this.data.vat)
+  //   it('Enter valid VAT', function () {
+  //     cy.get('[name="holder.vat"]')
+  //       .type(this.data.vat).should('have.value', this.data.vat)
 
-      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
-    })
-  })
+  //     cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+  //   })
+  // })
 
-  describe('Enter CUPS', function () {
-    beforeEach(function () {
-      cy.get('[name="holder.vat"]')
-        .type(this.data.vat).should('have.value', this.data.vat)
+  // describe('Enter CUPS', function () {
+  //   beforeEach(function () {
+  //     cy.get('[name="holder.vat"]')
+  //       .type(this.data.vat).should('have.value', this.data.vat)
 
-      cy.get('[data-cy=next]').click()
-    })
+  //     cy.get('[data-cy=next]').click()
+  //   })
 
-    it('Enter invalid CUPS', function () {
-      cy.get('[name="supply_point.cups"]')
-        .type(this.data.cupsInvalid).should('have.value', this.data.cupsInvalid)
-        .blur()
+  //   it('Enter invalid CUPS', function () {
+  //     cy.get('[name="supply_point.cups"]')
+  //       .type(this.data.cupsInvalid).should('have.value', this.data.cupsInvalid)
+  //       .blur()
 
-      cy.contains('CUPS incorrecto')
-    })
+  //     cy.contains('CUPS incorrecto')
+  //   })
 
-    it('Enter valid CUPS', function () {
-      cy.get('[name="supply_point.cups"]')
-        .type(this.data.cups).should('have.value', this.data.cups)
+  //   it('Enter valid CUPS', function () {
+  //     cy.get('[name="supply_point.cups"]')
+  //       .type(this.data.cups).should('have.value', this.data.cups)
 
-      // cy.get('#cupsaddress').should('have.value', this.data.cupsAddress)
+  //     // cy.get('#cupsaddress').should('have.value', this.data.cupsAddress)
 
-      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+  //     cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
 
-      cy.get('[name="supply_point_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
+  //     cy.get('[name="supply_point_accepted"]').click()
+  //     cy.get('[data-cy=accept]').click()
 
-      cy.get('[name="supply_point.verified"]').click()
+  //     cy.get('[name="supply_point.verified"]').click()
 
-      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
-    })
-  })
+  //     cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+  //   })
+  // })
 
   describe('Enter personal data', function () {
     beforeEach(function () {
@@ -116,7 +116,15 @@ describe('Holder Change', () => {
 
       cy.get('[data-cy=next]').click()
 
-      cy.get('[name="become_member_accepted"]').click()
+      // Screen: BecomeMember - No
+      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
+      cy.get('[data-cy=next]').click()
+
+      // Screen: MemberIdentifier - Ok member
+      cy.get('[name="member.number"]')
+        .type(this.data.memberNumber).should('have.value', this.data.memberNumber)
+      cy.get('[name="member.vat"]')
+        .type(this.data.memberVat).should('have.value', this.data.memberVat)
       cy.get('[data-cy=next]').click()
 
       cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()
