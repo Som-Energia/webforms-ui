@@ -168,8 +168,7 @@ export const normalizeHolderChange = (contract) => {
   normalContract.holder?.door !== undefined &&
     delete normalContract.holder?.door
 
-  "ismember" in normalContract?.holder &&
-    delete normalContract.holder.ismember
+
 
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
@@ -179,17 +178,32 @@ export const normalizeHolderChange = (contract) => {
     delete normalContract.holder.proxynif_valid
   }
 
-  if (
-    normalContract?.member?.become_member === undefined ||
-    normalContract?.member?.become_member === ''
-  ) {
-    if (normalContract?.member === undefined) {
-      normalContract.member = {}
-    }
-    normalContract.member.is_member = true
+  // delete member fields
+  if ("name" in normalContract?.member) {
+    delete normalContract?.member?.name
+    delete normalContract?.member?.address
+    delete normalContract?.member?.postal_code
+    delete normalContract?.member?.state
+    delete normalContract?.member?.city
+    delete normalContract?.member?.surname1
+    delete normalContract?.member?.email
+    delete normalContract?.member?.phone1
+    delete normalContract?.member?.phone2
+    delete normalContract?.member?.language
+    delete normalContract?.member?.checked
+    delete normalContract?.member?.full_name
+  }
+
+  if (normalContract?.holder?.ismember) {
     normalContract.member.become_member = false
-  } else {
-    normalContract.member.is_member = false
+  }
+
+  if (
+    normalContract?.member?.become_member === true &&
+    "vat" in normalContract?.member
+  ) {
+    delete normalContract?.member?.vat
+    delete normalContract?.member?.number
   }
 
   if (normalContract?.legal_person_accepted !== undefined) {

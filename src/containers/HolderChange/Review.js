@@ -112,7 +112,10 @@ const Review = (props) => {
             values?.especial_cases?.reason_electrodep &&
             <ReviewField label={t('SPECIAL_CASES_TITLE')} value={t('SPECIAL_CASES_ELECTRODEP')} />
           }
-          <ReviewField label={t('RELATED_MEMBER')} value={ (`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`) } />
+          <ReviewField label={t('RELATED_MEMBER')} value={ values?.member?.become_member &&
+            (`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`) ||
+            (`${values?.member?.name} ${values?.member?.surname1}`)
+          } />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">{t('SUPPLY')}</Typography>
