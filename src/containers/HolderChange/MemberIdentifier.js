@@ -20,7 +20,6 @@ function MemberIdentifier (props) {
       <Box mt={0} mb={1}>
         <MemberIdentifierFields {...props} />
       </Box>
-      {/* <Box mt={3} mb={4}> /> */}
     </>
   )
 }

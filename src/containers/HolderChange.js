@@ -269,7 +269,6 @@ function HolderChange(props) {
   const nextStep = (props) => {
     let next = activeStep + 1
     if (next === 3 && props?.values?.holder?.ismember) {
-      props.values.member.become_member = false  // already a member
       next += 2
     }
     if (next === 4 && props?.values?.member?.become_member) {
@@ -287,10 +286,10 @@ function HolderChange(props) {
 
   const prevStep = (props) => {
     let prev = activeStep - 1
-    if (prev === 4 && props?.values?.member?.become_member) {
-      prev--
+    if (prev === 4 && props?.values?.holder?.ismember) {
+      prev -= 2
     }
-    if (prev === 3 && props?.values?.holder?.ismember) {
+    if (prev === 4 && props?.values?.member?.become_member) {
       prev--
     }
     setActiveStep(Math.max(0, prev))
