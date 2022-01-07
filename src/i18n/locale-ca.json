@@ -111,6 +111,7 @@
   "HOLDER_SURNAME1_HELP": "Primer cognom de la persona titular",
   "HOLDER_SURNAME2": "Segon cognom",
   "HOLDER_SURNAME2_HELP": "Segon cognom de la persona titular",
+  "HOLDER_MEMBER_IDENTIFIER_DESC": "<p>Introdueix el número de soci/a i el seu DNI:</p>",
   "BUSINESS_NAME": "Raó social",
   "BUSINESS_NAME_HELP": "Raó social",
   "PROXY_NAME": "Nom del representant legal",
