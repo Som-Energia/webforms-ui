@@ -38,6 +38,7 @@ function BecomeMember (props) {
               description: t('BECOME_MEMBER_NO_DESCRIPTION')
             }
           ]}
+          canBeEmpty={false}
       />
       </Box>
     </>
