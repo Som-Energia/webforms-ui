@@ -12,6 +12,7 @@ function BecomeMember (props) {
   const { t } = useTranslation()
 
   const handleChange = ({ option }) => {
+    props.setFieldValue('member.link_member', !option)
     props.setFieldValue('member.become_member', option)
   }
 
