@@ -42,6 +42,9 @@ function BecomeMember (props) {
           canBeEmpty={false}
       />
       </Box>
+      <FormHelperText
+          dangerouslySetInnerHTML={{ __html: t('MEMBER_ENERGETICA_HELPER') }}
+      />
     </>
   )
 }
