@@ -4,6 +4,7 @@ describe('Holder Change', () => {
   beforeEach(() => {
     cy.visit('/holder-change')
     cy.fixture('holderChange.json').as('data')
+    cy.fixture('contract.json').as('dataContract')
   })
 
   describe('Enter VAT', function () {
@@ -45,6 +46,7 @@ describe('Holder Change', () => {
         .type(this.data.cups).should('have.value', this.data.cups)
 
       // cy.get('#cupsaddress').should('have.value', this.data.cupsAddress)
+      cy.wait(5000)
 
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
 
@@ -66,6 +68,7 @@ describe('Holder Change', () => {
 
       cy.get('[name="supply_point.cups"]')
         .type(this.data.cups).should('have.value', this.data.cups)
+      cy.wait(5000)
 
       cy.get('[name="supply_point_accepted"]').click()
       cy.get('[data-cy=accept]').click()
@@ -116,7 +119,15 @@ describe('Holder Change', () => {
 
       cy.get('[data-cy=next]').click()
 
-      cy.get('[name="become_member_accepted"]').click()
+      // Screen: BecomeMember - No
+      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
+      cy.get('[data-cy=next]').click()
+
+      // Screen: MemberIdentifier - Ok member
+      cy.get('[name="member.number"]')
+        .type(this.dataContract.member.number).should('have.value', this.dataContract.member.number)
+      cy.get('[name="member.vat"]')
+        .type(this.dataContract.member.vat).should('have.value', this.dataContract.member.vat)
       cy.get('[data-cy=next]').click()
 
       cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()

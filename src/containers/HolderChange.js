@@ -25,6 +25,7 @@ import VoluntaryCent from './HolderChange/VoluntaryCent'
 import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
 import Review from './HolderChange/Review'
+import MemberIdentifier from './HolderChange/MemberIdentifier'
 import Success from './Success'
 import Failure from './Failure'
 
@@ -181,10 +182,16 @@ function HolderChange(props) {
       member: Yup.object().shape({
         become_member: Yup.bool()
           .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
       }),
     }),
     Yup.object().shape({
+      member: Yup.object().shape({
+        checked: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+      }),
+    }),Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
           .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
@@ -236,7 +243,7 @@ function HolderChange(props) {
     })
   ]
 
-  const MAX_STEP_NUMBER = 8
+  const MAX_STEP_NUMBER = 9
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
@@ -246,10 +253,11 @@ function HolderChange(props) {
         {activeStep === 1 && <CUPS {...props} />}
         {activeStep === 2 && <PersonalData url={url} {...props} />}
         {activeStep === 3 && <BecomeMember {...props} />}
-        {activeStep === 4 && <VoluntaryCent {...props} />}
-        {activeStep === 5 && <SpecialCases {...props} />}
-        {activeStep === 6 && <IBAN {...props} />}
-        {activeStep === 7 && <Review {...props} />}
+        {activeStep === 4 && <MemberIdentifier {...props} />}
+        {activeStep === 5 && <VoluntaryCent {...props} />}
+        {activeStep === 6 && <SpecialCases {...props} />}
+        {activeStep === 7 && <IBAN {...props} />}
+        {activeStep === 8 && <Review {...props} />}
       </>
     )
   }
@@ -261,7 +269,9 @@ function HolderChange(props) {
   const nextStep = (props) => {
     let next = activeStep + 1
     if (next === 3 && props?.values?.holder?.ismember) {
-      props.values.member.become_member = false  // already a member
+      next += 2
+    }
+    if (next === 4 && props?.values?.member?.become_member) {
       next++
     }
     const last = MAX_STEP_NUMBER
@@ -275,7 +285,13 @@ function HolderChange(props) {
   }
 
   const prevStep = (props) => {
-    const prev = activeStep - 1
+    let prev = activeStep - 1
+    if (prev === 4 && props?.values?.holder?.ismember) {
+      prev -= 2
+    }
+    if (prev === 4 && props?.values?.member?.become_member) {
+      prev--
+    }
     setActiveStep(Math.max(0, prev))
     if (completed) {
       setCompleted(false)
@@ -357,8 +373,9 @@ function HolderChange(props) {
       supply_point_accepted: false
     },
     member: {
-      become_member: false,
-      invite_token: false
+      become_member: '',
+      invite_token: false,
+      checked: false
     },
     payment: {
       iban: '',
