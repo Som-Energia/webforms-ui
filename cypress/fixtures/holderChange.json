@@ -16,5 +16,6 @@
   "phone": "636696969",
   "language": "ca_ES",
   "iban": "ES77 1234 1234 1612 3456 7890",
-  "voluntaryCent": true
+  "voluntaryCent": true,
+  "becomeMember": false
 }
