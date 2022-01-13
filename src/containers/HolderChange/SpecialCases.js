@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 const SpecialCases = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, errors, touched, setFieldValue, validateForm } = props
+  const { values, errors, touched, setFieldValue } = props
 
   const specialHandleChange = (event) => {
     if (event.target.name === 'especial_cases.reason_death') {
@@ -73,27 +73,39 @@ const SpecialCases = (props) => {
       if (values.especial_cases.reason_merge === true) {
         setFieldValue('especial_cases.reason_merge', false, false)
       }
-      setFieldValue('especial_cases.reason_death', !values.especial_cases.reason_death, true)
+      setFieldValue(
+        'especial_cases.reason_death',
+        !values.especial_cases.reason_death,
+        true
+      )
     } else if (event.target.name === 'especial_cases.reason_merge') {
       if (values.especial_cases.reason_death === true) {
         setFieldValue('especial_cases.reason_death', false, false)
         setFieldValue('especial_cases.attachments.death', [], false)
       }
-      setFieldValue('especial_cases.reason_merge', !values.especial_cases.reason_merge, true)
+      setFieldValue(
+        'especial_cases.reason_merge',
+        !values.especial_cases.reason_merge,
+        true
+      )
     } else if (event.target.name === 'especial_cases.reason_electrodep') {
       if (values.especial_cases.reason_electrodep === true) {
         setFieldValue('especial_cases.attachments.medical', [], false)
         setFieldValue('especial_cases.attachments.resident', [], false)
       }
-      setFieldValue('especial_cases.reason_electrodep', !values.especial_cases.reason_electrodep, true)
+      setFieldValue(
+        'especial_cases.reason_electrodep',
+        !values.especial_cases.reason_electrodep,
+        true
+      )
     }
-    validateForm()
   }
 
   return (
     <>
       <StepHeader title={t('SPECIAL_CASES_TITLE')} />
-      <Typography variant="body1"
+      <Typography
+        variant="body1"
         dangerouslySetInnerHTML={{ __html: t('SPECIAL_CASES_QUESTION') }}
       />
       <Box mt={3} mb={0}>
@@ -109,52 +121,86 @@ const SpecialCases = (props) => {
                 />
               }
               label={t('SPECIAL_CASES_REASON_DEATH')}
-              className={clsx(classes.chooserItem, values.especial_cases?.reason_death && classes.chooserItemSelected)}
+              className={clsx(
+                classes.chooserItem,
+                values.especial_cases?.reason_death &&
+                  classes.chooserItemSelected
+              )}
             />
-            { values.especial_cases?.reason_death &&
+            {values.especial_cases?.reason_death && (
               <>
                 <Typography className={classes.attachmentTitle}>
                   {t('CERT_ATTACH_DEATH')}
                 </Typography>
                 <Box mt={1} mb={2}>
                   <Uploader
-                    fieldError={errors.especial_cases?.attachments && touched.especial_cases?.attachments && errors.especial_cases?.attachments}
-                    callbackFn={attachments => setFieldValue('especial_cases.attachments.death', attachments)}
+                    fieldError={
+                      errors.especial_cases?.attachments &&
+                      touched.especial_cases?.attachments &&
+                      errors.especial_cases?.attachments
+                    }
+                    callbackFn={(attachments) =>
+                      setFieldValue(
+                        'especial_cases.attachments.death',
+                        attachments
+                      )
+                    }
                     values={values.especial_cases.attachments?.death}
                   />
                 </Box>
               </>
-            }
+            )}
             <FormControlLabel
               control={
-                <Checkbox checked={values.especial_cases?.reason_merge}
+                <Checkbox
+                  checked={values.especial_cases?.reason_merge}
                   onChange={specialHandleChange}
                   name="especial_cases.reason_merge"
                   color="primary"
                 />
               }
               label={t('SPECIAL_CASES_REASON_MERGE')}
-              className={clsx(classes.chooserItem, values.especial_cases?.reason_merge && classes.chooserItemSelected)}
+              className={clsx(
+                classes.chooserItem,
+                values.especial_cases?.reason_merge &&
+                  classes.chooserItemSelected
+              )}
             />
-            <FormControlLabel disabled={values.especial_cases?.reason_merge}
+            <FormControlLabel
+              disabled={values.especial_cases?.reason_merge}
               control={
-                <Checkbox checked={values.especial_cases?.reason_electrodep}
+                <Checkbox
+                  checked={values.especial_cases?.reason_electrodep}
                   onChange={specialHandleChange}
                   name="especial_cases.reason_electrodep"
-                  color="primary" />
+                  color="primary"
+                />
               }
               label={t('SPECIAL_CASES_REASON_ELECTRODEP')}
-              className={clsx(classes.chooserItem, values.especial_cases?.reason_electrodep && classes.chooserItemSelected)}
+              className={clsx(
+                classes.chooserItem,
+                values.especial_cases?.reason_electrodep &&
+                  classes.chooserItemSelected
+              )}
             />
-            { values.especial_cases?.reason_electrodep &&
+            {values.especial_cases?.reason_electrodep && (
               <>
                 <Typography className={classes.attachmentTitle}>
                   {t('ELECTRODEP_ATTACH_MEDICAL')}
                 </Typography>
                 <Box mt={1} mb={1}>
                   <Uploader
-                    fieldError={errors.attachments && touched.attachments && errors.attachments}
-                    callbackFn={attachments => setFieldValue('especial_cases.attachments.medical', attachments)}
+                    fieldError={
+                      errors.attachments &&
+                      touched.attachments &&
+                      errors.attachments
+                    }
+                    callbackFn={(attachments) =>
+                      setFieldValue(
+                        'especial_cases.attachments.medical',
+                        attachments
+                      )
+                    }
                     values={values.especial_cases.attachments?.medical}
                   />
                 </Box>
@@ -163,13 +209,22 @@ const SpecialCases = (props) => {
                 </Typography>
                 <Box mt={1} mb={0}>
                   <Uploader
-                    fieldError={errors.attachments && touched.attachments && errors.attachments}
-                    callbackFn={attachments => setFieldValue('especial_cases.attachments.resident', attachments)}
+                    fieldError={
+                      errors.attachments &&
+                      touched.attachments &&
+                      errors.attachments
+                    }
+                    callbackFn={(attachments) =>
+                      setFieldValue(
+                        'especial_cases.attachments.resident',
+                        attachments
+                      )
+                    }
                     values={values.especial_cases.attachments?.resident}
                   />
                 </Box>
               </>
-            }
+            )}
           </FormGroup>
         </FormControl>
       </Box>
