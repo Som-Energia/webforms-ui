@@ -168,8 +168,6 @@ export const normalizeHolderChange = (contract) => {
   normalContract.holder?.door !== undefined &&
     delete normalContract.holder?.door
 
-
-
   if (normalContract?.holder?.phone2 === '') {
     delete normalContract.holder.phone2
   }
@@ -179,7 +177,7 @@ export const normalizeHolderChange = (contract) => {
   }
 
   // delete member fields
-  if ("name" in normalContract?.member) {
+  if ('name' in normalContract?.member) {
     delete normalContract?.member?.name
     delete normalContract?.member?.address
     delete normalContract?.member?.postal_code
@@ -198,11 +196,15 @@ export const normalizeHolderChange = (contract) => {
     normalContract.member.become_member = false
     normalContract.member.link_member = false
   }
-  "ismember" in normalContract?.holder && delete normalContract.holder.ismember
+  'ismember' in normalContract?.holder && delete normalContract.holder.ismember
 
   if (!normalContract?.member?.link_member) {
-    "vat" in normalContract?.member && delete normalContract.member.vat
-    "number" in normalContract?.member && delete normalContract.member.number
+    'vat' in normalContract?.member && delete normalContract.member.vat
+    'number' in normalContract?.member && delete normalContract.member.number
+  }
+
+  if (normalContract?.member?.checked !== undefined) {
+    delete normalContract?.member?.checked
   }
 
   if (normalContract?.legal_person_accepted !== undefined) {
