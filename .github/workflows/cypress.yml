@@ -15,7 +15,7 @@ jobs:
         with:
           browser: chrome
           record: true
-          start: yarn start
+          start: yarn react-scripts start
           wait-on: 'http://localhost:3000'
           config: baseUrl=http://localhost:3000
         env:
