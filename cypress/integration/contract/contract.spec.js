@@ -10,7 +10,7 @@ describe('Contract', () => {
   })
 
   describe('Contract with selfconsumption', function () {
-    it.only('2.0TD', function () {
+    it('2.0TD', function () {
       cy.identifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
@@ -41,7 +41,7 @@ describe('Contract', () => {
     })
   })
 
-  describe('Contract with CUPS has no service', function () {
+  describe('Contract with CUPS without service', function () {
     beforeEach(function () {
       cy.identifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
@@ -66,7 +66,18 @@ describe('Contract', () => {
       cy.reviewAndConfirmData()
     })
 
-    it('3.0TD no incremental powers', function () {
+    it('Can not contract 3.0TD', function () {
+      const moreThan15Kw = true
+
+      cy.choosePhase(this.data.phase)
+
+      cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
+
+      cy.get('.MuiAlert-message').contains('no es posible contratar')
+    })
+
+    // contract 3.0TD not allowed
+    it.skip('3.0TD no incremental powers', function () {
       const moreThan15Kw = true
       const powers = [
         this.data.power,
