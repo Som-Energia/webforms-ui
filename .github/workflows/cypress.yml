@@ -1,4 +1,5 @@
 name: cypress webforms-ui
+on:
   push:
     branches:
       - master
