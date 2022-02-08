@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Success = (props) => {
-  const { result, description, title } = props
+  const { result, description, title, showTitle = true } = props
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
@@ -59,7 +59,9 @@ const Success = (props) => {
 
   return (
     <>
-      <StepHeader title={t('SUCCESS_TITLE')} />
+      {
+        showTitle && <StepHeader title={t('SUCCESS_TITLE')} />
+      }
       <div className={classes.container}>
         <Avatar className={classes.success}>
           <DoneIcon fontSize="large" />

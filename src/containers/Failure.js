@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 function Failure(props) {
   const { t, i18n } = useTranslation()
   const classes = useStyles()
-  const { error = false, description = 'NEWMEMBER_KO_DESCRIPTION' } = props
+  const { error = false, description = 'NEWMEMBER_KO_DESCRIPTION', showTitle = true } = props
 
   useEffect(() => {
     const language = props?.match?.params?.language
@@ -59,7 +59,7 @@ function Failure(props) {
 
   return (
     <>
-      <StepHeader title={t('FAILURE_TITLE')} />
+      { showTitle && <StepHeader title={t('FAILURE_TITLE')} /> }
       <div className={classes.container}>
         <Avatar className={classes.error}>
           <CloseIcon fontSize="large" />
@@ -78,7 +78,9 @@ function Failure(props) {
                 ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
                   ? t(error?.data?.[0]?.field.toUpperCase())
                   : t('INVALID_FIELD', { field_name: error?.data?.[0]?.field })
-                : t('UNEXPECTED_POSTERROR', {
+                : error?.code === 'INVOICE_ERROR'
+                  ? error?.error
+                  : t('UNEXPECTED_POSTERROR', {
                     error_message: error?.code ? t(error?.code) : error?.error
                   })
           }}
