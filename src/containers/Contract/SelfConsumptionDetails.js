@@ -34,12 +34,10 @@ const SelfConsumptionDetails = (props) => {
 
   const handleCollectiveInstallation = ({ option }) => {
     setFieldValue('self_consumption.collective_installation', option)
-    validateForm()
   }
 
   const handleAuxiliaryService = ({ option }) => {
     setFieldValue('self_consumption.aux_services', option)
-    validateForm()
   }
 
   const handleChangeSelect = (event) => {
