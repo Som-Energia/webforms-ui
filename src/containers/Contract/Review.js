@@ -426,9 +426,10 @@ const Review = (props) => {
           />
           <FormHelperText
             dangerouslySetInnerHTML={{
-              __html: `${t('LLOGUER_COMPTADOR')} &nbsp; ${
-                prices?.comptador?.value
-              } ${prices?.comptador?.uom}.`
+              __html: t('LLOGUER_COMPTADOR', {
+                valor: prices?.comptador?.value,
+                uom: prices?.comptador?.uom
+              })
             }}
           />
 

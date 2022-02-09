@@ -298,7 +298,7 @@
   "BO_SOCIAL": "Bono social",
   "CONCEPTES_EXTRES": "A estos precios se deben sumar los siguientes conceptos:",
   "EXTRA_REACTIVA": "En determinadas condiciones de la instalación, a estos precios se puede añadir <b>un recargo por energía reactiva</b>.",
-  "LLOGUER_COMPTADOR": "<b>Alquiler contador</b>: Depende cada caso. En general, {{valor}} {{uom}} con impuesto",
+  "LLOGUER_COMPTADOR": "<b>Alquiler contador</b>: Depende cada caso. En general, {{valor}} {{uom}} con impuestos",
   "TIPUS_INSTALLACIO_CONTRACTACIO": "¿Qué tipo de instalación tienes?",
   "POTENCIA_A_CONTRACTAR_CONTRACTACIO": "¿Qué potencia quieres contratar?",
   "DISCRIMINACIO_HORARIA_CONTRACTACIO": "¿Quieres discriminación horaria?",
