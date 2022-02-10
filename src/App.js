@@ -28,7 +28,7 @@ const theme = createTheme({
     secondary: {
       main: '#a1a1a1'
     },
-    backgroundColor: '#ffffff',
+    background: { default: 'transparent', paper: '#ffffff' },
     contrastThreshold: 2,
     tonalOffset: 0.2
   },
@@ -101,10 +101,12 @@ const App = (props) => {
   }
 
   const loadInvoicePaymentData = () => {
-    const data = typeof props.invoicePayment === 'string' && props.invoicePayment !== '' ? JSON.parse(props.invoicePayment) : {}
+    const data =
+      typeof props.invoicePayment === 'string' && props.invoicePayment !== ''
+        ? JSON.parse(props.invoicePayment)
+        : {}
     return data
   }
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -288,20 +290,22 @@ const App = (props) => {
                 <Route
                   path="/:language/invoices/:invoice_id/payment_ko"
                   element={
-                  <Failure
-                    showTitle={false}
-                    {...props}
-                    error={loadInvoicePaymentData()}
-                  />}
+                    <Failure
+                      showTitle={false}
+                      {...props}
+                      error={loadInvoicePaymentData()}
+                    />
+                  }
                 />
                 <Route
                   path="/:language/invoices/:invoice_id/payment_ok"
                   element={
-                  <Success
-                    showTitle={false}
-                    {...props}
-                    {...loadInvoicePaymentData()}
-                  />}
+                    <Success
+                      showTitle={false}
+                      {...props}
+                      {...loadInvoicePaymentData()}
+                    />
+                  }
                 />
               </Routes>
             </Router>
