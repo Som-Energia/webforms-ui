@@ -183,12 +183,15 @@ const Review = (props) => {
   }
 
   const Prices = ({ concept, name }) => {
+    let keys = Object.keys(concept)
+    keys.sort()
     return (
       <div className={classes.prices}>
         {concept ? (
-          Object.entries(concept).map(([key, value]) => (
-            <span
-              key={`${name}:${key}`}>{`${value?.value} ${value?.uom}`}</span>
+          keys.map( (value, index) => (
+            <span key={`${name}:${value}`}>
+              {`${concept[value]?.value} ${concept[value]?.uom}`}
+            </span>
           ))
         ) : (
           <>{t('UNAVAILABLE')}</>
@@ -423,9 +426,10 @@ const Review = (props) => {
           />
           <FormHelperText
             dangerouslySetInnerHTML={{
-              __html: `${t('LLOGUER_COMPTADOR')} &nbsp; ${
-                prices?.comptador?.value
-              } ${prices?.comptador?.uom}.`
+              __html: t('LLOGUER_COMPTADOR', {
+                valor: prices?.comptador?.value,
+                uom: prices?.comptador?.uom
+              })
             }}
           />
 
