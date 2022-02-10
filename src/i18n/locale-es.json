@@ -232,7 +232,7 @@
   "SUCCESS_TEXT": "Hemos tramitado con éxito tu solicitud",
   "SUCCESS_NOTE": "El nuevo contrato tendrá el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el trámite sea efectivo.",
   "CONTRACT_TITLE": "Contratación",
-  "MEMBER_IDENTIFIER_DESC": "<p>Contratar la luz con Som Energia es rápido, sencillo y no requiere ningún cambio en la instalación. Solo es necesario ser socia o socio de la cooperativa y rellenar este formulario. ¿No eres socio o socia? Asóciate en <a href=\"//www.somenergia.coop/es/hazte-socio-a/\">aquí</a>!</p><p>Introduce el <b>número y NIF del tomador</b> del contrato.</p>",
+  "MEMBER_IDENTIFIER_DESC": "<p>Contratar la luz con Som Energia es rápido, sencillo y no requiere ningún cambio en la instalación. Solo es necesario ser socia o socio de la cooperativa y rellenar este formulario. ¿No eres socio o socia? Asóciate en <a href=\"//www.somenergia.coop/es/hazte-socio-a/\">aquí</a>!</p><p>Introduce el <b>número y NIF del socio/a</b> del contrato.</p>",
   "NUMERO_SOCI": "Número de socio/a",
   "VAT": "NIF",
   "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu nº de socio/a?</a>.",
