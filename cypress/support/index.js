@@ -16,5 +16,8 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+import './contractCommands'
+import './holderChangeCommands'
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

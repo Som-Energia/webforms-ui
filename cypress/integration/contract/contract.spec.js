@@ -51,6 +51,16 @@ describe('Contract', () => {
       cy.enterSupplyPointData(this.data.supplyPoint)
     })
 
+    it('Can not contract 3.0TD', function () {
+      const moreThan15Kw = true
+
+      cy.choosePhase(this.data.phase)
+
+      cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
+
+      cy.get('.MuiAlert-message').contains('no es posible contratar')
+    })
+
     it('Contract with 2.0TD', function () {
       const moreThan15Kw = false
       const powers = [this.data.power, this.data.power2]
@@ -64,16 +74,6 @@ describe('Contract', () => {
       cy.enterPaymentData(this.data.holder.iban)
 
       cy.reviewAndConfirmData()
-    })
-
-    it('Can not contract 3.0TD', function () {
-      const moreThan15Kw = true
-
-      cy.choosePhase(this.data.phase)
-
-      cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
-
-      cy.get('.MuiAlert-message').contains('no es posible contratar')
     })
 
     // contract 3.0TD not allowed
