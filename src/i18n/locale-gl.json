@@ -170,7 +170,7 @@
   "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"//gl.support.somenergia.coop/article/866-como-podo-saber-o-meu-numero-de-socio-a\">Non lembras o teu número de socio/a?</a>.",
   "VAT": "NIF",
   "NUMERO_SOCI": "Número de socio/a",
-  "MEMBER_IDENTIFIER_DESC": "<p>Contratar a luz con Som Energia é rápido, sinxelo e non precisa ningún cambio na instalación. Só se precisa ser socio ou socia da cooperativa e encher este formulario. Non es socio/a? Faite socio/a <a href=\"//www.somenergia.coop/gl/faite-socio-a/\" target=\"_blank\">aquí</a>!</p><p>Introduce o <b>número de socio/a e NIF do tomador/a </b> do contrato.</p>",
+  "MEMBER_IDENTIFIER_DESC": "<p>Contratar a luz con Som Energia é rápido, sinxelo e non precisa ningún cambio na instalación. Só se precisa ser socio ou socia da cooperativa e encher este formulario. Non es socio/a? Faite socio/a <a href=\"//www.somenergia.coop/gl/faite-socio-a/\" target=\"_blank\">aquí</a>!</p><p>Introduce o <b>número de socio/a e NIF do socio/a </b> do contrato.</p>",
   "CONTRACT_TITLE": "Contratación",
   "SUCCESS_NOTE": "O novo contrato terá o número {{contract_number}}.<br> Informarémoste por correo electrónico cando o trámite entre en efecto.",
   "SUCCESS_TEXT": "Tramitamos con éxito a túa solicitude",
