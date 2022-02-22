@@ -56,26 +56,18 @@ const MemberIdentifierFields = (props) => {
           values.member.number,
           values.member.vat
         )
-        if (member?.state === true && member?.data?.soci?.nom) {
-          setFieldValue(
-            'member.full_name',
-            `${member?.data?.soci?.nom} ${
-              member?.data?.soci?.cognom !== member?.data?.soci?.nom
-                ? member?.data?.soci?.cognom
-                : ''
-            }`,
-            false
-          )
-          setFieldValue('member.name', member?.data?.soci?.nom, false)
-          setFieldValue('member.address', member?.data?.soci?.adreca, false)
-          setFieldValue('member.postal_code', member?.data?.soci?.cp, false)
-          setFieldValue('member.state.id', member?.data?.soci?.provincia, false)
-          setFieldValue('member.city.id', member?.data?.soci?.municipi, false)
-          setFieldValue('member.surname1', member?.data?.soci?.cognom, false)
-          setFieldValue('member.email', member?.data?.soci?.email, false)
-          setFieldValue('member.phone1', member?.data?.soci?.tel, false)
-          setFieldValue('member.phone2', member?.data?.soci?.tel2, false)
-          setFieldValue('member.language', member?.data?.soci?.lang, false)
+        if (member?.state === true) {
+          setFieldValue('member.full_name', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.name', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.address', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.postal_code', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.state.id', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.city.id', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.surname1', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.email', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.phone1', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.phone2', t('DATA_AS_IN_OV'), false)
+          setFieldValue('member.language', t('DATA_AS_IN_OV'), false)
 
           setError(false)
           setFieldValue('member.checked', true)
