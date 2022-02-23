@@ -57,18 +57,6 @@ const MemberIdentifierFields = (props) => {
           values.member.vat
         )
         if (member?.state === true) {
-          setFieldValue('member.full_name', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.name', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.address', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.postal_code', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.state.id', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.city.id', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.surname1', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.email', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.phone1', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.phone2', t('DATA_AS_IN_OV'), false)
-          setFieldValue('member.language', t('DATA_AS_IN_OV'), false)
-
           setError(false)
           setFieldValue('member.checked', true)
         } else {
@@ -154,7 +142,7 @@ const MemberIdentifierFields = (props) => {
               )
             ) : (
               <span className={classes.memberChecked}>
-                {t('SOCIA_TROBADA')}: {values?.member?.full_name}
+                {t('SOCIA_TROBADA')}
               </span>
             ))
           }
