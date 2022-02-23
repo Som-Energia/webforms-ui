@@ -258,11 +258,7 @@ export const normalizeHolderChange = (contract) => {
 export const normalizeContract = (contract) => {
   const finalContract = {}
 
-  const holder =
-    contract.holder.vat === contract.member.vat &&
-    contract.holder.isphisical === true
-      ? contract.member
-      : contract.holder
+  const holder = contract.holder
 
   finalContract.member_number = contract?.member?.number
   finalContract.member_vat = contract?.member?.vat
@@ -296,6 +292,7 @@ export const normalizeContract = (contract) => {
     contract?.supply_point?.supply_point_accepted
 
   finalContract.contract_owner = {}
+  finalContract.contract_owner.member_is_owner = holder.vat === contract.member.vat && holder.isphisical === true
   finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
   finalContract.contract_owner.vat = holder?.vat
   finalContract.contract_owner.name = holder?.name
