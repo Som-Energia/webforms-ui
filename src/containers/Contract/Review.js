@@ -226,7 +226,9 @@ const Review = (props) => {
           />
           <ReviewField
             label={t('RELATED_MEMBER')}
-            value={`${values?.member?.full_name}`}
+            value={
+              values?.member?.full_name ? `${values?.member?.full_name}` : t('DATA_AS_IN_OV')
+            }
           />
         </Grid>
 
@@ -239,7 +241,9 @@ const Review = (props) => {
             <>
               <ReviewField
                 label={t('NAME')}
-                value={`${holder?.name} ${holder?.surname1} ${holder?.surname2}`}
+                value={
+                  holder?.name ? `${holder?.name} ${holder?.surname1} ${holder?.surname2}` : t('DATA_AS_IN_OV')
+                }
               />
             </>
           ) : (
@@ -247,7 +251,9 @@ const Review = (props) => {
               <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
               <ReviewField
                 label={t('PROXY')}
-                value={`${holder?.proxyname} (${holder?.proxynif})`}
+                value={
+                  holder?.proxyname ? `${holder?.proxyname} (${holder?.proxynif})` : t('DATA_AS_IN_OV')
+                }
               />
             </>
           )}
@@ -349,8 +355,12 @@ const Review = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('CONTACT')}
           </Typography>
-          <ReviewField label={t('PHONE')} value={holder?.phone1} />
-          <ReviewField label={t('EMAIL')} value={holder?.email} />
+          <ReviewField label={t('PHONE')} value={
+            holder?.phone1 ? holder?.phone1 : t('DATA_AS_IN_OV')
+          } />
+          <ReviewField label={t('EMAIL')} value={
+            holder?.email ? holder?.email : t('DATA_AS_IN_OV')
+          } />
           <ReviewField
             label={t('LANGUAGE')}
             value={languages[holder?.language]}
