@@ -100,10 +100,6 @@ const Review = (props) => {
                 label={t('NUMERO_SOCI')}
                 value={`${values?.member?.number}`}
               />
-              <ReviewField
-                label={t('NAME')}
-                value={`${values?.member?.full_name}`}
-              />
             </>
           )}
 
@@ -141,17 +137,19 @@ const Review = (props) => {
             </>
           )}
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">
-            {t('CONTACT')}
-          </Typography>
-          <ReviewField label={t('PHONE')} value={values?.member?.phone1} />
-          <ReviewField label={t('EMAIL')} value={values?.member?.email} />
-          <ReviewField
-            label={t('LANGUAGE')}
-            value={languages[values?.member?.language]}
-          />
-        </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography className={classes.sectionTitle} variant="h6">
+              {t('CONTACT')}
+            </Typography>
+            { values?.member?.is_member ? t('DATA_AS_IN_OV') : ( <>
+            <ReviewField label={t('PHONE')} value={values?.member?.phone1} />
+            <ReviewField label={t('EMAIL')} value={values?.member?.email} />
+            <ReviewField
+              label={t('LANGUAGE')}
+              value={languages[values?.member?.language]}
+              />
+            </>) }
+          </Grid>
         <Grid item xs={12} sm={12}>
           <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">
