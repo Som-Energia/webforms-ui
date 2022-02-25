@@ -91,8 +91,8 @@ const Review = (props) => {
   const [rates] = useState(getRates())
   const [loading, setLoading] = useState(true)
 
-  const holder =
-    values.holder.vat === values.member.vat && values.holder.isphisical
+  const use_member_as_holder = values.holder.vat === values.member.vat && values.holder.isphisical
+  const holder = use_member_as_holder
       ? values.member
       : values.holder
 
@@ -226,9 +226,7 @@ const Review = (props) => {
           />
           <ReviewField
             label={t('RELATED_MEMBER')}
-            value={
-              values?.member?.full_name ? `${values?.member?.full_name}` : t('DATA_AS_IN_OV')
-            }
+            value={values?.holder?.vat}
           />
         </Grid>
 
@@ -237,12 +235,12 @@ const Review = (props) => {
             {t('HOLDER')}
           </Typography>
           <ReviewField label={'NIF'} value={values?.holder?.vat} />
-          {values?.holder?.isphisical ? (
+          {values?.holder?.isphisical ? values?.holder?.name && (
             <>
               <ReviewField
                 label={t('NAME')}
                 value={
-                  holder?.name ? `${holder?.name} ${holder?.surname1} ${holder?.surname2}` : t('DATA_AS_IN_OV')
+                  `${holder?.name} ${holder?.surname1} ${holder?.surname2}`
                 }
               />
             </>
@@ -355,16 +353,16 @@ const Review = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('CONTACT')}
           </Typography>
-          <ReviewField label={t('PHONE')} value={
-            holder?.phone1 ? holder?.phone1 : t('DATA_AS_IN_OV')
-          } />
-          <ReviewField label={t('EMAIL')} value={
-            holder?.email ? holder?.email : t('DATA_AS_IN_OV')
-          } />
-          <ReviewField
-            label={t('LANGUAGE')}
-            value={languages[holder?.language]}
-          />
+            {
+              use_member_as_holder ? t('DATA_AS_IN_OV') : (<>
+              <ReviewField label={t('PHONE')} value={holder?.phone1} />
+              <ReviewField label={t('EMAIL')} value={holder?.email} />
+              <ReviewField
+                label={t('LANGUAGE')}
+                value={languages[holder?.language]}
+              />
+            </>)
+            }
         </Grid>
 
         <Grid item xs={12} sm={6}>
