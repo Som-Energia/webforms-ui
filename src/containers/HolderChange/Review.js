@@ -10,13 +10,10 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
 
-import StepHeader from '../../components/StepHeader'
-import TermsDialog from '../../components/TermsDialog'
-
-import { languages } from '../../services/utils'
-
-// import generalTerms from '../../data/HolderChange/generalterms-es.html'
-import GeneralTerms from '../../components/GeneralTerms'
+import StepHeader from 'components/StepHeader'
+import TermsDialog from 'components/TermsDialog'
+import GeneralTerms from 'components/GeneralTerms'
+import { languages } from 'services/utils'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
