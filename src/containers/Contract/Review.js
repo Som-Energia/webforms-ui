@@ -226,7 +226,7 @@ const Review = (props) => {
           />
           <ReviewField
             label={t('RELATED_MEMBER')}
-            value={values?.holder?.vat}
+            value={values?.member?.vat}
           />
         </Grid>
 
