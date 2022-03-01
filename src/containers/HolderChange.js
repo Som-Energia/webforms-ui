@@ -426,11 +426,13 @@ function HolderChange(props) {
                         />
                         <>
                           {completed ? (
-                            error ? (
-                              <Failure error={error} />
-                            ) : (
-                              <Success result={result} />
-                            )
+                            <Box className="step-body">
+                              {error ? (
+                                <Failure error={error} />
+                              ) : (
+                                <Success result={result} />
+                              )}
+                            </Box>
                           ) : (
                             getActiveStep(props)
                           )}
