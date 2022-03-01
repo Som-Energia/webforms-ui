@@ -98,12 +98,12 @@ const Review = (props) => {
 
   useEffect(() => {
     setLoading(true)
-    getPrices(
-      values.contract.rate,
-      holder.vat,
-      values.supply_point.cnae,
-      values.supply_point.city.id
-    )
+    getPrices({
+      tariff: values.contract.rate,
+      vat: holder.vat,
+      cnae: values.supply_point.cnae,
+      city_id: values.supply_point.city.id
+    })
       .then((response) => {
         const tariffPrices = response?.data
         setPrices(tariffPrices)
@@ -188,7 +188,7 @@ const Review = (props) => {
     return (
       <div className={classes.prices}>
         {concept ? (
-          keys.map( (value, index) => (
+          keys.map((value, index) => (
             <span key={`${name}:${value}`}>
               {`${concept[value]?.value} ${concept[value]?.uom}`}
             </span>
