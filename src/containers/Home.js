@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import preval from 'preval.macro'
 
 import AppBar from '@material-ui/core/AppBar'
+import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -14,10 +15,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    backgroundColor: '#f2f2f2'
   },
   content: {
-    backgroundColor: '#f2f2f2',
     flexGrow: 1,
     padding: theme.spacing(12)
   },
@@ -44,13 +45,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const options = [
-  { title: 'Baixa punt de suministrament', href: '/cancellation' },
-  { title: 'Aportació al capital social', href: '/contribution' },
-  { title: 'Contractació', href: '/contract' },
+  { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Alta persona socia', href: '/new-member' },
+  { title: 'Aportació al capital social', href: '/contribution' },
+  { title: 'Baixa punt de suministrament', href: '/cancellation' },
   { title: 'Canvi de titular', href: '/holder-change' },
-  { title: 'Modificació contractual', href: '/modify-contract' },
-  { title: 'Acceptació/Rebuig D1', href: '/d1-detail' }
+  { title: 'Contractació', href: '/contract' },
+  { title: 'Modificació contractual', href: '/modify-contract' }
 ]
 
 const Home = (props) => {
@@ -61,7 +62,7 @@ const Home = (props) => {
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
 
   return (
-    <>
+    <Box class={classes.root}>
       <AppBar position="fixed" color="inherit" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6">
@@ -85,7 +86,7 @@ const Home = (props) => {
           </Paper>
         ))}
       </Container>
-    </>
+    </Box>
   )
 }
 
