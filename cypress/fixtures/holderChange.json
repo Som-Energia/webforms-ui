@@ -2,7 +2,7 @@
   "vat": "58291270R",
   "vatInvalid": "000123123R",
   "cups": "ES0031406238503003AP0F",
-  "cupsInvalid": "ES00311013220",
+  "cupsInvalid": "ES003140623850300XXXXX",
   "cupsAddress": "Pedro López 13 BJO-E",
   "name": "David",
   "surname1": "Palomo",
@@ -17,5 +17,5 @@
   "language": "ca_ES",
   "iban": "ES77 1234 1234 1612 3456 7890",
   "voluntaryCent": true,
-  "becomeMember": false
+  "becomeMember": true
 }

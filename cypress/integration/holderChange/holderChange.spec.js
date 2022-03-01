@@ -24,127 +24,193 @@ describe('Holder Change', () => {
     })
   })
 
-  describe.only('Enter CUPS', function () {
+  describe('Enter CUPS', function () {
     beforeEach(function () {
       cy.identifyHolder(this.data.vat)
       cy.get('[data-cy=next]').click()
     })
 
     it('Enter invalid CUPS', function () {
-      cy.identifySupplyPoint(this.data.cupsInvalid)
+      const ERROR_STATUS_CODE = 400
+      cy.holderChangeIdentSupplyPoint(this.data.cupsInvalid, ERROR_STATUS_CODE)
 
       cy.contains('CUPS incorrecto')
     })
 
     it('Enter valid CUPS', function () {
-      cy.identifySupplyPoint(this.data.cups)
-
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
 
-      cy.get('[name="supply_point_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
-      cy.get('[name="supply_point.verified"]').click()
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
 
       cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=next]').click()
     })
   })
 
   describe('Enter personal data', function () {
     beforeEach(function () {
-      cy.get('[name="holder.vat"]')
-        .type(this.data.vat)
-        .should('have.value', this.data.vat)
-
+      cy.identifyHolder(this.data.vat)
       cy.get('[data-cy=next]').click()
 
-      cy.get('[name="supply_point.cups"]')
-        .type(this.data.cups)
-        .should('have.value', this.data.cups)
-      cy.wait(5000)
-
-      cy.get('[name="supply_point_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
-      cy.get('[name="supply_point.verified"]').click()
-
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
       cy.get('[data-cy=next]').click()
     })
 
-    it('Enter name', function () {
-      cy.get('[name="holder.name"]')
-        .type(this.data.name)
-        .should('have.value', this.data.name)
+    it('Enter personal data', function () {
+      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
 
-      cy.get('[name="holder.surname1"]')
-        .type(this.data.surname1)
-        .should('have.value', this.data.surname1)
+      cy.holderChangePersonalData(this.data)
 
-      cy.get('[name="holder.surname2"]')
-        .type(this.data.surname2)
-        .should('have.value', this.data.surname2)
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=next]').click()
+    })
+  })
 
-      cy.get('[name="holder.address"]')
-        .type(this.data.address)
-        .should('have.value', this.data.address)
-
-      cy.get('[name="holder.number"]')
-        .type(this.data.number)
-        .should('have.value', this.data.number)
-
-      cy.get('[name="holder.postal_code"]')
-        .type(this.data.postalCode)
-        .should('have.value', this.data.postalCode)
-
-      cy.get('#holder_state').click()
-      cy.get(`[data-value="${this.data.stateCode}"]`).click()
-
-      cy.get('#holder_city').click()
-      cy.get(`[data-value="${this.data.cityCode}"]`).click()
-
-      cy.get('[name="holder.email"]')
-        .type(this.data.email)
-        .should('have.value', this.data.email)
-
-      cy.get('[name="holder.email2"]')
-        .type(this.data.email)
-        .should('have.value', this.data.email)
-
-      cy.get('[name="holder.phone1"]')
-        .type(this.data.phone)
-        .should('have.value', this.data.phone)
-
-      cy.get('#holder_lang').click()
-      cy.get('[data-value="ca_ES"]').click()
-
-      cy.get('[name="privacy_policy_accepted"]').click()
-
+  describe('Become member step', function () {
+    beforeEach(function () {
+      cy.identifyHolder(this.data.vat)
       cy.get('[data-cy=next]').click()
 
-      // Screen: BecomeMember - No
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangePersonalData(this.data)
+      cy.get('[data-cy=next]').click()
+    })
+
+    it('Check become member option', function () {
+      // cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+
+      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+
+      cy.get('[data-cy=next]').click()
+    })
+  })
+
+  describe('Voluntary cent step', function () {
+    beforeEach(function () {
+      cy.identifyHolder(this.data.vat)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangePersonalData(this.data)
+      cy.get('[data-cy=next]').click()
+
       cy.get(`[data-value="${this.data.becomeMember}"]`).click()
       cy.get('[data-cy=next]').click()
+    })
 
-      // Screen: MemberIdentifier - Ok member
-      cy.get('[name="member.number"]')
-        .type(this.dataContract.member.number)
-        .should('have.value', this.dataContract.member.number)
-      cy.get('[name="member.vat"]')
-        .type(this.dataContract.member.vat)
-        .should('have.value', this.dataContract.member.vat)
+    it('Check voluntary cent option', function () {
+      // cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+
+      cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+
+      cy.get('[data-cy=next]').click()
+    })
+  })
+
+  describe('Special cases step', function () {
+    beforeEach(function () {
+      cy.identifyHolder(this.data.vat)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangePersonalData(this.data)
+      cy.get('[data-cy=next]').click()
+
+      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
       cy.get('[data-cy=next]').click()
 
       cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()
       cy.get('[data-cy=next]').click()
+    })
+
+    it('Check special cases default', function () {
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+
+      cy.get('input[name="especial_cases.reason_death"]').click()
+      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+
+      cy.get('input[name="especial_cases.reason_default"]').click()
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
 
       cy.get('[data-cy=next]').click()
+    })
+  })
 
-      cy.get('[name="payment.iban"]')
+  describe('Payment step', function () {
+    beforeEach(function () {
+      cy.identifyHolder(this.data.vat)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangePersonalData(this.data)
+      cy.get('[data-cy=next]').click()
+
+      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
+      cy.get('[data-cy=next]').click()
+
+      cy.enterVoluntaryCent(this.data.voluntaryCent)
+
+      cy.get('[data-cy=next]').click()
+    })
+
+    it('Enter IBAN number', function () {
+      cy.get('input[name="payment.iban"]')
         .type(this.data.iban)
         .should('have.value', this.data.iban)
-      cy.get('[name="payment.sepa_accepted"]').click()
+
+      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+
+      cy.get('input[name="payment.sepa_accepted"]').click()
       cy.get('[data-cy=accept]').click()
+
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+
       cy.get('[data-cy=next]').click()
+    })
+  })
+
+  describe.only('Review step', function () {
+    beforeEach(function () {
+      cy.identifyHolder(this.data.vat)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangeIdentSupplyPoint(this.data.cups)
+      cy.get('[data-cy=next]').click()
+
+      cy.holderChangePersonalData(this.data)
+      cy.get('[data-cy=next]').click()
+
+      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
+      cy.get('[data-cy=next]').click()
+
+      cy.enterVoluntaryCent(this.data.voluntaryCent)
+
+      cy.get('[data-cy=next]').click()
+
+      cy.enterPaymentData(this.data.iban)
+    })
+
+    it('Review holder change data', function () {
+      cy.contains('revisa los datos introducidos', { matchCase: false })
+      cy.contains(this.data.vat, { matchCase: false })
+
+      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+
+      cy.contains('acepto las condiciones', { matchCase: false }).click()
+      cy.contains('condiciones generales', { matchCase: false })
+      cy.get('[data-cy=accept]').click()
+
+      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
     })
   })
 })
