@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
@@ -29,15 +29,19 @@ import MemberIdentifier from './HolderChange/MemberIdentifier'
 import Success from './Success'
 import Failure from './Failure'
 
-import data from '../data/HolderChange/data.json'
+import data from 'data/HolderChange/data.json'
 
-import DisplayFormikState from '../components/DisplayFormikState'
+import DisplayFormikState from 'components/DisplayFormikState'
 
-import { holderChange } from '../services/api'
-import { normalizeHolderChange } from '../services/utils'
+import { holderChange } from 'services/api'
+import { normalizeHolderChange } from 'services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: '#f2f2f2',
+    color: theme.palette.text.primary
+  },
+  form: {
     position: 'relative'
   },
   stepContainer: {
@@ -45,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'transparent'
   },
   step: {
     position: 'absolute',
@@ -69,6 +74,10 @@ function HolderChange(props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+
+  const keyMap = {
+    SHOW_INSPECTOR: 'ctrl+alt+shift+d'
+  }
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -183,15 +192,16 @@ function HolderChange(props) {
         become_member: Yup.bool()
           .required(t('UNACCEPTED_PRIVACY_POLICY'))
           .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-      }),
+      })
     }),
     Yup.object().shape({
       member: Yup.object().shape({
         checked: Yup.bool()
           .required(t('UNACCEPTED_PRIVACY_POLICY'))
           .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
-      }),
-    }),Yup.object().shape({
+      })
+    }),
+    Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
           .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
@@ -266,42 +276,40 @@ function HolderChange(props) {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  const nextStep = (props) => {
+  const nextStep = (values, actions) => {
     let next = activeStep + 1
-    if (next === 3 && props?.values?.holder?.ismember) {
+    if (next === 3 && values?.holder?.ismember) {
       next += 2
     }
-    if (next === 4 && props?.values?.member?.become_member) {
+    if (next === 4 && values?.member?.become_member === true) {
       next++
     }
+
     const last = MAX_STEP_NUMBER
-    props.submitForm().then(() => {
-      if (props.isValid) {
-        setActiveStep(Math.min(next, last))
-        props.validateForm()
-        props.setTouched({})
-      }
-    })
+    setActiveStep(Math.min(next, last))
+    actions?.validateForm()
   }
 
-  const prevStep = (props) => {
+  const prevStep = (values, actions) => {
     let prev = activeStep - 1
-    if (prev === 4 && props?.values?.holder?.ismember) {
+    if (prev === 4 && values?.holder?.ismember === true) {
       prev -= 2
     }
-    if (prev === 4 && props?.values?.member?.become_member) {
+    if (prev === 4 && values?.member?.become_member === true) {
       prev--
     }
     setActiveStep(Math.max(0, prev))
+    actions?.validateForm()
     if (completed) {
       setCompleted(false)
       setError(false)
     }
-    props.submitForm().then(() => {
-      props.validateForm()
-      props.setTouched({})
-    })
   }
+
+  const isLastStep = useMemo(
+    () => activeStep >= MAX_STEP_NUMBER - 1,
+    [activeStep]
+  )
 
   const handleError = async (error) => {
     let errorCode = error?.response?.data?.error?.code || 'UNEXPECTED'
@@ -383,6 +391,7 @@ function HolderChange(props) {
       voluntary_cent: ''
     },
     especial_cases: {
+      reason_default: true,
       reason_death: false,
       reason_merge: false,
       reason_electrodep: false,
@@ -394,90 +403,82 @@ function HolderChange(props) {
   }
 
   return (
-    <GlobalHotKeys handlers={handlers}>
-      <Container maxWidth="md">
-        <Formik
-          onSubmit={() => {}}
-          enableReinitialize
-          initialValues={initialValues}
-          validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}>
-          {(props) => (
-            <>
-              <div className="ov-theme">
-                <Form className={classes.root} noValidate autoComplete="off">
-                  {
-                    <Paper elevation={0} className={classes.stepContainer}>
-                      <LinearProgress
-                        variant={sending ? 'indeterminate' : 'determinate'}
-                        value={(activeStep / MAX_STEP_NUMBER) * 100}
-                      />
-                      <Box mx={4} mb={3}>
-                        {completed ? (
-                          error ? (
-                            <Failure error={error} />
+    <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+      <Box className={classes.root}>
+        <Container maxWidth="md">
+          <Formik
+            onSubmit={(values, actions) => {
+              !isLastStep ? nextStep(values, actions) : handlePost(values)
+            }}
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchemas[activeStep]}
+            validateOnMount={true}>
+            {(props) => (
+              <>
+                <div className="ov-theme">
+                  <Form className={classes.form} noValidate autoComplete="off">
+                    {
+                      <Paper elevation={0} className={classes.stepContainer}>
+                        <LinearProgress
+                          variant={sending ? 'indeterminate' : 'determinate'}
+                          value={(activeStep / MAX_STEP_NUMBER) * 100}
+                        />
+                        <>
+                          {completed ? (
+                            error ? (
+                              <Failure error={error} />
+                            ) : (
+                              <Success result={result} />
+                            )
                           ) : (
-                            <Success result={result} />
-                          )
-                        ) : (
-                          getActiveStep(props)
-                        )}
-                      </Box>
-                      <Box mx={4} mt={1} mb={3}>
-                        <div className={classes.actionsContainer}>
-                          {result?.contract_number === undefined && (
-                            <Button
-                              data-cy="prev"
-                              className={classes.button}
-                              startIcon={<ArrowBackIosIcon />}
-                              disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(props)}>
-                              {t('PAS_ANTERIOR')}
-                            </Button>
+                            getActiveStep(props)
                           )}
-                          {activeStep < MAX_STEP_NUMBER - 1 ? (
-                            <Button
-                              type="button"
-                              data-cy="next"
-                              className={classes.button}
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
-                              disabled={!props.isValid}
-                              onClick={() => nextStep(props)}>
-                              {t('SEGUENT_PAS')}
-                            </Button>
-                          ) : (
-                            !completed && (
+                        </>
+                        <Box mx={0} mt={2} mb={3}>
+                          <div className={classes.actionsContainer}>
+                            {result?.contract_number === undefined && (
                               <Button
-                                type="button"
+                                data-cy="prev"
+                                className={classes.button}
+                                startIcon={<ArrowBackIosIcon />}
+                                disabled={activeStep === 0 || sending}
+                                onClick={() => prevStep(props.values, props)}>
+                                {t('PAS_ANTERIOR')}
+                              </Button>
+                            )}
+                            {!completed && (
+                              <Button
+                                type="submit"
+                                data-cy="next"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"
                                 startIcon={
-                                  sending ? (
+                                  isLastStep &&
+                                  (sending ? (
                                     <CircularProgress size={24} />
                                   ) : (
                                     <SendIcon />
-                                  )
+                                  ))
                                 }
-                                disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}>
-                                {t('SEND')}
+                                endIcon={!isLastStep && <ArrowForwardIosIcon />}
+                                disabled={sending || !props.isValid}>
+                                {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
                               </Button>
-                            )
-                          )}
-                        </div>
-                      </Box>
-                    </Paper>
-                  }
-                </Form>
-              </div>
-              {showInspector && <DisplayFormikState {...props} />}
-            </>
-          )}
-        </Formik>
-      </Container>
+                            )}
+                          </div>
+                        </Box>
+                      </Paper>
+                    }
+                  </Form>
+                </div>
+                {showInspector && <DisplayFormikState {...props} />}
+              </>
+            )}
+          </Formik>
+        </Container>
+      </Box>
     </GlobalHotKeys>
   )
 }

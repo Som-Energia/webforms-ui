@@ -102,93 +102,94 @@ function CUPS(props) {
   return (
     <>
       <StepHeader title={t('CUPS_TITLE')} />
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('FILL_CUPS') }}
-      />
-      <Box mt={3} mb={1}>
-        <TextField
-          id="cups"
-          name="supply_point.cups"
-          label={t('CUPS_LABEL')}
-          variant="outlined"
-          fullWidth
-          required
-          value={values?.supply_point?.cups}
-          onChange={handleInputCups}
-          onBlur={handleBlur}
-          error={
-            !isLoading &&
-            errors?.supply_point?.cups &&
-            touched?.supply_point?.cups
-          }
-          helperText={
-            (!isLoading &&
-              touched?.supply_point?.cups &&
-              errors?.supply_point?.cups) || <CupsHelperText />
-          }
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {isLoading && <CircularProgress size={24} />}
-                {!isLoading && isActiveCups() && (
-                  <CheckOutlinedIcon color="primary" />
-                )}
-              </InputAdornment>
-            )
-          }}
+      <Box className="step-body">
+        <Typography
+          variant="body1"
+          dangerouslySetInnerHTML={{ __html: t('FILL_CUPS') }}
         />
-      </Box>
-      <Box mt={3} mb={1}>
-        <TextField
-          id="cupsaddress"
-          label={t('SUPPLY_POINT_ADDRESS')}
-          variant="outlined"
-          fullWidth
-          disabled
-          value={values?.supply_point?.address}
-          helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
-        />
-      </Box>
+        <Box mt={3} mb={1}>
+          <TextField
+            id="cups"
+            name="supply_point.cups"
+            label={t('CUPS_LABEL')}
+            variant="outlined"
+            fullWidth
+            required
+            value={values?.supply_point?.cups}
+            onChange={handleInputCups}
+            onBlur={handleBlur}
+            error={
+              !isLoading &&
+              errors?.supply_point?.cups &&
+              touched?.supply_point?.cups
+            }
+            helperText={
+              (!isLoading &&
+                touched?.supply_point?.cups &&
+                errors?.supply_point?.cups) || <CupsHelperText />
+            }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {isLoading && <CircularProgress size={24} />}
+                  {!isLoading && isActiveCups() && (
+                    <CheckOutlinedIcon color="primary" />
+                  )}
+                </InputAdornment>
+              )
+            }}
+          />
+        </Box>
+        <Box mt={3} mb={1}>
+          <TextField
+            id="cupsaddress"
+            label={t('SUPPLY_POINT_ADDRESS')}
+            variant="outlined"
+            fullWidth
+            disabled
+            value={values?.supply_point?.address}
+            helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
+          />
+        </Box>
 
-      <Box mt={3} mb={0} mx={1}>
-        <FormControlLabel
-          disabled={!isActiveCups()}
-          control={
-            <Checkbox
-              id="supply_point_accepted"
-              color="primary"
-              name="supply_point_accepted"
-              onClick={handleClick}
-              checked={values?.supply_point?.supply_point_accepted}
-              value={true}
-            />
-          }
-          label={t('FAIR_TITLE_LABEL')}
-        />
-      </Box>
+        <Box mt={3} mb={0} mx={1}>
+          <FormControlLabel
+            disabled={!isActiveCups()}
+            control={
+              <Checkbox
+                id="supply_point_accepted"
+                color="primary"
+                name="supply_point_accepted"
+                onClick={handleClick}
+                checked={values?.supply_point?.supply_point_accepted}
+                value={true}
+              />
+            }
+            label={t('FAIR_TITLE_LABEL')}
+          />
+        </Box>
 
-      <Box mx={1} mt={0} mb={2}>
-        <FormControlLabel
-          disabled={!isActiveCups()}
-          control={
-            <Checkbox
-              name="supply_point.verified"
-              onChange={handleChange}
-              checked={values?.supply_point?.verified}
-              color="primary"
-            />
-          }
-          label={t('CUPS_VERIFY_LABEL')}
-        />
+        <Box mx={1} mt={0} mb={2}>
+          <FormControlLabel
+            disabled={!isActiveCups()}
+            control={
+              <Checkbox
+                name="supply_point.verified"
+                onChange={handleChange}
+                checked={values?.supply_point?.verified}
+                color="primary"
+              />
+            }
+            label={t('CUPS_VERIFY_LABEL')}
+          />
+        </Box>
+        <Box ml={1}>
+          <FormHelperText
+            dangerouslySetInnerHTML={{
+              __html: t('CUPS_NO_VERIFY_HELP')
+            }}></FormHelperText>
+        </Box>
       </Box>
-      <Box ml={1}>
-        <FormHelperText
-          dangerouslySetInnerHTML={{
-            __html: t('CUPS_NO_VERIFY_HELP')
-          }}></FormHelperText>
-      </Box>
-
       <TermsDialog
         title={t('FAIR_TITLE')}
         open={open}

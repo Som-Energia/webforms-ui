@@ -5,8 +5,10 @@ import Box from '@material-ui/core/Box'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 
-import StepHeader from '../../components/StepHeader'
-import VATField from '../../components/VATField'
+import Header from 'components/oficinavirtual/Header'
+
+import StepHeader from 'components/StepHeader'
+import VATField from 'components/VATField'
 
 function VAT(props) {
   const {
@@ -30,37 +32,36 @@ function VAT(props) {
   return (
     <>
       <StepHeader title={t('HOLDER_CHANGE')} />
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('FILL_VAT') }}
-      />
-      <Box mt={3} mb={1}>
-        <VATField
-          id="vat"
-          name="holder.vat"
-          label={t('VAT_HOLDERCHANGE_LABEL')}
-          variant="outlined"
-          fullWidth
-          required
-          autoFocus={false}
-          value={values?.holder?.vat}
-          onChange={onChangeVAT}
-          onBlur={handleBlur}
-          error={
-            (errors?.holder?.vat && touched?.holder?.vat) ||
-            (touched?.holder?.vat && values?.holder?.vatvalid === false)
-          }
-          helperText={
-            (touched?.holder?.vat && errors?.holder?.vat) ||
-            (touched?.holder?.vat && errors?.holder?.vatvalid)
-          }
-        />
-      </Box>
-      <Box mt={4} mb={3}>
-        <FormHelperText
-          dangerouslySetInnerHTML={{
-            __html: t('NO_VAT_HELP')
-          }}></FormHelperText>
+      <Box className="step-body">
+        <Box dangerouslySetInnerHTML={{ __html: t('FILL_VAT') }} />
+        <Box mt={3} mb={1}>
+          <VATField
+            id="vat"
+            name="holder.vat"
+            label={t('VAT_HOLDERCHANGE_LABEL')}
+            variant="outlined"
+            fullWidth
+            required
+            autoFocus={false}
+            value={values?.holder?.vat}
+            onChange={onChangeVAT}
+            onBlur={handleBlur}
+            error={
+              (errors?.holder?.vat && touched?.holder?.vat) ||
+              (touched?.holder?.vat && values?.holder?.vatvalid === false)
+            }
+            helperText={
+              (touched?.holder?.vat && errors?.holder?.vat) ||
+              (touched?.holder?.vat && errors?.holder?.vatvalid)
+            }
+          />
+        </Box>
+        <Box mt={4} mb={3}>
+          <FormHelperText
+            dangerouslySetInnerHTML={{
+              __html: t('NO_VAT_HELP')
+            }}></FormHelperText>
+        </Box>
       </Box>
     </>
   )
