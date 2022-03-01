@@ -17,13 +17,14 @@ const Tariff = (props) => {
   }, [language, i18n])
 
   useEffect(() => {
-    const VAT = '40323835M'
-    const CNAE = '9820'
     const CITY_TAX_21 = 20
     const CITY_TAX_10 = 37
 
     setLoading(true)
-    getPrices(tariff, VAT, CNAE, taxType === 21 ? CITY_TAX_21 : CITY_TAX_10)
+    getPrices({
+      tariff,
+      city_id: taxType === 21 ? CITY_TAX_21 : CITY_TAX_10
+    })
       .then((response) => {
         const tariffPrices = response?.data
         setPrices(tariffPrices)
@@ -33,7 +34,7 @@ const Tariff = (props) => {
         setLoading(false)
         console.log(error)
       })
-  }, [taxType])
+  }, [taxType, tariff])
 
   const btnTaxStyle = {
     width: '120px',

@@ -197,7 +197,15 @@ export const checkMember = async (number, vat) => {
   })
 }
 
-export const getPrices = async (tariff, vat, cnae, city_id) => {
+const VAT = '58291270R'
+const CNAE = '9820'
+
+export const getPrices = async ({
+  tariff,
+  vat = VAT,
+  cnae = CNAE,
+  city_id
+}) => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}/data/prices?tariff=${tariff}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
