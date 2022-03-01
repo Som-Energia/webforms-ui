@@ -10,8 +10,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup from '@material-ui/core/FormGroup'
 import Typography from '@material-ui/core/Typography'
 
-import StepHeader from '../../components/StepHeader'
-import Uploader from '../../components/Uploader'
+import StepHeader from 'components/StepHeader'
+import Uploader from 'components/Uploader'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
     '&:not(.Mui-disabled):hover': {
       border: '1px solid rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgba(0, 0, 0, 0.03)'
-    }
+    },
+    height: '100%'
   },
   chooserItemSelected: {
     border: '2px solid #96b633',
@@ -45,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
     '&:not(.Mui-disabled):hover': {
       border: '2px solid #96b633',
       backgroundColor: 'rgba(150, 182, 51, 0.08)'
+    },
+    '& span:last-child': {
+      fontWeight: 'bold',
+      opacity: '0.75'
     }
   },
   chooserItemTitle: {
@@ -67,6 +72,7 @@ const SpecialCases = (props) => {
 
   const specialHandleChange = (event) => {
     if (event.target.name === 'especial_cases.reason_death') {
+      setFieldValue('especial_cases.reason_default', false, false)
       if (values.especial_cases.reason_death === true) {
         setFieldValue('especial_cases.attachments.death', [], false)
       }
@@ -79,6 +85,8 @@ const SpecialCases = (props) => {
         true
       )
     } else if (event.target.name === 'especial_cases.reason_merge') {
+      setFieldValue('especial_cases.reason_default', false, false)
+      setFieldValue('especial_cases.reason_electrodep', false, false)
       if (values.especial_cases.reason_death === true) {
         setFieldValue('especial_cases.reason_death', false, false)
         setFieldValue('especial_cases.attachments.death', [], false)
@@ -89,6 +97,7 @@ const SpecialCases = (props) => {
         true
       )
     } else if (event.target.name === 'especial_cases.reason_electrodep') {
+      setFieldValue('especial_cases.reason_default', false, false)
       if (values.especial_cases.reason_electrodep === true) {
         setFieldValue('especial_cases.attachments.medical', [], false)
         setFieldValue('especial_cases.attachments.resident', [], false)
@@ -98,19 +107,52 @@ const SpecialCases = (props) => {
         !values.especial_cases.reason_electrodep,
         true
       )
+    } else {
+      setFieldValue('especial_cases', {
+        ...values.especial_cases,
+        reason_default: true,
+        reason_death: false,
+        reason_merge: false,
+        reason_electrodep: false,
+        attachments: {
+          death: [],
+          medical: [],
+          resident: []
+        }
+      })
     }
   }
 
   return (
     <>
       <StepHeader title={t('SPECIAL_CASES_TITLE')} />
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('SPECIAL_CASES_QUESTION') }}
-      />
-      <Box mt={3} mb={0}>
+      <Box className="step-body">
         <FormControl component="fieldset" className={classes.container}>
           <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={values.especial_cases?.reason_default}
+                  onChange={specialHandleChange}
+                  name="especial_cases.reason_default"
+                  color="primary"
+                />
+              }
+              label={t('SPECIAL_CASES_REASON_DEFAULT')}
+              className={clsx(
+                classes.chooserItem,
+                values.especial_cases?.reason_default &&
+                  classes.chooserItemSelected
+              )}
+            />
+            <Box mt={1} mb={3}>
+              <Typography
+                variant="body1"
+                dangerouslySetInnerHTML={{
+                  __html: t('SPECIAL_CASES_QUESTION')
+                }}
+              />
+            </Box>
             <FormControlLabel
               control={
                 <Checkbox
@@ -135,9 +177,9 @@ const SpecialCases = (props) => {
                 <Box mt={1} mb={2}>
                   <Uploader
                     fieldError={
-                      errors.especial_cases?.attachments &&
-                      touched.especial_cases?.attachments &&
-                      errors.especial_cases?.attachments
+                      errors.attachments &&
+                      touched.attachments &&
+                      errors.attachments
                     }
                     callbackFn={(attachments) =>
                       setFieldValue(
