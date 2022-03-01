@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   chooserItem: {
     cursor: 'pointer',
     minHeight: '100px',
+    height: '100%',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(3),
@@ -37,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     },
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'flex-start',
+    alignItems: 'top'
   },
   chooserItemCondensed: {
     minHeight: '40px',

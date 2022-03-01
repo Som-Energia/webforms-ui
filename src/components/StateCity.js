@@ -11,7 +11,20 @@ import { getProvincies, getMunicipis } from '../services/api'
 
 const StateCity = (props) => {
   const { t } = useTranslation()
-  const { stateName, stateId, stateInitial, cityName, cityId, cityInitial, stateError, stateHelperText, cityError, cityHelperText, onChange, onBlur } = props
+  const {
+    stateName,
+    stateId,
+    stateInitial,
+    cityName,
+    cityId,
+    cityInitial,
+    stateError,
+    stateHelperText,
+    cityError,
+    cityHelperText,
+    onChange,
+    onBlur
+  } = props
 
   const [state, setState] = useState(stateInitial)
   const [states, setStates] = useState([])
@@ -30,7 +43,7 @@ const StateCity = (props) => {
   useEffect(() => {
     setIsLoadingStates(true)
     getProvincies()
-      .then(response => {
+      .then((response) => {
         const provincies = {}
         response?.data?.provincies &&
           response.data.provincies.forEach(({ id, name }) => {
@@ -38,7 +51,8 @@ const StateCity = (props) => {
           })
         setStates(provincies)
         setIsLoadingStates(false)
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log(error)
         setIsLoadingStates(false)
       })
@@ -48,7 +62,7 @@ const StateCity = (props) => {
     if (state && state?.id !== '') {
       setIsLoadingCities(true)
       getMunicipis(state.id)
-        .then(response => {
+        .then((response) => {
           const municipisNames = {}
           response?.data?.municipis &&
             response.data.municipis.forEach(({ id, name }) => {
@@ -57,7 +71,8 @@ const StateCity = (props) => {
           setCities(response?.data?.municipis)
           setCitiesNames(municipisNames)
           setIsLoadingCities(false)
-        }).catch(error => {
+        })
+        .catch((error) => {
           console.log(error)
           setIsLoadingCities(false)
         })
@@ -66,7 +81,10 @@ const StateCity = (props) => {
 
   const handleStateChange = (event) => {
     event.preventDefault()
-    const newState = { id: event.target.value, name: states[event.target.value] }
+    const newState = {
+      id: event.target.value,
+      name: states[event.target.value]
+    }
     setState(newState)
     setCity({ id: '' })
     onChange({
@@ -77,7 +95,10 @@ const StateCity = (props) => {
 
   const handleCityChange = (event) => {
     event.preventDefault()
-    const newCity = { id: event.target.value, name: citiesNames[event.target.value] }
+    const newCity = {
+      id: event.target.value,
+      name: citiesNames[event.target.value]
+    }
     setCity(newCity)
     onChange({
       state: state,
@@ -100,21 +121,23 @@ const StateCity = (props) => {
           fullWidth
           disabled={!Object.keys(states).length}
           value={state?.id}
-          error={stateError}
+          error={!!stateError}
           helperText={stateHelperText}
           InputProps={{
-            endAdornment:
+            endAdornment: (
               <InputAdornment position="end">
-                { isLoadingStates &&
-                  <CircularProgress size={24} />
-                }
+                {isLoadingStates && <CircularProgress size={24} />}
               </InputAdornment>
-          }}
-        >
-          <MenuItem key="0" value="">{t('STATE')}</MenuItem>
-          {
-            Object.keys(states).map(id => <MenuItem key={id} value={id}>{states[id]}</MenuItem>)
-          }
+            )
+          }}>
+          <MenuItem key="0" value="">
+            {t('STATE')}
+          </MenuItem>
+          {Object.keys(states).map((id) => (
+            <MenuItem key={id} value={id}>
+              {states[id]}
+            </MenuItem>
+          ))}
         </TextField>
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -130,21 +153,23 @@ const StateCity = (props) => {
           fullWidth
           disabled={!Object.keys(cities).length}
           value={city?.id}
-          error={cityError}
+          error={!!cityError}
           helperText={cityHelperText}
           InputProps={{
-            endAdornment:
+            endAdornment: (
               <InputAdornment position="end">
-                { isLoadingCities &&
-                  <CircularProgress size={24} />
-                }
+                {isLoadingCities && <CircularProgress size={24} />}
               </InputAdornment>
-          }}
-        >
-          <MenuItem key="0" value="">{t('CITY')}</MenuItem>
-          {
-            cities.map(({ id, name }) => <MenuItem key={id} value={id}>{name}</MenuItem>)
-          }
+            )
+          }}>
+          <MenuItem key="0" value="">
+            {t('CITY')}
+          </MenuItem>
+          {cities.map(({ id, name }) => (
+            <MenuItem key={id} value={id}>
+              {name}
+            </MenuItem>
+          ))}
         </TextField>
       </Grid>
     </>
