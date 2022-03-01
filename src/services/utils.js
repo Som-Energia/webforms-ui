@@ -293,6 +293,7 @@ export const normalizeContract = (contract) => {
 
   finalContract.contract_owner = {}
   finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
+  finalContract.contract_owner.owner_is_member = holder?.vat === contract?.member?.vat && holder?.isphisical
   finalContract.contract_owner.vat = holder?.vat
   finalContract.contract_owner.name = holder?.name
   finalContract.contract_owner.surname =
