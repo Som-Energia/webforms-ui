@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-import { checkIban } from '../../services/api'
-
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -15,8 +13,9 @@ import TextField from '@material-ui/core/TextField'
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
-import StepHeader from '../../components/StepHeader'
-import TermsDialog from '../../components/TermsDialog'
+import StepHeader from 'components/StepHeader'
+import TermsDialog from 'components/TermsDialog'
+import { checkIban } from 'services/api'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function IBAN (props) {
+function IBAN(props) {
   const { t } = useTranslation()
   const classes = useStyles()
   const { values, handleBlur, setFieldValue, errors, touched } = props
@@ -49,7 +48,7 @@ function IBAN (props) {
     setFieldValue('payment.sepa_accepted', false)
   }
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     let value = event.target.value
     if (value) {
       value = value.match(/[\s0-9A-Za-z]{0,29}/)
@@ -65,12 +64,14 @@ function IBAN (props) {
     if (values.payment.iban.length > 27) {
       setIsLoading(true)
       checkIban(values.payment.iban)
-        .then(response => {
+        .then((response) => {
           setFieldValue('payment.iban_valid', response?.state === true)
           setIsLoading(false)
         })
-        .catch(error => {
-          const errorStatus = error?.response?.data?.state ? error?.response?.data?.state : false
+        .catch((error) => {
+          const errorStatus = error?.response?.data?.state
+            ? error?.response?.data?.state
+            : false
           setFieldValue('payment.iban_valid', errorStatus)
           setIsLoading(false)
         })
@@ -82,60 +83,68 @@ function IBAN (props) {
   return (
     <>
       <StepHeader title={t('PAYMENT_TITLE')} />
-      <Box mt={5} mb={1}>
-        <TextField
-          id="iban"
-          className={classes.icon}
-          label={t('IBAN_LABEL')}
-          name="payment.iban"
-          value={values.payment.iban}
-          variant="outlined"
-          fullWidth
-          required
-          autoFocus
-          InputProps={{
-            startAdornment:
-              <InputAdornment position="start">
-                <AccountBalanceOutlinedIcon />
-              </InputAdornment>,
-            endAdornment:
-            <InputAdornment position="end">
-              { isLoading &&
-                <CircularProgress size={24} />
-              }
-              { !isLoading && values.payment?.iban_valid &&
-                <CheckOutlinedIcon color="primary" />
-              }
-            </InputAdornment>
-          }}
-          onChange={handleInputChange}
-          onBlur={handleBlur}
-          error={(errors?.payment?.iban || errors?.payment?.iban_valid) && touched?.payment?.iban}
-          helperText={(touched?.payment?.iban && (errors?.payment?.iban || errors?.payment?.iban_valid)) || t('IBAN_HELP')}
-        />
-      </Box>
-      <Box mt={4} mb={3}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              disabled={values.payment?.iban_valid !== true}
-              name="payment.sepa_accepted"
-              checked={values.payment.sepa_accepted}
-              onClick={handleClick}
-              color="primary"
-              value={true}
-            />
-          }
-          label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
-        />
+      <Box className="step-body">
+        <Box mt={2} mb={0}>
+          <TextField
+            id="iban"
+            className={classes.icon}
+            label={t('IBAN_LABEL')}
+            name="payment.iban"
+            value={values.payment.iban}
+            variant="outlined"
+            fullWidth
+            required
+            autoFocus
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountBalanceOutlinedIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  {isLoading && <CircularProgress size={24} />}
+                  {!isLoading && values.payment?.iban_valid && (
+                    <CheckOutlinedIcon color="primary" />
+                  )}
+                </InputAdornment>
+              )
+            }}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            error={
+              (errors?.payment?.iban || errors?.payment?.iban_valid) &&
+              touched?.payment?.iban
+            }
+            helperText={
+              (touched?.payment?.iban &&
+                (errors?.payment?.iban || errors?.payment?.iban_valid)) ||
+              t('IBAN_HELP')
+            }
+          />
+        </Box>
+        <Box mt={4} mb={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                disabled={values.payment?.iban_valid !== true}
+                name="payment.sepa_accepted"
+                checked={values.payment.sepa_accepted}
+                onClick={handleClick}
+                color="primary"
+                value={true}
+              />
+            }
+            label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
+          />
+        </Box>
       </Box>
 
       <TermsDialog
         title={t('SEPA_TITLE')}
         open={open}
         onAccept={handleAccept}
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <span dangerouslySetInnerHTML={{ __html: t('SEPA') }} />
       </TermsDialog>
     </>

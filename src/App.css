@@ -96,40 +96,24 @@ StepHeader Component
 }
 
 .ov-theme .header {
-  align-items: stretch;
-  -webkit-align-items: stretch;
-  box-align: stretch;
-  -webkit-box-align: stretch;
-  box-flex: 1;
-  -webkit-box-flex: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  flex-grow: 1;
-  -webkit-flex-grow: 1;
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-
-.ov-theme .header__container {
-  background-color: rgba(150, 182, 51, 0.9);
-  margin-left: -32px;
-  min-width: 0%;
-  padding: 8px 8px 8px 32px;
+  width: 100%;
+  margin: 0 0 1em 0;
+  padding: 1rem 1.5rem;
+  font-size: 18px;
+  background: #fff;
 }
 
 .ov-theme .header__text {
-  color: rgba(0, 0, 0, 60);
-  font-size: 21px;
-  font-weight: 400;
-  text-transform: uppercase;
+  color: #96b633;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.ov-theme .header__after {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 10 10' preserveAspectRatio='none' style='height: 100%25; width: 90%25; overflow: visible; position: absolute;'%3E%3Cpolygon class='freebirdSolidFill' style='fill: rgba(150, 182, 51, 0.90); stroke-width: 0;' points='0,0 10,0 0,10'%3E%3C/polygon%3E%3C/svg%3E");
-  flex-shrink: 0;
-  -webkit-flex-shrink: 0;
-  overflow: visible;
-  position: relative;
-  width: 18px;
+.ov-theme .step-body {
+  padding: 24px 24px;
+  background: #ffffff;
+}
+
+.MuiTypography-body1 p:first-child {
+  margin: 3px 0px 0px;
 }
