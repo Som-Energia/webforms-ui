@@ -225,6 +225,7 @@ export const normalizeHolderChange = (contract) => {
     normalContract?.especial_cases &&
     normalContract?.especial_cases?.attachments
   ) {
+    delete normalContract.especial_cases.reason_default
     const hasSpecialCases = Object.keys(normalContract.especial_cases)
       .map(
         (prop) =>
@@ -293,7 +294,8 @@ export const normalizeContract = (contract) => {
 
   finalContract.contract_owner = {}
   finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
-  finalContract.contract_owner.owner_is_member = holder?.vat === contract?.member?.vat && holder?.isphisical
+  finalContract.contract_owner.owner_is_member =
+    holder?.vat === contract?.member?.vat && holder?.isphisical
   finalContract.contract_owner.vat = holder?.vat
   finalContract.contract_owner.name = holder?.name
   finalContract.contract_owner.surname =
