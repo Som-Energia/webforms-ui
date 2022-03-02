@@ -511,5 +511,5 @@
   "CONTRIBUTION_OK_MSG": "Gràcies! Ja has acabat el procés per fer la teva aportació!",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Recomanem que la potència del període Vall no sigui inferior a la potència del període Punta",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Tingues en compte que el període Vall de potència correspon a l'horari de 00 a 08 h del matí dels dies laborables, i també a totes les hores del cap de setmana i festius estatals.",
-  "DATA_AS_IN_OV": "Segons les dades de la teva Oficina Virtual"
+  "DATA_AS_IN_OV": "Segons les dades de <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/ca/perfil/\">la teva Oficina Virtual</a>"
 }
