@@ -292,44 +292,47 @@ export const normalizeContract = (contract) => {
   finalContract.supply_point_accepted =
     contract?.supply_point?.supply_point_accepted
 
-  finalContract.contract_owner = {}
-  finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
-  finalContract.contract_owner.owner_is_member =
+  finalContract.owner_is_member =
     holder?.vat === contract?.member?.vat && holder?.isphisical
-  finalContract.contract_owner.vat = holder?.vat
-  finalContract.contract_owner.name = holder?.name
-  finalContract.contract_owner.surname =
-    `${holder?.surname1} ${holder?.surname2}`.trim()
-  finalContract.contract_owner.proxy_vat = !contract?.holder?.isphisical
-    ? holder?.proxynif
-    : undefined
-  finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
-    ? holder?.proxyname
-    : undefined
 
-  finalContract.contract_owner.address =
-    contract.holder.vat === contract.member.vat &&
-    contract.holder.isphisical === true
-      ? contract.member.address
-      : `${contract.holder?.address}, ${contract.holder?.number} ${contract.holder?.floor} ${contract.holder?.door}`.trim()
+  if (!finalContract.owner_is_member) {
+    finalContract.contract_owner = {}
+    finalContract.contract_owner.is_juridic = !contract?.holder?.isphisical
+    finalContract.contract_owner.vat = holder?.vat
+    finalContract.contract_owner.name = holder?.name
+    finalContract.contract_owner.surname =
+      `${holder?.surname1} ${holder?.surname2}`.trim()
+    finalContract.contract_owner.proxy_vat = !contract?.holder?.isphisical
+      ? holder?.proxynif
+      : undefined
+    finalContract.contract_owner.proxy_name = !contract?.holder?.isphisical
+      ? holder?.proxyname
+      : undefined
 
-  finalContract.contract_owner.city_id = holder?.city?.id
-    ? parseInt(holder?.city?.id)
-    : 0
+    finalContract.contract_owner.address =
+      contract.holder.vat === contract.member.vat &&
+      contract.holder.isphisical === true
+        ? contract.member.address
+        : `${contract.holder?.address}, ${contract.holder?.number} ${contract.holder?.floor} ${contract.holder?.door}`.trim()
 
-  finalContract.contract_owner.state_id = holder?.state?.id
-    ? parseInt(holder?.state?.id)
-    : 0
+    finalContract.contract_owner.city_id = holder?.city?.id
+      ? parseInt(holder?.city?.id)
+      : 0
 
-  finalContract.contract_owner.postal_code = holder?.postal_code
-  finalContract.contract_owner.email = holder?.email
-  finalContract.contract_owner.phone = holder?.phone1
-  finalContract.contract_owner.phone2 = holder?.phone2
-  finalContract.contract_owner.lang = holder?.language
-  finalContract.contract_owner.privacy_conditions =
-    contract?.privacy_policy_accepted
+    finalContract.contract_owner.state_id = holder?.state?.id
+      ? parseInt(holder?.state?.id)
+      : 0
 
-  finalContract.contract_owner = sanitizeData(finalContract.contract_owner)
+    finalContract.contract_owner.postal_code = holder?.postal_code
+    finalContract.contract_owner.email = holder?.email
+    finalContract.contract_owner.phone = holder?.phone1
+    finalContract.contract_owner.phone2 = holder?.phone2
+    finalContract.contract_owner.lang = holder?.language
+    finalContract.contract_owner.privacy_conditions =
+      contract?.privacy_policy_accepted
+
+    finalContract.contract_owner = sanitizeData(finalContract.contract_owner)
+  }
 
   finalContract.owner_is_payer = true
 
