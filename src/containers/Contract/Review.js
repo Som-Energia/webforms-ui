@@ -249,9 +249,7 @@ const Review = (props) => {
               <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
               <ReviewField
                 label={t('PROXY')}
-                value={
-                  holder?.proxyname ? `${holder?.proxyname} (${holder?.proxynif})` : t('DATA_AS_IN_OV')
-                }
+                value={`${holder?.proxyname} (${holder?.proxynif})`}
               />
             </>
           )}
@@ -354,14 +352,16 @@ const Review = (props) => {
             {t('CONTACT')}
           </Typography>
             {
-              use_member_as_holder ? t('DATA_AS_IN_OV') : (<>
-              <ReviewField label={t('PHONE')} value={holder?.phone1} />
-              <ReviewField label={t('EMAIL')} value={holder?.email} />
-              <ReviewField
-                label={t('LANGUAGE')}
-                value={languages[holder?.language]}
-              />
-            </>)
+              use_member_as_holder
+              ? <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }}/>
+              : (<>
+                <ReviewField label={t('PHONE')} value={holder?.phone1} />
+                <ReviewField label={t('EMAIL')} value={holder?.email} />
+                <ReviewField
+                  label={t('LANGUAGE')}
+                  value={languages[holder?.language]}
+                />
+              </>)
             }
         </Grid>
 

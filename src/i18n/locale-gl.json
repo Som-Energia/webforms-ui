@@ -441,5 +441,5 @@
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Recomendamos que a potencia do período Val non sexa inferior á potencia do período Punta",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Ten en conta que o período Val de potencia corresponde ao horario de 00 a 08 h da mañá dos días laborábeis, e tamén a todas as horas da fin de semana e festivos estatais.",
   "BECOME_MEMBER_HELP_TEXT": "",
-  "DATA_AS_IN_OV": "Segun los datos que tengas en tu Oficina Virtual"
+  "DATA_AS_IN_OV": "Segun los datos que tengas en  <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/gl/perfil/\">tu Oficina Virtual</a>"
 }
