@@ -55,10 +55,10 @@ app_dir="$deploy_path/current"
 function build () {
     if [ $testing -eq 1 ]; then
         log_message "INFO" "Building project for oficinavirtual"
-        yarn build:rename
+        npm run build:rename
     else
         log_message "INFO" "Building project"
-        yarn build
+        npm run build
     fi;
 
     if [ $? != 0 ]
