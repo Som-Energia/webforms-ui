@@ -1,23 +1,33 @@
 # WebForms UI
 
-### Som Energia WebForms React reimplementation
+### Som Energia WebForms UI
 
-## Available Scripts
+## Installation 🔧
 
-In the project directory, you can run:
+1. Install NPM packages
 
-### `yarn start`
+```sh
+  npm install
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Run the app 🚀
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Run the app on dev mode
 
-### `yarn build`
+```sh
+  npm start
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Testing ⚙️
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Launches the Jest test runner in the interactive watch mode.
+
+```sh
+npm test
+```
+
+Launches the Cypress test runner.
+
+```sh
+npm cypress
+```
