@@ -35,6 +35,7 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange } from 'services/utils'
+import { event } from 'react-ga'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -287,7 +288,8 @@ function HolderChange(props) {
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
-    actions?.validateForm()
+    actions.setTouched({})
+    actions.setSubmitting(false)
   }
 
   const prevStep = (values, actions) => {
@@ -299,7 +301,9 @@ function HolderChange(props) {
       prev--
     }
     setActiveStep(Math.max(0, prev))
-    actions?.validateForm()
+    actions.setTouched({})
+    actions.setSubmitting(false)
+
     if (completed) {
       setCompleted(false)
       setError(false)
@@ -328,6 +332,10 @@ function HolderChange(props) {
     console.log(errorResp)
     setError(errorResp)
     setCompleted(true)
+  }
+
+  const handleSubmit = (values, actions) => {
+    isLastStep ? handlePost(values) : nextStep(values, actions)
   }
 
   const handlePost = async (values) => {
@@ -407,13 +415,11 @@ function HolderChange(props) {
       <Box className={classes.root}>
         <Container maxWidth="md">
           <Formik
-            onSubmit={(values, actions) => {
-              !isLastStep ? nextStep(values, actions) : handlePost(values)
-            }}
             enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchemas[activeStep]}
-            validateOnMount={true}>
+            validateOnMount
+            onSubmit={handleSubmit}>
             {(props) => (
               <>
                 <div className="ov-theme">
