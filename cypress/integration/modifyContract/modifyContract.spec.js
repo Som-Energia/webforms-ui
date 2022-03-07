@@ -1,6 +1,11 @@
 /// <reference types="cypress" />
 
 describe('Modify Contract', () => {
+  Cypress.on('uncaught:exception', (error, runnable) => {
+    console.log(error)
+    return false
+  })
+
   beforeEach(() => {
     cy.visit('/modify-contract')
     cy.fixture('modifyContract.json').as('data')
@@ -12,19 +17,24 @@ describe('Modify Contract', () => {
     cy.get('[name=changePower]').click()
 
     cy.get('[name=power]')
-      .type(this.data.power).should('have.value', this.data.power)
+      .type(this.data.power)
+      .should('have.value', this.data.power)
 
     cy.get('[name=power2]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[type=submit]').click()
 
     cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
+      .type(this.data.name)
+      .should('have.value', this.data.name)
     cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
+      .type(this.data.surname)
+      .should('have.value', this.data.surname)
     cy.get('[name=phone]')
-      .type(this.data.phone).should('have.value', this.data.phone)
+      .type(this.data.phone)
+      .should('have.value', this.data.phone)
 
     cy.get('[type=submit]').click()
 
@@ -33,7 +43,10 @@ describe('Modify Contract', () => {
 
     cy.get('[data-cy=tariff]').should('contain', this.data.tariff20)
 
-    cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
+    cy.get('[data-cy=contact]').should(
+      'contain',
+      `${this.data.phone} (${this.data.name} ${this.data.surname})`
+    )
 
     // cy.get('[type=submit]').click({ multiple: true })
   })
@@ -43,35 +56,43 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]')
-      .get('[data-value="true"]').click()
+    cy.get('[name=moreThan15Kw]').get('[data-value="true"]').click()
 
     cy.get('[name=power]')
-      .type(this.data.power).should('have.value', this.data.power)
+      .type(this.data.power)
+      .should('have.value', this.data.power)
 
     cy.get('[name=power2]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[name=power3]')
-      .type(this.data.power3).should('have.value', this.data.power3)
+      .type(this.data.power3)
+      .should('have.value', this.data.power3)
 
     cy.get('[name=power4]')
-      .type(this.data.power4).should('have.value', this.data.power4)
+      .type(this.data.power4)
+      .should('have.value', this.data.power4)
 
     cy.get('[name=power5]')
-      .type(this.data.power5).should('have.value', this.data.power5)
+      .type(this.data.power5)
+      .should('have.value', this.data.power5)
 
     cy.get('[name=power6]')
-      .type(this.data.power6).should('have.value', this.data.power6)
+      .type(this.data.power6)
+      .should('have.value', this.data.power6)
 
     cy.get('[type=submit]').click()
 
     cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
+      .type(this.data.name)
+      .should('have.value', this.data.name)
     cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
+      .type(this.data.surname)
+      .should('have.value', this.data.surname)
     cy.get('[name=phone]')
-      .type(this.data.phone).should('have.value', this.data.phone)
+      .type(this.data.phone)
+      .should('have.value', this.data.phone)
 
     cy.get('[type=submit]').click()
 
@@ -84,7 +105,10 @@ describe('Modify Contract', () => {
 
     cy.get('[data-cy=tariff]').should('contain', this.data.tariff30)
 
-    cy.get('[data-cy=contact]').should('contain', `${this.data.phone} (${this.data.name} ${this.data.surname})`)
+    cy.get('[data-cy=contact]').should(
+      'contain',
+      `${this.data.phone} (${this.data.name} ${this.data.surname})`
+    )
 
     // cy.get('[type=submit]').click({ multiple: true })
   })
@@ -94,26 +118,31 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]')
-      .get('[data-value="true"]').click()
+    cy.get('[name=moreThan15Kw]').get('[data-value="true"]').click()
 
     cy.get('[name=power]')
-      .type(this.data.power).should('have.value', this.data.power)
+      .type(this.data.power)
+      .should('have.value', this.data.power)
 
     cy.get('[name=power2]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[name=power3]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[name=power4]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[name=power5]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[name=power6]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[type=submit]').click()
 
@@ -137,8 +166,7 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
 
-    cy.get('[name=moreThan15Kw]')
-      .get('[data-value="true"]').click()
+    cy.get('[name=moreThan15Kw]').get('[data-value="true"]').click()
 
     cy.get('[type=submit]').click()
 
@@ -164,21 +192,26 @@ describe('Modify Contract', () => {
     cy.get('[name=changePower]').click()
 
     cy.get('[name=power]')
-      .type(this.data.power).should('have.value', this.data.power)
+      .type(this.data.power)
+      .should('have.value', this.data.power)
 
     cy.get('[name=power2]')
-      .type(this.data.power2).should('have.value', this.data.power2)
+      .type(this.data.power2)
+      .should('have.value', this.data.power2)
 
     cy.get('[type=submit]').click()
 
     cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
+      .type(this.data.name)
+      .should('have.value', this.data.name)
 
     cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
+      .type(this.data.surname)
+      .should('have.value', this.data.surname)
 
     cy.get('[name=phone]')
-      .type(this.data.phoneIncomplete).should('have.value', this.data.phoneIncomplete)
+      .type(this.data.phoneIncomplete)
+      .should('have.value', this.data.phoneIncomplete)
       .blur()
       .parent()
       .should('have.class', 'Mui-error')
