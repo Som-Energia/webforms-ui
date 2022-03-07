@@ -16,6 +16,7 @@ jobs:
         with:
           browser: chrome
           record: true
+          parallel: true
           start: npm run start
           wait-on: 'http://localhost:3000'
           config: baseUrl=http://localhost:3000
