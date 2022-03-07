@@ -1,28 +1,37 @@
 /// <reference types="cypress" />
 
 describe('New Member', () => {
+  Cypress.on('uncaught:exception', (error, runnable) => {
+    console.log(error)
+    return false
+  })
+
   beforeEach(() => {
     cy.visit('/new-member')
     cy.fixture('member.json').as('data')
   })
 
   describe('New Member Sign In (legal)', function () {
-
-    function mainTest (data) {
+    function mainTest(data) {
       cy.get('[name="member.name"]')
-        .type(data.legalName).should('have.value', data.legalName)
+        .type(data.legalName)
+        .should('have.value', data.legalName)
 
       cy.get('[name="member.proxyname"]')
-        .type(`${data.name} ${data.surname1}`).should('have.value', `${data.name} ${data.surname1}`)
+        .type(`${data.name} ${data.surname1}`)
+        .should('have.value', `${data.name} ${data.surname1}`)
 
       cy.get('[name="member.proxynif"]')
-        .type(data.vat).should('have.value', data.vat)
+        .type(data.vat)
+        .should('have.value', data.vat)
 
       cy.get('[name="member.address"]')
-        .type(data.address).should('have.value', data.address)
+        .type(data.address)
+        .should('have.value', data.address)
 
       cy.get('[name="member.postal_code"]')
-        .type(data.postalCode).should('have.value', data.postalCode)
+        .type(data.postalCode)
+        .should('have.value', data.postalCode)
 
       cy.get('#member_state').click()
       cy.get(`[data-value="${data.stateCode}"]`).click()
@@ -31,13 +40,16 @@ describe('New Member', () => {
       cy.get(`[data-value="${data.cityCode}"]`).click()
 
       cy.get('[name="member.email"]')
-        .type(data.email).should('have.value', data.email)
+        .type(data.email)
+        .should('have.value', data.email)
 
       cy.get('[name="member.email2"]')
-        .type(data.email).should('have.value', data.email)
+        .type(data.email)
+        .should('have.value', data.email)
 
       cy.get('[name="member.phone1"]')
-        .type(data.phone).should('have.value', data.phone)
+        .type(data.phone)
+        .should('have.value', data.phone)
 
       cy.get('#member_lang').click()
       cy.get('[data-value="ca_ES"]').click()
@@ -55,7 +67,8 @@ describe('New Member', () => {
 
       if (data.paymentMethod === 'iban') {
         cy.get('[name="payment.iban"]')
-          .type(data.iban).should('have.value', data.iban)
+          .type(data.iban)
+          .should('have.value', data.iban)
 
         cy.get('[name="payment.sepa_accepted"]').click()
       }
@@ -73,7 +86,8 @@ describe('New Member', () => {
 
     it('Enter personal data for existing member', function () {
       cy.get('[name="member.vat"]')
-        .type(this.data.existingCif).should('have.value', this.data.existingCif)
+        .type(this.data.existingCif)
+        .should('have.value', this.data.existingCif)
       cy.get('[data-cy=next]').click()
 
       mainTest(this.data)
@@ -83,7 +97,8 @@ describe('New Member', () => {
 
     it('Enter personal data for non existing member', function () {
       cy.get('[name="member.vat"]')
-        .type(this.data.cif).should('have.value', this.data.cif)
+        .type(this.data.cif)
+        .should('have.value', this.data.cif)
       cy.get('[data-cy=next]').click()
 
       mainTest(this.data)
@@ -157,5 +172,4 @@ describe('New Member', () => {
   })
 
   */
-
 })

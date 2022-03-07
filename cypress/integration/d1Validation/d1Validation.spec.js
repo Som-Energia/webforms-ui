@@ -1,11 +1,15 @@
 /// <reference types="cypress" />
 
 describe('Modify Contract', () => {
+  Cypress.on('uncaught:exception', (error, runnable) => {
+    console.log(error)
+    return false
+  })
+
   beforeEach(() => {
     cy.visit('/ca/d1-detail')
     cy.fixture('d1Detail.json').as('data')
   })
-
 
   it('Reject D1', function () {
     cy.get(`[data-value="${false}"]`).click()
@@ -55,21 +59,28 @@ describe('Modify Contract', () => {
 
     cy.get('[name=changePower]').click()
     cy.get('[name=power]')
-      .type(this.data.power).should('have.value', this.data.power)
+      .type(this.data.power)
+      .should('have.value', this.data.power)
     cy.get('[name=power2]')
-      .type(this.data.power).should('have.value', this.data.power)
+      .type(this.data.power)
+      .should('have.value', this.data.power)
     cy.get('[type=submit]').click()
 
     cy.get('[name=contactName]')
-      .type(this.data.name).should('have.value', this.data.name)
+      .type(this.data.name)
+      .should('have.value', this.data.name)
     cy.get('[name=contactSurname]')
-      .type(this.data.surname).should('have.value', this.data.surname)
+      .type(this.data.surname)
+      .should('have.value', this.data.surname)
     cy.get('[name=phone]')
-      .type(this.data.phone).should('have.value', this.data.phone)
+      .type(this.data.phone)
+      .should('have.value', this.data.phone)
     cy.get('[type=submit]').click()
 
     cy.get('[data-cy=power]').should('contain', this.data.power)
-    cy.get('[data-cy=contact]').should('contain',
-      `${this.data.phone} (${this.data.name} ${this.data.surname})`)
+    cy.get('[data-cy=contact]').should(
+      'contain',
+      `${this.data.phone} (${this.data.name} ${this.data.surname})`
+    )
   })
 })

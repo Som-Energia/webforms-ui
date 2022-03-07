@@ -1,6 +1,11 @@
 /// <reference types="cypress" />
 
 describe('Holder Change', () => {
+  Cypress.on('uncaught:exception', (error, runnable) => {
+    console.log(error)
+    return false
+  })
+
   beforeEach(() => {
     cy.visit('/holder-change')
     cy.fixture('holderChange.json').as('data')
