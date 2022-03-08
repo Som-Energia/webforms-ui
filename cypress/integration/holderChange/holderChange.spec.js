@@ -52,7 +52,7 @@ describe('Holder Change', () => {
     })
   })
 
-  describe('Enter personal data', function () {
+  describe.skip('Enter personal data', function () {
     beforeEach(function () {
       cy.identifyHolder(this.data.vat)
       cy.get('[data-cy=next]').click()
@@ -216,6 +216,18 @@ describe('Holder Change', () => {
       cy.get('[data-cy=accept]').click()
 
       cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+
+      cy.intercept('POST', '/form/holderchange').as('holderChangePost')
+
+      cy.get('[data-cy=next]').click()
+
+      cy.wait('@holderChangePost')
+        .its('response.statusCode')
+        .should('be.oneOf', [200, 300])
+
+      cy.contains('hemos tramitado con éxito tu solicitud', {
+        matchCase: false
+      })
     })
   })
 })
