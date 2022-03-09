@@ -55,6 +55,7 @@ deploy_path=$P
 today=$(date +"%Y-%m-%d_%H%M%S")
 dest_dir="$deploy_path/build_$today"
 app_dir="$deploy_path/build"
+alias_dir="build_$today"
 
 function build () {
     if [ $testing -eq 1 ]; then
@@ -84,7 +85,7 @@ function upload () {
     fi
 
     log_message "INFO" "Linking new build... "
-    ssh $user@$deploy_server -p $port "rm $app_dir; ln -s $dest_dir $app_dir"
+    ssh $user@$deploy_server -p $port "rm $app_dir; ln -s $alias_dir $app_dir"
     if [ $? != 0 ]
     then
         log_message "ERROR" "An error ocurred linking new build $?"
