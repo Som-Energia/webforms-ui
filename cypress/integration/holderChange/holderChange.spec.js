@@ -184,7 +184,7 @@ describe('Holder Change', () => {
     })
   })
 
-  describe.only('Review step', function () {
+  describe('Review step', function () {
     beforeEach(function () {
       cy.identifyHolder(this.data.vat)
       cy.get('[data-cy=next]').click()
