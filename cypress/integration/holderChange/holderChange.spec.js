@@ -37,8 +37,19 @@ describe('Holder Change', () => {
 
     it('Enter invalid CUPS', function () {
       const ERROR_STATUS_CODE = 400
-      cy.holderChangeIdentSupplyPoint(this.data.cupsInvalid, ERROR_STATUS_CODE)
 
+      cy.intercept('GET', '/check/cups/**').as('checkCups')
+
+      cy.get('#cups')
+        .clear()
+        .type(this.data.cupsInvalid)
+        .should('have.value', this.data.cupsInvalid)
+
+      cy.wait('@checkCups')
+        .its('response.statusCode')
+        .should('be.oneOf', [ERROR_STATUS_CODE])
+
+      cy.get('#cups').focus().blur()
       cy.contains('CUPS incorrecto')
     })
 
