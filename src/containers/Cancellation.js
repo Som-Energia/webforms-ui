@@ -59,7 +59,7 @@ const Cancellation = (props) => {
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
-  const [completed, setCompleted] = useState(false)
+  const [completed, setCompleted] = useState(true)
   const [error, setError] = useState(false)
   const [result, setResult] = useState()
 
@@ -249,11 +249,12 @@ const Cancellation = (props) => {
                     <Paper elevation={0} className={classes.stepContainer}>
                       {result ? (
                         <Success
+                          showHeader={false}
                           title={t('CANCELLATION_SUCCESS_TITLE')}
                           description={t('CANCELLATION_SUCCESS_DESC')}
                         />
                       ) : (
-                        <Failure />
+                        <Failure showHeader={false} />
                       )}
                     </Paper>
                   )}
@@ -279,6 +280,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '2rem'
   },
   stepContainer: {
+    padding: '4rem',
     marginTop: 0,
     marginBottom: theme.spacing(4),
     width: '100%',
