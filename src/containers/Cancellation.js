@@ -8,11 +8,12 @@ import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
+import Alert from '@material-ui/lab/Alert'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
-import Alert from '@material-ui/lab/Alert'
+import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
@@ -29,8 +30,15 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
 import ContractDetails from './Cancellation/ContractDetails'
+import CancellationWarning from './Cancellation/CancellationWarning'
 import CancellationIntro from './Cancellation/CancellationIntro'
 import CancellationDetails from './Cancellation/CancellationDetails'
+
+import Failure from './Failure'
+import Success from './Success'
+
+import { getNextBussinessDay } from '../services/utils'
+import { cancelContract } from '../services/api'
 
 const MAX_STEP_NUMBER = 2
 
@@ -45,13 +53,15 @@ const Cancellation = (props) => {
 
   const { token, contract } = props
   const { language } = useParams()
+  const { id, number, cups, address } = contract
+  const nextBussinesDay = getNextBussinessDay()
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result, setResult] = useState({})
+  const [result, setResult] = useState()
 
   const handlers = {
     SHOW_INSPECTOR: () => {
@@ -60,15 +70,16 @@ const Cancellation = (props) => {
   }
 
   const initialValues = {
-    contract_number: contract?.name,
-    contract_cups: contract?.cups,
-    cups_address: contract?.address,
+    contract_id: id,
+    contract_number: number,
+    contract_cups: cups,
+    cups_address: address,
     cups: '',
     privacy_policy: false,
     terms_accepted: false,
     phone: '',
     validation_cups: '',
-    date_action: dayjs().add(1, 'd').format('DD/MM/YYYY')
+    date_action: dayjs(nextBussinesDay).format('DD/MM/YYYY')
   }
 
   const nextStep = (props) => {
@@ -97,8 +108,20 @@ const Cancellation = (props) => {
     })
   }
 
-  const handlePost = () => {
-    document.getElementById('cancelForm').submit()
+  const handlePost = (values) => {
+    console.log(values)
+    setSending(true)
+    cancelContract(values)
+      .then((response) => {
+        setSending(false)
+        setCompleted(true)
+        setResult(response)
+      })
+      .catch((error) => {
+        setSending(false)
+        setCompleted(true)
+        setError(error)
+      })
   }
 
   useEffect(() => {
@@ -128,7 +151,7 @@ const Cancellation = (props) => {
     })
   ]
 
-  if (!contract?.name || !contract?.cups) {
+  if (!id || !number || !cups) {
     return (
       <Alert severity="error">
         <Typography
@@ -160,68 +183,80 @@ const Cancellation = (props) => {
                 noValidate
                 autoComplete="off">
                 <Container maxWidth="lg" disableGutters={true}>
-                  <ContractDetails {...formikProps.values} />
-                  {activeStep === 0 && <CancellationIntro {...formikProps} />}
-                  {activeStep === 1 && <CancellationDetails {...formikProps} />}
-                  <Box mt={1}>
-                    <Alert severity="warning">
-                      <Typography
-                        className={classes.disclaimer}
-                        variant="body1"
-                        dangerouslySetInnerHTML={{
-                          __html: t('CANCELLATION_DISCLAIMER')
-                        }}
-                      />
-                    </Alert>
-                  </Box>
+                  {!completed && (
+                    <>
+                      <ContractDetails {...formikProps.values} />
+                      <CancellationWarning />
 
-                  <Box mx={0} mt={1} mb={3}>
-                    <div className={classes.actionsContainer}>
-                      {result?.contract_number === undefined && (
-                        <Button
-                          data-cy="prev"
-                          className={classes.button}
-                          startIcon={<ArrowBackIosIcon />}
-                          disabled={activeStep === 0 || sending}
-                          onClick={() => prevStep(formikProps)}>
-                          {t('PAS_ANTERIOR')}
-                        </Button>
+                      {activeStep === 0 && (
+                        <CancellationIntro {...formikProps} />
                       )}
-                      {activeStep < MAX_STEP_NUMBER - 1 ? (
-                        <Button
-                          type="button"
-                          data-cy="next"
-                          className={classes.button}
-                          variant="contained"
-                          color="primary"
-                          endIcon={<ArrowForwardIosIcon />}
-                          disabled={!formikProps.isValid}
-                          onClick={() => nextStep(formikProps)}>
-                          {t('SEGUENT_PAS')}
-                        </Button>
+                      {activeStep === 1 && (
+                        <CancellationDetails {...formikProps} />
+                      )}
+
+                      <Box mx={0} mt={2} mb={3}>
+                        <div className={classes.actionsContainer}>
+                          {result?.contract_number === undefined && (
+                            <Button
+                              data-cy="prev"
+                              className={classes.button}
+                              startIcon={<ArrowBackIosIcon />}
+                              disabled={activeStep === 0 || sending}
+                              onClick={() => prevStep(formikProps)}>
+                              {t('PAS_ANTERIOR')}
+                            </Button>
+                          )}
+                          {activeStep < MAX_STEP_NUMBER - 1 ? (
+                            <Button
+                              type="button"
+                              data-cy="next"
+                              className={classes.button}
+                              variant="contained"
+                              color="primary"
+                              endIcon={<ArrowForwardIosIcon />}
+                              disabled={!formikProps.isValid}
+                              onClick={() => nextStep(formikProps)}>
+                              {t('SEGUENT_PAS')}
+                            </Button>
+                          ) : (
+                            !completed && (
+                              <Button
+                                type="button"
+                                data-cy="submit"
+                                className={classes.button}
+                                variant="contained"
+                                color="primary"
+                                startIcon={
+                                  sending ? (
+                                    <CircularProgress size={24} />
+                                  ) : (
+                                    <SendIcon />
+                                  )
+                                }
+                                disabled={sending || !formikProps.isValid}
+                                onClick={() => handlePost(formikProps.values)}>
+                                {t('TRAMITAR_BAJA')}
+                              </Button>
+                            )
+                          )}
+                        </div>
+                      </Box>
+                    </>
+                  )}
+
+                  {completed && (
+                    <Paper elevation={0} className={classes.stepContainer}>
+                      {result ? (
+                        <Success
+                          title={t('CANCELLATION_SUCCESS_TITLE')}
+                          description={t('CANCELLATION_SUCCESS_DESC')}
+                        />
                       ) : (
-                        !completed && (
-                          <Button
-                            type="button"
-                            data-cy="submit"
-                            className={classes.button}
-                            variant="contained"
-                            color="primary"
-                            startIcon={
-                              sending ? (
-                                <CircularProgress size={24} />
-                              ) : (
-                                <SendIcon />
-                              )
-                            }
-                            disabled={sending || !formikProps.isValid}
-                            onClick={() => handlePost(formikProps.values)}>
-                            {t('TRAMITAR_BAJA')}
-                          </Button>
-                        )
+                        <Failure />
                       )}
-                    </div>
-                  </Box>
+                    </Paper>
+                  )}
                 </Container>
                 <input type="hidden" name="csrfmiddlewaretoken" value={token} />
               </Form>

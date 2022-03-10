@@ -332,3 +332,14 @@ export const contribution = async (data) => {
     return response?.data
   })
 }
+
+export const cancelContract = async (data) => {
+  const { contract_id } = data
+  return axios({
+    method: 'POST',
+    url: `/contract/${contract_id}/cancel`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}

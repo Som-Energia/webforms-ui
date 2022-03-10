@@ -465,6 +465,8 @@
   "CUPS_NO_MATCHING": "El CUPS no coincide con el del contrato",
   "CANCELLATION_NO_AVAILABLE": "Faltan datos para la tramitación de la baja o no está disponible",
   "TRAMITAR_BAJA": "Tramitar baja",
+  "CANCELLATION_SUCCESS_TITLE": "Revisa tu correo",
+  "CANCELLATION_SUCCESS_DESC": "",
 
   "CONTRIBUTION": "Formulario de aportación",
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder aportar a la cooperativa, es necesario que seas persona socia. ",
