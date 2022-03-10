@@ -14,11 +14,11 @@ import { DatePicker } from '@material-ui/pickers'
 
 import TodayOutlinedIcon from '@material-ui/icons/TodayOutlined'
 
-import Header from '../../components/oficinavirtual/Header'
-import Card from '../../components/oficinavirtual/Card'
-import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
-import TermsDialog from '../../components/TermsDialog'
-import GeneralTerms from '../../components/GeneralTerms'
+import Header from 'components/oficinavirtual/Header'
+import Card from 'components/oficinavirtual/Card'
+import LabelFieldRow from 'components/oficinavirtual/LabelFieldRow'
+import TermsDialog from 'components/TermsDialog'
+import CancellationTerms from 'containers/Cancellation/CancellationTerms'
 
 import { nationalHolidays, getNextBussinessDay } from '../../services/utils'
 
@@ -152,11 +152,11 @@ const CancellationDetails = (props) => {
       </LabelFieldRow>
       <Card className={classes.legalChecks}>
         <TermsDialog
-          title={t('GENERAL_TERMS')}
+          title={t('CANCELLATION_TERMS_TITLE')}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
-          <GeneralTerms />
+          <CancellationTerms />
         </TermsDialog>
 
         <FormControlLabel
