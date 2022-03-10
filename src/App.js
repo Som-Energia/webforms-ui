@@ -291,7 +291,7 @@ const App = (props) => {
                   path="/:language/invoices/:invoice_id/payment_ko"
                   element={
                     <Failure
-                      showTitle={false}
+                      showHeader={false}
                       {...props}
                       error={loadInvoicePaymentData()}
                     />
@@ -301,7 +301,7 @@ const App = (props) => {
                   path="/:language/invoices/:invoice_id/payment_ok"
                   element={
                     <Success
-                      showTitle={false}
+                      showHeader={false}
                       {...props}
                       {...loadInvoicePaymentData()}
                     />

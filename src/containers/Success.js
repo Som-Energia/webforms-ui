@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Success = (props) => {
-  const { result, description, title, showTitle = true } = props
+  const { result, description, title, showHeader = true } = props
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
@@ -59,21 +59,23 @@ const Success = (props) => {
 
   return (
     <>
-      {
-        showTitle && <StepHeader title={t('SUCCESS_TITLE')} />
-      }
+      {showHeader && <StepHeader title={t('SUCCESS_TITLE')} />}
       <div className={classes.container}>
         <Avatar className={classes.success}>
           <DoneIcon fontSize="large" />
         </Avatar>
 
         <Typography className={classes.title} variant="h6">
-          { title ? t(title) : t('SUCCESS_TEXT')}
+          {title ? t(title) : t('SUCCESS_TEXT')}
         </Typography>
         <Typography
           className={classes.message}
           variant="body1"
-          dangerouslySetInnerHTML={{ __html: description ? t(description, result) : t('SUCCESS_NOTE', result) }}
+          dangerouslySetInnerHTML={{
+            __html: description
+              ? t(description, result)
+              : t('SUCCESS_NOTE', result)
+          }}
         />
         <Box mt={3} mb={1}>
           <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />
