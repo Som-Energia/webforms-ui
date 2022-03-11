@@ -59,7 +59,7 @@ const Cancellation = (props) => {
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
-  const [completed, setCompleted] = useState(true)
+  const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState()
 
@@ -109,7 +109,6 @@ const Cancellation = (props) => {
   }
 
   const handlePost = (values) => {
-    console.log(values)
     setSending(true)
     cancelContract(values)
       .then((response) => {
