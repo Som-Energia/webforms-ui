@@ -343,3 +343,14 @@ export const cancelContract = async (data) => {
     return response?.data
   })
 }
+
+export const confirmCancelContract = async (data) => {
+  const { contract_id, token } = data
+  return axios({
+    method: 'POST',
+    url: `/contract/${contract_id}/confirm_cancelation/${token}`,
+    data: {}
+  }).then((response) => {
+    return response?.data
+  })
+}

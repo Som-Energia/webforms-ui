@@ -60,6 +60,9 @@ const App = (props) => {
   const Contract = lazy(() => import('./containers/Contract'))
   const Contribution = lazy(() => import('./containers/Contribution'))
   const Cancellation = lazy(() => import('./containers/Cancellation'))
+  const CancellationConfirm = lazy(() =>
+    import('./containers/CancellationConfirm')
+  )
   const D1Detail = lazy(() => import('./containers/D1Detail'))
   const HolderChange = lazy(() => import('./containers/HolderChange'))
   const Member = lazy(() => import('./containers/Member'))
@@ -238,6 +241,26 @@ const App = (props) => {
                     <Cancellation {...props} contract={loadContractData()} />
                   }
                 />
+
+                <Route
+                  path="/cancellation/confirm"
+                  element={
+                    <CancellationConfirm
+                      {...props}
+                      contract={loadContractData()}
+                    />
+                  }
+                />
+                <Route
+                  path="/:language/contract/:contract_id/confirm_cancelation/:token"
+                  element={
+                    <CancellationConfirm
+                      {...props}
+                      contract={loadContractData()}
+                    />
+                  }
+                />
+
                 <Route
                   path="/:language/contract/:contract_id/cancel"
                   element={
