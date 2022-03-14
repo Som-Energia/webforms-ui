@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#96b633',
     padding: '1rem 1.5rem',
     margin: '0 0 .5em 0',
-    fontSize: '18px'
+    fontSize: '18px',
+    textTransform: 'uppercase'
   }
 }))
