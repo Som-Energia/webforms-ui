@@ -9,10 +9,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import IconButton from '@material-ui/core/IconButton'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 import { DatePicker } from '@material-ui/pickers'
 
 import TodayOutlinedIcon from '@material-ui/icons/TodayOutlined'
+import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
 import Header from 'components/oficinavirtual/Header'
 import Card from 'components/oficinavirtual/Card'
@@ -79,6 +81,15 @@ const CancellationDetails = (props) => {
           size="small"
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                {values.contract_cups === values.cups && (
+                  <CheckOutlinedIcon color="primary" />
+                )}
+              </InputAdornment>
+            )
+          }}
           error={errors?.cups && touched?.cups}
           helperText={
             touched?.cups && (
