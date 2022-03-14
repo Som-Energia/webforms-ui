@@ -252,7 +252,7 @@ const App = (props) => {
                   }
                 />
                 <Route
-                  path="/:language/contract/:contract_id/confirm_cancelation/:token"
+                  path="/:language/contract/:contract_id/confirm_cancellation/:token"
                   element={
                     <CancellationConfirm
                       {...props}
