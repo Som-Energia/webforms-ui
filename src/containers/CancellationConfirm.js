@@ -27,7 +27,7 @@ import { confirmCancelContract } from 'services/api'
 
 const CancellationConfirm = (props) => {
   const classes = useStyles()
-  const { language } = useParams()
+  const { language, contract_id, token } = useParams()
   const { t, i18n } = useTranslation()
   const { contract } = props
 
@@ -43,7 +43,7 @@ const CancellationConfirm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     setSending(true)
-    confirmCancelContract()
+    confirmCancelContract({ contract_id, token })
       .then((response) => {
         setResult(response)
         console.log(response)
