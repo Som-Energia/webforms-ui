@@ -442,5 +442,6 @@
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Gomendatzen dizugu sakonuneko potentzia ez izatea puntako aldikoa baino txikiagoa",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Kontuan izan sakonuneak ordutegi-tarte hauek hartzen dituela barne: lanegunetan, 00:00etatik goizeko 8:00etara, eta asteburuetan eta jaiegun estataletan, egun osoa.",
   "BECOME_MEMBER_HELP_TEXT": "<p>Kontratua beste bazkide bati atxiki nahi badiozu, <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> helbidera mezua idatz dezakezu. Honako hauek bidali beharko dituzu: kooperatibako bazkidearen kodea eta NAN/IFZ, aldatu beharreko hornidura-puntuaren datuak (kontratu-zenbakia eta CUPS), titular berriaren datuak (izen-abizenak, NAN/IFZ agiria erantsita, helbide elektronikoa eta harremanetarako telefono-zenbakia) eta ordainketarako IBAN datuak.</p>",
-  "DATA_AS_IN_OV": "Segun los datos que tengas en  <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/eu/perfil/\">tu Oficina Virtual</a>"
+  "DATA_AS_IN_OV": "Segun los datos que tengas en  <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/eu/perfil/\">tu Oficina Virtual</a>",
+  "INVALID_INTERNAL_PARTNER_DATA": "Tenemos algun error en tus datos de socio i no podemos realizar la contratacion, puedes contactar con nosotros en la direccion <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> para solucionar-lo."
 }
