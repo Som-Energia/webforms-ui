@@ -523,5 +523,5 @@
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Recomendamos que la potencia del periodo Valle no sea inferior a la potencia del periodo Punta",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Ten en cuenta que el periodo Valle de potencia corresponde al horario de 00 a 08 h de la mañana de los días laborables, y también a todas las horas del fin de semana y festivos estatales.",
   "DATA_AS_IN_OV": "Segun los datos que tengas en  <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/es/perfil/\">tu Oficina Virtual</a>",
-  "INVALID_INTERNAL_PARTNER_DATA": "Tenemos algun error en tus datos de socio i no podemos realizar la contratacion, puedes contactar con nosotros en la direccion <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> para solucionar-lo."
+  "INVALID_INTERNAL_PARTNER_DATA": "Tenemos algun error en tus datos de titularidad i no podemos realizar la contratacion, puedes contactar con nosotros en la direccion <a target=\"_blank\" href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> para solucionarlo."
 }
