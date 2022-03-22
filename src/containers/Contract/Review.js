@@ -11,15 +11,13 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
 
-import StepHeader from '../../components/StepHeader'
-import TermsDialog from '../../components/TermsDialog'
-import Loading from '../../components/Loading'
+import StepHeader from 'components/StepHeader'
+import TermsDialog from 'components/TermsDialog'
+import Loading from 'components/Loading'
+import GeneralTerms from 'components/GeneralTerms'
 
-import { languages } from '../../services/utils'
-
-import GeneralTerms from '../../components/GeneralTerms'
-
-import { getPrices, getRates } from '../../services/api'
+import { languages } from 'services/utils'
+import { getPrices, getRates } from 'services/api'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
@@ -91,10 +89,9 @@ const Review = (props) => {
   const [rates] = useState(getRates())
   const [loading, setLoading] = useState(true)
 
-  const use_member_as_holder = values.holder.vat === values.member.vat && values.holder.isphisical
-  const holder = use_member_as_holder
-      ? values.member
-      : values.holder
+  const use_member_as_holder =
+    values.holder.vat === values.member.vat && values.holder.isphisical
+  const holder = use_member_as_holder ? values.member : values.holder
 
   useEffect(() => {
     setLoading(true)
@@ -235,15 +232,15 @@ const Review = (props) => {
             {t('HOLDER')}
           </Typography>
           <ReviewField label={'NIF'} value={values?.holder?.vat} />
-          {values?.holder?.isphisical ? values?.holder?.name && (
-            <>
-              <ReviewField
-                label={t('NAME')}
-                value={
-                  `${holder?.name} ${holder?.surname1} ${holder?.surname2}`
-                }
-              />
-            </>
+          {values?.holder?.isphisical ? (
+            values?.holder?.name && (
+              <>
+                <ReviewField
+                  label={t('NAME')}
+                  value={`${holder?.name} ${holder?.surname1} ${holder?.surname2}`}
+                />
+              </>
+            )
           ) : (
             <>
               <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
@@ -351,18 +348,18 @@ const Review = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('CONTACT')}
           </Typography>
-            {
-              use_member_as_holder
-              ? <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }}/>
-              : (<>
-                <ReviewField label={t('PHONE')} value={holder?.phone1} />
-                <ReviewField label={t('EMAIL')} value={holder?.email} />
-                <ReviewField
-                  label={t('LANGUAGE')}
-                  value={languages[holder?.language]}
-                />
-              </>)
-            }
+          {use_member_as_holder ? (
+            <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
+          ) : (
+            <>
+              <ReviewField label={t('PHONE')} value={holder?.phone1} />
+              <ReviewField label={t('EMAIL')} value={holder?.email} />
+              <ReviewField
+                label={t('LANGUAGE')}
+                value={languages[holder?.language]}
+              />
+            </>
+          )}
         </Grid>
 
         <Grid item xs={12} sm={6}>
