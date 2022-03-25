@@ -2,8 +2,4 @@
 window.config = {
   API_BASE_URL: '',
   GA_TRAKING_ID: '',
-
-  API_SOMSOLET_URL: '',
-  SOMSOLET_API_USERNAME: '',
-  SOMSOLET_API_PASSWORD: ''
 }

@@ -6,23 +6,18 @@ import LOCALE_ES from './locale-es.json'
 import LOCALE_GL from './locale-gl.json'
 import LOCALE_EU from './locale-eu.json'
 
-import SOMSOLET_CA from './SomSolet/locale-ca.json'
-import SOMSOLET_ES from './SomSolet/locale-es.json'
-import SOMSOLET_GL from './SomSolet/locale-gl.json'
-import SOMSOLET_EU from './SomSolet/locale-eu.json'
-
 const resources = {
   ca: {
-    translation: { ...LOCALE_CA, ...SOMSOLET_CA }
+    translation: { ...LOCALE_CA }
   },
   es: {
-    translation: { ...LOCALE_ES, ...SOMSOLET_ES }
+    translation: { ...LOCALE_ES }
   },
   gl: {
-    translation: { ...LOCALE_GL, ...SOMSOLET_GL }
+    translation: { ...LOCALE_GL }
   },
   eu: {
-    translation: { ...LOCALE_EU, ...SOMSOLET_EU }
+    translation: { ...LOCALE_EU }
   }
 }
 
