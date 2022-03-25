@@ -71,7 +71,6 @@ const App = (props) => {
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
   const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
-  const SomSolet = lazy(() => import('./containers/SomSolet'))
 
   const loadContractData = () => {
     const contractData =
@@ -183,12 +182,6 @@ const App = (props) => {
                 <Route
                   path="/:language/faite-socio-a/"
                   element={<Member {...props} />}
-                />
-
-                <Route path="/somsolet" element={<SomSolet {...props} />} />
-                <Route
-                  path="/:language/collective-purchases/"
-                  element={<SomSolet {...props} />}
                 />
 
                 <Route
