@@ -27,7 +27,7 @@ import { confirmCancelContract } from 'services/api'
 
 const CancellationConfirm = (props) => {
   const classes = useStyles()
-  const { language, contract_id, token } = useParams()
+  const { language, contract_id } = useParams()
   const { t, i18n } = useTranslation()
   const { contract } = props
 
@@ -43,10 +43,14 @@ const CancellationConfirm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     setSending(true)
-    confirmCancelContract({ contract_id, token })
+
+    const input = document.querySelector("input[name='csrfmiddlewaretoken']")
+    console.log(`csrfmiddlewaretoken: ${input?.value}`)
+    const postData = { contract_id, csrfmiddlewaretoken: input?.value }
+
+    confirmCancelContract(postData)
       .then((response) => {
         setResult(response)
-        console.log(response)
       })
       .catch((error) => {
         setError(error)

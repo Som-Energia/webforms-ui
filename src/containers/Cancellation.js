@@ -51,7 +51,7 @@ const Cancellation = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { token, contract } = props
+  const { contract } = props
   const { language } = useParams()
   const { id, number, cups, address } = contract
   const nextBussinesDay = getNextBussinessDay()
@@ -110,7 +110,12 @@ const Cancellation = (props) => {
 
   const handlePost = (values) => {
     setSending(true)
-    cancelContract(values)
+    const input = document.querySelector("input[name='csrfmiddlewaretoken']")
+    console.log(`csrfmiddlewaretoken: ${input?.value}`)
+
+    const postData = { ...values, csrfmiddlewaretoken: input?.value }
+
+    cancelContract(postData)
       .then((response) => {
         setSending(false)
         setCompleted(true)
@@ -258,7 +263,6 @@ const Cancellation = (props) => {
                     </Paper>
                   )}
                 </Container>
-                <input type="hidden" name="csrfmiddlewaretoken" value={token} />
               </Form>
               {showInspector && <DisplayFormikState {...formikProps} />}
             </>
