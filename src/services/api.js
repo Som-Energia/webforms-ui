@@ -334,25 +334,27 @@ export const contribution = async (data) => {
 }
 
 export const cancelContract = async (data) => {
-  const { contract_id } = data
+  const { contract_id, csrfToken } = data
   return axios({
     method: 'POST',
     url: `/contract/${contract_id}/cancel`,
-    data: data
+    data: data,
+    headers: {
+      "X-CSRFToken": csrfToken,
+    }
   }).then((response) => {
     return response?.data
   })
 }
 
 export const confirmCancelContract = async (data) => {
-  const { contract_id, token } = data
+  const { contract_id, csrfToken, token } = data
   return axios({
     method: 'POST',
     url: `/contract/${contract_id}/confirm_cancellation/${token}`,
-    data: {
-      contract_id: contract_id,
-      token: token
-    }
+    headers: {
+      "X-CSRFToken": csrfToken,
+    },
   }).then((response) => {
     return response?.data
   })
