@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate
 } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 
 import {
   createTheme,
@@ -110,12 +111,14 @@ const App = (props) => {
     return data
   }
 
+  const customHistory = createBrowserHistory()
+
   return (
     <ThemeProvider theme={theme}>
       <ScopedCssBaseline>
         <div className={classes.root}>
           <Suspense fallback={<Loading />}>
-            <Router>
+            <Router history={customHistory}>
               <Routes>
                 <Route exact path="/" element={<Home {...props} />} />
 
