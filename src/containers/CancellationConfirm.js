@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Alert from '@material-ui/lab/Alert'
@@ -36,6 +36,8 @@ const CancellationConfirm = (props) => {
   const [error, setError] = useState(false)
   const [result, setResult] = useState(false)
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     language && i18n.changeLanguage(language)
   }, [language, i18n])
@@ -44,7 +46,9 @@ const CancellationConfirm = (props) => {
     event.preventDefault()
     setSending(true)
 
-    const csrfInput = document.querySelector("input[name='csrfmiddlewaretoken']")
+    const csrfInput = document.querySelector(
+      "input[name='csrfmiddlewaretoken']"
+    )
     console.log(`csrfmiddlewaretoken: ${csrfInput?.value}`)
     const params = { contract_id, csrfToken: csrfInput?.value, token }
 
@@ -105,7 +109,7 @@ const CancellationConfirm = (props) => {
                   <Button
                     data-cy="prev"
                     className={classes.button}
-                    onClick={() => false}>
+                    onClick={() => navigate('/')}>
                     {t('CANCEL')}
                   </Button>
                   <Button
