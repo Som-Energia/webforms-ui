@@ -1,11 +1,5 @@
 import React, { lazy, Suspense } from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate
-} from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import {
   createTheme,
@@ -111,14 +105,12 @@ const App = (props) => {
     return data
   }
 
-  const customHistory = createBrowserHistory()
-
   return (
     <ThemeProvider theme={theme}>
       <ScopedCssBaseline>
         <div className={classes.root}>
           <Suspense fallback={<Loading />}>
-            <Router history={customHistory}>
+            <Router>
               <Routes>
                 <Route exact path="/" element={<Home {...props} />} />
 

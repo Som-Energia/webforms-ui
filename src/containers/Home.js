@@ -49,6 +49,7 @@ const options = [
   { title: 'Alta persona socia', href: '/new-member' },
   { title: 'Aportació al capital social', href: '/contribution' },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
+  { title: 'Confirmament de baixa', href: '/cancellation/confirm' },
   { title: 'Canvi de titular', href: '/holder-change' },
   { title: 'Contractació', href: '/contract' },
   { title: 'Modificació contractual', href: '/modify-contract' }
@@ -62,7 +63,7 @@ const Home = (props) => {
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
 
   return (
-    <Box class={classes.root}>
+    <Box className={classes.root}>
       <AppBar position="fixed" color="inherit" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6">
