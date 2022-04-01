@@ -22,14 +22,20 @@ import LabelFieldRow from 'components/oficinavirtual/LabelFieldRow'
 import TermsDialog from 'components/TermsDialog'
 import CancellationTerms from 'containers/Cancellation/CancellationTerms'
 
-import { nationalHolidays, getNextBussinessDay } from '../../services/utils'
+import {
+  nationalHolidays,
+  getNextBussinessDay,
+  getMaxDay
+} from '../../services/utils'
 
 const CancellationDetails = (props) => {
   const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
     props
   const classes = useStyles()
   const { t } = useTranslation()
+
   const nextBussinesDay = getNextBussinessDay()
+  const maxDay = getMaxDay(nextBussinesDay)
 
   const [open, setOpen] = useState(false)
 
@@ -69,6 +75,7 @@ const CancellationDetails = (props) => {
     return false
   }
 
+  console.log(nextBussinesDay)
   return (
     <div className={classes.root}>
       <Header>{t('CANCELLATION_DETAILS_TITLE')}</Header>
@@ -112,6 +119,7 @@ const CancellationDetails = (props) => {
           autoOk
           disableToolbar
           minDate={nextBussinesDay}
+          maxDate={maxDay}
           size="small"
           format="DD/MM/YYYY"
           value={dayjs(values.date_action, 'DD/MM/YYYY')}

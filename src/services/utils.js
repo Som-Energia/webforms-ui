@@ -509,3 +509,9 @@ export const getNextBussinessDay = (day) => {
     return nextBussinesDay
   }
 }
+
+export const getMaxDay = (day) => {
+  var isoWeek = require('dayjs/plugin/isoWeek')
+  dayjs.extend(isoWeek)
+  return dayjs(day).add(14, 'd')
+}
