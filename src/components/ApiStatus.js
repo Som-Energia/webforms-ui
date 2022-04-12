@@ -16,15 +16,15 @@ const ApiStatus = () => {
 
   const checkApiStatus = async () => {
     apiStatus()
-      .then(response => {
+      .then((response) => {
         response?.data?.status
           ? response?.data?.status === 'OFFLINE'
             ? setApiOffline(true)
             : setApiOffline(false) && setNoConnection(false)
           : setNoConnection(true)
       })
-      .catch(error => {
-        console.log(error)
+      .catch((error) => {
+        console.error(error)
         setNoConnection(true)
       })
   }
@@ -40,8 +40,12 @@ const ApiStatus = () => {
       {
         <Snackbar open={noConnection || apiOffline} TransitionComponent={Fade}>
           <Alert severity="error">
-            <AlertTitle>{ noConnection ? t('API_SERVER_ERROR') : t('API_SERVER_OFFLINE') }</AlertTitle>
-            { noConnection ? t('API_SERVER_ERROR_DETAILS') : t('API_SERVER_OFFLINE_DETAILS') }
+            <AlertTitle>
+              {noConnection ? t('API_SERVER_ERROR') : t('API_SERVER_OFFLINE')}
+            </AlertTitle>
+            {noConnection
+              ? t('API_SERVER_ERROR_DETAILS')
+              : t('API_SERVER_OFFLINE_DETAILS')}
           </Alert>
         </Snackbar>
       }

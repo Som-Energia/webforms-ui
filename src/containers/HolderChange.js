@@ -35,7 +35,6 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange } from 'services/utils'
-import { event } from 'react-ga'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -329,7 +328,7 @@ function HolderChange(props) {
     }
 
     errorResp.code = errorCode
-    console.log(errorResp)
+    console.error(errorResp)
     setError(errorResp)
     setCompleted(true)
   }
@@ -349,7 +348,7 @@ function HolderChange(props) {
         setCompleted(true)
       })
       .catch((error) => {
-        console.log(error?.response)
+        console.error(error?.response)
         handleError(error)
       })
     setActiveStep(MAX_STEP_NUMBER)

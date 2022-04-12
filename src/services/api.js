@@ -1,5 +1,6 @@
 import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
+import dayjs from 'dayjs'
 
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
@@ -115,6 +116,25 @@ export const getMunicipis = async (provincia) => {
 }
 
 let cancelTokenIban
+
+export const getNationalHolidays = async (firstdate, seconddate) => {
+  if (typeof cancelTokenIban !== typeof undefined) {
+    cancelTokenIban.cancel('Operation canceled due to new request')
+  }
+
+  cancelTokenIban = axios.CancelToken.source()
+
+  const from = dayjs(firstdate).format('YYYY-MM-DD')
+  const to = dayjs(seconddate).format('YYYY-MM-DD')
+
+  return axios({
+    method: 'GET',
+    url: `https://api.somenergia.coop/data/marketholidays?from=${from}&to=${to}`,
+    cancelToken: cancelTokenIban.token
+  }).then((response) => {
+    return response?.data
+  })
+}
 
 export const checkIban = async (iban) => {
   if (typeof cancelTokenIban !== typeof undefined) {
@@ -340,7 +360,7 @@ export const cancelContract = async (data) => {
     url: `/contract/${contract_id}/cancel`,
     data: data,
     headers: {
-      "X-CSRFToken": csrfToken,
+      'X-CSRFToken': csrfToken
     }
   }).then((response) => {
     return response?.data
@@ -353,8 +373,8 @@ export const confirmCancelContract = async (data) => {
     method: 'POST',
     url: `/contract/${contract_id}/confirm_cancellation/${token}`,
     headers: {
-      "X-CSRFToken": csrfToken,
-    },
+      'X-CSRFToken': csrfToken
+    }
   }).then((response) => {
     return response?.data
   })
