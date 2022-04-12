@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 
 import { DatePicker } from '@material-ui/pickers'
-
 import TodayOutlinedIcon from '@material-ui/icons/TodayOutlined'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
@@ -21,12 +20,11 @@ import Card from 'components/oficinavirtual/Card'
 import LabelFieldRow from 'components/oficinavirtual/LabelFieldRow'
 import TermsDialog from 'components/TermsDialog'
 import CancellationTerms from 'containers/Cancellation/CancellationTerms'
+import Loading from 'components/Loading'
 
-import {
-  nationalHolidays,
-  getNextBussinessDay,
-  getMaxDay
-} from '../../services/utils'
+import { getNextBussinessDay, getMaxDay } from '../../services/utils'
+
+import { getNationalHolidays } from 'services/api'
 
 const CancellationDetails = (props) => {
   const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
@@ -34,10 +32,37 @@ const CancellationDetails = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
-  const nextBussinesDay = getNextBussinessDay()
-  const maxDay = getMaxDay(nextBussinesDay)
-
   const [open, setOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [nationalHolidays, setNationalHolidays] = useState([])
+  const [nextBussinesDay, setNextBussinesDay] = useState(null)
+  const [maxDay, setMaxDay] = useState(null)
+
+  useEffect(() => {
+    setNextBussinesDay(getNextBussinessDay())
+  }, [])
+
+  useEffect(() => {
+    if (nextBussinesDay) setMaxDay(getMaxDay(nextBussinesDay))
+  }, [nextBussinesDay])
+
+  useEffect(() => {
+    if (nextBussinesDay && maxDay) {
+      setIsLoading(true)
+      getNationalHolidays(nextBussinesDay, maxDay)
+        .then((response) => {
+          setNationalHolidays(response.data)
+          setIsLoading(false)
+        })
+        .catch((error) => {
+          const errorStatus = error?.response?.data?.state
+            ? error?.response?.data?.state
+            : false
+          setNationalHolidays(errorStatus)
+          setIsLoading(false)
+        })
+    }
+  }, [nextBussinesDay, maxDay])
 
   const handleDateChange = (date) => {
     setFieldValue('date_action', date.format('DD/MM/YYYY'))
@@ -69,14 +94,15 @@ const CancellationDetails = (props) => {
     if (date.day() === 0 || date.day() === 6) {
       return true
     }
-    if (nationalHolidays.includes(date.format('DD/MM'))) {
+    if (nationalHolidays.includes(date.format('YYYY/MM/DD'))) {
       return true
     }
     return false
   }
 
-  console.log(nextBussinesDay)
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className={classes.root}>
       <Header>{t('CANCELLATION_DETAILS_TITLE')}</Header>
       <LabelFieldRow label={t('CUPS')}>

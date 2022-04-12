@@ -20,15 +20,8 @@ import {
 } from '../../services/api'
 
 const SelfConsumptionDetails = (props) => {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    setFieldValue,
-    validateForm
-  } = props
+  const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
+    props
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -73,7 +66,7 @@ const SelfConsumptionDetails = (props) => {
         setLoadingTechnologies(false)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         setLoadingTechnologies(false)
       })
   }, [])
@@ -86,7 +79,7 @@ const SelfConsumptionDetails = (props) => {
         setLoadingSituations(false)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         setLoadingSituations(false)
       })
   }, [])

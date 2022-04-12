@@ -91,7 +91,7 @@ const MemberIdentifierFields = (props) => {
         setDisabled(true)
       }
     } catch (error) {
-      console.log('Invalid hash code')
+      console.error('Invalid hash code')
     }
   }, [query.get('h'), values, setFieldValue])
 
