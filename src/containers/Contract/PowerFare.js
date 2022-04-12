@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
 
 import Alert from '@material-ui/lab/Alert'
 import Box from '@material-ui/core/Box'

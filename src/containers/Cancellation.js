@@ -170,7 +170,6 @@ const Cancellation = (props) => {
       </Alert>
     )
   }
-  console.error(error)
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>

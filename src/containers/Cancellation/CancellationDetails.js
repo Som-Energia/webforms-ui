@@ -50,8 +50,8 @@ const CancellationDetails = (props) => {
     if (nextBussinesDay && maxDay) {
       setIsLoading(true)
       getNationalHolidays(nextBussinesDay, maxDay)
-        .then((response) => {
-          setNationalHolidays(response.data)
+        .then(({ data }) => {
+          setNationalHolidays(data)
           setIsLoading(false)
         })
         .catch((error) => {
