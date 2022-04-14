@@ -9,7 +9,19 @@ import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 import { checkCnae } from '../services/api'
 
 const CnaeField = (props) => {
-  const { name, id, label, variant, value = '', onChange, onBlur, error, helperText, disabled = false, autoFocus = false } = props
+  const {
+    name,
+    id,
+    label,
+    variant,
+    value = '',
+    onChange,
+    onBlur,
+    error,
+    helperText,
+    disabled = false,
+    autoFocus = false
+  } = props
 
   const [isLoading, setIsLoading] = useState(false)
   const [isValidCnae, setIsValidCnae] = useState(false)
@@ -24,16 +36,18 @@ const CnaeField = (props) => {
     if (valueCnae.length > 3) {
       setIsLoading(true)
       checkCnae(valueCnae)
-        .then(response => {
+        .then((response) => {
           const validCnae = response?.state === true
           setIsValidCnae(validCnae)
           setCnaeDescription(response?.data?.description)
           setIsLoading(false)
           onChange({ cnae: valueCnae, valid: validCnae })
         })
-        .catch(error => {
-          console.log(error.response)
-          const errorStatus = error?.response?.data?.data?.valid ? error?.response?.data?.data?.valid : false
+        .catch((error) => {
+          console.error(error.response)
+          const errorStatus = error?.response?.data?.data?.valid
+            ? error?.response?.data?.data?.valid
+            : false
           setIsValidCnae(errorStatus)
           setCnaeDescription(false)
           setIsLoading(false)
@@ -67,17 +81,18 @@ const CnaeField = (props) => {
         onChange={handleChange}
         onBlur={handleBlur}
         error={!isLoading && error}
-        helperText={!isLoading && ((value !== '' && cnaeDescription) || helperText)}
+        helperText={
+          !isLoading && ((value !== '' && cnaeDescription) || helperText)
+        }
         InputProps={{
-          endAdornment:
+          endAdornment: (
             <InputAdornment position="end">
-              { isLoading &&
-                <CircularProgress size={24} />
-              }
-              { !isLoading && value !== '' && isValidCnae &&
+              {isLoading && <CircularProgress size={24} />}
+              {!isLoading && value !== '' && isValidCnae && (
                 <CheckOutlinedIcon color="primary" />
-              }
+              )}
             </InputAdornment>
+          )
         }}
       />
     </>

@@ -80,7 +80,7 @@ function CUPS(props) {
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log(error.response)
+          console.error(error.response)
           const errorStatus = error?.response?.data?.data?.status
             ? error?.response?.data?.data?.status
             : 'error'

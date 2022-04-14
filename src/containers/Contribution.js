@@ -283,7 +283,6 @@ const Contribution = (props) => {
             setError(false)
             // setResult({ contract_number: response?.data?.soci_num })
             values.member.number = response?.data?.soci_num
-            console.log(values)
           } else {
             setError(true)
           }
@@ -303,7 +302,6 @@ const Contribution = (props) => {
         if (response?.state === true) {
           setError(false)
           setResult(response?.data)
-          console.log(response.data)
         } else {
           setError(true)
         }

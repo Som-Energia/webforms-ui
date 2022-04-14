@@ -22,19 +22,6 @@ export const contributionParams = {
   contributionStep: 100
 }
 
-export const nationalHolidays = [
-  '31/12',
-  '26/12',
-  '25/12',
-  '08/12',
-  '06/12',
-  '01/11',
-  '12/10',
-  '01/05',
-  '06/01',
-  '01/01'
-]
-
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
     (key) =>
@@ -508,4 +495,10 @@ export const getNextBussinessDay = (day) => {
   } else {
     return nextBussinesDay
   }
+}
+
+export const getMaxDay = (day) => {
+  var isoWeek = require('dayjs/plugin/isoWeek')
+  dayjs.extend(isoWeek)
+  return dayjs(day).add(14, 'd')
 }

@@ -53,7 +53,7 @@ const StateCity = (props) => {
         setIsLoadingStates(false)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         setIsLoadingStates(false)
       })
   }, [])
@@ -73,7 +73,7 @@ const StateCity = (props) => {
           setIsLoadingCities(false)
         })
         .catch((error) => {
-          console.log(error)
+          console.error(error)
           setIsLoadingCities(false)
         })
     }

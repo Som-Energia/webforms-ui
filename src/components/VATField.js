@@ -49,7 +49,7 @@ const VATField = (props) => {
           })
         })
         .catch((error) => {
-          console.log(error.response)
+          console.error(error.response)
           const errorStatus = error?.response?.data?.data?.valid
             ? error?.response?.data?.data?.valid
             : false
