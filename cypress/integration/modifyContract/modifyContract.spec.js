@@ -2,7 +2,7 @@
 
 describe('Modify Contract', () => {
   Cypress.on('uncaught:exception', (error, runnable) => {
-    console.log(error)
+    console.error(error)
     return false
   })
 

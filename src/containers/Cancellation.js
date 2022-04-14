@@ -110,10 +110,12 @@ const Cancellation = (props) => {
 
   const handlePost = (values) => {
     setSending(true)
-    const csrfInput = document.querySelector("input[name='csrfmiddlewaretoken']")
+    const csrfInput = document.querySelector(
+      "input[name='csrfmiddlewaretoken']"
+    )
     console.log(`csrfmiddlewaretoken: ${csrfInput?.value}`)
 
-    const params = { ...values, csrfToken: csrfInput?.value}
+    const params = { ...values, csrfToken: csrfInput?.value }
 
     cancelContract(params)
       .then((response) => {

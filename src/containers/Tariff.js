@@ -32,7 +32,7 @@ const Tariff = (props) => {
       })
       .catch((error) => {
         setLoading(false)
-        console.log(error)
+        console.error(error)
       })
   }, [taxType, tariff])
 
