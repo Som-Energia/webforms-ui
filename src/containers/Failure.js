@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Avatar from '@material-ui/core/Avatar'
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function Failure(props) {
+  const { language } = useParams()
   const { t, i18n } = useTranslation()
   const classes = useStyles()
   const {
@@ -57,9 +59,8 @@ function Failure(props) {
   } = props
 
   useEffect(() => {
-    const language = props?.match?.params?.language
-    language && i18n.changeLanguage(language)
-  }, [props?.match?.params?.language, i18n])
+    i18n.changeLanguage(language)
+  }, [language, i18n])
 
   return (
     <>
