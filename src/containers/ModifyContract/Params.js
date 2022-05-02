@@ -434,12 +434,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     </Box>
                   )}
 
-                  <Box mt={2} mb={0}>
-                    <Typography variant="body1">
-                      {t('NEW_TOLLS_AND_TARIFF_INFO')}
-                    </Typography>
-                  </Box>
-
                   <Box my={2}>
                     <FormHelperText
                       dangerouslySetInnerHTML={{
