@@ -1,30 +1,28 @@
 const cancellationTerms = `
 <span tabindex="0"></span>
-<h3>Términos y condiciones</h3>
 <ul>
-  <li>Declaro ser el Titular/representante legal del Titular y usuario efectivo del Punto de Suministro.</li>  
-  <li>Como tal, solicito la baja del contrato de suministro de electricidad contratado en mi vivienda / local comercial, baja que solicito por la siguiente causa prevista en el contrato de suministro suscrito con Som Energia SCCL:</li>
+  <li>Declaro ser titular/representante legal da persoa titular e usuaria efectiva do punto de subministración.</li>  
+  <li>Como tal, solicito a baixa do contrato de subministración de electricidade contratado na miña vivenda / local comercial. Esta solicitude responde a unha, ou máis, das seguintes causas, previstas no contrato de subministración subscrito con Som Energia, SCCL:</li>
   <ul>
-    <li>por autorizarlo la normativa vigente;</li>
-    <li>por autorizarlo la normativa vigente;</li>
-    <li>por voluntad unilateral de no prorrogar el contrato;</li>
-    <li>incumplimiento notificado y no subsanado por parte de Som Energia SCCL;</li>
-    <li>cese de actividad;</li>
-    <li>no utilización de electricidad en el punto de suministro;</li>
-    <li>baja como socia / no vinculación con ninguna persona socia de la entidad;</li>
-    <li>rescisión de contrato de acceso a la red;</li>
+    <li>autorízao a normativa vixente;</li>
+    <li>vontade unilateral de non prorrogar o contrato;</li>
+    <li>incumprimento notificado e non subsanado por parte de Som Energia, SCCL;</li>
+    <li>cesamento de actividade;</li>
+    <li>non utilización de electricidade no punto de subministración;</li>
+    <li>baixa como socio/a / non vinculación con ningunha persoa socia da entidade;</li>
+    <li>rescisión de contrato de acceso á rede;</li>
   </ul>  
 </ul>
-<p>Quedo informado y asumo los siguientes compromisos:</p>
+<p>Quedo informado/a e asumo os seguintes compromisos:</p>
 <ul>
-  <li>El contrato permanecerá vigente hasta que la Distribuidora suspenda el suministro, por lo que asumo mi obligación de  abonar el suministro hasta dicha fecha. Som Energia me informará por correo electrónico de la fecha concreta del cese de suministro.</li>
-  <li>El restablecimiento del suministro  requerirá la realización de una nueva alta con el pago de los derechos correspondientes.</li>
-  <li>Permitiré el acceso a mi vivienda/local comercial si la Distribuidora lo entiende necesario para llevar a cabo el cese de suministro.</li>
-  <li>En caso de que la Distribuidora así lo requiera, me comprometo a facilitar el Documento Nacional de Identidad u otro documento de acreditación a la mayor brevedad.</li>
-  <li>Autorizo a Som Energia SCCL a realizar las gestiones necesarias con la empresa distribuidora para gestionar dicha baja.</li>
+  <li>O contrato permanecerá vixente até que a distribuidora suspenda a subministración, polo que asumo a miña obriga de aboar a subministración até a devandita data, de acordo co establecido nas Condicións Xerais vixentes. Som Energia informarame por correo electrónico da data concreta do cesamento de subministración.</li>
+  <li>O restablecemento da subministración requirirá unha nova alta, co pagamento dos dereitos correspondentes.</li>
+  <li>Autorizo o acceso á miña vivenda/local comercial, se a distribuidora o entende necesario, para levar a cabo o cesamento da subministración.</li>
+  <li>En caso de que a distribuidora así o requira, comprométome a facilitar o documento nacional de identidade ou outro documento de acreditación á maior brevidade posíbel.</li>
+  <li>Autorizo a Som Energia, SCCL, como mandataria, segundo o acordado nas Condicións Xerais, a realizar as xestións necesarias coa empresa distribuidora para xestionar a devandita baixa.</li>
 </ul>
-<h3>Información sobre protección de datos</h3>
-<p>RESPONSABLE: SOM ENERGIA, SCCL. (F55091367), Pic de Peguera, 11 17003 Girona ( GIRONA ) , somenergia@delegado-datos.com. FINALIDAD: Gestionar la tramitación de tu solicitud. LEGITIMACIÓN: Relación contractual y/o consentimiento del interesado. CESIONES: No están previstas cesiones de tus datos a terceros, salvo obligación legal. CONSERVACIÓN: Hasta una vez resuelta tu solicitud. DERECHOS: Puede retirar tu consentimiento en cualquier momento, así como ejercer tu derecho de acceso, rectificación, supresión, portabilidad, limitación y oposición dirigiéndose a los datos del responsable. En caso de divergencias, puedes presentar una reclamación ante la Agencia de Protección de Datos (www.aepd.es).</p>
+<h3>INFORMACIÓN SOBRE PROTECCIÓN DE DATOS</h3>
+<p>RESPONSÁBEL: SOM ENERGIA, SCCL (F55091367), Pic de Peguera, 11 17003 Girona (GIRONA), somenergia@delegado-datos.com. FINALIDADE: Xestionar a tramitación da túa solicitude. LEXITIMACIÓN: Relación contractual e/ou consentimento da persoa interesada. CESIÓNS: Non están previstas cesións dos teus datos a terceiras persoas, salvo obriga legal. CONSERVACIÓN: Ata que se resolvera a túa solicitude. DEREITOS: Podes retirar o teu consentimento en calquera momento, así como exercer o teu dereito de acceso, rectificación, supresión, portabilidade, limitación e oposición, dirixíndote aos datos do responsábel. En caso de diverxencias, podes presentar unha reclamación ante a Axencia de Protección de Datos (www.aepd.es).</p>
 `
 
 export default cancellationTerms

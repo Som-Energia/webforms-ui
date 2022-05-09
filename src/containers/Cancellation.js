@@ -141,7 +141,7 @@ const Cancellation = (props) => {
       cups: Yup.string()
         .required(t('CUPS_INVALID'))
         .min(18, t('CUPS_INVALID'))
-        .test('sameCups', t('CUPS_NO_MATCHING'), function () {
+        .test('sameCups', t('NOT_MATCH'), function () {
           return !(this.parent.contract_cups !== this.parent.cups)
         }),
       phone: Yup.string()
