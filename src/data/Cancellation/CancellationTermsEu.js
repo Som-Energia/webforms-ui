@@ -1,30 +1,28 @@
 const cancellationTerms = `
 <span tabindex="0"></span>
-<h3>Términos y condiciones</h3>
 <ul>
-  <li>Declaro ser el Titular/representante legal del Titular y usuario efectivo del Punto de Suministro.</li>  
-  <li>Como tal, solicito la baja del contrato de suministro de electricidad contratado en mi vivienda / local comercial, baja que solicito por la siguiente causa prevista en el contrato de suministro suscrito con Som Energia SCCL:</li>
+  <li>Adierazten dut titularra edo hornidura-puntuaren erabiltzailearen eta titularraren legezko ordezkaria naizela.</li>  
+  <li>Halakotzat, nire etxebizitzan edo lokal komertzialean elektrizitatearen hornidura-kontratuaren baja eskatzen dut. Eskaera hau Som Energia, SCCL-rekin izenpetutako hornidura-kontratuan aurreikusitako honako arrazoi hauetako batengatik edo hainbatengatik egiten dut:</li>
   <ul>
-    <li>por autorizarlo la normativa vigente;</li>
-    <li>por autorizarlo la normativa vigente;</li>
-    <li>por voluntad unilateral de no prorrogar el contrato;</li>
-    <li>incumplimiento notificado y no subsanado por parte de Som Energia SCCL;</li>
-    <li>cese de actividad;</li>
-    <li>no utilización de electricidad en el punto de suministro;</li>
-    <li>baja como socia / no vinculación con ninguna persona socia de la entidad;</li>
-    <li>rescisión de contrato de acceso a la red;</li>
+    <li>indarreko araudiak baimentzen duelako;</li>
+    <li>ez dudalako kontratua luzatu nahi;</li>
+    <li>Som Energia, SCCL-k kontratua bete ez duela jakinarazi eta ez-betetzea zuzendu ez duelako;</li>
+    <li>jarduera utzi dudalako;</li>
+    <li>hornidura-puntuan ez dudalako elektrizitaterik erabiltzen;</li>
+    <li>bazkide izateari utzi diodalako edo ez dudalako loturarik Kooperatibako ezein bazkiderekin;</li>
+    <li>sarerako sarbide-kontratua desegin delako.</li>
   </ul>  
 </ul>
-<p>Quedo informado y asumo los siguientes compromisos:</p>
+<p>Honako konpromiso hauek jakinarazi dizkidate eta onartzen ditut:</p>
 <ul>
-  <li>El contrato permanecerá vigente hasta que la Distribuidora suspenda el suministro, por lo que asumo mi obligación de  abonar el suministro hasta dicha fecha. Som Energia me informará por correo electrónico de la fecha concreta del cese de suministro.</li>
-  <li>El restablecimiento del suministro  requerirá la realización de una nueva alta con el pago de los derechos correspondientes.</li>
-  <li>Permitiré el acceso a mi vivienda/local comercial si la Distribuidora lo entiende necesario para llevar a cabo el cese de suministro.</li>
-  <li>En caso de que la Distribuidora así lo requiera, me comprometo a facilitar el Documento Nacional de Identidad u otro documento de acreditación a la mayor brevedad.</li>
-  <li>Autorizo a Som Energia SCCL a realizar las gestiones necesarias con la empresa distribuidora para gestionar dicha baja.</li>
+  <li>Kontratua indarrean egongo da banatzaileak hornidura eten arte; hortaz, egun horretara arte hornidura ordaintzeko betebeharra onartzen dut, indarreko Baldintza orokorretan xedatutakoarekin bat etorriaz. Som Energiak posta elektronikoz jakinaraziko dit zein egunetan zehazki etengo den hornidura.</li>
+  <li>Hornidura leheneratzeko alta berri bat egin beharko da, eta ondoriozko eskubideak ordaindu beharko dira.</li>
+  <li>Banatzaileak beharrezkotzat jotzen badu, hornidura eteteko, nire etxebizitzan edo lokal komertzialean sartzeko baimena ematen diot.</li>
+  <li>Banatzaileak eskatzen badit, hitzematen dut nortasun agiri nazionala edo beste egiaztagiri bat ahalik eta azkarren emango diodala.</li>
+  <li>Baldintza orokorretan adostutakoaren arabera, Som Energia, SCCL-ri, mandatari gisa, baimena ematen diot banatzailearekin baja hori kudeatzeko beharrezko kudeaketak egiteko.</li>
 </ul>
-<h3>Información sobre protección de datos</h3>
-<p>RESPONSABLE: SOM ENERGIA, SCCL. (F55091367), Pic de Peguera, 11 17003 Girona ( GIRONA ) , somenergia@delegado-datos.com. FINALIDAD: Gestionar la tramitación de tu solicitud. LEGITIMACIÓN: Relación contractual y/o consentimiento del interesado. CESIONES: No están previstas cesiones de tus datos a terceros, salvo obligación legal. CONSERVACIÓN: Hasta una vez resuelta tu solicitud. DERECHOS: Puede retirar tu consentimiento en cualquier momento, así como ejercer tu derecho de acceso, rectificación, supresión, portabilidad, limitación y oposición dirigiéndose a los datos del responsable. En caso de divergencias, puedes presentar una reclamación ante la Agencia de Protección de Datos (www.aepd.es).</p>
+<h3>DATUEN BABESARI BURUZKO INFORMAZIOA</h3>
+<p>ARDURADUNA: SOM ENERGIA, SCCL. (F55091367), Pic de Peguera, 11 17003 Girona (GIRONA), somenergia@delegado-datos.com. XEDEA: Zure eskaeraren tramitazioa kudeatzea. LEGITIMAZIOA: Kontratuzko harremana edota interesdunaren baimena. LAGAPENAK: Ez da aurreikusten hirugarrenei zure datuak lagatzea, legezko obligazioa badago salbu. KONTSERBAZIOA: Harik eta zure eskaera ebatzi arte. ESKUBIDEAK: Emandako baimena edozein unetan atzera bota dezakezu. Era berean, atzipen-, zuzenketa-, ezeztapen-, portabilitate-, mugaketa- eta aurkaritza-eskubideak baliatzeko, jo datuen arduradunarengana. Ados ez bazaude, erreklamazio bat aurkez dezakezu Datuak Babesteko Espainiako Agentzian (www.aepd.es).</p>
 `
 
 export default cancellationTerms
