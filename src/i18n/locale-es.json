@@ -458,7 +458,7 @@
   "FAQ_HOLDERCHANGE_URL": "https://es.support.somenergia.coop/article/287-que-tengo-que-hacer-cuando-me-voy-de-una-vivienda-de-alquiler-donde-tengo-contratada-la-luz",
   "CANCELLATION_DETAILS_TITLE": "Detalles de la baja de suministro",
   "CANCELLATION_DATE": "Fecha de baja",
-  "CANCELLATION_DATE_HELPER": "Fecha a partir de la cual se producirá la baja. Recuerda que pueden pasar hasta 6 dias laborales a hacerse efectivo el corte",
+  "CANCELLATION_DATE_HELPER": "De acuerdo con el procedimiento establecido, no es seleccionable el día de hoy, y la fecha escogida para la baja tiene que estar dentro de los próximos 14 días laborables",
   "CANCELLATION_PHONE_HELPER": "Lo usará la distribuidora para avisar en el caso que el personal técnico encargado requiera acceder al contador",
   "CANCELLATION_TERMS": "He leído y acepto las condiciones de baja",
   "CANCELLATION_TERMS_TITLE": "He leído y acepto las condiciones de baja",
