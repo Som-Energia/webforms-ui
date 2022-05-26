@@ -482,7 +482,7 @@
   "FAQ_HOLDERCHANGE_URL": "https://ca.support.somenergia.coop/article/274-que-he-de-fer-quan-marxo-d-un-habitatge-de-lloguer-on-tinc-contractada-la-llum",
   "CANCELLATION_DETAILS_TITLE": "Detalls de la baixa de subministrament",
   "CANCELLATION_DATE": "Data de baixa",
-  "CANCELLATION_DATE_HELPER": "Recorda que poden passar unes hores o fins a 6 dies laborables a fer-se efectiu el tall",
+  "CANCELLATION_DATE_HELPER": "D'acord amb el procediment establert, no és seleccionable el dia d'avui, i la data escollida per la baixa ha de ser dins dels propers 14 dies laborables",
   "CANCELLATION_PHONE_HELPER": "L'utilitzarà la distribuïdora per avisar-te en cas que el personal tècnic encarregat necessiti accedir al comptador",
   "CANCELLATION_DISCLAIMER": "<b>Recorda que aquest trámit comporta el tall del servei</b>",
   "CANCELLATION_SUCCESS_TITLE": "Revisa el teu correu",

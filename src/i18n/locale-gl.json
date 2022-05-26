@@ -379,7 +379,7 @@
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en conta que para poder achegar á cooperativa, é preciso que sexas persoa socia.",
   "CONTRIBUTION_GENERAL_TERMS_URL": "https://www.somenergia.coop/gl/condicions-xerais-achega/",
   "CANCELLATION_PHONE_HELPER": "Usarao a distribuidora para avisarte en caso de que o persoal técnico encargado precise acceder ao contador",
-  "CANCELLATION_DATE_HELPER": "Lembra que o corte pode tardar unhas horas ou até 6 días laborábeis en facerse efectivo",
+  "CANCELLATION_DATE_HELPER": "De acordo co procedemento establecido, o día de hoxe non é seleccionábel, e a data escollida para a baixa ten que estar dentro dos próximos 14 días laborábeis",
   "CANCELLATION_DATE": "Data de baixa",
   "CANCELLATION_DETAILS_TITLE": "Detalles da baixa de subministración",
   "CANCELLATION_INTRO_BODY": "<p>A baixa de subministración eléctrica implica cortar o servizo, na vivenda ou no local asociado a un contrato. É dicir, o espazo quedará sen electricidade e tamén se deixarán de xerar facturas.</p><p>Se nalgún momento posterior decídese a <a target=\"blank\" href=\"{{ url_new }}\">dar de alta a subministración</a>, deberán afrontarse os gastos regulados que apliquen as compañías distribuídoras. Recoméndase solicitar a baixa se un punto de subministración vai quedar deshabitado ou sen uso durante un período de tempo considerábel.</p><p>Se non queres deixar sen luz o punto de subministración, tes a opción de xestionar un cambio de titularidade para as novas usuarias do servizo. Atoparás máis información <a target=\"blank\" href=\"{{ url_holderchange }}\">nesta ligazón</a>.</p>",
