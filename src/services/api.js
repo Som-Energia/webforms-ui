@@ -115,14 +115,14 @@ export const getMunicipis = async (provincia) => {
   })
 }
 
-let cancelTokenIban
+let cancelTokenHolidays
 
 export const getNationalHolidays = async (firstdate, seconddate) => {
-  if (typeof cancelTokenIban !== typeof undefined) {
-    cancelTokenIban.cancel('Operation canceled due to new request')
+  if (typeof cancelTokenHolidays !== typeof undefined) {
+    cancelTokenHolidays.cancel('Operation canceled due to new request')
   }
 
-  cancelTokenIban = axios.CancelToken.source()
+  cancelTokenHolidays = axios.CancelToken.source()
 
   const from = dayjs(firstdate).format('YYYY-MM-DD')
   const to = dayjs(seconddate).format('YYYY-MM-DD')
@@ -130,11 +130,13 @@ export const getNationalHolidays = async (firstdate, seconddate) => {
   return axios({
     method: 'GET',
     url: `https://api.somenergia.coop/data/marketholidays?from=${from}&to=${to}`,
-    cancelToken: cancelTokenIban.token
+    cancelToken: cancelTokenHolidays.token
   }).then((response) => {
     return response?.data
   })
 }
+
+let cancelTokenIban
 
 export const checkIban = async (iban) => {
   if (typeof cancelTokenIban !== typeof undefined) {
