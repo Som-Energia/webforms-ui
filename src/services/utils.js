@@ -483,22 +483,23 @@ export const normalizeContribution = (data) => {
   return contribution
 }
 
-export const getNextBussinessDay = (day) => {
+export const getNextNBussinesDays = (day, n, marketHolidays) => {
   var isoWeek = require('dayjs/plugin/isoWeek')
   dayjs.extend(isoWeek)
-  const nextBussinesDay = dayjs(day).add(1, 'd')
+  const today = dayjs(day)
+  var result = []
+  for (var i=1; result.length<n; i++) {
+    var consideredDay = today.add(i, 'day')
+    const weekday = consideredDay.isoWeekday()
+    if (weekday === 6) continue // saturday
+    if (weekday === 7) continue // sunday
+    const iso = consideredDay.format('YYYY-MM-DD')
+    if (marketHolidays.includes(iso)) continue
 
-  if (nextBussinesDay.isoWeekday() === 6) {
-    return dayjs(nextBussinesDay).add(2, 'd')
-  } else if (nextBussinesDay.isoWeekday() === 7) {
-    return dayjs(nextBussinesDay).add(1, 'd')
-  } else {
-    return nextBussinesDay
+    result.push(iso)
   }
+  console.log('Available', n, result)
+  return result
 }
 
-export const getMaxDay = (day) => {
-  var isoWeek = require('dayjs/plugin/isoWeek')
-  dayjs.extend(isoWeek)
-  return dayjs(day).add(14, 'd')
-}
+

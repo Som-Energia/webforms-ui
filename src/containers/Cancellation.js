@@ -54,7 +54,6 @@ const Cancellation = (props) => {
   const { contract } = props
   const { language } = useParams()
   const { id, number, cups, address } = contract
-  const nextBussinesDay = getNextBussinessDay()
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
@@ -79,7 +78,7 @@ const Cancellation = (props) => {
     terms_accepted: false,
     phone: '',
     validation_cups: '',
-    date_action: dayjs(nextBussinesDay).format('DD/MM/YYYY')
+    date_action: null,
   }
 
   const nextStep = (props) => {

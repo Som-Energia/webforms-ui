@@ -22,7 +22,7 @@ import TermsDialog from 'components/TermsDialog'
 import CancellationTerms from 'containers/Cancellation/CancellationTerms'
 import Loading from 'components/Loading'
 
-import { getNextBussinessDay, getMaxDay } from '../../services/utils'
+import { getNextNBussinesDays } from '../../services/utils'
 
 import { getNationalHolidays } from 'services/api'
 
@@ -35,34 +35,41 @@ const CancellationDetails = (props) => {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [nationalHolidays, setNationalHolidays] = useState([])
-  const [nextBussinesDay, setNextBussinesDay] = useState(null)
-  const [maxDay, setMaxDay] = useState(null)
+  const [availableDates, setAvailableDates] = useState([])
+  const [firstDate, setFirstDate] = useState(null)
+  const [lastDate, setLastDate] = useState(null)
 
   useEffect(() => {
-    setNextBussinesDay(getNextBussinessDay())
+    console.log("Loading")
+    setIsLoading(true)
+    const today = dayjs()
+    getNationalHolidays(today, today.add(30, 'days'))
+      .then(({ data }) => {
+        setNationalHolidays(data)
+        setAvailableDates(getNextNBussinesDays(today, 14, data))
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        const errorStatus = error?.response?.data?.state
+          ? error?.response?.data?.state
+          : false
+        setNationalHolidays(errorStatus)
+        setIsLoading(false)
+      })
   }, [])
 
   useEffect(() => {
-    if (nextBussinesDay) setMaxDay(getMaxDay(nextBussinesDay))
-  }, [nextBussinesDay])
-
-  useEffect(() => {
-    if (nextBussinesDay && maxDay) {
-      setIsLoading(true)
-      getNationalHolidays(nextBussinesDay, maxDay)
-        .then(({ data }) => {
-          setNationalHolidays(data)
-          setIsLoading(false)
-        })
-        .catch((error) => {
-          const errorStatus = error?.response?.data?.state
-            ? error?.response?.data?.state
-            : false
-          setNationalHolidays(errorStatus)
-          setIsLoading(false)
-        })
+    if (availableDates !== []) {
+      setFirstDate(availableDates[0])
+      setLastDate(availableDates[availableDates.length-1])
+      setFieldValue('date_action', dayjs(availableDates[0]).format('DD/MM/YYYY'))
     }
-  }, [nextBussinesDay, maxDay])
+    else {
+      setFirstDate(null)
+      setLastDate(null)
+    }
+  }, [availableDates])
+
 
   const handleDateChange = (date) => {
     setFieldValue('date_action', date.format('DD/MM/YYYY'))
@@ -88,16 +95,9 @@ const CancellationDetails = (props) => {
   }
 
   const shouldDisableDate = (date) => {
-    if (dayjs().isSame(date)) {
-      return true
-    }
-    if (date.day() === 0 || date.day() === 6) {
-      return true
-    }
-    if (nationalHolidays.includes(date.format('YYYY/MM/DD'))) {
-      return true
-    }
-    return false
+    if (!availableDates) return true
+    var iso = date.format('YYYY-MM-DD')
+    return !availableDates.includes(iso)
   }
 
   return isLoading ? (
@@ -144,8 +144,8 @@ const CancellationDetails = (props) => {
           variant="inline"
           autoOk
           disableToolbar
-          minDate={nextBussinesDay}
-          maxDate={maxDay}
+          minDate={firstDate}
+          maxDate={lastDate}
           size="small"
           format="DD/MM/YYYY"
           value={dayjs(values.date_action, 'DD/MM/YYYY')}
