@@ -498,7 +498,6 @@ export const getNextNBussinesDays = (day, n, marketHolidays) => {
 
     result.push(iso)
   }
-  console.log('Available', n, result)
   return result
 }
 
