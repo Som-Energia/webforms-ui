@@ -34,7 +34,6 @@ const CancellationDetails = (props) => {
 
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [nationalHolidays, setNationalHolidays] = useState([])
   const [availableDates, setAvailableDates] = useState([])
   const [firstDate, setFirstDate] = useState(null)
   const [lastDate, setLastDate] = useState(null)
@@ -44,15 +43,15 @@ const CancellationDetails = (props) => {
     const today = dayjs()
     getNationalHolidays(today, today.add(30, 'days'))
       .then(({ data }) => {
-        setNationalHolidays(data)
-        setAvailableDates(getNextNBussinesDays(today, 14, data))
+        var dates = getNextNBussinesDays(today, 14, data)
+        setAvailableDates(dates)
         setIsLoading(false)
       })
       .catch((error) => {
         const errorStatus = error?.response?.data?.state
           ? error?.response?.data?.state
           : false
-        setNationalHolidays(errorStatus)
+        setAvailableDates([])
         setIsLoading(false)
       })
   }, [])
