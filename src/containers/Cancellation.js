@@ -37,7 +37,6 @@ import CancellationDetails from './Cancellation/CancellationDetails'
 import Failure from './Failure'
 import Success from './Success'
 
-import { getNextBussinessDay } from 'services/utils'
 import { cancelContract } from 'services/api'
 
 const MAX_STEP_NUMBER = 2
