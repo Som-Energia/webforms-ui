@@ -52,7 +52,6 @@ const Cancellation = (props) => {
 
   const { contract } = props
   const { language } = useParams()
-  const { id, number, cups, address } = contract
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
@@ -68,10 +67,10 @@ const Cancellation = (props) => {
   }
 
   const initialValues = {
-    contract_id: id,
-    contract_number: number,
-    contract_cups: cups,
-    cups_address: address,
+    contract_id: contract.id,
+    contract_number: contract.number,
+    contract_cups: contract.cups,
+    cups_address: contract.address,
     cups: '',
     privacy_policy: false,
     terms_accepted: false,
@@ -155,7 +154,7 @@ const Cancellation = (props) => {
     })
   ]
 
-  if (!id || !number || !cups) {
+  if (!contract.id || !contract.number || !contract.cups) {
     return (
       <Alert severity="error">
         <Typography
