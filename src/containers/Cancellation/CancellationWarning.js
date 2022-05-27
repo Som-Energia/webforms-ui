@@ -30,7 +30,8 @@ export default CancellationWarning
 
 const useStyles = makeStyles((theme) => ({
   disclaimer: {
-    fontSize: '14px',
-    fontWeight: 400
+    fontSize: '120%',
+    fontWeight: 400,
+    fontVariant: 'small-caps',
   }
 }))

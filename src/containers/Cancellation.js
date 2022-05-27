@@ -191,7 +191,6 @@ const Cancellation = (props) => {
                   {!completed && (
                     <>
                       <ContractDetails {...formikProps.values} />
-                      <CancellationWarning />
 
                       {activeStep === 0 && (
                         <CancellationIntro {...formikProps} />
@@ -199,7 +198,7 @@ const Cancellation = (props) => {
                       {activeStep === 1 && (
                         <CancellationDetails {...formikProps} />
                       )}
-
+                      <CancellationWarning />
                       <Box mx={0} mt={2} mb={3}>
                         <div className={classes.actionsContainer}>
                           {result?.contract_number === undefined && (
