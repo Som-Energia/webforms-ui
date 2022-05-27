@@ -40,7 +40,6 @@ const CancellationDetails = (props) => {
   const [lastDate, setLastDate] = useState(null)
 
   useEffect(() => {
-    console.log("Loading")
     setIsLoading(true)
     const today = dayjs()
     getNationalHolidays(today, today.add(30, 'days'))
