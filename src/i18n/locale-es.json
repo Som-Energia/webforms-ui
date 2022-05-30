@@ -38,8 +38,7 @@
   "NO_MONOPHASE_CHOICE": "No has especificado si la instalación es de tipo monofásico o trifásico",
   "NO_FARE_CHOSEN": "No has introducido la tarifa",
   "NO_POWER_CHOSEN": "No has introducido la potencia",
-  "NO_POWER_CHOSEN_P2": "No has introducido la potencia para el periodo P2",
-  "NO_POWER_CHOSEN_P3": "No has introducido la potencia para el periodo P3",
+  "NO_POWER_CHOSEN_PX": "No has introducido la potencia para el periodo",
   "INVALID_POWER_30": "Al menos un periodo debe tener una potencia superior o igual a 15 kW",
   "ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15": "Alguno de los tres periodos debe tener más de 15 kW",
   "NO_HOURLY_DISCRIMINATION_CHOSEN": "No has especificado si quieres discriminación horaria",
@@ -106,8 +105,8 @@
   "CUPS_INVALID": "CUPS incorrecto",
   "MEMBER_PERSONAL_DATA": "Datos personales de la nueva persona socia",
   "HOLDER_PERSONAL_DATA": "Datos personales de la nueva persona titular",
-  "HOLDER_NAME_HELP": "Nombre de la persona titular",
   "HOLDER_NAME": "Nombre",
+  "HOLDER_NAME_HELP": "Nombre de la persona titular",
   "HOLDER_SURNAME1": "Primer apellido",
   "HOLDER_SURNAME1_HELP": "Primer apellido de la persona titular",
   "HOLDER_SURNAME2": "Segundo apellido",
@@ -274,7 +273,6 @@
   "SELECCIONAR": "Seleccionar",
   "PUNTA": "Punta",
   "VALLE": "Valle",
-  "NO_POWER_CHOSEN_PX": "No has introducido la potencia para el periodo",
   "POWER_NO_LESS_THAN": "La potencia debe ser superior a {{value}} kW",
   "POWER_NO_MORE_THAN": "La potencia debe ser inferior a {{value}} kW",
   "SOME_PERIOD_MORE_THAN": "Alguno de los periodos debe ser superior a {{value}} kW",
@@ -293,9 +291,27 @@
   "API_ERROR": "Error",
   "PREUS_AMB_IMPOSTOS": "Precios con impuestos",
   "TERME_ENERGIA": "Término de energía",
-  "GENERATION": "Generation kWh",
+  "TERME_ENERGIA_P1_2": {
+    "0TD": "Periodo punta"
+  },
+  "TERME_ENERGIA_P2_2": {
+    "0TD": "Periodo llano"
+  },
+  "TERME_ENERGIA_P3_2": {
+    "0TD": "Periodo valle"
+  },
+  "TERME_ENERGIA_GENERATIONKWH": "Término de energía tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
   "TERME_POTENCIA": "Término de potencia",
+  "TERME_POTENCIA_P1_2": {
+    "0TD": "Periodo punta-llano"
+  },
+  "TERME_POTENCIA_P2_2": {
+    "0TD": "Periodo valle"
+  },
+  "GENERATION_URL": "https://www.generationkwh.org/ca/",
+  "GENERATION": "Generation kWh",
   "AUTOCONSUM": "Compensación por autoproducción",
+  "AUTOCONSUM_WITH_FAQ": "Compensación <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Autoproducción</a>",
   "BO_SOCIAL": "Bono social",
   "CONCEPTES_EXTRES": "A estos precios se deben sumar los siguientes conceptos:",
   "EXTRA_REACTIVA": "En determinadas condiciones de la instalación, a estos precios se puede añadir <b>un recargo por energía reactiva</b>.",
@@ -375,10 +391,10 @@
   "NO_POWER_INCREASING": "La potencia de este periodo no puede ser inferior al anterior",
   "HELP_MORE_THAN_15KW_HASNOT_SERVICE": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 6 periodos de potencia.</p><p>Al menos un periodo debe ser superior a 15 kW. La potencia de cada periodo debe ser igual o superior a la potencia del periodo anterior.</p>",
   "HELP_LESS_THAN_15KW": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 2 periodos de potencia.</p>",
-  "HELP_LESS_THAN_15KW_HAS_SERVICE": "<p>En los dos periodos debes indicar la misma potencia que tienes contratada actualmente, pues, según lo previsto en la Circular 3/2020 de la CNMC, la potencia del P2 será igual a la potencia contratada anteriormente.</p>",
   "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">Más información sobre los periodos de las potencias de la tarifa {{tariff}}</a>.</p>",
   "POWER_PERIODS_20TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1004-la-tarifa-2-0td",
   "POWER_PERIODS_30TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1116-la-tarifa-3-0td",
+  "HELP_LESS_THAN_15KW_HAS_SERVICE": "<p>En los dos periodos debes indicar la misma potencia que tienes contratada actualmente, pues, según lo previsto en la Circular 3/2020 de la CNMC, la potencia del P2 será igual a la potencia contratada anteriormente.</p>",
   "HELP_MORE_THAN_15KW_HAS_SERVICE": "<p>Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, verás que ahora debes indicar 6 periodos de potencia.</p><p>En el P1 deberás indicar la misma potencia que tienes contratada actualmente en el mismo periodo. En relación con el P2, P3, P4 y P5, deberás indicar la potencia que tienes contratada en el P2 actual. Finalmente, en el P6, deberás indicar la potencia que tienes contratada en el P3 actual.</p>",
   "NEW_TOLLS_AND_TARIFF_INFO": "Como consecuencia del cambio de peajes y tarifas propuesto por la CNMC, podemos cambiar las potencias contratadas sin coste desde el 1 de junio de 2021 hasta el 1 de junio de 2022, aunque durante los 12 meses anteriores hayas modificado tu contrato, y siempre y cuando no se trate de un aumento de potencia.",
   "UPLOAD_TOO_LARGE": "El archivo supera el límite de tamaño",
@@ -447,9 +463,6 @@
   "SELFCONSUMPTION_B21_EOLICA": "B21 - Eólica en tierra",
   "SELFCONSUMPTION_ALTRES": "Otros",
 
-  "SELFCONSUMPTION_INTERNAL_NET": "Red interna",
-  "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Red interna varios consumidores",
-  "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Próxima a través de red",
   "NO_MAIL_LISTS": "No hay listas de correo a gestionar",
   "TARIFF_NOT_AVAILABLE": "En estos momentos no es posible contratar nuevos suministros de potencia superior a 15 kW mediante este formulario. Pueden ponerse en contacto con nosotros al correo <a href=\"mailto:empresa@somenergia.coop\">empresa@somenergia.coop</a>.",
   "CANCELLATION_INTRO_TITLE": "Información importante",
@@ -465,15 +478,18 @@
   "CANCELLATION_DISCLAIMER": "Recuerda que este trámite implica el corte del servicio",
   "CANCELLATION_CONFIRM_TITLE": "Importante",
   "CANCELLATION_CONFIRM_BODY": "<ul><li>Si solicitas una baja del suministro eléctrico, estás dando tu consentimiento para interrumpir el suministro asociado a tu contrato y de este modo <b>dejará de haber luz.</b></li><li>Si en algún momento posterior se decide volver a <a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/245-no-tengo-luz-actualmente-puedo-solicitar-un-nuevo-punto-de-consumo\">dar de alta el suministro</a>, se tendrán que afrontar los gastos regulados que aplican las compañías distribuidoras. Se recomienda solicitar la baja si un punto de suministro tiene que quedar deshabitado o sin uso durante un periodo de tiempo considerable.</li><li>Ten en cuenta que solicitaremos la baja con la fecha que nos has indicado. Recuerda que <b>pueden pasar solo unas horas, o hasta 6 días laborables a hacerse efectivo el corte,</b> puesto que la <a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/656-las-distribuidoras-de-electricidad?utm_source=linkidiomes&utm_medium=cda&utm_campaign=castellano\">distribuidora</a> tiene un margen de 6 días hábiles para hacerlo.</li><li>Emitiremos una última factura correspondiente al consumo realizado hasta la fecha del corte.</li><li>Si no recibimos la confirmación, cancelaremos el trámite.</li></ul>",
-  "CONFIRM_CANCELLATION": "Confirmar la baja",
-  "CANCELLATION_NO_AVAILABLE": "La tramitación de la baja de este contrato no está disponible",
-  "TRAMITAR_BAJA": "Tramitar baja",
   "CANCELLATION_SUCCESS_TITLE": "Revisa tu correo",
   "CANCELLATION_SUCCESS_DESC": "<p>Hemos enviado un correo a la persona titular del contrato, solicitanto la confirmación del trámite. Es muy importante que accedas para que la baja se haga efectiva.</p><p>Si no recibimos la confirmación en 24 horas, cancelaremos el trámite.</p>",
+  "CONFIRM_CANCELLATION": "Confirmar la baja",
+  "CANCELLATION_NO_AVAILABLE": "La tramitación de la baja de este contrato no está disponible",
+  "CANCELLATION_ERROR_NOT_THE_OWNER": "No eres la persona titular de este contrato y es necesario serlo para solicitar la baja del contrato",
+  "TRAMITAR_BAJA": "Tramitar baja",
   "CANCEL": "Cancelar",
   "CANCELLATION_CONFIRM_SUCCESS_TITLE": "Baja confirmada",
   "CANCELLATION_CONFIRM_SUCCESS_DESC": "<p>Recibiras un correo cuando la baja sea efectiva.</p>",
-  "CANCELLATION_ERROR_NOT_THE_OWNER": "No eres la persona titular de este contrato y es necesario serlo para solicitar la baja del contrato",
+  "SELFCONSUMPTION_INTERNAL_NET": "Red interna",
+  "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Red interna varios consumidores",
+  "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Próxima a través de red",
 
   "CONTRIBUTION": "Formulario de aportación",
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder aportar a la cooperativa, es necesario que seas persona socia. ",
@@ -502,24 +518,6 @@
   "CLOSED_INVESTMENT": "Aportación cerrada",
   "CONTRIBUTION_OK_MSG": "Gracias, ¡ya has finalizado el proceso para hacer tu aportación!",
   "FAQ_AUTOCONSUM_URL": "https://ca.support.somenergia.coop/article/783-com-funciona-la-compensacio-simplificada-dexcedents",
-  "AUTOCONSUM_WITH_FAQ": "Compensación <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Autoproducción</a>",
-  "TERME_POTENCIA_P2_2": {
-    "0TD": "Periodo valle"
-  },
-  "TERME_POTENCIA_P1_2": {
-    "0TD": "Periodo punta-llano"
-  },
-  "GENERATION_URL": "https://www.generationkwh.org/ca/",
-  "TERME_ENERGIA_GENERATIONKWH": "Término de energía tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
-  "TERME_ENERGIA_P3_2": {
-    "0TD": "Periodo valle"
-  },
-  "TERME_ENERGIA_P2_2": {
-    "0TD": "Periodo llano"
-  },
-  "TERME_ENERGIA_P1_2": {
-    "0TD": "Periodo punta"
-  },
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE": "Recomendamos que la potencia del periodo Valle no sea inferior a la potencia del periodo Punta",
   "WARNING_POWER_VALLEY_SMALLER_THAN_PEAK": "Ten en cuenta que el periodo Valle de potencia corresponde al horario de 00 a 08 h de la mañana de los días laborables, y también a todas las horas del fin de semana y festivos estatales.",
   "DATA_AS_IN_OV": "Segun los datos que tengas en  <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/es/perfil/\">tu Oficina Virtual</a>",
