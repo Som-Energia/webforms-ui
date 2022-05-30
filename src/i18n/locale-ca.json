@@ -493,6 +493,7 @@
   "CANCEL": "Cancel·la",
   "CANCELLATION_CONFIRM_SUCCESS_TITLE": "Baixa confirmada",
   "CANCELLATION_CONFIRM_SUCCESS_DESC": "<p>Rebràs un correu quan la baixa sigui efectiva.</p>",
+  "CANCELLATION_ERROR_NOT_THE_OWNER": "No ets la persona titular d’aquest contracte i cal ser-ho per sol·licitar la baixa del contracte",
 
   "CONTRIBUTION": "Formulari d'aportació",
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Tingues en compte que per poder aportar a la cooperativa, cal que en siguis persona sòcia.",

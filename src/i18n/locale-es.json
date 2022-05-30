@@ -473,6 +473,7 @@
   "CANCEL": "Cancelar",
   "CANCELLATION_CONFIRM_SUCCESS_TITLE": "Baja confirmada",
   "CANCELLATION_CONFIRM_SUCCESS_DESC": "<p>Recibiras un correo cuando la baja sea efectiva.</p>",
+  "CANCELLATION_ERROR_NOT_THE_OWNER": "No eres la persona titular de este contrato y es necesario serlo para solicitar la baja del contrato",
 
   "CONTRIBUTION": "Formulario de aportación",
   "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Ten en cuenta que para poder aportar a la cooperativa, es necesario que seas persona socia. ",
