@@ -160,6 +160,11 @@ const App = (props) => {
                   element={<Contract is30ContractEnabled={true} {...props} />}
                 />
 
+                <Route
+                  path="/:language/contract-20/"
+                  element={<Contract {...props} />}
+                />
+
                 <Route path="/new-member" element={<Member {...props} />} />
 
                 <Route
