@@ -456,5 +456,6 @@
     "NOT_ACTIVE": "O contrato non está activo",
     "CANCELLATION_IN_PROGRESS": "O contrato xa ten unha petición de baixa en proceso (revisa o teu correo electrónico)",
     "BAD_TOKEN": "O token non é correcto",
-    "NOT_FOUND": "Petición de baixa non atopada"
+    "NOT_FOUND": "Petición de baixa non atopada",
+    "CANCELLATION_SUCCESS_DESC": "<p>Enviouse un correo á persoa titular do contrato, solicitando a confirmación do trámite. É moi importante que accedas, para que a baixa se faga efectiva.</p><p>Se non recibimos esta confirmación, cancelaremos o trámite.</p>"
 }
