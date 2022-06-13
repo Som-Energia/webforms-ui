@@ -215,18 +215,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             t
           )
         }
-      })
-      .test({
-        name: 'maxPowerValue',
-        test: function () {
-          return testPowerForPeriods(
-            rates,
-            this.parent,
-            'max_power',
-            this.createError,
-            t
-          )
-        }
       }),
     power4: Yup.number()
       .test('required', t('NO_POWER_CHOSEN_PX'), function () {
@@ -247,18 +235,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             rates,
             this.parent,
             'min_power',
-            this.createError,
-            t
-          )
-        }
-      })
-      .test({
-        name: 'maxPowerValue',
-        test: function () {
-          return testPowerForPeriods(
-            rates,
-            this.parent,
-            'max_power',
             this.createError,
             t
           )
@@ -287,18 +263,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             t
           )
         }
-      })
-      .test({
-        name: 'maxPowerValue',
-        test: function () {
-          return testPowerForPeriods(
-            rates,
-            this.parent,
-            'max_power',
-            this.createError,
-            t
-          )
-        }
       }),
     power6: Yup.number()
       .test('required', t('NO_POWER_CHOSEN_PX'), function () {
@@ -319,18 +283,6 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             rates,
             this.parent,
             'min_power',
-            this.createError,
-            t
-          )
-        }
-      })
-      .test({
-        name: 'maxPowerValue',
-        test: function () {
-          return testPowerForPeriods(
-            rates,
-            this.parent,
-            'max_power',
             this.createError,
             t
           )
