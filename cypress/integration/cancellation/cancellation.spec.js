@@ -31,7 +31,7 @@ describe('Cancellation', () => {
       .blur()
       .should('have.attr', 'aria-invalid', 'true')
 
-    cy.contains('cups no coincide', { matchCase: false })
+    cy.contains('El cups especificado no corresponde al cups del contrato', { matchCase: false })
 
     cy.get('input[name=phone]')
       .clear()
