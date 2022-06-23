@@ -123,7 +123,11 @@ const Cancellation = (props) => {
       .catch((error) => {
         setSending(false)
         setCompleted(true)
-        setError(error)
+        console.error(error)
+        const errorResp = error?.response?.data?.error
+          ? error?.response?.data?.error
+          : { code: 'UNEXPECTED' }
+        setError(errorResp)
       })
   }
 
@@ -256,7 +260,7 @@ const Cancellation = (props) => {
                           description={t('CANCELLATION_SUCCESS_DESC')}
                         />
                       ) : (
-                        <Failure showHeader={false} />
+                        <Failure error={error} />
                       )}
                     </Paper>
                   )}
