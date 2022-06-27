@@ -260,7 +260,7 @@ const Cancellation = (props) => {
                           description={t('CANCELLATION_SUCCESS_DESC')}
                         />
                       ) : (
-                        <Failure error={error} />
+                        <Failure error={error} showHeader={false} />
                       )}
                     </Paper>
                   )}

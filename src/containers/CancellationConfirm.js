@@ -141,7 +141,7 @@ const CancellationConfirm = (props) => {
                   description={t('CANCELLATION_CONFIRM_SUCCESS_DESC')}
                 />
               ) : (
-                <Failure error={error} />
+                <Failure error={error} showHeader={false} />
               )}
             </Paper>
           )}
