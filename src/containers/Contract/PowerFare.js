@@ -129,20 +129,6 @@ const PowerFare = (props) => {
       {(!values?.contract?.moreThan15Kw || is30ContractEnabled) && (
         <>
           <Box mt={3}>
-            <Typography
-              variant="body1"
-              dangerouslySetInnerHTML={{
-                __html: t(
-                  values?.contract?.moreThan15Kw
-                    ? values?.contract?.has_service
-                      ? 'HELP_MORE_THAN_15KW_HAS_SERVICE'
-                      : 'HELP_MORE_THAN_15KW_HASNOT_SERVICE'
-                    : values?.contract?.has_service
-                    ? 'HELP_LESS_THAN_15KW_HAS_SERVICE'
-                    : 'HELP_LESS_THAN_15KW'
-                )
-              }}
-            />
             <FormHelperText
               dangerouslySetInnerHTML={{
                 __html: t('POWER_PERIODS_MORE_INFO', {

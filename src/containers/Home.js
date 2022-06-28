@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography'
 
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
+import i18n from 'i18n/i18n'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+let language = navigator.language
+const availableLanguages = Object.keys(i18n?.options?.resources)
+if (!availableLanguages.includes(language)) {
+  language = 'ca'
+}
+
 const options = [
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Alta persona socia', href: '/new-member' },
@@ -52,7 +59,9 @@ const options = [
   { title: 'Confirmament de baixa', href: '/cancellation/confirm' },
   { title: 'Canvi de titular', href: '/holder-change' },
   { title: 'Contractació', href: '/contract' },
-  { title: 'Modificació contractual', href: '/modify-contract' }
+  { title: 'Contractació 20', href: `${language}/contract-20` },
+  { title: 'Contractació 30', href: '/contract-30' },
+  { title: 'Modificació contractual', href: '/modify-contract' },
 ]
 
 const Home = (props) => {
