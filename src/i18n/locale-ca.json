@@ -215,6 +215,7 @@
     "SPECIAL_CASES_REASON_MERGE": "El canvi de titular es fa per una fusió d'empreses",
     "SPECIAL_CASES_REASON_ELECTRODEP": "Al domicili viu una persona electrodependent",
     "CERT_ATTACH_DEATH": "Certificat de defunció",
+    "CERT_ATTACH_MERGE": "Certificat de fusió",
     "ELECTRODEP_ATTACH_MEDICAL": "Certificat mèdic d'electrodependència",
     "ELECTRODEP_ATTACH_RESIDENT": "Certificat d'empadronament",
     "ELECTRODEP_ATTACH_REQUIRED": "Cal adjuntar els certificats demanats",

@@ -215,6 +215,7 @@
     "SPECIAL_CASES_REASON_MERGE": "El cambio se hace por una fusión de empresas acreditada",
     "SPECIAL_CASES_REASON_ELECTRODEP": "En el domicilio vive una persona electrodependiente",
     "CERT_ATTACH_DEATH": "Certificado de defunción",
+    "CERT_ATTACH_MERGE": "Certificado de fusión",
     "ELECTRODEP_ATTACH_MEDICAL": "Certificado médico de electrodependencia",
     "ELECTRODEP_ATTACH_RESIDENT": "Certificado de empadronamiento",
     "ELECTRODEP_ATTACH_REQUIRED": "Tienes que adjuntar los certificados solicitados",

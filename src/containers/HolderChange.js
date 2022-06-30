@@ -233,6 +233,15 @@ function HolderChange(props) {
                 .required(t('ELECTRODEP_ATTACH_REQUIRED'))
             })
           })
+          .when('reason_merge', {
+            is: true,
+            then: Yup.object().shape({
+              merge: Yup.array()
+                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+            })
+          })
       })
     }),
     Yup.object().shape({

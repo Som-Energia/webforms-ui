@@ -116,6 +116,7 @@ const SpecialCases = (props) => {
         reason_electrodep: false,
         attachments: {
           death: [],
+          merge: [],
           medical: [],
           resident: []
         }
@@ -208,6 +209,29 @@ const SpecialCases = (props) => {
                   classes.chooserItemSelected
               )}
             />
+            {values.especial_cases?.reason_merge && (
+              <>
+                <Typography className={classes.attachmentTitle}>
+                  {t('CERT_ATTACH_MERGE')}
+                </Typography>
+                <Box mt={1} mb={2}>
+                  <Uploader
+                    fieldError={
+                      errors.attachments &&
+                      touched.attachments &&
+                      errors.attachments
+                    }
+                    callbackFn={(attachments) =>
+                      setFieldValue(
+                        'especial_cases.attachments.merge',
+                        attachments
+                      )
+                    }
+                    values={values.especial_cases.attachments?.merge}
+                  />
+                </Box>
+              </>
+            )}
             <FormControlLabel
               disabled={values.especial_cases?.reason_merge}
               control={
