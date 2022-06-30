@@ -239,6 +239,11 @@ export const normalizeHolderChange = (contract) => {
         normalContract.especial_cases.attachments.resident =
           normalContract?.especial_cases?.attachments?.resident[0]
       }
+
+      if (normalContract?.especial_cases?.attachments?.merge) {
+        normalContract.especial_cases.attachments.merge =
+          normalContract?.especial_cases?.attachments?.merge[0]
+      }
     }
   }
   return normalContract
