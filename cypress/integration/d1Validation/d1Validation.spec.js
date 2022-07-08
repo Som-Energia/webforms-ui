@@ -35,6 +35,16 @@ describe('Modify Contract', () => {
     cy.get(`[data-value="${false}"]`).click()
   })
 
+  it('Accept D1 and no M1 without attachment', function () {
+    cy.get(`[data-value="${true}"]`).click()
+    cy.get('[type=submit]').click()
+
+    cy.wait(500)
+    cy.get(`[data-value="${false}"]`).click()
+
+    cy.get('[type=submit]').should('not.have.class', 'Mui-disabled')
+  })
+
   it('Accept D1 and M1', function () {
     cy.get(`[data-value="${true}"]`).click()
     cy.get('[type=submit]').click()

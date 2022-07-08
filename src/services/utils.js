@@ -474,7 +474,6 @@ export const templateData = {
   register_section: 'Con excedentes',
   to_validate: true,
   case_id: '',
-  its_endesa: true
 }
 
 export const normalizeContribution = (data) => {

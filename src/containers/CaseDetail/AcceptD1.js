@@ -61,10 +61,6 @@ function AcceptD1({
     m1: Yup.bool()
       .required(t('UNACCEPTED_PRIVACY_POLICY'))
       .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY')),
-    d1Attachments: Yup.array().when('its_endesa', {
-      is: true,
-      then: Yup.array().min(1, t('NO_ATTACHMENTS'))
-    })
   })
 
   return (
