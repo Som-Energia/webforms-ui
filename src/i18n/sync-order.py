@@ -22,7 +22,7 @@ the strings which are missing in each.
 This will generate language-ca.json.new containing strings in
 language-ca.json but ordered like language-es.json
 
-    {sys.argv[0]} ca es 'language-{{}}.json'
+    {sys.argv[0]} ca es 'locale-{{}}.json'
 
 Since those are the default values for the reference language
 and the file pattern, this will be equivalent to:
