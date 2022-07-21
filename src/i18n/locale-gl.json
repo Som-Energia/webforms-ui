@@ -111,6 +111,7 @@
     "HOLDER_SURNAME1_HELP": "Primeiro apelido da persoa titular",
     "HOLDER_SURNAME2": "Segundo apelido",
     "HOLDER_SURNAME2_HELP": "Segundo apelido da persoa titular",
+    "HOLDER_MEMBER_IDENTIFIER_DESC": "",
     "BUSINESS_NAME": "Razón social",
     "BUSINESS_NAME_HELP": "Razón social",
     "PROXY_NAME": "Nome do representante legal",
@@ -414,6 +415,7 @@
     "CANCELLATION_DISCLAIMER": "Lembra que este trámite implica o corte do servizo",
     "CANCELLATION_CONFIRM_TITLE": "Importante",
     "CANCELLATION_CONFIRM_BODY": "<ul><li>Se solicitas unha baixa da subministración eléctrica, estás dando o teu consentimento para interrumpir a subministración asociada ao teu contrato e deste modo <b>deixará de haber luz.</b></li><li>Se nalgún momento posterior se decide volver a <a target=\"_blank\" href=\"https://gl.support.somenergia.coop/article/385-non-teno-luz-actualmente-podo-solicitar-un-novo-punto-de-consumo?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego\">dar de alta a subministración</a>, teranse que afrontar os gastos regulados que aplican as compañías distribuidoras. Recoméndase solicitar a baixa se un punto de subministración ten que quedar deshabitado ou sen uso durante un período de tempo considerábel.</li><li>Ten en conta que solicitaremos a baixa coa data que nos indicaches. Lembra que <b>poden pasar só unhas horas, ou ata 6 días laborábeis en facerse efectivo o corte,</b> xa que a <a target=\"_blank\" href=\"https://gl.support.somenergia.coop/article/658-las-distribuidoras-de-electricidad?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego\">distribuidora</a> ten unha marxe de 6 días hábiles para facelo.</li><li>Emitiremos unha última factura correspondente ao consumo realizado ata a data do corte.</li><li>Se non recibimos a confirmación en 24 horas, cancelaremos o trámite.</li></ul>",
+    "CANCELLATION_SUCCESS_DESC": "<p>Enviouse un correo á persoa titular do contrato, solicitando a confirmación do trámite. É moi importante que accedas, para que a baixa se faga efectiva.</p><p>Se non recibimos esta confirmación, cancelaremos o trámite.</p>",
     "CONFIRM_CANCELLATION": "CONFIRMAR A BAIXA",
     "CANCELLATION_ERROR_NOT_THE_OWNER": "Non es a persoa titular deste contrato e é preciso selo para solicitar a baixa do contrato",
     "TRAMITAR_BAJA": "Tramitar baixa",
@@ -452,7 +454,5 @@
     "NOT_ACTIVE": "O contrato non está activo",
     "CANCELLATION_IN_PROGRESS": "O contrato xa ten unha petición de baixa en proceso (revisa o teu correo electrónico)",
     "BAD_TOKEN": "O token non é correcto",
-    "NOT_FOUND": "Petición de baixa non atopada",
-    "CANCELLATION_SUCCESS_DESC": "<p>Enviouse un correo á persoa titular do contrato, solicitando a confirmación do trámite. É moi importante que accedas, para que a baixa se faga efectiva.</p><p>Se non recibimos esta confirmación, cancelaremos o trámite.</p>",
-    "HOLDER_MEMBER_IDENTIFIER_DESC": ""
+    "NOT_FOUND": "Petición de baixa non atopada"
 }
