@@ -518,5 +518,10 @@
     "NOT_ACTIVE": "El contracte no està actiu",
     "CANCELLATION_IN_PROGRESS": "El contracte ja té una petició de baixa en procés (revisa el teu correu electrònic)",
     "BAD_TOKEN": "El token no és correcte",
-    "NOT_FOUND": "Petició de baixa no trobada"
+    "NOT_FOUND": "Petició de baixa no trobada",
+    "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situació de la instal·lació",
+    "FILL_SELFCONSUMPTION_TECHNOLOGY": "Indica la tecnologia de la instal·lació",
+    "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Pròxima a través de xarxa",
+    "SELFCONSUMPTION_INTERNAL_NET": "Xarxa interna",
+    "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Xarxa interna de diversos consumidors"
 }
