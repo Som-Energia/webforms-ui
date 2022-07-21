@@ -34,7 +34,7 @@
     "AMB_DISCRIMINACIO_HORARIA": "Ordutegi-bereizketarekin",
     "HELP_DISCRIMINACIO_HORARIA": "<a target=\"_blank\" href=\"{{url}}\">Nola jakin ordutegi-bereizketa aktibatzea komeni zaidan ala ez?</a>",
     "HELP_DISCRIMINACIO_HORARIA_URL": "http://es.support.somenergia.coop/article/283-como-puedo-saber-si-me-sale-a-cuenta-tener-discriminacion-horaria",
-    "LA_TEVA_TARIFA_ES": "Zure tarifa hau izango da:",
+    "LA_TEVA_TARIFA_ES": "Zure tarifa hau izango da",
     "NO_MONOPHASE_CHOICE": "Ez duzu zehaztu instalazioa monofasikoa edo trifasikoa den",
     "NO_FARE_CHOSEN": "Ez duzu tarifa adierazi",
     "NO_POWER_CHOSEN": "Ez duzu potentzia adierazi",
