@@ -448,6 +448,8 @@
     "CAU_INVALID_FORMAT": "El format del CAU és incorrecte",
     "FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION": "Indica el com és la teva instal·lació",
     "FILL_SELFCONSUMPTION_INSTALLATION_POWER": "Indica la potència d'instal·lació",
+    "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situació de la instal·lació",
+    "FILL_SELFCONSUMPTION_TECHNOLOGY": "Indica la tecnologia de la instal·lació",
     "FILL_SELFCONSUMPTION_AUX_SERVICES": "Indica els si tens serveis auxiliars",
     "SELFCONSUMPTION_B11_RADIACIO_SOLAR": "B11 - Radiació solar",
     "SELFCONSUMPTION_B12_TERMICA": "B12 - Tèrmica",
@@ -483,6 +485,9 @@
     "[B11] - Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la tecnología fotovoltaica.": "[B11] - Instal·lacions que utilitzen únicament la radiació solar com a energia primària mitjançant la tecnologia fotovoltaica.",
     "[B21] - Instalaciones eólicas ubicadas en tierra.": "Instal·lacions èoliques ubicades a terra",
     "Otras tecnologias": "Altres tecnologies",
+    "SELFCONSUMPTION_INTERNAL_NET": "Xarxa interna",
+    "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Xarxa interna de diversos consumidors",
+    "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Pròxima a través de xarxa",
     "CONTRIBUTION": "Formulari d'aportació",
     "CONTRIBUTION_MEMBER_IDENTIFIER_DESC": "Tingues en compte que per poder aportar a la cooperativa, cal que en siguis persona sòcia.",
     "CONTRIBUTION_MEMBER_QUESTION": "Quin és el teu cas?",
@@ -518,10 +523,5 @@
     "NOT_ACTIVE": "El contracte no està actiu",
     "CANCELLATION_IN_PROGRESS": "El contracte ja té una petició de baixa en procés (revisa el teu correu electrònic)",
     "BAD_TOKEN": "El token no és correcte",
-    "NOT_FOUND": "Petició de baixa no trobada",
-    "FILL_SELFCONSUMPTION_INSTALLATION_SITUATION": "Indica la situació de la instal·lació",
-    "FILL_SELFCONSUMPTION_TECHNOLOGY": "Indica la tecnologia de la instal·lació",
-    "SELFCONSUMPTION_NEXT_VIA_NETWORK": "Pròxima a través de xarxa",
-    "SELFCONSUMPTION_INTERNAL_NET": "Xarxa interna",
-    "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Xarxa interna de diversos consumidors"
+    "NOT_FOUND": "Petició de baixa no trobada"
 }
