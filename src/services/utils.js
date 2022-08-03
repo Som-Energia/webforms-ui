@@ -376,42 +376,39 @@ export const normalizeContract = (contract) => {
 
 export const normalizeMember = (data) => {
   const finalMember = {}
-
-  finalMember.tipuspersona = data.member.isphisical
-    ? USER_TYPE_PERSON
-    : USER_TYPE_COMPANY
-  finalMember.nom = data.member.name
-  finalMember.dni = data.member.vat
-  finalMember.tel = data.member.phone1
-  finalMember.tel2 = data.member.phone2 || ''
+  
+  finalMember.name = data.member.name
+  finalMember.vat = data.member.vat
+  finalMember.phone = data.member.phone1
+  finalMember.phone2 = data.member.phone2 || ''
   finalMember.email = data.member.email
-  finalMember.cp = data.member.postal_code
-  finalMember.provincia = data.member.state.id
-  finalMember.adreca =
+  finalMember.postal_code = data.member.postal_code
+  finalMember.state_id = data.member.state.id
+  finalMember.address =
     `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
-  finalMember.municipi = data.member.city.id
-  finalMember.idioma = data.member.language
+  finalMember.city_id = data.member.city.id
+  finalMember.lang = data.member.language
 
   finalMember.payment_method =
-    data.payment.payment_method === 'iban'
-      ? PAYMENT_METHOD_PAYMENT_ORDER
-      : data.payment.payment_method === 'credit_card'
+    data.payment.payment_method === 'credit_card'
       ? PAYMENT_METHOD_CREDIT_CARD
       : PAYMENT_METHOD_PAYMENT_ORDER
+
 
   finalMember.payment_iban = data.payment.iban
   finalMember.urlok = data.urlok
   finalMember.urlko = data.urlko
 
+  finalMember.is_juridic = !data.member.isphisical
   if (data.member.isphisical) {
-    const cognoms = `${data.member.surname1} ${data.member.surname2}`
-    finalMember.cognom = cognoms.trim()
+    const surname = `${data.member.surname1} ${data.member.surname2}`
+    finalMember.surname = surname.trim()
   } else {
-    finalMember.representant_nom = data.member.proxyname
-    finalMember.representant_dni = data.member.proxynif
+    finalMember.proxy_name = data.member.proxyname
+    finalMember.proxy_vat = data.member.proxynif
   }
 
-  return finalMember
+  return sanitizeData(finalMember)
 }
 
 export const specialCaseType = (specialCases) => {
