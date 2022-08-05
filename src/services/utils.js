@@ -375,6 +375,7 @@ export const normalizeContract = (contract) => {
 }
 
 export const normalizeMember = (data) => {
+
   const finalMember = {}
   
   finalMember.name = data.member.name
@@ -407,6 +408,9 @@ export const normalizeMember = (data) => {
     finalMember.proxy_name = data.member.proxyname
     finalMember.proxy_vat = data.member.proxynif
   }
+
+  finalMember.privacy_conditions = data.privacy_policy_accepted
+  finalMember.terms_accepted = data.terms_accepted
 
   return sanitizeData(finalMember)
 }
