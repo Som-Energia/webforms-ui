@@ -18,6 +18,7 @@ import GeneralTerms from 'components/GeneralTerms'
 
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
+import AlertBox from 'components/AlertBox'
 
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
@@ -454,6 +455,8 @@ const Review = (props) => {
         onClose={handleClose}>
         <GeneralTerms />
       </TermsDialog>
+
+      <AlertBox severity='warning' title={t('TITLE_MAJ_ALERT')} description={t("DESCRIPTION_MAJ_ALERT")} />
 
       <Box mt={2}>
         <FormControlLabel

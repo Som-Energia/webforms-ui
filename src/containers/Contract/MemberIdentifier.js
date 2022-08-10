@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 
 import StepHeader from '../../components/StepHeader'
 import MemberIdentifierFields from '../../components/MemberIdentifierFields'
+import AlertBox from 'components/AlertBox'
 
 const MemberIdentifier = (props) => {
   const { t } = useTranslation()
@@ -18,6 +19,7 @@ const MemberIdentifier = (props) => {
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('MEMBER_IDENTIFIER_DESC') }}
       />
+      <AlertBox severity='warning' title={t("TITLE_MAJ_ALERT")} description={t("DESCRIPTION_MAJ_ALERT")} />
       <Box mt={0} mb={1}>
         <MemberIdentifierFields {...props} />
       </Box>
