@@ -224,13 +224,14 @@ const CNAE = '9820'
 
 export const getPrices = async ({
   tariff,
+  max_power,
   vat = VAT,
   cnae = CNAE,
   city_id
 }) => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/prices?tariff=${tariff}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
+    url: `${API_BASE_URL}/data/prices?tariff=${tariff}&max_power=${max_power}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
   }).then((response) => {
     return response?.data
   })
