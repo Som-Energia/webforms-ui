@@ -165,21 +165,21 @@ const Review = (props) => {
       <Grid container>
         {rates[values?.contract?.rate]?.num_power_periods > 1
           ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
-              (value, index) => {
-                const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
-                const label = values?.contract?.moreThan15Kw
-                  ? `P${index + 1}`
-                  : index === 0
+            (value, index) => {
+              const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+              const label = values?.contract?.moreThan15Kw
+                ? `P${index + 1}`
+                : index === 0
                   ? t('PUNTA')
                   : t('VALLE')
-                return (
-                  <Grid
-                    key={label}
-                    item
-                    xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
-                )
-              }
-            )
+              return (
+                <Grid
+                  key={label}
+                  item
+                  xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
+              )
+            }
+          )
           : `${values?.contract?.power} kW`}
       </Grid>
     )
@@ -428,6 +428,13 @@ const Review = (props) => {
               />
             </Grid>
           </Grid>
+
+          <Typography
+            variant="body1"
+            align='justify'
+            dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
+          />
+
           <FormHelperText
             className={classes.withoutLabel}
             dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
@@ -455,11 +462,6 @@ const Review = (props) => {
         onClose={handleClose}>
         <GeneralTerms />
       </TermsDialog>
-
-      <Typography
-        variant="body2"
-        dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
-      />
 
       <Box mt={2}>
         <FormControlLabel
