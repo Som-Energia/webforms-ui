@@ -16,7 +16,7 @@ import TermsDialog from 'components/TermsDialog'
 import Loading from 'components/Loading'
 import GeneralTerms from 'components/GeneralTerms'
 
-import { languages } from 'services/utils'
+import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
 
 const useStyles = makeStyles((theme) => ({
@@ -95,8 +95,13 @@ const Review = (props) => {
 
   useEffect(() => {
     setLoading(true)
+    let powerFields = Object.values(Object.fromEntries(
+      Object.entries(values.contract).filter(([key]) => key.startsWith('power'))
+    ))
+    let maxPower = Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
     getPrices({
       tariff: values.contract.rate,
+      max_power: maxPower,
       vat: holder.vat,
       cnae: values.supply_point.cnae,
       city_id: values.supply_point.city.id
