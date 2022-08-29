@@ -185,7 +185,7 @@ const Review = (props) => {
   }
 
   const Prices = ({ concept, name }) => {
-    let keys = Object.keys(concept)
+    let keys = concept ? Object.keys(concept) : []
     keys.sort()
     return (
       <div className={classes.prices}>
