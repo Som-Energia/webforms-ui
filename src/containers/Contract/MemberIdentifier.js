@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { useTranslation } from 'react-i18next'
 
 import Box from '@material-ui/core/Box'

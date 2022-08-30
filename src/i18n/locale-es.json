@@ -523,5 +523,7 @@
     "NOT_ACTIVE": "El contrato no está activo",
     "CANCELLATION_IN_PROGRESS": "El contrato ya tiene una petición de baja en proceso (revisa tu correo electrónico)",
     "BAD_TOKEN": "El token no es correcto",
-    "NOT_FOUND": "Petición de baja no encontrada"
+    "NOT_FOUND": "Petición de baja no encontrada",
+    "DESCRIPTION_MAJ_ALERT": "Además del precio fijo asociado al coste de la energía, establecido por Som Energia y publicado en <a target='_blank' href='https://www.somenergia.coop/es/tarifas-de-electricidad/'>nuestra página web</a>, a partir del 1 de octubre la factura incluirá un importe variable asociado al mecanismo de ajuste establecido en el <a target='_blank' href='https://www.boe.es/buscar/act.php?id=BOE-A-2022-7843'>RDL 10/2022</>. Este importe lo calcularemos para cada periodo de facturación. Ponderaremos el precio de cada hora del mecanismo de ajuste (<a target='_blank' href='https://www.omie.es/es/market-results/daily/average-final-prices/hourly-price-consumers'>publicado por OMIE</a>) en función del reparto horario energético de un consumidor/a tipo (<a target='_blank' href='https://www.ree.es/es/clientes/consumidor/gestion-medidas-electricas/consulta-perfiles-de-consumo'>publicado por Red Eléctrica de España</a> según la <a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-21395'>Resolución de 23/12/2021</a>). El precio obtenido lo multiplicaremos, en cada factura, por la energía total consumida en el período de facturación. El mecanismo de ajuste del gas no aplica para los contratos de Baleares y Canarias."
+
 }
