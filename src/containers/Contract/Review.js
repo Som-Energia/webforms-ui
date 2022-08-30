@@ -74,6 +74,8 @@ const useStyles = makeStyles((theme) => ({
   },
   prices: {
     marginBottom: '10px',
+    display: 'flex',
+    flexDirection: 'column',
     '& span': {
       paddingRight: '16px'
     }
