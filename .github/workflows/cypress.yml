@@ -1,8 +1,6 @@
 name: cypress webforms-ui
 on:
   push:
-    branches:
-      - master
 env:
   REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 jobs:
