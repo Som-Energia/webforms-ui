@@ -12,6 +12,9 @@ jobs:
     environment: cypress
     steps:
       - uses: actions/checkout@v1
+      - name: Generate package-lock
+      - run: |
+          npm install
       - uses: cypress-io/github-action@v2
         with:
           browser: chrome
