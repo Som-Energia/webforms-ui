@@ -82,7 +82,12 @@ const CnaeField = (props) => {
         onBlur={handleBlur}
         error={!isLoading && error}
         helperText={
-          !isLoading && ((value !== '' && cnaeDescription) || helperText)
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                !isLoading && ((value !== '' && cnaeDescription) || helperText)
+            }}
+          />
         }
         InputProps={{
           endAdornment: (
