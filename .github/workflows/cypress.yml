@@ -1,6 +1,5 @@
 name: cypress webforms-ui
-on:
-  push:
+on: [push]
 env:
   REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 jobs:
@@ -11,8 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Generate package-lock
-        run: |
-          npm install
+        run: npm install
       - uses: cypress-io/github-action@v2
         with:
           browser: chrome
