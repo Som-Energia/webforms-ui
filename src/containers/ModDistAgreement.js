@@ -34,7 +34,7 @@ const ModDistAgreement = ({ cau }) => {
     if(attachments.length === 0){
       setError(t('EMPTY_ATTACHMENTS'))
     }else{
-      //TODO: CRIDA A PUJAR ELS FITXERS
+      
     }
   }
 
