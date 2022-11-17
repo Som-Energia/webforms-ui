@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Uploader from '../components/Uploader'
+import StepHeader from 'components/StepHeader'
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -40,6 +41,7 @@ const ModDistAgreement = ({ cau }) => {
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
+      <StepHeader title={t('DETAIL_D1_TITLE')} />
         <Box mt={3} mb={1}>
           <Typography
             variant="body1"
