@@ -382,3 +382,13 @@ export const confirmCancelContract = async (data) => {
     return response?.data
   })
 }
+
+export const distribution_agreement = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}/procedures/distribution_agreement`,
+    data: data,
+  }).then((response) => {
+    return response?.data
+  })
+}

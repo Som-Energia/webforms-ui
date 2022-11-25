@@ -7,6 +7,9 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Uploader from '../components/Uploader'
 import StepHeader from 'components/StepHeader'
+import { templateData } from '../services/utils'
+import { useLocation } from 'react-router-dom'
+import { distribution_agreement } from '../services/api'
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -23,19 +26,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ModDistAgreement = ({ cau }) => {
+const ModDistAgreement = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
+  const { state } = useLocation()
 
+  const { templateProps = templateData } = props
   const [attachments, setAttachments] = useState([])
   const [error,setError] = useState('')
 
+  const [data] = useState(state?.d1CaseData || templateProps)
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     if(attachments.length === 0){
       setError(t('EMPTY_ATTACHMENTS'))
     }else{
-      
+      await distribution_agreement(({...data,d1Attachments:attachments}))
+      .then((response) => console.log("OK",response))
+      .catch((error) => {
+        const errorObj = {
+          error: error?.response?.data?.error
+            ? error.response.data.error
+            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+        }
+        setError(errorObj)
+      })
     }
   }
 
@@ -46,7 +62,7 @@ const ModDistAgreement = ({ cau }) => {
           <Typography
             variant="body1"
             dangerouslySetInnerHTML={{
-              __html: t('AUTO_PROCEDURE_INTRO', { cau: cau })
+              __html: t('AUTO_PROCEDURE_INTRO', { cau: data.cau })
             }}
           />
           <Typography
