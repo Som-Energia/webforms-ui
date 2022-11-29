@@ -383,10 +383,11 @@ export const confirmCancelContract = async (data) => {
   })
 }
 
-export const distribution_agreement = async (data) => {
+export const distribution_agreement = async (data,token) => {
   return axios({
     method: 'POST',
     url: `${API_BASE_URL}/procedures/distribution_agreement`,
+    headers: { Authorization: token },
     data: data,
   }).then((response) => {
     return response?.data

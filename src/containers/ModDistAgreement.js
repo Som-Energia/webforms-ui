@@ -31,18 +31,18 @@ const ModDistAgreement = (props) => {
   const { t } = useTranslation()
   const { state } = useLocation()
 
-  const { templateProps = templateData } = props
+  const templateProps = JSON.parse(props.d1)
   const [attachments, setAttachments] = useState([])
   const [error,setError] = useState('')
 
   const [data] = useState(state?.d1CaseData || templateProps)
 
-
+  
   const handleSubmit = async () => {
     if(attachments.length === 0){
       setError(t('EMPTY_ATTACHMENTS'))
     }else{
-      await distribution_agreement(({...data,d1Attachments:attachments}))
+      await distribution_agreement(({...data,attachments:attachments}),data.token)
       .then((response) => console.log("OK",response))
       .catch((error) => {
         const errorObj = {

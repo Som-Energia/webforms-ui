@@ -329,20 +329,8 @@ const App = (props) => {
                   path="/mod-distribution-agreement"
                   element={<ModDistAgreement {...props} />}
                 />
-                <Route
-                  path="/:language/modificacio-acord-repartiment/"
-                  element={<ModDistAgreement cau={'685929F'} {...props} />}
-                />
-                <Route
-                  path="/:language/modificacion-acuerdo-reparto/"
-                  element={<ModDistAgreement {...props} />}
-                />
-                <Route
-                  path="/:language/aldaketa-akordea-banaketa/"
-                  element={<ModDistAgreement {...props} />}
-                />
-                <Route
-                  path="/:language/modificacion-acordo-reparto/"
+                 <Route
+                  path="/:language/mod-distribution-agreement/"
                   element={<ModDistAgreement {...props} />}
                 />
               </Routes>
