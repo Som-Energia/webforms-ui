@@ -74,7 +74,7 @@ const ModDistAgreement = (props) => {
         </Box>
         <Box mt={1} mb={2}>
           <Uploader
-            fieldError={error}
+            fieldError={error.code ? t(error.code) : error}
             callbackFn={(values) => setAttachments(values)}
             values={attachments}
             maxFiles={5}
