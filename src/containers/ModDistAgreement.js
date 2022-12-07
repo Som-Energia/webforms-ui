@@ -10,6 +10,7 @@ import StepHeader from 'components/StepHeader'
 import { templateData } from '../services/utils'
 import { useLocation } from 'react-router-dom'
 import { distribution_agreement } from '../services/api'
+import Success from './Success'
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -33,63 +34,73 @@ const ModDistAgreement = (props) => {
 
   const templateProps = JSON.parse(props.d1)
   const [attachments, setAttachments] = useState([])
-  const [error,setError] = useState('')
+  const [error, setError] = useState('')
+  const [completed, setCompleted] = useState(false)
 
   const [data] = useState(state?.d1CaseData || templateProps)
 
-  
   const handleSubmit = async () => {
-    if(attachments.length === 0){
+    if (attachments.length === 0) {
       setError(t('EMPTY_ATTACHMENTS'))
-    }else{
-      await distribution_agreement(({...data,attachments:attachments}),data.token)
-      .then((response) => console.log("OK",response))
-      .catch((error) => {
-        const errorObj = {
-          error: error?.response?.data?.error
-            ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
-        }
-        setError(errorObj)
-      })
+    } else {
+      console.log("DADES QUE ENVIEM",{ ...data, attachments: attachments })
+      await distribution_agreement(
+        { ...data, attachments: attachments },
+        data.token
+      )
+        .then(() => setCompleted(true))
+        .catch((error) => {
+          const errorObj = {
+            error: error?.response?.data?.error
+              ? error.response.data.error
+              : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+          }
+          setError(errorObj)
+        })
     }
   }
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
-      <StepHeader title={t('DETAIL_D1_TITLE')} />
-        <Box mt={3} mb={1}>
-          <Typography
-            variant="body1"
-            dangerouslySetInnerHTML={{
-              __html: t('AUTO_PROCEDURE_INTRO', { cau: data.cau })
-            }}
-          />
-          <Typography
-            variant="body1"
-            dangerouslySetInnerHTML={{
-              __html: t('AUTO_PROCEDURE_DOCS')
-            }}
-          />
-        </Box>
-        <Box mt={1} mb={2}>
-          <Uploader
-            fieldError={error.code ? t(error.code) : error}
-            callbackFn={(values) => setAttachments(values)}
-            values={attachments}
-            maxFiles={5}
-          />
-        </Box>
-        <Box className={classes.buttonContainer}>
-          <Button
-            onClick={handleSubmit}
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            endIcon={''}>
-            {t('ENVIAR')}
-          </Button>
-        </Box>
+      {completed ? (
+        <Success description={t('NEWMEMBER_OK_DESCRIPTION')} />
+      ) : (
+        <>
+          <StepHeader title={t('DETAIL_D1_TITLE')} />
+          <Box mt={3} mb={1}>
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: t('AUTO_PROCEDURE_INTRO', { cau: data.cau })
+              }}
+            />
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: t('AUTO_PROCEDURE_DOCS')
+              }}
+            />
+          </Box>
+          <Box mt={1} mb={2}>
+            <Uploader
+              fieldError={error.code ? t(error.code) : error}
+              callbackFn={(values) => setAttachments(values)}
+              values={attachments}
+              maxFiles={5}
+            />
+          </Box>
+          <Box className={classes.buttonContainer}>
+            <Button
+              onClick={handleSubmit}
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              endIcon={''}>
+              {t('ENVIAR')}
+            </Button>
+          </Box>
+        </>
+      )}
     </Paper>
   )
 }
