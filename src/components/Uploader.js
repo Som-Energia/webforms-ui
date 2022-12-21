@@ -34,21 +34,23 @@ const useStyles = makeStyles((theme) => ({
 
 const Uploader = (props) => {
   const { name, callbackFn, fieldError, values, maxFiles } = props
+
   const { t } = useTranslation()
   const classes = useStyles()
 
+  const validTypeFiles = props.validTypeFiles || 'INSTALL_TYPE_ATTACHMENTS_INFO'
   const [uploads, setUploads] = useState([...values])
   const [inputKey, setInputKey] = useState(Date.now())
   const [isUploading, setUploading] = useState(false)
   const [error, setError] = useState(false)
-
+  
   useEffect(() => {
     callbackFn(uploads)
   }, [uploads])
 
   const upload = useCallback(
     async (name, file) => {
-      return uploadFile(name, file)
+      return uploadFile(name, file, props.uploadUrl)
         .then((response) => {
           if (response?.data?.code === 'UPLOAD_OK') {
             setUploads([...uploads, response?.data?.file_hash])
@@ -67,7 +69,7 @@ const Uploader = (props) => {
           setError(errorMsg)
         })
     },
-    [uploads]
+    [uploads,props.uploadUrl]
   )
 
   const handleChange = useCallback(
@@ -75,7 +77,7 @@ const Uploader = (props) => {
       setUploading(true)
       const name = event.target.name
       const file = event.target.files[0]
-      await upload(name, file)
+      await upload(name, file)  
       setUploading(false)
     },
     [upload]
@@ -130,7 +132,7 @@ const Uploader = (props) => {
             ? t(error)
             : fieldError
             ? t(fieldError)
-            : t('INSTALL_TYPE_ATTACHMENTS_INFO')
+            : t(validTypeFiles)
         }
       />
       <List>

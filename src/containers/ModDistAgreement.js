@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -7,10 +7,18 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Uploader from '../components/Uploader'
 import StepHeader from 'components/StepHeader'
-import { templateData } from '../services/utils'
 import { useLocation } from 'react-router-dom'
 import { distribution_agreement } from '../services/api'
 import Success from './Success'
+import {
+  allExtensionsValidation,
+  isTextFile
+} from '../validators/FileTypeValidator'
+
+import Alert from '@material-ui/lab/Alert'
+import AlertTitle from '@material-ui/lab/AlertTitle'
+
+const URL_TEXT = '/form/upload_txt_attachment/1'
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -33,19 +41,24 @@ const ModDistAgreement = (props) => {
   const { state } = useLocation()
 
   const templateProps = JSON.parse(props.d1)
-  const [attachments, setAttachments] = useState([])
+  const [type9Attachment, setType9Attachment] = useState([])
+  const [type12Attachment, setType12Attachment] = useState([])
+  const [errorType9, setErrorType9] = useState()
+  const [errorType12, setErrorType12] = useState()
   const [error, setError] = useState('')
   const [completed, setCompleted] = useState(false)
 
   const [data] = useState(state?.d1CaseData || templateProps)
 
   const handleSubmit = async () => {
-    if (attachments.length === 0) {
-      setError(t('EMPTY_ATTACHMENTS'))
+    if ([...type9Attachment, ...type12Attachment].length === 0) {
+      setError('EMPTY_ATTACHMENTS')
     } else {
-      console.log("DADES QUE ENVIEM",{ ...data, attachments: attachments })
       await distribution_agreement(
-        { ...data, attachments: attachments },
+        {
+          ...data,
+          rich_attachments: [...type9Attachment, ...type12Attachment]
+        },
         data.token
       )
         .then(() => setCompleted(true))
@@ -59,6 +72,34 @@ const ModDistAgreement = (props) => {
         })
     }
   }
+
+  const validateFileTypes = (values, validateFunc) => {
+    return values.reduce(function (init, a) {
+      return init && validateFunc(a)
+    }, true)
+  }
+
+  const handleChangeAttachment = (values, validateFunc, type) => {
+    setError('')
+    if (validateFileTypes(values, validateFunc)) {
+      type === "09"
+        ? setType9Attachment(values.map((el) => ({ type: type, data: el })))
+        : setType12Attachment(values.map((el) => ({ type: type, data: el })))
+    } else {
+      type === "09"
+        ? setErrorType9({ code: 'INSTALL_TYPE_ATTACHMENTS_INFO' })
+        : setErrorType12({ code: 'INSTALL_TXT_TYPE_ATTACHMENTS_INFO' })
+    }
+  }
+
+  useEffect(() => {
+    if(errorType9){
+      setType9Attachment([])
+    }
+    else if (errorType12){
+      setType12Attachment([])
+    }
+  }, [errorType9,errorType12])
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
@@ -74,20 +115,45 @@ const ModDistAgreement = (props) => {
                 __html: t('AUTO_PROCEDURE_INTRO', { cau: data.cau })
               }}
             />
+          </Box>
+
+          <Box mt={1} mb={2}>
             <Typography
               variant="body1"
               dangerouslySetInnerHTML={{
-                __html: t('AUTO_PROCEDURE_DOCS')
+                __html: t('AUTO_AGRREEMENT_DIST_FILE')
               }}
             />
-          </Box>
-          <Box mt={1} mb={2}>
             <Uploader
-              fieldError={error.code ? t(error.code) : error}
-              callbackFn={(values) => setAttachments(values)}
-              values={attachments}
-              maxFiles={5}
+              fieldError={errorType9?.code}
+              callbackFn={(values) => handleChangeAttachment(values, allExtensionsValidation, "09")}
+              values={type9Attachment}
+              validateFunction={allExtensionsValidation}
+              maxFiles={1}
             />
+          </Box>
+
+          <Box mt={1} mb={2}>
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: t('AUTO_COEF_DIST_FILE')
+              }}
+            />
+            <Uploader
+              fieldError={errorType12?.code}
+              callbackFn={(values) => handleChangeAttachment(values, isTextFile, "12")}
+              values={type12Attachment}
+              validTypeFiles={'INSTALL_TXT_TYPE_ATTACHMENTS_INFO'}
+              uploadUrl={URL_TEXT}
+              validateFunction={isTextFile}
+              maxFiles={1}
+            />
+          </Box>
+          <Box>
+            {error ? (
+              <Alert severity="error">{t(error.code ? error.code : error)}</Alert>
+            ) : null}
           </Box>
           <Box className={classes.buttonContainer}>
             <Button

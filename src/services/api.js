@@ -19,7 +19,7 @@ export const modifyContract = async (data, token) => {
   })
 }
 
-export const uploadFile = async (name, file) => {
+export const uploadFile = async (name, file, uploadUrl) => {
   const data = new FormData()
   data.append('field', name)
   data.append('uploaded_file', file)
@@ -33,9 +33,10 @@ export const uploadFile = async (name, file) => {
     }
   }
 
+  const callUrl = uploadUrl || '/form/upload_attachment/0'
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/upload_attachment`,
+    url: API_BASE_URL + callUrl,
     data: data,
     config: config
   }).then((response) => {
