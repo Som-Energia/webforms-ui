@@ -200,7 +200,11 @@ function ModifyContract(props) {
         <AlertBox 
           severity={"error"}
           title={t('MODIFY_POTTAR_INTRO_TITLE')} 
-          description={t('MODIFY_POTTAR_BANER')}>
+          description={t('MODIFY_POTTAR_BANER', {
+            baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),
+            baner_document_url: t('MODIFY_POTTAR_BANER_DOCUMENT_URL'),
+            baner_help_url: t('MODIFY_POTTAR_BANER_HELP_URL')
+          })}>
         </AlertBox>
         {fromD1 && (
           <Stepper
