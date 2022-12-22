@@ -59,7 +59,9 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
           component="div"
           dangerouslySetInnerHTML={{
             __html: t('MODIFY_POTTAR_INTRO', {
-              url: t('MODIFY_POTTAR_INTRO_URL')
+              url: t('MODIFY_POTTAR_INTRO_URL'),
+              url_costs: t('MODIFY_POTTAR_INTRO_COSTS_URL'),
+              potinfo_url: t('MODIFY_POTTAR_INTRO_POTINFO_URL')
             })
           }}
         />

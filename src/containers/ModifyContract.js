@@ -26,6 +26,8 @@ import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
 
 import DisplayFormikState from '../components/DisplayFormikState'
+import AlertBox from 'components/AlertBox'
+import { Description } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -195,6 +197,11 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <div className={classes.root}>
+        <AlertBox 
+          severity={"error"}
+          title={t('MODIFY_POTTAR_INTRO_TITLE')} 
+          description={t('MODIFY_POTTAR_BANER')}>
+        </AlertBox>
         {fromD1 && (
           <Stepper
             className={classes.stepper}
