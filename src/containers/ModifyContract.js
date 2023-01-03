@@ -197,9 +197,10 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <div className={classes.root}>
-        <AlertBox 
-          severity={"error"}
-          title={t('MODIFY_POTTAR_INTRO_TITLE')} 
+      <AlertBox 
+          severity={"warning"}
+          variant={"body2"}
+          title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')} 
           description={t('MODIFY_POTTAR_BANER', {
             baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),
             baner_document_url: t('MODIFY_POTTAR_BANER_DOCUMENT_URL'),
@@ -263,6 +264,7 @@ function ModifyContract(props) {
           </Grow>
         )}
         {showInspector && <DisplayFormikState {...data} />}
+        
       </div>
     </GlobalHotKeys>
   )
