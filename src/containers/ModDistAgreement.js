@@ -110,7 +110,7 @@ const ModDistAgreement = (props) => {
   return (
     <Paper className={classes.paperContainer} elevation={0}>
       {completed ? (
-        <Success description={t('NEWMEMBER_OK_DESCRIPTION')} />
+        <Success description={t('UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION')} />
       ) : (
         <>
           <StepHeader title={t('DETAIL_D1_TITLE')} />
