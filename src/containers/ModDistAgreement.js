@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Uploader from '../components/Uploader'
 import StepHeader from 'components/StepHeader'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { distribution_agreement } from '../services/api'
 import Success from './Success'
 import {
@@ -37,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ModDistAgreement = (props) => {
   const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { state } = useLocation()
+  const { language } = useParams()
 
   const templateProps = JSON.parse(props.d1)
   const [type9Attachment, setType9Attachment] = useState([])
@@ -93,6 +94,11 @@ const ModDistAgreement = (props) => {
   }
 
   useEffect(() => {
+    console.log(i18n)
+    i18n.changeLanguage(language)
+  }, [language, i18n])
+
+  useEffect(() => {
     if(errorType9){
       setType9Attachment([])
     }
@@ -115,6 +121,13 @@ const ModDistAgreement = (props) => {
                 __html: t('AUTO_PROCEDURE_INTRO', { cau: data.cau })
               }}
             />
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: t('AUTO_PROCEDURE_DOCS')
+              }}
+            />
+            
           </Box>
 
           <Box mt={1} mb={2}>
