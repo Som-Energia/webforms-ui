@@ -14,9 +14,9 @@ import {
   allExtensionsValidation,
   isTextFile
 } from '../validators/FileTypeValidator'
-
+import TermsDialog from 'components/TermsDialog'
 import Alert from '@material-ui/lab/Alert'
-import AlertTitle from '@material-ui/lab/AlertTitle'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const URL_TEXT = '/form/upload_txt_attachment/1'
 
@@ -48,30 +48,28 @@ const ModDistAgreement = (props) => {
   const [errorType12, setErrorType12] = useState()
   const [error, setError] = useState('')
   const [completed, setCompleted] = useState(false)
+  const [isDialogOpen, setDialogOpen] = useState(false)
+  const [isSendingData, setSendingData] = useState(false)
 
   const [data] = useState(state?.d1CaseData || templateProps)
 
   const handleSubmit = async () => {
-    if ([...type9Attachment, ...type12Attachment].length === 0) {
-      setError('EMPTY_ATTACHMENTS')
-    } else {
-      await distribution_agreement(
-        {
-          ...data,
-          rich_attachments: [...type9Attachment, ...type12Attachment]
-        },
-        data.token
-      )
-        .then(() => setCompleted(true))
-        .catch((error) => {
-          const errorObj = {
-            error: error?.response?.data?.error
-              ? error.response.data.error
-              : { code: 'MODIFY_POTTAR_UNEXPECTED' }
-          }
-          setError(errorObj)
-        })
-    }
+    setSendingData(true)
+    await distribution_agreement(
+      {
+        ...data,
+        rich_attachments: [...type9Attachment, ...type12Attachment]
+      },
+      data.token
+    )
+      .then(() => {
+        setCompleted(true)
+        setSendingData(false)
+      })
+      .catch((error) => {
+        setSendingData(false)
+        setError('UPDATE_DIST_AGREEMENT_ERROR')
+      })
   }
 
   const validateFileTypes = (values, validateFunc) => {
@@ -83,29 +81,28 @@ const ModDistAgreement = (props) => {
   const handleChangeAttachment = (values, validateFunc, type) => {
     setError('')
     if (validateFileTypes(values, validateFunc)) {
-      type === "09"
+      type === '09'
         ? setType9Attachment(values.map((el) => ({ type: type, data: el })))
         : setType12Attachment(values.map((el) => ({ type: type, data: el })))
     } else {
-      type === "09"
+      type === '09'
         ? setErrorType9({ code: 'INSTALL_TYPE_ATTACHMENTS_INFO' })
         : setErrorType12({ code: 'INSTALL_TXT_TYPE_ATTACHMENTS_INFO' })
     }
   }
 
   useEffect(() => {
-    console.log(i18n)
     i18n.changeLanguage(language)
   }, [language, i18n])
 
   useEffect(() => {
-    if(errorType9){
+    if (errorType9) {
       setType9Attachment([])
-    }
-    else if (errorType12){
+    } else if (errorType12) {
       setType12Attachment([])
     }
-  }, [errorType9,errorType12])
+  }, [errorType9, errorType12])
+
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
@@ -127,7 +124,6 @@ const ModDistAgreement = (props) => {
                 __html: t('AUTO_PROCEDURE_DOCS')
               }}
             />
-            
           </Box>
 
           <Box mt={1} mb={2}>
@@ -139,7 +135,9 @@ const ModDistAgreement = (props) => {
             />
             <Uploader
               fieldError={errorType9?.code}
-              callbackFn={(values) => handleChangeAttachment(values, allExtensionsValidation, "09")}
+              callbackFn={(values) =>
+                handleChangeAttachment(values, allExtensionsValidation, '09')
+              }
               values={type9Attachment}
               validateFunction={allExtensionsValidation}
               maxFiles={1}
@@ -155,7 +153,9 @@ const ModDistAgreement = (props) => {
             />
             <Uploader
               fieldError={errorType12?.code}
-              callbackFn={(values) => handleChangeAttachment(values, isTextFile, "12")}
+              callbackFn={(values) =>
+                handleChangeAttachment(values, isTextFile, '12')
+              }
               values={type12Attachment}
               validTypeFiles={'INSTALL_TXT_TYPE_ATTACHMENTS_INFO'}
               uploadUrl={URL_TEXT}
@@ -165,19 +165,40 @@ const ModDistAgreement = (props) => {
           </Box>
           <Box>
             {error ? (
-              <Alert severity="error">{t(error.code ? error.code : error)}</Alert>
+              <Alert severity="error">
+                {t(error)}
+              </Alert>
             ) : null}
           </Box>
           <Box className={classes.buttonContainer}>
-            <Button
-              onClick={handleSubmit}
-              className={classes.button}
-              variant="contained"
-              color="primary"
-              endIcon={''}>
-              {t('ENVIAR')}
-            </Button>
+            {!isSendingData ? (
+              <Button
+                onClick={() => setDialogOpen(true)}
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                endIcon={''}>
+                {t('ENVIAR')}
+              </Button>
+            ) : (
+              <CircularProgress size={24} />
+            )}
           </Box>
+          <TermsDialog
+            title={t('EMPTY_ATTACHMENTS_WARN_TITLE')}
+            open={isDialogOpen}
+            onAccept={() => {
+              setDialogOpen(false)
+              handleSubmit()
+            }}
+            onClose={() => setDialogOpen(false)}>
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: t('EMPTY_ATTACHMENTS_WARN_DESC')
+              }}
+            />
+          </TermsDialog>
         </>
       )}
     </Paper>

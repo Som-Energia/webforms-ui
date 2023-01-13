@@ -531,5 +531,8 @@
     "AUTO_AGRREEMENT_DIST_FILE":"<p><strong>Banaketa-hitzarmena:</strong> CUPS bakoitzaren banaketa-koefizienteak behar dira. argi eta garbi adierazita, eta titular guztien sinadura</p>",
     "AUTO_COEF_DIST_FILE":"<strong>Banaketa-koefizienteen fitxategia:</strong> Fitxategi honen formatua ondoko estekan kontsulta dezakezu <a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-18706'>TED 1247/2021</a>",
     "EMPTY_ATTACHMENTS":"Ez da dokumenturik gehitu bidaltzeko",
-    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Zure inguruko banatzaileari helaraziko diogu eskaera, hura baliozkotzeaz eta eraginkorra izateaz arduratuko dena. Beharrezkoa izanez gero, bidal iezaguzu prozedura honi dagokion dokumentazioa, baieztapenaren erantzunari erantsiz. minutu gutxi barru jasoko duzun mezu elektronikoa"
+    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Zure inguruko banatzaileari helaraziko diogu eskaera, hura baliozkotzeaz eta eraginkorra izateaz arduratuko dena. Beharrezkoa izanez gero, bidal iezaguzu prozedura honi dagokion dokumentazioa, baieztapenaren erantzunari erantsiz. minutu gutxi barru jasoko duzun mezu elektronikoa",
+    "EMPTY_ATTACHMENTS_WARN_TITLE":"Dokumentazioa osatu gabe dago",
+    "EMPTY_ATTACHMENTS_WARN_DESC":"Eskaera prozesatu dezakezu oraindik. Geroago zurekin harremanetan jarriko gara dokumentazioa errazteko",
+    "UPDATE_DIST_AGREEMENT_ERROR":"Prozedura ezin izan da egin. Mesedez, jarri gurekin harremanetan"
 }

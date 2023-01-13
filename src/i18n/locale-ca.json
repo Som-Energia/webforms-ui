@@ -531,5 +531,8 @@
     "AUTO_AGRREEMENT_DIST_FILE":"<p><strong>Acord de rpartiment:</strong> Han de constar clarament els coeficients de repartiment per a cada CUPS, i la signatura de totes les persones titulars.</p>",
     "AUTO_COEF_DIST_FILE":"<strong>Fitxer de coeficients de repartiment:</strong> Pots consultar el format d'aquest fitxer en el següent enllaç <a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-18706'>TED 1247/2021</a>.",
     "EMPTY_ATTACHMENTS":"No s'ha afegit cap document per enviar",
-    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Enviarem la sol·licitud a la distribuïdora de la teva zona, que s’encarregarà de validar-la i fer-la efectiva. Si cal, envia'ns la documentació relacionada amb aquest tràmit adjuntant-la a la resposta del correu de confirmació que rebràs en pocs minuts."
+    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Enviarem la sol·licitud a la distribuïdora de la teva zona, que s’encarregarà de validar-la i fer-la efectiva. Si cal, envia'ns la documentació relacionada amb aquest tràmit adjuntant-la a la resposta del correu de confirmació que rebràs en pocs minuts.",
+    "EMPTY_ATTACHMENTS_WARN_TITLE":"Falta completar la documentació",
+    "EMPTY_ATTACHMENTS_WARN_DESC":"Pots tramitar la petició igualment. Porperament ens posarem en contacte per facilitar la documentació",
+    "UPDATE_DIST_AGREEMENT_ERROR": "No s'ha pogut realitzar el tràmit. Sisplau, posa't en contacte amb nosaltres"
 }

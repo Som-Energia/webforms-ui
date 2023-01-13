@@ -531,5 +531,8 @@
     "AUTO_AGRREEMENT_DIST_FILE":"<p><strong>Acordo de distribución:</strong> Os coeficientes de distribución de cada CUPS deberán constar claramente, e a sinatura de todos os titulares.</p>",
     "AUTO_COEF_DIST_FILE":"<strong>Expediente de coeficientes de reparto:</strong> Podes consultar o formato deste ficheiro na seguinte ligazón <a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-18706'>TED 1247/2021</a>.",
     "EMPTY_ATTACHMENTS":"Non se engadiron documentos para enviar",
-    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Remitirémoslle a solicitude ao distribuidor da súa zona, que se encargará de validala e facela efectiva. Se é necesario, envíanos a documentación relacionada con este trámite axuntándoa á resposta da confirmación. correo electrónico que recibirá nuns minutos."
+    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Remitirémoslle a solicitude ao distribuidor da súa zona, que se encargará de validala e facela efectiva. Se é necesario, envíanos a documentación relacionada con este trámite axuntándoa á resposta da confirmación. correo electrónico que recibirá nuns minutos.",
+    "EMPTY_ATTACHMENTS_WARN_TITLE":"A documentación aínda está por completar",
+    "EMPTY_ATTACHMENTS_WARN_DESC":"Aínda podes procesar a solicitude. Porémonos en contacto contigo máis tarde para facilitar a documentación",
+    "UPDATE_DIST_AGREEMENT_ERROR": "Non se puido realizar o procedemento. Póñase en contacto connosco"
 }
