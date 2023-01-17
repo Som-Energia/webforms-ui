@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Uploader = (props) => {
-  const { name, callbackFn, fieldError, values, maxFiles } = props
+  const { id, name, callbackFn, fieldError, values, maxFiles } = props
 
   const { t } = useTranslation()
   const classes = useStyles()
@@ -101,6 +101,7 @@ const Uploader = (props) => {
   return (
     <>
       <TextField
+        id={id}
         key={inputKey}
         type="file"
         label=""

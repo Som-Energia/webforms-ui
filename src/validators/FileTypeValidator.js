@@ -1,5 +1,5 @@
 export const allExtensionsValidation = (fileName) => {
-    let allowedExtensions = /(.jpg|.jpeg|.pdf|.txt)$/i;
+    let allowedExtensions = /(.jpg|.png|.jpeg|.pdf|.txt)$/i;
     return allowedExtensions.test(fileName)
 }
 

@@ -134,12 +134,12 @@ const ModDistAgreement = (props) => {
               }}
             />
             <Uploader
+              id={'type9-input-file'}
               fieldError={errorType9?.code}
               callbackFn={(values) =>
                 handleChangeAttachment(values, allExtensionsValidation, '09')
               }
               values={type9Attachment}
-              validateFunction={allExtensionsValidation}
               maxFiles={1}
             />
           </Box>
@@ -152,6 +152,7 @@ const ModDistAgreement = (props) => {
               }}
             />
             <Uploader
+              id={'type12-input-file'}
               fieldError={errorType12?.code}
               callbackFn={(values) =>
                 handleChangeAttachment(values, isTextFile, '12')
@@ -159,7 +160,6 @@ const ModDistAgreement = (props) => {
               values={type12Attachment}
               validTypeFiles={'INSTALL_TXT_TYPE_ATTACHMENTS_INFO'}
               uploadUrl={URL_TEXT}
-              validateFunction={isTextFile}
               maxFiles={1}
             />
           </Box>
@@ -173,7 +173,8 @@ const ModDistAgreement = (props) => {
           <Box className={classes.buttonContainer}>
             {!isSendingData ? (
               <Button
-                onClick={() => setDialogOpen(true)}
+                id={'submit-button'}
+                onClick={() => handleSubmitButton()}
                 className={classes.button}
                 variant="contained"
                 color="primary"
