@@ -103,6 +103,14 @@ const ModDistAgreement = (props) => {
     }
   }, [errorType9, errorType12])
 
+  const handleSubmitButton = () => {
+    if([...type9Attachment, ...type12Attachment].length <2){
+      setDialogOpen(true)
+    }
+    else{
+      handleSubmit()
+    }
+  }
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
