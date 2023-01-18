@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
 describe('Update distribution agreement form', () => {
-  const filepathPng = 'mock_files/file-1.png'
+  const filepathJpg = 'mock_files/file-1.jpg'
   const filepathTxt = 'mock_files/file-2.txt'
-  const pngFileName = 'file-1.png'
+  const jpgFileName = 'file-1.jpg'
   const txtFileName = 'file-2.txt'
   const urlTxt = '/form/upload_txt_attachment/1'
   const urlAttachment = '/form/upload_attachment/0'
@@ -31,10 +31,10 @@ describe('Update distribution agreement form', () => {
 
     it('Upload correct files', function () {
       cy.get('#type9-input-file').attachFile({
-        filePath: filepathPng
+        filePath: filepathJpg
       })
 
-      uploadFile(pngFileName, urlAttachment)
+      uploadFile(jpgFileName, urlAttachment)
 
       cy.get('#type12-input-file').attachFile({
         filePath: filepathTxt
@@ -46,12 +46,29 @@ describe('Update distribution agreement form', () => {
       cy.get('#submit-button').click()
     })
 
-    it('Upload only one file and accept', function () {
+    /* it('Upload incorrect files', function () {
       cy.get('#type9-input-file').attachFile({
-        filePath: filepathPng
+        filePath: filepathTxt
       })
 
-      uploadFile(pngFileName, urlAttachment)
+      uploadFile(txtFileName, urlAttachment)
+
+      cy.get('#type12-input-file').attachFile({
+        filePath: filepathJpg
+      })
+
+      uploadFile(jpgFileName, urlTxt)
+
+      cy.intercept('POST', modAgreementUrl, { data: { statusCode: 200 } })
+      cy.get('#submit-button').click()
+    }) */
+
+    it('Upload only one file and accept', function () {
+      cy.get('#type9-input-file').attachFile({
+        filePath: filepathJpg
+      })
+
+      uploadFile(jpgFileName, urlAttachment)
 
       cy.intercept('POST', modAgreementUrl, { data: { statusCode: 200 } })
       cy.get('#submit-button').click()
@@ -60,10 +77,10 @@ describe('Update distribution agreement form', () => {
 
     it('Upload only one file and decline', function () {
       cy.get('#type9-input-file').attachFile({
-        filePath: filepathPng
+        filePath: filepathJpg
       })
 
-      uploadFile(pngFileName, urlAttachment)
+      uploadFile(jpgFileName, urlAttachment)
 
       cy.intercept('POST', modAgreementUrl, { data: { statusCode: 200 } })
       cy.get('#submit-button').click()

@@ -534,5 +534,8 @@
     "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Enviaremos la solicitud a la distribuidora de tu zona, que se encargará de validarla y hacerla efectiva. Si es necesario, envíanos la documentación relacionada con este trámite adjuntándola a la respuesta del correo de confirmación que recibirás en pocos minutos.",
     "EMPTY_ATTACHMENTS_WARN_TITLE":"No has añadido la documentación",
     "EMPTY_ATTACHMENTS_WARN_DESC":"Puedes tramitar la petición igualmente. Próximamente nos pondremos en contacto para facilitar la documentación",
-    "UPDATE_DIST_AGREEMENT_ERROR": "No se ha podido realizar el trámite. Por favor, ponte en contacto con nosotros"
+    "UPDATE_DIST_AGREEMENT_ERROR": "No se ha podido realizar el trámite. Por favor, ponte en contacto con nosotros",
+    "UPDATE_DIST_INVALID_FILETYPE": "Formato de archivo no permitido. Formatos permitidos: pdf, jpg, jpeg.",
+    "UPDATE_DIST_INVALID_TXT_FILETYPE": "Formato de archivo no permitido. Formato permitido: txt.",
+    "UPDATE_DIST_ALL_ATTACHMENTS_INFO": "Formatos permitidos: pdf, jpg, jpeg. Tamaño máximo: 5 MB."
 }

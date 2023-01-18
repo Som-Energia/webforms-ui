@@ -534,5 +534,8 @@
     "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Enviarem la sol·licitud a la distribuïdora de la teva zona, que s’encarregarà de validar-la i fer-la efectiva. Si cal, envia'ns la documentació relacionada amb aquest tràmit adjuntant-la a la resposta del correu de confirmació que rebràs en pocs minuts.",
     "EMPTY_ATTACHMENTS_WARN_TITLE":"Falta completar la documentació",
     "EMPTY_ATTACHMENTS_WARN_DESC":"Pots tramitar la petició igualment. Porperament ens posarem en contacte per facilitar la documentació",
-    "UPDATE_DIST_AGREEMENT_ERROR": "No s'ha pogut realitzar el tràmit. Sisplau, posa't en contacte amb nosaltres"
+    "UPDATE_DIST_AGREEMENT_ERROR": "No s'ha pogut realitzar el tràmit. Sisplau, posa't en contacte amb nosaltres",
+    "UPDATE_DIST_INVALID_FILETYPE": "Format de fitxer no permès. Formats permesos: pdf, jpg, jpeg.",
+    "UPDATE_DIST_INVALID_TXT_FILETYPE": "Format de fitxer no permès. Format permès: txt.",
+    "UPDATE_DIST_ALL_ATTACHMENTS_INFO": "Formats permesos: pdf, jpg, jpeg. Mida màxima permesa: 5 MB."
 }

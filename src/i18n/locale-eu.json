@@ -534,5 +534,8 @@
     "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Zure inguruko banatzaileari helaraziko diogu eskaera, hura baliozkotzeaz eta eraginkorra izateaz arduratuko dena. Beharrezkoa izanez gero, bidal iezaguzu prozedura honi dagokion dokumentazioa, baieztapenaren erantzunari erantsiz. minutu gutxi barru jasoko duzun mezu elektronikoa",
     "EMPTY_ATTACHMENTS_WARN_TITLE":"Dokumentazioa osatu gabe dago",
     "EMPTY_ATTACHMENTS_WARN_DESC":"Eskaera prozesatu dezakezu oraindik. Geroago zurekin harremanetan jarriko gara dokumentazioa errazteko",
-    "UPDATE_DIST_AGREEMENT_ERROR":"Prozedura ezin izan da egin. Mesedez, jarri gurekin harremanetan"
+    "UPDATE_DIST_AGREEMENT_ERROR":"Prozedura ezin izan da egin. Mesedez, jarri gurekin harremanetan",
+    "UPDATE_DIST_INVALID_FILETYPE": "Baimendu gabeko fitxategi-formatua. Baimendutako formatuak: pdf, jpg, jpeg.",
+    "UPDATE_DIST_INVALID_TXT_FILETYPE": "Baimendu gabeko fitxategi-formatua. Baimendutako formatua: txt.",
+    "UPDATE_DIST_ALL_ATTACHMENTS_INFO": "Onartutako formatuak: pdf, jpg, jpeg. Gehienezko tamaina: 5 MB."
 }

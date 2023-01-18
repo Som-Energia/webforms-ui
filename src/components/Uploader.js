@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Uploader = (props) => {
-  const { id, name, callbackFn, fieldError, values, maxFiles } = props
+  const { id, name, callbackFn, fieldError, values, maxFiles, validationFileFunction} = props
 
   const { t } = useTranslation()
   const classes = useStyles()
@@ -50,7 +50,10 @@ const Uploader = (props) => {
 
   const upload = useCallback(
     async (name, file) => {
-      return uploadFile(name, file, props.uploadUrl)
+      let validation = validationFileFunction ? validationFileFunction(file.name) : null
+      if(!validation || validation.result){
+        setError('')
+        return uploadFile(name, file, props.uploadUrl)
         .then((response) => {
           if (response?.data?.code === 'UPLOAD_OK') {
             setUploads([...uploads, response?.data?.file_hash])
@@ -68,6 +71,10 @@ const Uploader = (props) => {
             : 'MODIFY_POTTAR_UNEXPECTED'
           setError(errorMsg)
         })
+      }
+      else{
+          setError(validation.msg)
+      }
     },
     [uploads,props.uploadUrl]
   )
@@ -131,8 +138,6 @@ const Uploader = (props) => {
         helperText={
           error
             ? t(error)
-            : fieldError
-            ? t(fieldError)
             : t(validTypeFiles)
         }
       />
