@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Uploader from '../components/Uploader'
+import Uploader from '../../components/Uploader'
 import StepHeader from 'components/StepHeader'
-import { useLocation, useParams } from 'react-router-dom'
-import { distribution_agreement } from '../services/api'
-import Success from './Success'
+import Success from '../Success'
 import {
   allExtensionsValidation,
   isTextFile
-} from '../validators/FileTypeValidator'
+} from '../../validators/FileTypeValidator'
 import TermsDialog from 'components/TermsDialog'
 import Alert from '@material-ui/lab/Alert'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -35,82 +33,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ModDistAgreement = (props) => {
+const ModDistAgreementData = (props) => {
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
-  const { state } = useLocation()
-  const { language } = useParams()
+  const { t } = useTranslation()
 
-  const templateProps = JSON.parse(props.d1)
-  const [type9Attachment, setType9Attachment] = useState([])
-  const [type12Attachment, setType12Attachment] = useState([])
-  const [errorType9, setErrorType9] = useState()
-  const [errorType12, setErrorType12] = useState()
-  const [error, setError] = useState('')
-  const [completed, setCompleted] = useState(false)
-  const [isDialogOpen, setDialogOpen] = useState(false)
-  const [isSendingData, setSendingData] = useState(false)
-
-  const [data] = useState(state?.d1CaseData || templateProps)
-
-  const handleSubmit = async () => {
-    setSendingData(true)
-    await distribution_agreement(
-      {
-        ...data,
-        rich_attachments: [...type9Attachment, ...type12Attachment]
-      },
-      data.token
-    )
-      .then(() => {
-        setCompleted(true)
-        setSendingData(false)
-      })
-      .catch((error) => {
-        setSendingData(false)
-        setError('UPDATE_DIST_AGREEMENT_ERROR')
-      })
+  const handleChangeAttachment = (values, type) => {
+      updateAttachment(values,type)
   }
 
-  const validateFileTypes = (values, validateFunc) => {
-    return values.reduce(function (init, a) {
-      return init && validateFunc(a)
-    }, true)
-  }
 
-  const handleChangeAttachment = (values, validateFunc, type) => {
-    setError('')
-    if (validateFileTypes(values, validateFunc)) {
-      type === '09'
-        ? setType9Attachment(values.map((el) => ({ type: type, data: el })))
-        : setType12Attachment(values.map((el) => ({ type: type, data: el })))
-    } else {
-      type === '09'
-        ? setErrorType9({ code: 'INSTALL_TYPE_ATTACHMENTS_INFO' })
-        : setErrorType12({ code: 'INSTALL_TXT_TYPE_ATTACHMENTS_INFO' })
-    }
-  }
-
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
-
-  useEffect(() => {
-    if (errorType9) {
-      setType9Attachment([])
-    } else if (errorType12) {
-      setType12Attachment([])
-    }
-  }, [errorType9, errorType12])
-
-  const handleSubmitButton = () => {
-    if([...type9Attachment, ...type12Attachment].length <2){
-      setDialogOpen(true)
-    }
-    else{
-      handleSubmit()
-    }
-  }
+  const {
+    isDialogOpen,
+    setDialogOpen,
+    type9Attachment,
+    type12Attachment,
+    error,
+    isSendingData,
+    completed,
+    data,
+    updateAttachment,
+    handleSubmitButton,
+    handleSubmit
+  } = props
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
@@ -143,12 +87,11 @@ const ModDistAgreement = (props) => {
             />
             <Uploader
               id={'type9-input-file'}
-              fieldError={errorType9?.code}
-              callbackFn={(values) =>
-                handleChangeAttachment(values, allExtensionsValidation, '09')
-              }
+              callbackFn={(values) => handleChangeAttachment(values,'09')}
               values={type9Attachment}
+              validTypeFiles={'UPDATE_DIST_ALL_ATTACHMENTS_INFO'}
               maxFiles={1}
+              validationFileFunction={allExtensionsValidation}
             />
           </Box>
 
@@ -161,23 +104,15 @@ const ModDistAgreement = (props) => {
             />
             <Uploader
               id={'type12-input-file'}
-              fieldError={errorType12?.code}
-              callbackFn={(values) =>
-                handleChangeAttachment(values, isTextFile, '12')
-              }
+              callbackFn={(values) => handleChangeAttachment(values, '12')}
               values={type12Attachment}
               validTypeFiles={'INSTALL_TXT_TYPE_ATTACHMENTS_INFO'}
               uploadUrl={URL_TEXT}
               maxFiles={1}
+              validationFileFunction={isTextFile}
             />
           </Box>
-          <Box>
-            {error ? (
-              <Alert severity="error">
-                {t(error)}
-              </Alert>
-            ) : null}
-          </Box>
+          <Box>{error ? <Alert severity="error">{t(error)}</Alert> : null}</Box>
           <Box className={classes.buttonContainer}>
             {!isSendingData ? (
               <Button
@@ -214,4 +149,4 @@ const ModDistAgreement = (props) => {
   )
 }
 
-export default React.memo(ModDistAgreement)
+export default React.memo(ModDistAgreementData)
