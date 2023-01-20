@@ -46,7 +46,7 @@ describe('Update distribution agreement form', () => {
       cy.get('#submit-button').click()
     })
 
-    /* it('Upload incorrect files', function () {
+    it('Upload incorrect files', function () {
       cy.get('#type9-input-file').attachFile({
         filePath: filepathTxt
       })
@@ -61,7 +61,8 @@ describe('Update distribution agreement form', () => {
 
       cy.intercept('POST', modAgreementUrl, { data: { statusCode: 200 } })
       cy.get('#submit-button').click()
-    }) */
+      cy.get('#accept-button').click()
+    })
 
     it('Upload only one file and accept', function () {
       cy.get('#type9-input-file').attachFile({

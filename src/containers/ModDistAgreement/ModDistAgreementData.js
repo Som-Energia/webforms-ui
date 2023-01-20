@@ -112,7 +112,7 @@ const ModDistAgreementData = (props) => {
               validationFileFunction={isTextFile}
             />
           </Box>
-          <Box>{error ? <Alert severity="error">{t(error)}</Alert> : null}</Box>
+          <Box>{error ? <Alert id={'error-component'} severity="error">{t(error)}</Alert> : null}</Box>
           <Box className={classes.buttonContainer}>
             {!isSendingData ? (
               <Button
@@ -125,7 +125,7 @@ const ModDistAgreementData = (props) => {
                 {t('ENVIAR')}
               </Button>
             ) : (
-              <CircularProgress size={24} />
+              <CircularProgress id={'circular-progress'} size={24} />
             )}
           </Box>
           <TermsDialog
@@ -138,6 +138,7 @@ const ModDistAgreementData = (props) => {
             onClose={() => setDialogOpen(false)}>
             <Typography
               variant="body1"
+              component='span'
               dangerouslySetInnerHTML={{
                 __html: t('EMPTY_ATTACHMENTS_WARN_DESC')
               }}
