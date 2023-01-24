@@ -2,30 +2,20 @@ import {
   fireEvent,
   render,
   screen,
-  queryByAttribute,
-  act,
-  getByText,
-  findByText
+  queryByAttribute
 } from '@testing-library/react'
 import ModDistAgreementData from '../../../containers/ModDistAgreement/ModDistAgreementData'
 import d1 from '../../mock_files/d1.json'
 import { I18nextProvider } from 'react-i18next'
 import i18n from '../../testing-configuration/i18nForTests'
 
-describe('ModDistAgreement Translations CA', () => {
+describe('ModDistAgreement', () => {
   const updateAttachmentMock = jest.fn()
   const handleSubmitButtonMock = jest.fn()
   const setDialogOpenMock = jest.fn()
   const handleSubmitMock = jest.fn()
   const getById = queryByAttribute.bind(null, 'id')
   let dom = {}
-  const uploadFile = {
-    lastModified: 1673949953537,
-    name: 'file-2.txt',
-    size: 5,
-    type: 'text/plain',
-    webkitRelativePath: ''
-  }
 
   beforeEach(() => {
     dom = render(
@@ -119,13 +109,6 @@ describe('ModDistAgreement Translations CA', () => {
   })
 
   test('When click submit button handleSubmitButton is called', () => {
-    //CHECKING THE INPUT OF TYPE 9 EXISTS
-    const submitButton = getById(dom.container, 'submit-button')
-    submitButton.click()
-    expect(handleSubmitButtonMock).toBeCalledTimes(1)
-  })
-
-  test('', () => {
     //CHECKING THE INPUT OF TYPE 9 EXISTS
     const submitButton = getById(dom.container, 'submit-button')
     submitButton.click()

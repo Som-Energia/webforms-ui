@@ -37,10 +37,6 @@ const ModDistAgreementData = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
-  const handleChangeAttachment = (values, type) => {
-      updateAttachment(values,type)
-  }
-
 
   const {
     isDialogOpen,
@@ -87,7 +83,7 @@ const ModDistAgreementData = (props) => {
             />
             <Uploader
               id={'type9-input-file'}
-              callbackFn={(values) => handleChangeAttachment(values,'09')}
+              callbackFn={(values) => updateAttachment(values,'09')}
               values={type9Attachment}
               validTypeFiles={'UPDATE_DIST_ALL_ATTACHMENTS_INFO'}
               maxFiles={1}
@@ -104,7 +100,7 @@ const ModDistAgreementData = (props) => {
             />
             <Uploader
               id={'type12-input-file'}
-              callbackFn={(values) => handleChangeAttachment(values, '12')}
+              callbackFn={(values) => updateAttachment(values, '12')}
               values={type12Attachment}
               validTypeFiles={'INSTALL_TXT_TYPE_ATTACHMENTS_INFO'}
               uploadUrl={URL_TEXT}
