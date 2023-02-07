@@ -183,7 +183,7 @@
     "PAYMENT_TITLE": "Datos de pago",
     "IBAN_LABEL": "IBAN (cuenta bancaria)",
     "IBAN_HELP": "Ejemplo: ES11 2222 3333 4444 5555 6666",
-    "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular de la cuenta bancaria, yo misma o una tercera persona, autoriza la domiciliación de las facturas de electricidad",
+    "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular de la cuenta bancaria, yo misma o una tercera persona, autoriza la domiciliación de las facturas de electricidad.",
     "IBAN_ERROR": "IBAN incorrecto",
     "INVALID_PAYER_IBAN": "No has especificado correctamente el IBAN de la cuenta donde domiciliar",
     "UNCONFIRMED_ACCOUNT_OWNER": "Tienes que aceptar la domiciliación de recibos",
