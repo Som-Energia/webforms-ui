@@ -183,7 +183,7 @@
     "PAYMENT_TITLE": "Ordainketa-datuak",
     "IBAN_LABEL": "IBAN (banku-kontua)",
     "IBAN_HELP": "Adibidez: ES11 2222 3333 4444 5555 6666",
-    "IBAN_ACCEPT_DIRECT_DEBIT": "Banku-kontuaren titular naizen heinean, ordainagiriak helbideratzea onartzen dut",
+    "IBAN_ACCEPT_DIRECT_DEBIT": "Berresten dut banku-kontuaren titularrak, nik neuk edo beste norbaitek, elektrizitate-fakturak helbideratzeko baimena ematen duela",
     "IBAN_ERROR": "IBAN okerra",
     "INVALID_PAYER_IBAN": "Ez duzu ordainagiriak helbideratzeko kontuaren IBAN zenbakia zuzen adierazi",
     "UNCONFIRMED_ACCOUNT_OWNER": "Ordainagiriak helbideratzea onartu behar duzu",
