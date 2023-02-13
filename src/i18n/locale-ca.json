@@ -184,7 +184,7 @@
     "PAYMENT_TITLE": "Dades de pagament",
     "IBAN_LABEL": "IBAN (compte bancari)",
     "IBAN_HELP": "Exemple: ES11 2222 3333 4444 5555 6666",
-    "IBAN_ACCEPT_DIRECT_DEBIT": "Com a titular del compte bancari, accepto la domiciliació dels rebuts",
+    "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular del compte bancari, sigui jo mateixa o una altra, autoritza la domiciliació de les factures d'electricitat.",
     "IBAN_ERROR": "IBAN incorrecte",
     "INVALID_PAYER_IBAN": "No has especificat correctament l'IBAN del compte on domiciliar",
     "UNCONFIRMED_ACCOUNT_OWNER": "Has d'acceptar la domiciliació dels rebuts",
