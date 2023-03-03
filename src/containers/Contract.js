@@ -706,12 +706,12 @@ const Contract = (props) => {
     legal_person_accepted: false
   }
 
-  const { trackPageview } = Plausible()
+  const plausible = Plausible({
+    domain: process.env.REACT_APP_TRACK_DOMAIN
+  })
 
   const trackSucces = () => {
-
-    
-    trackPageview({
+    plausible.trackPageview({
       url: window.location.protocol + "//" + window.location.hostname + "/es/contratacion-realizada/"
     })
   }
