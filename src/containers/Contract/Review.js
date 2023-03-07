@@ -19,7 +19,6 @@ import GeneralTerms from 'components/GeneralTerms'
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
 
-
 const useStyles = makeStyles((theme) => ({
   withoutLabel: {
     marginTop: theme.spacing(1)
@@ -98,9 +97,13 @@ const Review = (props) => {
 
   useEffect(() => {
     setLoading(true)
-    let powerFields = Object.values(Object.fromEntries(
-      Object.entries(values.contract).filter(([key]) => key.startsWith('power'))
-    ))
+    let powerFields = Object.values(
+      Object.fromEntries(
+        Object.entries(values.contract).filter(([key]) =>
+          key.startsWith('power')
+        )
+      )
+    )
     let maxPower = Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
     getPrices({
       tariff: values.contract.rate,
@@ -167,21 +170,21 @@ const Review = (props) => {
       <Grid container>
         {rates[values?.contract?.rate]?.num_power_periods > 1
           ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
-            (value, index) => {
-              const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
-              const label = values?.contract?.moreThan15Kw
-                ? `P${index + 1}`
-                : index === 0
+              (value, index) => {
+                const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+                const label = values?.contract?.moreThan15Kw
+                  ? `P${index + 1}`
+                  : index === 0
                   ? t('PUNTA')
                   : t('VALLE')
-              return (
-                <Grid
-                  key={label}
-                  item
-                  xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
-              )
-            }
-          )
+                return (
+                  <Grid
+                    key={label}
+                    item
+                    xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
+                )
+              }
+            )
           : `${values?.contract?.power} kW`}
       </Grid>
     )
@@ -436,7 +439,7 @@ const Review = (props) => {
 
           <Typography
             variant="body1"
-            align='justify'
+            align="justify"
             dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
           />
 
