@@ -421,20 +421,15 @@ const Review = (props) => {
                 multipleValues={true}
               />
             </Grid>
-            {/*
-            // Commented out while it is not applied but it will be back soon.
-            <Grid item xs={12} sm={6}>
-              <ReviewField
-                label={t('BO_SOCIAL')}
-                value={
-                  prices?.bo_social?.value
-                    ? `${prices?.bo_social?.value} ${prices?.bo_social?.uom}`
-                    : t('UNAVAILABLE')
-                }
-                multipleValues={true}
-              />
-            </Grid>
-            */}
+            {prices?.bo_social?.value ? (
+              <Grid item xs={12} sm={6}>
+                <ReviewField
+                  label={t('BO_SOCIAL')}
+                  value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                  multipleValues={true}
+                />
+              </Grid>
+            ) : null}
           </Grid>
 
           <Typography
