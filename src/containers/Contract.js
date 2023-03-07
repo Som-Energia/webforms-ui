@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import ReactGA from 'react-ga'
 import Plausible from 'plausible-tracker'
 
 import { useTranslation } from 'react-i18next'
@@ -534,7 +534,7 @@ const Contract = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
-        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} />}
+        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} is30ContractEnabled={is30ContractEnabled}/>}
         {(showAllSteps || activeStep === 1) && <CUPS {...props} />}
         {(showAllSteps || activeStep === 2) && <SupplyPoint {...props} />}
         {(showAllSteps || activeStep === 3) && (
@@ -714,7 +714,11 @@ const Contract = (props) => {
     plausible.trackPageview({
       url: window.location.protocol + "//" + window.location.hostname + "/es/contratacion-realizada/"
     })
+
+    ReactGA.initialize(GA_TRACKING_ID)
+    ReactGA.pageview('/es/contratacion-realizada/')
   }
+
 
   const handlePost = async (values) => {
     setSending(true)
