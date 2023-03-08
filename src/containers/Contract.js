@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-
 import ReactGA from 'react-ga'
+import Plausible from 'plausible-tracker'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -534,7 +534,7 @@ const Contract = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
-        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} is30ContractEnabled={is30ContractEnabled} />}
+        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} is30ContractEnabled={is30ContractEnabled}/>}
         {(showAllSteps || activeStep === 1) && <CUPS {...props} />}
         {(showAllSteps || activeStep === 2) && <SupplyPoint {...props} />}
         {(showAllSteps || activeStep === 3) && (
@@ -706,10 +706,20 @@ const Contract = (props) => {
     legal_person_accepted: false
   }
 
+  const plausible = Plausible({
+    domain: process.env.REACT_APP_PLAUSIBLE_TRACK_DOMAIN,
+    apiHost: process.env.REACT_APP_PLAUSIBLE_APIHOST_URL
+  })
+
   const trackSucces = () => {
+    plausible.trackPageview({
+      url: window.location.protocol + "//" + window.location.hostname + "/es/contratacion-realizada/"
+    })
+
     ReactGA.initialize(GA_TRACKING_ID)
     ReactGA.pageview('/es/contratacion-realizada/')
   }
+
 
   const handlePost = async (values) => {
     setSending(true)
