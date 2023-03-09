@@ -32,15 +32,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+/**
+ * testingCustomError : Variable to force the error for testing (not delete)
+ *
+ */
+
 const Uploader = (props) => {
-  const { name, callbackFn, fieldError, values, maxFiles } = props
+  const {
+    id,
+    name,
+    callbackFn,
+    fieldError,
+    values,
+    maxFiles,
+    validationFileFunction,
+    testingCustomError
+  } = props
+
   const { t } = useTranslation()
   const classes = useStyles()
 
+  const validTypeFiles = props.validTypeFiles || 'INSTALL_TYPE_ATTACHMENTS_INFO'
   const [uploads, setUploads] = useState([...values])
   const [inputKey, setInputKey] = useState(Date.now())
   const [isUploading, setUploading] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(testingCustomError || false)
 
   useEffect(() => {
     callbackFn(uploads)
@@ -48,26 +64,34 @@ const Uploader = (props) => {
 
   const upload = useCallback(
     async (name, file) => {
-      return uploadFile(name, file)
-        .then((response) => {
-          if (response?.data?.code === 'UPLOAD_OK') {
-            setUploads([...uploads, response?.data?.file_hash])
-            setInputKey(Date.now())
-          } else {
-            const errorMsg = response?.data?.code
-              ? response?.data?.code
+      let validation = validationFileFunction
+        ? validationFileFunction(file.name)
+        : null
+      if (!validation || validation.result) {
+        setError('')
+        return uploadFile(name, file, props.uploadUrl)
+          .then((response) => {
+            if (response?.data?.code === 'UPLOAD_OK') {
+              setUploads([...uploads, response?.data?.file_hash])
+              setInputKey(Date.now())
+            } else {
+              const errorMsg = response?.data?.code
+                ? response?.data?.code
+                : 'MODIFY_POTTAR_UNEXPECTED'
+              setError(errorMsg)
+            }
+          })
+          .catch((error) => {
+            const errorMsg = error?.response?.data?.code
+              ? error.response.data.code
               : 'MODIFY_POTTAR_UNEXPECTED'
             setError(errorMsg)
-          }
-        })
-        .catch((error) => {
-          const errorMsg = error?.response?.data?.code
-            ? error.response.data.code
-            : 'MODIFY_POTTAR_UNEXPECTED'
-          setError(errorMsg)
-        })
+          })
+      } else {
+        setError(validation.msg)
+      }
     },
-    [uploads]
+    [uploads, props.uploadUrl]
   )
 
   const handleChange = useCallback(
@@ -99,6 +123,7 @@ const Uploader = (props) => {
   return (
     <>
       <TextField
+        id={id}
         key={inputKey}
         type="file"
         label=""
@@ -113,9 +138,9 @@ const Uploader = (props) => {
           endAdornment: (
             <InputAdornment position="end">
               {isUploading ? (
-                <CircularProgress size={24} />
+                <CircularProgress id={'uploader-circular-progress'} size={24} />
               ) : error ? (
-                <IconButton onClick={handleClean}>
+                <IconButton id={'clean-icon'} onClick={handleClean}>
                   <HighlightOffIcon />
                 </IconButton>
               ) : (
@@ -126,11 +151,7 @@ const Uploader = (props) => {
         }}
         error={(error || fieldError) && true}
         helperText={
-          error
-            ? t(error)
-            : fieldError
-            ? t(fieldError)
-            : t('INSTALL_TYPE_ATTACHMENTS_INFO')
+          error ? t(error) : fieldError ? t(fieldError) : t(validTypeFiles)
         }
       />
       <List>
@@ -142,6 +163,7 @@ const Uploader = (props) => {
             <ListItemText>{upload}</ListItemText>
             <ListItemSecondaryAction>
               <IconButton
+                id={'delete-icon' + index}
                 edge="end"
                 aria-label="delete"
                 onClick={(event) => handleDelete(event, index)}>

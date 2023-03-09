@@ -31,10 +31,10 @@ const TermsDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button data-cy="decline" onClick={onClose}>
+          <Button data-cy="decline" id={'decline-button'} onClick={onClose}>
             {t('I_DECLINE')}
           </Button>
-          <Button data-cy="accept" onClick={onAccept} variant="contained" color="primary">
+          <Button data-cy="accept" id={'accept-button'} onClick={onAccept} variant="contained" color="primary">
             {t('I_ACCEPT')}
           </Button>
         </DialogActions>

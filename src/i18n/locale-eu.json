@@ -75,6 +75,7 @@
     "MODIFY_POTTAR_UNEXPECTED": "Ustekabeko errorea gertatu da",
     "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Jar zaitez harremanetan modifica@somenergia.coop helbidearekin, eta lagunduko dizugu. Zu identifikatzeko, zure IFZ eta aldatu nahi duzun kontratuaren zenbakia behar ditugu.",
     "INSTALL_TYPE_ATTACHMENTS_INFO": "Onartutako formatuak: pdf, jpg, jpeg. Gehienezko tamaina: 5 MB.",
+    "INSTALL_TXT_TYPE_ATTACHMENTS_INFO": "Onartutako formatuak: txt. Gehienezko tamaina: 5 MB.",
     "UNEXPECTED": "Ustekabeko errorea gertatu da",
     "UNEXPECTED_ERROR": "Ustekabeko errorea gertatu da",
     "INVALID_FILETYPE": "Fitxategi-formatu hau ez da onartzen. Onartutako formatuak: pdf, jpg, jpeg.",
@@ -530,5 +531,17 @@
     "CANCELLATION_IN_PROGRESS": "Kontratuaren baja emateko eskaera bat abian dago jada (sartu zure posta elektronikoan)",
     "BAD_TOKEN": "Tokena ez da zuzena",
     "NOT_FOUND": "Ez dugu aurkitu baja-eskaerarik",
-    "DESCRIPTION_MAJ_ALERT": "Som Energiak ezarritako eta <a target='_blank' href='https://www.somenergia.coop/eu/elektrizitate-tarifak/'>webgunean</a> argitaratutako energiaren kostuaren prezio finkoaz gain, urriaren 1etik aurrera, fakturak <a target='_blank' href='https://www.boe.es/buscar/act.php?id=BOE-A-2022-7843'>10/2022 Legegintzako Errege Dekretuan</a> xedatutako doitzeko mekanismoaren ondoriozko zenbateko aldagarri bat barne hartuko du. Zenbateko hori fakturazio-aldi bakoitzean kalkulatuko dugu. Doitzeko mekanismoaren orduko prezioa (<a target='_blank' href='https://www.omie.es/es/market-results/daily/average-final-prices/hourly-price-consumers'>OMIEk argitaratuta</a>) haztatuko dugu kontsumitzaile estandar baten energiaren ordutegi-banaketaren arabera (<a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-21395'>2021/12/23ko Ebazpenari</a> jarraikiz <a target='_blank' href='https://www.ree.es/es/clientes/consumidor/gestion-medidas-electricas/consulta-perfiles-de-consumo'>Espainiako Red Eléctricak argitaratuta</a>). Faktura bakoitzean, ondoriozko prezioa fakturazio-aldian kontsumitutako energia guztiaz biderkatuko dugu. Gasa doitzeko mekanismoa ez zaie aplikatuko Balearretako eta Kanarietako kontratuei."
+    "DESCRIPTION_MAJ_ALERT": "Som Energiak ezarritako eta <a target='_blank' href='https://www.somenergia.coop/eu/elektrizitate-tarifak/'>webgunean</a> argitaratutako energiaren kostuaren prezio finkoaz gain, urriaren 1etik aurrera, fakturak <a target='_blank' href='https://www.boe.es/buscar/act.php?id=BOE-A-2022-7843'>10/2022 Legegintzako Errege Dekretuan</a> xedatutako doitzeko mekanismoaren ondoriozko zenbateko aldagarri bat barne hartuko du. Zenbateko hori fakturazio-aldi bakoitzean kalkulatuko dugu. Doitzeko mekanismoaren orduko prezioa (<a target='_blank' href='https://www.omie.es/es/market-results/daily/average-final-prices/hourly-price-consumers'>OMIEk argitaratuta</a>) haztatuko dugu kontsumitzaile estandar baten energiaren ordutegi-banaketaren arabera (<a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-21395'>2021/12/23ko Ebazpenari</a> jarraikiz <a target='_blank' href='https://www.ree.es/es/clientes/consumidor/gestion-medidas-electricas/consulta-perfiles-de-consumo'>Espainiako Red Eléctricak argitaratuta</a>). Faktura bakoitzean, ondoriozko prezioa fakturazio-aldian kontsumitutako energia guztiaz biderkatuko dugu. Gasa doitzeko mekanismoa ez zaie aplikatuko Balearretako eta Kanarietako kontratuei.",
+    "AUTO_PROCEDURE_INTRO":"Zure inguruko elektrizitatea banatzeko enpresak jakinarazten diguzu zurekin erlazionatuta zauden CAU <strong>{{cau}}</strong>rekin autoekoizpen kolektiboko instalazioaren soberakinen banaketa-hitzarmenean aldaketa bat eskatu behar dela.",
+    "AUTO_PROCEDURE_DOCS":"Aldaketa hau egiteko, beharrezkoa izango da dokumentazio hau ematea:",
+    "AUTO_AGRREEMENT_DIST_FILE":"<p><strong>Banaketa-hitzarmena:</strong> CUPS bakoitzaren banaketa-koefizienteak behar dira. argi eta garbi adierazita, eta titular guztien sinadura</p>",
+    "AUTO_COEF_DIST_FILE":"<strong>Banaketa-koefizienteen fitxategia:</strong> Fitxategi honen formatua ondoko estekan kontsulta dezakezu <a target='_blank' href='https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-18706'>TED 1247/2021</a>",
+    "EMPTY_ATTACHMENTS":"Ez da dokumenturik gehitu bidaltzeko",
+    "UPDATE_AUTO_AGREEMENT_OK_DESCRIPTION":"Zure inguruko banatzaileari helaraziko diogu eskaera, hura baliozkotzeaz eta eraginkorra izateaz arduratuko dena. Beharrezkoa izanez gero, bidal iezaguzu prozedura honi dagokion dokumentazioa, baieztapenaren erantzunari erantsiz. minutu gutxi barru jasoko duzun mezu elektronikoa",
+    "EMPTY_ATTACHMENTS_WARN_TITLE":"Dokumentazioa osatu gabe dago",
+    "EMPTY_ATTACHMENTS_WARN_DESC":"Eskaera prozesatu dezakezu oraindik. Geroago zurekin harremanetan jarriko gara dokumentazioa errazteko",
+    "UPDATE_DIST_AGREEMENT_ERROR":"Prozedura ezin izan da egin. Mesedez, jarri gurekin harremanetan",
+    "UPDATE_DIST_INVALID_FILETYPE": "Baimendu gabeko fitxategi-formatua. Baimendutako formatuak: pdf, jpg, jpeg.",
+    "UPDATE_DIST_INVALID_TXT_FILETYPE": "Baimendu gabeko fitxategi-formatua. Baimendutako formatua: txt.",
+    "UPDATE_DIST_ALL_ATTACHMENTS_INFO": "Onartutako formatuak: pdf, jpg, jpeg. Gehienezko tamaina: 5 MB."
 }

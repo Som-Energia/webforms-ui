@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.21.2",
     "cypress": "^9.5.1",
     "cypress-file-upload": "^5.0.8",
     "eslint-plugin-cypress": "^2.12.1",

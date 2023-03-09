@@ -66,6 +66,7 @@ const App = (props) => {
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
   const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
+  const ModDistAgreement = lazy(() => import('./containers/ModDistAgreement/ModDistAgreement'))
 
   const loadContractData = () => {
     const contractData =
@@ -322,6 +323,15 @@ const App = (props) => {
                       {...loadInvoicePaymentData()}
                     />
                   }
+                />
+                <Route
+                  exact
+                  path="/mod-distribution-agreement"
+                  element={<ModDistAgreement {...props} />}
+                />
+                 <Route
+                  path="/:language/mod-distribution-agreement/"
+                  element={<ModDistAgreement {...props} />}
                 />
               </Routes>
             </Router>
