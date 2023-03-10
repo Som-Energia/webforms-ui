@@ -537,5 +537,6 @@
     "GENERAL_CONDITIONS_URL": "https://www.somenergia.coop/es/condiciones-del-contrato-de-som-energia/",
     "TARIFF_INDEXADA_HELP_URL":"https://es.support.somenergia.coop/article/1273-la-tarifa-indexada?utm_source=linkidiomes&utm_medium=cda&utm_campaign=castellano",
     "CURRENT_TARIFF":"Tarifa actual",
-    "TARIFF_TO_CONTRACT":"Tarifa a contratar"
+    "TARIFF_TO_CONTRACT":"Tarifa a contratar",
+    "INDEXADA_ACCEPT_TERMS":"Amb l'acceptació d'aquestes condicions particulars, la contractant s'obliga al pagament del seu consum al preu que resulti de l'aplicació de la Tarifa Indexada, que serà d'aplicació a partir del primer dia del proper cicle de facturació"
 }

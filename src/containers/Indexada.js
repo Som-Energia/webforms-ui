@@ -32,7 +32,7 @@ import SendIcon from '@material-ui/icons/Send'
 import IndexadaContractDetails from './Indexada/IndexadaContractDetails'
 import IndexadaIntro from './Indexada/IndexadaIntro'
 import IndexadaImportantInfo from './Indexada/IndexadaImportantInfo'
-import IndexadaTerms from './Indexada/IndexadaTerms'
+import IndexadaReview from './Indexada/IndexadaReview'
 
 import Failure from './Failure'
 import Success from './Success'
@@ -137,24 +137,13 @@ const Indexada = (props) => {
 
   const validationSchemas = [
     Yup.object().shape({}),
-    Yup.object().shape({
-      cups: Yup.string()
-        .required(t('CUPS_INVALID'))
-        .min(18, t('CUPS_INVALID'))
-        .test('sameCups', t('NOT_MATCH'), function () {
-          return !(this.parent.contract_cups !== this.parent.cups)
-        }),
-      phone: Yup.string()
-        .required(t('NO_PHONE'))
-        .min(9, t('NO_PHONE'))
-        .max(9, t('NO_PHONE')),
-      privacy_policy: Yup.bool()
-        .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS')),
+    Yup.object().shape({}),
+    Yup.object().shape({})
+    /* Yup.object().shape({
       terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS'))
-    })
+    }) */
   ]
 
   if (!contract.id || !contract.number || !contract.cups) {
@@ -191,17 +180,17 @@ const Indexada = (props) => {
                 <Container maxWidth="lg" disableGutters={true}>
                   {!completed && (
                     <>
-                      <IndexadaContractDetails {...formikProps.values} />
+                      {activeStep !== 2 ? <IndexadaContractDetails {...formikProps.values} /> : null }
 
-                      {activeStep === 0 && (
+                      {activeStep === 0 ? (
                         <IndexadaIntro {...formikProps} />
-                      )}
-                      {activeStep === 1 && (
+                      ): null}
+                      {activeStep === 1 ? (
                         <IndexadaImportantInfo {...formikProps} />
-                      )}
-                      {activeStep === 2 && (
-                        <IndexadaTerms {...formikProps} />
-                      )}
+                      ): null}
+                      {activeStep === 2 ? (
+                        <IndexadaReview values={{holder:''}} {...formikProps} />
+                      ): null}
                       <Box mx={0} mt={2} mb={3}>
                         <div className={classes.actionsContainer}>
                           {result?.contract_number === undefined && (

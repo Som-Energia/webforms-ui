@@ -1,0 +1,333 @@
+import clsx from 'clsx'
+import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { makeStyles } from '@material-ui/core/styles'
+import Checkbox from '@material-ui/core/Checkbox'
+import Divider from '@material-ui/core/Divider'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import FormHelperText from '@material-ui/core/FormHelperText'
+
+import Header from 'components/oficinavirtual/Header'
+import TermsDialog from 'components/TermsDialog'
+import Loading from 'components/Loading'
+import GeneralTerms from 'components/GeneralTerms'
+
+import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
+import { getPrices, getRates } from 'services/api'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: 'white',
+    padding: '24px'
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(1)
+  },
+  sectionTitle: {
+    fontSize: '18px',
+    fontWeight: 500,
+    textTransform: 'uppercase',
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(1.2)
+  },
+  field: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: theme.spacing(0.8),
+    '& .field__value': {
+      flexGrow: 1
+    }
+  },
+  label: {
+    textTransform: 'uppercase',
+    paddingRight: '12px',
+    fontSize: '14px',
+    fontWeight: 400,
+    color: 'rgba(0, 0, 0, 0.54)'
+  },
+  value: {
+    fontSize: '16px'
+  },
+  listItem: {
+    paddingTop: '8px'
+  },
+  separatedField: {
+    flexDirection: 'column',
+    alignItems: 'flex-start'
+  },
+  separatedValues: {
+    marginLeft: 0,
+    marginRight: theme.spacing(1.6),
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5)
+  },
+  divider: {
+    marginTop: '12px',
+    marginLeft: 0,
+    marginRight: '32px'
+  },
+  dividerBottom: {
+    marginTop: '10px',
+    marginLeft: 0,
+    marginRight: '32px'
+  },
+  prices: {
+    marginBottom: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    '& span': {
+      paddingRight: '16px'
+    }
+  }
+}))
+
+const IndexadaReview = (props) => {
+  const classes = useStyles()
+  const { t } = useTranslation()
+  const { values, setFieldValue } = props
+
+  const [open, setOpen] = useState(false)
+  const [rates] = useState(getRates())
+  const [loading, setLoading] = useState(true)
+
+  const use_member_as_holder = true
+  /* values.holder.vat === values.member.vat && values.holder.isphisical */
+  const holder = use_member_as_holder ? values.member : values.holder
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('terms_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('terms_accepted', false)
+  }
+
+  const ReviewField = ({ label = 'holi', value, multipleValues = false }) => {
+    return (
+      <div
+        className={clsx(
+          classes.field,
+          multipleValues && classes.separatedField
+        )}>
+        {label !== false && (
+          <div className="field__title">
+            <Typography className={classes.label} variant="subtitle2">
+              {label}
+            </Typography>
+          </div>
+        )}
+        <div
+          className={clsx(
+            'field__value',
+            multipleValues && classes.separatedValues
+          )}>
+          <Typography className={classes.value} variant="body2">
+            {value}
+          </Typography>
+        </div>
+      </div>
+    )
+  }
+
+  const PowerValues = () => {
+    return (
+      <Grid container>
+        {rates[values?.contract?.rate]?.num_power_periods > 1
+          ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
+              (value, index) => {
+                const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+                const label = values?.contract?.moreThan15Kw
+                  ? `P${index + 1}`
+                  : index === 0
+                  ? t('PUNTA')
+                  : t('VALLE')
+                return (
+                  <Grid
+                    key={label}
+                    item
+                    xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
+                )
+              }
+            )
+          : `${values?.contract?.power} kW`}
+      </Grid>
+    )
+  }
+
+  
+
+  return (
+    <>
+      <Header>{t('REVIEW_TITLE')}</Header>
+      <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <Typography
+            variant="body1"
+            dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('SUMMARY_GROUP_PROCESS')}
+          </Typography>
+          <ReviewField label={false} value={'HOLA'} />
+          <ReviewField
+            label={t('RELATED_MEMBER')}
+            value={values?.member?.vat}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('SUPPLY')}
+          </Typography>
+          <ReviewField
+            label={t('CUPS_LABEL')}
+            value={values?.supply_point?.cups}
+          />
+          <ReviewField
+            label={t('ADDRESS')}
+            value={`${values?.supply_point?.address}, ${values?.supply_point?.number} ${values?.supply_point?.floor} ${values?.supply_point?.door}`}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('HOLDER')}
+          </Typography>
+          <ReviewField label={'NIF'} value={values?.holder?.vat} />
+          {values?.holder?.isphisical ? (
+            values?.holder?.name && (
+              <>
+                <ReviewField
+                  label={t('NAME')}
+                  value={`${holder?.name} ${holder?.surname1} ${holder?.surname2}`}
+                />
+              </>
+            )
+          ) : (
+            <>
+              <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
+              <ReviewField
+                label={t('PROXY')}
+                value={`${holder?.proxyname} (${holder?.proxynif})`}
+              />
+            </>
+          )}
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
+
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('CONTACT')}
+          </Typography>
+          {use_member_as_holder ? (
+            <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
+          ) : (
+            <>
+              <ReviewField label={t('PHONE')} value={holder?.phone1} />
+              <ReviewField label={t('EMAIL')} value={holder?.email} />
+              <ReviewField
+                label={t('LANGUAGE')}
+                value={languages[holder?.language]}
+              />
+            </>
+          )}
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('SUMMARY_GROUP_TECHNICAL')}
+          </Typography>
+          <ReviewField
+            label={t('FARE')}
+            value={
+              values?.contract?.has_service
+                ? t('FARE_SAME')
+                : values?.contract?.rate
+            }
+          />
+          {values?.contract?.has_service ? (
+            <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
+          ) : (
+            <ReviewField label={t('POWER')} value={<PowerValues />} />
+          )}
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Divider variant="middle" className={classes.divider} />
+
+          <Typography className={classes.sectionTitle} variant="h6">
+            {t('SUMMARY_GROUP_PAYMENT')}
+          </Typography>
+          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+          <ReviewField
+            label={t('VOLUNTARY_CENT')}
+            value={values?.payment?.voluntary_cent ? t('YES') : t('NO')}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormHelperText
+            className={classes.withoutLabel}
+            dangerouslySetInnerHTML={{
+              __html: t(
+                'En cas que vulguis corregir les dades que ens has indicat en aquest procés, ho pots fer contactant amb nosaltres al correu: modifica@somenergia.coop.'
+              )
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Grid container className={classes.root}>
+        <TermsDialog
+          title={t('GENERAL_TERMS')}
+          open={open}
+          onAccept={handleAccept}
+          onClose={handleClose}>
+          <GeneralTerms />
+        </TermsDialog>
+
+        <Grid xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="terms_accepted"
+                onClick={handleClick}
+                checked={values.terms_accepted}
+                color="primary"
+              />
+            }
+            label={t('ACCEPT_TERMS')}
+          />
+        </Grid>
+        <Grid xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="indexada_terms_accepted"
+                onClick={() => console.log("CHEKC")}
+                checked={values.indexada_terms_accepted}
+                color="primary"
+              />
+            }
+            label={t('INDEXADA_ACCEPT_TERMS')}
+          />
+        </Grid>
+      </Grid>
+    </>
+  )
+}
+
+export default IndexadaReview
