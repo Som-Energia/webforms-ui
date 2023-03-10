@@ -84,17 +84,76 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+
+const PowerValues = ({rates,values}) => {
+  const {t} = useTranslation()
+  return (
+    <Grid container>
+      {rates[values?.contract?.rate]?.num_power_periods > 1
+        ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
+            (value, index) => {
+              const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+              const label = values?.contract?.moreThan15Kw
+                ? `P${index + 1}`
+                : index === 0
+                ? t('PUNTA')
+                : t('VALLE')
+              return (
+                <Grid
+                  key={label}
+                  item
+                  xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
+              )
+            }
+          )
+        : `${values?.contract?.power} kW`}
+    </Grid>
+  )
+}
+
+const ReviewField = ({ label, value, multipleValues = false }) => {
+  const classes = useStyles()
+  return (
+    <div
+      className={clsx(
+        classes.field,
+        multipleValues && classes.separatedField
+      )}>
+      {label !== false && (
+        <div className="field__title">
+          <Typography className={classes.label} variant="subtitle2">
+            {label}
+          </Typography>
+        </div>
+      )}
+      <div
+        className={clsx(
+          'field__value',
+          multipleValues && classes.separatedValues
+        )}>
+        <Typography className={classes.value} variant="body2">
+          {value}
+        </Typography>
+      </div>
+    </div>
+  )
+}
+
+
+
+
 const IndexadaReview = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  
+  let { values, setFieldValue,contractJson } = props
+  values = contractJson  
 
   const [open, setOpen] = useState(false)
   const [rates] = useState(getRates())
-  const [loading, setLoading] = useState(true)
+  const [IndexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
 
-  const use_member_as_holder = true
-  /* values.holder.vat === values.member.vat && values.holder.isphisical */
+  const use_member_as_holder = values.holder.vat === values.member.vat && values.holder.isphisical
   const holder = use_member_as_holder ? values.member : values.holder
 
   const handleClick = (event) => {
@@ -112,59 +171,10 @@ const IndexadaReview = (props) => {
     setFieldValue('terms_accepted', false)
   }
 
-  const ReviewField = ({ label = 'holi', value, multipleValues = false }) => {
-    return (
-      <div
-        className={clsx(
-          classes.field,
-          multipleValues && classes.separatedField
-        )}>
-        {label !== false && (
-          <div className="field__title">
-            <Typography className={classes.label} variant="subtitle2">
-              {label}
-            </Typography>
-          </div>
-        )}
-        <div
-          className={clsx(
-            'field__value',
-            multipleValues && classes.separatedValues
-          )}>
-          <Typography className={classes.value} variant="body2">
-            {value}
-          </Typography>
-        </div>
-      </div>
-    )
+  const handleIndexadaTermsAccepted = (data) => {
+    setIndexadaTermsAccepted(data)
+    setFieldValue('indexada_terms_accepted', data)
   }
-
-  const PowerValues = () => {
-    return (
-      <Grid container>
-        {rates[values?.contract?.rate]?.num_power_periods > 1
-          ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
-              (value, index) => {
-                const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
-                const label = values?.contract?.moreThan15Kw
-                  ? `P${index + 1}`
-                  : index === 0
-                  ? t('PUNTA')
-                  : t('VALLE')
-                return (
-                  <Grid
-                    key={label}
-                    item
-                    xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
-                )
-              }
-            )
-          : `${values?.contract?.power} kW`}
-      </Grid>
-    )
-  }
-
-  
 
   return (
     <>
@@ -180,10 +190,8 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
-          <ReviewField label={false} value={'HOLA'} />
           <ReviewField
-            label={t('RELATED_MEMBER')}
-            value={values?.member?.vat}
+            value={t('Modificació de tarifa comercialitzadora')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -192,11 +200,11 @@ const IndexadaReview = (props) => {
           </Typography>
           <ReviewField
             label={t('CUPS_LABEL')}
-            value={values?.supply_point?.cups}
+            value={values?.supplyPoint?.cups}
           />
           <ReviewField
             label={t('ADDRESS')}
-            value={`${values?.supply_point?.address}, ${values?.supply_point?.number} ${values?.supply_point?.floor} ${values?.supply_point?.door}`}
+            value={values?.holder?.address}
           />
         </Grid>
 
@@ -230,7 +238,7 @@ const IndexadaReview = (props) => {
           <Divider variant="middle" className={classes.divider} />
 
           <Typography className={classes.sectionTitle} variant="h6">
-            {t('CONTACT')}
+            {t('CONTACT')} 
           </Typography>
           {use_member_as_holder ? (
             <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
@@ -256,13 +264,13 @@ const IndexadaReview = (props) => {
             value={
               values?.contract?.has_service
                 ? t('FARE_SAME')
-                : values?.contract?.rate
+                : values?.rate
             }
           />
           {values?.contract?.has_service ? (
             <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
           ) : (
-            <ReviewField label={t('POWER')} value={<PowerValues />} />
+            <ReviewField label={t('POWER')} value={<PowerValues rates={rates} values={values}/>} />
           )}
         </Grid>
 
@@ -272,7 +280,7 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
-          <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+          <ReviewField label={t('IBAN')} value={holder?.iban} />
           <ReviewField
             label={t('VOLUNTARY_CENT')}
             value={values?.payment?.voluntary_cent ? t('YES') : t('NO')}
@@ -317,7 +325,7 @@ const IndexadaReview = (props) => {
             control={
               <Checkbox
                 name="indexada_terms_accepted"
-                onClick={() => console.log("CHEKC")}
+                onClick={() => handleIndexadaTermsAccepted(!IndexadaTermsAccepted)}
                 checked={values.indexada_terms_accepted}
                 color="primary"
               />
