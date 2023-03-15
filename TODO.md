@@ -1,3 +1,30 @@
+# Pending Indexed Tariff tasks
+
+## Django (OV)
+
+- [x] Feature flag
+- [] Button
+- [] View
+- [] Template
+- [] Inside view, generate file TOKEN
+- [] Inside view, generate data payload
+- [] Translate TRANSPORT_AND_DISTRIBUTION_TOLL and RETAILER_TARIFF
+
+
+## Webforms (API)
+
+- [] To generate TOKEN, Could we reuse the current endpoint? Review
+- []
+
+## Webforms UI
+
+- [] Collect data payload
+- [] Fake data payload in public/index.html from .env.development
+- [] Check data payload reach summary page
+- [] Generate POST request
+- [] Success page
+- [] Failure page
+
 # Pending Tasks Contract
 
 - [x] Previous holder doesn't show when has service is false
