@@ -9,15 +9,15 @@ const IndexadaContractDetails = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const { contract_number } = props
+  const { data } = props
 
   return (
     <div className={classes.root}>
       <LabelFieldRow label={t('CONTRACT')}>
-        <p>{contract_number}</p>
+        <p>{data.name}</p>
       </LabelFieldRow>
       <LabelFieldRow label={t('CURRENT_TARIFF')}>
-        {/*TODO: show tarifa actual */}
+        {data.tariff}
       </LabelFieldRow>
       <LabelFieldRow isHighlight={true} label={t('TARIFF_TO_CONTRACT')}>
         {/*TODO: show tarifa a contractar */}

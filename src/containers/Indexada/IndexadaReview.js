@@ -12,7 +12,6 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 
 import Header from 'components/oficinavirtual/Header'
 import TermsDialog from 'components/TermsDialog'
-import Loading from 'components/Loading'
 import GeneralTerms from 'components/GeneralTerms'
 
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
@@ -146,15 +145,16 @@ const IndexadaReview = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
   
-  let { values, setFieldValue,contractJson } = props
-  values = contractJson  
-
+  let { setFieldValue, contractValues } = props
+  const powers = JSON.parse(contractValues.powers)
+console.log(contractValues)
   const [open, setOpen] = useState(false)
-  const [rates] = useState(getRates())
   const [IndexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
 
-  const use_member_as_holder = values.holder.vat === values.member.vat && values.holder.isphisical
-  const holder = use_member_as_holder ? values.member : values.holder
+  //const use_member_as_holder = values.holder.vat === values.member.vat && values.holder.isphisical
+  //const holder = use_member_as_holder ? values.member : values.holder
+
+  const use_member_as_holder = false
 
   const handleClick = (event) => {
     event.preventDefault()
@@ -200,11 +200,11 @@ const IndexadaReview = (props) => {
           </Typography>
           <ReviewField
             label={t('CUPS_LABEL')}
-            value={values?.supplyPoint?.cups}
+            value={contractValues?.cups}
           />
           <ReviewField
             label={t('ADDRESS')}
-            value={values?.holder?.address}
+            value={contractValues?.address}
           />
         </Grid>
 
@@ -213,22 +213,22 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('HOLDER')}
           </Typography>
-          <ReviewField label={'NIF'} value={values?.holder?.vat} />
-          {values?.holder?.isphisical ? (
-            values?.holder?.name && (
+          <ReviewField label={'NIF'} value={contractValues?.owner_vat} />
+          {contractValues?.isphisical ? (
+            contractValues?.owner_vat && (
               <>
                 <ReviewField
                   label={t('NAME')}
-                  value={`${holder?.name} ${holder?.surname1} ${holder?.surname2}`}
+                  value={contractValues?.owner_name}
                 />
               </>
             )
           ) : (
             <>
-              <ReviewField label={t('LEGAL_NAME')} value={holder?.name} />
+              <ReviewField label={t('LEGAL_NAME')} value={contractValues?.name} />
               <ReviewField
                 label={t('PROXY')}
-                value={`${holder?.proxyname} (${holder?.proxynif})`}
+                value={`${contractValues?.proxyname} (${contractValues?.proxynif})`}
               />
             </>
           )}
@@ -244,16 +244,15 @@ const IndexadaReview = (props) => {
             <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
           ) : (
             <>
-              <ReviewField label={t('PHONE')} value={holder?.phone1} />
-              <ReviewField label={t('EMAIL')} value={holder?.email} />
+              <ReviewField label={t('PHONE')} value={contractValues?.owner_phone} />
+              <ReviewField label={t('EMAIL')} value={contractValues?.owner_email} />
               <ReviewField
                 label={t('LANGUAGE')}
-                value={languages[holder?.language]}
+                value={contractValues?.language}
               />
             </>
           )}
         </Grid>
-
         <Grid item xs={12} sm={6}>
           <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">
@@ -261,17 +260,10 @@ const IndexadaReview = (props) => {
           </Typography>
           <ReviewField
             label={t('FARE')}
-            value={
-              values?.contract?.has_service
-                ? t('FARE_SAME')
-                : values?.rate
-            }
+            value={contractValues?.tariff}
           />
-          {values?.contract?.has_service ? (
-            <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
-          ) : (
-            <ReviewField label={t('POWER')} value={<PowerValues rates={rates} values={values}/>} />
-          )}
+          <ReviewField label={t('POWER_PUNTA')} value={powers[0].power} />
+          <ReviewField label={t('POWER_VALLE')} value={powers[1].power} />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -280,10 +272,10 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
-          <ReviewField label={t('IBAN')} value={holder?.iban} />
+          <ReviewField label={t('IBAN')} value={contractValues?.iban} />
           <ReviewField
             label={t('VOLUNTARY_CENT')}
-            value={values?.payment?.voluntary_cent ? t('YES') : t('NO')}
+            value={contractValues?.payment?.voluntary_cent ? t('YES') : t('NO')}
           />
         </Grid>
 
@@ -313,7 +305,7 @@ const IndexadaReview = (props) => {
               <Checkbox
                 name="terms_accepted"
                 onClick={handleClick}
-                checked={values.terms_accepted}
+                checked={contractValues.terms_accepted}
                 color="primary"
               />
             }
@@ -326,7 +318,7 @@ const IndexadaReview = (props) => {
               <Checkbox
                 name="indexada_terms_accepted"
                 onClick={() => handleIndexadaTermsAccepted(!IndexadaTermsAccepted)}
-                checked={values.indexada_terms_accepted}
+                checked={contractValues.indexada_terms_accepted}
                 color="primary"
               />
             }

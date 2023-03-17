@@ -39,78 +39,9 @@ import Success from './Success'
 
 import { cancelContract } from 'services/api'
 
-const contractJSON = {
-  holder: {
-    vat: '58291270R',
-    previousHolder: true,
-    name: 'David',
-    surname1: 'Palomo',
-    surname2: 'Romero',
-    postalCode: '17003',
-    address: 'Percebe, nº 13',
-    stateCode: '20',
-    cityCode: '5386',
-    email: 'david.palomo@somenergia.coop',
-    phone1: '636696969',
-    phone2: '636696969',
-    language: 'ca_ES',
-    voluntaryCent: true,
-    iban: 'ES77 1234 1234 1612 3456 7890',
-    badIban: 'ES77 1234 1234 1612 3456 AAAA',
-    badEmail: 'davidpalomosomenergiacoop',
-    isphisical: true
-  },
-  member: {
-    number: '38434',
-    vat: '40323835M',
-    badVat: '58291270J'
-  },
-  supplyPoint: {
-    cups: 'ES0021316182488672PV',
-    hasService: true,
-    hasNoService: false,
-    address: 'Pedro López',
-    number: '13',
-    postalCode: '17003',
-    state: '20',
-    city: '5386',
-    isHousing: true,
-    cnae: '9820',
-    badCups: 'ESO8249878173OO148BZ',
-    invalidCups: 'ES9803463008824117ZQ',
-    validCups: 'ES0021316182488672PV'
-  },
-  fare20A: '2.0A',
-  fare21: '2.1DHA',
-  fare30A: '3.0A',
-  power: 4.4,
-  power2: 8,
-  power3: 10,
-  power6: 16,
-  phase: 'mono',
-  fare: 'nodh',
-  juridicMember: {
-    number: '61444',
-    vat: 'B07121528'
-  },
-  juridicHolder: {
-    vat: 'B07121528',
-    proxynif: '40323835M',
-    previousHolder: true,
-    proxyname: 'David Palomo',
-    name: 'Testing, SL'
-  },
-  selfConsumption: {
-    have_installation: true,
-    cau: 'ES0353501028615353EEA000',
-    collective_installation: true,
-    installation_power: '3.5',
-    installation_type: '01',
-    aux_services: false,
-    attachments: ['file.png'],
-    technology: 'b11'
-  }
-}
+const contractJSON = JSON.parse(
+  document.getElementById('contract-data').textContent
+)
 
 const MAX_STEP_NUMBER = 3
 
@@ -248,7 +179,7 @@ const Indexada = (props) => {
                   {!completed && (
                     <>
                       {activeStep !== 2 ? (
-                        <IndexadaContractDetails {...formikProps.values} />
+                        <IndexadaContractDetails {...formikProps.values} data={contractJSON} />
                       ) : null}
 
                       {activeStep === 0 ? (
@@ -259,8 +190,7 @@ const Indexada = (props) => {
                       ) : null}
                       {activeStep === 2 ? (
                         <IndexadaReview
-                          contractJson={contractJSON}
-                          values={contractJSON}
+                        contractValues={contractJSON}
                           {...formikProps}
                         />
                       ) : null}

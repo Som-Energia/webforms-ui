@@ -3,18 +3,19 @@
 ## Django (OV)
 
 - [x] Feature flag
-- [] Button
-- [] View
-- [] Template
-- [] Inside view, generate file TOKEN
-- [] Inside view, generate data payload
-- [] Translate TRANSPORT_AND_DISTRIBUTION_TOLL and RETAILER_TARIFF
+- [X] Button
+- [X] View
+- [X] Template
+- [X] Inside view, generate file TOKEN
+- [] **Inside view, generate data payload**
+- [] Inside template, insert data payload
+- [] Translate TRANSPORT_AND_DISTRIBUTION_TOLL and RETAILER_TARIFF and others
 
 
 ## Webforms (API)
 
-- [] To generate TOKEN, Could we reuse the current endpoint? Review
-- []
+- [x] To generate TOKEN, Could we reuse the current endpoint? -> we can reuse it
+- [] Review (onboarding) the API layers and required testing
 
 ## Webforms UI
 
