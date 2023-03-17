@@ -103,13 +103,9 @@ const Indexada = (props) => {
 
   const handlePost = (values) => {
     setSending(true)
-    const csrfInput = document.querySelector(
-      "input[name='csrfmiddlewaretoken']"
-    )
-
-    const params = { ...values, csrfToken: csrfInput?.value }
-
-    cancelContract(params)
+    /* 
+      cont params = {...contractJSON,...values} 
+      modify_tariff(params)
       .then((response) => {
         setSending(false)
         setCompleted(true)
@@ -123,7 +119,7 @@ const Indexada = (props) => {
           ? error?.response?.data?.error
           : { code: 'UNEXPECTED' }
         setError(errorResp)
-      })
+      }) */
   }
 
   useEffect(() => {
@@ -235,7 +231,7 @@ const Indexada = (props) => {
                                 }
                                 disabled={sending || !formikProps.isValid}
                                 onClick={() => handlePost(formikProps.values)}>
-                                {t('TRAMITAR_BAJA')}
+                                {t('TRAMITAR CANVI DE TARIFA')}
                               </Button>
                             )
                           )}
@@ -249,8 +245,9 @@ const Indexada = (props) => {
                       {result ? (
                         <Success
                           showHeader={false}
-                          title={t('CANCELLATION_SUCCESS_TITLE')}
-                          description={t('CANCELLATION_SUCCESS_DESC')}
+                          title={'Has solicitat la tarifa comercialitzadora:'}
+                          subtitle={"2.0TD INDEXADA Península/Canàries/Balears"}
+                          description={'Ara, rebràs un correu amb les condicions generals i particulars de la tarifa indexada contractada i un cop finalitzat el cicle de facturació actual, se t\'aplicarà la tarifa indexada '}
                         />
                       ) : (
                         <Failure error={error} showHeader={false} />
