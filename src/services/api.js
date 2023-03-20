@@ -247,6 +247,24 @@ export const contract = async (data) => {
   })
 }
 
+export const modify_tariff = async (data) => {
+  /* return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}/procedures/modify_contract`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  }) */
+
+  let mockPromise = new Promise((resolve, reject) => {
+    resolve("DATA")
+  } )
+
+  return mockPromise.then(res => {
+    return res
+  })
+}
+
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',

@@ -69,7 +69,7 @@ const Success = (props) => {
           <DoneIcon fontSize="large" />
         </Avatar>
 
-        <Typography className={classes.title} variant="h6">
+        <Typography id="success-page-title" className={classes.title} variant="h6">
           {title ? t(title) : t('SUCCESS_TEXT')}
         </Typography>
 

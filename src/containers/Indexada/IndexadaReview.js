@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -13,9 +13,6 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Header from 'components/oficinavirtual/Header'
 import TermsDialog from 'components/TermsDialog'
 import GeneralTerms from 'components/GeneralTerms'
-
-import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
-import { getPrices, getRates } from 'services/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,41 +80,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-
-const PowerValues = ({rates,values}) => {
-  const {t} = useTranslation()
-  return (
-    <Grid container>
-      {rates[values?.contract?.rate]?.num_power_periods > 1
-        ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
-            (value, index) => {
-              const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
-              const label = values?.contract?.moreThan15Kw
-                ? `P${index + 1}`
-                : index === 0
-                ? t('PUNTA')
-                : t('VALLE')
-              return (
-                <Grid
-                  key={label}
-                  item
-                  xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
-              )
-            }
-          )
-        : `${values?.contract?.power} kW`}
-    </Grid>
-  )
-}
-
 const ReviewField = ({ label, value, multipleValues = false }) => {
   const classes = useStyles()
   return (
     <div
-      className={clsx(
-        classes.field,
-        multipleValues && classes.separatedField
-      )}>
+      className={clsx(classes.field, multipleValues && classes.separatedField)}>
       {label !== false && (
         <div className="field__title">
           <Typography className={classes.label} variant="subtitle2">
@@ -138,23 +105,14 @@ const ReviewField = ({ label, value, multipleValues = false }) => {
   )
 }
 
-
-
-
 const IndexadaReview = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  
+
   let { setFieldValue, contractValues } = props
   const powers = JSON.parse(contractValues.powers)
-console.log(contractValues)
   const [open, setOpen] = useState(false)
   const [IndexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
-
-  //const use_member_as_holder = values.holder.vat === values.member.vat && values.holder.isphisical
-  //const holder = use_member_as_holder ? values.member : values.holder
-
-  const use_member_as_holder = false
 
   const handleClick = (event) => {
     event.preventDefault()
@@ -190,22 +148,14 @@ console.log(contractValues)
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
-          <ReviewField
-            value={t('Modificació de tarifa comercialitzadora')}
-          />
+          <ReviewField value={t('Modificació de tarifa comercialitzadora')} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUPPLY')}
           </Typography>
-          <ReviewField
-            label={t('CUPS_LABEL')}
-            value={contractValues?.cups}
-          />
-          <ReviewField
-            label={t('ADDRESS')}
-            value={contractValues?.address}
-          />
+          <ReviewField label={t('CUPS_LABEL')} value={contractValues?.cups} />
+          <ReviewField label={t('ADDRESS')} value={contractValues?.address} />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -225,7 +175,10 @@ console.log(contractValues)
             )
           ) : (
             <>
-              <ReviewField label={t('LEGAL_NAME')} value={contractValues?.name} />
+              <ReviewField
+                label={t('LEGAL_NAME')}
+                value={contractValues?.name}
+              />
               <ReviewField
                 label={t('PROXY')}
                 value={`${contractValues?.proxyname} (${contractValues?.proxynif})`}
@@ -238,30 +191,30 @@ console.log(contractValues)
           <Divider variant="middle" className={classes.divider} />
 
           <Typography className={classes.sectionTitle} variant="h6">
-            {t('CONTACT')} 
+            {t('CONTACT')}
           </Typography>
-          {use_member_as_holder ? (
-            <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
-          ) : (
-            <>
-              <ReviewField label={t('PHONE')} value={contractValues?.owner_phone} />
-              <ReviewField label={t('EMAIL')} value={contractValues?.owner_email} />
-              <ReviewField
-                label={t('LANGUAGE')}
-                value={contractValues?.language}
-              />
-            </>
-          )}
+
+          <>
+            <ReviewField
+              label={t('PHONE')}
+              value={contractValues?.owner_phone}
+            />
+            <ReviewField
+              label={t('EMAIL')}
+              value={contractValues?.owner_email}
+            />
+            <ReviewField
+              label={t('LANGUAGE')}
+              value={contractValues?.language}
+            />
+          </>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Divider variant="middle" className={classes.divider} />
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
-          <ReviewField
-            label={t('FARE')}
-            value={contractValues?.tariff}
-          />
+          <ReviewField label={t('FARE')} value={contractValues?.tariff} />
           <ReviewField label={t('POWER_PUNTA')} value={powers[0].power} />
           <ReviewField label={t('POWER_VALLE')} value={powers[1].power} />
         </Grid>
@@ -283,9 +236,7 @@ console.log(contractValues)
           <FormHelperText
             className={classes.withoutLabel}
             dangerouslySetInnerHTML={{
-              __html: t(
-                'En cas que vulguis corregir les dades que ens has indicat en aquest procés, ho pots fer contactant amb nosaltres al correu: modifica@somenergia.coop.'
-              )
+              __html: t('HELPER_TEXT_MODIFY_DATA')
             }}
           />
         </Grid>
@@ -304,6 +255,7 @@ console.log(contractValues)
             control={
               <Checkbox
                 name="terms_accepted"
+                id="change-tarif-first-check"
                 onClick={handleClick}
                 checked={contractValues.terms_accepted}
                 color="primary"
@@ -316,8 +268,11 @@ console.log(contractValues)
           <FormControlLabel
             control={
               <Checkbox
+                id="change-tarif-second-check"
                 name="indexada_terms_accepted"
-                onClick={() => handleIndexadaTermsAccepted(!IndexadaTermsAccepted)}
+                onClick={() =>
+                  handleIndexadaTermsAccepted(!IndexadaTermsAccepted)
+                }
                 checked={contractValues.indexada_terms_accepted}
                 color="primary"
               />

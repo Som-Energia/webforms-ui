@@ -15,29 +15,22 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DayjsUtils from '@date-io/dayjs'
-
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
-
 import DisplayFormikState from '../components/DisplayFormikState'
-
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
-
 import IndexadaContractDetails from './Indexada/IndexadaContractDetails'
 import IndexadaIntro from './Indexada/IndexadaIntro'
 import IndexadaImportantInfo from './Indexada/IndexadaImportantInfo'
 import IndexadaReview from './Indexada/IndexadaReview'
-
 import Failure from './Failure'
 import Success from './Success'
-
-import { cancelContract } from 'services/api'
+import { modify_tariff } from 'services/api'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -51,10 +44,11 @@ const keyMap = {
 }
 
 const Indexada = (props) => {
+  
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { contract } = props
+  const { contract, token } = props
   const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
@@ -103,9 +97,7 @@ const Indexada = (props) => {
 
   const handlePost = (values) => {
     setSending(true)
-    /* 
-      cont params = {...contractJSON,...values} 
-      modify_tariff(params)
+      modify_tariff({data:token})
       .then((response) => {
         setSending(false)
         setCompleted(true)
@@ -119,7 +111,7 @@ const Indexada = (props) => {
           ? error?.response?.data?.error
           : { code: 'UNEXPECTED' }
         setError(errorResp)
-      }) */
+      })
   }
 
   useEffect(() => {
@@ -206,6 +198,7 @@ const Indexada = (props) => {
                             <Button
                               type="button"
                               data-cy="next"
+                              id="change-tariff-next-step-button"
                               className={classes.button}
                               variant="contained"
                               color="primary"
@@ -219,6 +212,7 @@ const Indexada = (props) => {
                               <Button
                                 type="button"
                                 data-cy="submit"
+                                id="tariff-change-submit"
                                 className={classes.button}
                                 variant="contained"
                                 color="primary"
@@ -245,9 +239,9 @@ const Indexada = (props) => {
                       {result ? (
                         <Success
                           showHeader={false}
-                          title={'Has solicitat la tarifa comercialitzadora:'}
+                          title={t('SUCCESS_PAGE_TITLE')}
                           subtitle={"2.0TD INDEXADA Península/Canàries/Balears"}
-                          description={'Ara, rebràs un correu amb les condicions generals i particulars de la tarifa indexada contractada i un cop finalitzat el cicle de facturació actual, se t\'aplicarà la tarifa indexada '}
+                          description={t('SUCCESS_PAGE_TITLE')}
                         />
                       ) : (
                         <Failure error={error} showHeader={false} />
