@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const SUCCESS_TITLE = "Has solicitat la tarifa comercialitzadora:"
+const SUCCESS_TITLE = "Has sol·licitat la tarifa comercialitzadora:"
 
 
 describe('Modify Tariff', () => {
@@ -22,7 +22,9 @@ describe('Modify Tariff', () => {
 
       cy.get('[id=terms-dialog-accept-btn]').click()
 
-      cy.get('[id=change-tarif-second-check]').click()
+      cy.get('[id=change-tariff-indexada-terms-check]').click()
+
+      cy.get('[id=change-tariff-indexada-legal-terms-check]').click()
   
       cy.get('[id=tariff-change-submit]').click()
 

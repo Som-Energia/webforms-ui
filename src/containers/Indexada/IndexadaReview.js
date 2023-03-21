@@ -109,10 +109,11 @@ const IndexadaReview = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
-  let { setFieldValue, contractValues } = props
+  let { setFieldValue, contractValues, values } = props
   const powers = JSON.parse(contractValues.powers)
   const [open, setOpen] = useState(false)
-  const [IndexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
+  const [indexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
+  const [indexadaLegalTermsAccepted, setIndexadaLegalTermsAccepted] = useState(false)
 
   const handleClick = (event) => {
     event.preventDefault()
@@ -132,6 +133,11 @@ const IndexadaReview = (props) => {
   const handleIndexadaTermsAccepted = (data) => {
     setIndexadaTermsAccepted(data)
     setFieldValue('indexada_terms_accepted', data)
+  }
+
+  const handleIndexadaLegalTermsAccepted = (data) => {
+    setIndexadaLegalTermsAccepted(data)
+    setFieldValue('indexada_legal_terms_accepted', data)
   }
 
   return (
@@ -257,7 +263,7 @@ const IndexadaReview = (props) => {
                 name="terms_accepted"
                 id="change-tarif-first-check"
                 onClick={handleClick}
-                checked={contractValues.terms_accepted}
+                checked={values.terms_accepted}
                 color="primary"
               />
             }
@@ -268,16 +274,34 @@ const IndexadaReview = (props) => {
           <FormControlLabel
             control={
               <Checkbox
-                id="change-tarif-second-check"
+                id="change-tariff-indexada-terms-check"
                 name="indexada_terms_accepted"
                 onClick={() =>
-                  handleIndexadaTermsAccepted(!IndexadaTermsAccepted)
+                  handleIndexadaTermsAccepted(!indexadaTermsAccepted)
                 }
-                checked={contractValues.indexada_terms_accepted}
+                checked={values.indexada_terms_accepted}
                 color="primary"
               />
             }
             label={t('INDEXADA_ACCEPT_TERMS')}
+          />
+        </Grid>
+        <Grid xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="change-tariff-indexada-legal-terms-check"
+                name="legal_terms_accepted"
+                onClick={() =>
+                  handleIndexadaLegalTermsAccepted(!indexadaLegalTermsAccepted)
+                }
+                checked={values.indexada_legal_terms_accepted}
+                color="primary"
+              />
+            }
+            label={<span dangerouslySetInnerHTML={{
+              __html: t('INDEXADA_ACCEPT_LEGAL_TERMS')
+            }}/>}
           />
         </Grid>
       </Grid>

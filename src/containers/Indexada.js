@@ -31,6 +31,8 @@ import IndexadaReview from './Indexada/IndexadaReview'
 import Failure from './Failure'
 import Success from './Success'
 import { modify_tariff } from 'services/api'
+import Grid from '@material-ui/core/Grid'
+import DropDownMenu from '../components/DropDownMenu'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -64,9 +66,31 @@ const Indexada = (props) => {
     }
   }
 
+  const sectionsJson = [
+    {
+      title: t('INDEXADA_GENERAL_CONDITIONS'),
+      text: t('INDEXADA_GENERAL_CONDITIONS_TEXT')
+    },
+    {
+      title: t('INDEXADA_SPECIFIC_CONDITIONS'),
+      text: t('INDEXADA_SPECIFIC_CONDITIONS_TEXT')
+    },
+    { title: t('INDEXADA_MARGE'), text: t('INDEXADA_MARGE_TEXT') },
+    {
+      title: t('INDEXADA_DURADA'),
+      text: t('INDEXADA_DURADA_TEXT', { tariff: t('TARIFA EXEMPLE') })
+    },
+    { title: t('INDEXADA_DESESTIMENT'), text: t('INDEXADA_DESESTIMENT_TEXT') },
+    {
+      title: t('INDEXADA_PERSONAL_DATA_PROTECTION'),
+      text: t('INDEXADA_PERSONAL_DATA_PROTECTION_TEXT')
+    }
+  ]
+
   const initialValues = {
     terms_accepted: false,
-    indexada_terms_accepted: false
+    indexada_terms_accepted: false,
+    indexada_legal_terms_accepted: false
   }
 
   const nextStep = (props) => {
@@ -95,9 +119,9 @@ const Indexada = (props) => {
     })
   }
 
-  const handlePost = (values) => {
+  const handlePost = () => {
     setSending(true)
-      modify_tariff({data:token})
+    modify_tariff({ data: token })
       .then((response) => {
         setSending(false)
         setCompleted(true)
@@ -128,6 +152,9 @@ const Indexada = (props) => {
         .oneOf([true], t('UNACCEPTED_TERMS')),
       indexada_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS')),
+      indexada_legal_terms_accepted: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS'))
     })
   ]
@@ -149,111 +176,128 @@ const Indexada = (props) => {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <MuiPickersUtilsProvider utils={DayjsUtils}>
-        <Formik
-          onSubmit={() => {}}
-          enableReinitialize
-          initialValues={initialValues}
-          validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}>
-          {(formikProps) => (
-            <>
-              <Form
-                id="cancelForm"
-                method="POST"
-                className={classes.root}
-                noValidate
-                autoComplete="off">
-                <Container maxWidth="lg" disableGutters={true}>
-                  {!completed && (
-                    <>
-                      {activeStep !== 2 ? (
-                        <IndexadaContractDetails {...formikProps.values} data={contractJSON} />
-                      ) : null}
+        <Grid container justifyContent="space-between">
+          <Grid item xs={8}>
+            <Formik
+              onSubmit={() => {}}
+              enableReinitialize
+              initialValues={initialValues}
+              validationSchema={validationSchemas[activeStep]}
+              validateOnMount={true}>
+              {(formikProps) => (
+                <>
+                  <Form
+                    id="cancelForm"
+                    method="POST"
+                    className={classes.root}
+                    noValidate
+                    autoComplete="off">
+                    <Container maxWidth="lg" disableGutters={true}>
+                      {!completed && (
+                        <>
+                          {activeStep !== 2 ? (
+                            <IndexadaContractDetails
+                              {...formikProps.values}
+                              data={contractJSON}
+                            />
+                          ) : null}
 
-                      {activeStep === 0 ? (
-                        <IndexadaIntro {...formikProps} />
-                      ) : null}
-                      {activeStep === 1 ? (
-                        <IndexadaImportantInfo {...formikProps} />
-                      ) : null}
-                      {activeStep === 2 ? (
-                        <IndexadaReview
-                        contractValues={contractJSON}
-                          {...formikProps}
-                        />
-                      ) : null}
-                      <Box mx={0} mt={2} mb={3}>
-                        <div className={classes.actionsContainer}>
-                          {result?.contract_number === undefined && (
-                            <Button
-                              data-cy="prev"
-                              className={classes.button}
-                              startIcon={<ArrowBackIosIcon />}
-                              disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(formikProps)}>
-                              {t('PAS_ANTERIOR')}
-                            </Button>
-                          )}
-                          {activeStep < MAX_STEP_NUMBER - 1 ? (
-                            <Button
-                              type="button"
-                              data-cy="next"
-                              id="change-tariff-next-step-button"
-                              className={classes.button}
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
-                              disabled={!formikProps.isValid}
-                              onClick={() => nextStep(formikProps)}>
-                              {t('SEGUENT_PAS')}
-                            </Button>
-                          ) : (
-                            !completed && (
-                              <Button
-                                type="button"
-                                data-cy="submit"
-                                id="tariff-change-submit"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                startIcon={
-                                  sending ? (
-                                    <CircularProgress size={24} />
-                                  ) : (
-                                    <SendIcon />
-                                  )
-                                }
-                                disabled={sending || !formikProps.isValid}
-                                onClick={() => handlePost(formikProps.values)}>
-                                {t('TRAMITAR CANVI DE TARIFA')}
-                              </Button>
-                            )
-                          )}
-                        </div>
-                      </Box>
-                    </>
-                  )}
-
-                  {completed && (
-                    <Paper elevation={0} className={classes.stepContainer}>
-                      {result ? (
-                        <Success
-                          showHeader={false}
-                          title={t('SUCCESS_PAGE_TITLE')}
-                          subtitle={"2.0TD INDEXADA Península/Canàries/Balears"}
-                          description={t('SUCCESS_PAGE_TITLE')}
-                        />
-                      ) : (
-                        <Failure error={error} showHeader={false} />
+                          {activeStep === 0 ? (
+                            <IndexadaIntro {...formikProps} />
+                          ) : null}
+                          {activeStep === 1 ? (
+                            <IndexadaImportantInfo {...formikProps} />
+                          ) : null}
+                          {activeStep === 2 ? (
+                            <IndexadaReview
+                              contractValues={contractJSON}
+                              {...formikProps}
+                            />
+                          ) : null}
+                          <Box mx={0} mt={2} mb={3}>
+                            <div className={classes.actionsContainer}>
+                              {result?.contract_number === undefined && (
+                                <Button
+                                  data-cy="prev"
+                                  className={classes.button}
+                                  startIcon={<ArrowBackIosIcon />}
+                                  disabled={activeStep === 0 || sending}
+                                  onClick={() => prevStep(formikProps)}>
+                                  {t('PAS_ANTERIOR')}
+                                </Button>
+                              )}
+                              {activeStep < MAX_STEP_NUMBER - 1 ? (
+                                <Button
+                                  type="button"
+                                  data-cy="next"
+                                  id="change-tariff-next-step-button"
+                                  className={classes.button}
+                                  variant="contained"
+                                  color="primary"
+                                  endIcon={<ArrowForwardIosIcon />}
+                                  disabled={!formikProps.isValid}
+                                  onClick={() => nextStep(formikProps)}>
+                                  {t('SEGUENT_PAS')}
+                                </Button>
+                              ) : (
+                                !completed && (
+                                  <Button
+                                    type="button"
+                                    data-cy="submit"
+                                    id="tariff-change-submit"
+                                    className={classes.button}
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={
+                                      sending ? (
+                                        <CircularProgress size={24} />
+                                      ) : (
+                                        <SendIcon />
+                                      )
+                                    }
+                                    disabled={sending || !formikProps.isValid}
+                                    onClick={() =>
+                                      handlePost(formikProps.values)
+                                    }>
+                                    {t('TRAMITAR CANVI DE TARIFA')}
+                                  </Button>
+                                )
+                              )}
+                            </div>
+                          </Box>
+                        </>
                       )}
-                    </Paper>
-                  )}
-                </Container>
-              </Form>
-              {showInspector && <DisplayFormikState {...formikProps} />}
-            </>
-          )}
-        </Formik>
+
+                      {completed && (
+                        <Paper elevation={0} className={classes.stepContainer}>
+                          {result ? (
+                            <Success
+                              showHeader={false}
+                              title={t('INDEXADA_SUCCESS_PAGE_TITLE')}
+                              subtitle={
+                                '2.0TD INDEXADA Península/Canàries/Balears'
+                              }
+                              description={t('INDEXADA_SUCCESS_PAGE_DESC')}
+                            />
+                          ) : (
+                            <Failure error={error} showHeader={false} />
+                          )}
+                        </Paper>
+                      )}
+                    </Container>
+                  </Form>
+                  {showInspector && <DisplayFormikState {...formikProps} />}
+                </>
+              )}
+            </Formik>
+          </Grid>
+          <Grid item xs={3}>
+            <DropDownMenu
+              title={t('INDEXADA_CONTRACT_CHARACTERISTICS')}
+              sections={sectionsJson}
+            />
+          </Grid>
+        </Grid>
       </MuiPickersUtilsProvider>
     </GlobalHotKeys>
   )
