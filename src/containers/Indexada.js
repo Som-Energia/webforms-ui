@@ -259,7 +259,7 @@ const Indexada = (props) => {
                                     onClick={() =>
                                       handlePost(formikProps.values)
                                     }>
-                                    {t('TRAMITAR CANVI DE TARIFA')}
+                                    {t('INDEXADA_SUBMIT_BUTTON_TEXT')}
                                   </Button>
                                 )
                               )}

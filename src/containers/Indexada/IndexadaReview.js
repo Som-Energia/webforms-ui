@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   dividerBottom: {
     marginTop: '10px',
+    marginBottom: '10px',
     marginLeft: 0,
     marginRight: '32px'
   },
@@ -267,8 +268,9 @@ const IndexadaReview = (props) => {
                 color="primary"
               />
             }
-            label={t('ACCEPT_TERMS')}
+            label={t('INDEXADA_ACCEPT_CONDITIONS')}
           />
+        <Divider variant="middle" className={classes.dividerBottom}/>
         </Grid>
         <Grid xs={12}>
           <FormControlLabel
@@ -285,7 +287,9 @@ const IndexadaReview = (props) => {
             }
             label={t('INDEXADA_ACCEPT_TERMS')}
           />
+        <Divider variant="middle" className={classes.dividerBottom}/>
         </Grid>
+        
         <Grid xs={12}>
           <FormControlLabel
             control={
