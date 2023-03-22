@@ -56,7 +56,7 @@ const Indexada = (props) => {
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState()
