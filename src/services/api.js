@@ -265,6 +265,18 @@ export const modify_tariff = async (data) => {
   })
 }
 
+
+export const can_modify_tariff = async (data) => {
+
+  let mockPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {resolve("2.0TD Indexada Peninsular")},2000)
+  } )
+
+  return mockPromise.then(res => {
+    return res
+  })
+}
+
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',
