@@ -133,12 +133,12 @@ const IndexadaReview = (props) => {
 
   const handleIndexadaTermsAccepted = (data) => {
     setIndexadaTermsAccepted(data)
-    setFieldValue('indexada_terms_accepted', data)
+    setFieldValue('indexed_terms_accepted', data)
   }
 
   const handleIndexadaLegalTermsAccepted = (data) => {
     setIndexadaLegalTermsAccepted(data)
-    setFieldValue('indexada_legal_terms_accepted', data)
+    setFieldValue('indexed_legal_terms_accepted', data)
   }
 
   return (
@@ -277,11 +277,11 @@ const IndexadaReview = (props) => {
             control={
               <Checkbox
                 id="change-tariff-indexada-terms-check"
-                name="indexada_terms_accepted"
+                name="indexed_terms_accepted"
                 onClick={() =>
                   handleIndexadaTermsAccepted(!indexadaTermsAccepted)
                 }
-                checked={values.indexada_terms_accepted}
+                checked={values.indexed_terms_accepted}
                 color="primary"
               />
             }
@@ -299,7 +299,7 @@ const IndexadaReview = (props) => {
                 onClick={() =>
                   handleIndexadaLegalTermsAccepted(!indexadaLegalTermsAccepted)
                 }
-                checked={values.indexada_legal_terms_accepted}
+                checked={values.indexed_legal_terms_accepted}
                 color="primary"
               />
             }
