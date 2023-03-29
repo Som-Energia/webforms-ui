@@ -305,6 +305,15 @@
     "TERME_ENERGIA_P3_2": {
         "0TD": "Período val"
     },
+    "TERME_AUTOCONSUM_P1_2": {
+        "0TD": "Período punta"
+    },
+    "TERME_AUTOCONSUM_P2_2": {
+        "0TD": "Período chan"
+    },
+    "TERME_AUTOCONSUM_P3_2": {
+        "0TD": "Período val"
+    },
     "TERME_ENERGIA_GENERATIONKWH": "Termo de enerxía tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
     "TERME_POTENCIA": "Termo de potencia",
     "TERME_POTENCIA_P1_2": {
