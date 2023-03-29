@@ -66,7 +66,7 @@ const App = (props) => {
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
   const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
-  const Indexada = lazy(() => import('./containers/Indexada'))
+  const Indexed = lazy(() => import('./containers/Indexed'))
 
   const loadContractData = () => {
     const contractData =
@@ -327,7 +327,7 @@ const App = (props) => {
                  <Route
                   path="/:language/contract/indexada"
                   element={
-                    <Indexada  {...props} contract={loadContractData()}/>
+                    <Indexed  {...props} contract={loadContractData()}/>
                   }
                 />
               </Routes>

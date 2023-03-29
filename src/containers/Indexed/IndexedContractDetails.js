@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 
-const IndexadaContractDetails = (props) => {
+const IndexedContractDetails = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -26,7 +26,7 @@ const IndexadaContractDetails = (props) => {
   )
 }
 
-export default IndexadaContractDetails
+export default IndexedContractDetails
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography'
 
 import CloseIcon from '@material-ui/icons/Close'
 
-import StepHeader from '../components/StepHeader'
-import cuca from '../images/cuca-marejada.svg'
+import StepHeader from '../../components/StepHeader'
+import cuca from '../../images/cuca-marejada.svg'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,13 +48,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+
+const exceptionMap = {
+    OPEN_CASES: 'INDEXED_OPEN_CASES_ERROR_TXT',
+    UNAUTHORIZED: 'INDEXED_UNAUTHORIZED_ERROR_TXT',
+    NO_CHANGES: 'INDEXED_NO_CHANGES_ERROR_TXT',
+    NOT_FOUND: 'INDEXED_NOT_FOUND_ERROR_TXT',
+    STATE_CONFLICT: 'INDEXED_STATE_CONFLICT_ERROR_TXT',
+    UNDEFINED: 'INDEXED_UNDEFINED_ERROR_TXT'
+}
+
+
 function Failure(props) {
   const { language } = useParams()
   const { t, i18n } = useTranslation()
   const classes = useStyles()
   const {
     error = false,
-    description = 'NEWMEMBER_KO_DESCRIPTION',
     showHeader = true
   } = props
 
@@ -78,16 +88,8 @@ function Failure(props) {
           dangerouslySetInnerHTML={{
             __html:
               error?.code === undefined
-                ? t(description, { url: t('CONTACT_HELP_URL') })
-                : error?.code === 'INVALID_FIELD' && error?.data?.[0]?.field
-                ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
-                  ? t(error?.data?.[0]?.field.toUpperCase())
-                  : t('INVALID_FIELD', { field_name: error?.data?.[0]?.field })
-                : error?.code === 'INVOICE_ERROR'
-                ? error?.error
-                : t('UNEXPECTED_POSTERROR', {
-                    error_message: error?.code ? t(error?.code) : error?.error
-                  })
+                ? t(exceptionMap.UNDEFINED, { url: t('CONTACT_HELP_URL') })
+                : t(exceptionMap[error.code])
           }}
         />
         <Box mt={3} mb={1}>

@@ -18,7 +18,7 @@ describe('Modify Tariff', () => {
 
       cy.get('[id=change-tariff-next-step-button]').click()
   
-      cy.get('[id=change-tarif-first-check]').click()
+      cy.get('[id=change-tarif-terms-check]').click()
 
       cy.get('[id=terms-dialog-accept-btn]').click()
 

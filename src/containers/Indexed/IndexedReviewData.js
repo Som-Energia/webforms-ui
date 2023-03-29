@@ -1,5 +1,4 @@
-import clsx from 'clsx'
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -13,6 +12,8 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Header from 'components/oficinavirtual/Header'
 import TermsDialog from 'components/TermsDialog'
 import GeneralTerms from 'components/GeneralTerms'
+
+import IndexedReviewField from './IndexedReviewField'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,37 +29,6 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(1.2)
-  },
-  field: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing(0.8),
-    '& .field__value': {
-      flexGrow: 1
-    }
-  },
-  label: {
-    textTransform: 'uppercase',
-    paddingRight: '12px',
-    fontSize: '14px',
-    fontWeight: 400,
-    color: 'rgba(0, 0, 0, 0.54)'
-  },
-  value: {
-    fontSize: '16px'
-  },
-  listItem: {
-    paddingTop: '8px'
-  },
-  separatedField: {
-    flexDirection: 'column',
-    alignItems: 'flex-start'
-  },
-  separatedValues: {
-    marginLeft: 0,
-    marginRight: theme.spacing(1.6),
-    marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5)
   },
   divider: {
     marginTop: '12px',
@@ -81,65 +51,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ReviewField = ({ label, value, multipleValues = false }) => {
-  const classes = useStyles()
-  return (
-    <div
-      className={clsx(classes.field, multipleValues && classes.separatedField)}>
-      {label !== false && (
-        <div className="field__title">
-          <Typography className={classes.label} variant="subtitle2">
-            {label}
-          </Typography>
-        </div>
-      )}
-      <div
-        className={clsx(
-          'field__value',
-          multipleValues && classes.separatedValues
-        )}>
-        <Typography className={classes.value} variant="body2">
-          {value}
-        </Typography>
-      </div>
-    </div>
-  )
-}
-
-const IndexadaReview = (props) => {
+const IndexedReviewData = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
-  let { setFieldValue, contractValues, values } = props
+  let {
+    contractValues,
+    values,
+    open,
+    indexadaTermsAccepted,
+    handleIndexadaLegalTermsAccepted,
+    indexadaLegalTermsAccepted,
+    handleClick,
+    handleAccept,
+    handleClose,
+    handleIndexadaTermsAccepted
+  } = props
   const powers = JSON.parse(contractValues.powers)
-  const [open, setOpen] = useState(false)
-  const [indexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
-  const [indexadaLegalTermsAccepted, setIndexadaLegalTermsAccepted] = useState(false)
-
-  const handleClick = (event) => {
-    event.preventDefault()
-    setOpen(true)
-  }
-
-  const handleAccept = () => {
-    setOpen(false)
-    setFieldValue('terms_accepted', true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-    setFieldValue('terms_accepted', false)
-  }
-
-  const handleIndexadaTermsAccepted = (data) => {
-    setIndexadaTermsAccepted(data)
-    setFieldValue('indexed_terms_accepted', data)
-  }
-
-  const handleIndexadaLegalTermsAccepted = (data) => {
-    setIndexadaLegalTermsAccepted(data)
-    setFieldValue('indexed_legal_terms_accepted', data)
-  }
 
   return (
     <>
@@ -155,14 +83,22 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
-          <ReviewField value={t('Modificació de tarifa comercialitzadora')} />
+          <IndexedReviewField
+            value={t('Modificació de tarifa comercialitzadora')}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUPPLY')}
           </Typography>
-          <ReviewField label={t('CUPS_LABEL')} value={contractValues?.cups} />
-          <ReviewField label={t('ADDRESS')} value={contractValues?.address} />
+          <IndexedReviewField
+            label={t('CUPS_LABEL')}
+            value={contractValues?.cups}
+          />
+          <IndexedReviewField
+            label={t('ADDRESS')}
+            value={contractValues?.address}
+          />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -170,11 +106,11 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('HOLDER')}
           </Typography>
-          <ReviewField label={'NIF'} value={contractValues?.owner_vat} />
+          <IndexedReviewField label={'NIF'} value={contractValues?.owner_vat} />
           {contractValues?.isphisical ? (
             contractValues?.owner_vat && (
               <>
-                <ReviewField
+                <IndexedReviewField
                   label={t('NAME')}
                   value={contractValues?.owner_name}
                 />
@@ -182,11 +118,11 @@ const IndexadaReview = (props) => {
             )
           ) : (
             <>
-              <ReviewField
+              <IndexedReviewField
                 label={t('LEGAL_NAME')}
                 value={contractValues?.name}
               />
-              <ReviewField
+              <IndexedReviewField
                 label={t('PROXY')}
                 value={`${contractValues?.proxyname} (${contractValues?.proxynif})`}
               />
@@ -202,15 +138,15 @@ const IndexadaReview = (props) => {
           </Typography>
 
           <>
-            <ReviewField
+            <IndexedReviewField
               label={t('PHONE')}
               value={contractValues?.owner_phone}
             />
-            <ReviewField
+            <IndexedReviewField
               label={t('EMAIL')}
               value={contractValues?.owner_email}
             />
-            <ReviewField
+            <IndexedReviewField
               label={t('LANGUAGE')}
               value={contractValues?.language}
             />
@@ -221,9 +157,18 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
-          <ReviewField label={t('FARE')} value={contractValues?.tariff} />
-          <ReviewField label={t('POWER_PUNTA')} value={powers[0].power} />
-          <ReviewField label={t('POWER_VALLE')} value={powers[1].power} />
+          <IndexedReviewField
+            label={t('FARE')}
+            value={contractValues?.tariff}
+          />
+          <IndexedReviewField
+            label={t('POWER_PUNTA')}
+            value={powers[0].power}
+          />
+          <IndexedReviewField
+            label={t('POWER_VALLE')}
+            value={powers[1].power}
+          />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -232,10 +177,10 @@ const IndexadaReview = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
-          <ReviewField label={t('IBAN')} value={contractValues?.iban} />
-          <ReviewField
+          <IndexedReviewField label={t('IBAN')} value={contractValues?.iban} />
+          <IndexedReviewField
             label={t('VOLUNTARY_CENT')}
-            value={contractValues?.payment?.voluntary_cent ? t('YES') : t('NO')}
+            value={contractValues?.donation}
           />
         </Grid>
 
@@ -257,12 +202,12 @@ const IndexadaReview = (props) => {
           <GeneralTerms />
         </TermsDialog>
 
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <FormControlLabel
             control={
               <Checkbox
                 name="terms_accepted"
-                id="change-tarif-first-check"
+                id="change-tarif-terms-check"
                 onClick={handleClick}
                 checked={values.terms_accepted}
                 color="primary"
@@ -270,9 +215,9 @@ const IndexadaReview = (props) => {
             }
             label={t('INDEXADA_ACCEPT_CONDITIONS')}
           />
-        <Divider variant="middle" className={classes.dividerBottom}/>
+          <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <FormControlLabel
             control={
               <Checkbox
@@ -287,10 +232,10 @@ const IndexadaReview = (props) => {
             }
             label={t('INDEXADA_ACCEPT_TERMS')}
           />
-        <Divider variant="middle" className={classes.dividerBottom}/>
+          <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
-        
-        <Grid xs={12}>
+
+        <Grid item xs={12}>
           <FormControlLabel
             control={
               <Checkbox
@@ -303,9 +248,13 @@ const IndexadaReview = (props) => {
                 color="primary"
               />
             }
-            label={<span dangerouslySetInnerHTML={{
-              __html: t('INDEXADA_ACCEPT_LEGAL_TERMS')
-            }}/>}
+            label={
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: t('INDEXADA_ACCEPT_LEGAL_TERMS')
+                }}
+              />
+            }
           />
         </Grid>
       </Grid>
@@ -313,4 +262,4 @@ const IndexadaReview = (props) => {
   )
 }
 
-export default IndexadaReview
+export default IndexedReviewData

@@ -24,16 +24,15 @@ import DisplayFormikState from '../components/DisplayFormikState'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
-import IndexadaContractDetails from './Indexada/IndexadaContractDetails'
-import IndexadaIntro from './Indexada/IndexadaIntro'
-import IndexadaImportantInfo from './Indexada/IndexadaImportantInfo'
-import IndexadaReview from './Indexada/IndexadaReview'
-import Failure from './Failure'
+import IndexedContractDetails from './Indexed/IndexedContractDetails'
+import IndexedReview from './Indexed/IndexedReview'
+import Failure from './Indexed/IndexedFailure'
 import Success from './Success'
 import { modify_tariff, can_modify_tariff } from 'services/api'
 import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
+import IndexedInfo from './Indexed/IndexedInfo'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -47,7 +46,6 @@ const keyMap = {
 }
 
 const Indexada = (props) => {
-  
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
@@ -62,7 +60,6 @@ const Indexada = (props) => {
   const [result, setResult] = useState()
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(true)
-
 
   const handlers = {
     SHOW_INSPECTOR: () => {
@@ -221,7 +218,7 @@ const Indexada = (props) => {
                             {!completed && (
                               <>
                                 {activeStep !== 2 ? (
-                                  <IndexadaContractDetails
+                                  <IndexedContractDetails
                                     {...formikProps.values}
                                     data={contractJSON}
                                     targetTariff={hasTargetTariff}
@@ -229,13 +226,28 @@ const Indexada = (props) => {
                                 ) : null}
 
                                 {activeStep === 0 ? (
-                                  <IndexadaIntro {...formikProps} />
+                                  <IndexedInfo
+                                    desc={t('INDEXADA_INTRO_BODY', {
+                                      url_general_conditions: t(
+                                        'GENERAL_CONDITIONS_URL'
+                                      )
+                                    })}
+                                    {...formikProps}
+                                  />
                                 ) : null}
                                 {activeStep === 1 ? (
-                                  <IndexadaImportantInfo {...formikProps} />
+                                  <IndexedInfo
+                                    title={t('INDEXADA_INTRO_TITLE')}
+                                    desc={t('INDEXADA_IMPORTANT_INFO_BODY', {
+                                      url_indexada_help: t(
+                                        'TARIFF_INDEXADA_HELP_URL'
+                                      )
+                                    })}
+                                    {...formikProps}
+                                  />
                                 ) : null}
                                 {activeStep === 2 ? (
-                                  <IndexadaReview
+                                  <IndexedReview
                                     contractValues={contractJSON}
                                     {...formikProps}
                                   />
