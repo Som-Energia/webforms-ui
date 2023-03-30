@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import StepHeader from '../../components/StepHeader'
 import cuca from '../../images/cuca-marejada.svg'
 
+
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: 0,
@@ -105,5 +106,3 @@ function Failure(props) {
 }
 
 export default Failure
-
-// - webforms/procedures/tests/test_contract_indexed_procedure.py
