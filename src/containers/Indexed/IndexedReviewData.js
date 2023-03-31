@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1)
   },
   sectionTitle: {
-    fontSize: '18px',
+    fontSize: '16px',
     fontWeight: 500,
     textTransform: 'uppercase',
     marginTop: theme.spacing(3),
@@ -190,7 +190,14 @@ const IndexedReviewData = (props) => {
                 color="primary"
               />
             }
-            label={t('INDEXADA_ACCEPT_CONDITIONS')}
+            label={
+              <Typography
+                variant="body2"
+                dangerouslySetInnerHTML={{
+                  __html: t('INDEXADA_ACCEPT_CONDITIONS')
+                }}
+              />
+            }
           />
           <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
@@ -207,7 +214,14 @@ const IndexedReviewData = (props) => {
                 color="primary"
               />
             }
-            label={t('INDEXADA_ACCEPT_TERMS')}
+            label={
+              <Typography
+                variant="body2"
+                dangerouslySetInnerHTML={{
+                  __html: t('INDEXADA_ACCEPT_TERMS')
+                }}
+              />
+            }
           />
           <Divider variant="middle" className={classes.dividerBottom} />
         </Grid>
@@ -226,7 +240,8 @@ const IndexedReviewData = (props) => {
               />
             }
             label={
-              <span
+              <Typography
+                variant="body2"
                 dangerouslySetInnerHTML={{
                   __html: t('INDEXADA_ACCEPT_LEGAL_TERMS')
                 }}

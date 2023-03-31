@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
   label: {
     textTransform: 'uppercase',
     paddingRight: '12px',
-    fontSize: '14px',
+    fontSize: '13px',
     fontWeight: 400,
     color: 'rgba(0, 0, 0, 0.54)'
   },
   value: {
-    fontSize: '16px'
+    fontSize: '13px'
   }
 }))
 
