@@ -147,10 +147,16 @@ const Indexada = (props) => {
   }
 
   const checkCanModifyTariff = async () => {
-    setLoadingTariff(true)
-    let result = await can_modify_tariff()
-    setLoadingTariff(false)
-    setHasTargetTariff(result)
+    try{
+      setLoadingTariff(true)
+      let result = await can_modify_tariff(token)
+      setLoadingTariff(false)
+      setHasTargetTariff(result?.data?.target_tariff)
+    }
+    catch(error){
+      setLoadingTariff(false)
+      setError(error?.response?.data?.error)
+    } 
   }
 
   useEffect(() => {
@@ -178,7 +184,7 @@ const Indexada = (props) => {
     })
   ]
 
-  if (!contract.id || !contract.number || !contract.cups) {
+  if (!contractJSON.name || !contractJSON.cups) {
     return (
       <Alert severity="error">
         <Typography

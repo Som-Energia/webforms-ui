@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuTitle: {
     backgroundColor: 'rgba(0, 0, 0, .06)',
-    padding: "2%"
+    padding: "3%"
   }
 }))
 
@@ -68,7 +68,7 @@ export default function CustomizedAccordions({ title, sections = [] }) {
     <div>
       {title ? (
         <Grid container item className={classes.menuTitle}>
-          <Typography variant="h6">{title}</Typography>
+          <Typography style={{fontSize:'16px'}} variant="subtitle">{title}</Typography>
         </Grid>
       ) : null}
       {sections.map((element, index) => {

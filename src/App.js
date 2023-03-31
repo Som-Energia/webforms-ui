@@ -325,7 +325,7 @@ const App = (props) => {
                   }
                 />
                  <Route
-                  path="/:language/contract/indexada"
+                  path="/:language/contract/indexed"
                   element={
                     <Indexed  {...props} contract={loadContractData()}/>
                   }

@@ -107,27 +107,10 @@ const IndexedReviewData = (props) => {
             {t('HOLDER')}
           </Typography>
           <IndexedReviewField label={'NIF'} value={contractValues?.owner_vat} />
-          {contractValues?.isphisical ? (
-            contractValues?.owner_vat && (
-              <>
-                <IndexedReviewField
-                  label={t('NAME')}
-                  value={contractValues?.owner_name}
-                />
-              </>
-            )
-          ) : (
-            <>
-              <IndexedReviewField
-                label={t('LEGAL_NAME')}
-                value={contractValues?.name}
-              />
-              <IndexedReviewField
-                label={t('PROXY')}
-                value={`${contractValues?.proxyname} (${contractValues?.proxynif})`}
-              />
-            </>
-          )}
+          <IndexedReviewField
+            label={t('NAME')}
+            value={contractValues?.owner_name}
+          />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -161,14 +144,8 @@ const IndexedReviewData = (props) => {
             label={t('FARE')}
             value={contractValues?.tariff}
           />
-          <IndexedReviewField
-            label={t('POWER_PUNTA')}
-            value={powers[0].power}
-          />
-          <IndexedReviewField
-            label={t('POWER_VALLE')}
-            value={powers[1].power}
-          />
+          <IndexedReviewField label={t('PUNTA')} value={powers[0].power} />
+          <IndexedReviewField label={t('VALLE')} value={powers[1].power} />
         </Grid>
 
         <Grid item xs={12} sm={6}>

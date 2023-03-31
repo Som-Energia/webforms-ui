@@ -250,7 +250,7 @@ export const contract = async (data) => {
 export const modify_tariff = async (data) => {
   /* return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/procedures/modify_contract`,
+    url: `${API_BASE_URL}/procedures/contract_indexed`,
     data: data
   }).then((response) => {
     return response?.data
@@ -266,15 +266,12 @@ export const modify_tariff = async (data) => {
 }
 
 
-export const can_modify_tariff = async (data) => {
-
-  let mockPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {resolve("2.0TD Indexada Peninsular")},2000)
-  } )
-
-  return mockPromise.then(res => {
-    return res
-  })
+export const can_modify_tariff = async (token) => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/procedures/can_turn_contract_indexed`,
+    headers: {Authorization: token}
+  }).then((response) => response?.data)
 }
 
 export const confirmD1Case = async (data, case_id, token) => {
