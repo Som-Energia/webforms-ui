@@ -16,61 +16,61 @@ describe("Check the utils functions",() =>{
     const tariff20tdIndexadaSom = "2.0TD Indexada Som"
 
 
-    test("Should retrun true with tariff20td", () => {
+    test("Should return true with tariff20td", () => {
 
         expect(checkIsTariff20(tariff20td)).toBeTruthy()
 
     })
 
-    test("Should retrun true with tariff30td", () => {
+    test("Should return true with tariff30td", () => {
 
         expect(checkIsTariff20(tariff30td)).toBeFalsy()
 
     })
 
-    test("Should retrun true with tariffWrong", () => {
+    test("Should return true with tariffWrong", () => {
 
         expect(checkIsTariff20(tariffWrong)).toBeFalsy()
 
     })
 
-    test("Should retrun true with tariff20A", () => {
+    test("Should return true with tariff20A", () => {
 
         expect(checkIsTariff20(tariff20A)).toBeTruthy()
 
     })
 
-    test("Should retrun true with tariff20tdIndexada", () => {
+    test("Should return true with tariff20tdIndexada", () => {
 
         expect(checkIsTariff20(tariff20tdIndexada)).toBeTruthy()
 
     })
 
-    test("Should retrun true with tariff30tdIndexada", () => {
+    test("Should return true with tariff30tdIndexada", () => {
 
         expect(checkIsTariff20(tariff30tdIndexada)).toBeFalsy()
 
     })
 
-    test("Should retrun true with tariffIndexada20td", () => {
+    test("Should return true with tariffIndexada20td", () => {
 
         expect(checkIsTariff20(tariffIndexada20td)).toBeTruthy()
 
     })
 
-    test("Should retrun true with tariffIndexada30td", () => {
+    test("Should return true with tariffIndexada30td", () => {
 
         expect(checkIsTariff20(tariffIndexada30td)).toBeFalsy()
 
     })
 
-    test("Should retrun true with tariffSomIndexada20td", () => {
+    test("Should return true with tariffSomIndexada20td", () => {
 
         expect(checkIsTariff20(tariffSomIndexada20td)).toBeTruthy()
 
     })
 
-    test("Should retrun true with tariff20tdIndexadaSom", () => {
+    test("Should return true with tariff20tdIndexadaSom", () => {
 
         expect(checkIsTariff20(tariff20tdIndexadaSom)).toBeTruthy()
 
