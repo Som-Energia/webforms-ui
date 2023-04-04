@@ -505,4 +505,8 @@ export const getNextNBussinesDays = (day, n, marketHolidays) => {
   return result
 }
 
+export const checkIsTariff20 = (tariff) => {
+  const regex = new RegExp(/^[\w\s]*(2\.0)\w*/g)
+  return regex.test(tariff)
+}
 

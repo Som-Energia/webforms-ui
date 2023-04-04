@@ -33,6 +33,7 @@ import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
+import {checkIsTariff20} from '../services/utils'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -45,10 +46,8 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-const checkIsTariff20 = (tariff) => {
-  const regex = new RegExp(/^\w*(2\.0)\w*/g)
-  return regex.test(tariff)
-}
+
+
 
 const Indexada = (props) => {
   const classes = useStyles()
@@ -243,6 +242,9 @@ const Indexada = (props) => {
                                     desc={t('INDEXADA_INTRO_BODY', {
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
+                                      ),
+                                      url_specific_conditions: t(
+                                        'SPECIFIC_CONDITIONS_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -252,7 +254,7 @@ const Indexada = (props) => {
                                   <IndexedInfo
                                     isTariff20={isTariff20}
                                     title={t('INDEXADA_INTRO_TITLE')}
-                                    desc={t('INDEXADA_IMPORTANT_INFO_BODY', {
+                                    desc={t(isTariff20 ? 'INDEXADA_IMPORTANT_INFO_BODY' :'INDEXADA_IMPORTANT_INFO_BODY_30', {
                                       url_indexada_help: t(
                                         'TARIFF_INDEXADA_HELP_URL'
                                       )
