@@ -47,8 +47,6 @@ const keyMap = {
 }
 
 
-
-
 const Indexada = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
