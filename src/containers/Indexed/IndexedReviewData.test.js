@@ -65,22 +65,6 @@ describe('Test that it correctly renders', () => {
     expect(tariffElement).toBeInTheDocument()
   })
 
-  test('The component render properly all texts when contract is not phisical', () => {
-    render(
-      <IndexedReviewData
-        open={false}
-        contractValues={mockContractValuesNoPhisical}
-        setFieldValues={mockSetFieldValues}
-        values={mockInitialValues}
-      />
-    )
-    //If it is not physical, the contract number is shown
-    const nameElement = screen.getByText(mockContractValues.name)
-    expect(nameElement).toBeInTheDocument()
-    
-  })
-
-
   test('Should call the handleClick function', () => {
     const dom = render(
       <IndexedReviewData

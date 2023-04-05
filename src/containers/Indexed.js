@@ -45,11 +45,16 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
+const checkIsTariff20 = (tariff) => {
+  const regex = new RegExp(/^\w*(2\.0)\w*/g)
+  return regex.test(tariff)
+}
+
 const Indexada = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { contract, token } = props
+  const { token, checkEnabled=true } = props
   const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
@@ -59,7 +64,8 @@ const Indexada = (props) => {
   const [error, setError] = useState(false)
   const [result, setResult] = useState()
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
-  const [loadingTariff, setLoadingTariff] = useState(true)
+  const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
+  const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
 
   const handlers = {
     SHOW_INSPECTOR: () => {
@@ -147,20 +153,19 @@ const Indexada = (props) => {
   }
 
   const checkCanModifyTariff = async () => {
-    try{
+    try {
       setLoadingTariff(true)
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
       setHasTargetTariff(result?.data?.target_tariff)
-    }
-    catch(error){
+    } catch (error) {
       setLoadingTariff(false)
       setError(error?.response?.data?.error)
-    } 
+    }
   }
 
   useEffect(() => {
-    checkCanModifyTariff()
+    checkEnabled && checkCanModifyTariff()
   }, [])
 
   useEffect(() => {
@@ -202,7 +207,7 @@ const Indexada = (props) => {
     <>
       {!loadingTariff ? (
         <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-          {hasTargetTariff ? (
+          {!checkEnabled || hasTargetTariff ? (
             <MuiPickersUtilsProvider utils={DayjsUtils}>
               <Grid container justifyContent="space-between">
                 <Grid item xs={8}>
@@ -228,11 +233,13 @@ const Indexada = (props) => {
                                     {...formikProps.values}
                                     data={contractJSON}
                                     targetTariff={hasTargetTariff}
+                                    isTariff20={isTariff20}
                                   />
                                 ) : null}
 
                                 {activeStep === 0 ? (
                                   <IndexedInfo
+                                    isTariff20={isTariff20}
                                     desc={t('INDEXADA_INTRO_BODY', {
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
@@ -243,6 +250,7 @@ const Indexada = (props) => {
                                 ) : null}
                                 {activeStep === 1 ? (
                                   <IndexedInfo
+                                    isTariff20={isTariff20}
                                     title={t('INDEXADA_INTRO_TITLE')}
                                     desc={t('INDEXADA_IMPORTANT_INFO_BODY', {
                                       url_indexada_help: t(
@@ -254,6 +262,7 @@ const Indexada = (props) => {
                                 ) : null}
                                 {activeStep === 2 ? (
                                   <IndexedReview
+                                    isTariff20={isTariff20}
                                     contractValues={contractJSON}
                                     {...formikProps}
                                   />

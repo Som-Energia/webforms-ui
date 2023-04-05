@@ -324,11 +324,13 @@ const App = (props) => {
                     />
                   }
                 />
-                 <Route
+                <Route
                   path="/:language/contract/indexed"
-                  element={
-                    <Indexed  {...props} contract={loadContractData()}/>
-                  }
+                  element={<Indexed {...props} contract={loadContractData()} />}
+                />
+                <Route
+                  path="/contract/indexed"
+                  element={<Indexed {...props} checkEnabled={false} contract={loadContractData()} />}
                 />
               </Routes>
             </Router>

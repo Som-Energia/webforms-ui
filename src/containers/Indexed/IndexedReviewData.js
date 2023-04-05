@@ -144,8 +144,8 @@ const IndexedReviewData = (props) => {
             label={t('FARE')}
             value={contractValues?.tariff}
           />
-          <IndexedReviewField label={t('PUNTA')} value={powers[0].power} />
-          <IndexedReviewField label={t('VALLE')} value={powers[1].power} />
+          <IndexedReviewField label={t('PUNTA')} value={powers[0].power.replaceAll('"','')} />
+          <IndexedReviewField label={t('VALLE')} value={powers[1].power.replaceAll('"','')} />
         </Grid>
 
         <Grid item xs={12} sm={6}>
