@@ -128,7 +128,7 @@ const Indexada = (props) => {
       token: token,
       terms_accepted: data.terms_accepted,
       indexed_terms_accepted: data.indexed_terms_accepted,
-      indexed_legal_terms_accepted: data.indexed_legal_terms
+      indexed_legal_terms_accepted: data.indexed_legal_terms_accepted
     }
 
     setLoading(true)

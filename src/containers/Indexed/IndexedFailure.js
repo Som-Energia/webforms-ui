@@ -56,8 +56,11 @@ const exceptionMap = {
     NO_CHANGES: 'INDEXED_NO_CHANGES_ERROR_TXT',
     NOT_FOUND: 'INDEXED_NOT_FOUND_ERROR_TXT',
     STATE_CONFLICT: 'INDEXED_STATE_CONFLICT_ERROR_TXT',
-    UNDEFINED: 'INDEXED_UNDEFINED_ERROR_TXT'
+    UNDEFINED: 'INDEXED_UNDEFINED_ERROR_TXT',
+    PENDING_CONTRACT_MODIFICATION: 'PENDING_CONTRACT_MODIFICATION_ERROR_TXT',
+    UNEXPECTED_ERROR: 'UNEXPECTED_ERROR_TXT'
 }
+
 
 
 function Failure(props) {
@@ -68,6 +71,11 @@ function Failure(props) {
     error = false,
     showHeader = true
   } = props
+
+  const getErrorTxt = (code) => {
+    let errorTxt = exceptionMap[code]
+    return errorTxt ? errorTxt : exceptionMap.UNEXPECTED_ERROR
+  }
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -90,7 +98,7 @@ function Failure(props) {
             __html:
               error?.code === undefined
                 ? t(exceptionMap.UNDEFINED, { url: t('CONTACT_HELP_URL') })
-                : t(exceptionMap[error.code])
+                : t(getErrorTxt(error.code))
           }}
         />
         <Box mt={3} mb={1}>

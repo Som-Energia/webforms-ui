@@ -248,20 +248,14 @@ export const contract = async (data) => {
 }
 
 export const modify_tariff = async (data) => {
-  /* return axios({
+  console.log("DADES ENTRA CRIDA",data)
+  return axios({
     method: 'POST',
     url: `${API_BASE_URL}/procedures/contract_indexed`,
+    headers: {Authorization: data.token},
     data: data
   }).then((response) => {
     return response?.data
-  }) */
-
-  let mockPromise = new Promise((resolve, reject) => {
-    resolve("DATA")
-  } )
-
-  return mockPromise.then(res => {
-    return res
   })
 }
 
