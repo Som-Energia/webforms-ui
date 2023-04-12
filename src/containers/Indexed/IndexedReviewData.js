@@ -194,7 +194,7 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXADA_ACCEPT_CONDITIONS')
+                  __html: t('INDEXED_ACCEPT_CONDITIONS')
                 }}
               />
             }
@@ -218,7 +218,7 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXADA_ACCEPT_TERMS')
+                  __html: t('INDEXED_ACCEPT_TERMS')
                 }}
               />
             }
@@ -243,7 +243,11 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXADA_ACCEPT_LEGAL_TERMS')
+                  __html: t('INDEXED_ACCEPT_LEGAL_TERMS',{
+                    inscription_conditions_url: t(
+                      'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
+                    )
+                  })
                 }}
               />
             }

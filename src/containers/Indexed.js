@@ -72,22 +72,22 @@ const Indexada = (props) => {
 
   const sectionsJson = [
     {
-      title: t('INDEXADA_GENERAL_CONDITIONS'),
-      text: t('INDEXADA_GENERAL_CONDITIONS_TEXT')
+      title: t('INDEXED_GENERAL_CONDITIONS'),
+      text: t('INDEXED_GENERAL_CONDITIONS_TEXT')
     },
     {
-      title: t('INDEXADA_SPECIFIC_CONDITIONS'),
-      text: t('INDEXADA_SPECIFIC_CONDITIONS_TEXT')
+      title: t('INDEXED_SPECIFIC_CONDITIONS'),
+      text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
     },
-    { title: t('INDEXADA_MARGE'), text: t('INDEXADA_MARGE_TEXT') },
+    { title: t('INDEXED_MARGE'), text: t('INDEXED_MARGE_TEXT') },
     {
-      title: t('INDEXADA_DURADA'),
-      text: t('INDEXADA_DURADA_TEXT', { tariff: hasTargetTariff })
+      title: t('INDEXED_DURADA'),
+      text: t('INDEXED_DURADA_TEXT', { tariff: hasTargetTariff })
     },
-    { title: t('INDEXADA_DESESTIMENT'), text: t('INDEXADA_DESESTIMENT_TEXT') },
+    { title: t('INDEXED_DESESTIMENT'), text: t('INDEXED_DESESTIMENT_TEXT') },
     {
-      title: t('INDEXADA_PERSONAL_DATA_PROTECTION'),
-      text: t('INDEXADA_PERSONAL_DATA_PROTECTION_TEXT')
+      title: t('INDEXED_PERSONAL_DATA_PROTECTION'),
+      text: t('INDEXED_PERSONAL_DATA_PROTECTION_TEXT')
     }
   ]
 
@@ -237,12 +237,12 @@ const Indexada = (props) => {
                                 {activeStep === 0 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
-                                    desc={t('INDEXADA_INTRO_BODY', {
+                                    desc={t('INDEXED_INTRO_BODY', {
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
                                       ),
                                       url_specific_conditions: t(
-                                        'SPECIFIC_CONDITIONS_URL'
+                                        'INDEXED_SPECIFIC_CONDITIONS_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -251,10 +251,10 @@ const Indexada = (props) => {
                                 {activeStep === 1 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
-                                    title={t('INDEXADA_INTRO_TITLE')}
-                                    desc={t(isTariff20 ? 'INDEXADA_IMPORTANT_INFO_BODY' :'INDEXADA_IMPORTANT_INFO_BODY_30', {
+                                    title={t('INDEXED_INTRO_TITLE')}
+                                    desc={t(isTariff20 ? 'INDEXED_IMPORTANT_INFO_BODY' :'INDEXED_IMPORTANT_INFO_BODY_30', {
                                       url_indexada_help: t(
-                                        'TARIFF_INDEXADA_HELP_URL'
+                                        'TARIFF_INDEXED_HELP_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -314,7 +314,7 @@ const Indexada = (props) => {
                                           onClick={() =>
                                             handlePost(formikProps.values)
                                           }>
-                                          {t('INDEXADA_SUBMIT_BUTTON_TEXT')}
+                                          {t('INDEXED_SUBMIT_BUTTON_TEXT')}
                                         </Button>
                                       )
                                     )}
@@ -330,12 +330,12 @@ const Indexada = (props) => {
                                 {result ? (
                                   <Success
                                     showHeader={false}
-                                    title={t('INDEXADA_SUCCESS_PAGE_TITLE')}
+                                    title={t('INDEXED_SUCCESS_PAGE_TITLE')}
                                     subtitle={
                                       '2.0TD INDEXADA Península/Canàries/Balears'
                                     }
                                     description={t(
-                                      'INDEXADA_SUCCESS_PAGE_DESC'
+                                      'INDEXED_SUCCESS_PAGE_DESC'
                                     )}
                                   />
                                 ) : (
@@ -354,7 +354,7 @@ const Indexada = (props) => {
                 </Grid>
                 <Grid item xs={3}>
                   <DropDownMenu
-                    title={t('INDEXADA_CONTRACT_CHARACTERISTICS')}
+                    title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
                     sections={sectionsJson}
                   />
                 </Grid>

@@ -49,27 +49,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-
-const exceptionMap = {
-    OPEN_CASES: 'INDEXED_OPEN_CASES_ERROR_TXT',
-    UNAUTHORIZED: 'INDEXED_UNAUTHORIZED_ERROR_TXT',
-    NO_CHANGES: 'INDEXED_NO_CHANGES_ERROR_TXT',
-    STATE_CONFLICT: 'INDEXED_STATE_CONFLICT_ERROR_TXT',
-    UNDEFINED: 'INDEXED_UNDEFINED_ERROR_TXT',
-    PENDING_CONTRACT_MODIFICATION: 'PENDING_CONTRACT_MODIFICATION_ERROR_TXT',
-    UNEXPECTED_ERROR: 'UNEXPECTED_ERROR_TXT'
-}
-
-
-
 function Failure(props) {
   const { language } = useParams()
   const { t, i18n } = useTranslation()
   const classes = useStyles()
-  const {
-    error = false,
-    showHeader = true
-  } = props
+  const { error = false, showHeader = true } = props
+
+  const exceptionMap = {
+    OPEN_CASES: t('INDEXED_OPEN_CASES_ERROR_TXT'),
+    UNAUTHORIZED: t('INDEXED_UNAUTHORIZED_ERROR_TXT'),
+    NO_CHANGES: t('INDEXED_NO_CHANGES_ERROR_TXT'),
+    STATE_CONFLICT: t('INDEXED_STATE_CONFLICT_ERROR_TXT'),
+    UNDEFINED: t('INDEXED_UNDEFINED_ERROR_TXT'),
+    PENDING_CONTRACT_MODIFICATION: t('PENDING_CONTRACT_MODIFICATION_ERROR_TXT'),
+    UNEXPECTED_ERROR: t('INDEXED_UNEXPECTED_ERROR_TXT')
+  }
 
   const getErrorTxt = (code) => {
     let errorTxt = exceptionMap[code]
@@ -97,7 +91,7 @@ function Failure(props) {
             __html:
               error?.code === undefined
                 ? t(exceptionMap.UNDEFINED, { url: t('CONTACT_HELP_URL') })
-                : t(getErrorTxt(error.code))
+                : getErrorTxt(error.code)
           }}
         />
         <Box mt={3} mb={1}>
