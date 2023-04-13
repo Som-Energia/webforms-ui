@@ -547,7 +547,7 @@
     "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Podes ver as condicións específicas do contrato coa tarifa indexada nesta ligazón.",
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
     "INDEXED_MARGE":"Marxe (k)",
-    "INDEXED_MARGE_TEXT":"A marxe de comercialización defínese en Som Energia. É de XX € por kWh. Ademais da marxe para a cooperativa, tamén inclúe o custo das desviacións e a adquisición dos certificados de garantía de orixe 100% renovábel.",    
+    "INDEXED_MARGE_TEXT":"A marxe de comercialización defínese en Som Energia. É de {{kCoefficient}} € por kWh. Ademais da marxe para a cooperativa, tamén inclúe o custo das desviacións e a adquisición dos certificados de garantía de orixe 100% renovábel.",    
     "INDEXED_DURADA":"Duración do contrato",
     "INDEXED_DURADA_TEXT":"O contrato de tarifa comercializadora {{tariff}} dura un ano desde a contratación e renóvase automaticamente se non manifestas o contrario. Non hai unha permanencia mínima, podes financialo en calquera momento.",
     "INDEXED_DESESTIMENT":"Dereito de desistencia",

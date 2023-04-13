@@ -33,7 +33,7 @@ import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
-import {checkIsTariff20} from '../services/utils'
+import { checkIsTariff20 } from '../services/utils'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -51,7 +51,7 @@ const Indexada = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { token, checkEnabled=true } = props
+  const { token, checkEnabled = true } = props
   const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
@@ -63,6 +63,7 @@ const Indexada = (props) => {
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
+  const [kCoefficient, setKCoefficient] = useState('')
 
   const handlers = {
     SHOW_INSPECTOR: () => {
@@ -79,7 +80,10 @@ const Indexada = (props) => {
       title: t('INDEXED_SPECIFIC_CONDITIONS'),
       text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
     },
-    { title: t('INDEXED_MARGE'), text: t('INDEXED_MARGE_TEXT') },
+    {
+      title: t('INDEXED_MARGE'),
+      text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
+    },
     {
       title: t('INDEXED_DURADA'),
       text: t('INDEXED_DURADA_TEXT', { tariff: hasTargetTariff })
@@ -155,6 +159,7 @@ const Indexada = (props) => {
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
       setHasTargetTariff(result?.data?.target_tariff)
+      setKCoefficient(result?.data?.k_coefficient_eurkwh)
     } catch (error) {
       setLoadingTariff(false)
       setError(error?.response?.data?.error)
@@ -252,11 +257,16 @@ const Indexada = (props) => {
                                   <IndexedInfo
                                     isTariff20={isTariff20}
                                     title={t('INDEXED_INTRO_TITLE')}
-                                    desc={t(isTariff20 ? 'INDEXED_IMPORTANT_INFO_BODY' :'INDEXED_IMPORTANT_INFO_BODY_30', {
-                                      url_indexada_help: t(
-                                        'TARIFF_INDEXED_HELP_URL'
-                                      )
-                                    })}
+                                    desc={t(
+                                      isTariff20
+                                        ? 'INDEXED_IMPORTANT_INFO_BODY'
+                                        : 'INDEXED_IMPORTANT_INFO_BODY_30',
+                                      {
+                                        url_indexada_help: t(
+                                          'TARIFF_INDEXED_HELP_URL'
+                                        )
+                                      }
+                                    )}
                                     {...formikProps}
                                   />
                                 ) : null}
@@ -334,9 +344,7 @@ const Indexada = (props) => {
                                     subtitle={
                                       '2.0TD INDEXADA Península/Canàries/Balears'
                                     }
-                                    description={t(
-                                      'INDEXED_SUCCESS_PAGE_DESC'
-                                    )}
+                                    description={t('INDEXED_SUCCESS_PAGE_DESC')}
                                   />
                                 ) : (
                                   <Failure error={error} showHeader={false} />

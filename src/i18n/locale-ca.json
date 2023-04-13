@@ -553,7 +553,7 @@
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAT.pdf",
     "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Pots veure les condicions específiques del contracte amb la tarifa indexada en aquest enllaç.",
     "INDEXED_MARGE":"Marge (k)",
-    "INDEXED_MARGE_TEXT":"El marge de comercialització es defineix a Som Energia. És de XX € per kWh. A més del marge per a la cooperativa, també inclou el cost de les desviacions i l’adquisició dels certificats de garantia d’origen 100% renovable.",    
+    "INDEXED_MARGE_TEXT":"El marge de comercialització es defineix a Som Energia. És de {{kCoefficient}} € per kWh. A més del marge per a la cooperativa, també inclou el cost de les desviacions i l’adquisició dels certificats de garantia d’origen 100% renovable.",    
     "INDEXED_DURADA":"Durada del contracte",
     "INDEXED_DURADA_TEXT":"El contracte de tarifa comercialitzadora {{tariff}} dura un any des de la contractació i es renova automàticament si no manifestes el contrari. No hi ha una permanència mínima, el pots finalitzar en qualsevol moment.",
     "INDEXED_DESESTIMENT":"Dret de desistiment",

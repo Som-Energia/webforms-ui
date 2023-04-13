@@ -551,7 +551,7 @@
     "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Puedes ver las condiciones específicas del contrato con la tarifa indexada en este enlace.",
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
     "INDEXED_MARGE":"Margen (k)",
-    "INDEXED_MARGE_TEXT":"El margen de comercialización se define en Som Energia. Es de XX € por kWh. Además del margen para la cooperativa, también incluye el coste de las desviaciones y la adquisición de los certificados de garantía de origen 100% renovable.",    
+    "INDEXED_MARGE_TEXT":"El margen de comercialización se define en Som Energia. Es de {{kCoefficient}} € por kWh. Además del margen para la cooperativa, también incluye el coste de las desviaciones y la adquisición de los certificados de garantía de origen 100% renovable.",    
     "INDEXED_DURADA":"Duración del contrato",
     "INDEXED_DURADA_TEXT":"El contrato de tarifa comercializadora {{tariff}} dura un año desde la contratación y se renueva automáticamente si no manifiestas lo contrario. No hay una permanencia mínima, lo puedes finalizar en cualquier momento.",
     "INDEXED_DESESTIMENT":"Derecho de desistimiento",

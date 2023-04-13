@@ -552,7 +552,7 @@
     "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Tarifa indexatuko kontratuaren berariazko baldintzak esteka honetan aurkituko dituzu.",
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
     "INDEXED_MARGE":"Marjina (k)",
-    "INDEXED_MARGE_TEXT":"Komertzializazio-marjina Som Energiak zehazten du: kWh-ko XX €. Kooperatibarentzako marjinaz gain, desbideraketen kostua eta jatorri %100 berriztagarriaren berme-ziurtagiriak eskuratzea barne hartzen ditu.",    
+    "INDEXED_MARGE_TEXT":"Komertzializazio-marjina Som Energiak zehazten du: kWh-ko {{kCoefficient}} €. Kooperatibarentzako marjinaz gain, desbideraketen kostua eta jatorri %100 berriztagarriaren berme-ziurtagiriak eskuratzea barne hartzen ditu.",    
     "INDEXED_DURADA":"Kontratuaren iraupena",
     "INDEXED_DURADA_TEXT":"{{tariff}} kontratuak urtebete irauten du kontratatzen denetik, eta automatikoki berritzen da kontrakoa adierazi ezean. Ez dago gutxieneko iraupen-konpromisorik. Kontratua edozein unetan azkendu dezakezu.",
     "INDEXED_DESESTIMENT":"Uko egiteko eskubidea",
