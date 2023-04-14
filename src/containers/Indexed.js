@@ -341,9 +341,7 @@ const Indexada = (props) => {
                                   <Success
                                     showHeader={false}
                                     title={t('INDEXED_SUCCESS_PAGE_TITLE')}
-                                    subtitle={
-                                      '2.0TD INDEXADA Península/Canàries/Balears'
-                                    }
+                                    subtitle={hasTargetTariff}
                                     description={t('INDEXED_SUCCESS_PAGE_DESC')}
                                   />
                                 ) : (

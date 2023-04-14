@@ -1280,7 +1280,7 @@ const generalTermsText = `
 
 
 <div id="condicions-especifiques">
-    <h2 style="font-size: 13px;">CONDICIONS ESPECÍFIQUES DE LA TARIFA INDEXADA</h2>
+    <h2>CONDICIONS ESPECÍFIQUES DE LA TARIFA INDEXADA</h2>
 </div>
 
 <div class="content_generals">

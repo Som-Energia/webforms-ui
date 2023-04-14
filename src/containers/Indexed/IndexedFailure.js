@@ -90,7 +90,7 @@ function Failure(props) {
           dangerouslySetInnerHTML={{
             __html:
               error?.code === undefined
-                ? t(exceptionMap.UNDEFINED, { url: t('CONTACT_HELP_URL') })
+                ? t(exceptionMap.UNEXPECTED_ERROR, { url: t('CONTACT_HELP_URL') })
                 : getErrorTxt(error.code)
           }}
         />
