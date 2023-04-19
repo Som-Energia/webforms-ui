@@ -145,10 +145,9 @@ const Indexada = (props) => {
       .catch((error) => {
         setLoading(false)
         setCompleted(true)
-        console.error(error)
         const errorResp = error?.response?.data?.error
           ? error?.response?.data?.error
-          : { code: 'UNEXPECTED' }
+          : { code: 'UNEXPECTED_ERROR' }
         setError(errorResp)
       })
   }

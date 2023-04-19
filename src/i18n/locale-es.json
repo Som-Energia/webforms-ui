@@ -548,7 +548,7 @@
     "INDEXED_GENERAL_CONDITIONS":"Condiciones generales del contrato",
     "INDEXED_GENERAL_CONDITIONS_TEXT":"Puedes ver las condiciones generales del contrato para la comercialización de electricidad de Som Energia en este <a target='_blank' href='https://www.somenergia.coop/es/condiciones-del-contrato-de-som-energia/'>enlace</a>.",
     "INDEXED_SPECIFIC_CONDITIONS":"Condiciones específicas de la tarifa indexada",
-    "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Puedes ver las condiciones específicas del contrato con la tarifa indexada en este enlace.",
+    "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Puedes ver las condiciones específicas del contrato con la tarifa indexada en este <a target='_blank' href='https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf'> enlace</a>.",
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
     "INDEXED_MARGE":"Margen (k)",
     "INDEXED_MARGE_TEXT":"El margen de comercialización se define en Som Energia. Es de {{kCoefficient}} € por kWh. Además del margen para la cooperativa, también incluye el coste de las desviaciones y la adquisición de los certificados de garantía de origen 100% renovable.",    
@@ -566,5 +566,6 @@
     "INDEXED_NO_CHANGES_ERROR_TXT": "La tarifa del contato ya es indexada.",
     "INDEXED_STATE_CONFLICT_ERROR_TXT": "El contrato no está en estado activo.",
     "PENDING_CONTRACT_MODIFICATION": "El contato tiene pendiente la aplicación de otra modificación.",
-    "TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/230124_TARIFA%20INDEXADA_ANEXO_es.pdf"
+    "TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/230124_TARIFA%20INDEXADA_ANEXO_es.pdf",
+    "UNKNOWN_FIELD": "Campo desconocido"
 }

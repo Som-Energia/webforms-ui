@@ -549,7 +549,7 @@
     "INDEXED_GENERAL_CONDITIONS":"Kontratuaren baldintza orokorrak",
     "INDEXED_GENERAL_CONDITIONS_TEXT":"Som Energiaren elektrizitatea komertzializatzeko kontratuaren baldintza orokorrak <a target='_blank' href='https://www.somenergia.coop/eu/energia-elektriko-hornikuntzaren-kontratuko-baldintza-orokorrak/'>esteka</a> honetan aurkituko dituzu.",
     "INDEXED_SPECIFIC_CONDITIONS":"Tarifa indexatuaren berariazko baldintzak",
-    "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Tarifa indexatuko kontratuaren berariazko baldintzak esteka honetan aurkituko dituzu.",
+    "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Tarifa indexatuko kontratuaren berariazko baldintzak <a target='_blank' href='https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf'> esteka</a> honetan aurkituko dituzu.",
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
     "INDEXED_MARGE":"Marjina (k)",
     "INDEXED_MARGE_TEXT":"Komertzializazio-marjina Som Energiak zehazten du: kWh-ko {{kCoefficient}} €. Kooperatibarentzako marjinaz gain, desbideraketen kostua eta jatorri %100 berriztagarriaren berme-ziurtagiriak eskuratzea barne hartzen ditu.",    

@@ -248,7 +248,6 @@ export const contract = async (data) => {
 }
 
 export const modify_tariff = async (data) => {
-  console.log("DADES ENTRA CRIDA",data)
   return axios({
     method: 'POST',
     url: `${API_BASE_URL}/procedures/contract_indexed`,

@@ -17,80 +17,80 @@ const generalTermsText = `
 <div class="index">
   <ol>
     <li>
-      <h4><a href="#objecte">OBJECTE</a></h4>
+      <h6><a href="#objecte">OBJECTE</a></h6>
     </li>
     <li>
-      <h4><a href="#garanties-d-origen">GARANTIES D'ORIGEN</a></h4>
+      <h6><a href="#garanties-d-origen">GARANTIES D'ORIGEN</a></h6>
     </li>
     <li>
-      <h4><a href="#formalitzacio-i-durada">FORMALITZACIÓ I DURADA</a></h4>
+      <h6><a href="#formalitzacio-i-durada">FORMALITZACIÓ I DURADA</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#equip-de-mesura-i-control">EQUIP DE MESURA I CONTROL</a>
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#preu-i-actualitzacio">PREU I ACTUALITZACIÓ</a></h4>
+      <h6><a href="#preu-i-actualitzacio">PREU I ACTUALITZACIÓ</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#autoritzacio-d-acces-a-la-xarxa-al-comercialitzador"
           >AUTORITZACIÓ D'ACCÉS A LA XARXA AL COMERCIALITZADOR</a
         >
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#facturacio-i-pagament">FACTURACIÓ I PAGAMENT</a></h4>
+      <h6><a href="#facturacio-i-pagament">FACTURACIÓ I PAGAMENT</a></h6>
     </li>
     <li>
-      <h4><a href="#autoconsum">AUTOCONSUM</a></h4>
+      <h6><a href="#autoconsum">AUTOCONSUM</a></h6>
     </li>
     <li>
-      <h4><a href="#modificacio">MODIFICACIÓ</a></h4>
+      <h6><a href="#modificacio">MODIFICACIÓ</a></h6>
     </li>
     <li>
-      <h4><a href="#traspas">TRASPÀS</a></h4>
+      <h6><a href="#traspas">TRASPÀS</a></h6>
     </li>
     <li>
-      <h4><a href="#suspensio">SUSPENSIÓ</a></h4>
+      <h6><a href="#suspensio">SUSPENSIÓ</a></h6>
     </li>
     <li>
-      <h4><a href="#finalitzacio">FINALITZACIÓ</a></h4>
+      <h6><a href="#finalitzacio">FINALITZACIÓ</a></h6>
     </li>
     <li>
-      <h4><a href="#responsabilitat">RESPONSABILITAT</a></h4>
+      <h6><a href="#responsabilitat">RESPONSABILITAT</a></h6>
     </li>
     <li>
-      <h4><a href="#qualitat">QUALITAT</a></h4>
+      <h6><a href="#qualitat">QUALITAT</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#informacio-basica-sobre-proteccio-de-dades"
           >INFORMACIÓ BÀSICA SOBRE PROTECCIÓ DE DADES</a
         >
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#notificacions-i-reclamacions">NOTIFICACIONS I RECLAMACIONS</a>
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#codi-etic-i-model"
           >CODI ÈTIC I MODEL DE PREVENCIÓ DE DELICTES</a
         >
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#legislacio-i-jurisdiccio">LEGISLACIÓ I JURISDICCIÓ</a></h4>
+      <h6><a href="#legislacio-i-jurisdiccio">LEGISLACIÓ I JURISDICCIÓ</a></h6>
     </li>
     <li>
-      <h4><a href="#contracte-complet">CONTRACTE COMPLET</a></h4>
+      <h6><a href="#contracte-complet">CONTRACTE COMPLET</a></h6>
     </li>
     <li>
-<h4><a href="#condicions-especifiques">CONDICIONS ESPECIFIQUES</h4>
+<h6><a href="#condicions-especifiques">CONDICIONS ESPECIFIQUES</a></h6>
 </li>
   </ol>
 </div>
@@ -1285,26 +1285,26 @@ const generalTermsText = `
 
 <div class="content_generals">
 
-<h3>1. DEFINICIONS</h3>
+<h5>1. DEFINICIONS</h5>
     <p><strong>1.1. </strong>Tots els termes en majúscules inclosos en el present document seran interpretats com s'hi defineixen, i, en absència de definició, tal com estan definits en les Condicions Generals del Contracte de Subministrament d'energia elèctrica subscrit entre la contractant i SOM ENERGIA, SCCL.</p>
 
-<h3>2. OBJECTE</h3>
+<h5>2. OBJECTE</h5>
     <p><strong>2.1.</strong>La contractant ha sol·licitat contractar la tarifa indexada, per a la qual cosa és un requisit essencial formalitzar la contractació prèvia o simultània del contracte de subministrament.</p>
     <p><strong>2.2.</strong>La tarifa indexada és una tarifa del mercat lliure amb preus horaris, calculada d'acord amb la fórmula indicada en la clàusula 5 de les presents condicions específiques. El seu preu és variable i depèn dels canvis que es produeixen diàriament en el mercat majorista de l'energia (OMIE), que fixa 24 preus diferents al llarg del dia, un per cada hora. En el cas de contractes situats a Canàries i Balears, el preu també és variable i depèn del preu del despatx de càrrega de Red Eléctrica fixat per a cadascun dels sistemes elèctrics insulars. </p>
     <p><strong>2.3.</strong>L'objecte d'aquestes Condicions específiques de la tarifa indexada (d'ara endavant “<strong>Condicions Específiques</strong>” o “<strong>Condicions Específiques de la Tarifa Indexada</strong>”) és adaptar les Condicions Generals del Contracte de Subministrament a conseqüència de la contractació de la tarifa indexada. Així, les presents Condicions Específiques de la Tarifa Indexada s'integren i formen part inseparable de les Condicions Generals del Contracte de Subministrament, i el seu contingut prevaldrà sobre tot el que recullen les Condicions Generals del Contracte de Subministrament.</p>
 
-<h3>3. ENTRADA EN VIGOR I VIGÈNCIA</h3>
+<h5>3. ENTRADA EN VIGOR I VIGÈNCIA</h5>
     <p>3.1.Aquestes Condicions Específiques estaran en vigor des de la data que hi consta, si bé la seva vigència està condicionada a la vigència del contracte del subministrament.</p>
     <p>3.2.Si la contractació de la tarifa indexada és simultània a la formalització del contracte de subministrament amb SOM ENERGIA, SCCL, la vigència del contracte de subministrament i d'aquestes Condicions Específiques estaran subjectes al que preveuen les clàusules 3.3 i 3.4 de les Condicions Generals del Contracte de Subministrament, de manera que si la companyia distribuïdora, propietària de la xarxa a la qual es connecta la contractant, denegués l'alta del punt de subministrament o els canvis en el contracte d'accés a xarxa necessaris per fer efectiu el contracte de subministrament i aquestes Condicions Específiques, es consideraran tots dos resolts automàticament sense dret a cap indemnització.</p>
     <p>3.3.Igualment, la resolució per qualsevol causa del contracte de subministrament comportarà automàticament la resolució d'aquestes Condicions Específiques, perquè l'existència d'un contracte de subministrament en vigor és requisit essencial per poder contractar la tarifa indexada.</p>
     <p>3.4.La durada del contracte de subministrament establerta a la clàusula 3.3 de les Condicions Generals del Contracte de Subministrament queda modificada amb la contractació de la tarifa indexada, de manera que el còmput del període d'un (1) any s'iniciarà en la data d'aquestes Condicions Específiques, o la més tardana de les seves dates en cas de contractar-se més d'un producte addicional al contracte de subministrament.</p>
 
-<h3>4. DATA D'INICI I FINALITZACIÓ DE LA TARIFA INDEXADA</h3>
+<h5>4. DATA D'INICI I FINALITZACIÓ DE LA TARIFA INDEXADA</h5>
     <p>4.1.Si la part contractant està contractant la tarifa indexada, mitjançant una modificació de tarifa, i disposa prèviament d'un contracte de subministrament amb SOM ENERGIA, SCCL, sense perjudici del que s'estableix en la clàusula anterior sobre l'entrada en vigor i vigència, les parts acorden que la tarifa indexada contractada comenci a aplicar-se a partir del primer dia del cicle de facturació següent a la data d'aquestes condicions específiques. L'energia consumida durant el cicle de facturació en curs en el moment de la signatura d'aquestes Condicions Específiques serà facturada amb la tarifa que s'aplicava abans contractar la tarifa indexada.</p>
     <p>4.2.Si la contractació de la tarifa indexada és simultània a la formalització del contracte de subministrament amb SOM ENERGIA, SCCL, la tarifa indexada començarà a aplicar-se després de complir-se les condicions establertes en la clàusula 3 d'aquestes condicions específiques.</p>
     <p>4.3.Si, una vegada iniciada l'aplicació de la tarifa indexada, la contractant efectua un canvi de tarifa a qualsevol de les tarifes vigents i disponibles de SOM ENERGIA, SCCL, s'aplicarà la tarifa indexada fins a l'últim dia del cicle de facturació en curs en el moment de contractació de la nova tarifa.</p>
 
-<h3>5. ADAPTACIÓ DE LA CLÀUSULA 5 “PREU I ACTUALITZACIÓ”</h3>
+<h5>5. ADAPTACIÓ DE LA CLÀUSULA 5 “PREU I ACTUALITZACIÓ”</h5>
     <p>5.1. Les parts acorden afegir la clàusula 5.6 de les Condicions Generals del Contracte de Subministrament, que queda redactada de la manera següent:</p>
     <p>En cas d'haver contractat la tarifa indexada, la contractant ha d'abonar en contraprestació al subministrament contractat el preu i altres conceptes descrits a continuació, així com els impostos aplicables al tipus vigent a cada moment i totes aquelles prestacions patrimonials i/o altres legalment exigibles. Així mateix, si la contractant ho sol·licita en el formulari de contractació, s'inclourà en la factura l'import corresponent al donatiu voluntari per ajudar al desenvolupament de la cooperativa.</p>
     <p>L'import de l'energia és el resultat de la suma horària del producte entre el consum d'energia activa entrant a cada hora i el preu horari de l'energia.</p>
@@ -1384,7 +1384,7 @@ const generalTermsText = `
     <p>Tal com marca la normativa, aquesta compensació serà fins a un valor màxim de compensació que iguali el valor del terme d'energia. Com a comercialitzadora del mercat lliure, hem establert la compensació també de la part regulada del cost de l'energia corresponent als peatges i càrrecs. Si el valor econòmic de l'energia excedentària és igual o superior al de l'energia utilitzada, l'import del terme d'energia en la factura serà de 0 euros.</p>
 
 
-<h3>6. FACTURACIÓ</h3>
+<h5>6. FACTURACIÓ</h5>
 
 <p>6.1. Les parts acorden afegir la clàusula 7.2. bis de les Condicions Generals del Contracte de Subministrament, que queda redactada de la manera següent:</p>
 <p style="page-break-after:always;"></p>

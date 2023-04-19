@@ -18,84 +18,84 @@ const generalTermsText = `
 <div class="index">
   <ol>
     <li>
-      <h4><a href="#helburua">HELBURUA</a></h4>
+      <h6><a href="#helburua">HELBURUA</a></h6>
     </li>
     <li>
-      <h4><a href="#jatorri-bermeak">JATORRI-BERMEAK</a></h4>
+      <h6><a href="#jatorri-bermeak">JATORRI-BERMEAK</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#formalizazioa-eta-iraupena">FORMALIZAZIOA ETA IRAUPENA</a>
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#kontrol-eta-neurri-ekipoa">KONTROL ETA NEURRI-EKIPOA</a>
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#prezio-eta-eguneratzea">PREZIO ETA EGUNERATZEA</a></h4>
+      <h6><a href="#prezio-eta-eguneratzea">PREZIO ETA EGUNERATZEA</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#sarearen-sarbiderako-baimena-merkaturatzailearentzat"
           >SAREAREN SARBIDERAKO BAIMENA MERKATURATZAILEARENTZAT</a
         >
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#fakturazioa-eta-ordainketa">FAKTURAZIOA ETA ORDAINKETA</a>
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#autokontsumoa">AUTOKONTSUMOA</a></h4>
+      <h6><a href="#autokontsumoa">AUTOKONTSUMOA</a></h6>
     </li>
     <li>
-      <h4><a href="#aldaketak">ALDAKETAK</a></h4>
+      <h6><a href="#aldaketak">ALDAKETAK</a></h6>
     </li>
     <li>
-      <h4><a href="#transferentzia">TRANSFERENTZIA</a></h4>
+      <h6><a href="#transferentzia">TRANSFERENTZIA</a></h6>
     </li>
     <li>
-      <h4><a href="#etendura">ETENDURA</a></h4>
+      <h6><a href="#etendura">ETENDURA</a></h6>
     </li>
     <li>
-      <h4><a href="#amaiera">AMAIERA</a></h4>
+      <h6><a href="#amaiera">AMAIERA</a></h6>
     </li>
     <li>
-      <h4><a href="#ardura">ARDURA</a></h4>
+      <h6><a href="#ardura">ARDURA</a></h6>
     </li>
     <li>
-      <h4><a href="#kalitatea">KALITATEA</a></h4>
+      <h6><a href="#kalitatea">KALITATEA</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#datu-babesari-buruzko-oinarrizko-informazioa"
           >DATU-BABESARI BURUZKO OINARRIZKO INFORMAZIOA</a
         >
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#jakinarazpenak-eta-kexak">JAKINARAZPENAK ETA KEXAK</a></h4>
+      <h6><a href="#jakinarazpenak-eta-kexak">JAKINARAZPENAK ETA KEXAK</a></h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#kode-etikoa-eta-delituak"
           >KODE ETIKOA ETA DELITUAK PREBENITZEKO EREDUA</a
         >
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4>
+      <h6>
         <a href="#legislazioa-eta-jurisdikzioa">LEGISLAZIOA ETA JURISDIKZIOA</a>
-      </h4>
+      </h6>
     </li>
     <li>
-      <h4><a href="#kontratu-osoa">KONTRATU OSOA</a></h4>
+      <h6><a href="#kontratu-osoa">KONTRATU OSOA</a></h6>
     </li>
     <li>
-<h4><a href="#condiciones-especificas">CONDICIONES ESPECÍFICAS</h4>
+<h6><a href="#condiciones-especificas">CONDICIONES ESPECÍFICAS</a></h6>
 </li>
   </ol>
 </div>
@@ -1241,26 +1241,26 @@ const generalTermsText = `
 
 <div class="content_generals">
 
-<h3>1. DEFINICIONES</h3>
+<h5>1. DEFINICIONES</h5>
     <p><strong>1.1. </strong>Todos los términos en mayúsculas incluidos en el presente documento serán interpretados conforme se definen en el mismo, y, en ausencia de definición, tal y como están definidos en las Condiciones Generales del Contrato de Suministro de energía eléctrica suscrito entre la contratante y SOM ENERGIA, SCCL. </p>
 
-<h3>2. OBJETO</h3>
+<h5>2. OBJETO</h5>
     <p><strong>2.1.</strong>La contratante ha solicitado contratar la tarifa indexada, para lo cual es un requisito esencial formalizar la contratación previa o simultánea del contrato de suministro. </p>
     <p><strong>2.2.</strong>La Tarifa Indexada es una tarifa del mercado libre indexada con precios horarios, calculada de acuerdo con la fórmula indicada en la cláusula 5 de las presentes condiciones específicas. Su precio es variable y depende de los cambios que se producen diariamente en el mercado mayorista de la energía (OMIE), que fija 24 precios diferentes a lo largo del día, uno por cada hora. En el caso de contratos situados en Canarias y Baleares, su precio también es variable y depende del precio del despacho de carga de Red Eléctrica fijado para cada uno de los sistemas eléctricos insulares. </p>
     <p><strong>2.3.</strong>El objeto de estas Condiciones específicas de la tarifa indexada (en adelante “<strong>Condiciones Específicas</strong>” o “<strong>Condiciones Específicas de la Tarifa Indexada</strong>”) es adaptar las Condiciones Generales del Contrato de Suministro como consecuencia de la contratación de la tarifa indexada. Así, las presentes Condiciones Específicas de la Tarifa Indexada<strong> </strong>se integran y forman parte inseparable de las Condiciones Generales del Contrato de Suministro, y su contenido prevalecerá sobre todo lo que recogen las Condiciones Generales del Contrato de Suministro. </p>
 
-<h3>3. ENTRADA EN VIGOR Y VIGENCIA</h3>
+<h5>3. ENTRADA EN VIGOR Y VIGENCIA</h5>
     <p>3.1.Las presentes Condiciones Específicas estarán en vigor desde la fecha que consta en ellas, si bien su vigencia está condicionada a la vigencia del contrato del suministro.</p>
     <p>3.2.Si la contratación de la tarifa indexada es simultánea a la formalización del contrato de suministro con SOM ENERGIA, SCCL, la vigencia del contrato de suministro y de las presentes Condiciones Específicas estarán sujetas a lo previsto en las cláusulas 3.3 y 3.4 de las Condiciones Generales del Contrato de Suministro, de manera que si la compañía distribuidora, propietaria de la red a la que se conecta la contratante, denegase el alta del punto de suministro o los cambios en el contrato de acceso a red necesarios para hacer efectivo el contrato de suministro y las presentes Condiciones Específicas, se considerarán ambos resueltos automáticamente sin derecho a indemnización alguna. </p>
     <p>3.3.Igualmente, la resolución por cualquier causa del contrato de suministro conllevará automáticamente la resolución de las presentes Condiciones Específicas, porque la existencia de un contrato de suministro en vigor es requisito esencial para poder contratar la tarifa indexada<strong>.</strong></p>
     <p>3.4.La duración del contrato de suministro establecida en la cláusula 3.3 de las Condiciones Generales del Contrato de Suministro queda modificada con la contratación de la tarifa indexada, de manera que el cómputo del periodo de un (1) año se iniciará en la fecha de las presentes Condiciones Específicas, o la más tardía de sus fechas en caso de contratarse más de un producto adicional al contrato de suministro. </p>
 
-<h3>4. FECHA DE INICIO Y FINALIZACIÓN DE LA TARIFA INDEXADA</h3>
+<h5>4. FECHA DE INICIO Y FINALIZACIÓN DE LA TARIFA INDEXADA</h5>
     <p>4.1.Si la contratante está contratando la tarifa indexada, mediante una modificación de tarifa, y dispone previamente de un contrato de suministro con SOM ENERGIA, SCCL, sin perjuicio de lo establecido en la cláusula anterior sobre la entrada en vigor y vigencia, las partes acuerdan que la<strong> </strong>tarifa indexada<strong> </strong>contratada<strong> </strong>comience a aplicarse a partir del primer día del ciclo de facturación siguiente a la fecha de las presentes Condiciones Específicas. La energía consumida durante el ciclo de facturación en curso en el momento de la firma de estas Condiciones Específicas será facturada con la tarifa que se aplicaba antes contratar la tarifa indexada. </p>
     <p>4.2.Si la contratación de la tarifa indexada es simultánea a la formalización del contrato de suministro con SOM ENERGIA, SCCL, la tarifa indexada comenzará a aplicarse tras cumplirse las condiciones establecidas en la cláusula 3 de las presentes Condiciones Específicas.</p>
     <p>4.3.Si, una vez iniciada la aplicación de la tarifa indexada<strong>, </strong>la contratante efectúa un cambio de tarifa a cualquiera de las tarifas vigentes y disponibles de SOM ENERGIA, SCCL, se aplicará la tarifa indexada hasta el último día del ciclo de facturación en curso en el momento de contratación de la nueva tarifa. </p>
 
-<h3>5. ADAPTACIÓN DE LA CLÁUSULA 5 “PRECIO Y ACTUALIZACIÓN”</h3>
+<h5>5. ADAPTACIÓN DE LA CLÁUSULA 5 “PRECIO Y ACTUALIZACIÓN”</h5>
     <p>5.1. Las partes acuerdan añadir la cláusula 5.6 de las Condiciones Generales del Contrato de Suministro, que queda redactada de la siguiente manera: </p>
     <p>En caso de haber contratado la tarifa indexada la contratante abonará en contraprestación al suministro contratado el precio y demás conceptos descritos a continuación, así como los impuestos aplicables al tipo vigente en cada momento y todas aquellas prestaciones patrimoniales y/o otras legalmente exigibles. Asimismo, si la contratante lo solicita en el formulario de contratación, se incluirá en la factura el importe correspondiente al donativo voluntario para ayudar al desarrollo de la cooperativa.</p>
     <p>El importe de la energía es el resultado de la suma horaria del producto entre el consumo de energía activa entrante en cada hora y el precio horario de la energía. </p>
@@ -1342,7 +1342,7 @@ const generalTermsText = `
     <p>Tal como marca la normativa, esta compensación será hasta un valor máximo de compensación que iguale el valor del término de energía. Como comercializadora del mercado libre, hemos establecido la compensación también de la parte regulada del coste de la energía correspondiente a los peajes y cargos. Si el valor económico de la energía excedentaria es igual o superior al de la energía utilizada, el importe del término de energía en la factura será de 0 euros. </p>
 
 
-<h3>6. FACTURACIÓN</h3>
+<h5>6. FACTURACIÓN</h5>
 
 <p>6.1. Las partes acuerdan añadir la cláusula 7.2. bis de las Condiciones Generales del Contrato de Suministro, que queda redactada de la siguiente manera: </p>
 

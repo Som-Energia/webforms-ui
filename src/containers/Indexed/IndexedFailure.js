@@ -55,17 +55,20 @@ function Failure(props) {
   const classes = useStyles()
   const { error = false, showHeader = true } = props
 
-  const exceptionMap = {
-    OPEN_CASES: t('INDEXED_OPEN_CASES_ERROR_TXT'),
-    UNAUTHORIZED: t('INDEXED_UNAUTHORIZED_ERROR_TXT'),
-    NO_CHANGES: t('INDEXED_NO_CHANGES_ERROR_TXT'),
-    STATE_CONFLICT: t('INDEXED_STATE_CONFLICT_ERROR_TXT'),
-    UNDEFINED: t('INDEXED_UNDEFINED_ERROR_TXT'),
-    PENDING_CONTRACT_MODIFICATION: t('PENDING_CONTRACT_MODIFICATION_ERROR_TXT'),
-    UNEXPECTED_ERROR: t('INDEXED_UNEXPECTED_ERROR_TXT')
-  }
+  
 
-  const getErrorTxt = (code) => {
+  const getErrorTxt = (code, errorData) => {
+
+    const exceptionMap = {
+      NO_CHANGES: t('INDEXED_NO_CHANGES_ERROR_TXT'),
+      OPEN_CASES: t('INDEXED_OPEN_CASES_ERROR_TXT'),
+      STATE_CONFLICT: t('INDEXED_STATE_CONFLICT_ERROR_TXT'),
+      PENDING_CONTRACT_MODIFICATION: t('PENDING_CONTRACT_MODIFICATION_ERROR_TXT'),
+      INVALID_FIELD:t('INDEXED_INVALID_FIELD_ERROR',{error_field: errorData?.[0]?.field || t('UNKNOWN_FIELD')}),
+      UNAUTHORIZED: t('INDEXED_UNAUTHORIZED_ERROR_TXT'),
+      UNEXPECTED_ERROR: t('INDEXED_UNEXPECTED_ERROR_TXT', {url: t('CONTACT_HELP_URL')})
+    }
+
     let errorTxt = exceptionMap[code]
     return errorTxt ? errorTxt : exceptionMap.UNEXPECTED_ERROR
   }
@@ -90,8 +93,8 @@ function Failure(props) {
           dangerouslySetInnerHTML={{
             __html:
               error?.code === undefined
-                ? t(exceptionMap.UNEXPECTED_ERROR, { url: t('CONTACT_HELP_URL') })
-                : getErrorTxt(error.code)
+                ? getErrorTxt("UNEXPECTED_ERROR")
+                : getErrorTxt(error.code,error.data)
           }}
         />
         <Box mt={3} mb={1}>

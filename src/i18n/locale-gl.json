@@ -544,7 +544,7 @@
     "INDEXED_GENERAL_CONDITIONS":"Condicións xerais do contrato",
     "INDEXED_GENERAL_CONDITIONS_TEXT":"Podes ver as condicións xerais do contrato para a comercialización de electricidade de Som Energia nesta <a target='_blank' href='https://www.somenergia.coop/gl/condicions-xerais-do-contrato-de-subministro-de-enerxia-electrica/'>ligazón</a>.",
     "INDEXED_SPECIFIC_CONDITIONS":"Condicións específicas da tarifa indexada",
-    "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Podes ver as condicións específicas do contrato coa tarifa indexada nesta ligazón.",
+    "INDEXED_SPECIFIC_CONDITIONS_TEXT":"Podes ver as condicións específicas do contrato coa tarifa indexada nesta <a target='_blank' href='https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf'> ligazón</a>.",
     "INDEXED_SPECIFIC_CONDITIONS_URL":"https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
     "INDEXED_MARGE":"Marxe (k)",
     "INDEXED_MARGE_TEXT":"A marxe de comercialización defínese en Som Energia. É de {{kCoefficient}} € por kWh. Ademais da marxe para a cooperativa, tamén inclúe o custo das desviacións e a adquisición dos certificados de garantía de orixe 100% renovábel.",    
