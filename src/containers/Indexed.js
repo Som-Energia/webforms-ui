@@ -272,6 +272,7 @@ const Indexada = (props) => {
                                 {activeStep === 2 ? (
                                   <IndexedReview
                                     isTariff20={isTariff20}
+                                    targetTariff={hasTargetTariff}
                                     contractValues={contractJSON}
                                     {...formikProps}
                                   />

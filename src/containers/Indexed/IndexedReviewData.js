@@ -65,7 +65,8 @@ const IndexedReviewData = (props) => {
     handleClick,
     handleAccept,
     handleClose,
-    handleIndexadaTermsAccepted
+    handleIndexadaTermsAccepted,
+    targetTariff
   } = props
   const powers = JSON.parse(contractValues.powers)
 
@@ -142,7 +143,7 @@ const IndexedReviewData = (props) => {
           </Typography>
           <IndexedReviewField
             label={t('FARE')}
-            value={contractValues?.tariff}
+            value={targetTariff}
           />
           <IndexedReviewField label={t('PUNTA')} value={powers[0].power.replaceAll('"','')} />
           <IndexedReviewField label={t('VALLE')} value={powers[1].power.replaceAll('"','')} />
