@@ -31,6 +31,8 @@ describe('Test that it correctly renders', () => {
     '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}]'
   }
 
+  const mockTargetTariff = "2.0TD Indexada Peninsula"
+
   let mockContractValuesNoPhisical = JSON.parse(JSON.stringify(mockContractValues))
   mockContractValuesNoPhisical.isphisical = false
 
@@ -51,13 +53,14 @@ describe('Test that it correctly renders', () => {
         open={false}
         contractValues={mockContractValues}
         setFieldValues={mockSetFieldValues}
+        targetTariff={mockTargetTariff}
         values={mockInitialValues}
       />
     )
     const cupsElement = screen.getByText(mockContractValues.cups)
     const addressElement = screen.getByText(mockContractValues.address)
     const vatElement = screen.getByText(mockContractValues.owner_vat)
-    const tariffElement = screen.getByText(mockContractValues.tariff)
+    const tariffElement = screen.getByText(mockTargetTariff)
 
     expect(cupsElement).toBeInTheDocument()
     expect(addressElement).toBeInTheDocument()
