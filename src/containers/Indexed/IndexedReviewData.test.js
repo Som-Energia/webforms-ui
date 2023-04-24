@@ -31,6 +31,8 @@ describe('Test that it correctly renders', () => {
     '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}]'
   }
 
+  const mock30ContractPowers = '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}, {"value": "P3", "power": "\\"8.050\\""},{"value": "P4", "power": "\\"8.050\\""},{"value": "P5", "power": "\\"8.050\\""},{"value": "P6", "power": "\\"8.050\\""}]'
+
   const mockTargetTariff = "2.0TD Indexada Peninsula"
 
   let mockContractValuesNoPhisical = JSON.parse(JSON.stringify(mockContractValues))
@@ -112,5 +114,52 @@ describe('Test that it correctly renders', () => {
     const legalTermsCheck = getById(dom.container,'change-tariff-indexada-legal-terms-check')
     fireEvent.click(legalTermsCheck)
     expect(mockHandleIndexadaLegalTermsAccepted).toBeCalledTimes(1)
+  })
+
+  test('Should show the 6 powers of a 3.0 contract', () => {
+    
+    let mock30ContractValues = JSON.parse(JSON.stringify(mockContractValues))
+    mock30ContractValues.powers = mock30ContractPowers
+    render(
+      <IndexedReviewData
+        open={false}
+        contractValues={mock30ContractValues}
+        setFieldValues={mockSetFieldValues}
+        isTariff20={false}
+        values={mockInitialValues}
+        handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
+      />
+    )
+
+    let counter = 0;
+    JSON.parse(mock30ContractPowers).forEach(element => {
+      counter ++;
+      const powerElement = screen.getByText(element.value)
+      expect(powerElement).toBeInTheDocument()
+    })
+    
+    expect(counter).toBe(6)
+    
+  })
+
+  test('Should show the 2 powers of a 2.0 contract', () => {
+    
+    render(
+      <IndexedReviewData
+        open={false}
+        contractValues={mockContractValues}
+        setFieldValues={mockSetFieldValues}
+        isTariff20={true}
+        values={mockInitialValues}
+        handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
+      />
+    )
+
+    const maxPower = screen.getByText("PUNTA")
+    const minPower = screen.getByText("VALLE")
+    expect(maxPower).toBeInTheDocument()
+    expect(minPower).toBeInTheDocument()
+
+    
   })
 })

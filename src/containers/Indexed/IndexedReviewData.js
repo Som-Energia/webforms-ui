@@ -14,6 +14,7 @@ import TermsDialog from 'components/TermsDialog'
 import GeneralEspeciTerms from 'components/GeneralEspeciTerms'
 
 import IndexedReviewField from './IndexedReviewField'
+import { Box } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +67,8 @@ const IndexedReviewData = (props) => {
     handleAccept,
     handleClose,
     handleIndexadaTermsAccepted,
-    targetTariff
+    targetTariff,
+    isTariff20
   } = props
   const powers = JSON.parse(contractValues.powers)
 
@@ -141,12 +143,33 @@ const IndexedReviewData = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
-          <IndexedReviewField
-            label={t('FARE')}
-            value={targetTariff}
-          />
-          <IndexedReviewField label={t('PUNTA')} value={powers[0].power.replaceAll('"','')} />
-          <IndexedReviewField label={t('VALLE')} value={powers[1].power.replaceAll('"','')} />
+          <IndexedReviewField label={t('FARE')} value={targetTariff} />
+          <Box id="tarif_powers">
+            {isTariff20 ? (
+              <>
+                <IndexedReviewField
+                  label={t('PUNTA')}
+                  value={powers[0].power.replaceAll('"', '')}
+                />
+                <IndexedReviewField
+                  label={t('VALLE')}
+                  value={powers[1].power.replaceAll('"', '')}
+                />
+              </>
+            ) : (
+              <>
+                {powers.map((element) => {
+                  return (
+                    <IndexedReviewField
+                      key={element.value}
+                      label={element.value}
+                      value={element.power.replaceAll('"', '')}
+                    />
+                  )
+                })}
+              </>
+            )}
+          </Box>
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -158,7 +181,7 @@ const IndexedReviewData = (props) => {
           <IndexedReviewField label={t('IBAN')} value={contractValues?.iban} />
           <IndexedReviewField
             label={t('VOLUNTARY_CENT')}
-            value={contractValues?.donation}
+            value={contractValues?.donation || 'No'}
           />
         </Grid>
 
@@ -244,7 +267,7 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_LEGAL_TERMS',{
+                  __html: t('INDEXED_ACCEPT_LEGAL_TERMS', {
                     inscription_conditions_url: t(
                       'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
                     )
