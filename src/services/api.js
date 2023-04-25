@@ -247,6 +247,26 @@ export const contract = async (data) => {
   })
 }
 
+export const modify_tariff = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}/procedures/contract_indexed`,
+    headers: {Authorization: data.token},
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+
+export const can_modify_tariff = async (token) => {
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/procedures/can_turn_contract_indexed`,
+    headers: {Authorization: token}
+  }).then((response) => response?.data)
+}
+
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',

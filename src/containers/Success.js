@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontSize: '1.15rem'
   },
+  subtitle: {
+    fontWeight: 'bold'
+  },
   icon: {
     fontSize: '1.85rem'
   },
@@ -49,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Success = (props) => {
-  const { result, description, title, showHeader = true } = props
+  const { result, description, title, showHeader, subtitle = true } = props
   const classes = useStyles()
   const { language } = useParams()
   const { t, i18n } = useTranslation()
@@ -66,9 +69,16 @@ const Success = (props) => {
           <DoneIcon fontSize="large" />
         </Avatar>
 
-        <Typography className={classes.title} variant="h6">
+        <Typography id="success-page-title" className={classes.title} variant="h6">
           {title ? t(title) : t('SUCCESS_TEXT')}
         </Typography>
+
+        {subtitle ? (
+          <Typography className={classes.subtitle} variant="h6">
+            {t(subtitle)}
+          </Typography>
+        ) : null}
+
         <Typography
           className={classes.message}
           variant="body1"

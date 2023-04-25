@@ -62,6 +62,7 @@ const options = [
   { title: 'Contractació 20', href: `${language}/contract-20` },
   { title: 'Contractació 30', href: '/contract-30' },
   { title: 'Modificació contractual', href: '/modify-contract' },
+  { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
 ]
 
 const Home = (props) => {
