@@ -46,6 +46,8 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
+const currentKindTariff = "indexada"
+
 
 const Indexada = (props) => {
   const classes = useStyles()
@@ -71,7 +73,7 @@ const Indexada = (props) => {
     }
   }
 
-  const sectionsJson = [
+  const sectionsIndexedJson = [
     {
       title: t('INDEXED_GENERAL_CONDITIONS'),
       text: t('INDEXED_GENERAL_CONDITIONS_TEXT')
@@ -83,6 +85,22 @@ const Indexada = (props) => {
     {
       title: t('INDEXED_MARGE'),
       text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
+    },
+    {
+      title: t('INDEXED_DURADA'),
+      text: t('INDEXED_DURADA_TEXT', { tariff: hasTargetTariff })
+    },
+    { title: t('INDEXED_DESESTIMENT'), text: t('INDEXED_DESESTIMENT_TEXT') },
+    {
+      title: t('INDEXED_PERSONAL_DATA_PROTECTION'),
+      text: t('INDEXED_PERSONAL_DATA_PROTECTION_TEXT')
+    }
+  ]
+
+  const sectionsPeriodsJson = [
+    {
+      title: t('INDEXED_GENERAL_CONDITIONS'),
+      text: t('INDEXED_GENERAL_CONDITIONS_TEXT')
     },
     {
       title: t('INDEXED_DURADA'),
@@ -234,13 +252,11 @@ const Indexada = (props) => {
                                     {...formikProps.values}
                                     data={contractJSON}
                                     targetTariff={hasTargetTariff}
-                                    isTariff20={isTariff20}
                                   />
                                 ) : null}
 
                                 {activeStep === 0 ? (
                                   <IndexedInfo
-                                    isTariff20={isTariff20}
                                     desc={t('INDEXED_INTRO_BODY', {
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
@@ -254,7 +270,6 @@ const Indexada = (props) => {
                                 ) : null}
                                 {activeStep === 1 ? (
                                   <IndexedInfo
-                                    isTariff20={isTariff20}
                                     title={t('INDEXED_INTRO_TITLE')}
                                     desc={t(
                                       isTariff20
@@ -361,7 +376,7 @@ const Indexada = (props) => {
                 <Grid item xs={3}>
                   <DropDownMenu
                     title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
-                    sections={sectionsJson}
+                    sections={currentKindTariff==='indexada' ? sectionsPeriodsJson : sectionsIndexedJson}
                   />
                 </Grid>
               </Grid>
