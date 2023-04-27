@@ -561,6 +561,6 @@
     "INDEXED_OPEN_CASES_ERROR_TXT": "O contrato ten un procedemento aberto coa distribuidora.",
     "INDEXED_NO_CHANGES_ERROR_TXT": "A tarifa do contato xa é indexada.",
     "INDEXED_STATE_CONFLICT_ERROR_TXT": "O contrato nom está en estado activo.",
-    "PENDING_CONTRACT_MODIFICATION": "O contato ten pendente a aplicación de outra modificación.",
+    "PENDING_CONTRACT_MODIFICATION_ERROR_TXT": "O contato ten pendente a aplicación de outra modificación.",
     "TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/230124_TARIFA%20INDEXADA_ANEXO_es.pdf"
 }

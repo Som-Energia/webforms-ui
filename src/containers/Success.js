@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Success = (props) => {
-  const { result, description, title, showHeader, subtitle = true } = props
+  const { result, description, title, showHeader, subtitle } = props
   const classes = useStyles()
   const { language } = useParams()
   const { t, i18n } = useTranslation()
