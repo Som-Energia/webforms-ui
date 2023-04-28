@@ -2,9 +2,11 @@ import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
 import dayjs from 'dayjs'
 
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
-  window?.config?.API_BASE_URL.replace?.(/\/$/, '')
+
+const API_BASE_URL = document.getElementById('root')
+  ? document.getElementById('root').dataset.apiBaseUrl
+  : null // For tests
+
 
 export const modifyContract = async (data, token) => {
   return axios({
