@@ -15,6 +15,8 @@ import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
 import './App.css'
+import GenerationInvestment from 'containers/GenerationInvestment'
+import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
 
 const theme = createTheme({
   palette: {
@@ -361,6 +363,22 @@ const App = (props) => {
                       }
                       checkEnabled={false}
                     />
+                  }
+                />
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <GenerationContextProvider>
+                      <GenerationInvestment {...props} />
+                    </GenerationContextProvider>
+                  }
+                />
+                <Route
+                  path="/investments/investments-kwh/"
+                  element={
+                    <GenerationContextProvider>
+                      <GenerationInvestment {...props} />
+                    </GenerationContextProvider>
                   }
                 />
               </Routes>
