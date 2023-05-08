@@ -14,6 +14,9 @@ import GenerationContext from './context/GenerationContext'
 const useStyles = makeStyles({
   table: {
     minWidth: 650
+  },
+  tableHeader:{
+    background: "#e6e6e6"
   }
 })
 
@@ -23,22 +26,36 @@ function createData(Contract, Address, Priority, LastDate, Use) {
   return { Contract, Address, Priority, LastDate, Use }
 }
 
-const SelectComponent = ({data, numContracts}) => {
+const SelectComponent = ({ data, numContracts }) => {
+  const { modifyPriorityContract } = useContext(GenerationContext)
 
-  const {modifyPriorityContract} = useContext(GenerationContext)
+  const priorityList = useMemo(
+    () =>
+      Array.from({ length: numContracts }, (value, index) => ({
+        name: index === 0 ? 'Prioritari' : 'Secundari' + index,
+        value: index
+      })),
+    [numContracts]
+  )
 
-  const priorityList = useMemo(() => Array.from({ length: numContracts }, (value, index) => ({ name: index===0 ? "Prioritari" : "Secundari"+ index, value: index})),[numContracts]);
+  const currentPriority = {
+    name: data.Priority === 0 ? 'Prioritari' : 'Secundari' + data.Priority,
+    value: data.Priority
+  }
 
-  const currentPriority = {name: data.Priority===0 ? "Prioritari" : "Secundari"+ data.Priority,value:data.Priority}
-
-  const handleChange = useCallback((event) => {
-    modifyPriorityContract(data.Contract,event.target.value)
-  },[data,modifyPriorityContract])
+  const handleChange = useCallback(
+    (event) => {
+      modifyPriorityContract(data.Contract, event.target.value)
+    },
+    [data, modifyPriorityContract]
+  )
 
   return (
     <Select value={currentPriority.value} onChange={handleChange}>
       {priorityList.map((element) => (
-        <MenuItem key={element.value} value={element.value}>{element.name}</MenuItem>
+        <MenuItem key={element.value} value={element.value}>
+          {element.name}
+        </MenuItem>
       ))}
     </Select>
   )
@@ -51,7 +68,7 @@ export default function BasicTable({ data, editing }) {
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
-        <TableHead>
+        <TableHead className={classes.tableHeader} >
           <TableRow>
             {columns.map((column) => (
               <TableCell key={column}>{column}</TableCell>
@@ -64,7 +81,9 @@ export default function BasicTable({ data, editing }) {
               <TableCell>{row.Contract}</TableCell>
               <TableCell>{row.Address}</TableCell>
               {editing ? (
-                <TableCell><SelectComponent data={row} numContracts={rows.length}/></TableCell>
+                <TableCell>
+                  <SelectComponent data={row} numContracts={rows.length} />
+                </TableCell>
               ) : (
                 <TableCell>{row.Priority}</TableCell>
               )}
