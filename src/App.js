@@ -15,7 +15,6 @@ import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
 import './App.css'
-import GenerationInvestment from 'containers/GenerationInvestment'
 import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
 
 const theme = createTheme({
@@ -70,6 +69,7 @@ const App = (props) => {
   const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
   const Indexed = lazy(() => import('./containers/Indexed'))
+  const Generation = lazy(() => import('./containers/Generation'))
 
   const loadContractData = () => {
     const contractData =
@@ -369,7 +369,7 @@ const App = (props) => {
                   path="/:language/investments/investments-kwh/"
                   element={
                     <GenerationContextProvider>
-                      <GenerationInvestment {...props} />
+                      <Generation {...props} />
                     </GenerationContextProvider>
                   }
                 />
@@ -377,7 +377,7 @@ const App = (props) => {
                   path="/investments/investments-kwh/"
                   element={
                     <GenerationContextProvider>
-                      <GenerationInvestment {...props} />
+                      <Generation {...props} />
                     </GenerationContextProvider>
                   }
                 />
