@@ -37,8 +37,9 @@ const SelectComponent = ({ data }) => {
     [data, modifyPriorityContract]
   )
 
+  console.log(data)
   return (
-    <Select value={currentPriority.index} onChange={handleChange}>
+    <Select id={data.name} value={currentPriority.index} onChange={handleChange}>
       {priorities.map((element) => (
         <MenuItem key={element.index} value={element.index}>
           {element.value}

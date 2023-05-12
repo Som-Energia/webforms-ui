@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Test as ComponentTest } from './components/TextLoader'
 
@@ -108,6 +108,22 @@ const App = (props) => {
         : {}
     return data
   }
+
+  const assignmentsJSON = useMemo(
+    () =>
+      JSON.parse(
+        document.getElementById('generation-assignments-data').textContent
+      ),
+    []
+  )
+  const investmentsJSON = useMemo(
+    () =>
+      JSON.parse(
+        document.getElementById('generation-investments-data').textContent
+      ),
+    []
+  )
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -340,7 +356,7 @@ const App = (props) => {
                 <Route
                   path="/:language/investments/investments-kwh/"
                   element={
-                    <GenerationContextProvider>
+                    <GenerationContextProvider assignmentsJSON={assignmentsJSON} investmentsJSON={investmentsJSON} >
                       <Generation {...props} />
                     </GenerationContextProvider>
                   }
@@ -348,7 +364,7 @@ const App = (props) => {
                 <Route
                   path="/investments/investments-kwh/"
                   element={
-                    <GenerationContextProvider>
+                    <GenerationContextProvider assignmentsJSON={assignmentsJSON} investmentsJSON={investmentsJSON} >
                       <Generation {...props} />
                     </GenerationContextProvider>
                   }
