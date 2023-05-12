@@ -45,5 +45,5 @@ export default function GenerationInvestmentSection({ data }) {
     [t]
   )
 
-  return <GenerationTable columns={columns} rows={rows} />
+  return <GenerationTable id='investment-table' columns={columns} rows={rows} />
 }
