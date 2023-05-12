@@ -24,12 +24,12 @@ const StyledTableCell = withStyles((theme) => ({
   }))(TableCell);
 
 
-export default function GenerationTable({ columns, rows, children }) {
+export default function GenerationTable({ columns, rows, children, id }) {
   const classes = useStyles()
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table id={id} className={classes.table} aria-label="simple table">
         <TableHead className={classes.tableHeader}>
           <TableRow>
             {columns.map((column) => (

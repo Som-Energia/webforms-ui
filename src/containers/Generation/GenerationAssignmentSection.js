@@ -37,7 +37,6 @@ const SelectComponent = ({ data }) => {
     [data, modifyPriorityContract]
   )
 
-  console.log(data)
   return (
     <Select id={data.name} value={currentPriority.index} onChange={handleChange}>
       {priorities.map((element) => (
@@ -70,8 +69,8 @@ export default function GenerationAssigmentSection({ data, editing }) {
   ],[t])
 
   return (
-    <GenerationTable columns={columns} >
-      <TableBody>
+    <GenerationTable  id="assignment-table" columns={columns} >
+      <TableBody >
         {rows.map((row) => (
           <TableRow key={row.contract}>
             <StyledTableCell>{row.contract}</StyledTableCell>

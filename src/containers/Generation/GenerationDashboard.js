@@ -44,12 +44,14 @@ function GenerationDashboard({
         {editing ? (
           <>
             <Button
+              id="cancel-action-btn"
               variant="contained"
               className={classes.button}
               onClick={() => handleCancelButtonClick(false)}>
               {t('CANCELAR')}
             </Button>
             <Button
+              id="validation-action-btn"
               variant="contained"
               className={classes.button}
               onClick={() => validateChanges()}>
@@ -58,6 +60,7 @@ function GenerationDashboard({
           </>
         ) : (
           <Button
+            id="change-priority-btn"
             variant="contained"
             className={classes.button}
             onClick={() => handleClick(true)}>
