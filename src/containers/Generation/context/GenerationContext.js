@@ -8,23 +8,10 @@ const GenerationContext = createContext({
   modifyContract: () => {}
 })
 
-export const GenerationContextProvider = ({ children }) => {
+export const GenerationContextProvider = ({ children, assignmentsJSON, investmentsJSON }) => {
   const { t } = useTranslation()
 
-  const assignmentsJSON = useMemo(
-    () =>
-      JSON.parse(
-        document.getElementById('generation-assignments-data').textContent
-      ),
-    []
-  )
-  const investmentsJSON = useMemo(
-    () =>
-      JSON.parse(
-        document.getElementById('generation-investments-data').textContent
-      ),
-    []
-  )
+
 
   const pioritiesJSON = useMemo(() => {
     return assignmentsJSON.map((value, index) => {

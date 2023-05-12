@@ -24,7 +24,7 @@ const StyledTableCell = withStyles((theme) => ({
   }))(TableCell);
 
 
-export default function BasicTable({ columns, rows, children }) {
+export default function GenerationTable({ columns, rows, children }) {
   const classes = useStyles()
 
   return (
@@ -43,8 +43,8 @@ export default function BasicTable({ columns, rows, children }) {
         ) : (
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row}>
-                {Object.keys(row).map((key) => <StyledTableCell key={row[key]} >{row[key]}</StyledTableCell>)}
+              <TableRow id={row.name} key={row.name}>
+                {Object.keys(row).map((key,index) => <StyledTableCell key={row[key]+index} >{row[key]}</StyledTableCell>)}
               </TableRow>
             ))}
           </TableBody>
