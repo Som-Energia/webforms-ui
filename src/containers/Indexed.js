@@ -34,6 +34,7 @@ import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
 import { checkIsTariff20 } from '../services/utils'
+import { checkIsTariffIndexed } from '../services/utils'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -63,6 +64,7 @@ const Indexada = (props) => {
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
+  const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
   const [kCoefficient, setKCoefficient] = useState('')
 
   const handlers = {
@@ -241,12 +243,21 @@ const Indexada = (props) => {
                                 {activeStep === 0 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
-                                    desc={t('INDEXED_INTRO_BODY', {
+                                    isTariffIndexed={isTariffIndexed}
+                                    desc={t(isTariffIndexed
+                                      ? 'PERIODES_INTRO_BODY'
+                                      : 'INDEXED_INTRO_BODY'
+                                      , {
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
                                       ),
                                       url_specific_conditions: t(
                                         'INDEXED_SPECIFIC_CONDITIONS_URL'
+                                      ),
+                                      url_tariff_characteristics: t(
+                                        isTariff20
+                                        ? 'TARIFF_CHARACTERISTICS_2.0_URL'
+                                        : 'TARIFF_CHARACTERISTICS_3.0_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -255,17 +266,34 @@ const Indexada = (props) => {
                                 {activeStep === 1 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
+                                    isTariffIndexed={isTariffIndexed}
                                     title={t('INDEXED_INTRO_TITLE')}
-                                    desc={t(
-                                      isTariff20
+                                    desc={
+                                      isTariffIndexed
+                                      ? t(isTariff20
+                                        ? 'PERIODES_IMPORTANT_INFO_BODY'
+                                        : 'PERIODES_IMPORTANT_INFO_BODY_30',
+                                      {
+                                        url_tariff_web: t(
+                                          isTariffIndexed && isTariff20
+                                          ? 'TARIFF_WEB_URL'
+                                          : 'TARIFF_WEB_30_URL'
+                                        ),
+                                        url_tariff_type: t(
+                                          isTariffIndexed && isTariff20
+                                          ? 'TARIFF_TYPE_URL'
+                                          : 'TARIFF_30_TYPE_URL'
+                                        )
+                                      })
+                                      : t(isTariff20
                                         ? 'INDEXED_IMPORTANT_INFO_BODY'
                                         : 'INDEXED_IMPORTANT_INFO_BODY_30',
                                       {
                                         url_indexada_help: t(
                                           'TARIFF_INDEXED_HELP_URL'
-                                        )
-                                      }
-                                    )}
+                                        ),
+                                      })
+                                    }
                                     {...formikProps}
                                   />
                                 ) : null}

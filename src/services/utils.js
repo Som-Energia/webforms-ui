@@ -510,3 +510,6 @@ export const checkIsTariff20 = (tariff) => {
   return regex.test(tariff)
 }
 
+export const checkIsTariffIndexed = (tariff) => {
+  return tariff.toLowerCase().match(/ndex/)
+}
