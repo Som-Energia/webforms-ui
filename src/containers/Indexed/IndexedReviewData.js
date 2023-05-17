@@ -68,7 +68,8 @@ const IndexedReviewData = (props) => {
     handleClose,
     handleIndexadaTermsAccepted,
     targetTariff,
-    isTariff20
+    isTariff20,
+    isTariffIndexed
   } = props
   const powers = JSON.parse(contractValues.powers)
 
@@ -245,14 +246,18 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_TERMS')
+                  __html: t(isTariffIndexed
+                    ? 'PERIODS_ACCEPT_TERMS'
+                    : 'INDEXED_ACCEPT_TERMS'
+                  )
                 }}
               />
             }
           />
           <Divider variant="middle" className={classes.dividerBottom} />
-        </Grid>
 
+        </Grid>
+        { !isTariffIndexed && (
         <Grid item xs={12}>
           <FormControlLabel
             control={
@@ -280,6 +285,7 @@ const IndexedReviewData = (props) => {
             }
           />
         </Grid>
+        )}
       </Grid>
     </>
   )
