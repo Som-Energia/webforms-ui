@@ -218,7 +218,10 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_CONDITIONS')
+                  __html: t(isTariffIndexed
+                    ? 'PERIODS_ACCEPT_CONDITIONS'
+                    : 'INDEXED_ACCEPT_CONDITIONS'
+                    )
                 }}
               />
             }

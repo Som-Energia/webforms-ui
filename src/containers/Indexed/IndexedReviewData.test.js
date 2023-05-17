@@ -126,6 +126,7 @@ describe('Test that it correctly renders', () => {
         contractValues={mock30ContractValues}
         setFieldValues={mockSetFieldValues}
         isTariff20={false}
+        isTariffIndexed={false}
         values={mockInitialValues}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
       />
@@ -150,6 +151,7 @@ describe('Test that it correctly renders', () => {
         contractValues={mockContractValues}
         setFieldValues={mockSetFieldValues}
         isTariff20={true}
+        isTariffIndexed={true}
         values={mockInitialValues}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
       />

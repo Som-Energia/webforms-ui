@@ -237,6 +237,7 @@ const Indexada = (props) => {
                                     data={contractJSON}
                                     targetTariff={hasTargetTariff}
                                     isTariff20={isTariff20}
+                                    isTariffIndexed={isTariffIndexed}
                                   />
                                 ) : null}
 
@@ -274,6 +275,7 @@ const Indexada = (props) => {
                                         ? 'PERIODES_IMPORTANT_INFO_BODY'
                                         : 'PERIODES_IMPORTANT_INFO_BODY_30',
                                       {
+                                        tariff: hasTargetTariff,
                                         url_tariff_web: t(
                                           isTariffIndexed && isTariff20
                                           ? 'TARIFF_WEB_URL'
@@ -300,6 +302,7 @@ const Indexada = (props) => {
                                 {activeStep === 2 ? (
                                   <IndexedReview
                                     isTariff20={isTariff20}
+                                    isTariffIndexed={isTariffIndexed}
                                     targetTariff={hasTargetTariff}
                                     contractValues={contractJSON}
                                     {...formikProps}
