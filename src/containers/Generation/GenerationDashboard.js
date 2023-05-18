@@ -19,6 +19,10 @@ const useStyles = makeStyles({
   button: {
     background: '#96b633',
     color: '#fff'
+  },
+  buttons: {
+    gap: '5px',
+    justifyContent: 'center'
   }
 })
 
@@ -28,21 +32,16 @@ function GenerationDashboard({
   validateChanges,
   handleClick
 }) {
-  const { language } = useParams()
-  const { t, i18n } = useTranslation()
+  
+  const { t } = useTranslation()
   const classes = useStyles()
   const { assignments, investments } = useContext(GenerationContext)
-
-  useEffect(() => {
-    language && i18n.changeLanguage(language)
-    language ? dayjs.locale(language) : dayjs.locale('es')
-  }, [language, i18n])
 
   const ActionSection = useCallback(() => {
     return (
       <>
         {editing ? (
-          <>
+          <Grid item container className={classes.buttons}>
             <Button
               id="cancel-action-btn"
               variant="contained"
@@ -57,15 +56,17 @@ function GenerationDashboard({
               onClick={() => validateChanges()}>
               {t('VALIDATE_CHANGES')}
             </Button>
-          </>
+          </Grid>
         ) : (
-          <Button
-            id="change-priority-btn"
-            variant="contained"
-            className={classes.button}
-            onClick={() => handleClick(true)}>
-            {t('CHANGE_PRIORITY')}
-          </Button>
+          <Grid item container className={classes.buttons}>
+            <Button
+              id="change-priority-btn"
+              variant="contained"
+              className={classes.button}
+              onClick={() => handleClick(true)}>
+              {t('CHANGE_PRIORITY')}
+            </Button>
+          </Grid>
         )}
       </>
     )
@@ -84,7 +85,7 @@ function GenerationDashboard({
       <GenerationInvestmentSection data={investments} />
       <SectionTitle text={t('GENERATION_ASSIGNMENTS_TABLE_TITLE')} />
       <GenerationAssigmentSection data={assignments} editing={editing} />
-      <Grid className={classes.footer} container justifyContent="center">
+      <Grid className={classes.footer} container justifyContent="flex-end">
         <ActionSection />
       </Grid>
     </>

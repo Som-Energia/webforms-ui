@@ -1,6 +1,6 @@
 import React from 'react'
 import GenerationDashboard from './GenerationDashboard'
-import { screen, render, queryByAttribute } from '@testing-library/react'
+import { render, queryByAttribute } from '@testing-library/react'
 import { GenerationContextProvider } from './context/GenerationContext'
 import userEvent from '@testing-library/user-event'
 

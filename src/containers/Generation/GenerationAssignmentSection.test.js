@@ -1,7 +1,8 @@
 import React from 'react'
 import GenerationAssignmentSection from './GenerationAssignmentSection'
-import { render } from '@testing-library/react'
-import { GenerationContextProvider } from './context/GenerationContext'
+import { render, screen, queryByAttribute } from '@testing-library/react'
+import GenerationContext  from './context/GenerationContext'
+import userEvent from '@testing-library/user-event'
 
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -18,14 +19,66 @@ jest.mock('react-i18next', () => ({
 
 describe('Generation Assignment Section', () => {
   
-    const mockAssignmentRows = JSON.parse('[{"contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]')
-    const mockInvestmentRows = JSON.parse('[{"contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"},{"contract": "ES0031405707405001AC0F - 0212400","contract_address": "CL Can Cartró , 27 27 Baix 08629 (Torrelles de Llobregat)","priority": 2,"contract_last_invoiced": "2022-11-10","annual_use_kwh": "1800.0"},{"contract": "ES0031103223192001CA0F - 0003684","contract_address": "PLAZA DE LA CONCORDIA, ,7 18518 (Lanteira)","priority": 1,"contract_last_invoiced": "2022-12-24","annual_use_kwh": "71.0"},{"contract": "ES0031408064564001YH0F - 0004438","contract_address": "FREDERIC CASAS,  Nº9 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-09","annual_use_kwh": "3537.0"}]')
+    const getById = queryByAttribute.bind(null, 'id')  
+    const assignments = JSON.parse('[{"contract": "ES0031405524755001RN0F - 0010777","contractAddress": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contractLastInvoiced": "2023-01-08","annualUseKwh": "7105.0"},{"contract": "ES0031405524910014WM0F - 0013117","contractAddress": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contractLastInvoiced": "2023-01-04","annualUseKwh": "115.0"},{"contract": "ES0031405707405001AC0F - 0212400","contract_address": "CL Can Cartró , 27 27 Baix 08629 (Torrelles de Llobregat)","priority": 2,"contract_last_invoiced": "2022-11-10","annual_use_kwh": "1800.0"}]')
+    const changeAssigmentPriority = jest.fn()
+    const getPriority = () => ({value:"mocKPriority"})
+
+
+    const contextValue = {
+      assignments,
+      changeAssigmentPriority,
+      getPriority
+    }
+
 
     test('The component render properly', () => {
       render(
-        <GenerationContextProvider assignmentsJSON={mockAssignmentRows} investmentsJSON={mockInvestmentRows}>
-            <GenerationAssignmentSection data={mockAssignmentRows}/>
-        </GenerationContextProvider>)
+        <GenerationContext.Provider value={contextValue}>
+            <GenerationAssignmentSection data={assignments}/>
+        </GenerationContext.Provider>)
+
+        const textElement0 = screen.getByText(assignments[0].contract)
+        const textElement1 = screen.getByText(assignments[1].contract)
+        expect(textElement0).toBeInTheDocument()
+        expect(textElement1).toBeInTheDocument()
+    })
+
+
+    test('Should call the function to change to lower priority', async () => {
+      const dom = render(
+        <GenerationContext.Provider value={contextValue}>
+            <GenerationAssignmentSection data={assignments} editing={true}/>
+        </GenerationContext.Provider>)
+    
+      const changePriorityDownButton = getById(dom.container,'change-priority-down ' + assignments[0].contract)
+      await userEvent.click(changePriorityDownButton)
+      expect(changeAssigmentPriority).toBeCalledWith(assignments[0],assignments[1])
+
+    })
+
+    test('Should call the function to change to higher priority', async () => {
+      const dom = render(
+        <GenerationContext.Provider value={contextValue}>
+            <GenerationAssignmentSection data={assignments} editing={true}/>
+        </GenerationContext.Provider>)
+    
+      const changePriorityUpButton = getById(dom.container,'change-priority-up ' + assignments[1].contract)
+      await userEvent.click(changePriorityUpButton)
+      expect(changeAssigmentPriority).toBeCalledWith(assignments[1],assignments[0])
+
+    })
+
+    test('Should not call the function when change the main contract to higher priority', async () => {
+      const dom = render(
+        <GenerationContext.Provider value={contextValue}>
+            <GenerationAssignmentSection data={assignments} editing={true}/>
+        </GenerationContext.Provider>)
+    
+      const changePriorityUpButton = getById(dom.container,'change-priority-up ' + assignments[0].contract)
+      await userEvent.click(changePriorityUpButton)
+      expect(changeAssigmentPriority).toBeCalledTimes(0)
+
     })
 
   })

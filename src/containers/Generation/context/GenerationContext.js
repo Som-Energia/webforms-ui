@@ -21,18 +21,28 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
     })
   }, [t, assignmentsJSON])
 
-  const [assignments, setAssignments] = useState(assignmentsJSON)
+
+
+  const [assignments, setAssignments] = useState(assignmentsJSON.sort((a,b) => a.priority - b.priority ))
   const [investments] = useState(investmentsJSON)
   const [priorities] = useState(pioritiesJSON)
 
-  const modifyPriorityContract = useCallback(
-    (id, priority) => {
+  const changeAssigmentPriority = useCallback(
+    (origin, dest) => {
+      const originPriority = origin.priority
+      const destPriority = dest.priority
+
       let newAssignments = JSON.parse(JSON.stringify(assignments))
       newAssignments.forEach((assignment) => {
-        if (assignment.contract === id) {
-          assignment.priority = priority
+        if (assignment.contract === origin.contract) {
+          assignment.priority = destPriority
+        }
+        if (assignment.contract === dest.contract) {
+          assignment.priority = originPriority
         }
       })
+      
+      newAssignments.sort((a,b) => a.priority - b.priority )
       setAssignments(newAssignments)
     },
     [assignments]
@@ -61,7 +71,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       investments,
       priorities,
       getPriority,
-      modifyPriorityContract,
+      changeAssigmentPriority,
       resetAssignments
     }),
     [
@@ -69,7 +79,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       priorities,
       getPriority,
       investments,
-      modifyPriorityContract,
+      changeAssigmentPriority,
       resetAssignments
     ]
   )
