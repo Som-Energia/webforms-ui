@@ -396,9 +396,13 @@ const Indexada = (props) => {
                                 {result ? (
                                   <Success
                                     showHeader={false}
-                                    title={t('INDEXED_SUCCESS_PAGE_TITLE')}
+                                    title={t(isTariffIndexed
+                                      ? 'PERIODES_SUCCESS_PAGE_TITLE'
+                                      : 'INDEXED_SUCCESS_PAGE_TITLE')}
                                     subtitle={hasTargetTariff}
-                                    description={t('INDEXED_SUCCESS_PAGE_DESC')}
+                                    description={t(isTariffIndexed
+                                      ? 'PERIODES_SUCCESS_PAGE_TITLE'
+                                      : 'INDEXED_SUCCESS_PAGE_DESC')}
                                   />
                                 ) : (
                                   <Failure error={error} showHeader={false} />
