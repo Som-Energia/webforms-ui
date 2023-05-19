@@ -27,6 +27,10 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
   const [investments] = useState(investmentsJSON)
   const [priorities] = useState(pioritiesJSON)
 
+  const editingPriority = useCallback(() => {
+    return assignments !== assignmentsJSON
+  },[assignments, assignmentsJSON])
+
   const changeAssigmentPriority = useCallback(
     (origin, dest) => {
       const originPriority = origin.priority
@@ -70,6 +74,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       assignments,
       investments,
       priorities,
+      editingPriority,
       getPriority,
       changeAssigmentPriority,
       resetAssignments
@@ -78,6 +83,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       assignments,
       priorities,
       getPriority,
+      editingPriority,
       investments,
       changeAssigmentPriority,
       resetAssignments

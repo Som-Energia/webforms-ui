@@ -45,7 +45,7 @@ describe('Generation Dashboard', () => {
   })
 
 
-  test('should call the change priority button', async () => {
+  test('should show cancel and validate button when editing', async () => {
     const dom = render(
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
@@ -53,20 +53,10 @@ describe('Generation Dashboard', () => {
         <GenerationDashboard handleClick={mockhandleClick} data={mockAssignmentRows} />
       </GenerationContextProvider>
     )
-    const changeButton = getById(dom.container,'change-priority-btn')
-    await userEvent.click(changeButton)
-    expect(mockhandleClick).toBeCalledTimes(1)
-
-  })
-
-  test('should show cancel and validate button when editing', async () => {
-    const dom = render(
-      <GenerationContextProvider
-        assignmentsJSON={mockAssignmentRows}
-        investmentsJSON={mockInvestmentRows}>
-        <GenerationDashboard editing={true} handleClick={mockhandleClick} data={mockAssignmentRows} />
-      </GenerationContextProvider>
-    )
+    
+    //FIRST CHANGE THE PRIORITY OF THE SECONDARY1 TO PRINCIPAL
+    const upButton = getById(dom.container,'change-priority-up ' + mockAssignmentRows[1].contract)
+    await userEvent.click(upButton)
 
     const cancelButton = getById(dom.container,'cancel-action-btn')
     const validateButton = getById(dom.container,'validation-action-btn')
@@ -79,12 +69,15 @@ describe('Generation Dashboard', () => {
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}>
-        <GenerationDashboard editing={true} handleCancelButtonClick={mockHandleCancelButtonClick} data={mockAssignmentRows} />
+        <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} data={mockAssignmentRows} />
       </GenerationContextProvider>
     )
+    
+    //FIRST CHANGE THE PRIORITY OF THE SECONDARY1 TO PRINCIPAL
+    const upButton = getById(dom.container,'change-priority-up ' + mockAssignmentRows[1].contract)
+    await userEvent.click(upButton)
 
     const cancelButton = getById(dom.container,'cancel-action-btn')
-    
     await userEvent.click(cancelButton)
     expect(mockHandleCancelButtonClick).toBeCalledTimes(1)
   })
@@ -94,12 +87,15 @@ describe('Generation Dashboard', () => {
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}>
-        <GenerationDashboard editing={true} validateChanges={mockValidateChanges} data={mockAssignmentRows} />
+        <GenerationDashboard validateChanges={mockValidateChanges} data={mockAssignmentRows} />
       </GenerationContextProvider>
     )
 
-    const validateButton = getById(dom.container,'validation-action-btn')
+    //FIRST CHANGE THE PRIORITY OF THE SECONDARY1 TO PRINCIPAL
+    const upButton = getById(dom.container,'change-priority-up ' + mockAssignmentRows[1].contract)
+    await userEvent.click(upButton)
     
+    const validateButton = getById(dom.container,'validation-action-btn')
     await userEvent.click(validateButton)
     expect(mockValidateChanges).toBeCalledTimes(1)
   })

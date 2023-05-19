@@ -28,13 +28,13 @@ function createData(
   }
 }
 
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles(() => ({
   body: {
     fontSize: 14
   }
 }))(TableCell)
 
-export default function GenerationAssigmentSection({ data, editing }) {
+export default function GenerationAssigmentSection({ data }) {
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
   const { getPriority, changeAssigmentPriority } = useContext(GenerationContext)
@@ -66,10 +66,10 @@ export default function GenerationAssigmentSection({ data, editing }) {
         {rows.map((row,index) => (
           <TableRow key={row.contract}>
             <StyledTableCell>
-              {editing ? <Box>
+              <Box>
                 <IconButton id={'change-priority-up ' + row.contract} size='small' onClick={() => handleChangeSort(index, 'up')} ><ArrowDropUpIcon/></IconButton>
                 <IconButton id={'change-priority-down ' + row.contract} size='small' onClick={() => handleChangeSort(index, 'down')} ><ArrowDropDownIcon/></IconButton>
-              </Box> : null}
+              </Box>
             </StyledTableCell>
             <StyledTableCell>{row.contract}</StyledTableCell>
             <StyledTableCell>{row.contractAddress}</StyledTableCell>
