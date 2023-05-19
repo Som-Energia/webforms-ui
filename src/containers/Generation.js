@@ -12,16 +12,10 @@ import 'dayjs/locale/es'
 function Generation() {
   const { language } = useParams()
   const {i18n } = useTranslation()
-  const [editing, setEditing] = useState(false)
   const { assignments, resetAssignments } =
     useContext(GenerationContext)
 
-  const handleClick = useCallback((state) => {
-    setEditing(state)
-  }, [])
-
   const handleCancelButtonClick = useCallback(() => {
-    setEditing(false)
     resetAssignments()
   }, [resetAssignments])
 
@@ -38,7 +32,6 @@ function Generation() {
     })
     try{
         await validation()
-        setEditing(false)
         let result = await generationChangeContractPriority()
         console.log("OK",result)
     }
@@ -55,7 +48,7 @@ function Generation() {
 
   return (
     <>
-      <GenerationDashboard editing={editing} handleCancelButtonClick={handleCancelButtonClick} validateChanges={validateChanges} handleClick={handleClick}/>
+      <GenerationDashboard handleCancelButtonClick={handleCancelButtonClick} validateChanges={validateChanges} />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, { useCallback, useContext } from 'react'
 import SectionTitle from './SectionTitle'
 import GenerationAssigmentSection from './GenerationAssignmentSection'
 import GenerationInvestmentSection from './GenerationInvestmentSection'
@@ -6,11 +6,6 @@ import { Button, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GenerationContext from './context/GenerationContext'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-
-import dayjs from 'dayjs'
-import 'dayjs/locale/ca'
-import 'dayjs/locale/es'
 
 const useStyles = makeStyles({
   footer: {
@@ -29,18 +24,17 @@ const useStyles = makeStyles({
 function GenerationDashboard({
   editing,
   handleCancelButtonClick,
-  validateChanges,
-  handleClick
+  validateChanges
 }) {
-  
   const { t } = useTranslation()
   const classes = useStyles()
-  const { assignments, investments } = useContext(GenerationContext)
+  const { editingPriority, assignments, investments } =
+    useContext(GenerationContext)
 
   const ActionSection = useCallback(() => {
     return (
       <>
-        {editing ? (
+        {editingPriority() ? (
           <Grid item container className={classes.buttons}>
             <Button
               id="cancel-action-btn"
@@ -57,27 +51,10 @@ function GenerationDashboard({
               {t('VALIDATE_CHANGES')}
             </Button>
           </Grid>
-        ) : (
-          <Grid item container className={classes.buttons}>
-            <Button
-              id="change-priority-btn"
-              variant="contained"
-              className={classes.button}
-              onClick={() => handleClick(true)}>
-              {t('CHANGE_PRIORITY')}
-            </Button>
-          </Grid>
-        )}
+        ) : null}
       </>
     )
-  }, [
-    t,
-    editing,
-    classes,
-    handleClick,
-    handleCancelButtonClick,
-    validateChanges
-  ])
+  }, [t, classes, editingPriority, handleCancelButtonClick, validateChanges])
 
   return (
     <>
