@@ -56,7 +56,7 @@ const AccordionDetails = withStyles((theme) => ({
   }
 }))(MuiAccordionDetails)
 
-export default function CustomizedAccordions({ title, sections = [] }) {
+export default function DropDownMenu({ title, sections = [] }) {
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState('')
 

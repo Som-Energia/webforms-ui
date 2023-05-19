@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -67,35 +67,51 @@ const Indexada = (props) => {
   const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
   const [kCoefficient, setKCoefficient] = useState('')
 
+  console.log("TARIFF INDEXED", isTariffIndexed)
+
   const handlers = {
     SHOW_INSPECTOR: () => {
       setShowInspector(!showInspector)
     }
   }
 
-  const sectionsJson = [
-    {
-      title: t('INDEXED_GENERAL_CONDITIONS'),
-      text: t('INDEXED_GENERAL_CONDITIONS_TEXT')
-    },
-    {
-      title: t('INDEXED_SPECIFIC_CONDITIONS'),
-      text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
-    },
-    {
-      title: t('INDEXED_MARGE'),
-      text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
-    },
-    {
-      title: t('INDEXED_DURADA'),
-      text: t('INDEXED_DURADA_TEXT', { tariff: hasTargetTariff })
-    },
-    { title: t('INDEXED_DESESTIMENT'), text: t('INDEXED_DESESTIMENT_TEXT') },
-    {
-      title: t('INDEXED_PERSONAL_DATA_PROTECTION'),
-      text: t('INDEXED_PERSONAL_DATA_PROTECTION_TEXT')
+  const sectionsJson = useMemo(() => {
+
+    let sectionsJson = [
+      {
+        title: t('GENERAL_CONDITIONS'),
+        text: t('GENERAL_CONDITIONS_TEXT')
+      }
+    ]
+
+    if(!isTariffIndexed){
+      sectionsJson.push({
+        title: t('INDEXED_SPECIFIC_CONDITIONS'),
+        text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
+      },
+      {
+        title: t('INDEXED_MARGE'),
+        text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
+      }
+      )
     }
-  ]
+
+    sectionsJson.push(
+      {
+        title: t('DURADA'),
+        text: t('DURADA_TEXT', { tariff: hasTargetTariff })
+      },
+      { title: t('DESESTIMENT'), text: t('DESESTIMENT_TEXT') },
+      {
+        title: t('PERSONAL_DATA_PROTECTION'),
+        text: t('PERSONAL_DATA_PROTECTION_TEXT')
+      }
+    )
+
+    return sectionsJson
+  },[isTariffIndexed])
+
+
 
   const initialValues = {
     terms_accepted: false,
@@ -401,7 +417,7 @@ const Indexada = (props) => {
                 <Grid item xs={3}>
                   <DropDownMenu
                     title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
-                    sections={sectionsJson}
+                      sections={sectionsJson}
                   />
                 </Grid>
               </Grid>
