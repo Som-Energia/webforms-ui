@@ -41,7 +41,7 @@ describe('Test that it correctly renders', () => {
   const mockSetFieldValues = jest.fn()
   const mockInitialValues = {
     terms_accepted: false,
-    indexed_terms_accepted: false,
+    particular_contract_terms_accepted: false,
     indexed_legal_terms_accepted: false
   }
 

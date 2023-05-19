@@ -99,7 +99,7 @@ const Indexada = (props) => {
 
   const initialValues = {
     terms_accepted: false,
-    indexed_terms_accepted: false,
+    particular_contract_terms_accepted: false,
     indexed_legal_terms_accepted: false
   }
 
@@ -132,9 +132,13 @@ const Indexada = (props) => {
   const handlePost = (data) => {
     let params = {
       token: token,
-      terms_accepted: data.terms_accepted,
-      indexed_terms_accepted: data.indexed_terms_accepted,
-      indexed_legal_terms_accepted: data.indexed_legal_terms_accepted
+      general_contract_terms_accepted: data.terms_accepted,
+      particular_contract_terms_accepted: data.particular_contract_terms_accepted
+     }
+
+    if (!isTariffIndexed) {
+      params.indexed_specific_terms_accepted = data.terms_accepted
+      params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
     }
 
     setLoading(true)
@@ -180,16 +184,21 @@ const Indexada = (props) => {
     Yup.object().shape({}),
     Yup.object().shape({}),
     Yup.object().shape({
+      isTariffIndexed: Yup.string()
+        .isTariffIndexed,
       terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS')),
-      indexed_terms_accepted: Yup.bool()
+      particular_contract_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS')),
-      indexed_legal_terms_accepted: Yup.bool()
-        .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS'))
+      indexed_legal_terms_accepted: Yup.bool().when([], {
+        is: () => !isTariffIndexed,
+        then: Yup.bool().required(t('UNACCEPTED_TERMS')) &&
+              Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
+        otherwise: Yup.bool().notRequired(),
     })
+      })
   ]
 
   if (!contractJSON.name || !contractJSON.cups) {

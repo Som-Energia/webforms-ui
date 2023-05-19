@@ -26,7 +26,7 @@ const IndexedReview = (props) => {
 
   const handleIndexadaTermsAccepted = (data) => {
     setIndexadaTermsAccepted(data)
-    setFieldValue('indexed_terms_accepted', data)
+    setFieldValue('particular_contract_terms_accepted', data)
   }
 
   const handleIndexadaLegalTermsAccepted = (data) => {

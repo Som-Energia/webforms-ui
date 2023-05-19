@@ -234,11 +234,11 @@ const IndexedReviewData = (props) => {
             control={
               <Checkbox
                 id="change-tariff-indexada-terms-check"
-                name="indexed_terms_accepted"
+                name="particular_contract_terms_accepted"
                 onClick={() =>
                   handleIndexadaTermsAccepted(!indexadaTermsAccepted)
                 }
-                checked={values.indexed_terms_accepted}
+                checked={values.particular_contract_terms_accepted}
                 color="primary"
               />
             }
