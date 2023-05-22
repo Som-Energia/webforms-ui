@@ -527,6 +527,17 @@ const Contract = (props) => {
     <IBAN />,
     <Review />
   ]
+  const memberIdentifierPage = 0
+  const cupsPage = 1
+  const supplyPointPage = 2
+  const powerFarePage = 3
+  const selfConsumptionPage = 4
+  const selfConsumptionDetailsPage = 5
+  const holderIdentifierPage = 6
+  const personalDataPage = 7
+  const voluntaryCentPage = 8
+  const ibanPage = 9
+  const reviewPage = 10
 
   const maxStepNumber = steps.length
 
@@ -534,27 +545,27 @@ const Contract = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
-        {(showAllSteps || activeStep === 0) && <MemberIdentifier {...props} is30ContractEnabled={is30ContractEnabled}/>}
-        {(showAllSteps || activeStep === 1) && <CUPS {...props} />}
-        {(showAllSteps || activeStep === 2) && <SupplyPoint {...props} />}
-        {(showAllSteps || activeStep === 3) && (
+        {(showAllSteps || activeStep === memberIdentifierPage) && <MemberIdentifier {...props} is30ContractEnabled={is30ContractEnabled}/>}
+        {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
+        {(showAllSteps || activeStep === supplyPointPage) && <SupplyPoint {...props} />}
+        {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
             rates={rates}
             is30ContractEnabled={is30ContractEnabled}
             {...props}
           />
         )}
-        {(showAllSteps || activeStep === 4) && <SelfConsumption {...props} />}
-        {(showAllSteps || activeStep === 5) && (
+        {(showAllSteps || activeStep === selfConsumptionPage) && <SelfConsumption {...props} />}
+        {(showAllSteps || activeStep === selfConsumptionDetailsPage) && (
           <SelfConsumptionDetails {...props} />
         )}
-        {(showAllSteps || activeStep === 6) && <HolderIdentifier {...props} />}
-        {(showAllSteps || activeStep === 7) && (
+        {(showAllSteps || activeStep === holderIdentifierPage) && <HolderIdentifier {...props} />}
+        {(showAllSteps || activeStep === personalDataPage) && (
           <PersonalData url={url} {...props} />
         )}
-        {(showAllSteps || activeStep === 8) && <VoluntaryCent {...props} />}
-        {(showAllSteps || activeStep === 9) && <IBAN {...props} />}
-        {(showAllSteps || activeStep === 10) && <Review {...props} />}
+        {(showAllSteps || activeStep === voluntaryCentPage) && <VoluntaryCent {...props} />}
+        {(showAllSteps || activeStep === ibanPage) && <IBAN {...props} />}
+        {(showAllSteps || activeStep === reviewPage) && <Review {...props} />}
       </>
     )
   }
@@ -562,25 +573,27 @@ const Contract = (props) => {
   const nextStep = (props) => {
     let next = activeStep + 1
 
-    if (activeStep === 3 && props.values.contract.has_service === false) {
-      next++
-      next++
+    // If the contract has no service, do not ask about self consumption
+    if (activeStep === powerFarePage && props.values.contract.has_service === false) {
+      next = holderIdentifierPage
     }
 
+    // If no self consumption, do not ask for details
     if (
-      activeStep === 4 &&
+      activeStep === selfConsumptionPage &&
       props.values.self_consumption.have_installation === false
     ) {
-      next++
+      next = holderIdentifierPage
     }
 
+    // If the owner is the member, do not ask personal data
     if (
-      activeStep === 6 &&
+      activeStep === holderIdentifierPage &&
       props.values.holder.vat === props.values.member.vat &&
       props.values.holder.isphisical
     ) {
-      next++
       props.setFieldValue('privacy_policy_accepted', true)
+      next = voluntaryCentPage
     }
 
     const last = maxStepNumber
@@ -595,21 +608,24 @@ const Contract = (props) => {
 
   const prevStep = (props) => {
     let prev = activeStep - 1
+    // Back from holderIdentifier, depending on having selfConsumption
+    // but always jumping selfConsumptionDetails
     if (
-      activeStep === 6 &&
+      activeStep === holderIdentifierPage &&
       props.values.self_consumption.have_installation === false
     ) {
-      prev--
-      props.values.contract.has_service === false && prev--
+      prev = props.values.contract.has_service === false ? powerFarePage : selfConsumptionPage
     }
 
+    // Back from voluntaryCent, depending on whether the user
+    // had to entry the personal data
     if (
-      activeStep === 8 &&
+      activeStep === voluntaryCentPage &&
       props.values.holder.vat === props.values.member.vat &&
       props.values.holder.isphisical
     ) {
-      prev--
       props.setFieldValue('privacy_policy_accepted', false)
+      prev = holderIdentifierPage
     }
     setActiveStep(Math.max(0, prev))
     if (completed) {
