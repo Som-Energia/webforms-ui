@@ -271,7 +271,7 @@ const Indexada = (props) => {
                                     isTariff20={isTariff20}
                                     isTariffIndexed={isTariffIndexed}
                                     desc={t(isTariffIndexed
-                                      ? 'PERIODES_INTRO_BODY'
+                                      ? 'PERIODS_INTRO_BODY'
                                       : 'INDEXED_INTRO_BODY'
                                       , {
                                       url_general_conditions: t(
@@ -297,8 +297,8 @@ const Indexada = (props) => {
                                     desc={
                                       isTariffIndexed
                                       ? t(isTariff20
-                                        ? 'PERIODES_IMPORTANT_INFO_BODY'
-                                        : 'PERIODES_IMPORTANT_INFO_BODY_30',
+                                        ? 'PERIODS_IMPORTANT_INFO_BODY'
+                                        : 'PERIODS_IMPORTANT_INFO_BODY_30',
                                       {
                                         tariff: hasTargetTariff,
                                         url_tariff_web: t(
@@ -397,11 +397,11 @@ const Indexada = (props) => {
                                   <Success
                                     showHeader={false}
                                     title={t(isTariffIndexed
-                                      ? 'PERIODES_SUCCESS_PAGE_TITLE'
+                                      ? 'PERIODS_SUCCESS_PAGE_TITLE'
                                       : 'INDEXED_SUCCESS_PAGE_TITLE')}
                                     subtitle={hasTargetTariff}
                                     description={t(isTariffIndexed
-                                      ? 'PERIODES_SUCCESS_PAGE_TITLE'
+                                      ? 'PERIODS_SUCCESS_PAGE_DESC'
                                       : 'INDEXED_SUCCESS_PAGE_DESC')}
                                   />
                                 ) : (
