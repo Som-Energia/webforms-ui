@@ -27,6 +27,7 @@ import MemberIdentifier from './Contract/MemberIdentifier'
 import CUPS from './Contract/CUPS'
 import SupplyPoint from './Contract/SupplyPoint'
 import PowerFare from './Contract/PowerFare'
+import TariffMode from './Contract/TariffMode'
 import SelfConsumption from './Contract/SelfConsumption'
 import SelfConsumptionDetails from './Contract/SelfConsumptionDetails'
 import HolderIdentifier from './Contract/HolderIdentifier'
@@ -182,6 +183,7 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
+        isIndexed: Yup.boolean().required(),
         phases: Yup.string().when('has_service', {
           is: false,
           then: Yup.string().required(t('NO_MONOPHASE_CHOICE'))
@@ -519,6 +521,7 @@ const Contract = (props) => {
     <CUPS />,
     <SupplyPoint />,
     <PowerFare rates={rates} is30ContractEnabled={is30ContractEnabled} />,
+    <TariffMode />,
     <SelfConsumption />,
     <SelfConsumptionDetails />,
     <HolderIdentifier />,
@@ -531,13 +534,14 @@ const Contract = (props) => {
   const cupsPage = 1
   const supplyPointPage = 2
   const powerFarePage = 3
-  const selfConsumptionPage = 4
-  const selfConsumptionDetailsPage = 5
-  const holderIdentifierPage = 6
-  const personalDataPage = 7
-  const voluntaryCentPage = 8
-  const ibanPage = 9
-  const reviewPage = 10
+  const tariffModePage = 4
+  const selfConsumptionPage = 5
+  const selfConsumptionDetailsPage = 6
+  const holderIdentifierPage = 7
+  const personalDataPage = 8
+  const voluntaryCentPage = 9
+  const ibanPage = 10
+  const reviewPage = 11
 
   const maxStepNumber = steps.length
 
@@ -555,6 +559,7 @@ const Contract = (props) => {
             {...props}
           />
         )}
+        {(showAllSteps || activeStep === tariffModePage) && <TariffMode {...props}/>}
         {(showAllSteps || activeStep === selfConsumptionPage) && <SelfConsumption {...props} />}
         {(showAllSteps || activeStep === selfConsumptionDetailsPage) && (
           <SelfConsumptionDetails {...props} />
@@ -574,7 +579,7 @@ const Contract = (props) => {
     let next = activeStep + 1
 
     // If the contract has no service, do not ask about self consumption
-    if (activeStep === powerFarePage && props.values.contract.has_service === false) {
+    if (activeStep === tariffModePage && props.values.contract.has_service === false) {
       next = holderIdentifierPage
     }
 
@@ -614,7 +619,7 @@ const Contract = (props) => {
       activeStep === holderIdentifierPage &&
       props.values.self_consumption.have_installation === false
     ) {
-      prev = props.values.contract.has_service === false ? powerFarePage : selfConsumptionPage
+      prev = props.values.contract.has_service === false ? tariffModePage : selfConsumptionPage
     }
 
     // Back from voluntaryCent, depending on whether the user
@@ -690,7 +695,8 @@ const Contract = (props) => {
       power3: '',
       phases: '',
       fare: '',
-      moreThan15Kw: false
+      moreThan15Kw: false,
+      isIndexed: false,
     },
     member: {
       number: '',
