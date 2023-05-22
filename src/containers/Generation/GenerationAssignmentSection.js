@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react'
+import React, { useCallback, useContext, useMemo, useState } from 'react'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
@@ -7,9 +7,9 @@ import GenerationTable from './GenerationTable'
 import { useTranslation } from 'react-i18next'
 import { withStyles } from '@material-ui/core/styles'
 import dayjs from 'dayjs'
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import IconButton from '@material-ui/core/IconButton';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import IconButton from '@material-ui/core/IconButton'
 import { Box } from '@material-ui/core'
 
 function createData(
@@ -35,13 +35,14 @@ const StyledTableCell = withStyles(() => ({
 }))(TableCell)
 
 export default function GenerationAssigmentSection({ data }) {
+  const [editEnabled, setEditEnabled] = useState(false)
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
   const { getPriority, changeAssigmentPriority } = useContext(GenerationContext)
 
   const columns = useMemo(
     () => [
-      "",
+      '',
       t('N_CONTRACT'),
       t('ADDRESS'),
       t('PRIORITY'),
@@ -51,25 +52,48 @@ export default function GenerationAssigmentSection({ data }) {
     [t]
   )
 
-  const handleChangeSort = useCallback((index, moveAction) => {
-    if((moveAction === 'up' && index - 1 < 0) || (moveAction === 'down' && index + 1 >= rows.length) ){
-      return false
-    } 
-    const newIndex = moveAction === 'up' ? index-1 : index+1;
-    changeAssigmentPriority(rows[index], rows[newIndex]) 
-  },[changeAssigmentPriority,rows])
+  const handleChangeSort = useCallback(
+    (index, moveAction) => {
+      if (
+        (moveAction === 'up' && index - 1 < 0) ||
+        (moveAction === 'down' && index + 1 >= rows.length)
+      ) {
+        return false
+      }
+      const newIndex = moveAction === 'up' ? index - 1 : index + 1
+      changeAssigmentPriority(rows[index], rows[newIndex])
+    },
+    [changeAssigmentPriority, rows]
+  )
 
+  const has_duplicate_priority_values = useCallback(() => {
+    let res = new Set(data.map((item) => item['priority'])).size !== data.length
+    console.log("hi ha repes", res)
+    return res
+  },[data])
 
   return (
     <GenerationTable id="assignment-table" columns={columns}>
       <TableBody>
-        {rows.map((row,index) => (
+        {rows.map((row, index) => (
           <TableRow key={row.contract}>
             <StyledTableCell>
-              <Box>
-                <IconButton id={'change-priority-up ' + row.contract} size='small' onClick={() => handleChangeSort(index, 'up')} ><ArrowDropUpIcon/></IconButton>
-                <IconButton id={'change-priority-down ' + row.contract} size='small' onClick={() => handleChangeSort(index, 'down')} ><ArrowDropDownIcon/></IconButton>
-              </Box>
+              {!has_duplicate_priority_values() ? (
+                <Box>
+                  <IconButton
+                    id={'change-priority-up ' + row.contract}
+                    size="small"
+                    onClick={() => handleChangeSort(index, 'up')}>
+                    <ArrowDropUpIcon />
+                  </IconButton>
+                  <IconButton
+                    id={'change-priority-down ' + row.contract}
+                    size="small"
+                    onClick={() => handleChangeSort(index, 'down')}>
+                    <ArrowDropDownIcon />
+                  </IconButton>
+                </Box>
+              ) : null}
             </StyledTableCell>
             <StyledTableCell>{row.contract}</StyledTableCell>
             <StyledTableCell>{row.contractAddress}</StyledTableCell>
