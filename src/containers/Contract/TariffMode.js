@@ -4,11 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
-import { FormHelperText } from '@material-ui/core'
 
 const TariffMode = (props) => {
   const classes = useStyles()
