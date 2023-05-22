@@ -26,8 +26,8 @@ Launches the Jest test runner in the interactive watch mode.
 npm test
 ```
 
-Launches the Cypress test runner.
+Launches the Cypress test runner. Cypress requires you to run `npm start` in parallel.
 
 ```sh
-npm cypress
+npm run cypress
 ```
