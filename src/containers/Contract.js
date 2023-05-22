@@ -183,7 +183,6 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
-        isIndexed: Yup.boolean().required(),
         phases: Yup.string().when('has_service', {
           is: false,
           then: Yup.string().required(t('NO_MONOPHASE_CHOICE'))
@@ -394,6 +393,11 @@ const Contract = (props) => {
               )
             }
           })
+      })
+    }),
+    Yup.object().shape({
+      contract: Yup.object().shape({
+        isIndexed: Yup.bool().required()
       })
     }),
     Yup.object().shape({
