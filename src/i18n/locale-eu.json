@@ -581,4 +581,22 @@
     "TARIFF_CHARACTERISTICS_30_URL": "https://eu.support.somenergia.coop/article/1146-3-0td-tarifa?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "TARIFF_CHARACTERISTICS_INDEX_20_URL": "https://eu.support.somenergia.coop/article/1323-la-tarifa-2-0td-indexada",
     "TARIFF_CHARACTERISTICS_INDEX_30_URL": "https://eu.support.somenergia.coop/article/1326-la-tarifa-3-0td-indexada"
+    "TARIFF_MODE_TITLE": "Tarifa",
+    "TARIFF_MODE_QUESTION": "Zein tarifa kontratatu nahi duzu?",
+    "TARIFF_MODE_PERIODS_20TD_LABEL": "Ordutegi-tarteen 2.0TD tarifa",
+    "TARIFF_MODE_PERIODS_20TD_DESC": "<p>Tarifa honek prezio desberdineko bi ordutegi-tarte ezartzen ditu potentziarako, <b> eta prezio desberdineko beste hiru ordutegi-tarte energiarako</b>.  Gure prezioak <a target=\"_blank\" href=\"{{prices_url}}\">webguneko tarifen atalean</a> daude ikusgai.</p><p><a target=\"_blank\" href=\"{{periods_url}}\">Ordutegi-tarteen 2.0TD tarifari</a> buruzko informazio gehiago aurkituko duzu hemen.</p>",
+    "TARIFF_MODE_20TD_PRICES_URL": "https://www.somenergia.coop/eu/elektrizitate-tarifak/#tarifa20TD",
+    "TARIFF_MODE_20TD_PERIODS_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa",
+    "TARIFF_MODE_PERIODS_30TD_LABEL": "Ordutegi-tarteen 3.0TD tarifa",
+    "TARIFF_MODE_PERIODS_30TD_DESC": "<p>Tarifa honetan, erabilitako energiagatik ordaindu beharreko prezioak finkoak dira ordutegi-tarte bakoitzerako. <b>Prezio desberdineko 6 ordutegi-tarte daude</b>, eskualdearen (Penintsula, Balearrak edo Kanariak) eta hilabetearen arabera aplikatzen direnak.  Prezio eta ordutegi guztiak <a  target=\"_blank\" href=\"{{prices_url}}\">webguneko tarifen atalean</a> kontsulta daitezke.</p><p>Laguntza Gunean <a target=\"_blank\" href=\"{{periods_url}}\">ordutegi-tarteen 3.0TD tarifari</a> buruzko informazio gehiago aurkituko duzu ere.</p>",
+    "TARIFF_MODE_30TD_PRICES_URL": "https://www.somenergia.coop/eu/elektrizitate-tarifak/#tarifa30TD",
+    "TARIFF_MODE_30TD_PERIODS_URL": "https://eu.support.somenergia.coop/article/1146-3-0td-tarifa",
+    "TARIFF_MODE_INDEXED_20TD_LABEL": "Tarifa 2.0TD indexatua",
+    "TARIFF_MODE_INDEXED_30TD_LABEL": "Tarifa 3.0TD indexatua",
+    "TARIFF_MODE_INDEXED_DESC": "<p>Tarifa aldakor bat da, pertsona eta enpresa kontsumitzaileei energiak eguneko handizkako merkatuan (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> Penintsulan eta Red Eléctrica Balearretan eta Kanarietan) duen prezioa zuzenean aplikatzen diena. Prezio-bariazioak berehala egozten zaizkie erabiltzaileei. Horrenbestez, <b>prezioa desberdina da egunero eta orduero</b> (energiak eguneko merkatuan dituen bariazioen arabera).</p><p>Tarifa indexatua kalkulatzeko metodoa eta tarifaren aldagai guztiak <a target='_blank' href=\"{{indexed_url}}\">esteka honetan</a> aurkituko dituzu.</p>",
+    "TARIFF_MODE_INDEXED_URL":"https://eu.support.somenergia.coop/article/1275-tarifa-indexatua",
+    "TARIFF_MODE_TARIFF_COMPARISON": "Laguntza Gunean <a target='_blank' href=\"{{tariff_comparison_url}}\">bi tarifen konparazio</a> bat aurkituko duzu.",
+    "TARIFF_MODE_TARIFF_COMPARISON_URL":"",
+    "UNKNOWN_FIELD": "Campo desconocido"
 }
+
