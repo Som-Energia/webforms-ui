@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
+import Typography from '@material-ui/core/Typography'
 
 const TariffMode = (props) => {
   const classes = useStyles()
@@ -29,17 +30,48 @@ const TariffMode = (props) => {
           options={[
             {
               value: false,
-              label: t('TARIFF_MODE_PERIODS_LABEL'),
-              description: t('TARIFF_MODE_PERIODS_DESC')
+              label: props.values.contract.moreThan15Kw?
+                t('TARIFF_MODE_PERIODS_30TD_LABEL') : t('TARIFF_MODE_PERIODS_20TD_LABEL'),
+              description: props.values.contract.moreThan15Kw?
+                t('TARIFF_MODE_PERIODS_30TD_DESC', {
+                  prices_url: t(
+                    'TARIFF_MODE_30TD_PRICES_URL'
+                  ),
+                  periods_url: t(
+                    'TARIFF_MODE_30TD_PERIODS_URL'
+                  )
+                })
+                :
+                t('TARIFF_MODE_PERIODS_20TD_DESC', {
+                  prices_url: t(
+                    'TARIFF_MODE_20TD_PRICES_URL'
+                  ),
+                  periods_url: t(
+                    'TARIFF_MODE_20TD_PERIODS_URL'
+                  )
+                })
             },
             {
               value: true,
-              label: t('TARIFF_MODE_INDEXED_LABEL'),
-              description: t('TARIFF_MODE_INDEXED_DESC')
+              label: props.values.contract.moreThan15Kw?
+                t('TARIFF_MODE_INDEXED_30TD_LABEL') : t('TARIFF_MODE_INDEXED_20TD_LABEL'),
+              description: t('TARIFF_MODE_INDEXED_DESC', {
+                indexed_url: t(
+                  'TARIFF_MODE_INDEXED_URL'
+                )
+              })
             }
           ]}
         />
       </Box>
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_TARIFF_COMPARISON', {
+          tariff_comparison_url: t(
+            'TARIFF_MODE_TARIFF_COMPARISON_URL'
+          )})
+        }}
+      />
     </>
   )
 }

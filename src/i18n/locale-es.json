@@ -585,7 +585,7 @@
     "TARIFF_MODE_TITLE": "Tarifa",
     "TARIFF_MODE_QUESTION": "¿Qué tarifa quieres contratar?",
     "TARIFF_MODE_PERIODS_20TD_LABEL": "Tarifa 2.0TD periodos",
-    "TARIFF_MODE_PERIODS_20TD_DESC": "<p>Esta tarifa tiene dos periodos horarios para la potencia con precios diferentes y <b>tres periodos horarios para la energía con precios también diferentes</b>. Puedes consultar nuestros precios en el <a target=\"_blank\" href=\"{{prices_url}}\">apartado de tarifas del web</a>.</p><p>Puedes consultar aquí más información sobre <a target=\"_blank\" href=\"{{periods_url}}\">la tarifa 2.0TD periodos.</p>",
+    "TARIFF_MODE_PERIODS_20TD_DESC": "<p>Esta tarifa tiene dos periodos horarios para la potencia con precios diferentes y <b>tres periodos horarios para la energía con precios también diferentes</b>. Puedes consultar nuestros precios en el <a target=\"_blank\" href=\"{{prices_url}}\">apartado de tarifas del web</a>.</p><p>Puedes consultar aquí más información sobre <a target=\"_blank\" href=\"{{periods_url}}\">la tarifa 2.0TD periodos</a>.</p>",
     "TARIFF_MODE_20TD_PRICES_URL": "https://www.somenergia.coop/es/tarifas-de-electricidad/#tarifa20TD",
     "TARIFF_MODE_20TD_PERIODS_URL": "https://es.support.somenergia.coop/article/1004-la-tarifa-2-0td",
     "TARIFF_MODE_PERIODS_30TD_LABEL": "Tarifa 3.0TD periodos",
@@ -594,6 +594,9 @@
     "TARIFF_MODE_30TD_PERIODS_URL": "https://es.support.somenergia.coop/article/1116-la-tarifa-3-0td",
     "TARIFF_MODE_INDEXED_20TD_LABEL": "Tarifa 2.0TD indexada",
     "TARIFF_MODE_INDEXED_30TD_LABEL": "Tarifa 3.0TD indexada",
-    "TARIFF_MODE_INDEXED_DESC": "<p>Se trata de una tarifa variable que traslada directamente a las personas y empresas consumidoras el precio de la energía en el mercado mayorista diario (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> para la Península y Red Eléctrica para Baleares y Canarias). Así pues, las variaciones de precio que hay se repercuten en el momento a las usuarias. Por lo tanto, <b>cada día y cada hora el precio es diferente</b> (en función de las variaciones del precio de la energía en el mercado diario).</p><p>Puedes consultar el método de cálculo de la tarifa indexada y todas sus variables en este <a target='_blank' href='https://es.support.somenergia.coop/article/1273-la-tarifa-indexada'>enlace</a>.</p>",
+    "TARIFF_MODE_INDEXED_DESC": "<p>Se trata de una tarifa variable que traslada directamente a las personas y empresas consumidoras el precio de la energía en el mercado mayorista diario (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> para la Península y Red Eléctrica para Baleares y Canarias). Así pues, las variaciones de precio que hay se repercuten en el momento a las usuarias. Por lo tanto, <b>cada día y cada hora el precio es diferente</b> (en función de las variaciones del precio de la energía en el mercado diario).</p><p>Puedes consultar el método de cálculo de la tarifa indexada y todas sus variables en este <a target='_blank' href=\"{{indexed_url}}\">enlace</a>.</p>",
+    "TARIFF_MODE_INDEXED_URL":"https://es.support.somenergia.coop/article/1273-la-tarifa-indexada",
+    "TARIFF_MODE_TARIFF_COMPARISON": "En el Centro de Ayuda puedes ver una <a target='_blank' href=\"{{tariff_comparison_url}}\">comparación de las dos tarifas</a>.",
+    "TARIFF_MODE_TARIFF_COMPARISON_URL":"",
     "UNKNOWN_FIELD": "Campo desconocido"
 }

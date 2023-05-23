@@ -88,6 +88,10 @@ const Chooser = (props) => {
   const [selectedOption, setSelectedOption] = useState(value)
 
   const handleClick = (event, value) => {
+    // Do not handle here click if a link inside
+    // the description is clicked
+    if (event.target.tagName==='A') return
+
     event.preventDefault()
     if (!canBeEmpty || selectedOption !== value) {
       setSelectedOption(value)
