@@ -394,6 +394,8 @@
     "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">Máis información sobre os períodos das potencias da tarifa {{tariff}}</a>.</p>",
     "POWER_PERIODS_20TD_MORE_INFO_URL": "https://gl.support.somenergia.coop/article/1006-a-tarifa-2-0td",
     "POWER_PERIODS_30TD_MORE_INFO_URL": "https://gl.support.somenergia.coop/article/1142-a-tarifa-3-0td",
+    "POWER_INDEXED_20TD_MORE_INFO_URL": "https://gl.support.somenergia.coop/article/1328-a-tarifa-2-0td-indexada",
+    "POWER_INDEXED_30TD_MORE_INFO_URL": "https://gl.support.somenergia.coop/article/1327-a-tarifa-3-0td-indexada",
     "NEW_TOLLS_AND_TARIFF_INFO": "A consecuencia do cambio de peaxes e tarifas proposto pola CNMC, podemos mudar as potencias contratadas sen custo desde o 1 de xuño de 2021 até o 1 de xuño de 2022, aínda que durante os 12 meses anteriores modificaras o teu contrato, e sempre que non se trate dun aumento de potencia.",
     "UPLOAD_TOO_LARGE": "O ficheiro supera o límite de tamaño",
     "UNAUTHORIZED": "A sesión caducou. Recomendámosche que volvas acceder desde a listaxe de contratos e que o volvas tentar.",

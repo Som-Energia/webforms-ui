@@ -399,6 +399,8 @@
     "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">{{tariff}} tarifaren potentzien aldiei buruzko informazio gehiago</a>.</p>",
     "POWER_PERIODS_20TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa",
     "POWER_PERIODS_30TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1146-3-0td-tarifa",
+    "POWER_INDEXED_20TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1329-tarifa-2-0td-indexatua",
+    "POWER_INDEXED_30TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1330-tarifa-3-0td-indexatua",
     "NEW_TOLLS_AND_TARIFF_INFO": "MLBNk proposatutako bidesari- eta tarifa-aldaketaren ondorioz, kontratatutako potentziak doan alda ditzakegu 2021eko ekainaren 1etik 2022ko ekainaren 1era arte, aurreko 12 hilabeteetan kontratua aldatu badugu ere, baldin eta ez badugu potentzia handitzen.",
     "UPLOAD_TOO_LARGE": "Fitxategiak gehienezko tamaina gainditzen du",
     "UNAUTHORIZED": "Saioa iraungi da. Gomendatzen dizugu kontratu-zerrendatik sartzea eta berriz ere saiatzea.",

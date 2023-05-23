@@ -132,11 +132,14 @@ const PowerFare = (props) => {
             <FormHelperText
               dangerouslySetInnerHTML={{
                 __html: t('POWER_PERIODS_MORE_INFO', {
-                  tariff: values?.contract?.rate,
-                  url: values?.contract?.moreThan15Kw
+                  tariff: values?.tariff,
+                  periods_url: values?.moreThan15Kw
                     ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
-                    : t('POWER_PERIODS_20TD_MORE_INFO_URL')
-                })
+                    : t('POWER_PERIODS_20TD_MORE_INFO_URL'),
+                  indexed_url: values?.moreThan15Kw
+                    ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
+                    : t('POWER_INDEXED_20TD_MORE_INFO_URL')
+                  })
               }}></FormHelperText>
           </Box>
           <Box mt={2} mb={1}>
