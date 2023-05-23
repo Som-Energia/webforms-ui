@@ -79,7 +79,7 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-  const { is30ContractEnabled = false } = props
+  const { is30ContractEnabled = true } = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
