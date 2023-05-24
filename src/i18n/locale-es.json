@@ -264,6 +264,8 @@
     "AVIS_ALTA_DE_SERVEI_DESC": "Quiero darla de alta directamente con Som Energia.",
     "ES_UN_HABITATGE": "¿Es una vivienda?",
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/252-cual-es-mi-numero-de-cnae\">CNAE de vuestra actividad económica</a>.",
+    "CADASTRAL_REFERENCE": "Referencia catastral",
+    "HELP_CADASTRAL_REFERENCE":  "<a target=\"_blank\" href=\"https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCBusqueda.aspx\">Encuentra la referencia catastral aquí</a>.",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificado si ya hay luz con otra comercializadora o es un nuevo punto de suministro sin luz",
     "NO_SUPPLY_POINT_ADDRESS": "No has especificado la <b>dirección</b> del punto de suministro",
     "NO_IS_HOUSING": "No has especificado si la dirección corresponde a una vivienda",

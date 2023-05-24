@@ -719,6 +719,7 @@ const Contract = (props) => {
       is_housing: '',
       cnae: '',
       cnae_valid: false,
+      cadastral_reference: '',
       attachments: [],
       supply_point_accepted: false
     },

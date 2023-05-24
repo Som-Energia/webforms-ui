@@ -30,6 +30,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const CadastralReferenceHelperText = () => {
+  const { t } = useTranslation()
+  return <span dangerouslySetInnerHTML={{
+    __html: t('HELP_CADASTRAL_REFERENCE', {
+        cadastral_reference_url: t(
+        'CADASTRAL_REFERENCE_URL'
+      )
+    })
+  }}/>
+}
+
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
@@ -264,6 +275,25 @@ const SupplyPoint = (props) => {
               helperText={
                 (touched?.supply_point?.cnae &&
                   errors?.supply_point?.cnae_valid) || t('HELP_POPOVER_CNAE')
+              }
+            />
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <TextField
+              id="supply_point_cadastral_reference"
+              name="supply_point.cadastral_reference"
+              label={t('CADASTRAL_REFERENCE')}
+              variant="outlined"
+              fullWidth
+              value={values?.supply_point?.cadastral_reference}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={
+                errors?.supply_point?.cadastral_reference && touched?.supply_point?.cadastral_reference
+              }
+              helperText={
+                (touched?.supply_point?.cadastral_reference &&
+                  errors?.supply_point?.cadastral_reference) || <CadastralReferenceHelperText/>
               }
             />
           </Grid>
