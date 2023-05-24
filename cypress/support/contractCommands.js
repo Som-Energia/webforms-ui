@@ -83,6 +83,14 @@ Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('chooseTariff', (isIndexed) => {
+  cy.get('[data-cy="tariffMode"]')
+    .get(`[data-value="${isIndexed}"]`)
+    .click()
+
+  cy.get('[data-cy=next]').click()
+})
+
 Cypress.Commands.add(
   'enterSelfConsumption',
   (haveSelfConsumption, selfConsumptionData) => {

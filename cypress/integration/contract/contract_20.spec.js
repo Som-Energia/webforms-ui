@@ -35,6 +35,8 @@ describe('Contract', () => {
 
       cy.enterPowerFare(this.data.phase, moreThan15Kw, powers)
 
+      cy.chooseTariff(this.data.isIndexed)
+
       cy.identifyOwner(this.data.member.vat)
 
       cy.enterVoluntaryCent(this.data.holder.voluntaryCent)

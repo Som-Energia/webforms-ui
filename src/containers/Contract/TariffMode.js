@@ -23,9 +23,10 @@ const TariffMode = (props) => {
       <Box mt={3} mb={2}>
         <Chooser
           className={classes.chooserQuestion}
+          name="tariffMode"
           question={t('TARIFF_MODE_QUESTION')}
           onChange={handleChange}
-          value={props.values.contract.isIndexed}
+          value={props?.values?.contract?.isIndexed}
           canBeEmpty={false}
           options={[
             {

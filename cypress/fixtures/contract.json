@@ -37,6 +37,7 @@
     "invalidCups": "ES9803463008824117ZQ",
     "validCups": "ES0021316182488672PV"
   },
+  "isIndexed": false,
   "fare20A": "2.0A",
   "fare21": "2.1DHA",
   "fare30A": "3.0A",

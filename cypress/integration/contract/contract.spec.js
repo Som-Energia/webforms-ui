@@ -26,6 +26,8 @@ describe('Contract', () => {
         powers
       )
 
+      cy.chooseTariff(this.data.isIndexed)
+
       cy.enterSelfConsumption(
         this.data.selfConsumption.have_installation,
         this.data.selfConsumption
@@ -66,6 +68,8 @@ describe('Contract', () => {
       const powers = [this.data.power, this.data.power2]
 
       cy.enterPowerFare(this.data.phase, moreThan15Kw, powers)
+
+      cy.chooseTariff(this.data.isIndexed)
 
       cy.identifyOwner(this.data.member.vat)
 
