@@ -595,7 +595,7 @@
     "TARIFF_MODE_INDEXED_30TD_LABEL": "Tarifa 3.0TD indexatua",
     "TARIFF_MODE_INDEXED_DESC": "<p>Tarifa aldakor bat da, pertsona eta enpresa kontsumitzaileei energiak eguneko handizkako merkatuan (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> Penintsulan eta Red Eléctrica Balearretan eta Kanarietan) duen prezioa zuzenean aplikatzen diena. Prezio-bariazioak berehala egozten zaizkie erabiltzaileei. Horrenbestez, <b>prezioa desberdina da egunero eta orduero</b> (energiak eguneko merkatuan dituen bariazioen arabera).</p><p>Tarifa indexatua kalkulatzeko metodoa eta tarifaren aldagai guztiak <a target='_blank' href=\"{{indexed_url}}\">esteka honetan</a> aurkituko dituzu.</p>",
     "TARIFF_MODE_INDEXED_URL":"https://eu.support.somenergia.coop/article/1275-tarifa-indexatua",
-    "TARIFF_MODE_TARIFF_COMPARISON": "Laguntza Gunean <a target='_blank' href=\"{{tariff_comparison_url}}\">bi tarifen konparazio</a> bat aurkituko duzu.",
+    "TARIFF_MODE_TARIFF_COMPARISON": "Laguntza Gunean <a target='_blank' href=\"{{url}}\">bi tarifen konparazio</a> bat aurkituko duzu.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL":"",
     "UNKNOWN_FIELD": "Campo desconocido"
 }

@@ -68,7 +68,7 @@ const TariffMode = (props) => {
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_TARIFF_COMPARISON', {
-          tariff_comparison_url: t(
+          url: t(
             'TARIFF_MODE_TARIFF_COMPARISON_URL'
           )})
         }}
