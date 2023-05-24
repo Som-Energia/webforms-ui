@@ -16,13 +16,15 @@ Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
 })
 
 Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
-  cy.intercept('GET', '/check/cups/**').as('checkCups')
 
-  cy.get('#cups').clear().type(cups).should('have.value', cups)
+  cy.get('#cups')
+    .clear().type(cups)
+    .should('have.value', cups)
+    // Extra validation is done when bluring so blur before continue
+    .blur()
 
-  cy.wait('@checkCups')
-    .its('response.statusCode')
-    .should('be.oneOf', [200, 304])
+  // Wait for the cups to be validated
+  cy.get('#cups[aria-invalid=false]', { timeout: 2000 })
 
   cy.get(`[data-value="${hasService}"]`).click()
 
