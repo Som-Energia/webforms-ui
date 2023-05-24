@@ -597,6 +597,6 @@
     "TARIFF_MODE_INDEXED_DESC": "<p>Se trata de una tarifa variable que traslada directamente a las personas y empresas consumidoras el precio de la energía en el mercado mayorista diario (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> para la Península y Red Eléctrica para Baleares y Canarias). Así pues, las variaciones de precio que hay se repercuten en el momento a las usuarias. Por lo tanto, <b>cada día y cada hora el precio es diferente</b> (en función de las variaciones del precio de la energía en el mercado diario).</p><p>Puedes consultar el método de cálculo de la tarifa indexada y todas sus variables en este <a target='_blank' href=\"{{indexed_url}}\">enlace</a>.</p>",
     "TARIFF_MODE_INDEXED_URL":"https://es.support.somenergia.coop/article/1273-la-tarifa-indexada",
     "TARIFF_MODE_TARIFF_COMPARISON": "En el Centro de Ayuda puedes ver una <a target='_blank' href=\"{{url}}\">comparación de las dos tarifas</a>.",
-    "TARIFF_MODE_TARIFF_COMPARISON_URL":"",
+    "TARIFF_MODE_TARIFF_COMPARISON_URL":"https://es.support.somenergia.coop/article/1332-comparacion-de-las-tarifas-por-periodos-y-las-indexadas ",
     "UNKNOWN_FIELD": "Campo desconocido"
 }
