@@ -8,28 +8,22 @@ const GenerationContext = createContext({
   modifyContract: () => {}
 })
 
-export const GenerationContextProvider = ({ children, assignmentsJSON, investmentsJSON }) => {
+export const GenerationContextProvider = ({ children, assignmentsJSON, investmentsJSON, propEditingPriority }) => {
   const { t } = useTranslation()
-
-
 
   const pioritiesJSON = useMemo(() => {
     return assignmentsJSON.map((value, index) => {
       return index === 0
-        ? { active: true, value: t('MAIN_PRIORITY'), index: index }
-        : { active: true, value: t('SECONDARY') + index, index: index }
+        ? { active: true, value: t('GENERATION_MAIN_PRIORITY'), index: index }
+        : { active: true, value: t('GENERATION_SECONDARY') + " " + index, index: index }
     })
   }, [t, assignmentsJSON])
 
 
-
+  const [editingPriority, setEditingPriority] = useState(propEditingPriority)
   const [assignments, setAssignments] = useState(assignmentsJSON.sort((a,b) => a.priority - b.priority ))
   const [investments] = useState(investmentsJSON)
   const [priorities] = useState(pioritiesJSON)
-
-  const editingPriority = useCallback(() => {
-    return assignments !== assignmentsJSON
-  },[assignments, assignmentsJSON])
 
   const changeAssigmentPriority = useCallback(
     (origin, dest) => {
@@ -66,6 +60,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
   },[priorities])
 
   const resetAssignments = useCallback(() => {
+    setEditingPriority(false)
     setAssignments(assignmentsJSON)
   }, [assignmentsJSON])
 
@@ -75,6 +70,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       investments,
       priorities,
       editingPriority,
+      setEditingPriority,
       getPriority,
       changeAssigmentPriority,
       resetAssignments
@@ -84,6 +80,7 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       priorities,
       getPriority,
       editingPriority,
+      setEditingPriority,
       investments,
       changeAssigmentPriority,
       resetAssignments

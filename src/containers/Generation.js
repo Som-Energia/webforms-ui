@@ -1,54 +1,46 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import GenerationContext from './Generation/context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import {generationChangeContractPriority} from '../services/api'
+import { generationChangeContractPriority } from '../services/api'
 import GenerationDashboard from './Generation/GenerationDashboard'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
 
-function Generation() {
+function Generation(props) {
   const { language } = useParams()
-  const {i18n } = useTranslation()
-  const { assignments, resetAssignments } =
-    useContext(GenerationContext)
+  const { i18n } = useTranslation()
+  const {token} = props
+  const { assignments, resetAssignments, setEditingPriority } = useContext(GenerationContext)
 
   const handleCancelButtonClick = useCallback(() => {
     resetAssignments()
   }, [resetAssignments])
 
   const validateChanges = useCallback(async () => {
-    const validation = () => new Promise((resolve, reject) => {
-        const search = assignments.reduce((acc, assignment) => {
-            acc[assignment.priority] = ++acc[assignment.priority] || 0;
-            return acc;
-        },{})
-        const duplicities = assignments.filter((assignment) => {
-            return search[assignment.priority]
-        })
-        duplicities.length > 0 ? reject("CACA") : resolve("OK") 
-    })
-    try{
-        await validation()
-        let result = await generationChangeContractPriority()
-        console.log("OK",result)
+    setEditingPriority(false)
+    try {
+      const newAssignments = assignments.map(assignment => assignment.id)
+      let result = await generationChangeContractPriority(newAssignments, token)
+      console.log('OK', result)
+    } catch (error) {
+      console.log('ERROR', error)
     }
-    catch (error){
-        console.log("ERROR",error)
-    }
-  },[assignments])
+  }, [assignments, token, setEditingPriority])
 
   useEffect(() => {
     language && i18n.changeLanguage(language)
     language ? dayjs.locale(language) : dayjs.locale('es')
   }, [language, i18n])
 
-
   return (
     <>
-      <GenerationDashboard handleCancelButtonClick={handleCancelButtonClick} validateChanges={validateChanges} />
+      <GenerationDashboard
+        handleCancelButtonClick={handleCancelButtonClick}
+        validateChanges={validateChanges}
+      />
     </>
   )
 }

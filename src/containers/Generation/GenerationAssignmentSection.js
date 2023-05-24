@@ -10,9 +10,10 @@ import dayjs from 'dayjs'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import IconButton from '@material-ui/core/IconButton'
-import { Box } from '@material-ui/core'
+import { Box, Grow } from '@material-ui/core'
 
 function createData(
+  id,
   contract,
   contractAddress,
   priority,
@@ -20,6 +21,7 @@ function createData(
   annualUseKwh
 ) {
   return {
+    id,
     contract,
     contractAddress,
     priority,
@@ -35,21 +37,33 @@ const StyledTableCell = withStyles(() => ({
 }))(TableCell)
 
 export default function GenerationAssigmentSection({ data }) {
-  const [editEnabled, setEditEnabled] = useState(false)
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
-  const { getPriority, changeAssigmentPriority } = useContext(GenerationContext)
+  const isVisible = {}
+  data.forEach((element, index) => (isVisible[index] = true))
+  const [is_visible, setVisible] = useState(isVisible)
+  const { getPriority, setEditingPriority, changeAssigmentPriority } =
+    useContext(GenerationContext)
 
   const columns = useMemo(
     () => [
-      '',
-      t('N_CONTRACT'),
+      t('GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY'),
+      t('GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT'),
       t('ADDRESS'),
-      t('PRIORITY'),
-      t('LAST_INVOICED'),
-      t('ANNUAL_USE_KWH')
+      t('GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE'),
+      t('GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH')
     ],
     [t]
+  )
+
+  const changeIsVisible = useCallback(
+    (index, newIndex, visible) => {
+      let newVisible = JSON.parse(JSON.stringify(is_visible))
+      newVisible[index] = visible
+      newVisible[newIndex] = visible
+      setVisible(newVisible)
+    },
+    [is_visible]
   )
 
   const handleChangeSort = useCallback(
@@ -61,54 +75,70 @@ export default function GenerationAssigmentSection({ data }) {
         return false
       }
       const newIndex = moveAction === 'up' ? index - 1 : index + 1
-      changeAssigmentPriority(rows[index], rows[newIndex])
+      changeIsVisible(index, newIndex, false)
+
+      setTimeout(() => {
+        setEditingPriority(true)
+        changeAssigmentPriority(rows[index], rows[newIndex])
+        changeIsVisible(index, newIndex, true)
+      }, 200)
     },
-    [changeAssigmentPriority, rows]
+    [changeAssigmentPriority, rows, setEditingPriority, changeIsVisible]
   )
 
   const has_duplicate_priority_values = useCallback(() => {
     let res = new Set(data.map((item) => item['priority'])).size !== data.length
-    console.log("hi ha repes", res)
     return res
-  },[data])
+  }, [data])
 
   return (
     <GenerationTable id="assignment-table" columns={columns}>
       <TableBody>
         {rows.map((row, index) => (
-          <TableRow key={row.contract}>
-            <StyledTableCell>
-              {!has_duplicate_priority_values() ? (
-                <Box>
-                  <IconButton
-                    id={'change-priority-up ' + row.contract}
-                    size="small"
-                    onClick={() => handleChangeSort(index, 'up')}>
-                    <ArrowDropUpIcon />
-                  </IconButton>
-                  <IconButton
-                    id={'change-priority-down ' + row.contract}
-                    size="small"
-                    onClick={() => handleChangeSort(index, 'down')}>
-                    <ArrowDropDownIcon />
-                  </IconButton>
-                </Box>
-              ) : null}
-            </StyledTableCell>
-            <StyledTableCell>{row.contract}</StyledTableCell>
-            <StyledTableCell>{row.contractAddress}</StyledTableCell>
-            <StyledTableCell>{getPriority(row.priority).value}</StyledTableCell>
-            <StyledTableCell>
-              {dayjs(row.contractLastInvoiced.replaceAll('"', '')).format(
-                'DD/MM/YYYY'
-              )}
-            </StyledTableCell>
-            <StyledTableCell>
-              {Number(row.annualUseKwh).toLocaleString('es-ES', {
-                minimumFractionDigits: 2
-              })}
-            </StyledTableCell>
-          </TableRow>
+          <Grow key={row.contract} in={is_visible[index]}>
+            <TableRow>
+              <StyledTableCell size="small">
+                {!has_duplicate_priority_values() ? (
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center">
+                    <IconButton
+                      style={{ visibility: index !== 0 ? 'visible' : 'hidden' }}
+                      size="small"
+                      id={'change-priority-up ' + row.contract}
+                      onClick={() => handleChangeSort(index, 'up')}>
+                      <ArrowDropUpIcon />
+                    </IconButton>
+                    {getPriority(row.priority).value}
+                    <IconButton
+                      style={{
+                        visibility:
+                          index !== rows.length - 1 ? 'visible' : 'hidden'
+                      }}
+                      size="small"
+                      id={'change-priority-down ' + row.contract}
+                      onClick={() => handleChangeSort(index, 'down')}>
+                      <ArrowDropDownIcon />
+                    </IconButton>
+                  </Box>
+                ) : null}
+              </StyledTableCell>
+              <StyledTableCell>{row.contract}</StyledTableCell>
+              <StyledTableCell>{row.contractAddress}</StyledTableCell>
+              <StyledTableCell>
+                {dayjs(row.contractLastInvoiced.replaceAll('"', '')).format(
+                  'DD/MM/YYYY'
+                )}
+              </StyledTableCell>
+              <StyledTableCell>
+                {Number(row.annualUseKwh).toLocaleString('es-ES', {
+                  minimumFractionDigits: 2
+                })}
+              </StyledTableCell>
+            </TableRow>
+          </Grow>
         ))}
       </TableBody>
     </GenerationTable>

@@ -385,7 +385,7 @@ const App = (props) => {
                   path="/:language/investments/investments-kwh/"
                   element={
                     <GenerationContextProvider assignmentsJSON={assignmentsJSON} investmentsJSON={investmentsJSON} >
-                      <Generation {...props} />
+                      <Generation {...props} token={token}/>
                     </GenerationContextProvider>
                   }
                 />
@@ -393,7 +393,7 @@ const App = (props) => {
                   path="/investments/investments-kwh/"
                   element={
                     <GenerationContextProvider assignmentsJSON={assignmentsJSON} investmentsJSON={investmentsJSON} >
-                      <Generation {...props} />
+                      <Generation {...props} token={token}/>
                     </GenerationContextProvider>
                   }
                 />

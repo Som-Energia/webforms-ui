@@ -402,8 +402,13 @@ export const confirmCancelContract = async (data) => {
   })
 }
 
-export const generationChangeContractPriority = async (data) => {
-  return new Promise((resolve, reject) => {
-    resolve(true)
-  })
+export const generationChangeContractPriority = async (data, token) => {
+    return axios({
+      method: 'PUT',
+      url: `/investments/change-assignment-order`,
+      headers: { Authorization: token },
+      data: data
+    }).then((response) => {
+      return response?.data
+    })
 }

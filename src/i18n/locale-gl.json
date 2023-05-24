@@ -615,5 +615,18 @@
     "CONTRACT_PRIVACY_POLICY_TERMS": "Lin e acepto a <a target='_blank' href='{{url}}'>política de privacidade</a> de Som Energia.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/gl/politica-de-privacidade/#formulario-de-contratacion-luz",
     "PROCESS_TYPE_TARIFF_CHANGE": "Modificación de tarifa",
-    "UNKNOWN_FIELD": "Campo desconocido"
+    "UNKNOWN_FIELD": "Campo desconocido",
+    "GENERATION_MAIN_PRIORITY": "Principal",
+    "GENERATION_SECONDARY": "Secundario",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT": "Núm de contrato",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY": "Prioridade",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE": "Última data de facturación",
+    "GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH": "Uso anual de kWh",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_N_INVESTMENT": "Núm Aportación",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_INVESTED_AMOUNT": "Importe invertido",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_ENERGY_ACTIONS": "Acciones energéticas",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE ": "Fecha de compra",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE ": "Fecha de activación",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT ": "Cantidad amortizada",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Fecha de finalización"
 }
