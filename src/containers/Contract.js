@@ -177,7 +177,7 @@ const Contract = (props) => {
           .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL'))
+          .oneOf([true], t('CUPS_VERIFY_LABEL')),
       })
     }),
     Yup.object().shape({

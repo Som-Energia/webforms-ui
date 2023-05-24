@@ -396,7 +396,7 @@
     "API_SERVER_OFFLINE_DETAILS": "Baliteke mantentze-lanak egiten aritzea. Saiatu berriro geroago. Barkatu eragozpenak.",
     "MENOR_IGUAL_A_15KW_CONTRACTACIO": "15 kW-ko edo hortik beherako potentzia",
     "NO_POWER_INCREASING": "Aldi honetako potentzia ezin da aurreko aldikoa baino txikiagoa izan",
-    "POWER_PERIODS_MORE_INFO": "<p><a href=\"{{url}}\" target=\"_blank\">{{tariff}} tarifaren potentzien aldiei buruzko informazio gehiago</a>.</p>",
+    "POWER_PERIODS_MORE_INFO": "{{tariff}} tarifako (ordutegi-tarteen <a href=\"{{periods_url}}\" target=\"_blank\">araberakoa</a> edo <a href=\"{{indexed_url}}\" target=\"_blank\">indexatua</a>) potentzia-tarteen gaineko informazio gehiago.",
     "POWER_PERIODS_20TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa",
     "POWER_PERIODS_30TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1146-3-0td-tarifa",
     "POWER_INDEXED_20TD_MORE_INFO_URL": "https://eu.support.somenergia.coop/article/1329-tarifa-2-0td-indexatua",

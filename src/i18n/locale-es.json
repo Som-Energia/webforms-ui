@@ -396,7 +396,7 @@
     "API_SERVER_OFFLINE_DETAILS": "Es posible que estemos haciendo tareas de mantenimiento. Vuelve a probar más tarde. Perdona las molestias.",
     "MENOR_IGUAL_A_15KW_CONTRACTACIO": "Potencia inferior o igual a 15 kW",
     "NO_POWER_INCREASING": "La potencia de este periodo no puede ser inferior al anterior",
-    "POWER_PERIODS_MORE_INFO": "<p>Más información sobre los períodos de las potencias de la tarifa {{tariff}} <a href=\"{{periods_url}}\" target=\"_blank\">períodos</a> o <a href=\"{{indexed_url}}\" target=\"_blank\">indexada</a>.",
+    "POWER_PERIODS_MORE_INFO": "Más información sobre los períodos de las potencias de la tarifa {{tariff}} <a href=\"{{periods_url}}\" target=\"_blank\">períodos</a> o <a href=\"{{indexed_url}}\" target=\"_blank\">indexada</a>.",
     "POWER_PERIODS_20TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1006-la-tarifa-2-0td",
     "POWER_PERIODS_30TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1142-la-tarifa-3-0td",
     "POWER_INDEXED_20TD_MORE_INFO_URL": "https://es.support.somenergia.coop/article/1328-la-tarifa-2-0td-indexada",
