@@ -108,7 +108,7 @@ describe('Generation Context', () => {
         </GenerationContextProvider>
     )
 
-    expect(screen.getByText("MAIN_PRIORITY")).toBeInTheDocument()
+    expect(screen.getByText("GENERATION_MAIN_PRIORITY")).toBeInTheDocument()
 
   })
 

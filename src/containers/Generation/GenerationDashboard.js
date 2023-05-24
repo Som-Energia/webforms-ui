@@ -34,7 +34,7 @@ function GenerationDashboard({
   const ActionSection = useCallback(() => {
     return (
       <>
-        {editingPriority() ? (
+        {editingPriority ? (
           <Grid item container className={classes.buttons}>
             <Button
               id="cancel-action-btn"

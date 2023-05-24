@@ -612,5 +612,19 @@
     "CONTRACT_PRIVACY_POLICY_TERMS": "He llegit i accepto la <a target='_blank' href='{{url}}'>política de privacitat</a> de Som Energia.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/ca/politica-de-privacitat/#formulari-del-contracte-de-la-llum",
     "PROCESS_TYPE_TARIFF_CHANGE": "Modificació de tarifa",
-    "UNKNOWN_FIELD": "Camp desconegut"
+    "UNKNOWN_FIELD": "Camp desconegut",
+    "GENERATION_MAIN_PRIORITY": "Principal",
+    "GENERATION_SECONDARY": "Secundari",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT": "Núm de contracte",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY": "Prioritat",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE": "Última data facturada",
+    "GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH": "Ús anual de kWh",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_N_INVESTMENT": "Núm Aportació",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_INVESTED_AMOUNT": "Import invertit",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_ENERGY_ACTIONS": "Accions energètiques",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE ": "Data de compra",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE ": "Data d'activació",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT ": "Quantitat amortitzada",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Data de finalització"
 }
+

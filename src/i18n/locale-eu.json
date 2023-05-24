@@ -610,5 +610,18 @@
     "CONTRACT_PRIVACY_POLICY_TERMS": "Som Energiaren <a target='_blank' href='{{url}}'>pribatutasun-politika</a> irakurri dut eta onartzen dut.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/eu/pribatutasun-politika/#kontrata-ezazu-argia-formularioa",
     "PROCESS_TYPE_TARIFF_CHANGE": "",
-    "UNKNOWN_FIELD": ""
+    "UNKNOWN_FIELD": "",
+    "GENERATION_MAIN_PRIORITY": "Nagusi",
+    "GENERATION_SECONDARY": "Bigarren mailakoa",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT": "Kontratuaren zenbakia",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY": "Lehentasuna",
+    "GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE": "Fakturatutako azken data",
+    "GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH": "Urteko kwh erabilera",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_N_INVESTMENT": "Núm Aportación",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_INVESTED_AMOUNT": "Importe invertido",
+    "GENERATION_INVESTMENTS_TABLE_TTILE_ENERGY_ACTIONS": "Acciones energéticas",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE ": "Fecha de compra",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE ": "Fecha de activación",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT ": "Cantidad amortizada",
+    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Fecha de finalización"
 }

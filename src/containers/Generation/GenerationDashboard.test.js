@@ -19,7 +19,7 @@ jest.mock('react-i18next', () => ({
 describe('Generation Dashboard', () => {
   const getById = queryByAttribute.bind(null, 'id')
   const mockAssignmentRows = JSON.parse(
-    '[{"contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
+    '[{"id":"0001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"0002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
   )
   const mockInvestmentRows = JSON.parse(
     '[{"name": "GKWH05844","nominal_amount": "2000.0","nshares": 20,"purchase_date": "2020-01-01","first_effective_date": "2021-01-01","amortized_amount": "160.0","last_effective_date": "2045-01-01"}]'
@@ -28,6 +28,7 @@ describe('Generation Dashboard', () => {
   const mockHandleCancelButtonClick = jest.fn()
   const mockhandleClick = jest.fn()
   const mockValidateChanges = jest.fn()
+  
   test('The component render properly the prop data', () => {
     const dom = render(
       <GenerationContextProvider
@@ -49,14 +50,12 @@ describe('Generation Dashboard', () => {
     const dom = render(
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
-        investmentsJSON={mockInvestmentRows}>
+        investmentsJSON={mockInvestmentRows}
+        propEditingPriority={true}
+        >
         <GenerationDashboard handleClick={mockhandleClick} data={mockAssignmentRows} />
       </GenerationContextProvider>
     )
-    
-    //FIRST CHANGE THE PRIORITY OF THE SECONDARY1 TO PRINCIPAL
-    const upButton = getById(dom.container,'change-priority-up ' + mockAssignmentRows[1].contract)
-    await userEvent.click(upButton)
 
     const cancelButton = getById(dom.container,'cancel-action-btn')
     const validateButton = getById(dom.container,'validation-action-btn')
@@ -68,14 +67,12 @@ describe('Generation Dashboard', () => {
     const dom = render(
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
-        investmentsJSON={mockInvestmentRows}>
+        investmentsJSON={mockInvestmentRows}
+        propEditingPriority={true}
+        >
         <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} data={mockAssignmentRows} />
       </GenerationContextProvider>
     )
-    
-    //FIRST CHANGE THE PRIORITY OF THE SECONDARY1 TO PRINCIPAL
-    const upButton = getById(dom.container,'change-priority-up ' + mockAssignmentRows[1].contract)
-    await userEvent.click(upButton)
 
     const cancelButton = getById(dom.container,'cancel-action-btn')
     await userEvent.click(cancelButton)
@@ -86,15 +83,12 @@ describe('Generation Dashboard', () => {
     const dom = render(
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
-        investmentsJSON={mockInvestmentRows}>
+        investmentsJSON={mockInvestmentRows}
+        propEditingPriority={true}
+        >
         <GenerationDashboard validateChanges={mockValidateChanges} data={mockAssignmentRows} />
       </GenerationContextProvider>
-    )
-
-    //FIRST CHANGE THE PRIORITY OF THE SECONDARY1 TO PRINCIPAL
-    const upButton = getById(dom.container,'change-priority-up ' + mockAssignmentRows[1].contract)
-    await userEvent.click(upButton)
-    
+    )    
     const validateButton = getById(dom.container,'validation-action-btn')
     await userEvent.click(validateButton)
     expect(mockValidateChanges).toBeCalledTimes(1)
