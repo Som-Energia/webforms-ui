@@ -1,6 +1,6 @@
 {
   "name": "webforms-ui",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "private": false,
   "dependencies": {
     "@date-io/dayjs": "1.x",
