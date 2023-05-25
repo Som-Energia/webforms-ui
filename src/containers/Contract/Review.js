@@ -193,12 +193,19 @@ const Review = (props) => {
   const Prices = ({ concept, name }) => {
     let keys = concept ? Object.keys(concept) : []
     keys.sort()
+    const labels =
+      keys.length === 2
+        ? [t('PEAK'), t('VALLEY')]
+        : keys.length === 3
+        ? [t('PEAK'), t('FLAT'), t('VALLEY')]
+        : keys
+
     return (
       <div className={classes.prices}>
         {concept ? (
-          keys.map((value, index) => (
-            <span key={`${name}:${value}`}>
-              {`${concept[value]?.value} ${concept[value]?.uom}`}
+          keys.map((key, index) => (
+            <span key={`${name}:${key}`}>
+              {`${labels[index]}: ${concept[key]?.value} ${concept[key]?.uom}`}
             </span>
           ))
         ) : (
