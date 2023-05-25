@@ -9,6 +9,14 @@ import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 import Typography from '@material-ui/core/Typography'
 
+const useStyles = makeStyles((theme) => ({
+  chooserQuestionTariffMode: {
+    '& .MuiFormHelperText-root': {
+      fontSize: '0.9rem',
+    },
+  },
+}))
+
 const TariffMode = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
@@ -20,9 +28,12 @@ const TariffMode = (props) => {
   return (
     <>
       <StepHeader title={t('TARIFF_MODE_TITLE')} />
-      <Box mt={3} mb={2}>
+      <Box
+        mt={3}
+        mb={2}
+        className={classes.chooserQuestionTariffMode}
+      >
         <Chooser
-          className={classes.chooserQuestion}
           name="tariffMode"
           question={t('TARIFF_MODE_QUESTION')}
           onChange={handleChange}
@@ -79,13 +90,3 @@ const TariffMode = (props) => {
 
 export default TariffMode
 
-const useStyles = makeStyles((theme) => ({
-  chooserQuestion: {
-    '& h6': {
-      fontWeight: 400
-    },
-    '& label': {
-      minHeight: '80px'
-    }
-  }
-}))
