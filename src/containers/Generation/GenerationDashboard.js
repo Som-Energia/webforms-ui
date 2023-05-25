@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from 'react'
 import SectionTitle from './SectionTitle'
 import GenerationAssigmentSection from './GenerationAssignmentSection'
 import GenerationInvestmentSection from './GenerationInvestmentSection'
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GenerationContext from './context/GenerationContext'
 import { useTranslation } from 'react-i18next'
@@ -31,6 +31,13 @@ function GenerationDashboard({
   const { editingPriority, assignments, investments } =
     useContext(GenerationContext)
 
+  const has_duplicate_priority_values = useCallback(() => {
+    let res =
+      new Set(assignments.map((item) => item['priority'])).size !==
+      assignments.length
+    return res
+  }, [assignments])
+
   const ActionSection = useCallback(() => {
     return (
       <>
@@ -58,13 +65,17 @@ function GenerationDashboard({
 
   return (
     <>
-      <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
-      <GenerationInvestmentSection data={investments} />
-      <SectionTitle text={t('GENERATION_ASSIGNMENTS_TABLE_TITLE')} />
-      <GenerationAssigmentSection data={assignments} editing={editing} />
-      <Grid className={classes.footer} container justifyContent="flex-end">
-        <ActionSection />
-      </Grid>
+      {!has_duplicate_priority_values() ? (
+        <>
+          <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
+          <GenerationInvestmentSection data={investments} />
+          <SectionTitle text={t('GENERATION_ASSIGNMENTS_TABLE_TITLE')} />
+          <GenerationAssigmentSection data={assignments} editing={editing} />
+          <Grid className={classes.footer} container justifyContent="flex-end">
+            <ActionSection />
+          </Grid>
+        </>
+      ) : <Typography id='info-text-section'>{t('TEXT EXPLICATIU PER DIR QUE HAN DE POSAR-SE EN CONTACTE AMB SOM ENERGIA')}</Typography>}
     </>
   )
 }

@@ -81,15 +81,10 @@ export default function GenerationAssigmentSection({ data }) {
         setEditingPriority(true)
         changeAssigmentPriority(rows[index], rows[newIndex])
         changeIsVisible(index, newIndex, true)
-      }, 200)
+      }, 150)
     },
     [changeAssigmentPriority, rows, setEditingPriority, changeIsVisible]
   )
-
-  const has_duplicate_priority_values = useCallback(() => {
-    let res = new Set(data.map((item) => item['priority'])).size !== data.length
-    return res
-  }, [data])
 
   return (
     <GenerationTable id="assignment-table" columns={columns}>
@@ -98,32 +93,30 @@ export default function GenerationAssigmentSection({ data }) {
           <Grow key={row.contract} in={is_visible[index]}>
             <TableRow>
               <StyledTableCell size="small">
-                {!has_duplicate_priority_values() ? (
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    justifyContent="center">
-                    <IconButton
-                      style={{ visibility: index !== 0 ? 'visible' : 'hidden' }}
-                      size="small"
-                      id={'change-priority-up ' + row.contract}
-                      onClick={() => handleChangeSort(index, 'up')}>
-                      <ArrowDropUpIcon />
-                    </IconButton>
-                    {getPriority(row.priority).value}
-                    <IconButton
-                      style={{
-                        visibility:
-                          index !== rows.length - 1 ? 'visible' : 'hidden'
-                      }}
-                      size="small"
-                      id={'change-priority-down ' + row.contract}
-                      onClick={() => handleChangeSort(index, 'down')}>
-                      <ArrowDropDownIcon />
-                    </IconButton>
-                  </Box>
-                ) : null}
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center">
+                  <IconButton
+                    style={{ visibility: index !== 0 ? 'visible' : 'hidden' }}
+                    size="small"
+                    id={'change-priority-up ' + row.contract}
+                    onClick={() => handleChangeSort(index, 'up')}>
+                    <ArrowDropUpIcon />
+                  </IconButton>
+                  {getPriority(row.priority).value}
+                  <IconButton
+                    style={{
+                      visibility:
+                        index !== rows.length - 1 ? 'visible' : 'hidden'
+                    }}
+                    size="small"
+                    id={'change-priority-down ' + row.contract}
+                    onClick={() => handleChangeSort(index, 'down')}>
+                    <ArrowDropDownIcon />
+                  </IconButton>
+                </Box>
               </StyledTableCell>
               <StyledTableCell>{row.contract}</StyledTableCell>
               <StyledTableCell>{row.contractAddress}</StyledTableCell>
