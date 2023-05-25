@@ -599,5 +599,9 @@
     "PEAK": "Punta",
     "VALLEY": "Valle",
     "FLAT": "Llano",
+    "TOLL": "Peaje",
+    "TOLL_SAME": "Se mantendrá el peaje actual",
+    "FARE_INDEXED": "Indexada",
+    "FARE_BY_PERIODS": "Por periodos",
     "UNKNOWN_FIELD": "Campo desconocido"
 }

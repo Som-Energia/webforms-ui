@@ -298,11 +298,17 @@ const Review = (props) => {
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
           <ReviewField
-            label={t('FARE')}
+            label={t('TOLL')}
             value={
               values?.contract?.has_service
-                ? t('FARE_SAME')
+                ? t('TOLL_SAME')
                 : values?.contract?.rate
+            }
+          />
+          <ReviewField
+            label={t('FARE')}
+            value={
+               values?.contract?.isIndexed ? t('FARE_INDEXED') : t('FARE_BY_PERIODS')
             }
           />
           {values?.contract?.has_service ? (
