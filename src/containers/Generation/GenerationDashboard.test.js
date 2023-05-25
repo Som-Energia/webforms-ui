@@ -53,7 +53,7 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard handleClick={mockhandleClick} data={mockAssignmentRows} />
+        <GenerationDashboard handleClick={mockhandleClick} />
       </GenerationContextProvider>
     )
 
@@ -70,7 +70,7 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} data={mockAssignmentRows} />
+        <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} />
       </GenerationContextProvider>
     )
 
@@ -86,12 +86,30 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard validateChanges={mockValidateChanges} data={mockAssignmentRows} />
+        <GenerationDashboard validateChanges={mockValidateChanges} />
       </GenerationContextProvider>
     )    
     const validateButton = getById(dom.container,'validation-action-btn')
     await userEvent.click(validateButton)
     expect(mockValidateChanges).toBeCalledTimes(1)
+  })
+
+  test('should show the info text', async () => {
+
+    const mockAssignmentSamePriorityRows = JSON.parse(
+      '[{"id":"0001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"0002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
+    )
+    const dom = render(
+      <GenerationContextProvider
+        assignmentsJSON={mockAssignmentSamePriorityRows}
+        investmentsJSON={mockInvestmentRows}
+        propEditingPriority={true}
+        >
+        <GenerationDashboard />
+      </GenerationContextProvider>
+    )    
+    const infoText = getById(dom.container,'info-text-section')
+    expect(infoText).toBeInTheDocument()
   })
 
 })
