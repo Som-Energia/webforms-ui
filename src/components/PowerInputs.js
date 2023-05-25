@@ -60,8 +60,8 @@ const PowerInputs = (props) => {
             <InputAdornment position="start">
               {numInputs <= 2
                 ? inputNum === 0
-                  ? t('PUNTA')
-                  : t('VALLE')
+                  ? t('PEAK')
+                  : t('VALLEY')
                 : `P${inputNum + 1}`}
             </InputAdornment>
           )

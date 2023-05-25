@@ -127,7 +127,7 @@ export default function ModifyResume({
             <Grid item>
               <Typography data-cy="power" variant="body1" gutterBottom>
                 <span className={classes.powerPeriod}>
-                  {params?.modify?.moreThan15Kw ? 'P1' : t('PUNTA')}
+                  {params?.modify?.moreThan15Kw ? 'P1' : t('PEAK')}
                 </span>{' '}
                 {params.modify?.power} kW
               </Typography>
@@ -135,7 +135,7 @@ export default function ModifyResume({
             <Grid item>
               <Typography data-cy="power2" variant="body1" gutterBottom>
                 <span className={classes.powerPeriod}>
-                  {params?.modify?.moreThan15Kw ? 'P2' : t('VALLE')}
+                  {params?.modify?.moreThan15Kw ? 'P2' : t('VALLEY')}
                 </span>{' '}
                 {params.modify?.power2} kW
               </Typography>

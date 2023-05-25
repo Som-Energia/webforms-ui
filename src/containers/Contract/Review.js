@@ -175,8 +175,8 @@ const Review = (props) => {
                 const label = values?.contract?.moreThan15Kw
                   ? `P${index + 1}`
                   : index === 0
-                  ? t('PUNTA')
-                  : t('VALLE')
+                  ? t('PEAK')
+                  : t('VALLEY')
                 return (
                   <Grid
                     key={label}

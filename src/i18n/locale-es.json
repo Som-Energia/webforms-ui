@@ -278,8 +278,6 @@
     "QUINA_TARIFA_TENS_CONTRACTADA": "¿Qué tarifa tienes contratada?",
     "CURRENT_RATE": "Selecciona la tarifa ACTUAL de tu contracto",
     "SELECCIONAR": "Seleccionar",
-    "PUNTA": "Punta",
-    "VALLE": "Valle",
     "POWER_NO_LESS_THAN": "La potencia debe ser superior a {{value}} kW",
     "POWER_NO_MORE_THAN": "La potencia debe ser inferior a {{value}} kW",
     "SOME_PERIOD_MORE_THAN": "Alguno de los periodos debe ser superior a {{value}} kW",
@@ -598,5 +596,8 @@
     "TARIFF_MODE_INDEXED_URL":"https://es.support.somenergia.coop/article/1273-la-tarifa-indexada",
     "TARIFF_MODE_TARIFF_COMPARISON": "En el Centro de Ayuda puedes ver una <a target='_blank' href=\"{{url}}\">comparación de las dos tarifas</a>.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL":"https://es.support.somenergia.coop/article/1332-comparacion-de-las-tarifas-por-periodos-y-las-indexadas ",
+    "PEAK": "Punta",
+    "VALLEY": "Valle",
+    "FLAT": "Llano",
     "UNKNOWN_FIELD": "Campo desconocido"
 }

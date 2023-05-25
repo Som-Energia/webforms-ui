@@ -150,11 +150,11 @@ const IndexedReviewData = (props) => {
             {isTariff20 ? (
               <>
                 <IndexedReviewField
-                  label={t('PUNTA')}
+                  label={t('PEAK')}
                   value={powers[0].power.replaceAll('"', '')}
                 />
                 <IndexedReviewField
-                  label={t('VALLE')}
+                  label={t('VALLEY')}
                   value={powers[1].power.replaceAll('"', '')}
                 />
               </>

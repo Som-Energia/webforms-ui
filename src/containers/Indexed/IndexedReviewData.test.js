@@ -185,11 +185,9 @@ describe('Test that it correctly renders', () => {
       />
     )
 
-    const maxPower = screen.getByText("PUNTA")
-    const minPower = screen.getByText("VALLE")
+    const maxPower = screen.getByText('PEAK')
+    const minPower = screen.getByText('VALLEY')
     expect(maxPower).toBeInTheDocument()
     expect(minPower).toBeInTheDocument()
-
-    
   })
 })

@@ -278,8 +278,6 @@
     "QUINA_TARIFA_TENS_CONTRACTADA": "Zer tarifa daukazu kontratatuta?",
     "CURRENT_RATE": "Hautatu ORAIN kontratatuta duzun tarifa",
     "SELECCIONAR": "Hautatu",
-    "PUNTA": "Puntakoa",
-    "VALLE": "Sakonunea",
     "POWER_NO_LESS_THAN": "Potentziak {{value}} kW-tik gorakoa izan behar du",
     "POWER_NO_MORE_THAN": "Potentziak {{value}} kW-tik beherakoa izan behar du",
     "SOME_PERIOD_MORE_THAN": "Aldietako batek {{value}} kW-tik gorako potentzia izan behar du",
@@ -596,7 +594,10 @@
     "TARIFF_MODE_INDEXED_DESC": "<p>Tarifa aldakor bat da, pertsona eta enpresa kontsumitzaileei energiak eguneko handizkako merkatuan (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> Penintsulan eta Red Eléctrica Balearretan eta Kanarietan) duen prezioa zuzenean aplikatzen diena. Prezio-bariazioak berehala egozten zaizkie erabiltzaileei. Horrenbestez, <b>prezioa desberdina da egunero eta orduero</b> (energiak eguneko merkatuan dituen bariazioen arabera).</p><p>Tarifa indexatua kalkulatzeko metodoa eta tarifaren aldagai guztiak <a target='_blank' href=\"{{indexed_url}}\">esteka honetan</a> aurkituko dituzu.</p>",
     "TARIFF_MODE_INDEXED_URL":"https://eu.support.somenergia.coop/article/1275-tarifa-indexatua",
     "TARIFF_MODE_TARIFF_COMPARISON": "Laguntza Gunean <a target='_blank' href=\"{{url}}\">bi tarifen konparazio</a> bat aurkituko duzu.",
-    "TARIFF_MODE_TARIFF_COMPARISON_URL":"https://eu.support.somenergia.coop/article/1334-comparacion-de-las-tarifas-por-periodos-e-indexadas-euskera",
+    "TARIFF_MODE_TARIFF_COMPARISON_URL": "https://eu.support.somenergia.coop/article/1334-comparacion-de-las-tarifas-por-periodos-e-indexadas-euskera",
+    "PEAK": "Puntakoa",
+    "VALLEY": "Sakonunea",
+    "FLAT": "Une arrunta",
     "UNKNOWN_FIELD": "Campo desconocido"
 }
 

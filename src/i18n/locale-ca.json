@@ -279,8 +279,6 @@
     "QUINA_TARIFA_TENS_CONTRACTADA": "Quina tarifa tens contractada?",
     "CURRENT_RATE": "Selecciona la tarifa ACTUAL del teu contracte",
     "SELECCIONAR": "Seleccionar",
-    "PUNTA": "Punta",
-    "VALLE": "Vall",
     "POWER_NO_LESS_THAN": "La potència ha de ser superior a {{value}} kW",
     "POWER_NO_MORE_THAN": "La potència ha de ser inferior a {{value}} kW",
     "SOME_PERIOD_MORE_THAN": "Algun dels períodes ha de ser superior a {{value}} kW",
@@ -599,6 +597,9 @@
     "TARIFF_MODE_INDEXED_DESC": "<p>Es tracta d’una tarifa variable que trasllada directament a les persones i empreses consumidores el preu de l’energia al mercat majorista diari (<a target='_blank' href='https://www.omie.es/es/spot-hoy'>OMIE</a> per a la Península i Red Eléctrica per a Balears i Canàries). Així doncs, les variacions de preu que hi ha es repercuteixen en el moment a les usuàries. Per tant, <b>cada dia i cada hora el preu és diferent</b> (en funció de les variacions del preu de l’energia al mercat diari).</p><p>Pots consultar el mètode de càlcul de la tarifa indexada i totes les seves variables en aquest <a target='_blank' href=\"{{indexed_url}}\">enllaç</a>.</p>",
     "TARIFF_MODE_INDEXED_URL":"https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada",
     "TARIFF_MODE_TARIFF_COMPARISON": "Al Centre d’Ajuda pots veure una <a target='_blank' href=\"{{url}}\">comparació de les dues tarifes</a>.",
-    "TARIFF_MODE_TARIFF_COMPARISON_URL":"https://ca.support.somenergia.coop/article/1331-comparacio-de-les-tarifes-per-periodes-i-indexades",
+    "TARIFF_MODE_TARIFF_COMPARISON_URL": "https://ca.support.somenergia.coop/article/1331-comparacio-de-les-tarifes-per-periodes-i-indexades",
+    "PEAK": "Punta",
+    "VALLEY": "Vall",
+    "FLAT": "Pla",
     "UNKNOWN_FIELD": "Camp desconegut"
 }
