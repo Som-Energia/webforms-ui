@@ -314,7 +314,7 @@
     "AUTOCONSUM_WITH_FAQ": "Compensación <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Autoprodución</a>",
     "BO_SOCIAL": "Bono social",
     "CONCEPTES_EXTRES": "A estes prezos hai que sumarlles os conceptos seguintes:",
-    "EXTRA_REACTIVA": "En determinadas condicións da instalación, a estes prezos pódeselles engadir <b>unha recarga por enerxía reactiva</b>.",
+    "EXTRA_REACTIVA": "En determinadas condicións, segundo a normativa, a estes prezos hai que engadirlles unha recarga por <b>enerxía reactiva e/ou exceso de potencia</b>.",
     "LLOGUER_COMPTADOR": "<b>Alugueiro de conpador</b>: Depende de cada caso. En xeral, {{valor}} {{uom}} con impostos",
     "TIPUS_INSTALLACIO_CONTRACTACIO": "Que tipo de instalación tes?",
     "POTENCIA_A_CONTRACTAR_CONTRACTACIO": "Que potencia queres contratar?",

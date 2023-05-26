@@ -399,78 +399,112 @@ const Review = (props) => {
           />
         </Grid>
 
-        <Grid item xs={12}>
-          <Divider variant="middle" className={classes.divider} />
+        { values?.contract?.isIndexed ?
+          <Grid item xs={12}>
+            <Divider variant="middle" className={classes.divider} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
-            {t('PREUS_AMB_IMPOSTOS')}
-          </Typography>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <ReviewField
-                label={t('TERME_ENERGIA')}
-                value={<Prices concept={prices?.te} name="te" />}
-                multipleValues={true}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <ReviewField
-                label={t('GENERATION')}
-                value={<Prices concept={prices?.gkwh} name="gkwh" />}
-                multipleValues={true}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <ReviewField
-                label={t('TERME_POTENCIA')}
-                value={<Prices concept={prices?.tp} name="tp" />}
-                multipleValues={true}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <ReviewField
-                label={t('AUTOCONSUM')}
-                value={<Prices concept={prices?.ac} name="ac" />}
-                multipleValues={true}
-              />
-            </Grid>
-            {prices?.bo_social?.value ? (
+            <Typography className={classes.sectionTitle} variant="h6">
+              {t('PREUS')}
+            </Typography>
+
+            <Typography
+              variant="body1"
+              align="justify"
+              dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_INDEXED_MORE') }}
+            />
+
+            <FormHelperText
+              className={classes.withoutLabel}
+              dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
+            />
+            <FormHelperText
+              dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}
+            />
+            <FormHelperText
+              dangerouslySetInnerHTML={{
+                __html: t('LLOGUER_COMPTADOR', {
+                  valor: prices?.comptador?.value,
+                  uom: prices?.comptador?.uom
+                })
+              }}
+            />
+
+            <Divider variant="middle" className={classes.dividerBottom} />
+
+          </Grid>
+        :
+          <Grid item xs={12}>
+            <Divider variant="middle" className={classes.divider} />
+
+            <Typography className={classes.sectionTitle} variant="h6">
+              {t('PREUS_AMB_IMPOSTOS')}
+            </Typography>
+            <Grid container>
               <Grid item xs={12} sm={6}>
                 <ReviewField
-                  label={t('BO_SOCIAL')}
-                  value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                  label={t('TERME_ENERGIA')}
+                  value={<Prices concept={prices?.te} name="te" />}
                   multipleValues={true}
                 />
               </Grid>
-            ) : null}
+              <Grid item xs={12} sm={6}>
+                <ReviewField
+                  label={t('GENERATION')}
+                  value={<Prices concept={prices?.gkwh} name="gkwh" />}
+                  multipleValues={true}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <ReviewField
+                  label={t('TERME_POTENCIA')}
+                  value={<Prices concept={prices?.tp} name="tp" />}
+                  multipleValues={true}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <ReviewField
+                  label={t('AUTOCONSUM')}
+                  value={<Prices concept={prices?.ac} name="ac" />}
+                  multipleValues={true}
+                />
+              </Grid>
+              {prices?.bo_social?.value ? (
+                <Grid item xs={12} sm={6}>
+                  <ReviewField
+                    label={t('BO_SOCIAL')}
+                    value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                    multipleValues={true}
+                  />
+                </Grid>
+              ) : null}
+            </Grid>
+
+            <Typography
+              variant="body1"
+              align="justify"
+              dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
+            />
+
+            <FormHelperText
+              className={classes.withoutLabel}
+              dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
+            />
+            <FormHelperText
+              dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}
+            />
+            <FormHelperText
+              dangerouslySetInnerHTML={{
+                __html: t('LLOGUER_COMPTADOR', {
+                  valor: prices?.comptador?.value,
+                  uom: prices?.comptador?.uom
+                })
+              }}
+            />
+
+            <Divider variant="middle" className={classes.dividerBottom} />
           </Grid>
-
-          <Typography
-            variant="body1"
-            align="justify"
-            dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
-          />
-
-          <FormHelperText
-            className={classes.withoutLabel}
-            dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
-          />
-          <FormHelperText
-            dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}
-          />
-          <FormHelperText
-            dangerouslySetInnerHTML={{
-              __html: t('LLOGUER_COMPTADOR', {
-                valor: prices?.comptador?.value,
-                uom: prices?.comptador?.uom
-              })
-            }}
-          />
-
-          <Divider variant="middle" className={classes.dividerBottom} />
-        </Grid>
+      }
       </Grid>
-
       <TermsDialog
         title={t('GENERAL_TERMS')}
         open={open}

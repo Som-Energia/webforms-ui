@@ -319,7 +319,7 @@
     "AUTOCONSUM_WITH_FAQ": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Autoprodukzioarengatiko</a> konpentsazioa",
     "BO_SOCIAL": "Bonu soziala",
     "CONCEPTES_EXTRES": "Prezioei kontzeptu hauek gehitu behar zaizkie:",
-    "EXTRA_REACTIVA": "Instalazioak baldintza jakin batzuk dituenean, prezioei <b>energia erreaktiboaren ondoriozko errekargua</b> gehi dakieke.",
+    "EXTRA_REACTIVA": "Baldintza jakin batzuetan, araudiari jarraikiz, prezioei <b>energia erreaktiboaren</b> edota <b>potentzia-gehiegikerien</b> ondoriozko errekargu bat gehitu behar zaie</b>.",
     "LLOGUER_COMPTADOR": "<b>Kontagailuaren alokairua</b>: Kasuaren arabera. Oro har, {{valor}} {{uom}}, zergak barne",
     "TIPUS_INSTALLACIO_CONTRACTACIO": "Zer-nolako instalazioa duzu?",
     "POTENCIA_A_CONTRACTAR_CONTRACTACIO": "Zenbateko potentzia kontratatu nahi duzu?",

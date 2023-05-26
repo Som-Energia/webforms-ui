@@ -320,7 +320,7 @@
     "AUTOCONSUM_WITH_FAQ": "Compensació <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Autoproducció</a>",
     "BO_SOCIAL": "Bo social",
     "CONCEPTES_EXTRES": "A aquests preus s'hi han de sumar els conceptes següents:",
-    "EXTRA_REACTIVA": "En determinades condicions de la instal·lació, a aquests preus es pot afegir <b>un recàrrec per energia reactiva</b>.",
+    "EXTRA_REACTIVA": "En determinades condicions, segons la normativa, en aquests preus cal afegir un recàrrec per <b>energia reactiva i/o excés de potència</b>.",
     "LLOGUER_COMPTADOR": "<b>Lloguer de comptador</b>: Depèn de cada cas. En general, {{valor}} {{uom}} amb impostos",
     "TIPUS_INSTALLACIO_CONTRACTACIO": "Quin tipus d'instal·lació tens?",
     "POTENCIA_A_CONTRACTAR_CONTRACTACIO": "Quina potència vols contractar?",
