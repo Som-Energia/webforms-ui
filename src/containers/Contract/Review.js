@@ -308,7 +308,7 @@ const Review = (props) => {
           <ReviewField
             label={t('FARE')}
             value={
-               values?.contract?.isIndexed ? t('FARE_INDEXED') : t('FARE_BY_PERIODS')
+               values?.contract?.isIndexed ? t('FARE_INDEXED') : t('FARE_PERIODS')
             }
           />
           {values?.contract?.has_service ? (

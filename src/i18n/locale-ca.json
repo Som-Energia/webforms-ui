@@ -604,6 +604,6 @@
     "TOLL": "Peatge",
     "TOLL_SAME": "Es mantindrà el peatge actual",
     "FARE_INDEXED": "Indexada",
-    "FARE_BY_PERIODS": "Per períodes",
+    "FARE_PERIODS": "Períodes",
     "UNKNOWN_FIELD": "Camp desconegut"
 }

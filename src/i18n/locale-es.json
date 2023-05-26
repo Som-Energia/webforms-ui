@@ -602,6 +602,6 @@
     "TOLL": "Peaje",
     "TOLL_SAME": "Se mantendrá el peaje actual",
     "FARE_INDEXED": "Indexada",
-    "FARE_BY_PERIODS": "Por periodos",
+    "FARE_PERIODS": "Periodos",
     "UNKNOWN_FIELD": "Campo desconocido"
 }
