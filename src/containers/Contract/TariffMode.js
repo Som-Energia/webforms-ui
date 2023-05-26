@@ -67,7 +67,7 @@ const TariffMode = (props) => {
               value: true,
               label: props.values.contract.moreThan15Kw?
                 t('TARIFF_MODE_INDEXED_30TD_LABEL') : t('TARIFF_MODE_INDEXED_20TD_LABEL'),
-              description: t('TARIFF_MODE_INDEXED_DESC', {
+              description: t('TARIFF_MODE_INDEXED_DESC') + t('TARIFF_MODE_INDEXED_MORE', {
                 indexed_url: t(
                   'TARIFF_MODE_INDEXED_URL'
                 )
