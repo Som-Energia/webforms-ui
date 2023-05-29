@@ -473,11 +473,14 @@ const Review = (props) => {
             </Grid>
           </>
         }
+        {
+          values?.contract?.isIndexed ? null :
           <Typography
             variant="body1"
             align="justify"
             dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
           />
+        }
           <Typography
             className={classes.subsectionTitle} variant="subtitle2"
             dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
