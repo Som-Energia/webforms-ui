@@ -591,8 +591,13 @@
     "TARIFF_MODE_INDEXED_URL":"https://gl.support.somenergia.coop/article/1274-a-tarifa-indexada",
     "TARIFF_MODE_TARIFF_COMPARISON": "No Centro de Axuda podes ver unha <a target='_blank' href=\"{{url}}\">comparación das dúas tarifas</a>.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL": "https://gl.support.somenergia.coop/article/1333-comparacion-de-las-tarifas-por-periodos-e-indexadas-gallego",
+    "CONTRACT_PARTICULAR_TERMS_ACCEPTED": "Coa aceptación destas condicións particulares, a contratante obrígase ao pagamento do seu consumo ao prezo que resulte da aplicación da tarifa contratada.",
     "PEAK": "Punta",
     "VALLEY": "Val",
     "FLAT": "Chan",
+    "TOLL": "Peaxe de transporte e distribución",
+    "TOLL_SAME": "Manterase a peaxe actual",
+    "FARE_INDEXED": "Indexada",
+    "FARE_PERIODS": "Períodos",
     "UNKNOWN_FIELD": "Campo desconocido"
 }
