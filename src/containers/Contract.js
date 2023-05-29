@@ -729,6 +729,7 @@ const Contract = (props) => {
     },
     privacy_policy_accepted: false,
     terms_accepted: false,
+    particular_contract_terms_accepted: false,
     legal_person_accepted: false
   }
 

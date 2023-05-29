@@ -132,6 +132,11 @@ const Review = (props) => {
       })
   }, [])
 
+// TODO: terms_accepted -> general_contract_terms_accepted + indexed_specific_terms_accepted
+
+  const handleParticularConditionsCheckClick = () => {
+    setFieldValue('particular_contract_terms_accepted', !values?.particular_contract_terms_accepted)
+  }
   const handleClick = (event) => {
     event.preventDefault()
     setOpen(true)
@@ -527,6 +532,21 @@ const Review = (props) => {
             values?.contract?.isIndexed?
             t('INDEXED_ACCEPT_CONDITIONS'):
             t('ACCEPT_TERMS')
+          }
+        />
+      </Box>
+      <Box mt={2}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="particular_terms_accepted"
+              onClick={handleParticularConditionsCheckClick}
+              checked={values.particular_terms_accepted}
+              color="primary"
+            />
+          }
+          label={
+            t('CONTRACT_PARTICULAR_TERMS_ACCEPTED')
           }
         />
       </Box>
