@@ -15,6 +15,8 @@ import StepHeader from 'components/StepHeader'
 import TermsDialog from 'components/TermsDialog'
 import Loading from 'components/Loading'
 import GeneralTerms from 'components/GeneralTerms'
+import GeneralEspeciTerms from 'components/GeneralEspeciTerms'
+
 
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
@@ -505,7 +507,10 @@ const Review = (props) => {
         open={open}
         onAccept={handleAccept}
         onClose={handleClose}>
-        <GeneralTerms />
+        { values?.contract?.isIndexed ?
+          <GeneralEspeciTerms /> :
+          <GeneralTerms />
+        }
       </TermsDialog>
 
       <Box mt={2}>
@@ -518,7 +523,11 @@ const Review = (props) => {
               color="primary"
             />
           }
-          label={t('ACCEPT_TERMS')}
+          label={
+            values?.contract?.isIndexed?
+            t('INDEXED_ACCEPT_CONDITIONS'):
+            t('ACCEPT_TERMS')
+          }
         />
       </Box>
     </>
