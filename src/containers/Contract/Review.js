@@ -45,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     color: 'rgba(0, 0, 0, 0.54)'
   },
+  subsectionTitle: {
+    marginTop: "1rem",
+    textTransform: 'uppercase',
+    fontSize: '14px',
+    fontWeight: 400,
+    color: 'rgba(0, 0, 0, 0.54)'
+  },
   value: {
     fontSize: '16px'
   },
@@ -399,8 +406,9 @@ const Review = (props) => {
           />
         </Grid>
 
+        <Grid item xs={12}>
         { values?.contract?.isIndexed ?
-          <Grid item xs={12}>
+          <>
             <Divider variant="middle" className={classes.divider} />
 
             <Typography className={classes.sectionTitle} variant="h6">
@@ -410,30 +418,15 @@ const Review = (props) => {
             <Typography
               variant="body1"
               align="justify"
-              dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_INDEXED_MORE') }}
+              dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_INDEXED_MORE', {
+                indexed_url: t(
+                  'TARIFF_MODE_INDEXED_URL'
+                )
+              })}}
             />
-
-            <FormHelperText
-              className={classes.withoutLabel}
-              dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
-            />
-            <FormHelperText
-              dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}
-            />
-            <FormHelperText
-              dangerouslySetInnerHTML={{
-                __html: t('LLOGUER_COMPTADOR', {
-                  valor: prices?.comptador?.value,
-                  uom: prices?.comptador?.uom
-                })
-              }}
-            />
-
-            <Divider variant="middle" className={classes.dividerBottom} />
-
-          </Grid>
+          </>
         :
-          <Grid item xs={12}>
+          <>
             <Divider variant="middle" className={classes.divider} />
 
             <Typography className={classes.sectionTitle} variant="h6">
@@ -478,32 +471,31 @@ const Review = (props) => {
                 </Grid>
               ) : null}
             </Grid>
-
-            <Typography
-              variant="body1"
-              align="justify"
-              dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
-            />
-
-            <FormHelperText
-              className={classes.withoutLabel}
-              dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
-            />
-            <FormHelperText
-              dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}
-            />
-            <FormHelperText
+          </>
+        }
+          <Typography
+            variant="body1"
+            align="justify"
+            dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
+          />
+          <Typography
+            className={classes.subsectionTitle} variant="subtitle2"
+            dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
+          />
+          <ul>
+            <li dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}></li>
+            <li 
               dangerouslySetInnerHTML={{
                 __html: t('LLOGUER_COMPTADOR', {
                   valor: prices?.comptador?.value,
                   uom: prices?.comptador?.uom
                 })
-              }}
-            />
+              }}>
+            </li>
+          </ul>
 
-            <Divider variant="middle" className={classes.dividerBottom} />
-          </Grid>
-      }
+          <Divider variant="middle" className={classes.dividerBottom} />
+        </Grid>
       </Grid>
       <TermsDialog
         title={t('GENERAL_TERMS')}
