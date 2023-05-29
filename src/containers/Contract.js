@@ -100,10 +100,10 @@ const Contract = (props) => {
       const values = { ...initialValues }
     },
     SHOW_INSPECTOR: () => {
-      setShowInspector(oldvalue => !oldvalue)
+      setShowInspector((oldvalue) => !oldvalue)
     },
     SHOW_ALL_STEPS: () => {
-      setShowAllSteps(oldvalue => !oldvalue)
+      setShowAllSteps((oldvalue) => !oldvalue)
     }
   }
 
@@ -178,7 +178,7 @@ const Contract = (props) => {
           .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL')),
+          .oneOf([true], t('CUPS_VERIFY_LABEL'))
       })
     }),
     Yup.object().shape({
@@ -553,9 +553,16 @@ const Contract = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
-        {(showAllSteps || activeStep === memberIdentifierPage) && <MemberIdentifier {...props} is30ContractEnabled={is30ContractEnabled}/>}
+        {(showAllSteps || activeStep === memberIdentifierPage) && (
+          <MemberIdentifier
+            {...props}
+            is30ContractEnabled={is30ContractEnabled}
+          />
+        )}
         {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
-        {(showAllSteps || activeStep === supplyPointPage) && <SupplyPoint {...props} />}
+        {(showAllSteps || activeStep === supplyPointPage) && (
+          <SupplyPoint {...props} />
+        )}
         {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
             rates={rates}
@@ -563,16 +570,24 @@ const Contract = (props) => {
             {...props}
           />
         )}
-        {(showAllSteps || activeStep === tariffModePage) && <TariffMode {...props}/>}
-        {(showAllSteps || activeStep === selfConsumptionPage) && <SelfConsumption {...props} />}
+        {(showAllSteps || activeStep === tariffModePage) && (
+          <TariffMode {...props} />
+        )}
+        {(showAllSteps || activeStep === selfConsumptionPage) && (
+          <SelfConsumption {...props} />
+        )}
         {(showAllSteps || activeStep === selfConsumptionDetailsPage) && (
           <SelfConsumptionDetails {...props} />
         )}
-        {(showAllSteps || activeStep === holderIdentifierPage) && <HolderIdentifier {...props} />}
+        {(showAllSteps || activeStep === holderIdentifierPage) && (
+          <HolderIdentifier {...props} />
+        )}
         {(showAllSteps || activeStep === personalDataPage) && (
           <PersonalData url={url} {...props} />
         )}
-        {(showAllSteps || activeStep === voluntaryCentPage) && <VoluntaryCent {...props} />}
+        {(showAllSteps || activeStep === voluntaryCentPage) && (
+          <VoluntaryCent {...props} />
+        )}
         {(showAllSteps || activeStep === ibanPage) && <IBAN {...props} />}
         {(showAllSteps || activeStep === reviewPage) && <Review {...props} />}
       </>
@@ -583,7 +598,10 @@ const Contract = (props) => {
     let next = activeStep + 1
 
     // If the contract has no service, do not ask about self consumption
-    if (activeStep === tariffModePage && props.values.contract.has_service === false) {
+    if (
+      activeStep === tariffModePage &&
+      props.values.contract.has_service === false
+    ) {
       next = holderIdentifierPage
     }
 
@@ -623,7 +641,10 @@ const Contract = (props) => {
       activeStep === holderIdentifierPage &&
       props.values.self_consumption.have_installation === false
     ) {
-      prev = props.values.contract.has_service === false ? tariffModePage : selfConsumptionPage
+      prev =
+        props.values.contract.has_service === false
+          ? tariffModePage
+          : selfConsumptionPage
     }
 
     // Back from voluntaryCent, depending on whether the user
@@ -700,7 +721,7 @@ const Contract = (props) => {
       phases: '',
       fare: '',
       moreThan15Kw: false,
-      isIndexed: false,
+      isIndexed: false
     },
     member: {
       number: '',
@@ -740,13 +761,16 @@ const Contract = (props) => {
 
   const trackSucces = () => {
     plausible.trackPageview({
-      url: window.location.protocol + "//" + window.location.hostname + "/es/contratacion-realizada/"
+      url:
+        window.location.protocol +
+        '//' +
+        window.location.hostname +
+        '/es/contratacion-realizada/'
     })
 
     ReactGA.initialize(GA_TRACKING_ID)
     ReactGA.pageview('/es/contratacion-realizada/')
   }
-
 
   const handlePost = async (values) => {
     setSending(true)
@@ -781,7 +805,8 @@ const Contract = (props) => {
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}>
+          validateOnMount={true}
+        >
           {(props) => (
             <>
               <div>
@@ -814,7 +839,8 @@ const Contract = (props) => {
                               className={classes.button}
                               startIcon={<ArrowBackIosIcon />}
                               disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(props)}>
+                              onClick={() => prevStep(props)}
+                            >
                               {t('PAS_ANTERIOR')}
                             </Button>
                           )}
@@ -827,7 +853,8 @@ const Contract = (props) => {
                               color="primary"
                               endIcon={<ArrowForwardIosIcon />}
                               disabled={!props.isValid}
-                              onClick={() => nextStep(props)}>
+                              onClick={() => nextStep(props)}
+                            >
                               {t('SEGUENT_PAS')}
                             </Button>
                           ) : (
@@ -846,7 +873,8 @@ const Contract = (props) => {
                                   )
                                 }
                                 disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}>
+                                onClick={() => handlePost(props.values)}
+                              >
                                 {t('SEND')}
                               </Button>
                             )
@@ -862,7 +890,8 @@ const Contract = (props) => {
                   <Button
                     variant="outlined"
                     size="small"
-                    onClick={() => setShowAllSteps(!showAllSteps)}>
+                    onClick={() => setShowAllSteps(!showAllSteps)}
+                  >
                     Show all steps
                   </Button>
                   <DisplayFormikState {...props} />
