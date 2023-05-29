@@ -100,10 +100,10 @@ const Contract = (props) => {
       const values = { ...initialValues }
     },
     SHOW_INSPECTOR: () => {
-      setShowInspector(!showInspector)
+      setShowInspector(oldvalue => !oldvalue)
     },
     SHOW_ALL_STEPS: () => {
-      setShowAllSteps(!showAllSteps)
+      setShowAllSteps(oldvalue => !oldvalue)
     }
   }
 
