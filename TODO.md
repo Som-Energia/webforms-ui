@@ -1,23 +1,13 @@
-# Pending Indexed Tariff tasks
-
-- [ ] Afegir els textos
-- [ ] Url de la descripcio
-- [ ] Mirar si el chooser sense estils ja es veu be o calen
-- [ ] Considerar si paga la pena el chooser vertical
-- [ ] Cypress amb la nova pagina
-- [ ] Preguntar si es pot contractar amb formulari 6.0 (caldria saltar la pregunta de si vols indexada)
-
 ## Django (OV)
 
 - [x] Feature flag
-- [X] Button
-- [X] View
-- [X] Template
-- [X] Inside view, generate file TOKEN
+- [x] Button
+- [x] View
+- [x] Template
+- [x] Inside view, generate file TOKEN
 - [] **Inside view, generate data payload**
 - [] Inside template, insert data payload
 - [] Translate TRANSPORT_AND_DISTRIBUTION_TOLL and RETAILER_TARIFF and others
-
 
 ## Webforms (API)
 
