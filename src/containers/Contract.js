@@ -622,7 +622,6 @@ const Contract = (props) => {
       props.values.holder.vat === props.values.member.vat &&
       props.values.holder.isphisical
     ) {
-      props.setFieldValue('privacy_policy_accepted', true)
       next = voluntaryCentPage
     }
 
@@ -657,7 +656,6 @@ const Contract = (props) => {
       props.values.holder.vat === props.values.member.vat &&
       props.values.holder.isphisical
     ) {
-      props.setFieldValue('privacy_policy_accepted', false)
       prev = holderIdentifierPage
     }
     setActiveStep(Math.max(0, prev))
