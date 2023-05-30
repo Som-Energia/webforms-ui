@@ -30,11 +30,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CnaeHelperText = () => {
-  const { t } = useTranslation()
-  return <span dangerouslySetInnerHTML={{ __html: t('HELP_POPOVER_CNAE') }} />
-}
-
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
@@ -268,7 +263,7 @@ const SupplyPoint = (props) => {
               }
               helperText={
                 (touched?.supply_point?.cnae &&
-                  errors?.supply_point?.cnae_valid) || <CnaeHelperText />
+                  errors?.supply_point?.cnae_valid) || t('HELP_POPOVER_CNAE')
               }
             />
           </Grid>
