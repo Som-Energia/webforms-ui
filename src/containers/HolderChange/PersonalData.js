@@ -454,7 +454,8 @@ function PersonalData(props) {
                   </InputAdornment>
                 )
               }}
-              variant="outlined">
+              variant="outlined"
+            >
               {Object.keys(languages).map((id) => (
                 <MenuItem key={id} value={id}>
                   {languages[id]}
@@ -547,7 +548,8 @@ function PersonalData(props) {
                   open={openLegal}
                   onAccept={handleAccept}
                   onClose={handleClose}
-                  maxWidth="sm">
+                  maxWidth="sm"
+                >
                   <span
                     dangerouslySetInnerHTML={{
                       __html:

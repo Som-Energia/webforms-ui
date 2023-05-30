@@ -17,7 +17,6 @@ import Loading from 'components/Loading'
 import GeneralTerms from 'components/GeneralTerms'
 import GeneralEspeciTerms from 'components/GeneralEspeciTerms'
 
-
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
 
@@ -48,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'rgba(0, 0, 0, 0.54)'
   },
   subsectionTitle: {
-    marginTop: "1rem",
+    marginTop: '1rem',
     textTransform: 'uppercase',
     fontSize: '14px',
     fontWeight: 400,
@@ -164,7 +163,8 @@ const Review = (props) => {
         className={clsx(
           classes.field,
           multipleValues && classes.separatedField
-        )}>
+        )}
+      >
         {label !== false && (
           <div className="field__title">
             <Typography className={classes.label} variant="subtitle2">
@@ -176,7 +176,8 @@ const Review = (props) => {
           className={clsx(
             'field__value',
             multipleValues && classes.separatedValues
-          )}>
+          )}
+        >
           <Typography className={classes.value} variant="body2">
             {value}
           </Typography>
@@ -201,7 +202,8 @@ const Review = (props) => {
                   <Grid
                     key={label}
                     item
-                    xs={4}>{`${label} ${values?.contract[attr]} kW `}</Grid>
+                    xs={4}
+                  >{`${label} ${values?.contract[attr]} kW `}</Grid>
                 )
               }
             )
@@ -328,7 +330,9 @@ const Review = (props) => {
           <ReviewField
             label={t('FARE')}
             value={
-               values?.contract?.isIndexed ? t('FARE_INDEXED') : t('FARE_PERIODS')
+              values?.contract?.isIndexed
+                ? t('FARE_INDEXED')
+                : t('FARE_PERIODS')
             }
           />
           {values?.contract?.has_service ? (
@@ -420,94 +424,94 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12}>
-        { values?.contract?.isIndexed ?
-          <>
-            <Divider variant="middle" className={classes.divider} />
+          {values?.contract?.isIndexed ? (
+            <>
+              <Divider variant="middle" className={classes.divider} />
 
-            <Typography className={classes.sectionTitle} variant="h6">
-              {t('PREUS')}
-            </Typography>
+              <Typography className={classes.sectionTitle} variant="h6">
+                {t('PREUS')}
+              </Typography>
 
-            <Typography
-              variant="body1"
-              align="justify"
-              dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_INDEXED_MORE', {
-                indexed_url: t(
-                  'TARIFF_MODE_INDEXED_URL'
-                )
-              })}}
-            />
-          </>
-        :
-          <>
-            <Divider variant="middle" className={classes.divider} />
+              <Typography
+                variant="body1"
+                align="justify"
+                dangerouslySetInnerHTML={{
+                  __html: t('TARIFF_MODE_INDEXED_MORE', {
+                    indexed_url: t('TARIFF_MODE_INDEXED_URL')
+                  })
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <Divider variant="middle" className={classes.divider} />
 
-            <Typography className={classes.sectionTitle} variant="h6">
-              {t('PREUS_AMB_IMPOSTOS')}
-            </Typography>
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <ReviewField
-                  label={t('TERME_ENERGIA')}
-                  value={<Prices concept={prices?.te} name="te" />}
-                  multipleValues={true}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <ReviewField
-                  label={t('GENERATION')}
-                  value={<Prices concept={prices?.gkwh} name="gkwh" />}
-                  multipleValues={true}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <ReviewField
-                  label={t('TERME_POTENCIA')}
-                  value={<Prices concept={prices?.tp} name="tp" />}
-                  multipleValues={true}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <ReviewField
-                  label={t('AUTOCONSUM')}
-                  value={<Prices concept={prices?.ac} name="ac" />}
-                  multipleValues={true}
-                />
-              </Grid>
-              {prices?.bo_social?.value ? (
+              <Typography className={classes.sectionTitle} variant="h6">
+                {t('PREUS_AMB_IMPOSTOS')}
+              </Typography>
+              <Grid container>
                 <Grid item xs={12} sm={6}>
                   <ReviewField
-                    label={t('BO_SOCIAL')}
-                    value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                    label={t('TERME_ENERGIA')}
+                    value={<Prices concept={prices?.te} name="te" />}
                     multipleValues={true}
                   />
                 </Grid>
-              ) : null}
-            </Grid>
-          </>
-        }
-        {
-          values?.contract?.isIndexed ? null :
+                <Grid item xs={12} sm={6}>
+                  <ReviewField
+                    label={t('GENERATION')}
+                    value={<Prices concept={prices?.gkwh} name="gkwh" />}
+                    multipleValues={true}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <ReviewField
+                    label={t('TERME_POTENCIA')}
+                    value={<Prices concept={prices?.tp} name="tp" />}
+                    multipleValues={true}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <ReviewField
+                    label={t('AUTOCONSUM')}
+                    value={<Prices concept={prices?.ac} name="ac" />}
+                    multipleValues={true}
+                  />
+                </Grid>
+                {prices?.bo_social?.value ? (
+                  <Grid item xs={12} sm={6}>
+                    <ReviewField
+                      label={t('BO_SOCIAL')}
+                      value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                      multipleValues={true}
+                    />
+                  </Grid>
+                ) : null}
+              </Grid>
+            </>
+          )}
+          {values?.contract?.isIndexed ? null : (
+            <Typography
+              variant="body1"
+              align="justify"
+              dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
+            />
+          )}
           <Typography
-            variant="body1"
-            align="justify"
-            dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
-          />
-        }
-          <Typography
-            className={classes.subsectionTitle} variant="subtitle2"
+            className={classes.subsectionTitle}
+            variant="subtitle2"
             dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
           />
           <ul>
             <li dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}></li>
-            <li 
+            <li
               dangerouslySetInnerHTML={{
                 __html: t('LLOGUER_COMPTADOR', {
                   valor: prices?.comptador?.value,
                   uom: prices?.comptador?.uom
                 })
-              }}>
-            </li>
+              }}
+            ></li>
           </ul>
 
           <Divider variant="middle" className={classes.dividerBottom} />
@@ -517,11 +521,13 @@ const Review = (props) => {
         title={t('GENERAL_TERMS')}
         open={open}
         onAccept={handleAccept}
-        onClose={handleClose}>
-        { values?.contract?.isIndexed ?
-          <GeneralEspeciTerms /> :
+        onClose={handleClose}
+      >
+        {values?.contract?.isIndexed ? (
+          <GeneralEspeciTerms />
+        ) : (
           <GeneralTerms />
-        }
+        )}
       </TermsDialog>
 
       <Box mt={2}>
@@ -535,9 +541,9 @@ const Review = (props) => {
             />
           }
           label={
-            values?.contract?.isIndexed?
-            t('INDEXED_ACCEPT_CONDITIONS'):
-            t('ACCEPT_TERMS')
+            values?.contract?.isIndexed
+              ? t('INDEXED_ACCEPT_CONDITIONS')
+              : t('ACCEPT_TERMS')
           }
         />
       </Box>
