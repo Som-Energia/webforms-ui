@@ -601,28 +601,29 @@ const Contract = (props) => {
     let next = activeStep + 1
 
     // If the contract has no service, do not ask about self consumption
-    if (
-      activeStep === tariffModePage &&
-      props.values.contract.has_service === false
-    ) {
-      next = holderIdentifierPage
+    if (next === selfConsumptionPage && !props.values.contract.has_service) {
+      next++
     }
 
+    console.log(
+      'have_installation',
+      props.values.self_consumption.have_installation
+    )
     // If no self consumption, do not ask for details
     if (
-      activeStep === selfConsumptionPage &&
-      props.values.self_consumption.have_installation === false
+      next === selfConsumptionDetailsPage &&
+      !props.values.self_consumption.have_installation
     ) {
-      next = holderIdentifierPage
+      next++
     }
 
     // If the owner is the member, do not ask personal data
     if (
-      activeStep === holderIdentifierPage &&
+      next === personalDataPage &&
       props.values.holder.vat === props.values.member.vat &&
       props.values.holder.isphisical
     ) {
-      next = voluntaryCentPage
+      next++
     }
 
     const last = maxStepNumber
@@ -637,27 +638,27 @@ const Contract = (props) => {
 
   const prevStep = (props) => {
     let prev = activeStep - 1
-    // Back from holderIdentifier, depending on having selfConsumption
-    // but always jumping selfConsumptionDetails
-    if (
-      activeStep === holderIdentifierPage &&
-      props.values.self_consumption.have_installation === false
-    ) {
-      prev =
-        props.values.contract.has_service === false
-          ? tariffModePage
-          : selfConsumptionPage
-    }
-
     // Back from voluntaryCent, depending on whether the user
     // had to entry the personal data
     if (
-      activeStep === voluntaryCentPage &&
+      prev === personalDataPage &&
       props.values.holder.vat === props.values.member.vat &&
       props.values.holder.isphisical
     ) {
-      prev = holderIdentifierPage
+      prev--
     }
+    // Back from holderIdentifier, depending on having selfConsumption
+    // but always jumping selfConsumptionDetails
+    if (
+      prev === selfConsumptionDetailsPage &&
+      !props.values.self_consumption.have_installation
+    ) {
+      prev--
+    }
+    if (prev === selfConsumptionPage && !props.values.contract.has_service) {
+      prev--
+    }
+
     setActiveStep(Math.max(0, prev))
     if (completed) {
       setCompleted(false)
