@@ -300,6 +300,11 @@ const Indexada = (props) => {
                                         ? 'PERIODS_IMPORTANT_INFO_BODY'
                                         : 'PERIODS_IMPORTANT_INFO_BODY_30',
                                       {
+                                        url_tariff_characteristics: t(
+                                          isTariff20
+                                          ? 'TARIFF_CHARACTERISTICS_2.0_URL'
+                                          : 'TARIFF_CHARACTERISTICS_3.0_URL'
+                                        ),
                                         tariff: hasTargetTariff,
                                         url_tariff_web: t(
                                           isTariffIndexed && isTariff20
