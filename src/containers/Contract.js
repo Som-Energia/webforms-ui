@@ -80,7 +80,7 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-  const { is30ContractEnabled = true } = props
+  const { is30ContractEnabled = true, isIndexedContractEnabled = false } = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -600,15 +600,16 @@ const Contract = (props) => {
   const nextStep = (props) => {
     let next = activeStep + 1
 
+    // If indexed contracts are not enabled, skip tariffModePage
+    if (next === tariffModePage && !isIndexedContractEnabled) {
+      next++
+    }
+
     // If the contract has no service, do not ask about self consumption
     if (next === selfConsumptionPage && !props.values.contract.has_service) {
       next++
     }
 
-    console.log(
-      'have_installation',
-      props.values.self_consumption.have_installation
-    )
     // If no self consumption, do not ask for details
     if (
       next === selfConsumptionDetailsPage &&
@@ -638,8 +639,7 @@ const Contract = (props) => {
 
   const prevStep = (props) => {
     let prev = activeStep - 1
-    // Back from voluntaryCent, depending on whether the user
-    // had to entry the personal data
+    // Skip holder personal data unless holder is not member or judiric
     if (
       prev === personalDataPage &&
       props.values.holder.vat === props.values.member.vat &&
@@ -647,15 +647,20 @@ const Contract = (props) => {
     ) {
       prev--
     }
-    // Back from holderIdentifier, depending on having selfConsumption
-    // but always jumping selfConsumptionDetails
+    // Skip selfConsumptionDetailsPage if has no self consumption installation
     if (
       prev === selfConsumptionDetailsPage &&
       !props.values.self_consumption.have_installation
     ) {
       prev--
     }
+    // Skip selfConsumption choice if the supply point has no service
     if (prev === selfConsumptionPage && !props.values.contract.has_service) {
+      prev--
+    }
+
+    // If indexed contracts are not enabled, skip tariffModePage
+    if (prev === tariffModePage && !isIndexedContractEnabled) {
       prev--
     }
 
