@@ -488,10 +488,7 @@ const Contract = (props) => {
             this.parent.legal_person_accepted !== true
           )
         }
-      }),
-      privacy_policy_accepted: Yup.bool()
-        .required(t('UNACCEPTED_PRIVACY_POLICY'))
-        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+      })
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
@@ -514,7 +511,13 @@ const Contract = (props) => {
     Yup.object().shape({
       terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS')),
+      particular_contract_terms_accepted: Yup.bool()
+        .required(t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS')),
+      privacy_policy_accepted: Yup.bool()
+        .required(t('UNACCEPTED_PRIVACY_POLICY'))
+        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
     })
   ]
 
@@ -524,12 +527,12 @@ const Contract = (props) => {
     <MemberIdentifier />,
     <CUPS />,
     <SupplyPoint />,
-    <PowerFare rates={rates} is30ContractEnabled={is30ContractEnabled} />,
+    <PowerFare />,
     <TariffMode />,
     <SelfConsumption />,
     <SelfConsumptionDetails />,
     <HolderIdentifier />,
-    <PersonalData url={t('DATA_PROTECTION_CONTRACT_URL')} />,
+    <PersonalData />,
     <VoluntaryCent />,
     <IBAN />,
     <Review />
@@ -583,7 +586,7 @@ const Contract = (props) => {
           <HolderIdentifier {...props} />
         )}
         {(showAllSteps || activeStep === personalDataPage) && (
-          <PersonalData url={url} {...props} />
+          <PersonalData skipPrivacyPolicy url={url} {...props} />
         )}
         {(showAllSteps || activeStep === voluntaryCentPage) && (
           <VoluntaryCent {...props} />

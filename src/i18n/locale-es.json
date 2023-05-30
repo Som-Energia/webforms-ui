@@ -597,7 +597,7 @@
     "TARIFF_MODE_INDEXED_URL":"https://es.support.somenergia.coop/article/1273-la-tarifa-indexada",
     "TARIFF_MODE_TARIFF_COMPARISON": "En el Centro de Ayuda puedes ver una <a target='_blank' href=\"{{url}}\">comparación de las dos tarifas</a>.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL":"https://es.support.somenergia.coop/article/1332-comparacion-de-las-tarifas-por-periodos-y-las-indexadas ",
-    "CONTRACT_PARTICULAR_TERMS_ACCEPTED": "Con la aceptación de estas condiciones particulares, la contratante se obliga al pago de su consumo al precio que resulte de la aplicación de la tarifa contratada.",
+    "CONTRACT_PARTICULAR_TERMS": "Con la aceptación de estas condiciones particulares, la contratante se obliga al pago de su consumo al precio que resulte de la aplicación de la tarifa contratada.",
     "PEAK": "Punta",
     "VALLEY": "Valle",
     "FLAT": "Llano",
@@ -605,5 +605,7 @@
     "TOLL_SAME": "Se mantendrá el peaje actual",
     "FARE_INDEXED": "Indexada",
     "FARE_PERIODS": "Periodos",
+    "CONTRACT_PRIVACY_POLICY_TERMS": "He leído y acepto la <a target='_blank' href='{{url}}'>política de privacidad</a> de Som Energia.",
+    "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/es/aviso-legal/",
     "UNKNOWN_FIELD": "Campo desconocido"
 }

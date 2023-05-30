@@ -596,7 +596,7 @@
     "TARIFF_MODE_INDEXED_URL":"https://eu.support.somenergia.coop/article/1275-tarifa-indexatua",
     "TARIFF_MODE_TARIFF_COMPARISON": "Laguntza Gunean <a target='_blank' href=\"{{url}}\">bi tarifen konparazio</a> bat aurkituko duzu.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL": "https://eu.support.somenergia.coop/article/1334-comparacion-de-las-tarifas-por-periodos-e-indexadas-euskera",
-    "CONTRACT_PARTICULAR_TERMS_ACCEPTED": "Baldintza berezi hauek onartzean, kontratugileak hitzematen du egindako kontsumoa kontratatutako tarifari aplikatzekoa zaion prezioan ordainduko duela.",
+    "CONTRACT_PARTICULAR_TERMS": "Baldintza berezi hauek onartzean, kontratugileak hitzematen du egindako kontsumoa kontratatutako tarifari aplikatzekoa zaion prezioan ordainduko duela.",
     "PEAK": "Puntakoa",
     "VALLEY": "Sakonunea",
     "FLAT": "Une arrunta",
@@ -604,6 +604,8 @@
     "TOLL_SAME": "Oraingo bidesaria mantenduko da",
     "FARE_INDEXED": "Indexatua",
     "FARE_PERIODS": "Ordutegi-tarteen",
+    "CONTRACT_PRIVACY_POLICY_TERMS": "Som Energiaren <a target='_blank' href='{{url}}'>pribatutasun-politika</a> irakurri dut eta onartzen dut.",
+    "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/eu/lege-oharra/",
     "UNKNOWN_FIELD": "Campo desconocido"
 }
 

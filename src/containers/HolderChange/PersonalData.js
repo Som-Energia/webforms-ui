@@ -48,6 +48,7 @@ function PersonalData(props) {
     handleBlur,
     errors,
     touched,
+    skipPrivacyPolicy = false,
     entity = 'holder'
   } = props
   const [openLegal, setOpenLegal] = useState(false)
@@ -461,64 +462,68 @@ function PersonalData(props) {
               ))}
             </TextField>
           </Grid>
-
-          <Grid item mt={1} mb={0}>
-            <FormHelperText
-              dangerouslySetInnerHTML={{
-                __html:
-                  values?.contract?.has_service === undefined
-                    ? entity === 'holder'
-                      ? t('PRIVACY_POLICY_HOLDERCHANGE', {
-                          url: t('DATA_PROTECTION_HOLDERCHANGE_URL')
-                        })
-                      : t('PRIVACY_POLICY_NEWMEMBER', {
-                          url: t('DATA_PROTECTION_NEWMEMBER_URL')
-                        })
-                    : t('PRIVACY_POLICY_CONTRACT', {
-                        url: t('DATA_PROTECTION_CONTRACT_URL')
-                      })
-              }}
-            />
-            {values?.contract?.has_service === undefined ? (
+          {skipPrivacyPolicy === true ? null : (
+            <Grid item mt={1} mb={0}>
               <FormHelperText
-                className={classes.noteText}
                 dangerouslySetInnerHTML={{
-                  __html: t('PRIVACY_POLICY_HOLDERCHANGE_NOTE')
+                  __html:
+                    values?.contract?.has_service === undefined
+                      ? entity === 'holder'
+                        ? t('PRIVACY_POLICY_HOLDERCHANGE', {
+                            url: t('DATA_PROTECTION_HOLDERCHANGE_URL')
+                          })
+                        : t('PRIVACY_POLICY_NEWMEMBER', {
+                            url: t('DATA_PROTECTION_NEWMEMBER_URL')
+                          })
+                      : t('PRIVACY_POLICY_CONTRACT', {
+                          url: t('DATA_PROTECTION_CONTRACT_URL')
+                        })
                 }}
               />
-            ) : (
-              <></>
-            )}
-          </Grid>
+              {'skipPrivacyPolicy: ' + skipPrivacyPolicy}
+              {values?.contract?.has_service === undefined ? (
+                <FormHelperText
+                  className={classes.noteText}
+                  dangerouslySetInnerHTML={{
+                    __html: t('PRIVACY_POLICY_HOLDERCHANGE_NOTE')
+                  }}
+                />
+              ) : (
+                <></>
+              )}
+            </Grid>
+          )}
           <Grid item xs={12}>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    id="privacy_policy_accepted"
-                    color="primary"
-                    name="privacy_policy_accepted"
-                    onClick={handleClick}
-                    checked={values?.privacy_policy_accepted}
-                  />
-                }
-                label={
-                  <label
-                    dangerouslySetInnerHTML={{
-                      __html: t('ACCEPT_PRIVACY_POLICY', {
-                        url:
-                          values?.contract?.has_service === undefined
-                            ? entity === 'holder'
-                              ? t('DATA_PROTECTION_HOLDERCHANGE_URL')
-                              : t('DATA_PROTECTION_NEWMEMBER_URL')
-                            : t('DATA_PROTECTION_CONTRACT_URL')
-                      })
-                    }}
-                  />
-                }
-                labelPlacement="end"
-              />
-            </FormGroup>
+            {skipPrivacyPolicy ? null : (
+              <FormGroup row>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      id="privacy_policy_accepted"
+                      color="primary"
+                      name="privacy_policy_accepted"
+                      onClick={handleClick}
+                      checked={values?.privacy_policy_accepted}
+                    />
+                  }
+                  label={
+                    <label
+                      dangerouslySetInnerHTML={{
+                        __html: t('ACCEPT_PRIVACY_POLICY', {
+                          url:
+                            values?.contract?.has_service === undefined
+                              ? entity === 'holder'
+                                ? t('DATA_PROTECTION_HOLDERCHANGE_URL')
+                                : t('DATA_PROTECTION_NEWMEMBER_URL')
+                              : t('DATA_PROTECTION_CONTRACT_URL')
+                        })
+                      }}
+                    />
+                  }
+                  labelPlacement="end"
+                />
+              </FormGroup>
+            )}
             {!values[entity]?.isphisical && values[entity]?.vatvalid && (
               <>
                 <FormGroup row>

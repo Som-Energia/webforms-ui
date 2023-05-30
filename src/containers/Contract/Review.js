@@ -132,10 +132,16 @@ const Review = (props) => {
       })
   }, [])
 
-// TODO: terms_accepted -> general_contract_terms_accepted + indexed_specific_terms_accepted
+  // TODO: terms_accepted -> general_contract_terms_accepted + indexed_specific_terms_accepted
 
   const handleParticularConditionsCheckClick = () => {
-    setFieldValue('particular_contract_terms_accepted', !values?.particular_contract_terms_accepted)
+    setFieldValue(
+      'particular_contract_terms_accepted',
+      !values?.particular_contract_terms_accepted
+    )
+  }
+  const handlePrivacyPolicyCheckClick = () => {
+    setFieldValue('privacy_policy_accepted', !values?.privacy_policy_accepted)
   }
   const handleClick = (event) => {
     event.preventDefault()
@@ -545,8 +551,29 @@ const Review = (props) => {
               color="primary"
             />
           }
+          label={t('CONTRACT_PARTICULAR_TERMS')}
+        />
+      </Box>
+      <Box mt={2}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="privacy_policy_accepted"
+              onClick={handlePrivacyPolicyCheckClick}
+              checked={values.privacy_policy_accepted}
+              color="primary"
+            />
+          }
           label={
-            t('CONTRACT_PARTICULAR_TERMS_ACCEPTED')
+            <Typography
+              variant="body1"
+              align="justify"
+              dangerouslySetInnerHTML={{
+                __html: t('CONTRACT_PRIVACY_POLICY_TERMS', {
+                  url: t('CONTRACT_PRIVACY_POLICY_TERMS_URL')
+                })
+              }}
+            ></Typography>
           }
         />
       </Box>
