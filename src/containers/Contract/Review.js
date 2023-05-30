@@ -504,14 +504,7 @@ const Review = (props) => {
           />
           <ul>
             <li dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}></li>
-            <li
-              dangerouslySetInnerHTML={{
-                __html: t('LLOGUER_COMPTADOR', {
-                  valor: prices?.comptador?.value,
-                  uom: prices?.comptador?.uom
-                })
-              }}
-            ></li>
+            <li dangerouslySetInnerHTML={{ __html: t('LLOGUER_COMPTADOR') }}></li>
           </ul>
 
           <Divider variant="middle" className={classes.dividerBottom} />

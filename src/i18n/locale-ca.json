@@ -321,7 +321,7 @@
     "BO_SOCIAL": "Bo social",
     "CONCEPTES_EXTRES": "A aquests preus s'hi han de sumar els conceptes següents:",
     "EXTRA_REACTIVA": "En determinades condicions, segons la normativa, en aquests preus cal afegir un recàrrec per <b>energia reactiva i/o excés de potència</b>.",
-    "LLOGUER_COMPTADOR": "<b>Lloguer de comptador</b>: Depèn de cada cas. En general, {{valor}} {{uom}} amb impostos",
+    "LLOGUER_COMPTADOR": "<b>Lloguer de comptador:</b> depèn de cada cas, en funció del que estableixi la normativa.",
     "TIPUS_INSTALLACIO_CONTRACTACIO": "Quin tipus d'instal·lació tens?",
     "POTENCIA_A_CONTRACTAR_CONTRACTACIO": "Quina potència vols contractar?",
     "DISCRIMINACIO_HORARIA_CONTRACTACIO": "Vols discriminació horària?",
