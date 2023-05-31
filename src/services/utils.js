@@ -257,7 +257,7 @@ export const normalizeContract = (contract) => {
   finalContract.member_number = contract?.member?.number
   finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
-  finalContract.isIndexed = contract?.isIndexed
+  finalContract.is_indexed = contract?.isIndexed
   finalContract.tariff = contract?.contract?.rate
 
   const rates = getRates()
