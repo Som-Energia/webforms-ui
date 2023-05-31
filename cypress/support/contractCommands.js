@@ -188,4 +188,10 @@ Cypress.Commands.add('enterPaymentData', (paymentIban) => {
 
 Cypress.Commands.add('reviewAndConfirmData', () => {
   cy.contains('€/kWh')
+
+  cy.get('[name="terms_accepted"]').click()
+  cy.get('[data-cy=accept]').click()
+
+  cy.get('[name="particular_terms_accepted"]').click()
+  cy.get('[name="privacy_policy_accepted"]').click()
 })

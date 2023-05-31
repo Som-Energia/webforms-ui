@@ -40,6 +40,8 @@ describe('Contract', () => {
       cy.enterPaymentData(this.data.holder.iban)
 
       cy.reviewAndConfirmData()
+
+      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
     })
   })
 
@@ -68,6 +70,8 @@ describe('Contract', () => {
       cy.enterPaymentData(this.data.holder.iban)
 
       cy.reviewAndConfirmData()
+
+      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
     })
 
     // contract 3.0TD not allowed
