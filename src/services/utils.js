@@ -257,7 +257,7 @@ export const normalizeContract = (contract) => {
   finalContract.member_number = contract?.member?.number
   finalContract.member_vat = contract?.member?.vat
   finalContract.cups = contract?.supply_point?.cups
-  finalContract.is_indexed = contract?.isIndexed
+  finalContract.is_indexed = contract?.contract?.isIndexed
   finalContract.tariff = contract?.contract?.rate
 
   const rates = getRates()
@@ -347,7 +347,7 @@ export const normalizeContract = (contract) => {
 
   finalContract.attachments = contract?.supply_point?.attachments
   finalContract.general_contract_terms_accepted = contract?.terms_accepted
-  if (contract?.isIndexed) {
+  if (contract?.contract?.isIndexed) {
     finalContract.indexed_specific_terms_accepted = contract?.terms_accepted
   }
   finalContract.particular_contract_terms_accepted = contract?.particular_contract_terms_accepted
