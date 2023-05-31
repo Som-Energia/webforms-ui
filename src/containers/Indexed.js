@@ -207,13 +207,7 @@ const Indexada = (props) => {
         .oneOf([true], t('UNACCEPTED_TERMS')),
       particular_contract_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS')),
-      indexed_legal_terms_accepted: Yup.bool().when([], {
-        is: () => !isTariffIndexed,
-        then: Yup.bool().required(t('UNACCEPTED_TERMS')) &&
-              Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
-        otherwise: Yup.bool().notRequired(),
-    })
+        .oneOf([true], t('UNACCEPTED_TERMS'))
       })
   ]
 
@@ -274,6 +268,11 @@ const Indexada = (props) => {
                                       ? 'PERIODS_INTRO_BODY'
                                       : 'INDEXED_INTRO_BODY'
                                       , {
+                                      url_tariff_index_characteristics: t(
+                                        isTariff20
+                                        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
+                                        : 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
+                                        ),
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
                                       ),
@@ -282,8 +281,8 @@ const Indexada = (props) => {
                                       ),
                                       url_tariff_characteristics: t(
                                         isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_2.0_URL'
-                                        : 'TARIFF_CHARACTERISTICS_3.0_URL'
+                                        ? 'TARIFF_CHARACTERISTICS_20_URL'
+                                        : 'TARIFF_CHARACTERISTICS_30_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -302,20 +301,14 @@ const Indexada = (props) => {
                                       {
                                         url_tariff_characteristics: t(
                                           isTariff20
-                                          ? 'TARIFF_CHARACTERISTICS_2.0_URL'
-                                          : 'TARIFF_CHARACTERISTICS_3.0_URL'
+                                          ? 'TARIFF_CHARACTERISTICS_20_URL'
+                                          : 'TARIFF_CHARACTERISTICS_30_URL'
                                         ),
-                                        tariff: hasTargetTariff,
                                         url_tariff_web: t(
-                                          isTariffIndexed && isTariff20
+                                          isTariff20
                                           ? 'TARIFF_WEB_URL'
                                           : 'TARIFF_WEB_30_URL'
                                         ),
-                                        url_tariff_type: t(
-                                          isTariffIndexed && isTariff20
-                                          ? 'TARIFF_TYPE_URL'
-                                          : 'TARIFF_30_TYPE_URL'
-                                        )
                                       })
                                       : t(isTariff20
                                         ? 'INDEXED_IMPORTANT_INFO_BODY'
