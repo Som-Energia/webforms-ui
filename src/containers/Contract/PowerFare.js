@@ -71,9 +71,8 @@ const PowerFare = (props) => {
               onBlur={handleBlur}
               value={values?.contract?.phases}
               error={errors?.contract?.phases && touched?.contract?.phases}
-              helperText={
-                touched?.contract?.phases && errors?.contract?.phases
-              }>
+              helperText={touched?.contract?.phases && errors?.contract?.phases}
+            >
               <MenuItem value="mono">{t('PHASE_MONO')}</MenuItem>
               <MenuItem value="tri">{t('PHASE_TRI')}</MenuItem>
             </TextField>
@@ -85,7 +84,8 @@ const PowerFare = (props) => {
                 __html: t('HELP_INSTALL_TYPE', {
                   url: t('HELP_INSTALL_TYPE_URL')
                 })
-              }}></FormHelperText>
+              }}
+            ></FormHelperText>
           </Box>
         </>
       )}
@@ -140,8 +140,9 @@ const PowerFare = (props) => {
                   indexed_url: values?.moreThan15Kw
                     ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
                     : t('POWER_INDEXED_20TD_MORE_INFO_URL')
-                  })
-              }}></FormHelperText>
+                })
+              }}
+            ></FormHelperText>
           </Box>
           <Box mt={2} mb={1}>
             <PowerInputs
