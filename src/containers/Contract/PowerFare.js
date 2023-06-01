@@ -130,19 +130,32 @@ const PowerFare = (props) => {
       {(!values?.contract?.moreThan15Kw || is30ContractEnabled) && (
         <>
           <Box mt={3}>
-            <FormHelperText
-              dangerouslySetInnerHTML={{
-                __html: t('POWER_PERIODS_MORE_INFO', {
-                  tariff: values?.tariff,
-                  periods_url: values?.moreThan15Kw
-                    ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
-                    : t('POWER_PERIODS_20TD_MORE_INFO_URL'),
-                  indexed_url: values?.moreThan15Kw
-                    ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
-                    : t('POWER_INDEXED_20TD_MORE_INFO_URL')
-                })
-              }}
-            ></FormHelperText>
+            {isIndexedContractEnabled ? (
+              <FormHelperText
+                dangerouslySetInnerHTML={{
+                  __html: t('POWER_PERIODS_MORE_INFO', {
+                    tariff: values?.tariff,
+                    periods_url: values?.moreThan15Kw
+                      ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
+                      : t('POWER_PERIODS_20TD_MORE_INFO_URL'),
+                    indexed_url: values?.moreThan15Kw
+                      ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
+                      : t('POWER_INDEXED_20TD_MORE_INFO_URL')
+                  })
+                }}
+              ></FormHelperText>
+            ) : (
+              <FormHelperText
+                dangerouslySetInnerHTML={{
+                  __html: t('POWER_PERIODS_MORE_INFO__DEPRECATED', {
+                    tariff: values?.tariff,
+                    url: values?.moreThan15Kw
+                      ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
+                      : t('POWER_PERIODS_20TD_MORE_INFO_URL')
+                  })
+                }}
+              ></FormHelperText>
+            )}
           </Box>
           <Box mt={2} mb={1}>
             <PowerInputs
