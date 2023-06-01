@@ -25,6 +25,7 @@ const PowerFare = (props) => {
     touched,
     rates,
     setFieldValue,
+    isIndexedContractEnabled,
     is30ContractEnabled = false
   } = props
 

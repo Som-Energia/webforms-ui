@@ -569,6 +569,7 @@ const Contract = (props) => {
         {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
             rates={rates}
+            isIndexedContractEnabled={isIndexedContractEnabled}
             is30ContractEnabled={is30ContractEnabled}
             {...props}
           />
