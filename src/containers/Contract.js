@@ -592,7 +592,12 @@ const Contract = (props) => {
           <VoluntaryCent {...props} />
         )}
         {(showAllSteps || activeStep === ibanPage) && <IBAN {...props} />}
-        {(showAllSteps || activeStep === reviewPage) && <Review {...props} />}
+        {(showAllSteps || activeStep === reviewPage) && (
+          <Review
+            isIndexedContractEnabled={isIndexedContractEnabled}
+            {...props}
+          />
+        )}
       </>
     )
   }

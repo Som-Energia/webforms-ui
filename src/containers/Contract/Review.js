@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, isIndexedContractEnabled } = props
 
   const [open, setOpen] = useState(false)
   const [prices, setPrices] = useState({})
@@ -319,22 +319,35 @@ const Review = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
-          <ReviewField
-            label={t('TOLL')}
-            value={
-              values?.contract?.has_service
-                ? t('TOLL_SAME')
-                : values?.contract?.rate
-            }
-          />
-          <ReviewField
-            label={t('FARE')}
-            value={
-              values?.contract?.isIndexed
-                ? t('FARE_INDEXED')
-                : t('FARE_PERIODS')
-            }
-          />
+          {isIndexedContractEnabled === true ? (
+            <>
+              <ReviewField
+                label={t('TOLL')}
+                value={
+                  values?.contract?.has_service
+                    ? t('TOLL_SAME')
+                    : values?.contract?.rate
+                }
+              />
+              <ReviewField
+                label={t('FARE')}
+                value={
+                  values?.contract?.isIndexed
+                    ? t('FARE_INDEXED')
+                    : t('FARE_PERIODS')
+                }
+              />
+            </>
+          ) : (
+            <ReviewField
+              label={t('FARE')}
+              value={
+                values?.contract?.has_service
+                  ? t('FARE_SAME')
+                  : values?.contract?.rate
+              }
+            />
+          )}
           {values?.contract?.has_service ? (
             <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
           ) : (
