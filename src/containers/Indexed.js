@@ -60,14 +60,12 @@ const Indexada = (props) => {
   const [loading, setLoading] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result, setResult] = useState()
+  const [result, setResult] = useState(true)
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
   const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
   const [kCoefficient, setKCoefficient] = useState('')
-
-  console.log("TARIFF INDEXED", isTariffIndexed)
 
   const handlers = {
     SHOW_INSPECTOR: () => {
@@ -114,9 +112,8 @@ const Indexada = (props) => {
 
 
   const initialValues = {
-    terms_accepted: false,
+    general_contract_terms_accepted: false,
     particular_contract_terms_accepted: false,
-    indexed_legal_terms_accepted: false
   }
 
   const nextStep = (props) => {
@@ -200,9 +197,7 @@ const Indexada = (props) => {
     Yup.object().shape({}),
     Yup.object().shape({}),
     Yup.object().shape({
-      isTariffIndexed: Yup.string()
-        .isTariffIndexed,
-      terms_accepted: Yup.bool()
+      general_contract_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS')),
       particular_contract_terms_accepted: Yup.bool()

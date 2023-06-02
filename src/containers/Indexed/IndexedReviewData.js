@@ -182,7 +182,7 @@ const IndexedReviewData = (props) => {
           <IndexedReviewField label={t('IBAN')} value={contractValues?.iban} />
           <IndexedReviewField
             label={t('VOLUNTARY_CENT')}
-            value={contractValues?.donation || 'No'}
+            value={contractValues?.donation ? 'Sí' : 'No'}
           />
         </Grid>
 
@@ -208,7 +208,7 @@ const IndexedReviewData = (props) => {
           <FormControlLabel
             control={
               <Checkbox
-                name="terms_accepted"
+                name="general_contract_terms_accepted"
                 id="change-tarif-terms-check"
                 onClick={handleClick}
                 checked={values.terms_accepted}

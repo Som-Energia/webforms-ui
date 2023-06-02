@@ -16,25 +16,18 @@ const IndexedReview = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', true)
+    setFieldValue('general_contract_terms_accepted', true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', false)
+    setFieldValue('general_contract_terms_accepted', false)
   }
 
   const handleIndexadaTermsAccepted = (data) => {
     setIndexadaTermsAccepted(data)
     setFieldValue('particular_contract_terms_accepted', data)
   }
-
-  const handleIndexadaLegalTermsAccepted = (data) => {
-    setIndexadaLegalTermsAccepted(data)
-    setFieldValue('indexed_legal_terms_accepted', data)
-  }
-
-  
 
   return (
     <IndexedReviewData
@@ -45,7 +38,6 @@ const IndexedReview = (props) => {
       open={open}
       targetTariff={targetTariff}
       indexadaTermsAccepted={indexadaTermsAccepted}
-      handleIndexadaLegalTermsAccepted={handleIndexadaLegalTermsAccepted}
       indexadaLegalTermsAccepted={indexadaLegalTermsAccepted}
       handleClick={handleClick}
       handleAccept={handleAccept}
