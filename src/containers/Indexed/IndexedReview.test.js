@@ -89,7 +89,7 @@ describe('Test that it correctly renders', () => {
         fireEvent.click(declineTermsButton)
     })
 
-    expect(mockSetFieldValue).toBeCalledWith("general_contract_terms_accepted",false)
+    expect(mockSetFieldValue).toBeCalledWith("terms_accepted",false)
     
   })
 
@@ -113,7 +113,7 @@ describe('Test that it correctly renders', () => {
         fireEvent.click(declineTermsButton)
     })
 
-    expect(mockSetFieldValue).toBeCalledWith("general_contract_terms_accepted",true)
+    expect(mockSetFieldValue).toBeCalledWith("terms_accepted",true)
     
   })
 

@@ -16,12 +16,12 @@ const IndexedReview = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('general_contract_terms_accepted', true)
+    setFieldValue('terms_accepted', true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('general_contract_terms_accepted', false)
+    setFieldValue('terms_accepted', false)
   }
 
   const handleIndexadaTermsAccepted = (data) => {

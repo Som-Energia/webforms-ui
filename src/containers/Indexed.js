@@ -112,7 +112,7 @@ const Indexada = (props) => {
 
 
   const initialValues = {
-    general_contract_terms_accepted: false,
+    terms_accepted: false,
     particular_contract_terms_accepted: false,
   }
 
@@ -197,7 +197,7 @@ const Indexada = (props) => {
     Yup.object().shape({}),
     Yup.object().shape({}),
     Yup.object().shape({
-      general_contract_terms_accepted: Yup.bool()
+      terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS')),
       particular_contract_terms_accepted: Yup.bool()

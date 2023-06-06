@@ -208,7 +208,7 @@ const IndexedReviewData = (props) => {
           <FormControlLabel
             control={
               <Checkbox
-                name="general_contract_terms_accepted"
+                name="terms_accepted"
                 id="change-tarif-terms-check"
                 onClick={handleClick}
                 checked={values.terms_accepted}
