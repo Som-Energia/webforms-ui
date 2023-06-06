@@ -295,7 +295,8 @@
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Canvi de comercialitzadora modificant la persona titular",
     "CANVI_DE_COMERCIALITZADORA": "Canvi de comercialitzadora mantenint la persona titular",
     "API_ERROR": "Error",
-    "PREUS_AMB_IMPOSTOS": "Preus amb impostos",
+    "PRICES_PLUS_TAXES": "Preus amb impostos",
+    "PRICES": "Preus",
     "TERME_ENERGIA": "Terme d’energia",
     "TERME_ENERGIA_P1_2": {
         "0TD": "Període punta"

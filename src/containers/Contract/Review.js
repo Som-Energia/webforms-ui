@@ -442,7 +442,7 @@ const Review = (props) => {
               <Divider variant="middle" className={classes.divider} />
 
               <Typography className={classes.sectionTitle} variant="h6">
-                {t('PREUS')}
+                {t('PRICES')}
               </Typography>
 
               <Typography
@@ -460,7 +460,7 @@ const Review = (props) => {
               <Divider variant="middle" className={classes.divider} />
 
               <Typography className={classes.sectionTitle} variant="h6">
-                {t('PREUS_AMB_IMPOSTOS')}
+                {t('PRICES_PLUS_TAXES')}
               </Typography>
               <Grid container>
                 <Grid item xs={12} sm={6}>

@@ -289,7 +289,8 @@
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Cambio de comercializadora modificando a persoa titular",
     "CANVI_DE_COMERCIALITZADORA": "Cambio de comercializadora mantendo a persoa titular",
     "API_ERROR": "Erro",
-    "PREUS_AMB_IMPOSTOS": "Prezos con impostos",
+    "PRICES_PLUS_TAXES": "Prezos con impostos",
+    "PRICES": "Prezos",
     "TERME_ENERGIA": "Termo de enerxía",
     "TERME_ENERGIA_P1_2": {
         "0TD": "Período punta"

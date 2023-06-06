@@ -295,7 +295,8 @@
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Merkaturatze-konpainia eta titularra aldatzea",
     "CANVI_DE_COMERCIALITZADORA": "Merkaturatze-konpainia aldatzea baina titularra mantentzea",
     "API_ERROR": "Errorea",
-    "PREUS_AMB_IMPOSTOS": "Prezioak zergak barne",
+    "PRICES_PLUS_TAXES": "Prezioak zergak barne",
+    "PRICES": "Prezioak",
     "TERME_ENERGIA": "Energia-tartea",
     "TERME_ENERGIA_P1_2": {
         "0TD": "Puntako aldia"
