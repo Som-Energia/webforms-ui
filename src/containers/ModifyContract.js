@@ -27,7 +27,6 @@ import Resume from './ModifyContract/Resume'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 import AlertBox from 'components/AlertBox'
-import { Description } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
