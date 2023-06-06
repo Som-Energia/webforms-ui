@@ -128,6 +128,22 @@ describe('Test that it correctly renders', () => {
     expect(mockHandleIndexadaTermsAccepted).toBeCalledTimes(1)
   })
   
+  test('Should call the handleIndexadaLegalTermsAccepted function', () => {
+    //TODO: click the check to accept the legal terms
+    const dom = render(
+      <IndexedReviewData
+        open={false}
+        contractValues={mockContractValues}
+        setFieldValues={mockSetFieldValues}
+        values={mockInitialValues}
+        handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
+      />
+    )
+    const legalTermsCheck = getById(dom.container,'change-tariff-indexada-legal-terms-check')
+    fireEvent.click(legalTermsCheck)
+    expect(mockHandleIndexadaLegalTermsAccepted).toBeCalledTimes(1)
+  })
+
   test('Should show the 6 powers of a 3.0 contract', () => {
     
     let mock30ContractValues = JSON.parse(JSON.stringify(mockContractValues))

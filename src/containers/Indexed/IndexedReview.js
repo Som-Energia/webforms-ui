@@ -29,6 +29,11 @@ const IndexedReview = (props) => {
     setFieldValue('particular_contract_terms_accepted', data)
   }
 
+  const handleIndexadaLegalTermsAccepted = (data) => {
+    setIndexadaLegalTermsAccepted(data)
+    setFieldValue('indexed_legal_terms_accepted', data)
+  }
+
   return (
     <IndexedReviewData
       contractValues={contractValues}
@@ -38,6 +43,7 @@ const IndexedReview = (props) => {
       open={open}
       targetTariff={targetTariff}
       indexadaTermsAccepted={indexadaTermsAccepted}
+      handleIndexadaLegalTermsAccepted={handleIndexadaLegalTermsAccepted}
       indexadaLegalTermsAccepted={indexadaLegalTermsAccepted}
       handleClick={handleClick}
       handleAccept={handleAccept}
