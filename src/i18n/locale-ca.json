@@ -544,6 +544,8 @@
     "GENERAL_CONDITIONS_URL": "https://www.somenergia.coop/ca/condicions-del-contracte-de-som-energia/",
     "SPECIFIC_CONDITIONS_URL": "https://www.somenergia.coop/ca/condicions-del-contracte-de-som-energia/",
     "TARIFF_INDEXED_HELP_URL":"https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada",
+    "INDEXED_ACCEPT_LEGAL_TERMS":"Declaro que soc coneixedora que es tracta d’una prova pilot de la tarifa indexada i accepto les <a target='_blank' href=\"{{inscription_conditions_url}}\">condicions d’inscripció</a>, així com la possibilitat que es produeixin incidències per part de SOM ENERGIA, SCCL, les quals, en tot cas, podran ser comunicades al correu <a href = \"mailto:pilot_indexada@somenergia.coop\">pilot_indexada@somenergia.coop</a> per tal que siguin gestionades amb la celeritat més ràpida possible.",
+    "TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/230124_TARIFA%20INDEXADA_ANNEX_ca.pdf",
     "CURRENT_TARIFF":"Tarifa actual",
     "TARIFF_TO_CONTRACT":"Tarifa a contractar",
     "INDEXED_SUCCESS_PAGE_TITLE":"Has sol·licitat la tarifa:",

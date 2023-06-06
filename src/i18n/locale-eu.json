@@ -547,6 +547,8 @@
     "GENERAL_CONDITIONS_URL": "https://www.somenergia.coop/eu/energia-elektriko-hornikuntzaren-kontratuko-baldintza-orokorrak/",
     "SPECIFIC_CONDITIONS_URL": "https://www.somenergia.coop/ca/condicions-del-contracte-de-som-energia/",
     "TARIFF_INDEXED_HELP_URL":"https://eu.support.somenergia.coop/article/1275-tarifa-indexatua?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
+    "INDEXED_ACCEPT_LEGAL_TERMS":"Aitortzen dut jakitun naizela hau tarifa indexatuaren proba pilotu bat dela, eta izena <a target='_blank' href=\"{{inscription_conditions_url}}\">emateko baldintzak/a> onartzen ditu, bai eta SOM ENERGIA, SCCLren aldetik gorabeherak gertatu daitezkeela ere. Nolanahi ere, gorabeherak <a href = \"mailto:pilot_indexada@somenergia.coop\">pilot_indexada@somenergia.coop</a> helbide elektronikoaren bidez jakinarazi ahalko dira, ahalik eta azkarren kudea ditzaten.",
+    "TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/230124_TARIFA%20INDEXADA_ANEXO_es.pdf",
     "HELPER_TEXT_MODIFY_DATA":"Prozesu honetarako eman dizkiguzun datuak zuzendu nahi badituzu, bidaliguzu mezu elektroniko bat helbide honetara: <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a>.",
     "INDEXED_ACCEPT_CONDITIONS":"Som Energiaren baldintza orokorrak eta berariazko baldintzak irakurri ditut eta onartzen ditut.",
     "PERIODS_ACCEPT_CONDITIONS": "Som Energiaren Baldintza orokorrak irakurri ditut eta onartzen ditut.",

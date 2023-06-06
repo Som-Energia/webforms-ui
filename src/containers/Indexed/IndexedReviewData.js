@@ -257,6 +257,35 @@ const IndexedReviewData = (props) => {
           <Divider variant="middle" className={classes.dividerBottom} />
 
         </Grid>
+        { !isTariffIndexed && (
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="change-tariff-indexada-legal-terms-check"
+                name="legal_terms_accepted"
+                onClick={() =>
+                  handleIndexadaLegalTermsAccepted(!indexadaLegalTermsAccepted)
+                }
+                checked={values.indexed_legal_terms_accepted}
+                color="primary"
+              />
+            }
+            label={
+              <Typography
+                variant="body2"
+                dangerouslySetInnerHTML={{
+                  __html: t('INDEXED_ACCEPT_LEGAL_TERMS', {
+                    inscription_conditions_url: t(
+                      'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
+                    )
+                  })
+                }}
+              />
+            }
+          />
+        </Grid>
+        )}
       </Grid>
     </>
   )

@@ -202,7 +202,13 @@ const Indexada = (props) => {
         .oneOf([true], t('UNACCEPTED_TERMS')),
       particular_contract_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS'))
+        .oneOf([true], t('UNACCEPTED_TERMS')),
+      indexed_legal_terms_accepted: Yup.bool().when([], {
+        is: () => !isTariffIndexed,
+        then: Yup.bool().required(t('UNACCEPTED_TERMS')) &&
+              Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
+        otherwise: Yup.bool().notRequired(),
+    })
       })
   ]
 
