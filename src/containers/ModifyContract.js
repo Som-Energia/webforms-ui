@@ -197,21 +197,22 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <div className={classes.root}>
-      <AlertBox 
-          severity={"warning"}
-          variant={"body2"}
-          title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')} 
+        <AlertBox
+          severity={'warning'}
+          variant={'body2'}
+          title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')}
           description={t('MODIFY_POTTAR_BANER', {
             baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),
             baner_document_url: t('MODIFY_POTTAR_BANER_DOCUMENT_URL'),
             baner_help_url: t('MODIFY_POTTAR_BANER_HELP_URL')
-          })}>
-        </AlertBox>
+          })}
+        ></AlertBox>
         {fromD1 && (
           <Stepper
             className={classes.stepper}
             activeStep={activeD1Step}
-            orientation="vertical">
+            orientation="vertical"
+          >
             {d1Steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>
@@ -232,11 +233,13 @@ function ModifyContract(props) {
         <Stepper
           className={classes.stepper}
           activeStep={activeStep}
-          orientation="vertical">
+          orientation="vertical"
+        >
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel
-                error={index === steps.length - 1 && data?.error !== undefined}>
+                error={index === steps.length - 1 && data?.error !== undefined}
+              >
                 <span className={classes.stepLabel}>{t(label)}</span>
               </StepLabel>
               <StepContent>{getStepContent(index)}</StepContent>
@@ -264,7 +267,6 @@ function ModifyContract(props) {
           </Grow>
         )}
         {showInspector && <DisplayFormikState {...data} />}
-        
       </div>
     </GlobalHotKeys>
   )
