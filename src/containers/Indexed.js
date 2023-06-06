@@ -150,6 +150,7 @@ const Indexada = (props) => {
      }
 
     if (!isTariffIndexed) {
+      // Not indexed, moving to an indexed, requiring those checks
       params.indexed_specific_terms_accepted = data.terms_accepted
       params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
     }
