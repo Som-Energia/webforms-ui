@@ -60,7 +60,7 @@ const Indexada = (props) => {
   const [loading, setLoading] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result, setResult] = useState(true)
+  const [result, setResult] = useState(false)
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
