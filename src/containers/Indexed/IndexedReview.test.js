@@ -49,7 +49,7 @@ describe('Test that it correctly renders', () => {
   const mockSetFieldValue = jest.fn()
   const mockInitialValues = {
     terms_accepted: false,
-    indexed_terms_accepted: false,
+    particular_contract_terms_accepted: false,
     indexed_legal_terms_accepted: false
   }
 
@@ -66,23 +66,7 @@ describe('Test that it correctly renders', () => {
       'change-tariff-indexada-terms-check'
     )
     fireEvent.click(indexedTermsCheck)
-    expect(mockSetFieldValue).toBeCalledWith("indexed_terms_accepted", true)
-  })
-
-  test('Should call the setFieldValues function to change legal terms', () => {
-    const dom = render(
-      <IndexedReview
-        contractValues={mockContractValues}
-        setFieldValue={mockSetFieldValue}
-        values={mockInitialValues}
-      />
-    )
-    const legalTermsCheck = getById(
-      dom.container,
-      'change-tariff-indexada-legal-terms-check'
-    )
-    fireEvent.click(legalTermsCheck)
-    expect(mockSetFieldValue).toBeCalledWith("indexed_legal_terms_accepted", true)
+    expect(mockSetFieldValue).toBeCalledWith("particular_contract_terms_accepted", true)
   })
 
   test('Should call the setFieldValues function to decline general terms', async () => {
@@ -105,7 +89,7 @@ describe('Test that it correctly renders', () => {
         fireEvent.click(declineTermsButton)
     })
 
-    expect(mockSetFieldValue).toBeCalledWith("terms_accepted",false)
+    expect(mockSetFieldValue).toBeCalledWith("general_contract_terms_accepted",false)
     
   })
 
@@ -129,7 +113,7 @@ describe('Test that it correctly renders', () => {
         fireEvent.click(declineTermsButton)
     })
 
-    expect(mockSetFieldValue).toBeCalledWith("terms_accepted",true)
+    expect(mockSetFieldValue).toBeCalledWith("general_contract_terms_accepted",true)
     
   })
 

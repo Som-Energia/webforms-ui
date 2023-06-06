@@ -1,5 +1,5 @@
 import IndexedReviewData from './IndexedReviewData'
-import { fireEvent, render, screen, queryByAttribute } from '@testing-library/react'
+import { fireEvent, render, screen, queryByAttribute, within } from '@testing-library/react'
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => {
@@ -41,7 +41,7 @@ describe('Test that it correctly renders', () => {
   const mockSetFieldValues = jest.fn()
   const mockInitialValues = {
     terms_accepted: false,
-    indexed_terms_accepted: false,
+    particular_contract_terms_accepted: false,
     indexed_legal_terms_accepted: false
   }
 
@@ -50,7 +50,7 @@ describe('Test that it correctly renders', () => {
   const mockHandleIndexadaLegalTermsAccepted = jest.fn()
 
   test('The component render properly all texts', () => {
-    render(
+    const dom = render(
       <IndexedReviewData
         open={false}
         contractValues={mockContractValues}
@@ -63,7 +63,34 @@ describe('Test that it correctly renders', () => {
     const addressElement = screen.getByText(mockContractValues.address)
     const vatElement = screen.getByText(mockContractValues.owner_vat)
     const tariffElement = screen.getByText(mockTargetTariff)
+    const { getByText } = within(getById(dom.container,'VOLUNTARY_CENT__value'))
 
+    expect(getByText('Sí')).toBeInTheDocument()
+    expect(cupsElement).toBeInTheDocument()
+    expect(addressElement).toBeInTheDocument()
+    expect(vatElement).toBeInTheDocument()
+    expect(tariffElement).toBeInTheDocument()
+  })
+
+  test('The component render properly all texts without donation', () => {
+    const mockContractValuesWithoutDonation = JSON.parse(JSON.stringify(mockContractValues))
+    mockContractValuesWithoutDonation.donation = false
+    const dom = render(
+      <IndexedReviewData
+        open={false}
+        contractValues={mockContractValuesWithoutDonation}
+        setFieldValues={mockSetFieldValues}
+        targetTariff={mockTargetTariff}
+        values={mockInitialValues}
+      />
+    )
+    const cupsElement = screen.getByText(mockContractValues.cups)
+    const addressElement = screen.getByText(mockContractValues.address)
+    const vatElement = screen.getByText(mockContractValues.owner_vat)
+    const tariffElement = screen.getByText(mockTargetTariff)
+    const { getByText } = within(getById(dom.container,'VOLUNTARY_CENT__value'))
+
+    
     expect(cupsElement).toBeInTheDocument()
     expect(addressElement).toBeInTheDocument()
     expect(vatElement).toBeInTheDocument()
@@ -100,22 +127,7 @@ describe('Test that it correctly renders', () => {
     fireEvent.click(indexadaTermsCheck)
     expect(mockHandleIndexadaTermsAccepted).toBeCalledTimes(1)
   })
-  test('Should call the handleIndexadaLegalTermsAccepted function', () => {
-    //TODO: click the check to accept the legal terms
-    const dom = render(
-      <IndexedReviewData
-        open={false}
-        contractValues={mockContractValues}
-        setFieldValues={mockSetFieldValues}
-        values={mockInitialValues}
-        handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
-      />
-    )
-    const legalTermsCheck = getById(dom.container,'change-tariff-indexada-legal-terms-check')
-    fireEvent.click(legalTermsCheck)
-    expect(mockHandleIndexadaLegalTermsAccepted).toBeCalledTimes(1)
-  })
-
+  
   test('Should show the 6 powers of a 3.0 contract', () => {
     
     let mock30ContractValues = JSON.parse(JSON.stringify(mockContractValues))
@@ -126,6 +138,7 @@ describe('Test that it correctly renders', () => {
         contractValues={mock30ContractValues}
         setFieldValues={mockSetFieldValues}
         isTariff20={false}
+        isTariffIndexed={false}
         values={mockInitialValues}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
       />
@@ -150,6 +163,7 @@ describe('Test that it correctly renders', () => {
         contractValues={mockContractValues}
         setFieldValues={mockSetFieldValues}
         isTariff20={true}
+        isTariffIndexed={true}
         values={mockInitialValues}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
       />

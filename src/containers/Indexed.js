@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -34,6 +34,7 @@ import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
 import { checkIsTariff20 } from '../services/utils'
+import { checkIsTariffIndexed } from '../services/utils'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -59,10 +60,11 @@ const Indexada = (props) => {
   const [loading, setLoading] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
-  const [result, setResult] = useState()
+  const [result, setResult] = useState(false)
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
+  const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
   const [kCoefficient, setKCoefficient] = useState('')
 
   const handlers = {
@@ -71,34 +73,47 @@ const Indexada = (props) => {
     }
   }
 
-  const sectionsJson = [
-    {
-      title: t('INDEXED_GENERAL_CONDITIONS'),
-      text: t('INDEXED_GENERAL_CONDITIONS_TEXT')
-    },
-    {
-      title: t('INDEXED_SPECIFIC_CONDITIONS'),
-      text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
-    },
-    {
-      title: t('INDEXED_MARGE'),
-      text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
-    },
-    {
-      title: t('INDEXED_DURADA'),
-      text: t('INDEXED_DURADA_TEXT', { tariff: hasTargetTariff })
-    },
-    { title: t('INDEXED_DESESTIMENT'), text: t('INDEXED_DESESTIMENT_TEXT') },
-    {
-      title: t('INDEXED_PERSONAL_DATA_PROTECTION'),
-      text: t('INDEXED_PERSONAL_DATA_PROTECTION_TEXT')
+  const sectionsJson = useMemo(() => {
+
+    let sectionsJson = [
+      {
+        title: t('GENERAL_CONDITIONS'),
+        text: t('GENERAL_CONDITIONS_TEXT')
+      }
+    ]
+
+    if(!isTariffIndexed){
+      sectionsJson.push({
+        title: t('INDEXED_SPECIFIC_CONDITIONS'),
+        text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
+      },
+      {
+        title: t('INDEXED_MARGE'),
+        text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
+      }
+      )
     }
-  ]
+
+    sectionsJson.push(
+      {
+        title: t('DURADA'),
+        text: t('DURADA_TEXT', { tariff: hasTargetTariff })
+      },
+      { title: t('DESESTIMENT'), text: t('DESESTIMENT_TEXT') },
+      {
+        title: t('PERSONAL_DATA_PROTECTION'),
+        text: t('PERSONAL_DATA_PROTECTION_TEXT')
+      }
+    )
+
+    return sectionsJson
+  },[isTariffIndexed])
+
+
 
   const initialValues = {
-    terms_accepted: false,
-    indexed_terms_accepted: false,
-    indexed_legal_terms_accepted: false
+    general_contract_terms_accepted: false,
+    particular_contract_terms_accepted: false,
   }
 
   const nextStep = (props) => {
@@ -130,9 +145,13 @@ const Indexada = (props) => {
   const handlePost = (data) => {
     let params = {
       token: token,
-      terms_accepted: data.terms_accepted,
-      indexed_terms_accepted: data.indexed_terms_accepted,
-      indexed_legal_terms_accepted: data.indexed_legal_terms_accepted
+      general_contract_terms_accepted: data.terms_accepted,
+      particular_contract_terms_accepted: data.particular_contract_terms_accepted
+     }
+
+    if (!isTariffIndexed) {
+      params.indexed_specific_terms_accepted = data.terms_accepted
+      params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
     }
 
     setLoading(true)
@@ -178,16 +197,13 @@ const Indexada = (props) => {
     Yup.object().shape({}),
     Yup.object().shape({}),
     Yup.object().shape({
-      terms_accepted: Yup.bool()
+      general_contract_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS')),
-      indexed_terms_accepted: Yup.bool()
-        .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS')),
-      indexed_legal_terms_accepted: Yup.bool()
+      particular_contract_terms_accepted: Yup.bool()
         .required(t('UNACCEPTED_TERMS'))
         .oneOf([true], t('UNACCEPTED_TERMS'))
-    })
+      })
   ]
 
   if (!contractJSON.name || !contractJSON.cups) {
@@ -235,18 +251,33 @@ const Indexada = (props) => {
                                     data={contractJSON}
                                     targetTariff={hasTargetTariff}
                                     isTariff20={isTariff20}
+                                    isTariffIndexed={isTariffIndexed}
                                   />
                                 ) : null}
 
                                 {activeStep === 0 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
-                                    desc={t('INDEXED_INTRO_BODY', {
+                                    isTariffIndexed={isTariffIndexed}
+                                    desc={t(isTariffIndexed
+                                      ? 'PERIODS_INTRO_BODY'
+                                      : 'INDEXED_INTRO_BODY'
+                                      , {
+                                      url_tariff_index_characteristics: t(
+                                        isTariff20
+                                        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
+                                        : 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
+                                        ),
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
                                       ),
                                       url_specific_conditions: t(
                                         'INDEXED_SPECIFIC_CONDITIONS_URL'
+                                      ),
+                                      url_tariff_characteristics: t(
+                                        isTariff20
+                                        ? 'TARIFF_CHARACTERISTICS_20_URL'
+                                        : 'TARIFF_CHARACTERISTICS_30_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -255,23 +286,41 @@ const Indexada = (props) => {
                                 {activeStep === 1 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
+                                    isTariffIndexed={isTariffIndexed}
                                     title={t('INDEXED_INTRO_TITLE')}
-                                    desc={t(
-                                      isTariff20
+                                    desc={
+                                      isTariffIndexed
+                                      ? t(isTariff20
+                                        ? 'PERIODS_IMPORTANT_INFO_BODY'
+                                        : 'PERIODS_IMPORTANT_INFO_BODY_30',
+                                      {
+                                        url_tariff_characteristics: t(
+                                          isTariff20
+                                          ? 'TARIFF_CHARACTERISTICS_20_URL'
+                                          : 'TARIFF_CHARACTERISTICS_30_URL'
+                                        ),
+                                        url_tariff_web: t(
+                                          isTariff20
+                                          ? 'TARIFF_WEB_URL'
+                                          : 'TARIFF_WEB_30_URL'
+                                        ),
+                                      })
+                                      : t(isTariff20
                                         ? 'INDEXED_IMPORTANT_INFO_BODY'
                                         : 'INDEXED_IMPORTANT_INFO_BODY_30',
                                       {
                                         url_indexada_help: t(
                                           'TARIFF_INDEXED_HELP_URL'
-                                        )
-                                      }
-                                    )}
+                                        ),
+                                      })
+                                    }
                                     {...formikProps}
                                   />
                                 ) : null}
                                 {activeStep === 2 ? (
                                   <IndexedReview
                                     isTariff20={isTariff20}
+                                    isTariffIndexed={isTariffIndexed}
                                     targetTariff={hasTargetTariff}
                                     contractValues={contractJSON}
                                     {...formikProps}
@@ -340,9 +389,13 @@ const Indexada = (props) => {
                                 {result ? (
                                   <Success
                                     showHeader={false}
-                                    title={t('INDEXED_SUCCESS_PAGE_TITLE')}
+                                    title={t(isTariffIndexed
+                                      ? 'PERIODS_SUCCESS_PAGE_TITLE'
+                                      : 'INDEXED_SUCCESS_PAGE_TITLE')}
                                     subtitle={hasTargetTariff}
-                                    description={t('INDEXED_SUCCESS_PAGE_DESC')}
+                                    description={t(isTariffIndexed
+                                      ? 'PERIODS_SUCCESS_PAGE_DESC'
+                                      : 'INDEXED_SUCCESS_PAGE_DESC')}
                                   />
                                 ) : (
                                   <Failure error={error} showHeader={false} />
@@ -361,7 +414,7 @@ const Indexada = (props) => {
                 <Grid item xs={3}>
                   <DropDownMenu
                     title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
-                    sections={sectionsJson}
+                      sections={sectionsJson}
                   />
                 </Grid>
               </Grid>

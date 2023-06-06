@@ -68,7 +68,8 @@ const IndexedReviewData = (props) => {
     handleClose,
     handleIndexadaTermsAccepted,
     targetTariff,
-    isTariff20
+    isTariff20,
+    isTariffIndexed
   } = props
   const powers = JSON.parse(contractValues.powers)
 
@@ -181,7 +182,7 @@ const IndexedReviewData = (props) => {
           <IndexedReviewField label={t('IBAN')} value={contractValues?.iban} />
           <IndexedReviewField
             label={t('VOLUNTARY_CENT')}
-            value={contractValues?.donation || 'No'}
+            value={contractValues?.donation ? 'Sí' : 'No'}
           />
         </Grid>
 
@@ -207,7 +208,7 @@ const IndexedReviewData = (props) => {
           <FormControlLabel
             control={
               <Checkbox
-                name="terms_accepted"
+                name="general_contract_terms_accepted"
                 id="change-tarif-terms-check"
                 onClick={handleClick}
                 checked={values.terms_accepted}
@@ -218,7 +219,10 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_CONDITIONS')
+                  __html: t(isTariffIndexed
+                    ? 'PERIODS_ACCEPT_CONDITIONS'
+                    : 'INDEXED_ACCEPT_CONDITIONS'
+                    )
                 }}
               />
             }
@@ -230,11 +234,11 @@ const IndexedReviewData = (props) => {
             control={
               <Checkbox
                 id="change-tariff-indexada-terms-check"
-                name="indexed_terms_accepted"
+                name="particular_contract_terms_accepted"
                 onClick={() =>
                   handleIndexadaTermsAccepted(!indexadaTermsAccepted)
                 }
-                checked={values.indexed_terms_accepted}
+                checked={values.particular_contract_terms_accepted}
                 color="primary"
               />
             }
@@ -242,40 +246,16 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_TERMS')
+                  __html: t(isTariffIndexed
+                    ? 'PERIODS_ACCEPT_TERMS'
+                    : 'INDEXED_ACCEPT_TERMS'
+                  )
                 }}
               />
             }
           />
           <Divider variant="middle" className={classes.dividerBottom} />
-        </Grid>
 
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                id="change-tariff-indexada-legal-terms-check"
-                name="legal_terms_accepted"
-                onClick={() =>
-                  handleIndexadaLegalTermsAccepted(!indexadaLegalTermsAccepted)
-                }
-                checked={values.indexed_legal_terms_accepted}
-                color="primary"
-              />
-            }
-            label={
-              <Typography
-                variant="body2"
-                dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_LEGAL_TERMS', {
-                    inscription_conditions_url: t(
-                      'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
-                    )
-                  })
-                }}
-              />
-            }
-          />
         </Grid>
       </Grid>
     </>
