@@ -1,6 +1,6 @@
 {
   "name": "webforms-ui",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": false,
   "dependencies": {
     "@date-io/dayjs": "1.x",
@@ -42,17 +42,10 @@
   },
   "prettier": "prettier-config-standard",
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "plugin:cypress/recommended"
-    ]
+    "extends": ["react-app", "plugin:cypress/recommended"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
