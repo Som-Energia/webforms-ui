@@ -202,7 +202,7 @@ const Review = (props) => {
                   <Grid
                     key={label}
                     item
-                    xs={4}
+                    xs={values?.contract?.moreThan15Kw? 4: 12}
                   >{`${label} ${values?.contract[attr]} kW `}</Grid>
                 )
               }
