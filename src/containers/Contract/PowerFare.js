@@ -135,10 +135,10 @@ const PowerFare = (props) => {
                 dangerouslySetInnerHTML={{
                   __html: t('POWER_PERIODS_MORE_INFO', {
                     tariff: values?.tariff,
-                    periods_url: values?.moreThan15Kw
+                    periods_url: values?.contract?.moreThan15Kw
                       ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
                       : t('POWER_PERIODS_20TD_MORE_INFO_URL'),
-                    indexed_url: values?.moreThan15Kw
+                    indexed_url: values?.contract?.moreThan15Kw
                       ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
                       : t('POWER_INDEXED_20TD_MORE_INFO_URL')
                   })
@@ -149,7 +149,7 @@ const PowerFare = (props) => {
                 dangerouslySetInnerHTML={{
                   __html: t('POWER_PERIODS_MORE_INFO__DEPRECATED', {
                     tariff: values?.tariff,
-                    url: values?.moreThan15Kw
+                    url: values?.contract?.moreThan15Kw
                       ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
                       : t('POWER_PERIODS_20TD_MORE_INFO_URL')
                   })
