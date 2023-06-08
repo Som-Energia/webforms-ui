@@ -64,6 +64,7 @@ const options = [
   { title: 'Contractació 30', href: '/contract-30' },
   { title: 'Modificació contractual', href: '/modify-contract' },
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
+  { title: 'Generation kwh', href: '/investments/investments-kwh' },
 ]
 
 const Home = (props) => {

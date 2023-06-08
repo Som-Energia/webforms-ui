@@ -81,7 +81,7 @@ export default function GenerationAssigmentSection({ data }) {
         setEditingPriority(true)
         changeAssigmentPriority(rows[index], rows[newIndex])
         changeIsVisible(index, newIndex, true)
-      }, 150)
+      }, 250)
     },
     [changeAssigmentPriority, rows, setEditingPriority, changeIsVisible]
   )

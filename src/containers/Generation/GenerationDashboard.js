@@ -6,6 +6,7 @@ import { Button, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GenerationContext from './context/GenerationContext'
 import { useTranslation } from 'react-i18next'
+import Alert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles({
   footer: {
@@ -18,6 +19,12 @@ const useStyles = makeStyles({
   buttons: {
     gap: '5px',
     justifyContent: 'center'
+  },
+  gripDivider: {
+    margin: '50px 0 20px 0'
+  },
+  gripReminder: {
+    margin: '20px 0 20px 0'
   }
 })
 
@@ -42,21 +49,26 @@ function GenerationDashboard({
     return (
       <>
         {editingPriority ? (
-          <Grid item container className={classes.buttons}>
-            <Button
-              id="cancel-action-btn"
-              variant="contained"
-              className={classes.button}
-              onClick={() => handleCancelButtonClick(false)}>
-              {t('CANCELAR')}
-            </Button>
-            <Button
-              id="validation-action-btn"
-              variant="contained"
-              className={classes.button}
-              onClick={() => validateChanges()}>
-              {t('VALIDATE_CHANGES')}
-            </Button>
+          <Grid container>
+              <Alert severity='warning' className={classes.gripReminder}>
+                {t('GENERATION_INVESTMENTS_REMINDER_INFO_TEXT')}
+              </Alert>
+            <Grid item container className={classes.buttons}>
+              <Button
+                id="cancel-action-btn"
+                variant="contained"
+                className={classes.button}
+                onClick={() => handleCancelButtonClick(false)}>
+                {t('GENERATION_INVESTMENTS_CANCEL_BUTTON')}
+              </Button>
+              <Button
+                id="validation-action-btn"
+                variant="contained"
+                className={classes.button}
+                onClick={() => validateChanges()}>
+                {t('GENERATION_INVESTMENTS_VALIDATE_BUTTON')}
+              </Button>
+            </Grid>
           </Grid>
         ) : null}
       </>
@@ -69,13 +81,24 @@ function GenerationDashboard({
         <>
           <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
           <GenerationInvestmentSection data={investments} />
+          <Grid item xs={12} className={classes.gripDivider}>
+            <Typography variant="body2">
+              {t('GENERATION_INVESTMENTS_HELPER_TEXT')}
+            </Typography>
+          </Grid>
           <SectionTitle text={t('GENERATION_ASSIGNMENTS_TABLE_TITLE')} />
           <GenerationAssigmentSection data={assignments} editing={editing} />
           <Grid className={classes.footer} container justifyContent="flex-end">
             <ActionSection />
           </Grid>
         </>
-      ) : <Typography id='info-text-section'>{t('TEXT EXPLICATIU PER DIR QUE HAN DE POSAR-SE EN CONTACTE AMB SOM ENERGIA')}</Typography>}
+      ) : (
+        <Typography id="info-text-section">
+          {t(
+            'TEXT EXPLICATIU PER DIR QUE HAN DE POSAR-SE EN CONTACTE AMB SOM ENERGIA'
+          )}
+        </Typography>
+      )}
     </>
   )
 }

@@ -623,5 +623,10 @@
     "GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE ": "Fecha de compra",
     "GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE ": "Fecha de activación",
     "GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT ": "Cantidad amortizada",
-    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Fecha de finalización"
+    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Fecha de finalización",
+    "GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT": "Une honetan, ezin dizkizugu kontratuak erakutsi batzuk lehentasun-maila berekoak direlako. Bidaliguzu mezu bat <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera kontratuen lehentasun-maila adierazteko.",
+    "GENERATION_INVESTMENTS_REMINDER_INFO_TEXT":"Gogoan izan kontratu nagusiari esleituko zaiola sortutako GkWh energia. Aprobetxatu ezin dena, faktura egitean, gainerako kontratuentzat geldituko da, eta energia ezarritako lehentasun-mailaren arabera jasoko dute.",
+    "GENERATION_INVESTMENTS_HELPER_TEXT":"Esleipen-ordenaren gaineko oharra: kontratu \"Nagusia\", lehentasun handienekoa. Sortutako kWh-ak, lehenik, lehentasun handiko kontratuei esleituko zaizkie, eta, gero, lehentasun txikikoei.",
+    "GENERATION_INVESTMENTS_CANCEL_BUTTON":"UTZI",
+    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"BALIOZTATU ALDAKETAK"
 }
