@@ -117,3 +117,8 @@ StepHeader Component
 .MuiTypography-body1 p:first-child {
   margin: 3px 0px 0px;
 }
+
+/* Added because wordpress rule interferes: #content .wpb_text_column :last-child */
+.MuiTypography-body2 p:last-child {
+  margin-bottom: 1em;
+}
