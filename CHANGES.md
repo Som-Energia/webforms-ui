@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.7.2 2023-06-08
+
+- Conditionally show pilot test check
+
 # 1.7.1 2023-06-06
 
 - Fix: General and particular terms were not sent in post
