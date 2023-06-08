@@ -215,6 +215,20 @@ const Review = (props) => {
   const Prices = ({ concept, name }) => {
     let keys = concept ? Object.keys(concept) : []
     keys.sort()
+    const differentValues = (
+      new Set(Object.keys(concept).map((key) => concept[key]?.value ))
+    )
+    if (differentValues.size === 1) {
+      for (const key in concept) {
+        return (
+          <div className={classes.prices}>
+            <span key={`${name}`}>
+              {`${concept[key]?.value} ${concept[key]?.uom}`}
+            </span>
+          </div>
+        )
+      }
+    }
     const labels =
       keys.length === 2
         ? [t('PEAK'), t('VALLEY')]
