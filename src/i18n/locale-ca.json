@@ -634,6 +634,11 @@
     "GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE ": "Data de compra",
     "GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE ": "Data d'activació",
     "GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT ": "Quantitat amortitzada",
-    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Data de finalització"
+    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Data de finalització",
+    "GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT": "Actualment, no et podem mostrar els contractes perquè n’hi ha que tenen la mateixa prioritat. Caldrà que contactis amb nosaltres a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> per tal d’indicar una llista de prioritats d’aquests contractes.",
+    "GENERATION_INVESTMENTS_REMINDER_INFO_TEXT":"Recorda que al contracte principal se li assignarà l’energia GkWh generada i la que no pugui aprofitar, en el moment de la factura, quedarà per a la resta de contractes que la rebran segons l’ordre de prioritat establert.",
+    "GENERATION_INVESTMENTS_HELPER_TEXT":"Nota d’ordre d’assignació: contracte “Principal” amb màxima prioritat. Els contractes més prioritaris tenen preferència sobre els kWh generats, respecte als de menor prioritat",
+    "GENERATION_INVESTMENTS_CANCEL_BUTTON":"CANCELAR",
+    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CANVIS"
 }
 

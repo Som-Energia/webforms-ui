@@ -634,5 +634,10 @@
     "GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE ": "Fecha de compra",
     "GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE ": "Fecha de activación",
     "GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT ": "Cantidad amortizada",
-    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Fecha de finalización"
+    "GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ": "Fecha de finalización",
+    "GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT": "Actualmente, no podemos mostrarte los contratos porque algunos tienen la misma prioridad. Es necesario que contactes con nosotros a generationkwh@somenergia.coop para indicar una lista de prioridades de estos contratos.",
+    "GENERATION_INVESTMENTS_REMINDER_INFO_TEXT":"Recuerda que al contrato principal se le asignará la energía GkWh generada y la que no pueda aprovechar, en el momento de la factura, quedará para el resto de contratos que la percibirán según el orden de prioridad establecido.",
+    "GENERATION_INVESTMENTS_HELPER_TEXT":"Nota de orden de asignación: contrato \"Principal\" con máxima prioridad. Los contratos más prioritarios tienen preferencia sobre los kWh generados respecto a los de menor prioridad.",
+    "GENERATION_INVESTMENTS_CANCEL_BUTTON":"CANCELAR",
+    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CAMBIOS"
 }
