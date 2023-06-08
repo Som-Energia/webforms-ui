@@ -69,7 +69,8 @@ const IndexedReviewData = (props) => {
     handleIndexadaTermsAccepted,
     targetTariff,
     isTariff20,
-    isTariffIndexed
+    isTariffIndexed,
+    isIndexedPilotOngoing,
   } = props
   const powers = JSON.parse(contractValues.powers)
 
@@ -257,7 +258,7 @@ const IndexedReviewData = (props) => {
           <Divider variant="middle" className={classes.dividerBottom} />
 
         </Grid>
-        { !isTariffIndexed && (
+        { !isTariffIndexed && isIndexedPilotOngoing && (
         <Grid item xs={12}>
           <FormControlLabel
             control={

@@ -52,7 +52,7 @@ const Indexada = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { token, checkEnabled = true } = props
+  const { token, checkEnabled = true, isIndexedPilotOngoing=false } = props
   const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
@@ -152,7 +152,9 @@ const Indexada = (props) => {
     if (!isTariffIndexed) {
       // Not indexed, moving to an indexed, requiring those checks
       params.indexed_specific_terms_accepted = data.terms_accepted
-      params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
+      if (isIndexedPilotOngoing) {
+        params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
+      }
     }
 
     setLoading(true)
@@ -328,6 +330,7 @@ const Indexada = (props) => {
                                   <IndexedReview
                                     isTariff20={isTariff20}
                                     isTariffIndexed={isTariffIndexed}
+                                    isIndexedPilotOngoing={isIndexedPilotOngoing}
                                     targetTariff={hasTargetTariff}
                                     contractValues={contractJSON}
                                     {...formikProps}

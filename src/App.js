@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const App = (props) => {
   const classes = useStyles()
-  const { token = '' } = props
+  const { token = '', isIndexedPilotOngoing=undefined} = props
 
   const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
@@ -326,11 +326,11 @@ const App = (props) => {
                 />
                 <Route
                   path="/:language/contract/indexed"
-                  element={<Indexed {...props} contract={loadContractData()} />}
+                  element={<Indexed {...props} contract={loadContractData()} isIndexedPilotOngoing={isIndexedPilotOngoing!==undefined} />}
                 />
                 <Route
                   path="/contract/indexed"
-                  element={<Indexed {...props} checkEnabled={false} contract={loadContractData()} />}
+                  element={<Indexed {...props} contract={loadContractData()} isIndexedPilotOngoing={isIndexedPilotOngoing!==undefined} checkEnabled={false} />}
                 />
               </Routes>
             </Router>
