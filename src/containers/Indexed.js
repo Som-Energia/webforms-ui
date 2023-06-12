@@ -107,7 +107,7 @@ const Indexada = (props) => {
     )
 
     return sectionsJson
-  },[isTariffIndexed])
+  },[isTariffIndexed, t])
 
 
 
