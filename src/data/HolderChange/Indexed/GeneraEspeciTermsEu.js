@@ -1347,11 +1347,17 @@ const generalTermsText = `
 <p style="page-break-after:always;"></p>
 <br>
 <br>
-<p>7.2. klausulan xedatutako eragotzi gabe, tarifa indexatua aplikatzeko ordutegien araberako kontsumoak irakurketa egiteaz arduratzen den pertsonak aurkeztutako ordutegi-kurbak oinarri hartuta kalkulatuko dira. SOM ENERGIA, SCCLk ezin badu fakturatu ordutegi-kurbak oinarri hartuta, irakurketa egiteaz arduratzen den pertsonak jakinarazitako edo Hornidura-kontratuaren Baldintza orokorretako 7.2. klausulan aurreikusitako moduren batean eskuratutako kontsumoei sistema-operadoreak argitaratutako koefiziente perfilatuak aplikatuko dizkie, banatzailearen sarerako sarbide-bidesari mota bakoitzarentzat indarrean dagoen araudiak xedatutakoarekin bat etorriaz. 6.1TD banaketa-sarerako sarbide-bidesaria duten hornidura-puntuen kasuan,  3.0TD sarbide-bidesariarentzat araudiak ezartzen dituen koefiziente perfilatuak aplikatuko dira. </p>
+<p>7.2. klausulan xedatutako eragotzi gabe, tarifa indexatua aplikatzeko ordutegien araberako kontsumoak irakurketa egiteaz arduratzen den pertsonak aurkeztutako ordutegi-kurbak oinarri hartuta kalkulatuko dira. SOM ENERGIA, SCCLk ezin badu fakturatu ordutegi-kurbak oinarri hartuta, irakurketa egiteaz arduratzen den pertsonak jakinarazitako edo Hornidura-kontratuaren Baldintza orokorretako 7.2. klausulan aurreikusitako moduren batean eskuratutako kontsumoei sistema-operadoreak argitaratutako koefiziente perfilatuak aplikatuko dizkie, banatzailearen sarerako sarbide-bidesari mota bakoitzarentzat indarrean dagoen araudiak xedatutakoarekin bat etorriaz<sup><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></sup>. 6.1TD banaketa-sarerako sarbide-bidesaria duten hornidura-puntuen kasuan,  3.0TD sarbide-bidesariarentzat araudiak ezartzen dituen koefiziente perfilatuak aplikatuko dira. </p>
 
 <p>SOM ENERGIA, SCCLk Berariazko baldintza hauek kontratugilearen eskura jarri ditu, bere webgunearen (<a href="http://www.somenergia.coop"><em>www.somenergia.coop</em></a>) bidez kontratazioa gauzatu aurretik. Berariazko baldintzak kontratazio elektronikoko sistema baten bidez sinatu dira eta, kontratazioa burutzean, kontratugileari euskarri iraunkorreko ale bat helarazi zaio.</p>
 </div>
-`
+
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Merkatu eta Lehiakortasun Batzorde Nazionalaren urtarrilaren 5eko 3/2020 zirkularra, elektrizitatearen garraio- eta banaketa-bidesariak kalkulatzeko metodologia ezartzen duena.</p>
+</ol>
+</section>`
 
 const GeneralTerms = () => (
   <span dangerouslySetInnerHTML={{ __html: generalTermsText }} />
