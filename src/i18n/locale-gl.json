@@ -603,5 +603,6 @@
     "FARE_PERIODS": "Períodos",
     "CONTRACT_PRIVACY_POLICY_TERMS": "Lin e acepto a <a target='_blank' href='{{url}}'>política de privacidade</a> de Som Energia.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/gl/politica-de-privacidade/#formulario-de-contratacion-luz",
+    "PROCESS_TYPE_TARIFF_CHANGE": "",
     "UNKNOWN_FIELD": "Campo desconocido"
 }

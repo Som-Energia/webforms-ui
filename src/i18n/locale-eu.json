@@ -609,5 +609,6 @@
     "FARE_PERIODS": "Ordutegi-tarteen",
     "CONTRACT_PRIVACY_POLICY_TERMS": "Som Energiaren <a target='_blank' href='{{url}}'>pribatutasun-politika</a> irakurri dut eta onartzen dut.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/eu/pribatutasun-politika/#kontrata-ezazu-argia-formularioa",
+    "PROCESS_TYPE_TARIFF_CHANGE": "",
     "UNKNOWN_FIELD": ""
 }

@@ -611,5 +611,6 @@
     "FARE_PERIODS": "Períodes",
     "CONTRACT_PRIVACY_POLICY_TERMS": "He llegit i accepto la <a target='_blank' href='{{url}}'>política de privacitat</a> de Som Energia.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/ca/politica-de-privacitat/#formulari-del-contracte-de-la-llum",
+    "PROCESS_TYPE_TARIFF_CHANGE": "Modificació de tarifa",
     "UNKNOWN_FIELD": "Camp desconegut"
 }

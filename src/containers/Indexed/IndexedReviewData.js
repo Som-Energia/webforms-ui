@@ -89,7 +89,7 @@ const IndexedReviewData = (props) => {
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
           <IndexedReviewField
-            value={t('Modificació de tarifa comercialitzadora')}
+            value={t('PROCESS_TYPE_TARIFF_CHANGE')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
