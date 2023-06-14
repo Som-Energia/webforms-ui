@@ -265,7 +265,7 @@
     "ES_UN_HABITATGE": "Etxebizitza bat da?",
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://eu.support.somenergia.coop/article/332-zein-da-nire-cnae-zenbakia\">Zure jarduera ekonomikoaren EJSN kodea</a>.",
     "CADASTRAL_REFERENCE": "Katastroko erreferentzia",
-    "HELP_CADASTRAL_REFERENCE":  "<a target=\"_blank\" href=\"https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCBusqueda.aspx\">Aurkitu hemen katastroko erreferentzia</a>.",
+    "HELP_CADASTRAL_REFERENCE": "Ez baduzu aurkitzen zure katastroko erreferentzia, <a target=\"_blank\" href=\"https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCBusqueda.aspx\">bila ezazu erregistroan</a> edo <a target=\"_blank\" href=\"https://eu.support.somenergia.coop/article/1341-que-es-y-donde-encontrar-la-referencia-cadastral-euskera\">sartu gure Laguntza Gunean</a>.",
     "UNSELECTED_NEW_SUPPLY_POINT": "Ez duzu zehaztu argindarra beste merkaturatze-konpainia batekin kontratatuta duzun edo argindarrik ez duen hornidura-puntu berria den",
     "NO_SUPPLY_POINT_ADDRESS": "Ez duzu adierazi hornidura-puntuaren <b>helbidea</b>",
     "NO_IS_HOUSING": "Ez duzu zehaztu etxebizitza baten helbidea den",
