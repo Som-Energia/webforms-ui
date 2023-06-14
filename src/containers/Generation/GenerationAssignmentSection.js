@@ -1,16 +1,15 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
+import GenerationContext from './context/GenerationContext'
+import { useTranslation } from 'react-i18next'
+import dayjs from 'dayjs'
+import GenerationTable from './GenerationTable'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
-import GenerationContext from './context/GenerationContext'
-import GenerationTable from './GenerationTable'
-import { useTranslation } from 'react-i18next'
-import { withStyles } from '@material-ui/core/styles'
-import dayjs from 'dayjs'
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import IconButton from '@material-ui/core/IconButton'
-import { Box, Grow } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
 
 function createData(
   id,
@@ -30,6 +29,14 @@ function createData(
   }
 }
 
+const useStyles = makeStyles({
+  dragger: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 15
+  }
+})
+
 const StyledTableCell = withStyles(() => ({
   body: {
     fontSize: 14
@@ -37,11 +44,9 @@ const StyledTableCell = withStyles(() => ({
 }))(TableCell)
 
 export default function GenerationAssigmentSection({ data }) {
+  const classes = useStyles()
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
-  const isVisible = {}
-  data.forEach((element, index) => (isVisible[index] = true))
-  const [is_visible, setVisible] = useState(isVisible)
   const { getPriority, setEditingPriority, changeAssigmentPriority } =
     useContext(GenerationContext)
 
@@ -56,84 +61,78 @@ export default function GenerationAssigmentSection({ data }) {
     [t]
   )
 
-  const changeIsVisible = useCallback(
-    (index, newIndex, visible) => {
-      let newVisible = JSON.parse(JSON.stringify(is_visible))
-      newVisible[index] = visible
-      newVisible[newIndex] = visible
-      setVisible(newVisible)
-    },
-    [is_visible]
-  )
-
   const handleChangeSort = useCallback(
-    (index, moveAction) => {
-      if (
-        (moveAction === 'up' && index - 1 < 0) ||
-        (moveAction === 'down' && index + 1 >= rows.length)
-      ) {
-        return false
-      }
-      const newIndex = moveAction === 'up' ? index - 1 : index + 1
-      changeIsVisible(index, newIndex, false)
-
-      setTimeout(() => {
-        setEditingPriority(true)
-        changeAssigmentPriority(rows[index], rows[newIndex])
-        changeIsVisible(index, newIndex, true)
-      }, 250)
+    (indexSource, indexDest) => {
+      setEditingPriority(true)
+      changeAssigmentPriority(rows[indexSource], rows[indexDest])
     },
-    [changeAssigmentPriority, rows, setEditingPriority, changeIsVisible]
+    [changeAssigmentPriority, rows, setEditingPriority]
   )
 
   return (
-    <GenerationTable id="assignment-table" columns={columns}>
-      <TableBody>
-        {rows.map((row, index) => (
-          <Grow key={row.contract} in={is_visible[index]}>
-            <TableRow>
-              <StyledTableCell size="small">
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  justifyContent="center">
-                  <IconButton
-                    style={{ visibility: index !== 0 ? 'visible' : 'hidden' }}
-                    size="small"
-                    id={'change-priority-up ' + row.contract}
-                    onClick={() => handleChangeSort(index, 'up')}>
-                    <ArrowDropUpIcon />
-                  </IconButton>
-                  {getPriority(row.priority).value}
-                  <IconButton
-                    style={{
-                      visibility:
-                        index !== rows.length - 1 ? 'visible' : 'hidden'
-                    }}
-                    size="small"
-                    id={'change-priority-down ' + row.contract}
-                    onClick={() => handleChangeSort(index, 'down')}>
-                    <ArrowDropDownIcon />
-                  </IconButton>
-                </Box>
-              </StyledTableCell>
-              <StyledTableCell>{row.contract}</StyledTableCell>
-              <StyledTableCell>{row.contractAddress}</StyledTableCell>
-              <StyledTableCell>
-                {dayjs(row.contractLastInvoiced.replaceAll('"', '')).format(
-                  'DD/MM/YYYY'
-                )}
-              </StyledTableCell>
-              <StyledTableCell>
-                {Number(row.annualUseKwh).toLocaleString('es-ES', {
-                  minimumFractionDigits: 2
-                })}
-              </StyledTableCell>
-            </TableRow>
-          </Grow>
-        ))}
-      </TableBody>
-    </GenerationTable>
+    <DragDropContext
+      onDragEnd={(result) => {
+        handleChangeSort(result.source.index, result.destination.index)
+      }}
+      onBeforeDragStart={(result) => {
+        const elements = document.getElementsByClassName(
+          result.draggableId + 'styled-cell'
+        )
+        Object.values(elements).forEach((element) => {
+          const style = window.getComputedStyle(element)
+          element.style.width = style.width
+        })
+      }}>
+      <Droppable droppableId="assignments">
+        {(droppableProvided) => (
+          <GenerationTable id="assignment-table" columns={columns}>
+            <TableBody
+              {...droppableProvided.droppableProps}
+              ref={droppableProvided.innerRef}>
+              {rows.map((row, index) => (
+                <Draggable
+                  key={row.contract}
+                  draggableId={row.contract}
+                  index={index}>
+                  {(draggableProvided, snapshot) => (
+                    <TableRow
+                      {...draggableProvided.draggableProps}
+                      ref={draggableProvided.innerRef}
+                      id={row.contract}>
+                      <StyledTableCell
+                        className={row.contract + 'styled-cell'}
+                        size="small"
+                        {...draggableProvided.dragHandleProps}>
+                        <Box className={classes.dragger}>
+                          <DragIndicatorIcon />
+                          {getPriority(row.priority).value}
+                        </Box>
+                      </StyledTableCell>
+                      <StyledTableCell className={row.contract + 'styled-cell'}>
+                        {row.contract}
+                      </StyledTableCell>
+                      <StyledTableCell className={row.contract + 'styled-cell'}>
+                        {row.contractAddress}
+                      </StyledTableCell>
+                      <StyledTableCell className={row.contract + 'styled-cell'}>
+                        {dayjs(
+                          row.contractLastInvoiced.replaceAll('"', '')
+                        ).format('DD/MM/YYYY')}
+                      </StyledTableCell>
+                      <StyledTableCell className={row.contract + 'styled-cell'}>
+                        {Number(row.annualUseKwh).toLocaleString('es-ES', {
+                          minimumFractionDigits: 2
+                        })}
+                      </StyledTableCell>
+                    </TableRow>
+                  )}
+                </Draggable>
+              ))}
+              {droppableProvided.placeholder}
+            </TableBody>
+          </GenerationTable>
+        )}
+      </Droppable>
+    </DragDropContext>
   )
 }

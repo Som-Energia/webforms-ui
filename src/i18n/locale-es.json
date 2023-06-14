@@ -623,7 +623,7 @@
     "PROCESS_TYPE_TARIFF_CHANGE": "Modificación de tarifa",
     "UNKNOWN_FIELD": "Campo desconocido",
     "GENERATION_MAIN_PRIORITY": "Principal",
-    "GENERATION_SECONDARY": "Secundario",
+    "GENERATION_SECONDARY": "Sec.",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT": "Núm de contrato",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY": "Prioridad",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE": "Última fecha facturada",
@@ -639,5 +639,8 @@
     "GENERATION_INVESTMENTS_REMINDER_INFO_TEXT":"Recuerda que al contrato principal se le asignará la energía GkWh generada y la que no pueda aprovechar, en el momento de la factura, quedará para el resto de contratos que la percibirán según el orden de prioridad establecido.",
     "GENERATION_INVESTMENTS_HELPER_TEXT":"Nota de orden de asignación: contrato \"Principal\" con máxima prioridad. Los contratos más prioritarios tienen preferencia sobre los kWh generados respecto a los de menor prioridad.",
     "GENERATION_INVESTMENTS_CANCEL_BUTTON":"CANCELAR",
-    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CAMBIOS"
+    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CAMBIOS",
+    "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE":"CONTRATOS ASIGNADOS",
+    "GENERATION_INVESTMENTS_TABLE_TITLE":"MIS APORTACIONES",
+    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El cambio se ha registrado correctamente y será efectivo en 2 días hábiles."
 }

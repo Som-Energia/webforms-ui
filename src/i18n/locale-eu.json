@@ -584,6 +584,7 @@
     "INDEXED_NO_CHANGES_ERROR_TXT": "Kontratuaren tasa dagoeneko indexatua dago.",
     "INDEXED_STATE_CONFLICT_ERROR_TXT": "Kontratua ez dago egoera aktiboan.",
     "PENDING_CONTRACT_MODIFICATION_ERROR_TXT": "Kontratua beste aldaketa bat aplikatzeko zain dago.",
+<<<<<<< HEAD
     "TARIFF_CHARACTERISTICS_20_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "TARIFF_CHARACTERISTICS_30_URL": "https://eu.support.somenergia.coop/article/1146-3-0td-tarifa?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "TARIFF_CHARACTERISTICS_6_URL": "https://eu.support.somenergia.coop/article/1165-goi-tentsioko-6-1td-6-2td-6-3td-eta-6-4td-tarifak",
@@ -622,8 +623,8 @@
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/eu/pribatutasun-politika/#kontrata-ezazu-argia-formularioa",
     "PROCESS_TYPE_TARIFF_CHANGE": "Tarifa aldaketa",
     "UNKNOWN_FIELD": "",
-    "GENERATION_MAIN_PRIORITY": "Nagusi",
-    "GENERATION_SECONDARY": "Bigarren mailakoa",
+    "GENERATION_MAIN_PRIORITY": "Nagusia",
+    "GENERATION_SECONDARY": "Sek.",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT": "Kontratuaren zenbakia",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY": "Lehentasuna",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE": "Fakturatutako azken data",
@@ -639,5 +640,8 @@
     "GENERATION_INVESTMENTS_REMINDER_INFO_TEXT":"Gogoan izan kontratu nagusiari esleituko zaiola sortutako GkWh energia. Aprobetxatu ezin dena, faktura egitean, gainerako kontratuentzat geldituko da, eta energia ezarritako lehentasun-mailaren arabera jasoko dute.",
     "GENERATION_INVESTMENTS_HELPER_TEXT":"Esleipen-ordenaren gaineko oharra: kontratu \"Nagusia\", lehentasun handienekoa. Sortutako kWh-ak, lehenik, lehentasun handiko kontratuei esleituko zaizkie, eta, gero, lehentasun txikikoei.",
     "GENERATION_INVESTMENTS_CANCEL_BUTTON":"UTZI",
-    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"BALIOZTATU ALDAKETAK"
+    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"BALIOZTATU ALDAKETAK",
+    "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE":"ESLEITUTAKO KONTRATUAK",
+    "GENERATION_INVESTMENTS_TABLE_TITLE":"NIRE EKARPENAK",
+    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"Aldaketa erregistratu dugu eta 2 egun baliodunen buruan burutuko dugu."
 }

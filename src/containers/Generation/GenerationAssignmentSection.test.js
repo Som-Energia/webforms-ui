@@ -48,41 +48,5 @@ describe('Generation Assignment Section', () => {
         expect(textElement1).toBeInTheDocument()
     })
 
-
-    test('Should call the function to change to lower priority', async () => {
-      const dom = render(
-        <GenerationContext.Provider value={contextValue}>
-            <GenerationAssignmentSection data={assignments} />
-        </GenerationContext.Provider>)
-    
-      const changePriorityDownButton = getById(dom.container,'change-priority-down ' + assignments[0].contract)
-      await userEvent.click(changePriorityDownButton)
-      await waitFor(() => expect(changeAssigmentPriority).toBeCalledWith(assignments[0],assignments[1]))
-
-    })
-
-    test('Should call the function to change to higher priority', async () => {
-      const dom = render(
-        <GenerationContext.Provider value={contextValue}>
-            <GenerationAssignmentSection data={assignments} />
-        </GenerationContext.Provider>)
-    
-      const changePriorityUpButton = getById(dom.container,'change-priority-up ' + assignments[1].contract)
-      await userEvent.click(changePriorityUpButton)
-      await waitFor(() => expect(changeAssigmentPriority).toBeCalledWith(assignments[1],assignments[0]))
-
-    })
-
-    test('Should not call the function to change to higher priority', async () => {
-      const dom = render(
-        <GenerationContext.Provider value={contextValue}>
-            <GenerationAssignmentSection data={assignments} editing={true}/>
-        </GenerationContext.Provider>)
-    
-      const changePriorityUpButton = getById(dom.container,'change-priority-up ' + assignments[0].contract)
-      await userEvent.click(changePriorityUpButton)
-      expect(changeAssigmentPriority).toBeCalledTimes(0)
-
-    })
   })
 
