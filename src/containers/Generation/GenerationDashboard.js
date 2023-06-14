@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import GenerationContext from './context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import Alert from '@material-ui/lab/Alert'
+import GenerationFailure from './GenerationFailure'
 
 const useStyles = makeStyles({
   footer: {
@@ -31,7 +32,9 @@ const useStyles = makeStyles({
 function GenerationDashboard({
   editing,
   handleCancelButtonClick,
-  validateChanges
+  validateChanges,
+  validationConfirm,
+  setValidationConfirm
 }) {
   const { t } = useTranslation()
   const classes = useStyles()
@@ -50,9 +53,9 @@ function GenerationDashboard({
       <>
         {editingPriority ? (
           <Grid container>
-              <Alert severity='warning' className={classes.gripReminder}>
-                {t('GENERATION_INVESTMENTS_REMINDER_INFO_TEXT')}
-              </Alert>
+            <Alert severity="warning" className={classes.gripReminder}>
+              {t('GENERATION_INVESTMENTS_REMINDER_INFO_TEXT')}
+            </Alert>
             <Grid item container className={classes.buttons}>
               <Button
                 id="cancel-action-btn"
@@ -71,12 +74,35 @@ function GenerationDashboard({
             </Grid>
           </Grid>
         ) : null}
+        {validationConfirm.finished && validationConfirm.completed  ? (
+          <Grid item container className={classes.buttons}>
+              <Alert
+                id="alert-success-message"
+                severity="success"
+                className={classes.gripReminder}
+                onClose={() => setValidationConfirm(false)}>
+                {t('GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS')}
+              </Alert>
+          </Grid>
+        ) : null}
       </>
     )
-  }, [t, classes, editingPriority, handleCancelButtonClick, validateChanges])
+  }, [
+    t,
+    classes,
+    editingPriority,
+    setValidationConfirm,
+    validationConfirm,
+    handleCancelButtonClick,
+    validateChanges
+  ])
 
   return (
     <>
+    {validationConfirm.finished && !validationConfirm.completed ? (
+      <GenerationFailure />
+    ) : (
+      <>
       {!has_duplicate_priority_values() ? (
         <>
           <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
@@ -86,7 +112,9 @@ function GenerationDashboard({
               {t('GENERATION_INVESTMENTS_HELPER_TEXT')}
             </Typography>
           </Grid>
-          <SectionTitle text={t('GENERATION_ASSIGNMENTS_TABLE_TITLE')} />
+          <SectionTitle
+            text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}
+          />
           <GenerationAssigmentSection data={assignments} editing={editing} />
           <Grid className={classes.footer} container justifyContent="flex-end">
             <ActionSection />
@@ -94,11 +122,11 @@ function GenerationDashboard({
         </>
       ) : (
         <Typography id="info-text-section">
-          {t(
-            'TEXT EXPLICATIU PER DIR QUE HAN DE POSAR-SE EN CONTACTE AMB SOM ENERGIA'
-          )}
+          {t('GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT')}
         </Typography>
       )}
+    </>
+    )}
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import GenerationDashboard from './GenerationDashboard'
-import { render, queryByAttribute } from '@testing-library/react'
+import { render, queryByAttribute, screen, within } from '@testing-library/react'
 import { GenerationContextProvider } from './context/GenerationContext'
 import userEvent from '@testing-library/user-event'
 
@@ -18,6 +18,9 @@ jest.mock('react-i18next', () => ({
 
 describe('Generation Dashboard', () => {
   const getById = queryByAttribute.bind(null, 'id')
+  const mockValidationConfirm = {finished:false,completed:false}
+  const mockValidationConfirmSuccess = {finished:true,completed:true}
+  const mockValidationConfirmFailure = {finished:true,completed:false}
   const mockAssignmentRows = JSON.parse(
     '[{"id":"0001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"0002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
   )
@@ -28,13 +31,14 @@ describe('Generation Dashboard', () => {
   const mockHandleCancelButtonClick = jest.fn()
   const mockhandleClick = jest.fn()
   const mockValidateChanges = jest.fn()
+  const mockSetValidationConfirm = jest.fn()
   
   test('The component render properly the prop data', () => {
     const dom = render(
       <GenerationContextProvider
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}>
-        <GenerationDashboard data={mockAssignmentRows} />
+        <GenerationDashboard validationConfirm={mockValidationConfirm}/>
       </GenerationContextProvider>
     )
 
@@ -53,7 +57,7 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard handleClick={mockhandleClick} />
+        <GenerationDashboard handleClick={mockhandleClick} validationConfirm={mockValidationConfirm}/>
       </GenerationContextProvider>
     )
 
@@ -70,7 +74,7 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} />
+        <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} validationConfirm={mockValidationConfirm}/>
       </GenerationContextProvider>
     )
 
@@ -86,7 +90,7 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard validateChanges={mockValidateChanges} />
+        <GenerationDashboard validateChanges={mockValidateChanges} validationConfirm={mockValidationConfirm}/>
       </GenerationContextProvider>
     )    
     const validateButton = getById(dom.container,'validation-action-btn')
@@ -105,11 +109,54 @@ describe('Generation Dashboard', () => {
         investmentsJSON={mockInvestmentRows}
         propEditingPriority={true}
         >
-        <GenerationDashboard />
+        <GenerationDashboard validationConfirm={mockValidationConfirm}/>
       </GenerationContextProvider>
     )    
     const infoText = getById(dom.container,'info-text-section')
     expect(infoText).toBeInTheDocument()
+  })
+
+  test('should show the success text', async () => {
+    const dom = render(
+      <GenerationContextProvider
+        assignmentsJSON={mockAssignmentRows}
+        investmentsJSON={mockInvestmentRows}
+        >
+        <GenerationDashboard validationConfirm={mockValidationConfirmSuccess}/>
+      </GenerationContextProvider>
+    )    
+    const alertComponent = getById(dom.container,'alert-success-message')
+    expect(alertComponent).toBeInTheDocument()
+    expect(screen.getByText("GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS")).toBeInTheDocument()
+  })
+
+  test('should call the function to close the success message', async () => {
+    const dom = render(
+      <GenerationContextProvider
+        assignmentsJSON={mockAssignmentRows}
+        investmentsJSON={mockInvestmentRows}
+        >
+        <GenerationDashboard validationConfirm={mockValidationConfirmSuccess} setValidationConfirm={mockSetValidationConfirm}/>
+      </GenerationContextProvider>
+    )    
+    const alertComponent = getById(dom.container,'alert-success-message')
+    const closeBtn = within(alertComponent).getByRole('button')
+    expect(alertComponent).toBeInTheDocument()
+    expect(closeBtn).toBeInTheDocument()
+    await userEvent.click(closeBtn)
+    expect(mockSetValidationConfirm).toBeCalledWith(false)
+  })
+
+  test('should show the failure component', async () => {
+    render(
+      <GenerationContextProvider
+        assignmentsJSON={mockAssignmentRows}
+        investmentsJSON={mockInvestmentRows}
+        >
+        <GenerationDashboard validationConfirm={mockValidationConfirmFailure} />
+      </GenerationContextProvider>
+    )    
+    expect(screen.getByText("FAILURE_TEXT")).toBeInTheDocument()
   })
 
 })

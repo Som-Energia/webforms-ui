@@ -614,7 +614,7 @@
     "PROCESS_TYPE_TARIFF_CHANGE": "Modificació de tarifa",
     "UNKNOWN_FIELD": "Camp desconegut",
     "GENERATION_MAIN_PRIORITY": "Principal",
-    "GENERATION_SECONDARY": "Secundari",
+    "GENERATION_SECONDARY": "Sec.",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT": "Núm de contracte",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY": "Prioritat",
     "GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE": "Última data facturada",
@@ -630,6 +630,8 @@
     "GENERATION_INVESTMENTS_REMINDER_INFO_TEXT":"Recorda que al contracte principal se li assignarà l’energia GkWh generada i la que no pugui aprofitar, en el moment de la factura, quedarà per a la resta de contractes que la rebran segons l’ordre de prioritat establert.",
     "GENERATION_INVESTMENTS_HELPER_TEXT":"Nota d’ordre d’assignació: contracte “Principal” amb màxima prioritat. Els contractes més prioritaris tenen preferència sobre els kWh generats, respecte als de menor prioritat",
     "GENERATION_INVESTMENTS_CANCEL_BUTTON":"CANCELAR",
-    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CANVIS"
+    "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CANVIS",
+    "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE":"CONTRACTES ASSIGNATS",
+    "GENERATION_INVESTMENTS_TABLE_TITLE":"LES MEVES APORTACIONS",
+    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El canvi s’ha registrat correctament i serà efectiu en 2 dies hàbils."
 }
-
