@@ -14,8 +14,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import StepHeader from 'components/StepHeader'
 import TermsDialog from 'components/TermsDialog'
 import Loading from 'components/Loading'
-import GeneralTerms from 'components/GeneralTerms'
-import GeneralEspeciTerms from 'components/GeneralEspeciTerms'
+import TextLoader from 'components/TextLoader'
 
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
@@ -546,11 +545,15 @@ const Review = (props) => {
         onAccept={handleAccept}
         onClose={handleClose}
       >
-        {values?.contract?.isIndexed ? (
-          <GeneralEspeciTerms />
-        ) : (
-          <GeneralTerms />
-        )}
+        <TextLoader
+          lang={holder?.language}
+          documentName={
+            values?.contract?.isIndexed
+            ? "general-and-indexed-specific-terms"
+            : "general-contract-terms"
+          }
+        >
+        </TextLoader>
       </TermsDialog>
 
       <Box mt={2}>
