@@ -10,7 +10,7 @@ const TextLoader = props => {
   } = props
   const [ text, setText ] = React.useState()
   React.useEffect(()=>{
-    const url = `${process.env.PUBLIC_URL}/static/docs/${lang}/${documentName}.html`
+    const url = `${process.env.PUBLIC_URL}/static/docs/${lang.slice(0,2)}/${documentName}.html`
     setText(undefined)
     axios({
       method: 'GET',
@@ -27,5 +27,5 @@ const TextLoader = props => {
     : <span dangerouslySetInnerHTML={{ __html: text }} />
 }
 
-export const Test = () => <TextLoader documentName='legal' lang='es' />
+export const Test = () => <TextLoader documentName='general-and-indexed-specific-terms' lang='es' />
 export default TextLoader
