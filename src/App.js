@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Test as ComponentTest } from './components/TextLoader'
 
 import {
   createTheme,
@@ -114,6 +115,8 @@ const App = (props) => {
             <Router>
               <Routes>
                 <Route exact path="/" element={<Home {...props} />} />
+
+                <Route exact path="/:language/component-testing" element={<ComponentTest {...props} />} />
 
                 <Route
                   exact

@@ -53,6 +53,7 @@ if (!availableLanguages.includes(language)) {
 
 const options = [
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
+  { title: 'Component Testing', href:`/${language}/component-testing` },
   { title: 'Alta persona socia', href: '/new-member' },
   { title: 'Aportació al capital social', href: '/contribution' },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
