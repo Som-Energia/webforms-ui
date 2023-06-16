@@ -265,7 +265,7 @@
     "ES_UN_HABITATGE": "¿Es una vivienda?",
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/252-cual-es-mi-numero-de-cnae\">CNAE de vuestra actividad económica</a>.",
     "CADASTRAL_REFERENCE": "Referencia catastral",
-    "HELP_CADASTRAL_REFERENCE": "Si no sabes dónde encontrar tu referencia catastral, puedes <a target=\"_blank\" href=\"https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCBusqueda.aspx\">buscarlo en el registro</a>, o <a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/1339-que-es-y-donde-encontrar-la-referencia-catastral\">visitar nuestro Centro de Ayuda</a>.",
+    "HELP_CADASTRAL_REFERENCE": "Si no sabes dónde encontrar tu referencia catastral, puedes <a target=\"_blank\" href=\"https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCBusqueda.aspx\">buscarla en el registro</a>, o <a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/1339-que-es-y-donde-encontrar-la-referencia-catastral\">visitar nuestro Centro de Ayuda</a>.",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificado si ya hay luz con otra comercializadora o es un nuevo punto de suministro sin luz",
     "NO_SUPPLY_POINT_ADDRESS": "No has especificado la <b>dirección</b> del punto de suministro",
     "NO_IS_HOUSING": "No has especificado si la dirección corresponde a una vivienda",
