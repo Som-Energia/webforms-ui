@@ -178,8 +178,23 @@ const Contract = (props) => {
           .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL'))
-      })
+          .oneOf([true], t('CUPS_VERIFY_LABEL')),
+        cadastral_reference: Yup.string()
+          .when('cadastral_reference', (value) => {
+            if(value?.length > 0) {
+              return Yup.string()
+                .min(20, t('INVALID_REF_CATASTRAL_MIN'))
+                .max(20, t('INVALID_REF_CATASTRAL_MAX'))
+                .required("Required")
+            } else {
+              return Yup.string()
+                .notRequired();
+            }
+          }),
+      }, [
+        ['cadastral_reference', 'cadastral_reference']
+      ]
+    )
     }),
     Yup.object().shape({
       contract: Yup.object().shape({

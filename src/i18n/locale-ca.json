@@ -266,6 +266,8 @@
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/232-quin-es-el-meu-numero-de-cnae\">CNAE de la vostra activitat econòmica</a>.",
     "CADASTRAL_REFERENCE": "Referència cadastral",
     "HELP_CADASTRAL_REFERENCE": "Si no saps on trobar la teva referència cadastral, pots <a target=\"_blank\" href=\"https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCBusqueda.aspx\">buscar-la al registre</a>, o bé <a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/1338-que-es-i-on-trobar-la-referencia-cadastral\">visitar el nostre Centre d’Ajuda</a>.",
+    "INVALID_REF_CATASTRAL_MIN": "INVALID_REF_CATASTRAL_MIN",
+    "INVALID_REF_CATASTRAL_MAX": "INVALID_REF_CATASTRAL_MAX",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificat si ja hi ha llum amb una altra comercialitzadora o és un nou punt de subministrament sense llum",
     "NO_SUPPLY_POINT_ADDRESS": "No has especificat l'<b>adreça</b> del punt de subministrament",
     "NO_IS_HOUSING": "No has especificat si l'adreça correspon a un habitatge",
