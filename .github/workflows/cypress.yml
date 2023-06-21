@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Generate package lock
+        run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
