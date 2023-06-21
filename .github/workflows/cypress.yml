@@ -1,23 +1,16 @@
 name: cypress webforms-ui
-on: [push]
-env:
-  REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+on: push
+
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    name: cypress webforms-ui on chrome
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          browser: chrome
-          record: true
-          parallel: true
           build: npm run build
           start: npm run start
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
