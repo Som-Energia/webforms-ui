@@ -11,8 +11,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 
 import Header from 'components/oficinavirtual/Header'
 import TermsDialog from 'components/TermsDialog'
-import GeneralEspeciTerms from 'components/GeneralEspeciTerms'
-import GeneralTerms from 'components/GeneralTerms'
+import LegalText from 'components/LegalText'
 
 import IndexedReviewField from './IndexedReviewField'
 import { Box } from '@material-ui/core'
@@ -198,23 +197,18 @@ const IndexedReviewData = (props) => {
         </Grid>
       </Grid>
       <Grid container className={classes.root}>
-        {!isTariffIndexed ? (
-          <TermsDialog
-            title={t('GENERAL_TERMS')}
-            open={open}
-            onAccept={handleAccept}
-            onClose={handleClose}>
-            <GeneralEspeciTerms />
-          </TermsDialog>
-        ):(
-          <TermsDialog
-            title={t('GENERAL_TERMS')}
-            open={open}
-            onAccept={handleAccept}
-            onClose={handleClose}>
-            <GeneralTerms />
-          </TermsDialog>
-        )}
+        <TermsDialog
+          title={t('GENERAL_TERMS')}
+          open={open}
+          onAccept={handleAccept}
+          onClose={handleClose}>
+          <LegalText
+            lang={contractValues?.language}
+            documentName={
+              isTariffIndexed ? "general-contract-terms" : "general-and-indexed-specific-terms"
+            }
+          />
+        </TermsDialog>
 
         <Grid item xs={12}>
           <FormControlLabel
