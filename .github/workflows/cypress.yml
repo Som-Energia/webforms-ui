@@ -1,23 +1,30 @@
 name: cypress webforms-ui
 on: [push]
+env:
+  REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    name: cypress webforms-ui on chrome
+    environment: cypress
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install dependencies
+      - uses: actions/checkout@v1
+      - name: Generate package-lock
         run: |
           if [ -e package-lock.json ]; then
-          npm ci
+          rm package-lock.json && npm install
           else
           npm i
           fi
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
+      - uses: cypress-io/github-action@v2
         with:
-          start: npm start
+          browser: chrome
           record: true
+          parallel: true
+          start: npm run start
+          wait-on: 'http://localhost:3000'
+          config: baseUrl=http://localhost:3000
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
