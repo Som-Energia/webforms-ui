@@ -26,7 +26,7 @@ function Generation(props) {
     try {
       const newAssignments = assignments.map((assignment) => assignment.id)
       await generationChangeContractPriority(newAssignments, token)
-      setValidationConfirm({finished:true, completed:false})
+      setValidationConfirm({finished:true, completed:true})
     } catch (error) {
       console.error('ERROR', error)
       setValidationConfirm({finished:true, completed:false})
