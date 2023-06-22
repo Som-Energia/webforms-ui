@@ -4,8 +4,10 @@
 
 - Contract form: Adding Chooser for indexed or period tariff
 - Contract form tests fixed
+- Priorities of generation assignments can be reordered
 - Upgrade notes:
   - Contract component attribute isIndexedContractEnabled to toggle the indexed chooser
+
 
 ## 1.7.2 2023-06-08
 
