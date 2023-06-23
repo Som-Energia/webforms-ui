@@ -562,7 +562,7 @@
     "INDEXED_SPECIFIC_CONDITIONS": "Condiciones específicas de la tarifa indexada",
     "INDEXED_SPECIFIC_CONDITIONS_TEXT": "Puedes ver las condiciones específicas del contrato con la tarifa indexada en este <a target='_blank' href='https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf'> enlace</a>.",
     "INDEXED_SPECIFIC_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
-    "INDEXED_MARGE": "Franja de la cooperativa",
+    "INDEXED_MARGE": "Composición del precio",
     "INDEXED_MARGE_TEXT": "<p>El precio de la energía en la tarifa indexada contiene el coste de la energía (que depende, en buena parte, del mercado mayorista diario), los peajes, cargos y otros conceptos regulados que se deben pagar para consumir electricidad, y la franja de la cooperativa.</p>\n\n<p>La franja de la cooperativa es de {{kCoefficient}} euros por kWh. Esta franja incluye el margen para la viabilidad de la cooperativa, el coste de las desviaciones y el coste de adquisición de los certificados de garantía de origen 100%.</p>",
     "DURADA": "Duración del contrato",
     "DURADA_TEXT": "El contrato de tarifa {{tariff}} dura un año desde la contratación y se renueva automáticamente si no manifiestas lo contrario. No hay una permanencia mínima, lo puedes finalizar en cualquier momento.",
