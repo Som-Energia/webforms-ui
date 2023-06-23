@@ -26,7 +26,7 @@
     "TRIFASICA": "Monofásica a trifásica",
     "INSTALL_TYPE_ATTACHMENTS": "A distribuidora eléctrica solicita obrigatoriamente a presentación do boletín eléctrico no que conste a mudanza de tensión efectuada",
     "HELP_INSTALL_TYPE": "<a target=\"_blank\" href=\"{{url}}\">Como identificar se unha instalación é trifásica ou monofásica</a>",
-    "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
+    "HELP_INSTALL_TYPE_URL": "https://gl.support.somenergia.coop/article/1216-como-saber-se-a-tua-instalacion-e-monofasica-ou-trifasica",
     "POTENCIA_A_CONTRACTAR": "Que potencia queres contratar?",
     "HELP_POTENCIA": "<a target=\"_blank\" href=\"{{url}}\">Como averiguar a potencia que preciso</a>",
     "HELP_POTENCIA_URL": "https://gl.support.somenergia.coop/article/399-como-podo-saber-a-potencia-que-preciso",
