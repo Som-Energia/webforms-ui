@@ -109,21 +109,14 @@ const App = (props) => {
     return data
   }
 
-  const assignmentsJSON = useMemo(
-    () =>
-      JSON.parse(
-        document.getElementById('generation-assignments-data').textContent
-      ),
-    []
-  )
-  const investmentsJSON = useMemo(
-    () =>
-      JSON.parse(
-        document.getElementById('generation-investments-data').textContent
-      ),
-    []
-  )
-
+  const assignmentsJSON = useMemo(() => {
+    const assignments = document.getElementById('generation-assignments-data')
+    return assignments ? JSON.parse(assignments.textContent) : {}
+  }, [])
+  const investmentsJSON = useMemo(() => {
+    const investments = document.getElementById('generation-investments-data')
+    return investments ? JSON.parse(investments.textContent) : {}
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -384,16 +377,20 @@ const App = (props) => {
                 <Route
                   path="/:language/investments/investments-kwh/"
                   element={
-                    <GenerationContextProvider assignmentsJSON={assignmentsJSON} investmentsJSON={investmentsJSON} >
-                      <Generation {...props} token={token}/>
+                    <GenerationContextProvider
+                      assignmentsJSON={assignmentsJSON}
+                      investmentsJSON={investmentsJSON}>
+                      <Generation {...props} token={token} />
                     </GenerationContextProvider>
                   }
                 />
                 <Route
                   path="/investments/investments-kwh/"
                   element={
-                    <GenerationContextProvider assignmentsJSON={assignmentsJSON} investmentsJSON={investmentsJSON} >
-                      <Generation {...props} token={token}/>
+                    <GenerationContextProvider
+                      assignmentsJSON={assignmentsJSON}
+                      investmentsJSON={investmentsJSON}>
+                      <Generation {...props} token={token} />
                     </GenerationContextProvider>
                   }
                 />
