@@ -1,9 +1,10 @@
 # Change Log
 
-## unreleased
+## 1.7.3 2023-06-27
 
 - Contract form: Adding Chooser for indexed or period tariff
 - Contract form tests fixed
+- TextLoader/LegalText components for html based translated texts
 - Upgrade notes:
   - Contract component attribute isIndexedContractEnabled to toggle the indexed chooser
 
