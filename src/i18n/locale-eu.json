@@ -566,7 +566,7 @@
     "INDEXED_MARGE": "Prezioaren osaera",
     "INDEXED_MARGE_TEXT": "<p>Tarifa indexatuan, energiaren prezioak energiaren kostua (neurri handi batean eguneko handizkako merkatuaren araberakoa), bidesariak, karguak, elektrizitatea kontsumitzeko ordaindu behar diren beste kontzeptu arautu batzuk eta Kooperatibarentzako tartea barne hartzen ditu.</p>\n\n<p>Kooperatibarentzako tartea kWh-ko {{kCoefficient}} euro da. Tarte horrek Kooperatibaren bideragarritasuna bermatzeko marjina, desbideraketen kostua eta jatorri % 100 berriztagarriaren berme-ziurtagirien kostua barne hartzen ditu.</p>",
     "DURADA": "Kontratuaren iraupena",
-    "DURADA_TEXT": "{{tariff}} kontratuak urtebete irauten du kontratatzen denetik, eta automatikoki berritzen da kontrakoa adierazi ezean. Ez dago gutxieneko iraupen-konpromisorik. Kontratua edozein unetan azkendu dezakezu.",
+    "DURADA_TEXT": "Kontratuak urtebete irauten du kontratatzen denetik, eta, gero, automatikoki berritzen da kontrakoa adierazi ezean. Ez dago gutxieneko iraupen-konpromisorik. Kontratua edozein unetan suntsiarazi dezakezu zigorrik jaso gabe.",
     "DESESTIMENT": "Uko egiteko eskubidea",
     "DESESTIMENT_TEXT": "<p>Kontsumitzaileek 14 egun naturaleko epea izango dute, kontratuaren datatik zenbatzen hasita, zerbitzuak azkentzeko. Nahi izanez gero, erabakia posta elektronikoz (comercialitzacio@somenergia.coop), postaz (SOM ENERGIA SCCL c / Pic de Peguera 11, 17003 Girona) edo gure web-atarian zehazten diren kontaktu-bideen bitartez, jakinarazi behar diguzu. Horretarako, txantiloi honetan aurkituko duzun testua erabil dezakezu.</p><p>Uko egitearen ondorioak: jasotako ordainketa guztiak itzuliko dizkizugu, halakorik badago, erabakia jakinarazten diguzun datatik 14 egun naturalen buruan. Itzulketa hori doakoa izango da zuretzat, eta, zuk kontrakoa adierazi ezean, hasierako transakzioa egiteko erabili zenuen ordainbide bera erabiliko dugu. Elektrizitate-hornidura jada aktibo badago, zerbitzua eman dizugun egunei dagokien kontsumoa ordaindu beharko diguzu, bai eta kontratazioarekin eta, egokitzen bada, aurreko egoerara itzultzearekin lotutako gainerako kostuak ere.</p>",
     "PERSONAL_DATA_PROTECTION": "Datu pertsonalen babesaren arloko informazio osagarria",
@@ -609,6 +609,6 @@
     "FARE_PERIODS": "Ordutegi-tarteen",
     "CONTRACT_PRIVACY_POLICY_TERMS": "Som Energiaren <a target='_blank' href='{{url}}'>pribatutasun-politika</a> irakurri dut eta onartzen dut.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/eu/pribatutasun-politika/#kontrata-ezazu-argia-formularioa",
-    "PROCESS_TYPE_TARIFF_CHANGE": "",
+    "PROCESS_TYPE_TARIFF_CHANGE": "Tarifa aldaketa",
     "UNKNOWN_FIELD": ""
 }
