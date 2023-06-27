@@ -557,10 +557,10 @@
     "INDEXED_SPECIFIC_CONDITIONS": "Condicións específicas da tarifa indexada",
     "INDEXED_SPECIFIC_CONDITIONS_TEXT": "Podes ver as condicións específicas do contrato coa tarifa indexada nesta <a target='_blank' href='https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf'> ligazón</a>.",
     "INDEXED_SPECIFIC_CONDITIONS_URL": "https://www.somenergia.coop/tarifa_indexada/221209_Condiciones_%20Especificas_Indexada_CAST.pdf",
-    "INDEXED_MARGE": "Franxa da cooperativa",
-    "INDEXED_MARGE_TEXT": "A franxa da cooperativa defínese en Som Energia. É de {{kCoefficient}} €  por kWh. Esta franxa da cooperativa inclúe a marxe para a viabilidade da cooperativa, máis os custos das desviacións e os custos dos certificados de garantía de orixe 100% renovable.",
+    "INDEXED_MARGE": "Composición do prezo",
+    "INDEXED_MARGE_TEXT": "<p>O prezo da enerxía na tarifa indexada contén o custo da enerxía (que depende, en boa parte, do mercado maiorista diario), as peaxes, cargos e outros conceptos regulados que se deben pagar para consumir electricidade, e a franxa da cooperativa.</p>\n\n<p>A franxa da cooperativa é de {{kCoefficient}} euros por kWh. Esta franxa inclúe a marxe para a viabilidade da cooperativa, o custo das desviacións e o custo de adquisición dos certificados de garantía de orixe 100 %.</p>",
     "DURADA": "Duración do contrato",
-    "DURADA_TEXT": "O contrato de tarifa {{tariff}} dura un ano desde a contratación e renóvase automaticamente se non manifestas o contrario. Non hai unha permanencia mínima, podes financialo en calquera momento.",
+    "DURADA_TEXT": "O contrato dura un ano desde a contratación e, pasado este tempo, renóvase automaticamente se non manifestas o contrario. Non hai unha permanencia mínima, podes resolvelo en calquera momento sen ningunha penalización.",
     "DESESTIMENT": "Dereito de desistencia",
     "DESESTIMENT_TEXT": "<p> As persoas consumidoras dispoñen de 14 días naturais desde a data do contrato para finalizar os servizos. Se así o desexas, tes que notificalo por correo electrónico a comercialitzacio@somenergia.coop, por correo postal a SOM ENERGIA, SCCL, c/ Pic de Peguera 11, 17003 Girona ou a través de calquera das vías de contacto que constan no noso portal de Internet. Para facelo, podes utilizar o texto que atoparás neste modelo.</p><p>Consecuencias da desistencia: devolverémosche todos os pagamentos recibidos, se os hai, dentro dos 14 días naturais a partir da data na que nos comuniques a túa decisión. Efectuaremos este reembolso sen que supoña ningún gasto para ti, e usaremos o mesmo método de pagamento que usaches para a transacción inicial, se non nos indicas o contrario. En caso de que xa se atope activa a subministración de electricidade, terás que aboarnos o consumo correspondente aos días que che prestaramos servizo, así como o resto de custos asociados á contratación e, se se tercia, á reposición á situación anterior.</p>",
     "PERSONAL_DATA_PROTECTION": "Información adicional en materia de protección de datos persoais",
@@ -603,6 +603,6 @@
     "FARE_PERIODS": "Períodos",
     "CONTRACT_PRIVACY_POLICY_TERMS": "Lin e acepto a <a target='_blank' href='{{url}}'>política de privacidade</a> de Som Energia.",
     "CONTRACT_PRIVACY_POLICY_TERMS_URL": "https://www.somenergia.coop/gl/politica-de-privacidade/#formulario-de-contratacion-luz",
-    "PROCESS_TYPE_TARIFF_CHANGE": "",
+    "PROCESS_TYPE_TARIFF_CHANGE": "Modificación de tarifa",
     "UNKNOWN_FIELD": "Campo desconocido"
 }
