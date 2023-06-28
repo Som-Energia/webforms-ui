@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.4 2023-06-28
+
+- Contract form: Add cadastral reference to supply point
+- Upgrade notes:
+    -  Contract attribute isCadastralReference to display cadastral reference field
+
 ## 1.7.3 2023-06-27
 
 - Contract form: Adding Chooser for indexed or period tariff
