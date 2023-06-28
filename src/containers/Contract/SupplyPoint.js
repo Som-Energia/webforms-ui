@@ -278,6 +278,7 @@ const SupplyPoint = (props) => {
               }
             />
           </Grid>
+          {props.isCadastralReference ? (
           <Grid item xs={6} sm={6}>
             <TextField
               id="supply_point_cadastral_reference"
@@ -297,6 +298,7 @@ const SupplyPoint = (props) => {
               }
             />
           </Grid>
+          ): null}
           <Grid item xs={12} className={classes.noPaddingTop}>
             {values?.contract?.has_service ? (
               <Typography>{t('ADJUNTAR_ULTIMA_FACTURA')}</Typography>

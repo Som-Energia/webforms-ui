@@ -80,7 +80,7 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-  const { is30ContractEnabled = true, isIndexedContractEnabled = false } = props
+  const { is30ContractEnabled = true, isIndexedContractEnabled = false , isCadastralReference = false} = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -579,7 +579,10 @@ const Contract = (props) => {
         )}
         {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
         {(showAllSteps || activeStep === supplyPointPage) && (
-          <SupplyPoint {...props} />
+          <SupplyPoint
+            {...props}
+            isCadastralReference={isCadastralReference}
+          />
         )}
         {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
