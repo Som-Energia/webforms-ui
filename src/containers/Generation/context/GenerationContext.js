@@ -1,5 +1,7 @@
 import { useState, createContext, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import OrdinalNumbers from 'utils/ordinalNumbers'
+import { useParams } from 'react-router-dom'
 
 const GenerationContext = createContext({
   assignments: [],
@@ -10,14 +12,17 @@ const GenerationContext = createContext({
 
 export const GenerationContextProvider = ({ children, assignmentsJSON, investmentsJSON, propEditingPriority }) => {
   const { t } = useTranslation()
+  const { language } = useParams()
+
+  const ordinals = useMemo(() => {return new OrdinalNumbers(language)},[language])
 
   const pioritiesJSON = useMemo(() => {
     return assignmentsJSON.map((value, index) => {
       return index === 0
         ? { active: true, value: t('GENERATION_MAIN_PRIORITY'), index: index }
-        : { active: true, value: t('GENERATION_SECONDARY') + " " + index, index: index }
+        : { active: true, value: ordinals.formatOrdinals(index+1), index: index }
     })
-  }, [t, assignmentsJSON])
+  }, [t, assignmentsJSON, ordinals])
 
 
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
