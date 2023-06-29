@@ -33,7 +33,7 @@ import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
-import { checkIsTariff20 } from '../services/utils'
+import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 
 const contractJSON = JSON.parse(
@@ -64,6 +64,7 @@ const Indexada = (props) => {
   const [hasTargetTariff, setHasTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
+  const [isTariff30] = useState(checkIsTariff30(contractJSON.tariff))
   const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
   const [kCoefficient, setKCoefficient] = useState('')
 
@@ -267,6 +268,7 @@ const Indexada = (props) => {
                                 {activeStep === 0 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
+                                    isTariff30={isTariff30}
                                     isTariffIndexed={isTariffIndexed}
                                     desc={t(isTariffIndexed
                                       ? 'PERIODS_INTRO_BODY'
@@ -275,7 +277,9 @@ const Indexada = (props) => {
                                       url_tariff_index_characteristics: t(
                                         isTariff20
                                         ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
-                                        : 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
+                                        : isTariff30
+                                        ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
+                                        : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
                                         ),
                                       url_general_conditions: t(
                                         'GENERAL_CONDITIONS_URL'
@@ -286,7 +290,9 @@ const Indexada = (props) => {
                                       url_tariff_characteristics: t(
                                         isTariff20
                                         ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                        : 'TARIFF_CHARACTERISTICS_30_URL'
+                                        : isTariff30
+                                        ? 'TARIFF_CHARACTERISTICS_30_URL'
+                                        : 'TARIFF_CHARACTERISTICS_6_URL'
                                       )
                                     })}
                                     {...formikProps}
@@ -295,23 +301,30 @@ const Indexada = (props) => {
                                 {activeStep === 1 ? (
                                   <IndexedInfo
                                     isTariff20={isTariff20}
+                                    isTariff30={isTariff30}
                                     isTariffIndexed={isTariffIndexed}
                                     title={t('INDEXED_INTRO_TITLE')}
                                     desc={
                                       isTariffIndexed
                                       ? t(isTariff20
                                         ? 'PERIODS_IMPORTANT_INFO_BODY'
-                                        : 'PERIODS_IMPORTANT_INFO_BODY_30',
+                                        : isTariff30
+                                        ? 'PERIODS_IMPORTANT_INFO_BODY_30'
+                                        : 'PERIODS_IMPORTANT_INFO_BODY_6',
                                       {
                                         url_tariff_characteristics: t(
                                           isTariff20
                                           ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                          : 'TARIFF_CHARACTERISTICS_30_URL'
+                                          : isTariff30
+                                          ? 'TARIFF_CHARACTERISTICS_30_URL'
+                                          : 'TARIFF_CHARACTERISTICS_6_URL'
                                         ),
                                         url_tariff_web: t(
                                           isTariff20
                                           ? 'TARIFF_WEB_URL'
-                                          : 'TARIFF_WEB_30_URL'
+                                          : isTariff30
+                                          ? 'TARIFF_WEB_30_URL'
+                                          : 'TARIFF_WEB_6_URL'
                                         ),
                                       })
                                       : t(isTariff20

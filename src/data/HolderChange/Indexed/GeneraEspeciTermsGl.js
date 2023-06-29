@@ -1317,7 +1317,7 @@ const generalTermsText = `
     
     <p>Sendo <em><strong>h</strong></em><sub><em><strong>i </strong></em></sub>cada unha das horas do período de facturación en cuestión.</p>
     <p>Sendo PH o prezo horario da enerxía calculado seguindo a seguinte fórmula:</p>
-    <p style="padding-left: 40px"><strong>PH = 1,015 * [(PHM + PHMA + Pc + Sc + I + POsOm) (1 + Perd) + FE + K] + PTD + CA</strong></p>
+    <p style="padding-left: 40px"><strong>PH = 1,015 * [(PHM + PHMA + Pc + Sc + I + POsOm) (1 + Perd) + FE + F] + PTD + CA</strong></p>
 
     <p style="page-break-after:always;"></p>
 
@@ -1357,7 +1357,7 @@ const generalTermsText = `
         <p><strong>FE</strong> = Obriga de achega ao Fondo de Eficiencia Enerxética (FNEE) publicada polo Ministerio.</p>
         </li>
         <li>
-        <p><strong>K</strong> = Franxa da cooperativa (inclúe a marxe para a viabilidade da cooperativa, máis os custos dos Certificados de Garantía de Orixe 100 % renovábel e os custos das desviacións). </p>
+        <p><strong>F</strong> = Franxa da cooperativa (inclúe a marxe para a viabilidade da cooperativa, máis os custos dos Certificados de Garantía de Orixe 100 % renovábel e os custos das desviacións).</p>
         </li>
         <li>
         <p><strong>PTD </strong>= Custo regulado da peaxe de transporte e distribución establecido e publicado pola CNMC e aplicado sobre o total da enerxía consumida.</p>

@@ -12,6 +12,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Header from 'components/oficinavirtual/Header'
 import TermsDialog from 'components/TermsDialog'
 import GeneralEspeciTerms from 'components/GeneralEspeciTerms'
+import GeneralTerms from 'components/GeneralTerms'
 
 import IndexedReviewField from './IndexedReviewField'
 import { Box } from '@material-ui/core'
@@ -197,13 +198,23 @@ const IndexedReviewData = (props) => {
         </Grid>
       </Grid>
       <Grid container className={classes.root}>
-        <TermsDialog
-          title={t('GENERAL_TERMS')}
-          open={open}
-          onAccept={handleAccept}
-          onClose={handleClose}>
-          <GeneralEspeciTerms />
-        </TermsDialog>
+        {!isTariffIndexed ? (
+          <TermsDialog
+            title={t('GENERAL_TERMS')}
+            open={open}
+            onAccept={handleAccept}
+            onClose={handleClose}>
+            <GeneralEspeciTerms />
+          </TermsDialog>
+        ):(
+          <TermsDialog
+            title={t('GENERAL_TERMS')}
+            open={open}
+            onAccept={handleAccept}
+            onClose={handleClose}>
+            <GeneralTerms />
+          </TermsDialog>
+        )}
 
         <Grid item xs={12}>
           <FormControlLabel
