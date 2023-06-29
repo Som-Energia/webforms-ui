@@ -1267,7 +1267,7 @@ const generalTermsText = `
     <p style="padding-left: 40px"><strong> Energia-terminoaren zenbatekoa = Ordu-batura (sartzen den energia aktiboa, kWh </strong><em><strong>h</strong></em><sub><em><strong>i</strong></em></sub><em><strong> </strong></em><strong>* PH)</strong></p>
     <p>Non <em><strong>h</strong></em><sub><em><strong>i </strong></em></sub>akturazio-aldiko orduetako bakoitza baita,</p>
     <p>eta PH energiaren orduko prezioa, honako formula honi jarraituz kalkulatuta:</p>
-    <p style="padding-left: 40px"><strong>PH = 1,015 * [(PHM + PHMA + Pc + Sc + I + POsOm) (1 + Perd) + FE + K] + PTD + CA</strong></p>
+    <p style="padding-left: 40px"><strong>PH = 1,015 * [(PHM + PHMA + Pc + Sc + I + POsOm) (1 + Perd) + FE + F] + PTD + CA</strong></p>
 
     <p style="page-break-after:always;"></p>
 
@@ -1306,7 +1306,7 @@ const generalTermsText = `
         <p><strong>FE</strong> = Ministerioak argitaratutako Energia-efizientziarako fondorako (FNEE) nahitaezko ekarpena.</p>
         </li>
         <li>
-        <p><strong>K</strong> = Kooperatibarentzako tartea (Kooperatibaren bideragarritasuna bermatzeko marjina, jatorri % 100 berriztagarriaren berme-ziurtagirien kostua eta desbideraketen kostua barne hartzen ditu). </p>
+        <p><strong>F</strong> =  Kooperatibarentzako tartea (Kooperatibaren bideragarritasuna bermatzeko marjina, jatorri % 100 berriztagarriaren berme-ziurtagirien kostua eta desbideraketen kostua barne hartzen ditu).</p>
         </li>
         <li>
         <p><strong>PTD </strong>= MLBNk ezarritako eta argitaratutako garraio- eta banaketa-bidesariaren kostu arautua. Kontsumitutako energiaren gainean aplikatzen da.</p>
