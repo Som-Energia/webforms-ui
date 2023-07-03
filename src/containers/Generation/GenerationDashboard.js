@@ -74,15 +74,15 @@ function GenerationDashboard({
             </Grid>
           </Grid>
         ) : null}
-        {validationConfirm.finished && validationConfirm.completed  ? (
+        {validationConfirm.finished && validationConfirm.completed ? (
           <Grid item container className={classes.buttons}>
-              <Alert
-                id="alert-success-message"
-                severity="success"
-                className={classes.gripReminder}
-                onClose={() => setValidationConfirm(false)}>
-                {t('GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS')}
-              </Alert>
+            <Alert
+              id="alert-success-message"
+              severity="success"
+              className={classes.gripReminder}
+              onClose={() => setValidationConfirm(false)}>
+              {t('GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS')}
+            </Alert>
           </Grid>
         ) : null}
       </>
@@ -99,34 +99,43 @@ function GenerationDashboard({
 
   return (
     <>
-    {validationConfirm.finished && !validationConfirm.completed ? (
-      <GenerationFailure />
-    ) : (
-      <>
-      {!has_duplicate_priority_values() ? (
-        <>
-          <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
-          <GenerationInvestmentSection data={investments} />
-          <Grid item xs={12} className={classes.gripDivider}>
-            <Typography variant="body2">
-              {t('GENERATION_INVESTMENTS_HELPER_TEXT')}
-            </Typography>
-          </Grid>
-          <SectionTitle
-            text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}
-          />
-          <GenerationAssigmentSection data={assignments} editing={editing} />
-          <Grid className={classes.footer} container justifyContent="flex-end">
-            <ActionSection />
-          </Grid>
-        </>
+      {validationConfirm.finished && !validationConfirm.completed ? (
+        <GenerationFailure />
       ) : (
-        <Typography id="info-text-section">
-          {t('GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT')}
-        </Typography>
+        <>
+          {!has_duplicate_priority_values() ? (
+            <>
+              <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
+              <GenerationInvestmentSection data={investments} />
+              <Grid item xs={12} className={classes.gripDivider}>
+                <Typography variant="body2">
+                  {t('GENERATION_INVESTMENTS_HELPER_TEXT_1')}
+                </Typography>
+                <Typography variant="body2">
+                  {t('GENERATION_INVESTMENTS_HELPER_TEXT_2')}
+                </Typography>
+              </Grid>
+              <SectionTitle
+                text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}
+              />
+              <GenerationAssigmentSection
+                data={assignments}
+                editing={editing}
+              />
+              <Grid
+                className={classes.footer}
+                container
+                justifyContent="flex-end">
+                <ActionSection />
+              </Grid>
+            </>
+          ) : (
+            <Typography id="info-text-section">
+              {t('GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT')}
+            </Typography>
+          )}
+        </>
       )}
-    </>
-    )}
     </>
   )
 }
