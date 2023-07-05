@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- Fix: Missing kCoeffient 
+- Fix: Replace K by F in especific conditions
+- Fix: links and texts related with 6.1TD
+
 ## 1.7.4 2023-06-28
 
 - Contract form: Add cadastral reference to supply point
