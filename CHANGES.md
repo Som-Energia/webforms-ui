@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.7.5 2023-07-05
 
 - Fix: Missing kCoeffient 
 - Fix: Replace K by F in especific conditions
