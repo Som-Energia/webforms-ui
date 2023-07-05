@@ -412,7 +412,7 @@
     "NOTFOUND": "No s'ha trobat el contracte a modificar",
     "ATR_CASE": "No s'ha pogut generar el cas ATR, aquest contracte ja té un procés en curs",
     "OPEN_CASES": "Aquest contracte ja té un procés en curs",
-    "PENDING_CONTRACT_MODIFICATION": "",
+    "PENDING_CONTRACT_MODIFICATION": "Aquest contracte conté modificacions pendents d'aplicar",
     "ATTACHMENT_ERROR": "No s'han pogut carregar els arxius adjunts",
     "STATE_CONFLICT": "Aquest contracte no permet fer modificacions contractuals",
     "UNAVAILABLE": "No disponible",
