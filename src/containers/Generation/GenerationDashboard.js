@@ -108,12 +108,18 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
               <GenerationInvestmentSection data={investments} />
               <Grid item xs={12} className={classes.gripDivider}>
-                <Typography variant="body2">
-                  {t('GENERATION_INVESTMENTS_HELPER_TEXT_1')}
-                </Typography>
-                <Typography variant="body2">
-                  {t('GENERATION_INVESTMENTS_HELPER_TEXT_2')}
-                </Typography>
+                <Alert severity="warning">
+                  <Typography variant="body2"
+                  dangerouslySetInnerHTML={{
+                        __html: t('GENERATION_INVESTMENTS_HELPER_TEXT_1')
+                    }}
+                  /> 
+                  <Typography variant="body2"
+                  dangerouslySetInnerHTML={{
+                        __html: t('GENERATION_INVESTMENTS_HELPER_TEXT_2')
+                    }}
+                  /> 
+                </Alert>
               </Grid>
               <SectionTitle
                 text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}
