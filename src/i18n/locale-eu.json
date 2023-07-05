@@ -412,6 +412,7 @@
     "NOTFOUND": "Ez da aldatu beharreko kontratua aurkitu",
     "ATR_CASE": "Ezin izan da ATR kasua sortu. Kontratu honek badu prozesu bat aribidean",
     "OPEN_CASES": "Kontratu honek badu prozesu bat aribidean",
+    "PENDING_CONTRACT_MODIFICATION": "",
     "ATTACHMENT_ERROR": "Ezin izan ditugu fitxategi erantsiak kargatu",
     "STATE_CONFLICT": "Kontratu honetan ezin da aldaketarik egin",
     "UNAVAILABLE": "Ez dago erabilgarri",

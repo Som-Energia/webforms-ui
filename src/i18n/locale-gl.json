@@ -406,6 +406,7 @@
     "NOTFOUND": "Non atopamos o contrato para modificar",
     "ATR_CASE": "Non puidemos xerar o caso ATR, este contrato xa ten un proceso en curso",
     "OPEN_CASES": "Este contrato xa ten un proceso en curso",
+    "PENDING_CONTRACT_MODIFICATION": "",
     "ATTACHMENT_ERROR": "Non se puideron cargar os ficheiros adxuntos",
     "STATE_CONFLICT": "Este contrato non permite facer modificacións contractuais",
     "UNAVAILABLE": "Non dispoñíbel",
