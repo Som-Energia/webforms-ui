@@ -229,7 +229,7 @@ const Review = (props) => {
           onAccept={handleAccept}
           onClose={handleClose}>
           <LegalText
-            lang={values?.holder?.language}
+            language={values?.holder?.language}
             documentName={"general-contract-terms"}
           />
         </TermsDialog>
