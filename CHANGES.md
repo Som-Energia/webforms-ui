@@ -1,10 +1,9 @@
 # Change Log
 
 
-## Unrealised
+## 1.7.6 2023-07-10
 
-- Added REACT_APP_FEATURE_FLAGS configuration variable containing a json with feature flags
-
+- Added `REACT_APP_FEATURE_FLAGS` configuration variable containing a json with feature flags
 
 ## 1.7.5 2023-07-05
 
