@@ -1,5 +1,11 @@
 # Change Log
 
+
+## Unrealised
+
+- Added REACT_APP_FEATURE_FLAGS configuration variable containing a json with feature flags
+
+
 ## 1.7.5 2023-07-05
 
 - Fix: Missing kCoeffient 
