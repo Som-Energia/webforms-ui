@@ -59,15 +59,16 @@ const CancellationDetails = (props) => {
   useEffect(() => {
     if (availableDates !== []) {
       setFirstDate(availableDates[0])
-      setLastDate(availableDates[availableDates.length-1])
-      setFieldValue('date_action', dayjs(availableDates[0]).format('DD/MM/YYYY'))
-    }
-    else {
+      setLastDate(availableDates[availableDates.length - 1])
+      setFieldValue(
+        'date_action',
+        dayjs(availableDates[0]).format('DD/MM/YYYY')
+      )
+    } else {
       setFirstDate(null)
       setLastDate(null)
     }
   }, [availableDates])
-
 
   const handleDateChange = (date) => {
     setFieldValue('date_action', date.format('DD/MM/YYYY'))
