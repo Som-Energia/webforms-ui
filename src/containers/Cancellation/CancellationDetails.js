@@ -19,7 +19,7 @@ import Header from 'components/oficinavirtual/Header'
 import Card from 'components/oficinavirtual/Card'
 import LabelFieldRow from 'components/oficinavirtual/LabelFieldRow'
 import TermsDialog from 'components/TermsDialog'
-import CancellationTerms from 'containers/Cancellation/CancellationTerms'
+import LegalText from 'components/LegalText'
 import Loading from 'components/Loading'
 
 import { getNextNBussinesDays } from '../../services/utils'
@@ -59,15 +59,16 @@ const CancellationDetails = (props) => {
   useEffect(() => {
     if (availableDates !== []) {
       setFirstDate(availableDates[0])
-      setLastDate(availableDates[availableDates.length-1])
-      setFieldValue('date_action', dayjs(availableDates[0]).format('DD/MM/YYYY'))
-    }
-    else {
+      setLastDate(availableDates[availableDates.length - 1])
+      setFieldValue(
+        'date_action',
+        dayjs(availableDates[0]).format('DD/MM/YYYY')
+      )
+    } else {
       setFirstDate(null)
       setLastDate(null)
     }
   }, [availableDates])
-
 
   const handleDateChange = (date) => {
     setFieldValue('date_action', date.format('DD/MM/YYYY'))
@@ -199,7 +200,7 @@ const CancellationDetails = (props) => {
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
-          <CancellationTerms />
+          <LegalText documentName={'cancellation-terms'} />
         </TermsDialog>
 
         <FormControlLabel

@@ -223,7 +223,7 @@ const Indexada = (props) => {
           className={classes.disclaimer}
           variant="body1"
           dangerouslySetInnerHTML={{
-            __html: t('CANCELLATION_NO_AVAILABLE')
+            __html: t('TARIFF_CHANGE_NOT_AVAILABLE')
           }}
         />
       </Alert>

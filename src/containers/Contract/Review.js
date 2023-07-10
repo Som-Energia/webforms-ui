@@ -546,7 +546,7 @@ const Review = (props) => {
         onClose={handleClose}
       >
         <LegalText
-          lang={holder?.language}
+          language={holder?.language}
           documentName={
             values?.contract?.isIndexed
             ? "general-and-indexed-specific-terms"

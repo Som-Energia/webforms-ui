@@ -1,5 +1,15 @@
 # Change Log
 
+## Unreleased
+
+- TextLoader takes language from i18next context by default
+- Use LegalText component in on holderchange and cancellation
+- Unified formatting among translations
+- Unwrapped paragraphs so that they are the same line independent
+  of the language and weblate identifies them
+- Fix: document on some languages had a broken xml structure
+- index items moved from h6 to h4 to made general-terms and
+  general-and-indexed to be diffable in order to spot changes.
 
 ## 1.7.6 2023-07-10
 
@@ -7,7 +17,7 @@
 
 ## 1.7.5 2023-07-05
 
-- Fix: Missing kCoeffient 
+- Fix: Missing kCoeffient
 - Fix: Replace K by F in especific conditions
 - Fix: links and texts related with 6.1TD
 
@@ -15,7 +25,7 @@
 
 - Contract form: Add cadastral reference to supply point
 - Upgrade notes:
-    -  Contract attribute isCadastralReference to display cadastral reference field
+  - Contract attribute isCadastralReference to display cadastral reference field
 
 ## 1.7.3 2023-06-27
 

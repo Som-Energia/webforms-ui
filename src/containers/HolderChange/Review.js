@@ -12,7 +12,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 
 import StepHeader from 'components/StepHeader'
 import TermsDialog from 'components/TermsDialog'
-import GeneralTerms from 'components/GeneralTerms'
+import LegalText from 'components/LegalText'
 import { languages } from 'services/utils'
 
 const useStyles = makeStyles((theme) => ({
@@ -228,7 +228,10 @@ const Review = (props) => {
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
-          <GeneralTerms />
+          <LegalText
+            language={values?.holder?.language}
+            documentName={"general-contract-terms"}
+          />
         </TermsDialog>
 
         <Box mt={2}>

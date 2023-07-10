@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const App = (props) => {
   const classes = useStyles()
-  const { token = '', isIndexedPilotOngoing=undefined} = props
+  const { token = '', isIndexedPilotOngoing = undefined } = props
 
   const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
@@ -116,7 +116,11 @@ const App = (props) => {
               <Routes>
                 <Route exact path="/" element={<Home {...props} />} />
 
-                <Route exact path="/:language/component-testing" element={<ComponentTest {...props} />} />
+                <Route
+                  exact
+                  path="/:language/component-testing"
+                  element={<ComponentTest {...props} />}
+                />
 
                 <Route
                   exact
@@ -240,6 +244,13 @@ const App = (props) => {
                 />
 
                 <Route
+                  path="/:language/cancellation"
+                  element={
+                    <Cancellation {...props} contract={loadContractData()} />
+                  }
+                />
+
+                <Route
                   path="/cancellation/confirm"
                   element={
                     <CancellationConfirm
@@ -329,11 +340,28 @@ const App = (props) => {
                 />
                 <Route
                   path="/:language/contract/indexed"
-                  element={<Indexed {...props} contract={loadContractData()} isIndexedPilotOngoing={isIndexedPilotOngoing!==undefined} />}
+                  element={
+                    <Indexed
+                      {...props}
+                      contract={loadContractData()}
+                      isIndexedPilotOngoing={
+                        isIndexedPilotOngoing !== undefined
+                      }
+                    />
+                  }
                 />
                 <Route
                   path="/contract/indexed"
-                  element={<Indexed {...props} contract={loadContractData()} isIndexedPilotOngoing={isIndexedPilotOngoing!==undefined} checkEnabled={false} />}
+                  element={
+                    <Indexed
+                      {...props}
+                      contract={loadContractData()}
+                      isIndexedPilotOngoing={
+                        isIndexedPilotOngoing !== undefined
+                      }
+                      checkEnabled={false}
+                    />
+                  }
                 />
               </Routes>
             </Router>
