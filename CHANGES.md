@@ -1,5 +1,15 @@
 # Change Log
 
+## Unreleased
+
+- Use LegalText component in on holderchange and cancellation
+- Unified formatting among translations
+- Unwrapped paragraphs so that they are the same line independent
+  of the language and weblate identifies them
+- Fix: document on some languages had a broken xml structure
+- TextLoader takes language from i18next context by default
+- index items moved from h6 to h4 to made general-terms and
+  general-and-indexed to be diffable in order to spot changes.
 
 ## 1.7.6 2023-07-10
 
