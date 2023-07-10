@@ -19,6 +19,7 @@ import Header from 'components/oficinavirtual/Header'
 import Card from 'components/oficinavirtual/Card'
 import LabelFieldRow from 'components/oficinavirtual/LabelFieldRow'
 import TermsDialog from 'components/TermsDialog'
+import LegalText from 'components/LegalText'
 import CancellationTerms from 'containers/Cancellation/CancellationTerms'
 import Loading from 'components/Loading'
 
@@ -199,7 +200,7 @@ const CancellationDetails = (props) => {
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
-          <CancellationTerms />
+          <LegalText documentName={'cancellation-terms'} />
         </TermsDialog>
 
         <FormControlLabel

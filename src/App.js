@@ -240,6 +240,13 @@ const App = (props) => {
                 />
 
                 <Route
+                  path="/:language/cancellation"
+                  element={
+                    <Cancellation {...props} contract={loadContractData()} />
+                  }
+                />
+
+                <Route
                   path="/cancellation/confirm"
                   element={
                     <CancellationConfirm
