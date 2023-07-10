@@ -16,11 +16,22 @@ if (root) {
     })
 
     props.version = process.env.REACT_APP_VERSION
+
+    const featureFlags = JSON.parse(process.env?.REACT_APP_FEATURE_FLAGS || "{}")
+
+    Object.keys(featureFlags).forEach((flag, index) => {
+      props[flag] = featureFlags[flag]
+    })
+    
     console.log(
       `webforms-ui version: ${
         process.env.REACT_APP_VERSION ||
         process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
       }`
+    )
+
+    console.log(
+      `webforms-ui flags:`, featureFlags
     )
 
     ReactDOM.render(
