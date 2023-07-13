@@ -109,16 +109,18 @@ function GenerationDashboard({
               <GenerationInvestmentSection data={investments} />
               <Grid item xs={12} className={classes.gripDivider}>
                 <Alert severity="warning">
-                  <Typography variant="body2"
-                  dangerouslySetInnerHTML={{
-                        __html: t('GENERATION_INVESTMENTS_HELPER_TEXT_1')
+                  <Typography
+                    variant="body2"
+                    dangerouslySetInnerHTML={{
+                      __html: t('GENERATION_INVESTMENTS_HELPER_TEXT_1')
                     }}
-                  /> 
-                  <Typography variant="body2"
-                  dangerouslySetInnerHTML={{
-                        __html: t('GENERATION_INVESTMENTS_HELPER_TEXT_2')
+                  />
+                  <Typography
+                    variant="body2"
+                    dangerouslySetInnerHTML={{
+                      __html: t('GENERATION_INVESTMENTS_HELPER_TEXT_2')
                     }}
-                  /> 
+                  />
                 </Alert>
               </Grid>
               <SectionTitle
@@ -136,9 +138,14 @@ function GenerationDashboard({
               </Grid>
             </>
           ) : (
-            <Typography id="info-text-section">
-              {t('GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT')}
-            </Typography>
+            <Alert severity="warning">
+              <Typography
+                id="info-text-section"
+                dangerouslySetInnerHTML={{
+                  __html: t('GENERATION_INVESTMENTS_SAME_PRIORITY_INFO_TEXT')
+                }}
+              />
+            </Alert>
           )}
         </>
       )}
