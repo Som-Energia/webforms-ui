@@ -481,7 +481,6 @@ function PersonalData(props) {
                         })
                 }}
               />
-              {'skipPrivacyPolicy: ' + skipPrivacyPolicy}
               {values?.contract?.has_service === undefined ? (
                 <FormHelperText
                   className={classes.noteText}
