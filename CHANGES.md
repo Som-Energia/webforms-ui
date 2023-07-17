@@ -1,7 +1,9 @@
 # Change Log
 
-## Unreleased
+## 1.7.7 2023-07-17
 
+- Fix: Remove visible debuging text in interface
+- Fix: No power limit in 3.0TD
 - TextLoader takes language from i18next context by default
 - Use LegalText component in on holderchange and cancellation
 - Unified formatting among translations
