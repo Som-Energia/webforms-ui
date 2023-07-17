@@ -55,18 +55,20 @@ function Failure(props) {
   const classes = useStyles()
   const { error = false, showHeader = true } = props
 
-  
-
   const getErrorTxt = (code, errorData) => {
-
     const exceptionMap = {
       NO_CHANGES: t('INDEXED_NO_CHANGES_ERROR_TXT'),
       OPEN_CASES: t('INDEXED_OPEN_CASES_ERROR_TXT'),
       STATE_CONFLICT: t('INDEXED_STATE_CONFLICT_ERROR_TXT'),
       PENDING_CONTRACT_MODIFICATION: t('PENDING_CONTRACT_MODIFICATION_ERROR_TXT'),
-      INVALID_FIELD:t('INDEXED_INVALID_FIELD_ERROR',{error_field: errorData?.[0]?.field || t('UNKNOWN_FIELD')}),
+      NON_STANDARD_TARIFF: t('INDEXED_NON_STANDARD_TARIFF_ERROR_TXT'),
+      INVALID_FIELD: t('INDEXED_INVALID_FIELD_ERROR', {
+        error_field: errorData?.[0]?.field || t('UNKNOWN_FIELD')
+      }),
       UNAUTHORIZED: t('INDEXED_UNAUTHORIZED_ERROR_TXT'),
-      UNEXPECTED_ERROR: t('INDEXED_UNEXPECTED_ERROR_TXT', {url: t('CONTACT_HELP_URL')})
+      UNEXPECTED_ERROR: t('INDEXED_UNEXPECTED_ERROR_TXT', {
+        url: t('CONTACT_HELP_URL')
+      })
     }
 
     let errorTxt = exceptionMap[code]
