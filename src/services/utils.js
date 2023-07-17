@@ -441,12 +441,21 @@ export const testPowerForPeriods = (
 ) => {
   const rate = values?.rate || values?.tariff
   let valids = 0
+  let inLimit = false
+
   if (rates[rate] === undefined) return true
+
   for (let i = 1; i <= rates[rate]?.num_power_periods; i++) {
     const attr = i === 1 ? 'power' : `power${i}`
-    const inLimit = limit.match('min')
-      ? values[attr] >= rates[rate][limit]?.power
-      : values[attr] <= rates[rate][limit]?.power
+
+    if (limit.match('min')) {
+     inLimit = values[attr] >= rates[rate][limit]?.power
+    } else {
+      inLimit = rate == '2.0TD'
+        ? values[attr] <= rates[rate][limit]?.power
+        : true
+    }
+
     inLimit && valids++
     values[attr] === undefined && valids++
   }

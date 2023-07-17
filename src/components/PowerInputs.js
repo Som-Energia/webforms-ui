@@ -17,12 +17,9 @@ const handleChangePower = (
   let result = match[0].replace(',', '.')
   result = result.replace("'", '.')
 
-  result =
-    !moreThan15Kw && result <= 15
-      ? result
-      : moreThan15Kw && result < 450
-      ? result
-      : result.slice(0, -1)
+  if (!moreThan15Kw && result > 15){
+    result = result.slice(0, -1)
+  }
 
   setFieldValue(event.target.name, result)
 }
