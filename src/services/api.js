@@ -251,19 +251,18 @@ export const modify_tariff = async (data) => {
   return axios({
     method: 'POST',
     url: `${API_BASE_URL}/procedures/contract_indexed`,
-    headers: {Authorization: data.token},
+    headers: { Authorization: data.token },
     data: data
   }).then((response) => {
     return response?.data
   })
 }
 
-
 export const can_modify_tariff = async (token) => {
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}/procedures/can_turn_contract_indexed`,
-    headers: {Authorization: token}
+    headers: { Authorization: token }
   }).then((response) => response?.data)
 }
 
@@ -401,4 +400,15 @@ export const confirmCancelContract = async (data) => {
   }).then((response) => {
     return response?.data
   })
+}
+
+export const generationChangeContractPriority = async (data, token) => {
+    return axios({
+      method: 'PUT',
+      url: `/investments/change-assignment-order`,
+      headers: { Authorization: token },
+      data: data
+    }).then((response) => {
+      return response?.data
+    })
 }

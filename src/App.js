@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Test as ComponentTest } from './components/TextLoader'
 
@@ -15,6 +15,7 @@ import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
 import './App.css'
+import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
 
 const theme = createTheme({
   palette: {
@@ -68,6 +69,7 @@ const App = (props) => {
   const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
   const Indexed = lazy(() => import('./containers/Indexed'))
+  const Generation = lazy(() => import('./containers/Generation'))
 
   const loadContractData = () => {
     const contractData =
@@ -106,6 +108,15 @@ const App = (props) => {
         : {}
     return data
   }
+
+  const assignmentsJSON = useMemo(() => {
+    const assignments = document.getElementById('generation-assignments-data')
+    return assignments ? JSON.parse(assignments.textContent) : {}
+  }, [])
+  const investmentsJSON = useMemo(() => {
+    const investments = document.getElementById('generation-investments-data')
+    return investments ? JSON.parse(investments.textContent) : {}
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -361,6 +372,26 @@ const App = (props) => {
                       }
                       checkEnabled={false}
                     />
+                  }
+                />
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <GenerationContextProvider
+                      assignmentsJSON={assignmentsJSON}
+                      investmentsJSON={investmentsJSON}>
+                      <Generation {...props} token={token} />
+                    </GenerationContextProvider>
+                  }
+                />
+                <Route
+                  path="/investments/investments-kwh/"
+                  element={
+                    <GenerationContextProvider
+                      assignmentsJSON={assignmentsJSON}
+                      investmentsJSON={investmentsJSON}>
+                      <Generation {...props} token={token} />
+                    </GenerationContextProvider>
                   }
                 />
               </Routes>
