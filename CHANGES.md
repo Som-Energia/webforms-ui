@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.0 2023-07-18
+
+- Added the new investments table
+- Added the new assignments table 
+- New Action: Partners can modify the priority of their assignments using drag and drop
+
 ## 1.7.7 2023-07-17
 
 - Fix: Remove visible debuging text in interface
