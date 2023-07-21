@@ -17,6 +17,8 @@ export const languages = {
 }
 
 export const contributionParams = {
+  generationMinAnnualUse:1,
+  generationMinNumActions:1,
   minContribution: 100,
   maxContribution: 100000,
   contributionStep: 100

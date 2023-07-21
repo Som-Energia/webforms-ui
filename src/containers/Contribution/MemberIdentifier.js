@@ -37,7 +37,8 @@ const MemberIdentifier = (props) => {
     touched,
     setFieldValue,
     setFieldTouched,
-    resetForm
+    resetForm,
+    title = t("CONTRIBUTION")
   } = props
 
   const handleChooser = (event) => {
@@ -58,7 +59,7 @@ const MemberIdentifier = (props) => {
 
   return (
     <>
-      <StepHeader title={t('CONTRIBUTION')} />
+      <StepHeader title={title} />
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
