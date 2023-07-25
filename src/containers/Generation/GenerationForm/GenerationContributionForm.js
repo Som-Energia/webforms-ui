@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -29,14 +29,22 @@ const useStyles = makeStyles((theme) => ({
     '& path': {
       color: 'rgba(0, 0, 0, 0.54)'
     }
+  },
+  helperText: {
+    marginLeft: '14px',
+    color: '#f44336',
+    fontSize: '0.75rem',
+    marginTop: '3px',
+    textAlign: 'left',
+    fontWeight: '400',
+    lineHeight: '1.66',
+    letterSpacing: '0.03333em'
   }
 }))
 
 const GenerationContributionForm = (props) => {
-  const { values, handleChange, handleBlur, errors, touched, setFieldValue } =
-    props
+  const { values, handleBlur, errors, touched, setFieldValue } = props
 
-    console.log(values.payment.amount)
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -49,27 +57,58 @@ const GenerationContributionForm = (props) => {
     const nActions = event.target.value
     setFieldValue('number_of_actions', nActions)
     setFieldValue('payment.amount', nActions * ACTION_VALUE)
+    changePercentProductionAnnualUse(nActions, values.annual_use)
+  }
+
+  const handleAnnualUseChange = (event) => {
+    const annualUse = event.target.value
+    setFieldValue('annual_use', annualUse)
+    changePercentProductionAnnualUse(values.number_of_actions, annualUse)
+  }
+
+  const changePercentProductionAnnualUse = (nActions, annualUse) => {
+    let percentNum = 0
+    if (nActions !== 0) {
+      percentNum = ((nActions * KWH_ACTION * 100) / annualUse).toFixed(2)
+    }
+    setFieldValue('percent_over_annual_use', percentNum)
   }
 
   const PercentProductionToAnnualUse = useCallback(() => {
-    let percentProd = '0%'
-    if (values.number_of_actions !== 0) {
-      percentProd =
-        ((values.number_of_actions * KWH_ACTION) * 100) / values.annual_use + '%'
+    let percentProd = values.percent_over_annual_use + '%'
+    if (
+      isNaN(values.percent_over_annual_use) ||
+      !isFinite(values.percent_over_annual_use)
+    ) {
+      percentProd = '0%'
     }
+
     return (
-      <Grid
-        item
-        style={{
-          padding: '10px',
-          width: percentProd,
-          height: '100%',
-          backgroundColor: '#96b633'
-        }}>
-        <Typography>{percentProd}</Typography>
-      </Grid>
+      <>
+        <Grid container style={{ border: '0.5px lightgrey solid' }}>
+          <Grid
+            item
+            style={{
+              padding: '10px',
+              width: percentProd,
+              height: '100%',
+              backgroundColor: '#96b633'
+            }}>
+            <Typography>{percentProd}</Typography>
+          </Grid>
+        </Grid>
+        <Typography variant="body1" className={classes.helperText}>
+          {errors.percent_over_annual_use
+            ? errors.percent_over_annual_use
+            : ""}
+        </Typography>
+      </>
     )
-  }, [values.number_of_actions, values.annual_use])
+  }, [
+    values.percent_over_annual_use,
+    classes.helperText,
+    errors.percent_over_annual_use
+  ])
 
   return (
     <>
@@ -95,9 +134,12 @@ const GenerationContributionForm = (props) => {
         label={t('Consumo anual kWh - trans')}
         value={values?.annual_use}
         margin="normal"
-        onChange={handleChange}
+        onChange={handleAnnualUseChange}
         onBlur={handleBlur}
         error={errors?.annual_use && touched?.annual_use}
+        helperText={
+          (touched?.annual_use && errors?.annual_use) || 'Por ejemplo 2500'
+        }
       />
 
       <Box pt={1}>
@@ -127,6 +169,10 @@ const GenerationContributionForm = (props) => {
               onChange={handleActionsChange}
               onBlur={handleBlur}
               error={errors?.number_of_actions && touched?.number_of_actions}
+              helperText={
+                (touched?.number_of_actions && errors?.number_of_actions) ||
+                'Por ejemplo 2 acciones correspondrian a: 200€'
+              }
             />
           </Grid>
           <Grid item xs={12} md>
@@ -187,9 +233,7 @@ const GenerationContributionForm = (props) => {
           className={`${classes.title} ${classes.titleWithMargin}`}>
           {t('PORCENTAJE DE PRODUCCION SOBRE TÚ USO TOTAL')}
         </Typography>
-        <Grid container style={{ border: '0.5px lightgrey solid' }}>
-          {PercentProductionToAnnualUse()}
-        </Grid>
+        <PercentProductionToAnnualUse />
       </Box>
       <Box pt={1} mb={0}>
         <Typography

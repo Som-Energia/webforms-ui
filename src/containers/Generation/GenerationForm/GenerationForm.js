@@ -87,9 +87,8 @@ const GenerationContribution = (props) => {
     },
     number_of_actions: 0,
     annual_use: 0,
-    terms_accepted: false,
     privacy_policy_accepted: false,
-    legal_person_accepted: false
+    percent_over_annual_use: 0
   }
 
   const validationSchemas = [
@@ -134,6 +133,14 @@ const GenerationContribution = (props) => {
             contributionParams?.generationMinAnnualUse
           )
         })
+      )
+      .min(
+        contributionParams?.generationMinAnnualUse,
+        t('GENERATION_ANNUAL_USE_MIN', {
+          generationMinNumActions: new Intl.NumberFormat('ca').format(
+            contributionParams?.generationMinAnnualUse
+          )
+        })
       ),
       number_of_actions: Yup.number()
         .required(
@@ -151,7 +158,6 @@ const GenerationContribution = (props) => {
             )
           })
         ),
-      //TODO: validar el consum anual i el nombre d'accions energètiques
       payment: Yup.object().shape({
         amount: Yup.number()
           .required(
@@ -187,8 +193,21 @@ const GenerationContribution = (props) => {
         iban: Yup.string().required(t('IBAN_ERROR')),
         iban_valid: Yup.bool()
           .required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR'))
-      })
+          .oneOf([true], t('IBAN_ERROR')),
+      }),
+      percent_over_annual_use:Yup.number()
+      .max(
+        contributionParams?.maxPercentOverAnnualUse,
+        t('No et passis de percentatge nano!!', {
+          amount: new Intl.NumberFormat('ca').format(
+            contributionParams?.maxPercentOverAnnualUse
+          )
+        })
+      )
+      .typeError("El percentatge resultant no és vàlid!")
+    }),
+    Yup.object().shape({
+        privacy_policy_accepted: Yup.bool().required(t('HAY QUE ACEPTAR LA POLÍTICA DE PRIVACIDAD')).oneOf([true], t('PRIVATE_POLICY'))
     })
   ]
 

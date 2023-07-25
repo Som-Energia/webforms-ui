@@ -21,7 +21,8 @@ export const contributionParams = {
   generationMinNumActions:1,
   minContribution: 100,
   maxContribution: 100000,
-  contributionStep: 100
+  contributionStep: 100,
+  maxPercentOverAnnualUse: 100
 }
 
 const sanitizeData = (data) => {

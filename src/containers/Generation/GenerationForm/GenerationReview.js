@@ -59,11 +59,13 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, isValid } = props
+  console.log("IS VALID",isValid)
+  console.log("values", values.privacy_policy_accepted)
 
-  const handleClickTerms = (event) => {
+  const handleClickPrivacyPolicy = (event) => {
     event.preventDefault()
-    setFieldValue('terms_accepted', !values?.terms_accepted)
+    setFieldValue('privacy_policy_accepted', !values?.privacy_policy_accepted)
   }
 
   const ReviewField = useCallback(({ label, value }) => {
@@ -204,8 +206,8 @@ const Review = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={values?.terms_accepted}
-              onClick={handleClickTerms}
+              checked={values?.privacy_policy_accepted}
+              onClick={handleClickPrivacyPolicy}
               color="primary"
               value={true}
             />
