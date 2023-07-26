@@ -644,5 +644,20 @@
     "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CAMBIOS",
     "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE":"CONTRATOS ASIGNADOS",
     "GENERATION_INVESTMENTS_TABLE_TITLE":"MIS APORTACIONES",
-    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El cambio se ha registrado correctamente y será efectivo en 2 días hábiles."
+    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El cambio se ha registrado correctamente y será efectivo en 2 días hábiles.",
+    "GENERATION_FORM_TITLE":"Formulario de participación Generation kWh",
+    "GENERATION_FORM_ANNUAL_USE_TITLE":"Uso eléctrico anual",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introduce la cantidad de electricidad que usas (p.e. 2500).",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Consumo anual en kWh",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"Por ejemplo 2500",
+    "GENERATION_FORM_ACTIONS_INPUT_TITLE":"¿Cuántas acciones energéticas querrías?*",
+    "GENERATION_FORM_ACTIONS_INPUT_LABEL":"Acciones energéticas",
+    "GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT":"Por ejemplo 2 acciones corresponden a: 200€",
+    "GENERATION_FORM_ACTIONS_DESC_TEXT":"Cada acción energética representa un préstamo de 100€ que realizas en la cooperativa. A cada acción energética le corresponden aproximadamente 170 kWh al año, provenientes de las plantas vinculadas al Generation kWh.<a target=\"_blank\" href=\"{{url}}\"> Más información.</a> ",
+    "GENERATION_FORM_ACTIONS_URL_INFO_ACTION":"https://es.support.somenergia.coop/article/589-que-representa-una-accion-energetica",
+    "GENERATION_FORM_ACTION_MAX_ACTIONS_INFO":"Máximo 49 acciones energéticas. Para valores superiores, ponte en contacto con nosotros en <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
+    "GENERATION_FORM_PROD_ANNUAL":"Autoproducción alcanzada anualmente",
+    "GENERATION_FORM_PERCENT_ANNUAL_USE_TITLE":"Porcentaje de producción sobre tu uso total",
+    "GENERATION_FORM_PERCENT_ANNUAL_USE_INFO":"Puedes autoproducir lo que quieras pero recuerda que nuestra <a target=\"_blank\" href=\"{{url}}\" >recomendación</a> es hacerlo en torno al 70% del uso eléctrico total.",
+    "GENERATION_FORM_PERCENT_ANNUAL_USE_URL_INFO":"https://es.support.somenergia.coop/article/591-existe-una-cantidad-minima-y-maxima-a-aportar"
 }

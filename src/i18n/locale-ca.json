@@ -644,5 +644,20 @@
     "GENERATION_INVESTMENTS_VALIDATE_BUTTON":"VALIDAR CANVIS",
     "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE":"CONTRACTES ASSIGNATS",
     "GENERATION_INVESTMENTS_TABLE_TITLE":"LES MEVES APORTACIONS",
-    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El canvi s’ha registrat correctament i serà efectiu en 2 dies hàbils."
+    "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El canvi s’ha registrat correctament i serà efectiu en 2 dies hàbils.",
+    "GENERATION_FORM_TITLE":"Formulari de participació Generation kWh",
+    "GENERATION_FORM_ANNUAL_USE_TITLE":"Ús elèctric anual",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introdueix la quantitat d’electricitat que fas servir anualment (p.e. 2500).",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Consum anual en kWh",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"Per exemple 2500",
+    "GENERATION_FORM_ACTIONS_INPUT_TITLE":"Quantes accions energètiques voldries?*",
+    "GENERATION_FORM_ACTIONS_INPUT_LABEL":"Accions energètiques",
+    "GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT":"Per exemple 2 accions corresponen a: 200€",
+    "GENERATION_FORM_ACTIONS_DESC_TEXT":"Cada acció energètica representa un préstec de 100€ que fas a la cooperativa. A cada acció energètica li corresponen aproximadament 170 kWh cada any, provinents de les plantes vinculades al Generation kWh. <a target=\"_blank\" href=\"{{url}}\"> Més informació.</a>",
+    "GENERATION_FORM_ACTIONS_URL_INFO_ACTION":"https://ca.support.somenergia.coop/article/582-que-representa-una-accio-energetica",
+    "GENERATION_FORM_ACTION_MAX_ACTIONS_INFO":"Màxim 49 accions energètiques. Per a valors superiors, posa’t en contacte amb nosaltres a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
+    "GENERATION_FORM_PROD_ANNUAL":"Autoproducció assolida anualment",
+    "GENERATION_FORM_PERCENT_ANNUAL_USE_TITLE":"Percentatge de producció sobre el teu ús total",
+    "GENERATION_FORM_PERCENT_ANNUAL_USE_INFO":"Pots autoproduir el que vulguis però recorda que la nostra <a target=\"_blank\" href=\"{{url}}\" >recomanació</a> és fer-ho al voltant del 70% de l’ús elèctric total.",
+    "GENERATION_FORM_PERCENT_ANNUAL_USE_URL_INFO":"https://ca.support.somenergia.coop/article/584-hi-ha-una-quantitat-minima-o-maxima-a-aportar"
 }
