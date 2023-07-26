@@ -141,17 +141,10 @@ const GenerationContribution = (props) => {
             contributionParams?.generationMinAnnualUse
           )
         })
-      ),
+      )
+      .typeError("El valor de l'ús anual no és vàlid!"),
       number_of_actions: Yup.number()
         .required(
-          t('GENERATION_ACTIONS_HELPER_MIN', {
-            generationMinNumActions: new Intl.NumberFormat('ca').format(
-              contributionParams?.generationMinNumActions
-            )
-          })
-        )
-        .min(
-          contributionParams?.generationMinNumActions,
           t('GENERATION_ACTIONS_HELPER_MIN', {
             generationMinNumActions: new Intl.NumberFormat('ca').format(
               contributionParams?.generationMinNumActions
@@ -308,7 +301,7 @@ const GenerationContribution = (props) => {
               {activeStep === 0 && (
                 <MemberIdentifier
                   {...formikProps}
-                  title={t('FORMULARIO GNERATION - trans')}
+                  title={t('GENERATION_FORM_TITLE')}
                 />
               )}
               {activeStep === 1 && (

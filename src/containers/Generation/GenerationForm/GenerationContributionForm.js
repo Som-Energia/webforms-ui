@@ -5,12 +5,16 @@ import { makeStyles } from '@material-ui/core/styles'
 import StepHeader from '../../../components/StepHeader'
 import IBANField from '../../../components/IBANField'
 
+import AddIcon from '@material-ui/icons/AddBox'
+import RemoveIcon from '@material-ui/icons/IndeterminateCheckBox'
 import Box from '@material-ui/core/Box'
+import IconButton from '@material-ui/core/IconButton'
+import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-
+import { contributionParams } from '../../../services/utils'
 import EuroIcon from '@material-ui/icons/EuroRounded'
 
 const ACTION_VALUE = 100
@@ -39,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '400',
     lineHeight: '1.66',
     letterSpacing: '0.03333em'
+  },
+  noHover: {
+    backgroundColor: 'white',
+    padding: 0,
+    margin: 0,
+    minWidth: 0
   }
 }))
 
@@ -53,11 +63,19 @@ const GenerationContributionForm = (props) => {
     setFieldValue('payment.iban_valid', IBANValid)
   }
 
-  const handleActionsChange = (event) => {
-    const nActions = event.target.value
-    setFieldValue('number_of_actions', nActions)
-    setFieldValue('payment.amount', nActions * ACTION_VALUE)
-    changePercentProductionAnnualUse(nActions, values.annual_use)
+  const handleActionsChange = (action) => {
+    let nActions =
+      action === 'add'
+        ? values.number_of_actions + 1
+        : values.number_of_actions - 1
+    if (
+      nActions <= contributionParams.generationMaxNumActions &&
+      nActions >= contributionParams.generationMinAnnualUse
+    ) {
+      setFieldValue('number_of_actions', nActions)
+      setFieldValue('payment.amount', nActions * ACTION_VALUE)
+      changePercentProductionAnnualUse(nActions, values.annual_use)
+    }
   }
 
   const handleAnnualUseChange = (event) => {
@@ -71,6 +89,7 @@ const GenerationContributionForm = (props) => {
     if (nActions !== 0) {
       percentNum = ((nActions * KWH_ACTION * 100) / annualUse).toFixed(2)
     }
+    console.log('Num percent', percentNum)
     setFieldValue('percent_over_annual_use', percentNum)
   }
 
@@ -80,27 +99,33 @@ const GenerationContributionForm = (props) => {
       isNaN(values.percent_over_annual_use) ||
       !isFinite(values.percent_over_annual_use)
     ) {
-      percentProd = '0%'
+      percentProd = '% Erròni'
     }
 
     return (
       <>
-        <Grid container style={{ border: '0.5px lightgrey solid' }}>
+        <Grid
+          container
+          style={{
+            border: errors.percent_over_annual_use
+              ? '1.5px #f44336 solid'
+              : '0.5px lightgrey solid'
+          }}>
           <Grid
             item
             style={{
-              padding: '10px',
+              padding: '10px 2px 10px 2px',
               width: percentProd,
               height: '100%',
-              backgroundColor: '#96b633'
+              backgroundColor: errors.percent_over_annual_use ? "#ff00001c" : '#96b633'
             }}>
-            <Typography>{percentProd}</Typography>
+            <Typography style={{ margin: '0px 10px' }}>
+              {percentProd}
+            </Typography>
           </Grid>
         </Grid>
         <Typography variant="body1" className={classes.helperText}>
-          {errors.percent_over_annual_use
-            ? errors.percent_over_annual_use
-            : ""}
+          {errors.percent_over_annual_use ? errors.percent_over_annual_use : ''}
         </Typography>
       </>
     )
@@ -113,13 +138,13 @@ const GenerationContributionForm = (props) => {
   return (
     <>
       <StepHeader
-        title={t('FORMULARIO DE PARTICIPACIÓN GENERATION KWH -trans')}
+        title={t('GENERATION_FORM_TITLE')}
       />
-      <Typography variant="h6">{t('Uso electrico anual- trans')}</Typography>
+      <Typography variant="h6">{t('GENERATION_FORM_ANNUAL_USE_TITLE')}</Typography>
       <Box pt={1}>
         <Typography variant="body1">
           {t(
-            'Introduce la cantidad de electricidad que usas anualmente (p.e.2500) - trans'
+            'GENERATION_FORM_ANNUAL_USE_INPUT_TITLE'
           )}
         </Typography>
       </Box>
@@ -131,14 +156,14 @@ const GenerationContributionForm = (props) => {
         variant="outlined"
         className={classes.icon}
         fullWidth
-        label={t('Consumo anual kWh - trans')}
+        label={t('GENERATION_FORM_ANNUAL_USE_INPUT_LABEL')}
         value={values?.annual_use}
         margin="normal"
         onChange={handleAnnualUseChange}
         onBlur={handleBlur}
         error={errors?.annual_use && touched?.annual_use}
         helperText={
-          (touched?.annual_use && errors?.annual_use) || 'Por ejemplo 2500'
+          (touched?.annual_use && errors?.annual_use) || t('GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT')
         }
       />
 
@@ -147,7 +172,7 @@ const GenerationContributionForm = (props) => {
           variant="h6"
           className={classes.title}
           dangerouslySetInnerHTML={{
-            __html: t('CUANTAS ACCIONES ENERGETICAS QUIERES? - trans', {
+            __html: t('GENERATION_FORM_ACTIONS_INPUT_TITLE', {
               name: values.member.full_name
             })
           }}
@@ -156,23 +181,45 @@ const GenerationContributionForm = (props) => {
         <Grid container style={{ gap: '1rem' }}>
           <Grid item xs={12} md>
             <TextField
-              type="number"
               required
               id="number_of_actions"
               name="number_of_actions"
               variant="outlined"
               className={classes.icon}
               fullWidth
-              label={t('ACCIONES ENERGETICAS')}
+              label={t('GENERATION_FORM_ACTIONS_INPUT_LABEL')}
               value={values?.number_of_actions}
               margin="normal"
+              disabled
               onChange={handleActionsChange}
               onBlur={handleBlur}
-              error={errors?.number_of_actions && touched?.number_of_actions}
+              error={errors?.number_of_actions}
               helperText={
-                (touched?.number_of_actions && errors?.number_of_actions) ||
-                'Por ejemplo 2 acciones correspondrian a: 200€'
+                errors?.number_of_actions ||
+                t('GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT')
               }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Button
+                      aria-label="Remove action"
+                      className={classes.noHover}
+                      onClick={() => handleActionsChange('remove')}>
+                      <RemoveIcon fontSize="large" />
+                    </Button>
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Button
+                      aria-label="Add action"
+                      className={classes.noHover}
+                      onClick={() => handleActionsChange('add')}>
+                      <AddIcon fontSize="large" />
+                    </Button>
+                  </InputAdornment>
+                )
+              }}
             />
           </Grid>
           <Grid item xs={12} md>
@@ -203,9 +250,9 @@ const GenerationContributionForm = (props) => {
           className={`${classes.title} ${classes.titleWithMargin}`}
           dangerouslySetInnerHTML={{
             __html: t(
-              'Cada acció energètica representa un préstec de 100€ que fas a la cooperativa. A cada acció energètica li corresponen aproximadament 170 kWh cada any, provinents de les plantes vinculades al Generation kWh. Més informació. - trans',
+              'GENERATION_FORM_ACTIONS_DESC_TEXT',
               {
-                name: values.member.full_name
+                url: t('GENERATION_FORM_ACTIONS_URL_INFO_ACTION')
               }
             )
           }}
@@ -214,10 +261,7 @@ const GenerationContributionForm = (props) => {
           variant="body2"
           dangerouslySetInnerHTML={{
             __html: t(
-              ' *Màxim 49 Accions Energètiques. Per valors superiors, posa’t en contacte amb nosaltres a generationkwh@somenergia.coop. - trans',
-              {
-                name: values.member.full_name
-              }
+              'GENERATION_FORM_ACTION_MAX_ACTIONS_INFO',
             )
           }}
         />
@@ -226,14 +270,23 @@ const GenerationContributionForm = (props) => {
         <Typography
           variant="h6"
           className={`${classes.title} ${classes.titleWithMargin}`}>
-          {t('AUTOPRODUCCIÓN ALCANZADA ANUALMENTE - trans')}
+          {t('GENERATION_FORM_PROD_ANNUAL')}
         </Typography>
         <Typography
-          variant="body"
+          variant="body2"
           className={`${classes.title} ${classes.titleWithMargin}`}>
-          {t('PORCENTAJE DE PRODUCCION SOBRE TÚ USO TOTAL')}
+          {t('GENERATION_FORM_PERCENT_ANNUAL_USE_TITLE')}
         </Typography>
         <PercentProductionToAnnualUse />
+        <Typography variant="body2"
+            dangerouslySetInnerHTML={{
+            __html: t(
+              'GENERATION_FORM_PERCENT_ANNUAL_USE_INFO',
+              {
+                url: t('GENERATION_FORM_PERCENT_ANNUAL_USE_URL_INFO')
+              }
+            )
+          }}/>
       </Box>
       <Box pt={1} mb={0}>
         <Typography

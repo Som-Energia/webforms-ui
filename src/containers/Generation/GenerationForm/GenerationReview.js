@@ -59,9 +59,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue, isValid } = props
-  console.log("IS VALID",isValid)
-  console.log("values", values.privacy_policy_accepted)
+  const { values, setFieldValue } = props
 
   const handleClickPrivacyPolicy = (event) => {
     event.preventDefault()
