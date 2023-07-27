@@ -1,0 +1,21 @@
+{
+  "member": {
+    "number": "38434",
+    "vat": "40323835M",
+    "badVat": "58291270J"
+  },
+  "annual_use": {
+    "not_enough": 0,
+    "low": 2500,
+    "normal": 3000,
+    "high": 5000
+  },
+  "number_of_action": {
+    "not_enough": 0,
+    "min": 1,
+    "normal": 11,
+    "max": 49,
+    "above_allow": 51
+  },
+  "payment_data": "ES1814657317814458664841"
+}
