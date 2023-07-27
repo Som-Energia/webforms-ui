@@ -85,10 +85,10 @@ const Review = (props) => {
 
   return (
     <>
-      <StepHeader title={t('FORMULARIO DE PARTICIPACIÓN GENERATION KWH - trans')} />
+      <StepHeader title={t('GENERATION_FORM_TITLE')} />
       <Typography
         variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('<p>Gairebé hem acabat!</p><p>Revisa les dades introduïdes, accepta les clàusules legals i ja podràs signar el contracte i el permís per girar el rebut bancari de la teva inscripció al Generation kWh. - trans</p>')}}
+        dangerouslySetInnerHTML={{ __html: t('GENERATION_FORM_REVIEW_DESC')}}
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
@@ -196,7 +196,7 @@ const Review = (props) => {
       <Box className={classes.boxContent}>
         <Typography 
         variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('<strong>RESPONSABLE:</strong> SOM ENERGIA, SCCL. (F55091367), Pic de Peguera, 11, 17003 de Girona, <a href=\'mailto:somenergia@delegado-datos.com\'>somenergia@delegado-datos.com</a>. <strong>FINALITAT:</strong> Gestionar i tramitar la contractació del servei Generation kWh; gestionar la facturació dels consums segons la tarifa Generation kWh; tramitar l\'assignació de la tarifa Generation kWh als tercers designats pel client. <strong>LEGITIMACIÓ:</strong> Relació contractual. <strong>CESSIONS:</strong> No estan previstes cessions, excepte les legalment previstes. <strong>CONSERVACIÓ:</strong> Fins a la vigència del contracte de subministrament i, durant els terminis exigits per llei per a atendre eventuals responsabilitats. <strong>DRETS:</strong> Pot exercir el seu dret d\'accés, rectificació, supressió, portabilitat, limitació i oposició dirigint-se a les dades de la persona responsable. En cas de divergències, pot presentar una reclamació davant l\'Agència de Protecció de Dades (www.aepd.es). <strong>IMPORTANT:</strong> Declaro responsablement que disposo del consentiment de les terceres persones a les quals assignaré la tarifa Generation kWh, per a cedir les seves dades personals a SOM ENERGIA necessaris per a l\'assignació i contractació de la tarifa Generation kWh.')}}
+        dangerouslySetInnerHTML={{ __html: t('GENERATION_FORM_REVIEW_RESPONSIBLE_STATEMENT')}}
         />
       </Box>
 
@@ -213,7 +213,9 @@ const Review = (props) => {
           label={
             <label
               dangerouslySetInnerHTML={{
-                __html: t('<strong>Acepto la política de privacidad y la declaración responsable.</strong>')
+                __html: t('GENERATION_FORM_TERMS_RESPONSIBLE_STATEMENT',{
+                    url: t('GENERATION_FORM_URL_PRIVACY_POLICY')
+                })
               }}
             />
           }
@@ -223,7 +225,7 @@ const Review = (props) => {
       <Box className={classes.boxContent}>
         <Typography 
         variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('<p>Tingues en compte que la signatura del contracte implica l’acceptació de les condicions contractuals i, per tant, el càrrec de l’import del préstec al compte bancari que has indicat.</p><p>Quan acabis la signatura dels documents, t’enviarem per correu electrònic les Condicions generals i les Condicions particulars del teu contracte de préstec al Generation kWh perquè en tinguis una còpia. </p><p>Moltes gràcies pel teu suport al canvi de model energètic!</p>')}}
+        dangerouslySetInnerHTML={{ __html: t('GENERATION_FORM_REVIEW_SECONDARY_TEXT')}}
         />
       </Box>
     </>
