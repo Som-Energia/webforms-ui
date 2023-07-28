@@ -136,6 +136,7 @@ describe('Test that it correctly renders', () => {
         contractValues={mockContractValues}
         setFieldValues={mockSetFieldValues}
         values={mockInitialValues}
+        isIndexedPilotOngoing={true}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
         isIndexedPilotOngoing={true}
       />
