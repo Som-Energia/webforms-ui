@@ -583,7 +583,7 @@
     "INDEXED_NO_CHANGES_ERROR_TXT": "La tarifa del contato ya es indexada.",
     "INDEXED_STATE_CONFLICT_ERROR_TXT": "El contrato no está en estado activo.",
     "PENDING_CONTRACT_MODIFICATION_ERROR_TXT": "El contato tiene pendiente la aplicación de otra modificación.",
-    "INDEXED_NON_STANDARD_TARIFF_ERROR_TXT": "El contracto tiene una tarifa personalizada. Contacta con nosotras para cambiarla.",
+    "INDEXED_CUSTOM_TARIFF_ERROR_TXT": "El contracto tiene una tarifa personalizada. Contacta con nosotras para cambiarla.",
     "TARIFF_CHARACTERISTICS_20_URL": "https://es.support.somenergia.coop/article/1004-la-tarifa-2-0td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=castellano",
     "TARIFF_CHARACTERISTICS_30_URL": "https://es.support.somenergia.coop/article/1116-la-tarifa-3-0td",
     "TARIFF_CHARACTERISTICS_6_URL": "https://es.support.somenergia.coop/article/1164-tarifas-de-alta-tension-6-1td-6-2td-6-3td-y-6-4td",
