@@ -204,6 +204,7 @@ const Review = (props) => {
         <FormControlLabel
           control={
             <Checkbox
+              id='privacy_plicy_check'
               checked={values?.privacy_policy_accepted}
               onClick={handleClickPrivacyPolicy}
               color="primary"

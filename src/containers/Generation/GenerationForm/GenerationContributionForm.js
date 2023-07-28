@@ -151,7 +151,7 @@ const GenerationContributionForm = (props) => {
 
       <TextField
         required
-        id="annual-use"
+        id="annual_use"
         name="annual_use"
         variant="outlined"
         className={classes.icon}
@@ -202,6 +202,7 @@ const GenerationContributionForm = (props) => {
                 startAdornment: (
                   <InputAdornment position="start">
                     <Button
+                      id="remove_action"
                       aria-label="Remove action"
                       className={classes.noHover}
                       onClick={() => handleActionsChange('remove')}>
@@ -212,6 +213,7 @@ const GenerationContributionForm = (props) => {
                 endAdornment: (
                   <InputAdornment position="end">
                     <Button
+                      id="add_action"
                       aria-label="Add action"
                       className={classes.noHover}
                       onClick={() => handleActionsChange('add')}>
