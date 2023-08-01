@@ -92,7 +92,7 @@ const Review = (props) => {
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography id="personal-data" className={classes.sectionTitle} variant="h6">
             {t(
               values?.member?.is_member ? 'REVIEW_PERSONAL_DATA' : 'NEW_MEMBER'
             )}
@@ -137,7 +137,7 @@ const Review = (props) => {
               />
               <ReviewField
                 label={t('CITY')}
-                value={`${values?.member?.city.name} (${values?.member?.postal_code}) ${values?.member?.state.name}`}
+                value={`${values?.member?.city?.name} (${values?.member?.postal_code}) ${values?.member?.state?.name}`}
               />
             </>
           )}

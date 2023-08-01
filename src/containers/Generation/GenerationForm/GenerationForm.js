@@ -40,7 +40,6 @@ const GenerationContribution = (props) => {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
-  const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -51,11 +50,6 @@ const GenerationContribution = (props) => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  const handlers = {
-    SHOW_INSPECTOR: () => {
-      setShowInspector(!showInspector)
-    }
-  }
 
   const initialValues = {
     member: {
@@ -370,7 +364,6 @@ const GenerationContribution = (props) => {
                 </div>
               </Box>
             </Paper>
-            {showInspector && <DisplayFormikState {...formikProps} />}
           </Container>
         </Form>
       )}

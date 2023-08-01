@@ -89,7 +89,6 @@ const GenerationContributionForm = (props) => {
     if (nActions !== 0) {
       percentNum = ((nActions * KWH_ACTION * 100) / annualUse).toFixed(2)
     }
-    console.log('Num percent', percentNum)
     setFieldValue('percent_over_annual_use', percentNum)
   }
 
@@ -103,7 +102,7 @@ const GenerationContributionForm = (props) => {
     }
 
     return (
-      <>
+      <Box id="box_percent_use">
         <Grid
           container
           style={{
@@ -117,9 +116,11 @@ const GenerationContributionForm = (props) => {
               padding: '10px 2px 10px 2px',
               width: percentProd,
               height: '100%',
-              backgroundColor: errors.percent_over_annual_use ? "#ff00001c" : '#96b633'
+              backgroundColor: errors.percent_over_annual_use
+                ? '#ff00001c'
+                : '#96b633'
             }}>
-            <Typography style={{ margin: '0px 10px' }}>
+            <Typography id="percent_value" style={{ margin: '0px 10px' }}>
               {percentProd}
             </Typography>
           </Grid>
@@ -127,7 +128,7 @@ const GenerationContributionForm = (props) => {
         <Typography variant="body1" className={classes.helperText}>
           {errors.percent_over_annual_use ? errors.percent_over_annual_use : ''}
         </Typography>
-      </>
+      </Box>
     )
   }, [
     values.percent_over_annual_use,
@@ -137,36 +138,35 @@ const GenerationContributionForm = (props) => {
 
   return (
     <>
-      <StepHeader
-        title={t('GENERATION_FORM_TITLE')}
-      />
-      <Typography variant="h6">{t('GENERATION_FORM_ANNUAL_USE_TITLE')}</Typography>
+      <StepHeader title={t('GENERATION_FORM_TITLE')} />
+      <Typography variant="h6">
+        {t('GENERATION_FORM_ANNUAL_USE_TITLE')}
+      </Typography>
       <Box pt={1}>
         <Typography variant="body1">
-          {t(
-            'GENERATION_FORM_ANNUAL_USE_INPUT_TITLE'
-          )}
+          {t('GENERATION_FORM_ANNUAL_USE_INPUT_TITLE')}
         </Typography>
       </Box>
-
-      <TextField
-        required
-        id="annual_use"
-        name="annual_use"
-        variant="outlined"
-        className={classes.icon}
-        fullWidth
-        label={t('GENERATION_FORM_ANNUAL_USE_INPUT_LABEL')}
-        value={values?.annual_use}
-        margin="normal"
-        onChange={handleAnnualUseChange}
-        onBlur={handleBlur}
-        error={errors?.annual_use && touched?.annual_use}
-        helperText={
-          (touched?.annual_use && errors?.annual_use) || t('GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT')
-        }
-      />
-
+      <Box pt={1} id="box_annual_use">
+        <TextField
+          required
+          id="annual_use"
+          name="annual_use"
+          variant="outlined"
+          className={classes.icon}
+          fullWidth
+          label={t('GENERATION_FORM_ANNUAL_USE_INPUT_LABEL')}
+          value={values?.annual_use}
+          margin="normal"
+          onChange={handleAnnualUseChange}
+          onBlur={handleBlur}
+          error={errors?.annual_use && touched?.annual_use}
+          helperText={
+            (touched?.annual_use && errors?.annual_use) ||
+            t('GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT')
+          }
+        />
+      </Box>
       <Box pt={1}>
         <Typography
           variant="h6"
@@ -251,20 +251,15 @@ const GenerationContributionForm = (props) => {
           variant="body1"
           className={`${classes.title} ${classes.titleWithMargin}`}
           dangerouslySetInnerHTML={{
-            __html: t(
-              'GENERATION_FORM_ACTIONS_DESC_TEXT',
-              {
-                url: t('GENERATION_FORM_ACTIONS_URL_INFO_ACTION')
-              }
-            )
+            __html: t('GENERATION_FORM_ACTIONS_DESC_TEXT', {
+              url: t('GENERATION_FORM_ACTIONS_URL_INFO_ACTION')
+            })
           }}
         />
         <Typography
           variant="body2"
           dangerouslySetInnerHTML={{
-            __html: t(
-              'GENERATION_FORM_ACTION_MAX_ACTIONS_INFO',
-            )
+            __html: t('GENERATION_FORM_ACTION_MAX_ACTIONS_INFO')
           }}
         />
       </Box>
@@ -280,17 +275,16 @@ const GenerationContributionForm = (props) => {
           {t('GENERATION_FORM_PERCENT_ANNUAL_USE_TITLE')}
         </Typography>
         <PercentProductionToAnnualUse />
-        <Typography variant="body2"
-            dangerouslySetInnerHTML={{
-            __html: t(
-              'GENERATION_FORM_PERCENT_ANNUAL_USE_INFO',
-              {
-                url: t('GENERATION_FORM_PERCENT_ANNUAL_USE_URL_INFO')
-              }
-            )
-          }}/>
+        <Typography
+          variant="body2"
+          dangerouslySetInnerHTML={{
+            __html: t('GENERATION_FORM_PERCENT_ANNUAL_USE_INFO', {
+              url: t('GENERATION_FORM_PERCENT_ANNUAL_USE_URL_INFO')
+            })
+          }}
+        />
       </Box>
-      <Box pt={1} mb={0}>
+      <Box id="box_iban_input" pt={1} mb={0}>
         <Typography
           variant="h6"
           className={`${classes.title} ${classes.titleWithMargin}`}

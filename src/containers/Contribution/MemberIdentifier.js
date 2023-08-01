@@ -57,6 +57,7 @@ const MemberIdentifier = (props) => {
     }
   }
 
+
   return (
     <>
       <StepHeader title={title} />
@@ -76,18 +77,20 @@ const MemberIdentifier = (props) => {
           options={[
             {
               value: true,
-              label: t('CONTRIBUTION_MEMBER_YES')
+              label: t('CONTRIBUTION_MEMBER_YES'),
+              id: "member_choose_yes"
             },
             {
               value: false,
-              label: t('CONTRIBUTION_MEMBER_NO')
+              label: t('CONTRIBUTION_MEMBER_NO'),
+              id: "member_choose_no"
             }
           ]}
         />
       </Box>
 
       {values?.member?.is_member ? (
-        <Box mt={0} mb={2}>
+        <Box id='box_member_identifier' mt={0} mb={2}>
           <Typography
             variant="h6"
             className={`${classes.title} ${classes.titleWithMargin}`}
@@ -100,7 +103,7 @@ const MemberIdentifier = (props) => {
         </Box>
       ) : (
         <>
-          <Box mt={0} mb={2}>
+          <Box id='box_no_member_identifier' mt={0} mb={2}>
             <Typography
               variant="h6"
               className={`${classes.title} ${classes.titleWithMarginPlus}`}
@@ -108,7 +111,7 @@ const MemberIdentifier = (props) => {
                 __html: t('CONTRIBUTION_MEMBER_VAT')
               }}
             />
-            <Box mt={2} mb={1}>
+            <Box id='box_no_member_vat_input' mt={2} mb={1}>
               <VATField
                 id="vat"
                 name="member.vat"
