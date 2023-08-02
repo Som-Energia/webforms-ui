@@ -19,7 +19,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
-import MemberIdentifier from '../../Contribution/MemberIdentifier'
+import GenerationMemberIdentifier from './GenerationMemberIdentifier'
 import GenerationContributionForm from './GenerationContributionForm'
 import GenerationReview from './GenerationReview'
 
@@ -71,7 +71,8 @@ const GenerationContribution = (props) => {
       email2: '',
       phone1: '',
       phone2: '',
-      language: `${i18n.language}_ES`
+      language: `${i18n.language}_ES`,
+      has_generation_enabled_zone: true
     },
     payment: {
       amount: '',
@@ -293,7 +294,7 @@ const GenerationContribution = (props) => {
           <Container maxWidth="md" disableGutters={true}>
             <Paper elevation={0} className={classes.stepContainer}>
               {activeStep === 0 && (
-                <MemberIdentifier
+                <GenerationMemberIdentifier
                   {...formikProps}
                   title={t('GENERATION_FORM_TITLE')}
                 />
