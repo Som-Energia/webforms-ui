@@ -418,7 +418,7 @@ export const checkIsFromGenerationEnabledZone = async (data, token) => {
   const {memberNumber,memberVat} = data
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/generation/enabled_zone/${memberNumber}/${memberVat}`,
+    url: `${API_BASE_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`,
     headers: { Authorization: token }
   }).then((response) => {
     return response?.data
