@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Formik, Form } from 'formik'
@@ -32,6 +32,10 @@ import {
   normalizeMember
 } from '../../../services/utils'
 import { contribution, member } from '../../../services/api'
+import PrevButton from 'components/Buttons/PrevButton'
+import NextButton from 'components/Buttons/NextButton'
+import SubmitButton from 'components/Buttons/SubmitButton'
+import ExitButton from 'components/Buttons/ExitButton'
 
 const MAX_STEP_NUMBER = 4
 
@@ -49,7 +53,6 @@ const GenerationContribution = (props) => {
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
-
 
   const initialValues = {
     member: {
@@ -122,30 +125,30 @@ const GenerationContribution = (props) => {
       })
     }),
     Yup.object().shape({
-      annual_use: Yup.number().required(
-        t('GENERATION_ANNUAL_USE_HELPER_MIN', {
-          generationMinAnnualUse: new Intl.NumberFormat('ca').format(
-            contributionParams?.generationMinAnnualUse
-          )
-        })
-      )
-      .min(
-        contributionParams?.generationMinAnnualUse,
-        t('GENERATION_ANNUAL_USE_MIN', {
-          generationMinNumActions: new Intl.NumberFormat('ca').format(
-            contributionParams?.generationMinAnnualUse
-          )
-        })
-      )
-      .typeError("El valor de l'ús anual no és vàlid!"),
-      number_of_actions: Yup.number()
+      annual_use: Yup.number()
         .required(
-          t('GENERATION_ACTIONS_HELPER_MIN', {
-            generationMinNumActions: new Intl.NumberFormat('ca').format(
-              contributionParams?.generationMinNumActions
+          t('GENERATION_ANNUAL_USE_HELPER_MIN', {
+            generationMinAnnualUse: new Intl.NumberFormat('ca').format(
+              contributionParams?.generationMinAnnualUse
             )
           })
-        ),
+        )
+        .min(
+          contributionParams?.generationMinAnnualUse,
+          t('GENERATION_ANNUAL_USE_MIN', {
+            generationMinNumActions: new Intl.NumberFormat('ca').format(
+              contributionParams?.generationMinAnnualUse
+            )
+          })
+        )
+        .typeError("El valor de l'ús anual no és vàlid!"),
+      number_of_actions: Yup.number().required(
+        t('GENERATION_ACTIONS_HELPER_MIN', {
+          generationMinNumActions: new Intl.NumberFormat('ca').format(
+            contributionParams?.generationMinNumActions
+          )
+        })
+      ),
       payment: Yup.object().shape({
         amount: Yup.number()
           .required(
@@ -181,21 +184,23 @@ const GenerationContribution = (props) => {
         iban: Yup.string().required(t('IBAN_ERROR')),
         iban_valid: Yup.bool()
           .required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR')),
+          .oneOf([true], t('IBAN_ERROR'))
       }),
-      percent_over_annual_use:Yup.number()
-      .max(
-        contributionParams?.maxPercentOverAnnualUse,
-        t('No et passis de percentatge nano!!', {
-          amount: new Intl.NumberFormat('ca').format(
-            contributionParams?.maxPercentOverAnnualUse
-          )
-        })
-      )
-      .typeError("El percentatge resultant no és vàlid!")
+      percent_over_annual_use: Yup.number()
+        .max(
+          contributionParams?.maxPercentOverAnnualUse,
+          t('No et passis de percentatge nano!!', {
+            amount: new Intl.NumberFormat('ca').format(
+              contributionParams?.maxPercentOverAnnualUse
+            )
+          })
+        )
+        .typeError('El percentatge resultant no és vàlid!')
     }),
     Yup.object().shape({
-        privacy_policy_accepted: Yup.bool().required(t('HAY QUE ACEPTAR LA POLÍTICA DE PRIVACIDAD')).oneOf([true], t('PRIVATE_POLICY'))
+      privacy_policy_accepted: Yup.bool()
+        .required(t('HAY QUE ACEPTAR LA POLÍTICA DE PRIVACIDAD'))
+        .oneOf([true], t('PRIVATE_POLICY'))
     })
   ]
 
@@ -235,6 +240,23 @@ const GenerationContribution = (props) => {
       props.setTouched({})
     })
   }
+
+  const getNextButton = useCallback((canNextStep, formikProps) => {
+    console.log(formikProps)
+    return canNextStep ? (
+      <NextButton
+        disabled={!formikProps.isValid}
+        onClick={() => nextStep(formikProps)}
+        title={t('SEGUENT_PAS')}
+      />
+    ) : (
+      <ExitButton
+        disabled={!formikProps.isValid}
+        onClick={() => window.location.href = "/"}
+        title={t('EXIT')}
+      />
+    )
+  },[nextStep,t])
 
   const handlePost = async (values) => {
     setSending(true)
@@ -320,48 +342,28 @@ const GenerationContribution = (props) => {
               <Box mx={0} mt={2} mb={3}>
                 <div className={classes.actionsContainer}>
                   {result?.investment === undefined && (
-                    <Button
-                      data-cy="prev"
-                      className={classes.button}
-                      startIcon={<ArrowBackIosIcon />}
+                    <PrevButton
                       disabled={activeStep === 0 || sending}
-                      onClick={() => prevStep(formikProps)}>
-                      {t('PAS_ANTERIOR')}
-                    </Button>
+                      onClick={() => prevStep(formikProps)}
+                      title={t('PAS_ANTERIOR')}
+                    />
                   )}
-                  {activeStep < MAX_STEP_NUMBER - 1 ? (
-                    <Button
-                      type="button"
-                      data-cy="next"
-                      className={classes.button}
-                      variant="contained"
-                      color="primary"
-                      endIcon={<ArrowForwardIosIcon />}
-                      disabled={!formikProps.isValid}
-                      onClick={() => nextStep(formikProps)}>
-                      {t('SEGUENT_PAS')}
-                    </Button>
-                  ) : (
-                    !completed && (
-                      <Button
-                        type="button"
-                        data-cy="submit"
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        startIcon={
-                          sending ? (
-                            <CircularProgress size={24} />
-                          ) : (
-                            <SendIcon />
-                          )
-                        }
-                        disabled={sending || !formikProps.isValid}
-                        onClick={() => handlePost(formikProps.values)}>
-                        {t('SEND')}
-                      </Button>
-                    )
-                  )}
+                  {activeStep < MAX_STEP_NUMBER - 1
+                    ? getNextButton(formikProps.values.member.has_generation_enabled_zone,formikProps)
+                    : !completed && (
+                        <SubmitButton
+                          startIcon={
+                            sending ? (
+                              <CircularProgress size={24} />
+                            ) : (
+                              <SendIcon />
+                            )
+                          }
+                          disabled={sending || !formikProps.isValid}
+                          onClick={() => handlePost(formikProps.values)}
+                          title={t('SEND')}
+                        />
+                      )}
                 </div>
               </Box>
             </Paper>
