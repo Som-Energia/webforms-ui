@@ -11,7 +11,11 @@ import TextField from '@material-ui/core/TextField'
 
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
 
-import { checkMember, checkMemberVat, checkIsFromGenerationEnabledZone } from '../../../services/api'
+import {
+  checkMember,
+  checkMemberVat,
+  checkIsFromGenerationEnabledZone
+} from '../../../services/api'
 
 const useStyles = makeStyles((theme) => ({
   memberChecked: {
@@ -29,7 +33,7 @@ const GenerationMemberIdFields = (props) => {
   const classes = useStyles()
   const query = useQuery()
 
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
+  const { values, handleBlur, handleChange, errors, setErrors, touched, setFieldValue } =
     props
 
   const [isLoading, setLoading] = useState(false)
@@ -57,15 +61,8 @@ const GenerationMemberIdFields = (props) => {
           values.member.vat
         )
         if (member?.state === true) {
-          
-          let res = await checkIsFromGenerationEnabledZone({
-            memberNumber: values.member.number,
-            memberVat: values.member.vat
-          })
           setError(false)
           setFieldValue('member.checked', true)
-          setFieldValue("member.has_generation_enabled_zone", res.data)
-
         } else {
           setError(true)
           setFieldValue('member.checked', false)
@@ -73,7 +70,16 @@ const GenerationMemberIdFields = (props) => {
       } catch (error) {
         setError(error)
       }
-
+      try {
+        let res = await checkIsFromGenerationEnabledZone({
+          memberNumber: values.member.number,
+          memberVat: values.member.vat
+        })
+        setFieldValue('member.has_generation_enabled_zone', res.data)
+        setErrors({'member':{'has_generation_enabled_zone':false}})
+      } catch (error) {
+        setErrors({'member':{'has_generation_enabled_zone':t('GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED')}})
+      }
       setLoading(false)
     }
 
@@ -86,7 +92,7 @@ const GenerationMemberIdFields = (props) => {
     } else {
       setFieldValue('member.checked', false)
     }
-  }, [values.member.number, values.member.vat, setFieldValue])
+  }, [values.member.number, values.member.vat, setFieldValue,setErrors])
 
   useEffect(() => {
     let hash = query.get('h')

@@ -146,7 +146,7 @@ const MemberIdentifier = (props) => {
         </>
       )}
       {!values?.member?.has_generation_enabled_zone ? (
-        <Grid id='grid_not_enabled_zone' container style={{ gap: '1rem' }}>
+        <Grid id="grid_not_enabled_zone" container style={{ gap: '1rem' }}>
           <Grid item>
             <Alert severity="warning">
               <AlertTitle>
@@ -164,13 +164,26 @@ const MemberIdentifier = (props) => {
             </Alert>
           </Grid>
           <Grid item>
-          <Typography
-                variant="body2"
+            <Typography
+              variant="body2"
+              dangerouslySetInnerHTML={{
+                __html: t('GENERATION_FORM_INFO_NOT_VALID_DATA_OF_PARTNER')
+              }}
+            />
+          </Grid>
+        </Grid>
+      ) : null}
+
+      {errors?.member?.has_generation_enabled_zone ? (
+        <Grid id="grid_error_enabled_zone" container item >
+            <Alert severity="warning">
+              <Typography
+                variant="body1"
                 dangerouslySetInnerHTML={{
-                  __html: t('GENERATION_FORM_INFO_NOT_VALID_DATA_OF_PARTNER')
+                  __html: t('GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED')
                 }}
               />
-          </Grid>
+            </Alert>
         </Grid>
       ) : null}
     </>
