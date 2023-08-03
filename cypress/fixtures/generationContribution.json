@@ -1,5 +1,10 @@
 {
   "member": {
+    "number": "78820",
+    "vat": "78050110R",
+    "badVat": "58291270J"
+  },
+  "member_out_first_fase_zone":{
     "number": "38434",
     "vat": "40323835M",
     "badVat": "58291270J"

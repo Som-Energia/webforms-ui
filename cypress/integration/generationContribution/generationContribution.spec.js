@@ -36,6 +36,26 @@ describe('Generation Form', () => {
     cy.get('[data-cy=next]').click()
   })
 
+  it('Try to contribute with out of zone member', function () {
+    //Member page
+    let memberNumber = this.data.member_out_first_fase_zone.number
+      let memberVat = this.data.member_out_first_fase_zone.vat
+
+      cy.intercept('GET', '/data/soci/**').as('checkMember')
+
+      cy.get('#memberNumber')
+        .clear()
+        .type(memberNumber)
+        .should('have.value', memberNumber)
+
+      cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
+      cy.wait('@checkMember')
+      .its('response.statusCode')
+      .should('be.oneOf', [200, 304])
+      cy.get('[data-cy=exit]').click()
+  })
+
+
   context('Fail Tests', () => {
     it('Try to contribute with erroneous credentials', function () {
       //Member page
