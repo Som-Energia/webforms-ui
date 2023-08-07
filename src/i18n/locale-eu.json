@@ -413,6 +413,7 @@
     "ATR_CASE": "Ezin izan da ATR kasua sortu. Kontratu honek badu prozesu bat aribidean",
     "OPEN_CASES": "Kontratu honek badu prozesu bat aribidean",
     "PENDING_CONTRACT_MODIFICATION": "Kontratu honek aplikatu gabeko aldaketak ditu",
+    "INDEXED_CUSTOM_TARIFF_ERROR_TXT": "El contracto tiene una tarifa personalizada. Contacta con nosotras para cambiarla.",
     "ATTACHMENT_ERROR": "Ezin izan ditugu fitxategi erantsiak kargatu",
     "STATE_CONFLICT": "Kontratu honetan ezin da aldaketarik egin",
     "UNAVAILABLE": "Ez dago erabilgarri",
