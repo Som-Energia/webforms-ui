@@ -9,6 +9,7 @@ import StepHeader from '../../../components/StepHeader'
 import Chooser from '../../../components/Chooser'
 import GenerationMemberIdFields from './GenerationMemberIdFields'
 import VATField from '../../../components/VATField'
+import GenerationNoMemberFields from './GenerationNoMemberIdFields'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -27,14 +28,12 @@ const useStyles = makeStyles((theme) => ({
 const GenerationMemberIdentifier = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
+  
 
   const {
     values,
-    handleBlur,
     errors,
-    touched,
     setFieldValue,
-    setFieldTouched,
     resetForm,
     title = t('CONTRIBUTION')
   } = props
@@ -44,17 +43,7 @@ const GenerationMemberIdentifier = (props) => {
     setFieldValue('member.is_member', !!event?.option)
   }
 
-  const onChangeVAT = (params) => {
-    const { vat, isPhisical, valid } = params
-    setFieldValue('member.isphisical', isPhisical, false)
-    setFieldValue('member.vatvalid', valid, false)
-    setFieldValue('member.exists', false, false)
-    setFieldValue('member.vat', vat)
-    if (vat !== '') {
-      setFieldTouched('member.vat', true)
-    }
-  }
-
+  console.log("GENERATION", values.member.has_generation_enabled_zone)
   return (
     <>
       <StepHeader title={title} />
@@ -100,49 +89,7 @@ const GenerationMemberIdentifier = (props) => {
         </Box>
       ) : (
         <>
-          <Box id="box_no_member_identifier" mt={0} mb={2}>
-            <Typography
-              variant="h6"
-              className={`${classes.title} ${classes.titleWithMarginPlus}`}
-              dangerouslySetInnerHTML={{
-                __html: t('CONTRIBUTION_MEMBER_VAT')
-              }}
-            />
-            <Box id="box_no_member_vat_input" mt={2} mb={1}>
-              <VATField
-                id="vat"
-                name="member.vat"
-                label={t('VAT_LABEL')}
-                variant="outlined"
-                fullWidth
-                required
-                value={values?.member?.vat}
-                onChange={onChangeVAT}
-                onBlur={handleBlur}
-                error={
-                  (errors?.member?.vat && touched?.member?.vat) ||
-                  (touched?.member?.vat &&
-                    values?.member?.vatvalid === false) ||
-                  (touched?.member?.vat && values?.member?.exists === true)
-                }
-                helperText={
-                  (touched?.member?.vat && errors?.member?.vat) ||
-                  (touched?.member?.vat && errors?.member?.vatvalid) ||
-                  (touched?.member?.vat && errors?.member?.exists)
-                }
-              />
-            </Box>
-          </Box>
-          <Box mt={0} mb={2}>
-            <Alert severity="warning">
-              <Typography
-                variant="body1"
-                dangerouslySetInnerHTML={{
-                  __html: t('CONTRIBUTION_MEMBER_WARNING')
-                }}
-              />
-            </Alert>
-          </Box>
+          <GenerationNoMemberFields {...props} />
         </>
       )}
       {!values?.member?.has_generation_enabled_zone ? (

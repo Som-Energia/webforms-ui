@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
@@ -15,8 +14,6 @@ import Paper from '@material-ui/core/Paper'
 
 import DisplayFormikState from '../../../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
 
 import GenerationMemberIdentifier from './GenerationMemberIdentifier'
@@ -36,6 +33,7 @@ import PrevButton from 'components/Buttons/PrevButton'
 import NextButton from 'components/Buttons/NextButton'
 import SubmitButton from 'components/Buttons/SubmitButton'
 import ExitButton from 'components/Buttons/ExitButton'
+import PersonalData from '../../HolderChange/PersonalData'
 
 const MAX_STEP_NUMBER = 4
 
@@ -125,6 +123,61 @@ const GenerationContribution = (props) => {
       })
     }),
     Yup.object().shape({
+      member: Yup.object().shape({
+        name: Yup.string().required(t('NO_NAME')),
+        surname1: Yup.string().when('isphisical', {
+          is: true,
+          then: Yup.string().required(t('NO_SURNAME1'))
+        }),
+        proxyname: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NAME'))
+        }),
+        proxynif: Yup.string().when('isphisical', {
+          is: false,
+          then: Yup.string().required(t('NO_PROXY_NIF'))
+        }),
+        proxynif_valid: Yup.bool().when('isphisical', {
+          is: false,
+          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+        }),
+        address: Yup.string().required(t('NO_ADDRESS')),
+        postal_code: Yup.string()
+          .matches(/^\d*$/, t('NO_POSTALCODE'))
+          .required(t('NO_POSTALCODE')),
+        state: Yup.object().shape({
+          id: Yup.number().required(t('NO_STATE'))
+        }),
+        city: Yup.object().shape({
+          id: Yup.number().required(t('NO_CITY'))
+        }),
+        email: Yup.string().required(t('NO_EMAIL')).email(t('NO_EMAIL')),
+        email2: Yup.string().test(
+          'repeatEmail',
+          t('NO_REPEATED_EMAIL'),
+          function () {
+            return this.parent.email === this.parent.email2
+          }
+        ),
+        phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
+        phone2: Yup.string().min(9, t('NO_PHONE')),
+        language: Yup.string().required(t('NO_LANGUAGE'))
+      }),
+      legal_person_accepted: Yup.bool().test({
+        name: 'isTheMemberVat',
+        message: t('ACCEPT_LEGAL_PERSON'),
+        test: function () {
+          return !(
+            this.parent.member.isphisical === false &&
+            this.parent.legal_person_accepted !== true
+          )
+        }
+      }),
+      privacy_policy_accepted: Yup.bool()
+        .required(t('UNACCEPTED_PRIVACY_POLICY'))
+        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+    }),
+    Yup.object().shape({
       annual_use: Yup.number()
         .required(
           t('GENERATION_ANNUAL_USE_HELPER_MIN', {
@@ -194,13 +247,12 @@ const GenerationContribution = (props) => {
     })
   ]
 
-  const nextStep = (props) => {
+  const nextStep = useCallback((props) => {
     let next = activeStep + 1
     const last = MAX_STEP_NUMBER
-    //This part of code i for the no partners
-    /* if (activeStep === 0 && props?.values?.member?.is_member) {
+    if (activeStep === 0 && props?.values?.member?.is_member) {
       next++
-    } */
+    }
 
     setActiveStep(Math.min(next, last))
 
@@ -211,16 +263,15 @@ const GenerationContribution = (props) => {
         props.setTouched({})
       }
     })
-  }
+  },[activeStep])
 
-  const prevStep = (props) => {
+  const prevStep = useCallback((props) => {
     const prev = activeStep - 1
-    /*if (activeStep === 2 && props?.values?.member?.is_member) {
+    if (activeStep === 2 && props?.values?.member?.is_member) {
       setActiveStep(Math.max(activeStep - 2, 0))
-    } else {*/
+    } else {
     setActiveStep(Math.max(0, prev))
-    //}
-
+    }
     if (completed) {
       setCompleted(false)
       setError(false)
@@ -229,7 +280,7 @@ const GenerationContribution = (props) => {
       props.validateForm()
       props.setTouched({})
     })
-  }
+  },[activeStep,completed])
 
   const getNextButton = useCallback((canNextStep, formikProps) => {
     console.log(formikProps)
@@ -312,9 +363,12 @@ const GenerationContribution = (props) => {
                 />
               )}
               {activeStep === 1 && (
+                  <PersonalData {...formikProps} entity="member" />
+              )}
+              {activeStep === 2 && (
                 <GenerationContributionForm {...formikProps} />
               )}
-              {activeStep === 2 && <GenerationReview {...formikProps} />}
+              {activeStep === 3 && <GenerationReview {...formikProps} />}
 
               {completed && (
                 <Box mx={0} mb={1}>

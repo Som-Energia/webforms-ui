@@ -92,7 +92,7 @@ const GenerationMemberIdFields = (props) => {
     } else {
       setFieldValue('member.checked', false)
     }
-  }, [values.member.number, values.member.vat, setFieldValue,setErrors])
+  }, [t,values.member.number, values.member.vat, setFieldValue,setErrors])
 
   useEffect(() => {
     let hash = query.get('h')
@@ -106,7 +106,7 @@ const GenerationMemberIdFields = (props) => {
     } catch (error) {
       console.error('Invalid hash code')
     }
-  }, [query.get('h'), values, setFieldValue])
+  }, [ values, setFieldValue,query])
 
   return (
     <Grid container spacing={3}>
