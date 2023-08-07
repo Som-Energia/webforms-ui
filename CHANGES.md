@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.8.1 2023-08-07
+
+- Fix: error message when contract with custom tariff try to change tariff
+
 ## 1.8.0 2023-07-18
 
 - Added the new investments table
