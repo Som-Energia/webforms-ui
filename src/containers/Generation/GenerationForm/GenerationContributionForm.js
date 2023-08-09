@@ -91,7 +91,6 @@ const GenerationContributionForm = (props) => {
       percentProd = '% Erròni'
     }
 
-    console.log("GENERATION CONTRIBUTION FORM", values)
     return (
       <Box id="box_percent_use">
         <Grid

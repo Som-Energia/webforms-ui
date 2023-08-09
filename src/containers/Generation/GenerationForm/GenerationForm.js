@@ -73,7 +73,8 @@ const GenerationContribution = (props) => {
       phone1: '',
       phone2: '',
       language: `${i18n.language}_ES`,
-      has_generation_enabled_zone: true
+      has_generation_enabled_zone: true,
+      postal_code_checked: false
     },
     payment: {
       amount: '',

@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { Alert, AlertTitle } from '@material-ui/lab'
-import { Grid, Typography, TextField } from '@material-ui/core'
+import React, { useState, useEffect, useCallback } from 'react'
+import { Alert } from '@material-ui/lab'
+import { Typography, TextField } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
-import StepHeader from '../../../components/StepHeader'
-import Chooser from '../../../components/Chooser'
-import GenerationMemberIdFields from './GenerationMemberIdFields'
 import VATField from '../../../components/VATField'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import {checkIsPostalCodeFromGenerationEnabledZone} from '../../../services/api'
+
 const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: '1rem',
@@ -28,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 const GenerationNoMemberFields = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
-  const [pcCheck, setPCCHeck] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -52,21 +50,31 @@ const GenerationNoMemberFields = (props) => {
   }
 
   const onChangePostalCode = (event) => {
-    setFieldValue('member.postal_code', event.target.value)
+    if(values?.member?.postal_code_checked){ setFieldValue('member.postal_code_checked',false) }
+    setFieldValue('member.postal_code',event.target.value)
   }
 
-  useEffect(() => {
-    if (values?.member?.postal_code.length === 5) {
-      setIsLoading(true)
-      //TODO: CRIDA A WEBFORMS PER SABER SI EL CODI POSTAL ESTÀ A LA LLISTA
-      // si tot ok posem pcCheck a true
-      setTimeout(() => {
-        setPCCHeck(true)
-        setFieldValue('member.has_generation_enabled_zone', true)
+  const checkPostalCode = useCallback(async () => {
+    setIsLoading(true)
+    try{
+        let result = await checkIsPostalCodeFromGenerationEnabledZone({postalCode:values?.member?.postal_code})
+        setFieldValue('member.has_generation_enabled_zone', result.data)
+        setFieldValue('member.postal_code_checked',true)
         setIsLoading(false)
-      }, 2000)
     }
-  }, [values?.member?.postal_code, setFieldValue])
+    catch(error){
+        setFieldValue('member.postal_code_checked',true)
+        setIsLoading(false)
+        console.log(error)
+    } 
+  },[values?.member?.postal_code, setFieldValue])
+
+  useEffect(() => {
+    if (values?.member?.postal_code?.length === 5) {
+      console.log("CRIDA AL CHECK")
+        checkPostalCode()
+    }
+  }, [checkPostalCode,values?.member?.postal_code])
 
   return (
     <>
@@ -97,7 +105,7 @@ const GenerationNoMemberFields = (props) => {
               endAdornment: (
                 <InputAdornment position="end">
                   {isLoading && <CircularProgress size={24} />}
-                  {!isLoading && values?.member?.checked && (
+                  {!isLoading && values?.member?.postal_code_checked && (
                     <CheckOutlinedIcon color="primary" />
                   )}
                 </InputAdornment>
@@ -106,7 +114,7 @@ const GenerationNoMemberFields = (props) => {
           />
         </Box>
       </Box>
-      {values?.member?.has_generation_enabled_zone && pcCheck ? (
+      {values?.member?.has_generation_enabled_zone && values.member.postal_code_checked ? (
         <>
           <Box id="box_no_member_identifier" mt={0} mb={2}>
             <Typography
@@ -146,7 +154,7 @@ const GenerationNoMemberFields = (props) => {
               <Typography
                 variant="body1"
                 dangerouslySetInnerHTML={{
-                  __html: t('CONTRIBUTION_MEMBER_WARNING')
+                  __html: t('GENERATION_CONTRIBUTION_MEMBER_WARNING')
                 }}
               />
             </Alert>

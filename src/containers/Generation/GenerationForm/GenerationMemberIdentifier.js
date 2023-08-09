@@ -1,14 +1,12 @@
 import React from 'react'
 import { Alert, AlertTitle } from '@material-ui/lab'
 import { Grid, Typography } from '@material-ui/core'
-
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import StepHeader from '../../../components/StepHeader'
 import Chooser from '../../../components/Chooser'
 import GenerationMemberIdFields from './GenerationMemberIdFields'
-import VATField from '../../../components/VATField'
 import GenerationNoMemberFields from './GenerationNoMemberIdFields'
 
 const useStyles = makeStyles((theme) => ({
@@ -42,8 +40,7 @@ const GenerationMemberIdentifier = (props) => {
     resetForm()
     setFieldValue('member.is_member', !!event?.option)
   }
-
-  console.log("GENERATION", values.member.has_generation_enabled_zone)
+  
   return (
     <>
       <StepHeader title={title} />
@@ -107,7 +104,6 @@ const GenerationMemberIdentifier = (props) => {
                   })
                 }}
               />
-              {}
             </Alert>
           </Grid>
           <Grid item>
