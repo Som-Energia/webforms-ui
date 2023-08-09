@@ -671,5 +671,6 @@
     "GENERATION_FORM_INFO_NOT_VALID_DATA_OF_PARTNER":"Si et sembla que tenim malament les teves dades de residència, escriu-nos a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
     "GENERATION_FORM_HELP_CENTER_URL":"https://ca.support.somenergia.coop/category/580-generation-kwh",
     "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"No hem pogut validar les dades, posa't en contacte amb <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> perquè et puguem donar un cop de mà",
-    "GENERATION_FORM_CONTRIBUTION_MEMBER_IDENTIFIER_DESC":"Tingues en compte que per poder participar en el Generation kWh és necessari que siguis soci o sòcia de la cooperativa."
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_IDENTIFIER_DESC":"Tingues en compte que per poder participar en el Generation kWh és necessari que siguis soci o sòcia de la cooperativa.",
+    "GENERATION_CONTRIBUTION_MEMBER_WARNING":"<p>Ja pots participar al <strong>Generation kWh perquè està oberta la possibilitat a la teva zona!</strong></p><p>Ara, a part de la quantitat amb què decideixis participar en el Generation kWh, per ser soci/sòcia has de fer una aportació al capital social de <strong>100 €</strong>, que es tornen en el supòsit que algun dia et vulguis donar de baixa.</p>"
 }
