@@ -254,23 +254,6 @@ describe('Generation Form Contribution', () => {
     expect(getByText(ibanTextField, mockErrMsg)).toBeInTheDocument()
   })
 
-  test('Should show percent use error text, when has an error', () => {
-    const mockErrMsg = "percent use is not valid"
-    const mockErrors = JSON.parse(JSON.stringify(errors))
-    mockErrors.percent_over_annual_use = mockErrMsg
-    const dom = render(
-      <GenerationContributionForm
-        values={mockValues}
-        errors={mockErrors}
-        touched={{payment:{iban:true}}}
-        setFieldValue={mockSetFieldValue}
-      />
-    )
-
-    const ibanTextField = getById(dom.container, 'box_percent_use')
-    expect(getByText(ibanTextField, mockErrMsg)).toBeInTheDocument()
-  })
-
   test('Should show annual use helper text', () => {
     
     const dom = render(

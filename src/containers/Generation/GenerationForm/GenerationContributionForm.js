@@ -34,16 +34,6 @@ const useStyles = makeStyles((theme) => ({
       color: 'rgba(0, 0, 0, 0.54)'
     }
   },
-  helperText: {
-    marginLeft: '14px',
-    color: '#f44336',
-    fontSize: '0.75rem',
-    marginTop: '3px',
-    textAlign: 'left',
-    fontWeight: '400',
-    lineHeight: '1.66',
-    letterSpacing: '0.03333em'
-  },
   noHover: {
     backgroundColor: 'white',
     padding: 0,
@@ -106,9 +96,7 @@ const GenerationContributionForm = (props) => {
         <Grid
           container
           style={{
-            border: errors.percent_over_annual_use
-              ? '1.5px #f44336 solid'
-              : '0.5px lightgrey solid'
+            border: '0.5px lightgrey solid'
           }}>
           <Grid
             item
@@ -116,25 +104,16 @@ const GenerationContributionForm = (props) => {
               padding: '10px 2px 10px 2px',
               width: percentProd,
               height: '100%',
-              backgroundColor: errors.percent_over_annual_use
-                ? '#ff00001c'
-                : '#96b633'
+              backgroundColor: '#96b633'
             }}>
             <Typography id="percent_value" style={{ margin: '0px 10px' }}>
               {percentProd}
             </Typography>
           </Grid>
         </Grid>
-        <Typography variant="body1" className={classes.helperText}>
-          {errors.percent_over_annual_use ? errors.percent_over_annual_use : ''}
-        </Typography>
       </Box>
     )
-  }, [
-    values.percent_over_annual_use,
-    classes.helperText,
-    errors.percent_over_annual_use
-  ])
+  }, [values.percent_over_annual_use])
 
   return (
     <>

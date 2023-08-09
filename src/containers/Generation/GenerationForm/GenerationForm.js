@@ -185,17 +185,7 @@ const GenerationContribution = (props) => {
         iban_valid: Yup.bool()
           .required(t('IBAN_ERROR'))
           .oneOf([true], t('IBAN_ERROR'))
-      }),
-      percent_over_annual_use: Yup.number()
-        .max(
-          contributionParams?.maxPercentOverAnnualUse,
-          t('No et passis de percentatge nano!!', {
-            amount: new Intl.NumberFormat('ca').format(
-              contributionParams?.maxPercentOverAnnualUse
-            )
-          })
-        )
-        .typeError('El percentatge resultant no és vàlid!')
+      })
     }),
     Yup.object().shape({
       privacy_policy_accepted: Yup.bool()
