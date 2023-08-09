@@ -6,7 +6,6 @@ import {
   fireEvent,
   getByText
 } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 jest.mock('react-i18next', () => ({
@@ -29,36 +28,19 @@ describe('Generation Form Review', () => {
     }
   }
 
-  const mockValuesNoMember = {
+  const mockValuesNotEnabledZone = {
     member: {
-      is_member: false
+      is_member: true,
+      has_generation_enabled_zone: false
     }
   }
 
-  const mockErrorsVat = {
-    member:{
-        vat: "VAT_HAS_AN_ERROR"
+  const mockEnabledZonneError = {
+    member: {
+      has_generation_enabled_zone: 'ENABLED_ZONE_ERROR'
     }
   }
 
-  const mockErrorsVatValid = {
-    member:{
-        vatvalid: "VAT IS NOT VALID"
-    }
-  }
-
-  const mockErrorsMemberExists = {
-    member:{
-        exists: "MEMBER_ALREADY_EXISTS"
-    }
-  }
-
-  const mockTouched = {
-    member:{
-        vat:true
-    }
-  }
-  const VAT = '40323835M'
   const getById = queryByAttribute.bind(null, 'id')
   const mockSetFieldValue = jest.fn()
   const mocksetFieldTouched = jest.fn()
@@ -88,20 +70,58 @@ describe('Generation Form Review', () => {
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.is_member', false)
   })
 
-  test('Should call setFieldTouched when change the value of vat', async () => {
+  test('Should show warning text when zone is not enabled', async () => {
     const dom = render(
-      <GenerationMemberIdentifier
-        resetForm={jest.fn()}
-        setFieldTouched={mocksetFieldTouched}
-        setFieldValue={mockSetFieldValue}
-      />
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <GenerationMemberIdentifier
+                resetForm={jest.fn()}
+                values={mockValuesNotEnabledZone}
+                setFieldValue={mockSetFieldValue}
+              />
+            }
+          />
+        </Routes>
+      </Router>
     )
 
-    const vatTextField = getById(dom.container, 'vat')
-    act(() => {
-      fireEvent.change(vatTextField, { target: { value: VAT } })
-    })
-    expect(mocksetFieldTouched).toHaveBeenCalledWith('member.vat', true)
+    const infoNoEnabledZone = getById(dom.container, 'grid_not_enabled_zone')
+    expect(
+      getByText(
+        infoNoEnabledZone,
+        'GENERATION_FORM_INFO_ZONE_NOT_ENABLED_TITLE'
+      )
+    ).toBeInTheDocument()
+  })
+
+  test('Should show error when the call to check zone fails', async () => {
+    const dom = render(
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <GenerationMemberIdentifier
+                resetForm={jest.fn()}
+                values={mockValues}
+                setFieldValue={mockSetFieldValue}
+                errors={mockEnabledZonneError}
+              />
+            }
+          />
+        </Routes>
+      </Router>
+    )
+
+    const errorEnabledZone = getById(dom.container, 'grid_error_enabled_zone')
+    expect(
+      getByText(errorEnabledZone, 'GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED')
+    ).toBeInTheDocument()
   })
 
   test('Should show the input to fill in the partner number if is member', async () => {
@@ -129,166 +149,10 @@ describe('Generation Form Review', () => {
       'box_member_identifier'
     )
     expect(
-      getByText(GenerationMemberIdentifierInputBox, 'CONTRIBUTION_MEMBER_INDENTIFIER')
+      getByText(
+        GenerationMemberIdentifierInputBox,
+        'CONTRIBUTION_MEMBER_INDENTIFIER'
+      )
     ).toBeInTheDocument()
   })
-
-  test('Should show the input to fill in the nif of the new person', async () => {
-
-    const dom = render(
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <GenerationMemberIdentifier
-                resetForm={jest.fn()}
-                values={mockValuesNoMember}
-                setFieldTouched={mocksetFieldTouched}
-                setFieldValue={mockSetFieldValue}
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    )
-
-    const newMemberInputBox = getById(
-      dom.container,
-      'box_no_member_identifier'
-    )
-    expect(
-      getByText(newMemberInputBox, 'CONTRIBUTION_MEMBER_VAT')
-    ).toBeInTheDocument()
-  })
-
-  test('Should show error if vat has an error', async () => {
-
-    const dom = render(
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <GenerationMemberIdentifier
-                resetForm={jest.fn()}
-                values={mockValuesNoMember}
-                setFieldTouched={mocksetFieldTouched}
-                setFieldValue={mockSetFieldValue}
-                errors={mockErrorsVat}
-                touched={mockTouched}
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    )
-
-    const newMemberVatInputBox = getById(
-      dom.container,
-      'box_no_member_vat_input'
-    )
-    expect(
-      getByText(newMemberVatInputBox, mockErrorsVat.member.vat)
-    ).toBeInTheDocument()
-  })
-
-  test('Should show error if vat is not valid', async () => {
-
-    const mockValuesNoMemberVatNoValid = JSON.parse(JSON.stringify(mockValuesNoMember))
-    mockValuesNoMemberVatNoValid.member.vatvalid=false
-
-    const dom = render(
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <GenerationMemberIdentifier
-                resetForm={jest.fn()}
-                values={mockValuesNoMemberVatNoValid}
-                setFieldTouched={mocksetFieldTouched}
-                setFieldValue={mockSetFieldValue}
-                errors={mockErrorsVatValid}
-                touched={mockTouched}
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    )
-
-    const newMemberVatInputBox = getById(
-      dom.container,
-      'box_no_member_vat_input'
-    )
-    expect(
-      getByText(newMemberVatInputBox, mockErrorsVatValid.member.vatvalid)
-    ).toBeInTheDocument()
-  })
-
-  test('Should show error when member vat already exists', async () => {
-
-    const dom = render(
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <GenerationMemberIdentifier
-                resetForm={jest.fn()}
-                values={mockValuesNoMember}
-                setFieldTouched={mocksetFieldTouched}
-                setFieldValue={mockSetFieldValue}
-                errors={mockErrorsMemberExists}
-                touched={mockTouched}
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    )
-
-    const newMemberVatInputBox = getById(
-      dom.container,
-      'box_no_member_vat_input'
-    )
-    expect(
-      getByText(newMemberVatInputBox, mockErrorsMemberExists.member.exists)
-    ).toBeInTheDocument()
-  })
-
-  test('Should show info of no enabled zone', async () => {
-    const mockValuesNotEnabledZone = JSON.parse(JSON.stringify(mockValues))
-    mockValuesNotEnabledZone.member.has_generation_enabled_zone = false
-    const dom = render(
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <GenerationMemberIdentifier
-                values={mockValuesNotEnabledZone}
-                setFieldValue={mockSetFieldValue}
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    )
-
-    const infoNotEnabledZone = getById(
-      dom.container,
-      'grid_not_enabled_zone'
-    )
-    expect(
-      getByText(infoNotEnabledZone, "GENERATION_FORM_INFO_ZONE_NOT_ENABLED_TITLE")
-    ).toBeInTheDocument()
-  })
-  
 })
