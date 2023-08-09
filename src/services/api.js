@@ -414,12 +414,21 @@ export const generationChangeContractPriority = async (data, token) => {
     })
 }
 
-export const checkIsFromGenerationEnabledZone = async (data, token) => {
+export const checkIsFromGenerationEnabledZone = async (data) => {
   const {memberNumber,memberVat} = data
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`,
-    headers: { Authorization: token }
+    url: `${API_BASE_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
+  const {postalCode} = data 
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/data/generationkwh/can_join/${postalCode}`
   }).then((response) => {
     return response?.data
   })
