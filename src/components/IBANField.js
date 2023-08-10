@@ -51,7 +51,7 @@ function IBANField(props) {
 
   useEffect(() => {
     onChange({ IBAN: IBAN, IBANValid: false })
-    if (IBAN.length > 27) {
+    if (IBAN.length > 28) {
       setIsLoading(true)
       checkIban(IBAN)
         .then((response) => {
