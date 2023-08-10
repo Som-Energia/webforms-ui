@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box'
 import VATField from '../../../components/VATField'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
-import {checkIsPostalCodeFromGenerationEnabledZone} from '../../../services/api'
+import { checkIsPostalCodeFromGenerationEnabledZone } from '../../../services/api'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -50,29 +50,34 @@ const GenerationNoMemberFields = (props) => {
   }
 
   const onChangePostalCode = (event) => {
-    if(values?.member?.postal_code_checked){ setFieldValue('member.postal_code_checked',false) }
-    setFieldValue('member.postal_code',event.target.value)
+    if (values?.member?.postal_code_checked) {
+      setFieldValue('member.postal_code_checked', false)
+    }
+    setFieldValue('member.postal_code', event.target.value)
   }
 
   const checkPostalCode = useCallback(async () => {
     setIsLoading(true)
-    try{
-        let result = await checkIsPostalCodeFromGenerationEnabledZone({postalCode:values?.member?.postal_code})
-        setFieldValue('member.has_generation_enabled_zone', result.data)
-        setFieldValue('member.postal_code_checked',true)
-        setIsLoading(false)
+    try {
+      let result = await checkIsPostalCodeFromGenerationEnabledZone({
+        postalCode: values?.member?.postal_code
+      })
+      setFieldValue('member.has_generation_enabled_zone', result.data)
+      setFieldValue('member.generation_zone_checked', true)
+      setFieldValue('member.postal_code_checked', true)
+      setIsLoading(false)
+    } catch (error) {
+      setFieldValue('member.generation_zone_checked', true)
+      setFieldValue('member.postal_code_checked', true)
+      setIsLoading(false)
     }
-    catch(error){
-        setFieldValue('member.postal_code_checked',true)
-        setIsLoading(false)
-    } 
-  },[values?.member?.postal_code, setFieldValue])
+  }, [values?.member?.postal_code, setFieldValue])
 
   useEffect(() => {
     if (values?.member?.postal_code?.length === 5) {
-        checkPostalCode()
+      checkPostalCode()
     }
-  }, [checkPostalCode,values?.member?.postal_code])
+  }, [checkPostalCode, values?.member?.postal_code])
 
   return (
     <>
@@ -112,7 +117,8 @@ const GenerationNoMemberFields = (props) => {
           />
         </Box>
       </Box>
-      {values?.member?.has_generation_enabled_zone && values.member.postal_code_checked ? (
+      {values?.member?.has_generation_enabled_zone &&
+      values.member.postal_code_checked ? (
         <>
           <Box id="box_no_member_identifier" mt={0} mb={2}>
             <Typography
