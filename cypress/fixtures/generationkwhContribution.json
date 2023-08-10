@@ -27,5 +27,22 @@
   },
   "out_zone_data":{
     "postal_code": 90902
+  },
+  "new_member":{
+    "vat": "78912872X",
+    "previous_holder": true,
+    "name": "Pere",
+    "surname1": "Pi",
+    "surname2": "Palmera",
+    "postal_code": "25320",
+    "address": "C/Percebe",
+    "number": 13,
+    "email": "pere.pi@somenergia.coop",
+    "phone": "636696969",
+    "language": "ca_ES",
+    "voluntary_cent": true,
+    "iban": "ES77 1234 1234 1612 3456 7890",
+    "bad_iban": "ES77 1234 1234 1612 3456 AAAA",
+    "bad_email": "perepisomenergia.coop"
   }
 }
