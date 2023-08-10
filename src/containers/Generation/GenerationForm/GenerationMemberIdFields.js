@@ -31,8 +31,15 @@ const GenerationMemberIdFields = (props) => {
   const classes = useStyles()
   const query = useQuery()
 
-  const { values, handleBlur, handleChange, errors, setErrors, touched, setFieldValue } =
-    props
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    setErrors,
+    touched,
+    setFieldValue
+  } = props
 
   const [isLoading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -46,6 +53,8 @@ const GenerationMemberIdFields = (props) => {
 
   useEffect(() => {
     const checkIsMember = async () => {
+      setFieldValue('member.generation_zone_checked', false)
+      setFieldValue('member.has_generation_enabled_zone', true)
       setLoading(true)
       try {
         await checkMemberVat(values.member.vat)
@@ -74,9 +83,16 @@ const GenerationMemberIdFields = (props) => {
         })
         setFieldValue('member.checked', true)
         setFieldValue('member.has_generation_enabled_zone', res.data)
-        setErrors({'member':{'has_generation_enabled_zone':false}})
+        setFieldValue('member.generation_zone_checked', true)
+        setErrors({ member: { has_generation_enabled_zone: false } })
       } catch (error) {
-        setErrors({'member':{'has_generation_enabled_zone':t('GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED')}})
+        setErrors({
+          member: {
+            has_generation_enabled_zone: t(
+              'GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED'
+            )
+          }
+        })
       }
       setLoading(false)
     }
@@ -90,7 +106,7 @@ const GenerationMemberIdFields = (props) => {
     } else {
       setFieldValue('member.checked', false)
     }
-  }, [t,values.member.number, values.member.vat, setFieldValue,setErrors])
+  }, [t, values.member.number, values.member.vat, setFieldValue, setErrors])
 
   useEffect(() => {
     let hash = query.get('h')
@@ -104,7 +120,7 @@ const GenerationMemberIdFields = (props) => {
     } catch (error) {
       console.error('Invalid hash code')
     }
-  }, [ values, setFieldValue,query])
+  }, [values, setFieldValue, query])
 
   return (
     <Grid container spacing={3}>
@@ -159,7 +175,7 @@ const GenerationMemberIdFields = (props) => {
           }
         />
       </Grid>
-      <Grid id='grid_vat_input' item xs={12} sm={6}>
+      <Grid id="grid_vat_input" item xs={12} sm={6}>
         <TextField
           required
           id="vat"

@@ -65,13 +65,11 @@ const GenerationNoMemberFields = (props) => {
     catch(error){
         setFieldValue('member.postal_code_checked',true)
         setIsLoading(false)
-        console.log(error)
     } 
   },[values?.member?.postal_code, setFieldValue])
 
   useEffect(() => {
     if (values?.member?.postal_code?.length === 5) {
-      console.log("CRIDA AL CHECK")
         checkPostalCode()
     }
   }, [checkPostalCode,values?.member?.postal_code])

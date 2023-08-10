@@ -74,7 +74,8 @@ const GenerationContribution = (props) => {
       phone2: '',
       language: `${i18n.language}_ES`,
       has_generation_enabled_zone: true,
-      postal_code_checked: false
+      postal_code_checked: false,
+      generation_zone_checked: false
     },
     payment: {
       amount: '',
@@ -248,57 +249,65 @@ const GenerationContribution = (props) => {
     })
   ]
 
-  const nextStep = useCallback((props) => {
-    let next = activeStep + 1
-    const last = MAX_STEP_NUMBER
-    if (activeStep === 0 && props?.values?.member?.is_member) {
-      next++
-    }
+  const nextStep = useCallback(
+    (props) => {
+      let next = activeStep + 1
+      const last = MAX_STEP_NUMBER
+      if (activeStep === 0 && props?.values?.member?.is_member) {
+        next++
+      }
 
-    setActiveStep(Math.min(next, last))
+      setActiveStep(Math.min(next, last))
 
-    props.submitForm().then(() => {
-      if (props.isValid) {
-        setActiveStep(Math.min(next, last))
+      props.submitForm().then(() => {
+        if (props.isValid) {
+          setActiveStep(Math.min(next, last))
+          props.validateForm()
+          props.setTouched({})
+        }
+      })
+    },
+    [activeStep]
+  )
+
+  const prevStep = useCallback(
+    (props) => {
+      const prev = activeStep - 1
+      if (activeStep === 2 && props?.values?.member?.is_member) {
+        setActiveStep(Math.max(activeStep - 2, 0))
+      } else {
+        setActiveStep(Math.max(0, prev))
+      }
+      if (completed) {
+        setCompleted(false)
+        setError(false)
+      }
+      props.submitForm().then(() => {
         props.validateForm()
         props.setTouched({})
-      }
-    })
-  },[activeStep])
+      })
+    },
+    [activeStep, completed]
+  )
 
-  const prevStep = useCallback((props) => {
-    const prev = activeStep - 1
-    if (activeStep === 2 && props?.values?.member?.is_member) {
-      setActiveStep(Math.max(activeStep - 2, 0))
-    } else {
-    setActiveStep(Math.max(0, prev))
-    }
-    if (completed) {
-      setCompleted(false)
-      setError(false)
-    }
-    props.submitForm().then(() => {
-      props.validateForm()
-      props.setTouched({})
-    })
-  },[activeStep,completed])
-
-  const getNextButton = useCallback((canNextStep, formikProps) => {
-    console.log(formikProps)
-    return canNextStep ? (
-      <NextButton
-        disabled={!formikProps.isValid}
-        onClick={() => nextStep(formikProps)}
-        title={t('SEGUENT_PAS')}
-      />
-    ) : (
-      <ExitButton
-        disabled={!formikProps.isValid}
-        onClick={() => window.location.href = "/"}
-        title={t('EXIT')}
-      />
-    )
-  },[nextStep,t])
+  const getNextButton = useCallback(
+    (nextStepChecked, canNextStep, formikProps) => { 
+      return canNextStep ? (
+        <NextButton
+          disabled={activeStep === 0 ? !formikProps.isValid || !nextStepChecked : !formikProps.isValid}
+          onClick={() => nextStep(formikProps)}
+          title={t('SEGUENT_PAS')}
+        />
+      ) : (
+        <ExitButton
+          disabled={!formikProps.isValid}
+          onClick={() => (window.location.href = '/')}
+          title={t('EXIT')}
+        />
+      )
+    },
+    [nextStep, t]
+  )
 
   const handlePost = async (values) => {
     setSending(true)
@@ -364,7 +373,7 @@ const GenerationContribution = (props) => {
                 />
               )}
               {activeStep === 1 && (
-                  <PersonalData {...formikProps} entity="member" />
+                <PersonalData {...formikProps} entity="member" />
               )}
               {activeStep === 2 && (
                 <GenerationContributionForm {...formikProps} />
@@ -394,7 +403,11 @@ const GenerationContribution = (props) => {
                     />
                   )}
                   {activeStep < MAX_STEP_NUMBER - 1
-                    ? getNextButton(formikProps.values.member.has_generation_enabled_zone,formikProps)
+                    ? getNextButton(
+                        formikProps.values.member.generation_zone_checked,
+                        formikProps.values.member.has_generation_enabled_zone,
+                        formikProps
+                      )
                     : !completed && (
                         <SubmitButton
                           startIcon={

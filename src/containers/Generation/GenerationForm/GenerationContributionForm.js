@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -8,7 +8,6 @@ import IBANField from '../../../components/IBANField'
 import AddIcon from '@material-ui/icons/AddBox'
 import RemoveIcon from '@material-ui/icons/IndeterminateCheckBox'
 import Box from '@material-ui/core/Box'
-import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -156,7 +155,6 @@ const GenerationContributionForm = (props) => {
             })
           }}
         />
-        {/*TODO: POSAR ELS ESTILS CORRECTAMENT*/}
         <Grid container style={{ gap: '1rem' }}>
           <Grid item xs={12} md>
             <TextField
