@@ -24,9 +24,18 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
     })
   }, [t, assignmentsJSON, ordinals])
 
+  const assignmentsJSONSorted = useMemo(() => {
+      const assignmentsSorted = assignmentsJSON.sort((a,b) => a.priority - b.priority )
+      return assignmentsSorted.map((value, index) => {
+        value.priority = index
+        return value;
+      })
+  }, [assignmentsJSON])
+
+  console.log(assignmentsJSONSorted)
 
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
-  const [assignments, setAssignments] = useState(assignmentsJSON.sort((a,b) => a.priority - b.priority ))
+  const [assignments, setAssignments] = useState(assignmentsJSONSorted)
   const [investments] = useState(investmentsJSON)
   const [priorities] = useState(pioritiesJSON)
 
