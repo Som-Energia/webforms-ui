@@ -1,6 +1,6 @@
 # Change Log
 
-## Unrealeased 
+## 1.8.2 2023-08-23 
 
 - Fix: The way to sort the list of assignments, when there are low contracts
 - Fix: Indexed test with the new condition IsIndexedPilotOngoing
