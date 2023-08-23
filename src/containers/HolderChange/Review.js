@@ -229,9 +229,13 @@ const Review = (props) => {
           onAccept={handleAccept}
           onClose={handleClose}>
           <LegalText
-            language={values?.holder?.language}
-            documentName={"general-contract-terms"}
-          />
+          language={values?.holder?.language}
+          documentName={
+            values?.contract?.isIndexed
+            ?"general-and-indexed-specific-terms"
+            :"general-contract-terms"
+          }
+          ></LegalText>
         </TermsDialog>
 
         <Box mt={2}>
@@ -243,7 +247,11 @@ const Review = (props) => {
                 color="primary"
               />
             }
-            label={t('ACCEPT_TERMS')}
+            label={
+              values?.contract?.isIndexed
+                ? t('INDEXED_ACCEPT_CONDITIONS')
+                : t('PERIODS_ACCEPT_CONDITIONS')
+            }
           />
         </Box>
       </Box>
