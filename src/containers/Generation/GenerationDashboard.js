@@ -38,15 +38,8 @@ function GenerationDashboard({
 }) {
   const { t } = useTranslation()
   const classes = useStyles()
-  const { editingPriority, assignments, investments } =
+  const { editingPriority, assignments, investments, has_duplicate_priority_values } =
     useContext(GenerationContext)
-
-  const has_duplicate_priority_values = useCallback(() => {
-    let res =
-      new Set(assignments.map((item) => item['priority'])).size !==
-      assignments.length
-    return res
-  }, [assignments])
 
   const ActionSection = useCallback(() => {
     return (
