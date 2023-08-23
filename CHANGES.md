@@ -1,5 +1,10 @@
 # Change Log
 
+## Unrealeased 
+
+- Fix: The way to sort the list of assignments, when there are low contracts
+- Fix: Indexed test with the new condition IsIndexedPilotOngoing
+
 ## 1.8.1 2023-08-07
 
 - Fix: error message when contract with custom tariff try to change tariff
