@@ -24,11 +24,26 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
     })
   }, [t, assignmentsJSON, ordinals])
 
+  const assignmentsJSONSorted = useMemo(() => {
+      const tmpAssignments = JSON.parse(JSON.stringify(assignmentsJSON))
+      const assignmentsSorted = tmpAssignments.sort((a,b) => a.priority - b.priority )
+      return assignmentsSorted.map((value, index) => {
+        value.priority = index
+        return value;
+      })
+  }, [assignmentsJSON])
 
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
-  const [assignments, setAssignments] = useState(assignmentsJSON.sort((a,b) => a.priority - b.priority ))
+  const [assignments, setAssignments] = useState(assignmentsJSONSorted)
   const [investments] = useState(investmentsJSON)
   const [priorities] = useState(pioritiesJSON)
+
+  const has_duplicate_priority_values = useCallback(() => {
+    let res =
+      new Set(assignmentsJSON.map((item) => item['priority'])).size !==
+      assignmentsJSON.length
+    return res
+  }, [assignmentsJSON])
 
   const changeAssigmentPriority = useCallback(
     (origin, dest) => {
@@ -78,7 +93,8 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       setEditingPriority,
       getPriority,
       changeAssigmentPriority,
-      resetAssignments
+      resetAssignments,
+      has_duplicate_priority_values
     }),
     [
       assignments,
@@ -88,7 +104,8 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       setEditingPriority,
       investments,
       changeAssigmentPriority,
-      resetAssignments
+      resetAssignments,
+      has_duplicate_priority_values
     ]
   )
 

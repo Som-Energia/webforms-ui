@@ -75,6 +75,7 @@ describe('Test that it correctly renders', () => {
         contractValues={mockContractValues}
         setFieldValue={mockSetFieldValue}
         values={mockInitialValues}
+        isIndexedPilotOngoing={true}
       />
     )
     const legalTermsCheck = getById(

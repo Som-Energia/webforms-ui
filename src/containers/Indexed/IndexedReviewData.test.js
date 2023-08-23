@@ -137,6 +137,7 @@ describe('Test that it correctly renders', () => {
         setFieldValues={mockSetFieldValues}
         values={mockInitialValues}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
+        isIndexedPilotOngoing={true}
       />
     )
     const legalTermsCheck = getById(dom.container,'change-tariff-indexada-legal-terms-check')
