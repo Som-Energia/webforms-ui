@@ -32,8 +32,6 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
       })
   }, [assignmentsJSON])
 
-  console.log(assignmentsJSONSorted)
-
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
   const [assignments, setAssignments] = useState(assignmentsJSONSorted)
   const [investments] = useState(investmentsJSON)
