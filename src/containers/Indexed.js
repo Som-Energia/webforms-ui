@@ -36,6 +36,8 @@ import IndexedInfo from './Indexed/IndexedInfo'
 import indexedErrorText from './Indexed/IndexedError'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
+import getCommercialName from '../utils/tariffs'
+
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -180,7 +182,7 @@ const Indexada = (props) => {
       setLoadingTariff(true)
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
-      setHasTargetTariff(result?.data?.target_tariff)
+      setHasTargetTariff(getCommercialName(result?.data?.target_tariff))
       setKCoefficient(result?.data?.k_coefficient_eurkwh)
     } catch (error) {
       setLoadingTariff(false)
