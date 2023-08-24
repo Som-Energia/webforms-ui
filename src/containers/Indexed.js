@@ -232,9 +232,13 @@ const Indexada = (props) => {
 
   return (
     <>
-      {!loadingTariff ? (
+      {loadingTariff ? (
+        <Loading />
+      ) : (
         <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-          {!checkEnabled || hasTargetTariff ? (
+          {checkEnabled && !hasTargetTariff ? (
+            <Failure error={error} showHeader={false} />
+          ) : (
             <MuiPickersUtilsProvider utils={DayjsUtils}>
               <Grid container justifyContent="space-between">
                 <Grid item xs={8}>
@@ -442,12 +446,8 @@ const Indexada = (props) => {
                 </Grid>
               </Grid>
             </MuiPickersUtilsProvider>
-          ) : (
-            <Failure error={error} showHeader={false} />
           )}
         </GlobalHotKeys>
-      ) : (
-        <Loading />
       )}
     </>
   )
