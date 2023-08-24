@@ -47,12 +47,11 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-
 const Indexada = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { token, checkEnabled = true, isIndexedPilotOngoing=false } = props
+  const { token, checkEnabled = true, isIndexedPilotOngoing = false } = props
   const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
@@ -75,7 +74,6 @@ const Indexada = (props) => {
   }
 
   const sectionsJson = useMemo(() => {
-
     let sectionsJson = [
       {
         title: t('GENERAL_CONDITIONS'),
@@ -83,15 +81,16 @@ const Indexada = (props) => {
       }
     ]
 
-    if(!isTariffIndexed){
-      sectionsJson.push({
-        title: t('INDEXED_SPECIFIC_CONDITIONS'),
-        text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
-      },
-      {
-        title: t('INDEXED_MARGE'),
-        text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
-      }
+    if (!isTariffIndexed) {
+      sectionsJson.push(
+        {
+          title: t('INDEXED_SPECIFIC_CONDITIONS'),
+          text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
+        },
+        {
+          title: t('INDEXED_MARGE'),
+          text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
+        }
       )
     }
 
@@ -108,13 +107,11 @@ const Indexada = (props) => {
     )
 
     return sectionsJson
-  },[isTariffIndexed, t, kCoefficient, hasTargetTariff])
-
-
+  }, [isTariffIndexed, t, kCoefficient, hasTargetTariff])
 
   const initialValues = {
     terms_accepted: false,
-    particular_contract_terms_accepted: false,
+    particular_contract_terms_accepted: false
   }
 
   const nextStep = (props) => {
@@ -147,14 +144,16 @@ const Indexada = (props) => {
     let params = {
       token: token,
       general_contract_terms_accepted: data.terms_accepted,
-      particular_contract_terms_accepted: data.particular_contract_terms_accepted
-     }
+      particular_contract_terms_accepted:
+        data.particular_contract_terms_accepted
+    }
 
     if (!isTariffIndexed) {
       // Not indexed, moving to an indexed, requiring those checks
       params.indexed_specific_terms_accepted = data.terms_accepted
       if (isIndexedPilotOngoing) {
-        params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
+        params.indexed_pilot_legal_terms_accepted =
+          data.indexed_legal_terms_accepted
       }
     }
 
@@ -209,11 +208,12 @@ const Indexada = (props) => {
         .oneOf([true], t('UNACCEPTED_TERMS')),
       indexed_legal_terms_accepted: Yup.bool().when([], {
         is: () => !isTariffIndexed,
-        then: Yup.bool().required(t('UNACCEPTED_TERMS')) &&
-              Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
-        otherwise: Yup.bool().notRequired(),
-    })
+        then:
+          Yup.bool().required(t('UNACCEPTED_TERMS')) &&
+          Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
+        otherwise: Yup.bool().notRequired()
       })
+    })
   ]
 
   if (!contractJSON.name || !contractJSON.cups) {
@@ -274,31 +274,33 @@ const Indexada = (props) => {
                                     isTariff20={isTariff20}
                                     isTariff30={isTariff30}
                                     isTariffIndexed={isTariffIndexed}
-                                    desc={t(isTariffIndexed
-                                      ? 'PERIODS_INTRO_BODY'
-                                      : 'INDEXED_INTRO_BODY'
-                                      , {
-                                      url_tariff_index_characteristics: t(
-                                        isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
-                                        : isTariff30
-                                        ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
-                                        : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
+                                    desc={t(
+                                      isTariffIndexed
+                                        ? 'PERIODS_INTRO_BODY'
+                                        : 'INDEXED_INTRO_BODY',
+                                      {
+                                        url_tariff_index_characteristics: t(
+                                          isTariff20
+                                            ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
+                                            : isTariff30
+                                            ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
+                                            : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
                                         ),
-                                      url_general_conditions: t(
-                                        'GENERAL_CONDITIONS_URL'
-                                      ),
-                                      url_specific_conditions: t(
-                                        'INDEXED_SPECIFIC_CONDITIONS_URL'
-                                      ),
-                                      url_tariff_characteristics: t(
-                                        isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                        : isTariff30
-                                        ? 'TARIFF_CHARACTERISTICS_30_URL'
-                                        : 'TARIFF_CHARACTERISTICS_6_URL'
-                                      )
-                                    })}
+                                        url_general_conditions: t(
+                                          'GENERAL_CONDITIONS_URL'
+                                        ),
+                                        url_specific_conditions: t(
+                                          'INDEXED_SPECIFIC_CONDITIONS_URL'
+                                        ),
+                                        url_tariff_characteristics: t(
+                                          isTariff20
+                                            ? 'TARIFF_CHARACTERISTICS_20_URL'
+                                            : isTariff30
+                                            ? 'TARIFF_CHARACTERISTICS_30_URL'
+                                            : 'TARIFF_CHARACTERISTICS_6_URL'
+                                        )
+                                      }
+                                    )}
                                     {...formikProps}
                                   />
                                 ) : null}
@@ -310,35 +312,39 @@ const Indexada = (props) => {
                                     title={t('INDEXED_INTRO_TITLE')}
                                     desc={
                                       isTariffIndexed
-                                      ? t(isTariff20
-                                        ? 'PERIODS_IMPORTANT_INFO_BODY'
-                                        : isTariff30
-                                        ? 'PERIODS_IMPORTANT_INFO_BODY_30'
-                                        : 'PERIODS_IMPORTANT_INFO_BODY_6',
-                                      {
-                                        url_tariff_characteristics: t(
-                                          isTariff20
-                                          ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                          : isTariff30
-                                          ? 'TARIFF_CHARACTERISTICS_30_URL'
-                                          : 'TARIFF_CHARACTERISTICS_6_URL'
-                                        ),
-                                        url_tariff_web: t(
-                                          isTariff20
-                                          ? 'TARIFF_WEB_URL'
-                                          : isTariff30
-                                          ? 'TARIFF_WEB_30_URL'
-                                          : 'TARIFF_WEB_6_URL'
-                                        ),
-                                      })
-                                      : t(isTariff20
-                                        ? 'INDEXED_IMPORTANT_INFO_BODY'
-                                        : 'INDEXED_IMPORTANT_INFO_BODY_30',
-                                      {
-                                        url_indexada_help: t(
-                                          'TARIFF_INDEXED_HELP_URL'
-                                        ),
-                                      })
+                                        ? t(
+                                            isTariff20
+                                              ? 'PERIODS_IMPORTANT_INFO_BODY'
+                                              : isTariff30
+                                              ? 'PERIODS_IMPORTANT_INFO_BODY_30'
+                                              : 'PERIODS_IMPORTANT_INFO_BODY_6',
+                                            {
+                                              url_tariff_characteristics: t(
+                                                isTariff20
+                                                  ? 'TARIFF_CHARACTERISTICS_20_URL'
+                                                  : isTariff30
+                                                  ? 'TARIFF_CHARACTERISTICS_30_URL'
+                                                  : 'TARIFF_CHARACTERISTICS_6_URL'
+                                              ),
+                                              url_tariff_web: t(
+                                                isTariff20
+                                                  ? 'TARIFF_WEB_URL'
+                                                  : isTariff30
+                                                  ? 'TARIFF_WEB_30_URL'
+                                                  : 'TARIFF_WEB_6_URL'
+                                              )
+                                            }
+                                          )
+                                        : t(
+                                            isTariff20
+                                              ? 'INDEXED_IMPORTANT_INFO_BODY'
+                                              : 'INDEXED_IMPORTANT_INFO_BODY_30',
+                                            {
+                                              url_indexada_help: t(
+                                                'TARIFF_INDEXED_HELP_URL'
+                                              )
+                                            }
+                                          )
                                     }
                                     {...formikProps}
                                   />
@@ -347,7 +353,9 @@ const Indexada = (props) => {
                                   <IndexedReview
                                     isTariff20={isTariff20}
                                     isTariffIndexed={isTariffIndexed}
-                                    isIndexedPilotOngoing={isIndexedPilotOngoing}
+                                    isIndexedPilotOngoing={
+                                      isIndexedPilotOngoing
+                                    }
                                     targetTariff={hasTargetTariff}
                                     contractValues={contractJSON}
                                     {...formikProps}
@@ -416,13 +424,17 @@ const Indexada = (props) => {
                                 {result ? (
                                   <Success
                                     showHeader={false}
-                                    title={t(isTariffIndexed
-                                      ? 'PERIODS_SUCCESS_PAGE_TITLE'
-                                      : 'INDEXED_SUCCESS_PAGE_TITLE')}
+                                    title={t(
+                                      isTariffIndexed
+                                        ? 'PERIODS_SUCCESS_PAGE_TITLE'
+                                        : 'INDEXED_SUCCESS_PAGE_TITLE'
+                                    )}
                                     subtitle={hasTargetTariff}
-                                    description={t(isTariffIndexed
-                                      ? 'PERIODS_SUCCESS_PAGE_DESC'
-                                      : 'INDEXED_SUCCESS_PAGE_DESC')}
+                                    description={t(
+                                      isTariffIndexed
+                                        ? 'PERIODS_SUCCESS_PAGE_DESC'
+                                        : 'INDEXED_SUCCESS_PAGE_DESC'
+                                    )}
                                   />
                                 ) : (
                                   <Failure error={error} showHeader={false} />
@@ -441,7 +453,7 @@ const Indexada = (props) => {
                 <Grid item xs={3}>
                   <DropDownMenu
                     title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
-                      sections={sectionsJson}
+                    sections={sectionsJson}
                   />
                 </Grid>
               </Grid>
