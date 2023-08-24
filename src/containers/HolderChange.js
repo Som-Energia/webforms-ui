@@ -300,6 +300,9 @@ function HolderChange(props) {
     if (next === 4 && values?.member?.become_member === true) {
       next++
     }
+    if (next === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+      next += 2
+    }
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -314,6 +317,9 @@ function HolderChange(props) {
     }
     if (prev === 4 && values?.member?.become_member === true) {
       prev--
+    }
+    if (prev === 4 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+      prev -= 2
     }
     setActiveStep(Math.max(0, prev))
     actions.setTouched({})
