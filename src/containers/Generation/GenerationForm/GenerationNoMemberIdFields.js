@@ -21,6 +21,16 @@ const useStyles = makeStyles((theme) => ({
   },
   titleWithMarginPlus: {
     marginBottom: theme.spacing(3)
+  },
+  helperText: {
+    color: "#f44336",
+    marginRight: "14px",
+    fontSize: "0.75rem",
+    marginTop: "3px",
+    textAlign: "left",
+    lineHeight: "1.66",
+    letterSpacing: "0.03333em",
+    fontWeight: 400
   }
 }))
 
@@ -35,6 +45,7 @@ const GenerationNoMemberFields = (props) => {
     errors,
     touched,
     setFieldValue,
+    setErrors,
     setFieldTouched
   } = props
 
@@ -67,18 +78,22 @@ const GenerationNoMemberFields = (props) => {
       setFieldValue('member.postal_code_checked', true)
       setIsLoading(false)
     } catch (error) {
-      setFieldValue('member.generation_zone_checked', true)
-      setFieldValue('member.postal_code_checked', true)
+      setErrors({
+        member: {
+          postal_code: t(
+            'GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED'
+          )
+        }
+      })
       setIsLoading(false)
     }
-  }, [values?.member?.postal_code, setFieldValue])
+  }, [values?.member?.postal_code, setFieldValue, setErrors, t])
 
   useEffect(() => {
     if (values?.member?.postal_code?.length === 5) {
       checkPostalCode()
     }
   }, [checkPostalCode, values?.member?.postal_code])
-
 
   return (
     <>
@@ -103,7 +118,13 @@ const GenerationNoMemberFields = (props) => {
             onBlur={handleBlur}
             error={errors?.member?.postal_code && touched?.member?.postal_code}
             helperText={
-              touched?.member?.postal_code && errors?.member?.postal_code
+              touched?.member?.postal_code &&  errors?.member?.postal_code ? <Typography
+              variant="h6"
+              className={classes.helperText}
+              dangerouslySetInnerHTML={{
+                __html: errors?.member?.postal_code
+              }}
+            /> : ""
             }
             InputProps={{
               endAdornment: (
