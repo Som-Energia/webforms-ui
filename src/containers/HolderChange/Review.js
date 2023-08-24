@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, isTariffIndexed } = props
 
   const [open, setOpen] = useState(false)
 
@@ -231,7 +231,7 @@ const Review = (props) => {
           <LegalText
           language={values?.holder?.language}
           documentName={
-            values?.contract?.isIndexed
+            isTariffIndexed
             ?"general-and-indexed-specific-terms"
             :"general-contract-terms"
           }
@@ -248,7 +248,7 @@ const Review = (props) => {
               />
             }
             label={
-              values?.contract?.isIndexed
+              isTariffIndexed
                 ? t('INDEXED_ACCEPT_CONDITIONS')
                 : t('PERIODS_ACCEPT_CONDITIONS')
             }
