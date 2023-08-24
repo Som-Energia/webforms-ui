@@ -39,10 +39,10 @@ const GenerationNoMemberFields = (props) => {
   } = props
 
   const onChangeVAT = (params) => {
-    const { vat, isPhisical, valid } = params
+    const { vat, isPhisical, valid, exists } = params
     setFieldValue('member.isphisical', isPhisical, false)
     setFieldValue('member.vatvalid', valid, false)
-    setFieldValue('member.exists', false, false)
+    setFieldValue('member.exists', exists, false)
     setFieldValue('member.vat', vat)
     if (vat !== '') {
       setFieldTouched('member.vat', true)
@@ -78,6 +78,7 @@ const GenerationNoMemberFields = (props) => {
       checkPostalCode()
     }
   }, [checkPostalCode, values?.member?.postal_code])
+
 
   return (
     <>

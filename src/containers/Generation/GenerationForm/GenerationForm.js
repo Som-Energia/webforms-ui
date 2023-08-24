@@ -12,8 +12,6 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 
-import DisplayFormikState from '../../../components/DisplayFormikState'
-
 import SendIcon from '@material-ui/icons/Send'
 
 import GenerationMemberIdentifier from './GenerationMemberIdentifier'
@@ -22,7 +20,6 @@ import GenerationReview from './GenerationReview'
 
 import Failure from '../../Failure'
 import Success from '../../Success'
-
 import {
   contributionParams,
   normalizeContribution,
@@ -41,12 +38,12 @@ const GenerationContribution = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -86,6 +83,7 @@ const GenerationContribution = (props) => {
     number_of_actions: 0,
     annual_use: 0,
     privacy_policy_accepted: false,
+    privacy_policy_accepted_responsible_declaration: false,
     percent_over_annual_use: 0
   }
 
@@ -243,7 +241,7 @@ const GenerationContribution = (props) => {
       })
     }),
     Yup.object().shape({
-      privacy_policy_accepted: Yup.bool()
+      privacy_policy_accepted_responsible_declaration: Yup.bool()
         .required(t('HAY QUE ACEPTAR LA POLÍTICA DE PRIVACIDAD'))
         .oneOf([true], t('PRIVATE_POLICY'))
     })
@@ -291,10 +289,14 @@ const GenerationContribution = (props) => {
   )
 
   const getNextButton = useCallback(
-    (nextStepChecked, canNextStep, formikProps) => { 
+    (nextStepChecked, canNextStep, formikProps) => {
       return canNextStep ? (
         <NextButton
-          disabled={activeStep === 0 ? !formikProps.isValid || !nextStepChecked : !formikProps.isValid}
+          disabled={
+            activeStep === 0
+              ? !formikProps.isValid || !nextStepChecked
+              : !formikProps.isValid
+          }
           onClick={() => nextStep(formikProps)}
           title={t('SEGUENT_PAS')}
         />
@@ -349,86 +351,86 @@ const GenerationContribution = (props) => {
           ? error?.response?.data?.data
           : { code: 'UNEXPECTED' }
         setError(errorResp)
-      })
+      }) 
     setSending(false)
     setActiveStep(MAX_STEP_NUMBER)
     setCompleted(true)
   }
 
   return (
-    <Formik
-      onSubmit={() => {}}
-      enableReinitialize
-      initialValues={initialValues}
-      validationSchema={validationSchemas[activeStep]}
-      validateOnMount={true}>
-      {(formikProps) => (
-        <Form className={classes.root} noValidate autoComplete="off">
-          <Container maxWidth="md" disableGutters={true}>
-            <Paper elevation={0} className={classes.stepContainer}>
-              {activeStep === 0 && (
-                <GenerationMemberIdentifier
-                  {...formikProps}
-                  title={t('GENERATION_FORM_TITLE')}
-                />
-              )}
-              {activeStep === 1 && (
-                <PersonalData {...formikProps} entity="member" />
-              )}
-              {activeStep === 2 && (
-                <GenerationContributionForm {...formikProps} />
-              )}
-              {activeStep === 3 && <GenerationReview {...formikProps} />}
+      <Formik
+        onSubmit={() => {}}
+        enableReinitialize
+        initialValues={initialValues}
+        validationSchema={validationSchemas[activeStep]}
+        validateOnMount={true}>
+        {(formikProps) => (
+          <Form className={classes.root} noValidate autoComplete="off">
+            <Container maxWidth="md" disableGutters={true}>
+              <Paper elevation={0} className={classes.stepContainer}>
+                {activeStep === 0 && (
+                  <GenerationMemberIdentifier
+                    {...formikProps}
+                    title={t('GENERATION_FORM_TITLE')}
+                  />
+                )}
+                {activeStep === 1 && (
+                  <PersonalData {...formikProps} entity="member" />
+                )}
+                {activeStep === 2 && (
+                  <GenerationContributionForm {...formikProps} />
+                )}
+                {activeStep === 3 && <GenerationReview {...formikProps} />}
 
-              {completed && (
-                <Box mx={0} mb={1}>
-                  {error ? (
-                    <Failure error={error} />
-                  ) : (
-                    <Success
-                      description="CONTRIBUTION_OK_MSG"
-                      result={result}
-                    />
-                  )}
+                {completed && (
+                  <Box mx={0} mb={1}>
+                    {error ? (
+                      <Failure error={error} />
+                    ) : (
+                      <Success
+                        description="CONTRIBUTION_OK_MSG"
+                        result={result}
+                      />
+                    )}
+                  </Box>
+                )}
+
+                <Box mx={0} mt={2} mb={3}>
+                  <div className={classes.actionsContainer}>
+                    {result?.investment === undefined && (
+                      <PrevButton
+                        disabled={activeStep === 0 || sending}
+                        onClick={() => prevStep(formikProps)}
+                        title={t('PAS_ANTERIOR')}
+                      />
+                    )}
+                    {activeStep < MAX_STEP_NUMBER - 1
+                      ? getNextButton(
+                          formikProps.values.member.generation_zone_checked,
+                          formikProps.values.member.has_generation_enabled_zone,
+                          formikProps
+                        )
+                      : !completed && (
+                          <SubmitButton
+                            startIcon={
+                              sending ? (
+                                <CircularProgress size={24} />
+                              ) : (
+                                <SendIcon />
+                              )
+                            }
+                            disabled={sending || !formikProps.isValid}
+                            onClick={() => handlePost(formikProps.values)}
+                            title={t('SEND')}
+                          />
+                        )}
+                  </div>
                 </Box>
-              )}
-
-              <Box mx={0} mt={2} mb={3}>
-                <div className={classes.actionsContainer}>
-                  {result?.investment === undefined && (
-                    <PrevButton
-                      disabled={activeStep === 0 || sending}
-                      onClick={() => prevStep(formikProps)}
-                      title={t('PAS_ANTERIOR')}
-                    />
-                  )}
-                  {activeStep < MAX_STEP_NUMBER - 1
-                    ? getNextButton(
-                        formikProps.values.member.generation_zone_checked,
-                        formikProps.values.member.has_generation_enabled_zone,
-                        formikProps
-                      )
-                    : !completed && (
-                        <SubmitButton
-                          startIcon={
-                            sending ? (
-                              <CircularProgress size={24} />
-                            ) : (
-                              <SendIcon />
-                            )
-                          }
-                          disabled={sending || !formikProps.isValid}
-                          onClick={() => handlePost(formikProps.values)}
-                          title={t('SEND')}
-                        />
-                      )}
-                </div>
-              </Box>
-            </Paper>
-          </Container>
-        </Form>
-      )}
-    </Formik>
+              </Paper>
+            </Container>
+          </Form>
+        )}
+      </Formik>
   )
 }
 
