@@ -16,6 +16,9 @@ import Paper from '@material-ui/core/Paper'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
+import Typography from '@material-ui/core/Typography'
+import Alert from '@material-ui/lab/Alert'
+
 
 import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
@@ -300,8 +303,9 @@ function HolderChange(props) {
     if (next === 4 && values?.member?.become_member === true) {
       next++
     }
+    // Neighbour comunity cannot become a member
     if (next === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
-      next += 2
+      next += 1
     }
 
     const last = MAX_STEP_NUMBER
@@ -318,8 +322,9 @@ function HolderChange(props) {
     if (prev === 4 && values?.member?.become_member === true) {
       prev--
     }
-    if (prev === 4 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
-      prev -= 2
+    // Neighbour comunity cannot become a member
+    if (prev === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+      prev -= 1
     }
     setActiveStep(Math.max(0, prev))
     actions.setTouched({})
@@ -496,8 +501,27 @@ function HolderChange(props) {
                                 {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
                               </Button>
                             )}
+                         </div>
+                        </Box>
+                        <Box mx={0} mt={2} mb={3}>
+                          <div className={classes.actionsContainer}>
+                            {activeStep === 4 && (RegExp(/(^[H])/).test(props.values?.holder?.vat)) && (
+                              <>
+                                <Box mt={3}>
+                                  <Alert severity="warning">
+                                    <Typography
+                                      variant="body1"
+                                      dangerouslySetInnerHTML={{
+                                        __html: t('CIF_COMMUNITY_OWNERS')
+                                      }}
+                                    />
+                                  </Alert>
+                                </Box>
+                              </>
+                            )}
                           </div>
                         </Box>
+
                       </Paper>
                     }
                   </Form>
