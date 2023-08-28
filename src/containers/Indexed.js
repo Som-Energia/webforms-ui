@@ -260,6 +260,20 @@ const Indexada = (props) => {
       : t('TARIFF_WEB_6_URL')
   }
 
+  const importantInfoBody = isTariffIndexed
+    ? isTariff20
+      ? t('PERIODS_IMPORTANT_INFO_BODY', translatedUrls)
+      : isTariff30
+      ? t('PERIODS_IMPORTANT_INFO_BODY_30', translatedUrls)
+      : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
+    : isTariff20
+    ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
+    : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
+
+  const introBody = isTariffIndexed
+    ? t('PERIODS_INTRO_BODY', translatedUrls)
+    : t('INDEXED_INTRO_BODY', translatedUrls)
+
   return (
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
@@ -298,12 +312,7 @@ const Indexada = (props) => {
                                 isTariff20={isTariff20}
                                 isTariff30={isTariff30}
                                 isTariffIndexed={isTariffIndexed}
-                                desc={
-                                  (isTariffIndexed
-                                    ? t('PERIODS_INTRO_BODY')
-                                    : t('INDEXED_INTRO_BODY'),
-                                  translatedUrls)
-                                }
+                                desc={introBody}
                                 {...formikProps}
                               />
                             ) : null}
@@ -313,19 +322,7 @@ const Indexada = (props) => {
                                 isTariff30={isTariff30}
                                 isTariffIndexed={isTariffIndexed}
                                 title={t('INDEXED_INTRO_TITLE')}
-                                desc={
-                                  isTariffIndexed
-                                    ? (isTariff20
-                                        ? t('PERIODS_IMPORTANT_INFO_BODY')
-                                        : isTariff30
-                                        ? t('PERIODS_IMPORTANT_INFO_BODY_30')
-                                        : t('PERIODS_IMPORTANT_INFO_BODY_6'),
-                                      translatedUrls)
-                                    : (isTariff20
-                                        ? t('INDEXED_IMPORTANT_INFO_BODY')
-                                        : t('INDEXED_IMPORTANT_INFO_BODY_30'),
-                                      translatedUrls)
-                                }
+                                desc={importantInfoBody}
                                 {...formikProps}
                               />
                             ) : null}
