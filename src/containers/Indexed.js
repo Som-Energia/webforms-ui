@@ -298,12 +298,12 @@ const Indexada = (props) => {
                                 isTariff20={isTariff20}
                                 isTariff30={isTariff30}
                                 isTariffIndexed={isTariffIndexed}
-                                desc={t(
-                                  isTariffIndexed
-                                    ? 'PERIODS_INTRO_BODY'
-                                    : 'INDEXED_INTRO_BODY',
-                                  translatedUrls
-                                )}
+                                desc={
+                                  (isTariffIndexed
+                                    ? t('PERIODS_INTRO_BODY')
+                                    : t('INDEXED_INTRO_BODY'),
+                                  translatedUrls)
+                                }
                                 {...formikProps}
                               />
                             ) : null}
@@ -315,20 +315,16 @@ const Indexada = (props) => {
                                 title={t('INDEXED_INTRO_TITLE')}
                                 desc={
                                   isTariffIndexed
-                                    ? t(
-                                        isTariff20
-                                          ? 'PERIODS_IMPORTANT_INFO_BODY'
-                                          : isTariff30
-                                          ? 'PERIODS_IMPORTANT_INFO_BODY_30'
-                                          : 'PERIODS_IMPORTANT_INFO_BODY_6',
-                                        translatedUrls
-                                      )
-                                    : t(
-                                        isTariff20
-                                          ? 'INDEXED_IMPORTANT_INFO_BODY'
-                                          : 'INDEXED_IMPORTANT_INFO_BODY_30',
-                                        translatedUrls
-                                      )
+                                    ? (isTariff20
+                                        ? t('PERIODS_IMPORTANT_INFO_BODY')
+                                        : isTariff30
+                                        ? t('PERIODS_IMPORTANT_INFO_BODY_30')
+                                        : t('PERIODS_IMPORTANT_INFO_BODY_6'),
+                                      translatedUrls)
+                                    : (isTariff20
+                                        ? t('INDEXED_IMPORTANT_INFO_BODY')
+                                        : t('INDEXED_IMPORTANT_INFO_BODY_30'),
+                                      translatedUrls)
                                 }
                                 {...formikProps}
                               />
