@@ -239,6 +239,33 @@ const Indexada = (props) => {
       </GlobalHotKeys>
     )
 
+  const translatedUrls = {
+    url_general_conditions: t('GENERAL_CONDITIONS_URL'),
+    url_specific_conditions: t('INDEXED_SPECIFIC_CONDITIONS_URL'),
+    url_indexada_help: t('TARIFF_INDEXED_HELP_URL'),
+    url_tariff_index_characteristics: t(
+      isTariff20
+        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
+        : isTariff30
+        ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
+        : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
+    ),
+    url_tariff_characteristics: t(
+      isTariff20
+        ? 'TARIFF_CHARACTERISTICS_20_URL'
+        : isTariff30
+        ? 'TARIFF_CHARACTERISTICS_30_URL'
+        : 'TARIFF_CHARACTERISTICS_6_URL'
+    ),
+    url_tariff_web: t(
+      isTariff20
+        ? 'TARIFF_WEB_URL'
+        : isTariff30
+        ? 'TARIFF_WEB_30_URL'
+        : 'TARIFF_WEB_6_URL'
+    )
+  }
+
   return (
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
@@ -281,28 +308,7 @@ const Indexada = (props) => {
                                   isTariffIndexed
                                     ? 'PERIODS_INTRO_BODY'
                                     : 'INDEXED_INTRO_BODY',
-                                  {
-                                    url_tariff_index_characteristics: t(
-                                      isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
-                                        : isTariff30
-                                        ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
-                                        : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
-                                    ),
-                                    url_general_conditions: t(
-                                      'GENERAL_CONDITIONS_URL'
-                                    ),
-                                    url_specific_conditions: t(
-                                      'INDEXED_SPECIFIC_CONDITIONS_URL'
-                                    ),
-                                    url_tariff_characteristics: t(
-                                      isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                        : isTariff30
-                                        ? 'TARIFF_CHARACTERISTICS_30_URL'
-                                        : 'TARIFF_CHARACTERISTICS_6_URL'
-                                    )
-                                  }
+                                  translatedUrls
                                 )}
                                 {...formikProps}
                               />
@@ -321,32 +327,13 @@ const Indexada = (props) => {
                                           : isTariff30
                                           ? 'PERIODS_IMPORTANT_INFO_BODY_30'
                                           : 'PERIODS_IMPORTANT_INFO_BODY_6',
-                                        {
-                                          url_tariff_characteristics: t(
-                                            isTariff20
-                                              ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                              : isTariff30
-                                              ? 'TARIFF_CHARACTERISTICS_30_URL'
-                                              : 'TARIFF_CHARACTERISTICS_6_URL'
-                                          ),
-                                          url_tariff_web: t(
-                                            isTariff20
-                                              ? 'TARIFF_WEB_URL'
-                                              : isTariff30
-                                              ? 'TARIFF_WEB_30_URL'
-                                              : 'TARIFF_WEB_6_URL'
-                                          )
-                                        }
+                                        translatedUrls
                                       )
                                     : t(
                                         isTariff20
                                           ? 'INDEXED_IMPORTANT_INFO_BODY'
                                           : 'INDEXED_IMPORTANT_INFO_BODY_30',
-                                        {
-                                          url_indexada_help: t(
-                                            'TARIFF_INDEXED_HELP_URL'
-                                          )
-                                        }
+                                        translatedUrls
                                       )
                                 }
                                 {...formikProps}
