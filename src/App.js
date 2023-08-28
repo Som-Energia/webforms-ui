@@ -70,7 +70,9 @@ const App = (props) => {
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
   const Indexed = lazy(() => import('./containers/Indexed'))
   const Generation = lazy(() => import('./containers/Generation'))
-  const GenerationContribution = lazy(() => import('./containers/Generation/GenerationForm/GenerationForm'))
+  const GenerationContribution = lazy(() =>
+    import('./containers/Generation/GenerationForm/GenerationForm')
+  )
 
   const loadContractData = () => {
     const contractData =
@@ -397,7 +399,11 @@ const App = (props) => {
                 />
 
                 <Route
-                  path="/generation/contribution/"
+                  path="/:language/generationkwh/contribution/"
+                  element={<GenerationContribution {...props} token={token} />}
+                />
+                <Route
+                  path="/generationkwh/contribution/"
                   element={<GenerationContribution {...props} token={token} />}
                 />
               </Routes>

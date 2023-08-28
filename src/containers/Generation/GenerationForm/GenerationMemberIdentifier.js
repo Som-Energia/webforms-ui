@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const MemberIdentifier = (props) => {
+const GenerationMemberIdentifier = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -190,4 +190,4 @@ const MemberIdentifier = (props) => {
   )
 }
 
-export default MemberIdentifier
+export default GenerationMemberIdentifier

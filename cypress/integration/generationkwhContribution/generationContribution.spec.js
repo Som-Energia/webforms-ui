@@ -7,8 +7,8 @@ describe('Generation Form', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/generation/contribution')
-    cy.fixture('generationContribution.json').as('data')
+    cy.visit('/generationkwh/contribution')
+    cy.fixture('generationkwhContribution.json').as('data')
   })
 
   it('Contribute with an action', function () {

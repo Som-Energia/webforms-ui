@@ -62,7 +62,6 @@ const GenerationMemberIdFields = (props) => {
         )
         if (member?.state === true) {
           setError(false)
-          setFieldValue('member.checked', true)
         } else {
           setError(true)
           setFieldValue('member.checked', false)
@@ -75,6 +74,7 @@ const GenerationMemberIdFields = (props) => {
           memberNumber: values.member.number,
           memberVat: values.member.vat
         })
+        setFieldValue('member.checked', true)
         setFieldValue('member.has_generation_enabled_zone', res.data)
         setErrors({'member':{'has_generation_enabled_zone':false}})
       } catch (error) {
