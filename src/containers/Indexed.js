@@ -243,27 +243,21 @@ const Indexada = (props) => {
     url_general_conditions: t('GENERAL_CONDITIONS_URL'),
     url_specific_conditions: t('INDEXED_SPECIFIC_CONDITIONS_URL'),
     url_indexada_help: t('TARIFF_INDEXED_HELP_URL'),
-    url_tariff_index_characteristics: t(
-      isTariff20
-        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
-        : isTariff30
-        ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
-        : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
-    ),
-    url_tariff_characteristics: t(
-      isTariff20
-        ? 'TARIFF_CHARACTERISTICS_20_URL'
-        : isTariff30
-        ? 'TARIFF_CHARACTERISTICS_30_URL'
-        : 'TARIFF_CHARACTERISTICS_6_URL'
-    ),
-    url_tariff_web: t(
-      isTariff20
-        ? 'TARIFF_WEB_URL'
-        : isTariff30
-        ? 'TARIFF_WEB_30_URL'
-        : 'TARIFF_WEB_6_URL'
-    )
+    url_tariff_index_characteristics: isTariff20
+      ? t('TARIFF_CHARACTERISTICS_INDEX_20_URL')
+      : isTariff30
+      ? t('TARIFF_CHARACTERISTICS_INDEX_30_URL')
+      : t('TARIFF_CHARACTERISTICS_INDEX_6_URL'),
+    url_tariff_characteristics: isTariff20
+      ? t('TARIFF_CHARACTERISTICS_20_URL')
+      : isTariff30
+      ? t('TARIFF_CHARACTERISTICS_30_URL')
+      : t('TARIFF_CHARACTERISTICS_6_URL'),
+    url_tariff_web: isTariff20
+      ? t('TARIFF_WEB_URL')
+      : isTariff30
+      ? t('TARIFF_WEB_30_URL')
+      : t('TARIFF_WEB_6_URL')
   }
 
   return (
