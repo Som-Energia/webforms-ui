@@ -1,6 +1,6 @@
 # Change Log
 
-## Unrealeased
+## 1.9.0 2023-08-29
 
 - Added: Generation kwh. the way for partners
 
