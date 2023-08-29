@@ -670,5 +670,6 @@
     "GENERATION_FORM_INFO_ZONE_NOT_ENABLED_TEXT":"Anirem obrint-les de manera progressiva, ampliant l’àmbit territorial fins a arribar a la participació de totes les sòcies, persones o entitats (si abans no s’han cobert totes les inscripcions entre les sòcies de les zones properes). Trobaràs tota la informació a l’apartat del Generation kWh del <a href=\"{{url}}\">Centre d’Ajuda.</a>",
     "GENERATION_FORM_INFO_NOT_VALID_DATA_OF_PARTNER":"Si et sembla que tenim malament les teves dades de residència, escriu-nos a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
     "GENERATION_FORM_HELP_CENTER_URL":"https://ca.support.somenergia.coop/category/580-generation-kwh",
-    "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"No hem pogut validar les dades, posa't en contacte amb <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> perquè et puguem donar un cop de mà"
+    "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"No hem pogut validar les dades, posa't en contacte amb <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> perquè et puguem donar un cop de mà",
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_IDENTIFIER_DESC":"Tingues en compte que per poder participar en el Generation kWh és necessari que siguis soci o sòcia de la cooperativa."
 }

@@ -669,5 +669,6 @@
     "GENERATION_FORM_INFO_ZONE_NOT_ENABLED_TEXT":"Aukera berriak ematen joango gara pixkanaka, lurralde-eremua zabalduz, bazkide diren pertsona eta erakunde guztiei parte hartzeko aukera eman arte (baldin eta hurbileko eskualdeetako bazkideen izen-emateak ez badira nahikoak).  <a href=\"{{url}}\">Centro de Ayuda.</a> Generation kWh atalean informazio guztia aurkituko duzu.",
     "GENERATION_FORM_INFO_NOT_VALID_DATA_OF_PARTNER":"Uste baduzu zure bizilekuaren gaineko datuak ez direla zuzenak, bidali mezu bat <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
     "GENERATION_FORM_HELP_CENTER_URL":"https://eu.support.somenergia.coop/category/580-generation-kwh",
-    "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"Ezin izan ditugu datuak balioztatu, mesedez jarri harremanetan <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>, esku bat eman diezazugun."
+    "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"Ezin izan ditugu datuak balioztatu, mesedez jarri harremanetan <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>, esku bat eman diezazugun.",
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_IDENTIFIER_DESC":"Kontuan hartu Generation kWh proiektuan parte hartzeko Kooperatibako bazkide izan behar duzula."
 }

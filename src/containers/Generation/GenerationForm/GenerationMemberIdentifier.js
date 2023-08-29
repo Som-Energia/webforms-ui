@@ -61,7 +61,7 @@ const GenerationMemberIdentifier = (props) => {
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: t('CONTRIBUTION_MEMBER_IDENTIFIER_DESC')
+          __html: t('GENERATION_FORM_CONTRIBUTION_MEMBER_IDENTIFIER_DESC')
         }}
       />
       <Box pt={0} mb={1}>
