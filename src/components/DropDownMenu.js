@@ -68,7 +68,7 @@ export default function DropDownMenu({ title, sections = [] }) {
     <div>
       {title ? (
         <Grid container item className={classes.menuTitle}>
-          <Typography style={{fontSize:'16px'}} variant="subtitle">{title}</Typography>
+          <Typography style={{fontSize:'16px'}} variant="subtitle1">{title}</Typography>
         </Grid>
       ) : null}
       {sections.map((element, index) => {
