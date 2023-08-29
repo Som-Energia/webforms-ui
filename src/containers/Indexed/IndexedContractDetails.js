@@ -16,11 +16,9 @@ const IndexedContractDetails = (props) => {
       <LabelFieldRow label={t('CONTRACT')}>
         <p>{data.name}</p>
       </LabelFieldRow>
-      <LabelFieldRow label={t('CURRENT_TARIFF')}>
-        {data.tariff}
-      </LabelFieldRow>
+      <LabelFieldRow label={t('CURRENT_TARIFF')}>{data.tariff}</LabelFieldRow>
       <LabelFieldRow isHighlight={true} label={t('TARIFF_TO_CONTRACT')}>
-        {targetTariff}
+        {targetTariff || t('TARIFF_CHANGE_NOT_AVAILABLE')}
       </LabelFieldRow>
     </div>
   )
