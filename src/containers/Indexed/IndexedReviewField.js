@@ -24,12 +24,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-
-
 const ReviewField = ({ label, value }) => {
   const classes = useStyles()
   return (
-    <div className={clsx(classes.field)} >
+    <div className={clsx(classes.field)}>
       {label !== false && (
         <div className="field__title">
           <Typography className={classes.label} variant="subtitle2">
@@ -38,7 +36,10 @@ const ReviewField = ({ label, value }) => {
         </div>
       )}
       <div className={clsx('field__value')}>
-        <Typography id={label+'__value'} className={classes.value} variant="body2">
+        <Typography
+          id={label + '__value'}
+          className={classes.value}
+          variant="body2">
           <>{value}</>
         </Typography>
       </div>

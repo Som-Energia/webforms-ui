@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import IndexedReviewData from './IndexedReviewData'
 
-
 const IndexedReview = (props) => {
-  let { setFieldValue, contractValues, values, targetTariff, isTariff20, isTariffIndexed, isIndexedPilotOngoing } = props
+  let {
+    setFieldValue,
+    contractValues,
+    values,
+    targetTariff,
+    isTariff20,
+    isTariffIndexed,
+    isIndexedPilotOngoing
+  } = props
   const [open, setOpen] = useState(false)
   const [indexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
   const [indexadaLegalTermsAccepted, setIndexadaLegalTermsAccepted] =
