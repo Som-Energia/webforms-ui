@@ -1,5 +1,9 @@
 # Change Log
 
+## Unrealeased
+
+- Added: Generation kwh. the way for partners
+
 ## 1.8.2 2023-08-23 
 
 - Fix: The way to sort the list of assignments, when there are low contracts
