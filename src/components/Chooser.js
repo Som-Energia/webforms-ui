@@ -119,6 +119,7 @@ const Chooser = (props) => {
             <Grid key={index} item xs={12} sm={6}>
               <label
                 data-value={option.value}
+                id={option.id || option.value}
                 onClick={(event) =>
                   !disabled && handleClick(event, option.value)
                 }

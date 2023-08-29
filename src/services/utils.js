@@ -17,9 +17,13 @@ export const languages = {
 }
 
 export const contributionParams = {
+  generationMinAnnualUse:1,
+  generationMinNumActions:1,
+  generationMaxNumActions:49,
   minContribution: 100,
   maxContribution: 100000,
-  contributionStep: 100
+  contributionStep: 100,
+  maxPercentOverAnnualUse: 100
 }
 
 const sanitizeData = (data) => {

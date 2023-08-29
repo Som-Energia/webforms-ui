@@ -1,0 +1,28 @@
+{
+  "member": {
+    "number": "78820",
+    "vat": "78050110R",
+    "badVat": "58291270J"
+  },
+  "member_out_first_fase_zone":{
+    "number": "38434",
+    "vat": "40323835M",
+    "badVat": "58291270J"
+  },
+  "annual_use": {
+    "not_enough": 0,
+    "low": 2500,
+    "normal": 3000,
+    "high": 5000
+  },
+  "number_of_action": {
+    "not_enough": 0,
+    "min": 1,
+    "normal": 11,
+    "max": 49
+  },
+  "payment_data": {
+    "iban": "ES18 1465 7317 8144 5866 4841",
+    "err_iban": "ES18 9999 0000 9999 0000 9999"
+  }
+}

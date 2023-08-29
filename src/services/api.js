@@ -6,6 +6,7 @@ const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
+
 export const modifyContract = async (data, token) => {
   return axios({
     method: 'POST',
@@ -411,4 +412,15 @@ export const generationChangeContractPriority = async (data, token) => {
     }).then((response) => {
       return response?.data
     })
+}
+
+export const checkIsFromGenerationEnabledZone = async (data, token) => {
+  const {memberNumber,memberVat} = data
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`,
+    headers: { Authorization: token }
+  }).then((response) => {
+    return response?.data
+  })
 }
