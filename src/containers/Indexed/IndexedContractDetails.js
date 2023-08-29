@@ -32,6 +32,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '0.5rem'
   },
   highlight: {
-    color:  theme.palette.text.primary
+    color: theme.palette.text.primary
   }
 }))

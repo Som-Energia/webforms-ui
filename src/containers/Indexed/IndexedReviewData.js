@@ -70,7 +70,7 @@ const IndexedReviewData = (props) => {
     targetTariff,
     isTariff20,
     isTariffIndexed,
-    isIndexedPilotOngoing,
+    isIndexedPilotOngoing
   } = props
   const powers = JSON.parse(contractValues.powers)
 
@@ -88,9 +88,7 @@ const IndexedReviewData = (props) => {
           <Typography className={classes.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
-          <IndexedReviewField
-            value={t('PROCESS_TYPE_TARIFF_CHANGE')}
-          />
+          <IndexedReviewField value={t('PROCESS_TYPE_TARIFF_CHANGE')} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.sectionTitle} variant="h6">
@@ -205,7 +203,9 @@ const IndexedReviewData = (props) => {
           <LegalText
             language={contractValues?.language}
             documentName={
-              isTariffIndexed ? "general-contract-terms" : "general-and-indexed-specific-terms"
+              isTariffIndexed
+                ? 'general-contract-terms'
+                : 'general-and-indexed-specific-terms'
             }
           />
         </TermsDialog>
@@ -225,10 +225,11 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t(isTariffIndexed
-                    ? 'PERIODS_ACCEPT_CONDITIONS'
-                    : 'INDEXED_ACCEPT_CONDITIONS'
-                    )
+                  __html: t(
+                    isTariffIndexed
+                      ? 'PERIODS_ACCEPT_CONDITIONS'
+                      : 'INDEXED_ACCEPT_CONDITIONS'
+                  )
                 }}
               />
             }
@@ -252,45 +253,47 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t(isTariffIndexed
-                    ? 'PERIODS_ACCEPT_TERMS'
-                    : 'INDEXED_ACCEPT_TERMS'
+                  __html: t(
+                    isTariffIndexed
+                      ? 'PERIODS_ACCEPT_TERMS'
+                      : 'INDEXED_ACCEPT_TERMS'
                   )
                 }}
               />
             }
           />
           <Divider variant="middle" className={classes.dividerBottom} />
-
         </Grid>
-        { !isTariffIndexed && isIndexedPilotOngoing && (
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                id="change-tariff-indexada-legal-terms-check"
-                name="legal_terms_accepted"
-                onClick={() =>
-                  handleIndexadaLegalTermsAccepted(!indexadaLegalTermsAccepted)
-                }
-                checked={values.indexed_legal_terms_accepted}
-                color="primary"
-              />
-            }
-            label={
-              <Typography
-                variant="body2"
-                dangerouslySetInnerHTML={{
-                  __html: t('INDEXED_ACCEPT_LEGAL_TERMS', {
-                    inscription_conditions_url: t(
-                      'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
+        {!isTariffIndexed && isIndexedPilotOngoing && (
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  id="change-tariff-indexada-legal-terms-check"
+                  name="legal_terms_accepted"
+                  onClick={() =>
+                    handleIndexadaLegalTermsAccepted(
+                      !indexadaLegalTermsAccepted
                     )
-                  })
-                }}
-              />
-            }
-          />
-        </Grid>
+                  }
+                  checked={values.indexed_legal_terms_accepted}
+                  color="primary"
+                />
+              }
+              label={
+                <Typography
+                  variant="body2"
+                  dangerouslySetInnerHTML={{
+                    __html: t('INDEXED_ACCEPT_LEGAL_TERMS', {
+                      inscription_conditions_url: t(
+                        'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
+                      )
+                    })
+                  }}
+                />
+              }
+            />
+          </Grid>
         )}
       </Grid>
     </>
