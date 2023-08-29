@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
-export default function errorTxt(t, code, errorData) {
+export default function indexedErrorText(t, code, errorData) {
   const exceptionMap = {
     NO_CHANGES: t('INDEXED_NO_CHANGES_ERROR_TXT'),
     OPEN_CASES: t('INDEXED_OPEN_CASES_ERROR_TXT'),
