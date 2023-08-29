@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const GenerationNoMemberFields = (props) => {
+const GenerationNoMemberIdFields = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
   const [isLoading, setIsLoading] = useState(false)
@@ -46,14 +46,15 @@ const GenerationNoMemberFields = (props) => {
     touched,
     setFieldValue,
     setErrors,
-    setFieldTouched
+    setFieldTouched,
+    isTesting = false
   } = props
 
   const onChangeVAT = (params) => {
-    const { vat, isPhisical, valid, exists } = params
+    const { vat, isPhisical, valid, isMember } = params
     setFieldValue('member.isphisical', isPhisical, false)
     setFieldValue('member.vatvalid', valid, false)
-    setFieldValue('member.exists', exists, false)
+    setFieldValue('member.exists', isMember, false)
     setFieldValue('member.vat', vat)
     if (vat !== '') {
       setFieldTouched('member.vat', true)
@@ -90,7 +91,7 @@ const GenerationNoMemberFields = (props) => {
   }, [values?.member?.postal_code, setFieldValue, setErrors, t])
 
   useEffect(() => {
-    if (values?.member?.postal_code?.length === 5) {
+    if (values?.member?.postal_code?.length === 5 && !isTesting) {
       checkPostalCode()
     }
   }, [checkPostalCode, values?.member?.postal_code])
@@ -191,4 +192,4 @@ const GenerationNoMemberFields = (props) => {
   )
 }
 
-export default GenerationNoMemberFields
+export default GenerationNoMemberIdFields

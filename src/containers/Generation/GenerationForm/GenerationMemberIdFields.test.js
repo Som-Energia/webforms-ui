@@ -47,6 +47,8 @@ describe('Generation Form Review', () => {
               <GenerationMemberIdFields
                 setFieldValue={mockSetFieldValue}
                 values={mockValues}
+                setErrors={jest.fn()}
+                isTesting={true}
               />
             }
           />

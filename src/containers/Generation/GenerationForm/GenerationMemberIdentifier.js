@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box'
 import StepHeader from '../../../components/StepHeader'
 import Chooser from '../../../components/Chooser'
 import GenerationMemberIdFields from './GenerationMemberIdFields'
-import GenerationNoMemberFields from './GenerationNoMemberIdFields'
+import GenerationNoMemberIdFields from './GenerationNoMemberIdFields'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -86,7 +86,7 @@ const GenerationMemberIdentifier = (props) => {
         </Box>
       ) : (
         <>
-          <GenerationNoMemberFields {...props} />
+          <GenerationNoMemberIdFields {...props} />
         </>
       )}
       {!values?.member?.has_generation_enabled_zone ? (

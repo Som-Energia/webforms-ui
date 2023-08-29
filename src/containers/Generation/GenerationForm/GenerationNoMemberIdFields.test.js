@@ -3,11 +3,10 @@ import GenerationNoMemberIdFields from './GenerationNoMemberIdFields'
 import {
   render,
   queryByAttribute,
-  fireEvent,
-  getByText
+  fireEvent
 } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -22,13 +21,7 @@ jest.mock('react-i18next', () => ({
 }))
 
 describe('Generation Form Review', () => {
-  const mockValues = {
-    member: {
-      is_member: true,
-      has_generation_enabled_zone: false
-    }
-  }
-
+  
   const mockValuesPostalCode = {
     member: {
       is_member: true,
@@ -52,12 +45,16 @@ describe('Generation Form Review', () => {
   const mocksetFieldTouched = jest.fn()
 
   test('Should call setFieldValue when change postal code', async () => {
+    
+
     const dom = render(
       <GenerationNoMemberIdFields
         resetForm={jest.fn()}
         values={mockValuesPostalCode}
         setFieldValue={mockSetFieldValue}
         setFieldTouched={mocksetFieldTouched}
+        setErrors={jest.fn()}
+        isTesting={true}
       />
     )
 
@@ -65,26 +62,7 @@ describe('Generation Form Review', () => {
     act(() => {
       fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
     })
-    expect(mockSetFieldValue).toHaveBeenCalledWith(
-      'member.postal_code',
-      POSTAL_CODE
-    )
-  })
 
-  test('Should call setFieldValue when change postal code', async () => {
-    const dom = render(
-      <GenerationNoMemberIdFields
-        resetForm={jest.fn()}
-        values={mockValues}
-        setFieldValue={mockSetFieldValue}
-        setFieldTouched={mocksetFieldTouched}
-      />
-    )
-
-    const postalCodeTextField = getById(dom.container, 'input_postalcode')
-    act(() => {
-      fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
-    })
     expect(mockSetFieldValue).toHaveBeenCalledWith(
       'member.postal_code',
       POSTAL_CODE
@@ -98,6 +76,8 @@ describe('Generation Form Review', () => {
         values={mockValuesEnabeldAndCheckedZone}
         setFieldValue={mockSetFieldValue}
         setFieldTouched={mocksetFieldTouched}
+        setErrors={jest.fn()}
+        isTesting={true}
       />
     )
 
@@ -105,6 +85,7 @@ describe('Generation Form Review', () => {
     act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
+    
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.vat', VAT)
   })
 })

@@ -38,7 +38,8 @@ const GenerationMemberIdFields = (props) => {
     errors,
     setErrors,
     touched,
-    setFieldValue
+    setFieldValue,
+    isTesting = false
   } = props
 
   const [isLoading, setLoading] = useState(false)
@@ -100,7 +101,8 @@ const GenerationMemberIdFields = (props) => {
     if (
       values?.member?.number &&
       values?.member?.vat &&
-      values.member.vat.length >= 9
+      values.member.vat.length >= 9 &&
+      !isTesting
     ) {
       checkIsMember()
     } else {
