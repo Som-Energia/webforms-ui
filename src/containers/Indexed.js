@@ -33,6 +33,7 @@ import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
+import IndexedError from './Indexed/IndexedError'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 
@@ -232,12 +233,20 @@ const Indexada = (props) => {
 
   if (loadingTariff) return <Loading />
 
+  const lesserErrors = [
+    'OPEN_CASES',
+    'STATE_CONFLICT',
+    'PENDING_CONTRACT_MODIFICATION',
+    'CUSTOM_TARIFF'
+  ]
+
   if (checkEnabled && !hasTargetTariff)
-    return (
-      <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-        <Failure error={error} showHeader={false} />
-      </GlobalHotKeys>
-    )
+    if (activeStep != 0 || !lesserErrors.includes(error?.code))
+      return (
+        <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+          <Failure error={error} showHeader={false} />
+        </GlobalHotKeys>
+      )
 
   const translatedUrls = {
     url_general_conditions: t('GENERAL_CONDITIONS_URL'),
@@ -270,7 +279,9 @@ const Indexada = (props) => {
     ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
     : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
 
-  const introBody = isTariffIndexed
+  const introBody = error
+    ? IndexedError(t, error?.code, error?.data)
+    : isTariffIndexed
     ? t('PERIODS_INTRO_BODY', translatedUrls)
     : t('INDEXED_INTRO_BODY', translatedUrls)
 
@@ -357,7 +368,9 @@ const Indexada = (props) => {
                                     variant="contained"
                                     color="primary"
                                     endIcon={<ArrowForwardIosIcon />}
-                                    disabled={!formikProps.isValid}
+                                    disabled={
+                                      !formikProps.isValid || !hasTargetTariff
+                                    }
                                     onClick={() => nextStep(formikProps)}>
                                     {t('SEGUENT_PAS')}
                                   </Button>
