@@ -33,7 +33,7 @@ import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
-import IndexedError from './Indexed/IndexedError'
+import indexedErrorText from './Indexed/IndexedError'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 
@@ -280,7 +280,7 @@ const Indexada = (props) => {
     : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
 
   const introBody = error
-    ? IndexedError(t, error?.code, error?.data)
+    ? indexedErrorText(t, error?.code, error?.data)
     : isTariffIndexed
     ? t('PERIODS_INTRO_BODY', translatedUrls)
     : t('INDEXED_INTRO_BODY', translatedUrls)

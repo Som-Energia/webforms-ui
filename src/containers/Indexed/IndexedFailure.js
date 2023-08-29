@@ -11,7 +11,7 @@ import CloseIcon from '@material-ui/icons/Close'
 
 import StepHeader from '../../components/StepHeader'
 import cuca from '../../images/cuca-marejada.svg'
-import IndexedError from './IndexedError'
+import indexedErrorText from './IndexedError'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,28 +55,6 @@ function Failure(props) {
   const classes = useStyles()
   const { error = false, showHeader = true } = props
 
-  const getErrorTxt = (code, errorData) => {
-    const exceptionMap = {
-      NO_CHANGES: t('INDEXED_NO_CHANGES_ERROR_TXT'),
-      OPEN_CASES: t('INDEXED_OPEN_CASES_ERROR_TXT'),
-      STATE_CONFLICT: t('INDEXED_STATE_CONFLICT_ERROR_TXT'),
-      PENDING_CONTRACT_MODIFICATION: t(
-        'PENDING_CONTRACT_MODIFICATION_ERROR_TXT'
-      ),
-      CUSTOM_TARIFF: t('INDEXED_CUSTOM_TARIFF_ERROR_TXT'),
-      INVALID_FIELD: t('INVALID_FIELD', {
-        field_name: errorData?.[0]?.field || t('UNKNOWN_FIELD')
-      }),
-      UNAUTHORIZED: t('INDEXED_UNAUTHORIZED_ERROR_TXT'),
-      UNEXPECTED_ERROR: t('INDEXED_UNEXPECTED_ERROR_TXT', {
-        url: t('CONTACT_HELP_URL')
-      })
-    }
-
-    let errorTxt = exceptionMap[code]
-    return errorTxt ? errorTxt : exceptionMap.UNEXPECTED_ERROR
-  }
-
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
@@ -95,7 +73,7 @@ function Failure(props) {
           className={classes.message}
           variant="body1"
           dangerouslySetInnerHTML={{
-            __html: IndexedError(t, error.code, error.data)
+            __html: indexedErrorText(t, error.code, error.data)
           }}
         />
         <Box mt={3} mb={1}>
