@@ -342,7 +342,7 @@ function HolderChange(props) {
   )
 
   const handleError = async (error) => {
-    let errorCode = error?.response?.data?.data?.code || 'UNEXPECTED'
+    let errorCode = error?.response?.data?.error?.code || 'UNEXPECTED'
     const errorResp = error?.response?.data?.data || {}
 
     if (error?.response?.data?.data?.invalid_fields) {
