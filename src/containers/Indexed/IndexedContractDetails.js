@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
 import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
-import { Alert } from '@material-ui/lab'
 
 const IndexedContractDetails = (props) => {
   const { t } = useTranslation()
@@ -19,9 +18,7 @@ const IndexedContractDetails = (props) => {
       </LabelFieldRow>
       <LabelFieldRow label={t('CURRENT_TARIFF')}>{data.tariff}</LabelFieldRow>
       <LabelFieldRow isHighlight={true} label={t('TARIFF_TO_CONTRACT')}>
-        <Alert severity="warning">
-          {targetTariff || t('TARIFF_CHANGE_NOT_AVAILABLE')}
-        </Alert>
+        {targetTariff || t('TARIFF_CHANGE_NOT_AVAILABLE')}
       </LabelFieldRow>
     </div>
   )
