@@ -280,10 +280,14 @@ const Indexada = (props) => {
     : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
 
   const introBody = error
-    ? indexedErrorText(t, error?.code, error?.data)
-    : isTariffIndexed
-    ? t('PERIODS_INTRO_BODY', translatedUrls)
-    : t('INDEXED_INTRO_BODY', translatedUrls)
+    ? <Alert severity='error'> {indexedErrorText(t, error?.code, error?.data)} </Alert>
+    : <div
+    dangerouslySetInnerHTML={{
+      __html: isTariffIndexed
+      ? t('PERIODS_INTRO_BODY', translatedUrls)
+      : t('INDEXED_INTRO_BODY', translatedUrls)
+    }}
+  />
 
   return (
     <>
