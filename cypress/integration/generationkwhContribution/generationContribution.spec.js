@@ -27,12 +27,6 @@ describe('Generation Form', () => {
       .type(data.new_member.number)
       .should('have.value', data.new_member.number)
 
-      cy.get('#member_state').click()
-      cy.get(`[data-value="${data.stateCode}"]`).click()
-
-      cy.get('#member_city').click()
-      cy.get(`[data-value="${data.cityCode}"]`).click()
-
     cy.get('#member_email')
       .type(data.new_member.email)
       .should('have.value', data.new_member.email)
@@ -51,6 +45,9 @@ describe('Generation Form', () => {
 
     cy.get('[name="privacy_policy_accepted"]').click()
     cy.get('[data-cy=next]').click()
+
+
+
   }
 
   beforeEach(() => {
@@ -58,7 +55,7 @@ describe('Generation Form', () => {
     cy.fixture('generationkwhContribution.json').as('data')
   })
 
-  /*   context('Member - Success Tests', () => {
+  context('Member - Success Tests', () => {
     it('Contribute with an action', function () {
       //Member page
       cy.identifyMember(this.data.member.number, this.data.member.vat)
@@ -103,7 +100,7 @@ describe('Generation Form', () => {
       cy.get('[data-cy=exit]').click()
     })
   })
- */
+ 
   context(' NO Member - Success Tests', () => {
     it('Contribute with an action', function () {
       //Member page
@@ -121,7 +118,7 @@ describe('Generation Form', () => {
 
       fillInData(this.data)
       //Contribution page
-      /*  cy.get('#annual_use')
+      cy.get('#annual_use')
         .clear()
         .type(this.data.annual_use.low)
         .should('have.value', this.data.annual_use.low)
@@ -138,7 +135,7 @@ describe('Generation Form', () => {
   
       //Review page
       cy.get('#privacy_plicy_check').check()
-      cy.get('[data-cy=next]').click() */
+      /* cy.get('[data-cy=next]').click() */
     })
 
     it('Try to contribute with out of zone postal code', function () {
@@ -153,7 +150,7 @@ describe('Generation Form', () => {
     })
   })
 
-  /* context('Member - Fail Tests', () => {
+  context('Member - Fail Tests', () => {
     it('Try to contribute with erroneous credentials', function () {
       //Member page
       let memberNumber = this.data.member.number
@@ -235,5 +232,5 @@ describe('Generation Form', () => {
         .should('have.value', this.data.payment_data.err_iban)
       cy.get('[data-cy=next]').should('be.disabled')
     })
-  }) */
+  }) 
 })
