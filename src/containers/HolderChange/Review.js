@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, isTariffIndexed } = props
 
   const [open, setOpen] = useState(false)
 
@@ -229,9 +229,13 @@ const Review = (props) => {
           onAccept={handleAccept}
           onClose={handleClose}>
           <LegalText
-            language={values?.holder?.language}
-            documentName={"general-contract-terms"}
-          />
+          language={values?.holder?.language}
+          documentName={
+            isTariffIndexed
+            ?"general-and-indexed-specific-terms"
+            :"general-contract-terms"
+          }
+          ></LegalText>
         </TermsDialog>
 
         <Box mt={2}>
@@ -243,7 +247,11 @@ const Review = (props) => {
                 color="primary"
               />
             }
-            label={t('ACCEPT_TERMS')}
+            label={
+              isTariffIndexed
+                ? t('INDEXED_ACCEPT_CONDITIONS')
+                : t('PERIODS_ACCEPT_CONDITIONS')
+            }
           />
         </Box>
       </Box>

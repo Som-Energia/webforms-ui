@@ -16,6 +16,9 @@ import Paper from '@material-ui/core/Paper'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import SendIcon from '@material-ui/icons/Send'
+import Typography from '@material-ui/core/Typography'
+import Alert from '@material-ui/lab/Alert'
+
 
 import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
@@ -35,6 +38,11 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange } from 'services/utils'
+import { checkIsTariffIndexed } from '../services/utils'
+
+const contractJSON = JSON.parse(
+  document.getElementById('contract-data').textContent
+)
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +82,8 @@ function HolderChange(props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+  const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
+
 
   const keyMap = {
     SHOW_INSPECTOR: 'ctrl+alt+shift+d'
@@ -276,7 +286,7 @@ function HolderChange(props) {
         {activeStep === 5 && <VoluntaryCent {...props} />}
         {activeStep === 6 && <SpecialCases {...props} />}
         {activeStep === 7 && <IBAN {...props} />}
-        {activeStep === 8 && <Review {...props} />}
+        {activeStep === 8 && <Review isTariffIndexed={isTariffIndexed} {...props} />}
       </>
     )
   }
@@ -293,6 +303,10 @@ function HolderChange(props) {
     if (next === 4 && values?.member?.become_member === true) {
       next++
     }
+    // Neighbour comunity cannot become a member
+    if (next === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+      next += 1
+    }
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -307,6 +321,10 @@ function HolderChange(props) {
     }
     if (prev === 4 && values?.member?.become_member === true) {
       prev--
+    }
+    // Neighbour comunity cannot become a member
+    if (prev === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+      prev -= 1
     }
     setActiveStep(Math.max(0, prev))
     actions.setTouched({})
@@ -483,8 +501,27 @@ function HolderChange(props) {
                                 {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
                               </Button>
                             )}
+                         </div>
+                        </Box>
+                        <Box mx={0} mt={2} mb={3}>
+                          <div className={classes.actionsContainer}>
+                            {activeStep === 4 && (RegExp(/(^[H])/).test(props.values?.holder?.vat)) && (
+                              <>
+                                <Box mt={3}>
+                                  <Alert severity="warning">
+                                    <Typography
+                                      variant="body1"
+                                      dangerouslySetInnerHTML={{
+                                        __html: t('CIF_COMMUNITY_OWNERS')
+                                      }}
+                                    />
+                                  </Alert>
+                                </Box>
+                              </>
+                            )}
                           </div>
                         </Box>
+
                       </Paper>
                     }
                   </Form>
