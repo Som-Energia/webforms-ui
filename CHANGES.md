@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.9.1 2023-09-04
+
+- Fix general conditions for holderchange form
+- Adapt form to recover backend exceptions
+- Fix neighbor communities, they cannot become members
+
 ## 1.9.0 2023-08-29
 
 - Added: Generation kwh. the way for partners
