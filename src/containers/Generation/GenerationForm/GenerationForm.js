@@ -31,8 +31,9 @@ import NextButton from 'components/Buttons/NextButton'
 import SubmitButton from 'components/Buttons/SubmitButton'
 import ExitButton from 'components/Buttons/ExitButton'
 import PersonalData from '../../HolderChange/PersonalData'
+import GenerationSignaturit from './GenerationSignaturit'
 
-const MAX_STEP_NUMBER = 4
+const MAX_STEP_NUMBER = 5
 
 const GenerationContribution = (props) => {
   const classes = useStyles()
@@ -381,6 +382,7 @@ const GenerationContribution = (props) => {
                   <GenerationContributionForm {...formikProps} />
                 )}
                 {activeStep === 3 && <GenerationReview {...formikProps} />}
+                {activeStep === 4 && <GenerationSignaturit {...formikProps} />}
 
                 {completed && (
                   <Box mx={0} mb={1}>
