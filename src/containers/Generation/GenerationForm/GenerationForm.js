@@ -180,7 +180,7 @@ const GenerationContribution = (props) => {
     Yup.object().shape({
       annual_use: Yup.number()
         .required(
-          t('GENERATION_ANNUAL_USE_HELPER_MIN', {
+          t('GENERATION_ANNUAL_USE_MIN', {
             generationMinAnnualUse: new Intl.NumberFormat('ca').format(
               contributionParams?.generationMinAnnualUse
             )

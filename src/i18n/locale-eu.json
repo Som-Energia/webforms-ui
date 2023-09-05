@@ -649,13 +649,13 @@
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Urteko elektrizitate-erabilera",
     "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Adierazi urtean zenbat elektrizitate erabiltzen duzun (adibidez, 2.500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Urteko kontsumoa kWh-tan",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"Adibidez 2500",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Adibidez 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"Zenbat akzio energetiko nahi dituzu?*",
     "GENERATION_FORM_ACTIONS_INPUT_LABEL":"Ekintza energetikoak",
     "GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT":"Adibidez, 2 akzio hauei dagozkie: 200€",
     "GENERATION_FORM_ACTIONS_DESC_TEXT":"Akzio energetiko bakoitza Kooperatibari egiten diozun 100 euroko mailegu bat da. Akzio energetiko bakoitzari, gutxi gorabehera, Generation kWh proiektuari lotutako instalazioetatik datozen 170 kWh dagozkio urteko. <a target=\"_blank\" href=\"{{url}}\"> Informazio gehiago.</a> ",
     "GENERATION_FORM_ACTIONS_URL_INFO_ACTION":"https://eu.support.somenergia.coop/article/602--generation-kwh-zer-da-akzio-energetiko-bat?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
-    "GENERATION_FORM_ACTION_MAX_ACTIONS_INFO":"Gehienez, 49 akzio energetiko. Akzio gehiago nahi badituzu, idatzi <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
+    "GENERATION_FORM_ACTION_MAX_ACTIONS_INFO":"*Gehienez, 49 akzio energetiko. Akzio gehiago nahi badituzu, idatzi <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
     "GENERATION_FORM_PROD_ANNUAL":"Urtean autoproduzitutako elektrizitatea",
     "GENERATION_FORM_PERCENT_ANNUAL_USE_TITLE":"Ekoizpenaren ehunekoa zure erabilera osoaren gainean",
     "GENERATION_FORM_PERCENT_ANNUAL_USE_INFO":"Nahi adina elektrizitate autoproduzitu dezakezu, baina guk, gehienez, erabiltzen duzun elektrizitatearen % 70 autoproduzitzea gomendatzen dizugu.",
@@ -672,5 +672,7 @@
     "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"Ezin izan ditugu datuak balioztatu, mesedez jarri harremanetan <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>, esku bat eman diezazugun.",
     "GENERATION_FORM_CONTRIBUTION_MEMBER_IDENTIFIER_DESC":"Kontuan hartu Generation kWh proiektuan parte hartzeko Kooperatibako bazkide izan behar duzula.",
     "GENERATION_CONTRIBUTION_NO_MEMBER_TO_MEMBER_FORM":"<b>Sin embargo, si todavía quieres dar el paso de hacerte socio/socia, puedes hacerlo a través de este <a target=\"_blank\" href=\"{{url}}\">formulario</a>.</b>",
-    "GENERATION_CONTRIBUTION_MEMBER_FORM_URL":"https://www.somenergia.coop/es/hazte-socio-a/"
+    "GENERATION_CONTRIBUTION_MEMBER_FORM_URL":"https://www.somenergia.coop/es/hazte-socio-a/",
+    "GENERATION_ACTIONS_HELPER_MIN":"Akzio bat gutxienez",
+    "GENERATION_ANNUAL_USE_MIN":"Zero baino balio handiagoa izan behar du"
 }
