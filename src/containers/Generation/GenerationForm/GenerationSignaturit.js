@@ -1,40 +1,52 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import {createGenerationkWhSignature} from '../../../services/api'
-
+import { useTranslation } from 'react-i18next'
 function GenerationSignaturit(props) {
-  const [signaturitURL, setSignaturitURL] = useState()
-
+  const [signaturitResponse, setSignaturitResponse] = useState('')
+  const {i18n} = useTranslation()
+  const {submit, values} = props
 
   const getSignaturit = useCallback(() => {
-    createGenerationkWhSignature()
+    createGenerationkWhSignature({
+      partner_number: values?.member?.number,
+      nif: values?.member?.vat,
+      name: values?.member?.name,
+      full_name: values?.member?.name + " " +values?.member?.surname1+ " " + values?.member?.surname2,
+      address: values?.member?.address,
+      postal_code: values?.member?.postal_code,
+      state: values?.member?.state.name,
+      city: values?.member?.city.name,
+      language: i18n.language,
+      number_of_actions: values?.number_of_actions,
+      amount: values?.payment?.amount,
+      iban: values?.payment?.iban
+    })
       .then((response) => {
-        setSignaturitURL(response.data.url)
+        setSignaturitResponse(response.data)
       })
       .catch((err) => console.log(err))
-  },[])
+  },[i18n,values])
+
+  const signaturitDocResponse = useCallback((e) => {
+    if (e.data.event === 'completed') {
+      submit(values)
+    }
+  },[submit,values])
 
   useEffect(() => {
+    window.addEventListener('message',signaturitDocResponse)
     getSignaturit()
-  }, [getSignaturit])
 
-
-  console.log("SIGNATURIT_URL",signaturitURL)
+    return () => window.removeEventListener("message", signaturitDocResponse);
+  }, [getSignaturit,signaturitDocResponse])
 
   return (
-    <div>
+    <div style={{height:"100vh"}}>
       <iframe
       id="iframe_signaturit"
-        src={signaturitURL}
-        style={{position: "absolute",top: 0, left: 0, height: "920px", width: "1900px"}}
+        src={signaturitResponse.url}
+        style={{position: "relative", height: "95%", width: "100%"}}
       />
-      {window.addEventListener('message', function (e) {
-        // e.data.event       = EVENT_TYPE
-        // e.data.documentId  = DOCUMENT_ID
-        // e.data.signatureId = SIGNATURE_ID
-        if (e.data.event === 'completed') {
-          console.log(e.data)
-        }
-      })}
     </div>
   )
 }

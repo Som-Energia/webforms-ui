@@ -434,10 +434,11 @@ export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
   })
 }
 
-export const createGenerationkWhSignature = async () => {
+export const createGenerationkWhSignature = async (data) => {
   return axios({
     method: 'POST',
     url: `${API_BASE_URL}/form/create_gkwh_signature`,
+    data: data
   }).then((response) => {
     return response?.data
   })
