@@ -298,7 +298,7 @@ const GenerationContribution = (props) => {
               : !formikProps.isValid
           }
           onClick={() => nextStep(formikProps)}
-          title={t('SEGUENT_PAS')}
+          title={activeStep===3 ? t('GENERATION_FORM_SIGN_BUTTON') : t('SEGUENT_PAS')}
         />
       ) : (
         <ExitButton
@@ -308,7 +308,7 @@ const GenerationContribution = (props) => {
         />
       )
     },
-    [nextStep, t]
+    [nextStep, t, activeStep]
   )
 
   const handlePost = async (values) => {
@@ -391,7 +391,8 @@ const GenerationContribution = (props) => {
                     <Failure error={error} />
                   ) : (
                     <Success
-                      description="CONTRIBUTION_OK_MSG"
+                      title={t('GENERATION_FORM_SUCCESS_TITLE')}
+                      description={t('GENERATION_FORM_SUCCESS_DESCRIPTION')}
                       result={result}
                     />
                   )}

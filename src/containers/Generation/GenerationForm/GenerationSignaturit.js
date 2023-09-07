@@ -10,7 +10,6 @@ function GenerationSignaturit(props) {
     createGenerationkWhSignature({
       partner_number: values?.member?.number,
       nif: values?.member?.vat,
-      name: values?.member?.name,
       full_name: values?.member?.name + " " +values?.member?.surname1+ " " + values?.member?.surname2,
       address: values?.member?.address,
       postal_code: values?.member?.postal_code,
