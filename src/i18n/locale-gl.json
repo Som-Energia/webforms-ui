@@ -669,5 +669,8 @@
     "GENERATION_CONTRIBUTION_NO_MEMBER_TO_MEMBER_FORM":"<b>Sin embargo, si todavía quieres dar el paso de hacerte socio/socia, puedes hacerlo a través de este <a target=\"_blank\" href=\"{{url}}\">formulario</a>.</b>",
     "GENERATION_CONTRIBUTION_MEMBER_FORM_URL":"https://www.somenergia.coop/es/hazte-socio-a/",
     "GENERATION_ACTIONS_HELPER_MIN":"Un mínimo dunha acción",
-    "GENERATION_ANNUAL_USE_MIN":"Debe ser un valor maior que cero"
+    "GENERATION_ANNUAL_USE_MIN":"Debe ser un valor maior que cero",
+    "GENERATION_FORM_SUCCESS_TITLE":"Moitas grazas polo teu apoio ao cambio de modelo enerxético!",
+    "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>En breve recibirás por correo electrónico unha copia do contrato de préstamo para o Generation kWh que acabas de subscribir e nuns días procedemos ao cargo na conta bancaria que indicaches.</p><p>Boa enerxía!</p>",
+    "GENERATION_FORM_SIGN_BUTTON":"Asinar"
 }

@@ -677,5 +677,8 @@
     "GENERATION_FORM__NO_MEMBER_TO_MEMBER_FORM":"<b>Tot i així, si encara vols fer el pas de fer-te soci/sòcia, pots fer-ho a través d'aquest <a target=\"_blank\" href=\"{{url}}\">formulari</a>.</b>",
     "GENERATION_FORM__MEMBER_FORM_URL":"https://www.somenergia.coop/ca/fes-te-n-soci-a/",
     "GENERATION_ACTIONS_HELPER_MIN":"Un mínim d'una aportació",
-    "GENERATION_ANNUAL_USE_MIN":"Ha de ser un valor major que zero"
+    "GENERATION_ANNUAL_USE_MIN":"Ha de ser un valor major que zero",
+    "GENERATION_FORM_SUCCESS_TITLE":"Moltes gràcies pel teu suport al canvi de model energètic!",
+    "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>Ben aviat rebràs per correu electrònic una còpia del contracte de préstec al Generation kWh que acabes de subscriure i en uns dies farem el càrrec al compte bancari que has indicat.</p><p>Bona Energia!</p>",
+    "GENERATION_FORM_SIGN_BUTTON":"Signar"
 }
