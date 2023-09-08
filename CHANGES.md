@@ -1,8 +1,8 @@
 # Change Log
 
-## Unreleased
+## 1.9.2 2023-09-08
 
-- Added: Generation kwh form. Path for non partners
+- Generation kwh form: Path for non partners (still hidden)
 
 ## 1.9.1 2023-09-04
 
@@ -12,7 +12,7 @@
 
 ## 1.9.0 2023-08-29
 
-- Added: Generation kwh form. Path for partners
+- Generation kwh form: Path for partners (still hidden)
 
 ## 1.8.2 2023-08-23 
 
