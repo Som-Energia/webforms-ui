@@ -42,6 +42,7 @@ describe('Generation Form Review', () => {
       }
     }
 
+
     test('Should call setFieldValue when check is clicked', () => {
       const dom = render(<GenerationReview setFieldValue={mockSetFieldValue} />)
 
@@ -71,4 +72,5 @@ describe('Generation Form Review', () => {
       expect(personalData).toBeInTheDocument()
       
     })
+
   })

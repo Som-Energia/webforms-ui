@@ -36,7 +36,7 @@ describe('Generation Form Review', () => {
   const mockSetFieldValue = jest.fn()
   const getById = queryByAttribute.bind(null, 'id')
 
-   test('Should call setFieldValue when change vat', async () => {
+  test('Should call setFieldValue when change vat', async () => {
     const dom = render(
       <Router>
         <Routes>
@@ -47,6 +47,8 @@ describe('Generation Form Review', () => {
               <GenerationMemberIdFields
                 setFieldValue={mockSetFieldValue}
                 values={mockValues}
+                setErrors={jest.fn()}
+                isTesting={true}
               />
             }
           />
@@ -59,5 +61,5 @@ describe('Generation Form Review', () => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.vat', VAT)
-  }) 
+  })
 })

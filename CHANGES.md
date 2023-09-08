@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Added: Generation kwh form. Path for non partners
+
 ## 1.9.1 2023-09-04
 
 - Fix general conditions for holderchange form
@@ -8,7 +12,7 @@
 
 ## 1.9.0 2023-08-29
 
-- Added: Generation kwh. the way for partners
+- Added: Generation kwh form. Path for partners
 
 ## 1.8.2 2023-08-23 
 

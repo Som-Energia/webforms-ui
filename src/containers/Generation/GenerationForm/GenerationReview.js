@@ -63,7 +63,7 @@ const Review = (props) => {
 
   const handleClickPrivacyPolicy = (event) => {
     event.preventDefault()
-    setFieldValue('privacy_policy_accepted', !values?.privacy_policy_accepted)
+    setFieldValue('privacy_policy_accepted_responsible_declaration', !values?.privacy_policy_accepted_responsible_declaration)
   }
 
   const ReviewField = useCallback(({ label, value }) => {
@@ -205,7 +205,7 @@ const Review = (props) => {
           control={
             <Checkbox
               id='privacy_plicy_check'
-              checked={values?.privacy_policy_accepted}
+              checked={values?.privacy_policy_accepted_responsible_declaration}
               onClick={handleClickPrivacyPolicy}
               color="primary"
               value={true}
