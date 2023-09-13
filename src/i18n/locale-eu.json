@@ -611,7 +611,7 @@
     "TARIFF_MODE_INDEXED_URL": "https://eu.support.somenergia.coop/article/1275-tarifa-indexatua",
     "TARIFF_MODE_TARIFF_COMPARISON": "Laguntza Gunean <a target='_blank' href=\"{{url}}\">bi tarifen konparazio</a> bat aurkituko duzu.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL": "https://eu.support.somenergia.coop/article/1334-comparacion-de-las-tarifas-por-periodos-e-indexadas-euskera",
-    "TARIFF_CHANGE_NOT_AVAILABLE": "",
+    "TARIFF_CHANGE_NOT_AVAILABLE": "Kontratu honekin ez dago tarifa aldatzeko aukerarik.",
     "CONTRACT_PARTICULAR_TERMS": "Baldintza berezi hauek onartzean, enpresa edo pertsona kontratugileak hitzematen du egindako kontsumoa kontratatutako tarifari aplikatzekoa zaion prezioan ordainduko duela.",
     "PEAK": "Puntakoa",
     "VALLEY": "Sakonunea",
