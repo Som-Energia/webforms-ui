@@ -504,6 +504,9 @@ export const normalizeContribution = (data) => {
   contribution.amount = parseInt(data?.payment?.amount)
   contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
 
+  contribution.signaturit = data?.signaturit
+  contribution.mandate_name = data?.mandate_name
+
   return contribution
 }
 

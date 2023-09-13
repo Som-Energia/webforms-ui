@@ -84,7 +84,9 @@ const GenerationContribution = (props) => {
     annual_use: 0,
     privacy_policy_accepted: false,
     privacy_policy_accepted_responsible_declaration: false,
-    percent_over_annual_use: 0
+    percent_over_annual_use: 0,
+    signaturit:{},
+    mandate_name:''
   }
 
   const validationSchemas = [
@@ -313,7 +315,6 @@ const GenerationContribution = (props) => {
 
   const handlePost = async (values) => {
     setSending(true)
-
     if (!values.member.is_member) {
       const data = normalizeMember(values)
       await member(data)
@@ -351,7 +352,7 @@ const GenerationContribution = (props) => {
           ? error?.response?.data?.data
           : { code: 'UNEXPECTED' }
         setError(errorResp)
-      })
+      }) 
     setSending(false)
     setActiveStep(MAX_STEP_NUMBER)
     setCompleted(true)
