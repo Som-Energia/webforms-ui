@@ -1,11 +1,11 @@
 import IndexedReview from './IndexedReview'
-import {Suspense} from 'react'
+import { Suspense } from 'react'
 import Loading from 'components/Loading'
 import {
   fireEvent,
   render,
   screen,
-  queryByAttribute,
+  queryByAttribute
 } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 
@@ -66,7 +66,10 @@ describe('Test that it correctly renders', () => {
       'change-tariff-indexada-terms-check'
     )
     fireEvent.click(indexedTermsCheck)
-    expect(mockSetFieldValue).toBeCalledWith("particular_contract_terms_accepted", true)
+    expect(mockSetFieldValue).toBeCalledWith(
+      'particular_contract_terms_accepted',
+      true
+    )
   })
 
   test('Should call the setFieldValues function to change legal terms', () => {
@@ -83,7 +86,10 @@ describe('Test that it correctly renders', () => {
       'change-tariff-indexada-legal-terms-check'
     )
     fireEvent.click(legalTermsCheck)
-    expect(mockSetFieldValue).toBeCalledWith("indexed_legal_terms_accepted", true)
+    expect(mockSetFieldValue).toBeCalledWith(
+      'indexed_legal_terms_accepted',
+      true
+    )
   })
 
   test('Should call the setFieldValues function to decline general terms', async () => {
@@ -100,14 +106,13 @@ describe('Test that it correctly renders', () => {
     act(() => {
       fireEvent.click(acceptTermsCheck)
     })
-    const declineTermsButton = await screen.findByText("I_DECLINE")
-    
+    const declineTermsButton = await screen.findByText('I_DECLINE')
+
     act(() => {
-        fireEvent.click(declineTermsButton)
+      fireEvent.click(declineTermsButton)
     })
 
-    expect(mockSetFieldValue).toBeCalledWith("terms_accepted",false)
-    
+    expect(mockSetFieldValue).toBeCalledWith('terms_accepted', false)
   })
 
   test('Should call the setFieldValues function to accept general terms', async () => {
@@ -124,14 +129,12 @@ describe('Test that it correctly renders', () => {
     act(() => {
       fireEvent.click(acceptTermsCheck)
     })
-    const declineTermsButton = await screen.findByText("I_ACCEPT")
-    
+    const declineTermsButton = await screen.findByText('I_ACCEPT')
+
     act(() => {
-        fireEvent.click(declineTermsButton)
+      fireEvent.click(declineTermsButton)
     })
 
-    expect(mockSetFieldValue).toBeCalledWith("terms_accepted",true)
-    
+    expect(mockSetFieldValue).toBeCalledWith('terms_accepted', true)
   })
-
 })

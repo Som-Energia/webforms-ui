@@ -4,6 +4,8 @@
 
 - Recover tariff type for specific conditions
 - Remove old implementation to get tariff_type from OV
+- Indexed: Errors on contract state are not fatal just shown
+  in the first info page, not with the dead firefly
 
 ## 1.9.2 2023-09-08
 
@@ -19,7 +21,7 @@
 
 - Generation kwh form: Path for partners (still hidden)
 
-## 1.8.2 2023-08-23 
+## 1.8.2 2023-08-23
 
 - Fix: The way to sort the list of assignments, when there are low contracts
 - Fix: Indexed test with the new condition IsIndexedPilotOngoing
@@ -31,7 +33,7 @@
 ## 1.8.0 2023-07-18
 
 - Added the new investments table
-- Added the new assignments table 
+- Added the new assignments table
 - New Action: Partners can modify the priority of their assignments using drag and drop
 
 ## 1.7.7 2023-07-17

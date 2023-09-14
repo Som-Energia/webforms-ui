@@ -1,5 +1,11 @@
 import IndexedReviewData from './IndexedReviewData'
-import { fireEvent, render, screen, queryByAttribute, within } from '@testing-library/react'
+import {
+  fireEvent,
+  render,
+  screen,
+  queryByAttribute,
+  within
+} from '@testing-library/react'
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => {
@@ -10,8 +16,7 @@ jest.mock('react-i18next', () => ({
 }))
 
 describe('Test that it correctly renders', () => {
-
-  const getById = queryByAttribute.bind(null,'id')
+  const getById = queryByAttribute.bind(null, 'id')
 
   const mockContractValues = {
     isphisical: true,
@@ -28,14 +33,17 @@ describe('Test that it correctly renders', () => {
     donation: true,
     tariff: '2.0TD_SOM',
     powers:
-    '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}]'
+      '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}]'
   }
 
-  const mock30ContractPowers = '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}, {"value": "P3", "power": "\\"8.050\\""},{"value": "P4", "power": "\\"8.050\\""},{"value": "P5", "power": "\\"8.050\\""},{"value": "P6", "power": "\\"8.050\\""}]'
+  const mock30ContractPowers =
+    '[{"value": "P1", "power": "\\"8.050\\""}, {"value": "P2", "power": "\\"8.050\\""}, {"value": "P3", "power": "\\"8.050\\""},{"value": "P4", "power": "\\"8.050\\""},{"value": "P5", "power": "\\"8.050\\""},{"value": "P6", "power": "\\"8.050\\""}]'
 
-  const mockTargetTariff = "2.0TD Indexada Peninsula"
+  const mockTargetTariff = '2.0TD Indexada Peninsula'
 
-  let mockContractValuesNoPhisical = JSON.parse(JSON.stringify(mockContractValues))
+  let mockContractValuesNoPhisical = JSON.parse(
+    JSON.stringify(mockContractValues)
+  )
   mockContractValuesNoPhisical.isphisical = false
 
   const mockSetFieldValues = jest.fn()
@@ -63,7 +71,9 @@ describe('Test that it correctly renders', () => {
     const addressElement = screen.getByText(mockContractValues.address)
     const vatElement = screen.getByText(mockContractValues.owner_vat)
     const tariffElement = screen.getByText(mockTargetTariff)
-    const { getByText } = within(getById(dom.container,'VOLUNTARY_CENT__value'))
+    const { getByText } = within(
+      getById(dom.container, 'VOLUNTARY_CENT__value')
+    )
 
     expect(getByText('Sí')).toBeInTheDocument()
     expect(cupsElement).toBeInTheDocument()
@@ -73,7 +83,9 @@ describe('Test that it correctly renders', () => {
   })
 
   test('The component render properly all texts without donation', () => {
-    const mockContractValuesWithoutDonation = JSON.parse(JSON.stringify(mockContractValues))
+    const mockContractValuesWithoutDonation = JSON.parse(
+      JSON.stringify(mockContractValues)
+    )
     mockContractValuesWithoutDonation.donation = false
     const dom = render(
       <IndexedReviewData
@@ -88,9 +100,10 @@ describe('Test that it correctly renders', () => {
     const addressElement = screen.getByText(mockContractValues.address)
     const vatElement = screen.getByText(mockContractValues.owner_vat)
     const tariffElement = screen.getByText(mockTargetTariff)
-    const { getByText } = within(getById(dom.container,'VOLUNTARY_CENT__value'))
+    const { getByText } = within(
+      getById(dom.container, 'VOLUNTARY_CENT__value')
+    )
 
-    
     expect(cupsElement).toBeInTheDocument()
     expect(addressElement).toBeInTheDocument()
     expect(vatElement).toBeInTheDocument()
@@ -107,10 +120,9 @@ describe('Test that it correctly renders', () => {
         handleClick={mockHandleClick}
       />
     )
-    const acceptTermsCheck = getById(dom.container,'change-tarif-terms-check')
+    const acceptTermsCheck = getById(dom.container, 'change-tarif-terms-check')
     fireEvent.click(acceptTermsCheck)
     expect(mockHandleClick).toBeCalledTimes(1)
-  
   })
 
   test('Should call the handleIndexadaTermsAccepted function', () => {
@@ -123,11 +135,14 @@ describe('Test that it correctly renders', () => {
         handleIndexadaTermsAccepted={mockHandleIndexadaTermsAccepted}
       />
     )
-    const indexadaTermsCheck = getById(dom.container,'change-tariff-indexada-terms-check')
+    const indexadaTermsCheck = getById(
+      dom.container,
+      'change-tariff-indexada-terms-check'
+    )
     fireEvent.click(indexadaTermsCheck)
     expect(mockHandleIndexadaTermsAccepted).toBeCalledTimes(1)
   })
-  
+
   test('Should call the handleIndexadaLegalTermsAccepted function', () => {
     //TODO: click the check to accept the legal terms
     const dom = render(
@@ -141,13 +156,15 @@ describe('Test that it correctly renders', () => {
         isIndexedPilotOngoing={true}
       />
     )
-    const legalTermsCheck = getById(dom.container,'change-tariff-indexada-legal-terms-check')
+    const legalTermsCheck = getById(
+      dom.container,
+      'change-tariff-indexada-legal-terms-check'
+    )
     fireEvent.click(legalTermsCheck)
     expect(mockHandleIndexadaLegalTermsAccepted).toBeCalledTimes(1)
   })
 
   test('Should show the 6 powers of a 3.0 contract', () => {
-    
     let mock30ContractValues = JSON.parse(JSON.stringify(mockContractValues))
     mock30ContractValues.powers = mock30ContractPowers
     render(
@@ -162,19 +179,17 @@ describe('Test that it correctly renders', () => {
       />
     )
 
-    let counter = 0;
-    JSON.parse(mock30ContractPowers).forEach(element => {
-      counter ++;
+    let counter = 0
+    JSON.parse(mock30ContractPowers).forEach((element) => {
+      counter++
       const powerElement = screen.getByText(element.value)
       expect(powerElement).toBeInTheDocument()
     })
-    
+
     expect(counter).toBe(6)
-    
   })
 
   test('Should show the 2 powers of a 2.0 contract', () => {
-    
     render(
       <IndexedReviewData
         open={false}

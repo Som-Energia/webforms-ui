@@ -33,6 +33,7 @@ import Grid from '@material-ui/core/Grid'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
+import indexedErrorText from './Indexed/IndexedError'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 
@@ -47,12 +48,11 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-
 const Indexada = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
-  const { token, checkEnabled = true, isIndexedPilotOngoing=false } = props
+  const { token, checkEnabled = true, isIndexedPilotOngoing = false } = props
   const { language } = useParams()
 
   const [showInspector, setShowInspector] = useState(false)
@@ -75,7 +75,6 @@ const Indexada = (props) => {
   }
 
   const sectionsJson = useMemo(() => {
-
     let sectionsJson = [
       {
         title: t('GENERAL_CONDITIONS'),
@@ -83,15 +82,16 @@ const Indexada = (props) => {
       }
     ]
 
-    if(!isTariffIndexed){
-      sectionsJson.push({
-        title: t('INDEXED_SPECIFIC_CONDITIONS'),
-        text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
-      },
-      {
-        title: t('INDEXED_MARGE'),
-        text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
-      }
+    if (!isTariffIndexed) {
+      sectionsJson.push(
+        {
+          title: t('INDEXED_SPECIFIC_CONDITIONS'),
+          text: t('INDEXED_SPECIFIC_CONDITIONS_TEXT')
+        },
+        {
+          title: t('INDEXED_MARGE'),
+          text: t('INDEXED_MARGE_TEXT', { kCoefficient: kCoefficient })
+        }
       )
     }
 
@@ -108,13 +108,11 @@ const Indexada = (props) => {
     )
 
     return sectionsJson
-  },[isTariffIndexed, t, kCoefficient, hasTargetTariff])
-
-
+  }, [isTariffIndexed, t, kCoefficient, hasTargetTariff])
 
   const initialValues = {
     terms_accepted: false,
-    particular_contract_terms_accepted: false,
+    particular_contract_terms_accepted: false
   }
 
   const nextStep = (props) => {
@@ -147,14 +145,16 @@ const Indexada = (props) => {
     let params = {
       token: token,
       general_contract_terms_accepted: data.terms_accepted,
-      particular_contract_terms_accepted: data.particular_contract_terms_accepted
-     }
+      particular_contract_terms_accepted:
+        data.particular_contract_terms_accepted
+    }
 
     if (!isTariffIndexed) {
       // Not indexed, moving to an indexed, requiring those checks
       params.indexed_specific_terms_accepted = data.terms_accepted
       if (isIndexedPilotOngoing) {
-        params.indexed_pilot_legal_terms_accepted = data.indexed_legal_terms_accepted
+        params.indexed_pilot_legal_terms_accepted =
+          data.indexed_legal_terms_accepted
       }
     }
 
@@ -209,11 +209,12 @@ const Indexada = (props) => {
         .oneOf([true], t('UNACCEPTED_TERMS')),
       indexed_legal_terms_accepted: Yup.bool().when([], {
         is: () => !isTariffIndexed,
-        then: Yup.bool().required(t('UNACCEPTED_TERMS')) &&
-              Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
-        otherwise: Yup.bool().notRequired(),
-    })
+        then:
+          Yup.bool().required(t('UNACCEPTED_TERMS')) &&
+          Yup.bool().oneOf([true], t('UNACCEPTED_TERMS')),
+        otherwise: Yup.bool().notRequired()
       })
+    })
   ]
 
   if (!contractJSON.name || !contractJSON.cups) {
@@ -230,225 +231,222 @@ const Indexada = (props) => {
     )
   }
 
+  if (loadingTariff) return <Loading />
+
+  const lesserErrors = [
+    'OPEN_CASES',
+    'STATE_CONFLICT',
+    'PENDING_CONTRACT_MODIFICATION',
+    'CUSTOM_TARIFF'
+  ]
+
+  if (checkEnabled && !hasTargetTariff)
+    if (activeStep != 0 || !lesserErrors.includes(error?.code))
+      return (
+        <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+          <Failure error={error} showHeader={false} />
+        </GlobalHotKeys>
+      )
+
+  const translatedUrls = {
+    url_general_conditions: t('GENERAL_CONDITIONS_URL'),
+    url_specific_conditions: t('INDEXED_SPECIFIC_CONDITIONS_URL'),
+    url_indexada_help: t('TARIFF_INDEXED_HELP_URL'),
+    url_tariff_index_characteristics: isTariff20
+      ? t('TARIFF_CHARACTERISTICS_INDEX_20_URL')
+      : isTariff30
+      ? t('TARIFF_CHARACTERISTICS_INDEX_30_URL')
+      : t('TARIFF_CHARACTERISTICS_INDEX_6_URL'),
+    url_tariff_characteristics: isTariff20
+      ? t('TARIFF_CHARACTERISTICS_20_URL')
+      : isTariff30
+      ? t('TARIFF_CHARACTERISTICS_30_URL')
+      : t('TARIFF_CHARACTERISTICS_6_URL'),
+    url_tariff_web: isTariff20
+      ? t('TARIFF_WEB_URL')
+      : isTariff30
+      ? t('TARIFF_WEB_30_URL')
+      : t('TARIFF_WEB_6_URL')
+  }
+
+  const importantInfoBody = isTariffIndexed
+    ? isTariff20
+      ? t('PERIODS_IMPORTANT_INFO_BODY', translatedUrls)
+      : isTariff30
+      ? t('PERIODS_IMPORTANT_INFO_BODY_30', translatedUrls)
+      : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
+    : isTariff20
+    ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
+    : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
+
+  const introBody = error
+    ? <Alert severity='error'> {indexedErrorText(t, error?.code, error?.data)} </Alert>
+    : <div
+    dangerouslySetInnerHTML={{
+      __html: isTariffIndexed
+      ? t('PERIODS_INTRO_BODY', translatedUrls)
+      : t('INDEXED_INTRO_BODY', translatedUrls)
+    }}
+  />
+
   return (
     <>
-      {!loadingTariff ? (
-        <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-          {!checkEnabled || hasTargetTariff ? (
-            <MuiPickersUtilsProvider utils={DayjsUtils}>
-              <Grid container justifyContent="space-between">
-                <Grid item xs={8}>
-                  <Formik
-                    onSubmit={() => {}}
-                    enableReinitialize
-                    initialValues={initialValues}
-                    validationSchema={validationSchemas[activeStep]}
-                    validateOnMount={true}>
-                    {(formikProps) => (
-                      <>
-                        <Form
-                          id="cancelForm"
-                          method="POST"
-                          className={classes.root}
-                          noValidate
-                          autoComplete="off">
-                          <Container maxWidth="lg" disableGutters={true}>
-                            {!completed && (
-                              <>
-                                {activeStep !== 2 ? (
-                                  <IndexedContractDetails
-                                    {...formikProps.values}
-                                    data={contractJSON}
-                                    targetTariff={hasTargetTariff}
-                                    isTariff20={isTariff20}
-                                    isTariffIndexed={isTariffIndexed}
-                                  />
-                                ) : null}
+      <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
+        <MuiPickersUtilsProvider utils={DayjsUtils}>
+          <Grid container justifyContent="space-between">
+            <Grid item xs={8}>
+              <Formik
+                onSubmit={() => {}}
+                enableReinitialize
+                initialValues={initialValues}
+                validationSchema={validationSchemas[activeStep]}
+                validateOnMount={true}>
+                {(formikProps) => (
+                  <>
+                    <Form
+                      id="cancelForm"
+                      method="POST"
+                      className={classes.root}
+                      noValidate
+                      autoComplete="off">
+                      <Container maxWidth="lg" disableGutters={true}>
+                        {!completed && (
+                          <>
+                            {activeStep !== 2 ? (
+                              <IndexedContractDetails
+                                {...formikProps.values}
+                                data={contractJSON}
+                                targetTariff={hasTargetTariff}
+                                isTariff20={isTariff20}
+                                isTariffIndexed={isTariffIndexed}
+                              />
+                            ) : null}
 
-                                {activeStep === 0 ? (
-                                  <IndexedInfo
-                                    isTariff20={isTariff20}
-                                    isTariff30={isTariff30}
-                                    isTariffIndexed={isTariffIndexed}
-                                    desc={t(isTariffIndexed
-                                      ? 'PERIODS_INTRO_BODY'
-                                      : 'INDEXED_INTRO_BODY'
-                                      , {
-                                      url_tariff_index_characteristics: t(
-                                        isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_INDEX_20_URL'
-                                        : isTariff30
-                                        ? 'TARIFF_CHARACTERISTICS_INDEX_30_URL'
-                                        : 'TARIFF_CHARACTERISTICS_INDEX_6_URL'
-                                        ),
-                                      url_general_conditions: t(
-                                        'GENERAL_CONDITIONS_URL'
-                                      ),
-                                      url_specific_conditions: t(
-                                        'INDEXED_SPECIFIC_CONDITIONS_URL'
-                                      ),
-                                      url_tariff_characteristics: t(
-                                        isTariff20
-                                        ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                        : isTariff30
-                                        ? 'TARIFF_CHARACTERISTICS_30_URL'
-                                        : 'TARIFF_CHARACTERISTICS_6_URL'
-                                      )
-                                    })}
-                                    {...formikProps}
-                                  />
-                                ) : null}
-                                {activeStep === 1 ? (
-                                  <IndexedInfo
-                                    isTariff20={isTariff20}
-                                    isTariff30={isTariff30}
-                                    isTariffIndexed={isTariffIndexed}
-                                    title={t('INDEXED_INTRO_TITLE')}
-                                    desc={
-                                      isTariffIndexed
-                                      ? t(isTariff20
-                                        ? 'PERIODS_IMPORTANT_INFO_BODY'
-                                        : isTariff30
-                                        ? 'PERIODS_IMPORTANT_INFO_BODY_30'
-                                        : 'PERIODS_IMPORTANT_INFO_BODY_6',
-                                      {
-                                        url_tariff_characteristics: t(
-                                          isTariff20
-                                          ? 'TARIFF_CHARACTERISTICS_20_URL'
-                                          : isTariff30
-                                          ? 'TARIFF_CHARACTERISTICS_30_URL'
-                                          : 'TARIFF_CHARACTERISTICS_6_URL'
-                                        ),
-                                        url_tariff_web: t(
-                                          isTariff20
-                                          ? 'TARIFF_WEB_URL'
-                                          : isTariff30
-                                          ? 'TARIFF_WEB_30_URL'
-                                          : 'TARIFF_WEB_6_URL'
-                                        ),
-                                      })
-                                      : t(isTariff20
-                                        ? 'INDEXED_IMPORTANT_INFO_BODY'
-                                        : 'INDEXED_IMPORTANT_INFO_BODY_30',
-                                      {
-                                        url_indexada_help: t(
-                                          'TARIFF_INDEXED_HELP_URL'
-                                        ),
-                                      })
-                                    }
-                                    {...formikProps}
-                                  />
-                                ) : null}
-                                {activeStep === 2 ? (
-                                  <IndexedReview
-                                    isTariff20={isTariff20}
-                                    isTariffIndexed={isTariffIndexed}
-                                    isIndexedPilotOngoing={isIndexedPilotOngoing}
-                                    targetTariff={hasTargetTariff}
-                                    contractValues={contractJSON}
-                                    {...formikProps}
-                                  />
-                                ) : null}
-                                <Box mx={0} mt={2} mb={3}>
-                                  <div className={classes.actionsContainer}>
-                                    {result?.contract_number === undefined && (
-                                      <Button
-                                        data-cy="prev"
-                                        className={classes.button}
-                                        startIcon={<ArrowBackIosIcon />}
-                                        disabled={activeStep === 0 || loading}
-                                        onClick={() => prevStep(formikProps)}>
-                                        {t('PAS_ANTERIOR')}
-                                      </Button>
-                                    )}
-                                    {activeStep < MAX_STEP_NUMBER - 1 ? (
-                                      <Button
-                                        type="button"
-                                        data-cy="next"
-                                        id="change-tariff-next-step-button"
-                                        className={classes.button}
-                                        variant="contained"
-                                        color="primary"
-                                        endIcon={<ArrowForwardIosIcon />}
-                                        disabled={!formikProps.isValid}
-                                        onClick={() => nextStep(formikProps)}>
-                                        {t('SEGUENT_PAS')}
-                                      </Button>
-                                    ) : (
-                                      !completed && (
-                                        <Button
-                                          type="button"
-                                          data-cy="submit"
-                                          id="tariff-change-submit"
-                                          className={classes.button}
-                                          variant="contained"
-                                          color="primary"
-                                          startIcon={
-                                            loading ? (
-                                              <CircularProgress size={24} />
-                                            ) : (
-                                              <SendIcon />
-                                            )
-                                          }
-                                          disabled={
-                                            loading || !formikProps.isValid
-                                          }
-                                          onClick={() =>
-                                            handlePost(formikProps.values)
-                                          }>
-                                          {t('INDEXED_SUBMIT_BUTTON_TEXT')}
-                                        </Button>
-                                      )
-                                    )}
-                                  </div>
-                                </Box>
-                              </>
-                            )}
-
-                            {completed && (
-                              <Paper
-                                elevation={0}
-                                className={classes.stepContainer}>
-                                {result ? (
-                                  <Success
-                                    showHeader={false}
-                                    title={t(isTariffIndexed
-                                      ? 'PERIODS_SUCCESS_PAGE_TITLE'
-                                      : 'INDEXED_SUCCESS_PAGE_TITLE')}
-                                    subtitle={hasTargetTariff}
-                                    description={t(isTariffIndexed
-                                      ? 'PERIODS_SUCCESS_PAGE_DESC'
-                                      : 'INDEXED_SUCCESS_PAGE_DESC')}
-                                  />
-                                ) : (
-                                  <Failure error={error} showHeader={false} />
+                            {activeStep === 0 ? (
+                              <IndexedInfo
+                                isTariff20={isTariff20}
+                                isTariff30={isTariff30}
+                                isTariffIndexed={isTariffIndexed}
+                                desc={introBody}
+                                {...formikProps}
+                              />
+                            ) : null}
+                            {activeStep === 1 ? (
+                              <IndexedInfo
+                                isTariff20={isTariff20}
+                                isTariff30={isTariff30}
+                                isTariffIndexed={isTariffIndexed}
+                                title={t('INDEXED_INTRO_TITLE')}
+                                desc={importantInfoBody}
+                                {...formikProps}
+                              />
+                            ) : null}
+                            {activeStep === 2 ? (
+                              <IndexedReview
+                                isTariff20={isTariff20}
+                                isTariffIndexed={isTariffIndexed}
+                                isIndexedPilotOngoing={isIndexedPilotOngoing}
+                                targetTariff={hasTargetTariff}
+                                contractValues={contractJSON}
+                                {...formikProps}
+                              />
+                            ) : null}
+                            <Box mx={0} mt={2} mb={3}>
+                              <div className={classes.actionsContainer}>
+                                {result?.contract_number === undefined && (
+                                  <Button
+                                    data-cy="prev"
+                                    className={classes.button}
+                                    startIcon={<ArrowBackIosIcon />}
+                                    disabled={activeStep === 0 || loading}
+                                    onClick={() => prevStep(formikProps)}>
+                                    {t('PAS_ANTERIOR')}
+                                  </Button>
                                 )}
-                              </Paper>
-                            )}
-                          </Container>
-                        </Form>
-                        {showInspector && (
-                          <DisplayFormikState {...formikProps} />
+                                {activeStep < MAX_STEP_NUMBER - 1 ? (
+                                  <Button
+                                    type="button"
+                                    data-cy="next"
+                                    id="change-tariff-next-step-button"
+                                    className={classes.button}
+                                    variant="contained"
+                                    color="primary"
+                                    endIcon={<ArrowForwardIosIcon />}
+                                    disabled={
+                                      !formikProps.isValid || !hasTargetTariff
+                                    }
+                                    onClick={() => nextStep(formikProps)}>
+                                    {t('SEGUENT_PAS')}
+                                  </Button>
+                                ) : (
+                                  !completed && (
+                                    <Button
+                                      type="button"
+                                      data-cy="submit"
+                                      id="tariff-change-submit"
+                                      className={classes.button}
+                                      variant="contained"
+                                      color="primary"
+                                      startIcon={
+                                        loading ? (
+                                          <CircularProgress size={24} />
+                                        ) : (
+                                          <SendIcon />
+                                        )
+                                      }
+                                      disabled={loading || !formikProps.isValid}
+                                      onClick={() =>
+                                        handlePost(formikProps.values)
+                                      }>
+                                      {t('INDEXED_SUBMIT_BUTTON_TEXT')}
+                                    </Button>
+                                  )
+                                )}
+                              </div>
+                            </Box>
+                          </>
                         )}
-                      </>
-                    )}
-                  </Formik>
-                </Grid>
-                <Grid item xs={3}>
-                  <DropDownMenu
-                    title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
-                      sections={sectionsJson}
-                  />
-                </Grid>
-              </Grid>
-            </MuiPickersUtilsProvider>
-          ) : (
-            <Failure error={error} showHeader={false} />
-          )}
-        </GlobalHotKeys>
-      ) : (
-        <Loading />
-      )}
+
+                        {completed && (
+                          <Paper
+                            elevation={0}
+                            className={classes.stepContainer}>
+                            {result ? (
+                              <Success
+                                showHeader={false}
+                                title={t(
+                                  isTariffIndexed
+                                    ? 'PERIODS_SUCCESS_PAGE_TITLE'
+                                    : 'INDEXED_SUCCESS_PAGE_TITLE'
+                                )}
+                                subtitle={hasTargetTariff}
+                                description={t(
+                                  isTariffIndexed
+                                    ? 'PERIODS_SUCCESS_PAGE_DESC'
+                                    : 'INDEXED_SUCCESS_PAGE_DESC'
+                                )}
+                              />
+                            ) : (
+                              <Failure error={error} showHeader={false} />
+                            )}
+                          </Paper>
+                        )}
+                      </Container>
+                    </Form>
+                    {showInspector && <DisplayFormikState {...formikProps} />}
+                  </>
+                )}
+              </Formik>
+            </Grid>
+            <Grid item xs={3}>
+              <DropDownMenu
+                title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
+                sections={sectionsJson}
+              />
+            </Grid>
+          </Grid>
+        </MuiPickersUtilsProvider>
+      </GlobalHotKeys>
     </>
   )
 }

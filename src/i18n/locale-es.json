@@ -611,7 +611,7 @@
     "TARIFF_MODE_INDEXED_URL": "https://es.support.somenergia.coop/article/1273-la-tarifa-indexada",
     "TARIFF_MODE_TARIFF_COMPARISON": "En el Centro de Ayuda puedes ver una <a target='_blank' href=\"{{url}}\">comparación de las dos tarifas</a>.",
     "TARIFF_MODE_TARIFF_COMPARISON_URL": "https://es.support.somenergia.coop/article/1332-comparacion-de-las-tarifas-por-periodos-y-las-indexadas",
-    "TARIFF_CHANGE_NOT_AVAILABLE": "La tramitación del cambio de tarifa no està disponible para este contrato",
+    "TARIFF_CHANGE_NOT_AVAILABLE": "El cambio de tarifa no está disponible para este contrato.",
     "CONTRACT_PARTICULAR_TERMS": "Con la aceptación de estas condiciones particulares, la persona o empresa contratante se obliga al pago de su consumo al precio que resulte de la aplicación de la tarifa contratada.",
     "PEAK": "Punta",
     "VALLEY": "Valle",

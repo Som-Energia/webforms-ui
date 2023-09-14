@@ -10,16 +10,16 @@ jest.mock('react-i18next', () => ({
 }))
 
 describe('Test the correctly render', () => {
-  
-    const mockData = {
-        name:"mockName",
-        tariff:"mockTariff",
-    }
-    const mockTargetTariff = "mockTargetTariff" 
-
+  const mockData = {
+    name: 'mockName',
+    tariff: 'mockTariff'
+  }
+  const mockTargetTariff = 'mockTargetTariff'
 
   test('The component render properly all texts', () => {
-    render(<IndexedContractDetails data={mockData} targetTariff={mockTargetTariff} />)
+    render(
+      <IndexedContractDetails data={mockData} targetTariff={mockTargetTariff} />
+    )
     const contractElement = screen.getByText(mockData.name)
     const currentTariffElement = screen.getByText(mockData.tariff)
     const targetTariffElement = screen.getByText(mockTargetTariff)
