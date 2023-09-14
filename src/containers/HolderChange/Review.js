@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue, isTariffIndexed } = props
+  const { values, setFieldValue } = props
 
   const [open, setOpen] = useState(false)
 
