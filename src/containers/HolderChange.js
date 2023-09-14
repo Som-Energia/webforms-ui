@@ -38,11 +38,7 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange } from 'services/utils'
-import { checkIsTariffIndexed } from '../services/utils'
 
-const contractJSON = JSON.parse(
-  document.getElementById('contract-data').textContent
-)
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,8 +78,6 @@ function HolderChange(props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
-  const [isTariffIndexed] = useState(checkIsTariffIndexed(contractJSON.tariff))
-
 
   const keyMap = {
     SHOW_INSPECTOR: 'ctrl+alt+shift+d'
@@ -286,7 +280,7 @@ function HolderChange(props) {
         {activeStep === 5 && <VoluntaryCent {...props} />}
         {activeStep === 6 && <SpecialCases {...props} />}
         {activeStep === 7 && <IBAN {...props} />}
-        {activeStep === 8 && <Review isTariffIndexed={isTariffIndexed} {...props} />}
+        {activeStep === 8 && <Review {...props} />}
       </>
     )
   }
@@ -412,7 +406,8 @@ function HolderChange(props) {
       status: false,
       address: '',
       verified: false,
-      supply_point_accepted: false
+      supply_point_accepted: false,
+      tariff_type: ''
     },
     member: {
       become_member: '',
