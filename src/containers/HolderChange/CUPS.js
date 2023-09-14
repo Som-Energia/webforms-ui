@@ -73,6 +73,11 @@ function CUPS(props) {
               response?.data?.address,
               false
             )
+            setFieldValue(
+              'supply_point.tariff_type',
+              response?.data?.tariff_type,
+              false
+            )
           }
           setTouched({ supply_point: { cups: true } }, false)
           setFieldValue('supply_point.status', status, true)

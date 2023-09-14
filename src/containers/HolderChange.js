@@ -412,7 +412,8 @@ function HolderChange(props) {
       status: false,
       address: '',
       verified: false,
-      supply_point_accepted: false
+      supply_point_accepted: false,
+      tariff_type: ''
     },
     member: {
       become_member: '',

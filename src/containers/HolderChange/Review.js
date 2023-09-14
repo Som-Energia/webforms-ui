@@ -231,7 +231,7 @@ const Review = (props) => {
           <LegalText
           language={values?.holder?.language}
           documentName={
-            isTariffIndexed
+            values?.supply_point?.tariff_type === 'index'
             ?"general-and-indexed-specific-terms"
             :"general-contract-terms"
           }
@@ -248,7 +248,7 @@ const Review = (props) => {
               />
             }
             label={
-              isTariffIndexed
+              values?.supply_point?.tariff_type === 'index'
                 ? t('INDEXED_ACCEPT_CONDITIONS')
                 : t('PERIODS_ACCEPT_CONDITIONS')
             }
