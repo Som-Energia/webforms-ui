@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Recover tariff type for specific conditions
+- Remove old implementation to get tariff_type from OV
+
 ## 1.9.2 2023-09-08
 
 - Generation kwh form: Path for non partners (still hidden)
