@@ -269,7 +269,8 @@ const Indexada = (props) => {
       : t('TARIFF_WEB_6_URL')
   }
 
-  const importantInfoBody = isTariffIndexed
+  const importantInfoBody =
+  <div dangerouslySetInnerHTML={{__html:isTariffIndexed
     ? isTariff20
       ? t('PERIODS_IMPORTANT_INFO_BODY', translatedUrls)
       : isTariff30
@@ -277,13 +278,13 @@ const Indexada = (props) => {
       : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
     : isTariff20
     ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
-    : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
+    : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls) }} />
 
   const introBody = error
     ? <Alert severity='error'> {indexedErrorText(t, error?.code, error?.data)} </Alert>
-    : isTariffIndexed
+    : <div dangerouslySetInnerHTML={{__html:isTariffIndexed
       ? t('PERIODS_INTRO_BODY', translatedUrls)
-      : t('INDEXED_INTRO_BODY', translatedUrls)
+      : t('INDEXED_INTRO_BODY', translatedUrls)}}/>
 
   return (
     <>
