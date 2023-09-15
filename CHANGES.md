@@ -1,11 +1,12 @@
 # Change Log
 
-## Unreleased
+## 1.9.3 2023-09-15
 
-- Recover tariff type for specific conditions
-- Remove old implementation to get tariff_type from OV
+- HolderChange: Recover tariff type for specific conditions
+- HolderChange: Remove old implementation to get tariff_type from OV
 - Indexed: Errors on contract state are not fatal just shown
   in the first info page, not with the dead firefly
+- Indexed: Fix errors handling dangerouslySetInnerHTML
 
 ## 1.9.2 2023-09-08
 
