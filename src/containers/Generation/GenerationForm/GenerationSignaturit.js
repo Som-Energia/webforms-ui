@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { createGenerationkWhSignature } from '../../../services/api'
+import {
+  createGenerationkWhSignature
+} from '../../../services/api'
 import { useTranslation } from 'react-i18next'
+
 function GenerationSignaturit(props) {
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
@@ -28,8 +31,8 @@ function GenerationSignaturit(props) {
     })
       .then((response) => {
         setLoading(false)
-        setFieldValue("signaturit",response?.data?.signaturit)
-        setFieldValue("mandate_name",response?.data?.mandate_name)
+        setFieldValue('signaturit', response?.data?.signaturit)
+        setFieldValue('mandate_name', response?.data?.mandate_name)
         setSignaturitResponseUrl(response?.data?.signaturit?.url)
       })
       .catch((err) => {
@@ -39,29 +42,42 @@ function GenerationSignaturit(props) {
   }, [i18n, values, setFieldValue])
 
   const signaturitDocResponse = useCallback(
-    (e) => {
-      if (e.data.event === 'completed') {
-
+    (e, values) => {
+      if (e?.data?.event === 'completed') {
         submit(values)
+        window.removeEventListener('message', function(e){signaturitDocResponse(e,values)})
       }
     },
-    [submit, values]
+    [values, submit]
   )
 
-  useEffect(() => {
-    window.addEventListener('message', signaturitDocResponse)
-    getSignaturit()
+  
 
-    return () => window.removeEventListener('message', signaturitDocResponse)
+  useEffect(() => {
+    if(values.signaturit && values.mandate_name){
+      window.addEventListener('message', function(e){signaturitDocResponse(e,values)})
+    }
+    return () => window.removeEventListener('message', function(e){signaturitDocResponse(e,values)})
+  }, [signaturitDocResponse,values])
+
+  useEffect(() => {
+    getSignaturit()
   }, [])
 
-  
   return (
     <div style={{ height: '100vh' }}>
       {loading ? (
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>Loading...</div> 
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+          Loading...
+        </div>
       ) : (
         <iframe
+          title="signaturit_iframe"
           id="iframe_signaturit"
           src={signaturitResponseUrl}
           style={{ position: 'relative', height: '95%', width: '100%' }}

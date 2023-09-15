@@ -108,7 +108,7 @@ const GenerationMemberIdFields = (props) => {
     } else {
       setFieldValue('member.checked', false)
     }
-  }, [t, values.member.number, values.member.vat, setFieldValue, setErrors])
+  }, [t, values.member.number, values.member.vat, setFieldValue, setErrors, isTesting])
 
   useEffect(() => {
     let hash = query.get('h')

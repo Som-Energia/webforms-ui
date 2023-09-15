@@ -25,10 +25,9 @@ import {
   normalizeContribution,
   normalizeMember
 } from '../../../services/utils'
-import { contribution, member } from '../../../services/api'
+import { generationkWhContribution, member } from '../../../services/api'
 import PrevButton from 'components/Buttons/PrevButton'
 import NextButton from 'components/Buttons/NextButton'
-import SubmitButton from 'components/Buttons/SubmitButton'
 import ExitButton from 'components/Buttons/ExitButton'
 import PersonalData from '../../HolderChange/PersonalData'
 import GenerationSignaturit from './GenerationSignaturit'
@@ -78,14 +77,14 @@ const GenerationContribution = (props) => {
       amount: '',
       iban: '',
       payment_method: 'iban',
-      sepa_accepted: false
+      sepa_accepted: true
     },
     number_of_actions: 0,
     annual_use: 0,
     privacy_policy_accepted: false,
     privacy_policy_accepted_responsible_declaration: false,
     percent_over_annual_use: 0,
-    signaturit:{},
+    signaturit: {},
     mandate_name:''
   }
 
@@ -335,9 +334,9 @@ const GenerationContribution = (props) => {
           setError(errorResp)
         })
     }
+    const dataCon = normalizeContribution(values,true)
 
-    const data = normalizeContribution(values)
-    await contribution(data)
+    await generationkWhContribution(dataCon)
       .then((response) => {
         if (response?.state === true) {
           setError(false)
