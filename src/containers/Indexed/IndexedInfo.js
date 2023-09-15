@@ -12,7 +12,7 @@ const IndexedInfo = ({ title, desc }) => {
       {title ? <Header>{title}</Header> : null}
       {desc ? (
         <Card>
-          {desc}
+          <div dangerouslySetInnerHTML={{__html:desc}} />
         </Card>
       ) : null}
     </div>
