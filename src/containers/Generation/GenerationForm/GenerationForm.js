@@ -50,6 +50,7 @@ const GenerationContribution = (props) => {
 
   const initialValues = {
     member: {
+      partner_number: '',
       is_member: true,
       number: '',
       vat: '',
@@ -92,7 +93,7 @@ const GenerationContribution = (props) => {
     Yup.object().shape({
       is_member: Yup.bool().oneOf([true, false], t('NO_IS_MEMBER')),
       member: Yup.object().shape({
-        number: Yup.string().when('is_member', {
+        partner_number: Yup.string().when('is_member', {
           is: true,
           then: Yup.string().required(t('NO_MEMBER_NUMBER'))
         }),
@@ -321,7 +322,7 @@ const GenerationContribution = (props) => {
           if (response?.state === true) {
             setError(false)
             // setResult({ contract_number: response?.data?.soci_num })
-            values.member.number = response?.data?.soci_num
+            values.member.partner_number = response?.data?.soci_num
           } else {
             setError(true)
           }

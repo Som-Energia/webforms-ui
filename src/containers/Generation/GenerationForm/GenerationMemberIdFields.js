@@ -65,7 +65,7 @@ const GenerationMemberIdFields = (props) => {
 
       try {
         const member = await checkMember(
-          values.member.number,
+          values.member.partner_number,
           values.member.vat
         )
         if (member?.state === true) {
@@ -79,7 +79,7 @@ const GenerationMemberIdFields = (props) => {
       }
       try {
         let res = await checkIsFromGenerationEnabledZone({
-          memberNumber: values.member.number,
+          memberNumber: values.member.partner_number,
           memberVat: values.member.vat
         })
         setFieldValue('member.checked', true)
@@ -99,7 +99,7 @@ const GenerationMemberIdFields = (props) => {
     }
 
     if (
-      values?.member?.number &&
+      values?.member?.partner_number &&
       values?.member?.vat &&
       values.member.vat.length >= 9 &&
       !isTesting
@@ -108,14 +108,14 @@ const GenerationMemberIdFields = (props) => {
     } else {
       setFieldValue('member.checked', false)
     }
-  }, [t, values.member.number, values.member.vat, setFieldValue, setErrors, isTesting])
+  }, [t, values.member.partner_number, values.member.vat, setFieldValue, setErrors, isTesting])
 
   useEffect(() => {
     let hash = query.get('h')
     try {
       hash = hash && atob(hash).split(';')
       if (hash && hash.length > 1) {
-        setFieldValue('member.number', hash[0], false)
+        setFieldValue('member.partner_number', hash[0], false)
         setFieldValue('member.vat', hash[1])
         setDisabled(true)
       }
@@ -130,11 +130,11 @@ const GenerationMemberIdFields = (props) => {
         <TextField
           required
           id="memberNumber"
-          name="member.number"
+          name="member.partner_number"
           label={t('NUMERO_SOCI')}
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.member.number}
+          value={values.member.partner_number}
           fullWidth
           disabled={disabled}
           variant="outlined"
@@ -151,10 +151,10 @@ const GenerationMemberIdFields = (props) => {
           }}
           error={
             error !== false ||
-            (errors?.member?.number && touched?.member?.number)
+            (errors?.member?.partner_number && touched?.member?.partner_number)
           }
           helperText={
-            (touched?.member?.number && errors?.member?.number) ||
+            (touched?.member?.partner_number && errors?.member?.partner_number) ||
             (!values?.member?.checked ? (
               error ? (
                 <span

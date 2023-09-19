@@ -4,6 +4,10 @@ import {
 } from '../../../services/api'
 import { useTranslation } from 'react-i18next'
 
+let signaturitHook = () => undefined
+
+window.addEventListener('message', function(e){signaturitHook(e)})
+
 function GenerationSignaturit(props) {
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
@@ -12,7 +16,7 @@ function GenerationSignaturit(props) {
 
   const getSignaturit = useCallback(() => {
     createGenerationkWhSignature({
-      partner_number: values?.member?.number,
+      partner_number: values?.member?.partner_number,
       nif: values?.member?.vat,
       full_name:
         values?.member?.name +
@@ -41,24 +45,14 @@ function GenerationSignaturit(props) {
       })
   }, [i18n, values, setFieldValue])
 
-  const signaturitDocResponse = useCallback(
-    (e, values) => {
+  signaturitHook = useCallback(
+    (e) => {
       if (e?.data?.event === 'completed') {
         submit(values)
-        window.removeEventListener('message', function(e){signaturitDocResponse(e,values)})
       }
     },
     [values, submit]
   )
-
-  
-
-  useEffect(() => {
-    if(values.signaturit && values.mandate_name){
-      window.addEventListener('message', function(e){signaturitDocResponse(e,values)})
-    }
-    return () => window.removeEventListener('message', function(e){signaturitDocResponse(e,values)})
-  }, [signaturitDocResponse,values])
 
   useEffect(() => {
     getSignaturit()
