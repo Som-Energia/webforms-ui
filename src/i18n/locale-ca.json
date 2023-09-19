@@ -95,7 +95,7 @@
     "VAT_HOLDERCHANGE_LABEL": "NIF de la nova titular",
     "VAT_HELP": "I si no disposo d'un NIF?",
     "NO_VAT_HELP": "Si no disposes de NIE i tens passaport, ens pots enviar un correu a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> amb les dades del punt de subministrament que vols canviar (número de contracte i CUPS), les dades de la nova persona titular (nom, cognoms, passaport adjunt, correu electrònic i telèfon de contacte) i dades IBAN de pagament.",
-    "CIF_COMMUNITY_OWNERS": "Malauradament, per llei, les comunitats veïnals no es poden fer sòcies de cooperatives. Et convidem que sigui un membre de la comunitat veïnal, o bé la persona administradora de finques, qui es faci sòcia de Som Energia. Per a més informació, podeu consultar el Centre d’Ajuda.",
+    "CIF_COMMUNITY_OWNERS": "Malauradament, per llei, les comunitats veïnals no es poden fer sòcies de cooperatives. Et convidem que sigui un membre de la comunitat veïnal, o bé la persona administradora de finques, qui es faci sòcia de Som Energia. Per a més informació, podeu consultar el <a target=\"_blank\" href=\"https://ca.support.somenergia.coop\">Centre d’Ajuda</a>.",
     "CUPS_TITLE": "Identifica el punt de subministrament",
     "FILL_CUPS": "<b>Indica el codi CUPS</b> (codi universal de punt de subministrament):",
     "CUPS_LABEL": "CUPS",
