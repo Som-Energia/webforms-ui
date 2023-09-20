@@ -680,5 +680,6 @@
     "GENERATION_FORM_SUCCESS_TITLE":"¡Muchas gracias por tu apoyo al cambio de modelo energético!",
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>En breve recibirás por correo electrónico una copia del contrato de préstamo al Generation kWh que acabas de suscribir y en unos días procedemos al cargo en la cuenta bancaria que has indicado.</p><p>¡Buena energía!</p>",
     "GENERATION_FORM_SIGN_BUTTON":"Firmar",
-    "GENERATION_FORM_IN_PROCESS":"La solicitud se está procesando..."
+    "GENERATION_FORM_IN_PROCESS":"La solicitud se está procesando...",
+    "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulario para hacerse socio/socia"
 }

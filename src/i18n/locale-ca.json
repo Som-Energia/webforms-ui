@@ -681,5 +681,6 @@
     "GENERATION_FORM_SUCCESS_TITLE":"Moltes gràcies pel teu suport al canvi de model energètic!",
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>Ben aviat rebràs per correu electrònic una còpia del contracte de préstec al Generation kWh que acabes de subscriure i en uns dies farem el càrrec al compte bancari que has indicat.</p><p>Bona Energia!</p>",
     "GENERATION_FORM_SIGN_BUTTON":"Signar",
-    "GENERATION_FORM_IN_PROCESS":"la sol·licitud s'està processant..."
+    "GENERATION_FORM_IN_PROCESS":"la sol·licitud s'està processant...",
+    "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulari per fer-se soci/sòcia"
 }
