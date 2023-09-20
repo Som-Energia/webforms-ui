@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '700px',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    gap: "5px"
   }
 }))
 
@@ -31,7 +32,7 @@ function GenerationSignaturit(props) {
   const [loading, setLoading] = useState(true)
   const [completed, setCompleted] = useState(false)
   const { i18n } = useTranslation()
-  const { submit, values, setFieldValue } = props
+  const { submit, values, setFieldValue, title } = props
   const { t } = useTranslation()
   const classes = useStyles()
   const getSignaturit = useCallback(() => {
@@ -81,13 +82,10 @@ function GenerationSignaturit(props) {
 
   return (
     <>
-      <StepHeader title={t('GENERATION_FORM_TITLE')} />
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{
-          __html: t('GENERATION_FORM_REVIEW_SECONDARY_TEXT')
-        }}
-      />
+      <Typography component="h1" variant="h3">
+        {title}
+      </Typography>
+
       {loading || completed ? (
         <div className={classes.root}>
           <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />

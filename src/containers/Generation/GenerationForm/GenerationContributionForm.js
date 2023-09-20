@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const GenerationContributionForm = (props) => {
-  const { values, handleBlur, errors, touched, setFieldValue } = props
+  const { values, handleBlur, errors, touched, setFieldValue, title } = props
 
   const { t } = useTranslation()
   const classes = useStyles()
@@ -116,7 +116,9 @@ const GenerationContributionForm = (props) => {
 
   return (
     <>
-      <StepHeader title={t('GENERATION_FORM_TITLE')} />
+      <Typography component="h1" variant="h3">
+        {title}
+      </Typography>
       <Typography variant="h6">
         {t('GENERATION_FORM_ANNUAL_USE_TITLE')}
       </Typography>

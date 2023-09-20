@@ -376,14 +376,14 @@ const GenerationContribution = (props) => {
                 />
               )}
               {activeStep === 1 && (
-                <PersonalData {...formikProps} entity="member" />
+                <PersonalData title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')} {...formikProps} entity="member" />
               )}
               {activeStep === 2 && (
-                <GenerationContributionForm {...formikProps} />
+                <GenerationContributionForm title={t('GENERATION_FORM_TITLE')} {...formikProps} />
               )}
-              {activeStep === 3 && <GenerationReview {...formikProps} />}
+              {activeStep === 3 && <GenerationReview title={t('GENERATION_FORM_TITLE')} {...formikProps} />}
               {activeStep === 4 && (
-                <GenerationSignaturit submit={handlePost} {...formikProps} />
+                <GenerationSignaturit title={t('GENERATION_FORM_TITLE')} submit={handlePost} {...formikProps} />
               )}
 
               {completed && (

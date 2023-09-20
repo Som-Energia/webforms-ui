@@ -25,6 +25,7 @@ import VATField from 'components/VATField'
 
 import { languages } from 'services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
+import { Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -49,6 +50,7 @@ function PersonalData(props) {
     errors,
     touched,
     skipPrivacyPolicy = false,
+    title = false,
     entity = 'holder'
   } = props
   const [openLegal, setOpenLegal] = useState(false)
@@ -112,6 +114,7 @@ function PersonalData(props) {
 
   return (
     <>
+      {title ? <Typography component='h1' variant='h3'>{title}</Typography> : null}
       <StepHeader
         title={t(
           entity === 'holder' ? 'HOLDER_PERSONAL_DATA' : 'MEMBER_PERSONAL_DATA'
@@ -454,8 +457,7 @@ function PersonalData(props) {
                   </InputAdornment>
                 )
               }}
-              variant="outlined"
-            >
+              variant="outlined">
               {Object.keys(languages).map((id) => (
                 <MenuItem key={id} value={id}>
                   {languages[id]}
@@ -547,8 +549,7 @@ function PersonalData(props) {
                   open={openLegal}
                   onAccept={handleAccept}
                   onClose={handleClose}
-                  maxWidth="sm"
-                >
+                  maxWidth="sm">
                   <span
                     dangerouslySetInnerHTML={{
                       __html:
