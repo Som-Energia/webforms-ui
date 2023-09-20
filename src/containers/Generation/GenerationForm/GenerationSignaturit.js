@@ -1,19 +1,39 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import {
-  createGenerationkWhSignature
-} from '../../../services/api'
+import { createGenerationkWhSignature } from '../../../services/api'
 import { useTranslation } from 'react-i18next'
+import cuca from '../../../images/cuca.svg'
+import { makeStyles } from '@material-ui/core/styles'
+import { CircularProgress, Typography } from '@material-ui/core/'
+import StepHeader from '../../../components/StepHeader'
 
 let signaturitHook = () => undefined
 
-window.addEventListener('message', function(e){signaturitHook(e)})
+window.addEventListener('message', function (e) {
+  signaturitHook(e)
+})
+
+const useStyles = makeStyles((theme) => ({
+  logo: {
+    width: '70px',
+    margin: theme.spacing(2)
+  },
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '700px',
+    flexDirection: 'column'
+  }
+}))
 
 function GenerationSignaturit(props) {
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
+  const [completed, setCompleted] = useState(false)
   const { i18n } = useTranslation()
   const { submit, values, setFieldValue } = props
-
+  const { t } = useTranslation()
+  const classes = useStyles()
   const getSignaturit = useCallback(() => {
     createGenerationkWhSignature({
       partner_number: values?.member?.partner_number,
@@ -49,6 +69,7 @@ function GenerationSignaturit(props) {
     (e) => {
       if (e?.data?.event === 'completed') {
         submit(values)
+        setCompleted(true)
       }
     },
     [values, submit]
@@ -59,25 +80,38 @@ function GenerationSignaturit(props) {
   }, [])
 
   return (
-    <div style={{ height: '100vh' }}>
-      {loading ? (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-          Loading...
+    <>
+      <StepHeader title={t('GENERATION_FORM_TITLE')} />
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: t('GENERATION_FORM_REVIEW_SECONDARY_TEXT')
+        }}
+      />
+      {loading || completed ? (
+        <div className={classes.root}>
+          <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />
+          <CircularProgress color="secondary" />
+          {completed ? (
+            <>
+              <Typography
+                variant="body2"
+                dangerouslySetInnerHTML={{
+                  __html: t('GENERATION_FORM_IN_PROCESS')
+                }}
+              />
+            </>
+          ) : null}
         </div>
       ) : (
         <iframe
           title="signaturit_iframe"
           id="iframe_signaturit"
           src={signaturitResponseUrl}
-          style={{ position: 'relative', height: '95%', width: '100%' }}
+          style={{ height: '700px', width: '100%' }}
         />
       )}
-    </div>
+    </>
   )
 }
 

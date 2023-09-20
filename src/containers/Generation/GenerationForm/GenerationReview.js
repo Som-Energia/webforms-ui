@@ -103,7 +103,7 @@ const Review = (props) => {
             <>
               <ReviewField
                 label={t('NUMERO_SOCI')}
-                value={`${values?.member?.number}`}
+                value={`${values?.member?.partner_number}`}
               />
             </>
           )}
