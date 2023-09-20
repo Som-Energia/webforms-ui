@@ -678,5 +678,6 @@
     "GENERATION_ANNUAL_USE_MIN":"Zero baino balio handiagoa izan behar du",
     "GENERATION_FORM_SUCCESS_TITLE":"Eskerrik asko eredu energetikoa aldatzen laguntzeagatik!",
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>Laster jasoko duzu posta elektronikoz sinatu berri duzun Generation kWh proiekturako mailegu-kontratuaren kopia bat eta, egun batzuen buruan, zenbatekoa adierazitako banku-kontuan kobratuko dugu.</p><p>Gora energia!</p>",
-    "GENERATION_FORM_SIGN_BUTTON":"Sinatu"
+   "GENERATION_FORM_SIGN_BUTTON":"Sinatu",
+   "GENERATION_FORM_IN_PROCESS":"Eskaera prozesatzen ari da..."
 }

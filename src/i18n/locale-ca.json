@@ -672,7 +672,7 @@
     "GENERATION_FORM_INFO_NOT_VALID_DATA_OF_PARTNER":"Si et sembla que tenim malament les teves dades de residència, escriu-nos a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
     "GENERATION_FORM_HELP_CENTER_URL":"https://ca.support.somenergia.coop/category/580-generation-kwh",
     "GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED":"No hem pogut validar les dades, posa't en contacte amb <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> perquè et puguem donar un cop de mà",
-    "GENERATION_FORM_MEMBER_IDENTIFIER_DESC":"Tingues en compte que per poder participar en el Generation kWh és necessari que siguis soci o sòcia de la cooperativa.",
+    "GENERATION_FORM_MEMBER_IDENTIFIER_DESC":"Tingues en compte que per poder participar en el Generation kWh és necessari que siguis persona sòcia de la cooperativa.",
     "GENERATION_FORM__MEMBER_WARNING":"<p>Ja pots participar al <strong>Generation kWh perquè està oberta la possibilitat a la teva zona!</strong></p><p>Ara, a part de la quantitat amb què decideixis participar en el Generation kWh, per ser soci/sòcia has de fer una aportació al capital social de <strong>100 €</strong>, que es tornen en el supòsit que algun dia et vulguis donar de baixa.</p>",
     "GENERATION_FORM__NO_MEMBER_TO_MEMBER_FORM":"<b>Tot i així, si encara vols fer el pas de fer-te soci/sòcia, pots fer-ho a través d'aquest <a target=\"_blank\" href=\"{{url}}\">formulari</a>.</b>",
     "GENERATION_FORM__MEMBER_FORM_URL":"https://www.somenergia.coop/ca/fes-te-n-soci-a/",
@@ -680,5 +680,6 @@
     "GENERATION_ANNUAL_USE_MIN":"Ha de ser un valor major que zero",
     "GENERATION_FORM_SUCCESS_TITLE":"Moltes gràcies pel teu suport al canvi de model energètic!",
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>Ben aviat rebràs per correu electrònic una còpia del contracte de préstec al Generation kWh que acabes de subscriure i en uns dies farem el càrrec al compte bancari que has indicat.</p><p>Bona Energia!</p>",
-    "GENERATION_FORM_SIGN_BUTTON":"Signar"
+    "GENERATION_FORM_SIGN_BUTTON":"Signar",
+    "GENERATION_FORM_IN_PROCESS":"la sol·licitud s'està processant..."
 }
