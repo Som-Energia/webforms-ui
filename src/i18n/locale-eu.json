@@ -648,7 +648,7 @@
     "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"Aldaketa erregistratu dugu eta 2 egun baliodunen buruan burutuko dugu.",
     "GENERATION_FORM_TITLE":"Generation kWh proiektuan parte hartzeko formularioa",
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Urteko elektrizitate-erabilera",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Adierazi urtean zenbat elektrizitate erabiltzen duzun.",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Adierazi urtean <a target=_\"__blank\" href=\"{{url}}\">zenbat elektrizitate</a> erabiltzen duzun (adibidez, 2.500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Urteko kontsumoa kWh-tan",
     "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Adibidez 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"Zenbat akzio energetiko nahi dituzu?*",
@@ -680,5 +680,6 @@
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>Laster jasoko duzu posta elektronikoz sinatu berri duzun Generation kWh proiekturako mailegu-kontratuaren kopia bat eta, egun batzuen buruan, zenbatekoa adierazitako banku-kontuan kobratuko dugu.</p><p>Gora energia!</p>",
    "GENERATION_FORM_SIGN_BUTTON":"Sinatu",
    "GENERATION_FORM_IN_PROCESS":"Eskaera prozesatzen ari da...",
-   "GENERATION_FORM_PERSONAL_DATA_TITLE":"Bazkide izateko formularioa"
+   "GENERATION_FORM_PERSONAL_DATA_TITLE":"Bazkide izateko formularioa",
+   "GENERATION_FORM_ANNUAL_CONSUMPTION_URL":"https://eu.support.somenergia.coop/article/947-nola-jakin-dezaket-urtean-zenbat-elektrizitate-erabiltzen-dudan?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara"
 }

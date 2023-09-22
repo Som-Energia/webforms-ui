@@ -649,7 +649,7 @@
     "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El canvi s’ha registrat correctament i serà efectiu en 2 dies hàbils.",
     "GENERATION_FORM_TITLE":"Formulari de participació Generation kWh",
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Ús elèctric anual",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introdueix la quantitat d’electricitat que fas servir anualment.",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introdueix la <a target=_\"__blank\" href=\"{{url}}\">quantitat d’electricitat</a> que fas servir anualment (p.e. 2500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Consum anual en kWh",
     "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Per exemple 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"Quantes accions energètiques voldries?*",
@@ -682,5 +682,6 @@
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>Ben aviat rebràs per correu electrònic una còpia del contracte de préstec al Generation kWh que acabes de subscriure i en uns dies farem el càrrec al compte bancari que has indicat.</p><p>Bona Energia!</p>",
     "GENERATION_FORM_SIGN_BUTTON":"Signar",
     "GENERATION_FORM_IN_PROCESS":"la sol·licitud s'està processant...",
-    "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulari per fer-se soci/sòcia"
+    "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulari per fer-se soci/sòcia",
+    "GENERATION_FORM_ANNUAL_CONSUMPTION_URL":"https://ca.support.somenergia.coop/article/945-com-puc-saber-el-meu-us-anual-delectricitat"
 }

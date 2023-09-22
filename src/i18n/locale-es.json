@@ -648,7 +648,7 @@
     "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS":"El cambio se ha registrado correctamente y será efectivo en 2 días hábiles.",
     "GENERATION_FORM_TITLE":"Formulario de participación Generation kWh",
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Uso eléctrico anual",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introduce la cantidad de electricidad que usas.",
+    "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introduce la <a target=_\"__blank\" href=\"{{url}}\">cantidad de electricidad</a> que usas (p.e. 2500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Consumo anual en kWh",
     "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Por ejemplo 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"¿Cuántas acciones energéticas querrías?*",
@@ -681,5 +681,6 @@
     "GENERATION_FORM_SUCCESS_DESCRIPTION":"<p>En breve recibirás por correo electrónico una copia del contrato de préstamo al Generation kWh que acabas de suscribir y en unos días procedemos al cargo en la cuenta bancaria que has indicado.</p><p>¡Buena energía!</p>",
     "GENERATION_FORM_SIGN_BUTTON":"Firmar",
     "GENERATION_FORM_IN_PROCESS":"La solicitud se está procesando...",
-    "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulario para hacerse socio/socia"
+    "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulario para hacerse socio/socia",
+    "GENERATION_FORM_ANNUAL_CONSUMPTION_URL":"https://es.support.somenergia.coop/article/946-como-puedo-saber-mi-uso-anual-de-electricidad?utm_source=linkidiomes&utm_medium=cda&utm_campaign=castellano"
 }
