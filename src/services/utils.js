@@ -498,11 +498,12 @@ export const templateData = {
 
 export const normalizeContribution = (data, signaturitData) => {
   const contribution = {}
-  contribution.socinumber = data?.member?.partner_number
+  contribution.socinumber = data?.member?.number
   contribution.dni = data?.member?.vat
   contribution.accountbankiban = data?.payment?.iban
   contribution.amount = parseInt(data?.payment?.amount)
   if(signaturitData){
+    contribution.socinumber = data?.member?.partner_number
     contribution.signaturit = data?.signaturit
     contribution.mandate_name = data?.mandate_name
     contribution.acceptaccountowner = "1"
