@@ -706,51 +706,6 @@ const Contract = (props) => {
         {(showAllSteps || completed) && error && <Failure error={error} />}
         {(showAllSteps || completed) && !error && <Success result={result} />}
 
-        {/*
-        {(showAllSteps || activeStep === memberIdentifierPage) && (
-          <MemberIdentifier
-            {...props}
-            is30ContractEnabled={is30ContractEnabled}
-          />
-        )}
-        {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
-        {(showAllSteps || activeStep === supplyPointPage) && (
-          <SupplyPoint {...props} isCadastralReference={isCadastralReference} />
-        )}
-        {(showAllSteps || activeStep === powerFarePage) && (
-          <PowerFare
-            rates={rates}
-            isIndexedContractEnabled={isIndexedContractEnabled}
-            is30ContractEnabled={is30ContractEnabled}
-            {...props}
-          />
-        )}
-        {(showAllSteps || activeStep === tariffModePage) && (
-          <TariffMode {...props} />
-        )}
-        {(showAllSteps || activeStep === selfConsumptionPage) && (
-          <SelfConsumption {...props} />
-        )}
-        {(showAllSteps || activeStep === selfConsumptionDetailsPage) && (
-          <SelfConsumptionDetails {...props} />
-        )}
-        {(showAllSteps || activeStep === holderIdentifierPage) && (
-          <HolderIdentifier {...props} />
-        )}
-        {(showAllSteps || activeStep === personalDataPage) && (
-          <PersonalData skipPrivacyPolicy url={dataProtectionUrl} {...props} />
-        )}
-        {(showAllSteps || activeStep === voluntaryCentPage) && (
-          <VoluntaryCent {...props} />
-        )}
-        {(showAllSteps || activeStep === ibanPage) && <IBAN {...props} />}
-        {(showAllSteps || activeStep === reviewPage) && (
-          <Review
-            isIndexedContractEnabled={isIndexedContractEnabled}
-            {...props}
-          />
-        )}
-        */}
       </>
     )
   }
@@ -760,34 +715,6 @@ const Contract = (props) => {
     while (steps[next]?.props?.skip && steps[next]?.props?.skip(props)) {
       next++
     }
-    /*
-    // If indexed contracts are not enabled, skip tariffModePage
-    if (next === tariffModePage && !isIndexedContractEnabled) {
-      next++
-    }
-
-    // If the contract has no service, do not ask about self consumption
-    if (next === selfConsumptionPage && !props.values.contract.has_service) {
-      next++
-    }
-
-    // If no self consumption, do not ask for details
-    if (
-      next === selfConsumptionDetailsPage &&
-      !props.values.self_consumption.have_installation
-    ) {
-      next++
-    }
-
-    // If the owner is the member, do not ask personal data
-    if (
-      next === personalDataPage &&
-      props.values.holder.vat === props.values.member.vat &&
-      props.values.holder.isphisical
-    ) {
-      next++
-    }
-    */
     const last = maxStepNumber
     props.submitForm().then(() => {
       if (props.isValid) {
@@ -803,33 +730,6 @@ const Contract = (props) => {
     while (steps[prev]?.props?.skip && steps[prev].props.skip(props)) {
       prev--
     }
-    /*
-    // Skip holder personal data unless holder is not member or judiric
-    if (
-      prev === personalDataPage &&
-      props.values.holder.vat === props.values.member.vat &&
-      props.values.holder.isphisical
-    ) {
-      prev--
-    }
-    // Skip selfConsumptionDetailsPage if has no self consumption installation
-    if (
-      prev === selfConsumptionDetailsPage &&
-      !props.values.self_consumption.have_installation
-    ) {
-      prev--
-    }
-    // Skip selfConsumption choice if the supply point has no service
-    if (prev === selfConsumptionPage && !props.values.contract.has_service) {
-      prev--
-    }
-
-    // If indexed contracts are not enabled, skip tariffModePage
-    if (prev === tariffModePage && !isIndexedContractEnabled) {
-      prev--
-    }
-    */
-
     setActiveStep(Math.max(0, prev))
     if (completed) {
       setCompleted(false)
