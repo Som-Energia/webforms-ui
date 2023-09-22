@@ -433,3 +433,25 @@ export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
     return response?.data
   })
 }
+
+export const createGenerationkWhSignature = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}/form/create_gkwh_signature`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+
+export const generationkWhContribution = async (data) => {
+
+  return axios({
+    method: 'POST',
+    url: `${API_BASE_URL}/form/generationkwh`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}

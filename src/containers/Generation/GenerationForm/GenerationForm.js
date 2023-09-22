@@ -25,14 +25,14 @@ import {
   normalizeContribution,
   normalizeMember
 } from '../../../services/utils'
-import { contribution, member } from '../../../services/api'
+import { generationkWhContribution, member } from '../../../services/api'
 import PrevButton from 'components/Buttons/PrevButton'
 import NextButton from 'components/Buttons/NextButton'
-import SubmitButton from 'components/Buttons/SubmitButton'
 import ExitButton from 'components/Buttons/ExitButton'
 import PersonalData from '../../HolderChange/PersonalData'
+import GenerationSignaturit from './GenerationSignaturit'
 
-const MAX_STEP_NUMBER = 4
+const MAX_STEP_NUMBER = 5
 
 const GenerationContribution = (props) => {
   const classes = useStyles()
@@ -44,13 +44,13 @@ const GenerationContribution = (props) => {
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
 
-
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
   const initialValues = {
     member: {
+      partner_number: '',
       is_member: true,
       number: '',
       vat: '',
@@ -78,20 +78,22 @@ const GenerationContribution = (props) => {
       amount: '',
       iban: '',
       payment_method: 'iban',
-      sepa_accepted: false
+      sepa_accepted: true
     },
     number_of_actions: 0,
     annual_use: 0,
     privacy_policy_accepted: false,
     privacy_policy_accepted_responsible_declaration: false,
-    percent_over_annual_use: 0
+    percent_over_annual_use: 0,
+    signaturit: {},
+    mandate_name:''
   }
 
   const validationSchemas = [
     Yup.object().shape({
       is_member: Yup.bool().oneOf([true, false], t('NO_IS_MEMBER')),
       member: Yup.object().shape({
-        number: Yup.string().when('is_member', {
+        partner_number: Yup.string().when('is_member', {
           is: true,
           then: Yup.string().required(t('NO_MEMBER_NUMBER'))
         }),
@@ -298,7 +300,7 @@ const GenerationContribution = (props) => {
               : !formikProps.isValid
           }
           onClick={() => nextStep(formikProps)}
-          title={t('SEGUENT_PAS')}
+          title={activeStep===3 ? t('GENERATION_FORM_SIGN_BUTTON') : t('SEGUENT_PAS')}
         />
       ) : (
         <ExitButton
@@ -308,12 +310,11 @@ const GenerationContribution = (props) => {
         />
       )
     },
-    [nextStep, t]
+    [nextStep, t, activeStep]
   )
 
   const handlePost = async (values) => {
     setSending(true)
-
     if (!values.member.is_member) {
       const data = normalizeMember(values)
       await member(data)
@@ -321,7 +322,7 @@ const GenerationContribution = (props) => {
           if (response?.state === true) {
             setError(false)
             // setResult({ contract_number: response?.data?.soci_num })
-            values.member.number = response?.data?.soci_num
+            values.member.partner_number = response?.data?.soci_num
           } else {
             setError(true)
           }
@@ -334,9 +335,9 @@ const GenerationContribution = (props) => {
           setError(errorResp)
         })
     }
+    const dataCon = normalizeContribution(values,true)
 
-    const data = normalizeContribution(values)
-    await contribution(data)
+    await generationkWhContribution(dataCon)
       .then((response) => {
         if (response?.state === true) {
           setError(false)
@@ -358,79 +359,70 @@ const GenerationContribution = (props) => {
   }
 
   return (
-      <Formik
-        onSubmit={() => {}}
-        enableReinitialize
-        initialValues={initialValues}
-        validationSchema={validationSchemas[activeStep]}
-        validateOnMount={true}>
-        {(formikProps) => (
-          <Form className={classes.root} noValidate autoComplete="off">
-            <Container maxWidth="md" disableGutters={true}>
-              <Paper elevation={0} className={classes.stepContainer}>
-                {activeStep === 0 && (
-                  <GenerationMemberIdentifier
-                    {...formikProps}
-                    title={t('GENERATION_FORM_TITLE')}
-                  />
-                )}
-                {activeStep === 1 && (
-                  <PersonalData {...formikProps} entity="member" />
-                )}
-                {activeStep === 2 && (
-                  <GenerationContributionForm {...formikProps} />
-                )}
-                {activeStep === 3 && <GenerationReview {...formikProps} />}
+    <Formik
+      onSubmit={() => {}}
+      enableReinitialize
+      initialValues={initialValues}
+      validationSchema={validationSchemas[activeStep]}
+      validateOnMount={true}>
+      {(formikProps) => (
+        <Form className={classes.root} noValidate autoComplete="off">
+          <Container maxWidth="md" disableGutters={true}>
+            <Paper elevation={0} className={classes.stepContainer}>
+              {activeStep === 0 && (
+                <GenerationMemberIdentifier
+                  {...formikProps}
+                  title={t('GENERATION_FORM_TITLE')}
+                />
+              )}
+              {activeStep === 1 && (
+                <PersonalData title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')} {...formikProps} entity="member" />
+              )}
+              {activeStep === 2 && (
+                <GenerationContributionForm title={t('GENERATION_FORM_TITLE')} {...formikProps} />
+              )}
+              {activeStep === 3 && <GenerationReview title={t('GENERATION_FORM_TITLE')} {...formikProps} />}
+              {activeStep === 4 && (
+                <GenerationSignaturit title={t('GENERATION_FORM_TITLE')} submit={handlePost} {...formikProps} />
+              )}
 
-                {completed && (
-                  <Box mx={0} mb={1}>
-                    {error ? (
-                      <Failure error={error} />
-                    ) : (
-                      <Success
-                        description="CONTRIBUTION_OK_MSG"
-                        result={result}
-                      />
-                    )}
-                  </Box>
-                )}
-
-                <Box mx={0} mt={2} mb={3}>
-                  <div className={classes.actionsContainer}>
-                    {result?.investment === undefined && (
-                      <PrevButton
-                        disabled={activeStep === 0 || sending}
-                        onClick={() => prevStep(formikProps)}
-                        title={t('PAS_ANTERIOR')}
-                      />
-                    )}
-                    {activeStep < MAX_STEP_NUMBER - 1
-                      ? getNextButton(
-                          formikProps.values.member.generation_zone_checked,
-                          formikProps.values.member.has_generation_enabled_zone,
-                          formikProps
-                        )
-                      : !completed && (
-                          <SubmitButton
-                            startIcon={
-                              sending ? (
-                                <CircularProgress size={24} />
-                              ) : (
-                                <SendIcon />
-                              )
-                            }
-                            disabled={sending || !formikProps.isValid}
-                            onClick={() => handlePost(formikProps.values)}
-                            title={t('SEND')}
-                          />
-                        )}
-                  </div>
+              {completed && (
+                <Box mx={0} mb={1}>
+                  {error ? (
+                    <Failure error={error} />
+                  ) : (
+                    <Success
+                      title={t('GENERATION_FORM_SUCCESS_TITLE')}
+                      description={t('GENERATION_FORM_SUCCESS_DESCRIPTION')}
+                      result={result}
+                    />
+                  )}
                 </Box>
-              </Paper>
-            </Container>
-          </Form>
-        )}
-      </Formik>
+              )}
+
+              <Box mx={0} mt={2} mb={3}>
+                <div className={classes.actionsContainer}>
+                  {result?.investment === undefined && !completed ? (
+                    <PrevButton
+                      disabled={activeStep === 0 || sending}
+                      onClick={() => prevStep(formikProps)}
+                      title={t('PAS_ANTERIOR')}
+                    />
+                  ) : null}
+                  {activeStep < MAX_STEP_NUMBER - 1
+                    ? getNextButton(
+                        formikProps.values.member.generation_zone_checked,
+                        formikProps.values.member.has_generation_enabled_zone,
+                        formikProps
+                      )
+                    : null}
+                </div>
+              </Box>
+            </Paper>
+          </Container>
+        </Form>
+      )}
+    </Formik>
   )
 }
 

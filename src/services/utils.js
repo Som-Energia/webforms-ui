@@ -496,14 +496,21 @@ export const templateData = {
   case_id: '',
 }
 
-export const normalizeContribution = (data) => {
+export const normalizeContribution = (data, signaturitData) => {
   const contribution = {}
   contribution.socinumber = data?.member?.number
   contribution.dni = data?.member?.vat
   contribution.accountbankiban = data?.payment?.iban
   contribution.amount = parseInt(data?.payment?.amount)
-  contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
-
+  if(signaturitData){
+    contribution.socinumber = data?.member?.partner_number
+    contribution.signaturit = data?.signaturit
+    contribution.mandate_name = data?.mandate_name
+    contribution.acceptaccountowner = "1"
+  }
+  else{
+    contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0  
+  }
   return contribution
 }
 

@@ -1,5 +1,8 @@
 # Change Log
 
+## Unreleased
+- Generation kwh form: Signaturit
+
 ## 1.9.3 2023-09-15
 
 - HolderChange: Recover tariff type for specific conditions

@@ -403,6 +403,14 @@ const App = (props) => {
                   element={<GenerationContribution {...props} token={token} />}
                 />
                 <Route
+                  path="/participar/"
+                  element={<GenerationContribution {...props} token={token} />}
+                />
+                <Route
+                  path="/:language/participar/"
+                  element={<GenerationContribution {...props} token={token} />}
+                />
+                <Route
                   path="/generationkwh/contribution/"
                   element={<GenerationContribution {...props} token={token} />}
                 />

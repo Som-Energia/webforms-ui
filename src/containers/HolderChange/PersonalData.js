@@ -25,6 +25,7 @@ import VATField from 'components/VATField'
 
 import { languages } from 'services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
+import { Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -34,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
   noteText: {
     marginTop: theme.spacing(2)
+  },
+  title:{
+    display:'flex',
+    flexDirection: 'column',
+    marginBottom:"25px"
   }
 }))
 
@@ -49,6 +55,7 @@ function PersonalData(props) {
     errors,
     touched,
     skipPrivacyPolicy = false,
+    title = false,
     entity = 'holder'
   } = props
   const [openLegal, setOpenLegal] = useState(false)
@@ -112,11 +119,24 @@ function PersonalData(props) {
 
   return (
     <>
-      <StepHeader
-        title={t(
-          entity === 'holder' ? 'HOLDER_PERSONAL_DATA' : 'MEMBER_PERSONAL_DATA'
-        )}
-      />
+      {title ? (
+        <div className={classes.title}>
+          <Typography component="h1" variant="h3">
+            {title}
+          </Typography>
+          <Typography component="h3" variant="h6">
+            {t('MEMBER_PERSONAL_DATA')}
+          </Typography>
+        </div>
+      ) : (
+        <StepHeader
+          title={t(
+            entity === 'holder'
+              ? 'HOLDER_PERSONAL_DATA'
+              : 'MEMBER_PERSONAL_DATA'
+          )}
+        />
+      )}
       <Box className="step-body">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
@@ -454,8 +474,7 @@ function PersonalData(props) {
                   </InputAdornment>
                 )
               }}
-              variant="outlined"
-            >
+              variant="outlined">
               {Object.keys(languages).map((id) => (
                 <MenuItem key={id} value={id}>
                   {languages[id]}
@@ -547,8 +566,7 @@ function PersonalData(props) {
                   open={openLegal}
                   onAccept={handleAccept}
                   onClose={handleClose}
-                  maxWidth="sm"
-                >
+                  maxWidth="sm">
                   <span
                     dangerouslySetInnerHTML={{
                       __html:

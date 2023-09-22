@@ -42,7 +42,13 @@ const GenerationMemberIdentifier = (props) => {
 
   return (
     <>
-      <StepHeader title={title} />
+      <Typography
+        component='h1'
+        variant='h4'
+      >
+        {title}
+      </Typography>
+      
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
@@ -74,8 +80,8 @@ const GenerationMemberIdentifier = (props) => {
       {values?.member?.is_member ? (
         <Box id="box_member_identifier" mt={0} mb={2}>
           <Typography
-            variant="h6"
-            className={`${classes.title} ${classes.titleWithMargin}`}
+            component="h3"
+            variant='h6'
             dangerouslySetInnerHTML={{
               __html: t('CONTRIBUTION_MEMBER_INDENTIFIER')
             }}

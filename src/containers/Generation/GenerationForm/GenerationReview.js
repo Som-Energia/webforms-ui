@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = (props) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, title } = props
 
   const handleClickPrivacyPolicy = (event) => {
     event.preventDefault()
@@ -85,14 +85,17 @@ const Review = (props) => {
 
   return (
     <>
-      <StepHeader title={t('GENERATION_FORM_TITLE')} />
+      <Typography component="h1" variant="h3">
+        {title}
+      </Typography>
+
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('GENERATION_FORM_REVIEW_DESC')}}
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography id="personal-data" className={classes.sectionTitle} variant="h6">
+          <Typography id="personal-data" component="h3" variant="h6">
             {t(
               values?.member?.is_member ? 'REVIEW_PERSONAL_DATA' : 'NEW_MEMBER'
             )}
@@ -103,7 +106,7 @@ const Review = (props) => {
             <>
               <ReviewField
                 label={t('NUMERO_SOCI')}
-                value={`${values?.member?.number}`}
+                value={`${values?.member?.partner_number}`}
               />
             </>
           )}
@@ -143,7 +146,7 @@ const Review = (props) => {
           )}
         </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Typography component="h3" variant="h6">
               {t('CONTACT')}
             </Typography>
             { values?.member?.is_member
@@ -160,7 +163,7 @@ const Review = (props) => {
           </Grid>
         <Grid item xs={12} sm={12}>
           <Divider variant="middle" className={classes.divider} />
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography component="h3" variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
           <ReviewField
