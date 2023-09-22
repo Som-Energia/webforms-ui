@@ -17,13 +17,18 @@ const useStyles = makeStyles((theme) => ({
     width: '70px',
     margin: theme.spacing(2)
   },
-  root: {
+  loading: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '700px',
     flexDirection: 'column',
     gap: "5px"
+  },
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: "20px"
   }
 }))
 
@@ -81,13 +86,13 @@ function GenerationSignaturit(props) {
   }, [])
 
   return (
-    <>
+    <div className={classes.root}>
       <Typography component="h1" variant="h3">
         {title}
       </Typography>
 
       {loading || completed ? (
-        <div className={classes.root}>
+        <div className={classes.loading}>
           <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />
           <CircularProgress color="secondary" />
           {completed ? (
@@ -109,7 +114,7 @@ function GenerationSignaturit(props) {
           style={{ height: '700px', width: '100%' }}
         />
       )}
-    </>
+    </div>
   )
 }
 

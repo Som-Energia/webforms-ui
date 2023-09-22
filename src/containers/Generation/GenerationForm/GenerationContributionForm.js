@@ -123,9 +123,12 @@ const GenerationContributionForm = (props) => {
         {t('GENERATION_FORM_ANNUAL_USE_TITLE')}
       </Typography>
       <Box pt={1}>
-        <Typography variant="body1">
-          {t('GENERATION_FORM_ANNUAL_USE_INPUT_TITLE')}
-        </Typography>
+        <Typography variant="body1"
+          dangerouslySetInnerHTML={{
+            __html: t('GENERATION_FORM_ANNUAL_USE_INPUT_TITLE', {
+              url: t('GENERATION_FORM_ANNUAL_CONSUMPTION_URL')
+            })
+          }} />
       </Box>
       <Box pt={1} id="box_annual_use">
         <TextField
@@ -142,8 +145,7 @@ const GenerationContributionForm = (props) => {
           onBlur={handleBlur}
           error={errors?.annual_use && touched?.annual_use}
           helperText={
-            (touched?.annual_use && errors?.annual_use) ||
-            t('GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT')
+            (touched?.annual_use && errors?.annual_use) || ''
           }
         />
       </Box>

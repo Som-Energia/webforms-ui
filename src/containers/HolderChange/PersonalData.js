@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
   noteText: {
     marginTop: theme.spacing(2)
+  },
+  title:{
+    display:'flex',
+    flexDirection: 'column',
+    marginBottom:"25px"
   }
 }))
 
@@ -114,12 +119,24 @@ function PersonalData(props) {
 
   return (
     <>
-      {title ? <Typography component='h1' variant='h3'>{title}</Typography> : null}
-      <StepHeader
-        title={t(
-          entity === 'holder' ? 'HOLDER_PERSONAL_DATA' : 'MEMBER_PERSONAL_DATA'
-        )}
-      />
+      {title ? (
+        <div className={classes.title}>
+          <Typography component="h1" variant="h3">
+            {title}
+          </Typography>
+          <Typography component="h3" variant="h6">
+            {t('MEMBER_PERSONAL_DATA')}
+          </Typography>
+        </div>
+      ) : (
+        <StepHeader
+          title={t(
+            entity === 'holder'
+              ? 'HOLDER_PERSONAL_DATA'
+              : 'MEMBER_PERSONAL_DATA'
+          )}
+        />
+      )}
       <Box className="step-body">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>

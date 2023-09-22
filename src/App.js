@@ -407,7 +407,7 @@ const App = (props) => {
                   element={<GenerationContribution {...props} token={token} />}
                 />
                 <Route
-                  path="/:language/aportar/"
+                  path="/:language/participar/"
                   element={<GenerationContribution {...props} token={token} />}
                 />
                 <Route
