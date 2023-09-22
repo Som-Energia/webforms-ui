@@ -80,9 +80,13 @@ const Contract = (props) => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-  const { is30ContractEnabled = true, isIndexedContractEnabled = false , isCadastralReference = false} = props
+  const {
+    is30ContractEnabled = true,
+    isIndexedContractEnabled = false,
+    isCadastralReference = false
+  } = props
 
-  const [showInspector, setShowInspector] = useState(false)
+  const [showInspector, setShowInspector] = useState(true)
   const [showAllSteps, setShowAllSteps] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
@@ -142,59 +146,60 @@ const Contract = (props) => {
       })
     }),
     Yup.object().shape({
-      supply_point: Yup.object().shape({
-        address: Yup.string().required(t('NO_ADDRESS')),
-        number: Yup.string().required(t('NO_NUMBER')),
-        postal_code: Yup.string()
-          .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE'))
-          .min(5, t('NO_POSTALCODE'))
-          .max(5, t('NO_POSTALCODE')),
-        state: Yup.object().shape({
-          id: Yup.number().required(t('NO_STATE'))
-        }),
-        city: Yup.object().shape({
-          id: Yup.number().required(t('NO_CITY'))
-        }),
-        is_housing: Yup.bool()
-          .oneOf([true, false], t('NO_IS_HOUSING'))
-          .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
-            return !(
-              this.parent.is_housing === false &&
-              this.parent.cnae === CNAE_HOUSING
-            )
+      supply_point: Yup.object().shape(
+        {
+          address: Yup.string().required(t('NO_ADDRESS')),
+          number: Yup.string().required(t('NO_NUMBER')),
+          postal_code: Yup.string()
+            .matches(/^\d*$/, t('NO_POSTALCODE'))
+            .required(t('NO_POSTALCODE'))
+            .min(5, t('NO_POSTALCODE'))
+            .max(5, t('NO_POSTALCODE')),
+          state: Yup.object().shape({
+            id: Yup.number().required(t('NO_STATE'))
           }),
-        cnae: Yup.string()
-          .required(t('INVALID_SUPPLY_POINT_CNAE'))
-          .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
-          .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
-            return !(
-              this.parent.is_housing === false &&
-              this.parent.cnae === CNAE_HOUSING
-            )
+          city: Yup.object().shape({
+            id: Yup.number().required(t('NO_CITY'))
           }),
-        cnae_valid: Yup.bool()
-          .required(t('INVALID_SUPPLY_POINT_CNAE'))
-          .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
-        supply_point_accepted: Yup.bool()
-          .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL')),
-        cadastral_reference: Yup.string()
-          .when('cadastral_reference', (value) => {
-            if(value?.length > 0) {
-              return Yup.string()
-                .min(20, t('INVALID_REF_CATASTRAL_MIN'))
-                .max(20, t('INVALID_REF_CATASTRAL_MAX'))
-                .required("Required")
-            } else {
-              return Yup.string()
-                .notRequired();
+          is_housing: Yup.bool()
+            .oneOf([true, false], t('NO_IS_HOUSING'))
+            .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
+              return !(
+                this.parent.is_housing === false &&
+                this.parent.cnae === CNAE_HOUSING
+              )
+            }),
+          cnae: Yup.string()
+            .required(t('INVALID_SUPPLY_POINT_CNAE'))
+            .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
+            .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
+              return !(
+                this.parent.is_housing === false &&
+                this.parent.cnae === CNAE_HOUSING
+              )
+            }),
+          cnae_valid: Yup.bool()
+            .required(t('INVALID_SUPPLY_POINT_CNAE'))
+            .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
+          supply_point_accepted: Yup.bool()
+            .required(t('CUPS_VERIFY_LABEL'))
+            .oneOf([true], t('CUPS_VERIFY_LABEL')),
+          cadastral_reference: Yup.string().when(
+            'cadastral_reference',
+            (value) => {
+              if (value?.length > 0) {
+                return Yup.string()
+                  .min(20, t('INVALID_REF_CATASTRAL_MIN'))
+                  .max(20, t('INVALID_REF_CATASTRAL_MAX'))
+                  .required('Required')
+              } else {
+                return Yup.string().notRequired()
+              }
             }
-          }),
-      }, [
-        ['cadastral_reference', 'cadastral_reference']
-      ]
-    )
+          )
+        },
+        [['cadastral_reference', 'cadastral_reference']]
+      )
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
@@ -537,21 +542,72 @@ const Contract = (props) => {
   ]
 
   const showProgress = false
+  const dataProtectionUrl = t('DATA_PROTECTION_CONTRACT_URL')
 
   const steps = [
-    <MemberIdentifier />,
-    <CUPS />,
-    <SupplyPoint />,
-    <PowerFare />,
-    <TariffMode />,
-    <SelfConsumption />,
-    <SelfConsumptionDetails />,
-    <HolderIdentifier />,
-    <PersonalData />,
-    <VoluntaryCent />,
-    <IBAN />,
-    <Review />
+    {
+      id: 'memberIdentifierPage',
+      component: MemberIdentifier,
+      extra: { is30ContractEnabled }
+    },
+    {
+      id: 'cupsPage',
+      component: CUPS
+    },
+    {
+      id: 'supplyPointPage',
+      component: SupplyPoint,
+      extra: { isCadastralReference }
+    },
+    {
+      id: 'powerFarePage',
+      component: PowerFare,
+      extra: {
+        rates: rates,
+        isIndexedContractEnabled,
+        is30ContractEnabled
+      }
+    },
+    {
+      id: 'tariffModePage',
+      component: TariffMode,
+      skip: () => !isIndexedContractEnabled
+    },
+    {
+      id: 'selfConsumptionPage',
+      component: SelfConsumption,
+      skip: (props) =>
+        // If the contract has no service, do not ask about self consumption
+        !props.values.contract.has_service
+    },
+    {
+      id: 'selfConsumptionDetailsPage',
+      component: SelfConsumptionDetails,
+      skip: (props) =>
+        // If no self consumption, do not ask for details
+        !props.values.self_consumption.have_installation
+    },
+    { id: 'holderIdentifierPage', component: HolderIdentifier },
+    {
+      id: 'personalDataPage',
+      component: PersonalData,
+      extra: { skipPrivacyPolicy: true, url: dataProtectionUrl },
+      skip: (props) =>
+        // If the owner is the member, do not ask personal data
+        props.values.holder.vat === props.values.member.vat &&
+        props.values.holder.isphisical
+    },
+    { id: 'voluntaryCentPage', component: VoluntaryCent },
+    { id: 'ibanPage', component: IBAN },
+    {
+      id: 'reviewPage',
+      component: Review,
+      extra: {
+        isIndexedContractEnabled
+      }
+    }
   ]
+  /*
   const memberIdentifierPage = 0
   const cupsPage = 1
   const supplyPointPage = 2
@@ -564,13 +620,93 @@ const Contract = (props) => {
   const voluntaryCentPage = 9
   const ibanPage = 10
   const reviewPage = 11
+  */
 
   const maxStepNumber = steps.length
 
   const getActiveStep = (props) => {
-    const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
+        {steps.map((step, stepIndex) => {
+          if (activeStep != stepIndex && !showAllSteps) return null
+          const markActiveStep = activeStep == stepIndex && showAllSteps
+          return (
+            <Box
+              key={'' + stepIndex}
+              sx={
+                markActiveStep
+                  ? {
+                      borderLeftColor: 'orange',
+                      borderLeftWidth: '.3rem',
+                      paddingLeft: '.3rem',
+                      borderLeftStyle: 'solid'
+                    }
+                  : {}
+              }
+            >
+              <Box mx={0} mb={3}>
+                <step.component
+                  {...props}
+                  {...(step.extra ? step.extra : {})}
+                />
+              </Box>
+              <Box mx={0} mt={1} mb={3}>
+                <div className={classes.actionsContainer}>
+                  {result?.contract_number === undefined && (
+                    <Button
+                      data-cy="prev"
+                      className={classes.button}
+                      startIcon={<ArrowBackIosIcon />}
+                      disabled={activeStep === 0 || sending}
+                      onClick={() => prevStep(props)}
+                    >
+                      {t('PAS_ANTERIOR')}
+                    </Button>
+                  )}
+                  {activeStep < maxStepNumber - 1 ? (
+                    <Button
+                      type="button"
+                      data-cy="next"
+                      className={classes.button}
+                      variant="contained"
+                      color="primary"
+                      endIcon={<ArrowForwardIosIcon />}
+                      disabled={!props.isValid}
+                      onClick={() => nextStep(props)}
+                    >
+                      {t('SEGUENT_PAS')}
+                    </Button>
+                  ) : (
+                    !completed && (
+                      <Button
+                        type="button"
+                        data-cy="submit"
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        startIcon={
+                          sending ? (
+                            <CircularProgress size={24} />
+                          ) : (
+                            <SendIcon />
+                          )
+                        }
+                        disabled={sending || !props.isValid}
+                        onClick={() => handlePost(props.values)}
+                      >
+                        {t('SEND')}
+                      </Button>
+                    )
+                  )}
+                </div>
+              </Box>
+            </Box>
+          )
+        })}
+        {(showAllSteps || completed) && error && <Failure error={error} />}
+        {(showAllSteps || completed) && !error && <Success result={result} />}
+
+        {/*
         {(showAllSteps || activeStep === memberIdentifierPage) && (
           <MemberIdentifier
             {...props}
@@ -579,10 +715,7 @@ const Contract = (props) => {
         )}
         {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
         {(showAllSteps || activeStep === supplyPointPage) && (
-          <SupplyPoint
-            {...props}
-            isCadastralReference={isCadastralReference}
-          />
+          <SupplyPoint {...props} isCadastralReference={isCadastralReference} />
         )}
         {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
@@ -605,7 +738,7 @@ const Contract = (props) => {
           <HolderIdentifier {...props} />
         )}
         {(showAllSteps || activeStep === personalDataPage) && (
-          <PersonalData skipPrivacyPolicy url={url} {...props} />
+          <PersonalData skipPrivacyPolicy url={dataProtectionUrl} {...props} />
         )}
         {(showAllSteps || activeStep === voluntaryCentPage) && (
           <VoluntaryCent {...props} />
@@ -617,13 +750,17 @@ const Contract = (props) => {
             {...props}
           />
         )}
+        */}
       </>
     )
   }
 
   const nextStep = (props) => {
     let next = activeStep + 1
-
+    while (steps[next]?.props?.skip && steps[next]?.props?.skip(props)) {
+      next++
+    }
+    /*
     // If indexed contracts are not enabled, skip tariffModePage
     if (next === tariffModePage && !isIndexedContractEnabled) {
       next++
@@ -650,7 +787,7 @@ const Contract = (props) => {
     ) {
       next++
     }
-
+    */
     const last = maxStepNumber
     props.submitForm().then(() => {
       if (props.isValid) {
@@ -663,6 +800,10 @@ const Contract = (props) => {
 
   const prevStep = (props) => {
     let prev = activeStep - 1
+    while (steps[prev]?.props?.skip && steps[prev].props.skip(props)) {
+      prev--
+    }
+    /*
     // Skip holder personal data unless holder is not member or judiric
     if (
       prev === personalDataPage &&
@@ -687,6 +828,7 @@ const Contract = (props) => {
     if (prev === tariffModePage && !isIndexedContractEnabled) {
       prev--
     }
+    */
 
     setActiveStep(Math.max(0, prev))
     if (completed) {
@@ -862,56 +1004,6 @@ const Contract = (props) => {
                         ) : (
                           getActiveStep(props)
                         )}
-                      </Box>
-                      <Box mx={0} mt={1} mb={3}>
-                        <div className={classes.actionsContainer}>
-                          {result?.contract_number === undefined && (
-                            <Button
-                              data-cy="prev"
-                              className={classes.button}
-                              startIcon={<ArrowBackIosIcon />}
-                              disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(props)}
-                            >
-                              {t('PAS_ANTERIOR')}
-                            </Button>
-                          )}
-                          {activeStep < maxStepNumber - 1 ? (
-                            <Button
-                              type="button"
-                              data-cy="next"
-                              className={classes.button}
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
-                              disabled={!props.isValid}
-                              onClick={() => nextStep(props)}
-                            >
-                              {t('SEGUENT_PAS')}
-                            </Button>
-                          ) : (
-                            !completed && (
-                              <Button
-                                type="button"
-                                data-cy="submit"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                startIcon={
-                                  sending ? (
-                                    <CircularProgress size={24} />
-                                  ) : (
-                                    <SendIcon />
-                                  )
-                                }
-                                disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}
-                              >
-                                {t('SEND')}
-                              </Button>
-                            )
-                          )}
-                        </div>
                       </Box>
                     </Paper>
                   }
