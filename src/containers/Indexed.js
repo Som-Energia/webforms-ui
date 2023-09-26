@@ -312,6 +312,8 @@ const Indexada = (props) => {
       ? t('PERIODS_INTRO_BODY', translatedUrls)
       : t('INDEXED_INTRO_BODY', translatedUrls)}}/>
 
+  const originTariff = getCommercialName(contractJSON.tariff)
+
   return (
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
@@ -338,7 +340,8 @@ const Indexada = (props) => {
                             {activeStep !== 2 ? (
                               <IndexedContractDetails
                                 {...formikProps.values}
-                                data={contractJSON}
+                                contract={contractJSON.name}
+                                originTariff={originTariff}
                                 targetTariff={targetTariff}
                                 isTariff20={isTariff20}
                                 isTariffIndexed={isTariffIndexed}
