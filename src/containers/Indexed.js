@@ -197,7 +197,7 @@ const Indexada = (props) => {
             "Indexada Empresa Canàries": t("TAR_INDEXADA_EMPRESA_CANARIES"),
             "Indexada Empresa Balears": t("TAR_INDEXADA_EMPRESA_BALEARS")
     }
-    return tariff_mapping[tariff] || '-'
+    return tariff_mapping[tariff] || tariff
 }
 
   const checkCanModifyTariff = async () => {
