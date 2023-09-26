@@ -312,7 +312,7 @@ const Indexada = (props) => {
       ? t('PERIODS_INTRO_BODY', translatedUrls)
       : t('INDEXED_INTRO_BODY', translatedUrls)}}/>
 
-  const originTariff = getCommercialName(contractJSON.tariff)
+  const currentTariff = getCommercialName(contractJSON.tariff)
 
   return (
     <>
@@ -341,7 +341,7 @@ const Indexada = (props) => {
                               <IndexedContractDetails
                                 {...formikProps.values}
                                 contract={contractJSON.name}
-                                originTariff={originTariff}
+                                currentTariff={currentTariff}
                                 targetTariff={targetTariff}
                                 isTariff20={isTariff20}
                                 isTariffIndexed={isTariffIndexed}

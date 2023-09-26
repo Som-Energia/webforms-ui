@@ -9,14 +9,14 @@ const IndexedContractDetails = (props) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
-  const { contract, originTariff, targetTariff } = props
+  const { contract, currentTariff, targetTariff } = props
 
   return (
     <div className={classes.root}>
       <LabelFieldRow label={t('CONTRACT')}>
         <p>{contract}</p>
       </LabelFieldRow>
-      <LabelFieldRow label={t('CURRENT_TARIFF')}>{originTariff}</LabelFieldRow>
+      <LabelFieldRow label={t('CURRENT_TARIFF')}>{currentTariff}</LabelFieldRow>
       <LabelFieldRow isHighlight={true} label={t('TARIFF_TO_CONTRACT')}>
         {targetTariff || t('TARIFF_CHANGE_NOT_AVAILABLE')}
       </LabelFieldRow>
