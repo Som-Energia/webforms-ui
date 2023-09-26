@@ -62,7 +62,7 @@ const Indexada = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState(false)
-  const [hasTargetTariff, setHasTargetTariff] = useState(false)
+  const [targetTariff, setTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
   const [isTariff30] = useState(checkIsTariff30(contractJSON.tariff))
@@ -99,7 +99,7 @@ const Indexada = (props) => {
     sectionsJson.push(
       {
         title: t('DURADA'),
-        text: t('DURADA_TEXT', { tariff: hasTargetTariff })
+        text: t('DURADA_TEXT', { tariff: targetTariff })
       },
       { title: t('DESESTIMENT'), text: t('DESESTIMENT_TEXT') },
       {
@@ -109,7 +109,7 @@ const Indexada = (props) => {
     )
 
     return sectionsJson
-  }, [isTariffIndexed, t, kCoefficient, hasTargetTariff])
+  }, [isTariffIndexed, t, kCoefficient, targetTariff])
 
   const initialValues = {
     terms_accepted: false,
@@ -206,7 +206,7 @@ const Indexada = (props) => {
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
       let comercialName = getCommercialName(result?.data?.target_tariff)
-      setHasTargetTariff(comercialName)
+      setTargetTariff(comercialName)
       setKCoefficient(result?.data?.k_coefficient_eurkwh)
     } catch (error) {
       setLoadingTariff(false)
@@ -266,7 +266,7 @@ const Indexada = (props) => {
     'CUSTOM_TARIFF'
   ]
 
-  if (checkEnabled && !hasTargetTariff)
+  if (checkEnabled && !targetTariff)
     if (activeStep != 0 || !lesserErrors.includes(error?.code))
       return (
         <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
@@ -339,7 +339,7 @@ const Indexada = (props) => {
                               <IndexedContractDetails
                                 {...formikProps.values}
                                 data={contractJSON}
-                                targetTariff={hasTargetTariff}
+                                targetTariff={targetTariff}
                                 isTariff20={isTariff20}
                                 isTariffIndexed={isTariffIndexed}
                               />
@@ -369,7 +369,7 @@ const Indexada = (props) => {
                                 isTariff20={isTariff20}
                                 isTariffIndexed={isTariffIndexed}
                                 isIndexedPilotOngoing={isIndexedPilotOngoing}
-                                targetTariff={hasTargetTariff}
+                                targetTariff={targetTariff}
                                 contractValues={contractJSON}
                                 {...formikProps}
                               />
@@ -396,7 +396,7 @@ const Indexada = (props) => {
                                     color="primary"
                                     endIcon={<ArrowForwardIosIcon />}
                                     disabled={
-                                      !formikProps.isValid || !hasTargetTariff
+                                      !formikProps.isValid || !targetTariff
                                     }
                                     onClick={() => nextStep(formikProps)}>
                                     {t('SEGUENT_PAS')}
@@ -442,7 +442,7 @@ const Indexada = (props) => {
                                     ? 'PERIODS_SUCCESS_PAGE_TITLE'
                                     : 'INDEXED_SUCCESS_PAGE_TITLE'
                                 )}
-                                subtitle={hasTargetTariff}
+                                subtitle={targetTariff}
                                 description={t(
                                   isTariffIndexed
                                     ? 'PERIODS_SUCCESS_PAGE_DESC'
