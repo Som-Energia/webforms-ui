@@ -1,5 +1,8 @@
 # Change Log
 
+## Unrelease
+- Update cancellation terms
+
 ## 1.9.4 2023-09-22
 - Generation kwh form: Signaturit
 
