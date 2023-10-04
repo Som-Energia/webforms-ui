@@ -3,7 +3,7 @@ import GenerationContext from './Generation/context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { generationChangeContractPriority } from '../services/api'
-import GenerationDashboard from './Generation/GenerationDashboard'
+import GenerationDashboard from './Generation/GenerationDashboard/GenerationDashboard'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'

@@ -4,10 +4,11 @@ import GenerationAssigmentSection from './GenerationAssignmentSection'
 import GenerationInvestmentSection from './GenerationInvestmentSection'
 import { Button, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import GenerationContext from './context/GenerationContext'
+import GenerationContext from '../context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import Alert from '@material-ui/lab/Alert'
 import GenerationFailure from './GenerationFailure'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 const useStyles = makeStyles({
   footer: {
@@ -15,6 +16,10 @@ const useStyles = makeStyles({
   },
   button: {
     background: '#96b633',
+    color: '#fff'
+  },
+  altButton:{
+    background: '#8E8C8C',
     color: '#fff'
   },
   buttons: {
@@ -38,8 +43,12 @@ function GenerationDashboard({
 }) {
   const { t } = useTranslation()
   const classes = useStyles()
-  const { editingPriority, assignments, investments, has_duplicate_priority_values } =
-    useContext(GenerationContext)
+  const {
+    editingPriority,
+    assignments,
+    investments,
+    has_duplicate_priority_values
+  } = useContext(GenerationContext)
 
   const ActionSection = useCallback(() => {
     return (
@@ -129,6 +138,16 @@ function GenerationDashboard({
                 justifyContent="flex-end">
                 <ActionSection />
               </Grid>
+              <SectionTitle text={t('DADES DE PRODUCCIÓ I CONSUM')}>
+                <Button
+                  className={classes.altButton}
+                  type="button"
+                  id="generationkwh-id-production-consumption"
+                  variant="contained"
+                  endIcon={<ArrowForwardIosIcon />}>
+                  {t('ENTRAR')}
+                </Button>
+              </SectionTitle>
             </>
           ) : (
             <Alert severity="warning">

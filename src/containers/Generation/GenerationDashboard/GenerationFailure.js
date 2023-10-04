@@ -9,8 +9,7 @@ import Typography from '@material-ui/core/Typography'
 
 import CloseIcon from '@material-ui/icons/Close'
 
-import StepHeader from '../../components/StepHeader'
-import cuca from '../../images/cuca-marejada.svg'
+import cuca from '../../../images/cuca-marejada.svg'
 
 
 const useStyles = makeStyles((theme) => ({
