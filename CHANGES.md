@@ -1,6 +1,7 @@
 # Change Log
 
-## Unrelease
+## 1.9.5 2023-10-05
+
 - Update cancellation terms
 - HolderChange: Add link to support center
 at `CIF_COMMUNITY_OWNERS` html message.
