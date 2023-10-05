@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.9.6 2023-10-05
+
+- Update general conditions html
+
 ## 1.9.5 2023-10-05
 
 - Update cancellation terms
