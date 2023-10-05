@@ -37,6 +37,7 @@ import indexedErrorText from './Indexed/IndexedError'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 
+
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
 )
@@ -61,7 +62,7 @@ const Indexada = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState(false)
-  const [hasTargetTariff, setHasTargetTariff] = useState(false)
+  const [targetTariff, setTargetTariff] = useState(false)
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
   const [isTariff30] = useState(checkIsTariff30(contractJSON.tariff))
@@ -98,7 +99,7 @@ const Indexada = (props) => {
     sectionsJson.push(
       {
         title: t('DURADA'),
-        text: t('DURADA_TEXT', { tariff: hasTargetTariff })
+        text: t('DURADA_TEXT', { tariff: targetTariff })
       },
       { title: t('DESESTIMENT'), text: t('DESESTIMENT_TEXT') },
       {
@@ -108,7 +109,7 @@ const Indexada = (props) => {
     )
 
     return sectionsJson
-  }, [isTariffIndexed, t, kCoefficient, hasTargetTariff])
+  }, [isTariffIndexed, t, kCoefficient, targetTariff])
 
   const initialValues = {
     terms_accepted: false,
@@ -175,12 +176,37 @@ const Indexada = (props) => {
       })
   }
 
+  const getCommercialName = function (tariff) {
+    let tariff_mapping = {
+            "2.0TD_SOM": t("TAR_20TD_SOM"),
+            "2.0TD_SOM_INSULAR": t("TAR_2.0TD_SOM_INSULAR"),
+            "3.0TD_SOM": t("TAR_30TD_SOM"),
+            "3.0TD_SOM_INSULAR": t("TAR_30TD_SOM_INSULAR"),
+            "6.0TD_SOM":t("TAR_60TD_SOM"),
+            "6.0TD_SOM_INSULAR":t("TAR_60TD_SOM_INSULAR"),
+            "Indexada 2.0TD Península": t("TAR_INDEXADA_20TD_PENINSULA"),
+            "Indexada 2.0TD Canàries": t("TAR_INDEXADA_20TD_CANARIES"),
+            "Indexada 2.0TD Balears": t("TAR_INDEXADA_20TD_BALEARS"),
+            "Indexada 3.0TD Península": t("TAR_INDEXADA_30TD_PENINSULA"),
+            "Indexada 3.0TD Canàries": t("TAR_INDEXADA_30TD_CANARIES"),
+            "Indexada 3.0TD Balears": t("TAR_INDEXADA_30TD_BALEARS"),
+            "Indexada 6.1TD Peninsula": t("TAR_INDEXADA_61TD_PENINSULA"),
+            "Indexada 6.1TD Canàries": t("TAR_INDEXADA_61TD_CANARIES"),
+            "Indexada 6.1TD Balears": t("TAR_INDEXADA_61TD_BALEARS"),
+            "Indexada Empresa Península": t("TAR_INDEXADA_EMPRESA_PENINSULA"),
+            "Indexada Empresa Canàries": t("TAR_INDEXADA_EMPRESA_CANARIES"),
+            "Indexada Empresa Balears": t("TAR_INDEXADA_EMPRESA_BALEARS")
+    }
+    return tariff_mapping[tariff] || tariff
+}
+
   const checkCanModifyTariff = async () => {
     try {
       setLoadingTariff(true)
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
-      setHasTargetTariff(result?.data?.target_tariff)
+      let comercialName = getCommercialName(result?.data?.target_tariff)
+      setTargetTariff(comercialName)
       setKCoefficient(result?.data?.k_coefficient_eurkwh)
     } catch (error) {
       setLoadingTariff(false)
@@ -240,7 +266,7 @@ const Indexada = (props) => {
     'CUSTOM_TARIFF'
   ]
 
-  if (checkEnabled && !hasTargetTariff)
+  if (checkEnabled && !targetTariff)
     if (activeStep != 0 || !lesserErrors.includes(error?.code))
       return (
         <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
@@ -286,6 +312,8 @@ const Indexada = (props) => {
       ? t('PERIODS_INTRO_BODY', translatedUrls)
       : t('INDEXED_INTRO_BODY', translatedUrls)}}/>
 
+  const currentTariff = getCommercialName(contractJSON.tariff)
+
   return (
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
@@ -312,8 +340,9 @@ const Indexada = (props) => {
                             {activeStep !== 2 ? (
                               <IndexedContractDetails
                                 {...formikProps.values}
-                                data={contractJSON}
-                                targetTariff={hasTargetTariff}
+                                contract={contractJSON.name}
+                                currentTariff={currentTariff}
+                                targetTariff={targetTariff}
                                 isTariff20={isTariff20}
                                 isTariffIndexed={isTariffIndexed}
                               />
@@ -343,7 +372,7 @@ const Indexada = (props) => {
                                 isTariff20={isTariff20}
                                 isTariffIndexed={isTariffIndexed}
                                 isIndexedPilotOngoing={isIndexedPilotOngoing}
-                                targetTariff={hasTargetTariff}
+                                targetTariff={targetTariff}
                                 contractValues={contractJSON}
                                 {...formikProps}
                               />
@@ -370,7 +399,7 @@ const Indexada = (props) => {
                                     color="primary"
                                     endIcon={<ArrowForwardIosIcon />}
                                     disabled={
-                                      !formikProps.isValid || !hasTargetTariff
+                                      !formikProps.isValid || !targetTariff
                                     }
                                     onClick={() => nextStep(formikProps)}>
                                     {t('SEGUENT_PAS')}
@@ -416,7 +445,7 @@ const Indexada = (props) => {
                                     ? 'PERIODS_SUCCESS_PAGE_TITLE'
                                     : 'INDEXED_SUCCESS_PAGE_TITLE'
                                 )}
-                                subtitle={hasTargetTariff}
+                                subtitle={targetTariff}
                                 description={t(
                                   isTariffIndexed
                                     ? 'PERIODS_SUCCESS_PAGE_DESC'
