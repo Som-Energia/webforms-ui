@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.9.7 2023-10-09
+
+- Fix CCGG html language
+- Update CCEE indexed in eu
+
 ## 1.9.6 2023-10-05
 
 - Update general conditions html
