@@ -201,7 +201,6 @@ const IndexedReviewData = (props) => {
           onAccept={handleAccept}
           onClose={handleClose}>
           <LegalText
-            language={contractValues?.language}
             documentName={
               isTariffIndexed
                 ? 'general-contract-terms'
