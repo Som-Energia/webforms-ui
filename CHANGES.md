@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.9.8 2023-10-16
+
+- Update CCGG and CCEE: SOLS -> Sols
+
 ## 1.9.7 2023-10-09
 
 - Fix CCGG html language
