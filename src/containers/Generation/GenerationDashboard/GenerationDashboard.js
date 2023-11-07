@@ -144,6 +144,7 @@ function GenerationDashboard({
                   type="button"
                   id="generationkwh-id-production-consumption"
                   variant="contained"
+                  onClick={()=> window.location.replace('/investments/production-consumption')}
                   endIcon={<ArrowForwardIosIcon />}>
                   {t('ENTRAR')}
                 </Button>
