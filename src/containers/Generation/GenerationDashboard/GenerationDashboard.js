@@ -138,7 +138,7 @@ function GenerationDashboard({
                 justifyContent="flex-end">
                 <ActionSection />
               </Grid>
-              <SectionTitle text={t('DADES DE PRODUCCIÓ I CONSUM')}>
+              <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button
                   className={classes.altButton}
                   type="button"
