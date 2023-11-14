@@ -9,7 +9,6 @@ const useStyles = makeStyles({
     textTransform: 'uppercase',
     fontSize: '14px',
     margin: '10px 0 4px 0',
-    padding: '1em',
     display:'flex',
     justifyContent:'space-between',
     alignItems:'center'

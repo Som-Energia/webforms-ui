@@ -16,16 +16,16 @@ function createData(
     name,
     nominal_amount: Number(nominal_amount).toLocaleString('es-ES') + '€',
     nshares,
-    purchase_date: dayjs(purchase_date.replaceAll('"', '')).format(
-      'DD/MM/YYYY'
-    ),
-    first_effective_date: dayjs(
-      first_effective_date.replaceAll('"', '')
-    ).format('DD/MM/YYYY'),
+    purchase_date: purchase_date
+      ? dayjs(purchase_date.replaceAll('"', '')).format('DD/MM/YYYY')
+      : '--',
+    first_effective_date: first_effective_date
+      ? dayjs(first_effective_date.replaceAll('"', '')).format('DD/MM/YYYY')
+      : '--',
     amortized_amount: Number(amortized_amount).toLocaleString('es-ES') + '€',
-    last_effective_date: dayjs(last_effective_date.replaceAll('"', '')).format(
-      'DD/MM/YYYY'
-    )
+    last_effective_date: last_effective_date
+      ? dayjs(last_effective_date.replaceAll('"', '')).format('DD/MM/YYYY')
+      : '--'
   }
 }
 
