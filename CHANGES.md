@@ -1,6 +1,6 @@
 # Change Log
 
-## Unrealeased
+## 1.10.0 2023-11-16
 
 - Added new GenerationkWh form without limit in number of actions
 
