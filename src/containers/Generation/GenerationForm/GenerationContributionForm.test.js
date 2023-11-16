@@ -147,6 +147,7 @@ describe('Generation Form Contribution', () => {
         values={mockWithActions}
         errors={errors}
         setFieldValue={mockSetFieldValue}
+        limitAmount={true}
       />
     )
 
@@ -202,7 +203,7 @@ describe('Generation Form Contribution', () => {
     )
 
     const percentValue = getById(dom.container, 'percent_value')
-    expect(getByText(percentValue, '% Erròni')).toBeInTheDocument()
+    expect(getByText(percentValue, 'n/s %')).toBeInTheDocument()
   })
 
   test('Should show IBAN helper text', () => {
@@ -252,20 +253,6 @@ describe('Generation Form Contribution', () => {
 
     const ibanTextField = getById(dom.container, 'box_iban_input')
     expect(getByText(ibanTextField, mockErrMsg)).toBeInTheDocument()
-  })
-
-  test('Should show annual use helper text', () => {
-    
-    const dom = render(
-      <GenerationContributionForm
-        values={mockValues}
-        errors={errors}
-        setFieldValue={mockSetFieldValue}
-      />
-    )
-
-    const ibanTextField = getById(dom.container, 'box_annual_use')
-    expect(getByText(ibanTextField, "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT")).toBeInTheDocument()
   })
 
   test('Should show annual use error text, when has an error', () => {

@@ -651,7 +651,6 @@
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Ús elèctric anual",
     "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introdueix la <a target=_\"__blank\" href=\"{{url}}\">quantitat d’electricitat</a> que fas servir anualment (p.e. 2500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Consum anual en kWh",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Per exemple 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"Quantes accions energètiques voldries?*",
     "GENERATION_FORM_ACTIONS_INPUT_LABEL":"Accions energètiques",
     "GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT":"Per exemple 2 accions corresponen a: 200€",

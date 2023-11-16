@@ -650,7 +650,6 @@
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Uso eléctrico anual",
     "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Introduce la <a target=_\"__blank\" href=\"{{url}}\">cantidad de electricidad</a> que usas (p.e. 2500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Consumo anual en kWh",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Por ejemplo 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"¿Cuántas acciones energéticas querrías?*",
     "GENERATION_FORM_ACTIONS_INPUT_LABEL":"Acciones energéticas",
     "GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT":"Por ejemplo 2 acciones corresponden a: 200€",
