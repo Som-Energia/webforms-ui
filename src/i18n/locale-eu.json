@@ -650,7 +650,6 @@
     "GENERATION_FORM_ANNUAL_USE_TITLE":"Urteko elektrizitate-erabilera",
     "GENERATION_FORM_ANNUAL_USE_INPUT_TITLE":"Adierazi urtean <a target=_\"__blank\" href=\"{{url}}\">zenbat elektrizitate</a> erabiltzen duzun (adibidez, 2.500).",
     "GENERATION_FORM_ANNUAL_USE_INPUT_LABEL":"Urteko kontsumoa kWh-tan",
-    "GENERATION_FORM_ANNUAL_USE_INPUT_HELP_TEXT":"*Adibidez 2500",
     "GENERATION_FORM_ACTIONS_INPUT_TITLE":"Zenbat akzio energetiko nahi dituzu?*",
     "GENERATION_FORM_ACTIONS_INPUT_LABEL":"Ekintza energetikoak",
     "GENERATION_FORM_ACTIONS_INPUT_HELP_TEXT":"Adibidez, 2 akzio hauei dagozkie: 200€",

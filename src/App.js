@@ -404,11 +404,19 @@ const App = (props) => {
                 />
                 <Route
                   path="/participar/"
-                  element={<GenerationContribution {...props} token={token} />}
+                  element={<GenerationContribution {...props} limitAmount={true} token={token} />}
                 />
                 <Route
                   path="/:language/participar/"
-                  element={<GenerationContribution {...props} token={token} />}
+                  element={<GenerationContribution {...props} limitAmount={true} token={token} />}
+                />
+                <Route
+                  path="/participar-no-limit/"
+                  element={<GenerationContribution {...props} limitAmount={false} token={token} />}
+                />
+                <Route
+                  path="/:language/participar-no-limit/"
+                  element={<GenerationContribution {...props} limitAmount={false} token={token} />}
                 />
                 <Route
                   path="/generationkwh/contribution/"

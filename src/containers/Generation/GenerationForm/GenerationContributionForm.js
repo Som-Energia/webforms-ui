@@ -42,7 +42,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const GenerationContributionForm = (props) => {
-  const { values, handleBlur, errors, touched, setFieldValue, title } = props
+  const {
+    values,
+    handleBlur,
+    errors,
+    touched,
+    setFieldValue,
+    title,
+    limitAmount
+  } = props
 
   const { t } = useTranslation()
   const classes = useStyles()
@@ -57,9 +65,12 @@ const GenerationContributionForm = (props) => {
       action === 'add'
         ? values.number_of_actions + 1
         : values.number_of_actions - 1
+
     if (
-      nActions <= contributionParams.generationMaxNumActions &&
-      nActions >= contributionParams.generationMinAnnualUse
+      (limitAmount &&
+        nActions <= contributionParams.generationMaxNumActions &&
+        nActions >= contributionParams.generationMinAnnualUse) ||
+      (!limitAmount && nActions >= contributionParams.generationMinAnnualUse)
     ) {
       setFieldValue('number_of_actions', nActions)
       setFieldValue('payment.amount', nActions * ACTION_VALUE)
@@ -87,7 +98,7 @@ const GenerationContributionForm = (props) => {
       isNaN(values.percent_over_annual_use) ||
       !isFinite(values.percent_over_annual_use)
     ) {
-      percentProd = '% Erròni'
+      percentProd = 'n/s %'
     }
 
     return (
@@ -123,12 +134,14 @@ const GenerationContributionForm = (props) => {
         {t('GENERATION_FORM_ANNUAL_USE_TITLE')}
       </Typography>
       <Box pt={1}>
-        <Typography variant="body1"
+        <Typography
+          variant="body1"
           dangerouslySetInnerHTML={{
             __html: t('GENERATION_FORM_ANNUAL_USE_INPUT_TITLE', {
               url: t('GENERATION_FORM_ANNUAL_CONSUMPTION_URL')
             })
-          }} />
+          }}
+        />
       </Box>
       <Box pt={1} id="box_annual_use">
         <TextField
@@ -144,9 +157,7 @@ const GenerationContributionForm = (props) => {
           onChange={handleAnnualUseChange}
           onBlur={handleBlur}
           error={errors?.annual_use && touched?.annual_use}
-          helperText={
-            (touched?.annual_use && errors?.annual_use) || ''
-          }
+          helperText={(touched?.annual_use && errors?.annual_use) || ''}
         />
       </Box>
       <Box pt={1}>
