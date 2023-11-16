@@ -35,6 +35,7 @@ import GenerationSignaturit from './GenerationSignaturit'
 const MAX_STEP_NUMBER = 5
 
 const GenerationContribution = (props) => {
+  const { limitAmount } = props
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
@@ -379,7 +380,7 @@ const GenerationContribution = (props) => {
                 <PersonalData title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')} {...formikProps} entity="member" />
               )}
               {activeStep === 2 && (
-                <GenerationContributionForm title={t('GENERATION_FORM_TITLE')} {...formikProps} />
+                <GenerationContributionForm limitAmount={limitAmount} title={t('GENERATION_FORM_TITLE')} {...formikProps} />
               )}
               {activeStep === 3 && <GenerationReview title={t('GENERATION_FORM_TITLE')} {...formikProps} />}
               {activeStep === 4 && (

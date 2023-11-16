@@ -103,7 +103,7 @@ const GenerationNoMemberIdFields = (props) => {
           variant="h6"
           className={`${classes.title} ${classes.titleWithMarginPlus}`}
           dangerouslySetInnerHTML={{
-            __html: t('INTRODUCE EL CODIGO POSTAL')
+            __html: t('GENERATION_FORM_POSTAL_CODE')
           }}
         />
         <Box id="box_no_member_vat_input" mt={2} mb={1}>
