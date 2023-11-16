@@ -1,5 +1,9 @@
 # Change Log
 
+## Unrealeased
+
+- Added new GenerationkWh form without limit in number of actions
+
 ## 1.9.8 2023-10-16
 
 - Update CCGG and CCEE: SOLS -> Sols
