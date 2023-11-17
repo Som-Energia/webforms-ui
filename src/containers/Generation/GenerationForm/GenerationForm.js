@@ -384,7 +384,7 @@ const GenerationContribution = (props) => {
               )}
               {activeStep === 3 && <GenerationReview title={t('GENERATION_FORM_TITLE')} {...formikProps} />}
               {activeStep === 4 && (
-                <GenerationSignaturit title={t('GENERATION_FORM_TITLE')} submit={handlePost} {...formikProps} />
+                <GenerationSignaturit limitAmount={limitAmount} title={t('GENERATION_FORM_TITLE')} submit={handlePost} {...formikProps} />
               )}
 
               {completed && (
