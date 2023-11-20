@@ -37,7 +37,7 @@ function GenerationSignaturit(props) {
   const [loading, setLoading] = useState(true)
   const [completed, setCompleted] = useState(false)
   const { i18n } = useTranslation()
-  const { submit, values, setFieldValue, title } = props
+  const { submit, values, setFieldValue, title, limitAmount } = props
   const { t } = useTranslation()
   const classes = useStyles()
   const getSignaturit = useCallback(() => {
@@ -57,7 +57,8 @@ function GenerationSignaturit(props) {
       language: i18n.language,
       number_of_actions: values?.number_of_actions,
       iban: values?.payment?.iban,
-      email: values?.member?.email
+      email: values?.member?.email,
+      limit_amount_actions: limitAmount
     })
       .then((response) => {
         setLoading(false)

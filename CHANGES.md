@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix Signaturit creation in GenerationKwh form without limit
+
 ## 1.10.0 2023-11-16
 
 - Added new GenerationkWh form without limit in number of actions
