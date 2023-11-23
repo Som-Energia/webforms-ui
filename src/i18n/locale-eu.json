@@ -681,6 +681,7 @@
     "GENERATION_FORM_IN_PROCESS":"Eskaera prozesatzen ari da...",
     "GENERATION_FORM_PERSONAL_DATA_TITLE":"Bazkide izateko formularioa",
     "GENERATION_FORM_ANNUAL_CONSUMPTION_URL":"https://eu.support.somenergia.coop/article/947-nola-jakin-dezaket-urtean-zenbat-elektrizitate-erabiltzen-dudan?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
+    "GENERATION_PERCENT_ERROR_DESC":"Ehuneko hori ikusteko, urteko erabilera eremua bete behar duzu",
     "TAR_20TD_SOM": "2.0TD Periodos Península",
     "TAR_20TD_SOM_INSULAR": "2.0TD Periodos Insular",
     "TAR_30TD_SOM": "3.0TD Periodos Península",
