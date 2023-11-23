@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.10.2 2023-11-23
+
+- Improve understanding of the contribution form in generationkwh
+
 ## 1.10.1 2023-11-20
 
 - Fix Signaturit creation in GenerationKwh form without limit
