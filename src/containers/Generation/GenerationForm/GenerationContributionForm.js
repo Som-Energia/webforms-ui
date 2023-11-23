@@ -2,8 +2,8 @@ import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
-import StepHeader from '../../../components/StepHeader'
 import IBANField from '../../../components/IBANField'
+import AlertBox from 'components/AlertBox'
 
 import AddIcon from '@material-ui/icons/AddBox'
 import RemoveIcon from '@material-ui/icons/IndeterminateCheckBox'
@@ -98,29 +98,33 @@ const GenerationContributionForm = (props) => {
       isNaN(values.percent_over_annual_use) ||
       !isFinite(values.percent_over_annual_use)
     ) {
-      percentProd = 'n/s %'
+      percentProd = undefined
     }
 
     return (
       <Box id="box_percent_use">
-        <Grid
-          container
-          style={{
-            border: '0.5px lightgrey solid'
-          }}>
+        {percentProd ? (
           <Grid
-            item
+            container
             style={{
-              padding: '10px 2px 10px 2px',
-              width: percentProd,
-              height: '100%',
-              backgroundColor: '#96b633'
+              border: '0.5px lightgrey solid'
             }}>
-            <Typography id="percent_value" style={{ margin: '0px 10px' }}>
-              {percentProd}
-            </Typography>
+            <Grid
+              item
+              style={{
+                padding: '10px 2px 10px 2px',
+                width: percentProd,
+                height: '100%',
+                backgroundColor: '#96b633'
+              }}>
+              <Typography id="percent_value" style={{ margin: '0px 10px' }}>
+                {percentProd}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
+        ) : (
+          <AlertBox id='percent_value_error' description={t('GENERATION_PERCENT_ERROR_DESC')} severity={'warning'} variant={'body2'}/>
+        )}
       </Box>
     )
   }, [values.percent_over_annual_use])

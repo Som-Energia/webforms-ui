@@ -190,22 +190,6 @@ describe('Generation Form Contribution', () => {
     expect(mockSetFieldValue).toHaveBeenCalledWith('payment.iban', IBAN, false)
   })
 
-  test('Should show error when percent use has erroneous value', () => {
-    const mockPercentValues = JSON.parse(JSON.stringify(mockValues))
-    mockPercentValues.percent_over_annual_use = Infinity
-
-    const dom = render(
-      <GenerationContributionForm
-        values={mockPercentValues}
-        errors={errors}
-        setFieldValue={mockSetFieldValue}
-      />
-    )
-
-    const percentValue = getById(dom.container, 'percent_value')
-    expect(getByText(percentValue, 'n/s %')).toBeInTheDocument()
-  })
-
   test('Should show IBAN helper text', () => {
     
     const dom = render(

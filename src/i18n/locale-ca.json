@@ -684,6 +684,7 @@
     "GENERATION_FORM_PERSONAL_DATA_TITLE":"Formulari per fer-se soci/sòcia",
     "GENERATION_FORM_ANNUAL_CONSUMPTION_URL":"https://ca.support.somenergia.coop/article/945-com-puc-saber-el-meu-us-anual-delectricitat",
     "GENERATION_FORM_POSTAL_CODE":"Introdueix el codi postal",
+    "GENERATION_PERCENT_ERROR_DESC":"Per poder veure aquest percentatge, has d'emplenar el camp d'ús anual",
     "TAR_20TD_SOM": "2.0TD Períodes Península",
     "TAR_20TD_SOM_INSULAR": "2.0TD Períodes Insular",
     "TAR_30TD_SOM": "3.0TD Períodes Península",

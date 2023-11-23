@@ -82,7 +82,7 @@ const GenerationContribution = (props) => {
       sepa_accepted: true
     },
     number_of_actions: 0,
-    annual_use: 0,
+    annual_use: 5000,
     privacy_policy_accepted: false,
     privacy_policy_accepted_responsible_declaration: false,
     percent_over_annual_use: 0,
