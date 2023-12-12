@@ -18,6 +18,8 @@ import SendIcon from '@material-ui/icons/Send'
 
 import Uploader from '../../components/Uploader'
 
+const showD1PowerModificationChooser = process.env.REACT_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -131,25 +133,28 @@ function AcceptD1({
               </Box>
             </Box>
 
-            <Box mx={1} mt={1} mb={2} className={classes.chooserLabelBox}>
-              <Chooser
-                question={t('APROFITAR_LA_MODIFICACIO')}
-                onChange={(option) => setFieldValue('m1', option.option)}
-                value={values.m1}
-                options={[
-                  {
-                    value: true,
-                    label: t('SI'),
-                    description: t('AVIS_APROFITAR_M1')
-                  },
-                  {
-                    value: false,
-                    label: t('NO'),
-                    description: t('AVIS_NO_APROFITAR_M1')
-                  }
-                ]}
-              />
-            </Box>
+            {showD1PowerModificationChooser && (
+              <Box mx={1} mt={1} mb={2} className={classes.chooserLabelBox}>
+                <Chooser
+                  question={t('APROFITAR_LA_MODIFICACIO')}
+                  onChange={(option) => setFieldValue('m1', option.option)}
+                  value={values.m1}
+                  options={[
+                    {
+                      value: true,
+                      label: t('SI'),
+                      description: t('AVIS_APROFITAR_M1')
+                    },
+                    {
+                      value: false,
+                      label: t('NO'),
+                      description: t('AVIS_NO_APROFITAR_M1')
+                    }
+                  ]}
+                />
+              </Box>
+            )}
+
             <div className={classes.actionsContainer}>
               {
                 <Button
