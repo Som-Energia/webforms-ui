@@ -18,7 +18,8 @@ import SendIcon from '@material-ui/icons/Send'
 
 import Uploader from '../../components/Uploader'
 
-const showD1PowerModificationChooser = process.env.REACT_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
+const showD1PowerModificationChooser =
+  process.env.REACT_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,10 +61,11 @@ function AcceptD1({
   const [sending, setSending] = useState(false)
 
   const AcceptD1Schema = Yup.object().shape({
-    m1: Yup.bool()
-      .required(t('UNACCEPTED_PRIVACY_POLICY'))
-      .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY')),
-  })
+          m1: Yup.bool()
+            .required(t('UNACCEPTED_PRIVACY_POLICY'))
+            .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+        }
+  )
 
   return (
     <Paper className={classes.paperContainer} elevation={0}>
@@ -71,7 +73,7 @@ function AcceptD1({
         initialValues={{
           ...{
             d1Attachments: [],
-            m1: ''
+            m1: showD1PowerModificationChooser ?  '' : false
           },
           ...params
         }}
@@ -122,7 +124,7 @@ function AcceptD1({
                   maxFiles={5}
                   fieldError={
                     errors?.d1Attachments &&
-                    (touched?.d1Attachments || values?.m1 !== "") &&
+                    (touched?.d1Attachments || values?.m1 !== '') &&
                     errors?.d1Attachments
                   }
                   callbackFn={(d1Attachments) =>
@@ -172,7 +174,7 @@ function AcceptD1({
                   className={classes.button}
                   color="primary"
                   variant="contained"
-                  disabled={!isValid || sending}
+                  disabled={(showD1PowerModificationChooser && !isValid) || sending}
                   endIcon={
                     (sending && <CircularProgress size={24} />) ||
                     (values?.m1 === false && <SendIcon />) || (
