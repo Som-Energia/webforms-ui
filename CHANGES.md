@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.10.3 2023-12-18
+
+- Add feature flag to disable contract d1 power modification
+
 ## 1.10.2 2023-11-23
 
 - Improve understanding of the contribution form in generationkwh
