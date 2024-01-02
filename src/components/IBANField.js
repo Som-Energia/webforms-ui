@@ -30,6 +30,7 @@ function ApiValidatedField({
   onBlur,
   error,
   inputFilter,
+  localCheck,
   remoteCheck,
   helperText,
   errorText,
@@ -53,7 +54,7 @@ function ApiValidatedField({
 
   useEffect(() => {
     onChange({ value: currentValue, valid: false })
-    if (currentValue.length <= 28) {
+    if (!localCheck(currentValue)) {
       setIsValid(false)
       return
     }
@@ -117,7 +118,9 @@ function IBANField(props) {
     value = value.split(' ').join('')
     value = value.match(/.{1,4}/g).join(' ')
     return value
-
+  }
+  function localCheck(value) {
+    return value.replaceAll(' ', '').length === 24
   }
   function remoteCheck(value) {
     return checkIban(value)
@@ -129,6 +132,7 @@ function IBANField(props) {
       leadingIcon={AccountBalanceOutlinedIcon}
       errorText={t('INVALID_IBAN_FORMAT')}
       inputFilter={inputFilter}
+      localCheck={localCheck}
       remoteCheck={remoteCheck}
       onChange={(newValue) => {
         return onChange({
