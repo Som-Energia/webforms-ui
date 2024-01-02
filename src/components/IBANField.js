@@ -48,7 +48,7 @@ function ApiValidatedField({
 
   const handleChange = (event) => {
     let value = event.target.value
-    setCurrentValue(inputFilter?inputFilter(value):value)
+    setCurrentValue(inputFilter ? inputFilter(value) : value)
   }
 
   useEffect(() => {
