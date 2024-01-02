@@ -30,6 +30,7 @@ function ApiValidatedField({
   onBlur,
   error,
   inputFilter,
+  remoteCheck,
   helperText,
   errorText,
   autoFocus = false,
@@ -57,7 +58,7 @@ function ApiValidatedField({
       return
     }
     setIsLoading(true)
-    checkIban(currentValue)
+    remoteCheck(currentValue)
       .then((response) => {
         onChange({ value: currentValue, valid: response?.state === true })
         setIsValid(response?.state === true)
@@ -118,12 +119,17 @@ function IBANField(props) {
     return value
 
   }
+  function remoteCheck(value) {
+    return checkIban(value)
+  }
+
   return (
     <ApiValidatedField
       {...others}
       leadingIcon={AccountBalanceOutlinedIcon}
       errorText={t('INVALID_IBAN_FORMAT')}
       inputFilter={inputFilter}
+      remoteCheck={remoteCheck}
       onChange={(newValue) => {
         return onChange({
           ...newValue,
