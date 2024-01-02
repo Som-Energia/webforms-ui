@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function IBANField(props) {
+function ApiValidatedField(props) {
   const classes = useStyles()
   const {
     name,
@@ -106,6 +106,10 @@ function IBANField(props) {
       />
     </>
   )
+}
+
+function IBANField(props) {
+  return <ApiValidatedField {...props} />
 }
 
 export default IBANField
