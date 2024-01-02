@@ -29,6 +29,7 @@ function ApiValidatedField({
   onChange,
   onBlur,
   error,
+  inputFilter,
   helperText,
   errorText,
   autoFocus = false,
@@ -42,17 +43,12 @@ function ApiValidatedField({
   const { t } = useTranslation()
 
   const LeadingIcon = leadingIcon
+  const hasError = currentValue && !isValid
+
   const handleChange = (event) => {
     let value = event.target.value
-    if (value) {
-      value = value.match(/[\s0-9A-Za-z]{0,29}/)[0]
-      value = value.toUpperCase()
-      value = value.split(' ').join('')
-      value = value.match(/.{1,4}/g).join(' ')
-    }
-    setCurrentValue(value)
+    setCurrentValue(inputFilter?inputFilter(value):value)
   }
-  const hasError = currentValue && !isValid
 
   useEffect(() => {
     onChange({ value: currentValue, valid: false })
@@ -113,11 +109,21 @@ function ApiValidatedField({
 function IBANField(props) {
   const { t } = useTranslation()
   const { onChange, ...others } = props
+  function inputFilter(value) {
+    if (!value) return value
+    value = value.match(/[\s0-9A-Za-z]{0,29}/)[0] // TODO: Do not cut chars after not matching one
+    value = value.toUpperCase()
+    value = value.split(' ').join('')
+    value = value.match(/.{1,4}/g).join(' ')
+    return value
+
+  }
   return (
     <ApiValidatedField
       {...others}
       leadingIcon={AccountBalanceOutlinedIcon}
       errorText={t('INVALID_IBAN_FORMAT')}
+      inputFilter={inputFilter}
       onChange={(newValue) => {
         return onChange({
           ...newValue,
