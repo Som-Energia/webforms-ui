@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-import { checkIban } from '../services/api'
+import { checkCadastralReference, checkIban } from '../services/api'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
@@ -10,6 +10,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import MapIcon from '@material-ui/icons/Map'
 import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,6 @@ function ApiValidatedField({
   value = '',
   onChange,
   onBlur,
-  error,
   inputFilter,
   localCheck,
   remoteCheck,
@@ -45,11 +45,12 @@ function ApiValidatedField({
   const { t } = useTranslation()
 
   const LeadingIcon = leadingIcon
-  const hasError = currentValue && !isValid
+  const hasError = !!currentValue && !isValid
 
   const handleChange = (event) => {
     let value = event.target.value
-    setCurrentValue(inputFilter ? inputFilter(value) : value)
+    const formattedValue = inputFilter ? inputFilter(value) : value
+    setCurrentValue(formattedValue)
   }
 
   useEffect(() => {
@@ -59,20 +60,12 @@ function ApiValidatedField({
       return
     }
     setIsLoading(true)
-    remoteCheck(currentValue)
-      .then((response) => {
-        onChange({ value: currentValue, valid: response?.state === true })
-        setIsValid(response?.state === true)
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        const errorStatus = error?.response?.data?.state
-          ? error?.response?.data?.state
-          : false
-        setIsValid(errorStatus)
-        setIsLoading(false)
-        onChange({ value: currentValue, valid: errorStatus })
-      })
+    remoteCheck(currentValue).then((isOk) => {
+      onChange({ value: currentValue, valid: isOk })
+      setIsValid(isOk)
+      setIsLoading(false)
+      console.log({ name, hasError, isValid, currentValue })
+    })
   }, [currentValue])
 
   return (
@@ -85,7 +78,7 @@ function ApiValidatedField({
         fullWidth
         required
         autoFocus={autoFocus}
-        value={currentValue}
+        value={value}
         onChange={handleChange}
         onBlur={onBlur}
         error={hasError}
@@ -113,7 +106,8 @@ function IBANField(props) {
   const { onChange, ...others } = props
   function inputFilter(value) {
     if (!value) return value
-    value = value.match(/[\s0-9A-Za-z]{0,29}/)[0] // TODO: Do not cut chars after not matching one
+    value = value.replace(/[^0-9A-Za-z]/g, '') // TODO: Do not cut chars after not matching one
+    value = value.slice(0, 24)
     value = value.toUpperCase()
     value = value.split(' ').join('')
     value = value.match(/.{1,4}/g).join(' ')
@@ -124,6 +118,12 @@ function IBANField(props) {
   }
   function remoteCheck(value) {
     return checkIban(value)
+      .then((response) => {
+        return response?.state === true
+      })
+      .catch((error) => {
+        return !!error?.response?.data?.state
+      })
   }
 
   return (
@@ -144,15 +144,59 @@ function IBANField(props) {
     />
   )
 }
+
+
+function CadastralReferenceField(props) {
+  const { t } = useTranslation()
+  const { onChange, ...others } = props
+  function inputFilter(value) {
+    if (!value) return value
+    value = value.replace(/[^0-9A-Za-z]/g, '') // TODO: Do not cut chars after not matching one
+    value = value.slice(0, 20)
+    value = value.toUpperCase()
+    value = [value.slice(0,7), value.slice(7,14), value.slice(14,18), value.slice(18,20)].join(' ')
+    return value
+  }
+  function localCheck(value) {
+    return value.replaceAll(' ', '').length === 20
+  }
+  function remoteCheck(value) {
+    return checkCadastralReference(value)
+      .then((response) => {
+        return response?.state === true
+      })
+      .catch((error) => {
+        return !!error?.response?.data?.state
+      })
+  }
+
+  return (
+    <ApiValidatedField
+      {...others}
+      leadingIcon={MapIcon}
+      errorText={t('INVALID_CADASTRAL_REFERENCE_FORMAT')}
+      inputFilter={inputFilter}
+      localCheck={localCheck}
+      remoteCheck={remoteCheck}
+      onChange={onChange}
+    />
+  )
+}
+
+
+
 export function Test() {
   const [value, setValue] = React.useState()
   const [valid, setValid] = React.useState()
   const [value2, setValue2] = React.useState()
   const [valid2, setValid2] = React.useState()
+  const [cadastralRef, setCadastralRef] = React.useState()
+  const [cadastralRefValid, setCadastralRefValid] = React.useState()
   return (
     <>
       <Container>
         <IBANField
+          name="old"
           value={value}
           onChange={(newValue) => {
             setValue(newValue.IBAN)
@@ -166,6 +210,7 @@ export function Test() {
         <div>Value: {value}</div>
         <div>Valid: {'' + valid}</div>
         <IBANField
+          name="new"
           value={value2}
           onChange={(newValue) => {
             setValue2(newValue.IBAN)
@@ -175,6 +220,17 @@ export function Test() {
         />
         <div>Value: {value2}</div>
         <div>Valid: {'' + valid2}</div>
+        <CadastralReferenceField
+          name="cadastralref"
+          value={cadastralRef}
+          onChange={(newValue) => {
+            setCadastralRef(newValue.value)
+            setCadastralRefValid(newValue.valid)
+          }}
+          helperText={'Referencia Cadastral'}
+        />
+        <div>Value: {cadastralRef}</div>
+        <div>Valid: {'' + cadastralRefValid}</div>
       </Container>
     </>
   )

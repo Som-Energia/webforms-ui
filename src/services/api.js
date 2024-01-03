@@ -155,6 +155,25 @@ export const checkIban = async (iban) => {
   })
 }
 
+let cancelTokenCadastralReference
+
+export const checkCadastralReference = async (cadastralReference) => {
+  if (typeof cancelTokenCadastralReference !== typeof undefined) {
+    cancelTokenCadastralReference.cancel('Operation canceled due to new request')
+  }
+
+  cancelTokenCadastralReference = axios.CancelToken.source()
+
+  return axios({
+    method: 'GET',
+    url: `${API_BASE_URL}/check/cadastral_reference/${cadastralReference}`,
+    cancelToken: cancelTokenCadastralReference.token
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+
 export const holderChange = async (data) => {
   return axios({
     method: 'POST',
