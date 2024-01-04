@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 //import { Test as ComponentTest } from './components/TextLoader'
-import { Test as ComponentTest } from './components/IBANField'
+import { Example as ComponentTest } from './components/IBANField.example'
 
 import {
   createTheme,
