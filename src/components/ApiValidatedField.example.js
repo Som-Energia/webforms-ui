@@ -3,20 +3,21 @@ import Container from '@material-ui/core/Container'
 import CadastralReferenceField from './CadastralReferenceField'
 import IBANField from './IBANField'
 
-function ExampleWrap({ component }) {
+function ExampleWrap({ component, ...props }) {
   const [value, setValue] = React.useState()
   const [valid, setValid] = React.useState()
   const Component = component
   return (
     <>
       <Component
-        name="old"
+        {...props}
         value={value}
         onChange={(newValue) => {
           setValue(newValue.value)
           setValid(newValue.valid)
         }}
-        helperText={'Formato invalido'}
+        errorText={'Formato invalido'}
+        helperText={'Text d\'ajuda'}
       />
       <div>Value: {value}</div>
       <div>Valid: {'' + valid}</div>
@@ -30,8 +31,8 @@ export function Example() {
   return (
     <>
       <Container>
-        <ExampleWrap component={IBANField} />
-        <ExampleWrap component={CadastralReferenceField} />
+        <ExampleWrap label={"Compte"} variant='outlined' component={IBANField} />
+        <ExampleWrap label={"Cadastre"} variant='outlined' component={CadastralReferenceField} />
         {/* Legacy deprecated interface */}
         <IBANField
           name="old"
