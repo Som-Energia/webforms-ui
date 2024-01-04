@@ -2,7 +2,7 @@ import React from 'react'
 import { checkIban } from '../services/api'
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
 import { useTranslation } from 'react-i18next'
-import { ApiValidatedField } from './ApiValidatedField'
+import ApiValidatedField from './ApiValidatedField'
 
 export function IBANField(props) {
   const { t } = useTranslation()

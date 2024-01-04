@@ -78,3 +78,5 @@ export function ApiValidatedField({
     </>
   );
 }
+
+export default ApiValidatedField

@@ -2,7 +2,7 @@ import React from 'react';
 import { checkCadastralReference } from '../services/api';
 import MapIcon from '@material-ui/icons/Map';
 import { useTranslation } from 'react-i18next';
-import { ApiValidatedField } from './ApiValidatedField';
+import ApiValidatedField from './ApiValidatedField';
 
 export function CadastralReferenceField(props) {
   const { t } = useTranslation();
@@ -39,3 +39,5 @@ export function CadastralReferenceField(props) {
       onChange={onChange} />
   );
 }
+
+export default CadastralReferenceField
