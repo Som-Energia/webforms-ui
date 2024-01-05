@@ -182,18 +182,14 @@ const Contract = (props) => {
         cadastral_reference: Yup.string()
           .when('cadastral_reference', (value) => {
             if(value?.length > 0) {
-              return Yup.string()
-                .min(23, t('INVALID_REF_CATASTRAL_MIN'))
-                .max(23, t('INVALID_REF_CATASTRAL_MAX'))
-                .required("Required")
+              return Yup.string().required("Required")
             } else {
-              return Yup.string()
-                .notRequired();
+              return Yup.string().notRequired();
             }
           }),
         cadastral_reference_valid: Yup.bool()
-          .required(t('INVALID_REF_CATASTRAL_MIN'))
-          .oneOf([true], t('INVALID_REF_CATASTRAL_MIN')),
+          .required(t('INVALID_REF_CADASTRAL'))
+          .oneOf([true], t('INVALID_REF_CADASTRAL')),
 
       }, [
         ['cadastral_reference', 'cadastral_reference']

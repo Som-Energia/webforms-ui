@@ -37,8 +37,7 @@ export function CadastralReferenceField({errorText, ...props}) {
   return (
     <ApiValidatedField
       {...props}
-      errorText={errorText}
-      // || t('INVALID_CADASTRAL_REFERENCE_FORMAT')
+      errorText={errorText || t('INVALID_REF_CADASTRAL')}
       leadingIcon={MapIcon}
       inputFilter={inputFilter}
       localCheck={localCheck}
