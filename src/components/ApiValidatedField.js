@@ -50,10 +50,10 @@ export function ApiValidatedField({
       return
     }
     setIsLoading(true)
-    remoteCheck(value).then((isOk) => {
-      setIsValid(isOk)
+    remoteCheck(value).then((result) => {
+      setIsValid(result.valid)
       setIsLoading(false)
-      onChange({ value, valid: isOk })
+      onChange(result)
     })
   }
 

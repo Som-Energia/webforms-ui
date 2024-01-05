@@ -25,10 +25,12 @@ export function CadastralReferenceField({errorText, ...props}) {
   function remoteCheck(value) {
     return checkCadastralReference(value)
       .then((response) => {
-        return response?.state === true
+        const valid = response?.state === true
+        return { value, valid }
       })
       .catch((error) => {
-        return !!error?.response?.data?.state
+        const valid = !!error?.response?.data?.state
+        return { value, valid }
       })
   }
 

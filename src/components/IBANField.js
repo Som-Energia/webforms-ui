@@ -22,10 +22,12 @@ export function IBANField(props) {
   function remoteCheck(value) {
     return checkIban(value)
       .then((response) => {
-        return response?.state === true
+        const valid = response?.state === true
+        return { value, valid }
       })
       .catch((error) => {
-        return !!error?.response?.data?.state
+        const valid = !!error?.response?.data?.state
+        return { value, valid }
       })
   }
 
@@ -42,7 +44,7 @@ export function IBANField(props) {
           ...newValue,
           // TODO: deprecated API, remove when unused
           IBAN: newValue.value,
-          IBANValid: newValue.valid
+          IBANValid: newValue.valid,
         })
       }}
     />
