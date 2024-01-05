@@ -81,7 +81,13 @@ export function ApiValidatedField({
         onChange={handleChange}
         onBlur={onBlur}
         error={error ?? hasError}
-        helperText={hasError ? errorText ?? t('INVALID_FORMAT') : helperText}
+        helperText={
+          isLoading
+            ? t('API_VALIDATED_FIELD_CHECKING')
+            : hasError
+            ? errorText ?? t('API_VALIDATED_FIELD_INVALID_FORMAT')
+            : helperText
+        }
         InputProps={{
           startAdornment: LeadingIcon && (
             <InputAdornment className={classes.icon} position="start">
