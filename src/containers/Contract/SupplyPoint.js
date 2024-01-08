@@ -295,11 +295,10 @@ const SupplyPoint = (props) => {
               value={values?.supply_point?.cadastral_reference}
               onChange={onChangeCadastralReference}
               onBlur={handleBlur}
-              errorText={
+              helperText={(
                 touched?.supply_point?.cadastral_reference &&
                 errors?.supply_point?.cadastral_reference_valid
-              }
-              helperText={<CadastralReferenceHelperText/>}
+              ) || <CadastralReferenceHelperText/>}
             />
           </Grid>
           ): null}

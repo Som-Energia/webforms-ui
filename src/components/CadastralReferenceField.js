@@ -4,7 +4,7 @@ import MapIcon from '@material-ui/icons/Map'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
 
-export function CadastralReferenceField({errorText, ...props}) {
+export function CadastralReferenceField(props) {
   const { t } = useTranslation()
   function inputFilter(value) {
     if (!value) return value
@@ -37,7 +37,6 @@ export function CadastralReferenceField({errorText, ...props}) {
   return (
     <ApiValidatedField
       {...props}
-      errorText={errorText || t('INVALID_REF_CADASTRAL')}
       leadingIcon={MapIcon}
       inputFilter={inputFilter}
       localCheck={localCheck}

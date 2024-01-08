@@ -189,7 +189,6 @@
     "IBAN_ERROR": "IBAN incorrecte",
     "INVALID_PAYER_IBAN": "No has especificat correctament l'IBAN del compte on domiciliar",
     "API_VALIDATED_FIELD_CHECKING": "Validant...",
-    "API_VALIDATED_FIELD_INVALID_FORMAT": "Valor inválido",
     "UNCONFIRMED_ACCOUNT_OWNER": "Has d'acceptar la domiciliació dels rebuts",
     "REVIEW_TITLE": "Revisa i confirma el contracte",
     "REVIEW_DESCRIPTION": "Revisa les dades i, si són correctes, clica el botó enviar:",

@@ -314,7 +314,8 @@ const Member = (props) => {
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}>
+          validateOnMount={true}
+        >
           {(props) => (
             <>
               <div>

@@ -28,7 +28,6 @@ export function ApiValidatedField({
   localCheck,
   remoteCheck,
   helperText,
-  errorText,
   autoFocus = false,
   leadingIcon
 }) {
@@ -84,8 +83,6 @@ export function ApiValidatedField({
         helperText={
           isLoading
             ? t('API_VALIDATED_FIELD_CHECKING')
-            : hasError
-            ? errorText ?? t('API_VALIDATED_FIELD_INVALID_FORMAT')
             : helperText
         }
         InputProps={{

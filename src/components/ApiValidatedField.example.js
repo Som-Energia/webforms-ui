@@ -16,8 +16,7 @@ function ExampleWrap({ component, ...props }) {
           setValue(newValue.value)
           setValid(newValue.valid)
         }}
-        errorText={'Formato invalido'}
-        helperText={'Text d\'ajuda'}
+        helperText={valid?'Text d\'ajuda':'Formato invalido'}
       />
       <div>Value: {value}</div>
       <div>Valid: {'' + valid}</div>

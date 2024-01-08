@@ -35,7 +35,6 @@ export function IBANField(props) {
     <ApiValidatedField
       {...others}
       leadingIcon={AccountBalanceOutlinedIcon}
-      errorText={t('INVALID_IBAN_FORMAT')}
       inputFilter={inputFilter}
       localCheck={localCheck}
       remoteCheck={remoteCheck}
