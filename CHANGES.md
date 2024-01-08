@@ -1,5 +1,10 @@
 # Change Log
 
+## unreleased
+
+- In-edit validation of Cadastral reference
+- Abstracted field ApiValidatedField for Cadastral reference and IBAN
+
 ## 1.10.4 2024-01-09
 
 - Add link to section Production and Consumption of Generation kWh
