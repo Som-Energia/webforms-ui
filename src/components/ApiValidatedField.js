@@ -34,23 +34,19 @@ export function ApiValidatedField({
   const classes = useStyles()
 
   const [isLoading, setIsLoading] = useState(false)
-  const [isValid, setIsValid] = useState(false)
   const [formerValue, setFormerValue] = useState(undefined)
   const { t } = useTranslation()
 
   const LeadingIcon = leadingIcon
-  const hasError = !!value && !isValid
 
   function checkValue(value) {
     setFormerValue(value)
     onChange({ value, valid: false })
-    setIsValid(false)
     if (!localCheck(value)) {
       return
     }
     setIsLoading(true)
     remoteCheck(value).then((result) => {
-      setIsValid(result.valid)
       setIsLoading(false)
       onChange(result)
     })
@@ -79,7 +75,7 @@ export function ApiValidatedField({
         value={value}
         onChange={handleChange}
         onBlur={onBlur}
-        error={error ?? hasError}
+        error={error}
         helperText={
           isLoading
             ? t('API_VALIDATED_FIELD_CHECKING')
@@ -95,7 +91,7 @@ export function ApiValidatedField({
             <InputAdornment position="end">
               {isLoading ? (
                 <CircularProgress size={24} />
-              ) : isValid ? (
+              ) : error ? (
                 <CheckOutlinedIcon color="primary" />
               ) : null}
             </InputAdornment>

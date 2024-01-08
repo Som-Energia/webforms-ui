@@ -78,7 +78,7 @@ return (
               value={values?.payment?.iban}
               error={
                 (errors?.payment?.iban || errors?.payment?.iban_valid) &&
-                touched?.payment?.iban
+                values?.payment?.iban
               }
               required
               helperText={values?.payment?.iban &&
