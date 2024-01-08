@@ -146,7 +146,7 @@ function GenerationDashboard({
                   variant="contained"
                   onClick={()=> window.location.replace('/investments/production-consumption')}
                   endIcon={<ArrowForwardIosIcon />}>
-                  {t('ENTRAR')}
+                  {t('GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION')}
                 </Button>
               </SectionTitle>
             </>
