@@ -694,5 +694,6 @@
     "TAR_INDEXADA_EMPRESA_PENINSULA": "Indexada Empresa Península",
     "TAR_INDEXADA_EMPRESA_CANARIES": "Indexada Empresa Canarias",
     "TAR_INDEXADA_EMPRESA_BALEARS": "Indexada Empresa Baleares",
-    "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION":"Datos de produción e consumo"
+    "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION":"Datos de produción e consumo",
+    "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION":"Entrar"
 }
