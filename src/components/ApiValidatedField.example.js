@@ -2,6 +2,7 @@ import React from 'react'
 import Container from '@material-ui/core/Container'
 import CadastralReferenceField from './CadastralReferenceField'
 import IBANField from './IBANField'
+import CAUField from './CAUField'
 
 function ExampleWrap({ component, ...props }) {
   const [value, setValue] = React.useState()
@@ -32,6 +33,7 @@ export function Example() {
       <Container>
         <ExampleWrap label={"Compte"} variant='outlined' component={IBANField} />
         <ExampleWrap label={"Cadastre"} variant='outlined' component={CadastralReferenceField} />
+        <ExampleWrap label={"CAU"} variant='outlined' component={CAUField} />
         {/* Legacy deprecated interface */}
         <IBANField
           name="old"
