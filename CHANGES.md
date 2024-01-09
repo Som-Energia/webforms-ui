@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Add link to section Production and Consumption of Generation kWh
+
 ## 1.10.3 2023-12-18
 
 - Add feature flag to disable contract d1 power modification

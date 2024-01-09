@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo } from 'react'
-import GenerationContext from './context/GenerationContext'
+import GenerationContext from '../context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 import GenerationTable from './GenerationTable'
