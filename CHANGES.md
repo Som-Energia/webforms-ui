@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.10.4 2024-01-09
 
 - Add link to section Production and Consumption of Generation kWh
 
