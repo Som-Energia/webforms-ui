@@ -20,7 +20,7 @@ export function CadastralReferenceField(props) {
     return value
   }
   function localCheck(value) {
-    return value.replaceAll(' ', '').length === 20
+    return {value, valid: value.replaceAll(' ', '').length === 20 }
   }
   function remoteCheck(value) {
     return checkCadastralReference(value)

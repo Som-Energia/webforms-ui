@@ -17,7 +17,7 @@ export function IBANField(props) {
     return value
   }
   function localCheck(value) {
-    return value.replaceAll(' ', '').length === 24
+    return { value, valid: value.replaceAll(' ', '').length === 24 }
   }
   function remoteCheck(value) {
     return checkIban(value)

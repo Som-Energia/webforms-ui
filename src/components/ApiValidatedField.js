@@ -41,10 +41,10 @@ export function ApiValidatedField({
 
   function checkValue(value) {
     setFormerValue(value)
-    onChange({ value, valid: false })
-    if (!localCheck(value)) {
-      return
-    }
+    const result = localCheck(value)
+    const needsRemote = result.valid
+    onChange({...result, valid: false})
+    if (!needsRemote) return
     setIsLoading(true)
     remoteCheck(value).then((result) => {
       setIsLoading(false)

@@ -421,10 +421,11 @@ const Contract = (props) => {
     Yup.object().shape({
       self_consumption: Yup.object().shape({
         cau: Yup.string()
-          .required(t('FILL_SELFCONSUMPTION_CAU'))
-          .min(22, t('CAU_INVALID'))
-          .max(31, t('CAU_INVALID'))
-          .matches(/A\d{1,3}$/, t('CAU_INVALID_FORMAT')),
+          .when('cau_error', (cau_error)=>{
+            if (cau_error) return Yup.mixed().test({name: 'cau_error', test: ()=>false, message: cau_error})
+            return Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
+          }),
+        cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),

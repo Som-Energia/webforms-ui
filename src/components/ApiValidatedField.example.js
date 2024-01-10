@@ -7,20 +7,25 @@ import CAUField from './CAUField'
 function ExampleWrap({ component, ...props }) {
   const [value, setValue] = React.useState()
   const [valid, setValid] = React.useState()
+  const [extra, setExtra] = React.useState()
   const Component = component
   return (
     <>
       <Component
         {...props}
         value={value}
+        error={value && !valid}
         onChange={(newValue) => {
-          setValue(newValue.value)
-          setValid(newValue.valid)
+          const {value, valid, ...extra} = newValue
+          setValue(value)
+          setValid(valid)
+          setExtra(extra)
         }}
-        helperText={valid?'Text d\'ajuda':'Formato invalido'}
+        helperText={(!value || valid)?'Text d\'ajuda':extra?.error??'Formato invalido'}
       />
       <div>Value: {value}</div>
       <div>Valid: {'' + valid}</div>
+      <div>Extra: {JSON.stringify(extra)}</div>
     </>
   )
 }
