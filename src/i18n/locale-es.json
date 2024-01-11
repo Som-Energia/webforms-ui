@@ -269,6 +269,7 @@
     "CADASTRAL_REFERENCE": "Referencia catastral",
     "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/1339-que-es-y-donde-encontrar-la-referencia-catastral\">¿Qué es la referencia catastral y dónde puedo encontrarla?</a>.",
     "INVALID_REF_CADASTRAL_LENGTH": "La referencia catastral es un código de 20 números y/o letras.",
+    "INVALID_REF_CADASTRAL_CONTROL_DIGIT":"La refrencia catastral no es vàlida",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificado si ya hay luz con otra comercializadora o es un nuevo punto de suministro sin luz",
     "NO_SUPPLY_POINT_ADDRESS": "No has especificado la <b>dirección</b> del punto de suministro",
     "NO_IS_HOUSING": "No has especificado si la dirección corresponde a una vivienda",
