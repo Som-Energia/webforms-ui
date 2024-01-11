@@ -179,14 +179,13 @@ const Contract = (props) => {
         supply_point_accepted: Yup.bool()
           .required(t('CUPS_VERIFY_LABEL'))
           .oneOf([true], t('CUPS_VERIFY_LABEL')),
-        cadastral_reference: Yup.string(),
-        cadastral_reference_valid: Yup.bool().notRequired()
-          .when('cadastral_reference', (value) => {
-            if (!value) return Yup.bool().notRequired()
-            return Yup.bool()
-              .required("Required "+t('INVALID_REF_CADASTRAL'))
-              .oneOf([true], "One of "+t('INVALID_REF_CADASTRAL'))
+        cadastral_reference: Yup.string()
+          .when('cadastral_reference_error', (cadastral_reference_error)=>{
+            if (cadastral_reference_error)
+              return Yup.string().test({name: 'cadastral_reference_error', test: ()=>false, message: cadastral_reference_error})
+            return Yup.string().required(t('INVALID_REF_CADASTRAL_LENGTH'))
           }),
+        cadastral_reference_error: Yup.string().notRequired(),
       }, [
         ['cadastral_reference', 'cadastral_reference']
       ]
@@ -735,7 +734,7 @@ const Contract = (props) => {
       cnae: '',
       cnae_valid: false,
       cadastral_reference: '',
-      cadastral_reference_valid: false,
+      cadastral_reference_error: false,
       attachments: [],
       supply_point_accepted: false
     },

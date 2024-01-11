@@ -92,9 +92,9 @@ const SupplyPoint = (props) => {
     setFieldValue('supply_point.cnae_valid', valid)
   }
 
-  const onChangeCadastralReference= ({value, valid}) => {
+  const onChangeCadastralReference= ({value, valid, error}) => {
     setFieldValue('supply_point.cadastral_reference', value)
-    setFieldValue('supply_point.cadastral_reference_valid', valid)
+    setFieldValue('supply_point.cadastral_reference_error', error)
   }
 
   useEffect(() => {
@@ -295,10 +295,12 @@ const SupplyPoint = (props) => {
               value={values?.supply_point?.cadastral_reference}
               onChange={onChangeCadastralReference}
               onBlur={handleBlur}
-              helperText={(
-                touched?.supply_point?.cadastral_reference &&
-                errors?.supply_point?.cadastral_reference_valid
-              ) || <CadastralReferenceHelperText/>}
+              error={values?.supply_point?.cadastral_reference && !!errors?.supply_point?.cadastral_reference}
+              helperText={
+                values?.supply_point?.cadastral_reference && errors?.supply_point?.cadastral_reference
+                ?errors?.supply_point?.cadastral_reference
+                :<CadastralReferenceHelperText/>
+              }
             />
           </Grid>
           ): null}

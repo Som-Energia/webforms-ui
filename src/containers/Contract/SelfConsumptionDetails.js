@@ -55,7 +55,7 @@ const SelfConsumptionDetails = (props) => {
 
   const handleChangeCAU = (data) => {
     setFieldValue('self_consumption.cau', data.value)
-    setFieldValue('self_consumption.cau_error', data.error || false)
+    setFieldValue('self_consumption.cau_error', data.error)
   }
 
   const [situations, setSituations] = useState([])

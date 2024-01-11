@@ -20,17 +20,21 @@ export function CadastralReferenceField(props) {
     return value
   }
   function localCheck(value) {
-    return {value, valid: value.replaceAll(' ', '').length === 20 }
+    return {
+      value,
+      valid: value.replaceAll(' ', '').length === 20,
+      error: t('INVALID_REF_CADASTRAL_LENGTH'),
+    }
   }
   function remoteCheck(value) {
     return checkCadastralReference(value)
       .then((response) => {
         const valid = response?.state === true
-        return { value, valid }
+        return { value, valid, error: valid?undefined:t('INVALID_REF_CADASTRAL_CONTROL_DIGIT')}
       })
       .catch((error) => {
         const valid = !!error?.response?.data?.state
-        return { value, valid }
+        return { value, valid, error: valid?undefined:t('INVALID_REF_CADASTRAL_CONTROL_DIGIT')}
       })
   }
 

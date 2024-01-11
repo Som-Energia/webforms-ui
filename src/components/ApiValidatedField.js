@@ -39,22 +39,22 @@ export function ApiValidatedField({
 
   const LeadingIcon = leadingIcon
 
-  function checkValue(value) {
-    setFormerValue(value)
-    const result = localCheck(value)
+  function checkValue(valueToCheck) {
+    setFormerValue(valueToCheck)
+    const result = localCheck(valueToCheck)
     const needsRemote = result.valid
     onChange({...result, valid: false})
     if (!needsRemote) return
     setIsLoading(true)
-    remoteCheck(value).then((result) => {
+    remoteCheck(valueToCheck).then((result) => {
       setIsLoading(false)
       onChange(result)
     })
   }
 
   const handleChange = (event) => {
-    let value = event.target.value
-    const formattedValue = inputFilter ? inputFilter(value) : value
+    let inputValue = event.target.value
+    const formattedValue = inputFilter ? inputFilter(inputValue) : inputValue
     checkValue(formattedValue)
   }
 
