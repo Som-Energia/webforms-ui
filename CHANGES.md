@@ -1,9 +1,10 @@
 # Change Log
 
-## unreleased
+## 1.10.5 2024-01-18
 
 - In-edit validation of Cadastral reference
-- Abstracted field ApiValidatedField for Cadastral reference and IBAN
+- In-edit validation of CAU
+- Abstracted field ApiValidatedField for Cadastral reference, IBAN and CAU
 
 ## 1.10.4 2024-01-09
 
