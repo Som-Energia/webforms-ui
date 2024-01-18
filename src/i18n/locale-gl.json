@@ -692,6 +692,12 @@
     "TAR_INDEXADA_EMPRESA_PENINSULA": "Indexada Empresa Península",
     "TAR_INDEXADA_EMPRESA_CANARIES": "Indexada Empresa Canarias",
     "TAR_INDEXADA_EMPRESA_BALEARS": "Indexada Empresa Baleares",
-    "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION":"Datos de produción e consumo",
-    "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION":"Entrar"
+    "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION": "Datos de produción e consumo",
+    "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION": "Entrar",
+    "CAU_INVALID_PREFIX": "O código CAU debe comezar por ES",
+    "CAU_INVALID_INSTALLATION": "O código CAU debe rematar con A e tres números",
+    "CAU_INVALID_LENGTH": "O código CAU debe ter 26 caracteres",
+    "CAU_INVALID_CONTROL_DIGIT": "O código CAU non é válido",
+    "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "A referencia catastral non é válida",
+    "CAU_INVALID_BORDER_POINT": "Os caracteres 21 e 22 deben ser un número e unha letra: 0F, 1P..."
 }
