@@ -286,7 +286,7 @@ export const normalizeContract = (contract) => {
   finalContract.cups_state_id = contract?.supply_point?.state?.id
     ? parseInt(contract?.supply_point?.state?.id)
     : 0
-  finalContract.cups_cadastral_reference = contract?.supply_point?.cadastral_reference
+  finalContract.cups_cadastral_reference = contract?.supply_point?.cadastral_reference.replace(/ /g, '')
   finalContract.cnae = contract?.supply_point?.cnae
   finalContract.supply_point_accepted =
     contract?.supply_point?.supply_point_accepted
@@ -359,7 +359,7 @@ export const normalizeContract = (contract) => {
 
   if (contract?.self_consumption?.have_installation) {
     finalContract.self_consumption = {}
-    finalContract.self_consumption.cau = contract?.self_consumption?.cau
+    finalContract.self_consumption.cau = contract?.self_consumption?.cau.replace(/ /g, '')
     finalContract.self_consumption.collective_installation =
       contract?.self_consumption?.collective_installation
 

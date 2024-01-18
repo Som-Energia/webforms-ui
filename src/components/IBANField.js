@@ -1,110 +1,52 @@
-import React, { useState, useEffect } from 'react'
-
-import { makeStyles } from '@material-ui/core/styles'
-
+import React from 'react'
 import { checkIban } from '../services/api'
-
-import CircularProgress from '@material-ui/core/CircularProgress'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import { useTranslation } from 'react-i18next'
+import ApiValidatedField from './ApiValidatedField'
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
+export function IBANField(props) {
+  const { t } = useTranslation()
+  const { onChange, ...others } = props
+  function inputFilter(value) {
+    if (!value) return value
+    value = value.replace(/[^0-9A-Za-z]/g, '') // TODO: Do not cut chars after not matching one
+    value = value.slice(0, 24)
+    value = value.toUpperCase()
+    value = value.split(' ').join('')
+    value = value.match(/.{1,4}/g).join(' ')
+    return value
   }
-}))
-
-function IBANField(props) {
-  const classes = useStyles()
-  const {
-    name,
-    id,
-    label,
-    variant,
-    value = '',
-    onChange,
-    onBlur,
-    error,
-    helperText,
-    autoFocus = false
-  } = props
-
-  const [isLoading, setIsLoading] = useState(false)
-  const [isValidIBAN, setIsValidIBAN] = useState(false)
-  const [IBAN, setIBAN] = useState(value)
-
-  const handleChangeIBAN = (event) => {
-    let value = event.target.value
-    if (value) {
-      value = value.match(/[\s0-9A-Za-z]{0,29}/)
-      value = value[0].toUpperCase()
-      value = value.split(' ').join('')
-      value = value.match(/.{1,4}/g).join(' ')
-    }
-    setIBAN(value)
+  function localCheck(value) {
+    return { value, valid: value.replaceAll(' ', '').length === 24 }
   }
-
-  useEffect(() => {
-    onChange({ IBAN: IBAN, IBANValid: false })
-    if (IBAN.length > 28) {
-      setIsLoading(true)
-      checkIban(IBAN)
-        .then((response) => {
-          onChange({ IBAN: IBAN, IBANValid: response?.state === true })
-          setIsValidIBAN(response?.state === true)
-          setIsLoading(false)
-        })
-        .catch((error) => {
-          const errorStatus = error?.response?.data?.state
-            ? error?.response?.data?.state
-            : false
-          setIsValidIBAN(errorStatus)
-          setIsLoading(false)
-          onChange({ IBAN: IBAN, IBANValid: errorStatus })
-        })
-    } else {
-      onChange({ IBAN: IBAN, IBANValid: false })
-      setIsValidIBAN(false)
-    }
-  }, [IBAN])
+  function remoteCheck(value) {
+    return checkIban(value)
+      .then((response) => {
+        const valid = response?.state === true
+        return { value, valid }
+      })
+      .catch((error) => {
+        const valid = !!error?.response?.data?.state
+        return { value, valid }
+      })
+  }
 
   return (
-    <>
-      <TextField
-        id={id}
-        name={name}
-        label={label}
-        variant={variant}
-        fullWidth
-        required
-        autoFocus={autoFocus}
-        value={value}
-        onChange={handleChangeIBAN}
-        onBlur={onBlur}
-        error={error}
-        helperText={helperText}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment className={classes.icon} position="start">
-              <AccountBalanceOutlinedIcon />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              {isLoading && <CircularProgress size={24} />}
-              {!isLoading && isValidIBAN && (
-                <CheckOutlinedIcon color="primary" />
-              )}
-            </InputAdornment>
-          )
-        }}
-      />
-    </>
+    <ApiValidatedField
+      {...others}
+      leadingIcon={AccountBalanceOutlinedIcon}
+      inputFilter={inputFilter}
+      localCheck={localCheck}
+      remoteCheck={remoteCheck}
+      onChange={(newValue) => {
+        return onChange({
+          ...newValue,
+          // TODO: deprecated API, remove when unused
+          IBAN: newValue.value,
+          IBANValid: newValue.valid,
+        })
+      }}
+    />
   )
 }
 

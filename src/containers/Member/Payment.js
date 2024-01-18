@@ -21,7 +21,7 @@ function Payment(props) {
   }
 
   const handleIBANChange = ({ IBAN, IBANValid }) => {
-    setFieldValue('payment.iban', IBAN, false)
+    setFieldValue('payment.iban', IBAN)
     setFieldValue('payment.iban_valid', IBANValid)
   }
 
@@ -40,7 +40,7 @@ function Payment(props) {
     setFieldValue('payment.sepa_accepted', false)
   }
 
-  return (
+return (
     <>
       <StepHeader title={t('PAYMENT_METHOD_TITLE')} />
       <Typography
@@ -78,11 +78,11 @@ function Payment(props) {
               value={values?.payment?.iban}
               error={
                 (errors?.payment?.iban || errors?.payment?.iban_valid) &&
-                touched?.payment?.iban
+                values?.payment?.iban
               }
-              helperText={
-                (touched?.payment?.iban &&
-                  (errors?.payment?.iban || errors?.payment?.iban_valid)) ||
+              required
+              helperText={values?.payment?.iban &&
+                ((errors?.payment?.iban || errors?.payment?.iban_valid)) ||
                 t('IBAN_HELP')
               }
               variant="outlined"

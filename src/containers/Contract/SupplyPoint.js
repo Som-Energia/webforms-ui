@@ -19,6 +19,7 @@ import CnaeField from '../../components/CnaeField'
 
 import { CNAE_HOUSING } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
+import CadastralReferenceField from 'components/CadastralReferenceField'
 
 const useStyles = makeStyles((theme) => ({
   memberChecked: {
@@ -89,6 +90,11 @@ const SupplyPoint = (props) => {
     setFieldTouched('supply_point.cnae', touched)
     setFieldValue('supply_point.cnae', cnae)
     setFieldValue('supply_point.cnae_valid', valid)
+  }
+
+  const onChangeCadastralReference= ({value, valid, error}) => {
+    setFieldValue('supply_point.cadastral_reference', value)
+    setFieldValue('supply_point.cadastral_reference_error', error)
   }
 
   useEffect(() => {
@@ -280,21 +286,20 @@ const SupplyPoint = (props) => {
           </Grid>
           {props.isCadastralReference ? (
           <Grid item xs={6} sm={6}>
-            <TextField
+            <CadastralReferenceField
               id="supply_point_cadastral_reference"
               name="supply_point.cadastral_reference"
               label={t('CADASTRAL_REFERENCE')}
               variant="outlined"
               fullWidth
               value={values?.supply_point?.cadastral_reference}
-              onChange={handleChange}
+              onChange={onChangeCadastralReference}
               onBlur={handleBlur}
-              error={
-                errors?.supply_point?.cadastral_reference && touched?.supply_point?.cadastral_reference
-              }
+              error={values?.supply_point?.cadastral_reference && !!errors?.supply_point?.cadastral_reference}
               helperText={
-                (touched?.supply_point?.cadastral_reference &&
-                  errors?.supply_point?.cadastral_reference) || <CadastralReferenceHelperText/>
+                values?.supply_point?.cadastral_reference && errors?.supply_point?.cadastral_reference
+                ?errors?.supply_point?.cadastral_reference
+                :<CadastralReferenceHelperText/>
               }
             />
           </Grid>

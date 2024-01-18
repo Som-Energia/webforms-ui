@@ -3,16 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
-import Chooser from '../../components/Chooser'
-import StepHeader from '../../components/StepHeader'
-import Uploader from '../../components/Uploader'
-
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+
+import Chooser from '../../components/Chooser'
+import StepHeader from '../../components/StepHeader'
+import Uploader from '../../components/Uploader'
+import CAUField from '../../components/CAUField'
 
 import {
   getSelfConsumptionSituations,
@@ -50,6 +51,11 @@ const SelfConsumptionDetails = (props) => {
     result = result.replace("'", '.')
 
     setFieldValue(event.target.name, result)
+  }
+
+  const handleChangeCAU = (data) => {
+    setFieldValue('self_consumption.cau', data.value)
+    setFieldValue('self_consumption.cau_error', data.error)
   }
 
   const [situations, setSituations] = useState([])
@@ -94,7 +100,7 @@ const SelfConsumptionDetails = (props) => {
             dangerouslySetInnerHTML={{ __html: t('SELFCONSUMPTION_CAU_CODE') }}
             className={classes.fieldTitle}
           />
-          <TextField
+          <CAUField
             required
             id="self_consumption_cau"
             name="self_consumption.cau"
@@ -102,14 +108,13 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values.self_consumption.cau}
-            onChange={handleChange}
+            onChange={handleChangeCAU}
             onBlur={handleBlur}
             error={
-              errors?.self_consumption?.cau && touched?.self_consumption?.cau
+               values?.self_consumption?.cau && !!errors?.self_consumption?.cau
             }
             helperText={
-              (touched?.self_consumption?.cau &&
-                errors?.self_consumption?.cau) || (
+              errors?.self_consumption?.cau || (
                 <a
                   href={t('SELFCONSUMPTION_CAU_HELP_URL')}
                   target="_blank"

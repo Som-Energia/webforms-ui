@@ -180,17 +180,12 @@ const Contract = (props) => {
           .required(t('CUPS_VERIFY_LABEL'))
           .oneOf([true], t('CUPS_VERIFY_LABEL')),
         cadastral_reference: Yup.string()
-          .when('cadastral_reference', (value) => {
-            if(value?.length > 0) {
-              return Yup.string()
-                .min(20, t('INVALID_REF_CATASTRAL_MIN'))
-                .max(20, t('INVALID_REF_CATASTRAL_MAX'))
-                .required("Required")
-            } else {
-              return Yup.string()
-                .notRequired();
-            }
+          .when('cadastral_reference_error', (cadastral_reference_error)=>{
+            if (cadastral_reference_error)
+              return Yup.string().test({name: 'cadastral_reference_error', test: ()=>false, message: cadastral_reference_error})
+            return Yup.string().required(t('INVALID_REF_CADASTRAL_LENGTH'))
           }),
+        cadastral_reference_error: Yup.string().notRequired(),
       }, [
         ['cadastral_reference', 'cadastral_reference']
       ]
@@ -425,10 +420,11 @@ const Contract = (props) => {
     Yup.object().shape({
       self_consumption: Yup.object().shape({
         cau: Yup.string()
-          .required(t('FILL_SELFCONSUMPTION_CAU'))
-          .min(22, t('CAU_INVALID'))
-          .max(31, t('CAU_INVALID'))
-          .matches(/A\d{1,3}$/, t('CAU_INVALID_FORMAT')),
+          .when('cau_error', (cau_error)=>{
+            if (cau_error) return Yup.mixed().test({name: 'cau_error', test: ()=>false, message: cau_error})
+            return Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
+          }),
+        cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),
@@ -738,6 +734,7 @@ const Contract = (props) => {
       cnae: '',
       cnae_valid: false,
       cadastral_reference: '',
+      cadastral_reference_error: undefined,
       attachments: [],
       supply_point_accepted: false
     },
