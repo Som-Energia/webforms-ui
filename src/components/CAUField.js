@@ -39,11 +39,11 @@ export function CAUField(props) {
     return checkCups(value.replace(/ /g, '').slice(0,20))
       .then((response) => {
         const valid = response?.state === true
-        return { value, valid, error: !valid && t("CAU_INVALID_CONTROL_DIGIT") }
+        return { value, valid, error: valid?undefined:t("CAU_INVALID_CONTROL_DIGIT") }
       })
       .catch((error) => {
         const valid = !!error?.response?.data?.state
-        return { value, valid, error: !valid && t("CAU_INVALID_CONTROL_DIGIT")  }
+        return { value, valid, error: valid?undefined:t("CAU_INVALID_CONTROL_DIGIT")  }
       })
   }
 
