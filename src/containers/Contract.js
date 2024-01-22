@@ -183,7 +183,7 @@ const Contract = (props) => {
           .when('cadastral_reference_error', (cadastral_reference_error)=>{
             if (cadastral_reference_error)
               return Yup.string().test({name: 'cadastral_reference_error', test: ()=>false, message: cadastral_reference_error})
-            return Yup.string().required(t('INVALID_REF_CADASTRAL_LENGTH'))
+            return Yup.string(t('INVALID_REF_CADASTRAL_LENGTH'))
           }),
         cadastral_reference_error: Yup.string().notRequired(),
       }, [
