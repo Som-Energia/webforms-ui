@@ -41,9 +41,13 @@ export function ApiValidatedField({
 
   function checkValue(valueToCheck) {
     setFormerValue(valueToCheck)
+    if (valueToCheck == '') {
+      onChange({ valueToCheck, valid: true, error: undefined })
+      return
+    }
     const result = localCheck(valueToCheck)
     const needsRemote = result.valid
-    onChange({...result, valid: false})
+    onChange({ ...result, valid: false })
     if (!needsRemote) return
     setIsLoading(true)
     remoteCheck(valueToCheck).then((result) => {
