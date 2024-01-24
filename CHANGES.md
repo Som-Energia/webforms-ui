@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.10.6 2024-01-24
+
+- Fix cadastral reference is not required
+
 ## 1.10.5 2024-01-18
 
 - In-edit validation of Cadastral reference
