@@ -188,7 +188,7 @@
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular de la cuenta bancaria, yo misma o una tercera persona, autoriza la domiciliación de las facturas de electricidad.",
     "IBAN_ERROR": "IBAN incorrecto",
     "INVALID_PAYER_IBAN": "No has especificado correctamente el IBAN de la cuenta donde domiciliar",
-    "API_VALIDATED_FIELD_CHECKING": "Validando...",
+    "API_VALIDATED_FIELD_CHECKING": "Validando…",
     "UNCONFIRMED_ACCOUNT_OWNER": "Tienes que aceptar la domiciliación de recibos",
     "REVIEW_TITLE": "Revisa y confirma el contrato",
     "REVIEW_DESCRIPTION": "Revisa los datos, si son correctos, clica el botón enviar:",
@@ -269,7 +269,7 @@
     "CADASTRAL_REFERENCE": "Referencia catastral",
     "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/1339-que-es-y-donde-encontrar-la-referencia-catastral\">¿Qué es la referencia catastral y dónde puedo encontrarla?</a>.",
     "INVALID_REF_CADASTRAL_LENGTH": "La referencia catastral es un código de 20 números y/o letras.",
-    "INVALID_REF_CADASTRAL_CONTROL_DIGIT":"La referencia catastral no es válida",
+    "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "La referencia catastral no es válida",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificado si ya hay luz con otra comercializadora o es un nuevo punto de suministro sin luz",
     "NO_SUPPLY_POINT_ADDRESS": "No has especificado la <b>dirección</b> del punto de suministro",
     "NO_IS_HOUSING": "No has especificado si la dirección corresponde a una vivienda",
@@ -707,6 +707,6 @@
     "TAR_INDEXADA_EMPRESA_PENINSULA": "Indexada Empresa Península",
     "TAR_INDEXADA_EMPRESA_CANARIES": "Indexada Empresa Canarias",
     "TAR_INDEXADA_EMPRESA_BALEARS": "Indexada Empresa Baleares",
-    "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION":"Datos de producción y consumo",
-    "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION":"Entrar"
+    "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION": "Datos de producción y consumo",
+    "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION": "Entrar"
 }
