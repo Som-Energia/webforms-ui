@@ -188,7 +188,7 @@
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular del compte bancari, sigui jo mateixa o una altra, autoritza la domiciliació de les factures d'electricitat.",
     "IBAN_ERROR": "IBAN incorrecte",
     "INVALID_PAYER_IBAN": "No has especificat correctament l'IBAN del compte on domiciliar",
-    "API_VALIDATED_FIELD_CHECKING": "Validant...",
+    "API_VALIDATED_FIELD_CHECKING": "Validant…",
     "UNCONFIRMED_ACCOUNT_OWNER": "Has d'acceptar la domiciliació dels rebuts",
     "REVIEW_TITLE": "Revisa i confirma el contracte",
     "REVIEW_DESCRIPTION": "Revisa les dades i, si són correctes, clica el botó enviar:",
