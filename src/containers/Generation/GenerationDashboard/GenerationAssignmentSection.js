@@ -15,6 +15,7 @@ function createData(
   id,
   contract,
   contractAddress,
+  contractTariff,
   priority,
   contractLastInvoiced,
   annualUseKwh
@@ -23,6 +24,7 @@ function createData(
     id,
     contract,
     contractAddress,
+    contractTariff,
     priority,
     contractLastInvoiced,
     annualUseKwh
