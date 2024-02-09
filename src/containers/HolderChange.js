@@ -290,10 +290,10 @@ function HolderChange(props) {
   }, [language, i18n])
 
   /// True if the step has to be skipped according to the values
-  const skipStep(page, values, isBackwards=false) {
+  const skipStep(step, values, isBackwards=false) {
     // TODO: backwards is member was checked === true, check it still works
     // without
-    switch (page) {
+    switch (step) {
       case 3: // BecomeMember
         if (values?.holder?.ismember) return true
         if (isHomeOwnerCommunityNif(values?.holder?.vat)) return true
