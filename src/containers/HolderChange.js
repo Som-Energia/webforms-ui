@@ -37,7 +37,7 @@ import data from 'data/HolderChange/data.json'
 import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
-import { normalizeHolderChange } from 'services/utils'
+import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -298,7 +298,7 @@ function HolderChange(props) {
       next++
     }
     // Neighbour comunity cannot become a member
-    if (next === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+    if (next === 3 && isHomeOwnerCommunityNif(values?.holder?.vat)) {
       next += 1
     }
 
@@ -317,7 +317,7 @@ function HolderChange(props) {
       prev--
     }
     // Neighbour comunity cannot become a member
-    if (prev === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
+    if (prev === 3 && isHomeOwnerCommunityNif(values?.holder?.vat)) {
       prev -= 1
     }
     setActiveStep(Math.max(0, prev))
@@ -500,7 +500,7 @@ function HolderChange(props) {
                         </Box>
                         <Box mx={0} mt={2} mb={3}>
                           <div className={classes.actionsContainer}>
-                            {activeStep === 4 && (RegExp(/(^[H])/).test(props.values?.holder?.vat)) && (
+                            {activeStep === 4 && (isHomeOwnerCommunityNif(props.values?.holder?.vat)) && (
                               <>
                                 <Box mt={3}>
                                   <Alert severity="warning">
