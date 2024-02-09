@@ -289,18 +289,27 @@ function HolderChange(props) {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
+  /// True if the step has to be skipped according to the values
+  const skipStep(page, values, isBackwards=false) {
+    // TODO: backwards is member was checked === true, check it still works
+    // without
+    switch (page) {
+      case 3: // BecomeMember
+        if (values?.holder?.ismember) return true
+        if (isHomeOwnerCommunityNif(values?.holder?.vat)) return true
+        return false
+      case 4: // MemberIdentifier
+        if (values?.holder?.ismember) return true
+        if (values?.member?.become_member === true) return true
+        return false
+    }
+    return false
+  }
+
   const nextStep = (values, actions) => {
     let next = activeStep + 1
-    if (next === 3 && values?.holder?.ismember) {
-      next += 2
-    }
-    if (next === 4 && values?.member?.become_member === true) {
-      next++
-    }
-    // Neighbour comunity cannot become a member
-    if (next === 3 && isHomeOwnerCommunityNif(values?.holder?.vat)) {
-      next += 1
-    }
+
+    while (skipStep(next, values, false)) next++
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -310,16 +319,9 @@ function HolderChange(props) {
 
   const prevStep = (values, actions) => {
     let prev = activeStep - 1
-    if (prev === 4 && values?.holder?.ismember === true) {
-      prev -= 2
-    }
-    if (prev === 4 && values?.member?.become_member === true) {
-      prev--
-    }
-    // Neighbour comunity cannot become a member
-    if (prev === 3 && isHomeOwnerCommunityNif(values?.holder?.vat)) {
-      prev -= 1
-    }
+
+    while (skipStep(prev, values, true)) prev--
+
     setActiveStep(Math.max(0, prev))
     actions.setTouched({})
     actions.setSubmitting(false)
