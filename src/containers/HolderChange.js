@@ -19,7 +19,6 @@ import SendIcon from '@material-ui/icons/Send'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 
-
 import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
 import PersonalData from './HolderChange/PersonalData'
@@ -38,7 +37,6 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -243,7 +241,7 @@ function HolderChange(props) {
               merge: Yup.array()
                 .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
                 .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
             })
           })
       })
@@ -495,27 +493,29 @@ function HolderChange(props) {
                                 {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
                               </Button>
                             )}
-                         </div>
+                          </div>
                         </Box>
                         <Box mx={0} mt={2} mb={3}>
                           <div className={classes.actionsContainer}>
-                            {activeStep === 4 && (isHomeOwnerCommunityNif(props.values?.holder?.vat)) && (
-                              <>
-                                <Box mt={3}>
-                                  <Alert severity="warning">
-                                    <Typography
-                                      variant="body1"
-                                      dangerouslySetInnerHTML={{
-                                        __html: t('CIF_COMMUNITY_OWNERS')
-                                      }}
-                                    />
-                                  </Alert>
-                                </Box>
-                              </>
-                            )}
+                            {activeStep === 4 &&
+                              isHomeOwnerCommunityNif(
+                                props.values?.holder?.vat
+                              ) && (
+                                <>
+                                  <Box mt={3}>
+                                    <Alert severity="warning">
+                                      <Typography
+                                        variant="body1"
+                                        dangerouslySetInnerHTML={{
+                                          __html: t('CIF_COMMUNITY_OWNERS')
+                                        }}
+                                      />
+                                    </Alert>
+                                  </Box>
+                                </>
+                              )}
                           </div>
                         </Box>
-
                       </Paper>
                     }
                   </Form>
