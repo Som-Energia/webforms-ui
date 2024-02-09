@@ -13,6 +13,7 @@ jobs:
         run: npm install
       - uses: cypress-io/github-action@v2
         with:
+          install-command: npm install
           browser: chrome
           record: true
           parallel: true
