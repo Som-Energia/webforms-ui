@@ -332,10 +332,7 @@ function HolderChange(props) {
     }
   }
 
-  const isLastStep = useMemo(
-    () => activeStep >= MAX_STEP_NUMBER - 1,
-    [activeStep]
-  )
+  const isLastStep = activeStep >= MAX_STEP_NUMBER - 1
 
   const handleError = async (error) => {
     let errorCode = error?.response?.data?.error?.code || 'UNEXPECTED'
