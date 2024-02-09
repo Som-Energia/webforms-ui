@@ -290,8 +290,8 @@ function HolderChange(props) {
   }, [language, i18n])
 
   /// True if the step has to be skipped according to the values
-  const skipStep(step, values, isBackwards=false) {
-    // TODO: backwards is member was checked === true, check it still works
+  function skipStep(step, values, isBackwards = false) {
+    // TODO: backwards ismember was checked with "=== true", check it still works
     // without
     switch (step) {
       case 3: // BecomeMember
