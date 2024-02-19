@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.10.7 2024-02-19
+
+- Fix Holder Change: Member information not sent from ui to api
+  for homeowners communities
+
 ## 1.10.6 2024-01-24
 
 - Fix cadastral reference is not required
