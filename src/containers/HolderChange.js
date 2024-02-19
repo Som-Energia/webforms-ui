@@ -19,7 +19,6 @@ import SendIcon from '@material-ui/icons/Send'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 
-
 import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
 import PersonalData from './HolderChange/PersonalData'
@@ -37,8 +36,7 @@ import data from 'data/HolderChange/data.json'
 import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
-import { normalizeHolderChange } from 'services/utils'
-
+import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -243,7 +241,7 @@ function HolderChange(props) {
               merge: Yup.array()
                 .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
                 .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
             })
           })
       })
@@ -289,18 +287,27 @@ function HolderChange(props) {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
+  /// True if the step has to be skipped according to the values
+  function skipStep(step, values, isBackwards = false) {
+    // TODO: backwards ismember was checked with "=== true", check it still works
+    // without
+    switch (step) {
+      case 3: // BecomeMember
+        if (values?.holder?.ismember) return true
+        if (isHomeOwnerCommunityNif(values?.holder?.vat)) return true
+        return false
+      case 4: // MemberIdentifier
+        if (values?.holder?.ismember) return true
+        if (values?.member?.become_member === true) return true
+        return false
+    }
+    return false
+  }
+
   const nextStep = (values, actions) => {
     let next = activeStep + 1
-    if (next === 3 && values?.holder?.ismember) {
-      next += 2
-    }
-    if (next === 4 && values?.member?.become_member === true) {
-      next++
-    }
-    // Neighbour comunity cannot become a member
-    if (next === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
-      next += 1
-    }
+
+    while (skipStep(next, values, false)) next++
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -310,16 +317,9 @@ function HolderChange(props) {
 
   const prevStep = (values, actions) => {
     let prev = activeStep - 1
-    if (prev === 4 && values?.holder?.ismember === true) {
-      prev -= 2
-    }
-    if (prev === 4 && values?.member?.become_member === true) {
-      prev--
-    }
-    // Neighbour comunity cannot become a member
-    if (prev === 3 && RegExp(/(^[H])/).test(values?.holder?.vat) === true) {
-      prev -= 1
-    }
+
+    while (skipStep(prev, values, true)) prev--
+
     setActiveStep(Math.max(0, prev))
     actions.setTouched({})
     actions.setSubmitting(false)
@@ -330,10 +330,7 @@ function HolderChange(props) {
     }
   }
 
-  const isLastStep = useMemo(
-    () => activeStep >= MAX_STEP_NUMBER - 1,
-    [activeStep]
-  )
+  const isLastStep = activeStep >= MAX_STEP_NUMBER - 1
 
   const handleError = async (error) => {
     let errorCode = error?.response?.data?.error?.code || 'UNEXPECTED'
@@ -496,27 +493,29 @@ function HolderChange(props) {
                                 {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
                               </Button>
                             )}
-                         </div>
+                          </div>
                         </Box>
                         <Box mx={0} mt={2} mb={3}>
                           <div className={classes.actionsContainer}>
-                            {activeStep === 4 && (RegExp(/(^[H])/).test(props.values?.holder?.vat)) && (
-                              <>
-                                <Box mt={3}>
-                                  <Alert severity="warning">
-                                    <Typography
-                                      variant="body1"
-                                      dangerouslySetInnerHTML={{
-                                        __html: t('CIF_COMMUNITY_OWNERS')
-                                      }}
-                                    />
-                                  </Alert>
-                                </Box>
-                              </>
-                            )}
+                            {activeStep === 4 &&
+                              isHomeOwnerCommunityNif(
+                                props.values?.holder?.vat
+                              ) && (
+                                <>
+                                  <Box mt={3}>
+                                    <Alert severity="warning">
+                                      <Typography
+                                        variant="body1"
+                                        dangerouslySetInnerHTML={{
+                                          __html: t('CIF_COMMUNITY_OWNERS')
+                                        }}
+                                      />
+                                    </Alert>
+                                  </Box>
+                                </>
+                              )}
                           </div>
                         </Box>
-
                       </Paper>
                     }
                   </Form>

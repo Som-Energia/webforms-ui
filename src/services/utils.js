@@ -188,6 +188,10 @@ export const normalizeHolderChange = (contract) => {
     normalContract.member.become_member = false
     normalContract.member.link_member = false
   }
+  else if (isHomeOwnerCommunityNif(normalContract?.holder?.vat)) {
+    normalContract.member.become_member = false
+    normalContract.member.link_member = true
+  }
   'ismember' in normalContract?.holder && delete normalContract.holder.ismember
 
   if (!normalContract?.member?.link_member) {
@@ -545,3 +549,8 @@ export const checkIsTariff30 = (tariff) => {
 export const checkIsTariffIndexed = (tariff) => {
   return tariff.toLowerCase().match(/ndex/)
 }
+
+export const isHomeOwnerCommunityNif = (nif) => {
+  return /^H/.test(nif)
+}
+
