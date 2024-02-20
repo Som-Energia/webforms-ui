@@ -154,7 +154,9 @@ const Contribution = (props) => {
         address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()
           .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE')),
+          .required(t('NO_POSTALCODE'))
+          .min(5, t('NO_POSTALCODE'))
+          .max(5, t('NO_POSTALCODE')),
         state: Yup.object().shape({
           id: Yup.number().required(t('NO_STATE'))
         }),

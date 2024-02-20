@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix: add `postal_code` validation length
+
 ## 1.10.7 2024-02-19
 
 - Fix Holder Change: Member information not sent from ui to api
