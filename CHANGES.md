@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add contract tariff in contract model
+- Add contract tariff in generation assignments
 - Fix: add `postal_code` validation length
 
 ## 1.10.7 2024-02-19
