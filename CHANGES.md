@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.10.8 2024-02-20
 
 - Add contract tariff in generation assignments
 - Fix: add `postal_code` validation length
