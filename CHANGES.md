@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix `particular_contract_terms_accepted`
+
 ## 1.10.8 2024-02-20
 
 - Add contract tariff in generation assignments
