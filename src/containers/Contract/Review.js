@@ -579,7 +579,7 @@ const Review = (props) => {
             <Checkbox
               name="particular_terms_accepted"
               onClick={handleParticularConditionsCheckClick}
-              checked={values.particular_terms_accepted}
+              checked={values.particular_contract_terms_accepted}
               color="primary"
             />
           }
