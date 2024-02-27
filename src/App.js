@@ -17,6 +17,7 @@ import ApiStatus from './components/ApiStatus'
 import './i18n/i18n'
 import './App.css'
 import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
+import { PopUpContextProvider } from 'context/PopUpContext'
 
 const theme = createTheme({
   palette: {
@@ -74,6 +75,7 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
+
 
   const loadContractData = () => {
     const contractData =
@@ -381,21 +383,25 @@ const App = (props) => {
                 <Route
                   path="/:language/investments/investments-kwh/"
                   element={
-                    <GenerationContextProvider
-                      assignmentsJSON={assignmentsJSON}
-                      investmentsJSON={investmentsJSON}>
-                      <Generation {...props} token={token} />
-                    </GenerationContextProvider>
+                    <PopUpContextProvider>
+                      <GenerationContextProvider
+                        assignmentsJSON={assignmentsJSON}
+                        investmentsJSON={investmentsJSON}>
+                        <Generation {...props} token={token} />
+                      </GenerationContextProvider>
+                    </PopUpContextProvider>
                   }
                 />
                 <Route
                   path="/investments/investments-kwh/"
                   element={
-                    <GenerationContextProvider
-                      assignmentsJSON={assignmentsJSON}
-                      investmentsJSON={investmentsJSON}>
-                      <Generation {...props} token={token} />
-                    </GenerationContextProvider>
+                    <PopUpContextProvider>
+                      <GenerationContextProvider
+                        assignmentsJSON={assignmentsJSON}
+                        investmentsJSON={investmentsJSON}>
+                        <Generation {...props} token={token} />
+                      </GenerationContextProvider>
+                    </PopUpContextProvider>
                   }
                 />
 
