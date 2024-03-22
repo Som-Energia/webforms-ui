@@ -1,7 +1,7 @@
 import React from 'react'
 import GenerationDashboard from './GenerationDashboard'
 import { render, queryByAttribute, screen, within } from '@testing-library/react'
-import { GenerationContextProvider } from './context/GenerationContext'
+import { GenerationContextProvider } from '../context/GenerationContext'
 import userEvent from '@testing-library/user-event'
 
 jest.mock('react-i18next', () => ({
