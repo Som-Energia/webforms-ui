@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fix: not sending `max_power` as float to prices API
 - Fix `particular_contract_terms_accepted`
 
 ## 1.10.8 2024-02-20
