@@ -111,7 +111,7 @@ const Review = (props) => {
         )
       )
     )
-    let maxPower = Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
+    let maxPower = Math.round(Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR)
     getPrices({
       tariff: values.contract.rate,
       max_power: maxPower,
