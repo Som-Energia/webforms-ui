@@ -1,85 +1,98 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import { useTranslation } from 'react-i18next';
+
+
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 420,
-    '& .MuiFilledInput-underline:before': {
-      borderBottom: 'none', // Removes the border bottom
-    },
-    '& .MuiFilledInput-underline:after': {
-      borderBottom: 'none', // Removes the border bottom after input is focused
-    },
-    '& .MuiFilledInput-underline:hover:before': {
-      borderBottom: 'none', // Removes the border bottom on hover
-    }
-  },
   grid: {
-    display:'flex',
-    justifyContent:'center',
+    display: 'flex',
+    justifyContent: 'center',
     padding: '15px',
     flexDirection: 'column',
-    gap:'1rem'
+    gap: '1rem'
   },
-  titleContainer:{
-    display:'flex',
-    justifyContent:'center',
+  titleContainer: {
+    display: 'flex',
+    justifyContent: 'center',
   },
-  title:{
+  title: {
     fontSize: '16px'
+  },
+  groupButton: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
 
-export default function SelectedListItem({data,clickFunction}) {
+export default function SelectedListItem({ data, title, acceptFunction, acceptButtonText, cancelFunction, cancelButtonText }) {
   const classes = useStyles();
-  const [itemSelected, setItemSelected] = useState('')
+  const [checked, setChecked] = useState([]);
+  const { t } = useTranslation()
 
-  const handleChange = (event) => {
-     setItemSelected(event.target.value);
-   };
+  const handleToggle = (value) => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+  };
 
-   useEffect(() => {
-     if(data.length > 0){
-       const firstItem = data[0]
-       setItemSelected(firstItem.string)
-     }
-   },[data])
 
-  const ListItemsSelect = ({data, clickFunction}) => {
+  const ListItemsSelect = ({ data }) => {
+
     return (
-      <Grid cotnainer className={classes.grid}>
-      <Grid container item className={classes.titleContainer}>
-        <Typography className={classes.title} variant='h6'>LLISTAT DE CONTRACTES</Typography>
-      </Grid>
-      <Grid container item>
-      <FormControl variant="filled" className={classes.formControl} fullWidth>
-          <Select
-            labelId="simple-select-filled-label"
-            id="simple-select-filled"
-            value={itemSelected}
-            onChange={handleChange}
-          >
-            {data.map(element => <MenuItem value={element.string}>{ element.contract } - { element.contract_address }</MenuItem>)}
-          </Select>
-      </FormControl>
-      </Grid>
-      <Button onClick={() => clickFunction(itemSelected)}>SELECCIONAR</Button>
+      <Grid container className={classes.grid}>
+        <Grid container item className={classes.titleContainer}>
+          <Typography className={classes.title} variant='h6'>{title}</Typography>
+        </Grid>
+        <Grid container item>
+          <List className={classes.root}>
+            {data.map((value) => {
+              return (
+                <ListItem key={value.id} role={undefined} dense button onClick={() => handleToggle(value.id)}>
+                  <ListItemIcon>
+                    <Checkbox
+                      data-testid={"checkbox-" + value.id}
+                      edge="start"
+                      checked={checked.indexOf(value.id) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText id={value.id} primary={value.primary} secondary={value.secondary} />
+                </ListItem>
+              );
+            })}
+          </List>
+        </Grid>
+        <Grid>
+          <Typography variant='body2' dangerouslySetInnerHTML={{
+            __html: t('GENERATION_ADD_ASSIGNMENTS_INFO_MSG')
+          }} />
+        </Grid>
+        <Grid item container className={classes.groupButton}>
+          {acceptFunction ? <Button color='primary' data-testid={"list-accept-button"} disabled={checked.length === 0} onClick={() => acceptFunction(checked)}>{acceptButtonText}</Button> : null}
+          {cancelFunction ? <Button color='primary' data-testid={"list-cancel-button"} onClick={cancelFunction}>{cancelButtonText}</Button> : null}
+        </Grid>
       </Grid>
     )
   }
 
-
-
   return (
     <div className={classes.root}>
-      <ListItemsSelect data={data} clickFunction={clickFunction}/>
+      <ListItemsSelect data={data} />
     </div>
   );
 }
