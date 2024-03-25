@@ -1,5 +1,4 @@
-import { useState, createContext } from 'react'
-import CustomDialog from '../components/CustomDialog'
+import React, { useState, createContext } from 'react'
 
 const PopUpContext = createContext();
 
@@ -9,7 +8,7 @@ const [content, setContent] = useState(undefined);
 
   return (
     <PopUpContext.Provider value={{ setContent:setContent }}>
-      <CustomDialog>{content}</CustomDialog>
+      <React.Fragment>{content}</React.Fragment>
       {children}
     </PopUpContext.Provider>
   )
