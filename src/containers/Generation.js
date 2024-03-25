@@ -13,7 +13,6 @@ function Generation(props) {
   const [validationConfirm, setValidationConfirm] = useState({finished:false,completed:false})
   const { language } = useParams()
   const { i18n } = useTranslation()
-  const { token } = props
   const { assignments, resetAssignments, setEditingPriority } =
     useContext(GenerationContext)
 
@@ -25,13 +24,13 @@ function Generation(props) {
     setEditingPriority(false)
     try {
       const newAssignments = assignments.map((assignment) => assignment.id)
-      await generationChangeContractPriority(newAssignments, token)
+      await generationChangeContractPriority(newAssignments)
       setValidationConfirm({finished:true, completed:true})
     } catch (error) {
       console.error('ERROR', error)
       setValidationConfirm({finished:true, completed:false})
     }
-  }, [assignments, token, setEditingPriority])
+  }, [assignments, setEditingPriority])
 
   useEffect(() => {
     language && i18n.changeLanguage(language)
