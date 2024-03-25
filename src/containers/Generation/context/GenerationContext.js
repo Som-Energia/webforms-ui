@@ -2,41 +2,45 @@ import { useState, createContext, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import OrdinalNumbers from 'utils/ordinalNumbers'
 import { useParams } from 'react-router-dom'
+import { getAssignmentContracts, getNoAssignmentContracts } from '../../../services/api'
 
 const GenerationContext = createContext({
   assignments: [],
   investments: [],
-  priorities: [],
-  modifyContract: () => {}
+  contractNoAssignments: [],
+  modifyContract: () => { }
 })
 
-export const GenerationContextProvider = ({ children, assignmentsJSON, investmentsJSON, propEditingPriority }) => {
+export const GenerationContextProvider = ({testMode=false, children, assignmentsJSON, investmentsJSON, propEditingPriority, contractNoAssignmentsJSON=[] }) => {
   const { t } = useTranslation()
   const { language } = useParams()
 
-  const ordinals = useMemo(() => {return new OrdinalNumbers(language)},[language])
-
-  const pioritiesJSON = useMemo(() => {
-    return assignmentsJSON.map((value, index) => {
-      return index === 0
-        ? { active: true, value: t('GENERATION_MAIN_PRIORITY'), index: index }
-        : { active: true, value: ordinals.formatOrdinals(index+1), index: index }
-    })
-  }, [t, assignmentsJSON, ordinals])
+  const ordinals = useMemo(() => { return new OrdinalNumbers(language) }, [language])
 
   const assignmentsJSONSorted = useMemo(() => {
-      const tmpAssignments = JSON.parse(JSON.stringify(assignmentsJSON))
-      const assignmentsSorted = tmpAssignments.sort((a,b) => a.priority - b.priority )
-      return assignmentsSorted.map((value, index) => {
-        value.priority = index
-        return value;
-      })
+    const tmpAssignments = JSON.parse(JSON.stringify(assignmentsJSON))
+    const assignmentsSorted = tmpAssignments.sort((a, b) => a.priority - b.priority)
+    return assignmentsSorted.map((value, index) => {
+      value.priority = index
+      return value;
+    })
   }, [assignmentsJSON])
 
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
   const [assignments, setAssignments] = useState(assignmentsJSONSorted)
+  const [contractNoAssignments, setContractNoAssignments] = useState(contractNoAssignmentsJSON)
   const [investments] = useState(investmentsJSON)
-  const [priorities] = useState(pioritiesJSON)
+
+  const getAssingments = async () => {
+    try {
+      let result = await getAssignmentContracts()
+      setAssignments(result?.data)
+    }
+    catch (e) {
+      console.log("NO s'han pogut trobar les assignacions")
+    }
+  }
+
 
   const has_duplicate_priority_values = useCallback(() => {
     let res =
@@ -59,25 +63,44 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
           assignment.priority = originPriority
         }
       })
-      
-      newAssignments.sort((a,b) => a.priority - b.priority )
+
+      newAssignments.sort((a, b) => a.priority - b.priority)
       setAssignments(newAssignments)
     },
     [assignments]
   )
 
   const getPriority = useCallback((index) => {
+    
+    const priorities = assignments.map((value, index) => {
+      return index === 0
+        ? { active: true, value: t('GENERATION_MAIN_PRIORITY'), index: index }
+        : { active: true, value: ordinals.formatOrdinals(index + 1), index: index }
+    })
+
     let found = false;
     let count = 0;
-    while(!found && count<priorities.length){
-      if(priorities[count].index === index){
+    while (!found && count < priorities.length) {
+      if (priorities[count].index === index) {
         found = true
-      }else{
-        count ++;
+      } else {
+        count++;
       }
     }
     return priorities[count]
-  },[priorities])
+  }, [assignments])
+
+  const getContractsToAssign = async () => {
+    try {
+      if(!testMode){
+        const noContractAssignments = await getNoAssignmentContracts()
+        setContractNoAssignments(noContractAssignments?.data)
+      }
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
 
   const resetAssignments = useCallback(() => {
     setEditingPriority(false)
@@ -88,24 +111,28 @@ export const GenerationContextProvider = ({ children, assignmentsJSON, investmen
     () => ({
       assignments,
       investments,
-      priorities,
       editingPriority,
       setEditingPriority,
       getPriority,
       changeAssigmentPriority,
       resetAssignments,
-      has_duplicate_priority_values
+      has_duplicate_priority_values,
+      getAssingments,
+      getContractsToAssign,
+      contractNoAssignments
     }),
     [
       assignments,
-      priorities,
       getPriority,
       editingPriority,
       setEditingPriority,
       investments,
       changeAssigmentPriority,
       resetAssignments,
-      has_duplicate_priority_values
+      has_duplicate_priority_values,
+      getAssingments,
+      getContractsToAssign,
+      contractNoAssignments
     ]
   )
 
