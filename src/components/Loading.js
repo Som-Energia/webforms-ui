@@ -15,7 +15,7 @@ const Loading = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.loading}>
+    <div data-testid={'loading-component'} className={classes.loading}>
       <img alt="Loading..." src={loading} />
     </div>
   )
