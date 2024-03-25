@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react'
+import React, { useCallback, useContext, useMemo, useState } from 'react'
 import GenerationContext from '../context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
@@ -10,6 +10,15 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Box from '@material-ui/core/Box'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import PopUpContext from '../../../context/PopUpContext';
+import SimpleDialog from '../../../components/SimpleDialog';
+import { deleteContractsFromAssignments } from '../../../services/api'
+import CustomDialog from 'components/CustomDialog'
+import Loading from 'components/Loading'
+import Alert from '@material-ui/lab/Alert';
+import { Typography } from '@material-ui/core'
 
 function createData(
   id,
@@ -49,8 +58,11 @@ export default function GenerationAssigmentSection({ data }) {
   const classes = useStyles()
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
-  const { getPriority, setEditingPriority, changeAssigmentPriority } =
+  const { getPriority, setEditingPriority, changeAssigmentPriority, getAssingments, getContractsToAssign } =
     useContext(GenerationContext)
+  const [loading, setLoading] = useState(false)
+
+  const { setContent } = useContext(PopUpContext)
 
   const columns = useMemo(
     () => [
@@ -58,7 +70,8 @@ export default function GenerationAssigmentSection({ data }) {
       t('GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT'),
       t('ADDRESS'),
       t('GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE'),
-      t('GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH')
+      t('GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH'),
+      ''
     ],
     [t]
   )
@@ -70,6 +83,22 @@ export default function GenerationAssigmentSection({ data }) {
     },
     [changeAssigmentPriority, rows, setEditingPriority]
   )
+
+  const handleDelete = async (id) => {
+    try {
+      setLoading(true)
+      setContent(<CustomDialog withBackground={false} blockHandleClose={true} ><Loading /></CustomDialog>)
+      await deleteContractsFromAssignments(id)
+      await getContractsToAssign()
+      setLoading(false)
+      getAssingments()
+    }
+    catch (e) {
+      console.error("No s'ha pogut esborrar l'assignació", e)
+      setLoading(false)
+    }
+    setContent(undefined)
+  }
 
   return (
     <DragDropContext
@@ -125,6 +154,17 @@ export default function GenerationAssigmentSection({ data }) {
                         {Number(row.annualUseKwh).toLocaleString('es-ES', {
                           minimumFractionDigits: 2
                         })}
+                      </StyledTableCell>
+                      <StyledTableCell className={row.contract + 'styled-cell'}>
+                        <IconButton id={`delete-button-${row.id}`} disabled={loading} onClick={() => setContent(
+                          <SimpleDialog
+                            title={t('GENERATION_ASSIGNMENTS_CONFIRM_TITLE')}
+                            text={<Alert severity="warning" ><Typography dangerouslySetInnerHTML={{ __html: t('GENERATION_REMOVE_ASSIGNMENTS_ALERT_MSG') }} /></Alert>}
+                            acceptFunction={() => handleDelete(row.id)}
+                            cancelFunction={() => setContent(undefined)} />
+                        )}>
+                          <DeleteIcon />
+                        </IconButton>
                       </StyledTableCell>
                     </TableRow>
                   )}
