@@ -710,5 +710,13 @@
     "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION": "Datos de producción y consumo",
     "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION": "Entrar",
     "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Introduce tu DNI o NIF",
-    "GENERATION_BUTTON_ADD_ASSIGNMENT":"Añadir"
+    "GENERATION_BUTTON_ADD_ASSIGNMENT":"Asignar nuevo contrato",
+    "GENERATION_ADD_ASSIGNMENTS_INFO_MSG":"Ten en cuenta que solo puedes añadir contratos de los que eres titular. Si quieres añadir un contrato de otra persona, escríbenos un correo electrónico a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>.",
+    "GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT":"No tienes ningún contrato disponible para añadir al Generation kWh, bien porque no tienes ningún contrato a tu nombre o porque tus contratos ya tienen derechos Generation kWh asignados. Si quieres añadir un contrato de otra persona, escríbenos un correo electrónico a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
+    "GENERATION_REMOVE_ASSIGNMENTS_ALERT_MSG":"Estás a punto de desasignar el contrato (eliminarás este contrato de la lista de contratos que se benefician del Generation kWh). Recuerda que sí eliminas algún contrato del cual no eres titular y, más adelante, quieres volver a añadirlo, tendras que escribirnos un correo a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
+    "GENERATION_ASSIGNMENTS_CONFIRM_TITLE":"Quieres continuar?",
+    "GENERATION_ADD_CONTRACT_LIST_TITLE":"¿Qué contratos quieres añadir?",
+    "GENERATION_ADD_CONTRACT_LIST_VALIDATE_CHANGES":"Validar cambios",
+    "GENERATION_ADD_CONTRACT_LIST_CANCEL":"Cancelar",
+    "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Aceptar"
 }

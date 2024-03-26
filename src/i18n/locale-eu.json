@@ -708,5 +708,13 @@
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "Katastroko erreferentzia ez da baliozkoa",
     "CAU_INVALID_LENGTH": "CAU kodeak 26 karaktere izan behar ditu",
     "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Idatzi zure NAN zenbakia edo IFZ",
-    "GENERATION_BUTTON_ADD_ASSIGNMENT":"Gehitu"
+    "GENERATION_BUTTON_ADD_ASSIGNMENT":"Kontratu berria esleitu",
+    "GENERATION_ADD_ASSIGNMENTS_INFO_MSG":"Kontuan hartu titular zaren kontratuak bakarrik gehitu ditzakezula. Beste norbaiten kontratu bat gehitu nahi baduzu, bidali mezu bat <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
+    "GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT":"Ez duzu kontraturik Generation kWh proiektura gehitzeko, ez duzulako kontraturik zure izenean edo zure kontratuek jada esleituta dituztelako Generation kWh eskubideak. Beste norbaiten kontratu bat gehitu nahi baduzu, bidali mezu bat <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
+    "GENERATION_REMOVE_ASSIGNMENTS_ALERT_MSG":"Kontratua kentzear zaude (kontratua Generation kWh baldintzak dituzten kontratuen zerrendatik ezabatuko duzu).Gogoan izan titular ez zaren kontratu bat ezabatzen baduzu eta, gero, kontratua berriz ere gehitu nahi baduzu, mezu bat bidali beharko duzula <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
+    "GENERATION_ASSIGNMENTS_CONFIRM_TITLE":"Jarraitu nahi duzu?",
+    "GENERATION_ADD_CONTRACT_LIST_TITLE":"Zeintzuk dira gehitu nahi dituzun kontratuak?",
+    "GENERATION_ADD_CONTRACT_LIST_VALIDATE_CHANGES":"Aldaketak baliozkotu",
+    "GENERATION_ADD_CONTRACT_LIST_CANCEL":"Ezeztatu",
+    "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Onartzeko"
 }
