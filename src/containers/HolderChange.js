@@ -108,11 +108,14 @@ function HolderChange(props) {
           .test('statusError', t('CUPS_INVALID'), function () {
             return !(this.parent.status === 'error')
           })
-          .test('statusError', t('CUPS_IN_PROCESS'), function () {
+          .test('statusBusy', t('CUPS_IN_PROCESS'), function () {
             return !(this.parent.status === 'busy')
           })
           .test('statusNew', t('CUPS_SHOULD_BE_ACTIVE'), function () {
             return !(this.parent.status === 'new')
+          })
+          .test('statusInactive', t('CUPS_SHOULD_BE_ACTIVE'), function () {
+            return !(this.parent.status === 'inactive')
           })
           .test('statusInvalid', t('INVALID_SUPPLY_POINT_CUPS'), function () {
             return !(this.parent.status === 'invalid')

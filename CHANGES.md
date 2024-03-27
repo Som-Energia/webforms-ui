@@ -2,8 +2,9 @@
 
 ## Unreleased
 
-- Fix: not sending `max_power` as float to prices API
-- Fix `particular_contract_terms_accepted`
+- Fix: Contract: not sending `max_power` as float to prices API
+- Fix: Contract: missnamed `particular_contract_terms_accepted`
+- Fix: HolderChange: inactive CUPS properly reported to users
 
 ## 1.10.8 2024-02-20
 
