@@ -179,7 +179,7 @@ const Indexada = (props) => {
   const getCommercialName = function (tariff) {
     let tariff_mapping = {
             "2.0TD_SOM": t("TAR_20TD_SOM"),
-            "2.0TD_SOM_INSULAR": t("TAR_2.0TD_SOM_INSULAR"),
+            "2.0TD_SOM_INSULAR": t("TAR_20TD_SOM_INSULAR"),
             "3.0TD_SOM": t("TAR_30TD_SOM"),
             "3.0TD_SOM_INSULAR": t("TAR_30TD_SOM_INSULAR"),
             "6.0TD_SOM":t("TAR_60TD_SOM"),
