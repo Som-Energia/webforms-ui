@@ -1,7 +1,8 @@
 # Change Log
 
-## Unreleased
+## 1.10.9 2024-04-02
 
+- Fix: TAR_2.0TD_SOM_INSULAR to TAR_20TD_SOM_INSULAR
 - Fix: Contract: not sending `max_power` as float to prices API
 - Fix: Contract: missnamed `particular_contract_terms_accepted`
 - Fix: HolderChange: inactive CUPS properly reported to users
