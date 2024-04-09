@@ -94,7 +94,7 @@ export default function GenerationAssigmentSection({ data }) {
       getAssingments()
     }
     catch (e) {
-      console.error("No s'ha pogut esborrar l'assignació", e)
+      console.error(e)
       setLoading(false)
     }
     setContent(undefined)
