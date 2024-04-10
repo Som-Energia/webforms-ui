@@ -710,5 +710,6 @@
     "GENERATION_ADD_CONTRACT_LIST_TITLE":"Que contratos queres engadir?",
     "GENERATION_ADD_CONTRACT_LIST_VALIDATE_CHANGES":"Validar cambios",
     "GENERATION_ADD_CONTRACT_LIST_CANCEL":"Cancelar",
-    "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Aceptar"
+    "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Aceptar",
+    "GENERATION_INFO_NOT_HAS_INVOICES":"<p>Agora mesmo non estás a participar no sistema de autoprodución colectiva Generation kWh. Se che interesa ou queres máis información, consulta o web: <a href=\"http://www.generationkwh.org\" >www.generationkwh.org</a></p>"
 }
