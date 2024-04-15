@@ -155,14 +155,14 @@ function GenerationDashboard({
         <GenerationFailure />
       ) : (
         <>{investments.length === 0 ?
-          (<Alert severity="warning">
+          (
             <Typography
-              variant="body2"
+              variant="body1"
               dangerouslySetInnerHTML={{
                 __html: t('GENERATION_INFO_NOT_HAS_INVOICES')
               }}
             />
-          </Alert>)
+          )
           : (!has_duplicate_priority_values() ? (
             <>
               <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
