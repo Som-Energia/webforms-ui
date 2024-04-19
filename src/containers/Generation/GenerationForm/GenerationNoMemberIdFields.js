@@ -148,7 +148,7 @@ const GenerationNoMemberIdFields = (props) => {
               variant="h6"
               className={`${classes.title} ${classes.titleWithMarginPlus}`}
               dangerouslySetInnerHTML={{
-                __html: t('GENERATION_CONTRIBUTION_NO_MEMBER_VAT')
+                __html: t('GENERATION_FORM_CONTRIBUTION_MEMBER_VAT')
               }}
             />
             <Box id="box_no_member_vat_input" mt={2} mb={1}>
