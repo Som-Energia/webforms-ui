@@ -717,5 +717,6 @@
     "GENERATION_ADD_CONTRACT_LIST_VALIDATE_CHANGES":"Aldaketak baliozkotu",
     "GENERATION_ADD_CONTRACT_LIST_CANCEL":"Ezeztatu",
     "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Onartzeko",
-    "GENERATION_INFO_NOT_HAS_INVOICES":"<p>Une honetan ez zaude Generation kWh autoprodukzio kolektiboko sisteman sartuta. Interesatzen bazaizu edo informazio gehiago ikusteko, jo webgunera: <a href=\"http://www.generationkwh.org\" >www.generationkwh.org</a></p>"
+    "GENERATION_INFO_NOT_HAS_INVOICES":"<p>Une honetan ez zaude Generation kWh autoprodukzio kolektiboko sisteman sartuta. Interesatzen bazaizu edo informazio gehiago ikusteko, jo webgunera: <a href=\"http://www.generationkwh.org\" >www.generationkwh.org</a></p>",
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT":"Idatzi zure NAN zenbakia edo IFZ."
 }

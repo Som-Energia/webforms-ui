@@ -720,5 +720,6 @@
     "GENERATION_ADD_CONTRACT_LIST_VALIDATE_CHANGES":"Validar canvis",
     "GENERATION_ADD_CONTRACT_LIST_CANCEL":"Cancel·lar",
     "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Acceptar",
-    "GENERATION_INFO_NOT_HAS_INVOICES":"<p>Ara mateix no participes en el sistema d'autoproducció col·lectiva Generation kWh. Si t’interessa o en vols més informació, pots consultar el web: <a href=\"http://www.generationkwh.org/ca/\" >www.generationkwh.org</a></p>"
+    "GENERATION_INFO_NOT_HAS_INVOICES":"<p>Ara mateix no participes en el sistema d'autoproducció col·lectiva Generation kWh. Si t’interessa o en vols més informació, pots consultar el web: <a href=\"http://www.generationkwh.org/ca/\" >www.generationkwh.org</a></p>",
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT":"Introdueix el teu DNI o NIF."
 }
