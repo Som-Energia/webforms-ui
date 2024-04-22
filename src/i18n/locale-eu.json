@@ -706,5 +706,6 @@
     "CAU_INVALID_CONTROL_DIGIT": "CAU kodea ez da baliozkoa",
     "CAU_INVALID_BORDER_POINT": "21 eta 22 karaktereek zenbaki bat eta letra bat izan behar dute: 0F, 1P…",
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "Katastroko erreferentzia ez da baliozkoa",
-    "CAU_INVALID_LENGTH": "CAU kodeak 26 karaktere izan behar ditu"
+    "CAU_INVALID_LENGTH": "CAU kodeak 26 karaktere izan behar ditu",
+    "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Idatzi zure NAN zenbakia edo IFZ"
 }
