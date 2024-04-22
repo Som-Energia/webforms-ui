@@ -1,5 +1,8 @@
 # Change Log
 
+## Update changes
+- Fix: text of the input of NIF in generationkWh's form
+
 ## 1.10.9 2024-04-02
 
 - Fix: TAR_2.0TD_SOM_INSULAR to TAR_20TD_SOM_INSULAR

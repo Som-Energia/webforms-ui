@@ -709,5 +709,6 @@
     "CAU_INVALID_INSTALLATION": "El codi CAU ha d'acabar amb A i tres números",
     "CAU_INVALID_LENGTH": "El codi CAU ha de tenir 26 caràcters",
     "CAU_INVALID_CONTROL_DIGIT": "El codi CAU no és vàlid",
-    "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "La referència cadastral no és vàlida"
+    "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "La referència cadastral no és vàlida",
+    "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Introdueix el teu DNI o NIF"
 }

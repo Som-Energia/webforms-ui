@@ -700,5 +700,6 @@
     "CAU_INVALID_CONTROL_DIGIT": "O código CAU non é válido",
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "A referencia catastral non é válida",
     "CAU_INVALID_BORDER_POINT": "Os caracteres 21 e 22 deben ser un número e unha letra: 0F, 1P...",
-    "API_VALIDATED_FIELD_CHECKING": "Validando…"
+    "API_VALIDATED_FIELD_CHECKING": "Validando…",
+    "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Insire o teu DNI ou NIF"
 }
