@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased 
+## 1.10.11 2024-04-23 
 - Add functionality: Add and remove contracts in generationkwh assignments
 
 ## 1.10.10 2024-04-22
