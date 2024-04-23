@@ -1,5 +1,8 @@
 # Change Log
 
+## Unreleased 
+- Add functionality: Add and remove contracts in generationkwh assignments
+
 ## 1.10.10 2024-04-22
 - Fix: text of the input of NIF in generationkWh's form
 

@@ -710,5 +710,16 @@
     "CAU_INVALID_LENGTH": "El codi CAU ha de tenir 26 caràcters",
     "CAU_INVALID_CONTROL_DIGIT": "El codi CAU no és vàlid",
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "La referència cadastral no és vàlida",
-    "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Introdueix el teu DNI o NIF"
+    "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Introdueix el teu DNI o NIF",
+    "GENERATION_BUTTON_ADD_ASSIGNMENT":"Assignar nou contracte",
+    "GENERATION_ADD_ASSIGNMENTS_INFO_MSG":"Tingues en compte que només pots afegir contractes dels quals ets titular. Si vols afegir un contracte d’una altra persona, escriu-nos un correu electrònic a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop.</a>",
+    "GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT":"No tens cap contracte disponible per afegir al Generation kWh, bé perquè no tens cap contracte al teu nom o bé perquè els teus contractes ja tenen drets Generation kWh assignats. Si vols afegir un contracte d'una altra persona, escriu-nos un correu electrònic a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
+    "GENERATION_REMOVE_ASSIGNMENTS_ALERT_MSG":"Estàs a punt de desassignar el contracte (eliminaràs aquest contracte de la llista de contractes que es beneficien del Generation kWh). Recorda que si elimines algun contracte del qual no ets titular i, més endavant, vols tornar a afegir-lo, ens hauràs d'escriure un correu a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>",
+    "GENERATION_ASSIGNMENTS_CONFIRM_TITLE":"Vols continuar?",
+    "GENERATION_ADD_CONTRACT_LIST_TITLE":"Quins contractes hi vols afegir?",
+    "GENERATION_ADD_CONTRACT_LIST_VALIDATE_CHANGES":"Validar canvis",
+    "GENERATION_ADD_CONTRACT_LIST_CANCEL":"Cancel·lar",
+    "GENERATION_ADD_CONTRACT_LIST_ACCEPT":"Acceptar",
+    "GENERATION_INFO_NOT_HAS_INVOICES":"<p>Ara mateix no participes en el sistema d'autoproducció col·lectiva Generation kWh. Si t’interessa o en vols més informació, pots consultar el web: <a href=\"http://www.generationkwh.org/ca/\" >www.generationkwh.org</a></p>",
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT":"Introdueix el teu DNI o NIF."
 }

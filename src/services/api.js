@@ -6,7 +6,6 @@ const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   window?.config?.API_BASE_URL.replace?.(/\/$/, '')
 
-
 export const modifyContract = async (data, token) => {
   return axios({
     method: 'POST',
@@ -422,11 +421,10 @@ export const confirmCancelContract = async (data) => {
   })
 }
 
-export const generationChangeContractPriority = async (data, token) => {
+export const generationChangeContractPriority = async (data) => {
     return axios({
       method: 'PUT',
-      url: `/investments/change-assignment-order`,
-      headers: { Authorization: token },
+      url: `/api/investments/change-assignment-order/`,
       data: data
     }).then((response) => {
       return response?.data
@@ -444,7 +442,7 @@ export const checkIsFromGenerationEnabledZone = async (data) => {
 }
 
 export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
-  const {postalCode} = data 
+  const {postalCode} = data
   return axios({
     method: 'GET',
     url: `${API_BASE_URL}/data/generationkwh/can_join/${postalCode}`
@@ -465,11 +463,47 @@ export const createGenerationkWhSignature = async (data) => {
 
 
 export const generationkWhContribution = async (data) => {
-
   return axios({
     method: 'POST',
     url: `${API_BASE_URL}/form/generationkwh`,
     data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const getNoAssignmentContracts = async () => {
+  return axios({
+    method: 'GET',
+    url: `/api/investments/unassigned-contracts`,
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const getAssignmentContracts = async () => {
+  return axios({
+    method: 'GET',
+    url: `/api/investments/assignments/`,
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const addContractsToAssignments = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `/api/investments/assignments/`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const deleteContractsFromAssignments = async (id) => {
+  return axios({
+    method: 'DELETE',
+    url: `/api/investments/assignments/${id}`,
   }).then((response) => {
     return response?.data
   })
