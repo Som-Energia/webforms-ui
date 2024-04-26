@@ -1,48 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
-import { makeStyles } from '@material-ui/core/styles'
 import { normalizeD1ConfirmationData, templateData } from '../services/utils'
 import { confirmD1Case } from '../services/api'
 
-import Alert from '@material-ui/lab/Alert'
-import AlertTitle from '@material-ui/lab/AlertTitle'
+import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
 
-import Grow from '@material-ui/core/Grow'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
-import StepContent from '@material-ui/core/StepContent'
+import Grow from '@mui/material/Grow'
+
+import Stepper from '@mui/material/Stepper'
+import Step from '@mui/material/Step'
+import StepLabel from '@mui/material/StepLabel'
+import StepContent from '@mui/material/StepContent'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 import D1Validation from './CaseDetail/D1Validation'
 import RefuseD1 from './CaseDetail/RefuseD1'
 import AcceptD1 from './CaseDetail/AcceptD1'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: '#f2f2f2'
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(2)
-  },
-  resetContainer: {
-    padding: theme.spacing(2)
-  },
-  responseContainer: {
-    padding: theme.spacing(1)
-  },
-  stepper: {
-    backgroundColor: '#f2f2f2',
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
-  },
-  stepLabel: {
-    fontSize: '1.15rem'
-  }
-}))
 
 const steps = [
   'DETAIL_D1_TITLE',
@@ -51,7 +27,6 @@ const steps = [
 ]
 
 function D1Detail(props) {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
   const { state } = useLocation()
@@ -142,11 +117,24 @@ function D1Detail(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <Box sx={{
+      width: '100%',
+      backgroundColor: '#f2f2f2'
+    }}>
       {(data?.to_validate && (
         <>
           <Stepper
-            className={classes.stepper}
+            sx={{
+              '& .MuiStepIcon-root.Mui-active': {
+                color: '#96b633',
+              },
+              '& .MuiStepIcon-root.Mui-completed': {
+                color: '#96b633',
+              },
+              pl: 1,
+              pr: 1,
+              pb: 1
+            }}
             activeStep={activeStep}
             orientation="vertical">
             {steps.map((label, index) => (
@@ -155,7 +143,7 @@ function D1Detail(props) {
                   error={
                     index === steps.length - 1 && data?.error !== undefined
                   }>
-                  <span className={classes.stepLabel}>{t(label)}</span>
+                  <Typography component='body1' sx={{ fontSize: '1.15rem' }}>{t(label)}</Typography>
                 </StepLabel>
                 <StepContent>
                   {data?.error === undefined &&
@@ -167,35 +155,35 @@ function D1Detail(props) {
           </Stepper>
           {data?.error && (
             <Grow in={data?.error !== undefined}>
-              <div className={classes.responseContainer}>
+              <Box sx={{ m: 1 }}>
                 <Alert severity="error">
                   <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
                   {t(data?.error?.code)}
                 </Alert>
-              </div>
+              </Box>
             </Grow>
           )}
           {data?.response && (
             <Grow in={data?.response !== undefined}>
-              <div className={classes.responseContainer}>
+              <Box sx={{ m: 1 }}>
                 <Alert severity="success">
                   {(data?.validate && (
                     <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
                   )) || <AlertTitle>{t('REFUSE_SUCCESS_TITTLE')}</AlertTitle>}
                   {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
                 </Alert>
-              </div>
+              </Box>
             </Grow>
           )}
         </>
       )) || (
-        <D1Validation
-          nextStep={() => nextStep(1)}
-          handleStepChanges={handleStepChanges}
-          params={data}
-        />
-      )}
-    </div>
+          <D1Validation
+            nextStep={() => nextStep(1)}
+            handleStepChanges={handleStepChanges}
+            params={data}
+          />
+        )}
+    </Box>
   )
 }
 
