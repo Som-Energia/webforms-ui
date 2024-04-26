@@ -3,59 +3,28 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+
 import Chooser from '../../components/Chooser'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-  paperContainer: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
-  },
-  sectionTitle: {
-    fontSize: '1rem',
-    fontWeight: 500,
-    textTransform: 'uppercase',
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
-  },
-  label: {
-    textTransform: 'uppercase',
-    paddingRight: '12px',
-    fontSize: '14px',
-    fontWeight: 400,
-    color: 'rgba(0, 0, 0, 0.54)'
-  },
-  chooserLabelBox: {
-    '& label': {
-      minHeight: 'auto'
-    }
-  }
-}))
+const label = {
+  textTransform: 'uppercase',
+  paddingRight: '12px',
+  fontSize: '14px',
+  fontWeight: 400,
+  color: 'rgba(0, 0, 0, 0.54)'
+}
 
 function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
-  const classes = useStyles()
+
   const { t } = useTranslation()
 
   const handleValidateD1 = (setFieldValue, errors, option) => {
@@ -69,7 +38,10 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
   })
 
   return (
-    <Paper className={classes.paperContainer} elevation={0}>
+    <Paper sx={{
+      mt: 2,
+      p: 2
+    }} elevation={0}>
       <Formik
         enableReinitialize
         initialValues={{
@@ -106,7 +78,13 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
             )}
 
             <Box mx={1} mb={2}>
-              <Typography className={classes.sectionTitle} variant="h6">
+              <Typography sx={{
+                fontSize: '1rem',
+                fontWeight: 500,
+                textTransform: 'uppercase',
+                mt: 2,
+                mb: 2
+              }} variant="h6">
                 {t('DATOS_AUTOCONSUMO')}
               </Typography>
 
@@ -114,7 +92,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('REGISTER_SECTION')}
@@ -128,7 +106,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('SUBSECTION')}
@@ -142,7 +120,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('CIL')}
@@ -153,7 +131,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('CAU')}
@@ -164,7 +142,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('COLLECTIVE')}
@@ -179,14 +157,20 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                 </Grid>
               </Box>
 
-              <Typography className={classes.sectionTitle} variant="h6">
+              <Typography sx={{
+                fontSize: '1rem',
+                fontWeight: 500,
+                textTransform: 'uppercase',
+                mt: 2,
+                mb: 2
+              }} variant="h6">
                 {t('DATOS_GENERADORES')}
               </Typography>
               <Box mb={0}>
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('INSTALLATION_TYPE')}
@@ -200,7 +184,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('GENERATOR_TECHNOLOGY')}
@@ -214,7 +198,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('SSAA')}
@@ -225,7 +209,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      className={classes.label}
+                      sx={label}
                       variant="subtitle2"
                       gutterBottom>
                       {t('INSTALLED_POWER')}
@@ -246,7 +230,11 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                 <Box mx={1} mb={3}>
                   <Divider />
                 </Box>
-                <Box mx={1} mb={2} className={classes.chooserLabelBox}>
+                <Box mx={1} mb={2} sx={{
+                  '& label': {
+                    minHeight: 'auto'
+                  }
+                }}>
                   <Chooser
                     canBeEmpty={false}
                     question={t('ACCEPTACIO_AUTO')}
@@ -266,19 +254,26 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     ]}
                   />
                 </Box>
-                <div className={classes.actionsContainer}>
+                <Box sx={{
+                  mb: 1,
+                  display: 'flex',
+                  justifyContent: 'flex-end'
+                }} >
                   {
                     <Button
                       type="submit"
-                      className={classes.button}
+                      sx={{
+                        mt: 1,
+                        mr: 1,
+                        backgroundColor: '#96b633'
+                      }}
                       variant="contained"
-                      color="primary"
                       disabled={!isValid}
                       endIcon={<ArrowForwardIosIcon />}>
                       {t('SEGUENT_PAS')}
                     </Button>
                   }
-                </div>
+                </Box>
               </>
             )}
           </Form>
