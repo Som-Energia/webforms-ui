@@ -4,24 +4,14 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import clsx from 'clsx'
 
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Grid from '@material-ui/core/Grid'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import FormHelperText from '@mui/material/FormHelperText'
+import Grid from '@mui/material//Grid'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import Typography from '@mui/material/Typography'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  margin: {
-    marginTop: theme.spacing(3)
-  },
-  title: {
-    fontSize: '1rem',
-    marginTop: theme.spacing(2)
-  },
   chooserItem: {
     cursor: 'pointer',
     minHeight: '100px',
@@ -62,14 +52,6 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid rgba(0, 0, 0, 0.12)',
       backgroundColor: 'inherit'
     }
-  },
-  chooserItemTitle: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  chooserItemDesc: {
-    marginTop: theme.spacing(1),
-    paddingLeft: theme.spacing(1)
   }
 }))
 
@@ -90,7 +72,7 @@ const Chooser = (props) => {
   const handleClick = (event, value) => {
     // Do not handle here click if a link inside
     // the description is clicked
-    if (event.target.tagName==='A') return
+    if (event.target.tagName === 'A') return
 
     event.preventDefault()
     if (!canBeEmpty || selectedOption !== value) {
@@ -106,14 +88,10 @@ const Chooser = (props) => {
     <>
       <Typography
         variant="h6"
-        className={classes.title}
+        sx={{ fontSize: '1rem', mt: 2 }}
         dangerouslySetInnerHTML={{ __html: question }}
       />
-      <RadioGroup
-        className={classes.margin}
-        defaultValue=""
-        name={name}
-        data-cy={name}>
+      <RadioGroup sx={{ mt: 3 }} defaultValue="" name={name} data-cy={name}>
         <Grid container spacing={3}>
           {options.map((option, index) => (
             <Grid key={index} item xs={12} sm={6}>
@@ -130,7 +108,7 @@ const Chooser = (props) => {
                     classes.chooserItemSelected,
                   disabled && classes.chooserItemDisabled
                 )}>
-                <div className={classes.chooserItemTitle}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Radio
                     disabled={disabled}
                     value={option.value}
@@ -138,10 +116,10 @@ const Chooser = (props) => {
                     checked={selectedOption === option.value}
                   />
                   <Typography>{option.label}</Typography>
-                </div>
+                </Box>
                 {option.description && (
                   <FormHelperText
-                    className={classes.chooserItemDesc}
+                    sx={{ mt: 1, pl: 1 }}
                     dangerouslySetInnerHTML={{ __html: option.description }}
                   />
                 )}
