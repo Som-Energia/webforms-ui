@@ -2,40 +2,27 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import IconButton from '@material-ui/core/IconButton'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import TextField from '@material-ui/core/TextField'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import CircularProgress from '@mui/material/CircularProgress'
+import TextField from '@mui/material/TextField'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import ListItemText from '@mui/material/ListItemText'
 
-import PublishIcon from '@material-ui/icons/Publish'
-import HighlightOffIcon from '@material-ui/icons/HighlightOff'
-import FileIcon from '@material-ui/icons/DescriptionOutlined'
-import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
+import PublishIcon from '@mui/icons-material/Publish'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import AttachFileIcon from '@mui/icons-material/AttachFile'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 import { uploadFile } from '../services/api'
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    '& input': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    },
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  }
-}))
 
 const Uploader = (props) => {
   const { name, callbackFn, fieldError, values, maxFiles } = props
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const [uploads, setUploads] = useState([...values])
   const [inputKey, setInputKey] = useState(Date.now())
@@ -102,7 +89,14 @@ const Uploader = (props) => {
         key={inputKey}
         type="file"
         label=""
-        className={classes.input}
+        sx={{
+          '& input': {
+            color: 'rgba(0, 0, 0, 0.54)'
+          },
+          '& path': {
+            color: 'rgba(0, 0, 0, 0.54)'
+          }
+        }}
         required
         name={name}
         variant="outlined"
@@ -137,7 +131,7 @@ const Uploader = (props) => {
         {uploads.map((upload, index) => (
           <ListItem key={upload}>
             <ListItemIcon>
-              <FileIcon />
+              <AttachFileIcon />
             </ListItemIcon>
             <ListItemText>{upload}</ListItemText>
             <ListItemSecondaryAction>
