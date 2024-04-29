@@ -1,6 +1,6 @@
 import React from 'react'
 import { checkIban } from '../services/api'
-import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
+import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
 

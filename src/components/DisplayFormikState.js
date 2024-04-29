@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Paper from '@material-ui/core/Paper'
+import Paper from '@mui/material/Paper'
 
 const DisplayFormikState = props => (
   <Paper elevation={3} style={{ margin: '1rem 0' }}>
