@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import InputAdornment from '@mui/material/InputAdornment'
 
 import { getProvincies, getMunicipis } from '../services/api'
 

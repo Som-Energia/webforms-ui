@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
-import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  }
-}))
+import CircularProgress from '@mui/material/CircularProgress'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
+
+import { useTranslation } from 'react-i18next'
+
 
 export function ApiValidatedField({
   name,
@@ -31,8 +25,6 @@ export function ApiValidatedField({
   autoFocus = false,
   leadingIcon
 }) {
-  const classes = useStyles()
-
   const [isLoading, setIsLoading] = useState(false)
   const [formerValue, setFormerValue] = useState(undefined)
   const { t } = useTranslation()
@@ -87,7 +79,9 @@ export function ApiValidatedField({
         }
         InputProps={{
           startAdornment: LeadingIcon && (
-            <InputAdornment className={classes.icon} position="start">
+            <InputAdornment sx={{ 
+              '& path': { color: 'rgba(0, 0, 0, 0.54)'}
+              }} position="start">
               <LeadingIcon />
             </InputAdornment>
           ),
