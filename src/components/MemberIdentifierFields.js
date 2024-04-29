@@ -4,12 +4,12 @@ import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
 
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import { checkMember, checkMemberVat } from '../services/api'
 
