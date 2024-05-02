@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import CircularProgress from '@mui/material/CircularProgress'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-
-import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import StepHeader from 'components/StepHeader'
 import TermsDialog from 'components/TermsDialog'
 import { checkIban } from 'services/api'
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  }
-}))
-
 // TODO: Use IBANField
 function IBAN(props) {
   const { t } = useTranslation()
-  const classes = useStyles()
   const { values, handleBlur, setFieldValue, errors, touched } = props
 
   const [isLoading, setIsLoading] = useState(false)
@@ -88,7 +77,11 @@ function IBAN(props) {
         <Box mt={2} mb={0}>
           <TextField
             id="iban"
-            className={classes.icon}
+            sx={{
+              '& path': {
+                color: 'rgba(0, 0, 0, 0.54)'
+              }
+            }}
             label={t('IBAN_LABEL')}
             name="payment.iban"
             value={values.payment.iban}

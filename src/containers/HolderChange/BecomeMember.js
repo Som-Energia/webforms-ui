@@ -1,11 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/Chooser'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import FormHelperText from '@mui/material/FormHelperText'
 import StepHeader from '../../components/StepHeader'
 
 function BecomeMember(props) {

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import CircularProgress from '@mui/material/CircularProgress'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormHelperText from '@mui/material/FormHelperText'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import { checkCups } from '../../services/api'
 import StepHeader from '../../components/StepHeader'
@@ -201,7 +201,7 @@ function CUPS(props) {
         onAccept={handleAccept}
         onClose={handleClose}
         maxWidth="sm">
-        <span
+        <Typography
           dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }}
         />
       </TermsDialog>
