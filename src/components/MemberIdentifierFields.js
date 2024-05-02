@@ -2,23 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import { checkMember, checkMemberVat } from '../services/api'
-
-const useStyles = makeStyles((theme) => ({
-  memberChecked: {
-    fontWeight: 500,
-    color: theme.palette.primary.main
-  }
-}))
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search)
@@ -26,7 +19,6 @@ const useQuery = () => {
 
 const MemberIdentifierFields = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const query = useQuery()
 
   const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
@@ -142,9 +134,12 @@ const MemberIdentifierFields = (props) => {
                 />
               )
             ) : (
-              <span className={classes.memberChecked}>
+              <Typography sx={{
+                fontWeight: 500,
+                color: 'primary.main'
+              }} component='body1'>
                 {t('SOCIA_TROBADA')}
-              </span>
+              </Typography>
             ))
           }
         />

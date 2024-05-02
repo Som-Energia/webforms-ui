@@ -366,7 +366,6 @@ const Contribution = (props) => {
                     {result?.investment === undefined && (
                       <Button
                         data-cy="prev"
-                        className={classes.button}
                         startIcon={<ArrowBackIosIcon />}
                         disabled={activeStep === 0 || sending}
                         onClick={() => prevStep(formikProps)}>

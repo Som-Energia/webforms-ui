@@ -1,15 +1,10 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+
+import Box from '@mui/material/Box'
 
 const Card = ({ variant = 'h1', children, className }) => {
-  const classes = useStyles()
-  return <div className={`${classes.card} ${className || ''}`}>{children}</div>
-}
 
-export default Card
-
-const useStyles = makeStyles((theme) => ({
-  card: {
+  return <Box sx={{
     width: '100%',
     background: '#fff',
     color: '#4d4d4d',
@@ -29,5 +24,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '0.5rem',
       lineHeight: '1.5'
     }
-  }
-}))
+  }} className={`${className || ''}`}>{children}</Box>
+}
+
+export default Card
