@@ -1,29 +1,19 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormGroup from '@mui/material/FormGroup'
+import Typography from '@mui/material/Typography'
 
 import StepHeader from 'components/StepHeader'
 import Uploader from 'components/Uploader'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  margin: {
-    marginTop: theme.spacing(3)
-  },
-  container: {
-    width: '100%'
-  },
   chooserItem: {
     display: 'block',
     cursor: 'pointer',
@@ -61,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1)
   },
   attachmentTitle: {
-    paddingLeft: theme.spacing(1)
+    pl: 1
   }
 }))
 
@@ -128,7 +118,7 @@ const SpecialCases = (props) => {
     <>
       <StepHeader title={t('SPECIAL_CASES_TITLE')} />
       <Box className="step-body">
-        <FormControl component="fieldset" className={classes.container}>
+        <FormControl component="fieldset" sx={{ width: '100%'}}>
           <FormGroup>
             <FormControlLabel
               control={
