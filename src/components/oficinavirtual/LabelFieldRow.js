@@ -4,25 +4,28 @@ import Box from '@mui/material/Box'
 
 const LabelFieldRow = ({ label = '', children, isHighlight }) => {
   return (
-    <Box sx={{width: '100%', display: 'flex'}}>
+    <Box sx={{ width: '100%', display: 'flex' }}>
       <Box sx={isHighlight ? customStyles.highlight : customStyles.label}>
         {label}
       </Box>
-      <Box sx={{background: '#fff',
-          fontSize: '14px',
-          padding: '1em',
-          margin: '0 0 .5em 0',
-          flex: '0 0 75%',
-          maxWidth: '75%',
-          '& p': {
-            margin: 0}}}>
-          {children}
+      <Box sx={{
+        background: '#fff',
+        fontSize: '14px',
+        padding: '1em',
+        margin: '0 0 .5em 0',
+        flex: '0 0 75%',
+        maxWidth: '75%',
+        '& p': {
+          margin: 0
+        }
+      }}>
+        {children}
       </Box>
     </Box>
   )
 }
 
-export default LabelFieldRow 
+export default LabelFieldRow
 
 const customStyles = {
   label: {
