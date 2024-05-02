@@ -8,20 +8,18 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
-
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Paper from '@material-ui/core/Paper'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import LinearProgress from '@mui/material/LinearProgress'
+import Paper from '@mui/material/Paper'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
 
 import MemberIdentifier from './Contract/MemberIdentifier'
 import CUPS from './Contract/CUPS'
@@ -53,34 +51,10 @@ const keyMap = {
   SHOW_ALL_STEPS: 'ctrl+alt+shift+a'
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'relative',
-    color: theme.palette.text.primary
-  },
-  stepContainer: {
-    marginTop: 0,
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.palette.backgroundColor
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
-}))
-
 const Contract = (props) => {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-  const { is30ContractEnabled = true, isIndexedContractEnabled = false , isCadastralReference = false} = props
+  const { is30ContractEnabled = true, isIndexedContractEnabled = false, isCadastralReference = false } = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -180,16 +154,16 @@ const Contract = (props) => {
           .required(t('CUPS_VERIFY_LABEL'))
           .oneOf([true], t('CUPS_VERIFY_LABEL')),
         cadastral_reference: Yup.string()
-          .when('cadastral_reference_error', (cadastral_reference_error)=>{
+          .when('cadastral_reference_error', (cadastral_reference_error) => {
             if (cadastral_reference_error)
-              return Yup.string().test({name: 'cadastral_reference_error', test: ()=>false, message: cadastral_reference_error})
+              return Yup.string().test({ name: 'cadastral_reference_error', test: () => false, message: cadastral_reference_error })
             return Yup.string(t('INVALID_REF_CADASTRAL_LENGTH'))
           }),
         cadastral_reference_error: Yup.string().notRequired(),
       }, [
         ['cadastral_reference', 'cadastral_reference']
       ]
-    )
+      )
     }),
     Yup.object().shape({
       contract: Yup.object().shape({
@@ -420,8 +394,8 @@ const Contract = (props) => {
     Yup.object().shape({
       self_consumption: Yup.object().shape({
         cau: Yup.string()
-          .when('cau_error', (cau_error)=>{
-            if (cau_error) return Yup.mixed().test({name: 'cau_error', test: ()=>false, message: cau_error})
+          .when('cau_error', (cau_error) => {
+            if (cau_error) return Yup.mixed().test({ name: 'cau_error', test: () => false, message: cau_error })
             return Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
           }),
         cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
@@ -832,7 +806,7 @@ const Contract = (props) => {
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
-          onSubmit={() => {}}
+          onSubmit={() => { }}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -841,9 +815,19 @@ const Contract = (props) => {
           {(props) => (
             <>
               <div>
-                <Form className={classes.root} noValidate autoComplete="off">
+                <Form sx={{
+                  position: 'relative',
+                  color: 'text.primary'
+                }} noValidate autoComplete="off">
                   {
-                    <Paper elevation={0} className={classes.stepContainer}>
+                    <Paper elevation={0} sx={{
+                      mt: 0,
+                      mb: 4,
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      backgroundColor: 'backgroundColor'
+                    }} >
                       {showProgress && (
                         <LinearProgress
                           variant={sending ? 'indeterminate' : 'determinate'}
@@ -863,11 +847,13 @@ const Contract = (props) => {
                         )}
                       </Box>
                       <Box mx={0} mt={1} mb={3}>
-                        <div className={classes.actionsContainer}>
+                        <div sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between'
+                        }}>
                           {result?.contract_number === undefined && (
                             <Button
                               data-cy="prev"
-                              className={classes.button}
                               startIcon={<ArrowBackIosIcon />}
                               disabled={activeStep === 0 || sending}
                               onClick={() => prevStep(props)}
@@ -879,7 +865,6 @@ const Contract = (props) => {
                             <Button
                               type="button"
                               data-cy="next"
-                              className={classes.button}
                               variant="contained"
                               color="primary"
                               endIcon={<ArrowForwardIosIcon />}
@@ -893,7 +878,6 @@ const Contract = (props) => {
                               <Button
                                 type="button"
                                 data-cy="submit"
-                                className={classes.button}
                                 variant="contained"
                                 color="primary"
                                 startIcon={
@@ -932,7 +916,7 @@ const Contract = (props) => {
           )}
         </Formik>
       </Container>
-    </GlobalHotKeys>
+    </GlobalHotKeys >
   )
 }
 
