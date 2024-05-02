@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Checkbox from '@mui/material/Checkbox'
 import Divider from '@mui/material/Divider'
@@ -15,46 +14,15 @@ import TermsDialog from 'components/TermsDialog'
 import LegalText from 'components/LegalText'
 import { languages } from 'services/utils'
 
-const useStyles = makeStyles((theme) => ({
-  withoutLabel: {
-    marginTop: theme.spacing(1)
-  },
-  sectionTitle: {
-    fontSize: '18px',
-    fontWeight: 500,
-    textTransform: 'uppercase',
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(1.2)
-  },
-  field: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing(0.8)
-  },
-  label: {
-    textTransform: 'uppercase',
-    paddingRight: '12px',
-    fontSize: '14px',
-    fontWeight: 400,
-    color: 'rgba(0, 0, 0, 0.54)'
-  },
-  value: {
-    fontSize: '16px'
-  },
-  divider: {
-    marginTop: '12px',
-    marginLeft: 0,
-    marginRight: '32px'
-  },
-  dividerBottom: {
-    marginTop: '24px',
-    marginLeft: 0,
-    marginRight: '32px'
-  }
-}))
+const sectionTitleStyles = {
+  fontSize: '18px',
+  fontWeight: 500,
+  textTransform: 'uppercase',
+  mt: 2,
+  mb: 1.2
+}
 
 const Review = (props) => {
-  const classes = useStyles()
   const { t } = useTranslation()
   const { values, setFieldValue } = props
 
@@ -77,18 +45,26 @@ const Review = (props) => {
 
   const ReviewField = ({ label, value }) => {
     return (
-      <div className={classes.field}>
-        <div className="field__title">
-          <Typography className={classes.label} variant="subtitle2">
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.8 }}>
+        <Box className="field__title">
+          <Typography
+            sx={{
+              textTransform: 'uppercase',
+              paddingRight: '12px',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: 'rgba(0, 0, 0, 0.54)'
+            }}
+            variant="subtitle2">
             {label}
           </Typography>
-        </div>
-        <div className="field__value">
-          <Typography className={classes.value} variant="body2">
+        </Box>
+        <Box className="field__value">
+          <Typography sx={{ fontSize: '16px' }} variant="body2">
             {value}
           </Typography>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
@@ -102,7 +78,7 @@ const Review = (props) => {
         />
         <Grid container>
           <Grid item xs={12} sm={6}>
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Typography sx={sectionTitleStyles} variant="h6">
               {t('SUMMARY_GROUP_PROCESS')}
             </Typography>
             <ReviewField
@@ -138,7 +114,7 @@ const Review = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Typography sx={sectionTitleStyles} variant="h6">
               {t('SUPPLY')}
             </Typography>
             <ReviewField
@@ -151,8 +127,8 @@ const Review = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" className={classes.divider} />
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Typography sx={sectionTitleStyles} variant="h6">
               {t('HOLDER')}
             </Typography>
             <ReviewField label={'NIF'} value={values?.holder?.vat} />
@@ -185,8 +161,8 @@ const Review = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" className={classes.divider} />
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Typography sx={sectionTitleStyles} variant="h6">
               {t('CONTACT')}
             </Typography>
             <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
@@ -197,20 +173,20 @@ const Review = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" className={classes.divider} />
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Typography sx={sectionTitleStyles} variant="h6">
               {t('SUMMARY_GROUP_TECHNICAL')}
             </Typography>
             <ReviewField label={t('FARE')} value={t('FARE_SAME')} />
             <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
             <FormHelperText
-              className={classes.withoutLabel}
+              sx={{ mt: 1 }}
               dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" className={classes.divider} />
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Typography sx={sectionTitleStyles} variant="h6">
               {t('SUMMARY_GROUP_PAYMENT')}
             </Typography>
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
@@ -221,7 +197,7 @@ const Review = (props) => {
           </Grid>
         </Grid>
 
-        <Divider variant="middle" className={classes.dividerBottom} />
+        <Divider variant="middle" sx={{ mt: '24px', ml: 0, mr: '32px' }} />
 
         <TermsDialog
           title={t('GENERAL_TERMS')}
@@ -229,13 +205,12 @@ const Review = (props) => {
           onAccept={handleAccept}
           onClose={handleClose}>
           <LegalText
-          language={values?.holder?.language}
-          documentName={
-            values?.supply_point?.tariff_type === 'index'
-            ?"general-and-indexed-specific-terms"
-            :"general-contract-terms"
-          }
-          ></LegalText>
+            language={values?.holder?.language}
+            documentName={
+              values?.supply_point?.tariff_type === 'index'
+                ? 'general-and-indexed-specific-terms'
+                : 'general-contract-terms'
+            }></LegalText>
         </TermsDialog>
 
         <Box mt={2}>
