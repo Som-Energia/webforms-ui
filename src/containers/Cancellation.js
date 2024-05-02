@@ -8,15 +8,16 @@ import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-import Alert from '@material-ui/lab/Alert'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
+import Alert from '@mui/material/Alert'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import {LocalizationProvider} from '@mui/x-date-pickers';
+
 import DayjsUtils from '@date-io/dayjs'
 
 import dayjs from 'dayjs'
@@ -25,9 +26,9 @@ import 'dayjs/locale/es'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
 
 import ContractDetails from './Cancellation/ContractDetails'
 import CancellationWarning from './Cancellation/CancellationWarning'
@@ -174,7 +175,7 @@ const Cancellation = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <MuiPickersUtilsProvider utils={DayjsUtils}>
+      <LocalizationProvider utils={DayjsUtils}>
         <Formik
           onSubmit={() => {}}
           enableReinitialize
@@ -270,7 +271,7 @@ const Cancellation = (props) => {
             </>
           )}
         </Formik>
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </GlobalHotKeys>
   )
 }

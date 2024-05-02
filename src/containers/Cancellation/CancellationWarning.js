@@ -1,21 +1,22 @@
 import React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
-
-import Box from '@material-ui/core/Box'
-import Alert from '@material-ui/lab/Alert'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Alert from '@mui/material/Alert'
+import Typography from '@mui/material/Typography'
 
 const CancellationWarning = () => {
-  const classes = useStyles()
   const { t } = useTranslation()
 
   return (
     <Box mt={0.75} mb={1.5}>
       <Alert severity="warning">
         <Typography
-          className={classes.disclaimer}
+          sx={{
+            fontSize: '120%',
+            fontWeight: 400,
+            fontVariant: 'small-caps',
+          }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_DISCLAIMER')
@@ -27,11 +28,3 @@ const CancellationWarning = () => {
 }
 
 export default CancellationWarning
-
-const useStyles = makeStyles((theme) => ({
-  disclaimer: {
-    fontSize: '120%',
-    fontWeight: 400,
-    fontVariant: 'small-caps',
-  }
-}))
