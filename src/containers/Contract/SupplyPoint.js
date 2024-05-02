@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import StepHeader from '../../components/StepHeader'
 import StateCity from '../../components/StateCity'
@@ -21,15 +20,6 @@ import { CNAE_HOUSING } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
 import CadastralReferenceField from 'components/CadastralReferenceField'
 
-const useStyles = makeStyles((theme) => ({
-  memberChecked: {
-    fontWeight: 500,
-    color: theme.palette.primary.main
-  },
-  noPaddingTop: {
-    paddingTop: '0 !important'
-  }
-}))
 
 const CadastralReferenceHelperText = () => {
   const { t } = useTranslation()
@@ -44,7 +34,6 @@ const CadastralReferenceHelperText = () => {
 
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const {
     values,
@@ -304,7 +293,7 @@ const SupplyPoint = (props) => {
             />
           </Grid>
           ): null}
-          <Grid item xs={12} className={classes.noPaddingTop}>
+          <Grid item xs={12} sx={{pt: 0}} >
             {values?.contract?.has_service ? (
               <Typography>{t('ADJUNTAR_ULTIMA_FACTURA')}</Typography>
             ) : (
