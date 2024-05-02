@@ -1,34 +1,33 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+
+import Typography from '@mui/material/Typography'
+
 import TextLoader from './TextLoader'
 
 // This component is a wrapper over TextLoader
 // adding nice styles for legal text.
 
 const LegalText = (props) => {
-  const classes = useStyles()
   return (
-    <span className={classes.container}>
-      <TextLoader {...props}/>
-    </span>
+    <Typography
+      component="body1"
+      sx={{
+        '& a': {
+          color: 'secondary'
+        },
+        '& h2': {
+          fontSize: '1.25rem'
+        },
+        '& .pujar a': {
+          fontSize: '1rem'
+        },
+        '& .sagnia': {
+          pl: '1rem'
+        }
+      }}>
+      <TextLoader {...props} />
+    </Typography>
   )
 }
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    '& a': {
-      color: theme.palette.text.secondary
-    },
-    '& h2': {
-      fontSize: '1.25rem'
-    },
-    '& .pujar a': {
-      fontSize: '1rem'
-    },
-    '& .sagnia': {
-      paddingLeft: '1rem'
-    }
-  }
-}))
 
 export default LegalText
