@@ -3,6 +3,7 @@ import { createGenerationkWhSignature } from '../../../services/api'
 import { useTranslation } from 'react-i18next'
 import cuca from '../../../images/cuca.svg'
 import { CircularProgress, Typography, Box } from '@mui/material/'
+import { styled } from '@mui/system'
 
 let signaturitHook = () => undefined
 
@@ -28,7 +29,7 @@ const customStyles = {
 
 const StyledImg = styled('img')({
   width: '70px',
-  margin: theme.spacing(2)
+  margin: 2
 })
 
 

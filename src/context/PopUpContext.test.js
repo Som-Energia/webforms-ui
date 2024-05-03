@@ -3,7 +3,7 @@ import PopUpContext, {
   PopUpContextProvider
 } from './PopUpContext'
 import React, { useContext } from 'react'
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 import { act } from 'react-dom/test-utils'
 
 const ContextConsumer = () => {

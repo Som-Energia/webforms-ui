@@ -77,7 +77,7 @@ const GenerationMemberIdentifier = (props) => {
         </>
       )}
       {!values?.member?.has_generation_enabled_zone ? (
-        <Grid id="grid_not_enabled_zone" container style={{ gap: '1rem' }}>
+        <Grid id="grid_not_enabled_zone" container sx={{ gap: '1rem' }}>
           <Grid item>
             <Alert severity="warning">
               <AlertTitle>

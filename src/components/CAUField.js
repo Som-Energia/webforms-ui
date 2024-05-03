@@ -1,6 +1,6 @@
 import React from 'react'
 import { checkCups } from '../services/api'
-import SolarPowerIcon from '@material-ui/icons/WbSunny'
+import SolarPowerIcon from '@mui/icons-material/WbSunny'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
 

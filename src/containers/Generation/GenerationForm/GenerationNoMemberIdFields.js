@@ -12,10 +12,10 @@ const customStyles = {
     fontWeight: 500
   },
   titleWithMargin: {
-    marginBottom: theme.spacing(1)
+    mb: 1
   },
   titleWithMarginPlus: {
-    marginBottom: theme.spacing(3)
+    mb: 3
   },
   helperText: {
     color: "#f44336",
