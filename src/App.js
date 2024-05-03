@@ -7,9 +7,9 @@ import {
   createTheme,
   ThemeProvider,
   makeStyles
-} from '@material-ui/core/styles'
+} from '@mui/material/styles'
 
-import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline'
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
