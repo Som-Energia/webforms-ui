@@ -44,7 +44,7 @@ const Home = (props) => {
 
   return (
     <Box sx={{ display: 'flex', backgroundColor: '#f2f2f2' }}>
-      <AppBar position="fixed" color="inherit" className={classes.appBar}>
+      <AppBar position="fixed" color="inherit">
         <Toolbar>
           <Typography variant="h6">
             webforms-ui

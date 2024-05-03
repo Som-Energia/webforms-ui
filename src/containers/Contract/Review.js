@@ -17,7 +17,6 @@ import LegalText from 'components/LegalText'
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
 
-
 const sectionTitle = {
   fontSize: '18px',
   fontWeight: 500,
@@ -26,9 +25,7 @@ const sectionTitle = {
   mb: 1.2
 }
 
-
 const Review = (props) => {
-  
   const { t } = useTranslation()
   const { values, setFieldValue, isIndexedContractEnabled } = props
 
@@ -50,7 +47,9 @@ const Review = (props) => {
         )
       )
     )
-    let maxPower = Math.round(Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR)
+    let maxPower = Math.round(
+      Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
+    )
     getPrices({
       tariff: values.contract.rate,
       max_power: maxPower,
@@ -97,38 +96,42 @@ const Review = (props) => {
 
   const ReviewField = ({ label, value, multipleValues = false }) => {
     return (
-      <div
-        sx={multipleValues && {
-          flexDirection: 'column',
-          alignItems: 'flex-start'
-        }}
-      >
+      <Box
+        sx={
+          multipleValues && {
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+          }
+        }>
         {label !== false && (
-          <div className="field__title">
-            <Typography sx={{
-              textTransform: 'uppercase',
-              pr: '12px',
-              fontSize: '14px',
-              fontWeight: 400,
-              color: 'rgba(0, 0, 0, 0.54)'
-            }} variant="subtitle2">
+          <Box className="field__title">
+            <Typography
+              sx={{
+                textTransform: 'uppercase',
+                pr: '12px',
+                fontSize: '14px',
+                fontWeight: 400,
+                color: 'rgba(0, 0, 0, 0.54)'
+              }}
+              variant="subtitle2">
               {label}
             </Typography>
-          </div>
+          </Box>
         )}
-        <div
-          sx={multipleValues && {
-            ml: 0,
-            mr: 1.6,
-            mt: 0.5,
-            mb: 0.5
-          }}
-        >
+        <Box
+          sx={
+            multipleValues && {
+              ml: 0,
+              mr: 1.6,
+              mt: 0.5,
+              mb: 0.5
+            }
+          }>
           <Typography sx={{ fontSize: '16px' }} variant="body2">
             {value}
           </Typography>
-        </div>
-      </div >
+        </Box>
+      </Box>
     )
   }
 
@@ -137,22 +140,23 @@ const Review = (props) => {
       <Grid container>
         {rates[values?.contract?.rate]?.num_power_periods > 1
           ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
-            (value, index) => {
-              const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
-              const label = values?.contract?.moreThan15Kw
-                ? `P${index + 1}`
-                : index === 0
+              (value, index) => {
+                const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+                const label = values?.contract?.moreThan15Kw
+                  ? `P${index + 1}`
+                  : index === 0
                   ? t('PEAK')
                   : t('VALLEY')
-              return (
-                <Grid
-                  key={label}
-                  item
-                  xs={values?.contract?.moreThan15Kw ? 4 : 12}
-                >{`${label} ${values?.contract[attr]} kW `}</Grid>
-              )
-            }
-          )
+                return (
+                  <Grid
+                    key={label}
+                    item
+                    xs={
+                      values?.contract?.moreThan15Kw ? 4 : 12
+                    }>{`${label} ${values?.contract[attr]} kW `}</Grid>
+                )
+              }
+            )
           : `${values?.contract?.power} kW`}
       </Grid>
     )
@@ -161,20 +165,21 @@ const Review = (props) => {
   const Prices = ({ concept, name }) => {
     let keys = concept ? Object.keys(concept) : []
     keys.sort()
-    const differentValues = (
-      new Set(Object.keys(concept).map((key) => concept[key]?.value))
+    const differentValues = new Set(
+      Object.keys(concept).map((key) => concept[key]?.value)
     )
     if (differentValues.size === 1) {
       for (const key in concept) {
         return (
-          <Box sx={{
-            mb: '10px',
-            display: 'flex',
-            flexDirection: 'column',
-            '& span': {
-              pr: '16px'
-            }
-          }} >
+          <Box
+            sx={{
+              mb: '10px',
+              display: 'flex',
+              flexDirection: 'column',
+              '& span': {
+                pr: '16px'
+              }
+            }}>
             <span key={`${name}`}>
               {`${concept[key]?.value} ${concept[key]?.uom}`}
             </span>
@@ -186,18 +191,19 @@ const Review = (props) => {
       keys.length === 2
         ? [t('PEAK'), t('VALLEY')]
         : keys.length === 3
-          ? [t('PEAK'), t('FLAT'), t('VALLEY')]
-          : keys
+        ? [t('PEAK'), t('FLAT'), t('VALLEY')]
+        : keys
 
     return (
-      <Box sx={{
-        mb: '10px',
-        display: 'flex',
-        flexDirection: 'column',
-        '& span': {
-          pr: '16px'
-        }
-      }}>
+      <Box
+        sx={{
+          mb: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          '& span': {
+            pr: '16px'
+          }
+        }}>
         {concept ? (
           keys.map((key, index) => (
             <span key={`${name}:${key}`}>
@@ -267,11 +273,14 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" sx={{
-            mt: '12px',
-            ml: 0,
-            mr: '32px'
-          }} />
+          <Divider
+            variant="middle"
+            sx={{
+              mt: '12px',
+              ml: 0,
+              mr: '32px'
+            }}
+          />
 
           <Typography sx={sectionTitle} variant="h6">
             {t('SUPPLY')}
@@ -292,11 +301,14 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" sx={{
-            mt: '12px',
-            ml: 0,
-            mr: '32px'
-          }} />
+          <Divider
+            variant="middle"
+            sx={{
+              mt: '12px',
+              ml: 0,
+              mr: '32px'
+            }}
+          />
 
           <Typography sx={sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
@@ -342,11 +354,14 @@ const Review = (props) => {
         </Grid>
         {values?.self_consumption?.have_installation === true && (
           <Grid item xs={12}>
-            <Divider variant="middle" sx={{
-              mt: '12px',
-              ml: 0,
-              mr: '32px'
-            }} />
+            <Divider
+              variant="middle"
+              sx={{
+                mt: '12px',
+                ml: 0,
+                mr: '32px'
+              }}
+            />
             <Typography sx={sectionTitle} variant="h6">
               {t('SELFCONSUMPTION_TITLE')}
             </Typography>
@@ -390,17 +405,20 @@ const Review = (props) => {
         )}
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" sx={{
-            mt: '12px',
-            ml: 0,
-            mr: '32px'
-          }} />
+          <Divider
+            variant="middle"
+            sx={{
+              mt: '12px',
+              ml: 0,
+              mr: '32px'
+            }}
+          />
 
           <Typography sx={sectionTitle} variant="h6">
             {t('CONTACT')}
           </Typography>
           {use_member_as_holder ? (
-            <div dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
+            <Box dangerouslySetInnerHTML={{ __html: t('DATA_AS_IN_OV') }} />
           ) : (
             <>
               <ReviewField label={t('PHONE')} value={holder?.phone1} />
@@ -414,11 +432,14 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" sx={{
-            mt: '12px',
-            ml: 0,
-            mr: '32px'
-          }} />
+          <Divider
+            variant="middle"
+            sx={{
+              mt: '12px',
+              ml: 0,
+              mr: '32px'
+            }}
+          />
 
           <Typography sx={sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
@@ -433,11 +454,14 @@ const Review = (props) => {
         <Grid item xs={12}>
           {values?.contract?.isIndexed ? (
             <>
-              <Divider variant="middle" sx={{
-                mt: '12px',
-                ml: 0,
-                mr: '32px'
-              }} />
+              <Divider
+                variant="middle"
+                sx={{
+                  mt: '12px',
+                  ml: 0,
+                  mr: '32px'
+                }}
+              />
 
               <Typography sx={sectionTitle} variant="h6">
                 {t('PRICES')}
@@ -455,11 +479,14 @@ const Review = (props) => {
             </>
           ) : (
             <>
-              <Divider variant="middle" sx={{
-                mt: '12px',
-                ml: 0,
-                mr: '32px'
-              }} />
+              <Divider
+                variant="middle"
+                sx={{
+                  mt: '12px',
+                  ml: 0,
+                  mr: '32px'
+                }}
+              />
 
               <Typography sx={sectionTitle} variant="h6">
                 {t('PRICES_PLUS_TAXES')}
@@ -519,32 +546,31 @@ const Review = (props) => {
           <ul>
             <li dangerouslySetInnerHTML={{ __html: t('EXTRA_REACTIVA') }}></li>
             <li
-              dangerouslySetInnerHTML={{ __html: t('LLOGUER_COMPTADOR') }}
-            ></li>
+              dangerouslySetInnerHTML={{ __html: t('LLOGUER_COMPTADOR') }}></li>
           </ul>
 
-          <Divider variant="middle" sx={{
-            mt: '24px',
-            ml: 0,
-            mr: '32px'
-          }} />
+          <Divider
+            variant="middle"
+            sx={{
+              mt: '24px',
+              ml: 0,
+              mr: '32px'
+            }}
+          />
         </Grid>
       </Grid>
       <TermsDialog
         title={t('GENERAL_TERMS')}
         open={open}
         onAccept={handleAccept}
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <LegalText
           language={holder?.language}
           documentName={
             values?.contract?.isIndexed
-              ? "general-and-indexed-specific-terms"
-              : "general-contract-terms"
-          }
-        >
-        </LegalText>
+              ? 'general-and-indexed-specific-terms'
+              : 'general-contract-terms'
+          }></LegalText>
       </TermsDialog>
 
       <Box mt={2}>
@@ -595,8 +621,7 @@ const Review = (props) => {
                 __html: t('CONTRACT_PRIVACY_POLICY_TERMS', {
                   url: t('CONTRACT_PRIVACY_POLICY_TERMS_URL')
                 })
-              }}
-            ></Typography>
+              }}></Typography>
           }
         />
       </Box>
