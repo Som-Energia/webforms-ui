@@ -1,15 +1,13 @@
-import clsx from 'clsx'
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import Divider from '@material-ui/core/Divider'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import Divider from '@mui/material/Divider'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import FormHelperText from '@mui/material/FormHelperText'
 
 import StepHeader from 'components/StepHeader'
 import TermsDialog from 'components/TermsDialog'
@@ -19,77 +17,18 @@ import LegalText from 'components/LegalText'
 import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
 import { getPrices, getRates } from 'services/api'
 
-const useStyles = makeStyles((theme) => ({
-  withoutLabel: {
-    marginTop: theme.spacing(1)
-  },
-  sectionTitle: {
-    fontSize: '18px',
-    fontWeight: 500,
-    textTransform: 'uppercase',
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(1.2)
-  },
-  field: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing(0.8),
-    '& .field__value': {
-      flexGrow: 1
-    }
-  },
-  label: {
-    textTransform: 'uppercase',
-    paddingRight: '12px',
-    fontSize: '14px',
-    fontWeight: 400,
-    color: 'rgba(0, 0, 0, 0.54)'
-  },
-  subsectionTitle: {
-    marginTop: '1rem',
-    textTransform: 'uppercase',
-    fontSize: '14px',
-    fontWeight: 400,
-    color: 'rgba(0, 0, 0, 0.54)'
-  },
-  value: {
-    fontSize: '16px'
-  },
-  listItem: {
-    paddingTop: '8px'
-  },
-  separatedField: {
-    flexDirection: 'column',
-    alignItems: 'flex-start'
-  },
-  separatedValues: {
-    marginLeft: 0,
-    marginRight: theme.spacing(1.6),
-    marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5)
-  },
-  divider: {
-    marginTop: '12px',
-    marginLeft: 0,
-    marginRight: '32px'
-  },
-  dividerBottom: {
-    marginTop: '24px',
-    marginLeft: 0,
-    marginRight: '32px'
-  },
-  prices: {
-    marginBottom: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    '& span': {
-      paddingRight: '16px'
-    }
-  }
-}))
+
+const sectionTitle = {
+  fontSize: '18px',
+  fontWeight: 500,
+  textTransform: 'uppercase',
+  mt: 3,
+  mb: 1.2
+}
+
 
 const Review = (props) => {
-  const classes = useStyles()
+  
   const { t } = useTranslation()
   const { values, setFieldValue, isIndexedContractEnabled } = props
 
@@ -159,29 +98,37 @@ const Review = (props) => {
   const ReviewField = ({ label, value, multipleValues = false }) => {
     return (
       <div
-        className={clsx(
-          classes.field,
-          multipleValues && classes.separatedField
-        )}
+        sx={multipleValues && {
+          flexDirection: 'column',
+          alignItems: 'flex-start'
+        }}
       >
         {label !== false && (
           <div className="field__title">
-            <Typography className={classes.label} variant="subtitle2">
+            <Typography sx={{
+              textTransform: 'uppercase',
+              pr: '12px',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: 'rgba(0, 0, 0, 0.54)'
+            }} variant="subtitle2">
               {label}
             </Typography>
           </div>
         )}
         <div
-          className={clsx(
-            'field__value',
-            multipleValues && classes.separatedValues
-          )}
+          sx={multipleValues && {
+            ml: 0,
+            mr: 1.6,
+            mt: 0.5,
+            mb: 0.5
+          }}
         >
-          <Typography className={classes.value} variant="body2">
+          <Typography sx={{ fontSize: '16px' }} variant="body2">
             {value}
           </Typography>
         </div>
-      </div>
+      </div >
     )
   }
 
@@ -190,22 +137,22 @@ const Review = (props) => {
       <Grid container>
         {rates[values?.contract?.rate]?.num_power_periods > 1
           ? [...Array(rates[values?.contract?.rate]?.num_power_periods)].map(
-              (value, index) => {
-                const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
-                const label = values?.contract?.moreThan15Kw
-                  ? `P${index + 1}`
-                  : index === 0
+            (value, index) => {
+              const attr = index + 1 === 1 ? 'power' : `power${index + 1}`
+              const label = values?.contract?.moreThan15Kw
+                ? `P${index + 1}`
+                : index === 0
                   ? t('PEAK')
                   : t('VALLEY')
-                return (
-                  <Grid
-                    key={label}
-                    item
-                    xs={values?.contract?.moreThan15Kw? 4: 12}
-                  >{`${label} ${values?.contract[attr]} kW `}</Grid>
-                )
-              }
-            )
+              return (
+                <Grid
+                  key={label}
+                  item
+                  xs={values?.contract?.moreThan15Kw ? 4 : 12}
+                >{`${label} ${values?.contract[attr]} kW `}</Grid>
+              )
+            }
+          )
           : `${values?.contract?.power} kW`}
       </Grid>
     )
@@ -215,16 +162,23 @@ const Review = (props) => {
     let keys = concept ? Object.keys(concept) : []
     keys.sort()
     const differentValues = (
-      new Set(Object.keys(concept).map((key) => concept[key]?.value ))
+      new Set(Object.keys(concept).map((key) => concept[key]?.value))
     )
     if (differentValues.size === 1) {
       for (const key in concept) {
         return (
-          <div className={classes.prices}>
+          <Box sx={{
+            mb: '10px',
+            display: 'flex',
+            flexDirection: 'column',
+            '& span': {
+              pr: '16px'
+            }
+          }} >
             <span key={`${name}`}>
               {`${concept[key]?.value} ${concept[key]?.uom}`}
             </span>
-          </div>
+          </Box>
         )
       }
     }
@@ -232,11 +186,18 @@ const Review = (props) => {
       keys.length === 2
         ? [t('PEAK'), t('VALLEY')]
         : keys.length === 3
-        ? [t('PEAK'), t('FLAT'), t('VALLEY')]
-        : keys
+          ? [t('PEAK'), t('FLAT'), t('VALLEY')]
+          : keys
 
     return (
-      <div className={classes.prices}>
+      <Box sx={{
+        mb: '10px',
+        display: 'flex',
+        flexDirection: 'column',
+        '& span': {
+          pr: '16px'
+        }
+      }}>
         {concept ? (
           keys.map((key, index) => (
             <span key={`${name}:${key}`}>
@@ -246,7 +207,7 @@ const Review = (props) => {
         ) : (
           <>{t('UNAVAILABLE')}</>
         )}
-      </div>
+      </Box>
     )
   }
 
@@ -261,7 +222,7 @@ const Review = (props) => {
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
           <ReviewField
@@ -281,7 +242,7 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={sectionTitle} variant="h6">
             {t('HOLDER')}
           </Typography>
           <ReviewField label={'NIF'} value={values?.holder?.vat} />
@@ -306,9 +267,13 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
+          <Divider variant="middle" sx={{
+            mt: '12px',
+            ml: 0,
+            mr: '32px'
+          }} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={sectionTitle} variant="h6">
             {t('SUPPLY')}
           </Typography>
           <ReviewField
@@ -327,9 +292,13 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
+          <Divider variant="middle" sx={{
+            mt: '12px',
+            ml: 0,
+            mr: '32px'
+          }} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
           {isIndexedContractEnabled === true ? (
@@ -367,14 +336,18 @@ const Review = (props) => {
             <ReviewField label={t('POWER')} value={<PowerValues />} />
           )}
           <FormHelperText
-            className={classes.withoutLabel}
+            sx={{ mt: 1 }}
             dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }}
           />
         </Grid>
         {values?.self_consumption?.have_installation === true && (
           <Grid item xs={12}>
-            <Divider variant="middle" className={classes.divider} />
-            <Typography className={classes.sectionTitle} variant="h6">
+            <Divider variant="middle" sx={{
+              mt: '12px',
+              ml: 0,
+              mr: '32px'
+            }} />
+            <Typography sx={sectionTitle} variant="h6">
               {t('SELFCONSUMPTION_TITLE')}
             </Typography>
             <Grid container>
@@ -417,9 +390,13 @@ const Review = (props) => {
         )}
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
+          <Divider variant="middle" sx={{
+            mt: '12px',
+            ml: 0,
+            mr: '32px'
+          }} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={sectionTitle} variant="h6">
             {t('CONTACT')}
           </Typography>
           {use_member_as_holder ? (
@@ -437,9 +414,13 @@ const Review = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
+          <Divider variant="middle" sx={{
+            mt: '12px',
+            ml: 0,
+            mr: '32px'
+          }} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
           <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
@@ -452,9 +433,13 @@ const Review = (props) => {
         <Grid item xs={12}>
           {values?.contract?.isIndexed ? (
             <>
-              <Divider variant="middle" className={classes.divider} />
+              <Divider variant="middle" sx={{
+                mt: '12px',
+                ml: 0,
+                mr: '32px'
+              }} />
 
-              <Typography className={classes.sectionTitle} variant="h6">
+              <Typography sx={sectionTitle} variant="h6">
                 {t('PRICES')}
               </Typography>
 
@@ -470,9 +455,13 @@ const Review = (props) => {
             </>
           ) : (
             <>
-              <Divider variant="middle" className={classes.divider} />
+              <Divider variant="middle" sx={{
+                mt: '12px',
+                ml: 0,
+                mr: '32px'
+              }} />
 
-              <Typography className={classes.sectionTitle} variant="h6">
+              <Typography sx={sectionTitle} variant="h6">
                 {t('PRICES_PLUS_TAXES')}
               </Typography>
               <Grid container>
@@ -517,7 +506,13 @@ const Review = (props) => {
             </>
           )}
           <Typography
-            className={classes.subsectionTitle}
+            sx={{
+              mt: '1rem',
+              textTransform: 'uppercase',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: 'rgba(0, 0, 0, 0.54)'
+            }}
             variant="subtitle2"
             dangerouslySetInnerHTML={{ __html: t('CONCEPTES_EXTRES') }}
           />
@@ -528,7 +523,11 @@ const Review = (props) => {
             ></li>
           </ul>
 
-          <Divider variant="middle" className={classes.dividerBottom} />
+          <Divider variant="middle" sx={{
+            mt: '24px',
+            ml: 0,
+            mr: '32px'
+          }} />
         </Grid>
       </Grid>
       <TermsDialog
@@ -541,8 +540,8 @@ const Review = (props) => {
           language={holder?.language}
           documentName={
             values?.contract?.isIndexed
-            ? "general-and-indexed-specific-terms"
-            : "general-contract-terms"
+              ? "general-and-indexed-specific-terms"
+              : "general-contract-terms"
           }
         >
         </LegalText>

@@ -1,36 +1,25 @@
 import React from 'react'
-import { makeStyles,withStyles } from '@material-ui/core/styles'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650
-  },
-  tableHeader: {
-    background: '#e6e6e6'
+const StyledTableCell = styled(TableCell)(() => ({
+  body: {
+    fontSize: 14
   }
-})
-
-const StyledTableCell = withStyles((theme) => ({
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-
+}))
 
 export default function GenerationTable({ columns, rows, children, id }) {
-  const classes = useStyles()
 
   return (
     <TableContainer component={Paper}>
-      <Table id={id} className={classes.table} aria-label="simple table">
-        <TableHead className={classes.tableHeader}>
+      <Table id={id} sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead sx={{ background: '#e6e6e6' }} >
           <TableRow>
             {columns.map((column) => (
               <StyledTableCell key={column}>{column}</StyledTableCell>
@@ -44,7 +33,7 @@ export default function GenerationTable({ columns, rows, children, id }) {
           <TableBody>
             {rows.map((row) => (
               <TableRow id={row.name} key={row.name}>
-                {Object.keys(row).map((key,index) => <StyledTableCell key={row[key]+index} >{row[key]}</StyledTableCell>)}
+                {Object.keys(row).map((key, index) => <StyledTableCell key={row[key] + index} >{row[key]}</StyledTableCell>)}
               </TableRow>
             ))}
           </TableBody>

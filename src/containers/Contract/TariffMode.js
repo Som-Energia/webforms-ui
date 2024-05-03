@@ -1,24 +1,15 @@
 import React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
+import Box from '@mui/material/Box'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
-const useStyles = makeStyles((theme) => ({
-  chooserQuestionTariffMode: {
-    '& .MuiFormHelperText-root': {
-      fontSize: '0.9rem',
-    },
-  },
-}))
 
 const TariffMode = (props) => {
-  const classes = useStyles()
   const { t } = useTranslation()
 
   const handleChange = ({ option }) => {
@@ -31,7 +22,11 @@ const TariffMode = (props) => {
       <Box
         mt={3}
         mb={2}
-        className={classes.chooserQuestionTariffMode}
+        sx={{
+          '& .MuiFormHelperText-root': {
+            fontSize: '0.9rem',
+          }
+        }}
       >
         <Chooser
           name="tariffMode"
@@ -42,9 +37,9 @@ const TariffMode = (props) => {
           options={[
             {
               value: false,
-              label: props.values.contract.moreThan15Kw?
+              label: props.values.contract.moreThan15Kw ?
                 t('TARIFF_MODE_PERIODS_30TD_LABEL') : t('TARIFF_MODE_PERIODS_20TD_LABEL'),
-              description: props.values.contract.moreThan15Kw?
+              description: props.values.contract.moreThan15Kw ?
                 t('TARIFF_MODE_PERIODS_30TD_DESC', {
                   prices_url: t(
                     'TARIFF_MODE_30TD_PRICES_URL'
@@ -65,7 +60,7 @@ const TariffMode = (props) => {
             },
             {
               value: true,
-              label: props.values.contract.moreThan15Kw?
+              label: props.values.contract.moreThan15Kw ?
                 t('TARIFF_MODE_INDEXED_30TD_LABEL') : t('TARIFF_MODE_INDEXED_20TD_LABEL'),
               description: t('TARIFF_MODE_INDEXED_DESC') + t('TARIFF_MODE_INDEXED_MORE', {
                 indexed_url: t(
@@ -78,10 +73,12 @@ const TariffMode = (props) => {
       </Box>
       <Typography
         variant="body1"
-        dangerouslySetInnerHTML={{ __html: t('TARIFF_MODE_TARIFF_COMPARISON', {
-          url: t(
-            'TARIFF_MODE_TARIFF_COMPARISON_URL'
-          )})
+        dangerouslySetInnerHTML={{
+          __html: t('TARIFF_MODE_TARIFF_COMPARISON', {
+            url: t(
+              'TARIFF_MODE_TARIFF_COMPARISON_URL'
+            )
+          })
         }}
       />
     </>

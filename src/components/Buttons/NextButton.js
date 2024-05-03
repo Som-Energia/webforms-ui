@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import { Button } from '@mui/material'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 function NextButton(props) {
   const { title, onClick, disabled } = props

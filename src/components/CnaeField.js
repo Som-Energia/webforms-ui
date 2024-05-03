@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import CircularProgress from '@mui/material/CircularProgress'
 
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import { checkCnae } from '../services/api'
 

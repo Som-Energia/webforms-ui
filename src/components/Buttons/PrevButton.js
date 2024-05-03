@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import { Button } from '@mui/material'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
 function PrevButton(props) {
   const { title, onClick, disabled } = props
