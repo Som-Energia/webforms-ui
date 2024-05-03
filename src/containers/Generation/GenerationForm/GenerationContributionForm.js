@@ -1,32 +1,33 @@
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
+
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
+import AddIcon from '@mui/icons-material/AddBox'
+import RemoveIcon from '@mui/icons-material/IndeterminateCheckBox'
+import EuroIcon from '@mui/icons-material/Euro'
 
 import IBANField from '../../../components/IBANField'
 import AlertBox from 'components/AlertBox'
 
-import AddIcon from '@material-ui/icons/AddBox'
-import RemoveIcon from '@material-ui/icons/IndeterminateCheckBox'
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 import { contributionParams } from '../../../services/utils'
-import EuroIcon from '@material-ui/icons/EuroRounded'
 
 const ACTION_VALUE = 100
 const KWH_ACTION = 170
 
-const useStyles = makeStyles((theme) => ({
+const customStyles = {
   title: {
     fontSize: '1rem',
-    marginTop: theme.spacing(2),
-    paddingBottom: theme.spacing(1)
+    mt: 2,
+    pb: 2
   },
   titleWithMargin: {
-    marginBottom: theme.spacing(2)
+    mb: 2
   },
   icon: {
     '& path': {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     minWidth: 0
   }
-}))
+}
 
 const GenerationContributionForm = (props) => {
   const {
@@ -53,7 +54,6 @@ const GenerationContributionForm = (props) => {
   } = props
 
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const handleIBANChange = ({ IBAN, IBANValid }) => {
     setFieldValue('payment.iban', IBAN, false)
@@ -123,7 +123,12 @@ const GenerationContributionForm = (props) => {
             </Grid>
           </Grid>
         ) : (
-          <AlertBox id='percent_value_error' description={t('GENERATION_PERCENT_ERROR_DESC')} severity={'warning'} variant={'body2'}/>
+          <AlertBox
+            id="percent_value_error"
+            description={t('GENERATION_PERCENT_ERROR_DESC')}
+            severity={'warning'}
+            variant={'body2'}
+          />
         )}
       </Box>
     )
@@ -153,7 +158,7 @@ const GenerationContributionForm = (props) => {
           id="annual_use"
           name="annual_use"
           variant="outlined"
-          className={classes.icon}
+          sx={customStyles.icon}
           fullWidth
           label={t('GENERATION_FORM_ANNUAL_USE_INPUT_LABEL')}
           value={values?.annual_use}
@@ -167,7 +172,7 @@ const GenerationContributionForm = (props) => {
       <Box pt={1}>
         <Typography
           variant="h6"
-          className={classes.title}
+          sx={customStyles.title}
           dangerouslySetInnerHTML={{
             __html: t('GENERATION_FORM_ACTIONS_INPUT_TITLE', {
               name: values.member.full_name
@@ -181,7 +186,7 @@ const GenerationContributionForm = (props) => {
               id="number_of_actions"
               name="number_of_actions"
               variant="outlined"
-              className={classes.icon}
+              sx={customStyles.icon}
               fullWidth
               label={t('GENERATION_FORM_ACTIONS_INPUT_LABEL')}
               value={values?.number_of_actions}
@@ -200,7 +205,7 @@ const GenerationContributionForm = (props) => {
                     <Button
                       id="remove_action"
                       aria-label="Remove action"
-                      className={classes.noHover}
+                      sx={customStyles.noHover}
                       onClick={() => handleActionsChange('remove')}>
                       <RemoveIcon fontSize="large" />
                     </Button>
@@ -211,7 +216,7 @@ const GenerationContributionForm = (props) => {
                     <Button
                       id="add_action"
                       aria-label="Add action"
-                      className={classes.noHover}
+                      sx={customStyles.noHover}
                       onClick={() => handleActionsChange('add')}>
                       <AddIcon fontSize="large" />
                     </Button>
@@ -226,7 +231,7 @@ const GenerationContributionForm = (props) => {
               id="amount"
               name="payment.amount"
               variant="outlined"
-              className={classes.icon}
+              sx={customStyles.icon}
               fullWidth
               disabled
               value={values?.payment?.amount}
@@ -245,7 +250,7 @@ const GenerationContributionForm = (props) => {
       <Box pt={1} mb={0}>
         <Typography
           variant="body1"
-          className={`${classes.title} ${classes.titleWithMargin}`}
+          sx={[customStyles.title, customStyles.titleWithMargin]}
           dangerouslySetInnerHTML={{
             __html: t('GENERATION_FORM_ACTIONS_DESC_TEXT', {
               url: t('GENERATION_FORM_ACTIONS_URL_INFO_ACTION')
@@ -262,12 +267,12 @@ const GenerationContributionForm = (props) => {
       <Box pt={1} mb={0}>
         <Typography
           variant="h6"
-          className={`${classes.title} ${classes.titleWithMargin}`}>
+          sx={[customStyles.title, customStyles.titleWithMargin]}>
           {t('GENERATION_FORM_PROD_ANNUAL')}
         </Typography>
         <Typography
           variant="body2"
-          className={`${classes.title} ${classes.titleWithMargin}`}>
+          sx={[customStyles.title, customStyles.titleWithMargin]}>
           {t('GENERATION_FORM_PERCENT_ANNUAL_USE_TITLE')}
         </Typography>
         <PercentProductionToAnnualUse />
@@ -283,7 +288,7 @@ const GenerationContributionForm = (props) => {
       <Box id="box_iban_input" pt={1} mb={0}>
         <Typography
           variant="h6"
-          className={`${classes.title} ${classes.titleWithMargin}`}
+          sx={[customStyles.title, customStyles.titleWithMargin]}
           dangerouslySetInnerHTML={{
             __html: t('CONTRIBUTION_IBAN_TITLE', {
               name: values.member.full_name
