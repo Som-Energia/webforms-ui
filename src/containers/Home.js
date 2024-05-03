@@ -2,48 +2,16 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import preval from 'preval.macro'
 
-import AppBar from '@material-ui/core/AppBar'
-import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import i18n from 'i18n/i18n'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    backgroundColor: '#f2f2f2'
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(12)
-  },
-  formPaper: {
-    padding: theme.spacing(3),
-    marginTop: theme.spacing(3),
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    cursor: 'pointer',
-    '& h6': {
-      fontSize: '1rem'
-    }
-  },
-  build: {
-    fontSize: '0.85rem',
-    fontWeight: '500'
-  },
-  subtitle: {
-    fontSize: '0.9rem',
-    textTransform: 'uppercase',
-    paddingLeft: '10px'
-  }
-}))
 
 let language = navigator.language
 const availableLanguages = Object.keys(i18n?.options?.resources)
@@ -53,7 +21,7 @@ if (!availableLanguages.includes(language)) {
 
 const options = [
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
-  { title: 'Component Testing', href:`/${language}/component-testing` },
+  { title: 'Component Testing', href: `/${language}/component-testing` },
   { title: 'Alta persona socia', href: '/new-member' },
   { title: 'Aportació al capital social', href: '/contribution' },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
@@ -65,33 +33,54 @@ const options = [
   { title: 'Modificació contractual', href: '/modify-contract' },
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
-  { title: 'Generation kwh - Form', href: '/generationkwh/contribution' },
+  { title: 'Generation kwh - Form', href: '/generationkwh/contribution' }
 ]
 
 const Home = (props) => {
   const { version } = props
-  const classes = useStyles()
   const navigate = useNavigate()
 
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
 
   return (
-    <Box className={classes.root}>
+    <Box sx={{ display: 'flex', backgroundColor: '#f2f2f2' }}>
       <AppBar position="fixed" color="inherit" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6">
             webforms-ui
-            <span className={classes.subtitle}>Nous Peatges Edition</span>
+            <Typography
+              sx={{
+                fontSize: '0.9rem',
+                textTransform: 'uppercase',
+                pl: '10px'
+              }}
+              component="body1">
+              Nous Peatges Edition
+            </Typography>
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container className={classes.content}>
-        <div className={classes.build}>Build date: {dateTimeStamp}</div>
-        <div className={classes.build}>Last commit hash: {version}</div>
+      <Container sx={{ flexGrow: 1, padding: 12 }}>
+        <Box sx={{ fontSize: '0.85rem', fontWeight: '500' }}>
+          Build date: {dateTimeStamp}
+        </Box>
+        <Box sx={{ fontSize: '0.85rem', fontWeight: '500' }}>
+          Last commit hash: {version}
+        </Box>
         {options.map((option) => (
           <Paper
             key={option.href}
-            className={classes.formPaper}
+            sx={{
+              padding: 3,
+              mt: 3,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              cursor: 'pointer',
+              '& h6': {
+                fontSize: '1rem'
+              }
+            }}
             onClick={() => {
               navigate(option.href)
             }}>
