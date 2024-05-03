@@ -2,44 +2,19 @@ import React, { useCallback, useContext, useState, useEffect } from 'react'
 import SectionTitle from './SectionTitle'
 import GenerationAssigmentSection from './GenerationAssignmentSection'
 import GenerationInvestmentSection from './GenerationInvestmentSection'
-import { Button, Grid, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Button, Grid, Typography, Alert } from '@mui/material'
 import GenerationContext from '../context/GenerationContext'
 import PopUpContext from '../../../context/PopUpContext'
 import { useTranslation } from 'react-i18next'
-import Alert from '@material-ui/lab/Alert'
 import GenerationFailure from './GenerationFailure'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import AddIcon from '@material-ui/icons/Add';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import AddIcon from '@mui/icons-material/Add';
 import ContractList from '../../../components/ClickableList';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
 import Loading from 'components/Loading'
 import CustomDialog from 'components/CustomDialog'
 
-const useStyles = makeStyles({
-  footer: {
-    padding: '10px'
-  },
-  button: {
-    background: '#96b633',
-    color: '#fff'
-  },
-  altButton: {
-    background: '#8E8C8C',
-    color: '#fff'
-  },
-  buttons: {
-    gap: '5px',
-    justifyContent: 'center'
-  },
-  gripDivider: {
-    margin: '50px 0 20px 0'
-  },
-  gripReminder: {
-    margin: '20px 0 20px 0'
-  }
-})
 
 function GenerationDashboard({
   editing,
@@ -50,7 +25,6 @@ function GenerationDashboard({
 }) {
 
   const { t } = useTranslation()
-  const classes = useStyles()
   const {
     editingPriority,
     assignments,
@@ -69,21 +43,30 @@ function GenerationDashboard({
       <>
         {editingPriority ? (
           <Grid container>
-            <Alert severity="warning" className={classes.gripReminder}>
+            <Alert severity="warning" sx={{ margin: '20px 0 20px 0' }} >
               {t('GENERATION_INVESTMENTS_REMINDER_INFO_TEXT')}
             </Alert>
-            <Grid item container className={classes.buttons}>
+            <Grid item container sx={{
+              gap: '5px',
+              justifyContent: 'center'
+            }}>
               <Button
                 id="cancel-action-btn"
                 variant="contained"
-                className={classes.button}
+                sx={{
+                  background: '#96b633',
+                  color: '#fff'
+                }}
                 onClick={() => handleCancelButtonClick(false)}>
                 {t('GENERATION_INVESTMENTS_CANCEL_BUTTON')}
               </Button>
               <Button
                 id="validation-action-btn"
                 variant="contained"
-                className={classes.button}
+                sx={{
+                  background: '#96b633',
+                  color: '#fff'
+                }}
                 onClick={() => validateChanges()}>
                 {t('GENERATION_INVESTMENTS_VALIDATE_BUTTON')}
               </Button>
@@ -91,11 +74,14 @@ function GenerationDashboard({
           </Grid>
         ) : null}
         {validationConfirm.finished && validationConfirm.completed ? (
-          <Grid item container className={classes.buttons}>
+          <Grid item container sx={{
+            gap: '5px',
+            justifyContent: 'center'
+          }}>
             <Alert
               id="alert-success-message"
               severity="success"
-              className={classes.gripReminder}
+              sx={{ margin: '20px 0 20px 0' }}
               onClose={() => setValidationConfirm(false)}>
               {t('GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS')}
             </Alert>
@@ -105,7 +91,6 @@ function GenerationDashboard({
     )
   }, [
     t,
-    classes,
     editingPriority,
     setValidationConfirm,
     validationConfirm,
@@ -167,7 +152,7 @@ function GenerationDashboard({
             <>
               <SectionTitle text={t('GENERATION_INVESTMENTS_TABLE_TITLE')} />
               <GenerationInvestmentSection data={investments} />
-              <Grid item xs={12} className={classes.gripDivider}>
+              <Grid item xs={12} sx={{ margin: '50px 0 20px 0' }}>
                 <Alert severity="warning">
                   <Typography
                     variant="body2"
@@ -185,7 +170,10 @@ function GenerationDashboard({
               </Grid>
               <SectionTitle text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}>
                 {investments.length > 0 ? <Button
-                  className={classes.altButton}
+                  sx={{
+                    background: '#8E8C8C',
+                    color: '#fff'
+                  }}
                   disabled={loading}
                   type="button"
                   id="generationkwh-id-add-assignment"
@@ -200,14 +188,17 @@ function GenerationDashboard({
                 editing={editing}
               />
               <Grid
-                className={classes.footer}
+                sx={{ padding: '10px' }}
                 container
                 justifyContent="flex-end">
                 <ActionSection />
               </Grid>
               <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button
-                  className={classes.altButton}
+                  sx={{
+                    background: '#8E8C8C',
+                    color: '#fff'
+                  }}
                   type="button"
                   id="generationkwh-id-production-consumption"
                   variant="contained"

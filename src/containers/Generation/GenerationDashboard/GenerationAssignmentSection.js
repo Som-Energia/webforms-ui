@@ -4,21 +4,29 @@ import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 import GenerationTable from './GenerationTable'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-import Box from '@material-ui/core/Box'
-import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
+import Box from '@mui/material/Box'
+import DragIndicatorIcon from '@mui/icons-material//DragIndicator'
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 import PopUpContext from '../../../context/PopUpContext';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { deleteContractsFromAssignments } from '../../../services/api'
 import CustomDialog from 'components/CustomDialog'
 import Loading from 'components/Loading'
-import Alert from '@material-ui/lab/Alert';
-import { Typography } from '@material-ui/core'
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography'
+import { styled } from '@mui/material/styles';
+
+
+const StyledTableCell = styled(TableCell)(() => ({
+  body: {
+    fontSize: 14
+  }
+}))
+
 
 function createData(
   id,
@@ -40,22 +48,9 @@ function createData(
   }
 }
 
-const useStyles = makeStyles({
-  dragger: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 15
-  }
-})
 
-const StyledTableCell = withStyles(() => ({
-  body: {
-    fontSize: 14
-  }
-}))(TableCell)
 
 export default function GenerationAssigmentSection({ data }) {
-  const classes = useStyles()
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
   const { getPriority, setEditingPriority, changeAssigmentPriority, getAssingments, getContractsToAssign } =
@@ -134,7 +129,11 @@ export default function GenerationAssigmentSection({ data }) {
                         className={row.contract + 'styled-cell'}
                         size="small"
                         {...draggableProvided.dragHandleProps}>
-                        <Box className={classes.dragger}>
+                        <Box sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 15
+                        }} >
                           <DragIndicatorIcon />
                           {getPriority(row.priority).value}
                         </Box>

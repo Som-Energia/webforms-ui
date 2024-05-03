@@ -7,12 +7,9 @@ import { useParams } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-
-import SendIcon from '@material-ui/icons/Send'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
 
 import GenerationMemberIdentifier from './GenerationMemberIdentifier'
 import GenerationContributionForm from './GenerationContributionForm'
