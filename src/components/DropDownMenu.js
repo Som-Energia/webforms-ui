@@ -1,23 +1,14 @@
 import React from 'react'
-import { withStyles,makeStyles } from '@material-ui/core/styles'
-import MuiAccordion from '@material-ui/core/Accordion'
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
+import { styled } from '@mui/material/styles'
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  menuTitle: {
-    backgroundColor: 'rgba(0, 0, 0, .06)',
-    padding: "3%"
-  }
-}))
+import Box from '@mui/material/Box'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
-const Accordion = withStyles({
+const StyledAccordion = styled(Accordion)(() => ({
   root: {
     boxShadow: 'none',
     '&:not(:last-child)': {
@@ -31,12 +22,12 @@ const Accordion = withStyles({
     }
   },
   expanded: {}
-})(MuiAccordion)
+}))
 
-const AccordionSummary = withStyles({
+const StyledAccordionSummary = styled(AccordionSummary)(() => ({
   root: {
     backgroundColor: 'rgba(0, 0, 0, .06)',
-    marginBottom: 2,
+    mb: 2,
     minHeight: 56,
     '&$expanded': {
       minHeight: 56
@@ -48,16 +39,15 @@ const AccordionSummary = withStyles({
     }
   },
   expanded: {}
-})(MuiAccordionSummary)
+}))
 
-const AccordionDetails = withStyles((theme) => ({
+const StyledAccordionDetails = styled(AccordionDetails)(() => ({
   root: {
-    padding: theme.spacing(2)
+    padding: 2
   }
-}))(MuiAccordionDetails)
+}))
 
 export default function DropDownMenu({ title, sections = [] }) {
-  const classes = useStyles()
   const [expanded, setExpanded] = React.useState('')
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -65,23 +55,28 @@ export default function DropDownMenu({ title, sections = [] }) {
   }
 
   return (
-    <div>
+    <Box>
       {title ? (
-        <Grid container item className={classes.menuTitle}>
-          <Typography style={{fontSize:'16px'}} variant="subtitle1">{title}</Typography>
+        <Grid
+          container
+          item
+          sx={{ backgroundColor: 'rgba(0, 0, 0, .06)', padding: '3%' }}>
+          <Typography style={{ fontSize: '16px' }} variant="subtitle1">
+            {title}
+          </Typography>
         </Grid>
       ) : null}
       {sections.map((element, index) => {
         return (
-          <Accordion
+          <StyledAccordion
             key={element.title}
             square
             expanded={expanded === 'panel' + index}
             onChange={handleChange('panel' + index)}>
-            <AccordionSummary
+            <StyledAccordionSummary
               aria-controls="panel1d-content"
               id="panel1d-header">
-              <Grid container className={classes.title}>
+              <Grid container sx={{ display: 'flex', alignItems: 'center' }}>
                 <Grid item xs={1}>
                   <Typography variant="body1">
                     {expanded === 'panel' + index ? '−' : '+'}
@@ -91,13 +86,16 @@ export default function DropDownMenu({ title, sections = [] }) {
                   <Typography variant="body2">{element.title}</Typography>
                 </Grid>
               </Grid>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body2" dangerouslySetInnerHTML={{__html:element.text}} />
-            </AccordionDetails>
-          </Accordion>
+            </StyledAccordionSummary>
+            <StyledAccordionDetails>
+              <Typography
+                variant="body2"
+                dangerouslySetInnerHTML={{ __html: element.text }}
+              />
+            </StyledAccordionDetails>
+          </StyledAccordion>
         )
       })}
-    </div>
+    </Box>
   )
 }
