@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Alert } from '@material-ui/lab'
-import { Typography, TextField } from '@material-ui/core'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import { Alert, Typography, TextField, InputAdornment, Box, CircularProgress } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
 import VATField from '../../../components/VATField'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 import { checkIsPostalCodeFromGenerationEnabledZone } from '../../../services/api'
 
-const useStyles = makeStyles((theme) => ({
+const customStyles = {
   title: {
     fontSize: '1rem',
     marginTop: '16px',
@@ -32,11 +27,10 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "0.03333em",
     fontWeight: 400
   }
-}))
+}
 
 const GenerationNoMemberIdFields = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -101,7 +95,7 @@ const GenerationNoMemberIdFields = (props) => {
       <Box id="box_no_member_identifier" mt={0} mb={2}>
         <Typography
           variant="h6"
-          className={`${classes.title} ${classes.titleWithMarginPlus}`}
+          sx={[customStyles.title, customStyles.titleWithMarginPlus]}
           dangerouslySetInnerHTML={{
             __html: t('GENERATION_FORM_POSTAL_CODE')
           }}
@@ -119,13 +113,13 @@ const GenerationNoMemberIdFields = (props) => {
             onBlur={handleBlur}
             error={errors?.member?.postal_code && touched?.member?.postal_code}
             helperText={
-              touched?.member?.postal_code &&  errors?.member?.postal_code ? <Typography
-              variant="h6"
-              className={classes.helperText}
-              dangerouslySetInnerHTML={{
-                __html: errors?.member?.postal_code
-              }}
-            /> : ""
+              touched?.member?.postal_code && errors?.member?.postal_code ? <Typography
+                variant="h6"
+                sx={customStyles.helperText}
+                dangerouslySetInnerHTML={{
+                  __html: errors?.member?.postal_code
+                }}
+              /> : ""
             }
             InputProps={{
               endAdornment: (
@@ -141,12 +135,12 @@ const GenerationNoMemberIdFields = (props) => {
         </Box>
       </Box>
       {values?.member?.has_generation_enabled_zone &&
-      values.member.postal_code_checked ? (
+        values.member.postal_code_checked ? (
         <>
           <Box id="box_no_member_identifier" mt={0} mb={2}>
             <Typography
               variant="h6"
-              className={`${classes.title} ${classes.titleWithMarginPlus}`}
+              sx={[customStyles.title, customStyles.titleWithMarginPlus]}
               dangerouslySetInnerHTML={{
                 __html: t('GENERATION_FORM_CONTRIBUTION_MEMBER_VAT')
               }}

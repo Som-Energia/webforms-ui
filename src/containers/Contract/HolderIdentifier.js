@@ -1,31 +1,18 @@
 import React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
-const useStyles = makeStyles((theme) => ({
-  memberChecked: {
-    fontWeight: 500,
-    color: theme.palette.primary.main
-  },
-  chooserContainer: {
-    '& h6': {
-      fontSize: '1rem',
-      marginTop: theme.spacing(2)
-    }
-  }
-}))
+
 
 const HolderIdentifier = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const {
     values,
     handleBlur,
@@ -77,7 +64,12 @@ const HolderIdentifier = (props) => {
       </Box>
 
       {values?.contract?.has_service !== false && (
-        <Box mt={1} mb={1} className={classes.chooserContainer}>
+        <Box mt={1} mb={1} sx={{
+          '& h6': {
+            fontSize: '1rem',
+            mt: 2
+          }
+        }} >
           <Chooser
             question={t('PREVIOUS_HOLDER')}
             onChange={handleChangePreviousHolder}
