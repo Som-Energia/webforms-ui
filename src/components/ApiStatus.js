@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import Fade from '@material-ui/core/Fade'
-import Snackbar from '@material-ui/core/Snackbar'
-import Alert from '@material-ui/lab/Alert'
-import AlertTitle from '@material-ui/lab/AlertTitle'
+import Fade from '@mui/material/Fade'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
 
 import { apiStatus } from '../services/api'
 

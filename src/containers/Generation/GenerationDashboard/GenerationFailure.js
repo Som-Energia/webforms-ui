@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Avatar from '@material-ui/core/Avatar'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
-import CloseIcon from '@material-ui/icons/Close'
+import CloseIcon from '@mui/icons-material/Close'
 
 import cuca from '../../../images/cuca-marejada.svg'
 
 
-const useStyles = makeStyles((theme) => ({
+const customStyles ={
   container: {
-    paddingTop: 0,
+    pt: 0,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
   message: {
-    marginTop: theme.spacing(2),
+    mt: 2,
     fontWeight: '400',
     fontSize: '1rem',
     lineHeight: '1.75',
@@ -32,27 +31,26 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     width: '220px',
-    margin: theme.spacing(2)
+    margin: 2
   },
   title: {
     textAlign: 'center',
     fontSize: '1.15rem'
   },
   error: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
+    width: 6,
+    height: 6,
     color: '#fe6444',
     backgroundColor: 'transparent',
     border: '2px solid #fe6444',
-    marginBottom: theme.spacing(3)
+    mb: 3
   }
-}))
+}
 
 function GenerationFailure(props) {
   const { language } = useParams()
   const { t, i18n } = useTranslation()
-  const classes = useStyles()
-
+  
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -60,15 +58,15 @@ function GenerationFailure(props) {
 
   return (
     <>
-      <div className={classes.container}>
-        <Avatar className={classes.error}>
+      <Box sx={customStyles.container}>
+        <Avatar sx={customStyles.error}>
           <CloseIcon fontSize="large" />
         </Avatar>
-        <Typography className={classes.title} variant="h6">
+        <Typography sx={customStyles.title} variant="h6">
           {t('FAILURE_TEXT')}
         </Typography>
         <Typography
-          className={classes.message}
+          sx={customStyles.message}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html:
@@ -77,12 +75,12 @@ function GenerationFailure(props) {
         />
         <Box mt={3} mb={1}>
           <img
-            className={classes.logo}
+            sx={customStyles.logo}
             alt="Cuca KO de Som Energia"
             src={cuca}
           />
         </Box>
-      </div>
+      </Box>
     </>
   )
 }

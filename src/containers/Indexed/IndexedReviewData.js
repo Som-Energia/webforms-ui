@@ -1,59 +1,58 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import Divider from '@material-ui/core/Divider'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import Checkbox from '@mui/material/Checkbox'
+import Divider from '@mui/material/Divider'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import FormHelperText from '@mui/material/FormHelperText'
 
 import Header from 'components/oficinavirtual/Header'
 import TermsDialog from 'components/TermsDialog'
 import LegalText from 'components/LegalText'
 
 import IndexedReviewField from './IndexedReviewField'
-import { Box } from '@material-ui/core'
+import Box from '@mui/material/Box'
 
-const useStyles = makeStyles((theme) => ({
+const customStyles ={
   root: {
     backgroundColor: 'white',
     padding: '24px'
   },
   withoutLabel: {
-    marginTop: theme.spacing(1)
+    mt: 1
   },
   sectionTitle: {
     fontSize: '16px',
     fontWeight: 500,
     textTransform: 'uppercase',
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(1.2)
+    mt: 3,
+    mb: 1.2
   },
   divider: {
-    marginTop: '12px',
-    marginLeft: 0,
-    marginRight: '32px'
+    mt: '12px',
+    ml: 0,
+    mr: '32px'
   },
   dividerBottom: {
-    marginTop: '10px',
-    marginBottom: '10px',
-    marginLeft: 0,
-    marginRight: '32px'
+    mt: '10px',
+    mb: '10px',
+    ml: 0,
+    mr: '32px'
   },
   prices: {
-    marginBottom: '10px',
+    mb: '10px',
     display: 'flex',
     flexDirection: 'column',
     '& span': {
-      paddingRight: '16px'
+      pr: '16px'
     }
   }
-}))
+}
 
 const IndexedReviewData = (props) => {
-  const classes = useStyles()
+  
   const { t } = useTranslation()
 
   let {
@@ -77,7 +76,7 @@ const IndexedReviewData = (props) => {
   return (
     <>
       <Header>{t('REVIEW_TITLE')}</Header>
-      <Grid container className={classes.root}>
+      <Grid container sx={customStyles.root}>
         <Grid item xs={12}>
           <Typography
             variant="body1"
@@ -85,13 +84,13 @@ const IndexedReviewData = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={customStyles.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PROCESS')}
           </Typography>
           <IndexedReviewField value={t('PROCESS_TYPE_TARIFF_CHANGE')} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={customStyles.sectionTitle} variant="h6">
             {t('SUPPLY')}
           </Typography>
           <IndexedReviewField
@@ -105,8 +104,8 @@ const IndexedReviewData = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Divider variant="middle" sx={customStyles.divider} />
+          <Typography sx={customStyles.sectionTitle} variant="h6">
             {t('HOLDER')}
           </Typography>
           <IndexedReviewField label={'NIF'} value={contractValues?.owner_vat} />
@@ -117,9 +116,9 @@ const IndexedReviewData = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
+          <Divider variant="middle" sx={customStyles.divider} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={customStyles.sectionTitle} variant="h6">
             {t('CONTACT')}
           </Typography>
 
@@ -139,8 +138,8 @@ const IndexedReviewData = (props) => {
           </>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Divider variant="middle" sx={customStyles.divider} />
+          <Typography sx={customStyles.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_TECHNICAL')}
           </Typography>
           <IndexedReviewField label={t('FARE')} value={targetTariff} />
@@ -173,9 +172,9 @@ const IndexedReviewData = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" className={classes.divider} />
+          <Divider variant="middle" sx={customStyles.divider} />
 
-          <Typography className={classes.sectionTitle} variant="h6">
+          <Typography sx={customStyles.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
           <IndexedReviewField label={t('IBAN')} value={contractValues?.iban} />
@@ -187,14 +186,14 @@ const IndexedReviewData = (props) => {
 
         <Grid item xs={12}>
           <FormHelperText
-            className={classes.withoutLabel}
+            sx={customStyles.withoutLabel}
             dangerouslySetInnerHTML={{
               __html: t('HELPER_TEXT_MODIFY_DATA')
             }}
           />
         </Grid>
       </Grid>
-      <Grid container className={classes.root}>
+      <Grid container sx={customStyles.root}>
         <TermsDialog
           title={t('GENERAL_TERMS')}
           open={open}
@@ -233,7 +232,7 @@ const IndexedReviewData = (props) => {
               />
             }
           />
-          <Divider variant="middle" className={classes.dividerBottom} />
+          <Divider variant="middle" sx={customStyles.dividerBottom} />
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
@@ -261,7 +260,7 @@ const IndexedReviewData = (props) => {
               />
             }
           />
-          <Divider variant="middle" className={classes.dividerBottom} />
+          <Divider variant="middle" sx={customStyles.dividerBottom} />
         </Grid>
         {!isTariffIndexed && isIndexedPilotOngoing && (
           <Grid item xs={12}>
