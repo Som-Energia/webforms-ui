@@ -15,7 +15,7 @@ const ReviewField = ({ label, value }) => {
       }
     }} >
       {label !== false && (
-        <div className="field__title">
+        <Box className="field__title">
           <Typography sx={{
             textTransform: 'uppercase',
             paddingRight: '12px',
@@ -25,16 +25,16 @@ const ReviewField = ({ label, value }) => {
           }} variant="subtitle2">
             <>{label}</>
           </Typography>
-        </div>
+        </Box>
       )}
-      <div className={clsx('field__value')}>
+      <Box className={clsx('field__value')}>
         <Typography
           id={label + '__value'}
           sx={{ fontSize: '13px' }}
           variant="body2">
           <>{value}</>
         </Typography>
-      </div>
+      </Box>
     </Box>
   )
 }

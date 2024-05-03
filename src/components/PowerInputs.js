@@ -17,7 +17,7 @@ const handleChangePower = (
   let result = match[0].replace(',', '.')
   result = result.replace("'", '.')
 
-  if (!moreThan15Kw && result > 15){
+  if (!moreThan15Kw && result > 15) {
     result = result.slice(0, -1)
   }
 
