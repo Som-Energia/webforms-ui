@@ -6,37 +6,38 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
+import Alert from '@mui/material/Alert'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
-import Alert from '@material-ui/lab/Alert'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DayjsUtils from '@date-io/dayjs'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
-import DisplayFormikState from '../components/DisplayFormikState'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
+
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
+
 import IndexedContractDetails from './Indexed/IndexedContractDetails'
 import IndexedReview from './Indexed/IndexedReview'
-import Failure from './Indexed/IndexedFailure'
-import Success from './Success'
-import { modify_tariff, can_modify_tariff } from 'services/api'
-import Grid from '@material-ui/core/Grid'
-import DropDownMenu from '../components/DropDownMenu'
-import Loading from 'components/Loading'
 import IndexedInfo from './Indexed/IndexedInfo'
 import indexedErrorText from './Indexed/IndexedError'
+import Failure from './Indexed/IndexedFailure'
+import Success from './Success'
+import DisplayFormikState from '../components/DisplayFormikState'
+import DropDownMenu from '../components/DropDownMenu'
+import Loading from 'components/Loading'
+
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
-
+import { modify_tariff, can_modify_tariff } from 'services/api'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -50,7 +51,6 @@ const keyMap = {
 }
 
 const Indexada = (props) => {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
 
   const { token, checkEnabled = true, isIndexedPilotOngoing = false } = props
@@ -178,27 +178,27 @@ const Indexada = (props) => {
 
   const getCommercialName = function (tariff) {
     let tariff_mapping = {
-            "2.0TD_SOM": t("TAR_20TD_SOM"),
-            "2.0TD_SOM_INSULAR": t("TAR_20TD_SOM_INSULAR"),
-            "3.0TD_SOM": t("TAR_30TD_SOM"),
-            "3.0TD_SOM_INSULAR": t("TAR_30TD_SOM_INSULAR"),
-            "6.0TD_SOM":t("TAR_60TD_SOM"),
-            "6.0TD_SOM_INSULAR":t("TAR_60TD_SOM_INSULAR"),
-            "Indexada 2.0TD Península": t("TAR_INDEXADA_20TD_PENINSULA"),
-            "Indexada 2.0TD Canàries": t("TAR_INDEXADA_20TD_CANARIES"),
-            "Indexada 2.0TD Balears": t("TAR_INDEXADA_20TD_BALEARS"),
-            "Indexada 3.0TD Península": t("TAR_INDEXADA_30TD_PENINSULA"),
-            "Indexada 3.0TD Canàries": t("TAR_INDEXADA_30TD_CANARIES"),
-            "Indexada 3.0TD Balears": t("TAR_INDEXADA_30TD_BALEARS"),
-            "Indexada 6.1TD Peninsula": t("TAR_INDEXADA_61TD_PENINSULA"),
-            "Indexada 6.1TD Canàries": t("TAR_INDEXADA_61TD_CANARIES"),
-            "Indexada 6.1TD Balears": t("TAR_INDEXADA_61TD_BALEARS"),
-            "Indexada Empresa Península": t("TAR_INDEXADA_EMPRESA_PENINSULA"),
-            "Indexada Empresa Canàries": t("TAR_INDEXADA_EMPRESA_CANARIES"),
-            "Indexada Empresa Balears": t("TAR_INDEXADA_EMPRESA_BALEARS")
+      '2.0TD_SOM': t('TAR_20TD_SOM'),
+      '2.0TD_SOM_INSULAR': t('TAR_20TD_SOM_INSULAR'),
+      '3.0TD_SOM': t('TAR_30TD_SOM'),
+      '3.0TD_SOM_INSULAR': t('TAR_30TD_SOM_INSULAR'),
+      '6.0TD_SOM': t('TAR_60TD_SOM'),
+      '6.0TD_SOM_INSULAR': t('TAR_60TD_SOM_INSULAR'),
+      'Indexada 2.0TD Península': t('TAR_INDEXADA_20TD_PENINSULA'),
+      'Indexada 2.0TD Canàries': t('TAR_INDEXADA_20TD_CANARIES'),
+      'Indexada 2.0TD Balears': t('TAR_INDEXADA_20TD_BALEARS'),
+      'Indexada 3.0TD Península': t('TAR_INDEXADA_30TD_PENINSULA'),
+      'Indexada 3.0TD Canàries': t('TAR_INDEXADA_30TD_CANARIES'),
+      'Indexada 3.0TD Balears': t('TAR_INDEXADA_30TD_BALEARS'),
+      'Indexada 6.1TD Peninsula': t('TAR_INDEXADA_61TD_PENINSULA'),
+      'Indexada 6.1TD Canàries': t('TAR_INDEXADA_61TD_CANARIES'),
+      'Indexada 6.1TD Balears': t('TAR_INDEXADA_61TD_BALEARS'),
+      'Indexada Empresa Península': t('TAR_INDEXADA_EMPRESA_PENINSULA'),
+      'Indexada Empresa Canàries': t('TAR_INDEXADA_EMPRESA_CANARIES'),
+      'Indexada Empresa Balears': t('TAR_INDEXADA_EMPRESA_BALEARS')
     }
     return tariff_mapping[tariff] || tariff
-}
+  }
 
   const checkCanModifyTariff = async () => {
     try {
@@ -247,7 +247,7 @@ const Indexada = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          className={classes.disclaimer}
+          sx={{ fontSize: '14px', fontWeight: 400 }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html: t('TARIFF_CHANGE_NOT_AVAILABLE')
@@ -295,22 +295,36 @@ const Indexada = (props) => {
       : t('TARIFF_WEB_6_URL')
   }
 
-  const importantInfoBody =
-  <div dangerouslySetInnerHTML={{__html:isTariffIndexed
-    ? isTariff20
-      ? t('PERIODS_IMPORTANT_INFO_BODY', translatedUrls)
-      : isTariff30
-      ? t('PERIODS_IMPORTANT_INFO_BODY_30', translatedUrls)
-      : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
-    : isTariff20
-    ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
-    : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls) }} />
+  const importantInfoBody = (
+    <Box
+      dangerouslySetInnerHTML={{
+        __html: isTariffIndexed
+          ? isTariff20
+            ? t('PERIODS_IMPORTANT_INFO_BODY', translatedUrls)
+            : isTariff30
+            ? t('PERIODS_IMPORTANT_INFO_BODY_30', translatedUrls)
+            : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
+          : isTariff20
+          ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
+          : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
+      }}
+    />
+  )
 
-  const introBody = error
-    ? <Alert severity='error'> {indexedErrorText(t, error?.code, error?.data)} </Alert>
-    : <div dangerouslySetInnerHTML={{__html:isTariffIndexed
-      ? t('PERIODS_INTRO_BODY', translatedUrls)
-      : t('INDEXED_INTRO_BODY', translatedUrls)}}/>
+  const introBody = error ? (
+    <Alert severity="error">
+      {' '}
+      {indexedErrorText(t, error?.code, error?.data)}{' '}
+    </Alert>
+  ) : (
+    <Box
+      dangerouslySetInnerHTML={{
+        __html: isTariffIndexed
+          ? t('PERIODS_INTRO_BODY', translatedUrls)
+          : t('INDEXED_INTRO_BODY', translatedUrls)
+      }}
+    />
+  )
 
   const currentTariff = getCommercialName(contractJSON.tariff)
 
@@ -331,7 +345,12 @@ const Indexada = (props) => {
                     <Form
                       id="cancelForm"
                       method="POST"
-                      className={classes.root}
+                      sx={{
+                        backgroundColor: '#f2f2f2',
+                        color: 'primary',
+                        display: 'flex',
+                        pd: '2rem'
+                      }}
                       noValidate
                       autoComplete="off">
                       <Container maxWidth="lg" disableGutters={true}>
@@ -378,11 +397,15 @@ const Indexada = (props) => {
                               />
                             ) : null}
                             <Box mx={0} mt={2} mb={3}>
-                              <div className={classes.actionsContainer}>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  pt: '0.25rem'
+                                }}>
                                 {result?.contract_number === undefined && (
                                   <Button
                                     data-cy="prev"
-                                    className={classes.button}
                                     startIcon={<ArrowBackIosIcon />}
                                     disabled={activeStep === 0 || loading}
                                     onClick={() => prevStep(formikProps)}>
@@ -391,10 +414,8 @@ const Indexada = (props) => {
                                 )}
                                 {activeStep < MAX_STEP_NUMBER - 1 ? (
                                   <Button
-                                    type="button"
                                     data-cy="next"
                                     id="change-tariff-next-step-button"
-                                    className={classes.button}
                                     variant="contained"
                                     color="primary"
                                     endIcon={<ArrowForwardIosIcon />}
@@ -407,10 +428,8 @@ const Indexada = (props) => {
                                 ) : (
                                   !completed && (
                                     <Button
-                                      type="button"
                                       data-cy="submit"
                                       id="tariff-change-submit"
-                                      className={classes.button}
                                       variant="contained"
                                       color="primary"
                                       startIcon={
@@ -428,7 +447,7 @@ const Indexada = (props) => {
                                     </Button>
                                   )
                                 )}
-                              </div>
+                              </Box>
                             </Box>
                           </>
                         )}
@@ -436,7 +455,15 @@ const Indexada = (props) => {
                         {completed && (
                           <Paper
                             elevation={0}
-                            className={classes.stepContainer}>
+                            sx={{
+                              padding: '4rem',
+                              mt: 0,
+                              mb: 4,
+                              width: '100%',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              backgroundColor: 'backgroundColor'
+                            }}>
                             {result ? (
                               <Success
                                 showHeader={false}
@@ -478,34 +505,3 @@ const Indexada = (props) => {
 }
 
 export default Indexada
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#f2f2f2',
-    color: theme.palette.text.primary,
-    display: 'flex',
-    paddingBottom: '2rem'
-  },
-  stepContainer: {
-    padding: '4rem',
-    marginTop: 0,
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.palette.backgroundColor
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    paddingTop: '0.25rem'
-  },
-  disclaimer: {
-    fontSize: '14px',
-    fontWeight: 400
-  }
-}))
