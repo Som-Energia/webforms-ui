@@ -1,33 +1,16 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import TextField from '@material-ui/core/TextField'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import TextField from '@mui/material/TextField'
 
 import MailOutlinedIcon from '@material-ui/icons/MailOutlined'
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    '& h2': {
-      fontWeight: '600',
-      display: 'flex',
-      alignContent: 'space-between',
-      alignItems: 'center'
-    }
-  },
-  actions: {
-    margin: '16px'
-  }
-}))
-
 const ContactDialog = (props) => {
-  const classes = useStyles()
   const { t } = useTranslation()
 
   const { open, handleClose, handleSend, isSending } = props
@@ -36,46 +19,56 @@ const ContactDialog = (props) => {
   const [message, setMessage] = useState('')
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-contact">
-      <DialogTitle className={classes.title}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-contact">
+      <DialogTitle
+        sx={{
+          '& h2': {
+            fontWeight: '600',
+            display: 'flex',
+            alignContent: 'space-between',
+            alignItems: 'center'
+          }
+        }}>
         <MailOutlinedIcon fontSize="normal" />
-        <span>&nbsp; { t('INSTALLER_CONTACT') } </span>
+        <span>&nbsp; {t('INSTALLER_CONTACT')} </span>
       </DialogTitle>
       <DialogContent>
         <TextField
           id="subject"
           margin="normal"
-          label={ t('SUBJECT') }
+          label={t('SUBJECT')}
           type="text"
           variant="outlined"
           fullWidth
           value={subject}
-          onChange={ (event) => setSubject(event.target.value) }
+          onChange={(event) => setSubject(event.target.value)}
         />
         <TextField
           margin="normal"
           id="message"
-          label={ t('WRITE_MESSAGE') }
+          label={t('WRITE_MESSAGE')}
           type="text"
           multiline
           rows={8}
           fullWidth
           variant="outlined"
           value={message}
-          onChange={ (event) => setMessage(event.target.value) }
+          onChange={(event) => setMessage(event.target.value)}
         />
       </DialogContent>
-      <DialogActions className={classes.actions}>
+      <DialogActions sx={{ margin: '16px' }}>
         <Button onClick={handleClose} variant="contained">
-          { t('CLOSE') }
+          {t('CLOSE')}
         </Button>
         <Button
           onClick={() => handleSend({ subject, message })}
           variant="contained"
           color="primary"
-          disabled={isSending}
-        >
-          { t('SEND') }
+          disabled={isSending}>
+          {t('SEND')}
         </Button>
       </DialogActions>
     </Dialog>
