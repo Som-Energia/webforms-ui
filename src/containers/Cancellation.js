@@ -46,7 +46,6 @@ const keyMap = {
 }
 
 const Cancellation = (props) => {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
 
   const { contract } = props
@@ -215,7 +214,6 @@ const Cancellation = (props) => {
                           {result?.contract_number === undefined && (
                             <Button
                               data-cy="prev"
-                              className={classes.button}
                               startIcon={<ArrowBackIosIcon />}
                               disabled={activeStep === 0 || sending}
                               onClick={() => prevStep(formikProps)}>
@@ -224,9 +222,7 @@ const Cancellation = (props) => {
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
                             <Button
-                              type="button"
                               data-cy="next"
-                              className={classes.button}
                               variant="contained"
                               color="primary"
                               endIcon={<ArrowForwardIosIcon />}
@@ -237,9 +233,7 @@ const Cancellation = (props) => {
                           ) : (
                             !completed && (
                               <Button
-                                type="button"
                                 data-cy="submit"
-                                className={classes.button}
                                 variant="contained"
                                 color="primary"
                                 startIcon={

@@ -31,7 +31,7 @@ const MAX_STEP_NUMBER = 5
 
 const GenerationContribution = (props) => {
   const { limitAmount } = props
-  
+
   const { t, i18n } = useTranslation()
   const { language } = useParams()
   const [activeStep, setActiveStep] = useState(0)
@@ -298,7 +298,11 @@ const GenerationContribution = (props) => {
               : !formikProps.isValid
           }
           onClick={() => nextStep(formikProps)}
-          title={activeStep === 3 ? t('GENERATION_FORM_SIGN_BUTTON') : t('SEGUENT_PAS')}
+          title={
+            activeStep === 3
+              ? t('GENERATION_FORM_SIGN_BUTTON')
+              : t('SEGUENT_PAS')
+          }
         />
       ) : (
         <ExitButton
@@ -358,25 +362,30 @@ const GenerationContribution = (props) => {
 
   return (
     <Formik
-      onSubmit={() => { }}
+      onSubmit={() => {}}
       enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchemas[activeStep]}
       validateOnMount={true}>
       {(formikProps) => (
-        <Form sx={{
-          position: 'relative',
-          color: 'text.primary'
-        }} noValidate autoComplete="off">
+        <Form
+          sx={{
+            position: 'relative',
+            color: 'text.primary'
+          }}
+          noValidate
+          autoComplete="off">
           <Container maxWidth="md" disableGutters={true}>
-            <Paper elevation={0} sx={{
-              mt: 0,
-              mb: 4,
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              backgroundColor: 'backgroundColor'
-            }}>
+            <Paper
+              elevation={0}
+              sx={{
+                mt: 0,
+                mb: 4,
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: 'backgroundColor'
+              }}>
               {activeStep === 0 && (
                 <GenerationMemberIdentifier
                   {...formikProps}
@@ -384,14 +393,32 @@ const GenerationContribution = (props) => {
                 />
               )}
               {activeStep === 1 && (
-                <PersonalData title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')} {...formikProps} entity="member" />
+                <PersonalData
+                  title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')}
+                  {...formikProps}
+                  entity="member"
+                />
               )}
               {activeStep === 2 && (
-                <GenerationContributionForm limitAmount={limitAmount} title={t('GENERATION_FORM_TITLE')} {...formikProps} />
+                <GenerationContributionForm
+                  limitAmount={limitAmount}
+                  title={t('GENERATION_FORM_TITLE')}
+                  {...formikProps}
+                />
               )}
-              {activeStep === 3 && <GenerationReview title={t('GENERATION_FORM_TITLE')} {...formikProps} />}
+              {activeStep === 3 && (
+                <GenerationReview
+                  title={t('GENERATION_FORM_TITLE')}
+                  {...formikProps}
+                />
+              )}
               {activeStep === 4 && (
-                <GenerationSignaturit limitAmount={limitAmount} title={t('GENERATION_FORM_TITLE')} submit={handlePost} {...formikProps} />
+                <GenerationSignaturit
+                  limitAmount={limitAmount}
+                  title={t('GENERATION_FORM_TITLE')}
+                  submit={handlePost}
+                  {...formikProps}
+                />
               )}
 
               {completed && (
@@ -409,10 +436,11 @@ const GenerationContribution = (props) => {
               )}
 
               <Box mx={0} mt={2} mb={3}>
-                <Box sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between'
-                }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                  }}>
                   {result?.investment === undefined && !completed ? (
                     <PrevButton
                       disabled={activeStep === 0 || sending}
@@ -422,10 +450,10 @@ const GenerationContribution = (props) => {
                   ) : null}
                   {activeStep < MAX_STEP_NUMBER - 1
                     ? getNextButton(
-                      formikProps.values.member.generation_zone_checked,
-                      formikProps.values.member.has_generation_enabled_zone,
-                      formikProps
-                    )
+                        formikProps.values.member.generation_zone_checked,
+                        formikProps.values.member.has_generation_enabled_zone,
+                        formikProps
+                      )
                     : null}
                 </Box>
               </Box>

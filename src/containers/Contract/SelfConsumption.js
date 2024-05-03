@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import FormHelperText from '@mui/material/FormatHelperText'
+import FormHelperText from '@mui/material/FormHelperText'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'

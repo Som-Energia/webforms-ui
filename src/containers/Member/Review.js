@@ -12,7 +12,6 @@ import StepHeader from '../../components/StepHeader'
 
 import { languages } from '../../services/utils'
 
-
 const Review = (props) => {
   const { t } = useTranslation()
   const { values, setFieldValue } = props
@@ -24,27 +23,30 @@ const Review = (props) => {
 
   const ReviewField = ({ label, value }) => {
     return (
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'center',
-        mb: 0.8
-      }}>
-        <div className="field__title">
-          <Typography sx={{
-            textTransform: 'uppercase',
-            paddingRight: '12px',
-            fontSize: '14px',
-            fontWeight: 400,
-            color: 'rgba(0, 0, 0, 0.54)'
-          }} variant="subtitle2">
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          mb: 0.8
+        }}>
+        <Box className="field__title">
+          <Typography
+            sx={{
+              textTransform: 'uppercase',
+              paddingRight: '12px',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: 'rgba(0, 0, 0, 0.54)'
+            }}
+            variant="subtitle2">
             {label}
           </Typography>
-        </div>
-        <div className="field__value">
+        </Box>
+        <Box className="field__value">
           <Typography sx={{ fontSize: '16px' }} variant="body2">
             {value}
           </Typography>
-        </div>
+        </Box>
       </Box>
     )
   }
@@ -58,13 +60,15 @@ const Review = (props) => {
       />
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <Typography sx={{
-            fontSize: '18px',
-            fontWeight: 500,
-            textTransform: 'uppercase',
-            mt: 3,
-            mb: 1.2
-          }} variant="h6">
+          <Typography
+            sx={{
+              fontSize: '18px',
+              fontWeight: 500,
+              textTransform: 'uppercase',
+              mt: 3,
+              mb: 1.2
+            }}
+            variant="h6">
             {t('NEW_MEMBER')}
           </Typography>
           <ReviewField label={'NIF'} value={values?.member?.vat} />
@@ -89,8 +93,9 @@ const Review = (props) => {
           )}
           <ReviewField
             label={t('ADDRESS')}
-            value={`${values?.member?.address}, ${values?.member?.number} ${values?.member?.floor || ''
-              } ${values?.member?.door || ''}`}
+            value={`${values?.member?.address}, ${values?.member?.number} ${
+              values?.member?.floor || ''
+            } ${values?.member?.door || ''}`}
           />
           <ReviewField
             label={t('CITY')}
@@ -98,13 +103,15 @@ const Review = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography sx={{
-            fontSize: '18px',
-            fontWeight: 500,
-            textTransform: 'uppercase',
-            mt: 3,
-            mb: 1.2
-          }} variant="h6">
+          <Typography
+            sx={{
+              fontSize: '18px',
+              fontWeight: 500,
+              textTransform: 'uppercase',
+              mt: 3,
+              mb: 1.2
+            }}
+            variant="h6">
             {t('CONTACT')}
           </Typography>
           <ReviewField label={t('PHONE')} value={values?.member?.phone1} />
@@ -115,18 +122,23 @@ const Review = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Divider variant="middle" sx={{
-            mt: '12px',
-            ml: 0,
-            mr: '32px'
-          }} />
-          <Typography sx={{
-            fontSize: '18px',
-            fontWeight: 500,
-            textTransform: 'uppercase',
-            mt: 3,
-            mb: 1.2
-          }} variant="h6">
+          <Divider
+            variant="middle"
+            sx={{
+              mt: '12px',
+              ml: 0,
+              mr: '32px'
+            }}
+          />
+          <Typography
+            sx={{
+              fontSize: '18px',
+              fontWeight: 500,
+              textTransform: 'uppercase',
+              mt: 3,
+              mb: 1.2
+            }}
+            variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
           <ReviewField
@@ -136,11 +148,14 @@ const Review = (props) => {
           {values?.payment?.payment_method === 'iban' && (
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
           )}
-          <Divider variant="middle" sx={{
-            marginTop: '24px',
-            marginLeft: 0,
-            marginRight: '32px'
-          }} />
+          <Divider
+            variant="middle"
+            sx={{
+              marginTop: '24px',
+              marginLeft: 0,
+              marginRight: '32px'
+            }}
+          />
         </Grid>
       </Grid>
 

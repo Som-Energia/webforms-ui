@@ -5,8 +5,7 @@ import { Example as ComponentTest } from './components/ApiValidatedField.example
 
 import {
   createTheme,
-  ThemeProvider,
-  makeStyles
+  ThemeProvider
 } from '@mui/material/styles'
 
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
@@ -18,6 +17,7 @@ import './i18n/i18n'
 import './App.css'
 import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
 import { PopUpContextProvider } from 'context/PopUpContext'
+import Box  from '@mui/material/Box'
 
 const theme = createTheme({
   palette: {
@@ -45,14 +45,9 @@ const theme = createTheme({
   }
 })
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  }
-}))
+
 
 const App = (props) => {
-  const classes = useStyles()
   const { token = '', isIndexedPilotOngoing = undefined } = props
 
   const Home = lazy(() => import('./containers/Home'))
@@ -127,7 +122,7 @@ const App = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <ScopedCssBaseline>
-        <div className={classes.root}>
+        <Box sx={{flexGrow: 1}}>
           <Suspense fallback={<Loading />}>
             <Router>
               <Routes>
@@ -433,7 +428,7 @@ const App = (props) => {
             </Router>
           </Suspense>
           <ApiStatus />
-        </div>
+        </Box>
       </ScopedCssBaseline>
     </ThemeProvider>
   )

@@ -54,7 +54,11 @@ const keyMap = {
 const Contract = (props) => {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
-  const { is30ContractEnabled = true, isIndexedContractEnabled = false, isCadastralReference = false } = props
+  const {
+    is30ContractEnabled = true,
+    isIndexedContractEnabled = false,
+    isCadastralReference = false
+  } = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -116,53 +120,59 @@ const Contract = (props) => {
       })
     }),
     Yup.object().shape({
-      supply_point: Yup.object().shape({
-        address: Yup.string().required(t('NO_ADDRESS')),
-        number: Yup.string().required(t('NO_NUMBER')),
-        postal_code: Yup.string()
-          .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE'))
-          .min(5, t('NO_POSTALCODE'))
-          .max(5, t('NO_POSTALCODE')),
-        state: Yup.object().shape({
-          id: Yup.number().required(t('NO_STATE'))
-        }),
-        city: Yup.object().shape({
-          id: Yup.number().required(t('NO_CITY'))
-        }),
-        is_housing: Yup.bool()
-          .oneOf([true, false], t('NO_IS_HOUSING'))
-          .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
-            return !(
-              this.parent.is_housing === false &&
-              this.parent.cnae === CNAE_HOUSING
-            )
+      supply_point: Yup.object().shape(
+        {
+          address: Yup.string().required(t('NO_ADDRESS')),
+          number: Yup.string().required(t('NO_NUMBER')),
+          postal_code: Yup.string()
+            .matches(/^\d*$/, t('NO_POSTALCODE'))
+            .required(t('NO_POSTALCODE'))
+            .min(5, t('NO_POSTALCODE'))
+            .max(5, t('NO_POSTALCODE')),
+          state: Yup.object().shape({
+            id: Yup.number().required(t('NO_STATE'))
           }),
-        cnae: Yup.string()
-          .required(t('INVALID_SUPPLY_POINT_CNAE'))
-          .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
-          .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
-            return !(
-              this.parent.is_housing === false &&
-              this.parent.cnae === CNAE_HOUSING
-            )
+          city: Yup.object().shape({
+            id: Yup.number().required(t('NO_CITY'))
           }),
-        cnae_valid: Yup.bool()
-          .required(t('INVALID_SUPPLY_POINT_CNAE'))
-          .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
-        supply_point_accepted: Yup.bool()
-          .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL')),
-        cadastral_reference: Yup.string()
-          .when('cadastral_reference_error', (cadastral_reference_error) => {
-            if (cadastral_reference_error)
-              return Yup.string().test({ name: 'cadastral_reference_error', test: () => false, message: cadastral_reference_error })
-            return Yup.string(t('INVALID_REF_CADASTRAL_LENGTH'))
-          }),
-        cadastral_reference_error: Yup.string().notRequired(),
-      }, [
-        ['cadastral_reference', 'cadastral_reference']
-      ]
+          is_housing: Yup.bool()
+            .oneOf([true, false], t('NO_IS_HOUSING'))
+            .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
+              return !(
+                this.parent.is_housing === false &&
+                this.parent.cnae === CNAE_HOUSING
+              )
+            }),
+          cnae: Yup.string()
+            .required(t('INVALID_SUPPLY_POINT_CNAE'))
+            .min(3, t('INVALID_SUPPLY_POINT_CNAE'))
+            .test('CnaeNoHousing', t('INVALID_CNAE_NO_HOUSING'), function () {
+              return !(
+                this.parent.is_housing === false &&
+                this.parent.cnae === CNAE_HOUSING
+              )
+            }),
+          cnae_valid: Yup.bool()
+            .required(t('INVALID_SUPPLY_POINT_CNAE'))
+            .oneOf([true], t('INVALID_SUPPLY_POINT_CNAE')),
+          supply_point_accepted: Yup.bool()
+            .required(t('CUPS_VERIFY_LABEL'))
+            .oneOf([true], t('CUPS_VERIFY_LABEL')),
+          cadastral_reference: Yup.string().when(
+            'cadastral_reference_error',
+            (cadastral_reference_error) => {
+              if (cadastral_reference_error)
+                return Yup.string().test({
+                  name: 'cadastral_reference_error',
+                  test: () => false,
+                  message: cadastral_reference_error
+                })
+              return Yup.string(t('INVALID_REF_CADASTRAL_LENGTH'))
+            }
+          ),
+          cadastral_reference_error: Yup.string().notRequired()
+        },
+        [['cadastral_reference', 'cadastral_reference']]
       )
     }),
     Yup.object().shape({
@@ -393,11 +403,15 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       self_consumption: Yup.object().shape({
-        cau: Yup.string()
-          .when('cau_error', (cau_error) => {
-            if (cau_error) return Yup.mixed().test({ name: 'cau_error', test: () => false, message: cau_error })
-            return Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
-          }),
+        cau: Yup.string().when('cau_error', (cau_error) => {
+          if (cau_error)
+            return Yup.mixed().test({
+              name: 'cau_error',
+              test: () => false,
+              message: cau_error
+            })
+          return Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
+        }),
         cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
@@ -551,10 +565,7 @@ const Contract = (props) => {
         )}
         {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
         {(showAllSteps || activeStep === supplyPointPage) && (
-          <SupplyPoint
-            {...props}
-            isCadastralReference={isCadastralReference}
-          />
+          <SupplyPoint {...props} isCadastralReference={isCadastralReference} />
         )}
         {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
@@ -806,28 +817,32 @@ const Contract = (props) => {
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
-          onSubmit={() => { }}
+          onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}
-        >
+          validateOnMount={true}>
           {(props) => (
             <>
-              <div>
-                <Form sx={{
-                  position: 'relative',
-                  color: 'text.primary'
-                }} noValidate autoComplete="off">
+              <Box>
+                <Form
+                  sx={{
+                    position: 'relative',
+                    color: 'text.primary'
+                  }}
+                  noValidate
+                  autoComplete="off">
                   {
-                    <Paper elevation={0} sx={{
-                      mt: 0,
-                      mb: 4,
-                      width: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      backgroundColor: 'backgroundColor'
-                    }} >
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        mt: 0,
+                        mb: 4,
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        backgroundColor: 'backgroundColor'
+                      }}>
                       {showProgress && (
                         <LinearProgress
                           variant={sending ? 'indeterminate' : 'determinate'}
@@ -847,17 +862,17 @@ const Contract = (props) => {
                         )}
                       </Box>
                       <Box mx={0} mt={1} mb={3}>
-                        <div sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between'
-                        }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}>
                           {result?.contract_number === undefined && (
                             <Button
                               data-cy="prev"
                               startIcon={<ArrowBackIosIcon />}
                               disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(props)}
-                            >
+                              onClick={() => prevStep(props)}>
                               {t('PAS_ANTERIOR')}
                             </Button>
                           )}
@@ -869,8 +884,7 @@ const Contract = (props) => {
                               color="primary"
                               endIcon={<ArrowForwardIosIcon />}
                               disabled={!props.isValid}
-                              onClick={() => nextStep(props)}
-                            >
+                              onClick={() => nextStep(props)}>
                               {t('SEGUENT_PAS')}
                             </Button>
                           ) : (
@@ -888,25 +902,23 @@ const Contract = (props) => {
                                   )
                                 }
                                 disabled={sending || !props.isValid}
-                                onClick={() => handlePost(props.values)}
-                              >
+                                onClick={() => handlePost(props.values)}>
                                 {t('SEND')}
                               </Button>
                             )
                           )}
-                        </div>
+                        </Box>
                       </Box>
                     </Paper>
                   }
                 </Form>
-              </div>
+              </Box>
               {showInspector && (
                 <>
                   <Button
                     variant="outlined"
                     size="small"
-                    onClick={() => setShowAllSteps(!showAllSteps)}
-                  >
+                    onClick={() => setShowAllSteps(!showAllSteps)}>
                     Show all steps
                   </Button>
                   <DisplayFormikState {...props} />
@@ -916,7 +928,7 @@ const Contract = (props) => {
           )}
         </Formik>
       </Container>
-    </GlobalHotKeys >
+    </GlobalHotKeys>
   )
 }
 
