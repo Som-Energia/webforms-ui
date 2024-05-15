@@ -13,7 +13,7 @@ const TextLoader = props => {
   const [ text, setText ] = React.useState()
 
   React.useEffect(()=>{
-    const url = `${process.env.PUBLIC_URL}/static/docs/${language.slice(0,2)}/${documentName}.html`
+    const url = `${import.meta.env.PUBLIC_URL}/static/docs/${language.slice(0,2)}/${documentName}.html`
     setText(undefined)
     axios({
       method: 'GET',

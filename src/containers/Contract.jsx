@@ -776,8 +776,8 @@ const Contract = (props) => {
   }
 
   const plausible = Plausible({
-    domain: process.env.REACT_APP_PLAUSIBLE_TRACK_DOMAIN,
-    apiHost: process.env.REACT_APP_PLAUSIBLE_APIHOST_URL
+    domain: import.meta.env.VITE_APP_PLAUSIBLE_TRACK_DOMAIN,
+    apiHost: import.meta.env.VITE_APP_PLAUSIBLE_APIHOST_URL
   })
 
   const trackSucces = () => {
