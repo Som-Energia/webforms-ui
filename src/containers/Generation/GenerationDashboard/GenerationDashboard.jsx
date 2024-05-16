@@ -54,8 +54,8 @@ function GenerationDashboard({
                 id="cancel-action-btn"
                 variant="contained"
                 sx={{
-                  background: '#96b633',
-                  color: '#fff'
+                  backgroundColor: 'primary.main',
+                  color: 'lightFont.main'
                 }}
                 onClick={() => handleCancelButtonClick(false)}>
                 {t('GENERATION_INVESTMENTS_CANCEL_BUTTON')}
@@ -64,8 +64,8 @@ function GenerationDashboard({
                 id="validation-action-btn"
                 variant="contained"
                 sx={{
-                  background: '#96b633',
-                  color: '#fff'
+                  backgroundColor: 'primary.main',
+                  color: 'lightFont.main'
                 }}
                 onClick={() => validateChanges()}>
                 {t('GENERATION_INVESTMENTS_VALIDATE_BUTTON')}
@@ -171,8 +171,8 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}>
                 {investments.length > 0 ? <Button
                   sx={{
-                    background: '#8E8C8C',
-                    color: '#fff'
+                    backgroundColor: 'secondary.main',
+                    color: 'lightFont.main'
                   }}
                   disabled={loading}
                   type="button"
@@ -196,8 +196,8 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button
                   sx={{
-                    background: '#8E8C8C',
-                    color: '#fff'
+                    backgroundColor: 'secondary.main',
+                    color: 'lightFont.main'
                   }}
                   type="button"
                   id="generationkwh-id-production-consumption"

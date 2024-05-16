@@ -8,7 +8,7 @@ import {
   ThemeProvider
 } from '@mui/material/styles'
 
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
+import ScopedCssBaseline from '@mui/material/CssBaseline'
 
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
@@ -27,6 +27,12 @@ const theme = createTheme({
     secondary: {
       dark: '#000',
       main: '#a1a1a1'
+    },
+    dark: {
+      main: '#750d0d'
+    },
+    lightFont: {
+      main: '#fff'
     },
     background: { default: 'transparent', paper: '#ffffff' },
     contrastThreshold: 2,
@@ -51,22 +57,22 @@ const theme = createTheme({
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
 
-/*   const Home = lazy(() => import('./containers/Home'))
+  const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
   const Contribution = lazy(() => import('./containers/Contribution'))
   const Cancellation = lazy(() => import('./containers/Cancellation'))
   const CancellationConfirm = lazy(() =>
     import('./containers/CancellationConfirm')
   )
-  const D1Detail = lazy(() => import('./containers/D1Detail'))*/
+  const D1Detail = lazy(() => import('./containers/D1Detail'))
   const HolderChange = lazy(() => import('./containers/HolderChange'))
-  /*const Member = lazy(() => import('./containers/Member'))
+  const Member = lazy(() => import('./containers/Member'))
   const Failure = lazy(() => import('./containers/Failure'))
-  const Success = lazy(() => import('./containers/Success'))*/
+  const Success = lazy(() => import('./containers/Success'))
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
-  /*const Tariff = lazy(() => import('./containers/Tariff'))
+  const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
-  const Indexed = lazy(() => import('./containers/Indexed')) */
+  const Indexed = lazy(() => import('./containers/Indexed'))
   const Generation = lazy(() => import('./containers/Generation'))
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
@@ -127,7 +133,7 @@ const App = (props) => {
           <Suspense fallback={<Loading />}>
             <Router>
               <Routes>
-               {/*<Route exact path="/" element={<Home {...props} />} />*/}
+                <Route exact path="/" element={<Home {...props} />} />
 
                 <Route
                   exact
@@ -154,7 +160,7 @@ const App = (props) => {
                   element={<HolderChange {...props} />}
                 />
 
-                {/*<Route
+                <Route
                   exact
                   path="/contract"
                   element={<Contract {...props} />}
@@ -375,7 +381,7 @@ const App = (props) => {
                       checkEnabled={false}
                     />
                   }
-                /> */}
+                />
                 <Route
                   path="/:language/investments/investments-kwh/"
                   element={

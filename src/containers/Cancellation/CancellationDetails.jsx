@@ -56,7 +56,7 @@ const CancellationDetails = (props) => {
   }, [])
 
   useEffect(() => {
-    if (availableDates !== []) {
+    if (availableDates.length > 0) {
       setFirstDate(availableDates[0])
       setLastDate(availableDates[availableDates.length - 1])
       setFieldValue(
