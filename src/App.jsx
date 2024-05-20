@@ -2,11 +2,8 @@ import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 //import { Test as ComponentTest } from './components/TextLoader'
 import { Example as ComponentTest } from './components/ApiValidatedField.example'
-
-import {
-  createTheme,
-  ThemeProvider
-} from '@mui/material/styles'
+import SomEnergiaTheme from 'components/SomenergiaTheme'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import ScopedCssBaseline from '@mui/material/CssBaseline'
 
@@ -53,7 +50,6 @@ const theme = createTheme({
 })
 
 
-
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
 
@@ -77,7 +73,6 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
-
 
   const loadContractData = () => {
     const contractData =
@@ -125,9 +120,10 @@ const App = (props) => {
     const investments = document.getElementById('generation-investments-data')
     return investments ? JSON.parse(investments.textContent) : {}
   }, [])
+  const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={somtheme}>
       <ScopedCssBaseline>
         <Box sx={{ flexGrow: 1 }}>
           <Suspense fallback={<Loading />}>
@@ -413,19 +409,43 @@ const App = (props) => {
                 />
                 <Route
                   path="/participar/"
-                  element={<GenerationContribution {...props} limitAmount={true} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={true}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/:language/participar/"
-                  element={<GenerationContribution {...props} limitAmount={true} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={true}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/participar-no-limit/"
-                  element={<GenerationContribution {...props} limitAmount={false} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={false}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/:language/participar-no-limit/"
-                  element={<GenerationContribution {...props} limitAmount={false} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={false}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/generationkwh/contribution/"
