@@ -36,14 +36,12 @@ const Review = (props) => {
               pr: 2,
               color: 'secondary.dark'
             }}
-            variant="subtitle2">
+            variant="pagesubtitle">
             {label}
           </Typography>
         </Box>
         <Box className="field__value">
-          <Typography variant="body1">
-            {value}
-          </Typography>
+          <Typography variant="body1">{value}</Typography>
         </Box>
       </Box>
     )
@@ -115,15 +113,8 @@ const Review = (props) => {
             value={languages[values?.member?.language]}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Divider
-            variant="middle"
-            sx={{
-              mt: 1.5,
-              ml: 0,
-              mr: 2
-            }}
-          />
+        <Grid item xs={12} sm={12}>
+          <Divider variant="middle" sx={{ mt: 1.5, ml: 0, mr: 6 }} />
           <Typography
             sx={{
               textTransform: 'uppercase',
@@ -140,14 +131,7 @@ const Review = (props) => {
           {values?.payment?.payment_method === 'iban' && (
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
           )}
-          <Divider
-            variant="middle"
-            sx={{
-              mt: 1.5,
-              ml: 0,
-              mr: 2
-            }}
-          />
+          <Divider variant="middle" sx={{ mt: 1.5, ml: 0, mr: 6 }} />
         </Grid>
       </Grid>
 

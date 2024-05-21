@@ -76,7 +76,7 @@ const MemberIdentifier = (props) => {
         <Box id="box_member_identifier" mt={0} mb={2}>
           <Typography
             variant="h6"
-            sx={{ fontSize: '1rem', mt: '16px', fontWeight: 500, mb: 1 }}
+            sx={{ mt: 2, mb: 1 }}
             dangerouslySetInnerHTML={{
               __html: t('CONTRIBUTION_MEMBER_INDENTIFIER')
             }}
@@ -90,9 +90,7 @@ const MemberIdentifier = (props) => {
             <Typography
               variant="h6"
               sx={{
-                fontSize: '1rem',
-                mt: '16px',
-                fontWeight: 500,
+                mt: 2,
                 mb: 3
               }}
               dangerouslySetInnerHTML={{

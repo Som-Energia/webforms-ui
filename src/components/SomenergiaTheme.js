@@ -62,8 +62,8 @@ export default function SomEnergiaTheme() {
         lineHeight: 1
       },
       pagesubtitle: {
-        fontSize: 20,
-        fontWeight: 500,
+        fontSize: 15,
+        fontWeight: 400,
         lineHeight: 1
       }
     },

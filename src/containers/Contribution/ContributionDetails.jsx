@@ -66,7 +66,7 @@ const ContributionDetails = (props) => {
       <Box pt={1}>
         <Typography
           variant="h6"
-          sx={{ fontSize: '1rem', mt: 2, pb: 1 }}
+          sx={{ mt: 2, pb: 1 }}
           dangerouslySetInnerHTML={{
             __html: t('CONTRIBUTION_AMOUNT_TITLE', {
               name: values.member.full_name
@@ -81,7 +81,7 @@ const ContributionDetails = (props) => {
           variant="outlined"
           sx={{
             '& path': {
-              color: 'rgba(0, 0, 0, 0.54)'
+              color: 'secondary.dark'
             }
           }}
           fullWidth
@@ -108,7 +108,7 @@ const ContributionDetails = (props) => {
       <Box pt={1} mb={0}>
         <Typography
           variant="h6"
-          sx={{ fontSize: '1rem', mt: 2, pb: 1, mb: 2 }}
+          sx={{ mt: 2, pb: 1, mb: 2 }}
           dangerouslySetInnerHTML={{
             __html: t('CONTRIBUTION_IBAN_TITLE', {
               name: values.member.full_name
