@@ -7,7 +7,6 @@ import {
 import PopUpContext, { PopUpContextProvider } from './PopUpContext'
 import React, { useContext } from 'react'
 import { Button } from '@mui/material'
-import { act } from 'react-dom/test-utils'
 
 const ContextConsumer = () => {
   const { setContent } = useContext(PopUpContext)
@@ -21,16 +20,9 @@ const ContextConsumer = () => {
   )
 }
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../tests/__mocks__/i18n'));
 
 describe('PopUp Context', () => {
   const getById = queryByAttribute.bind(null, 'id')
@@ -43,7 +35,7 @@ describe('PopUp Context', () => {
     const buttonElement = getById(dom.container, 'set-content-btn')
     const contentElement = getById(dom.container, 'content-div')
     expect(contentElement).toBeNull()
-    act(() => {
+    React.act(() => {
       fireEvent.click(buttonElement)
     })
     const contentElementA = await screen.findByText('DIALOG CONTENT')

@@ -7,22 +7,13 @@ import {
   getByText
 } from '@testing-library/react'
 
-import { act } from 'react-dom/test-utils'
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 describe('Generation Form Contribution', () => {
-  const mockSetFieldValue = jest.fn()
+  const mockSetFieldValue = vi.fn()
   const valueStructure = {
     member: {
       is_member: true,
@@ -184,7 +175,7 @@ describe('Generation Form Contribution', () => {
     )
     const IBAN = 'ES18 9999 0000 9999 0000 9999'
     const ibanTextField = getById(dom.container, 'iban')
-    act(() => {
+    React.act(() => {
       fireEvent.change(ibanTextField, { target: { value: IBAN } })
     })
     expect(mockSetFieldValue).toHaveBeenCalledWith('payment.iban', IBAN, false)

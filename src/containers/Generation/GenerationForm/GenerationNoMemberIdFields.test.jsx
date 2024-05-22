@@ -8,17 +8,9 @@ import {
 import { act } from 'react-dom/test-utils'
 
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 describe('Generation Form Review', () => {
   
@@ -41,25 +33,25 @@ describe('Generation Form Review', () => {
   const VAT = '40323835M'
   const POSTAL_CODE = '25290'
   const getById = queryByAttribute.bind(null, 'id')
-  const mockSetFieldValue = jest.fn()
-  const mocksetFieldTouched = jest.fn()
+  const mockSetFieldValue = vi.fn()
+  const mocksetFieldTouched = vi.fn()
 
   test('Should call setFieldValue when change postal code', async () => {
     
 
     const dom = render(
       <GenerationNoMemberIdFields
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         values={mockValuesPostalCode}
         setFieldValue={mockSetFieldValue}
         setFieldTouched={mocksetFieldTouched}
-        setErrors={jest.fn()}
+        setErrors={vi.fn()}
         isTesting={true}
       />
     )
 
     const postalCodeTextField = getById(dom.container, 'input_postalcode')
-    act(() => {
+    React.act(() => {
       fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
     })
 
@@ -72,17 +64,17 @@ describe('Generation Form Review', () => {
   test('Should call setFieldValue when change vat', async () => {
     const dom = render(
       <GenerationNoMemberIdFields
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         values={mockValuesEnabeldAndCheckedZone}
         setFieldValue={mockSetFieldValue}
         setFieldTouched={mocksetFieldTouched}
-        setErrors={jest.fn()}
+        setErrors={vi.fn()}
         isTesting={true}
       />
     )
 
     const vatTextField = getById(dom.container, 'vat')
-    act(() => {
+    React.act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
     

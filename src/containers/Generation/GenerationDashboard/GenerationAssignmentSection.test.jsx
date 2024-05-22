@@ -3,35 +3,25 @@ import GenerationAssignmentSection from './GenerationAssignmentSection'
 import { render, screen, queryByAttribute, fireEvent } from '@testing-library/react'
 import GenerationContext  from '../context/GenerationContext'
 import PopUpContext, {PopUpContextProvider}  from '../../../context/PopUpContext'
-import { act } from 'react-dom/test-utils'
-import SimpleDialog from 'components/SimpleDialog'
+import SimpleDialog from '../../../components/SimpleDialog'
 
-jest.mock('react-i18next', () => ({
-    // this mock makes sure any components using the translate hook can use it without a warning being shown
-    useTranslation: () => {
-      return {
-        t: (str) => str,
-        i18n: {
-          changeLanguage: () => new Promise(() => {}),
-        },
-      };
-    }
-  }));
+import { vi } from 'vitest';
 
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 describe('Generation Assignment Section', () => {
     const getById = queryByAttribute.bind(null, 'id')
     const assignments = JSON.parse('[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contractAddress": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contractLastInvoiced": "2023-01-08","annualUseKwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contractAddress": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 1,"contractLastInvoiced": "2023-01-04","annualUseKwh": "115.0"}]')
-    const changeAssigmentPriority = jest.fn()
-    const setEditingPriority = jest.fn()
+    const changeAssigmentPriority = vi.fn()
+    const setEditingPriority = vi.fn()
     const getPriority = () => ({value:"mocKPriority"})
     const editingPriority = true
-    const setContent = jest.fn()
+    const setContent = vi.fn()
     const setContentSimpleDialog = () => <SimpleDialog
     title={'TITLE'}
     text={'TEXT'}
-    acceptFunction={() => jest.fn()}
-    cancelFunction={() => jest.fn()} />
+    acceptFunction={() => vi.fn()}
+    cancelFunction={() => vi.fn()} />
 
     const contextValue = {
       assignments,
@@ -68,7 +58,7 @@ describe('Generation Assignment Section', () => {
         </PopUpContext.Provider >)
 
         const deleteButtonOfTheFirstContract = getById(dom.container,`delete-button-${assignments[0].id}`)
-        act(() => {
+        React.act(() => {
           fireEvent.click(deleteButtonOfTheFirstContract)
         })
         expect(setContent).toBeCalled()
@@ -83,11 +73,11 @@ describe('Generation Assignment Section', () => {
         </PopUpContextProvider >)
 
         const deleteButtonOfTheFirstContract = getById(dom.container,`delete-button-${assignments[0].id}`)
-        act(() => {
+        React.act(() => {
           fireEvent.click(deleteButtonOfTheFirstContract)
         })
         const acceptButtonSimpleDialog = await screen.findByTestId('simple-dialog-button-accept')
-        act(() => {
+        React.act(() => {
           fireEvent.click(acceptButtonSimpleDialog)
         })
         const loadingComponent = await screen.findByTestId('loading-component')
@@ -103,11 +93,11 @@ describe('Generation Assignment Section', () => {
         </PopUpContextProvider >)
 
         const deleteButtonOfTheFirstContract = getById(dom.container,`delete-button-${assignments[0].id}`)
-        act(() => {
+        React.act(() => {
           fireEvent.click(deleteButtonOfTheFirstContract)
         })
         const cancelButtonSimpleDialog = await screen.findByTestId('simple-dialog-button-cancel')
-        act(() => {
+        React.act(() => {
           fireEvent.click(cancelButtonSimpleDialog)
         })
         const SimpleDialogComponent = await screen.queryByTestId('simple-dialog')

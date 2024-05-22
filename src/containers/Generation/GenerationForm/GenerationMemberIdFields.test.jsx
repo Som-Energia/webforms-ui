@@ -6,21 +6,12 @@ import {
   fireEvent,
   getByText
 } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import axios from 'axios'
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 
 describe('Generation Form Review', () => {
@@ -33,7 +24,7 @@ describe('Generation Form Review', () => {
   }
 
   const VAT = '21329935F'
-  const mockSetFieldValue = jest.fn()
+  const mockSetFieldValue = vi.fn()
   const getById = queryByAttribute.bind(null, 'id')
 
   test('Should call setFieldValue when change vat', async () => {
@@ -47,7 +38,7 @@ describe('Generation Form Review', () => {
               <GenerationMemberIdFields
                 setFieldValue={mockSetFieldValue}
                 values={mockValues}
-                setErrors={jest.fn()}
+                setErrors={vi.fn()}
                 isTesting={true}
               />
             }
@@ -57,7 +48,7 @@ describe('Generation Form Review', () => {
     )
 
     const vatTextField = getById(dom.container, 'vat')
-    act(() => {
+    React.act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.vat', VAT)

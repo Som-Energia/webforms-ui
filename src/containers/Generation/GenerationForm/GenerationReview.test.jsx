@@ -3,21 +3,13 @@ import GenerationReview from './GenerationReview'
 import { render, queryByAttribute, fireEvent, getByText } from '@testing-library/react'
 
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  }
-}));
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 describe('Generation Form Review', () => {
 
-    const mockSetFieldValue = jest.fn()
+    const mockSetFieldValue = vi.fn()
     const getById = queryByAttribute.bind(null, 'id')  
 
     const mockValuesIsMember = {

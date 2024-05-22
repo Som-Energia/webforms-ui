@@ -1,13 +1,9 @@
 import IndexedContractDetails from './IndexedContractDetails'
 import { render, screen } from '@testing-library/react'
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str) => str
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
 describe('Test the correctly render', () => {
   const mockData = {
