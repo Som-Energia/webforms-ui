@@ -9,11 +9,9 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/x-date-pickers": "^6.19.7",
-    "@somenergia/somenergia-ui": "^0.4.4",
-    "@testing-library/react": "^15.0.7",
+    "@somenergia/somenergia-ui": "^0.4.5",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.2.1",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
@@ -42,10 +40,12 @@
     "build:staging": "env-cmd -f .env.staging --use-shell \"npm run build\"",
     "build:wp": "env-cmd -f .env.wp --use-shell \"npm run build\"",
     "build:vercel": "env-cmd -f .env.vercel --use-shell \"npm run build\"",
-    "test": "react-scripts test",
+    "test": " vitest",
+    "test:coverage": " vitest run --coverage",
     "cypress": "TZ=Europe/Madrid cypress open",
     "i18n-extract": "./node_modules/.bin/i18next src/**/*.js -o src/i18n/locale-xx.json -s",
-    "i18n-lint": "./scripts/lint-i18n.sh"
+    "i18n-lint": "./scripts/lint-i18n.sh",
+    "preview": "vite preview"
   },
   "prettier": "prettier-config-standard",
   "eslintConfig": {
@@ -66,14 +66,32 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.1",
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.1",
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.12",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.6.0",
+    "babel-plugin-transform-import-meta": "^2.2.1",
     "cypress": "^13.9.0",
     "cypress-file-upload": "^5.0.8",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "jsdom": "^24.0.0",
     "prettier-config-standard": "^5.0.0",
-    "standard": "^16.0.4"
+    "standard": "^16.0.4",
+    "vite-plugin-environment": "^1.1.3",
+    "vitest": "^1.6.0"
   }
 }
