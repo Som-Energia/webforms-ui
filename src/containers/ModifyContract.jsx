@@ -27,7 +27,7 @@ import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
 
 import DisplayFormikState from '../components/DisplayFormikState'
-import AlertBox from 'components/AlertBox'
+import AlertBox from '../components/AlertBox'
 
 const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
@@ -170,16 +170,16 @@ function ModifyContract(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ width: '100%', backgroundColor: '#f2f2f2' }}>
+      <Box sx={{ width: '100%', backgroundColor: 'secondary.light' }}>
         {fromD1 && (
           <Stepper
-            sx={{ backgroundColor: '#f2f2f2', pl: 1, pr: 1, pb: 1 }}
+            sx={{ backgroundColor: 'secondary.light', pl: 1, pr: 1, pb: 1 }}
             activeStep={activeD1Step}
             orientation="vertical">
             {d1Steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>
-                  <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
+                  <Typography variant="pagetitle">
                     {t(label)}
                   </Typography>
                 </StepLabel>
@@ -196,14 +196,14 @@ function ModifyContract(props) {
           </Stepper>
         )}
         <Stepper
-          sx={{ backgroundColor: '#f2f2f2', pl: 1, pr: 1, pb: 1 }}
+          sx={{ backgroundColor: 'secondary.light', pl: 1, pr: 1, pb: 1 }}
           activeStep={activeStep}
           orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel
                 error={index === steps.length - 1 && data?.error !== undefined}>
-                <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
+                <Typography variant="pagetitle">
                   {t(label)}
                 </Typography>
               </StepLabel>

@@ -34,7 +34,7 @@ import Failure from './Indexed/IndexedFailure'
 import Success from './Success'
 import DisplayFormikState from '../components/DisplayFormikState'
 import DropDownMenu from '../components/DropDownMenu'
-import Loading from 'components/Loading'
+import Loading from '../components/Loading'
 
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
@@ -249,8 +249,7 @@ const Indexada = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          sx={{ fontSize: '14px', fontWeight: 400 }}
-          variant="body1"
+          variant="pagesubtitle"
           dangerouslySetInnerHTML={{
             __html: t('TARIFF_CHANGE_NOT_AVAILABLE')
           }}
@@ -348,7 +347,7 @@ const Indexada = (props) => {
                       id="cancelForm"
                       method="POST"
                       sx={{
-                        backgroundColor: '#f2f2f2',
+                        backgroundColor: 'secondary.light',
                         color: 'primary',
                         display: 'flex',
                         pd: '2rem'
@@ -462,7 +461,7 @@ const Indexada = (props) => {
                               width: '100%',
                               display: 'flex',
                               flexDirection: 'column',
-                              backgroundColor: 'backgroundColor'
+                              backgroundColor: 'background.default'
                             }}>
                             {result ? (
                               <Success

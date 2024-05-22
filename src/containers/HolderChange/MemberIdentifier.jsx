@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import StepHeader from 'components/StepHeader'
-import MemberIdentifierFields from 'components/MemberIdentifierFields'
+import StepHeader from '../../components/StepHeader'
+import MemberIdentifierFields from '../../components/MemberIdentifierFields'
 
 function MemberIdentifier(props) {
   const { t } = useTranslation()

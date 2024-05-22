@@ -18,7 +18,7 @@ import CnaeField from '../../components/CnaeField'
 
 import { CNAE_HOUSING } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
-import CadastralReferenceField from 'components/CadastralReferenceField'
+import CadastralReferenceField from '../../components/CadastralReferenceField'
 
 
 const CadastralReferenceHelperText = () => {

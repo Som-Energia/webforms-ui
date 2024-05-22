@@ -31,7 +31,8 @@ export default function SomEnergiaTheme() {
       primary: {
         //main: '#96D600', //'hsl(78, 100%, 42%)', // from style guide
         main: '#96b633', // from webforms-ui
-        contrastText: 'white'
+        contrastText: 'white',
+        extraLight: "rgba(150, 182, 51, 0.08)"
       },
       secondary: {
         //main: '#E0E723', //'hsl(62, 80%, 52%)', // from style guide
@@ -39,6 +40,7 @@ export default function SomEnergiaTheme() {
         // main: '#e6cc00', // Original design
         //main: '#e2e2e2' // From mentxu design 2023-10-26
         dark: 'rgba(0, 0, 0, 0.54)',
+        extraDark:'#6f6262',
         light: '#f2f2f2'
       },
       dark: {
@@ -53,12 +55,15 @@ export default function SomEnergiaTheme() {
       },
       pagetitle: {
         main: '#4d4d4d'
+      },
+      failure:{
+        primary: '#fe6444'
       }
     },
     typography: {
       pagetitle: {
         fontSize: 20,
-        fontWeight: 400, // from style guide
+        fontWeight: 500, // from style guide
         lineHeight: 1
       },
       pagesubtitle: {

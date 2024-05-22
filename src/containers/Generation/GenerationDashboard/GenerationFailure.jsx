@@ -24,9 +24,9 @@ const customStyles ={
     fontSize: '1rem',
     lineHeight: '1.75',
     textAlign: 'center',
-    color: '#6f6262',
+    color: 'secondary.extraDark',
     '& a': {
-      color: '#fe6444 !important'
+      color: 'failure.primary !important'
     }
   },
   logo: {
@@ -40,9 +40,10 @@ const customStyles ={
   error: {
     width: 6,
     height: 6,
-    color: '#fe6444',
+    color: 'failure.primary',
     backgroundColor: 'transparent',
-    border: '2px solid #fe6444',
+    border: '2px solid',
+    borderColor: 'failure.primary',
     mb: 3
   }
 }

@@ -42,7 +42,8 @@ const Success = (props) => {
           height: 6,
           color: 'primary.main',
           backgroundColor: 'transparent',
-          border: `2px solid primary.main`,
+          border: '2px solid',
+          borderColor: 'primary.main',
           mb: 3
         }}>
           <DoneIcon fontSize="large" />
@@ -68,7 +69,7 @@ const Success = (props) => {
             fontSize: '1rem',
             lineHeight: '1.75',
             textAlign: 'center',
-            color: '#6f6262'
+            color: 'secondary.extraDark'
           }}
           variant="body1"
           dangerouslySetInnerHTML={{

@@ -36,7 +36,7 @@ if (root) {
    
     ReactDOM.createRoot(document.querySelectorAll("[id='root']")[index]).render(
       <React.StrictMode>
-        <App />
+        <App {...props} />
       </React.StrictMode>,
     )
   })

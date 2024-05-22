@@ -12,12 +12,10 @@ const CancellationWarning = () => {
     <Box mt={0.75} mb={1.5}>
       <Alert severity="warning">
         <Typography
-          sx={{
-            fontSize: '120%',
-            fontWeight: 400,
+           sx={{
             fontVariant: 'small-caps',
-          }}
-          variant="body1"
+           }}
+          variant="pagesubtitle"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_DISCLAIMER')
           }}

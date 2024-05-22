@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 //import { Test as ComponentTest } from './components/TextLoader'
 import { Example as ComponentTest } from './components/ApiValidatedField.example'
-import SomEnergiaTheme from 'components/SomenergiaTheme'
+import SomEnergiaTheme from './components/SomenergiaTheme'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import ScopedCssBaseline from '@mui/material/CssBaseline'
@@ -12,8 +12,8 @@ import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
 import './App.css'
-import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
-import { PopUpContextProvider } from 'context/PopUpContext'
+import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
+import { PopUpContextProvider } from './context/PopUpContext'
 import Box from '@mui/material/Box'
 
 const theme = createTheme({
@@ -74,6 +74,7 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
 
+  console.log("CONTRACT_PROPS", props)
   const loadContractData = () => {
     const contractData =
       typeof props.contract === 'string' && props.contract !== ''

@@ -7,7 +7,6 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import Typography from '@mui/material/Typography'
 
-
 const Chooser = (props) => {
   const {
     question,
@@ -21,6 +20,7 @@ const Chooser = (props) => {
     alignTop = false
   } = props
   const [selectedOption, setSelectedOption] = useState(value)
+
 
   const customStyles = {
     chooserItemAlignTop: {
@@ -71,6 +71,7 @@ const Chooser = (props) => {
         backgroundColor: 'inherit'
       }
     }
+
   }
 
 
@@ -88,6 +89,9 @@ const Chooser = (props) => {
       onChange({ option: undefined })
     }
   }
+
+
+  //console.log(getStyles(selectedOption === option.value))
 
   return (
     <>

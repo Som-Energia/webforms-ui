@@ -12,8 +12,8 @@ import AddIcon from '@mui/icons-material/Add';
 import ContractList from '../../../components/ClickableList';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
-import Loading from 'components/Loading'
-import CustomDialog from 'components/CustomDialog'
+import Loading from '../../../components/Loading'
+import CustomDialog from '../../../components/CustomDialog'
 
 
 function GenerationDashboard({

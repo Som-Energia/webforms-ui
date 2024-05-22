@@ -20,13 +20,13 @@ const ReviewField = ({ label, value }) => {
             paddingRight: '12px',
             fontSize: '13px',
             fontWeight: 400,
-            color: 'rgba(0, 0, 0, 0.54)'
+            color: 'secondary.dark'
           }} variant="subtitle2">
             <>{label}</>
           </Typography>
         </Box>
       )}
-      <Box className={clsx('field__value')}>
+      <Box className='field__value'>
         <Typography
           id={label + '__value'}
           sx={{ fontSize: '13px' }}

@@ -42,7 +42,7 @@ function Failure(props) {
         flexDirection: 'column',
         alignItems: 'center'}} >
         <Avatar 
-          sx={{ width: 6, height: 6, color: '#fe6444', backgroundColor: 'transparent', border: '2px solid #fe6444', mb: 3}}>
+          sx={{ width: 6, height: 6, color: 'failure.primary', backgroundColor: 'transparent', border: '2px solid', borderColor: 'secondary.extraDark', mb: 3}}>
           <CloseIcon fontSize="large" />
         </Avatar>
         <Typography sx={{ textAlign: 'center', fontSize: '1.15rem'}} variant="h6">
@@ -54,9 +54,9 @@ function Failure(props) {
             fontSize: '1rem',
             lineHeight: '1.75',
             textAlign: 'center',
-            color: '#6f6262',
+            color: 'secondary.extraDark',
             '& a': {
-              color: '#fe6444 !important'
+              color: 'failure.primary !important'
             }}}
           variant="body1"
           dangerouslySetInnerHTML={{

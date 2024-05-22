@@ -8,7 +8,7 @@ const Card = ({ variant = 'h1', children, className, sx }) => {
     ...sx,
     width: '100%',
     background: '#fff',
-    color: '#4d4d4d',
+    color: 'pagetitle.main',
     fontSize: '14px',
     padding: '1.25rem 1.25rem',
     margin: '0 0 .5em 0',

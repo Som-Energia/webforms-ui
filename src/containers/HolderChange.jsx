@@ -30,9 +30,9 @@ import MemberIdentifier from './HolderChange/MemberIdentifier'
 import Success from './Success'
 import Failure from './Failure'
 
-import data from 'data/HolderChange/data.json'
+import data from '../data/HolderChange/data.json'
 
-import DisplayFormikState from 'components/DisplayFormikState'
+import DisplayFormikState from '../components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
@@ -42,7 +42,6 @@ function HolderChange(props) {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
-  // const [showAll, setShowAll] = useState(false)
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
@@ -408,7 +407,7 @@ function HolderChange(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ backgroundColor: 'secondary.light', color: 'primary' }}>
+      <Box sx={{ backgroundColor: 'secondary.light', color: 'primary.main' }}>
         <Container maxWidth="md">
           <Formik
             enableReinitialize

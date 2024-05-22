@@ -15,7 +15,6 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
 import { LocalizationProvider } from '@mui/x-date-pickers'
-
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import dayjs from 'dayjs'
@@ -161,8 +160,7 @@ const Cancellation = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          sx={{ fontSize: '14px', fontWeight: 400 }}
-          variant="body1"
+          variant="pagesubtitle"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_NO_AVAILABLE')
           }}
@@ -186,7 +184,7 @@ const Cancellation = (props) => {
                 id="cancelForm"
                 method="POST"
                 sx={{
-                  backgroundColor: '#f2f2f2',
+                  backgroundColor: 'secondary.light',
                   color: 'primary',
                   display: 'flex',
                   pb: '2rem'
@@ -263,7 +261,7 @@ const Cancellation = (props) => {
                         width: '100%',
                         display: 'flex',
                         flexDirection: 'column',
-                        backgroundColor: 'backgroundColor'
+                        backgroundColor: 'background.default'
                       }}>
                       {result ? (
                         <Success

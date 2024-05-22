@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-import i18n from 'i18n/i18n'
+import i18n from '../i18n/i18n'
 
 
 let language = navigator.language

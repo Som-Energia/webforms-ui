@@ -1,6 +1,6 @@
 import { useState, createContext, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import OrdinalNumbers from 'utils/ordinalNumbers'
+import OrdinalNumbers from '../../../utils/ordinalNumbers'
 import { useParams } from 'react-router-dom'
 import { getAssignmentContracts, getNoAssignmentContracts } from '../../../services/api'
 

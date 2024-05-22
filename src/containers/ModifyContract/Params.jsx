@@ -308,7 +308,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     }
                   }}
                   label={
-                    <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>
+                    <Typography variant="pagetitle">
                       {t('MODIFY_ANSWER_POWER')}
                     </Typography>
                   }
@@ -449,7 +449,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     }
                   }}
                   label={
-                    <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>
+                    <Typography variant="pagetitle">
                       {t('MODIFY_ANSWER_INSTAL_TYPE')}
                     </Typography>
                   }

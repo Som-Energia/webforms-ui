@@ -13,7 +13,7 @@ import RemoveIcon from '@mui/icons-material/IndeterminateCheckBox'
 import EuroIcon from '@mui/icons-material/Euro'
 
 import IBANField from '../../../components/IBANField'
-import AlertBox from 'components/AlertBox'
+import AlertBox from '../../../components/AlertBox'
 
 import { contributionParams } from '../../../services/utils'
 

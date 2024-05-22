@@ -8,8 +8,8 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import Typography from '@mui/material/Typography'
 
-import StepHeader from 'components/StepHeader'
-import Uploader from 'components/Uploader'
+import StepHeader from '../../components/StepHeader'
+import Uploader from '../../components/Uploader'
 
 const SpecialCases = (props) => {
   const { t } = useTranslation()
@@ -33,12 +33,14 @@ const SpecialCases = (props) => {
         height: '100%'
       },
       chooserItemSelected: {
-        border: '2px solid #96b633',
-        backgroundColor: 'rgba(150, 182, 51, 0.08)',
+        border: '2px solid',
+        borderColor: 'primary.main',
+        backgroundColor: 'primary.extraLight',
         margin: '0 0 8px 0',
         '&:not(.Mui-disabled):hover': {
-          border: '2px solid #96b633',
-          backgroundColor: 'rgba(150, 182, 51, 0.08)'
+          border: '2px solid',
+          borderColor: 'primary.main',
+          backgroundColor: 'primary.extraLight'
         },
         '& span:last-child': {
           fontWeight: 'bold',

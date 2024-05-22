@@ -11,9 +11,9 @@ import TextField from '@mui/material/TextField'
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
-import StepHeader from 'components/StepHeader'
-import TermsDialog from 'components/TermsDialog'
-import { checkIban } from 'services/api'
+import StepHeader from '../../components/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
+import { checkIban } from '../../services/api'
 
 // TODO: Use IBANField
 function IBAN(props) {
@@ -79,7 +79,7 @@ function IBAN(props) {
             id="iban"
             sx={{
               '& path': {
-                color: 'rgba(0, 0, 0, 0.54)'
+                color: 'secondary.dark'
               }
             }}
             label={t('IBAN_LABEL')}

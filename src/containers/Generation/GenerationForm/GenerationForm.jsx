@@ -21,9 +21,9 @@ import {
   normalizeMember
 } from '../../../services/utils'
 import { generationkWhContribution, member } from '../../../services/api'
-import PrevButton from 'components/Buttons/PrevButton'
-import NextButton from 'components/Buttons/NextButton'
-import ExitButton from 'components/Buttons/ExitButton'
+import PrevButton from '../../../components/Buttons/PrevButton'
+import NextButton from '../../../components/Buttons/NextButton'
+import ExitButton from '../../../components/Buttons/ExitButton'
 import PersonalData from '../../HolderChange/PersonalData'
 import GenerationSignaturit from './GenerationSignaturit'
 
@@ -384,7 +384,7 @@ const GenerationContribution = (props) => {
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: 'backgroundColor'
+                backgroundColor: 'background.default'
               }}>
               {activeStep === 0 && (
                 <GenerationMemberIdentifier

@@ -21,7 +21,8 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { uploadFile } from '../services/api'
 
 const Uploader = (props) => {
-  const { name, callbackFn, fieldError, values, maxFiles } = props
+
+  const { name='uploads', callbackFn, fieldError, values=[], maxFiles = 1 } = props
   const { t } = useTranslation()
 
   const [uploads, setUploads] = useState([...values])
@@ -155,10 +156,5 @@ Uploader.propTypes = {
   maxFiles: PropTypes.number
 }
 
-Uploader.defaultProps = {
-  name: 'uploads',
-  values: [],
-  maxFiles: 1
-}
 
 export default React.memo(Uploader)

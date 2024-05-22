@@ -846,7 +846,7 @@ const Contract = (props) => {
                         width: '100%',
                         display: 'flex',
                         flexDirection: 'column',
-                        backgroundColor: 'backgroundColor'
+                        backgroundColor: 'background.default'
                       }}>
                       {showProgress && (
                         <LinearProgress
