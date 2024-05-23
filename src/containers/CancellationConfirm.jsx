@@ -104,7 +104,7 @@ const CancellationConfirm = (props) => {
                 <Header>{t('CANCELLATION_CONFIRM_TITLE')}</Header>
                 <Card>
                   <Box
-                    sx={{ width: '100%', 'a':{textDecoration:'none'} }}
+                    sx={{ width: '100%' }}
                     dangerouslySetInnerHTML={{
                       __html: t('CANCELLATION_CONFIRM_BODY', {
                         url_new: t('FAQ_ALTA_SUMINISTRAMENT_URL'),

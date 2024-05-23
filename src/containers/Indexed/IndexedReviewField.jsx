@@ -19,7 +19,7 @@ const ReviewField = ({ label, value }) => {
             textTransform: 'uppercase',
             paddingRight: '12px',
             fontSize: '13px',
-            fontWeight: 400,
+            fontWeight: 600,
             color: 'secondary.dark'
           }} variant="subtitle2">
             <>{label}</>

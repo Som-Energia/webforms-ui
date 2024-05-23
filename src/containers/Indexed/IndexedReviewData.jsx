@@ -28,7 +28,8 @@ const customStyles ={
     fontWeight: 500,
     textTransform: 'uppercase',
     mt: 3,
-    mb: 1.2
+    mb: 1.2,
+    color:'secondary.dark'
   },
   divider: {
     mt: '12px',

@@ -23,8 +23,6 @@ import 'dayjs/locale/es'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import ContractDetails from './Cancellation/ContractDetails'
@@ -35,8 +33,9 @@ import CancellationDetails from './Cancellation/CancellationDetails'
 import Failure from './Failure'
 import Success from './Success'
 
-import { cancelContract } from 'services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+import { cancelContract } from '../services/api'
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
 
 const MAX_STEP_NUMBER = 2
 
@@ -218,15 +217,11 @@ const Cancellation = (props) => {
                             />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
-                            <Button
-                              data-cy="next"
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
+                            <NextButton
                               disabled={!formikProps.isValid}
-                              onClick={() => nextStep(formikProps)}>
-                              {t('SEGUENT_PAS')}
-                            </Button>
+                              onClick={() => nextStep(formikProps)}
+                              title={t('SEGUENT_PAS')}
+                            />
                           ) : (
                             !completed && (
                               <Button

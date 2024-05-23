@@ -72,6 +72,15 @@ export default function SomEnergiaTheme() {
         lineHeight: 1
       }
     },
+    components:{
+      MuiCssBaseline: {
+        styleOverrides: {
+          a:{
+            textDecoration: 'none'
+          }
+        }
+      }
+    },
     shape: {
       borderRadius: '0'
     },

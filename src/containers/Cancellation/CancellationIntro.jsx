@@ -10,10 +10,7 @@ const CancellationIntro = () => {
   return (
     <Box sx={{
       position: 'relative',
-      color: 'text.primary',
-      'a': {
-        textDecoration: 'none'
-      }
+      color: 'text.primary'
     }}>
       <Header>{t('CANCELLATION_INTRO_TITLE')}</Header>
       <Card>

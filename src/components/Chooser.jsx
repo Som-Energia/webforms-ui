@@ -7,6 +7,7 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import Typography from '@mui/material/Typography'
 
+
 const Chooser = (props) => {
   const {
     question,
@@ -21,13 +22,12 @@ const Chooser = (props) => {
   } = props
   const [selectedOption, setSelectedOption] = useState(value)
 
-
   const customStyles = {
     chooserItemAlignTop: {
-      justifyContent:'flex-start'
+      justifyContent: 'flex-start'
     },
-    chooserItemAlignCenter:{
-      justifyContent:'center'
+    chooserItemAlignCenter: {
+      justifyContent: 'center'
     },
     chooserItem: {
       cursor: 'pointer',
@@ -45,6 +45,7 @@ const Chooser = (props) => {
       },
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'center',
       alignItems: 'flex-start'
     },
     chooserItemCondensed: {
@@ -60,7 +61,12 @@ const Chooser = (props) => {
       '&:hover': {
         border: '1px solid',
         borderColor: 'primary.main',
-        backgroundColor: 'primary.extraLight'
+        backgroundColor: 'primary.extraLight',
+        '&:hover': {
+          border: '1px solid',
+          borderColor: 'primary.main',
+          backgroundColor: 'primary.extraLight'
+        }
       }
     },
     chooserItemDisabled: {
@@ -71,7 +77,6 @@ const Chooser = (props) => {
         backgroundColor: 'inherit'
       }
     }
-
   }
 
 
@@ -89,9 +94,6 @@ const Chooser = (props) => {
       onChange({ option: undefined })
     }
   }
-
-
-  //console.log(getStyles(selectedOption === option.value))
 
   return (
     <>

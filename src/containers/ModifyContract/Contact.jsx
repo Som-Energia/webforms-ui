@@ -11,9 +11,8 @@ import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-import PrevButton from 'components/Buttons/PrevButton'
+import PrevButton from '../../components/Buttons/PrevButton'
+import NextButton from '../../components/Buttons/NextButton'
 
 export default function Contact({
   nextStep,
@@ -118,24 +117,19 @@ export default function Contact({
               {prevStep && (
                 <PrevButton
                   onClick={prevStep}
-                  sx={{ mt: 1, mr: 1 }}
                   title={t('PAS_ANTERIOR')}
                 />
               )}
               {nextStep && (
-                <Button
-                  type="submit"
-                  sx={{ mt: 1, mr: 1 }}
-                  color="primary"
-                  variant="contained"
-                  endIcon={<ArrowForwardIosIcon />}>
-                  {t('SEGUENT_PAS')}
-                </Button>
+                <NextButton
+                  onClick={nextStep}
+                  title={t('SEGUENT_PAS')}
+                />
               )}
             </Box>
           </form>
         )}
       </Formik>
-    </Paper>
+    </Paper >
   )
 }

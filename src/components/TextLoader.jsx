@@ -3,17 +3,18 @@ import React from 'react'
 import Loading from './Loading'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import { Typography } from '@mui/material'
 
 const TextLoader = props => {
   const { i18n } = useTranslation()
   const {
     documentName,
-    language =`${i18n.language}_ES`,
+    language = `${i18n.language}_ES`,
   } = props
-  const [ text, setText ] = React.useState()
+  const [text, setText] = React.useState()
 
-  React.useEffect(()=>{
-    const url = `${import.meta.env.PUBLIC_URL}/static/docs/${language.slice(0,2)}/${documentName}.html`
+  React.useEffect(() => {
+    const url = `/static/docs/${language.slice(0, 2)}/${documentName}.html`
     setText(undefined)
     axios({
       method: 'GET',
@@ -27,13 +28,13 @@ const TextLoader = props => {
   }, [documentName, language])
 
   return text === undefined
-    ? <Loading/>
-    : <span dangerouslySetInnerHTML={{ __html: text }} />
+    ? <Loading />
+    : <Typography variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }} dangerouslySetInnerHTML={{ __html: text }} />
 }
 
 export const Test = () => {
   const { i18n } = useTranslation()
-  const {language} = useParams()
+  const { language } = useParams()
 
   React.useEffect(() => {
     i18n.changeLanguage(language)

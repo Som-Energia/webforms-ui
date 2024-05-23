@@ -5,7 +5,7 @@ import { Example as ComponentTest } from './components/ApiValidatedField.example
 import SomEnergiaTheme from './components/SomenergiaTheme'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-import ScopedCssBaseline from '@mui/material/CssBaseline'
+import CssBaseline from '@mui/material/CssBaseline'
 
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
@@ -125,7 +125,7 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={somtheme}>
-      <ScopedCssBaseline>
+      <CssBaseline />
         <Box sx={{ flexGrow: 1 }}>
           <Suspense fallback={<Loading />}>
             <Router>
@@ -457,7 +457,6 @@ const App = (props) => {
           </Suspense>
           <ApiStatus />
         </Box>
-      </ScopedCssBaseline>
     </ThemeProvider>
   )
 }

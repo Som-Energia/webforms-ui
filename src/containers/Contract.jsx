@@ -17,8 +17,7 @@ import Paper from '@mui/material/Paper'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+
 import SendIcon from '@mui/icons-material/Send'
 
 import MemberIdentifier from './Contract/MemberIdentifier'
@@ -43,7 +42,10 @@ import {
   normalizeContract,
   testPowerForPeriods
 } from '../services/utils'
-import PrevButton from 'components/Buttons/PrevButton'
+
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
+
 const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
@@ -880,16 +882,11 @@ const Contract = (props) => {
                             />
                           )}
                           {activeStep < maxStepNumber - 1 ? (
-                            <Button
-                              type="button"
-                              data-cy="next"
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
+                            <NextButton
                               disabled={!props.isValid}
-                              onClick={() => nextStep(props)}>
-                              {t('SEGUENT_PAS')}
-                            </Button>
+                              onClick={() => nextStep(props)}
+                              title={t('SEGUENT_PAS')}
+                            />                        
                           ) : (
                             !completed && (
                               <Button

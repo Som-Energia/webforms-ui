@@ -22,8 +22,6 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import IndexedContractDetails from './Indexed/IndexedContractDetails'
@@ -35,6 +33,8 @@ import Success from './Success'
 import DisplayFormikState from '../components/DisplayFormikState'
 import DropDownMenu from '../components/DropDownMenu'
 import Loading from '../components/Loading'
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
 
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
@@ -64,7 +64,7 @@ const Indexada = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState(false)
-  const [targetTariff, setTargetTariff] = useState(false)
+  const [targetTariff, setTargetTariff] = useState("2.0")
   const [loadingTariff, setLoadingTariff] = useState(checkEnabled)
   const [isTariff20] = useState(checkIsTariff20(contractJSON.tariff))
   const [isTariff30] = useState(checkIsTariff30(contractJSON.tariff))
@@ -205,6 +205,7 @@ const Indexada = (props) => {
   const checkCanModifyTariff = async () => {
     try {
       setLoadingTariff(true)
+      console.log("CRIDO AQUI!!!")
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
       let comercialName = getCommercialName(result?.data?.target_tariff)
@@ -245,6 +246,7 @@ const Indexada = (props) => {
     })
   ]
 
+  console.log("CONTRACT JSON", contractJSON)
   if (!contractJSON.name || !contractJSON.cups) {
     return (
       <Alert severity="error">
@@ -333,7 +335,6 @@ const Indexada = (props) => {
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
-          <Grid container justifyContent="space-between">
             <Grid item xs={8}>
               <Formik
                 onSubmit={() => { }}
@@ -412,18 +413,13 @@ const Indexada = (props) => {
                                   />
                                 )}
                                 {activeStep < MAX_STEP_NUMBER - 1 ? (
-                                  <Button
-                                    data-cy="next"
-                                    id="change-tariff-next-step-button"
-                                    variant="contained"
-                                    color="primary"
-                                    endIcon={<ArrowForwardIosIcon />}
+                                  <NextButton
                                     disabled={
                                       !formikProps.isValid || !targetTariff
                                     }
-                                    onClick={() => nextStep(formikProps)}>
-                                    {t('SEGUENT_PAS')}
-                                  </Button>
+                                    onClick={() => nextStep(formikProps)}
+                                    title={t('SEGUENT_PAS')}
+                                  />
                                 ) : (
                                   !completed && (
                                     <Button
@@ -496,9 +492,8 @@ const Indexada = (props) => {
                 sections={sectionsJson}
               />
             </Grid>
-          </Grid>
-        </LocalizationProvider>
-      </GlobalHotKeys>
+        </LocalizationProvider >
+      </GlobalHotKeys >
     </>
   )
 }

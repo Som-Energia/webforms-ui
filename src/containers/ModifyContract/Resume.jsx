@@ -10,9 +10,8 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
-import PrevButton from 'components/Buttons/PrevButton'
+import PrevButton from '../../components/Buttons/PrevButton'
 
 export default function ModifyResume({
   prevStep,
@@ -175,7 +174,6 @@ export default function ModifyResume({
         {prevStep && (
           <PrevButton
             onClick={prevStep}
-            sx={{ mt: 1, mr: 1 }}
             title={t('PAS_ANTERIOR')}
           />
         )}
