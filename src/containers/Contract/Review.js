@@ -516,14 +516,6 @@ const Review = (props) => {
               </Grid>
             </>
           )}
-          {values?.contract?.isIndexed ? null : (
-            <Typography
-              className={classes.withoutLabel}
-              variant="body1"
-              align="justify"
-              dangerouslySetInnerHTML={{ __html: t('DESCRIPTION_MAJ_ALERT') }}
-            />
-          )}
           <Typography
             className={classes.subsectionTitle}
             variant="subtitle2"
