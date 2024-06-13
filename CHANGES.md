@@ -1,9 +1,15 @@
 # Change Log
 
+## 1.11.1 2024-06-13
+
+- Remove maj warning: "mecanisme d'ajust al gas" 
+
 ## 1.11.0 2024-04-23 
+
 - Add functionality: Add and remove contracts in generationkwh assignments
 
 ## 1.10.10 2024-04-22
+
 - Fix: text of the input of NIF in generationkWh's form
 
 ## 1.10.9 2024-04-02
