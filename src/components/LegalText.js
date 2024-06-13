@@ -10,7 +10,6 @@ import TextLoader from './TextLoader'
 const LegalText = (props) => {
   return (
     <Typography
-      component="body1"
       sx={{
         '& a': {
           color: 'secondary'
