@@ -82,7 +82,11 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
           <form onSubmit={handleSubmit} noValidate>
             <Box mx={1} mt={1} mb={1}>
               <Typography
-                dangerouslySetInnerHTML={{ __html: t('HELP_CONTACT_INFO') }}
+                dangerouslySetInnerHTML={{
+                  __html: t('HELP_CONTACT_INFO', {
+                    url: t('HELP_CONTACT_INFO_URL')
+                  })
+                }}
               />
             </Box>
             <Box mx={1} mb={2}>
