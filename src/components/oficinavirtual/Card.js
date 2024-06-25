@@ -14,7 +14,7 @@ const Card = ({ variant = 'h1', children, className }) => {
     p: {
       lineHeight: '1.5'
     },
-    '& p:first-child': {
+    '& p:first-of-type': {
       marginTop: 0
     },
     '& p:last-child': {
