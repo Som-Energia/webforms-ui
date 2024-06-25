@@ -45,7 +45,6 @@
   "prettier": "prettier-config-standard",
   "eslintConfig": {
     "extends": [
-      "react-app",
       "plugin:cypress/recommended"
     ]
   },
