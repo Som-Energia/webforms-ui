@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Box from '@mui/material/Box'
 
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
@@ -142,9 +142,12 @@ const CancellationDetails = (props) => {
       </LabelFieldRow>
       <LabelFieldRow label={t('CANCELLATION_DATE')}>
         <DatePicker
+          value={dayjs(values.date_action, 'DD/MM/YYYY')}
+          onChange={handleDateChange}
           name="date_action"
           fullWidth
           sx={{
+            width: '100%',
             '& path': {
               color: 'rgba(0, 0, 0, 0.54)'
             }
@@ -153,21 +156,13 @@ const CancellationDetails = (props) => {
           variant="inline"
           autoOk
           disableToolbar
-          minDate={firstDate}
-          maxDate={lastDate}
+          minDate={dayjs(firstDate)}
+          maxDate={dayjs(lastDate)}
           size="small"
           format="DD/MM/YYYY"
-          value={dayjs(values.date_action, 'DD/MM/YYYY')}
-          onChange={handleDateChange}
           shouldDisableDate={shouldDisableDate}
-          InputProps={{
-            startAdornment: (
-              <IconButton edge="start" size="small">
-                <TodayOutlinedIcon />
-              </IconButton>
-            )
-          }}
         />
+
         <FormHelperText
           component="span"
           sx={{

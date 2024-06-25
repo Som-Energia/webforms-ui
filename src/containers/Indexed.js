@@ -15,8 +15,9 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import DayjsUtils from '@date-io/dayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
@@ -331,7 +332,7 @@ const Indexada = (props) => {
   return (
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-        <MuiPickersUtilsProvider utils={DayjsUtils}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
           <Grid container justifyContent="space-between">
             <Grid item xs={8}>
               <Formik
@@ -498,7 +499,7 @@ const Indexada = (props) => {
               />
             </Grid>
           </Grid>
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
       </GlobalHotKeys>
     </>
   )
