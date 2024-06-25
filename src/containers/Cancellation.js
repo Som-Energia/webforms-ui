@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography'
 
 import { LocalizationProvider } from '@mui/x-date-pickers'
 
-import DayjsUtils from '@date-io/dayjs'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
@@ -172,7 +172,7 @@ const Cancellation = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <LocalizationProvider utils={DayjsUtils}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
         <Formik
           onSubmit={() => {}}
           enableReinitialize
