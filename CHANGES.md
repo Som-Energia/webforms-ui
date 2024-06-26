@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.11.2 2024-06-26
+
+- Fixed urls in translations
+
 ## 1.11.1 2024-06-13
 
 - Remove maj warning: "mecanisme d'ajust al gas" 
