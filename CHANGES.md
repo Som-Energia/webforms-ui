@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Changes in CCEE
+- Fix: broken eslint-react-app dependency
+
 ## 1.11.2 2024-06-26
 
 - Fixed urls in translations
