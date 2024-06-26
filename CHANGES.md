@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.11.3 2024-06-26
 
 - Changes in CCEE
 - Fix: broken eslint-react-app dependency
