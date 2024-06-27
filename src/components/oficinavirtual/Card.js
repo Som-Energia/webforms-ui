@@ -5,6 +5,8 @@ import Box from '@mui/material/Box'
 const Card = ({ variant = 'h1', children, className }) => {
 
   return <Box sx={{
+    display: 'flex',
+    flexDirection: 'column',
     width: '100%',
     background: '#fff',
     color: '#4d4d4d',
