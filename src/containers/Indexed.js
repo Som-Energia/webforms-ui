@@ -39,6 +39,7 @@ import Loading from 'components/Loading'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 import { modify_tariff, can_modify_tariff } from 'services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -282,18 +283,18 @@ const Indexada = (props) => {
     url_tariff_index_characteristics: isTariff20
       ? t('TARIFF_CHARACTERISTICS_INDEX_20_URL')
       : isTariff30
-      ? t('TARIFF_CHARACTERISTICS_INDEX_30_URL')
-      : t('TARIFF_CHARACTERISTICS_INDEX_6_URL'),
+        ? t('TARIFF_CHARACTERISTICS_INDEX_30_URL')
+        : t('TARIFF_CHARACTERISTICS_INDEX_6_URL'),
     url_tariff_characteristics: isTariff20
       ? t('TARIFF_CHARACTERISTICS_20_URL')
       : isTariff30
-      ? t('TARIFF_CHARACTERISTICS_30_URL')
-      : t('TARIFF_CHARACTERISTICS_6_URL'),
+        ? t('TARIFF_CHARACTERISTICS_30_URL')
+        : t('TARIFF_CHARACTERISTICS_6_URL'),
     url_tariff_web: isTariff20
       ? t('TARIFF_WEB_URL')
       : isTariff30
-      ? t('TARIFF_WEB_30_URL')
-      : t('TARIFF_WEB_6_URL')
+        ? t('TARIFF_WEB_30_URL')
+        : t('TARIFF_WEB_6_URL')
   }
 
   const importantInfoBody = (
@@ -303,11 +304,11 @@ const Indexada = (props) => {
           ? isTariff20
             ? t('PERIODS_IMPORTANT_INFO_BODY', translatedUrls)
             : isTariff30
-            ? t('PERIODS_IMPORTANT_INFO_BODY_30', translatedUrls)
-            : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
+              ? t('PERIODS_IMPORTANT_INFO_BODY_30', translatedUrls)
+              : t('PERIODS_IMPORTANT_INFO_BODY_6', translatedUrls)
           : isTariff20
-          ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
-          : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
+            ? t('INDEXED_IMPORTANT_INFO_BODY', translatedUrls)
+            : t('INDEXED_IMPORTANT_INFO_BODY_30', translatedUrls)
       }}
     />
   )
@@ -332,11 +333,11 @@ const Indexada = (props) => {
   return (
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
           <Grid container justifyContent="space-between">
             <Grid item xs={8}>
               <Formik
-                onSubmit={() => {}}
+                onSubmit={() => { }}
                 enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchemas[activeStep]}
@@ -405,13 +406,11 @@ const Indexada = (props) => {
                                   pt: '0.25rem'
                                 }}>
                                 {result?.contract_number === undefined && (
-                                  <Button
-                                    data-cy="prev"
-                                    startIcon={<ArrowBackIosIcon />}
+                                  <PrevButton
                                     disabled={activeStep === 0 || loading}
-                                    onClick={() => prevStep(formikProps)}>
-                                    {t('PAS_ANTERIOR')}
-                                  </Button>
+                                    onClick={() => prevStep(formikProps)}
+                                    title={t('PAS_ANTERIOR')}
+                                  />
                                 )}
                                 {activeStep < MAX_STEP_NUMBER - 1 ? (
                                   <Button

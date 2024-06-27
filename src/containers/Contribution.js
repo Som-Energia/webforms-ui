@@ -32,6 +32,7 @@ import {
   normalizeMember
 } from '../services/utils'
 import { contribution, member } from '../services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const MAX_STEP_NUMBER = 4
 
@@ -320,7 +321,7 @@ const Contribution = (props) => {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Formik
-        onSubmit={() => {}}
+        onSubmit={() => { }}
         enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
@@ -364,13 +365,11 @@ const Contribution = (props) => {
                   <Box
                     sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {result?.investment === undefined && (
-                      <Button
-                        data-cy="prev"
-                        startIcon={<ArrowBackIosIcon />}
+                      <PrevButton
                         disabled={activeStep === 0 || sending}
-                        onClick={() => prevStep(formikProps)}>
-                        {t('PAS_ANTERIOR')}
-                      </Button>
+                        onClick={() => prevStep(formikProps)}
+                        title={t('PAS_ANTERIOR')}
+                      />
                     )}
                     {activeStep < MAX_STEP_NUMBER - 1 ? (
                       <Button

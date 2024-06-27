@@ -3,9 +3,10 @@ import { Button } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
 function PrevButton(props) {
-  const { title, onClick, disabled } = props
+  const { title, onClick, disabled, sx={} } = props
   return (
     <Button
+      sx={{color:"secondary.dark",...sx}}
       data-cy="prev"
       startIcon={<ArrowBackIosIcon />}
       disabled={disabled}
