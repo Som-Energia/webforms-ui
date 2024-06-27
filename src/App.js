@@ -17,7 +17,7 @@ import './i18n/i18n'
 import './App.css'
 import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
 import { PopUpContextProvider } from 'context/PopUpContext'
-import Box  from '@mui/material/Box'
+import Box from '@mui/material/Box'
 
 const theme = createTheme({
   palette: {
@@ -25,6 +25,7 @@ const theme = createTheme({
       main: '#96b633'
     },
     secondary: {
+      dark: '#000',
       main: '#a1a1a1'
     },
     background: { default: 'transparent', paper: '#ffffff' },
@@ -122,7 +123,7 @@ const App = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <ScopedCssBaseline>
-        <Box sx={{flexGrow: 1}}>
+        <Box sx={{ flexGrow: 1 }}>
           <Suspense fallback={<Loading />}>
             <Router>
               <Routes>
