@@ -28,6 +28,7 @@ import Chooser from '../../components/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
 import { getRates } from '../../services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const handleChangeModify = (event, setFieldValue, values) => {
   if (event.target.name === 'changePhases' && values.changePhases) {
@@ -522,28 +523,27 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   justifyContent: 'space-between'
                 }}>
                 {prevStep && (
-                  <Button
+                  <PrevButton
                     onClick={prevStep}
                     sx={{ mt: 1, mr: 1 }}
-                    startIcon={<ArrowBackIosIcon />}>
-                    {t('PAS_ANTERIOR')}
-                  </Button>
+                    title={t('PAS_ANTERIOR')}  
+                  />
                 )}
-                {nextStep && (
-                  <Button
-                    type="submit"
-                    sx={{ mt: 1, mr: 1 }}
-                    variant="contained"
-                    color="primary"
-                    endIcon={<ArrowForwardIosIcon />}
-                    disabled={
-                      (!values.changePhases && !values.changePower) ||
-                      isSubmitting
-                    }>
-                    {t('SEGUENT_PAS')}
-                  </Button>
-                )}
-              </Box>
+                    {nextStep && (
+                      <Button
+                        type="submit"
+                        sx={{ mt: 1, mr: 1 }}
+                        variant="contained"
+                        color="primary"
+                        endIcon={<ArrowForwardIosIcon />}
+                        disabled={
+                          (!values.changePhases && !values.changePower) ||
+                          isSubmitting
+                        }>
+                        {t('SEGUENT_PAS')}
+                      </Button>
+                    )}
+                  </Box>
             </form>
           )
         }}
