@@ -2,11 +2,10 @@ import React from 'react'
 
 import Box from '@mui/material/Box'
 
-const Card = ({ variant = 'h1', children, className }) => {
+const Card = ({ variant = 'h1', children, className, sx }) => {
 
   return <Box sx={{
-    display: 'flex',
-    flexDirection: 'column',
+    ...sx,
     width: '100%',
     background: '#fff',
     color: '#4d4d4d',
