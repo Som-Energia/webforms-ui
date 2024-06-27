@@ -10,7 +10,7 @@ describe('Modify Tariff', () => {
     })
   
     beforeEach(() => {
-      cy.visit('/ca/contract/indexada')
+      cy.visit('/ca/contract/indexed')
     })
   
     it('Change Tariff to indexada', function () {
