@@ -211,7 +211,7 @@ const CancellationDetails = (props) => {
         flexDirection: 'column',
         padding: '0.75rem 1.5rem',
         '& .MuiFormControlLabel-label': {
-          fontSize: '14px !important'
+          fontSize: '14px'
         }
       }}>
         <TermsDialog
@@ -221,7 +221,6 @@ const CancellationDetails = (props) => {
           onClose={handleClose}>
           <LegalText documentName={'cancellation-terms'} />
         </TermsDialog>
-
         <FormControlLabel
           control={
             <Checkbox
