@@ -14,14 +14,11 @@ export default function LocationInput({ value, onChange, onLocationSelected }) {
   const [placeDetail, setPlaceDetail] = useState()
 
   const loadSuggestions = async (inputValue) => {
-    console.log('inputValue', inputValue)
-
     clearTimeout(timeoutRef.current)
     if (!inputValue || inputValue.trim().length <= 3) {
       setSuggestions([])
       return
     }
-    console.log('inputValue', inputValue)
 
     // debounce the loading of suggestions to reduce usage of the Google API
     timeoutRef.current = setTimeout(async () => {
@@ -69,7 +66,6 @@ export default function LocationInput({ value, onChange, onLocationSelected }) {
     setSuggestions([])
 
     const places = await getGoogleMapsPlacesApiClient()
-    console.log('Conection places', places)
 
     // Clear the session token, it can only be used in one request
     const sessionToken = sessionTokenRef.current
@@ -110,10 +106,6 @@ export default function LocationInput({ value, onChange, onLocationSelected }) {
       }
     )
   }
-
-  // the JSX implementation will vary depending on which UI lib you're using
-  console.log('event', value)
-
   return (
     <>
       <Autocomplete
