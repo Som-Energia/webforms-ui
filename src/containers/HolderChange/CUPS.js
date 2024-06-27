@@ -152,6 +152,14 @@ function CUPS(props) {
             variant="outlined"
             fullWidth
             disabled
+            sx={{
+              '& .MuiInputBase-input.Mui-disabled': {
+                WebkitTextFillColor: '#000',
+              },
+              '& .MuiInputLabel-root.Mui-disabled': {
+                color: 'secondary.dark',
+              }
+            }}
             value={values?.supply_point?.address}
             helperText={t('CUPS_PARTIAL_ADDRESS_NOTICE')}
           />
