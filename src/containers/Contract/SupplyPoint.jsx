@@ -111,18 +111,30 @@ const SupplyPoint = (props) => {
     setAddressValue(value)
   }
   const handleLocationSelected = (selection) => {
-    const address =
-      selection !== null
-        ? Object.assign(
-            {},
-            ...selection.address_components.map((x) => ({
-              [x.types[0]]: x.long_name
-            }))
-          )
-        : {}
-    setFieldValue('supply_point.address', address?.route)
-    setFieldValue('supply_point.postal_code', address?.postal_code || '')
-    setFieldValue('supply_point.number', address?.street_number || '')
+    if (selection === null) {
+      setFieldValue('supply_point.address', '')
+      setFieldValue('supply_point.postal_code', '')
+      setFieldValue('supply_point.number', '')
+      setFieldValue('supply_point.lat', '')
+      setFieldValue('supply_point.long', '')
+      setFieldValue('supply_point.state', { id: '', name: '' })
+      setFieldValue('supply_point.city', { id: '', name: '' })
+    } else {
+      const address = Object.assign(
+        {},
+        ...selection.address_components.map((x) => ({
+          [x.types[0]]: x.long_name
+        }))
+      )
+
+      setFieldValue('supply_point.address', address?.route)
+      setFieldValue('supply_point.postal_code', address?.postal_code)
+      setFieldValue('supply_point.number', address?.street_number || '')
+      if (address?.street_number) {
+        setFieldValue('supply_point.lat', selection?.geometry?.location?.lat())
+        setFieldValue('supply_point.long', selection?.geometry?.location?.lng())
+      }
+    }
   }
   return (
     <>

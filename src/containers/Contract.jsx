@@ -730,7 +730,9 @@ const Contract = (props) => {
       cadastral_reference: '',
       cadastral_reference_error: undefined,
       attachments: [],
-      supply_point_accepted: false
+      supply_point_accepted: false,
+      lat: false,
+      long: false,
     },
     self_consumption: {
       have_installation: ''
