@@ -17,11 +17,18 @@ const Chooser = (props) => {
     disabled,
     name,
     condensed = false,
-    canBeEmpty = true
+    canBeEmpty = true,
+    alignTop = false
   } = props
   const [selectedOption, setSelectedOption] = useState(value)
 
   const customStyles = {
+    chooserItemAlignTop: {
+      justifyContent:'flex-start'
+    },
+    chooserItemAlignCenter:{
+      justifyContent:'center'
+    },
     chooserItem: {
       cursor: 'pointer',
       minHeight: '100px',
@@ -100,6 +107,7 @@ const Chooser = (props) => {
                   !disabled && handleClick(event, option.value)
                 }
                 sx={[
+                  alignTop ? customStyles.chooserItemAlignTop : customStyles.chooserItemAlignCenter,
                   customStyles.chooserItem,
                   condensed && customStyles.chooserItemCondensed,
                   selectedOption === option.value && customStyles.chooserItemSelected,
