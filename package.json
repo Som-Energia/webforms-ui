@@ -20,6 +20,7 @@
     "@date-io/dayjs": "1.x",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@googlemaps/js-api-loader": "^1.16.6",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/x-date-pickers": "^6.19.7",
