@@ -23,6 +23,7 @@ import Failure from './Failure'
 import Success from './Success'
 
 import { confirmCancelContract } from 'services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const CancellationConfirm = (props) => {
   const { language, contract_id, token } = useParams()
@@ -121,9 +122,7 @@ const CancellationConfirm = (props) => {
                     justifyContent: 'space-between',
                     pt: '0.25rem'
                   }}>
-                  <Button data-cy="prev" onClick={() => navigate('/')}>
-                    {t('CANCEL')}
-                  </Button>
+                  <PrevButton title={t('CANCEL')} onClick={() => navigate('/')}/>
                   <Button
                     type="submit"
                     data-cy="submit"

@@ -36,6 +36,7 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
+import PrevButton from 'components/Buttons/PrevButton'
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
@@ -455,13 +456,11 @@ function HolderChange(props) {
                               justifyContent: 'space-between'
                             }}>
                             {result?.contract_number === undefined && (
-                              <Button
-                                data-cy="prev"
-                                startIcon={<ArrowBackIosIcon />}
+                              <PrevButton
                                 disabled={activeStep === 0 || sending}
-                                onClick={() => prevStep(props.values, props)}>
-                                {t('PAS_ANTERIOR')}
-                              </Button>
+                                onClick={() => prevStep(props.values, props)}
+                                title={t('PAS_ANTERIOR')}
+                              />
                             )}
                             {!completed && (
                               <Button

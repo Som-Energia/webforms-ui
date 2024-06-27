@@ -15,6 +15,7 @@ import SendIcon from '@mui/icons-material/Send'
 
 import Chooser from '../../components/Chooser'
 import Uploader from '../../components/Uploader'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =
   process.env.REACT_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
@@ -139,17 +140,14 @@ function AcceptD1({
               justifyContent: 'space-between'
             }} >
               {
-                <Button
-                  data-cy="prev"
-                  sx={{
-                    mt: 1,
-                    mr: 1
-                  }}
-                  startIcon={<ArrowBackIosIcon />}
+                <PrevButton sx={{
+                  mt: 1,
+                  mr: 1
+                }}
                   disabled={sending}
-                  onClick={() => prevStep(params)}>
-                  {t('PAS_ANTERIOR')}
-                </Button>
+                  onClick={() => prevStep(params)}
+                  title={t('PAS_ANTERIOR')}
+                />
               }
               {
                 <Button

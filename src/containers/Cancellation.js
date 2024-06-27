@@ -37,6 +37,7 @@ import Failure from './Failure'
 import Success from './Success'
 
 import { cancelContract } from 'services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const MAX_STEP_NUMBER = 2
 
@@ -174,7 +175,7 @@ const Cancellation = (props) => {
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
         <Formik
-          onSubmit={() => {}}
+          onSubmit={() => { }}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -212,13 +213,11 @@ const Cancellation = (props) => {
                             pt: '0.25rem'
                           }}>
                           {result?.contract_number === undefined && (
-                            <Button
-                              data-cy="prev"
-                              startIcon={<ArrowBackIosIcon />}
+                            <PrevButton
                               disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(formikProps)}>
-                              {t('PAS_ANTERIOR')}
-                            </Button>
+                              onClick={() => prevStep(formikProps)}
+                              title={t('PAS_ANTERIOR')}
+                            />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
                             <Button

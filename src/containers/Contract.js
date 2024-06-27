@@ -43,6 +43,7 @@ import {
   normalizeContract,
   testPowerForPeriods
 } from '../services/utils'
+import PrevButton from 'components/Buttons/PrevButton'
 const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
@@ -817,7 +818,7 @@ const Contract = (props) => {
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
-          onSubmit={() => {}}
+          onSubmit={() => { }}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -868,13 +869,11 @@ const Contract = (props) => {
                             justifyContent: 'space-between'
                           }}>
                           {result?.contract_number === undefined && (
-                            <Button
-                              data-cy="prev"
-                              startIcon={<ArrowBackIosIcon />}
+                            <PrevButton
                               disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(props)}>
-                              {t('PAS_ANTERIOR')}
-                            </Button>
+                              onClick={() => prevStep(props)}
+                              title={t('PAS_ANTERIOR')}
+                            />
                           )}
                           {activeStep < maxStepNumber - 1 ? (
                             <Button

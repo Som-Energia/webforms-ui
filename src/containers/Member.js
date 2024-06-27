@@ -29,6 +29,7 @@ import Success from './Success'
 
 import { member } from '../services/api'
 import { normalizeMember } from '../services/utils'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const Member = (props) => {
 
@@ -331,13 +332,11 @@ const Member = (props) => {
                       <Box mx={0} mt={0} mb={3}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                           {(!completed || error) && (
-                            <Button
-                              data-cy="prev"
-                              startIcon={<ArrowBackIosIcon />}
+                            <PrevButton
                               disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(props)}>
-                              {t('PAS_ANTERIOR')}
-                            </Button>
+                              onClick={() => prevStep(props)}
+                              title={t('PAS_ANTERIOR')}
+                            />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
                             <Button

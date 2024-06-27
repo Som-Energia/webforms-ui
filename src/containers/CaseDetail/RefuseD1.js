@@ -15,6 +15,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import Uploader from '../../components/Uploader'
+import PrevButton from 'components/Buttons/PrevButton'
 
 function RefuseD1({
   prevStep,
@@ -117,14 +118,11 @@ function RefuseD1({
                   justifyContent: 'space-between'
                 }}>
                 {
-                  <Button
-                    data-cy="prev"
-                    sx={{ mt: 1, mr: 1 }}
-                    startIcon={<ArrowBackIosIcon />}
+                  <PrevButton sx={{ mt: 1, mr: 1 }}
                     disabled={params?.sending}
-                    onClick={() => prevStep(params)}>
-                    {t('PAS_ANTERIOR')}
-                  </Button>
+                    onClick={() => prevStep(params)}
+                    title={t('PAS_ANTERIOR')}
+                  />
                 }
                 {
                   <>
