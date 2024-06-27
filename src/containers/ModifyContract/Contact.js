@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography'
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import PrevButton from 'components/Buttons/PrevButton'
 
 export default function Contact({
   nextStep,
@@ -115,12 +116,11 @@ export default function Contact({
             <Box
               sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
               {prevStep && (
-                <Button
+                <PrevButton
                   onClick={prevStep}
                   sx={{ mt: 1, mr: 1 }}
-                  startIcon={<ArrowBackIosIcon />}>
-                  {t('PAS_ANTERIOR')}
-                </Button>
+                  title={t('PAS_ANTERIOR')}
+                />
               )}
               {nextStep && (
                 <Button

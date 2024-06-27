@@ -12,6 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
+import PrevButton from 'components/Buttons/PrevButton'
 
 export default function ModifyResume({
   prevStep,
@@ -172,12 +173,11 @@ export default function ModifyResume({
 
       <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
         {prevStep && (
-          <Button
+          <PrevButton
             onClick={prevStep}
             sx={{ mt: 1, mr: 1 }}
-            startIcon={<ArrowBackIosIcon />}>
-            {t('PAS_ANTERIOR')}
-          </Button>
+            title={t('PAS_ANTERIOR')}
+          />
         )}
         {
           <>

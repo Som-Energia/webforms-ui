@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import PrevButton from 'components/Buttons/PrevButton'
 
 export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
   const { t } = useTranslation()
@@ -38,12 +39,11 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
         />
         <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
           {prevStep && (
-            <Button
+            <PrevButton 
               sx={{ mt: 1, mr: 1 }}
-              startIcon={<ArrowBackIosIcon />}
-              onClick={(event) => onPrevStep(event)}>
-              {t('PAS_ANTERIOR')}
-            </Button>
+              onClick={(event) => onPrevStep(event)}
+              title={t('PAS_ANTERIOR')}
+            />            
           )}
           {nextStep && (
             <Button
