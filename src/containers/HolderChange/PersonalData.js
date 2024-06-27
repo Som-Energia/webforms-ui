@@ -525,6 +525,7 @@ function PersonalData(props) {
             {skipPrivacyPolicy ? null : (
               <FormGroup row>
                 <FormControlLabel
+                  sx={{m:0}}
                   control={
                     <Checkbox
                       id="privacy_policy_accepted"
