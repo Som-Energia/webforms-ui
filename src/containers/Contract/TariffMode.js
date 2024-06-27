@@ -30,6 +30,7 @@ const TariffMode = (props) => {
       >
         <Chooser
           name="tariffMode"
+          alignTop={true}
           question={t('TARIFF_MODE_QUESTION')}
           onChange={handleChange}
           value={props?.values?.contract?.isIndexed}
