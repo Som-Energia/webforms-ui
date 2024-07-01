@@ -60,7 +60,8 @@ const Contract = (props) => {
   const {
     is30ContractEnabled = true,
     isIndexedContractEnabled = false,
-    isCadastralReference = false
+    isCadastralReference = false,
+    isGurbEnabled = false
   } = props
 
   const [showInspector, setShowInspector] = useState(false)
@@ -572,7 +573,11 @@ const Contract = (props) => {
         )}
         {(showAllSteps || activeStep === cupsPage) && <CUPS {...props} />}
         {(showAllSteps || activeStep === supplyPointPage) && (
-          <SupplyPoint {...props} isCadastralReference={isCadastralReference} />
+          <SupplyPoint
+            isCadastralReference={isCadastralReference}
+            isGurbEnabled={isGurbEnabled}
+            {...props}
+          />
         )}
         {(showAllSteps || activeStep === powerFarePage) && (
           <PowerFare
