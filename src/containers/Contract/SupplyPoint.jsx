@@ -21,8 +21,6 @@ import { getMunicipisByPostalCode } from '../../services/api'
 import CadastralReferenceField from '../../components/CadastralReferenceField'
 import LocationInput from '../../components/AddressAutocompletedField'
 
-const SHOW_STATE_CITY = false
-
 const CadastralReferenceHelperText = () => {
   const { t } = useTranslation()
   return (
