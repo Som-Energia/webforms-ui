@@ -86,7 +86,8 @@ export default function LocationInput({ value, onChange, onLocationSelected }) {
           'geometry.location',
           'place_id',
           'plus_code',
-          'address_components'
+          'address_components',
+          'geometry.location_type'
         ],
         // pass the session token so all autocomplete requests are counted as part of this places request
         sessionToken
