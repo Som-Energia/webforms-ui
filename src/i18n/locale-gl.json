@@ -711,5 +711,13 @@
     "GENERATION_ADD_CONTRACT_LIST_CANCEL": "Cancelar",
     "GENERATION_ADD_CONTRACT_LIST_ACCEPT": "Aceptar",
     "GENERATION_INFO_NOT_HAS_INVOICES": "<p>Agora mesmo non estás a participar no sistema de autoprodución colectiva Generation kWh. Se che interesa ou queres máis información, consulta o web: <a href=\"http://www.generationkwh.org\" >www.generationkwh.org</a></p>",
-    "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT": "Insire o teu DNI ou NIF."
+    "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT": "Insire o teu DNI ou NIF.",
+    "MODIFY_POTTAR_SELECT_TITLE": "Selecciona a modificación/modificacións que queres",
+    "MODIFY_POTTAR_CONTACT_TITLE": "Datos de contacto para acceder ao contador",
+    "MODIFY_ANSWER_INSTAL_TYPE": "Modificar a tensión",
+    "GENERATION_FORM_POSTAL_CODE": "Insire o código postal",
+    "HELP_CONTACT_INFO": "Os datos de contacto serán empregados pola <a target=\"_blank\" href=\"{{url}}\">distribuidora da zona</a> para avisarte caso de que o personal técnico encargado precise acceder ao contador.",
+    "EXIT": "Saír",
+    "GENERATION_CONTRIBUTION_MEMBER_WARNING": "<p>Xa podes participar en <strong>Generation kWh porque está aberta a posibilidade na túa zona!</strong></p><p>Agora, ademais da cantidade coa que decidas participar en Generation kWh, para seres socia/o debes facer unha achega ao capital social de <strong>100 €</strong>, que se devolverán caso de que algún día te queiras dar de baixa.</p>",
+    "MODIFY_ANSWER_POWER": "Modificar a potencia"
 }
