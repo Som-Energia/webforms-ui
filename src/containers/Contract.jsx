@@ -738,6 +738,7 @@ const Contract = (props) => {
       supply_point_accepted: false,
       lat: false,
       long: false,
+      coordinates_accuracy: ''
     },
     self_consumption: {
       have_installation: ''
