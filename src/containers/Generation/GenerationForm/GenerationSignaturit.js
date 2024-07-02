@@ -2,9 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { createGenerationkWhSignature } from '../../../services/api'
 import { useTranslation } from 'react-i18next'
 import cuca from '../../../images/cuca.svg'
-import { makeStyles } from '@material-ui/core/styles'
-import { CircularProgress, Typography } from '@material-ui/core/'
-import StepHeader from '../../../components/StepHeader'
+import { CircularProgress, Typography, Box } from '@mui/material/'
+import { styled } from '@mui/system'
 
 let signaturitHook = () => undefined
 
@@ -12,11 +11,7 @@ window.addEventListener('message', function (e) {
   signaturitHook(e)
 })
 
-const useStyles = makeStyles((theme) => ({
-  logo: {
-    width: '70px',
-    margin: theme.spacing(2)
-  },
+const customStyles = {
   loading: {
     display: 'flex',
     justifyContent: 'center',
@@ -30,7 +25,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     gap: "20px"
   }
-}))
+}
+
+const StyledImg = styled('img')({
+  width: '70px',
+  margin: 2
+})
+
 
 function GenerationSignaturit(props) {
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
@@ -39,7 +40,7 @@ function GenerationSignaturit(props) {
   const { i18n } = useTranslation()
   const { submit, values, setFieldValue, title, limitAmount } = props
   const { t } = useTranslation()
-  const classes = useStyles()
+
   const getSignaturit = useCallback(() => {
     createGenerationkWhSignature({
       partner_number: values?.member?.partner_number,
@@ -87,14 +88,14 @@ function GenerationSignaturit(props) {
   }, [])
 
   return (
-    <div className={classes.root}>
+    <Box sx={customStyles.root}>
       <Typography component="h1" variant="h3">
         {title}
       </Typography>
 
       {loading || completed ? (
-        <div className={classes.loading}>
-          <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />
+        <Box sx={customStyles.loading}>
+          <StyledImg alt="Cuca de Som Energia" src={cuca} />
           <CircularProgress color="secondary" />
           {completed ? (
             <>
@@ -106,7 +107,7 @@ function GenerationSignaturit(props) {
               />
             </>
           ) : null}
-        </div>
+        </Box>
       ) : (
         <iframe
           title="signaturit_iframe"
@@ -115,7 +116,7 @@ function GenerationSignaturit(props) {
           style={{ height: '700px', width: '100%' }}
         />
       )}
-    </div>
+    </Box>
   )
 }
 

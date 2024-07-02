@@ -1,6 +1,6 @@
 import React from 'react'
 import GenerationTable from './GenerationTable'
-import TableBody from '@material-ui/core/TableBody'
+import TableBody from '@mui/material/TableBody'
 import { render, queryByAttribute } from '@testing-library/react'
 
 describe('Generation Table', () => {

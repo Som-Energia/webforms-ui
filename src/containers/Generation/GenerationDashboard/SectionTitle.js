@@ -1,24 +1,21 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
-const useStyles = makeStyles({
-  h2: {
-    background: '#96b633',
-    color: '#fff',
-    textTransform: 'uppercase',
-    fontSize: '14px',
-    margin: '10px 0 4px 0',
-    display:'flex',
-    justifyContent:'space-between',
-    alignItems:'center'
-  }
-})
+
 
 function SectionTitle({ text, children }) {
-  const classes = useStyles()
+
   return (
-    <Grid container className={classes.h2}>
+    <Grid container sx={{
+      background: '#96b633',
+      color: '#fff',
+      textTransform: 'uppercase',
+      fontSize: '14px',
+      margin: '10px 0 4px 0',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    }}>
       <Typography component="h2">
         {text}
       </Typography>

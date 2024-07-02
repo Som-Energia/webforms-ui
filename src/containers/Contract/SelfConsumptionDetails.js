@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import InputAdornment from '@material-ui/core/InputAdornment'
-import Grid from '@material-ui/core/Grid'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@mui/material/InputAdornment'
+import Grid from '@mui/material/Grid'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import FormHelperText from '@mui/material/FormHelperText'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
@@ -23,7 +22,6 @@ import {
 const SelfConsumptionDetails = (props) => {
   const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
     props
-  const classes = useStyles()
   const { t } = useTranslation()
 
   const handleCollectiveInstallation = ({ option }) => {
@@ -34,14 +32,14 @@ const SelfConsumptionDetails = (props) => {
     setFieldValue('self_consumption.aux_services', option)
   }
 
-  const handleChangeSelect = (event) => {
-    setFieldValue(
-      `${event.target.name}_title`,
-      event.currentTarget.getAttribute('data-title'),
-      false
-    )
+  const handleChangeInstallationType = (event) => {
     setFieldValue(event.target.name, event.target.value)
   }
+
+  const handleChangeTechnology = (event) => {
+    setFieldValue(event.target.name, event.target.value)
+  }
+
 
   const handleChangeInstallPower = (event) => {
     const regex = /^\d*([.,'])?\d{0,3}/g
@@ -98,7 +96,10 @@ const SelfConsumptionDetails = (props) => {
           <Typography
             variant="body1"
             dangerouslySetInnerHTML={{ __html: t('SELFCONSUMPTION_CAU_CODE') }}
-            className={classes.fieldTitle}
+            sx={{
+              fontWeight: 500,
+              mb: 2
+            }}
           />
           <CAUField
             required
@@ -111,7 +112,7 @@ const SelfConsumptionDetails = (props) => {
             onChange={handleChangeCAU}
             onBlur={handleBlur}
             error={
-               values?.self_consumption?.cau && !!errors?.self_consumption?.cau
+              values?.self_consumption?.cau && !!errors?.self_consumption?.cau
             }
             helperText={
               errors?.self_consumption?.cau || (
@@ -128,7 +129,22 @@ const SelfConsumptionDetails = (props) => {
         <Grid item xs={12}>
           <Chooser
             name="self_consumption.collective_installation"
-            className={classes.chooserQuestion}
+            sx={{
+              '& h6': {
+                mb: 0
+              },
+              '& > div': {
+                mt: 2
+              },
+              '& label': {
+                pt: 1,
+                pb: 1,
+                minHeight: '90px',
+                '& p': {
+                  mt: 0
+                }
+              }
+            }}
             question={t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_QUESTION')}
             onChange={handleCollectiveInstallation}
             value={props.values.self_consumption.collective_installation}
@@ -152,7 +168,10 @@ const SelfConsumptionDetails = (props) => {
             dangerouslySetInnerHTML={{
               __html: t('SELFCONSUMPTION_INSTALL_POWER_QUESTION')
             }}
-            className={classes.fieldTitle}
+            sx={{
+              fontWeight: 500,
+              mb: 2
+            }}
           />
           <TextField
             required
@@ -191,7 +210,10 @@ const SelfConsumptionDetails = (props) => {
             dangerouslySetInnerHTML={{
               __html: t('SELFCONSUMPTION_INSTALLATION_SITUATION_QUESTION')
             }}
-            className={classes.fieldTitle}
+            sx={{
+              fontWeight: 500,
+              mb: 2
+            }}
           />
           <TextField
             select
@@ -202,7 +224,7 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values?.self_consumption?.installation_type || ''}
-            onChange={handleChangeSelect}
+            onChange={handleChangeInstallationType}
             onBlur={handleBlur}
             disabled={isLoadingSituations}
             error={
@@ -237,7 +259,10 @@ const SelfConsumptionDetails = (props) => {
             dangerouslySetInnerHTML={{
               __html: t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')
             }}
-            className={classes.fieldTitle}
+            sx={{
+              fontWeight: 500,
+              mb: 2
+            }}
           />
           <TextField
             select
@@ -248,7 +273,7 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values?.self_consumption?.technology || ''}
-            onChange={handleChangeSelect}
+            onChange={handleChangeTechnology}
             onBlur={handleBlur}
             disabled={isLoadingTechnologies}
             error={
@@ -280,7 +305,22 @@ const SelfConsumptionDetails = (props) => {
         <Grid item xs={12}>
           <Chooser
             name="self_consumption.aux_services"
-            className={classes.chooserQuestion}
+            sx={{
+              '& h6': {
+                mb: 0
+              },
+              '& > div': {
+                mt: 2
+              },
+              '& label': {
+                pt: 1,
+                pb: 1,
+                minHeight: '90px',
+                '& p': {
+                  mt: 0
+                }
+              }
+            }}
             question={t('SELFCONSUMPTION_DETAILS_QUESTION_AUXILIARY_SERVICE')}
             onChange={handleAuxiliaryService}
             value={props.values.self_consumption.aux_services}
@@ -316,7 +356,10 @@ const SelfConsumptionDetails = (props) => {
             dangerouslySetInnerHTML={{
               __html: t('SELFCONSUMPTION_ATTACHMENTS')
             }}
-            className={classes.fieldTitle}
+            sx={{
+              fontWeight: 500,
+              mb: 2
+            }}
           />
 
           <Uploader
@@ -338,26 +381,3 @@ const SelfConsumptionDetails = (props) => {
 }
 
 export default SelfConsumptionDetails
-
-const useStyles = makeStyles((theme) => ({
-  fieldTitle: {
-    fontWeight: 500,
-    marginBottom: theme.spacing(2)
-  },
-  chooserQuestion: {
-    '& h6': {
-      marginBottom: theme.spacing(0)
-    },
-    '& > div': {
-      marginTop: theme.spacing(2)
-    },
-    '& label': {
-      paddingTop: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-      minHeight: '90px',
-      '& p': {
-        marginTop: 0
-      }
-    }
-  }
-}))

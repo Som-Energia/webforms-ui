@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
 
-import Paper from '@material-ui/core/Paper'
-import Switch from '@material-ui/core/Switch'
+import Paper from '@mui/material/Paper'
+import Switch from '@mui/material/Switch'
+import Box from '@mui/material/Box'
 
-import { Typography } from '@material-ui/core'
+import Typography from '@mui/material/Typography'
 
-const useStyles = makeStyles((theme) => ({
+const customStyles = {
   subsPaper: {
     padding: '16px 32px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderLeft: '4px solid gray',
-    borderColor: theme.palette.secondary.main
+    borderColor:'secondary.main'
   },
   active: {
-    borderColor: theme.palette.primary.main
+    borderColor: 'primary.main'
   },
   optionContainer: {
     paddingRight: '32px'
@@ -34,37 +33,35 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontSize: '1rem'
   }
-}))
+}
 
 const OptionSwitch = (props) => {
-  const classes = useStyles()
   const { title = '', description = '', value = false } = props
-
   const [state, setState] = useState(value)
 
   return (
     <Paper
       elevation={0}
-      className={clsx(classes.subsPaper, state && classes.active)}>
-      <div className={classes.optionContainer}>
+      sx={[customStyles.subsPaper, state && customStyles.active]}>
+      <Box sx={customStyles.optionContainer}>
         <Typography
           variant="h5"
-          className={classes.title}
+          sx={customStyles.title}
           onClick={() => setState(!state)}>
           {title}
         </Typography>
-        <Typography variant="body1" className={classes.description}>
+        <Typography variant="body1" sx={customStyles.description}>
           {description}
         </Typography>
-      </div>
-      <div className={classes.switchContainer}>
+      </Box>
+      <Box sx={customStyles.switchContainer}>
         <Switch
           checked={state}
           onChange={(event) => setState(event.target.checked)}
           color="primary"
           inputProps={{ 'aria-label': `subscription ${title} switcher` }}
         />
-      </div>
+      </Box>
     </Paper>
   )
 }

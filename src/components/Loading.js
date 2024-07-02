@@ -1,23 +1,17 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
 
 import loading from '../images/loading.svg'
 
-const useStyles = makeStyles((theme) => ({
-  loading: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-}))
-
 const Loading = () => {
-  const classes = useStyles()
-
   return (
-    <div data-testid={'loading-component'} className={classes.loading}>
+    <Box data-testid={'loading-component'} sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }} >
       <img alt="Loading..." src={loading} />
-    </div>
+    </Box>
   )
 }
 

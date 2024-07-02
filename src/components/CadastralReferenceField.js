@@ -1,6 +1,6 @@
 import React from 'react'
 import { checkCadastralReference } from '../services/api'
-import MapIcon from '@material-ui/icons/Map'
+import MapIcon from '@mui/icons-material/Map'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
 

@@ -1,14 +1,15 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 import StepHeader from '../../components/StepHeader'
 import MemberIdentifierFields from '../../components/MemberIdentifierFields'
-import Alert from '@material-ui/lab/Alert'
+import Alert from '@mui/material/Alert'
 
 const MemberIdentifier = (props) => {
+
   const { t } = useTranslation()
 
   return (
@@ -23,7 +24,7 @@ const MemberIdentifier = (props) => {
       </Box>
       {!props.is30ContractEnabled ? (
         <Box mt={0} mb={1}>
-          <Alert severity="warning">
+          <Alert severity="warning" data-cy="warning-alert">
             <Typography
               variant="body1"
               dangerouslySetInnerHTML={{

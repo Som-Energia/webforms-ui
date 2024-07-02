@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import Alert from '@material-ui/lab/Alert'
-import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
+import FormHelperText from '@mui/material/FormHelperText'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'

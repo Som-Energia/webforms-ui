@@ -1,29 +1,17 @@
 import React from 'react'
 
-import { makeStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
+
 import Header from 'components/oficinavirtual/Header'
 import Card from 'components/oficinavirtual/Card'
 
 const IndexedInfo = ({ title, desc }) => {
-  const classes = useStyles()
-
   return (
-    <div className={classes.root}>
+    <Box sx={{ position: 'relative', color: 'primary' }}>
       {title ? <Header>{title}</Header> : null}
-      {desc ? (
-        <Card>
-          {desc}
-        </Card>
-      ) : null}
-    </div>
+      {desc ? <Card>{desc}</Card> : null}
+    </Box>
   )
 }
 
 export default IndexedInfo
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'relative',
-    color: theme.palette.text.primary
-  }
-}))

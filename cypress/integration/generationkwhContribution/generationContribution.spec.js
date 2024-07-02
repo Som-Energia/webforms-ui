@@ -86,7 +86,25 @@ describe('Generation Form', () => {
       let memberNumber = this.data.member_out_first_fase_zone.number
       let memberVat = this.data.member_out_first_fase_zone.vat
 
-      cy.intercept('GET', '/data/soci/**').as('checkMember')
+      // cy.intercept('GET', '/data/soci/**', {
+      //   statusCode: 200,
+      //   body: {
+      //     "data": {
+      //       "soci": {}
+      //     },
+      //     "state": true,
+      //     "status": "ONLINE"
+      //   }
+      // }).as('checkMember')
+
+      // cy.intercept('GET', '/data/generationkwh/can_join/78820/78050110R', {
+      //   statusCode: 200,
+      //   body: {
+      //     "data": true,
+      //     "state": true,
+      //     "status": "ONLINE"
+      //   }
+      // }).as('canJoin')
 
       cy.get('#memberNumber')
         .clear()
@@ -94,13 +112,20 @@ describe('Generation Form', () => {
         .should('have.value', memberNumber)
 
       cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
-      cy.wait('@checkMember')
+
+      // cy.wait('@checkMember')
+      //   .its('response.statusCode')
+      //   .should('be.oneOf', [200, 304])
+
+      cy.wait('@canJoin')
         .its('response.statusCode')
         .should('be.oneOf', [200, 304])
+
       cy.get('[data-cy=exit]').click()
+
     })
   })
- 
+
   context(' NO Member - Success Tests', () => {
     it('Contribute with an action', function () {
       //Member page
@@ -122,17 +147,17 @@ describe('Generation Form', () => {
         .clear()
         .type(this.data.annual_use.low)
         .should('have.value', this.data.annual_use.low)
-  
+
       for (let n = 0; n < this.data.number_of_action.normal; n++) {
         cy.get('#add_action').click()
       }
-  
+
       cy.get('[name="payment.iban"]')
         .clear()
         .type(this.data.payment_data.iban)
         .should('have.value', this.data.payment_data.iban)
       cy.get('[data-cy=next]').click()
-  
+
       //Review page
       cy.get('#privacy_plicy_check').check()
       /* cy.get('[data-cy=next]').click() */
@@ -232,5 +257,5 @@ describe('Generation Form', () => {
         .should('have.value', this.data.payment_data.err_iban)
       cy.get('[data-cy=next]').should('be.disabled')
     })
-  }) 
+  })
 })
