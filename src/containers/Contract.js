@@ -90,7 +90,9 @@ const Contract = (props) => {
     Yup.object().shape({
       member: Yup.object().shape({
         number: Yup.string().required(t('NO_MEMBER_NUMBER')),
-        vat: Yup.string().required(t('NO_MEMBER_VAT')),
+        vat: Yup.string()
+          .required(t('NO_MEMBER_VAT'))
+          .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, t('INVALID_NIF')),
         checked: Yup.bool()
           .required(t('NO_MEMBER_MATCH'))
           .oneOf([true], t('NO_MEMBER_MATCH'))
@@ -434,7 +436,9 @@ const Contract = (props) => {
         previous_holder: Yup.bool()
           .required(t('FILL_PREVIOUS_HOLDER'))
           .oneOf([true, false], t('FILL_PREVIOUS_HOLDER')),
-        vat: Yup.string().required(t('FILL_NIF')),
+        vat: Yup.string()
+          .required(t('FILL_NIF'))
+          .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, t('INVALID_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))

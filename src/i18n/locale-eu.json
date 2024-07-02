@@ -250,6 +250,7 @@
     "SOCIA_NO_TROBADA": "Ez dugu datu horiek dituen bazkiderik aurkitu!",
     "NO_MEMBER_VAT": "Adierazi duzun IFZ ez da zuzena",
     "NO_MEMBER_NUMBER": "Ez duzu bazkide-zenbakia adierazi",
+    "INVALID_NIF": "NIF formatuak 12345678P izan behar du",
     "FILL_SUPPLY_POINT": "Adierazi hornidura-puntuko datuak:",
     "CUPS_IS_ACTIVE": "CUPS honek badu kontratu aktibo bat Som Energiarekin. Titularra aldatzeko eskaera egin dezakezu <a href=\"//oficinavirtual.somenergia.coop/eu/change-ownership/\" target=\"_blank\">hemen</a>.",
     "ADRECA": "Helbidea",
