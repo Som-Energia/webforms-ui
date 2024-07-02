@@ -32,14 +32,14 @@ const SelfConsumptionDetails = (props) => {
     setFieldValue('self_consumption.aux_services', option)
   }
 
-  const handleChangeSelect = (event) => {
-    setFieldValue(
-      `${event.target.name}_title`,
-      event.currentTarget.getAttribute('data-title'),
-      false
-    )
+  const handleChangeInstallationType = (event) => {
     setFieldValue(event.target.name, event.target.value)
   }
+
+  const handleChangeTechnology = (event) => {
+    setFieldValue(event.target.name, event.target.value)
+  }
+
 
   const handleChangeInstallPower = (event) => {
     const regex = /^\d*([.,'])?\d{0,3}/g
@@ -224,7 +224,7 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values?.self_consumption?.installation_type || ''}
-            onChange={handleChangeSelect}
+            onChange={handleChangeInstallationType}
             onBlur={handleBlur}
             disabled={isLoadingSituations}
             error={
@@ -273,7 +273,7 @@ const SelfConsumptionDetails = (props) => {
             variant="outlined"
             fullWidth
             value={values?.self_consumption?.technology || ''}
-            onChange={handleChangeSelect}
+            onChange={handleChangeTechnology}
             onBlur={handleBlur}
             disabled={isLoadingTechnologies}
             error={
