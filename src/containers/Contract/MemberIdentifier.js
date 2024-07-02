@@ -9,6 +9,7 @@ import MemberIdentifierFields from '../../components/MemberIdentifierFields'
 import Alert from '@mui/material/Alert'
 
 const MemberIdentifier = (props) => {
+
   const { t } = useTranslation()
 
   return (
@@ -23,7 +24,7 @@ const MemberIdentifier = (props) => {
       </Box>
       {!props.is30ContractEnabled ? (
         <Box mt={0} mb={1}>
-          <Alert severity="warning">
+          <Alert severity="warning" data-cy="warning-alert">
             <Typography
               variant="body1"
               dangerouslySetInnerHTML={{
