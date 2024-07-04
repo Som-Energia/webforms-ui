@@ -217,7 +217,7 @@ describe('Holder Change', () => {
     })
 
     it('Review holder change data', function () {
-      cy.contains('revisa los datos introducidos', { matchCase: false })
+      cy.contains('revisa y confirma el contrato', { matchCase: false })
       cy.contains(this.data.vat, { matchCase: false })
 
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')

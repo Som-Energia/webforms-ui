@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Alert from '@material-ui/lab/Alert'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
+import Alert from '@mui/material/Alert'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
-import SendIcon from '@material-ui/icons/Send'
+import SendIcon from '@mui/icons-material/Send'
 
 import ContractDetails from 'containers/Cancellation/ContractDetails'
 import CancellationWarning from 'containers/Cancellation/CancellationWarning'
@@ -24,9 +23,9 @@ import Failure from './Failure'
 import Success from './Success'
 
 import { confirmCancelContract } from 'services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const CancellationConfirm = (props) => {
-  const classes = useStyles()
   const { language, contract_id, token } = useParams()
   const { t, i18n } = useTranslation()
   const { contract } = props
@@ -73,7 +72,7 @@ const CancellationConfirm = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          className={classes.disclaimer}
+          sx={{ fontSize: '14px', fontWeight: 400 }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_NO_AVAILABLE')
@@ -84,7 +83,15 @@ const CancellationConfirm = (props) => {
   }
 
   return (
-    <Box className={classes.root}>
+    <Box
+      sx={{
+        pb: '2rem',
+        backgroundColor: '#f2f2f2',
+        color: 'primary',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column'
+      }}>
       <form onSubmit={handleSubmit}>
         <Container maxWidth="lg" disableGutters={true}>
           {!completed && (
@@ -94,11 +101,11 @@ const CancellationConfirm = (props) => {
                 cups_address={contract?.address}
               />
               <CancellationWarning />
-              <Box className={classes.contentWrapper}>
+              <Box>
                 <Header>{t('CANCELLATION_CONFIRM_TITLE')}</Header>
                 <Card>
-                  <div
-                    style={{ width: '100%' }}
+                  <Box
+                    sx={{ width: '100%' }}
                     dangerouslySetInnerHTML={{
                       __html: t('CANCELLATION_CONFIRM_BODY', {
                         url_new: t('FAQ_ALTA_SUMINISTRAMENT_URL'),
@@ -109,17 +116,16 @@ const CancellationConfirm = (props) => {
                 </Card>
               </Box>
               <Box mx={0} mt={2} mb={3}>
-                <div className={classes.actionsContainer}>
-                  <Button
-                    data-cy="prev"
-                    className={classes.button}
-                    onClick={() => navigate('/')}>
-                    {t('CANCEL')}
-                  </Button>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    pt: '0.25rem'
+                  }}>
+                  <PrevButton title={t('CANCEL')} onClick={() => navigate('/')}/>
                   <Button
                     type="submit"
                     data-cy="submit"
-                    className={classes.button}
                     variant="contained"
                     color="primary"
                     startIcon={
@@ -128,12 +134,21 @@ const CancellationConfirm = (props) => {
                     disabled={sending}>
                     {t('CONFIRM_CANCELLATION')}
                   </Button>
-                </div>
+                </Box>
               </Box>
             </>
           )}
           {completed && (
-            <Paper elevation={0} className={classes.stepContainer}>
+            <Paper
+              elevation={0}
+              sx={{
+                padding: '4rem',
+                mt: 0,
+                mb: 4,
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
               {result ? (
                 <Success
                   showHeader={false}
@@ -152,37 +167,3 @@ const CancellationConfirm = (props) => {
 }
 
 export default CancellationConfirm
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#f2f2f2',
-    color: theme.palette.text.primary,
-    display: 'flex',
-    paddingBottom: '2rem',
-    justifyContent: 'center',
-    flexDirection: 'column'
-  },
-  contentWrapper: {},
-  stepContainer: {
-    padding: '4rem',
-    marginTop: 0,
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.palette.backgroundColor
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    paddingTop: '0.25rem'
-  },
-  disclaimer: {
-    fontSize: '14px',
-    fontWeight: 400
-  }
-}))

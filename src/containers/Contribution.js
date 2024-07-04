@@ -6,19 +6,17 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
-
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
 
 import MemberIdentifier from './Contribution/MemberIdentifier'
 import ContributionDetails from './Contribution/ContributionDetails'
@@ -34,6 +32,7 @@ import {
   normalizeMember
 } from '../services/utils'
 import { contribution, member } from '../services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const MAX_STEP_NUMBER = 4
 
@@ -43,7 +42,6 @@ const keyMap = {
 }
 
 const Contribution = (props) => {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
@@ -323,15 +321,26 @@ const Contribution = (props) => {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Formik
-        onSubmit={() => {}}
+        onSubmit={() => { }}
         enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
         validateOnMount={true}>
         {(formikProps) => (
-          <Form className={classes.root} noValidate autoComplete="off">
+          <Form
+            sx={{ position: 'relative', color: 'primary' }}
+            noValidate
+            autoComplete="off">
             <Container maxWidth="md" disableGutters={true}>
-              <Paper elevation={0} className={classes.stepContainer}>
+              <Paper
+                elevation={0}
+                sx={{
+                  mt: 0,
+                  mb: 4,
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
                 {activeStep === 0 && <MemberIdentifier {...formikProps} />}
                 {activeStep === 1 && (
                   <PersonalData {...formikProps} entity="member" />
@@ -353,22 +362,18 @@ const Contribution = (props) => {
                 )}
 
                 <Box mx={0} mt={2} mb={3}>
-                  <div className={classes.actionsContainer}>
+                  <Box
+                    sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {result?.investment === undefined && (
-                      <Button
-                        data-cy="prev"
-                        className={classes.button}
-                        startIcon={<ArrowBackIosIcon />}
+                      <PrevButton
                         disabled={activeStep === 0 || sending}
-                        onClick={() => prevStep(formikProps)}>
-                        {t('PAS_ANTERIOR')}
-                      </Button>
+                        onClick={() => prevStep(formikProps)}
+                        title={t('PAS_ANTERIOR')}
+                      />
                     )}
                     {activeStep < MAX_STEP_NUMBER - 1 ? (
                       <Button
-                        type="button"
                         data-cy="next"
-                        className={classes.button}
                         variant="contained"
                         color="primary"
                         endIcon={<ArrowForwardIosIcon />}
@@ -379,9 +384,7 @@ const Contribution = (props) => {
                     ) : (
                       !completed && (
                         <Button
-                          type="button"
                           data-cy="submit"
-                          className={classes.button}
                           variant="contained"
                           color="primary"
                           startIcon={
@@ -397,7 +400,7 @@ const Contribution = (props) => {
                         </Button>
                       )
                     )}
-                  </div>
+                  </Box>
                 </Box>
               </Paper>
               {showInspector && <DisplayFormikState {...formikProps} />}
@@ -410,26 +413,3 @@ const Contribution = (props) => {
 }
 
 export default Contribution
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'relative',
-    color: theme.palette.text.primary
-  },
-  stepContainer: {
-    marginTop: 0,
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.palette.backgroundColor
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
-}))

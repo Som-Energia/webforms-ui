@@ -1,18 +1,17 @@
 import React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
+import Box from '@mui/material/Box'
 import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 
 const IndexedContractDetails = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const { contract, currentTariff, targetTariff } = props
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ width: '100%', mb: '0.5rem' }}>
       <LabelFieldRow label={t('CONTRACT')}>
         <p>{contract}</p>
       </LabelFieldRow>
@@ -20,18 +19,8 @@ const IndexedContractDetails = (props) => {
       <LabelFieldRow isHighlight={true} label={t('TARIFF_TO_CONTRACT')}>
         {targetTariff || t('TARIFF_CHANGE_NOT_AVAILABLE')}
       </LabelFieldRow>
-    </div>
+    </Box>
   )
 }
 
 export default IndexedContractDetails
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    marginBottom: '0.5rem'
-  },
-  highlight: {
-    color: theme.palette.text.primary
-  }
-}))

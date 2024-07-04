@@ -250,6 +250,7 @@
     "SOCIA_NO_TROBADA": "No s'ha trobat cap soci/a vinculat a aquestes dades!",
     "NO_MEMBER_VAT": "No has introduït un NIF correcte",
     "NO_MEMBER_NUMBER": "No has introduït un número de soci/a",
+    "INVALID_NIF": "El format del NIF hauria de ser: 12345678P",
     "FILL_SUPPLY_POINT": "Indica les dades del punt de subministrament:",
     "CUPS_IS_ACTIVE": "Aquest CUPS ja té un contracte actiu a Som Energia. Per sol·licitar un canvi de titular pots fer-ho <a href=\"//oficinavirtual.somenergia.coop/ca/change-ownership/\" target=\"_blank\">aquí</a>.",
     "ADRECA": "Adreça",

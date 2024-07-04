@@ -23,7 +23,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES0021316182488672PV",
+    "cups": "ES0029874572863299XP",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -35,7 +35,7 @@
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
     "invalidCups": "ES9803463008824117ZQ",
-    "validCups": "ES0021316182488672PV",
+    "validCups": "ES0029874572863299XP",
     "cadastralReference":""
   },
   "isIndexed": false,
@@ -61,7 +61,7 @@
   },
   "selfConsumption": {
     "have_installation": true,
-    "cau": "ES0353501028615353EEA000",
+    "cau": "ES 0353 5010 2861 5353 EE 0F A000",
     "collective_installation": true,
     "installation_power": "3.5",
     "installation_type": "01",

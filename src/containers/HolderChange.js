@@ -5,19 +5,18 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Paper from '@material-ui/core/Paper'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import LinearProgress from '@mui/material/LinearProgress'
+import Paper from '@mui/material/Paper'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
-import Typography from '@material-ui/core/Typography'
-import Alert from '@material-ui/lab/Alert'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
+import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
 
 import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
@@ -37,35 +36,9 @@ import DisplayFormikState from 'components/DisplayFormikState'
 
 import { holderChange } from 'services/api'
 import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#f2f2f2',
-    color: theme.palette.text.primary
-  },
-  form: {
-    position: 'relative'
-  },
-  stepContainer: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'transparent'
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
-}))
+import PrevButton from 'components/Buttons/PrevButton'
 
 function HolderChange(props) {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
@@ -433,7 +406,7 @@ function HolderChange(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box className={classes.root}>
+      <Box sx={{ backgroundColor: '#f2f2f2', color: 'primary' }}>
         <Container maxWidth="md">
           <Formik
             enableReinitialize
@@ -443,10 +416,22 @@ function HolderChange(props) {
             onSubmit={handleSubmit}>
             {(props) => (
               <>
-                <div className="ov-theme">
-                  <Form className={classes.form} noValidate autoComplete="off">
+                <Box className="ov-theme">
+                  <Form
+                    sx={{ position: 'relative' }}
+                    noValidate
+                    autoComplete="off">
                     {
-                      <Paper elevation={0} className={classes.stepContainer}>
+                      <Paper
+                        elevation={0}
+                        sx={{
+                          mt: 4,
+                          mb: 4,
+                          width: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          backgroundColor: 'transparent'
+                        }}>
                         <LinearProgress
                           variant={sending ? 'indeterminate' : 'determinate'}
                           value={(activeStep / MAX_STEP_NUMBER) * 100}
@@ -465,22 +450,22 @@ function HolderChange(props) {
                           )}
                         </>
                         <Box mx={0} mt={2} mb={3}>
-                          <div className={classes.actionsContainer}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between'
+                            }}>
                             {result?.contract_number === undefined && (
-                              <Button
-                                data-cy="prev"
-                                className={classes.button}
-                                startIcon={<ArrowBackIosIcon />}
+                              <PrevButton
                                 disabled={activeStep === 0 || sending}
-                                onClick={() => prevStep(props.values, props)}>
-                                {t('PAS_ANTERIOR')}
-                              </Button>
+                                onClick={() => prevStep(props.values, props)}
+                                title={t('PAS_ANTERIOR')}
+                              />
                             )}
                             {!completed && (
                               <Button
                                 type="submit"
                                 data-cy="next"
-                                className={classes.button}
                                 variant="contained"
                                 color="primary"
                                 startIcon={
@@ -496,10 +481,14 @@ function HolderChange(props) {
                                 {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
                               </Button>
                             )}
-                          </div>
+                          </Box>
                         </Box>
                         <Box mx={0} mt={2} mb={3}>
-                          <div className={classes.actionsContainer}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between'
+                            }}>
                             {activeStep === 4 &&
                               isHomeOwnerCommunityNif(
                                 props.values?.holder?.vat
@@ -517,12 +506,12 @@ function HolderChange(props) {
                                   </Box>
                                 </>
                               )}
-                          </div>
+                          </Box>
                         </Box>
                       </Paper>
                     }
                   </Form>
-                </div>
+                </Box>
                 {showInspector && <DisplayFormikState {...props} />}
               </>
             )}

@@ -1,27 +1,33 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
+
 
 const LabelFieldRow = ({ label = '', children, isHighlight }) => {
-
-  const classes = useStyles()
-
   return (
-    <div className={classes.row}>
-      <div className={isHighlight ? classes.highlight : classes.label}>
+    <Box sx={{ width: '100%', display: 'flex' }}>
+      <Box sx={isHighlight ? customStyles.highlight : customStyles.label}>
         {label}
-      </div>
-      <div className={classes.field}>{children}</div>
-    </div>
+      </Box>
+      <Box sx={{
+        background: '#fff',
+        fontSize: '14px',
+        padding: '1em',
+        margin: '0 0 .5em 0',
+        flex: '0 0 75%',
+        maxWidth: '75%',
+        '& p': {
+          margin: 0
+        }
+      }}>
+        {children}
+      </Box>
+    </Box>
   )
 }
 
 export default LabelFieldRow
 
-const useStyles = makeStyles((theme) => ({
-  row: {
-    width: '100%',
-    display: 'flex'
-  },
+const customStyles = {
   label: {
     background: '#cccc',
     borderRight: '5px #f2f2f2 solid',
@@ -44,17 +50,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     fontWeight: 'bold',
-    color: theme.palette.primary.main
+    color: 'primary.main'
   },
-  field: {
-    background: '#fff',
-    fontSize: '14px',
-    padding: '1em',
-    margin: '0 0 .5em 0',
-    flex: '0 0 75%',
-    maxWidth: '75%',
-    '& p': {
-      margin: 0
-    }
-  }
-}))
+}

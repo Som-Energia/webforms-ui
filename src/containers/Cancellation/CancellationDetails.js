@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
-
-import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import TextField from '@material-ui/core/TextField'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import IconButton from '@material-ui/core/IconButton'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import TextField from '@mui/material/TextField'
+import FormHelperText from '@mui/material/FormHelperText'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import Box from '@mui/material/Box'
 
-import { DatePicker } from '@material-ui/pickers'
-import TodayOutlinedIcon from '@material-ui/icons/TodayOutlined'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import Header from 'components/oficinavirtual/Header'
 import Card from 'components/oficinavirtual/Card'
@@ -29,7 +29,6 @@ import { getNationalHolidays } from 'services/api'
 const CancellationDetails = (props) => {
   const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
     props
-  const classes = useStyles()
   const { t } = useTranslation()
 
   const [open, setOpen] = useState(false)
@@ -102,7 +101,14 @@ const CancellationDetails = (props) => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className={classes.root}>
+    <Box sx={{
+      width: '100%',
+      mb: '0.5rem',
+      '#root & input[type="text"]': {
+        fontSize: '14px !important',
+        padding: '14px !important'
+      }
+    }}>
       <Header>{t('CANCELLATION_DETAILS_TITLE')}</Header>
       <LabelFieldRow label={t('CUPS')}>
         <TextField
@@ -136,31 +142,33 @@ const CancellationDetails = (props) => {
       </LabelFieldRow>
       <LabelFieldRow label={t('CANCELLATION_DATE')}>
         <DatePicker
+          value={dayjs(values.date_action, 'DD/MM/YYYY')}
+          onChange={handleDateChange}
           name="date_action"
           fullWidth
-          className={classes.icon}
+          sx={{
+            width: '100%',
+            '& path': {
+              color: 'rgba(0, 0, 0, 0.54)'
+            }
+          }}
           inputVariant="outlined"
           variant="inline"
           autoOk
           disableToolbar
-          minDate={firstDate}
-          maxDate={lastDate}
+          minDate={dayjs(firstDate)}
+          maxDate={dayjs(lastDate)}
           size="small"
           format="DD/MM/YYYY"
-          value={dayjs(values.date_action, 'DD/MM/YYYY')}
-          onChange={handleDateChange}
           shouldDisableDate={shouldDisableDate}
-          InputProps={{
-            startAdornment: (
-              <IconButton edge="start" size="small">
-                <TodayOutlinedIcon />
-              </IconButton>
-            )
-          }}
         />
+
         <FormHelperText
           component="span"
-          className={classes.helper}
+          sx={{
+            pt: '4px',
+            mb: '-0.25rem !important'
+          }}
           dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
         />
       </LabelFieldRow>
@@ -185,7 +193,10 @@ const CancellationDetails = (props) => {
             )) || (
               <FormHelperText
                 component="span"
-                className={classes.helper}
+                sx={{
+                  pt: '4px',
+                  mb: '-0.25rem !important'
+                }}
                 dangerouslySetInnerHTML={{
                   __html: t('CANCELLATION_PHONE_HELPER')
                 }}
@@ -194,7 +205,15 @@ const CancellationDetails = (props) => {
           }
         />
       </LabelFieldRow>
-      <Card className={classes.legalChecks}>
+      <Card sx={{
+        mt: '4px',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '0.75rem 1.5rem',
+        '& .MuiFormControlLabel-label': {
+          fontSize: '14px'
+        }
+      }}>
         <TermsDialog
           title={t('CANCELLATION_TERMS_TITLE')}
           open={open}
@@ -202,7 +221,6 @@ const CancellationDetails = (props) => {
           onClose={handleClose}>
           <LegalText documentName={'cancellation-terms'} />
         </TermsDialog>
-
         <FormControlLabel
           control={
             <Checkbox
@@ -235,37 +253,8 @@ const CancellationDetails = (props) => {
           label={t('CANCELLATION_TERMS')}
         />
       </Card>
-    </div>
+    </Box>
   )
 }
 
 export default CancellationDetails
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    marginBottom: '0.5rem',
-    '#root & input[type="text"]': {
-      fontSize: '14px !important',
-      padding: '14px !important'
-    }
-  },
-  helper: {
-    paddingTop: '4px',
-    marginBottom: '-0.25rem !important'
-  },
-  legalChecks: {
-    marginTop: '4px',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '0.75rem 1.5rem',
-    '& .MuiFormControlLabel-label': {
-      fontSize: '14px !important'
-    }
-  },
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  }
-}))

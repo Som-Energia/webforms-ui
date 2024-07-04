@@ -1,17 +1,15 @@
 import React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import FormHelperText from '@mui/material/FormHelperText'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
-import { FormHelperText } from '@material-ui/core'
 
 const SelfConsumption = (props) => {
-  const classes = useStyles()
   const { t } = useTranslation()
 
   const handleChange = ({ option }) => {
@@ -23,7 +21,14 @@ const SelfConsumption = (props) => {
       <StepHeader title={t('SELFCONSUMPTION_TITLE')} />
       <Box mt={3} mb={2}>
         <Chooser
-          className={classes.chooserQuestion}
+          sx={{
+            '& h6': {
+              fontWeight: 400
+            },
+            '& label': {
+              minHeight: '80px'
+            }
+          }}
           question={t('SELFCONSUMPTION_QUESTION')}
           onChange={handleChange}
           value={props.values.self_consumption.have_installation}
@@ -63,14 +68,3 @@ const SelfConsumption = (props) => {
 }
 
 export default SelfConsumption
-
-const useStyles = makeStyles((theme) => ({
-  chooserQuestion: {
-    '& h6': {
-      fontWeight: 400
-    },
-    '& label': {
-      minHeight: '80px'
-    }
-  }
-}))

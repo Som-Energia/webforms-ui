@@ -1,32 +1,14 @@
 import React from 'react'
-import { Alert, AlertTitle } from '@material-ui/lab'
-import { Grid, Typography } from '@material-ui/core'
+import { Alert, AlertTitle, Grid, Typography, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
-import StepHeader from '../../../components/StepHeader'
 import Chooser from '../../../components/Chooser'
 import GenerationMemberIdFields from './GenerationMemberIdFields'
 import GenerationNoMemberIdFields from './GenerationNoMemberIdFields'
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontSize: '1rem',
-    marginTop: '16px',
-    fontWeight: 500
-  },
-  titleWithMargin: {
-    marginBottom: theme.spacing(1)
-  },
-  titleWithMarginPlus: {
-    marginBottom: theme.spacing(3)
-  }
-}))
 
 const GenerationMemberIdentifier = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
-
+  
   const {
     values,
     errors,
@@ -95,7 +77,7 @@ const GenerationMemberIdentifier = (props) => {
         </>
       )}
       {!values?.member?.has_generation_enabled_zone ? (
-        <Grid id="grid_not_enabled_zone" container style={{ gap: '1rem' }}>
+        <Grid id="grid_not_enabled_zone" container sx={{ gap: '1rem' }}>
           <Grid item>
             <Alert severity="warning">
               <AlertTitle>

@@ -1,75 +1,52 @@
 import React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import PrevButton from 'components/Buttons/PrevButton'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  resetContainer: {
-    padding: theme.spacing(3)
-  },
-  paperContainer: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
-  }
-}))
-
-export default function Contact ({ nextStep, prevStep, handleStepChanges, params }) {
-  const classes = useStyles()
+export default function Contact({
+  nextStep,
+  prevStep,
+  handleStepChanges,
+  params
+}) {
   const { t } = useTranslation()
 
   const ContactSchema = Yup.object().shape({
-    contactName: Yup.string()
-      .required(t('NO_NAME')),
-    contactSurname: Yup.string()
-      .required(t('NO_SURNAME')),
+    contactName: Yup.string().required(t('NO_NAME')),
+    contactSurname: Yup.string().required(t('NO_SURNAME')),
     phone: Yup.string()
       .matches(/^\d{9}$/, t('NO_PHONE'))
       .required(t('NO_PHONE'))
   })
 
   return (
-    <Paper className={classes.paperContainer} elevation={0}>
+    <Paper sx={{ mt: 2, padding: 2 }} elevation={0}>
       <Formik
-        initialValues={
-          {
-            ...{
-              contactName: '',
-              contactSurname: '',
-              phone: ''
-            },
-            ...params
-          }
-        }
+        initialValues={{
+          ...{
+            contactName: '',
+            contactSurname: '',
+            phone: ''
+          },
+          ...params
+        }}
         validationSchema={ContactSchema}
         onSubmit={(values, { setSubmitting }) => {
           handleStepChanges({ contact: values })
           nextStep()
-        }}
-      >
+        }}>
         {({
           values,
           errors,
@@ -94,8 +71,8 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 id="contactName"
                 name="contactName"
                 label={t('NAME')}
-                error={(errors.contactName && touched.contactName)}
-                helperText={(touched.contactName && errors.contactName)}
+                error={errors.contactName && touched.contactName}
+                helperText={touched.contactName && errors.contactName}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.contactName}
@@ -109,8 +86,8 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 id="contactSurname"
                 name="contactSurname"
                 label={t('SURNAME')}
-                error={(errors.contactSurname && touched.contactSurname)}
-                helperText={(touched.contactSurname && errors.contactSurname)}
+                error={errors.contactSurname && touched.contactSurname}
+                helperText={touched.contactSurname && errors.contactSurname}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.contactSurname}
@@ -124,8 +101,8 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
                 name="phone"
                 type="tel"
                 label={t('PHONE')}
-                error={(errors.phone && touched.phone)}
-                helperText={(touched.phone && errors.phone)}
+                error={errors.phone && touched.phone}
+                helperText={touched.phone && errors.phone}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.phone}
@@ -136,30 +113,26 @@ export default function Contact ({ nextStep, prevStep, handleStepChanges, params
               />
             </Box>
 
-            <div className={classes.actionsContainer}>
-              {
-                prevStep &&
-                <Button
+            <Box
+              sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
+              {prevStep && (
+                <PrevButton
                   onClick={prevStep}
-                  className={classes.button}
-                  startIcon={<ArrowBackIosIcon />}
-                >
-                  {t('PAS_ANTERIOR')}
-                </Button>
-              }
-              {
-                nextStep &&
+                  sx={{ mt: 1, mr: 1 }}
+                  title={t('PAS_ANTERIOR')}
+                />
+              )}
+              {nextStep && (
                 <Button
                   type="submit"
-                  className={classes.button}
+                  sx={{ mt: 1, mr: 1 }}
                   color="primary"
                   variant="contained"
-                  endIcon={<ArrowForwardIosIcon />}
-                >
+                  endIcon={<ArrowForwardIosIcon />}>
                   {t('SEGUENT_PAS')}
                 </Button>
-              }
-            </div>
+              )}
+            </Box>
           </form>
         )}
       </Formik>

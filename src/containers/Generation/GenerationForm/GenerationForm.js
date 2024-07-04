@@ -5,14 +5,9 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
-
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-
-import SendIcon from '@material-ui/icons/Send'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
 
 import GenerationMemberIdentifier from './GenerationMemberIdentifier'
 import GenerationContributionForm from './GenerationContributionForm'
@@ -36,7 +31,7 @@ const MAX_STEP_NUMBER = 5
 
 const GenerationContribution = (props) => {
   const { limitAmount } = props
-  const classes = useStyles()
+
   const { t, i18n } = useTranslation()
   const { language } = useParams()
   const [activeStep, setActiveStep] = useState(0)
@@ -87,7 +82,7 @@ const GenerationContribution = (props) => {
     privacy_policy_accepted_responsible_declaration: false,
     percent_over_annual_use: 0,
     signaturit: {},
-    mandate_name:''
+    mandate_name: ''
   }
 
   const validationSchemas = [
@@ -303,7 +298,11 @@ const GenerationContribution = (props) => {
               : !formikProps.isValid
           }
           onClick={() => nextStep(formikProps)}
-          title={activeStep===3 ? t('GENERATION_FORM_SIGN_BUTTON') : t('SEGUENT_PAS')}
+          title={
+            activeStep === 3
+              ? t('GENERATION_FORM_SIGN_BUTTON')
+              : t('SEGUENT_PAS')
+          }
         />
       ) : (
         <ExitButton
@@ -338,7 +337,7 @@ const GenerationContribution = (props) => {
           setError(errorResp)
         })
     }
-    const dataCon = normalizeContribution(values,true)
+    const dataCon = normalizeContribution(values, true)
 
     await generationkWhContribution(dataCon)
       .then((response) => {
@@ -355,7 +354,7 @@ const GenerationContribution = (props) => {
           ? error?.response?.data?.data
           : { code: 'UNEXPECTED' }
         setError(errorResp)
-      }) 
+      })
     setSending(false)
     setActiveStep(MAX_STEP_NUMBER)
     setCompleted(true)
@@ -369,9 +368,24 @@ const GenerationContribution = (props) => {
       validationSchema={validationSchemas[activeStep]}
       validateOnMount={true}>
       {(formikProps) => (
-        <Form className={classes.root} noValidate autoComplete="off">
+        <Form
+          sx={{
+            position: 'relative',
+            color: 'text.primary'
+          }}
+          noValidate
+          autoComplete="off">
           <Container maxWidth="md" disableGutters={true}>
-            <Paper elevation={0} className={classes.stepContainer}>
+            <Paper
+              elevation={0}
+              sx={{
+                mt: 0,
+                mb: 4,
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: 'backgroundColor'
+              }}>
               {activeStep === 0 && (
                 <GenerationMemberIdentifier
                   {...formikProps}
@@ -379,14 +393,32 @@ const GenerationContribution = (props) => {
                 />
               )}
               {activeStep === 1 && (
-                <PersonalData title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')} {...formikProps} entity="member" />
+                <PersonalData
+                  title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')}
+                  {...formikProps}
+                  entity="member"
+                />
               )}
               {activeStep === 2 && (
-                <GenerationContributionForm limitAmount={limitAmount} title={t('GENERATION_FORM_TITLE')} {...formikProps} />
+                <GenerationContributionForm
+                  limitAmount={limitAmount}
+                  title={t('GENERATION_FORM_TITLE')}
+                  {...formikProps}
+                />
               )}
-              {activeStep === 3 && <GenerationReview title={t('GENERATION_FORM_TITLE')} {...formikProps} />}
+              {activeStep === 3 && (
+                <GenerationReview
+                  title={t('GENERATION_FORM_TITLE')}
+                  {...formikProps}
+                />
+              )}
               {activeStep === 4 && (
-                <GenerationSignaturit limitAmount={limitAmount} title={t('GENERATION_FORM_TITLE')} submit={handlePost} {...formikProps} />
+                <GenerationSignaturit
+                  limitAmount={limitAmount}
+                  title={t('GENERATION_FORM_TITLE')}
+                  submit={handlePost}
+                  {...formikProps}
+                />
               )}
 
               {completed && (
@@ -404,7 +436,11 @@ const GenerationContribution = (props) => {
               )}
 
               <Box mx={0} mt={2} mb={3}>
-                <div className={classes.actionsContainer}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                  }}>
                   {result?.investment === undefined && !completed ? (
                     <PrevButton
                       disabled={activeStep === 0 || sending}
@@ -419,7 +455,7 @@ const GenerationContribution = (props) => {
                         formikProps
                       )
                     : null}
-                </div>
+                </Box>
               </Box>
             </Paper>
           </Container>
@@ -430,26 +466,3 @@ const GenerationContribution = (props) => {
 }
 
 export default GenerationContribution
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'relative',
-    color: theme.palette.text.primary
-  },
-  stepContainer: {
-    marginTop: 0,
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.palette.backgroundColor
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
-}))

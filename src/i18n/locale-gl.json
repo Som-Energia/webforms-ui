@@ -245,6 +245,7 @@
     "SOCIA_NO_TROBADA": "Non se atopou ningún socio/a vinculado a estes datos!",
     "NO_MEMBER_VAT": "Non introduciches un NIF correcto",
     "NO_MEMBER_NUMBER": "Non introduciches un número de socio/a",
+    "INVALID_NIF": "O formato do NIF debería ser: 12345678P",
     "FILL_SUPPLY_POINT": "Indica os datos do punto de subministración:",
     "CUPS_IS_ACTIVE": "Este CUPS xa ten un contrato activo en Som Energia. Para solicitar un cambio de titular podes facelo en <a href=\"//oficinavirtual.somenergia.coop/es/change-ownership/\" target=\"_blank\">aquí</a>.",
     "ADRECA": "Enderezo",

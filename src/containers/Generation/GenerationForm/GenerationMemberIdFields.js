@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
 
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import {
   checkMember,
@@ -15,12 +16,6 @@ import {
   checkIsFromGenerationEnabledZone
 } from '../../../services/api'
 
-const useStyles = makeStyles((theme) => ({
-  memberChecked: {
-    fontWeight: 500,
-    color: theme.palette.primary.main
-  }
-}))
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search)
@@ -28,7 +23,7 @@ const useQuery = () => {
 
 const GenerationMemberIdFields = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
+  
   const query = useQuery()
 
   const {
@@ -170,9 +165,12 @@ const GenerationMemberIdFields = (props) => {
                 />
               )
             ) : (
-              <span className={classes.memberChecked}>
+              <Typography sx={{
+                fontWeight: 500,
+                color: 'primary.main'
+              }} >
                 {t('SOCIA_TROBADA')}
-              </span>
+              </Typography>
             ))
           }
         />

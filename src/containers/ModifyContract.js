@@ -3,21 +3,22 @@ import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 
-import { makeStyles } from '@material-ui/core/styles'
 import { modifyContract, confirmD1Case } from '../services/api'
 import {
   normalizeModifyData,
   normalizeD1ConfirmationData
 } from '../services/utils'
 
-import Alert from '@material-ui/lab/Alert'
-import AlertTitle from '@material-ui/lab/AlertTitle'
+import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
 
-import Grow from '@material-ui/core/Grow'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
-import StepContent from '@material-ui/core/StepContent'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Grow from '@mui/material/Grow'
+import Stepper from '@mui/material/Stepper'
+import Step from '@mui/material/Step'
+import StepLabel from '@mui/material/StepLabel'
+import StepContent from '@mui/material/StepContent'
 
 import Intro from './ModifyContract/Intro'
 import IntroFromD1 from './CaseDetail/Intro'
@@ -27,31 +28,6 @@ import Resume from './ModifyContract/Resume'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 import AlertBox from 'components/AlertBox'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: '#f2f2f2'
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(2)
-  },
-  resetContainer: {
-    padding: theme.spacing(2)
-  },
-  responseContainer: {
-    padding: theme.spacing(1)
-  },
-  stepper: {
-    backgroundColor: '#f2f2f2',
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
-  },
-  stepLabel: {
-    fontSize: '1.15rem'
-  }
-}))
 
 const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
@@ -73,7 +49,6 @@ function ModifyContract(props) {
   const fromD1 = state?.d1CaseData?.m1
   const d1CaseData = state?.d1CaseData
 
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
 
   const handlers = {
@@ -195,7 +170,7 @@ function ModifyContract(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <div className={classes.root}>
+      <Box sx={{ width: '100%', backgroundColor: '#f2f2f2' }}>
         <AlertBox
           severity={'warning'}
           variant={'body2'}
@@ -204,18 +179,18 @@ function ModifyContract(props) {
             baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),
             baner_document_url: t('MODIFY_POTTAR_BANER_DOCUMENT_URL'),
             baner_help_url: t('MODIFY_POTTAR_BANER_HELP_URL')
-          })}
-        ></AlertBox>
+          })}></AlertBox>
         {fromD1 && (
           <Stepper
-            className={classes.stepper}
+            sx={{ backgroundColor: '#f2f2f2', pl: 1, pr: 1, pb: 1 }}
             activeStep={activeD1Step}
-            orientation="vertical"
-          >
+            orientation="vertical">
             {d1Steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>
-                  <span className={classes.stepLabel}>{t(label)}</span>
+                  <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
+                    {t(label)}
+                  </Typography>
                 </StepLabel>
                 <StepContent>
                   <Navigate
@@ -230,16 +205,16 @@ function ModifyContract(props) {
           </Stepper>
         )}
         <Stepper
-          className={classes.stepper}
+          sx={{ backgroundColor: '#f2f2f2', pl: 1, pr: 1, pb: 1 }}
           activeStep={activeStep}
-          orientation="vertical"
-        >
+          orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel
-                error={index === steps.length - 1 && data?.error !== undefined}
-              >
-                <span className={classes.stepLabel}>{t(label)}</span>
+                error={index === steps.length - 1 && data?.error !== undefined}>
+                <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
+                  {t(label)}
+                </Typography>
               </StepLabel>
               <StepContent>{getStepContent(index)}</StepContent>
             </Step>
@@ -247,26 +222,26 @@ function ModifyContract(props) {
         </Stepper>
         {data?.error && (
           <Grow in={data?.error !== undefined}>
-            <div className={classes.responseContainer}>
+            <Box sx={{ padding: 1 }}>
               <Alert severity="error">
                 <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
                 {t(data?.error?.code)}
               </Alert>
-            </div>
+            </Box>
           </Grow>
         )}
         {data?.response && (
           <Grow in={data?.response !== undefined}>
-            <div className={classes.responseContainer}>
+            <Box sx={{ padding: 1 }}>
               <Alert severity="success">
                 <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
                 {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
               </Alert>
-            </div>
+            </Box>
           </Grow>
         )}
         {showInspector && <DisplayFormikState {...data} />}
-      </div>
+      </Box>
     </GlobalHotKeys>
   )
 }

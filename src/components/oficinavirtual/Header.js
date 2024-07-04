@@ -1,15 +1,9 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@mui/material/Typography'
 
 const Header = ({ variant = 'h1', children }) => {
-  const classes = useStyles()
-  return <h3 className={classes.header}>{children}</h3>
-}
 
-export default Header
-
-const useStyles = makeStyles((theme) => ({
-  header: {
+  return <Typography component='h3' sx={{
     width: '100%',
     background: '#fff',
     color: '#96b633',
@@ -17,5 +11,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 0 .5em 0',
     fontSize: '18px',
     textTransform: 'uppercase'
-  }
-}))
+  }} >{children}</Typography>
+}
+
+export default Header

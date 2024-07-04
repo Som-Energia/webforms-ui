@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@material-ui/core/Box'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import FormHelperText from '@mui/material/FormHelperText'
+import Typography from '@mui/material/Typography'
 
 import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'

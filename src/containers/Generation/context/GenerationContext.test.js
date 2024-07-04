@@ -3,7 +3,7 @@ import GenerationContext, {
   GenerationContextProvider
 } from './GenerationContext'
 import React, { useContext } from 'react'
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 import userEvent from '@testing-library/user-event'
 
 const ContextConsumer = () => {

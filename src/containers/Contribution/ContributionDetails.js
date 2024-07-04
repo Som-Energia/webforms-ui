@@ -1,42 +1,24 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
 import StepHeader from '../../components/StepHeader'
 import IBANField from '../../components/IBANField'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
-import EuroIcon from '@material-ui/icons/EuroRounded'
+import EuroIcon from '@mui/icons-material/Euro'
 
 import { contributionParams } from '../../services/utils'
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontSize: '1rem',
-    marginTop: theme.spacing(2),
-    paddingBottom: theme.spacing(1)
-  },
-  titleWithMargin: {
-    marginBottom: theme.spacing(2)
-  },
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  }
-}))
 
 const ContributionDetails = (props) => {
   const { values, handleChange, handleBlur, errors, touched, setFieldValue } =
     props
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const handleIBANChange = ({ IBAN, IBANValid }) => {
     setFieldValue('payment.iban', IBAN, false)
@@ -84,7 +66,7 @@ const ContributionDetails = (props) => {
       <Box pt={1}>
         <Typography
           variant="h6"
-          className={classes.title}
+          sx={{ fontSize: '1rem', mt: 2, pb: 1 }}
           dangerouslySetInnerHTML={{
             __html: t('CONTRIBUTION_AMOUNT_TITLE', {
               name: values.member.full_name
@@ -97,7 +79,11 @@ const ContributionDetails = (props) => {
           id="amount"
           name="payment.amount"
           variant="outlined"
-          className={classes.icon}
+          sx={{
+            '& path': {
+              color: 'rgba(0, 0, 0, 0.54)'
+            }
+          }}
           fullWidth
           label={t('CONTRIBUTION_AMOUNT')}
           value={values?.payment?.amount}
@@ -122,7 +108,7 @@ const ContributionDetails = (props) => {
       <Box pt={1} mb={0}>
         <Typography
           variant="h6"
-          className={`${classes.title} ${classes.titleWithMargin}`}
+          sx={{ fontSize: '1rem', mt: 2, pb: 1, mb: 2 }}
           dangerouslySetInnerHTML={{
             __html: t('CONTRIBUTION_IBAN_TITLE', {
               name: values.member.full_name

@@ -1,35 +1,13 @@
 import React, { useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
-import Button from '@material-ui/core/Button'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
 
 import OptionSwitch from '../components/OptionSwitch'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: '#f2f2f2'
-  },
-  subsPaper: {
-    padding: '16px 0'
-  },
-  controls: {
-    textAlign: 'right',
-    marginTop: '8px',
-    marginBottom: '16px'
-  },
-  button: {
-    paddingLeft: '64px',
-    paddingRight: '64px'
-  },
-  emptyList: {
-    padding: '32px'
-  }
-}))
+import Box from '@mui/material/Box'
 
 const defaultLists = [
   { title: 'BLOG_NEWS', description: 'BLOG_NEWS_DESC', value: true },
@@ -51,7 +29,6 @@ const defaultLists = [
 ]
 
 const MailSubscriptions = (props) => {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
   const { mailLists = defaultLists } = props
   const { language } = useParams()
@@ -61,7 +38,7 @@ const MailSubscriptions = (props) => {
   }, [language, i18n])
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ width: '100%', backgroundColor: '#f2f2f2' }}>
       <Container disableGutters>
         <Grid container spacing={1}>
           {mailLists.lenghth ? (
@@ -75,9 +52,12 @@ const MailSubscriptions = (props) => {
                   />
                 </Grid>
               ))}
-              <Grid item xs={12} className={classes.controls}>
+              <Grid
+                item
+                xs={12}
+                sx={{ textAlign: 'right', mt: '8px', mb: '16px' }}>
                 <Button
-                  className={classes.button}
+                  sx={{ pl: '64px', pr: '64px' }}
                   variant="contained"
                   disableElevation
                   color="primary">
@@ -87,12 +67,12 @@ const MailSubscriptions = (props) => {
             </>
           ) : (
             <Grid item xs={12}>
-              <div className={classes.emptyList}>{t('NO_MAIL_LISTS')}</div>
+              <Box sx={{ padding: '32px' }}>{t('NO_MAIL_LISTS')}</Box>
             </Grid>
           )}
         </Grid>
       </Container>
-    </div>
+    </Box>
   )
 }
 

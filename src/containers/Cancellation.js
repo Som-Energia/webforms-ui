@@ -6,18 +6,17 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
+import Alert from '@mui/material/Alert'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
-import Alert from '@material-ui/lab/Alert'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
+import { LocalizationProvider } from '@mui/x-date-pickers'
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import DayjsUtils from '@date-io/dayjs'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
@@ -25,9 +24,9 @@ import 'dayjs/locale/es'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
 
 import ContractDetails from './Cancellation/ContractDetails'
 import CancellationWarning from './Cancellation/CancellationWarning'
@@ -38,6 +37,7 @@ import Failure from './Failure'
 import Success from './Success'
 
 import { cancelContract } from 'services/api'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const MAX_STEP_NUMBER = 2
 
@@ -47,7 +47,6 @@ const keyMap = {
 }
 
 const Cancellation = (props) => {
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
 
   const { contract } = props
@@ -76,7 +75,7 @@ const Cancellation = (props) => {
     terms_accepted: false,
     phone: '',
     validation_cups: '',
-    date_action: null,
+    date_action: null
   }
 
   const nextStep = (props) => {
@@ -162,7 +161,7 @@ const Cancellation = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          className={classes.disclaimer}
+          sx={{ fontSize: '14px', fontWeight: 400 }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_NO_AVAILABLE')
@@ -174,9 +173,9 @@ const Cancellation = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <MuiPickersUtilsProvider utils={DayjsUtils}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
         <Formik
-          onSubmit={() => {}}
+          onSubmit={() => { }}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -186,7 +185,12 @@ const Cancellation = (props) => {
               <Form
                 id="cancelForm"
                 method="POST"
-                className={classes.root}
+                sx={{
+                  backgroundColor: '#f2f2f2',
+                  color: 'primary',
+                  display: 'flex',
+                  pb: '2rem'
+                }}
                 noValidate
                 autoComplete="off">
                 <Container maxWidth="lg" disableGutters={true}>
@@ -202,22 +206,22 @@ const Cancellation = (props) => {
                       )}
                       <CancellationWarning />
                       <Box mx={0} mt={2} mb={3}>
-                        <div className={classes.actionsContainer}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            pt: '0.25rem'
+                          }}>
                           {result?.contract_number === undefined && (
-                            <Button
-                              data-cy="prev"
-                              className={classes.button}
-                              startIcon={<ArrowBackIosIcon />}
+                            <PrevButton
                               disabled={activeStep === 0 || sending}
-                              onClick={() => prevStep(formikProps)}>
-                              {t('PAS_ANTERIOR')}
-                            </Button>
+                              onClick={() => prevStep(formikProps)}
+                              title={t('PAS_ANTERIOR')}
+                            />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
                             <Button
-                              type="button"
                               data-cy="next"
-                              className={classes.button}
                               variant="contained"
                               color="primary"
                               endIcon={<ArrowForwardIosIcon />}
@@ -228,9 +232,7 @@ const Cancellation = (props) => {
                           ) : (
                             !completed && (
                               <Button
-                                type="button"
                                 data-cy="submit"
-                                className={classes.button}
                                 variant="contained"
                                 color="primary"
                                 startIcon={
@@ -246,13 +248,23 @@ const Cancellation = (props) => {
                               </Button>
                             )
                           )}
-                        </div>
+                        </Box>
                       </Box>
                     </>
                   )}
 
                   {completed && (
-                    <Paper elevation={0} className={classes.stepContainer}>
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        padding: '4rem',
+                        mt: 0,
+                        mb: 4,
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        backgroundColor: 'backgroundColor'
+                      }}>
                       {result ? (
                         <Success
                           showHeader={false}
@@ -270,40 +282,9 @@ const Cancellation = (props) => {
             </>
           )}
         </Formik>
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </GlobalHotKeys>
   )
 }
 
 export default Cancellation
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#f2f2f2',
-    color: theme.palette.text.primary,
-    display: 'flex',
-    paddingBottom: '2rem'
-  },
-  stepContainer: {
-    padding: '4rem',
-    marginTop: 0,
-    marginBottom: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.palette.backgroundColor
-  },
-  step: {
-    position: 'absolute',
-    width: '100%'
-  },
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    paddingTop: '0.25rem'
-  },
-  disclaimer: {
-    fontSize: '14px',
-    fontWeight: 400
-  }
-}))

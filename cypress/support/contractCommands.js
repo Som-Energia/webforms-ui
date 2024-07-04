@@ -15,6 +15,29 @@ Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('identifyGenerationCanJoin', (memberNumber, memberVat) => {
+  cy.intercept('GET', '/data/generationkwh/can_join/**', {
+    statusCode: 200,
+    body: {
+      "data": true,
+      "state": true,
+      "status": "ONLINE"
+    }
+  }).as('canJoin')
+
+  cy.get('#memberNumber')
+    .clear()
+    .type(memberNumber)
+    .should('have.value', memberNumber)
+
+  cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
+
+  cy.wait('@canJoin')
+    .its('response.statusCode')
+    .should('be.oneOf', [200, 304])
+})
+
+
 Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
 
   cy.get('#cups')
@@ -47,7 +70,7 @@ Cypress.Commands.add('enterSupplyPointData', (supplyPoint) => {
     .type(supplyPoint.postalCode)
     .should('have.value', supplyPoint.postalCode)
 
-  /*  
+  /*
   cy.get('#supply_point_state').click()
   cy.get(`[data-value="${supplyPoint.state}"]`).click()
 
@@ -71,6 +94,7 @@ Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
     cy.get('#phases').click()
     cy.get(`[data-value="${phase}"]`).click()
   }
+
   cy.get('[data-cy="moreThan15Kw"]')
     .get(`[data-value="${moreThan15Kw}"]`)
     .click()

@@ -2,25 +2,25 @@ import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Alert from '@material-ui/lab/Alert'
-import AlertTitle from '@material-ui/lab/AlertTitle'
-import Badge from '@material-ui/core/Badge'
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
-import MenuItem from '@material-ui/core/MenuItem'
-import Paper from '@material-ui/core/Paper'
-import Switch from '@material-ui/core/Switch'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import Badge from '@mui/material/Badge'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
+import FormHelperText from '@mui/material/FormHelperText'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import MenuItem from '@mui/material/MenuItem'
+import Paper from '@mui/material/Paper'
+import Switch from '@mui/material/Switch'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
 import Uploader from '../../components/Uploader'
 import PowerInputs from '../../components/PowerInputs'
@@ -28,43 +28,7 @@ import Chooser from '../../components/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
 import { getRates } from '../../services/api'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  resetContainer: {
-    padding: theme.spacing(3)
-  },
-  paperContainer: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
-  },
-  paramTitle: {
-    fontSize: '1.15rem'
-  },
-  switch: {
-    marginLeft: theme.spacing(2)
-  },
-  switchLabel: {
-    marginLeft: 0,
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    '&:hover': {
-      textDecoration: 'underline'
-    }
-  }
-}))
+import PrevButton from 'components/Buttons/PrevButton'
 
 const handleChangeModify = (event, setFieldValue, values) => {
   if (event.target.name === 'changePhases' && values.changePhases) {
@@ -98,7 +62,6 @@ const handleChangeMoreThan15 = (values, setFieldValue) => {
 }
 
 const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
-  const classes = useStyles()
   const { t } = useTranslation()
   const rates = getRates()
 
@@ -291,7 +254,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
   })
 
   return (
-    <Paper className={classes.paperContainer} elevation={0}>
+    <Paper sx={{ mt: 2, padding: 2 }} elevation={0}>
       <Formik
         initialValues={{
           ...{
@@ -335,9 +298,17 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             <form onSubmit={handleSubmit} noValidate>
               <Box mx={1} mb={0}>
                 <FormControlLabel
-                  className={classes.switchLabel}
+                  sx={{
+                    ml: 0,
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    '&:hover': {
+                      textDecoration: 'underline'
+                    }
+                  }}
                   label={
-                    <Typography variant="h6" className={classes.paramTitle}>
+                    <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>
                       {t('MODIFY_ANSWER_POWER')}
                     </Typography>
                   }
@@ -345,7 +316,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   control={
                     <Switch
                       name="changePower"
-                      className={classes.switch}
+                      sx={{ ml: 2 }}
                       onChange={(event) =>
                         handleChangeModify(event, setFieldValue, values)
                       }
@@ -397,7 +368,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                           indexed_url: values?.moreThan15Kw
                             ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
                             : t('POWER_INDEXED_20TD_MORE_INFO_URL')
-                          })
+                        })
                       }}></FormHelperText>
                   </Box>
 
@@ -468,9 +439,17 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
 
               <Box mx={1} mt={1} mb={0}>
                 <FormControlLabel
-                  className={classes.switchLabel}
+                  sx={{
+                    ml: 0,
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    '&:hover': {
+                      textDecoration: 'underline'
+                    }
+                  }}
                   label={
-                    <Typography variant="h6" className={classes.paramTitle}>
+                    <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>
                       {t('MODIFY_ANSWER_INSTAL_TYPE')}
                     </Typography>
                   }
@@ -478,7 +457,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   control={
                     <Switch
                       name="changePhases"
-                      className={classes.switch}
+                      sx={{ ml: 2 }}
                       onChange={(event) =>
                         handleChangeModify(event, setFieldValue, values)
                       }
@@ -537,30 +516,34 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   }}></FormHelperText>
               </Box>
 
-              <div className={classes.actionsContainer}>
+              <Box
+                sx={{
+                  mb: 1,
+                  display: 'flex',
+                  justifyContent: 'space-between'
+                }}>
                 {prevStep && (
-                  <Button
+                  <PrevButton
                     onClick={prevStep}
-                    className={classes.button}
-                    startIcon={<ArrowBackIosIcon />}>
-                    {t('PAS_ANTERIOR')}
-                  </Button>
+                    sx={{ mt: 1, mr: 1 }}
+                    title={t('PAS_ANTERIOR')}  
+                  />
                 )}
-                {nextStep && (
-                  <Button
-                    type="submit"
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    endIcon={<ArrowForwardIosIcon />}
-                    disabled={
-                      (!values.changePhases && !values.changePower) ||
-                      isSubmitting
-                    }>
-                    {t('SEGUENT_PAS')}
-                  </Button>
-                )}
-              </div>
+                    {nextStep && (
+                      <Button
+                        type="submit"
+                        sx={{ mt: 1, mr: 1 }}
+                        variant="contained"
+                        color="primary"
+                        endIcon={<ArrowForwardIosIcon />}
+                        disabled={
+                          (!values.changePhases && !values.changePower) ||
+                          isSubmitting
+                        }>
+                        {t('SEGUENT_PAS')}
+                      </Button>
+                    )}
+                  </Box>
             </form>
           )
         }}

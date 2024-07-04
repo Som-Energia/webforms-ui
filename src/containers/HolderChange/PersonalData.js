@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormHelperText from '@mui/material/FormHelperText'
+import Grid from '@mui/material/Grid'
+import InputAdornment from '@mui/material/InputAdornment'
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
-import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
+import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined'
 
 import StepHeader from 'components/StepHeader'
 import StateCity from 'components/StateCity'
@@ -25,27 +24,9 @@ import VATField from 'components/VATField'
 
 import { languages } from 'services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
-import { Typography } from '@material-ui/core'
-
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    '& path': {
-      color: 'rgba(0, 0, 0, 0.54)'
-    }
-  },
-  noteText: {
-    marginTop: theme.spacing(2)
-  },
-  title:{
-    display:'flex',
-    flexDirection: 'column',
-    marginBottom:"25px"
-  }
-}))
 
 function PersonalData(props) {
   const { t } = useTranslation()
-  const classes = useStyles()
   const {
     values,
     setFieldValue,
@@ -120,14 +101,18 @@ function PersonalData(props) {
   return (
     <>
       {title ? (
-        <div className={classes.title}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          marginBottom: "25px"
+        }}>
           <Typography component="h1" variant="h3">
             {title}
           </Typography>
           <Typography component="h3" variant="h6">
             {t('MEMBER_PERSONAL_DATA')}
           </Typography>
-        </div>
+        </Box>
       ) : (
         <StepHeader
           title={t(
@@ -250,7 +235,11 @@ function PersonalData(props) {
               id={`${entity}_address`}
               name={`${entity}.address`}
               label={t('HOLDER_ADDRESS')}
-              className={classes.icon}
+              sx={{
+                '& path': {
+                  color: 'rgba(0, 0, 0, 0.54)'
+                }
+              }}
               required
               variant="outlined"
               InputProps={{
@@ -361,7 +350,11 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_email`}
               name={`${entity}.email`}
-              className={classes.icon}
+              sx={{
+                '& path': {
+                  color: 'rgba(0, 0, 0, 0.54)'
+                }
+              }}
               label={t('HOLDER_EMAIL')}
               variant="outlined"
               InputProps={{
@@ -384,7 +377,11 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_email2`}
               name={`${entity}.email2`}
-              className={classes.icon}
+              sx={{
+                '& path': {
+                  color: 'rgba(0, 0, 0, 0.54)'
+                }
+              }}
               label={t('HOLDER_EMAIL_2')}
               variant="outlined"
               InputProps={{
@@ -407,7 +404,11 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_phone`}
               name={`${entity}.phone1`}
-              className={classes.icon}
+              sx={{
+                '& path': {
+                  color: 'rgba(0, 0, 0, 0.54)'
+                }
+              }}
               label={t('HOLDER_PHONE')}
               variant="outlined"
               InputProps={{
@@ -430,7 +431,11 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_phone2`}
               name={`${entity}.phone2`}
-              className={classes.icon}
+              sx={{
+                '& path': {
+                  color: 'rgba(0, 0, 0, 0.54)'
+                }
+              }}
               label={t('HOLDER_PHONE_2')}
               variant="outlined"
               InputProps={{
@@ -454,7 +459,11 @@ function PersonalData(props) {
               select
               required
               fullWidth
-              className={classes.icon}
+              sx={{
+                '& path': {
+                  color: 'rgba(0, 0, 0, 0.54)'
+                }
+              }}
               id={`${entity}_lang`}
               name={`${entity}.language`}
               label={t('LANGUAGE')}
@@ -490,19 +499,19 @@ function PersonalData(props) {
                     values?.contract?.has_service === undefined
                       ? entity === 'holder'
                         ? t('PRIVACY_POLICY_HOLDERCHANGE', {
-                            url: t('DATA_PROTECTION_HOLDERCHANGE_URL')
-                          })
-                        : t('PRIVACY_POLICY_NEWMEMBER', {
-                            url: t('DATA_PROTECTION_NEWMEMBER_URL')
-                          })
-                      : t('PRIVACY_POLICY_CONTRACT', {
-                          url: t('DATA_PROTECTION_CONTRACT_URL')
+                          url: t('DATA_PROTECTION_HOLDERCHANGE_URL')
                         })
+                        : t('PRIVACY_POLICY_NEWMEMBER', {
+                          url: t('DATA_PROTECTION_NEWMEMBER_URL')
+                        })
+                      : t('PRIVACY_POLICY_CONTRACT', {
+                        url: t('DATA_PROTECTION_CONTRACT_URL')
+                      })
                 }}
               />
               {values?.contract?.has_service === undefined ? (
                 <FormHelperText
-                  className={classes.noteText}
+                  sx={{ mt: 2 }}
                   dangerouslySetInnerHTML={{
                     __html: t('PRIVACY_POLICY_HOLDERCHANGE_NOTE')
                   }}
@@ -516,6 +525,7 @@ function PersonalData(props) {
             {skipPrivacyPolicy ? null : (
               <FormGroup row>
                 <FormControlLabel
+                  sx={{m:0}}
                   control={
                     <Checkbox
                       id="privacy_policy_accepted"

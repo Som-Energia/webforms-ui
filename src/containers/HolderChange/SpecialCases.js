@@ -1,74 +1,58 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
-import clsx from 'clsx'
 
-import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import Checkbox from '@mui/material/Checkbox'
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormGroup from '@mui/material/FormGroup'
+import Typography from '@mui/material/Typography'
 
 import StepHeader from 'components/StepHeader'
 import Uploader from 'components/Uploader'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  margin: {
-    marginTop: theme.spacing(3)
-  },
-  container: {
-    width: '100%'
-  },
-  chooserItem: {
-    display: 'block',
-    cursor: 'pointer',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-    paddingRight: theme.spacing(3),
-    paddingLeft: theme.spacing(3),
-    margin: '1px 1px 9px 1px',
-    border: '1px solid rgba(0, 0, 0, 0.12)',
-    '&:not(.Mui-disabled):hover': {
-      border: '1px solid rgba(0, 0, 0, 0.87)',
-      backgroundColor: 'rgba(0, 0, 0, 0.03)'
-    },
-    height: '100%'
-  },
-  chooserItemSelected: {
-    border: '2px solid #96b633',
-    backgroundColor: 'rgba(150, 182, 51, 0.08)',
-    margin: '0 0 8px 0',
-    '&:not(.Mui-disabled):hover': {
-      border: '2px solid #96b633',
-      backgroundColor: 'rgba(150, 182, 51, 0.08)'
-    },
-    '& span:last-child': {
-      fontWeight: 'bold',
-      opacity: '0.75'
-    }
-  },
-  chooserItemTitle: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  chooserItemDesc: {
-    marginTop: theme.spacing(1),
-    paddingLeft: theme.spacing(1)
-  },
-  attachmentTitle: {
-    paddingLeft: theme.spacing(1)
-  }
-}))
-
 const SpecialCases = (props) => {
-  const classes = useStyles()
   const { t } = useTranslation()
   const { values, errors, touched, setFieldValue } = props
+
+  const getChooserStyles = (selected) => {
+    const customChooserStyles = {
+      chooserItem: {
+        display: 'block',
+        cursor: 'pointer',
+        pt: 2,
+        pb: 2,
+        pr: 3,
+        pl: 3,
+        margin: '1px 1px 9px 1px',
+        border: '1px solid rgba(0, 0, 0, 0.12)',
+        '&:not(.Mui-disabled):hover': {
+          border: '1px solid rgba(0, 0, 0, 0.87)',
+          backgroundColor: 'rgba(0, 0, 0, 0.03)'
+        },
+        height: '100%'
+      },
+      chooserItemSelected: {
+        border: '2px solid #96b633',
+        backgroundColor: 'rgba(150, 182, 51, 0.08)',
+        margin: '0 0 8px 0',
+        '&:not(.Mui-disabled):hover': {
+          border: '2px solid #96b633',
+          backgroundColor: 'rgba(150, 182, 51, 0.08)'
+        },
+        '& span:last-child': {
+          fontWeight: 'bold',
+          opacity: '0.75'
+        }
+      }
+    }
+
+    let customChooserStylesArray = []
+    customChooserStylesArray.push(customChooserStyles.chooserItem)
+    selected &&
+      customChooserStylesArray.push(customChooserStyles.chooserItemSelected)
+    return customChooserStylesArray
+  }
 
   const specialHandleChange = (event) => {
     if (event.target.name === 'especial_cases.reason_death') {
@@ -128,7 +112,7 @@ const SpecialCases = (props) => {
     <>
       <StepHeader title={t('SPECIAL_CASES_TITLE')} />
       <Box className="step-body">
-        <FormControl component="fieldset" className={classes.container}>
+        <FormControl component="fieldset" sx={{ width: '100%' }}>
           <FormGroup>
             <FormControlLabel
               control={
@@ -140,11 +124,7 @@ const SpecialCases = (props) => {
                 />
               }
               label={t('SPECIAL_CASES_REASON_DEFAULT')}
-              className={clsx(
-                classes.chooserItem,
-                values.especial_cases?.reason_default &&
-                  classes.chooserItemSelected
-              )}
+              sx={getChooserStyles(values.especial_cases?.reason_default)}
             />
             <Box mt={1} mb={3}>
               <Typography
@@ -164,17 +144,11 @@ const SpecialCases = (props) => {
                 />
               }
               label={t('SPECIAL_CASES_REASON_DEATH')}
-              className={clsx(
-                classes.chooserItem,
-                values.especial_cases?.reason_death &&
-                  classes.chooserItemSelected
-              )}
+              sx={getChooserStyles(values.especial_cases?.reason_death)}
             />
             {values.especial_cases?.reason_death && (
               <>
-                <Typography className={classes.attachmentTitle}>
-                  {t('CERT_ATTACH_DEATH')}
-                </Typography>
+                <Typography sx={{ pl: 1 }}>{t('CERT_ATTACH_DEATH')}</Typography>
                 <Box mt={1} mb={2}>
                   <Uploader
                     fieldError={
@@ -203,17 +177,11 @@ const SpecialCases = (props) => {
                 />
               }
               label={t('SPECIAL_CASES_REASON_MERGE')}
-              className={clsx(
-                classes.chooserItem,
-                values.especial_cases?.reason_merge &&
-                  classes.chooserItemSelected
-              )}
+              sx={getChooserStyles(values.especial_cases?.reason_merge)}
             />
             {values.especial_cases?.reason_merge && (
               <>
-                <Typography className={classes.attachmentTitle}>
-                  {t('CERT_ATTACH_MERGE')}
-                </Typography>
+                <Typography sx={{ pl: 1 }}>{t('CERT_ATTACH_MERGE')}</Typography>
                 <Box mt={1} mb={2}>
                   <Uploader
                     fieldError={
@@ -243,15 +211,11 @@ const SpecialCases = (props) => {
                 />
               }
               label={t('SPECIAL_CASES_REASON_ELECTRODEP')}
-              className={clsx(
-                classes.chooserItem,
-                values.especial_cases?.reason_electrodep &&
-                  classes.chooserItemSelected
-              )}
+              sx={getChooserStyles(values.especial_cases?.reason_electrodep)}
             />
             {values.especial_cases?.reason_electrodep && (
               <>
-                <Typography className={classes.attachmentTitle}>
+                <Typography sx={{ pl: 1 }}>
                   {t('ELECTRODEP_ATTACH_MEDICAL')}
                 </Typography>
                 <Box mt={1} mb={1}>
@@ -270,7 +234,7 @@ const SpecialCases = (props) => {
                     values={values.especial_cases.attachments?.medical}
                   />
                 </Box>
-                <Typography className={classes.attachmentTitle}>
+                <Typography sx={{ pl: 1 }}>
                   {t('ELECTRODEP_ATTACH_RESIDENT')}
                 </Typography>
                 <Box mt={1} mb={0}>

@@ -1,34 +1,19 @@
 import React, { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 import { checkCups } from '../../services/api'
-
-const useStyles = makeStyles((theme) => ({
-  memberChecked: {
-    fontWeight: 500,
-    color: theme.palette.primary.main
-  },
-  chooserContainer: {
-    '& h6': {
-      fontSize: '1rem',
-      fontWeight: 500,
-      marginTop: theme.spacing(2)
-    }
-  }
-}))
 
 const CupsHelperText = () => {
   const { t } = useTranslation()
@@ -41,7 +26,6 @@ const CupsHelperText = () => {
 
 const CUPS = (props) => {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const {
     values,
@@ -151,7 +135,13 @@ const CUPS = (props) => {
         </Grid>
       </Box>
 
-      <Box mt={1} mb={2} className={classes.chooserContainer}>
+      <Box mt={1} mb={2} sx={{
+        '& h6': {
+          fontSize: '1rem',
+          fontWeight: 500,
+          mt: 2
+        }
+      }} >
         <Chooser
           question={t('HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT')}
           onChange={handleChangeService}

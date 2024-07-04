@@ -1,54 +1,18 @@
 import React, { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import CircularProgress from '@mui/material/CircularProgress'
 
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  resetContainer: {
-    padding: theme.spacing(3)
-  },
-  paperContainer: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
-  },
-  resumeLabel: {
-    textTransform: 'uppercase'
-  },
-  buttonProgress: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -12,
-    marginLeft: -12
-  },
-  powerPeriod: {
-    marginRight: theme.spacing(1),
-    color: 'gray'
-  }
-}))
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
+import PrevButton from 'components/Buttons/PrevButton'
 
 export default function ModifyResume({
   prevStep,
@@ -57,7 +21,6 @@ export default function ModifyResume({
   postSubmit,
   params
 }) {
-  const classes = useStyles()
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
@@ -68,7 +31,7 @@ export default function ModifyResume({
   }
 
   return (
-    <Paper className={classes.paperContainer} elevation={0}>
+    <Paper sx={{ mt: 2, padding: 2 }} elevation={0}>
       <Box mt={1} mx={1} mb={2}>
         <Typography gutterBottom>{t('REVIEW_DATA_AND_CONFIRM')}</Typography>
       </Box>
@@ -80,7 +43,7 @@ export default function ModifyResume({
       {params?.subsection && (
         <Box mt={2} mx={1}>
           <Typography
-            className={classes.resumeLabel}
+            sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
             {t('SUBSECTION_AUTO')}
@@ -98,7 +61,7 @@ export default function ModifyResume({
       {params.modify?.phases && (
         <Box mt={2} mx={1}>
           <Typography
-            className={classes.resumeLabel}
+            sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
             {t('INSTALL_TYPE')}
@@ -117,7 +80,7 @@ export default function ModifyResume({
       {params.modify?.power && (
         <Box mt={2} mx={1}>
           <Typography
-            className={classes.resumeLabel}
+            sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
             {t('POWER')}
@@ -126,17 +89,17 @@ export default function ModifyResume({
           <Grid container spacing={4}>
             <Grid item>
               <Typography data-cy="power" variant="body1" gutterBottom>
-                <span className={classes.powerPeriod}>
+                <Typography component="body1" sx={{ mr: 1, color: 'gray' }}>
                   {params?.modify?.moreThan15Kw ? 'P1' : t('PEAK')}
-                </span>{' '}
+                </Typography>{' '}
                 {params.modify?.power} kW
               </Typography>
             </Grid>
             <Grid item>
               <Typography data-cy="power2" variant="body1" gutterBottom>
-                <span className={classes.powerPeriod}>
+                <Typography component="body1" sx={{ mr: 1, color: 'gray' }}>
                   {params?.modify?.moreThan15Kw ? 'P2' : t('VALLEY')}
-                </span>{' '}
+                </Typography>{' '}
                 {params.modify?.power2} kW
               </Typography>
             </Grid>
@@ -151,7 +114,12 @@ export default function ModifyResume({
                         data-cy={`power${num}`}
                         variant="body1"
                         gutterBottom>
-                        <span className={classes.powerPeriod}>{`P${num}`}</span>{' '}
+                        <Typography
+                          component="body1"
+                          sx={{
+                            mr: 1,
+                            color: 'gray'
+                          }}>{`P${num}`}</Typography>{' '}
                         {params.modify?.[`power${num}`]} kW
                       </Typography>
                     </Grid>
@@ -165,7 +133,7 @@ export default function ModifyResume({
       {params.modify?.changePower && (
         <Box mt={2} mx={1}>
           <Typography
-            className={classes.resumeLabel}
+            sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
             {t('FARE')}
@@ -184,7 +152,7 @@ export default function ModifyResume({
 
       <Box mt={2} mb={3} mx={1}>
         <Typography
-          className={classes.resumeLabel}
+          sx={{ textTransform: 'uppercase' }}
           variant="subtitle2"
           gutterBottom>
           {t('CONTACT_PHONE')}
@@ -203,21 +171,20 @@ export default function ModifyResume({
         <Divider />
       </Box>
 
-      <div className={classes.actionsContainer}>
+      <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
         {prevStep && (
-          <Button
+          <PrevButton
             onClick={prevStep}
-            className={classes.button}
-            startIcon={<ArrowBackIosIcon />}>
-            {t('PAS_ANTERIOR')}
-          </Button>
+            sx={{ mt: 1, mr: 1 }}
+            title={t('PAS_ANTERIOR')}
+          />
         )}
         {
           <>
             <Button
               type="submit"
               onClick={handleSubmit}
-              className={classes.button}
+              sx={{ mt: 1, mr: 1 }}
               color="primary"
               variant="contained"
               startIcon={
@@ -228,7 +195,7 @@ export default function ModifyResume({
             </Button>
           </>
         }
-      </div>
+      </Box>
     </Paper>
   )
 }

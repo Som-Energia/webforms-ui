@@ -1,8 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import TextField from '@mui/material/TextField'
+import InputAdornment from '@mui/material/InputAdornment'
 
 const handleChangePower = (
   event,
@@ -17,7 +17,7 @@ const handleChangePower = (
   let result = match[0].replace(',', '.')
   result = result.replace("'", '.')
 
-  if (!moreThan15Kw && result > 15){
+  if (!moreThan15Kw && result > 15) {
     result = result.slice(0, -1)
   }
 

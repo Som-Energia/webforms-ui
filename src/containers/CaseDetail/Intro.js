@@ -1,45 +1,17 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { makeStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  resetContainer: {
-    padding: theme.spacing(3)
-  },
-  stepLabel: {
-    fontSize: '1.5rem',
-    color: 'red'
-  },
-  paperContainer: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
-  }
-}))
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import PrevButton from 'components/Buttons/PrevButton'
 
 export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   const onNextStep = (event) => {
     event.preventDefault()
@@ -52,7 +24,7 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
   }
 
   return (
-    <Paper className={classes.paperContainer} elevation={0}>
+    <Paper sx={{ mt: 2, p: 2 }} elevation={0}>
       <Box mx={1}>
         <Typography
           variant="body1"
@@ -65,19 +37,18 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
             })
           }}
         />
-        <div className={classes.actionsContainer}>
+        <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
           {prevStep && (
-            <Button
-              className={classes.button}
-              startIcon={<ArrowBackIosIcon />}
-              onClick={(event) => onPrevStep(event)}>
-              {t('PAS_ANTERIOR')}
-            </Button>
+            <PrevButton 
+              sx={{ mt: 1, mr: 1 }}
+              onClick={(event) => onPrevStep(event)}
+              title={t('PAS_ANTERIOR')}
+            />            
           )}
           {nextStep && (
             <Button
               type="submit"
-              className={classes.button}
+              sx={{ mt: 1, mr: 1 }}
               variant="contained"
               color="primary"
               endIcon={<ArrowForwardIosIcon />}
@@ -85,7 +56,7 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
               {t('SEGUENT_PAS')}
             </Button>
           )}
-        </div>
+        </Box>
       </Box>
     </Paper>
   )

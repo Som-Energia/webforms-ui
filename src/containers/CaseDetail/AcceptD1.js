@@ -3,51 +3,22 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import CircularProgress from '@mui/material/CircularProgress'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import SendIcon from '@mui/icons-material/Send'
+
 import Chooser from '../../components/Chooser'
-
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import SendIcon from '@material-ui/icons/Send'
-
 import Uploader from '../../components/Uploader'
+import PrevButton from 'components/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =
   process.env.REACT_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: '100%'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  resetContainer: {
-    padding: theme.spacing(3)
-  },
-  paperContainer: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
-  },
-  chooserLabelBox: {
-    '& label': {
-      minHeight: '110px'
-    }
-  }
-}))
 
 function AcceptD1({
   prevStep,
@@ -56,24 +27,26 @@ function AcceptD1({
   nextStep,
   params
 }) {
-  const classes = useStyles()
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
   const AcceptD1Schema = Yup.object().shape({
-          m1: Yup.bool()
-            .required(t('UNACCEPTED_PRIVACY_POLICY'))
-            .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-        }
+    m1: Yup.bool()
+      .required(t('UNACCEPTED_PRIVACY_POLICY'))
+      .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+  }
   )
 
   return (
-    <Paper className={classes.paperContainer} elevation={0}>
+    <Paper sx={{
+      mt: 2,
+      p: 2
+    }}>
       <Formik
         initialValues={{
           ...{
             d1Attachments: [],
-            m1: showD1PowerModificationChooser ?  '' : false
+            m1: showD1PowerModificationChooser ? '' : false
           },
           ...params
         }}
@@ -136,7 +109,11 @@ function AcceptD1({
             </Box>
 
             {showD1PowerModificationChooser && (
-              <Box mx={1} mt={1} mb={2} className={classes.chooserLabelBox}>
+              <Box mx={1} mt={1} mb={2} sx={{
+                '& label': {
+                  minHeight: '110px'
+                }
+              }} >
                 <Chooser
                   question={t('APROFITAR_LA_MODIFICACIO')}
                   onChange={(option) => setFieldValue('m1', option.option)}
@@ -157,21 +134,28 @@ function AcceptD1({
               </Box>
             )}
 
-            <div className={classes.actionsContainer}>
+            <Box sx={{
+              mb: 1,
+              display: 'flex',
+              justifyContent: 'space-between'
+            }} >
               {
-                <Button
-                  data-cy="prev"
-                  className={classes.button}
-                  startIcon={<ArrowBackIosIcon />}
+                <PrevButton sx={{
+                  mt: 1,
+                  mr: 1
+                }}
                   disabled={sending}
-                  onClick={() => prevStep(params)}>
-                  {t('PAS_ANTERIOR')}
-                </Button>
+                  onClick={() => prevStep(params)}
+                  title={t('PAS_ANTERIOR')}
+                />
               }
               {
                 <Button
                   type="submit"
-                  className={classes.button}
+                  sx={{
+                    mt: 1,
+                    mr: 1
+                  }}
                   color="primary"
                   variant="contained"
                   disabled={(showD1PowerModificationChooser && !isValid) || sending}
@@ -184,7 +168,7 @@ function AcceptD1({
                   {(values?.m1 === false && t('ENVIAR')) || t('SEGUENT_PAS')}
                 </Button>
               }
-            </div>
+            </Box>
           </Form>
         )}
       </Formik>
