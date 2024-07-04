@@ -3,6 +3,8 @@
 ## 2.0.0 2024-07-04
 
 - Migration from muiv4 to muiv5
+- Upgrade notes:
+  - Reinstall dependencies
 
 ## 1.11.3 2024-06-26
 
