@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.0.0 2024-07-04
 
 - Migration from muiv4 to muiv5
 
