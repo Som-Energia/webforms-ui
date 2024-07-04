@@ -22,8 +22,8 @@ import Card from '../components/oficinavirtual/Card'
 import Failure from './Failure'
 import Success from './Success'
 
-import { confirmCancelContract } from 'services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+import { confirmCancelContract } from '../services/api'
+import PrevButton from '../components/Buttons/PrevButton'
 
 const CancellationConfirm = (props) => {
   const { language, contract_id, token } = useParams()

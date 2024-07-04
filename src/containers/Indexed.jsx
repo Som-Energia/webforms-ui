@@ -38,8 +38,7 @@ import NextButton from '../components/Buttons/NextButton'
 
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
-import { modify_tariff, can_modify_tariff } from 'services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+import { modify_tariff, can_modify_tariff } from '../services/api'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -246,7 +245,6 @@ const Indexada = (props) => {
     })
   ]
 
-  console.log("CONTRACT JSON", contractJSON)
   if (!contractJSON.name || !contractJSON.cups) {
     return (
       <Alert severity="error">
@@ -335,6 +333,7 @@ const Indexada = (props) => {
     <>
       <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
+          <Grid container display='flex' justifyContent='space-between'>
             <Grid item xs={8}>
               <Formik
                 onSubmit={() => { }}
@@ -491,6 +490,7 @@ const Indexada = (props) => {
                 title={t('INDEXED_CONTRACT_CHARACTERISTICS')}
                 sections={sectionsJson}
               />
+            </Grid>
             </Grid>
         </LocalizationProvider >
       </GlobalHotKeys >
