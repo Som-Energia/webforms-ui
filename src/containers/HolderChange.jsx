@@ -67,7 +67,9 @@ function HolderChange(props) {
   const validationSchemas = [
     Yup.object().shape({
       holder: Yup.object().shape({
-        vat: Yup.string().required(t('FILL_NIF')),
+        vat: Yup.string()
+          .required(t('FILL_NIF'))
+          .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, t('INVALID_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
