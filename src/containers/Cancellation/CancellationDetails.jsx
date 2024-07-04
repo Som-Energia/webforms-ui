@@ -168,7 +168,7 @@ const CancellationDetails = (props) => {
           }}
           dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
         />
-      </LabelFieldRow>
+      </LabelFieldRow >
       <LabelFieldRow label={t('PHONE')}>
         <TextField
           id="phone"
@@ -250,7 +250,7 @@ const CancellationDetails = (props) => {
           label={t('CANCELLATION_TERMS')}
         />
       </Card>
-    </Box>
+    </Box >
   )
 }
 

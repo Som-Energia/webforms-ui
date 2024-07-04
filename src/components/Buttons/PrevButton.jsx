@@ -11,7 +11,6 @@ function PrevButton(props) {
       startIcon={<ArrowBackIosIcon />}
       disabled={disabled}
       onClick={onClick}
-      sx={{color:'secondary.dark'}}
       >
       {title}
     </Button>
