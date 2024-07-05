@@ -74,7 +74,6 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
 
-  console.log("CONTRACT_PROPS", props)
   const loadContractData = () => {
     const contractData =
       typeof props.contract === 'string' && props.contract !== ''
