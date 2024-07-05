@@ -11,15 +11,18 @@ function customManifestPlugin() {
 
       for (const [key, value] of Object.entries(bundle)) {
         if (value.type === 'asset' || value.type === 'chunk') {
-          const filePath = path.join(pathPrefix, value.fileName);
-          manifest.files[value.fileName] = filePath;
+          const filePath = path.join(pathPrefix, value.fileName)
+          manifest.files[value.fileName] = filePath
 
-          // Identify main entry points
+          // Identify entry points
           if (value.isEntry) {
             manifest.entrypoints.push(value.fileName);
-          } else if (key.endsWith('.js') || key.endsWith('.css')) {
-            if (key.includes('main')) {
-              manifest.entrypoints.push(value.fileName);
+          }
+          // Ensure CSS entry is included only once
+          const cssFile = Object.values(bundle).find(asset => asset.fileName === 'assets/main.css');
+          if (cssFile) {
+            if (!manifest.entrypoints.includes(cssFile.fileName)) {
+              manifest.entrypoints.push(cssFile.fileName)
             }
           }
         }
@@ -29,7 +32,7 @@ function customManifestPlugin() {
         type: 'asset',
         fileName: 'asset-manifest.json',
         source: JSON.stringify(manifest, null, 2)
-      });
+      })
     }
   };
 }
@@ -42,8 +45,18 @@ export default defineConfig({
     // eslint()
   ],
   build: {
-    outDir: 'dist',
+    outDir: 'build',
     rollupOptions: {
+      output: {
+        entryFileNames: 'assets/main.js', // Explicitly name the entry JS file
+        chunkFileNames: 'assets/[name].js', // Name for chunk JS files (if any)
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.css')) {
+            return 'assets/main.css'; // Explicitly name the CSS file
+          }
+          return 'assets/[name].[ext]';
+        }
+      }
     },
   },
   server: {
