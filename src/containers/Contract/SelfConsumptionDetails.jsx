@@ -362,6 +362,7 @@ const SelfConsumptionDetails = (props) => {
             }}
             sx={{
               fontWeight: 500,
+              mt: 2,
               mb: 2
             }}
           />
