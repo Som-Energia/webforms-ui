@@ -14,12 +14,11 @@ const TextLoader = props => {
   const [text, setText] = React.useState()
 
   React.useEffect(() => {
-    const url = `/static/docs/${language.slice(0, 2)}/${documentName}.html`
+    const url = `../wp-content/plugins/react-wordpress/webforms/build/static/docs/${language.slice(0, 2)}/${documentName}.html`
     setText(undefined)
     axios({
       method: 'GET',
       url: url,
-      //headers: {Authorization: data.token},
     }).then((response) => {
       setText(response?.data)
     }).catch((error) => {
