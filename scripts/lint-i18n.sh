@@ -38,7 +38,7 @@ color_diff() {
 }
 
 ids_from_src() {
-  npm run extract
+  npm run i18n-extract
   step "Extracting ids from source: red maybe obsolete, yellow new... "
   color_diff <(json_ids $reflang) <(json_ids xx)
 }

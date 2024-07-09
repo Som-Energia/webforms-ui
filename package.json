@@ -18,6 +18,7 @@
     "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "i18next": "^21.6.13",
+    "i18next-parser": "^9.0.0",
     "plausible-tracker": "^0.3.8",
     "preval.macro": "^5.0.0",
     "react": "^17.0.2",
@@ -40,6 +41,8 @@
     "build:vercel": "env-cmd -f .env.vercel --use-shell \"npm run build\"",
     "test": "react-scripts test",
     "cypress": "./node_modules/.bin/cypress open",
+    "i18n-extract": "./node_modules/.bin/i18next src/**/*.js -o src/i18n/locale-xx.json -s",
+    "i18n-lint": "./scripts/lint-i18n.sh",
     "eject": "react-scripts eject"
   },
   "prettier": "prettier-config-standard",
