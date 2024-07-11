@@ -297,15 +297,10 @@ export const confirmD1Case = async (data, case_id, token) => {
 }
 
 export const member = async (data) => {
-  var formData = new FormData()
-  for (var key in data) {
-    formData.append(key, data[key])
-  }
-
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/soci/alta`,
-    data: formData
+    url: `${API_BASE_URL}/procedures/member`,
+    data: data
   }).then((response) => {
     return response?.data
   })
