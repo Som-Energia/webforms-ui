@@ -16,7 +16,7 @@ const Tariff = (props) => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  useEffect(() => {
+ useEffect(() => {
     const CITY_TAX_21 = 20
     const CITY_TAX_10 = 37
 
@@ -26,7 +26,7 @@ const Tariff = (props) => {
       city_id: taxType === 21 ? CITY_TAX_21 : CITY_TAX_10
     })
       .then((response) => {
-        const tariffPrices = response?.data
+        const tariffPrices = response?.data['current']
         setPrices(tariffPrices)
         setLoading(false)
       })
@@ -72,15 +72,15 @@ const Tariff = (props) => {
           <div className="tp">
             <h4>{t('TERME_POTENCIA')}</h4>
             <p className="titol">
-              {prices?.tp &&
-                Object.keys(prices?.tp)
+              {prices?.potencia &&
+                Object.keys(prices?.potencia)
                   .reverse()
                   .map((key) => (
                     <span key={key}>
                       {tariff === '2.0TD'
                         ? t(`TERME_POTENCIA_${key}_${tariff}`)
                         : key}{' '}
-                      {prices.tp[key]?.value} {prices.tp[key]?.uom}
+                      {prices.potencia[key]?.value} {prices.potencia[key]?.unit}
                       <br />
                     </span>
                   ))}
@@ -89,15 +89,15 @@ const Tariff = (props) => {
           <div className="te">
             <h4>{t('TERME_ENERGIA')}</h4>
             <p className="titol">
-              {prices?.te &&
-                Object.keys(prices?.te)
+              {prices?.energia &&
+                Object.keys(prices?.energia)
                   .reverse()
                   .map((key) => (
                     <span key={key}>
                       {tariff === '2.0TD'
                         ? t(`TERME_ENERGIA_${key}_${tariff}`)
                         : key}{' '}
-                      {prices.te[key]?.value} {prices.te[key]?.uom}
+                      {prices.energia[key]?.value} {prices.energia[key]?.unit}
                       <br />
                     </span>
                   ))}
@@ -111,15 +111,15 @@ const Tariff = (props) => {
                 })
               }}></h4>
             <p className="titol">
-              {prices?.gkwh &&
-                Object.keys(prices?.gkwh)
+              {prices?.generation_kWh &&
+                Object.keys(prices?.generation_kWh)
                   .reverse()
                   .map((key) => (
                     <span key={key}>
                       {tariff === '2.0TD'
                         ? t(`TERME_ENERGIA_${key}_${tariff}`)
                         : key}{' '}
-                      {prices.gkwh[key]?.value} {prices.gkwh[key]?.uom}
+                      {prices.generation_kWh[key]?.value} {prices.generation_kWh[key]?.unit}
                       <br />
                     </span>
                   ))}
@@ -133,12 +133,15 @@ const Tariff = (props) => {
                 })
               }}></h4>
             <p className="titol">
-              {prices?.ac &&
-                Object.keys(prices?.ac)
+              {prices?.energia_autoconsumida &&
+                Object.keys(prices?.energia_autoconsumida)
                   .reverse()
                   .map((key) => (
                     <span key={key}>
-                      {prices.ac[key]?.value} {prices.ac[key]?.uom}
+                      {tariff === '2.0TD'
+                        ? t(`TERME_AUTOCONUNM_${key}_${tariff}`)
+                        : key}{' '}
+                      {prices.energia_autoconsumida[key]?.value} {prices.energia_autoconsumida[key]?.unit}
                       <br />
                     </span>
                   ))}
