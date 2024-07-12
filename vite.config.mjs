@@ -1,13 +1,15 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react'
 import pkg from './package.json'
+import { splitVendorChunkPlugin } from 'vite'
 
 export default defineConfig({
   resolve: {
     dedupe: Object.keys(pkg.dependencies)
   },
   plugins: [
-    react()
+    react(),
+    splitVendorChunkPlugin(),
     // TODO: to be activated after fixing the issues
     // eslint()
   ],
@@ -16,7 +18,6 @@ export default defineConfig({
     manifest: 'asset-manifest.json',
     rollupOptions: {
       output: {
-        inlineDynamicImports: true
       }
     },
     target: "es2020",
