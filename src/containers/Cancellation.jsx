@@ -14,6 +14,8 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
+import SendIcon from '@mui/icons-material/Send'
+
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
@@ -22,8 +24,6 @@ import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
 
 import DisplayFormikState from '../components/DisplayFormikState'
-
-import SendIcon from '@mui/icons-material/Send'
 
 import ContractDetails from './Cancellation/ContractDetails'
 import CancellationWarning from './Cancellation/CancellationWarning'

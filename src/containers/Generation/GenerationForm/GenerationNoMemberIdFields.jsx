@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Alert, Typography, TextField, InputAdornment, Box, CircularProgress } from '@mui/material'
+import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
+import InputAdornment from '@mui/material/InputAdornment'
+import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
 import { useTranslation } from 'react-i18next'
 import VATField from '../../../components/VATField'
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 import { checkIsPostalCodeFromGenerationEnabledZone } from '../../../services/api'
 
 const customStyles = {

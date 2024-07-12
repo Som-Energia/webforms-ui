@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from '@mui/material'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
 // TODO: This list must be updated if standard MUI typographies change
 const standardTypographies = [

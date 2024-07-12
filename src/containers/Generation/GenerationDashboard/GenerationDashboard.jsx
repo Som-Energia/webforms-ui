@@ -1,14 +1,17 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react'
+import React from 'react'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next'
 import SectionTitle from './SectionTitle'
 import GenerationAssigmentSection from './GenerationAssignmentSection'
 import GenerationInvestmentSection from './GenerationInvestmentSection'
-import { Button, Grid, Typography, Alert } from '@mui/material'
 import GenerationContext from '../context/GenerationContext'
 import PopUpContext from '../../../context/PopUpContext'
-import { useTranslation } from 'react-i18next'
 import GenerationFailure from './GenerationFailure'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import AddIcon from '@mui/icons-material/Add';
 import ContractList from '../../../components/ClickableList';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
@@ -33,12 +36,12 @@ function GenerationDashboard({
     getAssingments,
     getContractsToAssign,
     contractNoAssignments
-  } = useContext(GenerationContext)
+  } = React.useContext(GenerationContext)
 
-  const { setContent } = useContext(PopUpContext)
-  const [loading, setLoading] = useState(false)
+  const { setContent } = React.useContext(PopUpContext)
+  const [loading, setLoading] = React.useState(false)
 
-  const ActionSection = useCallback(() => {
+  const ActionSection = React.useCallback(() => {
     return (
       <>
         {editingPriority ? (
@@ -98,7 +101,7 @@ function GenerationDashboard({
     validateChanges
   ])
 
-  useEffect(() => {
+  React.useEffect(() => {
     getContractsToAssign()
   }, [])
 

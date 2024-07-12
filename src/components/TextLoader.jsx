@@ -3,7 +3,7 @@ import React from 'react'
 import Loading from './Loading'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Typography } from '@mui/material'
+import Typography from '@mui/material/Typography'
 
 const TextLoader = props => {
   const { i18n } = useTranslation()

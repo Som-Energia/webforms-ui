@@ -3,7 +3,7 @@ import GenerationContext, {
   GenerationContextProvider
 } from './GenerationContext'
 import React, { useContext } from 'react'
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest';
 
