@@ -4,6 +4,10 @@ import pkg from './package.json'
 import { splitVendorChunkPlugin } from 'vite'
 
 export default defineConfig(({mode}) => {
+  // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
+  // but, by default, it ignores that parameter from .env files
+  // (not VITE_APP_ prefixed).
+  // Read it explicitly to have a mode dependant base.
   process.env = {...process.env, ...loadEnv(mode, process.cwd(), 'BASE_URL')}
   return {
     base: process.env.BASE_URL,
