@@ -37,9 +37,9 @@
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite",
     "build": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite build",
-    "build:ov": "env-cmd -f .env.ov  --use-shell \"npm run build && ./scripts/rename-assets-ov.sh\"",
+    "build:ov": "npm run build -- --mode=ov --base=/static/webforms/ && ./scripts/rename-assets-ov.sh",
     "build:staging": "env-cmd -f .env.staging --use-shell \"npm run build\"",
-    "build:wp": "env-cmd -f .env.wp --use-shell \"npm run build\"",
+    "build:wp": "npm run build -- --mode=wp --base=/wp-content/plugins/react-wordpress/webforms/build/",
     "build:vercel": "env-cmd -f .env.vercel --use-shell \"npm run build\"",
     "test": "TZ=Europe/Madrid vitest",
     "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
