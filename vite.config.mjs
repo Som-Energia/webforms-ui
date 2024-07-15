@@ -1,14 +1,34 @@
-import { defineConfig, loadEnv} from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react'
 import pkg from './package.json'
 import { splitVendorChunkPlugin } from 'vite'
 
-export default defineConfig(({mode}) => {
+export default defineConfig(({ mode }) => {
   // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
   // but, by default, it ignores that parameter from .env files
   // (not VITE_APP_ prefixed).
   // Read it explicitly to have a mode dependant base.
-  process.env = {...process.env, ...loadEnv(mode, process.cwd(), 'BASE_URL')}
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), 'BASE_URL') }
+
+  const ovOptions = mode === 'ov' ? {
+    entryFileNames: 'assets/main.js',
+    chunkFileNames: (fileInfo) => {
+      if (fileInfo.name.includes('vendor')) {
+        return 'assets/vendor.js';  // Explicitly name the entry JS file
+      }
+      return 'assets/[name]-[hash].js';
+    },
+    assetFileNames: (assetInfo) => {
+      if (assetInfo.name.endsWith('.css') && assetInfo.name.includes('index')) {
+        return 'assets/index.css'; // Explicitly name the CSS file
+      }
+      return 'assets/[name]-[hash].[ext]';
+    } 
+  } : {}
+
+  /* entryFileNames: mode === 'ov' ? 'assets/main.js' : undefined, // Explicitly name the entry JS file */
+
+
   return {
     base: process.env.BASE_URL,
     resolve: {
@@ -25,6 +45,18 @@ export default defineConfig(({mode}) => {
       manifest: 'asset-manifest.json',
       rollupOptions: {
         output: {
+          ...ovOptions,
+          /* chunkFileNames: (fileInfo) => {
+            if (fileInfo.name.includes('vendor')) {
+              return 'assets/vendor.js';  // Explicitly name the entry JS file
+            }
+            return 'assets/[name]-[hash].js';
+          }, assetFileNames: (assetInfo) => {
+            if (assetInfo.name.endsWith('.css') && assetInfo.name.includes('index')) {
+              return 'assets/index.css'; // Explicitly name the CSS file
+            }
+            return 'assets/[name]-[hash].[ext]';
+          } */
         }
       },
       target: "es2020",
