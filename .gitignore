@@ -28,3 +28,9 @@ yarn.lock
 
 package-lock.json
 dist
+
+# python
+.venv
+
+# editors
+.*sw?
