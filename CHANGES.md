@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Remove avis autonom and their translations
+
 ## 2.0.0 2024-07-04
 
 - Migration from muiv4 to muiv5
