@@ -3,8 +3,12 @@ import GenerationContext, {
   GenerationContextProvider
 } from './GenerationContext'
 import React, { useContext } from 'react'
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button'
 import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+
 
 const ContextConsumer = () => {
   const { assignments, investments, changeAssigmentPriority, resetAssignments, getPriority  } = useContext(GenerationContext)
@@ -27,18 +31,6 @@ const ContextConsumer = () => {
   )
 }
 
-
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  }
-}));
 
 describe('Generation Context', () => {
   const getById = queryByAttribute.bind(null, 'id')

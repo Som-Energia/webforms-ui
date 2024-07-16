@@ -2,8 +2,8 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
 
-import Header from 'components/oficinavirtual/Header'
-import Card from 'components/oficinavirtual/Card'
+import Header from '../../components/oficinavirtual/Header'
+import Card from '../../components/oficinavirtual/Card'
 
 const CancellationIntro = () => {
   const { t } = useTranslation()

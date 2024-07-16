@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import FormHelperText from '@mui/material/FormHelperText'
 
-import StepHeader from 'components/StepHeader'
-import VATField from 'components/VATField'
+import StepHeader from '../../components/StepHeader'
+import VATField from '../../components/VATField'
 
 function VAT(props) {
   const {

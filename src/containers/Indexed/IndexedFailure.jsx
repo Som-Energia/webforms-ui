@@ -41,9 +41,10 @@ function Failure(props) {
           sx={{
             width: 6,
             height: 6,
-            color: '#fe6444',
+            color: 'secondary.extraDark',
             backgroundColor: 'transparent',
-            border: '2px solid #fe6444',
+            border: '2px solid',
+            borderColor: 'secondary.extraDark',
             mb: 3
           }}>
           <CloseIcon fontSize="large" />
@@ -60,9 +61,9 @@ function Failure(props) {
             fontSize: '1rem',
             lineHeight: '1.75',
             textAlign: 'center',
-            color: '#6f6262',
+            color: 'secondary.extraDark',
             '& a': {
-              color: '#fe6444 !important'
+              color: 'failure.primary !important'
             }
           }}
           variant="body1"

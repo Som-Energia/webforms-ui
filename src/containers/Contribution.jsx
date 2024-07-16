@@ -14,8 +14,6 @@ import Paper from '@mui/material/Paper'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import MemberIdentifier from './Contribution/MemberIdentifier'
@@ -32,7 +30,9 @@ import {
   normalizeMember
 } from '../services/utils'
 import { contribution, member } from '../services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
 
 const MAX_STEP_NUMBER = 4
 
@@ -372,15 +372,11 @@ const Contribution = (props) => {
                       />
                     )}
                     {activeStep < MAX_STEP_NUMBER - 1 ? (
-                      <Button
-                        data-cy="next"
-                        variant="contained"
-                        color="primary"
-                        endIcon={<ArrowForwardIosIcon />}
+                      <NextButton
                         disabled={!formikProps.isValid}
-                        onClick={() => nextStep(formikProps)}>
-                        {t('SEGUENT_PAS')}
-                      </Button>
+                        onClick={() => nextStep(formikProps)}
+                        title={t('SEGUENT_PAS')}
+                      />
                     ) : (
                       !completed && (
                         <Button

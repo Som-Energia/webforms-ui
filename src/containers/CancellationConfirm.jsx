@@ -13,17 +13,17 @@ import Typography from '@mui/material/Typography'
 
 import SendIcon from '@mui/icons-material/Send'
 
-import ContractDetails from 'containers/Cancellation/ContractDetails'
-import CancellationWarning from 'containers/Cancellation/CancellationWarning'
+import ContractDetails from './Cancellation/ContractDetails'
+import CancellationWarning from './Cancellation/CancellationWarning'
 
-import Header from 'components/oficinavirtual/Header'
-import Card from 'components/oficinavirtual/Card'
+import Header from '../components/oficinavirtual/Header'
+import Card from '../components/oficinavirtual/Card'
 
 import Failure from './Failure'
 import Success from './Success'
 
-import { confirmCancelContract } from 'services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+import { confirmCancelContract } from '../services/api'
+import PrevButton from '../components/Buttons/PrevButton'
 
 const CancellationConfirm = (props) => {
   const { language, contract_id, token } = useParams()
@@ -72,8 +72,7 @@ const CancellationConfirm = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          sx={{ fontSize: '14px', fontWeight: 400 }}
-          variant="body1"
+          variant="pagesubtitle"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_NO_AVAILABLE')
           }}
@@ -86,7 +85,7 @@ const CancellationConfirm = (props) => {
     <Box
       sx={{
         pb: '2rem',
-        backgroundColor: '#f2f2f2',
+        backgroundColor: 'secondary.light',
         color: 'primary',
         display: 'flex',
         justifyContent: 'center',

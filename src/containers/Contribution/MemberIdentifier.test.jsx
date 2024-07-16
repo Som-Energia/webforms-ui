@@ -6,20 +6,10 @@ import {
   fireEvent,
   getByText
 } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { vi } from 'vitest';
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
 describe('Generation Form Review', () => {
   const mockValues = {
@@ -59,12 +49,12 @@ describe('Generation Form Review', () => {
   }
   const VAT = '40323835M'
   const getById = queryByAttribute.bind(null, 'id')
-  const mockSetFieldValue = jest.fn()
-  const mocksetFieldTouched = jest.fn()
+  const mockSetFieldValue = vi.fn()
+  const mocksetFieldTouched = vi.fn()
   test('Should call setFieldValue when choose member', async () => {
     const dom = render(
       <MemberIdentifier
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         setFieldValue={mockSetFieldValue}
       />
     )
@@ -77,7 +67,7 @@ describe('Generation Form Review', () => {
   test('Should call setFieldValue when choose no member', async () => {
     const dom = render(
       <MemberIdentifier
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         setFieldValue={mockSetFieldValue}
       />
     )
@@ -90,14 +80,14 @@ describe('Generation Form Review', () => {
   test('Should call setFieldTouched when change the value of vat', async () => {
     const dom = render(
       <MemberIdentifier
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         setFieldTouched={mocksetFieldTouched}
         setFieldValue={mockSetFieldValue}
       />
     )
 
     const vatTextField = getById(dom.container, 'vat')
-    act(() => {
+    React.act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
     expect(mocksetFieldTouched).toHaveBeenCalledWith('member.vat', true)
@@ -112,7 +102,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <MemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValues}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
@@ -142,7 +132,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <MemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValuesNoMember}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
@@ -172,7 +162,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <MemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValuesNoMember}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
@@ -207,7 +197,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <MemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValuesNoMemberVatNoValid}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
@@ -239,7 +229,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <MemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValuesNoMember}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}

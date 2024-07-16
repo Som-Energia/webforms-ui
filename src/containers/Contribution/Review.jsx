@@ -14,8 +14,6 @@ import { languages, NEW_MEMBER_CONTRIB_AMOUNT } from '../../services/utils'
 
 const CustomStyles = {
   sectionTitle: {
-    fontSize: '18px',
-    fontWeight: 500,
     textTransform: 'uppercase',
     mt: 3,
     mb: 1.2
@@ -33,24 +31,20 @@ const Review = (props) => {
 
   const ReviewField = ({ label, value }) => {
     return (
-      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 0.8 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.8 }}>
         <Box className="field__title">
           <Typography
             sx={{
               textTransform: 'uppercase',
-              paddingRight: '12px',
-              fontSize: '14px',
-              fontWeight: 400,
-              color: 'rgba(0, 0, 0, 0.54)'
+              pr: 1.5,
+              color: 'secondary.dark'
             }}
-            variant="subtitle2">
+            variant="pagesubtitle">
             {label}
           </Typography>
         </Box>
         <Box className="field__value">
-          <Typography sx={{ fontSize: '16px' }} variant="body2">
-            {value}
-          </Typography>
+          <Typography variant="body1">{value}</Typography>
         </Box>
       </Box>
     )
@@ -133,7 +127,7 @@ const Review = (props) => {
           )}
         </Grid>
         <Grid item xs={12} sm={12}>
-          <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+          <Divider variant="middle" sx={{ mt: 1.5, ml: 0, mr: 6 }} />
           <Typography sx={CustomStyles.sectionTitle} variant="h6">
             {t('SUMMARY_GROUP_PAYMENT')}
           </Typography>
@@ -163,7 +157,7 @@ const Review = (props) => {
 
           <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
 
-          <Divider variant="middle" sx={{ mt: '24px', ml: 0, mr: '32px' }} />
+          <Divider variant="middle" sx={{ mt: 3, ml: 0, mr: 6 }} />
         </Grid>
       </Grid>
 

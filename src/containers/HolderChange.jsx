@@ -5,15 +5,11 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useParams } from 'react-router-dom'
 
-import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
 import Container from '@mui/material/Container'
 import LinearProgress from '@mui/material/LinearProgress'
 import Paper from '@mui/material/Paper'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
@@ -30,19 +26,21 @@ import MemberIdentifier from './HolderChange/MemberIdentifier'
 import Success from './Success'
 import Failure from './Failure'
 
-import data from 'data/HolderChange/data.json'
+import data from '../data/HolderChange/data.json'
 
-import DisplayFormikState from 'components/DisplayFormikState'
+import DisplayFormikState from '../components/DisplayFormikState'
 
-import { holderChange } from 'services/api'
-import { normalizeHolderChange, isHomeOwnerCommunityNif } from 'services/utils'
-import PrevButton from 'components/Buttons/PrevButton'
+import { holderChange } from '../services/api'
+import { normalizeHolderChange, isHomeOwnerCommunityNif } from '../services/utils'
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
+import SubmitButton from '../components/Buttons/SubmitButton'
+
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
-  // const [showAll, setShowAll] = useState(false)
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [sending, setSending] = useState(false)
@@ -408,7 +406,7 @@ function HolderChange(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ backgroundColor: '#f2f2f2', color: 'primary' }}>
+      <Box sx={{ backgroundColor: 'secondary.light', color: 'primary.main' }}>
         <Container maxWidth="md">
           <Formik
             enableReinitialize
@@ -464,25 +462,21 @@ function HolderChange(props) {
                                 title={t('PAS_ANTERIOR')}
                               />
                             )}
-                            {!completed && (
-                              <Button
-                                type="submit"
-                                data-cy="next"
-                                variant="contained"
-                                color="primary"
-                                startIcon={
-                                  isLastStep &&
-                                  (sending ? (
-                                    <CircularProgress size={24} />
-                                  ) : (
-                                    <SendIcon />
-                                  ))
-                                }
-                                endIcon={!isLastStep && <ArrowForwardIosIcon />}
-                                disabled={sending || !props.isValid}>
-                                {!isLastStep ? t('SEGUENT_PAS') : t('SEND')}
-                              </Button>
-                            )}
+                            {(!completed && !isLastStep) ? (
+                              <NextButton
+                                onClick={() => nextStep(props.values, props)}
+                                disabled={sending || !props.isValid}
+                                title={t('SEGUENT_PAS')}
+                              />
+                            ) : null}
+                            {(!completed && isLastStep) ? (
+                              <SubmitButton
+                                loading={sending}
+                                startIcon={<SendIcon />}
+                                title={t('SEND')}
+                                disabled={sending || !props.isValid}
+                              />
+                            ) : null}
                           </Box>
                         </Box>
                         <Box mx={0} mt={2} mb={3}>

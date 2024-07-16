@@ -7,13 +7,9 @@ import {
   within
 } from '@testing-library/react'
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str) => str
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
 describe('Test that it correctly renders', () => {
   const getById = queryByAttribute.bind(null, 'id')
@@ -46,16 +42,16 @@ describe('Test that it correctly renders', () => {
   )
   mockContractValuesNoPhisical.isphisical = false
 
-  const mockSetFieldValues = jest.fn()
+  const mockSetFieldValues = vi.fn()
   const mockInitialValues = {
     terms_accepted: false,
     particular_contract_terms_accepted: false,
     indexed_legal_terms_accepted: false
   }
 
-  const mockHandleClick = jest.fn()
-  const mockHandleIndexadaTermsAccepted = jest.fn()
-  const mockHandleIndexadaLegalTermsAccepted = jest.fn()
+  const mockHandleClick = vi.fn()
+  const mockHandleIndexadaTermsAccepted = vi.fn()
+  const mockHandleIndexadaLegalTermsAccepted = vi.fn()
 
   test('The component render properly all texts', () => {
     const dom = render(
@@ -153,7 +149,6 @@ describe('Test that it correctly renders', () => {
         values={mockInitialValues}
         isIndexedPilotOngoing={true}
         handleIndexadaLegalTermsAccepted={mockHandleIndexadaLegalTermsAccepted}
-        isIndexedPilotOngoing={true}
       />
     )
     const legalTermsCheck = getById(

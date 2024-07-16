@@ -33,19 +33,15 @@ const Review = (props) => {
           <Typography
             sx={{
               textTransform: 'uppercase',
-              paddingRight: '12px',
-              fontSize: '14px',
-              fontWeight: 400,
-              color: 'rgba(0, 0, 0, 0.54)'
+              pr: 2,
+              color: 'secondary.dark'
             }}
-            variant="subtitle2">
+            variant="pagesubtitle">
             {label}
           </Typography>
         </Box>
         <Box className="field__value">
-          <Typography sx={{ fontSize: '16px' }} variant="body2">
-            {value}
-          </Typography>
+          <Typography variant="body1">{value}</Typography>
         </Box>
       </Box>
     )
@@ -62,8 +58,6 @@ const Review = (props) => {
         <Grid item xs={12} sm={6}>
           <Typography
             sx={{
-              fontSize: '18px',
-              fontWeight: 500,
               textTransform: 'uppercase',
               mt: 3,
               mb: 1.2
@@ -105,8 +99,6 @@ const Review = (props) => {
         <Grid item xs={12} sm={6}>
           <Typography
             sx={{
-              fontSize: '18px',
-              fontWeight: 500,
               textTransform: 'uppercase',
               mt: 3,
               mb: 1.2
@@ -121,19 +113,10 @@ const Review = (props) => {
             value={languages[values?.member?.language]}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Divider
-            variant="middle"
-            sx={{
-              mt: '12px',
-              ml: 0,
-              mr: '32px'
-            }}
-          />
+        <Grid item xs={12} sm={12}>
+          <Divider variant="middle" sx={{ mt: 1.5, ml: 0, mr: 6 }} />
           <Typography
             sx={{
-              fontSize: '18px',
-              fontWeight: 500,
               textTransform: 'uppercase',
               mt: 3,
               mb: 1.2
@@ -148,14 +131,7 @@ const Review = (props) => {
           {values?.payment?.payment_method === 'iban' && (
             <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
           )}
-          <Divider
-            variant="middle"
-            sx={{
-              marginTop: '24px',
-              marginLeft: 0,
-              marginRight: '32px'
-            }}
-          />
+          <Divider variant="middle" sx={{ mt: 1.5, ml: 0, mr: 6 }} />
         </Grid>
       </Grid>
 

@@ -17,12 +17,12 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined'
 
-import StepHeader from 'components/StepHeader'
-import StateCity from 'components/StateCity'
-import TermsDialog from 'components/TermsDialog'
-import VATField from 'components/VATField'
+import StepHeader from '../../components/StepHeader'
+import StateCity from '../../components/StateCity'
+import TermsDialog from '../../components/TermsDialog'
+import VATField from '../../components/VATField'
 
-import { languages } from 'services/utils'
+import { languages } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
 
 function PersonalData(props) {
@@ -104,7 +104,7 @@ function PersonalData(props) {
         <Box sx={{
           display: 'flex',
           flexDirection: 'column',
-          marginBottom: "25px"
+          mb: 25
         }}>
           <Typography component="h1" variant="h3">
             {title}
@@ -237,7 +237,7 @@ function PersonalData(props) {
               label={t('HOLDER_ADDRESS')}
               sx={{
                 '& path': {
-                  color: 'rgba(0, 0, 0, 0.54)'
+                  color: 'secondary.dark'
                 }
               }}
               required
@@ -352,7 +352,7 @@ function PersonalData(props) {
               name={`${entity}.email`}
               sx={{
                 '& path': {
-                  color: 'rgba(0, 0, 0, 0.54)'
+                  color: 'secondary.dark'
                 }
               }}
               label={t('HOLDER_EMAIL')}
@@ -379,7 +379,7 @@ function PersonalData(props) {
               name={`${entity}.email2`}
               sx={{
                 '& path': {
-                  color: 'rgba(0, 0, 0, 0.54)'
+                  color: 'secondary.dark'
                 }
               }}
               label={t('HOLDER_EMAIL_2')}
@@ -406,7 +406,7 @@ function PersonalData(props) {
               name={`${entity}.phone1`}
               sx={{
                 '& path': {
-                  color: 'rgba(0, 0, 0, 0.54)'
+                  color: 'secondary.dark'
                 }
               }}
               label={t('HOLDER_PHONE')}
@@ -433,7 +433,7 @@ function PersonalData(props) {
               name={`${entity}.phone2`}
               sx={{
                 '& path': {
-                  color: 'rgba(0, 0, 0, 0.54)'
+                  color: 'secondary.dark'
                 }
               }}
               label={t('HOLDER_PHONE_2')}
@@ -461,7 +461,7 @@ function PersonalData(props) {
               fullWidth
               sx={{
                 '& path': {
-                  color: 'rgba(0, 0, 0, 0.54)'
+                  color: 'secondary.dark'
                 }
               }}
               id={`${entity}_lang`}

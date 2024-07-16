@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -20,14 +19,14 @@ const ReviewField = ({ label, value }) => {
             textTransform: 'uppercase',
             paddingRight: '12px',
             fontSize: '13px',
-            fontWeight: 400,
-            color: 'rgba(0, 0, 0, 0.54)'
+            fontWeight: 600,
+            color: 'secondary.dark'
           }} variant="subtitle2">
             <>{label}</>
           </Typography>
         </Box>
       )}
-      <Box className={clsx('field__value')}>
+      <Box className='field__value'>
         <Typography
           id={label + '__value'}
           sx={{ fontSize: '13px' }}

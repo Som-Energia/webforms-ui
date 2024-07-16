@@ -18,9 +18,7 @@ import Chooser from '../../components/Chooser'
 const label = {
   textTransform: 'uppercase',
   paddingRight: '12px',
-  fontSize: '14px',
-  fontWeight: 400,
-  color: 'rgba(0, 0, 0, 0.54)'
+  color: 'secondary.dark'
 }
 
 function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
@@ -79,8 +77,6 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
 
             <Box mx={1} mb={2}>
               <Typography sx={{
-                fontSize: '1rem',
-                fontWeight: 500,
                 textTransform: 'uppercase',
                 mt: 2,
                 mb: 2
@@ -158,8 +154,6 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
               </Box>
 
               <Typography sx={{
-                fontSize: '1rem',
-                fontWeight: 500,
                 textTransform: 'uppercase',
                 mt: 2,
                 mb: 2
@@ -265,7 +259,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                       sx={{
                         mt: 1,
                         mr: 1,
-                        backgroundColor: '#96b633'
+                        backgroundColor: 'primary.main'
                       }}
                       variant="contained"
                       disabled={!isValid}

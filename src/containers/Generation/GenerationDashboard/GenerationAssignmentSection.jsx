@@ -1,8 +1,6 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react'
-import GenerationContext from '../context/GenerationContext'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
-import GenerationTable from './GenerationTable'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -11,14 +9,16 @@ import Box from '@mui/material/Box'
 import DragIndicatorIcon from '@mui/icons-material//DragIndicator'
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import PopUpContext from '../../../context/PopUpContext';
-import SimpleDialog from '../../../components/SimpleDialog';
-import { deleteContractsFromAssignments } from '../../../services/api'
-import CustomDialog from 'components/CustomDialog'
-import Loading from 'components/Loading'
 import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles';
+import GenerationTable from './GenerationTable'
+import GenerationContext from '../context/GenerationContext'
+import PopUpContext from '../../../context/PopUpContext';
+import SimpleDialog from '../../../components/SimpleDialog';
+import { deleteContractsFromAssignments } from '../../../services/api'
+import CustomDialog from '../../../components/CustomDialog'
+import Loading from '../../../components/Loading'
 
 
 const StyledTableCell = styled(TableCell)(() => ({

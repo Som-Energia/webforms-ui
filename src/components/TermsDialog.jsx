@@ -31,7 +31,7 @@ const TermsDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button data-cy="decline" sx={{color:"secondary.dark"}} onClick={onClose} id="terms-dialog-decline-btn">
+          <Button data-cy="decline" sx={{color:'secondary.dark'}} onClick={onClose} id="terms-dialog-decline-btn">
             {t('I_DECLINE')}
           </Button>
           <Button data-cy="accept" onClick={onAccept} variant="contained" color="primary" id="terms-dialog-accept-btn">

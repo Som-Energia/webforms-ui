@@ -1,23 +1,19 @@
 import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Box from '@mui/material/Box'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+
+import SomEnergiaTheme from './components/SomenergiaTheme'
 //import { Test as ComponentTest } from './components/TextLoader'
 import { Example as ComponentTest } from './components/ApiValidatedField.example'
-
-import {
-  createTheme,
-  ThemeProvider
-} from '@mui/material/styles'
-
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
-
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
 import './App.css'
-import { GenerationContextProvider } from 'containers/Generation/context/GenerationContext'
-import { PopUpContextProvider } from 'context/PopUpContext'
-import Box from '@mui/material/Box'
+import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
+import { PopUpContextProvider } from './context/PopUpContext'
 
 const theme = createTheme({
   palette: {
@@ -27,6 +23,12 @@ const theme = createTheme({
     secondary: {
       dark: '#000',
       main: '#a1a1a1'
+    },
+    dark: {
+      main: '#750d0d'
+    },
+    lightFont: {
+      main: '#fff'
     },
     background: { default: 'transparent', paper: '#ffffff' },
     contrastThreshold: 2,
@@ -45,7 +47,6 @@ const theme = createTheme({
     modal: 1600
   }
 })
-
 
 
 const App = (props) => {
@@ -71,7 +72,6 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
-
 
   const loadContractData = () => {
     const contractData =
@@ -119,10 +119,11 @@ const App = (props) => {
     const investments = document.getElementById('generation-investments-data')
     return investments ? JSON.parse(investments.textContent) : {}
   }, [])
+  const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <ScopedCssBaseline>
+    <ThemeProvider theme={somtheme}>
+      <CssBaseline />
         <Box sx={{ flexGrow: 1 }}>
           <Suspense fallback={<Loading />}>
             <Router>
@@ -407,19 +408,43 @@ const App = (props) => {
                 />
                 <Route
                   path="/participar/"
-                  element={<GenerationContribution {...props} limitAmount={true} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={true}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/:language/participar/"
-                  element={<GenerationContribution {...props} limitAmount={true} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={true}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/participar-no-limit/"
-                  element={<GenerationContribution {...props} limitAmount={false} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={false}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/:language/participar-no-limit/"
-                  element={<GenerationContribution {...props} limitAmount={false} token={token} />}
+                  element={
+                    <GenerationContribution
+                      {...props}
+                      limitAmount={false}
+                      token={token}
+                    />
+                  }
                 />
                 <Route
                   path="/generationkwh/contribution/"
@@ -430,7 +455,6 @@ const App = (props) => {
           </Suspense>
           <ApiStatus />
         </Box>
-      </ScopedCssBaseline>
     </ThemeProvider>
   )
 }

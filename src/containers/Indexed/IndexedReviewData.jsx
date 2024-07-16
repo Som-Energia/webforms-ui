@@ -8,9 +8,9 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import FormHelperText from '@mui/material/FormHelperText'
 
-import Header from 'components/oficinavirtual/Header'
-import TermsDialog from 'components/TermsDialog'
-import LegalText from 'components/LegalText'
+import Header from '../../components/oficinavirtual/Header'
+import TermsDialog from '../../components/TermsDialog'
+import LegalText from '../../components/LegalText'
 
 import IndexedReviewField from './IndexedReviewField'
 import Box from '@mui/material/Box'
@@ -28,7 +28,8 @@ const customStyles ={
     fontWeight: 500,
     textTransform: 'uppercase',
     mt: 3,
-    mb: 1.2
+    mb: 1.2,
+    color:'secondary.dark'
   },
   divider: {
     mt: '12px',
@@ -79,7 +80,7 @@ const IndexedReviewData = (props) => {
       <Grid container sx={customStyles.root}>
         <Grid item xs={12}>
           <Typography
-            variant="body1"
+            variant="subtitle1"
             dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
           />
         </Grid>

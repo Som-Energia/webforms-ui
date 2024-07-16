@@ -6,25 +6,23 @@ import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import TextField from '@mui/material/TextField'
 import FormHelperText from '@mui/material/FormHelperText'
-import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Box from '@mui/material/Box'
 
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
-import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
-import Header from 'components/oficinavirtual/Header'
-import Card from 'components/oficinavirtual/Card'
-import LabelFieldRow from 'components/oficinavirtual/LabelFieldRow'
-import TermsDialog from 'components/TermsDialog'
-import LegalText from 'components/LegalText'
-import Loading from 'components/Loading'
+import Header from '../../components/oficinavirtual/Header'
+import Card from '../../components/oficinavirtual/Card'
+import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
+import TermsDialog from '../../components/TermsDialog'
+import LegalText from '../../components/LegalText'
+import Loading from '../../components/Loading'
 
 import { getNextNBussinesDays } from '../../services/utils'
 
-import { getNationalHolidays } from 'services/api'
+import { getNationalHolidays } from '../../services/api'
 
 const CancellationDetails = (props) => {
   const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
@@ -56,7 +54,7 @@ const CancellationDetails = (props) => {
   }, [])
 
   useEffect(() => {
-    if (availableDates !== []) {
+    if (availableDates.length > 0) {
       setFirstDate(availableDates[0])
       setLastDate(availableDates[availableDates.length - 1])
       setFieldValue(
@@ -145,11 +143,10 @@ const CancellationDetails = (props) => {
           value={dayjs(values.date_action, 'DD/MM/YYYY')}
           onChange={handleDateChange}
           name="date_action"
-          fullWidth
           sx={{
             width: '100%',
             '& path': {
-              color: 'rgba(0, 0, 0, 0.54)'
+              color: 'secondary.dark'
             }
           }}
           inputVariant="outlined"
@@ -171,7 +168,7 @@ const CancellationDetails = (props) => {
           }}
           dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
         />
-      </LabelFieldRow>
+      </LabelFieldRow >
       <LabelFieldRow label={t('PHONE')}>
         <TextField
           id="phone"
@@ -253,7 +250,7 @@ const CancellationDetails = (props) => {
           label={t('CANCELLATION_TERMS')}
         />
       </Card>
-    </Box>
+    </Box >
   )
 }
 

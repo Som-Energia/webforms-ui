@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import NextButton from '../../components/Buttons/NextButton'
 
 export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()
@@ -36,15 +35,11 @@ export default function ModifyIntro({ nextStep, prevStep }) {
           />
           <Box sx={{ mb: 1, display: 'flex', justifyContent: 'flex-end' }}>
             {nextStep && (
-              <Button
-                type="submit"
-                sx={{ mt: 1, mr: 1 }}
-                variant="contained"
-                color="primary"
-                endIcon={<ArrowForwardIosIcon />}
-                disabled={isSubmitting}>
-                {t('SEGUENT_PAS')}
-              </Button>
+               <NextButton
+                onClick={nextStep}
+                disabled={isSubmitting}
+                title={t('SEGUENT_PAS')}
+              />
             )}
           </Box>
         </form>

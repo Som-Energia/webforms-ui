@@ -117,19 +117,20 @@ function D1Detail(props) {
   }
 
   return (
-    <Box sx={{
-      width: '100%',
-      backgroundColor: '#f2f2f2'
-    }}>
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: 'secondary.light'
+      }}>
       {(data?.to_validate && (
         <>
           <Stepper
             sx={{
               '& .MuiStepIcon-root.Mui-active': {
-                color: '#96b633',
+                color: 'primary.main'
               },
               '& .MuiStepIcon-root.Mui-completed': {
-                color: '#96b633',
+                color: 'primary.main'
               },
               pl: 1,
               pr: 1,
@@ -143,7 +144,9 @@ function D1Detail(props) {
                   error={
                     index === steps.length - 1 && data?.error !== undefined
                   }>
-                  <Typography component='body1' sx={{ fontSize: '1.15rem' }}>{t(label)}</Typography>
+                  <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
+                    {t(label)}
+                  </Typography>
                 </StepLabel>
                 <StepContent>
                   {data?.error === undefined &&
@@ -177,12 +180,12 @@ function D1Detail(props) {
           )}
         </>
       )) || (
-          <D1Validation
-            nextStep={() => nextStep(1)}
-            handleStepChanges={handleStepChanges}
-            params={data}
-          />
-        )}
+        <D1Validation
+          nextStep={() => nextStep(1)}
+          handleStepChanges={handleStepChanges}
+          params={data}
+        />
+      )}
     </Box>
   )
 }

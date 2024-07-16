@@ -9,13 +9,13 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import FormHelperText from '@mui/material/FormHelperText'
 
-import StepHeader from 'components/StepHeader'
-import TermsDialog from 'components/TermsDialog'
-import Loading from 'components/Loading'
-import LegalText from 'components/LegalText'
+import StepHeader from '../../components/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
+import Loading from '../../components/Loading'
+import LegalText from '../../components/LegalText'
 
-import { languages, THOUSANDS_CONVERSION_FACTOR } from 'services/utils'
-import { getPrices, getRates } from 'services/api'
+import { languages, THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
+import { getPrices, getRates } from '../../services/api'
 
 const sectionTitle = {
   fontSize: '18px',

@@ -10,9 +10,8 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
-import PrevButton from 'components/Buttons/PrevButton'
+import PrevButton from '../../components/Buttons/PrevButton'
 
 export default function ModifyResume({
   prevStep,
@@ -89,7 +88,7 @@ export default function ModifyResume({
           <Grid container spacing={4}>
             <Grid item>
               <Typography data-cy="power" variant="body1" gutterBottom>
-                <Typography component="body1" sx={{ mr: 1, color: 'gray' }}>
+                <Typography component="body1" sx={{ mr: 1, color: 'secondary.dark' }}>
                   {params?.modify?.moreThan15Kw ? 'P1' : t('PEAK')}
                 </Typography>{' '}
                 {params.modify?.power} kW
@@ -97,7 +96,7 @@ export default function ModifyResume({
             </Grid>
             <Grid item>
               <Typography data-cy="power2" variant="body1" gutterBottom>
-                <Typography component="body1" sx={{ mr: 1, color: 'gray' }}>
+                <Typography component="body1" sx={{ mr: 1, color: 'secondary.dark' }}>
                   {params?.modify?.moreThan15Kw ? 'P2' : t('VALLEY')}
                 </Typography>{' '}
                 {params.modify?.power2} kW
@@ -118,7 +117,7 @@ export default function ModifyResume({
                           component="body1"
                           sx={{
                             mr: 1,
-                            color: 'gray'
+                            color: 'secondary.dark'
                           }}>{`P${num}`}</Typography>{' '}
                         {params.modify?.[`power${num}`]} kW
                       </Typography>
@@ -175,7 +174,6 @@ export default function ModifyResume({
         {prevStep && (
           <PrevButton
             onClick={prevStep}
-            sx={{ mt: 1, mr: 1 }}
             title={t('PAS_ANTERIOR')}
           />
         )}

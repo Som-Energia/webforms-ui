@@ -14,8 +14,9 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import { LocalizationProvider } from '@mui/x-date-pickers'
+import SendIcon from '@mui/icons-material/Send'
 
+import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import dayjs from 'dayjs'
@@ -23,10 +24,6 @@ import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
 
 import DisplayFormikState from '../components/DisplayFormikState'
-
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-import SendIcon from '@mui/icons-material/Send'
 
 import ContractDetails from './Cancellation/ContractDetails'
 import CancellationWarning from './Cancellation/CancellationWarning'
@@ -36,8 +33,9 @@ import CancellationDetails from './Cancellation/CancellationDetails'
 import Failure from './Failure'
 import Success from './Success'
 
-import { cancelContract } from 'services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+import { cancelContract } from '../services/api'
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
 
 const MAX_STEP_NUMBER = 2
 
@@ -161,8 +159,7 @@ const Cancellation = (props) => {
     return (
       <Alert severity="error">
         <Typography
-          sx={{ fontSize: '14px', fontWeight: 400 }}
-          variant="body1"
+          variant="pagesubtitle"
           dangerouslySetInnerHTML={{
             __html: t('CANCELLATION_NO_AVAILABLE')
           }}
@@ -186,7 +183,7 @@ const Cancellation = (props) => {
                 id="cancelForm"
                 method="POST"
                 sx={{
-                  backgroundColor: '#f2f2f2',
+                  backgroundColor: 'secondary.light',
                   color: 'primary',
                   display: 'flex',
                   pb: '2rem'
@@ -220,15 +217,11 @@ const Cancellation = (props) => {
                             />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
-                            <Button
-                              data-cy="next"
-                              variant="contained"
-                              color="primary"
-                              endIcon={<ArrowForwardIosIcon />}
+                            <NextButton
                               disabled={!formikProps.isValid}
-                              onClick={() => nextStep(formikProps)}>
-                              {t('SEGUENT_PAS')}
-                            </Button>
+                              onClick={() => nextStep(formikProps)}
+                              title={t('SEGUENT_PAS')}
+                            />
                           ) : (
                             !completed && (
                               <Button
@@ -263,7 +256,7 @@ const Cancellation = (props) => {
                         width: '100%',
                         display: 'flex',
                         flexDirection: 'column',
-                        backgroundColor: 'backgroundColor'
+                        backgroundColor: 'background.default'
                       }}>
                       {result ? (
                         <Success

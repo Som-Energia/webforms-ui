@@ -10,15 +10,14 @@ import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import CircularProgress from '@mui/material/CircularProgress'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import Chooser from '../../components/Chooser'
 import Uploader from '../../components/Uploader'
-import PrevButton from 'components/Buttons/PrevButton'
+import PrevButton from '../../components/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =
-  process.env.REACT_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
+  import.meta.env.VITE_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
 
 function AcceptD1({
   prevStep,
@@ -140,10 +139,7 @@ function AcceptD1({
               justifyContent: 'space-between'
             }} >
               {
-                <PrevButton sx={{
-                  mt: 1,
-                  mr: 1
-                }}
+                <PrevButton
                   disabled={sending}
                   onClick={() => prevStep(params)}
                   title={t('PAS_ANTERIOR')}

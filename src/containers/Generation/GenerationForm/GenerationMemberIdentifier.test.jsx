@@ -8,17 +8,9 @@ import {
 } from '@testing-library/react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 describe('Generation Form Review', () => {
   const mockValues = {
@@ -42,12 +34,12 @@ describe('Generation Form Review', () => {
   }
 
   const getById = queryByAttribute.bind(null, 'id')
-  const mockSetFieldValue = jest.fn()
-  const mocksetFieldTouched = jest.fn()
+  const mockSetFieldValue = vi.fn()
+  const mocksetFieldTouched = vi.fn()
   test('Should call setFieldValue when choose member', async () => {
     const dom = render(
       <GenerationMemberIdentifier
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         setFieldValue={mockSetFieldValue}
       />
     )
@@ -60,7 +52,7 @@ describe('Generation Form Review', () => {
   test('Should call setFieldValue when choose no member', async () => {
     const dom = render(
       <GenerationMemberIdentifier
-        resetForm={jest.fn()}
+        resetForm={vi.fn()}
         setFieldValue={mockSetFieldValue}
       />
     )
@@ -79,7 +71,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <GenerationMemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValuesNotEnabledZone}
                 setFieldValue={mockSetFieldValue}
               />
@@ -107,7 +99,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <GenerationMemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValues}
                 setFieldValue={mockSetFieldValue}
                 errors={mockEnabledZonneError}
@@ -133,7 +125,7 @@ describe('Generation Form Review', () => {
             path="/"
             element={
               <GenerationMemberIdentifier
-                resetForm={jest.fn()}
+                resetForm={vi.fn()}
                 values={mockValues}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}

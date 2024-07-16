@@ -114,7 +114,7 @@ StepHeader Component
   background: #ffffff;
 }
 
-.MuiTypography-body1 p:first-child {
+.MuiTypography-body1 p:first-of-type {
   margin: 3px 0px 0px;
 }
 

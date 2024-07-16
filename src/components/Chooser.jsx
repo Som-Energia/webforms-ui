@@ -24,10 +24,10 @@ const Chooser = (props) => {
 
   const customStyles = {
     chooserItemAlignTop: {
-      justifyContent:'flex-start'
+      justifyContent: 'flex-start'
     },
-    chooserItemAlignCenter:{
-      justifyContent:'center'
+    chooserItemAlignCenter: {
+      justifyContent: 'center'
     },
     chooserItem: {
       cursor: 'pointer',
@@ -45,6 +45,7 @@ const Chooser = (props) => {
       },
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'center',
       alignItems: 'flex-start'
     },
     chooserItemCondensed: {
@@ -60,7 +61,12 @@ const Chooser = (props) => {
       '&:hover': {
         border: '1px solid',
         borderColor: 'primary.main',
-        backgroundColor: 'primary.extraLight'
+        backgroundColor: 'primary.extraLight',
+        '&:hover': {
+          border: '1px solid',
+          borderColor: 'primary.main',
+          backgroundColor: 'primary.extraLight'
+        }
       }
     },
     chooserItemDisabled: {

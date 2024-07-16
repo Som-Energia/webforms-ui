@@ -19,16 +19,14 @@ import Switch from '@mui/material/Switch'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-
 import Uploader from '../../components/Uploader'
 import PowerInputs from '../../components/PowerInputs'
 import Chooser from '../../components/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
 import { getRates } from '../../services/api'
-import PrevButton from 'components/Buttons/PrevButton'
+import PrevButton from '../../components/Buttons/PrevButton'
+import NextButton from '../../components/Buttons/NextButton'
 
 const handleChangeModify = (event, setFieldValue, values) => {
   if (event.target.name === 'changePhases' && values.changePhases) {
@@ -308,7 +306,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     }
                   }}
                   label={
-                    <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>
+                    <Typography variant="pagetitle">
                       {t('MODIFY_ANSWER_POWER')}
                     </Typography>
                   }
@@ -449,7 +447,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     }
                   }}
                   label={
-                    <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>
+                    <Typography variant="pagetitle">
                       {t('MODIFY_ANSWER_INSTAL_TYPE')}
                     </Typography>
                   }
@@ -525,8 +523,17 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 {prevStep && (
                   <PrevButton
                     onClick={prevStep}
-                    sx={{ mt: 1, mr: 1 }}
-                    title={t('PAS_ANTERIOR')}  
+                    title={t('PAS_ANTERIOR')}
+                  />
+                )}
+                {nextStep && (
+                  <NextButton
+                    onClick={nextStep}
+                    disabled={
+                      (!values.changePhases && !values.changePower) ||
+                      isSubmitting
+                    }
+                    title={t('SEGUENT_PAS')}
                   />
                 )}
                     {nextStep && (

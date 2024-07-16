@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { createGenerationkWhSignature } from '../../../services/api'
-import { useTranslation } from 'react-i18next'
-import cuca from '../../../images/cuca.svg'
-import { CircularProgress, Typography, Box } from '@mui/material/'
+import CircularProgress from '@mui/material/CircularProgress'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 import { styled } from '@mui/system'
+import { useTranslation } from 'react-i18next'
+import { createGenerationkWhSignature } from '../../../services/api'
+import cuca from '../../../images/cuca.svg'
 
 let signaturitHook = () => undefined
 

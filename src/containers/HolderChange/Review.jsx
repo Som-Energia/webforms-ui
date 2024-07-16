@@ -9,10 +9,10 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import FormHelperText from '@mui/material/FormHelperText'
 
-import StepHeader from 'components/StepHeader'
-import TermsDialog from 'components/TermsDialog'
-import LegalText from 'components/LegalText'
-import { languages } from 'services/utils'
+import StepHeader from '../../components/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
+import LegalText from '../../components/LegalText'
+import { languages } from '../../services/utils'
 
 const sectionTitleStyles = {
   fontSize: '18px',
@@ -53,7 +53,7 @@ const Review = (props) => {
               paddingRight: '12px',
               fontSize: '14px',
               fontWeight: 400,
-              color: 'rgba(0, 0, 0, 0.54)'
+              color: 'secondary.dark'
             }}
             variant="subtitle2">
             {label}

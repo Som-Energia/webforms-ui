@@ -1,24 +1,17 @@
+import React from 'react'
 import IndexedReview from './IndexedReview'
 import { Suspense } from 'react'
-import Loading from 'components/Loading'
+import Loading from '../../components/Loading'
 import {
   fireEvent,
   render,
   screen,
   queryByAttribute
 } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
+import { vi } from 'vitest';
+
+vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
 describe('Test that it correctly renders', () => {
   const getById = queryByAttribute.bind(null, 'id')
@@ -46,7 +39,7 @@ describe('Test that it correctly renders', () => {
   )
   mockContractValuesNoPhisical.isphisical = false
 
-  const mockSetFieldValue = jest.fn()
+  const mockSetFieldValue = vi.fn()
   const mockInitialValues = {
     terms_accepted: false,
     particular_contract_terms_accepted: false,
@@ -103,12 +96,12 @@ describe('Test that it correctly renders', () => {
       </Suspense>
     )
     const acceptTermsCheck = getById(dom.container, 'change-tarif-terms-check')
-    act(() => {
+    React.act(() => {
       fireEvent.click(acceptTermsCheck)
     })
     const declineTermsButton = await screen.findByText('I_DECLINE')
 
-    act(() => {
+    React.act(() => {
       fireEvent.click(declineTermsButton)
     })
 
@@ -126,12 +119,12 @@ describe('Test that it correctly renders', () => {
       </Suspense>
     )
     const acceptTermsCheck = getById(dom.container, 'change-tarif-terms-check')
-    act(() => {
+    React.act(() => {
       fireEvent.click(acceptTermsCheck)
     })
     const declineTermsButton = await screen.findByText('I_ACCEPT')
 
-    act(() => {
+    React.act(() => {
       fireEvent.click(declineTermsButton)
     })
 

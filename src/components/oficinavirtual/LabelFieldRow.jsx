@@ -12,6 +12,7 @@ const LabelFieldRow = ({ label = '', children, isHighlight }) => {
         background: '#fff',
         fontSize: '14px',
         padding: '1em',
+        color: 'text.primary',
         margin: '0 0 .5em 0',
         flex: '0 0 75%',
         maxWidth: '75%',
@@ -37,7 +38,8 @@ const customStyles = {
     flex: '0 0 25%',
     maxWidth: '25%',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    color: 'text.primary'
   },
   highlight: {
     background: '#cccc',

@@ -10,12 +10,11 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
-
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import Uploader from '../../components/Uploader'
-import PrevButton from 'components/Buttons/PrevButton'
+
+import PrevButton from '../../components/Buttons/PrevButton'
 
 function RefuseD1({
   prevStep,
@@ -118,7 +117,7 @@ function RefuseD1({
                   justifyContent: 'space-between'
                 }}>
                 {
-                  <PrevButton sx={{ mt: 1, mr: 1 }}
+                  <PrevButton
                     disabled={params?.sending}
                     onClick={() => prevStep(params)}
                     title={t('PAS_ANTERIOR')}
