@@ -17,7 +17,7 @@ import Uploader from '../../components/Uploader'
 import PrevButton from '../../components/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =
-  import.meta.env.VITE_APP_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
+  import.meta.env.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
 
 function AcceptD1({
   prevStep,

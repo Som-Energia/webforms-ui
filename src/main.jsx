@@ -17,7 +17,7 @@ if (root) {
 
     props.version = import.meta.env.VITE_APP_VERSION
 
-    const featureFlags = JSON.parse(import.meta.env?.VITE_APP_FEATURE_FLAGS || "{}")
+    const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
 
     Object.keys(featureFlags).forEach((flag, index) => {
       props[flag] = featureFlags[flag]
