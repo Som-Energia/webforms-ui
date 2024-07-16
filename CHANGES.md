@@ -2,7 +2,12 @@
 
 ## unreleased
 
+- Migrated from cra to vite 
 - Remove avis autonom and their translations
+- Upgrade notes:
+  - Remove node_modules and package-lock and install from scratch, since the build system has changed
+  - All environment variables changed prefix to VITE_
+  - PUBLIC_URL has changed to BASE_URL and requires final slash
 
 ## 2.0.0 2024-07-04
 
