@@ -129,7 +129,7 @@ export const getNationalHolidays = async (firstdate, seconddate) => {
 
   return axios({
     method: 'GET',
-    url: `https://api.somenergia.coop/data/marketholidays?from=${from}&to=${to}`,
+    url: `${WEBFORMS_API_URL}/data/marketholidays?from=${from}&to=${to}`,
     cancelToken: cancelTokenHolidays.token
   }).then((response) => {
     return response?.data
