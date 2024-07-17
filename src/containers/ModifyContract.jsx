@@ -33,15 +33,6 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-const steps = [
-  'MODIFY_POTTAR_INTRO_TITLE',
-  'MODIFY_POTTAR_SELECT_TITLE',
-  'MODIFY_POTTAR_CONTACT_TITLE',
-  'REVISIO_CONFIRMACIO_DADES'
-]
-
-const d1Steps = ['ACCEPT_OR_REFUSE_TITLE', 'DETAIL_D1_TITLE']
-
 function ModifyContract(props) {
   const params = useParams()
   const { state } = useLocation()
@@ -50,6 +41,18 @@ function ModifyContract(props) {
   const d1CaseData = state?.d1CaseData
 
   const { t, i18n } = useTranslation()
+
+  const steps = [
+    t('MODIFY_POTTAR_INTRO_TITLE'),
+    t('MODIFY_POTTAR_SELECT_TITLE'),
+    t('MODIFY_POTTAR_CONTACT_TITLE'),
+    t('REVISIO_CONFIRMACIO_DADES'),
+  ]
+
+  const d1Steps = [
+    t('ACCEPT_OR_REFUSE_TITLE'),
+    t('DETAIL_D1_TITLE'),
+  ]
 
   const handlers = {
     SHOW_INSPECTOR: () => {
@@ -177,11 +180,9 @@ function ModifyContract(props) {
             activeStep={activeD1Step}
             orientation="vertical">
             {d1Steps.map((label, index) => (
-              <Step key={label}>
+              <Step key={`step-${index}`}>
                 <StepLabel>
-                  <Typography variant="pagetitle">
-                    {t(label)}
-                  </Typography>
+                  <Typography variant="pagetitle">{label}</Typography>
                 </StepLabel>
                 <StepContent>
                   <Navigate
@@ -200,12 +201,10 @@ function ModifyContract(props) {
           activeStep={activeStep}
           orientation="vertical">
           {steps.map((label, index) => (
-            <Step key={label}>
+            <Step key={`step-${index}`}>
               <StepLabel
                 error={index === steps.length - 1 && data?.error !== undefined}>
-                <Typography variant="pagetitle">
-                  {t(label)}
-                </Typography>
+                <Typography variant="pagetitle">{label}</Typography>
               </StepLabel>
               <StepContent>{getStepContent(index)}</StepContent>
             </Step>
