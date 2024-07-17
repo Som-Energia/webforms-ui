@@ -18,6 +18,7 @@ import Paper from '@mui/material/Paper'
 import Switch from '@mui/material/Switch'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import Uploader from '../../components/Uploader'
 import PowerInputs from '../../components/PowerInputs'
