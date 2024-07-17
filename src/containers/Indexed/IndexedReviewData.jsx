@@ -224,11 +224,9 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t(
-                    isTariffIndexed
-                      ? 'PERIODS_ACCEPT_CONDITIONS'
-                      : 'INDEXED_ACCEPT_CONDITIONS'
-                  )
+                  __html: isTariffIndexed
+                    ? t('PERIODS_ACCEPT_CONDITIONS')
+                    : t('INDEXED_ACCEPT_CONDITIONS')
                 }}
               />
             }
@@ -252,11 +250,9 @@ const IndexedReviewData = (props) => {
               <Typography
                 variant="body2"
                 dangerouslySetInnerHTML={{
-                  __html: t(
-                    isTariffIndexed
-                      ? 'PERIODS_ACCEPT_TERMS'
-                      : 'INDEXED_ACCEPT_TERMS'
-                  )
+                  __html: isTariffIndexed
+                    ? t('PERIODS_ACCEPT_TERMS')
+                    : t('INDEXED_ACCEPT_TERMS')
                 }}
               />
             }

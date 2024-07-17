@@ -41,18 +41,19 @@ const PowerFare = (props) => {
   return (
     <>
       <StepHeader
-        title={t(
-          values?.contract?.has_service === true ? 'POWER' : 'TENSION_AND_POWER'
-        )}
+        title={
+          values?.contract?.has_service === true
+            ? t('POWER')
+            : t('TENSION_AND_POWER')
+        }
       />
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: t(
+          __html:
             values?.contract?.has_service === true
-              ? 'HELP_POWER_CANVI'
-              : 'HELP_TENSION_POWER_ALTA'
-          )
+              ? t('HELP_POWER_CANVI')
+              : t('HELP_TENSION_POWER_ALTA')
         }}
       />
       {values?.contract?.has_service === false && (
@@ -94,11 +95,11 @@ const PowerFare = (props) => {
           name="moreThan15Kw"
           condensed
           canBeEmpty={false}
-          question={t(
+          question={
             !values?.contract?.has_service
               ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')
               : t('QUINA_POTENCIA_TENS_CONTRACTADA')
-          )}
+          }
           onChange={handleChangeChooser}
           value={values?.contract?.moreThan15Kw}
           options={[

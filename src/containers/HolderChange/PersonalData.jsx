@@ -115,11 +115,11 @@ function PersonalData(props) {
         </Box>
       ) : (
         <StepHeader
-          title={t(
+          title={
             entity === 'holder'
-              ? 'HOLDER_PERSONAL_DATA'
-              : 'MEMBER_PERSONAL_DATA'
-          )}
+              ? t('HOLDER_PERSONAL_DATA')
+              : t('MEMBER_PERSONAL_DATA')
+          }
         />
       )}
       <Box className="step-body">
