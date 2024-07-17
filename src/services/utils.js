@@ -481,7 +481,7 @@ export const testPowerForPeriods = (
     ? t('SOME_PERIOD_MORE_THAN', { value })
     : t('POWER_NO_LESS_THAN', { value })
 
-  return createError({ messge })
+  return createError({ message })
 }
 
 export const templateData = {
