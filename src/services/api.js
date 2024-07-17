@@ -420,16 +420,6 @@ export const confirmCancelContract = async (data) => {
   })
 }
 
-export const generationChangeContractPriority = async (data) => {
-    return axios({
-      method: 'PUT',
-      url: `/api/investments/change-assignment-order/`,
-      data: data
-    }).then((response) => {
-      return response?.data
-    })
-}
-
 export const checkIsFromGenerationEnabledZone = async (data) => {
   const {memberNumber,memberVat} = data
   return axios({
@@ -469,6 +459,16 @@ export const generationkWhContribution = async (data) => {
   }).then((response) => {
     return response?.data
   })
+}
+
+export const generationChangeContractPriority = async (data) => {
+    return axios({
+      method: 'PUT',
+      url: `/api/investments/change-assignment-order/`,
+      data: data
+    }).then((response) => {
+      return response?.data
+    })
 }
 
 export const getNoAssignmentContracts = async () => {
