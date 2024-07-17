@@ -537,21 +537,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     title={t('SEGUENT_PAS')}
                   />
                 )}
-                    {nextStep && (
-                      <Button
-                        type="submit"
-                        sx={{ mt: 1, mr: 1 }}
-                        variant="contained"
-                        color="primary"
-                        endIcon={<ArrowForwardIosIcon />}
-                        disabled={
-                          (!values.changePhases && !values.changePower) ||
-                          isSubmitting
-                        }>
-                        {t('SEGUENT_PAS')}
-                      </Button>
-                    )}
-                  </Box>
+              </Box>
             </form>
           )
         }}
