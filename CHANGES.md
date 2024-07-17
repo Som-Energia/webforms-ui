@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Upgrade notes:
+    - VITE_API_BASE_URL -> VITE_WEBFORMS_API_URL
+
 ## 2.1.0 2024-07-16
 
 - Migrated from cra to vite 

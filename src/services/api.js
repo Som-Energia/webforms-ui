@@ -2,14 +2,14 @@ import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
 import dayjs from 'dayjs'
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  window?.config?.API_BASE_URL.replace?.(/\/$/, '')
+const WEBFORMS_API_URL = document.getElementById('root')
+  ? document.getElementById('root').dataset.webformsApiUrl
+  : import.meta.env.VITE_WEBFORMS_API_URL ?? null // For tests
 
 export const modifyContract = async (data, token) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/procedures/contract_modification`,
+    url: `${WEBFORMS_API_URL}/procedures/contract_modification`,
     headers: {
       Authorization: token
     },
@@ -35,7 +35,7 @@ export const uploadFile = async (name, file) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/upload_attachment`,
+    url: `${WEBFORMS_API_URL}/form/upload_attachment`,
     data: data,
     config: config
   }).then((response) => {
@@ -54,7 +54,7 @@ export const checkVat = async (vat) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/check/vat/exists/${vat}`,
+    url: `${WEBFORMS_API_URL}/check/vat/exists/${vat}`,
     cancelToken: cancelTokenVat.token
   }).then((response) => {
     return response?.data
@@ -72,7 +72,7 @@ export const checkCups = async (cups) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/check/cups/status/${cups}`,
+    url: `${WEBFORMS_API_URL}/check/cups/status/${cups}`,
     cancelToken: cancelTokenCups.token
   }).then((response) => {
     return response?.data
@@ -90,7 +90,7 @@ export const checkCnae = async (cnae) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/check/cnae/${cnae}`,
+    url: `${WEBFORMS_API_URL}/check/cnae/${cnae}`,
     cancelToken: cancelTokenCnae.token
   }).then((response) => {
     return response?.data
@@ -100,7 +100,7 @@ export const checkCnae = async (cnae) => {
 export const getProvincies = async () => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/provincies`
+    url: `${WEBFORMS_API_URL}/data/provincies`
   }).then((response) => {
     return response?.data
   })
@@ -109,7 +109,7 @@ export const getProvincies = async () => {
 export const getMunicipis = async (provincia) => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/municipis/${provincia}`
+    url: `${WEBFORMS_API_URL}/data/municipis/${provincia}`
   }).then((response) => {
     return response?.data
   })
@@ -147,7 +147,7 @@ export const checkIban = async (iban) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/check/iban/${iban}`,
+    url: `${WEBFORMS_API_URL}/check/iban/${iban}`,
     cancelToken: cancelTokenIban.token
   }).then((response) => {
     return response?.data
@@ -165,7 +165,7 @@ export const checkCadastralReference = async (cadastralReference) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/check/cadastral_reference/${cadastralReference}`,
+    url: `${WEBFORMS_API_URL}/check/cadastral_reference/${cadastralReference}`,
     cancelToken: cancelTokenCadastralReference.token
   }).then((response) => {
     return response?.data
@@ -176,7 +176,7 @@ export const checkCadastralReference = async (cadastralReference) => {
 export const holderChange = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/holderchange`,
+    url: `${WEBFORMS_API_URL}/form/holderchange`,
     data: data
   }).then((response) => {
     return response?.data
@@ -213,7 +213,7 @@ export const checkMemberVat = async (vat) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/check/vat/${vat}`,
+    url: `${WEBFORMS_API_URL}/check/vat/${vat}`,
     cancelToken: cancelTokenMemberVat.token
   }).then((response) => {
     return response?.data
@@ -231,7 +231,7 @@ export const checkMember = async (number, vat) => {
 
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/soci/${number}/${vat}`,
+    url: `${WEBFORMS_API_URL}/data/soci/${number}/${vat}`,
     cancelToken: cancelTokenMember.token
   }).then((response) => {
     return response?.data
@@ -250,7 +250,7 @@ export const getPrices = async ({
 }) => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/prices?tariff=${tariff}&max_power=${max_power}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
+    url: `${WEBFORMS_API_URL}/data/prices?tariff=${tariff}&max_power=${max_power}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
   }).then((response) => {
     return response?.data
   })
@@ -259,7 +259,7 @@ export const getPrices = async ({
 export const contract = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/procedures/contract`,
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
     data: data
   }).then((response) => {
     return response?.data
@@ -269,7 +269,7 @@ export const contract = async (data) => {
 export const modify_tariff = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/procedures/contract_indexed`,
+    url: `${WEBFORMS_API_URL}/procedures/contract_indexed`,
     headers: { Authorization: data.token },
     data: data
   }).then((response) => {
@@ -280,7 +280,7 @@ export const modify_tariff = async (data) => {
 export const can_modify_tariff = async (token) => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/procedures/can_turn_contract_indexed`,
+    url: `${WEBFORMS_API_URL}/procedures/can_turn_contract_indexed`,
     headers: { Authorization: token }
   }).then((response) => response?.data)
 }
@@ -288,7 +288,7 @@ export const can_modify_tariff = async (token) => {
 export const confirmD1Case = async (data, case_id, token) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/procedures/d1_confirmation/${case_id}`,
+    url: `${WEBFORMS_API_URL}/procedures/d1_confirmation/${case_id}`,
     headers: { Authorization: token },
     data: data
   }).then((response) => {
@@ -304,7 +304,7 @@ export const member = async (data) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/soci/alta`,
+    url: `${WEBFORMS_API_URL}/form/soci/alta`,
     data: formData
   }).then((response) => {
     return response?.data
@@ -319,7 +319,7 @@ export const memberPayment = async (data) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/pagament/redirectiondata`,
+    url: `${WEBFORMS_API_URL}/pagament/redirectiondata`,
     data: formData
   }).then((response) => {
     return response?.data
@@ -329,14 +329,14 @@ export const memberPayment = async (data) => {
 export const apiStatus = async () => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/ping`
+    url: `${WEBFORMS_API_URL}/ping`
   })
 }
 
 export const getSelfConsumptionSituations = async () => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/installation_types`
+    url: `${WEBFORMS_API_URL}/data/installation_types`
   }).then((response) => {
     return response?.data
   })
@@ -345,7 +345,7 @@ export const getSelfConsumptionSituations = async () => {
 export const getSelfConsumptionTechnologies = async () => {
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/generator_technologies`
+    url: `${WEBFORMS_API_URL}/data/generator_technologies`
   }).then((response) => {
     return response?.data
   })
@@ -368,7 +368,7 @@ export const getMunicipisByPostalCode = async (postalCode) => {
     const ineCode = item[postalCode]
     return axios({
       method: 'GET',
-      url: `${API_BASE_URL}/data/ine/${ineCode}`,
+      url: `${WEBFORMS_API_URL}/data/ine/${ineCode}`,
       cancelToken: cancelPostalCode.token
     }).then((response) => {
       return response?.data
@@ -387,7 +387,7 @@ export const contribution = async (data) => {
 
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/inversio`,
+    url: `${WEBFORMS_API_URL}/form/inversio`,
     data: formData
   }).then((response) => {
     return response?.data
@@ -435,7 +435,7 @@ export const checkIsFromGenerationEnabledZone = async (data) => {
   const {memberNumber,memberVat} = data
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`
+    url: `${WEBFORMS_API_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`
   }).then((response) => {
     return response?.data
   })
@@ -445,7 +445,7 @@ export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
   const {postalCode} = data
   return axios({
     method: 'GET',
-    url: `${API_BASE_URL}/data/generationkwh/can_join/${postalCode}`
+    url: `${WEBFORMS_API_URL}/data/generationkwh/can_join/${postalCode}`
   }).then((response) => {
     return response?.data
   })
@@ -454,7 +454,7 @@ export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
 export const createGenerationkWhSignature = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/create_gkwh_signature`,
+    url: `${WEBFORMS_API_URL}/form/create_gkwh_signature`,
     data: data
   }).then((response) => {
     return response?.data
@@ -465,7 +465,7 @@ export const createGenerationkWhSignature = async (data) => {
 export const generationkWhContribution = async (data) => {
   return axios({
     method: 'POST',
-    url: `${API_BASE_URL}/form/generationkwh`,
+    url: `${WEBFORMS_API_URL}/form/generationkwh`,
     data: data
   }).then((response) => {
     return response?.data
