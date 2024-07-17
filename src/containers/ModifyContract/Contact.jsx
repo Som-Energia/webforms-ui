@@ -122,6 +122,7 @@ export default function Contact({
               )}
               {nextStep && (
                 <NextButton
+                  type="submit"
                   onClick={nextStep}
                   title={t('SEGUENT_PAS')}
                 />

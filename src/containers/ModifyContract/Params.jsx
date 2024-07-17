@@ -531,6 +531,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 )}
                 {nextStep && (
                   <NextButton
+                    type="submit"
                     onClick={nextStep}
                     disabled={
                       (!values.changePhases && !values.changePower) ||
