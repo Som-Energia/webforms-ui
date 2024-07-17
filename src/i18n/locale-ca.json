@@ -300,23 +300,13 @@
     "PRICES_PLUS_TAXES": "Preus amb impostos",
     "PRICES": "Preus",
     "TERME_ENERGIA": "Terme d’energia",
-    "TERME_ENERGIA_P1_2": {
-        "0TD": "Període punta"
-    },
-    "TERME_ENERGIA_P2_2": {
-        "0TD": "Període pla"
-    },
-    "TERME_ENERGIA_P3_2": {
-        "0TD": "Període vall"
-    },
+    "TERME_ENERGIA_20TD_P1": "Període punta",
+    "TERME_ENERGIA_20TD_P2": "Període pla",
+    "TERME_ENERGIA_20TD_P3": "Període vall",
     "TERME_ENERGIA_GENERATIONKWH": "Terme d’energia tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
     "TERME_POTENCIA": "Terme de potència",
-    "TERME_POTENCIA_P1_2": {
-        "0TD": "Període punta-pla"
-    },
-    "TERME_POTENCIA_P2_2": {
-        "0TD": "Període vall"
-    },
+    "TERME_POTENCIA_20TD_P1": "Període punta-pla",
+    "TERME_POTENCIA_20TD_P2": "Període vall",
     "GENERATION_URL": "https://www.generationkwh.org/ca/",
     "GENERATION": "Generation kWh",
     "AUTOCONSUM": "Compensació per autoproducció",
