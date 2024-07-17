@@ -2,9 +2,8 @@ import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
 import dayjs from 'dayjs'
 
-const WEBFORMS_API_URL = document.getElementById('root')
-  ? document.getElementById('root').dataset.webformsApiUrl
-  : import.meta.env.VITE_WEBFORMS_API_URL ?? null // For tests
+const WEBFORMS_API_URL = document.getElementById('root')?.dataset?.webformsApiUrl
+  ?? import.meta.env.VITE_WEBFORMS_API_URL ?? null // For tests
 
 export const modifyContract = async (data, token) => {
   return axios({
