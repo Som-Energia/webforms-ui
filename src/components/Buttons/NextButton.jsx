@@ -2,8 +2,7 @@ import React from 'react'
 import Button from '@mui/material/Button'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-function NextButton(props) {
-  const { title, onClick, disabled } = props
+function NextButton({title, ...props}) {
   return (
     <Button
       type="button"
@@ -11,8 +10,8 @@ function NextButton(props) {
       variant="contained"
       color="primary"
       endIcon={<ArrowForwardIosIcon />}
-      disabled={disabled}
-      onClick={onClick}>
+      {...props}
+    >
       {title}
     </Button>
   )
