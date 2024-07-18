@@ -2,7 +2,12 @@
 
 ## Unreleased
 
+- New deploy scripts for wp
+- Support different ways of setting WEBFORMS_API_URL for wp and ov
+- Moved translation literals inside t() (wip)
+- Include jsx files in i18n-lint
 - Upgrade notes:
+    - webforms-config.js obsolete
     - VITE_API_BASE_URL -> VITE_WEBFORMS_API_URL
 
 ## 2.1.0 2024-07-16
