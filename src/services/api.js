@@ -393,33 +393,6 @@ export const contribution = async (data) => {
   })
 }
 
-export const cancelContract = async (data) => {
-  const { contract_id, csrfToken } = data
-  return axios({
-    method: 'POST',
-    url: `/contract/${contract_id}/cancel`,
-    data: data,
-    headers: {
-      'X-CSRFToken': csrfToken
-    }
-  }).then((response) => {
-    return response?.data
-  })
-}
-
-export const confirmCancelContract = async (data) => {
-  const { contract_id, csrfToken, token } = data
-  return axios({
-    method: 'POST',
-    url: `/contract/${contract_id}/confirm_cancellation/${token}`,
-    headers: {
-      'X-CSRFToken': csrfToken
-    }
-  }).then((response) => {
-    return response?.data
-  })
-}
-
 export const checkIsFromGenerationEnabledZone = async (data) => {
   const {memberNumber,memberVat} = data
   return axios({
@@ -456,6 +429,35 @@ export const generationkWhContribution = async (data) => {
     method: 'POST',
     url: `${WEBFORMS_API_URL}/form/generationkwh`,
     data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+/// OV API (local urls)
+
+export const cancelContract = async (data) => {
+  const { contract_id, csrfToken } = data
+  return axios({
+    method: 'POST',
+    url: `/contract/${contract_id}/cancel`,
+    data: data,
+    headers: {
+      'X-CSRFToken': csrfToken
+    }
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const confirmCancelContract = async (data) => {
+  const { contract_id, csrfToken, token } = data
+  return axios({
+    method: 'POST',
+    url: `/contract/${contract_id}/confirm_cancellation/${token}`,
+    headers: {
+      'X-CSRFToken': csrfToken
+    }
   }).then((response) => {
     return response?.data
   })
