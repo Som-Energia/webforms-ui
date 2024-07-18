@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.2.0 2024-07-18
 
 - New deploy scripts for wp
 - Support different ways of setting WEBFORMS_API_URL for wp and ov
