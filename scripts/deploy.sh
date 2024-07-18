@@ -66,13 +66,8 @@ app_dir="$deploy_path/build"
 alias_dir="build_$today"
 
 function build () {
-    if [ $testing -eq 1 ]; then
-        log_message "INFO" "Building project for oficinavirtual"
-        npm run build:rename
-    else
-        log_message "INFO" "Building project $build"
-        npm run $build
-    fi;
+    log_message "INFO" "Building project $build"
+    npm run $build
 
     if [ $? != 0 ]
     then
