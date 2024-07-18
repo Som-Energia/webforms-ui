@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography'
 
 import SendIcon from '@mui/icons-material/Send'
 
-import { LocalizationProvider } from '@mui/x-date-pickers'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import dayjs from 'dayjs'

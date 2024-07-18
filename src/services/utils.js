@@ -474,16 +474,14 @@ export const testPowerForPeriods = (
     return true
   }
 
-  const lessThan =
-    rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
-      ? 'SOME_PERIOD_MORE_THAN'
-      : 'POWER_NO_LESS_THAN'
+  const value = rates[rate][limit]?.power
+  const message = !limit.match('min')
+    ? ('POWER_NO_MORE_THAN', { value })
+    : rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
+    ? t('SOME_PERIOD_MORE_THAN', { value })
+    : t('POWER_NO_LESS_THAN', { value })
 
-  return createError({
-    message: t(limit.match('min') ? lessThan : 'POWER_NO_MORE_THAN', {
-      value: rates[rate][limit]?.power
-    })
-  })
+  return createError({ message })
 }
 
 export const templateData = {

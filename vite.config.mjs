@@ -26,9 +26,6 @@ export default defineConfig(({ mode }) => {
     } 
   } : {}
 
-  /* entryFileNames: mode === 'ov' ? 'assets/main.js' : undefined, // Explicitly name the entry JS file */
-
-
   return {
     base: process.env.BASE_URL,
     resolve: {
@@ -46,17 +43,6 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           ...ovOptions,
-          /* chunkFileNames: (fileInfo) => {
-            if (fileInfo.name.includes('vendor')) {
-              return 'assets/vendor.js';  // Explicitly name the entry JS file
-            }
-            return 'assets/[name]-[hash].js';
-          }, assetFileNames: (assetInfo) => {
-            if (assetInfo.name.endsWith('.css') && assetInfo.name.includes('index')) {
-              return 'assets/index.css'; // Explicitly name the CSS file
-            }
-            return 'assets/[name]-[hash].[ext]';
-          } */
         }
       },
       target: "es2020",

@@ -11,7 +11,7 @@ if (root) {
   root.forEach((item, index) => {
     const props = {}
     const attrs = Object.keys(item.dataset)
-    attrs.forEach((name, index) => {
+    attrs.forEach((name) => {
       props[name] = item.dataset[name]
     })
 
@@ -19,7 +19,7 @@ if (root) {
 
     const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
 
-    Object.keys(featureFlags).forEach((flag, index) => {
+    Object.keys(featureFlags).forEach((flag) => {
       props[flag] = featureFlags[flag]
     })
     

@@ -107,7 +107,7 @@ find_external_id() {
 # For external id's prepend 
 non_literal_t_calls() {
   step "Locating t calls with non literals... "
-  ! grep "\<t([^'\"]" src/ -r 
+  ! grep "\<t([^'\"]" src/ -rn 
 }
 
 # Usually multiline calls to t are expressions as well.
@@ -115,7 +115,7 @@ non_literal_t_calls() {
 # possible false positives.
 multiline_t_calls() {
   step "Locating t calls with multiline parameters... "
-  ! grep "\<t(\s*$" src/ -r
+  ! grep "\<t(\s*$" src/ -rn
 }
 
 check ids_from_src # wait the migration merge to add "run extract"

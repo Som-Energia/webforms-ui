@@ -20,16 +20,17 @@ import { CNAE_HOUSING } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
 import CadastralReferenceField from '../../components/CadastralReferenceField'
 
-
 const CadastralReferenceHelperText = () => {
   const { t } = useTranslation()
-  return <span dangerouslySetInnerHTML={{
-    __html: t('HELP_CADASTRAL_REFERENCE', {
-        cadastral_reference_url: t(
-        'CADASTRAL_REFERENCE_URL'
-      )
-    })
-  }}/>
+  return (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: t('HELP_CADASTRAL_REFERENCE', {
+          url: t('HELP_CADASTRAL_REFERENCE_URL')
+        })
+      }}
+    />
+  )
 }
 
 const SupplyPoint = (props) => {

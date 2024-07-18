@@ -18,6 +18,7 @@ import Paper from '@mui/material/Paper'
 import Switch from '@mui/material/Switch'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import Uploader from '../../components/Uploader'
 import PowerInputs from '../../components/PowerInputs'
@@ -337,10 +338,12 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     value={values.moreThan15Kw}
                     options={[
                       {
+                        id: 'lesser_power',
                         value: false,
                         label: t('MENOR_IGUAL_A_15KW_CONTRACTACIO')
                       },
                       {
+                        id: 'greater_power',
                         value: true,
                         label: t('MES_GRAN_DE_15KW_CONTRACTACIO')
                       }
@@ -528,6 +531,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 )}
                 {nextStep && (
                   <NextButton
+                    type="submit"
                     onClick={nextStep}
                     disabled={
                       (!values.changePhases && !values.changePower) ||
@@ -536,21 +540,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     title={t('SEGUENT_PAS')}
                   />
                 )}
-                    {nextStep && (
-                      <Button
-                        type="submit"
-                        sx={{ mt: 1, mr: 1 }}
-                        variant="contained"
-                        color="primary"
-                        endIcon={<ArrowForwardIosIcon />}
-                        disabled={
-                          (!values.changePhases && !values.changePower) ||
-                          isSubmitting
-                        }>
-                        {t('SEGUENT_PAS')}
-                      </Button>
-                    )}
-                  </Box>
+              </Box>
             </form>
           )
         }}

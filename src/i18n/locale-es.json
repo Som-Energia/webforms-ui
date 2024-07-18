@@ -262,7 +262,8 @@
     "ES_UN_HABITATGE": "¿Es una vivienda?",
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/252-cual-es-mi-numero-de-cnae\">CNAE de vuestra actividad económica</a>.",
     "CADASTRAL_REFERENCE": "Referencia catastral",
-    "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/1339-que-es-y-donde-encontrar-la-referencia-catastral\">¿Qué es la referencia catastral y dónde puedo encontrarla?</a>.",
+    "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"{{url}}\">¿Qué es la referencia catastral y dónde puedo encontrarla?</a>.",
+    "HELP_CADASTRAL_REFERENCE_URL": "https://es.support.somenergia.coop/article/1339-que-es-y-donde-encontrar-la-referencia-catastral",
     "INVALID_REF_CADASTRAL_LENGTH": "La referencia catastral es un código de 20 números y/o letras.",
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "La referencia catastral no es válida",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificado si ya hay luz con otra comercializadora o es un nuevo punto de suministro sin luz",
@@ -299,23 +300,13 @@
     "PRICES_PLUS_TAXES": "Precios con impuestos",
     "PRICES": "Precios",
     "TERME_ENERGIA": "Término de energía",
-    "TERME_ENERGIA_P1_2": {
-        "0TD": "Periodo punta"
-    },
-    "TERME_ENERGIA_P2_2": {
-        "0TD": "Periodo llano"
-    },
-    "TERME_ENERGIA_P3_2": {
-        "0TD": "Periodo valle"
-    },
+    "TERME_ENERGIA_20TD_P1": "Periodo punta",
+    "TERME_ENERGIA_20TD_P2": "Periodo llano",
+    "TERME_ENERGIA_20TD_P3": "Periodo valle",
     "TERME_ENERGIA_GENERATIONKWH": "Término de energía tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
     "TERME_POTENCIA": "Término de potencia",
-    "TERME_POTENCIA_P1_2": {
-        "0TD": "Periodo punta-llano"
-    },
-    "TERME_POTENCIA_P2_2": {
-        "0TD": "Periodo valle"
-    },
+    "TERME_POTENCIA_20TD_P1": "Periodo punta-llano",
+    "TERME_POTENCIA_20TD_P2": "Periodo valle",
     "GENERATION_URL": "https://www.generationkwh.org/ca/",
     "GENERATION": "Generation kWh",
     "AUTOCONSUM": "Compensación por autoproducción",

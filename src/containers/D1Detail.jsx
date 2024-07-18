@@ -20,12 +20,6 @@ import D1Validation from './CaseDetail/D1Validation'
 import RefuseD1 from './CaseDetail/RefuseD1'
 import AcceptD1 from './CaseDetail/AcceptD1'
 
-const steps = [
-  'DETAIL_D1_TITLE',
-  'ACCEPT_OR_REFUSE_TITLE',
-  'REVISIO_CONFIRMACIO_DADES'
-]
-
 function D1Detail(props) {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
@@ -64,6 +58,12 @@ function D1Detail(props) {
         nextStep()
       })
   }
+
+  const steps = [
+    t('DETAIL_D1_TITLE'),
+    t('ACCEPT_OR_REFUSE_TITLE'),
+    t('REVISIO_CONFIRMACIO_DADES'),
+  ]
 
   const getStepContent = (step) => {
     switch (step) {
@@ -139,13 +139,13 @@ function D1Detail(props) {
             activeStep={activeStep}
             orientation="vertical">
             {steps.map((label, index) => (
-              <Step key={label}>
+              <Step key={`step_${index}`}>
                 <StepLabel
                   error={
                     index === steps.length - 1 && data?.error !== undefined
                   }>
                   <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
-                    {t(label)}
+                    {label}
                   </Typography>
                 </StepLabel>
                 <StepContent>

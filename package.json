@@ -2,6 +2,20 @@
   "name": "webforms-ui",
   "version": "2.1.0",
   "private": false,
+  "scripts": {
+    "start": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite",
+    "build": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite build",
+    "build:ov": "npm run build -- --mode=ov && ./scripts/rename-assets-ov.sh",
+    "build:wp": "npm run build -- --mode=wp",
+    "build:pre": "npm run build -- --mode=pre",
+    "build:vercel": "npm run build -- --mode=vercel",
+    "test": "TZ=Europe/Madrid vitest",
+    "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
+    "cypress": "TZ=Europe/Madrid cypress open",
+    "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
+    "i18n-lint": "./scripts/lint-i18n.sh",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@date-io/dayjs": "1.x",
     "@emotion/react": "^11.11.4",
@@ -33,20 +47,6 @@
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.2",
     "yup": "^0.32.11"
-  },
-  "scripts": {
-    "start": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite",
-    "build": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite build",
-    "build:ov": "npm run build -- --mode=ov && ./scripts/rename-assets-ov.sh",
-    "build:staging": "npm run build -- --mode=staging",
-    "build:wp": "npm run build -- --mode=wp",
-    "build:vercel": "npm run build -- --mode=vercel",
-    "test": "TZ=Europe/Madrid vitest",
-    "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
-    "cypress": "TZ=Europe/Madrid cypress open",
-    "i18n-extract": "./node_modules/.bin/i18next src/**/*.js -o src/i18n/locale-xx.json -s",
-    "i18n-lint": "./scripts/lint-i18n.sh",
-    "preview": "vite preview"
   },
   "prettier": "prettier-config-standard",
   "browserslist": {

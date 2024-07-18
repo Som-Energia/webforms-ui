@@ -262,7 +262,8 @@
     "ES_UN_HABITATGE": "¿És un habitatge?",
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/232-quin-es-el-meu-numero-de-cnae\">CNAE de la vostra activitat econòmica</a>.",
     "CADASTRAL_REFERENCE": "Referència cadastral",
-    "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/1338-que-es-i-on-trobar-la-referencia-cadastral\"> Què és la referència cadastral i on puc trobar-la?</a>",
+    "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"{{url}}\"> Què és la referència cadastral i on puc trobar-la?</a>",
+    "HELP_CADASTRAL_REFERENCE_URL": "https://ca.support.somenergia.coop/article/1338-que-es-i-on-trobar-la-referencia-cadastral",
     "INVALID_REF_CADASTRAL_LENGTH": "La referència cadastral és un codi de 20 xifres i/o lletres.",
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "La referència cadastral no és vàlida",
     "UNSELECTED_NEW_SUPPLY_POINT": "No has especificat si ja hi ha llum amb una altra comercialitzadora o és un nou punt de subministrament sense llum",
@@ -299,23 +300,13 @@
     "PRICES_PLUS_TAXES": "Preus amb impostos",
     "PRICES": "Preus",
     "TERME_ENERGIA": "Terme d’energia",
-    "TERME_ENERGIA_P1_2": {
-        "0TD": "Període punta"
-    },
-    "TERME_ENERGIA_P2_2": {
-        "0TD": "Període pla"
-    },
-    "TERME_ENERGIA_P3_2": {
-        "0TD": "Període vall"
-    },
+    "TERME_ENERGIA_20TD_P1": "Període punta",
+    "TERME_ENERGIA_20TD_P2": "Període pla",
+    "TERME_ENERGIA_20TD_P3": "Període vall",
     "TERME_ENERGIA_GENERATIONKWH": "Terme d’energia tarifa <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a>",
     "TERME_POTENCIA": "Terme de potència",
-    "TERME_POTENCIA_P1_2": {
-        "0TD": "Període punta-pla"
-    },
-    "TERME_POTENCIA_P2_2": {
-        "0TD": "Període vall"
-    },
+    "TERME_POTENCIA_20TD_P1": "Període punta-pla",
+    "TERME_POTENCIA_20TD_P2": "Període vall",
     "GENERATION_URL": "https://www.generationkwh.org/ca/",
     "GENERATION": "Generation kWh",
     "AUTOCONSUM": "Compensació per autoproducció",

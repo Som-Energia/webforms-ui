@@ -262,7 +262,8 @@
     "ES_UN_HABITATGE": "Etxebizitza bat da?",
     "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://eu.support.somenergia.coop/article/332-zein-da-nire-cnae-zenbakia\">Zure jarduera ekonomikoaren EJSN kodea</a>.",
     "CADASTRAL_REFERENCE": "Katastroko erreferentzia",
-    "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"https://eu.support.somenergia.coop/article/1349-zer-da-katastroko-erreferentzia-non-aurkitu-dezaket\">Zer da katastroko erreferentzia? Non aurkitu dezaket?</a>.",
+    "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"{{url}}\">Zer da katastroko erreferentzia? Non aurkitu dezaket?</a>.",
+    "HELP_CADASTRAL_REFERENCE_URL": "https://eu.support.somenergia.coop/article/1349-zer-da-katastroko-erreferentzia-non-aurkitu-dezaket",
     "INVALID_REF_CADASTRAL_LENGTH": "Katastroko erreferentzia 20 zenbakiz edota letraz osatutako kode bat da.",
     "INVALID_REF_CADASTRAL_CONTROL_DIGIT": "Katastroko erreferentzia ez da baliozkoa",
     "UNSELECTED_NEW_SUPPLY_POINT": "Ez duzu zehaztu argindarra beste merkaturatze-konpainia batekin kontratatuta duzun edo argindarrik ez duen hornidura-puntu berria den",
@@ -299,23 +300,13 @@
     "PRICES_PLUS_TAXES": "Prezioak zergak barne",
     "PRICES": "Prezioak",
     "TERME_ENERGIA": "Energia-tartea",
-    "TERME_ENERGIA_P1_2": {
-        "0TD": "Puntako aldia"
-    },
-    "TERME_ENERGIA_P2_2": {
-        "0TD": "Aldi arrunta"
-    },
-    "TERME_ENERGIA_P3_2": {
-        "0TD": "Sakonune-aldia"
-    },
+    "TERME_ENERGIA_20TD_P1": "Puntako aldia",
+    "TERME_ENERGIA_20TD_P2": "Aldi arrunta",
+    "TERME_ENERGIA_20TD_P3": "Sakonune-aldia",
     "TERME_ENERGIA_GENERATIONKWH": "Energia-tartea <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{{url}}\">Generation kWh</a> tarifan",
     "TERME_POTENCIA": "Potentzia-tartea",
-    "TERME_POTENCIA_P1_2": {
-        "0TD": "Puntako aldia-aldi arrunta"
-    },
-    "TERME_POTENCIA_P2_2": {
-        "0TD": "Sakonune-aldia"
-    },
+    "TERME_POTENCIA_20TD_P1": "Puntako aldia-aldi arrunta",
+    "TERME_POTENCIA_20TD_P2": "Sakonune-aldia",
     "GENERATION_URL": "https://www.generationkwh.org/eu/",
     "GENERATION": "Generation kWh",
     "AUTOCONSUM": "Autoprodukzioarengatiko konpentsazioa",

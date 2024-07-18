@@ -68,9 +68,9 @@ const Review = (props) => {
       <Grid container>
         <Grid item xs={12} sm={6}>
           <Typography id="personal-data" component="h3" variant="h6">
-            {t(
-              values?.member?.is_member ? 'REVIEW_PERSONAL_DATA' : 'NEW_MEMBER'
-            )}
+            {values?.member?.is_member
+              ? t('REVIEW_PERSONAL_DATA')
+              : t('NEW_MEMBER')}
           </Typography>
           <ReviewField label={'NIF'} value={values?.member?.vat} />
 
