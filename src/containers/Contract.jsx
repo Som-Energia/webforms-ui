@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import ReactGA from 'react-ga'
 import Plausible from 'plausible-tracker'
 
 import { useTranslation } from 'react-i18next'
@@ -807,9 +806,6 @@ const Contract = (props) => {
         window.location.hostname +
         '/es/contratacion-realizada/'
     })
-
-    ReactGA.initialize(GA_TRACKING_ID)
-    ReactGA.pageview('/es/contratacion-realizada/')
   }
 
   const handlePost = async (values) => {
