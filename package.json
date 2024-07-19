@@ -47,7 +47,7 @@
     "vite": "^5.2.11",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.2",
-    "yup": "^0.32.11"
+    "yup": "^1.4.0"
   },
   "prettier": "prettier-config-standard",
   "browserslist": {
