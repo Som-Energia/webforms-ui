@@ -106,25 +106,27 @@ function HolderChange(props) {
         name: Yup.string().required(t('NO_NAME')),
         surname1: Yup.string().when('isphisical', {
           is: true,
-          then: Yup.string().required(t('NO_SURNAME1'))
+          then: (schema) => schema.required(t('NO_SURNAME1'))
         }),
         proxyname: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NAME'))
+          then: (schema) => schema.required(t('NO_PROXY_NAME'))
         }),
         proxynif: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NIF'))
+          then: (schema) => schema.required(t('NO_PROXY_NIF'))
         }),
         proxynif_valid: Yup.bool().when('isphisical', {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: (schema) =>
+            schema.required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
         }),
         proxynif_phisical: Yup.bool().when('isphisical', {
           is: false,
-          then: Yup.bool()
-            .required(t('PROXY_NIF_PHISICAL'))
-            .oneOf([true], t('PROXY_NIF_PHISICAL'))
+          then: (schema) =>
+            schema
+              .required(t('PROXY_NIF_PHISICAL'))
+              .oneOf([true], t('PROXY_NIF_PHISICAL'))
         }),
         address: Yup.string().required(t('NO_ADDRESS')),
         number: Yup.string().required(t('NO_NUMBER')),
@@ -188,37 +190,44 @@ function HolderChange(props) {
     }),
     Yup.object().shape({
       especial_cases: Yup.object().shape({
+        reason_default: Yup.bool(),
+        reason_death: Yup.bool(),
+        reason_electrodep: Yup.bool(),
+        reason_merge: Yup.bool(),
         attachments: Yup.object()
           .when('reason_death', {
             is: true,
-            then: Yup.object().shape({
-              death: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-            })
+            then: (schema) =>
+              schema.shape({
+                death: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+              })
           })
           .when('reason_electrodep', {
             is: true,
-            then: Yup.object().shape({
-              medical: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
-              resident: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-            })
+            then: (schema) =>
+              schema.shape({
+                medical: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+                resident: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+              })
           })
           .when('reason_merge', {
             is: true,
-            then: Yup.object().shape({
-              merge: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-            })
+            then: (schema) =>
+              schema.shape({
+                merge: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+              })
           })
       })
     }),
