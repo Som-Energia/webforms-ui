@@ -187,11 +187,11 @@ const Contract = (props) => {
       contract: Yup.object().shape({
         phases: Yup.string().when('has_service', {
           is: false,
-          then: Yup.string().required(t('NO_MONOPHASE_CHOICE'))
+          then: (scheme) => scheme.required(t('NO_MONOPHASE_CHOICE'))
         }),
         rate: Yup.string().when('has_service', {
           is: true,
-          then: Yup.string().required(t('NO_FARE_CHOSEN'))
+          then: (scheme) => scheme.required(t('NO_FARE_CHOSEN'))
         }),
         moreThan15Kw: Yup.boolean().required(),
         power: Yup.number()
@@ -454,19 +454,19 @@ const Contract = (props) => {
         name: Yup.string().required(t('NO_NAME')),
         surname1: Yup.string().when('isphisical', {
           is: true,
-          then: Yup.string().required(t('NO_SURNAME1'))
+          then: (schema)=>schema.required(t('NO_SURNAME1'))
         }),
         proxyname: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NAME'))
+          then: (schema)=>schema.required(t('NO_PROXY_NAME'))
         }),
         proxynif: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NIF'))
+          then: (schema)=>schema.required(t('NO_PROXY_NIF'))
         }),
         proxynif_valid: Yup.bool().when('isphisical', {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: (schema) => schema.required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
         }),
         address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()

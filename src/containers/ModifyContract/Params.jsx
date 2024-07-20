@@ -70,7 +70,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
     phases: Yup.string()
       .when('changePhases', {
         is: true,
-        then: Yup.string().required(t('NO_MONOPHASE_CHOICE'))
+        then: (schema) => schema.required(t('NO_MONOPHASE_CHOICE'))
       })
       .test(
         'noMoreThan15KwForMono',
@@ -81,7 +81,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
       ),
     attachments: Yup.array().when('changePhases', {
       is: true,
-      then: Yup.array().min(1, t('NO_ATTACHMENTS'))
+      then: (schema) => schema.min(1, t('NO_ATTACHMENTS'))
     }),
     moreThan15Kw: Yup.boolean().test(
       'noMoreThan15KwForMono',
