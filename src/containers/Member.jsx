@@ -74,15 +74,15 @@ const Member = (props) => {
         name: Yup.string().required(t('NO_NAME')),
         surname1: Yup.string().when('isphisical', {
           is: true,
-          then: Yup.string().required(t('NO_SURNAME1'))
+          then: (schema) => schema.required(t('NO_SURNAME1'))
         }),
         proxyname: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NAME'))
+          then: (schema) => schema.required(t('NO_PROXY_NAME'))
         }),
         proxynif: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NIF'))
+          then: (schema) => schema.required(t('NO_PROXY_NIF'))
         }),
         proxynif_valid: Yup.bool().when('isphisical', {
           is: false,
@@ -133,17 +133,17 @@ const Member = (props) => {
           .oneOf(['iban', 'credit_card'], t('INVALID_PAYMENT_METHOD')),
         iban: Yup.string().when('payment_method', {
           is: 'iban',
-          then: Yup.string().required(t('IBAN_ERROR'))
+          then: (schema) => schema.required(t('IBAN_ERROR'))
         }),
         iban_valid: Yup.bool().when('payment_method', {
           is: 'iban',
-          then: Yup.bool()
+          then: (schema) => schema.bool()
             .required(t('IBAN_ERROR'))
             .oneOf([true], t('IBAN_ERROR'))
         }),
         sepa_accepted: Yup.bool().when('payment_method', {
           is: 'iban',
-          then: Yup.bool()
+          then: (schema) => schema.bool()
             .required(t('IBAN_ERROR'))
             .oneOf([true], t('IBAN_ERROR'))
         })
