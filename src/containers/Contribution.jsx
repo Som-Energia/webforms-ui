@@ -101,30 +101,30 @@ const Contribution = (props) => {
       member: Yup.object().shape({
         number: Yup.string().when('is_member', {
           is: true,
-          then: Yup.string().required(t('NO_MEMBER_NUMBER'))
+          then: (schema) => schema.string().required(t('NO_MEMBER_NUMBER'))
         }),
         vat: Yup.string()
           .required(t('NO_MEMBER_VAT'))
           .when('is_member', {
             is: false,
-            then: Yup.string().matches(
+            then: (schema) => schema.string().matches(
               /(^[A-GI-Z0-9])/,
               t('CIF_COMMUNITY_OWNERS')
             )
           }),
         vatvalid: Yup.bool().when('is_member', {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: (schema) => schema.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
         }),
         checked: Yup.bool().when('is_member', {
           is: true,
-          then: Yup.bool()
+          then: (schema) => schema.bool()
             .required(t('NO_MEMBER_MATCH'))
             .oneOf([true], t('NO_MEMBER_MATCH'))
         }),
         exists: Yup.bool().when('is_member', {
           is: false,
-          then: Yup.bool()
+          then: (schema) => schema.bool()
             .required(t('DNI_EXIST'))
             .oneOf([false], t('DNI_EXIST'))
         })
@@ -135,19 +135,19 @@ const Contribution = (props) => {
         name: Yup.string().required(t('NO_NAME')),
         surname1: Yup.string().when('isphisical', {
           is: true,
-          then: Yup.string().required(t('NO_SURNAME1'))
+          then: (schema) => schema.string().required(t('NO_SURNAME1'))
         }),
         proxyname: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NAME'))
+          then: (schema) => schema.string().required(t('NO_PROXY_NAME'))
         }),
         proxynif: Yup.string().when('isphisical', {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NIF'))
+          then: (schema) => schema.string().required(t('NO_PROXY_NIF'))
         }),
         proxynif_valid: Yup.bool().when('isphisical', {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: (schema) => schema.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
         }),
         address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()
