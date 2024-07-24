@@ -162,6 +162,10 @@ const SelfConsumptionDetails = (props) => {
                 </a>
               )
             }
+            data={{
+              'collective_installation': props.values.self_consumption.collective_installation,
+              'cups': props.values.supply_point.cups,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
