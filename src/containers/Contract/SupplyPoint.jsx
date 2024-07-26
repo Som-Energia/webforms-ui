@@ -255,9 +255,8 @@ const SupplyPoint = (props) => {
             />
           </Grid>
 
-          {SHOW_STATE_CITY && (
+          {SHOW_STATE_CITY ? (
             <StateCity
-              disabled={props.isGurbEnabled ? true : false}
               stateId="supply_point_state"
               stateName="supply_point.state"
               stateInitial={values?.supply_point?.state}
@@ -278,7 +277,7 @@ const SupplyPoint = (props) => {
               }
               onChange={onChangeStateCity}
             />
-          )}
+          ) : null}
 
           <Grid item xs={12} sm={6}>
             <TextField
@@ -343,7 +342,7 @@ const SupplyPoint = (props) => {
                 }
                 helperText={
                   values?.supply_point?.cadastral_reference &&
-                  errors?.supply_point?.cadastral_reference ? (
+                    errors?.supply_point?.cadastral_reference ? (
                     errors?.supply_point?.cadastral_reference
                   ) : (
                     <CadastralReferenceHelperText />
