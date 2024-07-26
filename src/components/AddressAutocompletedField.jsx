@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react'
-import getGoogleMapsPlacesApiClient from 'services/googleApiClient'
+import getGoogleMapsPlacesApiClient from '../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
-import { languages } from 'services/utils'
 
 export default function LocationInput({ value, onChange, onLocationSelected }) {
   const { t } = useTranslation()
@@ -124,6 +123,7 @@ export default function LocationInput({ value, onChange, onLocationSelected }) {
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
           <TextField
+            sx={{'input' : {padding:0}}}
             {...params}
             label={t('HOLDER_ADDRESS')}
             onChange={(event) => {
