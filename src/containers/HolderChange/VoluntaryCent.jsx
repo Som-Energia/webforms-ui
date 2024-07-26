@@ -30,11 +30,13 @@ function VoluntaryCent(props) {
             canBeEmpty={false}
             options={[
               {
+                id: 'voluntary-cent-yes',
                 value: true,
                 label: t('VOLUNTARY_CENT_YES_LABEL'),
                 description: t('VOLUNTARY_CENT_YES_DESCRIPTION')
               },
               {
+                id: 'voluntary-cent-no',
                 value: false,
                 label: t('VOLUNTARY_CENT_NO_LABEL'),
                 description: t('VOLUNTARY_CENT_NO_DESCRIPTION')

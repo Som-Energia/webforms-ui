@@ -152,11 +152,13 @@ const CUPS = (props) => {
           }
           options={[
             {
+              id: 'change-comer',
               value: true,
               label: t('AVIS_CANVI_COMERCIALITZADORA_LABEL'),
               description: t('AVIS_CANVI_COMERCIALITZADORA_DESC')
             },
             {
+              id: 'register-service',
               value: false,
               label: t('AVIS_ALTA_DE_SERVEI_LABEL'),
               description: t('AVIS_ALTA_DE_SERVEI_DESC')

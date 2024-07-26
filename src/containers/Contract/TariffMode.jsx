@@ -37,6 +37,7 @@ const TariffMode = (props) => {
           canBeEmpty={false}
           options={[
             {
+              id: 'periods',
               value: false,
               label: props.values.contract.moreThan15Kw ?
                 t('TARIFF_MODE_PERIODS_30TD_LABEL') : t('TARIFF_MODE_PERIODS_20TD_LABEL'),
@@ -60,6 +61,7 @@ const TariffMode = (props) => {
                 })
             },
             {
+              id: 'indexed',
               value: true,
               label: props.values.contract.moreThan15Kw ?
                 t('TARIFF_MODE_INDEXED_30TD_LABEL') : t('TARIFF_MODE_INDEXED_20TD_LABEL'),

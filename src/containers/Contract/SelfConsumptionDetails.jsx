@@ -150,11 +150,13 @@ const SelfConsumptionDetails = (props) => {
             value={props.values.self_consumption.collective_installation}
             options={[
               {
+                id: 'individual',
                 value: false,
                 label: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_LABEL'),
                 description: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_HELP')
               },
               {
+                id: 'collective',
                 value: true,
                 label: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_LABEL'),
                 description: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
@@ -326,6 +328,7 @@ const SelfConsumptionDetails = (props) => {
             value={props.values.self_consumption.aux_services}
             options={[
               {
+                id: 'auxiliary-service-yes',
                 value: true,
                 label: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
                 description: t(
@@ -344,6 +347,7 @@ const SelfConsumptionDetails = (props) => {
                 )
               },
               {
+                id: 'auxiliary-service-no',
                 value: false,
                 label: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_NO_LABEL')
               }
