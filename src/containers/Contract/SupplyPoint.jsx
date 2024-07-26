@@ -255,29 +255,21 @@ const SupplyPoint = (props) => {
             />
           </Grid>
 
-          {SHOW_STATE_CITY ? (
-            <StateCity
-              stateId="supply_point_state"
-              stateName="supply_point.state"
-              stateInitial={values?.supply_point?.state}
-              stateError={
-                errors?.supply_point?.state && touched?.supply_point?.state
-              }
-              stateHelperText={
-                touched?.supply_point?.state && errors?.supply_point?.state
-              }
-              cityId="supply_point_city"
-              cityName="supply_point.city"
-              cityInitial={values?.supply_point?.city}
-              cityError={
-                errors?.supply_point?.city && touched?.supply_point?.city
-              }
-              cityHelperText={
-                touched?.supply_point?.city && errors?.supply_point?.city
-              }
-              onChange={onChangeStateCity}
-            />
-          ) : null}
+          <StateCity
+            stateId="supply_point_state"
+            stateName="supply_point.state"
+            stateInitial={values?.supply_point?.state}
+            stateError={
+              errors?.supply_point?.state && touched?.supply_point?.state
+            }
+            cityId="supply_point_city"
+            cityName="supply_point.city"
+            cityInitial={values?.supply_point?.city}
+            cityError={
+              errors?.supply_point?.city && touched?.supply_point?.city
+            }
+            onChange={onChangeStateCity}
+          />
 
           <Grid item xs={12} sm={6}>
             <TextField

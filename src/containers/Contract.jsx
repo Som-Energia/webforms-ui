@@ -647,9 +647,10 @@ const Contract = (props) => {
     }
 
     const last = maxStepNumber
+    setActiveStep(Math.min(next, last))
+
     props.submitForm().then(() => {
       if (props.isValid) {
-        setActiveStep(Math.min(next, last))
         props.validateForm()
         props.setTouched({})
       }
@@ -752,7 +753,7 @@ const Contract = (props) => {
       phases: '',
       fare: '',
       moreThan15Kw: false,
-      isIndexed: false
+      isIndexed: ''
     },
     member: {
       number: '',
