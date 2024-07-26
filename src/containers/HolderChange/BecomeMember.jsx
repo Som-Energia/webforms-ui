@@ -33,11 +33,13 @@ function BecomeMember(props) {
             value={props.values.member.become_member}
             options={[
               {
+                id: 'become-member-yes',
                 value: true,
                 label: t('BECOME_MEMBER_YES_LABEL'),
                 description: t('BECOME_MEMBER_YES_DESCRIPTION')
               },
               {
+                id: 'become-member-no',
                 value: false,
                 label: t('BECOME_MEMBER_NO_LABEL'),
                 description: t('BECOME_MEMBER_NO_DESCRIPTION')

@@ -104,10 +104,12 @@ const PowerFare = (props) => {
           value={values?.contract?.moreThan15Kw}
           options={[
             {
+              id: 'lower-15kw',
               value: false,
               label: t('MENOR_IGUAL_A_15KW_CONTRACTACIO')
             },
             {
+              id: 'higher-15kw',
               value: true,
               label: t('MES_GRAN_DE_15KW_CONTRACTACIO')
             }

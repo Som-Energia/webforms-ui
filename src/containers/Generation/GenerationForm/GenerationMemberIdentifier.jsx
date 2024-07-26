@@ -52,12 +52,12 @@ const GenerationMemberIdentifier = (props) => {
             {
               value: true,
               label: t('CONTRIBUTION_MEMBER_YES'),
-              id: 'member_choose_yes'
+              id: 'member-choose-yes'
             },
             {
               value: false,
               label: t('CONTRIBUTION_MEMBER_NO'),
-              id: 'member_choose_no'
+              id: 'member-choose-no'
             }
           ]}
         />

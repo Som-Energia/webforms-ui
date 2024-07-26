@@ -84,11 +84,13 @@ const HolderIdentifier = (props) => {
             }
             options={[
               {
+                id: 'previous-holder-yes',
                 value: true,
                 label: t('PREVIOUS_HOLDER_YES_LABEL'),
                 description: t('PREVIOUS_HOLDER_YES_DESC')
               },
               {
+                id: 'previous-holder-no',
                 value: false,
                 label: t('PREVIOUS_HOLDER_NO_LABEL'),
                 description: t('PREVIOUS_HOLDER_NO_DESC')
