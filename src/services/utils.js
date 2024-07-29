@@ -1,5 +1,6 @@
 import { getRates } from '../services/api'
 import dayjs from 'dayjs'
+import isoWeek from "dayjs/plugin/isoWeek";
 
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
@@ -519,7 +520,6 @@ export const normalizeContribution = (data, signaturitData) => {
 }
 
 export const getNextNBussinesDays = (day, n, marketHolidays) => {
-  var isoWeek = require('dayjs/plugin/isoWeek')
   dayjs.extend(isoWeek)
   const today = dayjs(day)
   var result = []
