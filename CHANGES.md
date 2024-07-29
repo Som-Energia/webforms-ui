@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.3.0 2024-07-29
+
+- New address autocomplete with feature flag
+
+
 ## 2.2.0 2024-07-18
 
 - New deploy scripts for wp
