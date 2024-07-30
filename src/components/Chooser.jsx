@@ -45,7 +45,6 @@ const Chooser = (props) => {
       },
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
       alignItems: 'flex-start'
     },
     chooserItemCondensed: {
