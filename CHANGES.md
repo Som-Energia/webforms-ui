@@ -1,9 +1,15 @@
 # Change Log
 
+## 2.3.1 2024-07-30
+
+- Fixed some bugs:
+  - Chooser as a required field in contract form
+  - Fixed chooser text justify content when alignTop
+  - Fixed dayjs isoWeek import in Cancellation form
+
 ## 2.3.0 2024-07-29
 
 - New address autocomplete with feature flag
-
 
 ## 2.2.0 2024-07-18
 
