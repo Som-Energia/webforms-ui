@@ -19,9 +19,9 @@ const StateCity = (props) => {
     cityId,
     cityInitial,
     stateError,
-    stateHelperText,
+    stateHelperText = '',
     cityError,
-    cityHelperText,
+    cityHelperText = '',
     onChange,
     onBlur
   } = props

@@ -35,6 +35,7 @@ const SelfConsumption = (props) => {
           canBeEmpty={false}
           options={[
             {
+              id: 'selfconsumption-yes',
               value: true,
               label: t('SELFCONSUMPTION_YES_LABEL'),
               helper: (
@@ -49,6 +50,7 @@ const SelfConsumption = (props) => {
               )
             },
             {
+              id: 'selfconsumption-no',
               value: false,
               label: t('SELFCONSUMPTION_NO_LABEL')
             }

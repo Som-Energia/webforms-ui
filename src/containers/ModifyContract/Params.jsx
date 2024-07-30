@@ -338,12 +338,12 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     value={values.moreThan15Kw}
                     options={[
                       {
-                        id: 'lesser_power',
+                        id: 'lesser-power',
                         value: false,
                         label: t('MENOR_IGUAL_A_15KW_CONTRACTACIO')
                       },
                       {
-                        id: 'greater_power',
+                        id: 'greater-power',
                         value: true,
                         label: t('MES_GRAN_DE_15KW_CONTRACTACIO')
                       }
