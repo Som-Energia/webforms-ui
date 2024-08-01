@@ -33,7 +33,6 @@ const CUPS = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldTouched
   } = props
   const [isLoading, setLoading] = useState(false)
 
@@ -71,7 +70,6 @@ const CUPS = (props) => {
         .then((response) => {
           const status = response?.data?.status
           setFieldValue('supply_point.status', status)
-          setFieldTouched('supply_point.cups', true)
           setLoading(false)
         })
         .catch((error) => {
@@ -85,7 +83,7 @@ const CUPS = (props) => {
     } else {
       setFieldValue('supply_point.status', 'error')
     }
-  }, [values.supply_point.cups, setFieldValue, setFieldTouched])
+  }, [values.supply_point.cups, setFieldValue])
 
   return (
     <>
