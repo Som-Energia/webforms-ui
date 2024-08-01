@@ -19,14 +19,12 @@ const HolderIdentifier = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldTouched
   } = props
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
     setFieldValue('holder.vat', vat)
     setFieldValue('holder.isphisical', isPhisical)
     setFieldValue('holder.vatvalid', valid)
-    setFieldTouched('holder.vat', true)
   }
 
   const handleChangePreviousHolder = ({ option }) => {
