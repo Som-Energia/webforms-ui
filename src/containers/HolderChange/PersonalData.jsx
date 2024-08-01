@@ -30,7 +30,6 @@ function PersonalData(props) {
   const {
     values,
     setFieldValue,
-    validateForm,
     handleChange,
     handleBlur,
     errors,
@@ -45,7 +44,6 @@ function PersonalData(props) {
     setFieldValue(`${entity}.proxynif`, vat)
     setFieldValue(`${entity}.proxynif_valid`, valid)
     setFieldValue(`${entity}.proxynif_phisical`, isPhisical)
-    validateForm()
   }
 
   const onChangeStateCity = ({ state, city }) => {
@@ -135,7 +133,7 @@ function PersonalData(props) {
               }
               variant="outlined"
               fullWidth
-              autoFocus
+              /* autoFocus */
               required
               value={values[entity]?.name}
               onChange={handleChange}
