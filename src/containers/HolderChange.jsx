@@ -47,6 +47,7 @@ function HolderChange(props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+  const [isValid, setIsValid] = useState(false)
 
   const keyMap = {
     SHOW_INSPECTOR: 'ctrl+alt+shift+d'
@@ -148,7 +149,7 @@ function HolderChange(props) {
           }
         ),
         phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
-        phone2: Yup.string().min(9, t('NO_PHONE')),
+        /* phone2: Yup.string().min(9, t('NO_PHONE')), */
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
       legal_person_accepted: Yup.bool().test({
@@ -280,23 +281,27 @@ function HolderChange(props) {
     return false
   }
 
-  const nextStep = (values, actions) => {
+  const nextStep = (values, actions, callBack) => {
     let next = activeStep + 1
 
     while (skipStep(next, values, false)) next++
 
     const last = MAX_STEP_NUMBER
-    setActiveStep(Math.min(next, last))
+
+    const nextStep = Math.min(next, last)
+    setActiveStep(nextStep)
     actions.setTouched({})
     actions.setSubmitting(false)
+    callBack(nextStep)
   }
 
-  const prevStep = (values, actions) => {
+  const prevStep = (values, actions, callBack) => {
     let prev = activeStep - 1
 
     while (skipStep(prev, values, true)) prev--
 
-    setActiveStep(Math.max(0, prev))
+    const prevStep = Math.max(0, prev) 
+    setActiveStep(prevStep)
     actions.setTouched({})
     actions.setSubmitting(false)
 
@@ -304,6 +309,7 @@ function HolderChange(props) {
       setCompleted(false)
       setError(false)
     }
+    callBack(prevStep)
   }
 
   const isLastStep = activeStep >= MAX_STEP_NUMBER - 1
@@ -383,7 +389,7 @@ function HolderChange(props) {
       tariff_type: ''
     },
     member: {
-      become_member: '',
+      become_member: undefined,
       invite_token: false,
       checked: false
     },
@@ -404,6 +410,18 @@ function HolderChange(props) {
     legal_person_accepted: false
   }
 
+
+  const validateStep = (values, step) => {
+    const stepToValidate = step || activeStep
+    validationSchemas[stepToValidate].validate(values)
+      .then(() => {
+        setIsValid(true)
+      })
+      .catch(() => {
+        setIsValid(false)
+      })
+  }
+
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Box sx={{ backgroundColor: 'secondary.light', color: 'primary.main' }}>
@@ -412,7 +430,8 @@ function HolderChange(props) {
             enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchemas[activeStep]}
-            validateOnMount
+            validateOnChange
+            validate={values => validateStep(values, activeStep)}
             onSubmit={handleSubmit}>
             {(props) => (
               <>
@@ -458,14 +477,14 @@ function HolderChange(props) {
                             {result?.contract_number === undefined && (
                               <PrevButton
                                 disabled={activeStep === 0 || sending}
-                                onClick={() => prevStep(props.values, props)}
+                                onClick={() => prevStep(props.values, props, (step) => validateStep(props.values, step))}
                                 title={t('PAS_ANTERIOR')}
                               />
                             )}
                             {(!completed && !isLastStep) ? (
                               <NextButton
-                                onClick={() => nextStep(props.values, props)}
-                                disabled={sending || !props.isValid}
+                                onClick={() => nextStep(props.values, props, (step) => validateStep(props.values, step))}
+                                disabled={sending || !isValid}
                                 title={t('SEGUENT_PAS')}
                               />
                             ) : null}
@@ -474,7 +493,7 @@ function HolderChange(props) {
                                 loading={sending}
                                 startIcon={<SendIcon />}
                                 title={t('SEND')}
-                                disabled={sending || !props.isValid}
+                                disabled={sending || !isValid}
                               />
                             ) : null}
                           </Box>
