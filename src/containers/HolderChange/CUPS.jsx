@@ -20,8 +20,8 @@ function CUPS(props) {
   const { t } = useTranslation()
   const {
     values,
+    setValues,
     setFieldValue,
-    setTouched,
     handleChange,
     validateForm,
     handleBlur,
@@ -68,20 +68,17 @@ function CUPS(props) {
         .then((response) => {
           const status = response?.data?.status
           if (status === 'active') {
-            setFieldValue(
-              'supply_point.address',
-              response?.data?.address,
-              false
-            )
-            setFieldValue(
-              'supply_point.tariff_type',
-              response?.data?.tariff_type,
-              false
-            )
+            const tmpValues = {
+              ...values,
+              supply_point: {
+                ...values.supply_point,
+                address: response?.data?.address,
+                tariff_type: response?.data?.tariff_type,
+              }
+            }
+            setValues(tmpValues)
           }
-          setTouched({ supply_point: { cups: true } }, false)
-          setFieldValue('supply_point.status', status, true)
-          validateForm()
+          setFieldValue('supply_point.status', status, true)          
           setIsLoading(false)
         })
         .catch((error) => {
@@ -90,13 +87,12 @@ function CUPS(props) {
             ? error?.response?.data?.data?.status
             : 'error'
           setFieldValue('supply_point.status', errorStatus)
-          validateForm()
           setIsLoading(false)
         })
     } else {
       setFieldValue('supply_point.status', 'error')
     }
-  }, [values.supply_point.cups, setFieldValue, validateForm, setTouched])
+  }, [values.supply_point.cups, setFieldValue, validateForm])
 
   const CupsHelperText = () => (
     <a href={t('CUPS_HELP_URL')} target="_blank" rel="noopener noreferrer">
