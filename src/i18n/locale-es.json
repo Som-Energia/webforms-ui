@@ -694,7 +694,7 @@
     "CAU_INVALID_INSTALLATION": "El código CAU debe acabar con A y tres números",
     "CAU_INVALID_LENGTH": "El código CAU ha de tener 26 caracteres",
     "CAU_INVALID_CONTROL_DIGIT": "El código CAU no es válido",
-    "CAU_INVALID_CUPS": "El código CAU no coincide con los 20 primeros carácteres del CUPS",
+    "CAU_NOT_MATCHING_CUPS": "El código CAU no coincide con los 20 primeros carácteres del CUPS",
     "GENERATION_CONTRIBUTION_NO_MEMBER_VAT":"Introduce tu DNI o NIF",
     "GENERATION_BUTTON_ADD_ASSIGNMENT":"Asignar nuevo contrato",
     "GENERATION_ADD_ASSIGNMENTS_INFO_MSG":"Ten en cuenta que solo puedes añadir contratos de los que eres titular. Si quieres añadir un contrato de otra persona, escríbenos un correo electrónico a <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a>.",
