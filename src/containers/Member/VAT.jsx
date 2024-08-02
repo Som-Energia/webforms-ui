@@ -9,14 +9,21 @@ import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
 function VAT (props) {
-  const { values, setFieldValue, setFieldTouched, handleBlur, touched, errors } = props
+  const { values, setValues, handleBlur, touched, errors } = props
   const { t } = useTranslation()
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
-    setFieldValue('member.vat', vat)
-    setFieldValue('member.isphisical', isPhisical)
-    setFieldValue('member.vatvalid', valid)
-    setFieldTouched('member.vat', true)
+
+    const tmpValues = {
+      ...values,
+      member: {
+        ...values.member,
+        vat:vat,
+        isphisical:isPhisical,
+        vatvalid: valid
+      }
+    }
+    setValues(tmpValues)
   }
 
   return (
