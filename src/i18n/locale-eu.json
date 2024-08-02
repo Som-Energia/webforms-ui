@@ -692,7 +692,7 @@
     "CAU_INVALID_INSTALLATION": "CAU kodeak A eta hiru zenbakirekin amaitu behar du",
     "CAU_INVALID_LENGTH": "CAU kodeak 26 karaktere izan behar ditu",
     "CAU_INVALID_CONTROL_DIGIT": "CAU kodea ez da baliozkoa",
-    "CAU_INVALID_CUPS": "CAU kodea ez dator bat CUPSen lehen 20 karaktereekin",
+    "CAU_NOT_MATCHING_CUPS": "CAU kodea ez dator bat CUPSen lehen 20 karaktereekin",
     "GENERATION_CONTRIBUTION_NO_MEMBER_VAT": "Idatzi zure NAN zenbakia edo IFZ",
     "GENERATION_BUTTON_ADD_ASSIGNMENT": "Kontratu berria esleitu",
     "GENERATION_ADD_ASSIGNMENTS_INFO_MSG": "Kontuan hartu titular zaren kontratuak bakarrik gehitu ditzakezula. Beste norbaiten kontratu bat gehitu nahi baduzu, bidali mezu bat <a href=\"mailto:generationkwh@somenergia.coop\">generationkwh@somenergia.coop</a> helbidera.",
