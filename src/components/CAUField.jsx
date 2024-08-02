@@ -26,19 +26,20 @@ export function CAUField(props) {
 
   function localCheck(value) {
     const compact = value.replaceAll(' ', '')
+    if (!compact) return {value, valid: false}
     const borderPoint = compact.slice(20,22)
     const installation = compact.slice(22,26)
-    const collective_installation = props.data.collective_installation
-    const cups = props.data.cups.slice(0,20)
-    if (collective_installation == false){
-      const cau_cups = compact.slice(0,20)
-      if (cau_cups != cups) return {value, valid: false, error:t("CAU_INVALID_CUPS")}
-    }
-    if (!compact) return {value, valid: false}
     if (compact.slice(0,2) !== "ES".slice(0,compact.length)) return {value, valid: false, error:t("CAU_INVALID_PREFIX")}
+    const collective_installation = props.data.collective_installation
+    const cups = props.data.cups.slice(0,compact.length)
+    if (collective_installation === false){
+      const cau_cups = compact.slice(0,compact.length)
+      if (cau_cups !== cups) return {value, valid: false, error:t("CAU_NOT_MATCHING_CUPS")}
+    }
+    if (compact.length !== 26) return {value, valid: false, error:t("CAU_INVALID_LENGTH")}
     if (borderPoint.length === 2 && !/^\d[A-Z]$/.test(borderPoint)) return {value, valid: false, error:t("CAU_INVALID_BORDER_POINT")}
     if (installation.length === 4 && !/^A\d{1,3}$/.test(installation)) return {value, valid: false, error:t("CAU_INVALID_INSTALLATION")}
-    if (compact.length !== 26) return {value, valid: false, error:t("CAU_INVALID_LENGTH")}
+    
     return {value, valid: true}
   }
   function remoteCheck(value) {
