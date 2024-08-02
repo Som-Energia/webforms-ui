@@ -183,9 +183,9 @@ const Member = (props) => {
       props.setFieldValue('privacy_policy_accepted', true)
     }
     const last = MAX_STEP_NUMBER
+    setActiveStep(Math.min(next, last))
     props.submitForm().then(() => {
       if (props.isValid) {
-        setActiveStep(Math.min(next, last))
         props.validateForm()
         props.setTouched({})
       }
