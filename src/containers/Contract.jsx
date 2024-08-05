@@ -733,8 +733,7 @@ const Contract = (props) => {
       supply_point_accepted: false
     },
     self_consumption: {
-      have_installation: '',
-      collective_installation: undefined,
+      have_installation: ''
     },
     contract: {
       has_service: '',
