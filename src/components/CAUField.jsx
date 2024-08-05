@@ -33,7 +33,7 @@ export function CAUField(props) {
     const collective_installation = props.data.collective_installation
     const cups = props.data.cups.slice(0, compact.length)
     if (collective_installation === false) {
-      const cau_cups = compact.slice(0, compact.length)      
+      const cau_cups = compact.slice(0, compact.length > 20 ? 20 : compact.length)      
       if (cau_cups !== cups) return { value, valid: false, error: t("CAU_NOT_MATCHING_CUPS") }
     }
     if (compact.length !== 26) return { value, valid: false, error: t("CAU_INVALID_LENGTH") }
