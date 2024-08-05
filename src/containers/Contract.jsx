@@ -751,8 +751,7 @@ const Contract = (props) => {
       coordinates_accuracy: ''
     },
     self_consumption: {
-      have_installation: '',
-      collective_installation: undefined,
+      have_installation: ''
     },
     contract: {
       has_service: '',

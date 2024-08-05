@@ -23,8 +23,7 @@ export function ApiValidatedField({
   remoteCheck,
   helperText,
   autoFocus = false,
-  leadingIcon,
-  disabled
+  leadingIcon
 }) {
   const [isLoading, setIsLoading] = useState(false)
   const [formerValue, setFormerValue] = useState(undefined)
@@ -40,6 +39,7 @@ export function ApiValidatedField({
     }
     const result = localCheck(valueToCheck)
     const needsRemote = result.valid
+
     onChange({ ...result, valid: false })
     if (!needsRemote) return
     setIsLoading(true)
@@ -67,7 +67,6 @@ export function ApiValidatedField({
         label={label}
         variant={variant}
         fullWidth
-        disabled={disabled}
         required={required}
         autoFocus={autoFocus}
         value={value}
