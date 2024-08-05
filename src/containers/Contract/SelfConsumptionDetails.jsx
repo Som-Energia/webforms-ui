@@ -149,7 +149,6 @@ const SelfConsumptionDetails = (props) => {
             values={values}
             value={values.self_consumption.cau}
             onChange={handleChangeCAU}
-            disabled={props.values.self_consumption.collective_installation === undefined}
             onBlur={handleBlur}
             error={
               values?.self_consumption?.cau && !!errors?.self_consumption?.cau
