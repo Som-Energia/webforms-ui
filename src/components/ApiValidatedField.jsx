@@ -23,7 +23,8 @@ export function ApiValidatedField({
   remoteCheck,
   helperText,
   autoFocus = false,
-  leadingIcon
+  leadingIcon,
+  disabled
 }) {
   const [isLoading, setIsLoading] = useState(false)
   const [formerValue, setFormerValue] = useState(undefined)
@@ -66,6 +67,7 @@ export function ApiValidatedField({
         label={label}
         variant={variant}
         fullWidth
+        disabled={disabled}
         required={required}
         autoFocus={autoFocus}
         value={value}
@@ -79,9 +81,9 @@ export function ApiValidatedField({
         }
         InputProps={{
           startAdornment: LeadingIcon && (
-            <InputAdornment sx={{ 
-              '& path': { color: 'rgba(0, 0, 0, 0.54)'}
-              }} position="start">
+            <InputAdornment sx={{
+              '& path': { color: 'rgba(0, 0, 0, 0.54)' }
+            }} position="start">
               <LeadingIcon />
             </InputAdornment>
           ),
@@ -93,7 +95,7 @@ export function ApiValidatedField({
                 <CheckOutlinedIcon color="primary" />
               ) : null}
             </InputAdornment>
-          ): null
+          ) : null
         }}
       />
     </>
