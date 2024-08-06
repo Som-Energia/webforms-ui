@@ -178,7 +178,6 @@ const Indexada = (props) => {
   }
 
   const getCommercialName = function (tariff) {
-    console.log("TARIFF-----",tariff)
     let tariff_mapping = {
       '2.0TD_SOM': t('TAR_20TD_SOM'),
       '2.0TD_SOM_INSULAR': t('TAR_20TD_SOM_INSULAR'),
@@ -199,7 +198,6 @@ const Indexada = (props) => {
       'Indexada Empresa Canàries 2024': t('TAR_INDEXADA_EMPRESA_CANARIES'),
       'Indexada Empresa Balears 2024': t('TAR_INDEXADA_EMPRESA_BALEARS')
     }
-    console.log("tariff_mapping[tariff]-----",tariff_mapping[tariff])
 
     return tariff_mapping[tariff] || tariff
   }
