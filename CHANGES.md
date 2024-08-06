@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.2 2024-08-06
 
 - Fix tariff names
 	
