@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix tariff names
+	
 ## 2.3.1 2024-07-30
 
 - Fixed some bugs:
