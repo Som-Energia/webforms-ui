@@ -178,6 +178,7 @@ const Indexada = (props) => {
   }
 
   const getCommercialName = function (tariff) {
+    console.log("TARIFF-----",tariff)
     let tariff_mapping = {
       '2.0TD_SOM': t('TAR_20TD_SOM'),
       '2.0TD_SOM_INSULAR': t('TAR_20TD_SOM_INSULAR'),
@@ -185,19 +186,21 @@ const Indexada = (props) => {
       '3.0TD_SOM_INSULAR': t('TAR_30TD_SOM_INSULAR'),
       '6.0TD_SOM': t('TAR_60TD_SOM'),
       '6.0TD_SOM_INSULAR': t('TAR_60TD_SOM_INSULAR'),
-      'Indexada 2.0TD Península': t('TAR_INDEXADA_20TD_PENINSULA'),
-      'Indexada 2.0TD Canàries': t('TAR_INDEXADA_20TD_CANARIES'),
-      'Indexada 2.0TD Balears': t('TAR_INDEXADA_20TD_BALEARS'),
-      'Indexada 3.0TD Península': t('TAR_INDEXADA_30TD_PENINSULA'),
-      'Indexada 3.0TD Canàries': t('TAR_INDEXADA_30TD_CANARIES'),
-      'Indexada 3.0TD Balears': t('TAR_INDEXADA_30TD_BALEARS'),
-      'Indexada 6.1TD Peninsula': t('TAR_INDEXADA_61TD_PENINSULA'),
-      'Indexada 6.1TD Canàries': t('TAR_INDEXADA_61TD_CANARIES'),
-      'Indexada 6.1TD Balears': t('TAR_INDEXADA_61TD_BALEARS'),
-      'Indexada Empresa Península': t('TAR_INDEXADA_EMPRESA_PENINSULA'),
-      'Indexada Empresa Canàries': t('TAR_INDEXADA_EMPRESA_CANARIES'),
-      'Indexada Empresa Balears': t('TAR_INDEXADA_EMPRESA_BALEARS')
+      'Indexada 2.0TD Península 2024': t('TAR_INDEXADA_20TD_PENINSULA'),
+      'Indexada 2.0TD Canàries 2024': t('TAR_INDEXADA_20TD_CANARIES'),
+      'Indexada 2.0TD Balears 2024': t('TAR_INDEXADA_20TD_BALEARS'),
+      'Indexada 3.0TD Península 2024': t('TAR_INDEXADA_30TD_PENINSULA'),
+      'Indexada 3.0TD Canàries 2024': t('TAR_INDEXADA_30TD_CANARIES'),
+      'Indexada 3.0TD Balears 2024': t('TAR_INDEXADA_30TD_BALEARS'),
+      'Indexada 6.1TD Peninsula 2024': t('TAR_INDEXADA_61TD_PENINSULA'),
+      'Indexada 6.1TD Canàries 2024': t('TAR_INDEXADA_61TD_CANARIES'),
+      'Indexada 6.1TD Balears 2024': t('TAR_INDEXADA_61TD_BALEARS'),
+      'Indexada Empresa Península 2024': t('TAR_INDEXADA_EMPRESA_PENINSULA'),
+      'Indexada Empresa Canàries 2024': t('TAR_INDEXADA_EMPRESA_CANARIES'),
+      'Indexada Empresa Balears 2024': t('TAR_INDEXADA_EMPRESA_BALEARS')
     }
+    console.log("tariff_mapping[tariff]-----",tariff_mapping[tariff])
+
     return tariff_mapping[tariff] || tariff
   }
 
