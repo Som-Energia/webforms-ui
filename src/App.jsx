@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useMemo } from 'react'
+import React, { lazy, Suspense, useMemo, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { ThemeProvider } from '@mui/material/styles'
@@ -16,6 +16,15 @@ import { PopUpContextProvider } from './context/PopUpContext'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
+
+  useEffect(() => {
+      var _mtm = window._mtm = window._mtm || [];
+      _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+      (function() {
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src='https://matomo.somenergia.coop/js/container_i9uB2r3V.js'; s.parentNode.insertBefore(g,s);
+      })();
+  }, [])
 
   const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
