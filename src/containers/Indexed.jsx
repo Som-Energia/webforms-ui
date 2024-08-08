@@ -196,7 +196,19 @@ const Indexada = (props) => {
       'Indexada 6.1TD Balears 2024': t('TAR_INDEXADA_61TD_BALEARS'),
       'Indexada Empresa Península 2024': t('TAR_INDEXADA_EMPRESA_PENINSULA'),
       'Indexada Empresa Canàries 2024': t('TAR_INDEXADA_EMPRESA_CANARIES'),
-      'Indexada Empresa Balears 2024': t('TAR_INDEXADA_EMPRESA_BALEARS')
+      'Indexada Empresa Balears 2024': t('TAR_INDEXADA_EMPRESA_BALEARS'),
+      'Indexada 2.0TD Península': t('TAR_INDEXADA_20TD_PENINSULA'),
+      'Indexada 2.0TD Canàries': t('TAR_INDEXADA_20TD_CANARIES'),
+      'Indexada 2.0TD Balears': t('TAR_INDEXADA_20TD_BALEARS'),
+      'Indexada 3.0TD Península': t('TAR_INDEXADA_30TD_PENINSULA'),
+      'Indexada 3.0TD Canàries': t('TAR_INDEXADA_30TD_CANARIES'),
+      'Indexada 3.0TD Balears': t('TAR_INDEXADA_30TD_BALEARS'),
+      'Indexada 6.1TD Peninsula': t('TAR_INDEXADA_61TD_PENINSULA'),
+      'Indexada 6.1TD Canàries': t('TAR_INDEXADA_61TD_CANARIES'),
+      'Indexada 6.1TD Balears': t('TAR_INDEXADA_61TD_BALEARS'),
+      'Indexada Empresa Península': t('TAR_INDEXADA_EMPRESA_PENINSULA'),
+      'Indexada Empresa Canàries': t('TAR_INDEXADA_EMPRESA_CANARIES'),
+      'Indexada Empresa Balears': t('TAR_INDEXADA_EMPRESA_BALEARS')
     }
 
     return tariff_mapping[tariff] || tariff
