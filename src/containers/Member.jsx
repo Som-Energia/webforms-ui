@@ -184,8 +184,12 @@ const Member = (props) => {
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
+      // Matomo
+      _paq.push(['trackEvent', 'Send', 'Send NewMember Click', 'send-new-member'])
       if (props.isValid) {
         setActiveStep(Math.min(next, last))
+        // Matomo
+        _paq.push(['trackEvent', 'isValid', 'NewMember Form Valid', 'send-new-member-ok'])
         props.validateForm()
         props.setTouched({})
       }

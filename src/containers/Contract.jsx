@@ -650,7 +650,11 @@ const Contract = (props) => {
     setActiveStep(Math.min(next, last))
 
     props.submitForm().then(() => {
+      // Matomo
+      _paq.push(['trackEvent', 'Send', 'Send Contract Click', 'send-contract'])
       if (props.isValid) {
+        // Matomo
+        _paq.push(['trackEvent', 'isValid', 'Contract Form Valid', 'send-contract-ok'])
         props.validateForm()
         props.setTouched({})
       }
