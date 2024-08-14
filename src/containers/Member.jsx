@@ -31,9 +31,7 @@ import { normalizeMember } from '../services/utils'
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
-
 const Member = (props) => {
-
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
@@ -308,19 +306,22 @@ const Member = (props) => {
     <GlobalHotKeys handlers={handlers}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
-          onSubmit={() => { }}
+          onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}
-        >
+          validateOnMount={true}>
           {(props) => (
             <>
               <Box>
-                <Form sx={{ position: 'relative' }} noValidate autoComplete="off">
+                <Form
+                  sx={{ position: 'relative' }}
+                  noValidate
+                  autoComplete="off">
                   {
-                    <Paper elevation={0}
-                      id='custom_paper'
+                    <Paper
+                      elevation={0}
+                      id="custom_paper"
                       sx={{
                         mt: 0,
                         mb: 4,
@@ -349,7 +350,11 @@ const Member = (props) => {
                         )}
                       </Box>
                       <Box mx={0} mt={0} mb={3}>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}>
                           {(!completed || error) && (
                             <PrevButton
                               disabled={activeStep === 0 || sending}
