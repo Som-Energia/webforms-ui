@@ -561,8 +561,7 @@ const Contract = (props) => {
 
   const maxStepNumber = steps.length
 
-  const getActiveStep = (props) => {
-    const url = t('DATA_PROTECTION_CONTRACT_URL')
+  useEffect(() => {
     // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
     _paq.push([
       'trackEvent',
@@ -570,6 +569,10 @@ const Contract = (props) => {
       'setContractStep',
       `contract-step-${activeStep}`
     ])
+  }, [activeStep])
+
+  const getActiveStep = (props) => {
+    const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
       <>
         {(showAllSteps || activeStep === memberIdentifierPage) && (
