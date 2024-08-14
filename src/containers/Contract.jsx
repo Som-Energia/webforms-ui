@@ -563,6 +563,13 @@ const Contract = (props) => {
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push([
+      'trackEvent',
+      'Contract',
+      'setContractStep',
+      `contract-step-${activeStep}`
+    ])
     return (
       <>
         {(showAllSteps || activeStep === memberIdentifierPage) && (
@@ -650,11 +657,9 @@ const Contract = (props) => {
     setActiveStep(Math.min(next, last))
 
     props.submitForm().then(() => {
-      // Matomo
-      _paq.push(['trackEvent', 'Send', 'Send Contract Click', 'send-contract'])
+      // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+      _paq.push(['trackEvent', 'Send', 'sendContractClick', 'send-contract'])
       if (props.isValid) {
-        // Matomo
-        _paq.push(['trackEvent', 'isValid', 'Contract Form Valid', 'send-contract-ok'])
         props.validateForm()
         props.setTouched({})
       }
@@ -796,6 +801,9 @@ const Contract = (props) => {
   })
 
   const trackSucces = () => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'Contract', 'contractFormOk', 'send-contract-ok'])
+    // end matomo
     plausible.trackPageview({
       url:
         window.location.protocol +
