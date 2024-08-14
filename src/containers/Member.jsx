@@ -157,6 +157,16 @@ const Member = (props) => {
   const MAX_STEP_NUMBER = 4
   const showProgress = false
 
+  useEffect(() => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push([
+      'trackEvent',
+      'NewMember',
+      'setNewMemberStep',
+      `new-member-step-${activeStep}`
+    ])
+  }, [activeStep])
+
   const getActiveStep = (props) => {
     return (
       <>
@@ -184,12 +194,8 @@ const Member = (props) => {
     }
     const last = MAX_STEP_NUMBER
     props.submitForm().then(() => {
-      // Matomo
-      _paq.push(['trackEvent', 'Send', 'Send NewMember Click', 'send-new-member'])
       if (props.isValid) {
         setActiveStep(Math.min(next, last))
-        // Matomo
-        _paq.push(['trackEvent', 'isValid', 'NewMember Form Valid', 'send-new-member-ok'])
         props.validateForm()
         props.setTouched({})
       }
@@ -266,13 +272,21 @@ const Member = (props) => {
     setCompleted(true)
   }
 
+  const trackSucces = () => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'NewMember', 'newMemberFormOk', 'send-new-member-ok'])
+  }
+
   const handlePost = async (values) => {
     setSending(true)
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'Send', 'sendNewMemberClick', 'send-new-member'])
     const data = normalizeMember(values)
     await member(data)
       .then((response) => {
         if (response?.state === true) {
           setError(false)
+          trackSucces()
           if (response?.data?.endpoint) {
             setData(response?.data)
             formTPV.current.submit()
