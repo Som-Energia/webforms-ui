@@ -660,8 +660,6 @@ const Contract = (props) => {
     setActiveStep(Math.min(next, last))
 
     props.submitForm().then(() => {
-      // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-      _paq.push(['trackEvent', 'Send', 'sendContractClick', 'send-contract'])
       if (props.isValid) {
         props.validateForm()
         props.setTouched({})
@@ -821,6 +819,8 @@ const Contract = (props) => {
 
   const handlePost = async (values) => {
     setSending(true)
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'Send', 'sendContractClick', 'send-contract'])
     const data = normalizeContract(values)
     await contract(data)
       .then((response) => {
