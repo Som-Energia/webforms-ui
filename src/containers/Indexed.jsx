@@ -217,7 +217,6 @@ const Indexada = (props) => {
   const checkCanModifyTariff = async () => {
     try {
       setLoadingTariff(true)
-      console.log("CRIDO AQUI!!!")
       let result = await can_modify_tariff(token)
       setLoadingTariff(false)
       let comercialName = getCommercialName(result?.data?.target_tariff)
