@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix: Disable next button when error on tariff modification first step
+
 ## 2.3.3 2024-08-12
 
 - Fix tariff old names
