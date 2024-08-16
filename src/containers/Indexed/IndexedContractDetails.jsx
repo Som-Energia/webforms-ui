@@ -7,10 +7,8 @@ import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 
 const IndexedContractDetails = (props) => {
   const { t } = useTranslation()
-  console.log("PROPS",props)
   const { contract, currentTariff, targetTariff } = props
 
-  console.log("TARIF", targetTariff)
   return (
     <Box sx={{ width: '100%', mb: '0.5rem' }}>
       <LabelFieldRow label={t('CONTRACT')}>
