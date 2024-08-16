@@ -425,9 +425,7 @@ const Indexada = (props) => {
                                 )}
                                 {activeStep < MAX_STEP_NUMBER - 1 ? (
                                   <NextButton
-                                    disabled={
-                                      !formikProps.isValid || !targetTariff
-                                    }
+                                    disabled={error}
                                     onClick={() => nextStep(formikProps)}
                                     title={t('SEGUENT_PAS')}
                                   />
