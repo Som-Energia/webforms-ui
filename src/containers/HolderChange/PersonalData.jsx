@@ -38,7 +38,8 @@ function PersonalData(props) {
     touched,
     skipPrivacyPolicy = false,
     title = false,
-    entity = 'holder'
+    entity = 'holder',
+    isMemberMandatoryForHolderchange = false
   } = props
   const [openLegal, setOpenLegal] = useState(false)
 

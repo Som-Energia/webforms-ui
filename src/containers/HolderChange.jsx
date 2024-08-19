@@ -18,6 +18,7 @@ import VAT from './HolderChange/VAT'
 import CUPS from './HolderChange/CUPS'
 import PersonalData from './HolderChange/PersonalData'
 import BecomeMember from './HolderChange/BecomeMember'
+import HolderCase from './HolderChange/HolderCase'
 import VoluntaryCent from './HolderChange/VoluntaryCent'
 import SpecialCases from './HolderChange/SpecialCases'
 import IBAN from './HolderChange/IBAN'
@@ -31,15 +32,19 @@ import data from '../data/HolderChange/data.json'
 import DisplayFormikState from '../components/DisplayFormikState'
 
 import { holderChange } from '../services/api'
-import { normalizeHolderChange, isHomeOwnerCommunityNif } from '../services/utils'
+import {
+  normalizeHolderChange,
+  isHomeOwnerCommunityNif
+} from '../services/utils'
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 import SubmitButton from '../components/Buttons/SubmitButton'
 
-
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
+
+  const { isMemberMandatoryForHolderchange = false } = props
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
@@ -174,6 +179,13 @@ function HolderChange(props) {
     }),
     Yup.object().shape({
       member: Yup.object().shape({
+        link_member: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+      })
+    }),
+    Yup.object().shape({
+      member: Yup.object().shape({
         checked: Yup.bool()
           .required(t('UNACCEPTED_PRIVACY_POLICY'))
           .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
@@ -252,7 +264,7 @@ function HolderChange(props) {
     })
   ]
 
-  const MAX_STEP_NUMBER = 9
+  const MAX_STEP_NUMBER = 10
 
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
@@ -261,12 +273,18 @@ function HolderChange(props) {
         {activeStep === 0 && <VAT {...props} />}
         {activeStep === 1 && <CUPS {...props} />}
         {activeStep === 2 && <PersonalData url={url} {...props} />}
-        {activeStep === 3 && <BecomeMember {...props} />}
-        {activeStep === 4 && <MemberIdentifier {...props} />}
-        {activeStep === 5 && <VoluntaryCent {...props} />}
-        {activeStep === 6 && <SpecialCases {...props} />}
-        {activeStep === 7 && <IBAN {...props} />}
-        {activeStep === 8 && <Review {...props} />}
+        {activeStep === 3 && (
+          <BecomeMember
+            {...props}
+            isMemberMandatoryForHolderchange={isMemberMandatoryForHolderchange}
+          />
+        )}
+        {activeStep === 4 && <HolderCase {...props} />}
+        {activeStep === 5 && <MemberIdentifier {...props} />}
+        {activeStep === 6 && <VoluntaryCent {...props} />}
+        {activeStep === 7 && <SpecialCases {...props} />}
+        {activeStep === 8 && <IBAN {...props} />}
+        {activeStep === 9 && <Review {...props} />}
       </>
     )
   }
@@ -284,9 +302,19 @@ function HolderChange(props) {
         if (values?.holder?.ismember) return true
         if (isHomeOwnerCommunityNif(values?.holder?.vat)) return true
         return false
-      case 4: // MemberIdentifier
+      case 4: // HolderCase
         if (values?.holder?.ismember) return true
         if (values?.member?.become_member === true) return true
+        if (isMemberMandatoryForHolderchange === true) return true
+        return false
+      case 5: // MemberIdentifier
+        if (values?.holder?.ismember) return true
+        if (values?.member?.become_member === true) return true
+        if (
+          isMemberMandatoryForHolderchange === false &&
+          values?.member?.link_member === false
+        )
+          return true
         return false
     }
     return false
@@ -401,6 +429,7 @@ function HolderChange(props) {
     },
     member: {
       become_member: undefined,
+      link_member: undefined,
       invite_token: false,
       checked: false
     },
