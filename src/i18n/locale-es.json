@@ -215,6 +215,7 @@
     "YES": "Sí",
     "I_DECLINE": "Rechazo",
     "I_ACCEPT": "Acepto",
+    "HOLDERCHANGE_REVIEW_TEXT": "<p>Estás a punto de contratar tu suministro electrico con Som Energia, cooperativa sin ánimo de lucro, que tiene com a missión impulsar un modelo energético 100 % renovable y en manos de la ciutadanía.</p><p>Normalmente, los servicios de la cooperativa están reservados a las persones socies. Ahora, y durante un tiempo, ofrecemos la posibilidad de <b>contratar durante un año el suministro eléctrico</b> a personas que, como tú, han llegado a nuestro proyecto a través de un cambio de titular y <b>prefieren no asociarse a la cooperativa aún</b>.</p><p>Durante los próximos meses te iremos explicado más sobre nosaltros; qué es el que nos mueve y cuál es nuestro plam para fomentar les energías renovables.</p><p>¿Con qué objetivo? Nos gustaría que, cuando nos conozcas un poco más, te unas a Som Energia haciéndote socio/a. Ya somos más de 85.000 personas que hemos construido la cooperativa de forma colectiva, y queremos ser muchas más!</p>",
     "SPECIAL_CASES_TITLE": "Motivo del cambio",
     "SPECIAL_CASES_REASON_DEFAULT": "Cambio de persona o entidad titular del contrato",
     "SPECIAL_CASES_QUESTION": "Excepcionalmente, indica si alguna de las opciones siguientes se dan en tu caso para llevar a cabo el cambio de titular.",

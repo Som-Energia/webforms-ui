@@ -284,7 +284,12 @@ function HolderChange(props) {
         {activeStep === 6 && <VoluntaryCent {...props} />}
         {activeStep === 7 && <SpecialCases {...props} />}
         {activeStep === 8 && <IBAN {...props} />}
-        {activeStep === 9 && <Review {...props} />}
+        {activeStep === 9 && (
+          <Review
+            {...props}
+            isMemberMandatoryForHolderchange={isMemberMandatoryForHolderchange}
+          />
+        )}
       </>
     )
   }

@@ -24,7 +24,7 @@ const sectionTitleStyles = {
 
 const Review = (props) => {
   const { t } = useTranslation()
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, isMemberMandatoryForHolderchange } = props
 
   const [open, setOpen] = useState(false)
 
@@ -197,7 +197,18 @@ const Review = (props) => {
           </Grid>
         </Grid>
 
-        <Divider variant="middle" sx={{ mt: '24px', ml: 0, mr: '32px' }} />
+        <Divider
+          variant="middle"
+          sx={{ mt: '24px', ml: 0, mr: '32px', mb: '24px' }}
+        />
+
+        {isMemberMandatoryForHolderchange === false && (
+          <FormHelperText
+            dangerouslySetInnerHTML={{
+              __html: t('HOLDERCHANGE_REVIEW_TEXT')
+            }}
+          />
+        )}
 
         <TermsDialog
           title={t('GENERAL_TERMS')}
