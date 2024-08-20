@@ -107,6 +107,27 @@ function HolderChange(props) {
       })
     }),
     Yup.object().shape({
+      member: Yup.object().shape({
+        become_member: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+      })
+    }),
+    Yup.object().shape({
+      member: Yup.object().shape({
+        link_member: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+      })
+    }),
+    Yup.object().shape({
+      member: Yup.object().shape({
+        checked: Yup.bool()
+          .required(t('UNACCEPTED_PRIVACY_POLICY'))
+          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+      })
+    }),
+    Yup.object().shape({
       holder: Yup.object().shape({
         name: Yup.string().required(t('NO_NAME')),
         surname1: Yup.string().when('isphisical', {
@@ -169,27 +190,6 @@ function HolderChange(props) {
       privacy_policy_accepted: Yup.bool()
         .required(t('UNACCEPTED_PRIVACY_POLICY'))
         .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
-    }),
-    Yup.object().shape({
-      member: Yup.object().shape({
-        become_member: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
-    }),
-    Yup.object().shape({
-      member: Yup.object().shape({
-        link_member: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
-    }),
-    Yup.object().shape({
-      member: Yup.object().shape({
-        checked: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
@@ -272,15 +272,15 @@ function HolderChange(props) {
       <>
         {activeStep === 0 && <VAT {...props} />}
         {activeStep === 1 && <CUPS {...props} />}
-        {activeStep === 2 && <PersonalData url={url} {...props} />}
-        {activeStep === 3 && (
+        {activeStep === 2 && (
           <BecomeMember
             {...props}
             isMemberMandatoryForHolderchange={isMemberMandatoryForHolderchange}
           />
         )}
-        {activeStep === 4 && <HolderCase {...props} />}
-        {activeStep === 5 && <MemberIdentifier {...props} />}
+        {activeStep === 3 && <HolderCase {...props} />}
+        {activeStep === 4 && <MemberIdentifier {...props} />}
+        {activeStep === 5 && <PersonalData url={url} {...props} />}
         {activeStep === 6 && <VoluntaryCent {...props} />}
         {activeStep === 7 && <SpecialCases {...props} />}
         {activeStep === 8 && <IBAN {...props} />}
@@ -298,16 +298,16 @@ function HolderChange(props) {
     // TODO: backwards ismember was checked with "=== true", check it still works
     // without
     switch (step) {
-      case 3: // BecomeMember
+      case 2: // BecomeMember
         if (values?.holder?.ismember) return true
         if (isHomeOwnerCommunityNif(values?.holder?.vat)) return true
         return false
-      case 4: // HolderCase
+      case 3: // HolderCase
         if (values?.holder?.ismember) return true
         if (values?.member?.become_member === true) return true
         if (isMemberMandatoryForHolderchange === true) return true
         return false
-      case 5: // MemberIdentifier
+      case 4: // MemberIdentifier
         if (values?.holder?.ismember) return true
         if (values?.member?.become_member === true) return true
         if (
