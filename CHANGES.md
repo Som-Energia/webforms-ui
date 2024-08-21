@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.4 2024-08-21
 
 - Fix: Disable next button when error on tariff modification first step
 
