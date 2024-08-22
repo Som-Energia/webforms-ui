@@ -38,8 +38,6 @@ const Success = (props) => {
         alignItems: 'center'
       }}>
         <Avatar sx={{
-          width: 6,
-          height: 6,
           color: 'primary.main',
           backgroundColor: 'transparent',
           border: '2px solid',
