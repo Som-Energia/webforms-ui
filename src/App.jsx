@@ -18,11 +18,12 @@ const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
 
   useEffect(() => {
+      const matomoUrl = import.meta.env.VITE_MATOMO_URL
       var _mtm = window._mtm = window._mtm || [];
       _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
       (function() {
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.async=true; g.src='https://matomo.somenergia.coop/js/container_i9uB2r3V.js'; s.parentNode.insertBefore(g,s);
+        g.async=true; g.src=matomoUrl; s.parentNode.insertBefore(g,s);
       })();
   }, [])
 
