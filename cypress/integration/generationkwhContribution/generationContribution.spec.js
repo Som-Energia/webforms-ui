@@ -78,7 +78,7 @@ describe('Generation Form', () => {
 
       //Review page
       cy.get('#privacy_plicy_check').check()
-      cy.get('[data-cy=submit]').click()
+      cy.get('[data-cy=next]').click()
     })
 
     it('Try to contribute with out of zone member', function () {
@@ -86,25 +86,13 @@ describe('Generation Form', () => {
       let memberNumber = this.data.member_out_first_fase_zone.number
       let memberVat = this.data.member_out_first_fase_zone.vat
 
-      // cy.intercept('GET', '/data/soci/**', {
-      //   statusCode: 200,
-      //   body: {
-      //     "data": {
-      //       "soci": {}
-      //     },
-      //     "state": true,
-      //     "status": "ONLINE"
-      //   }
-      // }).as('checkMember')
 
-      // cy.intercept('GET', '/data/generationkwh/can_join/78820/78050110R', {
-      //   statusCode: 200,
-      //   body: {
-      //     "data": true,
-      //     "state": true,
-      //     "status": "ONLINE"
-      //   }
-      // }).as('canJoin')
+      cy.intercept('GET', '/data/generationkwh/can_join/**', {
+        statusCode: 200,
+        body: {
+          data: false
+        }
+      }).as('canJoin')
 
       cy.get('#memberNumber')
         .clear()
@@ -112,10 +100,6 @@ describe('Generation Form', () => {
         .should('have.value', memberNumber)
 
       cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
-
-      // cy.wait('@checkMember')
-      //   .its('response.statusCode')
-      //   .should('be.oneOf', [200, 304])
 
       cy.wait('@canJoin')
         .its('response.statusCode')
@@ -132,7 +116,7 @@ describe('Generation Form', () => {
       let postal_code = this.data.new_member.postal_code
       let vat = this.data.new_member.vat
 
-      cy.get('#member_choose_no').click()
+      cy.get('#member-choose-no').click()
       cy.get('#input_postalcode')
         .clear()
         .type(postal_code)
@@ -160,17 +144,32 @@ describe('Generation Form', () => {
 
       //Review page
       cy.get('#privacy_plicy_check').check()
-      /* cy.get('[data-cy=next]').click() */
+      //cy.get('[data-cy=next]').click()
     })
 
     it('Try to contribute with out of zone postal code', function () {
       //Member page
       let postal_code = this.data.out_zone_data.postal_code
-      cy.get('#member_choose_no').click()
+      
+      cy.intercept('GET', `/data/generationkwh/can_join/${postal_code}`, {
+        statusCode: 200,
+        body: {
+          data: false
+        }
+      }).as('canJoin')
+
+      cy.get('#member-choose-no').click()
       cy.get('#input_postalcode')
         .clear()
         .type(postal_code)
         .should('have.value', postal_code)
+
+     
+
+      cy.wait('@canJoin')
+        .its('response.statusCode')
+        .should('be.oneOf', [200, 304])
+
       cy.get('[data-cy=exit]').click()
     })
   })
