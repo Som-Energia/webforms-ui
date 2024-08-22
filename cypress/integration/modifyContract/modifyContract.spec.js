@@ -12,7 +12,7 @@ describe('Modify Contract', () => {
   })
 
   it('Change power 2.0TD', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePower]').click()
 
@@ -52,7 +52,7 @@ describe('Modify Contract', () => {
   })
 
   it('Change power 3.0TD', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePower]').click()
 
@@ -114,7 +114,7 @@ describe('Modify Contract', () => {
   })
 
   it('Change power 3.0TD no more 15kW', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePower]').click()
 
@@ -144,13 +144,13 @@ describe('Modify Contract', () => {
       .type(this.data.power2)
       .should('have.value', this.data.power2)
 
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.contains('Alguno de los periodos debe ser superior a 15.001 kW')
   })
 
   it('Change power 2.0TD no values', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePower]').click()
 
@@ -162,7 +162,7 @@ describe('Modify Contract', () => {
   })
 
   it('Change power 3.0TD no values', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePower]').click()
 
@@ -174,7 +174,7 @@ describe('Modify Contract', () => {
   })
 
   it('Change phases attachment required', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePhases]').click()
 
@@ -187,7 +187,7 @@ describe('Modify Contract', () => {
   })
 
   it('Incorrect phone number', function () {
-    cy.get('[type=submit]').click()
+    cy.get('[data-cy=next]').click()
 
     cy.get('[name=changePower]').click()
 
