@@ -15,10 +15,10 @@ const VATField = (props) => {
     id,
     label,
     variant,
-    value = '',
+    values,
     onChange,
-    onBlur,
     error,
+    touched,
     helperText,
     autoFocus = false
   } = props
@@ -26,7 +26,7 @@ const VATField = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isValidVAT, setIsValidVAT] = useState(false)
   const [isPhisicalVAT, setIsPhisicalVAT] = useState(false)
-  const [valueVAT, setValueVAT] = useState(value)
+  const [valueVAT, setValueVAT] = useState(values.holder.vat)
 
   useEffect(() => {
     setIsValidVAT(false)
@@ -49,7 +49,6 @@ const VATField = (props) => {
           })
         })
         .catch((error) => {
-          console.error(error.response)
           const errorStatus = error?.response?.data?.data?.valid
             ? error?.response?.data?.data?.valid
             : false
@@ -69,11 +68,7 @@ const VATField = (props) => {
     value = value[0].toUpperCase()
     setValueVAT(value)
   }
-
-  const handleBlur = (event) => {
-    onBlur(event)
-  }
-
+  
   return (
     <>
       <TextField
@@ -84,10 +79,9 @@ const VATField = (props) => {
         fullWidth
         required
         autoFocus={autoFocus}
-        value={value}
+        value={values.holder.vat}
         onChange={handleChange}
-        onBlur={handleBlur}
-        error={!isLoading && error}
+        error={!isLoading && !isValidVAT && touched?.holder?.vat}
         helperText={!isLoading && helperText}
         InputProps={{
           endAdornment: (

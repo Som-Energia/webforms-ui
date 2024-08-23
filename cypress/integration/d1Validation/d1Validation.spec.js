@@ -63,7 +63,7 @@ describe('Modify Contract', () => {
     cy.wait(500)
 
     // Mock the response
-    cy.intercept('POST', 'https://testapi-nonpersistence.somenergia.coop/procedures/d1_confirmation/398891', {
+    cy.intercept('POST', '/procedures/d1_confirmation/398891', {
       statusCode: 200,
       body: {
         'status': 'ONLINE',

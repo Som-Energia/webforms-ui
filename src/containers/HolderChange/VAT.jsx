@@ -11,15 +11,14 @@ function VAT(props) {
   const {
     values,
     setValues,
-    handleBlur,
     touched,
+    setFieldTouched,
     errors
   } = props
   const { t } = useTranslation()
 
 
   const onChangeVAT = ({ vat, isPhisical, valid, isMember }) => {
-
     const tmpValues = {
       ...values,
       holder: {
@@ -31,6 +30,9 @@ function VAT(props) {
       }
     }
     setValues(tmpValues)
+    if(!touched?.holder?.vat){
+      setFieldTouched('holder.vat',true)  
+    }
   }
 
   return (
@@ -47,9 +49,8 @@ function VAT(props) {
             fullWidth
             required
             autoFocus={false}
-            value={values?.holder?.vat}
             onChange={onChangeVAT}
-            onBlur={handleBlur}
+            {...props}
             error={
               (errors?.holder?.vat && touched?.holder?.vat) ||
               (touched?.holder?.vat && values?.holder?.vatvalid === false)
