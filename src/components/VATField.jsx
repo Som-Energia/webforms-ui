@@ -15,7 +15,7 @@ const VATField = (props) => {
     id,
     label,
     variant,
-    values,
+    value,
     onChange,
     error,
     touched,
@@ -26,7 +26,7 @@ const VATField = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isValidVAT, setIsValidVAT] = useState(false)
   const [isPhisicalVAT, setIsPhisicalVAT] = useState(false)
-  const [valueVAT, setValueVAT] = useState(values.holder.vat)
+  const [valueVAT, setValueVAT] = useState(value)
 
   useEffect(() => {
     setIsValidVAT(false)
@@ -79,7 +79,7 @@ const VATField = (props) => {
         fullWidth
         required
         autoFocus={autoFocus}
-        value={values.holder.vat}
+        value={value}
         onChange={handleChange}
         error={!isLoading && !isValidVAT && touched?.holder?.vat}
         helperText={!isLoading && helperText}
