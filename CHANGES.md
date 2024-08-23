@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.5 2024-08-23
 
 - Matomo funnels tracking for Contract and NewMember forms
 - Upgrade notes:
