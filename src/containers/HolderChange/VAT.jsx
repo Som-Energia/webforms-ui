@@ -51,6 +51,7 @@ function VAT(props) {
             autoFocus={false}
             onChange={onChangeVAT}
             {...props}
+            value={values?.holder?.vat}
             error={
               (errors?.holder?.vat && touched?.holder?.vat) ||
               (touched?.holder?.vat && values?.holder?.vatvalid === false)
