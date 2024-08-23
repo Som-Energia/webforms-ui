@@ -12,7 +12,7 @@ describe('Holder Change', () => {
     cy.fixture('contract.json').as('dataContract')
   })
 
-  describe('Enter VAT', function () {
+ describe('Enter VAT', function () {
     it('Enter invalid VAT', function () {
       const ERROR_STATUS_CODE = 400
       cy.identifyHolder(this.data.vatInvalid, ERROR_STATUS_CODE)
@@ -115,8 +115,6 @@ describe('Holder Change', () => {
       cy.holderChangePersonalData(this.data)
       cy.get('[data-cy=next]').click()
 
-      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
-      cy.get('[data-cy=next]').click()
     })
 
     it('Check voluntary cent option', function () {
@@ -138,9 +136,6 @@ describe('Holder Change', () => {
       cy.get('[data-cy=next]').click()
 
       cy.holderChangePersonalData(this.data)
-      cy.get('[data-cy=next]').click()
-
-      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
       cy.get('[data-cy=next]').click()
 
       cy.get(`[data-value="${this.data.voluntaryCent}"]`).click()
@@ -169,9 +164,6 @@ describe('Holder Change', () => {
       cy.get('[data-cy=next]').click()
 
       cy.holderChangePersonalData(this.data)
-      cy.get('[data-cy=next]').click()
-
-      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
       cy.get('[data-cy=next]').click()
 
       cy.enterVoluntaryCent(this.data.voluntaryCent)
@@ -206,9 +198,6 @@ describe('Holder Change', () => {
       cy.holderChangePersonalData(this.data)
       cy.get('[data-cy=next]').click()
 
-      cy.get(`[data-value="${this.data.becomeMember}"]`).click()
-      cy.get('[data-cy=next]').click()
-
       cy.enterVoluntaryCent(this.data.voluntaryCent)
 
       cy.get('[data-cy=next]').click()
@@ -220,17 +209,19 @@ describe('Holder Change', () => {
       cy.contains('revisa y confirma el contrato', { matchCase: false })
       cy.contains(this.data.vat, { matchCase: false })
 
-      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+      cy.get('[data-cy=submit]').should('have.class', 'Mui-disabled')
 
       cy.contains('acepto las condiciones', { matchCase: false }).click()
       cy.contains('condiciones generales', { matchCase: false })
       cy.get('[data-cy=accept]').click()
 
-      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
 
-      cy.intercept('POST', '/form/holderchange').as('holderChangePost')
+      cy.intercept('POST', '/form/holderchange',{
+        statusCode: 200
+      }).as('holderChangePost')
 
-      cy.get('[data-cy=next]').click()
+      cy.get('[data-cy=submit]').click()
 
       cy.wait('@holderChangePost')
         .its('response.statusCode')
