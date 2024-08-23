@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- Matomo funnels tracking for Contract and NewMember forms
+- Upgrade notes:
+    - VITE_MATOMO_URL in `.env.*`
+
 ## 2.3.4 2024-08-21
 
 - Fix: Disable next button when error on tariff modification first step

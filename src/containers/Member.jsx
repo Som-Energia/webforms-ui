@@ -31,9 +31,7 @@ import { normalizeMember } from '../services/utils'
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
-
 const Member = (props) => {
-
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
@@ -157,6 +155,16 @@ const Member = (props) => {
   const MAX_STEP_NUMBER = 4
   const showProgress = false
 
+  useEffect(() => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push([
+      'trackEvent',
+      'NewMember',
+      'setNewMemberStep',
+      `new-member-step-${activeStep}`
+    ])
+  }, [activeStep])
+
   const getActiveStep = (props) => {
     return (
       <>
@@ -262,13 +270,21 @@ const Member = (props) => {
     setCompleted(true)
   }
 
+  const trackSucces = () => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'NewMember', 'newMemberFormOk', 'send-new-member-ok'])
+  }
+
   const handlePost = async (values) => {
     setSending(true)
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'Send', 'sendNewMemberClick', 'send-new-member'])
     const data = normalizeMember(values)
     await member(data)
       .then((response) => {
         if (response?.state === true) {
           setError(false)
+          trackSucces()
           if (response?.data?.endpoint) {
             setData(response?.data)
             formTPV.current.submit()
@@ -290,19 +306,22 @@ const Member = (props) => {
     <GlobalHotKeys handlers={handlers}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
-          onSubmit={() => { }}
+          onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
-          validateOnMount={true}
-        >
+          validateOnMount={true}>
           {(props) => (
             <>
               <Box>
-                <Form sx={{ position: 'relative' }} noValidate autoComplete="off">
+                <Form
+                  sx={{ position: 'relative' }}
+                  noValidate
+                  autoComplete="off">
                   {
-                    <Paper elevation={0}
-                      id='custom_paper'
+                    <Paper
+                      elevation={0}
+                      id="custom_paper"
                       sx={{
                         mt: 0,
                         mb: 4,
@@ -331,7 +350,11 @@ const Member = (props) => {
                         )}
                       </Box>
                       <Box mx={0} mt={0} mb={3}>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}>
                           {(!completed || error) && (
                             <PrevButton
                               disabled={activeStep === 0 || sending}

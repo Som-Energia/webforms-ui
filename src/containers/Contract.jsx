@@ -17,7 +17,6 @@ import Paper from '@mui/material/Paper'
 
 import DisplayFormikState from '../components/DisplayFormikState'
 
-
 import SendIcon from '@mui/icons-material/Send'
 
 import MemberIdentifier from './Contract/MemberIdentifier'
@@ -561,6 +560,16 @@ const Contract = (props) => {
 
   const maxStepNumber = steps.length
 
+  useEffect(() => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push([
+      'trackEvent',
+      'Contract',
+      'setContractStep',
+      `contract-step-${activeStep}`
+    ])
+  }, [activeStep])
+
   const getActiveStep = (props) => {
     const url = t('DATA_PROTECTION_CONTRACT_URL')
     return (
@@ -792,6 +801,9 @@ const Contract = (props) => {
   })
 
   const trackSucces = () => {
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'Contract', 'contractFormOk', 'send-contract-ok'])
+    // end matomo
     plausible.trackPageview({
       url:
         window.location.protocol +
@@ -806,6 +818,8 @@ const Contract = (props) => {
 
   const handlePost = async (values) => {
     setSending(true)
+    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
+    _paq.push(['trackEvent', 'Send', 'sendContractClick', 'send-contract'])
     const data = normalizeContract(values)
     await contract(data)
       .then((response) => {
@@ -833,7 +847,7 @@ const Contract = (props) => {
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Container maxWidth="md" disableGutters={true}>
         <Formik
-          onSubmit={() => { }}
+          onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -895,7 +909,7 @@ const Contract = (props) => {
                               disabled={!props.isValid}
                               onClick={() => nextStep(props)}
                               title={t('SEGUENT_PAS')}
-                            />                        
+                            />
                           ) : (
                             !completed && (
                               <Button

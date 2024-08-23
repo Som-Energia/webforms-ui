@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 
 const StepHeader = ({title}) => {
+
   return (
     <div className="header">
       <div className="header__container">
