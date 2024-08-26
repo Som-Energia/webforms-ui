@@ -117,6 +117,7 @@ const SpecialCases = (props) => {
         <FormControl component="fieldset" sx={{ width: '100%' }}>
           <FormGroup>
             <FormControlLabel
+              disabled={values.especial_cases?.reason_merge || values.especial_cases?.reason_death || values.especial_cases?.reason_electrodep}
               control={
                 <Checkbox
                   checked={values.especial_cases?.reason_default}
@@ -137,6 +138,7 @@ const SpecialCases = (props) => {
               />
             </Box>
             <FormControlLabel
+              disabled={values.especial_cases?.reason_merge}
               control={
                 <Checkbox
                   checked={values.especial_cases?.reason_death}
@@ -170,6 +172,7 @@ const SpecialCases = (props) => {
               </>
             )}
             <FormControlLabel
+              disabled={values.especial_cases?.reason_death || values.especial_cases?.reason_electrodep}
               control={
                 <Checkbox
                   checked={values.especial_cases?.reason_merge}
