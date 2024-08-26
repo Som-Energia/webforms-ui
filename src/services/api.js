@@ -249,7 +249,14 @@ export const getPrices = async ({
 }) => {
   return axios({
     method: 'GET',
-    url: `${WEBFORMS_API_URL}/data/prices?tariff=${tariff}&max_power=${max_power}&vat=${vat}&cnae=${cnae}&city_id=${city_id}`
+    url: `${WEBFORMS_API_URL}/data/prices`,
+    params: {
+      tariff,
+      max_power,
+      vat,
+      cnae,
+      city_id,
+    }
   }).then((response) => {
     return response?.data
   })
