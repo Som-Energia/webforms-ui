@@ -18,7 +18,6 @@ const VATField = (props) => {
     value,
     onChange,
     error,
-    touched,
     helperText,
     autoFocus = false
   } = props
@@ -81,7 +80,7 @@ const VATField = (props) => {
         autoFocus={autoFocus}
         value={value}
         onChange={handleChange}
-        error={!isLoading && !isValidVAT && touched?.holder?.vat}
+        error={!isLoading && !isValidVAT && error}
         helperText={!isLoading && helperText}
         InputProps={{
           endAdornment: (
