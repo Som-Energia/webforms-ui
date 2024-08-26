@@ -16,15 +16,27 @@ const HolderIdentifier = (props) => {
   const {
     values,
     handleBlur,
+    setValues,
     errors,
     touched,
     setFieldValue,
+    setFieldTouched
   } = props
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
-    setFieldValue('holder.vat', vat)
-    setFieldValue('holder.isphisical', isPhisical)
-    setFieldValue('holder.vatvalid', valid)
+    const tmpValues = {
+      ...values,
+      holder: {
+        ...values.holder,
+        vat: vat,
+        isphisical: isPhisical,
+        vatvalid: valid
+      }
+    }
+    setValues(tmpValues)
+    if(!touched?.holder?.vat){
+      setFieldTouched('holder.vat',true)  
+    }
   }
 
   const handleChangePreviousHolder = ({ option }) => {
@@ -51,7 +63,7 @@ const HolderIdentifier = (props) => {
           onChange={onChangeVAT}
           onBlur={handleBlur}
           error={
-            (errors?.holder?.vat && touched?.holder?.vat) ||
+            ((errors?.holder?.vat || errors?.holder?.vatvalid) && touched?.holder?.vat) ||
             (touched?.holder?.vat && values?.holder?.vatvalid === false)
           }
           helperText={

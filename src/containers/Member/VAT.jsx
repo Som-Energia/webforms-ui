@@ -9,7 +9,7 @@ import StepHeader from '../../components/StepHeader'
 import VATField from '../../components/VATField'
 
 function VAT (props) {
-  const { values, setValues, handleBlur, touched, errors } = props
+  const { values, setValues, handleBlur, setFieldTouched, touched, errors } = props
   const { t } = useTranslation()
 
   const onChangeVAT = ({ vat, isPhisical, valid }) => {
@@ -24,6 +24,9 @@ function VAT (props) {
       }
     }
     setValues(tmpValues)
+    if(!touched?.member?.vat){
+      setFieldTouched('member.vat',true)  
+    }
   }
 
   return (
@@ -44,7 +47,7 @@ function VAT (props) {
           value={values?.member?.vat}
           onChange={onChangeVAT}
           onBlur={handleBlur}
-          error={(errors?.member?.vat && touched?.member?.vat) ||
+          error={((errors?.member?.vat || errors?.member?.vatvalid) && touched?.member?.vat) ||
             (touched?.member?.vat && values?.member?.vatvalid === false)
           }
           helperText={(touched?.member?.vat && errors?.member?.vat) ||

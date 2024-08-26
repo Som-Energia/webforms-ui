@@ -46,6 +46,7 @@ const GenerationNoMemberIdFields = (props) => {
     setFieldValue,
     setErrors,
     setValues,
+    setFieldTouched,
     isTesting = false
   } = props
 
@@ -62,6 +63,10 @@ const GenerationNoMemberIdFields = (props) => {
       }
     }
     setValues(tmpValues)
+    if(!touched?.member?.vat){
+      setFieldTouched('member.vat',true)  
+    }
+
   }
 
   const onChangePostalCode = (event) => {

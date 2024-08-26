@@ -477,14 +477,14 @@ function HolderChange(props) {
                             {result?.contract_number === undefined && (
                               <PrevButton
                                 disabled={activeStep === 0 || sending}
-                                onClick={() => prevStep(props.values, props, (step) => validateStep(props.values, step))}
+                                onClick={() => prevStep(props.values, props, (step) => validateStep(props.values, step, "PREVIOUS"))}
                                 title={t('PAS_ANTERIOR')}
                               />
                             )}
                             {(!completed && !isLastStep) ? (
                               <NextButton
-                                onClick={() => nextStep(props.values, props, (step) => validateStep(props.values, step))}
-                                disabled={sending || !isValid}
+                                onClick={() => nextStep(props.values, props, (step) => validateStep(props.values, step, "NEXT"))}
+                                disabled={sending || !props.isValid}
                                 title={t('SEGUENT_PAS')}
                               />
                             ) : null}
