@@ -59,11 +59,12 @@ deploy_server=$DEPLOYMENT_HOST
 deploy_path=$DEPLOYMENT_PATH
 port="$DEPLOYMENT_PORT"
 user="$DEPLOYMENT_USER"
+deploy_prefix="${DEPLOYMENT_PREFIX:-build}"
 
 today=$(date +"%Y-%m-%d_%H%M%S")
-dest_dir="$deploy_path/build_$today"
-app_dir="$deploy_path/build"
-alias_dir="build_$today"
+version_dir="$deploy_prefix-$today"
+dest_dir="$deploy_path/$version_dir"
+app_dir="$deploy_path/$deploy_prefix"
 
 function build () {
     log_message "INFO" "Building project $build"
@@ -89,7 +90,7 @@ function upload () {
     fi
 
     log_message "INFO" "Linking new build... "
-    ssh $user@$deploy_server -p $port "rm $app_dir; ln -s $alias_dir $app_dir"
+    ssh $user@$deploy_server -p $port "rm $app_dir; ln -s $version_dir $app_dir"
     if [ $? != 0 ]
     then
         log_message "ERROR" "An error ocurred linking new build $?"
