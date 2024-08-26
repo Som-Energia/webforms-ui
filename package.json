@@ -3,8 +3,8 @@
   "version": "2.3.6",
   "private": false,
   "scripts": {
-    "start": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite",
-    "build": "export VITE_APP_VERSION=$(git rev-parse HEAD) && vite build",
+    "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
+    "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov && ./scripts/rename-assets-ov.sh",
     "build:wp": "npm run build -- --mode=wp",
     "build:pre": "npm run build -- --mode=pre",
