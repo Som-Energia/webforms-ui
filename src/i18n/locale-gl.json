@@ -707,5 +707,6 @@
     "HELP_CONTACT_INFO": "Os datos de contacto serán empregados pola <a target=\"_blank\" href=\"{{url}}\">distribuidora da zona</a> para avisarte caso de que o personal técnico encargado precise acceder ao contador.",
     "EXIT": "Saír",
     "GENERATION_CONTRIBUTION_MEMBER_WARNING": "<p>Xa podes participar en <strong>Generation kWh porque está aberta a posibilidade na túa zona!</strong></p><p>Agora, ademais da cantidade coa que decidas participar en Generation kWh, para seres socia/o debes facer unha achega ao capital social de <strong>100 €</strong>, que se devolverán caso de que algún día te queiras dar de baixa.</p>",
-    "MODIFY_ANSWER_POWER": "Modificar a potencia"
+    "MODIFY_ANSWER_POWER": "Modificar a potencia",
+    "AT_LEAST_ONE_CHANGE_REASON":"Como mínim tes que escoller un motivo do cambio"
 }

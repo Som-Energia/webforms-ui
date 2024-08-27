@@ -15,11 +15,12 @@ const VATField = (props) => {
     id,
     label,
     variant,
-    value = '',
+    value,
     onChange,
-    onBlur,
+    isVatTouched,
     error,
     helperText,
+    setFieldTouched,
     autoFocus = false
   } = props
 
@@ -49,7 +50,6 @@ const VATField = (props) => {
           })
         })
         .catch((error) => {
-          console.error(error.response)
           const errorStatus = error?.response?.data?.data?.valid
             ? error?.response?.data?.data?.valid
             : false
@@ -67,13 +67,12 @@ const VATField = (props) => {
   const handleChange = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
+    if(!isVatTouched){
+      setFieldTouched(name,true)  
+    }
     setValueVAT(value)
   }
-
-  const handleBlur = (event) => {
-    onBlur(event)
-  }
-
+  
   return (
     <>
       <TextField
@@ -86,8 +85,7 @@ const VATField = (props) => {
         autoFocus={autoFocus}
         value={value}
         onChange={handleChange}
-        onBlur={handleBlur}
-        error={!isLoading && error}
+        error={!isLoading && !isValidVAT && error}
         helperText={!isLoading && helperText}
         InputProps={{
           endAdornment: (

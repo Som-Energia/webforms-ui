@@ -59,7 +59,8 @@ const Member = (props) => {
       member: Yup.object().shape({
         vat: Yup.string()
           .required(t('FILL_NIF'))
-          .matches(/(^[A-GI-Z0-9])/, t('CIF_COMMUNITY_OWNERS')),
+          .matches(/(^[A-GI-Z0-9])/, t('CIF_COMMUNITY_OWNERS'))
+          .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, t('INVALID_NIF')),
         vatvalid: Yup.bool()
           .required(t('FILL_NIF'))
           .oneOf([true], t('FILL_NIF'))
@@ -191,9 +192,9 @@ const Member = (props) => {
       props.setFieldValue('privacy_policy_accepted', true)
     }
     const last = MAX_STEP_NUMBER
+    setActiveStep(Math.min(next, last))
     props.submitForm().then(() => {
       if (props.isValid) {
-        setActiveStep(Math.min(next, last))
         props.validateForm()
         props.setTouched({})
       }

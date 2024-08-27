@@ -47,6 +47,7 @@ function HolderChange(props) {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
+  const [isValid, setIsValid] = useState(false)
 
   const keyMap = {
     SHOW_INSPECTOR: 'ctrl+alt+shift+d'
@@ -148,7 +149,7 @@ function HolderChange(props) {
           }
         ),
         phone1: Yup.string().min(9, t('NO_PHONE')).required(t('NO_PHONE')),
-        phone2: Yup.string().min(9, t('NO_PHONE')),
+        /* phone2: Yup.string().min(9, t('NO_PHONE')), */
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
       legal_person_accepted: Yup.bool().test({
@@ -219,8 +220,20 @@ function HolderChange(props) {
                 .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
                 .required(t('ELECTRODEP_ATTACH_REQUIRED'))
             })
-          })
-      })
+          }),
+        reason_default: Yup.bool(),
+        reason_death: Yup.bool(),
+        reason_merge: Yup.bool(),
+        reason_electrodep: Yup.bool(),
+      }).test(
+        'At least one checked',
+        t('AT_LEAST_ONE_CHANGE_REASON'),
+        function () {
+          const { reason_death, reason_default, reason_merge, reason_electrodep } = this.parent.especial_cases
+          if (reason_death || reason_default || reason_merge || reason_electrodep)
+            return true
+        }
+      )
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
@@ -280,23 +293,27 @@ function HolderChange(props) {
     return false
   }
 
-  const nextStep = (values, actions) => {
+  const nextStep = (values, actions, callBack) => {
     let next = activeStep + 1
 
     while (skipStep(next, values, false)) next++
 
     const last = MAX_STEP_NUMBER
-    setActiveStep(Math.min(next, last))
+
+    const nextStep = Math.min(next, last)
+    setActiveStep(nextStep)
     actions.setTouched({})
     actions.setSubmitting(false)
+    callBack(nextStep)
   }
 
-  const prevStep = (values, actions) => {
+  const prevStep = (values, actions, callBack) => {
     let prev = activeStep - 1
 
     while (skipStep(prev, values, true)) prev--
 
-    setActiveStep(Math.max(0, prev))
+    const prevStep = Math.max(0, prev)
+    setActiveStep(prevStep)
     actions.setTouched({})
     actions.setSubmitting(false)
 
@@ -304,6 +321,7 @@ function HolderChange(props) {
       setCompleted(false)
       setError(false)
     }
+    callBack(prevStep)
   }
 
   const isLastStep = activeStep >= MAX_STEP_NUMBER - 1
@@ -383,7 +401,7 @@ function HolderChange(props) {
       tariff_type: ''
     },
     member: {
-      become_member: '',
+      become_member: undefined,
       invite_token: false,
       checked: false
     },
@@ -404,6 +422,18 @@ function HolderChange(props) {
     legal_person_accepted: false
   }
 
+
+  const validateStep = (values, step) => {
+    const stepToValidate = (step !== null && step !== undefined) ? step : activeStep
+    validationSchemas[stepToValidate].validate(values)
+      .then(() => {
+        setIsValid(true)
+      })
+      .catch((e) => {
+        setIsValid(false)
+      })
+  }
+
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Box sx={{ backgroundColor: 'secondary.light', color: 'primary.main' }}>
@@ -412,105 +442,107 @@ function HolderChange(props) {
             enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchemas[activeStep]}
-            validateOnMount
+            validateOnMount={true}
+            validate={(values => validateStep(values, activeStep))}
             onSubmit={handleSubmit}>
             {(props) => (
-              <>
-                <Box className="ov-theme">
-                  <Form
-                    sx={{ position: 'relative' }}
-                    noValidate
-                    autoComplete="off">
-                    {
-                      <Paper
-                        elevation={0}
-                        sx={{
-                          mt: 4,
-                          mb: 4,
-                          width: '100%',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          backgroundColor: 'transparent'
-                        }}>
-                        <LinearProgress
-                          variant={sending ? 'indeterminate' : 'determinate'}
-                          value={(activeStep / MAX_STEP_NUMBER) * 100}
-                        />
-                        <>
-                          {completed ? (
-                            <Box className="step-body">
-                              {error ? (
-                                <Failure error={error} />
-                              ) : (
-                                <Success result={result} />
-                              )}
-                            </Box>
-                          ) : (
-                            getActiveStep(props)
-                          )}
-                        </>
-                        <Box mx={0} mt={2} mb={3}>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              justifyContent: 'space-between'
-                            }}>
-                            {result?.contract_number === undefined && (
-                              <PrevButton
-                                disabled={activeStep === 0 || sending}
-                                onClick={() => prevStep(props.values, props)}
-                                title={t('PAS_ANTERIOR')}
-                              />
+                <>
+                  <Box className="ov-theme">
+                    <Form
+                      sx={{ position: 'relative' }}
+                      noValidate
+                      autoComplete="off">
+                      {
+                        <Paper
+                          elevation={0}
+                          sx={{
+                            mt: 4,
+                            mb: 4,
+                            width: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            backgroundColor: 'transparent'
+                          }}>
+                          <LinearProgress
+                            variant={sending ? 'indeterminate' : 'determinate'}
+                            value={(activeStep / MAX_STEP_NUMBER) * 100}
+                          />
+                          <>
+                            {completed ? (
+                              <Box className="step-body">
+                                {error ? (
+                                  <Failure error={error} />
+                                ) : (
+                                  <Success result={result} />
+                                )}
+                              </Box>
+                            ) : (
+                              getActiveStep(props)
                             )}
-                            {(!completed && !isLastStep) ? (
-                              <NextButton
-                                onClick={() => nextStep(props.values, props)}
-                                disabled={sending || !props.isValid}
-                                title={t('SEGUENT_PAS')}
-                              />
-                            ) : null}
-                            {(!completed && isLastStep) ? (
-                              <SubmitButton
-                                loading={sending}
-                                startIcon={<SendIcon />}
-                                title={t('SEND')}
-                                disabled={sending || !props.isValid}
-                              />
-                            ) : null}
-                          </Box>
-                        </Box>
-                        <Box mx={0} mt={2} mb={3}>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              justifyContent: 'space-between'
-                            }}>
-                            {activeStep === 4 &&
-                              isHomeOwnerCommunityNif(
-                                props.values?.holder?.vat
-                              ) && (
-                                <>
-                                  <Box mt={3}>
-                                    <Alert severity="warning">
-                                      <Typography
-                                        variant="body1"
-                                        dangerouslySetInnerHTML={{
-                                          __html: t('CIF_COMMUNITY_OWNERS')
-                                        }}
-                                      />
-                                    </Alert>
-                                  </Box>
-                                </>
+                          </>
+                          <Box mx={0} mt={2} mb={3}>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between'
+                              }}>
+                              {result?.contract_number === undefined && (
+                                <PrevButton
+                                  disabled={activeStep === 0 || sending}
+                                  onClick={() => prevStep(props.values, props, (step) => validateStep(props.values, step, props.setErrors))}
+                                  title={t('PAS_ANTERIOR')}
+                                />
                               )}
+                              {(!completed && !isLastStep) ? (
+                                <NextButton
+                                  onClick={() => nextStep(props.values, props, (step) => validateStep(props.values, step))}
+                                  disabled={sending || !isValid}
+                                  title={t('SEGUENT_PAS')}
+                                />
+                              ) : null}
+                              {(!completed && isLastStep) ? (
+                                <SubmitButton
+                                  loading={sending}
+                                  startIcon={<SendIcon />}
+                                  title={t('SEND')}
+                                  disabled={sending || !isValid}
+                                />
+                              ) : null}
+                            </Box>
                           </Box>
-                        </Box>
-                      </Paper>
-                    }
-                  </Form>
-                </Box>
-                {showInspector && <DisplayFormikState {...props} />}
-              </>
-            )}
+                          <Box mx={0} mt={2} mb={3}>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between'
+                              }}>
+                              {activeStep === 4 &&
+                                isHomeOwnerCommunityNif(
+                                  props.values?.holder?.vat
+                                ) && (
+                                  <>
+                                    <Box mt={3}>
+                                      <Alert severity="warning">
+                                        <Typography
+                                          variant="body1"
+                                          dangerouslySetInnerHTML={{
+                                            __html: t('CIF_COMMUNITY_OWNERS')
+                                          }}
+                                        />
+                                      </Alert>
+                                    </Box>
+                                  </>
+                                )}
+                            </Box>
+                          </Box>
+                        </Paper>
+                      }
+                    </Form>
+                  </Box>
+                  {showInspector && <DisplayFormikState {...props} />}
+                </>
+              )
+            }
           </Formik>
         </Container>
       </Box>

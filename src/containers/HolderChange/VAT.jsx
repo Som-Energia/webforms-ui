@@ -10,20 +10,26 @@ import VATField from '../../components/VATField'
 function VAT(props) {
   const {
     values,
-    setFieldValue,
-    setFieldTouched,
-    handleBlur,
+    setValues,
     touched,
+    setFieldTouched,
     errors
   } = props
   const { t } = useTranslation()
 
+
   const onChangeVAT = ({ vat, isPhisical, valid, isMember }) => {
-    setFieldValue('holder.vat', vat)
-    setFieldValue('holder.isphisical', isPhisical)
-    setFieldValue('holder.vatvalid', valid)
-    setFieldTouched('holder.vat', true)
-    setFieldValue('holder.ismember', isMember)
+    const tmpValues = {
+      ...values,
+      holder: {
+        ...values.holder,
+        vat: vat,
+        isphisical: isPhisical,
+        vatvalid: valid,
+        ismember: isMember
+      }
+    }
+    setValues(tmpValues)
   }
 
   return (
@@ -39,10 +45,12 @@ function VAT(props) {
             variant="outlined"
             fullWidth
             required
+            isVatTouched={touched?.holder?.vat}
+            setFieldTouched={setFieldTouched}
             autoFocus={false}
-            value={values?.holder?.vat}
             onChange={onChangeVAT}
-            onBlur={handleBlur}
+            {...props}
+            value={values?.holder?.vat}
             error={
               (errors?.holder?.vat && touched?.holder?.vat) ||
               (touched?.holder?.vat && values?.holder?.vatvalid === false)

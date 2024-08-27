@@ -19,7 +19,7 @@ describe('Contract', () => {
       cy.enterSupplyPointData(this.data.supplyPoint)
     })
 
-    it('Can not contract 3.0TD', function () {
+/*     it('Can not contract 3.0TD', function () {
       const moreThan15Kw = true
 
       cy.choosePhase(this.data.phase)
@@ -27,7 +27,7 @@ describe('Contract', () => {
       cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
 
       cy.get('.MuiAlert-message').contains('no es posible contratar')
-    })
+    }) */
 
     it('Contract with 2.0TD', function () {
       const moreThan15Kw = false
@@ -50,7 +50,7 @@ describe('Contract', () => {
     })
 
     // contract 3.0TD not allowed
-    it.skip('3.0TD no incremental powers', function () {
+    it('3.0TD no incremental powers', function () {
       const moreThan15Kw = true
       const powers = [
         this.data.power,

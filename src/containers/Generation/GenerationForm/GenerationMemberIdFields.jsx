@@ -34,6 +34,7 @@ const GenerationMemberIdFields = (props) => {
     setErrors,
     touched,
     setFieldValue,
+    setValues,
     isTesting = false
   } = props
 
@@ -49,8 +50,15 @@ const GenerationMemberIdFields = (props) => {
 
   useEffect(() => {
     const checkIsMember = async () => {
-      setFieldValue('member.generation_zone_checked', false)
-      setFieldValue('member.has_generation_enabled_zone', true)
+      const tmpValues = {
+        ...values,
+        member: {
+          ...values.member,
+          generation_zone_checked: false,
+          has_generation_enabled_zone: true,
+        }
+      }
+      setValues(tmpValues)
       setLoading(true)
       try {
         await checkMemberVat(values.member.vat)
@@ -72,14 +80,22 @@ const GenerationMemberIdFields = (props) => {
       } catch (error) {
         setError(error)
       }
+
       try {
         let res = await checkIsFromGenerationEnabledZone({
           memberNumber: values.member.partner_number,
           memberVat: values.member.vat
         })
-        setFieldValue('member.checked', true)
-        setFieldValue('member.has_generation_enabled_zone', res.data)
-        setFieldValue('member.generation_zone_checked', true)
+        const tmpValues = {
+          ...values,
+          member: {
+            ...values.member,
+            checked: true,
+            has_generation_enabled_zone: res.data,
+            generation_zone_checked: true
+          }
+        }
+        setValues(tmpValues)
         setErrors({ member: { has_generation_enabled_zone: false } })
       } catch (error) {
         setErrors({
@@ -110,8 +126,15 @@ const GenerationMemberIdFields = (props) => {
     try {
       hash = hash && atob(hash).split(';')
       if (hash && hash.length > 1) {
-        setFieldValue('member.partner_number', hash[0], false)
-        setFieldValue('member.vat', hash[1])
+        const tmpValues = {
+          ...values,
+          member: {
+            ...values.member,
+            partner_number: hash[0],
+            vat: hash[1]
+          }
+        }
+        setValues(tmpValues)
         setDisabled(true)
       }
     } catch (error) {

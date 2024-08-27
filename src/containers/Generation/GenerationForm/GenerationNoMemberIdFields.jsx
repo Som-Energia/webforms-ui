@@ -45,19 +45,24 @@ const GenerationNoMemberIdFields = (props) => {
     touched,
     setFieldValue,
     setErrors,
+    setValues,
     setFieldTouched,
     isTesting = false
   } = props
 
   const onChangeVAT = (params) => {
     const { vat, isPhisical, valid, isMember } = params
-    setFieldValue('member.isphisical', isPhisical, false)
-    setFieldValue('member.vatvalid', valid, false)
-    setFieldValue('member.exists', isMember, false)
-    setFieldValue('member.vat', vat)
-    if (vat !== '') {
-      setFieldTouched('member.vat', true)
+    const tmpValues = {
+      ...values,
+      member: {
+        ...values.member,
+        isphisical: isPhisical,
+        vatvalid: valid,
+        exists:isMember,
+        vat: vat
+      }
     }
+    setValues(tmpValues)
   }
 
   const onChangePostalCode = (event) => {
@@ -73,9 +78,17 @@ const GenerationNoMemberIdFields = (props) => {
       let result = await checkIsPostalCodeFromGenerationEnabledZone({
         postalCode: values?.member?.postal_code
       })
-      setFieldValue('member.has_generation_enabled_zone', result.data)
-      setFieldValue('member.generation_zone_checked', true)
-      setFieldValue('member.postal_code_checked', true)
+      const tmpValues = {
+        ...values,
+        member: {
+          ...values.member,
+          generation_zone_checked: true,
+          has_generation_enabled_zone: result.data,
+          postal_code_checked:true
+        }
+      }
+      setValues(tmpValues)
+
       setIsLoading(false)
     } catch (error) {
       setErrors({
@@ -157,6 +170,8 @@ const GenerationNoMemberIdFields = (props) => {
                 label={t('VAT_LABEL')}
                 variant="outlined"
                 fullWidth
+                isVatTouched={touched?.member?.vat}
+                setFieldTouched={setFieldTouched}
                 required
                 value={values?.member?.vat}
                 onChange={onChangeVAT}
