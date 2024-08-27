@@ -32,6 +32,8 @@ function PersonalData(props) {
     setFieldValue,
     handleChange,
     handleBlur,
+    setFieldTouched,
+    setValues,
     errors,
     touched,
     skipPrivacyPolicy = false,
@@ -41,9 +43,15 @@ function PersonalData(props) {
   const [openLegal, setOpenLegal] = useState(false)
 
   const onChangeProxyVAT = ({ vat, isPhisical, valid }) => {
-    setFieldValue(`${entity}.proxynif`, vat)
-    setFieldValue(`${entity}.proxynif_valid`, valid)
-    setFieldValue(`${entity}.proxynif_phisical`, isPhisical)
+    const tmpValues = {...values}
+    tmpValues[entity] = {
+        ...values[entity],
+        proxynif: vat,
+        proxynif_valid: valid,
+        proxynif_phisical: isPhisical
+      }
+    
+    setValues(tmpValues)
   }
 
   const onChangeStateCity = ({ state, city }) => {
@@ -206,6 +214,8 @@ function PersonalData(props) {
                   label={t('PROXY_NIF')}
                   variant="outlined"
                   fullWidth
+                  isVatTouched={touched[entity]?.proxynif}
+                  setFieldTouched={setFieldTouched}
                   required
                   value={values[entity]?.proxynif}
                   onChange={onChangeProxyVAT}
