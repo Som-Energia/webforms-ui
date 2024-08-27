@@ -24,7 +24,7 @@ describe('New Member', () => {
       cy.get('[name="member.proxynif"]')
         .type(data.vat)
         .should('have.value', data.vat)
-
+      cy.wait(2000)
       cy.get('[name="member.address"]')
         .type(data.address)
         .should('have.value', data.address)
