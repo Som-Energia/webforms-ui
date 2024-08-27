@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
+import FormHelperText from '@mui/material/FormHelperText';
 import Typography from '@mui/material/Typography'
 
 import StepHeader from '../../components/StepHeader'
@@ -96,7 +97,7 @@ const SpecialCases = (props) => {
     } else {
       setFieldValue('especial_cases', {
         ...values.especial_cases,
-        reason_default: true,
+        reason_default: !values.especial_cases.reason_default,
         reason_death: false,
         reason_merge: false,
         reason_electrodep: false,
@@ -261,6 +262,7 @@ const SpecialCases = (props) => {
               </>
             )}
           </FormGroup>
+          <FormHelperText>{errors?.specialcases}</FormHelperText>
         </FormControl>
       </Box>
     </>
