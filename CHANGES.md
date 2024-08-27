@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.7 2024-08-27
 
 - Deploy script unified with somrepre
 - New tag based version string
