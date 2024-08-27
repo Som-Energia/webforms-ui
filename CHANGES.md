@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+
+- Deploy script unified with somrepre
+- New tag based version string
+- New linter command
+- Fix: escaping url params (security)
+- Fix: undefined not properly managed in attachments
+
 ## 2.3.6 2024-08-27
 
 - Force CAU to match CUPS in single installs
