@@ -147,6 +147,7 @@ describe('Holder Change', () => {
 
       cy.get('input[name="especial_cases.reason_death"]').click()
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+      cy.get('input[name="especial_cases.reason_death"]').click()
 
       cy.get('input[name="especial_cases.reason_default"]').click()
       cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
