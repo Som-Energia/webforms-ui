@@ -17,8 +17,10 @@ const VATField = (props) => {
     variant,
     value,
     onChange,
+    isVatTouched,
     error,
     helperText,
+    setFieldTouched,
     autoFocus = false
   } = props
 
@@ -65,6 +67,9 @@ const VATField = (props) => {
   const handleChange = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
+    if(!isVatTouched){
+      setFieldTouched(name,true)  
+    }
     setValueVAT(value)
   }
   
