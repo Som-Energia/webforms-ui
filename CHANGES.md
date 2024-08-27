@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.3.8 2024-07-27
+
+- Validations forms
+
 ## 2.3.7 2024-08-27
 
 - Deploy script unified with somrepre
