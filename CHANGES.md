@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.6 2024-08-27
 
 - Force CAU to match CUPS in single installs
 
