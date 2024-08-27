@@ -39,6 +39,7 @@ export function ApiValidatedField({
     }
     const result = localCheck(valueToCheck)
     const needsRemote = result.valid
+
     onChange({ ...result, valid: false })
     if (!needsRemote) return
     setIsLoading(true)
@@ -79,9 +80,9 @@ export function ApiValidatedField({
         }
         InputProps={{
           startAdornment: LeadingIcon && (
-            <InputAdornment sx={{ 
-              '& path': { color: 'rgba(0, 0, 0, 0.54)'}
-              }} position="start">
+            <InputAdornment sx={{
+              '& path': { color: 'rgba(0, 0, 0, 0.54)' }
+            }} position="start">
               <LeadingIcon />
             </InputAdornment>
           ),
@@ -93,7 +94,7 @@ export function ApiValidatedField({
                 <CheckOutlinedIcon color="primary" />
               ) : null}
             </InputAdornment>
-          ): null
+          ) : null
         }}
       />
     </>

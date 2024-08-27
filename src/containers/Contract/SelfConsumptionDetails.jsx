@@ -93,40 +93,6 @@ const SelfConsumptionDetails = (props) => {
       <StepHeader title={t('SELFCONSUMPTION_DETAILS_TITLE')} />
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography
-            variant="body1"
-            dangerouslySetInnerHTML={{ __html: t('SELFCONSUMPTION_CAU_CODE') }}
-            sx={{
-              fontWeight: 500,
-              mb: 2
-            }}
-          />
-          <CAUField
-            required
-            id="self_consumption_cau"
-            name="self_consumption.cau"
-            label={t('CAU')}
-            variant="outlined"
-            fullWidth
-            value={values.self_consumption.cau}
-            onChange={handleChangeCAU}
-            onBlur={handleBlur}
-            error={
-              values?.self_consumption?.cau && !!errors?.self_consumption?.cau
-            }
-            helperText={
-              errors?.self_consumption?.cau || (
-                <a
-                  href={t('SELFCONSUMPTION_CAU_HELP_URL')}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  {t('SELFCONSUMPTION_CAU_HELP')}
-                </a>
-              )
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
           <Chooser
             name="self_consumption.collective_installation"
             sx={{
@@ -162,6 +128,45 @@ const SelfConsumptionDetails = (props) => {
                 description: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
               }
             ]}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            variant="body1"
+            dangerouslySetInnerHTML={{ __html: t('SELFCONSUMPTION_CAU_CODE') }}
+            sx={{
+              fontWeight: 500,
+              mb: 2
+            }}
+          />
+          <CAUField
+            required
+            id="self_consumption_cau"
+            name="self_consumption.cau"
+            label={t('CAU')}
+            variant="outlined"
+            fullWidth
+            values={values}
+            value={values.self_consumption.cau}
+            onChange={handleChangeCAU}
+            onBlur={handleBlur}
+            error={
+              values?.self_consumption?.cau && !!errors?.self_consumption?.cau
+            }
+            helperText={
+              errors?.self_consumption?.cau || (
+                <a
+                  href={t('SELFCONSUMPTION_CAU_HELP_URL')}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  {t('SELFCONSUMPTION_CAU_HELP')}
+                </a>
+              )
+            }
+            data={{
+              'collective_installation': props.values.self_consumption.collective_installation,
+              'cups': props.values.supply_point.cups,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -362,6 +367,7 @@ const SelfConsumptionDetails = (props) => {
             }}
             sx={{
               fontWeight: 500,
+              mt: 2,
               mb: 2
             }}
           />

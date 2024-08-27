@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { checkCups } from '../services/api'
 import SolarPowerIcon from '@mui/icons-material/WbSunny'
 import { useTranslation } from 'react-i18next'
@@ -26,26 +26,40 @@ export function CAUField(props) {
 
   function localCheck(value) {
     const compact = value.replaceAll(' ', '')
-    const borderPoint = compact.slice(20,22)
-    const installation = compact.slice(22,26)
-    if (!compact) return {value, valid: false}
-    if (compact.slice(0,2) !== "ES".slice(0,compact.length)) return {value, valid: false, error:t("CAU_INVALID_PREFIX")}
-    if (borderPoint.length === 2 && !/^\d[A-Z]$/.test(borderPoint)) return {value, valid: false, error:t("CAU_INVALID_BORDER_POINT")}
-    if (installation.length === 4 && !/^A\d{1,3}$/.test(installation)) return {value, valid: false, error:t("CAU_INVALID_INSTALLATION")}
-    if (compact.length !== 26) return {value, valid: false, error:t("CAU_INVALID_LENGTH")}
-    return {value, valid: true}
+    if (!compact) return { value, valid: false }
+    const borderPoint = compact.slice(20, 22)
+    const installation = compact.slice(22, 26)
+    if (compact.slice(0, 2) !== "ES".slice(0, compact.length)) return { value, valid: false, error: t("CAU_INVALID_PREFIX") }
+    const collective_installation = props.data.collective_installation
+    const cups = props.data.cups.slice(0, 20)
+    if (collective_installation === false) {
+      const cau_cups = compact.slice(0, Math.min(compact.length,20))   
+      if (cau_cups !== cups) return { value, valid: false, error: t("CAU_NOT_MATCHING_CUPS") }
+    }
+    if (borderPoint.length === 2 && !/^\d[A-Z]$/.test(borderPoint)) return { value, valid: false, error: t("CAU_INVALID_BORDER_POINT") }
+    if (installation.length === 4 && !/^A\d{1,3}$/.test(installation)) return { value, valid: false, error: t("CAU_INVALID_INSTALLATION") }
+    if (compact.length !== 26) return { value, valid: false, error: t("CAU_INVALID_LENGTH") }
+
+    return { value, valid: true }
   }
   function remoteCheck(value) {
-    return checkCups(value.replace(/ /g, '').slice(0,20))
+    return checkCups(value.replace(/ /g, '').slice(0, 20))
       .then((response) => {
         const valid = response?.state === true
-        return { value, valid, error: valid?undefined:t("CAU_INVALID_CONTROL_DIGIT") }
+        return { value, valid, error: valid ? undefined : t("CAU_INVALID_CONTROL_DIGIT") }
       })
       .catch((error) => {
         const valid = !!error?.response?.data?.state
-        return { value, valid, error: valid?undefined:t("CAU_INVALID_CONTROL_DIGIT")  }
+        return { value, valid, error: valid ? undefined : t("CAU_INVALID_CONTROL_DIGIT") }
       })
   }
+
+  useEffect(() => {
+    if (props.value) {
+      const result = localCheck(props.value)
+      props.onChange({ ...result, valid: false })
+    }
+  }, [props.values.self_consumption.collective_installation])
 
   return (
     <ApiValidatedField
