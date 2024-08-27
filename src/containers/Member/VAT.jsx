@@ -24,9 +24,6 @@ function VAT (props) {
       }
     }
     setValues(tmpValues)
-    if(!touched?.member?.vat){
-      setFieldTouched('member.vat',true)  
-    }
   }
 
   return (
@@ -43,6 +40,8 @@ function VAT (props) {
           variant="outlined"
           fullWidth
           required
+          isVatTouched={touched?.member?.vat}
+          setFieldTouched={setFieldTouched}
           autoFocus={true}
           value={values?.member?.vat}
           onChange={onChangeVAT}

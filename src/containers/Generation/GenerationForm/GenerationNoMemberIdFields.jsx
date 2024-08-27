@@ -63,10 +63,6 @@ const GenerationNoMemberIdFields = (props) => {
       }
     }
     setValues(tmpValues)
-    if(!touched?.member?.vat){
-      setFieldTouched('member.vat',true)  
-    }
-
   }
 
   const onChangePostalCode = (event) => {
@@ -174,6 +170,8 @@ const GenerationNoMemberIdFields = (props) => {
                 label={t('VAT_LABEL')}
                 variant="outlined"
                 fullWidth
+                isVatTouched={touched?.member?.vat}
+                setFieldTouched={setFieldTouched}
                 required
                 value={values?.member?.vat}
                 onChange={onChangeVAT}

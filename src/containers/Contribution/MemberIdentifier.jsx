@@ -20,6 +20,7 @@ const MemberIdentifier = (props) => {
     errors,
     touched,
     setFieldValue,
+    setValues,
     setFieldTouched,
     resetForm,
     title = t('CONTRIBUTION')
@@ -32,13 +33,17 @@ const MemberIdentifier = (props) => {
 
   const onChangeVAT = (params) => {
     const { vat, isPhisical, valid } = params
-    setFieldValue('member.isphisical', isPhisical, false)
-    setFieldValue('member.vatvalid', valid, false)
-    setFieldValue('member.exists', false, false)
-    setFieldValue('member.vat', vat)
-    if (vat !== '') {
-      setFieldTouched('member.vat', true)
+    const tmpValues = {
+      ...values,
+      member: {
+        ...values.member,
+        vat: vat,
+        isphisical: isPhisical,
+        vatvalid: valid,
+        exists: false
+      }
     }
+    setValues(tmpValues)
   }
 
   return (
@@ -104,6 +109,8 @@ const MemberIdentifier = (props) => {
                 label={t('VAT_LABEL')}
                 variant="outlined"
                 fullWidth
+                isVatTouched={touched?.member.vat}
+                setFieldTouched={setFieldTouched}
                 required
                 value={values?.member?.vat}
                 onChange={onChangeVAT}

@@ -34,9 +34,6 @@ const HolderIdentifier = (props) => {
       }
     }
     setValues(tmpValues)
-    if(!touched?.holder?.vat){
-      setFieldTouched('holder.vat',true)  
-    }
   }
 
   const handleChangePreviousHolder = ({ option }) => {
@@ -57,6 +54,8 @@ const HolderIdentifier = (props) => {
           label={t('VAT_LABEL')}
           variant="outlined"
           fullWidth
+          isVatTouched={touched?.holder?.vat}
+          setFieldTouched={setFieldTouched}
           required
           autoFocus={true}
           value={values?.holder?.vat}
