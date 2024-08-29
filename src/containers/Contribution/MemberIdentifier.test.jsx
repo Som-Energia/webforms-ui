@@ -9,9 +9,10 @@ import {
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { vi } from 'vitest';
 
+
 vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
-describe('Generation Form Review', () => {
+describe('Member Identifier', () => {
   const mockValues = {
     member: {
       is_member: true
@@ -20,70 +21,104 @@ describe('Generation Form Review', () => {
 
   const mockValuesNoMember = {
     member: {
-      is_member: false
+      is_member: false,
+      vat: ''
     }
   }
 
   const mockErrorsVat = {
-    member:{
-        vat: "VAT_HAS_AN_ERROR"
+    member: {
+      vat: "VAT_HAS_AN_ERROR"
     }
   }
 
   const mockErrorsVatValid = {
-    member:{
-        vatvalid: "VAT IS NOT VALID"
+    member: {
+      vatvalid: "VAT IS NOT VALID"
     }
   }
 
   const mockErrorsMemberExists = {
-    member:{
-        exists: "MEMBER_ALREADY_EXISTS"
+    member: {
+      exists: "MEMBER_ALREADY_EXISTS"
     }
   }
 
   const mockTouched = {
-    member:{
-        vat:true
+    member: {
+      vat: true
     }
   }
   const VAT = '40323835M'
   const getById = queryByAttribute.bind(null, 'id')
   const mockSetFieldValue = vi.fn()
   const mocksetFieldTouched = vi.fn()
+  const mockSetValues = vi.fn()
   test('Should call setFieldValue when choose member', async () => {
     const dom = render(
-      <MemberIdentifier
-        resetForm={vi.fn()}
-        setFieldValue={mockSetFieldValue}
-      />
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <MemberIdentifier
+                values={mockValues}
+                resetForm={vi.fn()}
+                setFieldValue={mockSetFieldValue}
+              />
+            }
+          />
+        </Routes>
+      </Router>
     )
 
-    const memberButton = getById(dom.container, 'member_choose_yes')
+    const memberButton = getById(dom.container, 'member-choose-yes')
     fireEvent.click(memberButton)
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.is_member', true)
   })
 
   test('Should call setFieldValue when choose no member', async () => {
     const dom = render(
-      <MemberIdentifier
-        resetForm={vi.fn()}
-        setFieldValue={mockSetFieldValue}
-      />
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <MemberIdentifier
+                values={mockValues}
+                resetForm={vi.fn()}
+                setFieldValue={mockSetFieldValue}
+              />
+            }
+          />
+        </Routes>
+      </Router>
     )
 
-    const memberButton = getById(dom.container, 'member_choose_no')
+    const memberButton = getById(dom.container, 'member-choose-no')
     fireEvent.click(memberButton)
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.is_member', false)
   })
 
   test('Should call setFieldTouched when change the value of vat', async () => {
     const dom = render(
-      <MemberIdentifier
-        resetForm={vi.fn()}
-        setFieldTouched={mocksetFieldTouched}
-        setFieldValue={mockSetFieldValue}
-      />
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<MemberIdentifier
+              values={mockValuesNoMember}
+              resetForm={vi.fn()}
+              setFieldTouched={mocksetFieldTouched}
+              setFieldValue={mockSetFieldValue}
+              setValues={mockSetValues}
+            />}
+          />
+        </Routes>
+      </Router>
     )
 
     const vatTextField = getById(dom.container, 'vat')
@@ -136,6 +171,7 @@ describe('Generation Form Review', () => {
                 values={mockValuesNoMember}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
+                setValues={mockSetValues}
               />
             }
           />
@@ -166,6 +202,7 @@ describe('Generation Form Review', () => {
                 values={mockValuesNoMember}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
+                setValues={mockSetValues}
                 errors={mockErrorsVat}
                 touched={mockTouched}
               />
@@ -201,6 +238,7 @@ describe('Generation Form Review', () => {
                 values={mockValuesNoMemberVatNoValid}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
+                setValues={mockSetValues}
                 errors={mockErrorsVatValid}
                 touched={mockTouched}
               />
@@ -233,6 +271,7 @@ describe('Generation Form Review', () => {
                 values={mockValuesNoMember}
                 setFieldTouched={mocksetFieldTouched}
                 setFieldValue={mockSetFieldValue}
+                setValues={mockSetValues}
                 errors={mockErrorsMemberExists}
                 touched={mockTouched}
               />

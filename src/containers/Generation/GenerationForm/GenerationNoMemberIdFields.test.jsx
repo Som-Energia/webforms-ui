@@ -24,60 +24,73 @@ describe('Generation Form Review', () => {
 
   const mockValuesEnabeldAndCheckedZone = {
     member: {
+      exists: undefined,
+      has_generation_enabled_zone: true,
       is_member: false,
+      isphisical: false,
       postal_code_checked: true,
-      has_generation_enabled_zone: true
+      vat: ""
     }
   }
 
   const VAT = '40323835M'
   const POSTAL_CODE = '25290'
+
+  const mockExpect = {
+    member: {
+      ...mockValuesEnabeldAndCheckedZone.member,
+      vat: VAT,
+      vatvalid: false
+    }
+  }
   const getById = queryByAttribute.bind(null, 'id')
   const mockSetFieldValue = vi.fn()
   const mocksetFieldTouched = vi.fn()
+  const mockSetValues = vi.fn()
 
-  test('Should call setFieldValue when change postal code', async () => {
-    
-
-    const dom = render(
-      <GenerationNoMemberIdFields
-        resetForm={vi.fn()}
-        values={mockValuesPostalCode}
-        setFieldValue={mockSetFieldValue}
-        setFieldTouched={mocksetFieldTouched}
-        setErrors={vi.fn()}
-        isTesting={true}
-      />
-    )
-
-    const postalCodeTextField = getById(dom.container, 'input_postalcode')
-    React.act(() => {
-      fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
-    })
-
-    expect(mockSetFieldValue).toHaveBeenCalledWith(
-      'member.postal_code',
-      POSTAL_CODE
-    )
-  })
+   test('Should call setFieldValue when change postal code', async () => {
+     
+ 
+     const dom = render(
+       <GenerationNoMemberIdFields
+         resetForm={vi.fn()}
+         values={mockValuesPostalCode}
+         setFieldValue={mockSetFieldValue}
+         setFieldTouched={mocksetFieldTouched}
+         setErrors={vi.fn()}
+         isTesting={true}
+       />
+     )
+ 
+     const postalCodeTextField = getById(dom.container, 'input_postalcode')
+     React.act(() => {
+       fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
+     })
+ 
+     expect(mockSetFieldValue).toHaveBeenCalledWith(
+       'member.postal_code',
+       POSTAL_CODE
+     )
+   })
 
   test('Should call setFieldValue when change vat', async () => {
+
     const dom = render(
       <GenerationNoMemberIdFields
         resetForm={vi.fn()}
         values={mockValuesEnabeldAndCheckedZone}
         setFieldValue={mockSetFieldValue}
         setFieldTouched={mocksetFieldTouched}
+        setValues={mockSetValues}
         setErrors={vi.fn()}
         isTesting={true}
       />
     )
 
-    const vatTextField = getById(dom.container, 'vat')
+    const vatTextField = getById(dom.container, 'pastel')
     React.act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
-    
-    expect(mockSetFieldValue).toHaveBeenCalledWith('member.vat', VAT)
+    expect(mockSetValues).toHaveBeenLastCalledWith(mockExpect)
   })
 })

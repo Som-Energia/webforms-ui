@@ -44,7 +44,7 @@ describe('Generation Form Review', () => {
       />
     )
 
-    const memberButton = getById(dom.container, 'member_choose_yes')
+    const memberButton = getById(dom.container, 'member-choose-yes')
     fireEvent.click(memberButton)
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.is_member', true)
   })
@@ -57,7 +57,7 @@ describe('Generation Form Review', () => {
       />
     )
 
-    const memberButton = getById(dom.container, 'member_choose_no')
+    const memberButton = getById(dom.container, 'member-choose-no')
     fireEvent.click(memberButton)
     expect(mockSetFieldValue).toHaveBeenCalledWith('member.is_member', false)
   })
