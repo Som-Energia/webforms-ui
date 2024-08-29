@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-//import preval from 'preval.macro'
 
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -41,8 +40,6 @@ const Home = (props) => {
   const { version } = props
   const navigate = useNavigate()
 
- //const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
-
   return (
     <Box sx={{ display: 'flex', backgroundColor: '#f2f2f2' }}>
       <AppBar position="fixed" color="inherit">
@@ -62,9 +59,6 @@ const Home = (props) => {
         </Toolbar>
       </AppBar>
       <Container sx={{ flexGrow: 1, padding: 12 }}>
-        {/* <Box sx={{ fontSize: '0.85rem', fontWeight: '500' }}>
-          Build date: {dateTimeStamp}
-        </Box> */}
         <Box sx={{ fontSize: '0.85rem', fontWeight: '500' }}>
           Last commit hash: {version}
         </Box>
