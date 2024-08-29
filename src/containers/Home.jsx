@@ -53,7 +53,6 @@ const Home = (props) => {
                 pl: '10px'
               }}
               component="body1">
-              Nous Peatges Edition
             </Typography>
           </Typography>
         </Toolbar>
