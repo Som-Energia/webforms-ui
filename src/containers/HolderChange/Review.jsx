@@ -24,7 +24,7 @@ const sectionTitleStyles = {
 
 const Review = (props) => {
   const { t } = useTranslation()
-  const { values, setFieldValue, isMemberMandatoryForHolderchange } = props
+  const { values, setFieldValue } = props
 
   const [open, setOpen] = useState(false)
 
@@ -67,6 +67,11 @@ const Review = (props) => {
       </Box>
     )
   }
+  const member = values?.member?.become_member
+    ? `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`
+    : values?.holder?.ismember
+    ? values?.holder.vat
+    : values?.member?.vat
 
   return (
     <>
@@ -103,15 +108,9 @@ const Review = (props) => {
                 value={t('SPECIAL_CASES_ELECTRODEP')}
               />
             )}
-            <ReviewField
-              label={t('RELATED_MEMBER')}
-              value={
-                (values?.member?.become_member &&
-                  `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`) ||
-                (values?.holder?.ismember && values?.holder.vat) ||
-                values?.member?.vat
-              }
-            />
+            {member !== undefined && (
+              <ReviewField label={t('RELATED_MEMBER')} value={member} />
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography sx={sectionTitleStyles} variant="h6">
@@ -202,7 +201,7 @@ const Review = (props) => {
           sx={{ mt: '24px', ml: 0, mr: '32px', mb: '24px' }}
         />
 
-        {isMemberMandatoryForHolderchange === false && (
+        { member === undefined && (
           <FormHelperText
             dangerouslySetInnerHTML={{
               __html: t('HOLDERCHANGE_REVIEW_TEXT')
