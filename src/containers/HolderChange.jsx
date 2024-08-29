@@ -199,52 +199,64 @@ function HolderChange(props) {
       })
     }),
     Yup.object().shape({
-      especial_cases: Yup.object().shape({
-        attachments: Yup.object()
-          .when('reason_death', {
-            is: true,
-            then: Yup.object().shape({
-              death: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+      especial_cases: Yup.object()
+        .shape({
+          attachments: Yup.object()
+            .when('reason_death', {
+              is: true,
+              then: Yup.object().shape({
+                death: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+              })
             })
-          })
-          .when('reason_electrodep', {
-            is: true,
-            then: Yup.object().shape({
-              medical: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED')),
-              resident: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+            .when('reason_electrodep', {
+              is: true,
+              then: Yup.object().shape({
+                medical: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+                resident: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+              })
             })
-          })
-          .when('reason_merge', {
-            is: true,
-            then: Yup.object().shape({
-              merge: Yup.array()
-                .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-            })
-          }),
-        reason_default: Yup.bool(),
-        reason_death: Yup.bool(),
-        reason_merge: Yup.bool(),
-        reason_electrodep: Yup.bool(),
-      }).test(
-        'At least one checked',
-        t('AT_LEAST_ONE_CHANGE_REASON'),
-        function () {
-          const { reason_death, reason_default, reason_merge, reason_electrodep } = this.parent.especial_cases
-          if (reason_death || reason_default || reason_merge || reason_electrodep)
-            return true
-        }
-      )
+            .when('reason_merge', {
+              is: true,
+              then: Yup.object().shape({
+                merge: Yup.array()
+                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
+                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
+              })
+            }),
+          reason_default: Yup.bool(),
+          reason_death: Yup.bool(),
+          reason_merge: Yup.bool(),
+          reason_electrodep: Yup.bool()
+        })
+        .test(
+          'At least one checked',
+          t('AT_LEAST_ONE_CHANGE_REASON'),
+          function () {
+            const {
+              reason_death,
+              reason_default,
+              reason_merge,
+              reason_electrodep
+            } = this.parent.especial_cases
+            if (
+              reason_death ||
+              reason_default ||
+              reason_merge ||
+              reason_electrodep
+            )
+              return true
+          }
+        )
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
@@ -450,10 +462,11 @@ function HolderChange(props) {
     legal_person_accepted: false
   }
 
-
   const validateStep = (values, step) => {
-    const stepToValidate = (step !== null && step !== undefined) ? step : activeStep
-    validationSchemas[stepToValidate].validate(values)
+    const stepToValidate =
+      step !== null && step !== undefined ? step : activeStep
+    validationSchemas[stepToValidate]
+      .validate(values)
       .then(() => {
         setIsValid(true)
       })
@@ -471,106 +484,117 @@ function HolderChange(props) {
             initialValues={initialValues}
             validationSchema={validationSchemas[activeStep]}
             validateOnMount={true}
-            validate={(values => validateStep(values, activeStep))}
+            validate={(values) => validateStep(values, activeStep)}
             onSubmit={handleSubmit}>
             {(props) => (
-                <>
-                  <Box className="ov-theme">
-                    <Form
-                      sx={{ position: 'relative' }}
-                      noValidate
-                      autoComplete="off">
-                      {
-                        <Paper
-                          elevation={0}
-                          sx={{
-                            mt: 4,
-                            mb: 4,
-                            width: '100%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            backgroundColor: 'transparent'
-                          }}>
-                          <LinearProgress
-                            variant={sending ? 'indeterminate' : 'determinate'}
-                            value={(activeStep / MAX_STEP_NUMBER) * 100}
-                          />
-                          <>
-                            {completed ? (
-                              <Box className="step-body">
-                                {error ? (
-                                  <Failure error={error} />
-                                ) : (
-                                  <Success result={result} />
-                                )}
-                              </Box>
-                            ) : (
-                              getActiveStep(props)
-                            )}
-                          </>
-                          <Box mx={0} mt={2} mb={3}>
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between'
-                              }}>
-                              {result?.contract_number === undefined && (
-                                <PrevButton
-                                  disabled={activeStep === 0 || sending}
-                                  onClick={() => prevStep(props.values, props, (step) => validateStep(props.values, step, props.setErrors))}
-                                  title={t('PAS_ANTERIOR')}
-                                />
+              <>
+                <Box className="ov-theme">
+                  <Form
+                    sx={{ position: 'relative' }}
+                    noValidate
+                    autoComplete="off">
+                    {
+                      <Paper
+                        elevation={0}
+                        sx={{
+                          mt: 4,
+                          mb: 4,
+                          width: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          backgroundColor: 'transparent'
+                        }}>
+                        <LinearProgress
+                          variant={sending ? 'indeterminate' : 'determinate'}
+                          value={(activeStep / MAX_STEP_NUMBER) * 100}
+                        />
+                        <>
+                          {completed ? (
+                            <Box className="step-body">
+                              {error ? (
+                                <Failure error={error} />
+                              ) : (
+                                <Success result={result} />
                               )}
-                              {(!completed && !isLastStep) ? (
-                                <NextButton
-                                  onClick={() => nextStep(props.values, props, (step) => validateStep(props.values, step))}
-                                  disabled={sending || !isValid}
-                                  title={t('SEGUENT_PAS')}
-                                />
-                              ) : null}
-                              {(!completed && isLastStep) ? (
-                                <SubmitButton
-                                  loading={sending}
-                                  startIcon={<SendIcon />}
-                                  title={t('SEND')}
-                                  disabled={sending || !isValid}
-                                />
-                              ) : null}
                             </Box>
+                          ) : (
+                            getActiveStep(props)
+                          )}
+                        </>
+                        <Box mx={0} mt={2} mb={3}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between'
+                            }}>
+                            {result?.contract_number === undefined && (
+                              <PrevButton
+                                disabled={activeStep === 0 || sending}
+                                onClick={() =>
+                                  prevStep(props.values, props, (step) =>
+                                    validateStep(
+                                      props.values,
+                                      step,
+                                      props.setErrors
+                                    )
+                                  )
+                                }
+                                title={t('PAS_ANTERIOR')}
+                              />
+                            )}
+                            {!completed && !isLastStep ? (
+                              <NextButton
+                                onClick={() =>
+                                  nextStep(props.values, props, (step) =>
+                                    validateStep(props.values, step)
+                                  )
+                                }
+                                disabled={sending || !isValid}
+                                title={t('SEGUENT_PAS')}
+                              />
+                            ) : null}
+                            {!completed && isLastStep ? (
+                              <SubmitButton
+                                loading={sending}
+                                startIcon={<SendIcon />}
+                                title={t('SEND')}
+                                disabled={sending || !isValid}
+                              />
+                            ) : null}
                           </Box>
-                          <Box mx={0} mt={2} mb={3}>
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between'
-                              }}>
-                              {activeStep === 4 &&
-                                isHomeOwnerCommunityNif(
-                                  props.values?.holder?.vat
-                                ) && (
-                                  <>
-                                    <Box mt={3}>
-                                      <Alert severity="warning">
-                                        <Typography
-                                          variant="body1"
-                                          dangerouslySetInnerHTML={{
-                                            __html: t('CIF_COMMUNITY_OWNERS')
-                                          }}
-                                        />
-                                      </Alert>
-                                    </Box>
-                                  </>
-                                )}
-                            </Box>
+                        </Box>
+                        <Box mx={0} mt={2} mb={3}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between'
+                            }}>
+                            {activeStep === 4 &&
+                              isHomeOwnerCommunityNif(
+                                props.values?.holder?.vat
+                              ) && (
+                                <>
+                                  <Box mt={3}>
+                                    <Alert severity="warning">
+                                      <Typography
+                                        variant="body1"
+                                        dangerouslySetInnerHTML={{
+                                          __html: t('CIF_COMMUNITY_OWNERS')
+                                        }}
+                                      />
+                                    </Alert>
+                                  </Box>
+                                </>
+                              )}
                           </Box>
-                        </Paper>
-                      }
-                    </Form>
-                  </Box>
-                  {showInspector && <DisplayFormikState {...props} />}
-                </>
-              )
-            }
+                        </Box>
+                      </Paper>
+                    }
+                  </Form>
+                </Box>
+                {showInspector && <DisplayFormikState {...props} />}
+              </>
+            )}
           </Formik>
         </Container>
       </Box>
