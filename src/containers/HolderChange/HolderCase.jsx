@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 
-function BecomeMember(props) {
+function HolderCase(props) {
   const { t } = useTranslation()
   const { setFieldValue } = props
 
@@ -48,4 +48,4 @@ function BecomeMember(props) {
   )
 }
 
-export default BecomeMember
+export default HolderCase

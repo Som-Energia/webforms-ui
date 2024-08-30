@@ -448,7 +448,7 @@ function HolderChange(props) {
     payment: {
       iban: '',
       sepa_accepted: false,
-      voluntary_cent: ''
+      voluntary_cent: undefined
     },
     especial_cases: {
       reason_default: true,
