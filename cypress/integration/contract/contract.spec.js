@@ -128,7 +128,6 @@ describe('Contract', () => {
 
     it('Contract with 2.0TD', function () {
       const moreThan15Kw = false
-      const have_installation=false
 
       cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
 
