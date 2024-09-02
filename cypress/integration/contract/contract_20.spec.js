@@ -33,7 +33,9 @@ describe('Contract', () => {
       const moreThan15Kw = false
       const powers = [this.data.power, this.data.power2]
 
-      cy.enterPowerFare(this.data.phase, moreThan15Kw, powers)
+      cy.choosePhase(this.data.phase)
+
+      cy.enterPowerFare(moreThan15Kw, powers)
 
       cy.chooseTariff(this.data.isIndexed)
 
