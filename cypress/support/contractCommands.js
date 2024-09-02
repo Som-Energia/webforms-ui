@@ -19,9 +19,9 @@ Cypress.Commands.add('identifyGenerationCanJoin', (memberNumber, memberVat) => {
   cy.intercept('GET', '/data/generationkwh/can_join/**', {
     statusCode: 200,
     body: {
-      "data": true,
-      "state": true,
-      "status": "ONLINE"
+      data: true,
+      state: true,
+      status: 'ONLINE'
     }
   }).as('canJoin')
 
@@ -32,16 +32,13 @@ Cypress.Commands.add('identifyGenerationCanJoin', (memberNumber, memberVat) => {
 
   cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
-  cy.wait('@canJoin')
-    .its('response.statusCode')
-    .should('be.oneOf', [200, 304])
+  cy.wait('@canJoin').its('response.statusCode').should('be.oneOf', [200, 304])
 })
 
-
 Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
-
   cy.get('#cups')
-    .clear().type(cups)
+    .clear()
+    .type(cups)
     .should('have.value', cups)
     // Extra validation is done when bluring so blur before continue
     .blur()
@@ -89,11 +86,15 @@ Cypress.Commands.add('enterSupplyPointData', (supplyPoint) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
-  if (phase !== undefined) {
+/* Cypress.Commands.add('phaseChoice', (phase, hasNoService) => {
+  console.log("HAS NO SERVICE", hasNoService)
+  if (phase !== undefined && hasNoService) {
     cy.get('#phases').click()
     cy.get(`[data-value="${phase}"]`).click()
   }
+}) */
+
+Cypress.Commands.add('enterPowerFare', (moreThan15Kw, powers) => {
 
   cy.get('[data-cy="moreThan15Kw"]')
     .get(`[data-value="${moreThan15Kw}"]`)
@@ -110,9 +111,7 @@ Cypress.Commands.add('enterPowerFare', (phase, moreThan15Kw, powers) => {
 })
 
 Cypress.Commands.add('chooseTariff', (isIndexed) => {
-  cy.get('[data-cy="tariffMode"]')
-    .get(`[data-value="${isIndexed}"]`)
-    .click()
+  cy.get('[data-cy="tariffMode"]').get(`[data-value="${isIndexed}"]`).click()
 
   cy.get('[data-cy=next]').click()
 })

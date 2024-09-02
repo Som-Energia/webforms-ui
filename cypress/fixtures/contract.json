@@ -45,6 +45,8 @@
   "power": 4.4,
   "power2": 8,
   "power3": 10,
+  "power4": 12,
+  "power5": 14,
   "power6": 16,
   "phase": "mono",
   "fare": "nodh",
@@ -61,6 +63,7 @@
   },
   "selfConsumption": {
     "have_installation": true,
+    "have_no_installation": false,
     "cau": "ES 0353 5010 2861 5353 EE 0F A000",
     "collective_installation": true,
     "installation_power": "3.5",
