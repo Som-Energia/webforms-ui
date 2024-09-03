@@ -178,6 +178,22 @@ Cypress.Commands.add('noIncrementalPowers', (phase, moreThan15Kw, powers) => {
   cy.contains('La potencia de este periodo no puede ser inferior al anterior')
 })
 
+Cypress.Commands.add('no30Power', (phase, moreThan15Kw, powers) => {
+  //cy.choosePhase(phase)
+  cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
+
+  powers.forEach((power, index) => {
+    cy.get(power)
+    cy.get(`[name="contract.power${index > 0 ? index + 1 : ''}"]`)
+      .clear()
+      .type(power)
+      .should('have.value', power)
+      .blur()
+  })
+
+  cy.contains('Alguno de los periodos debe ser superior')
+})
+
 Cypress.Commands.add('identifyOwner', (ownerVat, previousHolder) => {
   cy.intercept('GET', '/check/vat/exists/**').as('checkVat')
 
