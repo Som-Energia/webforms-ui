@@ -182,95 +182,35 @@ describe('Contract', () => {
     })
   })
 
-
-/*
   describe('Wrong power', function () {
     beforeEach(function () {
-      cy.intercept('GET', '/data/soci/*').as('checkMember')
-
-      cy.get('#memberNumber')
-        .clear()
-        .type(this.data.member.number)
-        .should('have.value', this.data.member.number)
-
-      cy.get('#vat')
-        .clear()
-        .type(this.data.member.vat)
-        .should('have.value', this.data.member.vat)
-
-      cy.wait('@checkMember')
-
-      cy.get('[data-cy=next]').click()
-
-      cy.intercept('GET', '/check/cups/*').as('checkCups')
-
-      cy.get('#cups')
-        .clear()
-        .type(this.data.supplyPoint.cups)
-        .should('have.value', this.data.supplyPoint.cups)
-
-      cy.wait('@checkCups')
-      // https://github.com/cypress-io/cypress/issues/9549
-      // cy.wait(2000)
-
-      cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
-
-      cy.get('[data-cy=next]').click()
-
-      cy.get('#supply_point_address')
-        .clear()
-        .type(this.data.supplyPoint.address)
-        .should('have.value', this.data.supplyPoint.address)
-
-      cy.get('#supply_point_number')
-        .clear()
-        .type(this.data.supplyPoint.number)
-        .should('have.value', this.data.supplyPoint.number)
-
-      cy.get('#supply_point_postal_code')
-        .clear()
-        .type(this.data.supplyPoint.postalCode)
-        .should('have.value', this.data.supplyPoint.postalCode)
-
-      cy.get('#supply_point_state').click()
-      cy.get(`[data-value="${this.data.supplyPoint.state}"]`).click()
-
-      cy.get('#supply_point_city').click()
-      cy.get(`[data-value="${this.data.supplyPoint.city}"]`).click()
-
-      cy.get('#supply_point_is_housing').click()
-      cy.get(`[data-value="${this.data.supplyPoint.isHousing}"]`).click()
-
-      cy.get('#supply_point_cnae').should(
-        'have.value',
-        this.data.supplyPoint.cnae
+      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.identifySupplyPoint(
+        this.data.supplyPoint.cups,
+        this.data.supplyPoint.hasService
       )
-
-      cy.get('[name="supply_point_accepted"]').click()
-      cy.get('[data-cy=accept]').click()
-
-      cy.get('[data-cy=next]').click()
+      cy.enterSupplyPointData(this.data.supplyPoint)
     })
 
     it('Contract 3.0A less than 15kW', function () {
-      cy.get('#rate').click()
-      cy.get(`[data-value="${this.data.fare30A}"]`).click()
+      const moreThan15Kw = true
 
-      cy.get('#power')
-        .type(this.data.power)
-        .should('have.value', this.data.power)
+      cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
 
-      cy.get('#power2')
-        .type(this.data.power3)
-        .should('have.value', this.data.power3)
+      const powers = [
+        this.data.power,
+        this.data.power,
+        this.data.power,
+        this.data.power,
+        this.data.power,
+        this.data.power
+     ]
 
-      cy.get('#power3')
-        .type(this.data.power3)
-        .should('have.value', this.data.power3)
-
-      cy.contains('Alguno de los periodos debe ser superior')
+      cy.no30Power(this.data.phase, moreThan15Kw, powers)
     })
+  })
 
+/*
     it('Contract 2.0A more than 10kW', function () {
       cy.get('#rate').click()
       cy.get(`[data-value="${this.data.fare20A}"]`).click()
@@ -631,5 +571,5 @@ describe('Contract', () => {
       cy.get('[data-cy=next]').click()
     })
   })
-    */
+*/
 })
