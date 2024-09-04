@@ -210,36 +210,26 @@ describe('Contract', () => {
     })
   })
 
-/*
-    it('Contract 2.0A more than 10kW', function () {
-      cy.get('#rate').click()
-      cy.get(`[data-value="${this.data.fare20A}"]`).click()
+  describe('Wrong fields', function () {
+    it('Check fields error detection', function() {
+    let memberNumber = this.data.member.number
+    let memberVat = this.data.member.badVat
 
-      cy.get('#power')
-        .type(this.data.power2)
-        .should('have.value', this.data.power2)
-        .blur()
-
-      cy.contains('La potencia debe ser inferior a')
-    })
-  })
-
-  it('Check some fields error detection: VAT, CUPS, email, IBAN', function () {
-    cy.intercept('GET', '/data/soci/*').as('checkMember')
+    cy.intercept('GET', '/data/soci/**').as('checkMember')
 
     cy.get('#memberNumber')
       .clear()
-      .type(this.data.member.number)
-      .should('have.value', this.data.member.number)
+      .type(memberNumber)
+      .should('have.value', memberNumber)
 
-    cy.get('#vat')
-      .clear()
-      .type(this.data.member.badVat)
-      .should('have.value', this.data.member.badVat)
+    cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
     cy.wait('@checkMember')
+      .its('response.statusCode')
+      .should('be.oneOf', [200, 304])
 
     cy.contains('No se ha encontrado ningún socio/a ')
+    cy.get('[data-cy=next]').should('be.disabled')
 
     cy.get('#vat')
       .clear()
@@ -260,7 +250,7 @@ describe('Contract', () => {
       .type(this.data.supplyPoint.invalidCups)
       .should('have.value', this.data.supplyPoint.invalidCups)
       .blur()
-    cy.contains('Este CUPS está actualmente en un proceso')
+    cy.contains('Actualmente este CUPS está en un proceso')
 
     cy.get('#cups')
       .clear()
@@ -312,12 +302,14 @@ describe('Contract', () => {
 
     cy.get('[data-cy=next]').click()
 
-    cy.get('#rate').click()
-    cy.get(`[data-value="${this.data.fare20A}"]`).click()
+    const moreThan15Kw = false
+    const powers = [this.data.power, this.data.power2]
 
-    cy.get('#power').type(this.data.power).should('have.value', this.data.power)
+    cy.enterPowerFare(moreThan15Kw, powers)
 
-    cy.get('[data-cy=next]').click()
+    cy.chooseTariff(this.data.isIndexed)
+
+    cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 
     cy.get('[name="holder.vat"]')
       .type(this.data.holder.vat)
@@ -359,7 +351,7 @@ describe('Contract', () => {
       .should('have.value', this.data.holder.badEmail)
       .blur()
 
-    cy.contains('No has especificado un correo electrónico correcto')
+    cy.contains('No has introducido el correo electrónico')
 
     cy.get('[name="holder.email"]')
       .clear()
@@ -371,7 +363,7 @@ describe('Contract', () => {
       .should('have.value', this.data.holder.badEmail)
       .blur()
 
-    cy.contains('No has repetido el correo electrónico correctamente')
+    cy.contains('No has repetido correctamente el correo electrónico')
 
     cy.get('[name="holder.email2"]')
       .clear()
@@ -384,8 +376,6 @@ describe('Contract', () => {
 
     cy.get('#holder_lang').click()
     cy.get('[data-value="ca_ES"]').click()
-
-    cy.get('[name="privacy_policy_accepted"]').click()
 
     cy.get('[data-cy=next]').click()
 
@@ -409,8 +399,12 @@ describe('Contract', () => {
     cy.get('[name="payment.sepa_accepted"]').click()
     cy.get('[data-cy=accept]').click()
     cy.get('[data-cy=next]').click()
-  })
 
+    cy.reviewAndConfirmData()
+
+    cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+  })
+/*
   describe('Juridic Person', function () {
     beforeEach(function () {
       cy.get('#memberNumber')
@@ -570,6 +564,6 @@ describe('Contract', () => {
 
       cy.get('[data-cy=next]').click()
     })
+      */
   })
-*/
 })
