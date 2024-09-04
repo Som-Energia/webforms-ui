@@ -24,11 +24,7 @@ const TermsDialog = (props) => {
       >
         <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
         <DialogContent dividers={true}>
-          <DialogContentText
-            tabIndex={-1}
-          >
             {props.children}
-          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button data-cy="decline" sx={{color:'secondary.dark'}} onClick={onClose} id="terms-dialog-decline-btn">
