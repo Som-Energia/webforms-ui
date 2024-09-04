@@ -37,7 +37,7 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
       setAssignments(result?.data)
     }
     catch (e) {
-      console.log("NO s'han pogut trobar les assignacions")
+      console.log("No s'han pogut trobar les assignacions")
     }
   }
 

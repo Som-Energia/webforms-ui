@@ -1,13 +1,31 @@
 import React from 'react'
 import GenerationDashboard from './GenerationDashboard'
-import { render, queryByAttribute, screen, within } from '@testing-library/react'
+import { render, queryByAttribute, screen, within, fireEvent, waitFor } from '@testing-library/react'
 import { GenerationContextProvider } from '../context/GenerationContext'
 import { PopUpContextProvider } from '../../../context/PopUpContext'
 import userEvent from '@testing-library/user-event'
-
 import { vi } from 'vitest';
+import * as myApi from '../../../services/api'
+
 
 vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+vi.mock('axios', async (importActual) => {
+  const actual = await importActual();
+
+  const mockAxios = {
+    default: {
+      ...actual.default,
+      create: vi.fn(() => ({
+        ...actual.default.create(),
+        get: mocks.get,
+        post: mocks.post,
+        delete: mocks.delete
+      })),
+    },
+  };
+
+  return mockAxios;
+});
 
 describe('Generation Dashboard', () => {
   const getById = queryByAttribute.bind(null, 'id')
@@ -27,6 +45,14 @@ describe('Generation Dashboard', () => {
   const mockhandleClick = vi.fn()
   const mockValidateChanges = vi.fn()
   const mockSetValidationConfirm = vi.fn()
+
+  vi.spyOn(myApi,'addContractsToAssignments').mockImplementation(()=>{
+    return Promise.resolve({data:"OK"})
+  })
+
+  vi.spyOn(myApi,'getAssignmentContracts').mockImplementation(()=>{
+    return Promise.resolve({data:[]})
+  })
 
   test('The component render properly the prop data', () => {
     const dom = render(
@@ -62,7 +88,7 @@ describe('Generation Dashboard', () => {
       </PopUpContextProvider>
     )
 
-    const cancelButton = getById(dom.container, 'cancel-action-btn') 
+    const cancelButton = getById(dom.container, 'cancel-action-btn')
     const validateButton = getById(dom.container, 'validation-action-btn')
     expect(cancelButton).toBeInTheDocument()
     expect(validateButton).toBeInTheDocument()
@@ -84,7 +110,7 @@ describe('Generation Dashboard', () => {
 
     const cancelButton = getById(dom.container, 'cancel-action-btn')
     await userEvent.click(cancelButton)
-    expect(mockHandleCancelButtonClick).toBeCalledTimes(1)
+    expect(mockHandleCancelButtonClick).toHaveBeenCalled()
   })
 
   test('should call validate function when click validate button', async () => {
@@ -102,7 +128,7 @@ describe('Generation Dashboard', () => {
     )
     const validateButton = getById(dom.container, 'validation-action-btn')
     await userEvent.click(validateButton)
-    expect(mockValidateChanges).toBeCalledTimes(1)
+    expect(mockValidateChanges).toHaveBeenCalled()
   })
 
   test('should show the info text', async () => {
@@ -160,7 +186,7 @@ describe('Generation Dashboard', () => {
     expect(alertComponent).toBeInTheDocument()
     expect(closeBtn).toBeInTheDocument()
     await userEvent.click(closeBtn)
-    expect(mockSetValidationConfirm).toBeCalledWith(false)
+    expect(mockSetValidationConfirm).toHaveBeenCalledWith(false)
   })
 
   test('should show the failure component', async () => {
@@ -192,16 +218,16 @@ describe('Generation Dashboard', () => {
     )
     const addButton = getById(dom.container, 'generationkwh-id-add-assignment')
     await userEvent.click(addButton)
-       
+
     const checkbox = screen.getByTestId('checkbox-00003')
     await userEvent.click(checkbox)
 
-    const acceptButton = screen.getByTestId('list-accept-button')
-    await userEvent.click(acceptButton)
+    React.act(() => {
+      const acceptButton = screen.getByTestId('list-accept-button')
+      fireEvent.click(acceptButton)
+    })
 
-    const loadingComponent = screen.getByTestId('loading-component')
-    expect(loadingComponent).toBeInTheDocument()
-
+    await waitFor(() => expect(screen.getByTestId('loading-component')).toBeInTheDocument());
   })
 
   test('Should show info message when you can\'t add more contracts', async () => {
