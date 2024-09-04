@@ -23,7 +23,9 @@ const LegalText = (props) => {
         '& .sagnia': {
           pl: '1rem'
         }
-      }}>
+      }}
+      component='div'
+    >
       <TextLoader {...props} />
     </Typography>
   )
