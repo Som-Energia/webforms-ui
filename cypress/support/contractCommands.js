@@ -319,3 +319,88 @@ Cypress.Commands.add('reviewAndConfirmData', () => {
   cy.get('[name="particular_terms_accepted"]').click()
   cy.get('[name="privacy_policy_accepted"]').click()
 })
+
+Cypress.Commands.add('juridicPersonalData', (datajuridic, dataholder) => {
+  cy.intercept('GET', '/check/vat/exists/*',{
+    statusCode : 200,
+    body: 
+    {data: {
+        exists: true,
+        is_member: true,
+        is_selfconsumption_owner: false,
+        valid: true
+    },
+    state: true,
+    status: "ONLINE"
+  }
+  }).as('checkVat')
+
+  cy.get('[name="holder.name"]')
+    .type(datajuridic.name)
+    .should('have.value', datajuridic.name)
+
+  cy.get('[name="holder.proxyname"]')
+    .type(datajuridic.proxyname)
+    .should('have.value', datajuridic.proxyname)
+
+  cy.get('[name="holder.proxynif"]')
+    .type(datajuridic.proxynif)
+    .should('have.value', datajuridic.proxynif)
+
+  cy.wait('@checkVat')
+  cy.get('[name="holder.address"]')
+    .type(dataholder.address)
+    .should('have.value', dataholder.address)
+
+  cy.get('[name="holder.number"]')
+    .type(dataholder.number)
+    .should('have.value', dataholder.number)
+
+  cy.get('[name="holder.postal_code"]')
+    .type(dataholder.postalCode)
+    .should('have.value', dataholder.postalCode)
+
+  cy.get('#holder_state').click()
+  cy.get(`[data-value="${dataholder.stateCode}"]`).click()
+
+  cy.get('#holder_city').click()
+  cy.get(`[data-value="${dataholder.cityCode}"]`).click()
+
+  cy.get('[name="holder.email"]')
+    .type(dataholder.email)
+    .should('have.value', dataholder.email)
+
+  cy.get('[name="holder.email2"]')
+    .type(dataholder.email)
+    .should('have.value', dataholder.email)
+
+  cy.get('[name="holder.phone1"]')
+    .type(dataholder.phone)
+    .should('have.value', dataholder.phone)
+
+  cy.get('#holder_lang').click()
+  cy.get('[data-value="ca_ES"]').click()
+
+  cy.get('[name="legal_person_accepted"]').click()
+  cy.get('[data-cy=accept]').click()
+
+  cy.get('[data-cy=next]').click()
+
+  //cy.get('[name="privacy_policy_accepted"]').click()
+
+  //cy.get('[data-cy=next]').click()
+
+  cy.get(`[data-value="${dataholder.voluntaryCent}"]`).click()
+  cy.get('[data-cy=next]').click()
+
+  cy.get('[name="payment.iban"]')
+    .clear()
+    .type(dataholder.iban)
+    .should('have.value', dataholder.iban)
+
+  cy.get('[name="payment.sepa_accepted"]').click()
+  cy.get('[data-cy=accept]').click()
+  cy.get('[data-cy=next]').click()
+
+  cy.contains('€/kWh')
+})
