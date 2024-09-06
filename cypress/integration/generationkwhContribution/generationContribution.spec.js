@@ -53,65 +53,67 @@ describe('Generation Form', () => {
   beforeEach(() => {
     cy.visit('/generationkwh/contribution')
     cy.fixture('generationkwhContribution.json').as('data')
-  })
 
-  context('Member - Success Tests', () => {
-    it('Contribute with an action', function () {
-      //Member page
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
-
-      //Contribution page
-      cy.get('#annual_use')
-        .clear()
-        .type(this.data.annual_use.low)
-        .should('have.value', this.data.annual_use.low)
-
-      for (let n = 0; n < this.data.number_of_action.normal; n++) {
-        cy.get('#add_action').click()
+    cy.intercept('GET', '/ping', {
+      statusCode: 200,
+      body: {
+        state: true,
+        status: "ONLINE"
       }
-
-      cy.get('[name="payment.iban"]')
-        .clear()
-        .type(this.data.payment_data.iban)
-        .should('have.value', this.data.payment_data.iban)
-      cy.get('[data-cy=next]').click()
-
-      //Review page
-      cy.get('#privacy_plicy_check').check()
-      cy.get('[data-cy=next]').click()
     })
 
-    it('Try to contribute with out of zone member', function () {
-      //Member page
-      let memberNumber = this.data.member_out_first_fase_zone.number
-      let memberVat = this.data.member_out_first_fase_zone.vat
+  })
 
+    context('Member - Success Tests', () => {
+      it('Contribute with an action', function () {
+  
+        //Member page
+        cy.generationkwhIdentifyMember(this.data.member.number, this.data.member.vat, true)
+        cy.get('[data-cy=next]').click()
+  
+        //Contribution page
+        cy.get('#annual_use')
+          .clear()
+          .type(this.data.annual_use.low)
+          .should('have.value', this.data.annual_use.low)
+  
+        for (let n = 0; n < this.data.number_of_action.normal; n++) {
+          cy.get('#add_action').click()
+        }
+  
+        //Insert IBAN
+        cy.typeIbanGenerationkwh(this.data.payment_data.iban,200)
+  
+        cy.get('[data-cy=next]').click()
+  
+        //Review page
+        cy.get('#privacy_plicy_check').check()
+      })
+  
+      it('Try to contribute with out of zone member', function () {
+        //Member page
+        let memberNumber = this.data.member_out_first_fase_zone.number
+        let memberVat = this.data.member_out_first_fase_zone.vat
+  
+        cy.generationkwhIdentifyMember(memberNumber, memberVat, false)
+  
+        cy.get('[data-cy=exit]').click()
+  
+      })
+    })
+
+  context(' NO Member - Success Tests', () => {
+    it('Contribute with an action', function () {
 
       cy.intercept('GET', '/data/generationkwh/can_join/**', {
         statusCode: 200,
         body: {
-          data: false
+          data: true,
+          state: true,
+          status: "ONLINE"
         }
       }).as('canJoin')
 
-      cy.get('#memberNumber')
-        .clear()
-        .type(memberNumber)
-        .should('have.value', memberNumber)
-
-      cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
-
-      cy.wait('@canJoin')
-        .its('response.statusCode')
-        .should('be.oneOf', [200, 304])
-
-      cy.get('[data-cy=exit]').click()
-
-    })
-  })
-
-  context(' NO Member - Success Tests', () => {
-    it('Contribute with an action', function () {
       //Member page
       let postal_code = this.data.new_member.postal_code
       let vat = this.data.new_member.vat
@@ -121,7 +123,30 @@ describe('Generation Form', () => {
         .clear()
         .type(postal_code)
         .should('have.value', postal_code)
+
+      cy.wait('@canJoin')
+        .its('response.statusCode')
+        .should('be.oneOf', [200, 304])
+
+      cy.intercept('GET', '/check/vat/exists/*', {
+        statusCode: 200,
+        body: {
+          data: {
+            exists: false,
+            is_member: false,
+            is_selfconsumption_owner: false,
+            valid: true
+          },
+          state: true,
+          status: "ONLINE"
+        }
+      }).as('vatExists')
+
       cy.get('#vat').clear().type(vat).should('have.value', vat)
+
+      cy.wait('@vatExists')
+        .its('response.statusCode')
+        .should('be.oneOf', [200, 304])
 
       cy.get('[data-cy=next]').click()
 
@@ -136,10 +161,9 @@ describe('Generation Form', () => {
         cy.get('#add_action').click()
       }
 
-      cy.get('[name="payment.iban"]')
-        .clear()
-        .type(this.data.payment_data.iban)
-        .should('have.value', this.data.payment_data.iban)
+      //Insert IBAN
+      cy.typeIbanGenerationkwh(this.data.payment_data.iban,200)
+
       cy.get('[data-cy=next]').click()
 
       //Review page
@@ -150,7 +174,7 @@ describe('Generation Form', () => {
     it('Try to contribute with out of zone postal code', function () {
       //Member page
       let postal_code = this.data.out_zone_data.postal_code
-      
+
       cy.intercept('GET', `/data/generationkwh/can_join/${postal_code}`, {
         statusCode: 200,
         body: {
@@ -164,7 +188,7 @@ describe('Generation Form', () => {
         .type(postal_code)
         .should('have.value', postal_code)
 
-     
+
 
       cy.wait('@canJoin')
         .its('response.statusCode')
@@ -180,7 +204,27 @@ describe('Generation Form', () => {
       let memberNumber = this.data.member.number
       let memberVat = this.data.member.badVat
 
-      cy.intercept('GET', '/data/soci/**').as('checkMember')
+      cy.intercept('GET', '/check/vat/*', {
+        statusCode: 400,
+      }).as('checkVat')
+
+      cy.intercept('GET', '/data/soci/**',
+        {
+          statusCode: 200,
+          body: {
+            data: { soci: {} },
+            state: true
+          }
+        }).as('checkMember')
+
+      cy.intercept('GET', '/data/generationkwh/can_join/**',
+        {
+          statusCode: 400,
+          body: {
+            data: {},
+            state: false
+          }
+        }).as('canJoin')
 
       cy.get('#memberNumber')
         .clear()
@@ -189,16 +233,25 @@ describe('Generation Form', () => {
 
       cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
+
+
+
+      cy.wait('@checkVat')
+        .its('response.statusCode')
+        .should('be.oneOf', [400])
+
       cy.wait('@checkMember')
         .its('response.statusCode')
         .should('be.oneOf', [200, 304])
+
       cy.get('[data-cy=next]').should('be.disabled')
     })
 
     it('Try to contribute with erroneous annual use', function () {
-      //Member page
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
 
+      //Member page
+      cy.generationkwhIdentifyMember(this.data.member.number, this.data.member.vat, true)
+      cy.get('[data-cy=next]').click()
       //Contribution page
       cy.get('#annual_use')
         .clear()
@@ -209,15 +262,14 @@ describe('Generation Form', () => {
         cy.get('#add_action').click()
       }
 
-      cy.get('[name="payment.iban"]')
-        .clear()
-        .type(this.data.payment_data.iban)
-        .should('have.value', this.data.payment_data.iban)
+      cy.typeIbanGenerationkwh(this.data.payment_data.iban, 200)
       cy.get('[data-cy=next]').should('be.disabled')
     })
+
     it('Not enough number of actions', function () {
       //Member page
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.generationkwhIdentifyMember(this.data.member.number, this.data.member.vat, true)
+      cy.get('[data-cy=next]').click()
 
       //Contribution page
       cy.get('#annual_use')
@@ -229,16 +281,14 @@ describe('Generation Form', () => {
         cy.get('#add_action').click()
       }
 
-      cy.get('[name="payment.iban"]')
-        .clear()
-        .type(this.data.payment_data.iban)
-        .should('have.value', this.data.payment_data.iban)
+      cy.typeIbanGenerationkwh(this.data.payment_data.iban, 200)
       cy.get('[data-cy=next]').should('be.disabled')
     })
 
     it('Erroneous IBAN', function () {
       //Member page
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.generationkwhIdentifyMember(this.data.member.number, this.data.member.vat, true)
+      cy.get('[data-cy=next]').click()
 
       //Contribution page
       cy.get('#annual_use')
@@ -250,10 +300,8 @@ describe('Generation Form', () => {
         cy.get('#add_action').click()
       }
 
-      cy.get('[name="payment.iban"]')
-        .clear()
-        .type(this.data.payment_data.err_iban)
-        .should('have.value', this.data.payment_data.err_iban)
+      cy.typeIbanGenerationkwh(this.data.payment_data.err_iban, 400)
+
       cy.get('[data-cy=next]').should('be.disabled')
     })
   })
