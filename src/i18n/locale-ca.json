@@ -708,5 +708,10 @@
     "GENERATION_INFO_NOT_HAS_INVOICES": "<p>Ara mateix no participes en el sistema d'autoproducció col·lectiva Generation kWh. Si t’interessa o en vols més informació, pots consultar el web: <a href=\"http://www.generationkwh.org/ca/\" >www.generationkwh.org</a></p>",
     "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT": "Introdueix el teu DNI o NIF.",
     "EXIT": "Sortir",
-    "AT_LEAST_ONE_CHANGE_REASON":"Com a mínim has d'escollir un motiu del canvi"
+    "AT_LEAST_ONE_CHANGE_REASON":"Com a mínim has d'escollir un motiu del canvi",
+    "GURG_SUPPLY_POINT_TITLE": "Formulari d'inscripció GURG Mataró",
+    "GURG_SUPPLY_POINT_RECOMENDATION_TITLE": "Identifica el punt de subministrament",
+    "GURG_SUPPLY_POINT_RECOMENDATION_TEXT": "Et recomanem tenir a mà un contracte de llum per anar omplint el formulari",
+    "PROGRESS_WARNING_TITLE": "Atenció",
+    "PROGRESS_WARNING_TEXT": "El GURB té places limitades, i ja està el 25% ocupat. Si es completen totes mentre omples el formulari, t'avisarem i podràs unir-te a la llista d'espera."
 }
