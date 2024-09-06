@@ -38,6 +38,8 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
+  const Gurb = lazy(() => import('./containers/Gurb'))
+
 
   const loadContractData = () => {
     const contractData =
@@ -439,6 +441,10 @@ const App = (props) => {
                 <Route
                   path="/generationkwh/contribution/"
                   element={<GenerationContribution {...props} token={token} />}
+                />
+                <Route
+                  path="/:language/gurb/validations/"
+                  element={<Gurb {...props} />}
                 />
               </Routes>
             </Router>

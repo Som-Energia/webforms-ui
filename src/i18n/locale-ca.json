@@ -721,5 +721,10 @@
     "EXIT": "Sortir",
     "AT_LEAST_ONE_CHANGE_REASON": "Com a mínim has d'escollir un motiu del canvi",
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "Darrere d''ES' van 16 números",
-    "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "Els caràcters 19 i 20 han de ser 2 lletres de control"
+    "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "Els caràcters 19 i 20 han de ser 2 lletres de control",
+    "GURG_SUPPLY_POINT_TITLE": "Formulari d'inscripció GURG Mataró",
+    "GURG_SUPPLY_POINT_RECOMENDATION_TITLE": "Identifica el punt de subministrament",
+    "GURG_SUPPLY_POINT_RECOMENDATION_TEXT": "Et recomanem tenir a mà un contracte de llum per anar omplint el formulari",
+    "PROGRESS_WARNING_TITLE": "Atenció",
+    "PROGRESS_WARNING_TEXT": "El GURB té places limitades, i ja està el 25% ocupat. Si es completen totes mentre omples el formulari, t'avisarem i podràs unir-te a la llista d'espera."
 }
