@@ -11,7 +11,8 @@ import StepConnector, {
 import { useEffect, useState } from 'react'
 
 const SomConnector = styled(StepConnector)(({ theme }) => ({
-  marginTop: '2rem',
+  marginTop: '3rem',
+  marginBottom: '3rem',
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       borderColor: '#96B633'
