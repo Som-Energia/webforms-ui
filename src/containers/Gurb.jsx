@@ -5,11 +5,13 @@ import { Formik } from 'formik'
 // import * as Yup from 'yup'
 
 import SupplyPoint from './Gurb/SupplyPoint'
+import Requirements from './Gurb/Requirements'
 
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
-const MAX_STEP_NUMBER = 2
+const MAX_STEP_NUMBER = 6
+const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 
 const Gurb = (props) => {
   const { i18n } = useTranslation()
@@ -39,8 +41,13 @@ const Gurb = (props) => {
   const getStep = (props) => {
     if (activeStep === 0) {
       return <SupplyPoint {...props} />
-    } else if (activeStep === 1) {
-      return <></>
+    } else if (REQUIREMENTS_STEPS.includes(activeStep)) {
+      return (
+        <Requirements
+          {...props}
+          activeStep={REQUIREMENTS_STEPS.indexOf(activeStep)}
+        />
+      )
     } else {
       return <></>
     }
