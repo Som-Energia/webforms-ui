@@ -2,9 +2,19 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import SomStepper from './components/SomStepper'
+import TextRecomendation from './components/TextRecomendation'
+import Chooser from './components/Chooser'
 
 const LightQuestion = (props) => {
-  return <>Luz</>
+  return (
+    <>
+      <TextRecomendation
+        title={'1. Actualment a casa teva hi ha llum corrent?'}
+      />
+      &nbsp;
+      <Chooser />
+    </>
+  )
 }
 const Address = (props) => {
   return <>Address</>
