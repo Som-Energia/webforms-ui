@@ -48,7 +48,6 @@ const MemberIdentifierFields = (props) => {
           values.member.number,
           values.member.vat
         )
-        console.log(member)
         if (member?.state === true) {
           setError(false)
           setFieldValue('member.checked', true)

@@ -56,7 +56,6 @@ function HolderChange(props) {
   const handlers = {
     SAMPLE_DATA: () => {
       const values = { ...initialValues, ...data }
-      console.log(values)
     },
     SHOW_INSPECTOR: () => {
       setShowInspector(true)

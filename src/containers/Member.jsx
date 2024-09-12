@@ -47,7 +47,6 @@ const Member = (props) => {
   const handlers = {
     SAMPLE_DATA: () => {
       const values = { ...initialValues }
-      console.log(values)
     },
     SHOW_INSPECTOR: () => {
       setShowInspector(true)

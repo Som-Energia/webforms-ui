@@ -15,7 +15,6 @@ const TextLoader = props => {
 
   React.useEffect(() => {
     const url = `${import.meta.env.BASE_URL}static/docs/${language.slice(0, 2)}/${documentName}.html`
-    console.log({url})
     setText(undefined)
     axios({
       method: 'GET',

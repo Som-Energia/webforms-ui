@@ -107,7 +107,6 @@ const Cancellation = (props) => {
     const csrfInput = document.querySelector(
       "input[name='csrfmiddlewaretoken']"
     )
-    console.log(`csrfmiddlewaretoken: ${csrfInput?.value}`)
 
     const params = { ...values, csrfToken: csrfInput?.value }
 
