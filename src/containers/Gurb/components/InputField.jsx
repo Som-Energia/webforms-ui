@@ -1,12 +1,24 @@
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import { textHeader4 } from '../gurbTheme'
+import { textHeader4, textHelper1 } from '../gurbTheme'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-const InputField = ({ TextFieldName, TextFieldHelper }) => {
+const HelperText = ({ helperText, iconHelper }) => {
+  return (
+    <Box sx={{ ...textHelper1 }}>
+      {iconHelper && (
+        <InfoOutlinedIcon sx={{ fontSize: '14px', margin: '2px' }} />
+      )}
+      {helperText}
+    </Box>
+  )
+}
+
+const InputField = ({ textFieldName, textFieldHelper, iconHelper = false }) => {
   return (
     <Box>
-      <Typography sx={ textHeader4 }>TextFieldName</Typography>
+      <Typography sx={textHeader4}>{textFieldName}</Typography>
       <TextField
         sx={{
           '& .MuiFormHelperText-root': { color: '#B3B3B3' },
@@ -17,8 +29,10 @@ const InputField = ({ TextFieldName, TextFieldHelper }) => {
         InputProps={{
           sx: { borderRadius: '8px', display: 'flex' }
         }}
-        label={TextFieldName}
-        helperText={TextFieldHelper}
+        label={textFieldName}
+        helperText={
+          <HelperText helperText={textFieldHelper} iconHelper={iconHelper} />
+        }
       />
     </Box>
   )

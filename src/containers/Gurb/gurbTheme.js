@@ -54,6 +54,12 @@ export const textSubtitle = {
   textTransform: 'uppercase'
 }
 
+export const textHelper1 = {
+  display: 'flex',
+  alignItems: 'center',
+  fontSize: '12px'
+}
+
 export const containerSpacing = {
   display: 'flex',
   padding: '0.3rem',
