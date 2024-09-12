@@ -19,8 +19,8 @@ const App = (props) => {
 
   useEffect(() => {
       const matomoUrl = import.meta.env.VITE_MATOMO_URL
-      var _mtm = window._mtm = window._mtm || [];
-      _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+      var _paq = window._paq = window._paq || [];
+      _paq.push({'_paq.startTime': (new Date().getTime()), 'event': '_paq.Start'});
       (function() {
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
         g.async=true; g.src=matomoUrl; s.parentNode.insertBefore(g,s);
