@@ -4,9 +4,9 @@ import TextField from '@mui/material/TextField'
 import { textHeader4, textHelper1 } from '../gurbTheme'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-const HelperText = ({ helperText, iconHelper }) => {
+export const HelperText = ({ helperText, iconHelper }) => {
   return (
-    <Box sx={{ ...textHelper1 }}>
+    <Box sx={ textHelper1 }>
       {iconHelper && (
         <InfoOutlinedIcon sx={{ fontSize: '14px', margin: '2px' }} />
       )}
