@@ -1,25 +1,66 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { textHeader4, textBody1 } from '../gurbTheme'
+import Grid from '@mui/material/Grid'
 
-const Option = ({ icon, textHeader, textBody }) => {
+import Checkbox from '@mui/material/Checkbox'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { chooserGurg, chooserGurgSelected } from '../gurbTheme'
+
+const Option = ({
+  isSelected,
+  setSelected,
+  optionId,
+  icon,
+  textHeader,
+  textBody
+}) => {
   return (
     <Box
-      sx={{
-        maxWidth: '20rem',
-        padding: '2rem',
-        borderRadius: '8px',
-        border: '1px solid #D9D9D9'
+      sx={isSelected ? chooserGurgSelected : chooserGurg}
+      onClick={() => {
+        setSelected(optionId)
       }}>
-      {icon}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start'
+        }}>
+        {icon}
+        {isSelected && (
+          <Checkbox
+            checked
+            icon={<CheckCircleIcon />}
+            checkedIcon={<CheckCircleIcon />}
+          />
+        )}
+      </Box>
       <Typography sx={textHeader4}>{textHeader}</Typography>
       <Typography sx={textBody1}>{textBody}</Typography>
     </Box>
   )
 }
 
-const Chooser = ({ icon, textHeader, textBody }) => {
-  return <Option icon={icon} textHeader={textHeader} textBody={textBody} />
+const Chooser = ({ options }) => {
+  const [selected, setSelected] = useState(undefined)
+
+  return (
+    <Grid container spacing={4}>
+      {options.map((option, index) => (
+        <Grid key={index} item xs={12} sm={6}>
+          <Option
+            isSelected={option?.id === selected}
+            setSelected={setSelected}
+            optionId={option?.id}
+            icon={option?.icon}
+            textHeader={option?.textHeader}
+            textBody={option?.textBody}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  )
 }
 export default Chooser
