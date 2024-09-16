@@ -9,40 +9,32 @@ import { HelperText } from './components/InputField'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
-import Grid from '@mui/material/Grid'
 
-const iconRequirements = {
-  marginBottom: '1rem',
-  borderRadius: '8px',
-  border: '1px solid #D9D9D9',
-  color: '#1E1E1E',
-  fontSize: '3rem',
-  padding: '8px'
-}
+import { iconRequirements, iconOffRequirements } from './gurbTheme'
 
 const LightQuestion = (props) => {
   const { t } = useTranslation()
+
+  const options = [
+    {
+      id: 'light-on',
+      icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
+      textHeader: t('GURB_HI_HA_LLUM'),
+      textBody: t('GURB_HI_HA_LLUM_BODY')
+    },
+    {
+      id: 'light-off',
+      icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
+      textHeader: t('GURB_NO_HI_HA_LLUM'),
+      textBody: t('GURB_NO_HI_HA_LLUM_BODY')
+    }
+  ]
 
   return (
     <>
       <TextRecomendation title={t('GURB_ACTUALMENT_HI_HA_LLUM')} />
       &nbsp;
-      <Grid container spacing={4}>
-        <Grid item xs={12} sm={6}>
-          <Chooser
-            icon={<LightbulbOutlinedIcon sx={iconRequirements} />}
-            textHeader={t('GURB_HI_HA_LLUM')}
-            textBody={t('GURB_HI_HA_LLUM_BODY')}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Chooser
-            icon={<LightbulbOutlinedIcon sx={iconRequirements} />}
-            textHeader={t('GURB_NO_HI_HA_LLUM')}
-            textBody={t('GURB_NO_HI_HA_LLUM_BODY')}
-          />
-        </Grid>
-      </Grid>
+      <Chooser options={options} />
     </>
   )
 }
@@ -67,32 +59,32 @@ const Address = (props) => {
 const SelfConsumption = (props) => {
   const { t } = useTranslation()
 
+  const options = [
+    {
+      id: 'selfconsmption-on',
+      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
+      textHeader: t('GURB_TINC_AUTOCONSUM'),
+      textBody: t('GURB_TINC_AUTOCONSUM_BODY')
+    },
+    {
+      id: 'selfconsmption-off',
+      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
+      textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
+      textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
+    }
+  ]
+
   return (
     <>
-      {' '}
       <TextRecomendation title={t('GURB_AUTOCONSUM_TITLE')} />
       &nbsp;
-      <Grid container spacing={4}>
-        <Grid item xs={12} sm={6}>
-          <Chooser
-            icon={<SolarPowerOutlinedIcon sx={iconRequirements} />}
-            textHeader={t('GURB_TINC_AUTOCONSUM')}
-            textBody={t('GURB_TINC_AUTOCONSUM_BODY')}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Chooser
-            icon={<SolarPowerOutlinedIcon sx={iconRequirements} />}
-            textHeader={t('GURB_NO_TINC_AUTOCONSUM')}
-            textBody={t('GURB_NO_TINC_AUTOCONSUM_BODY')}
-          />
-        </Grid>
-      </Grid>
+      <Chooser options={options} />
       &nbsp;
       <HelperText helperText={t('GURB_AUTOCONSUM_HELPER')} iconHelper={true} />
     </>
   )
 }
+
 const MemberQuestion = () => {
   return <>Member</>
 }

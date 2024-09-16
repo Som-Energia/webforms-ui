@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
 // import * as Yup from 'yup'
 
+import Container from '@mui/material/Container'
+
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
 
@@ -53,34 +55,36 @@ const Gurb = (props) => {
     }
   }
   return (
-    <Formik
-      initialValues={initialValues}
-      // validationSchema={validationSchemas[activeStep]}
-    >
-      {(formikProps) => (
-        <>
-          {getStep(formikProps)}
-          <div
-            style={{
-              marginTop: '2rem',
-              marginX: '2rem',
-              display: 'flex',
-              justifyContent: 'space-between'
-            }}>
-            <PrevButton
-              disabled={activeStep === 0}
-              onClick={() => prevStep(formikProps)}
-              title={'PREV'}
-            />
-            <NextButton
-              disabled={activeStep === MAX_STEP_NUMBER}
-              onClick={() => nextStep(formikProps)}
-              title={'NEXT'}
-            />
-          </div>
-        </>
-      )}
-    </Formik>
+    <Container maxWidth="md" disableGutters={true}>
+      <Formik
+        initialValues={initialValues}
+        // validationSchema={validationSchemas[activeStep]}
+      >
+        {(formikProps) => (
+          <>
+            {getStep(formikProps)}
+            <div
+              style={{
+                marginTop: '2rem',
+                marginX: '2rem',
+                display: 'flex',
+                justifyContent: 'space-between'
+              }}>
+              <PrevButton
+                disabled={activeStep === 0}
+                onClick={() => prevStep(formikProps)}
+                title={'PREV'}
+              />
+              <NextButton
+                disabled={activeStep === MAX_STEP_NUMBER}
+                onClick={() => nextStep(formikProps)}
+                title={'NEXT'}
+              />
+            </div>
+          </>
+        )}
+      </Formik>
+    </Container>
   )
 }
 export default Gurb

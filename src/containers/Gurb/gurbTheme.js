@@ -66,3 +66,39 @@ export const containerSpacing = {
   padding: '0.3rem',
   borderRadius: '8px'
 }
+
+export const iconRequirements = {
+  marginBottom: '1rem',
+  borderRadius: '8px',
+  border: '1px solid #D9D9D9',
+  color: '#1E1E1E',
+  fontSize: '3rem',
+  padding: '8px',
+  backgroundColor: '#fff'
+}
+
+export const iconOffRequirements = {
+  marginBottom: '1rem',
+  borderRadius: '8px',
+  border: '1px solid #D9D9D9',
+  color: '#1E1E1E',
+  fontSize: '3rem',
+  padding: '8px',
+  backgroundColor: '#fff',
+  background:
+    'linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 1.5px), rgba(0,0,0,1) calc(50% - 1.4px), rgba(0,0,0,1) 50%, rgba(0,0,0,1) calc(50% + 1.4px), rgba(0,0,0,0) calc(50% + 1.5px), rgba(0,0,0,0) 100%)',
+  backgroundRepeat: 'no-repeat',
+  backgroundOrigin: 'content-box'
+}
+
+export const chooserGurg = {
+  maxWidth: '20rem',
+  padding: '2rem',
+  borderRadius: '8px',
+  border: '1px solid #D9D9D9'
+}
+
+export const chooserGurgSelected = {
+  ...chooserGurg,
+  backgroundColor: '#FAFAFA'
+}
