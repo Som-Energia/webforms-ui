@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "municipi": {
+                "id": 5558,
+                "name": "Anglesola"
+            },
+            "provincia": {
+                "id": 28,
+                "name": "Lleida"
+            }
+        }
+    ],
+    "state": true,
+    "status": "ONLINE"
+}
