@@ -726,5 +726,24 @@
     "GURG_SUPPLY_POINT_RECOMENDATION_TITLE": "Identifica el punt de subministrament",
     "GURG_SUPPLY_POINT_RECOMENDATION_TEXT": "Et recomanem tenir a mà un contracte de llum per anar omplint el formulari",
     "PROGRESS_WARNING_TITLE": "Atenció",
-    "PROGRESS_WARNING_TEXT": "El GURB té places limitades, i ja està el 25% ocupat. Si es completen totes mentre omples el formulari, t'avisarem i podràs unir-te a la llista d'espera."
+    "PROGRESS_WARNING_TEXT": "El GURB té places limitades, i ja està el 25% ocupat. Si es completen totes mentre omples el formulari, t'avisarem i podràs unir-te a la llista d'espera.",
+    "GURB_ACTUALMENT_HI_HA_LLUM": "1. Actualment a casa teva hi ha llum corrent?",
+    "GURB_HI_HA_LLUM": "Sí hi ha llum",
+    "GURB_HI_HA_LLUM_BODY": "Tinc llum amb Som Energia o amb una altre comercialitzadora.",
+    "GURB_NO_HI_HA_LLUM": "No hi ha llum",
+    "GURB_NO_HI_HA_LLUM_BODY": "No tinc donada d'alta la llum amb cap comercialitzadora.",
+    "GURB_ADRECA_SUBMINISTRAMENT_TITLE": "2. Indica l'adreça del subministrament",
+    "GURB_ADRECA_SUBMINISTRAMENT_TITLE_HELPER": "Hem de vefificar que l'adreça estigui dins dels 2 km de radi.",
+    "GURB_ADRECA_SUBMINISTRAMENT": "Adreça de subministrament",
+    "GURB_ADRECA_SUBMINISTRAMENT_HELPER": "Exemple: Carrer Indústria, 8, Barcelona, Espanya",
+    "GURB_AUTOCONSUM_TITLE": "3. Tens alguna modalitat d'autoconsum activa?",
+    "GURB_TINC_AUTOCONSUM": "Sí tinc autoconsum",
+    "GURB_TINC_AUTOCONSUM_BODY": "Qualsevol projecte que sigui de generació energètica",
+    "GURB_NO_TINC_AUTOCONSUM": "No tinc autoconsum",
+    "GURB_NO_TINC_AUTOCONSUM_BODY": "Actualment no disposo de cap modalitat d'autoconsum",
+    "GURB_AUTOCONSUM_HELPER": "Què és una modalitat d'autoconsum?"
+
+
+
+
 }

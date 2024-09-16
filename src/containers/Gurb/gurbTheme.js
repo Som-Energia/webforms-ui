@@ -56,6 +56,7 @@ export const textSubtitle = {
 
 export const textHelper1 = {
   display: 'flex',
+  color: '#B3B3B3',
   alignItems: 'center',
   fontSize: '12px'
 }
