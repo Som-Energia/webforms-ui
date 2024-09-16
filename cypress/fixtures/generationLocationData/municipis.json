@@ -1,0 +1,936 @@
+{
+    "data": {
+        "municipis": [
+            {
+                "id": 5534,
+                "name": "Abella de la Conca"
+            },
+            {
+                "id": 5536,
+                "name": "Agramunt"
+            },
+            {
+                "id": 5568,
+                "name": "Aitona"
+            },
+            {
+                "id": 5537,
+                "name": "Alam\u00fas, Els"
+            },
+            {
+                "id": 5539,
+                "name": "Albag\u00e9s, L'"
+            },
+            {
+                "id": 5540,
+                "name": "Albat\u00e0rrec"
+            },
+            {
+                "id": 5541,
+                "name": "Albesa"
+            },
+            {
+                "id": 5542,
+                "name": "Albi, L'"
+            },
+            {
+                "id": 5543,
+                "name": "Alcan\u00f3"
+            },
+            {
+                "id": 5544,
+                "name": "Alcarr\u00e0s"
+            },
+            {
+                "id": 5545,
+                "name": "Alcoletge"
+            },
+            {
+                "id": 5546,
+                "name": "Alfarr\u00e0s"
+            },
+            {
+                "id": 5547,
+                "name": "Alf\u00e9s"
+            },
+            {
+                "id": 5548,
+                "name": "Algerri"
+            },
+            {
+                "id": 5549,
+                "name": "Alguaire"
+            },
+            {
+                "id": 5550,
+                "name": "Alins"
+            },
+            {
+                "id": 5551,
+                "name": "Almacelles"
+            },
+            {
+                "id": 5552,
+                "name": "Almatret"
+            },
+            {
+                "id": 5553,
+                "name": "Almenar"
+            },
+            {
+                "id": 5555,
+                "name": "Alpicat"
+            },
+            {
+                "id": 5556,
+                "name": "Alt \u00c0neu"
+            },
+            {
+                "id": 5538,
+                "name": "Al\u00e0s i Cerc"
+            },
+            {
+                "id": 5554,
+                "name": "Al\u00f2s de Balaguer"
+            },
+            {
+                "id": 5558,
+                "name": "Anglesola"
+            },
+            {
+                "id": 5559,
+                "name": "Arbeca"
+            },
+            {
+                "id": 5561,
+                "name": "Arres"
+            },
+            {
+                "id": 8126,
+                "name": "Arr\u00f2s"
+            },
+            {
+                "id": 5562,
+                "name": "Ars\u00e8guel"
+            },
+            {
+                "id": 5563,
+                "name": "Artesa de Lleida"
+            },
+            {
+                "id": 5564,
+                "name": "Artesa de Segre"
+            },
+            {
+                "id": 5566,
+                "name": "Aspa"
+            },
+            {
+                "id": 5567,
+                "name": "Avellanes i Santa Linya, Les"
+            },
+            {
+                "id": 5569,
+                "name": "Baix Pallars"
+            },
+            {
+                "id": 5570,
+                "name": "Balaguer"
+            },
+            {
+                "id": 5571,
+                "name": "Barbens"
+            },
+            {
+                "id": 5572,
+                "name": "Baronia de Rialb, La"
+            },
+            {
+                "id": 5574,
+                "name": "Bassella"
+            },
+            {
+                "id": 5575,
+                "name": "Bausen"
+            },
+            {
+                "id": 5576,
+                "name": "Belianes"
+            },
+            {
+                "id": 5578,
+                "name": "Bell-lloc d'Urgell"
+            },
+            {
+                "id": 5681,
+                "name": "Bellaguarda"
+            },
+            {
+                "id": 5577,
+                "name": "Bellcaire d'Urgell"
+            },
+            {
+                "id": 5579,
+                "name": "Bellmunt d'Urgell"
+            },
+            {
+                "id": 5580,
+                "name": "Bellpuig"
+            },
+            {
+                "id": 5581,
+                "name": "Bellver de Cerdanya"
+            },
+            {
+                "id": 5582,
+                "name": "Bellv\u00eds"
+            },
+            {
+                "id": 5583,
+                "name": "Benavent de Segri\u00e0"
+            },
+            {
+                "id": 5584,
+                "name": "Biosca"
+            },
+            {
+                "id": 5587,
+                "name": "Borges Blanques, Les"
+            },
+            {
+                "id": 5588,
+                "name": "Boss\u00f2st"
+            },
+            {
+                "id": 5585,
+                "name": "Bovera"
+            },
+            {
+                "id": 5586,
+                "name": "B\u00f2rdes, Es"
+            },
+            {
+                "id": 5589,
+                "name": "Cabanabona"
+            },
+            {
+                "id": 5590,
+                "name": "Cab\u00f3"
+            },
+            {
+                "id": 5591,
+                "name": "Camarasa"
+            },
+            {
+                "id": 5592,
+                "name": "Canejan"
+            },
+            {
+                "id": 5755,
+                "name": "Castell de Mur"
+            },
+            {
+                "id": 5593,
+                "name": "Castellar de la Ribera"
+            },
+            {
+                "id": 5594,
+                "name": "Castelldans"
+            },
+            {
+                "id": 5595,
+                "name": "Castellnou de Seana"
+            },
+            {
+                "id": 5597,
+                "name": "Castellser\u00e0"
+            },
+            {
+                "id": 5596,
+                "name": "Castell\u00f3 de Farfanya"
+            },
+            {
+                "id": 5598,
+                "name": "Cava"
+            },
+            {
+                "id": 5599,
+                "name": "Cervera"
+            },
+            {
+                "id": 5600,
+                "name": "Cervi\u00e0 de les Garrigues"
+            },
+            {
+                "id": 5601,
+                "name": "Ciutadilla"
+            },
+            {
+                "id": 5602,
+                "name": "Clariana de Cardener"
+            },
+            {
+                "id": 5603,
+                "name": "Cogul, El"
+            },
+            {
+                "id": 5604,
+                "name": "Coll de Narg\u00f3"
+            },
+            {
+                "id": 5674,
+                "name": "Coma i la Pedra, La"
+            },
+            {
+                "id": 5673,
+                "name": "Conca de Dalt"
+            },
+            {
+                "id": 5605,
+                "name": "Corbins"
+            },
+            {
+                "id": 5606,
+                "name": "Cubells"
+            },
+            {
+                "id": 5607,
+                "name": "Espluga Calba, L'"
+            },
+            {
+                "id": 5608,
+                "name": "Espot"
+            },
+            {
+                "id": 5612,
+                "name": "Estamariu"
+            },
+            {
+                "id": 5609,
+                "name": "Estar\u00e0s"
+            },
+            {
+                "id": 5610,
+                "name": "Esterri d'\u00c0neu"
+            },
+            {
+                "id": 5611,
+                "name": "Esterri de Card\u00f3s"
+            },
+            {
+                "id": 5613,
+                "name": "Farrera"
+            },
+            {
+                "id": 5614,
+                "name": "Floresta, La"
+            },
+            {
+                "id": 5615,
+                "name": "Fondarella"
+            },
+            {
+                "id": 5616,
+                "name": "Foradada"
+            },
+            {
+                "id": 5617,
+                "name": "Fuliola, La"
+            },
+            {
+                "id": 5618,
+                "name": "Fulleda"
+            },
+            {
+                "id": 5759,
+                "name": "F\u00edgols i Aliny\u00e0"
+            },
+            {
+                "id": 5619,
+                "name": "Gavet de la Conca"
+            },
+            {
+                "id": 5763,
+                "name": "Gimenells i el Pla de la Font"
+            },
+            {
+                "id": 5620,
+                "name": "Golm\u00e9s"
+            },
+            {
+                "id": 5622,
+                "name": "Granadella, La"
+            },
+            {
+                "id": 5623,
+                "name": "Granja d'Escarp, La"
+            },
+            {
+                "id": 5624,
+                "name": "Granyanella"
+            },
+            {
+                "id": 5625,
+                "name": "Granyena de Segarra"
+            },
+            {
+                "id": 5626,
+                "name": "Granyena de les Garrigues"
+            },
+            {
+                "id": 5627,
+                "name": "Guimer\u00e0"
+            },
+            {
+                "id": 5754,
+                "name": "Guingueta d'\u00c0neu, La"
+            },
+            {
+                "id": 5628,
+                "name": "Guissona"
+            },
+            {
+                "id": 5629,
+                "name": "Guixers"
+            },
+            {
+                "id": 5621,
+                "name": "G\u00f3sol"
+            },
+            {
+                "id": 5633,
+                "name": "Isona i Conca Dell\u00e0"
+            },
+            {
+                "id": 5631,
+                "name": "Ivars d'Urgell"
+            },
+            {
+                "id": 5630,
+                "name": "Ivars de Noguera"
+            },
+            {
+                "id": 5632,
+                "name": "Ivorra"
+            },
+            {
+                "id": 5761,
+                "name": "Josa i Tuix\u00e9n"
+            },
+            {
+                "id": 5634,
+                "name": "Juncosa"
+            },
+            {
+                "id": 5635,
+                "name": "Juneda"
+            },
+            {
+                "id": 5637,
+                "name": "Les"
+            },
+            {
+                "id": 5638,
+                "name": "Linyola"
+            },
+            {
+                "id": 5639,
+                "name": "Lladorre"
+            },
+            {
+                "id": 5640,
+                "name": "Lladurs"
+            },
+            {
+                "id": 5641,
+                "name": "Llardecans"
+            },
+            {
+                "id": 5642,
+                "name": "Llavors\u00ed"
+            },
+            {
+                "id": 5636,
+                "name": "Lleida"
+            },
+            {
+                "id": 5643,
+                "name": "Lles de Cerdanya"
+            },
+            {
+                "id": 5644,
+                "name": "Llimiana"
+            },
+            {
+                "id": 5645,
+                "name": "Llobera"
+            },
+            {
+                "id": 5649,
+                "name": "Maials"
+            },
+            {
+                "id": 5646,
+                "name": "Mald\u00e0"
+            },
+            {
+                "id": 5647,
+                "name": "Massalcoreig"
+            },
+            {
+                "id": 5648,
+                "name": "Massoteres"
+            },
+            {
+                "id": 5650,
+                "name": "Men\u00e0rguens"
+            },
+            {
+                "id": 5651,
+                "name": "Miralcamp"
+            },
+            {
+                "id": 5653,
+                "name": "Mollerussa"
+            },
+            {
+                "id": 5652,
+                "name": "Molsosa, La"
+            },
+            {
+                "id": 5655,
+                "name": "Montell\u00e0 i Martinet"
+            },
+            {
+                "id": 5656,
+                "name": "Montferrer i Castellb\u00f2"
+            },
+            {
+                "id": 5654,
+                "name": "Montgai"
+            },
+            {
+                "id": 5658,
+                "name": "Montoliu de Lleida"
+            },
+            {
+                "id": 5657,
+                "name": "Montoliu de Segarra"
+            },
+            {
+                "id": 5659,
+                "name": "Montorn\u00e8s de Segarra"
+            },
+            {
+                "id": 5660,
+                "name": "Nalec"
+            },
+            {
+                "id": 5557,
+                "name": "Naut Aran"
+            },
+            {
+                "id": 5661,
+                "name": "Nav\u00e8s"
+            },
+            {
+                "id": 5662,
+                "name": "Od\u00e8n"
+            },
+            {
+                "id": 5663,
+                "name": "Oliana"
+            },
+            {
+                "id": 5664,
+                "name": "Oliola"
+            },
+            {
+                "id": 5665,
+                "name": "Olius"
+            },
+            {
+                "id": 5666,
+                "name": "Oluges, Les"
+            },
+            {
+                "id": 5667,
+                "name": "Omellons, Els"
+            },
+            {
+                "id": 5668,
+                "name": "Omells de na Gaia, Els"
+            },
+            {
+                "id": 5669,
+                "name": "Organy\u00e0"
+            },
+            {
+                "id": 5670,
+                "name": "Os de Balaguer"
+            },
+            {
+                "id": 5671,
+                "name": "Oss\u00f3 de Si\u00f3"
+            },
+            {
+                "id": 5672,
+                "name": "Palau d'Anglesola, El"
+            },
+            {
+                "id": 5675,
+                "name": "Penelles"
+            },
+            {
+                "id": 5676,
+                "name": "Peramola"
+            },
+            {
+                "id": 5677,
+                "name": "Pinell de Solson\u00e8s"
+            },
+            {
+                "id": 5678,
+                "name": "Pin\u00f3s"
+            },
+            {
+                "id": 5762,
+                "name": "Plans de Si\u00f3, Els"
+            },
+            {
+                "id": 5679,
+                "name": "Poal, El"
+            },
+            {
+                "id": 5680,
+                "name": "Pobla de C\u00e9rvoles, La"
+            },
+            {
+                "id": 5682,
+                "name": "Pobla de Segur, La"
+            },
+            {
+                "id": 5560,
+                "name": "Pont de Bar, El"
+            },
+            {
+                "id": 5684,
+                "name": "Pont de Suert, El"
+            },
+            {
+                "id": 5683,
+                "name": "Ponts"
+            },
+            {
+                "id": 5685,
+                "name": "Portella, La"
+            },
+            {
+                "id": 5686,
+                "name": "Prats i Sansor"
+            },
+            {
+                "id": 5687,
+                "name": "Preixana"
+            },
+            {
+                "id": 5688,
+                "name": "Preixens"
+            },
+            {
+                "id": 5689,
+                "name": "Prullans"
+            },
+            {
+                "id": 5690,
+                "name": "Puiggr\u00f2s"
+            },
+            {
+                "id": 5691,
+                "name": "Puigverd d'Agramunt"
+            },
+            {
+                "id": 5692,
+                "name": "Puigverd de Lleida"
+            },
+            {
+                "id": 5693,
+                "name": "Rialp"
+            },
+            {
+                "id": 5756,
+                "name": "Ribera d'Ondara"
+            },
+            {
+                "id": 5694,
+                "name": "Ribera d'Urgellet"
+            },
+            {
+                "id": 5695,
+                "name": "Riner"
+            },
+            {
+                "id": 5764,
+                "name": "Riu de Cerdanya"
+            },
+            {
+                "id": 5696,
+                "name": "Rossell\u00f3"
+            },
+            {
+                "id": 5697,
+                "name": "Sal\u00e0s de Pallars"
+            },
+            {
+                "id": 5698,
+                "name": "Sana\u00fcja"
+            },
+            {
+                "id": 5702,
+                "name": "Sant Esteve de la Sarga"
+            },
+            {
+                "id": 5699,
+                "name": "Sant Guim de Freixenet"
+            },
+            {
+                "id": 5703,
+                "name": "Sant Guim de la Plana"
+            },
+            {
+                "id": 5700,
+                "name": "Sant Lloren\u00e7 de Morunys"
+            },
+            {
+                "id": 5753,
+                "name": "Sant Mart\u00ed de Riucorb"
+            },
+            {
+                "id": 5701,
+                "name": "Sant Ramon"
+            },
+            {
+                "id": 5705,
+                "name": "Sarroca de Bellera"
+            },
+            {
+                "id": 5704,
+                "name": "Sarroca de Lleida"
+            },
+            {
+                "id": 5706,
+                "name": "Senterada"
+            },
+            {
+                "id": 5565,
+                "name": "Sentiu de Si\u00f3, La"
+            },
+            {
+                "id": 5708,
+                "name": "Ser\u00f2s"
+            },
+            {
+                "id": 5707,
+                "name": "Seu d'Urgell, La"
+            },
+            {
+                "id": 5709,
+                "name": "Sidamon"
+            },
+            {
+                "id": 5710,
+                "name": "Soler\u00e0s, El"
+            },
+            {
+                "id": 5711,
+                "name": "Solsona"
+            },
+            {
+                "id": 5712,
+                "name": "Soriguera"
+            },
+            {
+                "id": 5713,
+                "name": "Sort"
+            },
+            {
+                "id": 5714,
+                "name": "Soses"
+            },
+            {
+                "id": 5715,
+                "name": "Sudanell"
+            },
+            {
+                "id": 5716,
+                "name": "Sunyer"
+            },
+            {
+                "id": 5717,
+                "name": "Talarn"
+            },
+            {
+                "id": 5718,
+                "name": "Talavera"
+            },
+            {
+                "id": 5721,
+                "name": "Tarroja de Segarra"
+            },
+            {
+                "id": 5720,
+                "name": "Tarr\u00e9s"
+            },
+            {
+                "id": 5724,
+                "name": "Tiurana"
+            },
+            {
+                "id": 5726,
+                "name": "Torms, Els"
+            },
+            {
+                "id": 5727,
+                "name": "Tornabous"
+            },
+            {
+                "id": 5729,
+                "name": "Torre de Cabdella, La"
+            },
+            {
+                "id": 5734,
+                "name": "Torre-serona"
+            },
+            {
+                "id": 5728,
+                "name": "Torrebesses"
+            },
+            {
+                "id": 5730,
+                "name": "Torrefarrera"
+            },
+            {
+                "id": 5758,
+                "name": "Torrefeta i Florejacs"
+            },
+            {
+                "id": 5731,
+                "name": "Torregrossa"
+            },
+            {
+                "id": 5732,
+                "name": "Torrelameu"
+            },
+            {
+                "id": 5733,
+                "name": "Torres de Segre"
+            },
+            {
+                "id": 5725,
+                "name": "Tor\u00e0"
+            },
+            {
+                "id": 5735,
+                "name": "Tremp"
+            },
+            {
+                "id": 5719,
+                "name": "T\u00e0rrega"
+            },
+            {
+                "id": 5722,
+                "name": "T\u00e9rmens"
+            },
+            {
+                "id": 5723,
+                "name": "T\u00edrvia"
+            },
+            {
+                "id": 5573,
+                "name": "Vall de Bo\u00ed, La"
+            },
+            {
+                "id": 5752,
+                "name": "Vall de Card\u00f3s"
+            },
+            {
+                "id": 5736,
+                "name": "Vallbona de les Monges"
+            },
+            {
+                "id": 5738,
+                "name": "Vallfogona de Balaguer"
+            },
+            {
+                "id": 5757,
+                "name": "Valls d'Aguilar, Les"
+            },
+            {
+                "id": 5737,
+                "name": "Valls de Valira, Les"
+            },
+            {
+                "id": 5760,
+                "name": "Vansa i F\u00f3rnols, La"
+            },
+            {
+                "id": 5739,
+                "name": "Verd\u00fa"
+            },
+            {
+                "id": 5740,
+                "name": "Vielha e Mijaran"
+            },
+            {
+                "id": 5748,
+                "name": "Vila-sana"
+            },
+            {
+                "id": 5741,
+                "name": "Vilagrassa"
+            },
+            {
+                "id": 5742,
+                "name": "Vilaller"
+            },
+            {
+                "id": 5743,
+                "name": "Vilam\u00f2s"
+            },
+            {
+                "id": 5744,
+                "name": "Vilanova de Bellpuig"
+            },
+            {
+                "id": 5746,
+                "name": "Vilanova de Mei\u00e0"
+            },
+            {
+                "id": 5747,
+                "name": "Vilanova de Segri\u00e0"
+            },
+            {
+                "id": 5745,
+                "name": "Vilanova de l'Aguda"
+            },
+            {
+                "id": 5750,
+                "name": "Vilanova de la Barca"
+            },
+            {
+                "id": 5749,
+                "name": "Vilosell, El"
+            },
+            {
+                "id": 5751,
+                "name": "Vinaixa"
+            },
+            {
+                "id": 5535,
+                "name": "\u00c0ger"
+            }
+        ]
+    },
+    "state": true,
+    "status": "ONLINE"
+}

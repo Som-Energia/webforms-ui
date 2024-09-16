@@ -1,0 +1,216 @@
+{
+    "data": {
+        "provincies": [
+            {
+                "id": 1,
+                "name": "Araba/\u00c1lava"
+            },
+            {
+                "id": 2,
+                "name": "Albacete"
+            },
+            {
+                "id": 3,
+                "name": "Alicante/Alacant"
+            },
+            {
+                "id": 4,
+                "name": "Almer\u00eda"
+            },
+            {
+                "id": 5,
+                "name": "Asturias"
+            },
+            {
+                "id": 6,
+                "name": "\u00c1vila"
+            },
+            {
+                "id": 7,
+                "name": "Badajoz"
+            },
+            {
+                "id": 8,
+                "name": "Balears, Illes"
+            },
+            {
+                "id": 9,
+                "name": "Barcelona"
+            },
+            {
+                "id": 10,
+                "name": "Burgos"
+            },
+            {
+                "id": 11,
+                "name": "C\u00e1ceres"
+            },
+            {
+                "id": 12,
+                "name": "C\u00e1diz"
+            },
+            {
+                "id": 13,
+                "name": "Cantabria"
+            },
+            {
+                "id": 14,
+                "name": "Castell\u00f3n/Castell\u00f3"
+            },
+            {
+                "id": 15,
+                "name": "Ceuta"
+            },
+            {
+                "id": 16,
+                "name": "Ciudad Real"
+            },
+            {
+                "id": 17,
+                "name": "C\u00f3rdoba"
+            },
+            {
+                "id": 18,
+                "name": "Coru\u00f1a, A"
+            },
+            {
+                "id": 19,
+                "name": "Cuenca"
+            },
+            {
+                "id": 20,
+                "name": "Girona"
+            },
+            {
+                "id": 21,
+                "name": "Granada"
+            },
+            {
+                "id": 22,
+                "name": "Guadalajara"
+            },
+            {
+                "id": 23,
+                "name": "Gipuzkoa"
+            },
+            {
+                "id": 24,
+                "name": "Huelva"
+            },
+            {
+                "id": 25,
+                "name": "Huesca"
+            },
+            {
+                "id": 26,
+                "name": "Ja\u00e9n"
+            },
+            {
+                "id": 27,
+                "name": "Le\u00f3n"
+            },
+            {
+                "id": 28,
+                "name": "Lleida"
+            },
+            {
+                "id": 29,
+                "name": "Lugo"
+            },
+            {
+                "id": 30,
+                "name": "Madrid"
+            },
+            {
+                "id": 31,
+                "name": "M\u00e1laga"
+            },
+            {
+                "id": 32,
+                "name": "Melilla"
+            },
+            {
+                "id": 33,
+                "name": "Murcia"
+            },
+            {
+                "id": 34,
+                "name": "Navarra"
+            },
+            {
+                "id": 35,
+                "name": "Ourense"
+            },
+            {
+                "id": 36,
+                "name": "Palencia"
+            },
+            {
+                "id": 37,
+                "name": "Palmas, Las"
+            },
+            {
+                "id": 38,
+                "name": "Pontevedra"
+            },
+            {
+                "id": 39,
+                "name": "Rioja, La"
+            },
+            {
+                "id": 40,
+                "name": "Salamanca"
+            },
+            {
+                "id": 41,
+                "name": "Santa Cruz de Tenerife"
+            },
+            {
+                "id": 42,
+                "name": "Segovia"
+            },
+            {
+                "id": 43,
+                "name": "Sevilla"
+            },
+            {
+                "id": 44,
+                "name": "Soria"
+            },
+            {
+                "id": 45,
+                "name": "Tarragona"
+            },
+            {
+                "id": 46,
+                "name": "Teruel"
+            },
+            {
+                "id": 47,
+                "name": "Toledo"
+            },
+            {
+                "id": 48,
+                "name": "Valencia/Val\u00e8ncia"
+            },
+            {
+                "id": 49,
+                "name": "Valladolid"
+            },
+            {
+                "id": 50,
+                "name": "Bizkaia"
+            },
+            {
+                "id": 51,
+                "name": "Zamora"
+            },
+            {
+                "id": 52,
+                "name": "Zaragoza"
+            }
+        ]
+    },
+    "state": true,
+    "status": "ONLINE"
+}

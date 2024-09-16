@@ -7,6 +7,7 @@ describe('Generation Form', () => {
   })
 
   function fillInData(data) {
+
     cy.get('#member_name')
       .type(data.new_member.name)
       .should('have.value', data.new_member.name)
@@ -46,14 +47,9 @@ describe('Generation Form', () => {
     cy.get('[name="privacy_policy_accepted"]').click()
     cy.get('[data-cy=next]').click()
 
-
-
   }
 
   beforeEach(() => {
-    cy.visit('/generationkwh/contribution')
-    cy.fixture('generationkwhContribution.json').as('data')
-
     cy.intercept('GET', '/ping', {
       statusCode: 200,
       body: {
@@ -61,10 +57,15 @@ describe('Generation Form', () => {
         status: "ONLINE"
       }
     })
-
+    cy.visit('/generationkwh/contribution')
+    cy.fixture('generationkwhContribution.json').as('data')
+    cy.fixture('generationLocationData/provincies.json').as('provincies')
+    cy.fixture('generationLocationData/municipis.json').as('municipis')
+    cy.fixture('generationLocationData/ine.json').as('ine')
   })
 
     context('Member - Success Tests', () => {
+
       it('Contribute with an action', function () {
   
         //Member page
@@ -147,6 +148,21 @@ describe('Generation Form', () => {
       cy.wait('@vatExists')
         .its('response.statusCode')
         .should('be.oneOf', [200, 304])
+
+      cy.intercept('GET', '/data/provincies', {
+        statusCode: 200,
+        body: this.provincies
+      })
+
+      cy.intercept('GET', '/data/municipis/*', {
+        statusCode: 200,
+        body: this.municipis
+      })
+
+      cy.intercept('GET', '/data/ine/*', {
+        statusCode: 200,
+        body: this.ine
+      })
 
       cy.get('[data-cy=next]').click()
 
