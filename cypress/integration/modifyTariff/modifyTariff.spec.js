@@ -8,10 +8,17 @@ describe('Modify Tariff', () => {
     console.error(error)
     return false
   })
-
   beforeEach(() => {
+    cy.fixture('generalContractTerms.html').as('html')
     cy.visit('/ca/contract/indexed')
-    
+    cy.intercept('GET', '/ping', {
+      statusCode: 200,
+      body: {
+        state: true,
+        status: "ONLINE"
+      }
+    })
+
     cy.intercept('GET', '/procedures/can_turn_contract_indexed', {
       statusCode: 200,
       body: {
@@ -34,11 +41,21 @@ describe('Modify Tariff', () => {
   })
 
   it('Change Tariff to indexada', function () {
+    cy.intercept('GET', `/static/docs/ca/general-contract-terms.html`, {
+      statusCode: 200,
+      headers: {'content-type':'text/html'},
+      body: this.html
+    }).as('generalTerms')
+
     cy.get('[data-cy="next"]').click()
 
     cy.get('[data-cy="next"]').click()
 
     cy.get('[id=change-tarif-terms-check]').click()
+
+    cy.wait('@generalTerms')
+    .its('response.statusCode')
+    .should('be.oneOf', [200, 304])
 
     cy.get('[id=terms-dialog-accept-btn]').click()
 
