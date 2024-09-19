@@ -14,7 +14,12 @@ import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import { iconRequirements, iconOffRequirements } from './gurbTheme'
 
 const LightQuestion = (props) => {
+  const { values, setFieldValue } = props
   const { t } = useTranslation()
+
+  const handleLightQuestion = (value) => {
+    setFieldValue('has_light', value)
+  }
 
   const options = [
     {
@@ -35,7 +40,11 @@ const LightQuestion = (props) => {
     <>
       <TextRecomendation title={t('GURB_ACTUALMENT_HI_HA_LLUM')} />
       &nbsp;
-      <Chooser options={options} />
+      <Chooser
+        options={options}
+        value={values.has_light}
+        handleChange={handleLightQuestion}
+      />
     </>
   )
 }

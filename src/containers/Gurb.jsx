@@ -5,12 +5,18 @@ import { Formik } from 'formik'
 // import * as Yup from 'yup'
 
 import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
 
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
+import supplyPointValidations from './Gurb/supplyPointValidations'
+import {
+  addressValidations,
+  lightValidations
+} from './Gurb/requirementsValidations'
 
 const MAX_STEP_NUMBER = 6
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
@@ -25,9 +31,22 @@ const Gurb = (props) => {
   }, [language, i18n])
 
   const initialValues = {
-    cups: undefined
+    cups: undefined,
+    has_light: undefined,
+    address: {
+      street: undefined,
+      number: undefined,
+      postal_code: undefined,
+      state: undefined,
+      city: undefined
+    }
   }
-  // const validationSchemas = []
+
+  const validationSchemas = [
+    supplyPointValidations,
+    lightValidations,
+    addressValidations
+  ]
 
   const nextStep = () => {
     const next = activeStep + 1
@@ -58,12 +77,12 @@ const Gurb = (props) => {
     <Container maxWidth="md" disableGutters={true}>
       <Formik
         initialValues={initialValues}
-        // validationSchema={validationSchemas[activeStep]}
-      >
+        validationSchema={validationSchemas[activeStep]}
+        validateOnChange={false}>
         {(formikProps) => (
           <>
             {getStep(formikProps)}
-            <div
+            <Box
               style={{
                 marginTop: '2rem',
                 marginX: '2rem',
@@ -76,11 +95,13 @@ const Gurb = (props) => {
                 title={'PREV'}
               />
               <NextButton
-                disabled={activeStep === MAX_STEP_NUMBER}
+                disabled={
+                  !formikProps.isValid || activeStep === MAX_STEP_NUMBER
+                }
                 onClick={() => nextStep(formikProps)}
                 title={'NEXT'}
               />
-            </div>
+            </Box>
           </>
         )}
       </Formik>
