@@ -6,7 +6,6 @@ import TextRecomendation from './components/TextRecomendation'
 import CUPS from './components/CUPS'
 
 const SupplyPoint = (props) => {
-  //   const { values, handleChange, setFieldValue } = props
   const { t } = useTranslation()
 
   return (
@@ -20,7 +19,7 @@ const SupplyPoint = (props) => {
         text={t('GURG_SUPPLY_POINT_RECOMENDATION_TEXT')}
       />
       &nbsp;
-      <CUPS />
+      <CUPS {...props} />
     </>
   )
 }
