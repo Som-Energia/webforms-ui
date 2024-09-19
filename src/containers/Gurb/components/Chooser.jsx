@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { textHeader4, textBody1 } from '../gurbTheme'
@@ -43,16 +42,20 @@ const Option = ({
   )
 }
 
-const Chooser = ({ options }) => {
-  const [selected, setSelected] = useState(undefined)
+const Chooser = (props) => {
+  const { options, value, handleChange } = props
+
+  const setOptionSelection = (option) => {
+    handleChange(option)
+  }
 
   return (
     <Grid container spacing={4}>
       {options.map((option, index) => (
         <Grid key={index} item xs={12} sm={6}>
           <Option
-            isSelected={option?.id === selected}
-            setSelected={setSelected}
+            isSelected={option?.id === value}
+            setSelected={setOptionSelection}
             optionId={option?.id}
             icon={option?.icon}
             textHeader={option?.textHeader}
