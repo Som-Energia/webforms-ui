@@ -28,8 +28,9 @@ describe('Contract', () => {
 
       cy.get('.MuiAlert-message').contains('no es posible contratar')
     })
-
+ 
     it('Contract with 2.0TD', function () {
+      cy.fixture('normalizedData/contract20_noservice.json').as('reqData')
       const moreThan15Kw = false
       const powers = [this.data.power, this.data.power2]
 
@@ -47,7 +48,22 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+        req.reply({
+          statusCode: 200,
+          body: {
+            data: {
+              contract_id:565944,
+              contract_number: 240032
+            },
+            state: true,
+            status: 'ONLINE'
+          }
+        })
+      })
       cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=submit]').click()
 
     })
   })
@@ -72,6 +88,7 @@ describe('Contract', () => {
     })
 
     it('Contract with 2.0TD', function () {
+      cy.fixture('normalizedData/contract20.json').as('reqData')
       const moreThan15Kw = false
       const powers = [this.data.power, this.data.power2]
 
@@ -89,7 +106,23 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+
+        req.reply({
+          statusCode: 200,
+          body: {
+            data: {
+              contract_id:565944,
+              contract_number: 240032
+            },
+            state: true,
+            status: 'ONLINE'
+          },
+        });
+      })
       cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=submit]').click()
 
     })
   })
