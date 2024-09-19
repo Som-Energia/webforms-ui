@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import SomStepper from './components/SomStepper'
@@ -9,6 +8,8 @@ import { HelperText } from './components/InputField'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
+import Groups2Icon from '@mui/icons-material/Groups2'
+import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 
 import { iconRequirements, iconOffRequirements } from './gurbTheme'
 
@@ -86,7 +87,38 @@ const SelfConsumption = (props) => {
 }
 
 const MemberQuestion = () => {
-  return <>Member</>
+  const { t } = useTranslation()
+
+  const options = [
+    {
+      id: 'member-on',
+      icon: <Groups2Icon sx={iconRequirements} />,
+      textHeader: t('GURB_TINC_AUTOCONSUM'),
+      textBody: t('GURB_TINC_AUTOCONSUM_BODY')
+    },
+    {
+      id: 'member-off',
+      icon: <Groups2Icon sx={iconOffRequirements} />,
+      textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
+      textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
+    },
+    {
+      id: 'apadrinating',
+      icon: <HandshakeOutlinedIcon sx={iconRequirements} />,
+      textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
+      textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
+    }
+  ]
+
+  return (
+    <>
+      <TextRecomendation title={t('GURB_AUTOCONSUM_TITLE')} />
+      &nbsp;
+      <Chooser options={options} />
+      &nbsp;
+      <HelperText helperText={t('GURB_AUTOCONSUM_HELPER')} iconHelper={true} />
+    </>
+  )
 }
 
 const Requirements = (props) => {
