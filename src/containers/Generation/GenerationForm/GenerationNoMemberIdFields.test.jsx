@@ -87,7 +87,7 @@ describe('Generation Form Review', () => {
       />
     )
 
-    const vatTextField = getById(dom.container, 'pastel')
+    const vatTextField = getById(dom.container, 'vat')
     React.act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
