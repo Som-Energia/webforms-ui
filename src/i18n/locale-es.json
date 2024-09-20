@@ -107,6 +107,7 @@
     "CUPS_INVALID": "CUPS incorrecto",
     "MEMBER_PERSONAL_DATA": "Datos personales de la nueva persona socia",
     "HOLDER_PERSONAL_DATA": "Datos personales de la nueva persona titular",
+    "HOLDER_PERSONAL_DATA_TRIAL_PERIOD": "¡Contrata ahora y decide más adelante si quieres asociarte a la cooperativa!",
     "HOLDER_NAME": "Nombre",
     "HOLDER_NAME_HELP": "Nombre de la persona titular",
     "HOLDER_SURNAME1": "Primer apellido",

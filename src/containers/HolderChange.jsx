@@ -292,7 +292,13 @@ function HolderChange(props) {
         )}
         {activeStep === 3 && <HolderCase {...props} />}
         {activeStep === 4 && <MemberIdentifier {...props} />}
-        {activeStep === 5 && <PersonalData url={url} {...props} />}
+        {activeStep === 5 && (
+          <PersonalData
+            url={url}
+            {...props}
+            isMemberMandatoryForHolderchange={isMemberMandatoryForHolderchange}
+          />
+        )}
         {activeStep === 6 && <VoluntaryCent {...props} />}
         {activeStep === 7 && <SpecialCases {...props} />}
         {activeStep === 8 && <IBAN {...props} />}
