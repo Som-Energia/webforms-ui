@@ -138,7 +138,7 @@ function PersonalData(props) {
       <Box className="step-body">
         {!isMemberMandatoryForHolderchange && trialPeriod && (
           <Box sx={{ marginBottom: '1rem' }}>
-            <Typography component="h3" variant="h7">
+            <Typography sx={{ fontSize: '18px', fontWeight: '500' }}>
               {t('HOLDER_PERSONAL_DATA')}
             </Typography>
           </Box>
