@@ -226,7 +226,7 @@ describe("checkCAUWhileTyping provides feedback and correction while typing the 
     expect(checkCAUWhileTyping('ESD', t)).toEqual({
       value: 'ESD',
       valid: false,
-      error: 'CAU_INVALID_CUPS_SHOULD_BE_NUMBERS',
+      error: 'CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS',
     })
   })
   test("Should complain about length if just numbers after ES", () => {
@@ -247,21 +247,21 @@ describe("checkCAUWhileTyping provides feedback and correction while typing the 
     expect(checkCAUWhileTyping('ES123456789012345K', t)).toEqual({
       value: 'ES123456789012345K',
       valid: false,
-      error: 'CAU_INVALID_CUPS_SHOULD_BE_NUMBERS',
+      error: 'CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS',
     })
   })
   test("Should complain first CRC should be a number", () => {
     expect(checkCAUWhileTyping('ES12345678901234567', t)).toEqual({
       value: 'ES12345678901234567',
       valid: false,
-      error: 'CAU_INVALID_CUPS_REDUNDANCY_SHOULD_BE_LETTERS',
+      error: 'CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS',
     })
   })
   test("Should complain second CRC digit is a number", () => {
     expect(checkCAUWhileTyping('ES1234567890123456A8', t)).toEqual({
       value: 'ES1234567890123456A8',
       valid: false,
-      error: 'CAU_INVALID_CUPS_REDUNDANCY_SHOULD_BE_LETTERS',
+      error: 'CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS',
     })
   })
   test("Should complain of a border point not starting with a number", () => {
@@ -356,7 +356,7 @@ describe("checkCAUWhileTyping provides feedback and correction while typing the 
     expect(checkCAUWhileTyping('ES123456789K', t, 'ES1111222233334444551F')).toEqual({
       value: 'ES123456789K',
       valid: false,
-      error: 'CAU_INVALID_CUPS_SHOULD_BE_NUMBERS',
+      error: 'CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS',
     })
   })
 })
