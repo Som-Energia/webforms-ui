@@ -552,3 +552,43 @@ export const isHomeOwnerCommunityNif = (nif) => {
   return /^H/.test(nif)
 }
 
+export const checkCAUWhileTyping = (value, t, matchingCups) => {
+  function error(message) {
+    return {value, valid: false, error: message}
+  }
+  value = value.replaceAll(' ', '').toUpperCase()
+
+  // When empty fail but do not show message yet
+  if (!value)
+    return error()
+
+  if (value.slice(0,2) !== "ES".slice(0, value.length))
+    return error(t('CAU_INVALID_PREFIX'))
+
+  const numbers = value.slice(2,18)
+  if (!/^\d{0,16}$/.test(numbers))
+    return error(t('CAU_INVALID_CUPS_SHOULD_BE_NUMBERS'))
+
+  const redundancyDigits = value.slice(18,20)
+  if (!/^[A-Z]{0,2}$/.test(redundancyDigits))
+    return error(t('CAU_INVALID_CUPS_REDUNDANCY_SHOULD_BE_LETTERS'))
+
+  const cupsWithoutBorder = value.slice(0, 20)
+  if (matchingCups && matchingCups.slice(0, cupsWithoutBorder.length) !== cupsWithoutBorder)
+    return error(t('CAU_NOT_MATCHING_CUPS'))
+
+
+  const borderPoint = value.slice(20, 22)
+  if (borderPoint && !/^\d[A-Za-z]{0,1}$/.test(borderPoint))
+    return error(t('CAU_INVALID_BORDER_POINT'))
+
+  const installation = value.slice(22, 26)
+  if (installation && !/^\A\d{0,3}$/.test(installation))
+    return error(t('CAU_INVALID_INSTALLATION'))
+
+  if (value.length !== 26)
+    return error(t("CAU_INVALID_LENGTH"))
+
+  return {value, valid: true}
+}
+
