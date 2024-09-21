@@ -1,5 +1,15 @@
 # Change Log
 
+## Unreleased
+
+- CAU code validation fixes
+    - TDD rewritten code (inspired on the old one but adding it progressively to fail every test)
+    - Fix: Partial match now complaints on length not on unmatching cups
+    - Fix: Now verifies locally that 18 numbers follow after 'ES'
+    - Complaints on bad partially written border points and installation
+    - Corrects spurious spaces from user
+    - Corrects lowercases into upper cases from user
+
 ## 2.3.9 2024-09-30
 
 - Added VITE feature flag: isMemberMandatoryForHolderchange
