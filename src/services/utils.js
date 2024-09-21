@@ -567,11 +567,11 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
 
   const numbers = value.slice(2,18)
   if (!/^\d{0,16}$/.test(numbers))
-    return error(t('CAU_INVALID_CUPS_SHOULD_BE_NUMBERS'))
+    return error(t('CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS'))
 
   const redundancyDigits = value.slice(18,20)
   if (!/^[A-Z]{0,2}$/.test(redundancyDigits))
-    return error(t('CAU_INVALID_CUPS_REDUNDANCY_SHOULD_BE_LETTERS'))
+    return error(t('CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS'))
 
   const cupsWithoutBorder = value.slice(0, 20)
   if (matchingCups && matchingCups.slice(0, cupsWithoutBorder.length) !== cupsWithoutBorder)
