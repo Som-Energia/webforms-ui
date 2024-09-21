@@ -90,7 +90,6 @@ describe("Check the utils functions", () => {
         expect(checkIsTariff20(tariff20tdIndexadaSom)).toBeTruthy()
 
     })
-
 })
 
 describe("Check Contract Form (normalize function)", () => {
