@@ -741,9 +741,13 @@
     "GURB_TINC_AUTOCONSUM_BODY": "Qualsevol projecte que sigui de generació energètica",
     "GURB_NO_TINC_AUTOCONSUM": "No tinc autoconsum",
     "GURB_NO_TINC_AUTOCONSUM_BODY": "Actualment no disposo de cap modalitat d'autoconsum",
-    "GURB_AUTOCONSUM_HELPER": "Què és una modalitat d'autoconsum?"
-
-
-
-
+    "GURB_AUTOCONSUM_HELPER": "Què és una modalitat d'autoconsum?",
+    "GURB_HAS_MEMBER_TITLE": "4. Ets soci/a de Som Energia o coneixes a algú que ho és i pot apadrinar-te?",
+    "GURB_APADRINATING_HELPER": "Com em poden apadrinar?",
+    "GURB_HAS_MEMBER": "Sóc soci/a",
+    "GURB_HAS_MEMBER_BODY": "Sóc soci/a de la cooperativa",
+    "GURB_HAS_NO_MEMBER": "No sóc soci/a",
+    "GURB_HAS_NO_MEMBER_BODY": "No sóc soci/a de la cooperativa",
+    "GURB_APADRINATING": "M'apadrinen",
+    "GURB_APADRINATING_BODY": "Conec a algú que em pot apadrinar"
 }
