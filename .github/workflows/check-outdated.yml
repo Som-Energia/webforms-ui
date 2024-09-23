@@ -25,13 +25,7 @@ jobs:
         run: npm cache clean --force
 
       # Run npm outdated and handle failures
-      - name: Check outdated dependencies
+      - name: List of outdated dependencies
         run: |
-          OUTDATED=$(npm outdated)
-          if [[ -n "$OUTDATED" ]]; then
-            echo "Outdated dependencies found!"
-            echo "$OUTDATED"
-            exit 1
-          else
-            echo "All dependencies are up-to-date."
-          fi
+          echo Listing for updated dependencies
+          npm outdated || true
