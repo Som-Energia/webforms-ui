@@ -1,16 +1,22 @@
 ame: Check for Outdated NPM Dependencies
 
 # Trigger the workflow on pull requests to the main branch
-on:
-  pull_request:
-    branches:
-      - main
-
+on: [push]
 jobs:
   check-outdated:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+      - name: Install dependencies
+        run: npm install
+      - name: Check outdated dependencies
+        run: npm outdated
       - name: Fail on outdated dependencies
         run: |
           if [[ $(npm outdated) ]]; then
