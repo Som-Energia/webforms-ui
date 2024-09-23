@@ -317,6 +317,8 @@ describe('Contract', () => {
 
     cy.fixture('normalizedData/contract_20_owner.json').as('reqData')
 
+    cy.fixture('normalizedData/contract_20_owner.json').as('reqData')
+
     cy.get('#memberNumber')
       .clear()
       .type(memberNumber)
