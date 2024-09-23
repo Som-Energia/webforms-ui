@@ -86,7 +86,7 @@ const Gurb = (props) => {
   }, [activeStep])
   
   return (
-    <Container maxWidth="md" disableGutters={true}>
+    <Container maxWidth="md" disableGutters={true} sx={{padding: '1rem'}}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
