@@ -50,9 +50,16 @@ const Chooser = (props) => {
   }
 
   return (
-    <Grid container spacing={4}>
+    <Grid
+      container
+      spacing={4}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
       {options.map((option, index) => (
-        <Grid key={index} item xs={12} sm={6}>
+        <Grid key={index} item xs={12} sm={6} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <Option
             isSelected={option?.id === value}
             setSelected={setOptionSelection}
@@ -60,7 +67,12 @@ const Chooser = (props) => {
             icon={option?.icon}
             textHeader={option?.textHeader}
             textBody={option?.textBody}
-          />
+            />
+          {option?.helper && (
+            <Box sx={{ marginTop: '1rem'} }>
+              {option?.helper}
+            </Box>
+          )}
         </Grid>
       ))}
     </Grid>

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import { textHeader4, textHelper1 } from '../gurbTheme'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-// import InputBase from '@mui/material/InputBase';
 
 export const HelperText = ({ helperText, iconHelper }) => {
   return (
@@ -17,6 +16,7 @@ export const HelperText = ({ helperText, iconHelper }) => {
 }
 
 const InputField = ({
+  textFieldLabel,
   textFieldName,
   textFieldHelper,
   iconHelper = false,
@@ -40,7 +40,7 @@ const InputField = ({
           sx: { borderRadius: '8px', display: 'flex' },
           onBlur: handleBlur
         }}
-        label={textFieldName}
+        label={textFieldLabel}
         helperText={
           touched && error ? (
             error

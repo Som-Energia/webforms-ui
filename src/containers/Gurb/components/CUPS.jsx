@@ -23,8 +23,9 @@ const CUPS = (props) => {
 
   return (
     <InputField
-      textFieldName={'CUPS'}
-      textFieldHelper={t('On puc trobar el CUPS?')}
+      textFieldLabel={t('GURB_CUPS_LABEL')}
+      textFieldName={t('GURB_CUPS_FIELD')}
+      textFieldHelper={t('GURB_CUPS_HELPER')}
       iconHelper={true}
       handleChange={handleInputCups}
       handleBlur={handleInputCupsBlur}

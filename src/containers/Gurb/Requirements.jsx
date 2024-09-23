@@ -63,13 +63,14 @@ const Address = (props) => {
   return (
     <>
       <TextRecomendation
-        title={t('GURB_ADRECA_SUBMINISTRAMENT_TITLE')}
-        text={t('GURB_ADRECA_SUBMINISTRAMENT_TITLE_HELPER')}
+        title={t('GURB_ADDRESS_TITLE')}
+        text={t('GURB_ADDRESS_TITLE_HELPER')}
       />
       &nbsp;
       <InputField
-        textFieldName={t('GURB_ADRECA_SUBMINISTRAMENT')}
-        textFieldHelper={t('GURB_ADRECA_SUBMINISTRAMENT_HELPER')}
+        textFieldLabel={t('GURB_ADDRESS_LABEL')}
+        textFieldName={t('GURB_ADDRESS_FIELD')}
+        textFieldHelper={t('GURB_ADDRESS_HELPER')}
         iconHelper={false}
         handleChange={handleInputAddress}
         handleBlur={handleInputAddressBlur}
@@ -92,7 +93,7 @@ const SelfConsumption = (props) => {
       id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
       textHeader: t('GURB_TINC_AUTOCONSUM'),
-      textBody: t('GURB_TINC_AUTOCONSUM_BODY')
+      textBody: t('GURB_TINC_AUTOCONSUM_BODY'),
     },
     {
       id: 'selfconsumption-off',
@@ -141,7 +142,8 @@ const MemberQuestion = (props) => {
       id: 'apadrinating',
       icon: <HandshakeOutlinedIcon sx={iconRequirements} />,
       textHeader: t('GURB_APADRINATING'),
-      textBody: t('GURB_APADRINATING_BODY')
+      textBody: t('GURB_APADRINATING_BODY'),
+      helper: <HelperText helperText={t('GURB_APADRINATING_HELPER')} iconHelper={true} />
     }
   ]
 
@@ -154,8 +156,6 @@ const MemberQuestion = (props) => {
         value={values.has_member}
         handleChange={handleMemberQuestion}
       />
-      &nbsp;
-      <HelperText helperText={t('GURB_APADRINATING_HELPER')} iconHelper={true} />
     </>
   )
 }
