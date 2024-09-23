@@ -20,6 +20,7 @@ describe('Contract', () => {
       const moreThan15Kw = false
       const powers = [this.data.power, this.data.power2]
 
+      cy.fixture('normalizedData/contract_20selfconsumption.json').as('reqData')
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
@@ -38,12 +39,28 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
+      cy.intercept('POST', '/procedures/contract', (req) => {
+      expect(req.body).to.deep.equal(this.reqData);
+        req.reply({
+          statusCode: 200,
+          body: {
+            data: {
+              contract_id: 565944,
+              contract_number: 240032
+            },
+            state: true,
+            status: 'ONLINE'
+          },
+        });
+      })
       cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.get('[data-cy=submit]').click()
     })
   })
 
   describe('Contract with CUPS without service', function () {
     beforeEach(function () {
+      cy.fixture('normalizedData/contract20_noservice.json').as('reqData')
       cy.identifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
@@ -70,7 +87,22 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
-      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+          req.reply({
+            statusCode: 200,
+            body: {
+              data: {
+                contract_id: 565944,
+                contract_number: 240032
+              },
+              state: true,
+              status: 'ONLINE'
+            },
+          });
+        })
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=submit]').click()
     })
 
     it('3.0TD no incremental powers', function () {
@@ -97,6 +129,7 @@ describe('Contract', () => {
         this.data.power5,
         this.data.power6
      ]
+      cy.fixture('normalizedData/contract_30selfconsumption.json').as('reqData')
 
       cy.choosePhase(this.data.phase)
 
@@ -112,7 +145,22 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
-      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+          req.reply({
+            statusCode: 200,
+            body: {
+              data: {
+                contract_id: 565944,
+                contract_number: 240032
+              },
+              state: true,
+              status: 'ONLINE'
+            },
+          });
+        })
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=submit]').click()
     })
   })
 
@@ -133,6 +181,8 @@ describe('Contract', () => {
 
       const powers = [this.data.power, this.data.power2]
 
+      cy.fixture('normalizedData/contract20.json').as('reqData')
+
       cy.enterPowerFare(moreThan15Kw, powers)
 
       cy.chooseTariff(this.data.isIndexed)
@@ -147,7 +197,23 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
-      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        console.log("RESPONSE",req)
+        expect(req.body).to.deep.equal(this.reqData);
+          req.reply({
+            statusCode: 200,
+            body: {
+              data: {
+                contract_id: 565944,
+                contract_number: 240032
+              },
+              state: true,
+              status: 'ONLINE'
+            },
+          })
+        })
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=submit]').click()
     })
 
     it('Contract with 3.0TD', function () {
@@ -164,6 +230,8 @@ describe('Contract', () => {
         this.data.power6
      ]
 
+      cy.fixture('normalizedData/contract_30noselfconsumption.json').as('reqData')
+
       cy.enterPowerFare(moreThan15Kw, powers)
 
       cy.chooseTariff(this.data.isIndexed)
@@ -178,7 +246,22 @@ describe('Contract', () => {
 
       cy.reviewAndConfirmData()
 
-      cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+          req.reply({
+            statusCode: 200,
+            body: {
+              data: {
+                contract_id: 565944,
+                contract_number: 240032
+              },
+              state: true,
+              status: 'ONLINE'
+            },
+          })
+        })
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=submit]').click()
     })
   })
 
@@ -216,6 +299,8 @@ describe('Contract', () => {
     let memberVat = this.data.member.badVat
 
     cy.intercept('GET', '/data/soci/**').as('checkMember')
+
+    cy.fixture('normalizedData/contract_20_owner.json').as('reqData')
 
     cy.get('#memberNumber')
       .clear()
@@ -402,7 +487,22 @@ describe('Contract', () => {
 
     cy.reviewAndConfirmData()
 
-    cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+          req.reply({
+            statusCode: 200,
+            body: {
+              data: {
+                contract_id: 565944,
+                contract_number: 240032
+              },
+              state: true,
+              status: 'ONLINE'
+            },
+          });
+        })
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=submit]').click()
   })
 })
 
@@ -418,6 +518,7 @@ describe('Contract', () => {
     })
 
     it('Juridic 20', function() {
+      cy.fixture('normalizedData/contract_juridic.json').as('reqData')
       const moreThan15Kw = false
 
       cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
@@ -431,13 +532,30 @@ describe('Contract', () => {
       cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 
       cy.identifyOwner(this.data.juridicHolder.vat, this.data.juridicHolder.previousHolder)
-
-
     })
+
     afterEach(function () {
       cy.juridicPersonalData(this.data.juridicHolder, this.data.holder)
       cy.reviewAndConfirmData()
+
+      cy.intercept('POST', '/procedures/contract', (req) => {
+        expect(req.body).to.deep.equal(this.reqData);
+          req.reply({
+            statusCode: 200,
+            body: {
+              data: {
+                contract_id: 565944,
+                contract_number: 240032
+              },
+              state: true,
+              status: 'ONLINE'
+            },
+          });
+        //})
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=submit]').click()
     })
+  })
 /*
     it('Same juridic person', function () {
       cy.get('[name="holder.vat"]')
