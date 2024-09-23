@@ -1,8 +1,4 @@
-import { textBody3, textSubtitle } from '../gurbTheme'
-import Header from './Header'
-
 import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepConnector, {
@@ -15,12 +11,12 @@ const SomConnector = styled(StepConnector)(({ theme }) => ({
   marginBottom: '3rem',
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#96B633'
+      borderColor: '#1E1E1E'
     }
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#96B633'
+      borderColor: '#1E1E1E'
     }
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -43,12 +39,6 @@ const SomStepper = (props) => {
 
   return (
     <>
-      <Typography sx={textSubtitle}>Formulari inscripció</Typography>
-      <Header title="Requisits de participació" />
-      <Typography sx={textBody3}>
-        Per participar has de complir els 4 requisits que et preguntem a
-        continuació
-      </Typography>
       <Stepper activeStep={activeStep} connector={<SomConnector />}>
         {Array(connectors)
           .fill(0)
