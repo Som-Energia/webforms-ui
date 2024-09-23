@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -73,14 +73,23 @@ const Gurb = (props) => {
       return <></>
     }
   }
+
+  const formikRef = useRef(null)
+  useEffect(() => {
+    formikRef.current.validateForm()
+    console.log("formikRef.current", formikRef.current)
+  }, [activeStep])
+  
   return (
     <Container maxWidth="md" disableGutters={true}>
       <Formik
+        innerRef={formikRef}
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
-        validateOnChange={false}>
-        {(formikProps) => (
-          <>
+        validateOnChange={true}
+        validateOnBlur={false}>
+        {(formikProps) => {
+          return <>
             {getStep(formikProps)}
             <Box
               style={{
@@ -103,7 +112,8 @@ const Gurb = (props) => {
               />
             </Box>
           </>
-        )}
+        }
+        }
       </Formik>
     </Container>
   )
