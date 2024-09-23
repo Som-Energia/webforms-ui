@@ -1,0 +1,21 @@
+ame: Check for Outdated NPM Dependencies
+
+# Trigger the workflow on pull requests to the main branch
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-outdated:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fail on outdated dependencies
+        run: |
+          if [[ $(npm outdated) ]]; then
+            echo "Outdated dependencies found!"
+            exit 1
+          else
+            echo "All dependencies are up-to-date."
+          fi
