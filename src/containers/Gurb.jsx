@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
-// import * as Yup from 'yup'
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
@@ -15,7 +14,9 @@ import NextButton from '../components/Buttons/NextButton'
 import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
   addressValidations,
-  lightValidations
+  lightValidations,
+  memberQuestionValidations,
+  selfConsumptionValidations
 } from './Gurb/requirementsValidations'
 
 const MAX_STEP_NUMBER = 6
@@ -39,13 +40,17 @@ const Gurb = (props) => {
       postal_code: undefined,
       state: undefined,
       city: undefined
-    }
+    },
+    has_selfconsumption: undefined,
+    has_member: undefined
   }
 
   const validationSchemas = [
     supplyPointValidations,
     lightValidations,
-    addressValidations
+    addressValidations,
+    selfConsumptionValidations,
+    memberQuestionValidations
   ]
 
   const nextStep = () => {
