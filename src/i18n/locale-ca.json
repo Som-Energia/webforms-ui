@@ -732,10 +732,11 @@
     "GURB_HI_HA_LLUM_BODY": "Tinc llum amb Som Energia o amb una altre comercialitzadora.",
     "GURB_NO_HI_HA_LLUM": "No hi ha llum",
     "GURB_NO_HI_HA_LLUM_BODY": "No tinc donada d'alta la llum amb cap comercialitzadora.",
-    "GURB_ADRECA_SUBMINISTRAMENT_TITLE": "2. Indica l'adreça del subministrament",
-    "GURB_ADRECA_SUBMINISTRAMENT_TITLE_HELPER": "Hem de vefificar que l'adreça estigui dins dels 2 km de radi.",
-    "GURB_ADRECA_SUBMINISTRAMENT": "Adreça de subministrament",
-    "GURB_ADRECA_SUBMINISTRAMENT_HELPER": "Exemple: Carrer Indústria, 8, Barcelona, Espanya",
+    "GURB_ADDRESS_TITLE": "2. Indica l'adreça del subministrament",
+    "GURB_ADDRESS_TITLE_HELPER": "Hem de verificar que l'adreça estigui dins dels 2 km de radi.",
+    "GURB_ADDRESS_FIELD": "Adreça de subministrament",
+    "GURB_ADDRESS_LABEL": "Carrer i número",
+    "GURB_ADDRESS_HELPER": "Exemple: Carrer Indústria, 8, Barcelona, Espanya",
     "GURB_AUTOCONSUM_TITLE": "3. Tens alguna modalitat d'autoconsum activa?",
     "GURB_TINC_AUTOCONSUM": "Sí tinc autoconsum",
     "GURB_TINC_AUTOCONSUM_BODY": "Qualsevol projecte que sigui de generació energètica",
@@ -749,5 +750,9 @@
     "GURB_HAS_NO_MEMBER": "No sóc soci/a",
     "GURB_HAS_NO_MEMBER_BODY": "No sóc soci/a de la cooperativa",
     "GURB_APADRINATING": "M'apadrinen",
-    "GURB_APADRINATING_BODY": "Conec a algú que em pot apadrinar"
+    "GURB_APADRINATING_BODY": "Conec a algú que em pot apadrinar",
+    "GURB_CUPS_FIELD": "Número CUPS*",
+    "GURB_CUPS_LABEL": "CUPS",
+    "GURB_CUPS_HELPER": "On puc trobar el CUPS?"
+
 }
