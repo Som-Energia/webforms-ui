@@ -81,17 +81,21 @@ const Address = (props) => {
   )
 }
 const SelfConsumption = (props) => {
+  const { values, setFieldValue } = props
   const { t } = useTranslation()
 
+  const handleSelfconsumptionQuestion = (value) => {
+    setFieldValue('has_selfconsumption', value)
+  }
   const options = [
     {
-      id: 'selfconsmption-on',
+      id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
       textHeader: t('GURB_TINC_AUTOCONSUM'),
       textBody: t('GURB_TINC_AUTOCONSUM_BODY')
     },
     {
-      id: 'selfconsmption-off',
+      id: 'selfconsumption-off',
       icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
       textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
       textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
@@ -102,44 +106,56 @@ const SelfConsumption = (props) => {
     <>
       <TextRecomendation title={t('GURB_AUTOCONSUM_TITLE')} />
       &nbsp;
-      <Chooser options={options} />
+      <Chooser
+        options={options}
+        value={values.has_selfconsumption}
+        handleChange={handleSelfconsumptionQuestion}
+      />
       &nbsp;
       <HelperText helperText={t('GURB_AUTOCONSUM_HELPER')} iconHelper={true} />
     </>
   )
 }
 
-const MemberQuestion = () => {
+const MemberQuestion = (props) => {
+  const { values, setFieldValue } = props
   const { t } = useTranslation()
 
+  const handleMemberQuestion = (value) => {
+    setFieldValue('has_member', value)
+  }
   const options = [
     {
       id: 'member-on',
       icon: <Groups2Icon sx={iconRequirements} />,
-      textHeader: t('GURB_TINC_AUTOCONSUM'),
-      textBody: t('GURB_TINC_AUTOCONSUM_BODY')
+      textHeader: t('GURB_HAS_MEMBER'),
+      textBody: t('GURB_HAS_MEMBER_BODY')
     },
     {
       id: 'member-off',
       icon: <Groups2Icon sx={iconOffRequirements} />,
-      textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
-      textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
+      textHeader: t('GURB_HAS_NO_MEMBER'),
+      textBody: t('GURB_HAS_NO_MEMBER_BODY')
     },
     {
       id: 'apadrinating',
       icon: <HandshakeOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
-      textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
+      textHeader: t('GURB_APADRINATING'),
+      textBody: t('GURB_APADRINATING_BODY')
     }
   ]
 
   return (
     <>
-      <TextRecomendation title={t('GURB_AUTOCONSUM_TITLE')} />
+      <TextRecomendation title={t('GURB_HAS_MEMBER_TITLE')} />
       &nbsp;
-      <Chooser options={options} />
+      <Chooser
+        options={options}
+        value={values.has_member}
+        handleChange={handleMemberQuestion}
+      />
       &nbsp;
-      <HelperText helperText={t('GURB_AUTOCONSUM_HELPER')} iconHelper={true} />
+      <HelperText helperText={t('GURB_APADRINATING_HELPER')} iconHelper={true} />
     </>
   )
 }
