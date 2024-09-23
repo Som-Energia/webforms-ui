@@ -1,6 +1,4 @@
-ame: Check for Outdated NPM Dependencies
-
-# Trigger the workflow on pull requests to the main branch
+name: Check for Outdated NPM Dependencies
 on: [push]
 jobs:
   check-outdated:
