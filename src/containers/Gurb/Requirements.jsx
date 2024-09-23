@@ -50,6 +50,15 @@ const LightQuestion = (props) => {
 }
 const Address = (props) => {
   const { t } = useTranslation()
+  const { values, errors, touched, setFieldValue, setFieldTouched } = props
+
+  const handleInputAddress = (event) => {
+    setFieldValue('address.street', event.target.value)
+  }
+
+  const handleInputAddressBlur = () => {
+    setFieldTouched('address.street', true)
+  }
 
   return (
     <>
@@ -62,6 +71,11 @@ const Address = (props) => {
         textFieldName={t('GURB_ADRECA_SUBMINISTRAMENT')}
         textFieldHelper={t('GURB_ADRECA_SUBMINISTRAMENT_HELPER')}
         iconHelper={false}
+        handleChange={handleInputAddress}
+        handleBlur={handleInputAddressBlur}
+        touched={touched?.address?.street}
+        value={values.address.street}
+        error={errors?.address?.street}
       />
     </>
   )
