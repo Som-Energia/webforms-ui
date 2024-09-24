@@ -12,6 +12,7 @@
 ## 2.3.8 2024-07-27
 
 - Validations forms
+- Improve test coverage
 
 ## 2.3.7 2024-08-27
 
