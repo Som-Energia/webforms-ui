@@ -9,8 +9,8 @@ import Box from '@mui/material/Box'
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
 
-import PrevButton from '../components/Buttons/PrevButton'
-import NextButton from '../components/Buttons/NextButton'
+import PrevButton from './Gurb/components/PrevButton'
+import NextButton from './Gurb/components/NextButton'
 import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
   addressValidations,

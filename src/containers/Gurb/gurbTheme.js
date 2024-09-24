@@ -102,3 +102,51 @@ export const chooserGurgSelected = {
   ...chooserGurg,
   backgroundColor: '#FAFAFA'
 }
+
+export const buttonGurgDark = {
+  ...textBody1,
+  textTransform: 'capitalize',
+  borderRadius: '2rem',
+  border: '1px solid transparent',
+  backgroundColor: '#1E1E1E',
+  color: '#FFFFFF',
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
+  boxShadow: 'none',
+  '&:hover': {
+    backgroundColor: '#FFFFFF',
+    color: '#1E1E1E',
+    boxShadow: 'none',
+    border: '1px solid #D9D9D9'
+  }
+}
+
+export const buttonGurgLight = {
+  ...textBody1,
+  textTransform: 'capitalize',
+  border: '1px solid #D9D9D9',
+  borderRadius: '2rem',
+  color: '#1E1E1E',
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
+  boxShadow: 'none',
+  '& .MuiButton-startIcon': {
+    color: '#1E1E1E',
+    '& svg': { width: '0.8rem', hight: '0.8rem' }
+  },
+  '&.Mui-disabled': {
+    '& .MuiButton-startIcon': {
+      color: 'lightgrey'
+    }
+  },
+  '&:hover': {
+    backgroundColor: '#1E1E1E',
+    color: '#FFFFFF',
+    border: '1px solid transparent',
+    boxShadow: 'none',
+    '& .MuiButton-startIcon': {
+      color: '#FFFFFF',
+      '& svg': { width: '0.8rem', hight: '0.8rem' }
+    }
+  }
+}
