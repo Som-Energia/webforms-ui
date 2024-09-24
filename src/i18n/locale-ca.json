@@ -753,6 +753,11 @@
     "GURB_APADRINATING_BODY": "Conec a algú que em pot apadrinar",
     "GURB_CUPS_FIELD": "Número CUPS*",
     "GURB_CUPS_LABEL": "CUPS",
-    "GURB_CUPS_HELPER": "On puc trobar el CUPS?"
-
+    "GURB_CUPS_HELPER": "On puc trobar el CUPS?",
+    "GURB_REQUIREMENTS_STEP": "Requisits",
+    "GURB_NEW_MEMBER_STEP": "Alta Sòcia",
+    "GURB_CONTRACT_STEP": "Contractació",
+    "GURB_FINAL_STEP": "GURB",
+    "GURB_NEXT": "Següent",
+    "GURB_PREV": "Anterior"
 }
