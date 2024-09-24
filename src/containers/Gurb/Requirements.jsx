@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next'
 
 import SomStepper from './components/SomStepper'
+import SomGurbStepper, {
+  GURB_REQUIREMENTS_STEP
+} from './components/SomGurbStepper'
 import Header from './components/Header'
 
 import Typography from '@mui/material/Typography'
@@ -31,6 +34,7 @@ const Requirements = (props) => {
   return (
     <>
       <Typography sx={textSubtitle}>Formulari inscripció</Typography>
+      <SomGurbStepper activeStep={GURB_REQUIREMENTS_STEP} />
       <Header title="Requisits de participació" />
       <Typography sx={textBody3}>
         Per participar has de complir els 4 requisits que et preguntem a
