@@ -42,15 +42,14 @@ const GenerationMemberIdFields = (props) => {
   const [disabled, setDisabled] = useState(false)
 
   const handleChangeVat = (event) => {
-    let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
-    value = value[0].toUpperCase()
+    let match = event.target.value.match(/[0-9A-Za-z]{0,12}/)
+    let value = match[0].toUpperCase()
     setFieldValue('member.vat', value)
   }
 
   const handleChangeMemberNumber = (event) => {
-    let value = event.target.value.match(/[0-9]{0,12}/)
-    value = value[0].toString()
-    setFieldValue('member.number', value)
+    let match = event.target.value.replace(/[^0-9]/g, '')
+    setFieldValue('member.number', match)
   }
 
   useEffect(() => {
