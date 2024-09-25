@@ -49,7 +49,7 @@ const GenerationMemberIdFields = (props) => {
 
   const handleChangeMemberNumber = (event) => {
     let match = event.target.value.replace(/[^0-9]/g, '')
-    setFieldValue('member.number', match)
+    setFieldValue('member.partner_number', match)
   }
 
   useEffect(() => {
