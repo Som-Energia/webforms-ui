@@ -31,3 +31,12 @@ Launches the Cypress test runner. Cypress requires you to run `npm start` in par
 ```sh
 npm run cypress
 ```
+
+To get `holderChangePersonaldata.js`:
+
+```sh
+cd cypress/fixtures/
+ln -s ../../../testdata/b2bs/holderChangePersonaldata.json .
+```
+
+We should have testdata repo!

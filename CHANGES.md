@@ -1,5 +1,14 @@
 # Change Log
 
+## Unreleased
+
+- Added VITE feature flag: isMemberMandatoryForHolderchange
+- Changes in HolderChange form:
+  - When feature flag is disabled, member is not required (trial period)
+  - Behaviour does not change if the feature flag is enabled
+- Upgrade notes:
+    - isMemberMandatoryForHolderchange in VITE_FEATURE_FLAGS in `.env.*`
+
 ## 2.3.8 2024-07-27
 
 - Validations forms

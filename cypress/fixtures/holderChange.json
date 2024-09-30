@@ -1,7 +1,6 @@
 {
-  "vat": "58291270R",
   "vatInvalid": "00012312R",
-  "cups": "ES0031405994023009AD0F",
+  "randomVat": "02672161K",
   "cupsInvalid": "ES003140623850300XXXXX",
   "cupsAddress": "Pedro López 13 BJO-E",
   "name": "David",
@@ -17,5 +16,8 @@
   "language": "ca_ES",
   "iban": "ES77 1234 1234 1612 3456 7890",
   "voluntaryCent": true,
-  "becomeMember": true
+  "becomeMember": true,
+  "noBecomeMember": false,
+  "linkMember": true,
+  "noLinkMember": false
 }

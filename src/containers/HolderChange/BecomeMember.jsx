@@ -10,16 +10,15 @@ import StepHeader from '../../components/StepHeader'
 
 function BecomeMember(props) {
   const { t } = useTranslation()
-  const { setFieldValue } = props
+  const { setFieldValue, isMemberMandatoryForHolderchange = false } = props
 
   const handleChange = ({ option }) => {
-    setFieldValue('member.link_member', !option, false)
     setFieldValue('member.become_member', option)
   }
 
   return (
     <>
-      <StepHeader title={t('BECOME_MEMBER_TITLE')} />
+      <StepHeader title={ isMemberMandatoryForHolderchange ? t('BECOME_MEMBER_TITLE') : t('BECOME_MEMBER_QUESTION')} />
       <Box className="step-body">
         <Typography
           variant="body1"
@@ -28,7 +27,7 @@ function BecomeMember(props) {
         />
         <Box mt={3} mb={4}>
           <Chooser
-            question={t('BECOME_MEMBER_QUESTION')}
+            question={ isMemberMandatoryForHolderchange ? t('BECOME_MEMBER_QUESTION') : ''}
             onChange={handleChange}
             value={props.values.member.become_member}
             options={[
@@ -42,7 +41,7 @@ function BecomeMember(props) {
                 id: 'become-member-no',
                 value: false,
                 label: t('BECOME_MEMBER_NO_LABEL'),
-                description: t('BECOME_MEMBER_NO_DESCRIPTION')
+                description: isMemberMandatoryForHolderchange && t('BECOME_MEMBER_NO_DESCRIPTION')
               }
             ]}
             canBeEmpty={false}

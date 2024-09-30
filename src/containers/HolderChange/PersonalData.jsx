@@ -38,9 +38,14 @@ function PersonalData(props) {
     touched,
     skipPrivacyPolicy = false,
     title = false,
-    entity = 'holder'
+    entity = 'holder',
+    isMemberMandatoryForHolderchange = false
   } = props
   const [openLegal, setOpenLegal] = useState(false)
+  const trialPeriod =
+    !values?.holder?.ismember &&
+    !values?.member?.link_member &&
+    !values?.member?.become_member
 
   const onChangeProxyVAT = ({ vat, isPhisical, valid }) => {
     const tmpValues = {...values}
@@ -123,12 +128,21 @@ function PersonalData(props) {
         <StepHeader
           title={
             entity === 'holder'
-              ? t('HOLDER_PERSONAL_DATA')
+              ? !isMemberMandatoryForHolderchange && trialPeriod
+                ? t('HOLDER_PERSONAL_DATA_TRIAL_PERIOD')
+                : t('HOLDER_PERSONAL_DATA')
               : t('MEMBER_PERSONAL_DATA')
           }
         />
       )}
       <Box className="step-body">
+        {!isMemberMandatoryForHolderchange && trialPeriod && (
+          <Box sx={{ marginBottom: '1rem' }}>
+            <Typography sx={{ fontSize: '18px', fontWeight: '500' }}>
+              {t('HOLDER_PERSONAL_DATA')}
+            </Typography>
+          </Box>
+        )}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <TextField
