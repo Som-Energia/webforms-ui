@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.9 2024-09-30
 
 - Added VITE feature flag: isMemberMandatoryForHolderchange
 - Changes in HolderChange form:
