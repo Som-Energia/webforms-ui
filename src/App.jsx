@@ -13,19 +13,10 @@ import './i18n/i18n'
 import './App.css'
 import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
 import { PopUpContextProvider } from './context/PopUpContext'
+import MatomoProvider from './trackers/matomo/MatomoProvider'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
-
-  useEffect(() => {
-      const matomoUrl = import.meta.env.VITE_MATOMO_URL
-      var _paq = window._paq = window._paq || [];
-      _paq.push({'_paq.startTime': (new Date().getTime()), 'event': '_paq.Start'});
-      (function() {
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.async=true; g.src=matomoUrl; s.parentNode.insertBefore(g,s);
-      })();
-  }, [])
 
   const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
@@ -139,11 +130,31 @@ const App = (props) => {
                 <Route
                   exact
                   path="/contract"
-                  element={<Contract {...props} />}
+                  element={
+                    <MatomoProvider>
+                      <Contract {...props} />
+                    </MatomoProvider>
+                  }
+                />
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <PopUpContextProvider>
+                      <GenerationContextProvider
+                        assignmentsJSON={assignmentsJSON}
+                        investmentsJSON={investmentsJSON}>
+                        <Generation {...props} token={token} />
+                      </GenerationContextProvider>
+                    </PopUpContextProvider>
+                  }
                 />
                 <Route
                   path="/:language/contracta-la-llum/"
-                  element={<Contract {...props} />}
+                  element={
+                    <MatomoProvider>
+                      <Contract {...props} />
+                    </MatomoProvider>
+                  }
                 />
                 <Route
                   path="/:language/contrata-la-luz/"
@@ -160,12 +171,20 @@ const App = (props) => {
 
                 <Route
                   path="/:language/contract-30/"
-                  element={<Contract {...props} />}
+                  element={
+                    <MatomoProvider>
+                      <Contract {...props} />
+                    </MatomoProvider>
+                  }
                 />
 
                 <Route
                   path="/:language/contract-20/"
-                  element={<Contract {...contract20Props()} />}
+                  element={
+                    <MatomoProvider>
+                      <Contract is30ContractEnabled={false} {...props} />
+                    </MatomoProvider>
+                  }
                 />
 
                 <Route path="/new-member" element={<Member {...props} />} />

@@ -31,9 +31,13 @@ import { normalizeMember } from '../services/utils'
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
+import useMatomo from '../trackers/matomo/useMatomo'
+
 const Member = (props) => {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
+
+  const { trackEvent } = useMatomo()
 
   const formTPV = useRef(null)
 
@@ -156,13 +160,7 @@ const Member = (props) => {
   const showProgress = false
 
   useEffect(() => {
-    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-    _paq.push([
-      'trackEvent',
-      'NewMember',
-      'setNewMemberStep',
-      `new-member-step-${activeStep}`
-    ])
+    trackEvent({ category: 'NewMember', action: 'setNewMemberStep', name: `new-member-step-${activeStep}`})
   }, [activeStep])
 
   const getActiveStep = (props) => {
@@ -271,14 +269,14 @@ const Member = (props) => {
   }
 
   const trackSucces = () => {
-    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-    _paq.push(['trackEvent', 'NewMember', 'newMemberFormOk', 'send-new-member-ok'])
+    trackEvent({ category: 'NewMember', action: 'newMemberFormOk', name: 'send-new-member-ok'})
   }
 
   const handlePost = async (values) => {
     setSending(true)
-    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-    _paq.push(['trackEvent', 'Send', 'sendNewMemberClick', 'send-new-member'])
+
+    trackEvent({ category: 'Send', action: 'sendNewMemberClick', name: 'send-new-member'})
+
     const data = normalizeMember(values)
     await member(data)
       .then((response) => {
