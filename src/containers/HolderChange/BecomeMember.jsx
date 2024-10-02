@@ -10,10 +10,20 @@ import StepHeader from '../../components/StepHeader'
 
 function BecomeMember(props) {
   const { t } = useTranslation()
-  const { setFieldValue, isMemberMandatoryForHolderchange = false } = props
+  const {
+    values,
+    setFieldValue,
+    isMemberMandatoryForHolderchange = false
+  } = props
 
   const handleChange = ({ option }) => {
-    setFieldValue('member.become_member', option)
+    setFieldValue('member', {
+      ...values.member,
+      become_member: option,
+      link_member: isMemberMandatoryForHolderchange
+        ? !option
+        : values.member.link_member
+    })
   }
 
   return (
