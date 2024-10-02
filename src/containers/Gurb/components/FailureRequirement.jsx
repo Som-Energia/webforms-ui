@@ -1,7 +1,17 @@
-import ResultRequirement from './ResultRequirement'
+import { useContext } from 'react'
+import Link from '@mui/material/Link'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
+import ResultRequirement from './ResultRequirement'
+import GurbErrorContext from '../../../context/GurbErrorContext'
+import { link } from '../gurbTheme'
 
-const FailureRequirement = ({ textHeader, textBody, textHelper }) => {
+const FailureRequirement = ({
+  textHeader,
+  textBody,
+  textHelper,
+  textHelperAction
+}) => {
+  const { setError, setErrorInfo } = useContext(GurbErrorContext)
   return (
     <ResultRequirement
       containerColors={{
@@ -11,7 +21,19 @@ const FailureRequirement = ({ textHeader, textBody, textHelper }) => {
       icon={<CancelOutlinedIcon sx={{ color: '#EE4949', fontSize: '50px' }} />}
       textHeader={textHeader}
       textBody={textBody}
-      textHelper={textHelper}
+      textHelper={
+        <Link
+          component="button"
+          color="inherit"
+          sx={link}
+          onClick={() => {
+            setError(false)
+            setErrorInfo({})
+            textHelperAction()
+          }}>
+          {textHelper}
+        </Link>
+      }
     />
   )
 }

@@ -154,3 +154,7 @@ export const buttonGurgLight = {
     }
   }
 }
+
+export const link = {
+  ...textBody2
+}
