@@ -96,6 +96,12 @@ const App = (props) => {
   }, [])
   const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
 
+  const contract20Props = () => {
+    let tmpProps = JSON.parse(JSON.stringify(props))
+    tmpProps.is30ContractEnabled = false
+    return tmpProps
+  }
+
   return (
     <ThemeProvider theme={somtheme}>
       <CssBaseline />
@@ -159,7 +165,7 @@ const App = (props) => {
 
                 <Route
                   path="/:language/contract-20/"
-                  element={<Contract {...{...props,is30ContractEnabled:false}} />}
+                  element={<Contract props={contract20Props()} />}
                 />
 
                 <Route path="/new-member" element={<Member {...props} />} />
