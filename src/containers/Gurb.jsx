@@ -82,11 +82,10 @@ const Gurb = (props) => {
   const formikRef = useRef(null)
   useEffect(() => {
     formikRef.current.validateForm()
-    console.log("formikRef.current", formikRef.current)
   }, [activeStep])
-  
+
   return (
-    <Container maxWidth="md" disableGutters={true} sx={{padding: '1rem'}}>
+    <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -94,31 +93,32 @@ const Gurb = (props) => {
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) => {
-          return <>
-            {getStep(formikProps)}
-            <Box
-              style={{
-                marginTop: '2rem',
-                marginX: '2rem',
-                display: 'flex',
-                justifyContent: 'space-between'
-              }}>
-              <PrevButton
-                disabled={activeStep === 0}
-                onClick={() => prevStep(formikProps)}
-                title={'PREV'}
-              />
-              <NextButton
-                disabled={
-                  !formikProps.isValid || activeStep === MAX_STEP_NUMBER
-                }
-                onClick={() => nextStep(formikProps)}
-                title={'NEXT'}
-              />
-            </Box>
-          </>
-        }
-        }
+          return (
+            <>
+              {getStep(formikProps)}
+              {<Box
+                style={{
+                  marginTop: '2rem',
+                  marginX: '2rem',
+                  display: 'flex',
+                  justifyContent: 'space-between'
+                }}>
+                <PrevButton
+                  disabled={activeStep === 0}
+                  onClick={() => prevStep(formikProps)}
+                  title={'PREV'}
+                />
+                <NextButton
+                  disabled={
+                    !formikProps.isValid || activeStep === MAX_STEP_NUMBER
+                  }
+                  onClick={() => nextStep(formikProps)}
+                  title={'NEXT'}
+                />
+              </Box>}
+            </>
+          )
+        }}
       </Formik>
     </Container>
   )
