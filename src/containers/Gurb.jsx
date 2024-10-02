@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -18,6 +18,7 @@ import {
   memberQuestionValidations,
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
+import GurbErrorContext from '../context/GurbErrorContext'
 
 const MAX_STEP_NUMBER = 6
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
@@ -25,8 +26,9 @@ const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const Gurb = (props) => {
   const { i18n } = useTranslation()
   const { language } = useParams()
-  const [activeStep, setActiveStep] = useState(0)
+  const { error } = useContext(GurbErrorContext)
 
+  const [activeStep, setActiveStep] = useState(0)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
@@ -96,26 +98,30 @@ const Gurb = (props) => {
           return (
             <>
               {getStep(formikProps)}
-              {<Box
-                style={{
-                  marginTop: '2rem',
-                  marginX: '2rem',
-                  display: 'flex',
-                  justifyContent: 'space-between'
-                }}>
-                <PrevButton
-                  disabled={activeStep === 0}
-                  onClick={() => prevStep(formikProps)}
-                  title={'PREV'}
-                />
-                <NextButton
-                  disabled={
-                    !formikProps.isValid || activeStep === MAX_STEP_NUMBER
-                  }
-                  onClick={() => nextStep(formikProps)}
-                  title={'NEXT'}
-                />
-              </Box>}
+              {error ? (
+                <></>
+              ) : (
+                <Box
+                  style={{
+                    marginTop: '2rem',
+                    marginX: '2rem',
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                  }}>
+                  <PrevButton
+                    disabled={activeStep === 0}
+                    onClick={() => prevStep(formikProps)}
+                    title={'PREV'}
+                  />
+                  <NextButton
+                    disabled={
+                      !formikProps.isValid || activeStep === MAX_STEP_NUMBER
+                    }
+                    onClick={() => nextStep(formikProps)}
+                    title={'NEXT'}
+                  />
+                </Box>
+              )}
             </>
           )
         }}
