@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.10 2024-10-03
 - Cypress: Fix all tests and imrpove coverage
 - Cypress: Mocked calls of Generation and modify Tariff
 - Add github action to check the version of dependecies
