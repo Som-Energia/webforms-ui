@@ -28,7 +28,7 @@ const TextLoader = props => {
 
   return text === undefined
     ? <Loading />
-    : <Typography variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }} dangerouslySetInnerHTML={{ __html: text }} />
+    : <Typography component='div' variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }} dangerouslySetInnerHTML={{ __html: text }} />
 }
 
 export const Test = () => {

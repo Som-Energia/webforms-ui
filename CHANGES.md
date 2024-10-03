@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+- Cypress: Fix all tests and imrpove coverage
+- Cypress: Mocked calls of Generation and modify Tariff
+- Add github action to check the version of dependecies
+- Add test for normalize function with jest
+
 ## 2.3.9 2024-09-30
 
 - Added VITE feature flag: isMemberMandatoryForHolderchange
@@ -12,6 +18,7 @@
 ## 2.3.8 2024-07-27
 
 - Validations forms
+- Improve test coverage
 
 ## 2.3.7 2024-08-27
 

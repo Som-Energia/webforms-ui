@@ -1,0 +1,31 @@
+name: Check for Outdated NPM Dependencies
+on: [push]
+
+jobs:
+  check-outdated:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install npm 10.3.0
+        run: npm install -g npm@10.3.0
+
+      # Optional: Clear npm cache to prevent cache-related issues
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      # Run npm outdated and handle failures
+      - name: List of outdated dependencies
+        run: |
+          echo Listing for updated dependencies
+          npm outdated || true

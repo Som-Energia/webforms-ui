@@ -8,10 +8,17 @@ describe('Modify Tariff', () => {
     console.error(error)
     return false
   })
-
   beforeEach(() => {
+
     cy.visit('/ca/contract/indexed')
-    
+    cy.intercept('GET', '/ping', {
+      statusCode: 200,
+      body: {
+        state: true,
+        status: "ONLINE"
+      }
+    })
+
     cy.intercept('GET', '/procedures/can_turn_contract_indexed', {
       statusCode: 200,
       body: {
@@ -22,33 +29,47 @@ describe('Modify Tariff', () => {
       },
     });
 
-    cy.intercept('POST', '/procedures/contract_indexed',{
+    cy.intercept('POST', '/procedures/contract_indexed', {
       statusCode: 200,
-      body:{
-        data:{
+      body: {
+        data: {
           status: "OK"
         }
       }
     })
-    
+
   })
 
   it('Change Tariff to indexada', function () {
-    cy.get('[data-cy="next"]').click()
+    cy.request('/static/docs/ca/general-and-indexed-specific-terms.html')
+      .its('body')
+      .then((htmlContent) => {
+      cy.intercept('GET', `/static/docs/ca/general-and-indexed-specific-terms.html`, {
+        statusCode: 200,
+        headers: { 'content-type': 'text/html' },
+        body: htmlContent
+      }).as('generalTerms')
 
-    cy.get('[data-cy="next"]').click()
+      cy.get('[data-cy="next"]').click()
 
-    cy.get('[id=change-tarif-terms-check]').click()
+      cy.get('[data-cy="next"]').click()
 
-    cy.get('[id=terms-dialog-accept-btn]').click()
+      cy.get('[id=change-tarif-terms-check]').click()
 
-    cy.get('[id=change-tariff-indexada-terms-check]').click()
+      cy.wait('@generalTerms')
+        .its('response.statusCode')
+        .should('be.oneOf', [200, 304])
 
-    cy.get('[id=tariff-change-submit]').click()
+      cy.get('[id=terms-dialog-accept-btn]').click()
 
-    cy.get('[id=success-page-title]').should(
-      'contain',
-      SUCCESS_TITLE
-    )
+      cy.get('[id=change-tariff-indexada-terms-check]').click()
+
+      cy.get('[id=tariff-change-submit]').click()
+
+      cy.get('[id=success-page-title]').should(
+        'contain',
+        SUCCESS_TITLE
+      )
+    })
   })
 })

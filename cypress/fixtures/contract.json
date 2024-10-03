@@ -6,7 +6,8 @@
     "surname1": "Palomo",
     "surname2": "Romero",
     "postalCode": "17003",
-    "address": "Percebe, nº 13",
+    "address": "Percebe",
+    "number": "13",
     "stateCode": "20",
     "cityCode": "5386",
     "email": "david.palomo@somenergia.coop",
@@ -23,7 +24,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES0029874572863299XP",
+    "cups": "ES1234123456789012JY1F",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -34,8 +35,8 @@
     "isHousing": true,
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
-    "invalidCups": "ES9803463008824117ZQ",
-    "validCups": "ES0029874572863299XP",
+    "invalidCups": "ES0029874572863299XP",
+    "validCups": "ES1234123456789012JY1F",
     "cadastralReference":""
   },
   "isIndexed": false,
@@ -45,6 +46,8 @@
   "power": 4.4,
   "power2": 8,
   "power3": 10,
+  "power4": 12,
+  "power5": 14,
   "power6": 16,
   "phase": "mono",
   "fare": "nodh",
@@ -61,6 +64,7 @@
   },
   "selfConsumption": {
     "have_installation": true,
+    "have_no_installation": false,
     "cau": "ES 0353 5010 2861 5353 EE 0F A000",
     "collective_installation": true,
     "installation_power": "3.5",
