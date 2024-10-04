@@ -332,7 +332,7 @@
     "DETAIL_D1_TITLE": "Detalls del tràmit d'autoconsum",
     "ACCEPT_OR_REFUSE_TITLE": "Acceptació / Rebuig del tràmit",
     "MODIFY_POTTAR_WITH_D1_TITLE": "Avís important",
-    "REVIEW_DATA_D1": "<b>IMPORTANT</b>: Cal que revisis que les dades que ens fa arribar la distribuïdora són correctes, si és així prem aceptar. En cas contrari prem rebutjar i indica’ns amb quina no hi estàs conforme.",
+    "REVIEW_DATA_D1": "<b>IMPORTANT</b>: Cal que revisis que les dades que ens fa arribar la distribuïdora són correctes, si és així prem acceptar. En cas contrari, prem rebutjar i indica’ns amb quina no hi estàs conforme.",
     "INSTALLATION_TYPE": "Tipus d'instal·lació",
     "GENERATOR_TECHNOLOGY": "Tecnologia de generació",
     "INSTALLED_POWER": "Potència instal·lada",
@@ -351,7 +351,7 @@
     "ATTACHMENTS_D1_INTRO_REFUSE": "<p>Tingues en compte que, si rebutges les dades, hauràs de tornar a registrar la teva instal·lació generadora a la teva comunitat autònoma. Si tens cap dubte, abans de continuar amb aquest tràmit, et recomanem que revisis les dades amb la teva empresa instal·ladora.</p><p>Necessitem que ens indiquis quin és el motiu pel qual no estàs conforme amb la informació que ens traslladen. Ens pots facilitar la documentació presentada al registre per comprovar les dades que consten.</p>",
     "D1_ATTACHMENTS_REFUSE": "Documentació acreditativa d’inscripció al registre de la comunitat autònoma",
     "REFUSE_REASON": "Indica breument el motiu de disconformitat",
-    "ATTACHMENTS_D1_INTRO_ACCEPT": "Un cop acceptada la informació relativa a la teva instal·lació d’autoconsum, cal modificar el contracte per tal que la distribuïdora apliqui la modalitat triada. Tingues en compte que l’empresa de distribució elèctrica aplicarà un cost de 10,94€ (IVA inclòs) per fer efectiva la modificació. <b>Prem el botó «Enviar» per iniciar el tràmit.</b>",
+    "ATTACHMENTS_D1_INTRO_ACCEPT": "Un cop acceptada la informació relativa a la teva instal·lació d’autoconsum, cal modificar el contracte per tal que la distribuïdora apliqui la modalitat triada. Tingues en compte que l’empresa de distribució elèctrica aplicarà un cost de 10,94 € (IVA inclòs) per fer efectiva la modificació. <b>Prem el botó «Enviar» per iniciar el tràmit.</b>",
     "D1_ATTACHMENTS_ACCEPT": "En cas que es tracti d'una <b>modalitat d’autoproducció col·lectiva</b>, també ens hauràs d’adjuntar l’<b>acord de repartiment </b> i el <b>Fitxer de coeficients</b>. Pots consultar com elaborar aquest fitxer en el següent enllaç <a href=\"https://www.boe.es/diario_boe/txt.php?lang=ca&id=BOE-A-2021-18706\" target=\"_blank\">TED 1247/2021</a>.</p>",
     "MODIFY_POTTARAUTO_INTRO": "<p>La <a target=\"_blank\" href=\"{{url}}\">distribuïdora</a> de la teva zona aplica i cobra, a través de la nostra factura, qualsevol modificació contractual (potència, tarifa, tensió i/o modalitat d'autoconsum). El cost regulat és:</p><ul><li>10,94 € (IVA inclòs) per sol·licitud. Pots canviar alhora de tarifa i potència en una sola sol·licitud.</li><li>En cas d'<b>augmentar la potència</b>, 44,86&nbsp;€ per kW d'increment.</li><li>En cas d'haver baixat la potència contractada, durant els tres anys següents podràs tornar-la a augmentar fins al valor contractat anteriorment pagant 23,84 € per kW d'augment, en lloc dels 44,86 € esmentats més amunt.</li></ul><p>La distribuïdora només està obligada a acceptar <b>una sol·licitud de canvi cada 12 mesos</b>, excepte per a augments de potència contractada. En aquest cas, per normativa, la distribuïdora no pot aplicar aquesta limitació. </p><p>En cas d'augmentar la potència contractada, la companyia distribuïdora pot demanar el butlletí o certificat d'instal·lació, si ja ha caducat o si marca una potència inferior a la nova sol·licitada. Si és així, t'ho farem saber per correu electrònic.</p>",
     "SUBSECTION_AUTO": "Modalitat d'autoconsum",
@@ -714,5 +714,5 @@
     "GENERATION_INFO_NOT_HAS_INVOICES": "<p>Ara mateix no participes en el sistema d'autoproducció col·lectiva Generation kWh. Si t’interessa o en vols més informació, pots consultar el web: <a href=\"http://www.generationkwh.org/ca/\" >www.generationkwh.org</a></p>",
     "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT": "Introdueix el teu DNI o NIF.",
     "EXIT": "Sortir",
-    "AT_LEAST_ONE_CHANGE_REASON":"Com a mínim has d'escollir un motiu del canvi"
+    "AT_LEAST_ONE_CHANGE_REASON": "Com a mínim has d'escollir un motiu del canvi"
 }
