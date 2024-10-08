@@ -49,12 +49,12 @@ const ProgressWarning = () => {
         <Typography
           // variant="h3"
           sx={textHeader3}>
-          {t('PROGRESS_WARNING_TITLE')}
+          {t('GURB_PROGRESS_WARNING_TITLE')}
         </Typography>
         <Typography
           // variant="body2"
           sx={textBody2}>
-          {t('PROGRESS_WARNING_TEXT')}
+          {t('GURB_PROGRESS_WARNING_TEXT')}
         </Typography>
       </Box>
     </Box>
