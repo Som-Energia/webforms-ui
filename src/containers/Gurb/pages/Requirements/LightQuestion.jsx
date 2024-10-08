@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
@@ -6,7 +7,7 @@ import Chooser from '../../components/Chooser'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { iconRequirements, iconOffRequirements } from '../../gurbTheme'
-import { useContext } from 'react'
+
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 
 const LightQuestion = (props) => {
@@ -19,10 +20,12 @@ const LightQuestion = (props) => {
     if (value === 'light-off') {
       setError(true)
       setErrorInfo({
-        main_text: 'Si no hi ha llum a casa teva...',
-        seconday_text: "Et pots donar d'alta al servei...",
-        link_text: 'Sí que tinc llum a casa',
-        test: setFieldValue('has_light', undefined)
+        main_text: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
+        seconday_text: t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT'),
+        link_text: t('GURB_LIGHT_QUESTION_ERROR_LINK_TEXT'),
+        test: () => {
+          setFieldValue('has_light', undefined)
+        }
       })
     }
   }
