@@ -247,7 +247,7 @@
     "VAT": "NIF",
     "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu nº de socio/a?</a>.",
     "HELP_POPOVER_NIF": "Ejemplo: 12345678P (con letra final)",
-    "SOCIA_TROBADA": "¡Soci/a encontrado!",
+    "SOCIA_TROBADA": "¡Socio/a encontrado!",
     "SOCIA_NO_TROBADA": "¡No se ha encontrado ningún socio/a vinculado a estos datos!",
     "NO_MEMBER_VAT": "No has introducido un NIF correcto",
     "NO_MEMBER_NUMBER": "No has introducido un número de socio/a",
