@@ -40,7 +40,7 @@ export const textBody2 = {
 }
 
 export const textBody3 = {
-  fontFamily: 'Open Sans',
+  fontFamily: 'Inter',
   color: '#373737',
   fontWeight: '400',
   fontSize: '16px'
@@ -99,7 +99,7 @@ export const chooserGurg = {
   paddingRight: '1.625rem',
   borderRadius: '8px',
   border: '1px solid #D9D9D9',
-  cursor: 'pointer',
+  cursor: 'pointer'
 }
 
 export const chooserGurgSelected = {
