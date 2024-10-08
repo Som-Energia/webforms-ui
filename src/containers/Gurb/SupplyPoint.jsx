@@ -10,13 +10,13 @@ const SupplyPoint = (props) => {
 
   return (
     <>
-      <Header title={t('GURG_SUPPLY_POINT_TITLE')} />
+      <Header title={t('GURB_SUPPLY_POINT_TITLE')} />
       &nbsp;
       <ProgressWarning />
       &nbsp;
       <TextRecomendation
-        title={t('GURG_SUPPLY_POINT_RECOMENDATION_TITLE')}
-        text={t('GURG_SUPPLY_POINT_RECOMENDATION_TEXT')}
+        title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
+        text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
       />
       &nbsp;
       <CUPS {...props} />

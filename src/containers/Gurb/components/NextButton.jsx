@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
-import { buttonGurgDark, textBody1 } from '../gurbTheme'
+import { buttonGurbDark, textBody1 } from '../gurbTheme'
 import Typography from '@mui/material/Typography'
 
 function NextButton(props) {
@@ -11,7 +11,7 @@ function NextButton(props) {
 
   return (
     <Button
-      sx={{ ...buttonGurgDark }}
+      sx={{ ...buttonGurbDark }}
       type="button"
       data-cy="next"
       variant="contained"

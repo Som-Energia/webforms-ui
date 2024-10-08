@@ -19,20 +19,20 @@ const SelfConsumption = (props) => {
     {
       id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_TINC_AUTOCONSUM'),
-      textBody: t('GURB_TINC_AUTOCONSUM_BODY')
+      textHeader: t('GURB_SELFCONSUMPTION_YES_HEADER'),
+      textBody: t('GURB_SELFCONSUMPTION_YES_BODY')
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_NO_TINC_AUTOCONSUM'),
-      textBody: t('GURB_NO_TINC_AUTOCONSUM_BODY')
+      textHeader: t('GURB_SELFCONSUMPTION_NO_HEADER'),
+      textBody: t('GURB_SELFCONSUMPTION_NO_BODY')
     }
   ]
 
   return (
     <>
-      <TextRecomendation title={t('GURB_AUTOCONSUM_TITLE')} />
+      <TextRecomendation title={t('GURB_SELFCONSUMPTION_TITLE')} />
       &nbsp;
       <Chooser
         options={options}
@@ -40,7 +40,10 @@ const SelfConsumption = (props) => {
         handleChange={handleSelfconsumptionQuestion}
       />
       &nbsp;
-      <HelperText helperText={t('GURB_AUTOCONSUM_HELPER')} iconHelper={true} />
+      <HelperText
+        helperText={t('GURB_SELFCONSUMPTION_HELPER')}
+        iconHelper={true}
+      />
     </>
   )
 }

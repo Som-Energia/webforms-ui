@@ -31,20 +31,20 @@ const LightQuestion = (props) => {
     {
       id: 'light-on',
       icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_HI_HA_LLUM'),
-      textBody: t('GURB_HI_HA_LLUM_BODY')
+      textHeader: t('GURB_HAS_LIGHT_HEADER'),
+      textBody: t('GURB_HAS_LIGHT_BODY')
     },
     {
       id: 'light-off',
       icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_NO_HI_HA_LLUM'),
-      textBody: t('GURB_NO_HI_HA_LLUM_BODY')
+      textHeader: t('GURB_HAS_NO_LIGHT_HEADER'),
+      textBody: t('GURB_HAS_NO_LIGHT_BODY')
     }
   ]
 
   return (
     <>
-      <TextRecomendation title={t('GURB_ACTUALMENT_HI_HA_LLUM')} />
+      <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} />
       &nbsp;
       <Chooser
         options={options}

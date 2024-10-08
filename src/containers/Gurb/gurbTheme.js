@@ -91,7 +91,7 @@ export const iconOffRequirements = {
   backgroundOrigin: 'content-box'
 }
 
-export const chooserGurg = {
+export const chooserGurb = {
   width: '20.45rem',
   paddingTop: '1.5rem',
   paddingBottom: '2rem',
@@ -102,12 +102,12 @@ export const chooserGurg = {
   cursor: 'pointer'
 }
 
-export const chooserGurgSelected = {
-  ...chooserGurg,
+export const chooserGurbSelected = {
+  ...chooserGurb,
   backgroundColor: '#FAFAFA'
 }
 
-export const buttonGurgDark = {
+export const buttonGurbDark = {
   ...textBody1,
   textTransform: 'capitalize',
   borderRadius: '2rem',
@@ -125,7 +125,7 @@ export const buttonGurgDark = {
   }
 }
 
-export const buttonGurgLight = {
+export const buttonGurbLight = {
   ...textBody1,
   textTransform: 'capitalize',
   border: '1px solid #D9D9D9',

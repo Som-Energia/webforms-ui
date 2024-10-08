@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserGurg, chooserGurgSelected } from '../gurbTheme'
+import { chooserGurb, chooserGurbSelected } from '../gurbTheme'
 
 const Option = ({
   isSelected,
@@ -17,7 +17,7 @@ const Option = ({
 }) => {
   return (
     <Box
-      sx={isSelected ? chooserGurgSelected : chooserGurg}
+      sx={isSelected ? chooserGurbSelected : chooserGurb}
       onClick={() => {
         setSelected(optionId)
       }}>
