@@ -9,14 +9,8 @@ import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
 
 import { textHeader3, textBody2, containerSpacing } from '../gurbTheme'
 
-const ProgressWarning = () => {
+const ProgressWarning = ({ completed }) => {
   const { t } = useTranslation()
-  const [percentage, setPercentage] = useState(0)
-
-  useEffect(() => {
-    // ask percentage to API / ERP
-    setPercentage(10)
-  }, []) // only when render, ensure this!
 
   return (
     <Box
@@ -32,8 +26,8 @@ const ProgressWarning = () => {
         <Gauge
           width={100}
           height={100}
-          value={percentage}
-          text={`${percentage}%`}
+          value={completed}
+          text={`${completed}%`}
           cornerRadius="50%"
           sx={() => ({
             [`& .${gaugeClasses.valueArc}`]: {
@@ -54,7 +48,7 @@ const ProgressWarning = () => {
         <Typography
           // variant="body2"
           sx={textBody2}>
-          {t('GURB_PROGRESS_WARNING_TEXT')}
+          {t('GURB_PROGRESS_WARNING_TEXT', { completedPercentage: completed })}
         </Typography>
       </Box>
     </Box>

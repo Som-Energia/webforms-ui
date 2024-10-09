@@ -34,6 +34,7 @@ const Gurb = (props) => {
   }, [language, i18n])
 
   const initialValues = {
+    is_client: undefined,
     cups: undefined,
     has_light: undefined,
     address: {
