@@ -20,9 +20,12 @@ function BecomeMember(props) {
     setFieldValue('member', {
       ...values.member,
       become_member: option,
-      link_member: isMemberMandatoryForHolderchange
+      // When become member is true, link member must be false.
+      // When member is not mandatory for holderchange, we set the link member to undefined
+      // because it is set in another page.
+      link_member: isMemberMandatoryForHolderchange || option === true
         ? !option
-        : values.member.link_member
+        : undefined
     })
   }
 
