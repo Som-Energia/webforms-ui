@@ -15,8 +15,12 @@ const SupplyPoint = (props) => {
     // TODO: gurb id from where?
     const gurbId = 1
     await getGurbData(gurbId)
-      .then((data) => {
-        setGurbData(data)
+      .then(({ data }) => {
+        setGurbData({
+          name: data?.name,
+          state: data?.state,
+          completedPercentage: data?.assigned_betas_percentage
+        })
       })
       .catch((error) => {
         // TODO: handle errors

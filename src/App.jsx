@@ -41,7 +41,6 @@ const App = (props) => {
   )
   const Gurb = lazy(() => import('./containers/Gurb'))
 
-
   const loadContractData = () => {
     const contractData =
       typeof props.contract === 'string' && props.contract !== ''
@@ -421,7 +420,9 @@ const App = (props) => {
                 path="/:language/gurb/validations/"
                 element={
                   <GurbErrorContextProvider>
-                    <Gurb {...props} />
+                    <GurbLoadingContextProvider>
+                      <Gurb {...props} />
+                    </GurbLoadingContextProvider>
                   </GurbErrorContextProvider>
                 }
               />
