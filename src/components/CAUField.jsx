@@ -3,7 +3,7 @@ import { checkCups } from '../services/api'
 import SolarPowerIcon from '@mui/icons-material/WbSunny'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
-import checkCAUWhileTyping from '../services/utils'
+import { checkCAUWhileTyping } from '../services/utils'
 
 export function CAUField(props) {
   const { t } = useTranslation()
