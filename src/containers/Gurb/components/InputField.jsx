@@ -1,8 +1,13 @@
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import { textHeader4, textHelper1 } from '../gurbTheme'
+import InputAdornment from '@mui/material/InputAdornment'
+
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
+import CircularProgress from '@mui/material/CircularProgress'
+
+import { textHeader4, textHelper1 } from '../gurbTheme'
 
 export const HelperText = ({ helperText, iconHelper }) => {
   return (
@@ -24,7 +29,8 @@ const InputField = ({
   handleBlur,
   touched,
   value,
-  error
+  error,
+  isLoading = false
 }) => {
   return (
     <Box>
@@ -38,7 +44,12 @@ const InputField = ({
         fullWidth
         InputProps={{
           sx: { borderRadius: '8px', display: 'flex' },
-          onBlur: handleBlur
+          onBlur: handleBlur,
+          endAdornment: (
+            <InputAdornment position="end">
+              {isLoading && <CircularProgress size={24} />}
+            </InputAdornment>
+          )
         }}
         label={textFieldLabel}
         helperText={
@@ -50,7 +61,7 @@ const InputField = ({
         }
         onChange={handleChange}
         value={value}
-        error={touched && error}
+        error={touched && error !== undefined}
       />
     </Box>
   )
