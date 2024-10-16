@@ -86,7 +86,7 @@ const Member = (props) => {
         }),
         proxynif_valid: Yup.bool().when('isphisical', {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: (schema) => schema.required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
         }),
         address: Yup.string().required(t('NO_ADDRESS')),
         postal_code: Yup.string()
