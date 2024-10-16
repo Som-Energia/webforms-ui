@@ -5,13 +5,13 @@ class MatomoTracker {
 
     initialize() {
         const matomoUrl = import.meta.env.VITE_MATOMO_URL
-        this._paq = window._paq = window._paq || [];
+        this._formTracker = window._formTracker = window._formTracker || [];
 
         const doc = document
         const scriptElement = doc.createElement('script')
         const scripts = doc.getElementsByTagName('script')[0]
 
-        _paq.push({'_paq.startTime': (new Date().getTime()), 'event': '_paq.Start'});
+        _formTracker.push({'_formTracker.startTime': (new Date().getTime()), 'event': '_formTracker.Start'});
 
         scriptElement.type = 'text/javascript'
         scriptElement.async = true
@@ -57,7 +57,7 @@ class MatomoTracker {
 
     pushInstruction(name, ...args) {
         if (typeof window !== 'undefined') {
-            window._paq.push([name, ...args]);
+            window._formTracker.push([name, ...args]);
         }
     
         return this;

@@ -1,16 +1,27 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState, useCallback, useMemo } from 'react'
 import MatomoTracker from './MatomoTracker'
 
-const MatomoInstance = new MatomoTracker()
+export const MatomoContext = createContext({
+  trackEvent: () => { }
+})
 
-export const MatomoContext = createContext(MatomoInstance)
+export const MatomoProvider = ({ children }) => {
 
-const MatomoProvider = ({ children }) => {
+  const [MatomoInstance] = useState(new MatomoTracker())
+
+  const trackEvent = useCallback(
+    (params) => MatomoInstance?.trackEvent(params),
+    [MatomoInstance]
+  )
+  const contextValue = useMemo(
+    () => ({trackEvent}),
+    [trackEvent]
+  )
   return (
-    <MatomoContext.Provider value={ MatomoInstance }>
+    <MatomoContext.Provider value={contextValue}>
       {children}
     </MatomoContext.Provider>
   )
 }
 
-export default MatomoProvider
+export default MatomoContext

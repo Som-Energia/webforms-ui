@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactGA from 'react-ga'
 import Plausible from 'plausible-tracker'
 
@@ -45,7 +45,7 @@ import {
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
-import useMatomo from '../trackers/matomo/useMatomo'
+import MatomoContext from '../trackers/matomo/MatomoProvider'
 
 const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
@@ -65,7 +65,7 @@ const Contract = (props) => {
     isGurbEnabled = false
   } = props
 
-  const { trackEvent } = useMatomo()
+  const { trackEvent } = useContext(MatomoContext)
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)

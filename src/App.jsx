@@ -13,7 +13,7 @@ import './i18n/i18n'
 import './App.css'
 import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
 import { PopUpContextProvider } from './context/PopUpContext'
-import MatomoProvider from './trackers/matomo/MatomoProvider'
+import { MatomoProvider } from './trackers/matomo/MatomoProvider'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props

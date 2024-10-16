@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -31,14 +31,14 @@ import { normalizeMember } from '../services/utils'
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
-import useMatomo from '../trackers/matomo/useMatomo'
+import MatomoContext from '../trackers/matomo/MatomoProvider'
 
 const Member = (props) => {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
-  const { trackEvent } = useMatomo()
-
+  const { trackEvent } = useContext(MatomoContext)
+  
   const formTPV = useRef(null)
 
   const [showInspector, setShowInspector] = useState(false)
