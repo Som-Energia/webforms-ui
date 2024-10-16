@@ -14,7 +14,6 @@ export const GurbErrorContextProvider = ({ children }) => {
         error: error,
         errorInfo: errorInfo
       }}>
-      <React.Fragment>{error}</React.Fragment>
       {children}
     </GurbErrorContext.Provider>
   )

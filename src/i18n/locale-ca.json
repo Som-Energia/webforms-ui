@@ -765,5 +765,6 @@
     "GURB_CONTRACT_STEP": "Contractació",
     "GURB_FINAL_STEP": "GURB",
     "GURB_NEXT": "Següent",
-    "GURB_PREV": "Anterior"
+    "GURB_PREV": "Anterior",
+    "GURB_ERROR_INVALID_FIELD": "Camp incorrecte"
 }

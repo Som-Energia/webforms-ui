@@ -19,6 +19,7 @@ import {
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
 import GurbErrorContext from '../context/GurbErrorContext'
+import GurbLoadingContext from '../context/GurbLoadingContext'
 
 const MAX_STEP_NUMBER = 6
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
@@ -27,6 +28,7 @@ const Gurb = (props) => {
   const { i18n } = useTranslation()
   const { language } = useParams()
   const { error } = useContext(GurbErrorContext)
+  const { loading } = useContext(GurbLoadingContext)
 
   const [activeStep, setActiveStep] = useState(0)
   useEffect(() => {
@@ -35,7 +37,7 @@ const Gurb = (props) => {
 
   const initialValues = {
     is_client: undefined,
-    cups: undefined,
+    cups: '',
     has_light: undefined,
     address: {
       street: undefined,
@@ -116,7 +118,9 @@ const Gurb = (props) => {
                   />
                   <NextButton
                     disabled={
-                      !formikProps.isValid || activeStep === MAX_STEP_NUMBER
+                      loading ||
+                      !formikProps.isValid ||
+                      activeStep === MAX_STEP_NUMBER
                     }
                     onClick={() => nextStep(formikProps)}
                     title={'NEXT'}

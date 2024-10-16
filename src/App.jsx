@@ -440,7 +440,13 @@ const App = (props) => {
               />
               <Route
                 path="/:language/gurb/validations/"
-                element={<Gurb {...props} />}
+                element={
+                  <GurbErrorContextProvider>
+                    <GurbLoadingContextProvider>
+                      <Gurb {...props} />
+                    </GurbLoadingContextProvider>
+                  </GurbErrorContextProvider>
+                }
               />
             </Routes>
           </Router>

@@ -1,19 +1,27 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from './InputField'
 
 import { checkCups } from '../../../services/api'
+import GurbLoadingContext from '../../../context/GurbLoadingContext'
 
 const CUPS = (props) => {
-  const { values, errors, touched, setFieldValue, setFieldTouched } = props
+  const {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldError,
+    setFieldTouched
+  } = props
   const { t } = useTranslation()
-  // const [isLoading, setIsLoading] = useState(false)
+  const { loading, setLoading } = useContext(GurbLoadingContext)
 
   useEffect(() => {
     const cups = values.cups
-    if (cups?.length > 18) {
-      // setIsLoading(true)
+    if (cups?.length >= 20) {
+      setLoading(true)
       checkCups(cups)
         .then((response) => {
           const status = response?.data?.status
@@ -22,11 +30,14 @@ const CUPS = (props) => {
           } else {
             setFieldValue('is_client', true)
           }
-          // setIsLoading(false)
+          setFieldTouched('cups', true)
+          setLoading(false)
         })
-        .catch((error) => {
-          console.error(error.response)
-          // setIsLoading(false)
+        .catch(({ response }) => {
+          const { error } = response.data
+          setFieldError('cups', t(`GURB_ERROR_${error.code}`))
+          setFieldTouched('cups', true)
+          setLoading(false)
         })
     }
   }, [values.cups])
@@ -52,6 +63,7 @@ const CUPS = (props) => {
       touched={touched?.cups}
       value={values.cups}
       error={errors?.cups}
+      isLoading={loading}
     />
   )
 }
