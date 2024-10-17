@@ -714,5 +714,7 @@
     "GENERATION_INFO_NOT_HAS_INVOICES": "<p>Ara mateix no participes en el sistema d'autoproducció col·lectiva Generation kWh. Si t’interessa o en vols més informació, pots consultar el web: <a href=\"http://www.generationkwh.org/ca/\" >www.generationkwh.org</a></p>",
     "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT": "Introdueix el teu DNI o NIF.",
     "EXIT": "Sortir",
-    "AT_LEAST_ONE_CHANGE_REASON": "Com a mínim has d'escollir un motiu del canvi"
+    "AT_LEAST_ONE_CHANGE_REASON": "Com a mínim has d'escollir un motiu del canvi",
+    "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "Darrere d''ES' van 16 números",
+    "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "Els caràcters 19 i 20 han de ser 2 lletres de control"
 }
