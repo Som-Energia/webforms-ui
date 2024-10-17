@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Fix: CAU code validation
+    - TDD rewritten code (inspired on the old one but adding it progressively to fail every test)
+    - Fix: Partial match now complaints on length not on unmatching cups
+    - Fix: Now verifies locally that 18 numbers follow after 'ES'
+    - Complaints on bad partially written border points and installation
+    - Corrects spurious spaces from user
+    - Corrects lowercases into upper cases from user
 - Usability: filter out unaccepted chars in member number from input
     - Avoids among other problems, the one produced when pasting
     numbers from comunications with milliard dots like 99.999,

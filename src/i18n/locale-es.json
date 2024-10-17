@@ -696,6 +696,8 @@
     "GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION": "Datos de producción y consumo",
     "GENERATION_BUTTON_ACCESS_PRODUCTION_CONSUMPTION": "Entrar",
     "CAU_INVALID_PREFIX": "El código CAU debe comenzar por ES",
+    "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "Detrás de 'ES' van 16 números",
+    "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "Los caracteres 19 y 20 han de ser 2 letras de control",
     "CAU_INVALID_BORDER_POINT": "Los caracteres 21 y 22 han de ser un número y una letra: 0F, 1P...",
     "CAU_INVALID_INSTALLATION": "El código CAU debe acabar con A y tres números",
     "CAU_INVALID_LENGTH": "El código CAU ha de tener 26 caracteres",

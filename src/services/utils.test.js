@@ -7,7 +7,8 @@ import {
     normalizeD1ConfirmationData, 
     normalizeHolderChange, 
     normalizeMember, 
-    normalizeModifyData 
+    normalizeModifyData,
+    checkCAUWhileTyping,
 } from './utils'
 import contractCases from './utilsMockData/forms/contract';
 import memberCases from './utilsMockData/forms/member';
@@ -89,7 +90,6 @@ describe("Check the utils functions", () => {
         expect(checkIsTariff20(tariff20tdIndexadaSom)).toBeTruthy()
 
     })
-
 })
 
 describe("Check Contract Form (normalize function)", () => {
@@ -167,4 +167,195 @@ describe("Check D1 Form (normalize function)", () => {
         expect(normalizeD1ConfirmationData(d1Cases.acceptD1NoM1NoAtt.entryValues)).toStrictEqual(d1Cases.acceptD1NoM1NoAtt.normalizedData)
     })
 
+})
+
+
+describe("checkCAUWhileTyping provides feedback and correction while typing the CAU code",() =>{
+  const t = x => x // Translate identity
+  test("Should return invalid with no message when still empty", () => {
+    expect(checkCAUWhileTyping('', t)).toEqual({
+      value: '',
+      valid: false,
+      error: undefined,
+    })
+  })
+  test("Should strip spaces", () => {
+    expect(checkCAUWhileTyping('   ', t)).toEqual({
+      value: '',
+      valid: false,
+      error: undefined,
+    })
+  })
+  test("Should complain starting different than 'E'", () => {
+    expect(checkCAUWhileTyping('K', t)).toEqual({
+      value: 'K',
+      valid: false,
+      error: 'CAU_INVALID_PREFIX',
+    })
+  })
+  test("Should complain second leter not 'S'", () => {
+    expect(checkCAUWhileTyping('EK', t)).toEqual({
+      value: 'EK',
+      valid: false,
+      error: 'CAU_INVALID_PREFIX',
+    })
+  })
+  test("Should complain on length when just E", () => {
+    expect(checkCAUWhileTyping('E', t)).toEqual({
+      value: 'E',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should complain on length when just ES", () => {
+    expect(checkCAUWhileTyping('ES', t)).toEqual({
+      value: 'ES',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should correct lower cases", () => {
+    expect(checkCAUWhileTyping('es', t)).toEqual({
+      value: 'ES',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should complain on non numbers after ES", () => {
+    expect(checkCAUWhileTyping('ESD', t)).toEqual({
+      value: 'ESD',
+      valid: false,
+      error: 'CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS',
+    })
+  })
+  test("Should complain about length if just numbers after ES", () => {
+    expect(checkCAUWhileTyping('ES12345678', t)).toEqual({
+      value: 'ES12345678',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should complain about length if all numbers after ES", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456', t)).toEqual({
+      value: 'ES1234567890123456',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should complain on non numbers if up to the 16th is not number", () => {
+    expect(checkCAUWhileTyping('ES123456789012345K', t)).toEqual({
+      value: 'ES123456789012345K',
+      valid: false,
+      error: 'CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS',
+    })
+  })
+  test("Should complain first CRC should be a number", () => {
+    expect(checkCAUWhileTyping('ES12345678901234567', t)).toEqual({
+      value: 'ES12345678901234567',
+      valid: false,
+      error: 'CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS',
+    })
+  })
+  test("Should complain second CRC digit is a number", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456A8', t)).toEqual({
+      value: 'ES1234567890123456A8',
+      valid: false,
+      error: 'CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS',
+    })
+  })
+  test("Should complain of a border point not starting with a number", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AAK', t)).toEqual({
+      value: 'ES1234567890123456AAK',
+      valid: false,
+      error: 'CAU_INVALID_BORDER_POINT',
+    })
+  })
+  test("Should complain of a border point not followint a letter", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA11', t)).toEqual({
+      value: 'ES1234567890123456AA11',
+      valid: false,
+      error: 'CAU_INVALID_BORDER_POINT',
+    })
+  })
+  test("Should complain about length if border point is ok", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1F', t)).toEqual({
+      value: 'ES1234567890123456AA1F',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should complain about installation if starting not an A", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FK', t)).toEqual({
+      value: 'ES1234567890123456AA1FK',
+      valid: false,
+      error: 'CAU_INVALID_INSTALLATION',
+    })
+  })
+  test("Should complain about length when installation starts with A", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FA', t)).toEqual({
+      value: 'ES1234567890123456AA1FA',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should complain about installation when a non number follows A", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FAK', t)).toEqual({
+      value: 'ES1234567890123456AA1FAK',
+      valid: false,
+      error: 'CAU_INVALID_INSTALLATION',
+    })
+  })
+  test("Should accept a full CUA", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FA001', t)).toEqual({
+      value: 'ES1234567890123456AA1FA001',
+      valid: true,
+    })
+  })
+  test("Should complain if provided CUPS and does not match", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FA001', t, 'ES1111222233334444551F')).toEqual({
+      value: 'ES1234567890123456AA1FA001',
+      valid: false,
+      error: 'CAU_NOT_MATCHING_CUPS',
+    })
+  })
+  test("Should accept if provided CUPS matches", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FA001', t, 'ES1234567890123456AA1F')).toEqual({
+      value: 'ES1234567890123456AA1FA001',
+      valid: true,
+    })
+  })
+  test("Should complain if provided CUPS and does not match partially", () => {
+    expect(checkCAUWhileTyping('ES1234567890', t, 'ES1111222233334444551F')).toEqual({
+      value: 'ES1234567890',
+      valid: false,
+      error: 'CAU_NOT_MATCHING_CUPS',
+    })
+  })
+  test("Should complain on length if provided CUPS matches partially", () => {
+    expect(checkCAUWhileTyping('ES1234567890', t, 'ES1234567890123456AA1F')).toEqual({
+      value: 'ES1234567890',
+      valid: false,
+      error: 'CAU_INVALID_LENGTH',
+    })
+  })
+  test("Should ignore differences with the provided CUPS on the border point", () => {
+    expect(checkCAUWhileTyping('ES1234567890123456AA1FA001', t, 'ES1234567890123456AA4F')).toEqual({
+      value: 'ES1234567890123456AA1FA001',
+      valid: true,
+    })
+  })
+  test("Should precede prefix error over matching cups", () => {
+    expect(checkCAUWhileTyping('KS1234567890', t, 'ES1111222233334444551F')).toEqual({
+      value: 'KS1234567890',
+      valid: false,
+      error: 'CAU_INVALID_PREFIX',
+    })
+  })
+  test("Should precede non-number error over matching cups", () => {
+    expect(checkCAUWhileTyping('ES123456789K', t, 'ES1111222233334444551F')).toEqual({
+      value: 'ES123456789K',
+      valid: false,
+      error: 'CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS',
+    })
+  })
 })
