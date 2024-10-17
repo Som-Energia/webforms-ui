@@ -15,6 +15,7 @@ import { GenerationContextProvider } from './containers/Generation/context/Gener
 import { PopUpContextProvider } from './context/PopUpContext'
 import { MatomoProvider } from './trackers/matomo/MatomoProvider'
 import { GurbErrorContextProvider } from './context/GurbErrorContext'
+import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
