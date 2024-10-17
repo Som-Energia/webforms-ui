@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.12 2024-10-17
 
 - Fix: CAU code validation
     - TDD rewritten code (inspired on the old one but adding it progressively to fail every test)
