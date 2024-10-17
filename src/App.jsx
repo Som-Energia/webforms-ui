@@ -14,6 +14,7 @@ import './App.css'
 import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
 import { PopUpContextProvider } from './context/PopUpContext'
 import { GurbErrorContextProvider } from './context/GurbErrorContext'
+import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
