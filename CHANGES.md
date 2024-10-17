@@ -1,5 +1,12 @@
 # Change Log
 
+## Unreleased
+
+- Usability: filter out unaccepted chars in member number from input
+    - Avoids among other problems, the one produced when pasting
+    numbers from comunications with milliard dots like 99.999,
+    trailing spaces and the 'S' character.
+
 ## 2.3.11 2024-10-17
 
 - Refactor and encapsulate matomo 

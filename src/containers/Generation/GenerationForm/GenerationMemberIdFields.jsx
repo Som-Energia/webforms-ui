@@ -29,7 +29,6 @@ const GenerationMemberIdFields = (props) => {
   const {
     values,
     handleBlur,
-    handleChange,
     errors,
     setErrors,
     touched,
@@ -43,9 +42,14 @@ const GenerationMemberIdFields = (props) => {
   const [disabled, setDisabled] = useState(false)
 
   const handleChangeVat = (event) => {
-    let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
-    value = value[0].toUpperCase()
+    let match = event.target.value.match(/[0-9A-Za-z]{0,12}/)
+    let value = match[0].toUpperCase()
     setFieldValue('member.vat', value)
+  }
+
+  const handleChangeMemberNumber = (event) => {
+    let match = event.target.value.replace(/[^0-9]/g, '')
+    setFieldValue('member.partner_number', match)
   }
 
   useEffect(() => {
@@ -150,7 +154,7 @@ const GenerationMemberIdFields = (props) => {
           id="memberNumber"
           name="member.partner_number"
           label={t('NUMERO_SOCI')}
-          onChange={handleChange}
+          onChange={handleChangeMemberNumber}
           onBlur={handleBlur}
           value={values.member.partner_number}
           fullWidth
