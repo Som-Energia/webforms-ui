@@ -20,7 +20,7 @@ const CUPS = (props) => {
 
   useEffect(() => {
     const cups = values.cups
-    if (cups?.length >= 20) {
+    if (cups?.length >= 20 && cups?.length <= 22) {
       setLoading(true)
       checkCups(cups)
         .then((response) => {
@@ -35,7 +35,7 @@ const CUPS = (props) => {
         })
         .catch(({ response }) => {
           const { error } = response.data
-          setFieldError('cups', t(`GURB_ERROR_${error.code}`))
+          setFieldError('cups', `ERROR_${error.code}`)
           setFieldTouched('cups', true)
           setLoading(false)
         })
@@ -43,7 +43,7 @@ const CUPS = (props) => {
   }, [values.cups])
 
   const handleInputCups = (event) => {
-    let value = event.target.value.match(/[0-9A-Za-z]{0,22}/)
+    let value = event.target.value.match(/[0-9A-Za-z]*/)
     value = value[0].toUpperCase()
     setFieldValue('cups', value)
   }

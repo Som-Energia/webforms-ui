@@ -40,7 +40,7 @@ const Gurb = (props) => {
     cups: '',
     has_light: undefined,
     address: {
-      street: undefined,
+      street: '',
       number: undefined,
       postal_code: undefined,
       state: undefined,
