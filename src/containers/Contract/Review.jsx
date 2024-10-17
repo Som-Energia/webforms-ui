@@ -58,7 +58,7 @@ const Review = (props) => {
       city_id: values.supply_point.city.id
     })
       .then((response) => {
-        const tariffPrices = response?.data
+        const tariffPrices = response?.data['current']
         setPrices(tariffPrices)
         setLoading(false)
       })
@@ -181,7 +181,7 @@ const Review = (props) => {
               }
             }}>
             <span key={`${name}`}>
-              {`${concept[key]?.value} ${concept[key]?.uom}`}
+              {`${concept[key]?.value} ${concept[key]?.unit}`}
             </span>
           </Box>
         )
@@ -207,7 +207,7 @@ const Review = (props) => {
         {concept ? (
           keys.map((key, index) => (
             <span key={`${name}:${key}`}>
-              {`${labels[index]}: ${concept[key]?.value} ${concept[key]?.uom}`}
+              {`${labels[index]}: ${concept[key]?.value} ${concept[key]?.unit}`}
             </span>
           ))
         ) : (
@@ -495,28 +495,28 @@ const Review = (props) => {
                 <Grid item xs={12} sm={6}>
                   <ReviewField
                     label={t('TERME_ENERGIA')}
-                    value={<Prices concept={prices?.te} name="te" />}
+                    value={<Prices concept={prices?.energia} name="te" />}
                     multipleValues={true}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <ReviewField
                     label={t('GENERATION')}
-                    value={<Prices concept={prices?.gkwh} name="gkwh" />}
+                    value={<Prices concept={prices?.generation_kWh} name="gkwh" />}
                     multipleValues={true}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <ReviewField
                     label={t('TERME_POTENCIA')}
-                    value={<Prices concept={prices?.tp} name="tp" />}
+                    value={<Prices concept={prices?.potencia} name="tp" />}
                     multipleValues={true}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <ReviewField
                     label={t('AUTOCONSUM')}
-                    value={<Prices concept={prices?.ac} name="ac" />}
+                    value={<Prices concept={prices?.energia_autoconsumida} name="ac" />}
                     multipleValues={true}
                   />
                 </Grid>
@@ -524,7 +524,7 @@ const Review = (props) => {
                   <Grid item xs={12} sm={6}>
                     <ReviewField
                       label={t('BO_SOCIAL')}
-                      value={`${prices?.bo_social?.value} ${prices?.bo_social?.uom}`}
+                      value={`${prices?.bo_social?.value} ${prices?.bo_social?.unit}`}
                       multipleValues={true}
                     />
                   </Grid>
