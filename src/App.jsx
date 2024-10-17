@@ -438,16 +438,18 @@ const App = (props) => {
                 path="/generationkwh/contribution/"
                 element={<GenerationContribution {...props} token={token} />}
               />
-              <Route
-                path="/:language/gurb/validations/"
-                element={
-                  <GurbErrorContextProvider>
-                    <GurbLoadingContextProvider>
-                      <Gurb {...props} />
-                    </GurbLoadingContextProvider>
-                  </GurbErrorContextProvider>
-                }
-              />
+              {props?.isGurbEnabled && (
+                <Route
+                  path="/:language/gurb/validations/"
+                  element={
+                    <GurbErrorContextProvider>
+                      <GurbLoadingContextProvider>
+                        <Gurb {...props} />
+                      </GurbLoadingContextProvider>
+                    </GurbErrorContextProvider>
+                  }
+                />
+              )}
             </Routes>
           </Router>
         </Suspense>
