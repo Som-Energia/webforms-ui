@@ -1,10 +1,11 @@
+import { useTranslation } from 'react-i18next'
+
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { textHeader4, textHelper1 } from '../gurbTheme'
@@ -32,6 +33,8 @@ const InputField = ({
   error,
   isLoading = false
 }) => {
+  const { t } = useTranslation()
+
   return (
     <Box>
       <Typography sx={textHeader4}>{textFieldName}</Typography>
@@ -54,7 +57,7 @@ const InputField = ({
         label={textFieldLabel}
         helperText={
           touched && error ? (
-            error
+            t(error)
           ) : (
             <HelperText helperText={textFieldHelper} iconHelper={iconHelper} />
           )
