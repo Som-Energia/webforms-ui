@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.3.11 2024-10-17
 
 - Refactor and encapsulate matomo 
 
