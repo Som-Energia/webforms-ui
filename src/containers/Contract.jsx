@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactGA from 'react-ga'
 import Plausible from 'plausible-tracker'
 
@@ -45,6 +45,8 @@ import {
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
+import MatomoContext from '../trackers/matomo/MatomoProvider'
+
 const GA_TRACKING_ID = window?.config?.GA_TRAKING_ID
 
 const keyMap = {
@@ -62,6 +64,8 @@ const Contract = (props) => {
     isCadastralReference = false,
     isGurbEnabled = false
   } = props
+
+  const { trackEvent } = useContext(MatomoContext)
 
   const [showInspector, setShowInspector] = useState(false)
   const [showAllSteps, setShowAllSteps] = useState(false)
@@ -561,13 +565,7 @@ const Contract = (props) => {
   const maxStepNumber = steps.length
 
   useEffect(() => {
-    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-    _paq.push([
-      'trackEvent',
-      'Contract',
-      'setContractStep',
-      `contract-step-${activeStep}`
-    ])
+    trackEvent({ category: 'Contract', action: 'setContractStep', name: `contract-step-${activeStep}`})
   }, [activeStep])
 
   const getActiveStep = (props) => {
@@ -801,9 +799,7 @@ const Contract = (props) => {
   })
 
   const trackSucces = () => {
-    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-    _paq.push(['trackEvent', 'Contract', 'contractFormOk', 'send-contract-ok'])
-    // end matomo
+    trackEvent({ category: 'Contract', action: 'contractFormOk', name: 'send-contract-ok'})
     plausible.trackPageview({
       url:
         window.location.protocol +
@@ -818,8 +814,9 @@ const Contract = (props) => {
 
   const handlePost = async (values) => {
     setSending(true)
-    // matomo.push(['trackEvent', 'Event Category', 'Event Action', 'Event Name'])
-    _paq.push(['trackEvent', 'Send', 'sendContractClick', 'send-contract'])
+
+    trackEvent({ category: 'Send', action: 'sendContractClick', name: 'send-contract'})
+
     const data = normalizeContract(values)
     await contract(data)
       .then((response) => {
