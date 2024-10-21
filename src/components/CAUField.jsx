@@ -28,8 +28,8 @@ export function CAUField(props) {
   function localCheck(value) {
     const cupsToMatch = 
       props.data.collective_installation?
-      props.data.cups:
-      undefined
+      undefined:
+      props.data.cups
     return checkCAUWhileTyping(value, t, cupsToMatch)
   }
   function remoteCheck(value) {
