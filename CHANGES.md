@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Translations: New CAU validation errors (missing GL)
+- Translations: Missing EU translations
+
 ## 2.3.12 2024-10-17
 
 - Fix: CAU code validation
