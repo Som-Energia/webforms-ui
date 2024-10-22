@@ -26,11 +26,7 @@ export function CAUField(props) {
   }
 
   function localCheck(value) {
-    const cupsToMatch = 
-      props.data.collective_installation?
-      undefined:
-      props.data.cups
-    return checkCAUWhileTyping(value, t, cupsToMatch)
+    return checkCAUWhileTyping(value, t, props.cupsToMatch)
   }
   function remoteCheck(value) {
     return checkCups(value.replace(/ /g, '').slice(0, 20))
@@ -49,7 +45,7 @@ export function CAUField(props) {
       const result = localCheck(props.value)
       props.onChange({ ...result, valid: false })
     }
-  }, [props.values.self_consumption.collective_installation])
+  }, [props.cupsToMatch])
 
   return (
     <ApiValidatedField
