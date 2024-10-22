@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.3.14 2024-10-22
+
+- Fix: link_member value when member is not mandatory for holderchange
+
 ## 2.3.13 2024-10-21
 
 - Translations: New CAU validation errors (missing GL)
