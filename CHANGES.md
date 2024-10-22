@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.3.15 2024-10-22
+
+- Fix: Was forcing cau-cups matching in the wrong case (collective)
+
 ## 2.3.14 2024-10-22
 
 - Fix: link_member value when member is not mandatory for holderchange
