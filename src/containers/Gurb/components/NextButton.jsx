@@ -17,10 +17,7 @@ function NextButton(props) {
       variant="contained"
       disabled={disabled}
       onClick={onClick}>
-      {/* <Typography */}
-        {/* sx={{ ...textBody1, textTransform: 'capitalize', color: '#FFFFFF' }}> */}
-        {t('GURB_NEXT')}
-      {/* </Typography> */}
+      {t('GURB_NEXT')}
     </Button>
   )
 }
