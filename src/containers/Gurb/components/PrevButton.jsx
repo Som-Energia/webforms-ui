@@ -15,14 +15,7 @@ function PrevButton(props) {
         ...buttonGurbLight
       }}
       data-cy="prev"
-      startIcon={
-        <ArrowBackIosIcon
-        //   sx={{
-        //     color: '#1E1E1E',
-        //     width: '0.8rem'
-        //   }}
-        />
-      }
+      startIcon={<ArrowBackIosIcon />}
       disabled={disabled}
       onClick={onClick}>
       {t('GURB_PREV')}
