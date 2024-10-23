@@ -141,7 +141,7 @@ const MemberIdentifierFields = (props) => {
               <Typography sx={{
                 fontWeight: 500,
                 color: 'primary.main'
-              }} component='body1'>
+              }} variant='helpertext'>
                 {t('SOCIA_TROBADA')}
               </Typography>
             ))
