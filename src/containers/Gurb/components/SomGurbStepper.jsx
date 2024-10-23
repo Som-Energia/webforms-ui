@@ -51,7 +51,7 @@ const SomGurbStepper = (props) => {
             <StepLabel color="inherit">
               <Typography
                 sx={{
-                  fontFamily: 'Manrope',
+                  fontFamily: 'Inter',
                   fontSize: '18px',
                   textTransform: 'capitalize'
                 }}>
