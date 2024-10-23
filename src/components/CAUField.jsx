@@ -3,27 +3,10 @@ import { checkCups } from '../services/api'
 import SolarPowerIcon from '@mui/icons-material/WbSunny'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
-import { checkCAUWhileTyping } from '../services/utils'
+import { checkCAUWhileTyping, prettyCAU } from '../services/utils'
 
 export function CAUField(props) {
   const { t } = useTranslation()
-  function inputFilter(value) {
-    if (!value) return value
-    value = value.replace(/[^0-9A-Za-z]/g, '') // TODO: Do not cut chars after not matching one
-    value = value.slice(0, 26)
-    value = value.toUpperCase()
-    value = [
-      value.slice(0, 2), // ES
-      value.slice(2, 6), // Supplier
-      value.slice(6, 10), // Supply point
-      value.slice(10, 14), // Supply point
-      value.slice(14, 18), // Supply point
-      value.slice(18, 20), // Control
-      value.slice(20, 22), // Border point
-      value.slice(22, 26), // CAU
-    ].join(' ').trim()
-    return value
-  }
 
   function localCheck(value) {
     return checkCAUWhileTyping(value, t, props.cupsToMatch)
@@ -51,7 +34,7 @@ export function CAUField(props) {
     <ApiValidatedField
       {...props}
       leadingIcon={SolarPowerIcon}
-      inputFilter={inputFilter}
+      inputFilter={prettyCAU}
       localCheck={localCheck}
       remoteCheck={remoteCheck}
     />
