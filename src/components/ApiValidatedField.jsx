@@ -76,7 +76,7 @@ export function ApiValidatedField({
         value={inputFilter?inputFilter(value):value}
         onChange={handleChange}
         onBlur={onBlur}
-        error={error}
+        error={!!error}
         helperText={
           isLoading
             ? t('API_VALIDATED_FIELD_CHECKING')
