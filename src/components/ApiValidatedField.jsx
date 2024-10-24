@@ -33,17 +33,21 @@ export function ApiValidatedField({
 
   function checkValue(valueToCheck) {
     setFormerValue(valueToCheck)
-    if (valueToCheck == '') {
+    if (!valueToCheck) {
       onChange({ valueToCheck, valid: true, error: undefined })
       return
     }
     const result = localCheck(valueToCheck)
-    const needsRemote = result.valid
-
-    onChange({ ...result, valid: false })
-    if (!needsRemote) return
+    if (!result.valid) {
+      onChange(result)
+      return
+    }
+    if (!remoteCheck) {
+      onChange(result)
+    }
+    onChange({ ...result, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
     setIsLoading(true)
-    remoteCheck(valueToCheck).then((result) => {
+    remoteCheck(result.value).then((result) => {
       setIsLoading(false)
       onChange(result)
     })
@@ -69,10 +73,10 @@ export function ApiValidatedField({
         fullWidth
         required={required}
         autoFocus={autoFocus}
-        value={value}
+        value={inputFilter?inputFilter(value):value}
         onChange={handleChange}
         onBlur={onBlur}
-        error={error}
+        error={!!error}
         helperText={
           isLoading
             ? t('API_VALIDATED_FIELD_CHECKING')
@@ -86,11 +90,11 @@ export function ApiValidatedField({
               <LeadingIcon />
             </InputAdornment>
           ),
-          endAdornment: isLoading || isLoading ? (
+          endAdornment: isLoading || !error ? (
             <InputAdornment position="end">
               {isLoading ? (
                 <CircularProgress size={24} />
-              ) : error ? (
+              ) : value && !error ? (
                 <CheckOutlinedIcon color="primary" />
               ) : null}
             </InputAdornment>
