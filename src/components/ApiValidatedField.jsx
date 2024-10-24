@@ -90,11 +90,11 @@ export function ApiValidatedField({
               <LeadingIcon />
             </InputAdornment>
           ),
-          endAdornment: isLoading || isLoading ? (
+          endAdornment: isLoading || !error ? (
             <InputAdornment position="end">
               {isLoading ? (
                 <CircularProgress size={24} />
-              ) : error ? (
+              ) : value && !error ? (
                 <CheckOutlinedIcon color="primary" />
               ) : null}
             </InputAdornment>
