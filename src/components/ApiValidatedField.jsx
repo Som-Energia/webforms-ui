@@ -47,7 +47,7 @@ export function ApiValidatedField({
     }
     onChange({ ...result, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
     setIsLoading(true)
-    remoteCheck(valueToCheck).then((result) => {
+    remoteCheck(result.value).then((result) => {
       setIsLoading(false)
       onChange(result)
     })
