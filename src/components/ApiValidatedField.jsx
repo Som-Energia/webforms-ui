@@ -73,7 +73,7 @@ export function ApiValidatedField({
         fullWidth
         required={required}
         autoFocus={autoFocus}
-        value={value}
+        value={inputFilter?inputFilter(value):value}
         onChange={handleChange}
         onBlur={onBlur}
         error={error}
