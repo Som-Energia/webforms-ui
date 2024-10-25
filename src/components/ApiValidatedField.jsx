@@ -76,7 +76,7 @@ export function ApiValidatedField({
     checkValue(formattedValue)
   }
 
-  const prettyValue = input? inputFilter(value) : value
+  const prettyValue = inputFilter? inputFilter(value) : value
   if (prettyValue !== formerValue) {
     checkValue(prettyValue)
   }
