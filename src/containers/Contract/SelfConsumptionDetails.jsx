@@ -151,6 +151,7 @@ const SelfConsumptionDetails = (props) => {
             onChange={handleChangeCAU}
             onBlur={handleBlur}
             error={
+              // Do not show errors if not touched
               touched?.self_consumption?.cau && !!errors?.self_consumption?.cau
             }
             helperText={

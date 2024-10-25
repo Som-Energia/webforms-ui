@@ -45,9 +45,10 @@ export function ApiValidatedField({
     if (!remoteCheck) {
       onChange(result)
     }
-    onChange({ ...result, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
+    const compactValue = result.value
+    onChange({ value: compactValue, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
     setIsLoading(true)
-    remoteCheck(result.value).then((result) => {
+    remoteCheck(compactValue).then((result) => {
       setIsLoading(false)
       onChange(result)
     })
@@ -59,8 +60,9 @@ export function ApiValidatedField({
     checkValue(formattedValue)
   }
 
-  if (value !== formerValue) {
-    checkValue(value)
+  const prettyValue = input? inputFilter(value) : value
+  if (prettyValue !== formerValue) {
+    checkValue(prettyValue)
   }
 
   return (
@@ -73,7 +75,7 @@ export function ApiValidatedField({
         fullWidth
         required={required}
         autoFocus={autoFocus}
-        value={inputFilter?inputFilter(value):value}
+        value={prettyValue}
         onChange={handleChange}
         onBlur={onBlur}
         error={!!error}
