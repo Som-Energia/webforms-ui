@@ -7,6 +7,22 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import { useTranslation } from 'react-i18next'
 
+/*
+TODO: known bugs
+
+- Abort remote checks on edit.
+If you edit the field while an external validation is in progress,
+when the external validation ends it reverts the edit.
+We should apply query abortion on every edit similar to the
+ones proposed [here](https://dev.to/bil/using-abortcontroller-with-react-hooks-and-typescript-to-cancel-window-fetch-requests-1md4).
+
+- Restore selection (cursor).
+Editing in the middle moves the cursor to the end, making editing a pain.
+When an edition in the middle changes the spaces position within the content,
+React's automatic cursor restoration thinks it is a full programmatic
+value replacement and moves the cursor at the end.
+*/
+
 
 export function ApiValidatedField({
   name,
