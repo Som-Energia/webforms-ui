@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Generate package-lock
         run: npm install
-      - uses: cypress-io/github-action@v2
+      - uses: cypress-io/github-action@v6
         with:
           install-command: npm install
           browser: chrome
