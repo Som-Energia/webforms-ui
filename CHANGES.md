@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Removed google tracking
+
 ## 2.3.15 2024-10-22
 
 - Fix: Was forcing cau-cups matching in the wrong case (collective)
