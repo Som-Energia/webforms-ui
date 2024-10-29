@@ -3,6 +3,10 @@
 ## Unreleased
 
 - Removed google tracking
+- Fix: CAU helper text when untouched was required error and not the help.
+- Fix: Infinite loop on remote CAU validation
+- Fix: Recovered pretty format on CAU, IBAN and Cadaster
+- Fix: Recovered the Checking... message and spiner in CAU, IBAN, Cadaster
 
 ## 2.3.15 2024-10-22
 

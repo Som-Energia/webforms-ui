@@ -151,10 +151,11 @@ const SelfConsumptionDetails = (props) => {
             onChange={handleChangeCAU}
             onBlur={handleBlur}
             error={
-              values?.self_consumption?.cau && !!errors?.self_consumption?.cau
+              // Do not show errors if not touched
+              touched?.self_consumption?.cau && !!errors?.self_consumption?.cau
             }
             helperText={
-              errors?.self_consumption?.cau || (
+              (!!values?.self_consumption?.cau && errors?.self_consumption?.cau) || (
                 <a
                   href={t('SELFCONSUMPTION_CAU_HELP_URL')}
                   target="_blank"
