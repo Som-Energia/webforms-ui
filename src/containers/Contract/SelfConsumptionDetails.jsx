@@ -151,10 +151,11 @@ const SelfConsumptionDetails = (props) => {
             onChange={handleChangeCAU}
             onBlur={handleBlur}
             error={
-              // Do not show errors if not touched
-              touched?.self_consumption?.cau && !!errors?.self_consumption?.cau
+              // Show error if any content or if the field is empty but has been visited
+              (touched?.self_consumption?.cau || values.self_consumption?.cau) && !!errors?.self_consumption?.cau
             }
             helperText={
+              // if empty field, show the helper message, not the error
               (!!values?.self_consumption?.cau && errors?.self_consumption?.cau) || (
                 <a
                   href={t('SELFCONSUMPTION_CAU_HELP_URL')}
