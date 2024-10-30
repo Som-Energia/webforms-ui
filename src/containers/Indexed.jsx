@@ -253,7 +253,7 @@ const Indexada = (props) => {
           schema
             .required(t('UNACCEPTED_TERMS'))
             .oneOf([true], t('UNACCEPTED_TERMS')),
-        otherwise: Yup.bool().notRequired()
+        otherwise: (schema) => schema.notRequired()
       })
     })
   ]
