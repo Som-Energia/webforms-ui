@@ -411,16 +411,16 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       self_consumption: Yup.object().shape({
-        cau: Yup.string().when('cau_error', (cau_error) => {
+        cau: Yup.string().when('cau_error', ([cau_error], schema) => {
           if (cau_error)
-            return Yup.mixed().test({
+            return schema.test({
               name: 'cau_error',
               test: () => false,
               message: cau_error
             })
-          return Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
+          return schema.required(t('FILL_SELFCONSUMPTION_CAU'))
         }),
-        cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
+        cau_error: Yup.oneOf([Yup.bool(), Yup.string()]),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),
