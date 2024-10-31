@@ -166,18 +166,10 @@ const Contract = (props) => {
           supply_point_accepted: Yup.bool()
             .required(t('CUPS_VERIFY_LABEL'))
             .oneOf([true], t('CUPS_VERIFY_LABEL')),
-          cadastral_reference: Yup.string().when(
-            'cadastral_reference_error',
-            (cadastral_reference_error) => {
-              if (cadastral_reference_error)
-                return Yup.string().test({
-                  name: 'cadastral_reference_error',
-                  test: () => false,
-                  message: cadastral_reference_error
-                })
-              return Yup.string(t('INVALID_REF_CADASTRAL_LENGTH'))
-            }
-          ),
+          cadastral_reference: Yup.string()
+            .when('cadastral_reference_error', (cadastral_reference_error, schema) => {
+              return cadastral_reference_error? schema.oneOf([], cadastral_reference_error): schema
+            }),
           cadastral_reference_error: Yup.string().notRequired()
         },
         [['cadastral_reference', 'cadastral_reference']]
@@ -411,16 +403,11 @@ const Contract = (props) => {
     }),
     Yup.object().shape({
       self_consumption: Yup.object().shape({
-        cau: Yup.string().when('cau_error', ([cau_error], schema) => {
-          if (cau_error)
-            return schema.test({
-              name: 'cau_error',
-              test: () => false,
-              message: cau_error
-            })
-          return schema.required(t('FILL_SELFCONSUMPTION_CAU'))
-        }),
-        cau_error: Yup.oneOf([Yup.bool(), Yup.string()]),
+        cau: Yup.string().required(t('FILL_SELFCONSUMPTION_CAU'))
+          .when('cau_error', (cau_error, schema) => {
+            return cau_error ? schema.oneOf([], cau_error) : schema
+          }),
+        cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
         collective_installation: Yup.bool().required(
           t('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
         ),
