@@ -179,11 +179,11 @@ const Contract = (props) => {
       contract: Yup.object().shape({
         phases: Yup.string().when('has_service', {
           is: false,
-          then: (scheme) => scheme.required(t('NO_MONOPHASE_CHOICE'))
+          then: (schema) => schema.required(t('NO_MONOPHASE_CHOICE'))
         }),
         rate: Yup.string().when('has_service', {
           is: true,
-          then: (scheme) => scheme.required(t('NO_FARE_CHOSEN'))
+          then: (schema) => schema.required(t('NO_FARE_CHOSEN'))
         }),
         moreThan15Kw: Yup.boolean().required(),
         power: Yup.number()
