@@ -44,7 +44,9 @@ const Gurb = (props) => {
       number: undefined,
       postal_code: undefined,
       state: undefined,
-      city: undefined
+      city: undefined,
+      lat: undefined,
+      long: undefined
     },
     has_selfconsumption: undefined,
     has_member: undefined

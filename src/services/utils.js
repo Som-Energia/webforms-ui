@@ -1,4 +1,4 @@
-import { getRates } from '../services/api'
+import { getMunicipisByPostalCode, getRates } from '../services/api'
 import dayjs from 'dayjs'
 import isoWeek from "dayjs/plugin/isoWeek";
 
@@ -610,4 +610,12 @@ export const prettyCAU = (value) => {
     .join(' ')
     .trim()
   return value
+}
+
+export const setMunicipisWithPostalCode = async (postalCode, stateName, cityName, setFieldValue) => {
+  const municipis = await getMunicipisByPostalCode(postalCode)
+  if (municipis?.length > 0) {
+    setFieldValue(stateName, municipis[0][0]?.provincia)
+    setFieldValue(cityName, municipis[0][0]?.municipi)
+  }
 }

@@ -1,16 +1,18 @@
-// import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import InputField from '../../components/InputField'
-// import LocationInput from '../../../../components/AddressAutocompletedField'
-
-// import { getMunicipisByPostalCode } from '../../../../services/api'
+import LocationInput from '../../../../components/AddressAutocompletedField'
+import { setMunicipisWithPostalCode } from '../../../../services/utils'
+import { checkGurbDistance } from '../../../../services/apiGurb'
+import GurbErrorContext from '../../../../context/GurbErrorContext'
 
 const Address = (props) => {
   const { t } = useTranslation()
   const { values, errors, touched, setFieldValue, setFieldTouched } = props
-  // const [addressValue, setAddressValue] = useState(undefined)
+  const { setError, setErrorInfo } = useContext(GurbErrorContext)
+  const [addressValue, setAddressValue] = useState('')
 
   const handleInputAddress = (event) => {
     setFieldValue('address.street', event.target.value)
@@ -20,60 +22,81 @@ const Address = (props) => {
     setFieldTouched('address.street', true)
   }
 
-  // useEffect(() => {
-  //   const setMunicipisWithPostalCode = async (postalCode) => {
-  //     const municipis = await getMunicipisByPostalCode(postalCode)
-  //     if (municipis?.length > 0) {
-  //       setFieldValue('address.state', municipis[0][0]?.provincia)
-  //       setFieldValue('address.city', municipis[0][0]?.municipi)
-  //     }
-  //   }
+  useEffect(() => {
+    const postalCode = values.address.postal_code
+    if (postalCode?.length > 4) {
+      setMunicipisWithPostalCode(
+        postalCode,
+        'address.state',
+        'address.city',
+        setFieldValue
+      )
+    }
+  }, [values.address.postal_code])
 
-  //   const postalCode = values.address.postal_code
-  //   if (postalCode?.length > 4 && values?.supply_point?.city?.id === '') {
-  //     setMunicipisWithPostalCode(postalCode)
-  //   }
-  // }, [values.address.postal_code])
+  const handleCheckGurbDistance = async () => {
+    // TODO: gurb id from where?
+    const gurbId = 3
+    await checkGurbDistance(gurbId, values.address.lat, values.address.long)
+      .then(({ data }) => {
+        // data is false when address is outside gurb's 2km limit
+        if (data === false) {
+          setError(true)
+          setErrorInfo({
+              main_text: t('GURB_ADDRESS_ERROR_MAIN_TEXT'),
+              seconday_text: t('GURB_ADDRESS_ERROR_SECONDARY_TEXT'),
+              link_text: t('GURB_ADDRESS_ERROR_LINK_TEXT'),
+              test: () => {
+                initializeAddress()
+              }
+          })
+        }
+      })
+      .catch((error) => {
+        // TODO: handle errors
+        console.log('ERROR:', error)
+      })
+  }
 
-  // const handleAddressChange = (value) => {
-  //   setAddressValue(value)
-  // }
+  useEffect(() => {
+    if (values.address.lat !== undefined && values.address.long !== undefined) {
+      handleCheckGurbDistance()
+    }
+  }, [values.address.lat, values.address.long])
 
-  // const handleLocationSelected = (selection) => {
-  //   if (selection === null) {
-  //     setFieldValue('address.address', '')
-  //     setFieldValue('address.postal_code', '')
-  //     setFieldValue('address.number', '')
-  //     setFieldValue('address.lat', '')
-  //     setFieldValue('address.long', '')
-  //     setFieldValue('address.state', { id: '', name: '' })
-  //     setFieldValue('address.city', { id: '', name: '' })
-  //   } else {
-  //     const address = Object.assign(
-  //       {},
-  //       ...selection.address_components.map((x) => ({
-  //         [x.types[0]]: x.long_name
-  //       }))
-  //     )
-  //     setFieldValue('address', {
-  //       street: address?.route,
-  //       number: address?.street_number,
-  //       lat: selection?.geometry?.location?.lat(),
-  //       lng: selection?.geometry?.location?.lng(),
-  //       postal_code: address?.postal_code
-  //       // state: undefined,
-  //       // city: undefined
-  //     })
-  //     setFieldValue('supply_point.address', address?.route)
-  //     setFieldValue('supply_point.postal_code', address?.postal_code)
-  //     setFieldValue('supply_point.number', address?.street_number || '')
-  //     if (address?.street_number) {
-  //       setFieldValue('supply_point.lat', selection?.geometry?.location?.lat())
-  //       setFieldValue('supply_point.long', selection?.geometry?.location?.lng())
-  //     }
-  //   }
-  // }
+  const handleAddressChange = (value) => {
+    setAddressValue(value)
+  }
 
+  const initializeAddress = () => {
+    setFieldValue('address.street', '')
+    setFieldValue('address.number', '')
+    setFieldValue('address.lat', '')
+    setFieldValue('address.long', '')
+    setFieldValue('address.postal_code', '')
+    setFieldValue('address.state', { id: '', name: '' })
+    setFieldValue('address.city', { id: '', name: '' })
+  }
+
+  const handleLocationSelected = (selection) => {
+    if (selection === null) {
+      initializeAddress()
+    } else {
+      const address = Object.assign(
+        {},
+        ...selection.address_components.map((x) => ({
+          [x.types[0]]: x.long_name
+        }))
+      )
+      setFieldValue('address', {
+        street: address?.route,
+        number: address?.street_number || '',
+        lat: selection?.geometry?.location?.lat(),
+        long: selection?.geometry?.location?.lng(),
+        postal_code: address?.postal_code
+      })
+    }
+  }
   return (
     <>
       <TextRecomendation
@@ -81,13 +104,13 @@ const Address = (props) => {
         text={t('GURB_ADDRESS_TITLE_HELPER')}
       />
       &nbsp;
-      {/* <LocationInput
+      <LocationInput
         id="address-street"
         name="address.street"
         value={addressValue}
         onChange={handleAddressChange}
         onLocationSelected={handleLocationSelected}
-      /> */}
+      />
       <InputField
         textFieldLabel={t('GURB_ADDRESS_LABEL')}
         textFieldName={t('GURB_ADDRESS_FIELD')}

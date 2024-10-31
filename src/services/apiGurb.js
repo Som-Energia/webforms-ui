@@ -24,14 +24,14 @@ export const getGurbData = async (gurbId) => {
 //   })
 // }
 
-// export const checkGurbDistance = async (gurbId, localization) => {
-//   return axios({
-//     method: 'GET',
-//     url: `${WEBFORMS_API_URL}/gurb/${gurbId}?localization=${localization}`,
-//   }).then((response) => {
-//     return response?.data
-//   })
-// }
+export const checkGurbDistance = async (gurbId, lat, long) => {
+  return axios({
+    method: 'GET',
+    url: `${WEBFORMS_API_URL}/check/gurb/${gurbId}?lat=${lat}&long=${long}`,
+  }).then((response) => {
+    return response?.data
+  })
+}
 
 // // CUPS from Som?
 // export const checkGurbCups = async (data, token) => {
