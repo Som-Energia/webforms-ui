@@ -1,3 +1,7 @@
+- [ ] Referencia catastral tiene check sin tocarlo
+- [ ] CAU si editas mientras esta validando remoto, se machaca el valor cuando acaba de validar
+
+
 ## Django (OV)
 
 - [x] Feature flag
