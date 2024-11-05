@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.3.17
+
+- New entry points for the renamed new-member form urls 
+
 ## 2.3.16
 
 - Removed google tracking
