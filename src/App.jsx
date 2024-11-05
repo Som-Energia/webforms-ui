@@ -187,24 +187,19 @@ const App = (props) => {
                   }
                 />
 
-                <Route path="/new-member" element={<Member {...props} />} />
-
-                <Route
-                  path="/:language/fes-te-n-soci-a/"
-                  element={<Member {...props} />}
-                />
-                <Route
-                  path="/:language/hazte-socio-a/"
-                  element={<Member {...props} />}
-                />
-                <Route
-                  path="/:language/izan-zaitez-bazkide/"
-                  element={<Member {...props} />}
-                />
-                <Route
-                  path="/:language/faite-socio-a/"
-                  element={<Member {...props} />}
-                />
+                {[
+                  "/new-member",
+                  "/:language/associat/",
+                  "/:language/asociate/", // es, gl
+                  "/:language/bazkidetu/",
+                  // Deprecated entrypoints: remove after transition to "associat" as the official pages
+                  "/:language/fes-te-n-soci-a/",
+                  "/:language/hazte-socio-a/",
+                  "/:language/izan-zaitez-bazkide/",
+                  "/:language/faite-socio-a/",
+                ].map((path)=> (
+                  <Route path={path} key={path} element={<Member {...props} />} />
+                ))}
 
                 <Route
                   path="/d1-detail"
