@@ -16,7 +16,7 @@ const Tariff = (props) => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  useEffect(() => {
+ useEffect(() => {
     const CITY_TAX_21 = 20
     const CITY_TAX_10 = 37
 
@@ -26,7 +26,7 @@ const Tariff = (props) => {
       city_id: taxType === 21 ? CITY_TAX_21 : CITY_TAX_10
     })
       .then((response) => {
-        const tariffPrices = response?.data
+        const tariffPrices = response?.data['current']
         setPrices(tariffPrices)
         setLoading(false)
       })
@@ -81,13 +81,13 @@ const Tariff = (props) => {
           <div className="tp">
             <h4>{t('TERME_POTENCIA')}</h4>
             <p className="titol">
-              {prices?.tp &&
-                Object.keys(prices?.tp)
+              {prices?.potencia &&
+                Object.keys(prices?.potencia)
                   .reverse()
                   .map((period) => (
                     <span key={period}>
                       {powerPeriodNames[`${tariff}_${period}`] ?? period}{' '}
-                      {prices.tp[period]?.value} {prices.tp[period]?.uom}
+                      {prices.potencia[period]?.value} {prices.potencia[period]?.unit}
                       <br />
                     </span>
                   ))}
@@ -96,13 +96,13 @@ const Tariff = (props) => {
           <div className="te">
             <h4>{t('TERME_ENERGIA')}</h4>
             <p className="titol">
-              {prices?.te &&
-                Object.keys(prices?.te)
+              {prices?.energia &&
+                Object.keys(prices?.energia)
                   .reverse()
                   .map((period) => (
                     <span key={period}>
                       {energyPeriodNames[`${tariff}_${period}`] ?? period}{' '}
-                      {prices.te[period]?.value} {prices.te[period]?.uom}
+                      {prices.energia[period]?.value} {prices.energia[period]?.unit}
                       <br />
                     </span>
                   ))}
@@ -116,13 +116,13 @@ const Tariff = (props) => {
                 })
               }}></h4>
             <p className="titol">
-              {prices?.gkwh &&
-                Object.keys(prices?.gkwh)
+              {prices?.generation_kWh &&
+                Object.keys(prices?.generation_kWh)
                   .reverse()
                   .map((period) => (
                     <span key={period}>
                       {energyPeriodNames[`${tariff}_${period}`] ?? period}{' '}
-                      {prices.gkwh[period]?.value} {prices.gkwh[period]?.uom}
+                      {prices.generation_kWh[period]?.value} {prices.generation_kWh[period]?.unit}
                       <br />
                     </span>
                   ))}
@@ -136,12 +136,12 @@ const Tariff = (props) => {
                 })
               }}></h4>
             <p className="titol">
-              {prices?.ac &&
-                Object.keys(prices?.ac)
+              {prices?.energia_autoconsumida &&
+                Object.keys(prices?.energia_autoconsumida)
                   .reverse()
                   .map((period) => (
                     <span key={period}>
-                      {prices.ac[period]?.value} {prices.ac[period]?.uom}
+                      {prices.energia_autoconsumida[period]?.value} {prices.energia_autoconsumida[period]?.unit}
                       <br />
                     </span>
                   ))}
