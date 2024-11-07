@@ -1,10 +1,15 @@
 # Change Log
 
-## 2.3.17
+## 2.4.0 2024-11-06
+
+- Use new prices entry point
+- Remove old new-member urls
+
+## 2.3.17 2024-11-05
 
 - New entry points for the renamed new-member form urls 
 
-## 2.3.16
+## 2.3.16 2024-11-04
 
 - Removed google tracking
 - Fix: CAU helper text when untouched was required error and not the help.
