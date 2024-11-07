@@ -192,11 +192,6 @@ const App = (props) => {
                   "/:language/associat/",
                   "/:language/asociate/", // es, gl
                   "/:language/bazkidetu/",
-                  // Deprecated entrypoints: remove after transition to "associat" as the official pages
-                  "/:language/fes-te-n-soci-a/",
-                  "/:language/hazte-socio-a/",
-                  "/:language/izan-zaitez-bazkide/",
-                  "/:language/faite-socio-a/",
                 ].map((path)=> (
                   <Route path={path} key={path} element={<Member {...props} />} />
                 ))}
