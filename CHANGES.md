@@ -1,5 +1,8 @@
 # Change Log
 
+## Unreleased 
+- Added message for autonomous (Modify Contract form)
+
 ## 2.4.0 2024-11-06
 
 - Use new prices entry point
