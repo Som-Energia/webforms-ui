@@ -39,6 +39,7 @@ function ModifyContract(props) {
 
   const fromD1 = state?.d1CaseData?.m1
   const d1CaseData = state?.d1CaseData
+  const { noticeAutonomous } = props
 
   const { t, i18n } = useTranslation()
 
@@ -174,6 +175,17 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Box sx={{ width: '100%', backgroundColor: 'secondary.light' }}>
+        {noticeAutonomous ? (
+          <AlertBox
+            severity={'warning'}
+            variant={'body2'}
+            title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')}
+            description={t('MODIFY_POTTAR_BANER', {
+              baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),
+              baner_document_url: t('MODIFY_POTTAR_BANER_DOCUMENT_URL'),
+              baner_help_url: t('MODIFY_POTTAR_BANER_HELP_URL')
+            })}></AlertBox>) : null
+        }
         {fromD1 && (
           <Stepper
             sx={{ backgroundColor: 'secondary.light', pl: 1, pr: 1, pb: 1 }}
