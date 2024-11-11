@@ -39,6 +39,7 @@ function ModifyContract(props) {
 
   const fromD1 = state?.d1CaseData?.m1
   const d1CaseData = state?.d1CaseData
+  const { noticeAutonomous } = props
 
   const { t, i18n } = useTranslation()
 
