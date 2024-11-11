@@ -2,6 +2,7 @@
 
 ## 2.4.1 2024-11-11
 - Added message for autonomous (Modify Contract form)
+- Added feature flag: noticeAutonomous
 
 ## 2.4.0 2024-11-06
 
