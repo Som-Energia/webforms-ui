@@ -19,7 +19,6 @@ import CnaeField from '../../components/CnaeField'
 import { CNAE_HOUSING } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'
 import CadastralReferenceField from '../../components/CadastralReferenceField'
-import LocationInput from '../../components/AddressAutocompletedField'
 
 const CadastralReferenceHelperText = () => {
   const { t } = useTranslation()
@@ -36,8 +35,6 @@ const CadastralReferenceHelperText = () => {
 
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
-
-  const SHOW_STATE_CITY = props.isGurbEnabled ? false : true
 
   const [addressValue, setAddressValue] = useState('')
 
@@ -146,35 +143,23 @@ const SupplyPoint = (props) => {
       <Box mt={3} mb={1}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            {props.isGurbEnabled ? (
-              <LocationInput
-                id="supply_point_address"
-                name="supply_point.address"
-                value={addressValue}
-                onChange={handleAddressChange}
-                onLocationSelected={handleLocationSelected}
-              />
-            ) : (
-              <TextField
-                id="supply_point_address"
-                name="supply_point.address"
-                label={t('HOLDER_ADDRESS')}
-                required
-                variant="outlined"
-                fullWidth
-                value={values?.supply_point?.address}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={
-                  errors?.supply_point?.address &&
-                  touched?.supply_point?.address
-                }
-                helperText={
-                  touched?.supply_point?.address &&
-                  errors?.supply_point?.address
-                }
-              />
-            )}
+            <TextField
+              id="supply_point_address"
+              name="supply_point.address"
+              label={t('HOLDER_ADDRESS')}
+              required
+              variant="outlined"
+              fullWidth
+              value={values?.supply_point?.address}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={
+                errors?.supply_point?.address && touched?.supply_point?.address
+              }
+              helperText={
+                touched?.supply_point?.address && errors?.supply_point?.address
+              }
+            />
           </Grid>
           <Grid item xs={4} sm={2}>
             <TextField
@@ -234,7 +219,6 @@ const SupplyPoint = (props) => {
 
           <Grid item xs={12} sm={6}>
             <TextField
-              disabled={props.isGurbEnabled ? true : false}
               id="supply_point_postal_code"
               name="supply_point.postal_code"
               label={t('HOLDER_POSTALCODE')}
@@ -255,23 +239,21 @@ const SupplyPoint = (props) => {
             />
           </Grid>
 
-          {SHOW_STATE_CITY ? (
-            <StateCity
-              stateId="supply_point_state"
-              stateName="supply_point.state"
-              stateInitial={values?.supply_point?.state}
-              stateError={
-                errors?.supply_point?.state && touched?.supply_point?.state
-              }
-              cityId="supply_point_city"
-              cityName="supply_point.city"
-              cityInitial={values?.supply_point?.city}
-              cityError={
-                errors?.supply_point?.city && touched?.supply_point?.city
-              }
-              onChange={onChangeStateCity}
-            />
-          ) : null}
+          <StateCity
+            stateId="supply_point_state"
+            stateName="supply_point.state"
+            stateInitial={values?.supply_point?.state}
+            stateError={
+              errors?.supply_point?.state && touched?.supply_point?.state
+            }
+            cityId="supply_point_city"
+            cityName="supply_point.city"
+            cityInitial={values?.supply_point?.city}
+            cityError={
+              errors?.supply_point?.city && touched?.supply_point?.city
+            }
+            onChange={onChangeStateCity}
+          />
 
           <Grid item xs={12} sm={6}>
             <TextField
@@ -336,7 +318,7 @@ const SupplyPoint = (props) => {
                 }
                 helperText={
                   values?.supply_point?.cadastral_reference &&
-                    errors?.supply_point?.cadastral_reference ? (
+                  errors?.supply_point?.cadastral_reference ? (
                     errors?.supply_point?.cadastral_reference
                   ) : (
                     <CadastralReferenceHelperText />

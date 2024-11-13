@@ -2,8 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import TextRecomendation from '../../components/TextRecomendation'
-import InputField from '../../components/InputField'
-import LocationInput from '../../../../components/AddressAutocompletedField'
+import LocationInput from '../../components/AddressAutocompletedField'
 import { setMunicipisWithPostalCode } from '../../../../services/utils'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
@@ -35,7 +34,7 @@ const Address = (props) => {
   }, [values.address.postal_code])
 
   const handleCheckGurbDistance = async () => {
-    // TODO: gurb id from where?
+    // TODO: waiting to know where gurb id comes from
     const gurbId = 3
     await checkGurbDistance(gurbId, values.address.lat, values.address.long)
       .then(({ data }) => {
@@ -43,12 +42,12 @@ const Address = (props) => {
         if (data === false) {
           setError(true)
           setErrorInfo({
-              main_text: t('GURB_ADDRESS_ERROR_MAIN_TEXT'),
-              seconday_text: t('GURB_ADDRESS_ERROR_SECONDARY_TEXT'),
-              link_text: t('GURB_ADDRESS_ERROR_LINK_TEXT'),
-              test: () => {
-                initializeAddress()
-              }
+            main_text: t('GURB_ADDRESS_ERROR_MAIN_TEXT'),
+            seconday_text: t('GURB_ADDRESS_ERROR_SECONDARY_TEXT'),
+            link_text: t('GURB_ADDRESS_ERROR_LINK_TEXT'),
+            clean_address: () => {
+              initializeAddress()
+            }
           })
         }
       })
@@ -105,22 +104,14 @@ const Address = (props) => {
       />
       &nbsp;
       <LocationInput
+        textFieldLabel={t('GURB_ADDRESS_LABEL')}
+        textFieldName={t('GURB_ADDRESS_FIELD')}
+        textFieldHelper={t('GURB_ADDRESS_HELPER')}
         id="address-street"
         name="address.street"
         value={addressValue}
         onChange={handleAddressChange}
         onLocationSelected={handleLocationSelected}
-      />
-      <InputField
-        textFieldLabel={t('GURB_ADDRESS_LABEL')}
-        textFieldName={t('GURB_ADDRESS_FIELD')}
-        textFieldHelper={t('GURB_ADDRESS_HELPER')}
-        iconHelper={false}
-        handleChange={handleInputAddress}
-        handleBlur={handleInputAddressBlur}
-        touched={touched?.address?.street}
-        value={values.address.street}
-        error={errors?.address?.street}
       />
     </>
   )
