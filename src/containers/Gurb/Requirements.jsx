@@ -16,6 +16,8 @@ import MemberQuestion from './pages/Requirements/MemberQuestion'
 
 import { textBody3, textSubtitle } from './gurbTheme'
 import FailureRequirement from './components/FailureRequirement'
+import AlertRequirement from './components/AlertRequirement'
+
 import GurbErrorContext from '../../context/GurbErrorContext'
 
 const Requirements = (props) => {
@@ -46,12 +48,21 @@ const Requirements = (props) => {
       </Typography>
       <SomStepper step={activeStep} connectors={4 + 1} />
       {error ? (
-        <FailureRequirement
-          textHeader={errorInfo?.main_text}
-          textBody={errorInfo?.seconday_text}
-          textHelper={errorInfo?.link_text}
-          textHelperAction={errorInfo?.test}
-        />
+        errorInfo?.error_type === 'error' ? (
+          <FailureRequirement
+            textHeader={errorInfo?.main_text}
+            textBody={errorInfo?.seconday_text}
+            textHelper={errorInfo?.link_text}
+            textHelperAction={errorInfo?.test}
+          />
+        ) : (
+          <AlertRequirement
+            textHeader={errorInfo?.main_text}
+            textBody={errorInfo?.seconday_text}
+            textHelper={errorInfo?.link_text}
+            textHelperAction={errorInfo?.test}
+          />
+        )
       ) : (
         getStep()
       )}

@@ -45,7 +45,8 @@ const Address = (props) => {
             main_text: t('GURB_ADDRESS_ERROR_MAIN_TEXT'),
             seconday_text: t('GURB_ADDRESS_ERROR_SECONDARY_TEXT'),
             link_text: t('GURB_ADDRESS_ERROR_LINK_TEXT'),
-            clean_address: () => {
+            error_type: 'error',
+            clean_field: () => {
               initializeAddress()
             }
           })

@@ -24,7 +24,8 @@ const SelfConsumption = (props) => {
         main_text: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
         seconday_text: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT'),
         link_text: t('GURB_SELFCONSUMPTION_ERROR_LINK_TEXT'),
-        test: () => {
+        error_type: 'error',
+        clean_field: () => {
           setFieldValue('has_selfconsumption', undefined)
         }
       })
