@@ -39,13 +39,10 @@ const Requirements = (props) => {
 
   return (
     <>
-      <Typography sx={textSubtitle}>Formulari inscripció</Typography>
+      <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper activeStep={GURB_REQUIREMENTS_STEP} />
-      <Header title="Requisits de participació" />
-      <Typography sx={textBody3}>
-        Per participar has de complir els 4 requisits que et preguntem a
-        continuació
-      </Typography>
+      <Header title={t('GURB_REQUIREMENTS_TITLE')} />
+      <Typography sx={textBody3}>{t('GURB_REQUIREMENTS_SUBTITLE')}</Typography>
       <SomStepper step={activeStep} connectors={4 + 1} />
       {error ? (
         errorInfo?.error_type === 'error' ? (
