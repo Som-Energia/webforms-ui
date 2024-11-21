@@ -82,7 +82,7 @@ export default function SomEnergiaTheme() {
       }
     },
     shape: {
-      borderRadius: '0'
+      borderRadius: 0
     },
     zIndex: {
       modal: 1600

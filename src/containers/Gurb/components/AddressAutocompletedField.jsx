@@ -1,10 +1,21 @@
 import React, { useRef, useState } from 'react'
-import getGoogleMapsPlacesApiClient from '../services/googleApiClient'
+import getGoogleMapsPlacesApiClient from '../../../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { textHeader4 } from '../gurbTheme'
+import { HelperText } from './InputField'
 
-export default function LocationInput({ value, onChange, onLocationSelected }) {
+export default function LocationInput({
+  textFieldLabel,
+  textFieldName,
+  textFieldHelper,
+  value,
+  onChange,
+  onLocationSelected
+}) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
   const sessionTokenRef = useRef()
@@ -122,20 +133,29 @@ export default function LocationInput({ value, onChange, onLocationSelected }) {
         noOptionsText="No locations"
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
-          <TextField
-            sx={{'input' : {padding:0}}}
-            {...params}
-            label={t('HOLDER_ADDRESS')}
-            onChange={(event) => {
-              const newValue = event.target.value
-              // update controlled input value
-              onChange(newValue)
-              // clear any previously loaded place details
-              setPlaceDetail(undefined)
-              // trigger the load of suggestions
-              loadSuggestions(newValue)
-            }}
-          />
+          <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            <Typography sx={textHeader4}>{textFieldName}</Typography>
+            <TextField
+              sx={{
+                '& .MuiFormHelperText-root': { color: '#B3B3B3' },
+                '& .MuiInputLabel-root': { color: '#B3B3B3' },
+                '& .MuiOutlinedInput-root': { borderRadius: '8px' },
+                marginTop: '0.5rem'
+              }}
+              {...params}
+              label={textFieldLabel}
+              helperText={textFieldHelper}
+              onChange={(event) => {
+                const newValue = event.target.value
+                // update controlled input value
+                onChange(newValue)
+                // clear any previously loaded place details
+                setPlaceDetail(undefined)
+                // trigger the load of suggestions
+                loadSuggestions(newValue)
+              }}
+            />
+          </Box>
         )}
       />
       <div id="googlemaps-attribution-container"></div>
