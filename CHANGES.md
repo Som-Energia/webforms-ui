@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- Gurb: validation pages for non-members
+- Added feature flag: isGurbEnabled
+
+
 ## 2.4.1 2024-11-11
 - Added message for autonomous (Modify Contract form)
 - Added feature flag: noticeAutonomous
