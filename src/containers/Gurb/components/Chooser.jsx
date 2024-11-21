@@ -56,7 +56,9 @@ const Chooser = (props) => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: '1rem',
+        marginBottom: '1rem'
       }}>
       {options.map((option, index) => (
         <Grid key={index} item xs={12} sm={6} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>

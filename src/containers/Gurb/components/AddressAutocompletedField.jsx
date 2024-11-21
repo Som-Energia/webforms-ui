@@ -133,7 +133,7 @@ export default function LocationInput({
         noOptionsText="No locations"
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
-          <Box>
+          <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
             <Typography sx={textHeader4}>{textFieldName}</Typography>
             <TextField
               sx={{

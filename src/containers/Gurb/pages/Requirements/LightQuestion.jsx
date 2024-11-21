@@ -49,7 +49,6 @@ const LightQuestion = (props) => {
   return (
     <>
       <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} />
-      &nbsp;
       <Chooser
         options={options}
         value={values.has_light}

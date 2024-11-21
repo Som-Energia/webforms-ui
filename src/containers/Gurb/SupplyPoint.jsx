@@ -35,14 +35,11 @@ const SupplyPoint = (props) => {
   return (
     <>
       <Header title={`${t('GURB_SUPPLY_POINT_TITLE')} ${gurbData.name}`} />
-      &nbsp;
       <ProgressWarning completed={gurbData.completedPercentage} />
-      &nbsp;
       <TextRecomendation
         title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
         text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
       />
-      &nbsp;
       <CUPS {...props} />
     </>
   )

@@ -103,7 +103,6 @@ const Address = (props) => {
         title={t('GURB_ADDRESS_TITLE')}
         text={t('GURB_ADDRESS_TITLE_HELPER')}
       />
-      &nbsp;
       <LocationInput
         textFieldLabel={t('GURB_ADDRESS_LABEL')}
         textFieldName={t('GURB_ADDRESS_FIELD')}

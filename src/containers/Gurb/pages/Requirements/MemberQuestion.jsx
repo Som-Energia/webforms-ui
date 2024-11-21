@@ -49,7 +49,6 @@ const MemberQuestion = (props) => {
     return (
       <>
         <TextRecomendation title={t('GURB_HAS_MEMBER_TITLE')} />
-        &nbsp;
         <Chooser
           options={options}
           value={values.has_member}
