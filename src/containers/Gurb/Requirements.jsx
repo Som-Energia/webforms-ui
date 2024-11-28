@@ -53,7 +53,7 @@ const Requirements = (props) => {
             textHelperAction={errorInfo?.test}
           />
         ) : (
-          <AlertRequirement
+          <AlertRequirement //To Do: check if we should merge this component with Failure component.
             textHeader={errorInfo?.main_text}
             textBody={errorInfo?.seconday_text}
             textHelper={errorInfo?.link_text}
