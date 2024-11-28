@@ -1,4 +1,4 @@
-{
+    {
     "SI": "Sí",
     "NO": "No",
     "SEGUENT_PAS": "Següent",
@@ -769,10 +769,23 @@
     "GURB_REQUIREMENTS_SUBTITLE": "Per participar has de complir els 4 requisits que et preguntem a continuació",
     "GURB_REQUIREMENTS_TITLE": "Requisits de participació",
     "GURB_FORM_TITLE": "Formulari inscripció GURB",
+    "GURB_IS_MEMBER_TITLE": "Indica el teu DNI i número de sòcia",
+    "GURB_DNI_LABEL":"DNI",
+    "GURB_DNI_FIELD": "DNI",
+    "GURB_DNI_HELPER": "Exemple: 45292153U",
+    "GURB_MEMBER_NUMBER_LABEL":"Número de sòcia",
+    "GURB_MEMBER_NUMBER_FIELD": "Número de sòcia",
+    "GURB_MEMBER_NUMBER_HELPER": "On trobar el número de sòcia",
+    "GURB_DNI_APADRINATING_FIELD": "DNI de la persona que t'apadrina" ,
+    "GURB_APADRINATING_MEMBER_NUMBER_FIELD": "Número de sòcia de la persona que t'apadrina",
+    "GURB_APADRINATING_MEMBER_TITLE": "Indica el número de sòcia i el DNI de lapersona que t'apadrina",
+    "GURB_NEW_MEMBER_TITLE": "Dades de la nova persona sòcia",
+    "GURB_DNI_NEW_MEMBER_FIELD": "Introdueix el NIF de la nova persona sòcia",
     "ERROR_INVALID_FIELD": "Camp incorrecte",
     "ERROR_FIELD_TOO_SHORT": "Camp massa curt",
     "ERROR_FIELD_TOO_LONG": "Camp massa llarg",
     "ERROR_REQUIRED_FIELD": "Camp requerit",
     "MAINTENANCE_TEXT1": "Estem realitzant tasques de manteniment",
-    "MAINTENANCE_TEXT2": "Tornem aviat"
+    "MAINTENANCE_TEXT2": "Tornem aviat",
+    "ERROR_REQUIRED_FIELD": "Camp requerit"
 }
