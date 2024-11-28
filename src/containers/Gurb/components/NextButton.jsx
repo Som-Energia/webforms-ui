@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
-import { buttonGurbDark, textBody1 } from '../gurbTheme'
-import Typography from '@mui/material/Typography'
+import { buttonGurbDark } from '../gurbTheme'
 
 function NextButton(props) {
   const { onClick, disabled } = props
