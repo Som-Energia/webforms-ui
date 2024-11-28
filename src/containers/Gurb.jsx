@@ -8,6 +8,7 @@ import Box from '@mui/material/Box'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
+import NewMember from './Gurb/NewMember'
 
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
@@ -18,11 +19,13 @@ import {
   memberQuestionValidations,
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
+import newMemberValidations from './Gurb/newMemberValidations'
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 6
+const MAX_STEP_NUMBER = 7
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
+const NEW_MEMBER_STEP = [5]
 
 const Gurb = (props) => {
   const { i18n } = useTranslation()
@@ -49,7 +52,15 @@ const Gurb = (props) => {
       long: undefined
     },
     has_selfconsumption: undefined,
-    has_member: undefined
+    has_member: undefined,
+    is_member: undefined,
+    member_vat: '',
+    member: {
+      vat: undefined,
+      number: undefined,
+      dni: undefined,
+      checked: undefined
+    }
   }
 
   const validationSchemas = [
@@ -57,7 +68,8 @@ const Gurb = (props) => {
     lightValidations,
     addressValidations,
     selfConsumptionValidations,
-    memberQuestionValidations
+    memberQuestionValidations,
+    newMemberValidations
   ]
 
   const nextStep = () => {
@@ -81,6 +93,8 @@ const Gurb = (props) => {
           activeStep={REQUIREMENTS_STEPS.indexOf(activeStep)}
         />
       )
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
+      return <NewMember {...props} />
     } else {
       return <></>
     }
