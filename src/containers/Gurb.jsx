@@ -53,13 +53,25 @@ const Gurb = (props) => {
     },
     has_selfconsumption: undefined,
     has_member: undefined,
-    is_member: undefined,
-    member_vat: '',
     member: {
       vat: undefined,
       number: undefined,
       dni: undefined,
-      checked: undefined
+      is_member: undefined,
+      become_member: undefined,
+      link_member: undefined,
+      isphisical: true,
+      proxynif_valid: false,
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      surname1: '',
+      surname2: '',
+      email: '',
+      email2: '',
+      phone1: '',
+      phone2: '',
+      language: `${i18n.language}_ES`
     }
   }
 
