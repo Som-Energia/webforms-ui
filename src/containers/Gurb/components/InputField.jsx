@@ -36,7 +36,7 @@ const InputField = ({
   const { t } = useTranslation()
 
   return (
-    <Box sx={{ marginBottom: '2rem', marginTop: '2rem' }} >
+    <Box sx={{ marginTop: '2rem' }}>
       <Typography sx={textHeader4}>{textFieldName}</Typography>
       <TextField
         sx={{
