@@ -1,10 +1,10 @@
 # Change Log
 
-## Unreleased
+## 2.4.2 2024-12-04
 
 - Gurb: validation pages for non-members
 - Added feature flag: isGurbEnabled
-
+- Fix tpv asynchronous submit
 
 ## 2.4.1 2024-11-11
 - Added message for autonomous (Modify Contract form)
