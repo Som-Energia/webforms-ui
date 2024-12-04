@@ -47,6 +47,13 @@ const Member = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [data, setData] = useState()
+  const [url, setUrl] = useState('')
+
+  useEffect(() => {
+    if (url !== '') {
+      formTPV.current.submit()
+    }
+  }, [url])
 
   const handlers = {
     SAMPLE_DATA: () => {
@@ -285,7 +292,7 @@ const Member = (props) => {
           trackSucces()
           if (response?.data?.endpoint) {
             setData(response?.data)
-            formTPV.current.submit()
+            setUrl(response.data.endpoint)
           } else {
             setCompleted(true)
           }
