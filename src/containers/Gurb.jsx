@@ -71,7 +71,8 @@ const Gurb = (props) => {
       email2: '',
       phone1: '',
       phone2: '',
-      language: `${i18n.language}_ES`
+      language: `${i18n.language}_ES`,
+      privacy_policy_accepted: undefined
     }
   }
 

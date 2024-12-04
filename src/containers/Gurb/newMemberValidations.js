@@ -17,7 +17,8 @@ const newMemberValidations = Yup.object().shape({
       }),
     phone1: Yup.string().min(9, 'NO_PHONE').required('ERROR_REQUIRED_FIELD'),
     phone2: Yup.string().min(9, 'NO_PHONE'),
-    language: Yup.string().required('ERROR_REQUIRED_FIELD')
+    language: Yup.string().required('ERROR_REQUIRED_FIELD'),
+    privacy_policy_accepted: Yup.bool().required('ERROR_REQUIRED_FIELD')
   })
 })
 
