@@ -6,6 +6,7 @@ import { textHeader4, textSubtitle2 } from '../../gurbTheme'
 import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import MenuItem from '@mui/material/MenuItem'
 
 import TextField from '@mui/material/TextField'
@@ -58,85 +59,85 @@ const NewMemberDetails = (props) => {
         value={values?.member.dni}
         error={errors?.member?.dni}
       />
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between'
-        }}>
-        <InputField
-          textFieldLabel={t('GURB_NAME_LABEL')}
-          textFieldName={t('GURB_NAME_FIELD')}
-          handleChange={(event) => {
-            setFieldValue('member.name', event.target.value)
-          }}
-          handleBlur={() => {
-            setFieldTouched('member.name', true)
-          }}
-          touched={touched?.member?.name}
-          value={values?.member.name}
-          error={errors?.member?.name}
-        />
-        <InputField
-          textFieldLabel={t('GURB_SURNAME1_LABEL')}
-          textFieldName={t('GURB_SURNAME1_FIELD')}
-          handleChange={(event) => {
-            setFieldValue('member.surname1', event.target.value)
-          }}
-          handleBlur={() => {
-            setFieldTouched('member.surname1', true)
-          }}
-          touched={touched?.member?.surname1}
-          value={values?.member.surname1}
-          error={errors?.member?.surname1}
-        />
-        <InputField
-          textFieldLabel={t('GURB_SURNAME2_LABEL')}
-          textFieldName={t('GURB_SURNAME2_FIELD')}
-          handleChange={(event) => {
-            setFieldValue('member.surname2', event.target.value)
-          }}
-          handleBlur={() => {
-            setFieldTouched('member.surname2', true)
-          }}
-          touched={touched?.member?.surname2}
-          value={values?.member.surname2}
-          error={errors?.member?.surname2}
-        />
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between'
-        }}>
-        <InputField
-          textFieldLabel={t('GURB_EMAIL_LABEL')}
-          textFieldName={t('GURB_EMAIL_FIELD')}
-          handleChange={(event) => {
-            setFieldValue('member.email', event.target.value)
-          }}
-          handleBlur={() => {
-            setFieldTouched('member.email', true)
-          }}
-          touched={touched?.member?.email}
-          value={values?.member.email}
-          error={errors?.member?.email}
-        />
-        <InputField
-          textFieldLabel={t('GURB_EMAIL2_LABEL')}
-          textFieldName={t('GURB_EMAIL2_LABEL')}
-          handleChange={(event) => {
-            setFieldValue('member.email2', event.target.value)
-          }}
-          handleBlur={() => {
-            setFieldTouched('member.email2', true)
-          }}
-          touched={touched?.member?.email2}
-          value={values?.member.email2}
-          error={errors?.member?.email2}
-        />
-      </Box>
+
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <InputField
+            textFieldLabel={t('GURB_NAME_LABEL')}
+            textFieldName={t('GURB_NAME_FIELD')}
+            handleChange={(event) => {
+              setFieldValue('member.name', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.name', true)
+            }}
+            touched={touched?.member?.name}
+            value={values?.member.name}
+            error={errors?.member?.name}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
+            textFieldLabel={t('GURB_SURNAME1_LABEL')}
+            textFieldName={t('GURB_SURNAME1_FIELD')}
+            handleChange={(event) => {
+              setFieldValue('member.surname1', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.surname1', true)
+            }}
+            touched={touched?.member?.surname1}
+            value={values?.member.surname1}
+            error={errors?.member?.surname1}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
+            textFieldLabel={t('GURB_SURNAME2_LABEL')}
+            textFieldName={t('GURB_SURNAME2_FIELD')}
+            handleChange={(event) => {
+              setFieldValue('member.surname2', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.surname2', true)
+            }}
+            touched={touched?.member?.surname2}
+            value={values?.member.surname2}
+            error={errors?.member?.surname2}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <InputField
+            textFieldLabel={t('GURB_EMAIL_LABEL')}
+            textFieldName={t('GURB_EMAIL_FIELD')}
+            handleChange={(event) => {
+              setFieldValue('member.email', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.email', true)
+            }}
+            touched={touched?.member?.email}
+            value={values?.member.email}
+            error={errors?.member?.email}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <InputField
+            textFieldLabel={t('GURB_EMAIL2_LABEL')}
+            textFieldName={t('GURB_EMAIL2_LABEL')}
+            handleChange={(event) => {
+              setFieldValue('member.email2', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.email2', true)
+            }}
+            touched={touched?.member?.email2}
+            value={values?.member.email2}
+            error={errors?.member?.email2}
+          />
+        </Grid>
+      </Grid>
+
       {/* TO DO: make a component */}
       <Box sx={{ marginTop: '2rem' }}>
         <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
