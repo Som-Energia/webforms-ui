@@ -2,12 +2,14 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 
-import { textHeader4, textSubtitle2 } from '../../gurbTheme'
+import { textHeader4, textSubtitle2, textCheckbox } from '../../gurbTheme'
 import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import MenuItem from '@mui/material/MenuItem'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 
 import TextField from '@mui/material/TextField'
 
@@ -43,6 +45,11 @@ const NewMemberDetails = (props) => {
   const handleLanguageChange = (event) => {
     let value = event.target.value
     setFieldValue('member.language', value)
+  }
+
+  const handleCheckboxChange = (event) => {
+    let value = event.target.value
+    setFieldValue('member.privacy_policy_accepted', value)
   }
 
   return (
@@ -169,6 +176,13 @@ const NewMemberDetails = (props) => {
         <Typography sx={textSubtitle2}>
           {t('GURB_NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
         </Typography>
+        <FormControlLabel
+          sx={{ ...textCheckbox }}
+          control={<Checkbox />}
+          label={t('GURB_NEW_MEMBER_CHECKLIST')}
+          labelPlacement="end"
+          onChange={handleCheckboxChange}
+        />
       </Box>
     </>
   )

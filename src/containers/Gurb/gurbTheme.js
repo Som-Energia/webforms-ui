@@ -165,3 +165,10 @@ export const buttonGurbLight = {
 export const link = {
   ...textBody2
 }
+
+export const textCheckbox = {
+  fontFamily: 'Inter',
+  color: '#000000',
+  fontSize: '16px',
+  fontWeight: '600'
+}
