@@ -720,5 +720,7 @@
     "HOLDER_CASE_TITLE": "Zein da zure egoera?",
     "HOLDERCHANGE_REVIEW_TEXT": "<p>Elektrizitate-hornidura Som Energiarekin kontratatzear zaude. Som Energia irabazi asmorik gabeko kooperatiba bat da, eta helburu du herritarren esku dagoen eta % 100 berriztagarria den eredu energetiko bat bultzatzea.</p><p>Eskuarki, Kooperatibaren zerbitzuak bazkideentzat bakarrik dira. Baina, denboraldi batez,<b>elektrizitate-hornidura urtebetez kontratatzeko</b> aukera eskainiko diegu, zu bezala, titular-aldaketa baten ondorioz gure proiektura heldu diren eta <b>oraindik Kooperatibako bazkide izan nahi ez duten</b> pertsonei.</p><p>Hurrengo hilabeteetan informazio gehiago bidaliko dizugu guri buruz: zer asmo dugun eta zein den gure plana energia berriztagarriak sustatzeko.</p><p>Zergatik? Hobeto ezagutzen gaituzunean, zu bazkide gisa elkartzea nahiko genuke. Som Energia 85.000 bazkide baino gehiagok eraiki dugu modu kolektiboan eta askoz bazkide gehiago elkartu nahi ditugu!</p>",
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "'ES' ondoren 16 zenbaki idatzi behar dira",
-    "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "19. eta 20. karaktereetan 2 kontrol-letra idatzi behar dira"
+    "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "19. eta 20. karaktereetan 2 kontrol-letra idatzi behar dira",
+    "MAINTENANCE_TEXT1": "Mantentze lanak egiten ari gara",
+    "MAINTENANCE_TEXT2": "Laster itzuliko gara"
 }

@@ -772,5 +772,7 @@
     "ERROR_INVALID_FIELD": "Camp incorrecte",
     "ERROR_FIELD_TOO_SHORT": "Camp massa curt",
     "ERROR_FIELD_TOO_LONG": "Camp massa llarg",
-    "ERROR_REQUIRED_FIELD": "Camp requerit"
+    "ERROR_REQUIRED_FIELD": "Camp requerit",
+    "MAINTENANCE_TEXT1": "Estem realitzant tasques de manteniment",
+    "MAINTENANCE_TEXT2": "Tornem aviat"
 }
