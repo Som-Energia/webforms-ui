@@ -177,9 +177,17 @@ const NewMemberDetails = (props) => {
           {t('GURB_NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
         </Typography>
         <FormControlLabel
-          sx={{ ...textCheckbox }}
+          sx={{ ...textCheckbox, marginTop: '2rem' }}
           control={<Checkbox />}
-          label={t('GURB_NEW_MEMBER_CHECKLIST')}
+          label={
+            <label
+              dangerouslySetInnerHTML={{
+                __html: t('ACCEPT_PRIVACY_POLICY', {
+                  url: t('ACCEPT_PRIVACY_POLICY_URL')
+                })
+              }}
+            />
+          }
           labelPlacement="end"
           onChange={handleCheckboxChange}
         />

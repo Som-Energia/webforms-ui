@@ -167,8 +167,10 @@ export const link = {
 }
 
 export const textCheckbox = {
-  fontFamily: 'Inter',
-  color: '#000000',
-  fontSize: '16px',
-  fontWeight: '600'
+  '& .MuiTypography-root': {
+    fontFamily: 'Inter',
+    color: '#000000',
+    fontSize: '16px',
+    fontWeight: '600'
+  },
 }
