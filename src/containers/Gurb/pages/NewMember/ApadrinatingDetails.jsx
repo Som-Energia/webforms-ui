@@ -23,7 +23,7 @@ const ApadrinatingDetails = (props) => {
 
   const handleCheckMemberResponse = async () => {
     let status = undefined
-    await checkMember(values.member.number, values.member.dni)
+    await checkMember(values.member.number, values.member.nif)
       .then((response) => {
         status = response?.state
       })
@@ -42,20 +42,20 @@ const ApadrinatingDetails = (props) => {
   }
 
   useEffect(() => {
-    if (values?.member?.dni && values?.member?.number) {
+    if (values?.member?.nif && values?.member?.number) {
       handleCheckMemberResponse()
     }
-  }, [values.member.number, values.member.dni])
+  }, [values.member.number, values.member.nif])
 
-  const handleInputDni = (event) => {
+  const handleInputNif = (event) => {
     console.log(event)
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
-    setFieldValue('member.dni', value)
+    setFieldValue('member.nif', value)
   }
 
-  const handleInputDniBlur = () => {
-    setFieldTouched('member.dni', true)
+  const handleInputNifBlur = () => {
+    setFieldTouched('member.nif', true)
   }
 
   const handleInputMemberNumber = (event) => {
@@ -70,15 +70,15 @@ const ApadrinatingDetails = (props) => {
     <>
       <TextRecomendation title={t('GURB_APADRINATING_MEMBER_TITLE')} />
       <InputField
-        textFieldLabel={t('GURB_DNI_LABEL')}
-        textFieldName={t('GURB_DNI_APADRINATING_FIELD')}
-        textFieldHelper={t('GURB_DNI_HELPER')}
+        textFieldLabel={t('GURB_NIF_LABEL')}
+        textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
+        textFieldHelper={t('GURB_NIF_HELPER')}
         iconHelper={true}
-        handleChange={handleInputDni}
-        handleBlur={handleInputDniBlur}
-        touched={touched?.member?.dni}
-        value={values?.member.dni}
-        error={errors?.member?.dni}
+        handleChange={handleInputNif}
+        handleBlur={handleInputNifBlur}
+        touched={touched?.member?.nif}
+        value={values?.member.nif}
+        error={errors?.member?.nif}
       />
       <InputField
         textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
