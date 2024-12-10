@@ -721,5 +721,7 @@
     "GENERATION_INFO_NOT_HAS_INVOICES": "<p>Ahora mismo no participas en el sistema de autoproducción colectiva Generation kWh. Si te interesa o quieres más información, puedes consultar la web: <a href=\"http://www.generationkwh.org\" >www.generationkwh.org</a></p>",
     "GENERATION_FORM_CONTRIBUTION_MEMBER_VAT": "Introduce tu DNI o NIF.",
     "EXIT": "Salir",
-    "AT_LEAST_ONE_CHANGE_REASON": "Cómo mínimo tienes que escoger un motivo del cambio"
+    "AT_LEAST_ONE_CHANGE_REASON": "Cómo mínimo tienes que escoger un motivo del cambio",
+    "MAINTENANCE_TEXT1": "Estamos realizando tareas de mantenimiento",
+    "MAINTENANCE_TEXT2": "Volvemos pronto"
 }
