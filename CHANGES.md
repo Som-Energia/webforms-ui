@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Replace forms by Maintenance component if ping request fails
+
 ## 2.4.2 2024-12-04
 
 - Gurb: validation pages for non-members
