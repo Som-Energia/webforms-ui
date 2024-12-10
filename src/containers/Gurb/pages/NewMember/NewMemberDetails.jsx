@@ -32,14 +32,14 @@ const NewMemberDetails = (props) => {
 
   const { t } = useTranslation()
 
-  const handleInputDni = (event) => {
+  const handleInputNif = (event) => {
     let value = event.target.value.match(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/)
     value = value[0].toUpperCase()
-    setFieldValue('member.dni', value)
+    setFieldValue('member.nif', value)
   }
 
-  const handleInputDniBlur = () => {
-    setFieldTouched('member.dni', true)
+  const handleInputNifBlur = () => {
+    setFieldTouched('member.nif', true)
   }
 
   const handleLanguageChange = (event) => {
@@ -56,15 +56,15 @@ const NewMemberDetails = (props) => {
     <>
       <TextRecomendation title={t('GURB_NEW_MEMBER_TITLE')} />
       <InputField
-        textFieldLabel={t('GURB_DNI_LABEL')}
-        textFieldName={t('GURB_DNI_NEW_MEMBER_FIELD')}
-        textFieldHelper={t('GURB_DNI_HELPER')}
+        textFieldLabel={t('GURB_NIF_LABEL_NEW_MEMBER_FIELD')}
+        textFieldName={t('GURB_NIF_FIELD')}
+        textFieldHelper={t('GURB_NIF_HELPER')}
         iconHelper={true}
-        handleChange={handleInputDni}
-        handleBlur={handleInputDniBlur}
-        touched={touched?.member?.dni}
-        value={values?.member.dni}
-        error={errors?.member?.dni}
+        handleChange={handleInputNif}
+        handleBlur={handleInputNifBlur}
+        touched={touched?.member?.nif}
+        value={values?.member.nif}
+        error={errors?.member?.nif}
       />
 
       <Grid container spacing={2}>
