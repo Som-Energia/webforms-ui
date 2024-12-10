@@ -67,11 +67,11 @@ const NewMemberDetails = (props) => {
         error={errors?.member?.nif}
       />
 
-      <Grid container spacing={2}>
+      <Grid container columnSpacing={2}>
         <Grid item xs={4}>
           <InputField
-            textFieldLabel={t('GURB_NAME_LABEL')}
-            textFieldName={t('GURB_NAME_FIELD')}
+            textFieldLabel={t('NAME')}
+            textFieldName={t('NAME')}
             handleChange={(event) => {
               setFieldValue('member.name', event.target.value)
             }}
@@ -85,8 +85,8 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={4}>
           <InputField
-            textFieldLabel={t('GURB_SURNAME1_LABEL')}
-            textFieldName={t('GURB_SURNAME1_FIELD')}
+            textFieldLabel={t('HOLDER_SURNAME1')}
+            textFieldName={t('HOLDER_SURNAME1')}
             handleChange={(event) => {
               setFieldValue('member.surname1', event.target.value)
             }}
@@ -100,8 +100,8 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={4}>
           <InputField
-            textFieldLabel={t('GURB_SURNAME2_LABEL')}
-            textFieldName={t('GURB_SURNAME2_FIELD')}
+            textFieldLabel={t('HOLDER_SURNAME2')}
+            textFieldName={t('HOLDER_SURNAME2')}
             handleChange={(event) => {
               setFieldValue('member.surname2', event.target.value)
             }}
@@ -115,8 +115,8 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
-            textFieldLabel={t('GURB_EMAIL_LABEL')}
-            textFieldName={t('GURB_EMAIL_FIELD')}
+            textFieldLabel={t('EMAIL')}
+            textFieldName={t('EMAIL')}
             handleChange={(event) => {
               setFieldValue('member.email', event.target.value)
             }}
@@ -130,8 +130,8 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
-            textFieldLabel={t('GURB_EMAIL2_LABEL')}
-            textFieldName={t('GURB_EMAIL2_LABEL')}
+            textFieldLabel={t('HOLDER_EMAIL_2')}
+            textFieldName={t('HOLDER_EMAIL_2')}
             handleChange={(event) => {
               setFieldValue('member.email2', event.target.value)
             }}
@@ -141,6 +141,36 @@ const NewMemberDetails = (props) => {
             touched={touched?.member?.email2}
             value={values?.member.email2}
             error={errors?.member?.email2}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <InputField
+            textFieldLabel={t('GURB_PHONE1_LABEL')}
+            textFieldName={t('GURB_PHONE1_LABEL')}
+            handleChange={(event) => {
+              setFieldValue('member.phone1', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.phone1', true)
+            }}
+            touched={touched?.member?.phone1}
+            value={values?.member.phone1}
+            error={errors?.member?.phone1}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <InputField
+            textFieldLabel={t('HOLDER_PHONE_2')}
+            textFieldName={t('HOLDER_PHONE_2')}
+            handleChange={(event) => {
+              setFieldValue('member.phone2', event.target.value)
+            }}
+            handleBlur={() => {
+              setFieldTouched('member.phone2', true)
+            }}
+            touched={touched?.member?.phone2}
+            value={values?.member.phone2}
+            error={errors?.member?.phone2}
           />
         </Grid>
       </Grid>
