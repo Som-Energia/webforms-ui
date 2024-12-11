@@ -1,17 +1,20 @@
+import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import Typography from '@mui/material/Typography'
 
 import { textHeader4, textSubtitle2, textCheckbox } from '../../gurbTheme'
 import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
+
+import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import MenuItem from '@mui/material/MenuItem'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-
 import TextField from '@mui/material/TextField'
+
+import { checkMemberVat } from '../../../../services/api'
+import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
 const languages = {
   es_ES: 'Español',
@@ -27,13 +30,41 @@ const NewMemberDetails = (props) => {
     touched,
     setFieldValue,
     setFieldError,
+    setErrors,
     setFieldTouched
   } = props
 
   const { t } = useTranslation()
 
+  const { loading, setLoading } = useContext(GurbLoadingContext)
+
+  const handleCheckNifResponse = async () => {
+    let status = undefined
+    setLoading(true)
+    await checkMemberVat(values?.member?.nif)
+      .then((response) => {
+        status = response?.state
+      })
+      .catch(() => {
+        status = false
+      })
+    if (status === false) {
+      await setFieldError('member.nif', t('INVALID_NIF'))
+      setFieldTouched('member.nif', true)
+    } else {
+      setErrors({})
+    }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    if (values?.member?.nif) {
+      handleCheckNifResponse()
+    }
+  }, [values.member.nif])
+
   const handleInputNif = (event) => {
-    let value = event.target.value.match(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/)
+    let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
     setFieldValue('member.nif', value)
   }
@@ -65,8 +96,8 @@ const NewMemberDetails = (props) => {
         touched={touched?.member?.nif}
         value={values?.member.nif}
         error={errors?.member?.nif}
+        isLoading={loading}
       />
-
       <Grid container columnSpacing={2}>
         <Grid item xs={4}>
           <InputField
@@ -174,8 +205,7 @@ const NewMemberDetails = (props) => {
           />
         </Grid>
       </Grid>
-
-      {/* TO DO: make a component */}
+      {/* TO DO: make a component? */}
       <Box sx={{ marginTop: '2rem' }}>
         <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
         <TextField
@@ -187,10 +217,12 @@ const NewMemberDetails = (props) => {
           select
           fullWidth
           InputProps={{
-            sx: { borderRadius: '8px', display: 'flex' }
+            sx: {
+              borderRadius: '8px',
+              display: 'flex'
+            }
           }}
           onChange={handleLanguageChange}
-          label={t('GURB_LANGUAGE_LABEL')}
           value={values?.member.language}>
           {Object.keys(languages).map((id) => (
             <MenuItem key={id} value={id}>

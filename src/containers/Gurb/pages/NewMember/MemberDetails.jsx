@@ -23,6 +23,7 @@ const MemberDetails = (props) => {
 
   const handleCheckMemberResponse = async () => {
     let status = undefined
+    setLoading(true)
     await checkMember(values.member.number, values.member.nif)
       .then((response) => {
         status = response?.state
@@ -35,7 +36,7 @@ const MemberDetails = (props) => {
       setErrors({})
     } else {
       await setFieldValue('member.is_member', false)
-      await setFieldError('is_member', 'WRONG_VALUES')
+      await setFieldError('is_member', t('SOCIA_NO_TROBADA'))
       setFieldTouched('member.number', true)
     }
     setLoading(false)

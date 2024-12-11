@@ -56,7 +56,7 @@ const Gurb = (props) => {
     member: {
       vat: undefined,
       number: undefined,
-      dni: undefined,
+      nif: undefined,
       is_member: undefined,
       become_member: undefined,
       link_member: undefined,
