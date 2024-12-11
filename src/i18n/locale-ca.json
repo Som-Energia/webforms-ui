@@ -247,7 +247,7 @@
     "SUCCESS_TEXT": "Hem tramitat amb èxit la teva sol·licitud",
     "SUCCESS_NOTE": "El nou contracte tindrà el número {{contract_number}}.<br> T'informarem per correu electrònic quan el tràmit sigui efectiu.",
     "CONTRACT_TITLE": "Contractació",
-    "MEMBER_IDENTIFIER_DESC": "<p>Estàs a punt de contractar la llum amb Som Energia. Ara només cal que ens vagis indicant les teves dades, és ràpid i senzill, i no serà necessari fer cap canvi a la instal·lació. Només cal ser soci o sòcia de la cooperativa i omplir aquest formulari. No t'hi has associat? Fes-ho <a href=\"https://www.somenergia.coop/ca/fes-te-n-soci-a/\" target=\"_blank\">aquí</a>!</p><p>Introdueix el <b>el número de sòcia o soci, i el NIF</b> del contracte.</p>",
+    "MEMBER_IDENTIFIER_DESC": "<p>Estàs a punt de contractar la llum amb Som Energia. Ara només cal que ens vagis indicant les teves dades, és ràpid i senzill, i no serà necessari fer cap canvi a la instal·lació. Només cal ser soci o sòcia de la cooperativa i omplir aquest formulari. No t'hi has associat? Fes-ho <a href=\"https://www.somenergia.coop/ca/fes-te-n-soci-a/\" target=\"_blank\">aquí</a>!</p><p>Introdueix <b>el número i NIF del soci/sòcia</b> del contracte.</p>",
     "NUMERO_SOCI": "Número de sòcia o soci",
     "VAT": "NIF",
     "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"//ca.support.somenergia.coop/article/864-com-puc-saber-el-meu-numero-de-soci-a\">No recordes el teu número de soci o sòcia?</a>.",
