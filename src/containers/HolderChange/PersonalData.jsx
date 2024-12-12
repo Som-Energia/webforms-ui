@@ -39,7 +39,8 @@ function PersonalData(props) {
     skipPrivacyPolicy = false,
     title = false,
     entity = 'holder',
-    isMemberMandatoryForHolderchange = false
+    isMemberMandatoryForHolderchange = false,
+    form = undefined
   } = props
   const [openLegal, setOpenLegal] = useState(false)
   const trialPeriod =
@@ -128,7 +129,7 @@ function PersonalData(props) {
         <StepHeader
           title={
             entity === 'holder'
-              ? !isMemberMandatoryForHolderchange && trialPeriod
+              ? form === 'holderchange' && !isMemberMandatoryForHolderchange && trialPeriod
                 ? t('HOLDER_PERSONAL_DATA_TRIAL_PERIOD')
                 : t('HOLDER_PERSONAL_DATA')
               : t('MEMBER_PERSONAL_DATA')
