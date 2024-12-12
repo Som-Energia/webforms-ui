@@ -137,7 +137,7 @@ function PersonalData(props) {
         />
       )}
       <Box className="step-body">
-        {!isMemberMandatoryForHolderchange && trialPeriod && (
+        {form === 'holderchange' && !isMemberMandatoryForHolderchange && trialPeriod && (
           <Box sx={{ marginBottom: '1rem' }}>
             <Typography sx={{ fontSize: '18px', fontWeight: '500' }}>
               {t('HOLDER_PERSONAL_DATA')}

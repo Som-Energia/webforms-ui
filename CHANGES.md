@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix: subtitle in PersonalData for Contract
+
 ## 2.4.3 2024-12-12
 
 - Fix: show a PersonalData message only for Holderchange
