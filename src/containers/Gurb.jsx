@@ -19,7 +19,7 @@ import {
   memberQuestionValidations,
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
-import newMemberValidations from './Gurb/newMemberValidations'
+import {newMemberValidations, memberValidations} from './Gurb/newMemberValidations'
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
@@ -54,25 +54,27 @@ const Gurb = (props) => {
     has_selfconsumption: undefined,
     has_member: undefined,
     member: {
-      vat: undefined,
-      number: undefined,
-      nif: undefined,
-      is_member: undefined,
-      become_member: undefined,
-      link_member: undefined,
+      number: '',
+      nif: '',
+      is_member: false,
+      link_member: false
+    },
+    new_member: {
+      nif: '',
+      become_member: false,
       isphisical: true,
       proxynif_valid: false,
       proxynif: '',
       proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      email: '',
-      email2: '',
-      phone1: '',
-      phone2: '',
+      name: undefined,
+      surname1: undefined,
+      surname2: undefined,
+      email: undefined,
+      email2: undefined,
+      phone1: undefined,
+      phone2: undefined,
       language: `${i18n.language}_ES`,
-      privacy_policy_accepted: undefined
+      privacy_policy_accepted: false
     }
   }
 
@@ -82,7 +84,8 @@ const Gurb = (props) => {
     addressValidations,
     selfConsumptionValidations,
     memberQuestionValidations,
-    newMemberValidations
+    newMemberValidations,
+    memberValidations
   ]
 
   const nextStep = () => {

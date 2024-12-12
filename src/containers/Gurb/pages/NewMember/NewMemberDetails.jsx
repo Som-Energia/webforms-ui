@@ -58,7 +58,7 @@ const NewMemberDetails = (props) => {
   }
 
   useEffect(() => {
-    if (values?.member?.nif) {
+    if (values?.new_member?.nif && values?.new_member?.nif.length > 8) {
       handleCheckNifResponse()
     }
   }, [values.member.nif])
@@ -66,21 +66,22 @@ const NewMemberDetails = (props) => {
   const handleInputNif = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
-    setFieldValue('member.nif', value)
+    setFieldValue('new_member.nif', value)
   }
 
   const handleInputNifBlur = () => {
-    setFieldTouched('member.nif', true)
+    setFieldTouched('new_member.nif', true)
   }
 
   const handleLanguageChange = (event) => {
     let value = event.target.value
-    setFieldValue('member.language', value)
+    setFieldValue('new_member.language', value)
   }
 
   const handleCheckboxChange = (event) => {
-    let value = event.target.value
-    setFieldValue('member.privacy_policy_accepted', value)
+    let value = event.target.checked
+    setFieldValue('new_member.privacy_policy_accepted', value)
+    setFieldTouched('new_member.privacy_policy_accepted', true)
   }
 
   return (
@@ -93,9 +94,9 @@ const NewMemberDetails = (props) => {
         iconHelper={true}
         handleChange={handleInputNif}
         handleBlur={handleInputNifBlur}
-        touched={touched?.member?.nif}
-        value={values?.member.nif}
-        error={errors?.member?.nif}
+        touched={touched?.new_member?.nif}
+        value={values?.new_member.nif}
+        error={errors?.new_member?.nif}
         isLoading={loading}
       />
       <Grid container columnSpacing={2}>
@@ -104,14 +105,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('NAME')}
             textFieldName={t('NAME')}
             handleChange={(event) => {
-              setFieldValue('member.name', event.target.value)
+              setFieldValue('new_member.name', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.name', true)
+              setFieldTouched('new_member.name', true)
             }}
-            touched={touched?.member?.name}
-            value={values?.member.name}
-            error={errors?.member?.name}
+            touched={touched?.new_member?.name}
+            value={values?.new_member.name}
+            error={errors?.new_member?.name}
           />
         </Grid>
         <Grid item xs={4}>
@@ -119,14 +120,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('HOLDER_SURNAME1')}
             textFieldName={t('HOLDER_SURNAME1')}
             handleChange={(event) => {
-              setFieldValue('member.surname1', event.target.value)
+              setFieldValue('new_member.surname1', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.surname1', true)
+              setFieldTouched('new_member.surname1', true)
             }}
-            touched={touched?.member?.surname1}
-            value={values?.member.surname1}
-            error={errors?.member?.surname1}
+            touched={touched?.new_member?.surname1}
+            value={values?.new_member.surname1}
+            error={errors?.new_member?.surname1}
           />
         </Grid>
         <Grid item xs={4}>
@@ -134,14 +135,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('HOLDER_SURNAME2')}
             textFieldName={t('HOLDER_SURNAME2')}
             handleChange={(event) => {
-              setFieldValue('member.surname2', event.target.value)
+              setFieldValue('new_member.surname2', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.surname2', true)
+              setFieldTouched('new_member.surname2', true)
             }}
-            touched={touched?.member?.surname2}
-            value={values?.member.surname2}
-            error={errors?.member?.surname2}
+            touched={touched?.new_member?.surname2}
+            value={values?.new_member.surname2}
+            error={errors?.new_member?.surname2}
           />
         </Grid>
         <Grid item xs={6}>
@@ -149,14 +150,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('EMAIL')}
             textFieldName={t('EMAIL')}
             handleChange={(event) => {
-              setFieldValue('member.email', event.target.value)
+              setFieldValue('new_member.email', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.email', true)
+              setFieldTouched('new_member.email', true)
             }}
-            touched={touched?.member?.email}
-            value={values?.member.email}
-            error={errors?.member?.email}
+            touched={touched?.new_member?.email}
+            value={values?.new_member.email}
+            error={errors?.new_member?.email}
           />
         </Grid>
         <Grid item xs={6}>
@@ -164,14 +165,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('HOLDER_EMAIL_2')}
             textFieldName={t('HOLDER_EMAIL_2')}
             handleChange={(event) => {
-              setFieldValue('member.email2', event.target.value)
+              setFieldValue('new_member.email2', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.email2', true)
+              setFieldTouched('new_member.email2', true)
             }}
-            touched={touched?.member?.email2}
-            value={values?.member.email2}
-            error={errors?.member?.email2}
+            touched={touched?.new_member?.email2}
+            value={values?.new_member.email2}
+            error={errors?.new_member?.email2}
           />
         </Grid>
         <Grid item xs={6}>
@@ -179,14 +180,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('GURB_PHONE1_LABEL')}
             textFieldName={t('GURB_PHONE1_LABEL')}
             handleChange={(event) => {
-              setFieldValue('member.phone1', event.target.value)
+              setFieldValue('new_member.phone1', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.phone1', true)
+              setFieldTouched('new_member.phone1', true)
             }}
-            touched={touched?.member?.phone1}
-            value={values?.member.phone1}
-            error={errors?.member?.phone1}
+            touched={touched?.new_member?.phone1}
+            value={values?.new_member.phone1}
+            error={errors?.new_member?.phone1}
           />
         </Grid>
         <Grid item xs={6}>
@@ -194,14 +195,14 @@ const NewMemberDetails = (props) => {
             textFieldLabel={t('HOLDER_PHONE_2')}
             textFieldName={t('HOLDER_PHONE_2')}
             handleChange={(event) => {
-              setFieldValue('member.phone2', event.target.value)
+              setFieldValue('new_member.phone2', event.target.value)
             }}
             handleBlur={() => {
-              setFieldTouched('member.phone2', true)
+              setFieldTouched('new_member.phone2', true)
             }}
-            touched={touched?.member?.phone2}
-            value={values?.member.phone2}
-            error={errors?.member?.phone2}
+            touched={touched?.new_member?.phone2}
+            value={values?.new_member.phone2}
+            error={errors?.new_member?.phone2}
           />
         </Grid>
       </Grid>
@@ -223,7 +224,7 @@ const NewMemberDetails = (props) => {
             }
           }}
           onChange={handleLanguageChange}
-          value={values?.member.language}>
+          value={values?.new_member.language}>
           {Object.keys(languages).map((id) => (
             <MenuItem key={id} value={id}>
               {languages[id]}

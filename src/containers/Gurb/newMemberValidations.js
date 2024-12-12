@@ -1,11 +1,19 @@
 import * as Yup from 'yup'
 
-const newMemberValidations = Yup.object().shape({
+export const memberValidations = Yup.object().shape({
   member: Yup.object().shape({
     nif: Yup.string()
       .length(9, 'ERROR_FIELD_LENGTH')
       .required('ERROR_REQUIRED_FIELD'),
-    number: Yup.number().required('ERROR_REQUIRED_FIELD'),
+    number: Yup.number().required('ERROR_REQUIRED_FIELD')
+  })
+})
+
+export const newMemberValidations = Yup.object().shape({
+  new_member: Yup.object().shape({
+    nif: Yup.string()
+      .length(9, 'ERROR_FIELD_LENGTH')
+      .required('ERROR_REQUIRED_FIELD'),
     name: Yup.string().required('ERROR_REQUIRED_FIELD'),
     surname1: Yup.string().required('ERROR_REQUIRED_FIELD'),
     surname2: Yup.string().required('ERROR_REQUIRED_FIELD'),
@@ -18,8 +26,8 @@ const newMemberValidations = Yup.object().shape({
     phone1: Yup.string().length(9, 'NO_PHONE').required('ERROR_REQUIRED_FIELD'),
     phone2: Yup.string().length(9, 'NO_PHONE'),
     language: Yup.string().required('ERROR_REQUIRED_FIELD'),
-    privacy_policy_accepted: Yup.bool().required('ERROR_REQUIRED_FIELD')
+    privacy_policy_accepted: Yup.bool()
+      .required('UNACCEPTED_PRIVACY_POLICY')
+      .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY')
   })
 })
-
-export default newMemberValidations
