@@ -40,21 +40,21 @@ const NewMemberDetails = (props) => {
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const handleCheckNifResponse = async () => {
-    let status = undefined
     setLoading(true)
     await checkMemberVat(values?.member?.nif)
       .then((response) => {
-        status = response?.state
+        if (response?.state === false) {
+          setFieldError('new_member.nif', t('INVALID_NIF'))
+          setFieldValue('new_member.become_member', false)
+        } else {
+          setFieldError('new_member.nif', undefined)
+          setFieldValue('new_member.become_member', true)
+        }
       })
       .catch(() => {
-        status = false
+        console.error('UNEXPECTED')
       })
-    if (status === false) {
-      await setFieldError('member.nif', t('INVALID_NIF'))
-      setFieldTouched('member.nif', true)
-    } else {
-      setErrors({})
-    }
+
     setLoading(false)
   }
 
@@ -254,9 +254,15 @@ const NewMemberDetails = (props) => {
         <Typography sx={textSubtitle2}>
           {t('GURB_NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
         </Typography>
+        {/* TO DO: make a component? */}
         <FormControlLabel
           sx={{ ...textCheckbox, marginTop: '2rem' }}
-          control={<Checkbox />}
+          control={
+            <Checkbox
+              checked={values?.new_member.privacy_policy_accepted}
+              onChange={handleCheckboxChange}
+            />
+          }
           label={
             <label
               dangerouslySetInnerHTML={{
@@ -266,8 +272,6 @@ const NewMemberDetails = (props) => {
               }}
             />
           }
-          labelPlacement="end"
-          onChange={handleCheckboxChange}
         />
       </Box>
     </>
