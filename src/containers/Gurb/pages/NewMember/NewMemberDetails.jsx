@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField'
 
 import { checkMemberVat } from '../../../../services/api'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
+import GurbErrorContext from '../../../../context/GurbErrorContext'
 
 const languages = {
   es_ES: 'Español',
@@ -30,13 +31,13 @@ const NewMemberDetails = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setErrors,
     setFieldTouched
   } = props
 
   const { t } = useTranslation()
 
   const { loading, setLoading } = useContext(GurbLoadingContext)
+  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const handleCheckNifResponse = async () => {
     let status = undefined
@@ -61,7 +62,21 @@ const NewMemberDetails = (props) => {
     if (values?.new_member?.nif && values?.new_member?.nif.length > 8) {
       handleCheckNifResponse()
     }
-  }, [values.member.nif])
+  }, [values.new_member.nif])
+
+  useEffect(() => {
+    if (
+      errors.new_member === undefined &&
+      values.new_member.become_member === true
+    ) {
+      setError(true)
+      setErrorInfo({
+        main_text: t('GURB_WELCOME_NEW_MEMBER_MAIN_TEXT'),
+        seconday_text: t('GURB_WELCOME_NEW_MEMBER_SECONDARY_TEXT'),
+        error_type: 'success'
+      })
+    }
+  }, [])
 
   const handleInputNif = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
