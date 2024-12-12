@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Fix: show a PersonalData message only for Holderchange
+
 ## 2.4.2 2024-12-04
 
 - Gurb: validation pages for non-members
@@ -7,6 +11,7 @@
 - Fix tpv asynchronous submit
 
 ## 2.4.1 2024-11-11
+
 - Added message for autonomous (Modify Contract form)
 - Added feature flag: noticeAutonomous
 
