@@ -35,7 +35,7 @@ const ApadrinatingDetails = (props) => {
       setErrors({})
     } else {
       await setFieldValue('member.link_member', false)
-      await setFieldError('link_member', 'WRONG_VALUES')
+      await setFieldError('link_member', t('SOCIA_NO_TROBADA'))
       setFieldTouched('member.number', true)
     }
     setLoading(false)
