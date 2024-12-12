@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.4.3 2024-12-12
 
 - Fix: show a PersonalData message only for Holderchange
 
