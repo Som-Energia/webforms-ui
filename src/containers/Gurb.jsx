@@ -134,7 +134,7 @@ const Gurb = (props) => {
         link_text: t('GURB_WELCOME_NEW_MEMBER_LINK_TEXT'),
         error_type: 'success',
         clean_field: () => {
-          activeStep()
+          activeStep
         }
       })
     }
