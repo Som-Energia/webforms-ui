@@ -1,19 +1,39 @@
+import { useContext } from 'react'
+import Link from '@mui/material/Link'
 import ResultRequirement from './ResultRequirement'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import GurbErrorContext from '../../../context/GurbErrorContext'
+import { link } from '../gurbTheme'
 
-const SuccessRequirement = ({ textHeader, textBody, textHelper }) => {
+const SuccessRequirement = ({
+  textHeader,
+  textBody,
+  textHelper,
+  textHelperAction
+}) => {
+  const { setError, setErrorInfo } = useContext(GurbErrorContext)
   return (
     <ResultRequirement
       containerColors={{
         border: '1px solid #96B633',
         backgroundColor: '#F4F8EB'
       }}
-      icon={
-        <CheckCircleOutlineIcon sx={{ color: '#96B633', fontSize: '50px' }} />
-      }
+      icon={<CheckCircleIcon sx={{ color: '#96B633', fontSize: '50px' }} />}
       textHeader={textHeader}
       textBody={textBody}
-      textHelper={textHelper}
+      textHelper={
+        <Link
+          component="button"
+          color="inherit"
+          sx={link}
+          onClick={() => {
+            setError(false)
+            setErrorInfo({})
+            textHelperAction()
+          }}>
+          {textHelper}
+        </Link>
+      }
     />
   )
 }

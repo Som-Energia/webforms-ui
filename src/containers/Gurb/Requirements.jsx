@@ -15,15 +15,13 @@ import SelfConsumption from './pages/Requirements/SelfConsumption'
 import MemberQuestion from './pages/Requirements/MemberQuestion'
 
 import { textBody3, textSubtitle } from './gurbTheme'
-import FailureRequirement from './components/FailureRequirement'
-import AlertRequirement from './components/AlertRequirement'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
 
 const Requirements = (props) => {
   const { values, activeStep } = props
   const { t } = useTranslation()
-  const { error, errorInfo } = useContext(GurbErrorContext)
+  const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
 
   const getStep = () => {
     if (activeStep === 0) {
@@ -44,25 +42,7 @@ const Requirements = (props) => {
       <Header title={t('GURB_REQUIREMENTS_TITLE')} />
       <Typography sx={textBody3}>{t('GURB_REQUIREMENTS_SUBTITLE')}</Typography>
       <SomStepper step={activeStep} connectors={4 + 1} />
-      {error ? (
-        errorInfo?.error_type === 'error' ? (
-          <FailureRequirement
-            textHeader={errorInfo?.main_text}
-            textBody={errorInfo?.seconday_text}
-            textHelper={errorInfo?.link_text}
-            textHelperAction={errorInfo?.test}
-          />
-        ) : (
-          <AlertRequirement
-            textHeader={errorInfo?.main_text}
-            textBody={errorInfo?.seconday_text}
-            textHelper={errorInfo?.link_text}
-            textHelperAction={errorInfo?.test}
-          />
-        )
-      ) : (
-        getStep()
-      )}
+      {error ? getStepResult(errorInfo) : getStep()}
     </>
   )
 }
