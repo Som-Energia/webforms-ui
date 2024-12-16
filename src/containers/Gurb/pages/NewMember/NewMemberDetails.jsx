@@ -13,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 
-import { checkMemberVat } from '../../../../services/api'
+import { checkVat } from '../../../../services/api'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 
@@ -40,20 +40,22 @@ const NewMemberDetails = (props) => {
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const handleCheckNifResponse = async () => {
+    let nif_info = undefined
     setLoading(true)
-    await checkMemberVat(values?.member?.nif)
+    await checkVat(values?.new_member?.nif)
       .then((response) => {
-        if (response?.state === false) {
-          setFieldError('new_member.nif', t('INVALID_NIF'))
-          setFieldValue('new_member.become_member', false)
-        } else {
-          setFieldError('new_member.nif', undefined)
-          setFieldValue('new_member.become_member', true)
-        }
+        nif_info = response?.data
       })
       .catch(() => {
         console.error('UNEXPECTED')
       })
+    if (nif_info.exists === false && nif_info.valid === true) {
+      await setFieldValue('new_member.become_member', true)
+      setFieldError('new_member.nif', undefined)
+    } else {
+      await setFieldValue('new_member.become_member', false)
+      setFieldError('new_member.nif', t('INVALID_NIF'))
+    }
 
     setLoading(false)
   }
