@@ -23,7 +23,8 @@ import {
 import newMemberValidations from './Gurb/newMemberValidations'
 import {
   holderIdentificationValidations,
-  holderPersonalDataValidations
+  holderPersonalDataValidations,
+  holderVoluntaryDonationValidations
 } from './Gurb/contractValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
@@ -99,7 +100,8 @@ const Gurb = (props) => {
     memberQuestionValidations,
     newMemberValidations,
     holderIdentificationValidations,
-    holderPersonalDataValidations
+    holderPersonalDataValidations,
+    holderVoluntaryDonationValidations
   ]
 
   const nextStep = () => {
