@@ -95,7 +95,6 @@ const Gurb = (props) => {
     selfConsumptionValidations,
     memberQuestionValidations,
     newMemberValidations,
-    memberValidations
     contractValidations
   ]
 
