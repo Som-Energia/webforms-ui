@@ -1,15 +1,13 @@
 import * as Yup from 'yup'
 
-export const memberValidations = Yup.object().shape({
+const newMemberValidations = Yup.object().shape({
   member: Yup.object().shape({
-    nif: Yup.string()
-      .length(9, 'ERROR_FIELD_LENGTH')
-      .required('ERROR_REQUIRED_FIELD'),
+    has_member: Yup.string(),
+    is_member: Yup.bool(),
+    link_member: Yup.bool(),
+    nif: Yup.string().required('ERROR_REQUIRED_FIELD'),
     number: Yup.number().required('ERROR_REQUIRED_FIELD')
-  })
-})
-
-export const newMemberValidations = Yup.object().shape({
+  }),
   new_member: Yup.object().shape({
     nif: Yup.string()
       .length(9, 'ERROR_FIELD_LENGTH')
@@ -31,3 +29,5 @@ export const newMemberValidations = Yup.object().shape({
       .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY')
   })
 })
+
+export default newMemberValidations
