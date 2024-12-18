@@ -21,7 +21,10 @@ import {
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
 import newMemberValidations from './Gurb/newMemberValidations'
-import contractValidations from './Gurb/contractValidations'
+import {
+  holderIdentificationValidations,
+  holderPersonalDataValidations
+} from './Gurb/contractValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
@@ -95,7 +98,8 @@ const Gurb = (props) => {
     selfConsumptionValidations,
     memberQuestionValidations,
     newMemberValidations,
-    contractValidations
+    holderIdentificationValidations,
+    holderPersonalDataValidations
   ]
 
   const nextStep = () => {
@@ -123,10 +127,7 @@ const Gurb = (props) => {
       return <NewMember {...props} />
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
-        <Contract
-          {...props}
-          activeStep={CONTRACT_STEPS.indexOf(activeStep)}
-        />
+        <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
       )
     } else {
       return <></>
