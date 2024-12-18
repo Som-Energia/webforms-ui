@@ -27,6 +27,12 @@ export const textHeader4 = {
   fontWeight: '500'
 }
 
+export const textHeader5 = {
+  fontFamily: 'Inter',
+  color: '#919191',
+  fontSize: '14px'
+}
+
 export const textBody1 = {
   fontFamily: 'Inter',
   color: '#919191',
@@ -172,5 +178,5 @@ export const textCheckbox = {
     color: '#000000',
     fontSize: '16px',
     fontWeight: '600'
-  },
+  }
 }

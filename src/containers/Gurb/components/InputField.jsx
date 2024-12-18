@@ -8,7 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import { textHeader4, textHelper1 } from '../gurbTheme'
+import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
 
 export const HelperText = ({ helperText, iconHelper }) => {
   return (
@@ -24,6 +24,7 @@ export const HelperText = ({ helperText, iconHelper }) => {
 const InputField = ({
   textFieldLabel,
   textFieldName,
+  textFieldNameHelper,
   textFieldHelper,
   iconHelper = false,
   handleChange,
@@ -38,6 +39,7 @@ const InputField = ({
   return (
     <Box sx={{ marginTop: '2rem' }}>
       <Typography sx={textHeader4}>{textFieldName}</Typography>
+      <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
       <TextField
         sx={{
           '& .MuiFormHelperText-root': { color: '#B3B3B3' },
