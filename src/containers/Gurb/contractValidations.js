@@ -34,3 +34,15 @@ export const holderVoluntaryDonationValidations = Yup.object().shape({
       .oneOf(['voluntary-donation-on', 'voluntary-donation-off'])
   })
 })
+
+export const holderIbanValidations = Yup.object().shape({
+  holder: Yup.object().shape({
+    iban: Yup.string()
+      .length(29, 'ERROR_FIELD_LENGTH')
+      .required('REQUIRED_FIELD'),
+    iban_valid: Yup.bool().required('IBAN_ERROR').oneOf([true], 'IBAN_ERROR'),
+    direct_debit_accepted: Yup.bool()
+      .required('UNACCEPTED_DIRECT_DEBIT')
+      .oneOf([true], 'UNACCEPTED_DIRECT_DEBIT')
+  })
+})
