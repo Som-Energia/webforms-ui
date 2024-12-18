@@ -22,6 +22,7 @@ import {
 } from './Gurb/requirementsValidations'
 import newMemberValidations from './Gurb/newMemberValidations'
 import {
+  holderIbanValidations,
   holderIdentificationValidations,
   holderPersonalDataValidations,
   holderVoluntaryDonationValidations
@@ -88,7 +89,18 @@ const Gurb = (props) => {
     },
     holder: {
       nif: '',
-      has_holder: undefined
+      has_holder: undefined,
+      name: undefined,
+      surname1: undefined,
+      surname2: undefined,
+      email: undefined,
+      email2: undefined,
+      phone1: undefined,
+      phone2: undefined,
+      voluntary_donation: undefined,
+      iban: '',
+      iban_valid: false,
+      direct_debit_accepted: false
     }
   }
 
@@ -101,7 +113,8 @@ const Gurb = (props) => {
     newMemberValidations,
     holderIdentificationValidations,
     holderPersonalDataValidations,
-    holderVoluntaryDonationValidations
+    holderVoluntaryDonationValidations,
+    holderIbanValidations
   ]
 
   const nextStep = () => {

@@ -11,6 +11,7 @@ import GurbErrorContext from '../../context/GurbErrorContext'
 import HolderIdentification from './pages/Contract/HolderIdentification'
 import HolderPersonalData from './pages/Contract/HolderPersonalData'
 import HolderVoluntaryDonation from './pages/Contract/VoluntaryDonation'
+import HolderIban from './pages/Contract/Iban'
 
 const Contract = (props) => {
   const { values, activeStep } = props
@@ -26,6 +27,9 @@ const Contract = (props) => {
     }
     if (activeStep === 2) {
       return <HolderVoluntaryDonation {...props} />
+    }
+    if (activeStep === 3) {
+      return <HolderIban {...props} />
     } else {
       return <></>
     }
