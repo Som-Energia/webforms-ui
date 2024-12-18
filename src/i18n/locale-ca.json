@@ -803,6 +803,7 @@
     "GURB_SAME_HOLDER_BODY":"Era el titular del contracte amb la comercialitzadora anterior",
     "GURB_DIFFERENT_HOLDER_HEADER":"No, no era la persona titular",
     "GURB_DIFFERENT_HOLDER_BODY":"No era el titular del contracte amb la comercialitzadora anterior",
+    "GURB_HOLDER_PERSONAL_DATA_TITLE":"2. Dades de la persona titular",
     "ERROR_FIELD_TOO_SHORT": "Camp massa curt",
     "ERROR_FIELD_TOO_LONG": "Camp massa llarg",
     "ERROR_REQUIRED_FIELD": "Camp requerit",

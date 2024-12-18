@@ -89,7 +89,7 @@ const HolderIdentification = (props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: '2rem' }}>
+      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
         <TextRecomendation
           title={t('GURB_HOLDER_ID_TITLE')}
           text={t('GURB_HOLDER_ID_SUBTITLE')}

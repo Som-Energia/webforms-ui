@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-const contractValidations = Yup.object().shape({
+export const holderIdentificationValidations = Yup.object().shape({
   holder: Yup.object().shape({
     nif: Yup.string()
       .length(9, 'ERROR_FIELD_LENGTH')
@@ -11,4 +11,18 @@ const contractValidations = Yup.object().shape({
   })
 })
 
-export default contractValidations
+export const holderPersonalDataValidations = Yup.object().shape({
+  holder: Yup.object().shape({
+    name: Yup.string().required('ERROR_REQUIRED_FIELD'),
+    surname1: Yup.string().required('ERROR_REQUIRED_FIELD'),
+    surname2: Yup.string().required('ERROR_REQUIRED_FIELD'),
+    email: Yup.string().required('ERROR_REQUIRED_FIELD').email('NO_EMAIL'),
+    email2: Yup.string()
+      .required('ERROR_REQUIRED_FIELD')
+      .test('repeatEmail', 'NO_REPEATED_EMAIL', function () {
+        return this.parent.email === this.parent.email2
+      }), // To Do: is there a better way?
+    phone1: Yup.string().length(9, 'NO_PHONE').required('ERROR_REQUIRED_FIELD'),
+    phone2: Yup.string().length(9, 'NO_PHONE')
+  })
+})
