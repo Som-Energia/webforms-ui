@@ -10,6 +10,7 @@ import { textSubtitle } from './gurbTheme'
 import GurbErrorContext from '../../context/GurbErrorContext'
 import HolderIdentification from './pages/Contract/HolderIdentification'
 import HolderPersonalData from './pages/Contract/HolderPersonalData'
+import HolderVoluntaryDonation from './pages/Contract/VoluntaryDonation'
 
 const Contract = (props) => {
   const { values, activeStep } = props
@@ -19,10 +20,13 @@ const Contract = (props) => {
   const getStep = () => {
     if (activeStep === 0) {
       return <HolderIdentification {...props} />
-    }if (activeStep === 1) {
+    }
+    if (activeStep === 1) {
       return <HolderPersonalData {...props} />
     }
-    else {
+    if (activeStep === 2) {
+      return <HolderVoluntaryDonation {...props} />
+    } else {
       return <></>
     }
   }

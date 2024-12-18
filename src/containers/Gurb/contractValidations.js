@@ -26,3 +26,11 @@ export const holderPersonalDataValidations = Yup.object().shape({
     phone2: Yup.string().length(9, 'NO_PHONE')
   })
 })
+
+export const holderVoluntaryDonationValidations = Yup.object().shape({
+  holder: Yup.object().shape({
+    voluntary_donation: Yup.string()
+      .required('REQUIRED_FIELD')
+      .oneOf(['voluntary-donation-on', 'voluntary-donation-off'])
+  })
+})

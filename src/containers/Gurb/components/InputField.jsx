@@ -10,9 +10,9 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
 
-export const HelperText = ({ helperText, iconHelper }) => {
+export const HelperText = ({ helperText, iconHelper, justifyContent=false }) => {
   return (
-    <Box sx={textHelper1}>
+    <Box display="flex" justifyContent={justifyContent} sx={textHelper1}>
       {iconHelper && (
         <InfoOutlinedIcon sx={{ fontSize: '14px', margin: '2px' }} />
       )}
