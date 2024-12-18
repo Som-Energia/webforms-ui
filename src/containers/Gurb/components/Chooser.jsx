@@ -57,7 +57,7 @@ const Chooser = (props) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '1rem',
+        marginTop: '0.5rem',
         marginBottom: '1rem'
       }}>
       {options.map((option, index) => (

@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
 import NewMember from './Gurb/NewMember'
-import NewContract from './Gurb/NewContract'
+import Contract from './Gurb/Contract'
 
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
@@ -20,17 +20,16 @@ import {
   memberQuestionValidations,
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
-import {
-  newMemberValidations,
-  memberValidations
-} from './Gurb/newMemberValidations'
+import newMemberValidations from './Gurb/newMemberValidations'
+import contractValidations from './Gurb/contractValidations'
+
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 7
+const MAX_STEP_NUMBER = 11
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5]
-const NEW_CONTRACT_STEP = [6]
+const CONTRACT_STEPS = [6, 7, 8, 9, 10]
 
 const Gurb = (props) => {
   const { i18n, t } = useTranslation()
@@ -82,6 +81,10 @@ const Gurb = (props) => {
       phone2: undefined,
       language: `${i18n.language}_ES`,
       privacy_policy_accepted: false
+    },
+    holder: {
+      nif: '',
+      has_holder: undefined
     }
   }
 
@@ -93,6 +96,7 @@ const Gurb = (props) => {
     memberQuestionValidations,
     newMemberValidations,
     memberValidations
+    contractValidations
   ]
 
   const nextStep = () => {
@@ -118,8 +122,13 @@ const Gurb = (props) => {
       )
     } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       return <NewMember {...props} />
-    } else if (NEW_CONTRACT_STEP.includes(activeStep)) {
-      return <NewContract {...props} />
+    } else if (CONTRACT_STEPS.includes(activeStep)) {
+      return (
+        <Contract
+          {...props}
+          activeStep={CONTRACT_STEPS.indexOf(activeStep)}
+        />
+      )
     } else {
       return <></>
     }
@@ -139,6 +148,7 @@ const Gurb = (props) => {
       })
     }
   }
+
   const formikRef = useRef(null)
   useEffect(() => {
     formikRef.current.validateForm()
