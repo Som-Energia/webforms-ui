@@ -25,6 +25,7 @@ import {
   holderIbanValidations,
   holderIdentificationValidations,
   holderPersonalDataValidations,
+  holderTaxAddressValidations,
   holderVoluntaryDonationValidations
 } from './Gurb/contractValidations'
 
@@ -55,6 +56,15 @@ const Gurb = (props) => {
     has_light: undefined,
     address: {
       street: '',
+      number: undefined,
+      postal_code: undefined,
+      state: undefined,
+      city: undefined,
+      lat: undefined,
+      long: undefined
+    },
+    tax_address: {
+      street: undefined,
       number: undefined,
       postal_code: undefined,
       state: undefined,
@@ -97,6 +107,7 @@ const Gurb = (props) => {
       email2: undefined,
       phone1: undefined,
       phone2: undefined,
+      has_same_tax_address: undefined,
       voluntary_donation: undefined,
       iban: '',
       iban_valid: false,
@@ -113,6 +124,7 @@ const Gurb = (props) => {
     newMemberValidations,
     holderIdentificationValidations,
     holderPersonalDataValidations,
+    holderTaxAddressValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations
   ]
