@@ -27,6 +27,23 @@ export const holderPersonalDataValidations = Yup.object().shape({
   })
 })
 
+export const holderTaxAddressValidations = Yup.object().shape({
+  holder: Yup.object().shape({
+    has_same_tax_address: Yup.string()
+      .required('REQUIRED_FIELD')
+      .oneOf([
+        'supplypoint-tax-address-same',
+        'supplypoint-tax-address-different'
+      ])
+  }),
+  tax_address: Yup.object().shape({
+    street: Yup.string().when('holder.has_same_tax_address', {
+      is: 'supplypoint-tax-address-different',
+      then: Yup.string().required('REQUIRED_FIELD')
+    })
+  })
+})
+
 export const holderVoluntaryDonationValidations = Yup.object().shape({
   holder: Yup.object().shape({
     voluntary_donation: Yup.string()

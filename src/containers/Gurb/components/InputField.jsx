@@ -10,7 +10,11 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
 
-export const HelperText = ({ helperText, iconHelper, justifyContent=false }) => {
+export const HelperText = ({
+  helperText,
+  iconHelper,
+  justifyContent = false
+}) => {
   return (
     <Box display="flex" justifyContent={justifyContent} sx={textHelper1}>
       {iconHelper && (
@@ -32,7 +36,8 @@ const InputField = ({
   touched,
   value,
   error,
-  isLoading = false
+  isLoading = false,
+  readonlyField = false
 }) => {
   const { t } = useTranslation()
 
@@ -46,6 +51,7 @@ const InputField = ({
           '& .MuiInputLabel-root': { color: '#B3B3B3' },
           marginTop: '0.5rem'
         }}
+        disabled={readonlyField}
         fullWidth
         InputProps={{
           sx: { borderRadius: '8px', display: 'flex' },

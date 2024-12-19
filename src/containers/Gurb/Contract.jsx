@@ -12,6 +12,7 @@ import HolderIdentification from './pages/Contract/HolderIdentification'
 import HolderPersonalData from './pages/Contract/HolderPersonalData'
 import HolderVoluntaryDonation from './pages/Contract/VoluntaryDonation'
 import HolderIban from './pages/Contract/Iban'
+import TaxAddress from './pages/Contract/TaxAddress'
 
 const Contract = (props) => {
   const { values, activeStep } = props
@@ -26,9 +27,12 @@ const Contract = (props) => {
       return <HolderPersonalData {...props} />
     }
     if (activeStep === 2) {
-      return <HolderVoluntaryDonation {...props} />
+      return <TaxAddress {...props} />
     }
     if (activeStep === 3) {
+      return <HolderVoluntaryDonation {...props} />
+    }
+    if (activeStep === 4) {
       return <HolderIban {...props} />
     } else {
       return <></>
@@ -40,8 +44,7 @@ const Contract = (props) => {
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
 
-      {error ? getStepResult(errorInfo) : getStep() }
-
+      {error ? getStepResult(errorInfo) : getStep()}
     </>
   )
 }
