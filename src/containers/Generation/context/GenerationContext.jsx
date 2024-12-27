@@ -8,10 +8,11 @@ const GenerationContext = createContext({
   assignments: [],
   investments: [],
   contractNoAssignments: [],
+  outsideAssignments: [],
   modifyContract: () => { }
 })
 
-export const GenerationContextProvider = ({testMode=false, children, assignmentsJSON, investmentsJSON, propEditingPriority, contractNoAssignmentsJSON=[] }) => {
+export const GenerationContextProvider = ({testMode=false, children, assignmentsJSON, investmentsJSON, outsideAssignmentsJSON, propEditingPriority, contractNoAssignmentsJSON=[] }) => {
   const { t } = useTranslation()
   const { language } = useParams()
 
@@ -26,8 +27,13 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
     })
   }, [assignmentsJSON])
 
+  const outsideAssignmentsJSONSorted = useMemo(() => {
+    return JSON.parse(JSON.stringify(outsideAssignmentsJSON))
+  }, [outsideAssignmentsJSON])
+
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
   const [assignments, setAssignments] = useState(assignmentsJSONSorted)
+  const [outsideAssignments, setOutsideAssignments] = useState(outsideAssignmentsJSONSorted)
   const [contractNoAssignments, setContractNoAssignments] = useState(contractNoAssignmentsJSON)
   const [investments] = useState(investmentsJSON)
 
@@ -111,6 +117,7 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
     () => ({
       assignments,
       investments,
+      outsideAssignments,
       editingPriority,
       setEditingPriority,
       getPriority,
@@ -123,6 +130,7 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
     }),
     [
       assignments,
+      outsideAssignments,
       getPriority,
       editingPriority,
       setEditingPriority,

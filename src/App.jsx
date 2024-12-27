@@ -89,6 +89,10 @@ const App = (props) => {
     const investments = document.getElementById('generation-investments-data')
     return investments ? JSON.parse(investments.textContent) : {}
   }, [])
+  const outsideAssignmentsJSON = useMemo(() => {
+    const outsideAssignments = document.getElementById('outside-assignments-data')
+    return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
+  }, [])
   const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
 
   const contract20Props = () => {
