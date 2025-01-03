@@ -8,7 +8,6 @@ import SomEnergiaTheme from './components/SomenergiaTheme'
 import { Example as ComponentTest } from './components/ApiValidatedField.example'
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
-import Maintenance from './components/Maintenance'
 
 import './i18n/i18n'
 import './App.css'
@@ -456,7 +455,6 @@ const App = (props) => {
                   />
                 )}
 
-                {/*<Route path="*" element={<Maintenance {...props} />} />*/}
               </Routes>
             </Router>
 
