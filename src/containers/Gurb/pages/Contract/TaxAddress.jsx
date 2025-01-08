@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
+import { setMunicipisWithPostalCode } from '../../../../services/utils'
 
 import {
   iconOffRequirements,
@@ -20,7 +21,7 @@ import {
   textHeader5
 } from '../../gurbTheme'
 
-const SupplyPoint = (props) => {
+const TaxAddress = (props) => {
   const {
     activeStep,
     values,
@@ -47,8 +48,6 @@ const SupplyPoint = (props) => {
   const initializeAddress = () => {
     setFieldValue('tax_address.street', '')
     setFieldValue('tax_address.number', '')
-    setFieldValue('tax_address.lat', '')
-    setFieldValue('tax_address.long', '')
     setFieldValue('tax_address.postal_code', '')
     setFieldValue('tax_address.state', { id: '', name: '' })
     setFieldValue('tax_address.city', { id: '', name: '' })
@@ -67,12 +66,21 @@ const SupplyPoint = (props) => {
       setFieldValue('tax_address', {
         street: address?.route,
         number: address?.street_number || '',
-        lat: selection?.geometry?.location?.lat(),
-        long: selection?.geometry?.location?.lng(),
         postal_code: address?.postal_code
       })
     }
   }
+  useEffect(() => {
+    const postalCode = values.tax_address.postal_code
+    if (postalCode?.length > 4) {
+      setMunicipisWithPostalCode(
+        postalCode,
+        'tax_address.state',
+        'tax_address.city',
+        setFieldValue
+      )
+    }
+  }, [values.tax_address.postal_code])
 
   const options = [
     {
@@ -138,4 +146,4 @@ const SupplyPoint = (props) => {
     </>
   )
 }
-export default SupplyPoint
+export default TaxAddress
