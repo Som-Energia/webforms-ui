@@ -20,6 +20,9 @@ describe('Contract', () => {
     })
 
      it('Can not contract 3.0TD', function () {
+      if (Cypress.env('FEATURE_FLAGS').is30ContractEnabled) {
+        this.skip()
+      }
       const moreThan15Kw = true
 
       cy.choosePhase(this.data.phase)
@@ -64,6 +67,9 @@ describe('Contract', () => {
     })
 
      it('Can not contract 3.0TD', function () {
+      if (Cypress.env('FEATURE_FLAGS').is30ContractEnabled) {
+        this.skip()
+      }
       const moreThan15Kw = true
 
       cy.chooseMoreOrLessThan15Kw(moreThan15Kw)

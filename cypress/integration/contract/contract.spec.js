@@ -74,6 +74,9 @@ describe('Contract', () => {
     })
 
     it('3.0TD no incremental powers', function () {
+      if (!Cypress.env('FEATURE_FLAGS').is30ContractEnabled) {
+        this.skip()
+      }
       const moreThan15Kw = true
       const powers = [
         this.data.power,
@@ -88,6 +91,9 @@ describe('Contract', () => {
     })
 
     it('Contract with 3.0TD', function () {
+      if (!Cypress.env('FEATURE_FLAGS').is30ContractEnabled) {
+        this.skip()
+      }
       const moreThan15Kw = true
       const powers = [
         this.data.power,
@@ -151,6 +157,9 @@ describe('Contract', () => {
     })
 
     it('Contract with 3.0TD', function () {
+      if (!Cypress.env('FEATURE_FLAGS').is30ContractEnabled) {
+        this.skip()
+      }
       const moreThan15Kw = true
 
       cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
@@ -193,6 +202,9 @@ describe('Contract', () => {
     })
 
     it('Contract 3.0A less than 15kW', function () {
+      if (!Cypress.env('FEATURE_FLAGS').is30ContractEnabled) {
+        this.skip()
+      }
       const moreThan15Kw = true
 
       cy.chooseMoreOrLessThan15Kw(moreThan15Kw)
