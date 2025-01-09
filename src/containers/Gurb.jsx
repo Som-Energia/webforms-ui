@@ -64,7 +64,8 @@ const Gurb = (props) => {
       long: undefined
     },
     tax_address: {
-      street: undefined,
+      has_different_address: undefined,
+      street: '',
       number: undefined,
       postal_code: undefined,
       state: undefined,
@@ -105,7 +106,6 @@ const Gurb = (props) => {
       email2: undefined,
       phone1: undefined,
       phone2: undefined,
-      has_same_tax_address: undefined,
       voluntary_donation: undefined,
       iban: '',
       iban_valid: false,

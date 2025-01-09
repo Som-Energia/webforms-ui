@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { textHeader4 } from '../gurbTheme'
-import { HelperText } from './InputField'
 
 export default function LocationInput({
   textFieldLabel,

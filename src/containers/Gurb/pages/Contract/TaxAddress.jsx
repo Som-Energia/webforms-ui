@@ -38,7 +38,7 @@ const TaxAddress = (props) => {
   const [addressValue, setAddressValue] = useState('')
 
   const handleHolderAddressQuestion = (value) => {
-    setFieldValue('holder.has_same_tax_address', value)
+    setFieldValue('tax_address.has_different_address', value)
   }
 
   const handleAddressChange = (value) => {
@@ -64,12 +64,21 @@ const TaxAddress = (props) => {
         }))
       )
       setFieldValue('tax_address', {
+        has_different_address: values.tax_address.has_different_address,
         street: address?.route,
         number: address?.street_number || '',
         postal_code: address?.postal_code
       })
     }
   }
+
+  useEffect(() => {
+    const street = values.tax_address.street
+    if (street?.length < 1) {
+      initializeAddress()
+    }
+  }, [values.tax_address.street])
+
   useEffect(() => {
     const postalCode = values.tax_address.postal_code
     if (postalCode?.length > 4) {
@@ -97,8 +106,6 @@ const TaxAddress = (props) => {
     }
   ]
 
-  console.log('ERRORs', errors)
-  console.log('VALUES', values)
   const supplypointAddress = `${values?.address.street}, ${values?.address.number} ${values?.address.postal_code}`
   return (
     <>
@@ -124,11 +131,11 @@ const TaxAddress = (props) => {
         </Typography>
         <Chooser
           options={options}
-          value={values.holder.has_same_tax_address}
+          value={values.tax_address.has_different_address}
           handleChange={handleHolderAddressQuestion}
         />
       </Box>
-      {values.holder.has_same_tax_address ===
+      {values.tax_address.has_different_address ===
       'supplypoint-tax-address-different' ? (
         <LocationInput
           textFieldLabel={t('GURB_ADDRESS_LABEL')}

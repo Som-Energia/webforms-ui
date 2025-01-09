@@ -22,6 +22,13 @@ const Address = (props) => {
   }
 
   useEffect(() => {
+    const street = values.address.street
+    if (street?.length < 1) {
+      initializeAddress()
+    }
+  }, [values.address.street])
+
+  useEffect(() => {
     const postalCode = values.address.postal_code
     if (postalCode?.length > 4) {
       setMunicipisWithPostalCode(
