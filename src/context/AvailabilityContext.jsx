@@ -7,13 +7,12 @@ export const AvailabilityContextProvider = ({ children }) => {
   const [availability, setAvailability] = useState(true)
 
   return (
-    <AvailabilityContext.Provider value={{
-      availability: availability,
-      setAvailability: setAvailability
-    }}>
-      {availability ?
-        children : <Maintenance />
-      }
+    <AvailabilityContext.Provider
+      value={{
+        availability: availability,
+        setAvailability: setAvailability
+      }}>
+      {availability ? children : <Maintenance />}
     </AvailabilityContext.Provider>
   )
 }
