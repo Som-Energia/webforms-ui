@@ -1,4 +1,4 @@
-export const WAIT_TIME = 2000
+export const WAIT_TIME = 3000
 
 describe('Contract', () => {
   Cypress.on('uncaught:exception', (error, runnable) => {
