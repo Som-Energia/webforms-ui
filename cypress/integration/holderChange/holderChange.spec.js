@@ -64,28 +64,10 @@ describe('Holder Change', () => {
     })
   })
 
-  describe.skip('Enter personal data', function () {
-    beforeEach(function () {
-      cy.identifyHolder(this.data.vat)
-      cy.get('[data-cy=next]').click()
-
-      cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
-      cy.get('[data-cy=next]').click()
-    })
-
-    it('Enter personal data', function () {
-      cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
-
-      cy.holderChangePersonalData(this.data)
-
-      cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
-      cy.get('[data-cy=next]').click()
-    })
-  })
-
   describe('Become member step', function () {
+
     it('Check become member option: skip if holder is member', function () {
-      cy.identifyHolder(this.personaldata.vat)
+      cy.identifyHolder(this.personaldata.memberVat)
       cy.get('[data-cy=next]').click()
 
       cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -151,7 +133,7 @@ describe('Holder Change', () => {
         cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
         cy.get('[data-cy=next]').click()
 
-        cy.contains('Datos personales de la nueva persona titular', {
+        cy.contains('¡Contrata ahora y decide más adelante si quieres asociarte a la cooperativa!', {
           matchCase: false
         })
       })
@@ -189,9 +171,28 @@ describe('Holder Change', () => {
       })
     })
 
+    describe.skip('Enter personal data', function () {
+      beforeEach(function () {
+        cy.identifyHolder(this.data.vat)
+        cy.get('[data-cy=next]').click()
+
+        cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
+        cy.get('[data-cy=next]').click()
+      })
+
+      it('Enter personal data', function () {
+        cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
+
+        cy.holderChangePersonalData(this.data)
+
+        cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
+        cy.get('[data-cy=next]').click()
+      })
+    })
+
     describe('Voluntary cent step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.personaldata.vat)
+        cy.identifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -211,7 +212,7 @@ describe('Holder Change', () => {
 
     describe('Special cases step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.personaldata.vat)
+        cy.identifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -240,7 +241,7 @@ describe('Holder Change', () => {
 
     describe('Payment step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.personaldata.vat)
+        cy.identifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -271,7 +272,6 @@ describe('Holder Change', () => {
     })
 
     describe('Review step', function () {
-
       it('Review holder change data: holder in trial period', function () {
         cy.identifyHolder(this.data.randomVat)
         cy.get('[data-cy=next]').click()
@@ -310,7 +310,7 @@ describe('Holder Change', () => {
       })
 
       it('Review holder change data', function () {
-        cy.identifyHolder(this.personaldata.vat)
+        cy.identifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -327,7 +327,7 @@ describe('Holder Change', () => {
 
         // Review page
         cy.contains('revisa y confirma el contrato', { matchCase: false })
-        cy.contains(this.personaldata.vat, { matchCase: false })
+        cy.contains(this.personaldata.memberVat, { matchCase: false })
 
         cy.contains(
           'ofrecemos la posibilidad de contratar durante un año el suministro eléctrico',

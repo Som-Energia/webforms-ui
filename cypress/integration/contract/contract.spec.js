@@ -1,3 +1,5 @@
+export const WAIT_TIME = 2000
+
 describe('Contract', () => {
   Cypress.on('uncaught:exception', (error, runnable) => {
     console.error(error)
@@ -7,6 +9,7 @@ describe('Contract', () => {
   beforeEach(() => {
     cy.visit('/contract')
     cy.fixture('contract.json').as('data')
+    cy.fixture('holderChangePersonaldata.json').as('personaldata')
   })
 
   describe('Contract with selfconsumption', function () {
@@ -259,8 +262,8 @@ describe('Contract', () => {
 
     cy.get('#cups')
       .clear()
-      .type(this.data.supplyPoint.invalidCups)
-      .should('have.value', this.data.supplyPoint.invalidCups)
+      .type(this.personaldata.invalidCups)
+      .should('have.value', this.personaldata.invalidCups)
       .blur()
     cy.contains('Actualmente este CUPS está en un proceso')
 
@@ -275,7 +278,7 @@ describe('Contract', () => {
       .type(this.data.supplyPoint.cups)
       .should('have.value', this.data.supplyPoint.cups)
 
-    cy.wait(2000)
+    cy.wait(WAIT_TIME)
     cy.get(`[data-value="${this.data.supplyPoint.hasService}"]`).click()
 
     cy.get('[data-cy=next]').click()
@@ -327,7 +330,7 @@ describe('Contract', () => {
       .type(this.data.holder.vat)
       .should('have.value', this.data.holder.vat)
 
-    cy.wait(2000)
+    cy.wait(WAIT_TIME)
     cy.get(`[data-value="${this.data.holder.previousHolder}"]`).click()
 
     cy.get('[data-cy=next]').click()
@@ -456,7 +459,7 @@ describe('Contract', () => {
         .type(this.data.juridicMember.vat)
         .should('have.value', this.data.juridicMember.vat)
 
-      cy.wait(2000)
+      cy.wait(WAIT_TIME)
       cy.get(`[data-value="${this.data.juridicHolder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
@@ -466,7 +469,7 @@ describe('Contract', () => {
       cy.get('[name="holder.vat"]')
         .type(this.data.juridicHolder.vat)
         .should('have.value', this.data.juridicHolder.vat)
-      cy.wait(2000)
+      cy.wait(WAIT_TIME)
       cy.get(`[data-value="${this.data.juridicHolder.previousHolder}"]`).click()
 
       cy.get('[data-cy=next]').click()
