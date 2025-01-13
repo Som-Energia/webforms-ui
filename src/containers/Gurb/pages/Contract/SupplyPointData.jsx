@@ -55,6 +55,33 @@ const SupplyPointData = (props) => {
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
       <CadastralReference {...props} />
+      <FormControlLabel
+        sx={{ ...textCheckbox, marginTop: '2rem' }}
+        control={
+          <Checkbox
+            color="primary"
+            onClick={handleClick}
+            checked={values?.supply_point?.supply_point_accepted}
+          />
+        }
+        label={
+          <label
+            dangerouslySetInnerHTML={{
+              __html: t('FAIR_TITLE_LABEL')
+            }}
+          />
+        }
+      />
+      <TermsDialog
+        title={t('FAIR_TITLE')}
+        open={open}
+        onAccept={handleAccept}
+        onClose={handleClose}
+        maxWidth="sm">
+        <span
+          dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }}
+        />
+      </TermsDialog>
     </>
   )
 }
