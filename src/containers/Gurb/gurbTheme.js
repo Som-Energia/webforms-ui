@@ -33,6 +33,13 @@ export const textHeader5 = {
   fontSize: '14px'
 }
 
+export const textHeader6 = {
+  fontFamily: 'Inter',
+  color: '#000000',
+  fontSize: '16px',
+  fontWeight: '700'
+}
+
 export const textBody1 = {
   fontFamily: 'Inter',
   color: '#919191',
@@ -50,6 +57,13 @@ export const textBody3 = {
   color: '#373737',
   fontWeight: '400',
   fontSize: '16px'
+}
+
+export const textBody4 = {
+  fontFamily: 'Inter',
+  color: '#1E1E1E',
+  fontWeight: '400',
+  fontSize: '14px'
 }
 
 export const textSubtitle = {
