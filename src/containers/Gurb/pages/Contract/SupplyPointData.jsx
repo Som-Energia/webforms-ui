@@ -55,6 +55,7 @@ const SupplyPointData = (props) => {
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
       <CadastralReference {...props} />
+      <DragDrop />
       <FormControlLabel
         sx={{ ...textCheckbox, marginTop: '2rem' }}
         control={
