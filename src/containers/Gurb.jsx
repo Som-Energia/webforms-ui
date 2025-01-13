@@ -26,6 +26,7 @@ import {
   holderIdentificationValidations,
   holderPersonalDataValidations,
   holderTaxAddressValidations,
+  supplyPointDataValidations,
   holderVoluntaryDonationValidations
 } from './Gurb/contractValidations'
 
@@ -110,6 +111,11 @@ const Gurb = (props) => {
       iban: '',
       iban_valid: false,
       direct_debit_accepted: false
+    },
+    cadastral_reference: '',
+    cadastral_reference_valid: true,
+    supply_point: {
+      supply_point_accepted: false
     }
   }
 
@@ -123,6 +129,7 @@ const Gurb = (props) => {
     holderIdentificationValidations,
     holderPersonalDataValidations,
     holderTaxAddressValidations,
+    supplyPointDataValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations
   ]
