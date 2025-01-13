@@ -37,7 +37,11 @@ const InputField = ({
   value,
   error,
   isLoading = false,
-  readonlyField = false
+  readonlyField = false,
+  required = false,
+  endAdornmentText = false,
+  startAdornmentText = false,
+  numInputs = false
 }) => {
   const { t } = useTranslation()
 
@@ -52,6 +56,7 @@ const InputField = ({
           marginTop: '0.5rem'
         }}
         disabled={readonlyField}
+        required={required}
         fullWidth
         InputProps={{
           sx: { borderRadius: '8px', display: 'flex' },
@@ -59,6 +64,12 @@ const InputField = ({
           endAdornment: (
             <InputAdornment position="end">
               {isLoading && <CircularProgress size={24} />}
+              {endAdornmentText && endAdornmentText}
+            </InputAdornment>
+          ),
+          startAdornment: (
+            <InputAdornment position="start">
+              {startAdornmentText && numInputs > 1 && startAdornmentText}
             </InputAdornment>
           )
         }}

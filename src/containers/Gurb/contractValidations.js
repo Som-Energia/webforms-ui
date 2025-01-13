@@ -42,7 +42,19 @@ export const holderTaxAddressValidations = Yup.object().shape({
     number: Yup.string().when('has_different_address', {
       is: 'supplypoint-tax-address-different',
       then: Yup.string().required('NO_ADDRESS_NUMBER')
-    })
+    }),
+    postal_code: Yup.string().when('has_different_address', {
+      is: 'supplypoint-tax-address-different',
+      then: Yup.string().required('NO_ADDRESS_POSTAL_CODE')
+    }),
+  })
+})
+
+export const powerValidations = Yup.object().shape({
+  contract: Yup.object().shape({
+    power_type: Yup.string()
+      .required('REQUIRED_FIELD')
+      .oneOf(['power-lower-15kw', 'power-higher-15kw'])
   })
 })
 

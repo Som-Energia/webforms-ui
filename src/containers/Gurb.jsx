@@ -27,7 +27,8 @@ import {
   holderPersonalDataValidations,
   holderTaxAddressValidations,
   supplyPointDataValidations,
-  holderVoluntaryDonationValidations
+  holderVoluntaryDonationValidations,
+  powerValidations
 } from './Gurb/contractValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
@@ -116,6 +117,9 @@ const Gurb = (props) => {
     cadastral_reference_valid: true,
     supply_point: {
       supply_point_accepted: false
+    },
+    contract: {
+      power_type: undefined
     }
   }
 
@@ -129,6 +133,7 @@ const Gurb = (props) => {
     holderIdentificationValidations,
     holderPersonalDataValidations,
     holderTaxAddressValidations,
+    powerValidations,
     supplyPointDataValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations
