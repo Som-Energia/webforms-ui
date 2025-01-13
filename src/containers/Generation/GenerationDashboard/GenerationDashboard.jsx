@@ -138,13 +138,12 @@ function GenerationDashboard({
 
   }
 
-
   return (
     <>
       {validationConfirm.finished && !validationConfirm.completed ? (
         <GenerationFailure />
       ) : (
-        <>{investments.length === 0 ?
+        <>{(investments.length === 0 && outsideAssignments.length === 0) ?
           (
             <Typography
               variant="body1"
