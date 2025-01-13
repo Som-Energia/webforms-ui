@@ -22,13 +22,6 @@ const Address = (props) => {
   }
 
   useEffect(() => {
-    const street = values.address.street
-    if (street?.length < 1) {
-      initializeAddress()
-    }
-  }, [values.address.street])
-
-  useEffect(() => {
     const postalCode = values.address.postal_code
     if (postalCode?.length > 4) {
       setMunicipisWithPostalCode(
@@ -76,13 +69,15 @@ const Address = (props) => {
   }
 
   const initializeAddress = () => {
-    setFieldValue('address.street', '')
-    setFieldValue('address.number', '')
-    setFieldValue('address.lat', '')
-    setFieldValue('address.long', '')
-    setFieldValue('address.postal_code', '')
-    setFieldValue('address.state', { id: '', name: '' })
-    setFieldValue('address.city', { id: '', name: '' })
+    setFieldValue('address', {
+      street: '',
+      number: '',
+      lat: '',
+      long: '',
+      postal_code: '',
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
+    })
   }
 
   const handleLocationSelected = (selection) => {

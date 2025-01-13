@@ -46,11 +46,14 @@ const TaxAddress = (props) => {
   }
 
   const initializeAddress = () => {
-    setFieldValue('tax_address.street', '')
-    setFieldValue('tax_address.number', '')
-    setFieldValue('tax_address.postal_code', '')
-    setFieldValue('tax_address.state', { id: '', name: '' })
-    setFieldValue('tax_address.city', { id: '', name: '' })
+    setFieldValue('tax_address', {
+      has_different_address: values.tax_address.has_different_address,
+      street: '',
+      number: '',
+      postal_code: '',
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
+    })
   }
 
   const handleLocationSelected = (selection) => {
@@ -71,13 +74,6 @@ const TaxAddress = (props) => {
       })
     }
   }
-
-  useEffect(() => {
-    const street = values.tax_address.street
-    if (street?.length < 1) {
-      initializeAddress()
-    }
-  }, [values.tax_address.street])
 
   useEffect(() => {
     const postalCode = values.tax_address.postal_code
