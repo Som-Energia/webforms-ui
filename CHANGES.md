@@ -1,9 +1,10 @@
 # Change Log
 
-## Unreleased
+## 2.5.0 2025-01-14
 
 - Fix: subtitle in PersonalData for Contract
 - Replace forms by Maintenance component if ping request fails
+- Gurb: new member pages
 
 ## 2.4.3 2024-12-12
 
