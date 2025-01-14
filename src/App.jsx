@@ -105,6 +105,7 @@ const App = (props) => {
     <ThemeProvider theme={somtheme}>
       <CssBaseline />
       <AvailabilityContextProvider>
+      <MatomoProvider>
         <Box sx={{ flexGrow: 1 }}>
           <Suspense fallback={<Loading />}>
 
@@ -141,9 +142,7 @@ const App = (props) => {
                   exact
                   path="/contract"
                   element={
-                    <MatomoProvider>
                       <Contract {...props} />
-                    </MatomoProvider>
                   }
                 />
                 <Route
@@ -162,9 +161,7 @@ const App = (props) => {
                 <Route
                   path="/:language/contracta-la-llum/"
                   element={
-                    <MatomoProvider>
                       <Contract {...props} />
-                    </MatomoProvider>
                   }
                 />
                 <Route
@@ -183,18 +180,14 @@ const App = (props) => {
                 <Route
                   path="/:language/contract-30/"
                   element={
-                    <MatomoProvider>
                       <Contract {...props} />
-                    </MatomoProvider>
                   }
                 />
 
                 <Route
                   path="/:language/contract-20/"
                   element={
-                    <MatomoProvider>
                       <Contract is30ContractEnabled={false} {...props} />
-                    </MatomoProvider>
                   }
                 />
 
@@ -468,6 +461,7 @@ const App = (props) => {
           </Suspense>
           <ApiStatus />
         </Box>
+        </MatomoProvider>
       </AvailabilityContextProvider>
     </ThemeProvider>
   )
