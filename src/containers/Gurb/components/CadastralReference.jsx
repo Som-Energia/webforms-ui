@@ -79,7 +79,7 @@ const CadastralReference = (props) => {
       handleBlur={handleInputCadastralReferenceBlur}
       touched={touched?.cadastral_reference}
       value={values.cadastral_reference}
-      error={errors?.cadastral_reference}
+      error={errors?.cadastral_reference || errors?.cadastral_reference_valid}
       isLoading={loading}
     />
   )
