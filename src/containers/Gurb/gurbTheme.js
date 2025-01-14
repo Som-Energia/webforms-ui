@@ -54,6 +54,13 @@ export const textSubtitle = {
   textTransform: 'uppercase'
 }
 
+export const textSubtitle2 = {
+  fontFamily: 'Inter',
+  color: '#B3B3B3',
+  fontSize: '12px',
+  fontWeight: '400'
+}
+
 export const textHelper1 = {
   display: 'flex',
   color: '#B3B3B3',
@@ -157,4 +164,13 @@ export const buttonGurbLight = {
 
 export const link = {
   ...textBody2
+}
+
+export const textCheckbox = {
+  '& .MuiTypography-root': {
+    fontFamily: 'Inter',
+    color: '#000000',
+    fontSize: '16px',
+    fontWeight: '600'
+  },
 }

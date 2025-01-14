@@ -13,6 +13,8 @@
 
 - Gurb: validation pages for non-members
 - Added feature flag: isGurbEnabled
+- Gurb: Add new member form
+- Add member and godmother/godfather validation pages
 - Fix tpv asynchronous submit
 
 ## 2.4.1 2024-11-11

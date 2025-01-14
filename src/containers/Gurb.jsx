@@ -8,6 +8,8 @@ import Box from '@mui/material/Box'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
+import NewMember from './Gurb/NewMember'
+import NewContract from './Gurb/NewContract'
 
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
@@ -18,16 +20,24 @@ import {
   memberQuestionValidations,
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
+import {
+  newMemberValidations,
+  memberValidations
+} from './Gurb/newMemberValidations'
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 6
+const MAX_STEP_NUMBER = 7
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
+const NEW_MEMBER_STEP = [5]
+const NEW_CONTRACT_STEP = [6]
 
 const Gurb = (props) => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const { language } = useParams()
-  const { error } = useContext(GurbErrorContext)
+  const { error, setError, errorInfo, setErrorInfo } =
+    useContext(GurbErrorContext)
+
   const { loading } = useContext(GurbLoadingContext)
 
   const [activeStep, setActiveStep] = useState(0)
@@ -49,7 +59,30 @@ const Gurb = (props) => {
       long: undefined
     },
     has_selfconsumption: undefined,
-    has_member: undefined
+    has_member: undefined,
+    member: {
+      number: '',
+      nif: '',
+      is_member: false,
+      link_member: false
+    },
+    new_member: {
+      nif: '',
+      become_member: false,
+      isphisical: true,
+      proxynif_valid: false,
+      proxynif: '',
+      proxyname: '',
+      name: undefined,
+      surname1: undefined,
+      surname2: undefined,
+      email: undefined,
+      email2: undefined,
+      phone1: undefined,
+      phone2: undefined,
+      language: `${i18n.language}_ES`,
+      privacy_policy_accepted: false
+    }
   }
 
   const validationSchemas = [
@@ -57,7 +90,9 @@ const Gurb = (props) => {
     lightValidations,
     addressValidations,
     selfConsumptionValidations,
-    memberQuestionValidations
+    memberQuestionValidations,
+    newMemberValidations,
+    memberValidations
   ]
 
   const nextStep = () => {
@@ -81,14 +116,35 @@ const Gurb = (props) => {
           activeStep={REQUIREMENTS_STEPS.indexOf(activeStep)}
         />
       )
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
+      return <NewMember {...props} />
+    } else if (NEW_CONTRACT_STEP.includes(activeStep)) {
+      return <NewContract {...props} />
     } else {
       return <></>
     }
   }
 
+  const NewMemberResult = (props) => {
+    if (formikRef.current.values.new_member.become_member) {
+      setError(true)
+      setErrorInfo({
+        main_text: t('GURB_WELCOME_NEW_MEMBER_MAIN_TEXT'),
+        seconday_text: t('GURB_WELCOME_NEW_MEMBER_SECONDARY_TEXT'),
+        link_text: t('GURB_WELCOME_NEW_MEMBER_LINK_TEXT'),
+        error_type: 'success',
+        clean_field: () => {
+          activeStep
+        }
+      })
+    }
+  }
   const formikRef = useRef(null)
   useEffect(() => {
     formikRef.current.validateForm()
+    if (activeStep === 6) {
+      NewMemberResult()
+    }
   }, [activeStep])
 
   return (
