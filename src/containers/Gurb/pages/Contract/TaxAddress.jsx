@@ -80,9 +80,9 @@ const TaxAddress = (props) => {
     if (postalCode?.length > 4) {
       setMunicipisWithPostalCode(
         postalCode,
-        'tax_address.state',
-        'tax_address.city',
-        setFieldValue
+        setFieldValue,
+        'tax_address',
+        values
       )
     }
   }, [values.tax_address.postal_code])

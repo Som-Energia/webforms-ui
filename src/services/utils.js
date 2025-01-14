@@ -612,10 +612,18 @@ export const prettyCAU = (value) => {
   return value
 }
 
-export const setMunicipisWithPostalCode = async (postalCode, stateName, cityName, setFieldValue) => {
+export const setMunicipisWithPostalCode = async (
+  postalCode,
+  setFieldValue,
+  fieldName,
+  values
+) => {
   const municipis = await getMunicipisByPostalCode(postalCode)
   if (municipis?.length > 0) {
-    setFieldValue(stateName, municipis[0][0]?.provincia)
-    setFieldValue(cityName, municipis[0][0]?.municipi)
+    setFieldValue(fieldName, {
+      ...values[fieldName],
+      state: municipis[0][0]?.provincia,
+      city: municipis[0][0]?.municipi
+    })
   }
 }

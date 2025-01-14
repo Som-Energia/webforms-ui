@@ -13,23 +13,10 @@ const Address = (props) => {
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
   const [addressValue, setAddressValue] = useState('')
 
-  const handleInputAddress = (event) => {
-    setFieldValue('address.street', event.target.value)
-  }
-
-  const handleInputAddressBlur = () => {
-    setFieldTouched('address.street', true)
-  }
-
   useEffect(() => {
     const postalCode = values.address.postal_code
     if (postalCode?.length > 4) {
-      setMunicipisWithPostalCode(
-        postalCode,
-        'address.state',
-        'address.city',
-        setFieldValue
-      )
+      setMunicipisWithPostalCode(postalCode, setFieldValue, 'address', values)
     }
   }, [values.address.postal_code])
 

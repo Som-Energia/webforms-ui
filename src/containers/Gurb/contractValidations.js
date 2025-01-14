@@ -47,6 +47,34 @@ export const holderTaxAddressValidations = Yup.object().shape({
       is: 'supplypoint-tax-address-different',
       then: Yup.string().required('NO_ADDRESS_POSTAL_CODE')
     }),
+    city: Yup.object()
+      .shape({
+        id: Yup.number(),
+        name: Yup.string()
+      })
+      .when('has_different_address', {
+        is: 'supplypoint-tax-address-different',
+        then: Yup.object()
+          .shape({
+            id: Yup.number().required('NO_ADDRESS_CITY_ID'),
+            name: Yup.string().required('NO_ADDRESS_CITY_NAME')
+          })
+          .required('NO_ADDRESS_CITY')
+      }),
+    state: Yup.object()
+      .shape({
+        id: Yup.number(),
+        name: Yup.string()
+      })
+      .when('has_different_address', {
+        is: 'supplypoint-tax-address-different',
+        then: Yup.object()
+          .shape({
+            id: Yup.number().required('NO_ADDRESS_STATE_ID'),
+            name: Yup.string().required('NO_ADDRESS_STATE_NAME')
+          })
+          .required('NO_ADDRESS_STATE')
+      })
   })
 })
 
