@@ -203,7 +203,7 @@ function GenerationDashboard({
                 columns={[
                   t('GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT'),
                   t('ADDRESS'),
-                  t('GENERATION_INVESTMENTS_TABLE_TTILE_ENERGY_ACTIONS'),
+                  t('GENERATION_INVESTMENTS_TABLE_TTILE_CONTRACT_HOLDER'),
                 ]}
                 rows={outsideAssignments} />
               <Grid
