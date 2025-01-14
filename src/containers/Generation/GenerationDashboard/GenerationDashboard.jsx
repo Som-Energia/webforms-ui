@@ -197,7 +197,7 @@ function GenerationDashboard({
                 justifyContent="flex-end">
                 <ActionSection />
               </Grid>
-              <SectionTitle text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}/>
+              <SectionTitle text={t('GENERATION_INVESTMENTS_OUTSIDE_ASSIGNMENTS_TABLE_TITLE')}/>
               <GenerationTable
                 id="outside-assignments-table"
                 columns={[
