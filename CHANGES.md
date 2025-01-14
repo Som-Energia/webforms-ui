@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix: subtitle in PersonalData for Contract
+- Replace forms by Maintenance component if ping request fails
 
 ## 2.4.3 2024-12-12
 

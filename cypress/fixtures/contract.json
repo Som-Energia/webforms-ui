@@ -24,7 +24,7 @@
     "badVat": "58291270J"
   },
   "supplyPoint": {
-    "cups": "ES1234123456789012JY1F",
+    "cups": "ES0122449351050857YA",
     "hasService": true,
     "hasNoService": false,
     "address": "Pedro López",
@@ -35,7 +35,6 @@
     "isHousing": true,
     "cnae": "9820",
     "badCups": "ESO8249878173OO148BZ",
-    "invalidCups": "ES0029874572863299XP",
     "validCups": "ES1234123456789012JY1F",
     "cadastralReference":""
   },

@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react'
-
-import { useTranslation } from 'react-i18next'
-
-import Fade from '@mui/material/Fade'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
+import { useState, useEffect, useContext } from 'react'
 
 import { apiStatus } from '../services/api'
+import AvailabilityContext from '../context/AvailabilityContext'
 
 const ApiStatus = () => {
-  const { t } = useTranslation()
   const [apiOffline, setApiOffline] = useState(false)
   const [noConnection, setNoConnection] = useState(false)
+  const { availability, setAvailability } = useContext(AvailabilityContext)
+
+  useEffect(() => {
+    if (apiOffline || noConnection) {
+      setAvailability(false)
+    }
+    else if (availability) {
+      setAvailability(true)
+    }
+  },[apiOffline, noConnection])
 
   const checkApiStatus = async () => {
     apiStatus()
@@ -35,22 +38,6 @@ const ApiStatus = () => {
     return () => clearInterval(interval)
   }, [])
 
-  return (
-    <>
-      {
-        <Snackbar open={noConnection || apiOffline} TransitionComponent={Fade}>
-          <Alert severity="error">
-            <AlertTitle>
-              {noConnection ? t('API_SERVER_ERROR') : t('API_SERVER_OFFLINE')}
-            </AlertTitle>
-            {noConnection
-              ? t('API_SERVER_ERROR_DETAILS')
-              : t('API_SERVER_OFFLINE_DETAILS')}
-          </Alert>
-        </Snackbar>
-      }
-    </>
-  )
 }
 
 export default ApiStatus

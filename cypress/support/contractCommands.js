@@ -129,7 +129,7 @@ Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
     .blur()
 
   // Wait for the cups to be validated
-  cy.get('#cups[aria-invalid=false]', { timeout: 2000 })
+  cy.get('#cups[aria-invalid=false]', { timeout: 3000 })
 
   cy.get(`[data-value="${hasService}"]`).click()
 
