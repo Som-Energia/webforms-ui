@@ -6,21 +6,45 @@ import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
+import Alert from '@mui/material/Alert'
 
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
 import { textBody1, textBody3, textSubtitle2 } from '../gurbTheme'
+import { uploadFile } from '../../../services/api'
 
 export default function DragDrop() {
   const { t } = useTranslation()
 
   const [drag, setDrag] = useState(false)
+  const [error, setError] = useState(false)
   const [filename, setFilename] = useState('')
+  const [uploads, setUploads] = useState('')
 
   let dropRef = createRef()
 
   const fileInputRef = useRef(null)
+
+  const upload = (name, file) => {
+    return uploadFile(name, file)
+      .then((response) => {
+        if (response?.data?.code === 'UPLOAD_OK') {
+          setUploads([response?.data?.file_hash])
+        } else {
+          const errorMsg = response?.data?.code
+            ? response?.data?.code
+            : t('GURB_UPLOAD_UNEXPECTED')
+          setError(errorMsg)
+        }
+      })
+      .catch((error) => {
+        const errorMsg = error?.response?.data?.code
+          ? error.response.data.code
+          : t('GURB_UPLOAD_UNEXPECTED')
+        setError(errorMsg)
+      })
+  }
 
   const prevent = (e) => {
     e.preventDefault()
@@ -42,11 +66,13 @@ export default function DragDrop() {
   }
 
   const handleDrop = (e) => {
+    setError(false)
     prevent(e)
     setDrag(false)
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       onDrop(e.dataTransfer.files[0])
       setFilename(e.dataTransfer.files[0].name)
+      upload(e.dataTransfer.files[0].name, e.dataTransfer.files[0])
       e.dataTransfer.clearData()
     }
   }
@@ -74,8 +100,10 @@ export default function DragDrop() {
     const file = e.target.files[0]
     if (file) {
       // Aquí puedes manejar el archivo, como subirlo al servidor
+      setError(false)
       onDrop(file)
       setFilename(file.name)
+      upload(file.name, file)
     }
   }
 
@@ -102,7 +130,11 @@ export default function DragDrop() {
           flexGrow: 1,
           gap: 1
         }}>
-        {filename && !drag ? (
+        {error ? (
+          <Alert sx={{ borderRadius: '8px' }} severity="error">
+            {error}
+          </Alert>
+        ) : filename && !drag ? (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography sx={{ ...textBody1, marginRight: '1rem' }}>
               {filename}

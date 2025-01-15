@@ -88,7 +88,7 @@ export const powerValidations = Yup.object().shape({
 
 export const supplyPointDataValidations = Yup.object().shape({
   cadastral_reference: Yup.string().length(23, 'ERROR_FIELD_LENGTH'),
-  cadastral_reference_valid: Yup.mixed()
+  cadastral_reference_valid: Yup.bool()
     .required('CADASTRAL_REFERENCE_ERROR')
     .oneOf([true], 'CADASTRAL_REFERENCE_ERROR'),
   supply_point: Yup.object().shape({
