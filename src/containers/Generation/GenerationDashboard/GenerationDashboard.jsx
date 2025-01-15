@@ -147,6 +147,7 @@ function GenerationDashboard({
           (
             <Typography
               variant="body1"
+              id='not-has-invoices-text'
               dangerouslySetInnerHTML={{
                 __html: t('GENERATION_INFO_NOT_HAS_INVOICES')
               }}
