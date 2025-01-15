@@ -76,6 +76,12 @@ const NewMemberDetails = (props) => {
     setFieldTouched('new_member.nif', true)
   }
 
+  const handleChangePhone = (event) => {
+    let value = event.target.value.match(/[0-9]{0,14}/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   const handleLanguageChange = (event) => {
     let value = event.target.value
     setFieldValue('new_member.language', value)
@@ -180,11 +186,10 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name={'new_member.phone1'}
             textFieldLabel={t('GURB_PHONE1_LABEL')}
             textFieldName={t('GURB_PHONE1_LABEL')}
-            handleChange={(event) => {
-              setFieldValue('new_member.phone1', event.target.value)
-            }}
+            handleChange={handleChangePhone}
             handleBlur={() => {
               setFieldTouched('new_member.phone1', true)
             }}
@@ -195,11 +200,10 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name={'new_member.phone2'}
             textFieldLabel={t('HOLDER_PHONE_2')}
             textFieldName={t('HOLDER_PHONE_2')}
-            handleChange={(event) => {
-              setFieldValue('new_member.phone2', event.target.value)
-            }}
+            handleChange={handleChangePhone}
             handleBlur={() => {
               setFieldTouched('new_member.phone2', true)
             }}

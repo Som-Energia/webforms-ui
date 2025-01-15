@@ -20,6 +20,12 @@ const HolderPersonalData = (props) => {
 
   const { t } = useTranslation()
 
+  const handleChangePhone = (event) => {
+    let value = event.target.value.match(/[0-9]{0,14}/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   return (
     <>
       <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
@@ -29,7 +35,7 @@ const HolderPersonalData = (props) => {
         />
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
-      <Grid container columnSpacing={2} sx={{marginBottom:'6rem'}}>
+      <Grid container columnSpacing={2} sx={{ marginBottom: '6rem' }}>
         <Grid item xs={4}>
           <InputField
             textFieldLabel={t('NAME')}
@@ -107,11 +113,10 @@ const HolderPersonalData = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name={'holder.phone1'}
             textFieldLabel={t('GURB_PHONE1_LABEL')}
             textFieldName={t('GURB_PHONE1_LABEL')}
-            handleChange={(event) => {
-              setFieldValue('holder.phone1', event.target.value)
-            }}
+            handleChange={handleChangePhone}
             handleBlur={() => {
               setFieldTouched('holder.phone1', true)
             }}
@@ -122,11 +127,10 @@ const HolderPersonalData = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name={'holder.phone2'}
             textFieldLabel={t('HOLDER_PHONE_2')}
             textFieldName={t('HOLDER_PHONE_2')}
-            handleChange={(event) => {
-              setFieldValue('holder.phone2', event.target.value)
-            }}
+            handleChange={handleChangePhone}
             handleBlur={() => {
               setFieldTouched('holder.phone2', true)
             }}

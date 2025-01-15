@@ -41,7 +41,8 @@ const InputField = ({
   required = false,
   endAdornmentText = false,
   startAdornmentText = false,
-  numInputs = false
+  numInputs = false,
+  name=false
 }) => {
   const { t } = useTranslation()
 
@@ -55,6 +56,7 @@ const InputField = ({
           '& .MuiInputLabel-root': { color: '#B3B3B3' },
           marginTop: '0.5rem'
         }}
+        name={name}
         disabled={readonlyField}
         required={required}
         fullWidth
