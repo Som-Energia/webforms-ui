@@ -209,28 +209,51 @@ const Gurb = (props) => {
               {error ? (
                 <></>
               ) : (
-                <Box
-                  style={{
-                    marginTop: '2rem',
-                    marginX: '2rem',
-                    display: 'flex',
-                    justifyContent: 'space-between'
-                  }}>
-                  <PrevButton
-                    disabled={activeStep === 0}
-                    onClick={() => prevStep(formikProps)}
-                    title={'PREV'}
-                  />
-                  <NextButton
-                    disabled={
-                      loading ||
-                      !formikProps.isValid ||
-                      activeStep === MAX_STEP_NUMBER
-                    }
-                    onClick={() => nextStep(formikProps)}
-                    title={'NEXT'}
-                  />
-                </Box>
+                <>
+                  {activeStep === 0 ? (
+                    <>
+                      <Box
+                        style={{
+                          marginTop: '2rem',
+                          marginX: '2rem',
+                          display: 'flex',
+                          justifyContent: 'flex-end'
+                        }}>
+                        <NextButton
+                          disabled={
+                            loading ||
+                            !formikProps.isValid ||
+                            activeStep === MAX_STEP_NUMBER
+                          }
+                          onClick={() => nextStep(formikProps)}
+                          title={'NEXT'}
+                        />
+                      </Box>
+                    </>
+                  ) : (
+                    <Box
+                      style={{
+                        marginTop: '2rem',
+                        marginX: '2rem',
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}>
+                      <PrevButton
+                        onClick={() => prevStep(formikProps)}
+                        title={'PREV'}
+                      />
+                      <NextButton
+                        disabled={
+                          loading ||
+                          !formikProps.isValid ||
+                          activeStep === MAX_STEP_NUMBER
+                        }
+                        onClick={() => nextStep(formikProps)}
+                        title={'NEXT'}
+                      />
+                    </Box>
+                  )}
+                </>
               )}
             </>
           )
