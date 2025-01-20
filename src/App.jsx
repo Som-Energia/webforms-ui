@@ -152,7 +152,8 @@ const App = (props) => {
                     <PopUpContextProvider>
                       <GenerationContextProvider
                         assignmentsJSON={assignmentsJSON}
-                        investmentsJSON={investmentsJSON}>
+                        investmentsJSON={investmentsJSON}
+                        outsideAssignmentsJSON={outsideAssignmentsJSON}>
                         <Generation {...props} token={token} />
                       </GenerationContextProvider>
                     </PopUpContextProvider>
@@ -379,7 +380,8 @@ const App = (props) => {
                     <PopUpContextProvider>
                       <GenerationContextProvider
                         assignmentsJSON={assignmentsJSON}
-                        investmentsJSON={investmentsJSON}>
+                        investmentsJSON={investmentsJSON}
+                        outsideAssignmentsJSON={outsideAssignmentsJSON}>
                         <Generation {...props} token={token} />
                       </GenerationContextProvider>
                     </PopUpContextProvider>
@@ -391,7 +393,8 @@ const App = (props) => {
                     <PopUpContextProvider>
                       <GenerationContextProvider
                         assignmentsJSON={assignmentsJSON}
-                        investmentsJSON={investmentsJSON}>
+                        investmentsJSON={investmentsJSON}
+                        outsideAssignmentsJSON={outsideAssignmentsJSON}>
                         <Generation {...props} token={token} />
                       </GenerationContextProvider>
                     </PopUpContextProvider>
