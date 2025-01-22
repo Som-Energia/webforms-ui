@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.6.0 2025-01-22
 
 - Added VITE_GENERATION_OUTSIDE_ASSIGNMENTS as env varible
 - Added outside assignments in generationkwh section 
