@@ -17,6 +17,7 @@ import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
 import Loading from '../../../components/Loading'
 import CustomDialog from '../../../components/CustomDialog'
+import GenerationTable from './GenerationTable'
 
 
 function GenerationDashboard({
@@ -32,6 +33,7 @@ function GenerationDashboard({
     editingPriority,
     assignments,
     investments,
+    outsideAssignments,
     has_duplicate_priority_values,
     getAssingments,
     getContractsToAssign,
@@ -136,16 +138,16 @@ function GenerationDashboard({
 
   }
 
-
   return (
     <>
       {validationConfirm.finished && !validationConfirm.completed ? (
         <GenerationFailure />
       ) : (
-        <>{investments.length === 0 ?
+        <>{(investments.length === 0 && outsideAssignments.length === 0) ?
           (
             <Typography
               variant="body1"
+              id='not-has-invoices-text'
               dangerouslySetInnerHTML={{
                 __html: t('GENERATION_INFO_NOT_HAS_INVOICES')
               }}
@@ -195,6 +197,20 @@ function GenerationDashboard({
                 container
                 justifyContent="flex-end">
                 <ActionSection />
+              </Grid>
+              <SectionTitle text={t('GENERATION_INVESTMENTS_OUTSIDE_ASSIGNMENTS_TABLE_TITLE')}/>
+              <GenerationTable
+                id="outside-assignments-table"
+                columns={[
+                  t('GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT'),
+                  t('ADDRESS'),
+                  t('GENERATION_INVESTMENTS_TABLE_TTILE_CONTRACT_HOLDER'),
+                ]}
+                rows={outsideAssignments} />
+              <Grid
+                sx={{ padding: '10px' }}
+                container
+                justifyContent="flex-end">
               </Grid>
               <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button

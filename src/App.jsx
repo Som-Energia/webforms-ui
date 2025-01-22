@@ -89,6 +89,10 @@ const App = (props) => {
     const investments = document.getElementById('generation-investments-data')
     return investments ? JSON.parse(investments.textContent) : {}
   }, [])
+  const outsideAssignmentsJSON = useMemo(() => {
+    const outsideAssignments = document.getElementById('outside-assignments-data')
+    return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
+  }, [])
   const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
 
   const contract20Props = () => {
@@ -148,7 +152,8 @@ const App = (props) => {
                     <PopUpContextProvider>
                       <GenerationContextProvider
                         assignmentsJSON={assignmentsJSON}
-                        investmentsJSON={investmentsJSON}>
+                        investmentsJSON={investmentsJSON}
+                        outsideAssignmentsJSON={outsideAssignmentsJSON}>
                         <Generation {...props} token={token} />
                       </GenerationContextProvider>
                     </PopUpContextProvider>
@@ -375,7 +380,8 @@ const App = (props) => {
                     <PopUpContextProvider>
                       <GenerationContextProvider
                         assignmentsJSON={assignmentsJSON}
-                        investmentsJSON={investmentsJSON}>
+                        investmentsJSON={investmentsJSON}
+                        outsideAssignmentsJSON={outsideAssignmentsJSON}>
                         <Generation {...props} token={token} />
                       </GenerationContextProvider>
                     </PopUpContextProvider>
@@ -387,7 +393,8 @@ const App = (props) => {
                     <PopUpContextProvider>
                       <GenerationContextProvider
                         assignmentsJSON={assignmentsJSON}
-                        investmentsJSON={investmentsJSON}>
+                        investmentsJSON={investmentsJSON}
+                        outsideAssignmentsJSON={outsideAssignmentsJSON}>
                         <Generation {...props} token={token} />
                       </GenerationContextProvider>
                     </PopUpContextProvider>

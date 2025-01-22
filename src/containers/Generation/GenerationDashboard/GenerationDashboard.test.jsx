@@ -34,6 +34,10 @@ describe('Generation Dashboard', () => {
   const mockValidationConfirmFailure = { finished: true, completed: false }
   const mockAssignmentRows = JSON.parse('[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)", "contract_tariff":"2.0","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","contract_tariff":"2.0","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
   )
+
+  const mockOutsideAssignmentRows = JSON.parse('[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)", "contract_tariff":"2.0","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","contract_tariff":"2.0","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
+  )
+
   const mockContractNoAssignmentRows = JSON.parse('[{"id":"00003","contract": "ES0031405524755001WN8H - 0010243","contract_address": "Carrer Petit, 21, 2º 08880 (Sant Carles de la Ràpita)", "contract_tariff":"2.0","priority": 3,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"}]'
   )
 
@@ -60,6 +64,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
@@ -71,6 +76,10 @@ describe('Generation Dashboard', () => {
 
     const investmentTable = getById(dom.container, 'investment-table')
     expect(investmentTable).toBeInTheDocument()
+
+    const outsideAssignmentsTable = getById(dom.container, 'outside-assignments-table')
+    expect(outsideAssignmentsTable).toBeInTheDocument()
+
   })
 
 
@@ -80,6 +89,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
           testMode={true}
         >
@@ -100,6 +110,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
           testMode={true}
         >
@@ -119,6 +130,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
           testMode={true}
         >
@@ -141,6 +153,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentSamePriorityRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
           testMode={true}
         >
@@ -152,12 +165,32 @@ describe('Generation Dashboard', () => {
     expect(infoText).toBeInTheDocument()
   })
 
+  test('should show the text that shows you have no generation', async () => {
+
+    const dom = render(
+      <PopUpContextProvider>
+        <GenerationContextProvider
+          assignmentsJSON={mockAssignmentRows}
+          investmentsJSON={[]}
+          outsideAssignmentsJSON={[]}
+          propEditingPriority={true}
+          testMode={true}
+        >
+          <GenerationDashboard validationConfirm={mockValidationConfirm} />
+        </GenerationContextProvider>
+      </PopUpContextProvider>
+    )
+    const infoText = getById(dom.container, 'not-has-invoices-text')
+    expect(infoText).toBeInTheDocument()
+  })
+
   test('should show the success text', async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           testMode={true}
         >
           <GenerationDashboard validationConfirm={mockValidationConfirmSuccess} />
@@ -175,6 +208,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           testMode={true}
         >
           <GenerationDashboard validationConfirm={mockValidationConfirmSuccess} setValidationConfirm={mockSetValidationConfirm} />
@@ -195,6 +229,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           testMode={true}
         >
           <GenerationDashboard validationConfirm={mockValidationConfirmFailure} />
@@ -210,6 +245,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           contractNoAssignmentsJSON={mockContractNoAssignmentRows}
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
@@ -236,6 +272,7 @@ describe('Generation Dashboard', () => {
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
           contractNoAssignmentsJSON={[]}
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />

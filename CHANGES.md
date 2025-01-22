@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Added VITE_GENERATION_OUTSIDE_ASSIGNMENTS as env varible
+- Added outside assignments in generationkwh section 
+
 ## 2.5.0 2025-01-14
 
 - Fix: subtitle in PersonalData for Contract
