@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.6.1 2025-01-23
+
+- Fix: Matomo calls and context
+
 ## 2.6.0 2025-01-22
 
 - Added VITE_GENERATION_OUTSIDE_ASSIGNMENTS as env varible
