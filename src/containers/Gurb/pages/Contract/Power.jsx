@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField, { HelperText } from '../../components/InputField'
+import { HelperText } from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import PowerInputs from '../../components/PowerInputs'
@@ -13,12 +13,7 @@ import Box from '@mui/material/Box'
 
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
-import {
-  iconOffRequirements,
-  iconRequirements,
-  textHeader4,
-  textHeader5
-} from '../../gurbTheme'
+import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
 
 const Power = (props) => {
   const {
@@ -37,6 +32,7 @@ const Power = (props) => {
 
   const handlePowerQuestion = (value) => {
     setFieldValue('contract.power_type', value)
+    setFieldValue('contract.power', {})
   }
 
   const options = [
@@ -51,9 +47,6 @@ const Power = (props) => {
       textHeader: t('GURB_POWER_HIGHER_15_HEADER')
     }
   ]
-
-  console.log('VALUES', values)
-  console.log('ERRRR', errors)
 
   return (
     <>
@@ -73,10 +66,10 @@ const Power = (props) => {
       {values.contract.power_type === 'power-lower-15kw' && (
         <>
           <PowerInputs
-            namePrefix="contract"
+            name="contract.power"
             numInputs={2}
             {...props}
-            values={values?.contract}
+            values={values?.contract.power}
             errors={errors?.contract}
             touched={touched?.contract}
           />
@@ -89,10 +82,10 @@ const Power = (props) => {
       {values.contract.power_type === 'power-higher-15kw' && (
         <>
           <PowerInputs
-            namePrefix="contract"
+            name="contract.power"
             numInputs={6}
             {...props}
-            values={values?.contract}
+            values={values?.contract.power}
             errors={errors?.contract}
             touched={touched?.contract}
           />

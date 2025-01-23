@@ -12,19 +12,20 @@ const handleChangePower = (
   const regex = moreThanOneDecimal ? regexThreeDecimal : regexOneDecimal
 
   const match = regex.exec(event.target.value)
+
   let result = match[0].replace(',', '.')
   result = result.replace("'", '.')
 
   if (!moreThan15Kw && result > 15) {
     result = result.slice(0, -1)
   }
-
   setFieldValue(event.target.name, result)
 }
 
 const PowerInputs = (props) => {
   const { t } = useTranslation()
   const {
+    name,
     values,
     handleBlur,
     errors,
@@ -34,10 +35,12 @@ const PowerInputs = (props) => {
   } = props
 
   return Array.from(Array(numInputs).keys()).map((inputNum) => {
-    const attr = inputNum === 0 ? 'power' : `power${inputNum + 1}`
+    const attr = inputNum === 0 ? 'power1' : `power${inputNum + 1}`
+    const moreThan15Kw = numInputs === 2 ? false : true
 
     return (
       <InputField
+        name={`${name}.${attr}`}
         required={true}
         key={attr}
         textFieldLabel={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
@@ -50,18 +53,18 @@ const PowerInputs = (props) => {
             : `P${inputNum + 1}`
         }
         numInputs={numInputs}
-        onChange={(event) =>
+        handleChange={(event) =>
           handleChangePower(event, setFieldValue, {
-            moreThanOneDecimal: values?.has_service || values?.moreThan15Kw,
-            moreThan15Kw: values?.moreThan15Kw
+            moreThanOneDecimal: moreThan15Kw,
+            moreThan15Kw: moreThan15Kw
           })
         }
-        onBlur={handleBlur}
-        value={values?.[attr]}
+        handleBlur={handleBlur}
+        touched={touched?.contract}
+        value={values[attr]}
         error={errors?.[attr] && touched?.[attr]}
         helperText={
-          (touched?.[attr] && errors?.[attr]) ||
-          (values.has_service && t('HELP_POPOVER_POWER'))
+          (touched?.[attr] && errors?.[attr]) || t('HELP_POPOVER_POWER')
         }
       />
     )

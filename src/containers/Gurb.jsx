@@ -119,7 +119,12 @@ const Gurb = (props) => {
       supply_point_accepted: false
     },
     contract: {
-      power_type: undefined
+      power_type: undefined,
+      power: {
+        power1: undefined,
+        power2: undefined,
+        power3: undefined
+      }
     }
   }
 
