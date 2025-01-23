@@ -34,10 +34,10 @@ import {
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 11
+const MAX_STEP_NUMBER = 13
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5]
-const CONTRACT_STEPS = [6, 7, 8, 9, 10]
+const CONTRACT_STEPS = [6, 7, 8, 9, 10, 11, 12, 13]
 
 const Gurb = (props) => {
   const { i18n, t } = useTranslation()

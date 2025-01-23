@@ -88,6 +88,33 @@ export const textHelper1 = {
   fontSize: '14px'
 }
 
+export const textReviewLabel = {
+  display: 'flex',
+  fontFamily: 'Inter',
+  color: '#7E7E7E',
+  alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '400'
+}
+
+export const textReviewValue = {
+  display: 'flex',
+  fontFamily: 'Inter',
+  color: '#363636',
+  alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '400'
+}
+
+export const textReviewSubtitle = {
+  display: 'flex',
+  fontFamily: 'Inter',
+  color: '#7E7E7E',
+  alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '600'
+}
+
 export const containerSpacing = {
   display: 'flex',
   padding: '0.3rem',
