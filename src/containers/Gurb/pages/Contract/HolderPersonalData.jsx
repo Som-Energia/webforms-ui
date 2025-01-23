@@ -49,6 +49,7 @@ const HolderPersonalData = (props) => {
             touched={touched?.holder?.name}
             value={values?.holder.name}
             error={errors?.holder?.name}
+            required={true}
           />
         </Grid>
         <Grid item xs={4}>
@@ -64,6 +65,7 @@ const HolderPersonalData = (props) => {
             touched={touched?.holder?.surname1}
             value={values?.holder.surname1}
             error={errors?.holder?.surname1}
+            required={true}
           />
         </Grid>
         <Grid item xs={4}>
@@ -79,6 +81,7 @@ const HolderPersonalData = (props) => {
             touched={touched?.holder?.surname2}
             value={values?.holder.surname2}
             error={errors?.holder?.surname2}
+            required={true}
           />
         </Grid>
         <Grid item xs={12}>
@@ -94,6 +97,7 @@ const HolderPersonalData = (props) => {
             touched={touched?.holder?.email}
             value={values?.holder.email}
             error={errors?.holder?.email}
+            required={true}
           />
         </Grid>
         <Grid item xs={12}>
@@ -109,6 +113,7 @@ const HolderPersonalData = (props) => {
             touched={touched?.holder?.email2}
             value={values?.holder.email2}
             error={errors?.holder?.email2}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
@@ -123,6 +128,7 @@ const HolderPersonalData = (props) => {
             touched={touched?.holder?.phone1}
             value={values?.holder.phone1}
             error={errors?.holder?.phone1}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>

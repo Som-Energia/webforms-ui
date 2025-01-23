@@ -107,6 +107,7 @@ const NewMemberDetails = (props) => {
         value={values?.new_member.nif}
         error={errors?.new_member?.nif}
         isLoading={loading}
+        required={true}
       />
       <Grid container columnSpacing={2}>
         <Grid item xs={4}>
@@ -122,6 +123,7 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.name}
             value={values?.new_member.name}
             error={errors?.new_member?.name}
+            required={true}
           />
         </Grid>
         <Grid item xs={4}>
@@ -137,6 +139,7 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.surname1}
             value={values?.new_member.surname1}
             error={errors?.new_member?.surname1}
+            required={true}
           />
         </Grid>
         <Grid item xs={4}>
@@ -152,6 +155,7 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.surname2}
             value={values?.new_member.surname2}
             error={errors?.new_member?.surname2}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
@@ -167,6 +171,7 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.email}
             value={values?.new_member.email}
             error={errors?.new_member?.email}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
@@ -182,6 +187,7 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.email2}
             value={values?.new_member.email2}
             error={errors?.new_member?.email2}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
@@ -196,6 +202,7 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.phone1}
             value={values?.new_member.phone1}
             error={errors?.new_member?.phone1}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
@@ -222,6 +229,7 @@ const NewMemberDetails = (props) => {
             '& .MuiInputLabel-root': { color: '#B3B3B3' },
             marginTop: '0.5rem'
           }}
+          required
           select
           fullWidth
           InputProps={{

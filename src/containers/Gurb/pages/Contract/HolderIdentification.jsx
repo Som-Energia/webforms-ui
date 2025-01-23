@@ -105,6 +105,7 @@ const HolderIdentification = (props) => {
         touched={touched?.holder?.nif}
         value={values?.holder.nif}
         error={errors?.holder?.nif}
+        required={true}
       />
       <Box marginTop={'3rem'}>
         <Typography sx={textHeader4}>{t('GURB_HOLDER_QUESTION')}</Typography>

@@ -79,6 +79,7 @@ const MemberDetails = (props) => {
         touched={touched?.member?.nif}
         value={values?.member.nif}
         error={errors?.member?.nif}
+        required={true}
       />
       <InputField
         textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
@@ -91,6 +92,7 @@ const MemberDetails = (props) => {
         value={values?.member.number}
         error={errors?.is_member}
         isLoading={loading}
+        required={true}
       />
     </>
   )
