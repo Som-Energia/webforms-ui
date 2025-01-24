@@ -20,6 +20,12 @@ const HolderPersonalData = (props) => {
 
   const { t } = useTranslation()
 
+  const handleChangeName = (event) => {
+    let value = event.target.value.match(/^[a-zA-Z]*/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   const handleChangePhone = (event) => {
     let value = event.target.value.match(/[0-9]{0,14}/)
     value = value[0]
@@ -38,11 +44,10 @@ const HolderPersonalData = (props) => {
       <Grid container columnSpacing={2} sx={{ marginBottom: '6rem' }}>
         <Grid item xs={4}>
           <InputField
+            name={'holder.name'}
             textFieldLabel={t('NAME')}
             textFieldName={t('NAME')}
-            handleChange={(event) => {
-              setFieldValue('holder.name', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('holder.name', true)
             }}
@@ -54,11 +59,10 @@ const HolderPersonalData = (props) => {
         </Grid>
         <Grid item xs={4}>
           <InputField
+            name={'holder.surname1'}
             textFieldLabel={t('HOLDER_SURNAME1')}
             textFieldName={t('HOLDER_SURNAME1')}
-            handleChange={(event) => {
-              setFieldValue('holder.surname1', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('holder.surname1', true)
             }}
@@ -70,11 +74,10 @@ const HolderPersonalData = (props) => {
         </Grid>
         <Grid item xs={4}>
           <InputField
+            name={'holder.surname2'}
             textFieldLabel={t('HOLDER_SURNAME2')}
             textFieldName={t('HOLDER_SURNAME2')}
-            handleChange={(event) => {
-              setFieldValue('holder.surname2', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('holder.surname2', true)
             }}

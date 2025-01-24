@@ -76,6 +76,12 @@ const NewMemberDetails = (props) => {
     setFieldTouched('new_member.nif', true)
   }
 
+  const handleChangeName = (event) => {
+    let value = event.target.value.match(/^[a-zA-Z]*/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   const handleChangePhone = (event) => {
     let value = event.target.value.match(/[0-9]{0,14}/)
     value = value[0]
@@ -112,11 +118,10 @@ const NewMemberDetails = (props) => {
       <Grid container columnSpacing={2}>
         <Grid item xs={4}>
           <InputField
+            name={'new_member.name'}
             textFieldLabel={t('NAME')}
             textFieldName={t('NAME')}
-            handleChange={(event) => {
-              setFieldValue('new_member.name', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('new_member.name', true)
             }}
@@ -128,11 +133,10 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={4}>
           <InputField
+            name={'new_member.surname1'}
             textFieldLabel={t('HOLDER_SURNAME1')}
             textFieldName={t('HOLDER_SURNAME1')}
-            handleChange={(event) => {
-              setFieldValue('new_member.surname1', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('new_member.surname1', true)
             }}
@@ -144,11 +148,10 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={4}>
           <InputField
+            name={'new_member.surname2'}
             textFieldLabel={t('HOLDER_SURNAME2')}
             textFieldName={t('HOLDER_SURNAME2')}
-            handleChange={(event) => {
-              setFieldValue('new_member.surname2', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('new_member.surname2', true)
             }}
