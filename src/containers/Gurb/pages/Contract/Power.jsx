@@ -6,6 +6,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import PowerInputs from '../../components/PowerInputs'
 import SomStepper from '../../components/SomStepper'
+import RequiredTitle from '../../components/RequiredTitle'
 
 import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'
@@ -55,7 +56,11 @@ const Power = (props) => {
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
       <Box marginTop={'3rem'} marginBottom={'4rem'}>
-        <Typography sx={textHeader4}>{t('GURB_POWER_QUESTION')}</Typography>
+        <RequiredTitle
+          text={t('GURB_POWER_QUESTION')}
+          textStyle={textHeader4}
+          required={true}
+        />
         <Typography sx={textHeader5}>{t('GURB_POWER_HELPER')}</Typography>
         <Chooser
           options={options}

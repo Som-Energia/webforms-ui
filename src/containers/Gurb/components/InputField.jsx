@@ -9,6 +9,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
+import RequiredTitle from './RequiredTitle'
 
 export const HelperText = ({
   helperText,
@@ -42,13 +43,17 @@ const InputField = ({
   endAdornmentText = false,
   startAdornmentText = false,
   numInputs = false,
-  name=false
+  name = false
 }) => {
   const { t } = useTranslation()
 
   return (
     <Box sx={{ marginTop: '2rem' }}>
-      <Typography sx={textHeader4}>{textFieldName}</Typography>
+      <RequiredTitle
+        text={textFieldName}
+        textStyle={textHeader4}
+        required={required}
+      />
       <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
       <TextField
         sx={{
@@ -58,7 +63,6 @@ const InputField = ({
         }}
         name={name}
         disabled={readonlyField}
-        required={required}
         fullWidth
         InputProps={{
           sx: { borderRadius: '8px', display: 'flex' },

@@ -3,14 +3,13 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
-import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 import SomStepper from '../../components/SomStepper'
 import CadastralReference from '../../components/CadastralReference'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-import { textCheckbox } from '../../gurbTheme'
+import { textCheckbox, textHeader4 } from '../../gurbTheme'
 
 import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../components/DragDrop'
@@ -55,7 +54,11 @@ const SupplyPointData = (props) => {
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
       <CadastralReference {...props} />
-      <DragDrop />
+      <DragDrop
+        fieldName={t('GURB_ELECTRIC_BILL_UPLOAD')}
+        textStyle={textHeader4}
+        required={false}
+      />
       <FormControlLabel
         sx={{ ...textCheckbox, marginTop: '2rem' }}
         control={

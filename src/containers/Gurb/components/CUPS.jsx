@@ -64,6 +64,7 @@ const CUPS = (props) => {
       value={values.cups}
       error={errors?.cups}
       isLoading={loading}
+      required={true}
     />
   )
 }

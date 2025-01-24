@@ -6,6 +6,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import SomStepper from '../../components/SomStepper'
 import LocationInput from '../../components/AddressAutocompletedField'
+import RequiredTitle from '../../components/RequiredTitle'
 
 import ArticleIcon from '@mui/icons-material/Article'
 import Typography from '@mui/material/Typography'
@@ -119,9 +120,11 @@ const TaxAddress = (props) => {
         readonlyField={true}
       />
       <Box marginTop={'3rem'} marginBottom={'4rem'}>
-        <Typography sx={textHeader4}>
-          {t('GURB_HOLDER_ADDRESS_QUESTION')}
-        </Typography>
+        <RequiredTitle
+          text={t('GURB_HOLDER_ADDRESS_QUESTION')}
+          textStyle={textHeader4}
+          required={true}
+        />
         <Typography sx={textHeader5}>
           {t('GURB_HOLDER_ADDRESS_QUESTION_HELPER')}
         </Typography>

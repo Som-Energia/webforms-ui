@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import SomStepper from '../../components/SomStepper'
+import RequiredTitle from '../../components/RequiredTitle'
 import { HelperText } from '../../components/InputField'
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
@@ -68,9 +69,11 @@ const HolderVoluntaryDonation = (props) => {
         />
       </Box>
       <Box marginTop={'4rem'} marginBottom={'4rem'}>
-        <Typography sx={textHeader4}>
-          {t('GURB_VOLUNTARY_DONATION_QUESTION')}
-        </Typography>
+        <RequiredTitle
+          text={t('GURB_VOLUNTARY_DONATION_QUESTION')}
+          textStyle={textHeader4}
+          required={true}
+        />
         <Chooser
           options={options}
           value={values.holder.voluntary_donation}

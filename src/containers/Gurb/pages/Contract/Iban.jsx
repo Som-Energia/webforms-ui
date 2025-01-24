@@ -93,6 +93,7 @@ const HolderIban = (props) => {
         value={values?.holder.iban}
         error={errors?.holder?.iban_valid || errors?.holder?.iban}
         isLoading={loading}
+        required={true}
       />
       <FormControlLabel
         sx={{ ...textCheckbox, marginTop: '2rem' }}

@@ -5,9 +5,9 @@ import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import SomStepper from '../../components/SomStepper'
+import RequiredTitle from '../../components/RequiredTitle'
 
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 import { checkMemberVat } from '../../../../services/api'
@@ -108,7 +108,11 @@ const HolderIdentification = (props) => {
         required={true}
       />
       <Box marginTop={'3rem'}>
-        <Typography sx={textHeader4}>{t('GURB_HOLDER_QUESTION')}</Typography>
+        <RequiredTitle
+          text={t('GURB_HOLDER_QUESTION')}
+          textStyle={textHeader4}
+          required={true}
+        />
         <Chooser
           options={options}
           value={values.holder.has_holder}

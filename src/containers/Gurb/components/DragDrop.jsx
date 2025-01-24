@@ -11,10 +11,11 @@ import Alert from '@mui/material/Alert'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
+import RequiredTitle from './RequiredTitle'
 import { textBody1, textBody3, textSubtitle2 } from '../gurbTheme'
 import { uploadFile } from '../../../services/api'
 
-export default function DragDrop() {
+const DragDrop = ({ fieldName, textStyle, required }) => {
   const { t } = useTranslation()
 
   const [drag, setDrag] = useState(false)
@@ -111,6 +112,11 @@ export default function DragDrop() {
 
   return (
     <>
+      <RequiredTitle
+        text={fieldName}
+        textStyle={{ ...textStyle, marginBottom: '-1.5rem', marginTop: '2rem' }}
+        required={required}
+      />
       <Card
         ref={dropRef}
         sx={{
@@ -167,3 +173,4 @@ export default function DragDrop() {
     </>
   )
 }
+export default DragDrop
