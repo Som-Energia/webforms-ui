@@ -43,7 +43,7 @@ const PowerInputs = (props) => {
         name={`${name}.${attr}`}
         required={true}
         key={attr}
-        textFieldLabel={t('QUINA_POTENCIA_TENS_CONTRACTADA')}
+        textFieldName={t('GURB_CURRENT_POWER')}
         endAdornmentText={'kW'}
         startAdornmentText={
           numInputs <= 2

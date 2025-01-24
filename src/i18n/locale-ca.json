@@ -836,6 +836,7 @@
     "GURB_POWER_TITLE": "5. Contractació potència",
     "GURB_POWER_QUESTION": "Quina potència tens contractada?",
     "GURB_POWER_HELPER":"Per evitar problemes de tramitació, posa la mateixa potència que apareix a la factura actual. Podràs sol·licitar canvis de potència una vegada estigui el contracte activat amb Som Energia.",
+    "GURB_CURRENT_POWER": "Anota la potència ACTUAL del teu contracte",
     "GURB_POWER_LOWER_15_HEADER":"Potència inferior o igual a 15 kW",
     "GURB_POWER_LOWER_15_HELPER": "Més informació sobre els períodes de les potències de la tarifa 2.0TD",
     "GURB_POWER_HIGHER_15_HEADER": "Potència superior a 15 kW",
