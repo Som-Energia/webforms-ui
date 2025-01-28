@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.6.2 2025-01-28
+
+- Fix: Maintenance screen language depending on url
+
 ## 2.6.1 2025-01-23
 
 - Fix: Matomo calls and context
