@@ -1,12 +1,14 @@
+import { useContext, useEffect, useState } from 'react'
+
 import { useTranslation } from 'react-i18next'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import SomStepper from '../../components/SomStepper'
+import { ReviewField, ReviewTable } from '../../components/ReviewField'
 
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Divider from '@mui/material/Divider'
 
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import PersonIcon from '@mui/icons-material/Person'
@@ -20,10 +22,12 @@ import {
   iconRequirements,
   textBody1,
   textHeader4,
-  textReviewSubtitle,
-  textSubtitle2
+  textReviewLabel
 } from '../../gurbTheme'
-import ReviewField from '../../components/ReviewField'
+import { getPrices } from '../../../../services/api'
+import { THOUSANDS_CONVERSION_FACTOR } from '../../../../services/utils'
+
+import Loading from '../../../../components/Loading'
 
 const ContractSummary = (props) => {
   const {
@@ -38,6 +42,9 @@ const ContractSummary = (props) => {
   } = props
 
   const { t } = useTranslation()
+
+  const [loading, setLoading] = useState(true)
+  const [prices, setPrices] = useState({})
 
   const reviewFields = [
     [
@@ -142,173 +149,153 @@ const ContractSummary = (props) => {
   ]
 
   const reviewPrices = [
-    [
-      {
-        title: t('GURB_REVIEW_PRICES_ENERGY_TITLE'),
-        field: [
-          {
-            reviewLabel: t('GURB_REVIEW_PROCEDURE_TYPE_LABEL'),
-            reviewValue: values.member.number
-          },
-          {
-            reviewLabel: t('GURB_REVIEW_PROCEDURE_TYPE_LABEL'),
-            reviewValue: values.member.number
-          }
-        ]
-      },
-      {
-        title: t('GURB_REVIEW_PRICES_POWER_TITLE'),
-        field: [
-          {
-            reviewLabel: t('GURB_REVIEW_PRICES_POWER_LABEL'),
-            reviewValue: values.member.number
-          },
-          {
-            reviewLabel: t('GURB_REVIEW_PRICES_POWER_LABEL'),
-            reviewValue: values.member.number
-          }
-        ]
-      }
-    ]
+    {
+      title: t('GURB_REVIEW_PRICES_ENERGY_TITLE'),
+      field: 'energia'
+    },
+    {
+      title: t('GURB_REVIEW_PRICES_POWER_TITLE'),
+      field: 'potencia'
+    }
   ]
 
-  return (
-    <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation title={t('GURB_CONTRACT_SUMMARY_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-        {reviewFields.map((rows, index) => {
-          return (
-            <>
-              <Grid
-                key={index}
-                container
-                columnSpacing={2}
-                sx={{ marginY: '2rem' }}>
-                {rows.map((details, index) => {
-                  return (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      sm={6}
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row'
-                      }}>
-                      {details.icon}
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'flex-start',
-                          flexDirection: 'column',
-                          marginLeft: '2rem'
-                        }}>
-                        <Typography sx={textHeader4}>
-                          {details.title}
-                        </Typography>
-                        {details.subtitle && (
-                          <Typography sx={textBody1}>
-                            {details.subtitle}
-                          </Typography>
-                        )}
-                        {details.field &&
-                          details.field.map((detail, index) => {
-                            return (
-                              <ReviewField
-                                key={index}
-                                label={detail.reviewLabel}
-                                value={detail.reviewValue}
-                              />
-                            )
-                          })}
-                        {details.footer && (
-                          <Typography sx={textSubtitle2}>
-                            {details.footer}
-                          </Typography>
-                        )}
-                      </Box>
-                    </Grid>
-                  )
-                })}
-              </Grid>
-              <Divider />
-            </>
-          )
-        })}
-        <Grid
-          container
-          columnSpacing={2}
-          sx={{
-            marginLeft: '0.2rem',
-            marginTop: '2rem',
-            marginBottom: '-1rem'
-          }}>
-          <LocalOfferOutlinedIcon sx={iconRequirements} />
-          <Box
+  const Prices = ({ concept, name }) => {
+    let keys = concept ? Object.keys(concept) : []
+    keys.sort()
+
+    const differentValues = new Set(
+      Object.keys(concept).map((key) => concept[key]?.value)
+    )
+    if (differentValues.size === 1) {
+      for (const key in concept) {
+        return (
+          <ReviewField
+            label={`${name}`}
+            value={`${concept[key]?.value} ${concept[key]?.unit}`}
+          />
+        )
+      }
+    }
+    const labels =
+      keys.length === 2
+        ? [t('PEAK'), t('VALLEY')]
+        : keys.length === 3
+        ? [t('PEAK'), t('FLAT'), t('VALLEY')]
+        : keys
+
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+        {concept ? (
+          <Grid
+            container
             sx={{
               display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              flexDirection: 'column',
-              marginLeft: '2rem'
+              flexDirection: 'column'
             }}>
-            <Typography sx={textHeader4}>
-              {t('GURB_PRICES_AFTER_TAXES')}
-            </Typography>
-          </Box>
-        </Grid>
-        {reviewPrices.map((rows, index) => {
-          return (
-            <>
-              <Grid
-                key={index}
-                container
-                columnSpacing={2}
-                sx={{ marginBottom: '2rem', marginX: '2rem' }}>
-                {rows.map((details, index) => {
-                  return (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      sm={6}
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row'
-                      }}>
-                      {details.icon}
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'flex-start',
-                          flexDirection: 'column',
-                          marginLeft: '2rem',
-                          marginBottom: '2rem'
-                        }}>
-                        <Typography sx={textReviewSubtitle}>
-                          {details.title}
-                        </Typography>
-                        {details.field &&
-                          details.field.map((detail, index) => {
-                            return (
-                              <ReviewField
-                                key={index}
-                                label={detail.reviewLabel}
-                                value={detail.reviewValue}
-                              />
-                            )
-                          })}
-                      </Box>
-                    </Grid>
-                  )
-                })}
+            {keys.map((key, index) => (
+              <Grid item key={index}>
+                <ReviewField
+                  label={`${labels[index]}:`}
+                  value={`${concept[key]?.value} ${concept[key]?.unit}`}
+                />
               </Grid>
-            </>
-          )
-        })}
+            ))}
+          </Grid>
+        ) : (
+          <>{t('UNAVAILABLE')}</>
+        )}
+      </Box>
+    )
+  }
+
+  console.log('VALUES', values, loading)
+  useEffect(() => {
+    console.log('useEffect!!')
+    setLoading(true)
+    let powerFields = Object.values(
+      Object.fromEntries(
+        Object.entries(values.contract.power).filter(([key]) =>
+          key.startsWith('power')
+        )
+      )
+    )
+    let maxPower = Math.round(
+      Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
+    )
+    getPrices({
+      tariff: '2.0TD', // values.contract.tariff,
+      max_power: '5000',
+      vat: '60973654X', //values.holder.dni,
+      cnae: '9820', // values.supply_point.cnae,
+      city_id: 5102 // values.address.city
+    })
+      .then((response) => {
+        const tariffPrices = response?.data['current']
+        setPrices(tariffPrices)
+        setLoading(false)
+      })
+      .catch((error) => {
+        setLoading(false)
+        console.error(error)
+      })
+  }, [])
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <>
+      {/* <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}> */}
+
+      <TextRecomendation title={t('GURB_CONTRACT_SUMMARY_TITLE')} />
+      <SomStepper step={activeStep} connectors={7 + 1} />
+      <ReviewTable tableFields={reviewFields} />
+
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          marginY: '2rem',
+          gap: '2rem'
+        }}>
+        <LocalOfferOutlinedIcon sx={iconRequirements} />
+        <Box>
+          <Typography sx={textHeader4}>
+            {t('GURB_REVIEW_PRICES_POWER_TITLE')}
+          </Typography>
+
+          <Grid container columnSpacing={2}>
+            {reviewPrices.map((detail, index) => {
+              return (
+                <Grid
+                  key={index}
+                  item
+                  xs={12}
+                  sm={6}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginY: '1rem'
+                  }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}>
+                    <Typography sx={textReviewLabel}>
+                      {t(detail.title)}
+                    </Typography>
+                    <Prices concept={prices?.[`${detail.field}`]} />
+                  </Box>
+                </Grid>
+              )
+            })}
+          </Grid>
+        </Box>
       </Box>
 
       <Typography

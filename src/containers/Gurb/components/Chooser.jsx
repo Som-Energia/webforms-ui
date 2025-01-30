@@ -25,7 +25,8 @@ const Option = ({
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start'
+          alignItems: 'flex-start',
+          marginBottom: '1rem'
         }}>
         {icon}
         {isSelected && (
@@ -61,7 +62,16 @@ const Chooser = (props) => {
         marginBottom: '1rem'
       }}>
       {options.map((option, index) => (
-        <Grid key={index} item xs={12} sm={6} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Grid
+          key={index}
+          item
+          xs={12}
+          sm={6}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
           <Option
             isSelected={option?.id === value}
             setSelected={setOptionSelection}
@@ -69,11 +79,9 @@ const Chooser = (props) => {
             icon={option?.icon}
             textHeader={option?.textHeader}
             textBody={option?.textBody}
-            />
+          />
           {option?.helper && (
-            <Box sx={{ marginTop: '1rem'} }>
-              {option?.helper}
-            </Box>
+            <Box sx={{ marginTop: '1rem' }}>{option?.helper}</Box>
           )}
         </Grid>
       ))}

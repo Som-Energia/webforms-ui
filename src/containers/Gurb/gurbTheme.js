@@ -122,7 +122,6 @@ export const containerSpacing = {
 }
 
 export const iconRequirements = {
-  marginBottom: '1rem',
   borderRadius: '8px',
   border: '1px solid #D9D9D9',
   color: '#1E1E1E',
@@ -132,7 +131,6 @@ export const iconRequirements = {
 }
 
 export const iconOffRequirements = {
-  marginBottom: '1rem',
   borderRadius: '8px',
   border: '1px solid #D9D9D9',
   color: '#1E1E1E',
