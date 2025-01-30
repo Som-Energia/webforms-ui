@@ -5,40 +5,11 @@ import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 
-import { textReviewLabel, textReviewValue } from '../gurbTheme'
+import ReviewField from './ReviewField'
+import { textBody1, textHeader4, textSubtitle2 } from '../../gurbTheme'
 
-import { textBody1, textHeader4, textSubtitle2 } from '../gurbTheme'
 
-export const ReviewField = ({ label, value }) => {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center'
-      }}>
-      {label !== false && (
-        <Box className="field__title">
-          <Typography
-            sx={{
-              paddingRight: '0.5rem',
-              paddingBlock: '0.2rem',
-              ...textReviewLabel
-            }}
-            noWrap>
-            {label}
-          </Typography>
-        </Box>
-      )}
-      <Box>
-        <Typography sx={{ ...textReviewValue }} variant="body2">
-          {value}
-        </Typography>
-      </Box>
-    </Box>
-  )
-}
-
-export const ReviewTable = ({ tableFields }) => {
+const ReviewTable = ({ tableFields }) => {
   return tableFields.map((rows, index) => {
     return (
       <React.Fragment key={index}>
@@ -99,3 +70,5 @@ export const ReviewTable = ({ tableFields }) => {
     )
   })
 }
+
+export default ReviewTable
