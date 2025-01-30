@@ -46,6 +46,12 @@ const TaxAddress = (props) => {
     setAddressValue(value)
   }
 
+  const handleChangeAddressDetails = (event) => {
+    let value = event.target.value.match(/^[A-Za-z0-9 ]*/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   const initializeAddress = () => {
     setFieldValue('tax_address', {
       has_different_address: values.tax_address.has_different_address,
@@ -136,16 +142,78 @@ const TaxAddress = (props) => {
       </Box>
       {values.tax_address.has_different_address ===
       'supplypoint-tax-address-different' ? (
-        <LocationInput
-          textFieldLabel={t('GURB_ADDRESS_LABEL')}
-          textFieldName={t('GURB_TAX_ADDRESS_FIELD')}
-          textFieldHelper={t('GURB_ADDRESS_HELPER')}
-          id="tax_address-street"
-          name="tax_address.street"
-          value={addressValue}
-          onChange={handleAddressChange}
-          onLocationSelected={handleLocationSelected}
-        />
+        <>
+          <LocationInput
+            textFieldLabel={t('GURB_ADDRESS_LABEL')}
+            textFieldName={t('GURB_TAX_ADDRESS_FIELD')}
+            textFieldHelper={t('GURB_ADDRESS_HELPER')}
+            id="tax_address-street"
+            name="tax_address.street"
+            value={addressValue}
+            onChange={handleAddressChange}
+            onLocationSelected={handleLocationSelected}
+          />
+          <Grid container columnSpacing={2} sx={{ marginBottom: '6rem' }}>
+            <Grid item xs={2.5}>
+              <InputField
+                name={'holder.name'}
+                textFieldName={t('NUMBER')}
+                // handleChange={handleChangeName}
+                // handleBlur={() => {
+                //   setFieldTouched('holder.name', true)
+                // }}
+                touched={touched?.tax_address?.number}
+                value={values?.tax_address?.number}
+                error={errors?.tax_address?.number}
+                required={true}
+              />
+            </Grid>
+            <Grid item xs={2.5}>
+              <InputField
+                name={'tax_address.floor'}
+                textFieldName={t('FLOOR')}
+                handleChange={handleChangeAddressDetails}
+                touched={touched?.tax_address?.floor}
+                value={values?.tax_address?.floor}
+                error={errors?.tax_address?.floor}
+                required={false}
+              />
+            </Grid>
+            <Grid item xs={2.5}>
+              <InputField
+                name={'tax_address.door'}
+                textFieldName={t('DOOR')}
+                handleChange={handleChangeAddressDetails}
+                touched={touched?.tax_address?.door}
+                value={values?.tax_address?.door}
+                error={errors?.tax_address?.door}
+                required={false}
+              />
+            </Grid>
+            <Grid item xs={2.5}>
+              <InputField
+                name={'tax_address.stairs'}
+                textFieldName={t('STAIRS')}
+                handleChange={handleChangeAddressDetails}
+                touched={touched?.tax_address?.stairs}
+                value={values?.tax_address?.stairs}
+                error={errors?.tax_address?.stairs}
+                required={false}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <InputField
+                name={'tax_address.bloc'}
+                textFieldName={t('BLOCK')}
+                handleChange={handleChangeAddressDetails}
+                touched={touched?.tax_address?.bloc}
+                value={values?.tax_address?.bloc}
+                error={errors?.tax_address?.bloc}
+                required={false}
+              />
+            </Grid>
+          </Grid>
+        </>
       ) : (
         <></>
       )}

@@ -4,8 +4,11 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+
 import Typography from '@mui/material/Typography'
 import { textHeader4 } from '../gurbTheme'
+import InputField from './InputField'
 
 export default function LocationInput({
   textFieldLabel,
@@ -13,7 +16,9 @@ export default function LocationInput({
   textFieldHelper,
   value,
   onChange,
-  onLocationSelected
+  onLocationSelected,
+  numberField = false,
+  required = false
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()

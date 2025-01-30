@@ -43,6 +43,10 @@ export const holderTaxAddressValidations = Yup.object().shape({
       is: 'supplypoint-tax-address-different',
       then: Yup.string().required('NO_ADDRESS_NUMBER')
     }),
+    floor: Yup.string(),
+    door: Yup.string(),
+    stairs: Yup.string(),
+    bloc: Yup.string(),
     postal_code: Yup.string().when('has_different_address', {
       is: 'supplypoint-tax-address-different',
       then: Yup.string().required('NO_ADDRESS_POSTAL_CODE')
@@ -91,7 +95,6 @@ export const powerValidations = Yup.object().shape({
         power4: Yup.string(),
         power5: Yup.string(),
         power6: Yup.string()
-
       })
       .when('power_type', {
         is: 'power-higher-15kw',
