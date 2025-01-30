@@ -180,8 +180,8 @@ const ContractSummary = (props) => {
       keys.length === 2
         ? [t('PEAK'), t('VALLEY')]
         : keys.length === 3
-        ? [t('PEAK'), t('FLAT'), t('VALLEY')]
-        : keys
+          ? [t('PEAK'), t('FLAT'), t('VALLEY')]
+          : keys
 
     return (
       <Box
@@ -248,8 +248,6 @@ const ContractSummary = (props) => {
     <Loading />
   ) : (
     <>
-      {/* <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}> */}
-
       <TextRecomendation title={t('GURB_CONTRACT_SUMMARY_TITLE')} />
       <SomStepper step={activeStep} connectors={7 + 1} />
       <ReviewTable tableFields={reviewFields} />
@@ -257,18 +255,21 @@ const ContractSummary = (props) => {
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'flex-start',
-          flexDirection: 'row',
+          flexDirection: 'column',
           marginY: '2rem',
-          gap: '2rem'
         }}>
-        <LocalOfferOutlinedIcon sx={iconRequirements} />
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '2rem'
+          }}>
+          <LocalOfferOutlinedIcon sx={iconRequirements} />
           <Typography sx={textHeader4}>
             {t('GURB_REVIEW_PRICES_POWER_TITLE')}
           </Typography>
-
-          <Grid container columnSpacing={2}>
+        </Box>
+          <Grid container sx={{marginLeft: '5rem'}}>
             {reviewPrices.map((detail, index) => {
               return (
                 <Grid
@@ -277,25 +278,16 @@ const ContractSummary = (props) => {
                   xs={12}
                   sm={6}
                   sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
                     marginY: '1rem'
                   }}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}>
-                    <Typography sx={textReviewLabel}>
-                      {t(detail.title)}
-                    </Typography>
-                    <Prices concept={prices?.[`${detail.field}`]} />
-                  </Box>
+                  <Typography sx={textReviewLabel}>
+                    {t(detail.title)}
+                  </Typography>
+                  <Prices concept={prices?.[`${detail.field}`]} />
                 </Grid>
               )
             })}
           </Grid>
-        </Box>
       </Box>
 
       <Typography
