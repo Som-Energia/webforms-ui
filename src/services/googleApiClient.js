@@ -15,7 +15,7 @@ export default async function getGoogleMapsPlacesApiClient() {
 
   const loader = new Loader({
     apiKey: import.meta.env.VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY,
-    version: 'weekly'
+    version: 'beta'
   })
 
   placesApiClient = await loader.importLibrary('places')

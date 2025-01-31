@@ -41,26 +41,28 @@ export default function LocationInput({
         sessionTokenRef.current = new places.AutocompleteSessionToken()
       }
 
-      new places.AutocompleteService().getPlacePredictions(
-        {
-          input: inputValue,
-          sessionToken: sessionTokenRef.current
-        },
-        (predictions, status) => {
-          // when the status is 'ZERO_RESULTS', we treat it as if there are 0 suggestions, no error
-          // you could change this behavior if you require users to pick a suggestion
-          if (status === places.PlacesServiceStatus.ZERO_RESULTS) {
-            setSuggestions([])
-            return
-          }
-          if (status !== places.PlacesServiceStatus.OK || !predictions) {
-            // if you allow your users to enter arbitrary locations that aren't autocompleted,
-            // then you can fail silently here and track the error (with Sentry for example)
-            return
-          }
-          setSuggestions(predictions)
-        }
-      )
+      // TODO: Need to be addresses
+      let request = {
+        // locationRestriction: {
+        //   west: -122.44,
+        //   north: 37.8,
+        //   east: -122.39,
+        //   south: 37.78,
+        // },
+        // origin: { lat: 37.7893, lng: -122.4039 },
+        region: "es",
+        sessionToken: sessionTokenRef.current,
+        input: inputValue,
+      }
+      console.log(request)
+      const { suggestions } = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
+      console.log(suggestions)
+      let placesSuggestions = []
+      for (let suggestion of suggestions) {
+        const placePrediction = suggestion.placePrediction
+        placesSuggestions.push(placePrediction.text.toString())
+      }
+      setSuggestions(placesSuggestions)
     }, 350)
   }
 
@@ -124,17 +126,16 @@ export default function LocationInput({
   return (
     <>
       <Autocomplete
-        debug
         autoHighlight
         autoComplete
         includeInputInList
-        filterSelectedOptions
+        // filterSelectedOptions
         value={value}
         getOptionLabel={(option) =>
           typeof option === 'string' ? option : option.description
         }
         options={suggestions}
-        noOptionsText="No locations"
+        noOptionsText="No locations" // TODO: Translate this!
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
           <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
