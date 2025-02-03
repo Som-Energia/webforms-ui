@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import getGoogleMapsPlacesApiClient from '../../../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -25,12 +25,14 @@ export default function LocationInput({
   const sessionTokenRef = useRef()
 
   const [suggestions, setSuggestions] = useState([])
+  const [inputValue, setInputValue] = useState('')
   const [placeDetail, setPlaceDetail] = useState()
+  const [loadingResults, setLoadingResults] = useState(false)
 
-  const loadSuggestions = async (inputValue) => {
+  useEffect(() => {
+    setLoadingResults(true)
     clearTimeout(timeoutRef.current)
     if (!inputValue || inputValue.trim().length <= 3) {
-      setSuggestions([])
       return
     }
 
@@ -54,17 +56,17 @@ export default function LocationInput({
         sessionToken: sessionTokenRef.current,
         input: inputValue,
       }
-      console.log(request)
-      const { suggestions } = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
-      console.log(suggestions)
+      const result = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
       let placesSuggestions = []
-      for (let suggestion of suggestions) {
+      for (let suggestion of result?.suggestions) {
         const placePrediction = suggestion.placePrediction
         placesSuggestions.push(placePrediction.text.toString())
       }
+      console.log("useEffect", inputValue, placesSuggestions)
       setSuggestions(placesSuggestions)
+      setLoadingResults(false)
     }, 350)
-  }
+  }, [inputValue])
 
   const handleSuggestionSelected = async (event, newValue) => {
     if (newValue === null) {
@@ -123,22 +125,19 @@ export default function LocationInput({
       }
     )
   }
+
   return (
     <>
       <Autocomplete
-        autoHighlight
-        autoComplete
-        includeInputInList
-        // filterSelectedOptions
-        value={value}
-        getOptionLabel={(option) =>
-          typeof option === 'string' ? option : option.description
-        }
+        value={value || inputValue || ''}
         options={suggestions}
+        filterOptions={(option) => option} // Required to see options without perfect match with Google Places API
+        loading={loadingResults}
+        loadingText="Loading..." // TODO: Translate this!
         noOptionsText="No locations" // TODO: Translate this!
         onChange={handleSuggestionSelected}
-        renderInput={(params) => (
-          <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
+        renderInput={(params) => {
+          return <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
             <Typography sx={textHeader4}>{textFieldName}</Typography>
             <TextField
               sx={{
@@ -148,20 +147,14 @@ export default function LocationInput({
                 marginTop: '0.5rem'
               }}
               {...params}
+              value={inputValue}
               label={textFieldLabel}
               helperText={textFieldHelper}
-              onChange={(event) => {
-                const newValue = event.target.value
-                // update controlled input value
-                onChange(newValue)
-                // clear any previously loaded place details
-                setPlaceDetail(undefined)
-                // trigger the load of suggestions
-                loadSuggestions(newValue)
-              }}
+              onChange={(event) => setInputValue(event.target.value)}
             />
           </Box>
-        )}
+        }
+        }
       />
       <div id="googlemaps-attribution-container"></div>
     </>
