@@ -4,11 +4,9 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 
 import Typography from '@mui/material/Typography'
 import { textHeader4 } from '../gurbTheme'
-import InputField from './InputField'
 
 export default function LocationInput({
   textFieldLabel,
@@ -43,26 +41,22 @@ export default function LocationInput({
         sessionTokenRef.current = new places.AutocompleteSessionToken()
       }
 
-      // TODO: Need to be addresses
       let request = {
-        // locationRestriction: {
-        //   west: -122.44,
-        //   north: 37.8,
-        //   east: -122.39,
-        //   south: 37.78,
-        // },
-        // origin: { lat: 37.7893, lng: -122.4039 },
-        region: "es",
+        region: 'es',
         sessionToken: sessionTokenRef.current,
         input: inputValue,
+        includedPrimaryTypes: ['route'],
+        includedRegionCodes: ['es'],
       }
       const result = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
       let placesSuggestions = []
       for (let suggestion of result?.suggestions) {
         const placePrediction = suggestion.placePrediction
-        placesSuggestions.push(placePrediction.text.toString())
+        placesSuggestions.push({
+          id: placePrediction.placeId.toString(),
+          text: placePrediction.text.toString()
+        })
       }
-      console.log("useEffect", inputValue, placesSuggestions)
       setSuggestions(placesSuggestions)
       setLoadingResults(false)
     }, 350)
@@ -77,53 +71,29 @@ export default function LocationInput({
     }
 
     // update the text in the input to the full selected suggestion text
-    const suggestion = newValue
-    onChange(suggestion.description)
+    // const suggestion = newValue
+    onChange(newValue)
 
     // clear suggestion list
     setSuggestions([])
 
-    const places = await getGoogleMapsPlacesApiClient()
+    const { Place } = await getGoogleMapsPlacesApiClient()
 
     // Clear the session token, it can only be used in one request
     const sessionToken = sessionTokenRef.current
     sessionTokenRef.current = undefined
 
-    // @see https://developers.google.com/maps/documentation/javascript/places
-    new places.PlacesService(
-      // this is the node to populate attribution details on
-      document.getElementById('googlemaps-attribution-container')
-    ).getDetails(
-      {
-        placeId: suggestion.place_id,
-        fields: [
-          // you can pick the fields you want for your application
-          // @see https://developers.google.com/maps/documentation/javascript/place-data-fields
-          'formatted_address',
-          'name',
-          'geometry.location',
-          'place_id',
-          'plus_code',
-          'address_components',
-          'geometry.location_type'
-        ],
-        // pass the session token so all autocomplete requests are counted as part of this places request
-        sessionToken
-      },
-      (place, status) => {
-        if (status === places.PlacesServiceStatus.OK) {
-          // set the place detail in this state component
-          // you can use this info to show the detail in the UI, or maybe a checkmark
-          setPlaceDetail(place)
-
-          // notify up the tree that a location is selected
-          onLocationSelected(place)
-        } else {
-          // silently fail here and track it with an error tracker like Sentry
-          // or fail loudly if users are required to use a suggestion from the list
-        }
-      }
-    )
+    // @see https://developers.google.com/maps/documentation/javascript/place-details
+    const place = new Place({
+      id: newValue.id,
+      sessionToken,  // pass the session token so all autocomplete requests are counted as part of this places request
+    })
+    await place.fetchFields({
+      fields: ["displayName", "formattedAddress", "location", "addressComponents", "primaryType", "types", "adrFormatAddress", "primaryTypeDisplayName", "primaryTypeDisplayNameLanguageCode"]
+    })
+    console.log(place)
+    console.log(place.formattedAddress)
+    console.log(place.location.lat(), place.location.lng())
   }
 
   return (
@@ -132,13 +102,16 @@ export default function LocationInput({
         value={value || inputValue || ''}
         options={suggestions}
         filterOptions={(option) => option} // Required to see options without perfect match with Google Places API
+        getOptionLabel={(option) => option.text ? option.text : option}
         loading={loadingResults}
         loadingText="Loading..." // TODO: Translate this!
         noOptionsText="No locations" // TODO: Translate this!
         onChange={handleSuggestionSelected}
-        renderInput={(params) => {
-          return <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
-            <Typography sx={textHeader4}>{textFieldName}</Typography>
+        renderInput={(params) => (
+          <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            <Typography sx={textHeader4}>
+              {textFieldName}
+            </Typography>
             <TextField
               sx={{
                 '& .MuiFormHelperText-root': { color: '#B3B3B3' },
@@ -153,10 +126,8 @@ export default function LocationInput({
               onChange={(event) => setInputValue(event.target.value)}
             />
           </Box>
-        }
-        }
+        )}
       />
-      <div id="googlemaps-attribution-container"></div>
     </>
   )
 }

@@ -6,6 +6,9 @@ import LocationInput from '../../components/AddressAutocompletedField'
 import { setMunicipisWithPostalCode } from '../../../../services/utils'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
+import Box from '@mui/material/Box'
+import InputField from '../../components/InputField'
+
 
 const Address = (props) => {
   const { t } = useTranslation()
@@ -86,6 +89,16 @@ const Address = (props) => {
       })
     }
   }
+
+  const handleChangeInteger = (event) => {
+    let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
+    setFieldValue(event.target.name, cleanedValue)
+  }
+
+  const handleChange = (event) => {
+    setFieldValue(event.target.name, event.target.value)
+  }
+
   return (
     <>
       <TextRecomendation
@@ -102,6 +115,63 @@ const Address = (props) => {
         onChange={handleAddressChange}
         onLocationSelected={handleLocationSelected}
       />
+      <Box sx={{ display: 'flex', gap: '2rem' }}>
+        <Box>
+          <InputField
+            name={'address.number'}
+            textFieldName={t('NUMBER')}
+            handleChange={handleChangeInteger}
+            touched={touched?.address?.number}
+            value={values?.address?.number}
+            error={errors?.address?.number}
+            required={true}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.floor'}
+            textFieldName={t('FLOOR')}
+            handleChange={handleChangeInteger}
+            touched={touched?.address?.floor}
+            value={values?.address?.floor}
+            error={errors?.address?.floor}
+            required={false}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.door'}
+            textFieldName={t('DOOR')}
+            handleChange={handleChangeInteger}
+            touched={touched?.address?.door}
+            value={values?.address?.door}
+            error={errors?.address?.door}
+            required={false}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.stairs'}
+            textFieldName={t('STAIRS')}
+            handleChange={handleChange}
+            touched={touched?.address?.stairs}
+            value={values?.address?.stairs}
+            error={errors?.address?.stairs}
+            required={false}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.bloc'}
+            textFieldName={t('BLOCK')}
+            handleChange={handleChange}
+            touched={touched?.address?.bloc}
+            value={values?.address?.bloc}
+            error={errors?.address?.bloc}
+            required={false}
+          />
+        </Box>
+      </Box>
     </>
   )
 }

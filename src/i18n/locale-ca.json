@@ -263,6 +263,8 @@
     "NUMBER": "Número",
     "FLOOR": "Pis",
     "DOOR": "Porta",
+    "STAIRS": "Escala",
+    "BLOCK": "Bloc",
     "CODI_POSTAL": "Codi postal",
     "NO_NUMBER": "No has introduït el número",
     "HI_HA_LLUM_AL_PUNT_DE_SUBMINISTRAMENT": "Hi ha llum actualment?",
