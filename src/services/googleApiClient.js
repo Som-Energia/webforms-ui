@@ -22,3 +22,46 @@ export default async function getGoogleMapsPlacesApiClient() {
 
   return placesApiClient
 }
+
+export async function getPlaceDetails(placeId, sessionTokenRef) {
+  const { Place } = await getGoogleMapsPlacesApiClient()
+
+  // Clear the session token, it can only be used in one request
+  const sessionToken = sessionTokenRef.current
+  sessionTokenRef.current = undefined
+
+  // @see https://developers.google.com/maps/documentation/javascript/place-details
+  const place = new Place({
+    id: placeId,
+    sessionToken,  // pass the session token so all autocomplete requests are counted as part of this places request
+  })
+  await place.fetchFields({
+    fields: ["displayName", "formattedAddress", "location", "addressComponents", "primaryType", "types", "adrFormatAddress", "primaryTypeDisplayName", "primaryTypeDisplayNameLanguageCode"]
+  })
+  return place
+}
+
+export async function searchPlace(string, sessionTokenRef) {
+  const places = await getGoogleMapsPlacesApiClient() // TODO: with {}
+  if (!sessionTokenRef.current) {
+    sessionTokenRef.current = new places.AutocompleteSessionToken()
+  }
+
+  let request = {
+    region: 'es',
+    sessionToken: sessionTokenRef.current,
+    input: string,
+    includedPrimaryTypes: ['route'],
+    includedRegionCodes: ['es'],
+  }
+  const result = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
+  let placesSuggestions = []
+  for (let suggestion of result?.suggestions) {
+    const placePrediction = suggestion.placePrediction
+    placesSuggestions.push({
+      id: placePrediction.placeId.toString(),
+      text: placePrediction.text.toString()
+    })
+  }
+  return placesSuggestions
+}

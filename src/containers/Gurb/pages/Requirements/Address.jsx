@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import TextRecomendation from '../../components/TextRecomendation'
@@ -8,6 +8,7 @@ import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Box from '@mui/material/Box'
 import InputField from '../../components/InputField'
+import { getPlaceDetails, searchPlace } from '../../../../services/googleApiClient'
 
 
 const Address = (props) => {
@@ -15,6 +16,7 @@ const Address = (props) => {
   const { values, errors, touched, setFieldValue, setFieldTouched } = props
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
   const [addressValue, setAddressValue] = useState('')
+  const sessionTokenRef = useRef()
 
   useEffect(() => {
     const postalCode = values.address.postal_code
@@ -22,6 +24,45 @@ const Address = (props) => {
       setMunicipisWithPostalCode(postalCode, setFieldValue, 'address', values)
     }
   }, [values.address.postal_code])
+
+  useEffect(() => {
+    if (addressValue && values.address.number) {
+      getPlaceDetails(addressValue.id, sessionTokenRef)
+        .then((place) => {
+          const postalCode = place.addressComponents.find(component =>
+            component.types.includes('postal_code')
+          );
+          setFieldValue('address.postal_code', postalCode.longText)
+          const street = place.addressComponents.find(component =>
+            component.types.includes('route')
+          );
+          setFieldValue('address.street', street.longText)
+          const fullAddress = place.formattedAddress.replace(/,/, ` ${values.address.number},`)
+          searchPlace(fullAddress, sessionTokenRef)
+            .then((suggestions) => {
+              if (suggestions.length > 0) {
+                getPlaceDetails(suggestions[0].id, sessionTokenRef)
+                  .then((place) => {
+                    setFieldValue('address.lat', place.location.lat())
+                    setFieldValue('address.long', place.location.lng())
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              }
+              else {
+                console.log("Error!")
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+  
+        }).catch((error) => {
+          console.log(error)
+        })
+    }
+  }, [addressValue, values.address.number])
 
   const handleCheckGurbDistance = async () => {
     // TODO: waiting to know where gurb id comes from
@@ -114,6 +155,7 @@ const Address = (props) => {
         value={addressValue}
         onChange={handleAddressChange}
         onLocationSelected={handleLocationSelected}
+        sessionTokenRef={sessionTokenRef}
       />
       <Box sx={{ display: 'flex', gap: '2rem' }}>
         <Box>

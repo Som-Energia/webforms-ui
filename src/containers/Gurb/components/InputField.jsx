@@ -48,7 +48,7 @@ const InputField = ({
   const { t } = useTranslation()
 
   return (
-    <Box sx={{ marginTop: '2rem' }}>
+    <Box>
       <RequiredTitle
         text={textFieldName}
         textStyle={textHeader4}

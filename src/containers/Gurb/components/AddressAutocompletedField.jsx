@@ -15,12 +15,12 @@ export default function LocationInput({
   value,
   onChange,
   onLocationSelected,
+  sessionTokenRef,
   numberField = false,
   required = false
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
-  const sessionTokenRef = useRef()
 
   const [suggestions, setSuggestions] = useState([])
   const [inputValue, setInputValue] = useState('')
@@ -45,7 +45,7 @@ export default function LocationInput({
         region: 'es',
         sessionToken: sessionTokenRef.current,
         input: inputValue,
-        includedPrimaryTypes: ['route'],
+        includedPrimaryTypes: ['route'],  // TODO: Ojo que deixa colar "street_address"
         includedRegionCodes: ['es'],
       }
       const result = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
