@@ -25,42 +25,53 @@ const Address = (props) => {
     }
   }, [values.address.postal_code])
 
+  const updateAddressValues = async () => {
+    getPlaceDetails(addressValue.id, sessionTokenRef)
+      .then((place) => {
+        const postalCode = place.addressComponents.find(component =>
+          component.types.includes('postal_code')
+        );
+        const street = place.addressComponents.find(component =>
+          component.types.includes('route')
+        );
+        const fullAddress = place.formattedAddress.replace(/,/, ` ${values.address.number},`)
+        searchPlace(fullAddress, sessionTokenRef)
+          .then((suggestions) => {
+            if (suggestions.length > 0) {
+              getPlaceDetails(suggestions[0].id, sessionTokenRef)
+                .then((place) => {
+                  const updatedValues = {
+                    ...values,
+                    address: {
+                      ...values.address,
+                      lat: place.location.lat(),
+                      long: place.location.lng(),
+                      postal_code: postalCode.longText,
+                      street: street.longText,
+                    }
+                  }
+                  setValues(updatedValues)
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+            }
+            else {
+              console.log("Address not found")
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     if (addressValue && values.address.number) {
-      getPlaceDetails(addressValue.id, sessionTokenRef)
-        .then((place) => {
-          const postalCode = place.addressComponents.find(component =>
-            component.types.includes('postal_code')
-          );
-          setFieldValue('address.postal_code', postalCode.longText)
-          const street = place.addressComponents.find(component =>
-            component.types.includes('route')
-          );
-          setFieldValue('address.street', street.longText)
-          const fullAddress = place.formattedAddress.replace(/,/, ` ${values.address.number},`)
-          searchPlace(fullAddress, sessionTokenRef)
-            .then((suggestions) => {
-              if (suggestions.length > 0) {
-                getPlaceDetails(suggestions[0].id, sessionTokenRef)
-                  .then((place) => {
-                    setFieldValue('address.lat', place.location.lat())
-                    setFieldValue('address.long', place.location.lng())
-                  })
-                  .catch((error) => {
-                    console.log(error)
-                  })
-              }
-              else {
-                console.log("Error!")
-              }
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-  
-        }).catch((error) => {
-          console.log(error)
-        })
+      updateAddressValues()
     }
   }, [addressValue, values.address.number])
 

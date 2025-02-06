@@ -36,7 +36,7 @@ export async function getPlaceDetails(placeId, sessionTokenRef) {
     sessionToken,  // pass the session token so all autocomplete requests are counted as part of this places request
   })
   await place.fetchFields({
-    fields: ["displayName", "formattedAddress", "location", "addressComponents", "primaryType", "types", "adrFormatAddress", "primaryTypeDisplayName", "primaryTypeDisplayNameLanguageCode"]
+    fields: ["formattedAddress", "location", "addressComponents"]
   })
   return place
 }
