@@ -12,8 +12,8 @@ import ArticleIcon from '@mui/icons-material/Article'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import { setMunicipisWithPostalCode } from '../../../../services/utils'
 import { getPlaceDetails } from '../../../../services/googleApiClient'
+import { getMunicipisByPostalCode } from '../../../../services/api'
 
 import {
   iconOffRequirements,
@@ -38,46 +38,52 @@ const TaxAddress = (props) => {
 
   const { t } = useTranslation()
   const [addressValue, setAddressValue] = useState(values.tax_address.street)
+  const [numberValue, setNumberValue] = useState(values.tax_address.number)
   const sessionTokenRef = useRef()
 
   const handleHolderAddressQuestion = (value) => {
     setFieldValue('tax_address.has_different_address', value)
   }
 
-  const updateAddressValues = async (value) => {
-    getPlaceDetails(value.id, sessionTokenRef)
-      .then((place) => {
-        const postalCode = place.addressComponents.find(component =>
-          component.types.includes('postal_code')
-        );
-        const street = place.addressComponents.find(component =>
-          component.types.includes('route')
-        );
-        const updatedValues = {
-          ...values,
-          tax_address: {
-            ...values.tax_address,
-            postal_code: postalCode.longText,
-            street: street.longText,
-          }
-        }
-        setValues(updatedValues)
-      }).catch((error) => {
-        console.log(error)
-      })
-  }
+  const updateAddressValues = async () => {
+    try {
+      const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
+      const postalCode = place.addressComponents.find(component =>
+        component.types.includes('postal_code')
+      );
+      const municipis = await getMunicipisByPostalCode(postalCode?.longText)
+      const street = place.addressComponents.find(component =>
+        component.types.includes('route')
+      );
 
-  const handleAddressChange = (value) => {
-    setAddressValue(value)
-    if (value === null) {
-      cleanAddressValues()
+      const updatedValues = {
+        ...values,
+        tax_address: {
+          ...values.tax_address,
+          number: numberValue,
+          postal_code: postalCode?.longText || '',
+          street: street?.longText || '',
+          state: municipis && municipis[0] ? municipis[0][0]?.provincia : {},
+          city: municipis && municipis[0] ? municipis[0][0]?.municipi : {},
+        }
+      }
+
+      setValues(updatedValues);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (addressValue && numberValue) {
+      updateAddressValues()
     }
     else {
-      updateAddressValues(value)
+      cleanAddress()
     }
-  }
+  }, [addressValue, numberValue])
 
-  const cleanAddressValues = () => {
+  const cleanAddress = () => {
     setFieldValue('tax_address', {
       has_different_address: values.tax_address.has_different_address,
       street: '',
@@ -88,17 +94,14 @@ const TaxAddress = (props) => {
     })
   }
 
-  useEffect(() => {
-    const postalCode = values.tax_address.postal_code
-    if (postalCode?.length > 4) {
-      setMunicipisWithPostalCode(
-        postalCode,
-        setFieldValue,
-        'tax_address',
-        values
-      )
-    }
-  }, [values.tax_address.postal_code])
+  const handleAddressChange = (value) => {
+    setAddressValue(value)
+  }
+
+  const handleChangeNumber = (event) => {
+    let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
+    setNumberValue(cleanedValue)
+  }
 
   const handleChangeInteger = (event) => {
     let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
@@ -176,9 +179,9 @@ const TaxAddress = (props) => {
               <InputField
                 name={'tax_address.number'}
                 textFieldName={t('NUMBER')}
-                handleChange={handleChangeInteger}
+                handleChange={handleChangeNumber}
                 touched={touched?.tax_address?.number}
-                value={values?.tax_address?.number}
+                value={numberValue}
                 error={errors?.tax_address?.number}
                 required={true}
               />
