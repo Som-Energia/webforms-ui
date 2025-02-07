@@ -13,9 +13,9 @@ import { getPlaceDetails, searchPlace } from '../../../../services/googleApiClie
 
 const Address = (props) => {
   const { t } = useTranslation()
-  const { values, errors, touched, setFieldValue, setFieldTouched } = props
+  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } = props
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
-  const [addressValue, setAddressValue] = useState('')
+  const [addressValue, setAddressValue] = useState(values.address.street)
   const sessionTokenRef = useRef()
 
   useEffect(() => {
@@ -122,26 +122,6 @@ const Address = (props) => {
     })
   }
 
-  const handleLocationSelected = (selection) => {
-    if (selection === null) {
-      initializeAddress()
-    } else {
-      const address = Object.assign(
-        {},
-        ...selection.address_components.map((x) => ({
-          [x.types[0]]: x.long_name
-        }))
-      )
-      setFieldValue('address', {
-        street: address?.route,
-        number: address?.street_number || '',
-        lat: selection?.geometry?.location?.lat(),
-        long: selection?.geometry?.location?.lng(),
-        postal_code: address?.postal_code
-      })
-    }
-  }
-
   const handleChangeInteger = (event) => {
     let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
     setFieldValue(event.target.name, cleanedValue)
@@ -165,7 +145,6 @@ const Address = (props) => {
         name="address.street"
         value={addressValue}
         onChange={handleAddressChange}
-        onLocationSelected={handleLocationSelected}
         sessionTokenRef={sessionTokenRef}
       />
       <Box sx={{ display: 'flex', gap: '2rem' }}>

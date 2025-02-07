@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
@@ -12,8 +12,8 @@ import ArticleIcon from '@mui/icons-material/Article'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 import { setMunicipisWithPostalCode } from '../../../../services/utils'
+import { getPlaceDetails} from '../../../../services/googleApiClient'
 
 import {
   iconOffRequirements,
@@ -21,6 +21,7 @@ import {
   textHeader4,
   textHeader5
 } from '../../gurbTheme'
+
 
 const TaxAddress = (props) => {
   const {
@@ -31,28 +32,52 @@ const TaxAddress = (props) => {
     setFieldValue,
     setFieldError,
     setErrors,
-    setFieldTouched
+    setFieldTouched,
+    setValues,
   } = props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
-  const [addressValue, setAddressValue] = useState('')
+  const [addressValue, setAddressValue] = useState(values.tax_address.street)
+  const sessionTokenRef = useRef()
 
   const handleHolderAddressQuestion = (value) => {
     setFieldValue('tax_address.has_different_address', value)
   }
 
+  const updateAddressValues = async (value) => {
+    getPlaceDetails(value.id, sessionTokenRef)
+      .then((place) => {
+        const postalCode = place.addressComponents.find(component =>
+          component.types.includes('postal_code')
+        );
+        const street = place.addressComponents.find(component =>
+          component.types.includes('route')
+        );
+        const updatedValues = {
+          ...values,
+          tax_address: {
+            ...values.tax_address,
+            postal_code: postalCode.longText,
+            street: street.longText,
+          }
+        }
+        setValues(updatedValues)
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
+
   const handleAddressChange = (value) => {
     setAddressValue(value)
+    if (value === null) {
+      cleanAddressValues()
+    }
+    else {
+      updateAddressValues(value)
+    }
   }
 
-  const handleChangeAddressDetails = (event) => {
-    let value = event.target.value.match(/^[A-Za-z0-9 ]*/)
-    value = value[0]
-    setFieldValue(event.target.name, value)
-  }
-
-  const initializeAddress = () => {
+  const cleanAddressValues = () => {
     setFieldValue('tax_address', {
       has_different_address: values.tax_address.has_different_address,
       street: '',
@@ -61,25 +86,6 @@ const TaxAddress = (props) => {
       state: { id: '', name: '' },
       city: { id: '', name: '' }
     })
-  }
-
-  const handleLocationSelected = (selection) => {
-    if (selection === null) {
-      initializeAddress()
-    } else {
-      const address = Object.assign(
-        {},
-        ...selection.address_components.map((x) => ({
-          [x.types[0]]: x.long_name
-        }))
-      )
-      setFieldValue('tax_address', {
-        has_different_address: values.tax_address.has_different_address,
-        street: address?.route,
-        number: address?.street_number || '',
-        postal_code: address?.postal_code
-      })
-    }
   }
 
   useEffect(() => {
@@ -151,8 +157,9 @@ const TaxAddress = (props) => {
         />
       </Box>
       {values.tax_address.has_different_address ===
-      'supplypoint-tax-address-different' ? (
+        'supplypoint-tax-address-different' ? (
         <>
+          {console.log(errors)}
           <LocationInput
             textFieldLabel={t('GURB_ADDRESS_LABEL')}
             textFieldName={t('GURB_TAX_ADDRESS_FIELD')}
@@ -161,7 +168,7 @@ const TaxAddress = (props) => {
             name="tax_address.street"
             value={addressValue}
             onChange={handleAddressChange}
-            onLocationSelected={handleLocationSelected}
+            sessionTokenRef={sessionTokenRef}
           />
           <Box sx={{ display: 'flex', gap: '2rem' }}>
             <Box>
