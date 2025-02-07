@@ -25,6 +25,7 @@ export default function LocationInput({
   const [suggestions, setSuggestions] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [loadingResults, setLoadingResults] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
     setLoadingResults(true)
@@ -70,14 +71,17 @@ export default function LocationInput({
               sx={{
                 '& .MuiFormHelperText-root': { color: '#B3B3B3' },
                 '& .MuiInputLabel-root': { color: '#B3B3B3' },
-                '& .MuiOutlinedInput-root': { borderRadius: '8px' },
-                marginTop: '0.5rem'
+                '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' },
+                marginTop: '0.5rem',
               }}
               {...params}
               required={required}
               value={inputValue}
-              label={textFieldLabel}
+              label={!inputValue && !isFocused ? textFieldLabel: ''}
+              InputLabelProps={{ shrink: false }}
               helperText={textFieldHelper}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               onChange={(event) => setInputValue(event.target.value)}
             />
           </Box>
