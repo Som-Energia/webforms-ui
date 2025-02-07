@@ -5,7 +5,7 @@ import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import SomStepper from '../../components/SomStepper'
-import RequiredTitle from '../../components/RequiredTitle'
+import RequiredTitle from '../../components/InputTitle'
 
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
 import Box from '@mui/material/Box'

@@ -138,6 +138,7 @@ const Address = (props) => {
         text={t('GURB_ADDRESS_TITLE_HELPER')}
       />
       <LocationInput
+        required
         textFieldLabel={t('GURB_ADDRESS_LABEL')}
         textFieldName={t('GURB_ADDRESS_FIELD')}
         textFieldHelper={t('GURB_ADDRESS_HELPER')}

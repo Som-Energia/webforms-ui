@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import getGoogleMapsPlacesApiClient, { getPlaceDetails, searchPlace } from '../../../services/googleApiClient'
+import { searchPlace } from '../../../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 
-import Typography from '@mui/material/Typography'
 import { textHeader4 } from '../gurbTheme'
+import InputTitle from './InputTitle'
+
 
 export default function LocationInput({
   textFieldLabel,
@@ -60,9 +61,11 @@ export default function LocationInput({
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
           <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
-            <Typography sx={textHeader4}>
-              {textFieldName}
-            </Typography>
+            <InputTitle
+              text={textFieldName}
+              textStyle={textHeader4}
+              required={required}
+            />
             <TextField
               sx={{
                 '& .MuiFormHelperText-root': { color: '#B3B3B3' },
@@ -71,6 +74,7 @@ export default function LocationInput({
                 marginTop: '0.5rem'
               }}
               {...params}
+              required={required}
               value={inputValue}
               label={textFieldLabel}
               helperText={textFieldHelper}

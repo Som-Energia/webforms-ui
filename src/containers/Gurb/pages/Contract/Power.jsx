@@ -6,7 +6,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import PowerInputs from '../../components/PowerInputs'
 import SomStepper from '../../components/SomStepper'
-import RequiredTitle from '../../components/RequiredTitle'
+import RequiredTitle from '../../components/InputTitle'
 
 import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import { textHeader2, textBody1 } from '../gurbTheme'
-import RequiredTitle from './RequiredTitle'
+import RequiredTitle from './InputTitle'
 
 const TextRecomendation = ({ title, text, required = false }) => {
   return (

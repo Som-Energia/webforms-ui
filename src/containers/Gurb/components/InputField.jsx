@@ -9,7 +9,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
-import RequiredTitle from './RequiredTitle'
+import InputTitle from './InputTitle'
 
 export const HelperText = ({
   helperText,
@@ -49,7 +49,7 @@ const InputField = ({
 
   return (
     <Box>
-      <RequiredTitle
+      <InputTitle
         text={textFieldName}
         textStyle={textHeader4}
         required={required}

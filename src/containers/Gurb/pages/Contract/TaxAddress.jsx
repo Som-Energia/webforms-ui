@@ -6,14 +6,14 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import SomStepper from '../../components/SomStepper'
 import LocationInput from '../../components/AddressAutocompletedField'
-import RequiredTitle from '../../components/RequiredTitle'
+import RequiredTitle from '../../components/InputTitle'
 
 import ArticleIcon from '@mui/icons-material/Article'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 import { setMunicipisWithPostalCode } from '../../../../services/utils'
-import { getPlaceDetails} from '../../../../services/googleApiClient'
+import { getPlaceDetails } from '../../../../services/googleApiClient'
 
 import {
   iconOffRequirements,
@@ -161,6 +161,7 @@ const TaxAddress = (props) => {
         <>
           {console.log(errors)}
           <LocationInput
+            required
             textFieldLabel={t('GURB_ADDRESS_LABEL')}
             textFieldName={t('GURB_TAX_ADDRESS_FIELD')}
             textFieldHelper={t('GURB_ADDRESS_HELPER')}

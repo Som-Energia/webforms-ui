@@ -11,7 +11,7 @@ import Alert from '@mui/material/Alert'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
-import RequiredTitle from './RequiredTitle'
+import RequiredTitle from './InputTitle'
 import { textBody1, textBody3, textSubtitle2 } from '../gurbTheme'
 import { uploadFile } from '../../../services/api'
 

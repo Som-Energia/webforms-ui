@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import SomStepper from '../../components/SomStepper'
-import RequiredTitle from '../../components/RequiredTitle'
+import RequiredTitle from '../../components/InputTitle'
 import { HelperText } from '../../components/InputField'
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
