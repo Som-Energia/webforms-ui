@@ -59,10 +59,10 @@ const Address = (props) => {
   };
 
   useEffect(() => {
-    if (addressValue && numberValue) {
+    if (addressValue?.id && numberValue) {
       updateAddressValues()
     }
-    else {
+    else if (!addressValue || !numberValue) {
       initializeAddress()
     }
   }, [addressValue, numberValue])
