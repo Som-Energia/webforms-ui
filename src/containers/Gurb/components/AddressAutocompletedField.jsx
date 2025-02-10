@@ -77,7 +77,7 @@ export default function LocationInput({
               {...params}
               required={required}
               value={inputValue}
-              label={!inputValue && !isFocused ? textFieldLabel: ''}
+              label={!value && !inputValue && !isFocused ? textFieldLabel: ''}
               InputLabelProps={{ shrink: false }}
               helperText={textFieldHelper}
               onFocus={() => setIsFocused(true)}

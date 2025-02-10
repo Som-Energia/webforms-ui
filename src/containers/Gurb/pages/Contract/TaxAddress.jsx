@@ -75,10 +75,10 @@ const TaxAddress = (props) => {
   };
 
   useEffect(() => {
-    if (addressValue && numberValue) {
+    if (addressValue?.id && numberValue) {
       updateAddressValues()
     }
-    else {
+    else if (!addressValue || !numberValue) {
       cleanAddress()
     }
   }, [addressValue, numberValue])
@@ -162,7 +162,6 @@ const TaxAddress = (props) => {
       {values.tax_address.has_different_address ===
         'supplypoint-tax-address-different' ? (
         <>
-          {console.log(errors)}
           <LocationInput
             required
             textFieldLabel={t('GURB_ADDRESS_LABEL')}
