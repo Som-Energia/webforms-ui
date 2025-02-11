@@ -43,4 +43,8 @@ cd cypress/fixtures/
 ln -s ../../../testdata/b2bs/holderChangePersonaldata.json .
 ```
 
+To get  `.env.development`:
+```sh
+ln -s $myit-docs_dir/it-docs/conf/webforms-ui/.env.development
+```
 We should have testdata repo!
