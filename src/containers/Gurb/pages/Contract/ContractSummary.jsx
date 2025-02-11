@@ -96,7 +96,7 @@ const ContractSummary = (props) => {
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
-            reviewValue: values.address.city
+            reviewValue: values.address.city.name
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CNAE'),

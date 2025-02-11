@@ -69,7 +69,7 @@ const Address = (props) => {
 
   const handleCheckGurbDistance = async () => {
     // TODO: waiting to know where gurb id comes from
-    const gurbId = 3
+    const gurbId = 2
     await checkGurbDistance(gurbId, values.address.lat, values.address.long)
       .then(({ data }) => {
         // data is false when address is outside gurb's 2km limit
