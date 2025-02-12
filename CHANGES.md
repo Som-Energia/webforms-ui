@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.6.3 2025-02-12
 
 - Change noticeAutonomous future flag value to false
 
