@@ -13,13 +13,13 @@ import ApadrinatingDetails from './pages/NewMember/ApadrinatingDetails'
 import NewMemberDetails from './pages/NewMember/NewMemberDetails'
 
 const NewMember = (props) => {
-  const { values } = props
+  const { values, activeStep } = props
   const { t } = useTranslation()
 
   const getMemberPage = () => {
-    if (values.has_member === 'member-on') {
+    if (activeStep === 0) {
       return <MemberDetails {...props} />
-    } else if (values.has_member === 'member-off') {
+    } else if (activeStep === 1) {
       return <NewMemberDetails {...props} />
     } else {
       return <ApadrinatingDetails {...props} />

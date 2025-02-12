@@ -1,13 +1,6 @@
 import * as Yup from 'yup'
 
-const newMemberValidations = Yup.object().shape({
-  member: Yup.object().shape({
-    has_member: Yup.string(),
-    is_member: Yup.bool(),
-    link_member: Yup.bool(),
-    nif: Yup.string().required('ERROR_REQUIRED_FIELD'),
-    number: Yup.number().required('ERROR_REQUIRED_FIELD')
-  }),
+export const newMemberValidations = Yup.object().shape({
   new_member: Yup.object().shape({
     nif: Yup.string()
       .length(9, 'ERROR_FIELD_LENGTH')
@@ -27,6 +20,26 @@ const newMemberValidations = Yup.object().shape({
     privacy_policy_accepted: Yup.bool()
       .required('UNACCEPTED_PRIVACY_POLICY')
       .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY')
+  })
+})
+
+export const apadrinatingValidations = Yup.object().shape({
+  member: Yup.object().shape({
+    has_member: Yup.string(),
+    is_member: Yup.bool(),
+    link_member: Yup.bool(),
+    nif: Yup.string().required('ERROR_REQUIRED_FIELD'),
+    number: Yup.number().required('ERROR_REQUIRED_FIELD')
+  })
+})
+
+export const alreadyMemberValidations = Yup.object().shape({
+  member: Yup.object().shape({
+    has_member: Yup.string(),
+    is_member: Yup.bool(),
+    link_member: Yup.bool(),
+    nif: Yup.string().required('ERROR_REQUIRED_FIELD'),
+    number: Yup.number().required('ERROR_REQUIRED_FIELD')
   })
 })
 

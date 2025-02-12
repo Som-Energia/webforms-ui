@@ -20,7 +20,11 @@ import {
   memberQuestionValidations,
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
-import newMemberValidations from './Gurb/newMemberValidations'
+import {
+  newMemberValidations,
+  alreadyMemberValidations,
+  apadrinatingValidations
+} from './Gurb/newMemberValidations'
 import {
   holderIbanValidations,
   holderIdentificationValidations,
@@ -34,10 +38,10 @@ import {
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 13
+const MAX_STEP_NUMBER = 15
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
-const NEW_MEMBER_STEP = [5]
-const CONTRACT_STEPS = [6, 7, 8, 9, 10, 11, 12, 13]
+const NEW_MEMBER_STEP = [5, 6, 7]
+const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15]
 
 const Gurb = (props) => {
   const { i18n, t } = useTranslation()
@@ -134,7 +138,9 @@ const Gurb = (props) => {
     addressValidations,
     selfConsumptionValidations,
     memberQuestionValidations,
+    alreadyMemberValidations,
     newMemberValidations,
+    apadrinatingValidations,
     holderIdentificationValidations,
     holderPersonalDataValidations,
     holderTaxAddressValidations,
@@ -144,14 +150,30 @@ const Gurb = (props) => {
     holderIbanValidations
   ]
 
-  const nextStep = () => {
-    const next = activeStep + 1
+  const nextStep = (formikProps) => {
+    let next = activeStep + 1
+    if (activeStep === 4) {
+      if (formikProps.values.has_member === 'member-off') {
+        next = activeStep + 2
+      }
+      else if (formikProps.values.has_member === 'apadrinating') {
+        next = activeStep + 3
+      }
+    }
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
-  const prevStep = () => {
-    const prev = activeStep - 1
+  const prevStep = (formikProps) => {
+    let prev = activeStep - 1
+    if (NEW_MEMBER_STEP.includes(activeStep)) {
+      if (formikProps.values.has_member === 'member-off') {
+        prev = activeStep - 2
+      }
+      else if (formikProps.values.has_member === 'apadrinating') {
+        prev = activeStep - 3
+      }
+    }
     setActiveStep(Math.max(0, prev))
   }
 
@@ -166,7 +188,7 @@ const Gurb = (props) => {
         />
       )
     } else if (NEW_MEMBER_STEP.includes(activeStep)) {
-      return <NewMember {...props} />
+      return <NewMember {...props} activeStep={NEW_MEMBER_STEP.indexOf(activeStep)} />
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
         <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
@@ -194,7 +216,7 @@ const Gurb = (props) => {
   const formikRef = useRef(null)
   useEffect(() => {
     formikRef.current.validateForm()
-    if (activeStep === 6) {
+    if (activeStep === 9) {
       NewMemberResult()
     }
   }, [activeStep])
