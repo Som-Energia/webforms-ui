@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Change noticeAutonomous future flag value to false
+
 ## 2.6.2 2025-01-28
 
 - Fix: Maintenance screen language depending on url
