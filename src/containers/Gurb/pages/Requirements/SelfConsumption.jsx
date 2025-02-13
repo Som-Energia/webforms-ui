@@ -53,6 +53,7 @@ const SelfConsumption = (props) => {
         required={true}
       />
       <Chooser
+        name='selfconsumption-question'
         options={options}
         value={values.has_selfconsumption}
         handleChange={handleSelfconsumptionQuestion}

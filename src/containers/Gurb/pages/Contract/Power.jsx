@@ -63,6 +63,7 @@ const Power = (props) => {
         />
         <Typography sx={textHeader5}>{t('GURB_POWER_HELPER')}</Typography>
         <Chooser
+          name='power_question'
           options={options}
           value={values.contract.power_type}
           handleChange={handlePowerQuestion}

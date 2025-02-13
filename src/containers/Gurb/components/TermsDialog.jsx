@@ -33,6 +33,7 @@ const TermsDialog = (props) => {
             {t('I_DECLINE')}
           </Button>
           <Button
+            data-cy='accept'
             sx={{ ...buttonGurbDark }}
             onClick={onAccept}
             variant="contained">

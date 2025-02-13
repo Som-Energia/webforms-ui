@@ -10,6 +10,7 @@ import InputTitle from './InputTitle'
 
 
 export default function LocationInput({
+  id,
   textFieldLabel,
   textFieldName,
   textFieldHelper,
@@ -52,6 +53,7 @@ export default function LocationInput({
   return (
     <>
       <Autocomplete
+        data-cy={id}
         value={value || inputValue || ''}
         options={suggestions}
         filterOptions={(option) => option} // Required to see options without perfect match with Google Places API
@@ -77,7 +79,7 @@ export default function LocationInput({
               {...params}
               required={required}
               value={inputValue}
-              label={!value && !inputValue && !isFocused ? textFieldLabel: ''}
+              label={!value && !inputValue && !isFocused ? textFieldLabel : ''}
               InputLabelProps={{ shrink: false }}
               helperText={textFieldHelper}
               onFocus={() => setIsFocused(true)}

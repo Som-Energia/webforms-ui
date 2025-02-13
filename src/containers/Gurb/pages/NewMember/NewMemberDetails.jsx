@@ -103,6 +103,7 @@ const NewMemberDetails = (props) => {
     <>
       <TextRecomendation title={t('GURB_NEW_MEMBER_TITLE')} />
       <InputField
+        name='new_member.nif'
         textFieldLabel={t('GURB_NIF_LABEL_NEW_MEMBER_FIELD')}
         textFieldName={t('GURB_NIF_FIELD')}
         textFieldHelper={t('GURB_NIF_HELPER')}
@@ -163,6 +164,7 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name='email'
             textFieldLabel={t('EMAIL')}
             textFieldName={t('EMAIL')}
             handleChange={(event) => {
@@ -179,6 +181,7 @@ const NewMemberDetails = (props) => {
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name='repeat_email'
             textFieldLabel={t('HOLDER_EMAIL_2')}
             textFieldName={t('HOLDER_EMAIL_2')}
             handleChange={(event) => {
@@ -262,6 +265,7 @@ const NewMemberDetails = (props) => {
           sx={{ ...textCheckbox, marginTop: '2rem' }}
           control={
             <Checkbox
+              data-cy="privacy_policy"
               checked={values?.new_member.privacy_policy_accepted}
               onChange={handleCheckboxChange}
             />

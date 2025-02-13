@@ -47,6 +47,7 @@ const MemberQuestion = (props) => {
     <>
       <TextRecomendation title={t('GURB_HAS_MEMBER_TITLE')} required={true} />
       <Chooser
+        name='member-question'
         options={options}
         value={values.has_member}
         handleChange={handleMemberQuestion}

@@ -89,6 +89,7 @@ const HolderPersonalData = (props) => {
         </Grid>
         <Grid item xs={12}>
           <InputField
+            name='email'
             textFieldLabel={t('EMAIL')}
             textFieldName={t('EMAIL')}
             handleChange={(event) => {
@@ -105,6 +106,7 @@ const HolderPersonalData = (props) => {
         </Grid>
         <Grid item xs={12}>
           <InputField
+            name='repeat_email'
             textFieldLabel={t('HOLDER_EMAIL_2')}
             textFieldName={t('HOLDER_EMAIL_2')}
             handleChange={(event) => {

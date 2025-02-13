@@ -20,5 +20,6 @@ import './contractCommands'
 import './holderChangeCommands'
 
 import './statusCommands'
+import './gurbCommands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

@@ -97,6 +97,7 @@ const HolderIdentification = (props) => {
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
       <InputField
+        name='holder_vat'
         textFieldLabel={t('GURB_NIF_LABEL')}
         textFieldName={t('GURB_HOLDER_NIF_FIELD')}
         textFieldNameHelper={t('GURB_HOLDER_NIF_FIELD_HELPER')}
@@ -114,6 +115,7 @@ const HolderIdentification = (props) => {
           required={true}
         />
         <Chooser
+          name='has_holder'
           options={options}
           value={values.holder.has_holder}
           handleChange={handleHolderQuestion}

@@ -63,6 +63,7 @@ const SupplyPointData = (props) => {
         sx={{ ...textCheckbox, marginTop: '2rem' }}
         control={
           <Checkbox
+            data-cy='supply_point_accepted'
             color="primary"
             onClick={handleClick}
             checked={values?.supply_point?.supply_point_accepted}

@@ -17,6 +17,7 @@ const Option = ({
 }) => {
   return (
     <Box
+      data-cy={optionId}
       sx={isSelected ? chooserGurbSelected : chooserGurb}
       onClick={() => {
         setSelected(optionId)
@@ -44,7 +45,7 @@ const Option = ({
 }
 
 const Chooser = (props) => {
-  const { options, value, handleChange } = props
+  const { options, value, handleChange, name } = props
 
   const setOptionSelection = (option) => {
     handleChange(option)
@@ -52,6 +53,7 @@ const Chooser = (props) => {
 
   return (
     <Grid
+      data-cy={name}
       container
       spacing={4}
       sx={{

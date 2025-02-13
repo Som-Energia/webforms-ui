@@ -75,6 +75,7 @@ const HolderVoluntaryDonation = (props) => {
           required={true}
         />
         <Chooser
+        name='donation_question'
           options={options}
           value={values.holder.voluntary_donation}
           handleChange={handleVoluntaryDonationQuestion}

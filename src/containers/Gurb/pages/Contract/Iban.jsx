@@ -83,6 +83,7 @@ const HolderIban = (props) => {
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
       <InputField
+        name='iban'
         textFieldLabel={t('GURB_IBAN_LABEL')}
         textFieldName={t('GURB_IBAN_FIELD')}
         textFieldNameHelper={t('GURB_IBAN_FIELD_HELPER')}
@@ -99,6 +100,7 @@ const HolderIban = (props) => {
         sx={{ ...textCheckbox, marginTop: '2rem' }}
         control={
           <Checkbox
+            data-cy='iban_check'
             checked={values?.holder.direct_debit_accepted}
             onChange={handleCheckboxChange}
           />

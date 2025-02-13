@@ -62,6 +62,7 @@ const InputField = ({
           marginTop: '0.5rem'
         }}
         name={name}
+        data-cy={name}
         disabled={readonlyField}
         fullWidth
         InputProps={{

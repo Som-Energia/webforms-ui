@@ -154,6 +154,7 @@ const TaxAddress = (props) => {
           {t('GURB_HOLDER_ADDRESS_QUESTION_HELPER')}
         </Typography>
         <Chooser
+          name='sameDirection'
           options={options}
           value={values.tax_address.has_different_address}
           handleChange={handleHolderAddressQuestion}
