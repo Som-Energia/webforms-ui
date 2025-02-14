@@ -12,8 +12,8 @@ describe('Contract', () => {
     cy.fixture('holderChangePersonaldata.json').as('personaldata')
   })
 
-  describe('New member and contract', function () {
-    it('HappyPath', function () {
+  describe('New contract', function () {  // TODO: before and after
+    it('New member', function () {
       cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
 
       cy.lightQuestion()
@@ -32,9 +32,65 @@ describe('Contract', () => {
 
       cy.personalDataHolder(this.data.personalData)
 
-      cy.taxAddress({...this.personaldata.invalidGurbAddress, sameDirection: true})
+      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
 
-      cy.choosePower({powers: [2, 3]})
+      cy.choosePower({ powers: [2, 3] })
+
+      cy.supplyPointData()
+
+      cy.donationQuestion()
+
+      cy.paymentData(this.data.randomIban)
+    })
+
+    it('Already member', function () {
+      cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
+
+      cy.lightQuestion()
+
+      cy.gurbAddress(this.personaldata.validGurbAddress)
+
+      cy.selfconsumptionQuestion(false)
+
+      cy.memberQuestion('member-on')
+
+      cy.identifyMember({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
+
+      cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
+
+      cy.personalDataHolder(this.data.personalData)
+
+      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
+
+      cy.choosePower({ powers: [2, 3] })
+
+      cy.supplyPointData()
+
+      cy.donationQuestion()
+
+      cy.paymentData(this.data.randomIban)
+    })
+
+    it('Apadrinating', function () {
+      cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
+
+      cy.lightQuestion()
+
+      cy.gurbAddress(this.personaldata.validGurbAddress)
+
+      cy.selfconsumptionQuestion(false)
+
+      cy.memberQuestion('apadrinating')
+
+      cy.identifyMember({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
+
+      cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
+
+      cy.personalDataHolder(this.data.personalData)
+
+      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
+
+      cy.choosePower({ powers: [2, 3] })
 
       cy.supplyPointData()
 

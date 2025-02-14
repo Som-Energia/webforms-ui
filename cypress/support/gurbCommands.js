@@ -57,10 +57,10 @@ Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('identifyMember', ({vat, code}) => {
+Cypress.Commands.add('identifyMember', ({vat, number}) => {
 
   cy.get('[data-cy="vat"]').type(vat)
-  cy.get('[data-cy="code"]').type(code)
+  cy.get('[data-cy="code"]').type(number)
 
   cy.get('[data-cy=next]').click()
 })
