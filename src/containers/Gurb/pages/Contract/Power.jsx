@@ -69,7 +69,7 @@ const Power = (props) => {
           handleChange={handlePowerQuestion}
         />
       </Box>
-      {values.contract.power_type === 'power-lower-15kw' && (
+      {values.contract.power_type === 'power-lower-15kw' ? (
         <>
           <PowerInputs
             name="contract.power"
@@ -84,8 +84,8 @@ const Power = (props) => {
             iconHelper={true}
           />
         </>
-      )}
-      {values.contract.power_type === 'power-higher-15kw' && (
+      ) : null}
+      {values.contract.power_type === 'power-higher-15kw' ? (
         <>
           <PowerInputs
             name="contract.power"
@@ -100,7 +100,7 @@ const Power = (props) => {
             iconHelper={true}
           />
         </>
-      )}
+      ) : null}
     </>
   )
 }

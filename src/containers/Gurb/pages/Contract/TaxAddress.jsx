@@ -232,9 +232,7 @@ const TaxAddress = (props) => {
             </Box>
           </Box>
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </>
   )
 }
