@@ -42,7 +42,7 @@ export async function getPlaceDetails(placeId, sessionTokenRef) {
 }
 
 export async function searchPlace(string, sessionTokenRef) {
-  const places = await getGoogleMapsPlacesApiClient() // TODO: with {}
+  const places = await getGoogleMapsPlacesApiClient()
   if (!sessionTokenRef.current) {
     sessionTokenRef.current = new places.AutocompleteSessionToken()
   }

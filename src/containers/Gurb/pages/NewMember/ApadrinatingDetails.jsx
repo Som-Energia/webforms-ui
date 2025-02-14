@@ -32,7 +32,6 @@ const ApadrinatingDetails = (props) => {
       })
     if (status === true) {
       await setFieldValue('member.link_member', true)
-      setErrors({})
     } else {
       await setFieldValue('member.link_member', false)
       await setFieldError('link_member', t('SOCIA_NO_TROBADA'))
@@ -70,6 +69,7 @@ const ApadrinatingDetails = (props) => {
     <>
       <TextRecomendation title={t('GURB_APADRINATING_MEMBER_TITLE')} />
       <InputField
+        name='vat'
         textFieldLabel={t('GURB_NIF_LABEL')}
         textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
         textFieldHelper={t('GURB_NIF_HELPER')}
@@ -82,6 +82,7 @@ const ApadrinatingDetails = (props) => {
         required={true}
       />
       <InputField
+        name='code'
         textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
         textFieldName={t('GURB_APADRINATING_MEMBER_NUMBER_FIELD')}
         textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}

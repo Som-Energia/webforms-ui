@@ -17,7 +17,6 @@ export default function LocationInput({
   value,
   onChange,
   sessionTokenRef,
-  numberField = false,
   required = false
 }) {
   const { t } = useTranslation()
@@ -59,8 +58,8 @@ export default function LocationInput({
         filterOptions={(option) => option} // Required to see options without perfect match with Google Places API
         getOptionLabel={(option) => option.text ? option.text : option}
         loading={loadingResults}
-        loadingText="Loading..." // TODO: Translate this!
-        noOptionsText="No locations" // TODO: Translate this!
+        loadingText={t('AUTOCOMPLETE_LOADING_TEXT')}
+        noOptionsText={t('AUTOCOMPLETE_WIHTOUT_OPTIONS')}
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
           <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>

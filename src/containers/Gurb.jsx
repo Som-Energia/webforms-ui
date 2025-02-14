@@ -160,19 +160,25 @@ const Gurb = (props) => {
         next = activeStep + 3
       }
     }
+    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+      next = 8
+    }
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
-    if (NEW_MEMBER_STEP.includes(activeStep)) {
+    if (activeStep === 8) {
       if (formikProps.values.has_member === 'member-off') {
         prev = activeStep - 2
       }
-      else if (formikProps.values.has_member === 'apadrinating') {
+      else if (formikProps.values.has_member === 'member-on') {
         prev = activeStep - 3
       }
+    }
+    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+      prev = 4
     }
     setActiveStep(Math.max(0, prev))
   }
@@ -216,7 +222,7 @@ const Gurb = (props) => {
   const formikRef = useRef(null)
   useEffect(() => {
     formikRef.current.validateForm()
-    if (activeStep === 9) {
+    if (activeStep === 8) {
       NewMemberResult()
     }
   }, [activeStep])

@@ -15,7 +15,6 @@ import TextField from '@mui/material/TextField'
 
 import { checkVat } from '../../../../services/api'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
-import GurbErrorContext from '../../../../context/GurbErrorContext'
 
 const languages = {
   es_ES: 'Español',
@@ -31,13 +30,13 @@ const NewMemberDetails = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setFieldTouched
+    setFieldTouched,
+    setErrors
   } = props
 
   const { t } = useTranslation()
 
   const { loading, setLoading } = useContext(GurbLoadingContext)
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const handleCheckNifResponse = async () => {
     let nif_info = undefined

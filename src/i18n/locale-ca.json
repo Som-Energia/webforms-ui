@@ -882,5 +882,7 @@
     "ERROR_REQUIRED_FIELD": "Camp requerit",
     "MAINTENANCE_TEXT1": "Estem realitzant tasques de manteniment",
     "MAINTENANCE_TEXT2": "Tornem aviat",
-    "ERROR_REQUIRED_FIELD": "Camp requerit"
+    "ERROR_REQUIRED_FIELD": "Camp requerit",
+    "AUTOCOMPLETE_LOADING_TEXT": "Carregant...",
+    "AUTOCOMPLETE_WIHTOUT_OPTIONS": "No s'han trobat resultat"
 }
