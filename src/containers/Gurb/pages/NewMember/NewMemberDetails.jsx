@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { textHeader4, textSubtitle2, textCheckbox } from '../../gurbTheme'
+import { textHeader4, textSubtitle2, textCheckbox, textField } from '../../gurbTheme'
 import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
@@ -230,11 +230,7 @@ const NewMemberDetails = (props) => {
       <Box sx={{ marginTop: '2rem' }}>
         <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
         <TextField
-          sx={{
-            '& .MuiFormHelperText-root': { color: '#B3B3B3' },
-            '& .MuiInputLabel-root': { color: '#B3B3B3' },
-            marginTop: '0.5rem'
-          }}
+          sx={textField}
           required
           select
           fullWidth

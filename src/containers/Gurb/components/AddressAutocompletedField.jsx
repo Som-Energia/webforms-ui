@@ -5,7 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 
-import { textHeader4 } from '../gurbTheme'
+import { textHeader4, textField } from '../gurbTheme'
 import InputTitle from './InputTitle'
 
 
@@ -71,10 +71,8 @@ export default function LocationInput({
             />
             <TextField
               sx={{
-                '& .MuiFormHelperText-root': { color: '#B3B3B3' },
-                '& .MuiInputLabel-root': { color: '#B3B3B3' },
-                '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' },
-                marginTop: '0.5rem',
+                ...textField,
+                '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
               }}
               {...params}
               required={required}

@@ -11,6 +11,9 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
 import InputTitle from './InputTitle'
 
+import { textField } from '../gurbTheme'
+
+
 export const HelperText = ({
   helperText,
   iconHelper,
@@ -56,11 +59,7 @@ const InputField = ({
       />
       <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
       <TextField
-        sx={{
-          '& .MuiFormHelperText-root': { color: '#B3B3B3' },
-          '& .MuiInputLabel-root': { color: '#B3B3B3' },
-          marginTop: '0.5rem'
-        }}
+        sx={textField}
         name={name}
         data-cy={name}
         disabled={readonlyField}
