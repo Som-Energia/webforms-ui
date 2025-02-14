@@ -15,8 +15,7 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
       }
     }).as('checkCUPS')
 
-  cy.get('[data-cy="cups"]')
-    .type(cups)
+  cy.get('[data-cy="cups"]').type(cups)
 
   cy.get('[data-cy=next]').click()
 })
@@ -24,43 +23,21 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
 Cypress.Commands.add('lightQuestion', (lightOn = true) => {
 
   const optionValue = lightOn ? 'light-on' : 'light-off'
+  cy.get('[data-cy="light-question"]').get(`[data-cy="${optionValue}"]`).click()
 
-  cy.get('[data-cy="light-question"]')
-    .get(`[data-cy="${optionValue}"]`)
-    .click()
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('gurbAddress', (street) => {
 
-  cy.get('[data-cy="address-street"]')
-    .type(street.input)
+  cy.get('[data-cy="address-street"]').type(street.input)
   cy.contains(street.value).click()
 
-  cy.get('[data-cy="address.number"]')
-    .clear()
-    .type('2')
-  // .should('have.value', '2')
-
-  cy.get('[data-cy="address.floor"]')
-    .clear()
-    .type('1')
-  // .should('have.value', '1')
-
-  cy.get('[data-cy="address.door"]')
-    .clear()
-    .type('3')
-  // .should('have.value', '3')
-
-  cy.get('[data-cy="address.stairs"]')
-    .clear()
-    .type('B')
-  // .should('have.value', 'B')
-
-  cy.get('[data-cy="address.bloc"]')
-    .clear()
-    .type('Omega')
-  // .should('have.value', '2')
+  cy.get('[data-cy="address.number"]').type('2')
+  cy.get('[data-cy="address.floor"]').type('1')
+  cy.get('[data-cy="address.door"]').type('3')
+  cy.get('[data-cy="address.stairs"]').type('B')
+  cy.get('[data-cy="address.bloc"]').type('Omega')
 
   cy.get('[data-cy=next]').click()
 })
@@ -68,18 +45,23 @@ Cypress.Commands.add('gurbAddress', (street) => {
 Cypress.Commands.add('selfconsumptionQuestion', (selfconsumption = true) => {
 
   const optionValue = selfconsumption ? 'selfconsumption-on' : 'selfconsumption-off'
+  cy.get('[data-cy="selfconsumption-question"]').get(`[data-cy="${optionValue}"]`).click()
 
-  cy.get('[data-cy="selfconsumption-question"]')
-    .get(`[data-cy="${optionValue}"]`)
-    .click()
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {
 
-  cy.get('[data-cy="member-question"]')
-    .get(`[data-cy="${optionValue}"]`)
-    .click()
+  cy.get('[data-cy="member-question"]').get(`[data-cy="${optionValue}"]`).click()
+
+  cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('identifyMember', ({vat, code}) => {
+
+  cy.get('[data-cy="vat"]').type(vat)
+  cy.get('[data-cy="code"]').type(code)
+
   cy.get('[data-cy=next]').click()
 })
 
@@ -101,27 +83,13 @@ Cypress.Commands.add('personalDataMember', (personalData, statusCode = 200) => {
       }
     }).as('checkVAT')
 
-  cy.get('[data-cy="new_member.nif"]')
-    // .clear()
-    .type(personalData.vat)
-  cy.get('[data-cy="new_member.name"]')
-    // .clear()
-    .type(personalData.name)
-  cy.get('[data-cy="new_member.surname1"]')
-    // .clear()
-    .type(personalData.surname1)
-  cy.get('[data-cy="new_member.surname2"]')
-    // .clear()
-    .type(personalData.surname2)
-  cy.get('[data-cy="email"]')
-    // .clear()
-    .type(personalData.email)
-  cy.get('[data-cy="repeat_email"]')
-    // .clear()
-    .type(personalData.repeat_email)
-  cy.get('[data-cy="new_member.phone1"]')
-    // .clear()
-    .type(personalData.phone1)
+  cy.get('[data-cy="new_member.nif"]').type(personalData.vat)
+  cy.get('[data-cy="new_member.name"]').type(personalData.name)
+  cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
+  cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
+  cy.get('[data-cy="email"]').type(personalData.email)
+  cy.get('[data-cy="repeat_email"]').type(personalData.repeat_email)
+  cy.get('[data-cy="new_member.phone1"]').type(personalData.phone1)
 
   cy.get('[data-cy="privacy_policy"]').click()
 
@@ -141,37 +109,21 @@ Cypress.Commands.add('identifyHolderGURB', (vat, statusCode = 200) => {
       }
     }).as('checkSyntaxVAT')
 
-  cy.get('[data-cy="holder_vat"]')
-    // .clear()
-    .type(vat)
+  cy.get('[data-cy="holder_vat"]').type(vat)
 
-  cy.get('[data-cy="has_holder"]')
-    .get('[data-cy="holder-same"]')
-    .click()
+  cy.get('[data-cy="has_holder"]').get('[data-cy="holder-same"]').click()
 
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('personalDataHolder', (personalData) => {
 
-  cy.get('[data-cy="holder.name"]')
-    // .clear()
-    .type(personalData.name)
-  cy.get('[data-cy="holder.surname1"]')
-    // .clear()
-    .type(personalData.surname1)
-  cy.get('[data-cy="holder.surname2"]')
-    // .clear()
-    .type(personalData.surname2)
-  cy.get('[data-cy="email"]')
-    // .clear()
-    .type(personalData.email)
-  cy.get('[data-cy="repeat_email"]')
-    // .clear()
-    .type(personalData.repeat_email)
-  cy.get('[data-cy="holder.phone1"]')
-    // .clear()
-    .type(personalData.phone1)
+  cy.get('[data-cy="holder.name"]').type(personalData.name)
+  cy.get('[data-cy="holder.surname1"]').type(personalData.surname1)
+  cy.get('[data-cy="holder.surname2"]').type(personalData.surname2)
+  cy.get('[data-cy="email"]').type(personalData.email)
+  cy.get('[data-cy="repeat_email"]').type(personalData.repeat_email)
+  cy.get('[data-cy="holder.phone1"]').type(personalData.phone1)
 
   cy.get('[data-cy=next]').click()
 })
@@ -179,30 +131,15 @@ Cypress.Commands.add('personalDataHolder', (personalData) => {
 Cypress.Commands.add('taxAddress', ({sameDirection = true, input, value}) => {
 
   const optionValue = sameDirection ? 'supplypoint-tax-address-same' : 'supplypoint-tax-address-different'
-
-  cy.get('[data-cy="sameDirection"]')
-    .get(`[data-cy="${optionValue}"]`)
-    .click()
+  cy.get('[data-cy="sameDirection"]').get(`[data-cy="${optionValue}"]`).click()
 
   if (!sameDirection) {
-    cy.get('[data-cy="tax_address-street"]')
-      .type(input)
+    cy.get('[data-cy="tax_address-street"]').type(input)
     cy.contains(value).click()
   
-    cy.get('[data-cy="tax_address.number"]')
-      .clear()
-      .type('24')
-    // .should('have.value', '2')
-  
-    cy.get('[data-cy="tax_address.floor"]')
-      .clear()
-      .type('6')
-    // .should('have.value', '1')
-  
-    cy.get('[data-cy="tax_address.door"]')
-      .clear()
-      .type('2')
-    // .should('have.value', '3')
+    cy.get('[data-cy="tax_address.number"]').type('24')
+    cy.get('[data-cy="tax_address.floor"]').type('6')
+    cy.get('[data-cy="tax_address.door"]').type('2')
   }
 
   cy.get('[data-cy=next]').click()
@@ -211,16 +148,10 @@ Cypress.Commands.add('taxAddress', ({sameDirection = true, input, value}) => {
 Cypress.Commands.add('choosePower', ({moreThan15Kw = false, powers}) => {
 
   const optionValue = moreThan15Kw ? 'power-higher-15kw' : 'power-lower-15kw'
-
-  cy.get('[data-cy="power_question"]')
-    .get(`[data-cy="${optionValue}"]`)
-    .click()
+  cy.get('[data-cy="power_question"]').get(`[data-cy="${optionValue}"]`).click()
 
   powers.forEach((power, index) => {
-    cy.get(`[data-cy="contract.power.power${index+1}"]`)
-      // .clear()
-      .type(power)
-    // .should('have.value', power)
+    cy.get(`[data-cy="contract.power.power${index+1}"]`).type(power)
   })
 
   cy.get('[data-cy=next]').click()
@@ -237,23 +168,16 @@ Cypress.Commands.add('supplyPointData', () => {
 Cypress.Commands.add('donationQuestion', (donation = true) => {
 
   const optionValue = donation ? 'voluntary-donation-on' : 'voluntary-donation-off'
+  cy.get('[data-cy="donation_question"]').get(`[data-cy="${optionValue}"]`).click()
 
-  cy.get('[data-cy="donation_question"]')
-    .get(`[data-cy="${optionValue}"]`)
-    .click()
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('paymentData', (iban) => {
 
-  cy.get('[data-cy="iban"]')
-  // .clear()
-  .type(iban)
+  cy.get('[data-cy="iban"]').type(iban)
 
   cy.get('[data-cy="iban_check"]').click()
 
   cy.get('[data-cy=next]').click()
 })
-
-// TODO: Check clear and should
-// TODO: ibanCheck, iban-check or iban_check?
