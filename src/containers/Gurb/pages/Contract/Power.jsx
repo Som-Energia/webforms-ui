@@ -31,8 +31,8 @@ const Power = (props) => {
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
 
-  const handlePowerQuestion = (value) => {
-    setFieldValue('contract.power_type', value)
+  const handlePowerQuestion = async (value) => {
+    await setFieldValue('contract.power_type', value)
     setFieldValue('contract.power', {})
   }
 

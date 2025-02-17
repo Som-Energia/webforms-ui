@@ -70,9 +70,9 @@ const HolderIban = (props) => {
     setFieldTouched('holder.iban', true)
   }
 
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = async (event) => {
     let value = event.target.checked
-    setFieldValue('holder.direct_debit_accepted', value)
+    await setFieldValue('holder.direct_debit_accepted', value)
     setFieldTouched('holder.direct_debit_accepted', true)
   }
 
