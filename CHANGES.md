@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.6.4 2025-02-18
 
 - New contract gurb form
 
