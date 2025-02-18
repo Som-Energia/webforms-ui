@@ -48,8 +48,12 @@ const SelfConsumption = (props) => {
 
   return (
     <>
-      <TextRecomendation title={t('GURB_SELFCONSUMPTION_TITLE')} />
+      <TextRecomendation
+        title={t('GURB_SELFCONSUMPTION_TITLE')}
+        required={true}
+      />
       <Chooser
+        name='selfconsumption-question'
         options={options}
         value={values.has_selfconsumption}
         handleChange={handleSelfconsumptionQuestion}

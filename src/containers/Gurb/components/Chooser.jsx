@@ -17,6 +17,7 @@ const Option = ({
 }) => {
   return (
     <Box
+      data-cy={optionId}
       sx={isSelected ? chooserGurbSelected : chooserGurb}
       onClick={() => {
         setSelected(optionId)
@@ -25,7 +26,8 @@ const Option = ({
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start'
+          alignItems: 'flex-start',
+          marginBottom: '1rem'
         }}>
         {icon}
         {isSelected && (
@@ -43,7 +45,7 @@ const Option = ({
 }
 
 const Chooser = (props) => {
-  const { options, value, handleChange } = props
+  const { options, value, handleChange, name } = props
 
   const setOptionSelection = (option) => {
     handleChange(option)
@@ -51,17 +53,27 @@ const Chooser = (props) => {
 
   return (
     <Grid
+      data-cy={name}
       container
       spacing={4}
       sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '1rem',
+        marginTop: '0.5rem',
         marginBottom: '1rem'
       }}>
       {options.map((option, index) => (
-        <Grid key={index} item xs={12} sm={6} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Grid
+          key={index}
+          item
+          xs={12}
+          sm={6}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
           <Option
             isSelected={option?.id === value}
             setSelected={setOptionSelection}
@@ -69,11 +81,9 @@ const Chooser = (props) => {
             icon={option?.icon}
             textHeader={option?.textHeader}
             textBody={option?.textBody}
-            />
+          />
           {option?.helper && (
-            <Box sx={{ marginTop: '1rem'} }>
-              {option?.helper}
-            </Box>
+            <Box sx={{ marginTop: '1rem' }}>{option?.helper}</Box>
           )}
         </Grid>
       ))}

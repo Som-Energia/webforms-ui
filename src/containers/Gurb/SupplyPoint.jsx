@@ -13,7 +13,7 @@ const SupplyPoint = (props) => {
 
   const handleGurbData = async () => {
     // TODO: gurb id from where?
-    const gurbId = 3
+    const gurbId = 2
     await getGurbData(gurbId)
       .then(({ data }) => {
         setGurbData({

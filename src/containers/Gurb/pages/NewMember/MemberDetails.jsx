@@ -33,7 +33,6 @@ const MemberDetails = (props) => {
       })
     if (status === true) {
       await setFieldValue('member.is_member', true)
-      setErrors({})
     } else {
       await setFieldValue('member.is_member', false)
       await setFieldError('is_member', t('SOCIA_NO_TROBADA'))
@@ -70,6 +69,7 @@ const MemberDetails = (props) => {
     <>
       <TextRecomendation title={t('GURB_IS_MEMBER_TITLE')} />
       <InputField
+        name='vat'
         textFieldLabel={t('GURB_NIF_LABEL')}
         textFieldName={t('GURB_NIF_FIELD')}
         textFieldHelper={t('GURB_NIF_HELPER')}
@@ -79,8 +79,10 @@ const MemberDetails = (props) => {
         touched={touched?.member?.nif}
         value={values?.member.nif}
         error={errors?.member?.nif}
+        required={true}
       />
       <InputField
+        name='code'
         textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
         textFieldName={t('GURB_MEMBER_NUMBER_FIELD')}
         textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}
@@ -91,6 +93,7 @@ const MemberDetails = (props) => {
         value={values?.member.number}
         error={errors?.is_member}
         isLoading={loading}
+        required={true}
       />
     </>
   )

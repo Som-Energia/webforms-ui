@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- New contract gurb form
+
 ## 2.6.3 2025-02-12
 
 - Change noticeAutonomous future flag value to false

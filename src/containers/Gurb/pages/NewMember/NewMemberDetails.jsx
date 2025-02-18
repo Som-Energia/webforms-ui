@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { textHeader4, textSubtitle2, textCheckbox } from '../../gurbTheme'
+import { textHeader4, textSubtitle2, textCheckbox, textField } from '../../gurbTheme'
 import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
@@ -15,7 +15,6 @@ import TextField from '@mui/material/TextField'
 
 import { checkVat } from '../../../../services/api'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
-import GurbErrorContext from '../../../../context/GurbErrorContext'
 
 const languages = {
   es_ES: 'Español',
@@ -31,13 +30,13 @@ const NewMemberDetails = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setFieldTouched
+    setFieldTouched,
+    setErrors
   } = props
 
   const { t } = useTranslation()
 
   const { loading, setLoading } = useContext(GurbLoadingContext)
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const handleCheckNifResponse = async () => {
     let nif_info = undefined
@@ -76,6 +75,18 @@ const NewMemberDetails = (props) => {
     setFieldTouched('new_member.nif', true)
   }
 
+  const handleChangeName = (event) => {
+    let value = event.target.value.match(/^[a-zA-Z]*/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
+  const handleChangePhone = (event) => {
+    let value = event.target.value.match(/[0-9]{0,14}/)
+    value = value[0]
+    setFieldValue(event.target.name, value)
+  }
+
   const handleLanguageChange = (event) => {
     let value = event.target.value
     setFieldValue('new_member.language', value)
@@ -91,6 +102,7 @@ const NewMemberDetails = (props) => {
     <>
       <TextRecomendation title={t('GURB_NEW_MEMBER_TITLE')} />
       <InputField
+        name='new_member.nif'
         textFieldLabel={t('GURB_NIF_LABEL_NEW_MEMBER_FIELD')}
         textFieldName={t('GURB_NIF_FIELD')}
         textFieldHelper={t('GURB_NIF_HELPER')}
@@ -101,55 +113,57 @@ const NewMemberDetails = (props) => {
         value={values?.new_member.nif}
         error={errors?.new_member?.nif}
         isLoading={loading}
+        required={true}
       />
       <Grid container columnSpacing={2}>
         <Grid item xs={4}>
           <InputField
+            name={'new_member.name'}
             textFieldLabel={t('NAME')}
             textFieldName={t('NAME')}
-            handleChange={(event) => {
-              setFieldValue('new_member.name', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('new_member.name', true)
             }}
             touched={touched?.new_member?.name}
             value={values?.new_member.name}
             error={errors?.new_member?.name}
+            required={true}
           />
         </Grid>
         <Grid item xs={4}>
           <InputField
+            name={'new_member.surname1'}
             textFieldLabel={t('HOLDER_SURNAME1')}
             textFieldName={t('HOLDER_SURNAME1')}
-            handleChange={(event) => {
-              setFieldValue('new_member.surname1', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('new_member.surname1', true)
             }}
             touched={touched?.new_member?.surname1}
             value={values?.new_member.surname1}
             error={errors?.new_member?.surname1}
+            required={true}
           />
         </Grid>
         <Grid item xs={4}>
           <InputField
+            name={'new_member.surname2'}
             textFieldLabel={t('HOLDER_SURNAME2')}
             textFieldName={t('HOLDER_SURNAME2')}
-            handleChange={(event) => {
-              setFieldValue('new_member.surname2', event.target.value)
-            }}
+            handleChange={handleChangeName}
             handleBlur={() => {
               setFieldTouched('new_member.surname2', true)
             }}
             touched={touched?.new_member?.surname2}
             value={values?.new_member.surname2}
             error={errors?.new_member?.surname2}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name='email'
             textFieldLabel={t('EMAIL')}
             textFieldName={t('EMAIL')}
             handleChange={(event) => {
@@ -161,10 +175,12 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.email}
             value={values?.new_member.email}
             error={errors?.new_member?.email}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name='repeat_email'
             textFieldLabel={t('HOLDER_EMAIL_2')}
             textFieldName={t('HOLDER_EMAIL_2')}
             handleChange={(event) => {
@@ -176,30 +192,30 @@ const NewMemberDetails = (props) => {
             touched={touched?.new_member?.email2}
             value={values?.new_member.email2}
             error={errors?.new_member?.email2}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name={'new_member.phone1'}
             textFieldLabel={t('GURB_PHONE1_LABEL')}
             textFieldName={t('GURB_PHONE1_LABEL')}
-            handleChange={(event) => {
-              setFieldValue('new_member.phone1', event.target.value)
-            }}
+            handleChange={handleChangePhone}
             handleBlur={() => {
               setFieldTouched('new_member.phone1', true)
             }}
             touched={touched?.new_member?.phone1}
             value={values?.new_member.phone1}
             error={errors?.new_member?.phone1}
+            required={true}
           />
         </Grid>
         <Grid item xs={6}>
           <InputField
+            name={'new_member.phone2'}
             textFieldLabel={t('HOLDER_PHONE_2')}
             textFieldName={t('HOLDER_PHONE_2')}
-            handleChange={(event) => {
-              setFieldValue('new_member.phone2', event.target.value)
-            }}
+            handleChange={handleChangePhone}
             handleBlur={() => {
               setFieldTouched('new_member.phone2', true)
             }}
@@ -213,11 +229,8 @@ const NewMemberDetails = (props) => {
       <Box sx={{ marginTop: '2rem' }}>
         <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
         <TextField
-          sx={{
-            '& .MuiFormHelperText-root': { color: '#B3B3B3' },
-            '& .MuiInputLabel-root': { color: '#B3B3B3' },
-            marginTop: '0.5rem'
-          }}
+          sx={textField}
+          required
           select
           fullWidth
           InputProps={{
@@ -247,6 +260,7 @@ const NewMemberDetails = (props) => {
           sx={{ ...textCheckbox, marginTop: '2rem' }}
           control={
             <Checkbox
+              data-cy="privacy_policy"
               checked={values?.new_member.privacy_policy_accepted}
               onChange={handleCheckboxChange}
             />

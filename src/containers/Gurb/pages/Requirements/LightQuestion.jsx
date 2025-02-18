@@ -48,8 +48,9 @@ const LightQuestion = (props) => {
 
   return (
     <>
-      <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} />
+      <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} required={true} />
       <Chooser
+        name='light-question'
         options={options}
         value={values.has_light}
         handleChange={handleLightQuestion}

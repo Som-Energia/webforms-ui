@@ -23,6 +23,7 @@ const SuccessRequirement = ({
       textBody={textBody}
       textHelper={
         <Link
+          data-cy='success_link'
           component="button"
           color="inherit"
           sx={link}

@@ -1,41 +1,75 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import LocationInput from '../../components/AddressAutocompletedField'
-import { setMunicipisWithPostalCode } from '../../../../services/utils'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
+import Box from '@mui/material/Box'
+import InputField from '../../components/InputField'
+import { getPlaceDetails, searchPlace } from '../../../../services/googleApiClient'
+import { getMunicipisByPostalCode } from '../../../../services/api'
+
 
 const Address = (props) => {
   const { t } = useTranslation()
-  const { values, errors, touched, setFieldValue, setFieldTouched } = props
+  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } = props
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
-  const [addressValue, setAddressValue] = useState('')
+  const [addressValue, setAddressValue] = useState(values.address.street)
+  const [numberValue, setNumberValue] = useState(values.address.number)
+  const sessionTokenRef = useRef()
 
-  const handleInputAddress = (event) => {
-    setFieldValue('address.street', event.target.value)
-  }
+  const updateAddressValues = async () => {
+    try {
+      const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
+      const postalCode = place.addressComponents.find(component =>
+        component.types.includes('postal_code')
+      );
+      const municipis = await getMunicipisByPostalCode(postalCode?.longText)
+      const street = place.addressComponents.find(component =>
+        component.types.includes('route')
+      );
+      const fullAddress = place.formattedAddress.replace(/,/, ` ${numberValue},`)
+      const suggestions = await searchPlace(fullAddress, sessionTokenRef)
 
-  const handleInputAddressBlur = () => {
-    setFieldTouched('address.street', true)
-  }
+      if (suggestions.length > 0) {
+        const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
+
+        const updatedValues = {
+          ...values,
+          address: {
+            ...values.address,
+            number: numberValue,
+            lat: suggestedPlace.location.lat(),
+            long: suggestedPlace.location.lng(),
+            postal_code: postalCode?.longText || '',
+            street: street?.longText || '',
+            state: municipis && municipis[0] ? municipis[0][0]?.provincia : {},
+            city: municipis && municipis[0] ? municipis[0][0]?.municipi : {},
+          }
+        }
+
+        setValues(updatedValues);
+      } else {
+        console.log("Address not found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const postalCode = values.address.postal_code
-    if (postalCode?.length > 4) {
-      setMunicipisWithPostalCode(
-        postalCode,
-        'address.state',
-        'address.city',
-        setFieldValue
-      )
+    if (addressValue?.id && numberValue) {
+      updateAddressValues()
     }
-  }, [values.address.postal_code])
+    else if (!addressValue || !numberValue) {
+      initializeAddress()
+    }
+  }, [addressValue, numberValue])
 
   const handleCheckGurbDistance = async () => {
     // TODO: waiting to know where gurb id comes from
-    const gurbId = 3
+    const gurbId = 2
     await checkGurbDistance(gurbId, values.address.lat, values.address.long)
       .then(({ data }) => {
         // data is false when address is outside gurb's 2km limit
@@ -64,39 +98,36 @@ const Address = (props) => {
     }
   }, [values.address.lat, values.address.long])
 
+  const initializeAddress = () => {
+    setFieldValue('address', {
+      street: '',
+      number: '',
+      lat: '',
+      long: '',
+      postal_code: '',
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
+    })
+  }
+
   const handleAddressChange = (value) => {
     setAddressValue(value)
   }
 
-  const initializeAddress = () => {
-    setFieldValue('address.street', '')
-    setFieldValue('address.number', '')
-    setFieldValue('address.lat', '')
-    setFieldValue('address.long', '')
-    setFieldValue('address.postal_code', '')
-    setFieldValue('address.state', { id: '', name: '' })
-    setFieldValue('address.city', { id: '', name: '' })
+  const handleChangeNumber = (event) => {
+    let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
+    setNumberValue(cleanedValue)
   }
 
-  const handleLocationSelected = (selection) => {
-    if (selection === null) {
-      initializeAddress()
-    } else {
-      const address = Object.assign(
-        {},
-        ...selection.address_components.map((x) => ({
-          [x.types[0]]: x.long_name
-        }))
-      )
-      setFieldValue('address', {
-        street: address?.route,
-        number: address?.street_number || '',
-        lat: selection?.geometry?.location?.lat(),
-        long: selection?.geometry?.location?.lng(),
-        postal_code: address?.postal_code
-      })
-    }
+  const handleChangeInteger = (event) => {
+    let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
+    setFieldValue(event.target.name, cleanedValue)
   }
+
+  const handleChange = (event) => {
+    setFieldValue(event.target.name, event.target.value)
+  }
+
   return (
     <>
       <TextRecomendation
@@ -104,6 +135,7 @@ const Address = (props) => {
         text={t('GURB_ADDRESS_TITLE_HELPER')}
       />
       <LocationInput
+        required
         textFieldLabel={t('GURB_ADDRESS_LABEL')}
         textFieldName={t('GURB_ADDRESS_FIELD')}
         textFieldHelper={t('GURB_ADDRESS_HELPER')}
@@ -111,8 +143,65 @@ const Address = (props) => {
         name="address.street"
         value={addressValue}
         onChange={handleAddressChange}
-        onLocationSelected={handleLocationSelected}
+        sessionTokenRef={sessionTokenRef}
       />
+      <Box sx={{ display: 'flex', gap: '2rem' }}>
+        <Box>
+          <InputField
+            name={'address.number'}
+            textFieldName={t('NUMBER')}
+            handleChange={handleChangeNumber}
+            touched={touched?.address?.number}
+            value={numberValue}
+            error={errors?.address?.number}
+            required={true}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.floor'}
+            textFieldName={t('FLOOR')}
+            handleChange={handleChangeInteger}
+            touched={touched?.address?.floor}
+            value={values?.address?.floor}
+            error={errors?.address?.floor}
+            required={false}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.door'}
+            textFieldName={t('DOOR')}
+            handleChange={handleChangeInteger}
+            touched={touched?.address?.door}
+            value={values?.address?.door}
+            error={errors?.address?.door}
+            required={false}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.stairs'}
+            textFieldName={t('STAIRS')}
+            handleChange={handleChange}
+            touched={touched?.address?.stairs}
+            value={values?.address?.stairs}
+            error={errors?.address?.stairs}
+            required={false}
+          />
+        </Box>
+        <Box>
+          <InputField
+            name={'address.bloc'}
+            textFieldName={t('BLOCK')}
+            handleChange={handleChange}
+            touched={touched?.address?.bloc}
+            value={values?.address?.bloc}
+            error={errors?.address?.bloc}
+            required={false}
+          />
+        </Box>
+      </Box>
     </>
   )
 }

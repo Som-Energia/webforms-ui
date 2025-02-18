@@ -8,11 +8,19 @@ import InputAdornment from '@mui/material/InputAdornment'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import { textHeader4, textHelper1 } from '../gurbTheme'
+import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
+import InputTitle from './InputTitle'
 
-export const HelperText = ({ helperText, iconHelper }) => {
+import { textField } from '../gurbTheme'
+
+
+export const HelperText = ({
+  helperText,
+  iconHelper,
+  justifyContent = false
+}) => {
   return (
-    <Box sx={textHelper1}>
+    <Box display="flex" justifyContent={justifyContent} sx={textHelper1}>
       {iconHelper && (
         <InfoOutlinedIcon sx={{ fontSize: '14px', margin: '2px' }} />
       )}
@@ -24,6 +32,7 @@ export const HelperText = ({ helperText, iconHelper }) => {
 const InputField = ({
   textFieldLabel,
   textFieldName,
+  textFieldNameHelper,
   textFieldHelper,
   iconHelper = false,
   handleChange,
@@ -31,19 +40,29 @@ const InputField = ({
   touched,
   value,
   error,
-  isLoading = false
+  isLoading = false,
+  readonlyField = false,
+  required = false,
+  endAdornmentText = false,
+  startAdornmentText = false,
+  numInputs = false,
+  name = false
 }) => {
   const { t } = useTranslation()
 
   return (
-    <Box sx={{ marginTop: '2rem' }}>
-      <Typography sx={textHeader4}>{textFieldName}</Typography>
+    <Box>
+      <InputTitle
+        text={textFieldName}
+        textStyle={textHeader4}
+        required={required}
+      />
+      <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
       <TextField
-        sx={{
-          '& .MuiFormHelperText-root': { color: '#B3B3B3' },
-          '& .MuiInputLabel-root': { color: '#B3B3B3' },
-          marginTop: '0.5rem'
-        }}
+        sx={textField}
+        name={name}
+        data-cy={name}
+        disabled={readonlyField}
         fullWidth
         InputProps={{
           sx: { borderRadius: '8px', display: 'flex' },
@@ -51,6 +70,12 @@ const InputField = ({
           endAdornment: (
             <InputAdornment position="end">
               {isLoading && <CircularProgress size={24} />}
+              {endAdornmentText && endAdornmentText}
+            </InputAdornment>
+          ),
+          startAdornment: (
+            <InputAdornment position="start">
+              {startAdornmentText && numInputs > 1 && startAdornmentText}
             </InputAdornment>
           )
         }}

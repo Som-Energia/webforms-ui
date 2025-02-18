@@ -27,6 +27,19 @@ export const textHeader4 = {
   fontWeight: '500'
 }
 
+export const textHeader5 = {
+  fontFamily: 'Inter',
+  color: '#919191',
+  fontSize: '14px'
+}
+
+export const textHeader6 = {
+  fontFamily: 'Inter',
+  color: '#000000',
+  fontSize: '16px',
+  fontWeight: '700'
+}
+
 export const textBody1 = {
   fontFamily: 'Inter',
   color: '#919191',
@@ -46,12 +59,25 @@ export const textBody3 = {
   fontSize: '16px'
 }
 
+export const textBody4 = {
+  fontFamily: 'Inter',
+  color: '#1E1E1E',
+  fontWeight: '400',
+  fontSize: '14px'
+}
+
 export const textSubtitle = {
   fontFamily: 'Inter',
   color: '#B3B3B3',
   fontSize: '16px',
   fontWeight: '400',
   textTransform: 'uppercase'
+}
+
+export const textField = {
+  '& .MuiFormHelperText-root': { color: '#B3B3B3' },
+  '& .MuiInputLabel-root': { color: '#B3B3B3' },
+  marginTop: '0.5rem'
 }
 
 export const textSubtitle2 = {
@@ -68,6 +94,33 @@ export const textHelper1 = {
   fontSize: '14px'
 }
 
+export const textReviewLabel = {
+  display: 'flex',
+  fontFamily: 'Inter',
+  color: '#7E7E7E',
+  alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '400'
+}
+
+export const textReviewValue = {
+  display: 'flex',
+  fontFamily: 'Inter',
+  color: '#363636',
+  alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '400'
+}
+
+export const textReviewSubtitle = {
+  display: 'flex',
+  fontFamily: 'Inter',
+  color: '#7E7E7E',
+  alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '600'
+}
+
 export const containerSpacing = {
   display: 'flex',
   padding: '0.3rem',
@@ -75,7 +128,6 @@ export const containerSpacing = {
 }
 
 export const iconRequirements = {
-  marginBottom: '1rem',
   borderRadius: '8px',
   border: '1px solid #D9D9D9',
   color: '#1E1E1E',
@@ -85,7 +137,6 @@ export const iconRequirements = {
 }
 
 export const iconOffRequirements = {
-  marginBottom: '1rem',
   borderRadius: '8px',
   border: '1px solid #D9D9D9',
   color: '#1E1E1E',
@@ -172,5 +223,5 @@ export const textCheckbox = {
     color: '#000000',
     fontSize: '16px',
     fontWeight: '600'
-  },
+  }
 }

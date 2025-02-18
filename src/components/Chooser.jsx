@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 
 import Box from '@mui/material/Box'
 import FormHelperText from '@mui/material/FormHelperText'
-import Grid from '@mui/material//Grid'
+import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import Typography from '@mui/material/Typography'

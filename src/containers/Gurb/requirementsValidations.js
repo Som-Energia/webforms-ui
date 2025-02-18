@@ -8,7 +8,19 @@ export const lightValidations = Yup.object().shape({
 
 export const addressValidations = Yup.object().shape({
   address: Yup.object().shape({
-    street: Yup.string().required('NO_ADDRESS')
+    street: Yup.string().required('NO_ADDRESS_STREET'),
+    number: Yup.string().required('NO_ADDRESS_NUMBER'),
+    lat: Yup.number().required('NO_ADDRESS_LAT'),
+    long: Yup.number().required('NO_ADDRESS_LONG'),
+    postal_code: Yup.string().required('NO_ADDRESS_POSTAL_CODE'),
+    state: Yup.object().shape({
+      id: Yup.number().required('NO_ADDRESS_CITY_ID'),
+      name: Yup.string().required('NO_ADDRESS_CITY_NAME')
+    }),
+    city: Yup.object().shape({
+      id: Yup.number().required('NO_ADDRESS_CITY_ID'),
+      name: Yup.string().required('NO_ADDRESS_CITY_NAME')
+    })
   })
 })
 
