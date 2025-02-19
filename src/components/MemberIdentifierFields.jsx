@@ -11,7 +11,8 @@ import Typography from '@mui/material/Typography'
 
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
-import { checkMember, checkMemberVat } from '../services/api'
+import { checkMember } from '../services/api'
+import { checkVatFormat } from '../services/utils'
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search)
@@ -21,8 +22,7 @@ const MemberIdentifierFields = (props) => {
   const { t } = useTranslation()
   const query = useQuery()
 
-  const { values, handleBlur, errors, touched, setFieldValue } =
-    props
+  const { values, handleBlur, errors, touched, setFieldValue } = props
 
   const [isLoading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -42,28 +42,26 @@ const MemberIdentifierFields = (props) => {
   useEffect(() => {
     const checkIsMember = async () => {
       setLoading(true)
-      try {
-        await checkMemberVat(values.member.vat)
-      } catch (error) {
-        setError(error)
-      }
-
-      try {
-        const response = await checkMember(
-          values.member.number,
-          values.member.vat
-        )
-        if (response?.data === true) {
-          setError(false)
-          setFieldValue('member.checked', true)
-        } else {
-          setError(true)
-          setFieldValue('member.checked', false)
+      let valid = checkVatFormat(values.member.vat)
+      if (!valid) {
+        setError(true)
+      } else {
+        try {
+          const response = await checkMember(
+            values.member.number,
+            values.member.vat
+          )
+          if (response?.data === true) {
+            setError(false)
+            setFieldValue('member.checked', true)
+          } else {
+            setError(true)
+            setFieldValue('member.checked', false)
+          }
+        } catch (error) {
+          setError(error)
         }
-      } catch (error) {
-        setError(error)
       }
-
       setLoading(false)
     }
 
@@ -138,10 +136,12 @@ const MemberIdentifierFields = (props) => {
                 />
               )
             ) : (
-              <Typography sx={{
-                fontWeight: 500,
-                color: 'primary.main'
-              }} variant='helpertext'>
+              <Typography
+                sx={{
+                  fontWeight: 500,
+                  color: 'primary.main'
+                }}
+                variant="helpertext">
                 {t('SOCIA_TROBADA')}
               </Typography>
             ))

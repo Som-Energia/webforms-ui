@@ -36,7 +36,7 @@ export function ApiValidatedField({
   required,
   inputFilter,
   localCheck,
-  remoteCheck,
+  remoteCheck = false,
   helperText,
   autoFocus = false,
   leadingIcon
@@ -60,6 +60,7 @@ export function ApiValidatedField({
     }
     if (!remoteCheck) {
       onChange(result)
+      return
     }
     const compactValue = result.value
     onChange({ value: compactValue, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
