@@ -224,11 +224,11 @@ describe('Generation Form', () => {
         statusCode: 400,
       }).as('checkVat')
 
-      cy.intercept('GET', '/data/soci/**',
+      cy.intercept('GET', '/check/soci/**',
         {
           statusCode: 200,
           body: {
-            data: { soci: {} },
+            data: true,
             state: true
           }
         }).as('checkMember')

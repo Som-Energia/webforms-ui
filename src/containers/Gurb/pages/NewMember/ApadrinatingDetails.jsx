@@ -25,7 +25,7 @@ const ApadrinatingDetails = (props) => {
     let status = undefined
     await checkMember(values.member.number, values.member.nif)
       .then((response) => {
-        status = response?.state
+        status = response?.data
       })
       .catch(() => {
         status = false

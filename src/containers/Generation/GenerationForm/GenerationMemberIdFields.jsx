@@ -71,11 +71,11 @@ const GenerationMemberIdFields = (props) => {
       }
 
       try {
-        const member = await checkMember(
+        const response = await checkMember(
           values.member.partner_number,
           values.member.vat
         )
-        if (member?.state === true) {
+        if (response?.data === true) {
           setError(false)
         } else {
           setError(true)

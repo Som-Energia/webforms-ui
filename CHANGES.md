@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- checkMember: get the response from data and not from the state field
+- checkMember: moved from data to check
+
 ## 2.6.4 2025-02-18
 
 - New contract gurb form
