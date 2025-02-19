@@ -12,9 +12,9 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import {
   checkMember,
-  checkMemberVat,
   checkIsFromGenerationEnabledZone
 } from '../../../services/api'
+import { checkVatFormat } from '../../../services/utils'
 
 
 const useQuery = () => {
@@ -64,12 +64,10 @@ const GenerationMemberIdFields = (props) => {
       }
       setValues(tmpValues)
       setLoading(true)
-      try {
-        await checkMemberVat(values.member.vat)
-      } catch (error) {
-        setError(error)
+      let valid = checkVatFormat(values.member.vat)
+      if (!valid) {
+        setError(true)
       }
-
       try {
         const response = await checkMember(
           values.member.partner_number,

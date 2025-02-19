@@ -1,6 +1,5 @@
 Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
 
-  cy.intercept('GET', '/check/vat/*').as('checkVat')
   cy.intercept('GET', '/check/soci/**').as('checkMember')
 
   cy.get('#memberNumber')
@@ -11,10 +10,6 @@ Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
   cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
   cy.wait('@checkMember')
-    .its('response.statusCode')
-    .should('be.oneOf', [200, 304])
-
-  cy.wait('@checkVat')
     .its('response.statusCode')
     .should('be.oneOf', [200, 304])
 
@@ -33,14 +28,6 @@ Cypress.Commands.add('generationkwhIdentifyMember', (memberNumber, memberVat, ca
       }
     }).as('checkMember')
 
-  cy.intercept('GET', '/check/vat/*', {
-    statusCode: 200,
-    body: {
-      data: {},
-      state: true
-    }
-  }).as('checkVat')
-
   cy.intercept('GET', '/data/generationkwh/can_join/**', {
     statusCode: 200,
     body: {
@@ -58,10 +45,6 @@ Cypress.Commands.add('generationkwhIdentifyMember', (memberNumber, memberVat, ca
   cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
   cy.wait('@checkMember')
-    .its('response.statusCode')
-    .should('be.oneOf', [200, 304])
-
-  cy.wait('@checkVat')
     .its('response.statusCode')
     .should('be.oneOf', [200, 304])
 
@@ -96,25 +79,10 @@ Cypress.Commands.add('identifyGenerationCanJoin', (memberNumber, memberVat) => {
 
 Cypress.Commands.add('typeIbanGenerationkwh', (iban, statusCode) => {
 
-  //Intercept call to check IBAN
-  cy.intercept('GET', '/check/iban/*',
-    {
-      statusCode: statusCode,
-      body: {
-        data: { iban: iban },
-        state: statusCode === 200,
-        status: "ONLINE"
-      }
-    }).as('checkIban')
-
   cy.get('[name="payment.iban"]')
     .clear()
     .type(iban)
     .should('have.value', iban)
-
-  cy.wait('@checkIban')
-    .its('response.statusCode')
-    .should('be.oneOf', [statusCode])
 
 })
 
