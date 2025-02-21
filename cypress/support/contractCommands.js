@@ -1,6 +1,13 @@
 Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
 
-  cy.intercept('GET', '/check/soci/**').as('checkMember')
+  cy.intercept('GET', '/check/vat/*', {
+    state: true,
+    status: 'ONLINE'
+  }).as('checkVat')
+  cy.intercept('GET', '/data/soci/**', {
+    state: true,
+    status: 'ONLINE'
+  }).as('checkMember')
 
   cy.get('#memberNumber')
     .clear()
@@ -89,6 +96,18 @@ Cypress.Commands.add('typeIbanGenerationkwh', (iban, statusCode) => {
 
 
 Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
+
+  cy.intercept('GET', '/check/cups/status/*',
+    {
+      data: { 
+        cups: cups,
+        status: 'new',
+        tariff_type: null,
+      },
+      status: "ONLINE",
+      state: true      
+    }).as('checkIban')
+
   cy.get('#cups')
     .clear()
     .type(cups)
@@ -289,18 +308,19 @@ Cypress.Commands.add('reviewAndConfirmData', () => {
 })
 
 Cypress.Commands.add('juridicPersonalData', (datajuridic, dataholder) => {
-  cy.intercept('GET', '/check/vat/exists/*',{
-    statusCode : 200,
-    body: 
-    {data: {
+  cy.intercept('GET', '/check/vat/exists/*', {
+    statusCode: 200,
+    body:
+    {
+      data: {
         exists: true,
         is_member: true,
         is_selfconsumption_owner: false,
         valid: true
-    },
-    state: true,
-    status: "ONLINE"
-  }
+      },
+      state: true,
+      status: "ONLINE"
+    }
   }).as('checkVat')
 
   cy.get('[name="holder.name"]')

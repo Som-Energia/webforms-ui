@@ -20,6 +20,7 @@ const ApiStatus = () => {
   const checkApiStatus = async () => {
     apiStatus()
       .then((response) => {
+        console.log("HOLA RESPONSE",response);
         response?.data?.status
           ? response?.data?.status === 'OFFLINE'
             ? setApiOffline(true)
