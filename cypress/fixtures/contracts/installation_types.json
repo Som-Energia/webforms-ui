@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "id": "01",
+            "name": "Red interior"
+        },
+        {
+            "id": "02",
+            "name": "Red interior da varios consumidores (instalaci\u00f3n de enlace)"
+        },
+        {
+            "id": "03",
+            "name": "Pr\u00f3xima a trav\u00e9s de red"
+        }
+    ],
+    "state": true,
+    "status": "ONLINE"
+}

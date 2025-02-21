@@ -1,0 +1,147 @@
+{
+    "data": {
+        "current": {
+            "bo_social": {
+                "unit": "\u20ac/dia",
+                "value": 0.0
+            },
+            "comptador": {
+                "unit": "\u20ac/mes",
+                "value": 0.9801
+            },
+            "end_date": false,
+            "energia": {
+                "P1": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.30652
+                },
+                "P2": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.211129
+                },
+                "P3": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.161527
+                }
+            },
+            "energia_autoconsumida": {
+                "P1": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.063593
+                },
+                "P2": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.063593
+                },
+                "P3": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.063593
+                }
+            },
+            "energia_carrecs": {
+                "P1": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.0
+                },
+                "P2": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.0
+                },
+                "P3": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.0
+                }
+            },
+            "excedent_autoconsum": {
+                "P1": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.0
+                },
+                "P2": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.0
+                },
+                "P3": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.0
+                }
+            },
+            "exces_potencia": {
+                "P1": {
+                    "unit": "\u20ac/kW",
+                    "value": 0.010293
+                },
+                "P2": {
+                    "unit": "\u20ac/kW",
+                    "value": 0.010293
+                }
+            },
+            "exces_potencia_per_maximetre": {
+                "P1": {
+                    "unit": "\u20ac/kW",
+                    "value": 0.000339
+                },
+                "P2": {
+                    "unit": "\u20ac/kW",
+                    "value": 0.000339
+                }
+            },
+            "fiscal_position": {
+                "date_from": "2025-02-18",
+                "date_to": "2025-02-18",
+                "name": "R\u00e9gimen nacional 2024"
+            },
+            "generation_kWh": {
+                "P1": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.255645
+                },
+                "P2": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.171701
+                },
+                "P3": {
+                    "unit": "\u20ac/kWh",
+                    "value": 0.138633
+                }
+            },
+            "potencia": {
+                "P1": {
+                    "unit": "\u20ac/kW/dia",
+                    "value": 0.101098
+                },
+                "P2": {
+                    "unit": "\u20ac/kW/dia",
+                    "value": 0.009715
+                }
+            },
+            "potencia_carrecs": {
+                "P1": {
+                    "unit": "\u20ac/kW",
+                    "value": 0.0
+                },
+                "P2": {
+                    "unit": "\u20ac/kW",
+                    "value": 0.0
+                }
+            },
+            "reactiva": {
+                "BOE n\u00fam. 302 - 16/12/2024": {
+                    "0 - 0.80": {
+                        "unit": "\u20ac/kVArh",
+                        "value": 0.079278
+                    },
+                    "0.80 - 0.95": {
+                        "unit": "\u20ac/kVArh",
+                        "value": 0.052852
+                    }
+                }
+            },
+            "start_date": "2025-01-01",
+            "version_name": "2.0TD_SOM 2025-01-01"
+        },
+        "history": []
+    },
+    "state": true,
+    "status": "ONLINE"
+}
