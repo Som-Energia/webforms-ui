@@ -15,7 +15,7 @@ import HolderIban from './pages/Contract/Iban'
 import TaxAddress from './pages/Contract/TaxAddress'
 import SupplyPointData from './pages/Contract/SupplyPointData'
 import Power from './pages/Contract/Power'
-// import TariffMode from './pages/Contract/TariffMode'
+import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
 
 const Contract = (props) => {
