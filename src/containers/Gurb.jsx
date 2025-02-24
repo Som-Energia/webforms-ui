@@ -46,7 +46,7 @@ const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
 
 const Gurb = (props) => {
   const { i18n, t } = useTranslation()
-  const { language } = useParams()
+  const { language, id } = useParams()
   const { error, setError, errorInfo, setErrorInfo } =
     useContext(GurbErrorContext)
 
