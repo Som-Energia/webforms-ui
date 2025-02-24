@@ -41,7 +41,7 @@ import GurbLoadingContext from '../context/GurbLoadingContext'
 const MAX_STEP_NUMBER = 15
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5, 6, 7]
-const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15]
+const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
 
 const Gurb = (props) => {
   const { i18n, t } = useTranslation()
@@ -123,6 +123,7 @@ const Gurb = (props) => {
       supply_point_accepted: false
     },
     contract: {
+      tariff_mode: undefined,
       power_type: undefined,
       power: {
         power1: undefined,

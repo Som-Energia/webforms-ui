@@ -15,6 +15,7 @@ import HolderIban from './pages/Contract/Iban'
 import TaxAddress from './pages/Contract/TaxAddress'
 import SupplyPointData from './pages/Contract/SupplyPointData'
 import Power from './pages/Contract/Power'
+// import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
 
 const Contract = (props) => {
@@ -33,18 +34,21 @@ const Contract = (props) => {
       return <TaxAddress {...props} />
     }
     if (activeStep === 3) {
-      return <Power {...props} />
-    }
-    if (activeStep === 4) {
       return <SupplyPointData {...props} />
     }
+    if (activeStep === 4) {
+      return <Power {...props} />
+    }
     if (activeStep === 5) {
-      return <HolderVoluntaryDonation {...props} />
+      return <TariffMode {...props} />
     }
     if (activeStep === 6) {
-      return <HolderIban {...props} />
+      return <HolderVoluntaryDonation {...props} />
     }
     if (activeStep === 7) {
+      return <HolderIban {...props} />
+    }
+    if (activeStep === 8) {
       return <ContractSummary {...props} />
     } else {
       return <></>
