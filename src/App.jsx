@@ -444,7 +444,7 @@ const App = (props) => {
                 />
                 {props?.isGurbEnabled && (
                   <Route
-                    path="/:language/gurb/validations/"
+                    path="/:language/gurb/:id/validations/"
                     element={
                       <GurbErrorContextProvider>
                         <GurbLoadingContextProvider>
