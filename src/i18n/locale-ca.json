@@ -883,5 +883,11 @@
     "MAINTENANCE_TEXT1": "Estem realitzant tasques de manteniment",
     "MAINTENANCE_TEXT2": "Tornem aviat",
     "AUTOCOMPLETE_LOADING_TEXT": "Carregant...",
-    "AUTOCOMPLETE_WIHTOUT_OPTIONS": "No s'han trobat resultat"
+    "AUTOCOMPLETE_WIHTOUT_OPTIONS": "No s'han trobat resultat",
+    "GURB_TARIFFMODE_PERIODS_HEADER": "Tarifa Periodes",
+    "GURB_TARIFFMODE_PERIODS_BODY": "Tiene dos periodos horarios para la potencia con precios diferentes y tres periodos horarios para la energía con precios también diferentes. Puedes consultar los precios en el <a href='https://www.somenergia.coop'> de tarifas del web</a>.",
+    "GURB_TARIFFMODE_INDEXED_HEADER": "Tarifa Indexada",
+    "GURB_TARIFFMODE_INDEXED_BODY": "El precio de la energía en el mercado mayorista diario se traslada directamente a las personas y empresas consumidoras. Las variaciones de precio se repercuten en tiempo real a los usuarios, por lo que el precio cambia cada día y cada hora según las fluctuaciones del mercado diario.",
+    "GURB_TARIFFMODE_TITLE": "Tarifes",
+    "GURB_TARIFFMODE_QUESTION": "Quina tarifa vols contractar?"
 }

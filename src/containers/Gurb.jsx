@@ -32,7 +32,8 @@ import {
   holderTaxAddressValidations,
   supplyPointDataValidations,
   holderVoluntaryDonationValidations,
-  powerValidations
+  powerValidations,
+  tariffModeValidations
 } from './Gurb/contractValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
@@ -145,8 +146,9 @@ const Gurb = (props) => {
     holderIdentificationValidations,
     holderPersonalDataValidations,
     holderTaxAddressValidations,
-    powerValidations,
     supplyPointDataValidations,
+    powerValidations,
+    tariffModeValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations
   ]
