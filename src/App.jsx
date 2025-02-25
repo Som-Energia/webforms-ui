@@ -41,7 +41,7 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
-  const Gurb = lazy(() => import('./containers/Gurb'))
+  const GurbForm = lazy(() => import('./containers/GurbForm'))
 
   const loadContractData = () => {
     const contractData =
@@ -448,7 +448,7 @@ const App = (props) => {
                     element={
                       <GurbErrorContextProvider>
                         <GurbLoadingContextProvider>
-                          <Gurb {...props} />
+                          <GurbForm {...props} />
                         </GurbLoadingContextProvider>
                       </GurbErrorContextProvider>
                     }
