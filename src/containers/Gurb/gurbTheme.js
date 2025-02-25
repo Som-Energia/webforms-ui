@@ -150,7 +150,7 @@ export const iconOffRequirements = {
 }
 
 export const chooserGurb = {
-  width: '20.45rem',
+  width: '26rem',
   paddingTop: '1.5rem',
   paddingBottom: '2rem',
   paddingLeft: '1.625rem',
