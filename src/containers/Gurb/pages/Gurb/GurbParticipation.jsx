@@ -7,6 +7,7 @@ import Select from '../../components/Select'
 import Alert from '@mui/material/Alert'
 
 const Contract = (props) => {
+
     const options = [
         {
             id: '90-pastel',
