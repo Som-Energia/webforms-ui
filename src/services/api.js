@@ -230,7 +230,7 @@ export const checkMember = async (number, vat) => {
 
   return axios({
     method: 'GET',
-    url: `${WEBFORMS_API_URL}/data/soci/${number}/${vat}`,
+    url: `${WEBFORMS_API_URL}/check/soci/${number}/${vat}`,
     cancelToken: cancelTokenMember.token
   }).then((response) => {
     return response?.data

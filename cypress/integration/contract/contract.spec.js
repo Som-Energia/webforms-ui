@@ -230,7 +230,7 @@ describe('Contract', () => {
     let memberNumber = this.data.member.number
     let memberVat = this.data.member.badVat
 
-    cy.intercept('GET', '/data/soci/**').as('checkMember')
+    cy.intercept('GET', '/check/soci/**').as('checkMember')
 
     cy.get('#memberNumber')
       .clear()
