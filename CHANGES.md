@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 2.7.0 2025-02-25
 
 - checkMember: get the response from data and not from the state field
 - checkMember: moved from data to check
