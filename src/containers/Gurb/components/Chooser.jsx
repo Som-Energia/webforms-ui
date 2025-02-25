@@ -25,20 +25,28 @@ const Option = ({
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: '1rem'
+          alignItems: 'center',
+          marginBottom: '1rem',
+          justifyContent: 'space-between'
         }}>
-        {icon}
-        {isSelected && (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+          {icon}
+          <Typography sx={textHeader4}>{textHeader}</Typography>
+        </Box>
+        {isSelected ?
           <Checkbox
             checked
             icon={<CheckCircleIcon />}
             checkedIcon={<CheckCircleIcon />}
           />
-        )}
+          : null
+        }
       </Box>
-      <Typography sx={textHeader4}>{textHeader}</Typography>
       <Typography sx={textBody1}>{textBody}</Typography>
     </Box>
   )
@@ -58,7 +66,7 @@ const Chooser = (props) => {
       spacing={4}
       sx={{
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center',
         marginTop: '0.5rem',
         marginBottom: '1rem'
@@ -71,8 +79,7 @@ const Chooser = (props) => {
           sm={6}
           sx={{
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
+            alignItems: 'stretch'
           }}>
           <Option
             isSelected={option?.id === value}
