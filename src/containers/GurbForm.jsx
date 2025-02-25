@@ -40,13 +40,13 @@ import {
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 15
+const MAX_STEP_NUMBER = 19
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5, 6, 7]
 const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
 const GURB_STEPS = [17, 18, 19]
 
-const Gurb = (props) => {
+const GurbForm = (props) => {
   const { i18n, t } = useTranslation()
   const { language, id } = useParams()
   const { error, setError, errorInfo, setErrorInfo } =
@@ -205,7 +205,7 @@ const Gurb = (props) => {
         <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
       )
     } else if (GURB_STEPS.includes(activeStep)) {
-      return (<GurbAdd {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />)
+      return (<Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />)
     }
     else {
       return <></>
@@ -303,4 +303,4 @@ const Gurb = (props) => {
     </Container>
   )
 }
-export default Gurb
+export default GurbForm
