@@ -1,8 +1,8 @@
 import React from 'react'
-import { checkIban } from '../services/api'
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined'
 import { useTranslation } from 'react-i18next'
 import ApiValidatedField from './ApiValidatedField'
+import { checkIbanFormat } from '../services/utils'
 
 export function IBANField(props) {
   const { t } = useTranslation()
@@ -17,27 +17,15 @@ export function IBANField(props) {
     return value
   }
   function localCheck(value) {
-    return { value, valid: value.replaceAll(' ', '').length === 24 }
+    const valid = checkIbanFormat(value)
+    return { value, valid }
   }
-  function remoteCheck(value) {
-    return checkIban(value)
-      .then((response) => {
-        const valid = response?.state === true
-        return { value, valid }
-      })
-      .catch((error) => {
-        const valid = !!error?.response?.data?.state
-        return { value, valid }
-      })
-  }
-
   return (
     <ApiValidatedField
       {...others}
       leadingIcon={AccountBalanceOutlinedIcon}
       inputFilter={inputFilter}
       localCheck={localCheck}
-      remoteCheck={remoteCheck}
       onChange={(newValue) => {
         return onChange({
           ...newValue,

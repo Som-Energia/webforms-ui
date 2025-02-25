@@ -220,10 +220,6 @@ describe('Generation Form', () => {
       let memberNumber = this.data.member.number
       let memberVat = this.data.member.badVat
 
-      cy.intercept('GET', '/check/vat/*', {
-        statusCode: 400,
-      }).as('checkVat')
-
       cy.intercept('GET', '/check/soci/**',
         {
           statusCode: 200,
@@ -248,13 +244,6 @@ describe('Generation Form', () => {
         .should('have.value', memberNumber)
 
       cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
-
-
-
-
-      cy.wait('@checkVat')
-        .its('response.statusCode')
-        .should('be.oneOf', [400])
 
       cy.wait('@checkMember')
         .its('response.statusCode')

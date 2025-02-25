@@ -13,7 +13,7 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
-import { checkIban } from '../../services/api'
+import { checkIbanFormat } from '../../services/utils'
 
 // TODO: Use IBANField
 function IBAN(props) {
@@ -52,19 +52,8 @@ function IBAN(props) {
 
   useEffect(() => {
     if (values.payment.iban.length > 27) {
-      setIsLoading(true)
-      checkIban(values.payment.iban)
-        .then((response) => {
-          setFieldValue('payment.iban_valid', response?.state === true)
-          setIsLoading(false)
-        })
-        .catch((error) => {
-          const errorStatus = error?.response?.data?.state
-            ? error?.response?.data?.state
-            : false
-          setFieldValue('payment.iban_valid', errorStatus)
-          setIsLoading(false)
-        })
+      const valid = checkIbanFormat(values.payment.iban)
+      setFieldValue('payment.iban_valid', valid)
     } else {
       setFieldValue('payment.iban_valid', false)
     }

@@ -10,14 +10,12 @@ import RequiredTitle from '../../components/InputTitle'
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
 import Box from '@mui/material/Box'
 
-import { checkMemberVat } from '../../../../services/api'
-import GurbLoadingContext from '../../../../context/GurbLoadingContext'
-
 import {
   iconOffRequirements,
   iconRequirements,
   textHeader4
 } from '../../gurbTheme'
+import { checkVatFormat } from '../../../../services/utils'
 
 const HolderIdentification = (props) => {
   const {
@@ -32,24 +30,14 @@ const HolderIdentification = (props) => {
   } = props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
 
   const handleCheckNifResponse = async () => {
-    let status = undefined
-    setLoading(true)
-    await checkMemberVat(values.holder.nif)
-      .then((response) => {
-        status = response?.state
-      })
-      .catch(() => {
-        status = false
-      })
-    if (status === true) {
+    let valid = checkVatFormat(values.holder.nif)
+    if (valid === true) {
       setFieldError('holder.nif', undefined)
     } else {
       setFieldError('holder.nif', t('INVALID_NIF'))
     }
-    setLoading(false)
   }
 
   useEffect(() => {
