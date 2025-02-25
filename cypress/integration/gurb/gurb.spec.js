@@ -54,7 +54,7 @@ describe('Contract', () => {
 
       cy.memberQuestion('member-on')
 
-      cy.identifyMember({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
+      cy.identifyMemberGURB({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
 
       cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
 
@@ -82,7 +82,7 @@ describe('Contract', () => {
 
       cy.memberQuestion('apadrinating')
 
-      cy.identifyMember({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
+      cy.identifyMemberGURB({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
 
       cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
 
