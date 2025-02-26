@@ -5,7 +5,7 @@ import { textField } from '../gurbTheme'
 
 
 const Select = (props) => {
-    const { options, value, handleChange } = props
+    const { options, value, handleChange, helperText } = props
 
     return (
             <TextField
@@ -20,7 +20,9 @@ const Select = (props) => {
                     }
                 }}
                 onChange={(event) => handleChange(event.target.value)}
-                value={value}>
+                value={value}
+                helperText={helperText}
+                >
                 {options.map((element) => (
                     <MenuItem key={element.id} value={element.id}>
                         {element.value}
