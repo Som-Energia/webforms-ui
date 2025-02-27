@@ -123,7 +123,7 @@ export const textReviewSubtitle = {
 
 export const containerSpacing = {
   display: 'flex',
-  padding: '0.3rem',
+  padding: '16px',
   borderRadius: '8px'
 }
 
