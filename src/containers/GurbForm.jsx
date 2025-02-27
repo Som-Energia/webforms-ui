@@ -184,12 +184,10 @@ const GurbForm = (props) => {
     if (activeStep === 4) {
       if (formikProps.values.has_member === 'member-off') {
         next = activeStep + 2
-      }
-      else if (formikProps.values.has_member === 'apadrinating') {
+      } else if (formikProps.values.has_member === 'apadrinating') {
         next = activeStep + 3
       }
-    }
-    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       next = 8
     }
     const last = MAX_STEP_NUMBER
@@ -201,12 +199,10 @@ const GurbForm = (props) => {
     if (activeStep === 8) {
       if (formikProps.values.has_member === 'member-off') {
         prev = activeStep - 2
-      }
-      else if (formikProps.values.has_member === 'member-on') {
+      } else if (formikProps.values.has_member === 'member-on') {
         prev = activeStep - 3
       }
-    }
-    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       prev = 4
     }
     setActiveStep(Math.max(0, prev))
@@ -232,15 +228,19 @@ const GurbForm = (props) => {
         />
       )
     } else if (NEW_MEMBER_STEP.includes(activeStep)) {
-      return <NewMember {...props} activeStep={NEW_MEMBER_STEP.indexOf(activeStep)} />
+      return (
+        <NewMember
+          {...props}
+          activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
+        />
+      )
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
         <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
       )
     } else if (GURB_STEPS.includes(activeStep)) {
-      return (<Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />)
-    }
-    else {
+      return <Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />
+    } else {
       return <></>
     }
   }
