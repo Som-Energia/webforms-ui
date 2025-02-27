@@ -180,7 +180,8 @@ export const buttonGurbDark = {
     color: '#1E1E1E',
     boxShadow: 'none',
     border: '1px solid #D9D9D9'
-  }
+  },
+  width: '100%'
 }
 
 export const buttonGurbLight = {
@@ -210,7 +211,8 @@ export const buttonGurbLight = {
       color: '#FFFFFF',
       '& svg': { width: '0.8rem', hight: '0.8rem' }
     }
-  }
+  },
+  width: '100%'
 }
 
 export const link = {
