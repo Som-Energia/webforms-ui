@@ -123,6 +123,8 @@ const GurbForm = (props) => {
     cadastral_reference: '',
     cadastral_reference_valid: true,
     supply_point: {
+      is_housing: undefined,
+      cnae: undefined,
       supply_point_accepted: false
     },
     contract: {

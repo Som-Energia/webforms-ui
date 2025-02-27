@@ -120,7 +120,11 @@ export const supplyPointDataValidations = Yup.object().shape({
   supply_point: Yup.object().shape({
     supply_point_accepted: Yup.bool()
       .required('UNACCEPTED_FAIR_TITLE')
-      .oneOf([true], 'UNACCEPTED_FAIR_TITLE')
+      .oneOf([true], 'UNACCEPTED_FAIR_TITLE'),
+    cnae: Yup.string().required('REQUIRED_CNAE'),
+    cnae_valid: Yup.bool()
+    .required('INCORRECT_CNAE')
+    .oneOf([true], 'INCORRECT_CNAE'),
   })
 })
 
