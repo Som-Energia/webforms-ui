@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
 import Grid from '@mui/material/Grid'
 
 import { checkCnae } from '../../../services/api'
 import GurbLoadingContext from '../../../context/GurbLoadingContext'
 import InputField from './InputField'
+import Select from './Select'
+import InputTitle from './InputTitle'
+import { textHeader4, textField } from '../gurbTheme'
 
 
 const CnaeField = (props) => {
@@ -69,40 +70,42 @@ const CnaeField = (props) => {
     })
   }
 
+  const options = [
+    { id: 'yes', value: true },
+    { id: 'no', value: false }
+  ]
+
   return (
     <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <TextField  // TODO: Selector
-            select
-            fullWidth
-            name="is_housing"
-            label={t('ES_UN_HABITATGE')}
-            value={values?.supply_point?.is_housing}
-            onChange={handleIsHousing}
-            error={errors?.supply_point?.is_housing}
-            helperText=""
-          >
-            <MenuItem value={true}>{t('YES')}</MenuItem>
-            <MenuItem value={false}>{t('NO')}</MenuItem>
-          </TextField>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            name="cnae"
-            textFieldLabel={t('CNAE')}
-            textFieldName={t('CNAE')}
-            readonlyField={values?.supply_point?.is_housing}
-            value={values?.supply_point?.cnae}
-            handleChange={handleChangeCNAE}
-            handleBlur={handleBlurCNAE}
-            touched={touched?.supply_point?.cnae}
-            error={errors?.supply_point?.cnae || errors?.supply_point?.cnae_valid}
-            isLoading={loading}
-            required={true}
-          />
-
-        </Grid>
+      <Grid item xs={12} sm={6}>
+        <InputTitle
+          text={t('ES_UN_HABITATGE')}
+          textStyle={textHeader4}
+          required={true}
+        />
+        <Select
+          options={options}
+          value={values?.supply_point?.is_housing}
+          handleChange={handleIsHousing}
+          style={textField}
+        />
       </Grid>
+      <Grid item xs={12} sm={6}>
+        <InputField
+          name="cnae"
+          textFieldLabel={t('CNAE')}
+          textFieldName={t('CNAE')}
+          readonlyField={values?.supply_point?.is_housing}
+          value={values?.supply_point?.cnae}
+          handleChange={handleChangeCNAE}
+          handleBlur={handleBlurCNAE}
+          touched={touched?.supply_point?.cnae}
+          error={errors?.supply_point?.cnae || errors?.supply_point?.cnae_valid}
+          isLoading={loading}
+          required={true}
+        />
+      </Grid>
+    </Grid>
   )
 }
 

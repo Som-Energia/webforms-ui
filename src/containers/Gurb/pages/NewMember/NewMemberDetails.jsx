@@ -228,7 +228,7 @@ const NewMemberDetails = (props) => {
       {/* TO DO: make a component? */}
       <Box sx={{ marginTop: '2rem' }}>
         <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
-        <TextField
+        <TextField  // TODO: Use Select Component
           sx={textField}
           required
           select
