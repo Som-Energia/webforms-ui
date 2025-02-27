@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
@@ -250,51 +251,35 @@ const GurbForm = (props) => {
               {error ? (
                 <></>
               ) : (
-                <>
-                  {activeStep === 0 ? (
-                    <>
-                      <Box
-                        style={{
-                          marginTop: '2rem',
-                          marginX: '2rem',
-                          display: 'flex',
-                          justifyContent: 'flex-end'
-                        }}>
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
-                        />
-                      </Box>
-                    </>
-                  ) : (
-                    <Box
-                      style={{
-                        marginTop: '2rem',
-                        marginX: '2rem',
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}>
+                <Grid
+                  container
+                  direction="row-reverse"
+                  rowSpacing={2}
+                  sx={{
+                    marginTop: '2rem',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                  {activeStep !== 0 && (
+                    <Grid item md={2} xs={12}>
                       <PrevButton
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
                       />
-                      <NextButton
-                        disabled={
-                          loading ||
-                          !formikProps.isValid ||
-                          activeStep === MAX_STEP_NUMBER
-                        }
-                        onClick={() => nextStep(formikProps)}
-                        title={'NEXT'}
-                      />
-                    </Box>
+                    </Grid>
                   )}
-                </>
+                  <Grid item md={2} xs={12} order={-1}>
+                    <NextButton
+                      disabled={
+                        loading ||
+                        !formikProps.isValid ||
+                        activeStep === MAX_STEP_NUMBER
+                      }
+                      onClick={() => nextStep(formikProps)}
+                      title={'NEXT'}
+                    />
+                  </Grid>
+                </Grid>
               )}
             </>
           )
