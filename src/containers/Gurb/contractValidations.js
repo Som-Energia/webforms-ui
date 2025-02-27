@@ -128,22 +128,6 @@ export const supplyPointDataValidations = Yup.object().shape({
   })
 })
 
-export const tariffModeValidations = Yup.object().shape({
-  contract: Yup.object().shape({
-    tariff_mode: Yup.string()
-    .required('REQUIRED_FIELD')
-    .oneOf(['periods', 'indexed']),
-  })
-})
-
-export const tariffModeValidations = Yup.object().shape({
-  contract: Yup.object().shape({
-    tariff_mode: Yup.string()
-    .required('REQUIRED_FIELD')
-    .oneOf(['periods', 'indexed']),
-  })
-})
-
 export const holderVoluntaryDonationValidations = Yup.object().shape({
   holder: Yup.object().shape({
     voluntary_donation: Yup.string()
