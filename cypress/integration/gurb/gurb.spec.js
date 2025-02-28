@@ -7,7 +7,7 @@ describe('Contract', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/ca/gurb/validations')
+    cy.visit('/ca/gurb/1/validations')
     cy.fixture('gurb.json').as('data')
     cy.fixture('holderChangePersonaldata.json').as('personaldata')
   })

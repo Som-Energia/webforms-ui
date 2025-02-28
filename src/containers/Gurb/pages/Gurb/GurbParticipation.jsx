@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { textHeader4, textField, textHeader5 } from '../../gurbTheme'
@@ -10,17 +10,28 @@ const Contract = (props) => {
 
     const options = [
         {
-            id: '90-pastel',
-            value: "90value"
+            id: '0_5_kwh',
+            value: "0.5 KWh"
         },
         {
-            id: '100-pastel',
-            value: '100values'
+            id: '1_kwh',
+            value: "1 KWh"
         }
     ]
 
-    const [value, setValue] = useState(options[0])
+    const cost = {
+        "1 KWh": 180,
+        "0.5 KWh": 90
+    }
+
+    const {values, setFieldValue} = props
     const { t } = useTranslation()
+
+
+    const onChangePower = async (value) => {
+        await setFieldValue('contract.gurb_power', value)
+        await setFieldValue('contract.gurb_power_cost', cost[value])
+    }
 
     return (
         <Box sx={{ display:'flex', flexDirection:'column', gap: 1 }}>
@@ -28,8 +39,8 @@ const Contract = (props) => {
             <Typography sx={textHeader5}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}</Typography>
             <Select
                 options={options}
-                value={value}
-                handleChange={setValue}
+                value={values.contract.gurb_power}
+                handleChange={(value) => onChangePower(value)}
                 style={textField}
                 helperText={
                     <span

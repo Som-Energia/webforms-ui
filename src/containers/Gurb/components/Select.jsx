@@ -24,7 +24,7 @@ const Select = (props) => {
                 helperText={helperText}
                 >
                 {options.map((element) => (
-                    <MenuItem key={element.id} value={element.id}>
+                    <MenuItem key={element.id} value={element.value}>
                         {element.value}
                     </MenuItem>
                 ))}

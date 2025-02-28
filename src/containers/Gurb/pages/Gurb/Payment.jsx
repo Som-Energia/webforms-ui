@@ -9,7 +9,11 @@ import InputField from '../../components/InputField'
 
 const Payment = (props) => {
 
+    const NEW_MEMBER_COST = 100
     const { t } = useTranslation()
+    const {values,errors}= props
+
+    console.log(errors)
 
     return (
         <>
@@ -18,7 +22,7 @@ const Payment = (props) => {
                 <Typography sx={textBody1}>{t('GURB_PAYMENT_REVIEW_TEXT_CUSTOMER_COST')}</Typography>
                 <InputField
                     name='customer_cost'
-                    value={100}
+                    value={NEW_MEMBER_COST + '€'}
                     readonlyField={true}
                 />
             </Box>
@@ -27,13 +31,13 @@ const Payment = (props) => {
                 <Typography sx={textBody1}>{t('GURB_PAYMENT_REVIEW_TEXT_GURB_COST')}</Typography>
                 <InputField
                     name='gurb_cost'
-                    value={90}
+                    value={values.contract.gurb_power_cost + '€'}
                     readonlyField={true}
                 />
             </Box>
             <Box sx={{display:'flex',justifyContent:'center', width:"100%", gap:2}}>
-                <Typography sx={textHeader3}>{"Total a pagar"}</Typography>
-                <Typography sx={textBody1}>{"190€ (IVA inclós)"}</Typography>
+                <Typography sx={textHeader3}>{t("Total a pagar")}</Typography>
+                <Typography sx={textBody1}>{(NEW_MEMBER_COST + values.contract.gurb_power_cost) + " € " + t("IVA inclós")}</Typography>
             </Box>
         </>
     )
