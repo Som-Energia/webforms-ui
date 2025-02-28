@@ -37,10 +37,15 @@ import {
   tariffModeValidations
 } from './Gurb/contractValidations'
 
+import {
+  gurbPowerOptions,
+  gurbPolicyChecks
+} from './Gurb//GurbValidations'
+
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
-const MAX_STEP_NUMBER = 19
+const MAX_STEP_NUMBER = 20
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5, 6, 7]
 const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
@@ -134,8 +139,14 @@ const GurbForm = (props) => {
         power1: undefined,
         power2: undefined,
         power3: undefined
-      }
-    }
+      },
+      gurb_power: '',
+      gurb_power_cost: ''
+    },
+    privacy_policy_accepted: false,
+    generic_especific_conditons_accepted: false,
+    tariff_payment_accepted: false,
+    gurb_adhesion_payment_accepted: false
   }
 
   const validationSchemas = [
@@ -154,7 +165,10 @@ const GurbForm = (props) => {
     powerValidations,
     tariffModeValidations,
     holderVoluntaryDonationValidations,
-    holderIbanValidations
+    holderIbanValidations,
+    gurbPowerOptions,
+    gurbPowerOptions,
+    gurbPolicyChecks
   ]
 
   const nextStep = (formikProps) => {
