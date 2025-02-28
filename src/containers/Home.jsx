@@ -18,6 +18,7 @@ const availableLanguages = Object.keys(i18n?.options?.resources)
 if (!availableLanguages.includes(language)) {
   language = 'ca'
 }
+let gurbId = 2  // TODO: move to env?
 
 const options = [
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
@@ -34,7 +35,7 @@ const options = [
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
   { title: 'Generation kwh - Form', href: '/generationkwh/contribution' },
-  { title: 'Gurb - Form', href: '/ca/gurb/validations' }
+  { title: 'Gurb - Form', href: `${language}/gurb/${gurbId}/validations/`}
 
 ]
 

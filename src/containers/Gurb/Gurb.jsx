@@ -10,7 +10,6 @@ import SomStepper from './components/SomStepper'
 import Payment from './pages/Gurb/Payment'
 
 
-
 const Contract = (props) => {
     const { activeStep } = props
     const { t } = useTranslation()
@@ -27,7 +26,6 @@ const Contract = (props) => {
             return t('GURB_PARTICIPATION_TITLE_3_STEP')
         }
     }
-
     const getStep = () => {
         if (activeStep === 0) {
             return <GurbParticipation {...props} />

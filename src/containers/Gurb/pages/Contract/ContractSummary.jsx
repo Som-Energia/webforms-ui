@@ -171,11 +171,11 @@ const ContractSummary = (props) => {
       Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
     )
     getPrices({
-      tariff: '2.0TD', // values.contract.tariff,
-      max_power: '5000',
-      vat: '60973654X', //values.holder.dni,
-      cnae: '9820', // values.supply_point.cnae,
-      city_id: 5102 // values.address.city
+      tariff: values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
+      max_power: maxPower,
+      vat: values.holder.nif,
+      cnae: values.supply_point.cnae,
+      city_id: values.address.city.id
     })
       .then((response) => {
         const tariffPrices = response?.data['current']

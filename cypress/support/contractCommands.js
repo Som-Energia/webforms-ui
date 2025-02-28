@@ -1,7 +1,7 @@
 Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
 
   cy.intercept('GET', '/check/vat/*').as('checkVat')
-  cy.intercept('GET', '/data/soci/**').as('checkMember')
+  cy.intercept('GET', '/check/soci/**').as('checkMember')
 
   cy.get('#memberNumber')
     .clear()
@@ -24,11 +24,11 @@ Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
 
 Cypress.Commands.add('generationkwhIdentifyMember', (memberNumber, memberVat, canJoin) => {
 
-  cy.intercept('GET', '/data/soci/**',
+  cy.intercept('GET', '/check/soci/**',
     {
       statusCode: 200,
       body: {
-        data: { soci: {} },
+        data: true,
         state: true
       }
     }).as('checkMember')

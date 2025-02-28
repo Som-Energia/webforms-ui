@@ -13,6 +13,7 @@ import { textCheckbox, textHeader4 } from '../../gurbTheme'
 
 import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../components/DragDrop'
+import CNAE from '../../components/CNAE'
 
 const SupplyPointData = (props) => {
   const {
@@ -53,6 +54,7 @@ const SupplyPointData = (props) => {
         />
         <SomStepper step={activeStep} connectors={7 + 1} />
       </Box>
+      <CNAE {...props} />
       <CadastralReference {...props} />
       <DragDrop
         fieldName={t('GURB_ELECTRIC_BILL_UPLOAD')}
