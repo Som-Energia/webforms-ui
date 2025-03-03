@@ -13,7 +13,6 @@ import InputTitle from './InputTitle'
 
 import { textField } from '../gurbTheme'
 
-
 export const HelperText = ({
   helperText,
   iconHelper,
@@ -65,21 +64,22 @@ const InputField = ({
         disabled={readonlyField}
         fullWidth
         InputProps={{
-          sx: { borderRadius: '8px', display: 'flex' },
+          sx: { borderRadius: '8px' },
           onBlur: handleBlur,
-          endAdornment: (
-            <InputAdornment position="end">
-              {isLoading && <CircularProgress size={24} />}
-              {endAdornmentText && endAdornmentText}
+          startAdornment: startAdornmentText && numInputs > 1 && (
+            <InputAdornment position="start">
+              {startAdornmentText}
             </InputAdornment>
           ),
-          startAdornment: (
-            <InputAdornment position="start">
-              {startAdornmentText && numInputs > 1 && startAdornmentText}
-            </InputAdornment>
-          )
+          endAdornment:
+            (isLoading && (
+              <InputAdornment position="end">
+                {<CircularProgress size={24} />}
+              </InputAdornment>
+            )) ||
+            endAdornmentText
         }}
-        label={textFieldLabel}
+        label={value ? undefined : textFieldLabel}
         helperText={
           touched && error ? (
             t(error)
