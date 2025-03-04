@@ -299,7 +299,7 @@ const GurbForm = (props) => {
                     alignItems: 'center'
                   }}>
                   {activeStep !== 0 && (
-                    <Grid item md={2} xs={12}>
+                    <Grid item sm={2} xs={12}>
                       <PrevButton
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
@@ -307,7 +307,7 @@ const GurbForm = (props) => {
 
                     </Grid>
                   )}
-                  <Grid item md={2} xs={12} order={-1}>
+                  <Grid item sm={2} xs={12} order={-1}>
                     <NextButton
                       disabled={
                         loading ||
