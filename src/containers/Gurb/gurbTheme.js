@@ -1,3 +1,6 @@
+export const PREV_COLOR = '#96b633'
+export const NEXT_COLOR = '#E6E6E6'
+
 export const textHeader1 = {
   fontFamily: 'Inter',
   color: '#3B3B3B',
