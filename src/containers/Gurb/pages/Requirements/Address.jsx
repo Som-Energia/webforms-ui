@@ -7,13 +7,17 @@ import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Box from '@mui/material/Box'
 import InputField from '../../components/InputField'
-import { getPlaceDetails, searchPlace } from '../../../../services/googleApiClient'
+import {
+  getPlaceDetails,
+  searchPlace
+} from '../../../../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../../../../services/api'
-
+import Grid from '@mui/material/Grid'
 
 const Address = (props) => {
   const { t } = useTranslation()
-  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } = props
+  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
+    props
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
   const [addressValue, setAddressValue] = useState(values.address.street)
   const [numberValue, setNumberValue] = useState(values.address.number)
@@ -22,18 +26,24 @@ const Address = (props) => {
   const updateAddressValues = async () => {
     try {
       const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
-      const postalCode = place.addressComponents.find(component =>
+      const postalCode = place.addressComponents.find((component) =>
         component.types.includes('postal_code')
-      );
+      )
       const municipis = await getMunicipisByPostalCode(postalCode?.longText)
-      const street = place.addressComponents.find(component =>
+      const street = place.addressComponents.find((component) =>
         component.types.includes('route')
-      );
-      const fullAddress = place.formattedAddress.replace(/,/, ` ${numberValue},`)
+      )
+      const fullAddress = place.formattedAddress.replace(
+        /,/,
+        ` ${numberValue},`
+      )
       const suggestions = await searchPlace(fullAddress, sessionTokenRef)
 
       if (suggestions.length > 0) {
-        const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
+        const suggestedPlace = await getPlaceDetails(
+          suggestions[0].id,
+          sessionTokenRef
+        )
 
         const updatedValues = {
           ...values,
@@ -45,24 +55,23 @@ const Address = (props) => {
             postal_code: postalCode?.longText || '',
             street: street?.longText || '',
             state: municipis && municipis[0] ? municipis[0][0]?.provincia : {},
-            city: municipis && municipis[0] ? municipis[0][0]?.municipi : {},
+            city: municipis && municipis[0] ? municipis[0][0]?.municipi : {}
           }
         }
 
-        setValues(updatedValues);
+        setValues(updatedValues)
       } else {
-        console.log("Address not found");
+        console.log('Address not found')
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
     if (addressValue?.id && numberValue) {
       updateAddressValues()
-    }
-    else if (!addressValue || !numberValue) {
+    } else if (!addressValue || !numberValue) {
       initializeAddress()
     }
   }, [addressValue, numberValue])
