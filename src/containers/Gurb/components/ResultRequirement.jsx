@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { textHeader4, textBody1 } from '../gurbTheme'
+import Grid from '@mui/material/Grid'
 
 const ResultRequirement = ({
   containerColors,
@@ -10,39 +11,41 @@ const ResultRequirement = ({
   textHelper = false
 }) => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
-      <Box
-        sx={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '2rem',
-          borderRadius: '8px',
-          ...containerColors
-        }}>
-        {icon}
-        <Typography sx={{ ...textHeader4, marginTop: '1rem' }}>
-          {textHeader}
-        </Typography>
-        <Typography sx={textBody1}>{textBody}</Typography>
-      </Box>
-      {textHelper && (
-        <Typography
+    <Grid container spacing={2} align={'center'}>
+      <Grid item xs={12}>
+        <Grid
+          align={'center'}
+          container
+          rowSpacing={1}
           sx={{
-            marginTop: '1rem',
-            fontSize: '14px',
-            color: '#000000'
+            ...containerColors,
+            padding: '2rem',
+            paddingBottom: '3rem',
+            borderRadius: '8px'
           }}>
-          {textHelper}
-        </Typography>
-      )}
-    </Box>
+          <Grid item xs={12}>
+            {icon}
+          </Grid>
+          <Grid item xs={12}>
+            <Typography sx={textHeader4}>{textHeader}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography sx={textBody1}>{textBody}</Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        {textHelper && (
+          <Typography
+            sx={{
+              fontSize: '14px',
+              color: '#000000'
+            }}>
+            {textHelper}
+          </Typography>
+        )}
+      </Grid>
+    </Grid>
   )
 }
 
