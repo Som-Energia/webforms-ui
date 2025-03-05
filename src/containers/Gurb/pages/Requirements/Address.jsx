@@ -129,80 +129,82 @@ const Address = (props) => {
   }
 
   return (
-    <>
-      <TextRecomendation
-        title={t('GURB_ADDRESS_TITLE')}
-        text={t('GURB_ADDRESS_TITLE_HELPER')}
-      />
-      <LocationInput
-        required
-        textFieldLabel={t('GURB_ADDRESS_LABEL')}
-        textFieldName={t('GURB_ADDRESS_FIELD')}
-        textFieldHelper={t('GURB_ADDRESS_HELPER')}
-        id="address-street"
-        name="address.street"
-        value={addressValue}
-        onChange={handleAddressChange}
-        sessionTokenRef={sessionTokenRef}
-      />
-      <Box sx={{ display: 'flex', gap: '2rem' }}>
-        <Box>
-          <InputField
-            name={'address.number'}
-            textFieldName={t('NUMBER')}
-            handleChange={handleChangeNumber}
-            touched={touched?.address?.number}
-            value={numberValue}
-            error={errors?.address?.number}
-            required={true}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.floor'}
-            textFieldName={t('FLOOR')}
-            handleChange={handleChangeInteger}
-            touched={touched?.address?.floor}
-            value={values?.address?.floor}
-            error={errors?.address?.floor}
-            required={false}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.door'}
-            textFieldName={t('DOOR')}
-            handleChange={handleChangeInteger}
-            touched={touched?.address?.door}
-            value={values?.address?.door}
-            error={errors?.address?.door}
-            required={false}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.stairs'}
-            textFieldName={t('STAIRS')}
-            handleChange={handleChange}
-            touched={touched?.address?.stairs}
-            value={values?.address?.stairs}
-            error={errors?.address?.stairs}
-            required={false}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.bloc'}
-            textFieldName={t('BLOCK')}
-            handleChange={handleChange}
-            touched={touched?.address?.bloc}
-            value={values?.address?.bloc}
-            error={errors?.address?.bloc}
-            required={false}
-          />
-        </Box>
-      </Box>
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextRecomendation
+          title={t('GURB_ADDRESS_TITLE')}
+          text={t('GURB_ADDRESS_TITLE_HELPER')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LocationInput
+          required
+          textFieldLabel={t('GURB_ADDRESS_LABEL')}
+          textFieldName={t('GURB_ADDRESS_FIELD')}
+          textFieldHelper={t('GURB_ADDRESS_HELPER')}
+          id="address-street"
+          name="address.street"
+          value={addressValue}
+          onChange={handleAddressChange}
+          sessionTokenRef={sessionTokenRef}
+        />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <InputField
+          name={'address.number'}
+          textFieldName={t('NUMBER')}
+          handleChange={handleChangeNumber}
+          touched={touched?.address?.number}
+          value={numberValue}
+          error={errors?.address?.number}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.floor'}
+          textFieldName={t('FLOOR')}
+          handleChange={handleChangeInteger}
+          touched={touched?.address?.floor}
+          value={values?.address?.floor}
+          error={errors?.address?.floor}
+          required={false}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.door'}
+          textFieldName={t('DOOR')}
+          handleChange={handleChangeInteger}
+          touched={touched?.address?.door}
+          value={values?.address?.door}
+          error={errors?.address?.door}
+          required={false}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.stairs'}
+          textFieldName={t('STAIRS')}
+          handleChange={handleChange}
+          touched={touched?.address?.stairs}
+          value={values?.address?.stairs}
+          error={errors?.address?.stairs}
+          required={false}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.bloc'}
+          textFieldName={t('BLOCK')}
+          handleChange={handleChange}
+          touched={touched?.address?.bloc}
+          value={values?.address?.bloc}
+          error={errors?.address?.bloc}
+          required={false}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default Address
