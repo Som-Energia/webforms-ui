@@ -21,8 +21,8 @@ const SomStepper = (props) => {
         connector={
           <StepConnector
             sx={{
-              marginTop: '3rem',
-              marginBottom: '3rem',
+              marginTop: '1rem',
+              marginBottom: '1rem',
               [`&.${stepConnectorClasses.active}`]: {
                 [`& .${stepConnectorClasses.line}`]: {
                   borderColor: '#1E1E1E'
