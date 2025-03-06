@@ -38,14 +38,13 @@ const Option = ({
           {icon}
           <Typography sx={textHeader4}>{textHeader}</Typography>
         </Box>
-        {isSelected ?
+        {isSelected ? (
           <Checkbox
             checked
             icon={<CheckCircleIcon />}
             checkedIcon={<CheckCircleIcon />}
           />
-          : null
-        }
+        ) : null}
       </Box>
       <Typography sx={textBody1}>{textBody}</Typography>
     </Box>
