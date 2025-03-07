@@ -724,5 +724,5 @@
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "'ES' ondoren 16 zenbaki idatzi behar dira",
     "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "19. eta 20. karaktereetan 2 kontrol-letra idatzi behar dira",
     "MAINTENANCE_TEXT1": "Mantentze lanak egiten ari gara",
-    "MAINTENANCE_TEXT2": "Laster itzuliko gara"
+    "MAINTENANCE_TEXT2": "Parada programada de <b>Oficina Virtual</b> del 7 al 11 de marzo. <br> No se podrán realizar gestiones, consultas, asociaciones ni contrataciones de luz durante este período."
 }
