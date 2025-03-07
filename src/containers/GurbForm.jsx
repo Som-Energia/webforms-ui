@@ -14,6 +14,7 @@ import Gurb from './Gurb/Gurb'
 
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
+import SubmitButton from './Gurb/components/SubmitButton'
 import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
   addressValidations,
@@ -44,22 +45,28 @@ import {
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import { addGurb } from '../services/api'
 
-const MAX_STEP_NUMBER = 20
+const MAX_STEP_NUMBER = 19
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5, 6, 7]
 const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
 const GURB_STEPS = [17, 18, 19]
+const NEW_MEMBER_COST = 100
 
 const GurbForm = (props) => {
   const { i18n, t } = useTranslation()
   const { language, id } = useParams()
+  const [url, setUrl] = useState('')
+  const [data, setData] = useState()
+  const formTPV = useRef(null)
+
   const { error, setError, errorInfo, setErrorInfo } =
     useContext(GurbErrorContext)
 
   const { loading } = useContext(GurbLoadingContext)
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(17)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
@@ -203,7 +210,16 @@ const GurbForm = (props) => {
     }
     setActiveStep(Math.max(0, prev))
   }
-
+  const handlePost = async (values) => {
+    await addGurb(values)
+      .then((response) => {
+        setData(response?.data)
+        setUrl(response.data.endpoint)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   const getStep = (props) => {
     if (activeStep === 0) {
       return <SupplyPoint {...props} />
@@ -250,6 +266,12 @@ const GurbForm = (props) => {
       NewMemberResult()
     }
   }, [activeStep])
+
+  useEffect(() => {
+    if (url !== '') {
+      formTPV.current.submit()
+    }
+  }, [url])
 
   return (
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
@@ -299,15 +321,25 @@ const GurbForm = (props) => {
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
                       />
-                      <NextButton
-                        disabled={
-                          loading ||
-                          !formikProps.isValid ||
-                          activeStep === MAX_STEP_NUMBER
-                        }
-                        onClick={() => nextStep(formikProps)}
-                        title={'NEXT'}
-                      />
+                      {activeStep !== MAX_STEP_NUMBER ?
+                        <NextButton
+                          disabled={
+                            loading ||
+                            !formikProps.isValid ||
+                            activeStep === MAX_STEP_NUMBER
+                          }
+                          onClick={() => nextStep(formikProps)}
+                          title={'NEXT'}
+                        />
+                        :
+                        <SubmitButton
+                          disabled={
+                            loading ||
+                            !formikProps.isValid
+                          }
+                          onClick={() => handlePost({ soci: "Eustaquio", cost: NEW_MEMBER_COST + formikProps.values.contract.gurb_power_cost })}
+                        />
+                      }
                     </Box>
                   )}
                 </>
@@ -316,7 +348,20 @@ const GurbForm = (props) => {
           )
         }}
       </Formik>
+      {data?.payment_data && (
+        <form ref={formTPV} action={data.endpoint} method="POST">
+          {Object.keys(data.payment_data).map((key) => (
+            <input
+              key={key}
+              type="hidden"
+              name={key}
+              value={data.payment_data[key]}
+            />
+          ))}
+        </form>
+      )}
     </Container>
+
   )
 }
 export default GurbForm
