@@ -5,15 +5,14 @@ import { textHeader3, textHeader4, textBody1 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import InputField from '../../components/InputField'
+import Button from '@mui/material/Button'
 
 
 const Payment = (props) => {
 
-    const NEW_MEMBER_COST = 100
     const { t } = useTranslation()
-    const {values,errors}= props
-
-    console.log(errors)
+    const {values}= props
+    const NEW_MEMBER_COST = 100
 
     return (
         <>
