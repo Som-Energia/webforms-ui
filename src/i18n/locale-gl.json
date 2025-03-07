@@ -724,5 +724,5 @@
     "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "Os caracteres 19 e 20 deben ser 2 letras de control",
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "Despois de 'ES' van 16 números",
     "MAINTENANCE_TEXT1": "Estamos realizando tarefas de mantemento",
-    "MAINTENANCE_TEXT2": "Voltamos axiña"
+    "MAINTENANCE_TEXT2": "Parada programada de <b>Oficina Virtual</b> del 7 al 11 de marzo. <br> No se podrán realizar gestiones, consultas, asociaciones ni contrataciones de luz durante este período."
 }
