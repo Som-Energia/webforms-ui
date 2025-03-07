@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { textHeader4, textField, textHeader5 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Select from '../../components/Select'
 import Alert from '@mui/material/Alert'
+import { getPowers } from '../../../../services/api'
 
 const Contract = (props) => {
 
@@ -24,7 +25,17 @@ const Contract = (props) => {
         "0.5 KWh": 90
     }
 
-    const {values, setFieldValue} = props
+    const getAvailablePowers = () => {
+        getPowers(1)
+            .then(response => setPowers(response.data))
+            .catch(error => console.log(error))
+    }
+
+    useEffect(() => {
+        getAvailablePowers()
+    }, [])
+
+    const { values, setFieldValue } = props
     const { t } = useTranslation()
 
 
@@ -34,11 +45,11 @@ const Contract = (props) => {
     }
 
     return (
-        <Box sx={{ display:'flex', flexDirection:'column', gap: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             <Typography sx={textHeader4}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT')}</Typography>
             <Typography sx={textHeader5}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}</Typography>
             <Select
-                options={options}
+                options={powers}
                 value={values.contract.gurb_power}
                 handleChange={(value) => onChangePower(value)}
                 style={textField}
