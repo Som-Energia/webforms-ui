@@ -99,4 +99,10 @@ describe('Contract', () => {
       cy.paymentData(this.data.randomIban)
     })
   })
+  describe('Gurb', function () {  
+    it('Select 0,5KWh', function () {
+      cy.powerChoice('0_5_kwh')
+      cy.acceptAllTerms()
+    })
+  })
 })
