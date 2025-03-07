@@ -50,7 +50,7 @@ import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
 
-const MAX_STEP_NUMBER = 20
+const MAX_STEP_NUMBER = 19
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5, 6, 7]
 const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
@@ -69,7 +69,7 @@ const GurbForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(17)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
