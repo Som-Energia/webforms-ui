@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import CheckBox from '@mui/material/Checkbox'
 
 const CustomCheckBox = (props) => {
-    const { name, onClick, text, checked } = props
+    const { name, onClick, text, checked, dataCy } = props
 
     return (
         <Box mt={2}>
@@ -19,6 +19,7 @@ const CustomCheckBox = (props) => {
                 sx={{ display: 'flex', gap: 2, color: 'black', fontWeight: 700 }}
                 control={
                     <CheckBox
+                        data-cy={dataCy}
                         name={name}
                         onChange={onClick}
                         checked={checked}
@@ -63,27 +64,32 @@ const ContractReview = (props) => {
             <Divider />
 
             <CustomCheckBox name="generic_especific_conditons_accepted"
+                dataCy="generic_especific_conditons_checkbox"
                 onClick={() => setFieldValue("generic_especific_conditons_accepted", !values.generic_especific_conditons_accepted)} text={{
-                    __html: t('CONTRACT_PRIVACY_POLICY_TERMS', {
-                        url: t('CONTRACT_PRIVACY_POLICY_TERMS_URL')
+                    __html: t('GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS', {
+                        generic_conditions_url: t('GENERIC_CONDITIONS_URL'),
+                        specific_conditions_url: t('GURB_CHECK_SPEECIFIC_CONDITIONS_URL')
                     })
                 }} checked={values.generic_especific_conditons_accepted} />
 
             <CustomCheckBox name="privacy_policy_accepted"
+                dataCy="privacy_policy_checkbox"
                 onClick={() => setFieldValue("privacy_policy_accepted", !values.privacy_policy_accepted)} text={{
                     __html: t('CONTRACT_PRIVACY_POLICY_TERMS', {
-                        url: t('CONTRACT_PRIVACY_POLICY_TERMS_URL')
+                        generic_conditions_url: t('GENERIC_CONDITIONS_URL')
                     })
                 }} checked={values.privacy_policy_accepted} />
 
             <CustomCheckBox name="tariff_payment_accepted"
+                dataCy="tariff_payment_checkbox"
                 onClick={() => setFieldValue("tariff_payment_accepted", !values.tariff_payment_accepted)}
-                text={{ __html: "Con la aceptación de estas condiciones particulares, se obliga al pago de su consumo al precio que resulte de la aplicaciónn de la tarifa contratada." }}
+                text={{ __html: t("GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED") }}
                 checked={values.tariff_payment_accepted}
             />
             <CustomCheckBox name="gurb_adhesion_payment_accepted"
+                dataCy="gurb_adhesion_payment_checkbox"
                 onClick={() => setFieldValue("gurb_adhesion_payment_accepted", !values.gurb_adhesion_payment_accepted)}
-                text={{ __html: "Con la contratación del sservicio GURB me obligo al pago del coste de Adhessión único una vez verificada mi plaza en GURB Mataró y de la Cuota GURB que será de aplicaciónn a partir del primer día posterior a la fecha de activación." }}
+                text={{ __html: t("GURB_CHECK_ADHESION_PAYMENT_ACCEPTED") }}
                 checked={values.gurb_adhesion_payment_accepted}
             />
 
