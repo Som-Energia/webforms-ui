@@ -6,6 +6,7 @@ import SomGurbStepper, {
 } from './components/SomGurbStepper'
 
 import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
 import { textSubtitle } from './gurbTheme'
 import MemberDetails from './pages/NewMember/MemberDetails'
@@ -26,11 +27,15 @@ const NewMember = (props) => {
     }
   }
   return (
-    <>
-      <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
-      <SomGurbStepper activeStep={GURB_NEW_MEMBER_STEP} />
-      {getMemberPage()}
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <SomGurbStepper activeStep={GURB_NEW_MEMBER_STEP} />
+      </Grid>
+      <Grid item xs={12}>{getMemberPage()}</Grid>
+    </Grid>
   )
 }
 

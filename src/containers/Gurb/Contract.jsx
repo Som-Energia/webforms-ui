@@ -17,6 +17,7 @@ import SupplyPointData from './pages/Contract/SupplyPointData'
 import Power from './pages/Contract/Power'
 import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
+import Grid from '@mui/material/Grid'
 
 const Contract = (props) => {
   const { values, activeStep } = props
@@ -56,12 +57,12 @@ const Contract = (props) => {
   }
 
   return (
-    <>
+    <Grid>
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
 
       {error ? getStepResult(errorInfo) : getStep()}
-    </>
+    </Grid>
   )
 }
 
