@@ -19,6 +19,7 @@ import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
 import TextRecomendation from './components/TextRecomendation'
 import SomStepper from './components/SomStepper'
+import Grid from '@mui/material/Grid'
 
 const Contract = (props) => {
 
@@ -105,14 +106,14 @@ const Contract = (props) => {
   }
 
   return (
-    <>
+    <Grid>
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
       {getTitle()}
       <SomStepper step={activeStep} connectors={CONTRACT_STEPS} />
 
       {error ? getStepResult(errorInfo) : getStep()}
-    </>
+    </Grid>
   )
 }
 
