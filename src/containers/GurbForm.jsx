@@ -308,15 +308,25 @@ const GurbForm = (props) => {
                     </Grid>
                   )}
                   <Grid item sm={2} xs={12} order={-1}>
-                    <NextButton
-                      disabled={
-                        loading ||
-                        !formikProps.isValid ||
-                        activeStep === MAX_STEP_NUMBER
-                      }
-                      onClick={() => nextStep(formikProps)}
-                      title={'NEXT'}
-                    />
+                    {activeStep !== MAX_STEP_NUMBER ?
+                      <NextButton
+                        disabled={
+                          loading ||
+                          !formikProps.isValid ||
+                          activeStep === MAX_STEP_NUMBER
+                        }
+                        onClick={() => nextStep(formikProps)}
+                        title={'NEXT'}
+                      />
+                      :
+                      <SubmitButton
+                        disabled={
+                          loading ||
+                          !formikProps.isValid
+                        }
+                        onClick={() => handlePost({ soci: "Eustaquio", cost: NEW_MEMBER_COST + formikProps.values.contract.gurb_power_cost })}
+                      />
+                    }
                   </Grid>
                 </Grid>
               )}
