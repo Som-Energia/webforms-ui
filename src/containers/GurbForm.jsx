@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
@@ -183,12 +184,10 @@ const GurbForm = (props) => {
     if (activeStep === 4) {
       if (formikProps.values.has_member === 'member-off') {
         next = activeStep + 2
-      }
-      else if (formikProps.values.has_member === 'apadrinating') {
+      } else if (formikProps.values.has_member === 'apadrinating') {
         next = activeStep + 3
       }
-    }
-    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       next = 8
     }
     const last = MAX_STEP_NUMBER
@@ -200,12 +199,10 @@ const GurbForm = (props) => {
     if (activeStep === 8) {
       if (formikProps.values.has_member === 'member-off') {
         prev = activeStep - 2
-      }
-      else if (formikProps.values.has_member === 'member-on') {
+      } else if (formikProps.values.has_member === 'member-on') {
         prev = activeStep - 3
       }
-    }
-    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       prev = 4
     }
     setActiveStep(Math.max(0, prev))
@@ -231,15 +228,19 @@ const GurbForm = (props) => {
         />
       )
     } else if (NEW_MEMBER_STEP.includes(activeStep)) {
-      return <NewMember {...props} activeStep={NEW_MEMBER_STEP.indexOf(activeStep)} />
+      return (
+        <NewMember
+          {...props}
+          activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
+        />
+      )
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
         <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
       )
     } else if (GURB_STEPS.includes(activeStep)) {
-      return (<Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />)
-    }
-    else {
+      return <Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />
+    } else {
       return <></>
     }
   }
@@ -288,61 +289,36 @@ const GurbForm = (props) => {
               {error ? (
                 <></>
               ) : (
-                <>
-                  {activeStep === 0 ? (
-                    <>
-                      <Box
-                        style={{
-                          marginTop: '2rem',
-                          marginX: '2rem',
-                          display: 'flex',
-                          justifyContent: 'flex-end'
-                        }}>
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
-                        />
-                      </Box>
-                    </>
-                  ) : (
-                    <Box
-                      style={{
-                        marginTop: '2rem',
-                        marginX: '2rem',
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}>
+                <Grid
+                  container
+                  direction="row-reverse"
+                  rowSpacing={2}
+                  sx={{
+                    marginTop: '2rem',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                  {activeStep !== 0 && (
+                    <Grid item sm={2} xs={12}>
                       <PrevButton
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
                       />
-                      {activeStep !== MAX_STEP_NUMBER ?
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
-                        />
-                        :
-                        <SubmitButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid
-                          }
-                          onClick={() => handlePost({ soci: "Eustaquio", cost: NEW_MEMBER_COST + formikProps.values.contract.gurb_power_cost })}
-                        />
-                      }
-                    </Box>
+
+                    </Grid>
                   )}
-                </>
+                  <Grid item sm={2} xs={12} order={-1}>
+                    <NextButton
+                      disabled={
+                        loading ||
+                        !formikProps.isValid ||
+                        activeStep === MAX_STEP_NUMBER
+                      }
+                      onClick={() => nextStep(formikProps)}
+                      title={'NEXT'}
+                    />
+                  </Grid>
+                </Grid>
               )}
             </>
           )

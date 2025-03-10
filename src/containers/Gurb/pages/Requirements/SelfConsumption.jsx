@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Grid from '@mui/material/Grid'
+
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import { HelperText } from '../../components/InputField'
@@ -47,22 +49,28 @@ const SelfConsumption = (props) => {
   ]
 
   return (
-    <>
-      <TextRecomendation
-        title={t('GURB_SELFCONSUMPTION_TITLE')}
-        required={true}
-      />
-      <Chooser
-        name='selfconsumption-question'
-        options={options}
-        value={values.has_selfconsumption}
-        handleChange={handleSelfconsumptionQuestion}
-      />
-      <HelperText
-        helperText={t('GURB_SELFCONSUMPTION_HELPER')}
-        iconHelper={true}
-      />
-    </>
+    <Grid container spacing={4}>
+      <Grid item>
+        <TextRecomendation
+          title={t('GURB_SELFCONSUMPTION_TITLE')}
+          required={true}
+        />
+      </Grid>
+      <Grid item>
+        <Chooser
+          name="selfconsumption-question"
+          options={options}
+          value={values.has_selfconsumption}
+          handleChange={handleSelfconsumptionQuestion}
+        />
+      </Grid>
+      <Grid item>
+        <HelperText
+          helperText={t('GURB_SELFCONSUMPTION_HELPER')}
+          iconHelper={true}
+        />
+      </Grid>
+    </Grid>
   )
 }
 

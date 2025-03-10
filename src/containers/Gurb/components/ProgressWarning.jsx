@@ -20,8 +20,6 @@ const ProgressWarning = ({ completed }) => {
           justifyContent: 'flex-start',
           alignItems: 'center',
           backgroundColor: '#DCEAFB',
-          marginBottom: '2rem',
-          marginTop: '2rem'
         }
       }}>
       <Stack>
