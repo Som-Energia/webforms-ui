@@ -516,3 +516,22 @@ export const deleteContractsFromAssignments = async (id) => {
     return response?.data
   })
 }
+
+export const getPowers = async (id) => {
+  return axios({
+    method: 'GET',
+    url: `${WEBFORMS_API_URL}/data/gurb/${id}/available_powers`,
+  }).then((response) => {
+    return response?.data
+  })
+}
+
+export const addGurb = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/form/gurb/payment`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
