@@ -176,7 +176,17 @@ Cypress.Commands.add('donationQuestion', (donation = true) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('paymentData', (iban) => {
+Cypress.Commands.add('paymentData', (iban, statusCode = 200) => {
+
+  cy.intercept('GET', '/check/iban/*',
+    {
+      statusCode: statusCode,
+      body: {
+        data: { iban: iban },
+        state: statusCode === 200,
+        status: "ONLINE"
+      }
+    }).as('checkIban')
 
   cy.get('[data-cy="iban"]').type(iban)
 
