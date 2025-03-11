@@ -881,7 +881,7 @@
     "ERROR_FIELD_TOO_LONG": "Camp massa llarg",
     "ERROR_REQUIRED_FIELD": "Camp requerit",
     "MAINTENANCE_TEXT1": "Estem realitzant tasques de manteniment",
-    "MAINTENANCE_TEXT2": "Aturada programada de l'Oficina Virtual del 7 a l'11 de març. No es podran fer gestions, consultes, associacions ni contractacions de llum durant aquest període.",
+    "MAINTENANCE_TEXT2": "Tornem aviat",
     "AUTOCOMPLETE_LOADING_TEXT": "Carregant...",
     "AUTOCOMPLETE_WIHTOUT_OPTIONS": "No s'han trobat resultat"
 }
