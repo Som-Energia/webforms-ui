@@ -159,6 +159,9 @@ Cypress.Commands.add('choosePower', ({ moreThan15Kw = false, powers }) => {
 
 Cypress.Commands.add('supplyPointData', () => {
 
+  cy.get('[data-cy=select_component]').click()
+  cy.get('[data-cy=yes]').click()
+
   cy.get('[data-cy="supply_point_accepted"]').click()
   cy.get('[data-cy=accept]').click()
 
@@ -173,7 +176,17 @@ Cypress.Commands.add('donationQuestion', (donation = true) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('paymentData', (iban) => {
+Cypress.Commands.add('paymentData', (iban, statusCode = 200) => {
+
+  cy.intercept('GET', '/check/iban/*',
+    {
+      statusCode: statusCode,
+      body: {
+        data: { iban: iban },
+        state: statusCode === 200,
+        status: "ONLINE"
+      }
+    }).as('checkIban')
 
   cy.get('[data-cy="iban"]').type(iban)
 
@@ -184,12 +197,20 @@ Cypress.Commands.add('paymentData', (iban) => {
 
 Cypress.Commands.add('powerChoice', (choice) => {
 
+
   cy.get('[data-cy="select_component"]').click()
   cy.get(`[data-cy="${choice}"]`).click()
   cy.get('[data-cy=next]').click()
 
 })
 
+Cypress.Commands.add('chooseTariffGURB', (isIndexed = true) => {
+
+  const optionValue = isIndexed ? 'indexed' : 'periods'
+  cy.get('[data-cy="tariffMode"]').get(`[data-cy="${optionValue}"]`).click()
+
+  cy.get('[data-cy=next]').click()
+})
 
 Cypress.Commands.add('acceptAllTerms', () => {
   cy.get('[data-cy="generic_especific_conditons_checkbox"]').click()
@@ -200,4 +221,20 @@ Cypress.Commands.add('acceptAllTerms', () => {
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('interceptAvailablePowers', () => {
+  cy.intercept('GET', '/data/gurb/*/available_powers',
+    {
+      statusCode: 200,
+      body: {
+        data: [{ "id": "0_5_kwh", "value": "0.5 KWh", "text": "0.5 KWh" }, { "id": "1_kwh", "value": "1 KWh", "text": "1 KWh" }]
+      },
+      state: true,
+      status: "ONLINE"
+    }
+  ).as('availablePowers')
 
+
+  cy.get('[data-cy=next]').click()
+
+  cy.wait("@availablePowers")
+})
