@@ -121,6 +121,21 @@ Cypress.Commands.add('typeIbanGenerationkwh', (iban, statusCode) => {
 
 
 Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
+
+  cy.intercept('GET', '/check/cups/status/*',
+    {
+      statusCode: 200,
+      body: {
+        data: {
+          cups: cups,
+          status: "new",
+          tariff_type: null
+        },
+        state: true,
+        status: "ONLINE"
+      }
+    }).as('checkCUPS')
+
   cy.get('#cups')
     .clear()
     .type(cups)
@@ -128,6 +143,7 @@ Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
     // Extra validation is done when bluring so blur before continue
     .blur()
 
+  cy.wait('@checkCUPS')
   // Wait for the cups to be validated
   cy.get('#cups[aria-invalid=false]', { timeout: 3000 })
 
@@ -321,18 +337,19 @@ Cypress.Commands.add('reviewAndConfirmData', () => {
 })
 
 Cypress.Commands.add('juridicPersonalData', (datajuridic, dataholder) => {
-  cy.intercept('GET', '/check/vat/exists/*',{
-    statusCode : 200,
-    body: 
-    {data: {
+  cy.intercept('GET', '/check/vat/exists/*', {
+    statusCode: 200,
+    body:
+    {
+      data: {
         exists: true,
         is_member: true,
         is_selfconsumption_owner: false,
         valid: true
-    },
-    state: true,
-    status: "ONLINE"
-  }
+      },
+      state: true,
+      status: "ONLINE"
+    }
   }).as('checkVat')
 
   cy.get('[name="holder.name"]')
