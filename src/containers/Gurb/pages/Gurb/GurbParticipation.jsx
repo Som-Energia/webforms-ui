@@ -8,7 +8,6 @@ import Alert from '@mui/material/Alert'
 import { getPowers } from '../../../../services/api'
 
 const Contract = (props) => {
-
   const [powers, setPowers] = useState([])
 
   const cost = {
