@@ -352,9 +352,6 @@ const GurbForm = (props) => {
 
   )
 }
-<<<<<<< HEAD
 
 export default GurbForm
-=======
-export default GurbForm
->>>>>>> ✨ Added Gurb section inside GurbForm
+
