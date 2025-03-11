@@ -57,8 +57,8 @@ const CnaeField = (props) => {
     setFieldTouched('supply_point.cnae', true)
   }
 
-  const handleIsHousing = (event) => {
-    const isHousing = event.target.value
+  const handleIsHousing = (value) => {
+    const isHousing = value
     setValues({
       ...values,
       supply_point: {
@@ -71,8 +71,8 @@ const CnaeField = (props) => {
   }
 
   const options = [
-    { id: 'yes', value: true },
-    { id: 'no', value: false }
+    { id: 'yes', value: true, text: t('SI') },
+    { id: 'no', value: false, text: t('NO') }
   ]
 
   return (
@@ -93,7 +93,6 @@ const CnaeField = (props) => {
       <Grid item xs={12} sm={6}>
         <InputField
           name="cnae"
-          textFieldLabel={t('CNAE')}
           textFieldName={t('CNAE')}
           readonlyField={values?.supply_point?.is_housing}
           value={values?.supply_point?.cnae}
