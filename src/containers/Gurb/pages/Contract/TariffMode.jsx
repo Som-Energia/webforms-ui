@@ -61,7 +61,7 @@ const TariffMode = (props) => {
           required={true}
         />
         <Chooser
-          name='power_question'
+          name='tariffMode'
           options={options}
           value={values.contract.tariff_mode}
           handleChange={handleChange}
