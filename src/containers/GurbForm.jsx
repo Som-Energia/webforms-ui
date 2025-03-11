@@ -44,6 +44,8 @@ import {
   gurbPolicyChecks
 } from './Gurb//GurbValidations'
 
+import * as Yup from 'yup'
+
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
@@ -67,7 +69,7 @@ const GurbForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
 
-  const [activeStep, setActiveStep] = useState(17)
+  const [activeStep, setActiveStep] = useState(0)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
@@ -174,7 +176,7 @@ const GurbForm = (props) => {
     tariffModeValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations,
-    gurbPowerOptions,
+    Yup.object().shape({}),
     gurbPowerOptions,
     gurbPolicyChecks
   ]
