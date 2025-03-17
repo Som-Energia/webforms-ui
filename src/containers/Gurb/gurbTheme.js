@@ -80,7 +80,6 @@ export const textSubtitle = {
 export const textField = {
   '& .MuiFormHelperText-root': { color: '#B3B3B3' },
   '& .MuiInputLabel-root': { color: '#B3B3B3' },
-  marginTop: '0.5rem'
 }
 
 export const textSubtitle2 = {

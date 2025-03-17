@@ -104,7 +104,7 @@ const NewMemberDetails = (props) => {
   }
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <TextRecomendation title={t('GURB_NEW_MEMBER_TITLE')} />
       </Grid>
