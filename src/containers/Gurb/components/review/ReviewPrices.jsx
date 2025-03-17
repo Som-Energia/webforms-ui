@@ -78,7 +78,6 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        marginY: '2rem',
       }}>
       <Box
         sx={{

@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 import { textHeader4, textField } from '../gurbTheme'
 import InputTitle from './InputTitle'
-
 
 export default function LocationInput({
   id,
@@ -36,11 +36,10 @@ export default function LocationInput({
 
     // debounce the loading of suggestions to reduce usage of the Google API
     timeoutRef.current = setTimeout(async () => {
-      searchPlace(inputValue, sessionTokenRef)
-        .then((placesSuggestions) => {
-          setSuggestions(placesSuggestions)
-          setLoadingResults(false)
-        })
+      searchPlace(inputValue, sessionTokenRef).then((placesSuggestions) => {
+        setSuggestions(placesSuggestions)
+        setLoadingResults(false)
+      })
     }, 350)
   }, [inputValue])
 
@@ -56,34 +55,43 @@ export default function LocationInput({
         value={value || inputValue || ''}
         options={suggestions}
         filterOptions={(option) => option} // Required to see options without perfect match with Google Places API
-        getOptionLabel={(option) => option.text ? option.text : option}
+        getOptionLabel={(option) => (option.text ? option.text : option)}
         loading={loadingResults}
         loadingText={t('AUTOCOMPLETE_LOADING_TEXT')}
         noOptionsText={t('AUTOCOMPLETE_WIHTOUT_OPTIONS')}
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
-          <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
-            <InputTitle
-              text={textFieldName}
-              textStyle={textHeader4}
-              required={required}
-            />
-            <TextField
-              sx={{
-                ...textField,
-                '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
-              }}
-              {...params}
-              required={required}
-              value={inputValue}
-              label={!value && !inputValue && !isFocused ? textFieldLabel : ''}
-              InputLabelProps={{ shrink: false }}
-              helperText={textFieldHelper}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onChange={(event) => setInputValue(event.target.value)}
-            />
-          </Box>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <InputTitle
+                text={textFieldName}
+                textStyle={textHeader4}
+                required={required}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                sx={{
+                  ...textField,
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '8px',
+                    paddingY: '0px'
+                  }
+                }}
+                {...params}
+                required={required}
+                value={inputValue}
+                label={
+                  !value && !inputValue && !isFocused ? textFieldLabel : ''
+                }
+                InputLabelProps={{ shrink: false }}
+                helperText={textFieldHelper}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                onChange={(event) => setInputValue(event.target.value)}
+              />
+            </Grid>
+          </Grid>
         )}
       />
     </>

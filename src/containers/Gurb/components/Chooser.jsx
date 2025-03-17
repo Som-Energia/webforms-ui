@@ -59,34 +59,36 @@ const Chooser = (props) => {
   }
 
   return (
-    <Grid
-      data-cy={name}
-      container
-      spacing={4}
-      direction="row"
-      justifyContent="center">
-      {options.map((option, index) => (
-        <Grid key={index} item sm={6} xs={12}>
-          <Option
-            isSelected={option?.id === value}
-            setSelected={setOptionSelection}
-            optionId={option?.id}
-            icon={option?.icon}
-            textHeader={option?.textHeader}
-            textBody={option?.textBody}
-          />
-          {option?.helper && (
-            <Box
-              sx={{
-                marginTop: '1rem',
-                justifyItems: 'center'
-              }}>
-              {option?.helper}
-            </Box>
-          )}
-        </Grid>
-      ))}
-    </Grid>
+    <Box sx={{ marginY: '1rem' }}>
+      <Grid
+        data-cy={name}
+        container
+        spacing={4}
+        direction="row"
+        justifyContent="center">
+        {options.map((option, index) => (
+          <Grid key={index} item sm={6} xs={12}>
+            <Option
+              isSelected={option?.id === value}
+              setSelected={setOptionSelection}
+              optionId={option?.id}
+              icon={option?.icon}
+              textHeader={option?.textHeader}
+              textBody={option?.textBody}
+            />
+            {option?.helper && (
+              <Box
+                sx={{
+                  marginTop: '1rem',
+                  justifyItems: 'center'
+                }}>
+                {option?.helper}
+              </Box>
+            )}
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   )
 }
 export default Chooser
