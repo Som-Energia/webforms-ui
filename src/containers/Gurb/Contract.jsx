@@ -21,38 +21,46 @@ import TextRecomendation from './components/TextRecomendation'
 import SomStepper from './components/SomStepper'
 import Grid from '@mui/material/Grid'
 
-const Contract = (props) => {
+export const CONTRACT_NUMBER_STEPS = 10
 
+const Contract = (props) => {
   const CONTRACT_STEPS = 9
   const { values, activeStep } = props
   const { t } = useTranslation()
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
 
-
   const getTitle = () => {
     if (activeStep === 0) {
-      return <TextRecomendation
-        title={t('GURB_HOLDER_ID_TITLE')}
-        text={t('GURB_HOLDER_ID_SUBTITLE')}
-      />
+      return (
+        <TextRecomendation
+          title={t('GURB_HOLDER_ID_TITLE')}
+          text={t('GURB_HOLDER_ID_SUBTITLE')}
+        />
+      )
     }
     if (activeStep === 1) {
-      return <TextRecomendation
-        title={t('GURB_HOLDER_PERSONAL_DATA_TITLE')}
-        text={t('GURB_HOLDER_ID_SUBTITLE')}
-      />
+      return (
+        <TextRecomendation
+          title={t('GURB_HOLDER_PERSONAL_DATA_TITLE')}
+          text={t('GURB_HOLDER_ID_SUBTITLE')}
+        />
+      )
     }
     if (activeStep === 2) {
-      return <TextRecomendation
-        title={t('GURB_HOLDER_SUPPLYPOINT_TITLE')}
-        text={t('GURB_HOLDER_ID_SUBTITLE')}
-      />
+      return (
+        <TextRecomendation
+          title={t('GURB_HOLDER_SUPPLYPOINT_TITLE')}
+          text={t('GURB_HOLDER_ID_SUBTITLE')}
+        />
+      )
     }
     if (activeStep === 3) {
-      return <TextRecomendation
-        title={t('GURB_SUPPLY_POINT_DATA_TITLE')}
-        text={t('GURB_SUPPLY_POINT_DATA_SUBTITLE')}
-      />
+      return (
+        <TextRecomendation
+          title={t('GURB_SUPPLY_POINT_DATA_TITLE')}
+          text={t('GURB_SUPPLY_POINT_DATA_SUBTITLE')}
+        />
+      )
     }
     if (activeStep === 4) {
       return <TextRecomendation title={t('GURB_POWER_TITLE')} />
@@ -61,7 +69,9 @@ const Contract = (props) => {
       return <TextRecomendation title={t('GURB_TARIFFMODE_TITLE')} />
     }
     if (activeStep === 6) {
-      return <TextRecomendation title={t('GURB_HOLDER_VOLUNTARY_DONATION_TITLE')} />
+      return (
+        <TextRecomendation title={t('GURB_HOLDER_VOLUNTARY_DONATION_TITLE')} />
+      )
     }
     if (activeStep === 7) {
       return <TextRecomendation title={t('GURB_IBAN_TITLE')} />
@@ -106,13 +116,22 @@ const Contract = (props) => {
   }
 
   return (
-    <Grid>
-      <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
-      <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
-      {getTitle()}
-      <SomStepper step={activeStep} connectors={CONTRACT_STEPS} />
-
-      {error ? getStepResult(errorInfo) : getStep()}
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
+      </Grid>
+      <Grid item xs={12}>
+        {getTitle()}
+      </Grid>
+      <Grid item xs={12}>
+        <SomStepper step={activeStep} connectors={CONTRACT_STEPS} />
+      </Grid>
+      <Grid item xs={12}>
+        {error ? getStepResult(errorInfo) : getStep()}
+      </Grid>
     </Grid>
   )
 }
