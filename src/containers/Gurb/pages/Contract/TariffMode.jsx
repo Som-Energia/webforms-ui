@@ -12,7 +12,8 @@ import SomStepper from '../../components/SomStepper'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
-
+import Grid from '@mui/material/Grid'
+import { CONTRACT_NUMBER_STEPS } from '../../../../containers/Gurb/Contract'
 
 const TariffMode = (props) => {
   const {
@@ -48,32 +49,36 @@ const TariffMode = (props) => {
   ]
 
   return (
-    <>
-      {console.log(values, errors)}
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
         <TextRecomendation title={t('GURB_TARIFFMODE_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />  {/*TODO*/}
-      </Box>
-      <Box marginTop={'3rem'} marginBottom={'4rem'}>
+      </Grid>
+      <Grid item xs={12}>
+        <SomStepper step={activeStep} connectors={CONTRACT_NUMBER_STEPS} /> {/*TODO*/}
+      </Grid>
+      <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_TARIFFMODE_QUESTION')}
           textStyle={textHeader4}
           required={true}
         />
+      </Grid>
+      <Grid item xs={12}>
         <Chooser
           name='tariffMode'
           options={options}
           value={values.contract.tariff_mode}
           handleChange={handleChange}
         />
-      </Box>
-      <HelperText
-        justifyContent='center'
-        helperText={'TODO: Edit HelperText with links'}
-      />
-    </>
+      </Grid>
+      <Grid item xs={12}>
+        <HelperText
+          justifyContent="center"
+          helperText={'TODO: Edit HelperText with links'}
+        />
+      </Grid>
+    </Grid>
   )
 }
 
 export default TariffMode
-

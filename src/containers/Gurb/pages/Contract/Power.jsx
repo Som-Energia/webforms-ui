@@ -11,10 +11,12 @@ import RequiredTitle from '../../components/InputTitle'
 import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
 import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
+import { CONTRACT_NUMBER_STEPS } from '../../../../containers/Gurb/Contract'
 
 const Power = (props) => {
   const {
@@ -50,58 +52,76 @@ const Power = (props) => {
   ]
 
   return (
-    <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
         <TextRecomendation title={t('GURB_POWER_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
-      <Box marginTop={'3rem'} marginBottom={'4rem'}>
+      </Grid>
+      <Grid item xs={12}>
+        <SomStepper step={activeStep} connectors={CONTRACT_NUMBER_STEPS} />
+      </Grid>
+      <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_POWER_QUESTION')}
           textStyle={textHeader4}
           required={true}
         />
+      </Grid>
+      <Grid item xs={12}>
         <Typography sx={textHeader5}>{t('GURB_POWER_HELPER')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
         <Chooser
-          name='power_question'
+          name="power_question"
           options={options}
           value={values.contract.power_type}
           handleChange={handlePowerQuestion}
         />
-      </Box>
+      </Grid>
       {values.contract.power_type === 'power-lower-15kw' ? (
-        <>
-          <PowerInputs
-            name="contract.power"
-            numInputs={2}
-            {...props}
-            values={values?.contract.power}
-            errors={errors?.contract}
-            touched={touched?.contract}
-          />
-          <HelperText
-            helperText={t('GURB_POWER_LOWER_15_HELPER')}
-            iconHelper={true}
-          />
-        </>
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <PowerInputs
+                name="contract.power"
+                numInputs={2}
+                {...props}
+                values={values?.contract.power}
+                errors={errors?.contract}
+                touched={touched?.contract}
+              />
+            </Grid>
+            <Grid item>
+              <HelperText
+                helperText={t('GURB_POWER_LOWER_15_HELPER')}
+                iconHelper={true}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
       ) : null}
       {values.contract.power_type === 'power-higher-15kw' ? (
-        <>
-          <PowerInputs
-            name="contract.power"
-            numInputs={6}
-            {...props}
-            values={values?.contract.power}
-            errors={errors?.contract}
-            touched={touched?.contract}
-          />
-          <HelperText
-            helperText={t('GURB_POWER_HIGHER_15_HELPER')}
-            iconHelper={true}
-          />
-        </>
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <PowerInputs
+                name="contract.power"
+                numInputs={6}
+                {...props}
+                values={values?.contract.power}
+                errors={errors?.contract}
+                touched={touched?.contract}
+              />
+            </Grid>
+            <Grid item>
+              <HelperText
+                helperText={t('GURB_POWER_HIGHER_15_HELPER')}
+                iconHelper={true}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
       ) : null}
-    </>
+    </Grid>
   )
 }
 export default Power
