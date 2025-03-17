@@ -21,8 +21,6 @@ import TextRecomendation from './components/TextRecomendation'
 import SomStepper from './components/SomStepper'
 import Grid from '@mui/material/Grid'
 
-export const CONTRACT_NUMBER_STEPS = 10
-
 const Contract = (props) => {
   const CONTRACT_STEPS = 9
   const { values, activeStep } = props

@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
 
-import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { checkIbanFormat } from '../../../../services/utils'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
 import { textCheckbox } from '../../gurbTheme'
+import Grid from '@mui/material/Grid'
 
 const HolderIban = (props) => {
   const {
@@ -66,33 +66,37 @@ const HolderIban = (props) => {
   }
 
   return (
-    <>
-      <InputField
-        name='iban'
-        textFieldLabel={t('GURB_IBAN_LABEL')}
-        textFieldName={t('GURB_IBAN_FIELD')}
-        textFieldNameHelper={t('GURB_IBAN_FIELD_HELPER')}
-        textFieldHelper={t('GURB_IBAN_EXAMPLE')}
-        handleChange={handleInputIban}
-        handleBlur={handleInputIbanBlur}
-        touched={touched?.holder?.iban}
-        value={values?.holder.iban}
-        error={errors?.holder?.iban_valid || errors?.holder?.iban}
-        isLoading={loading}
-        required={true}
-      />
-      <FormControlLabel
-        sx={{ ...textCheckbox, marginTop: '2rem' }}
-        control={
-          <Checkbox
-            data-cy='iban_check'
-            checked={values?.holder.direct_debit_accepted}
-            onChange={handleCheckboxChange}
-          />
-        }
-        label={t('GURB_ACCEPT_DIRECT_DEBIT')}
-      />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <InputField
+          name="iban"
+          textFieldLabel={t('GURB_IBAN_LABEL')}
+          textFieldName={t('GURB_IBAN_FIELD')}
+          textFieldNameHelper={t('GURB_IBAN_FIELD_HELPER')}
+          textFieldHelper={t('GURB_IBAN_EXAMPLE')}
+          handleChange={handleInputIban}
+          handleBlur={handleInputIbanBlur}
+          touched={touched?.holder?.iban}
+          value={values?.holder.iban}
+          error={errors?.holder?.iban_valid || errors?.holder?.iban}
+          isLoading={loading}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormControlLabel
+          sx={{ ...textCheckbox }}
+          control={
+            <Checkbox
+              data-cy="iban_check"
+              checked={values?.holder.direct_debit_accepted}
+              onChange={handleCheckboxChange}
+            />
+          }
+          label={t('GURB_ACCEPT_DIRECT_DEBIT')}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default HolderIban

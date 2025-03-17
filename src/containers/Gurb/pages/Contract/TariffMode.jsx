@@ -9,7 +9,7 @@ import { HelperText } from '../../components/InputField'
 import RequiredTitle from '../../components/InputTitle'
 
 import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
-
+import Grid from '@mui/material/Grid'
 
 const TariffMode = (props) => {
   const {
@@ -45,27 +45,30 @@ const TariffMode = (props) => {
   ]
 
   return (
-    <>
-      <Box marginTop={'3rem'} marginBottom={'4rem'}>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_TARIFFMODE_QUESTION')}
           textStyle={textHeader4}
           required={true}
         />
+      </Grid>
+      <Grid item xs={12}>
         <Chooser
           name='tariffMode'
           options={options}
           value={values.contract.tariff_mode}
           handleChange={handleChange}
         />
-      </Box>
-      <HelperText
-        justifyContent='center'
-        helperText={'TODO: Edit HelperText with links'}
-      />
-    </>
+      </Grid>
+      <Grid item xs={12}>
+        <HelperText
+          justifyContent="center"
+          helperText={'TODO: Edit HelperText with links'}
+        />
+      </Grid>
+    </Grid>
   )
 }
 
 export default TariffMode
-

@@ -6,7 +6,7 @@ import Chooser from '../../components/Chooser'
 import RequiredTitle from '../../components/InputTitle'
 
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
-import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 import {
   iconOffRequirements,
@@ -74,33 +74,37 @@ const HolderIdentification = (props) => {
   ]
 
   return (
-    <>
-      <InputField
-        name='holder_vat'
-        textFieldLabel={t('GURB_NIF_LABEL')}
-        textFieldName={t('GURB_HOLDER_NIF_FIELD')}
-        textFieldNameHelper={t('GURB_HOLDER_NIF_FIELD_HELPER')}
-        handleChange={handleInputNif}
-        handleBlur={handleInputNifBlur}
-        touched={touched?.holder?.nif}
-        value={values?.holder.nif}
-        error={errors?.holder?.nif}
-        required={true}
-      />
-      <Box marginTop={'3rem'}>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <InputField
+          name="holder_vat"
+          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldName={t('GURB_HOLDER_NIF_FIELD')}
+          textFieldNameHelper={t('GURB_HOLDER_NIF_FIELD_HELPER')}
+          handleChange={handleInputNif}
+          handleBlur={handleInputNifBlur}
+          touched={touched?.holder?.nif}
+          value={values?.holder.nif}
+          error={errors?.holder?.nif}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_HOLDER_QUESTION')}
           textStyle={textHeader4}
           required={true}
         />
+      </Grid>
+      <Grid item xs={12}>
         <Chooser
-          name='has_holder'
+          name="has_holder"
           options={options}
           value={values.holder.has_holder}
           handleChange={handleHolderQuestion}
         />
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   )
 }
 export default HolderIdentification

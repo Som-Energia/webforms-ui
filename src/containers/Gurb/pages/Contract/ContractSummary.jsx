@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -14,11 +14,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 
-import {
-  iconRequirements,
-  textBody1,
-  textHeader4
-} from '../../gurbTheme'
+import { iconRequirements, textBody1, textHeader4 } from '../../gurbTheme'
 import { getPrices } from '../../../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../../../services/utils'
 
@@ -167,7 +163,8 @@ const ContractSummary = (props) => {
       Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
     )
     getPrices({
-      tariff: values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
+      tariff:
+        values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
       max_power: maxPower,
       vat: values.holder.nif,
       cnae: values.supply_point.cnae,
@@ -187,35 +184,44 @@ const ContractSummary = (props) => {
   return loading ? (
     <Loading />
   ) : (
-    <>
-      <ReviewTable tableFields={reviewFields} />
-      <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
-      <Typography
-        sx={{ ...textBody1, marginBottom: '1rem', marginTop: '4rem' }}
-        variant="body2"
-        dangerouslySetInnerHTML={{
-          __html: t('GURB_SUMMARY_INFO', {
-            url_som_tariff: t('URL_WEB_SOM_TARIFF'),
-            url_rdl: t('URL_RDL_2022'),
-            url_omie: t('URL_OMIE'),
-            url_red_electrica: t('URL_RED_ELECTRICA'),
-            url_boe_310: t('URL_BOE_310')
-          })
-        }}
-      />
-      <Typography
-        sx={{ ...textHeader4, marginBottom: '1rem', marginTop: '2rem' }}>
-        {t('GURB_SUMMARY_OTHER_CONCEPTS_TITLE')}
-      </Typography>
-
-      <Typography
-        sx={{ ...textBody1, marginBottom: '4rem' }}
-        variant="body2"
-        dangerouslySetInnerHTML={{
-          __html: t('GURB_SUMMARY_OTHER_CONCEPTS_BODY')
-        }}
-      />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <ReviewTable tableFields={reviewFields} />
+      </Grid>
+      <Grid item xs={12}>
+        <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography
+          sx={{ ...textBody1 }}
+          variant="body2"
+          dangerouslySetInnerHTML={{
+            __html: t('GURB_SUMMARY_INFO', {
+              url_som_tariff: t('URL_WEB_SOM_TARIFF'),
+              url_rdl: t('URL_RDL_2022'),
+              url_omie: t('URL_OMIE'),
+              url_red_electrica: t('URL_RED_ELECTRICA'),
+              url_boe_310: t('URL_BOE_310')
+            })
+          }}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography
+          sx={{ ...textHeader4 }}>
+          {t('GURB_SUMMARY_OTHER_CONCEPTS_TITLE')}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography
+          sx={{ ...textBody1}}
+          variant="body2"
+          dangerouslySetInnerHTML={{
+            __html: t('GURB_SUMMARY_OTHER_CONCEPTS_BODY')
+          }}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default ContractSummary
