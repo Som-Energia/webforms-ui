@@ -1,6 +1,8 @@
 import { getMunicipisByPostalCode, getRates } from '../services/api'
 import dayjs from 'dayjs'
 import isoWeek from "dayjs/plugin/isoWeek";
+import { stdnum } from 'stdnum';
+import { electronicFormatIBAN, isValidIBAN } from 'ibantools'
 
 export const THOUSANDS_CONVERSION_FACTOR = 1000
 
@@ -626,4 +628,13 @@ export const setMunicipisWithPostalCode = async (
       city: municipis[0][0]?.municipi
     })
   }
+}
+
+export const checkVatFormat = (nif) => {
+  return stdnum.ES.nif.validate(nif)
+}
+
+export const checkIbanFormat = (iban) => {
+  const formattedIban = electronicFormatIBAN(iban)
+  return isValidIBAN(formattedIban)
 }
