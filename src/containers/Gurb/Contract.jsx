@@ -19,6 +19,8 @@ import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
 import Grid from '@mui/material/Grid'
 
+export const CONTRACT_NUMBER_STEPS = 10
+
 const Contract = (props) => {
   const { values, activeStep } = props
   const { t } = useTranslation()
@@ -57,11 +59,14 @@ const Contract = (props) => {
   }
 
   return (
-    <Grid>
-      <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
-      <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
-
-      {error ? getStepResult(errorInfo) : getStep()}
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
+      </Grid>
+      <Grid item xs={12}>{error ? getStepResult(errorInfo) : getStep()}</Grid>
     </Grid>
   )
 }
