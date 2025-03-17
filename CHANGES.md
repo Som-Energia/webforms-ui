@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.7.1 2025-03-17
+
+- use of ibantools for iban format validations
+- use of stdnum for nif format validations
+
 ## 2.7.0 2025-02-25
 
 - checkMember: get the response from data and not from the state field
