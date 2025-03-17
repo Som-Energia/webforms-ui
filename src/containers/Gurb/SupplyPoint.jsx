@@ -34,7 +34,7 @@ const SupplyPoint = (props) => {
   }, [])
 
   return (
-    <Grid container spacing={5}>
+    <Grid container spacing={3}>
       <Grid item xs={12}>
         <Header title={`${t('GURB_SUPPLY_POINT_TITLE')} ${gurbData.name}`} />
       </Grid>

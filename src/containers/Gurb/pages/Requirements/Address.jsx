@@ -157,7 +157,7 @@ const Address = (props) => {
           sessionTokenRef={sessionTokenRef}
         />
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} sm={4}>
         <InputField
           name={'address.number'}
           textFieldName={t('NUMBER')}
@@ -168,7 +168,7 @@ const Address = (props) => {
           required={true}
         />
       </Grid>
-      <Grid item xs={6} md={2}>
+      <Grid item xs={6} sm={2}>
         <InputField
           name={'address.floor'}
           textFieldName={t('FLOOR')}
@@ -179,7 +179,7 @@ const Address = (props) => {
           required={false}
         />
       </Grid>
-      <Grid item xs={6} md={2}>
+      <Grid item xs={6} sm={2}>
         <InputField
           name={'address.door'}
           textFieldName={t('DOOR')}
@@ -190,7 +190,7 @@ const Address = (props) => {
           required={false}
         />
       </Grid>
-      <Grid item xs={6} md={2}>
+      <Grid item xs={6} sm={2}>
         <InputField
           name={'address.stairs'}
           textFieldName={t('STAIRS')}
@@ -201,7 +201,7 @@ const Address = (props) => {
           required={false}
         />
       </Grid>
-      <Grid item xs={6} md={2}>
+      <Grid item xs={6} sm={2}>
         <InputField
           name={'address.bloc'}
           textFieldName={t('BLOCK')}

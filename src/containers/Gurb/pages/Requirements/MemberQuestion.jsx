@@ -45,7 +45,7 @@ const MemberQuestion = (props) => {
   ]
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={2}>
       <Grid item>
         <TextRecomendation title={t('GURB_HAS_MEMBER_TITLE')} required={true} />
       </Grid>
