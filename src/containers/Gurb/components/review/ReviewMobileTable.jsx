@@ -12,7 +12,7 @@ const ReviewMobileTable = ({ tableFields }) => {
   return tableFields.map((rows, index) => {
     return (
       <React.Fragment key={index}>
-        <Grid container rowSpacing={4}>
+        <Grid container>
           {rows.map((details, rowIndex) => {
             return (
               <Grid key={rowIndex} item xs={12} sm={6}>
