@@ -1,22 +1,30 @@
 Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
 
-  cy.intercept('GET', '/check/vat/*', {
-    state: true,
-    status: 'ONLINE'
+  cy.intercept('GET', '/check/vat/*',
+    {
+      statusCode: 200,
+      body: {
+        data: true,
+        state: true
+      }
   }).as('checkVat')
-  cy.intercept('GET', '/check/soci/**', {
-    state: true,
-    status: 'ONLINE'
-  }).as('checkMember')
+  cy.intercept('GET', '/check/soci/**',
+    {
+      statusCode: 200,
+      body: {
+        data: true,
+        state: true
+      }
+    }).as('checkMember')
 
   cy.get('#memberNumber')
     .clear()
-   .type(memberNumber)
+    .type(memberNumber)
     .should('have.value', memberNumber)
 
   cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
-  cy.wait('@checkMember')
+  .wait('@checkMember')
     .its('response.statusCode')
     .should('be.oneOf', [200, 304])
 
