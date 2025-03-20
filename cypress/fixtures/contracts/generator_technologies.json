@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "id": "b11",
+            "name": "[B11] - Instalaciones que \u00fanicamente utilicen la radiaci\u00f3n solar como energ\u00eda primaria mediante la tecnolog\u00eda fotovoltaica."
+        },
+        {
+            "id": "b21",
+            "name": "[B21] - Instalaciones e\u00f3licas ubicadas en tierra."
+        },
+        {
+            "id": "other",
+            "name": "Otras tecnologias"
+        }
+    ],
+    "state": true,
+    "status": "ONLINE"
+}
