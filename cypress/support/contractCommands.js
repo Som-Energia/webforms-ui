@@ -4,14 +4,14 @@ Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
     state: true,
     status: 'ONLINE'
   }).as('checkVat')
-  cy.intercept('GET', '/data/soci/**', {
+  cy.intercept('GET', '/check/soci/**', {
     state: true,
     status: 'ONLINE'
   }).as('checkMember')
 
   cy.get('#memberNumber')
     .clear()
-    .type(memberNumber)
+   .type(memberNumber)
     .should('have.value', memberNumber)
 
   cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)

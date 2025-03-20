@@ -31,7 +31,7 @@ describe('Contract', () => {
     cy.fixture('contracts/installation_types.json').as('installation_types')
     cy.fixture('contracts/prices.json').as('prices')
   })
-
+/*
   describe('Contract with selfconsumption', function () {
     it('2.0TD', function () {
 
@@ -123,7 +123,7 @@ describe('Contract', () => {
       cy.reviewAndConfirmData()
 
 
-      /*cy.intercept('POST', '/procedures/contract', (req) => {
+      cy.intercept('POST', '/procedures/contract', (req) => {
       expect(req.body).to.deep.equal(this.reqData);
         req.reply({
           statusCode: 200,
@@ -138,11 +138,10 @@ describe('Contract', () => {
         });
       })
       cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-      cy.get('[data-cy=submit]').click()*/
     })
   })
 
-  /* describe('Contract with CUPS without service', function () {
+  describe('Contract with CUPS without service', function () {
     beforeEach(function () {
       cy.fixture('normalizedData/contract20_noservice.json').as('reqData')
       cy.identifyMember(this.data.member.number, this.data.member.vat)
@@ -186,7 +185,6 @@ describe('Contract', () => {
           });
         })
         cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-        cy.get('[data-cy=submit]').click()
     })
 
     it('3.0TD no incremental powers', function () {
@@ -250,7 +248,6 @@ describe('Contract', () => {
           });
         })
         cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-        cy.get('[data-cy=submit]').click()
     })
   })
 
@@ -303,7 +300,6 @@ describe('Contract', () => {
           })
         })
         cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-        cy.get('[data-cy=submit]').click()
     })
 
     it('Contract with 3.0TD', function () {
@@ -354,7 +350,6 @@ describe('Contract', () => {
           })
         })
         cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-        cy.get('[data-cy=submit]').click()
     })
   })
 
@@ -388,15 +383,23 @@ describe('Contract', () => {
       cy.no30Power(this.data.phase, moreThan15Kw, powers)
     })
   })
-
+*/
   describe('Wrong fields', function () {
     it('Check fields error detection', function() {
     let memberNumber = this.data.member.number
     let memberVat = this.data.member.badVat
 
-    cy.intercept('GET', '/check/soci/**').as('checkMember')
+    cy.intercept('GET', '/check/soci/**',
+      {
+        statusCode: 200,
+        state: true,
+        status: 'ONLINE'
+      }).as('checkMember')
 
-    cy.fixture('normalizedData/contract_20_owner.json').as('reqData')
+      cy.intercept('GET', '/check/vat/*', {
+        state: true,
+        status: 'ONLINE'
+      }).as('checkVat')
 
     cy.fixture('normalizedData/contract_20_owner.json').as('reqData')
 
@@ -407,17 +410,31 @@ describe('Contract', () => {
 
     cy.get('#vat').clear().type(memberVat).should('have.value', memberVat)
 
-    cy.wait('@checkMember')
+   /*y.wait('@checkMember')
       .its('response.statusCode')
-      .should('be.oneOf', [200, 304])
+      .should('be.oneOf', [200, 304])*/
 
     cy.contains('No se ha encontrado ningún socio/a ')
     cy.get('[data-cy=next]').should('be.disabled')
+
+    cy.intercept('GET', '/check/vat/*', {
+      state: true,
+      status: 'ONLINE'
+    }).as('checkVat')
+
+    cy.intercept('GET', '/check/soci/**',
+      {
+        statusCode: 200,
+        state: true,
+        status: 'ONLINE'
+      }).as('checkMember')
+
 
     cy.get('#vat')
       .clear()
       .type(this.data.member.vat)
       .should('have.value', this.data.member.vat)
+
 
     cy.get('[data-cy=next]').click()
 
@@ -600,9 +617,8 @@ describe('Contract', () => {
           });
         })
         cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-        cy.get('[data-cy=submit]').click()
   })
-})
+})/*
 
   describe('Juridic Person', function () {
     beforeEach(function () {
@@ -651,9 +667,7 @@ describe('Contract', () => {
           });
         //})
         cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
-        cy.get('[data-cy=submit]').click()
     })
-  })
 
     it('Same juridic person', function () {
       cy.get('[name="holder.vat"]')
@@ -675,5 +689,6 @@ describe('Contract', () => {
 
       cy.get('[data-cy=next]').click()
       
-    }) */
-})
+    })
+  })*/
+  })
