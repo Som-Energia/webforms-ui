@@ -39,6 +39,8 @@ import {
   tariffModeValidations
 } from './Gurb/contractValidations'
 
+import noValidation from '../formValidations/noValidation'
+
 import {
   gurbPowerOptions,
   gurbPolicyChecks
@@ -176,7 +178,7 @@ const GurbForm = (props) => {
     tariffModeValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations,
-    Yup.object().shape({}),
+    noValidation,
     gurbPowerOptions,
     gurbPolicyChecks
   ]
