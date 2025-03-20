@@ -147,3 +147,11 @@ export const holderIbanValidations = Yup.object().shape({
       .oneOf([true], 'UNACCEPTED_DIRECT_DEBIT')
   })
 })
+
+export const tariffModeValidations = Yup.object().shape({
+  contract: Yup.object().shape({
+    tariff_mode: Yup.string()
+    .required('REQUIRED_FIELD')
+    .oneOf(['periods', 'indexed']),
+  })
+})
