@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.7.2 2025-03-20
+- add normalization of cypress tests
+
 ## 2.7.1 2025-03-17
 
 - use of ibantools for iban format validations
