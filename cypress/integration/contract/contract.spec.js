@@ -7,16 +7,14 @@ describe('Contract', () => {
   })
 
   beforeEach(() => {
-
     cy.intercept('GET', '/ping', {
       body: {
         state: true,
         status: 'ONLINE'
       }
-    }).as('checkPing');
+    }).as('checkPing')
 
     cy.visit('/contract')
-
 
     cy.wait('@checkPing')
       .its('response.statusCode')
