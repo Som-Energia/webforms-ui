@@ -1,5 +1,3 @@
-import { useTranslation } from 'react-i18next'
-
 import useCheckMobileScreen from '../../../services/checkMobileScreen'
 import GurbMobileStepper from './GurbMobileStepper'
 import GurbDesktopStepper from './GurbDesktopStepper'
