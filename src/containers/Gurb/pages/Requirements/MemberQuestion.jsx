@@ -8,6 +8,7 @@ import Groups2Icon from '@mui/icons-material/Groups2'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 
 import { iconRequirements, iconOffRequirements } from '../../gurbTheme'
+import Grid from '@mui/material/Grid'
 
 const MemberQuestion = (props) => {
   const { values, setFieldValue } = props
@@ -44,15 +45,19 @@ const MemberQuestion = (props) => {
   ]
 
   return (
-    <>
-      <TextRecomendation title={t('GURB_HAS_MEMBER_TITLE')} required={true} />
-      <Chooser
-        name='member-question'
-        options={options}
-        value={values.has_member}
-        handleChange={handleMemberQuestion}
-      />
-    </>
+    <Grid container spacing={4}>
+      <Grid item>
+        <TextRecomendation title={t('GURB_HAS_MEMBER_TITLE')} required={true} />
+      </Grid>
+      <Grid item>
+        <Chooser
+          name="member-question"
+          options={options}
+          value={values.has_member}
+          handleChange={handleMemberQuestion}
+        />
+      </Grid>
+    </Grid>
   )
 }
 

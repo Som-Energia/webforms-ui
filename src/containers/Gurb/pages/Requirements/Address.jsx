@@ -5,15 +5,18 @@ import TextRecomendation from '../../components/TextRecomendation'
 import LocationInput from '../../components/AddressAutocompletedField'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
-import Box from '@mui/material/Box'
 import InputField from '../../components/InputField'
-import { getPlaceDetails, searchPlace } from '../../../../services/googleApiClient'
+import {
+  getPlaceDetails,
+  searchPlace
+} from '../../../../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../../../../services/api'
-
+import Grid from '@mui/material/Grid'
 
 const Address = (props) => {
   const { t } = useTranslation()
-  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } = props
+  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
+    props
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
   const [addressValue, setAddressValue] = useState(values.address.street)
   const [numberValue, setNumberValue] = useState(values.address.number)
@@ -22,18 +25,24 @@ const Address = (props) => {
   const updateAddressValues = async () => {
     try {
       const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
-      const postalCode = place.addressComponents.find(component =>
+      const postalCode = place.addressComponents.find((component) =>
         component.types.includes('postal_code')
-      );
+      )
       const municipis = await getMunicipisByPostalCode(postalCode?.longText)
-      const street = place.addressComponents.find(component =>
+      const street = place.addressComponents.find((component) =>
         component.types.includes('route')
-      );
-      const fullAddress = place.formattedAddress.replace(/,/, ` ${numberValue},`)
+      )
+      const fullAddress = place.formattedAddress.replace(
+        /,/,
+        ` ${numberValue},`
+      )
       const suggestions = await searchPlace(fullAddress, sessionTokenRef)
 
       if (suggestions.length > 0) {
-        const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
+        const suggestedPlace = await getPlaceDetails(
+          suggestions[0].id,
+          sessionTokenRef
+        )
 
         const updatedValues = {
           ...values,
@@ -45,24 +54,23 @@ const Address = (props) => {
             postal_code: postalCode?.longText || '',
             street: street?.longText || '',
             state: municipis && municipis[0] ? municipis[0][0]?.provincia : {},
-            city: municipis && municipis[0] ? municipis[0][0]?.municipi : {},
+            city: municipis && municipis[0] ? municipis[0][0]?.municipi : {}
           }
         }
 
-        setValues(updatedValues);
+        setValues(updatedValues)
       } else {
-        console.log("Address not found");
+        console.log('Address not found')
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
     if (addressValue?.id && numberValue) {
       updateAddressValues()
-    }
-    else if (!addressValue || !numberValue) {
+    } else if (!addressValue || !numberValue) {
       initializeAddress()
     }
   }, [addressValue, numberValue])
@@ -129,80 +137,82 @@ const Address = (props) => {
   }
 
   return (
-    <>
-      <TextRecomendation
-        title={t('GURB_ADDRESS_TITLE')}
-        text={t('GURB_ADDRESS_TITLE_HELPER')}
-      />
-      <LocationInput
-        required
-        textFieldLabel={t('GURB_ADDRESS_LABEL')}
-        textFieldName={t('GURB_ADDRESS_FIELD')}
-        textFieldHelper={t('GURB_ADDRESS_HELPER')}
-        id="address-street"
-        name="address.street"
-        value={addressValue}
-        onChange={handleAddressChange}
-        sessionTokenRef={sessionTokenRef}
-      />
-      <Box sx={{ display: 'flex', gap: '2rem' }}>
-        <Box>
-          <InputField
-            name={'address.number'}
-            textFieldName={t('NUMBER')}
-            handleChange={handleChangeNumber}
-            touched={touched?.address?.number}
-            value={numberValue}
-            error={errors?.address?.number}
-            required={true}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.floor'}
-            textFieldName={t('FLOOR')}
-            handleChange={handleChangeInteger}
-            touched={touched?.address?.floor}
-            value={values?.address?.floor}
-            error={errors?.address?.floor}
-            required={false}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.door'}
-            textFieldName={t('DOOR')}
-            handleChange={handleChangeInteger}
-            touched={touched?.address?.door}
-            value={values?.address?.door}
-            error={errors?.address?.door}
-            required={false}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.stairs'}
-            textFieldName={t('STAIRS')}
-            handleChange={handleChange}
-            touched={touched?.address?.stairs}
-            value={values?.address?.stairs}
-            error={errors?.address?.stairs}
-            required={false}
-          />
-        </Box>
-        <Box>
-          <InputField
-            name={'address.bloc'}
-            textFieldName={t('BLOCK')}
-            handleChange={handleChange}
-            touched={touched?.address?.bloc}
-            value={values?.address?.bloc}
-            error={errors?.address?.bloc}
-            required={false}
-          />
-        </Box>
-      </Box>
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextRecomendation
+          title={t('GURB_ADDRESS_TITLE')}
+          text={t('GURB_ADDRESS_TITLE_HELPER')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LocationInput
+          required
+          textFieldLabel={t('GURB_ADDRESS_LABEL')}
+          textFieldName={t('GURB_ADDRESS_FIELD')}
+          textFieldHelper={t('GURB_ADDRESS_HELPER')}
+          id="address-street"
+          name="address.street"
+          value={addressValue}
+          onChange={handleAddressChange}
+          sessionTokenRef={sessionTokenRef}
+        />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <InputField
+          name={'address.number'}
+          textFieldName={t('NUMBER')}
+          handleChange={handleChangeNumber}
+          touched={touched?.address?.number}
+          value={numberValue}
+          error={errors?.address?.number}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.floor'}
+          textFieldName={t('FLOOR')}
+          handleChange={handleChangeInteger}
+          touched={touched?.address?.floor}
+          value={values?.address?.floor}
+          error={errors?.address?.floor}
+          required={false}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.door'}
+          textFieldName={t('DOOR')}
+          handleChange={handleChangeInteger}
+          touched={touched?.address?.door}
+          value={values?.address?.door}
+          error={errors?.address?.door}
+          required={false}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.stairs'}
+          textFieldName={t('STAIRS')}
+          handleChange={handleChange}
+          touched={touched?.address?.stairs}
+          value={values?.address?.stairs}
+          error={errors?.address?.stairs}
+          required={false}
+        />
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <InputField
+          name={'address.bloc'}
+          textFieldName={t('BLOCK')}
+          handleChange={handleChange}
+          touched={touched?.address?.bloc}
+          value={values?.address?.bloc}
+          error={errors?.address?.bloc}
+          required={false}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default Address

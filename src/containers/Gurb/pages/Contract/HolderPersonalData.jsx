@@ -1,10 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
-import SomStepper from '../../components/SomStepper'
 
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 
 const HolderPersonalData = (props) => {
@@ -34,13 +31,6 @@ const HolderPersonalData = (props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation
-          title={t('GURB_HOLDER_PERSONAL_DATA_TITLE')}
-          text={t('GURB_HOLDER_ID_SUBTITLE')}
-        />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
       <Grid container columnSpacing={2} sx={{ marginBottom: '6rem' }}>
         <Grid item xs={4}>
           <InputField

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Grid from '@mui/material/Grid'
 import Header from './components/Header'
 import ProgressWarning from './components/ProgressWarning'
 import TextRecomendation from './components/TextRecomendation'
@@ -33,15 +34,23 @@ const SupplyPoint = (props) => {
   }, [])
 
   return (
-    <>
-      <Header title={`${t('GURB_SUPPLY_POINT_TITLE')} ${gurbData.name}`} />
-      <ProgressWarning completed={gurbData.completedPercentage} />
-      <TextRecomendation
-        title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
-        text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
-      />
-      <CUPS {...props} />
-    </>
+    <Grid container spacing={5}>
+      <Grid item xs={12}>
+        <Header title={`${t('GURB_SUPPLY_POINT_TITLE')} ${gurbData.name}`} />
+      </Grid>
+      <Grid item xs={12}>
+        <ProgressWarning completed={gurbData.completedPercentage} />
+      </Grid>
+      <Grid item xs={12}>
+        <TextRecomendation
+          title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
+          text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <CUPS {...props} />
+      </Grid>
+    </Grid>
   )
 }
 export default SupplyPoint

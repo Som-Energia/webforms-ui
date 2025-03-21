@@ -41,7 +41,7 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
-  const Gurb = lazy(() => import('./containers/Gurb'))
+  const GurbForm = lazy(() => import('./containers/GurbForm'))
 
   const loadContractData = () => {
     const contractData =
@@ -444,11 +444,11 @@ const App = (props) => {
                 />
                 {props?.isGurbEnabled && (
                   <Route
-                    path="/:language/gurb/validations/"
+                    path="/:language/gurb/:id/validations/"
                     element={
                       <GurbErrorContextProvider>
                         <GurbLoadingContextProvider>
-                          <Gurb {...props} />
+                          <GurbForm {...props} />
                         </GurbLoadingContextProvider>
                       </GurbErrorContextProvider>
                     }

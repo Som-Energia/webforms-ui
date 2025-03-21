@@ -2,10 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { HelperText } from '../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
 import PowerInputs from '../../components/PowerInputs'
-import SomStepper from '../../components/SomStepper'
 import RequiredTitle from '../../components/InputTitle'
 
 import BoltIcon from '@mui/icons-material/Bolt'
@@ -51,10 +49,6 @@ const Power = (props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation title={t('GURB_POWER_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
       <Box marginTop={'3rem'} marginBottom={'4rem'}>
         <RequiredTitle
           text={t('GURB_POWER_QUESTION')}

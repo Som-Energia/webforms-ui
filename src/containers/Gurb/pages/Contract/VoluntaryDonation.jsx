@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
-import SomStepper from '../../components/SomStepper'
 import RequiredTitle from '../../components/InputTitle'
 import { HelperText } from '../../components/InputField'
 
@@ -51,8 +49,6 @@ const HolderVoluntaryDonation = (props) => {
   return (
     <>
       <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation title={t('GURB_HOLDER_VOLUNTARY_DONATION_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />
         <Typography
           sx={{ ...textBody1, marginBottom: '1rem' }}
           variant="body2"

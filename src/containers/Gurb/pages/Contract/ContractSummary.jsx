@@ -2,14 +2,10 @@ import { useContext, useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import TextRecomendation from '../../components/TextRecomendation'
-import SomStepper from '../../components/SomStepper'
 import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
 
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import PersonIcon from '@mui/icons-material/Person'
@@ -171,11 +167,11 @@ const ContractSummary = (props) => {
       Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
     )
     getPrices({
-      tariff: '2.0TD', // values.contract.tariff,
-      max_power: '5000',
-      vat: '60973654X', //values.holder.dni,
-      cnae: '9820', // values.supply_point.cnae,
-      city_id: 5102 // values.address.city
+      tariff: values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
+      max_power: maxPower,
+      vat: values.holder.nif,
+      cnae: values.supply_point.cnae,
+      city_id: values.address.city.id
     })
       .then((response) => {
         const tariffPrices = response?.data['current']
@@ -192,8 +188,6 @@ const ContractSummary = (props) => {
     <Loading />
   ) : (
     <>
-      <TextRecomendation title={t('GURB_CONTRACT_SUMMARY_TITLE')} />
-      <SomStepper step={activeStep} connectors={7 + 1} />
       <ReviewTable tableFields={reviewFields} />
       <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
       <Typography

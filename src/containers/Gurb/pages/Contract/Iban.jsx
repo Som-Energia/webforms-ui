@@ -2,14 +2,11 @@ import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
-import SomStepper from '../../components/SomStepper'
 
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-
-import { checkIban } from '../../../../services/api'
+import { checkIbanFormat } from '../../../../services/utils'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
 import { textCheckbox } from '../../gurbTheme'
@@ -22,7 +19,6 @@ const HolderIban = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setErrors,
     setFieldTouched
   } = props
 
@@ -30,16 +26,9 @@ const HolderIban = (props) => {
   const { loading, setLoading } = useContext(GurbLoadingContext)
 
   const handleCheckIbanResponse = async () => {
-    let status = undefined
     setLoading(true)
-    await checkIban(values.holder.iban)
-      .then((response) => {
-        status = response?.state
-      })
-      .catch(() => {
-        status = false
-      })
-    if (status === true) {
+    const valid = checkIbanFormat(values.holder.iban)
+    if (valid) {
       await setFieldError('holder.iban_valid', undefined)
       setFieldValue('holder.iban_valid', true)
     } else {
@@ -78,10 +67,6 @@ const HolderIban = (props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation title={t('GURB_IBAN_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
       <InputField
         name='iban'
         textFieldLabel={t('GURB_IBAN_LABEL')}
