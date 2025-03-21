@@ -2,14 +2,10 @@ import { useContext, useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import TextRecomendation from '../../components/TextRecomendation'
-import SomStepper from '../../components/SomStepper'
 import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
 
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import PersonIcon from '@mui/icons-material/Person'
@@ -192,8 +188,6 @@ const ContractSummary = (props) => {
     <Loading />
   ) : (
     <>
-      <TextRecomendation title={t('GURB_CONTRACT_SUMMARY_TITLE')} />
-      <SomStepper step={activeStep} connectors={7 + 1} />
       <ReviewTable tableFields={reviewFields} />
       <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
       <Typography

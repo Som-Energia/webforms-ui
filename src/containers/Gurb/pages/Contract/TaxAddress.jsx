@@ -2,9 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
-import SomStepper from '../../components/SomStepper'
 import LocationInput from '../../components/AddressAutocompletedField'
 import RequiredTitle from '../../components/InputTitle'
 
@@ -130,13 +128,6 @@ const TaxAddress = (props) => {
   const supplypointAddress = `${values?.address.street}, ${values?.address.number} ${values?.address.postal_code}`
   return (
     <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation
-          title={t('GURB_HOLDER_SUPPLYPOINT_TITLE')}
-          text={t('GURB_HOLDER_ID_SUBTITLE')}
-        />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
       <InputField
         name='supplypointAddress'
         textFieldName={t('GURB_ADDRESS_FIELD')}

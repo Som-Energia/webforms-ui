@@ -1,10 +1,8 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../components/Chooser'
-import SomStepper from '../../components/SomStepper'
 import RequiredTitle from '../../components/InputTitle'
 
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
@@ -77,13 +75,6 @@ const HolderIdentification = (props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation
-          title={t('GURB_HOLDER_ID_TITLE')}
-          text={t('GURB_HOLDER_ID_SUBTITLE')}
-        />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
       <InputField
         name='holder_vat'
         textFieldLabel={t('GURB_NIF_LABEL')}

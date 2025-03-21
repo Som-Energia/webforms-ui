@@ -12,6 +12,7 @@ import Payment from './pages/Gurb/Payment'
 
 
 const Contract = (props) => {
+  const GURB_SECTION_STEPS = 4
   const { activeStep } = props
   const { t } = useTranslation()
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
@@ -44,7 +45,7 @@ const Contract = (props) => {
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper activeStep={GURB_FINAL_STEP} />
       <Typography sx={textHeader2}>{getTitle()}</Typography>
-      <SomStepper step={activeStep} connectors={3 + 1} />
+      <SomStepper step={activeStep} connectors={GURB_SECTION_STEPS} />
       {error ? getStepResult(errorInfo) : getStep()}
     </>
   )

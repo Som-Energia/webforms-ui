@@ -2,8 +2,6 @@ import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputField from '../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
-import SomStepper from '../../components/SomStepper'
 
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -29,7 +27,7 @@ const HolderIban = (props) => {
 
   const handleCheckIbanResponse = async () => {
     setLoading(true)
-    const valid = checkIbanFormat(values.payment.iban)
+    const valid = checkIbanFormat(values.holder.iban)
     if (valid) {
       await setFieldError('holder.iban_valid', undefined)
       setFieldValue('holder.iban_valid', true)
@@ -69,10 +67,6 @@ const HolderIban = (props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation title={t('GURB_IBAN_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />
-      </Box>
       <InputField
         name='iban'
         textFieldLabel={t('GURB_IBAN_LABEL')}

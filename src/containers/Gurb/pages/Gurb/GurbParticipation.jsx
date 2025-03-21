@@ -9,16 +9,7 @@ import { getPowers } from '../../../../services/api'
 
 const Contract = (props) => {
 
-    const options = [
-        {
-            id: '0_5_kwh',
-            value: "0.5 KWh"
-        },
-        {
-            id: '1_kwh',
-            value: "1 KWh"
-        }
-    ]
+   const [powers,setPowers] = useState([])
 
   const cost = {
     "1 KWh": 180,

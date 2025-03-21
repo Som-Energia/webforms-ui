@@ -3,13 +3,10 @@ import { useTranslation } from 'react-i18next'
 
 import BoltIcon from '@mui/icons-material/Bolt'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/Chooser'
 import { HelperText } from '../../components/InputField'
 import RequiredTitle from '../../components/InputTitle'
-import SomStepper from '../../components/SomStepper'
-import TextRecomendation from '../../components/TextRecomendation'
 
 import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
 
@@ -49,11 +46,6 @@ const TariffMode = (props) => {
 
   return (
     <>
-      {console.log(values, errors)}
-      <Box sx={{ marginTop: '2rem', marginBottom: '-2rem' }}>
-        <TextRecomendation title={t('GURB_TARIFFMODE_TITLE')} />
-        <SomStepper step={activeStep} connectors={7 + 1} />  {/*TODO*/}
-      </Box>
       <Box marginTop={'3rem'} marginBottom={'4rem'}>
         <RequiredTitle
           text={t('GURB_TARIFFMODE_QUESTION')}
