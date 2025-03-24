@@ -5,14 +5,17 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
 import NewMember from './Gurb/NewMember'
 import Contract from './Gurb/Contract'
+import Gurb from './Gurb/Gurb'
 
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
+import SubmitButton from './Gurb/components/SubmitButton'
 import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
   addressValidations,
@@ -32,20 +35,37 @@ import {
   holderTaxAddressValidations,
   supplyPointDataValidations,
   holderVoluntaryDonationValidations,
-  powerValidations
+  powerValidations,
+  tariffModeValidations
 } from './Gurb/contractValidations'
+
+import noValidation from '../formValidations/noValidation'
+
+import {
+  gurbPowerOptions,
+  gurbPolicyChecks
+} from './Gurb//GurbValidations'
+
+import * as Yup from 'yup'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import { addGurb } from '../services/api'
 
-const MAX_STEP_NUMBER = 15
+const MAX_STEP_NUMBER = 19
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
 const NEW_MEMBER_STEP = [5, 6, 7]
-const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15]
+const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
+const GURB_STEPS = [17, 18, 19]
+const NEW_MEMBER_COST = 100
 
-const Gurb = (props) => {
+const GurbForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language } = useParams()
+  const { language, id } = useParams()
+  const [url, setUrl] = useState('')
+  const [data, setData] = useState()
+  const formTPV = useRef(null)
+
   const { error, setError, errorInfo, setErrorInfo } =
     useContext(GurbErrorContext)
 
@@ -120,16 +140,25 @@ const Gurb = (props) => {
     cadastral_reference: '',
     cadastral_reference_valid: true,
     supply_point: {
+      is_housing: undefined,
+      cnae: undefined,
       supply_point_accepted: false
     },
     contract: {
+      tariff_mode: undefined,
       power_type: undefined,
       power: {
         power1: undefined,
         power2: undefined,
         power3: undefined
-      }
-    }
+      },
+      gurb_power: '',
+      gurb_power_cost: ''
+    },
+    privacy_policy_accepted: false,
+    generic_especific_conditons_accepted: false,
+    tariff_payment_accepted: false,
+    gurb_adhesion_payment_accepted: false
   }
 
   const validationSchemas = [
@@ -144,10 +173,14 @@ const Gurb = (props) => {
     holderIdentificationValidations,
     holderPersonalDataValidations,
     holderTaxAddressValidations,
-    powerValidations,
     supplyPointDataValidations,
+    powerValidations,
+    tariffModeValidations,
     holderVoluntaryDonationValidations,
-    holderIbanValidations
+    holderIbanValidations,
+    noValidation,
+    gurbPowerOptions,
+    gurbPolicyChecks
   ]
 
   const nextStep = (formikProps) => {
@@ -155,12 +188,10 @@ const Gurb = (props) => {
     if (activeStep === 4) {
       if (formikProps.values.has_member === 'member-off') {
         next = activeStep + 2
-      }
-      else if (formikProps.values.has_member === 'apadrinating') {
+      } else if (formikProps.values.has_member === 'apadrinating') {
         next = activeStep + 3
       }
-    }
-    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       next = 8
     }
     const last = MAX_STEP_NUMBER
@@ -172,17 +203,24 @@ const Gurb = (props) => {
     if (activeStep === 8) {
       if (formikProps.values.has_member === 'member-off') {
         prev = activeStep - 2
-      }
-      else if (formikProps.values.has_member === 'member-on') {
+      } else if (formikProps.values.has_member === 'member-on') {
         prev = activeStep - 3
       }
-    }
-    else if (NEW_MEMBER_STEP.includes(activeStep)) {
+    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
       prev = 4
     }
     setActiveStep(Math.max(0, prev))
   }
-
+  const handlePost = async (values) => {
+    await addGurb(values)
+      .then((response) => {
+        setData(response?.data)
+        setUrl(response.data.endpoint)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   const getStep = (props) => {
     if (activeStep === 0) {
       return <SupplyPoint {...props} />
@@ -194,11 +232,18 @@ const Gurb = (props) => {
         />
       )
     } else if (NEW_MEMBER_STEP.includes(activeStep)) {
-      return <NewMember {...props} activeStep={NEW_MEMBER_STEP.indexOf(activeStep)} />
+      return (
+        <NewMember
+          {...props}
+          activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
+        />
+      )
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
         <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
       )
+    } else if (GURB_STEPS.includes(activeStep)) {
+      return <Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />
     } else {
       return <></>
     }
@@ -227,6 +272,12 @@ const Gurb = (props) => {
     }
   }, [activeStep])
 
+  useEffect(() => {
+    if (url !== '') {
+      formTPV.current.submit()
+    }
+  }, [url])
+
   return (
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
       <Formik
@@ -242,39 +293,26 @@ const Gurb = (props) => {
               {error ? (
                 <></>
               ) : (
-                <>
-                  {activeStep === 0 ? (
-                    <>
-                      <Box
-                        style={{
-                          marginTop: '2rem',
-                          marginX: '2rem',
-                          display: 'flex',
-                          justifyContent: 'flex-end'
-                        }}>
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
-                        />
-                      </Box>
-                    </>
-                  ) : (
-                    <Box
-                      style={{
-                        marginTop: '2rem',
-                        marginX: '2rem',
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}>
+                <Grid
+                  container
+                  direction="row-reverse"
+                  rowSpacing={2}
+                  sx={{
+                    marginTop: '2rem',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                  {activeStep !== 0 && (
+                    <Grid item sm={2} xs={12}>
                       <PrevButton
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
                       />
+
+                    </Grid>
+                  )}
+                  <Grid item sm={2} xs={12} order={-1}>
+                    {activeStep !== MAX_STEP_NUMBER ?
                       <NextButton
                         disabled={
                           loading ||
@@ -284,15 +322,38 @@ const Gurb = (props) => {
                         onClick={() => nextStep(formikProps)}
                         title={'NEXT'}
                       />
-                    </Box>
-                  )}
-                </>
+                      :
+                      <SubmitButton
+                        disabled={
+                          loading ||
+                          !formikProps.isValid
+                        }
+                        onClick={() => handlePost({ soci: "Eustaquio", cost: NEW_MEMBER_COST + formikProps.values.contract.gurb_power_cost })}
+                      />
+                    }
+                  </Grid>
+                </Grid>
               )}
             </>
           )
         }}
       </Formik>
+      {data?.payment_data && (
+        <form ref={formTPV} action={data.endpoint} method="POST">
+          {Object.keys(data.payment_data).map((key) => (
+            <input
+              key={key}
+              type="hidden"
+              name={key}
+              value={data.payment_data[key]}
+            />
+          ))}
+        </form>
+      )}
     </Container>
+
   )
 }
-export default Gurb
+
+export default GurbForm
+

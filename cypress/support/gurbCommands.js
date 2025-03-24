@@ -57,7 +57,7 @@ Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('identifyMemberGURB', ({vat, number}) => {
+Cypress.Commands.add('identifyMemberGURB', ({ vat, number }) => {
 
   cy.get('[data-cy="vat"]').type(vat)
   cy.get('[data-cy="code"]').type(number)
@@ -128,7 +128,7 @@ Cypress.Commands.add('personalDataHolder', (personalData) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('taxAddress', ({sameDirection = true, input, value}) => {
+Cypress.Commands.add('taxAddress', ({ sameDirection = true, input, value }) => {
 
   const optionValue = sameDirection ? 'supplypoint-tax-address-same' : 'supplypoint-tax-address-different'
   cy.get('[data-cy="sameDirection"]').get(`[data-cy="${optionValue}"]`).click()
@@ -136,7 +136,7 @@ Cypress.Commands.add('taxAddress', ({sameDirection = true, input, value}) => {
   if (!sameDirection) {
     cy.get('[data-cy="tax_address-street"]').type(input)
     cy.contains(value).click()
-  
+
     cy.get('[data-cy="tax_address.number"]').type('24')
     cy.get('[data-cy="tax_address.floor"]').type('6')
     cy.get('[data-cy="tax_address.door"]').type('2')
@@ -145,19 +145,22 @@ Cypress.Commands.add('taxAddress', ({sameDirection = true, input, value}) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('choosePower', ({moreThan15Kw = false, powers}) => {
+Cypress.Commands.add('choosePower', ({ moreThan15Kw = false, powers }) => {
 
   const optionValue = moreThan15Kw ? 'power-higher-15kw' : 'power-lower-15kw'
   cy.get('[data-cy="power_question"]').get(`[data-cy="${optionValue}"]`).click()
 
   powers.forEach((power, index) => {
-    cy.get(`[data-cy="contract.power.power${index+1}"]`).type(power)
+    cy.get(`[data-cy="contract.power.power${index + 1}"]`).type(power)
   })
 
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('supplyPointData', () => {
+
+  cy.get('[data-cy=select_component]').click()
+  cy.get('[data-cy=yes]').click()
 
   cy.get('[data-cy="supply_point_accepted"]').click()
   cy.get('[data-cy=accept]').click()
@@ -180,4 +183,48 @@ Cypress.Commands.add('paymentData', (iban) => {
   cy.get('[data-cy="iban_check"]').click()
 
   cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('powerChoice', (choice) => {
+
+
+  cy.get('[data-cy="select_component"]').click()
+  cy.get(`[data-cy="${choice}"]`).click()
+  cy.get('[data-cy=next]').click()
+
+})
+
+Cypress.Commands.add('chooseTariffGURB', (isIndexed = true) => {
+
+  const optionValue = isIndexed ? 'indexed' : 'periods'
+  cy.get('[data-cy="tariffMode"]').get(`[data-cy="${optionValue}"]`).click()
+
+  cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('acceptAllTerms', () => {
+  cy.get('[data-cy="generic_especific_conditons_checkbox"]').click()
+  cy.get('[data-cy="privacy_policy_checkbox"]').click()
+  cy.get('[data-cy="tariff_payment_checkbox"]').click()
+  cy.get('[data-cy="gurb_adhesion_payment_checkbox"]').click()
+
+  cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('interceptAvailablePowers', () => {
+  cy.intercept('GET', '/data/gurb/*/available_powers',
+    {
+      statusCode: 200,
+      body: {
+        data: [{ "id": "0_5_kwh", "value": "0.5 KWh", "text": "0.5 KWh" }, { "id": "1_kwh", "value": "1 KWh", "text": "1 KWh" }]
+      },
+      state: true,
+      status: "ONLINE"
+    }
+  ).as('availablePowers')
+
+
+  cy.get('[data-cy=next]').click()
+
+  cy.wait("@availablePowers")
 })

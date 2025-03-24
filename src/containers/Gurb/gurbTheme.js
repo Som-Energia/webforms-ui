@@ -1,3 +1,6 @@
+export const PREV_COLOR = '#96b633'
+export const NEXT_COLOR = '#E6E6E6'
+
 export const textHeader1 = {
   fontFamily: 'Inter',
   color: '#3B3B3B',
@@ -123,7 +126,7 @@ export const textReviewSubtitle = {
 
 export const containerSpacing = {
   display: 'flex',
-  padding: '0.3rem',
+  padding: '16px',
   borderRadius: '8px'
 }
 
@@ -150,7 +153,6 @@ export const iconOffRequirements = {
 }
 
 export const chooserGurb = {
-  width: '20.45rem',
   paddingTop: '1.5rem',
   paddingBottom: '2rem',
   paddingLeft: '1.625rem',
@@ -180,7 +182,8 @@ export const buttonGurbDark = {
     color: '#1E1E1E',
     boxShadow: 'none',
     border: '1px solid #D9D9D9'
-  }
+  },
+  width: '100%'
 }
 
 export const buttonGurbLight = {
@@ -210,7 +213,8 @@ export const buttonGurbLight = {
       color: '#FFFFFF',
       '& svg': { width: '0.8rem', hight: '0.8rem' }
     }
-  }
+  },
+  width: '100%'
 }
 
 export const link = {

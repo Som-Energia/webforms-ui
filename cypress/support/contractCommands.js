@@ -107,14 +107,17 @@ Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
 
   cy.intercept('GET', '/check/cups/status/*',
     {
-      data: { 
-        cups: cups,
-        status: 'new',
-        tariff_type: null,
-      },
-      status: "ONLINE",
-      state: true      
-    }).as('checkIban')
+      statusCode: 200,
+      body: {
+        data: {
+          cups: cups,
+          status: "new",
+          tariff_type: null
+        },
+        state: true,
+        status: "ONLINE"
+      }
+    }).as('checkCUPS')
 
   cy.get('#cups')
     .clear()
@@ -123,6 +126,7 @@ Cypress.Commands.add('identifySupplyPoint', (cups, hasService) => {
     // Extra validation is done when bluring so blur before continue
     .blur()
 
+  cy.wait('@checkCUPS')
   // Wait for the cups to be validated
   cy.get('#cups[aria-invalid=false]', { timeout: 3000 })
 

@@ -8,6 +8,7 @@ import SomGurbStepper, {
 import Header from './components/Header'
 
 import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
 import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
@@ -17,11 +18,13 @@ import MemberQuestion from './pages/Requirements/MemberQuestion'
 import { textBody3, textSubtitle } from './gurbTheme'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
+import useCheckMobileScreen from '../../services/checkMobileScreen'
 
 const Requirements = (props) => {
   const { values, activeStep } = props
   const { t } = useTranslation()
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
+  const isMobile = useCheckMobileScreen()
 
   const getStep = () => {
     if (activeStep === 0) {
@@ -36,14 +39,28 @@ const Requirements = (props) => {
   }
 
   return (
-    <>
-      <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
-      <SomGurbStepper activeStep={GURB_REQUIREMENTS_STEP} />
-      <Header title={t('GURB_REQUIREMENTS_TITLE')} />
-      <Typography sx={textBody3}>{t('GURB_REQUIREMENTS_SUBTITLE')}</Typography>
-      <SomStepper step={activeStep} connectors={4 + 1} />
-      {error ? getStepResult(errorInfo) : getStep()}
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <SomGurbStepper activeStep={GURB_REQUIREMENTS_STEP} />
+      </Grid>
+      <Grid item xs={12}>
+        <Header title={t('GURB_REQUIREMENTS_TITLE')} />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography sx={textBody3}>
+          {t('GURB_REQUIREMENTS_SUBTITLE')}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        {!isMobile && <SomStepper step={activeStep} connectors={4 + 1} />}
+      </Grid>
+      <Grid item xs={12}>
+        {error ? getStepResult(errorInfo) : getStep()}
+      </Grid>
+    </Grid>
   )
 }
 export default Requirements

@@ -25,20 +25,27 @@ const Option = ({
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: '1rem'
+          alignItems: 'center',
+          marginBottom: '1rem',
+          justifyContent: 'space-between'
         }}>
-        {icon}
-        {isSelected && (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+          {icon}
+          <Typography sx={textHeader4}>{textHeader}</Typography>
+        </Box>
+        {isSelected ? (
           <Checkbox
             checked
             icon={<CheckCircleIcon />}
             checkedIcon={<CheckCircleIcon />}
           />
-        )}
+        ) : null}
       </Box>
-      <Typography sx={textHeader4}>{textHeader}</Typography>
       <Typography sx={textBody1}>{textBody}</Typography>
     </Box>
   )
@@ -56,24 +63,10 @@ const Chooser = (props) => {
       data-cy={name}
       container
       spacing={4}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: '0.5rem',
-        marginBottom: '1rem'
-      }}>
+      direction="row"
+      justifyContent="center">
       {options.map((option, index) => (
-        <Grid
-          key={index}
-          item
-          xs={12}
-          sm={6}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}>
+        <Grid key={index} item sm={6} xs={12}>
           <Option
             isSelected={option?.id === value}
             setSelected={setOptionSelection}
@@ -83,7 +76,13 @@ const Chooser = (props) => {
             textBody={option?.textBody}
           />
           {option?.helper && (
-            <Box sx={{ marginTop: '1rem' }}>{option?.helper}</Box>
+            <Box
+              sx={{
+                marginTop: '1rem',
+                justifyItems: 'center'
+              }}>
+              {option?.helper}
+            </Box>
           )}
         </Grid>
       ))}
