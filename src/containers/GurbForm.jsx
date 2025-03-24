@@ -69,7 +69,7 @@ const GurbForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
 
-  const [activeStep, setActiveStep] = useState(17)
+  const [activeStep, setActiveStep] = useState(0)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])

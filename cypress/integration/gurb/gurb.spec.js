@@ -44,6 +44,8 @@ describe('Contract', () => {
 
       cy.paymentData(this.data.randomIban)
 
+      cy.checkReviewContractStep(this.personaldata.vat)
+
       cy.interceptAvailablePowers()
 
       cy.powerChoice('0_5_kwh')
@@ -80,6 +82,8 @@ describe('Contract', () => {
 
       cy.paymentData(this.data.randomIban)
 
+      cy.checkReviewContractStep(this.personaldata.vat)
+
       cy.interceptAvailablePowers()
 
       cy.powerChoice('0_5_kwh')
@@ -115,6 +119,8 @@ describe('Contract', () => {
       cy.donationQuestion()
 
       cy.paymentData(this.data.randomIban)
+
+      cy.checkReviewContractStep(this.personaldata.vat)
 
       cy.interceptAvailablePowers()
 
@@ -154,6 +160,8 @@ describe('Contract', () => {
       cy.donationQuestion()
 
       cy.paymentData(this.data.randomIban)
+
+      cy.checkReviewContractStep(this.personaldata.vat)
       
       cy.interceptAvailablePowers()
 

@@ -6,6 +6,7 @@ import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
 
 import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import PersonIcon from '@mui/icons-material/Person'
