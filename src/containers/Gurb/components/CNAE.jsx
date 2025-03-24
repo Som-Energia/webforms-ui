@@ -10,20 +10,13 @@ import Select from './Select'
 import InputTitle from './InputTitle'
 import { textHeader4, textField } from '../gurbTheme'
 
-
 const CnaeField = (props) => {
-  const {
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldTouched,
-    setValues
-  } = props
+  const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
+    props
 
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
-  const [cnaeDescription, setCnaeDescription] = useState(false)  // TODO: Remove it?
+  const [cnaeDescription, setCnaeDescription] = useState(false) // TODO: Remove it?
 
   const updateCNAE = async () => {
     setCnaeDescription(false)
@@ -42,7 +35,7 @@ const CnaeField = (props) => {
       setLoading(false)
       setFieldValue('supply_point.cnae_valid', correctCNAE)
     }
-  };
+  }
 
   useEffect(() => {
     updateCNAE()
@@ -78,17 +71,23 @@ const CnaeField = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
-        <InputTitle
-          text={t('ES_UN_HABITATGE')}
-          textStyle={textHeader4}
-          required={true}
-        />
-        <Select
-          options={options}
-          value={values?.supply_point?.is_housing}
-          handleChange={handleIsHousing}
-          style={textField}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <InputTitle
+              text={t('ES_UN_HABITATGE')}
+              textStyle={textHeader4}
+              required={true}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Select
+              options={options}
+              value={values?.supply_point?.is_housing}
+              handleChange={handleIsHousing}
+              style={textField}
+            />
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item xs={12} sm={6}>
         <InputField

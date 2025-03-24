@@ -48,7 +48,7 @@ const LightQuestion = (props) => {
   ]
 
   return (
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
       <Grid item>
         <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} required={true} />
       </Grid>

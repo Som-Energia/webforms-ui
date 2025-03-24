@@ -1,6 +1,8 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Grid from '@mui/material/Grid'
+
 import InputField from '../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
@@ -66,36 +68,42 @@ const ApadrinatingDetails = (props) => {
   }
 
   return (
-    <>
-      <TextRecomendation title={t('GURB_APADRINATING_MEMBER_TITLE')} />
-      <InputField
-        name='vat'
-        textFieldLabel={t('GURB_NIF_LABEL')}
-        textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
-        textFieldHelper={t('GURB_NIF_HELPER')}
-        iconHelper={true}
-        handleChange={handleInputNif}
-        handleBlur={handleInputNifBlur}
-        touched={touched?.member?.nif}
-        value={values?.member.nif}
-        error={errors?.member?.nif}
-        required={true}
-      />
-      <InputField
-        name='code'
-        textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
-        textFieldName={t('GURB_APADRINATING_MEMBER_NUMBER_FIELD')}
-        textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}
-        iconHelper={true}
-        handleChange={handleInputMemberNumber}
-        handleBlur={handleInputMemberNumberBlur}
-        touched={touched?.member?.number}
-        value={values?.member.number}
-        error={errors?.link_member}
-        isLoading={loading}
-        required={true}
-      />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextRecomendation title={t('GURB_APADRINATING_MEMBER_TITLE')} />
+      </Grid>
+      <Grid item xs={12}>
+        <InputField
+          name="vat"
+          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
+          textFieldHelper={t('GURB_NIF_HELPER')}
+          iconHelper={true}
+          handleChange={handleInputNif}
+          handleBlur={handleInputNifBlur}
+          touched={touched?.member?.nif}
+          value={values?.member.nif}
+          error={errors?.member?.nif}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <InputField
+          name="code"
+          textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
+          textFieldName={t('GURB_APADRINATING_MEMBER_NUMBER_FIELD')}
+          textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}
+          iconHelper={true}
+          handleChange={handleInputMemberNumber}
+          handleBlur={handleInputMemberNumberBlur}
+          touched={touched?.member?.number}
+          value={values?.member.number}
+          error={errors?.link_member}
+          isLoading={loading}
+          required={true}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default ApadrinatingDetails

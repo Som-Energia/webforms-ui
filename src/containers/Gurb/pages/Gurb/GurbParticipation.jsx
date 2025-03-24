@@ -8,8 +8,7 @@ import Alert from '@mui/material/Alert'
 import { getPowers } from '../../../../services/api'
 
 const Contract = (props) => {
-
-   const [powers,setPowers] = useState([])
+  const [powers, setPowers] = useState([])
 
   const cost = {
     "1 KWh": 180,

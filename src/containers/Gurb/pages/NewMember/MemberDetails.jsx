@@ -6,6 +6,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 
 import { checkMember } from '../../../../services/api'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
+import Grid from '@mui/material/Grid'
 
 const MemberDetails = (props) => {
   const {
@@ -66,36 +67,42 @@ const MemberDetails = (props) => {
   }
 
   return (
-    <>
-      <TextRecomendation title={t('GURB_IS_MEMBER_TITLE')} />
-      <InputField
-        name='vat'
-        textFieldLabel={t('GURB_NIF_LABEL')}
-        textFieldName={t('GURB_NIF_FIELD')}
-        textFieldHelper={t('GURB_NIF_HELPER')}
-        iconHelper={true}
-        handleChange={handleInputNif}
-        handleBlur={handleInputNifBlur}
-        touched={touched?.member?.nif}
-        value={values?.member.nif}
-        error={errors?.member?.nif}
-        required={true}
-      />
-      <InputField
-        name='code'
-        textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
-        textFieldName={t('GURB_MEMBER_NUMBER_FIELD')}
-        textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}
-        iconHelper={true}
-        handleChange={handleInputMemberNumber}
-        handleBlur={handleInputMemberNumberBlur}
-        touched={touched?.member?.number}
-        value={values?.member.number}
-        error={errors?.is_member}
-        isLoading={loading}
-        required={true}
-      />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextRecomendation title={t('GURB_IS_MEMBER_TITLE')} />
+      </Grid>
+      <Grid item xs={12}>
+        <InputField
+          name="vat"
+          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldName={t('GURB_NIF_FIELD')}
+          textFieldHelper={t('GURB_NIF_HELPER')}
+          iconHelper={true}
+          handleChange={handleInputNif}
+          handleBlur={handleInputNifBlur}
+          touched={touched?.member?.nif}
+          value={values?.member.nif}
+          error={errors?.member?.nif}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <InputField
+          name="code"
+          textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
+          textFieldName={t('GURB_MEMBER_NUMBER_FIELD')}
+          textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}
+          iconHelper={true}
+          handleChange={handleInputMemberNumber}
+          handleBlur={handleInputMemberNumberBlur}
+          touched={touched?.member?.number}
+          value={values?.member.number}
+          error={errors?.is_member}
+          isLoading={loading}
+          required={true}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default MemberDetails

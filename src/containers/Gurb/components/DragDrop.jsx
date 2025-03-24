@@ -14,6 +14,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import RequiredTitle from './InputTitle'
 import { textBody1, textBody3, textSubtitle2 } from '../gurbTheme'
 import { uploadFile } from '../../../services/api'
+import Grid from '@mui/material/Grid'
 
 const DragDrop = ({ fieldName, textStyle, required }) => {
   const { t } = useTranslation()
@@ -111,66 +112,69 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
   const onDrop = () => {}
 
   return (
-    <>
-      <RequiredTitle
-        text={fieldName}
-        textStyle={{ ...textStyle, marginBottom: '-1.5rem', marginTop: '2rem' }}
-        required={required}
-      />
-      <Card
-        ref={dropRef}
-        sx={{
-          marginY: '2rem',
-          padding: '2rem',
-          borderRadius: '8px',
-          border: drag
-            ? '2px dashed black'
-            : filename
-            ? '2px dashed #96B633'
-            : '2px dashed #D9D9D9',
-          boxShadow: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexGrow: 1,
-          gap: 1
-        }}>
-        {error ? (
-          <Alert sx={{ borderRadius: '8px' }} severity="error">
-            {error}
-          </Alert>
-        ) : filename && !drag ? (
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography sx={{ ...textBody1, marginRight: '1rem' }}>
-              {filename}
-            </Typography>
-            <IconButton
-              aria-label="delete"
-              onClick={() => {
-                setFilename('')
-              }}>
-              <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
-            </IconButton>
-          </Box>
-        ) : (
-          <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
-        )}
-        <Typography sx={textBody3}>
-          <Link component="button" overlay onClick={handleLinkClick}>
-            {t('GURB_CLICK_HERE')}
-          </Link>
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
-          />{' '}
-          {t('GURB_DRAG_AND_DROP_HERE')}
-        </Typography>
-        <Typography sx={textSubtitle2}>{t('GURB_TYPE_OF_FILES')}</Typography>
-      </Card>
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <RequiredTitle
+          text={fieldName}
+          textStyle={{ ...textStyle }}
+          required={required}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Card
+          ref={dropRef}
+          sx={{
+            padding: '2rem',
+            borderRadius: '8px',
+            border: drag
+              ? '2px dashed black'
+              : filename
+              ? '2px dashed #96B633'
+              : '2px dashed #D9D9D9',
+            boxShadow: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexGrow: 1,
+            gap: 1
+          }}>
+          {error ? (
+            <Alert sx={{ borderRadius: '8px' }} severity="error">
+              {error}
+            </Alert>
+          ) : filename && !drag ? (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography sx={{ ...textBody1, marginRight: '1rem' }}>
+                {filename}
+              </Typography>
+              <IconButton
+                aria-label="delete"
+                onClick={() => {
+                  setFilename('')
+                }}>
+                <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
+              </IconButton>
+            </Box>
+          ) : (
+            <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
+          )}
+          <Typography sx={textBody3}>
+            <Link component="button" overlay onClick={handleLinkClick}>
+              {t('GURB_CLICK_HERE')}
+            </Link>
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />{' '}
+            {t('GURB_DRAG_AND_DROP_HERE')}
+          </Typography>
+          <Typography sx={textSubtitle2}>{t('GURB_TYPE_OF_FILES')}</Typography>
+        </Card>
+      </Grid>
+    </Grid>
   )
 }
 export default DragDrop

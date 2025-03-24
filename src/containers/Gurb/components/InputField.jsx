@@ -7,6 +7,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
 
 import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
 import InputTitle from './InputTitle'
@@ -50,48 +51,57 @@ const InputField = ({
   const { t } = useTranslation()
 
   return (
-    <Box>
-      <InputTitle
-        text={textFieldName}
-        textStyle={textHeader4}
-        required={required}
-      />
-      <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
-      <TextField
-        sx={textField}
-        name={name}
-        data-cy={name}
-        disabled={readonlyField}
-        fullWidth
-        InputProps={{
-          sx: { borderRadius: '8px' },
-          onBlur: handleBlur,
-          startAdornment: startAdornmentText && numInputs > 1 && (
-            <InputAdornment position="start">
-              {startAdornmentText}
-            </InputAdornment>
-          ),
-          endAdornment:
-            (isLoading && (
-              <InputAdornment position="end">
-                {<CircularProgress size={24} />}
+    <Grid container spacing={1}>
+      <Grid item xs={12}>
+        <InputTitle
+          text={textFieldName}
+          textStyle={textHeader4}
+          required={required}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          sx={textField}
+          name={name}
+          data-cy={name}
+          disabled={readonlyField}
+          fullWidth
+          InputProps={{
+            sx: { borderRadius: '8px' },
+            onBlur: handleBlur,
+            startAdornment: startAdornmentText && numInputs > 1 && (
+              <InputAdornment position="start">
+                {startAdornmentText}
               </InputAdornment>
-            )) ||
-            endAdornmentText
-        }}
-        label={value ? undefined : textFieldLabel}
-        helperText={
-          touched && error ? (
-            t(error)
-          ) : (
-            <HelperText helperText={textFieldHelper} iconHelper={iconHelper} />
-          )
-        }
-        onChange={handleChange}
-        value={value}
-        error={touched && error !== undefined}
-      />
-    </Box>
+            ),
+            endAdornment:
+              (isLoading && (
+                <InputAdornment position="end">
+                  {<CircularProgress size={24} />}
+                </InputAdornment>
+              )) ||
+              endAdornmentText
+          }}
+          label={value ? undefined : textFieldLabel}
+          helperText={
+            touched && error ? (
+              t(error)
+            ) : (
+              <HelperText
+                helperText={textFieldHelper}
+                iconHelper={iconHelper}
+              />
+            )
+          }
+          onChange={handleChange}
+          value={value}
+          error={touched && error !== undefined}
+        />
+      </Grid>
+    </Grid>
   )
 }
 export default InputField

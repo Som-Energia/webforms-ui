@@ -1,19 +1,17 @@
 Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
-
   //Intercept call to check CUPS
-  cy.intercept('GET', '/check/cups/status/*',
-    {
-      statusCode: statusCode,
-      body: {
-        data: {
-          cups: cups,
-          status: "new",
-          tariff_type: null
-        },
-        state: statusCode === 200,
-        status: "ONLINE"
-      }
-    }).as('checkCUPS')
+  cy.intercept('GET', '/check/cups/status/*', {
+    statusCode: statusCode,
+    body: {
+      data: {
+        cups: cups,
+        status: 'new',
+        tariff_type: null
+      },
+      state: statusCode === 200,
+      status: 'ONLINE'
+    }
+  }).as('checkCUPS')
 
   cy.get('[data-cy="cups"]').type(cups)
 
@@ -21,7 +19,6 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
 })
 
 Cypress.Commands.add('lightQuestion', (lightOn = true) => {
-
   const optionValue = lightOn ? 'light-on' : 'light-off'
   cy.get('[data-cy="light-question"]').get(`[data-cy="${optionValue}"]`).click()
 
@@ -29,7 +26,6 @@ Cypress.Commands.add('lightQuestion', (lightOn = true) => {
 })
 
 Cypress.Commands.add('gurbAddress', (street) => {
-
   cy.get('[data-cy="address-street"]').type(street.input)
   cy.contains(street.value).click()
 
@@ -43,22 +39,25 @@ Cypress.Commands.add('gurbAddress', (street) => {
 })
 
 Cypress.Commands.add('selfconsumptionQuestion', (selfconsumption = true) => {
-
-  const optionValue = selfconsumption ? 'selfconsumption-on' : 'selfconsumption-off'
-  cy.get('[data-cy="selfconsumption-question"]').get(`[data-cy="${optionValue}"]`).click()
+  const optionValue = selfconsumption
+    ? 'selfconsumption-on'
+    : 'selfconsumption-off'
+  cy.get('[data-cy="selfconsumption-question"]')
+    .get(`[data-cy="${optionValue}"]`)
+    .click()
 
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {
-
-  cy.get('[data-cy="member-question"]').get(`[data-cy="${optionValue}"]`).click()
+  cy.get('[data-cy="member-question"]')
+    .get(`[data-cy="${optionValue}"]`)
+    .click()
 
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('identifyMemberGURB', ({ vat, number }) => {
-
   cy.get('[data-cy="vat"]').type(vat)
   cy.get('[data-cy="code"]').type(number)
 
@@ -66,22 +65,20 @@ Cypress.Commands.add('identifyMemberGURB', ({ vat, number }) => {
 })
 
 Cypress.Commands.add('personalDataMember', (personalData, statusCode = 200) => {
-
   //Intercept call to check vat
-  cy.intercept('GET', '/check/vat/exists/*',
-    {
-      statusCode: statusCode,
-      body: {
-        data: {
-          exists: false,
-          is_member: false,
-          is_selfconsumption_owner: false,
-          valid: true
-        },
-        state: statusCode === 200,
-        status: "ONLINE"
-      }
-    }).as('checkVAT')
+  cy.intercept('GET', '/check/vat/exists/*', {
+    statusCode: statusCode,
+    body: {
+      data: {
+        exists: false,
+        is_member: false,
+        is_selfconsumption_owner: false,
+        valid: true
+      },
+      state: statusCode === 200,
+      status: 'ONLINE'
+    }
+  }).as('checkVAT')
 
   cy.get('[data-cy="new_member.nif"]').type(personalData.vat)
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
@@ -97,18 +94,6 @@ Cypress.Commands.add('personalDataMember', (personalData, statusCode = 200) => {
 })
 
 Cypress.Commands.add('identifyHolderGURB', (vat, statusCode = 200) => {
-
-  //Intercept call to check vat
-  cy.intercept('GET', '/check/vat/*',
-    {
-      statusCode: statusCode,
-      body: {
-        data: true,
-        state: statusCode === 200,
-        status: "ONLINE"
-      }
-    }).as('checkSyntaxVAT')
-
   cy.get('[data-cy="holder_vat"]').type(vat)
 
   cy.get('[data-cy="has_holder"]').get('[data-cy="holder-same"]').click()
@@ -117,7 +102,6 @@ Cypress.Commands.add('identifyHolderGURB', (vat, statusCode = 200) => {
 })
 
 Cypress.Commands.add('personalDataHolder', (personalData) => {
-
   cy.get('[data-cy="holder.name"]').type(personalData.name)
   cy.get('[data-cy="holder.surname1"]').type(personalData.surname1)
   cy.get('[data-cy="holder.surname2"]').type(personalData.surname2)
@@ -129,8 +113,9 @@ Cypress.Commands.add('personalDataHolder', (personalData) => {
 })
 
 Cypress.Commands.add('taxAddress', ({ sameDirection = true, input, value }) => {
-
-  const optionValue = sameDirection ? 'supplypoint-tax-address-same' : 'supplypoint-tax-address-different'
+  const optionValue = sameDirection
+    ? 'supplypoint-tax-address-same'
+    : 'supplypoint-tax-address-different'
   cy.get('[data-cy="sameDirection"]').get(`[data-cy="${optionValue}"]`).click()
 
   if (!sameDirection) {
@@ -146,7 +131,6 @@ Cypress.Commands.add('taxAddress', ({ sameDirection = true, input, value }) => {
 })
 
 Cypress.Commands.add('choosePower', ({ moreThan15Kw = false, powers }) => {
-
   const optionValue = moreThan15Kw ? 'power-higher-15kw' : 'power-lower-15kw'
   cy.get('[data-cy="power_question"]').get(`[data-cy="${optionValue}"]`).click()
 
@@ -158,7 +142,6 @@ Cypress.Commands.add('choosePower', ({ moreThan15Kw = false, powers }) => {
 })
 
 Cypress.Commands.add('supplyPointData', () => {
-
   cy.get('[data-cy=select_component]').click()
   cy.get('[data-cy=yes]').click()
 
@@ -169,15 +152,17 @@ Cypress.Commands.add('supplyPointData', () => {
 })
 
 Cypress.Commands.add('donationQuestion', (donation = true) => {
-
-  const optionValue = donation ? 'voluntary-donation-on' : 'voluntary-donation-off'
-  cy.get('[data-cy="donation_question"]').get(`[data-cy="${optionValue}"]`).click()
+  const optionValue = donation
+    ? 'voluntary-donation-on'
+    : 'voluntary-donation-off'
+  cy.get('[data-cy="donation_question"]')
+    .get(`[data-cy="${optionValue}"]`)
+    .click()
 
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('paymentData', (iban) => {
-
+Cypress.Commands.add('paymentData', (iban, statusCode = 200) => {
   cy.get('[data-cy="iban"]').type(iban)
 
   cy.get('[data-cy="iban_check"]').click()
@@ -185,17 +170,17 @@ Cypress.Commands.add('paymentData', (iban) => {
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('checkReviewContractStep', (vat) => {
+  cy.get('p').contains(vat)
+})
+
 Cypress.Commands.add('powerChoice', (choice) => {
-
-
   cy.get('[data-cy="select_component"]').click()
   cy.get(`[data-cy="${choice}"]`).click()
   cy.get('[data-cy=next]').click()
-
 })
 
 Cypress.Commands.add('chooseTariffGURB', (isIndexed = true) => {
-
   const optionValue = isIndexed ? 'indexed' : 'periods'
   cy.get('[data-cy="tariffMode"]').get(`[data-cy="${optionValue}"]`).click()
 
@@ -212,19 +197,19 @@ Cypress.Commands.add('acceptAllTerms', () => {
 })
 
 Cypress.Commands.add('interceptAvailablePowers', () => {
-  cy.intercept('GET', '/data/gurb/*/available_powers',
-    {
-      statusCode: 200,
-      body: {
-        data: [{ "id": "0_5_kwh", "value": "0.5 KWh", "text": "0.5 KWh" }, { "id": "1_kwh", "value": "1 KWh", "text": "1 KWh" }]
-      },
-      state: true,
-      status: "ONLINE"
-    }
-  ).as('availablePowers')
-
+  cy.intercept('GET', '/data/gurb/*/available_powers', {
+    statusCode: 200,
+    body: {
+      data: [
+        { id: '0_5_kwh', value: '0.5 KWh', text: '0.5 KWh' },
+        { id: '1_kwh', value: '1 KWh', text: '1 KWh' }
+      ]
+    },
+    state: true,
+    status: 'ONLINE'
+  }).as('availablePowers')
 
   cy.get('[data-cy=next]').click()
 
-  cy.wait("@availablePowers")
+  cy.wait('@availablePowers')
 })

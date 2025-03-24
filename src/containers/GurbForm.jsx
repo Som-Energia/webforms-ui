@@ -46,8 +46,6 @@ import {
   gurbPolicyChecks
 } from './Gurb//GurbValidations'
 
-import * as Yup from 'yup'
-
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
