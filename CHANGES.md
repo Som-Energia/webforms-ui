@@ -1,6 +1,13 @@
 # Change Log
 
+## 2.8.0 2025-03-25
+
+- Gurb: form (WIP)
+- Gurb: form responsive (requirements, new member and contract)
+- Gurb: form cypress test
+
 ## 2.7.2 2025-03-20
+
 - add normalization of cypress tests
 
 ## 2.7.1 2025-03-17
