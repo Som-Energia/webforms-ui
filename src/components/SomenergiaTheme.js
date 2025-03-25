@@ -81,6 +81,14 @@ export default function SomEnergiaTheme() {
         }
       }
     },
+    gurbStyles:{
+       textHeader1:{
+        fontFamily: 'Inter',
+        color: '#00f',
+        fontSize: '30px',
+        fontWeight: '700'
+       }
+    },
     shape: {
       borderRadius: 0
     },
