@@ -49,8 +49,9 @@ function VAT (props) {
           error={((errors?.member?.vat || errors?.member?.vatvalid) && touched?.member?.vat) ||
             (touched?.member?.vat && values?.member?.vatvalid === false)
           }
-          helperText={(touched?.member?.vat && errors?.member?.vat) ||
-            (touched?.member?.vat && errors?.member?.vatvalid)
+          helperText={
+            (touched?.member?.vat && errors?.member?.vat ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vat }} /> : '' ) ||
+            (touched?.member?.vat && errors?.member?.vatvalid ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vatvalid }} /> : '' )
           }
         />
       </Box>

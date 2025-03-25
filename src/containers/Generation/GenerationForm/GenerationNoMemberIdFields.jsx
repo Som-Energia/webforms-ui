@@ -183,9 +183,9 @@ const GenerationNoMemberIdFields = (props) => {
                   (touched?.member?.vat && values?.member?.exists === true)
                 }
                 helperText={
-                  (touched?.member?.vat && errors?.member?.vat) ||
-                  (touched?.member?.vat && errors?.member?.vatvalid) ||
-                  (touched?.member?.vat && errors?.member?.exists)
+                  (touched?.member?.vat && errors?.member?.vat ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vat }} /> : '' ) ||
+                  (touched?.member?.vat && errors?.member?.vatvalid ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vatvalid }} /> : '' ) ||
+                  (touched?.member?.vat && errors?.member?.exists ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.exists }} /> : '' )
                 }
               />
             </Box>
