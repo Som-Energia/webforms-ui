@@ -9,10 +9,12 @@ import MemberDetails from './pages/NewMember/MemberDetails'
 import ApadrinatingDetails from './pages/NewMember/ApadrinatingDetails'
 import NewMemberDetails from './pages/NewMember/NewMemberDetails'
 import SomGurbStepper from './components/SomGurbStepper'
+import useTheme from '@mui/material/styles/useTheme'
 
 const NewMember = (props) => {
   const { values, activeStep, stepperSteps, stepperActiveSteps } = props
   const { t } = useTranslation()
+  const theme = useTheme()
 
   const getMemberPage = () => {
     if (activeStep === 0) {
@@ -26,7 +28,7 @@ const NewMember = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+        <Typography sx={theme.webFormStyles.textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <SomGurbStepper

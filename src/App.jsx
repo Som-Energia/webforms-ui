@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
 import SomEnergiaTheme from './components/SomenergiaTheme'
+import WebFormsTheme from './themes/webforms'
 import { Example as ComponentTest } from './components/ApiValidatedField.example'
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
@@ -97,6 +98,7 @@ const App = (props) => {
     return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
   }, [])
   const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
+  const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
 
   const contract20Props = () => {
     let tmpProps = JSON.parse(JSON.stringify(props))
@@ -105,13 +107,14 @@ const App = (props) => {
   }
 
   return (
-    <ThemeProvider theme={somtheme}>
+      <> 
       <CssBaseline />
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
             <Suspense fallback={<Loading />}>
               <Router>
+                <ThemeProvider theme={somtheme}>
                 <Routes>
                   <Route exact path="/" element={<Home {...props} />} />
 
@@ -462,24 +465,29 @@ const App = (props) => {
                       }
                     />
                   )}
-                  <Route
-                    path="/:language/new-contract-form"
-                    element={
-                      <GurbErrorContextProvider>
-                        <GurbLoadingContextProvider>
-                          <NewContractForm {...props} />
-                        </GurbLoadingContextProvider>
-                      </GurbErrorContextProvider>
-                    }
-                  />
-                </Routes>
+                  </Routes>
+                  </ThemeProvider>
+                  <ThemeProvider theme={webFormsTheme}>
+                  <Routes>
+                    <Route
+                      path="/:language/new-contract-form"
+                      element={
+                        <GurbErrorContextProvider>
+                          <GurbLoadingContextProvider>
+                            <NewContractForm {...props} />
+                          </GurbLoadingContextProvider>
+                        </GurbErrorContextProvider>
+                      }
+                    />
+                    </Routes>
+                  </ThemeProvider>
               </Router>
             </Suspense>
             <ApiStatus />
           </Box>
         </MatomoProvider>
       </AvailabilityContextProvider>
-    </ThemeProvider>
+    </>
   )
 }
 
