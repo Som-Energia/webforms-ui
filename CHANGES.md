@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased 2025-03-25
+## 2.8.1 2025-03-25
 
 - Fix `CIF_COMMUNITY_OWNERS` html message at member and generation.
 
