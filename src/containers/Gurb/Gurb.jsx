@@ -1,19 +1,21 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import SomGurbStepper, { GURB_FINAL_STEP } from './components/SomGurbStepper'
+
 import Typography from '@mui/material/Typography'
+
 import { textSubtitle, textHeader2 } from './gurbTheme'
+
+import ContractReview from './pages/Gurb/ContractReview'
 import GurbErrorContext from '../../context/GurbErrorContext'
 import GurbParticipation from './pages/Gurb/GurbParticipation'
-import ContractReview from './pages/Gurb/ContractReview'
-import SomStepper from './components/SomStepper'
 import Payment from './pages/Gurb/Payment'
-
+import SomStepper from './components/SomStepper'
+import SomGurbStepper from './components/SomGurbStepper'
 
 
 const Contract = (props) => {
   const GURB_SECTION_STEPS = 4
-  const { activeStep } = props
+  const { activeStep, stepperActiveStep, stepperSteps } = props
   const { t } = useTranslation()
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
 
@@ -43,7 +45,7 @@ const Contract = (props) => {
   return (
     <>
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
-      <SomGurbStepper activeStep={GURB_FINAL_STEP} />
+      <SomGurbStepper steps={stepperSteps} activeStep={stepperActiveStep} />
       <Typography sx={textHeader2}>{getTitle()}</Typography>
       <SomStepper step={activeStep} connectors={GURB_SECTION_STEPS} />
       {error ? getStepResult(errorInfo) : getStep()}

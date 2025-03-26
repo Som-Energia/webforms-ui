@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import SomGurbStepper, { GURB_CONTRACT_STEP } from './components/SomGurbStepper'
-
 import Typography from '@mui/material/Typography'
+
+import Grid from '@mui/material/Grid'
 
 import { textSubtitle } from './gurbTheme'
 
@@ -19,11 +19,11 @@ import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
 import TextRecomendation from './components/TextRecomendation'
 import SomStepper from './components/SomStepper'
-import Grid from '@mui/material/Grid'
+import SomGurbStepper from './components/SomGurbStepper'
 
 const Contract = (props) => {
   const CONTRACT_STEPS = 9
-  const { values, activeStep } = props
+  const { values, activeStep, stepperSteps, stepperActiveSteps } = props
   const { t } = useTranslation()
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
 
@@ -119,7 +119,7 @@ const Contract = (props) => {
         <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <SomGurbStepper activeStep={GURB_CONTRACT_STEP} />
+        <SomGurbStepper steps={stepperSteps} activeStep={stepperActiveSteps} />
       </Grid>
       <Grid item xs={12}>
         {getTitle()}
