@@ -32,6 +32,11 @@ import noValidation from '../formValidations/noValidation'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import {
+  CONTRACT_FORM_STEPS,
+  GURB_CONTRACT_STEP,
+  GURB_NEW_MEMBER_STEP
+} from '../services/steps'
 
 const MAX_STEP_NUMBER = 12
 const NEW_MEMBER_STEP = [0, 1, 2]
@@ -50,7 +55,7 @@ const NewContractForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(2)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
@@ -152,7 +157,7 @@ const NewContractForm = (props) => {
     tariffModeValidations,
     holderVoluntaryDonationValidations,
     holderIbanValidations,
-    noValidation,
+    noValidation
   ]
 
   const nextStep = (formikProps) => {
@@ -184,7 +189,7 @@ const NewContractForm = (props) => {
     setActiveStep(Math.max(0, prev))
   }
   const handlePost = async (values) => {
-    console.log("POST final")
+    console.log('POST final')
   }
   const getStep = (props) => {
     if (NEW_MEMBER_STEP.includes(activeStep)) {
@@ -192,39 +197,46 @@ const NewContractForm = (props) => {
         <NewMember
           {...props}
           activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
+          stepperSteps={CONTRACT_FORM_STEPS}
+          stepperActiveSteps={GURB_NEW_MEMBER_STEP}
         />
       )
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
-        <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
+        <Contract
+          {...props}
+          activeStep={CONTRACT_STEPS.indexOf(activeStep)}
+          stepperSteps={CONTRACT_FORM_STEPS}
+          stepperActiveSteps={GURB_CONTRACT_STEP}
+        />
       )
     } else {
       return <></>
     }
   }
 
-//   const NewMemberResult = (props) => {
-//     if (formikRef.current.values.new_member.become_member) {
-//       setError(true)
-//       setErrorInfo({
-//         main_text: t('GURB_WELCOME_NEW_MEMBER_MAIN_TEXT'),
-//         seconday_text: t('GURB_WELCOME_NEW_MEMBER_SECONDARY_TEXT'),
-//         link_text: t('GURB_WELCOME_NEW_MEMBER_LINK_TEXT'),
-//         error_type: 'success',
-//         clean_field: () => {
-//           activeStep
-//         }
-//       })
-//     }
-//   }
+  //   const NewMemberResult = (props) => {
+  //     if (formikRef.current.values.new_member.become_member) {
+  //       setError(true)
+  //       setErrorInfo({
+  //         main_text: t('GURB_WELCOME_NEW_MEMBER_MAIN_TEXT'),
+  //         seconday_text: t('GURB_WELCOME_NEW_MEMBER_SECONDARY_TEXT'),
+  //         link_text: t('GURB_WELCOME_NEW_MEMBER_LINK_TEXT'),
+  //         error_type: 'success',
+  //         clean_field: () => {
+  //           activeStep
+  //         }
+  //       })
+  //     }
+  //   }
 
   const formikRef = useRef(null)
-//   useEffect(() => {
-//     formikRef.current.validateForm()
-//     if (activeStep === 8) {
-//       NewMemberResult()
-//     }
-//   }, [activeStep])
+  //   useEffect(() => {
+  //     formikRef.current.validateForm()
+  //     if (activeStep === 8) {
+  //       NewMemberResult()
+  //     }
+  //   }, [activeStep])
 
   useEffect(() => {
     if (url !== '') {
@@ -262,11 +274,10 @@ const NewContractForm = (props) => {
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
                       />
-
                     </Grid>
                   )}
                   <Grid item sm={2} xs={12} order={-1}>
-                    {activeStep !== MAX_STEP_NUMBER ?
+                    {activeStep !== MAX_STEP_NUMBER ? (
                       <NextButton
                         disabled={
                           loading ||
@@ -276,15 +287,19 @@ const NewContractForm = (props) => {
                         onClick={() => nextStep(formikProps)}
                         title={'NEXT'}
                       />
-                      :
+                    ) : (
                       <SubmitButton
-                        disabled={
-                          loading ||
-                          !formikProps.isValid
+                        disabled={loading || !formikProps.isValid}
+                        onClick={() =>
+                          handlePost({
+                            soci: 'Eustaquio',
+                            cost:
+                              NEW_MEMBER_COST +
+                              formikProps.values.contract.gurb_power_cost
+                          })
                         }
-                        onClick={() => handlePost({ soci: "Eustaquio", cost: NEW_MEMBER_COST + formikProps.values.contract.gurb_power_cost })}
                       />
-                    }
+                    )}
                   </Grid>
                 </Grid>
               )}
@@ -305,9 +320,7 @@ const NewContractForm = (props) => {
         </form>
       )}
     </Container>
-
   )
 }
 
 export default NewContractForm
-

@@ -1,20 +1,17 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import SomGurbStepper, {
-  GURB_NEW_MEMBER_STEP
-} from './components/SomGurbStepper'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 import { textSubtitle } from './gurbTheme'
+
 import MemberDetails from './pages/NewMember/MemberDetails'
 import ApadrinatingDetails from './pages/NewMember/ApadrinatingDetails'
 import NewMemberDetails from './pages/NewMember/NewMemberDetails'
+import SomGurbStepper from './components/SomGurbStepper'
 
 const NewMember = (props) => {
-  const { values, activeStep } = props
+  const { values, activeStep, stepperSteps, stepperActiveSteps } = props
   const { t } = useTranslation()
 
   const getMemberPage = () => {
@@ -32,9 +29,14 @@ const NewMember = (props) => {
         <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <SomGurbStepper activeStep={GURB_NEW_MEMBER_STEP} />
+        <SomGurbStepper
+          steps={stepperSteps}
+          activeStep={stepperActiveSteps}
+        />
       </Grid>
-      <Grid item xs={12}>{getMemberPage()}</Grid>
+      <Grid item xs={12}>
+        {getMemberPage()}
+      </Grid>
     </Grid>
   )
 }

@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 
 import SupplyPoint from './Gurb/SupplyPoint'
@@ -41,14 +40,17 @@ import {
 
 import noValidation from '../formValidations/noValidation'
 
-import {
-  gurbPowerOptions,
-  gurbPolicyChecks
-} from './Gurb//GurbValidations'
+import { gurbPowerOptions, gurbPolicyChecks } from './Gurb/GurbValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
+import {
+  GURB_FINAL_STEP,
+  GURB_FORM_STEPS,
+  GURB_NEW_MEMBER_STEP,
+  GURB_REQUIREMENTS_STEP,
+} from '../services/steps'
 
 const MAX_STEP_NUMBER = 19
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
@@ -227,6 +229,8 @@ const GurbForm = (props) => {
         <Requirements
           {...props}
           activeStep={REQUIREMENTS_STEPS.indexOf(activeStep)}
+          stepperSteps={GURB_FORM_STEPS}
+          stepperActiveStep={GURB_REQUIREMENTS_STEP}
         />
       )
     } else if (NEW_MEMBER_STEP.includes(activeStep)) {
@@ -234,14 +238,28 @@ const GurbForm = (props) => {
         <NewMember
           {...props}
           activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
+          stepperSteps={GURB_FORM_STEPS}
+          stepperActiveStep={GURB_NEW_MEMBER_STEP}
         />
       )
     } else if (CONTRACT_STEPS.includes(activeStep)) {
       return (
-        <Contract {...props} activeStep={CONTRACT_STEPS.indexOf(activeStep)} />
+        <Contract
+          {...props}
+          activeStep={CONTRACT_STEPS.indexOf(activeStep)}
+          stepperSteps={GURB_FORM_STEPS}
+          stepperActiveStep={GURB_NEW_MEMBER_STEP}
+        />
       )
     } else if (GURB_STEPS.includes(activeStep)) {
-      return <Gurb {...props} activeStep={GURB_STEPS.indexOf(activeStep)} />
+      return (
+        <Gurb
+          {...props}
+          activeStep={GURB_STEPS.indexOf(activeStep)}
+          stepperSteps={GURB_FORM_STEPS}
+          stepperActiveStep={GURB_FINAL_STEP}
+        />
+      )
     } else {
       return <></>
     }
@@ -306,11 +324,10 @@ const GurbForm = (props) => {
                         onClick={() => prevStep(formikProps)}
                         title={'PREV'}
                       />
-
                     </Grid>
                   )}
                   <Grid item sm={2} xs={12} order={-1}>
-                    {activeStep !== MAX_STEP_NUMBER ?
+                    {activeStep !== MAX_STEP_NUMBER ? (
                       <NextButton
                         disabled={
                           loading ||
@@ -320,15 +337,19 @@ const GurbForm = (props) => {
                         onClick={() => nextStep(formikProps)}
                         title={'NEXT'}
                       />
-                      :
+                    ) : (
                       <SubmitButton
-                        disabled={
-                          loading ||
-                          !formikProps.isValid
+                        disabled={loading || !formikProps.isValid}
+                        onClick={() =>
+                          handlePost({
+                            soci: 'Eustaquio',
+                            cost:
+                              NEW_MEMBER_COST +
+                              formikProps.values.contract.gurb_power_cost
+                          })
                         }
-                        onClick={() => handlePost({ soci: "Eustaquio", cost: NEW_MEMBER_COST + formikProps.values.contract.gurb_power_cost })}
                       />
-                    }
+                    )}
                   </Grid>
                 </Grid>
               )}
@@ -349,9 +370,7 @@ const GurbForm = (props) => {
         </form>
       )}
     </Container>
-
   )
 }
 
 export default GurbForm
-
