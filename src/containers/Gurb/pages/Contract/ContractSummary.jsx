@@ -47,9 +47,10 @@ const ContractSummary = (props) => {
         field: [
           {
             reviewLabel: t('GURB_REVIEW_PROCEDURE_TYPE_LABEL'),
-            reviewValue: values.member.number
+            reviewValue: values?.member?.number,
+            step: 2
           }
-        ]
+        ],
       },
       {
         icon: <PersonIcon sx={iconRequirements} />,
@@ -57,19 +58,23 @@ const ContractSummary = (props) => {
         field: [
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
-            reviewValue: `${values.holder.name} ${values.holder.surname1} ${values.holder.surname2}`
+            reviewValue: `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`,
+            step: 4
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
-            reviewValue: values.holder.nif
+            reviewValue: values?.holder?.nif,
+            step: 3
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
-            reviewValue: values.holder.phone1
+            reviewValue: values?.holder?.phone1,
+            step: 4
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
-            reviewValue: values.holder.email
+            reviewValue: values?.holder?.email,
+            step: 4
           }
         ]
       }
@@ -81,19 +86,23 @@ const ContractSummary = (props) => {
         field: [
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CUPS'),
-            reviewValue: values.cups
+            reviewValue: values?.cups,
+            step: 5
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
-            reviewValue: `${values.address.street} ${values.address.number}`
+            reviewValue: `${values?.address?.street} ${values?.address?.number}`,
+            step: 5
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
-            reviewValue: values.address.city.name
+            reviewValue: values?.address?.city?.name,
+            step: 5
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CNAE'),
-            reviewValue: 'pendent field'
+            reviewValue: 'pendent field',
+            step: 6
           }
         ]
       },
@@ -129,11 +138,13 @@ const ContractSummary = (props) => {
         field: [
           {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
-            reviewValue: values.holder.iban
+            reviewValue: values?.holder?.iban,
+            step: 10
           },
           {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_VOLUNTARY_DONATION'),
-            reviewValue: values.holder.voluntary_donation
+            reviewValue: values?.holder?.voluntary_donation,
+            step: 9
           }
         ]
       }

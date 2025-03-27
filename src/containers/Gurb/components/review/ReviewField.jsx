@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Link from '@mui/material/Link'
+import SummaryContext from '../../../../context/SummaryContext'
 
 import { textReviewLabel, textReviewValue } from '../../gurbTheme'
 
 
-const ReviewField = ({ label, value }) => {
+const ReviewField = ({ label, value, step }) => {
+  const { setSummaryField } = useContext(SummaryContext)
+
   return (
     <Box
       sx={{
@@ -28,7 +32,19 @@ const ReviewField = ({ label, value }) => {
       )}
       <Box>
         <Typography sx={{ ...textReviewValue }} variant="body2">
-          {value}
+          {
+            step ?
+          <Link
+            component="button"
+            // variant="body2"
+            onClick={() => {
+              setSummaryField(step)
+            }}
+          >
+            {value}
+          </Link>
+          : value
+          }
         </Typography>
       </Box>
     </Box>
