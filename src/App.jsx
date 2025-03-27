@@ -16,6 +16,7 @@ import { PopUpContextProvider } from './context/PopUpContext'
 import { MatomoProvider } from './trackers/matomo/MatomoProvider'
 import { GurbErrorContextProvider } from './context/GurbErrorContext'
 import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
+import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
 
 const App = (props) => {
@@ -467,7 +468,9 @@ const App = (props) => {
                     element={
                       <GurbErrorContextProvider>
                         <GurbLoadingContextProvider>
-                          <NewContractForm {...props} />
+                          <SummaryContextProvider>
+                            <NewContractForm {...props} />
+                          </SummaryContextProvider>
                         </GurbLoadingContextProvider>
                       </GurbErrorContextProvider>
                     }
