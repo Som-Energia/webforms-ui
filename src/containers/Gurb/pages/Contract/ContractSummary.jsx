@@ -18,6 +18,7 @@ import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import { iconRequirements, textBody1, textHeader4 } from '../../gurbTheme'
 import { getPrices } from '../../../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../../../services/utils'
+import { CONTRACT_FORM_SUBSTEPS, NEW_MEMBER_FORM_SUBSTEPS} from '../../../../services/steps'
 
 import Loading from '../../../../components/Loading'
 
@@ -48,7 +49,7 @@ const ContractSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_PROCEDURE_TYPE_LABEL'),
             reviewValue: values?.member?.number,
-            step: 2
+            step: NEW_MEMBER_FORM_SUBSTEPS['APADRINATING']
           }
         ],
       },
@@ -59,22 +60,22 @@ const ContractSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
             reviewValue: `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`,
-            step: 4
+            step: CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
             reviewValue: values?.holder?.nif,
-            step: 3
+            step: CONTRACT_FORM_SUBSTEPS['IDENTIFY_HOLDER']
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: values?.holder?.phone1,
-            step: 4
+            step: CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.holder?.email,
-            step: 4
+            step: CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
           }
         ]
       }
@@ -87,22 +88,22 @@ const ContractSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CUPS'),
             reviewValue: values?.cups,
-            step: 5
+            step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-            step: 5
+            step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.address?.city?.name,
-            step: 5
+            step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CNAE'),
             reviewValue: 'pendent field',
-            step: 6
+            step: CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
           }
         ]
       },
@@ -139,12 +140,12 @@ const ContractSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.holder?.iban,
-            step: 10
+            step: CONTRACT_FORM_SUBSTEPS['IBAN']
           },
           {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_VOLUNTARY_DONATION'),
             reviewValue: values?.holder?.voluntary_donation,
-            step: 9
+            step: CONTRACT_FORM_SUBSTEPS['DONATION']
           }
         ]
       }
