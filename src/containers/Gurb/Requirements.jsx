@@ -1,27 +1,24 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import SomStepper from './components/SomStepper'
-import SomGurbStepper, {
-  GURB_REQUIREMENTS_STEP
-} from './components/SomGurbStepper'
-import Header from './components/Header'
-
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-
-import LightQuestion from './pages/Requirements/LightQuestion'
-import Address from './pages/Requirements/Address'
-import SelfConsumption from './pages/Requirements/SelfConsumption'
-import MemberQuestion from './pages/Requirements/MemberQuestion'
 
 import { textBody3, textSubtitle } from './gurbTheme'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
 import useCheckMobileScreen from '../../services/checkMobileScreen'
+import LightQuestion from './pages/Requirements/LightQuestion'
+import Address from './pages/Requirements/Address'
+import SelfConsumption from './pages/Requirements/SelfConsumption'
+import MemberQuestion from './pages/Requirements/MemberQuestion'
+import SomStepper from './components/SomStepper'
+import SomGurbStepper from './components/SomGurbStepper'
+import Header from './components/Header'
+
 
 const Requirements = (props) => {
-  const { values, activeStep } = props
+  const { values, activeStep, stepperActiveStep, stepperSteps } = props
   const { t } = useTranslation()
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
   const isMobile = useCheckMobileScreen()
@@ -44,7 +41,7 @@ const Requirements = (props) => {
         <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <SomGurbStepper activeStep={GURB_REQUIREMENTS_STEP} />
+        <SomGurbStepper steps={stepperSteps} activeStep={stepperActiveStep} />
       </Grid>
       <Grid item xs={12}>
         <Header title={t('GURB_REQUIREMENTS_TITLE')} />
