@@ -1,4 +1,15 @@
 import { useContext } from 'react'
+import GenerationContext from '../context/GenerationContext'
+import GenerationTable from './GenerationTable'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
+import TableBody from '@mui/material/TableBody'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
+import DeleteIcon from '@mui/icons-material/Delete'
+import dayjs from 'dayjs'
+import { styled } from '@mui/material/styles'
 import {
   DndContext,
   closestCenter,
@@ -10,21 +21,8 @@ import {
   SortableContext,
   verticalListSortingStrategy,
   useSortable,
-  arrayMove
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import TableBody from '@mui/material/TableBody'
-import TableRow from '@mui/material/TableRow'
-import TableCell from '@mui/material/TableCell'
-import IconButton from '@mui/material/IconButton'
-import Box from '@mui/material/Box'
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
-import DeleteIcon from '@mui/icons-material/Delete'
-import { useState } from 'react'
-import dayjs from 'dayjs'
-import GenerationTable from './GenerationTable'
-import { styled } from '@mui/material/styles'
-import GenerationContext from '../context/GenerationContext'
 
 const StyledTableCell = styled(TableCell)(() => ({
   body: {
@@ -32,7 +30,7 @@ const StyledTableCell = styled(TableCell)(() => ({
   }
 }))
 
-const DraggableRow = ({ row, index, handleDelete, loading }) => {
+const DraggableRow = ({ row, handleDelete, loading }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: row.contract
