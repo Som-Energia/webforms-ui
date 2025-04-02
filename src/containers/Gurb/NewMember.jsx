@@ -10,7 +10,6 @@ import MemberDetails from './pages/NewMember/MemberDetails'
 import ApadrinatingDetails from './pages/NewMember/ApadrinatingDetails'
 import NewMemberDetails from './pages/NewMember/NewMemberDetails'
 import SomGurbStepper from './components/SomGurbStepper'
-import useTheme from '@mui/material/styles/useTheme'
 
 const NewMember = (props) => {
   const { values, activeStep, stepperSteps, stepperActiveSteps } = props

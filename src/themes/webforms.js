@@ -16,6 +16,7 @@ export default function WebFormsTheme() {
         alt: '#afb5e8'
       },
       secondary: {
+        main: '#8C8C8C',
         dark: '#8C8C8C',
         light: '#D9D9D9',
       },
