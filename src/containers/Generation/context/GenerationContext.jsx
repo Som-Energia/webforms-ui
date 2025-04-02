@@ -110,8 +110,8 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
 
   const resetAssignments = useCallback(() => {
     setEditingPriority(false)
-    setAssignments(assignmentsJSON)
-  }, [assignmentsJSON])
+    setAssignments(assignmentsJSONSorted)
+  }, [assignmentsJSONSorted])
 
   const contextValue = useMemo(
     () => ({
