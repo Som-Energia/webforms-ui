@@ -28,6 +28,11 @@ export default function WebFormsTheme() {
     },
     typography: {
       fontFamily: 'Outfit',
+      h3: {
+        color: '#0B2E34',
+        fontSize: '28px',
+        fontWeight: '400',
+      }
     },
     webFormStyles: {
       display1: {

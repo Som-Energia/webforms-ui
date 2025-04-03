@@ -29,6 +29,7 @@ const HolderIdentification = (props) => {
 
   const { t } = useTranslation()
 
+  // TODO: use from utils
   const handleCheckNifResponse = async () => {
     let valid = checkVatFormat(values.holder.nif)
     if (valid === true) {

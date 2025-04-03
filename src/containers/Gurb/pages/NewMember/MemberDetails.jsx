@@ -48,6 +48,7 @@ const MemberDetails = (props) => {
     }
   }, [values.member.number, values.member.nif])
 
+  // TODO: use utils function
   const handleInputNif = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()

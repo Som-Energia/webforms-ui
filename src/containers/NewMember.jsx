@@ -9,11 +9,7 @@ import Grid from '@mui/material/Grid'
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
 import SubmitButton from './Gurb/components/SubmitButton'
-import {
-  newMemberValidations,
-  alreadyMemberValidations,
-  apadrinatingValidations
-} from './Gurb/newMemberValidations'
+import { memberIdentifierValidations } from './Gurb/newMemberValidations'
 
 import noValidation from '../formValidations/noValidation'
 
@@ -73,13 +69,13 @@ const NewMemberForm = (props) => {
       privacy_policy_accepted: false
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false,
+    generic_especific_conditons_accepted: false
   }
 
   const validationSchemas = [
-    alreadyMemberValidations,
-    newMemberValidations,
-    apadrinatingValidations,
+    memberIdentifierValidations,
+    noValidation,
+    noValidation,
     noValidation
   ]
 
@@ -88,8 +84,7 @@ const NewMemberForm = (props) => {
     if (summaryField && activeStep !== 3) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
-    }
-    else {
+    } else {
       next = activeStep + 1
     }
     const last = MAX_STEP_NUMBER
@@ -141,49 +136,49 @@ const NewMemberForm = (props) => {
           return (
             <>
               {getStep(formikProps)}
-                <Grid
-                  container
-                  direction="row-reverse"
-                  rowSpacing={2}
-                  sx={{
-                    marginTop: '2rem',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}>
-                  {activeStep !== 0 && (
-                    <Grid item sm={2} xs={12}>
-                      <PrevButton
-                        onClick={() => prevStep(formikProps)}
-                        title={'PREV'}
-                      />
-                    </Grid>
-                  )}
-                  <Grid item sm={2} xs={12} order={-1}>
-                    {activeStep !== MAX_STEP_NUMBER ? (
-                      <NextButton
-                        disabled={
-                          loading ||
-                          !formikProps.isValid ||
-                          activeStep === MAX_STEP_NUMBER
-                        }
-                        onClick={() => nextStep(formikProps)}
-                        title={'NEXT'}
-                      />
-                    ) : (
-                      <SubmitButton
-                        disabled={loading || !formikProps.isValid}
-                        onClick={() =>
-                          handlePost({
-                            soci: 'Eustaquio',
-                            cost:
-                              NEW_MEMBER_COST +
-                              formikProps.values.contract.gurb_power_cost
-                          })
-                        }
-                      />
-                    )}
+              <Grid
+                container
+                direction="row-reverse"
+                rowSpacing={2}
+                sx={{
+                  marginTop: '2rem',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                {activeStep !== 0 && (
+                  <Grid item sm={2} xs={12}>
+                    <PrevButton
+                      onClick={() => prevStep(formikProps)}
+                      title={'PREV'}
+                    />
                   </Grid>
+                )}
+                <Grid item sm={2} xs={12} order={-1}>
+                  {activeStep !== MAX_STEP_NUMBER ? (
+                    <NextButton
+                      disabled={
+                        loading ||
+                        !formikProps.isValid ||
+                        activeStep === MAX_STEP_NUMBER
+                      }
+                      onClick={() => nextStep(formikProps)}
+                      title={'NEXT'}
+                    />
+                  ) : (
+                    <SubmitButton
+                      disabled={loading || !formikProps.isValid}
+                      onClick={() =>
+                        handlePost({
+                          soci: 'Eustaquio',
+                          cost:
+                            NEW_MEMBER_COST +
+                            formikProps.values.contract.gurb_power_cost
+                        })
+                      }
+                    />
+                  )}
                 </Grid>
+              </Grid>
             </>
           )
         }}
