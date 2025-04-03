@@ -22,6 +22,7 @@ let gurbId = 2  // TODO: move to env?
 
 const options = [
   { title: 'New Contract - Form', href: `${language}/new-contract-form`},
+  { title: 'New Member - Form', href: `${language}/new-member-form`},
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Component Testing', href: `/${language}/component-testing` },
   { title: 'Alta persona socia', href: '/new-member' },
