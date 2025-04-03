@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
+import useTheme from '@mui/material/styles/useTheme'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
@@ -13,6 +14,7 @@ import SomGurbStepper from './components/SomGurbStepper'
 const NewMember = (props) => {
   const { values, activeStep, stepperSteps, stepperActiveSteps } = props
   const { t } = useTranslation()
+  const theme = useTheme()
 
   const getMemberPage = () => {
     if (activeStep === 0) {
@@ -26,7 +28,7 @@ const NewMember = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+        <Typography sx={theme.webFormStyles.textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <SomGurbStepper
