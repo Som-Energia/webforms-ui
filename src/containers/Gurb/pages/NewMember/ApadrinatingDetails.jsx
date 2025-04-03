@@ -49,7 +49,6 @@ const ApadrinatingDetails = (props) => {
   }, [values.member.number, values.member.nif])
 
   const handleInputNif = (event) => {
-    console.log(event)
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
     setFieldValue('member.nif', value)
