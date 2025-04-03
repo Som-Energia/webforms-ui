@@ -35,6 +35,7 @@ import GurbLoadingContext from '../context/GurbLoadingContext'
 import SummaryContext from '../context/SummaryContext'
 import {
   CONTRACT_FORM_STEPS,
+  CONTRACT_FORM_SUBSTEPS,
   GURB_CONTRACT_STEP,
   GURB_NEW_MEMBER_STEP
 } from '../services/steps'
@@ -163,11 +164,13 @@ const NewContractForm = (props) => {
 
   const nextStep = (formikProps) => {
     let next
-    if (summaryField && activeStep !== 3) {
+    if (
+      summaryField &&
+      activeStep !== CONTRACT_FORM_SUBSTEPS['IDENTIFY_HOLDER']
+    ) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
-    }
-    else {
+    } else {
       next = activeStep + 1
     }
     // if (activeStep === 4) {
