@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.9.0 2025-04-03
+
+- New contract form (Base branch)
+- New MUI theme for new contract forms
+- Possibility to edit contract summary fields
+
 ## 2.8.1 2025-03-25
 
 - Fix `CIF_COMMUNITY_OWNERS` html message at member and generation.
