@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 import { textHeader1 } from '../gurbTheme'
 
 const Header = ({ title }) => {
+
   return (
     <Typography
       // variant="h2"
