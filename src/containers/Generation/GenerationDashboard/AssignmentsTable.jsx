@@ -10,6 +10,10 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import DeleteIcon from '@mui/icons-material/Delete'
 import dayjs from 'dayjs'
 import { styled } from '@mui/material/styles'
+import PopUpContext from '../../../context/PopUpContext'
+import SimpleDialog from '../../../components/SimpleDialog';
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography'
 import {
   DndContext,
   closestCenter,
@@ -23,6 +27,7 @@ import {
   useSortable,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useTranslation } from 'react-i18next'
 
 const StyledTableCell = styled(TableCell)(() => ({
   body: {
@@ -31,13 +36,14 @@ const StyledTableCell = styled(TableCell)(() => ({
 }))
 
 const DraggableRow = ({ row, handleDelete, loading }) => {
+  const { setContent } = useContext(PopUpContext)
+  const {t} = useTranslation()
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: row.contract
     })
 
   const { getPriority } = useContext(GenerationContext)
-
   const style = {
     transform: CSS.Transform.toString(transform),
     transition

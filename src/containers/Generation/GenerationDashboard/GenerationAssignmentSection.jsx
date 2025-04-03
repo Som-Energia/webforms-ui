@@ -31,7 +31,6 @@ export default function GenerationAssigmentSection({ data }) {
   const rows = data.map((element) => createData(...Object.values(element)))
   const { t } = useTranslation()
   const {
-    getPriority,
     setEditingPriority,
     changeAssigmentPriority,
     getAssingments,
