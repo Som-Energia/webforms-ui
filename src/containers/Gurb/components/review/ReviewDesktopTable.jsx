@@ -45,6 +45,7 @@ const ReviewDesktopTable = ({tableFields}) => {
                                       <ReviewField
                                         label={detail.reviewLabel}
                                         value={detail.reviewValue}
+                                        step={detail.step}
                                       />
                                     </Grid>
                                   )

@@ -32,13 +32,15 @@ import noValidation from '../formValidations/noValidation'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import SummaryContext from '../context/SummaryContext'
 import {
   CONTRACT_FORM_STEPS,
+  CONTRACT_FORM_SUBSTEPS,
   GURB_CONTRACT_STEP,
   GURB_NEW_MEMBER_STEP
 } from '../services/steps'
 
-const MAX_STEP_NUMBER = 12
+const MAX_STEP_NUMBER = 11
 const NEW_MEMBER_STEP = [0, 1, 2]
 const CONTRACT_STEPS = [3, 4, 5, 6, 7, 8, 9, 10, 11]
 const NEW_MEMBER_COST = 100
@@ -52,8 +54,8 @@ const NewContractForm = (props) => {
 
   const { error, setError, errorInfo, setErrorInfo } =
     useContext(GurbErrorContext)
-
   const { loading } = useContext(GurbLoadingContext)
+  const { summaryField, setSummaryField } = useContext(SummaryContext)
 
   const [activeStep, setActiveStep] = useState(2)
   useEffect(() => {
@@ -161,7 +163,16 @@ const NewContractForm = (props) => {
   ]
 
   const nextStep = (formikProps) => {
-    let next = activeStep + 1
+    let next
+    if (
+      summaryField &&
+      activeStep !== CONTRACT_FORM_SUBSTEPS['IDENTIFY_HOLDER']
+    ) {
+      next = MAX_STEP_NUMBER
+      setSummaryField(undefined)
+    } else {
+      next = activeStep + 1
+    }
     // if (activeStep === 4) {
     //   if (formikProps.values.has_member === 'member-off') {
     //     next = activeStep + 2
@@ -243,6 +254,12 @@ const NewContractForm = (props) => {
       formTPV.current.submit()
     }
   }, [url])
+
+  useEffect(() => {
+    if (summaryField !== undefined) {
+      setActiveStep(summaryField)
+    }
+  }, [summaryField])
 
   return (
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
