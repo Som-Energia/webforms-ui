@@ -36,7 +36,7 @@ const MemberIdentifier = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="h3">
+        <Typography variant="headline3">
           {'Indica el NIF de la nova persona sòcia'}
         </Typography>
       </Grid>
@@ -60,7 +60,7 @@ const MemberIdentifier = (props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1">
+        <Typography variant="body.xs.regular" color="secondary.dark">
           {
             'Si no disposes de NIE i tens passaport, ens pots enviar un correu a info@somenergia.coop amb les dades de la nova persona sòcia (nom, cognoms, passaport adjunt, correu electrònic, adreça i telèfon de contacte) i dades IBAN de pagament.'
           }
