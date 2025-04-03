@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.0.0 2025-04-03
+
+- Update drag and drop deprecated library
+
 ## 2.9.0 2025-04-03
 
 - New contract form (Base branch)
