@@ -475,7 +475,9 @@ const App = (props) => {
                       element={
                         <GurbErrorContextProvider>
                           <GurbLoadingContextProvider>
-                            <NewContractForm {...props} />
+                            <SummaryContextProvider>
+                              <NewContractForm {...props} />
+                            </SummaryContextProvider>
                           </GurbLoadingContextProvider>
                         </GurbErrorContextProvider>
                       }
