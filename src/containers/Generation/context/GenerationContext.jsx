@@ -83,7 +83,6 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
         ? { active: true, value: t('GENERATION_MAIN_PRIORITY'), index: index }
         : { active: true, value: ordinals.formatOrdinals(index + 1), index: index }
     })
-
     let found = false;
     let count = 0;
     while (!found && count < priorities.length) {
@@ -110,8 +109,8 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
 
   const resetAssignments = useCallback(() => {
     setEditingPriority(false)
-    setAssignments(assignmentsJSON)
-  }, [assignmentsJSON])
+    setAssignments(assignmentsJSONSorted)
+  }, [assignmentsJSONSorted])
 
   const contextValue = useMemo(
     () => ({

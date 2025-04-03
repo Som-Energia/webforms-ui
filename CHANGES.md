@@ -8,7 +8,7 @@
 
 ## 2.8.1 2025-03-25
 
-- Fix `CIF_COMMUNITY_OWNERS` html message at member and generation.
+- Fix `CIF_COMMUNITY_OWNERS` html message at member and generation
 
 ## 2.8.0 2025-03-25
 
