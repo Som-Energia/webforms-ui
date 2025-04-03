@@ -6,8 +6,6 @@ import { Formik } from 'formik'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
-import NewMember from './Gurb/NewMember'
-
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
 import SubmitButton from './Gurb/components/SubmitButton'
@@ -16,40 +14,26 @@ import {
   alreadyMemberValidations,
   apadrinatingValidations
 } from './Gurb/newMemberValidations'
-import {
-  holderIbanValidations,
-  holderIdentificationValidations,
-  holderPersonalDataValidations,
-  holderTaxAddressValidations,
-  supplyPointDataValidations,
-  holderVoluntaryDonationValidations,
-  powerValidations,
-  tariffModeValidations
-} from './Gurb/contractValidations'
 
 import noValidation from '../formValidations/noValidation'
 
-import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import SummaryContext from '../context/SummaryContext'
-import {
-  CONTRACT_FORM_STEPS,
-  GURB_NEW_MEMBER_STEP
-} from '../services/steps'
+import MemberIdentifier from './NewMember/MemberIdentifier'
+import MemberPersonalData from './NewMember/MemberPersonalData'
+import PaymentMethod from './NewMember/PaymentMethod'
+import MemberSummary from './NewMember/MemberSummary'
 
 const MAX_STEP_NUMBER = 3
-const NEW_MEMBER_STEP = [0, 1, 2]
 const NEW_MEMBER_COST = 100
 
 const NewMemberForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language, id } = useParams()
+  const { language } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
 
-  const { error, setError, errorInfo, setErrorInfo } =
-    useContext(GurbErrorContext)
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
 
@@ -61,7 +45,6 @@ const NewMemberForm = (props) => {
 
   const initialValues = {
     is_client: undefined,
-    cups: '',
     has_light: undefined,
     address: {
       street: '',
@@ -71,22 +54,6 @@ const NewMemberForm = (props) => {
       city: undefined,
       lat: undefined,
       long: undefined
-    },
-    tax_address: {
-      has_different_address: undefined,
-      street: '',
-      number: undefined,
-      postal_code: undefined,
-      state: undefined,
-      city: undefined
-    },
-    has_selfconsumption: undefined,
-    has_member: undefined,
-    member: {
-      number: '',
-      nif: '',
-      is_member: false,
-      link_member: false
     },
     new_member: {
       nif: '',
@@ -105,43 +72,8 @@ const NewMemberForm = (props) => {
       language: `${i18n.language}_ES`,
       privacy_policy_accepted: false
     },
-    holder: {
-      nif: '',
-      has_holder: undefined,
-      name: undefined,
-      surname1: undefined,
-      surname2: undefined,
-      email: undefined,
-      email2: undefined,
-      phone1: undefined,
-      phone2: undefined,
-      voluntary_donation: undefined,
-      iban: '',
-      iban_valid: false,
-      direct_debit_accepted: false
-    },
-    cadastral_reference: '',
-    cadastral_reference_valid: true,
-    supply_point: {
-      is_housing: undefined,
-      cnae: undefined,
-      supply_point_accepted: false
-    },
-    contract: {
-      tariff_mode: undefined,
-      power_type: undefined,
-      power: {
-        power1: undefined,
-        power2: undefined,
-        power3: undefined
-      },
-      gurb_power: '',
-      gurb_power_cost: ''
-    },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false,
-    tariff_payment_accepted: false,
-    gurb_adhesion_payment_accepted: false
   }
 
   const validationSchemas = [
@@ -172,17 +104,14 @@ const NewMemberForm = (props) => {
     console.log('POST final')
   }
   const getStep = (props) => {
-    if (NEW_MEMBER_STEP.includes(activeStep)) {
-      return (
-        <NewMember
-          {...props}
-          activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
-          stepperSteps={CONTRACT_FORM_STEPS}
-          stepperActiveSteps={GURB_NEW_MEMBER_STEP}
-        />
-      )
+    if (activeStep === 0) {
+      return <MemberIdentifier {...props} />
+    } else if (activeStep === 1) {
+      return <MemberPersonalData {...props} />
+    } else if (activeStep === 2) {
+      return <PaymentMethod {...props} />
     } else {
-      return <></>
+      return <MemberSummary {...props} />
     }
   }
 
@@ -212,9 +141,6 @@ const NewMemberForm = (props) => {
           return (
             <>
               {getStep(formikProps)}
-              {error ? (
-                <></>
-              ) : (
                 <Grid
                   container
                   direction="row-reverse"
@@ -258,7 +184,6 @@ const NewMemberForm = (props) => {
                     )}
                   </Grid>
                 </Grid>
-              )}
             </>
           )
         }}
