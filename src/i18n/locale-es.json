@@ -730,6 +730,11 @@
     "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED":"Con la contratación del sservicio GURB me obligo al pago del coste de Adhessión único una vez verificada mi plaza en GURB Mataró y de la Cuota GURB que será de aplicaciónn a partir del primer día posterior a la fecha de activación.",
     "GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS":"He leído las <a href=\"{{generic_conditions_url}}\" >condiciones generales de contratación </a> y las <a href=\"{{specific_conditions_url}}\" >condiciones específicas del servicio GURB</a> de Som Energia.",
     "GURB_CHECK_SPEECIFIC_CONDITIONS_URL":"",
-    "GENERIC_CONDITIONS_URL":""
-
+    "GENERIC_CONDITIONS_URL":"",
+    "BIRTHDATE":"Fecha de nacimiento",
+    "GENDER": "Género",
+    "HOW_MEET_US": "Cómo nos has conocido?",
+    "GENDER_WOMAN": "Mujer",
+    "GENDER_MAN": "Hombre",
+    "GENDER_NON_BINARY": "No binario"
 }
