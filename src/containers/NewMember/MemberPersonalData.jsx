@@ -8,11 +8,10 @@ import Checkbox from '@mui/material/Checkbox'
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
-import {
-  textHeader4,
-  textField
-} from '../Gurb/gurbTheme'
+import { textHeader4, textField } from '../Gurb/gurbTheme'
 import { t } from 'i18next'
+
+import AddressField from '../../components/AddressField'
 
 const languages = {
   es_ES: 'Español',
@@ -61,6 +60,7 @@ const MemberPersonalData = (props) => {
     setFieldValue('new_member.birthdate', value)
   }
 
+  // TODO: enter international phone
   const handleChangePhone = (event) => {
     let value = event.target.value.match(/[0-9]{0,14}/)
     value = value[0]
@@ -176,106 +176,7 @@ const MemberPersonalData = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <InputField
-              name={'address.street'}
-              textFieldLabel={t('ADDRESS')}
-              textFieldName={t('ADDRESS')}
-              handleChange={(event) => {
-                setFieldValue('address.street', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('address.street', true)
-              }}
-              touched={touched?.address?.street}
-              value={values?.address.street}
-              error={errors?.address?.street}
-              required={true}
-            />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <InputField
-              name={'address.number'}
-              textFieldLabel={t('NUMBER')}
-              textFieldName={t('NUMBER')}
-              handleChange={(event) => {
-                setFieldValue('address.number', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('address.number', true)
-              }}
-              touched={touched?.address?.number}
-              value={values?.address.number}
-              error={errors?.address?.number}
-              required={true}
-            />
-          </Grid>
-          <Grid item xs={6} sm={2}>
-            <InputField
-              name={'address.floor'}
-              textFieldName={t('FLOOR')}
-              textFieldLabel={t('FLOOR')}
-              handleChange={(event) => {
-                setFieldValue('address.floor', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('address.floor', true)
-              }}
-              touched={touched?.address?.floor}
-              value={values?.address?.floor}
-              error={errors?.address?.floor}
-              required={false}
-            />
-          </Grid>
-          <Grid item xs={6} sm={2}>
-            <InputField
-              name={'address.door'}
-              textFieldName={t('DOOR')}
-              textFieldLabel={t('DOOR')}
-              handleChange={(event) => {
-                setFieldValue('address.door', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('address.door', true)
-              }}
-              touched={touched?.address?.door}
-              value={values?.address?.door}
-              error={errors?.address?.door}
-              required={false}
-            />
-          </Grid>
-          <Grid item xs={6} sm={2}>
-            <InputField
-              name={'address.stairs'}
-              textFieldName={t('STAIRS')}
-              textFieldLabel={t('STAIRS')}
-              handleChange={(event) => {
-                setFieldValue('address.stairs', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('address.stairs', true)
-              }}
-              touched={touched?.address?.stairs}
-              value={values?.address?.stairs}
-              error={errors?.address?.stairs}
-              required={false}
-            />
-          </Grid>
-          <Grid item xs={6} sm={2}>
-            <InputField
-              name={'address.bloc'}
-              textFieldName={t('BLOCK')}
-              textFieldLabel={t('BLOCK')}
-              handleChange={(event) => {
-                setFieldValue('address.bloc', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('address.bloc', true)
-              }}
-              touched={touched?.address?.bloc}
-              value={values?.address?.bloc}
-              error={errors?.address?.bloc}
-              required={false}
-            />
+            <AddressField addressFieldName="address" {...props} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
@@ -351,7 +252,9 @@ const MemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={12}>
             <Box>
-              <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
+              <Typography sx={textHeader4}>
+                {t('GURB_LANGUAGE_FIELD')}
+              </Typography>
               <TextField
                 sx={textField}
                 required
