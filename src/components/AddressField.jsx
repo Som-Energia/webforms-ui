@@ -12,6 +12,7 @@ import InputField from '../containers/Gurb/components/InputField'
 const AddressField = (props) => {
   const {
     addressFieldName = 'address',
+    addressLabel,
     activeStep,
     values,
     errors,
@@ -92,7 +93,7 @@ const AddressField = (props) => {
         <LocationInput
           required
           textFieldLabel={t('GURB_ADDRESS_LABEL')}
-          textFieldName={t('GURB_TAX_ADDRESS_FIELD')}
+          textFieldName={addressLabel}
           textFieldHelper={t('GURB_ADDRESS_HELPER')}
           id={`${addressFieldName}-street`}
           name={`${addressFieldName}.street`}

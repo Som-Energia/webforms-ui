@@ -5,13 +5,10 @@ import Typography from '@mui/material/Typography'
 import InputField from '../Gurb/components/InputField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import Box from '@mui/material/Box'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import { textHeader4, textField } from '../Gurb/gurbTheme'
 import { t } from 'i18next'
 
 import AddressField from '../../components/AddressField'
+import SelectField from '../../components/SelectField'
 import { handleChange } from '../../utils/commonHandles'
 
 const languages = {
@@ -45,11 +42,6 @@ const MemberPersonalData = (props) => {
   } = props
   const { i18n, t } = useTranslation()
 
-  const handleChangeGender = (event) => {
-    let value = event.target.value
-    setFieldValue('new_member.gender', value)
-  }
-
   const handleChangeBirthdate = (event) => {
     let value = event.target.value.match(/\d{1,2}\/\d{1,2}\/\d{2,4}/)
     setFieldValue('new_member.birthdate', value)
@@ -60,16 +52,6 @@ const MemberPersonalData = (props) => {
     let value = event.target.value.match(/[0-9]{0,14}/)
     value = value[0]
     setFieldValue(event.target.name, value)
-  }
-
-  const handleLanguageChange = (event) => {
-    let value = event.target.value
-    setFieldValue('new_member.language', value)
-  }
-
-  const handleHowMeetUsChange = (event) => {
-    let value = event.target.value
-    setFieldValue('new_member.how_meet_us', value)
   }
 
   const handleCheckboxChange = (event) => {
@@ -136,32 +118,18 @@ const MemberPersonalData = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box>
-              <Typography sx={textHeader4}>{t('GENDER')}</Typography>
-              <TextField
-                sx={textField}
-                select
-                fullWidth
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
-                    display: 'flex'
-                  }
-                }}
-                onChange={handleChangeGender}
-                value={values?.new_member.gender}>
-                {Object.keys(gender_options).map((id) => (
-                  <MenuItem key={id} value={id}>
-                    {gender_options[id]}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Box>
+            <SelectField
+              label={t('GENDER')}
+              value={values?.new_member?.gender}
+              fieldName="new_member.gender"
+              options={gender_options}
+              {...props}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
+            {/* TODO: datepicker ? */}
             <InputField
               name="birthdate"
-              textFieldLabel={t('BIRTHDATE')}
               textFieldName={t('BIRTHDATE')}
               handleChange={handleChangeBirthdate}
               handleBlur={() => {
@@ -174,12 +142,15 @@ const MemberPersonalData = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <AddressField addressFieldName="address" {...props} />
+            <AddressField
+              addressFieldName="address"
+              addressLabel={t('GURB_TAX_ADDRESS_FIELD')}
+              {...props}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
               name="email"
-              textFieldLabel={t('EMAIL')}
               textFieldName={t('EMAIL')}
               handleChange={(event) => {
                 setFieldValue('new_member.email', event.target.value)
@@ -196,7 +167,6 @@ const MemberPersonalData = (props) => {
           <Grid item xs={12} sm={6}>
             <InputField
               name="repeat_email"
-              textFieldLabel={t('HOLDER_EMAIL_2')}
               textFieldName={t('HOLDER_EMAIL_2')}
               handleChange={(event) => {
                 setFieldValue('new_member.email2', event.target.value)
@@ -213,7 +183,6 @@ const MemberPersonalData = (props) => {
           <Grid item xs={12} sm={6}>
             <InputField
               name={'new_member.phone1'}
-              textFieldLabel={t('GURB_PHONE1_LABEL')}
               textFieldName={t('GURB_PHONE1_LABEL')}
               handleChange={handleChangePhone}
               handleBlur={() => {
@@ -226,53 +195,22 @@ const MemberPersonalData = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box>
-              <Typography sx={textHeader4}>{t('HOW_MEET_US')}</Typography>
-              <TextField
-                sx={textField}
-                select
-                fullWidth
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
-                    display: 'flex'
-                  }
-                }}
-                onChange={handleHowMeetUsChange}
-                value={values?.new_member.how_meet_us}>
-                {Object.keys(how_meet_us_options).map((id) => (
-                  <MenuItem key={id} value={id}>
-                    {how_meet_us_options[id]}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Box>
+            <SelectField
+              label={t('HOW_MEET_US')}
+              value={values?.new_member?.how_meet_us}
+              fieldName="new_member.how_meet_us"
+              options={how_meet_us_options}
+              {...props}
+            />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Box>
-              <Typography sx={textHeader4}>
-                {t('GURB_LANGUAGE_FIELD')}
-              </Typography>
-              <TextField
-                sx={textField}
-                required
-                select
-                fullWidth
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
-                    display: 'flex'
-                  }
-                }}
-                onChange={handleLanguageChange}
-                value={values?.new_member.language}>
-                {Object.keys(languages).map((id) => (
-                  <MenuItem key={id} value={id}>
-                    {languages[id]}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Box>
+            <SelectField
+              label={t('GURB_LANGUAGE_FIELD')}
+              value={values?.new_member?.language}
+              fieldName="new_member.language"
+              options={languages}
+              {...props}
+            />
           </Grid>
         </Grid>
       </Grid>
