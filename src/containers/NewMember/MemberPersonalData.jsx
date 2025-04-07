@@ -12,6 +12,7 @@ import { textHeader4, textField } from '../Gurb/gurbTheme'
 import { t } from 'i18next'
 
 import AddressField from '../../components/AddressField'
+import { handleChange } from '../../utils/commonHandles'
 
 const languages = {
   es_ES: 'Español',
@@ -43,12 +44,6 @@ const MemberPersonalData = (props) => {
     setErrors
   } = props
   const { i18n, t } = useTranslation()
-
-  const handleChangeName = (event) => {
-    //TODO: make it possible to put accents
-    let value = event.target.value //.match(/^[a-zA-Z]*/)
-    setFieldValue(event.target.name, value)
-  }
 
   const handleChangeGender = (event) => {
     let value = event.target.value
@@ -95,9 +90,10 @@ const MemberPersonalData = (props) => {
           <Grid item xs={12} sm={4}>
             <InputField
               name={'new_member.name'}
-              textFieldLabel={t('NAME')}
               textFieldName={t('NAME')}
-              handleChange={handleChangeName}
+              handleChange={(event) => {
+                handleChange(event, setFieldValue)
+              }}
               handleBlur={() => {
                 setFieldTouched('new_member.name', true)
               }}
@@ -110,9 +106,10 @@ const MemberPersonalData = (props) => {
           <Grid item xs={12} sm={4}>
             <InputField
               name={'new_member.surname1'}
-              textFieldLabel={t('HOLDER_SURNAME1')}
               textFieldName={t('HOLDER_SURNAME1')}
-              handleChange={handleChangeName}
+              handleChange={(event) => {
+                handleChange(event, setFieldValue)
+              }}
               handleBlur={() => {
                 setFieldTouched('new_member.surname1', true)
               }}
@@ -125,9 +122,10 @@ const MemberPersonalData = (props) => {
           <Grid item xs={12} sm={4}>
             <InputField
               name={'new_member.surname2'}
-              textFieldLabel={t('HOLDER_SURNAME2')}
               textFieldName={t('HOLDER_SURNAME2')}
-              handleChange={handleChangeName}
+              handleChange={(event) => {
+                handleChange(event, setFieldValue)
+              }}
               handleBlur={() => {
                 setFieldTouched('new_member.surname2', true)
               }}

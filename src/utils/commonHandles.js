@@ -15,7 +15,7 @@ export const handleCheckNifFormat = async (nif, setFieldError, fieldName) => {
   }
 }
 
-export const handleChangeInteger = (event) => {
+export const handleChangeInteger = (event, setFieldValue) => {
   let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
   setFieldValue(event.target.name, cleanedValue)
 }
@@ -24,6 +24,6 @@ export const handleChangeInteger = (event) => {
 export const handleInputNifBlur = (setFieldTouched, fieldName) => {
   setFieldTouched(fieldName, true)
 }
-export const handleChange = (event) => {
+export const handleChange = (event, setFieldValue) => {
   setFieldValue(event.target.name, event.target.value)
 }

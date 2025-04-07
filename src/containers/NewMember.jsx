@@ -61,7 +61,7 @@ const NewMemberForm = (props) => {
       name: undefined,
       surname1: undefined,
       surname2: undefined,
-      gender: undefined,
+      gender: '',
       birthdate: undefined,
       email: undefined,
       email2: undefined,
