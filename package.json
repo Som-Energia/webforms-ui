@@ -41,6 +41,7 @@
     "i18next": "^23.11.2",
     "i18next-parser": "^9.0.0",
     "ibantools": "^4.5.1",
+    "mui-phone-number": "^3.0.3",
     "plausible-tracker": "^0.3.8",
     "preval.macro": "^5.0.0",
     "react": "^18.3.1",

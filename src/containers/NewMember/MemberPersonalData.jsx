@@ -9,6 +9,7 @@ import { t } from 'i18next'
 
 import AddressField from '../../components/AddressField'
 import SelectField from '../../components/SelectField'
+import PhoneField from '../../components/PhoneField'
 import { handleChange } from '../../utils/commonHandles'
 
 const languages = {
@@ -56,17 +57,14 @@ const MemberPersonalData = (props) => {
     setFieldValue('new_member.birthdate', value)
   }
 
-  // TODO: enter international phone
-  const handleChangePhone = (event) => {
-    let value = event.target.value.match(/[0-9]{0,14}/)
-    value = value[0]
-    setFieldValue(event.target.name, value)
-  }
-
   const handleCheckboxChange = (event) => {
     let value = event.target.checked
     setFieldValue('new_member.privacy_policy_accepted', value)
     setFieldTouched('new_member.privacy_policy_accepted', true)
+  }
+
+  function handleChangePhone(value) {
+    setFieldValue('new_member.phone1', value)
   }
 
   return (
@@ -190,7 +188,7 @@ const MemberPersonalData = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <InputField
+            <PhoneField
               name={'new_member.phone1'}
               textFieldName={t('GURB_PHONE1_LABEL')}
               handleChange={handleChangePhone}
