@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
+import InputTitle from '../containers/Gurb/components/InputTitle'
 
 const SelectField = (props) => {
   const {
+    required = false,
     label,
     fieldName,
     value,
@@ -33,7 +34,10 @@ const SelectField = (props) => {
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item xs={12} sm={6}>
-        <Typography>{label}</Typography>
+        <InputTitle
+          text={label}
+          required={required}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <Select

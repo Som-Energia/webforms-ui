@@ -117,7 +117,9 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.floor`}
           textFieldName={t('FLOOR')}
-          handleChange={handleChangeInteger}
+          handleChange={(event) => {
+            handleChangeInteger(event, setFieldValue)
+          }}
           touched={touched[addressFieldName]?.floor}
           value={values[addressFieldName]?.floor}
           error={errors[addressFieldName]?.floor}
@@ -128,7 +130,9 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.door`}
           textFieldName={t('DOOR')}
-          handleChange={handleChangeInteger}
+          handleChange={(event) => {
+            handleChangeInteger(event, setFieldValue)
+          }}
           touched={touched[addressFieldName]?.door}
           value={values[addressFieldName]?.door}
           error={errors[addressFieldName]?.door}
@@ -139,7 +143,9 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.stairs`}
           textFieldName={t('STAIRS')}
-          handleChange={handleChange}
+          handleChange={(event) => {
+            handleChange(event, setFieldValue)
+          }}
           touched={touched[addressFieldName]?.stairs}
           value={values[addressFieldName]?.stairs}
           error={errors[addressFieldName]?.stairs}
@@ -150,7 +156,9 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.bloc`}
           textFieldName={t('BLOCK')}
-          handleChange={handleChange}
+          handleChange={(event) => {
+            handleChange(event, setFieldValue)
+          }}
           touched={touched[addressFieldName]?.bloc}
           value={values[addressFieldName]?.bloc}
           error={errors[addressFieldName]?.bloc}
