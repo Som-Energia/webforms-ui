@@ -736,5 +736,17 @@
     "HOW_MEET_US": "Cómo nos has conocido?",
     "GENDER_WOMAN": "Mujer",
     "GENDER_MAN": "Hombre",
-    "GENDER_NON_BINARY": "No binario"
+    "GENDER_NON_BINARY": "No binario",
+    "GENDER_FLUID": "Género fluido",
+    "GENDER_OTHERS": "Otros",
+    "GENDER_NOT_SAY": "Prefiero no decirlo",
+    "HOW_MEET_US_OPTION_1": "Som Serveis",
+    "HOW_MEET_US_OPTION_2": "Otras Cooperativas",
+    "HOW_MEET_US_OPTION_3": "Opcions",
+    "HOW_MEET_US_OPTION_4": "Abacus",
+    "HOW_MEET_US_OPTION_5": "Recomanendación",
+    "HOW_MEET_US_OPTION_6": "Ya estaba en el piso cuando me he mudado",
+    "HOW_MEET_US_OPTION_7": "Publicidad",
+    "HOW_MEET_US_OPTION_8": "Redes sociales",
+    "HOW_MEET_US_OPTION_9": "Otras"
 }

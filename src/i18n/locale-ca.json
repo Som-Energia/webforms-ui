@@ -910,5 +910,17 @@
     "HOW_MEET_US": "Com ens has conegut?",
     "GENDER_WOMAN": "Dona",
     "GENDER_MAN": "Home",
-    "GENDER_NON_BINARY": "No binari"
+    "GENDER_NON_BINARY": "No binari",
+    "GENDER_FLUID": "Gènere fluid",
+    "GENDER_OTHERS": "Altres",
+    "GENDER_NOT_SAY": "Prefereixo no dir-ho",
+    "HOW_MEET_US_OPTION_1": "Som Serveis",
+    "HOW_MEET_US_OPTION_2": "Altres Cooperatives",
+    "HOW_MEET_US_OPTION_3": "Opcions",
+    "HOW_MEET_US_OPTION_4": "Abacus",
+    "HOW_MEET_US_OPTION_5": "Recomanacio",
+    "HOW_MEET_US_OPTION_6": "Ja estava al pis on m'he mudat",
+    "HOW_MEET_US_OPTION_7": "Publicitat",
+    "HOW_MEET_US_OPTION_8": "Xarxes socials",
+    "HOW_MEET_US_OPTION_9": "Altres"
 }

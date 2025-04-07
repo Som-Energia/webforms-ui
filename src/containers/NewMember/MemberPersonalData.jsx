@@ -19,15 +19,24 @@ const languages = {
 }
 
 const gender_options = {
-  W: t('GENDER_WOMAN'),
-  M: t('GENDER_MAN'),
-  N: t('GENDER_NON_BINARY')
+  woman: t('GENDER_WOMAN'),
+  man: t('GENDER_MAN'),
+  genderfluid: t('GENDER_FLUID'),
+  nonbinary: t('GENDER_NON_BINARY'),
+  others: t('GENDER_OTHERS'),
+  nottosay: t('GENDER_NOT_SAY')
 }
 
 const how_meet_us_options = {
-  O1: 'OPTION_1',
-  O2: 'OPTION_2',
-  O3: 'OPTION_3'
+  O1: t('HOW_MEET_US_OPTION_1'),
+  O2: t('HOW_MEET_US_OPTION_2'),
+  O3: t('HOW_MEET_US_OPTION_3'),
+  O4: t('HOW_MEET_US_OPTION_4'),
+  O5: t('HOW_MEET_US_OPTION_5'),
+  O6: t('HOW_MEET_US_OPTION_6'),
+  O7: t('HOW_MEET_US_OPTION_7'),
+  O8: t('HOW_MEET_US_OPTION_8'),
+  O9: t('HOW_MEET_US_OPTION_9')
 }
 
 const MemberPersonalData = (props) => {
@@ -205,6 +214,7 @@ const MemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={12}>
             <SelectField
+              required={true}
               label={t('GURB_LANGUAGE_FIELD')}
               value={values?.new_member?.language}
               fieldName="new_member.language"

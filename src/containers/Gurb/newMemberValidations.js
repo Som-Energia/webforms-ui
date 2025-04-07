@@ -52,4 +52,29 @@ export const memberIdentifierValidations = Yup.object().shape({
   })
 })
 
+export const memberPersonalDataValidations = Yup.object().shape({
+  new_member: Yup.object().shape({
+    name: Yup.string().required('NO_NAME'),
+    surname1: Yup.string().required('NO_SURNAME1'),
+    surname2: Yup.string().required('NO_SURNAME2'),
+    email: Yup.string().required('NO_EMAIL').email('NO_EMAIL'),
+    email2: Yup.string().test(
+      'repeatEmail',
+      'NO_REPEATED_EMAIL',
+      function () {
+        return this.parent.email === this.parent.email2
+      }
+    ),
+    phone1: Yup.string().min(9, 'NO_PHONE').required('NO_PHONE'),
+    language: Yup.string().required('NO_LANGUAGE'),
+    privacy_policy_accepted: Yup.bool()
+      .required('UNACCEPTED_PRIVACY_POLICY')
+      .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY')
+  }),
+  address: Yup.object().shape({
+    street: Yup.string().required('NO_ADDRESS'),
+    number: Yup.number().required('NO_NUMBER'),
+  })
+})
+
 export default newMemberValidations

@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid'
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
 import SubmitButton from './Gurb/components/SubmitButton'
-import { memberIdentifierValidations } from './Gurb/newMemberValidations'
+import { memberIdentifierValidations, memberPersonalDataValidations } from './Gurb/newMemberValidations'
 
 import noValidation from '../formValidations/noValidation'
 
@@ -77,7 +77,7 @@ const NewMemberForm = (props) => {
 
   const validationSchemas = [
     memberIdentifierValidations,
-    noValidation,
+    memberPersonalDataValidations,
     noValidation,
     noValidation
   ]
