@@ -37,7 +37,7 @@ const MemberIdentifier = (props) => {
     <Grid container spacing={4}>
       <Grid item xs={12}>
         <Typography variant="headline3">
-          {'Indica el NIF de la nova persona sòcia'}
+          {t('MEMBER_PAGE_NIF')}
         </Typography>
       </Grid>
       <Grid item xs={12}>

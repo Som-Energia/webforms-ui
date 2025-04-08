@@ -10,6 +10,7 @@ import { t } from 'i18next'
 import AddressField from '../../components/AddressField'
 import SelectField from '../../components/SelectField'
 import PhoneField from '../../components/PhoneField'
+import CalendarField from '../../components/CalendarField'
 import { handleChange } from '../../utils/commonHandles'
 
 const languages = {
@@ -52,8 +53,7 @@ const MemberPersonalData = (props) => {
   } = props
   const { i18n, t } = useTranslation()
 
-  const handleChangeBirthdate = (event) => {
-    let value = event.target.value.match(/\d{1,2}\/\d{1,2}\/\d{2,4}/)
+  function handleChangeBirthdate(value) {
     setFieldValue('new_member.birthdate', value)
   }
 
@@ -71,7 +71,7 @@ const MemberPersonalData = (props) => {
     <Grid container spacing={4}>
       <Grid item xs={12}>
         <Typography variant="headline3">
-          {'Indica el NIF de la nova persona sòcia'}
+          {t('MEMBER_PAGE_PERSONAL_DATA')}
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -134,18 +134,10 @@ const MemberPersonalData = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {/* TODO: datepicker ? */}
-            <InputField
-              name="birthdate"
+            <CalendarField
               textFieldName={t('BIRTHDATE')}
               handleChange={handleChangeBirthdate}
-              handleBlur={() => {
-                setFieldTouched('new_member.birthdate', true)
-              }}
-              touched={touched?.new_member?.birthdate}
               value={values?.new_member.birthdate}
-              error={errors?.new_member?.birthdate}
-              required={false}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
