@@ -4,6 +4,10 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import Grid from '@mui/material/Grid'
+import InputAdornment from '@mui/material/InputAdornment'
+// import AccountCircle from '@mui/icons-material/AccountCircle'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+
 import MuiPhoneNumber from 'mui-phone-number'
 
 import { textHeader4, textHeader5, textHelper1, textField } from '../containers/Gurb/gurbTheme'
@@ -24,12 +28,6 @@ export const HelperText = ({
   )
 }
 
-function handleOnChange(value) {
-  this.setState({
-     phone: value
-  });
-}
-
 const PhoneField = ({
   textFieldLabel,
   textFieldName,
@@ -37,6 +35,7 @@ const PhoneField = ({
   textFieldHelper,
   iconHelper = false,
   handleChange,
+  handleBlur,
   touched,
   value,
   error,
@@ -60,13 +59,25 @@ const PhoneField = ({
         <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <MuiPhoneNumber 
-          defaultCountry={'es'}
+        <MuiPhoneNumber
+          variant='outlined'
           sx={textField}
+          defaultCountry={'es'}
+          disableAreaCodes='True'
+          preferredCountries={['es']}
           name={name}
           data-cy={name}
           disabled={readonlyField}
           fullWidth
+          InputProps={{
+            onBlur: handleBlur,
+            startAdornment: (
+                <HighlightOffIcon />
+              // <InputAdornment position="start">
+              //   {/* <AccountCircle /> */}
+              // </InputAdornment>
+            ),
+          }}
           label={value ? undefined : textFieldLabel}
           helperText={
             touched && error ? (
