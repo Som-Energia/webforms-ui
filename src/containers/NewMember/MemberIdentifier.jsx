@@ -4,11 +4,13 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
+import { checkPhisicalVAT } from '../../services/utils'
+
 import InputField from '../Gurb/components/InputField'
 import {
   handleInputNif,
   handleInputNifBlur,
-  handleCheckNifFormat
+  handleCheckNifFormat,
 } from '../../utils/commonHandles'
 
 const MemberIdentifier = (props) => {
@@ -19,7 +21,7 @@ const MemberIdentifier = (props) => {
     setFieldValue,
     setFieldError,
     setErrors,
-    setFieldTouched
+    setFieldTouched,
   } = props
   const { t } = useTranslation()
 
@@ -30,15 +32,15 @@ const MemberIdentifier = (props) => {
         setFieldError,
         'new_member.nif'
       )
+      let is_physical = checkPhisicalVAT(values?.new_member?.nif)
+      setFieldValue('new_member.is_physical', is_physical)
     }
   }, [values.new_member.nif])
 
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
-          {t('MEMBER_PAGE_NIF')}
-        </Typography>
+        <Typography variant="headline3">{t('MEMBER_PAGE_NIF')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <InputField

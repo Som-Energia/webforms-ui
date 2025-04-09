@@ -38,37 +38,71 @@ const MemberSummary = (props) => {
     es_ES: 'Español',
     ca_ES: 'Català',
     eu_ES: 'Euskera',
-    gl_ES: 'Galego'
+    gl_ES: 'Galego',
+  }
+
+  const legalReviewFields = {
+    icon: <PersonIcon sx={iconRequirements} />,
+    title: t('GURB_REVIEW_HOLDER_TITLE'),
+    field: [
+      {
+        reviewLabel: t('BUSINESS_NAME'),
+        reviewValue: values?.new_member?.name,
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+      },
+      {
+        reviewLabel: t('CIF'),
+        reviewValue: values?.new_member?.nif,
+        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+      },
+      {
+        reviewLabel: t('PROXY'),
+        reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
+        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+      },
+      {
+        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+        reviewValue: `${values?.address?.street} ${values?.address?.number}`,
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+      },
+      {
+        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+        reviewValue: values?.address?.city?.name,
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+      },
+    ],
+  }
+
+  const physicalReviewFields = {
+    icon: <PersonIcon sx={iconRequirements} />,
+    title: t('GURB_REVIEW_HOLDER_TITLE'),
+    field: [
+      {
+        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
+        reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+      },
+      {
+        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
+        reviewValue: values?.new_member?.nif,
+        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+      },
+      {
+        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+        reviewValue: `${values?.address?.street} ${values?.address?.number}`,
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+      },
+      {
+        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+        reviewValue: values?.address?.city?.name,
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+      },
+    ],
   }
 
   const reviewFields = [
     [
-      {
-        icon: <PersonIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_HOLDER_TITLE'),
-        field: [
-          {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
-            reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
-          },
-          {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
-            reviewValue: values?.new_member?.nif,
-            step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
-          },
-          {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
-            reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
-          },
-          {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
-            reviewValue: values?.address?.city?.name,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
-          },
-        ],
-      },
+      values?.new_member?.is_physical ? physicalReviewFields : legalReviewFields,
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
         title: t('GURB_REVIEW_CONTACT_INFORMATION_TITLE'),
@@ -105,7 +139,7 @@ const MemberSummary = (props) => {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
             step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO'],
-            hide: values?.new_member?.payment_method != 'iban'
+            hide: values?.new_member?.payment_method != 'iban',
           },
         ],
       },
@@ -123,28 +157,24 @@ const MemberSummary = (props) => {
   ) : (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
-          {t('MEMBER_PAGE_SUMMARY')}
-        </Typography>
+        <Typography variant="headline3">{t('MEMBER_PAGE_SUMMARY')}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <InputTitle
-          text={t('MEMBER_PAGE_SUMMARY_QUESTION')}
-        />
+        <InputTitle text={t('MEMBER_PAGE_SUMMARY_QUESTION')} />
       </Grid>
       <Grid item xs={12}>
         <ReviewTable tableFields={reviewFields} />
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
-            control={
+          control={
             <Checkbox
-                data-cy="terms_accepted"
-                checked={values?.new_member?.terms_accepted}
-                onChange={handleCheckboxChange}
+              data-cy="terms_accepted"
+              checked={values?.new_member?.terms_accepted}
+              onChange={handleCheckboxChange}
             />
-            }
-            label={t('ACCEPT_TERMS')}
+          }
+          label={t('ACCEPT_TERMS')}
         />
       </Grid>
     </Grid>

@@ -55,8 +55,14 @@ export const memberIdentifierValidations = Yup.object().shape({
 export const memberPersonalDataValidations = Yup.object().shape({
   new_member: Yup.object().shape({
     name: Yup.string().required('NO_NAME'),
-    surname1: Yup.string().required('NO_SURNAME1'),
-    surname2: Yup.string().required('NO_SURNAME2'),
+    surname1: Yup.string().when('is_phisical', {
+      is: true,
+      then: Yup.string().required('NO_SURNAME1')
+    }),
+    surname2: Yup.string().when('is_phisical', {
+      is: true,
+      then: Yup.string().required('NO_SURNAME2')
+    }),
     email: Yup.string().required('NO_EMAIL').email('NO_EMAIL'),
     email2: Yup.string().test(
       'repeatEmail',
@@ -69,7 +75,21 @@ export const memberPersonalDataValidations = Yup.object().shape({
     language: Yup.string().required('NO_LANGUAGE'),
     privacy_policy_accepted: Yup.bool()
       .required('UNACCEPTED_PRIVACY_POLICY')
-      .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY')
+      .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY'),
+    proxyname: Yup.string().when('is_phisical', {
+      is: false,
+      then: Yup.string().required('NO_PROXY_NAME')
+    }),
+    proxynif: Yup.string().when('is_phisical', {
+      is: false,
+      then: Yup.string().required('NO_PROXY_NIF')
+    }),
+    legal_person_accepted: Yup.string().when('is_phisical', {
+      is: false,
+      then: Yup.bool()
+      .required('ACCEPT_LEGAL_PERSON')
+      .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+    })
   }),
   address: Yup.object().shape({
     street: Yup.string().required('NO_ADDRESS'),

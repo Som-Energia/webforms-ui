@@ -44,7 +44,6 @@ const NewMemberForm = (props) => {
 
   const initialValues = {
     is_client: undefined,
-    has_light: undefined,
     address: {
       street: '',
       number: undefined,
@@ -52,12 +51,12 @@ const NewMemberForm = (props) => {
       state: undefined,
       city: undefined,
       lat: undefined,
-      long: undefined
+      long: undefined,
     },
     new_member: {
       nif: '',
       become_member: false,
-      isphisical: true,
+      is_physical: true,
       proxynif_valid: false,
       proxynif: '',
       proxyname: '',
@@ -73,12 +72,13 @@ const NewMemberForm = (props) => {
       language: `${i18n.language}_ES`,
       how_meet_us: undefined,
       payment_method: undefined,
-      sepa_accepted: undefined,
+      sepa_accepted: false,
       iban: undefined,
-      terms_accepted: false
+      terms_accepted: false,
+      legal_person_accepted: false
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false
+    generic_especific_conditons_accepted: false,
   }
 
   const validationSchemas = [
@@ -144,7 +144,8 @@ const NewMemberForm = (props) => {
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
         validateOnChange={true}
-        validateOnBlur={false}>
+        validateOnBlur={false}
+      >
         {(formikProps) => {
           return (
             <>
@@ -156,8 +157,9 @@ const NewMemberForm = (props) => {
                 sx={{
                   marginTop: '2rem',
                   justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
+                  alignItems: 'center',
+                }}
+              >
                 {activeStep !== 0 && (
                   <Grid item sm={2} xs={12}>
                     <PrevButton
@@ -180,9 +182,7 @@ const NewMemberForm = (props) => {
                   ) : (
                     <SubmitButton
                       disabled={loading || !formikProps.isValid}
-                      onClick={() =>
-                        handlePost()
-                      }
+                      onClick={() => handlePost()}
                     />
                   )}
                 </Grid>
