@@ -750,5 +750,6 @@
     "HOW_MEET_US_OPTION_8": "Redes sociales",
     "HOW_MEET_US_OPTION_9": "Otras",
     "MEMBER_PAGE_NIF": "Indica el NIF de la nueva persona socia",
-    "MEMBER_PAGE_PERSONAL_DATA": "Datis de la nueva persona socia"
+    "MEMBER_PAGE_PERSONAL_DATA": "Datos de la nueva persona socia",
+    "MEMBER_PAGE_PAYMENT_METHOD": "Pago"
 }

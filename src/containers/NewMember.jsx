@@ -9,7 +9,11 @@ import Grid from '@mui/material/Grid'
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
 import SubmitButton from './Gurb/components/SubmitButton'
-import { memberIdentifierValidations, memberPersonalDataValidations } from './Gurb/newMemberValidations'
+import {
+  memberIdentifierValidations,
+  memberPersonalDataValidations,
+  memberPaymentMethodValidations
+} from './Gurb/newMemberValidations'
 
 import noValidation from '../formValidations/noValidation'
 
@@ -69,6 +73,9 @@ const NewMemberForm = (props) => {
       phone2: undefined,
       language: `${i18n.language}_ES`,
       how_meet_us: undefined,
+      payment_method: undefined,
+      sepa_accepted: undefined,
+      iban: undefined,
       privacy_policy_accepted: false
     },
     privacy_policy_accepted: false,
@@ -78,7 +85,7 @@ const NewMemberForm = (props) => {
   const validationSchemas = [
     memberIdentifierValidations,
     memberPersonalDataValidations,
-    noValidation,
+    memberPaymentMethodValidations,
     noValidation
   ]
 

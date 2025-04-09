@@ -924,5 +924,7 @@
     "HOW_MEET_US_OPTION_8": "Xarxes socials",
     "HOW_MEET_US_OPTION_9": "Altres",
     "MEMBER_PAGE_NIF": "Indica el NIF de la nova persona sòcia",
-    "MEMBER_PAGE_PERSONAL_DATA": "Dades de la nova persona sòcia"
+    "MEMBER_PAGE_PERSONAL_DATA": "Dades de la nova persona sòcia",
+    "MEMBER_PAGE_PAYMENT_METHOD": "Pagament",
+    "MEMBER_PAGE_PAYMENT_METHOD_QUESTION": "Escull el mètode de pagament"
 }
