@@ -9,9 +9,9 @@ const InputTitle = ({ text, textStyle, required }) => {
         alignItems: 'flex-start',
         flexDirection: 'row'
       }}>
-      <Typography variant="body.md.bold">{text}</Typography>
+      <Typography variant="body.sm.bold">{text}</Typography>
       {required && (
-        <Typography variant="body.md.bold" sx={{color: 'red' }}>*</Typography>
+        <Typography variant="body.sm.bold" sx={{color: 'red' }}>*</Typography>
       )}
     </Box>
   )

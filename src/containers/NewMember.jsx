@@ -12,10 +12,9 @@ import SubmitButton from './Gurb/components/SubmitButton'
 import {
   memberIdentifierValidations,
   memberPersonalDataValidations,
-  memberPaymentMethodValidations
+  memberPaymentMethodValidations,
+  memberSummaryValidations
 } from './Gurb/newMemberValidations'
-
-import noValidation from '../formValidations/noValidation'
 
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import SummaryContext from '../context/SummaryContext'
@@ -76,7 +75,7 @@ const NewMemberForm = (props) => {
       payment_method: undefined,
       sepa_accepted: undefined,
       iban: undefined,
-      privacy_policy_accepted: false
+      terms_accepted: false
     },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false
@@ -86,7 +85,7 @@ const NewMemberForm = (props) => {
     memberIdentifierValidations,
     memberPersonalDataValidations,
     memberPaymentMethodValidations,
-    noValidation
+    memberSummaryValidations
   ]
 
   const nextStep = (formikProps) => {
@@ -121,6 +120,10 @@ const NewMemberForm = (props) => {
   }
 
   const formikRef = useRef(null)
+
+  useEffect(() => {
+    formikRef.current.validateForm()
+  }, [activeStep])
 
   useEffect(() => {
     if (url !== '') {
@@ -178,12 +181,7 @@ const NewMemberForm = (props) => {
                     <SubmitButton
                       disabled={loading || !formikProps.isValid}
                       onClick={() =>
-                        handlePost({
-                          soci: 'Eustaquio',
-                          cost:
-                            NEW_MEMBER_COST +
-                            formikProps.values.contract.gurb_power_cost
-                        })
+                        handlePost()
                       }
                     />
                   )}

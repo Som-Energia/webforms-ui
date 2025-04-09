@@ -905,8 +905,9 @@
     "GURB_PAYMENT_REVIEW_TEXT_CUSTOMER_COST":"És una aportació al capital social, un pagament únic, que es retorna en el cas que qualsevol dia vulguis donar-te de baixa",
     "GURB_PAYMENT_REVIEW_TITLE_GURB_COST":"Cost d'adhesió al GURB",
     "GURB_PAYMENT_REVIEW_TEXT_GURB_COST":"Potènncia contractada de 0.5KW amb IVA innclòs. La quota del GURB es cobrarà mensualment a travées de domiciliació bancària.",
-    "BIRTHDATE":"Data de naixement",
-    "GENDER": "Gènere",
+    "GURB_PAYMENT_SUBMIT": "Finalitzar",
+    "BIRTHDATE":"Data de naixement (opcional)",
+    "GENDER": "Gènere (opcional)",
     "HOW_MEET_US": "Com ens has conegut?",
     "GENDER_WOMAN": "Dona",
     "GENDER_MAN": "Home",
@@ -926,5 +927,7 @@
     "MEMBER_PAGE_NIF": "Indica el NIF de la nova persona sòcia",
     "MEMBER_PAGE_PERSONAL_DATA": "Dades de la nova persona sòcia",
     "MEMBER_PAGE_PAYMENT_METHOD": "Pagament",
-    "MEMBER_PAGE_PAYMENT_METHOD_QUESTION": "Escull el mètode de pagament"
+    "MEMBER_PAGE_PAYMENT_METHOD_QUESTION": "Escull el mètode de pagament",
+    "MEMBER_PAGE_SUMMARY": "Revisa i confirma les dades",
+    "MEMBER_PAGE_SUMMARY_QUESTION": "Revisa les dades i, si són correctes, clica el botó \"Finalitzar\""
 }

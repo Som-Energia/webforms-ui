@@ -6,7 +6,6 @@ import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 
 import ReviewField from './ReviewField'
-import { textBody1, textHeader4, textSubtitle2 } from '../../gurbTheme'
 
 const ReviewMobileTable = ({ tableFields }) => {
   return tableFields.map((rows, index) => {
@@ -23,7 +22,7 @@ const ReviewMobileTable = ({ tableFields }) => {
                   <Grid item xs={10}>
                     <Grid container spacing={1}>
                       <Grid item xs={10}>
-                        <Typography sx={textHeader4}>
+                        <Typography variant="body.md.bold">
                           {details.title}
                         </Typography>
                       </Grid>
@@ -31,7 +30,7 @@ const ReviewMobileTable = ({ tableFields }) => {
                         <Grid container spacing={1}>
                           {details.subtitle && (
                             <Grid item xs={10}>
-                              <Typography sx={textBody1}>
+                              <Typography variant="body.md.regular">
                                 {details.subtitle}
                               </Typography>
                             </Grid>
@@ -54,7 +53,7 @@ const ReviewMobileTable = ({ tableFields }) => {
                           )}
                           {details.footer && (
                             <Grid item xs={10}>
-                              <Typography sx={textSubtitle2}>
+                              <Typography variant="body.md.regular">
                                 {details.footer}
                               </Typography>
                             </Grid>
