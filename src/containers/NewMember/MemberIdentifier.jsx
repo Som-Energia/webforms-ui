@@ -10,7 +10,7 @@ import InputField from '../Gurb/components/InputField'
 import {
   handleInputNif,
   handleInputNifBlur,
-  handleCheckNifFormat,
+  handleCheckNifFormat
 } from '../../utils/commonHandles'
 
 const MemberIdentifier = (props) => {
@@ -21,7 +21,7 @@ const MemberIdentifier = (props) => {
     setFieldValue,
     setFieldError,
     setErrors,
-    setFieldTouched,
+    setFieldTouched
   } = props
   const { t } = useTranslation()
 
@@ -33,7 +33,10 @@ const MemberIdentifier = (props) => {
         'new_member.nif'
       )
       let is_physical = checkPhisicalVAT(values?.new_member?.nif)
-      setFieldValue('new_member.is_physical', is_physical)
+      setFieldValue(
+        'new_member.person_type',
+        is_physical ? 'physic-person' : 'legal-person'
+      )
     }
   }, [values.new_member.nif])
 

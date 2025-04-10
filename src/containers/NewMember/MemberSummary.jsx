@@ -102,7 +102,7 @@ const MemberSummary = (props) => {
 
   const reviewFields = [
     [
-      values?.new_member?.is_physical ? physicalReviewFields : legalReviewFields,
+      values?.new_member?.person_type == 'physic-person' ? physicalReviewFields : legalReviewFields,
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
         title: t('GURB_REVIEW_CONTACT_INFORMATION_TITLE'),

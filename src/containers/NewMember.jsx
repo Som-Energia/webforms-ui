@@ -56,8 +56,8 @@ const NewMemberForm = (props) => {
     new_member: {
       nif: '',
       become_member: false,
-      is_physical: true,
-      proxynif_valid: false,
+      is_physical: undefined,
+      proxynif_valid: undefined,
       proxynif: '',
       proxyname: '',
       name: undefined,

@@ -121,7 +121,6 @@ const PhysicalMemberPersonalData = (props) => {
               touched={touched?.new_member?.surname2}
               value={values?.new_member.surname2}
               error={errors?.new_member?.surname2}
-              required={true}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

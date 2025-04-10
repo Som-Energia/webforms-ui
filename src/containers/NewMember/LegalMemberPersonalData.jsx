@@ -19,15 +19,6 @@ const languages = {
   gl_ES: 'Galego',
 }
 
-const gender_options = {
-  woman: t('GENDER_WOMAN'),
-  man: t('GENDER_MAN'),
-  genderfluid: t('GENDER_FLUID'),
-  nonbinary: t('GENDER_NON_BINARY'),
-  others: t('GENDER_OTHERS'),
-  nottosay: t('GENDER_NOT_SAY'),
-}
-
 const how_meet_us_options = {
   O1: t('HOW_MEET_US_OPTION_1'),
   O2: t('HOW_MEET_US_OPTION_2'),

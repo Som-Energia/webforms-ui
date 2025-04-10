@@ -4,7 +4,7 @@ import PhysicalMemberPersonalData from './PhysicalMemberPersonalData'
 const MemberPersonalData = (props) => {
   const { values } = props
 
-  return values?.new_member?.is_physical ? (
+  return values?.new_member?.person_type == 'physic-person' ? (
     <PhysicalMemberPersonalData {...props} />
   ) : (
     <LegalMemberPersonalData {...props} />

@@ -48,52 +48,51 @@ export const memberIdentifierValidations = Yup.object().shape({
     nif: Yup.string()
       .required('ERROR_REQUIRED_FIELD')
       .matches(/(^[A-GI-Z0-9])/, 'CIF_COMMUNITY_OWNERS')
-      .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF'),
+      .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF')
   })
 })
 
 export const memberPersonalDataValidations = Yup.object().shape({
   new_member: Yup.object().shape({
+    person_type: Yup.string().oneOf(['legal-person', 'physic-person']),
     name: Yup.string().required('NO_NAME'),
-    surname1: Yup.string().when('is_phisical', {
-      is: true,
+    surname1: Yup.string().when('person_type', {
+      is: 'physic-person',
       then: Yup.string().required('NO_SURNAME1')
     }),
-    surname2: Yup.string().when('is_phisical', {
-      is: true,
-      then: Yup.string().required('NO_SURNAME2')
-    }),
+    surname2: Yup.string(),
     email: Yup.string().required('NO_EMAIL').email('NO_EMAIL'),
-    email2: Yup.string().test(
-      'repeatEmail',
-      'NO_REPEATED_EMAIL',
-      function () {
-        return this.parent.email === this.parent.email2
-      }
-    ),
+    email2: Yup.string().test('repeatEmail', 'NO_REPEATED_EMAIL', function () {
+      return this.parent.email === this.parent.email2
+    }),
     phone1: Yup.string().min(9, 'NO_PHONE').required('NO_PHONE'),
     language: Yup.string().required('NO_LANGUAGE'),
     privacy_policy_accepted: Yup.bool()
       .required('UNACCEPTED_PRIVACY_POLICY')
       .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY'),
-    proxyname: Yup.string().when('is_phisical', {
-      is: false,
+    proxyname: Yup.string().when('person_type', {
+      is: 'legal-person',
       then: Yup.string().required('NO_PROXY_NAME')
     }),
-    proxynif: Yup.string().when('is_phisical', {
-      is: false,
+    proxynif: Yup.string().when('person_type', {
+      is: 'legal-person',
       then: Yup.string().required('NO_PROXY_NIF')
     }),
-    legal_person_accepted: Yup.string().when('is_phisical', {
-      is: false,
-      then: Yup.bool()
-      .required('ACCEPT_LEGAL_PERSON')
-      .oneOf([true], 'ACCEPT_LEGAL_PERSON')
-    })
+    legal_person_accepted: Yup.bool().when(
+      'person_type',
+      (person_type, schema) => {
+        console.log('person_type', person_type)
+        return person_type == 'legal-person'
+          ? schema
+              .required('ACCEPT_LEGAL_PERSON')
+              .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+          : schema
+      }
+    )
   }),
   address: Yup.object().shape({
     street: Yup.string().required('NO_ADDRESS'),
-    number: Yup.number().required('NO_NUMBER'),
+    number: Yup.number().required('NO_NUMBER')
   })
 })
 
@@ -108,24 +107,20 @@ export const memberPaymentMethodValidations = Yup.object().shape({
     }),
     iban_valid: Yup.bool().when('payment_method', {
       is: 'iban',
-      then: Yup.bool()
-        .required('IBAN_ERROR')
-        .oneOf([true],'IBAN_ERROR')
+      then: Yup.bool().required('IBAN_ERROR').oneOf([true], 'IBAN_ERROR')
     }),
     sepa_accepted: Yup.bool().when('payment_method', {
       is: 'iban',
-      then: Yup.bool()
-        .required('IBAN_ERROR')
-        .oneOf([true], 'IBAN_ERROR')
+      then: Yup.bool().required('IBAN_ERROR').oneOf([true], 'IBAN_ERROR')
     })
   })
 })
 
 export const memberSummaryValidations = Yup.object().shape({
   new_member: Yup.object().shape({
-      terms_accepted: Yup.bool()
-        .required('UNACCEPTED_TERMS')
-        .oneOf([true], 'UNACCEPTED_TERMS')
+    terms_accepted: Yup.bool()
+      .required('UNACCEPTED_TERMS')
+      .oneOf([true], 'UNACCEPTED_TERMS')
   })
 })
 
