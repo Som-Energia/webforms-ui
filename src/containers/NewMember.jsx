@@ -76,6 +76,7 @@ const NewMemberForm = (props) => {
       sepa_accepted: false,
       iban: undefined,
       terms_accepted: false,
+      comercial_info_accepted: false,
       legal_person_accepted: false
     },
     privacy_policy_accepted: false,
