@@ -22,6 +22,7 @@ import MemberIdentifier from './NewMember/MemberIdentifier'
 import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
+import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 
 const MAX_STEP_NUMBER = 3
 const NEW_MEMBER_COST = 100
@@ -90,7 +91,10 @@ const NewMemberForm = (props) => {
 
   const nextStep = (formikProps) => {
     let next
-    if (summaryField && activeStep !== 3) {
+    if (
+      summaryField !== undefined &&
+      activeStep !== NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+    ) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
     } else {

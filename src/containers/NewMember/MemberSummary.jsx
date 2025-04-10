@@ -58,7 +58,7 @@ const MemberSummary = (props) => {
       {
         reviewLabel: t('PROXY'),
         reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),

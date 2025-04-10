@@ -35,7 +35,7 @@ const ReviewField = ({ label, value, step }) => {
           variant="body.sm.regular"
           color="secondary.dark"
         >
-          {step ? (
+          {step != undefined ? (
             <Link
               component="button"
               // variant="body2"

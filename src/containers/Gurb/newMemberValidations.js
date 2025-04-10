@@ -81,7 +81,6 @@ export const memberPersonalDataValidations = Yup.object().shape({
     legal_person_accepted: Yup.bool().when(
       'person_type',
       (person_type, schema) => {
-        console.log('person_type', person_type)
         return person_type == 'legal-person'
           ? schema
               .required('ACCEPT_LEGAL_PERSON')

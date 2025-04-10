@@ -165,7 +165,7 @@ const NewContractForm = (props) => {
   const nextStep = (formikProps) => {
     let next
     if (
-      summaryField &&
+      summaryField !== undefined &&
       activeStep !== CONTRACT_FORM_SUBSTEPS['IDENTIFY_HOLDER']
     ) {
       next = MAX_STEP_NUMBER
