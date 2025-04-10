@@ -171,8 +171,8 @@ export const buttonGurbDark = {
   textTransform: 'capitalize',
   borderRadius: '2rem',
   border: '1px solid transparent',
-  backgroundColor: '#1E1E1E',
-  color: '#FFFFFF',
+  backgroundColor: 'primary.extraLight',
+  color: 'primary.main',
   paddingLeft: '1rem',
   paddingRight: '1rem',
   boxShadow: 'none',
@@ -195,7 +195,7 @@ export const buttonGurbLight = {
   paddingRight: '1rem',
   boxShadow: 'none',
   '& .MuiButton-startIcon': {
-    color: '#1E1E1E',
+    color: 'primary.main',
     '& svg': { width: '0.8rem', hight: '0.8rem' }
   },
   '&.Mui-disabled': {
@@ -204,12 +204,10 @@ export const buttonGurbLight = {
     }
   },
   '&:hover': {
-    backgroundColor: '#1E1E1E',
-    color: '#FFFFFF',
+    backgroundColor: 'primary.extraLight',
     border: '1px solid transparent',
     boxShadow: 'none',
     '& .MuiButton-startIcon': {
-      color: '#FFFFFF',
       '& svg': { width: '0.8rem', hight: '0.8rem' }
     }
   },

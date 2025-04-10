@@ -756,5 +756,9 @@
     "MEMBER_PAGE_SUMMARY": "Revisa y confirma los datos",
     "MEMBER_PAGE_SUMMARY_QUESTION": "Revisa los datos y, si són correctos, clica el botón \"Finalizar\"",
     "CIF": "CIF",
-    "COMERCIAL_INFO_ACCEPTED": "Nuevo check para recibir información comercial de Som Serveis"
+    "COMERCIAL_INFO_ACCEPTED": "Nuevo check para recibir información comercial de Som Serveis",
+    "IDENTIFY_MEMBER": "Identificación",
+    "MEMBER_INFO": "Datos personales",
+    "PAYMENT_INFO": "Pago",
+    "SUMMARY": "Confirmar datos"
 }
