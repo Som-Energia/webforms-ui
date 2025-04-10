@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid'
 import { textSubtitle } from './gurbTheme'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
+import { GURB_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import HolderIdentification from './pages/Contract/HolderIdentification'
 import HolderPersonalData from './pages/Contract/HolderPersonalData'
 import HolderVoluntaryDonation from './pages/Contract/VoluntaryDonation'
@@ -125,7 +126,7 @@ const Contract = (props) => {
         {getTitle()}
       </Grid>
       <Grid item xs={12}>
-        <SomStepper step={activeStep} connectors={CONTRACT_STEPS} />
+        <SomStepper activeStep={activeStep} steps={GURB_CONTRACT_FORM_SUBSTEPS} showNames={false} />
       </Grid>
       <Grid item xs={12}>
         {error ? getStepResult(errorInfo) : getStep()}

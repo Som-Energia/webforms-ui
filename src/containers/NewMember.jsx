@@ -17,12 +17,13 @@ import {
 } from './Gurb/newMemberValidations'
 
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 import SummaryContext from '../context/SummaryContext'
 import MemberIdentifier from './NewMember/MemberIdentifier'
 import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
-import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
+import SomStepper from './Gurb/components/SomStepper'
 
 const MAX_STEP_NUMBER = 3
 const NEW_MEMBER_COST = 100
@@ -149,11 +150,11 @@ const NewMemberForm = (props) => {
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
         validateOnChange={true}
-        validateOnBlur={false}
-      >
+        validateOnBlur={false}>
         {(formikProps) => {
           return (
             <>
+              <SomStepper activeStep={activeStep} steps={NEW_MEMBER_FORM_SUBSTEPS} />
               {getStep(formikProps)}
               <Grid
                 container

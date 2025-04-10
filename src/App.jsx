@@ -481,7 +481,9 @@ const App = (props) => {
                         element={
                           <GurbErrorContextProvider>
                             <GurbLoadingContextProvider>
-                              <GurbForm {...props} />
+                              <SummaryContextProvider>
+                                <GurbForm {...props} />
+                              </SummaryContextProvider>
                             </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
                         }

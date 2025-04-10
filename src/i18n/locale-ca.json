@@ -931,5 +931,9 @@
     "MEMBER_PAGE_SUMMARY": "Revisa i confirma les dades",
     "MEMBER_PAGE_SUMMARY_QUESTION": "Revisa les dades i, si són correctes, clica el botó \"Finalitzar\"",
     "CIF": "CIF",
-    "COMERCIAL_INFO_ACCEPTED": "Nou xec per rebre info comercial de Som Serveis"
+    "COMERCIAL_INFO_ACCEPTED": "Nou xec per rebre info comercial de Som Serveis",
+    "IDENTIFY_MEMBER": "Identificació",
+    "MEMBER_INFO": "Dades personals",
+    "PAYMENT_INFO": "Pagament",
+    "SUMMARY": "Confirmar dades"
 }

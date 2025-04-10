@@ -7,6 +7,7 @@ import { textSubtitle, textHeader2 } from './gurbTheme'
 
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbErrorContext from '../../context/GurbErrorContext'
+import { GURB_FORM_SUBSTEPS } from '../../services/steps'
 import GurbParticipation from './pages/Gurb/GurbParticipation'
 import Payment from './pages/Gurb/Payment'
 import SomStepper from './components/SomStepper'
@@ -47,7 +48,7 @@ const Contract = (props) => {
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper steps={stepperSteps} activeStep={stepperActiveStep} />
       <Typography sx={textHeader2}>{getTitle()}</Typography>
-      <SomStepper step={activeStep} connectors={GURB_SECTION_STEPS} />
+      <SomStepper activeStep={activeStep} steps={GURB_FORM_SUBSTEPS} showNames={false} />
       {error ? getStepResult(errorInfo) : getStep()}
     </>
   )

@@ -1,53 +1,58 @@
-import Stepper from '@mui/material/Stepper'
-import Step from '@mui/material/Step'
-import StepConnector, {
-  stepConnectorClasses
-} from '@mui/material/StepConnector'
-import { useEffect, useState } from 'react'
-
+import { useTranslation } from 'react-i18next'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 
 const SomStepper = (props) => {
-  const { step, connectors } = props
-  const [activeStep, setActiveStep] = useState(0)
-
-  useEffect(() => {
-    setActiveStep(step + 1)
-  }, [step])
+  const { activeStep, steps, showNames = true } = props
+  const { t } = useTranslation()
 
   return (
-    <>
-      <Stepper
-        activeStep={activeStep}
-        connector={
-          <StepConnector
+    <Stack
+      direction="row"
+      spacing={2}
+      sx={{
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: '2rem',
+        marginBottom: '3rem'
+      }}>
+      {Object.entries(steps).map(([stepName, stepNumber], index) => {
+        return (
+          <Box
             sx={{
-              marginTop: '1rem',
-              marginBottom: '2rem',
-              [`&.${stepConnectorClasses.active}`]: {
-                [`& .${stepConnectorClasses.line}`]: {
-                  borderColor: '#1E1E1E'
-                }
-              },
-              [`&.${stepConnectorClasses.completed}`]: {
-                [`& .${stepConnectorClasses.line}`]: {
-                  borderColor: '#1E1E1E'
-                }
-              },
-              [`& .${stepConnectorClasses.line}`]: {
-                borderColor: '#E6E6E6',
-                borderTopWidth: 6,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+            <Box
+              sx={{
+                width: `100%`,
+                height: '6px',
+                backgroundColor:
+                  activeStep >= index ? 'primary.main' : 'secondary.light',
                 borderRadius: '12px'
-              }
-            }}
-          />
-        }>
-        {Array(connectors)
-          .fill(0)
-          .map((label, index) => {
-            return <Step key={index} />
-          })}
-      </Stepper>
-    </>
+              }}
+            />
+            {showNames && (
+              <Box
+                sx={{
+                  marginTop: '6px'
+                }}>
+                <Typography
+                  key={index}
+                  color={
+                    activeStep >= index ? 'primary.main' : 'secondary.light'
+                  }>
+                  {t(stepName)}
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        )
+      })}
+    </Stack>
   )
 }
 export default SomStepper

@@ -8,6 +8,7 @@ import { textBody3, textSubtitle } from './gurbTheme'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
 import useCheckMobileScreen from '../../services/checkMobileScreen'
+import { GURB_REQUIREMENTS_SUBSTEPS } from '../../services/steps'
 import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
 import SelfConsumption from './pages/Requirements/SelfConsumption'
@@ -15,7 +16,6 @@ import MemberQuestion from './pages/Requirements/MemberQuestion'
 import SomStepper from './components/SomStepper'
 import SomGurbStepper from './components/SomGurbStepper'
 import Header from './components/Header'
-
 
 const Requirements = (props) => {
   const { values, activeStep, stepperActiveStep, stepperSteps } = props
@@ -52,7 +52,13 @@ const Requirements = (props) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        {!isMobile && <SomStepper step={activeStep} connectors={4 + 1} />}
+        {!isMobile && (
+          <SomStepper
+            activeStep={activeStep}
+            steps={GURB_REQUIREMENTS_SUBSTEPS}
+            showNames={false}
+          />
+        )}
       </Grid>
       <Grid item xs={12}>
         {error ? getStepResult(errorInfo) : getStep()}
