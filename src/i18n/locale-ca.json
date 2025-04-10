@@ -930,5 +930,6 @@
     "MEMBER_PAGE_PAYMENT_METHOD_QUESTION": "Escull el mètode de pagament",
     "MEMBER_PAGE_SUMMARY": "Revisa i confirma les dades",
     "MEMBER_PAGE_SUMMARY_QUESTION": "Revisa les dades i, si són correctes, clica el botó \"Finalitzar\"",
-    "CIF": "CIF"
+    "CIF": "CIF",
+    "COMERCIAL_INFO_ACCEPTED": "Nou xec per rebre info comercial de Som Serveis"
 }

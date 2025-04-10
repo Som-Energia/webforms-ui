@@ -133,23 +133,23 @@ const MemberSummary = (props) => {
           {
             reviewLabel: t('PAYMENT_METHOD'),
             reviewValue: values?.new_member?.payment_method,
-            step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO'],
+            step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO']
           },
           {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
             step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO'],
-            hide: values?.new_member?.payment_method != 'iban',
-          },
-        ],
-      },
-    ],
+            hide: values?.new_member?.payment_method != 'iban'
+          }
+        ]
+      }
+    ]
   ]
 
-  const handleCheckboxChange = async (event) => {
+  const handleCheckboxChange = async (event, fieldName) => {
     let value = event.target.checked
-    await setFieldValue('new_member.terms_accepted', value)
-    setFieldTouched('new_member.terms_accepted', true)
+    await setFieldValue(fieldName, value)
+    setFieldTouched(fieldName, true)
   }
 
   return loading ? (
@@ -171,12 +171,33 @@ const MemberSummary = (props) => {
             <Checkbox
               data-cy="terms_accepted"
               checked={values?.new_member?.terms_accepted}
-              onChange={handleCheckboxChange}
+              onChange={(event) => {
+                handleCheckboxChange(event, 'new_member.terms_accepted')
+              }}
             />
           }
           label={t('ACCEPT_TERMS')}
         />
       </Grid>
+      {values?.new_member?.person_type == 'legal-person' && (
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                data-cy="comercial_info_accepted"
+                checked={values?.new_member?.comercial_info_accepted}
+                onChange={(event) => {
+                  handleCheckboxChange(
+                    event,
+                    'new_member.comercial_info_accepted'
+                  )
+                }}
+              />
+            }
+            label={t('COMERCIAL_INFO_ACCEPTED')}
+          />
+        </Grid>
+      )}
     </Grid>
   )
 }
