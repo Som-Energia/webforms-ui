@@ -31,7 +31,7 @@ Cypress.Commands.add('choosePaymentMethod', ( creditCard = false ) => {
 })
 
 Cypress.Commands.add('paymentData', (iban) => {
-  cy.get('[data-cy="iban"]').type(iban)
+  cy.get('[data-cy="iban_number"]').type(iban)
 
   cy.get('[data-cy="iban_check"]').click()
 
