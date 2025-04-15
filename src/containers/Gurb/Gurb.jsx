@@ -10,7 +10,7 @@ import GurbErrorContext from '../../context/GurbErrorContext'
 import { GURB_FORM_SUBSTEPS } from '../../services/steps'
 import GurbParticipation from './pages/Gurb/GurbParticipation'
 import Payment from './pages/Gurb/Payment'
-import SomStepper from './components/SomStepper'
+import SomStepper from '../../components/SomStepper'
 import SomGurbStepper from './components/SomGurbStepper'
 
 

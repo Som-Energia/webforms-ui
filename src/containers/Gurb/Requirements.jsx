@@ -13,7 +13,7 @@ import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
 import SelfConsumption from './pages/Requirements/SelfConsumption'
 import MemberQuestion from './pages/Requirements/MemberQuestion'
-import SomStepper from './components/SomStepper'
+import SomStepper from '../../components/SomStepper'
 import SomGurbStepper from './components/SomGurbStepper'
 import Header from './components/Header'
 

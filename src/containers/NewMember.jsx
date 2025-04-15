@@ -6,18 +6,17 @@ import { Formik } from 'formik'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
-import PrevButton from './Gurb/components/PrevButton'
-import NextButton from './Gurb/components/NextButton'
-import SubmitButton from './Gurb/components/SubmitButton'
+import PrevButton from '../components/NewButtons/PrevButton'
+import NextButton from '../components/NewButtons/NextButton'
+import SubmitButton from '../components/NewButtons/SubmitButton'
+import SomStepper from '../components/SomStepper'
 
-import GurbLoadingContext from '../context/GurbLoadingContext'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 import SummaryContext from '../context/SummaryContext'
 import MemberIdentifier from './NewMember/MemberIdentifier'
 import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
-import SomStepper from './Gurb/components/SomStepper'
 
 import memberIdentifierValidations from './NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations,'
@@ -34,7 +33,6 @@ const NewMemberForm = (props) => {
   const [data, setData] = useState()
   const formTPV = useRef(null)
 
-  const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
 
   const [activeStep, setActiveStep] = useState(0)
@@ -52,7 +50,7 @@ const NewMemberForm = (props) => {
       state: undefined,
       city: undefined,
       lat: undefined,
-      long: undefined,
+      long: undefined
     },
     new_member: {
       nif: '',
@@ -80,7 +78,7 @@ const NewMemberForm = (props) => {
       legal_person_accepted: false
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false,
+    generic_especific_conditons_accepted: false
   }
 
   const validationSchemas = [
@@ -155,7 +153,10 @@ const NewMemberForm = (props) => {
         {(formikProps) => {
           return (
             <>
-              <SomStepper activeStep={activeStep} steps={NEW_MEMBER_FORM_SUBSTEPS} />
+              <SomStepper
+                activeStep={activeStep}
+                steps={NEW_MEMBER_FORM_SUBSTEPS}
+              />
               {getStep(formikProps)}
               <Grid
                 container
@@ -164,9 +165,8 @@ const NewMemberForm = (props) => {
                 sx={{
                   marginTop: '2rem',
                   justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
+                  alignItems: 'center'
+                }}>
                 {activeStep !== 0 && (
                   <Grid item sm={2} xs={12}>
                     <PrevButton
@@ -179,16 +179,14 @@ const NewMemberForm = (props) => {
                   {activeStep !== MAX_STEP_NUMBER ? (
                     <NextButton
                       disabled={
-                        loading ||
-                        !formikProps.isValid ||
-                        activeStep === MAX_STEP_NUMBER
+                        !formikProps.isValid || activeStep === MAX_STEP_NUMBER
                       }
                       onClick={() => nextStep(formikProps)}
                       title={'NEXT'}
                     />
                   ) : (
                     <SubmitButton
-                      disabled={loading || !formikProps.isValid}
+                      disabled={!formikProps.isValid}
                       onClick={() => handlePost()}
                     />
                   )}

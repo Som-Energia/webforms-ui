@@ -19,7 +19,7 @@ import Power from './pages/Contract/Power'
 import TariffMode from './pages/Contract/TariffMode'
 import ContractSummary from './pages/Contract/ContractSummary'
 import TextRecomendation from './components/TextRecomendation'
-import SomStepper from './components/SomStepper'
+import SomStepper from '../../components/SomStepper'
 import SomGurbStepper from './components/SomGurbStepper'
 
 const Contract = (props) => {
