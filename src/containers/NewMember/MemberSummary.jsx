@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
-import ReviewTable from '../Gurb/components/review/ReviewTable'
-import InputTitle from '../../containers/Gurb/components/InputTitle'
+import ReviewTable from '../../components/review/ReviewTable'
+import InputTitle from '../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -13,7 +13,7 @@ import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
-import { iconRequirements } from '../Gurb/gurbTheme'
+import { iconRequirements } from '../../themes/commonStyles'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
 
 import Loading from '../../components/Loading'

@@ -9,10 +9,10 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 
-import { textHeader4, textHeader5, textHelper1 } from '../gurbTheme'
+import { textHeader4, textHeader5, textHelper1 } from '../containers/Gurb/gurbTheme'
 import InputTitle from './InputTitle'
 
-import { textField } from '../gurbTheme'
+import { textField } from '../containers/Gurb/gurbTheme'
 
 export const HelperText = ({
   helperText,

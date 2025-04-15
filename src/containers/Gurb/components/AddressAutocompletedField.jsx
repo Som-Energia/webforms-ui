@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 
 import { textHeader4, textField } from '../gurbTheme'
-import InputTitle from './InputTitle'
+import InputTitle from '../../../components/InputTitle'
 
 export default function LocationInput({
   id,

@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 
 import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../components/Chooser'
-import { HelperText } from '../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
+import { HelperText } from '../../../../components/InputField'
 
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
-import { iconRequirements, iconOffRequirements } from '../../gurbTheme'
+import { iconRequirements } from '../../../../themes/commonStyles'
+import { iconOffRequirements } from '../../gurbTheme'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { checkMember } from '../../../../services/api'

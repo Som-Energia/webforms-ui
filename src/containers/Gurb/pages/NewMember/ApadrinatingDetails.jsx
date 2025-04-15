@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { checkMember } from '../../../../services/api'

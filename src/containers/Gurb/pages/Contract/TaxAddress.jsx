@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
-import Chooser from '../../components/Chooser'
+import InputField from '../../../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
 import LocationInput from '../../components/AddressAutocompletedField'
-import RequiredTitle from '../../components/InputTitle'
+import RequiredTitle from '../../../../components/InputTitle'
 
 import ArticleIcon from '@mui/icons-material/Article'
 import Typography from '@mui/material/Typography'
@@ -12,10 +12,9 @@ import Grid from '@mui/material/Grid'
 
 import { getPlaceDetails } from '../../../../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../../../../services/api'
-
+import { iconRequirements } from '../../../../themes/commonStyles'
 import {
   iconOffRequirements,
-  iconRequirements,
   textHeader4,
   textHeader5
 } from '../../gurbTheme'

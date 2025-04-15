@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import { textHeader3, textHeader4, textBody1 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import Button from '@mui/material/Button'
 
 

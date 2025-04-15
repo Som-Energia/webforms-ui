@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import InputField from '../Gurb/components/InputField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { t } from 'i18next'
 
+import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
 import SelectField from '../../components/SelectField'
 import PhoneField from '../../components/PhoneField'

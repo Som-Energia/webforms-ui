@@ -11,7 +11,7 @@ import 'dayjs/locale/ca'
 import 'dayjs/locale/eu'
 import 'dayjs/locale/gl'
 
-import InputTitle from '../containers/Gurb/components/InputTitle'
+import InputTitle from './InputTitle'
 import { textHeader4, textHeader5 } from '../containers/Gurb/gurbTheme'
 
 const CalendarField = ({

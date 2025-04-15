@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid'
 
 import MuiPhoneNumber from 'mui-phone-number'
 
-import InputTitle from '../containers/Gurb/components/InputTitle'
+import InputTitle from './InputTitle'
 
 export const HelperText = ({
   helperText,

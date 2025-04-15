@@ -8,9 +8,8 @@ import Grid from '@mui/material/Grid'
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined'
 
 import ReviewField from './ReviewField'
-import { textReviewLabel } from '../../gurbTheme'
-import { iconRequirements, textHeader4 } from '../../gurbTheme'
-import useCheckMobileScreen from '../../../../services/checkMobileScreen'
+import { iconRequirements } from '../../themes/commonStyles'
+import useCheckMobileScreen from '../../services/checkMobileScreen'
 
 const ReviewPricesTable = ({ reviewPrices, prices }) => {
   const { t } = useTranslation()
@@ -64,7 +63,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
       <Grid item xs={10} sm={11}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Typography sx={textHeader4}>
+            <Typography variant="headline4.bold">
               {t('GURB_REVIEW_PRICES_POWER_TITLE')}
             </Typography>
           </Grid>
@@ -82,7 +81,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
                     }}>
                     <Grid container spacing={1}>
                       <Grid item xs={12}>
-                        <Typography sx={textReviewLabel}>
+                        <Typography variant="body.sm.regular">
                           {t(detail.title)}
                         </Typography>
                       </Grid>

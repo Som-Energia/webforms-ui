@@ -7,7 +7,7 @@ import { handleChange, handleChangeInteger } from '../utils/commonHandles'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
-import InputField from '../containers/Gurb/components/InputField'
+import InputField from './InputField'
 
 const AddressField = (props) => {
   const {

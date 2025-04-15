@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import InputTitle from '../containers/Gurb/components/InputTitle'
+import InputTitle from './InputTitle'
 
 const SelectField = (props) => {
   const {

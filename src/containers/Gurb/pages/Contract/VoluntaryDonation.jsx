@@ -1,17 +1,16 @@
 import { useTranslation } from 'react-i18next'
 
-import Chooser from '../../components/Chooser'
-import RequiredTitle from '../../components/InputTitle'
-import { HelperText } from '../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
+import RequiredTitle from '../../../../components/InputTitle'
+import { HelperText } from '../../../../components/InputField'
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 
+import { iconRequirements } from '../../../../themes/commonStyles'
 import {
   iconOffRequirements,
-  iconRequirements,
   textBody1,
   textHeader4
 } from '../../gurbTheme'

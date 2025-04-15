@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid'
 
 import { checkPhisicalVAT } from '../../services/utils'
 
-import InputField from '../Gurb/components/InputField'
+import InputField from '../../components/InputField'
 import {
   handleInputNif,
   handleInputNifBlur,

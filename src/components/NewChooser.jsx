@@ -1,11 +1,11 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { textHeader4, textBody1 } from '../gurbTheme'
+import { textHeader4, textBody1 } from '../containers/Gurb/gurbTheme'
 import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserGurb, chooserGurbSelected } from '../gurbTheme'
+import { chooserGurb, chooserGurbSelected } from '../containers/Gurb/gurbTheme'
 
 const Option = ({
   isSelected,

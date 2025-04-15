@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'

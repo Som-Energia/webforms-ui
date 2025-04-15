@@ -7,7 +7,7 @@ import {
   textCheckbox,
   textField
 } from '../../gurbTheme'
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import Typography from '@mui/material/Typography'

@@ -1,5 +1,6 @@
 import SvgIcon from '@mui/material/SvgIcon'
-import { iconRequirements, iconOffRequirements } from '../../containers/Gurb/gurbTheme'
+import { iconRequirements } from '../../themes/commonStyles'
+import { iconOffRequirements } from '../../containers/Gurb/gurbTheme'
 
 export const ReceiptIcon = (props) => {
   const { on = true } = props

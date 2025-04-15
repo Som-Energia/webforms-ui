@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import { textHeader4 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import ReviewField from '../../components/review/ReviewField'
+import ReviewField from '../../../../components/review/ReviewField'
 import PersonIcon from '@mui/icons-material/Person';
 import Divider from '@mui/material/Divider'
 import FormControlLabel from '@mui/material/FormControlLabel'

@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
-import Chooser from '../../components/Chooser'
-import RequiredTitle from '../../components/InputTitle'
+import InputField from '../../../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
+import RequiredTitle from '../../../../components/InputTitle'
 
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
 import Grid from '@mui/material/Grid'
 
+import { iconRequirements } from '../../../../themes/commonStyles'
 import {
   iconOffRequirements,
-  iconRequirements,
   textHeader4
 } from '../../gurbTheme'
 import { checkVatFormat } from '../../../../services/utils'

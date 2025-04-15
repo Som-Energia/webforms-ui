@@ -5,9 +5,9 @@ import Grid from '@mui/material/Grid'
 
 import { checkCnae } from '../../../services/api'
 import GurbLoadingContext from '../../../context/GurbLoadingContext'
-import InputField from './InputField'
+import InputField from '../../../components/InputField'
 import Select from './Select'
-import InputTitle from './InputTitle'
+import InputTitle from '../../../components/InputTitle'
 import { textHeader4, textField } from '../gurbTheme'
 
 const CnaeField = (props) => {

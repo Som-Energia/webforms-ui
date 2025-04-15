@@ -1,9 +1,5 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import Chooser from '../../containers/Gurb/components/Chooser'
-import InputTitle from '../../containers/Gurb/components/InputTitle'
-import InputField from '../../containers/Gurb/components/InputField'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -12,7 +8,10 @@ import Checkbox from '@mui/material/Checkbox'
 
 import { ReceiptIcon, CreditCardIcon } from '../../data/icons/Icons'
 import { checkIbanFormat } from '../../services/utils'
-import GurbLoadingContext from '../../context/GurbLoadingContext'
+
+import Chooser from '../../components/NewChooser'
+import InputTitle from '../../components/InputTitle'
+import InputField from '../../components/InputField'
 
 const PaymentMethod = (props) => {
   const {
@@ -24,14 +23,12 @@ const PaymentMethod = (props) => {
     setFieldTouched,
   } = props
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
 
   const handleMethodPaymentQuestion = (value) => {
     setFieldValue('new_member.payment_method', value)
   }
 
   const handleCheckIbanResponse = async () => {
-    setLoading(true)
     const valid = checkIbanFormat(values.new_member.iban)
     if (valid) {
       await setFieldError('new_member.iban_valid', undefined)
@@ -40,7 +37,6 @@ const PaymentMethod = (props) => {
       await setFieldError('holder.iban_valid', t('INVALID_IBAN'))
       setFieldValue('new_member.iban_valid', false)
     }
-    setLoading(false)
   }
 
   const handleInputIban = (event) => {
@@ -118,7 +114,6 @@ const PaymentMethod = (props) => {
               touched={touched?.new_member?.iban}
               value={values?.new_member.iban}
               error={errors?.new_member?.iban_valid || errors?.new_member?.iban}
-              isLoading={loading}
               required={true}
             />
           </Grid>

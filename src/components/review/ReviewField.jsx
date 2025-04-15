@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
-import SummaryContext from '../../../../context/SummaryContext'
+import SummaryContext from '../../context/SummaryContext'
 
 const ReviewField = ({ label, value, step }) => {
   const { setSummaryField } = useContext(SummaryContext)
