@@ -53,7 +53,7 @@ const SelectField = (props) => {
           onChange={handleChange}>
           <MenuItem sx={{ display: 'none' }} label="None" value="" />
           {Object.keys(options).map((id) => (
-            <MenuItem key={id} value={id}>
+            <MenuItem id={`${fieldName}-${id}`} key={id} value={id}>
               {options[id]}
             </MenuItem>
           ))}

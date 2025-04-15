@@ -3,7 +3,7 @@ Cypress.Commands.add('identifyNewMember', (nif) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, statusCode = 200) => {
+Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, optionalData = false) => {
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
   cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
   cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
@@ -19,12 +19,21 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   cy.get('[data-cy="repeat_email"]').type(personalData.email2)
   cy.get('[data-cy="new_member.phone1"]').type(personalData.phone1)
 
+  if (optionalData)
+  {
+    cy.get('[id="new_member.gender"]').click()
+    cy.get('[id="new_member.gender-nonbinary"]').click()
+    cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
+    cy.get('[id="new_member.how_meet_us"]').click()
+    cy.get('[id="new_member.how_meet_us-O1"]').click()
+  }
+
   cy.get('[data-cy="privacy_policy"]').click()
 
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('personalLegalDataMember', (personalData, validAddress, statusCode = 200) => {
+Cypress.Commands.add('personalLegalDataMember', (personalData, validAddress, optionalData = false) => {
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
   cy.get('[data-cy="new_member.proxyname"]').type(personalData.proxyname)
   cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
@@ -39,6 +48,12 @@ Cypress.Commands.add('personalLegalDataMember', (personalData, validAddress, sta
   cy.get('[data-cy="email"]').type(personalData.email)
   cy.get('[data-cy="repeat_email"]').type(personalData.email2)
   cy.get('[data-cy="new_member.phone1"]').type(personalData.phone1)
+
+  if (optionalData)
+  {
+    cy.get('[id="new_member.how_meet_us"]').click()
+    cy.get('[id="new_member.how_meet_us-O1"]').click()
+  }
 
   cy.get('[data-cy="privacy_policy"]').click()
   cy.get('[data-cy="legal_person"]').click()
