@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-const InputTitle = ({ text, textStyle, required }) => {
+const InputTitle = ({ text, required }) => {
   return (
     <Box
       sx={{
@@ -11,7 +11,9 @@ const InputTitle = ({ text, textStyle, required }) => {
       }}>
       <Typography variant="body.sm.bold">{text}</Typography>
       {required && (
-        <Typography variant="body.sm.bold" sx={{color: 'red' }}>*</Typography>
+        <Typography variant="body.sm.bold" sx={{ color: 'red' }}>
+          *
+        </Typography>
       )}
     </Box>
   )

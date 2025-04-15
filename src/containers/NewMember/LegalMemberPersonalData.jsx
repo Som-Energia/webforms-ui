@@ -10,7 +10,8 @@ import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
 import SelectField from '../../components/SelectField'
 import PhoneField from '../../components/PhoneField'
-import { handleChange } from '../../utils/commonHandles'
+import { useHandleChange } from '../../hooks/useHandleChange'
+import { useHandleBlur } from '../../hooks/useHandleBlur'
 
 const languages = {
   es_ES: 'Español',
@@ -43,6 +44,9 @@ const LegalMemberPersonalData = (props) => {
   } = props
   const { i18n, t } = useTranslation()
 
+  const handleChange = useHandleChange(setFieldValue)
+  const handleBlur = useHandleBlur(setFieldTouched)
+
   const handleCheckboxPrivacyPolicy = (event) => {
     let value = event.target.checked
     setFieldValue('new_member.privacy_policy_accepted', value)
@@ -53,10 +57,6 @@ const LegalMemberPersonalData = (props) => {
     let value = event.target.checked
     setFieldValue('new_member.legal_person_accepted', value)
     setFieldTouched('new_member.legal_person_accepted', true)
-  }
-
-  function handleChangePhone(value) {
-    setFieldValue('new_member.phone1', value)
   }
 
   return (
@@ -72,12 +72,8 @@ const LegalMemberPersonalData = (props) => {
             <InputField
               name={'new_member.name'}
               textFieldName={t('BUSINESS_NAME')}
-              handleChange={(event) => {
-                handleChange(event, setFieldValue)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.name', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.name}
               value={values?.new_member.name}
               error={errors?.new_member?.name}
@@ -88,12 +84,8 @@ const LegalMemberPersonalData = (props) => {
             <InputField
               name={'new_member.proxyname'}
               textFieldName={t('PROXY_NAME')}
-              handleChange={(event) => {
-                handleChange(event, setFieldValue)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.proxyname', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.proxyname}
               value={values?.new_member.proxyname}
               error={errors?.new_member?.proxyname}
@@ -104,12 +96,8 @@ const LegalMemberPersonalData = (props) => {
             <InputField
               name={'new_member.proxynif'}
               textFieldName={t('PROXY_NIF')}
-              handleChange={(event) => {
-                handleChange(event, setFieldValue)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.proxynif', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.proxynif}
               value={values?.new_member.proxynif}
               error={errors?.new_member?.proxynif}
@@ -125,14 +113,10 @@ const LegalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
-              name="email"
+              name="new_member.email"
               textFieldName={t('EMAIL')}
-              handleChange={(event) => {
-                setFieldValue('new_member.email', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.email', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.email}
               value={values?.new_member.email}
               error={errors?.new_member?.email}
@@ -141,14 +125,10 @@ const LegalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
-              name="repeat_email"
+              name="new_member.email2"
               textFieldName={t('HOLDER_EMAIL_2')}
-              handleChange={(event) => {
-                setFieldValue('new_member.email2', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.email2', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.email2}
               value={values?.new_member.email2}
               error={errors?.new_member?.email2}
@@ -157,15 +137,13 @@ const LegalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <PhoneField
-              name={'new_member.phone1'}
+              name={'new_member.phone'}
               textFieldName={t('GURB_PHONE1_LABEL')}
-              handleChange={handleChangePhone}
-              handleBlur={() => {
-                setFieldTouched('new_member.phone1', true)
-              }}
-              touched={touched?.new_member?.phone1}
-              value={values?.new_member.phone1}
-              error={errors?.new_member?.phone1}
+              values={values}
+              errors={errors}
+              touched={touched}
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
               required={true}
             />
           </Grid>

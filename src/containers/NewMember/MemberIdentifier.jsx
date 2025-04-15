@@ -7,11 +7,9 @@ import Grid from '@mui/material/Grid'
 import { checkPhisicalVAT } from '../../services/utils'
 
 import InputField from '../../components/InputField'
-import {
-  handleInputNif,
-  handleInputNifBlur,
-  handleCheckNifFormat
-} from '../../utils/commonHandles'
+import { handleCheckNifFormat } from '../../utils/commonHandles'
+import { useHandleChangeNif } from '../../hooks/useHandleChange'
+import { useHandleBlur } from '../../hooks/useHandleBlur'
 
 const MemberIdentifier = (props) => {
   const {
@@ -24,6 +22,9 @@ const MemberIdentifier = (props) => {
     setFieldTouched
   } = props
   const { t } = useTranslation()
+
+  const handleChangeNif = useHandleChangeNif(setFieldValue)
+  const handleBlur = useHandleBlur(setFieldTouched)
 
   useEffect(() => {
     if (values?.new_member?.nif && values?.new_member?.nif.length === 9) {
@@ -47,17 +48,13 @@ const MemberIdentifier = (props) => {
       </Grid>
       <Grid item xs={12}>
         <InputField
-          name="vat"
+          name="new_member.nif"
           textFieldLabel={t('GURB_NIF_LABEL')}
           textFieldName={t('GURB_NIF_FIELD')}
           textFieldHelper={t('GURB_NIF_HELPER')}
           iconHelper={true}
-          handleChange={(event) => {
-            handleInputNif(event, setFieldValue, 'new_member.nif')
-          }}
-          handleBlur={(event) => {
-            handleInputNifBlur(setFieldTouched, 'new_member.nif')
-          }}
+          handleChange={handleChangeNif}
+          handleBlur={handleBlur}
           touched={touched?.new_member?.nif}
           value={values?.new_member.nif}
           error={errors?.new_member?.nif}

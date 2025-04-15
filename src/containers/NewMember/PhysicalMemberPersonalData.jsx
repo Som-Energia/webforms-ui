@@ -11,7 +11,8 @@ import AddressField from '../../components/AddressField'
 import SelectField from '../../components/SelectField'
 import PhoneField from '../../components/PhoneField'
 import CalendarField from '../../components/CalendarField'
-import { handleChange } from '../../utils/commonHandles'
+import { useHandleChange } from '../../hooks/useHandleChange'
+import { useHandleBlur } from '../../hooks/useHandleBlur'
 
 const languages = {
   es_ES: 'Español',
@@ -53,6 +54,9 @@ const PhysicalMemberPersonalData = (props) => {
   } = props
   const { i18n, t } = useTranslation()
 
+  const handleChange = useHandleChange(setFieldValue)
+  const handleBlur = useHandleBlur(setFieldTouched)
+
   function handleChangeBirthdate(value) {
     setFieldValue('new_member.birthdate', value)
   }
@@ -76,12 +80,8 @@ const PhysicalMemberPersonalData = (props) => {
             <InputField
               name={'new_member.name'}
               textFieldName={t('NAME')}
-              handleChange={(event) => {
-                handleChange(event, setFieldValue)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.name', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.name}
               value={values?.new_member.name}
               error={errors?.new_member?.name}
@@ -92,12 +92,8 @@ const PhysicalMemberPersonalData = (props) => {
             <InputField
               name={'new_member.surname1'}
               textFieldName={t('HOLDER_SURNAME1')}
-              handleChange={(event) => {
-                handleChange(event, setFieldValue)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.surname1', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.surname1}
               value={values?.new_member.surname1}
               error={errors?.new_member?.surname1}
@@ -108,12 +104,8 @@ const PhysicalMemberPersonalData = (props) => {
             <InputField
               name={'new_member.surname2'}
               textFieldName={t('HOLDER_SURNAME2')}
-              handleChange={(event) => {
-                handleChange(event, setFieldValue)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.surname2', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.surname2}
               value={values?.new_member.surname2}
               error={errors?.new_member?.surname2}
@@ -144,14 +136,10 @@ const PhysicalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
-              name="email"
+              name="new_member.email"
               textFieldName={t('EMAIL')}
-              handleChange={(event) => {
-                setFieldValue('new_member.email', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.email', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.email}
               value={values?.new_member.email}
               error={errors?.new_member?.email}
@@ -160,14 +148,10 @@ const PhysicalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
-              name="repeat_email"
+              name="new_member.email2"
               textFieldName={t('HOLDER_EMAIL_2')}
-              handleChange={(event) => {
-                setFieldValue('new_member.email2', event.target.value)
-              }}
-              handleBlur={() => {
-                setFieldTouched('new_member.email2', true)
-              }}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               touched={touched?.new_member?.email2}
               value={values?.new_member.email2}
               error={errors?.new_member?.email2}

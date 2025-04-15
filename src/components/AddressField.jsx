@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
-import { handleChange, handleChangeInteger } from '../utils/commonHandles'
+import { useHandleChange, useHandleChangeInteger } from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
@@ -25,6 +25,10 @@ const AddressField = (props) => {
   } = props
 
   const { t } = useTranslation()
+
+  const handleChange = useHandleChange(setFieldValue)
+  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
+
   const [addressValue, setAddressValue] = useState(
     values[addressFieldName]?.street
   )
@@ -117,9 +121,7 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.floor`}
           textFieldName={t('FLOOR')}
-          handleChange={(event) => {
-            handleChangeInteger(event, setFieldValue)
-          }}
+          handleChange={handleChangeInteger}
           touched={touched[addressFieldName]?.floor}
           value={values[addressFieldName]?.floor}
           error={errors[addressFieldName]?.floor}
@@ -130,9 +132,7 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.door`}
           textFieldName={t('DOOR')}
-          handleChange={(event) => {
-            handleChangeInteger(event, setFieldValue)
-          }}
+          handleChange={handleChangeInteger}
           touched={touched[addressFieldName]?.door}
           value={values[addressFieldName]?.door}
           error={errors[addressFieldName]?.door}
@@ -143,9 +143,7 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.stairs`}
           textFieldName={t('STAIRS')}
-          handleChange={(event) => {
-            handleChange(event, setFieldValue)
-          }}
+          handleChange={handleChange}
           touched={touched[addressFieldName]?.stairs}
           value={values[addressFieldName]?.stairs}
           error={errors[addressFieldName]?.stairs}
@@ -156,9 +154,7 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.bloc`}
           textFieldName={t('BLOCK')}
-          handleChange={(event) => {
-            handleChange(event, setFieldValue)
-          }}
+          handleChange={handleChange}
           touched={touched[addressFieldName]?.bloc}
           value={values[addressFieldName]?.bloc}
           error={errors[addressFieldName]?.bloc}

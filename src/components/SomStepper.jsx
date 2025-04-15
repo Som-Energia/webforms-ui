@@ -20,13 +20,16 @@ const SomStepper = (props) => {
       {Object.entries(steps).map(([stepName, stepNumber], index) => {
         return (
           <Box
+            key={`container-${index}`}
             sx={{
               width: '100%',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center'
-            }}>
+            }}
+          >
             <Box
+              key={`step-${index}`}
               sx={{
                 width: `100%`,
                 height: '6px',
@@ -37,6 +40,7 @@ const SomStepper = (props) => {
             />
             {showNames && (
               <Box
+                key={`name-${index}`}
                 sx={{
                   marginTop: '6px'
                 }}>
