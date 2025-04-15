@@ -109,7 +109,7 @@ const MemberSummary = (props) => {
         field: [
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
-            reviewValue: values?.new_member?.phone1,
+            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
             step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
           },
           {

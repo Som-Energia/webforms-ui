@@ -13,7 +13,11 @@ const memberPersonalDataValidations = Yup.object().shape({
     email2: Yup.string().test('repeatEmail', 'NO_REPEATED_EMAIL', function () {
       return this.parent.email === this.parent.email2
     }),
-    phone1: Yup.string().min(9, 'NO_PHONE').required('NO_PHONE'),
+    phone: Yup.string().required('NO_PHONE'),
+    phone_code: Yup.string().required('NO_PHONE'),
+    phone_valid: Yup.bool()
+      .required('NO_PHONE')
+      .oneOf([true], 'INCORRECT_PHONE'),
     language: Yup.string().required('NO_LANGUAGE'),
     privacy_policy_accepted: Yup.bool()
       .required('UNACCEPTED_PRIVACY_POLICY')

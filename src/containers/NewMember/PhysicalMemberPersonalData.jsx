@@ -63,10 +63,6 @@ const PhysicalMemberPersonalData = (props) => {
     setFieldTouched('new_member.privacy_policy_accepted', true)
   }
 
-  function handleChangePhone(value) {
-    setFieldValue('new_member.phone1', value)
-  }
-
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
@@ -180,15 +176,13 @@ const PhysicalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <PhoneField
-              name={'new_member.phone1'}
+              name={'new_member.phone'}
               textFieldName={t('GURB_PHONE1_LABEL')}
-              handleChange={handleChangePhone}
-              handleBlur={() => {
-                setFieldTouched('new_member.phone1', true)
-              }}
-              touched={touched?.new_member?.phone1}
-              value={values?.new_member.phone1}
-              error={errors?.new_member?.phone1}
+              values={values}
+              errors={errors}
+              touched={touched}
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
               required={true}
             />
           </Grid>

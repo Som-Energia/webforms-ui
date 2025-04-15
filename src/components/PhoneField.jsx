@@ -1,80 +1,118 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import Grid from '@mui/material/Grid'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import InputBase from '@mui/material/InputBase'
 
-import MuiPhoneNumber from 'mui-phone-number'
+import metadata from 'libphonenumber-js/metadata.full.json'
+import { getCountryCallingCode, getCountries } from 'libphonenumber-js/core'
+import { isValidPhoneNumber } from 'libphonenumber-js'
 
 import InputTitle from './InputTitle'
+import InputField from './InputField'
 
-export const HelperText = ({
-  helperText,
-  iconHelper,
-  justifyContent = false
-}) => {
+const SelectCountry = ({ code, setCode, setCountry, codes }) => {
+  const handleChange = (event) => {
+    setCode(event.target.value)
+    setCountry(event.target.name)
+  }
   return (
-    <Box display="flex" justifyContent={justifyContent}>
-      {iconHelper && (
-        <InfoOutlinedIcon sx={{ fontSize: '14px', margin: '2px' }} />
-      )}
-      {helperText}
-    </Box>
+    <Select
+      fullWidth
+      value={code}
+      renderValue={(value) => {
+        return value
+      }}
+      variant="outlined"
+      input={<InputBase />}
+      sx={{
+        border: 'none',
+        borderRadius: '0px',
+        borderRight: '1px solid',
+        borderColor: 'secondary.light',
+        borderHeight: '50%',
+        backgroundColor: 'transparent'
+      }}
+      onChange={handleChange}>
+      <MenuItem sx={{ display: 'none' }} label="None" value="" />
+      {Object.keys(codes).map((id) => (
+        <MenuItem id={`${id}`} key={id} name={id} value={codes[id]}>
+          {`${codes[id]} (${id})`}
+        </MenuItem>
+      ))}
+    </Select>
   )
 }
 
-const PhoneField = ({
-  textFieldLabel,
-  textFieldName,
-  textFieldNameHelper,
-  textFieldHelper,
-  iconHelper = false,
-  handleChange,
-  handleBlur,
-  touched,
-  value,
-  error,
-  readonlyField = false,
-  required = false,
-  name = false
-}) => {
+const PhoneField = (props) => {
+  const {
+    name = false,
+    textFieldName,
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched,
+    required = false
+  } = props
   const { t } = useTranslation()
+  const [code, setCode] = useState(values.new_member.phone_code)
+  const [country, setCountry] = useState('ES')
+  const [number, setNumber] = useState(values.new_member.phone)
+  const codes = getCountryDialCodesMap()
+
+  function getCountryDialCodesMap() {
+    const countries = getCountries(metadata)
+    const result = {}
+    countries.forEach((countryCode) => {
+      const callingCode = getCountryCallingCode(countryCode, metadata)
+      result[countryCode] = `+${callingCode}`
+    })
+    return result
+  }
+
+  function validatePhoneFormat() {
+    const isValid = isValidPhoneNumber(number, country)
+    setFieldValue(`${name}_valid`, isValid)
+  }
+
+  useEffect(() => {
+    setFieldValue(name, number)
+  }, [number])
+
+  useEffect(() => {
+    setFieldValue(`${name}_code`, code)
+  }, [code])
 
   return (
-    <Grid container spacing={1}>
+    <Grid container>
       <Grid item xs={12}>
         <InputTitle text={textFieldName} required={required} />
       </Grid>
       <Grid item xs={12}>
-        <Typography>{textFieldNameHelper}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <MuiPhoneNumber
-          variant="outlined"
-          defaultCountry="es"
-          disableAreaCodes={true}
+        <InputField
           name={name}
-          data-cy={name}
-          disabled={readonlyField}
-          fullWidth
-          InputProps={{
-            onBlur: handleBlur
+          value={number}
+          handleChange={(event) => {
+            setNumber(event.target.value)
           }}
-          label={value ? undefined : textFieldLabel}
-          helperText={
-            touched && error ? (
-              t(error)
-            ) : (
-              <HelperText
-                helperText={textFieldHelper}
-                iconHelper={iconHelper}
-              />
-            )
+          handleBlur={() => {
+            validatePhoneFormat()
+            setFieldTouched(name, true)
+          }}
+          startAdornmentText={
+            <SelectCountry
+              code={code}
+              setCode={setCode}
+              setCountry={setCountry}
+              codes={codes}
+            />
           }
-          onChange={handleChange}
-          value={value}
-          error={touched && error !== undefined}
+          numInputs={2}
+          touched={touched?.new_member?.phone}
+          error={errors?.new_member?.phone || errors?.new_member?.phone_valid}
         />
       </Grid>
     </Grid>
