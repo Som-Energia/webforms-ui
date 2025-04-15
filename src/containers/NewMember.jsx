@@ -9,12 +9,6 @@ import Grid from '@mui/material/Grid'
 import PrevButton from './Gurb/components/PrevButton'
 import NextButton from './Gurb/components/NextButton'
 import SubmitButton from './Gurb/components/SubmitButton'
-import {
-  memberIdentifierValidations,
-  memberPersonalDataValidations,
-  memberPaymentMethodValidations,
-  memberSummaryValidations
-} from './Gurb/newMemberValidations'
 
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
@@ -24,6 +18,11 @@ import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
 import SomStepper from './Gurb/components/SomStepper'
+
+import memberIdentifierValidations from './NewMember/memberIdentifierValidations'
+import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations,'
+import memberPaymentMethodValidations from './NewMember/paymentMethodValidations'
+import memberSummaryValidations from './NewMember/memberSummaryValidations'
 
 const MAX_STEP_NUMBER = 3
 const NEW_MEMBER_COST = 100
@@ -110,9 +109,11 @@ const NewMemberForm = (props) => {
     let prev = activeStep - 1
     setActiveStep(Math.max(0, prev))
   }
+
   const handlePost = async (values) => {
     console.log('POST final')
   }
+
   const getStep = (props) => {
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />

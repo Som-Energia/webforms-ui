@@ -1,0 +1,46 @@
+import * as Yup from 'yup'
+
+const memberPersonalDataValidations = Yup.object().shape({
+  new_member: Yup.object().shape({
+    person_type: Yup.string().oneOf(['legal-person', 'physic-person']),
+    name: Yup.string().required('NO_NAME'),
+    surname1: Yup.string().when('person_type', {
+      is: 'physic-person',
+      then: Yup.string().required('NO_SURNAME1')
+    }),
+    surname2: Yup.string(),
+    email: Yup.string().required('NO_EMAIL').email('NO_EMAIL'),
+    email2: Yup.string().test('repeatEmail', 'NO_REPEATED_EMAIL', function () {
+      return this.parent.email === this.parent.email2
+    }),
+    phone1: Yup.string().min(9, 'NO_PHONE').required('NO_PHONE'),
+    language: Yup.string().required('NO_LANGUAGE'),
+    privacy_policy_accepted: Yup.bool()
+      .required('UNACCEPTED_PRIVACY_POLICY')
+      .oneOf([true], 'UNACCEPTED_PRIVACY_POLICY'),
+    proxyname: Yup.string().when('person_type', {
+      is: 'legal-person',
+      then: Yup.string().required('NO_PROXY_NAME')
+    }),
+    proxynif: Yup.string().when('person_type', {
+      is: 'legal-person',
+      then: Yup.string().required('NO_PROXY_NIF')
+    }),
+    legal_person_accepted: Yup.bool().when(
+      'person_type',
+      (person_type, schema) => {
+        return person_type == 'legal-person'
+          ? schema
+              .required('ACCEPT_LEGAL_PERSON')
+              .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+          : schema
+      }
+    )
+  }),
+  address: Yup.object().shape({
+    street: Yup.string().required('NO_ADDRESS'),
+    number: Yup.number().required('NO_NUMBER')
+  })
+})
+
+export default memberPersonalDataValidations
