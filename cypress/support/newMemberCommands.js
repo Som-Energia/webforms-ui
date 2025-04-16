@@ -1,5 +1,5 @@
 Cypress.Commands.add('identifyNewMember', (nif) => {
-  cy.get('[data-cy="vat"]').type(nif)
+  cy.get('[data-cy="new_member.nif"]').type(nif)
   cy.get('[data-cy=next]').click()
 })
 
@@ -15,9 +15,9 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   cy.get('[data-cy="address.door"]').type('3')
   cy.get('[data-cy="address.stairs"]').type('B')
   cy.get('[data-cy="address.bloc"]').type('Omega')
-  cy.get('[data-cy="email"]').type(personalData.email)
-  cy.get('[data-cy="repeat_email"]').type(personalData.email2)
-  cy.get('[data-cy="new_member.phone1"]').type(personalData.phone1)
+  cy.get('[data-cy="new_member.email"]').type(personalData.email)
+  cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
+  cy.get('[data-cy="new_member.phone"]').type(personalData.phone).focused().blur()
 
   if (optionalData)
   {
@@ -45,9 +45,9 @@ Cypress.Commands.add('personalLegalDataMember', (personalData, validAddress, opt
   cy.get('[data-cy="address.door"]').type('3')
   cy.get('[data-cy="address.stairs"]').type('B')
   cy.get('[data-cy="address.bloc"]').type('Omega')
-  cy.get('[data-cy="email"]').type(personalData.email)
-  cy.get('[data-cy="repeat_email"]').type(personalData.email2)
-  cy.get('[data-cy="new_member.phone1"]').type(personalData.phone1)
+  cy.get('[data-cy="new_member.email"]').type(personalData.email)
+  cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
+  cy.get('[data-cy="new_member.phone"]').type(personalData.phone).focused().blur()
 
   if (optionalData)
   {

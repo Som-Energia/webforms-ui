@@ -3,6 +3,10 @@
     "input": "montilivi",
     "value": "Avinguda de Montilivi"
   },
+  "validPhone": {
+    "code": "34",
+    "phone_number": "123456789"
+  },
   "personalPhysicalData": {
     "nif": "74865726J",
     "is_physical": "true",
@@ -15,7 +19,8 @@
     "number": "1",
     "email": "somhi@somenergia.coop",
     "email2": "somhi@somenergia.coop",
-    "phone1": "123456789",
+    "phone": "652385827",
+    "phone_code": "+34",
     "language": "ca_ES",
     "how_meet_us": "O1",
     "payment_method": "iban",
@@ -35,7 +40,8 @@
     "number": "1",
     "email": "somhi@somenergia.coop",
     "email2": "somhi@somenergia.coop",
-    "phone1": "123456789",
+    "phone": "652385827",
+    "phone_code": "+34",
     "language": "ca_ES",
     "how_meet_us": "O1",
     "payment_method": "iban",

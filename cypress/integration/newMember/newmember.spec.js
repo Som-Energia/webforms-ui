@@ -21,7 +21,6 @@ describe('Member', () => {
     })
   })
 
-
   describe('Physical member with optional data', function () {
     it('New physical member with optional data', function () {
       cy.identifyNewMember(this.data.personalPhysicalData.nif)
