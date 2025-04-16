@@ -107,7 +107,7 @@ const LegalMemberPersonalData = (props) => {
           <Grid item xs={12} sm={12}>
             <AddressField
               addressFieldName="address"
-              addressLabel={t('GURB_TAX_ADDRESS_FIELD')}
+              addressLabel={t('ADDRESS')}
               {...props}
             />
           </Grid>
@@ -138,7 +138,7 @@ const LegalMemberPersonalData = (props) => {
           <Grid item xs={12} sm={6}>
             <PhoneField
               name={'new_member.phone'}
-              textFieldName={t('GURB_PHONE1_LABEL')}
+              textFieldName={t('MEMBER_PHONE_LABEL')}
               values={values}
               errors={errors}
               touched={touched}
@@ -170,12 +170,12 @@ const LegalMemberPersonalData = (props) => {
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('GURB_NEW_MEMBER_RIGHTS')}
+          {t('NEW_MEMBER_RIGHTS')}
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('GURB_NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
+          {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
         </Typography>
       </Grid>
       <Grid item xs={12}>

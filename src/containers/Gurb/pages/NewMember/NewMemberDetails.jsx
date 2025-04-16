@@ -260,10 +260,10 @@ const NewMemberDetails = (props) => {
         </Box>
         <Box sx={{ marginTop: '2rem' }}>
           <Typography sx={{ ...textSubtitle2, marginBottom: '1rem' }}>
-            {t('GURB_NEW_MEMBER_RIGHTS')}
+            {t('NEW_MEMBER_RIGHTS')}
           </Typography>
           <Typography sx={textSubtitle2}>
-            {t('GURB_NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
+            {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
           </Typography>
           {/* TO DO: make a component? */}
           <FormControlLabel

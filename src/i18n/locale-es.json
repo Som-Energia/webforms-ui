@@ -754,6 +754,7 @@
     "NIF_FIELD": "NIF",
     "MEMBER_NIF_HELPER": "Debe tener 8 números y una letra, sin guines ni puntos (Ej: 12345678A)",
     "MEMBER_PAGE_PERSONAL_DATA": "Datos de la nueva persona socia",
+    "MEMBER_PHONE_LABEL": "Número de telèfono",
     "MEMBER_PAGE_PAYMENT_METHOD": "Pago",
     "MEMBER_PAGE_PAYMENT_METHOD_QUESTION": "Escoge un métofo de pago",
     "MEMBER_PAGE_SUMMARY": "Revisa y confirma los datos",
