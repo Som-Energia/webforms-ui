@@ -114,7 +114,7 @@ const NewMemberDetails = (props) => {
             <InputField
               name="new_member.nif"
               textFieldLabel={t('GURB_NIF_LABEL_NEW_MEMBER_FIELD')}
-              textFieldName={t('GURB_NIF_FIELD')}
+              textFieldName={t('NIF_FIELD')}
               textFieldHelper={t('GURB_NIF_HELPER')}
               iconHelper={true}
               handleChange={handleInputNif}

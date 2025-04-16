@@ -49,9 +49,9 @@ const MemberIdentifier = (props) => {
       <Grid item xs={12}>
         <InputField
           name="new_member.nif"
-          textFieldLabel={t('GURB_NIF_LABEL')}
-          textFieldName={t('GURB_NIF_FIELD')}
-          textFieldHelper={t('GURB_NIF_HELPER')}
+          textFieldLabel={t('NIF_LABEL')}
+          textFieldName={t('NIF_FIELD')}
+          textFieldHelper={t('MEMBER_NIF_HELPER')}
           iconHelper={true}
           handleChange={handleChangeNif}
           handleBlur={handleBlur}
@@ -62,11 +62,11 @@ const MemberIdentifier = (props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {
-            'Si no disposes de NIE i tens passaport, ens pots enviar un correu a info@somenergia.coop amb les dades de la nova persona sòcia (nom, cognoms, passaport adjunt, correu electrònic, adreça i telèfon de contacte) i dades IBAN de pagament.'
-          }
-        </Typography>
+        <Typography
+          variant="body.xs.regular"
+          color="secondary.dark"
+          dangerouslySetInnerHTML={{ __html: t('NEW_MEMBER_NO_VAT_HELP') }}
+        />
       </Grid>
     </Grid>
   )

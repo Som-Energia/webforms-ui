@@ -75,8 +75,8 @@ const MemberDetails = (props) => {
       <Grid item xs={12}>
         <InputField
           name="vat"
-          textFieldLabel={t('GURB_NIF_LABEL')}
-          textFieldName={t('GURB_NIF_FIELD')}
+          textFieldLabel={t('NIF_LABEL')}
+          textFieldName={t('NIF_FIELD')}
           textFieldHelper={t('GURB_NIF_HELPER')}
           iconHelper={true}
           handleChange={handleInputNif}

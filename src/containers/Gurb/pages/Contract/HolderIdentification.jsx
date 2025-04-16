@@ -79,7 +79,7 @@ const HolderIdentification = (props) => {
       <Grid item xs={12}>
         <InputField
           name="holder_vat"
-          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldLabel={t('NIF_LABEL')}
           textFieldName={t('GURB_HOLDER_NIF_FIELD')}
           textFieldNameHelper={t('GURB_HOLDER_NIF_FIELD_HELPER')}
           handleChange={handleInputNif}

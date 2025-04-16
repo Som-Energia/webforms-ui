@@ -74,7 +74,7 @@ const ApadrinatingDetails = (props) => {
       <Grid item xs={12}>
         <InputField
           name="vat"
-          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldLabel={t('NIF_LABEL')}
           textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
           textFieldHelper={t('GURB_NIF_HELPER')}
           iconHelper={true}
