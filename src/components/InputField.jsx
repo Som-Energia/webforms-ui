@@ -17,10 +17,10 @@ export const HelperText = ({ helperText, iconHelper }) => {
     <Box sx={{ display: 'flex', alignItems: 'stretch' }}>
       {iconHelper && (
         <InfoOutlinedIcon
-          sx={{ color: 'secondary.dark', fontSize: '14px', margin: '2px' }}
+          sx={{ color: 'secondary', fontSize: '14px', margin: '2px' }}
         />
       )}
-      <Typography color="secondary.dark" variant="body.xs.regular">
+      <Typography color="secondary" variant="body.xs.regular">
         {helperText}
       </Typography>
     </Box>

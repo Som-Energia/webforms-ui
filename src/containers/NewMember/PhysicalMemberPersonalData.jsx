@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next'
+import { t } from 'i18next'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import { t } from 'i18next'
+import Stack from '@mui/material/Stack'
 
 import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
@@ -192,23 +193,22 @@ const PhysicalMemberPersonalData = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('NEW_MEMBER_RIGHTS')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
-        </Typography>
+        <Stack direction="column" spacing={1}>
+          <Typography variant="body.xs.regular" color="secondary.dark">
+            {t('NEW_MEMBER_RIGHTS')}
+          </Typography>
+          <Typography variant="body.xs.regular" color="secondary.dark">
+            {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
+          </Typography>
+        </Stack>
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
-          //   sx={{ ...textCheckbox, marginTop: '2rem' }}
           control={
             <Checkbox
-              data-cy="privacy_policy"
-              checked={values?.new_member.privacy_policy_accepted}
-              onChange={handleCheckboxChange}
+            data-cy="privacy_policy"
+            checked={values?.new_member.privacy_policy_accepted}
+            onChange={handleCheckboxChange}
             />
           }
           label={

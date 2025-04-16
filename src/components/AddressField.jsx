@@ -98,7 +98,6 @@ const AddressField = (props) => {
           required
           textFieldLabel={t('GURB_ADDRESS_LABEL')}
           textFieldName={addressLabel}
-          textFieldHelper={t('GURB_ADDRESS_HELPER')}
           id={`${addressFieldName}-street`}
           name={`${addressFieldName}.street`}
           value={addressValue}

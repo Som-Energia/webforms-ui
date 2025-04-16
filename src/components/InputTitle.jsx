@@ -6,13 +6,16 @@ const InputTitle = ({ text, required }) => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'flex-start',
-        flexDirection: 'row'
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 1
       }}>
-      <Typography variant="body.sm.bold">{text}</Typography>
+      <Typography variant="input.label" color="primary.main">
+        {text}
+      </Typography>
       {required && (
-        <Typography variant="body.sm.bold" sx={{ color: 'red' }}>
-          *
+        <Typography variant="body.sm.bold" color="error">
+          {'*'}
         </Typography>
       )}
     </Box>

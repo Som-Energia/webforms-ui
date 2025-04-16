@@ -8,7 +8,8 @@ export default function WebFormsTheme() {
       primary: {
         main: '#0B2E34',
         light: '#0c4c27',
-        extraLight: '#CDFF80'
+        extraLight: '#CDFF80',
+        dark: '#1E1E1E'
       },
       primary2: {
         main: '#ff632b',
@@ -16,7 +17,7 @@ export default function WebFormsTheme() {
         alt: '#afb5e8'
       },
       secondary: {
-        main: '#8C8C8C',
+        main: '#C4C4C4',
         dark: '#8C8C8C',
         light: '#D9D9D9'
       },
@@ -58,6 +59,10 @@ export default function WebFormsTheme() {
         fontSize: '16px',
         fontWeight: '400'
       },
+      'input.label': {
+        fontSize: '16px',
+        fontWeight: '500'
+      },
       'body.md.bold': {
         fontSize: '16px',
         fontWeight: '700'
@@ -97,6 +102,7 @@ export default function WebFormsTheme() {
             'headline4.regular': 'h4',
             'headline4.bold': 'h4',
             'body.md.regular': 'span',
+            'input.label': 'span',
             'body.md.bold': 'span',
             'body.sm.regular': 'span',
             'body.sm.bold': 'span',

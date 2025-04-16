@@ -49,10 +49,8 @@ const MemberIdentifier = (props) => {
       <Grid item xs={12}>
         <InputField
           name="new_member.nif"
-          textFieldLabel={t('NIF_LABEL')}
           textFieldName={t('NIF_FIELD')}
           textFieldHelper={t('MEMBER_NIF_HELPER')}
-          iconHelper={true}
           handleChange={handleChangeNif}
           handleBlur={handleBlur}
           touched={touched?.new_member?.nif}

@@ -79,7 +79,6 @@ export default function LocationInput({
                   }
                 }}
                 {...params}
-                required={required}
                 value={inputValue}
                 label={
                   !value && !inputValue && !isFocused ? textFieldLabel : ''

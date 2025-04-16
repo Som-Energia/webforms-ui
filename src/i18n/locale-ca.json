@@ -743,7 +743,7 @@
     "GURB_ADDRESS_TITLE_HELPER": "Hem de verificar que l'adreça estigui dins dels 2 km de radi.",
     "GURB_ADDRESS_FIELD": "Adreça de subministrament",
     "GURB_HOLDER_ADDRESS_FIELD_HELPER": "És la ubicació on es realitza el consum d'energia.",
-    "GURB_ADDRESS_LABEL": "Carrer i número",
+    "GURB_ADDRESS_LABEL": "Carrer Ardenya",
     "GURB_ADDRESS_HELPER": "Exemple: Carrer Indústria, 8, Barcelona, Espanya",
     "GURB_SELFCONSUMPTION_TITLE": "3. Tens alguna modalitat d'autoconsum activa?",
     "GURB_SELFCONSUMPTION_HELPER": "Què és una modalitat d'autoconsum?",

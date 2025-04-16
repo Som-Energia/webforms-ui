@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -12,11 +11,9 @@ import 'dayjs/locale/eu'
 import 'dayjs/locale/gl'
 
 import InputTitle from './InputTitle'
-import { textHeader4, textHeader5 } from '../containers/Gurb/gurbTheme'
 
 const CalendarField = ({
   textFieldName,
-  textFieldNameHelper,
   handleChange,
   value,
   required = false
@@ -26,23 +23,19 @@ const CalendarField = ({
   const language = i18n.language
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
-        <InputTitle
-          text={textFieldName}
-          textStyle={textHeader4}
-          required={required}
-        />
+        <InputTitle text={textFieldName} required={required} />
       </Grid>
       <Grid item xs={12}>
-        <Typography sx={textHeader5}>{textFieldNameHelper}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={language}>
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          adapterLocale={language}>
           <DatePicker
             value={value}
             onChange={handleChange}
             slotProps={{ textField: { fullWidth: true } }}
+            sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}
           />
         </LocalizationProvider>
       </Grid>

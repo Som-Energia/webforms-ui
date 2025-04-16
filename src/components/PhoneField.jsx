@@ -33,7 +33,8 @@ const SelectCountry = ({ code, setCode, setCountry, codes }) => {
         borderRight: '1px solid',
         borderColor: 'secondary.light',
         borderHeight: '50%',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        color: 'secondary.dark'
       }}
       onChange={handleChange}>
       <MenuItem sx={{ display: 'none' }} label="None" value="" />
