@@ -107,8 +107,8 @@ const PaymentMethod = (props) => {
           <Grid item xs={12}>
             <InputField
               name="iban_number"
-              textFieldName={t('GURB_IBAN_FIELD')}
-              textFieldHelper={t('GURB_IBAN_EXAMPLE')}
+              textFieldName={t('MEMBER_PAGE_IBAN')}
+              textFieldHelper={t('IBAN_EXAMPLE')}
               handleChange={handleInputIban}
               handleBlur={handleInputIbanBlur}
               touched={touched?.new_member?.iban}
