@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 import { checkPhisicalVAT } from '../../services/utils'
+import { checkVat } from '../../services/api'
 
 import InputField from '../../components/InputField'
 import { handleCheckNifFormat } from '../../utils/commonHandles'
@@ -26,6 +27,24 @@ const MemberIdentifier = (props) => {
   const handleChangeNif = useHandleChangeNif(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
 
+  const handleCheckNifResponse = async () => {
+    let nif_info = undefined
+    await checkVat(values?.new_member?.nif)
+      .then((response) => {
+        nif_info = response?.data
+      })
+      .catch(() => {
+        console.error('UNEXPECTED')
+      })
+    setFieldError('new_member.nif', undefined)
+    if (nif_info.exists === true){
+      setFieldError('new_member.nif', t('DNI_EXIST'))
+    }
+    if (nif_info.valid === false){
+      setFieldError('new_member.nif', t('FILL_NIF'))
+    }
+  }
+
   useEffect(() => {
     if (values?.new_member?.nif && values?.new_member?.nif.length === 9) {
       handleCheckNifFormat(
@@ -33,6 +52,7 @@ const MemberIdentifier = (props) => {
         setFieldError,
         'new_member.nif'
       )
+      handleCheckNifResponse()
       let is_physical = checkPhisicalVAT(values?.new_member?.nif)
       setFieldValue(
         'new_member.person_type',
