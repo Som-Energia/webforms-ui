@@ -12,7 +12,7 @@ const LegalText = (props) => {
     <Typography
       sx={{
         '& a': {
-          color: 'secondary.main'
+          color: '#0B2E34'
         },
         '& h2': {
           fontSize: '1.25rem'

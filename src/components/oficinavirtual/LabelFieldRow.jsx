@@ -30,8 +30,8 @@ export default LabelFieldRow
 
 const customStyles = {
   label: {
-    background: '#cccc',
-    borderRight: '5px #f2f2f2 solid',
+    background: '#D9D9D9',
+    // borderRight: '5px #eee solid',
     fontSize: '14px',
     padding: '1em',
     margin: '0 0 .5em 0',
@@ -42,8 +42,8 @@ const customStyles = {
     color: 'text.primary'
   },
   highlight: {
-    background: '#cccc',
-    borderRight: '5px #f2f2f2 solid',
+    background: '#D9D9D9',
+    // borderRight: '5px #eee solid',
     fontSize: '14px',
     padding: '1em',
     margin: '0 0 .5em 0',
