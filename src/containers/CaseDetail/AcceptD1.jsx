@@ -33,14 +33,14 @@ function AcceptD1({
     m1: Yup.bool()
       .required(t('UNACCEPTED_PRIVACY_POLICY'))
       .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-  }
-  )
+  })
 
   return (
-    <Paper sx={{
-      mt: 2,
-      p: 2
-    }}>
+    <Paper
+      sx={{
+        mt: 2,
+        p: 2
+      }}>
       <Formik
         initialValues={{
           ...{
@@ -108,11 +108,15 @@ function AcceptD1({
             </Box>
 
             {showD1PowerModificationChooser && (
-              <Box mx={1} mt={1} mb={2} sx={{
-                '& label': {
-                  minHeight: '110px'
-                }
-              }} >
+              <Box
+                mx={1}
+                mt={1}
+                mb={2}
+                sx={{
+                  '& label': {
+                    minHeight: '110px'
+                  }
+                }}>
                 <Chooser
                   question={t('APROFITAR_LA_MODIFICACIO')}
                   onChange={(option) => setFieldValue('m1', option.option)}
@@ -133,11 +137,12 @@ function AcceptD1({
               </Box>
             )}
 
-            <Box sx={{
-              mb: 1,
-              display: 'flex',
-              justifyContent: 'space-between'
-            }} >
+            <Box
+              sx={{
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}>
               {
                 <PrevButton
                   disabled={sending}
@@ -148,13 +153,19 @@ function AcceptD1({
               {
                 <Button
                   type="submit"
+                  disableElevation={true}
                   sx={{
-                    mt: 1,
-                    mr: 1
+                    backgroundColor: '#CDFF80',
+                    color: '#0B2E34',
+                    '&:hover': {
+                      color: '#CDFF80',
+                      backgroundColor: '#0B2E34'
+                    }
                   }}
-                  color="primary"
                   variant="contained"
-                  disabled={(showD1PowerModificationChooser && !isValid) || sending}
+                  disabled={
+                    (showD1PowerModificationChooser && !isValid) || sending
+                  }
                   endIcon={
                     (sending && <CircularProgress size={24} />) ||
                     (values?.m1 === false && <SendIcon />) || (

@@ -127,11 +127,19 @@ function RefuseD1({
                   <>
                     <Button
                       type="submit"
-                      sx={{ mt: 1, mr: 1 }}
+                      disableElevation={true}
+                      sx={{
+                        backgroundColor: '#CDFF80',
+                        color: '#0B2E34',
+                        '&:hover': {
+                          color: '#CDFF80',
+                          backgroundColor: '#0B2E34'
+                        }
+                      }}
                       color="primary"
                       variant="contained"
                       disabled={!isValid || sending}
-                      startIcon={
+                      endIcon={
                         sending ? <CircularProgress size={24} /> : <SendIcon />
                       }>
                       {t('ENVIAR')}

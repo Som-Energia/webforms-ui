@@ -15,7 +15,7 @@ function PrevButton(props) {
         }
       }}
       data-cy="prev"
-      startIcon={<ArrowBackIosIcon />}
+      startIcon={<ArrowBackIosIcon/>}
       disabled={disabled}
       onClick={onClick}
       >

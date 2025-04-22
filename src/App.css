@@ -36,7 +36,7 @@ body {
 #root {
   font-family: 'Outfit';
   background: transparent;
-  color: #747474;
+  color: #1E1E1E;
   font-size: 16px;
 }
 
@@ -85,7 +85,7 @@ StepHeader Component
 }
 
 .header__text {
-  color: #444444;
+  color: #0B2E34;
   font-size: 21px;
   font-weight: 400;
 }

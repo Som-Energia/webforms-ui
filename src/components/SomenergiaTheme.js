@@ -37,7 +37,7 @@ export default function SomEnergiaTheme() {
       secondary: {
         main: '#ff632b', // taronja
         dark: '#8C8C8C', // gris fosc
-        extraDark:'#6f6262',
+        extraDark:'red',
         alt: '#CDFF80',  // verd lima
         light: '#F0F3EC'  // Fondo
 
@@ -56,7 +56,7 @@ export default function SomEnergiaTheme() {
         paper: '#ffffff'
       },
       pagetitle: {
-        main: 'blue'
+        main: '#1E1E1E'
       },
       failure:{
         primary: '#fe6444'
@@ -87,6 +87,22 @@ export default function SomEnergiaTheme() {
           a:{
             textDecoration: 'none'
           }
+        }
+      },
+      MuiAlert: {
+        styleOverrides: {
+          standardSuccess: {
+            backgroundColor: '#E2E8DE',
+            color: '#0B2E34'
+          },
+          // standardError: {
+          //   backgroundColor: '#EE4949',
+          //   color: 'white'
+          // },
+          standardWarning: {
+            backgroundColor: 'rgba(255, 205, 181, 0.5)',
+            color: '#FF632B'
+          },
         }
       }
     },

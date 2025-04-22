@@ -9,6 +9,7 @@ function NextButton({title, ...props}) {
       data-cy="next"
       variant="contained"
       color="primary"
+      disableElevation={true}
       sx={{
         backgroundColor: '#CDFF80',
         color: '#0B2E34',

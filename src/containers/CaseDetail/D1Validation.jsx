@@ -14,7 +14,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import Chooser from '../../components/Chooser'
 
-
 const label = {
   textTransform: 'uppercase',
   paddingRight: '12px',
@@ -22,7 +21,6 @@ const label = {
 }
 
 function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
-
   const { t } = useTranslation()
 
   const handleValidateD1 = (setFieldValue, errors, option) => {
@@ -36,10 +34,12 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
   })
 
   return (
-    <Paper sx={{
-      mt: 2,
-      p: 2
-    }} elevation={0}>
+    <Paper
+      sx={{
+        mt: 2,
+        p: 2
+      }}
+      elevation={0}>
       <Formik
         enableReinitialize
         initialValues={{
@@ -76,21 +76,20 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
             )}
 
             <Box mx={1} mb={2}>
-              <Typography sx={{
-                textTransform: 'uppercase',
-                mt: 2,
-                mb: 2
-              }} variant="h6">
+              <Typography
+                sx={{
+                  textTransform: 'uppercase',
+                  mt: 2,
+                  mb: 2
+                }}
+                variant="h6">
                 {t('DATOS_AUTOCONSUMO')}
               </Typography>
 
               <Box mb={0}>
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('REGISTER_SECTION')}
                     </Typography>
                     <Typography
@@ -101,10 +100,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('SUBSECTION')}
                     </Typography>
                     <Typography
@@ -115,10 +111,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('CIL')}
                     </Typography>
                     <Typography data-cy="cil" variant="body1" gutterBottom>
@@ -126,10 +119,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('CAU')}
                     </Typography>
                     <Typography data-cy="cau" variant="body1" gutterBottom>
@@ -137,10 +127,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('COLLECTIVE')}
                     </Typography>
                     <Typography
@@ -153,20 +140,19 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                 </Grid>
               </Box>
 
-              <Typography sx={{
-                textTransform: 'uppercase',
-                mt: 2,
-                mb: 2
-              }} variant="h6">
+              <Typography
+                sx={{
+                  textTransform: 'uppercase',
+                  mt: 2,
+                  mb: 2
+                }}
+                variant="h6">
                 {t('DATOS_GENERADORES')}
               </Typography>
               <Box mb={0}>
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('INSTALLATION_TYPE')}
                     </Typography>
                     <Typography
@@ -177,10 +163,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('GENERATOR_TECHNOLOGY')}
                     </Typography>
                     <Typography
@@ -191,10 +174,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('SSAA')}
                     </Typography>
                     <Typography data-cy="ssaa" variant="body1" gutterBottom>
@@ -202,10 +182,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography
-                      sx={label}
-                      variant="subtitle2"
-                      gutterBottom>
+                    <Typography sx={label} variant="subtitle2" gutterBottom>
                       {t('INSTALLED_POWER')}
                     </Typography>
                     <Typography
@@ -224,11 +201,14 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                 <Box mx={1} mb={3}>
                   <Divider />
                 </Box>
-                <Box mx={1} mb={2} sx={{
-                  '& label': {
-                    minHeight: 'auto'
-                  }
-                }}>
+                <Box
+                  mx={1}
+                  mb={2}
+                  sx={{
+                    '& label': {
+                      minHeight: 'auto'
+                    }
+                  }}>
                   <Chooser
                     canBeEmpty={false}
                     question={t('ACCEPTACIO_AUTO')}
@@ -248,18 +228,25 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     ]}
                   />
                 </Box>
-                <Box sx={{
-                  mb: 1,
-                  display: 'flex',
-                  justifyContent: 'flex-end'
-                }} >
+                <Box
+                  sx={{
+                    mb: 1,
+                    display: 'flex',
+                    justifyContent: 'flex-end'
+                  }}>
                   {
                     <Button
                       type="submit"
+                      disableElevation={true}
                       sx={{
                         mt: 1,
                         mr: 1,
-                        backgroundColor: 'primary.main'
+                        backgroundColor: '#CDFF80',
+                        color: '#0B2E34',
+                        '&:hover': {
+                          color: '#CDFF80',
+                          backgroundColor: '#0B2E34'
+                        }
                       }}
                       variant="contained"
                       disabled={!isValid}

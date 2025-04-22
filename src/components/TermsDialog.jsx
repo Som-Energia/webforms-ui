@@ -19,20 +19,28 @@ const TermsDialog = (props) => {
         scroll="paper"
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        maxWidth={maxWidth}
-      >
+        maxWidth={maxWidth}>
         <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
-        <DialogContent dividers={true}>
-            {props.children}
+        <DialogContent dividers={true} sx={{ fontFamily: 'Outfit' }}>
+          {props.children}
         </DialogContent>
         <DialogActions>
           { onClose ?
-            <Button data-cy="decline" sx={{color:'secondary.dark'}} onClick={onClose} id="terms-dialog-decline-btn">
+            <Button
+              data-cy="decline"
+              sx={{ color: 'secondary' }}
+              onClick={onClose}
+              id="terms-dialog-decline-btn">
               {t('I_DECLINE')}
             </Button>
             : null
           }
-          <Button data-cy="accept" onClick={onAccept} variant="contained" color="primary" id="terms-dialog-accept-btn">
+          <Button
+            data-cy="accept"
+            onClick={onAccept}
+            variant="contained"
+            color="primary"
+            id="terms-dialog-accept-btn">
             {t(acceptText)}
           </Button>
         </DialogActions>
