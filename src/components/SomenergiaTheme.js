@@ -40,7 +40,7 @@ export default function SomEnergiaTheme() {
       secondary: {
         main: '#ff632b', // taronja
         dark: '#8C8C8C', // gris fosc
-        extraDark:'#6f6262',
+        extraDark:'red',
         alt: '#CDFF80',  // verd lima
         light: '#F0F3EC'  // Fondo
 
