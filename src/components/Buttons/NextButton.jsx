@@ -9,6 +9,14 @@ function NextButton({title, ...props}) {
       data-cy="next"
       variant="contained"
       color="primary"
+      sx={{
+        backgroundColor: '#CDFF80',
+        color: '#0B2E34',
+        '&:hover': {
+          color: '#CDFF80',
+          backgroundColor: '#0B2E34',         
+        }
+      }}
       endIcon={<ArrowForwardIosIcon />}
       {...props}
     >

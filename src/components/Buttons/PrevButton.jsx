@@ -6,7 +6,14 @@ function PrevButton(props) {
   const { title, onClick, disabled, sx={} } = props
   return (
     <Button
-      sx={{color:"secondary.dark",...sx}}
+      sx={{
+        backgroundColor: '#F0F3EC',
+        color: '#0B2E34',
+        '&:hover': {
+          color: '#0B2E34',
+          backgroundColor: '#F0F3EC',         
+        }
+      }}
       data-cy="prev"
       startIcon={<ArrowBackIosIcon />}
       disabled={disabled}
