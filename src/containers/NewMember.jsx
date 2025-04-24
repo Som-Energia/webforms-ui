@@ -13,6 +13,7 @@ import SomStepper from '../components/SomStepper'
 
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 import SummaryContext from '../context/SummaryContext'
+import GurbLoadingContext from '../context/GurbLoadingContext'
 import MemberIdentifier from './NewMember/MemberIdentifier'
 import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
@@ -33,6 +34,7 @@ const NewMemberForm = (props) => {
   const [data, setData] = useState()
   const formTPV = useRef(null)
 
+  const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
 
   const [activeStep, setActiveStep] = useState(0)
@@ -184,7 +186,9 @@ const NewMemberForm = (props) => {
                   {activeStep !== MAX_STEP_NUMBER ? (
                     <NextButton
                       disabled={
-                        !formikProps.isValid || activeStep === MAX_STEP_NUMBER
+                        loading ||
+                        !formikProps.isValid ||
+                        activeStep === MAX_STEP_NUMBER
                       }
                       onClick={() => nextStep(formikProps)}
                       title={'NEXT'}
