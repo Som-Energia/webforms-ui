@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Fix: verify member is not null in contributions form
+
 ## 3.0.0 2025-04-03
 
 - Update drag and drop deprecated library
