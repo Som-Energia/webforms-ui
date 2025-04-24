@@ -109,7 +109,7 @@ const MemberIdentifier = (props) => {
                 label={t('VAT_LABEL')}
                 variant="outlined"
                 fullWidth
-                isVatTouched={touched?.member.vat}
+                isVatTouched={touched?.member?.vat}
                 setFieldTouched={setFieldTouched}
                 required
                 value={values?.member?.vat}
