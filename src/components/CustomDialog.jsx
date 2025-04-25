@@ -29,7 +29,7 @@ function CustomDialog({ children, withBackground, blockHandleClose }) {
       PaperProps={customStyles(withBackground)}
       slotProps={{
         backdrop: {
-          sx: {backgroundColor: 'rgba(150, 182, 51, 0.5)'}
+          sx: {backgroundColor: 'rgba(12, 76, 39, 0.5)'}
         }
       }}
       id='custom-dialog'
