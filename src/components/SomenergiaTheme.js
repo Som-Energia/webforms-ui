@@ -32,12 +32,15 @@ export default function SomEnergiaTheme() {
         //main: '#96D600', //'hsl(78, 100%, 42%)', // from style guide
         main: '#0B2E34', // from webforms-ui
         contrastText: 'white',
-        extraLight: "#F8F9F6"
+        light: '#0c4c27',
+        extraLight: '#CDFF80',
+        megaLight: "#F8F9F6",
+        dark: '#1E1E1E'
       },
       secondary: {
         main: '#ff632b', // taronja
         dark: '#8C8C8C', // gris fosc
-        extraDark:'red',
+        extraDark: 'red',
         alt: '#CDFF80',  // verd lima
         light: '#F0F3EC'  // Fondo
 
@@ -58,7 +61,7 @@ export default function SomEnergiaTheme() {
       pagetitle: {
         main: '#1E1E1E'
       },
-      failure:{
+      failure: {
         primary: '#fe6444'
       }
     },
@@ -75,7 +78,7 @@ export default function SomEnergiaTheme() {
         lineHeight: 1
       }
     },
-    components:{
+    components: {
       // MuiTypography: {
       //   defaultProps: {
       //     fontFamily: 'Outfit',
@@ -84,7 +87,7 @@ export default function SomEnergiaTheme() {
       // },
       MuiCssBaseline: {
         styleOverrides: {
-          a:{
+          a: {
             textDecoration: 'none'
           }
         }
@@ -104,15 +107,22 @@ export default function SomEnergiaTheme() {
             color: '#FF632B'
           },
         }
-      }
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'capitalize', // Aquí cambias el texto
+          },
+        },
+      },
     },
-    gurbStyles:{
-       textHeader1:{
+    gurbStyles: {
+      textHeader1: {
         fontFamily: 'Inter',
         color: '#00f',
         fontSize: '30px',
         fontWeight: '700'
-       }
+      }
     },
     shape: {
       borderRadius: 0
