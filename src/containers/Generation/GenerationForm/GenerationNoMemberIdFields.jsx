@@ -25,7 +25,7 @@ const customStyles = {
   helperText: {
     color: "#f44336",
     marginRight: "14px",
-    fontSize: "0.75rem",
+    fontSize: "1rem",
     marginTop: "3px",
     textAlign: "left",
     lineHeight: "1.66",
