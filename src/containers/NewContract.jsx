@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
-import NewMember from './Gurb/NewMember'
+import NewMember from './NewMember'
 import Contract from './Gurb/Contract'
 
 import PrevButton from '../components/NewButtons/PrevButton'
