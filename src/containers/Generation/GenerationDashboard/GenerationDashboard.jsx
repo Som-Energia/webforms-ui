@@ -59,8 +59,12 @@ function GenerationDashboard({
                 id="cancel-action-btn"
                 variant="contained"
                 sx={{
-                  backgroundColor: 'primary.main',
-                  color: 'lightFont.main'
+                  backgroundColor: 'secondary.alt',
+                  color: 'primary.main',
+                  '&:hover': {
+                    color: 'secondary.alt',
+                    backgroundColor: 'primary.main',
+                  }
                 }}
                 onClick={() => handleCancelButtonClick(false)}>
                 {t('GENERATION_INVESTMENTS_CANCEL_BUTTON')}
@@ -69,8 +73,12 @@ function GenerationDashboard({
                 id="validation-action-btn"
                 variant="contained"
                 sx={{
-                  backgroundColor: 'primary.main',
-                  color: 'lightFont.main'
+                  backgroundColor: 'secondary.alt',
+                  color: 'primary.main',
+                  '&:hover': {
+                    color: 'secondary.alt',
+                    backgroundColor: 'primary.main',
+                  }
                 }}
                 onClick={() => validateChanges()}>
                 {t('GENERATION_INVESTMENTS_VALIDATE_BUTTON')}
@@ -176,8 +184,12 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}>
                 {investments.length > 0 ? <Button
                   sx={{
-                    backgroundColor: 'secondary.main',
-                    color: 'lightFont.main'
+                    backgroundColor: 'secondary.alt',
+                    color: 'primary.main',
+                    '&:hover': {
+                      color: 'secondary.alt',
+                      backgroundColor: 'primary.main',
+                    }
                   }}
                   disabled={loading}
                   type="button"
@@ -198,7 +210,7 @@ function GenerationDashboard({
                 justifyContent="flex-end">
                 <ActionSection />
               </Grid>
-              <SectionTitle text={t('GENERATION_INVESTMENTS_OUTSIDE_ASSIGNMENTS_TABLE_TITLE')}/>
+              <SectionTitle text={t('GENERATION_INVESTMENTS_OUTSIDE_ASSIGNMENTS_TABLE_TITLE')} />
               <GenerationTable
                 id="outside-assignments-table"
                 columns={[
@@ -215,8 +227,12 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button
                   sx={{
-                    backgroundColor: 'secondary.main',
-                    color: 'lightFont.main'
+                    backgroundColor: 'secondary.alt',
+                    color: 'primary.main',
+                    '&:hover': {
+                      color: 'secondary.alt',
+                      backgroundColor: 'primary.main',
+                    }
                   }}
                   type="button"
                   id="generationkwh-id-production-consumption"
