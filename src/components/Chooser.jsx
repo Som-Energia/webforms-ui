@@ -56,15 +56,15 @@ const Chooser = (props) => {
       margin: '0 0 8px 0',
       border: '1px solid',
       borderColor: 'primary.main',
-      backgroundColor: 'primary.extraLight',
+      backgroundColor: 'primary.megaLight',
       '&:hover': {
         border: '1px solid',
         borderColor: 'primary.main',
-        backgroundColor: 'primary.extraLight',
+        backgroundColor: 'primary.megaLight',
         '&:hover': {
           border: '1px solid',
           borderColor: 'primary.main',
-          backgroundColor: 'primary.extraLight'
+          backgroundColor: 'primary.megaLight'
         }
       }
     },
