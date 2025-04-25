@@ -764,5 +764,10 @@
     "IDENTIFY_MEMBER": "Identificación",
     "MEMBER_INFO": "Datos personales",
     "PAYMENT_INFO": "Pago",
-    "SUMMARY": "Confirmar datos"
+    "SUMMARY": "Confirmar datos",
+    "LIGHT_YES": "Sí, hay luz",
+    "LIGHT_NO": "No hay luz",
+    "LIGHT_MARKETER_YES": "Con otra comercializadora y quiero cambiar a Som Energia.",
+    "LIGHT_MARKETER_NO": "No tengo dada de alta la luz con ninguna comercializadora.",
+    "HAS_LIGHT_TITLE": "Actualmente hay luz en tu casa?"
 }

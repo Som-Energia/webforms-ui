@@ -938,5 +938,10 @@
     "IDENTIFY_MEMBER": "Identificació",
     "MEMBER_INFO": "Dades personals",
     "PAYMENT_INFO": "Pagament",
-    "SUMMARY": "Confirmar dades"
+    "SUMMARY": "Confirmar dades",
+    "LIGHT_YES": "Sí, hi ha llum",
+    "LIGHT_NO": "No hi ha llum",
+    "LIGHT_MARKETER_YES": "Amb una altra comercialitzadora i vull canviar a Som Energia.",
+    "LIGHT_MARKETER_NO": "No tinc donada d'alta la llum amb cap comercialitzadora.",
+    "HAS_LIGHT_TITLE": "Actualment a casa teva hi ha llum?"
 }
