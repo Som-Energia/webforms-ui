@@ -5,12 +5,11 @@ const Header = ({ variant = 'h1', children }) => {
 
   return <Typography component='h3' sx={{
     width: '100%',
-    background: '#fff',
-    color: '#0B2E34',
+    backgroundColor: 'primary.light',
+    color: '#fff',
     padding: '1rem 1.5rem',
     margin: '0 0 .5em 0',
-    fontSize: '18px',
-    textTransform: 'uppercase'
+    fontSize: '18px'
   }} >{children}</Typography>
 }
 
