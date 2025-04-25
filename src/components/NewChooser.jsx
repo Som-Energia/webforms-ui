@@ -1,11 +1,11 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { textHeader4, textBody1 } from '../gurbTheme'
+import { textHeader4, textBody1 } from '../containers/Gurb/gurbTheme'
 import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserGurb, chooserGurbSelected } from '../gurbTheme'
+import { chooserGurb, chooserGurbSelected } from '../containers/Gurb/gurbTheme'
 
 const Option = ({
   isSelected,
@@ -13,7 +13,7 @@ const Option = ({
   optionId,
   icon,
   textHeader,
-  textBody
+  textBody,
 }) => {
   return (
     <Box
@@ -21,20 +21,23 @@ const Option = ({
       sx={isSelected ? chooserGurbSelected : chooserGurb}
       onClick={() => {
         setSelected(optionId)
-      }}>
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
           marginBottom: '1rem',
-          justifyContent: 'space-between'
-        }}>
+          justifyContent: 'space-between',
+        }}
+      >
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1rem'
-          }}>
+            gap: '1rem',
+          }}
+        >
           {icon}
           <Typography sx={textHeader4}>{textHeader}</Typography>
         </Box>
@@ -59,36 +62,36 @@ const Chooser = (props) => {
   }
 
   return (
-    <Box sx={{ marginY: '1rem' }}>
-      <Grid
-        data-cy={name}
-        container
-        spacing={4}
-        direction="row"
-        justifyContent="center">
-        {options.map((option, index) => (
-          <Grid key={index} item sm={6} xs={12}>
-            <Option
-              isSelected={option?.id === value}
-              setSelected={setOptionSelection}
-              optionId={option?.id}
-              icon={option?.icon}
-              textHeader={option?.textHeader}
-              textBody={option?.textBody}
-            />
-            {option?.helper && (
-              <Box
-                sx={{
-                  marginTop: '1rem',
-                  justifyItems: 'center'
-                }}>
-                {option?.helper}
-              </Box>
-            )}
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+    <Grid
+      data-cy={name}
+      container
+      spacing={4}
+      direction="row"
+      justifyContent="center"
+    >
+      {options.map((option, index) => (
+        <Grid key={index} item sm={6} xs={12}>
+          <Option
+            isSelected={option?.id === value}
+            setSelected={setOptionSelection}
+            optionId={option?.id}
+            icon={option?.icon}
+            textHeader={option?.textHeader}
+            textBody={option?.textBody}
+          />
+          {option?.helper && (
+            <Box
+              sx={{
+                marginTop: '1rem',
+                justifyItems: 'center',
+              }}
+            >
+              {option?.helper}
+            </Box>
+          )}
+        </Grid>
+      ))}
+    </Grid>
   )
 }
 export default Chooser

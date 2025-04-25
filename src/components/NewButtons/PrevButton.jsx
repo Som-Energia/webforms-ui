@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
-import { buttonGurbLight, textBody1 } from '../gurbTheme'
+import { buttonGurbLight, textBody1 } from '../../containers/Gurb/gurbTheme'
 
 function PrevButton(props) {
   const { onClick, disabled } = props

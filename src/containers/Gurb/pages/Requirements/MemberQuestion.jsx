@@ -1,13 +1,14 @@
 import { useTranslation } from 'react-i18next'
 
 import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../components/Chooser'
-import { HelperText } from '../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
+import { HelperText } from '../../../../components/InputField'
 
 import Groups2Icon from '@mui/icons-material/Groups2'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 
-import { iconRequirements, iconOffRequirements } from '../../gurbTheme'
+import { iconRequirements } from '../../../../themes/commonStyles'
+import { iconOffRequirements } from '../../gurbTheme'
 import Grid from '@mui/material/Grid'
 
 const MemberQuestion = (props) => {

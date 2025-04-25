@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import InputField from './InputField'
+import InputField from '../../../components/InputField'
 import Grid from '@mui/material/Grid'
 
 const handleChangePower = (

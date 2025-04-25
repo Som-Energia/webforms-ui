@@ -28,7 +28,7 @@ const NewMember = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={theme.webFormStyles.textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
+        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <SomGurbStepper

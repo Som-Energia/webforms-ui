@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 
-import Chooser from '../../components/Chooser'
+import Chooser from '../../../../components/NewChooser'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import { iconRequirements, iconOffRequirements } from '../../gurbTheme'
+import { iconRequirements } from '../../../../themes/commonStyles'
+import { iconOffRequirements } from '../../gurbTheme'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'

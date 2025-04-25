@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next'
 import BoltIcon from '@mui/icons-material/Bolt'
 import Box from '@mui/material/Box'
 
-import Chooser from '../../components/Chooser'
-import { HelperText } from '../../components/InputField'
-import RequiredTitle from '../../components/InputTitle'
+import Chooser from '../../../../components/NewChooser'
+import { HelperText } from '../../../../components/InputField'
+import RequiredTitle from '../../../../components/InputTitle'
 
-import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
+import { iconRequirements } from '../../../../themes/commonStyles'
+import { textHeader4, textHeader5 } from '../../gurbTheme'
 import Grid from '@mui/material/Grid'
 
 const TariffMode = (props) => {

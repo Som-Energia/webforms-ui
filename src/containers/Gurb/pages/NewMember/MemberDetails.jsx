@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { checkMember } from '../../../../services/api'
@@ -48,6 +48,7 @@ const MemberDetails = (props) => {
     }
   }, [values.member.number, values.member.nif])
 
+  // TODO: use utils function
   const handleInputNif = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
@@ -74,8 +75,8 @@ const MemberDetails = (props) => {
       <Grid item xs={12}>
         <InputField
           name="vat"
-          textFieldLabel={t('GURB_NIF_LABEL')}
-          textFieldName={t('GURB_NIF_FIELD')}
+          textFieldLabel={t('NIF_LABEL')}
+          textFieldName={t('NIF_FIELD')}
           textFieldHelper={t('GURB_NIF_HELPER')}
           iconHelper={true}
           handleChange={handleInputNif}

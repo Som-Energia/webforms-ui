@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import ReviewTable from '../../components/review/ReviewTable'
-import ReviewPricesTable from '../../components/review/ReviewPrices'
+import ReviewTable from '../../../../components/review/ReviewTable'
+import ReviewPricesTable from '../../../../components/review/ReviewPrices'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -15,7 +15,8 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 
-import { iconRequirements, textBody1, textHeader4 } from '../../gurbTheme'
+import { iconRequirements } from '../../../../themes/commonStyles'
+import { textBody1, textHeader4 } from '../../gurbTheme'
 import { getPrices } from '../../../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../../../services/utils'
 import { CONTRACT_FORM_SUBSTEPS, NEW_MEMBER_FORM_SUBSTEPS} from '../../../../services/steps'

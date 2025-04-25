@@ -5,7 +5,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import LocationInput from '../../components/AddressAutocompletedField'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import {
   getPlaceDetails,
   searchPlace

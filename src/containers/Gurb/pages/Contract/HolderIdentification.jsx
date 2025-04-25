@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
-import Chooser from '../../components/Chooser'
-import RequiredTitle from '../../components/InputTitle'
+import InputField from '../../../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
+import RequiredTitle from '../../../../components/InputTitle'
 
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
 import Grid from '@mui/material/Grid'
 
+import { iconRequirements } from '../../../../themes/commonStyles'
 import {
   iconOffRequirements,
-  iconRequirements,
   textHeader4
 } from '../../gurbTheme'
 import { checkVatFormat } from '../../../../services/utils'
@@ -29,6 +29,7 @@ const HolderIdentification = (props) => {
 
   const { t } = useTranslation()
 
+  // TODO: use from utils
   const handleCheckNifResponse = async () => {
     let valid = checkVatFormat(values.holder.nif)
     if (valid === true) {
@@ -78,7 +79,7 @@ const HolderIdentification = (props) => {
       <Grid item xs={12}>
         <InputField
           name="holder_vat"
-          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldLabel={t('NIF_LABEL')}
           textFieldName={t('GURB_HOLDER_NIF_FIELD')}
           textFieldNameHelper={t('GURB_HOLDER_NIF_FIELD_HELPER')}
           handleChange={handleInputNif}

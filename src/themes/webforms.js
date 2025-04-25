@@ -8,7 +8,8 @@ export default function WebFormsTheme() {
       primary: {
         main: '#0B2E34',
         light: '#0c4c27',
-        extraLight: "#CDFF80"
+        extraLight: '#CDFF80',
+        dark: '#1E1E1E'
       },
       primary2: {
         main: '#ff632b',
@@ -16,20 +17,20 @@ export default function WebFormsTheme() {
         alt: '#afb5e8'
       },
       secondary: {
-        main: '#8C8C8C',
+        main: '#C4C4C4',
         dark: '#8C8C8C',
-        light: '#D9D9D9',
+        light: '#D9D9D9'
       },
       background: {
         first: '#CED5D0',
         second: '#E2E8DE',
         third: '#F0F3EC'
       },
+      error: {
+        main: '#EE4949'
+      }
     },
     typography: {
-      fontFamily: 'Outfit',
-    },
-    webFormStyles: {
       display1: {
         fontSize: '96px',
         fontWeight: '400'
@@ -46,59 +47,74 @@ export default function WebFormsTheme() {
         fontSize: '28px',
         fontWeight: '400'
       },
-      headline4: {
-        regular: {
-          ontSize: '21px',
-          fontWeight: '400'
-        },
-        bold: {
-          ontSize: '21px',
-          fontWeight: '700'
-        }
+      'headline4.regular': {
+        ontSize: '21px',
+        fontWeight: '400'
       },
-      body: {
-        md: {
-          regular: {
-            ontSize: '16px',
-            fontWeight: '400'
-          },
-          bold: {
-            ontSize: '16px',
-            fontWeight: '700'
-          }
-        },
-        sm: {
-          regular: {
-            ontSize: '14px',
-            fontWeight: '400'
-          },
-          bold: {
-            ontSize: '14px',
-            fontWeight: '700'
-          }
-        },
-        xs: {
-          regular: {
-            ontSize: '12px',
-            fontWeight: '400'
-          },
-          bold: {
-            ontSize: '12px',
-            fontWeight: '700'
-          }
-        }
+      'headline4.bold': {
+        fontSize: '21px',
+        fontWeight: '700'
       },
-      button: {
-        md: {
-          ontSize: '14px',
-          fontWeight: '400'
-        },
-        sm:{
-          ontSize: '12px',
-          fontWeight: '400'
-        }
+      'body.md.regular': {
+        fontSize: '16px',
+        fontWeight: '400'
+      },
+      'input.label': {
+        fontSize: '16px',
+        fontWeight: '500'
+      },
+      'body.md.bold': {
+        fontSize: '16px',
+        fontWeight: '700'
+      },
+      'body.sm.regular': {
+        fontSize: '14px',
+        fontWeight: '400'
+      },
+      'body.sm.bold': {
+        fontSize: '14px',
+        fontWeight: '700'
+      },
+      'body.xs.regular': {
+        fontSize: '12px',
+        fontWeight: '400'
+      },
+      'body.xs.bold': {
+        fontSize: '12px',
+        fontWeight: '700'
+      },
+      error: {
+        fontSize: '12px',
+        fontWeight: '400'
       }
     },
+    components: {
+      MuiTypography: {
+        defaultProps: {
+          fontFamily: 'Outfit',
+          color: '#0B2E34',
+          variantMapping: {
+            display1: 'h1',
+            display2: 'h2',
+            headline1: 'h1',
+            headline2: 'h2',
+            headline3: 'h3',
+            'headline4.regular': 'h4',
+            'headline4.bold': 'h4',
+            'body.md.regular': 'span',
+            'input.label': 'span',
+            'body.md.bold': 'span',
+            'body.sm.regular': 'span',
+            'body.sm.bold': 'span',
+            'body.xs.regular': 'span',
+            'body.xs.bold': 'span',
+            error: 'span',
+            'button.md': 'button',
+            'button.sm': 'button'
+          }
+        }
+      }
+    }
   })
   return responsiveFontSizes(theme)
 }

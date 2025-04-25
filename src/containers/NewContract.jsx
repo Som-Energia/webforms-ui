@@ -9,9 +9,9 @@ import Grid from '@mui/material/Grid'
 import NewMember from './Gurb/NewMember'
 import Contract from './Gurb/Contract'
 
-import PrevButton from './Gurb/components/PrevButton'
-import NextButton from './Gurb/components/NextButton'
-import SubmitButton from './Gurb/components/SubmitButton'
+import PrevButton from '../components/NewButtons/PrevButton'
+import NextButton from '../components/NewButtons/NextButton'
+import SubmitButton from '../components/NewButtons/SubmitButton'
 import {
   newMemberValidations,
   alreadyMemberValidations,
@@ -165,7 +165,7 @@ const NewContractForm = (props) => {
   const nextStep = (formikProps) => {
     let next
     if (
-      summaryField &&
+      summaryField !== undefined &&
       activeStep !== CONTRACT_FORM_SUBSTEPS['IDENTIFY_HOLDER']
     ) {
       next = MAX_STEP_NUMBER

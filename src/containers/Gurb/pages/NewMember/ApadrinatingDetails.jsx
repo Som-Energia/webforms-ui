@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { checkMember } from '../../../../services/api'
@@ -74,7 +74,7 @@ const ApadrinatingDetails = (props) => {
       <Grid item xs={12}>
         <InputField
           name="vat"
-          textFieldLabel={t('GURB_NIF_LABEL')}
+          textFieldLabel={t('NIF_LABEL')}
           textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
           textFieldHelper={t('GURB_NIF_HELPER')}
           iconHelper={true}

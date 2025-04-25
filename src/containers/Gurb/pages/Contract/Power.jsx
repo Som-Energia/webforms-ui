@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { HelperText } from '../../components/InputField'
-import Chooser from '../../components/Chooser'
+import { HelperText } from '../../../../components/InputField'
+import Chooser from '../../../../components/NewChooser'
 import PowerInputs from '../../components/PowerInputs'
-import RequiredTitle from '../../components/InputTitle'
+import RequiredTitle from '../../../../components/InputTitle'
 
 import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'
@@ -12,7 +12,8 @@ import Grid from '@mui/material/Grid'
 
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
-import { iconRequirements, textHeader4, textHeader5 } from '../../gurbTheme'
+import { iconRequirements } from '../../../../themes/commonStyles'
+import { textHeader4, textHeader5 } from '../../gurbTheme'
 
 const Power = (props) => {
   const {

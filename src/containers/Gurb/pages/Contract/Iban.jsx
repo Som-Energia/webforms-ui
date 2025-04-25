@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../components/InputField'
+import InputField from '../../../../components/InputField'
 
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
@@ -73,7 +73,7 @@ const HolderIban = (props) => {
           textFieldLabel={t('GURB_IBAN_LABEL')}
           textFieldName={t('GURB_IBAN_FIELD')}
           textFieldNameHelper={t('GURB_IBAN_FIELD_HELPER')}
-          textFieldHelper={t('GURB_IBAN_EXAMPLE')}
+          textFieldHelper={t('IBAN_EXAMPLE')}
           handleChange={handleInputIban}
           handleBlur={handleInputIbanBlur}
           touched={touched?.holder?.iban}
