@@ -34,7 +34,7 @@ import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import SummaryContext from '../context/SummaryContext'
 import {
-  CONTRACT_FORM_STEPS,
+  CONTRACT_MEMBER_FORM_STEPS,
   CONTRACT_FORM_SUBSTEPS,
   GURB_CONTRACT_STEP,
   GURB_NEW_MEMBER_STEP
@@ -208,8 +208,8 @@ const NewContractForm = (props) => {
         <NewMember
           {...props}
           activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
-          stepperSteps={CONTRACT_FORM_STEPS}
-          stepperActiveSteps={GURB_NEW_MEMBER_STEP}
+          stepperSteps={CONTRACT_MEMBER_FORM_STEPS}
+          stepperActiveSteps={NEW_MEMBER_STEP}
         />
       )
     } else if (CONTRACT_STEPS.includes(activeStep)) {
@@ -217,7 +217,7 @@ const NewContractForm = (props) => {
         <Contract
           {...props}
           activeStep={CONTRACT_STEPS.indexOf(activeStep)}
-          stepperSteps={CONTRACT_FORM_STEPS}
+          stepperSteps={CONTRACT_MEMBER_FORM_STEPS}
           stepperActiveSteps={GURB_CONTRACT_STEP}
         />
       )
@@ -273,53 +273,7 @@ const NewContractForm = (props) => {
           return (
             <>
               {getStep(formikProps)}
-              {error ? (
-                <></>
-              ) : (
-                <Grid
-                  container
-                  direction="row-reverse"
-                  rowSpacing={2}
-                  sx={{
-                    marginTop: '2rem',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}>
-                  {activeStep !== 0 && (
-                    <Grid item sm={2} xs={12}>
-                      <PrevButton
-                        onClick={() => prevStep(formikProps)}
-                        title={'PREV'}
-                      />
-                    </Grid>
-                  )}
-                  <Grid item sm={2} xs={12} order={-1}>
-                    {activeStep !== MAX_STEP_NUMBER ? (
-                      <NextButton
-                        disabled={
-                          loading ||
-                          !formikProps.isValid ||
-                          activeStep === MAX_STEP_NUMBER
-                        }
-                        onClick={() => nextStep(formikProps)}
-                        title={'NEXT'}
-                      />
-                    ) : (
-                      <SubmitButton
-                        disabled={loading || !formikProps.isValid}
-                        onClick={() =>
-                          handlePost({
-                            soci: 'Eustaquio',
-                            cost:
-                              NEW_MEMBER_COST +
-                              formikProps.values.contract.gurb_power_cost
-                          })
-                        }
-                      />
-                    )}
-                  </Grid>
-                </Grid>
-              )}
+            
             </>
           )
         }}

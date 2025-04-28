@@ -1,9 +1,13 @@
 import { useTranslation } from 'react-i18next'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
+import Typography from '@mui/material/Typography'
+
 
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
+import CUPS from '../Gurb/components/CUPS'
+import AlertBox from '../../components/AlertBox'
 
 import { iconRequirements } from '../../themes/commonStyles'
 import { iconOffRequirements } from '../Gurb/gurbTheme'
@@ -34,7 +38,23 @@ const LightQuestion = (props) => {
   ]
 
   return (
+
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+      <AlertBox
+            id="percent_value_error"
+            description={"holi"}
+            severity={'warning'}
+            //TODO icon={false}
+            variant={'body2'}
+          />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="headline3">{t('CUPS_TITLE')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <CUPS {...props} />
+      </Grid>
       <Grid item xs={12}>
         <InputTitle
           text={t('HAS_LIGHT_TITLE')}

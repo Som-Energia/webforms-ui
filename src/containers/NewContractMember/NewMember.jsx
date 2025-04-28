@@ -121,6 +121,8 @@ const NewMemberForm = (props) => {
   }
 
   const getStep = (props) => {
+    return <MemberSupplyPoint {...props} />
+    /*
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />
     } else if (activeStep === 1) {
@@ -131,7 +133,7 @@ const NewMemberForm = (props) => {
       return <PaymentMethod {...props} />
     } else {
       return <MemberSummary {...props} />
-    }
+    }*/
   }
 
   const formikRef = useRef(null)
