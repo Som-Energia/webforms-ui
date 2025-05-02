@@ -943,5 +943,7 @@
     "LIGHT_NO": "No hi ha llum",
     "LIGHT_MARKETER_YES": "Amb una altra comercialitzadora i vull canviar a Som Energia.",
     "LIGHT_MARKETER_NO": "No tinc donada d'alta la llum amb cap comercialitzadora.",
-    "HAS_LIGHT_TITLE": "Actualment a casa teva hi ha llum?"
+    "HAS_LIGHT_TITLE": "Actualment a casa teva hi ha llum?",
+    "SUPPLY_POINT_DATA_TITLE": "Dades del punt de subministrament",
+    "SUPPLY_POINT_DATA_SUBTITLE": "Et recomanem tenir a mà un contracte de llum per anar omplint les dades del formulari"
 }

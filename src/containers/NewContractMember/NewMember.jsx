@@ -17,13 +17,13 @@ import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
 import MemberPersonalData from '../NewMember/MemberPersonalData'
 import MemberSupplyPoint from './NewContractMemberSupplyPoint'
-import PaymentMethod from '../NewMember/PaymentMethod'
+import MemberSupplyPointData from './NewContractMemberSupplyPointData'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations,'
 import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
-import memberPaymentMethodValidations from '../NewMember/paymentMethodValidations'
+import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
 const MAX_STEP_NUMBER = 4
@@ -46,7 +46,26 @@ const NewMemberForm = (props) => {
   }, [language, i18n])
 
   const initialValues = {
-
+    cups: '',
+    has_light: undefined,
+    supply_point: {
+      cnae: '',
+      cadastral_reference: '',
+      supply_point_accepted: false,
+    },
+    supply_point_address: {
+      street: '',
+      number: '',
+      floor: '',
+      door: '',
+      stairs: '',
+      bloc: '',
+      postal_code: '',
+      state: undefined,
+      city: undefined,
+      lat: undefined,
+      long: undefined
+    },
     address: {
       street: '',
       number: '',
@@ -94,7 +113,7 @@ const NewMemberForm = (props) => {
     memberIdentifierValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
-    memberPaymentMethodValidations,
+    newContractMemberSupplyPointDataValidations,
     memberSummaryValidations
   ]
 
@@ -123,8 +142,6 @@ const NewMemberForm = (props) => {
   }
 
   const getStep = (props) => {
-    //return <MemberSupplyPoint {...props} />
-    
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />
     } else if (activeStep === 1) {
@@ -132,7 +149,7 @@ const NewMemberForm = (props) => {
     } else if (activeStep === 2) {
       return <MemberSupplyPoint {...props} />
     } else if (activeStep === 3) {
-      return <PaymentMethod {...props} />
+      return <MemberSupplyPointData {...props} />
     } else {
       return <MemberSummary {...props} />
     }
