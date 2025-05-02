@@ -68,6 +68,7 @@ const CUPS = (props) => {
       setLoading(true)
       checkCups(value)
         .then((response) => {
+          console.log('API response:', response);
           const status = response?.data?.status
           setFieldValue('supply_point.status', status)
           setLoading(false)
