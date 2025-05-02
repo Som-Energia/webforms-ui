@@ -28,7 +28,6 @@ import {
   tariffModeValidations
 } from './Gurb/contractValidations'
 
-import newContractMemberSupplyPointValidations from './NewContractMember/newContractMemberSupplyPointValidations'
 import noValidation from '../formValidations/noValidation'
 
 import GurbErrorContext from '../context/GurbErrorContext'
@@ -151,7 +150,6 @@ const NewContractForm = (props) => {
   const validationSchemas = [
     alreadyMemberValidations,
     newMemberValidations,
-    newContractMemberSupplyPointValidations,
     apadrinatingValidations,
     holderIdentificationValidations,
     holderPersonalDataValidations,

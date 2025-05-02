@@ -22,6 +22,7 @@ import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations,'
+import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
 import memberPaymentMethodValidations from '../NewMember/paymentMethodValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
@@ -92,6 +93,7 @@ const NewMemberForm = (props) => {
   const validationSchemas = [
     memberIdentifierValidations,
     memberPersonalDataValidations,
+    newContractMemberSupplyPointValidations,
     memberPaymentMethodValidations,
     memberSummaryValidations
   ]

@@ -14,7 +14,7 @@ import { iconOffRequirements } from '../Gurb/gurbTheme'
 
 import Grid from '@mui/material/Grid'
 
-const LightQuestion = (props) => {
+const newContractMemberSupplyPoint = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
 
@@ -72,4 +72,5 @@ const LightQuestion = (props) => {
     </Grid>
   )
 }
-export default LightQuestion
+
+export default newContractMemberSupplyPoint
