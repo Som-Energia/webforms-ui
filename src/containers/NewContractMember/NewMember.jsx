@@ -46,7 +46,7 @@ const NewMemberForm = (props) => {
   }, [language, i18n])
 
   const initialValues = {
-    is_client: undefined,
+
     address: {
       street: '',
       number: '',

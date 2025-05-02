@@ -161,7 +161,7 @@ const NewContractForm = (props) => {
     holderIbanValidations,
     noValidation
   ]
-
+  
   const nextStep = (formikProps) => {
     let next
     if (
