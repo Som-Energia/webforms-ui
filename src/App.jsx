@@ -46,6 +46,9 @@ const App = (props) => {
   const GurbForm = lazy(() => import('./containers/GurbForm'))
   const NewContractMemberForm = lazy(() => import('./containers/NewContractMember/NewContractMember'))
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
+  const NewSuccess = lazy(() => import('./containers/NewSuccess'))
+
+
 
   const loadContractData = () => {
     const contractData =
@@ -489,6 +492,12 @@ const App = (props) => {
                         }
                       />
                     )}
+                    <Route
+                      path="/:language/new-success"
+                      element={
+                        <NewSuccess {...props} />
+                      }
+                    />
                   </Routes>
                 </ThemeProvider>
                 <ThemeProvider theme={webFormsTheme}>
