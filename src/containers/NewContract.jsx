@@ -131,12 +131,15 @@ const NewContractForm = (props) => {
       supply_point_accepted: false
     },
     contract: {
-      tariff_mode: undefined,
-      power_type: undefined,
+      tariff_mode: '',
+      power_type: '',
       power: {
-        power1: undefined,
-        power2: undefined,
-        power3: undefined
+        power1: '',
+        power2: '',
+        power3: '',
+        power4: '',
+        power5: '',
+        power6: ''
       },
       gurb_power: '',
       gurb_power_cost: ''

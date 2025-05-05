@@ -16,14 +16,16 @@ import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
 import MemberPersonalData from '../NewMember/MemberPersonalData'
-import MemberSupplyPoint from './NewContractMemberSupplyPoint'
-import MemberSupplyPointData from './NewContractMemberSupplyPointData'
+import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
+import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
+import NewContractMemberPower from './NewContractMemberPower'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations,'
 import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
 import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
+import newContractMemberPowerValidations from './newContractMemberPowerValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
 const MAX_STEP_NUMBER = 4
@@ -105,16 +107,33 @@ const NewMemberForm = (props) => {
       comercial_info_accepted: false,
       legal_person_accepted: false
     },
+    contract: {
+      tariff_mode: '',
+      power_type: '',
+      power: {
+        power1: '',
+        power2: '',
+        power3: '',
+        power4: '',
+        power5: '',
+        power6: ''
+      },
+      gurb_power: '',
+      gurb_power_cost: ''
+    },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false
   }
 
   const validationSchemas = [
+    newContractMemberPowerValidations
+    /*
     memberIdentifierValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
     newContractMemberSupplyPointDataValidations,
-    memberSummaryValidations
+    newContractMemberPowerValidations,
+    memberSummaryValidations*/
   ]
 
   const nextStep = (formikProps) => {
@@ -142,17 +161,21 @@ const NewMemberForm = (props) => {
   }
 
   const getStep = (props) => {
+    return <NewContractMemberPower {...props} />
+    /*
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />
     } else if (activeStep === 1) {
       return <MemberPersonalData {...props} />
     } else if (activeStep === 2) {
-      return <MemberSupplyPoint {...props} />
+      return <NewContractMemberSupplyPoint {...props} />
     } else if (activeStep === 3) {
-      return <MemberSupplyPointData {...props} />
+      return <NewContractMemberSupplyPointData {...props} />
+    } else if (activeStep === 4) {
+      return <NewContractMemberPower {...props} />
     } else {
       return <MemberSummary {...props} />
-    }
+    }*/
   }
 
   const formikRef = useRef(null)
