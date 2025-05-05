@@ -1,4 +1,4 @@
-import { getMunicipisByPostalCode, getRates } from '../services/api'
+import { getMunicipisByPostalCode, getRates, getNewRates } from '../services/api'
 import dayjs from 'dayjs'
 import isoWeek from "dayjs/plugin/isoWeek";
 import { stdnum } from 'stdnum';
@@ -483,6 +483,48 @@ export const testPowerForPeriods = (
     : rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
     ? t('SOME_PERIOD_MORE_THAN', { value })
     : t('POWER_NO_LESS_THAN', { value })
+
+  return createError({ message })
+}
+
+export const newTestPowerForPeriods = (
+  rate,
+  values,
+  limit = 'min_power',
+  createError
+) => {
+  let valids = 0
+  let inLimit = false
+
+  const newRates = getNewRates()
+
+  if (newRates[rate] === undefined) return true
+
+  for (let i = 1; i <= newRates[rate]?.num_power_periods; i++) {
+    const attr = `power${i}`
+
+    if (limit.match('min')) {
+     inLimit = values[attr] >= newRates[rate][limit]?.power
+    } else {
+      inLimit = rate == 'power-lower-15kw'
+        ? values[attr] <= newRates[rate][limit]?.power
+        : true
+    }
+
+    inLimit && valids++
+    values[attr] === undefined && valids++
+  }
+
+  if (valids >= newRates[rate][limit]?.num_periods_apply) {
+    return true
+  }
+
+  const value = newRates[rate][limit]?.power
+  const message = !limit.match('min')
+    ? ('POWER_NO_MORE_THAN', { value })
+    : newRates[rate]?.num_power_periods > newRates[rate][limit]?.num_periods_apply
+    ? `SOME_PERIOD_MORE_THAN${value}`
+    : `POWER_NO_LESS_THAN${value}`
 
   return createError({ message })
 }
