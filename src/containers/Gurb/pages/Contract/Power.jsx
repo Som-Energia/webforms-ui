@@ -1,9 +1,7 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { HelperText } from '../../../../components/InputField'
-import Chooser from '../../../../components/NewChooser'
-import PowerInputs from '../../components/PowerInputs'
+import Powers from '../../../../components/Powers'
 import RequiredTitle from '../../../../components/InputTitle'
 
 import BoltIcon from '@mui/icons-material/Bolt'
@@ -58,60 +56,8 @@ const Power = (props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Typography sx={textHeader5}>{t('GURB_POWER_HELPER')}</Typography>
+        <Powers {...props}/>
       </Grid>
-      <Grid item xs={12}>
-        <Chooser
-          name="power_question"
-          options={options}
-          value={values.contract.power_type}
-          handleChange={handlePowerQuestion}
-        />
-      </Grid>
-      {values.contract.power_type === 'power-lower-15kw' ? (
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <PowerInputs
-                name="contract.power"
-                numInputs={2}
-                {...props}
-                values={values?.contract.power}
-                errors={errors?.contract}
-                touched={touched?.contract}
-              />
-            </Grid>
-            <Grid item>
-              <HelperText
-                helperText={t('GURB_POWER_LOWER_15_HELPER')}
-                iconHelper={true}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      ) : null}
-      {values.contract.power_type === 'power-higher-15kw' ? (
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <PowerInputs
-                name="contract.power"
-                numInputs={6}
-                {...props}
-                values={values?.contract.power}
-                errors={errors?.contract.power}
-                touched={touched?.contract}
-              />
-            </Grid>
-            <Grid item>
-              <HelperText
-                helperText={t('GURB_POWER_HIGHER_15_HELPER')}
-                iconHelper={true}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      ) : null}
     </Grid>
   )
 }

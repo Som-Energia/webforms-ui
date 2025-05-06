@@ -18,7 +18,7 @@ import MemberIdentifier from '../NewMember/MemberIdentifier'
 import MemberPersonalData from '../NewMember/MemberPersonalData'
 import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
 import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
-import NewContractMemberPower from '../Gurb/pages/Contract/Power'
+import NewContractMemberPower from './NewContractMemberPower'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
