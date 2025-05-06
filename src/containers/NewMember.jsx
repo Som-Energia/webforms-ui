@@ -85,7 +85,9 @@ const NewMemberForm = (props) => {
       legal_person_accepted: false
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false
+    generic_especific_conditons_accepted: false,
+    urlok: t('NEWMEMBER_OK_REDIRECT_URL'),
+    urlko: t('NEWMEMBER_KO_REDIRECT_URL')
   }
 
   const validationSchemas = [

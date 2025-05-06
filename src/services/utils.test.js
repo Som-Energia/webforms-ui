@@ -6,7 +6,8 @@ import {
     normalizeContribution, 
     normalizeD1ConfirmationData, 
     normalizeHolderChange, 
-    normalizeMember, 
+    normalizeMember,
+    newNormalizeMember,
     normalizeModifyData,
     checkCAUWhileTyping,
 } from './utils'
@@ -131,6 +132,17 @@ describe("Check Member Form (normalize function)", () => {
         expect(normalizeMember(memberCases.newMember.entryValues)).toStrictEqual(memberCases.newMember.normalizedData)
     })
 
+})
+
+describe("Check Member new Form (normalize function)", () => {
+
+  test("Normalize Member data (phisical)", () => {
+      expect(newNormalizeMember(memberCases.newNewMemberPhisical.entryValues)).toStrictEqual(memberCases.newNewMemberPhisical.normalizedData)
+  })
+
+  test("Normalize Member data (juridical)", () => {
+    expect(newNormalizeMember(memberCases.newNewMemberJuridical.entryValues)).toStrictEqual(memberCases.newNewMemberJuridical.normalizedData)
+})
 })
 
 describe("Check Holder Change Form (normalize function)", () => {
