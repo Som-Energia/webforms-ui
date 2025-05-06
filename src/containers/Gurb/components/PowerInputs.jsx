@@ -63,11 +63,11 @@ const PowerInputs = (props) => {
                 })
               }
               handleBlur={handleBlur}
-              touched={touched?.contract}
+              touched={touched?.power}
               value={values[attr]}
-              error={errors?.[attr] && touched?.[attr]}
-              helperText={
-                (touched?.[attr] && errors?.[attr]) || t('HELP_POPOVER_POWER')
+              error={errors?.[attr]}
+              textFieldHelper={
+                t('HELP_POPOVER_POWER')
               }
             />
           </Grid>
