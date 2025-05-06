@@ -19,6 +19,7 @@ import MemberPersonalData from '../NewMember/MemberPersonalData'
 import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
 import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
 import NewContractMemberPower from './NewContractMemberPower'
+import NewContractMemberSelfConsumption from './NewContractMemberSelfConsumption'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
@@ -26,9 +27,10 @@ import memberPersonalDataValidations from '../NewMember/memberPersonalDataValida
 import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
 import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
+import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
-const MAX_STEP_NUMBER = 4
+const MAX_STEP_NUMBER = 8
 const NEW_MEMBER_COST = 100
 
 const NewMemberForm = (props) => {
@@ -121,19 +123,19 @@ const NewMemberForm = (props) => {
       gurb_power: '',
       gurb_power_cost: ''
     },
+    has_selfconsumption: undefined,
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false
   }
 
   const validationSchemas = [
-    newContractMemberPowerValidations
-    /*
     memberIdentifierValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
     newContractMemberSupplyPointDataValidations,
     newContractMemberPowerValidations,
-    memberSummaryValidations*/
+    newContractMemberSelfConsumptionValidations,
+    memberSummaryValidations
   ]
 
   const nextStep = (formikProps) => {
@@ -161,8 +163,6 @@ const NewMemberForm = (props) => {
   }
 
   const getStep = (props) => {
-    return <NewContractMemberPower {...props} />
-    /*
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />
     } else if (activeStep === 1) {
@@ -173,9 +173,12 @@ const NewMemberForm = (props) => {
       return <NewContractMemberSupplyPointData {...props} />
     } else if (activeStep === 4) {
       return <NewContractMemberPower {...props} />
-    } else {
+    } else if (activeStep === 5) {
+      return <NewContractMemberSelfConsumption {...props} />
+    }
+    else {
       return <MemberSummary {...props} />
-    }*/
+    }
   }
 
   const formikRef = useRef(null)
