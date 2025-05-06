@@ -394,6 +394,47 @@ export const normalizeContract = (contract) => {
   return sanitizeData(finalContract)
 }
 
+export const newNormalizeMember = (data) => {
+  const finalMember = {};
+
+  finalMember.tipuspersona = data.person_type === 'physic-person'
+    ? USER_TYPE_PERSON
+    : USER_TYPE_COMPANY
+
+  finalMember.nom = data.name
+  finalMember.dni = data.nif
+  finalMember.tel = data.phone
+  finalMember.email = data.email
+  finalMember.cp = data.address.postal_code
+  finalMember.provincia = data.address.state.id
+  finalMember.adreca = `${data.address.street}, ${data.address.number} ${data.address.bloc} ${data.address.floor} ${data.address.door}`.trim()
+  finalMember.municipi = data.address.city.id
+  finalMember.idioma = data.language
+
+  finalMember.payment_method =
+    data.payment_method === 'iban'
+      ? PAYMENT_METHOD_PAYMENT_ORDER
+      : PAYMENT_METHOD_CREDIT_CARD
+
+  finalMember.payment_iban = data.iban;
+
+  finalMember.urlok = data.urlok
+  finalMember.urlko = data.urlko
+
+  if (data.person_type === 'physic-person') {
+    finalMember.cognom = `${data.surname1} ${data.surname2}`.trim()
+    finalMember.birthdate = data.birthdate.toISOString().split('T')[0]
+    finalMember.gender = data.gender
+  } else {
+    finalMember.representant_nom = data.proxyname
+    finalMember.representant_dni = data.proxynif
+  }
+
+  finalMember.how_meet_us = data.how_meet_us
+
+  return finalMember
+}
+
 export const normalizeMember = (data) => {
   const finalMember = {}
 

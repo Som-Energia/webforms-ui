@@ -84,7 +84,10 @@ const NewMemberForm = (props) => {
     },
     privacy_policy_accepted: false,
     statutes_accepted: false,
-    comercial_info_accepted: false
+    comercial_info_accepted: false,
+    generic_especific_conditons_accepted: false,
+    urlok: t('NEWMEMBER_OK_REDIRECT_URL'),
+    urlko: t('NEWMEMBER_KO_REDIRECT_URL')
   }
 
   const validationSchemas = [
