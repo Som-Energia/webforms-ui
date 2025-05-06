@@ -11,6 +11,8 @@ import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
 import SomStepper from '../components/SomStepper'
 
+import { newNormalizeMember } from '../services/utils'
+import { member } from '../services/api'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 import SummaryContext from '../context/SummaryContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
@@ -32,6 +34,9 @@ const NewMemberForm = (props) => {
   const { language } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
+  const [sending, setSending] = useState(false)
+  const [completed, setCompleted] = useState(false)
+  const [error, setError] = useState(false)
   const formTPV = useRef(null)
 
   const { loading } = useContext(GurbLoadingContext)
@@ -118,7 +123,33 @@ const NewMemberForm = (props) => {
   }
 
   const handlePost = async (values) => {
-    console.log('POST final')
+    setSending(true)
+    // trackEvent({ category: 'Send', action: 'sendNewMemberClick', name: 'send-new-member' })  // TODO: We will track same things?
+
+    const data = newNormalizeMember(values)
+    await member(data)
+      .then((response) => {
+        if (response?.state === true) {
+          setError(false)
+          // trackSucces()  // TODO: We will track same things?
+          if (response?.data?.endpoint) {
+            setData(response?.data)
+            setUrl(response.data.endpoint)
+          } else {
+            setCompleted(true)
+          }
+        } else {
+          console.log(response)
+          setError(true)
+          // handleError(response)  // TODO: Simplify
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+        setError(true)
+        // handleError(error?.response?.data)  // TODO: Simplify
+      })
+    setSending(false)
   }
 
   const getStep = (props) => {
@@ -166,7 +197,17 @@ const NewMemberForm = (props) => {
                 activeStep={activeStep}
                 steps={NEW_MEMBER_FORM_SUBSTEPS}
               />
-              {getStep(formikProps)}
+              {completed ? (
+                error ? (  // TODO
+                  <Failure error={error} />
+                ) : (
+                  <Success
+                    description={t('NEWMEMBER_OK_DESCRIPTION')}
+                  />
+                )
+              ) : (
+                getStep(formikProps)
+              )}
               <Grid
                 container
                 direction="row-reverse"
@@ -179,6 +220,7 @@ const NewMemberForm = (props) => {
                 {activeStep !== 0 && (
                   <Grid item sm={2} xs={12}>
                     <PrevButton
+                      disabled={sending}
                       onClick={() => prevStep(formikProps)}
                       title={'PREV'}
                     />
@@ -197,8 +239,9 @@ const NewMemberForm = (props) => {
                     />
                   ) : (
                     <SubmitButton
-                      disabled={!formikProps.isValid}
-                      onClick={() => handlePost()}
+                      disabled={!formikProps.isValid || sending}
+                      sending={sending}
+                      onClick={() => handlePost(formikProps.values)}
                     />
                   )}
                 </Grid>
