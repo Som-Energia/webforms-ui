@@ -20,6 +20,7 @@ import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
 import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
 import NewContractMemberPower from './NewContractMemberPower'
 import NewContractMemberSelfConsumption from './NewContractMemberSelfConsumption'
+import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
@@ -28,6 +29,7 @@ import newContractMemberSupplyPointValidations from './newContractMemberSupplyPo
 import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
 import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
+import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
 const MAX_STEP_NUMBER = 8
@@ -124,11 +126,20 @@ const NewMemberForm = (props) => {
       gurb_power_cost: ''
     },
     has_selfconsumption: undefined,
+    self_consumption: {
+      cau: undefined,
+      collective_installation: undefined,
+      installation_type: '',
+      technology:'',
+      aux_services: '',
+      power: ''
+    },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false
   }
 
   const validationSchemas = [
+    newContractMemberSelfConsumptionDataValidations,
     memberIdentifierValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
@@ -163,6 +174,7 @@ const NewMemberForm = (props) => {
   }
 
   const getStep = (props) => {
+    return <NewContractMemberSelfConsumptionData {...props} />
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />
     } else if (activeStep === 1) {
