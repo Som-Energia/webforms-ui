@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import TextRecomendation from '../Gurb/components/TextRecomendation'
 import Chooser from '../../components/NewChooser'
 import { HelperText } from '../../components/InputField'
 import Typography from '@mui/material/Typography'
@@ -53,7 +52,7 @@ const NewContractMemberSelfConsumption = (props) => {
       <Grid item xs={12}>
           <Typography variant="subtitle2">{t('SELFCONSUMPTION_HELPER')}</Typography>        
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Chooser
           name="selfconsumption-question"
           options={options}
@@ -61,7 +60,7 @@ const NewContractMemberSelfConsumption = (props) => {
           handleChange={handleSelfconsumptionQuestion}
         />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <HelperText
           helperText={t('GURB_SELFCONSUMPTION_HELPER')}
           iconHelper={true}
