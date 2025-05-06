@@ -397,40 +397,43 @@ export const normalizeContract = (contract) => {
 export const newNormalizeMember = (data) => {
   const finalMember = {};
 
-  finalMember.tipuspersona = data.person_type === 'physic-person'
+  finalMember.tipuspersona = data.new_member.person_type === 'physic-person'
     ? USER_TYPE_PERSON
     : USER_TYPE_COMPANY
 
-  finalMember.nom = data.name
-  finalMember.dni = data.nif
-  finalMember.tel = data.phone
-  finalMember.email = data.email
+  finalMember.nom = data.new_member.name
+  finalMember.dni = data.new_member.nif
+  finalMember.tel = data.new_member.phone
+  finalMember.email = data.new_member.email
   finalMember.cp = data.address.postal_code
   finalMember.provincia = data.address.state.id
   finalMember.adreca = `${data.address.street}, ${data.address.number} ${data.address.bloc} ${data.address.floor} ${data.address.door}`.trim()
   finalMember.municipi = data.address.city.id
-  finalMember.idioma = data.language
+  finalMember.idioma = data.new_member.language
 
   finalMember.payment_method =
-    data.payment_method === 'iban'
+    data.new_member.payment_method === 'iban'
       ? PAYMENT_METHOD_PAYMENT_ORDER
       : PAYMENT_METHOD_CREDIT_CARD
 
-  finalMember.payment_iban = data.iban;
+  finalMember.payment_iban = data.new_member.iban;
 
   finalMember.urlok = data.urlok
   finalMember.urlko = data.urlko
 
-  if (data.person_type === 'physic-person') {
-    finalMember.cognom = `${data.surname1} ${data.surname2}`.trim()
-    finalMember.birthdate = data.birthdate.toISOString().split('T')[0]
-    finalMember.gender = data.gender
+  if (data.new_member.person_type === 'physic-person') {
+    finalMember.cognom = `${data.new_member.surname1} ${data.new_member.surname2}`.trim()
+    finalMember.birthdate =
+      data.new_member.birthdate
+        ? data.new_member.birthdate.toISOString().split('T')[0]
+        : ""
+    finalMember.gender = data.new_member.gender
   } else {
-    finalMember.representant_nom = data.proxyname
-    finalMember.representant_dni = data.proxynif
+    finalMember.representant_nom = data.new_member.proxyname
+    finalMember.representant_dni = data.new_member.proxynif
   }
 
-  finalMember.how_meet_us = data.how_meet_us
+  finalMember.how_meet_us = data.new_member.how_meet_us
 
   return finalMember
 }
