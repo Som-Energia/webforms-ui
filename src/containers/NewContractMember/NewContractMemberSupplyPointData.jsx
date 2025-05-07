@@ -48,10 +48,12 @@ const NewContractMemberSupplyPointData = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('SUPPLY_POINT_DATA_TITLE')}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="subtitle2">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+        <Grid item xs={12}>
+          <Typography variant="headline3">{t('SUPPLY_POINT_DATA_TITLE')}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="body.sm.regular" color="secondary.dark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+        </Grid>
       </Grid>
       <Grid item xs={12} sm={12}>
         <AddressField

@@ -951,5 +951,8 @@
     "RECOMMENDATION_SUBTITLE": "Et recomanem tenir a mà un contracte de llum per anar omplint les dades del formulari",
     "POWER_TITLE": "Potència",
     "SELFCONSUMPTION_HELPER": "Autoconsum ès la generació d'energia per el consum propi. Per exemple, tenir plaques solars.",
-    "SELCONSUMPTION_WARNING": "No indiquis aquesta opció si encara NO has acabats el tràmits amb la teva comercialitzadora actual, encara que tinguis la instal·lació realitzada i registrada a la teva CCAA."
+    "SELCONSUMPTION_WARNING": "No indiquis aquesta opció si encara NO has acabats el tràmits amb la teva comercialitzadora actual, encara que tinguis la instal·lació realitzada i registrada a la teva CCAA.",
+    "SOM_SERVEIS_INFO_TITLE":"Vols rebre informació de Som Serveis?",
+    "SOM_SERVEIS_INF0_ACCEPTED":"Si acceptes rebre aquesta informació, consents que les teves dades siguin cedides a les cooperatives que formen part de Som Serveis (Som Connexió -www.somconnexio.coop-, Som Mobilitat -www.sommobilitat.coop- i Som Energia) perquè contactin amb tu i/o t'enviïn informació comercial dels seus serveis per mitjans electrònics. Més informació en la política de privacitat (3. Destinataris de les teves dades).",
+    "PREVIUOS_HOLDER_TITLE":"Eres la persona titular amb la comercialitzadora anterior?"
 }
