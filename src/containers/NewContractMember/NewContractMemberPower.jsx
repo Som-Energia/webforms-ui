@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Powers from '../../components/Powers'
@@ -26,7 +25,7 @@ const NewContractMemberPower = (props) => {
           <Typography variant="headline3">{t('POWER_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="subtitle2">{t('SUPPLY_POINT_DATA_SUBTITLE')}</Typography>        
+          <Typography variant="subtitle2">{t('RECOMMENDATION_SUBTITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
           <Typography variant="subtitle4">{t('POTENCIA_A_CONTRACTAR')}</Typography>        

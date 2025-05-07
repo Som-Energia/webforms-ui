@@ -771,5 +771,5 @@
     "LIGHT_MARKETER_NO": "No tengo dada de alta la luz con ninguna comercializadora.",
     "HAS_LIGHT_TITLE": "Actualmente hay luz en tu casa?",
     "SUPPLY_POINT_DATA_TITLE": "Datos del punto de subministro",
-    "SUPPLY_POINT_DATA_SUBTITLE": "Te recomendamos tener a mano un contrato de luz para ir rellenando los datos del formulario"
+    "RECOMMENDATION_SUBTITLE": "Te recomendamos tener a mano un contrato de luz para ir rellenando los datos del formulario"
 }

@@ -7,10 +7,12 @@ import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 
-import CAUField from '../../components/CAUField'
+import { BatteryIcon } from '../../data/icons/Icons'
+import CAUField from '../../components/NewCAUField'
 import Chooser from '../../components/NewChooser'
 import InputField from '../../components/InputField'
 import SelectField from '../../components/SelectField'
+import InputTitle from '../../components/InputTitle'
 
 import {
     getSelfConsumptionSituations,
@@ -30,23 +32,14 @@ const NewContractMemberSelfConsumptionData = (props) => {
 
   const { t } = useTranslation()
 
-  const handleCollectiveInstallation = ({ option }) => {
-    console.log('option', option)
-    setFieldValue('self_consumption.collective_installation', option)
+  const handleCollectiveInstallation = ( value ) => {
+    console.log('option', value)
+    setFieldValue('self_consumption.collective_installation', value)
   }
 
-  const handleAuxiliaryService = ({ option }) => {
-    setFieldValue('self_consumption.aux_services', option)
+  const handleAuxiliaryService = ( value ) => {
+    setFieldValue('self_consumption.aux_services', value)
   }
-
-  const handleChangeInstallationType = (event) => {
-    setFieldValue(event.target.name, event.target.value)
-  }
-
-  const handleChangeTechnology = (event) => {
-    setFieldValue(event.target.name, event.target.value)
-  }
-
 
   const handleChangeInstallPower = (event) => {
     const regex = /^\d*([.,'])?\d{0,3}/g
@@ -64,38 +57,29 @@ const NewContractMemberSelfConsumptionData = (props) => {
   }
 
   const [situations, setSituations] = useState([])
-  const [isLoadingSituations, setLoadingSituations] = useState(false)
-
   const [technologies, setTechnologies] = useState([])
-  const [isLoadingTechnologies, setLoadingTechnologies] = useState(false)
 
   useEffect(() => {
-    setLoadingTechnologies(true)
     getSelfConsumptionTechnologies()
       .then((response) => {
         let technologies = {}
         response?.data.forEach((e) => technologies[e.id] = e.name)
         setTechnologies(technologies)
-        setLoadingTechnologies(false)
       })
       .catch((error) => {
         console.error(error)
-        setLoadingTechnologies(false)
       })
   }, [])
 
   useEffect(() => {
-    setLoadingSituations(true)
     getSelfConsumptionSituations()
       .then((response) => {
         let situations = {}
         response?.data.forEach((e) => situations[e.id] = e.name)
         setSituations(situations)
-        setLoadingSituations(false)
       })
       .catch((error) => {
         console.error(error)
-        setLoadingSituations(false)
       })
   }, [])
 
@@ -117,13 +101,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const aux_services_options = [
     {
       id: 'auxiliary-service-yes',
-      icon: <AccountCircleOutlinedIcon />,
+      icon: <BatteryIcon on={true}/>,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
       textBody: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION')
     },
     {
       id: 'auxiliary-service-no',
-      icon: <Diversity1OutlinedIcon />,
+      icon: <BatteryIcon on={false}/>,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_NO_LABEL')
     }
   ]
@@ -131,43 +115,44 @@ const NewContractMemberSelfConsumptionData = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('SELFCONSUMPTION_DATA_TITLE')}</Typography>
+        <Typography variant="headline3">{t('SELFCONSUMPTION_DETAILS_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="subtitle2">{t('SELFCONSUMPTION_DATA_SUBTITLE')}</Typography>
+        <Typography variant="subtitle2">{t('RECOMMENDATION_SUBTITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <CAUField
             required
             id="self_consumption_cau"
+            label={t('SELFCONSUMPTION_CAU_CODE')}
             name="self_consumption.cau"
-            label={t('CAU')}
             variant="outlined"
             fullWidth
             values={values}
             value={values?.self_consumption?.cau}
             onChange={handleChangeCAU}
             onBlur={handleBlur}
-            error={
-              // Show error if any content or if the field is empty but has been visited
-              (touched?.self_consumption?.cau || values.self_consumption?.cau) && !!errors?.self_consumption?.cau
-            }
+            touched={touched?.self_consumption?.cau}
+            error={errors?.self_consumption?.cau}
             helperText={
-              // if empty field, show the helper message, not the error
-              (!!values?.self_consumption?.cau && errors?.self_consumption?.cau) || (
-                <a
-                  href={t('SELFCONSUMPTION_CAU_HELP_URL')}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  {t('SELFCONSUMPTION_CAU_HELP')}
-                </a>
-              )
+              <a
+                href={t('SELFCONSUMPTION_CAU_HELP_URL')}
+                target="_blank"
+                rel="noopener noreferrer">
+                {t('SELFCONSUMPTION_CAU_HELP')}
+              </a>
             }
             cupsToMatch={
               props.values?.self_consumption?.collective_installation?
                 undefined:
                 props.values.cups
             }
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <InputTitle
+            text={t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_QUESTION')}
+            required={true}
           />
         </Grid>
         <Grid item xs={12}>
@@ -180,15 +165,15 @@ const NewContractMemberSelfConsumptionData = (props) => {
         </Grid>
         <Grid item xs={12}>
             <InputField
-              name={'self_consumption.power'}
               required={true}
+              name={'self_consumption.installation_power'}
               textFieldName={t('GURB_CURRENT_POWER')}
               endAdornmentText={'kW'}
               handleChange={handleChangeInstallPower}
               handleBlur={handleBlur}
-              touched={touched?.self_consumption?.power}
-              value={values?.self_consumption?.power}
-              error={errors?.self_consumption?.power}
+              touched={touched?.self_consumption?.installation_power}
+              value={values?.self_consumption?.installation_power}
+              error={errors?.self_consumption?.installation_power}
               textFieldHelper={
                 t('HELP_POPOVER_POWER')
               }
@@ -200,6 +185,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
             value={values?.self_consumption?.installation_type}
             fieldName="self_consumption.installation_type"
             options={situations}
+            required={true}
             {...props}
         />
       </Grid>
@@ -209,17 +195,24 @@ const NewContractMemberSelfConsumptionData = (props) => {
             value={values?.self_consumption?.technology}
             fieldName="self_consumption.technology"
             options={technologies}
+            required={true}
             {...props}
         />
       </Grid>
       <Grid item xs={12}>
-            <Chooser
-                name="aux_services_question"
-                options={aux_services_options}
-                value={values?.self_consumption?.aux_services}
-                handleChange={handleAuxiliaryService}
-            />
-        </Grid>
+        <InputTitle
+          text={t('SELFCONSUMPTION_DETAILS_QUESTION_AUXILIARY_SERVICE')}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+          <Chooser
+              name="aux_services_question"
+              options={aux_services_options}
+              value={values?.self_consumption?.aux_services}
+              handleChange={handleAuxiliaryService}
+          />
+      </Grid>
     </Grid>
   )
 }

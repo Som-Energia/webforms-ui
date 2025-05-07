@@ -122,30 +122,29 @@ const NewMemberForm = (props) => {
         power5: '',
         power6: ''
       },
-      gurb_power: '',
-      gurb_power_cost: ''
     },
     has_selfconsumption: undefined,
     self_consumption: {
       cau: undefined,
+      cau_error: false,
       collective_installation: undefined,
       installation_type: '',
-      technology:'',
-      aux_services: '',
-      power: ''
+      technology:'b11',
+      aux_services: undefined,
+      installation_power: ''
     },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false
   }
 
   const validationSchemas = [
-    newContractMemberSelfConsumptionDataValidations,
     memberIdentifierValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
     newContractMemberSupplyPointDataValidations,
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
+    newContractMemberSelfConsumptionDataValidations,
     memberSummaryValidations
   ]
 
@@ -174,7 +173,6 @@ const NewMemberForm = (props) => {
   }
 
   const getStep = (props) => {
-    return <NewContractMemberSelfConsumptionData {...props} />
     if (activeStep === 0) {
       return <MemberIdentifier {...props} />
     } else if (activeStep === 1) {
@@ -187,6 +185,8 @@ const NewMemberForm = (props) => {
       return <NewContractMemberPower {...props} />
     } else if (activeStep === 5) {
       return <NewContractMemberSelfConsumption {...props} />
+    } else if (activeStep === 6) {
+      return <NewContractMemberSelfConsumptionData {...props} />
     }
     else {
       return <MemberSummary {...props} />

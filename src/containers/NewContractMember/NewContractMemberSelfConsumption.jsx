@@ -44,7 +44,7 @@ const NewContractMemberSelfConsumption = (props) => {
           <Typography variant="headline3">{t('SELFCONSUMPTION_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="subtitle2">{t('SUPPLY_POINT_DATA_SUBTITLE')}</Typography>        
+          <Typography variant="subtitle2">{t('RECOMMENDATION_SUBTITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
           <Typography variant="subtitle4">{t('POTENCIA_A_CONTRACTAR')}</Typography>        
