@@ -21,6 +21,7 @@ import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData
 import NewContractMemberPower from './NewContractMemberPower'
 import NewContractMemberSelfConsumption from './NewContractMemberSelfConsumption'
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
+import NewContractMemberHolder from './NewContractMemberHolder'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
@@ -30,6 +31,7 @@ import newContractMemberSupplyPointDataValidations from './newContractMemberSupp
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
 import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
 import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
+import newContractMemberHolderValidations from './newContractMemberHolderValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
 const MAX_STEP_NUMBER = 8
@@ -54,6 +56,7 @@ const NewMemberForm = (props) => {
   const initialValues = {
     cups: '',
     has_light: undefined,
+    previous_holder: undefined,
     supply_point: {
       cnae: '',
       cadastral_reference: '',
@@ -134,7 +137,8 @@ const NewMemberForm = (props) => {
       installation_power: ''
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false
+    generic_especific_conditons_accepted: false,
+    som_serveis_info_accepted: false
   }
 
   const validationSchemas = [
@@ -145,6 +149,7 @@ const NewMemberForm = (props) => {
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
+    newContractMemberHolderValidations,
     memberSummaryValidations
   ]
 
@@ -187,7 +192,10 @@ const NewMemberForm = (props) => {
       return <NewContractMemberSelfConsumption {...props} />
     } else if (activeStep === 6) {
       return <NewContractMemberSelfConsumptionData {...props} />
+    } else if (activeStep === 7) {
+      return <NewContractMemberHolder {...props} />
     }
+
     else {
       return <MemberSummary {...props} />
     }
