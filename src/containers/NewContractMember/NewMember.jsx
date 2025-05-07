@@ -22,6 +22,7 @@ import NewContractMemberPower from './NewContractMemberPower'
 import NewContractMemberSelfConsumption from './NewContractMemberSelfConsumption'
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
 import NewContractMemberHolder from './NewContractMemberHolder'
+import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
@@ -32,9 +33,10 @@ import newContractMemberPowerValidations from './newContractMemberPowerValidatio
 import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
 import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
 import newContractMemberHolderValidations from './newContractMemberHolderValidations'
+import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
-const MAX_STEP_NUMBER = 8
+const MAX_STEP_NUMBER = 9
 const NEW_MEMBER_COST = 100
 
 const NewMemberForm = (props) => {
@@ -57,6 +59,7 @@ const NewMemberForm = (props) => {
     cups: '',
     has_light: undefined,
     previous_holder: undefined,
+    voluntary_donation: undefined,
     supply_point: {
       cnae: '',
       cadastral_reference: '',
@@ -150,6 +153,7 @@ const NewMemberForm = (props) => {
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
     newContractMemberHolderValidations,
+    newContractMemberVoluntaryDonationValidations,
     memberSummaryValidations
   ]
 
@@ -194,6 +198,8 @@ const NewMemberForm = (props) => {
       return <NewContractMemberSelfConsumptionData {...props} />
     } else if (activeStep === 7) {
       return <NewContractMemberHolder {...props} />
+    } else if (activeStep === 8) {
+      return <NewContractMemberVoluntaryDonation {...props} />
     }
 
     else {
