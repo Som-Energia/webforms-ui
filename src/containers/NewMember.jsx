@@ -16,6 +16,7 @@ import { member } from '../services/api'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 import SummaryContext from '../context/SummaryContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import MatomoContext from '../trackers/matomo/MatomoProvider'
 import MemberIdentifier from './NewMember/MemberIdentifier'
 import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
@@ -41,6 +42,7 @@ const NewMemberForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
+  const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -102,6 +104,10 @@ const NewMemberForm = (props) => {
     memberSummaryValidations
   ]
 
+  useEffect(() => {
+    trackEvent({ category: 'NewMember', action: 'setNewMemberStep', name: `new-member-step-${activeStep}`})
+  }, [activeStep])
+
   const nextStep = (formikProps) => {
     let next
     if (
@@ -122,16 +128,20 @@ const NewMemberForm = (props) => {
     setActiveStep(Math.max(0, prev))
   }
 
+  const trackSucces = () => {
+    trackEvent({ category: 'NewMember', action: 'newMemberFormOk', name: 'send-new-member-ok' })
+  }
+
   const handlePost = async (values) => {
     setSending(true)
-    // trackEvent({ category: 'Send', action: 'sendNewMemberClick', name: 'send-new-member' })  // TODO: We will track same things?
+    trackEvent({ category: 'Send', action: 'sendNewMemberClick', name: 'send-new-member' })
 
     const data = newNormalizeMember(values)
     await member(data)
       .then((response) => {
         if (response?.state === true) {
           setError(false)
-          // trackSucces()  // TODO: We will track same things?
+          trackSucces()
           if (response?.data?.endpoint) {
             setData(response?.data)
             setUrl(response.data.endpoint)
