@@ -37,7 +37,7 @@ const newContractMemberHolder = (props) => {
 
   const handleCheckboxChange = (event) => {
     let value = event.target.checked
-    setFieldValue('som_serveis_info_accepted', value)
+    setFieldValue('comercial_info_accepted', value)
   }
 
   return (
@@ -69,8 +69,8 @@ const newContractMemberHolder = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              data-cy="som_serveis_info_accepted"
-              checked={values?.som_serveis_info_accepted}
+              data-cy="comercial_info_accepted"
+              checked={values?.comercial_info_accepted}
               onChange={handleCheckboxChange}
             />
           }
