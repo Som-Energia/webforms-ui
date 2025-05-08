@@ -33,7 +33,6 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const { t } = useTranslation()
 
   const handleCollectiveInstallation = ( value ) => {
-    console.log('option', value)
     setFieldValue('self_consumption.collective_installation', value)
   }
 
@@ -63,7 +62,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
     getSelfConsumptionTechnologies()
       .then((response) => {
         let technologies = {}
-        response?.data.forEach((e) => technologies[e.id] = e.name)
+        response?.data.forEach((e) => technologies[e.id] = t(e.name))
         setTechnologies(technologies)
       })
       .catch((error) => {

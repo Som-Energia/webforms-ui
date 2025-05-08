@@ -11,7 +11,7 @@ import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
 import SomStepper from '../../components/SomStepper'
 
-import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
+import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
@@ -24,7 +24,7 @@ import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsump
 import NewContractMemberHolder from './NewContractMemberHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import NewContractMemberPayment from './NewContractMemberPayment'
-import MemberSummary from '../NewMember/MemberSummary'
+import NewContractMemberSummary from './NewContractMemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations,'
@@ -36,7 +36,7 @@ import newContractMemberSelfConsumptionDataValidations from './newContractMember
 import newContractMemberHolderValidations from './newContractMemberHolderValidations'
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
-import memberSummaryValidations from '../NewMember/memberSummaryValidations'
+import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
 
 const MAX_STEP_NUMBER = 10
 const NEW_MEMBER_COST = 100
@@ -96,7 +96,7 @@ const NewMemberForm = (props) => {
     new_member: {
       nif: '',
       become_member: false,
-      is_physical: undefined,
+      is_physical: 'physic-person',
       proxynif_valid: false,
       proxynif: '',
       proxyname: '',
@@ -156,14 +156,14 @@ const NewMemberForm = (props) => {
     newContractMemberHolderValidations,
     newContractMemberVoluntaryDonationValidations,
     newContractMemberPaymentValidations,
-    memberSummaryValidations
+    newContractMemberSummaryValidations
   ]
 
   const nextStep = (formikProps) => {
     let next
     if (
       summaryField !== undefined &&
-      activeStep !== NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+      activeStep !== NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER']
     ) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
@@ -205,9 +205,8 @@ const NewMemberForm = (props) => {
     } else if (activeStep === 9) {
       return <NewContractMemberPayment {...props} />
     }
-
     else {
-      return <MemberSummary {...props} />
+      return <NewContractMemberSummary {...props} />
     }
   }
 
@@ -242,7 +241,7 @@ const NewMemberForm = (props) => {
             <>
               <SomStepper
                 activeStep={activeStep}
-                steps={NEW_MEMBER_FORM_SUBSTEPS}
+                steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
               />
               {getStep(formikProps)}
               <Grid

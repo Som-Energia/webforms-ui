@@ -496,8 +496,8 @@
     "Red interior da varios consumidores (instalación de enlace)": "Xarxa interior d'unes quantes persones consumidores (instal·lació d'enllaç)",
     "Próxima a través de red": "Pròxima a través de xarxa",
     "Red interior": "Xarxa interior",
-    "[B11] - Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la tecnología fotovoltaica.": "[B11] - Instal·lacions que utilitzen únicament la radiació solar com a energia primària mitjançant la tecnologia fotovoltaica.",
-    "[B21] - Instalaciones eólicas ubicadas en tierra.": "[B21] - Instal·lacions eòliques ubicades a terra.",
+    "[B11] - Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la tecnología fotovoltaica.": "Solar",
+    "[B21] - Instalaciones eólicas ubicadas en tierra.": "Eòlica",
     "Otras tecnologias": "Altres tecnologies",
     "SELFCONSUMPTION_INTERNAL_NET": "Xarxa interna",
     "SELFCONSUMPTION_INTERNAL_NET_VARIOUS": "Xarxa interna de diverses persones consumidores",
@@ -958,5 +958,9 @@
     "IBAN_EXPLANATION": "Servirà per fer el cobrament de les factures del llum al teu compte.",
     "PAYMENT_METHOD_QUESTION": "Selecciona com vols fer el pagament per associar-te",
     "IBAN_PAYMENT_QUESTION_OPTION": "Utilitza l'IBAN indicat abans",
-    "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€"
+    "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€",
+    "NEW_MEMBER_SUMMARY_PROCESS": "Alta de nova persona sòcia",
+    "NEW_CONTRACT_SUMMARY_PROCESS": "Canvi de comercialitzadora canviant la persona titular ",
+    "TECHNICAL_DATA_SUMMARY": "Dades técniques",
+    "CURRENT": "Actual"
 }
