@@ -23,6 +23,7 @@ import NewContractMemberSelfConsumption from './NewContractMemberSelfConsumption
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
 import NewContractMemberHolder from './NewContractMemberHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
+import NewContractMemberPayment from './NewContractMemberPayment'
 import MemberSummary from '../NewMember/MemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
@@ -34,9 +35,10 @@ import newContractMemberSelfConsumptionValidations from './newContractMemberSelf
 import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
 import newContractMemberHolderValidations from './newContractMemberHolderValidations'
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
+import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
 import memberSummaryValidations from '../NewMember/memberSummaryValidations'
 
-const MAX_STEP_NUMBER = 9
+const MAX_STEP_NUMBER = 10
 const NEW_MEMBER_COST = 100
 
 const NewMemberForm = (props) => {
@@ -114,7 +116,6 @@ const NewMemberForm = (props) => {
       sepa_accepted: false,
       iban: undefined,
       terms_accepted: false,
-      comercial_info_accepted: false,
       legal_person_accepted: false
     },
     contract: {
@@ -141,7 +142,7 @@ const NewMemberForm = (props) => {
     },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false,
-    som_serveis_info_accepted: false
+    comercial_info_accepted: false
   }
 
   const validationSchemas = [
@@ -154,6 +155,7 @@ const NewMemberForm = (props) => {
     newContractMemberSelfConsumptionDataValidations,
     newContractMemberHolderValidations,
     newContractMemberVoluntaryDonationValidations,
+    newContractMemberPaymentValidations,
     memberSummaryValidations
   ]
 
@@ -200,6 +202,8 @@ const NewMemberForm = (props) => {
       return <NewContractMemberHolder {...props} />
     } else if (activeStep === 8) {
       return <NewContractMemberVoluntaryDonation {...props} />
+    } else if (activeStep === 9) {
+      return <NewContractMemberPayment {...props} />
     }
 
     else {

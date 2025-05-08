@@ -954,5 +954,9 @@
     "SELCONSUMPTION_WARNING": "No indiquis aquesta opció si encara NO has acabats el tràmits amb la teva comercialitzadora actual, encara que tinguis la instal·lació realitzada i registrada a la teva CCAA.",
     "SOM_SERVEIS_INFO_TITLE":"Vols rebre informació de Som Serveis?",
     "SOM_SERVEIS_INF0_ACCEPTED":"Si acceptes rebre aquesta informació, consents que les teves dades siguin cedides a les cooperatives que formen part de Som Serveis (Som Connexió -www.somconnexio.coop-, Som Mobilitat -www.sommobilitat.coop- i Som Energia) perquè contactin amb tu i/o t'enviïn informació comercial dels seus serveis per mitjans electrònics. Més informació en la política de privacitat (3. Destinataris de les teves dades).",
-    "PREVIUOS_HOLDER_TITLE":"Eres la persona titular amb la comercialitzadora anterior?"
+    "PREVIUOS_HOLDER_TITLE":"Eres la persona titular amb la comercialitzadora anterior?",
+    "IBAN_EXPLANATION": "Servirà per fer el cobrament de les factures del llum al teu compte.",
+    "PAYMENT_METHOD_QUESTION": "Selecciona com vols fer el pagament per associar-te",
+    "IBAN_PAYMENT_QUESTION_OPTION": "Utilitza l'IBAN indicat abans",
+    "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€"
 }
