@@ -35,7 +35,7 @@ const PaymentMethod = (props) => {
       await setFieldError('new_member.iban_valid', undefined)
       setFieldValue('new_member.iban_valid', true)
     } else {
-      await setFieldError('holder.iban_valid', t('INVALID_IBAN'))
+      await setFieldError('new_member.iban_valid', t('INVALID_IBAN'))
       setFieldValue('new_member.iban_valid', false)
     }
   }
