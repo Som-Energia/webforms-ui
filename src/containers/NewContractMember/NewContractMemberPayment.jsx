@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect , useState} from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -13,6 +13,7 @@ import { checkIbanFormat } from '../../services/utils'
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
 import InputField from '../../components/InputField'
+import TermsDialog from '../Gurb/components/TermsDialog'
 
 const PaymentMethod = (props) => {
   const {
@@ -55,10 +56,21 @@ const PaymentMethod = (props) => {
     setFieldTouched('new_member.iban', true)
   }
 
-  const handleCheckboxChange = async (event) => {
-    let value = event.target.checked
-    await setFieldValue('new_member.sepa_accepted', value)
-    setFieldTouched('new_member.sepa_accepted', true)
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('new_member.sepa_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('new_member.sepa_accepted', false)
   }
 
   useEffect(() => {
@@ -123,8 +135,8 @@ const PaymentMethod = (props) => {
              <Checkbox
                 data-cy="iban_check"
                 checked={values?.new_member?.sepa_accepted}
-                onChange={handleCheckboxChange}
-             />
+                onClick={handleClick}
+                />
              }
             label={
               <>
@@ -138,6 +150,18 @@ const PaymentMethod = (props) => {
             }
           />
         </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <TermsDialog
+          title={t('SEPA_TITLE')}
+          open={open}
+          onAccept={handleAccept}
+          onClose={handleClose}
+          maxWidth="sm">
+          <span
+            dangerouslySetInnerHTML={{ __html: t('SEPA') }}
+          />
+        </TermsDialog>
       </Grid>
     </Grid>
   )
