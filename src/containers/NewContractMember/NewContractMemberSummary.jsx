@@ -7,6 +7,7 @@ import InputTitle from '../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import Divider from '@mui/material/Divider'
 
 import PersonIcon from '@mui/icons-material/Person'
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
@@ -290,6 +291,31 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
+      </Grid>
+      <Grid item xs={12}>
+        <Divider sx={{ my: 2 }} />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="body2">
+          {t('GURB_SUMMARY_OTHER_CONCEPTS_TITLE')}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="body2"
+          dangerouslySetInnerHTML={{
+            __html: t('GURB_SUMMARY_OTHER_CONCEPTS_BODY')
+          }}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Divider sx={{ my: 2 }} />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="body.sm.regular">
+          {t('PURPOSE')}
+          <br />
+          {t('RIGHTS')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
