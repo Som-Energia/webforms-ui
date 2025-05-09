@@ -19,7 +19,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
     if (!concept) {
       return <>{t('UNAVAILABLE')}</>
     }
-    keys.sort()
+    const keys = Object.keys(concept).sort()
 
     const differentValues = new Set(
       keys.map((key) => concept[key]?.value)
