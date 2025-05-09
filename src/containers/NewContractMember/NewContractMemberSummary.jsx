@@ -321,17 +321,28 @@ const NewContractMemberSummary = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              data-cy="terms_accepted"
-              checked={values?.new_member?.terms_accepted}
-              onChange={(event) => {
-                handleCheckboxChange(event, 'new_member.terms_accepted')
+            data-cy="privacy_policy"
+            checked={values?.new_member.privacy_policy_accepted}
+            onChange={(event) => {
+              handleCheckboxChange(
+                event,
+                'new_member.privacy_policy_accepted'
+              )
+            }}
+            />
+          }
+          label={
+            <label
+              dangerouslySetInnerHTML={{
+                __html: t('ACCEPT_PRIVACY_POLICY', {
+                  url: t('ACCEPT_PRIVACY_POLICY_URL')
+                })
               }}
             />
           }
-          label={t('ACCEPT_TERMS')}
         />
       </Grid>
-      {values?.new_member?.person_type == 'legal-person' && (
+      {/*values?.new_member?.person_type == 'legal-person' && (
         <Grid item xs={12}>
           <FormControlLabel
             control={
@@ -349,7 +360,7 @@ const NewContractMemberSummary = (props) => {
             label={t('COMERCIAL_INFO_ACCEPTED')}
           />
         </Grid>
-      )}
+      )*/}
     </Grid>
   )
 }
