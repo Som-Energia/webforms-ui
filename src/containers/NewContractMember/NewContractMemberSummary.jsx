@@ -226,39 +226,41 @@ const NewContractMemberSummary = (props) => {
     }
   ]
 
-  useEffect((values) => {
-    console.log('values prices', values)
+  useEffect(() => {
     setLoading(true)
-    let powerFields = Object.values(
-      Object.fromEntries(
-        Object.entries(values.contract.power).filter(([key]) =>
-          key.startsWith('power')
-        )
+
+  let powerFields = Object.values(
+    Object.fromEntries(
+      Object.entries(values.contract.power).filter(([key]) =>
+        key.startsWith('power')
       )
     )
+  )
 
-    let maxPower = Math.round(
-      Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
-    )
+  let maxPower = Math.round(
+    Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
+  )
 
-    getPrices({
-      tariff:
-        values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
-      max_power: maxPower,
-      vat: values.new_member.nif,
-      cnae: values.supply_point.cnae,
-      city_id: values.supply_point_address.city.id
+  const cityId = values?.supply_point_address?.city?.id || null;
+
+  getPrices({
+    tariff:
+      values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
+    max_power: maxPower,
+    vat: values.new_member.nif,
+    cnae: values.supply_point.cnae,
+    city_id: cityId
+  })
+    .then((response) => {
+      const tariffPrices = response?.data['current']
+      setPrices(tariffPrices)
+      setLoading(false)
     })
-      .then((response) => {
-        const tariffPrices = response?.data['current']
-        setPrices(tariffPrices)
-        setLoading(false)
-      })
-      .catch((error) => {
-        setLoading(false)
-        console.error(error)
-      })
-  }, [])
+    .catch((error) => {
+      setLoading(false)
+      console.error(error)
+    })
+}, [values])
 
   const handleCheckboxChange = async (event, fieldName) => {
     let value = event.target.checked
