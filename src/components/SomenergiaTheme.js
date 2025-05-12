@@ -35,7 +35,8 @@ export default function SomEnergiaTheme() {
         light: '#0c4c27',
         extraLight: '#CDFF80',
         megaLight: "#F8F9F6",
-        dark: '#1E1E1E'
+        dark: '#1E1E1E',
+        error: '#EE4949'
       },
       secondary: {
         main: '#ff632b', // taronja
@@ -75,6 +76,11 @@ export default function SomEnergiaTheme() {
       pagesubtitle: {
         fontSize: 15,
         fontWeight: 400,
+        lineHeight: 1
+      },
+      sectionTitle: {
+        fontSize: 20,
+        fontWeight: 700,
         lineHeight: 1
       }
     },
