@@ -43,7 +43,7 @@ const newContractMemberSupplyPoint = (props) => {
       <Grid item xs={12}>
       <AlertBox
             id="percent_value_error"
-            description={"holi"}
+            description={t('RECOMMENDATION_SUBTITLE')}
             severity={'warning'}
             //TODO icon={false}
             variant={'body2'}
