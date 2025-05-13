@@ -116,7 +116,7 @@ const App = (props) => {
           <Box sx={{ flexGrow: 1 }}>
             <Suspense fallback={<Loading />}>
               <Router>
-                <ThemeProvider theme={somtheme}>
+                <ThemeProvider theme={webFormsTheme}>
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
 
