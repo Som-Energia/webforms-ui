@@ -880,7 +880,7 @@
     "URL_RED_ELECTRICA": "https://www.ree.es/es/clientes/consumidor/gestion-medidas-electricas/consulta-perfiles-de-consumo",
     "URL_BOE_310": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-21395",
     "GURB_SUMMARY_OTHER_CONCEPTS_TITLE": "A estos precios se deben sumar los siguientes conceptos:",
-    "GURB_SUMMARY_OTHER_CONCEPTS_BODY": "<li><strong>Exceso de potencia y/o energía reactiva:</strong> En determinadas condiciones, según la normativa, a estos precios hay que añadir un recargo.</li><li><strong>Alquiler contador:</strong> depende de cada caso, en función de lo que establezca la normativa.</li>",
+    "GURB_SUMMARY_OTHER_CONCEPTS_BODY": "<li>Exceso de potencia y/o energía reactiva: En determinadas condiciones, según la normativa, a estos precios hay que añadir un recargo.</li><li>Alquiler contador: depende de cada caso, en función de lo que establezca la normativa.</li>",
     "ERROR_FIELD_TOO_SHORT": "Camp massa curt",
     "ERROR_FIELD_TOO_LONG": "Camp massa llarg",
     "ERROR_REQUIRED_FIELD": "Camp requerit",
