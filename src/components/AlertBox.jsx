@@ -6,31 +6,12 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 
-
+import { getAlertBoxStyles } from '../themes/webforms'
 
 const AlertBox = ({ severity, title, description, children, variant, icon }) => {
-  const theme = useTheme ()
+  const theme = useTheme()
 
-  const primary2Color = theme.palette.primary2.main
-  const primary2Bg = '#ffebd2' //ligher background than the theme one
-  
-  const customSx =
-  severity === 'warning'
-    ? {
-        backgroundColor: primary2Bg,
-        border: 'none',
-        color: primary2Color,
-        '& .MuiAlertTitle-root': {
-          color: primary2Color,
-        },
-        '& .MuiTypography-root': {
-          color: primary2Color,
-        },
-        '& *': {
-          color: `${primary2Color} !important`,
-        },
-      }
-    : {}
+  const customSx = getAlertBoxStyles(theme, severity)
 
   return (
     <Box mt={0.75} mb={1.5}>
@@ -40,7 +21,7 @@ const AlertBox = ({ severity, title, description, children, variant, icon }) => 
           <Typography
             variant={variant || 'body1'}
             dangerouslySetInnerHTML={{
-              __html: description
+              __html: description,
             }}
           />
         )}
