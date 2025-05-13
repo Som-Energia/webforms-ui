@@ -71,9 +71,9 @@ const PowerInputs = (props) => {
               touched={touched?.power}
               value={values[attr]}
               error={errors?.[attr]}
-              textFieldHelper={
-                t('HELP_POPOVER_POWER')
-              }
+              //textFieldHelper={
+                //t('HELP_POPOVER_POWER')
+              //}
             />
           </Grid>
         )
