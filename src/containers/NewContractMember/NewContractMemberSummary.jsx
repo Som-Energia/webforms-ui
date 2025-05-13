@@ -24,7 +24,6 @@ import Loading from '../../components/Loading'
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
-import SellOutlinedIcon from '@mui/icons-material/SellOutlined'
 
 const NewContractMemberSummary = (props) => {
   const {
@@ -133,22 +132,22 @@ const NewContractMemberSummary = (props) => {
           {
             reviewLabel: t('CUPS_LABEL'),
             reviewValue: values?.cups,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_POINT'],
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO'],
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.address?.city?.name,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO'],
           },
           {
             reviewLabel: 'CNAE',
             reviewValue: values?.supply_point.CNAE,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['DONATION'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO'],
           },
         ]
       },
@@ -208,7 +207,7 @@ const NewContractMemberSummary = (props) => {
           },
           {
             reviewLabel: t('VOLUNTARY_CENT'),
-            reviewValue: values?.voluntari_donation,
+            reviewValue: values?.voluntary_donation == 'voluntary-donation-on'? t('YES'):t('NO'),
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['DONATION']
           },
         ]

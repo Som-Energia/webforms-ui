@@ -69,7 +69,7 @@ const Powers = (props) => {
                 numInputs={2}
                 {...props}
                 values={values?.contract.power}
-                errors={errors?.contract}
+                errors={errors?.contract.power}
                 touched={touched?.contract}
               />
             </Grid>
