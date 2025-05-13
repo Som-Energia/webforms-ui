@@ -124,8 +124,8 @@ export default function WebFormsTheme() {
 
 
 export const getAlertBoxStyles = (theme, severity) => {
-  const primary = theme.palette?.primary2?.main || '#ff632b'
-  const secondary = '#ffebd2' // fondo claro manual
+  const primary = theme.palette?.primary2?.main
+  const secondary = theme.palette?.background?.main
 
   if (severity === 'warning') {
     return {
