@@ -47,6 +47,7 @@ const Powers = (props) => {
     }
   ]
 
+  console.log('values', values)
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -68,8 +69,8 @@ const Powers = (props) => {
                 name="contract.power"
                 numInputs={2}
                 {...props}
-                values={values?.contract.power}
-                errors={errors?.contract.power}
+                values={values?.contract?.power}
+                errors={errors?.contract?.power}
                 touched={touched?.contract}
               />
             </Grid>
@@ -90,8 +91,8 @@ const Powers = (props) => {
                 name="contract.power"
                 numInputs={6}
                 {...props}
-                values={values?.contract.power}
-                errors={errors?.contract.power}
+                values={values?.contract?.power}
+                errors={errors?.contract?.power}
                 touched={touched?.contract}
               />
             </Grid>
