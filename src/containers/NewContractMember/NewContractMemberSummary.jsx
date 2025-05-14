@@ -14,6 +14,8 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import TermsDialog from '../Gurb/components/TermsDialog'
+import LegalText from '../../components/LegalText'
 
 import { iconRequirements } from '../../themes/commonStyles'
 import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
@@ -34,19 +36,47 @@ const NewContractMemberSummary = (props) => {
     setFieldValue,
     setFieldError,
     setErrors,
-    setFieldTouched,
+    setFieldTouched
   } = props
 
   const { t } = useTranslation()
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
+  const [open, setOpen] = useState(false)
+  const [acceptGeneralTerms, setAcceptGeneralTerms] = useState(false)
 
+  const handlePrivacyPolicyChange = async (event) => {
+    const value = event.target.checked
+    await setFieldValue('new_member.privacy_policy_accepted', value)
+    setFieldTouched('new_member.privacy_policy_accepted', true)
+  }
+
+  const handleGeneralTermsChange = async (event) => {
+    const value = event.target.checked
+    await setFieldValue('new_member.generic_conditions_accepted', value)
+    setFieldTouched('new_member.generic_conditions_accepted', true)
+
+    if (value) {
+      setOpen(true)
+    }
+    setAcceptGeneralTerms(value)
+  }
+
+  const handleAcceptGeneralTerms = () => {
+    setFieldValue('new_member.generic_conditions_accepted', true)
+    setOpen(false)
+  }
+
+  const handleCloseGeneralTerms = () => {
+    setFieldValue('new_member.generic_conditions_accepted', false)
+    setOpen(false)
+  }
   const languages = {
     es_ES: 'Español',
     ca_ES: 'Català',
     eu_ES: 'Euskera',
-    gl_ES: 'Galego',
+    gl_ES: 'Galego'
   }
 
   const legalReviewFields = {
@@ -56,29 +86,29 @@ const NewContractMemberSummary = (props) => {
       {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('CIF'),
         reviewValue: values?.new_member?.nif,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
       {
         reviewLabel: t('PROXY'),
         reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
-      },
-    ],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+      }
+    ]
   }
 
   const physicalReviewFields = {
@@ -88,41 +118,43 @@ const NewContractMemberSummary = (props) => {
       {
         reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
       {
         reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
         reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
         reviewValue: values?.new_member?.email,
-        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
-      },
-    ],
+        step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+      }
+    ]
   }
 
   const reviewFields = [
     [
       {
-        icon: <DescriptionOutlinedIcon sx={iconRequirements}/>,
+        icon: <DescriptionOutlinedIcon sx={iconRequirements} />,
         title: t('REVIEW_PROCESS_TITLE'),
         field: [
           {
-            reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS'),
+            reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
           },
           {
-            reviewValue: t('NEW_CONTRACT_SUMMARY_PROCESS'),
+            reviewValue: t('NEW_CONTRACT_SUMMARY_PROCESS')
           }
         ]
       },
-      values?.new_member?.is_physical == 'physic-person' ? physicalReviewFields : physicalReviewFields
+      values?.new_member?.is_physical == 'physic-person'
+        ? physicalReviewFields
+        : physicalReviewFields
     ],
     [
       {
@@ -132,23 +164,23 @@ const NewContractMemberSummary = (props) => {
           {
             reviewLabel: t('CUPS_LABEL'),
             reviewValue: values?.cups,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_POINT'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_POINT']
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
           },
           {
             reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.address?.city?.name,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
           },
           {
             reviewLabel: 'CNAE',
             reviewValue: values?.supply_point.CNAE,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO'],
-          },
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
+          }
         ]
       },
       {
@@ -157,22 +189,22 @@ const NewContractMemberSummary = (props) => {
         field: [
           {
             reviewLabel: t('TOLL'),
-            reviewValue: t('CURRENT'),
+            reviewValue: t('CURRENT')
           },
           {
             reviewLabel: t('FARE'),
             reviewValue: values?.contract.tariff_mode,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
             reviewLabel: t('POWER'),
-            reviewValue: t('CURRENT'),
+            reviewValue: t('CURRENT')
           },
           {
             reviewValue: t('GURB_REVIEW_TECHNICAL_DETAILS_FOOTER')
           }
-        ],
-      },
+        ]
+      }
     ],
     [
       {
@@ -182,19 +214,19 @@ const NewContractMemberSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
             reviewLabel: t('LANGUAGE'),
             reviewValue: languages[values?.new_member?.language],
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO'],
-          },
-        ],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+          }
+        ]
       },
       {
         icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
@@ -203,16 +235,19 @@ const NewContractMemberSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
-            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO'],
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO']
           },
           {
             reviewLabel: t('VOLUNTARY_CENT'),
-            reviewValue: values?.voluntary_donation == 'voluntary-donation-on'? t('YES'):t('NO'),
+            reviewValue:
+              values?.voluntary_donation == 'voluntary-donation-on'
+                ? t('YES')
+                : t('NO'),
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['DONATION']
-          },
+          }
         ]
       }
-    ],
+    ]
   ]
 
   const reviewPrices = [
@@ -228,46 +263,44 @@ const NewContractMemberSummary = (props) => {
       title: t('GURB_REVIEW_PRICES_POWER_TITLE'),
       field: 'potencia'
     },
-    {title: t('AUTOCONSUM'),
-      field: 'energia_consumida'
-    },
+    { title: t('AUTOCONSUM'), field: 'energia_consumida' }
   ]
 
   useEffect(() => {
     setLoading(true)
 
-  let powerFields = Object.values(
-    Object.fromEntries(
-      Object.entries(values.contract.power).filter(([key]) =>
-        key.startsWith('power')
+    let powerFields = Object.values(
+      Object.fromEntries(
+        Object.entries(values.contract.power).filter(([key]) =>
+          key.startsWith('power')
+        )
       )
     )
-  )
 
-  let maxPower = Math.round(
-    Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
-  )
+    let maxPower = Math.round(
+      Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR
+    )
 
-  const cityId = values?.supply_point_address?.city?.id || null;
+    const cityId = values?.supply_point_address?.city?.id || null
 
-  getPrices({
-    tariff:
-      values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
-    max_power: maxPower,
-    vat: values.new_member.nif,
-    cnae: values.supply_point.cnae,
-    city_id: cityId
-  })
-    .then((response) => {
-      const tariffPrices = response?.data['current']
-      setPrices(tariffPrices)
-      setLoading(false)
+    getPrices({
+      tariff:
+        values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
+      max_power: maxPower,
+      vat: values.new_member.nif,
+      cnae: values.supply_point.cnae,
+      city_id: cityId
     })
-    .catch((error) => {
-      setLoading(false)
-      console.error(error)
-    })
-}, [values])
+      .then((response) => {
+        const tariffPrices = response?.data['current']
+        setPrices(tariffPrices)
+        setLoading(false)
+      })
+      .catch((error) => {
+        setLoading(false)
+        console.error(error)
+      })
+  }, [values])
 
   const handleCheckboxChange = async (event, fieldName) => {
     let value = event.target.checked
@@ -300,7 +333,8 @@ const NewContractMemberSummary = (props) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body2"
+        <Typography
+          variant="body2"
           dangerouslySetInnerHTML={{
             __html: t('GURB_SUMMARY_OTHER_CONCEPTS_BODY')
           }}
@@ -320,27 +354,57 @@ const NewContractMemberSummary = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-            data-cy="privacy_policy"
-            checked={values?.new_member.privacy_policy_accepted}
-            onChange={(event) => {
-              handleCheckboxChange(
-                event,
-                'new_member.privacy_policy_accepted'
-              )
-            }}
+              data-cy="privacy_policy"
+              checked={values?.new_member.privacy_policy_accepted}
+              onChange={handlePrivacyPolicyChange}
             />
           }
           label={
             <label
               dangerouslySetInnerHTML={{
                 __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL')
-                })
+                  url: t('ACCEPT_PRIVACY_POLICY_URL'),
+                }),
               }}
             />
           }
         />
       </Grid>
+
+      <Grid item xs={12}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={acceptGeneralTerms}
+              onChange={handleGeneralTermsChange}
+            />
+          }
+          label={
+            <label
+              dangerouslySetInnerHTML={{
+                __html: t('NEW_GENERAL_TERMS', {
+                  url: t('GENERAL_TERMS_URL'),
+                }),
+              }}
+            />
+          }
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <TermsDialog
+          title={t('GENERAL_TERMS_TITLE')}
+          open={open}
+          onAccept={handleAcceptGeneralTerms}
+          onClose={handleCloseGeneralTerms}
+          maxWidth="sm"
+        >
+          <LegalText documentName="general-contract-terms" />
+        </TermsDialog>
+      </Grid>
+    </Grid>
+  )
+}
       {/*values?.new_member?.person_type == 'legal-person' && (
         <Grid item xs={12}>
           <FormControlLabel
@@ -360,8 +424,6 @@ const NewContractMemberSummary = (props) => {
           />
         </Grid>
       )*/}
-    </Grid>
-  )
-}
+
 
 export default NewContractMemberSummary

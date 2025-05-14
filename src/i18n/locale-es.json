@@ -771,5 +771,6 @@
     "LIGHT_MARKETER_NO": "No tengo dada de alta la luz con ninguna comercializadora.",
     "HAS_LIGHT_TITLE": "Actualmente hay luz en tu casa?",
     "SUPPLY_POINT_DATA_TITLE": "Datos del punto de subministro",
-    "RECOMMENDATION_SUBTITLE": "Te recomendamos tener a mano un contrato de luz para ir rellenando los datos del formulario"
+    "RECOMMENDATION_SUBTITLE": "Te recomendamos tener a mano un contrato de luz para ir rellenando los datos del formulario",
+    "NEW_GENERAL_TERMS": "He leído y acepto las condiciones de contratación de Som Energia y con la aceptación de las mismas, me obligo al pago del consumo al precio que resulte de la aplicación de la tarifa contratada"
 }
