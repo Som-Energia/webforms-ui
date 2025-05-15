@@ -43,8 +43,7 @@ const NewContractMemberSummary = (props) => {
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
-  const [openTermsDialog, setOpenTermsDialog] = useState(false)
-  const [openStatutesDialog, setOpenStatutesDialog] = useState(false)
+  const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -54,23 +53,20 @@ const NewContractMemberSummary = (props) => {
 
   const handleAcceptGeneralTerms = () => {
     setFieldValue('new_member.generic_conditions_accepted', true)
-    setOpenTermsDialog(false)
+    setOpenGeneralTermsDialog(false)
   }
 
   const handleCloseGeneralTerms = () => {
     setFieldValue('new_member.generic_conditions_accepted', false)
-    setOpenTermsDialog(false)
+    setOpenGeneralTermsDialog(false)
   }
 
-  const handleAcceptStatutes = () => {
-    setFieldValue('new_member.statutes_accepted', true)
-    setOpenStatutesDialog(false)
+  const handleChangeStatutes = (event) => {
+    const checked = event.target.checked
+    setFieldValue('new_member.statutes_accepted', checked)
+    setFieldTouched('new_member.statutes_accepted', true)
   }
 
-  const handleCloseStatutes = () => {
-    setFieldValue('new_member.statutes_accepted', false)
-    setOpenStatutesDialog(false)
-  }
 
   const languages = {
     es_ES: 'Español',
@@ -380,7 +376,7 @@ const NewContractMemberSummary = (props) => {
               onChange={(event) => {
                 const checked = event.target.checked
                 if (checked) {
-                  setOpenTermsDialog(true)
+                  setOpenGeneralTermsDialog(true)
                 } else {
                   setFieldValue('new_member.generic_conditions_accepted', false)
                 }
@@ -401,48 +397,33 @@ const NewContractMemberSummary = (props) => {
       <Grid item xs={12}>
         <TermsDialog
           title={t('GENERAL_TERMS_TITLE')}
-          open={openTermsDialog}
+          open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
           maxWidth="sm">
           <LegalText documentName="general-contract-terms" />
         </TermsDialog>
       </Grid>
+
       <Grid item xs={12}>
         <FormControlLabel
           control={
             <Checkbox
-              checked={values?.new_member?.statutes_accepted || false}
-              onChange={(event) => {
-                const checked = event.target.checked
-                if (checked) {
-                  setOpenStatutesDialog(true) // abrir diálogo para aceptar estatutos
-                } else {
-                  setFieldValue('new_member.statutes_accepted', false)
-                }
-              }}
+              data-cy="statutes"
+              checked={values?.new_member.statutes_accepted || false}
+              onChange={handleChangeStatutes}
             />
           }
           label={
             <label
               dangerouslySetInnerHTML={{
-                __html: t('STATUTES_TERMS', {
-                  url: t('STATUTES_URL')
+                __html: t('ACCEPT_STATUTES', {
+                  url: t('ACCEPT_STATUTES_URL')
                 })
               }}
             />
           }
         />
-      </Grid>
-      <Grid item xs={12}>
-        <TermsDialog
-          title={t('STATUTES_TITLE')}
-          open={openStatutesDialog}
-          onAccept={handleAcceptStatutes}
-          onClose={handleCloseStatutes}
-          maxWidth="sm">
-          <LegalText documentName="statutes-terms" />
-        </TermsDialog>
       </Grid>
     </Grid>
   )

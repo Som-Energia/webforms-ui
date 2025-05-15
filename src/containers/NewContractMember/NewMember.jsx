@@ -142,7 +142,7 @@ const NewMemberForm = (props) => {
     },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false,
-    comercial_info_accepted: false
+    statutes_accepted: false
   }
 
   const validationSchemas = [
