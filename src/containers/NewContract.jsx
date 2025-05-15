@@ -47,7 +47,7 @@ const NEW_MEMBER_COST = 100
 
 const NewContractForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language, id } = useParams()
+  const { language, id, tariff } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)

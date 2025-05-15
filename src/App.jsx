@@ -494,7 +494,7 @@ const App = (props) => {
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
                     <Route
-                      path="/:language/new-contract-form"
+                      path="/:language/new-contract-form/:tariff"
                       element={
                         <GurbErrorContextProvider>
                           <GurbLoadingContextProvider>

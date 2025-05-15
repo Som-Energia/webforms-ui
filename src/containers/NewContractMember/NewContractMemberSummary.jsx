@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
-
+import { useParams } from 'react-router-dom'
 import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
 import InputTitle from '../../components/InputTitle'
@@ -27,6 +27,9 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 
+const TARIFF_INDEXED = 'indexed'
+
+
 const NewContractMemberSummary = (props) => {
   const {
     activeStep,
@@ -40,6 +43,8 @@ const NewContractMemberSummary = (props) => {
   } = props
 
   const { t } = useTranslation()
+  const {tariff} = useParams()
+  const istariffindexed = tariff === TARIFF_INDEXED
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
@@ -401,7 +406,8 @@ const NewContractMemberSummary = (props) => {
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
           maxWidth="sm">
-          <LegalText documentName="general-contract-terms" />
+          <LegalText 
+           documentName={istariffindexed ? "general-contract-terms": "otro"} />
         </TermsDialog>
       </Grid>
 
