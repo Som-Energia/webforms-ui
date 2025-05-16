@@ -14,6 +14,8 @@ import InputField from '../../components/InputField'
 import SelectField from '../../components/SelectField'
 import InputTitle from '../../components/InputTitle'
 
+import { iconRequirements } from '../../themes/commonStyles'
+
 import {
     getSelfConsumptionSituations,
     getSelfConsumptionTechnologies
@@ -85,13 +87,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const installation_type_options = [
     {
       id: 'individual',
-      icon: <AccountCircleOutlinedIcon />,
+      icon: <AccountCircleOutlinedIcon sx={iconRequirements}/>,
       textHeader: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_HELP')
     },
     {
       id: 'collective',
-      icon: <Diversity1OutlinedIcon />,
+      icon: <Diversity1OutlinedIcon sx={iconRequirements}/>,
       textHeader: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
     }
