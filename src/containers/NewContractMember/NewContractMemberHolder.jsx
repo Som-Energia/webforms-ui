@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
 
 import { ReceiptIcon } from '../../data/icons/Icons'
 
@@ -58,29 +56,6 @@ const newContractMemberHolder = (props) => {
           options={options}
           value={values.previous_holder}
           handleChange={handleHolderQuestion}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="headline4">
-          {t('SOM_SERVEIS_INFO_TITLE')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              data-cy="comercial_info_accepted"
-              checked={values?.comercial_info_accepted}
-              onChange={handleCheckboxChange}
-            />
-          }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('SOM_SERVEIS_INF0_ACCEPTED')
-              }}
-            />
-          }
         />
       </Grid>
     </Grid>

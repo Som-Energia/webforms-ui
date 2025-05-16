@@ -43,7 +43,7 @@ const NewContractMemberSummary = (props) => {
 
   const { t } = useTranslation()
   const { tariff } = useParams()
-  const istariffindexed = tariff === TARIFF_INDEXED
+  const isTariffIndexed = tariff === TARIFF_INDEXED
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
@@ -70,7 +70,6 @@ const NewContractMemberSummary = (props) => {
     setFieldValue('new_member.statutes_accepted', checked)
     setFieldTouched('new_member.statutes_accepted', true)
   }
-
 
   const languages = {
     es_ES: 'Español',
@@ -321,12 +320,17 @@ const NewContractMemberSummary = (props) => {
       <Grid item xs={12}>
         <ReviewTable tableFields={reviewFields} />
       </Grid>
-      <Grid item xs={12}>
-        <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
-      </Grid>
-      <Grid item xs={12}>
-        <Divider sx={{ my: 2 }} />
-      </Grid>
+      {isTariffIndexed && (
+        <>
+          <Grid item xs={12}>
+            <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider sx={{ my: 2 }} />
+          </Grid>
+        </>
+      )}
+
       <Grid item xs={12}>
         <Typography variant="body2">
           {t('GURB_SUMMARY_OTHER_CONCEPTS_TITLE')}
@@ -406,7 +410,11 @@ const NewContractMemberSummary = (props) => {
           onClose={handleCloseGeneralTerms}
           maxWidth="sm">
           <LegalText
-            documentName={istariffindexed ? 'general-contract-terms' : 'otro'}
+            documentName={
+              isTariffIndexed
+                ? 'general-and-indexed-specific-terms'
+                : 'general-contract-terms'
+            }
           />
         </TermsDialog>
       </Grid>
@@ -466,26 +474,4 @@ const NewContractMemberSummary = (props) => {
     </Grid>
   )
 }
-{
-  /*values?.new_member?.person_type == 'legal-person' && (
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                data-cy="comercial_info_accepted"
-                checked={values?.new_member?.comercial_info_accepted}
-                onChange={(event) => {
-                  handleCheckboxChange(
-                    event,
-                    'new_member.comercial_info_accepted'
-                  )
-                }}
-              />
-            }
-            label={t('COMERCIAL_INFO_ACCEPTED')}
-          />
-        </Grid>
-      )*/
-}
-
 export default NewContractMemberSummary
