@@ -16,7 +16,7 @@ const NewLoading = (props) => {
             gap: 3
         }} >
 
-            <CircularProgress sx={{ color: 'secondary.main' }} />
+            <CircularProgress sx={{ color: 'primary2.main' }} />
 
             <Typography variant="pagesubtitle">
                 {t(description)}
