@@ -854,7 +854,7 @@
     "GURB_REVIEW_HOLDER_LABEL_NAME": "Nom i Cognoms:",
     "GURB_REVIEW_HOLDER_LABEL_NIF": "NIF:",
     "GURB_REVIEW_HOLDER_LABEL_PHONE": "Telf:",
-    "GURB_REVIEW_HOLDER_LABEL_EMAIL": "email:",
+    "GURB_REVIEW_HOLDER_LABEL_EMAIL": "Email:",
     "GURB_REVIEW_SUPPLY_POINT_TITLE": "Punto de suministro",
     "GURB_REVIEW_SUPPLY_POINT_LABEL_CUPS": "CUPS:",
     "GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS": "Direcció:",
@@ -964,5 +964,8 @@
     "TECHNICAL_DATA_SUMMARY": "Dades técniques",
     "CURRENT": "Actual",
     "PURPOSE": "FINALITAT: Gestionar la contratació del servei de la llum i les tasques administrativas que se'n deriven; informar dels nostres productes i serveis energètics, inclós per mitjans electrònics.",
-    "RIGHTS": "DRETS: Pots oposar-te als nostres enviaments comercials i exercir el teu dret d'accés, rectificació, sopressió, portabilitat de les seves dades i la limitació o popsició en el correu electrònic somenergia@delegado.datos.com. Mès informació en la política de privatitat."
+    "RIGHTS": "DRETS: Pots oposar-te als nostres enviaments comercials i exercir el teu dret d'accés, rectificació, sopressió, portabilitat de les seves dades i la limitació o popsició en el correu electrònic somenergia@delegado.datos.com. Mès informació en la política de privatitat.",
+    "REVIEW_PAYMENT_DATA": "Quantitat:",
+    "REVIEW_PAYMENT_DATA_QUANTITY": "100 €",
+    "REVIEW_PROCESS_TITLE": "Tipus de tràmit"
 }

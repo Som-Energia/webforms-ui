@@ -232,6 +232,11 @@ const NewContractMemberSummary = (props) => {
         title: t('GURB_REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
+            reviewLabel: t('REVIEW_PAYMENT_DATA'),
+            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY'),
+            step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO']
+          },
+          {
             reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO']
