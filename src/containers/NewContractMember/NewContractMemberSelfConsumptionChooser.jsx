@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
@@ -12,12 +11,9 @@ import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 import { iconRequirements } from '../../themes/commonStyles'
 import { iconOffRequirements } from '../Gurb/gurbTheme'
 
-import GurbErrorContext from '../../context/GurbErrorContext'
-
-const NewContractMemberSelfConsumption = (props) => {
+const NewContractMemberSelfConsumptionChooser = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const handleSelfconsumptionQuestion = (value) => {
     setFieldValue('has_selfconsumption', value)
@@ -75,4 +71,4 @@ const NewContractMemberSelfConsumption = (props) => {
   )
 }
 
-export default NewContractMemberSelfConsumption
+export default NewContractMemberSelfConsumptionChooser

@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid'
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
-import SomStepper from '../../components/SomStepper'
+import SomStepper from '../../components/NewSomStepper'
 
 import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
@@ -19,7 +19,7 @@ import MemberPersonalData from '../NewMember/MemberPersonalData'
 import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
 import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
 import NewContractMemberPower from './NewContractMemberPower'
-import NewContractMemberSelfConsumption from './NewContractMemberSelfConsumption'
+import NewContractMemberSelfConsumptionChooser from './NewContractMemberSelfConsumptionChooser'
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
 import NewContractMemberHolder from './NewContractMemberHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
@@ -170,12 +170,20 @@ const NewMemberForm = (props) => {
     } else {
       next = activeStep + 1
     }
+
+    if (formikProps.values.has_selfconsumption === 'selfconsumption-off') (
+      next = next + 1
+    )
+
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
+    if (formikProps.values.has_selfconsumption === 'selfconsumption-off') (
+      prev = prev - 1
+    )
     setActiveStep(Math.max(0, prev))
   }
 
@@ -195,7 +203,7 @@ const NewMemberForm = (props) => {
     } else if (activeStep === 4) {
       return <NewContractMemberPower {...props} />
     } else if (activeStep === 5) {
-      return <NewContractMemberSelfConsumption {...props} />
+      return <NewContractMemberSelfConsumptionChooser {...props} />
     } else if (activeStep === 6) {
       return <NewContractMemberSelfConsumptionData {...props} />
     } else if (activeStep === 7) {

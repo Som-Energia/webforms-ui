@@ -18,7 +18,7 @@ const SomStepper = (props) => {
       </Typography>
       <LinearProgress 
         variant="determinate" 
-        value={(activeStep / numberSteps) * 100} 
+        value={(currentStep / numberSteps) * 100}
         color='secondary'
         sx={{
           backgroundColor: 'secondary',
