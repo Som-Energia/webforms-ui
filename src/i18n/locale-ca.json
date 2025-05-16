@@ -967,5 +967,13 @@
     "RIGHTS": "DRETS: Pots oposar-te als nostres enviaments comercials i exercir el teu dret d'accés, rectificació, sopressió, portabilitat de les seves dades i la limitació o popsició en el correu electrònic somenergia@delegado.datos.com. Mès informació en la política de privatitat.",
     "REVIEW_PAYMENT_DATA": "Quantitat:",
     "REVIEW_PAYMENT_DATA_QUANTITY": "100 €",
-    "REVIEW_PROCESS_TITLE": "Tipus de tràmit"
+    "REVIEW_PROCESS_TITLE": "Tipus de tràmit",
+    "CONTRACT_QUESTION_TITLE": "Estàs a punt de contractar la llum amb Som Energia",
+    "CONTRACT_QUESTION_DESC": "Som Energia és una cooperativa (sense ànim de lucre) i com a tal, per contractar la llum has de ser sòcia o bé que alguna persona o entitat et pugui convidar. Això vol dir que, si coneixes algú que és soci de Som Energia, et pot deixar el seu número de soci perquè puguis accedir als serveis que oferim com el de contractació de llum, així no has d’associar-te.",
+    "MEMBER_PAYMENT_INFO": "Si et vols fer sòcia hauràs de fer un pagament únic de 100€, que pot ser retornable si algún dia marxes de la cooperativa. Tens més informació aquí.",
+    "CONTRACT_QUESTION": "Tria la teva opció per començar",
+    "HAS_MEMBER": "Sóc persona sòcia o em conviden",
+    "HAS_MEMBER_BODY": "Si ja ets persona sòcia o coneixes a algú que et convida perquè puguis contractar.",
+    "HAS_NO_MEMBER": "Vull associar-me i contractar la llum",
+    "HAS_NO_MEMBER_BODY": "Uneix-te a la cooperativa ara i contracta la llum"
 }
