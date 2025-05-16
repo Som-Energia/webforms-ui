@@ -29,7 +29,6 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 
 const TARIFF_INDEXED = 'indexed'
 
-
 const NewContractMemberSummary = (props) => {
   const {
     activeStep,
@@ -43,7 +42,7 @@ const NewContractMemberSummary = (props) => {
   } = props
 
   const { t } = useTranslation()
-  const {tariff} = useParams()
+  const { tariff } = useParams()
   const istariffindexed = tariff === TARIFF_INDEXED
 
   const [loading, setLoading] = useState(false)
@@ -406,8 +405,9 @@ const NewContractMemberSummary = (props) => {
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
           maxWidth="sm">
-          <LegalText 
-           documentName={istariffindexed ? "general-contract-terms": "otro"} />
+          <LegalText
+            documentName={istariffindexed ? 'general-contract-terms' : 'otro'}
+          />
         </TermsDialog>
       </Grid>
 
@@ -431,6 +431,38 @@ const NewContractMemberSummary = (props) => {
           }
         />
       </Grid>
+      {values?.new_member?.person_type == 'legal-person' && (
+        <Grid item xs={12}>
+          <Typography variant="headline4">
+            {t('SOM_SERVEIS_INFO_TITLE')}
+          </Typography>
+        </Grid>
+      )}
+      {values?.new_member?.person_type == 'legal-person' && (
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                data-cy="comercial_info_accepted"
+                checked={values?.new_member?.comercial_info_accepted}
+                onChange={(event) => {
+                  handleCheckboxChange(
+                    event,
+                    'new_member.comercial_info_accepted'
+                  )
+                }}
+              />
+            }
+            label={
+              <label
+                dangerouslySetInnerHTML={{
+                  __html: t('SOM_SERVEIS_INF0_ACCEPTED')
+                }}
+              />
+            }
+          />
+        </Grid>
+      )}
     </Grid>
   )
 }
