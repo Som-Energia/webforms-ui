@@ -35,6 +35,7 @@ const Result = (props) => {
     const { language } = useParams()
     const { t, i18n } = useTranslation()
 
+
     useEffect(() => {
         i18n.changeLanguage(language)
     }, [language, i18n])
@@ -51,8 +52,8 @@ const Result = (props) => {
                 gap: 2
             }}>
 
-                {mode === 'success' ? <CheckCircleIcon sx={{ color: 'secondary.alt' }} fontSize="large" /> : null}
-                {mode === 'failure' ? <CancelIcon fontSize="large" sx={{ color: 'primary.error' }} /> : null}
+                {mode === 'success' ? <CheckCircleIcon fontSize="large" sx={{ color: 'primary.extraLight' }} /> : null}
+                {mode === 'failure' ? <CancelIcon fontSize="large" sx={{ color: 'primary2.main' }} /> : null}
 
                 <Title title={title} mode={mode} />
 
