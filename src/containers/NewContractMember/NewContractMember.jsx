@@ -141,7 +141,7 @@ const NewContractMemberForm = (props) => {
       installation_power: ''
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false,
+    generic_conditions_accepted: false,
     statutes_accepted: false
   }
 
