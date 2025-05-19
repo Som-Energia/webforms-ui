@@ -25,10 +25,7 @@
     "how_meet_us": "O1",
     "payment_method": "iban",
     "sepa_accepted": "true",
-    "iban": "ES7712341234161234567890",
-    "terms_accepted": "true",
-    "comercial_info_accepted": "true",
-    "legal_person_accepted": "true"
+    "iban": "ES7712341234161234567890"
   },
   "personalLegalData": {
     "nif": "Q9213530J",
@@ -47,9 +44,9 @@
     "payment_method": "iban",
     "sepa_accepted": "true",
     "iban": "ES7712341234161234567890",
-    "terms_accepted": "true",
     "comercial_info_accepted": "true",
     "legal_person_accepted": "true"
   },
-  "privacy_policy_accepted": "true"
+  "privacy_policy_accepted": "true",
+  "statutes_accepted": "true"
 }

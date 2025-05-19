@@ -167,7 +167,9 @@ const LegalMemberPersonalData = (props) => {
             />
           </Grid>
         </Grid>
+        
       </Grid>
+      {/*
       <Grid item xs={12}>
         <Typography variant="body.xs.regular" color="secondary.dark">
           {t('NEW_MEMBER_RIGHTS')}
