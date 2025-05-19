@@ -37,14 +37,14 @@ const MemberSummary = (props) => {
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
-    setFieldValue('new_member.privacy_policy_accepted', checked)
-    setFieldTouched('new_member.privacy_policy_accepted', true)
+    setFieldValue('privacy_policy_accepted', checked)
+    setFieldTouched('privacy_policy_accepted', true)
   }
 
   const handleChangeStatutes = (event) => {
     const checked = event.target.checked
-    setFieldValue('new_member.statutes_accepted', checked)
-    setFieldTouched('new_member.statutes_accepted', true)
+    setFieldValue('statutes_accepted', checked)
+    setFieldTouched('statutes_accepted', true)
   }
 
   const languages = {
@@ -193,7 +193,7 @@ const MemberSummary = (props) => {
           control={
             <Checkbox
               data-cy="privacy_policy"
-              checked={values?.new_member.privacy_policy_accepted || false}
+              checked={values?.privacy_policy_accepted || false}
               onChange={handleChangePrivacyPolicy}
             />
           }
@@ -214,7 +214,7 @@ const MemberSummary = (props) => {
           control={
             <Checkbox
               data-cy="statutes"
-              checked={values?.new_member.statutes_accepted || false}
+              checked={values?.statutes_accepted || false}
               onChange={handleChangeStatutes}
             />
           }
@@ -243,11 +243,11 @@ const MemberSummary = (props) => {
               control={
                 <Checkbox
                   data-cy="comercial_info_accepted"
-                  checked={values?.new_member?.comercial_info_accepted}
+                  checked={values?.comercial_info_accepted}
                   onChange={(event) => {
                     handleCheckboxChange(
                       event,
-                      'new_member.comercial_info_accepted'
+                      'comercial_info_accepted'
                     )
                   }}
                 />
