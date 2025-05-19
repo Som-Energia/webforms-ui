@@ -414,7 +414,7 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <TermsDialog
-          title={t('GENERAL_TERMS_TITLE')}
+          title={t('GENERAL_TERMS')}
           open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
