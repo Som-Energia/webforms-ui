@@ -51,24 +51,24 @@ const NewContractMemberSummary = (props) => {
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
-    setFieldValue('new_member.privacy_policy_accepted', checked)
-    setFieldTouched('new_member.privacy_policy_accepted', true)
+    setFieldValue('privacy_policy_accepted', checked)
+    setFieldTouched('privacy_policy_accepted', true)
   }
 
   const handleAcceptGeneralTerms = () => {
-    setFieldValue('new_member.generic_conditions_accepted', true)
+    setFieldValue('generic_conditions_accepted', true)
     setOpenGeneralTermsDialog(false)
   }
 
   const handleCloseGeneralTerms = () => {
-    setFieldValue('new_member.generic_conditions_accepted', false)
+    setFieldValue('generic_conditions_accepted', false)
     setOpenGeneralTermsDialog(false)
   }
 
   const handleChangeStatutes = (event) => {
     const checked = event.target.checked
-    setFieldValue('new_member.statutes_accepted', checked)
-    setFieldTouched('new_member.statutes_accepted', true)
+    setFieldValue('statutes_accepted', checked)
+    setFieldTouched('statutes_accepted', true)
   }
 
   const languages = {
@@ -304,7 +304,12 @@ const NewContractMemberSummary = (props) => {
         setLoading(false)
         console.error(error)
       })
-  }, [values])
+  }, [  values.contract.power,
+    values.contract.power_type,
+    values.new_member.nif,
+    values.supply_point.cnae,
+    values?.supply_point_address?.city?.id
+  ])
 
   const handleCheckboxChange = async (event, fieldName) => {
     let value = event.target.checked
@@ -385,13 +390,13 @@ const NewContractMemberSummary = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={values?.new_member?.generic_conditions_accepted || false}
+              checked={values?.generic_conditions_accepted || false}
               onChange={(event) => {
                 const checked = event.target.checked
                 if (checked) {
                   setOpenGeneralTermsDialog(true)
                 } else {
-                  setFieldValue('new_member.generic_conditions_accepted', false)
+                  setFieldValue('generic_conditions_accepted', false)
                 }
               }}
             />
@@ -429,7 +434,7 @@ const NewContractMemberSummary = (props) => {
           control={
             <Checkbox
               data-cy="statutes"
-              checked={values?.new_member.statutes_accepted || false}
+              checked={values?.statutes_accepted || false}
               onChange={handleChangeStatutes}
             />
           }
@@ -457,11 +462,11 @@ const NewContractMemberSummary = (props) => {
             control={
               <Checkbox
                 data-cy="comercial_info_accepted"
-                checked={values?.new_member?.comercial_info_accepted}
+                checked={values?.comercial_info_accepted}
                 onChange={(event) => {
                   handleCheckboxChange(
                     event,
-                    'new_member.comercial_info_accepted'
+                    'comercial_info_accepted'
                   )
                 }}
               />
