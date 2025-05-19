@@ -21,7 +21,8 @@ if (!availableLanguages.includes(language)) {
 let gurbId = 2  // TODO: move to env?
 
 const options = [
-  { title: 'New Contract - Form', href: `${language}/new-contract-form`},
+  { title: 'New ContractMember - Periods', href: `${language}/new-contract-form/periods`},
+  { title: 'New ContractMember - Indexed' , href: `${language}/new-contract-form/indexed`},
   { title: 'New Member - Form', href: `${language}/new-member-form`},
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Component Testing', href: `/${language}/component-testing` },
