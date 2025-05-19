@@ -178,26 +178,7 @@ const LegalMemberPersonalData = (props) => {
           {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
         </Typography>
       </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              data-cy="privacy_policy"
-              checked={values?.new_member.privacy_policy_accepted}
-              onChange={handleCheckboxPrivacyPolicy}
-            />
-          }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL'),
-                }),
-              }}
-            />
-          }
-        />
-      </Grid>
+      */}
       <Grid item xs={12}>
         <FormControlLabel
           control={
