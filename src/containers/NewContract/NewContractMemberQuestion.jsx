@@ -10,22 +10,30 @@ import { iconRequirements } from '../../themes/commonStyles'
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 import Grid from '@mui/material/Grid'
 
+import { useNavigate } from "react-router-dom";
+
 const NewContractMemberQuestion = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
 
+  const navigate = useNavigate();
+
   const handleMemberQuestion = (value) => {
-    setFieldValue('has_member', value)
-  }
+    const selectedUrl = value;
+    if (selectedUrl) {
+      navigate(selectedUrl);
+    }
+  };
+
   const options = [
     {
-      id: 'member-on',
+      id: 'new-contract-member-form',
       icon: <HandshakeOutlinedIcon sx={iconRequirements} />,
       textHeader: t('HAS_MEMBER'),
       textBody: t('HAS_MEMBER_BODY')
     },
     {
-      id: 'member-off',
+      id: 'new-contract-member-form',
       icon: <Diversity1OutlinedIcon sx={iconRequirements} />,
       textHeader: t('HAS_NO_MEMBER'),
       textBody: t('HAS_NO_MEMBER_BODY')
@@ -54,7 +62,7 @@ const NewContractMemberQuestion = (props) => {
           name="member-question"
           options={options}
           value={values.has_member}
-          handleChange={handleMemberQuestion}
+          handleChange={handleMemberQuestion}      
         />
       </Grid>
     </Grid>

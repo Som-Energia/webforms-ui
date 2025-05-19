@@ -41,7 +41,7 @@ import newContractMemberSummaryValidations from './newContractMemberSummaryValid
 const MAX_STEP_NUMBER = 10
 const NEW_MEMBER_COST = 100
 
-const NewMemberForm = (props) => {
+const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
   const { language } = useParams()
   const [url, setUrl] = useState('')
@@ -308,4 +308,4 @@ const NewMemberForm = (props) => {
   )
 }
 
-export default NewMemberForm
+export default NewContractMemberForm
