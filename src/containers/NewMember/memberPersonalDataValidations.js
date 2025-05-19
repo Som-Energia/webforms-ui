@@ -18,7 +18,8 @@ const memberPersonalDataValidations = Yup.object().shape({
     phone_valid: Yup.bool()
       .required('NO_PHONE')
       .oneOf([true], 'INCORRECT_PHONE'),
-    language: Yup.string().required('NO_LANGUAGE'),    proxyname: Yup.string().when('person_type', {
+    language: Yup.string().required('NO_LANGUAGE'),
+    proxyname: Yup.string().when('person_type', {
       is: 'legal-person',
       then: Yup.string().required('NO_PROXY_NAME')
     }),
