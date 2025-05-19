@@ -370,7 +370,7 @@ const NewContractMemberSummary = (props) => {
           control={
             <Checkbox
               data-cy="privacy_policy"
-              checked={values?.new_member.privacy_policy_accepted || false}
+              checked={values?.privacy_policy_accepted || false}
               onChange={handleChangePrivacyPolicy}
             />
           }
