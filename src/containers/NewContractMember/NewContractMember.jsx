@@ -142,8 +142,7 @@ const NewContractMemberForm = (props) => {
     },
     privacy_policy_accepted: false,
     generic_conditions_accepted: false,
-    statutes_accepted: false,
-    comercial_info_accepted: false
+    statutes_accepted: false
   }
 
   const validationSchemas = [
