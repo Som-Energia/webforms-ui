@@ -192,7 +192,7 @@ const PhysicalMemberPersonalData = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
+      {/*<Grid item xs={12}>
         <Stack direction="column" spacing={1}>
           <Typography variant="body.xs.regular" color="secondary.dark">
             {t('NEW_MEMBER_RIGHTS')}
@@ -201,27 +201,7 @@ const PhysicalMemberPersonalData = (props) => {
             {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
           </Typography>
         </Stack>
-      </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Checkbox
-            data-cy="privacy_policy"
-            checked={values?.new_member.privacy_policy_accepted}
-            onChange={handleCheckboxChange}
-            />
-          }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL')
-                })
-              }}
-            />
-          }
-        />
-      </Grid>
+      </Grid>*/}
     </Grid>
   )
 }

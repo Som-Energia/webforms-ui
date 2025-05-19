@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../../components/InputField'
+import InputField from './InputField'
 import Grid from '@mui/material/Grid'
 
 const handleChangePower = (
@@ -71,9 +71,9 @@ const PowerInputs = (props) => {
               touched={touched?.power}
               value={values[attr]}
               error={errors?.[attr]}
-              textFieldHelper={
-                t('HELP_POPOVER_POWER')
-              }
+              //textFieldHelper={
+                //t('HELP_POPOVER_POWER')
+              //}
             />
           </Grid>
         )

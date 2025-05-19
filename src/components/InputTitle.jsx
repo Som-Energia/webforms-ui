@@ -1,8 +1,9 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-const InputTitle = ({ text, required }) => {
+const InputTitle = ({ text, description, required }) => {
   return (
+    <>
     <Box
       sx={{
         display: 'flex',
@@ -19,6 +20,14 @@ const InputTitle = ({ text, required }) => {
         </Typography>
       )}
     </Box>
+    <Box>
+        {description && (
+        <Typography variant="body.sm.regular" color="secondary.dark">
+          {description}
+        </Typography>
+      )}
+    </Box>
+    </>
   )
 }
 

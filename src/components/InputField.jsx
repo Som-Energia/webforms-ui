@@ -55,7 +55,7 @@ const InputField = React.memo(
           <InputTitle text={textFieldName} required={required} />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body.sm.regular">
+          <Typography variant="body.sm.regular" color="secondary.dark">
             {textFieldNameHelper}
           </Typography>
         </Grid>

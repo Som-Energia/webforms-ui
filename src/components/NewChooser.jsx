@@ -18,38 +18,46 @@ const Option = ({
   return (
     <Box
       data-cy={optionId}
-      sx={isSelected ? chooserGurbSelected : chooserGurb}
+      sx={{
+        ...(isSelected ? chooserGurbSelected : chooserGurb),
+        height: '100%', 
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
       onClick={() => {
         setSelected(optionId)
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          marginBottom: '1rem',
-          justifyContent: 'space-between',
-        }}
-      >
+      <Box>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1rem',
+            marginBottom: '1rem',
+            justifyContent: 'space-between',
           }}
         >
-          {icon}
-          <Typography sx={textHeader4}>{textHeader}</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+            }}
+          >
+            {icon}
+            <Typography sx={textHeader4}>{textHeader}</Typography>
+          </Box>
+          {isSelected ? (
+            <Checkbox
+              checked
+              icon={<CheckCircleIcon />}
+              checkedIcon={<CheckCircleIcon />}
+            />
+          ) : null}
         </Box>
-        {isSelected ? (
-          <Checkbox
-            checked
-            icon={<CheckCircleIcon />}
-            checkedIcon={<CheckCircleIcon />}
-          />
-        ) : null}
+        <Typography sx={textBody1}>{textBody}</Typography>
       </Box>
-      <Typography sx={textBody1}>{textBody}</Typography>
     </Box>
   )
 }

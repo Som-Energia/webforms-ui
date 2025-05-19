@@ -118,3 +118,31 @@ export default function WebFormsTheme() {
   })
   return responsiveFontSizes(theme)
 }
+
+
+// AlertBox Custom Style
+
+
+export const getAlertBoxStyles = (theme, severity) => {
+  const primary = theme.palette?.primary2?.main
+  const secondary = theme.palette?.background?.main
+
+  if (severity === 'warning') {
+    return {
+      backgroundColor: secondary,
+      border: 'none',
+      color: primary,
+      '& .MuiAlertTitle-root': {
+        color: primary,
+      },
+      '& .MuiTypography-root': {
+        color: primary,
+      },
+      '& *': {
+        color: `${primary} !important`,
+      },
+    }
+  }
+
+  return {}
+}

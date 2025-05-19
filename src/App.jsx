@@ -116,7 +116,7 @@ const App = (props) => {
           <Box sx={{ flexGrow: 1 }}>
             <Suspense fallback={<Loading />}>
               <Router>
-                <ThemeProvider theme={somtheme}>
+                <ThemeProvider theme={webFormsTheme}>
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
 
@@ -494,7 +494,7 @@ const App = (props) => {
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
                     <Route
-                      path="/:language/new-contract-form"
+                      path="/:language/new-contract-form/:tariff"
                       element={
                         <GurbErrorContextProvider>
                           <GurbLoadingContextProvider>

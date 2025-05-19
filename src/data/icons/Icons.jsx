@@ -58,3 +58,19 @@ export const CreditCardIcon = (props) => {
     </SvgIcon>
   )
 }
+
+export const BatteryIcon = (props) => {
+  const { on = true } = props
+  return (
+    <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
+    <svg 
+      width="40" 
+      height="40" 
+      viewBox="0 0 40 40" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M31.2008 21.8V18.2M19.2008 23L22.2008 20H16.8008L19.8008 17M13.2008 26H25.2008C26.5263 26 27.6008 24.9255 27.6008 23.6V16.4C27.6008 15.0745 26.5263 14 25.2008 14H13.2008C11.8753 14 10.8008 15.0745 10.8008 16.4V23.6C10.8008 24.9255 11.8753 26 13.2008 26Z" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    </SvgIcon>
+  )
+}

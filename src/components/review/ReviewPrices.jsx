@@ -16,11 +16,13 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
   const isMobile = useCheckMobileScreen()
 
   const Prices = ({ concept, name }) => {
-    let keys = concept ? Object.keys(concept) : []
-    keys.sort()
+    if (!concept) {
+      return <>{t('UNAVAILABLE')}</>
+    }
+    const keys = Object.keys(concept).sort()
 
     const differentValues = new Set(
-      Object.keys(concept).map((key) => concept[key]?.value)
+      keys.map((key) => concept[key]?.value)
     )
     if (differentValues.size === 1) {
       for (const key in concept) {
@@ -39,7 +41,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
         ? [t('PEAK'), t('FLAT'), t('VALLEY')]
         : keys
 
-    return concept ? (
+    return (
       <Grid container spacing={0}>
         {keys.map((key, index) => (
           <Grid item key={index} xs={12}>
@@ -50,8 +52,6 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
           </Grid>
         ))}
       </Grid>
-    ) : (
-      <>{t('UNAVAILABLE')}</>
     )
   }
 

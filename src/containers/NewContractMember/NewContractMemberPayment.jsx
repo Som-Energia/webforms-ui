@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect , useState} from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -13,6 +13,7 @@ import { checkIbanFormat } from '../../services/utils'
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
 import InputField from '../../components/InputField'
+import TermsDialog from '../Gurb/components/TermsDialog'
 
 const PaymentMethod = (props) => {
   const {
@@ -55,10 +56,21 @@ const PaymentMethod = (props) => {
     setFieldTouched('new_member.iban', true)
   }
 
-  const handleCheckboxChange = async (event) => {
-    let value = event.target.checked
-    await setFieldValue('new_member.sepa_accepted', value)
-    setFieldTouched('new_member.sepa_accepted', true)
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('new_member.sepa_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('new_member.sepa_accepted', false)
   }
 
   useEffect(() => {
@@ -71,7 +83,7 @@ const PaymentMethod = (props) => {
     {
       id: 'iban',
       icon: <ReceiptIcon />,
-      textHeader: t('PAYMENT_METHOD_IBAN'),
+      textHeader: t('IBAN_PAYMENT_QUESTION_OPTION'),
       textBody: t('PAYMENT_METHOD_IBAN_DESC')
     },
     {
@@ -85,13 +97,26 @@ const PaymentMethod = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
-          {t('MEMBER_PAGE_PAYMENT_METHOD')}
-        </Typography>
+        <Typography variant="headline3">{t('MEMBER_PAGE_PAYMENT_METHOD')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <InputField
+          name="iban_number"
+          textFieldName={t('GURB_IBAN_FIELD')}
+          textFieldNameHelper={t('IBAN_EXPLANATION')}
+          textFieldHelper={t('IBAN_EXAMPLE')}
+          handleChange={handleInputIban}
+          handleBlur={handleInputIbanBlur}
+          touched={touched?.new_member?.iban}
+          value={values?.new_member.iban}
+          error={errors?.new_member?.iban_valid || errors?.new_member?.iban}
+          required={true}
+        />
       </Grid>
       <Grid item xs={12}>
         <InputTitle
-          text={t('MEMBER_PAGE_PAYMENT_METHOD_QUESTION')}
+          text={t('PAYMENT_METHOD_QUESTION')}
+          description={t('MEMBER_PAYMENT_EXPLANATION')}
           required={true}
         />
       </Grid>
@@ -103,46 +128,41 @@ const PaymentMethod = (props) => {
           handleChange={handleMethodPaymentQuestion}
         />
       </Grid>
-      {values?.new_member?.payment_method == 'iban' && (
-        <>
-          <Grid item xs={12}>
-            <InputField
-              name="iban_number"
-              textFieldName={t('MEMBER_PAGE_IBAN')}
-              textFieldHelper={t('IBAN_EXAMPLE')}
-              handleChange={handleInputIban}
-              handleBlur={handleInputIbanBlur}
-              touched={touched?.new_member?.iban}
-              value={values?.new_member.iban}
-              error={errors?.new_member?.iban_valid || errors?.new_member?.iban}
-              required={true}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Box sx={{ display: 'flex' }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    data-cy="iban_check"
-                    checked={values?.new_member?.sepa_accepted}
-                    onChange={handleCheckboxChange}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="body.sm.regular" color="primary.dark">
-                      {t('IBAN_ACCEPT_DIRECT_DEBIT')}
-                    </Typography>
-                    <Typography variant="body.sm.bold" color="error">
-                      {' *'}
-                    </Typography>
-                  </>
-                }
-              />
-            </Box>
-          </Grid>
-        </>
-      )}
+      <Grid item xs={12}>
+        <Box sx={{ display: 'flex' }}>
+          <FormControlLabel
+             control={
+             <Checkbox
+                data-cy="iban_check"
+                checked={values?.new_member?.sepa_accepted}
+                onClick={handleClick}
+                />
+             }
+            label={
+              <>
+                <Typography variant="body.sm.regular" color="primary.dark">
+                  {t('IBAN_ACCEPT_DIRECT_DEBIT')}
+                </Typography>
+                <Typography variant="body.sm.bold" color="error">
+                  {' *'}
+                </Typography>
+              </>
+            }
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <TermsDialog
+          title={t('SEPA_TITLE')}
+          open={open}
+          onAccept={handleAccept}
+          onClose={handleClose}
+          maxWidth="sm">
+          <span
+            dangerouslySetInnerHTML={{ __html: t('SEPA') }}
+          />
+        </TermsDialog>
+      </Grid>
     </Grid>
   )
 }

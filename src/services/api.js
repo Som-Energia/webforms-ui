@@ -201,6 +201,25 @@ export const getRates = (data) => {
   return rates
 }
 
+export const getNewRates = (data) => {
+  const rates = {
+    'power-lower-15kw': {
+      num_power_periods: 2,
+      min_power: { power: 0.1, num_periods_apply: 2 },
+      max_power: { power: 15, num_periods_apply: 2 },
+      increasing: false
+    },
+    'power-higher-15kw': {
+      num_power_periods: 6,
+      min_power: { power: 15.001, num_periods_apply: 1 },
+      max_power: { power: 450, num_periods_apply: 6 },
+      increasing: true
+    }
+  }
+
+  return rates
+}
+
 let cancelTokenMemberVat
 
 export const checkMemberVat = async (vat) => {
