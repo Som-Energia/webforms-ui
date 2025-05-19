@@ -45,6 +45,7 @@ const App = (props) => {
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
   const NewContractForm = lazy(() => import('./containers/NewContract'))
+  const NewContractMemberForm = lazy(() => import('./containers/NewContractMember/NewContractMember'))
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
 
   const loadContractData = () => {
@@ -500,6 +501,18 @@ const App = (props) => {
                           <GurbLoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractForm {...props} />
+                            </SummaryContextProvider>
+                          </GurbLoadingContextProvider>
+                        </GurbErrorContextProvider>
+                      }
+                    />
+                    <Route
+                      path="/:language/new-contract-form/:tariff/new-contract-member-form"
+                      element={
+                        <GurbErrorContextProvider>
+                          <GurbLoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm {...props} />
                             </SummaryContextProvider>
                           </GurbLoadingContextProvider>
                         </GurbErrorContextProvider>
