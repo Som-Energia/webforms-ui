@@ -17,7 +17,7 @@ const languages = {
   es_ES: 'Español',
   ca_ES: 'Català',
   eu_ES: 'Euskera',
-  gl_ES: 'Galego',
+  gl_ES: 'Galego'
 }
 
 const how_meet_us_options = {
@@ -29,7 +29,7 @@ const how_meet_us_options = {
   O6: t('HOW_MEET_US_OPTION_6'),
   O7: t('HOW_MEET_US_OPTION_7'),
   O8: t('HOW_MEET_US_OPTION_8'),
-  O9: t('HOW_MEET_US_OPTION_9'),
+  O9: t('HOW_MEET_US_OPTION_9')
 }
 
 const LegalMemberPersonalData = (props) => {
@@ -40,7 +40,7 @@ const LegalMemberPersonalData = (props) => {
     setFieldValue,
     setFieldError,
     setFieldTouched,
-    setErrors,
+    setErrors
   } = props
   const { i18n, t } = useTranslation()
 
@@ -167,7 +167,9 @@ const LegalMemberPersonalData = (props) => {
             />
           </Grid>
         </Grid>
+        
       </Grid>
+      {/*
       <Grid item xs={12}>
         <Typography variant="body.xs.regular" color="secondary.dark">
           {t('NEW_MEMBER_RIGHTS')}
@@ -178,26 +180,7 @@ const LegalMemberPersonalData = (props) => {
           {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
         </Typography>
       </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              data-cy="privacy_policy"
-              checked={values?.new_member.privacy_policy_accepted}
-              onChange={handleCheckboxPrivacyPolicy}
-            />
-          }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL'),
-                }),
-              }}
-            />
-          }
-        />
-      </Grid>
+      */}
       <Grid item xs={12}>
         <FormControlLabel
           control={

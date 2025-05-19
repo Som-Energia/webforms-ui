@@ -20,7 +20,7 @@ import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
 
 import memberIdentifierValidations from './NewMember/memberIdentifierValidations'
-import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations,'
+import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations'
 import memberPaymentMethodValidations from './NewMember/paymentMethodValidations'
 import memberSummaryValidations from './NewMember/memberSummaryValidations'
 
@@ -80,12 +80,11 @@ const NewMemberForm = (props) => {
       payment_method: undefined,
       sepa_accepted: false,
       iban: undefined,
-      terms_accepted: false,
-      comercial_info_accepted: false,
       legal_person_accepted: false
     },
     privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false
+    statutes_accepted: false,
+    comercial_info_accepted: false
   }
 
   const validationSchemas = [

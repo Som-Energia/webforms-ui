@@ -27,7 +27,7 @@ import NewContractMemberPayment from './NewContractMemberPayment'
 import NewContractMemberSummary from './NewContractMemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
-import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations,'
+import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations'
 import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
 import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
