@@ -20,7 +20,7 @@ import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
 
 import memberIdentifierValidations from './NewMember/memberIdentifierValidations'
-import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations,'
+import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations'
 import memberPaymentMethodValidations from './NewMember/paymentMethodValidations'
 import memberSummaryValidations from './NewMember/memberSummaryValidations'
 

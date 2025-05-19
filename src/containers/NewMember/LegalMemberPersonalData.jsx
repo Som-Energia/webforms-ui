@@ -17,7 +17,7 @@ const languages = {
   es_ES: 'Español',
   ca_ES: 'Català',
   eu_ES: 'Euskera',
-  gl_ES: 'Galego',
+  gl_ES: 'Galego'
 }
 
 const how_meet_us_options = {
@@ -29,7 +29,7 @@ const how_meet_us_options = {
   O6: t('HOW_MEET_US_OPTION_6'),
   O7: t('HOW_MEET_US_OPTION_7'),
   O8: t('HOW_MEET_US_OPTION_8'),
-  O9: t('HOW_MEET_US_OPTION_9'),
+  O9: t('HOW_MEET_US_OPTION_9')
 }
 
 const LegalMemberPersonalData = (props) => {
@@ -40,7 +40,7 @@ const LegalMemberPersonalData = (props) => {
     setFieldValue,
     setFieldError,
     setFieldTouched,
-    setErrors,
+    setErrors
   } = props
   const { i18n, t } = useTranslation()
 

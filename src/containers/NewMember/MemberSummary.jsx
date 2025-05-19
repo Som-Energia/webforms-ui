@@ -48,29 +48,29 @@ const MemberSummary = (props) => {
       {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('CIF'),
         reviewValue: values?.new_member?.nif,
-        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
       {
         reviewLabel: t('PROXY'),
         reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
-      },
-    ],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+      }
+    ]
   }
 
   const physicalReviewFields = {
@@ -80,29 +80,31 @@ const MemberSummary = (props) => {
       {
         reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
-        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
         reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
-      },
-    ],
+        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+      }
+    ]
   }
 
   const reviewFields = [
     [
-      values?.new_member?.person_type == 'physic-person' ? physicalReviewFields : legalReviewFields,
+      values?.new_member?.person_type == 'physic-person'
+        ? physicalReviewFields
+        : legalReviewFields,
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
         title: t('GURB_REVIEW_CONTACT_INFORMATION_TITLE'),
@@ -110,20 +112,20 @@ const MemberSummary = (props) => {
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
             reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
+            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
             reviewLabel: t('LANGUAGE'),
             reviewValue: languages[values?.new_member?.language],
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO'],
-          },
-        ],
-      },
+            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          }
+        ]
+      }
     ],
     [
       {
