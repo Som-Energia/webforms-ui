@@ -20,6 +20,7 @@ import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
 
+
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
 
@@ -46,8 +47,7 @@ const App = (props) => {
   const GurbForm = lazy(() => import('./containers/GurbForm'))
   const NewContractMemberForm = lazy(() => import('./containers/NewContractMember/NewContractMember'))
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
-  const NewSuccess = lazy(() => import('./containers/NewSuccess'))
-
+  const Result = lazy(() => import('./containers/Result'))
 
 
   const loadContractData = () => {
@@ -110,6 +110,7 @@ const App = (props) => {
     tmpProps.is30ContractEnabled = false
     return tmpProps
   }
+
 
   return (
     <>
@@ -230,10 +231,21 @@ const App = (props) => {
                         />
                       }
                     />
-                    <Route
+                 {/*    <Route
                       path="/:language/pago-realizado"
                       element={
                         <Success
+                          {...props}
+                          description={'NEWMEMBER_OK_DESCRIPTION'}
+                        />
+                      }
+                    />
+ */}
+<Route
+                      path="/:language/pago-realizado"
+                      element={
+                        <Result
+                          mode={'success'}
                           {...props}
                           description={'NEWMEMBER_OK_DESCRIPTION'}
                         />

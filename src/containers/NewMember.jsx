@@ -255,7 +255,7 @@ const NewMemberForm = (props) => {
                         />
                       ) : (
                         <SubmitButton
-                          disabled={!formikProps.isValid}
+                          disabled={!formikProps.isValid || completed}
                           onClick={() => handlePost(formikProps.values)}
                         />
                       )}
