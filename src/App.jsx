@@ -49,7 +49,6 @@ const App = (props) => {
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
 
-
   const loadContractData = () => {
     const contractData =
       typeof props.contract === 'string' && props.contract !== ''
@@ -195,20 +194,6 @@ const App = (props) => {
                         <Contract is30ContractEnabled={false} {...props} />
                       }
                     />
-
-                    {[
-                      '/new-member',
-                      '/:language/associat/',
-                      '/:language/asociate/', // es, gl
-                      '/:language/bazkidetu/'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        key={path}
-                        element={<Member {...props} />}
-                      />
-                    ))}
-
                     <Route
                       path="/d1-detail"
                       element={
@@ -231,17 +216,7 @@ const App = (props) => {
                         />
                       }
                     />
-                 {/*    <Route
-                      path="/:language/pago-realizado"
-                      element={
-                        <Success
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
- */}
-<Route
+                    <Route
                       path="/:language/pago-realizado"
                       element={
                         <Result
@@ -504,12 +479,6 @@ const App = (props) => {
                         }
                       />
                     )}
-                    <Route
-                      path="/:language/new-success"
-                      element={
-                        <NewSuccess {...props} />
-                      }
-                    />
                   </Routes>
                 </ThemeProvider>
                 <ThemeProvider theme={webFormsTheme}>
@@ -532,12 +501,13 @@ const App = (props) => {
                         <GurbErrorContextProvider>
                           <GurbLoadingContextProvider>
                             <SummaryContextProvider>
-                              <NewMemberForm {...props} />
+                              <NewMember {...props} />
                             </SummaryContextProvider>
                           </GurbLoadingContextProvider>
                         </GurbErrorContextProvider>
                       }
                     />
+
                   </Routes>
                 </ThemeProvider>
               </Router>
