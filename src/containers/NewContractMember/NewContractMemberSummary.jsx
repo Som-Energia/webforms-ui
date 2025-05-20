@@ -244,7 +244,7 @@ const NewContractMemberSummary = (props) => {
           {
             reviewLabel: t('VOLUNTARY_CENT'),
             reviewValue:
-              values?.voluntary_donation == 'voluntary-donation-on'
+              values?.voluntary_donation
                 ? t('YES')
                 : t('NO'),
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['DONATION']
