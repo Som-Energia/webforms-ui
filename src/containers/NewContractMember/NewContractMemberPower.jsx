@@ -30,7 +30,7 @@ const NewContractMemberPower = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="subtitle4">{t('POTENCIA_A_CONTRACTAR')}</Typography>        
+          <Typography variant="subtitle4">{t('POWER_TO_CONTRACT')}</Typography>
       </Grid>
       <Grid item xs={12} sm={12}>
           <Powers

@@ -51,7 +51,7 @@ const PowerInputs = (props) => {
                 ? inputNum === 0
                   ? t('GURB_CURRENT_PEAK')
                   : t('GURB_CURRENT_VALLEY')
-                : t('GURB_CURRENT_POWER')}
+                : t('CURRENT_POWER')}
               endAdornmentText={'kW'}
               startAdornmentText={
                 numInputs <= 2

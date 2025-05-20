@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
-import CUPS from '../Gurb/components/CUPS'
+import CUPS from '../../components/CUPS'
 import AlertBox from '../../components/AlertBox'
 
 import { iconRequirements } from '../../themes/commonStyles'

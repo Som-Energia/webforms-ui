@@ -170,7 +170,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
             <InputField
               required={true}
               name={'self_consumption.installation_power'}
-              textFieldName={t('GURB_CURRENT_POWER')}
+              textFieldName={t('CURRENT_POWER')}
               endAdornmentText={'kW'}
               handleChange={handleChangeInstallPower}
               handleBlur={handleBlur}

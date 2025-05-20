@@ -23,14 +23,14 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
     {
       id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_SELFCONSUMPTION_YES_HEADER'),
-      textBody: t('GURB_SELFCONSUMPTION_YES_BODY')
+      textHeader: t('SELFCONSUMPTION_YES_HEADER'),
+      textBody: t('SELFCONSUMPTION_YES_BODY')
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_SELFCONSUMPTION_NO_HEADER'),
-      textBody: t('GURB_SELFCONSUMPTION_NO_BODY')
+      textHeader: t('SELFCONSUMPTION_NO_HEADER'),
+      textBody: t('SELFCONSUMPTION_NO_BODY')
     }
   ]
 
@@ -45,7 +45,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="subtitle4">{t('POTENCIA_A_CONTRACTAR')}</Typography>        
+          <Typography variant="subtitle4">{t('POWER_TO_CONTRACT')}</Typography>
       </Grid>
       <Grid item xs={12}>
           <Typography variant="subtitle2">{t('SELFCONSUMPTION_HELPER')}</Typography>        
