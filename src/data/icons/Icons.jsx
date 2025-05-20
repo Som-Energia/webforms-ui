@@ -61,8 +61,10 @@ export const CreditCardIcon = (props) => {
 
 export const BatteryIcon = (props) => {
   const { on = true } = props
+  let sx_values = on ? iconRequirements : iconOffRequirements
+  sx_values['padding'] = 0
   return (
-    <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
+    <SvgIcon sx={sx_values}>
     <svg 
       width="40" 
       height="40" 
