@@ -115,7 +115,6 @@ const NewContractMemberForm = (props) => {
       payment_method: undefined,
       sepa_accepted: false,
       iban: undefined,
-      terms_accepted: false,
       legal_person_accepted: false
     },
     contract: {
