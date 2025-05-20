@@ -33,7 +33,7 @@
     "INSTALL_TYPE_ATTACHMENTS": "La distribuidora eléctrica solicita obligatoriamente la presentación del boletín eléctrico en el que conste el cambio de tensión efectuado",
     "HELP_INSTALL_TYPE": "<a target=\"_blank\" href=\"{{url}}\">Cómo identificar si una instalación es trifásica o monofásica</a>",
     "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
-    "POTENCIA_A_CONTRACTAR": "¿Qué potencia quieres contratar?",
+    "POWER_TO_CONTRACT": "¿Qué potencia quieres contratar?",
     "HELP_POTENCIA": "<a target=\"_blank\" href=\"{{url}}\">Cómo averiguar la potencia que necesito</a>",
     "HELP_POTENCIA_URL": "http://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
     "DISCRIMINACIO_HORARIA": "¿Quieres discriminación horaria?",

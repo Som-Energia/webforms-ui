@@ -33,7 +33,7 @@
     "INSTALL_TYPE_ATTACHMENTS": "Nahitaezkoa da tentsio-aldaketa erakusten duen buletin elektrikoa elektrizitatea banatzen duen enpresari aurkeztea",
     "HELP_INSTALL_TYPE": "<a target=\"_blank\" href=\"{{url}}\">Nola jakin instalazioa trifasikoa edo monofasikoa den?</a>",
     "HELP_INSTALL_TYPE_URL": "https://eu.support.somenergia.coop/article/1213-nola-jakin-dezaket-nire-instalazioa-monofasikoa-ala-trifasikoa-den",
-    "POTENCIA_A_CONTRACTAR": "Zenbateko potentzia kontratatu nahi duzu?",
+    "POWER_TO_CONTRACT": "Zenbateko potentzia kontratatu nahi duzu?",
     "HELP_POTENCIA": "<a target=\"_blank\" href=\"{{url}}\">Nola jakin zenbateko potentzia behar dudan?</a>",
     "HELP_POTENCIA_URL": "https://eu.support.somenergia.coop/article/368-nola-jakin-zein-potentzia-behar-dudan",
     "DISCRIMINACIO_HORARIA": "Ordutegi-bereizketa aktibatu nahi duzu?",

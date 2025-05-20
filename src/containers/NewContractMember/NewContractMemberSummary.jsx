@@ -14,7 +14,7 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import TermsDialog from '../Gurb/components/TermsDialog'
+import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 
 import { iconRequirements } from '../../themes/commonStyles'
@@ -80,7 +80,7 @@ const NewContractMemberSummary = (props) => {
 
   const legalReviewFields = {
     icon: <PersonIcon sx={iconRequirements} />,
-    title: t('GURB_REVIEW_HOLDER_TITLE'),
+    title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
         reviewLabel: t('BUSINESS_NAME'),
@@ -98,12 +98,12 @@ const NewContractMemberSummary = (props) => {
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+        reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+        reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       }
@@ -112,25 +112,25 @@ const NewContractMemberSummary = (props) => {
 
   const physicalReviewFields = {
     icon: <PersonIcon sx={iconRequirements} />,
-    title: t('GURB_REVIEW_HOLDER_TITLE'),
+    title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
-        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
+        reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
+        reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
       {
-        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
+        reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
         reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
+        reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
         reviewValue: values?.new_member?.email,
         step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
       }
@@ -166,12 +166,12 @@ const NewContractMemberSummary = (props) => {
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_POINT']
           },
           {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+            reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.address?.street} ${values?.address?.number}`,
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+            reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.address?.city?.name,
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
           },
@@ -200,7 +200,7 @@ const NewContractMemberSummary = (props) => {
             reviewValue: t('CURRENT')
           },
           {
-            reviewValue: t('GURB_REVIEW_TECHNICAL_DETAILS_FOOTER')
+            reviewValue: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
           }
         ]
       }
@@ -208,15 +208,15 @@ const NewContractMemberSummary = (props) => {
     [
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_CONTACT_INFORMATION_TITLE'),
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
           },
@@ -229,7 +229,7 @@ const NewContractMemberSummary = (props) => {
       },
       {
         icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_PAYMENT_DATA_TITLE'),
+        title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA'),
@@ -237,7 +237,7 @@ const NewContractMemberSummary = (props) => {
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
+            reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
             step: NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO']
           },
@@ -256,7 +256,7 @@ const NewContractMemberSummary = (props) => {
 
   const reviewPrices = [
     {
-      title: t('GURB_REVIEW_PRICES_ENERGY_TITLE'),
+      title: t('REVIEW_PRICES_ENERGY_TITLE'),
       field: 'energia'
     },
     {
@@ -264,7 +264,7 @@ const NewContractMemberSummary = (props) => {
       field: 'gkwh'
     },
     {
-      title: t('GURB_REVIEW_PRICES_POWER_TITLE'),
+      title: t('REVIEW_PRICES_POWER_TITLE'),
       field: 'potencia'
     },
     { title: t('AUTOCONSUM'), field: 'energia_consumida' }
@@ -343,14 +343,14 @@ const NewContractMemberSummary = (props) => {
 
       <Grid item xs={12}>
         <Typography variant="body2">
-          {t('GURB_SUMMARY_OTHER_CONCEPTS_TITLE')}
+          {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography
           variant="body2"
           dangerouslySetInnerHTML={{
-            __html: t('GURB_SUMMARY_OTHER_CONCEPTS_BODY')
+            __html: t('SUMMARY_OTHER_CONCEPTS_BODY')
           }}
         />
       </Grid>

@@ -47,7 +47,6 @@ const Powers = (props) => {
     }
   ]
 
-  console.log('values', values)
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>

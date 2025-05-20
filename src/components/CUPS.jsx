@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../../components/InputField'
+import InputField from './InputField'
 
-import { checkCups } from '../../../services/api'
-import GurbLoadingContext from '../../../context/GurbLoadingContext'
+import { checkCups } from '../services/api'
+import GurbLoadingContext from '../context/GurbLoadingContext'
 
 const CUPS = (props) => {
   const {
