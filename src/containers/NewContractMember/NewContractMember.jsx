@@ -62,9 +62,10 @@ const NewContractMemberForm = (props) => {
     has_light: undefined,
     previous_holder: undefined,
     voluntary_donation: undefined,
+    cadastral_reference: undefined,
+    cadastral_reference_valid: true,
     supply_point: {
       cnae: '',
-      cadastral_reference: '',
       supply_point_accepted: false,
       is_housing: undefined
     },
