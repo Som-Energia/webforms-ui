@@ -66,6 +66,7 @@ const NewContractMemberForm = (props) => {
       cnae: '',
       cadastral_reference: '',
       supply_point_accepted: false,
+      is_housing: undefined
     },
     supply_point_address: {
       street: '',

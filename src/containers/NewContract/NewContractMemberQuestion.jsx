@@ -19,7 +19,7 @@ const NewContractMemberQuestion = (props) => {
   const navigate = useNavigate();
 
   const handleMemberQuestion = (value) => {
-    const selectedUrl = value;
+    const selectedUrl = value == 'member-on'? 'new-contract-member-form' : 'new-contract-member-form';
     if (selectedUrl) {
       navigate(selectedUrl);
     }
@@ -27,13 +27,13 @@ const NewContractMemberQuestion = (props) => {
 
   const options = [
     {
-      id: 'new-contract-member-form',
+      id: 'member-on',
       icon: <HandshakeOutlinedIcon sx={iconRequirements} />,
       textHeader: t('HAS_MEMBER'),
       textBody: t('HAS_MEMBER_BODY')
     },
     {
-      id: 'new-contract-member-form',
+      id: 'member-off',
       icon: <Diversity1OutlinedIcon sx={iconRequirements} />,
       textHeader: t('HAS_NO_MEMBER'),
       textBody: t('HAS_NO_MEMBER_BODY')
