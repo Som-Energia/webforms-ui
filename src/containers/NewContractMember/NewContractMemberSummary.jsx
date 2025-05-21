@@ -379,15 +379,14 @@ const NewContractMemberSummary = (props) => {
         {!showReviewLinks && (
           <Button
             size="small"
-            variant="text"
             sx={{
               ...buttonGurbLight,
               minWidth: 'auto',
               width: 'auto',
-              padding: '6px 15px',
-              fontSize: '0.70rem',
+              // padding: '6px 15px',
+              fontSize: '0.90rem',
               textTransform: 'none',
-              height: 36
+              // height: 36
             }}
             startIcon={<EditOutlinedIcon fontSize="medium" />}
             onClick={() => setShowReviewLinks(true)}>
