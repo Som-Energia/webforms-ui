@@ -215,10 +215,9 @@ const NewMemberForm = (props) => {
                   {
                     completed ? (
                       <Result
-                        mode={!error ? 'success' : 'failure'
-                        } title={!error ? 'Benvinguda a la Cooperativa! Ja ets sòcia de Som Energia!' : 'Hi ha un erro i no s\'ha pogut realitzar l\'alta de sòcia!'
-                        }
-                        subtitle={!error ? 'Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés' : 'Si us plau, intenta-ho una altra vegada d\'aquí una estona. Disculpa les molèsties'}
+                        mode={error ? 'success' : 'failure'}
+                        title={error ? t('NEW_MEMBER_SUCCESS_TITLE') : t('NEW_MEMBER_ERROR_TITLE')}
+                        subtitle={error ? t('NEW_MEMBER_SUCCESS_DESC') : t('NEW_MEMBER_ERROR_DESC')}
                       />
 
                     ) : (

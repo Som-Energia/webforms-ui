@@ -992,5 +992,9 @@
     "REVIEW_PRICES_NOTICE_INDEXED_URL": "https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada",
     "NEW_GENERAL_TERMS": "He llegit i accepto les condicions de contractació de Som Energia. Amb l'acceptació d'aquestes m'obligo a pagament al preu que resulti de l’aplicació de la tarifa contractada.",
     "ACCEPT_STATUTES": "He llegit i accepto els <a target=\"_blank\" href={{url}}> estatuts</a> de Som Energia i amb aquesta acceptació, m'obligo al pagament dels cent euros (100.-€) que resulta de l'aportació social obligatòria al capital.",
-    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatuts_CAT.pdf"
+    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatuts_CAT.pdf",
+    "NEW_MEMBER_SUCCESS_TITLE":"Benvinguda a la Cooperativa! Ja ets sòcia de Som Energia!",
+    "NEW_MEMBER_ERROR_TITLE":"Hi ha un error i no s'ha pogut realitzar l'alta de sòcia!",
+    "NEW_MEMBER_SUCCESS_DESC":"Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés",
+    "NEW_MEMBER_ERROR_DESC":"Si us plau, intenta-ho una altra vegada d'aquí una estona. Disculpa les molèsties"
 }
