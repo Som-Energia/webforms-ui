@@ -23,7 +23,7 @@ const Title = (props) => {
         }
     }
     return (
-        <Typography id="page-title" variant="sectionTitle">
+        <Typography id="page-title" variant="body.md.bold">
             {title ? t(title) : getDefaultText()}
         </Typography>
     )
@@ -75,7 +75,7 @@ const Result = (props) => {
                         {description}
                     </Typography>
                 ) : null}
-                <Box mt={3} mb={1}>
+                <Box mt={1} mb={1}>
                     {children}
                 </Box>
             </Box>
