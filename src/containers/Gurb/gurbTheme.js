@@ -44,7 +44,7 @@ export const textHeader6 = {
 }
 
 export const textBody1 = {
-  fontFamily: 'Inter',
+  fontFamily: 'Outfit',
   color: '#919191',
   fontSize: '16px'
 }
