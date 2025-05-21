@@ -59,7 +59,7 @@ const Result = (props) => {
 
                 {subtitle ? (
                     <Typography variant="pagesubtitle">
-                        {t(subtitle)}
+                        {subtitle}
                     </Typography>
                 ) : null}
 
@@ -72,7 +72,7 @@ const Result = (props) => {
                             textAlign: 'center',
                             color: 'secondary.dark'
                         }}>
-                        {t(description)}
+                        {description}
                     </Typography>
                 ) : null}
                 <Box mt={3} mb={1}>
