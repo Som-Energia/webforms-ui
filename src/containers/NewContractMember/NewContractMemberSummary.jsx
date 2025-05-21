@@ -378,6 +378,7 @@ const NewContractMemberSummary = (props) => {
         <InputTitle text={t('MEMBER_PAGE_SUMMARY_QUESTION')} />
         {!showReviewLinks && (
           <Button
+            id="edit_button"
             size="small"
             sx={{
               ...buttonGurbLight,
@@ -457,6 +458,7 @@ const NewContractMemberSummary = (props) => {
         <FormControlLabel
           control={
             <Checkbox
+              data-cy="generic_conditions_accepted"
               checked={values?.generic_conditions_accepted || false}
               onChange={(event) => {
                 const checked = event.target.checked
