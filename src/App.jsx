@@ -123,6 +123,19 @@ const App = (props) => {
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
 
+                    {[
+                      '/new-member',
+                      '/:language/associat/',
+                      '/:language/asociate/', // es, gl
+                      '/:language/bazkidetu/'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        key={path}
+                        element={<Member {...props} />}
+                      />
+                    ))}
+                    
                     <Route
                       exact
                       path="/:language/component-testing"
@@ -507,7 +520,6 @@ const App = (props) => {
                         </GurbErrorContextProvider>
                       }
                     />
-
                   </Routes>
                 </ThemeProvider>
               </Router>
