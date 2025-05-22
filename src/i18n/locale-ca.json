@@ -978,5 +978,8 @@
     "HAS_NO_MEMBER_BODY": "Uneix-te a la cooperativa ara i contracta la llum",
     "PURPOSE_MEMBER": "FINALITAT: Formalitzar la teva alta com a apersona sòcia i remtre't comunicacions informatives relacionades amb el nostre àmbit.",
     "RIGHTS_MEMBER": "DRETS: Pots accedir, rectificar i suprimir les teves dades i altres drest a somenergia@delegado-datos.com.",
-    "EDIT_DATA": "Editar dades"
+    "EDIT_DATA": "Editar dades",
+    "I_AGREE": "D'acord",
+    "LIGHT_OFF_TERMS": "Costos per tramitar l’alta de llum",
+    "LIGHT_OFF_CONTRACT_TERMS": "Per l'alta d'un nou punt de subministrament que mai ha tingut llum o on fa més de tres anys que el subministrament elèctric està de baixa, s’han de pagar els conceptes següents: <ul><li><b>Drets d’accés:</b> 19,70 €/kW (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets d’extensió:</b> 17,37 €/kW (21,02 €/kW amb l’IVA inclòs)<li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas </li></ul>Si fa menys de tres anys que hi ha hagut llum, s’han de pagar els conceptes següents: <ul><li><b>Drets d’accés:</b> 19,70 €/kW  (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul><a href=''>Més informació aquí</a>"
 }
