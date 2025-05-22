@@ -174,9 +174,9 @@ const NewContractMemberSummary = (props) => {
           }
         ]
       },
-      values?.new_member?.is_physical == 'physic-person'
+      values?.new_member?.person_type == 'physic-person'
         ? physicalReviewFields
-        : physicalReviewFields
+        : legalReviewFields
     ],
     [
       {

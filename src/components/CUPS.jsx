@@ -34,7 +34,7 @@ const CUPS = (props) => {
           setLoading(false)
         })
         .catch(({ response }) => {
-          const { error } = response.data
+          const { error } = response?.data
           setFieldError('cups', `ERROR_${error.code}`)
           setFieldTouched('cups', true)
           setLoading(false)
@@ -62,7 +62,7 @@ const CUPS = (props) => {
       handleChange={handleInputCups}
       handleBlur={handleInputCupsBlur}
       touched={touched?.cups}
-      value={values.cups}
+      value={values?.cups}
       error={errors?.cups}
       isLoading={loading}
       required={true}
