@@ -38,19 +38,19 @@ const Powers = (props) => {
     {
       id: 'power-lower-15kw',
       icon: <BoltIcon sx={iconRequirements} />,
-      textHeader: t('GURB_POWER_LOWER_15_HEADER')
+      textHeader: t('POWER_LOWER_15_HEADER')
     },
     {
       id: 'power-higher-15kw',
       icon: <BoltIcon sx={iconRequirements} />,
-      textHeader: t('GURB_POWER_HIGHER_15_HEADER')
+      textHeader: t('POWER_HIGHER_15_HEADER')
     }
   ]
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={textHeader5}>{t('GURB_POWER_HELPER')}</Typography>
+        <Typography sx={textHeader5}>{t('POWER_HELPER')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <Chooser
@@ -64,6 +64,20 @@ const Powers = (props) => {
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item>
+              <HelperText
+                helperText={
+                  <a
+                    href={t('POWER_LOWER_15_HELPER_URL')}
+                    target="_blank"
+                    style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+                    rel="noopener noreferrer">
+                    {t('POWER_LOWER_15_HELPER')}
+                  </a>
+                }
+                iconHelper={true}
+              />
+            </Grid>
+            <Grid item>
               <PowerInputs
                 name="contract.power"
                 numInputs={2}
@@ -73,18 +87,26 @@ const Powers = (props) => {
                 touched={touched?.contract}
               />
             </Grid>
-            <Grid item>
-              <HelperText
-                helperText={t('GURB_POWER_LOWER_15_HELPER')}
-                iconHelper={true}
-              />
-            </Grid>
           </Grid>
         </Grid>
       ) : null}
       {values.contract.power_type === 'power-higher-15kw' ? (
         <Grid item xs={12}>
           <Grid container spacing={2}>
+            <Grid item>
+              <HelperText
+                helperText={
+                  <a
+                    href={t('POWER_HIGHER_15_HELPER_URL')}
+                    target="_blank"
+                    style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+                    rel="noopener noreferrer">
+                    {t('POWER_HIGHER_15_HELPER')}
+                  </a>
+                }
+                iconHelper={true}
+              />
+            </Grid>
             <Grid item>
               <PowerInputs
                 name="contract.power"
@@ -93,12 +115,6 @@ const Powers = (props) => {
                 values={values?.contract?.power}
                 errors={errors?.contract?.power}
                 touched={touched?.contract}
-              />
-            </Grid>
-            <Grid item>
-              <HelperText
-                helperText={t('GURB_POWER_HIGHER_15_HELPER')}
-                iconHelper={true}
               />
             </Grid>
           </Grid>
