@@ -18,7 +18,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
   const handleSelfconsumptionQuestion = (value) => {
     setFieldValue('has_selfconsumption', value)
   }
-    
+
   const options = [
     {
       id: 'selfconsumption-on',
@@ -38,17 +38,25 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-            <Typography variant="headline3">{t('SELFCONSUMPTION_TITLE')}</Typography>
+          <Typography variant="headline3">
+            {t('SELFCONSUMPTION_TITLE')}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-            <Typography variant="body.sm.regular" color="secondary.dark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+          <Typography variant="body.md.regular" color="secondary.dark">
+            {t('RECOMMENDATION_SUBTITLE')}
+          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="subtitle4">{t('POWER_TO_CONTRACT')}</Typography>
+        <Typography variant="subtitle4">
+          {t('SELFCONSUMPTION_ACTIVE')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="subtitle2">{t('SELFCONSUMPTION_HELPER')}</Typography>        
+        <Typography variant="body.md.regular" color="secondary.dark">
+          {t('SELFCONSUMPTION_HELPER')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <Chooser
@@ -59,13 +67,9 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <HelperText
-          helperText={t('GURB_SELFCONSUMPTION_HELPER')}
-          iconHelper={true}
-        />
-      </Grid>
-      <Grid item xs={12}>
-          <Typography variant="subtitle2">{t('SELFCONSUMPTION_WARNING')}</Typography>        
+        <Typography variant="body.md.regular" color="secondary.dark">
+          {t('SELFCONSUMPTION_WARNING')}
+        </Typography>
       </Grid>
     </Grid>
   )

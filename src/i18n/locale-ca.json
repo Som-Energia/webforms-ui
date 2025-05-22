@@ -952,6 +952,7 @@
     "SUPPLY_POINT_DATA_TITLE": "Dades del punt de subministrament",
     "RECOMMENDATION_SUBTITLE": "Et recomanem tenir a mà una facture de llum per anar omplint les dades formulari",
     "POWER_TITLE": "Potència",
+    "SELFCONSUMPTION_ACTIVE": "Al teu contracte actual, tens activa alguna modalitat d’autoconsum?",
     "SELFCONSUMPTION_HELPER": "Autoconsum ès la generació d'energia per el consum propi. Per exemple, tenir plaques solars.",
     "SELCONSUMPTION_WARNING": "No indiquis aquesta opció si encara NO has acabats el tràmits amb la teva comercialitzadora actual, encara que tinguis la instal·lació realitzada i registrada a la teva CCAA.",
     "SOM_SERVEIS_INFO_TITLE":"Vols rebre informació de Som Serveis?",
@@ -983,5 +984,5 @@
     "EDIT_DATA": "Editar dades",
     "I_AGREE": "D'acord",
     "LIGHT_OFF_TERMS": "Costos per tramitar l’alta de llum",
-    "LIGHT_OFF_CONTRACT_TERMS": "Per l'alta d'un nou punt de subministrament que mai ha tingut llum o on fa més de tres anys que el subministrament elèctric està de baixa, s’han de pagar els conceptes següents: <ul><li><b>Drets d’accés:</b> 19,70 €/kW (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets d’extensió:</b> 17,37 €/kW (21,02 €/kW amb l’IVA inclòs)<li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas </li></ul>Si fa menys de tres anys que hi ha hagut llum, s’han de pagar els conceptes següents: <ul><li><b>Drets d’accés:</b> 19,70 €/kW  (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul><a href=''>Més informació aquí</a>"
+    "LIGHT_OFF_CONTRACT_TERMS": "Per l'alta d'un nou punt de subministrament que mai ha tingut llum o on fa més de tres anys que el subministrament elèctric està de baixa, s’han de pagar els conceptes següents:<ul><li><b>Drets d’accés:</b> 19,70 €/kW (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets d’extensió:</b> 17,37 €/kW (21,02 €/kW amb l’IVA inclòs)<li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul>Si fa menys de tres anys que hi ha hagut llum, s’han de pagar els conceptes següents:<ul><li><b>Drets d’accés:</b> 19,70 €/kW  (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul><a href=''>Més informació aquí</a>"
 }
