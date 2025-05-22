@@ -5,7 +5,7 @@ import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
 import InputTitle from '../../components/InputTitle'
 
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
 import Button from '@mui/material/Button'
 
@@ -364,18 +364,18 @@ const NewContractMemberSummary = (props) => {
     <Loading />
   ) : (
     <Grid container spacing={4}>
-      <Grid item xs={12}>
-        <Typography variant="headline3">{t('MEMBER_PAGE_SUMMARY')}</Typography>
-      </Grid>
       <Grid
         item
         xs={12}
         sx={{
+          mt: 4,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
-        <InputTitle text={t('MEMBER_PAGE_SUMMARY_QUESTION')} />
+        <Typography variant="headline4">
+          {t('MEMBER_PAGE_SUMMARY_QUESTION')}
+        </Typography>
         {!showReviewLinks && (
           <Button
             id="edit_button"
@@ -386,7 +386,7 @@ const NewContractMemberSummary = (props) => {
               width: 'auto',
               // padding: '6px 15px',
               fontSize: '0.90rem',
-              textTransform: 'none',
+              textTransform: 'none'
               // height: 36
             }}
             startIcon={<EditOutlinedIcon fontSize="medium" />}
@@ -483,7 +483,7 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <TermsDialog
-          title={t('GENERAL_TERMS')}
+          title={t('CONTRACTUAL_PACKAGE')}
           open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
