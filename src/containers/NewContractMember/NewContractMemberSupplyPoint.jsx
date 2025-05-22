@@ -22,8 +22,7 @@ const newContractMemberSupplyPoint = (props) => {
 
   const handleLightQuestion = (value) => {
     setFieldValue('has_light', value)
-    if (value === 'light-off')
-    {
+    if (value === 'light-off') {
       setOpenLightOffDialog(true)
     }
   }
@@ -48,16 +47,15 @@ const newContractMemberSupplyPoint = (props) => {
   ]
 
   return (
-
     <Grid container spacing={2}>
       <Grid item xs={12}>
-      <AlertBox
-            id="percent_value_error"
-            description={t('RECOMMENDATION_SUBTITLE')}
-            severity={'warning'}
-            //TODO icon={false}
-            variant={'body2'}
-          />
+        <AlertBox
+          id="percent_value_error"
+          description={t('RECOMMENDATION_SUBTITLE')}
+          severity={'warning'}
+          //TODO icon={false}
+          variant={'body2'}
+        />
       </Grid>
       <Grid item xs={12}>
         <Typography variant="headline3">{t('CUPS_TITLE')}</Typography>

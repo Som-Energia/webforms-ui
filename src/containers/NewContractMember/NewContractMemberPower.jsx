@@ -26,7 +26,7 @@ const NewContractMemberPower = (props) => {
             <Typography variant="headline3">{t('POWER_TITLE')}</Typography>
         </Grid>
         <Grid item xs={12}>
-            <Typography variant="body.sm.regular" color="secondary.dark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+            <Typography variant="body.md.regular" color="secondary.dark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
         </Grid>
       </Grid>
       <Grid item xs={12}>
