@@ -56,7 +56,7 @@ const CUPS = (props) => {
     <InputField
       name='cups'
       textFieldLabel={t('GURB_CUPS_LABEL')}
-      textFieldName={t('GURB_CUPS_FIELD')}
+      textFieldName={t('CUPS_FIELD')}
       textFieldHelper={t('GURB_CUPS_HELPER')}
       iconHelper={true}
       handleChange={handleInputCups}

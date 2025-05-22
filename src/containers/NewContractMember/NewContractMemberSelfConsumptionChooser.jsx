@@ -48,7 +48,9 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
           </Typography>
         </Grid>
       </Grid>
+
       <Grid item xs={12}>
+        <br/>
         <Typography variant="subtitle4">
           {t('SELFCONSUMPTION_ACTIVE')}
         </Typography>

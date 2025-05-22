@@ -762,7 +762,7 @@
     "GURB_HAS_NO_MEMBER_BODY": "No sóc soci/a de la cooperativa",
     "GURB_APADRINATING": "M'apadrinen",
     "GURB_APADRINATING_BODY": "Conec a algú que em pot apadrinar",
-    "GURB_CUPS_FIELD": "Número CUPS",
+    "CUPS_FIELD": "Indica el codi CUPS",
     "GURB_CUPS_LABEL": "CUPS",
     "GURB_CUPS_HELPER": "El CUPS s'indica a la teva factura. Veure aquí on puc trobar el CUPS",
     "GURB_REQUIREMENTS_STEP": "Requisits",
