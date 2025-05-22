@@ -168,8 +168,8 @@ export const buttonGurbDark = {
   paddingRight: '1rem',
   boxShadow: 'none',
   '&:hover': {
-    backgroundColor: 'primary.main',
-    color: 'primary.extraLight',
+    backgroundColor: '#B6E471',
+    color: 'primary.main',
     boxShadow: 'none',
     border: '1px solid transparent'
   },
