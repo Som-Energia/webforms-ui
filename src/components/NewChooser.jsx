@@ -13,40 +13,45 @@ const Option = ({
   optionId,
   icon,
   textHeader,
-  textBody,
+  textBody
 }) => {
   return (
     <Box
       data-cy={optionId}
       sx={{
         ...(isSelected ? chooserGurbSelected : chooserGurb),
-        height: '100%', 
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
       }}
       onClick={() => {
         setSelected(optionId)
-      }}
-    >
+      }}>
       <Box>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '1rem',
-            justifyContent: 'space-between',
-          }}
-        >
+            marginBottom: '0.0rem',
+            justifyContent: 'space-between'
+          }}>
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
+              gap: '1rem'
+            }}>
             {icon}
-            <Typography sx={textHeader4}>{textHeader}</Typography>
+            <Typography
+              sx={{
+                ...textHeader4,
+                fontWeight: 'bold',
+                textAlign: 'center',
+                width: '100%'
+              }}>
+              {textHeader}
+            </Typography>
           </Box>
           {isSelected ? (
             <Checkbox
@@ -75,8 +80,7 @@ const Chooser = (props) => {
       container
       spacing={4}
       direction="row"
-      justifyContent="center"
-    >
+      justifyContent="center">
       {options.map((option, index) => (
         <Grid key={index} item sm={6} xs={12}>
           <Option
@@ -91,9 +95,8 @@ const Chooser = (props) => {
             <Box
               sx={{
                 marginTop: '1rem',
-                justifyItems: 'center',
-              }}
-            >
+                justifyItems: 'center'
+              }}>
               {option?.helper}
             </Box>
           )}
