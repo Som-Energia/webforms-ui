@@ -44,15 +44,24 @@ Cypress.Commands.add('newContractIdentifySupplyPoint', (cups, has_light, statusC
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('newContractSupplyPointData', (data) => {
+Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
   cy.get('[data-cy="supply_point_address-street"]').type(data.validAddress.input)
   cy.contains(data.supplyPointData.street).click()
 
   cy.get('[data-cy="supply_point_address.number"]').type('2')
 
   cy.get('[data-cy=select_component]').click()
-  cy.get('[data-cy=yes]').click()
-  cy.get('[data-cy="cnae"]').type(data.supplyPoint.cnae)
+  cy.get(`[data-cy="${house}"]`).click()
+
+  cy.get(`[data-cy="cnae"]`).find('input').then(($ele) => {
+    console.log('ele', $ele)
+    if ($ele.is(":enabled")) {
+      cy.get(`[name="cnae"]`).type(data.supplyPoint.cnae_no_house)
+    }
+    if ($ele.is(":disabled")) {
+      cy.get(`[name="cnae"]`).type(data.supplyPoint.cnae_house, {force:true})
+    }
+  })
 
   cy.get('[data-cy="supply_point_accepted"]').click()
   cy.get('[data-cy=accept]').click()
@@ -96,7 +105,7 @@ Cypress.Commands.add('contractMemberPaymentData', (paymentdata) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('contractMemberPersonalPhysicalcheckReviewNewMemberStep', (nif) => {
+Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif) => {
   cy.get('[data-cy="privacy_policy"]').click()
 
   cy.get('[data-cy="generic_conditions_accepted"]').click()
@@ -108,3 +117,4 @@ Cypress.Commands.add('contractMemberPersonalPhysicalcheckReviewNewMemberStep', (
 
   cy.get('button').contains(nif)
 })
+
