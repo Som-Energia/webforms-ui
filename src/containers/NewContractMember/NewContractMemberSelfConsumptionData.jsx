@@ -13,13 +13,14 @@ import Chooser from '../../components/NewChooser'
 import InputField from '../../components/InputField'
 import SelectField from '../../components/SelectField'
 import InputTitle from '../../components/InputTitle'
+import AlertBox from '../../components/AlertBox'
 
 import { iconRequirements } from '../../themes/commonStyles'
 
 import {
-    getSelfConsumptionSituations,
-    getSelfConsumptionTechnologies
-  } from '../../services/api'
+  getSelfConsumptionSituations,
+  getSelfConsumptionTechnologies
+} from '../../services/api'
 
 const NewContractMemberSelfConsumptionData = (props) => {
   const {
@@ -34,11 +35,11 @@ const NewContractMemberSelfConsumptionData = (props) => {
 
   const { t } = useTranslation()
 
-  const handleCollectiveInstallation = ( value ) => {
+  const handleCollectiveInstallation = (value) => {
     setFieldValue('self_consumption.collective_installation', value)
   }
 
-  const handleAuxiliaryService = ( value ) => {
+  const handleAuxiliaryService = (value) => {
     setFieldValue('self_consumption.aux_services', value)
   }
 
@@ -64,7 +65,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
     getSelfConsumptionTechnologies()
       .then((response) => {
         let technologies = {}
-        response?.data.forEach((e) => technologies[e.id] = t(e.name))
+        response?.data.forEach((e) => (technologies[e.id] = t(e.name)))
         setTechnologies(technologies)
       })
       .catch((error) => {
@@ -76,7 +77,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
     getSelfConsumptionSituations()
       .then((response) => {
         let situations = {}
-        response?.data.forEach((e) => situations[e.id] = e.name)
+        response?.data.forEach((e) => (situations[e.id] = e.name))
         setSituations(situations)
       })
       .catch((error) => {
@@ -87,13 +88,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const installation_type_options = [
     {
       id: 'individual',
-      icon: <AccountCircleOutlinedIcon sx={iconRequirements}/>,
+      icon: <AccountCircleOutlinedIcon sx={iconRequirements} />,
       textHeader: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_HELP')
     },
     {
       id: 'collective',
-      icon: <Diversity1OutlinedIcon sx={iconRequirements}/>,
+      icon: <Diversity1OutlinedIcon sx={iconRequirements} />,
       textHeader: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
     }
@@ -102,13 +103,15 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const aux_services_options = [
     {
       id: 'auxiliary-service-yes',
-      icon: <BatteryIcon on={true}/>,
+      icon: <BatteryIcon on={true} />,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
-      textBody: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION')
+      textBody: t(
+        'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
+      )
     },
     {
       id: 'auxiliary-service-no',
-      icon: <BatteryIcon on={false}/>,
+      icon: <BatteryIcon on={false} />,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_NO_LABEL')
     }
   ]
@@ -117,89 +120,97 @@ const NewContractMemberSelfConsumptionData = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-          <Typography variant="headline3">{t('SELFCONSUMPTION_DETAILS_TITLE')}</Typography>
+          <Typography variant="headline3">
+            {t('SELFCONSUMPTION_DETAILS_TITLE')}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body.sm.regular" color="secondary.dark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+          <Grid item xs={12}>
+            <AlertBox
+              id="percent_value_error"
+              description={t('SELFCONSUMPTION_RECOMMENDATION_TEXT')}
+              severity={'warning'}
+              //TODO icon={false}
+              variant={'body2'}
+            />
+          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12}>
         <CAUField
-            required
-            id="self_consumption_cau"
-            label={t('SELFCONSUMPTION_CAU_CODE')}
-            name="self_consumption.cau"
-            variant="outlined"
-            fullWidth
-            values={values}
-            value={values?.self_consumption?.cau}
-            onChange={handleChangeCAU}
-            onBlur={handleBlur}
-            touched={touched?.self_consumption?.cau}
-            error={errors?.self_consumption?.cau}
-            helperText={
-              <a
-                href={t('SELFCONSUMPTION_CAU_HELP_URL')}
-                target="_blank"
-                rel="noopener noreferrer">
-                {t('SELFCONSUMPTION_CAU_HELP')}
-              </a>
-            }
-            cupsToMatch={
-              props.values?.self_consumption?.collective_installation?
-                undefined:
-                props.values.cups
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <InputTitle
-            text={t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_QUESTION')}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={12}>
-            <Chooser
-                name="collective_installation_question"
-                options={installation_type_options}
-                value={values?.self_consumption?.collective_installation}
-                handleChange={handleCollectiveInstallation}
-            />
-        </Grid>
-        <Grid item xs={12}>
-            <InputField
-              required={true}
-              name={'self_consumption.installation_power'}
-              textFieldName={t('CURRENT_POWER')}
-              endAdornmentText={'kW'}
-              handleChange={handleChangeInstallPower}
-              handleBlur={handleBlur}
-              touched={touched?.self_consumption?.installation_power}
-              value={values?.self_consumption?.installation_power}
-              error={errors?.self_consumption?.installation_power}
-              textFieldHelper={
-                t('HELP_POPOVER_POWER')
-              }
-            />
+          required
+          id="self_consumption_cau"
+          label={t('SELFCONSUMPTION_CAU_CODE')}
+          name="self_consumption.cau"
+          variant="outlined"
+          fullWidth
+          values={values}
+          value={values?.self_consumption?.cau}
+          onChange={handleChangeCAU}
+          onBlur={handleBlur}
+          touched={touched?.self_consumption?.cau}
+          error={errors?.self_consumption?.cau}
+          helperText={
+            <a
+              href={t('SELFCONSUMPTION_CAU_HELP_URL')}
+              target="_blank"
+              rel="noopener noreferrer">
+              {t('SELFCONSUMPTION_CAU_HELP')}
+            </a>
+          }
+          cupsToMatch={
+            props.values?.self_consumption?.collective_installation
+              ? undefined
+              : props.values.cups
+          }
+        />
       </Grid>
-      <Grid item xs={12} sm={6}>
-        <SelectField
-            label={t('SELFCONSUMPTION_INSTALLATION_SITUATION_QUESTION')}
-            value={values?.self_consumption?.installation_type}
-            fieldName="self_consumption.installation_type"
-            options={situations}
-            required={true}
-            {...props}
+      <Grid item xs={12}>
+        <InputTitle
+          text={t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_QUESTION')}
+          required={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Chooser
+          name="collective_installation_question"
+          options={installation_type_options}
+          value={values?.self_consumption?.collective_installation}
+          handleChange={handleCollectiveInstallation}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <InputField
+          required={true}
+          name={'self_consumption.installation_power'}
+          textFieldName={t('CURRENT_POWER')}
+          endAdornmentText={'kW'}
+          handleChange={handleChangeInstallPower}
+          handleBlur={handleBlur}
+          touched={touched?.self_consumption?.installation_power}
+          value={values?.self_consumption?.installation_power}
+          error={errors?.self_consumption?.installation_power}
+          textFieldHelper={t('HELP_POPOVER_POWER')}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
         <SelectField
-            label={t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
-            value={values?.self_consumption?.technology}
-            fieldName="self_consumption.technology"
-            options={technologies}
-            required={true}
-            {...props}
+          label={t('SELFCONSUMPTION_INSTALLATION_SITUATION_QUESTION')}
+          value={values?.self_consumption?.installation_type}
+          fieldName="self_consumption.installation_type"
+          options={situations}
+          required={true}
+          {...props}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <SelectField
+          label={t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
+          value={values?.self_consumption?.technology}
+          fieldName="self_consumption.technology"
+          options={technologies}
+          required={true}
+          {...props}
         />
       </Grid>
       <Grid item xs={12}>
@@ -209,12 +220,12 @@ const NewContractMemberSelfConsumptionData = (props) => {
         />
       </Grid>
       <Grid item xs={12}>
-          <Chooser
-              name="aux_services_question"
-              options={aux_services_options}
-              value={values?.self_consumption?.aux_services}
-              handleChange={handleAuxiliaryService}
-          />
+        <Chooser
+          name="aux_services_question"
+          options={aux_services_options}
+          value={values?.self_consumption?.aux_services}
+          handleChange={handleAuxiliaryService}
+        />
       </Grid>
     </Grid>
   )

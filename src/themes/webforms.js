@@ -125,18 +125,23 @@ export default function WebFormsTheme() {
 
 export const getAlertBoxStyles = (theme, severity) => {
   const primary = theme.palette?.primary2?.main
-  const secondary = theme.palette?.background?.main
 
   if (severity === 'warning') {
     return {
-      backgroundColor: secondary,
+      textAlign: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#ffcdb580', // 50% opacidad
       border: 'none',
+      borderRadius: '8px',
       color: primary,
       '& .MuiAlertTitle-root': {
         color: primary,
       },
       '& .MuiTypography-root': {
         color: primary,
+        fontSize: 'body.md.regular',
       },
       '& *': {
         color: `${primary} !important`,
