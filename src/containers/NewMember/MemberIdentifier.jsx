@@ -40,10 +40,10 @@ const MemberIdentifier = (props) => {
         console.error('UNEXPECTED')
       })
     setFieldError('new_member.nif', undefined)
-    if (nif_info.exists === true) {
+    if (nif_info?.exists === true) {
       setFieldError('new_member.nif', t('DNI_EXIST'))
     }
-    if (nif_info.valid === false) {
+    if (nif_info?.valid === false) {
       setFieldError('new_member.nif', t('FILL_NIF'))
     }
   }
@@ -53,7 +53,7 @@ const MemberIdentifier = (props) => {
     try {
       setLoading(true)
       await handleCheckNifFormat(
-        values.new_member.nif,
+        values?.new_member?.nif,
         setFieldError,
         'new_member.nif'
       )
@@ -74,7 +74,7 @@ const MemberIdentifier = (props) => {
         is_physical ? 'physic-person' : 'legal-person'
       )
     }
-  }, [values.new_member.nif])
+  }, [values?.new_member?.nif])
 
   return (
     <Grid container spacing={4}>
