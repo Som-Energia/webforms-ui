@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid'
 import Chooser from '../../components/NewChooser'
 import { HelperText } from '../../components/InputField'
 import Typography from '@mui/material/Typography'
+import InputTitle from '../../components/InputTitle'
 
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
@@ -50,10 +51,14 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <br/>
-        <Typography variant="subtitle4">
-          {t('SELFCONSUMPTION_ACTIVE')}
-        </Typography>
+        <br />
+        <Grid item xs={12}>
+          <InputTitle
+            variant="subtitle4"
+            text={t('SELFCONSUMPTION_ACTIVE')}
+            required={true}
+          />
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body.md.regular" color="secondary.dark">

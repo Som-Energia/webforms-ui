@@ -154,6 +154,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
             <a
               href={t('SELFCONSUMPTION_CAU_HELP_URL')}
               target="_blank"
+              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
               rel="noopener noreferrer">
               {t('SELFCONSUMPTION_CAU_HELP')}
             </a>
