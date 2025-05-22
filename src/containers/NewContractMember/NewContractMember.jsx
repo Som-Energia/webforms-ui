@@ -98,7 +98,7 @@ const NewContractMemberForm = (props) => {
     new_member: {
       nif: '',
       become_member: false,
-      is_physical: 'physic-person',
+      person_type: '',
       proxynif_valid: false,
       proxynif: '',
       proxyname: '',
@@ -173,9 +173,12 @@ const NewContractMemberForm = (props) => {
       next = activeStep + 1
     }
 
-    if (formikProps.values.has_selfconsumption === 'selfconsumption-off') (
+    if (
+      activeStep === NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SELFCONSUMPTION'] &&
+      formikProps.values.has_selfconsumption === 'selfconsumption-off'
+    ) {
       next = next + 1
-    )
+    }
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -183,9 +186,12 @@ const NewContractMemberForm = (props) => {
 
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
-    if (formikProps.values.has_selfconsumption === 'selfconsumption-off') (
+    if (
+      activeStep === NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO'] &&
+      formikProps.values.has_selfconsumption === 'selfconsumption-off'
+    ) {
       prev = prev - 1
-    )
+    }
     setActiveStep(Math.max(0, prev))
   }
 
