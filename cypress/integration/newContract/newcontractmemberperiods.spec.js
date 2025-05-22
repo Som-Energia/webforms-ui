@@ -30,7 +30,7 @@ describe('Member', () => {
       cy.contractMemberHolderQuestion()
       cy.contractMemberDonationQuestion()
       cy.contractMemberPaymentData(this.data.paymentData)
-      cy.contractMemberPersonalPhysicalcheckReviewNewMemberStep(
+      cy.contractMemberCheckReviewNewMemberStep(
         this.data.personalPhysicalData.nif
       )
     })
@@ -56,8 +56,33 @@ describe('Member', () => {
       cy.contractMemberHolderQuestion()
       cy.contractMemberDonationQuestion()
       cy.contractMemberPaymentData(this.data.paymentData)
-      cy.contractMemberPersonalPhysicalcheckReviewNewMemberStep(
+      cy.contractMemberCheckReviewNewMemberStep(
         this.data.personalPhysicalData.nif
+      )
+    })
+  })
+
+  describe('New contract and legal member without optional data', function () {
+    it('New contract and legal member without option data', function () {
+      cy.contractMemberQuestion()
+      cy.identifyNewMember(this.data.personalLegalData.nif)
+      cy.personalLegalDataMember(
+        this.data.personalLegalData,
+        this.data.validAddress
+      )
+      cy.newContractIdentifySupplyPoint(
+        this.data.supplyPoint.cups,
+        this.data.supplyPoint.has_light
+      )
+      cy.newContractSupplyPointData(this.data)
+      cy.choosePower({ powers: [2, 3] })
+      cy.selfconsumptionQuestion(true)
+      cy.selfconsumptionData(this.data.selfConsumption)
+      cy.contractMemberHolderQuestion()
+      cy.contractMemberDonationQuestion()
+      cy.contractMemberPaymentData(this.data.paymentData)
+      cy.contractMemberCheckReviewNewMemberStep(
+        this.data.personalLegalData.nif
       )
     })
   })

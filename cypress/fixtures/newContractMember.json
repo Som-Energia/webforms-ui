@@ -57,7 +57,8 @@
   "supplyPoint": {
     "cups": "ES0122449351050857YA",
     "has_light": "light-on",
-    "cnae": "9820"
+    "cnae_house": "9820",
+    "cnae_no_house": "0111"
   },
   "paymentData": {
     "paymentMethod": "iban",
