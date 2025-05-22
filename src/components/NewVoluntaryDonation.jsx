@@ -81,13 +81,6 @@ const HolderVoluntaryDonation = (props) => {
           handleChange={handleVoluntaryDonationQuestion}
         />
       </Grid>
-      <Grid item xs={12}>
-        <HelperText
-          helperText={t('GURB_VOLUNTARY_DONATION_HELPER')}
-          iconHelper={false}
-          justifyContent={'center'}
-        />
-      </Grid>
     </Grid>
   )
 }
