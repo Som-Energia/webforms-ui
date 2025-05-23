@@ -224,6 +224,33 @@ const App = (props) => {
                       }
                     />
 
+                    <Route
+                      path="/:language/pagament-realitzat"
+                      element={
+                        <Success
+                          {...props}
+                          description={'NEWMEMBER_OK_DESCRIPTION'}
+                        />
+                      }
+                    />
+                    <Route
+                      path="/:language/pago-realizado"
+                      element={
+                        <Success
+                          {...props}
+                          description={'NEWMEMBER_OK_DESCRIPTION'}
+                        />
+                      }
+                    />
+
+                    <Route
+                      path="/:language/pagament-cancellat"
+                      element={<Failure {...props} />}
+                    />
+                    <Route
+                      path="/:language/pago-cancelado"
+                      element={<Failure {...props} />}
+                    />
 
                     <Route
                       path="/:language/mail-subscriptions"
@@ -473,7 +500,7 @@ const App = (props) => {
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
                     <Route
-                      path="/:language/pagament-realitzat"
+                      path="/:language/new-pagament-realitzat"
                       element={
                         <Result
                           mode={'success'}
@@ -484,7 +511,7 @@ const App = (props) => {
                       }
                     />
                     <Route
-                      path="/:language/pago-realizado"
+                      path="/:language/new-pago-realizado"
                       element={
                         <Result
                           mode={'success'}
@@ -495,7 +522,7 @@ const App = (props) => {
                       }
                     />
                     <Route
-                      path="/:language/pagament-cancellat"
+                      path="/:language/new-pagament-cancellat"
                       element={<Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
                         <Typography
                           sx={{ color: "secondary.dark" }}
@@ -506,7 +533,7 @@ const App = (props) => {
                       </Result>}
                     />
                     <Route
-                      path="/:language/pago-cancelado"
+                      path="/:language/new-pago-cancelado"
                       element={<Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
                         <Typography
                           sx={{ color: "secondary.dark" }}
