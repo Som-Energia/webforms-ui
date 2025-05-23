@@ -52,8 +52,8 @@ const Result = (props) => {
                 gap: 2
             }}>
 
-                {mode === 'success' ? <CheckCircleIcon fontSize="large" sx={{ color: 'primary.extraLight' }} /> : null}
-                {mode === 'failure' ? <CancelIcon fontSize="large" sx={{ color: 'primary2.main' }} /> : null}
+                {mode === 'success' ? <CheckCircleIcon data-cy='success-icon' fontSize="large" sx={{ color: 'primary.extraLight' }} /> : null}
+                {mode === 'failure' ? <CancelIcon data-cy='error-icon' fontSize="large" sx={{ color: 'primary2.main' }} /> : null}
 
                 <Title title={title} mode={mode} />
 
