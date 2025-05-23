@@ -36,7 +36,13 @@ const SelectField = (props) => {
       <Grid item xs={12} sm={6}>
         <InputTitle text={label} required={required} />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={6}
+        sx={{
+          "&.MuiGrid-item": {
+            maxWidth: "100%",
+          },
+        }}
+      >
         <Select
           fullWidth
           id={`${fieldName}`}
