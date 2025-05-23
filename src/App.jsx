@@ -19,10 +19,14 @@ import { GurbErrorContextProvider } from './context/GurbErrorContext'
 import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
+import { useTranslation } from 'react-i18next'
+
+import Typography from '@mui/material/Typography'
 
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
+  const { t } = useTranslation()
 
   const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
@@ -135,7 +139,7 @@ const App = (props) => {
                         element={<Member {...props} />}
                       />
                     ))}
-                    
+
                     <Route
                       exact
                       path="/:language/component-testing"
@@ -220,34 +224,6 @@ const App = (props) => {
                       }
                     />
 
-                    <Route
-                      path="/:language/pagament-realitzat"
-                      element={
-                        <Success
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/pago-realizado"
-                      element={
-                        <Result
-                          mode={'success'}
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
-
-                    <Route
-                      path="/:language/pagament-cancellat"
-                      element={<Failure {...props} />}
-                    />
-                    <Route
-                      path="/:language/pago-cancelado"
-                      element={<Failure {...props} />}
-                    />
 
                     <Route
                       path="/:language/mail-subscriptions"
@@ -496,6 +472,50 @@ const App = (props) => {
                 </ThemeProvider>
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
+                    <Route
+                      path="/:language/pagament-realitzat"
+                      element={
+                        <Result
+                          mode={'success'}
+                          {...props}
+                          title={t('SUCCESS_TEXT')}
+                          description={t('NEWMEMBER_OK_DESCRIPTION')}
+                        />
+                      }
+                    />
+                    <Route
+                      path="/:language/pago-realizado"
+                      element={
+                        <Result
+                          mode={'success'}
+                          {...props}
+                          title={t('SUCCESS_TEXT')}
+                          description={t('NEWMEMBER_OK_DESCRIPTION')}
+                        />
+                      }
+                    />
+                    <Route
+                      path="/:language/pagament-cancellat"
+                      element={<Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
+                        <Typography
+                          sx={{ color: "secondary.dark" }}
+                          dangerouslySetInnerHTML={{
+                            __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
+                          }}
+                        />
+                      </Result>}
+                    />
+                    <Route
+                      path="/:language/pago-cancelado"
+                      element={<Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
+                        <Typography
+                          sx={{ color: "secondary.dark" }}
+                          dangerouslySetInnerHTML={{
+                            __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
+                          }}
+                        />
+                      </Result>}
+                    />
                     <Route
                       path="/:language/new-contract-form/:tariff"
                       element={
