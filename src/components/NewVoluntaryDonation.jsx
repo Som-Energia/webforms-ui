@@ -37,12 +37,12 @@ const HolderVoluntaryDonation = (props) => {
     {
       id: true,
       icon: <FavoriteBorderIcon sx={iconRequirements} />,
-      textHeader: t('GURB_VOLUNTARY_DONATION_ON_HEADER')
+      textHeader: t('VOLUNTARY_DONATION_ON_HEADER')
     },
     {
       id: false,
       icon: <FavoriteBorderIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_VOLUNTARY_DONATION_OFF_HEADER')
+      textHeader: t('VOLUNTARY_DONATION_OFF_HEADER')
     }
   ]
 
@@ -53,7 +53,7 @@ const HolderVoluntaryDonation = (props) => {
           sx={textBody1}
           variant="body2"
           dangerouslySetInnerHTML={{
-            __html: t('GURB_VOLUNTARY_DONATION_HOW_INFO')
+            __html: t('VOLUNTARY_DONATION_HOW_INFO')
           }}
         />
       </Grid>
@@ -62,13 +62,13 @@ const HolderVoluntaryDonation = (props) => {
           sx={{ ...textBody1, marginBottom: '1rem' }}
           variant="body2"
           dangerouslySetInnerHTML={{
-            __html: t('GURB_VOLUNTARY_DONATION_WHY_INFO')
+            __html: t('VOLUNTARY_DONATION_WHY_INFO')
           }}
         />
       </Grid>
       <Grid item xs={12}>
         <RequiredTitle
-          text={t('GURB_VOLUNTARY_DONATION_QUESTION')}
+          text={t('VOLUNTARY_DONATION_QUESTION')}
           textStyle={textHeader4}
           required={true}
         />
