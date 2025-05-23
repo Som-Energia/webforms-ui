@@ -10,20 +10,14 @@ import { iconRequirements } from '../../themes/commonStyles'
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 import Grid from '@mui/material/Grid'
 
-import { useNavigate } from "react-router-dom";
-
-const NewContractMemberQuestion = (props) => {
-  const { values, setFieldValue } = props
+const NewContractMemberQuestion = ({ formikProps, nextStep }) => {
+  const { values, setFieldValue } = formikProps
   const { t } = useTranslation()
 
-  const navigate = useNavigate();
-
   const handleMemberQuestion = (value) => {
-    const selectedUrl = value == 'member-on'? 'new-contract-member-form' : 'new-contract-member-form';
-    if (selectedUrl) {
-      navigate(selectedUrl);
-    }
-  };
+    setFieldValue('has_member', value)
+    nextStep(formikProps)
+  }
 
   const options = [
     {
@@ -43,26 +37,29 @@ const NewContractMemberQuestion = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('CONTRACT_QUESTION_TITLE')}</Typography>
+        <Typography variant="headline3">
+          {t('CONTRACT_QUESTION_TITLE')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular" color="secondary.dark">{t('CONTRACT_QUESTION_DESC')}</Typography>
+        <Typography variant="body.sm.regular" color="secondary.dark">
+          {t('CONTRACT_QUESTION_DESC')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
-          <Typography variant="body.sm.regular" color="secondary.dark">{t('MEMBER_PAYMENT_INFO')}</Typography>        
+        <Typography variant="body.sm.regular" color="secondary.dark">
+          {t('MEMBER_PAYMENT_INFO')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
-        <InputTitle
-          text={t('CONTRACT_QUESTION')}
-          required={true}
-        />
+        <InputTitle text={t('CONTRACT_QUESTION')} required={true} />
       </Grid>
       <Grid item>
         <Chooser
           name="member-question"
           options={options}
           value={values.has_member}
-          handleChange={handleMemberQuestion}      
+          handleChange={handleMemberQuestion}
         />
       </Grid>
     </Grid>

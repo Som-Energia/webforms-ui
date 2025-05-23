@@ -16,6 +16,7 @@ import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
 import MemberPersonalData from '../NewMember/MemberPersonalData'
+import NewContractMemberQuestion from './NewContractMemberQuestion'
 import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
 import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
 import NewContractMemberPower from './NewContractMemberPower'
@@ -28,6 +29,7 @@ import NewContractMemberSummary from './NewContractMemberSummary'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations'
+import newContractMemberQuestionValidations from './newContractMemberQuestionValidations'
 import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
 import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
@@ -38,7 +40,7 @@ import newContractMemberVoluntaryDonationValidations from './newContractMemberVo
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
 
-const MAX_STEP_NUMBER = 10
+const MAX_STEP_NUMBER = 11
 const NEW_MEMBER_COST = 100
 
 const NewContractMemberForm = (props) => {
@@ -129,7 +131,7 @@ const NewContractMemberForm = (props) => {
         power4: '',
         power5: '',
         power6: ''
-      },
+      }
     },
     has_selfconsumption: undefined,
     self_consumption: {
@@ -137,7 +139,7 @@ const NewContractMemberForm = (props) => {
       cau_error: false,
       collective_installation: undefined,
       installation_type: '',
-      technology:'b11',
+      technology: 'b11',
       aux_services: undefined,
       installation_power: ''
     },
@@ -148,6 +150,7 @@ const NewContractMemberForm = (props) => {
   }
 
   const validationSchemas = [
+    newContractMemberQuestionValidations,
     memberIdentifierValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
@@ -201,27 +204,28 @@ const NewContractMemberForm = (props) => {
 
   const getStep = (props) => {
     if (activeStep === 0) {
-      return <MemberIdentifier {...props} />
+      return <NewContractMemberQuestion formikProps={props} nextStep={nextStep} />
     } else if (activeStep === 1) {
-      return <MemberPersonalData {...props} />
+      return <MemberIdentifier {...props} />
     } else if (activeStep === 2) {
-      return <NewContractMemberSupplyPoint {...props} />
+      return <MemberPersonalData {...props} />
     } else if (activeStep === 3) {
-      return <NewContractMemberSupplyPointData {...props} />
+      return <NewContractMemberSupplyPoint {...props} />
     } else if (activeStep === 4) {
-      return <NewContractMemberPower {...props} />
+      return <NewContractMemberSupplyPointData {...props} />
     } else if (activeStep === 5) {
-      return <NewContractMemberSelfConsumptionChooser {...props} />
+      return <NewContractMemberPower {...props} />
     } else if (activeStep === 6) {
-      return <NewContractMemberSelfConsumptionData {...props} />
+      return <NewContractMemberSelfConsumptionChooser {...props} />
     } else if (activeStep === 7) {
-      return <NewContractMemberHolder {...props} />
+      return <NewContractMemberSelfConsumptionData {...props} />
     } else if (activeStep === 8) {
-      return <NewContractMemberVoluntaryDonation {...props} />
+      return <NewContractMemberHolder {...props} />
     } else if (activeStep === 9) {
+      return <NewContractMemberVoluntaryDonation {...props} />
+    } else if (activeStep === 10) {
       return <NewContractMemberPayment {...props} />
-    }
-    else {
+    } else {
       return <NewContractMemberSummary {...props} />
     }
   }
@@ -255,47 +259,53 @@ const NewContractMemberForm = (props) => {
         {(formikProps) => {
           return (
             <>
-              <SomStepper
-                activeStep={activeStep}
-                steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
-              />
-              {getStep(formikProps)}
-              <Grid
-                container
-                direction="row-reverse"
-                rowSpacing={2}
-                sx={{
-                  marginTop: '2rem',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                {activeStep !== 0 && (
-                  <Grid item sm={2} xs={12}>
-                    <PrevButton
-                      onClick={() => prevStep(formikProps)}
-                      title={'PREV'}
-                    />
+              {activeStep == 0 ? (
+                getStep(formikProps)
+              ) : (
+                <>
+                  <SomStepper
+                    activeStep={activeStep - 1}  // because step 0 does not count
+                    steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
+                  />
+                  {getStep(formikProps)}
+                  <Grid
+                    container
+                    direction="row-reverse"
+                    rowSpacing={2}
+                    sx={{
+                      marginTop: '2rem',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}>
+                    {activeStep !== 0 && (
+                      <Grid item sm={2} xs={12}>
+                        <PrevButton
+                          onClick={() => prevStep(formikProps)}
+                          title={'PREV'}
+                        />
+                      </Grid>
+                    )}
+                    <Grid item sm={2} xs={12} order={-1}>
+                      {activeStep !== MAX_STEP_NUMBER ? (
+                        <NextButton
+                          disabled={
+                            loading ||
+                            !formikProps.isValid ||
+                            activeStep === MAX_STEP_NUMBER
+                          }
+                          onClick={() => nextStep(formikProps)}
+                          title={'NEXT'}
+                        />
+                      ) : (
+                        <SubmitButton
+                          disabled={!formikProps.isValid}
+                          onClick={() => handlePost()}
+                        />
+                      )}
+                    </Grid>
                   </Grid>
-                )}
-                <Grid item sm={2} xs={12} order={-1}>
-                  {activeStep !== MAX_STEP_NUMBER ? (
-                    <NextButton
-                      disabled={
-                        loading ||
-                        !formikProps.isValid ||
-                        activeStep === MAX_STEP_NUMBER
-                      }
-                      onClick={() => nextStep(formikProps)}
-                      title={'NEXT'}
-                    />
-                  ) : (
-                    <SubmitButton
-                      disabled={!formikProps.isValid}
-                      onClick={() => handlePost()}
-                    />
-                  )}
-                </Grid>
-              </Grid>
+                </>
+              )}
             </>
           )
         }}
