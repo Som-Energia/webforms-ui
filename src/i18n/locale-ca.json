@@ -870,12 +870,12 @@
     "REVIEW_TECHNICAL_DETAILS_FOOTER": "Siempre la podrás cambiar a través del área de clientes",
     "REVIEW_PAYMENT_DATA_LABEL_IBAN": "IBAN:",
     "GURB_REVIEW_PAYMENT_DATA_LABEL_VOLUNTARY_DONATION": "Donatiu voluntari:",
-    "REVIEW_CONTACT_INFORMATION_TITLE": "Información de contacto",
+    "REVIEW_CONTACT_INFORMATION_TITLE": "Informació de contacte",
     "GURB_REVIEW_CONTACT_INFORMATION_SUBTITLE": "Según los datos que tengas en el área de cliente ",
-    "REVIEW_PAYMENT_DATA_TITLE": "Datos de pago",
+    "REVIEW_PAYMENT_DATA_TITLE": "Dates de pagament",
     "GURB_PRICES_AFTER_TAXES": "Precios con impuestos",
     "REVIEW_PRICES_ENERGY_TITLE": "Término de energía",
-    "REVIEW_PRICES_POWER_TITLE": "Término de potencia",
+    "REVIEW_PRICES_POWER_TITLE": "Preus amb impostos",
     "GURB_SUMMARY_INFO": "<p>Además del precio fijo asociado al coste de la energía, establecido por Som Energia y publicado en <a target='_blank' href=\"{{url_som_tariff}}\">nostra página web</a>, a partir del 1 de octubre la factura incluirá un importe variable asociado al mecanismo de ajuste establecido en el <a target='_blank' href=\"{{url_rdl}}\">RDL 10/2022</a>. Este importe lo calcularemos para cada periodo de facturación. Ponderaremos el precio de cada hora del mecanismo de ajuste (<a target='_blank' href=\"{{url_omie}}\">publicado por OMIE</a>) en función del reparto horario energético de un consumidor/a tipo (<a target='_blank' href=\"{{url_red_electrica}}\">publicado por Red Eléctrica de España</a> según la <a target='_blank' href=\"{{url_boe_310}}\">Resolución de 23/12/2021</a>). El precio obtenido lo multiplicaremos, en cada factura, por la energía total consumida en el período de facturación. El mecanismo de ajuste del gas no aplica para los contratos de Baleares y Canarias.</p>",
     "URL_WEB_SOM_TARIFF": "https://www.somenergia.coop/ca/tarifes-delectricitat-que-oferim/",
     "URL_RDL_2022": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-7843",
@@ -986,5 +986,7 @@
     "I_AGREE": "D'acord",
     "LIGHT_OFF_TERMS": "Costos per tramitar l’alta de llum",
     "LIGHT_OFF_CONTRACT_TERMS": "Per l'alta d'un nou punt de subministrament que mai ha tingut llum o on fa més de tres anys que el subministrament elèctric està de baixa, s’han de pagar els conceptes següents:<ul><li><b>Drets d’accés:</b> 19,70 €/kW (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets d’extensió:</b> 17,37 €/kW (21,02 €/kW amb l’IVA inclòs)<li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul>Si fa menys de tres anys que hi ha hagut llum, s’han de pagar els conceptes següents:<ul><li><b>Drets d’accés:</b> 19,70 €/kW  (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul><a href=''>Més informació aquí</a>",
-    "CONTRACTUAL_PACKAGE": "Paquet contractual"
+    "CONTRACTUAL_PACKAGE": "Paquet contractual",
+    "REVIEW_PRICES_NOTICE_INDEXED": "Pots consultar el mètode de càlcul de la tarifa indexada i totes les seves variables en aquest <a target='_blank' href=\"{{url_indexed_prices}}\">enllaç</a>.",
+    "REVIEW_PRICES_NOTICE_INDEXED_URL": "https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada"
 }

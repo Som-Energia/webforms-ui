@@ -30,6 +30,7 @@ import Loading from '../../components/Loading'
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined'
 
 const TARIFF_INDEXED = 'indexed'
 
@@ -174,9 +175,9 @@ const NewContractMemberSummary = (props) => {
           }
         ]
       },
-      values?.new_member?.person_type == 'physic-person'
-        ? physicalReviewFields
-        : legalReviewFields
+      values?.new_member?.person_type == 'legal-person'
+        ? legalReviewFields
+        : physicalReviewFields
     ],
     [
       {
@@ -398,16 +399,39 @@ const NewContractMemberSummary = (props) => {
       <Grid item xs={12}>
         <ReviewTable tableFields={reviewFields} />
       </Grid>
-      {isTariffIndexed && (
-        <>
-          <Grid item xs={12}>
-            <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
+      {!isTariffIndexed ? (
+        <Grid item xs={12}>
+          <ReviewPricesTable reviewPrices={reviewPrices} prices={prices} />
+        </Grid>
+      ) : (
+        <Grid container spacing={0}>
+          <Grid item xs={2} sm={1}>
+            <LocalOfferOutlinedIcon sx={iconRequirements} />
           </Grid>
-          <Grid item xs={12}>
-            <Divider sx={{ my: 2 }} />
+          <Grid item xs={10} sm={11}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Typography variant="body.md.bold">
+                  {t('REVIEW_PRICES_POWER_TITLE')}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography
+                  variant="body.sm"
+                  dangerouslySetInnerHTML={{
+                    __html: t('REVIEW_PRICES_NOTICE_INDEXED', {
+                      url: t('REVIEW_PRICES_NOTICE_INDEXED_URL')
+                    })
+                  }}></Typography>
+              </Grid>
+            </Grid>
           </Grid>
-        </>
+        </Grid>
       )}
+
+      <Grid item xs={12}>
+        <Divider sx={{ my: 2 }} />
+      </Grid>
 
       <Grid item xs={12}>
         <Typography variant="body2">
