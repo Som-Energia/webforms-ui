@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
-import InputTitle from '../../components/InputTitle'
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'

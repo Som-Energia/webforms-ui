@@ -14,6 +14,7 @@ import InputField from '../../components/InputField'
 import SelectField from '../../components/SelectField'
 import InputTitle from '../../components/InputTitle'
 import AlertBox from '../../components/AlertBox'
+import { HelperText } from '../../components/InputField'
 
 import { iconRequirements } from '../../themes/commonStyles'
 
@@ -226,6 +227,18 @@ const NewContractMemberSelfConsumptionData = (props) => {
           options={aux_services_options}
           value={values?.self_consumption?.aux_services}
           handleChange={handleAuxiliaryService}
+        />
+        <HelperText
+          helperText={
+            <a
+              href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
+              target="_blank"
+              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              rel="noopener noreferrer">
+              {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
+            </a>
+          }
+          iconHelper={false}
         />
       </Grid>
     </Grid>
