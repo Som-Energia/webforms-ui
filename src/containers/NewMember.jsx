@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
@@ -151,13 +152,13 @@ const NewMemberForm = (props) => {
             setCompleted(true)
           }
         } else {
-          console.log(response)
+          setCompleted(true)
           setError(true)
           // handleError(response)  // TODO: Simplify
         }
       })
       .catch((error) => {
-        console.log(error)
+        setCompleted(true)
         setError(true)
         // handleError(error?.response?.data)  // TODO: Simplify
       })
@@ -206,7 +207,7 @@ const NewMemberForm = (props) => {
           return (
             <>
               {sending
-                ? <NewLoading description={"Estem donant d'alta a la nova persona sòcia"}/>
+                ? <NewLoading description={t("NEW_MEMBER_SUBMIT_LOADING")} />
                 : <>
                   <SomStepper
                     activeStep={activeStep}
@@ -215,10 +216,16 @@ const NewMemberForm = (props) => {
                   {
                     completed ? (
                       <Result
-                        mode={error ? 'success' : 'failure'}
-                        title={error ? t('NEW_MEMBER_SUCCESS_TITLE') : t('NEW_MEMBER_ERROR_TITLE')}
-                        subtitle={error ? t('NEW_MEMBER_SUCCESS_DESC') : t('NEW_MEMBER_ERROR_DESC')}
-                      />
+                        mode={!error ? 'success' : 'failure'}
+                        title={!error ? t('NEW_MEMBER_SUCCESS_TITLE') : t('NEW_MEMBER_ERROR_TITLE')}
+                      >
+                        <Typography
+                          sx={{ color: "secondary.dark" }}
+                          dangerouslySetInnerHTML={{
+                            __html: !error ? t('NEW_MEMBER_SUCCESS_DESC') : t('NEW_MEMBER_ERROR_DESC')
+                          }}
+                        />
+                      </Result>
 
                     ) : (
                       getStep(formikProps)
