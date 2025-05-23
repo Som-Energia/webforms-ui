@@ -778,5 +778,6 @@
     "NEW_MEMBER_SUCCESS_TITLE":"Bienvenida a la Cooperativa! Ya eres socia de Som Energia!",
     "NEW_MEMBER_ERROR_TITLE":"Hay un error y no se ha podido realizar el alta de socia!",
     "NEW_MEMBER_SUCCESS_DESC":"Recibiras un correo con tu número de socia una vez acabe todo el proceso",
-    "NEW_MEMBER_ERROR_DESC":"Por favor, intentalo otra vez más adelante. Disculpa les molestias"
+    "NEW_MEMBER_ERROR_DESC":"Por favor, intentalo otra vez más adelante. Disculpa les molestias",
+    "NEW_MEMBER_SUBMIT_LOADING":"Estamos dando de alta a la nueva persona socia"
 }

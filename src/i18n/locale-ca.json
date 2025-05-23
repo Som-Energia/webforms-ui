@@ -996,5 +996,6 @@
     "NEW_MEMBER_SUCCESS_TITLE":"Benvinguda a la Cooperativa! Ja ets sòcia de Som Energia!",
     "NEW_MEMBER_ERROR_TITLE":"Hi ha un error i no s'ha pogut realitzar l'alta de sòcia!",
     "NEW_MEMBER_SUCCESS_DESC":"Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés",
-    "NEW_MEMBER_ERROR_DESC":"Si us plau, intenta-ho una altra vegada d'aquí una estona. Disculpa les molèsties"
+    "NEW_MEMBER_ERROR_DESC":"Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisem la situació. Disculpa les molèsties",
+    "NEW_MEMBER_SUBMIT_LOADING":"Estem donant d'alta a la nova persona sòcia"
 }
