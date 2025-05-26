@@ -21,23 +21,10 @@ if (!availableLanguages.includes(language)) {
 let gurbId = 2  // TODO: move to env?
 
 const options = [
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  { title: 'New Contract - Periods', href: `${language}/new-contract-form/periods`},
-  { title: 'New Contract - Indexed', href: `${language}/new-contract-form/indexed`},
-=======
   { title: 'New ContractMember - Periods', href: `${language}/new-contract-form/periods`},
   { title: 'New ContractMember - Indexed' , href: `${language}/new-contract-form/indexed`},
->>>>>>> ✨ two calls new-contract-member
-=======
   { title: 'New Contract - Periods', href: `${language}/new-contract-form/periods`},
   { title: 'New Contract - Indexed', href: `${language}/new-contract-form/indexed`},
->>>>>>> 🚧 route to new contract forms
-=======
-  { title: 'New Contract - Periods', href: `${language}/new-contract-form/periods`},
-  { title: 'New Contract - Indexed', href: `${language}/new-contract-form/indexed`},
->>>>>>> 111b99642ca2a8382eb51bec540957019684e83c
   { title: 'New Member - Form', href: `${language}/new-member-form`},
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Component Testing', href: `/${language}/component-testing` },

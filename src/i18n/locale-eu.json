@@ -143,7 +143,7 @@
     "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/eu/pribatutasun-politika/#kontrata-ezazu-argia-formularioa",
     "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/eu/pribatutasun-politika/#erregistratzeko-formularioa-izan-zaitez-bazkide",
     "PRIVACY_POLICY_TITLE": "Datuak babesteko politika",
-    "ACCEPT_PRIVACY_POLICY": "Irakurri dut eta onartzen dut Som Energiaren <a target=\"_blank\" href={{url}}>pribatutasun-politika</a>",
+    "ACCEPT_PRIVACY_POLICY": "Irakurri dut eta onartzen dut Som Energiaren <a target=\"_blank\" href={{url}}>pribatutasun-politika</a>.",
     "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/eu/lege-oharra/",
     "PRIVACY_POLICY_HOLDERCHANGE": "Helburuak: kontratuaren titular berria tramitatzea, eta gure buletina eta gure produktu, zerbitzu eta ekitaldien gaineko informazioa eta jakinarazpen komertzialak bidaltzea. Eskubideak: Som Energiaren mezuak jasotzeari uko egin diezaiekezu, baita datuak atzitu, zuzendu eta ezabatu ere. Horiek eta gainerako eskubideak baliatzeko, idatzi somenergia@delegado-datos.com helbidera. Informazio gehiago <a target=\"_blank\" href={{url}}>Som Energiaren pribatutasun-politikan</a>.",
     "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "Hirugarrenen datu pertsonalak ematen badituzu, erantzukizunez adierazten duzu hirugarren horien baimena jaso duzula eta datu pertsonalak zertarako eta nola tratatuko diren jakiteko behar adina informazio eman diezula.",
