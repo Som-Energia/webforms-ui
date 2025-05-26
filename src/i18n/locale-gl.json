@@ -138,7 +138,7 @@
     "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/gl/politica-de-privacidade/#formulario-del-contrata-luz",
     "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/gl/politica-de-privacidade/#formulario-de-rexistro-faite-socio-socia",
     "PRIVACY_POLICY_TITLE": "Política de protección de datos",
-    "ACCEPT_PRIVACY_POLICY": "Lin e acepto a <a target=\"_blank\" href={{url}}>política de privacidade</a> de Som Energia",
+    "ACCEPT_PRIVACY_POLICY": "Lin e acepto a <a target=\"_blank\" href={{url}}>política de privacidade</a> de Som Energia.",
     "ACCEPT_PRIVACY_POLICY_URL": "https://www.somenergia.coop/gl/aviso-legal/",
     "PRIVACY_POLICY_HOLDERCHANGE": "Finalidades: tramitar a nova titularidade do contrato, así como enviarche o noso boletín e outras comunicacións informativas e comerciais sobre os nosos produtos, servizos e eventos. Dereitos: podes oporte ao envío de informacións de Som Energia, así como acceder, rectificar e suprimir os teus datos e outros en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}>Política de privacidade</a>.",
     "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "Se proporcionas datos persoais de terceiras persoas, declaras responsabelmente que contas co seu consentimento e que lles proporcionaches toda a información necesaria sobre as finalidades e o xeito en que se van tratar os seus datos persoais.",
