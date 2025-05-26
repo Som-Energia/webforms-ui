@@ -68,7 +68,7 @@ const PowerInputs = (props) => {
                 })
               }
               handleBlur={handleBlur}
-              touched={touched?.power}
+              touched={touched?.power[attr]}
               value={values[attr]}
               error={errors?.[attr]}
               //textFieldHelper={
