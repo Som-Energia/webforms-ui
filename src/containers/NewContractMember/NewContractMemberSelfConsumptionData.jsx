@@ -23,6 +23,8 @@ import {
   getSelfConsumptionTechnologies
 } from '../../services/api'
 
+const INDIVIDUAL_INSTALLATION = '01'
+
 const NewContractMemberSelfConsumptionData = (props) => {
   const {
     values,
@@ -61,6 +63,17 @@ const NewContractMemberSelfConsumptionData = (props) => {
 
   const [situations, setSituations] = useState([])
   const [technologies, setTechnologies] = useState([])
+
+  useEffect(() => {
+    if (values?.self_consumption?.collective_installation == 'individual') {
+      setFieldValue(
+        'self_consumption.installation_type',
+        INDIVIDUAL_INSTALLATION
+      )
+    } else {
+      setFieldValue('self_consumption.installation_type', '')
+    }
+  }, [values?.self_consumption?.collective_installation])
 
   useEffect(() => {
     getSelfConsumptionTechnologies()
@@ -202,6 +215,9 @@ const NewContractMemberSelfConsumptionData = (props) => {
           fieldName="self_consumption.installation_type"
           options={situations}
           required={true}
+          disabled={
+            values?.self_consumption?.collective_installation == 'individual'
+          }
           {...props}
         />
       </Grid>
