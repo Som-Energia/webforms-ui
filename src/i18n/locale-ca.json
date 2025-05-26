@@ -965,7 +965,8 @@
     "IBAN_PAYMENT_QUESTION_OPTION": "Utilitza l'IBAN indicat abans",
     "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€",
     "NEW_MEMBER_SUMMARY_PROCESS": "Alta de nova persona sòcia",
-    "NEW_CONTRACT_SUMMARY_PROCESS": "Canvi de comercialitzadora canviant la persona titular",
+    "NEW_CONTRACT_OLD_HOLDER_SUMMARY_PROCESS": "Canvi de comercialitzadora mantenint la persona titular ",
+    "NEW_CONTRACT_NEW_HOLDER_SUMMARY_PROCESS": "Canvi de comercialitzadora canviant la persona titular ",
     "TECHNICAL_DATA_SUMMARY": "Dades técniques",
     "CURRENT": "Actual",
     "PURPOSE": "FINALITAT: Gestionar la contratació del servei de la llum i les tasques administrativas que se'n deriven; informar dels nostres productes i serveis energètics, inclós per mitjans electrònics.",
@@ -1007,5 +1008,6 @@
     "NEW_HOLDER_SAME_TITLE": "Sí, la persona titular i la sòcia són la mateixa",
     "NEW_HOLDER_SAME_HELPER": "La persona sòcia de Som Energia és la mateixa que la titular del contracte.",
     "NEW_HOLDER_DIFFERENT_TITLE": "No, la persona sòcia i la titular no són la mateixa persona",
-    "NEW_HOLDER_DIFFERENT_HELPER": "La persona sòcia de Som Energia és una altre que la titular del contracte."
+    "NEW_HOLDER_DIFFERENT_HELPER": "La persona sòcia de Som Energia és una altre que la titular del contracte.",
+    "REVIEW_LINK_PERSON": "Persona sòcia vinculada:"
 }
