@@ -48,7 +48,7 @@ export default function WebFormsTheme() {
         fontWeight: '400'
       },
       'headline4.regular': {
-        ontSize: '21px',
+        fontSize: '21px',
         fontWeight: '400'
       },
       'headline4.bold': {

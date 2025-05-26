@@ -39,6 +39,8 @@ import newContractMemberHolderValidations from './newContractMemberHolderValidat
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
+import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
+import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
 
 const MAX_STEP_NUMBER = 11
 
@@ -60,6 +62,8 @@ const NewContractMemberForm = (props) => {
 
   const initialValues = {
     cups: '',
+    has_member: undefined,
+    member_is_holder: undefined,
     has_light: undefined,
     previous_holder: undefined,
     voluntary_donation: undefined,
@@ -95,6 +99,10 @@ const NewContractMemberForm = (props) => {
       city: undefined,
       lat: undefined,
       long: undefined
+    },
+    member: {
+      number: '',
+      nif: ''
     },
     new_member: {
       nif: '',
@@ -148,9 +156,17 @@ const NewContractMemberForm = (props) => {
     comercial_info_accepted: false
   }
 
+  const newContractMemberOptionValidations = () => {
+    if (formikRef.current.values.has_member == 'member-on') {
+      return linkMemberValidations
+    } else if (formikRef.current.values.has_member == 'member-off') {
+      return memberIdentifierValidations
+    }
+  }
+
   const validationSchemas = [
     newContractMemberQuestionValidations,
-    memberIdentifierValidations,
+    newContractMemberOptionValidations,
     memberPersonalDataValidations,
     newContractMemberSupplyPointValidations,
     newContractMemberSupplyPointDataValidations,
@@ -182,6 +198,13 @@ const NewContractMemberForm = (props) => {
       next = next + 1
     }
 
+    if (
+      activeStep === NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER'] &&
+      formikProps.values.has_member === 'member-on'
+    ) {
+      next = next + 1
+    }
+
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
@@ -194,6 +217,14 @@ const NewContractMemberForm = (props) => {
     ) {
       prev = prev - 1
     }
+
+    if (
+      activeStep === NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_POINT'] &&
+      formikProps.values.has_member === 'member-on'
+    ) {
+      prev = prev - 1
+    }
+
     setActiveStep(Math.max(0, prev))
   }
 
@@ -202,10 +233,17 @@ const NewContractMemberForm = (props) => {
   }
 
   const getStep = (props) => {
+    const { values } = props
     if (activeStep === 0) {
-      return <NewContractMemberQuestion formikProps={props} nextStep={nextStep} />
+      return (
+        <NewContractMemberQuestion formikProps={props} nextStep={nextStep} />
+      )
     } else if (activeStep === 1) {
-      return <MemberIdentifier {...props} />
+      return values?.has_member == 'member-on' ? (
+        <ApadrinatingDetails {...props} />
+      ) : (
+        <MemberIdentifier {...props} />
+      )
     } else if (activeStep === 2) {
       return <MemberPersonalData {...props} />
     } else if (activeStep === 3) {
@@ -263,7 +301,7 @@ const NewContractMemberForm = (props) => {
               ) : (
                 <>
                   <SomStepper
-                    activeStep={activeStep - 1}  // because step 0 does not count
+                    activeStep={activeStep - 1} // because step 0 does not count
                     steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
                   />
                   {getStep(formikProps)}

@@ -2,13 +2,14 @@ import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import InputField from '../../../../components/InputField'
-import TextRecomendation from '../../components/TextRecomendation'
 
 import { checkMember } from '../../../../services/api'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
+// TODO: generalize in common pages
 const ApadrinatingDetails = (props) => {
   const {
     values,
@@ -69,15 +70,15 @@ const ApadrinatingDetails = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation title={t('GURB_APADRINATING_MEMBER_TITLE')} />
+        <Typography variant="headline4.regular">
+          {t('LINK_MEMBER_TITLE')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <InputField
           name="vat"
-          textFieldLabel={t('NIF_LABEL')}
-          textFieldName={t('GURB_NIF_APADRINATING_FIELD')}
-          textFieldHelper={t('GURB_NIF_HELPER')}
-          iconHelper={true}
+          textFieldName={t('LINK_MEMBER_NIF_TITLE')}
+          textFieldHelper={t('LINK_MEMBER_NIF_HELPER')}
           handleChange={handleInputNif}
           handleBlur={handleInputNifBlur}
           touched={touched?.member?.nif}
@@ -89,10 +90,8 @@ const ApadrinatingDetails = (props) => {
       <Grid item xs={12}>
         <InputField
           name="code"
-          textFieldLabel={t('GURB_MEMBER_NUMBER_LABEL')}
-          textFieldName={t('GURB_APADRINATING_MEMBER_NUMBER_FIELD')}
-          textFieldHelper={t('GURB_MEMBER_NUMBER_HELPER')}
-          iconHelper={true}
+          textFieldName={t('LINK_MEMBER_NUMBER_TITLE')}
+          textFieldHelper={t('LINK_MEMBER_NUMBER_HELPER')}
           handleChange={handleInputMemberNumber}
           handleBlur={handleInputMemberNumberBlur}
           touched={touched?.member?.number}

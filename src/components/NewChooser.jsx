@@ -46,7 +46,6 @@ const Option = ({
               sx={{
                 ...'body.sm.regular',
                 fontWeight: 'bold',
-                textAlign: 'center',
                 width: '100%'
               }}>
               {textHeader}
