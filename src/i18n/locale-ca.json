@@ -873,7 +873,7 @@
     "REVIEW_CONTACT_INFORMATION_TITLE": "Informació de contacte",
     "GURB_REVIEW_CONTACT_INFORMATION_SUBTITLE": "Según los datos que tengas en el área de cliente ",
     "REVIEW_PAYMENT_DATA_TITLE": "Dates de pagament",
-    "GURB_PRICES_AFTER_TAXES": "Precios con impuestos",
+    "GURB_PRICES_AFTER_TAXES": "Preus amb impostos",
     "REVIEW_PRICES_ENERGY_TITLE": "Término de energía",
     "REVIEW_PRICES_POWER_TITLE": "Preus amb impostos",
     "GURB_SUMMARY_INFO": "<p>Además del precio fijo asociado al coste de la energía, establecido por Som Energia y publicado en <a target='_blank' href=\"{{url_som_tariff}}\">nostra página web</a>, a partir del 1 de octubre la factura incluirá un importe variable asociado al mecanismo de ajuste establecido en el <a target='_blank' href=\"{{url_rdl}}\">RDL 10/2022</a>. Este importe lo calcularemos para cada periodo de facturación. Ponderaremos el precio de cada hora del mecanismo de ajuste (<a target='_blank' href=\"{{url_omie}}\">publicado por OMIE</a>) en función del reparto horario energético de un consumidor/a tipo (<a target='_blank' href=\"{{url_red_electrica}}\">publicado por Red Eléctrica de España</a> según la <a target='_blank' href=\"{{url_boe_310}}\">Resolución de 23/12/2021</a>). El precio obtenido lo multiplicaremos, en cada factura, por la energía total consumida en el período de facturación. El mecanismo de ajuste del gas no aplica para los contratos de Baleares y Canarias.</p>",
@@ -882,7 +882,7 @@
     "URL_OMIE": "https://www.omie.es/es/market-results/daily/average-final-prices/hourly-price-consumers?scope=daily&date=2023-12-31",
     "URL_RED_ELECTRICA": "https://www.ree.es/es/clientes/consumidor/gestion-medidas-electricas/consulta-perfiles-de-consumo",
     "URL_BOE_310": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-21395",
-    "SUMMARY_OTHER_CONCEPTS_TITLE": "A estos precios se deben sumar los siguientes conceptos:",
+    "SUMMARY_OTHER_CONCEPTS_TITLE": "A aquests preus s'han de sumar els següents conceptes",
     "SUMMARY_OTHER_CONCEPTS_BODY": "<li>Exceso de potencia y/o energía reactiva: En determinadas condiciones, según la normativa, a estos precios hay que añadir un recargo.</li><li>Alquiler contador: depende de cada caso, en función de lo que establezca la normativa.</li>",
     "ERROR_FIELD_TOO_SHORT": "Camp massa curt",
     "ERROR_FIELD_TOO_LONG": "Camp massa llarg",
@@ -988,5 +988,8 @@
     "LIGHT_OFF_CONTRACT_TERMS": "Per l'alta d'un nou punt de subministrament que mai ha tingut llum o on fa més de tres anys que el subministrament elèctric està de baixa, s’han de pagar els conceptes següents:<ul><li><b>Drets d’accés:</b> 19,70 €/kW (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets d’extensió:</b> 17,37 €/kW (21,02 €/kW amb l’IVA inclòs)<li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul>Si fa menys de tres anys que hi ha hagut llum, s’han de pagar els conceptes següents:<ul><li><b>Drets d’accés:</b> 19,70 €/kW  (23,84 €/kW amb l’IVA inclòs)</li><li><b>Drets de connexió:</b> 9,04 € (10,94 € amb l’IVA inclòs)</li><li><b>Dipòsit de garantia:</b> fix, depèn de cada cas</li></ul><a href=''>Més informació aquí</a>",
     "CONTRACTUAL_PACKAGE": "Paquet contractual",
     "REVIEW_PRICES_NOTICE_INDEXED": "Pots consultar el mètode de càlcul de la tarifa indexada i totes les seves variables en aquest <a target='_blank' href=\"{{url_indexed_prices}}\">enllaç</a>.",
-    "REVIEW_PRICES_NOTICE_INDEXED_URL": "https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada"
+    "REVIEW_PRICES_NOTICE_INDEXED_URL": "https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada",
+    "NEW_GENERAL_TERMS": "He llegit i accepto les condicions de contractació de Som Energia. Amb l'acceptació d'aquestes m'obligo a pagament al preu que resulti de l’aplicació de la tarifa contractada.",
+    "ACCEPT_STATUTES": "He llegit i accepto els <a target=\"_blank\" href={{url}}> estatuts</a> de Som Energia i amb aquesta acceptació, m'obligo al pagament dels cent euros (100.-€) que resulta de l'aportació social obligatòria al capital.",
+    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatuts_CAT.pdf"
 }
