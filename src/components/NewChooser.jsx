@@ -1,11 +1,10 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { textHeader4, textBody1 } from '../containers/Gurb/gurbTheme'
 import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserGurb, chooserGurbSelected } from '../containers/Gurb/gurbTheme'
+import { chooser, chooserSelected } from '../themes/webforms/'
 
 const Option = ({
   isSelected,
@@ -19,7 +18,7 @@ const Option = ({
     <Box
       data-cy={optionId}
       sx={{
-        ...(isSelected ? chooserGurbSelected : chooserGurb),
+        ...(isSelected ? chooserSelected : chooser),
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -45,7 +44,7 @@ const Option = ({
             {icon}
             <Typography
               sx={{
-                ...textHeader4,
+                ...'body.sm.regular',
                 fontWeight: 'bold',
                 textAlign: 'center',
                 width: '100%'
@@ -61,7 +60,7 @@ const Option = ({
             />
           ) : null}
         </Box>
-        <Typography sx={textBody1}>{textBody}</Typography>
+        <Typography sx={'body.sm.regular'}>{textBody}</Typography>
       </Box>
     </Box>
   )
