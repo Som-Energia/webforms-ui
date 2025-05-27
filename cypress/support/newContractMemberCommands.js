@@ -79,8 +79,10 @@ Cypress.Commands.add('selfconsumptionData', (selfConsumption) => {
 
   cy.get('[data-cy="self_consumption.installation_power"]').type(selfConsumption.installation_power)
   
-  cy.get('[id="self_consumption.installation_type"]').click()
-  cy.get('[id="self_consumption.installation_type-01"]').click()
+  if (collectiveOptionValue !== 'individual') {
+    cy.get('[id="self_consumption.installation_type"]').click()
+    cy.get('[id="self_consumption.installation_type-01"]').click()
+  }
 
   cy.get('[id="self_consumption.technology"]').click()
   cy.get('[id="self_consumption.technology-b11"]').click()
