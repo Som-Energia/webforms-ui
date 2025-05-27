@@ -26,6 +26,7 @@ import NewContractMemberHolder from './NewContractMemberHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import NewContractMemberPayment from './NewContractMemberPayment'
 import NewContractMemberSummary from './NewContractMemberSummary'
+import IdentifyMemberPersonalData from './IdentifyMemberPersonalData'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations'
@@ -41,6 +42,7 @@ import newContractMemberPaymentValidations from './newContractMemberPaymentValid
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
 import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
 import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
+import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
 
 let MAX_STEP_NUMBER = 11
 
@@ -166,7 +168,7 @@ const NewContractMemberForm = (props) => {
       newContractMemberSelfConsumptionValidations,
       newContractMemberSelfConsumptionDataValidations,
       newContractMemberHolderValidations,
-      memberPersonalDataValidations,
+      identifyMemberPersonalDataValidations,
       newContractMemberVoluntaryDonationValidations,
       newContractMemberPaymentValidations,
       newContractMemberSummaryValidations
@@ -303,7 +305,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 7) {
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 8) {
-        return <MemberPersonalData {...props} />
+        return <IdentifyMemberPersonalData {...props} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...props} />
       } else if (activeStep === 10) {

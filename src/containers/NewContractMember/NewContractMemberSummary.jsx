@@ -132,7 +132,9 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['IDENTIFY_MEMBER']
+          ? values?.has_member == 'member-off'
+            ? values?.FORM_SUBSTEPS['IDENTIFY_MEMBER']
+            : values?.FORM_SUBSTEPS['MEMBER_INFO']
           : null
       },
       {
@@ -156,7 +158,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.member?.nif,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['IDENTIFY_MEMBER']
+          ? values?.FORM_SUBSTEPS['LINK_MEMBER']
           : null
       }
     ]
@@ -187,7 +189,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_LINK_PERSON'),
         reviewValue: values?.member?.nif,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['IDENTIFY_MEMBER']
+          ? values?.FORM_SUBSTEPS['LINK_MEMBER']
           : null
       }
     ]
