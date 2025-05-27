@@ -192,6 +192,36 @@ const NewContractMemberSummary = (props) => {
       }
     ]
 
+  const reviewContactData = values?.member_is_holder == 'holder-member-yes'
+    ? [
+      {
+        reviewValue: t('REVIEW_CONTACT_OLD_HOLDER')
+      }
+    ]
+    : [
+    {
+      reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+      reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+      step: showReviewLinks
+        ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+        : null
+    },
+    {
+      reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+      reviewValue: values?.new_member?.email,
+      step: showReviewLinks
+        ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+        : null
+    },
+    {
+      reviewLabel: t('LANGUAGE'),
+      reviewValue: languages[values?.new_member?.language],
+      step: showReviewLinks
+        ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+        : null
+    }
+  ]
+
   const reviewFields = [
     [
       {
@@ -269,29 +299,7 @@ const NewContractMemberSummary = (props) => {
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-        field: [
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['MEMBER_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-            reviewValue: values?.new_member?.email,
-            step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['MEMBER_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('LANGUAGE'),
-            reviewValue: languages[values?.new_member?.language],
-            step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['MEMBER_INFO']
-              : null
-          }
-        ]
+        field: reviewContactData
       },
       {
         icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
