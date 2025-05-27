@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { HelperText } from './InputField'
@@ -9,25 +8,15 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import GurbLoadingContext from '../context/GurbLoadingContext'
-
 import { iconRequirements } from '../themes/commonStyles'
-import { textHeader5 } from '../containers/Gurb/gurbTheme'
+
+import { useTheme } from '@mui/material/styles'
 
 const Powers = (props) => {
-  const {
-    activeStep,
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched
-  } = props
+  const { values, errors, touched, setFieldValue } = props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const theme = useTheme()
 
   const handlePowerQuestion = async (value) => {
     await setFieldValue('contract.power_type', value)
@@ -50,7 +39,10 @@ const Powers = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={textHeader5}>{t('POWER_HELPER')}</Typography>
+        <Typography
+          sx={{ typography: 'body.sm.regular', color: 'secondary.dark' }}>
+          {t('POWER_HELPER')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <Chooser
@@ -69,7 +61,10 @@ const Powers = (props) => {
                   <a
                     href={t('POWER_LOWER_15_HELPER_URL')}
                     target="_blank"
-                    style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+                    style={{
+                      color: theme.palette.secondary.dark,
+                      textDecoration: 'underline'
+                    }}
                     rel="noopener noreferrer">
                     {t('POWER_LOWER_15_HELPER')}
                   </a>
@@ -99,7 +94,7 @@ const Powers = (props) => {
                   <a
                     href={t('POWER_HIGHER_15_HELPER_URL')}
                     target="_blank"
-                    style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+                    style={{ color: 'secondary.dark', textDecoration: 'underline' }}
                     rel="noopener noreferrer">
                     {t('POWER_HIGHER_15_HELPER')}
                   </a>
