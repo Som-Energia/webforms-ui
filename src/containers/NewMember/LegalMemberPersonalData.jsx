@@ -1,10 +1,8 @@
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import { t } from 'i18next'
 
 import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
@@ -47,12 +45,6 @@ const LegalMemberPersonalData = (props) => {
   const handleChange = useHandleChange(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
 
-  const handleCheckboxPrivacyPolicy = (event) => {
-    let value = event.target.checked
-    setFieldValue('new_member.privacy_policy_accepted', value)
-    setFieldTouched('new_member.privacy_policy_accepted', true)
-  }
-
   const handleCheckboxLegalPerson = (event) => {
     let value = event.target.checked
     setFieldValue('new_member.legal_person_accepted', value)
@@ -61,11 +53,6 @@ const LegalMemberPersonalData = (props) => {
 
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12}>
-        <Typography variant="headline3">
-          {t('MEMBER_PAGE_PERSONAL_DATA')}
-        </Typography>
-      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
@@ -169,18 +156,6 @@ const LegalMemberPersonalData = (props) => {
         </Grid>
         
       </Grid>
-      {/*
-      <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('NEW_MEMBER_RIGHTS')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
-        </Typography>
-      </Grid>
-      */}
       <Grid item xs={12}>
         <FormControlLabel
           control={
