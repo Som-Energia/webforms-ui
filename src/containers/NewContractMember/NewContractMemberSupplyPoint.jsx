@@ -11,7 +11,6 @@ import CUPS from '../../components/CUPS'
 import AlertBox from '../../components/AlertBox'
 
 import { iconRequirements } from '../../themes/commonStyles'
-import { iconOffRequirements } from '../Gurb/gurbTheme'
 
 import Grid from '@mui/material/Grid'
 

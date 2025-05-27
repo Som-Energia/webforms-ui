@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 
 import Chooser from '../../components/NewChooser'
-import { HelperText } from '../../components/InputField'
 import Typography from '@mui/material/Typography'
 import InputTitle from '../../components/InputTitle'
 
@@ -51,8 +50,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <br />
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ mt: 2 }}>
           <InputTitle
             variant="subtitle4"
             text={t('SELFCONSUMPTION_ACTIVE')}
@@ -73,11 +71,13 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
           handleChange={handleSelfconsumptionQuestion}
         />
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body.md.regular" color="secondary.dark">
-          {t('SELFCONSUMPTION_WARNING')}
-        </Typography>
-      </Grid>
+      {values.has_selfconsumption === 'selfconsumption-on' && (
+        <Grid item xs={12}>
+          <Typography variant="body.md.regular" color="secondary.dark">
+            {t('SELFCONSUMPTION_WARNING')}
+          </Typography>
+        </Grid>
+      )}
     </Grid>
   )
 }
