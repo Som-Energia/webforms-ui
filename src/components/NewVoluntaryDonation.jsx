@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid'
 import { iconRequirements } from '../themes/commonStyles'
 import {
   iconOffRequirements
-} from '../themes/webforms/'
+} from '../themes/commonStyles/'
 
 const HolderVoluntaryDonation = (props) => {
   const { values, setFieldValue } = props

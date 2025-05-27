@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooser, chooserSelected } from '../themes/webforms/'
+import { chooser, chooserSelected } from '../themes/commonStyles/'
 
 const Option = ({
   isSelected,

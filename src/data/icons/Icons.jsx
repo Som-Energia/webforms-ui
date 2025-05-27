@@ -1,6 +1,6 @@
 import SvgIcon from '@mui/material/SvgIcon'
 import { iconRequirements } from '../../themes/commonStyles'
-import { iconOffRequirements } from '../../containers/Gurb/gurbTheme'
+import { iconOffRequirements } from '../../themes/commonStyles'
 
 export const ReceiptIcon = (props) => {
   const { on = true } = props
@@ -61,8 +61,7 @@ export const CreditCardIcon = (props) => {
 
 export const BatteryIcon = (props) => {
   const { on = true } = props
-  let sx_values = on ? iconRequirements : iconOffRequirements
-  sx_values['padding'] = 0
+  let sx_values = on ? iconRequirements({padding:0}) : iconOffRequirements({padding:0})
   return (
     <SvgIcon sx={sx_values}>
     <svg 
