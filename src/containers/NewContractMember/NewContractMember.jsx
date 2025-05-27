@@ -41,7 +41,6 @@ import newContractMemberPaymentValidations from './newContractMemberPaymentValid
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
 
 const MAX_STEP_NUMBER = 11
-const NEW_MEMBER_COST = 100
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
