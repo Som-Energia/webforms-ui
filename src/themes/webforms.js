@@ -119,9 +119,7 @@ export default function WebFormsTheme() {
   return responsiveFontSizes(theme)
 }
 
-
 // AlertBox Custom Style
-
 
 export const getAlertBoxStyles = (theme, severity) => {
   const primary = theme.palette?.primary2?.main
@@ -137,15 +135,15 @@ export const getAlertBoxStyles = (theme, severity) => {
       borderRadius: '8px',
       color: primary,
       '& .MuiAlertTitle-root': {
-        color: primary,
+        color: primary
       },
       '& .MuiTypography-root': {
         color: primary,
-        fontSize: 'body.md.regular',
+        fontSize: 'body.md.regular'
       },
       '& *': {
-        color: `${primary} !important`,
-      },
+        color: `${primary} !important`
+      }
     }
   }
 
@@ -162,8 +160,20 @@ export const chooser = {
   cursor: 'pointer'
 }
 
-
 export const chooserSelected = {
   ...chooser,
   backgroundColor: '#FAFAFA'
+}
+
+export const iconOffRequirements = {
+  borderRadius: '8px',
+  border: '1px solid #D9D9D9',
+  color: '#1E1E1E',
+  fontSize: '3rem',
+  padding: '8px',
+  backgroundColor: '#fff',
+  background:
+    'linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 1.5px), rgba(0,0,0,1) calc(50% - 1.4px), rgba(0,0,0,1) 50%, rgba(0,0,0,1) calc(50% + 1.4px), rgba(0,0,0,0) calc(50% + 1.5px), rgba(0,0,0,0) 100%)',
+  backgroundRepeat: 'no-repeat',
+  backgroundOrigin: 'content-box'
 }
