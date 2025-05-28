@@ -499,50 +499,42 @@ const App = (props) => {
                 </ThemeProvider>
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
-                    <Route
-                      path="/:language/new-pagament-realitzat"
-                      element={
-                        <Result
-                          mode={'success'}
-                          {...props}
-                          title={t('SUCCESS_TEXT')}
-                          description={t('NEWMEMBER_OK_DESCRIPTION')}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/new-pago-realizado"
-                      element={
-                        <Result
-                          mode={'success'}
-                          {...props}
-                          title={t('SUCCESS_TEXT')}
-                          description={t('NEWMEMBER_OK_DESCRIPTION')}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/new-pagament-cancellat"
-                      element={<Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
-                        <Typography
-                          sx={{ color: "secondary.dark" }}
-                          dangerouslySetInnerHTML={{
-                            __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
-                          }}
-                        />
-                      </Result>}
-                    />
-                    <Route
-                      path="/:language/new-pago-cancelado"
-                      element={<Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
-                        <Typography
-                          sx={{ color: "secondary.dark" }}
-                          dangerouslySetInnerHTML={{
-                            __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
-                          }}
-                        />
-                      </Result>}
-                    />
+                    {[
+                      '/:language/new-pagament-realitzat',
+                      '/:language/new-pago-realizado'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <Result
+                            mode={'success'}
+                            {...props}
+                            title={t('SUCCESS_TEXT')}
+                            description={t('NEWMEMBER_OK_DESCRIPTION')}
+                          />
+                        }
+                      />
+                    ))}
+
+                    {[
+                      '/:language/new-pagament-cancellat',
+                      '/:language/new-pago-cancelado'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
+                            <Typography
+                              sx={{ color: "secondary.dark" }}
+                              dangerouslySetInnerHTML={{
+                                __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
+                              }}
+                            />
+                          </Result>
+                        }
+                      />
+                    ))}
+
                     <Route
                       path="/:language/new-contract-form/:tariff"
                       element={
