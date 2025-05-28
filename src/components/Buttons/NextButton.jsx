@@ -1,11 +1,9 @@
 import React from 'react'
 import Button from '@mui/material/Button'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import useTheme from '@mui/material/styles/useTheme'
 
 function NextButton({title, ...props}) {
 
-  const theme = useTheme()
   return (
     <Button
       type="button"
@@ -14,11 +12,11 @@ function NextButton({title, ...props}) {
       color="primary"
       disableElevation={true}
       sx={{
-        backgroundColor: theme.palette.secondary.alt,
-        color: theme.palette.primary.main,
+        backgroundColor: "secondary.alt",
+        color: "primary.main",
         '&:hover': {
-          color: theme.palette.secondary.alt,
-          backgroundColor: theme.palette.primary.main,         
+          color: "secondary.alt",
+          backgroundColor: "primary.main",
         }
       }}
       endIcon={<ArrowForwardIosIcon />}

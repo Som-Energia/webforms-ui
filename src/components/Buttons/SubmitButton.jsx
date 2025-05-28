@@ -1,11 +1,9 @@
 import React from 'react'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
-import useTheme from '@mui/material/styles/useTheme'
 
 function SubmitButton(props) {
   const {startIcon, disabled, title, loading} = props
-  const theme = useTheme()
   
   return (
     <Button
@@ -14,11 +12,11 @@ function SubmitButton(props) {
       variant="contained"
       color="primary"
       sx={{
-        backgroundColor: theme.palette.secondary.alt,
-        color: theme.palette.primary.main,
+        backgroundColor: "secondary.alt",
+        color: "primary.main",
         '&:hover': {
-          color: theme.palette.secondary.alt,
-          backgroundColor: theme.palette.primary.main,
+          color: "secondary.alt",
+          backgroundColor: "primary.main",
         }
       }}
       startIcon={loading ? (
