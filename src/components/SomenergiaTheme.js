@@ -85,12 +85,6 @@ export default function SomEnergiaTheme() {
       }
     },
     components: {
-      // MuiTypography: {
-      //   defaultProps: {
-      //     fontFamily: 'Outfit',
-      //     color: '#0B2E34',
-      //   }
-      // },
       MuiCssBaseline: {
         styleOverrides: {
           a: {
@@ -104,10 +98,6 @@ export default function SomEnergiaTheme() {
             backgroundColor: '#E2E8DE',
             color: '#0B2E34'
           },
-          // standardError: {
-          //   backgroundColor: '#EE4949',
-          //   color: 'white'
-          // },
           standardWarning: {
             backgroundColor: 'rgba(255, 205, 181, 0.5)',
             color: '#FF632B'
