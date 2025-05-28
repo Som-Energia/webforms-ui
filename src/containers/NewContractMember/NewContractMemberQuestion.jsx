@@ -10,14 +10,14 @@ import { iconRequirements } from '../../themes/commonStyles'
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 import Grid from '@mui/material/Grid'
 
-const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationAndSteps}) => {
+const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaAndSteps}) => {
   const { values, setFieldValue } = formikProps
   const { t } = useTranslation()
 
   const handleMemberQuestion = (value) => {
     setFieldValue('has_member', value)
     nextStep(formikProps)
-    setValidationAndSteps(value)
+    setValidationSchemaAndSteps(value)
   }
 
   const options = [

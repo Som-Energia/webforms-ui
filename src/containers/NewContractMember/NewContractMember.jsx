@@ -346,7 +346,7 @@ const NewContractMemberForm = (props) => {
           return (
             <>
               {activeStep == 0 ? (
-                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setSteps={setValidationSchemaAndSteps}/>
+                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
               ) : (
                 <>
                   <SomStepper

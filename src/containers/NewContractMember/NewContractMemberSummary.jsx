@@ -291,7 +291,11 @@ const NewContractMemberSummary = (props) => {
           },
           {
             reviewLabel: t('FARE'),
-            reviewValue: values?.contract.tariff_mode,
+            reviewValue: isTariffIndexed
+              ? t('FARE_INDEXED')
+              : values.contract.power_type === 'power-higher-15kw'
+              ? t('FARE_PERIODS').concat(" ",'3.0TD')
+              : t('FARE_PERIODS').concat(" ",'2.0TD'),
             step: showReviewLinks
               ? formSteps['MEMBER_INFO']
               : null
