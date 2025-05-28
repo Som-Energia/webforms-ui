@@ -154,13 +154,11 @@ const NewMemberForm = (props) => {
         } else {
           setCompleted(true)
           setError(true)
-          // handleError(response)  // TODO: Simplify
         }
       })
       .catch((error) => {
         setCompleted(true)
         setError(true)
-        // handleError(error?.response?.data)  // TODO: Simplify
       })
     setSending(false)
   }
