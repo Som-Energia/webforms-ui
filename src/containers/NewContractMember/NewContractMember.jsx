@@ -44,8 +44,6 @@ import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
 import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
 
-let MAX_STEP_NUMBER = 11
-
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
   const { language } = useParams()
@@ -57,6 +55,9 @@ const NewContractMemberForm = (props) => {
   const { summaryField, setSummaryField } = useContext(SummaryContext)
 
   const [activeStep, setActiveStep] = useState(0)
+  const [validationSteps, setValidationSteps] = useState([newContractMemberQuestionValidations])
+  const [formSteps, setFormSteps] = useState({})
+  const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -155,11 +156,10 @@ const NewContractMemberForm = (props) => {
     privacy_policy_accepted: false,
     generic_conditions_accepted: false,
     statutes_accepted: false,
-    comercial_info_accepted: false,
-    FORM_SUBSTEPS: {}
+    comercial_info_accepted: false
   }
 
-  const validationSchemasLinkMwmber = [
+  const validationSchemasLinkMember = [
       newContractMemberQuestionValidations,
       linkMemberValidations,
       newContractMemberSupplyPointValidations,
@@ -174,7 +174,7 @@ const NewContractMemberForm = (props) => {
       newContractMemberSummaryValidations
     ]
 
-  const validationSchemasNewMwmber = [
+  const validationSchemasNewMember = [
       newContractMemberQuestionValidations,
       memberIdentifierValidations,
       memberPersonalDataValidations,
@@ -189,18 +189,29 @@ const NewContractMemberForm = (props) => {
       newContractMemberSummaryValidations
     ]
 
-
-  const validationSchemas = (activeStep, form_substeps) => {
-    return form_substeps == NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-      ? validationSchemasNewMwmber[activeStep]
-      : validationSchemasLinkMwmber[activeStep]
+  const setValidationSchemaAndSteps = (has_member) => {
+    if (has_member == 'member-off')
+    {
+      setValidationSteps(validationSchemasNewMember)
+      setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
+      setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
+    } else if (has_member == 'member-on')
+    {
+      setValidationSteps(validationSchemasLinkMember)
+      setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
+      setMAX_STEP_NUMBER(Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
+    } else {
+      setValidationSteps(newContractMemberQuestionValidations)
+      setFormSteps({})
+      setMAX_STEP_NUMBER(11)
+    }
   }
 
   const nextStep = (formikProps) => {
     let next
     if (
       summaryField !== undefined &&
-      activeStep !== formikProps.values.FORM_SUBSTEPS['IDENTIFY_MEMBER']
+      activeStep !== formSteps['IDENTIFY_MEMBER']
     ) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
@@ -209,14 +220,14 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
-      activeStep === formikProps.values.FORM_SUBSTEPS['SELFCONSUMPTION'] &&
+      activeStep === formSteps['SELFCONSUMPTION'] &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
       next = next + 1
     }
 
     if (
-      activeStep === formikProps.values.FORM_SUBSTEPS['HOLDER_INFO'] &&
+      activeStep === formSteps['HOLDER_INFO'] &&
       formikProps.values.member_is_holder === 'holder-member-yes'
     ) {
       next = next + 1
@@ -229,14 +240,14 @@ const NewContractMemberForm = (props) => {
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
     if (
-      activeStep === formikProps.values.FORM_SUBSTEPS['HOLDER_INFO'] &&
+      activeStep === formSteps['HOLDER_INFO'] &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
       prev = prev - 1
     }
 
     if (
-      activeStep === formikProps.values.FORM_SUBSTEPS['DONATION'] &&
+      activeStep === formSteps['DONATION'] &&
       formikProps.values.member_is_holder === 'holder-member-yes'
     ) {
       prev = prev - 1
@@ -252,17 +263,8 @@ const NewContractMemberForm = (props) => {
   const getStep = (props) => {
     const { values } = props
 
-    if (activeStep === 0) {
-      return (
-        <NewContractMemberQuestion formikProps={props} nextStep={nextStep} />
-      )
-    }
-
     if (values?.has_member == 'member-off')
     {
-      values.FORM_SUBSTEPS = NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-      MAX_STEP_NUMBER = Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length
-
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -287,8 +289,6 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSummary {...props} />
       }
     } else {
-      values.FORM_SUBSTEPS = NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-      MAX_STEP_NUMBER = Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length
 
       if (activeStep === 1) {
         return <ApadrinatingDetails {...props} />
@@ -339,19 +339,19 @@ const NewContractMemberForm = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        validationSchema={validationSchemas(activeStep, formikRef.values?.FORM_SUBSTEPS)}
+        validationSchema={validationSteps[activeStep]}
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) => {
           return (
             <>
               {activeStep == 0 ? (
-                getStep(formikProps)
+                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setSteps={setValidationSchemaAndSteps}/>
               ) : (
                 <>
                   <SomStepper
                     activeStep={activeStep - 1} // because step 0 does not count
-                    steps={formikProps.values.FORM_SUBSTEPS}
+                    steps={formSteps}
                   />
                   {getStep(formikProps)}
                   <Grid

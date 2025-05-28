@@ -24,6 +24,7 @@ import { iconRequirements } from '../../themes/commonStyles'
 import { getPrices } from '../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
+import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import Loading from '../../components/Loading'
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
@@ -52,6 +53,12 @@ const NewContractMemberSummary = (props) => {
   const [prices, setPrices] = useState({})
   const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
+
+  const formSteps = values?.has_member == 'member-off'
+    ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
+    : values?.has_member == 'member-on'
+    ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+    : undefined
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -87,35 +94,37 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       },
       {
         reviewLabel: t('CIF'),
         reviewValue: values?.new_member?.nif,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['IDENTIFY_MEMBER']
+          ? values?.has_member == 'member-off'
+            ? formSteps['IDENTIFY_MEMBER']
+            : formSteps['MEMBER_INFO']
           : null
       },
       {
         reviewLabel: t('PROXY'),
         reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       }
     ]
@@ -125,7 +134,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       },
       {
@@ -133,22 +142,22 @@ const NewContractMemberSummary = (props) => {
         reviewValue: values?.new_member?.nif,
         step: showReviewLinks
           ? values?.has_member == 'member-off'
-            ? values?.FORM_SUBSTEPS['IDENTIFY_MEMBER']
-            : values?.FORM_SUBSTEPS['MEMBER_INFO']
+            ? formSteps['IDENTIFY_MEMBER']
+            : formSteps['MEMBER_INFO']
           : null
       },
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
         reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       },
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
         reviewValue: values?.new_member?.email,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+          ? formSteps['MEMBER_INFO']
           : null
       }
     ]
@@ -158,7 +167,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.member?.nif,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['LINK_MEMBER']
+          ? formSteps['LINK_MEMBER']
           : null
       }
     ]
@@ -189,7 +198,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_LINK_PERSON'),
         reviewValue: values?.member?.nif,
         step: showReviewLinks
-          ? values?.FORM_SUBSTEPS['LINK_MEMBER']
+          ? formSteps['LINK_MEMBER']
           : null
       }
     ]
@@ -205,21 +214,21 @@ const NewContractMemberSummary = (props) => {
       reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
       reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
       step: showReviewLinks
-        ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+        ? formSteps['MEMBER_INFO']
         : null
     },
     {
       reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
       reviewValue: values?.new_member?.email,
       step: showReviewLinks
-        ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+        ? formSteps['MEMBER_INFO']
         : null
     },
     {
       reviewLabel: t('LANGUAGE'),
       reviewValue: languages[values?.new_member?.language],
       step: showReviewLinks
-        ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+        ? formSteps['MEMBER_INFO']
         : null
     }
   ]
@@ -246,28 +255,28 @@ const NewContractMemberSummary = (props) => {
             reviewLabel: t('CUPS_LABEL'),
             reviewValue: values?.cups,
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['SUPPLY_POINT']
+              ? formSteps['SUPPLY_POINT']
               : null
           },
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.address?.street} ${values?.address?.number}`,
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['SUPPLY_INFO']
+              ? formSteps['SUPPLY_INFO']
               : null
           },
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.address?.city?.name,
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['SUPPLY_INFO']
+              ? formSteps['SUPPLY_INFO']
               : null
           },
           {
             reviewLabel: 'CNAE',
             reviewValue: values?.supply_point.cnae,
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['SUPPLY_INFO']
+              ? formSteps['SUPPLY_INFO']
               : null
           }
         ]
@@ -284,7 +293,7 @@ const NewContractMemberSummary = (props) => {
             reviewLabel: t('FARE'),
             reviewValue: values?.contract.tariff_mode,
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['MEMBER_INFO']
+              ? formSteps['MEMBER_INFO']
               : null
           },
           {
@@ -311,21 +320,21 @@ const NewContractMemberSummary = (props) => {
             reviewLabel: t('REVIEW_PAYMENT_DATA'),
             reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY'),
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['PAYMENT_INFO']
+              ? formSteps['PAYMENT_INFO']
               : null
           },
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['PAYMENT_INFO']
+              ? formSteps['PAYMENT_INFO']
               : null
           },
           {
             reviewLabel: t('VOLUNTARY_CENT'),
             reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
             step: showReviewLinks
-              ? values?.FORM_SUBSTEPS['DONATION']
+              ? formSteps['DONATION']
               : null
           }
         ]
