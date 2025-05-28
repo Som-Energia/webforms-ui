@@ -28,7 +28,7 @@ const Maintenance = () => {
       <div
         style={{
           marginTop: '15px',
-          color: '#0B2E34',
+          color: 'primary.main',
           fontFamily: 'Outfit, sans-serif',
           fontSize: '4em',
           fontWeight: 'bold',
@@ -39,7 +39,7 @@ const Maintenance = () => {
       <div
         style={{
           marginTop: '15px',
-          color: '#0c4c27',
+          color: 'primary.light',
           fontFamily: 'Outfit, sans-serif',
           fontSize: '5em',
           fontWeight: 'bold',

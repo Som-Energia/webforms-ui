@@ -21,7 +21,7 @@ const ReviewField = ({ label, value }) => {
               paddingRight: '12px',
               fontSize: '13px',
               fontWeight: 600,
-              color: '#1E1E1E'
+              color: 'primary.dark'
             }}
             variant="subtitle2">
             <>{label}</>
