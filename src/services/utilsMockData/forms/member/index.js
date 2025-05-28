@@ -184,6 +184,9 @@ const newNewMemberPhisical = {
         how_meet_us: "O9",
         gender: "male",
         birthdate: "1994-08-31",
+        statutes_accepted: undefined,
+        privacy_policy_accepted: undefined,
+        comercial_info_accepted: undefined
     }
 }
 
@@ -253,6 +256,9 @@ const newNewMemberJuridical = {
         representant_nom: "Benji",
         representant_dni: "11111111H",
         how_meet_us: "O9",
+        statutes_accepted: undefined,
+        privacy_policy_accepted: undefined,
+        comercial_info_accepted: undefined
     }
 }
 
