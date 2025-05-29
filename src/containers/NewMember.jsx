@@ -86,7 +86,7 @@ const NewMemberForm = (props) => {
       phone_code: '+34',
       phone_valid: false,
       language: `${i18n.language}_ES`,
-      how_meet_us: '',
+      referral_source: '',
       payment_method: undefined,
       sepa_accepted: false,
       iban: undefined,

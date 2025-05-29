@@ -30,16 +30,15 @@ const PhysicalMemberPersonalData = (props) => {
 
   const gender_options = {
     '': t('SELECT_OPTION'),
-    woman: t('GENDER_WOMAN'),
-    man: t('GENDER_MAN'),
-    genderfluid: t('GENDER_FLUID'),
-    nonbinary: t('GENDER_NON_BINARY'),
-    others: t('GENDER_OTHERS'),
-    nottosay: t('GENDER_NOT_SAY')
+    female: t('GENDER_WOMAN'),
+    male: t('GENDER_MAN'),
+    gender_fluid: t('GENDER_FLUID'),
+    non_binary: t('GENDER_NON_BINARY'),
+    other: t('GENDER_OTHERS'),
+    prefer_not_to_say: t('GENDER_NOT_SAY')
   }
 
-  const how_meet_us_options = {
-    '': t('SELECT_OPTION'),
+  const referral_source_options = {
     O1: t('HOW_MEET_US_OPTION_1'),
     O2: t('HOW_MEET_US_OPTION_2'),
     O3: t('HOW_MEET_US_OPTION_3'),
@@ -165,9 +164,9 @@ const PhysicalMemberPersonalData = (props) => {
           <Grid item xs={12} sm={6}>
             <SelectField
               label={t('HOW_MEET_US')}
-              value={values?.new_member?.how_meet_us}
-              fieldName="new_member.how_meet_us"
-              options={how_meet_us_options}
+              value={values?.new_member?.referral_source}
+              fieldName="new_member.referral_source"
+              options={referral_source_options}
               {...props}
             />
           </Grid>

@@ -4,7 +4,8 @@ Cypress.Commands.add('identifyNewMember', (nif) => {
 })
 
 Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error=false) => {
-  cy.get('[data-cy="terms_accepted"]').click()
+  cy.get('[data-cy="privacy_policy"]').click()
+  cy.get('[data-cy="statutes"]').click()
   cy.intercept('POST', '/form/soci/alta', {
     statusCode: !error ? 200 : 500,
     body: {
@@ -35,11 +36,14 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   if (optionalData)
   {
     cy.get('[id="new_member.gender"]').click()
-    cy.get('[id="new_member.gender-nonbinary"]').click()
+    cy.get('[id="new_member.gender-female"]').click()
     cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
-    cy.get('[id="new_member.how_meet_us"]').click()
-    cy.get('[id="new_member.how_meet_us-O1"]').click()
+    cy.get('[id="new_member.referral_source"]').click()
+    cy.get('[id="new_member.referral_source-O1"]').click()
   }
+
+  cy.get('[data-cy=next]').click()
+
 })
 
 Cypress.Commands.add(
@@ -64,8 +68,8 @@ Cypress.Commands.add(
       .blur()
 
     if (optionalData) {
-      cy.get('[id="new_member.how_meet_us"]').click()
-      cy.get('[id="new_member.how_meet_us-O1"]').click()
+      cy.get('[id="new_member.referral_source"]').click()
+      cy.get('[id="new_member.referral_source-O1"]').click()
     }
 
     cy.get('[data-cy="legal_person"]').click()
