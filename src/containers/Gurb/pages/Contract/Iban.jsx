@@ -71,7 +71,7 @@ const HolderIban = (props) => {
         <InputField
           name="iban"
           textFieldLabel={t('GURB_IBAN_LABEL')}
-          textFieldName={t('GURB_IBAN_FIELD')}
+          textFieldName={t('IBAN_FIELD')}
           textFieldNameHelper={t('GURB_IBAN_FIELD_HELPER')}
           textFieldHelper={t('IBAN_EXAMPLE')}
           handleChange={handleInputIban}

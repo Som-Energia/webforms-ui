@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import CadastralReference from '../Gurb/components/CadastralReference'
+import CadastralReference from '../../components/CadastralReference'
 import Checkbox from '@mui/material/Checkbox'
 import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography'
 
 import { textCheckbox, textHeader4 } from '../Gurb/gurbTheme'
 
-import TermsDialog from '../Gurb/components/TermsDialog'
-import DragDrop from '../Gurb/components/DragDrop'
-import CNAE from '../Gurb/components/CNAE'
+import TermsDialog from '../../components/TermsDialog'
+import DragDrop from '../../components/DragDrop'
+import CNAE from '../../components/CNAE'
 import AddressField from '../../components/AddressField'
 
 const NewContractMemberSupplyPointData = (props) => {
@@ -70,7 +70,7 @@ const NewContractMemberSupplyPointData = (props) => {
       </Grid>
       <Grid item xs={12}>
         <DragDrop
-          fieldName={t('GURB_ELECTRIC_BILL_UPLOAD')}
+          fieldName={t('ELECTRIC_BILL_UPLOAD')}
           textStyle={textHeader4}
           required={false}
         />

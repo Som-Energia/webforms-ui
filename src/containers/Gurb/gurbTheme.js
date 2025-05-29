@@ -44,7 +44,7 @@ export const textHeader6 = {
 }
 
 export const textBody1 = {
-  fontFamily: 'Inter',
+  fontFamily: 'Outfit',
   color: '#919191',
   fontSize: '16px'
 }
@@ -168,10 +168,10 @@ export const buttonGurbDark = {
   paddingRight: '1rem',
   boxShadow: 'none',
   '&:hover': {
-    backgroundColor: '#FFFFFF',
-    color: '#1E1E1E',
+    backgroundColor: '#B6E471',
+    color: 'primary.main',
     boxShadow: 'none',
-    border: '1px solid #D9D9D9'
+    border: '1px solid transparent'
   },
   width: '100%'
 }

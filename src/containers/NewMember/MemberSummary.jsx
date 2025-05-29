@@ -56,7 +56,7 @@ const MemberSummary = (props) => {
 
   const legalReviewFields = {
     icon: <PersonIcon sx={iconRequirements} />,
-    title: t('GURB_REVIEW_HOLDER_TITLE'),
+    title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
         reviewLabel: t('BUSINESS_NAME'),
@@ -74,12 +74,12 @@ const MemberSummary = (props) => {
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+        reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+        reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       }
@@ -88,15 +88,15 @@ const MemberSummary = (props) => {
 
   const physicalReviewFields = {
     icon: <PersonIcon sx={iconRequirements} />,
-    title: t('GURB_REVIEW_HOLDER_TITLE'),
+    title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
-        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
+        reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
+        reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
         step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
@@ -106,7 +106,7 @@ const MemberSummary = (props) => {
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },
       {
-        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+        reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       }
@@ -120,15 +120,15 @@ const MemberSummary = (props) => {
         : legalReviewFields,
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_CONTACT_INFORMATION_TITLE'),
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
             step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
             step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
           },
@@ -143,7 +143,7 @@ const MemberSummary = (props) => {
     [
       {
         icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_PAYMENT_DATA_TITLE'),
+        title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
             reviewLabel: t('PAYMENT_METHOD'),
@@ -151,7 +151,7 @@ const MemberSummary = (props) => {
             step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
+            reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
             step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO'],
             hide: values?.new_member?.payment_method != 'iban'

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import ArrowBack from '@mui/icons-material/ArrowBack'
 
 import { buttonGurbLight, textBody1 } from '../../containers/Gurb/gurbTheme'
 
@@ -11,11 +11,9 @@ function PrevButton(props) {
 
   return (
     <Button
-      sx={{
-        ...buttonGurbLight
-      }}
+      sx={{...buttonGurbLight}}
       data-cy="prev"
-      startIcon={<ArrowBackIosIcon />}
+      startIcon={<ArrowBack />}
       disabled={disabled}
       onClick={onClick}>
       {t('GURB_PREV')}

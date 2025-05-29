@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import Header from './components/Header'
 import ProgressWarning from './components/ProgressWarning'
 import TextRecomendation from './components/TextRecomendation'
-import CUPS from './components/CUPS'
+import CUPS from '../../components/CUPS'
 import { getGurbData } from '../../services/apiGurb'
 
 const SupplyPoint = (props) => {

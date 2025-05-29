@@ -48,7 +48,7 @@ export default function WebFormsTheme() {
         fontWeight: '400'
       },
       'headline4.regular': {
-        ontSize: '21px',
+        fontSize: '21px',
         fontWeight: '400'
       },
       'headline4.bold': {
@@ -117,32 +117,4 @@ export default function WebFormsTheme() {
     }
   })
   return responsiveFontSizes(theme)
-}
-
-
-// AlertBox Custom Style
-
-
-export const getAlertBoxStyles = (theme, severity) => {
-  const primary = theme.palette?.primary2?.main
-  const secondary = theme.palette?.background?.main
-
-  if (severity === 'warning') {
-    return {
-      backgroundColor: secondary,
-      border: 'none',
-      color: primary,
-      '& .MuiAlertTitle-root': {
-        color: primary,
-      },
-      '& .MuiTypography-root': {
-        color: primary,
-      },
-      '& *': {
-        color: `${primary} !important`,
-      },
-    }
-  }
-
-  return {}
 }

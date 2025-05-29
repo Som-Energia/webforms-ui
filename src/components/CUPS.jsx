@@ -1,10 +1,12 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../../components/InputField'
+import InputField from './InputField'
 
-import { checkCups } from '../../../services/api'
-import GurbLoadingContext from '../../../context/GurbLoadingContext'
+import { checkCups } from '../services/api'
+import GurbLoadingContext from '../context/GurbLoadingContext'
+
+import { useTheme } from '@mui/material/styles'
 
 const CUPS = (props) => {
   const {
@@ -17,6 +19,7 @@ const CUPS = (props) => {
   } = props
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
+  const theme = useTheme()
 
   useEffect(() => {
     const cups = values.cups
@@ -34,7 +37,7 @@ const CUPS = (props) => {
           setLoading(false)
         })
         .catch(({ response }) => {
-          const { error } = response.data
+          const { error } = response?.data
           setFieldError('cups', `ERROR_${error.code}`)
           setFieldTouched('cups', true)
           setLoading(false)
@@ -54,15 +57,26 @@ const CUPS = (props) => {
 
   return (
     <InputField
-      name='cups'
-      textFieldLabel={t('GURB_CUPS_LABEL')}
-      textFieldName={t('GURB_CUPS_FIELD')}
-      textFieldHelper={t('GURB_CUPS_HELPER')}
+      name="cups"
+      textFieldLabel={t('CUPS_LABEL')}
+      textFieldName={t('CUPS_FIELD')}
+      textFieldHelper={
+        <span>
+          {t('CUPS_HELPER_TEXT')}{' '}
+          <a
+            href={t('CUPS_HELPER_URL')}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: theme.palette.secondary.main, textDecoration: 'underline' }}>
+            {t('CUPS_HELPER_LINK')}
+          </a>
+        </span>
+      }
       iconHelper={true}
       handleChange={handleInputCups}
       handleBlur={handleInputCupsBlur}
       touched={touched?.cups}
-      value={values.cups}
+      value={values?.cups}
       error={errors?.cups}
       isLoading={loading}
       required={true}

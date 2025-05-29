@@ -11,9 +11,9 @@ import Alert from '@mui/material/Alert'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
-import RequiredTitle from '../../../components/InputTitle'
-import { textBody1, textBody3, textSubtitle2 } from '../gurbTheme'
-import { uploadFile } from '../../../services/api'
+import RequiredTitle from './InputTitle'
+import { textBody1, textBody3, textSubtitle2 } from '../containers/Gurb/gurbTheme'
+import { uploadFile } from '../services/api'
 import Grid from '@mui/material/Grid'
 
 const DragDrop = ({ fieldName, textStyle, required }) => {

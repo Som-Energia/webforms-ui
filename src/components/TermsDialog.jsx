@@ -5,12 +5,11 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
 const TermsDialog = (props) => {
   const { t } = useTranslation()
-  const { open, onClose, onAccept, title, maxWidth = 'md' } = props
+  const { open, onClose, onAccept, title, maxWidth = 'md', acceptText = 'I_ACCEPT' } = props
 
   return (
     <>
@@ -27,11 +26,14 @@ const TermsDialog = (props) => {
             {props.children}
         </DialogContent>
         <DialogActions>
-          <Button data-cy="decline" sx={{color:'secondary.dark'}} onClick={onClose} id="terms-dialog-decline-btn">
-            {t('I_DECLINE')}
-          </Button>
+          { onClose ?
+            <Button data-cy="decline" sx={{color:'secondary.dark'}} onClick={onClose} id="terms-dialog-decline-btn">
+              {t('I_DECLINE')}
+            </Button>
+            : null
+          }
           <Button data-cy="accept" onClick={onAccept} variant="contained" color="primary" id="terms-dialog-accept-btn">
-            {t('I_ACCEPT')}
+            {t(acceptText)}
           </Button>
         </DialogActions>
       </Dialog>

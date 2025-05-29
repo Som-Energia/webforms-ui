@@ -1,46 +1,34 @@
 import { useTranslation } from 'react-i18next'
 
-import Chooser from '../../../../components/NewChooser'
-import RequiredTitle from '../../../../components/InputTitle'
-import { HelperText } from '../../../../components/InputField'
+import Chooser from './NewChooser'
+import RequiredTitle from './InputTitle'
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import { iconRequirements } from '../../../../themes/commonStyles'
+import { iconRequirements } from '../themes/commonStyles'
 import {
-  iconOffRequirements,
-  textBody1,
-  textHeader4
-} from '../../gurbTheme'
+  iconOffRequirements
+} from '../themes/commonStyles/'
 
 const HolderVoluntaryDonation = (props) => {
-  const {
-    activeStep,
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched
-  } = props
+  const { values, setFieldValue } = props
 
   const { t } = useTranslation()
 
   const handleVoluntaryDonationQuestion = (value) => {
-    setFieldValue('holder.voluntary_donation', value)
+    setFieldValue('voluntary_donation', value)
   }
 
   const options = [
     {
-      id: 'voluntary-donation-on',
+      id: true,
       icon: <FavoriteBorderIcon sx={iconRequirements} />,
       textHeader: t('VOLUNTARY_DONATION_ON_HEADER')
     },
     {
-      id: 'voluntary-donation-off',
+      id: false,
       icon: <FavoriteBorderIcon sx={iconOffRequirements} />,
       textHeader: t('VOLUNTARY_DONATION_OFF_HEADER')
     }
@@ -50,8 +38,8 @@ const HolderVoluntaryDonation = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography
-          sx={textBody1}
-          variant="body2"
+          sx={'body.sm.regular'}
+          color='background.main.dark'
           dangerouslySetInnerHTML={{
             __html: t('VOLUNTARY_DONATION_HOW_INFO')
           }}
@@ -59,8 +47,8 @@ const HolderVoluntaryDonation = (props) => {
       </Grid>
       <Grid item xs={12}>
         <Typography
-          sx={{ ...textBody1, marginBottom: '1rem' }}
-          variant="body2"
+          sx={'body.sm.regular'}
+          color='background.main.dark'
           dangerouslySetInnerHTML={{
             __html: t('VOLUNTARY_DONATION_WHY_INFO')
           }}
@@ -69,7 +57,7 @@ const HolderVoluntaryDonation = (props) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={t('VOLUNTARY_DONATION_QUESTION')}
-          textStyle={textHeader4}
+          textStyle={'body.sm.regular'}
           required={true}
         />
       </Grid>
@@ -77,15 +65,8 @@ const HolderVoluntaryDonation = (props) => {
         <Chooser
           name="donation_question"
           options={options}
-          value={values.holder.voluntary_donation}
+          value={values.voluntary_donation}
           handleChange={handleVoluntaryDonationQuestion}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <HelperText
-          helperText={t('GURB_VOLUNTARY_DONATION_HELPER')}
-          iconHelper={false}
-          justifyContent={'center'}
         />
       </Grid>
     </Grid>

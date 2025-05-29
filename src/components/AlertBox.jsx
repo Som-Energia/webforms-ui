@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 
-import { getAlertBoxStyles } from '../themes/webforms'
+import { getAlertBoxStyles } from '../themes/commonStyles'
 
 const AlertBox = ({ severity, title, description, children, variant, icon }) => {
   const theme = useTheme()

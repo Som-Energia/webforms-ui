@@ -56,25 +56,25 @@ const ContractSummary = (props) => {
       },
       {
         icon: <PersonIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_HOLDER_TITLE'),
+        title: t('REVIEW_HOLDER_TITLE'),
         field: [
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NAME'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
             reviewValue: `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`,
             step: CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_NIF'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
             reviewValue: values?.holder?.nif,
             step: CONTRACT_FORM_SUBSTEPS['IDENTIFY_HOLDER']
           },
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_PHONE'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: values?.holder?.phone1,
             step: CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
           },
           {
-            reviewLabel: t('GURB_REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.holder?.email,
             step: CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
           }
@@ -92,12 +92,12 @@ const ContractSummary = (props) => {
             step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
           {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+            reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.address?.street} ${values?.address?.number}`,
             step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
           {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CITY'),
+            reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.address?.city?.name,
             step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
@@ -125,21 +125,21 @@ const ContractSummary = (props) => {
             reviewValue: 'en proces'
           }
         ],
-        footer: t('GURB_REVIEW_TECHNICAL_DETAILS_FOOTER')
+        footer: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
       }
     ],
     [
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_CONTACT_INFORMATION_TITLE'),
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         subtitle: t('GURB_REVIEW_CONTACT_INFORMATION_SUBTITLE')
       },
       {
         icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_PAYMENT_DATA_TITLE'),
+        title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
-            reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_IBAN'),
+            reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.holder?.iban,
             step: CONTRACT_FORM_SUBSTEPS['IBAN']
           },
@@ -155,11 +155,11 @@ const ContractSummary = (props) => {
 
   const reviewPrices = [
     {
-      title: t('GURB_REVIEW_PRICES_ENERGY_TITLE'),
+      title: t('REVIEW_PRICES_ENERGY_TITLE'),
       field: 'energia'
     },
     {
-      title: t('GURB_REVIEW_PRICES_POWER_TITLE'),
+      title: t('REVIEW_PRICES_POWER_TITLE'),
       field: 'potencia'
     }
   ]
@@ -223,7 +223,7 @@ const ContractSummary = (props) => {
       <Grid item xs={12}>
         <Typography
           sx={{ ...textHeader4 }}>
-          {t('GURB_SUMMARY_OTHER_CONCEPTS_TITLE')}
+          {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -231,7 +231,7 @@ const ContractSummary = (props) => {
           sx={{ ...textBody1}}
           variant="body2"
           dangerouslySetInnerHTML={{
-            __html: t('GURB_SUMMARY_OTHER_CONCEPTS_BODY')
+            __html: t('SUMMARY_OTHER_CONCEPTS_BODY')
           }}
         />
       </Grid>

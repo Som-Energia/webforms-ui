@@ -7,7 +7,7 @@ const newContractMemberSupplyPointValidations = Yup.object().shape({
     .required('ERROR_REQUIRED_FIELD'),
   has_light: Yup.string()
     .required('REQUIRED_FIELD')
-    .oneOf(['light-on', 'light-off']),
+    .oneOf(['light-on', 'light-off'])
 });
 
 export default newContractMemberSupplyPointValidations;

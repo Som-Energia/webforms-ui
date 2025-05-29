@@ -33,7 +33,7 @@
     "INSTALL_TYPE_ATTACHMENTS": "La distribuidora eléctrica solicita obligatoriamente la presentación del boletín eléctrico en el que conste el cambio de tensión efectuado",
     "HELP_INSTALL_TYPE": "<a target=\"_blank\" href=\"{{url}}\">Cómo identificar si una instalación es trifásica o monofásica</a>",
     "HELP_INSTALL_TYPE_URL": "http://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
-    "POTENCIA_A_CONTRACTAR": "¿Qué potencia quieres contratar?",
+    "POWER_TO_CONTRACT": "¿Qué potencia quieres contratar?",
     "HELP_POTENCIA": "<a target=\"_blank\" href=\"{{url}}\">Cómo averiguar la potencia que necesito</a>",
     "HELP_POTENCIA_URL": "http://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
     "DISCRIMINACIO_HORARIA": "¿Quieres discriminación horaria?",
@@ -144,7 +144,7 @@
     "DATA_PROTECTION_CONTRACT_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-del-contrato-luz",
     "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-registro-hazte-socio-socia",
     "PRIVACY_POLICY_TITLE": "Política de protección de datos",
-    "ACCEPT_PRIVACY_POLICY": "He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad</a> de Som Energia",
+    "ACCEPT_PRIVACY_POLICY": "He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad</a> de Som Energia.",
     "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/es/aviso-legal/",
     "PRIVACY_POLICY_HOLDERCHANGE": "Finalidades: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. Derechos: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
     "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "En caso de proporcionar datos personales de terceros, declaras responsablemente que cuentas con su consentimiento y que les has proporcionado toda la información necesaria acerca de las finalidades y la forma en la que serán tratados sus datos personales.",
@@ -773,6 +773,6 @@
     "SUPPLY_POINT_DATA_TITLE": "Datos del punto de subministro",
     "RECOMMENDATION_SUBTITLE": "Te recomendamos tener a mano un contrato de luz para ir rellenando los datos del formulario",
     "NEW_GENERAL_TERMS": "He leído y acepto las condiciones de contratación de Som Energia y con la aceptación de las mismas, me obligo al pago del consumo al precio que resulte de la aplicación de la tarifa contratada",
-    "ACCEPT_STATUTES": "He leído y acepto los <a target=\"_blank\" href={{url}}> estatutos</a> de Som Energia y con la aceptación de los mismos, me obligo al pado de los cien euros (100.-€) que resulta de la aportación social obligatoria al capital de Som Energia",
+    "ACCEPT_STATUTES": "He leído y acepto los <a target=\"_blank\" href={{url}}> estatutos</a> de Som Energia y con la aceptación de los mismos, me obligo al pado de los cien euros (100.-€) que resulta de la aportación social obligatoria al capital de Som Energia.",
     "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatutos_CAST.pdf"
 }
