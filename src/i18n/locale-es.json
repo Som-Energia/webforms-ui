@@ -641,7 +641,7 @@
     "GENERATION_INVESTMENTS_VALIDATE_BUTTON": "VALIDAR CAMBIOS",
     "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE": "¿A qué contratos va a parar la energía de mi aportación al Generation kWh?",
     "GENERATION_INVESTMENTS_OUTSIDE_ASSIGNMENTS_TABLE_TITLE": "Mis contratos que reciben energía Generation kWh de otras socias",
-    "GENERATION_INVESTMENTS_TABLE_TITLE": "MIS APORTACIONES",
+    "GENERATION_INVESTMENTS_TABLE_TITLE": "Mis aportaciones",
     "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS": "El cambio se ha registrado correctamente y será efectivo en 2 días hábiles.",
     "GENERATION_FORM_TITLE": "Formulario de participación Generation kWh",
     "GENERATION_FORM_ANNUAL_USE_TITLE": "Uso eléctrico anual",
@@ -774,5 +774,10 @@
     "RECOMMENDATION_SUBTITLE": "Te recomendamos tener a mano un contrato de luz para ir rellenando los datos del formulario",
     "NEW_GENERAL_TERMS": "He leído y acepto las condiciones de contratación de Som Energia y con la aceptación de las mismas, me obligo al pago del consumo al precio que resulte de la aplicación de la tarifa contratada",
     "ACCEPT_STATUTES": "He leído y acepto los <a target=\"_blank\" href={{url}}> estatutos</a> de Som Energia y con la aceptación de los mismos, me obligo al pado de los cien euros (100.-€) que resulta de la aportación social obligatoria al capital de Som Energia.",
-    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatutos_CAST.pdf"
+    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatutos_CAST.pdf",
+    "NEW_MEMBER_SUCCESS_TITLE":"Ya te has asociado a Som Energia!",
+    "NEW_MEMBER_ERROR_TITLE":"Hay un error y no se ha podido realizar el alta de socia!",
+    "NEW_MEMBER_SUCCESS_DESC":"Recibiras un correo con tu número de socia una vez acabe todo el proceso",
+    "NEW_MEMBER_ERROR_DESC":"Por favor, intentalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la siituación. Disculpa les molestias",
+    "NEW_MEMBER_SUBMIT_LOADING":"Estamos dando de alta a la nueva persona socia"
 }

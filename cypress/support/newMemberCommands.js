@@ -3,38 +3,44 @@ Cypress.Commands.add('identifyNewMember', (nif) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add(
-  'personalPhysicalDataMember',
-  (personalData, validAddress, optionalData = false) => {
-    cy.get('[data-cy="new_member.name"]').type(personalData.name)
-    cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
-    cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
-    cy.get('[data-cy="address-street"]').type(validAddress.input)
-    cy.contains(personalData.street).click()
-
-    cy.get('[data-cy="address.number"]').type('2')
-    cy.get('[data-cy="address.floor"]').type('1')
-    cy.get('[data-cy="address.door"]').type('3')
-    cy.get('[data-cy="address.stairs"]').type('B')
-    cy.get('[data-cy="address.bloc"]').type('Omega')
-    cy.get('[data-cy="new_member.email"]').type(personalData.email)
-    cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
-    cy.get('[data-cy="new_member.phone"]')
-      .type(personalData.phone)
-      .focused()
-      .blur()
-
-    if (optionalData) {
-      cy.get('[id="new_member.gender"]').click()
-      cy.get('[id="new_member.gender-nonbinary"]').click()
-      cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
-      cy.get('[id="new_member.how_meet_us"]').click()
-      cy.get('[id="new_member.how_meet_us-O1"]').click()
+Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error=false) => {
+  cy.get('[data-cy="terms_accepted"]').click()
+  cy.intercept('POST', '/form/soci/alta', {
+    statusCode: !error ? 200 : 500,
+    body: {
+      state: status
     }
+  })
+  cy.get('[data-cy="next"]').click()
+  let icon = status ? "success-icon" : "error-icon"
+  cy.get('[data-cy='+icon+']').should('exist')
+})
 
-    cy.get('[data-cy=next]').click()
+Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, optionalData = false) => {
+  cy.get('[data-cy="new_member.name"]').type(personalData.name)
+  cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
+  cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
+  cy.get('[data-cy="address-street"]').type(validAddress.input)
+  cy.contains(personalData.street).click()
+
+  cy.get('[data-cy="address.number"]').type('2')
+  cy.get('[data-cy="address.floor"]').type('1')
+  cy.get('[data-cy="address.door"]').type('3')
+  cy.get('[data-cy="address.stairs"]').type('B')
+  cy.get('[data-cy="address.bloc"]').type('Omega')
+  cy.get('[data-cy="new_member.email"]').type(personalData.email)
+  cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
+  cy.get('[data-cy="new_member.phone"]').type(personalData.phone).focused().blur()
+
+  if (optionalData)
+  {
+    cy.get('[id="new_member.gender"]').click()
+    cy.get('[id="new_member.gender-nonbinary"]').click()
+    cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
+    cy.get('[id="new_member.how_meet_us"]').click()
+    cy.get('[id="new_member.how_meet_us-O1"]').click()
   }
-)
+})
 
 Cypress.Commands.add(
   'personalLegalDataMember',

@@ -18,6 +18,7 @@ export default async function getGoogleMapsPlacesApiClient() {
     version: 'beta'
   })
 
+
   placesApiClient = await loader.importLibrary('places')
 
   return placesApiClient

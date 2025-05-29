@@ -169,9 +169,11 @@ const Cancellation = (props) => {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={i18n.language}>
+      <LocalizationProvider
+        dateAdapter={AdapterDayjs}
+        adapterLocale={i18n.language}>
         <Formik
-          onSubmit={() => { }}
+          onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -227,7 +229,16 @@ const Cancellation = (props) => {
                                 data-cy="submit"
                                 variant="contained"
                                 color="primary"
-                                startIcon={
+                                disableElevation={true}
+                                sx={{
+                                  backgroundColor: '#CDFF80',
+                                  color: '#0B2E34',
+                                  '&:hover': {
+                                    color: '#CDFF80',
+                                    backgroundColor: '#0B2E34'
+                                  }
+                                }}
+                                endIcon={
                                   sending ? (
                                     <CircularProgress size={24} />
                                   ) : (

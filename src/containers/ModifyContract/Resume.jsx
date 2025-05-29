@@ -88,7 +88,9 @@ export default function ModifyResume({
           <Grid container spacing={4}>
             <Grid item>
               <Typography data-cy="power" variant="body1" gutterBottom>
-                <Typography component="body1" sx={{ mr: 1, color: 'secondary.dark' }}>
+                <Typography
+                  component="body1"
+                  sx={{ mr: 1, color: 'secondary.dark' }}>
                   {params?.modify?.moreThan15Kw ? 'P1' : t('PEAK')}
                 </Typography>{' '}
                 {params.modify?.power} kW
@@ -96,7 +98,9 @@ export default function ModifyResume({
             </Grid>
             <Grid item>
               <Typography data-cy="power2" variant="body1" gutterBottom>
-                <Typography component="body1" sx={{ mr: 1, color: 'secondary.dark' }}>
+                <Typography
+                  component="body1"
+                  sx={{ mr: 1, color: 'secondary.dark' }}>
                   {params?.modify?.moreThan15Kw ? 'P2' : t('VALLEY')}
                 </Typography>{' '}
                 {params.modify?.power2} kW
@@ -170,24 +174,27 @@ export default function ModifyResume({
         <Divider />
       </Box>
 
-      <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ marginTop: '1rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
         {prevStep && (
-          <PrevButton
-            onClick={prevStep}
-            title={t('PAS_ANTERIOR')}
-          />
+          <PrevButton onClick={prevStep} title={t('PAS_ANTERIOR')} />
         )}
         {
           <>
             <Button
               type="submit"
               onClick={handleSubmit}
-              sx={{ mt: 1, mr: 1 }}
+              disableElevation={true}
+              sx={{
+                backgroundColor: '#CDFF80',
+                color: '#0B2E34',
+                '&:hover': {
+                  color: '#CDFF80',
+                  backgroundColor: '#0B2E34'
+                }
+              }}
               color="primary"
               variant="contained"
-              startIcon={
-                sending ? <CircularProgress size={24} /> : <SendIcon />
-              }
+              endIcon={sending ? <CircularProgress size={24} /> : <SendIcon />}
               disabled={sending}>
               {t('ENVIAR')}
             </Button>

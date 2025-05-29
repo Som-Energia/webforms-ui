@@ -111,11 +111,11 @@ const GenerationContributionForm = (props) => {
             }}>
             <Grid
               item
-              style={{
+              sx={{
                 padding: '10px 2px 10px 2px',
                 width: percentProd,
                 height: '100%',
-                backgroundColor: '#96b633'
+                backgroundColor: 'primary.extraLight'
               }}>
               <Typography id="percent_value" style={{ margin: '0px 10px' }}>
                 {percentProd}

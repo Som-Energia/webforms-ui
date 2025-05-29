@@ -24,7 +24,7 @@ const TariffMode = (props) => {
         mb={2}
         sx={{
           '& .MuiFormHelperText-root': {
-            fontSize: '0.9rem',
+            fontSize: '1rem',
           }
         }}
       >

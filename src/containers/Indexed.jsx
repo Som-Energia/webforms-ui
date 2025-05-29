@@ -433,10 +433,18 @@ const Indexada = (props) => {
                                   !completed && (
                                     <Button
                                       data-cy="submit"
+                                      disableElevation="true"
+                                      sx={{
+                                        backgroundColor: '#CDFF80',
+                                        color: '#0B2E34',
+                                        '&:hover': {
+                                          color: '#CDFF80',
+                                          backgroundColor: '#0B2E34',
+                                        }
+                                      }}
                                       id="tariff-change-submit"
                                       variant="contained"
-                                      color="primary"
-                                      startIcon={
+                                      endIcon={
                                         loading ? (
                                           <CircularProgress size={24} />
                                         ) : (

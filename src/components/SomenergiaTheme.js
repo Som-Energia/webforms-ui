@@ -26,41 +26,48 @@ export default function SomEnergiaTheme() {
       contrastThreshold: 4.5, // Recommended by WCAG 2.1 Rule 1.4.3
       tonalOffset: 0.2,
       text: {
-        primary: '#4d4d4d'
+        primary: '#1E1E1E'
       },
       primary: {
         //main: '#96D600', //'hsl(78, 100%, 42%)', // from style guide
-        main: '#96b633', // from webforms-ui
+        main: '#0B2E34', // from webforms-ui
         contrastText: 'white',
-        extraLight: "rgba(150, 182, 51, 0.08)"
+        light: '#0c4c27',
+        extraLight: '#CDFF80',
+        megaLight: "#F8F9F6",
+        dark: '#1E1E1E',
+        error: '#EE4949'
       },
       secondary: {
+        main: '#ff632b', // taronja
+        dark: '#8C8C8C', // gris fosc
+        extraDark:'red',
+        alt: '#CDFF80',  // verd lima
+        light: '#F0F3EC'  // Fondo
+
         //main: '#E0E723', //'hsl(62, 80%, 52%)', // from style guide
-        main: '#a1a1a1', // from webforms-ui
         // main: '#e6cc00', // Original design
         //main: '#e2e2e2' // From mentxu design 2023-10-26
-        dark: 'rgba(0, 0, 0, 0.54)',
-        extraDark:'#6f6262',
-        light: '#f2f2f2'
       },
       dark: {
-        main: '#750d0d'
+        main: 'red'
       },
       lightFont: {
-        main: '#fff'
+        main: 'yellow'
       },
       background: {
         default: 'transparent',
         paper: '#ffffff'
       },
       pagetitle: {
-        main: '#4d4d4d'
+        main: '#1E1E1E'
       },
-      failure:{
+      failure: {
         primary: '#fe6444'
       }
     },
     typography: {
+      fontFamily: 'Outfit',
       pagetitle: {
         fontSize: 20,
         fontWeight: 500, // from style guide
@@ -70,24 +77,48 @@ export default function SomEnergiaTheme() {
         fontSize: 15,
         fontWeight: 400,
         lineHeight: 1
+      },
+      sectionTitle: {
+        fontSize: 20,
+        fontWeight: 700,
+        lineHeight: 1
       }
     },
-    components:{
+    components: {
       MuiCssBaseline: {
         styleOverrides: {
-          a:{
+          a: {
             textDecoration: 'none'
           }
         }
-      }
+      },
+      MuiAlert: {
+        styleOverrides: {
+          standardSuccess: {
+            backgroundColor: '#E2E8DE',
+            color: '#0B2E34'
+          },
+          standardWarning: {
+            backgroundColor: 'rgba(255, 205, 181, 0.5)',
+            color: '#FF632B'
+          },
+        }
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'capitalize', // Aquí cambias el texto
+          },
+        },
+      },
     },
-    gurbStyles:{
-       textHeader1:{
+    gurbStyles: {
+      textHeader1: {
         fontFamily: 'Inter',
         color: '#00f',
         fontSize: '30px',
         fontWeight: '700'
-       }
+      }
     },
     shape: {
       borderRadius: 0

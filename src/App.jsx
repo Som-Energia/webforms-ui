@@ -19,9 +19,14 @@ import { GurbErrorContextProvider } from './context/GurbErrorContext'
 import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
+import { useTranslation } from 'react-i18next'
+
+import Typography from '@mui/material/Typography'
+
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
+  const { t } = useTranslation()
 
   const Home = lazy(() => import('./containers/Home'))
   const Contract = lazy(() => import('./containers/Contract'))
@@ -46,6 +51,7 @@ const App = (props) => {
   const GurbForm = lazy(() => import('./containers/GurbForm'))
   const NewContractMemberForm = lazy(() => import('./containers/NewContractMember/NewContractMember'))
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
+  const Result = lazy(() => import('./containers/Result'))
 
   const loadContractData = () => {
     const contractData =
@@ -108,6 +114,7 @@ const App = (props) => {
     return tmpProps
   }
 
+
   return (
     <>
       <CssBaseline />
@@ -119,6 +126,19 @@ const App = (props) => {
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
+
+                    {[
+                      '/new-member',
+                      '/:language/associat/',
+                      '/:language/asociate/', // es, gl
+                      '/:language/bazkidetu/'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        key={path}
+                        element={<Member {...props} />}
+                      />
+                    ))}
 
                     <Route
                       exact
@@ -191,20 +211,6 @@ const App = (props) => {
                         <Contract is30ContractEnabled={false} {...props} />
                       }
                     />
-
-                    {[
-                      '/new-member',
-                      '/:language/associat/',
-                      '/:language/asociate/', // es, gl
-                      '/:language/bazkidetu/'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        key={path}
-                        element={<Member {...props} />}
-                      />
-                    ))}
-
                     <Route
                       path="/d1-detail"
                       element={
@@ -493,6 +499,42 @@ const App = (props) => {
                 </ThemeProvider>
                 <ThemeProvider theme={webFormsTheme}>
                   <Routes>
+                    {[
+                      '/:language/new-pagament-realitzat',
+                      '/:language/new-pago-realizado'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <Result
+                            mode={'success'}
+                            {...props}
+                            title={t('SUCCESS_TEXT')}
+                            description={t('NEWMEMBER_OK_DESCRIPTION')}
+                          />
+                        }
+                      />
+                    ))}
+
+                    {[
+                      '/:language/new-pagament-cancellat',
+                      '/:language/new-pago-cancelado'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
+                            <Typography
+                              sx={{ color: "secondary.dark" }}
+                              dangerouslySetInnerHTML={{
+                                __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
+                              }}
+                            />
+                          </Result>
+                        }
+                      />
+                    ))}
+
                     <Route
                       path="/:language/new-contract-form/:tariff"
                       element={

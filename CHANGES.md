@@ -3,6 +3,11 @@
 ## unreleased
 
 - New joint contract and member form
+- New Member form
+- Added the pages of payment results to new theme provider (App.jsx)
+- Added cypress tests (new member form)
+- Added Result component to show the result of new member form (success and error)
+- Matomo track (new member form)
 - Fix: verify member is not null in contributions form
 
 ## 3.0.0 2025-04-03

@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Outfit', sans-serif;
   background: transparent;
   color: #4d4d4d;
   font-size: 16px;
@@ -34,9 +34,9 @@ body {
 }
 
 #root {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Outfit';
   background: transparent;
-  color: #747474;
+  color: #1E1E1E;
   font-size: 16px;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 #root a {
-  color: #707a1a;
+  color: #0B2E34;
   font-weight: 500;
 }
 
@@ -85,14 +85,14 @@ StepHeader Component
 }
 
 .header__text {
-  color: #444444;
+  color: #0B2E34;
   font-size: 21px;
   font-weight: 400;
 }
 
 .ov-theme {
-  background: #f2f2f2;
-  color: #4d4d4d;
+  background: #F0F3EC;
+  color: #aa6161;
 }
 
 .ov-theme .header {
@@ -104,7 +104,7 @@ StepHeader Component
 }
 
 .ov-theme .header__text {
-  color: #96b633;
+  color: #0B2E34;
   font-size: 18px;
   font-weight: 700;
 }

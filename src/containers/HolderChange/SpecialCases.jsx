@@ -36,12 +36,12 @@ const SpecialCases = (props) => {
       chooserItemSelected: {
         border: '2px solid',
         borderColor: 'primary.main',
-        backgroundColor: 'primary.extraLight',
+        backgroundColor: 'primary.megaLight',
         margin: '0 0 8px 0',
         '&:not(.Mui-disabled):hover': {
           border: '2px solid',
           borderColor: 'primary.main',
-          backgroundColor: 'primary.extraLight'
+          backgroundColor: 'primary.megaLight'
         },
         '& span:last-child': {
           fontWeight: 'bold',

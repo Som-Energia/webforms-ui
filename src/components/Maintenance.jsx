@@ -28,8 +28,8 @@ const Maintenance = () => {
       <div
         style={{
           marginTop: '15px',
-          color: '#4d4d4d',
-          fontFamily: 'Roboto, sans-serif',
+          color: 'primary.main',
+          fontFamily: 'Outfit, sans-serif',
           fontSize: '4em',
           fontWeight: 'bold',
           textAlign: 'center'
@@ -39,8 +39,8 @@ const Maintenance = () => {
       <div
         style={{
           marginTop: '15px',
-          color: '#96B633',
-          fontFamily: 'Roboto, sans-serif',
+          color: 'primary.light',
+          fontFamily: 'Outfit, sans-serif',
           fontSize: '5em',
           fontWeight: 'bold',
           textAlign: 'center'

@@ -29,7 +29,7 @@ const customStyles ={
     textTransform: 'uppercase',
     mt: 3,
     mb: 1.2,
-    color:'secondary.dark'
+    color:'#0B2E34'
   },
   divider: {
     mt: '12px',

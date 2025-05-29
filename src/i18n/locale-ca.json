@@ -643,7 +643,7 @@
     "GENERATION_INVESTMENTS_VALIDATE_BUTTON": "VALIDAR CANVIS",
     "GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE": "A quins contractes va a parar la meva energia Generation kWh?",
     "GENERATION_INVESTMENTS_OUTSIDE_ASSIGNMENTS_TABLE_TITLE": "Els meus contractes que reben energia Generation kWh d’altres sòcies",
-    "GENERATION_INVESTMENTS_TABLE_TITLE": "LES MEVES APORTACIONS",
+    "GENERATION_INVESTMENTS_TABLE_TITLE": "Les meves aportacions",
     "GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS": "El canvi s’ha registrat correctament i serà efectiu en 2 dies hàbils.",
     "GENERATION_FORM_TITLE": "Formulari de participació Generation kWh",
     "GENERATION_FORM_ANNUAL_USE_TITLE": "Ús elèctric anual",
@@ -992,5 +992,10 @@
     "REVIEW_PRICES_NOTICE_INDEXED_URL": "https://ca.support.somenergia.coop/article/1272-la-tarifa-indexada",
     "NEW_GENERAL_TERMS": "He llegit i accepto les condicions de contractació de Som Energia. Amb l'acceptació d'aquestes m'obligo a pagament al preu que resulti de l’aplicació de la tarifa contractada.",
     "ACCEPT_STATUTES": "He llegit i accepto els <a target=\"_blank\" href={{url}}> estatuts</a> de Som Energia i amb aquesta acceptació, m'obligo al pagament dels cent euros (100.-€) que resulta de l'aportació social obligatòria al capital.",
-    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatuts_CAT.pdf"
+    "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatuts_CAT.pdf",
+    "NEW_MEMBER_SUCCESS_TITLE":"Ja t'has associat a Som Energia!",
+    "NEW_MEMBER_ERROR_TITLE":"Hi ha un error i no s'ha pogut realitzar l'alta de sòcia!",
+    "NEW_MEMBER_SUCCESS_DESC":"Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés",
+    "NEW_MEMBER_ERROR_DESC":"Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisem la situació. Disculpa les molèsties",
+    "NEW_MEMBER_SUBMIT_LOADING":"Estem donant d'alta a la nova persona sòcia"
 }

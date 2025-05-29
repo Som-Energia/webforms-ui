@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import { buttonGurbDark } from '../../containers/Gurb/gurbTheme'
 
 function SubmitButton(props) {
-  const { onClick, disabled } = props
+  const { onClick, disabled, sending } = props
 
   const { t } = useTranslation()
 
@@ -15,8 +16,13 @@ function SubmitButton(props) {
       data-cy="next"
       variant="contained"
       disabled={disabled}
-      onClick={onClick}>
-      {t('GURB_PAYMENT_SUBMIT')}
+      onClick={onClick}
+    >
+      {sending ? (
+        <CircularProgress size={24} sx={{ color: 'white' }} />
+      ) : (
+        t('GURB_PAYMENT_SUBMIT')
+      )}
     </Button>
   )
 }

@@ -109,4 +109,33 @@ describe('Member', () => {
       cy.personalLegalcheckReviewNewMemberStep(this.data.personalLegalData.nif)
     })
   })
-})
+
+  describe('Physical member without optional data and submit ok', function () {
+    it('New physical member without option data and submit ok', function () {
+      cy.identifyNewMember(this.data.personalPhysicalData.nif)
+      cy.personalPhysicalDataMember(this.data.personalPhysicalData, this.data.validAddress)
+      cy.choosePaymentMethod()
+      cy.paymentData(this.data.personalPhysicalData.iban)
+      cy.acceptTermsAndsubmitNewMember(true)
+    })
+  })
+
+  describe('Physical member without optional data and submit (status=false)', function () {
+    it('New physical member without option data and submit (status=false)', function () {
+      cy.identifyNewMember(this.data.personalPhysicalData.nif)
+      cy.personalPhysicalDataMember(this.data.personalPhysicalData, this.data.validAddress)
+      cy.choosePaymentMethod()
+      cy.paymentData(this.data.personalPhysicalData.iban)
+      cy.acceptTermsAndsubmitNewMember(false)
+    })
+  })
+  describe('Physical member without optional data and submit (error 500)', function () {
+    it('New physical member without option data and submit (error 500)', function () {
+      cy.identifyNewMember(this.data.personalPhysicalData.nif)
+      cy.personalPhysicalDataMember(this.data.personalPhysicalData, this.data.validAddress)
+      cy.choosePaymentMethod()
+      cy.paymentData(this.data.personalPhysicalData.iban)
+      cy.acceptTermsAndsubmitNewMember(false, true)
+    })
+  })
+ })

@@ -5,24 +5,30 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
 import SomStepper from '../components/SomStepper'
 
+import { newNormalizeMember } from '../services/utils'
+import { member } from '../services/api'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../services/steps'
 import SummaryContext from '../context/SummaryContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import MatomoContext from '../trackers/matomo/MatomoProvider'
 import MemberIdentifier from './NewMember/MemberIdentifier'
 import MemberPersonalData from './NewMember/MemberPersonalData'
 import PaymentMethod from './NewMember/PaymentMethod'
 import MemberSummary from './NewMember/MemberSummary'
+import Result from './Result'
 
 import memberIdentifierValidations from './NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from './NewMember/memberPersonalDataValidations'
 import memberPaymentMethodValidations from './NewMember/paymentMethodValidations'
 import memberSummaryValidations from './NewMember/memberSummaryValidations'
+import NewLoading from '../components/NewLoading'
 
 const MAX_STEP_NUMBER = 3
 const NEW_MEMBER_COST = 100
@@ -32,10 +38,14 @@ const NewMemberForm = (props) => {
   const { language } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
+  const [sending, setSending] = useState(false)
+  const [completed, setCompleted] = useState(false)
+  const [error, setError] = useState(false)
   const formTPV = useRef(null)
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
+  const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -84,7 +94,10 @@ const NewMemberForm = (props) => {
     },
     privacy_policy_accepted: false,
     statutes_accepted: false,
-    comercial_info_accepted: false
+    comercial_info_accepted: false,
+    generic_especific_conditons_accepted: false,
+    urlok: t('NEWMEMBER_OK_REDIRECT_URL'),
+    urlko: t('NEWMEMBER_KO_REDIRECT_URL')
   }
 
   const validationSchemas = [
@@ -93,6 +106,10 @@ const NewMemberForm = (props) => {
     memberPaymentMethodValidations,
     memberSummaryValidations
   ]
+
+  useEffect(() => {
+    trackEvent({ category: 'NewMember', action: 'setNewMemberStep', name: `new-member-step-${activeStep}` })
+  }, [activeStep])
 
   const nextStep = (formikProps) => {
     let next
@@ -114,8 +131,36 @@ const NewMemberForm = (props) => {
     setActiveStep(Math.max(0, prev))
   }
 
+  const trackSucces = () => {
+    trackEvent({ category: 'NewMember', action: 'newMemberFormOk', name: 'send-new-member-ok' })
+  }
+
   const handlePost = async (values) => {
-    console.log('POST final')
+    setSending(true)
+    trackEvent({ category: 'Send', action: 'sendNewMemberClick', name: 'send-new-member' })
+
+    const data = newNormalizeMember(values)
+    await member(data)
+      .then((response) => {
+        if (response?.state === true) {
+          setError(false)
+          trackSucces()
+          if (response?.data?.endpoint) {
+            setData(response?.data)
+            setUrl(response.data.endpoint)
+          } else {
+            setCompleted(true)
+          }
+        } else {
+          setCompleted(true)
+          setError(true)
+        }
+      })
+      .catch((error) => {
+        setCompleted(true)
+        setError(true)
+      })
+    setSending(false)
   }
 
   const getStep = (props) => {
@@ -159,64 +204,88 @@ const NewMemberForm = (props) => {
         {(formikProps) => {
           return (
             <>
-              <SomStepper
-                activeStep={activeStep}
-                steps={NEW_MEMBER_FORM_SUBSTEPS}
-              />
-              {getStep(formikProps)}
-              <Grid
-                container
-                direction="row-reverse"
-                rowSpacing={2}
-                sx={{
-                  marginTop: '2rem',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                {activeStep !== 0 && (
-                  <Grid item sm={2} xs={12}>
-                    <PrevButton
-                      onClick={() => prevStep(formikProps)}
-                      title={'PREV'}
-                    />
+              {sending
+                ? <NewLoading description={t("NEW_MEMBER_SUBMIT_LOADING")} />
+                : <>
+                  <SomStepper
+                    activeStep={activeStep}
+                    steps={NEW_MEMBER_FORM_SUBSTEPS}
+                  />
+                  {
+                    completed ? (
+                      <Result
+                        mode={!error ? 'success' : 'failure'}
+                        title={!error ? t('NEW_MEMBER_SUCCESS_TITLE') : t('NEW_MEMBER_ERROR_TITLE')}
+                      >
+                        <Typography
+                          sx={{ color: "secondary.dark" }}
+                          dangerouslySetInnerHTML={{
+                            __html: !error ? t('NEW_MEMBER_SUCCESS_DESC') : t('NEW_MEMBER_ERROR_DESC')
+                          }}
+                        />
+                      </Result>
+
+                    ) : (
+                      getStep(formikProps)
+                    )}
+                  <Grid
+                    container
+                    direction="row-reverse"
+                    rowSpacing={2}
+                    sx={{
+                      marginTop: '2rem',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}>
+                    {activeStep !== 0 && (
+                      <Grid item sm={2} xs={12}>
+                        <PrevButton
+                          disabled={sending}
+                          onClick={() => prevStep(formikProps)}
+                          title={'PREV'}
+                        />
+                      </Grid>
+                    )}
+                    <Grid item sm={2} xs={12} order={-1}>
+                      {activeStep !== MAX_STEP_NUMBER ? (
+                        <NextButton
+                          disabled={
+                            loading ||
+                            !formikProps.isValid ||
+                            activeStep === MAX_STEP_NUMBER
+                          }
+                          onClick={() => nextStep(formikProps)}
+                          title={'NEXT'}
+                        />
+                      ) : (
+                        <SubmitButton
+                          disabled={!formikProps.isValid || completed}
+                          onClick={() => handlePost(formikProps.values)}
+                        />
+                      )}
+                    </Grid>
                   </Grid>
-                )}
-                <Grid item sm={2} xs={12} order={-1}>
-                  {activeStep !== MAX_STEP_NUMBER ? (
-                    <NextButton
-                      disabled={
-                        loading ||
-                        !formikProps.isValid ||
-                        activeStep === MAX_STEP_NUMBER
-                      }
-                      onClick={() => nextStep(formikProps)}
-                      title={'NEXT'}
-                    />
-                  ) : (
-                    <SubmitButton
-                      disabled={!formikProps.isValid}
-                      onClick={() => handlePost()}
-                    />
-                  )}
-                </Grid>
-              </Grid>
+                </>
+              }
             </>
           )
         }}
       </Formik>
-      {data?.payment_data && (
-        <form ref={formTPV} action={data.endpoint} method="POST">
-          {Object.keys(data.payment_data).map((key) => (
-            <input
-              key={key}
-              type="hidden"
-              name={key}
-              value={data.payment_data[key]}
-            />
-          ))}
-        </form>
-      )}
-    </Container>
+      {
+        data?.payment_data && (
+          <form ref={formTPV} action={data.endpoint} method="POST">
+            {Object.keys(data.payment_data).map((key) => (
+              <input
+                key={key}
+                type="hidden"
+                name={key}
+                value={data.payment_data[key]}
+              />
+            ))}
+          </form>
+        )
+      }
+    </Container >
   )
 }
 
