@@ -553,7 +553,7 @@ const App = (props) => {
                         <GurbErrorContextProvider>
                           <GurbLoadingContextProvider>
                             <SummaryContextProvider>
-                              <NewMember {...props} />
+                              <NewMemberForm {...props} />
                             </SummaryContextProvider>
                           </GurbLoadingContextProvider>
                         </GurbErrorContextProvider>
