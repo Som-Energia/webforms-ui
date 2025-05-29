@@ -1,11 +1,10 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { textHeader4, textBody1 } from '../containers/Gurb/gurbTheme'
 import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserGurb, chooserGurbSelected } from '../containers/Gurb/gurbTheme'
+import { chooser, chooserSelected } from '../themes/commonStyles/'
 
 const Option = ({
   isSelected,
@@ -13,40 +12,45 @@ const Option = ({
   optionId,
   icon,
   textHeader,
-  textBody,
+  textBody
 }) => {
   return (
     <Box
       data-cy={optionId}
       sx={{
-        ...(isSelected ? chooserGurbSelected : chooserGurb),
-        height: '100%', 
+        ...(isSelected ? chooserSelected : chooser),
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
       }}
       onClick={() => {
         setSelected(optionId)
-      }}
-    >
+      }}>
       <Box>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '1rem',
-            justifyContent: 'space-between',
-          }}
-        >
+            marginBottom: '0.0rem',
+            justifyContent: 'space-between'
+          }}>
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
+              gap: '1rem'
+            }}>
             {icon}
-            <Typography sx={textHeader4}>{textHeader}</Typography>
+            <Typography
+              sx={{
+                ...'body.sm.regular',
+                fontWeight: 'bold',
+                textAlign: 'center',
+                width: '100%'
+              }}>
+              {textHeader}
+            </Typography>
           </Box>
           {isSelected ? (
             <Checkbox
@@ -56,7 +60,7 @@ const Option = ({
             />
           ) : null}
         </Box>
-        <Typography sx={textBody1}>{textBody}</Typography>
+        <Typography sx={'body.sm.regular'}>{textBody}</Typography>
       </Box>
     </Box>
   )
@@ -75,8 +79,7 @@ const Chooser = (props) => {
       container
       spacing={4}
       direction="row"
-      justifyContent="center"
-    >
+      justifyContent="center">
       {options.map((option, index) => (
         <Grid key={index} item sm={6} xs={12}>
           <Option
@@ -91,9 +94,8 @@ const Chooser = (props) => {
             <Box
               sx={{
                 marginTop: '1rem',
-                justifyItems: 'center',
-              }}
-            >
+                justifyItems: 'center'
+              }}>
               {option?.helper}
             </Box>
           )}

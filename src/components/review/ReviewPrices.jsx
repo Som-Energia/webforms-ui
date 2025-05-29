@@ -63,8 +63,8 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
       <Grid item xs={10} sm={11}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Typography variant="headline4.bold">
-              {t('GURB_REVIEW_PRICES_POWER_TITLE')}
+            <Typography variant="body.md.bold">
+              {t('REVIEW_PRICES_POWER_TITLE')}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -81,7 +81,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
                     }}>
                     <Grid container spacing={1}>
                       <Grid item xs={12}>
-                        <Typography variant="body.sm.regular">
+                        <Typography variant="body.sm.bold" color="primary.background">
                           {t(detail.title)}
                         </Typography>
                       </Grid>

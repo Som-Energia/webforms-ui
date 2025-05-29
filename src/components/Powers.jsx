@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { HelperText } from './InputField'
@@ -9,25 +8,15 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import GurbLoadingContext from '../context/GurbLoadingContext'
-
 import { iconRequirements } from '../themes/commonStyles'
-import { textHeader5 } from '../containers/Gurb/gurbTheme'
+
+import { useTheme } from '@mui/material/styles'
 
 const Powers = (props) => {
-  const {
-    activeStep,
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched
-  } = props
+  const { values, errors, touched, setFieldValue } = props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const theme = useTheme()
 
   const handlePowerQuestion = async (value) => {
     await setFieldValue('contract.power_type', value)
@@ -38,20 +27,22 @@ const Powers = (props) => {
     {
       id: 'power-lower-15kw',
       icon: <BoltIcon sx={iconRequirements} />,
-      textHeader: t('GURB_POWER_LOWER_15_HEADER')
+      textHeader: t('POWER_LOWER_15_HEADER')
     },
     {
       id: 'power-higher-15kw',
       icon: <BoltIcon sx={iconRequirements} />,
-      textHeader: t('GURB_POWER_HIGHER_15_HEADER')
+      textHeader: t('POWER_HIGHER_15_HEADER')
     }
   ]
 
-  console.log('values', values)
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={textHeader5}>{t('GURB_POWER_HELPER')}</Typography>
+        <Typography
+          sx={{ typography: 'body.sm.regular', color: 'secondary.dark' }}>
+          {t('POWER_HELPER')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <Chooser
@@ -65,6 +56,23 @@ const Powers = (props) => {
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item>
+              <HelperText
+                helperText={
+                  <a
+                    href={t('POWER_LOWER_15_HELPER_URL')}
+                    target="_blank"
+                    style={{
+                      color: theme.palette.secondary.dark,
+                      textDecoration: 'underline'
+                    }}
+                    rel="noopener noreferrer">
+                    {t('POWER_LOWER_15_HELPER')}
+                  </a>
+                }
+                iconHelper={true}
+              />
+            </Grid>
+            <Grid item>
               <PowerInputs
                 name="contract.power"
                 numInputs={2}
@@ -74,18 +82,26 @@ const Powers = (props) => {
                 touched={touched?.contract}
               />
             </Grid>
-            <Grid item>
-              <HelperText
-                helperText={t('GURB_POWER_LOWER_15_HELPER')}
-                iconHelper={true}
-              />
-            </Grid>
           </Grid>
         </Grid>
       ) : null}
       {values.contract.power_type === 'power-higher-15kw' ? (
         <Grid item xs={12}>
           <Grid container spacing={2}>
+            <Grid item>
+              <HelperText
+                helperText={
+                  <a
+                    href={t('POWER_HIGHER_15_HELPER_URL')}
+                    target="_blank"
+                    style={{ color: 'secondary.dark', textDecoration: 'underline' }}
+                    rel="noopener noreferrer">
+                    {t('POWER_HIGHER_15_HELPER')}
+                  </a>
+                }
+                iconHelper={true}
+              />
+            </Grid>
             <Grid item>
               <PowerInputs
                 name="contract.power"
@@ -94,12 +110,6 @@ const Powers = (props) => {
                 values={values?.contract?.power}
                 errors={errors?.contract?.power}
                 touched={touched?.contract}
-              />
-            </Grid>
-            <Grid item>
-              <HelperText
-                helperText={t('GURB_POWER_HIGHER_15_HELPER')}
-                iconHelper={true}
               />
             </Grid>
           </Grid>

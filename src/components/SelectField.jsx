@@ -18,29 +18,33 @@ const SelectField = (props) => {
     setFieldValue,
     setFieldError,
     setFieldTouched,
-    setErrors
+    setErrors,
+    disabled = false
   } = props
 
-  const [field, setField] = useState(value)
-
   const handleChange = (event) => {
-    setField(event.target.value)
+    setFieldValue(fieldName, event.target.value)
   }
-
-  useEffect(() => {
-    setFieldValue(fieldName, field)
-  }, [field])
 
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item xs={12} sm={6}>
         <InputTitle text={label} required={required} />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        sx={{
+          '&.MuiGrid-item': {
+            maxWidth: '100%'
+          }
+        }}>
         <Select
+          disabled={disabled}
           fullWidth
           id={`${fieldName}`}
-          value={field}
+          value={value}
           sx={{
             borderRadius: '8px'
           }}

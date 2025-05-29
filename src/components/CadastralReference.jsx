@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from '../../../components/InputField'
+import InputField from './InputField'
 
-import { checkCadastralReference } from '../../../services/api'
-import GurbLoadingContext from '../../../context/GurbLoadingContext'
+import { checkCadastralReference } from '../services/api'
+import GurbLoadingContext from '../context/GurbLoadingContext'
 
 const CadastralReference = (props) => {
   const {
@@ -15,13 +15,14 @@ const CadastralReference = (props) => {
     setFieldError,
     setFieldTouched
   } = props
+
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
 
   const handleCheckCadastralReferenceResponse = async () => {
     let status = undefined
     setLoading(true)
-    await checkCadastralReference(values.cadastral_reference)
+    await checkCadastralReference(values?.cadastral_reference)
       .then((response) => {
         status = response?.state
       })
@@ -47,7 +48,7 @@ const CadastralReference = (props) => {
     } else if (values?.cadastral_reference?.length > 19) {
       handleCheckCadastralReferenceResponse()
     }
-  }, [values.cadastral_reference, setFieldValue])
+  }, [values?.cadastral_reference, setFieldValue])
 
   const handleInputCadastralReference = (event) => {
     let value = event.target.value
@@ -78,7 +79,7 @@ const CadastralReference = (props) => {
       handleChange={handleInputCadastralReference}
       handleBlur={handleInputCadastralReferenceBlur}
       touched={touched?.cadastral_reference}
-      value={values.cadastral_reference}
+      value={values?.cadastral_reference}
       error={errors?.cadastral_reference || errors?.cadastral_reference_valid}
       isLoading={loading}
     />

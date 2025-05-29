@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- New joint contract and member form
 - Fix: verify member is not null in contributions form
 
 ## 3.0.0 2025-04-03

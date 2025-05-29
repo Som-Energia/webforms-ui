@@ -20,18 +20,6 @@ const languages = {
   gl_ES: 'Galego'
 }
 
-const how_meet_us_options = {
-  O1: t('HOW_MEET_US_OPTION_1'),
-  O2: t('HOW_MEET_US_OPTION_2'),
-  O3: t('HOW_MEET_US_OPTION_3'),
-  O4: t('HOW_MEET_US_OPTION_4'),
-  O5: t('HOW_MEET_US_OPTION_5'),
-  O6: t('HOW_MEET_US_OPTION_6'),
-  O7: t('HOW_MEET_US_OPTION_7'),
-  O8: t('HOW_MEET_US_OPTION_8'),
-  O9: t('HOW_MEET_US_OPTION_9')
-}
-
 const LegalMemberPersonalData = (props) => {
   const {
     values,
@@ -43,6 +31,18 @@ const LegalMemberPersonalData = (props) => {
     setErrors
   } = props
   const { i18n, t } = useTranslation()
+
+  const how_meet_us_options = {
+    O1: t('HOW_MEET_US_OPTION_1'),
+    O2: t('HOW_MEET_US_OPTION_2'),
+    O3: t('HOW_MEET_US_OPTION_3'),
+    O4: t('HOW_MEET_US_OPTION_4'),
+    O5: t('HOW_MEET_US_OPTION_5'),
+    O6: t('HOW_MEET_US_OPTION_6'),
+    O7: t('HOW_MEET_US_OPTION_7'),
+    O8: t('HOW_MEET_US_OPTION_8'),
+    O9: t('HOW_MEET_US_OPTION_9')
+  }
 
   const handleChange = useHandleChange(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)

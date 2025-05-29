@@ -1,0 +1,76 @@
+{
+  "has_member": "member-on",
+  "tariff": "periods",
+  "validAddress": {
+    "input": "montilivi",
+    "value": "Avinguda de Montilivi"
+  },
+  "validPhone": {
+    "code": "34",
+    "phone_number": "123456789"
+  },
+  "personalPhysicalData": {
+    "nif": "74865726J",
+    "is_physical": "true",
+    "name": "Tea",
+    "surname1": "Sam",
+    "surname2": "Trapella",
+    "gender": "GENDER_NON_BYNARY",
+    "birthdate": "10/10/2000",
+    "street": "Avinguda de Montilivi",
+    "number": "1",
+    "email": "somhi@somenergia.coop",
+    "email2": "somhi@somenergia.coop",
+    "phone": "652385827",
+    "phone_code": "+34",
+    "language": "ca_ES",
+    "how_meet_us": "O1"
+  },
+  "personalLegalData": {
+    "nif": "Q9213530J",
+    "is_physical": "false",
+    "proxynif": "41025869X",
+    "proxyname": "SomSL",
+    "name": "Tea",
+    "street": "Avinguda de Montilivi",
+    "number": "1",
+    "email": "somhi@somenergia.coop",
+    "email2": "somhi@somenergia.coop",
+    "phone": "652385827",
+    "phone_code": "+34",
+    "language": "ca_ES",
+    "how_meet_us": "O1",
+    "comercial_info_accepted": "true",
+    "legal_person_accepted": "true"
+  },
+  "selfConsumption": {
+    "have_installation": true,
+    "have_no_installation": false,
+    "cau": "ES 0353 5010 2861 5353 EE 0F A000",
+    "collective_installation": "individual",
+    "installation_power": "3.5",
+    "installation_type": "01",
+    "aux_services": "auxiliary-service-no",
+    "attachments": ["file.png"],
+    "technology": "b11"
+  },
+  "supplyPoint": {
+    "cups": "ES0122449351050857YA",
+    "has_light": "light-on",
+    "cnae_house": "9820",
+    "cnae_no_house": "0111"
+  },
+  "paymentData": {
+    "paymentMethod": "iban",
+    "iban": "ES77 1234 1234 1612 3456 7890",
+    "sepa_accepted": "true"
+  },
+  "supplyPointData": {
+    "street": "Avinguda de Montilivi",
+    "number": "1",
+    "floor": "1",
+    "door": "A",
+    "stairs": "",
+    "bloc": ""
+  }
+}

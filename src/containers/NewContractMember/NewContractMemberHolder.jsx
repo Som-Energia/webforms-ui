@@ -33,11 +33,6 @@ const newContractMemberHolder = (props) => {
     }
   ]
 
-  const handleCheckboxChange = (event) => {
-    let value = event.target.checked
-    setFieldValue('comercial_info_accepted', value)
-  }
-
   return (
 
     <Grid container spacing={2}>

@@ -13,7 +13,7 @@ import { checkIbanFormat } from '../../services/utils'
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
 import InputField from '../../components/InputField'
-import TermsDialog from '../Gurb/components/TermsDialog'
+import TermsDialog from '../../components/TermsDialog'
 
 const PaymentMethod = (props) => {
   const {
@@ -102,7 +102,7 @@ const PaymentMethod = (props) => {
       <Grid item xs={12}>
         <InputField
           name="iban_number"
-          textFieldName={t('GURB_IBAN_FIELD')}
+          textFieldName={t('IBAN_FIELD')}
           textFieldNameHelper={t('IBAN_EXPLANATION')}
           textFieldHelper={t('IBAN_EXAMPLE')}
           handleChange={handleInputIban}
