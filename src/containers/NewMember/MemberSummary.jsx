@@ -101,7 +101,7 @@ const MemberSummary = (props) => {
         step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
       },
       {
-        reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
+        reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
         step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
       },

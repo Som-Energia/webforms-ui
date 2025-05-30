@@ -119,9 +119,9 @@ const NewContractMemberSelfConsumptionData = (props) => {
       id: 'auxiliary-service-yes',
       icon: <BatteryIcon on={true} />,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
-      textBody: t(
-        'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
-      )
+      //textBody: t(
+      //  'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
+      //)
     },
     {
       id: 'auxiliary-service-no',
@@ -205,7 +205,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
           touched={touched?.self_consumption?.installation_power}
           value={values?.self_consumption?.installation_power}
           error={errors?.self_consumption?.installation_power}
-          textFieldHelper={t('HELP_POPOVER_POWER')}
+          //textFieldHelper={t('HELP_POPOVER_POWER')}
         />
       </Grid>
       <Grid item xs={12} sm={6}>

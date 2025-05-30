@@ -87,7 +87,7 @@ const ContractSummary = (props) => {
         title: t('GURB_REVIEW_SUPPLY_POINT_TITLE'),
         field: [
           {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CUPS'),
+            reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CUPS'),
             reviewValue: values?.cups,
             step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
