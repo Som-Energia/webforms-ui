@@ -725,5 +725,7 @@
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "Despois de 'ES' van 16 números",
     "MAINTENANCE_TEXT1": "Estamos realizando tarefas de mantemento",
     "MAINTENANCE_TEXT2": "Voltamos axiña",
-    "POWER_LOWER_15_HELPER_URL": "https://gl.support.somenergia.coop/article/1006-a-tarifa-2-0td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego"
+    "POWER_LOWER_15_HELPER_URL": "https://gl.support.somenergia.coop/article/1006-a-tarifa-2-0td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego",
+    "POWER_HIGHER_15_HELPER_URL": "https://gl.support.somenergia.coop/article/1109-horarios-e-periodos-da-tarifa-3-0td-e-as-tarifas-de-alta-tension-6-1td-6-2td-6-3td-e-6-4td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego",
+    "CUPS_HELPER_URL": "https://gl.support.somenergia.coop/article/417-que-e-o-cups?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego"
 }
