@@ -58,7 +58,7 @@ export default function LocationInput({
         getOptionLabel={(option) => (option.text ? option.text : option)}
         loading={loadingResults}
         loadingText={t('AUTOCOMPLETE_LOADING_TEXT')}
-        noOptionsText={t('AUTOCOMPLETE_WIHTOUT_OPTIONS')}
+        noOptionsText={t('AUTOCOMPLETE_WITHOUT_OPTIONS')}
         onChange={handleSuggestionSelected}
         renderInput={(params) => (
           <Grid container spacing={2}>
