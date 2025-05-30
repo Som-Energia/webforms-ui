@@ -12,7 +12,6 @@ import UploadFileIcon from '@mui/icons-material/UploadFile'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
 import RequiredTitle from './InputTitle'
-import { textBody1, textBody3, textSubtitle2 } from '../containers/Gurb/gurbTheme'
 import { uploadFile } from '../services/api'
 import Grid from '@mui/material/Grid'
 
@@ -145,7 +144,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
             </Alert>
           ) : filename && !drag ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography sx={{ ...textBody1, marginRight: '1rem' }}>
+              <Typography sx={{ variant: 'body.md.regular', marginRight: '1rem' }}>
                 {filename}
               </Typography>
               <IconButton
@@ -159,8 +158,8 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
           ) : (
             <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
           )}
-          <Typography sx={textBody3}>
-            <Link component="button" overlay onClick={handleLinkClick}>
+          <Typography sx={{ variant: 'body.md.regular'}}>
+            <Link variant="body.md.regular" component="button" overlay onClick={handleLinkClick}>
               {t('GURB_CLICK_HERE')}
             </Link>
             <input
@@ -171,7 +170,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
             />{' '}
             {t('GURB_DRAG_AND_DROP_HERE')}
           </Typography>
-          <Typography sx={textSubtitle2}>{t('GURB_TYPE_OF_FILES')}</Typography>
+          <Typography sx={{variant: 'body.xs.regular'}}>{t('GURB_TYPE_OF_FILES')}</Typography>
         </Card>
       </Grid>
     </Grid>

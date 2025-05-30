@@ -1,12 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
+
 import InputField from './InputField'
 
 import { checkCups } from '../services/api'
 import GurbLoadingContext from '../context/GurbLoadingContext'
-
-import { useTheme } from '@mui/material/styles'
 
 const CUPS = (props) => {
   const {
@@ -19,7 +20,6 @@ const CUPS = (props) => {
   } = props
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
-  const theme = useTheme()
 
   useEffect(() => {
     const cups = values.cups
@@ -61,16 +61,17 @@ const CUPS = (props) => {
       textFieldLabel={t('CUPS_LABEL')}
       textFieldName={t('CUPS_FIELD')}
       textFieldHelper={
-        <span>
+        <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
           {t('CUPS_HELPER_TEXT')}{' '}
-          <a
+          <Link
             href={t('CUPS_HELPER_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: theme.palette.secondary.main, textDecoration: 'underline' }}>
+            color="secondary"
+            >
             {t('CUPS_HELPER_LINK')}
-          </a>
-        </span>
+          </Link>
+        </Typography>
       }
       iconHelper={true}
       handleChange={handleInputCups}
