@@ -64,7 +64,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography variant="body.md.bold">
-              {t('REVIEW_PRICES_POWER_TITLE')}
+              {t('REVIEW_PRICES_TITLE')}
             </Typography>
           </Grid>
           <Grid item xs={12}>

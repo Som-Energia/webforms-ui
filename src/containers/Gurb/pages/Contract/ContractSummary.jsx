@@ -102,7 +102,7 @@ const ContractSummary = (props) => {
             step: CONTRACT_FORM_SUBSTEPS['SUPPLY_ADDRESS']
           },
           {
-            reviewLabel: t('GURB_REVIEW_SUPPLY_POINT_LABEL_CNAE'),
+            reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CNAE'),
             reviewValue: 'pendent field',
             step: CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
           }
