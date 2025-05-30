@@ -724,5 +724,8 @@
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "'ES' ondoren 16 zenbaki idatzi behar dira",
     "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "19. eta 20. karaktereetan 2 kontrol-letra idatzi behar dira",
     "MAINTENANCE_TEXT1": "Mantentze lanak egiten ari gara",
-    "MAINTENANCE_TEXT2": "Laster itzuliko gara"
+    "MAINTENANCE_TEXT2": "Laster itzuliko gara",
+    "POWER_LOWER_15_HELPER_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
+    "POWER_HIGHER_15_HELPER_URL": "https://eu.support.somenergia.coop/article/1110-ordutegi-tarteen-30td-tarifaren-eta-ordutegi-tarteen-goi-tentsioko-tarifen-ordutegiak",
+    "CUPS_HELPER_URL": "https://eu.support.somenergia.coop/article/442-cups-hornidura-puntuaren-kode-bateratua"
 }
