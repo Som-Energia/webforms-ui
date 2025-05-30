@@ -724,5 +724,6 @@
     "CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS": "Os caracteres 19 e 20 deben ser 2 letras de control",
     "CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS": "Despois de 'ES' van 16 números",
     "MAINTENANCE_TEXT1": "Estamos realizando tarefas de mantemento",
-    "MAINTENANCE_TEXT2": "Voltamos axiña"
+    "MAINTENANCE_TEXT2": "Voltamos axiña",
+    "POWER_LOWER_15_HELPER_URL": "https://gl.support.somenergia.coop/article/1006-a-tarifa-2-0td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego"
 }
