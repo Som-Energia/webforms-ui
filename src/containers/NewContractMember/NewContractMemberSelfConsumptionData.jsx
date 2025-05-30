@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 
@@ -165,13 +166,16 @@ const NewContractMemberSelfConsumptionData = (props) => {
           touched={touched?.self_consumption?.cau}
           error={errors?.self_consumption?.cau}
           helperText={
-            <a
-              href={t('SELFCONSUMPTION_CAU_HELP_URL')}
-              target="_blank"
-              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
-              rel="noopener noreferrer">
-              {t('SELFCONSUMPTION_CAU_HELP')}
-            </a>
+            <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
+              <Link
+                href={t('SELFCONSUMPTION_CAU_HELP_URL')}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="secondary"
+                >
+                {t('SELFCONSUMPTION_CAU_HELP')}
+              </Link>
+            </Typography>
           }
           cupsToMatch={
             props.values?.self_consumption?.collective_installation
@@ -246,13 +250,16 @@ const NewContractMemberSelfConsumptionData = (props) => {
         />
         <HelperText
           helperText={
-            <a
-              href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
-              target="_blank"
-              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
-              rel="noopener noreferrer">
-              {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
-            </a>
+            <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
+              <Link
+                href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="secondary"
+                >
+                {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
+              </Link>
+            </Typography>
           }
           iconHelper={true}
         />
