@@ -755,7 +755,7 @@
     "GURB_CLICK_HERE": "Haz click para subir",
     "GURB_DRAG_AND_DROP_HERE": "o arrastra y suelta aquí",
     "GURB_TYPE_OF_FILES": "PDF, JPG, JPEG (máx. 5MB)",
-    "GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED":"Con la aceptación de estas condiciones particulares, se obliga al pago de su consumo al precio que resulte de la aplicaciónn de la tarifa contratada.",
+    "GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED":"Con la aceptación de estas condiciones particulares, se obliga al pago de su consumo al precio que resulte de la aplicación de la tarifa contratada.",
     "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED":"Con la contratación del sservicio GURB me obligo al pago del coste de Adhessión único una vez verificada mi plaza en GURB Mataró y de la Cuota GURB que será de aplicaciónn a partir del primer día posterior a la fecha de activación.",
     "GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS":"He leído las <a href=\"{{generic_conditions_url}}\" >condiciones generales de contratación </a> y las <a href=\"{{specific_conditions_url}}\" >condiciones específicas del servicio GURB</a> de Som Energia.",
     "GURB_CHECK_SPECIFIC_CONDITIONS_URL":"",
