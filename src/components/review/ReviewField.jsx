@@ -8,6 +8,14 @@ import SummaryContext from '../../context/SummaryContext'
 const ReviewField = ({ label, value, step }) => {
   const { setSummaryField } = useContext(SummaryContext)
 
+  function htmlValue(value) {
+    return {__html: value};
+  }
+
+  function htmlField(value) {
+    return <span dangerouslySetInnerHTML={htmlValue(value)} />;
+  }
+
   return (
     <Box
       sx={{
@@ -46,7 +54,7 @@ const ReviewField = ({ label, value, step }) => {
               {value}
             </Link>
           ) : (
-            value
+            htmlField(value)
           )}
         </Typography>
       </Box>

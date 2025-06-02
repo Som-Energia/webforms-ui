@@ -965,7 +965,8 @@
     "IBAN_PAYMENT_QUESTION_OPTION": "Utilitza l'IBAN indicat abans",
     "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€",
     "NEW_MEMBER_SUMMARY_PROCESS": "Alta de nova persona sòcia",
-    "NEW_CONTRACT_SUMMARY_PROCESS": "Canvi de comercialitzadora canviant la persona titular",
+    "NEW_CONTRACT_OLD_HOLDER_SUMMARY_PROCESS": "Canvi de comercialitzadora mantenint la persona titular ",
+    "NEW_CONTRACT_NEW_HOLDER_SUMMARY_PROCESS": "Canvi de comercialitzadora canviant la persona titular ",
     "TECHNICAL_DATA_SUMMARY": "Dades técniques",
     "CURRENT": "Actual",
     "PURPOSE": "FINALITAT: Gestionar la contratació del servei de la llum i les tasques administrativas que se'n deriven; informar dels nostres productes i serveis energètics, inclós per mitjans electrònics.",
@@ -997,5 +998,17 @@
     "NEW_MEMBER_ERROR_TITLE": "Hi ha un error i no s'ha pogut realitzar l'alta de sòcia!",
     "NEW_MEMBER_SUCCESS_DESC": "Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés",
     "NEW_MEMBER_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisem la situació. Disculpa les molèsties",
-    "NEW_MEMBER_SUBMIT_LOADING": "Estem donant d'alta a la nova persona sòcia"
+    "NEW_MEMBER_SUBMIT_LOADING": "Estem donant d'alta a la nova persona sòcia",
+    "LINK_MEMBER_TITLE": "Identificació de la persona sòcia",
+    "LINK_MEMBER_NIF_TITLE": "Indica el NIF de la persona sòcia",
+    "LINK_MEMBER_NIF_HELPER": "Ha de tenir 8 números i una lletra, sense guionets ni punts (Ex: 12345678A)",
+    "LINK_MEMBER_NUMBER_TITLE": "Indica el número de sòci/a",
+    "LINK_MEMBER_NUMBER_HELPER": "El pots trobar a la teva Oficina Virtual o al correu de bevinguda que et vam enviar quan et vas associar.",
+    "NEW_HOLDER_TITLE": "La persona que serà titular del contracte és la mateixa que és sòcia de Som Energia?",
+    "NEW_HOLDER_SAME_TITLE": "Sí, la persona titular i la sòcia són la mateixa",
+    "NEW_HOLDER_SAME_HELPER": "La persona sòcia de Som Energia és la mateixa que la titular del contracte.",
+    "NEW_HOLDER_DIFFERENT_TITLE": "No, la persona sòcia i la titular no són la mateixa persona",
+    "NEW_HOLDER_DIFFERENT_HELPER": "La persona sòcia de Som Energia és una altre que la titular del contracte.",
+    "REVIEW_LINK_PERSON": "Persona sòcia vinculada:",
+    "REVIEW_CONTACT_OLD_HOLDER": "Segons les dades que tinguis a l'<a target='blank' href='https://oficinavirtual.somenergia.coop/'>Oficina Virtual</a>"
 }

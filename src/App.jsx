@@ -23,7 +23,6 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 
-
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
   const { t } = useTranslation()
@@ -49,7 +48,9 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
-  const NewContractMemberForm = lazy(() => import('./containers/NewContractMember/NewContractMember'))
+  const NewContractMemberForm = lazy(() =>
+    import('./containers/NewContractMember/NewContractMember')
+  )
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
 
@@ -114,16 +115,15 @@ const App = (props) => {
     return tmpProps
   }
 
-
   return (
     <>
-      <CssBaseline />
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
             <Suspense fallback={<Loading />}>
               <Router>
                 <ThemeProvider theme={webFormsTheme}>
+                  <CssBaseline />
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
 
@@ -131,7 +131,7 @@ const App = (props) => {
                       '/new-member',
                       '/:language/associat/',
                       '/:language/asociate/', // es, gl
-                      '/:language/bazkidetu/'
+                      '/:language/bazkidetu/',
                     ].map((path) => (
                       <Route
                         path={path}
@@ -177,7 +177,8 @@ const App = (props) => {
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
                             investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                            outsideAssignmentsJSON={outsideAssignmentsJSON}
+                          >
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
@@ -409,7 +410,8 @@ const App = (props) => {
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
                             investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                            outsideAssignmentsJSON={outsideAssignmentsJSON}
+                          >
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
@@ -422,7 +424,8 @@ const App = (props) => {
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
                             investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                            outsideAssignmentsJSON={outsideAssignmentsJSON}
+                          >
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
@@ -498,10 +501,11 @@ const App = (props) => {
                   </Routes>
                 </ThemeProvider>
                 <ThemeProvider theme={webFormsTheme}>
+                  <CssBaseline />
                   <Routes>
                     {[
                       '/:language/new-pagament-realitzat',
-                      '/:language/new-pago-realizado'
+                      '/:language/new-pago-realizado',
                     ].map((path) => (
                       <Route
                         path={path}
@@ -518,16 +522,22 @@ const App = (props) => {
 
                     {[
                       '/:language/new-pagament-cancellat',
-                      '/:language/new-pago-cancelado'
+                      '/:language/new-pago-cancelado',
                     ].map((path) => (
                       <Route
                         path={path}
                         element={
-                          <Result mode='failure' title={t('FAILURE_TEXT')} {...props}>
+                          <Result
+                            mode="failure"
+                            title={t('FAILURE_TEXT')}
+                            {...props}
+                          >
                             <Typography
-                              sx={{ color: "secondary.dark" }}
+                              sx={{ color: 'secondary.dark' }}
                               dangerouslySetInnerHTML={{
-                                __html: t('NEWMEMBER_KO_DESCRIPTION', { url: t('CONTACT_HELP_URL') })
+                                __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                                  url: t('CONTACT_HELP_URL'),
+                                }),
                               }}
                             />
                           </Result>

@@ -11,7 +11,7 @@ import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
 import SomStepper from '../../components/NewSomStepper'
 
-import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
+import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
@@ -26,6 +26,7 @@ import NewContractMemberHolder from './NewContractMemberHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import NewContractMemberPayment from './NewContractMemberPayment'
 import NewContractMemberSummary from './NewContractMemberSummary'
+import IdentifyMemberPersonalData from './IdentifyMemberPersonalData'
 
 import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations'
@@ -39,8 +40,9 @@ import newContractMemberHolderValidations from './newContractMemberHolderValidat
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
-
-const MAX_STEP_NUMBER = 11
+import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
+import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
+import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
@@ -53,6 +55,9 @@ const NewContractMemberForm = (props) => {
   const { summaryField, setSummaryField } = useContext(SummaryContext)
 
   const [activeStep, setActiveStep] = useState(0)
+  const [validationSteps, setValidationSteps] = useState([newContractMemberQuestionValidations])
+  const [formSteps, setFormSteps] = useState({})
+  const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -60,6 +65,8 @@ const NewContractMemberForm = (props) => {
 
   const initialValues = {
     cups: '',
+    has_member: undefined,
+    member_is_holder: undefined,
     has_light: undefined,
     previous_holder: undefined,
     voluntary_donation: undefined,
@@ -95,6 +102,10 @@ const NewContractMemberForm = (props) => {
       city: undefined,
       lat: undefined,
       long: undefined
+    },
+    member: {
+      number: '',
+      nif: ''
     },
     new_member: {
       nif: '',
@@ -148,26 +159,59 @@ const NewContractMemberForm = (props) => {
     comercial_info_accepted: false
   }
 
-  const validationSchemas = [
-    newContractMemberQuestionValidations,
-    memberIdentifierValidations,
-    memberPersonalDataValidations,
-    newContractMemberSupplyPointValidations,
-    newContractMemberSupplyPointDataValidations,
-    newContractMemberPowerValidations,
-    newContractMemberSelfConsumptionValidations,
-    newContractMemberSelfConsumptionDataValidations,
-    newContractMemberHolderValidations,
-    newContractMemberVoluntaryDonationValidations,
-    newContractMemberPaymentValidations,
-    newContractMemberSummaryValidations
-  ]
+  const validationSchemasLinkMember = [
+      newContractMemberQuestionValidations,
+      linkMemberValidations,
+      newContractMemberSupplyPointValidations,
+      newContractMemberSupplyPointDataValidations,
+      newContractMemberPowerValidations,
+      newContractMemberSelfConsumptionValidations,
+      newContractMemberSelfConsumptionDataValidations,
+      newContractMemberHolderValidations,
+      identifyMemberPersonalDataValidations,
+      newContractMemberVoluntaryDonationValidations,
+      newContractMemberPaymentValidations,
+      newContractMemberSummaryValidations
+    ]
+
+  const validationSchemasNewMember = [
+      newContractMemberQuestionValidations,
+      memberIdentifierValidations,
+      memberPersonalDataValidations,
+      newContractMemberSupplyPointValidations,
+      newContractMemberSupplyPointDataValidations,
+      newContractMemberPowerValidations,
+      newContractMemberSelfConsumptionValidations,
+      newContractMemberSelfConsumptionDataValidations,
+      newContractMemberHolderValidations,
+      newContractMemberVoluntaryDonationValidations,
+      newContractMemberPaymentValidations,
+      newContractMemberSummaryValidations
+    ]
+
+  const setValidationSchemaAndSteps = (has_member) => {
+    if (has_member == 'member-off')
+    {
+      setValidationSteps(validationSchemasNewMember)
+      setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
+      setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
+    } else if (has_member == 'member-on')
+    {
+      setValidationSteps(validationSchemasLinkMember)
+      setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
+      setMAX_STEP_NUMBER(Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
+    } else {
+      setValidationSteps(newContractMemberQuestionValidations)
+      setFormSteps({})
+      setMAX_STEP_NUMBER(11)
+    }
+  }
 
   const nextStep = (formikProps) => {
     let next
     if (
       summaryField !== undefined &&
-      activeStep !== NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+      activeStep !== formSteps['IDENTIFY_MEMBER']
     ) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
@@ -176,8 +220,15 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
-      activeStep === NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SELFCONSUMPTION'] &&
+      activeStep === formSteps['SELFCONSUMPTION'] &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
+    ) {
+      next = next + 1
+    }
+
+    if (
+      activeStep === formSteps['HOLDER_INFO'] &&
+      formikProps.values.member_is_holder === 'holder-member-yes'
     ) {
       next = next + 1
     }
@@ -189,11 +240,19 @@ const NewContractMemberForm = (props) => {
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
     if (
-      activeStep === NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO'] &&
+      activeStep === formSteps['HOLDER_INFO'] &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
       prev = prev - 1
     }
+
+    if (
+      activeStep === formSteps['DONATION'] &&
+      formikProps.values.member_is_holder === 'holder-member-yes'
+    ) {
+      prev = prev - 1
+    }
+
     setActiveStep(Math.max(0, prev))
   }
 
@@ -202,30 +261,58 @@ const NewContractMemberForm = (props) => {
   }
 
   const getStep = (props) => {
-    if (activeStep === 0) {
-      return <NewContractMemberQuestion formikProps={props} nextStep={nextStep} />
-    } else if (activeStep === 1) {
-      return <MemberIdentifier {...props} />
-    } else if (activeStep === 2) {
-      return <MemberPersonalData {...props} />
-    } else if (activeStep === 3) {
-      return <NewContractMemberSupplyPoint {...props} />
-    } else if (activeStep === 4) {
-      return <NewContractMemberSupplyPointData {...props} />
-    } else if (activeStep === 5) {
-      return <NewContractMemberPower {...props} />
-    } else if (activeStep === 6) {
-      return <NewContractMemberSelfConsumptionChooser {...props} />
-    } else if (activeStep === 7) {
-      return <NewContractMemberSelfConsumptionData {...props} />
-    } else if (activeStep === 8) {
-      return <NewContractMemberHolder {...props} />
-    } else if (activeStep === 9) {
-      return <NewContractMemberVoluntaryDonation {...props} />
-    } else if (activeStep === 10) {
-      return <NewContractMemberPayment {...props} />
+    const { values } = props
+
+    if (values?.has_member == 'member-off')
+    {
+      if (activeStep === 1) {
+        return <MemberIdentifier {...props} />
+      } else if (activeStep === 2) {
+        return <MemberPersonalData {...props} />
+      } else if (activeStep === 3) {
+        return <NewContractMemberSupplyPoint {...props} />
+      } else if (activeStep === 4) {
+        return <NewContractMemberSupplyPointData {...props} />
+      } else if (activeStep === 5) {
+        return <NewContractMemberPower {...props} />
+      } else if (activeStep === 6) {
+        return <NewContractMemberSelfConsumptionChooser {...props} />
+      } else if (activeStep === 7) {
+        return <NewContractMemberSelfConsumptionData {...props} />
+      } else if (activeStep === 8) {
+        return <NewContractMemberHolder {...props} />
+      } else if (activeStep === 9) {
+        return <NewContractMemberVoluntaryDonation {...props} />
+      } else if (activeStep === 10) {
+        return <NewContractMemberPayment {...props} />
+      } else {
+        return <NewContractMemberSummary {...props} />
+      }
     } else {
-      return <NewContractMemberSummary {...props} />
+
+      if (activeStep === 1) {
+        return <ApadrinatingDetails {...props} />
+      } else if (activeStep === 2) {
+        return <NewContractMemberSupplyPoint {...props} />
+      } else if (activeStep === 3) {
+        return <NewContractMemberSupplyPointData {...props} />
+      } else if (activeStep === 4) {
+        return <NewContractMemberPower {...props} />
+      } else if (activeStep === 5) {
+        return <NewContractMemberSelfConsumptionChooser {...props} />
+      } else if (activeStep === 6) {
+        return <NewContractMemberSelfConsumptionData {...props} />
+      } else if (activeStep === 7) {
+        return <NewContractMemberHolder {...props} />
+      } else if (activeStep === 8) {
+        return <IdentifyMemberPersonalData {...props} />
+      } else if (activeStep === 9) {
+        return <NewContractMemberVoluntaryDonation {...props} />
+      } else if (activeStep === 10) {
+        return <NewContractMemberPayment {...props} />
+      } else {
+        return <NewContractMemberSummary {...props} />
+      }
     }
   }
 
@@ -252,19 +339,19 @@ const NewContractMemberForm = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        validationSchema={validationSchemas[activeStep]}
+        validationSchema={validationSteps[activeStep]}
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) => {
           return (
             <>
               {activeStep == 0 ? (
-                getStep(formikProps)
+                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
               ) : (
                 <>
                   <SomStepper
-                    activeStep={activeStep - 1}  // because step 0 does not count
-                    steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
+                    activeStep={activeStep - 1} // because step 0 does not count
+                    steps={formSteps}
                   />
                   {getStep(formikProps)}
                   <Grid

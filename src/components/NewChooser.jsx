@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooser, chooserSelected } from '../themes/commonStyles/'
 
 const Option = ({
   isSelected,
@@ -14,6 +13,22 @@ const Option = ({
   textHeader,
   textBody
 }) => {
+
+  const chooser = {
+    paddingTop: '1.5rem',
+    paddingBottom: '2rem',
+    paddingLeft: '1.625rem',
+    paddingRight: '1.625rem',
+    borderRadius: '8px',
+    border: '1px solid #D9D9D9',
+    cursor: 'pointer'
+  }
+
+  const chooserSelected = {
+    ...chooser,
+    backgroundColor: 'secondary.extraLight'
+  }
+
   return (
     <Box
       data-cy={optionId}
@@ -46,7 +61,6 @@ const Option = ({
               sx={{
                 ...'body.sm.regular',
                 fontWeight: 'bold',
-                textAlign: 'center',
                 width: '100%'
               }}>
               {textHeader}

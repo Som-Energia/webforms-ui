@@ -8,6 +8,7 @@
 - Added cypress tests (new member form)
 - Added Result component to show the result of new member form (success and error)
 - Matomo track (new member form)
+- New contract form when link member
 - Fix: verify member is not null in contributions form
 
 ## 3.0.0 2025-04-03

@@ -10,13 +10,14 @@ import { iconRequirements } from '../../themes/commonStyles'
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 import Grid from '@mui/material/Grid'
 
-const NewContractMemberQuestion = ({ formikProps, nextStep }) => {
+const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaAndSteps}) => {
   const { values, setFieldValue } = formikProps
   const { t } = useTranslation()
 
   const handleMemberQuestion = (value) => {
     setFieldValue('has_member', value)
     nextStep(formikProps)
+    setValidationSchemaAndSteps(value)
   }
 
   const options = [
@@ -58,7 +59,7 @@ const NewContractMemberQuestion = ({ formikProps, nextStep }) => {
         <Chooser
           name="member-question"
           options={options}
-          value={values.has_member}
+          value={values?.has_member}
           handleChange={handleMemberQuestion}
         />
       </Grid>
