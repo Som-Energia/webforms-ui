@@ -19,7 +19,8 @@ export default function WebFormsTheme() {
       secondary: {
         main: '#C4C4C4',
         dark: '#8C8C8C',
-        light: '#D9D9D9'
+        light: '#D9D9D9',
+        extraLight: '#FAFAFA'
       },
       background: {
         first: '#CED5D0',
@@ -113,6 +114,13 @@ export default function WebFormsTheme() {
             'button.sm': 'button'
           }
         }
+      },
+      MuiCssBaseline: {
+        styleOverrides: {
+          a: {
+            color: '#C4C4C4',
+          },
+        },
       }
     }
   })
