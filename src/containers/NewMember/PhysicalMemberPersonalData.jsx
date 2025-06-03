@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
@@ -30,6 +31,7 @@ const PhysicalMemberPersonalData = (props) => {
   const { i18n, t } = useTranslation()
 
   const gender_options = {
+    '': t('SELECT_OPTION'),
     woman: t('GENDER_WOMAN'),
     man: t('GENDER_MAN'),
     genderfluid: t('GENDER_FLUID'),
@@ -39,6 +41,7 @@ const PhysicalMemberPersonalData = (props) => {
   }
 
   const how_meet_us_options = {
+    '': t('SELECT_OPTION'),
     O1: t('HOW_MEET_US_OPTION_1'),
     O2: t('HOW_MEET_US_OPTION_2'),
     O3: t('HOW_MEET_US_OPTION_3'),
