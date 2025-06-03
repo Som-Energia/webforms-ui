@@ -15,8 +15,7 @@ const newContractMemberSupplyPointDataValidations = Yup.object().shape({
       .oneOf([true], 'UNACCEPTED_FAIR_TITLE'),
   }),
   supply_point_address: Yup.object().shape({
-    street: Yup.string().required('NO_ADDRESS'),
-    number: Yup.number().required('NO_NUMBER')
+    street: Yup.string().required('NO_ADDRESS')
   }),
 });
 

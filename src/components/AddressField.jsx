@@ -113,7 +113,7 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.number}
           value={numberValue}
           error={errors[addressFieldName]?.number}
-          required={true}
+          required={false}
         />
       </Grid>
       <Grid item sm={2} xs={6}>
