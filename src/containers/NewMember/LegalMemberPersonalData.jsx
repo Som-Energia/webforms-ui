@@ -120,6 +120,7 @@ const LegalMemberPersonalData = (props) => {
               value={values?.new_member.email2}
               error={errors?.new_member?.email2}
               required={true}
+              onPaste={(e) => e.preventDefault()}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

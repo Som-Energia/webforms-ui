@@ -45,7 +45,8 @@ const InputField = React.memo(
     endAdornmentText = false,
     startAdornmentText = false,
     numInputs = false,
-    name = false
+    name = false,
+    onPaste = undefined
   }) => {
     const { t } = useTranslation()
 
@@ -83,6 +84,7 @@ const InputField = React.memo(
             }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
+            onPaste={onPaste}
             value={value}
             error={touched && error !== undefined}
           />
