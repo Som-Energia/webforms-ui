@@ -10,11 +10,16 @@ function NextButton(props) {
 
   return (
     <Button
-      sx={{ ...buttonGurbDark }}
+      sx={{
+        ...buttonGurbDark,
+        height: '40px',
+        padding: '13px 18px',
+        boxSizing: 'border-box'
+      }}
       type="button"
       data-cy="next"
       variant="contained"
-      endIcon={<ArrowForward />}
+      endIcon={<ArrowForward sx={{ fontSize: 20 }} />}
       disabled={disabled}
       onClick={onClick}>
       {t('GURB_NEXT')}
