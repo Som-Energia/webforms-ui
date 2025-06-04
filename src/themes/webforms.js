@@ -34,59 +34,73 @@ export default function WebFormsTheme() {
     typography: {
       display1: {
         fontSize: '96px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       display2: {
         fontSize: '64px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       headline1: {
         fontSize: '46px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       headline3: {
         fontSize: '28px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       'headline4.regular': {
         fontSize: '21px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       'headline4.bold': {
         fontSize: '21px',
-        fontWeight: '700'
+        fontWeight: '700',
+        letterSpacing: 0
       },
       'body.md.regular': {
         fontSize: '16px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       'input.label': {
         fontSize: '16px',
-        fontWeight: '500'
+        fontWeight: '500',
+        letterSpacing: 0
       },
       'body.md.bold': {
         fontSize: '16px',
-        fontWeight: '700'
+        fontWeight: '700',
+        letterSpacing: 0
       },
       'body.sm.regular': {
         fontSize: '14px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       'body.sm.bold': {
         fontSize: '14px',
-        fontWeight: '700'
+        fontWeight: '700',
+        letterSpacing: 0
       },
       'body.xs.regular': {
         fontSize: '12px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       },
       'body.xs.bold': {
         fontSize: '12px',
-        fontWeight: '700'
+        fontWeight: '700',
+        letterSpacing: 0
       },
       error: {
         fontSize: '12px',
-        fontWeight: '400'
+        fontWeight: '400',
+        letterSpacing: 0
       }
     },
     components: {
