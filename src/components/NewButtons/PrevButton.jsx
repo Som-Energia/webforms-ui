@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
 import ArrowBack from '@mui/icons-material/ArrowBack'
+import Box from '@mui/material/Box'
 
 import { buttonGurbLight, textBody1 } from '../../containers/Gurb/gurbTheme'
 
@@ -11,9 +12,18 @@ function PrevButton(props) {
 
   return (
     <Button
-      sx={{...buttonGurbLight}}
+      sx={{
+        ...buttonGurbLight,
+        height: '40px',
+        padding: '13px 18px',
+        boxSizing: 'border-box'
+      }}
       data-cy="prev"
-      startIcon={<ArrowBack />}
+      startIcon={
+        <Box sx={{ width: 20, height: 20, display: 'flex', alignItems: 'center' }}>
+          <ArrowBack style={{ width: '100%', height: '100%' }} />
+        </Box>
+      }
       disabled={disabled}
       onClick={onClick}>
       {t('GURB_PREV')}
