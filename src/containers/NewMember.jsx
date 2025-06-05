@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography'
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
-import SomStepper from '../components/SomStepper'
+import SomStepper from '../components/NewSomStepper'
 
 import { newNormalizeMember } from '../services/utils'
 import { member } from '../services/api'
