@@ -11,16 +11,16 @@ const SomStepper = (props) => {
 
   return (
     <>
-      <Typography
-        color='secondary'
-      >
-        {t('Pas') + ' ' + currentStep + '/' + numberSteps }
+      <Typography color="secondary">
+        {t('Pas') + ' ' + currentStep + '/' + numberSteps}
       </Typography>
-      <LinearProgress 
-        variant="determinate" 
+      <LinearProgress
+        variant="determinate"
         value={(currentStep / numberSteps) * 100}
-        color='secondary'
+        color="secondary"
         sx={{
+          height: 6,
+          borderRadius: '100px',
           backgroundColor: 'secondary',
           '& .MuiLinearProgress-bar': {
             backgroundColor: 'primary2.main'
