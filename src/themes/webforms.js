@@ -129,14 +129,8 @@ export default function WebFormsTheme() {
           }
         }
       },
-      MuiCssBaseline: {
-        styleOverrides: {
-          a: {
-            color: '#C4C4C4',
-          },
-        },
-      }
-    }
+    },
+
   })
   return responsiveFontSizes(theme)
 }
