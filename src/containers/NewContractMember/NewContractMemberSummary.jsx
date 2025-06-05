@@ -223,10 +223,7 @@ const NewContractMemberSummary = (props) => {
           },
           {
             reviewLabel: t('FARE'),
-            reviewValue: values?.contract.tariff_mode,
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-              : null
+            reviewValue: values?.contract.tariff_mode
           },
           {
             reviewLabel: t('POWER'),
@@ -272,10 +269,7 @@ const NewContractMemberSummary = (props) => {
         field: [
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA'),
-            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY'),
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['PAYMENT_INFO']
-              : null
+            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
           },
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
@@ -556,7 +550,11 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <span style={{ position: 'relative', display: 'inline-block' }}>
+            <span
+              style={{
+                position: 'relattiene que tener: ive',
+                display: 'inline-block'
+              }}>
               <label
                 style={{ display: 'inline' }}
                 dangerouslySetInnerHTML={{
