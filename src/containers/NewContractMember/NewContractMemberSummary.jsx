@@ -322,10 +322,7 @@ const NewContractMemberSummary = (props) => {
         field: [
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA'),
-            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY'),
-            step: showReviewLinks
-              ? formSteps['PAYMENT_INFO']
-              : null
+            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
           },
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
@@ -606,7 +603,11 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <span style={{ position: 'relative', display: 'inline-block' }}>
+            <span
+              style={{
+                position: 'relattiene que tener: ive',
+                display: 'inline-block'
+              }}>
               <label
                 style={{ display: 'inline' }}
                 dangerouslySetInnerHTML={{
