@@ -427,11 +427,9 @@ const NewContractMemberSummary = (props) => {
           </Grid>
         </Grid>
       )}
-
       <Grid item xs={12}>
         <Divider sx={{ my: 2 }} />
       </Grid>
-
       <Grid item xs={12}>
         <Typography variant="body2">
           {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
@@ -455,7 +453,6 @@ const NewContractMemberSummary = (props) => {
           {t('RIGHTS')}
         </Typography>
       </Grid>
-
       <Grid item xs={12}>
         <FormControlLabel
           control={
@@ -466,17 +463,27 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL')
-                })
-              }}
-            />
+            <span style={{ display: 'inline-block' }}>
+              <label
+                style={{ display: 'inline' }}
+                dangerouslySetInnerHTML={{
+                  __html: t('ACCEPT_PRIVACY_POLICY', {
+                    url: t('ACCEPT_PRIVACY_POLICY_URL')
+                  })
+                }}
+              />
+              <span
+                style={{
+                  color: '#ff632b',
+                  marginLeft: 2,
+                  fontWeight: 'bold'
+                }}>
+                *
+              </span>
+            </span>
           }
         />
       </Grid>
-
       <Grid item xs={12}>
         <FormControlLabel
           control={
@@ -494,19 +501,38 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('NEW_GENERAL_TERMS', {
-                  url: t('GENERAL_TERMS_URL')
-                })
-              }}
-            />
+            <span style={{ display: 'inline-block' }}>
+              <label
+                style={{ display: 'inline' }}
+                dangerouslySetInnerHTML={{
+                  __html: t('NEW_GENERAL_TERMS', {
+                    url: t('GENERAL_TERMS_URL')
+                  })
+                }}
+              />
+              <span
+                style={{
+                  color: '#ff632b',
+                  marginLeft: 2,
+                  fontWeight: 'bold'
+                }}>
+                *
+              </span>
+            </span>
           }
         />
       </Grid>
       <Grid item xs={12}>
         <TermsDialog
-          title={t('CONTRACTUAL_PACKAGE')}
+          title={
+            <span>
+              {t('CONTRACTUAL_PACKAGE')}
+              <span
+                style={{ color: '#ff632b', marginLeft: 4, fontWeight: 'bold' }}>
+                *
+              </span>
+            </span>
+          }
           open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
@@ -520,7 +546,6 @@ const NewContractMemberSummary = (props) => {
           />
         </TermsDialog>
       </Grid>
-
       <Grid item xs={12}>
         <FormControlLabel
           control={
@@ -531,13 +556,24 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_STATUTES', {
-                  url: t('ACCEPT_STATUTES_URL')
-                })
-              }}
-            />
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              <label
+                style={{ display: 'inline' }}
+                dangerouslySetInnerHTML={{
+                  __html: t('ACCEPT_STATUTES', {
+                    url: t('ACCEPT_STATUTES_URL')
+                  })
+                }}
+              />
+              <span
+                style={{
+                  color: '#ff632b',
+                  marginLeft: 2,
+                  fontWeight: 'bold'
+                }}>
+                *
+              </span>
+            </span>
           }
         />
       </Grid>

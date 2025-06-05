@@ -127,8 +127,9 @@ export default function WebFormsTheme() {
             'button.sm': 'button'
           }
         }
-      }
-    }
+      },
+    },
+
   })
   return responsiveFontSizes(theme)
 }
