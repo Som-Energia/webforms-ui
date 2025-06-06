@@ -167,6 +167,7 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.number`}
           textFieldName={t('NUMBER')}
+          textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
           handleChange={handleChangeNumber}
           touched={touched[addressFieldName]?.number}
           value={numberValue}
