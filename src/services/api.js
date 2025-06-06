@@ -291,6 +291,16 @@ export const contract = async (data) => {
   })
 }
 
+export const newContract = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/contract__WM`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
+}
+
 export const modify_tariff = async (data) => {
   return axios({
     method: 'POST',
