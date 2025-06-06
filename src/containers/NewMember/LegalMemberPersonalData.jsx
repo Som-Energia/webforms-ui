@@ -26,9 +26,7 @@ const LegalMemberPersonalData = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldError,
     setFieldTouched,
-    setErrors
   } = props
   const { i18n, t } = useTranslation()
 
@@ -46,12 +44,6 @@ const LegalMemberPersonalData = (props) => {
 
   const handleChange = useHandleChange(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
-
-  const handleCheckboxPrivacyPolicy = (event) => {
-    let value = event.target.checked
-    setFieldValue('new_member.privacy_policy_accepted', value)
-    setFieldTouched('new_member.privacy_policy_accepted', true)
-  }
 
   const handleCheckboxLegalPerson = (event) => {
     let value = event.target.checked

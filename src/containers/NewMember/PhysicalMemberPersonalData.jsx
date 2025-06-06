@@ -25,9 +25,7 @@ const PhysicalMemberPersonalData = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldError,
     setFieldTouched,
-    setErrors
   } = props
   const { i18n, t } = useTranslation()
 
@@ -60,13 +58,7 @@ const PhysicalMemberPersonalData = (props) => {
   function handleChangeBirthdate(value) {
     setFieldValue('new_member.birthdate', value)
   }
-
-  const handleCheckboxChange = (event) => {
-    let value = event.target.checked
-    setFieldValue('new_member.privacy_policy_accepted', value)
-    setFieldTouched('new_member.privacy_policy_accepted', true)
-  }
-
+  
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>

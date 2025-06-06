@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
-import { useHandleChange, useHandleChangeInteger } from '../hooks/useHandleChange'
+import {
+  useHandleChange,
+  useHandleChangeInteger
+} from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
@@ -13,14 +16,10 @@ const AddressField = (props) => {
   const {
     addressFieldName = 'address',
     addressLabel,
-    activeStep,
     values,
     errors,
     touched,
     setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched,
     setValues
   } = props
 
