@@ -28,18 +28,17 @@ const AddressField = (props) => {
   const handleChange = useHandleChange(setFieldValue)
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
-  const [addressValue, setAddressValue] = useState(values[addressFieldName] || {})
-  const [numberValue, setNumberValue] = useState(values[addressFieldName]?.number || '')
-  const [postalCodeValue, setPostalCodeValue] = useState(values[addressFieldName]?.postal_code || '')
+  const [addressValue, setAddressValue] = useState(
+    values[addressFieldName] || {}
+  )
+  const [numberValue, setNumberValue] = useState(
+    values[addressFieldName]?.number || ''
+  )
+  const [postalCodeValue, setPostalCodeValue] = useState(
+    values[addressFieldName]?.postal_code || ''
+  )
   const sessionTokenRef = useRef()
 
-  useEffect(() => {
-    if (addressValue?.id) {
-      updateAddressValues()
-    } else {
-      cleanAddress()
-    }
-  }, [addressValue])
 
   useEffect(() => {
     setPostalCodeValue(values[addressFieldName]?.postal_code || '')
@@ -178,7 +177,7 @@ const AddressField = (props) => {
         <InputField
           name={`${addressFieldName}.door`}
           textFieldName={t('DOOR')}
-          handleChange={handleChangeInteger}
+          handleChange={handleChange}
           touched={touched[addressFieldName]?.door}
           value={values[addressFieldName]?.door}
           error={errors[addressFieldName]?.door}
