@@ -24,9 +24,7 @@ const PhysicalMemberPersonalData = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldError,
     setFieldTouched,
-    setErrors
   } = props
   const { i18n, t } = useTranslation()
 

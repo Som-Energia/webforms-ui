@@ -401,8 +401,8 @@
     "PRIVACY_POLICY_SUPLYPOINT": "Declaro responsablemente que yo (o la entidad a la que represento) dispongo de un justo título sobre la vivienda o local (contrato de arrendamiento, escritura de propiedad u otro) relacionado con el punto de suministro y / o CUPS de referencia del cual soy usuario efectivo, asumiendo toda la responsabilidad en relación con la veracidad de los datos aportados. Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa del mencionado justo título cuando me sea requerida.",
     "PRIVACY_POLICY_LEGAL_PERSON": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica o entidad que represento (incluidas comunidades de propietarios, empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados . Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la entidad / persona jurídica cuando me sea requerida (escritura de poderes, certificado de acta de la junta de propietarios, etc .). En todo caso, la persona jurídica o entidad titular del contrato de suministro seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier cambio en la gestión o incumplimiento de las condiciones contractuales.",
     "PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER": "Declaro responsablemente que dispongo de los poderes o autorización suficientes para actuar en nombre de la persona jurídica que represento (incluidas  empresas, asociaciones, administraciones públicas, etc.), asumiendo toda la responsabilidad relacionada con la veracidad de los datos aportados. Asimismo, declaro que estoy en disposición de aportar la documentación acreditativa de la autorización otorgada para actuar en nombre de la persona jurídica cuando me sea requerida (escritura de poderes, etc.). En todo caso, la persona jurídica seguirá siendo la responsable, a efectos legales, ante Som Energia para cualquier aspecto relacionado con su condición de persona socia.",
-    "FAIR_TITLE_LABEL": "Declaración responsable del justo título",
-    "FAIR_TITLE": "Declaración responsable del justo título",
+    "FAIR_TITLE_LABEL": "Declaración responsable del justo título.",
+    "FAIR_TITLE": "Declaración responsable del justo título.",
     "LEGAL_PERSON_TITLE_LABEL": "Declaración responsable de la representante de la persona jurídica",
     "LEGAL_PERSON_TITLE": "Declaración responsable de la representante de la persona jurídica",
     "ACCEPT_LEGAL_PERSON": "No has aceptado la declaración",
@@ -869,9 +869,10 @@
     "NEW_GENERAL_TERMS": "He leído y acepto las condiciones de contratación de Som Energia y con la aceptación de las mismas, me obligo al pago del consumo al precio que resulte de la aplicación de la tarifa contratada",
     "ACCEPT_STATUTES": "He leído y acepto los <a target=\"_blank\" href={{url}}> estatutos</a> de Som Energia y con la aceptación de los mismos, me obligo al pado de los cien euros (100.-€) que resulta de la aportación social obligatoria al capital de Som Energia.",
     "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatutos_CAST.pdf",
-    "NEW_MEMBER_SUCCESS_TITLE": "Ya te has asociado a Som Energia!",
-    "NEW_MEMBER_ERROR_TITLE": "Hay un error y no se ha podido realizar el alta de socia!",
-    "NEW_MEMBER_SUCCESS_DESC": "Recibiras un correo con tu número de socia una vez acabe todo el proceso",
-    "NEW_MEMBER_ERROR_DESC": "Por favor, intentalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la siituación. Disculpa les molestias",
-    "NEW_MEMBER_SUBMIT_LOADING": "Estamos dando de alta a la nueva persona socia"
+    "NEW_MEMBER_SUCCESS_TITLE":"Ya te has asociado a Som Energia!",
+    "NEW_MEMBER_ERROR_TITLE":"Hay un error y no se ha podido realizar el alta de socia!",
+    "NEW_MEMBER_SUCCESS_DESC":"Recibiras un correo con tu número de socia una vez acabe todo el proceso",
+    "NEW_MEMBER_ERROR_DESC":"Por favor, intentalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la siituación. Disculpa les molestias",
+    "NEW_MEMBER_SUBMIT_LOADING":"Estamos dando de alta a la nueva persona socia",
+    "POSTAL_CODE": "Código postal"
 }

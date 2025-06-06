@@ -3,7 +3,6 @@ import { searchPlace } from '../../../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 
 import { textHeader4, textField } from '../gurbTheme'
