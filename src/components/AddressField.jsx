@@ -34,12 +34,12 @@ const AddressField = (props) => {
   const sessionTokenRef = useRef()
 
   useEffect(() => {
-    if (addressValue?.id && numberValue) {
+    if (addressValue?.id) {
       updateAddressValues()
-    } else if (!addressValue || !numberValue) {
+    } else {
       cleanAddress()
     }
-  }, [addressValue, numberValue])
+  }, [addressValue])
 
   useEffect(() => {
     setPostalCodeValue(values[addressFieldName]?.postal_code || '')
