@@ -46,7 +46,7 @@ import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataV
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language } = useParams()
+  const { language, tariff } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -132,7 +132,7 @@ const NewContractMemberForm = (props) => {
       legal_person_accepted: false
     },
     contract: {
-      tariff_mode: '',
+      tariff_mode: tariff,
       power_type: '',
       power: {
         power1: '',
@@ -289,7 +289,6 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSummary {...props} />
       }
     } else {
-
       if (activeStep === 1) {
         return <ApadrinatingDetails {...props} />
       } else if (activeStep === 2) {
