@@ -50,7 +50,9 @@ const AddressField = (props) => {
       const postalCodeComponent = place.addressComponents.find((component) =>
         component.types.includes('postal_code')
       )
-      const municipis = await getMunicipisByPostalCode(postalCodeComponent?.longText)
+      const municipis = await getMunicipisByPostalCode(
+        postalCodeComponent?.longText
+      )
       const streetComponent = place.addressComponents.find((component) =>
         component.types.includes('route')
       )
@@ -74,7 +76,8 @@ const AddressField = (props) => {
 
   const cleanAddress = () => {
     setFieldValue(addressFieldName, {
-      has_different_address: values[addressFieldName]?.has_different_address || false,
+      has_different_address:
+        values[addressFieldName]?.has_different_address || false,
       street: '',
       number: '',
       postal_code: '',
@@ -84,18 +87,19 @@ const AddressField = (props) => {
   }
 
   const handleAddressChange = async (value) => {
-    setAddressValue(value || {})
-
+    setAddressValue(value)
     if (!value || !value.id) {
       // Is a text is written, and no suggestion selected, the text is saved as street
-      setFieldValue(`${addressFieldName}.street`, value?.street || value?.text || '')
-      setFieldValue(`${addressFieldName}.postal_code`, '')
+      setFieldValue(
+        `${addressFieldName}.street`,
+        value?.street || value?.text || ''
+      )
       return
     }
 
     try {
       // When a suggestion is selected, only street is written
-       const place = await getPlaceDetails(value.id, sessionTokenRef)
+      const place = await getPlaceDetails(value.id, sessionTokenRef)
 
       const streetComponent = place.addressComponents.find((component) =>
         component.types.includes('route')
@@ -104,11 +108,20 @@ const AddressField = (props) => {
         component.types.includes('postal_code')
       )
 
-      setFieldValue(`${addressFieldName}.street`, streetComponent?.longText || '')
-      setFieldValue(`${addressFieldName}.postal_code`, postalCodeComponent?.longText || '')
+      setFieldValue(
+        `${addressFieldName}.street`,
+        streetComponent?.longText || ''
+      )
+      setFieldValue(
+        `${addressFieldName}.postal_code`,
+        postalCodeComponent?.longText || ''
+      )
     } catch (error) {
       console.error('Error fetching place details:', error)
-      setFieldValue(`${addressFieldName}.street`, value.text || value.street || '')
+      setFieldValue(
+        `${addressFieldName}.street`,
+        value.text || value.street || ''
+      )
       setFieldValue(`${addressFieldName}.postal_code`, '')
     }
   }
