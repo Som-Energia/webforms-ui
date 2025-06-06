@@ -59,7 +59,11 @@ const contractProcess = (has_light, same_holder) => {
 // TODO: test this
 export const newNormalizeContract = (data) => {
   const finalContract = {
-    linked_member: 'already_member', // data.member.link_member ? 'sponsored' : 'new_member', // CHANGE THIS!!!
+    linked_member: data.member.link_member
+      ? data.member_is_holder == 'holder-member-yes'
+        ? 'already_member'
+        : 'sponsored'
+      : 'new_member',
     contract_info: {
       cups: data.cups,
       tariff:
@@ -75,6 +79,7 @@ export const newNormalizeContract = (data) => {
       )
     },
     iban: data.new_member.iban, // TODO: new_member warning!
+    sepa_accepted: data.new_member.sepa_accepted, // TODO: new_member warning!
     member_payment_type:
       data.new_member.payment_method == 'credit_card' ? 'tpv' : 'remesa', // TODO: new_member warning!
     donation: data.voluntary_donation,
@@ -94,8 +99,6 @@ export const newNormalizeContract = (data) => {
     finalContract['contract_owner']['address'] = normalizeAddress(
       data.supply_point_address
     )
-    finalContract['contract_owner']['privacy_conditions'] =
-      data.privacy_policy_accepted
   }
 
   if (data.member.link_member) {
