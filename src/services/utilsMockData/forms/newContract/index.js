@@ -646,6 +646,98 @@ const cadastralReference = {
   }
 }
 
+const paymentTPV = {
+  entryValues: {
+    cups: random_cups,
+    has_member: 'member-on',
+    member_is_holder: 'holder-member-yes',
+    has_light: 'light-on',
+    previous_holder: 'previous-holder-yes',
+    voluntary_donation: false,
+    cadastral_reference_valid: true,
+    supply_point: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true
+    },
+    supply_point_address: address.entryValues,
+    address: {
+      street: '',
+      number: '',
+      floor: '',
+      door: '',
+      stairs: '',
+      bloc: '',
+      postal_code: ''
+    },
+    member: {
+      number: random_number,
+      nif: random_nif,
+      link_member: true
+    },
+    new_member: {
+      nif: '',
+      become_member: false,
+      person_type: '',
+      proxynif_valid: false,
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      surname1: '',
+      surname2: '',
+      gender: '',
+      email: '',
+      email2: '',
+      phone: '',
+      phone_code: '+34',
+      phone_valid: false,
+      language: 'es_ES',
+      referral_source: '',
+      payment_method: 'credit_card',
+      sepa_accepted: true,
+      iban: random_iban,
+      legal_person_accepted: false,
+      iban_valid: true
+    },
+    contract: {
+      tariff_mode: 'periods',
+      power_type: 'power-lower-15kw',
+      power: {
+        power1: '2',
+        power2: '2'
+      }
+    },
+    has_selfconsumption: 'selfconsumption-off',
+    self_consumption: {
+      cau_error: false,
+      installation_type: '',
+      technology: 'b11',
+      installation_power: ''
+    },
+    privacy_policy_accepted: true,
+    generic_conditions_accepted: true,
+    statutes_accepted: true,
+    comercial_info_accepted: false,
+    is_client: false
+  },
+  normalizedData: {
+    linked_member: 'already_member',
+    contract_info: contract_info_c1_20TD,
+    member_payment_type: 'tpv',
+    donation: false,
+    iban: random_iban,
+    sepa_accepted: true,
+    linked_member_info: {
+      vat: random_nif,
+      code: random_number
+    },
+    privacy_conditions: true,
+    general_contract_terms_accepted: true,
+    statutes_accepted: true
+  }
+}
+
 const newContractCases = {
   // Member cases
   alreadyMember: alreadyMember,
@@ -656,7 +748,10 @@ const newContractCases = {
   A3_indexed: A3_indexed,
   C2_30TD: C2_30TD,
   selfconsumption: withSelfconsumption,
-  cadastraslReference: cadastralReference
+  cadastraslReference: cadastralReference,
+  // Payment cases
+  // paymentIBAN: base cases for all previous cases
+  paymentTPV: paymentTPV
 }
 
 export default newContractCases

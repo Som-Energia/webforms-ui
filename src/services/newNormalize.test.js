@@ -82,4 +82,10 @@ describe('Check Contract new Form (normalize function)', () => {
     ).toStrictEqual(newContractCases.cadastraslReference.normalizedData)
   })
 
+  test('Normalize Contract data (tpv)', () => {
+    expect(
+      newNormalizeContract(newContractCases.paymentTPV.entryValues)
+    ).toStrictEqual(newContractCases.paymentTPV.normalizedData)
+  })
+
 })
