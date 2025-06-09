@@ -98,7 +98,7 @@ export default function WebFormsTheme() {
         letterSpacing: 0
       },
       error: {
-        fontSize: '12px',
+        fontSize: '14px',
         fontWeight: '400',
         letterSpacing: 0
       }
