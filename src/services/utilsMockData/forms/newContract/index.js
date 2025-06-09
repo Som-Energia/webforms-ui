@@ -16,7 +16,7 @@ const contract_info_c1_20TD = {
   cups: random_cups,
   cups_address: address.normalizedData,
   is_indexed: false,
-  powers: ['2', '2'],
+  powers: ['2000', '2000'],
   process: 'C1',
   tariff: '2.0TD'
 }
@@ -26,7 +26,7 @@ const contract_info_a3_indexed = {
   cups: random_cups,
   cups_address: address.normalizedData,
   is_indexed: true,
-  powers: ['2', '2'],
+  powers: ['2100', '2500'],
   process: 'A3',
   tariff: '2.0TD'
 }
@@ -36,7 +36,7 @@ const contract_info_c2_30TD = {
   cups: random_cups,
   cups_address: address.normalizedData,
   is_indexed: false,
-  powers: ['10', '12', '13', '14', '14', '16'],
+  powers: ['10000', '12000', '13000', '14000', '14000', '16000'],
   process: 'C2',
   tariff: '3.0TD'
 }
@@ -239,8 +239,8 @@ const A3_indexed = {
       tariff_mode: 'indexed',
       power_type: 'power-lower-15kw',
       power: {
-        power1: '2',
-        power2: '2'
+        power1: '2.1',
+        power2: '2.5'
       }
     },
     has_selfconsumption: 'selfconsumption-off',
@@ -425,13 +425,7 @@ const cadastralReference = {
   normalizedData: {
     linked_member: 'already_member',
     contract_info: {
-      cups: random_cups,
-      tariff: '2.0TD',
-      is_indexed: false,
-      powers: ['2', '2'],
-      cups_address: address.normalizedData,
-      cnae: '9820',
-      process: 'C1',
+      ...contract_info_c1_20TD,
       cups_cadastral_reference: '8277124 YR8968U 5098 BP'
     },
     iban: random_iban,
