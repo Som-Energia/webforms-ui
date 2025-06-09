@@ -242,11 +242,115 @@ const newMember = {
   }
 }
 
+const indexed_A3 = {
+  entryValues: {
+    cups: 'ES0031405905577001DH0F',
+    has_member: 'member-on',
+    member_is_holder: 'holder-member-yes',
+    has_light: 'light-off',
+    previous_holder: 'previous-holder-yes',
+    voluntary_donation: true,
+    cadastral_reference_valid: true,
+    supply_point: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true
+    },
+    supply_point_address: address.entryValues,
+    address: {
+      street: '',
+      number: '',
+      floor: '',
+      door: '',
+      stairs: '',
+      bloc: '',
+      postal_code: ''
+    },
+    member: {
+      number: '12345',
+      nif: '12345678P',
+      link_member: true
+    },
+    new_member: {
+      nif: '',
+      become_member: false,
+      person_type: '',
+      proxynif_valid: false,
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      surname1: '',
+      surname2: '',
+      gender: '',
+      email: '',
+      email2: '',
+      phone: '',
+      phone_code: '+34',
+      phone_valid: false,
+      language: 'es_ES',
+      referral_source: '',
+      payment_method: 'iban',
+      sepa_accepted: true,
+      iban: 'ES12 3456 7891 2345 6789 1234',
+      legal_person_accepted: false,
+      iban_valid: true
+    },
+    contract: {
+      tariff_mode: 'indexed',
+      power_type: 'power-lower-15kw',
+      power: {
+        power1: '2',
+        power2: '2'
+      }
+    },
+    has_selfconsumption: 'selfconsumption-off',
+    self_consumption: {
+      cau_error: false,
+      installation_type: '',
+      technology: 'b11',
+      installation_power: ''
+    },
+    privacy_policy_accepted: true,
+    generic_conditions_accepted: true,
+    statutes_accepted: true,
+    comercial_info_accepted: false,
+    is_client: false
+  },
+  normalizedData: {
+    contract_info: {
+      cnae: '9820',
+      cups: 'ES0031405905577001DH0F',
+      cups_address: address.normalizedData,
+      cups_cadastral_reference: undefined,
+      is_indexed: true,
+      powers: ['2', '2'],
+      process: 'A3',
+      tariff: '2.0TD'
+    },
+    donation: true,
+    general_contract_terms_accepted: true,
+    iban: 'ES12 3456 7891 2345 6789 1234',
+    linked_member: 'already_member',
+    linked_member_info: {
+      code: '12345',
+      vat: '12345678P'
+    },
+    member_payment_type: 'remesa',
+    privacy_conditions: true,
+    sepa_accepted: true,
+    statutes_accepted: true
+  }
+}
+
 const newContractCases = {
   // Member cases
   alreadyMember: alreadyMember,
   sponsored: sponsored,
-  newMember: newMember
+  newMember: newMember,
+  // Contract cases
+  // 20TD_C1: base case for member cases
+  indexed_A3: indexed_A3
 }
 
 export default newContractCases
