@@ -51,7 +51,10 @@ const NewContractMemberForm = (props) => {
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
+
   const [hasAlert, setHasAlert] = useState(false)
+  const [completed, setCompleted] = useState(false)
+  const [error, setError] = useState(false)
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
@@ -259,7 +262,7 @@ const NewContractMemberForm = (props) => {
   }
 
   const handlePost = async (values) => {
-    console.log('POST final')
+    setCompleted(true)
   }
 
   const getStep = (props) => {
@@ -349,14 +352,31 @@ const NewContractMemberForm = (props) => {
               {activeStep == 0 ? (
                 <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
               ) : (
-                <>
+                <>                
                   <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
-                    <SomStepper
-                      activeStep={activeStep - 1}
-                      steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
-                    />
-                  </Box>
-                  {getStep(formikProps)}
+                  <SomStepper
+                    activeStep={activeStep - 1} // because step 0 does not count
+                    steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
+                  />
+                   </Box>
+                  {
+                    completed ? (
+                      <Result
+                        mode={!error ? 'success' : 'failure'}
+                        title={!error ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE') : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')}
+                      >
+                        <Typography
+                          sx={{ color: "secondary.dark" }}
+                          dangerouslySetInnerHTML={{
+                            __html: !error ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC') : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                          }}
+                        />
+                      </Result>
+
+                    ) : (
+                      getStep(formikProps)
+                    )}
+
                   <Grid
                     container
                     direction="row-reverse"

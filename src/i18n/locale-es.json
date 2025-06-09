@@ -893,5 +893,9 @@
     "NEW_MEMBER_SUBMIT_LOADING": "Estamos dando de alta a la nueva persona socia",
     "POSTAL_CODE": "Código postal",
     "HELPER_NUMBER_ADDRESS": "Si vives en una casa sin número introduce el número 0 en este campo",
-    "SAVE_CHANGES": "Guardar cambios"
+    "SAVE_CHANGES": "Guardar cambios",
+    "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Ja eres de Som Energia!",
+    "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Recibirás un correo con tu número de persona socia y con toda la información sobre tu nuevo contrato.",
+    "NEW_MEMBER_CONTRACT_ERROR_TITLE":"Hay un error y no se ha podido realizar la operaciónn solicitada!",
+    "NEW_MEMBER_CONTRACT_ERROR_DESC": "Por favor, intentalo otra vez más tarde. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la situación. Disculpa las molestias."
 }
