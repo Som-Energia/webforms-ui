@@ -134,7 +134,7 @@ const PaymentMethod = (props) => {
                       {t('IBAN_ACCEPT_DIRECT_DEBIT')}
                     </Typography>
                     <Typography variant="body.sm.bold" color="error">
-                      {' *'}
+                      {'*'}
                     </Typography>
                   </>
                 }
