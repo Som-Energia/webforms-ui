@@ -872,5 +872,9 @@
     "NEW_MEMBER_ERROR_TITLE":"Hay un error y no se ha podido realizar el alta de socia!",
     "NEW_MEMBER_SUCCESS_DESC":"Recibiras un correo con tu número de socia una vez acabe todo el proceso",
     "NEW_MEMBER_ERROR_DESC":"Por favor, intentalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la siituación. Disculpa les molestias",
-    "NEW_MEMBER_SUBMIT_LOADING":"Estamos dando de alta a la nueva persona socia"
+    "NEW_MEMBER_SUBMIT_LOADING":"Estamos dando de alta a la nueva persona socia",
+    "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Ja eres de Som Energia!",
+    "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Recibirás un correo con tu número de persona socia y con toda la información sobre tu nuevo contrato.",
+    "NEW_MEMBER_CONTRACT_ERROR_TITLE":"Hay un error y no se ha podido realizar la operaciónn solicitada!",
+    "NEW_MEMBER_CONTRACT_ERROR_DESC": "Por favor, intentalo otra vez más tarde. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la situación. Disculpa las molestias."
 }
