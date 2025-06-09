@@ -64,10 +64,7 @@ const newContractMemberSupplyPoint = (props) => {
         <CUPS {...props} />
       </Grid>
       <Grid item xs={12}>
-        <InputTitle
-          text={t('HAS_LIGHT_TITLE')}
-          required={true}
-        />
+        <InputTitle text={t('HAS_LIGHT_TITLE')} required={true} />
       </Grid>
       <Grid item>
         <Chooser
@@ -85,7 +82,11 @@ const newContractMemberSupplyPoint = (props) => {
           acceptText={'I_AGREE'}
           maxWidth="sm">
           <span
-            dangerouslySetInnerHTML={{ __html: t('LIGHT_OFF_CONTRACT_TERMS') }}
+            dangerouslySetInnerHTML={{
+              __html: t('LIGHT_OFF_CONTRACT_TERMS',{
+              url: t('LIGHT_OFF_URL')
+            })
+          }}
           />
         </TermsDialog>
       )}
