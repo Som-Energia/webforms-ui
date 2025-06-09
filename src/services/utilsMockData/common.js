@@ -1,3 +1,8 @@
+export const random_cups = 'ES0031405905577001DH0F'
+export const random_number = '12345'
+export const random_nif = '12345678P'
+export const random_iban = 'ES12 3456 7891 2345 6789 1234'
+
 export const address = {
   entryValues: {
     street: 'Calle Test',
@@ -28,6 +33,15 @@ export const address = {
     stair: '',
     door: '',
     block: ''
+  },
+  empty: {
+    street: '',
+    number: '',
+    floor: '',
+    door: '',
+    stairs: '',
+    bloc: '',
+    postal_code: ''
   }
 }
 
@@ -49,6 +63,12 @@ export const selfconsumption = {
     aux_services: true,
     technology: 'b11',
     attachments: [] // TODO: check this
+  },
+  empty: {
+    cau_error: false,
+    installation_type: '',
+    technology: 'b11',
+    installation_power: ''
   }
 }
 
@@ -133,5 +153,38 @@ export const client = {
       referral_source: '',
       legal_person_accepted: true
     }
+  },
+  empty: {
+    nif: '',
+    become_member: false,
+    person_type: '',
+    proxynif_valid: false,
+    proxynif: '',
+    proxyname: '',
+    name: '',
+    surname1: '',
+    surname2: '',
+    gender: '',
+    email: '',
+    email2: '',
+    phone: '',
+    phone_code: '+34',
+    phone_valid: false,
+    language: 'es_ES',
+    how_meet_us: '',
+    legal_person_accepted: false
   }
+}
+
+export const iban_values = {
+  iban: random_iban,
+  iban_valid: true,
+  sepa_accepted: true
+}
+
+export const supply_point = {
+  cnae: 9820,
+  supply_point_accepted: true,
+  is_housing: true,
+  cnae_valid: true
 }

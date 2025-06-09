@@ -1,9 +1,14 @@
-import { address, client, selfconsumption } from '../../common'
-
-const random_cups = 'ES0031405905577001DH0F'
-const random_number = '12345'
-const random_nif = '12345678P'
-const random_iban = 'ES12 3456 7891 2345 6789 1234'
+import {
+  address,
+  client,
+  iban_values,
+  random_cups,
+  random_iban,
+  random_nif,
+  random_number,
+  selfconsumption,
+  supply_point
+} from '../../common'
 
 // fixtures normalized
 const contract_info_c1_20TD = {
@@ -47,50 +52,18 @@ const alreadyMember = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
       link_member: true
     },
     new_member: {
-      nif: '',
-      become_member: false,
-      person_type: '',
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: 'es_ES',
-      how_meet_us: '',
-      payment_method: 'iban',
-      sepa_accepted: true,
-      iban: random_iban,
-      legal_person_accepted: false,
-      iban_valid: true
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'iban'
     },
     contract: {
       tariff_mode: '',
@@ -101,12 +74,7 @@ const alreadyMember = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
@@ -146,15 +114,7 @@ const sponsored = {
       cnae_valid: true
     },
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
@@ -170,12 +130,7 @@ const sponsored = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
@@ -211,12 +166,7 @@ const newMember = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
     address: address.entryValues,
     member: {
@@ -233,12 +183,7 @@ const newMember = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
@@ -277,50 +222,18 @@ const A3_indexed = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
       link_member: true
     },
     new_member: {
-      nif: '',
-      become_member: false,
-      person_type: '',
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: 'es_ES',
-      referral_source: '',
-      payment_method: 'iban',
-      sepa_accepted: true,
-      iban: random_iban,
-      legal_person_accepted: false,
-      iban_valid: true
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'iban'
     },
     contract: {
       tariff_mode: 'indexed',
@@ -331,12 +244,7 @@ const A3_indexed = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
@@ -369,50 +277,18 @@ const C2_30TD = {
     previous_holder: 'previous-holder-no',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
       link_member: true
     },
     new_member: {
-      nif: '',
-      become_member: false,
-      person_type: '',
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: 'es_ES',
-      referral_source: '',
-      payment_method: 'iban',
-      sepa_accepted: true,
-      iban: random_iban,
-      legal_person_accepted: false,
-      iban_valid: true
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'iban'
     },
     contract: {
       tariff_mode: 'periods',
@@ -427,12 +303,7 @@ const C2_30TD = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
@@ -465,50 +336,18 @@ const withSelfconsumption = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
       link_member: true
     },
     new_member: {
-      nif: '',
-      become_member: false,
-      person_type: '',
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: 'es_ES',
-      referral_source: '',
-      payment_method: 'iban',
-      sepa_accepted: true,
-      iban: random_iban,
-      legal_person_accepted: false,
-      iban_valid: true
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'iban'
     },
     contract: {
       tariff_mode: 'periods',
@@ -554,50 +393,18 @@ const cadastralReference = {
     voluntary_donation: true,
     cadastral_reference: '8277124 YR8968U 5098 BP',
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
       link_member: true
     },
     new_member: {
-      nif: '',
-      become_member: false,
-      person_type: '',
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: 'es_ES',
-      referral_source: '',
-      payment_method: 'iban',
-      sepa_accepted: true,
-      iban: random_iban,
-      legal_person_accepted: false,
-      iban_valid: true
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'iban'
     },
     contract: {
       tariff_mode: 'periods',
@@ -608,12 +415,7 @@ const cadastralReference = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
@@ -655,50 +457,18 @@ const paymentTPV = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,
     cadastral_reference_valid: true,
-    supply_point: {
-      cnae: 9820,
-      supply_point_accepted: true,
-      is_housing: true,
-      cnae_valid: true
-    },
+    supply_point: supply_point,
     supply_point_address: address.entryValues,
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: ''
-    },
+    address: address.empty,
     member: {
       number: random_number,
       nif: random_nif,
       link_member: true
     },
     new_member: {
-      nif: '',
-      become_member: false,
-      person_type: '',
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: 'es_ES',
-      referral_source: '',
-      payment_method: 'credit_card',
-      sepa_accepted: true,
-      iban: random_iban,
-      legal_person_accepted: false,
-      iban_valid: true
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'credit_card'
     },
     contract: {
       tariff_mode: 'periods',
@@ -709,12 +479,7 @@ const paymentTPV = {
       }
     },
     has_selfconsumption: 'selfconsumption-off',
-    self_consumption: {
-      cau_error: false,
-      installation_type: '',
-      technology: 'b11',
-      installation_power: ''
-    },
+    self_consumption: selfconsumption.empty,
     privacy_policy_accepted: true,
     generic_conditions_accepted: true,
     statutes_accepted: true,
