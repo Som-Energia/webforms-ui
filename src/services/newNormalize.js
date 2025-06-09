@@ -71,8 +71,7 @@ export const newNormalizeContract = (data) => {
       is_indexed: data.contract.tariff_mode == 'indexed',
       powers: Object.values(data.contract.power),
       cups_address: normalizeAddress(data.supply_point_address),
-      cnae: data.supply_point.cnae.toString(), // type incorrect
-      cups_cadastral_reference: data.cadastral_reference,
+      cnae: data.supply_point.cnae.toString(),
       process: contractProcess(
         data.has_light == 'light-on',
         data.previous_holder == 'previous-holder-yes'
@@ -92,6 +91,11 @@ export const newNormalizeContract = (data) => {
     finalContract['self_consumption'] = normalizeSelfconsumption(
       data.self_consumption
     )
+  }
+
+  if (data.cadastral_reference) {
+    finalContract['contract_info']['cups_cadastral_reference'] =
+      data.cadastral_reference
   }
 
   if (data.member_is_holder != 'holder-member-yes') {
