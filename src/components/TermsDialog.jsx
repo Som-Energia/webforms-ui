@@ -6,10 +6,18 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
+import { buttonGurbDark, buttonGurbLight } from '../containers/Gurb/gurbTheme'
 
 const TermsDialog = (props) => {
   const { t } = useTranslation()
-  const { open, onClose, onAccept, title, maxWidth = 'md', acceptText = 'I_ACCEPT' } = props
+  const {
+    open,
+    onClose,
+    onAccept,
+    title,
+    maxWidth = 'md',
+    acceptText = 'I_ACCEPT'
+  } = props
 
   return (
     <>
