@@ -25,17 +25,28 @@ const TermsDialog = (props) => {
           {props.children}
         </DialogContent>
         <DialogActions>
-          { onClose ?
+          {onClose ? (
             <Button
+              sx={{
+                ...buttonGurbLight,
+                color: 'secondary',
+                height: '40px',
+                padding: '13px 18px',
+                boxSizing: 'border-box'
+              }}
               data-cy="decline"
-              sx={{ color: 'secondary' }}
               onClick={onClose}
               id="terms-dialog-decline-btn">
               {t('I_DECLINE')}
             </Button>
-            : null
-          }
+          ) : null}
           <Button
+            sx={{
+              ...buttonGurbDark,
+              height: '40px',
+              padding: '13px 18px',
+              boxSizing: 'border-box'
+            }}
             data-cy="accept"
             onClick={onAccept}
             variant="contained"
