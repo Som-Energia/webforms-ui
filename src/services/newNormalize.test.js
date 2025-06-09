@@ -70,11 +70,16 @@ describe('Check Contract new Form (normalize function)', () => {
     ).toStrictEqual(newContractCases.C2_30TD.normalizedData)
   })
 
-
   test('Normalize Contract data (selfconsumption)', () => {
     expect(
       newNormalizeContract(newContractCases.selfconsumption.entryValues)
     ).toStrictEqual(newContractCases.selfconsumption.normalizedData)
+  })
+
+  test('Normalize Contract data (cadastral reference)', () => {
+    expect(
+      newNormalizeContract(newContractCases.cadastraslReference.entryValues)
+    ).toStrictEqual(newContractCases.cadastraslReference.normalizedData)
   })
 
 })
