@@ -25,7 +25,9 @@ const memberPersonalDataValidations = Yup.object().shape({
     }),
     proxynif: Yup.string().when('person_type', {
       is: 'legal-person',
-      then: Yup.string().required('NO_PROXY_NIF')
+      then: Yup.string()
+        .required('NO_PROXY_NIF')
+        .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF'),
     }),
     legal_person_accepted: Yup.bool().when(
       'person_type',
