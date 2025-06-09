@@ -48,7 +48,6 @@ export const normalizeSelfconsumption = (selfconsumption) => {
   return data
 }
 
-// TODO: test this and move to utils
 const contractProcess = (has_light, same_holder) => {
   if (!has_light) {
     return 'A3'
@@ -59,7 +58,6 @@ const contractProcess = (has_light, same_holder) => {
   }
 }
 
-// TODO: test this
 export const newNormalizeContract = (data) => {
   const finalContract = {
     linked_member: data.member.link_member
