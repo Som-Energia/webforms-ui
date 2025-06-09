@@ -57,4 +57,11 @@ describe('Check Contract new Form (normalize function)', () => {
       newNormalizeContract(newContractCases.newMember.entryValues)
     ).toStrictEqual(newContractCases.newMember.normalizedData)
   })
+
+  test('Normalize Contract data (indexed A3)', () => {
+    expect(
+      newNormalizeContract(newContractCases.indexed_A3.entryValues)
+    ).toStrictEqual(newContractCases.indexed_A3.normalizedData)
+  })
+
 })
