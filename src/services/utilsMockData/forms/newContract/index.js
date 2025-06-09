@@ -1,21 +1,24 @@
-import { address, client } from '../../common'
+import { address, client, selfconsumption } from '../../common'
+
+const random_cups = 'ES0031405905577001DH0F'
+const random_number = '12345'
+const random_nif = '12345678P'
+const random_iban = 'ES12 3456 7891 2345 6789 1234'
 
 // fixtures normalized
-const contract_info_c1_20TD = () => {
-  return {
+const contract_info_c1_20TD = {
     cnae: '9820',
-    cups: 'ES0031405905577001DH0F',
+    cups: random_cups,
     cups_address: address.normalizedData,
     is_indexed: false,
     powers: ['2', '2'],
     process: 'C1',
     tariff: '2.0TD'
-  }
 }
 
 const contract_info_a3_indexed = {
   cnae: '9820',
-  cups: 'ES0031405905577001DH0F',
+  cups: random_cups,
   cups_address: address.normalizedData,
   is_indexed: true,
   powers: ['2', '2'],
@@ -25,7 +28,7 @@ const contract_info_a3_indexed = {
 
 const contract_info_c2_30TD = {
   cnae: '9820',
-  cups: 'ES0031405905577001DH0F',
+  cups: random_cups,
   cups_address: address.normalizedData,
   is_indexed: false,
   powers: ['10', '12', '13', '14', '14', '16'],
@@ -33,12 +36,11 @@ const contract_info_c2_30TD = {
   tariff: '3.0TD'
 }
 
-
 // newContract member cases
 
 const alreadyMember = {
   entryValues: {
-    cups: 'ES0031405905577001DH0F',
+    cups: random_cups,
     has_member: 'member-on',
     member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
@@ -62,8 +64,8 @@ const alreadyMember = {
       postal_code: ''
     },
     member: {
-      number: '1234',
-      nif: '123456785P',
+      number: random_number,
+      nif: random_nif,
       link_member: true
     },
     new_member: {
@@ -86,7 +88,7 @@ const alreadyMember = {
       how_meet_us: '',
       payment_method: 'iban',
       sepa_accepted: true,
-      iban: 'ES12 3456 7891 2345 6789 1234',
+      iban: random_iban,
       legal_person_accepted: false,
       iban_valid: true
     },
@@ -114,12 +116,12 @@ const alreadyMember = {
   normalizedData: {
     linked_member: 'already_member',
     linked_member_info: {
-      code: '1234',
-      vat: '123456785P'
+      code: random_number,
+      vat: random_nif
     },
-    contract_info: contract_info_c1_20TD(),
+    contract_info: contract_info_c1_20TD,
     donation: false,
-    iban: 'ES12 3456 7891 2345 6789 1234',
+    iban: random_iban,
     member_payment_type: 'remesa',
     sepa_accepted: true,
     general_contract_terms_accepted: true,
@@ -130,7 +132,7 @@ const alreadyMember = {
 
 const sponsored = {
   entryValues: {
-    cups: 'ES0031405905577001DH0F',
+    cups: random_cups,
     has_member: 'member-on',
     member_is_holder: 'holder-member-no',
     has_light: 'light-on',
@@ -154,8 +156,8 @@ const sponsored = {
       postal_code: ''
     },
     member: {
-      number: '1234',
-      nif: '123456785P',
+      number: random_number,
+      nif: random_nif,
       link_member: true
     },
     new_member: client.physical.entryValues,
@@ -183,16 +185,16 @@ const sponsored = {
   normalizedData: {
     linked_member: 'sponsored',
     linked_member_info: {
-      code: '1234',
-      vat: '123456785P'
+      code: random_number,
+      vat: random_nif
     },
-    contract_info: contract_info_c1_20TD(),
+    contract_info: contract_info_c1_20TD,
     contract_owner: {
       ...client.physical.normalizedData,
       address: address.normalizedData
     },
     donation: false,
-    iban: 'ES12 3456 7891 2345 6789 1234',
+    iban: random_iban,
     member_payment_type: 'remesa',
     sepa_accepted: true,
     general_contract_terms_accepted: true,
@@ -203,7 +205,7 @@ const sponsored = {
 
 const newMember = {
   entryValues: {
-    cups: 'ES0031405905577001DH0F',
+    cups: random_cups,
     has_member: 'member-off',
     has_light: 'light-on',
     previous_holder: 'previous-holder-yes',
@@ -245,7 +247,7 @@ const newMember = {
   },
   normalizedData: {
     linked_member: 'new_member',
-    contract_info: contract_info_c1_20TD(),
+    contract_info: contract_info_c1_20TD,
     contract_owner: {
       ...client.physical.normalizedData,
       address: address.normalizedData
@@ -255,7 +257,7 @@ const newMember = {
       address: address.normalizedData
     },
     donation: true,
-    iban: 'ES12 3456 7891 2345 6789 1234',
+    iban: random_iban,
     member_payment_type: 'remesa',
     sepa_accepted: true,
     general_contract_terms_accepted: true,
@@ -268,7 +270,7 @@ const newMember = {
 
 const A3_indexed = {
   entryValues: {
-    cups: 'ES0031405905577001DH0F',
+    cups: random_cups,
     has_member: 'member-on',
     member_is_holder: 'holder-member-yes',
     has_light: 'light-off',
@@ -292,8 +294,8 @@ const A3_indexed = {
       postal_code: ''
     },
     member: {
-      number: '12345',
-      nif: '12345678P',
+      number: random_number,
+      nif: random_nif,
       link_member: true
     },
     new_member: {
@@ -316,7 +318,7 @@ const A3_indexed = {
       referral_source: '',
       payment_method: 'iban',
       sepa_accepted: true,
-      iban: 'ES12 3456 7891 2345 6789 1234',
+      iban: random_iban,
       legal_person_accepted: false,
       iban_valid: true
     },
@@ -345,11 +347,11 @@ const A3_indexed = {
     contract_info: contract_info_a3_indexed,
     donation: true,
     general_contract_terms_accepted: true,
-    iban: 'ES12 3456 7891 2345 6789 1234',
+    iban: random_iban,
     linked_member: 'already_member',
     linked_member_info: {
-      code: '12345',
-      vat: '12345678P'
+      code: random_number,
+      vat: random_nif
     },
     member_payment_type: 'remesa',
     privacy_conditions: true,
@@ -360,7 +362,7 @@ const A3_indexed = {
 
 const C2_30TD = {
   entryValues: {
-    cups: 'ES0031405905577001DH0F',
+    cups: random_cups,
     has_member: 'member-on',
     member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
@@ -384,8 +386,8 @@ const C2_30TD = {
       postal_code: ''
     },
     member: {
-      number: '12345',
-      nif: '12345678P',
+      number: random_number,
+      nif: random_nif,
       link_member: true
     },
     new_member: {
@@ -408,7 +410,7 @@ const C2_30TD = {
       referral_source: '',
       payment_method: 'iban',
       sepa_accepted: true,
-      iban: 'ES12 3456 7891 2345 6789 1234',
+      iban: random_iban,
       legal_person_accepted: false,
       iban_valid: true
     },
@@ -440,7 +442,7 @@ const C2_30TD = {
   normalizedData: {
     linked_member: 'already_member',
     contract_info: contract_info_c2_30TD,
-    iban: 'ES12 3456 7891 2345 6789 1234',
+    iban: random_iban,
     sepa_accepted: true,
     member_payment_type: 'remesa',
     donation: true,
@@ -448,9 +450,97 @@ const C2_30TD = {
     general_contract_terms_accepted: true,
     statutes_accepted: true,
     linked_member_info: {
-      vat: '12345678P',
-      code: '12345'
+      vat: random_nif,
+      code: random_number
     }
+  }
+}
+
+const withSelfconsumption = {
+  entryValues: {
+    cups: random_cups,
+    has_member: 'member-on',
+    member_is_holder: 'holder-member-yes',
+    has_light: 'light-on',
+    previous_holder: 'previous-holder-yes',
+    voluntary_donation: true,
+    cadastral_reference_valid: true,
+    supply_point: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true
+    },
+    supply_point_address: address.entryValues,
+    address: {
+      street: '',
+      number: '',
+      floor: '',
+      door: '',
+      stairs: '',
+      bloc: '',
+      postal_code: ''
+    },
+    member: {
+      number: random_number,
+      nif: random_nif,
+      link_member: true
+    },
+    new_member: {
+      nif: '',
+      become_member: false,
+      person_type: '',
+      proxynif_valid: false,
+      proxynif: '',
+      proxyname: '',
+      name: '',
+      surname1: '',
+      surname2: '',
+      gender: '',
+      email: '',
+      email2: '',
+      phone: '',
+      phone_code: '+34',
+      phone_valid: false,
+      language: 'es_ES',
+      referral_source: '',
+      payment_method: 'iban',
+      sepa_accepted: true,
+      iban: random_iban,
+      legal_person_accepted: false,
+      iban_valid: true
+    },
+    contract: {
+      tariff_mode: 'periods',
+      power_type: 'power-lower-15kw',
+      power: {
+        power1: '2',
+        power2: '2'
+      }
+    },
+    has_selfconsumption: 'selfconsumption-on',
+    self_consumption: selfconsumption.entryValues,
+    privacy_policy_accepted: true,
+    generic_conditions_accepted: true,
+    statutes_accepted: true,
+    comercial_info_accepted: false,
+    is_client: false
+  },
+  normalizedData: {
+    linked_member: 'already_member',
+    contract_info: contract_info_c1_20TD,
+    donation: true,
+    member_payment_type: 'remesa',
+    iban: random_iban,
+    sepa_accepted: true,
+    self_consumption: selfconsumption.normalizedData,
+    linked_member_info: {
+      vat: random_nif,
+      code: random_number
+    },
+    privacy_conditions: true,
+    general_contract_terms_accepted: true,
+    statutes_accepted: true,
   }
 }
 
@@ -462,7 +552,8 @@ const newContractCases = {
   // Contract cases
   // C1_20TD: base case for member cases
   A3_indexed: A3_indexed,
-  C2_30TD: C2_30TD
+  C2_30TD: C2_30TD,
+  selfconsumption: withSelfconsumption
 }
 
 export default newContractCases

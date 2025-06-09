@@ -35,20 +35,20 @@ export const selfconsumption = {
   entryValues: {
     cau: 'EU12341234435THISISACAU',
     cau_error: false,
-    collective_installation: 'yes',
-    installation_type: 'individual',
+    collective_installation: 'individual',
+    installation_type: '01',
     technology: 'b11',
-    aux_services: 'something',
+    aux_services: 'auxiliary-service-yes',
     installation_power: '5'
   },
   normalizedData: {
     cau: 'EU12341234435THISISACAU',
-    collective_installation: 'yes',
+    collective_installation: false,
     installation_power: '5',
-    installation_type: 'individual',
-    aux_services: 'something',
+    installation_type: '01',
+    aux_services: true,
     technology: 'b11',
-    attachments: '' // TODO: check this
+    attachments: [] // TODO: check this
   }
 }
 

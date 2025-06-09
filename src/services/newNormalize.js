@@ -34,15 +34,18 @@ export const normalizeClient = (client) => {
 }
 
 export const normalizeSelfconsumption = (selfconsumption) => {
-  return {
+  let data = {
     cau: selfconsumption.cau,
-    collective_installation: selfconsumption.collective_installation,
+    collective_installation:
+      selfconsumption.collective_installation == 'collective' ? true : false,
     installation_power: selfconsumption.installation_power,
     installation_type: selfconsumption.installation_type,
-    aux_services: selfconsumption.aux_services,
+    aux_services:
+      selfconsumption.aux_services == 'auxiliary-service-yes' ? true : false,
     technology: selfconsumption.technology,
-    attachments: '' // ???
+    attachments: [] // TODO: check this !!!!
   }
+  return data
 }
 
 // TODO: test this and move to utils
