@@ -664,9 +664,9 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   if (!/^[A-Z]{0,2}$/.test(redundancyDigits))
     return error(t('CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS'))
 
-  const cupsWithoutBorder = value.slice(0, 20)
+  /* const cupsWithoutBorder = value.slice(0, 20)
   if (matchingCups && matchingCups.slice(0, cupsWithoutBorder.length) !== cupsWithoutBorder)
-    return error(t('CAU_NOT_MATCHING_CUPS'))
+    return error(t('CAU_NOT_MATCHING_CUPS')) -> TODO only when individual auto*/
 
 
   const borderPoint = value.slice(20, 22)
