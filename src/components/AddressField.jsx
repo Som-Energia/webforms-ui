@@ -3,139 +3,134 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
-import {
-  useHandleChange,
-  useHandleChangeInteger
-} from '../hooks/useHandleChange'
+import { useHandleChange, useHandleChangeInteger } from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField'
 
-const AddressField = (props) => {
-  const {
-    addressFieldName = 'address',
-    addressLabel,
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setValues
-  } = props
+const normalizePlace = (place) => ({
+  id: place?.id?.toString() || '',
+  name: place?.name || ''
+})
 
-  const { t } = useTranslation()
+const updateAddressValues = async (addressValue, numberValue, values, setValues, addressFieldName, sessionTokenRef) => {
+  try {
+    const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
 
-  const handleChange = useHandleChange(setFieldValue)
-  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
+    const postalCodeComponent = place.addressComponents.find(c =>
+      c.types.includes('postal_code')
+    )
+    const municipis = await getMunicipisByPostalCode(postalCodeComponent?.longText)
 
-  const [addressValue, setAddressValue] = useState(
-    values[addressFieldName] || {}
-  )
-  const [numberValue, setNumberValue] = useState(
-    values[addressFieldName]?.number || ''
-  )
-  const [postalCodeValue, setPostalCodeValue] = useState(
-    values[addressFieldName]?.postal_code || ''
-  )
-  const sessionTokenRef = useRef()
+    const streetComponent = place.addressComponents.find(c =>
+      c.types.includes('route')
+    )
 
+    const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
+    const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
 
-  useEffect(() => {
-    setPostalCodeValue(values[addressFieldName]?.postal_code || '')
-  }, [values[addressFieldName]?.postal_code])
+    const city = normalizePlace(cityRaw)
+    const state = normalizePlace(stateRaw)
 
-  const updateAddressValues = async () => {
-    try {
-      const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
-      const postalCodeComponent = place.addressComponents.find((component) =>
-        component.types.includes('postal_code')
-      )
-      const municipis = await getMunicipisByPostalCode(
-        postalCodeComponent?.longText
-      )
-      const streetComponent = place.addressComponents.find((component) =>
-        component.types.includes('route')
-      )
-
-      const updatedValues = { ...values }
-      updatedValues[addressFieldName] = {
+    setValues({
+      ...values,
+      [addressFieldName]: {
         ...values[addressFieldName],
         id: addressValue.id,
         text: addressValue.text,
         number: numberValue,
         postal_code: postalCodeComponent?.longText || '',
         street: streetComponent?.longText || '',
-        state: municipis?.[0]?.[0]?.provincia || {},
-        city: municipis?.[0]?.[0]?.municipi || {}
+        state,
+        city
       }
-      setValues(updatedValues)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const cleanAddress = () => {
-    setFieldValue(addressFieldName, {
-      has_different_address:
-        values[addressFieldName]?.has_different_address || false,
-      street: '',
-      number: '',
-      postal_code: '',
-      state: { id: '', name: '' },
-      city: { id: '', name: '' }
     })
+  } catch (error) {
+    console.error('Error updating address values:', error)
   }
+}
+
+const AddressField = ({
+  addressFieldName = 'address',
+  addressLabel,
+  values,
+  errors,
+  touched,
+  setFieldValue,
+  setValues
+}) => {
+  const { t } = useTranslation()
+  const sessionTokenRef = useRef()
+
+  const [numberValue, setNumberValue] = useState(values[addressFieldName]?.number || '')
+  const [postalCodeValue, setPostalCodeValue] = useState(values[addressFieldName]?.postal_code || '')
+
+  useEffect(() => {
+    setPostalCodeValue(values[addressFieldName]?.postal_code || '')
+  }, [values[addressFieldName]?.postal_code])
 
   const handleAddressChange = async (value) => {
-    setAddressValue(value)
     if (!value || !value.id) {
       // Is a text is written, and no suggestion selected, the text is saved as street
-      setFieldValue(
-        `${addressFieldName}.street`,
-        value?.street || value?.text || ''
-      )
+      setFieldValue(`${addressFieldName}.street`, value?.street || value?.text || '')
       return
     }
 
     try {
-      // When a suggestion is selected, only street is written
       const place = await getPlaceDetails(value.id, sessionTokenRef)
+      const streetComponent = place.addressComponents.find(c => c.types.includes('route'))
+      const postalCodeComponent = place.addressComponents.find(c => c.types.includes('postal_code'))
 
-      const streetComponent = place.addressComponents.find((component) =>
-        component.types.includes('route')
-      )
-      const postalCodeComponent = place.addressComponents.find((component) =>
-        component.types.includes('postal_code')
-      )
+      setFieldValue(`${addressFieldName}.street`, streetComponent?.longText || '')
+      setFieldValue(`${addressFieldName}.postal_code`, postalCodeComponent?.longText || '')
 
-      setFieldValue(
-        `${addressFieldName}.street`,
-        streetComponent?.longText || ''
-      )
-      setFieldValue(
-        `${addressFieldName}.postal_code`,
-        postalCodeComponent?.longText || ''
-      )
+      await updateAddressValues(value, numberValue, values, setValues, addressFieldName, sessionTokenRef)
     } catch (error) {
       console.error('Error fetching place details:', error)
-      setFieldValue(
-        `${addressFieldName}.street`,
-        value.text || value.street || ''
-      )
+      setFieldValue(`${addressFieldName}.street`, value.text || value.street || '')
       setFieldValue(`${addressFieldName}.postal_code`, '')
     }
   }
-  const handleChangePostalCode = (event) => {
+
+  const handleChangePostalCode = async (event) => {
     const value = event.target.value
     setPostalCodeValue(value)
     setFieldValue(`${addressFieldName}.postal_code`, value)
+
+    if (value.length >= 5) {
+      try {
+        const municipis = await getMunicipisByPostalCode(value)
+
+        const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
+        const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
+
+        const city = normalizePlace(cityRaw)
+        console.log('cityRaw:', cityRaw)  // <-- Aquí
+
+        const state = normalizePlace(stateRaw)
+
+        setFieldValue(`${addressFieldName}.city`, city)
+        setFieldValue(`${addressFieldName}.state`, state)
+      } catch (error) {
+        console.error('Error getting municipis by postal code:', error)
+        setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
+        setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
+      }
+    } else {
+      setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
+      setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
+    }
   }
 
   const handleChangeNumber = (event) => {
-    let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
+    const cleanedValue = event.target.value.replace(/[^0-9]/g, '')
     setNumberValue(cleanedValue)
     setFieldValue(`${addressFieldName}.number`, cleanedValue)
   }
+
+  const handleChange = useHandleChange(setFieldValue)
+  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
   return (
     <Grid container spacing={2}>
@@ -147,7 +142,7 @@ const AddressField = (props) => {
           value={values[addressFieldName]}
           onChange={handleAddressChange}
           sessionTokenRef={sessionTokenRef}
-          required={true}
+          required
         />
       </Grid>
 
@@ -159,7 +154,7 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.postal_code}
           value={postalCodeValue}
           error={errors[addressFieldName]?.postal_code}
-          required={true}
+          required
         />
       </Grid>
 
@@ -172,7 +167,7 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.number}
           value={numberValue}
           error={errors[addressFieldName]?.number}
-          required={true}
+          required
         />
       </Grid>
 
@@ -184,9 +179,9 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.floor}
           value={values[addressFieldName]?.floor}
           error={errors[addressFieldName]?.floor}
-          required={false}
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.door`}
@@ -195,9 +190,9 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.door}
           value={values[addressFieldName]?.door}
           error={errors[addressFieldName]?.door}
-          required={false}
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.stairs`}
@@ -206,9 +201,9 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.stairs}
           value={values[addressFieldName]?.stairs}
           error={errors[addressFieldName]?.stairs}
-          required={false}
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.bloc`}
@@ -217,10 +212,10 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.bloc}
           value={values[addressFieldName]?.bloc}
           error={errors[addressFieldName]?.bloc}
-          required={false}
         />
       </Grid>
     </Grid>
   )
 }
+
 export default AddressField
