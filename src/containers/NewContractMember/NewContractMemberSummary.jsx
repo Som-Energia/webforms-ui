@@ -205,7 +205,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: 'CNAE',
+            reviewLabel: 'CNAE:',
             reviewValue: values?.supply_point.cnae,
             step: showReviewLinks
               ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
@@ -218,15 +218,15 @@ const NewContractMemberSummary = (props) => {
         title: t('TECHNICAL_DATA_SUMMARY'),
         field: [
           {
-            reviewLabel: t('TOLL'),
+            reviewLabel: t('TOLL_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
-            reviewLabel: t('FARE'),
+            reviewLabel: t('FARE_SUMMARY'),
             reviewValue: values?.contract.tariff_mode
           },
           {
-            reviewLabel: t('POWER'),
+            reviewLabel: t('POWER_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
@@ -255,7 +255,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: t('LANGUAGE'),
+            reviewLabel: t('LANGUAGE_SUMMARY'),
             reviewValue: languages[values?.new_member?.language],
             step: showReviewLinks
               ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
@@ -279,7 +279,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: t('VOLUNTARY_CENT'),
+            reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
             reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
             step: showReviewLinks
               ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['DONATION']
