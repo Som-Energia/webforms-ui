@@ -192,14 +192,14 @@ const NewContractMemberSummary = (props) => {
           },
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
-            reviewValue: `${values?.address?.street} ${values?.address?.number}`,
+            reviewValue: `${values?.supply_point_address?.street} ${values?.address?.number}`,
             step: showReviewLinks
               ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
               : null
           },
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
-            reviewValue: values?.address?.city?.name,
+            reviewValue: values?.supply_point_address?.city?.name,
             step: showReviewLinks
               ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
               : null
