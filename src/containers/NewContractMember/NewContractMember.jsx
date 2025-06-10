@@ -15,7 +15,10 @@ import SomStepper from '../../components/NewSomStepper'
 import Result from '../../containers/Result'
 import Box from '@mui/material/Box'
 
-import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
+import {
+  NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
+  NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+} from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
@@ -47,7 +50,10 @@ import newContractMemberSummaryValidations from './newContractMemberSummaryValid
 import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
 import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
+import NewLoading from '../../components/NewLoading'
 
+import { newNormalizeContract } from '../../services/newNormalize'
+import { newContract } from '../../services/api'
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
@@ -62,9 +68,12 @@ const NewContractMemberForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
+  const [sending, setSending] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
-  const [validationSteps, setValidationSteps] = useState([newContractMemberQuestionValidations])
+  const [validationSteps, setValidationSteps] = useState([
+    newContractMemberQuestionValidations
+  ])
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
@@ -206,7 +215,9 @@ const NewContractMemberForm = (props) => {
     } else if (has_member == 'member-on') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
-      setMAX_STEP_NUMBER(Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
+      setMAX_STEP_NUMBER(
+        Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length
+      )
     } else {
       setValidationSteps(newContractMemberQuestionValidations)
       setFormSteps({})
@@ -264,8 +275,24 @@ const NewContractMemberForm = (props) => {
   }
 
   const handlePost = async (values) => {
-    setCompleted(true)
-    //setError(true)
+    setSending(true)
+    const data = newNormalizeContract(values)
+    await newContract(data)
+      .then((response) => {
+        if (response?.state === true) {
+          setCompleted(true)
+          setError(false)
+        } else {
+          setError(true)
+        }
+      })
+      .catch((error) => {
+        setError(true)
+        console.error(error)
+      })
+      .finally(() => {
+        setSending(false)
+      })
   }
 
   const getStep = (props) => {
@@ -349,10 +376,16 @@ const NewContractMemberForm = (props) => {
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) => {
-          return (
+          return sending ? (
+            <NewLoading description={t('NEW_MEMBER_SUBMIT_LOADING')} />
+          ) : (
             <>
               {activeStep == 0 ? (
-                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps} />
+                <NewContractMemberQuestion
+                  formikProps={formikProps}
+                  nextStep={nextStep}
+                  setValidationSchemaAndSteps={setValidationSchemaAndSteps}
+                />
               ) : (
                 <>                
                   <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
@@ -361,62 +394,67 @@ const NewContractMemberForm = (props) => {
                     steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
                   />
                    </Box>
-                  {
-                    completed ? (
-                      <Box sx={{mt:2}}>
-                        <Result
-                          mode={!error ? 'success' : 'failure'}
-                          title={!error ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE') : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')}
-                        >
-                          <Typography
-                            sx={{ color: "secondary.dark", textAlign: "center" }}
-                            dangerouslySetInnerHTML={{
-                              __html: !error ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC') : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
-                            }}
+           
+                  {completed ? (
+                    <Box sx={{ mt: 2 }}>
+                      <Result
+                        mode={!error ? 'success' : 'failure'}
+                        title={
+                          !error
+                            ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
+                            : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
+                        }>
+                        <Typography
+                          sx={{ color: 'secondary.dark', textAlign: 'center' }}
+                          dangerouslySetInnerHTML={{
+                            __html: !error
+                              ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                              : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                          }}
+                        />
+                      </Result>
+                    </Box>
+                  ) : (
+                    getStep(formikProps)
+                  )}
+                  {!completed && (
+                    <Grid
+                      container
+                      direction="row-reverse"
+                      rowSpacing={2}
+                      sx={{
+                        marginTop: '2rem',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                      }}>
+                      {activeStep !== 0 && (
+                        <Grid item sm={2} xs={12}>
+                          <PrevButton
+                            onClick={() => prevStep(formikProps)}
+                            title={'PREV'}
                           />
-                        </Result>
-                      </Box>
-
-                    ) : (
-                      getStep(formikProps)
-                    )}
-
-                  <Grid
-                    container
-                    direction="row-reverse"
-                    rowSpacing={2}
-                    sx={{
-                      marginTop: '2rem',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}>
-                    {activeStep !== 0 && (
-                      <Grid item sm={2} xs={12}>
-                        { summaryField === undefined && <PrevButton
-                          onClick={() => prevStep(formikProps)}
-                          title={'PREV'}
-                        /> }
-                      </Grid>
-                    )}
-                    <Grid item sm={2} xs={12} order={-1}>
-                      {activeStep !== MAX_STEP_NUMBER ? (
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={summaryField === undefined ? 'SEGUENT_PAS' : 'SAVE_CHANGES'}
-                        />
-                      ) : (
-                        <SubmitButton
-                          disabled={!formikProps.isValid}
-                          onClick={() => handlePost()}
-                        />
+                        </Grid>
                       )}
+                      <Grid item sm={2} xs={12} order={-1}>
+                        {activeStep !== MAX_STEP_NUMBER ? (
+                          <NextButton
+                            disabled={
+                              loading ||
+                              !formikProps.isValid ||
+                              activeStep === MAX_STEP_NUMBER
+                            }
+                            onClick={() => nextStep(formikProps)}
+                            title={'NEXT'}
+                          />
+                        ) : (
+                          <SubmitButton
+                            disabled={!formikProps.isValid}
+                            onClick={() => handlePost(formikProps.values)}
+                          />
+                        )}
+                      </Grid>
                     </Grid>
-                  </Grid>
+                  )}
                 </>
               )}
             </>
