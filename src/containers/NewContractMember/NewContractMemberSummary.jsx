@@ -273,7 +273,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: 'CNAE',
+            reviewLabel: 'CNAE:',
             reviewValue: values?.supply_point.cnae,
             step: showReviewLinks
               ? formSteps['SUPPLY_INFO']
@@ -286,7 +286,7 @@ const NewContractMemberSummary = (props) => {
         title: t('TECHNICAL_DATA_SUMMARY'),
         field: [
           {
-            reviewLabel: t('TOLL'),
+            reviewLabel: t('TOLL_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
@@ -301,7 +301,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: t('POWER'),
+            reviewLabel: t('POWER_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
@@ -314,7 +314,29 @@ const NewContractMemberSummary = (props) => {
       {
         icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-        field: reviewContactData
+        field: [
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewValue: values?.new_member?.email,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('LANGUAGE_SUMMARY'),
+            reviewValue: languages[values?.new_member?.language],
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          }
+        ]
       },
       {
         icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
@@ -332,7 +354,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: t('VOLUNTARY_CENT'),
+            reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
             reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
             step: showReviewLinks
               ? formSteps['DONATION']
