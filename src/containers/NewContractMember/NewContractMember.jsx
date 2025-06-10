@@ -280,8 +280,13 @@ const NewContractMemberForm = (props) => {
     await newContract(data)
       .then((response) => {
         if (response?.state === true) {
-          setCompleted(true)
-          setError(false)
+          if (response?.data?.redsys_endpoint) {
+            setData(response?.data)
+            setUrl(response.data.redsys_endpoint)
+          } else {
+            setCompleted(true)
+            setError(false)
+          }
         } else {
           setError(true)
         }
@@ -427,7 +432,7 @@ const NewContractMemberForm = (props) => {
                         justifyContent: 'space-between',
                         alignItems: 'center'
                       }}>
-                      {activeStep !== 0 && (
+                      {activeStep !== 0 && !error && (
                         <Grid item sm={2} xs={12}>
                           <PrevButton
                             onClick={() => prevStep(formikProps)}
@@ -462,7 +467,7 @@ const NewContractMemberForm = (props) => {
         }}
       </Formik>
       {data?.payment_data && (
-        <form ref={formTPV} action={data.endpoint} method="POST">
+        <form ref={formTPV} action={data.redsys_endpoint} method="POST">
           {Object.keys(data.payment_data).map((key) => (
             <input
               key={key}
