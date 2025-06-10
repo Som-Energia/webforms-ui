@@ -6,11 +6,14 @@ import { Formik } from 'formik'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
 import SomStepper from '../../components/NewSomStepper'
+import Result from '../../containers/Result'
+import Box from '@mui/material/Box'
 
 import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
@@ -44,6 +47,7 @@ import newContractMemberSummaryValidations from './newContractMemberSummaryValid
 import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
 import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
+
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
@@ -165,43 +169,41 @@ const NewContractMemberForm = (props) => {
   }
 
   const validationSchemasLinkMember = [
-      newContractMemberQuestionValidations,
-      linkMemberValidations,
-      newContractMemberSupplyPointValidations,
-      newContractMemberSupplyPointDataValidations,
-      newContractMemberPowerValidations,
-      newContractMemberSelfConsumptionValidations,
-      newContractMemberSelfConsumptionDataValidations,
-      newContractMemberHolderValidations,
-      identifyMemberPersonalDataValidations,
-      newContractMemberVoluntaryDonationValidations,
-      newContractMemberPaymentValidations,
-      newContractMemberSummaryValidations
-    ]
+    newContractMemberQuestionValidations,
+    linkMemberValidations,
+    newContractMemberSupplyPointValidations,
+    newContractMemberSupplyPointDataValidations,
+    newContractMemberPowerValidations,
+    newContractMemberSelfConsumptionValidations,
+    newContractMemberSelfConsumptionDataValidations,
+    newContractMemberHolderValidations,
+    identifyMemberPersonalDataValidations,
+    newContractMemberVoluntaryDonationValidations,
+    newContractMemberPaymentValidations,
+    newContractMemberSummaryValidations
+  ]
 
   const validationSchemasNewMember = [
-      newContractMemberQuestionValidations,
-      memberIdentifierValidations,
-      memberPersonalDataValidations,
-      newContractMemberSupplyPointValidations,
-      newContractMemberSupplyPointDataValidations,
-      newContractMemberPowerValidations,
-      newContractMemberSelfConsumptionValidations,
-      newContractMemberSelfConsumptionDataValidations,
-      newContractMemberHolderValidations,
-      newContractMemberVoluntaryDonationValidations,
-      newContractMemberPaymentValidations,
-      newContractMemberSummaryValidations
-    ]
+    newContractMemberQuestionValidations,
+    memberIdentifierValidations,
+    memberPersonalDataValidations,
+    newContractMemberSupplyPointValidations,
+    newContractMemberSupplyPointDataValidations,
+    newContractMemberPowerValidations,
+    newContractMemberSelfConsumptionValidations,
+    newContractMemberSelfConsumptionDataValidations,
+    newContractMemberHolderValidations,
+    newContractMemberVoluntaryDonationValidations,
+    newContractMemberPaymentValidations,
+    newContractMemberSummaryValidations
+  ]
 
   const setValidationSchemaAndSteps = (has_member) => {
-    if (has_member == 'member-off')
-    {
+    if (has_member == 'member-off') {
       setValidationSteps(validationSchemasNewMember)
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member == 'member-on')
-    {
+    } else if (has_member == 'member-on') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
@@ -263,13 +265,13 @@ const NewContractMemberForm = (props) => {
 
   const handlePost = async (values) => {
     setCompleted(true)
+    //setError(true)
   }
 
   const getStep = (props) => {
     const { values } = props
 
-    if (values?.has_member == 'member-off')
-    {
+    if (values?.has_member == 'member-off') {
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -350,7 +352,7 @@ const NewContractMemberForm = (props) => {
           return (
             <>
               {activeStep == 0 ? (
-                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
+                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps} />
               ) : (
                 <>                
                   <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
@@ -361,17 +363,19 @@ const NewContractMemberForm = (props) => {
                    </Box>
                   {
                     completed ? (
-                      <Result
-                        mode={!error ? 'success' : 'failure'}
-                        title={!error ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE') : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')}
-                      >
-                        <Typography
-                          sx={{ color: "secondary.dark" }}
-                          dangerouslySetInnerHTML={{
-                            __html: !error ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC') : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
-                          }}
-                        />
-                      </Result>
+                      <Box sx={{mt:2}}>
+                        <Result
+                          mode={!error ? 'success' : 'failure'}
+                          title={!error ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE') : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')}
+                        >
+                          <Typography
+                            sx={{ color: "secondary.dark", textAlign: "center" }}
+                            dangerouslySetInnerHTML={{
+                              __html: !error ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC') : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                            }}
+                          />
+                        </Result>
+                      </Box>
 
                     ) : (
                       getStep(formikProps)
