@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
@@ -22,8 +21,48 @@ const TermsDialog = ({
   const [scrolledToBottom, setScrolledToBottom] = useState(false)
   const contentRef = useRef(null)
 
+  const checkScroll = () => {
+    const el = contentRef.current
+    if (!el) return
+
+    if (el.scrollHeight <= el.clientHeight) {
+      setScrolledToBottom(true)
+    } else {
+      setScrolledToBottom(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return
+
+    setScrolledToBottom(false)
+
+    const timeoutId = setTimeout(() => {
+      checkScroll()
+    }, 100)
+
+    // Observer to changes in content size
+    let resizeObserver
+    if (contentRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        checkScroll()
+      })
+      resizeObserver.observe(contentRef.current)
+    }
+
+    return () => {
+      clearTimeout(timeoutId)
+      if (resizeObserver && contentRef.current) {
+        resizeObserver.unobserve(contentRef.current)
+        resizeObserver.disconnect()
+      }
+    }
+  }, [open])
+
   const handleScroll = () => {
     const el = contentRef.current
+    if (!el) return
+
     if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
       setScrolledToBottom(true)
     }
