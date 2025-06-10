@@ -61,8 +61,8 @@ export const selfconsumption = {
     installation_power: '5',
     installation_type: '01',
     aux_services: true,
-    technology: 'b11',
-    attachments: [] // TODO: check this
+    technology: 'b11'
+    // attachments: [] // TODO: check this
   },
   empty: {
     cau_error: false,
@@ -85,7 +85,7 @@ export const client = {
       surname1: 'D',
       surname2: 'Monkey',
       gender: 'male',
-      birthdate: '1997-05-05',
+      birthdate: new Date('1997-05-05T07:14:08.925Z'),
       email: 'luffy@example.coop',
       email2: 'luffy@example.coop',
       phone: '612345678',
@@ -102,15 +102,12 @@ export const client = {
       vat: '12345678P',
       name: 'Luffy',
       surname: 'D Monkey',
-      is_juridic: 'physic-person',
-      proxy_name: '',
-      proxy_vat: '',
+      is_juridic: false,
       email: 'luffy@example.coop',
       phone: '+34612345678',
       lang: 'ca_ES',
       gender: 'male',
-      birthdate: '1997-05-05',
-      referral_source: ''
+      birthdate: '1997-05-05'
     }
   },
   juridic: {
@@ -141,16 +138,12 @@ export const client = {
     normalizedData: {
       vat: 'U12345678',
       name: 'Mugiwara SL',
-      surname: '',
-      is_juridic: 'legal-person',
+      is_juridic: true,
       proxy_name: 'Luffy',
       proxy_vat: '12345678P',
       email: 'mugiwara@example.coop',
       phone: '+34612345679',
       lang: 'es_ES',
-      gender: '',
-      birthdate: '',
-      referral_source: '',
       legal_person_accepted: true
     }
   },

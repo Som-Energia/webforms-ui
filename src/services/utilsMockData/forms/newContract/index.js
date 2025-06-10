@@ -114,7 +114,7 @@ const sponsored = {
       cnae_valid: true
     },
     supply_point_address: address.entryValues,
-    address: address.empty,
+    address: address.entryValues,
     member: {
       number: random_number,
       nif: random_nif,
@@ -193,10 +193,6 @@ const newMember = {
   normalizedData: {
     linked_member: 'new_member',
     contract_info: contract_info_c1_20TD,
-    contract_owner: {
-      ...client.physical.normalizedData,
-      address: address.normalizedData
-    },
     new_member_info: {
       ...client.physical.normalizedData,
       address: address.normalizedData
@@ -426,7 +422,7 @@ const cadastralReference = {
     linked_member: 'already_member',
     contract_info: {
       ...contract_info_c1_20TD,
-      cups_cadastral_reference: '8277124 YR8968U 5098 BP'
+      cups_cadastral_reference: '8277124YR8968U5098BP'
     },
     iban: random_iban,
     sepa_accepted: true,

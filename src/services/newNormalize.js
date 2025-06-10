@@ -16,19 +16,26 @@ export const normalizeClient = (client) => {
   let data = {
     vat: client.nif,
     name: client.name,
-    surname: `${client.surname1} ${client.surname2}`.trim(),
-    is_juridic: client.person_type,
-    proxy_name: client.proxyname,
-    proxy_vat: client.proxynif,
+    is_juridic: client.person_type == 'physic-person' ? false : true,
     email: client.email,
     phone: `${client.phone_code}${client.phone}`,
-    lang: client.language,
-    gender: client.gender,
-    birthdate: client.birthdate,
-    referral_source: client.referral_source
+    lang: client.language
   }
-  if (client.person_type == 'legal-person') {
+  if (data.is_juridic) {
+    data['proxy_name'] = client.proxyname
+    data['proxy_vat'] = client.proxynif
     data['legal_person_accepted'] = client.legal_person_accepted
+  } else {
+    data['surname'] = `${client.surname1} ${client.surname2}`.trim()
+  }
+  if (client.gender) {
+    data['gender'] = client.gender
+  }
+  if (client.birthdate) {
+    data['birthdate'] = client.birthdate.toISOString().split('T')[0]
+  }
+  if (client.referral_source) {
+    data['referral_source'] = client.referral_source
   }
   return data
 }
@@ -42,8 +49,8 @@ export const normalizeSelfconsumption = (selfconsumption) => {
     installation_type: selfconsumption.installation_type,
     aux_services:
       selfconsumption.aux_services == 'auxiliary-service-yes' ? true : false,
-    technology: selfconsumption.technology,
-    attachments: [] // TODO: check this !!!!
+    technology: selfconsumption.technology
+    // attachments: [] // TODO: check this !!!!
   }
   return data
 }
@@ -59,7 +66,11 @@ const contractProcess = (has_light, same_holder) => {
 }
 
 export const newNormalizeContract = (data) => {
-  const powers = Object.values(data.contract.power)
+  const powers = []
+  const powers_max = data.contract.power_type == 'power-lower-15kw' ? 2 : 6
+  for (var i = 1; i <= powers_max; i++) {
+    powers.push(data.contract.power[`power${i}`])
+  }
   const finalContract = {
     linked_member: data.member.link_member
       ? data.member_is_holder == 'holder-member-yes'
@@ -71,7 +82,7 @@ export const newNormalizeContract = (data) => {
       tariff:
         data.contract.power_type == 'power-lower-15kw' ? '2.0TD' : '3.0TD',
       is_indexed: data.contract.tariff_mode == 'indexed',
-      powers: powers.map(power => (+power * 1000).toString()),
+      powers: powers.map((power) => (+power * 1000).toString()),
       cups_address: normalizeAddress(data.supply_point_address),
       cnae: data.supply_point.cnae.toString(),
       process: contractProcess(
@@ -97,14 +108,12 @@ export const newNormalizeContract = (data) => {
 
   if (data.cadastral_reference) {
     finalContract['contract_info']['cups_cadastral_reference'] =
-      data.cadastral_reference
+      data.cadastral_reference.replace(/\s/g, '')
   }
 
-  if (data.member_is_holder != 'holder-member-yes') {
+  if (data.member_is_holder != 'holder-member-yes' && data.member.link_member) {
     finalContract['contract_owner'] = normalizeClient(data.new_member) // TODO: change where this is saved! (new_member warning)
-    finalContract['contract_owner']['address'] = normalizeAddress(
-      data.supply_point_address
-    )
+    finalContract['contract_owner']['address'] = normalizeAddress(data.address)
   }
 
   if (data.member.link_member) {
