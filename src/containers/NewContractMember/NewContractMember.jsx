@@ -51,6 +51,7 @@ const NewContractMemberForm = (props) => {
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
+  const [hasAlert, setHasAlert] = useState(false)
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
@@ -350,7 +351,7 @@ const NewContractMemberForm = (props) => {
                 <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
               ) : (
                 <>
-                  <Box sx={{ marginBottom: '65px' }}>
+                  <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
                     <SomStepper
                       activeStep={activeStep - 1}
                       steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}

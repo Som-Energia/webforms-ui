@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
@@ -13,7 +13,7 @@ import { LightbulbIcon } from '../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 
-const newContractMemberSupplyPoint = (props) => {
+const newContractMemberSupplyPoint = ({ setHasAlert, ...props }) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const [openLightOffDialog, setOpenLightOffDialog] = useState(false)
@@ -29,23 +29,27 @@ const newContractMemberSupplyPoint = (props) => {
     setOpenLightOffDialog(false)
   }
 
+  useEffect(() => {
+    setHasAlert(true)
+  }, [setHasAlert])
+
   const options = [
     {
       id: 'light-on',
-      icon: <LightbulbIcon/>,
+      icon: <LightbulbIcon />,
       textHeader: t('LIGHT_YES'),
       textBody: t('LIGHT_MARKETER_YES')
     },
     {
       id: 'light-off',
-      icon: <LightbulbIcon on={false}/>,
+      icon: <LightbulbIcon on={false} />,
       textHeader: t('LIGHT_NO'),
       textBody: t('LIGHT_MARKETER_NO')
     }
   ]
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={0}>
       <Grid item xs={12}>
         <AlertBox
           id="percent_value_error"
@@ -81,10 +85,10 @@ const newContractMemberSupplyPoint = (props) => {
           maxWidth="sm">
           <span
             dangerouslySetInnerHTML={{
-              __html: t('LIGHT_OFF_CONTRACT_TERMS',{
-              url: t('LIGHT_OFF_URL')
-            })
-          }}
+              __html: t('LIGHT_OFF_CONTRACT_TERMS', {
+                url: t('LIGHT_OFF_URL')
+              })
+            }}
           />
         </TermsDialog>
       )}

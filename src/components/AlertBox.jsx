@@ -8,20 +8,27 @@ import { useTheme } from '@mui/material/styles'
 
 import { getAlertBoxStyles } from '../themes/commonStyles'
 
-const AlertBox = ({ severity, title, description, children, variant, icon }) => {
+const AlertBox = ({
+  severity,
+  title,
+  description,
+  children,
+  variant,
+  icon
+}) => {
   const theme = useTheme()
 
   const customSx = getAlertBoxStyles(theme, severity)
 
   return (
-    <Box mt={0.75} mb={1.5}>
+    <Box sx={{ mt: '0', mb: '30px !important' }}>
       <Alert severity={severity} icon={false} sx={customSx}>
         <AlertTitle>{title}</AlertTitle>
         {description && (
           <Typography
             variant={variant || 'body1'}
             dangerouslySetInnerHTML={{
-              __html: description,
+              __html: description
             }}
           />
         )}
