@@ -869,5 +869,8 @@
     "SUMMARY_OTHER_CONCEPTS_BODY": "<li>Exceso de potencia ou enerxía reactiva: en determinadas condicións, segundo a normativa, a estes prezos haberá que lles aplicar unha recarga.</li><li>Alugueiro do contador: depende de cada caso, en función do que estabeleza a normativa.</li>",
     "RIGHTS_MEMBER": "DEREITOS: podes acceder, recitificar e suprimir os teus datos e outros dereitos escribindo a somenergia@delegado-datos.com.",
     "PURPOSE_MEMBER": "FINALIDADE: formalizar a túa alta como persoa socia e remitirche comunicacións informativas relacionadas co noso ámbito.",
-    "EDIT_DATA": "Editar os datos"
+    "EDIT_DATA": "Editar os datos",
+    "HOLDER_CASE_PRESENTATION": "HOLDER_CASE_PRESENTATION",
+    "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "GURB_CHECK_SPECIFIC_CONDITIONS_URL",
+    "GENERIC_CONDITIONS_URL": "GENERIC_CONDITIONS_URL"
 }
