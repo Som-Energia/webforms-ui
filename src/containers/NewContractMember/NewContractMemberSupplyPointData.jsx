@@ -77,7 +77,7 @@ const NewContractMemberSupplyPointData = (props) => {
       <Grid item xs={12}>
         <DragDrop
           fieldName={t('ELECTRIC_BILL_UPLOAD')}
-          textStyle={textHeader4}
+          textStyle={"body.md.regular"}
           required={false}
         />
       </Grid>
