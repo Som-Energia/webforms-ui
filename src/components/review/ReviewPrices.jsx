@@ -5,10 +5,8 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined'
-
+import { PricetagIcon } from '../../data/icons/Icons'
 import ReviewField from './ReviewField'
-import { iconRequirements } from '../../themes/commonStyles'
 import useCheckMobileScreen from '../../services/checkMobileScreen'
 
 const ReviewPricesTable = ({ reviewPrices, prices }) => {
@@ -58,7 +56,7 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
   return (
     <Grid container spacing={0}>
       <Grid item xs={2} sm={1}>
-        <LocalOfferOutlinedIcon sx={iconRequirements} />
+        <PricetagIcon/>
       </Grid>
       <Grid item xs={10} sm={11}>
         <Grid container spacing={3}>
