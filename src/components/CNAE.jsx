@@ -99,6 +99,9 @@ const CnaeField = (props) => {
           handleBlur={handleBlurCNAE}
           touched={touched?.supply_point?.cnae}
           error={errors?.supply_point?.cnae || errors?.supply_point?.cnae_valid}
+          textFieldHelper={
+            values?.supply_point?.is_housing ? t('CNAE_HELPER') : ''
+          }
           isLoading={loading}
           required={true}
         />

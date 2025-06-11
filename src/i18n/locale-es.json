@@ -293,6 +293,7 @@
   "AVIS_ALTA_DE_SERVEI_LABEL": "No hay luz",
   "AVIS_ALTA_DE_SERVEI_DESC": "Quiero darla de alta directamente con Som Energia.",
   "ES_UN_HABITATGE": "¿Es una vivienda?",
+  "CNAE_HELPER": "Si es una vivienda, no tienes que rellenar este campo",
   "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/252-cual-es-mi-numero-de-cnae\">CNAE de vuestra actividad económica</a>.",
   "CADASTRAL_REFERENCE": "Referencia catastral",
   "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"{{url}}\">¿Qué es la referencia catastral y dónde puedo encontrarla?</a>",

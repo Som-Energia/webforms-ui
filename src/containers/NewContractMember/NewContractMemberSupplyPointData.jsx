@@ -92,7 +92,7 @@ const NewContractMemberSupplyPointData = (props) => {
           label={
             <span>
               {t('FAIR_TITLE_LABEL')}
-              <span style={{ color: '#ff632b', marginLeft: 4 }}>*</span>
+              <span style={{ color: "primary2.main", marginLeft: 4 }}>*</span>
             </span>
           }
         />
