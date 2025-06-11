@@ -13,18 +13,13 @@ import { isValidPhoneNumber } from 'libphonenumber-js'
 import InputTitle from './InputTitle'
 import InputField from './InputField'
 
-const SelectCountry = ({ code, setCode, setCountry, codes }) => {
-  const handleChange = (event) => {
-    setCode(event.target.value)
-    setCountry(event.target.name)
-  }
+const SelectCountry = ({ code, handleChange, codes }) => {
   return (
     <Select
       fullWidth
       value={code}
-      renderValue={(value) => {
-        return value
-      }}
+      onChange={handleChange}
+      renderValue={(value) => value}
       variant="outlined"
       input={<InputBase />}
       sx={{
@@ -32,15 +27,13 @@ const SelectCountry = ({ code, setCode, setCountry, codes }) => {
         borderRadius: '0px',
         borderRight: '1px solid',
         borderColor: 'secondary.light',
-        borderHeight: '50%',
         backgroundColor: 'transparent',
         color: 'secondary.dark'
-      }}
-      onChange={handleChange}>
+      }}>
       <MenuItem sx={{ display: 'none' }} label="None" value="" />
-      {Object.keys(codes).map((id) => (
-        <MenuItem id={`${id}`} key={id} name={id} value={codes[id]}>
-          {`${codes[id]} (${id})`}
+      {Object.keys(codes).map((countryCode) => (
+        <MenuItem key={countryCode} value={codes[countryCode]}>
+          {`${codes[countryCode]} (${countryCode})`}
         </MenuItem>
       ))}
     </Select>
@@ -59,9 +52,11 @@ const PhoneField = (props) => {
     required = false
   } = props
   const { t } = useTranslation()
-  const [code, setCode] = useState(values.new_member.phone_code)
+
+  const [code, setCode] = useState(values.new_member.phone_code || '+34')
   const [country, setCountry] = useState('ES')
-  const [number, setNumber] = useState(values.new_member.phone)
+  const [number, setNumber] = useState(values.new_member.phone || '')
+
   const codes = getCountryDialCodesMap()
 
   function getCountryDialCodesMap() {
@@ -74,18 +69,31 @@ const PhoneField = (props) => {
     return result
   }
 
-  function validatePhoneFormat() {
-    const isValid = isValidPhoneNumber(number, country)
+  function getCountryFromCode(code) {
+    return Object.keys(codes).find((country) => codes[country] === code)
+  }
+
+  const handleChangeCountry = (event) => {
+    const selectedCode = event.target.value
+    setCode(selectedCode)
+    const countryFromCode = getCountryFromCode(selectedCode)
+    if (countryFromCode) setCountry(countryFromCode)
+  }
+
+  function validatePhoneFormat(numberParam = number, countryParam = country) {
+    const isValid = isValidPhoneNumber(numberParam, countryParam)
     setFieldValue(`${name}_valid`, isValid)
   }
 
   useEffect(() => {
     setFieldValue(name, number)
+    validatePhoneFormat(number, country)
   }, [number])
 
   useEffect(() => {
     setFieldValue(`${name}_code`, code)
-  }, [code])
+    validatePhoneFormat(number, country)
+  }, [code, country])
 
   return (
     <Grid container>
@@ -106,8 +114,7 @@ const PhoneField = (props) => {
           startAdornmentText={
             <SelectCountry
               code={code}
-              setCode={setCode}
-              setCountry={setCountry}
+              handleChange={handleChangeCountry}
               codes={codes}
             />
           }
@@ -119,4 +126,5 @@ const PhoneField = (props) => {
     </Grid>
   )
 }
+
 export default PhoneField
