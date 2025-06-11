@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
@@ -349,10 +350,12 @@ const NewContractMemberForm = (props) => {
                 <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
               ) : (
                 <>
-                  <SomStepper
-                    activeStep={activeStep - 1} // because step 0 does not count
-                    steps={formSteps}
-                  />
+                  <Box sx={{ marginBottom: '65px' }}>
+                    <SomStepper
+                      activeStep={activeStep - 1}
+                      steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
+                    />
+                  </Box>
                   {getStep(formikProps)}
                   <Grid
                     container
