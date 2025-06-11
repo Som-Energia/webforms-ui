@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
-import { useHandleChange, useHandleChangeInteger } from '../hooks/useHandleChange'
+import {
+  useHandleChange,
+  useHandleChangeInteger
+} from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
@@ -67,13 +70,18 @@ const AddressField = ({
   errors,
   touched,
   setFieldValue,
+  setFieldTouched,
   setValues
 }) => {
   const { t } = useTranslation()
   const sessionTokenRef = useRef()
 
-  const [numberValue, setNumberValue] = useState(values[addressFieldName]?.number || '')
-  const [postalCodeValue, setPostalCodeValue] = useState(values[addressFieldName]?.postal_code || '')
+  const [numberValue, setNumberValue] = useState(
+    values[addressFieldName]?.number || ''
+  )
+  const [postalCodeValue, setPostalCodeValue] = useState(
+    values[addressFieldName]?.postal_code || ''
+  )
 
   useEffect(() => {
     setPostalCodeValue(values[addressFieldName]?.postal_code || '')
@@ -82,22 +90,45 @@ const AddressField = ({
   const handleAddressChange = async (value) => {
     if (!value || !value.id) {
       // Is a text is written, and no suggestion selected, the text is saved as street
-      setFieldValue(`${addressFieldName}.street`, value?.street || value?.text || '')
+      setFieldValue(
+        `${addressFieldName}.street`,
+        value?.street || value?.text || ''
+      )
       return
     }
 
     try {
       const place = await getPlaceDetails(value.id, sessionTokenRef)
-      const streetComponent = place.addressComponents.find(c => c.types.includes('route'))
-      const postalCodeComponent = place.addressComponents.find(c => c.types.includes('postal_code'))
+      const streetComponent = place.addressComponents.find((c) =>
+        c.types.includes('route')
+      )
+      const postalCodeComponent = place.addressComponents.find((c) =>
+        c.types.includes('postal_code')
+      )
 
-      setFieldValue(`${addressFieldName}.street`, streetComponent?.longText || '')
-      setFieldValue(`${addressFieldName}.postal_code`, postalCodeComponent?.longText || '')
+      setFieldValue(
+        `${addressFieldName}.street`,
+        streetComponent?.longText || ''
+      )
+      setFieldValue(
+        `${addressFieldName}.postal_code`,
+        postalCodeComponent?.longText || ''
+      )
 
-      await updateAddressValues(value, numberValue, values, setValues, addressFieldName, sessionTokenRef)
+      await updateAddressValues(
+        value,
+        numberValue,
+        values,
+        setValues,
+        addressFieldName,
+        sessionTokenRef
+      )
     } catch (error) {
       console.error('Error fetching place details:', error)
-      setFieldValue(`${addressFieldName}.street`, value.text || value.street || '')
+      setFieldValue(
+        `${addressFieldName}.street`,
+        value.text || value.street || ''
+      )
       setFieldValue(`${addressFieldName}.postal_code`, '')
     }
   }
