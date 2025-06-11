@@ -14,16 +14,25 @@ const normalizePlace = (place) => ({
   name: place?.name || ''
 })
 
-const updateAddressValues = async (addressValue, numberValue, values, setValues, addressFieldName, sessionTokenRef) => {
+const updateAddressValues = async (
+  addressValue,
+  numberValue,
+  values,
+  setValues,
+  addressFieldName,
+  sessionTokenRef
+) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
 
-    const postalCodeComponent = place.addressComponents.find(c =>
+    const postalCodeComponent = place.addressComponents.find((c) =>
       c.types.includes('postal_code')
     )
-    const municipis = await getMunicipisByPostalCode(postalCodeComponent?.longText)
+    const municipis = await getMunicipisByPostalCode(
+      postalCodeComponent?.longText
+    )
 
-    const streetComponent = place.addressComponents.find(c =>
+    const streetComponent = place.addressComponents.find((c) =>
       c.types.includes('route')
     )
 
@@ -106,8 +115,6 @@ const AddressField = ({
         const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
 
         const city = normalizePlace(cityRaw)
-        console.log('cityRaw:', cityRaw)  // <-- Aquí
-
         const state = normalizePlace(stateRaw)
 
         setFieldValue(`${addressFieldName}.city`, city)
@@ -141,6 +148,14 @@ const AddressField = ({
           textFieldName={addressLabel}
           value={values[addressFieldName]}
           onChange={handleAddressChange}
+          onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
+          error={
+            touched[addressFieldName]?.street &&
+            errors[addressFieldName]?.street
+              ? errors[addressFieldName].street
+              : false
+          }
+          touched={touched[addressFieldName]?.street}
           sessionTokenRef={sessionTokenRef}
           required
         />
@@ -149,11 +164,19 @@ const AddressField = ({
       <Grid item sm={4} xs={12}>
         <InputField
           name={`${addressFieldName}.postal_code`}
+          handleBlur={() =>
+            setFieldTouched(`${addressFieldName}.postal_code`, true)
+          }
           textFieldName={t('POSTAL_CODE')}
           handleChange={handleChangePostalCode}
           touched={touched[addressFieldName]?.postal_code}
           value={postalCodeValue}
-          error={errors[addressFieldName]?.postal_code}
+          error={
+            touched[addressFieldName]?.postal_code &&
+            errors[addressFieldName]?.postal_code
+              ? t(errors[addressFieldName].postal_code)
+              : ''
+          }
           required
         />
       </Grid>
@@ -161,12 +184,18 @@ const AddressField = ({
       <Grid item sm={4} xs={12}>
         <InputField
           name={`${addressFieldName}.number`}
+          handleBlur={() => setFieldTouched(`${addressFieldName}.number`, true)}
           textFieldName={t('NUMBER')}
           textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
           handleChange={handleChangeNumber}
           touched={touched[addressFieldName]?.number}
           value={numberValue}
-          error={errors[addressFieldName]?.number}
+          error={
+            touched[addressFieldName]?.number &&
+            errors[addressFieldName]?.number
+              ? t(errors[addressFieldName].number)
+              : ''
+          }
           required
         />
       </Grid>

@@ -42,7 +42,8 @@ const memberPersonalDataValidations = Yup.object().shape({
   }),
   address: Yup.object().shape({
     street: Yup.string().required('NO_ADDRESS'),
-    number: Yup.number().required('NO_NUMBER')
+    number: Yup.number().required('NO_NUMBER'),
+    postal_code: Yup.number().required('NO_POSTAL_CODE'),
   })
 })
 
