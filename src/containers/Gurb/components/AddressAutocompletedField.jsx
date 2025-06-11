@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import { textHeader4, textField } from '../gurbTheme'
 import InputTitle from '../../../components/InputTitle'
@@ -16,7 +17,11 @@ export default function LocationInput({
   value,
   onChange,
   sessionTokenRef,
-  required = false
+  required = false,
+  error = false,
+  helperText = '',
+  touched = false,
+  onBlur = () => {}
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
@@ -100,16 +105,18 @@ export default function LocationInput({
         option?.id === value?.id && option?.street === value?.street
       }
       renderInput={(params) => (
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sx={{ mb: '6px' }}>
             <InputTitle
               text={textFieldName}
               textStyle={textHeader4}
               required={required}
             />
           </Grid>
+
           <Grid item xs={12}>
             <TextField
+              {...params}
               sx={{
                 ...textField,
                 '& .MuiOutlinedInput-root': {
@@ -117,16 +124,28 @@ export default function LocationInput({
                   paddingY: '0px'
                 }
               }}
-              {...params}
               label={
-                !value?.street && !inputValue && !isFocused ? textFieldLabel : ''
+                !value?.street && !inputValue && !isFocused
+                  ? textFieldLabel
+                  : ''
               }
               InputLabelProps={{ shrink: false }}
-              helperText={textFieldHelper}
               onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
+              onBlur={(e) => {
+                setIsFocused(false)
+                if (onBlur) onBlur(e)
+              }}
+              error={Boolean(touched && error)}
             />
           </Grid>
+
+          {touched && error && (
+            <Grid item xs={12}>
+              <Typography variant="error" color="error">
+                {t(error)}
+              </Typography>
+            </Grid>
+          )}
         </Grid>
       )}
     />

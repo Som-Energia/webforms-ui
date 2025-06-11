@@ -184,16 +184,6 @@ const PhysicalMemberPersonalData = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      {/*<Grid item xs={12}>
-        <Stack direction="column" spacing={1}>
-          <Typography variant="body.xs.regular" color="secondary.dark">
-            {t('NEW_MEMBER_RIGHTS')}
-          </Typography>
-          <Typography variant="body.xs.regular" color="secondary.dark">
-            {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
-          </Typography>
-        </Stack>
-      </Grid>*/}
     </Grid>
   )
 }
