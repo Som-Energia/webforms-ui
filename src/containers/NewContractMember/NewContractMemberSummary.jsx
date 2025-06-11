@@ -207,9 +207,10 @@ const NewContractMemberSummary = (props) => {
           {
             reviewLabel: 'CNAE:',
             reviewValue: values?.supply_point.cnae,
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
-              : null
+            step:
+              showReviewLinks && values?.new_member?.person_type === 'legal-person'
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
+                : null
           }
         ]
       },
