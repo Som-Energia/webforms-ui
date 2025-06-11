@@ -27,7 +27,7 @@ const newContractMemberHolder = (props) => {
   const options = [
     {
       id: 'previous-holder-yes',
-      icon: <ReceiptIcon on={true} />,
+      icon: <ReceiptIcon/>,
       textHeader: t('PREVIOUS_HOLDER_YES_LABEL'),
       textBody: t('PREVIOUS_HOLDER_YES_DESC')
     },

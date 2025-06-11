@@ -6,10 +6,7 @@ import Chooser from '../../components/NewChooser'
 import Typography from '@mui/material/Typography'
 import InputTitle from '../../components/InputTitle'
 
-import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
-
-import { iconRequirements } from '../../themes/commonStyles'
-import { iconOffRequirements } from '../Gurb/gurbTheme'
+import { SolarpanelIcon } from '../../data/icons/Icons'
 
 const NewContractMemberSelfConsumptionChooser = (props) => {
   const { values, setFieldValue } = props
@@ -22,13 +19,13 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
+      icon: <SolarpanelIcon/>,
       textHeader: t('SELFCONSUMPTION_YES_HEADER'),
       textBody: t('SELFCONSUMPTION_YES_BODY')
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
+      icon: <SolarpanelIcon on={false}/>,
       textHeader: t('SELFCONSUMPTION_NO_HEADER'),
       textBody: t('SELFCONSUMPTION_NO_BODY')
     }

@@ -3,12 +3,10 @@ import { useTranslation } from 'react-i18next'
 import Chooser from '../../components/NewChooser'
 import InputTitle from '../../components/InputTitle'
 
-import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import Typography from '@mui/material/Typography'
 
-import { iconRequirements } from '../../themes/commonStyles'
-import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 import Grid from '@mui/material/Grid'
+import { CommunityIcon, HandshakeIcon } from '../../data/icons/Icons'
 
 const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaAndSteps}) => {
   const { values, setFieldValue } = formikProps
@@ -23,13 +21,13 @@ const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaA
   const options = [
     {
       id: 'member-on',
-      icon: <HandshakeOutlinedIcon sx={iconRequirements} />,
+      icon: <HandshakeIcon/>,
       textHeader: t('HAS_MEMBER'),
       textBody: t('HAS_MEMBER_BODY')
     },
     {
       id: 'member-off',
-      icon: <Diversity1OutlinedIcon sx={iconRequirements} />,
+      icon: <CommunityIcon/>,
       textHeader: t('HAS_NO_MEMBER'),
       textBody: t('HAS_NO_MEMBER_BODY')
     }

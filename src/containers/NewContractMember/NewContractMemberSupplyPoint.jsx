@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 import Typography from '@mui/material/Typography'
 import TermsDialog from '../../components/TermsDialog'
 
@@ -10,8 +9,7 @@ import InputTitle from '../../components/InputTitle'
 import CUPS from '../../components/CUPS'
 import AlertBox from '../../components/AlertBox'
 
-import { iconRequirements } from '../../themes/commonStyles'
-import { iconOffRequirements } from '../../themes/commonStyles'
+import { LightbulbIcon } from '../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 
@@ -34,13 +32,13 @@ const newContractMemberSupplyPoint = (props) => {
   const options = [
     {
       id: 'light-on',
-      icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
+      icon: <LightbulbIcon/>,
       textHeader: t('LIGHT_YES'),
       textBody: t('LIGHT_MARKETER_YES')
     },
     {
       id: 'light-off',
-      icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
+      icon: <LightbulbIcon on={false}/>,
       textHeader: t('LIGHT_NO'),
       textBody: t('LIGHT_MARKETER_NO')
     }

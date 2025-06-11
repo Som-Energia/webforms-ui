@@ -12,24 +12,18 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
 
-import PersonIcon from '@mui/icons-material/Person'
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
-import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 
-import { iconRequirements } from '../../themes/commonStyles'
+import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import { getPrices } from '../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
 import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import Loading from '../../components/Loading'
-import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
-import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined'
+import { InvoiceIcon, PersonalIcon, PlaceMapIcon, ConfigIcon, PhoneIcon, CreditCardIcon, PricetagIcon } from '../../data/icons/Icons'
 
 const TARIFF_INDEXED = 'indexed'
 
@@ -89,7 +83,10 @@ const NewContractMemberSummary = (props) => {
     gl_ES: 'Galego'
   }
 
-  const legalReviewFields = [
+  const legalReviewFields = {
+    icon: <PersonalIcon/>,
+    title: t('REVIEW_HOLDER_TITLE'),
+    field: [
       {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
@@ -128,8 +125,12 @@ const NewContractMemberSummary = (props) => {
           : null
       }
     ]
+  }
 
-  const physicalReviewFields = [
+  const physicalReviewFields = {
+    icon: <PersonalIcon/>,
+    title: t('REVIEW_HOLDER_TITLE'),
+    field: [
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
@@ -161,7 +162,8 @@ const NewContractMemberSummary = (props) => {
           : null
       }
     ]
-
+  }
+  
   const oldHolderFields = [
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
@@ -236,7 +238,7 @@ const NewContractMemberSummary = (props) => {
   const reviewFields = [
     [
       {
-        icon: <DescriptionOutlinedIcon sx={iconRequirements} />,
+        icon: <InvoiceIcon/>,
         title: t('REVIEW_PROCESS_TITLE'),
         field: reviewProcessFields
       },
@@ -248,7 +250,7 @@ const NewContractMemberSummary = (props) => {
     ],
     [
       {
-        icon: <PlaceOutlinedIcon sx={iconRequirements} />,
+        icon: <PlaceMapIcon/>,
         title: t('SUPPLY'),
         field: [
           {
@@ -283,7 +285,7 @@ const NewContractMemberSummary = (props) => {
         ]
       },
       {
-        icon: <SettingsOutlinedIcon sx={iconRequirements} />,
+        icon: <ConfigIcon/>,
         title: t('TECHNICAL_DATA_SUMMARY'),
         field: [
           {
@@ -313,7 +315,7 @@ const NewContractMemberSummary = (props) => {
     ],
     [
       {
-        icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
+        icon: <PhoneIcon/>,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
@@ -340,7 +342,7 @@ const NewContractMemberSummary = (props) => {
         ]
       },
       {
-        icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
+        icon: <CreditCardIcon/>,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
@@ -475,7 +477,7 @@ const NewContractMemberSummary = (props) => {
       ) : (
         <Grid container spacing={0}>
           <Grid item xs={2} sm={1}>
-            <LocalOfferOutlinedIcon sx={iconRequirements} />
+            <PricetagIcon/>
           </Grid>
           <Grid item xs={10} sm={11}>
             <Grid container spacing={3}>

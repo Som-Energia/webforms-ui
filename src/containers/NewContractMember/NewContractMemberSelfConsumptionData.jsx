@@ -3,12 +3,10 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link'
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
-import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 
-import { BatteryIcon } from '../../data/icons/Icons'
+import { BatteryIcon, CommunityIcon, PersonalIcon } from '../../data/icons/Icons'
 import CAUField from '../../components/NewCAUField'
 import Chooser from '../../components/NewChooser'
 import InputField from '../../components/InputField'
@@ -103,13 +101,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const installation_type_options = [
     {
       id: 'individual',
-      icon: <AccountCircleOutlinedIcon sx={iconRequirements} />,
+      icon: <PersonalIcon/>,
       textHeader: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_HELP')
     },
     {
       id: 'collective',
-      icon: <Diversity1OutlinedIcon sx={iconRequirements} />,
+      icon: <CommunityIcon/>,
       textHeader: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
     }
@@ -118,7 +116,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const aux_services_options = [
     {
       id: 'auxiliary-service-yes',
-      icon: <BatteryIcon on={true} />,
+      icon: <BatteryIcon/>,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
       //textBody: t(
       //  'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'

@@ -3,14 +3,10 @@ import { useTranslation } from 'react-i18next'
 import Chooser from './NewChooser'
 import RequiredTitle from './InputTitle'
 
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import { iconRequirements } from '../themes/commonStyles'
-import {
-  iconOffRequirements
-} from '../themes/commonStyles/'
+import { HeartIcon } from '../data/icons/Icons'
 
 const HolderVoluntaryDonation = (props) => {
   const { values, setFieldValue } = props
@@ -24,12 +20,12 @@ const HolderVoluntaryDonation = (props) => {
   const options = [
     {
       id: true,
-      icon: <FavoriteBorderIcon sx={iconRequirements} />,
+      icon: <HeartIcon/>,
       textHeader: t('VOLUNTARY_DONATION_ON_HEADER')
     },
     {
       id: false,
-      icon: <FavoriteBorderIcon sx={iconOffRequirements} />,
+      icon: <HeartIcon on={false} />,
       textHeader: t('VOLUNTARY_DONATION_OFF_HEADER')
     }
   ]
