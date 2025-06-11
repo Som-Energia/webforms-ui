@@ -105,7 +105,14 @@ const PhoneField = (props) => {
           name={name}
           value={number}
           handleChange={(event) => {
-            setNumber(event.target.value)
+            const input = event.target.value
+
+            // Regex to delete prefixes if they are written
+            const prefix = code.replace('+', '')
+            const regex = new RegExp(`^(\\+|00)?${prefix}`)
+            const cleaned = input.replace(regex, '')
+
+            setNumber(cleaned)
           }}
           handleBlur={() => {
             validatePhoneFormat()
