@@ -14,6 +14,7 @@ import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../components/DragDrop'
 import CNAE from '../../components/CNAE'
 import AddressField from '../../components/AddressField'
+import { useTheme } from '@mui/material/styles'
 
 const NewContractMemberSupplyPointData = (props) => {
   const {
@@ -25,6 +26,7 @@ const NewContractMemberSupplyPointData = (props) => {
     setFieldError,
     setFieldTouched
   } = props
+  const theme = useTheme()
 
   const { t } = useTranslation()
 
@@ -92,7 +94,7 @@ const NewContractMemberSupplyPointData = (props) => {
           label={
             <span>
               {t('FAIR_TITLE_LABEL')}
-              <span style={{ color: "primary2.main", marginLeft: 4 }}>*</span>
+              <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>*</span>
             </span>
           }
         />
