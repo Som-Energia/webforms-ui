@@ -55,7 +55,7 @@ export default function WebFormsTheme() {
       'headline4.regular': {
         fontSize: '21px',
         fontWeight: '400',
-        letterSpacing: 0
+        letterSpacing: '-0.84px',
       },
       'headline4.bold': {
         fontSize: '21px',
