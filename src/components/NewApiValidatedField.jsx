@@ -72,10 +72,13 @@ export function ApiValidatedField({
     checkValue(formattedValue)
   }
 
-  const prettyValue = inputFilter? inputFilter(value) : value
-  if (prettyValue !== formerValue) {
-    checkValue(prettyValue)
-  }
+  const prettyValue = inputFilter ? inputFilter(value) : value
+
+  useEffect(() => {
+    if (prettyValue !== formerValue) {
+      checkValue(prettyValue)
+    }
+  }, [prettyValue])
 
   return (
     <>
