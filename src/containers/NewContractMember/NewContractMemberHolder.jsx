@@ -57,9 +57,7 @@ const newContractMemberHolder = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
-          {t('HOLDER_IDENTIFIER_TITLE')}
-        </Typography>
+        <Typography variant="headline4.regular">{t('HOLDER_IDENTIFIER_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <InputTitle text={t('PREVIUOS_HOLDER_TITLE')} required={true} />

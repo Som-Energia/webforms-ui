@@ -85,7 +85,7 @@ const PaymentMethod = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
+        <Typography variant="headline4.regular">
           {t('MEMBER_PAGE_PAYMENT_METHOD')}
         </Typography>
       </Grid>

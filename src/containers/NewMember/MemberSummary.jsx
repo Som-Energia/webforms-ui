@@ -172,7 +172,7 @@ const MemberSummary = (props) => {
   ) : (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('MEMBER_PAGE_SUMMARY')}</Typography>
+        <Typography variant="headline4.regular">{t('MEMBER_PAGE_SUMMARY')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <InputTitle text={t('MEMBER_PAGE_SUMMARY_QUESTION')} />
