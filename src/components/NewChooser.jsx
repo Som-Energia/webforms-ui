@@ -58,7 +58,7 @@ const Option = ({
             }}>
             {icon}
             <Typography
-              variant="body.sm.bold"
+              variant="body.md.medium"
               sx={{
                 textAlign: 'center',
                 whiteSpace: 'normal',

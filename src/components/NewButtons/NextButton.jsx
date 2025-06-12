@@ -14,7 +14,9 @@ function NextButton(props) {
         ...buttonGurbDark,
         height: '40px',
         padding: '13px 18px',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        lineHeight: 1,
+        textTransform: 'none'
       }}
       type="button"
       data-cy="next"
