@@ -526,19 +526,20 @@ const App = (props) => {
                       '/:language/new-pago-cancelado',
                     ].map((path) => (
                       <Route
+                        key={path}
                         path={path}
                         element={
                           <Result
                             mode="failure"
                             title={t('FAILURE_TEXT')}
-                            {...props}
-                          >
+                            {...props}>
                             <Typography
+                              sx={{ color: 'secondary.dark' }}
                               sx={{ color: 'secondary.dark' }}
                               dangerouslySetInnerHTML={{
                                 __html: t('NEWMEMBER_KO_DESCRIPTION', {
-                                  url: t('CONTACT_HELP_URL'),
-                                }),
+                                  url: t('CONTACT_HELP_URL')
+                                })
                               }}
                             />
                           </Result>
