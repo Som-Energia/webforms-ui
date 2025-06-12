@@ -67,6 +67,11 @@ export default function WebFormsTheme() {
         fontWeight: '400',
         letterSpacing: 0
       },
+      'body.md.medium': {
+        fontSize: '16px',
+        fontWeight: '550',
+        letterSpacing: 0
+      },
       'input.label': {
         fontSize: '16px',
         fontWeight: '500',
