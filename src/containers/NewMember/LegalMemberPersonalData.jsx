@@ -162,18 +162,6 @@ const LegalMemberPersonalData = (props) => {
         </Grid>
         
       </Grid>
-      {/*
-      <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('NEW_MEMBER_RIGHTS')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body.xs.regular" color="secondary.dark">
-          {t('NEW_MEMBER_THIRD_PERSON_PERSONAL_DATA')}
-        </Typography>
-      </Grid>
-      */}
       <Grid item xs={12}>
         <FormControlLabel
           control={
