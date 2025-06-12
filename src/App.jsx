@@ -508,6 +508,7 @@ const App = (props) => {
                       '/:language/new-pago-realizado',
                     ].map((path) => (
                       <Route
+                        key={path}
                         path={path}
                         element={
                           <Result
