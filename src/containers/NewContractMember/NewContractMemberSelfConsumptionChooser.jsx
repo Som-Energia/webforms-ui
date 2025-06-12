@@ -21,13 +21,13 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       id: 'selfconsumption-on',
       icon: <SolarpanelIcon/>,
       textHeader: t('SELFCONSUMPTION_YES_HEADER'),
-      textBody: t('SELFCONSUMPTION_YES_BODY')
+      //textBody: t('SELFCONSUMPTION_YES_BODY')
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarpanelIcon on={false}/>,
       textHeader: t('SELFCONSUMPTION_NO_HEADER'),
-      textBody: t('SELFCONSUMPTION_NO_BODY')
+      //textBody: t('SELFCONSUMPTION_NO_BODY')
     }
   ]
 
@@ -47,20 +47,18 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <Grid item xs={12} sx={{ mt: 2 }}>
+        <Grid item xs={12} sx={{ mt: 1 }}>
           <InputTitle
             variant="subtitle4"
             text={t('SELFCONSUMPTION_ACTIVE')}
             required={true}
           />
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body.md.regular" color="secondary.dark">
+          <Typography variant="body.md.regular" color="secondary.dark">
           {t('SELFCONSUMPTION_HELPER')}
         </Typography>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{ mt: 1 }}>
         <Chooser
           name="selfconsumption-question"
           options={options}

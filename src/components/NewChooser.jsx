@@ -58,10 +58,12 @@ const Option = ({
             }}>
             {icon}
             <Typography
+              variant="body.sm.bold"
               sx={{
-                ...'body.sm.regular',
-                fontWeight: 'bold',
-                width: '100%'
+                textAlign: 'center',
+                whiteSpace: 'normal',
+                wordBreak: 'break-word',
+                maxWidth: '12rem',
               }}>
               {textHeader}
             </Typography>
