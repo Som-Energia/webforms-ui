@@ -285,10 +285,12 @@ const NewContractMemberForm = (props) => {
             setError(false)
           }
         } else {
+          setCompleted(true)
           setError(true)
         }
       })
       .catch((error) => {
+        setCompleted(true)
         setError(true)
         console.error(error)
       })
@@ -390,10 +392,12 @@ const NewContractMemberForm = (props) => {
                 />
               ) : (
                 <>
-                  <SomStepper
-                    activeStep={activeStep - 1} // because step 0 does not count
-                    steps={formSteps}
-                  />
+                  {!completed && (
+                    <SomStepper
+                      activeStep={activeStep - 1} // because step 0 does not count
+                      steps={formSteps}
+                    />
+                  )}
                   {completed ? (
                     <Box sx={{ mt: 2 }}>
                       <Result
@@ -426,7 +430,7 @@ const NewContractMemberForm = (props) => {
                         justifyContent: 'space-between',
                         alignItems: 'center'
                       }}>
-                      {activeStep !== 0 && !error && (
+                      {activeStep !== 0 && (
                         <Grid item sm={2} xs={12}>
                           <PrevButton
                             onClick={() => prevStep(formikProps)}
