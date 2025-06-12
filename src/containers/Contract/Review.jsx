@@ -472,7 +472,7 @@ const Review = (props) => {
                 align="justify"
                 dangerouslySetInnerHTML={{
                   __html: t('TARIFF_MODE_INDEXED_MORE', {
-                    indexed_url: t('TARIFF_MODE_INDEXED_URL')
+                    url: t('TARIFF_MODE_INDEXED_URL')
                   })
                 }}
               />
