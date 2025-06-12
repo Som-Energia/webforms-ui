@@ -37,8 +37,9 @@ const Powers = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
+      <Typography variant="body.md.medium">{t('POWER_TO_CONTRACT')}  <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>*</span></Typography>
         <Typography
-          sx={{ typography: 'body.sm.regular', color: 'secondary.dark' }}>
+          sx={{ typography: 'body.md.regular', color: 'secondary.dark' }}>
           {t('POWER_HELPER')}
         </Typography>
       </Grid>
