@@ -5,13 +5,15 @@ import Grid from '@mui/material/Grid'
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
+
 const Option = ({
   isSelected,
   setSelected,
   optionId,
   icon,
   textHeader,
-  textBody
+  textBody,
+  maxWidth
 }) => {
 
   const chooser = {
@@ -63,8 +65,10 @@ const Option = ({
                 textAlign: 'center',
                 whiteSpace: 'normal',
                 wordBreak: 'break-word',
-                maxWidth: '13rem',
-              }}>
+                maxWidth: {maxWidth},
+                display: 'inline-block',
+              }}
+              >
               {textHeader}
             </Typography>
           </Box>
@@ -83,7 +87,7 @@ const Option = ({
 }
 
 const Chooser = (props) => {
-  const { options, value, handleChange, name } = props
+  const { options, value, handleChange, name, maxWidth } = props
 
   const setOptionSelection = (option) => {
     handleChange(option)
@@ -105,6 +109,7 @@ const Chooser = (props) => {
             icon={option?.icon}
             textHeader={option?.textHeader}
             textBody={option?.textBody}
+            maxWidth={maxWidth}
           />
           {option?.helper && (
             <Box

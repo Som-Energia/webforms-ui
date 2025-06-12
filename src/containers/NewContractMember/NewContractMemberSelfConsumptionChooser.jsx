@@ -21,13 +21,11 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       id: 'selfconsumption-on',
       icon: <SolarpanelIcon/>,
       textHeader: t('SELFCONSUMPTION_YES_HEADER'),
-      //textBody: t('SELFCONSUMPTION_YES_BODY')
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarpanelIcon on={false}/>,
       textHeader: t('SELFCONSUMPTION_NO_HEADER'),
-      //textBody: t('SELFCONSUMPTION_NO_BODY')
     }
   ]
 
@@ -64,6 +62,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
           options={options}
           value={values.has_selfconsumption}
           handleChange={handleSelfconsumptionQuestion}
+          maxWidth="12rem"
         />
       </Grid>
       {values.has_selfconsumption === 'selfconsumption-on' && (
