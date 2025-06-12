@@ -201,7 +201,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
           touched={touched?.self_consumption?.installation_power}
           value={values?.self_consumption?.installation_power}
           error={errors?.self_consumption?.installation_power}
-          //textFieldHelper={t('HELP_POPOVER_POWER')}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -245,7 +244,7 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
             <a
               href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
               target="_blank"
-              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              style={{color: '#8C8C8C', textDecoration: 'underline' }}
               rel="noopener noreferrer">
               {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
             </a>

@@ -439,7 +439,7 @@
   "SELFCONSUMPTION_WARNING": "No indiquis aquesta opció si encara NO has acabat els tràmits amb la teva comercialitzadora actual, encara que tinguis la instal·lació realitzada i registrada a la teva CCAA.",
   "SELFCONSUMPTION_DETAILS_TITLE": "Dades de la instal·lació d'autoconsum",
   "SELFCONSUMPTION_RECOMMENDATION_TEXT": "Et recomanem tenir a mà  la documentació de la teva instal·lació d'autoconsum per omplir el formulari.",
-  "SELFCONSUMPTION_CAU_CODE": "Indica el codi CAU (codi d'autoconsum unificat)",
+  "SELFCONSUMPTION_CAU_CODE": "Indica el codi CAU (Codi d'Autoconsum Unificat)",
   "SELFCONSUMPTION_CAU_HELP": "On puc obtenir el codi CAU?",
   "SELFCONSUMPTION_CAU_HELP_URL": "https://ca.support.somenergia.coop/article/1143-que-cal-tenir-en-compte-si-vull-contractar-amb-la-cooperativa-i-tinc-autoconsum#cau",
   "SELFCONSUMPTION_COLLECTIVE_INSTALLATION_QUESTION": "Com és la teva instal·lació?",
