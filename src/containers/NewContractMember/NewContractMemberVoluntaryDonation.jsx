@@ -13,7 +13,7 @@ const newContractMemberVoluntaryDonation = (props) => {
 
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('VOLUNTARY_CENT_TITLE')}</Typography>
+        <Typography variant="headline4.regular">{t('VOLUNTARY_CENT_TITLE')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <VoluntaryDonation

@@ -51,7 +51,7 @@ const NewContractMemberSupplyPointData = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-          <Typography variant="headline3">
+          <Typography variant="headline4.regular">
             {t('SUPPLY_POINT_DATA_TITLE')}
           </Typography>
         </Grid>

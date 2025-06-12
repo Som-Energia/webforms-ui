@@ -35,7 +35,7 @@ const NewContractMemberQuestion = ({ formikProps, nextStep }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
+        <Typography variant="headline4.regular">
           {t('CONTRACT_QUESTION_TITLE')}
         </Typography>
       </Grid>

@@ -139,7 +139,7 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
               variant={'body2'}
             />
             <Grid item xs={12}>
-              <Typography variant="headline3">
+              <Typography variant="headline4.regular">
                 {t('SELFCONSUMPTION_DETAILS_TITLE')}
               </Typography>
             </Grid>
