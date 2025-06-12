@@ -93,12 +93,12 @@ export default function WebFormsTheme() {
         letterSpacing: 0
       },
       'body.xs.regular': {
-        fontSize: '12px',
+        fontSize: '14px',
         fontWeight: '400',
         letterSpacing: 0
       },
       'body.xs.bold': {
-        fontSize: '12px',
+        fontSize: '14px',
         fontWeight: '700',
         letterSpacing: 0
       },

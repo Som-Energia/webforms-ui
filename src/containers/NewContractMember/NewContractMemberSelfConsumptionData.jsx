@@ -204,7 +204,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
           touched={touched?.self_consumption?.installation_power}
           value={values?.self_consumption?.installation_power}
           error={errors?.self_consumption?.installation_power}
-          //textFieldHelper={t('HELP_POPOVER_POWER')}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -245,16 +244,13 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
         />
         <HelperText
           helperText={
-            <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
-              <Link
-                href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
-                target="_blank"
-                rel="noopener noreferrer"
-                color="secondary"
-                >
-                {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
-              </Link>
-            </Typography>
+            <a
+              href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
+              target="_blank"
+              style={{color: '#8C8C8C', textDecoration: 'underline' }}
+              rel="noopener noreferrer">
+              {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
+            </a>
           }
           iconHelper={true}
         />

@@ -63,7 +63,7 @@ const Option = ({
                 textAlign: 'center',
                 whiteSpace: 'normal',
                 wordBreak: 'break-word',
-                maxWidth: '12rem',
+                maxWidth: '13rem',
               }}>
               {textHeader}
             </Typography>
