@@ -568,7 +568,7 @@ export const newTestPowerForPeriods = (
 
   const value = newRates[rate][limit]?.power
   const message = !limit.match('min')
-    ? ('POWER_NO_MORE_THAN', { value })
+    ? `POWER_NO_MORE_THAN${value}`
     : newRates[rate]?.num_power_periods > newRates[rate][limit]?.num_periods_apply
     ? `SOME_PERIOD_MORE_THAN${value}`
     : `POWER_NO_LESS_THAN${value}`

@@ -5,70 +5,74 @@ import { getNewRates } from '../../services/api'
 const rates = getNewRates()
 
 const newContractMemberPowerValidations = Yup.object().shape({
-    contract: Yup.object().shape({
-      power_type: Yup.string()
-        .required('REQUIRED_FIELD')
-        .oneOf(['power-lower-15kw', 'power-higher-15kw']),
-      power: Yup.object()
-        .shape({
-        power1: Yup.number()
-          .required('NO_POWER_CHOSEN_PX')
-          .test({
-            name: 'minPowerValue',
-            test: function () {
-              return newTestPowerForPeriods(
-                'power-lower-15kw',
-                this.parent,
-                'min_power',
-                this.createError
-              )
-            }
+  contract: Yup.object().shape({
+    power_type: Yup.string()
+      .required('REQUIRED_FIELD')
+      .oneOf(['power-lower-15kw', 'power-higher-15kw']),
+    power: Yup.object()
+      .when('power_type', {
+        is: 'power-lower-15kw',
+        then: Yup.object()
+          .shape({
+            power1: Yup.number()
+              .required('NO_POWER_CHOSEN_PX')
+              .test({
+                name: 'minPowerValue',
+                test: function () {
+                  return newTestPowerForPeriods(
+                    'power-lower-15kw',
+                    this.parent,
+                    'min_power',
+                    this.createError
+                  )
+                }
+              })
+              .test({
+                name: 'maxPowerValue',
+                test: function () {
+                  return newTestPowerForPeriods(
+                    'power-lower-15kw',
+                    this.parent,
+                    'max_power',
+                    this.createError
+                  )
+                }
+              }),
+            power2: Yup.number()
+              .test('required', 'NO_POWER_CHOSEN_PX', function () {
+                return rates['power-lower-15kw']?.num_power_periods >= 2
+                  ? this.parent.power2
+                  : true
+              })
+              .test('increasing', 'NO_POWER_INCREASING', function () {
+                return rates['power-lower-15kw']?.increasing
+                  ? parseFloat(this.parent.power2) >= parseFloat(this.parent.power1)
+                  : true
+              })
+              .test({
+                name: 'minPowerValue',
+                test: function () {
+                  return newTestPowerForPeriods(
+                    'power-lower-15kw',
+                    this.parent,
+                    'min_power',
+                    this.createError
+                  )
+                }
+              })
+              .test({
+                name: 'maxPowerValue',
+                test: function () {
+                  return newTestPowerForPeriods(
+                    'power-lower-15kw',
+                    this.parent,
+                    'max_power',
+                    this.createError
+                  )
+                }
+              })
           })
-          .test({
-            name: 'maxPowerValue',
-            test: function () {
-              return newTestPowerForPeriods(
-                'power-lower-15kw',
-                this.parent,
-                'max_power',
-                this.createError
-              )
-            }
-          }),
-        power2: Yup.number()
-          .test('required', 'NO_POWER_CHOSEN_PX', function () {
-            return rates['power-lower-15kw']?.num_power_periods >= 2
-              ? this.parent.power2
-              : true
-          })
-          .test('increasing', 'NO_POWER_INCREASING', function () {
-            return rates['power-lower-15kw']?.increasing
-              ? parseFloat(this.parent.power2) >= parseFloat(this.parent.power1)
-              : true
-          })
-          .test({
-            name: 'minPowerValue',
-            test: function () {
-              return newTestPowerForPeriods(
-                'power-lower-15kw',
-                this.parent,
-                'min_power',
-                this.createError
-              )
-            }
-          })
-          .test({
-            name: 'maxPowerValue',
-            test: function () {
-              return newTestPowerForPeriods(
-                'power-lower-15kw',
-                this.parent,
-                'max_power',
-                this.createError
-              )
-            }
-          })
-        })
+      })
         .when('power_type', {
           is: 'power-higher-15kw',
           then: Yup.object()
@@ -263,8 +267,8 @@ const newContractMemberPowerValidations = Yup.object().shape({
                   }
                 })
             })
-      })
+        })
     })
-  });
+});
 
-  export default newContractMemberPowerValidations;
+export default newContractMemberPowerValidations;
