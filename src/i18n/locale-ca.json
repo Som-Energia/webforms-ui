@@ -1015,5 +1015,6 @@
   "NEW_MEMBER_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisem la situació. Disculpa les molèsties",
   "NEW_MEMBER_SUBMIT_LOADING": "Estem donant d'alta a la nova persona sòcia",
   "POSTAL_CODE": "Codi postal",
-  "HELPER_NUMBER_ADDRESS": "Si vius en una casa sense número introdueix el número 0 en aquest camp"
+  "HELPER_NUMBER_ADDRESS": "Si vius en una casa sense número introdueix el número 0 en aquest camp",
+  "SAVE_CHANGES": "Guardar canvis"
 }

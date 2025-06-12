@@ -369,10 +369,10 @@ const NewContractMemberForm = (props) => {
                     }}>
                     {activeStep !== 0 && (
                       <Grid item sm={2} xs={12}>
-                        <PrevButton
+                        { summaryField === undefined && <PrevButton
                           onClick={() => prevStep(formikProps)}
                           title={'PREV'}
-                        />
+                        /> }
                       </Grid>
                     )}
                     <Grid item sm={2} xs={12} order={-1}>
@@ -384,7 +384,7 @@ const NewContractMemberForm = (props) => {
                             activeStep === MAX_STEP_NUMBER
                           }
                           onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
+                          title={summaryField === undefined ? 'SEGUENT_PAS' : 'SAVE_CHANGES'}
                         />
                       ) : (
                         <SubmitButton
