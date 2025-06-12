@@ -55,20 +55,25 @@ const newContractMemberSupplyPoint = ({ setHasAlert, ...props }) => {
           id="percent_value_error"
           description={t('RECOMMENDATION_SUBTITLE')}
           severity={'warning'}
-          //TODO icon={false}
           variant={'body2'}
         />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('CUPS_TITLE')}</Typography>
+        <Typography variant="headline4.regular" mb={2}>
+          {t('CUPS_TITLE')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <CUPS {...props} />
       </Grid>
-      <Grid item xs={12}>
-        <InputTitle text={t('HAS_LIGHT_TITLE')} required={true} />
+      <Grid item xs={12} style={{ marginTop: '32px' }}>
+        <InputTitle
+          variant="body.md.regular"
+          text={t('HAS_LIGHT_TITLE')}
+          required={true}
+        />
       </Grid>
-      <Grid item>
+      <Grid item style={{ marginTop: '16px' }}>
         <Chooser
           name="light-question"
           options={options}

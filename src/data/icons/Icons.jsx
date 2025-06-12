@@ -20,10 +20,10 @@ export const InvoiceIcon = (props) => {
   return (
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M13.4173 1.99902H5.75065C5.24232 1.99902 4.75481 2.20974 4.39536 2.58481C4.03592 2.95988 3.83398 3.46859 3.83398 3.99902V19.999C3.83398 20.5295 4.03592 21.0382 4.39536 21.4132C4.75481 21.7883 5.24232 21.999 5.75065 21.999H17.2507C17.759 21.999 18.2465 21.7883 18.6059 21.4132C18.9654 21.0382 19.1673 20.5295 19.1673 19.999V7.99902L13.4173 1.99902Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M13.418 1.99902V7.99902H19.168" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M15.3327 13.001H7.66602" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M15.3327 16.999H7.66602" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M13.4173 1.99902H5.75065C5.24232 1.99902 4.75481 2.20974 4.39536 2.58481C4.03592 2.95988 3.83398 3.46859 3.83398 3.99902V19.999C3.83398 20.5295 4.03592 21.0382 4.39536 21.4132C4.75481 21.7883 5.24232 21.999 5.75065 21.999H17.2507C17.759 21.999 18.2465 21.7883 18.6059 21.4132C18.9654 21.0382 19.1673 20.5295 19.1673 19.999V7.99902L13.4173 1.99902Z" stroke="black" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+        <path d="M13.418 1.99902V7.99902H19.168" stroke="black" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+        <path d="M15.3327 13.001H7.66602" stroke="black" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+        <path d="M15.3327 16.999H7.66602" stroke="black" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
       </svg>
     </SvgIcon>
   )
@@ -47,7 +47,7 @@ export const BatteryIcon = (props) => {
   return (
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22.1998 13.8V10.2M10.1998 15L13.1998 12H7.7998L10.7998 9M4.1998 18H16.1998C17.5253 18 18.5998 16.9255 18.5998 15.6V8.4C18.5998 7.07452 17.5253 6 16.1998 6H4.1998C2.87432 6 1.7998 7.07452 1.7998 8.4V15.6C1.7998 16.9255 2.87432 18 4.1998 18Z" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M22.1998 13.8V10.2M10.1998 15L13.1998 12H7.7998L10.7998 9M4.1998 18H16.1998C17.5253 18 18.5998 16.9255 18.5998 15.6V8.4C18.5998 7.07452 17.5253 6 16.1998 6H4.1998C2.87432 6 1.7998 7.07452 1.7998 8.4V15.6C1.7998 16.9255 2.87432 18 4.1998 18Z" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
       </svg>
     </SvgIcon>
   )
@@ -86,10 +86,10 @@ export const LightbulbIcon = (props) => {
   return (
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.5625 19.9375H14.4375" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M11 17.1875V12.375" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M8.25 9.625L11 12.375L13.75 9.625" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M6.76339 14.3536C5.9461 13.7151 5.28412 12.8998 4.82717 11.9687C4.37022 11.0377 4.13019 10.0153 4.12511 8.97819C4.10448 5.25194 7.10886 2.15045 10.8342 2.06452C12.278 2.02955 13.6961 2.45012 14.8874 3.26656C16.0786 4.083 16.9825 5.25384 17.4708 6.61297C17.9591 7.9721 18.007 9.45049 17.6077 10.8384C17.2084 12.2263 16.3822 13.4532 15.2463 14.345C14.9957 14.5392 14.7927 14.788 14.6526 15.0724C14.5125 15.3568 14.439 15.6694 14.4376 15.9864V16.502C14.4376 16.6844 14.3652 16.8592 14.2362 16.9882C14.1073 17.1171 13.9324 17.1895 13.7501 17.1895H8.25011C8.06777 17.1895 7.8929 17.1171 7.76397 16.9882C7.63504 16.8592 7.56261 16.6844 7.56261 16.502V15.9864C7.56228 15.6714 7.49012 15.3606 7.35163 15.0777C7.21314 14.7947 7.01196 14.5471 6.76339 14.3536Z" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7.5625 19.9375H14.4375" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
+        <path d="M11 17.1875V12.375" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
+        <path d="M8.25 9.625L11 12.375L13.75 9.625" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
+        <path d="M6.76339 14.3536C5.9461 13.7151 5.28412 12.8998 4.82717 11.9687C4.37022 11.0377 4.13019 10.0153 4.12511 8.97819C4.10448 5.25194 7.10886 2.15045 10.8342 2.06452C12.278 2.02955 13.6961 2.45012 14.8874 3.26656C16.0786 4.083 16.9825 5.25384 17.4708 6.61297C17.9591 7.9721 18.007 9.45049 17.6077 10.8384C17.2084 12.2263 16.3822 13.4532 15.2463 14.345C14.9957 14.5392 14.7927 14.788 14.6526 15.0724C14.5125 15.3568 14.439 15.6694 14.4376 15.9864V16.502C14.4376 16.6844 14.3652 16.8592 14.2362 16.9882C14.1073 17.1171 13.9324 17.1895 13.7501 17.1895H8.25011C8.06777 17.1895 7.8929 17.1171 7.76397 16.9882C7.63504 16.8592 7.56261 16.6844 7.56261 16.502V15.9864C7.56228 15.6714 7.49012 15.3606 7.35163 15.0777C7.21314 14.7947 7.01196 14.5471 6.76339 14.3536Z" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
       </svg>
     </SvgIcon>
   )
@@ -112,7 +112,7 @@ export const PowerIcon = (props) => {
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_1870_1595)">
-          <path d="M8.25 1.375L9.625 8.25L4.125 10.3125L13.75 20.625L12.375 13.75L17.875 11.6875L8.25 1.375Z" stroke="#0B2E34" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8.25 1.375L9.625 8.25L4.125 10.3125L13.75 20.625L12.375 13.75L17.875 11.6875L8.25 1.375Z" stroke="#0B2E34" strokewidth="1.4" strokelinecap="round" strokelinejoin="round" />
         </g>
         <defs>
           <clipPath id="clip0_1870_1595">
@@ -130,16 +130,16 @@ export const SolarpanelIcon = (props) => {
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_1870_4292)">
-          <path d="M9 2.25C9 3.44347 9.47411 4.58807 10.318 5.43198C11.1619 6.27589 12.3065 6.75 13.5 6.75C14.6935 6.75 15.8381 6.27589 16.682 5.43198C17.5259 4.58807 18 3.44347 18 2.25" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M4.5 3.375H5.625" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M21.375 3.375H22.5" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M13.5 10.125V11.25" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M19.3501 8.09961L20.1455 8.89498" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M7.65005 8.09961L6.86255 8.88711" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M4.81491 23.625H22.1849C22.3559 23.625 22.5247 23.586 22.6784 23.511C22.832 23.436 22.9666 23.3269 23.0718 23.1921C23.177 23.0573 23.2501 22.9003 23.2855 22.733C23.3209 22.5657 23.3177 22.3925 23.2762 22.2266L21.5887 15.4766C21.5277 15.2333 21.3872 15.0174 21.1895 14.8631C20.9918 14.7088 20.7482 14.625 20.4974 14.625H6.50241C6.25162 14.625 6.00802 14.7088 5.8103 14.8631C5.61259 15.0174 5.47211 15.2333 5.41116 15.4766L3.72366 22.2266C3.68211 22.3925 3.67892 22.5657 3.71433 22.733C3.74974 22.9003 3.82283 23.0573 3.92804 23.1921C4.03324 23.3269 4.1678 23.436 4.32147 23.511C4.47515 23.586 4.64391 23.625 4.81491 23.625Z" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M4.5 19.125H22.5" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M11.25 14.625L10.125 23.625" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M15.75 14.625L16.875 23.625" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M9 2.25C9 3.44347 9.47411 4.58807 10.318 5.43198C11.1619 6.27589 12.3065 6.75 13.5 6.75C14.6935 6.75 15.8381 6.27589 16.682 5.43198C17.5259 4.58807 18 3.44347 18 2.25" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M4.5 3.375H5.625" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M21.375 3.375H22.5" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M13.5 10.125V11.25" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M19.3501 8.09961L20.1455 8.89498" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M7.65005 8.09961L6.86255 8.88711" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M4.81491 23.625H22.1849C22.3559 23.625 22.5247 23.586 22.6784 23.511C22.832 23.436 22.9666 23.3269 23.0718 23.1921C23.177 23.0573 23.2501 22.9003 23.2855 22.733C23.3209 22.5657 23.3177 22.3925 23.2762 22.2266L21.5887 15.4766C21.5277 15.2333 21.3872 15.0174 21.1895 14.8631C20.9918 14.7088 20.7482 14.625 20.4974 14.625H6.50241C6.25162 14.625 6.00802 14.7088 5.8103 14.8631C5.61259 15.0174 5.47211 15.2333 5.41116 15.4766L3.72366 22.2266C3.68211 22.3925 3.67892 22.5657 3.71433 22.733C3.74974 22.9003 3.82283 23.0573 3.92804 23.1921C4.03324 23.3269 4.1678 23.436 4.32147 23.511C4.47515 23.586 4.64391 23.625 4.81491 23.625Z" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M4.5 19.125H22.5" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M11.25 14.625L10.125 23.625" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
+          <path d="M15.75 14.625L16.875 23.625" stroke="#0B2E34" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
         </g>
         <defs>
           <clipPath id="clip0_1870_4292">
@@ -158,9 +158,9 @@ export const PersonalIcon = (props) => {
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_1870_2140)">
           <g clip-path="url(#clip1_1870_2140)">
-            <path d="M12.8193 22.75C18.2041 22.75 22.5693 18.3848 22.5693 13C22.5693 7.61522 18.2041 3.25 12.8193 3.25C7.43456 3.25 3.06934 7.61522 3.06934 13C3.06934 18.3848 7.43456 22.75 12.8193 22.75Z" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M12.8193 16.25C15.063 16.25 16.8818 14.4312 16.8818 12.1875C16.8818 9.94384 15.063 8.125 12.8193 8.125C10.5757 8.125 8.75684 9.94384 8.75684 12.1875C8.75684 14.4312 10.5757 16.25 12.8193 16.25Z" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M6.29688 20.2522C6.90819 19.0481 7.84099 18.0368 8.99188 17.3304C10.1428 16.6239 11.4668 16.25 12.8172 16.25C14.1676 16.25 15.4916 16.6239 16.6425 17.3304C17.7934 18.0368 18.7262 19.0481 19.3375 20.2522" stroke="#0B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12.8193 22.75C18.2041 22.75 22.5693 18.3848 22.5693 13C22.5693 7.61522 18.2041 3.25 12.8193 3.25C7.43456 3.25 3.06934 7.61522 3.06934 13C3.06934 18.3848 7.43456 22.75 12.8193 22.75Z" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
+            <path d="M12.8193 16.25C15.063 16.25 16.8818 14.4312 16.8818 12.1875C16.8818 9.94384 15.063 8.125 12.8193 8.125C10.5757 8.125 8.75684 9.94384 8.75684 12.1875C8.75684 14.4312 10.5757 16.25 12.8193 16.25Z" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
+            <path d="M6.29688 20.2522C6.90819 19.0481 7.84099 18.0368 8.99188 17.3304C10.1428 16.6239 11.4668 16.25 12.8172 16.25C14.1676 16.25 15.4916 16.6239 16.6425 17.3304C17.7934 18.0368 18.7262 19.0481 19.3375 20.2522" stroke="#0B2E34" strokewidth="1.5" strokelinecap="round" strokelinejoin="round" />
           </g>
         </g>
         <defs>
@@ -181,7 +181,7 @@ export const HeartIcon = (props) => {
   return (
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.75 3.1251C16.1117 3.1121 18.125 4.3751 18.125 8.1251C18.125 11.8751 9.99993 17.5001 9.99993 17.5001C9.99993 17.5001 1.875 11.8751 1.875 8.1251C1.875 4.3751 3.88826 3.12751 6.25 3.1251C7.5 3.12382 9.21988 3.90922 10.0001 5.0001C10.7801 3.90922 12.486 3.13205 13.75 3.1251Z" stroke="#0B2E34" stroke-width="2" stroke-linejoin="round" />
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.75 3.1251C16.1117 3.1121 18.125 4.3751 18.125 8.1251C18.125 11.8751 9.99993 17.5001 9.99993 17.5001C9.99993 17.5001 1.875 11.8751 1.875 8.1251C1.875 4.3751 3.88826 3.12751 6.25 3.1251C7.5 3.12382 9.21988 3.90922 10.0001 5.0001C10.7801 3.90922 12.486 3.13205 13.75 3.1251Z" stroke="#0B2E34" strokewidth="2" strokelinejoin="round" />
       </svg>
     </SvgIcon>
   )
@@ -223,7 +223,7 @@ export const PhoneIcon = (props) => {
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_1881_9767)">
-          <path d="M9.67347 5.97912L6.57247 2.23838C6.21471 1.80681 5.55963 1.8096 5.14421 2.24447L2.59409 4.91405C1.83514 5.70855 1.6179 6.88853 2.05645 7.83439C4.6979 13.5314 9.04588 18.0831 14.488 20.8483C15.3915 21.3073 16.5188 21.0799 17.2777 20.2855L19.852 17.5904C20.2691 17.1539 20.2699 16.465 19.8539 16.0916L16.26 12.8668C15.8839 12.5293 15.3003 12.5736 14.9234 12.9682L13.6733 14.2769C13.5342 14.4225 13.3252 14.4573 13.1662 14.3614C11.1191 13.1275 9.43175 11.3611 8.25298 9.21808C8.16144 9.05167 8.19473 8.83285 8.33374 8.68734L9.58006 7.38262C9.95865 6.98632 9.99953 6.37242 9.67347 5.97912Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M9.67347 5.97912L6.57247 2.23838C6.21471 1.80681 5.55963 1.8096 5.14421 2.24447L2.59409 4.91405C1.83514 5.70855 1.6179 6.88853 2.05645 7.83439C4.6979 13.5314 9.04588 18.0831 14.488 20.8483C15.3915 21.3073 16.5188 21.0799 17.2777 20.2855L19.852 17.5904C20.2691 17.1539 20.2699 16.465 19.8539 16.0916L16.26 12.8668C15.8839 12.5293 15.3003 12.5736 14.9234 12.9682L13.6733 14.2769C13.5342 14.4225 13.3252 14.4573 13.1662 14.3614C11.1191 13.1275 9.43175 11.3611 8.25298 9.21808C8.16144 9.05167 8.19473 8.83285 8.33374 8.68734L9.58006 7.38262C9.95865 6.98632 9.99953 6.37242 9.67347 5.97912Z" stroke="black" strokewidth="2" strokelinecap="round" strokelinejoin="round" />
         </g>
         <defs>
           <clipPath id="clip0_1881_9767">

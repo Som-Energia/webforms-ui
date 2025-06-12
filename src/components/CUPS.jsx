@@ -58,7 +58,6 @@ const CUPS = (props) => {
   return (
     <InputField
       name="cups"
-      textFieldLabel={t('CUPS_LABEL')}
       textFieldName={t('CUPS_FIELD')}
       textFieldHelper={
         <span>
