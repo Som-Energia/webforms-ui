@@ -23,7 +23,6 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 
-
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
   const { t } = useTranslation()
@@ -504,6 +503,7 @@ const App = (props) => {
                       '/:language/new-pago-realizado'
                     ].map((path) => (
                       <Route
+                        key={path}
                         path={path}
                         element={
                           <Result
