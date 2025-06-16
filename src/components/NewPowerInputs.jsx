@@ -31,11 +31,10 @@ const PowerInputs = (props) => {
         const attr = inputNum === 0 ? 'power1' : `power${inputNum + 1}`
         const moreThan15Kw = numInputs === 2 ? false : true
         return (
-          <Grid item xs={12}>
+          <Grid key={attr} item xs={12}>
             <InputField
               name={`${name}.${attr}`}
               required={true}
-              key={attr}
               textFieldName={
                 numInputs <= 2
                 ? inputNum === 0
