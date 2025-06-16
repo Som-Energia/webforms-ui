@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
+import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
@@ -68,6 +69,7 @@ const NewContractMemberForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
+   const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
@@ -273,13 +275,19 @@ const NewContractMemberForm = (props) => {
 
     setActiveStep(Math.max(0, prev))
   }
+  
+  const trackSucces = () => {
+    trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+  }
 
   const handlePost = async (values) => {
+    trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
     setSending(true)
     const data = newNormalizeContract(values)
     await newContract(data)
       .then((response) => {
         if (response?.state === true) {
+          trackSucces()
           if (response?.data?.redsys_endpoint) {
             setData(response?.data)
             setUrl(response.data.redsys_endpoint)
@@ -373,6 +381,10 @@ const NewContractMemberForm = (props) => {
       setActiveStep(summaryField)
     }
   }, [summaryField])
+
+  useEffect(() => {
+      trackEvent({ category: 'NewContractMember', action: 'setNewContractMemberStep', name: `new-contract-member-step-${activeStep}` })
+    }, [activeStep])
 
   return (
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
