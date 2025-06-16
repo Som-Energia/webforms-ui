@@ -26,27 +26,27 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
   let dropRef = createRef()
 
   const fileInputRef = useRef(null)
-
+  const getErrorMessage = (code) => {
+    switch (code) {
+      case 'INVALID_FILETYPE':
+        return t('INVALID_FILETYPE')
+    }
+  }
   const upload = (name, file) => {
     return uploadFile(name, file)
       .then((response) => {
         if (response?.data?.code === 'UPLOAD_OK') {
           setUploads([response?.data?.file_hash])
         } else {
-          const errorMsg = response?.data?.code
-            ? response?.data?.code
-            : t('GURB_UPLOAD_UNEXPECTED')
+          const errorMsg = getErrorMessage(response?.data?.code)
           setError(errorMsg)
         }
       })
       .catch((error) => {
-        const errorMsg = error?.response?.data?.code
-          ? error.response.data.code
-          : t('GURB_UPLOAD_UNEXPECTED')
+        const errorMsg = getErrorMessage(error?.response?.data?.code)
         setError(errorMsg)
       })
   }
-
   const prevent = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -71,13 +71,22 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
     prevent(e)
     setDrag(false)
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      onDrop(e.dataTransfer.files[0])
-      setFilename(e.dataTransfer.files[0].name)
-      upload(e.dataTransfer.files[0].name, e.dataTransfer.files[0])
+      const file = e.dataTransfer.files[0]
+      if (!validateFileType(file)) {
+        setError(t('INVALID_FILETYPE'))
+        return
+      }
+      onDrop(file)
+      setFilename(file.name)
+      upload(file.name, file)
       e.dataTransfer.clearData()
     }
   }
 
+  const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png']
+  const validateFileType = (file) => {
+    return allowedTypes.includes(file.type)
+  }
   useEffect(() => {
     let div = dropRef.current
     div.addEventListener('dragenter', handleDragIn)
@@ -100,14 +109,16 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (file) {
-      // Aquí puedes manejar el archivo, como subirlo al servidor
+      if (!validateFileType(file)) {
+        setError(t('INVALID_FILETYPE'))
+        return
+      }
       setError(false)
       onDrop(file)
       setFilename(file.name)
       upload(file.name, file)
     }
   }
-
   const onDrop = () => {}
 
   return (

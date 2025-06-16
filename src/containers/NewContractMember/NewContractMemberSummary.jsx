@@ -12,24 +12,17 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
 
-import PersonIcon from '@mui/icons-material/Person'
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
-import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 
-import { iconRequirements } from '../../themes/commonStyles'
 import { getPrices } from '../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
 import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import Loading from '../../components/Loading'
-import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
-import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined'
+import { InvoiceIcon, PersonalIcon, PlaceMapIcon, ConfigIcon, PhoneIcon, CreditCardIcon, PricetagIcon } from '../../data/icons/Icons'
 
 const TARIFF_INDEXED = 'indexed'
 
@@ -89,7 +82,10 @@ const NewContractMemberSummary = (props) => {
     gl_ES: 'Galego'
   }
 
-  const legalReviewFields = [
+  const legalReviewFields = {
+    icon: <PersonalIcon/>,
+    title: t('REVIEW_HOLDER_TITLE'),
+    field: [
       {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
@@ -128,8 +124,12 @@ const NewContractMemberSummary = (props) => {
           : null
       }
     ]
+  }
 
-  const physicalReviewFields = [
+  const physicalReviewFields = {
+    icon: <PersonalIcon/>,
+    title: t('REVIEW_HOLDER_TITLE'),
+    field: [
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
@@ -161,6 +161,7 @@ const NewContractMemberSummary = (props) => {
           : null
       }
     ]
+  }
 
   const oldHolderFields = [
       {
@@ -236,19 +237,24 @@ const NewContractMemberSummary = (props) => {
   const reviewFields = [
     [
       {
-        icon: <DescriptionOutlinedIcon sx={iconRequirements} />,
+        icon: <InvoiceIcon/>,
         title: t('REVIEW_PROCESS_TITLE'),
-        field: reviewProcessFields
+        field: [
+          {
+            reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
+          },
+          {
+            reviewValue: t('NEW_CONTRACT_SUMMARY_PROCESS')
+          }
+        ]
       },
-      {
-        icon: <PersonIcon sx={iconRequirements} />,
-        title: t('REVIEW_HOLDER_TITLE'),
-        field: reviewHolderData
-      },
+      values?.new_member?.person_type == 'legal-person'
+        ? legalReviewFields
+        : physicalReviewFields
     ],
     [
       {
-        icon: <PlaceOutlinedIcon sx={iconRequirements} />,
+        icon: <PlaceMapIcon/>,
         title: t('SUPPLY'),
         field: [
           {
@@ -273,20 +279,21 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: 'CNAE',
+            reviewLabel: 'CNAE:',
             reviewValue: values?.supply_point.cnae,
-            step: showReviewLinks
-              ? formSteps['SUPPLY_INFO']
-              : null
+            step:
+              showReviewLinks && values?.new_member?.person_type === 'legal-person'
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
+                : null
           }
         ]
       },
       {
-        icon: <SettingsOutlinedIcon sx={iconRequirements} />,
+        icon: <ConfigIcon/>,
         title: t('TECHNICAL_DATA_SUMMARY'),
         field: [
           {
-            reviewLabel: t('TOLL'),
+            reviewLabel: t('TOLL_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
@@ -301,7 +308,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: t('POWER'),
+            reviewLabel: t('POWER_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
@@ -312,20 +319,39 @@ const NewContractMemberSummary = (props) => {
     ],
     [
       {
-        icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
+        icon: <PhoneIcon/>,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-        field: reviewContactData
+        field: [
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewValue: values?.new_member?.email,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('LANGUAGE_SUMMARY'),
+            reviewValue: languages[values?.new_member?.language],
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          }
+        ]
       },
       {
-        icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
+        icon: <CreditCardIcon/>,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA'),
-            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY'),
-            step: showReviewLinks
-              ? formSteps['PAYMENT_INFO']
-              : null
+            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
           },
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
@@ -335,7 +361,7 @@ const NewContractMemberSummary = (props) => {
               : null
           },
           {
-            reviewLabel: t('VOLUNTARY_CENT'),
+            reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
             reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
             step: showReviewLinks
               ? formSteps['DONATION']
@@ -455,7 +481,7 @@ const NewContractMemberSummary = (props) => {
       ) : (
         <Grid container spacing={0}>
           <Grid item xs={2} sm={1}>
-            <LocalOfferOutlinedIcon sx={iconRequirements} />
+            <PricetagIcon/>
           </Grid>
           <Grid item xs={10} sm={11}>
             <Grid container spacing={3}>
@@ -477,11 +503,9 @@ const NewContractMemberSummary = (props) => {
           </Grid>
         </Grid>
       )}
-
       <Grid item xs={12}>
         <Divider sx={{ my: 2 }} />
       </Grid>
-
       <Grid item xs={12}>
         <Typography variant="body2">
           {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
@@ -505,7 +529,6 @@ const NewContractMemberSummary = (props) => {
           {t('RIGHTS')}
         </Typography>
       </Grid>
-
       <Grid item xs={12}>
         <FormControlLabel
           control={
@@ -516,17 +539,27 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL')
-                })
-              }}
-            />
+            <span style={{ display: 'inline-block' }}>
+              <label
+                style={{ display: 'inline' }}
+                dangerouslySetInnerHTML={{
+                  __html: t('ACCEPT_PRIVACY_POLICY', {
+                    url: t('ACCEPT_PRIVACY_POLICY_URL')
+                  })
+                }}
+              />
+              <span
+                style={{
+                  color: '#ff632b',
+                  marginLeft: 2,
+                  fontWeight: 'bold'
+                }}>
+                *
+              </span>
+            </span>
           }
         />
       </Grid>
-
       <Grid item xs={12}>
         <FormControlLabel
           control={
@@ -544,19 +577,38 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('NEW_GENERAL_TERMS', {
-                  url: t('GENERAL_TERMS_URL')
-                })
-              }}
-            />
+            <span style={{ display: 'inline-block' }}>
+              <label
+                style={{ display: 'inline' }}
+                dangerouslySetInnerHTML={{
+                  __html: t('NEW_GENERAL_TERMS', {
+                    url: t('GENERAL_TERMS_URL')
+                  })
+                }}
+              />
+              <span
+                style={{
+                  color: '#ff632b',
+                  marginLeft: 2,
+                  fontWeight: 'bold'
+                }}>
+                *
+              </span>
+            </span>
           }
         />
       </Grid>
       <Grid item xs={12}>
         <TermsDialog
-          title={t('CONTRACTUAL_PACKAGE')}
+          title={
+            <span>
+              {t('CONTRACTUAL_PACKAGE')}
+              <span
+                style={{ color: '#ff632b', marginLeft: 4, fontWeight: 'bold' }}>
+                *
+              </span>
+            </span>
+          }
           open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
@@ -570,7 +622,6 @@ const NewContractMemberSummary = (props) => {
           />
         </TermsDialog>
       </Grid>
-
       <Grid item xs={12}>
         <FormControlLabel
           control={
@@ -581,13 +632,28 @@ const NewContractMemberSummary = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_STATUTES', {
-                  url: t('ACCEPT_STATUTES_URL')
-                })
-              }}
-            />
+            <span
+              style={{
+                position: 'relattiene que tener: ive',
+                display: 'inline-block'
+              }}>
+              <label
+                style={{ display: 'inline' }}
+                dangerouslySetInnerHTML={{
+                  __html: t('ACCEPT_STATUTES', {
+                    url: t('ACCEPT_STATUTES_URL')
+                  })
+                }}
+              />
+              <span
+                style={{
+                  color: '#ff632b',
+                  marginLeft: 2,
+                  fontWeight: 'bold'
+                }}>
+                *
+              </span>
+            </span>
           }
         />
       </Grid>

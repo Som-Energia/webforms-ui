@@ -14,6 +14,7 @@ import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../components/DragDrop'
 import CNAE from '../../components/CNAE'
 import AddressField from '../../components/AddressField'
+import { useTheme } from '@mui/material/styles'
 
 const NewContractMemberSupplyPointData = (props) => {
   const {
@@ -25,6 +26,7 @@ const NewContractMemberSupplyPointData = (props) => {
     setFieldError,
     setFieldTouched
   } = props
+  const theme = useTheme()
 
   const { t } = useTranslation()
 
@@ -49,10 +51,14 @@ const NewContractMemberSupplyPointData = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-          <Typography variant="headline3">{t('SUPPLY_POINT_DATA_TITLE')}</Typography>
+          <Typography variant="headline4.regular">
+            {t('SUPPLY_POINT_DATA_TITLE')}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body.sm.regular" color="secondary.dark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+          <Typography variant="body.sm.regular" color="secondary.dark">
+            {t('RECOMMENDATION_SUBTITLE')}
+          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12}>
@@ -71,13 +77,12 @@ const NewContractMemberSupplyPointData = (props) => {
       <Grid item xs={12}>
         <DragDrop
           fieldName={t('ELECTRIC_BILL_UPLOAD')}
-          textStyle={textHeader4}
+          textStyle={"body.md.regular"}
           required={false}
         />
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
-          sx={{ ...textCheckbox, marginTop: '2rem' }}
           control={
             <Checkbox
               data-cy="supply_point_accepted"
@@ -87,14 +92,14 @@ const NewContractMemberSupplyPointData = (props) => {
             />
           }
           label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('FAIR_TITLE_LABEL')
-              }}
-            />
+            <span>
+              {t('FAIR_TITLE_LABEL')}
+              <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>*</span>
+            </span>
           }
         />
       </Grid>
+
       <Grid item xs={12}>
         <TermsDialog
           title={t('FAIR_TITLE')}

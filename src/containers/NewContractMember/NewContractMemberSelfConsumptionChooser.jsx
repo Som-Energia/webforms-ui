@@ -6,10 +6,7 @@ import Chooser from '../../components/NewChooser'
 import Typography from '@mui/material/Typography'
 import InputTitle from '../../components/InputTitle'
 
-import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
-
-import { iconRequirements } from '../../themes/commonStyles'
-import { iconOffRequirements } from '../Gurb/gurbTheme'
+import { SolarpanelIcon } from '../../data/icons/Icons'
 
 const NewContractMemberSelfConsumptionChooser = (props) => {
   const { values, setFieldValue } = props
@@ -22,15 +19,13 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
+      icon: <SolarpanelIcon/>,
       textHeader: t('SELFCONSUMPTION_YES_HEADER'),
-      textBody: t('SELFCONSUMPTION_YES_BODY')
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
+      icon: <SolarpanelIcon on={false}/>,
       textHeader: t('SELFCONSUMPTION_NO_HEADER'),
-      textBody: t('SELFCONSUMPTION_NO_BODY')
     }
   ]
 
@@ -38,7 +33,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-          <Typography variant="headline3">
+          <Typography variant="headline4.regular">
             {t('SELFCONSUMPTION_TITLE')}
           </Typography>
         </Grid>
@@ -50,25 +45,24 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <Grid item xs={12} sx={{ mt: 2 }}>
+        <Grid item xs={12} sx={{ mt: 1 }}>
           <InputTitle
             variant="subtitle4"
             text={t('SELFCONSUMPTION_ACTIVE')}
             required={true}
           />
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body.md.regular" color="secondary.dark">
+          <Typography variant="body.md.regular" color="secondary.dark">
           {t('SELFCONSUMPTION_HELPER')}
         </Typography>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{ mt: 1 }}>
         <Chooser
           name="selfconsumption-question"
           options={options}
           value={values.has_selfconsumption}
           handleChange={handleSelfconsumptionQuestion}
+          maxWidth="12rem"
         />
       </Grid>
       {values.has_selfconsumption === 'selfconsumption-on' && (

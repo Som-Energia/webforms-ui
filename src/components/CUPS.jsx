@@ -58,7 +58,6 @@ const CUPS = (props) => {
   return (
     <InputField
       name="cups"
-      textFieldLabel={t('CUPS_LABEL')}
       textFieldName={t('CUPS_FIELD')}
       textFieldHelper={
         <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>

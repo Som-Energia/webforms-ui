@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link'
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
-import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined'
 
-import { BatteryIcon } from '../../data/icons/Icons'
+import {
+  BatteryIcon,
+  CommunityIcon,
+  PersonalIcon
+} from '../../data/icons/Icons'
 import CAUField from '../../components/NewCAUField'
 import Chooser from '../../components/NewChooser'
 import InputField from '../../components/InputField'
@@ -17,8 +18,6 @@ import InputTitle from '../../components/InputTitle'
 import AlertBox from '../../components/AlertBox'
 import { HelperText } from '../../components/InputField'
 
-import { iconRequirements } from '../../themes/commonStyles'
-
 import {
   getSelfConsumptionSituations,
   getSelfConsumptionTechnologies
@@ -26,18 +25,14 @@ import {
 
 const INDIVIDUAL_INSTALLATION = '01'
 
-const NewContractMemberSelfConsumptionData = (props) => {
-  const {
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldError,
-    setFieldTouched,
-    handleBlur
-  } = props
+const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
+  const { values, errors, touched, setFieldValue, handleBlur } = props
 
   const { t } = useTranslation()
+
+  useEffect(() => {
+    setHasAlert(true)
+  }, [setHasAlert])
 
   const handleCollectiveInstallation = (value) => {
     setFieldValue('self_consumption.collective_installation', value)
@@ -103,13 +98,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const installation_type_options = [
     {
       id: 'individual',
-      icon: <AccountCircleOutlinedIcon sx={iconRequirements} />,
+      icon: <PersonalIcon />,
       textHeader: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_INDIVIDUAL_INSTALLATION_HELP')
     },
     {
       id: 'collective',
-      icon: <Diversity1OutlinedIcon sx={iconRequirements} />,
+      icon: <CommunityIcon />,
       textHeader: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_LABEL'),
       textBody: t('SELFCONSUMPTION_COLLECTIVE_INSTALLATION_HELP')
     }
@@ -118,8 +113,8 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const aux_services_options = [
     {
       id: 'auxiliary-service-yes',
-      icon: <BatteryIcon on={true} />,
-      textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL'),
+      icon: <BatteryIcon />,
+      textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL')
       //textBody: t(
       //  'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
       //)
@@ -135,11 +130,6 @@ const NewContractMemberSelfConsumptionData = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-          <Typography variant="headline3">
-            {t('SELFCONSUMPTION_DETAILS_TITLE')}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
           <Grid item xs={12}>
             <AlertBox
               id="percent_value_error"
@@ -148,6 +138,11 @@ const NewContractMemberSelfConsumptionData = (props) => {
               //TODO icon={false}
               variant={'body2'}
             />
+            <Grid item xs={12}>
+              <Typography variant="headline4.regular">
+                {t('SELFCONSUMPTION_DETAILS_TITLE')}
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -166,16 +161,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
           touched={touched?.self_consumption?.cau}
           error={errors?.self_consumption?.cau}
           helperText={
-            <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
-              <Link
-                href={t('SELFCONSUMPTION_CAU_HELP_URL')}
-                target="_blank"
-                rel="noopener noreferrer"
-                color="secondary"
-                >
-                {t('SELFCONSUMPTION_CAU_HELP')}
-              </Link>
-            </Typography>
+            <a
+              href={t('SELFCONSUMPTION_CAU_HELP_URL')}
+              target="_blank"
+              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              rel="noopener noreferrer">
+              {t('SELFCONSUMPTION_CAU_HELP')}
+            </a>
           }
           cupsToMatch={
             props.values?.self_consumption?.collective_installation
@@ -202,14 +194,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
         <InputField
           required={true}
           name={'self_consumption.installation_power'}
-          textFieldName={t('CURRENT_POWER')}
+          textFieldName={t('SELFCONSUMPTION_INSTALL_POWER_QUESTION')}
           endAdornmentText={'kW'}
           handleChange={handleChangeInstallPower}
           handleBlur={handleBlur}
           touched={touched?.self_consumption?.installation_power}
           value={values?.self_consumption?.installation_power}
           error={errors?.self_consumption?.installation_power}
-          //textFieldHelper={t('HELP_POPOVER_POWER')}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -250,16 +241,13 @@ const NewContractMemberSelfConsumptionData = (props) => {
         />
         <HelperText
           helperText={
-            <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
-              <Link
-                href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
-                target="_blank"
-                rel="noopener noreferrer"
-                color="secondary"
-                >
-                {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
-              </Link>
-            </Typography>
+            <a
+              href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
+              target="_blank"
+              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              rel="noopener noreferrer">
+              {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
+            </a>
           }
           iconHelper={true}
         />

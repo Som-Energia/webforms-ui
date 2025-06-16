@@ -5,6 +5,7 @@ import InputField from './InputField'
 
 import { checkCadastralReference } from '../services/api'
 import GurbLoadingContext from '../context/GurbLoadingContext'
+import { useTheme } from '@mui/material/styles'
 
 const CadastralReference = (props) => {
   const {
@@ -16,6 +17,7 @@ const CadastralReference = (props) => {
     setFieldTouched
   } = props
 
+  const theme = useTheme()
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
 
@@ -74,7 +76,18 @@ const CadastralReference = (props) => {
     <InputField
       textFieldLabel={t('CADASTRAL_REFERENCE')}
       textFieldName={t('CADASTRAL_REFERENCE')}
-      textFieldHelper={t('GURB_CADASTRAL_REFERENCE_HELPER')}
+      textFieldHelper={
+        <span>
+          {t('CADASTRAL_REFERENCE_HELPER')}{' '}
+          <a
+            href={t('HELP_CADASTRAL_REFERENCE_URL')}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{color: theme.palette.secondary.main, textDecoration: 'underline' }}>
+            {t('CADASTRAL_REFERENCE_LINK')}
+          </a>
+          </span>
+      }
       iconHelper={true}
       handleChange={handleInputCadastralReference}
       handleBlur={handleInputCadastralReferenceBlur}

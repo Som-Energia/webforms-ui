@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
@@ -50,6 +51,7 @@ const NewContractMemberForm = (props) => {
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
+  const [hasAlert, setHasAlert] = useState(false)
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
@@ -270,7 +272,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 2) {
         return <MemberPersonalData {...props} />
       } else if (activeStep === 3) {
-        return <NewContractMemberSupplyPoint {...props} />
+        return <NewContractMemberSupplyPoint {...props} setHasAlert={setHasAlert} />
       } else if (activeStep === 4) {
         return <NewContractMemberSupplyPointData {...props} />
       } else if (activeStep === 5) {
@@ -278,7 +280,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 6) {
         return <NewContractMemberSelfConsumptionChooser {...props} />
       } else if (activeStep === 7) {
-        return <NewContractMemberSelfConsumptionData {...props} />
+        return <NewContractMemberSelfConsumptionData {...props} setHasAlert={setHasAlert} />
       } else if (activeStep === 8) {
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 9) {
@@ -349,10 +351,12 @@ const NewContractMemberForm = (props) => {
                 <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
               ) : (
                 <>
-                  <SomStepper
-                    activeStep={activeStep - 1} // because step 0 does not count
-                    steps={formSteps}
-                  />
+                  <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
+                    <SomStepper
+                      activeStep={activeStep - 1}
+                      steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
+                    />
+                  </Box>
                   {getStep(formikProps)}
                   <Grid
                     container
@@ -365,10 +369,10 @@ const NewContractMemberForm = (props) => {
                     }}>
                     {activeStep !== 0 && (
                       <Grid item sm={2} xs={12}>
-                        <PrevButton
+                        { summaryField === undefined && <PrevButton
                           onClick={() => prevStep(formikProps)}
                           title={'PREV'}
-                        />
+                        /> }
                       </Grid>
                     )}
                     <Grid item sm={2} xs={12} order={-1}>
@@ -380,7 +384,7 @@ const NewContractMemberForm = (props) => {
                             activeStep === MAX_STEP_NUMBER
                           }
                           onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
+                          title={summaryField === undefined ? 'SEGUENT_PAS' : 'SAVE_CHANGES'}
                         />
                       ) : (
                         <SubmitButton

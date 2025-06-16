@@ -4,11 +4,9 @@ import { HelperText } from './InputField'
 import Chooser from './NewChooser'
 import PowerInputs from './NewPowerInputs'
 
-import BoltIcon from '@mui/icons-material/Bolt'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-
-import { iconRequirements } from '../themes/commonStyles'
+import { PowerIcon } from '../data/icons/Icons'
 
 import { useTheme } from '@mui/material/styles'
 
@@ -26,12 +24,12 @@ const Powers = (props) => {
   const options = [
     {
       id: 'power-lower-15kw',
-      icon: <BoltIcon sx={iconRequirements} />,
+      icon: <PowerIcon/>,
       textHeader: t('POWER_LOWER_15_HEADER')
     },
     {
       id: 'power-higher-15kw',
-      icon: <BoltIcon sx={iconRequirements} />,
+      icon:<PowerIcon/>,
       textHeader: t('POWER_HIGHER_15_HEADER')
     }
   ]
@@ -39,8 +37,9 @@ const Powers = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
+      <Typography variant="body.md.medium">{t('POWER_TO_CONTRACT')}  <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>*</span></Typography>
         <Typography
-          sx={{ typography: 'body.sm.regular', color: 'secondary.dark' }}>
+          sx={{ typography: 'body.md.regular', color: 'secondary.dark' }}>
           {t('POWER_HELPER')}
         </Typography>
       </Grid>

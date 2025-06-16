@@ -45,20 +45,23 @@ const InputField = React.memo(
     endAdornmentText = false,
     startAdornmentText = false,
     numInputs = false,
-    name = false
+    name = '',
+    onPaste = undefined
   }) => {
     const { t } = useTranslation()
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ mb: '6px' }}>
           <InputTitle text={textFieldName} required={required} />
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body.sm.regular" color="secondary.dark">
-            {textFieldNameHelper}
-          </Typography>
-        </Grid>
+        {textFieldNameHelper && (
+          <Grid item xs={12}>
+            <Typography variant="body.sm.regular" color="secondary.dark">
+              {textFieldNameHelper}
+            </Typography>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <TextField
             name={name}
@@ -81,10 +84,16 @@ const InputField = React.memo(
                 )) ||
                 endAdornmentText
             }}
+            inputProps={{
+              sx: {
+                padding: '10px'
+              }
+            }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
+            onPaste={onPaste}
             value={value}
-            error={touched && error !== undefined}
+            error={touched && typeof error === 'string' && error.trim().length > 0}
           />
         </Grid>
         <Grid item>
@@ -96,7 +105,7 @@ const InputField = React.memo(
               />
             </Grid>
             {touched && error && (
-              <Grid item xs={12} marginLeft={'4px'}>
+              <Grid item xs={12} sx={{ ml: 0 }}>
                 <Typography variant="error" color="error">
                   {t(error)}
                 </Typography>

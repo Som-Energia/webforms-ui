@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import { useContext, useEffect } from 'react'
+
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
@@ -20,7 +22,9 @@ const MemberIdentifier = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">{t('MEMBER_PAGE_NIF')}</Typography>
+        <Typography variant="headline4.regular">
+          {t('MEMBER_PAGE_NIF')}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <NifCif {...props} />

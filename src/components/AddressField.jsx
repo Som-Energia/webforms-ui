@@ -3,119 +3,234 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
-import { useHandleChange, useHandleChangeInteger } from '../hooks/useHandleChange'
+import {
+  useHandleChange,
+  useHandleChangeInteger
+} from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField'
 
-const AddressField = (props) => {
-  const {
-    addressFieldName = 'address',
-    addressLabel,
-    activeStep,
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched,
-    setValues
-  } = props
+const normalizePlace = (place) => ({
+  id: place?.id?.toString() || '',
+  name: place?.name || ''
+})
 
+const updateAddressValues = async (
+  addressValue,
+  numberValue,
+  values,
+  setValues,
+  addressFieldName,
+  sessionTokenRef
+) => {
+  try {
+    const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
+
+    const postalCodeComponent = place.addressComponents.find((c) =>
+      c.types.includes('postal_code')
+    )
+    const municipis = await getMunicipisByPostalCode(
+      postalCodeComponent?.longText
+    )
+
+    const streetComponent = place.addressComponents.find((c) =>
+      c.types.includes('route')
+    )
+
+    const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
+    const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
+
+    const city = normalizePlace(cityRaw)
+    const state = normalizePlace(stateRaw)
+
+    setValues({
+      ...values,
+      [addressFieldName]: {
+        ...values[addressFieldName],
+        id: addressValue.id,
+        text: addressValue.text,
+        number: numberValue,
+        postal_code: postalCodeComponent?.longText || '',
+        street: streetComponent?.longText || '',
+        state,
+        city
+      }
+    })
+  } catch (error) {
+    console.error('Error updating address values:', error)
+  }
+}
+
+const AddressField = ({
+  addressFieldName = 'address',
+  addressLabel,
+  values,
+  errors,
+  touched,
+  setFieldValue,
+  setFieldTouched,
+  setValues
+}) => {
   const { t } = useTranslation()
+  const sessionTokenRef = useRef()
+
+  const [numberValue, setNumberValue] = useState(
+    values[addressFieldName]?.number || ''
+  )
+  const [postalCodeValue, setPostalCodeValue] = useState(
+    values[addressFieldName]?.postal_code || ''
+  )
+
+  useEffect(() => {
+    setPostalCodeValue(values[addressFieldName]?.postal_code || '')
+  }, [values[addressFieldName]?.postal_code])
+
+  const handleAddressChange = async (value) => {
+    if (!value || !value.id) {
+      // Is a text is written, and no suggestion selected, the text is saved as street
+      setFieldValue(
+        `${addressFieldName}.street`,
+        value?.street || value?.text || ''
+      )
+      return
+    }
+
+    try {
+      const place = await getPlaceDetails(value.id, sessionTokenRef)
+      const streetComponent = place.addressComponents.find((c) =>
+        c.types.includes('route')
+      )
+      const postalCodeComponent = place.addressComponents.find((c) =>
+        c.types.includes('postal_code')
+      )
+
+      setFieldValue(
+        `${addressFieldName}.street`,
+        streetComponent?.longText || ''
+      )
+      setFieldValue(
+        `${addressFieldName}.postal_code`,
+        postalCodeComponent?.longText || ''
+      )
+
+      await updateAddressValues(
+        value,
+        numberValue,
+        values,
+        setValues,
+        addressFieldName,
+        sessionTokenRef
+      )
+    } catch (error) {
+      console.error('Error fetching place details:', error)
+      setFieldValue(
+        `${addressFieldName}.street`,
+        value.text || value.street || ''
+      )
+      setFieldValue(`${addressFieldName}.postal_code`, '')
+    }
+  }
+
+  const handleChangePostalCode = async (event) => {
+    const value = event.target.value
+    setPostalCodeValue(value)
+    setFieldValue(`${addressFieldName}.postal_code`, value)
+
+    if (value.length >= 5) {
+      try {
+        const municipis = await getMunicipisByPostalCode(value)
+
+        const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
+        const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
+
+        const city = normalizePlace(cityRaw)
+        const state = normalizePlace(stateRaw)
+
+        setFieldValue(`${addressFieldName}.city`, city)
+        setFieldValue(`${addressFieldName}.state`, state)
+      } catch (error) {
+        console.error('Error getting municipis by postal code:', error)
+        setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
+        setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
+      }
+    } else {
+      setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
+      setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
+    }
+  }
+
+  const handleChangeNumber = (event) => {
+    const cleanedValue = event.target.value.replace(/[^0-9]/g, '')
+    setNumberValue(cleanedValue)
+    setFieldValue(`${addressFieldName}.number`, cleanedValue)
+  }
 
   const handleChange = useHandleChange(setFieldValue)
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
-  const [addressValue, setAddressValue] = useState(
-    values[addressFieldName]?.street
-  )
-  const [numberValue, setNumberValue] = useState(
-    values[addressFieldName]?.number
-  )
-  const sessionTokenRef = useRef()
-
-  useEffect(() => {
-    if (addressValue?.id && numberValue) {
-      updateAddressValues()
-    } else if (!addressValue || !numberValue) {
-      cleanAddress()
-    }
-  }, [addressValue, numberValue])
-
-  const updateAddressValues = async () => {
-    try {
-      const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
-      const postalCode = place.addressComponents.find((component) =>
-        component.types.includes('postal_code')
-      )
-      const municipis = await getMunicipisByPostalCode(postalCode?.longText)
-      const street = place.addressComponents.find((component) =>
-        component.types.includes('route')
-      )
-
-      const updatedValues = { ...values }
-      updatedValues[addressFieldName] = {
-        ...values[addressFieldName],
-        number: numberValue,
-        postal_code: postalCode?.longText || '',
-        street: street?.longText || '',
-        state: municipis && municipis[0] ? municipis[0][0]?.provincia : {},
-        city: municipis && municipis[0] ? municipis[0][0]?.municipi : {}
-      }
-      setValues(updatedValues)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const cleanAddress = () => {
-    setFieldValue(addressFieldName, {
-      has_different_address: values[addressFieldName].has_different_address,
-      street: '',
-      number: '',
-      postal_code: '',
-      state: { id: '', name: '' },
-      city: { id: '', name: '' }
-    })
-  }
-
-  const handleAddressChange = (value) => {
-    setAddressValue(value)
-  }
-
-  const handleChangeNumber = (event) => {
-    let cleanedValue = event.target.value.replace(/[^0-9]/g, '')
-    setNumberValue(cleanedValue)
-  }
-
   return (
     <Grid container spacing={2}>
-      <Grid item sm={12} xs={12}>
+      <Grid item sm={8} xs={12}>
         <LocationInput
-          required
+          id={addressFieldName}
           textFieldLabel={t('GURB_ADDRESS_LABEL')}
           textFieldName={addressLabel}
-          id={`${addressFieldName}-street`}
-          name={`${addressFieldName}.street`}
-          value={addressValue}
+          value={values[addressFieldName]}
           onChange={handleAddressChange}
+          onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
+          error={
+            touched[addressFieldName]?.street &&
+            errors[addressFieldName]?.street
+              ? errors[addressFieldName].street
+              : false
+          }
+          touched={touched[addressFieldName]?.street}
           sessionTokenRef={sessionTokenRef}
+          required
         />
       </Grid>
+
+      <Grid item sm={4} xs={12}>
+        <InputField
+          name={`${addressFieldName}.postal_code`}
+          handleBlur={() =>
+            setFieldTouched(`${addressFieldName}.postal_code`, true)
+          }
+          textFieldName={t('POSTAL_CODE')}
+          handleChange={handleChangePostalCode}
+          touched={touched[addressFieldName]?.postal_code}
+          value={postalCodeValue}
+          error={
+            touched[addressFieldName]?.postal_code &&
+            errors[addressFieldName]?.postal_code
+              ? t(errors[addressFieldName].postal_code)
+              : ''
+          }
+          required
+        />
+      </Grid>
+
       <Grid item sm={4} xs={12}>
         <InputField
           name={`${addressFieldName}.number`}
+          handleBlur={() => setFieldTouched(`${addressFieldName}.number`, true)}
           textFieldName={t('NUMBER')}
+          textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
           handleChange={handleChangeNumber}
           touched={touched[addressFieldName]?.number}
           value={numberValue}
-          error={errors[addressFieldName]?.number}
-          required={true}
+          error={
+            touched[addressFieldName]?.number &&
+            errors[addressFieldName]?.number
+              ? t(errors[addressFieldName].number)
+              : ''
+          }
+          required
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.floor`}
@@ -124,20 +239,20 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.floor}
           value={values[addressFieldName]?.floor}
           error={errors[addressFieldName]?.floor}
-          required={false}
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.door`}
           textFieldName={t('DOOR')}
-          handleChange={handleChangeInteger}
+          handleChange={handleChange}
           touched={touched[addressFieldName]?.door}
           value={values[addressFieldName]?.door}
           error={errors[addressFieldName]?.door}
-          required={false}
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.stairs`}
@@ -146,9 +261,9 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.stairs}
           value={values[addressFieldName]?.stairs}
           error={errors[addressFieldName]?.stairs}
-          required={false}
         />
       </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.bloc`}
@@ -157,10 +272,10 @@ const AddressField = (props) => {
           touched={touched[addressFieldName]?.bloc}
           value={values[addressFieldName]?.bloc}
           error={errors[addressFieldName]?.bloc}
-          required={false}
         />
       </Grid>
     </Grid>
   )
 }
+
 export default AddressField

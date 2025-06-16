@@ -5,19 +5,26 @@ import ArrowForward from '@mui/icons-material/ArrowForward'
 import { buttonGurbDark } from '../../containers/Gurb/gurbTheme'
 
 function NextButton(props) {
-  const { onClick, disabled } = props
+  const { onClick, disabled, title = "GURB_NEXT" } = props
   const { t } = useTranslation()
 
   return (
     <Button
-      sx={{ ...buttonGurbDark }}
+      sx={{
+        ...buttonGurbDark,
+        height: '40px',
+        padding: '13px 18px',
+        boxSizing: 'border-box',
+        lineHeight: 1,
+        textTransform: 'none'
+      }}
       type="button"
       data-cy="next"
       variant="contained"
-      endIcon={<ArrowForward />}
+      endIcon={<ArrowForward sx={{ fontSize: 20 }} />}
       disabled={disabled}
       onClick={onClick}>
-      {t('GURB_NEXT')}
+      {t(title)}
     </Button>
   )
 }

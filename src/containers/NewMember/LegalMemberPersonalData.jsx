@@ -24,9 +24,7 @@ const LegalMemberPersonalData = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldError,
     setFieldTouched,
-    setErrors
   } = props
   const { i18n, t } = useTranslation()
 
@@ -53,6 +51,11 @@ const LegalMemberPersonalData = (props) => {
 
   return (
     <Grid container spacing={4}>
+      <Grid item xs={12}>
+        <Typography variant="headline4.regular">
+          {t('MEMBER_PAGE_PERSONAL_DATA')}
+        </Typography>
+      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
@@ -120,6 +123,7 @@ const LegalMemberPersonalData = (props) => {
               value={values?.new_member.email2}
               error={errors?.new_member?.email2}
               required={true}
+              onPaste={(e) => e.preventDefault()}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

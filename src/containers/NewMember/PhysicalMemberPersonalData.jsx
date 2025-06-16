@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
@@ -23,13 +24,12 @@ const PhysicalMemberPersonalData = (props) => {
     errors,
     touched,
     setFieldValue,
-    setFieldError,
     setFieldTouched,
-    setErrors
   } = props
   const { i18n, t } = useTranslation()
 
   const gender_options = {
+    '': t('SELECT_OPTION'),
     woman: t('GENDER_WOMAN'),
     man: t('GENDER_MAN'),
     genderfluid: t('GENDER_FLUID'),
@@ -39,6 +39,7 @@ const PhysicalMemberPersonalData = (props) => {
   }
 
   const how_meet_us_options = {
+    '': t('SELECT_OPTION'),
     O1: t('HOW_MEET_US_OPTION_1'),
     O2: t('HOW_MEET_US_OPTION_2'),
     O3: t('HOW_MEET_US_OPTION_3'),
@@ -59,6 +60,11 @@ const PhysicalMemberPersonalData = (props) => {
 
   return (
     <Grid container spacing={4}>
+      <Grid item xs={12}>
+        <Typography variant="headline4.regular">
+          {t('MEMBER_PAGE_PERSONAL_DATA')}
+        </Typography>
+      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
@@ -141,6 +147,7 @@ const PhysicalMemberPersonalData = (props) => {
               value={values?.new_member.email2}
               error={errors?.new_member?.email2}
               required={true}
+              onPaste={(e) => e.preventDefault()}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
