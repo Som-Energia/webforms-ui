@@ -55,7 +55,7 @@
     "NO_PHONE": "O teléfono non é correcto",
     "MODIFY_POTTAR": "Petición de cambio de tarifa e/ou potencia",
     "POWER": "Potencia",
-    "FARE": "Tarifa",
+    "FARE": "Tarifa:",
     "CONTACT_PHONE": "Teléfono de contacto para acceder ao contador",
     "REVIEW_DATA_AND_CONFIRM": "Revisa os datos, se son correctos, fai clic no botón enviar.",
     "INVALID_FIELD": "O campo \"{{field_name}}\" ten un valor incorrecto",

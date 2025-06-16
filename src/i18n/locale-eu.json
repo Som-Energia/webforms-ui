@@ -60,7 +60,7 @@
     "NO_PHONE": "Adierazitako telefonoa ez da zuzena",
     "MODIFY_POTTAR": "Tarifa edo/eta potentzia aldatzeko eskaera",
     "POWER": "Potentzia",
-    "FARE": "Tarifa",
+    "FARE": "Tarifa:",
     "CONTACT_PHONE": "Harremanetarako telefonoa kontagailua ikusteko",
     "REVIEW_DATA_AND_CONFIRM": "Oso gutxi falta da! Berrikusi adierazitako datuak, eta sakatu \"Bidali\" botoia.",
     "INVALID_FIELD": "\"{{field_name}}\" eremuaren balioa ez da zuzena",
