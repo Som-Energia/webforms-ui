@@ -58,7 +58,7 @@ const Home = (props) => {
                 textTransform: 'uppercase',
                 pl: '10px'
               }}
-              component="body1">
+              variant="body1">
             </Typography>
           </Typography>
         </Toolbar>

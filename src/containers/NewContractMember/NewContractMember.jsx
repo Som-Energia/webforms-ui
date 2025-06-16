@@ -295,7 +295,7 @@ const NewContractMemberForm = (props) => {
       if (activeStep === 1) {
         return <ApadrinatingDetails {...props} />
       } else if (activeStep === 2) {
-        return <NewContractMemberSupplyPoint {...props} />
+        return <NewContractMemberSupplyPoint {...props} setHasAlert={setHasAlert} />
       } else if (activeStep === 3) {
         return <NewContractMemberSupplyPointData {...props} />
       } else if (activeStep === 4) {
@@ -303,7 +303,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 5) {
         return <NewContractMemberSelfConsumptionChooser {...props} />
       } else if (activeStep === 6) {
-        return <NewContractMemberSelfConsumptionData {...props} />
+        return <NewContractMemberSelfConsumptionData setHasAlert={setHasAlert} />
       } else if (activeStep === 7) {
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 8) {
