@@ -170,7 +170,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
             <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
           )}
           <Typography sx={{ variant: 'body.md.regular'}}>
-            <Link variant="body.md.regular" component="button" overlay onClick={handleLinkClick}>
+            <Link variant="body.md.regular" component="button" onClick={handleLinkClick}>
               {t('GURB_CLICK_HERE')}
             </Link>
             <input
