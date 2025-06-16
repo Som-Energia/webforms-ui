@@ -161,16 +161,13 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
           touched={touched?.self_consumption?.cau}
           error={errors?.self_consumption?.cau}
           helperText={
-            <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
-              <Link
-                href={t('SELFCONSUMPTION_CAU_HELP_URL')}
-                target="_blank"
-                rel="noopener noreferrer"
-                color="secondary"
-                >
-                {t('SELFCONSUMPTION_CAU_HELP')}
-              </Link>
-            </Typography>
+            <a
+              href={t('SELFCONSUMPTION_CAU_HELP_URL')}
+              target="_blank"
+              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              rel="noopener noreferrer">
+              {t('SELFCONSUMPTION_CAU_HELP')}
+            </a>
           }
           cupsToMatch={
             props.values?.self_consumption?.collective_installation
@@ -247,7 +244,7 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
             <a
               href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
               target="_blank"
-              style={{color: '#8C8C8C', textDecoration: 'underline' }}
+              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
               rel="noopener noreferrer">
               {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
             </a>

@@ -17,7 +17,6 @@ import Checkbox from '@mui/material/Checkbox'
 import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 
-import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
 import { getPrices } from '../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
@@ -163,7 +162,7 @@ const NewContractMemberSummary = (props) => {
       }
     ]
   }
-  
+
   const oldHolderFields = [
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
@@ -240,13 +239,18 @@ const NewContractMemberSummary = (props) => {
       {
         icon: <InvoiceIcon/>,
         title: t('REVIEW_PROCESS_TITLE'),
-        field: reviewProcessFields
+        field: [
+          {
+            reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
+          },
+          {
+            reviewValue: t('NEW_CONTRACT_SUMMARY_PROCESS')
+          }
+        ]
       },
-      {
-        icon: <PersonIcon sx={iconRequirements} />,
-        title: t('REVIEW_HOLDER_TITLE'),
-        field: reviewHolderData
-      },
+      values?.new_member?.person_type == 'legal-person'
+        ? legalReviewFields
+        : physicalReviewFields
     ],
     [
       {
