@@ -115,9 +115,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
       id: 'auxiliary-service-yes',
       icon: <BatteryIcon />,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL')
-      //textBody: t(
-      //  'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
-      //)
     },
     {
       id: 'auxiliary-service-no',
@@ -135,7 +132,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
               id="percent_value_error"
               description={t('SELFCONSUMPTION_RECOMMENDATION_TEXT')}
               severity={'warning'}
-              //TODO icon={false}
               variant={'body2'}
             />
             <Grid item xs={12}>
