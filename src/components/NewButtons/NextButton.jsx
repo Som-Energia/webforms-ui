@@ -5,7 +5,7 @@ import ArrowForward from '@mui/icons-material/ArrowForward'
 import { buttonGurbDark } from '../../containers/Gurb/gurbTheme'
 
 function NextButton(props) {
-  const { onClick, disabled, title = "GURB_NEXT" } = props
+  const { onClick, disabled, title = "NEXT" } = props
   const { t } = useTranslation()
 
   return (
