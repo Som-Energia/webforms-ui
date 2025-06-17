@@ -77,8 +77,11 @@ const NewContractMemberSupplyPointData = (props) => {
       <Grid item xs={12}>
         <DragDrop
           fieldName={t('ELECTRIC_BILL_UPLOAD')}
-          textStyle={"body.md.regular"}
+          textStyle={'body.md.regular'}
           required={false}
+          onChange={(fileHash) =>
+            setFieldValue('supply_point.attachment', fileHash)
+          }
         />
       </Grid>
       <Grid item xs={12}>
