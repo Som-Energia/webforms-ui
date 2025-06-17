@@ -4,10 +4,10 @@ import Button from '@mui/material/Button'
 import ArrowBack from '@mui/icons-material/ArrowBack'
 import Box from '@mui/material/Box'
 
-import { buttonGurbLight, textBody1 } from '../../containers/Gurb/gurbTheme'
+import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
 
 function PrevButton(props) {
-  const { onClick, disabled } = props
+  const { onClick, disabled, title='PREV' } = props
   const { t } = useTranslation()
 
   return (
@@ -26,7 +26,7 @@ function PrevButton(props) {
       }
       disabled={disabled}
       onClick={onClick}>
-      {t('GURB_PREV')}
+      {t(title)}
     </Button>
   )
 }

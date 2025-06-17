@@ -80,7 +80,8 @@ const NifCif = (props) => {
     <>
       <Grid item xs={12}>
         <InputField
-          name="new_member.nif"
+          data-cy="new_member.nif" // TODO: generalize!
+          name="new_member.nif" // TODO: generalize!
           textFieldName={t('NIF_FIELD')}
           textFieldHelper={t('MEMBER_NIF_HELPER')}
           handleChange={handleChangeNif}

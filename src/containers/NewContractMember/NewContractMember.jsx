@@ -2,17 +2,23 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
+import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
 import SomStepper from '../../components/NewSomStepper'
+import Result from '../../containers/Result'
 
-import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
+import {
+  NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
+  NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+} from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
@@ -44,25 +50,38 @@ import newContractMemberSummaryValidations from './newContractMemberSummaryValid
 import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
 import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
+import NewLoading from '../../components/NewLoading'
+
+import { newNormalizeContract } from '../../services/newNormalize'
+import { newContract } from '../../services/api'
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language } = useParams()
+  const { language, tariff } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
+
   const [hasAlert, setHasAlert] = useState(false)
+  const [completed, setCompleted] = useState(false)
+  const [error, setError] = useState(false)
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
+  const { trackEvent } = useContext(MatomoContext)
+  const [sending, setSending] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
-  const [validationSteps, setValidationSteps] = useState([newContractMemberQuestionValidations])
+  const [validationSteps, setValidationSteps] = useState([
+    newContractMemberQuestionValidations
+  ])
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
   useEffect(() => {
-    i18n.changeLanguage(language)
+    if (language && i18n.language !== language) {
+      i18n.changeLanguage(language)
+    }
   }, [language, i18n])
 
   const initialValues = {
@@ -127,14 +146,14 @@ const NewContractMemberForm = (props) => {
       phone_code: '+34',
       phone_valid: false,
       language: `${i18n.language}_ES`,
-      how_meet_us: '',
+      referral_source: '',
       payment_method: undefined,
       sepa_accepted: false,
       iban: undefined,
       legal_person_accepted: false
     },
     contract: {
-      tariff_mode: '',
+      tariff_mode: tariff,
       power_type: '',
       power: {
         power1: '',
@@ -162,46 +181,46 @@ const NewContractMemberForm = (props) => {
   }
 
   const validationSchemasLinkMember = [
-      newContractMemberQuestionValidations,
-      linkMemberValidations,
-      newContractMemberSupplyPointValidations,
-      newContractMemberSupplyPointDataValidations,
-      newContractMemberPowerValidations,
-      newContractMemberSelfConsumptionValidations,
-      newContractMemberSelfConsumptionDataValidations,
-      newContractMemberHolderValidations,
-      identifyMemberPersonalDataValidations,
-      newContractMemberVoluntaryDonationValidations,
-      newContractMemberPaymentValidations,
-      newContractMemberSummaryValidations
-    ]
+    newContractMemberQuestionValidations,
+    linkMemberValidations,
+    newContractMemberSupplyPointValidations,
+    newContractMemberSupplyPointDataValidations,
+    newContractMemberPowerValidations,
+    newContractMemberSelfConsumptionValidations,
+    newContractMemberSelfConsumptionDataValidations,
+    newContractMemberHolderValidations,
+    identifyMemberPersonalDataValidations,
+    newContractMemberVoluntaryDonationValidations,
+    newContractMemberPaymentValidations,
+    newContractMemberSummaryValidations
+  ]
 
   const validationSchemasNewMember = [
-      newContractMemberQuestionValidations,
-      memberIdentifierValidations,
-      memberPersonalDataValidations,
-      newContractMemberSupplyPointValidations,
-      newContractMemberSupplyPointDataValidations,
-      newContractMemberPowerValidations,
-      newContractMemberSelfConsumptionValidations,
-      newContractMemberSelfConsumptionDataValidations,
-      newContractMemberHolderValidations,
-      newContractMemberVoluntaryDonationValidations,
-      newContractMemberPaymentValidations,
-      newContractMemberSummaryValidations
-    ]
+    newContractMemberQuestionValidations,
+    memberIdentifierValidations,
+    memberPersonalDataValidations,
+    newContractMemberSupplyPointValidations,
+    newContractMemberSupplyPointDataValidations,
+    newContractMemberPowerValidations,
+    newContractMemberSelfConsumptionValidations,
+    newContractMemberSelfConsumptionDataValidations,
+    newContractMemberHolderValidations,
+    newContractMemberVoluntaryDonationValidations,
+    newContractMemberPaymentValidations,
+    newContractMemberSummaryValidations
+  ]
 
   const setValidationSchemaAndSteps = (has_member) => {
-    if (has_member == 'member-off')
-    {
+    if (has_member == 'member-off') {
       setValidationSteps(validationSchemasNewMember)
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member == 'member-on')
-    {
+    } else if (has_member == 'member-on') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
-      setMAX_STEP_NUMBER(Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
+      setMAX_STEP_NUMBER(
+        Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length
+      )
     } else {
       setValidationSteps(newContractMemberQuestionValidations)
       setFormSteps({})
@@ -258,15 +277,44 @@ const NewContractMemberForm = (props) => {
     setActiveStep(Math.max(0, prev))
   }
 
+  const trackSucces = () => {
+    trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+  }
+
   const handlePost = async (values) => {
-    console.log('POST final')
+    trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
+    setSending(true)
+    const data = newNormalizeContract(values)
+    await newContract(data)
+      .then((response) => {
+        if (response?.state === true) {
+          trackSucces()
+          if (response?.data?.redsys_endpoint) {
+            setData(response?.data)
+            setUrl(response.data.redsys_endpoint)
+          } else {
+            setCompleted(true)
+            setError(false)
+          }
+        } else {
+          setCompleted(true)
+          setError(true)
+        }
+      })
+      .catch((error) => {
+        setCompleted(true)
+        setError(true)
+        console.error(error)
+      })
+      .finally(() => {
+        setSending(false)
+      })
   }
 
   const getStep = (props) => {
     const { values } = props
 
-    if (values?.has_member == 'member-off')
-    {
+    if (values?.has_member == 'member-off') {
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -291,7 +339,6 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSummary {...props} />
       }
     } else {
-
       if (activeStep === 1) {
         return <ApadrinatingDetails {...props} />
       } else if (activeStep === 2) {
@@ -336,6 +383,10 @@ const NewContractMemberForm = (props) => {
     }
   }, [summaryField])
 
+  useEffect(() => {
+    trackEvent({ category: 'NewContractMember', action: 'setNewContractMemberStep', name: `new-contract-member-step-${activeStep}` })
+  }, [activeStep])
+
   return (
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
       <Formik
@@ -345,55 +396,86 @@ const NewContractMemberForm = (props) => {
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) => {
-          return (
+          return sending ? (
+            <NewLoading description={t('NEW_MEMBER_SUBMIT_LOADING')} />
+          ) : (
             <>
               {activeStep == 0 ? (
-                <NewContractMemberQuestion formikProps={formikProps} nextStep={nextStep} setValidationSchemaAndSteps={setValidationSchemaAndSteps}/>
+                <NewContractMemberQuestion
+                  formikProps={formikProps}
+                  nextStep={nextStep}
+                  setValidationSchemaAndSteps={setValidationSchemaAndSteps}
+                />
               ) : (
                 <>
-                  <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
+                  {!completed && (
+                    <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
                     <SomStepper
-                      activeStep={activeStep - 1}
-                      steps={NEW_MEMBER_CONTRACT_FORM_SUBSTEPS}
+                      activeStep={activeStep - 1} // because step 0 does not count
+                      steps={formSteps}
                     />
-                  </Box>
-                  {getStep(formikProps)}
-                  <Grid
-                    container
-                    direction="row-reverse"
-                    rowSpacing={2}
-                    sx={{
-                      marginTop: '2rem',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}>
-                    {activeStep !== 0 && (
-                      <Grid item sm={2} xs={12}>
-                        { summaryField === undefined && <PrevButton
-                          onClick={() => prevStep(formikProps)}
-                          title={'PREV'}
-                        /> }
-                      </Grid>
-                    )}
-                    <Grid item sm={2} xs={12} order={-1}>
-                      {activeStep !== MAX_STEP_NUMBER ? (
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={summaryField === undefined ? 'SEGUENT_PAS' : 'SAVE_CHANGES'}
+                    </Box>
+                  )}
+                  {completed ? (
+                    <Box sx={{ mt: 2 }}>
+                      <Result
+                        mode={!error ? 'success' : 'failure'}
+                        title={
+                          !error
+                            ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
+                            : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
+                        }>
+                        <Typography
+                          sx={{ color: 'secondary.dark', textAlign: 'center' }}
+                          dangerouslySetInnerHTML={{
+                            __html: !error
+                              ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                              : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                          }}
                         />
-                      ) : (
-                        <SubmitButton
-                          disabled={!formikProps.isValid}
-                          onClick={() => handlePost()}
-                        />
+                      </Result>
+                    </Box>
+                  ) : (
+                    getStep(formikProps)
+                  )}
+                  {!completed && (
+                    <Grid
+                      container
+                      direction="row-reverse"
+                      rowSpacing={2}
+                      sx={{
+                        marginTop: '2rem',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                      }}>
+                      {activeStep !== 0 && (
+                        <Grid item sm={2} xs={12}>
+                          <PrevButton
+                            onClick={() => prevStep(formikProps)}
+                            title={'PREV'}
+                          />
+                        </Grid>
                       )}
+                      <Grid item sm={2} xs={12} order={-1}>
+                        {activeStep !== MAX_STEP_NUMBER ? (
+                          <NextButton
+                            disabled={
+                              loading ||
+                              !formikProps.isValid ||
+                              activeStep === MAX_STEP_NUMBER
+                            }
+                            onClick={() => nextStep(formikProps)}
+                            title={'NEXT'}
+                          />
+                        ) : (
+                          <SubmitButton
+                            disabled={!formikProps.isValid}
+                            onClick={() => handlePost(formikProps.values)}
+                          />
+                        )}
+                      </Grid>
                     </Grid>
-                  </Grid>
+                  )}
                 </>
               )}
             </>
@@ -401,7 +483,7 @@ const NewContractMemberForm = (props) => {
         }}
       </Formik>
       {data?.payment_data && (
-        <form ref={formTPV} action={data.endpoint} method="POST">
+        <form ref={formTPV} action={data.redsys_endpoint} method="POST">
           {Object.keys(data.payment_data).map((key) => (
             <input
               key={key}

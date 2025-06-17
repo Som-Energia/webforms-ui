@@ -433,7 +433,7 @@ export const newNormalizeMember = (data) => {
     finalMember.representant_dni = data.new_member.proxynif
   }
 
-  finalMember.how_meet_us = data.new_member.how_meet_us
+  finalMember.referral_source = data.new_member.referral_source
   finalMember.privacy_policy_accepted = data.privacy_policy_accepted
   finalMember.statutes_accepted = data.statutes_accepted
   finalMember.comercial_info_accepted = data.comercial_info_accepted

@@ -119,6 +119,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
       upload(file.name, file)
     }
   }
+
   const onDrop = () => {}
 
   return (
@@ -139,8 +140,8 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
             border: drag
               ? '2px dashed black'
               : filename
-              ? '2px dashed #96B633'
-              : '2px dashed #D9D9D9',
+                ? '2px dashed #96B633'
+                : '2px dashed #D9D9D9',
             boxShadow: 'none',
             display: 'flex',
             flexDirection: 'column',
@@ -155,7 +156,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
             </Alert>
           ) : filename && !drag ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography sx={{ variant: 'body.md.regular', marginRight: '1rem' }}>
+              <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
                 {filename}
               </Typography>
               <IconButton
@@ -169,8 +170,8 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
           ) : (
             <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
           )}
-          <Typography sx={{ variant: 'body.md.regular'}}>
-            <Link variant="body.md.regular" component="button" overlay onClick={handleLinkClick}>
+          <Typography variant='body.md.regular' sx={{ display: 'flex', alignItems: 'center', padding: 0, margin: 0, gap: 1 }}>
+            <Link component="button" overlay onClick={handleLinkClick}>
               {t('GURB_CLICK_HERE')}
             </Link>
             <input
@@ -181,7 +182,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
             />{' '}
             {t('GURB_DRAG_AND_DROP_HERE')}
           </Typography>
-          <Typography sx={{variant: 'body.xs.regular'}}>{t('GURB_TYPE_OF_FILES')}</Typography>
+          <Typography variant='body.xs.regular'>{t('GURB_TYPE_OF_FILES')}</Typography>
         </Card>
       </Grid>
     </Grid>

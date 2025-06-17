@@ -28,7 +28,7 @@ const LegalMemberPersonalData = (props) => {
   } = props
   const { i18n, t } = useTranslation()
 
-  const how_meet_us_options = {
+  const referral_source_options = {
     O1: t('HOW_MEET_US_OPTION_1'),
     O2: t('HOW_MEET_US_OPTION_2'),
     O3: t('HOW_MEET_US_OPTION_3'),
@@ -141,9 +141,9 @@ const LegalMemberPersonalData = (props) => {
           <Grid item xs={12} sm={6}>
             <SelectField
               label={t('HOW_MEET_US')}
-              value={values?.new_member?.how_meet_us}
-              fieldName="new_member.how_meet_us"
-              options={how_meet_us_options}
+              value={values?.new_member?.referral_source}
+              fieldName="new_member.referral_source"
+              options={referral_source_options}
               {...props}
             />
           </Grid>

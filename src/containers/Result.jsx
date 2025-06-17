@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React,  { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -37,7 +37,9 @@ const Result = (props) => {
 
 
     useEffect(() => {
-        i18n.changeLanguage(language)
+       if (language && i18n.language !== language) {
+            i18n.changeLanguage(language)
+       }
     }, [language, i18n])
 
 
