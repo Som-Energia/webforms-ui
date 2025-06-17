@@ -106,14 +106,9 @@ const App = (props) => {
     )
     return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
   }, [])
-  const somtheme = React.useMemo(() => SomEnergiaTheme(), [])
+  
   const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
 
-  const contract20Props = () => {
-    let tmpProps = JSON.parse(JSON.stringify(props))
-    tmpProps.is30ContractEnabled = false
-    return tmpProps
-  }
 
   return (
     <>
@@ -498,11 +493,6 @@ const App = (props) => {
                         }
                       />
                     )}
-                  </Routes>
-                </ThemeProvider>
-                <ThemeProvider theme={webFormsTheme}>
-                  <CssBaseline />
-                  <Routes>
                     {[
                       '/:language/new-pagament-realitzat',
                       '/:language/new-pago-realizado',
@@ -510,6 +500,7 @@ const App = (props) => {
                       <Route
                         key={path}
                         path={path}
+                        key={path}
                         element={
                           <Result
                             mode={'success'}
@@ -528,6 +519,7 @@ const App = (props) => {
                       <Route
                         key={path}
                         path={path}
+                        key={path}
                         element={
                           <Result
                             mode="failure"
@@ -546,17 +538,16 @@ const App = (props) => {
                         }
                       />
                     ))}
-
                     <Route
                       path="/:language/new-contract-form/:tariff"
                       element={
-                        <GurbErrorContextProvider>
+                        
                           <GurbLoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm {...props} />
                             </SummaryContextProvider>
                           </GurbLoadingContextProvider>
-                        </GurbErrorContextProvider>
+                        
                       }
                     />
                     <Route
