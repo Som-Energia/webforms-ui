@@ -1,7 +1,7 @@
 export const normalizeAddress = (address) => {
   return {
-    state_id: address.state.id,
-    city_id: address.city.id,
+    state_id: parseInt(address.state.id),
+    city_id: parseInt(address.city.id),
     postal_code: address.postal_code,
     street: address.street,
     number: address.number,

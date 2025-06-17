@@ -13,11 +13,11 @@ export const address = {
     bloc: '',
     postal_code: '17004',
     state: {
-      id: 20,
+      id: "20",
       name: 'Girona'
     },
     city: {
-      id: 5386,
+      id: "5386",
       name: 'Girona'
     },
     lat: '1234',
