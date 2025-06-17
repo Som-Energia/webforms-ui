@@ -500,7 +500,6 @@ const App = (props) => {
                       <Route
                         key={path}
                         path={path}
-                        key={path}
                         element={
                           <Result
                             mode={'success'}
@@ -519,14 +518,12 @@ const App = (props) => {
                       <Route
                         key={path}
                         path={path}
-                        key={path}
                         element={
                           <Result
                             mode="failure"
                             title={t('FAILURE_TEXT')}
                             {...props}>
                             <Typography
-                              sx={{ color: 'secondary.dark' }}
                               sx={{ color: 'secondary.dark' }}
                               dangerouslySetInnerHTML={{
                                 __html: t('NEWMEMBER_KO_DESCRIPTION', {

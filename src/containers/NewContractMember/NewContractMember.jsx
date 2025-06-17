@@ -14,7 +14,6 @@ import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
 import SomStepper from '../../components/NewSomStepper'
 import Result from '../../containers/Result'
-import Box from '@mui/material/Box'
 
 import {
   NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
