@@ -1,4 +1,4 @@
-Cypress.Commands.add('contractMemberQuestion', (has_member = true) => {
+Cypress.Commands.add('contractMemberQuestion', (has_member = false) => {
   const optionValue = has_member ? 'member-on' : 'member-off'
   cy.get('[data-cy="member-question"]')
     .get(`[data-cy="${optionValue}"]`)
@@ -120,3 +120,14 @@ Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif) => {
   cy.get('button').contains(nif)
 })
 
+Cypress.Commands.add('acceptTermsAndsubmitNewContract', (status, error=false) => {
+  cy.intercept('POST', '/procedures/contract__WM', {
+    statusCode: !error ? 200 : 500,
+    body: {
+      state: status
+    }
+  })
+  cy.get('[data-cy="next"]').click()
+  let icon = status ? "success-icon" : "error-icon"
+  cy.get('[data-cy='+icon+']').should('exist')
+})
