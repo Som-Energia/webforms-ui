@@ -21,8 +21,6 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
   const [drag, setDrag] = useState(false)
   const [error, setError] = useState(false)
   const [filename, setFilename] = useState('')
-  const [uploads, setUploads] = useState('')
-  const [uploads, setUploads] = useState('')
 
   let dropRef = createRef()
 
@@ -39,7 +37,6 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
       .then((response) => {
         if (response?.data?.code === 'UPLOAD_OK') {
           const fileHash = response?.data?.file_hash
-          setUploads([fileHash])
           if (onChange) onChange(fileHash)
         } else {
           const errorMsg = getErrorMessage(response?.data?.code)
