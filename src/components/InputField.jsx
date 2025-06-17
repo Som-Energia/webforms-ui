@@ -92,7 +92,7 @@ const InputField = React.memo(
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
-            value={value}
+            value={value ?? ''}
             error={touched && typeof error === 'string' && error.trim().length > 0}
           />
         </Grid>
