@@ -217,14 +217,18 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
         />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <SelectField
-          label={t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
-          value={values?.self_consumption?.technology}
-          fieldName="self_consumption.technology"
-          options={technologies}
-          required={true}
-          {...props}
-        />
+        {Object.keys(technologies).length > 0 ? (
+          <SelectField
+            label={t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
+            value={values?.self_consumption?.technology}
+            fieldName="self_consumption.technology"
+            options={technologies}
+            required={true}
+            {...props}
+          />
+        ) : (
+          <div>{t('Loading...')}</div>
+        )}
       </Grid>
       <Grid item xs={12}>
         <InputTitle
