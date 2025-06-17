@@ -22,6 +22,7 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
   const [error, setError] = useState(false)
   const [filename, setFilename] = useState('')
   const [uploads, setUploads] = useState('')
+  const [uploads, setUploads] = useState('')
 
   let dropRef = createRef()
 
