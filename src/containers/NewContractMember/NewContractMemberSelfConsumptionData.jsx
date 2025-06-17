@@ -223,7 +223,7 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
             {...props}
           />
         ) : (
-          <div>{t('Loading...')}</div>
+          <div></div>
         )}
       </Grid>
       <Grid item xs={12}>
