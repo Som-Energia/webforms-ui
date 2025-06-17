@@ -82,7 +82,7 @@ const CnaeField = (props) => {
           <Grid item xs={12}>
             <Select
               options={options}
-              value={typeof values?.supply_point?.is_housing === 'boolean' ? values.supply_point.is_housing : ''}
+              value={typeof values?.supply_point?.is_housing}
               handleChange={handleIsHousing}
               style={textField}
             />
@@ -93,7 +93,7 @@ const CnaeField = (props) => {
         <InputField
           name="cnae"
           textFieldName={t('CNAE')}
-          readonlyField={values?.supply_point?.is_housing}
+          readonlyField={values?.supply_point?.is_housing === true}
           value={values?.supply_point?.cnae}
           handleChange={handleChangeCNAE}
           handleBlur={handleBlurCNAE}
