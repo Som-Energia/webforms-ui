@@ -82,7 +82,7 @@ const CnaeField = (props) => {
           <Grid item xs={12}>
             <Select
               options={options}
-              value={typeof values?.supply_point?.is_housing}
+              value={values?.supply_point?.is_housing ?? ''}
               handleChange={handleIsHousing}
               style={textField}
             />
