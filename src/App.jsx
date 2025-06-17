@@ -535,7 +535,6 @@ const App = (props) => {
                             {...props}>
                             <Typography
                               sx={{ color: 'secondary.dark' }}
-                              sx={{ color: 'secondary.dark' }}
                               dangerouslySetInnerHTML={{
                                 __html: t('NEWMEMBER_KO_DESCRIPTION', {
                                   url: t('CONTACT_HELP_URL')

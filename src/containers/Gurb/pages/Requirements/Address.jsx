@@ -147,7 +147,6 @@ const Address = (props) => {
       <Grid item xs={12}>
         <LocationInput
           required
-          textFieldLabel={t('GURB_ADDRESS_LABEL')}
           textFieldName={t('GURB_ADDRESS_FIELD')}
           textFieldHelper={t('GURB_ADDRESS_HELPER')}
           id="address-street"
