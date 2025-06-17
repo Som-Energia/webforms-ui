@@ -69,7 +69,7 @@ const NewContractMemberForm = (props) => {
 
   const { loading } = useContext(GurbLoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
-   const { trackEvent } = useContext(MatomoContext)
+  const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
@@ -80,7 +80,9 @@ const NewContractMemberForm = (props) => {
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
   useEffect(() => {
-    i18n.changeLanguage(language)
+    if (language && i18n.language !== language) {
+      i18n.changeLanguage(language)
+    }
   }, [language, i18n])
 
   const initialValues = {
@@ -275,7 +277,7 @@ const NewContractMemberForm = (props) => {
 
     setActiveStep(Math.max(0, prev))
   }
-  
+
   const trackSucces = () => {
     trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
   }
@@ -383,8 +385,8 @@ const NewContractMemberForm = (props) => {
   }, [summaryField])
 
   useEffect(() => {
-      trackEvent({ category: 'NewContractMember', action: 'setNewContractMemberStep', name: `new-contract-member-step-${activeStep}` })
-    }, [activeStep])
+    trackEvent({ category: 'NewContractMember', action: 'setNewContractMemberStep', name: `new-contract-member-step-${activeStep}` })
+  }, [activeStep])
 
   return (
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>

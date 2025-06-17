@@ -50,7 +50,9 @@ const NewMemberForm = (props) => {
   const [activeStep, setActiveStep] = useState(0)
 
   useEffect(() => {
-    i18n.changeLanguage(language)
+    if (language && i18n.language !== language) {
+      i18n.changeLanguage(language)
+    }
   }, [language, i18n])
 
   const initialValues = {
