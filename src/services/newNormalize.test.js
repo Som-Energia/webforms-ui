@@ -2,12 +2,13 @@ import {
   normalizeAddress,
   normalizeClient,
   normalizeSelfconsumption,
-  newNormalizeContract
+  newNormalizeContract,
+  normalizeAttachments,
 } from './newNormalize'
 
 import newContractCases from './utilsMockData/forms/newContract'
 
-import { address, client, selfconsumption } from './utilsMockData/common'
+import { address, client, selfconsumption, supply_point_attachments } from './utilsMockData/common'
 
 describe('Check Address (normalize function)', () => {
   test('Normalize Address', () => {
@@ -35,6 +36,26 @@ describe('Check Client (normalize function)', () => {
   test('Normalize Client (juridical)', () => {
     expect(normalizeClient(client.juridic.entryValues)).toStrictEqual(
       client.juridic.normalizedData
+    )
+  })
+})
+
+describe('Check Attachments (normalize function)', () => {
+  test('Normalize Attachments (new_contract)', () => {
+    expect(normalizeAttachments(
+      supply_point_attachments.new_contract.entryValues.filename,
+      supply_point_attachments.new_contract.entryValues.process
+    )).toStrictEqual(
+      supply_point_attachments.new_contract.normalizedData
+    )
+  })
+
+  test('Normalize Attachments (invoice)', () => {
+    expect(normalizeAttachments(
+      supply_point_attachments.invoice.entryValues.filename,
+      supply_point_attachments.invoice.entryValues.process
+    )).toStrictEqual(
+      supply_point_attachments.invoice.normalizedData
     )
   })
 })

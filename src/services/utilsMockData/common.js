@@ -176,8 +176,44 @@ export const iban_values = {
 }
 
 export const supply_point = {
-  cnae: 9820,
-  supply_point_accepted: true,
-  is_housing: true,
-  cnae_valid: true
+  with_attachments: {
+    entryValues: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true,
+      attachment: 'road_poneglyph.jpg'
+    }
+  },
+  without_attachments: {
+    entryValues: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true,
+    }
+  }
+}
+
+export const supply_point_attachments = {
+  new_contract: {
+    entryValues: {
+      filename: 'road poneglyph',
+      process: 'A3'
+    },
+    normalizedData: [{
+      filename: 'road poneglyph',
+      category: 'new_contract'
+    }]
+  },
+  invoice: {
+    entryValues: {
+      filename: 'road poneglyph',
+      process: 'C1'
+    },
+    normalizedData: [{
+      filename: 'road poneglyph',
+      category: 'invoice'
+    }]
+  }
 }

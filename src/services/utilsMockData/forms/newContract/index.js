@@ -52,7 +52,7 @@ const alreadyMember = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.without_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.empty,
     member: {
@@ -166,7 +166,7 @@ const newMember = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.without_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.entryValues,
     member: {
@@ -218,7 +218,7 @@ const A3_indexed = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.without_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.empty,
     member: {
@@ -273,7 +273,7 @@ const C2_30TD = {
     previous_holder: 'previous-holder-no',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.without_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.empty,
     member: {
@@ -332,7 +332,7 @@ const withSelfconsumption = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.with_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.empty,
     member: {
@@ -375,7 +375,8 @@ const withSelfconsumption = {
     },
     privacy_conditions: true,
     general_contract_terms_accepted: true,
-    statutes_accepted: true
+    statutes_accepted: true,
+    attachments: [{filename: 'road_poneglyph.jpg', category: 'invoice'}]
   }
 }
 
@@ -389,7 +390,7 @@ const cadastralReference = {
     voluntary_donation: true,
     cadastral_reference: '8277124 YR8968U 5098 BP',
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.without_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.empty,
     member: {
@@ -447,7 +448,7 @@ const paymentTPV = {
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,
     cadastral_reference_valid: true,
-    supply_point: supply_point,
+    supply_point: supply_point.without_attachments.entryValues,
     supply_point_address: address.entryValues,
     address: address.empty,
     member: {
