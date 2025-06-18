@@ -175,7 +175,6 @@ const AddressField = ({
       <Grid item sm={8} xs={12}>
         <LocationInput
           id={addressFieldName}
-          textFieldLabel={t('GURB_ADDRESS_LABEL')}
           textFieldName={addressLabel}
           value={values[addressFieldName]}
           onChange={handleAddressChange}

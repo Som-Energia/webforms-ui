@@ -302,10 +302,7 @@ const NewContractMemberSummary = (props) => {
               ? t('FARE_INDEXED')
               : values.contract.power_type === 'power-higher-15kw'
               ? t('FARE_PERIODS').concat(" ",'3.0TD')
-              : t('FARE_PERIODS').concat(" ",'2.0TD'),
-            step: showReviewLinks
-              ? formSteps['MEMBER_INFO']
-              : null
+              : t('FARE_PERIODS').concat(" ",'2.0TD')
           },
           {
             reviewLabel: t('POWER_SUMMARY'),

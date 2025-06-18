@@ -15,14 +15,12 @@ import RequiredTitle from './InputTitle'
 import { uploadFile } from '../services/api'
 import Grid from '@mui/material/Grid'
 
-const DragDrop = ({ fieldName, textStyle, required }) => {
+const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
   const { t } = useTranslation()
 
   const [drag, setDrag] = useState(false)
   const [error, setError] = useState(false)
   const [filename, setFilename] = useState('')
-  const [uploads, setUploads] = useState('')
-  const [uploads, setUploads] = useState('')
 
   let dropRef = createRef()
 
@@ -33,11 +31,13 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
         return t('INVALID_FILETYPE')
     }
   }
+
   const upload = (name, file) => {
     return uploadFile(name, file)
       .then((response) => {
         if (response?.data?.code === 'UPLOAD_OK') {
-          setUploads([response?.data?.file_hash])
+          const fileHash = response?.data?.file_hash
+          if (onChange) onChange(fileHash)
         } else {
           const errorMsg = getErrorMessage(response?.data?.code)
           setError(errorMsg)
@@ -103,8 +103,8 @@ const DragDrop = ({ fieldName, textStyle, required }) => {
   })
 
   const handleLinkClick = (e) => {
-    e.preventDefault() // Evita la navegación predeterminada
-    fileInputRef.current.click() // Activa el input de archivo
+    e.preventDefault()
+    fileInputRef.current.click()
   }
 
   const handleFileChange = (e) => {

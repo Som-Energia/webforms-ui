@@ -115,9 +115,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
       id: 'auxiliary-service-yes',
       icon: <BatteryIcon />,
       textHeader: t('SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL')
-      //textBody: t(
-      //  'SELFCONSUMPTION_DETAILS_AUXILIARY_SERVICE_YES_LABEL_DESCRIPTION'
-      //)
     },
     {
       id: 'auxiliary-service-no',
@@ -135,7 +132,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
               id="percent_value_error"
               description={t('SELFCONSUMPTION_RECOMMENDATION_TEXT')}
               severity={'warning'}
-              //TODO icon={false}
               variant={'body2'}
             />
             <Grid item xs={12}>
@@ -217,14 +213,18 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
         />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <SelectField
-          label={t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
-          value={values?.self_consumption?.technology}
-          fieldName="self_consumption.technology"
-          options={technologies}
-          required={true}
-          {...props}
-        />
+        {Object.keys(technologies).length > 0 ? (
+          <SelectField
+            label={t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
+            value={values?.self_consumption?.technology}
+            fieldName="self_consumption.technology"
+            options={technologies}
+            required={true}
+            {...props}
+          />
+        ) : (
+          <div></div>
+        )}
       </Grid>
       <Grid item xs={12}>
         <InputTitle
