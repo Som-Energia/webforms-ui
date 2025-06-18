@@ -79,6 +79,7 @@ const TermsDialog = ({
       fullWidth>
       <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
       <DialogContent
+        data-cy="generic_conditions_modal"
         dividers
         sx={{ fontFamily: 'Outfit' }}
         ref={contentRef}

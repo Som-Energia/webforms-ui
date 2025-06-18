@@ -19,7 +19,7 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
 })
 
 Cypress.Commands.add('gurbAddress', (street) => {
-  cy.get('[data-cy="address-street"]').type(street.input)
+  cy.get('[data-cy="address"]').type(street.input)
   cy.contains(street.value).click()
 
   cy.get('[data-cy="address.number"]').type('2')
