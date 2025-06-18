@@ -388,13 +388,13 @@ const NewContractMemberSummary = (props) => {
     },
     {
       title: t('GENERATION'),
-      field: 'gkwh'
+      field: 'generation_kWh'
     },
     {
       title: t('REVIEW_PRICES_POWER_TITLE'),
       field: 'potencia'
     },
-    { title: t('AUTOCONSUM'), field: 'energia_consumida' }
+    { title: t('AUTOCONSUM'), field: 'energia_autoconsumida' }
   ]
 
   useEffect(() => {
