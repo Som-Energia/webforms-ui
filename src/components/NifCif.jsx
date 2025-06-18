@@ -40,7 +40,7 @@ const NifCif = (props) => {
         console.error('UNEXPECTED')
       })
     setFieldError('new_member.nif', undefined)
-    if (nif_info?.exists === true) {
+    if (nif_info?.is_member === true) {
       setFieldError('new_member.nif', t('DNI_EXIST'))
     }
     if (nif_info?.valid === false) {
