@@ -35,3 +35,6 @@ dist
 # editors
 .*sw?
 .vercel
+
+# personaldata
+holderChangePersonaldata.json
