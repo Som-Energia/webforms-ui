@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import Typography from '@mui/material/Typography'
 
 import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
