@@ -74,7 +74,6 @@ const CadastralReference = (props) => {
 
   return (
     <InputField
-      textFieldLabel={t('CADASTRAL_REFERENCE')}
       textFieldName={t('CADASTRAL_REFERENCE')}
       textFieldHelper={
         <span>
