@@ -418,7 +418,7 @@ const NewContractMemberSummary = (props) => {
       tariff:
         values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
       max_power: maxPower,
-      vat: values.new_member.nif,
+      vat : values.new_member ? values.new_member.nif : member.nif,
       cnae: values.supply_point.cnae,
       city_id: cityId
     })
