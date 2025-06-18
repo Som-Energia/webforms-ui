@@ -1,4 +1,4 @@
-import { useEffect , useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -113,31 +113,34 @@ const PaymentMethod = (props) => {
           required={true}
         />
       </Grid>
-      <Grid item xs={12}>
-        <InputTitle
-          text={t('PAYMENT_METHOD_QUESTION')}
-          description={t('MEMBER_PAYMENT_EXPLANATION')}
-          required={true}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Chooser
-          name="method-payment-question"
-          options={options}
-          value={values.new_member.payment_method}
-          handleChange={handleMethodPaymentQuestion}
-        />
-      </Grid>
+      {values?.has_member === 'member-off' ?
+        (<>
+          <Grid item xs={12}>
+            <InputTitle
+              text={t('PAYMENT_METHOD_QUESTION')}
+              description={t('MEMBER_PAYMENT_EXPLANATION')}
+              required={true}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Chooser
+              name="method-payment-question"
+              options={options}
+              value={values.new_member.payment_method}
+              handleChange={handleMethodPaymentQuestion}
+            />
+          </Grid>
+        </>) : null}
       <Grid item xs={12}>
         <Box sx={{ display: 'flex' }}>
           <FormControlLabel
-             control={
-             <Checkbox
+            control={
+              <Checkbox
                 data-cy="iban_check"
                 checked={values?.new_member?.sepa_accepted}
                 onClick={handleClick}
-                />
-             }
+              />
+            }
             label={
               <>
                 <Typography variant="body.sm.regular" color="primary.dark">

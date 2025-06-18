@@ -50,8 +50,8 @@ const NewContractMemberSummary = (props) => {
   const formSteps = values?.has_member == 'member-off'
     ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
     : values?.has_member == 'member-on'
-    ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-    : undefined
+      ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+      : undefined
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -83,7 +83,7 @@ const NewContractMemberSummary = (props) => {
   }
 
   const legalReviewFields = {
-    icon: <PersonalIcon/>,
+    icon: <PersonalIcon />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
@@ -127,7 +127,7 @@ const NewContractMemberSummary = (props) => {
   }
 
   const physicalReviewFields = {
-    icon: <PersonalIcon/>,
+    icon: <PersonalIcon />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
@@ -164,20 +164,20 @@ const NewContractMemberSummary = (props) => {
   }
 
   const oldHolderFields = [
-      {
-        reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
-        reviewValue: values?.member?.nif,
-        step: showReviewLinks
-          ? formSteps['LINK_MEMBER']
-          : null
-      }
-    ]
+    {
+      reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
+      reviewValue: values?.member?.nif,
+      step: showReviewLinks
+        ? formSteps['LINK_MEMBER']
+        : null
+    }
+  ]
 
   const reviewHolderData = values?.member_is_holder == 'holder-member-yes'
     ? oldHolderFields
     : values?.new_member?.person_type == 'legal-person'
-    ? legalReviewFields
-    : physicalReviewFields
+      ? legalReviewFields
+      : physicalReviewFields
 
   const summary_process = values?.previous_holder == 'prevuis-holder-yes'
     ? t('NEW_CONTRACT_OLD_HOLDER_SUMMARY_PROCESS')
@@ -211,33 +211,64 @@ const NewContractMemberSummary = (props) => {
       }
     ]
     : [
+      {
+        reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+        reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+        step: showReviewLinks
+          ? formSteps['MEMBER_INFO']
+          : null
+      },
+      {
+        reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+        reviewValue: values?.new_member?.email,
+        step: showReviewLinks
+          ? formSteps['MEMBER_INFO']
+          : null
+      },
+      {
+        reviewLabel: t('LANGUAGE'),
+        reviewValue: languages[values?.new_member?.language],
+        step: showReviewLinks
+          ? formSteps['MEMBER_INFO']
+          : null
+      }
+    ]
+
+
+
+  const getPaymentField = () => {
+
+    let paymentFields = [{
+      reviewLabel: t('REVIEW_PAYMENT_DATA'),
+      reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
+    },
     {
-      reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-      reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+      reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
+      reviewValue: values?.new_member?.iban,
       step: showReviewLinks
-        ? formSteps['MEMBER_INFO']
+        ? formSteps['PAYMENT_INFO']
         : null
     },
     {
-      reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-      reviewValue: values?.new_member?.email,
+      reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
+      reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
       step: showReviewLinks
-        ? formSteps['MEMBER_INFO']
-        : null
-    },
-    {
-      reviewLabel: t('LANGUAGE'),
-      reviewValue: languages[values?.new_member?.language],
-      step: showReviewLinks
-        ? formSteps['MEMBER_INFO']
+        ? formSteps['DONATION']
         : null
     }
-  ]
+    ]
+    if(values?.has_member === 'member-on') {
+      paymentFields.shift()
+    }
+    return paymentFields    
+  }
+
+
 
   const reviewFields = [
     [
       {
-        icon: <InvoiceIcon/>,
+        icon: <InvoiceIcon />,
         title: t('REVIEW_PROCESS_TITLE'),
         field: [
           {
@@ -254,7 +285,7 @@ const NewContractMemberSummary = (props) => {
     ],
     [
       {
-        icon: <PlaceMapIcon/>,
+        icon: <PlaceMapIcon />,
         title: t('SUPPLY'),
         field: [
           {
@@ -289,7 +320,7 @@ const NewContractMemberSummary = (props) => {
         ]
       },
       {
-        icon: <ConfigIcon/>,
+        icon: <ConfigIcon />,
         title: t('TECHNICAL_DATA_SUMMARY'),
         field: [
           {
@@ -301,8 +332,8 @@ const NewContractMemberSummary = (props) => {
             reviewValue: isTariffIndexed
               ? t('FARE_INDEXED')
               : values.contract.power_type === 'power-higher-15kw'
-              ? t('FARE_PERIODS').concat(" ",'3.0TD')
-              : t('FARE_PERIODS').concat(" ",'2.0TD')
+                ? t('FARE_PERIODS').concat(" ", '3.0TD')
+                : t('FARE_PERIODS').concat(" ", '2.0TD')
           },
           {
             reviewLabel: t('POWER_SUMMARY'),
@@ -316,7 +347,7 @@ const NewContractMemberSummary = (props) => {
     ],
     [
       {
-        icon: <PhoneIcon/>,
+        icon: <PhoneIcon />,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
@@ -343,28 +374,9 @@ const NewContractMemberSummary = (props) => {
         ]
       },
       {
-        icon: <CreditCardIcon/>,
+        icon: <CreditCardIcon />,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
-        field: [
-          {
-            reviewLabel: t('REVIEW_PAYMENT_DATA'),
-            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
-          },
-          {
-            reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
-            reviewValue: values?.new_member?.iban,
-            step: showReviewLinks
-              ? formSteps['PAYMENT_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
-            reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
-            step: showReviewLinks
-              ? formSteps['DONATION']
-              : null
-          }
-        ]
+        field: getPaymentField()
       }
     ]
   ]
@@ -478,7 +490,7 @@ const NewContractMemberSummary = (props) => {
       ) : (
         <Grid container spacing={0}>
           <Grid item xs={2} sm={1}>
-            <PricetagIcon/>
+            <PricetagIcon />
           </Grid>
           <Grid item xs={10} sm={11}>
             <Grid container spacing={3}>
