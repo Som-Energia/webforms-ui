@@ -166,9 +166,9 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
             </a>
           }
           cupsToMatch={
-            props.values?.self_consumption?.collective_installation
+            values?.self_consumption?.collective_installation
               ? undefined
-              : props.values.cups
+              : values.cups
           }
         />
       </Grid>
