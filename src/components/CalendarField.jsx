@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import dayjs from 'dayjs';
 
 import 'dayjs/locale/es'
 import 'dayjs/locale/ca'
@@ -21,6 +23,26 @@ const CalendarField = ({
   const { i18n } = useTranslation()
 
   const language = i18n.language
+  const [error, setError] = useState('');
+  const [touched, setTouched] = useState(false);
+
+
+    const handleError = (reason) => {
+    if (reason === 'invalidDate' && touched) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  };
+
+
+    const handleBlur = () => {
+    setTouched(true);
+    if (!value || !dayjs(value).isValid()) {
+      setError(true);
+    }
+  };
+
 
   return (
     <Grid container spacing={2}>
@@ -34,8 +56,10 @@ const CalendarField = ({
           <DatePicker
             value={value}
             onChange={handleChange}
-            slotProps={{ textField: { fullWidth: true } }}
+            onError={handleError}
+            slotProps={{ textField: { fullWidth: true, onBlur:handleBlur, error:!!error } }}
             sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}
+            
           />
         </LocalizationProvider>
       </Grid>
