@@ -18,56 +18,7 @@ const TermsDialog = ({
   maxWidth = 'sm'
 }) => {
   const { t } = useTranslation()
-  const [scrolledToBottom, setScrolledToBottom] = useState(false)
-  const contentRef = useRef(null)
-
-  const checkScroll = () => {
-    const el = contentRef.current
-    if (!el) return
-
-    if (el.scrollHeight <= el.clientHeight) {
-      setScrolledToBottom(true)
-    } else {
-      setScrolledToBottom(false)
-    }
-  }
-
-  useEffect(() => {
-    if (!open) return
-
-    setScrolledToBottom(false)
-
-    const timeoutId = setTimeout(() => {
-      checkScroll()
-    }, 100)
-
-    // Observer to changes in content size
-    let resizeObserver
-    if (contentRef.current) {
-      resizeObserver = new ResizeObserver(() => {
-        checkScroll()
-      })
-      resizeObserver.observe(contentRef.current)
-    }
-
-    return () => {
-      clearTimeout(timeoutId)
-      if (resizeObserver && contentRef.current) {
-        resizeObserver.unobserve(contentRef.current)
-        resizeObserver.disconnect()
-      }
-    }
-  }, [open])
-
-  const handleScroll = () => {
-    const el = contentRef.current
-    if (!el) return
-
-    if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
-      setScrolledToBottom(true)
-    }
-  }
-
+  
   return (
     <Dialog
       open={open}
@@ -82,8 +33,6 @@ const TermsDialog = ({
         data-cy="generic_conditions_modal"
         dividers
         sx={{ fontFamily: 'Outfit' }}
-        ref={contentRef}
-        onScroll={handleScroll}
         style={{ maxHeight: '300px', overflowY: 'auto' }}>
         {children}
       </DialogContent>
@@ -114,7 +63,6 @@ const TermsDialog = ({
           onClick={onAccept}
           variant="contained"
           color="primary"
-          disabled={!scrolledToBottom}
           id="terms-dialog-accept-btn">
           {t(acceptText)}
         </Button>
