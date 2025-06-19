@@ -17,9 +17,9 @@ export default function WebFormsTheme() {
         alt: '#afb5e8'
       },
       secondary: {
-        main: '#C4C4C4',
-        dark: '#8C8C8C',
-        light: '#D9D9D9',
+        main: '#636363',
+        dark: '#636363',
+        light: '#636363',
         extraLight: '#FAFAFA'
       },
       background: {
@@ -28,7 +28,10 @@ export default function WebFormsTheme() {
         third: '#F0F3EC'
       },
       error: {
-        main: '#EE4949'
+        main: '#D33C3C'
+      },
+      link: {
+        main: '#0c4c27'
       }
     },
     typography: {

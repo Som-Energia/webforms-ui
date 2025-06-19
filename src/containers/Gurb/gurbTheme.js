@@ -162,7 +162,7 @@ export const buttonGurbDark = {
   textTransform: 'capitalize',
   borderRadius: '2rem',
   border: '1px solid transparent',
-  backgroundColor: 'primary.extraLight',
+  backgroundColor: '#C5F47C',
   color: 'primary.main',
   paddingLeft: '1rem',
   paddingRight: '1rem',
@@ -195,7 +195,7 @@ export const buttonGurbLight = {
     }
   },
   '&:hover': {
-    backgroundColor: 'primary.extraLight',
+    backgroundColor: '#C5F47C',
     border: '1px solid transparent',
     boxShadow: 'none',
     '& .MuiButton-startIcon': {
