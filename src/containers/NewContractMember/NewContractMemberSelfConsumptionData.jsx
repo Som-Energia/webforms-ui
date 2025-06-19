@@ -249,7 +249,6 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
               {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
             </a>
           }
-          iconHelper={true}
         />
       </Grid>
     </Grid>
