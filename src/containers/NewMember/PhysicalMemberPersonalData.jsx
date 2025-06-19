@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-
+import { useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
@@ -27,6 +27,13 @@ const PhysicalMemberPersonalData = (props) => {
     setFieldTouched,
   } = props
   const { i18n, t } = useTranslation()
+
+  useEffect(() => {
+    const newLanguage = `${i18n.language}_ES`
+    if (values?.new_member?.language !== newLanguage) {
+      setFieldValue('new_member.language', newLanguage)
+    }
+  }, [i18n.language, setFieldValue, values?.new_member?.language])
 
   const gender_options = {
     '': t('SELECT_OPTION'),
