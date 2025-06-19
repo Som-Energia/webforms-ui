@@ -60,14 +60,19 @@ const CUPS = (props) => {
       name="cups"
       textFieldName={t('CUPS_FIELD')}
       textFieldHelper={
-        <Typography sx={{ typography: 'body.xs.regular', color: 'secondary' }}>
+        <Typography
+          sx={{
+            fontSize: '14px',
+            fontWeight: 400,
+            letterSpacing: 0,
+            color: 'secondary.main'
+          }}>
           {t('CUPS_HELPER_TEXT')}{' '}
           <Link
             href={t('CUPS_HELPER_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            color="secondary"
-            >
+            color="link.main">
             {t('CUPS_HELPER_LINK')}
           </Link>
         </Typography>

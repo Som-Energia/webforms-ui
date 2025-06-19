@@ -21,7 +21,7 @@ const SomStepper = (props) => {
         sx={{
           height: 6,
           borderRadius: '100px',
-          backgroundColor: 'secondary',
+          backgroundColor: 'secondary.main',
           '& .MuiLinearProgress-bar': {
             backgroundColor: 'primary2.main'
           }
