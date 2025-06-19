@@ -68,7 +68,6 @@ const Powers = (props) => {
                     {t('POWER_LOWER_15_HELPER')}
                   </a>
                 }
-                iconHelper={true}
               />
             </Grid>
             <Grid item>
@@ -98,7 +97,6 @@ const Powers = (props) => {
                     {t('POWER_HIGHER_15_HELPER')}
                   </a>
                 }
-                iconHelper={true}
               />
             </Grid>
             <Grid item>

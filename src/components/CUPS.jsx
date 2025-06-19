@@ -72,7 +72,6 @@ const CUPS = (props) => {
           </Link>
         </Typography>
       }
-      iconHelper={true}
       handleChange={handleInputCups}
       handleBlur={handleInputCupsBlur}
       touched={touched?.cups}

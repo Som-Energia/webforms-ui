@@ -87,7 +87,6 @@ const CadastralReference = (props) => {
           </a>
           </span>
       }
-      iconHelper={true}
       handleChange={handleInputCadastralReference}
       handleBlur={handleInputCadastralReferenceBlur}
       touched={touched?.cadastral_reference}
