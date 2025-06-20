@@ -746,8 +746,8 @@
     "CUPS_FIELD": "Adierazi CUPS kodea",
     "CUPS_HELPER_TEXT": "CUPS kodea fakturan zehazten da.",
     "CUPS_HELPER_LINK": "Ikusi hemen non aurkitu dezakedan CUPS kodea",
-    "BIRTHDATE": "Jaiotze-data",
-    "GENDER": "Generoa",
+    "BIRTHDATE": "Jaiotze-data (aukerakoa)",
+    "GENDER": "Generoa (aukerakoa)",
     "GENDER_NON_BINARY": "Ez-bitarra",
     "GURB_ADDRESS_LABEL": "GURB_ADDRESS_LABEL",
     "GENERIC_CONDITIONS_URL": "GENERIC_CONDITIONS_URL",
@@ -893,5 +893,11 @@
     "LIGHT_OFF_URL": "https://eu.support.somenergia.coop/article/462-une-honetan-ez-dago-argirik-nola-eskatu-hornidura-puntu-berri-bat?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "POSTAL_CODE": "Posta-kodea",
     "HELPER_NUMBER_ADDRESS": "Zure etxeak ez badu zenbakirik, eremu honetan jarri 0 zenbakia",
-    "SAVE_CHANGES": "Gorde aldaketak"
+    "SAVE_CHANGES": "Gorde aldaketak",
+    "GURB_NEXT": "Hurrengoa",
+    "GURB_PREV": "Aurrekoa",
+    "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Som Energiaren bazkidea zara jada!",
+    "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Mezu bat jasoko duzu zure bazkide-zenbakiarekin eta kontratu berriari buruzko informazio guztiarekin.",
+    "NEW_MEMBER_CONTRACT_ERROR_DESC": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
+    "NEW_MEMBER_CONTRACT_ERROR_TITLE": "Errore bat gertatu da eta ezin izan da gauzatu eskatutako eragiketa."
 }
