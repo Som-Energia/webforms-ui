@@ -21,7 +21,7 @@ import { getPrices } from '../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
 import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
-import Loading from '../../components/Loading'
+import NewLoading from '../../components/NewLoading'
 import { InvoiceIcon, PersonalIcon, PlaceMapIcon, ConfigIcon, PhoneIcon, CreditCardIcon, PricetagIcon } from '../../data/icons/Icons'
 
 const TARIFF_INDEXED = 'indexed'
@@ -418,7 +418,7 @@ const NewContractMemberSummary = (props) => {
       tariff:
         values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
       max_power: maxPower,
-      vat : values.new_member ? values.new_member.nif : values.member.nif,
+      vat : values.new_member?.nif ? values.new_member.nif : values.member.nif,
       cnae: values.supply_point.cnae,
       city_id: cityId
     })
@@ -446,7 +446,7 @@ const NewContractMemberSummary = (props) => {
   }
 
   return loading ? (
-    <Loading />
+    <NewLoading />
   ) : (
     <Grid container spacing={4}>
       <Grid
