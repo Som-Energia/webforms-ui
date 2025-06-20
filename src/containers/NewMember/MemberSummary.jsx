@@ -17,7 +17,7 @@ import { iconRequirements } from '../../themes/commonStyles'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
 import { PersonalIcon, PhoneIcon, CreditCardIcon } from '../../data/icons/Icons'
 
-import Loading from '../../components/Loading'
+import NewLoading from '../../components/NewLoading'
 
 const MemberSummary = (props) => {
   const {
@@ -197,7 +197,7 @@ const MemberSummary = (props) => {
   }
 
   return loading ? (
-    <Loading />
+    <NewLoading />
   ) : (
     <Grid container spacing={4}>
       <Grid item xs={12}>
