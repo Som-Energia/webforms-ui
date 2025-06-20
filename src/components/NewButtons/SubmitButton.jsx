@@ -11,6 +11,7 @@ function SubmitButton(props) {
 
   return (
     <Button
+      tabIndex={1}
       sx={{ ...buttonGurbDark }}
       type="button"
       data-cy="next"

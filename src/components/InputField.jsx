@@ -86,11 +86,6 @@ const InputField = React.memo(
                 )) ||
                 endAdornmentText
             }}
-            inputProps={{
-              sx: {
-                padding: '10px'
-              }
-            }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
