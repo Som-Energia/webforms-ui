@@ -41,6 +41,12 @@ const Option = ({
         flexDirection: 'column',
         justifyContent: 'space-between'
       }}
+      tabIndex={1}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          setSelected(optionId)
+        }
+      }}
       onClick={() => {
         setSelected(optionId)
       }}>

@@ -7,11 +7,12 @@ import Box from '@mui/material/Box'
 import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
 
 function PrevButton(props) {
-  const { onClick, disabled, title='PREV' } = props
+  const { onClick, disabled, title = 'PREV' } = props
   const { t } = useTranslation()
 
   return (
     <Button
+      tabIndex={1}
       sx={{
         ...buttonGurbLight,
         height: '40px',
