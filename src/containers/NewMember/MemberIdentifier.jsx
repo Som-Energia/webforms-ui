@@ -7,8 +7,6 @@ import Grid from '@mui/material/Grid'
 
 import NifCif from '../../components/NifCif'
 
-import { useTheme } from '@mui/material/styles'
-
 const MemberIdentifier = (props) => {
   const {
     values,
@@ -20,8 +18,6 @@ const MemberIdentifier = (props) => {
     setFieldTouched
   } = props
   const { t } = useTranslation()
-
-  const theme = useTheme()
 
   return (
     <Grid container spacing={4}>
@@ -39,7 +35,7 @@ const MemberIdentifier = (props) => {
           color="secondary.dark"
           sx={{
             [`& a[href='${t('NEW_MEMBER_NO_VAT_HELP_URL')}']`]: {
-              color: theme.palette.link.main,
+              color: "link.main",
               textDecoration: 'underline'
             }
           }}

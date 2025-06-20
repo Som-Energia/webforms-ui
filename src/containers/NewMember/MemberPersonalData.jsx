@@ -13,11 +13,6 @@ const MemberPersonalData = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline3">
-          {t('MEMBER_PAGE_PERSONAL_DATA')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
         {values?.new_member?.person_type == 'physic-person'?
           (
           <PhysicalMemberPersonalData {...props} />
