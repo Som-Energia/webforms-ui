@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 
 import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -30,12 +30,15 @@ const LegalMemberPersonalData = (props) => {
   } = props
   const { i18n, t } = useTranslation()
 
+  const didSetInitialLanguage = useRef(false)
+
   useEffect(() => {
-    const newLanguage = `${i18n.language}_ES`
-    if (values?.new_member?.language !== newLanguage) {
+    if (!didSetInitialLanguage.current) {
+      const newLanguage = `${i18n.language}_ES`
       setFieldValue('new_member.language', newLanguage)
+      didSetInitialLanguage.current = true
     }
-  }, [i18n.language, setFieldValue, values?.new_member?.language])
+  }, [i18n.language, setFieldValue])
 
   const referral_source_options = {
     O1: t('HOW_MEET_US_OPTION_1'),
