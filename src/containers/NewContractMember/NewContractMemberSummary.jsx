@@ -540,6 +540,11 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
+          sx={{
+            '& .MuiFormControlLabel-label a': {
+              color: 'link.main'
+            },
+          }}
           control={
             <Checkbox
               data-cy="privacy_policy"
@@ -633,6 +638,11 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
+          sx={{
+            '& .MuiFormControlLabel-label a': {
+              color: 'link.main'
+            },
+          }}
           control={
             <Checkbox
               data-cy="statutes"
