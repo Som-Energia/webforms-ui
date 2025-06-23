@@ -39,6 +39,14 @@ export default function ModifyIntro({ nextStep, prevStep }) {
                 onClick={nextStep}
                 disabled={isSubmitting}
                 title={t('SEGUENT_PAS')}
+                sx={{
+                  backgroundColor: 'primary.extraLight',
+                  color: 'primary.main',
+                  '&:hover': {
+                    color: 'primary.extraLight',
+                    backgroundColor: 'primary.main'
+                  }
+                }}
               />
             )}
           </Box>

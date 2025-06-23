@@ -12,11 +12,11 @@ function NextButton({title, ...props}) {
       color="primary"
       disableElevation={true}
       sx={{
-        backgroundColor: "secondary.alt",
-        color: "primary.main",
+        backgroundColor: 'primary.extraLight',
+        color: 'primary.main',
         '&:hover': {
-          color: "secondary.alt",
-          backgroundColor: "primary.main",
+          color: 'primary.extraLight',
+          backgroundColor: 'primary.main'
         }
       }}
       endIcon={<ArrowForwardIosIcon />}

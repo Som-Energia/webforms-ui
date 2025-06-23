@@ -435,11 +435,11 @@ const Indexada = (props) => {
                                       data-cy="submit"
                                       disableElevation="true"
                                       sx={{
-                                        backgroundColor: '#CDFF80',
-                                        color: '#0B2E34',
+                                        backgroundColor: 'primary.extraLight',
+                                        color: 'primary.main',
                                         '&:hover': {
-                                          color: '#CDFF80',
-                                          backgroundColor: '#0B2E34',
+                                          color: 'primary.extraLight',
+                                          backgroundColor: 'primary.main'
                                         }
                                       }}
                                       id="tariff-change-submit"

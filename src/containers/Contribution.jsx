@@ -385,11 +385,11 @@ const Contribution = (props) => {
                           color="primary"
                           disableElevation={true}
                           sx={{
-                            backgroundColor: '#CDFF80',
-                            color: '#0B2E34',
+                            backgroundColor: 'primary.extraLight',
+                            color: 'primary.main',
                             '&:hover': {
-                              color: '#CDFF80',
-                              backgroundColor: '#0B2E34'
+                              color: 'primary.extraLight',
+                              backgroundColor: 'primary.main'
                             }
                           }}
                           endIcon={
