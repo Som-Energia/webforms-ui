@@ -2,22 +2,12 @@ import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
-import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import DoneIcon from '@mui/icons-material/Done'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 import StepHeader from '../components/StepHeader'
-import cuca from '../images/cuca.svg'
-import { styled } from '@mui/system';
-
-
-const StyledImg = styled('img')({
-  width: '220px',
-  m: 2
-});
-
 
 const Success = (props) => {
   const { result, description, title, showHeader, subtitle } = props
@@ -25,32 +15,34 @@ const Success = (props) => {
   const { t, i18n } = useTranslation()
 
   useEffect(() => {
-    i18n.changeLanguage(language)
+    if (language && i18n.language !== language) {
+      i18n.changeLanguage(language)
+    }
   }, [language, i18n])
 
   return (
     <>
       {showHeader && <StepHeader title={t('SUCCESS_TITLE')} />}
-      <Box sx={{
-        pt: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
-        <Avatar sx={{
-          color: 'primary.main',
-          backgroundColor: 'transparent',
-          border: '2px solid',
-          borderColor: 'primary.main',
-          mb: 3
+      <Box
+        sx={{
+          pt: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}>
-          <DoneIcon fontSize="medium" />
-        </Avatar>
+        <CheckCircleIcon
+          data-cy="success-icon"
+          fontSize="large"
+          sx={{ mb: 3, color: 'primary.extraLight' }}
+        />
 
-        <Typography id="success-page-title" sx={{
-          textAlign: 'center',
-          fontSize: '1.15rem'
-        }} variant="h6">
+        <Typography
+          id="success-page-title"
+          sx={{
+            textAlign: 'center',
+            fontSize: '1.15rem'
+          }}
+          variant="h6">
           {title ? t(title) : t('SUCCESS_TEXT')}
         </Typography>
 
@@ -76,9 +68,6 @@ const Success = (props) => {
               : t('SUCCESS_NOTE', result)
           }}
         />
-        <Box mt={3} mb={1}>
-          <StyledImg alt="Cuca de Som Energia" src={cuca} />
-        </Box>
       </Box>
     </>
   )

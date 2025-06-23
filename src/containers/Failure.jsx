@@ -2,22 +2,12 @@ import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
-import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import CloseIcon from '@mui/icons-material/Close'
+import CancelIcon from '@mui/icons-material/Cancel'
 
 import StepHeader from '../components/StepHeader'
-import cuca from '../images/cuca-marejada.svg'
-
-import { styled } from '@mui/system'
-
-
-const StyledImg = styled('img')({
-  width: '220px',
-  m: 2
-})
 
 function Failure(props) {
   const { language } = useParams()
@@ -26,30 +16,38 @@ function Failure(props) {
   const {
     error = false,
     description = 'NEWMEMBER_KO_DESCRIPTION',
-    showHeader = true
+    showHeader
   } = props
 
   useEffect(() => {
-    i18n.changeLanguage(language)
+    if (language && i18n.language !== language) {
+      i18n.changeLanguage(language)
+    }
   }, [language, i18n])
 
   return (
     <>
       {showHeader && <StepHeader title={t('FAILURE_TITLE')} />}
-      <Box sx={{
-        pt: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'}} >
-        <Avatar 
-          sx={{ width: 6, height: 6, color: 'failure.primary', backgroundColor: 'transparent', border: '2px solid', borderColor: 'secondary.extraDark', mb: 3}}>
-          <CloseIcon fontSize="large" />
-        </Avatar>
-        <Typography sx={{ textAlign: 'center', fontSize: '1.15rem'}} variant="h6">
+      <Box
+        sx={{
+          pt: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+        <CancelIcon
+          data-cy="error-icon"
+          fontSize="large"
+          sx={{ mb: 3, color: 'primary2.main' }}
+        />
+        <Typography
+          sx={{ textAlign: 'center', fontSize: '1.15rem' }}
+          variant="h6">
           {t('FAILURE_TEXT')}
         </Typography>
         <Typography
-          sx={{mt: 2,
+          sx={{
+            mt: 2,
             fontWeight: '400',
             fontSize: '1rem',
             lineHeight: '1.75',
@@ -57,7 +55,8 @@ function Failure(props) {
             color: 'secondary.extraDark',
             '& a': {
               color: 'failure.primary !important'
-            }}}
+            }
+          }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html:
@@ -74,9 +73,6 @@ function Failure(props) {
                   })
           }}
         />
-        <Box mt={3} mb={1}>
-          <StyledImg alt="Cuca KO de Som Energia" src={cuca} />
-        </Box>
       </Box>
     </>
   )
