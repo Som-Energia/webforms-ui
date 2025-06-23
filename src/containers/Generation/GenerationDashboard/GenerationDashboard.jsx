@@ -184,10 +184,10 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}>
                 {investments.length > 0 ? <Button
                   sx={{
-                    backgroundColor: 'secondary.alt',
+                    backgroundColor: 'primary.extraLight',
                     color: 'primary.main',
                     '&:hover': {
-                      color: 'secondary.alt',
+                      color: 'primary.extraLight',
                       backgroundColor: 'primary.main',
                     }
                   }}
@@ -227,10 +227,10 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button
                   sx={{
-                    backgroundColor: 'secondary.alt',
+                    backgroundColor: 'primary.extraLight',
                     color: 'primary.main',
                     '&:hover': {
-                      color: 'secondary.alt',
+                      color: 'primary.extraLight',
                       backgroundColor: 'primary.main',
                     }
                   }}
