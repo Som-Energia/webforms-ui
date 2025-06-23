@@ -61,11 +61,13 @@ const LegalMemberPersonalData = (props) => {
 
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12}>
-        <Typography variant="headline4.regular">
-          {t('MEMBER_PAGE_PERSONAL_DATA')}
-        </Typography>
-      </Grid>
+      {title && (
+        <Grid item xs={12}>
+          <Typography variant="headline4.regular">
+            {t('MEMBER_PAGE_PERSONAL_DATA')}
+          </Typography>
+        </Grid>
+      )}
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>

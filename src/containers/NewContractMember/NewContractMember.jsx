@@ -355,7 +355,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 7) {
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 8) {
-        return <IdentifyMemberPersonalData {...props} />
+        return <IdentifyMemberPersonalData {...props} holder={true} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...props} />
       } else if (activeStep === 10) {
