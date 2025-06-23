@@ -13,9 +13,7 @@ import { useHandleBlur } from '../../hooks/useHandleBlur'
 
 const languages = {
   es_ES: 'Español',
-  ca_ES: 'Català',
-  eu_ES: 'Euskera',
-  gl_ES: 'Galego'
+  ca_ES: 'Català'
 }
 
 const PhysicalMemberPersonalData = (props) => {
