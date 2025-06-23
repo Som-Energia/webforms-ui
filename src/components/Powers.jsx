@@ -44,7 +44,7 @@ const Powers = (props) => {
           </span>
         </Typography>
         <Typography
-          sx={{ typography: 'body.md.regular', color: 'secondary.dark' }}>
+          sx={{ typography: 'body.md.regular', color: 'secondary.extraDark' }}>
           {t('POWER_HELPER')}
         </Typography>
       </Grid>

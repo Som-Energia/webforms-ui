@@ -236,7 +236,7 @@ const MemberSummary = (props) => {
         <ReviewTable tableFields={reviewFields} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular" color="secondary.dark">
+        <Typography variant="body.sm.regular" color="secondary.extraDark">
           {t('PURPOSE_MEMBER')}
           <br />
           {t('RIGHTS_MEMBER')}

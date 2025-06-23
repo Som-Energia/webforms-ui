@@ -19,10 +19,10 @@ export const HelperText = ({ helperText, iconHelper }) => {
     <Box sx={{ display: 'flex', alignItems: 'stretch' }}>
       {iconHelper && (
         <InfoOutlinedIcon
-          sx={{ color: 'secondary.main', fontSize: '14px', margin: '2px' }}
+          sx={{ color: 'secondary.extraDark', fontSize: '14px', margin: '2px' }}
         />
       )}
-      <Typography color="secondary.main" variant="body.xs.regular">
+      <Typography color="secondary.extraDark" variant="body.xs.regular">
         {helperText}
       </Typography>
     </Box>
@@ -59,7 +59,7 @@ const InputField = React.memo(
         </Grid>
         {textFieldNameHelper && (
           <Grid item xs={12}>
-            <Typography variant="body.sm.regular" color="secondary.dark">
+            <Typography variant="body.sm.regular" color="secondary.extraDark">
               {textFieldNameHelper}
             </Typography>
           </Grid>

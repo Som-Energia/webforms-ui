@@ -427,7 +427,7 @@ const NewContractMemberForm = (props) => {
                             : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
                         }>
                         <Typography
-                          sx={{ color: 'secondary.dark', textAlign: 'center' }}
+                          sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
                           dangerouslySetInnerHTML={{
                             __html: !error
                               ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')

@@ -65,7 +65,7 @@ const CUPS = (props) => {
             fontSize: '14px',
             fontWeight: 400,
             letterSpacing: 0,
-            color: 'secondary.main'
+            color: 'secondary.extraDark'
           }}>
           {t('CUPS_HELPER_TEXT')}{' '}
           <Link

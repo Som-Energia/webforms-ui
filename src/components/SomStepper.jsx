@@ -34,7 +34,7 @@ const SomStepper = (props) => {
                 width: `100%`,
                 height: '6px',
                 backgroundColor:
-                  activeStep >= index ? 'primary.main' : 'secondary.light',
+                  activeStep >= index ? 'primary.main' : 'secondary.extraDark',
                 borderRadius: '12px'
               }}
             />
@@ -47,7 +47,7 @@ const SomStepper = (props) => {
                 <Typography
                   key={index}
                   color={
-                    activeStep >= index ? 'primary.main' : 'secondary.light'
+                    activeStep >= index ? 'primary.main' : 'secondary.extraDark'
                   }>
                   {t(stepName)}
                 </Typography>

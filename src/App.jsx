@@ -524,7 +524,7 @@ const App = (props) => {
                             title={t('FAILURE_TEXT')}
                             {...props}>
                             <Typography
-                              sx={{ color: 'secondary.dark' }}
+                              sx={{ color: 'secondary.extraDark' }}
                               dangerouslySetInnerHTML={{
                                 __html: t('NEWMEMBER_KO_DESCRIPTION', {
                                   url: t('CONTACT_HELP_URL')

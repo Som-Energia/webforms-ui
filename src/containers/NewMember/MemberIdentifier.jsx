@@ -32,7 +32,7 @@ const MemberIdentifier = (props) => {
       <Grid item xs={12}>
         <Typography
           variant="body.xs.regular"
-          color="secondary.dark"
+          color="secondary.extraDark"
           sx={{
             [`& a[href='${t('NEW_MEMBER_NO_VAT_HELP_URL')}']`]: {
               color: "link.main",

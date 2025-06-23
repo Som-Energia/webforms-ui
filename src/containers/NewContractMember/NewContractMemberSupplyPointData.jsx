@@ -56,7 +56,7 @@ const NewContractMemberSupplyPointData = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body.sm.regular" color="secondary.dark">
+          <Typography variant="body.sm.regular" color="secondary.extraDark">
             {t('RECOMMENDATION_SUBTITLE')}
           </Typography>
         </Grid>
