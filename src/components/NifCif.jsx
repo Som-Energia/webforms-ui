@@ -15,6 +15,7 @@ import { useHandleBlur } from '../hooks/useHandleBlur'
 
 const NifCif = (props) => {
   const {
+    holder = false,
     values,
     errors,
     touched,
@@ -57,7 +58,9 @@ const NifCif = (props) => {
         setFieldError,
         'new_member.nif'
       )
-      await handleCheckNifResponse()
+      if (!holder) {
+        await handleCheckNifResponse()
+      }
     } catch (error) {
       console.error('Error validating nif:', error)
     } finally {
