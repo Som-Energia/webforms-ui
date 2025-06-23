@@ -59,7 +59,7 @@ const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaA
           options={options}
           value={values?.has_member}
           handleChange={handleMemberQuestion}
-          maxWidth="8rem"
+          maxWidth="18rem"
         />
       </Grid>
     </Grid>

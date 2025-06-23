@@ -86,7 +86,7 @@ const Option = ({
             />
           ) : null}
         </Box>
-        <Typography variant="body.sm.regular">{textBody}</Typography>
+        <Typography variant="body.sm.regular" color="secondary.extraDark">{textBody}</Typography>
       </Box>
     </Box>
   )
