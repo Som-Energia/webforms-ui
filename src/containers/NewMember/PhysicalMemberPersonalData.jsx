@@ -49,15 +49,15 @@ const PhysicalMemberPersonalData = (props) => {
   }
 
   const referral_source_options = {
-    O1: t('HOW_MEET_US_OPTION_1'),
-    O2: t('HOW_MEET_US_OPTION_2'),
-    O3: t('HOW_MEET_US_OPTION_3'),
-    O4: t('HOW_MEET_US_OPTION_4'),
-    O5: t('HOW_MEET_US_OPTION_5'),
-    O6: t('HOW_MEET_US_OPTION_6'),
-    O7: t('HOW_MEET_US_OPTION_7'),
-    O8: t('HOW_MEET_US_OPTION_8'),
-    O9: t('HOW_MEET_US_OPTION_9')
+    O1_SOM_SERVEIS: t('HOW_MEET_US_OPTION_1'),
+    O2_ALTRES_COOPS: t('HOW_MEET_US_OPTION_2'),
+    O3_OPCIONS: t('HOW_MEET_US_OPTION_3'),
+    O4_ABACUS: t('HOW_MEET_US_OPTION_4'),
+    O5_RECOMANAT: t('HOW_MEET_US_OPTION_5'),
+    O6_JA_CONTRACTAT: t('HOW_MEET_US_OPTION_6'),
+    O7_PUBLICITAT: t('HOW_MEET_US_OPTION_7'),
+    O8_XARXES_SOCIALS: t('HOW_MEET_US_OPTION_8'),
+    O9_ALTRES: t('HOW_MEET_US_OPTION_9')
   }
 
   const handleChange = useHandleChange(setFieldValue)

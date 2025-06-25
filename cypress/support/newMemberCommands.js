@@ -40,7 +40,7 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
     cy.get('[id="new_member.gender-female"]').click()
     cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
     cy.get('[id="new_member.referral_source"]').click()
-    cy.get('[id="new_member.referral_source-O1"]').click()
+    cy.get('[id="new_member.referral_source-O1_SOM_SERVEIS"]').click()
   }
 
   cy.get('[data-cy=next]').click()
@@ -71,7 +71,7 @@ Cypress.Commands.add(
 
     if (optionalData) {
       cy.get('[id="new_member.referral_source"]').click()
-      cy.get('[id="new_member.referral_source-O1"]').click()
+      cy.get('[id="new_member.referral_source-O1_SOM_SERVEIS"]').click()
     }
 
     cy.get('[data-cy="legal_person"]').click()
@@ -100,6 +100,8 @@ Cypress.Commands.add('personalPhysicalcheckReviewNewMemberStep', (nif) => {
 
   cy.get('[data-cy="statutes"]').click()
 
+  cy.get('[id="edit_button"]').click()
+
   cy.get('button').contains(nif)
 })
 
@@ -109,6 +111,8 @@ Cypress.Commands.add('personalLegalcheckReviewNewMemberStep', (nif) => {
   cy.get('[data-cy="statutes"]').click()
 
   cy.get('[data-cy="comercial_info_accepted"]').click()
+
+  cy.get('[id="edit_button"]').click()
 
   cy.get('button').contains(nif)
 })
