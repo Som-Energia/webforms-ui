@@ -104,7 +104,7 @@ export const client = {
       surname: 'D Monkey',
       is_juridic: false,
       email: 'luffy@example.coop',
-      phone: '+34612345678',
+      phone: '+34 612345678',
       lang: 'ca_ES',
       gender: 'male',
       birthdate: '1997-05-05'
@@ -142,7 +142,7 @@ export const client = {
       proxy_name: 'Luffy',
       proxy_vat: '12345678P',
       email: 'mugiwara@example.coop',
-      phone: '+34612345679',
+      phone: '+34 612345679',
       lang: 'es_ES',
       legal_person_accepted: true
     }

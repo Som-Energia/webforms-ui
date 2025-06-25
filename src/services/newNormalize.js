@@ -18,7 +18,7 @@ export const normalizeClient = (client) => {
     name: client.name,
     is_juridic: client.person_type == 'physic-person' ? false : true,
     email: client.email,
-    phone: `${client.phone_code}${client.phone}`,
+    phone: `${client.phone_code} ${client.phone}`,
     lang: client.language
   }
   if (data.is_juridic) {
