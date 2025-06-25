@@ -20,6 +20,7 @@ const languages = {
 
 const LegalMemberPersonalData = (props) => {
   const {
+    title = true,
     values,
     errors,
     touched,
