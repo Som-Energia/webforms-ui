@@ -197,7 +197,14 @@ const NewMemberForm = (props) => {
   }, [summaryField])
 
   return (
-    <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
+    <Container
+      maxWidth="md"
+      disableGutters={true}
+      sx={{
+        padding: '2rem',
+        backgroundColor: '#fff',
+        borderRadius: '10px'
+      }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}

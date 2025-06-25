@@ -385,11 +385,22 @@ const NewContractMemberForm = (props) => {
   }, [summaryField])
 
   useEffect(() => {
-    trackEvent({ category: 'NewContractMember', action: 'setNewContractMemberStep', name: `new-contract-member-step-${activeStep}` })
+    trackEvent({
+      category: 'NewContractMember',
+      action: 'setNewContractMemberStep',
+      name: `new-contract-member-step-${activeStep}`
+    })
   }, [activeStep])
 
   return (
-    <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
+    <Container
+      maxWidth="md"
+      disableGutters={true}
+      sx={{
+        padding: '2rem',
+        backgroundColor: '#fff',
+        borderRadius: '10px'
+      }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
