@@ -25,8 +25,15 @@ import {
 
 const INDIVIDUAL_INSTALLATION = '01'
 
-const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
-  const { values, errors, touched, setFieldValue, handleBlur } = props
+const NewContractMemberSelfConsumptionData = (props) => {
+  const {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    handleBlur,
+    setHasAlert
+  } = props
 
   const { t } = useTranslation()
 
@@ -168,7 +175,7 @@ const NewContractMemberSelfConsumptionData = ({ setHasAlert, ...props }) => {
           cupsToMatch={
             values?.self_consumption?.collective_installation
               ? undefined
-              : values.cups
+              : values?.cups
           }
         />
       </Grid>
