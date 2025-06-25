@@ -85,7 +85,7 @@ const CancellationConfirm = (props) => {
     <Box
       sx={{
         pb: '2rem',
-        backgroundColor: 'secondary.light',
+        backgroundColor: 'white',
         color: 'primary',
         display: 'flex',
         justifyContent: 'center',

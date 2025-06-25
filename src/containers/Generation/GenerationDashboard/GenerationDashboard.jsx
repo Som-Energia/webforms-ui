@@ -59,10 +59,10 @@ function GenerationDashboard({
                 id="cancel-action-btn"
                 variant="contained"
                 sx={{
-                  backgroundColor: 'secondary.alt',
+                  backgroundColor: 'primary.extraLight',
                   color: 'primary.main',
                   '&:hover': {
-                    color: 'secondary.alt',
+                    color: 'primary.extraLight',
                     backgroundColor: 'primary.main',
                   }
                 }}
@@ -73,10 +73,10 @@ function GenerationDashboard({
                 id="validation-action-btn"
                 variant="contained"
                 sx={{
-                  backgroundColor: 'secondary.alt',
+                  backgroundColor: 'primary.extraLight',
                   color: 'primary.main',
                   '&:hover': {
-                    color: 'secondary.alt',
+                    color: 'primary.extraLight',
                     backgroundColor: 'primary.main',
                   }
                 }}

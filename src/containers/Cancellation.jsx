@@ -184,7 +184,7 @@ const Cancellation = (props) => {
                 id="cancelForm"
                 method="POST"
                 sx={{
-                  backgroundColor: 'secondary.light',
+                  backgroundColor: 'white',
                   color: 'primary',
                   display: 'flex',
                   pb: '2rem'
