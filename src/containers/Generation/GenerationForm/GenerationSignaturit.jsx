@@ -97,7 +97,7 @@ function GenerationSignaturit(props) {
 
       {loading || completed ? (
         <Box sx={customStyles.loading}>
-          <StyledImg alt="Cuca de Som Energia" src={logo} />
+          <StyledImg alt="Som Energia" src={logo} />
           <CircularProgress color="secondary" />
           {completed ? (
             <>
