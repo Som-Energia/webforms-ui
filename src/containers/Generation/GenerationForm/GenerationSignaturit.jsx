@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import { styled } from '@mui/system'
 import { useTranslation } from 'react-i18next'
 import { createGenerationkWhSignature } from '../../../services/api'
-import cuca from '../../../images/cuca.svg'
+import logo from '../../../images/logo.svg'
 
 let signaturitHook = () => undefined
 
@@ -97,7 +97,7 @@ function GenerationSignaturit(props) {
 
       {loading || completed ? (
         <Box sx={customStyles.loading}>
-          <StyledImg alt="Cuca de Som Energia" src={cuca} />
+          <StyledImg alt="Cuca de Som Energia" src={logo} />
           <CircularProgress color="secondary" />
           {completed ? (
             <>

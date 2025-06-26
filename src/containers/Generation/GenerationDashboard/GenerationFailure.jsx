@@ -4,12 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-
 import CloseIcon from '@mui/icons-material/Close'
-
-import cuca from '../../../images/cuca-marejada.svg'
-
+import Result from '../../Result'
 
 const customStyles ={
   container: {
@@ -63,24 +59,12 @@ function GenerationFailure(props) {
         <Avatar sx={customStyles.error}>
           <CloseIcon fontSize="large" />
         </Avatar>
-        <Typography sx={customStyles.title} variant="h6">
-          {t('FAILURE_TEXT')}
-        </Typography>
-        <Typography
-          sx={customStyles.message}
-          variant="body1"
-          dangerouslySetInnerHTML={{
-            __html:
-            t('INDEXED_UNEXPECTED_ERROR_TXT', {url: t('CONTACT_HELP_URL')})
-          }}
+        <Result
+          mode={'failure'}
+          {...props}
+          title={t('FAILURE_TEXT')}
+          description={t('INDEXED_UNEXPECTED_ERROR_TXT')}
         />
-        <Box mt={3} mb={1}>
-          <img
-            sx={customStyles.logo}
-            alt="Cuca KO de Som Energia"
-            src={cuca}
-          />
-        </Box>
       </Box>
     </>
   )
