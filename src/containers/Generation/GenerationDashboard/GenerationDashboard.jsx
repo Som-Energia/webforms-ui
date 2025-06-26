@@ -15,7 +15,7 @@ import GenerationFailure from './GenerationFailure'
 import ContractList from '../../../components/ClickableList';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
-import Loading from '../../../components/Loading'
+import Loading from '../../../components/NewLoading'
 import CustomDialog from '../../../components/CustomDialog'
 import GenerationTable from './GenerationTable'
 
@@ -59,10 +59,10 @@ function GenerationDashboard({
                 id="cancel-action-btn"
                 variant="contained"
                 sx={{
-                  backgroundColor: 'secondary.alt',
+                  backgroundColor: 'primary.extraLight',
                   color: 'primary.main',
                   '&:hover': {
-                    color: 'secondary.alt',
+                    color: 'primary.extraLight',
                     backgroundColor: 'primary.main',
                   }
                 }}
@@ -73,10 +73,10 @@ function GenerationDashboard({
                 id="validation-action-btn"
                 variant="contained"
                 sx={{
-                  backgroundColor: 'secondary.alt',
+                  backgroundColor: 'primary.extraLight',
                   color: 'primary.main',
                   '&:hover': {
-                    color: 'secondary.alt',
+                    color: 'primary.extraLight',
                     backgroundColor: 'primary.main',
                   }
                 }}
@@ -184,10 +184,10 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_ASSIGNMENTS_TABLE_TITLE')}>
                 {investments.length > 0 ? <Button
                   sx={{
-                    backgroundColor: 'secondary.alt',
+                    backgroundColor: 'primary.extraLight',
                     color: 'primary.main',
                     '&:hover': {
-                      color: 'secondary.alt',
+                      color: 'primary.extraLight',
                       backgroundColor: 'primary.main',
                     }
                   }}
@@ -227,10 +227,10 @@ function GenerationDashboard({
               <SectionTitle text={t('GENERATION_INVESTMENTS_LINK_TO_PROD_CONSUMPTION')}>
                 <Button
                   sx={{
-                    backgroundColor: 'secondary.alt',
+                    backgroundColor: 'primary.extraLight',
                     color: 'primary.main',
                     '&:hover': {
-                      color: 'secondary.alt',
+                      color: 'primary.extraLight',
                       backgroundColor: 'primary.main',
                     }
                   }}

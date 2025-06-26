@@ -10,6 +10,7 @@ function NextButton(props) {
 
   return (
     <Button
+      tabIndex={0}
       sx={{
         ...buttonGurbDark,
         height: '40px',

@@ -85,7 +85,7 @@ const CancellationConfirm = (props) => {
     <Box
       sx={{
         pb: '2rem',
-        backgroundColor: 'secondary.light',
+        backgroundColor: 'white',
         color: 'primary',
         display: 'flex',
         justifyContent: 'center',
@@ -126,7 +126,14 @@ const CancellationConfirm = (props) => {
                     type="submit"
                     data-cy="submit"
                     variant="contained"
-                    color="primary"
+                    sx={{
+                      backgroundColor: 'primary.extraLight',
+                      color: 'primary.main',
+                      '&:hover': {
+                        color: 'primary.extraLight',
+                        backgroundColor: 'primary.main'
+                      }
+                    }}
                     startIcon={
                       sending ? <CircularProgress size={24} /> : <SendIcon />
                     }

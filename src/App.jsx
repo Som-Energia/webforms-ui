@@ -7,7 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import SomEnergiaTheme from './components/SomenergiaTheme'
 import WebFormsTheme from './themes/webforms'
 import { Example as ComponentTest } from './components/ApiValidatedField.example'
-import Loading from './components/Loading'
+import Loading from './components/NewLoading'
 import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
@@ -115,9 +115,9 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
+          <ThemeProvider theme={webFormsTheme}>
             <Suspense fallback={<Loading />}>
               <Router>
-                <ThemeProvider theme={webFormsTheme}>
                   <CssBaseline />
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
@@ -524,7 +524,7 @@ const App = (props) => {
                             title={t('FAILURE_TEXT')}
                             {...props}>
                             <Typography
-                              sx={{ color: 'secondary.dark' }}
+                              sx={{ color: 'secondary.extraDark' }}
                               dangerouslySetInnerHTML={{
                                 __html: t('NEWMEMBER_KO_DESCRIPTION', {
                                   url: t('CONTACT_HELP_URL')
@@ -560,9 +560,9 @@ const App = (props) => {
                       }
                     />
                   </Routes>
-                </ThemeProvider>
               </Router>
             </Suspense>
+            </ThemeProvider>
             <ApiStatus />
           </Box>
         </MatomoProvider>

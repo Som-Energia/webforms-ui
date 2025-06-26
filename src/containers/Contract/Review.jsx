@@ -11,7 +11,7 @@ import FormHelperText from '@mui/material/FormHelperText'
 
 import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
-import Loading from '../../components/Loading'
+import Loading from '../../components/NewLoading'
 import LegalText from '../../components/LegalText'
 
 import { languages, THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'

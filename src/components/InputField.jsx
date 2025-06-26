@@ -10,6 +10,8 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 
+import { Trans } from 'react-i18next'
+
 import InputTitle from './InputTitle'
 
 export const HelperText = ({ helperText, iconHelper }) => {
@@ -17,10 +19,10 @@ export const HelperText = ({ helperText, iconHelper }) => {
     <Box sx={{ display: 'flex', alignItems: 'stretch' }}>
       {iconHelper && (
         <InfoOutlinedIcon
-          sx={{ color: 'secondary', fontSize: '14px', margin: '2px' }}
+          sx={{ color: 'secondary.extraDark', fontSize: '14px', margin: '2px' }}
         />
       )}
-      <Typography color="secondary" variant="body.xs.regular">
+      <Typography color="secondary.extraDark" variant="body.xs.regular">
         {helperText}
       </Typography>
     </Box>
@@ -57,7 +59,7 @@ const InputField = React.memo(
         </Grid>
         {textFieldNameHelper && (
           <Grid item xs={12}>
-            <Typography variant="body.sm.regular" color="secondary.dark">
+            <Typography variant="body.sm.regular" color="secondary.extraDark">
               {textFieldNameHelper}
             </Typography>
           </Grid>
@@ -84,11 +86,6 @@ const InputField = React.memo(
                 )) ||
                 endAdornmentText
             }}
-            inputProps={{
-              sx: {
-                padding: '10px'
-              }
-            }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
@@ -107,7 +104,10 @@ const InputField = React.memo(
             {touched && error && (
               <Grid item xs={12} sx={{ ml: 0 }}>
                 <Typography variant="error" color="error">
-                  {t(error)}
+                  <Trans
+                    i18nKey={error}
+                    components={{ a: <a target="_blank" rel="noreferrer" /> }}
+                  />
                 </Typography>
               </Grid>
             )}

@@ -5,13 +5,12 @@ import { styled } from '@mui/system'
 
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
 import CloseIcon from '@mui/icons-material/Close'
 
 import StepHeader from '../../components/StepHeader'
-import cuca from '../../images/cuca-marejada.svg'
 import indexedErrorText from './IndexedError'
+import Result from '../Result'
 
 const StyledImg = styled('img')({
   width: '220px',
@@ -49,31 +48,12 @@ function Failure(props) {
           }}>
           <CloseIcon fontSize="large" />
         </Avatar>
-        <Typography
-          sx={{ textAlign: 'center', fontSize: '1.15rem' }}
-          variant="h6">
-          {t('FAILURE_TEXT')}
-        </Typography>
-        <Typography
-          sx={{
-            mt: 2,
-            fontWeight: '400',
-            fontSize: '1rem',
-            lineHeight: '1.75',
-            textAlign: 'center',
-            color: 'secondary.extraDark',
-            '& a': {
-              color: 'failure.primary !important'
-            }
-          }}
-          variant="body1"
-          dangerouslySetInnerHTML={{
-            __html: indexedErrorText(t, error.code, error.data)
-          }}
+        <Result
+          mode={'failure'}
+          {...props}
+          title={t('FAILURE_TEXT')}
+          description={indexedErrorText(t, error.code, error.data)}
         />
-        <Box mt={3} mb={1}>
-          <StyledImg alt="Cuca KO de Som Energia" src={cuca} />
-        </Box>
       </Box>
     </>
   )

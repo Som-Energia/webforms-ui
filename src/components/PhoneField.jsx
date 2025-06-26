@@ -53,11 +53,15 @@ const PhoneField = (props) => {
   } = props
   const { t } = useTranslation()
 
-  const [code, setCode] = useState(values.new_member.phone_code || '+34')
-  const [country, setCountry] = useState('ES')
-  const [number, setNumber] = useState(values.new_member.phone || '')
-
   const codes = getCountryDialCodesMap()
+
+  const initialCode = values.new_member.phone_code || '+34'
+  const initialCountry =
+    Object.keys(codes).find((c) => codes[c] === initialCode) || 'ES'
+
+  const [code, setCode] = useState(initialCode)
+  const [country, setCountry] = useState(initialCountry)
+  const [number, setNumber] = useState(values.new_member.phone || '')
 
   function getCountryDialCodesMap() {
     const countries = getCountries(metadata)

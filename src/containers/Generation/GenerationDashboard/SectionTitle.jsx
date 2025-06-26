@@ -8,7 +8,7 @@ function SectionTitle({ text, children }) {
 
   return (
     <Grid container sx={{
-      backgroundColor: 'primary.light',
+      backgroundColor: 'primary.main',
       color: '#fff',
       fontSize: '14px',
       margin: '10px 0 4px 0',
@@ -17,7 +17,7 @@ function SectionTitle({ text, children }) {
       alignItems: 'center',
       padding: '4px'
     }}>
-      <Typography component="h2">
+      <Typography component="h1" color='#fff'>
         {text}
       </Typography>
       {children}

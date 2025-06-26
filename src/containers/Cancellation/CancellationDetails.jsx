@@ -18,7 +18,7 @@ import Card from '../../components/oficinavirtual/Card'
 import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
 import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
-import Loading from '../../components/Loading'
+import Loading from '../../components/NewLoading'
 
 import { getNextNBussinesDays } from '../../services/utils'
 

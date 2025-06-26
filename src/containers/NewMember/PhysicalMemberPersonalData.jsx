@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-
+import { useRef, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
@@ -13,20 +13,30 @@ import { useHandleBlur } from '../../hooks/useHandleBlur'
 
 const languages = {
   es_ES: 'Español',
-  ca_ES: 'Català',
-  eu_ES: 'Euskera',
-  gl_ES: 'Galego'
+  ca_ES: 'Català'
 }
 
 const PhysicalMemberPersonalData = (props) => {
   const {
+    title = true,
     values,
     errors,
     touched,
     setFieldValue,
-    setFieldTouched,
+    setFieldTouched
   } = props
+
   const { i18n, t } = useTranslation()
+
+  const didSetInitialLanguage = useRef(false)
+
+  useEffect(() => {
+    if (!didSetInitialLanguage.current) {
+      const newLanguage = `${i18n.language}_ES`
+      setFieldValue('new_member.language', newLanguage)
+      didSetInitialLanguage.current = true
+    }
+  }, [i18n.language, setFieldValue])
 
   const gender_options = {
     '': t('SELECT_OPTION'),
@@ -39,15 +49,15 @@ const PhysicalMemberPersonalData = (props) => {
   }
 
   const referral_source_options = {
-    O1: t('HOW_MEET_US_OPTION_1'),
-    O2: t('HOW_MEET_US_OPTION_2'),
-    O3: t('HOW_MEET_US_OPTION_3'),
-    O4: t('HOW_MEET_US_OPTION_4'),
-    O5: t('HOW_MEET_US_OPTION_5'),
-    O6: t('HOW_MEET_US_OPTION_6'),
-    O7: t('HOW_MEET_US_OPTION_7'),
-    O8: t('HOW_MEET_US_OPTION_8'),
-    O9: t('HOW_MEET_US_OPTION_9')
+    O1_SOM_SERVEIS: t('HOW_MEET_US_OPTION_1'),
+    O2_ALTRES_COOPS: t('HOW_MEET_US_OPTION_2'),
+    O3_OPCIONS: t('HOW_MEET_US_OPTION_3'),
+    O4_ABACUS: t('HOW_MEET_US_OPTION_4'),
+    O5_RECOMANAT: t('HOW_MEET_US_OPTION_5'),
+    O6_JA_CONTRACTAT: t('HOW_MEET_US_OPTION_6'),
+    O7_PUBLICITAT: t('HOW_MEET_US_OPTION_7'),
+    O8_XARXES_SOCIALS: t('HOW_MEET_US_OPTION_8'),
+    O9_ALTRES: t('HOW_MEET_US_OPTION_9')
   }
 
   const handleChange = useHandleChange(setFieldValue)
@@ -59,11 +69,13 @@ const PhysicalMemberPersonalData = (props) => {
 
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12}>
-        <Typography variant="headline4.regular">
-          {t('MEMBER_PAGE_PERSONAL_DATA')}
-        </Typography>
-      </Grid>
+      {title && (
+        <Grid item xs={12}>
+          <Typography variant="headline4.regular">
+            {t('MEMBER_PAGE_PERSONAL_DATA')}
+          </Typography>
+        </Grid>
+      )}
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>

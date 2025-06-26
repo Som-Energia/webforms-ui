@@ -45,8 +45,9 @@ Cypress.Commands.add('newContractIdentifySupplyPoint', (cups, has_light, statusC
 })
 
 Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
-  cy.get('[data-cy="supply_point_address-street"]').type(data.validAddress.input)
+  cy.get('[data-cy="supply_point_address"]').type(data.validAddress.input)
   cy.contains(data.supplyPointData.street).click()
+  cy.wait(1000)
 
   cy.get('[data-cy="supply_point_address.number"]').type('2')
 
@@ -111,6 +112,7 @@ Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif) => {
   cy.get('[data-cy="privacy_policy"]').click()
 
   cy.get('[data-cy="generic_conditions_accepted"]').click()
+  cy.get('[data-cy="generic_conditions_modal"]').scrollTo('bottom')
   cy.get('[data-cy=accept]').click()
 
   cy.get('[data-cy="statutes"]').click()

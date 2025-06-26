@@ -18,11 +18,23 @@ import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 
 import { getPrices } from '../../services/api'
+import { contractProcess } from '../../services/newNormalize'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
-import { NEW_MEMBER_CONTRACT_FORM_SUBSTEPS, NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS } from '../../services/steps'
-import Loading from '../../components/Loading'
-import { InvoiceIcon, PersonalIcon, PlaceMapIcon, ConfigIcon, PhoneIcon, CreditCardIcon, PricetagIcon } from '../../data/icons/Icons'
+import {
+  NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
+  NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+} from '../../services/steps'
+import NewLoading from '../../components/NewLoading'
+import {
+  InvoiceIcon,
+  PersonalIcon,
+  PlaceMapIcon,
+  ConfigIcon,
+  PhoneIcon,
+  CreditCardIcon,
+  PricetagIcon
+} from '../../data/icons/Icons'
 
 const TARIFF_INDEXED = 'indexed'
 
@@ -47,11 +59,12 @@ const NewContractMemberSummary = (props) => {
   const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
-  const formSteps = values?.has_member == 'member-off'
-    ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-    : values?.has_member == 'member-on'
-    ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-    : undefined
+  const formSteps =
+    values?.has_member == 'member-off'
+      ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
+      : values?.has_member == 'member-on'
+      ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+      : undefined
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -83,15 +96,13 @@ const NewContractMemberSummary = (props) => {
   }
 
   const legalReviewFields = {
-    icon: <PersonalIcon/>,
+    icon: <PersonalIcon />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       },
       {
         reviewLabel: t('CIF'),
@@ -105,37 +116,29 @@ const NewContractMemberSummary = (props) => {
       {
         reviewLabel: t('PROXY'),
         reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       }
     ]
   }
 
   const physicalReviewFields = {
-    icon: <PersonalIcon/>,
+    icon: <PersonalIcon />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       },
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
@@ -149,147 +152,213 @@ const NewContractMemberSummary = (props) => {
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
         reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       },
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
         reviewValue: values?.new_member?.email,
-        step: showReviewLinks
-          ? formSteps['MEMBER_INFO']
-          : null
+        step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
       }
     ]
   }
 
-  const oldHolderFields = [
+  const oldHolderFields = {
+    icon: <PersonalIcon />,
+    title: t('REVIEW_HOLDER_TITLE'),
+    field: [
+      {
+        reviewLabel: `${t('NUMBER')}:`,
+        reviewValue: values?.member?.number,
+        step: showReviewLinks ? formSteps['LINK_MEMBER'] : null
+      },
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.member?.nif,
-        step: showReviewLinks
-          ? formSteps['LINK_MEMBER']
-          : null
+        step: showReviewLinks ? formSteps['LINK_MEMBER'] : null
       }
     ]
+  }
 
-  const reviewHolderData = values?.member_is_holder == 'holder-member-yes'
-    ? oldHolderFields
-    : values?.new_member?.person_type == 'legal-person'
-    ? legalReviewFields
-    : physicalReviewFields
+  const reviewHolderData =
+    values?.member_is_holder == 'holder-member-yes'
+      ? oldHolderFields
+      : values?.new_member?.person_type == 'legal-person'
+      ? legalReviewFields
+      : physicalReviewFields
 
-  const summary_process = values?.previous_holder == 'prevuis-holder-yes'
-    ? t('NEW_CONTRACT_OLD_HOLDER_SUMMARY_PROCESS')
-    : t('NEW_CONTRACT_NEW_HOLDER_SUMMARY_PROCESS')
+  const summary_process =
+    values?.previous_holder == 'prevuis-holder-yes'
+      ? t('NEW_CONTRACT_OLD_HOLDER_SUMMARY_PROCESS')
+      : t('NEW_CONTRACT_NEW_HOLDER_SUMMARY_PROCESS')
 
-  const reviewProcessFields = values?.has_member == 'member-off' ?
-    [
-      {
-        reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
-      },
-      {
-        reviewValue: summary_process
-      }
-    ] : [
-      {
-        reviewValue: summary_process
-      },
-      {
-        reviewLabel: t('REVIEW_LINK_PERSON'),
-        reviewValue: values?.member?.nif,
-        step: showReviewLinks
-          ? formSteps['LINK_MEMBER']
-          : null
-      }
-    ]
-
-  const reviewContactData = values?.member_is_holder == 'holder-member-yes'
-    ? [
-      {
-        reviewValue: t('REVIEW_CONTACT_OLD_HOLDER')
-      }
-    ]
-    : [
-    {
-      reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-      reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-      step: showReviewLinks
-        ? formSteps['MEMBER_INFO']
-        : null
-    },
-    {
-      reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-      reviewValue: values?.new_member?.email,
-      step: showReviewLinks
-        ? formSteps['MEMBER_INFO']
-        : null
-    },
-    {
-      reviewLabel: t('LANGUAGE'),
-      reviewValue: languages[values?.new_member?.language],
-      step: showReviewLinks
-        ? formSteps['MEMBER_INFO']
-        : null
-    }
-  ]
-
-  const reviewFields = [
-    [
-      {
-        icon: <InvoiceIcon/>,
-        title: t('REVIEW_PROCESS_TITLE'),
-        field: [
+  const reviewProcessFields =
+    values?.has_member == 'member-off'
+      ? [
           {
             reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
           },
           {
-            reviewValue: t('NEW_CONTRACT_SUMMARY_PROCESS')
+            reviewValue: summary_process
           }
         ]
+      : [
+          {
+            reviewValue: summary_process
+          },
+          {
+            reviewLabel: t('REVIEW_LINK_PERSON'),
+            reviewValue: values?.member?.nif,
+            step: showReviewLinks ? formSteps['LINK_MEMBER'] : null
+          }
+        ]
+
+  const reviewContactData =
+    values?.member_is_holder == 'holder-member-yes'
+      ? [
+          {
+            reviewValue: t('REVIEW_CONTACT_OLD_HOLDER')
+          }
+        ]
+      : [
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+            step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
+          },
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewValue: values?.new_member?.email,
+            step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
+          },
+          {
+            reviewLabel: t('LANGUAGE'),
+            reviewValue: languages[values?.new_member?.language],
+            step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
+          }
+        ]
+
+  const getPaymentField = () => {
+    let paymentFields = [
+      {
+        reviewLabel: t('REVIEW_PAYMENT_DATA'),
+        reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
       },
-      values?.new_member?.person_type == 'legal-person'
-        ? legalReviewFields
-        : physicalReviewFields
-    ],
+      {
+        reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
+        reviewValue: values?.new_member?.iban,
+        step: showReviewLinks ? formSteps['PAYMENT_INFO'] : null
+      },
+      {
+        reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
+        reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
+        step: showReviewLinks ? formSteps['DONATION'] : null
+      }
+    ]
+    if (values?.has_member === 'member-on') {
+      paymentFields.shift()
+    }
+    return paymentFields
+  }
+
+  const contactInfo =
+    values?.member_is_holder == 'holder-member-yes'
+      ? {
+          icon: <PhoneIcon />,
+          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+          field: [
+            {
+              reviewValue: t('DATA_AS_IN_OV'),
+              step: null
+            }
+          ]
+        }
+      : {
+          icon: <PhoneIcon />,
+          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+          field: [
+            {
+              reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+              reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+              step: showReviewLinks
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+                : null
+            },
+            {
+              reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+              reviewValue: values?.new_member?.email,
+              step: showReviewLinks
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+                : null
+            },
+            {
+              reviewLabel: t('LANGUAGE_SUMMARY'),
+              reviewValue: languages[values?.new_member?.language],
+              step: showReviewLinks
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+                : null
+            }
+          ]
+        }
+
+  const process = contractProcess(
+    values?.has_light == 'light-on',
+    values?.previous_holder == 'previous-holder-yes'
+  )
+  const processType = {
+    icon: <InvoiceIcon />,
+    title: t('REVIEW_PROCESS_TITLE'),
+    field: [
+      {
+        reviewValue:
+          process == 'A3'
+            ? t('ALTA')
+            : process == 'C1'
+            ? t('CANVI_DE_COMERCIALITZADORA')
+            : process == 'C2'
+            ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
+            : null
+      },
+      values?.has_member == 'member-off' && {
+        reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
+      }
+    ]
+  }
+
+  const reviewFields = [
+    [processType, reviewHolderData],
     [
       {
-        icon: <PlaceMapIcon/>,
+        icon: <PlaceMapIcon />,
         title: t('SUPPLY'),
         field: [
           {
             reviewLabel: t('CUPS_LABEL'),
             reviewValue: values?.cups,
-            step: showReviewLinks
-              ? formSteps['SUPPLY_POINT']
-              : null
+            step: showReviewLinks ? formSteps['SUPPLY_POINT'] : null
           },
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
             reviewValue: `${values?.supply_point_address?.street} ${values?.supply_point_address?.number}`,
-            step: showReviewLinks
-              ? formSteps['SUPPLY_INFO']
-              : null
+            step: showReviewLinks ? formSteps['SUPPLY_INFO'] : null
           },
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
             reviewValue: values?.supply_point_address?.city?.name,
-            step: showReviewLinks
-              ? formSteps['SUPPLY_INFO']
-              : null
+            step: showReviewLinks ? formSteps['SUPPLY_INFO'] : null
           },
           {
             reviewLabel: 'CNAE:',
             reviewValue: values?.supply_point.cnae,
             step:
-              showReviewLinks && values?.new_member?.person_type === 'legal-person'
+              showReviewLinks &&
+              values?.new_member?.person_type === 'legal-person'
                 ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
                 : null
           }
         ]
       },
       {
-        icon: <ConfigIcon/>,
+        icon: <ConfigIcon />,
         title: t('TECHNICAL_DATA_SUMMARY'),
         field: [
           {
@@ -301,70 +370,25 @@ const NewContractMemberSummary = (props) => {
             reviewValue: isTariffIndexed
               ? t('FARE_INDEXED')
               : values.contract.power_type === 'power-higher-15kw'
-              ? t('FARE_PERIODS').concat(" ",'3.0TD')
-              : t('FARE_PERIODS').concat(" ",'2.0TD')
+              ? t('FARE_PERIODS').concat(' ', '3.0TD')
+              : t('FARE_PERIODS').concat(' ', '2.0TD')
           },
           {
             reviewLabel: t('POWER_SUMMARY'),
             reviewValue: t('CURRENT')
           },
           {
-            reviewValue: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
+            reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
           }
         ]
       }
     ],
     [
+      contactInfo,
       {
-        icon: <PhoneIcon/>,
-        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-        field: [
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-            reviewValue: values?.new_member?.email,
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('LANGUAGE_SUMMARY'),
-            reviewValue: languages[values?.new_member?.language],
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-              : null
-          }
-        ]
-      },
-      {
-        icon: <CreditCardIcon/>,
+        icon: <CreditCardIcon />,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
-        field: [
-          {
-            reviewLabel: t('REVIEW_PAYMENT_DATA'),
-            reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
-          },
-          {
-            reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
-            reviewValue: values?.new_member?.iban,
-            step: showReviewLinks
-              ? formSteps['PAYMENT_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
-            reviewValue: values?.voluntary_donation ? t('YES') : t('NO'),
-            step: showReviewLinks
-              ? formSteps['DONATION']
-              : null
-          }
-        ]
+        field: getPaymentField()
       }
     ]
   ]
@@ -376,13 +400,13 @@ const NewContractMemberSummary = (props) => {
     },
     {
       title: t('GENERATION'),
-      field: 'gkwh'
+      field: 'generation_kWh'
     },
     {
       title: t('REVIEW_PRICES_POWER_TITLE'),
       field: 'potencia'
     },
-    { title: t('AUTOCONSUM'), field: 'energia_consumida' }
+    { title: t('AUTOCONSUM'), field: 'energia_autoconsumida' }
   ]
 
   useEffect(() => {
@@ -406,7 +430,7 @@ const NewContractMemberSummary = (props) => {
       tariff:
         values.contract.power_type === 'power-higher-15kw' ? '3.0TD' : '2.0TD',
       max_power: maxPower,
-      vat: values.new_member.nif,
+      vat: values.new_member?.nif ? values.new_member.nif : values.member.nif,
       cnae: values.supply_point.cnae,
       city_id: cityId
     })
@@ -434,7 +458,7 @@ const NewContractMemberSummary = (props) => {
   }
 
   return loading ? (
-    <Loading />
+    <NewLoading />
   ) : (
     <Grid container spacing={4}>
       <Grid
@@ -478,7 +502,7 @@ const NewContractMemberSummary = (props) => {
       ) : (
         <Grid container spacing={0}>
           <Grid item xs={2} sm={1}>
-            <PricetagIcon/>
+            <PricetagIcon />
           </Grid>
           <Grid item xs={10} sm={11}>
             <Grid container spacing={3}>
@@ -528,6 +552,11 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
+          sx={{
+            '& .MuiFormControlLabel-label a': {
+              color: 'link.main'
+            }
+          }}
           control={
             <Checkbox
               data-cy="privacy_policy"
@@ -621,6 +650,11 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
+          sx={{
+            '& .MuiFormControlLabel-label a': {
+              color: 'link.main'
+            }
+          }}
           control={
             <Checkbox
               data-cy="statutes"

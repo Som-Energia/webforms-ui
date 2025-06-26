@@ -6,6 +6,7 @@ import { Formik } from 'formik'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
@@ -196,7 +197,14 @@ const NewMemberForm = (props) => {
   }, [summaryField])
 
   return (
-    <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
+    <Container
+      maxWidth="md"
+      disableGutters={true}
+      sx={{
+        padding: '2rem',
+        backgroundColor: '#fff',
+        borderRadius: '10px'
+      }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -209,10 +217,12 @@ const NewMemberForm = (props) => {
               {sending
                 ? <NewLoading description={t("NEW_MEMBER_SUBMIT_LOADING")} />
                 : <>
-                  <SomStepper
-                    activeStep={activeStep}
-                    steps={NEW_MEMBER_FORM_SUBSTEPS}
-                  />
+                  <Box sx={{ marginBottom:'65px' }}>
+                    <SomStepper
+                      activeStep={activeStep}
+                      steps={NEW_MEMBER_FORM_SUBSTEPS}
+                    />
+                  </Box>
                   {
                     completed ? (
                       <Result

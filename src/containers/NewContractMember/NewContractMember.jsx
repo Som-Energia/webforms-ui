@@ -351,11 +351,11 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 5) {
         return <NewContractMemberSelfConsumptionChooser {...props} />
       } else if (activeStep === 6) {
-        return <NewContractMemberSelfConsumptionData setHasAlert={setHasAlert} />
+        return <NewContractMemberSelfConsumptionData {...props} setHasAlert={setHasAlert} />
       } else if (activeStep === 7) {
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 8) {
-        return <IdentifyMemberPersonalData {...props} />
+        return <IdentifyMemberPersonalData {...props} holder={true} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...props} />
       } else if (activeStep === 10) {
@@ -385,11 +385,22 @@ const NewContractMemberForm = (props) => {
   }, [summaryField])
 
   useEffect(() => {
-    trackEvent({ category: 'NewContractMember', action: 'setNewContractMemberStep', name: `new-contract-member-step-${activeStep}` })
+    trackEvent({
+      category: 'NewContractMember',
+      action: 'setNewContractMemberStep',
+      name: `new-contract-member-step-${activeStep}`
+    })
   }, [activeStep])
 
   return (
-    <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
+    <Container
+      maxWidth="md"
+      disableGutters={true}
+      sx={{
+        padding: '2rem',
+        backgroundColor: '#fff',
+        borderRadius: '10px'
+      }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -427,7 +438,7 @@ const NewContractMemberForm = (props) => {
                             : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
                         }>
                         <Typography
-                          sx={{ color: 'secondary.dark', textAlign: 'center' }}
+                          sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
                           dangerouslySetInnerHTML={{
                             __html: !error
                               ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')

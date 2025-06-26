@@ -19,16 +19,11 @@ const ReviewPricesTable = ({ reviewPrices, prices }) => {
     }
     const keys = Object.keys(concept).sort()
 
-    const differentValues = new Set(
-      keys.map((key) => concept[key]?.value)
-    )
+    const differentValues = new Set(keys.map((key) => concept[key]?.value))
     if (differentValues.size === 1) {
       for (const key in concept) {
         return (
-          <ReviewField
-            label={`${name}`}
-            value={`${concept[key]?.value} ${concept[key]?.unit}`}
-          />
+          <ReviewField value={`${concept[key]?.value} ${concept[key]?.unit}`} />
         )
       }
     }

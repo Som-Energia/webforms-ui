@@ -24,7 +24,7 @@
     "phone": "652385827",
     "phone_code": "+34",
     "language": "ca_ES",
-    "referral_source": "O1"
+    "referral_source": "O1_SOM_SERVEIS"
   },
   "personalLegalData": {
     "nif": "Q9213530J",
@@ -39,7 +39,7 @@
     "phone": "652385827",
     "phone_code": "+34",
     "language": "ca_ES",
-    "referral_source": "O1",
+    "referral_source": "O1_SOM_SERVEIS",
     "comercial_info_accepted": "true",
     "legal_person_accepted": "true"
   },

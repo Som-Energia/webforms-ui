@@ -538,6 +538,14 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       isSubmitting
                     }
                     title={t('SEGUENT_PAS')}
+                    sx={{
+                      backgroundColor: 'primary.extraLight',
+                      color: 'primary.main',
+                      '&:hover': {
+                        color: 'primary.extraLight',
+                        backgroundColor: 'primary.main'
+                      }
+                    }}
                   />
                 )}
               </Box>

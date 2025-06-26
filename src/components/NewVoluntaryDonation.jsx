@@ -35,7 +35,7 @@ const HolderVoluntaryDonation = (props) => {
       <Grid item xs={12}>
         <Typography
           variant="body.sm.regular"
-          color='secondary.dark'
+          color='secondary.extraDark'
           dangerouslySetInnerHTML={{
             __html: t('VOLUNTARY_DONATION_HOW_INFO')
           }}
@@ -44,7 +44,7 @@ const HolderVoluntaryDonation = (props) => {
       <Grid item xs={12}>
         <Typography
           variant="body.sm.regular"
-          color='secondary.dark'
+          color='secondary.extraDark'
           dangerouslySetInnerHTML={{
             __html: t('VOLUNTARY_DONATION_WHY_INFO')
           }}

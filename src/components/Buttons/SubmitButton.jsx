@@ -12,11 +12,11 @@ function SubmitButton(props) {
       variant="contained"
       color="primary"
       sx={{
-        backgroundColor: "secondary.alt",
-        color: "primary.main",
+        backgroundColor: 'primary.extraLight',
+        color: 'primary.main',
         '&:hover': {
-          color: "secondary.alt",
-          backgroundColor: "primary.main",
+          color: 'primary.extraLight',
+          backgroundColor: 'primary.main'
         }
       }}
       startIcon={loading ? (

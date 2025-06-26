@@ -74,7 +74,6 @@ const CadastralReference = (props) => {
 
   return (
     <InputField
-      textFieldLabel={t('CADASTRAL_REFERENCE')}
       textFieldName={t('CADASTRAL_REFERENCE')}
       textFieldHelper={
         <span>
@@ -83,12 +82,11 @@ const CadastralReference = (props) => {
             href={t('HELP_CADASTRAL_REFERENCE_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            style={{color: theme.palette.secondary.main, textDecoration: 'underline' }}>
+            style={{color: theme.palette.link.main, textDecoration: 'underline' }}>
             {t('CADASTRAL_REFERENCE_LINK')}
           </a>
           </span>
       }
-      iconHelper={true}
       handleChange={handleInputCadastralReference}
       handleBlur={handleInputCadastralReferenceBlur}
       touched={touched?.cadastral_reference}

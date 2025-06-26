@@ -6,18 +6,18 @@ import InputTitle from '../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
-import PersonIcon from '@mui/icons-material/Person'
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
-import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
+import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
 
 import { iconRequirements } from '../../themes/commonStyles'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
+import { PersonalIcon, PhoneIcon, CreditCardIcon } from '../../data/icons/Icons'
 
-import Loading from '../../components/Loading'
+import NewLoading from '../../components/NewLoading'
 
 const MemberSummary = (props) => {
   const {
@@ -34,6 +34,7 @@ const MemberSummary = (props) => {
   const { t } = useTranslation()
 
   const [loading, setLoading] = useState(false)
+  const [showReviewLinks, setShowReviewLinks] = useState(false)
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -55,60 +56,78 @@ const MemberSummary = (props) => {
   }
 
   const legalReviewFields = {
-    icon: <PersonIcon sx={iconRequirements} />,
+    icon: <PersonalIcon sx={iconRequirements} />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
         reviewLabel: t('BUSINESS_NAME'),
         reviewValue: values?.new_member?.name,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       },
       {
         reviewLabel: t('CIF'),
         reviewValue: values?.new_member?.nif,
-        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+          : null
       },
       {
         reviewLabel: t('PROXY'),
         reviewValue: `${values?.new_member?.proxyname} (${values?.new_member?.proxynif})`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       }
     ]
   }
 
   const physicalReviewFields = {
-    icon: <PersonIcon sx={iconRequirements} />,
+    icon: <PersonalIcon sx={iconRequirements} />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NAME'),
         reviewValue: `${values?.new_member?.name} ${values?.new_member?.surname1} ${values?.new_member?.surname2}`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       },
       {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
-        step: NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['IDENTIFY_MEMBER']
+          : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_ADDRESS'),
         reviewValue: `${values?.address?.street} ${values?.address?.number}`,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       },
       {
         reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CITY'),
         reviewValue: values?.address?.city?.name,
-        step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+        step: showReviewLinks
+          ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+          : null
       }
     ]
   }
@@ -119,41 +138,51 @@ const MemberSummary = (props) => {
         ? physicalReviewFields
         : legalReviewFields,
       {
-        icon: <LocalPhoneOutlinedIcon sx={iconRequirements} />,
+        icon: <PhoneIcon sx={iconRequirements} />,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
             reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+            step: showReviewLinks
+              ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
           },
           {
             reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+            step: showReviewLinks
+              ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
           },
           {
             reviewLabel: t('LANGUAGE'),
             reviewValue: languages[values?.new_member?.language],
-            step: NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+            step: showReviewLinks
+              ? NEW_MEMBER_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
           }
         ]
       }
     ],
     [
       {
-        icon: <CreditCardOutlinedIcon sx={iconRequirements} />,
+        icon: <CreditCardIcon sx={iconRequirements} />,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
             reviewLabel: t('PAYMENT_METHOD'),
             reviewValue: values?.new_member?.payment_method,
-            step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO']
+            step: showReviewLinks
+              ? NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO']
+              : null
           },
           {
             reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
             reviewValue: values?.new_member?.iban,
-            step: NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO'],
+            step: showReviewLinks
+              ? NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO']
+              : null,
             hide: values?.new_member?.payment_method != 'iban'
           }
         ]
@@ -168,20 +197,46 @@ const MemberSummary = (props) => {
   }
 
   return loading ? (
-    <Loading />
+    <NewLoading />
   ) : (
     <Grid container spacing={4}>
       <Grid item xs={12}>
         <Typography variant="headline4.regular">{t('MEMBER_PAGE_SUMMARY')}</Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          mt: 4,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
         <InputTitle text={t('MEMBER_PAGE_SUMMARY_QUESTION')} />
+        {!showReviewLinks && (
+          <Button
+            id="edit_button"
+            size="small"
+            sx={{
+              ...buttonGurbLight,
+              minWidth: 'auto',
+              width: 'auto',
+              // padding: '6px 15px',
+              fontSize: '0.90rem',
+              textTransform: 'none'
+              // height: 36
+            }}
+            startIcon={<EditOutlinedIcon fontSize="medium" />}
+            onClick={() => setShowReviewLinks(true)}>
+            {t('EDIT_DATA')}
+          </Button>
+        )}
       </Grid>
       <Grid item xs={12}>
         <ReviewTable tableFields={reviewFields} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular" color="secondary.dark">
+        <Typography variant="body.sm.regular" color="secondary.extraDark">
           {t('PURPOSE_MEMBER')}
           <br />
           {t('RIGHTS_MEMBER')}
@@ -190,6 +245,11 @@ const MemberSummary = (props) => {
 
       <Grid item xs={12}>
         <FormControlLabel
+          sx={{
+            '& .MuiFormControlLabel-label a': {
+              color: 'link.main'
+            },
+          }}
           control={
             <Checkbox
               data-cy="privacy_policy"
@@ -211,6 +271,11 @@ const MemberSummary = (props) => {
 
       <Grid item xs={12}>
         <FormControlLabel
+          sx={{
+            '& .MuiFormControlLabel-label a': {
+              color: 'link.main'
+            },
+          }}
           control={
             <Checkbox
               data-cy="statutes"

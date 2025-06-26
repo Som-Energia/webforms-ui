@@ -379,7 +379,6 @@ const Member = (props) => {
                               <Button
                                 data-cy="submit"
                                 variant="contained"
-                                color="primary"
                                 startIcon={
                                   sending ? (
                                     <CircularProgress size={24} />
@@ -387,6 +386,14 @@ const Member = (props) => {
                                     <SendIcon />
                                   )
                                 }
+                                sx={{
+                                  backgroundColor: 'primary.extraLight',
+                                  color: 'primary.main',
+                                  '&:hover': {
+                                    color: 'primary.extraLight',
+                                    backgroundColor: 'primary.main'
+                                  }
+                                }}
                                 disabled={sending || !props.isValid}
                                 onClick={() => handlePost(props.values)}>
                                 {t('SEND')}

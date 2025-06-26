@@ -32,7 +32,7 @@ import Failure from './Indexed/IndexedFailure'
 import Success from './Success'
 import DisplayFormikState from '../components/DisplayFormikState'
 import DropDownMenu from '../components/DropDownMenu'
-import Loading from '../components/Loading'
+import Loading from '../components/NewLoading'
 import PrevButton from '../components/Buttons/PrevButton'
 import NextButton from '../components/Buttons/NextButton'
 
@@ -435,11 +435,11 @@ const Indexada = (props) => {
                                       data-cy="submit"
                                       disableElevation="true"
                                       sx={{
-                                        backgroundColor: '#CDFF80',
-                                        color: '#0B2E34',
+                                        backgroundColor: 'primary.extraLight',
+                                        color: 'primary.main',
                                         '&:hover': {
-                                          color: '#CDFF80',
-                                          backgroundColor: '#0B2E34',
+                                          color: 'primary.extraLight',
+                                          backgroundColor: 'primary.main'
                                         }
                                       }}
                                       id="tariff-change-submit"

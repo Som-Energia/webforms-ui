@@ -41,12 +41,12 @@ const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaA
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular" color="secondary.dark">
+        <Typography variant="body.sm.regular" color="secondary.extraDark">
           {t('CONTRACT_QUESTION_DESC')}
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular" color="secondary.dark">
+        <Typography variant="body.sm.regular" color="secondary.extraDark">
           {t('MEMBER_PAYMENT_INFO')}
         </Typography>
       </Grid>
@@ -59,7 +59,7 @@ const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaA
           options={options}
           value={values?.has_member}
           handleChange={handleMemberQuestion}
-          maxWidth="8rem"
+          maxWidth="18rem"
         />
       </Grid>
     </Grid>

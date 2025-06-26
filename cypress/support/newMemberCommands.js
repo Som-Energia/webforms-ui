@@ -21,8 +21,9 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
   cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
   cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
-  cy.get('[data-cy="address-street"]').type(validAddress.input)
+  cy.get('[data-cy="address"]').type(validAddress.input)
   cy.contains(personalData.street).click()
+  cy.wait(1000)
 
   cy.get('[data-cy="address.number"]').type('2')
   cy.get('[data-cy="address.floor"]').type('1')
@@ -39,7 +40,7 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
     cy.get('[id="new_member.gender-female"]').click()
     cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
     cy.get('[id="new_member.referral_source"]').click()
-    cy.get('[id="new_member.referral_source-O1"]').click()
+    cy.get('[id="new_member.referral_source-O1_SOM_SERVEIS"]').click()
   }
 
   cy.get('[data-cy=next]').click()
@@ -52,8 +53,9 @@ Cypress.Commands.add(
     cy.get('[data-cy="new_member.name"]').type(personalData.name)
     cy.get('[data-cy="new_member.proxyname"]').type(personalData.proxyname)
     cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
-    cy.get('[data-cy="address-street"]').type(validAddress.input)
+    cy.get('[data-cy="address"]').type(validAddress.input)
     cy.contains(personalData.street).click()
+    cy.wait(1000)
 
     cy.get('[data-cy="address.number"]').type('2')
     cy.get('[data-cy="address.floor"]').type('1')
@@ -69,7 +71,7 @@ Cypress.Commands.add(
 
     if (optionalData) {
       cy.get('[id="new_member.referral_source"]').click()
-      cy.get('[id="new_member.referral_source-O1"]').click()
+      cy.get('[id="new_member.referral_source-O1_SOM_SERVEIS"]').click()
     }
 
     cy.get('[data-cy="legal_person"]').click()
@@ -98,6 +100,8 @@ Cypress.Commands.add('personalPhysicalcheckReviewNewMemberStep', (nif) => {
 
   cy.get('[data-cy="statutes"]').click()
 
+  cy.get('[id="edit_button"]').click()
+
   cy.get('button').contains(nif)
 })
 
@@ -107,6 +111,8 @@ Cypress.Commands.add('personalLegalcheckReviewNewMemberStep', (nif) => {
   cy.get('[data-cy="statutes"]').click()
 
   cy.get('[data-cy="comercial_info_accepted"]').click()
+
+  cy.get('[id="edit_button"]').click()
 
   cy.get('button').contains(nif)
 })

@@ -41,6 +41,12 @@ const Option = ({
         flexDirection: 'column',
         justifyContent: 'space-between'
       }}
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          setSelected(optionId)
+        }
+      }}
       onClick={() => {
         setSelected(optionId)
       }}>
@@ -74,13 +80,14 @@ const Option = ({
           </Box>
           {isSelected ? (
             <Checkbox
+              tabIndex={-1}
               checked
               icon={<CheckCircleIcon />}
               checkedIcon={<CheckCircleIcon />}
             />
           ) : null}
         </Box>
-        <Typography variant="body.sm.regular">{textBody}</Typography>
+        <Typography variant="body.sm.regular" color="secondary.extraDark">{textBody}</Typography>
       </Box>
     </Box>
   )

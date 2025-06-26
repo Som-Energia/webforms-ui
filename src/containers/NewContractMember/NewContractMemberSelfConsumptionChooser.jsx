@@ -38,7 +38,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body.md.regular" color="secondary.dark">
+          <Typography variant="body.md.regular" color="secondary.extraDark">
             {t('RECOMMENDATION_SUBTITLE')}
           </Typography>
         </Grid>
@@ -51,7 +51,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
             text={t('SELFCONSUMPTION_ACTIVE')}
             required={true}
           />
-          <Typography variant="body.md.regular" color="secondary.dark">
+          <Typography variant="body.md.regular" color="secondary.extraDark">
           {t('SELFCONSUMPTION_HELPER')}
         </Typography>
         </Grid>
@@ -67,7 +67,7 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       </Grid>
       {values.has_selfconsumption === 'selfconsumption-on' && (
         <Grid item xs={12}>
-          <Typography variant="body.md.regular" color="secondary.dark">
+          <Typography variant="body.md.regular" color="secondary.extraDark">
             {t('SELFCONSUMPTION_WARNING')}
           </Typography>
         </Grid>

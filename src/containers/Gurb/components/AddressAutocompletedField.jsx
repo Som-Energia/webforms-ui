@@ -134,6 +134,7 @@ export default function LocationInput({
               onBlur={(e) => {
                 setIsFocused(false)
                 if (onBlur) onBlur(e)
+                onChange({ id: null, street: e.target.value })
               }}
               error={Boolean(touched && error)}
             />

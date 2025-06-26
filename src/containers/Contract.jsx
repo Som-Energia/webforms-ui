@@ -909,7 +909,14 @@ const Contract = (props) => {
                                 type="button"
                                 data-cy="submit"
                                 variant="contained"
-                                color="primary"
+                                sx={{
+                                  backgroundColor: 'primary.extraLight',
+                                  color: 'primary.main',
+                                  '&:hover': {
+                                    color: 'primary.extraLight',
+                                    backgroundColor: 'primary.main'
+                                  }
+                                }}
                                 startIcon={
                                   sending ? (
                                     <CircularProgress size={24} />

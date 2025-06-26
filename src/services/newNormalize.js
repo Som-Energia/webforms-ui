@@ -18,7 +18,7 @@ export const normalizeClient = (client) => {
     name: client.name,
     is_juridic: client.person_type == 'physic-person' ? false : true,
     email: client.email,
-    phone: `${client.phone_code}${client.phone}`,
+    phone: `${client.phone_code} ${client.phone}`,
     lang: client.language
   }
   if (data.is_juridic) {
@@ -50,12 +50,11 @@ export const normalizeSelfconsumption = (selfconsumption) => {
     aux_services:
       selfconsumption.aux_services == 'auxiliary-service-yes' ? true : false,
     technology: selfconsumption.technology
-    // attachments: [] // TODO: check this !!!!
   }
   return data
 }
 
-const contractProcess = (has_light, same_holder) => {
+export const contractProcess = (has_light, same_holder) => {
   if (!has_light) {
     return 'A3'
   } else if (same_holder) {
@@ -65,12 +64,24 @@ const contractProcess = (has_light, same_holder) => {
   }
 }
 
+export const normalizeAttachments = (supply_point_attachment, process) => {
+  let data = [{
+    filename: supply_point_attachment,
+    category: process == 'A3' ? "new_contract" : "invoice"
+  }]
+  return data
+}
+
 export const newNormalizeContract = (data) => {
   const powers = []
   const powers_max = data.contract.power_type == 'power-lower-15kw' ? 2 : 6
   for (var i = 1; i <= powers_max; i++) {
     powers.push(data.contract.power[`power${i}`])
   }
+  const process = contractProcess(
+        data.has_light == 'light-on',
+        data.previous_holder == 'previous-holder-yes'
+      )
   const finalContract = {
     linked_member: data.member.link_member
       ? data.member_is_holder == 'holder-member-yes'
@@ -85,10 +96,7 @@ export const newNormalizeContract = (data) => {
       powers: powers.map((power) => (+power * 1000).toString()),
       cups_address: normalizeAddress(data.supply_point_address),
       cnae: data.supply_point.cnae.toString(),
-      process: contractProcess(
-        data.has_light == 'light-on',
-        data.previous_holder == 'previous-holder-yes'
-      )
+      process: process
     },
     iban: data.new_member.iban, // TODO: new_member warning!
     sepa_accepted: data.new_member.sepa_accepted, // TODO: new_member warning!
@@ -130,7 +138,12 @@ export const newNormalizeContract = (data) => {
     finalContract['comercial_info_accepted'] = data.comercial_info_accepted
   }
 
-  // TODO: check attachments!!!!
+  if (data.supply_point.attachment) {
+    // TODO: selfconsumption attachments must be inside attachment!!
+    finalContract['attachments'] = normalizeAttachments(
+      data.supply_point.attachment, process
+    )
+  }
 
   return finalContract
 }

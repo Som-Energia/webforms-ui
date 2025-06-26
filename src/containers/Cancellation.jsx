@@ -184,7 +184,7 @@ const Cancellation = (props) => {
                 id="cancelForm"
                 method="POST"
                 sx={{
-                  backgroundColor: 'secondary.light',
+                  backgroundColor: 'white',
                   color: 'primary',
                   display: 'flex',
                   pb: '2rem'
@@ -228,14 +228,13 @@ const Cancellation = (props) => {
                               <Button
                                 data-cy="submit"
                                 variant="contained"
-                                color="primary"
                                 disableElevation={true}
                                 sx={{
-                                  backgroundColor: '#CDFF80',
-                                  color: '#0B2E34',
+                                  backgroundColor: 'primary.extraLight',
+                                  color: 'primary.main',
                                   '&:hover': {
-                                    color: '#CDFF80',
-                                    backgroundColor: '#0B2E34'
+                                    color: 'primary.extraLight',
+                                    backgroundColor: 'primary.main'
                                   }
                                 }}
                                 endIcon={

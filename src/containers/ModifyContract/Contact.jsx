@@ -125,6 +125,14 @@ export default function Contact({
                   type="submit"
                   onClick={nextStep}
                   title={t('SEGUENT_PAS')}
+                  sx={{
+                    backgroundColor: 'primary.extraLight',
+                    color: 'primary.main',
+                    '&:hover': {
+                      color: 'primary.extraLight',
+                      backgroundColor: 'primary.main'
+                    }
+                  }}
                 />
               )}
             </Box>

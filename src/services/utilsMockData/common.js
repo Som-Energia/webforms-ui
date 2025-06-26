@@ -104,7 +104,7 @@ export const client = {
       surname: 'D Monkey',
       is_juridic: false,
       email: 'luffy@example.coop',
-      phone: '+34612345678',
+      phone: '+34 612345678',
       lang: 'ca_ES',
       gender: 'male',
       birthdate: '1997-05-05'
@@ -142,7 +142,7 @@ export const client = {
       proxy_name: 'Luffy',
       proxy_vat: '12345678P',
       email: 'mugiwara@example.coop',
-      phone: '+34612345679',
+      phone: '+34 612345679',
       lang: 'es_ES',
       legal_person_accepted: true
     }
@@ -176,8 +176,44 @@ export const iban_values = {
 }
 
 export const supply_point = {
-  cnae: 9820,
-  supply_point_accepted: true,
-  is_housing: true,
-  cnae_valid: true
+  with_attachments: {
+    entryValues: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true,
+      attachment: 'road_poneglyph.jpg'
+    }
+  },
+  without_attachments: {
+    entryValues: {
+      cnae: 9820,
+      supply_point_accepted: true,
+      is_housing: true,
+      cnae_valid: true,
+    }
+  }
+}
+
+export const supply_point_attachments = {
+  new_contract: {
+    entryValues: {
+      filename: 'road poneglyph',
+      process: 'A3'
+    },
+    normalizedData: [{
+      filename: 'road poneglyph',
+      category: 'new_contract'
+    }]
+  },
+  invoice: {
+    entryValues: {
+      filename: 'road poneglyph',
+      process: 'C1'
+    },
+    normalizedData: [{
+      filename: 'road poneglyph',
+      category: 'invoice'
+    }]
+  }
 }

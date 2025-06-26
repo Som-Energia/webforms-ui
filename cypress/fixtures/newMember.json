@@ -22,7 +22,7 @@
     "phone": "652385827",
     "phone_code": "+34",
     "language": "ca_ES",
-    "referral_source": "O1",
+    "referral_source": "O1_SOM_SERVEIS",
     "payment_method": "iban",
     "sepa_accepted": "true",
     "iban": "ES7712341234161234567890"
@@ -40,7 +40,7 @@
     "phone": "652385827",
     "phone_code": "+34",
     "language": "ca_ES",
-    "referral_source": "O1",
+    "referral_source": "O1_SOM_SERVEIS",
     "payment_method": "iban",
     "sepa_accepted": "true",
     "iban": "ES7712341234161234567890",

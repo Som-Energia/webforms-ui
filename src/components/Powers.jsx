@@ -37,9 +37,14 @@ const Powers = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-      <Typography variant="body.md.medium">{t('POWER_TO_CONTRACT')}  <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>*</span></Typography>
+        <Typography variant="body.md.medium">
+          {t('POWER_TO_CONTRACT')}{' '}
+          <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>
+            *
+          </span>
+        </Typography>
         <Typography
-          sx={{ typography: 'body.md.regular', color: 'secondary.dark' }}>
+          sx={{ typography: 'body.md.regular', color: 'secondary.extraDark' }}>
           {t('POWER_HELPER')}
         </Typography>
       </Grid>
@@ -61,14 +66,13 @@ const Powers = (props) => {
                     href={t('POWER_LOWER_15_HELPER_URL')}
                     target="_blank"
                     style={{
-                      color: theme.palette.secondary.dark,
+                      color: theme.palette.link.main,
                       textDecoration: 'underline'
                     }}
                     rel="noopener noreferrer">
                     {t('POWER_LOWER_15_HELPER')}
                   </a>
                 }
-                iconHelper={true}
               />
             </Grid>
             <Grid item>
@@ -93,12 +97,14 @@ const Powers = (props) => {
                   <a
                     href={t('POWER_HIGHER_15_HELPER_URL')}
                     target="_blank"
-                    style={{ color: 'secondary.dark', textDecoration: 'underline' }}
+                    style={{
+                      color: theme.palette.link.main,
+                      textDecoration: 'underline'
+                    }}
                     rel="noopener noreferrer">
                     {t('POWER_HIGHER_15_HELPER')}
                   </a>
                 }
-                iconHelper={true}
               />
             </Grid>
             <Grid item>
