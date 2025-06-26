@@ -54,7 +54,7 @@ export const normalizeSelfconsumption = (selfconsumption) => {
   return data
 }
 
-const contractProcess = (has_light, same_holder) => {
+export const contractProcess = (has_light, same_holder) => {
   if (!has_light) {
     return 'A3'
   } else if (same_holder) {

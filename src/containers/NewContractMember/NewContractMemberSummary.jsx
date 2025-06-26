@@ -18,6 +18,7 @@ import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 
 import { getPrices } from '../../services/api'
+import { contractProcess } from '../../services/newNormalize'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
 
 import {
@@ -299,22 +300,32 @@ const NewContractMemberSummary = (props) => {
           ]
         }
 
-  const reviewFields = [
-    [
+  const process = contractProcess(
+    values?.has_light == 'light-on',
+    values?.previous_holder == 'previous-holder-yes'
+  )
+  const processType = {
+    icon: <InvoiceIcon />,
+    title: t('REVIEW_PROCESS_TITLE'),
+    field: [
       {
-        icon: <InvoiceIcon />,
-        title: t('REVIEW_PROCESS_TITLE'),
-        field: [
-          {
-            reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
-          },
-          {
-            reviewValue: t('NEW_CONTRACT_SUMMARY_PROCESS')
-          }
-        ]
+        reviewValue:
+          process == 'A3'
+            ? t('ALTA')
+            : process == 'C1'
+            ? t('CANVI_DE_COMERCIALITZADORA')
+            : process == 'C2'
+            ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
+            : null
       },
-      reviewHolderData
-    ],
+      values?.has_member == 'member-off' && {
+        reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
+      }
+    ]
+  }
+
+  const reviewFields = [
+    [processType, reviewHolderData],
     [
       {
         icon: <PlaceMapIcon />,
@@ -367,7 +378,7 @@ const NewContractMemberSummary = (props) => {
             reviewValue: t('CURRENT')
           },
           {
-            reviewValue: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
+            reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
           }
         ]
       }
