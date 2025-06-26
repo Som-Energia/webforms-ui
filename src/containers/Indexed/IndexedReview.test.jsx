@@ -1,7 +1,7 @@
 import React from 'react'
 import IndexedReview from './IndexedReview'
 import { Suspense } from 'react'
-import Loading from '../../components/Loading'
+import Loading from '../../components/NewLoading'
 import {
   fireEvent,
   render,

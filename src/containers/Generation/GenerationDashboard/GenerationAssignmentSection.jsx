@@ -4,7 +4,7 @@ import GenerationContext from '../context/GenerationContext'
 import PopUpContext from '../../../context/PopUpContext'
 import { deleteContractsFromAssignments } from '../../../services/api'
 import CustomDialog from '../../../components/CustomDialog'
-import Loading from '../../../components/Loading'
+import Loading from '../../../components/NewLoading'
 import AssignmentsTable from './AssignmentsTable'
 
 function createData(
