@@ -41,7 +41,7 @@ const Option = ({
         flexDirection: 'column',
         justifyContent: 'space-between'
       }}
-      tabIndex={1}
+      tabIndex={0}
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           setSelected(optionId)
@@ -80,6 +80,7 @@ const Option = ({
           </Box>
           {isSelected ? (
             <Checkbox
+              tabIndex={-1}
               checked
               icon={<CheckCircleIcon />}
               checkedIcon={<CheckCircleIcon />}

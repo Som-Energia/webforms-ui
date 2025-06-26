@@ -12,7 +12,7 @@ function PrevButton(props) {
 
   return (
     <Button
-      tabIndex={1}
+      tabIndex={0}
       sx={{
         ...buttonGurbLight,
         height: '40px',
