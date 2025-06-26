@@ -27,7 +27,7 @@ const CalendarField = ({
   const [touched, setTouched] = useState(false);
 
 
-    const handleError = (reason) => {
+  const handleError = (reason) => {
     if (reason === 'invalidDate' && touched) {
       setError(true);
     } else {
@@ -36,9 +36,9 @@ const CalendarField = ({
   };
 
 
-    const handleBlur = () => {
+  const handleBlur = () => {
     setTouched(true);
-    if (!value || !dayjs(value).isValid()) {
+    if (!dayjs(value).isValid()) {
       setError(true);
     }
   };
@@ -57,9 +57,8 @@ const CalendarField = ({
             value={value}
             onChange={handleChange}
             onError={handleError}
-            slotProps={{ textField: { fullWidth: true, onBlur:handleBlur, error:!!error } }}
+            slotProps={{ textField: { fullWidth: true, onBlur: handleBlur, error: !!error } }}
             sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}
-            
           />
         </LocalizationProvider>
       </Grid>
