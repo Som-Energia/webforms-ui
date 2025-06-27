@@ -40,7 +40,7 @@ describe('Cancellation', () => {
       .blur()
       .should('have.attr', 'aria-invalid', 'true')
 
-    cy.contains('teléfono no es correcto', { matchCase: false })
+    cy.contains('No has introducido el teléfono', { matchCase: false })
 
     cy.get('[data-cy=submit]').should('have.class', 'Mui-disabled')
   })
