@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 4.0.0 2025-06-27
 
 - New joint contract and member form
 - New Member form
