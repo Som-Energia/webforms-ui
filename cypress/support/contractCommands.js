@@ -1,4 +1,4 @@
-Cypress.Commands.add('identifyMember', (memberNumber, memberVat) => {
+Cypress.Commands.add('oldIidentifyMember', (memberNumber, memberVat) => {
 
   cy.intercept('GET', '/check/vat/*',
     {
@@ -194,7 +194,7 @@ Cypress.Commands.add('enterPowerFare', (moreThan15Kw, powers) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('chooseTariff', (isIndexed) => {
+Cypress.Commands.add('oldChooseTariff', (isIndexed) => {
   cy.get('[data-cy="tariffMode"]').get(`[data-value="${isIndexed}"]`).click()
 
   cy.get('[data-cy=next]').click()
