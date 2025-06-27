@@ -16,14 +16,14 @@ describe('Holder Change', () => {
   describe('Enter VAT', function () {
     it('Enter invalid VAT', function () {
       const ERROR_STATUS_CODE = 400
-      cy.identifyHolder(this.data.vatInvalid, ERROR_STATUS_CODE)
+      cy.oldIdentifyHolder(this.data.vatInvalid, ERROR_STATUS_CODE)
 
       cy.contains('El NIF no es correcto')
       cy.get('[data-cy=next]').should('have.class', 'Mui-disabled')
     })
 
     it('Enter valid VAT', function () {
-      cy.identifyHolder(this.personaldata.vat)
+      cy.oldIdentifyHolder(this.personaldata.vat)
 
       cy.get('[data-cy=next]').should('not.have.class', 'Mui-disabled')
       cy.get('[data-cy=next]').click()
@@ -32,7 +32,7 @@ describe('Holder Change', () => {
 
   describe('Enter CUPS', function () {
     beforeEach(function () {
-      cy.identifyHolder(this.personaldata.vat)
+      cy.oldIdentifyHolder(this.personaldata.vat)
       cy.get('[data-cy=next]').click()
     })
 
@@ -67,7 +67,7 @@ describe('Holder Change', () => {
   describe('Become member step', function () {
 
     it('Check become member option: skip if holder is member', function () {
-      cy.identifyHolder(this.personaldata.memberVat)
+      cy.oldIdentifyHolder(this.personaldata.memberVat)
       cy.get('[data-cy=next]').click()
 
       cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -78,7 +78,7 @@ describe('Holder Change', () => {
       })
 
       it('Check become member option: yes', function () {
-        cy.identifyHolder(this.data.randomVat)
+        cy.oldIdentifyHolder(this.data.randomVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -94,7 +94,7 @@ describe('Holder Change', () => {
       })
 
       it('Check become member option: no', function () {
-        cy.identifyHolder(this.data.randomVat)
+        cy.oldIdentifyHolder(this.data.randomVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.data.cups)
@@ -109,7 +109,7 @@ describe('Holder Change', () => {
 
     describe('Select your case step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.data.randomVat)
+        cy.oldIdentifyHolder(this.data.randomVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -141,7 +141,7 @@ describe('Holder Change', () => {
 
     describe('Link member step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.data.randomVat)
+        cy.oldIdentifyHolder(this.data.randomVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -173,7 +173,7 @@ describe('Holder Change', () => {
 
     describe.skip('Enter personal data', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.data.vat)
+        cy.oldIdentifyHolder(this.data.vat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -192,7 +192,7 @@ describe('Holder Change', () => {
 
     describe('Voluntary cent step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.personaldata.memberVat)
+        cy.oldIdentifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -212,7 +212,7 @@ describe('Holder Change', () => {
 
     describe('Special cases step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.personaldata.memberVat)
+        cy.oldIdentifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -241,7 +241,7 @@ describe('Holder Change', () => {
 
     describe('Payment step', function () {
       beforeEach(function () {
-        cy.identifyHolder(this.personaldata.memberVat)
+        cy.oldIdentifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -273,7 +273,7 @@ describe('Holder Change', () => {
 
     describe('Review step', function () {
       it('Review holder change data: holder in trial period', function () {
-        cy.identifyHolder(this.data.randomVat)
+        cy.oldIdentifyHolder(this.data.randomVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
@@ -310,7 +310,7 @@ describe('Holder Change', () => {
       })
 
       it('Review holder change data', function () {
-        cy.identifyHolder(this.personaldata.memberVat)
+        cy.oldIdentifyHolder(this.personaldata.memberVat)
         cy.get('[data-cy=next]').click()
 
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)

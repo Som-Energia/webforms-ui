@@ -1,4 +1,4 @@
-Cypress.Commands.add('identifyHolder', (holderVat, statusCode = 200) => {
+Cypress.Commands.add('oldIdentifyHolder', (holderVat, statusCode = 200) => {
   cy.intercept('GET', '/check/vat/exists/**').as('checkVat')
 
   cy.get('[name="holder.vat"]').type(holderVat).should('have.value', holderVat)
