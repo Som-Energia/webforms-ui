@@ -34,7 +34,7 @@ describe('Contract', () => {
   
   describe('Contract with selfconsumption', function () {
     it('2.0TD', function () {
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.oldIidentifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasService
@@ -62,7 +62,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
 
       cy.intercept('GET', '/data/generator_technologies', {
@@ -143,7 +143,7 @@ describe('Contract', () => {
   describe('Contract with CUPS without service', function () {
     beforeEach(function () {
       cy.fixture('normalizedData/contract20_noservice.json').as('reqData')
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.oldIidentifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasNoService
@@ -159,7 +159,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.identifyOwner(this.data.member.vat)
 
@@ -222,7 +222,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.identifyOwner(this.data.member.vat)
 
@@ -252,7 +252,7 @@ describe('Contract', () => {
 
   describe('Contract with service, no selfconsumption, correct data', function () {
     beforeEach(function () {
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.oldIidentifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasService
@@ -271,7 +271,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 
@@ -322,7 +322,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 
@@ -354,7 +354,7 @@ describe('Contract', () => {
 
   describe('Wrong power', function () {
     beforeEach(function () {
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.oldIidentifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasService
@@ -523,7 +523,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 
@@ -639,7 +639,7 @@ describe('Contract', () => {
   describe('Juridic Person', function () {
     beforeEach(function () {
 
-      cy.identifyMember(this.data.juridicMember.number, this.data.juridicMember.vat)
+      cy.oldIidentifyMember(this.data.juridicMember.number, this.data.juridicMember.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasService
@@ -657,7 +657,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 
