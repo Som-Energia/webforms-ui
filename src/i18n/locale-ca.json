@@ -1039,7 +1039,7 @@
     "NEW_CONTRACT_SUMMARY_PROCESS": "Canvi de comercialitzadora i canvi de la persona titular",
     "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED": "Amb la contractació del servei GURB m'obligo a pagar el cost d'adhesió únic, un cop verificada la meva plaça a GURB Mataró, i la quota GURB, que s'aplicarà a partir de l'endemà de la data d'activació.",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Ja ets de Som Energia!",
-    "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Rebràs un correu amb el teu número de persona sòcia i amb tota la informació sobre el teu nou contacte",
+    "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Rebràs un correu amb el teu número de persona sòcia i amb tota la informació sobre el teu nou contracte",
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "Hi ha un error i no s'ha pogut realitzar l'operació sol·licitada!",
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisem la situació. Disculpa les molèsties",
     "GURB_NEXT": "Següent",
