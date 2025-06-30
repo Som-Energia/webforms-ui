@@ -21,13 +21,13 @@ if (!availableLanguages.includes(language)) {
 let gurbId = 2  // TODO: move to env?
 
 const options = [
-  { title: 'New Contract - Periods', href: `${language}/new-contract-form/periods`},
-  { title: 'New Contract - Indexed' , href: `${language}/new-contract-form/indexed`},
-  { title: 'New Member - Form', href: `${language}/new-member-form`},
+  { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos`},
+  { title: 'New Contract - Indexed' , href: `${language}/formulario-contratacion-indexada`},
+  { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse`},
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Component Testing', href: `/${language}/component-testing` },
   { title: 'Alta persona socia', href: '/new-member' },
-  { title: 'Aportació al capital social', href: '/contribution' },
+  { title: 'Aportació al capital social', href: `${language}/cooperativa/aportaciones-capital-social/formulario` },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
   { title: 'Confirmament de baixa', href: '/cancellation/confirm' },
   { title: 'Canvi de titular', href: '/holder-change' },
@@ -37,8 +37,8 @@ const options = [
   { title: 'Modificació contractual', href: '/modify-contract' },
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
-  { title: 'Generation kwh - Form', href: '/generationkwh/contribution' },
-  { title: 'Gurb - Form', href: `i${language}/gurb/${gurbId}/validations/`},
+  { title: 'Generation kwh - Form', href: `${language}/servicios/produccion/generation-kwh-aportaciones` },
+  { title: 'Gurb - Form', href: `${language}/gurb/${gurbId}/validations/`},
   { title: 'Pagament OK', href: `${language}/pagament-realitzat`},
   { title: 'Pagament KO', href: `${language}/pagament-cancellat`}
 
