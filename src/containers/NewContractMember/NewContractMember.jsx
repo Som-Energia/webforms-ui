@@ -57,11 +57,12 @@ import { newContract } from '../../services/api'
 
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language, tariff } = useParams()
+  const { language} = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
-
+  const { tariff } = props
+  
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
