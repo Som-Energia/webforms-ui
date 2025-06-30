@@ -339,7 +339,9 @@ const Contribution = (props) => {
                   mb: 4,
                   width: '100%',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  padding: '2rem',
+                  borderRadius: '10px'
                 }}>
                 {activeStep === 0 && <MemberIdentifier {...formikProps} />}
                 {activeStep === 1 && (
