@@ -899,5 +899,16 @@
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Ja eres de Som Energia!",
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Recibirás un correo con tu número de persona socia y con toda la información sobre tu nuevo contrato.",
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "¡Hay un error y no se ha podido realizar la operación solicitada!",
-    "NEW_MEMBER_CONTRACT_ERROR_DESC": "Por favor, intentalo otra vez más tarde. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la situación. Disculpa las molestias."
+    "NEW_MEMBER_CONTRACT_ERROR_DESC": "Por favor, intentalo otra vez más tarde. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la situación. Disculpa las molestias.",
+    "GURB_PAYMENT_SUBMIT": "Finalizar",
+    "ERROR_REQUIRED_FIELD": "Campo requerido",
+    "NEW_HOLDER_TITLE": "¿La persona que será titular del contrato es la misma que es socia de Som Energia?",
+    "NEW_HOLDER_SAME_HELPER": "La persona socia de Som Energia es la misma que la titular del contrato",
+    "NEW_HOLDER_DIFFERENT_TITLE": "No, la persona socia y la titular no son la misma persona",
+    "NEW_HOLDER_DIFFERENT_HELPER": "La persona socia de Som Energia es otra que la titular del contrato",
+    "LINK_MEMBER_TITLE": "Identificación de la persona socia",
+    "LINK_MEMBER_NIF_TITLE": "Indica el NIF de la persona socia",
+    "LINK_MEMBER_NIF_HELPER": "Debe tener 8 números y una letra, sin guiones ni puntos (Ex: 12345678A)",
+    "LINK_MEMBER_NUMBER_TITLE": "Indica el número de socio/a",
+    "LINK_MEMBER_NUMBER_HELPER": "Lo puedes encontrar en tu Oficina Virtual o al correo de bienvenida que te enviamos cuando te asociaste"
 }
