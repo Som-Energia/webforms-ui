@@ -13,7 +13,8 @@ const NewLoading = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            gap: 3
+            gap: 3,
+            minHeight: '33vh'
         }} >
 
             <CircularProgress sx={{ color: 'primary2.main' }} />
