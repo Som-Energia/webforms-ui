@@ -512,7 +512,7 @@ function HolderChange(props) {
                           backgroundColor: 'transparent'
                         }}>
                         <LinearProgress
-                          color="secondary"
+                          color="primary2"
                           variant={sending ? 'indeterminate' : 'determinate'}
                           value={(activeStep / MAX_STEP_NUMBER) * 100}
                         />
