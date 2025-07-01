@@ -32,14 +32,9 @@ const NewContractMemberSelfConsumptionData = (props) => {
     touched,
     setFieldValue,
     handleBlur,
-    setHasAlert
   } = props
 
   const { t } = useTranslation()
-
-  useEffect(() => {
-    setHasAlert(true)
-  }, [setHasAlert])
 
   const handleCollectiveInstallation = (value) => {
     setFieldValue('self_consumption.collective_installation', value)

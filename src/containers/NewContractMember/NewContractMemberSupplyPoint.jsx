@@ -13,7 +13,7 @@ import { LightbulbIcon } from '../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 
-const newContractMemberSupplyPoint = ({ setHasAlert, ...props }) => {
+const newContractMemberSupplyPoint = ({ ...props }) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const [openLightOffDialog, setOpenLightOffDialog] = useState(false)
@@ -28,10 +28,6 @@ const newContractMemberSupplyPoint = ({ setHasAlert, ...props }) => {
   const handleAcceptLightOffTerms = () => {
     setOpenLightOffDialog(false)
   }
-
-  useEffect(() => {
-    setHasAlert(true)
-  }, [setHasAlert])
 
   const options = [
     {

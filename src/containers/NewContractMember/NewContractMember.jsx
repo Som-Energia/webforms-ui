@@ -320,18 +320,24 @@ const NewContractMemberForm = (props) => {
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
+        setHasAlert(false)
         return <MemberPersonalData {...props} />
       } else if (activeStep === 3) {
-        return <NewContractMemberSupplyPoint {...props} setHasAlert={setHasAlert} />
+        setHasAlert(true)
+        return <NewContractMemberSupplyPoint {...props} />
       } else if (activeStep === 4) {
+        setHasAlert(false)
         return <NewContractMemberSupplyPointData {...props} />
       } else if (activeStep === 5) {
         return <NewContractMemberPower {...props} />
       } else if (activeStep === 6) {
+        setHasAlert(false)
         return <NewContractMemberSelfConsumptionChooser {...props} />
       } else if (activeStep === 7) {
-        return <NewContractMemberSelfConsumptionData {...props} setHasAlert={setHasAlert} />
+        setHasAlert(true)
+        return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 8) {
+        setHasAlert(false)
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...props} />
@@ -342,18 +348,24 @@ const NewContractMemberForm = (props) => {
       }
     } else {
       if (activeStep === 1) {
+        setHasAlert(false)
         return <ApadrinatingDetails {...props} />
       } else if (activeStep === 2) {
-        return <NewContractMemberSupplyPoint {...props} setHasAlert={setHasAlert} />
+        setHasAlert(true)
+        return <NewContractMemberSupplyPoint {...props} />
       } else if (activeStep === 3) {
+        setHasAlert(false)
         return <NewContractMemberSupplyPointData {...props} />
       } else if (activeStep === 4) {
         return <NewContractMemberPower {...props} />
       } else if (activeStep === 5) {
+        setHasAlert(false)
         return <NewContractMemberSelfConsumptionChooser {...props} />
       } else if (activeStep === 6) {
-        return <NewContractMemberSelfConsumptionData {...props} setHasAlert={setHasAlert} />
+        setHasAlert(true)
+        return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 7) {
+        setHasAlert(false)
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 8) {
         return <IdentifyMemberPersonalData {...props} holder={true} />
