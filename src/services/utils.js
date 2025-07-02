@@ -664,9 +664,9 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   if (!/^[A-Z]{0,2}$/.test(redundancyDigits))
     return error(t('CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS'))
 
-  /* const cupsWithoutBorder = value.slice(0, 20)
+  const cupsWithoutBorder = value.slice(0, 20)
   if (matchingCups && matchingCups.slice(0, cupsWithoutBorder.length) !== cupsWithoutBorder)
-    return error(t('CAU_NOT_MATCHING_CUPS')) -> TODO only when individual auto*/
+    return error(t('CAU_NOT_MATCHING_CUPS'))
 
 
   const borderPoint = value.slice(20, 22)
@@ -683,23 +683,16 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   return {value, valid: true}
 }
 
+export const isMatchingCUPSandCAU = (cau, cups) => {
+  const cau_substring = cau.slice(0, 20)
+  return cups.slice(0, cau_substring.length) === cau_substring
+}
+
 export const prettyCAU = (value) => {
   if (!value) return value
   value = value.replace(/[^0-9A-Za-z]/g, '') // TODO: Do not cut chars after not matching one
   value = value.slice(0, 26)
   value = value.toUpperCase()
-  value = [
-    value.slice(0, 2), // ES
-    value.slice(2, 6), // Supplier
-    value.slice(6, 10), // Supply point
-    value.slice(10, 14), // Supply point
-    value.slice(14, 18), // Supply point
-    value.slice(18, 20), // Control
-    value.slice(20, 22), // Border point
-    value.slice(22, 26) // CAU
-  ]
-    .join(' ')
-    .trim()
   return value
 }
 

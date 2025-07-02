@@ -11,7 +11,7 @@ describe('Contract', () => {
 
   describe('Contract with CUPS without service', function () {
     beforeEach(function () {
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.oldIidentifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasNoService
@@ -40,7 +40,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.identifyOwner(this.data.member.vat)
 
@@ -57,7 +57,7 @@ describe('Contract', () => {
 
   describe('Contract with service, no selfconsumption, correct data', function () {
     beforeEach(function () {
-      cy.identifyMember(this.data.member.number, this.data.member.vat)
+      cy.oldIidentifyMember(this.data.member.number, this.data.member.vat)
       cy.identifySupplyPoint(
         this.data.supplyPoint.cups,
         this.data.supplyPoint.hasService
@@ -83,7 +83,7 @@ describe('Contract', () => {
 
       cy.enterPowerFare(moreThan15Kw, powers)
 
-      cy.chooseTariff(this.data.isIndexed)
+      cy.oldChooseTariff(this.data.isIndexed)
 
       cy.enterSelfConsumption(this.data.selfConsumption.have_no_installation)
 

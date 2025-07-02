@@ -2,16 +2,15 @@ import * as Yup from 'yup'
 
 const newContractMemberSelfConsumptionDataValidations = Yup.object().shape({
     self_consumption: Yup.object().shape({
-        cau: Yup.string().when('cau_error', (cau_error) => {
-            if (cau_error)
-                return Yup.mixed().test({
-                name: 'cau_error',
-                test: () => false,
-                message: cau_error
-                })
-            return Yup.string().required('FILL_SELFCONSUMPTION_CAU')
+        cau: Yup.string()
+            .min(26, 'CAU_INVALID_LENGTH')
+            .max(26, 'CAU_INVALID_LENGTH')
+            .required('ERROR_REQUIRED_FIELD'),
+        cau_valid: Yup.bool().when('collective_installation', {
+            is: 'individual',
+            then: Yup.bool().oneOf([true], 'CAU_NOT_MATCHING_CUPS'),
+            otherwise: Yup.bool().oneOf([true], 'ERROR_INVALID_FIELD'),
         }),
-        cau_error: Yup.mixed().oneOf([Yup.bool(), Yup.string()]),
         collective_installation: Yup.string()
             .required('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
             .oneOf(['individual', 'collective']),
