@@ -356,17 +356,16 @@ const Indexada = (props) => {
                 {(formikProps) => (
                   <>
                     <Form
-                      id="cancelForm"
+                      id="indexedForm"
                       method="POST"
-                      sx={{
-                        backgroundColor: 'secondary.light',
-                        color: 'primary',
-                        display: 'flex',
-                        pd: '2rem'
-                      }}
                       noValidate
                       autoComplete="off">
-                      <Container maxWidth="lg" disableGutters={true}>
+                      <Container 
+                      sx={{
+                        backgroundColor: 'background.third',
+                        color: 'primary',
+                      }}
+                      maxWidth="lg" disableGutters={true}>
                         {!completed && (
                           <>
                             {activeStep !== 2 ? (
