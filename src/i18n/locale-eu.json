@@ -896,8 +896,6 @@
     "POSTAL_CODE": "Posta-kodea",
     "HELPER_NUMBER_ADDRESS": "Zure etxeak ez badu zenbakirik, eremu honetan jarri 0 zenbakia",
     "SAVE_CHANGES": "Gorde aldaketak",
-    "GURB_NEXT": "Hurrengoa",
-    "GURB_PREV": "Aurrekoa",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Som Energiaren bazkidea zara jada!",
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Mezu bat jasoko duzu zure bazkide-zenbakiarekin eta kontratu berriari buruzko informazio guztiarekin.",
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",

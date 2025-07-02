@@ -910,5 +910,10 @@
     "LINK_MEMBER_NIF_TITLE": "Indica el NIF de la persona socia",
     "LINK_MEMBER_NIF_HELPER": "Debe tener 8 números y una letra, sin guiones ni puntos (Ex: 12345678A)",
     "LINK_MEMBER_NUMBER_TITLE": "Indica el número de socio/a",
-    "LINK_MEMBER_NUMBER_HELPER": "Lo puedes encontrar en tu Oficina Virtual o al correo de bienvenida que te enviamos cuando te asociaste"
+    "LINK_MEMBER_NUMBER_HELPER": "Lo puedes encontrar en tu Oficina Virtual o al correo de bienvenida que te enviamos cuando te asociaste",
+    "ERROR_INVALID_FIELD": "Campo incorrecto",
+    "ERROR_FIELD_TOO_LONG": "Campo demasiado largo",
+    "ERROR_FIELD_TOO_SHORT": "Campo demasiado corto",
+    "GURB_VOLUNTARY_DONATION_HELPER": "Siempre podrás activar o desactivar esta opción dentro el área de clientes",
+    "NEW_HOLDER_SAME_TITLE": "Sí, la persona titular y la socia son la misma"
 }

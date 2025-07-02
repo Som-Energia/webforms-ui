@@ -43,7 +43,7 @@ const newContractMemberHolder = (props) => {
     {
       id: 'holder-member-yes',
       icon: <PersonIcon sx={iconRequirements} />,
-      textHeader: t('NEW_HOLDER_TITLE'),
+      textHeader: t('NEW_HOLDER_SAME_TITLE'),
       textBody: t('NEW_HOLDER_SAME_HELPER')
     },
     {

@@ -84,7 +84,7 @@ const ContractSummary = (props) => {
     [
       {
         icon: <LocationOnOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_SUPPLY_POINT_TITLE'),
+        title: t('REVIEW_SUPPLY_POINT_TITLE'),
         field: [
           {
             reviewLabel: t('REVIEW_SUPPLY_POINT_LABEL_CUPS'),
@@ -110,10 +110,10 @@ const ContractSummary = (props) => {
       },
       {
         icon: <SettingsOutlinedIcon sx={iconRequirements} />,
-        title: t('GURB_REVIEW_TECHNICAL_DETAILS_TITLE'),
+        title: t('REVIEW_TECHNICAL_DETAILS_TITLE'),
         field: [
           {
-            reviewLabel: t('GURB_REVIEW_TECHNICAL_DETAILS_LABEL_TOLL'),
+            reviewLabel: t('REVIEW_TECHNICAL_DETAILS_LABEL_TOLL'),
             reviewValue: 'Ni idea'
           },
           {
