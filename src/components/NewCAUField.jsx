@@ -1,42 +1,82 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { checkCups } from '../services/api'
-import SolarPowerIcon from '@mui/icons-material/WbSunny'
 import { useTranslation } from 'react-i18next'
-import ApiValidatedField from './NewApiValidatedField'
-import { checkCAUWhileTyping, prettyCAU } from '../services/utils'
+import InputField from './InputField'
+import { isMatchingCUPSandCAU, prettyCAU } from '../services/utils'
 
-export function CAUField(props) {
+export function CAUField({
+  name,
+  id,
+  label,
+  variant,
+  values,
+  value,
+  onBlur,
+  touched,
+  error,
+  required,
+  setFieldValue,
+  helperText,
+}) {
   const { t } = useTranslation()
+  const [isLoading, setIsLoading] = useState(false)
+  const [isValid, setIsValid] = useState(false)
 
-  function localCheck(value) {
-    return checkCAUWhileTyping(value, t, props.cupsToMatch)
-  }
-  function remoteCheck(value) {
-    return checkCups(value.replace(/ /g, '').slice(0, 20))
-      .then((response) => {
-        const valid = response?.state === true
-        return { value, valid, error: valid ? undefined : t("CAU_INVALID_CONTROL_DIGIT") }
-      })
-      .catch((error) => {
-        const valid = !!error?.response?.data?.state
-        return { value, valid, error: valid ? undefined : t("CAU_INVALID_CONTROL_DIGIT") }
-      })
+  const handleChange = async (event) => {
+    const cau = prettyCAU(event.target.value)
+    setFieldValue("self_consumption.cau", cau)
   }
 
   useEffect(() => {
-    if (props.value) {
-      const result = localCheck(props.value)
-      props.onChange({ ...result, valid: false })
+    isLoading && setIsLoading(false)
+  }, [values.self_consumption.cau_valid])
+
+  useEffect(() => {
+    setFieldValue("self_consumption.cau_valid", isValid)
+  }, [isValid])
+  
+  useEffect(() => {
+    const cleaned_cau = values?.self_consumption?.cau?.replace(/ /g, '')
+    if (values?.self_consumption?.collective_installation == 'individual') {
+      setIsValid(isMatchingCUPSandCAU(cleaned_cau, values?.cups))
     }
-  }, [props.cupsToMatch])
+    else {
+      if (cleaned_cau.length == 26) {
+        setIsLoading(true)
+        checkCups(cleaned_cau.slice(0, 20))
+          .then((response) => {
+            setIsValid(response?.state === true)
+            setIsLoading(false)
+          })
+          .catch((error) => {
+            console.error(error)
+            setIsValid(false)
+            setIsLoading(false)
+          })
+      }
+      else {
+        setIsValid(false)
+      }
+    }
+  }, [values.self_consumption.cau, values.self_consumption.collective_installation])
 
   return (
-    <ApiValidatedField
-      {...props}
-      leadingIcon={SolarPowerIcon}
-      inputFilter={prettyCAU}
-      localCheck={localCheck}
-      remoteCheck={remoteCheck}
+    <InputField
+      id={id}
+      name={name}
+      textFieldName={label}
+      variant={variant}
+      required={required}
+      value={value}
+      handleChange={handleChange}
+      handleBlur={onBlur}
+      touched={touched}
+      error={!isLoading ? error : ''}
+      textFieldHelper={
+        isLoading
+          ? t('API_VALIDATED_FIELD_CHECKING')
+          : helperText
+      }
     />
   )
 }

@@ -54,11 +54,6 @@ const NewContractMemberSelfConsumptionData = (props) => {
     setFieldValue(event.target.name, result)
   }
 
-  const handleChangeCAU = (data) => {
-    setFieldValue('self_consumption.cau', data.value)
-    setFieldValue('self_consumption.cau_error', data.error)
-  }
-
   const [situations, setSituations] = useState([])
   const [technologies, setTechnologies] = useState([])
 
@@ -152,12 +147,12 @@ const NewContractMemberSelfConsumptionData = (props) => {
           name="self_consumption.cau"
           variant="outlined"
           fullWidth
-          values={values}
           value={values?.self_consumption?.cau}
-          onChange={handleChangeCAU}
+          setFieldValue={setFieldValue}
+          values={values}
           onBlur={handleBlur}
           touched={touched?.self_consumption?.cau}
-          error={errors?.self_consumption?.cau}
+          error={errors?.self_consumption?.cau_valid || errors?.self_consumption?.cau}
           helperText={
             <a
               href={t('SELFCONSUMPTION_CAU_HELP_URL')}
@@ -166,11 +161,6 @@ const NewContractMemberSelfConsumptionData = (props) => {
               rel="noopener noreferrer">
               {t('SELFCONSUMPTION_CAU_HELP')}
             </a>
-          }
-          cupsToMatch={
-            values?.self_consumption?.collective_installation
-              ? undefined
-              : values?.cups
           }
         />
       </Grid>

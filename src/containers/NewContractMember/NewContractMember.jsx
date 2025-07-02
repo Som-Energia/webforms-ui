@@ -168,8 +168,8 @@ const NewContractMemberForm = (props) => {
     },
     has_selfconsumption: undefined,
     self_consumption: {
-      cau: undefined,
-      cau_error: false,
+      cau: '',
+      cau_valid: false,
       collective_installation: undefined,
       installation_type: '',
       technology: 'b11',
