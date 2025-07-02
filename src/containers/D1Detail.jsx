@@ -120,7 +120,7 @@ function D1Detail(props) {
     <Box
       sx={{
         width: '100%',
-        backgroundColor: 'white'
+        backgroundColor: 'background.third'
       }}>
       {(data?.to_validate && (
         <>
