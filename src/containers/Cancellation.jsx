@@ -173,7 +173,7 @@ const Cancellation = (props) => {
         dateAdapter={AdapterDayjs}
         adapterLocale={i18n.language}>
         <Formik
-          onSubmit={() => {}}
+          onSubmit={() => { }}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
@@ -183,15 +183,14 @@ const Cancellation = (props) => {
               <Form
                 id="cancelForm"
                 method="POST"
-                sx={{
-                  backgroundColor: 'white',
-                  color: 'primary',
-                  display: 'flex',
-                  pb: '2rem'
-                }}
                 noValidate
                 autoComplete="off">
-                <Container maxWidth="lg" disableGutters={true}>
+                <Container 
+                sx={{
+                  backgroundColor: 'background.third',
+                  color: 'primary',
+                }} 
+                maxWidth="lg" disableGutters={true}>
                   {!completed && (
                     <>
                       <ContractDetails {...formikProps.values} />
