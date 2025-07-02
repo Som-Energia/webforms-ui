@@ -13,7 +13,7 @@ step() {
 }
 
 REPOPATH=$(dirname $0)/..
-BUILD=${REPOPATH}/build/
+BUILD=${REPOPATH}/forms/
 OVDIR=${1:-${REPOPATH}/../oficinavirtual}
 TARGET=${OVDIR}/src/front/static/webforms
 

@@ -186,56 +186,6 @@ const NewContractMemberSummary = (props) => {
       ? legalReviewFields
       : physicalReviewFields
 
-  const summary_process =
-    values?.previous_holder == 'prevuis-holder-yes'
-      ? t('NEW_CONTRACT_OLD_HOLDER_SUMMARY_PROCESS')
-      : t('NEW_CONTRACT_NEW_HOLDER_SUMMARY_PROCESS')
-
-  const reviewProcessFields =
-    values?.has_member == 'member-off'
-      ? [
-          {
-            reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
-          },
-          {
-            reviewValue: summary_process
-          }
-        ]
-      : [
-          {
-            reviewValue: summary_process
-          },
-          {
-            reviewLabel: t('REVIEW_LINK_PERSON'),
-            reviewValue: values?.member?.nif,
-            step: showReviewLinks ? formSteps['LINK_MEMBER'] : null
-          }
-        ]
-
-  const reviewContactData =
-    values?.member_is_holder == 'holder-member-yes'
-      ? [
-          {
-            reviewValue: t('REVIEW_CONTACT_OLD_HOLDER')
-          }
-        ]
-      : [
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
-          },
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-            reviewValue: values?.new_member?.email,
-            step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
-          },
-          {
-            reviewLabel: t('LANGUAGE'),
-            reviewValue: languages[values?.new_member?.language],
-            step: showReviewLinks ? formSteps['MEMBER_INFO'] : null
-          }
-        ]
 
   const getPaymentField = () => {
     let paymentFields = [

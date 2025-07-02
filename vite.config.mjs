@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
       // eslint()
     ],
     build: {
-      outDir: 'build',
+      outDir: 'forms',
       manifest: 'asset-manifest.json',
       rollupOptions: {
         output: {

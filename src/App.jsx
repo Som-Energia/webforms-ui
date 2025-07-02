@@ -308,7 +308,7 @@ const App = (props) => {
                     />
 
                     <Route
-                      path="/contribution"
+                      path="/:language/cooperativa/aportaciones-capital-social/formulario"
                       element={<Contribution {...props} />}
                     />
                     <Route
@@ -428,7 +428,7 @@ const App = (props) => {
                     />
 
                     <Route
-                      path="/:language/generationkwh/contribution/"
+                      path="/:language/servicios/produccion/generation-kwh-aportaciones/"
                       element={
                         <GenerationContribution {...props} token={token} />
                       }
@@ -536,19 +536,31 @@ const App = (props) => {
                       />
                     ))}
                     <Route
-                      path="/:language/new-contract-form/:tariff"
+                      path="/:language/formulario-contratacion-periodos"
                       element={
                         
                           <GurbLoadingContextProvider>
                             <SummaryContextProvider>
-                              <NewContractMemberForm {...props} />
+                              <NewContractMemberForm {...props} tariff={'periods'} />
                             </SummaryContextProvider>
                           </GurbLoadingContextProvider>
                         
                       }
                     />
                     <Route
-                      path="/:language/new-member-form"
+                      path="/:language/formulario-contratacion-indexada"
+                      element={
+                        
+                          <GurbLoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm {...props} tariff={'indexed'}/>
+                            </SummaryContextProvider>
+                          </GurbLoadingContextProvider>
+                        
+                      }
+                    />
+                    <Route
+                      path="/:language/cooperativa/formulario-asociarse"
                       element={
                         <GurbErrorContextProvider>
                           <GurbLoadingContextProvider>

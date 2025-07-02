@@ -12,7 +12,7 @@ const SomStepper = (props) => {
   return (
     <>
       <Typography color="secondary">
-        {t('Pas') + ' ' + currentStep + '/' + numberSteps}
+        {currentStep + '/' + numberSteps}
       </Typography>
       <LinearProgress
         variant="determinate"

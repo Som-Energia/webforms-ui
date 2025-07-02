@@ -174,7 +174,7 @@ function ModifyContract(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ width: '100%', backgroundColor: 'white' }}>
+      <Box sx={{ width: '100%', backgroundColor: 'background.third' }}>
         {noticeAutonomous ? (
           <AlertBox
             severity={'warning'}
@@ -188,7 +188,7 @@ function ModifyContract(props) {
         }
         {fromD1 && (
           <Stepper
-            sx={{ backgroundColor: 'white', pl: 1, pr: 1, pb: 1 }}
+            sx={{ backgroundColor: 'background.third', pl: 1, pr: 1, pb: 1 }}
             activeStep={activeD1Step}
             orientation="vertical">
             {d1Steps.map((label, index) => (
@@ -209,7 +209,7 @@ function ModifyContract(props) {
           </Stepper>
         )}
         <Stepper
-          sx={{ backgroundColor: 'white', pl: 1, pr: 1, pb: 1 }}
+          sx={{ backgroundColor: 'background.third', pl: 1, pr: 1, pb: 1 }}
           activeStep={activeStep}
           orientation="vertical">
           {steps.map((label, index) => (

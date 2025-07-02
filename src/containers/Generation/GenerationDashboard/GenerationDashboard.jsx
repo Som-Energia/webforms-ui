@@ -151,7 +151,8 @@ function GenerationDashboard({
       {validationConfirm.finished && !validationConfirm.completed ? (
         <GenerationFailure />
       ) : (
-        <>{(investments.length === 0 && outsideAssignments.length === 0) ?
+        <Grid sx={{backgroundColor: 'background.third'}}>
+        {(investments.length === 0 && outsideAssignments.length === 0) ?
           (
             <Typography
               variant="body1"
@@ -253,7 +254,7 @@ function GenerationDashboard({
               />
             </Alert>
           ))}
-        </>
+        </Grid>
       )}
     </>
   )

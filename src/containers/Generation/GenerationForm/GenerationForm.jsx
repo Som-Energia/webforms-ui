@@ -384,7 +384,9 @@ const GenerationContribution = (props) => {
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: 'background.default'
+                backgroundColor: 'background.default',
+                padding: '2rem',
+                borderRadius: '10px'
               }}>
               {activeStep === 0 && (
                 <GenerationMemberIdentifier
