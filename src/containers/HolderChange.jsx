@@ -484,7 +484,7 @@ function HolderChange(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ backgroundColor: 'white', color: 'primary.main' }}>
+      <Box sx={{ backgroundColor: 'background.third', color: 'primary.main' }}>
         <Container maxWidth="md">
           <Formik
             enableReinitialize
