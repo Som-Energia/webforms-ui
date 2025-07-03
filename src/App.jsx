@@ -430,7 +430,11 @@ const App = (props) => {
                     <Route
                       path="/:language/servicios/produccion/generation-kwh-aportaciones/"
                       element={
-                        <GenerationContribution {...props} token={token} />
+                        <GenerationContribution
+                          {...props}
+                          limitAmount={true}
+                          token={token}
+                        />
                       }
                     />
                     <Route
