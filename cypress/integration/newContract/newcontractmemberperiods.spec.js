@@ -7,7 +7,7 @@ describe('New Contract with New Member', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/ca/new-contract-form/periods')
+    cy.visit('/ca/formulario-contratacion-periodos')
     cy.fixture('newContractMember.json').as('data')
   })
 
@@ -93,7 +93,7 @@ describe('New Contract: results', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/ca/new-contract-form/periods')
+    cy.visit('/ca/formulario-contratacion-periodos')
     cy.fixture('newContractMember.json').as('data')
   })
 

@@ -7,7 +7,7 @@ describe('Member', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/ca/new-member-form')
+    cy.visit('/ca/cooperativa/formulario-asociarse')
     cy.fixture('newMember.json').as('data')
   })
 
