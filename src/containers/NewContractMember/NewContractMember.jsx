@@ -422,7 +422,7 @@ const NewContractMemberForm = (props) => {
         validateOnBlur={false}>
         {(formikProps) => {
           return sending ? (
-            <NewLoading description={t('NEW_MEMBER_SUBMIT_LOADING')} />
+            <NewLoading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
           ) : (
             <>
               {activeStep == 0 ? (
