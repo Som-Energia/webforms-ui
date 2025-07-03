@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.0.0 2025-07-03
+
+- Fixed form styles
+- Fixed cypress tests
+- Fixed CAU component
+- Added missing translations
+- Added new urls
+
 ## 4.0.0 2025-06-27
 
 - New joint contract and member form
