@@ -531,7 +531,7 @@ const App = (props) => {
 
                     {[
                       '/:language/formulario-contratacion-periodos',
-                      '/:language/formulari-contratacio-periodos',
+                      '/:language/formulari-contractacio-periodes',
                       '/:language/formulari-contrato-periodos',
                       '/:language/kontratazio-formularioa-ordutegitarteak'
                     ].map((path) => (
