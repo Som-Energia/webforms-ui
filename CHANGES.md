@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.0.1 2025-07-09
+
+- All `.envs` are symbolic links now
+- fixed Generation form
+- Added new URLs
+
 ## 5.0.0 2025-07-03
 
 - Fixed form styles
