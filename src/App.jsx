@@ -305,30 +305,16 @@ const App = (props) => {
                       }
                     />
 
-                    <Route
-                      path="/:language/cooperativa/aportaciones-capital-social/formulario"
-                      element={<Contribution {...props} />}
-                    />
-                    <Route
-                      path="/:language/contribution"
-                      element={<Contribution {...props} />}
-                    />
-                    <Route
-                      path="/:language/produeix-energia-renovable/aporta-al-capital-social"
-                      element={<Contribution {...props} />}
-                    />
-                    <Route
-                      path="/:language/produce-energia-renovable/aporta-al-capital-social"
-                      element={<Contribution {...props} />}
-                    />
-                    <Route
-                      path="/:language/produce-energia-renovable/egin-zure-ekarpena-kapital-sozialean"
-                      element={<Contribution {...props} />}
-                    />
-                    <Route
-                      path="/:language/produce-energia-renovable/achegar-ao-capital-social"
-                      element={<Contribution {...props} />}
-                    />
+                    {[
+                      "/:language/cooperativa/aportaciones-capital-social/formulario",
+                      "/:language/cooperativa/aportacions-capital-social/formulari",
+                      "/:language/cooperativa/achegar-ao-capital-social/formulario",
+                      "/:language/kooperatiba/kapital-sozialerako-ekarpenak/formularioa"
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={<Contribution {...props} />}
+                      />))}
 
                     <Route
                       exact
@@ -443,16 +429,23 @@ const App = (props) => {
                         />
                       }
                     />
-                    <Route
-                      path="/:language/participar/"
-                      element={
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={true}
-                          token={token}
-                        />
-                      }
-                    />
+                    {[
+                      '/:language/serveis/produccio/generation-kwh-aportacions',
+                      '/:language/servicios/produccion/generation-kwh-aportaciones',
+                      '/:language/servizos/producion/generation-kwh-achegar',
+                      '/:language/zerbitzuak/ekoizpena/generation-kwh-ekarpenak'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <GenerationContribution
+                            {...props}
+                            limitAmount={true}
+                            token={token}
+                          />
+                        }
+                      />
+                    ))}
                     <Route
                       path="/participar-no-limit/"
                       element={
@@ -535,35 +528,52 @@ const App = (props) => {
                         }
                       />
                     ))}
-                    <Route
-                      path="/:language/formulario-contratacion-periodos"
-                      element={
-                        <GurbLoadingContextProvider>
-                          <SummaryContextProvider>
-                            <NewContractMemberForm
-                              {...props}
-                              tariff={'periods'}
-                            />
-                          </SummaryContextProvider>
-                        </GurbLoadingContextProvider>
-                      }
-                    />
-                    <Route
-                      path="/:language/formulario-contratacion-indexada"
-                      element={
-                        <GurbLoadingContextProvider>
-                          <SummaryContextProvider>
-                            <NewContractMemberForm
-                              {...props}
-                              tariff={'indexed'}
-                            />
-                          </SummaryContextProvider>
-                        </GurbLoadingContextProvider>
-                      }
-                    />
+
                     {[
+                      '/:language/formulario-contratacion-periodos',
+                      '/:language/formulari-contratacio-periodos',
+                      '/:language/formulari-contrato-periodos',
+                      '/:language/kontratazio-formularioa-ordutegitarteak'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <GurbLoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                tariff={'periods'}
+                              />
+                            </SummaryContextProvider>
+                          </GurbLoadingContextProvider>
+                        }
+                      />
+                    ))}
+                    {[
+                      '/:language/formulario-contratacion-indexada',
+                      '/:language/formulari-contractacio-indexada',
+                      '/:language/formulario-contrato-indexada',
+                      '/:language/kontratazio-formularioa-indexatua'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <GurbLoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                tariff={'indexed'}
+                              />
+                            </SummaryContextProvider>
+                          </GurbLoadingContextProvider>
+                        }
+                      />
+                    ))}
+
+                    {[
+                      '/:language/cooperativa/formulari-associar-se',
                       '/:language/cooperativa/formulario-asociarse',
-                      '/:language/cooperativa/formulari-associar-se'
+                      '/:language/kooperatiba/formularioa-bazkidetu/',
                     ].map((path) => (
                       <Route
                         path={path}
