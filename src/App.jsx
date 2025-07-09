@@ -306,10 +306,10 @@ const App = (props) => {
                     />
 
                     {[
-                      "/:language/cooperativa/aportaciones-capital-social/formulario",
-                      "/:language/cooperativa/aportacions-capital-social/formulari",
-                      "/:language/cooperativa/achegar-ao-capital-social/formulario",
-                      "/:language/kooperatiba/kapital-sozialerako-ekarpenak/formularioa"
+                      "/:language/aportaciones-capital-social/formulario",
+                      "/:language/aportacions-capital-social/formulari",
+                      "/:language/achegar-ao-capital-social/formulario",
+                      "/:language/kapital-sozialerako-ekarpenak/formularioa"
                     ].map((path) => (
                       <Route
                         path={path}
@@ -433,7 +433,7 @@ const App = (props) => {
                       '/:language/serveis/produccio/generation-kwh-aportacions',
                       '/:language/servicios/produccion/generation-kwh-aportaciones',
                       '/:language/servizos/producion/generation-kwh-achegar',
-                      '/:language/zerbitzuak/ekoizpena/generation-kwh-ekarpenak'
+                      '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
                     ].map((path) => (
                       <Route
                         path={path}
@@ -532,7 +532,7 @@ const App = (props) => {
                     {[
                       '/:language/formulario-contratacion-periodos',
                       '/:language/formulari-contractacio-periodes',
-                      '/:language/formulari-contrato-periodos',
+                      '/:language/formulario-contrato-periodos',
                       '/:language/kontratazio-formularioa-ordutegitarteak'
                     ].map((path) => (
                       <Route
@@ -573,7 +573,7 @@ const App = (props) => {
                     {[
                       '/:language/cooperativa/formulari-associar-se',
                       '/:language/cooperativa/formulario-asociarse',
-                      '/:language/kooperatiba/formularioa-bazkidetu/',
+                      '/:language/kooperatiba/bazkidetu-formularioa'
                     ].map((path) => (
                       <Route
                         path={path}
