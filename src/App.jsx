@@ -106,18 +106,17 @@ const App = (props) => {
     )
     return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
   }, [])
-  
-  const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
 
+  const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
 
   return (
     <>
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-          <ThemeProvider theme={webFormsTheme}>
-            <Suspense fallback={<Loading />}>
-              <Router>
+            <ThemeProvider theme={webFormsTheme}>
+              <Suspense fallback={<Loading />}>
+                <Router>
                   <CssBaseline />
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
@@ -126,7 +125,7 @@ const App = (props) => {
                       '/new-member',
                       '/:language/associat/',
                       '/:language/asociate/', // es, gl
-                      '/:language/bazkidetu/',
+                      '/:language/bazkidetu/'
                     ].map((path) => (
                       <Route
                         path={path}
@@ -172,8 +171,7 @@ const App = (props) => {
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
                             investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}
-                          >
+                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
@@ -405,8 +403,7 @@ const App = (props) => {
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
                             investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}
-                          >
+                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
@@ -419,8 +416,7 @@ const App = (props) => {
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
                             investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}
-                          >
+                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
@@ -430,7 +426,11 @@ const App = (props) => {
                     <Route
                       path="/:language/servicios/produccion/generation-kwh-aportaciones/"
                       element={
-                        <GenerationContribution {...props} token={token} />
+                        <GenerationContribution
+                          {...props}
+                          limitAmount={true}
+                          token={token}
+                        />
                       }
                     />
                     <Route
@@ -495,7 +495,7 @@ const App = (props) => {
                     )}
                     {[
                       '/:language/new-pagament-realitzat',
-                      '/:language/new-pago-realizado',
+                      '/:language/new-pago-realizado'
                     ].map((path) => (
                       <Route
                         key={path}
@@ -513,7 +513,7 @@ const App = (props) => {
 
                     {[
                       '/:language/new-pagament-cancellat',
-                      '/:language/new-pago-cancelado',
+                      '/:language/new-pago-cancelado'
                     ].map((path) => (
                       <Route
                         key={path}
@@ -538,42 +538,49 @@ const App = (props) => {
                     <Route
                       path="/:language/formulario-contratacion-periodos"
                       element={
-                        
-                          <GurbLoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm {...props} tariff={'periods'} />
-                            </SummaryContextProvider>
-                          </GurbLoadingContextProvider>
-                        
+                        <GurbLoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              tariff={'periods'}
+                            />
+                          </SummaryContextProvider>
+                        </GurbLoadingContextProvider>
                       }
                     />
                     <Route
                       path="/:language/formulario-contratacion-indexada"
                       element={
-                        
-                          <GurbLoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm {...props} tariff={'indexed'}/>
-                            </SummaryContextProvider>
-                          </GurbLoadingContextProvider>
-                        
+                        <GurbLoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              tariff={'indexed'}
+                            />
+                          </SummaryContextProvider>
+                        </GurbLoadingContextProvider>
                       }
                     />
-                    <Route
-                      path="/:language/cooperativa/formulario-asociarse"
-                      element={
-                        <GurbErrorContextProvider>
-                          <GurbLoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewMemberForm {...props} />
-                            </SummaryContextProvider>
-                          </GurbLoadingContextProvider>
-                        </GurbErrorContextProvider>
-                      }
-                    />
+                    {[
+                      '/:language/cooperativa/formulario-asociarse',
+                      '/:language/cooperativa/formulari-associar-se'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <GurbErrorContextProvider>
+                            <GurbLoadingContextProvider>
+                              <SummaryContextProvider>
+                                <NewMemberForm {...props} />
+                              </SummaryContextProvider>
+                            </GurbLoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        }
+                      />
+                    ))}
                   </Routes>
-              </Router>
-            </Suspense>
+                </Router>
+              </Suspense>
             </ThemeProvider>
             <ApiStatus />
           </Box>
