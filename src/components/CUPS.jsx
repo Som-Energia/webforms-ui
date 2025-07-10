@@ -31,7 +31,9 @@ const CUPS = (props) => {
           setValues({
             ...values,
             ...{
-              new_contract: response?.data?.status === 'new',
+              new_contract:
+                response?.data?.status === 'new' ||
+                response?.data?.status === 'inactive',
               knowledge_of_distri: response?.data?.knowledge_of_distri
             }
           })
