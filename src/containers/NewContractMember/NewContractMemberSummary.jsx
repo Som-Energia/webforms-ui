@@ -63,8 +63,8 @@ const NewContractMemberSummary = (props) => {
     values?.has_member == 'member-off'
       ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
       : values?.has_member == 'member-on'
-      ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-      : undefined
+        ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+        : undefined
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -183,8 +183,8 @@ const NewContractMemberSummary = (props) => {
     values?.member_is_holder == 'holder-member-yes'
       ? oldHolderFields
       : values?.new_member?.person_type == 'legal-person'
-      ? legalReviewFields
-      : physicalReviewFields
+        ? legalReviewFields
+        : physicalReviewFields
 
 
   const getPaymentField = () => {
@@ -213,42 +213,42 @@ const NewContractMemberSummary = (props) => {
   const contactInfo =
     values?.member_is_holder == 'holder-member-yes'
       ? {
-          icon: <PhoneIcon />,
-          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-          field: [
-            {
-              reviewValue: t('DATA_AS_IN_OV'),
-              step: null
-            }
-          ]
-        }
+        icon: <PhoneIcon />,
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+        field: [
+          {
+            reviewValue: t('DATA_AS_IN_OV'),
+            step: null
+          }
+        ]
+      }
       : {
-          icon: <PhoneIcon />,
-          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-          field: [
-            {
-              reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-              reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-              step: showReviewLinks
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-                : null
-            },
-            {
-              reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-              reviewValue: values?.new_member?.email,
-              step: showReviewLinks
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-                : null
-            },
-            {
-              reviewLabel: t('LANGUAGE_SUMMARY'),
-              reviewValue: languages[values?.new_member?.language],
-              step: showReviewLinks
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
-                : null
-            }
-          ]
-        }
+        icon: <PhoneIcon />,
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+        field: [
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewValue: values?.new_member?.email,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('LANGUAGE_SUMMARY'),
+            reviewValue: languages[values?.new_member?.language],
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              : null
+          }
+        ]
+      }
 
   const process = contractProcess(
     values?.has_light == 'light-on',
@@ -263,10 +263,10 @@ const NewContractMemberSummary = (props) => {
           process == 'A3'
             ? t('ALTA')
             : process == 'C1'
-            ? t('CANVI_DE_COMERCIALITZADORA')
-            : process == 'C2'
-            ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
-            : null
+              ? t('CANVI_DE_COMERCIALITZADORA')
+              : process == 'C2'
+                ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
+                : null
       },
       values?.has_member == 'member-off' && {
         reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
@@ -301,7 +301,7 @@ const NewContractMemberSummary = (props) => {
             reviewValue: values?.supply_point.cnae,
             step:
               showReviewLinks &&
-              values?.new_member?.person_type === 'legal-person'
+                values?.new_member?.person_type === 'legal-person'
                 ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
                 : null
           }
@@ -320,8 +320,8 @@ const NewContractMemberSummary = (props) => {
             reviewValue: isTariffIndexed
               ? t('FARE_INDEXED')
               : values.contract.power_type === 'power-higher-15kw'
-              ? t('FARE_PERIODS').concat(' ', '3.0TD')
-              : t('FARE_PERIODS').concat(' ', '2.0TD')
+                ? t('FARE_PERIODS').concat(' ', '3.0TD')
+                : t('FARE_PERIODS').concat(' ', '2.0TD')
           },
           {
             reviewLabel: t('POWER_SUMMARY'),
@@ -598,46 +598,50 @@ const NewContractMemberSummary = (props) => {
           />
         </TermsDialog>
       </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          sx={{
-            '& .MuiFormControlLabel-label a': {
-              color: 'link.main'
-            }
-          }}
-          control={
-            <Checkbox
-              data-cy="statutes"
-              checked={values?.statutes_accepted || false}
-              onChange={handleChangeStatutes}
-            />
-          }
-          label={
-            <span
-              style={{
-                position: 'relattiene que tener: ive',
-                display: 'inline-block'
-              }}>
-              <label
-                style={{ display: 'inline' }}
-                dangerouslySetInnerHTML={{
-                  __html: t('ACCEPT_STATUTES', {
-                    url: t('ACCEPT_STATUTES_URL')
-                  })
-                }}
+      {values?.has_member == 'member-off' ?
+        <Grid item xs={12}>
+
+          <FormControlLabel
+            sx={{
+              '& .MuiFormControlLabel-label a': {
+                color: 'link.main'
+              }
+            }}
+            control={
+              <Checkbox
+                data-cy="statutes"
+                checked={values?.statutes_accepted || false}
+                onChange={handleChangeStatutes}
               />
+            }
+            label={
               <span
                 style={{
-                  color: '#ff632b',
-                  marginLeft: 2,
-                  fontWeight: 'bold'
+                  position: 'relattiene que tener: ive',
+                  display: 'inline-block'
                 }}>
-                *
+                <label
+                  style={{ display: 'inline' }}
+                  dangerouslySetInnerHTML={{
+                    __html: t('ACCEPT_STATUTES', {
+                      url: t('ACCEPT_STATUTES_URL')
+                    })
+                  }}
+                />
+                <span
+                  style={{
+                    color: '#ff632b',
+                    marginLeft: 2,
+                    fontWeight: 'bold'
+                  }}>
+                  *
+                </span>
               </span>
-            </span>
-          }
-        />
-      </Grid>
+            }
+          />
+        </Grid>
+        : 
+      null}
       {values?.new_member?.person_type == 'legal-person' && (
         <Grid item xs={12}>
           <Typography variant="headline4">
