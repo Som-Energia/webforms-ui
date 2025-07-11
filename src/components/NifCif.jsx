@@ -26,7 +26,7 @@ const NifCif = (props) => {
   } = props
   const { t } = useTranslation()
   const { setLoading } = useContext(GurbLoadingContext)
-
+  const MAXINDENTIFIERLENGTH = 9;
   const handleChangeNif = useHandleChangeNif(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
 
@@ -69,7 +69,7 @@ const NifCif = (props) => {
   }
 
   useEffect(() => {
-    if (values?.new_member?.nif && values?.new_member?.nif.length === 9) {
+    if (values?.new_member?.nif && values?.new_member?.nif.length >= 9) {
       handleNifValidations()
       let is_physical = checkPhisicalVAT(values?.new_member?.nif)
       setFieldValue(
@@ -93,6 +93,7 @@ const NifCif = (props) => {
           value={values?.new_member?.nif}
           error={errors?.new_member?.nif}
           required={true}
+          customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />
       </Grid>
     </>

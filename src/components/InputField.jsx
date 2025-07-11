@@ -48,7 +48,9 @@ const InputField = React.memo(
     startAdornmentText = false,
     numInputs = false,
     name = '',
-    onPaste = undefined
+    onPaste = undefined,
+    customInputProps = {}
+
   }) => {
     const { t } = useTranslation()
 
@@ -84,8 +86,10 @@ const InputField = React.memo(
                     {<CircularProgress size={24} />}
                   </InputAdornment>
                 )) ||
-                endAdornmentText
+                endAdornmentText,
+
             }}
+            inputProps={customInputProps}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
