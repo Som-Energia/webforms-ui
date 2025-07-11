@@ -58,7 +58,7 @@ export const selfconsumption = {
   normalizedData: {
     cau: 'EU12341234435THISISACAU',
     collective_installation: false,
-    installation_power: '5',
+    installation_power: '5000',
     installation_type: '01',
     aux_services: true,
     technology: 'b11'

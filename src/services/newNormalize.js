@@ -45,7 +45,7 @@ export const normalizeSelfconsumption = (selfconsumption) => {
     cau: selfconsumption.cau,
     collective_installation:
       selfconsumption.collective_installation == 'collective' ? true : false,
-    installation_power: selfconsumption.installation_power,
+    installation_power: (+selfconsumption.installation_power * 1000).toString(),
     installation_type: selfconsumption.installation_type,
     aux_services:
       selfconsumption.aux_services == 'auxiliary-service-yes' ? true : false,
