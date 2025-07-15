@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Change http by https in docs and translations
+
 ## 5.0.10 2025-07-29
 
 - Removed old contract form
