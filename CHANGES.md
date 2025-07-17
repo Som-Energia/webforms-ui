@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- Removed old member form
+- Removed old member unused components
+- Removed old member cypress tests
+
 ## 5.0.1 2025-07-09
 
 - All `.envs` are symbolic links now
