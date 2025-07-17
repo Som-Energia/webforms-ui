@@ -6,6 +6,9 @@
 - Removed old contract unused components
 - Removed old contract cypress tests and commands
 - Removed "is30ContractEnabled" feature flag
+- Removed old member form
+- Removed old member unused components
+- Removed old member cypress tests
 
 ## 5.0.1 2025-07-09
 
