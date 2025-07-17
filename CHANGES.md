@@ -1,5 +1,12 @@
 # Change Log
 
+## Unreleased
+
+- Removed old contract form
+- Removed old contract unused components
+- Removed old contract cypress tests and commands
+- Removed "is30ContractEnabled" feature flag
+
 ## 5.0.1 2025-07-09
 
 - All `.envs` are symbolic links now
