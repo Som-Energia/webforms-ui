@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Change http by https in docs and translations
+
 ## 5.0.1 2025-07-09
 
 - All `.envs` are symbolic links now
