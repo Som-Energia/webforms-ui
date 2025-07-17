@@ -28,7 +28,6 @@ const App = (props) => {
   const { t } = useTranslation()
 
   const Home = lazy(() => import('./containers/Home'))
-  const Contract = lazy(() => import('./containers/Contract'))
   const Contribution = lazy(() => import('./containers/Contribution'))
   const Cancellation = lazy(() => import('./containers/Cancellation'))
   const CancellationConfirm = lazy(() =>
@@ -160,11 +159,6 @@ const App = (props) => {
                     />
 
                     <Route
-                      exact
-                      path="/contract"
-                      element={<Contract {...props} />}
-                    />
-                    <Route
                       path="/:language/investments/investments-kwh/"
                       element={
                         <PopUpContextProvider>
@@ -177,34 +171,7 @@ const App = (props) => {
                         </PopUpContextProvider>
                       }
                     />
-                    <Route
-                      path="/:language/contracta-la-llum/"
-                      element={<Contract {...props} />}
-                    />
-                    <Route
-                      path="/:language/contrata-la-luz/"
-                      element={<Contract {...props} />}
-                    />
-                    <Route
-                      path="/:language/kontrata-ezazu-argia/"
-                      element={<Contract {...props} />}
-                    />
-                    <Route
-                      path="/:language/contrata-a-luz/"
-                      element={<Contract {...props} />}
-                    />
 
-                    <Route
-                      path="/:language/contract-30/"
-                      element={<Contract {...props} />}
-                    />
-
-                    <Route
-                      path="/:language/contract-20/"
-                      element={
-                        <Contract is30ContractEnabled={false} {...props} />
-                      }
-                    />
                     <Route
                       path="/d1-detail"
                       element={
