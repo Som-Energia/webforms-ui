@@ -35,7 +35,6 @@ const App = (props) => {
   )
   const D1Detail = lazy(() => import('./containers/D1Detail'))
   const HolderChange = lazy(() => import('./containers/HolderChange'))
-  const Member = lazy(() => import('./containers/Member'))
   const Failure = lazy(() => import('./containers/Failure'))
   const Success = lazy(() => import('./containers/Success'))
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
@@ -119,19 +118,6 @@ const App = (props) => {
                   <CssBaseline />
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
-
-                    {[
-                      '/new-member',
-                      '/:language/associat/',
-                      '/:language/asociate/', // es, gl
-                      '/:language/bazkidetu/'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        key={path}
-                        element={<Member {...props} />}
-                      />
-                    ))}
 
                     <Route
                       exact
