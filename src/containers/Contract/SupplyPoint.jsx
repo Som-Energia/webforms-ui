@@ -33,6 +33,7 @@ const CadastralReferenceHelperText = () => {
   )
 }
 
+// used in GURB
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
 

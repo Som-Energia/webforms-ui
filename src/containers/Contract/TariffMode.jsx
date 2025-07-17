@@ -8,7 +8,7 @@ import Chooser from '../../components/Chooser'
 import StepHeader from '../../components/StepHeader'
 import Typography from '@mui/material/Typography'
 
-
+// used in GURB
 const TariffMode = (props) => {
   const { t } = useTranslation()
 
