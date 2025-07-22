@@ -1,5 +1,11 @@
 # Change Log
 
+## unreleased
+
+- HELPER_NUMBER_ADDRESS changed by empty string
+- Add key ERROR_FIELD_LENGTH
+- Change ERROR_FIELD_LENGTH by INVALID_REF_CADASTRAL_LENGTH in cadastral yup validation
+
 ## 5.0.1 2025-07-09
 
 - All `.envs` are symbolic links now
