@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
 const newContractMemberSupplyPointDataValidations = Yup.object().shape({
-  cadastral_reference: Yup.string().length(23, 'ERROR_FIELD_LENGTH'),
+  cadastral_reference: Yup.string().length(23, 'INVALID_REF_CADASTRAL_LENGTH'),
   cadastral_reference_valid: Yup.bool()
   .required('CADASTRAL_REFERENCE_ERROR')
   .oneOf([true], 'CADASTRAL_REFERENCE_ERROR'),
