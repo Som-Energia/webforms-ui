@@ -885,7 +885,7 @@
     "SELECT_OPTION": "-- Selecciona unha opción --",
     "LIGHT_OFF_URL": "https://gl.support.somenergia.coop/article/385-non-teno-luz-actualmente-podo-solicitar-un-novo-punto-de-consumo?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego",
     "POSTAL_CODE": "Código postal",
-    "HELPER_NUMBER_ADDRESS": "Se vives nunha casa sen número introduce o número 0 neste campo",
+    "HELPER_NUMBER_ADDRESS": "",
     "SAVE_CHANGES": "Gardar cambios",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Xa es de Som Energia!",
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Recibirás un correo co teu número de persoa socia e con toda a información sobre o teu novo contrato.",
