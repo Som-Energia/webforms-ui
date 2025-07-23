@@ -148,7 +148,7 @@
     "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/ca/politica-de-privacitat/#formulari-fer-te-n-soci",
     "PRIVACY_POLICY_TITLE": "Política de protecció de dades",
     "ACCEPT_PRIVACY_POLICY": "He llegit i accepto la <a target=\"_blank\" href={{url}}>política de privacitat</a> de Som Energia.",
-    "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/ca/avis-legal/",
+    "ACCEPT_PRIVACY_POLICY_URL": "https://www.somenergia.coop/ca/politica-de-privacitat",
     "PRIVACY_POLICY_HOLDERCHANGE": "Finalitats: tramitar la nova titularitat del contracte, així com enviar-te el nostre butlletí i altres comunicacions informatives i comercials sobre els nostres productes, serveis i esdeveniments. Drets: et pots oposar a l’enviament d’informacions de Som Energia, així com accedir, rectificar i suprimir les teves dades i altres drets a somenergia@delegado-datos.com. Informació addicional: <a target=\"_blank\" href={{url}}>Política de privacitat</a>.",
     "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "Si proporciones dades personals de terceres persones, declares responsablement que comptes amb el seu consentiment i que els has proporcionat tota la informació necessària sobre les finalitats i la manera com seran tractades les seves dades personals.",
     "PRIVACY_POLICY_CONTRACT": "Finalitats: gestionar el teu contracte de subministrament de llum i donar-te d’alta com a abonat/ada. Enviar-te el nostre butlletí i comunicacions informatives sobre els nostres productes, serveis i activitats. Drets: pots accedir, rectificar i suprimir les teves dades i altres drets a somenergia@delegado-datos.com. Informació addicional: <a target=\"_blank\" href={{url}}> política de privacitat de Som Energia</a>.",

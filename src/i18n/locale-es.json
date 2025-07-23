@@ -163,7 +163,7 @@
     "DATA_PROTECTION_NEWMEMBER_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-registro-hazte-socio-socia",
     "PRIVACY_POLICY_TITLE": "Política de protección de datos",
     "ACCEPT_PRIVACY_POLICY": "He leído y acepto la <a target=\"_blank\" href={{url}}> política de privacidad</a> de Som Energia.",
-    "ACCEPT_PRIVACY_POLICY_URL": "//www.somenergia.coop/es/aviso-legal/",
+    "ACCEPT_PRIVACY_POLICY_URL": "https://www.somenergia.coop/ca/politica-de-privacitat",
     "PRIVACY_POLICY_HOLDERCHANGE": "Finalidades: tramitar la nueva titularidad del contrato, así como enviarte nuestro boletín y demás comunicaciones informativas y comerciales sobre nuestros productos, servicios y eventos. Derechos: puedes oponerte al envío de informaciones de Som Energia, así como acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
     "PRIVACY_POLICY_HOLDERCHANGE_NOTE": "En caso de proporcionar datos personales de terceros, declaras responsablemente que cuentas con su consentimiento y que les has proporcionado toda la información necesaria acerca de las finalidades y la forma en la que serán tratados sus datos personales.",
     "PRIVACY_POLICY_CONTRACT": "Finalidades: gestionar tu contrato de suministro de luz y darte de alta como abonado/a. Enviarte nuestro boletín y comunicaciones informativas sobre nuestros productos, servicios y actividades. Derechos: puedes acceder, rectificar, suprimir tus datos y demás derechos en somenergia@delegado-datos.com. Información adicional: <a target=\"_blank\" href={{url}}> política de privacidad de Som Energia</a>.",
