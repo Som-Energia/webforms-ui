@@ -23,7 +23,12 @@ const NewContractMemberPower = (props) => {
           <Typography variant="headline4.regular">{t('POWER_TITLE')}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body.sm.regular" color="secondary.extraDark">{t('RECOMMENDATION_SUBTITLE')}</Typography>
+            <Typography variant="body.sm.regular" color="secondary.extraDark">
+              { values?.has_light === 'light-on'
+                ? t('RECOMMENDATION_SUBTITLE')
+                : ''
+              }
+            </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12}>
