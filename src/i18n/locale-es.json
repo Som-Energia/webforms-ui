@@ -917,5 +917,10 @@
     "ERROR_FIELD_TOO_SHORT": "Campo demasiado corto",
     "GURB_VOLUNTARY_DONATION_HELPER": "Siempre podrás activar o desactivar esta opción dentro el área de clientes",
     "NEW_HOLDER_SAME_TITLE": "Sí, la persona titular y la socia son la misma",
-    "ERROR_FIELD_LENGTH": "Logintud del campo incorrecta"
+    "ERROR_FIELD_LENGTH": "Logintud del campo incorrecta",
+    "WHICH_PEAK": "Indica que potencia punta quieres contratar",
+    "WHICH_VALLEY": "Indica que potencia valle quieres contratar",
+    "WHICH_POWER": "Indica que potencia quieres contratar",
+    "WHICH_POWER_HELPER": "Si no sabes qué potencia contratar revisa el siguiente <a target=\"_blank\" href={{url}}>artículo</a>.",
+    "WHICH_POWER_HELPER_URL": "https://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito"
 }

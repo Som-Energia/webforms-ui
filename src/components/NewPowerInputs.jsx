@@ -22,7 +22,8 @@ const PowerInputs = (props) => {
     errors,
     touched,
     numInputs = 2,
-    setFieldValue
+    setFieldValue,
+    has_light
   } = props
 
   return (
@@ -30,24 +31,26 @@ const PowerInputs = (props) => {
       {Array.from(Array(numInputs).keys()).map((inputNum) => {
         const attr = inputNum === 0 ? 'power1' : `power${inputNum + 1}`
         const moreThan15Kw = numInputs === 2 ? false : true
+        const textPower = has_light == 'light-on' ? 'CURRENT':'WHICH'
         return (
           <Grid key={attr} item xs={12}>
             <InputField
               name={`${name}.${attr}`}
               required={true}
               textFieldName={
-                numInputs <= 2
-                ? inputNum === 0
-                  ? t('CURRENT_PEAK')
-                  : t('CURRENT_VALLEY')
-                : t('CURRENT_POWER')}
+                moreThan15Kw
+                ? t(textPower + '_POWER')
+                : inputNum === 0
+                  ? t(textPower + '_PEAK')
+                  : t(textPower + '_VALLEY')
+              }
               endAdornmentText={'kW'}
               startAdornmentText={
-                numInputs <= 2
-                  ? inputNum === 0
+                moreThan15Kw
+                  ? `P${inputNum + 1}`
+                  : inputNum === 0
                     ? t('PEAK')
                     : t('VALLEY')
-                  : `P${inputNum + 1}`
               }
               numInputs={numInputs}
               handleChange={(event) =>
