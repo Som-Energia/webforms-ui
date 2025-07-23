@@ -19,7 +19,6 @@ export default defineConfig({
     disableGpu: true, // Custom environment variable to disable GPU
     FEATURE_FLAGS: {
       isCadastralReference: true,
-      is30ContractEnabled: true,
       isIndexedContractEnabled: true,
       isGurbEnabled: false,
       isMemberMandatoryForHolderchange: false
