@@ -21,7 +21,7 @@ const IdentifyMemberPersonalData = (props) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <NifCif {...props} holder={true} />
+        <NifCif entity="new_member" {...props} holder={true} />
       </Grid>
       <Grid item xs={12}>
         {values?.new_member?.person_type == 'physic-person' ? (

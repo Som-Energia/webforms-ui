@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 import { checkPhisicalVAT } from '../services/utils'
@@ -21,8 +20,8 @@ const NifCif = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setErrors,
-    setFieldTouched
+    setFieldTouched,
+    entity = "" // where we are saving nifcif info
   } = props
   const { t } = useTranslation()
   const { setLoading } = useContext(GurbLoadingContext)
@@ -30,33 +29,31 @@ const NifCif = (props) => {
   const handleChangeNif = useHandleChangeNif(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
 
-  // TODO: generalize ?
   const handleCheckNifResponse = async () => {
     let nif_info = undefined
-    await checkVat(values?.new_member?.nif)
+    await checkVat(values[entity]?.nif)
       .then((response) => {
         nif_info = response?.data
       })
       .catch(() => {
         console.error('UNEXPECTED')
       })
-    setFieldError('new_member.nif', undefined)
+    setFieldError(`${entity}.nif`, undefined)
     if (nif_info?.is_member === true) {
-      setFieldError('new_member.nif', t('DNI_EXIST'))
+      setFieldError(`${entity}.nif`, t('DNI_EXIST'))
     }
     if (nif_info?.valid === false) {
-      setFieldError('new_member.nif', t('FILL_NIF'))
+      setFieldError(`${entity}.nif`, t('FILL_NIF'))
     }
   }
 
-  // TODO: generalize ?
   const handleNifValidations = async () => {
     try {
       setLoading(true)
       await handleCheckNifFormat(
-        values?.new_member?.nif,
+        values[entity]?.nif,
         setFieldError,
-        'new_member.nif'
+        `${entity}.nif`
       )
       if (!holder) {
         await handleCheckNifResponse()
@@ -69,29 +66,29 @@ const NifCif = (props) => {
   }
 
   useEffect(() => {
-    if (values?.new_member?.nif && values?.new_member?.nif.length >= 9) {
+    if (values[entity]?.nif && values[entity]?.nif.length >= 9) {
       handleNifValidations()
-      let is_physical = checkPhisicalVAT(values?.new_member?.nif)
+      let is_physical = checkPhisicalVAT(values[entity]?.nif)
       setFieldValue(
-        'new_member.person_type',
+        `${entity}.person_type`,
         is_physical ? 'physic-person' : 'legal-person'
       )
     }
-  }, [values?.new_member?.nif])
+  }, [values[entity]?.nif])
 
   return (
     <>
       <Grid item xs={12}>
         <InputField
-          data-cy="new_member.nif" // TODO: generalize!
-          name="new_member.nif" // TODO: generalize!
+          data-cy={`${entity}.nif`}
+          name={`${entity}.nif`}
           textFieldName={t('NIF_FIELD')}
           textFieldHelper={t('MEMBER_NIF_HELPER')}
           handleChange={handleChangeNif}
           handleBlur={handleBlur}
-          touched={touched?.new_member?.nif}
-          value={values?.new_member?.nif}
-          error={errors?.new_member?.nif}
+          touched={touched[entity]?.nif}
+          value={values[entity]?.nif}
+          error={errors[entity]?.nif}
           required={true}
           customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />
