@@ -40,7 +40,7 @@ const CUPS = (props) => {
           setLoading(false)
         })
         .catch(({ response }) => {
-          setFieldError('cups', ERROR_INVALID_FIELD)
+          setFieldError('cups', t('ERROR_INVALID_FIELD'))
           setLoading(false)
         })
     }
