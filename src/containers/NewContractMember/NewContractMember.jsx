@@ -243,6 +243,22 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
+      activeStep === formSteps['POWER'] &&
+      formikProps.values.has_light === 'light-off' &&
+      formikProps.values.has_member === 'member-on'
+    ) {
+      next = next + 2
+    }
+
+    if (
+      activeStep === formSteps['POWER'] &&
+      formikProps.values.has_light === 'light-off' &&
+      formikProps.values.has_member === 'member-off'
+    ) {
+      next = next + 3
+    }
+
+    if (
       activeStep === formSteps['SELFCONSUMPTION'] &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
@@ -256,17 +272,36 @@ const NewContractMemberForm = (props) => {
       next = next + 1
     }
 
+
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
+
     if (
       activeStep === formSteps['HOLDER_INFO'] &&
+      formikProps.values.has_light === 'light-on' &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
       prev = prev - 1
+    }
+
+    if (
+      activeStep === formSteps['HOLDER_INFO'] &&
+      formikProps.values.has_light === 'light-off' &&
+      formikProps.values.has_member === 'member-on'
+    ) {
+      prev = prev - 2
+    }
+
+    if (
+      activeStep === formSteps['DONATION'] &&
+      formikProps.values.has_light === 'light-off' &&
+      formikProps.values.has_member === 'member-off'
+    ) {
+      prev = prev - 3
     }
 
     if (
