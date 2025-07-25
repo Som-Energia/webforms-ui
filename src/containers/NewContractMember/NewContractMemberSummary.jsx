@@ -232,21 +232,21 @@ const NewContractMemberSummary = (props) => {
             reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
             step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
               : null
           },
           {
             reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
             step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
               : null
           },
           {
             reviewLabel: t('LANGUAGE_SUMMARY'),
             reviewValue: languages[values?.new_member?.language],
             step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['MEMBER_INFO']
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
               : null
           }
         ]
@@ -408,7 +408,7 @@ const NewContractMemberSummary = (props) => {
     await setFieldValue(fieldName, value)
     setFieldTouched(fieldName, true)
   }
-
+ 
   return loading ? (
     <NewLoading />
   ) : (
