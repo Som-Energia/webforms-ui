@@ -278,7 +278,7 @@
     "AVIS_ALTA_DE_SERVEI_DESC": "Vull donar-la d'alta directament amb Som Energia.",
     "ES_UN_HABITATGE": "És un habitatge?",
     "CNAE_HELPER": "Si és un habitatge, no has d’omplir aquest camp",
-    "HELP_POPOVER_CNAE": "<a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/232-quin-es-el-meu-numero-de-cnae\">CNAE de la vostra activitat econòmica</a>.",
+    "HELP_POPOVER_CNAE": "El CNAE identifica l'activitat econòmica. Si no saps el teu, pots revisar <a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/232-que-es-el-numero-de-cnae\">aquest article</a>.",
     "CADASTRAL_REFERENCE": "Referència cadastral",
     "HELP_CADASTRAL_REFERENCE": "<a target=\"_blank\" href=\"{{url}}\"> Què és la referència cadastral i on puc trobar-la?</a>",
     "HELP_CADASTRAL_REFERENCE_URL": "https://ca.support.somenergia.coop/article/1338-que-es-i-on-trobar-la-referencia-cadastral",
