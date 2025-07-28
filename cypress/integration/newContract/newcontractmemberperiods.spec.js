@@ -36,6 +36,47 @@ describe('New Contract with New Member', () => {
     })
   })
 
+  describe('New contract light-off member-off', function () {
+    it('New contract light-off member-off', function () {
+      cy.contractMemberQuestion()
+      cy.identifyNewMember(this.data.personalPhysicalData.nif)
+      cy.personalPhysicalDataMember(
+        this.data.personalPhysicalData,
+        this.data.validAddress
+      )
+      cy.newContractIdentifySupplyPoint(
+        this.data.supplyPoint.cups,
+        "light-off"
+      )
+      cy.newContractSupplyPointData(this.data)
+      cy.choosePower({ powers: [2, 3] })
+      cy.contractMemberDonationQuestion()
+      cy.contractMemberPaymentData(this.data.paymentData)
+      cy.contractMemberCheckReviewNewMemberStep(
+        this.data.personalPhysicalData.nif
+      )
+    })
+  })
+
+  describe('New contract light-off member-on', function () {
+    it('New contract light-off member-on', function () {
+      cy.contractMemberQuestion(true)
+      cy.identifyMember(this.data.linkMember)
+      cy.newContractIdentifySupplyPoint(
+        this.data.supplyPoint.cups,
+        "light-off"
+      )
+      cy.newContractSupplyPointData(this.data)
+      cy.choosePower({ powers: [2, 3] })
+      cy.contractMemberHolderQuestion("light-off", false)
+      cy.contractMemberDonationQuestion()
+      cy.contractMemberPaymentData(this.data.paymentData, true)
+      cy.contractMemberCheckReviewNewMemberStep(
+        this.data.linkMember.nif, true
+      )
+    })
+  })
+
   describe('New contract and physical member with optional data', function () {
     it('New contract and physical member with optional data', function () {
       cy.contractMemberQuestion()

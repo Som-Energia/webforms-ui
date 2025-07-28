@@ -9,6 +9,10 @@
     "code": "34",
     "phone_number": "123456789"
   },
+  "linkMember": {
+    "nif": "36517097C",
+    "number": "1620"
+  },
   "personalPhysicalData": {
     "nif": "74865726J",
     "is_physical": "true",
