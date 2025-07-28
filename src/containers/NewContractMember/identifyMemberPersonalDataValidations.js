@@ -4,7 +4,6 @@ const identifyMemberPersonalDataValidations = Yup.object().shape({
   new_member: Yup.object().shape({
     nif: Yup.string()
     .required('ERROR_REQUIRED_FIELD')
-    .matches(/(^[A-GI-Z0-9])/, 'CIF_COMMUNITY_OWNERS')
     .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF'),
     person_type: Yup.string().oneOf(['legal-person', 'physic-person']),
     name: Yup.string().required('NO_NAME'),
