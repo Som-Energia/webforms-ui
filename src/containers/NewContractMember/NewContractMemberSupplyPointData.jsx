@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -8,8 +8,6 @@ import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/Typography'
 
-import { textCheckbox, textHeader4 } from '../Gurb/gurbTheme'
-
 import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../components/DragDrop'
 import CNAE from '../../components/CNAE'
@@ -17,15 +15,17 @@ import AddressField from '../../components/AddressField'
 import { useTheme } from '@mui/material/styles'
 
 const NewContractMemberSupplyPointData = (props) => {
+  const trackID = 'supply-point-data'
   const {
-    activeStep,
     values,
-    errors,
-    touched,
     setFieldValue,
-    setFieldError,
-    setFieldTouched
+    sendTrackEvent
   } = props
+
+  useEffect(() => {
+    sendTrackEvent(trackID)
+  }, [])
+
   const theme = useTheme()
 
   const { t } = useTranslation()

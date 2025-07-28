@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Chooser from '../../components/NewChooser'
@@ -8,9 +9,10 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import { CommunityIcon, HandshakeIcon } from '../../data/icons/Icons'
 
-const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaAndSteps}) => {
+const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaAndSteps, sendTrackEvent }) => {
   const { values, setFieldValue } = formikProps
   const { t } = useTranslation()
+  const trackID = 'member-question'
 
   const handleMemberQuestion = (value) => {
     setFieldValue('has_member', value)
@@ -18,16 +20,22 @@ const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaA
     setValidationSchemaAndSteps(value)
   }
 
+  useEffect(() => {
+    sendTrackEvent(trackID)
+  },[])
+
+
+
   const options = [
     {
       id: 'member-on',
-      icon: <HandshakeIcon/>,
+      icon: <HandshakeIcon />,
       textHeader: t('HAS_MEMBER'),
       textBody: t('HAS_MEMBER_BODY')
     },
     {
       id: 'member-off',
-      icon: <CommunityIcon/>,
+      icon: <CommunityIcon />,
       textHeader: t('HAS_NO_MEMBER'),
       textBody: t('HAS_NO_MEMBER_BODY')
     }

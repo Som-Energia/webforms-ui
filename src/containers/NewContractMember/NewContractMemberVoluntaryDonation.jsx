@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
@@ -6,8 +7,14 @@ import Grid from '@mui/material/Grid'
 import VoluntaryDonation from '../../components/NewVoluntaryDonation'
 
 const newContractMemberVoluntaryDonation = (props) => {
-  const { values, setFieldValue } = props
+  const { sendTrackEvent } = props
   const { t } = useTranslation()
+
+  const trackID = 'voluntary-donation'
+
+  useEffect(() => {
+    sendTrackEvent(trackID)
+  }, [])
 
   return (
 

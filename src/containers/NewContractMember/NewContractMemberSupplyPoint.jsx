@@ -14,7 +14,9 @@ import { LightbulbIcon } from '../../data/icons/Icons'
 import Grid from '@mui/material/Grid'
 
 const newContractMemberSupplyPoint = ({ ...props }) => {
-  const { values, setFieldValue } = props
+  const trackID = 'supply-point'
+  
+  const { values, setFieldValue, sendTrackEvent } = props
   const { t } = useTranslation()
   const [openLightOffDialog, setOpenLightOffDialog] = useState(false)
 
@@ -28,6 +30,10 @@ const newContractMemberSupplyPoint = ({ ...props }) => {
   const handleAcceptLightOffTerms = () => {
     setOpenLightOffDialog(false)
   }
+
+  useEffect(() => {
+    sendTrackEvent(trackID)
+  },[])
 
   const options = [
     {

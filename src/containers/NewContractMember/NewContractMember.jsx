@@ -313,8 +313,10 @@ const NewContractMemberForm = (props) => {
       })
   }
 
-  const getStep = (props) => {
+  const getStep = (props, sendTrackEvent) => {
     const { values } = props
+
+    const trackProps = {...props,sendTrackEvent}
 
     if (values?.has_member == 'member-off') {
       if (activeStep === 1) {
@@ -324,15 +326,15 @@ const NewContractMemberForm = (props) => {
         return <MemberPersonalData {...props} />
       } else if (activeStep === 3) {
         setHasAlert(true)
-        return <NewContractMemberSupplyPoint {...props} />
+        return <NewContractMemberSupplyPoint {...trackProps} />
       } else if (activeStep === 4) {
         setHasAlert(false)
-        return <NewContractMemberSupplyPointData {...props} />
+        return <NewContractMemberSupplyPointData {...trackProps} />
       } else if (activeStep === 5) {
-        return <NewContractMemberPower {...props} />
+        return <NewContractMemberPower {...trackProps} />
       } else if (activeStep === 6) {
         setHasAlert(false)
-        return <NewContractMemberSelfConsumptionChooser {...props} />
+        return <NewContractMemberSelfConsumptionChooser {...trackProps} />
       } else if (activeStep === 7) {
         setHasAlert(true)
         return <NewContractMemberSelfConsumptionData {...props} />
@@ -340,11 +342,11 @@ const NewContractMemberForm = (props) => {
         setHasAlert(false)
         return <NewContractMemberHolder {...props} />
       } else if (activeStep === 9) {
-        return <NewContractMemberVoluntaryDonation {...props} />
+        return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
-        return <NewContractMemberPayment {...props} />
+        return <NewContractMemberPayment {...trackProps} />
       } else {
-        return <NewContractMemberSummary {...props} />
+        return <NewContractMemberSummary {...trackProps} />
       }
     } else {
       if (activeStep === 1) {
@@ -352,15 +354,15 @@ const NewContractMemberForm = (props) => {
         return <ApadrinatingDetails {...props} />
       } else if (activeStep === 2) {
         setHasAlert(true)
-        return <NewContractMemberSupplyPoint {...props} />
+        return <NewContractMemberSupplyPoint {...trackProps} />
       } else if (activeStep === 3) {
         setHasAlert(false)
-        return <NewContractMemberSupplyPointData {...props} />
+        return <NewContractMemberSupplyPointData {...trackProps} />
       } else if (activeStep === 4) {
-        return <NewContractMemberPower {...props} />
+        return <NewContractMemberPower {...trackProps} />
       } else if (activeStep === 5) {
         setHasAlert(false)
-        return <NewContractMemberSelfConsumptionChooser {...props} />
+        return <NewContractMemberSelfConsumptionChooser {...trackProps} />
       } else if (activeStep === 6) {
         setHasAlert(true)
         return <NewContractMemberSelfConsumptionData {...props} />
@@ -370,11 +372,11 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 8) {
         return <IdentifyMemberPersonalData {...props} holder={true} />
       } else if (activeStep === 9) {
-        return <NewContractMemberVoluntaryDonation {...props} />
+        return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
-        return <NewContractMemberPayment {...props} />
+        return <NewContractMemberPayment {...trackProps} />
       } else {
-        return <NewContractMemberSummary {...props} />
+        return <NewContractMemberSummary {...trackProps} />
       }
     }
   }
@@ -397,13 +399,21 @@ const NewContractMemberForm = (props) => {
     }
   }, [summaryField])
 
-  useEffect(() => {
+  useEffect(()=> {
+    trackEvent({
+       category: 'NewContractMember',
+       action: 'setNewContractMemberStep',
+       name: `new-contract-member-step-${activeStep}`
+     })
+  }, [activeStep])
+
+  const sendTrackEvent = (id) => {
     trackEvent({
       category: 'NewContractMember',
       action: 'setNewContractMemberStep',
-      name: `new-contract-member-step-${activeStep}`
+      name: `new-contract-member-step-${id}`
     })
-  }, [activeStep])
+  }
 
   return (
     <Container
@@ -428,6 +438,7 @@ const NewContractMemberForm = (props) => {
               {activeStep == 0 ? (
                 <NewContractMemberQuestion
                   formikProps={formikProps}
+                  sendTrackEvent={sendTrackEvent}
                   nextStep={nextStep}
                   setValidationSchemaAndSteps={setValidationSchemaAndSteps}
                 />
@@ -461,7 +472,7 @@ const NewContractMemberForm = (props) => {
                       </Result>
                     </Box>
                   ) : (
-                    getStep(formikProps)
+                    getStep(formikProps,sendTrackEvent)
                   )}
                   {!completed && (
                     <Grid

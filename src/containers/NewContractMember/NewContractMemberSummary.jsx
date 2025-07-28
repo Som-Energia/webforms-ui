@@ -40,19 +40,16 @@ const TARIFF_INDEXED = 'indexed'
 
 const NewContractMemberSummary = (props) => {
   const {
-    activeStep,
     values,
-    errors,
-    touched,
     setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched
+    setFieldTouched,
+    sendTrackEvent
   } = props
 
   const { t } = useTranslation()
   const { tariff } = useParams()
   const isTariffIndexed = tariff === TARIFF_INDEXED
+  const trackID = 'contract-summary'
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
@@ -65,6 +62,11 @@ const NewContractMemberSummary = (props) => {
       : values?.has_member == 'member-on'
         ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
         : undefined
+
+
+  useEffect(() => {
+    sendTrackEvent(trackID)
+  }, [])
 
   const handleChangePrivacyPolicy = (event) => {
     const checked = event.target.checked
@@ -640,8 +642,8 @@ const NewContractMemberSummary = (props) => {
             }
           />
         </Grid>
-        : 
-      null}
+        :
+        null}
       {values?.new_member?.person_type == 'legal-person' && (
         <Grid item xs={12}>
           <Typography variant="headline4">

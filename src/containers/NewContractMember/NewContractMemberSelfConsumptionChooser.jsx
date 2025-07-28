@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
@@ -9,9 +10,13 @@ import InputTitle from '../../components/InputTitle'
 import { SolarpanelIcon } from '../../data/icons/Icons'
 
 const NewContractMemberSelfConsumptionChooser = (props) => {
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, sendTrackEvent } = props
   const { t } = useTranslation()
+  const trackID = 'self-consumption-chooser'
 
+  useEffect(() => {
+    sendTrackEvent(trackID)
+  }, [])
   const handleSelfconsumptionQuestion = (value) => {
     setFieldValue('has_selfconsumption', value)
   }

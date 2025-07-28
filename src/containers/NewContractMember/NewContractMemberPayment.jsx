@@ -22,9 +22,15 @@ const PaymentMethod = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setFieldTouched
+    setFieldTouched,
+    sendTrackEvent
   } = props
   const { t } = useTranslation()
+  const trackID = 'payment-method'
+
+   useEffect(() => {
+    sendTrackEvent(trackID)
+  }, [])
 
   const handleMethodPaymentQuestion = (value) => {
     setFieldValue('new_member.payment_method', value)
