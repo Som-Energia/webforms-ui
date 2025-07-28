@@ -8,6 +8,7 @@
 - Power texts depending on light-on/off
 - Modify privacy policy url
 - Empty option for referal_source
+- Cypress tests when light-off
 
 ## 5.0.12 2025-07-29
 
