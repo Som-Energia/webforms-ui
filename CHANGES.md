@@ -1,5 +1,14 @@
 # Change Log
 
+## Unreleased
+
+- CUPS unknown distri error
+- Helper text for CNAE when not housing
+- Remove steps whrn light-off
+- Power texts depending on light-on/off
+- Modify privacy policy url
+- Empty option for referal_source
+
 ## 5.0.12 2025-07-29
 
 - HELPER_NUMBER_ADDRESS changed by empty string
