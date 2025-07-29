@@ -21,13 +21,8 @@ import NewLoading from '../../components/NewLoading'
 
 const MemberSummary = (props) => {
   const {
-    activeStep,
     values,
-    errors,
-    touched,
     setFieldValue,
-    setFieldError,
-    setErrors,
     setFieldTouched
   } = props
 
@@ -221,10 +216,8 @@ const MemberSummary = (props) => {
               ...buttonGurbLight,
               minWidth: 'auto',
               width: 'auto',
-              // padding: '6px 15px',
               fontSize: '0.90rem',
               textTransform: 'none'
-              // height: 36
             }}
             startIcon={<EditOutlinedIcon fontSize="medium" />}
             onClick={() => setShowReviewLinks(true)}>
