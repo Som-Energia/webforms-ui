@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 5.0.11 2025-07-29
 
 - Change http by https in docs and translations
 
