@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 5.0.10 2025-07-29
 
 - Removed old contract form
 - Removed old contract unused components
