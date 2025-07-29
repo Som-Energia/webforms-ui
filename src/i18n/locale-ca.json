@@ -1018,7 +1018,7 @@
     "GENERIC_CONDITIONS_URL": "GENERIC_CONDITIONS_URL",
     "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "GURB_CHECK_SPECIFIC_CONDITIONS_URL",
     "POSTAL_CODE": "Codi postal",
-    "HELPER_NUMBER_ADDRESS": "Si vius en una casa sense número introdueix el número 0 en aquest camp",
+    "HELPER_NUMBER_ADDRESS": "",
     "SAVE_CHANGES": "Guardar canvis",
     "GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED": "L'acceptació d'aquestes condicions particulars obliga al pagament del consum al preu que resulti de l'aplicació de la tarifa contractada.",
     "CADASTRAL_REFERENCE_HELPER": "Si no saps on trobar la referència cadastral, pots buscar-la al registre o anar al",

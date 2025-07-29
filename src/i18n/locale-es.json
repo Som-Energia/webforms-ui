@@ -895,7 +895,7 @@
     "NEW_MEMBER_SUBMIT_LOADING": "Estamos dando de alta a la nueva persona socia",
     "NEW_CONTRACT_SUBMIT_LOADING": "Estamos gestionando la petición",
     "POSTAL_CODE": "Código postal",
-    "HELPER_NUMBER_ADDRESS": "Si vives en una casa sin número introduce el número 0 en este campo",
+    "HELPER_NUMBER_ADDRESS": "",
     "SAVE_CHANGES": "Guardar cambios",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "¡Ya eres de Som Energia!",
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Recibirás un correo con tu número de persona socia y con toda la información sobre tu nuevo contrato.",
@@ -916,5 +916,6 @@
     "ERROR_FIELD_TOO_LONG": "Campo demasiado largo",
     "ERROR_FIELD_TOO_SHORT": "Campo demasiado corto",
     "GURB_VOLUNTARY_DONATION_HELPER": "Siempre podrás activar o desactivar esta opción dentro el área de clientes",
-    "NEW_HOLDER_SAME_TITLE": "Sí, la persona titular y la socia son la misma"
+    "NEW_HOLDER_SAME_TITLE": "Sí, la persona titular y la socia son la misma",
+    "ERROR_FIELD_LENGTH": "Logintud del campo incorrecta"
 }

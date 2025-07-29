@@ -894,7 +894,7 @@
     "SELECT_OPTION": "-- Hautatu aukera bat --",
     "LIGHT_OFF_URL": "https://eu.support.somenergia.coop/article/462-une-honetan-ez-dago-argirik-nola-eskatu-hornidura-puntu-berri-bat?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "POSTAL_CODE": "Posta-kodea",
-    "HELPER_NUMBER_ADDRESS": "Zure etxeak ez badu zenbakirik, eremu honetan jarri 0 zenbakia",
+    "HELPER_NUMBER_ADDRESS": "",
     "SAVE_CHANGES": "Gorde aldaketak",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Som Energiaren bazkidea zara jada!",
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Mezu bat jasoko duzu zure bazkide-zenbakiarekin eta kontratu berriari buruzko informazio guztiarekin.",
