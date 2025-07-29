@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 5.0.12 2025-07-29
 
 - HELPER_NUMBER_ADDRESS changed by empty string
 - Add key ERROR_FIELD_LENGTH
