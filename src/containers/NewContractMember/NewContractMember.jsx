@@ -98,7 +98,7 @@ const NewContractMemberForm = (props) => {
       cnae: '',
       supply_point_accepted: false,
       is_housing: '',
-      attachment: ''
+      attachments: []
     },
     supply_point_address: {
       street: '',
