@@ -844,7 +844,7 @@
     "GURB_SUPPLY_POINT_DATA_TITLE": "4. Dades del punt de subministrament",
     "GURB_SUPPLY_POINT_DATA_SUBTITLE": "Per contractar la llum amb Som Energia ens has de facilitar algunes dades",
     "GURB_CADASTRAL_REFERENCE_HELPER": "Si no saps on trobar la referència cadastral, pots buscar-la al registre o anar al Centre d'ajuda.",
-    "ELECTRIC_BILL_UPLOAD": "Adjunta l'última factura elèctrica",
+    "ELECTRIC_BILL_UPLOAD": "Adjunta una factura elèctrica del punt de subministrament a contractar",
     "GURB_CLICK_HERE": "Fes click per pujar",
     "GURB_DRAG_AND_DROP_HERE": "o arrastra i deixar anar aquí",
     "GURB_TYPE_OF_FILES": "PDF, JPG, JPEG (max. 5MB)",
