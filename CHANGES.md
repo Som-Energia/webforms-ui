@@ -4,7 +4,7 @@
 
 - CUPS unknown distri error
 - Helper text for CNAE when not housing
-- Remove steps whrn light-off
+- Remove steps when light-off
 - Power texts depending on light-on/off
 - Modify privacy policy url
 - Empty option for referal_source
