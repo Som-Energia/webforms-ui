@@ -14,13 +14,15 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import RequiredTitle from './InputTitle'
 import { uploadFile } from '../services/api'
 import Grid from '@mui/material/Grid'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
 
-const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
+const DragDrop = ({ fieldName, textStyle, required, values, onChange }) => {
   const { t } = useTranslation()
 
   const [drag, setDrag] = useState(false)
   const [error, setError] = useState(false)
-  const [filename, setFilename] = useState('')
+  const [uploads, setUploads] = useState([...values])
 
   let dropRef = createRef()
 
@@ -32,12 +34,16 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
     }
   }
 
+  useEffect(() => {
+    onChange(uploads)
+  }, [uploads])
+
   const upload = (name, file) => {
     return uploadFile(name, file)
       .then((response) => {
         if (response?.data?.code === 'UPLOAD_OK') {
           const fileHash = response?.data?.file_hash
-          if (onChange) onChange(fileHash)
+          setUploads([...uploads, {"filename":name, "filehash": fileHash}])
         } else {
           const errorMsg = getErrorMessage(response?.data?.code)
           setError(errorMsg)
@@ -46,7 +52,7 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
       .catch((error) => {
         const errorMsg = getErrorMessage(error?.response?.data?.code)
         setError(errorMsg)
-      })
+      }), [uploads]
   }
   const prevent = (e) => {
     e.preventDefault()
@@ -78,7 +84,6 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
         return
       }
       onDrop(file)
-      setFilename(file.name)
       upload(file.name, file)
       e.dataTransfer.clearData()
     }
@@ -116,9 +121,14 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
       }
       setError(false)
       onDrop(file)
-      setFilename(file.name)
       upload(file.name, file)
     }
+  }
+
+  const handleDelete = (index) => {
+    const uploadsToDelete = uploads
+    uploadsToDelete.splice(index, 1)
+    setUploads([...uploadsToDelete])
   }
 
   const onDrop = () => {}
@@ -140,7 +150,7 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
             borderRadius: '8px',
             border: drag
               ? '2px dashed black'
-              : filename
+              : uploads
                 ? '2px dashed #96B633'
                 : '2px dashed #D9D9D9',
             boxShadow: 'none',
@@ -155,18 +165,22 @@ const DragDrop = ({ fieldName, textStyle, required, onChange }) => {
             <Alert sx={{ borderRadius: '8px' }} severity="error">
               {error}
             </Alert>
-          ) : filename && !drag ? (
+          ) : uploads && !drag ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
-                {filename}
-              </Typography>
-              <IconButton
-                aria-label="delete"
-                onClick={() => {
-                  setFilename('')
-                }}>
-                <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
-              </IconButton>
+              <List>
+              {uploads.map((upload, index) => (
+                <ListItem>
+                  <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
+                    {upload.filename}
+                  </Typography>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDelete(index)}>
+                    <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
+                  </IconButton>
+                </ListItem>
+              ))}
+              </List>
             </Box>
           ) : (
             <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />

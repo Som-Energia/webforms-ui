@@ -182,7 +182,7 @@ export const supply_point = {
       supply_point_accepted: true,
       is_housing: true,
       cnae_valid: true,
-      attachment: 'road_poneglyph.jpg'
+      attachments: [{'filename':'road_poneglyph.jpg','filehash':'road_poneglyph.jpg'}]
     }
   },
   without_attachments: {
@@ -201,19 +201,19 @@ export const supply_point_attachments = {
       filename: 'road poneglyph',
       process: 'A3'
     },
-    normalizedData: [{
+    normalizedData: {
       filename: 'road poneglyph',
       category: 'new_contract'
-    }]
+    }
   },
   invoice: {
     entryValues: {
       filename: 'road poneglyph',
       process: 'C1'
     },
-    normalizedData: [{
+    normalizedData: {
       filename: 'road poneglyph',
       category: 'invoice'
-    }]
+    }
   }
 }

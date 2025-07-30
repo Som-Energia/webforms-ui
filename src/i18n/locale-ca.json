@@ -1032,5 +1032,11 @@
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "Hi ha un error i no s'ha pogut realitzar l'operació sol·licitada!",
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisem la situació. Disculpa les molèsties-",
     "LIGHT_OFF_URL": "https://ca.support.somenergia.coop/article/225-no-tinc-llum-actualment-puc-sol-licitar-un-nou-punt-de-consum?utm_source=linkidiomes&utm_medium=cda&utm_campaign=catal%C3%A0",
-    "PAYMENT_METHOD_TITLE": "Pagament de l'aportació"
+    "PAYMENT_METHOD_TITLE": "Pagament de l'aportació",
+    "WHICH_PEAK": "Indica quina potència punta vols contractar",
+    "WHICH_VALLEY": "Indica quina potència vall vols contractar",
+    "WHICH_POWER": "Indica quina potència vols contractar",
+    "WHICH_POWER_HELPER": "Si no saps quina potència contractar revisa el següent <a target=\"_blank\" href={{url}}>article</a>.",
+    "WHICH_POWER_HELPER_URL": "https://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito",
+    "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentació per l'alta de subministrament"
 }

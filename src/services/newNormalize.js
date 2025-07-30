@@ -65,10 +65,10 @@ export const contractProcess = (has_light, same_holder) => {
 }
 
 export const normalizeAttachments = (supply_point_attachment, process) => {
-  let data = [{
+  let data = {
     filename: supply_point_attachment,
     category: process == 'A3' ? "new_contract" : "invoice"
-  }]
+  }
   return data
 }
 
@@ -138,12 +138,14 @@ export const newNormalizeContract = (data) => {
     finalContract['comercial_info_accepted'] = data.comercial_info_accepted
   }
 
-  if (data.supply_point.attachment) {
+  if (data.supply_point.attachments) {
     // TODO: selfconsumption attachments must be inside attachment!!
-    finalContract['attachments'] = normalizeAttachments(
-      data.supply_point.attachment, process
-    )
+    finalContract['attachments'] = []
+    data.supply_point.attachments.forEach(attachment => {
+      finalContract['attachments'].push(normalizeAttachments(
+        attachment['filehash'], process
+      ))
+    })
   }
-
   return finalContract
 }
