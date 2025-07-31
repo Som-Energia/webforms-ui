@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 5.0.14 2025-07-31
 
 - CUPS unknown distri error
 - Helper text for CNAE when not housing
