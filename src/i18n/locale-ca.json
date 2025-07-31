@@ -78,10 +78,10 @@
     "ERROR_POST_MODIFY": "S'ha detectat un error",
     "MODIFY_POTTAR_UNEXPECTED": "S'ha produït un error inesperat",
     "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Posa't en contacte amb modifica@somenergia.coop perquè et puguem donar un cop de mà. Per identificar-te, necessitarem saber el teu NIF i el número del contracte que vols modificar.",
-    "INSTALL_TYPE_ATTACHMENTS_INFO": "Formats permesos: pdf, jpg, jpeg. Mida màxima permesa: 5 MB.",
+    "INSTALL_TYPE_ATTACHMENTS_INFO": "Formats permesos: pdf, jpg, jpeg, txt. Mida màxima permesa: 5 MB.",
     "UNEXPECTED": "S'ha produït un error inesperat",
     "UNEXPECTED_ERROR": "S'ha produït un error inesperat",
-    "INVALID_FILETYPE": "Format de fitxer no permès. Formats permesos: pdf, jpg, jpeg.",
+    "INVALID_FILETYPE": "Format de fitxer no permès. Formats permesos: pdf, jpg, jpeg, txt.",
     "NO_ATTACHMENTS": "No has adjuntat la documentació requerida",
     "STATE": "Província",
     "STATE_HELP": "Província",
@@ -1038,5 +1038,6 @@
     "WHICH_POWER": "Indica quina potència vols contractar",
     "WHICH_POWER_HELPER": "Si no saps quina potència contractar revisa el següent <a target=\"_blank\" href={{url}}>article</a>.",
     "WHICH_POWER_HELPER_URL": "https://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito",
-    "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentació per l'alta de subministrament"
+    "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentació per l'alta de subministrament",
+    "ERROR_FIELD_LENGTH": "Longitud del camp incorrecta"
 }
