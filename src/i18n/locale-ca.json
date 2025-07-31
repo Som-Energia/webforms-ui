@@ -67,7 +67,7 @@
     "CONTACT_PHONE": "Telèfon de contacte per accedir al comptador",
     "REVIEW_DATA_AND_CONFIRM": "Ja gairebé ho tenim! Revisa les dades introduïdes i clica el botó d'enviar.",
     "INVALID_FIELD": "El camp \"{{field_name}}\" té un valor incorrecte",
-    "UNKNOWN_DISTRIBUTOR": "El codi CUPS que has indicat correspon a una empresa de distribució elèctrica que ens cal validar. Per tal que puguem seguir amb la contractació, envia un correu electrònic a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> adjuntant una factura recent ",
+    "UNKNOWN_DISTRIBUTOR": "El codi CUPS que has indicat correspon a una empresa de distribució elèctrica que ens cal validar. Per tal que puguem seguir amb la contractació, envia un correu electrònic a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> adjuntant una factura recent",
     "BADTOKEN": "La sessió ha expirat. Et recomanem accedir des de la llista de contractes i tornar a intentar-ho.",
     "NOTALLOWED": "No tens autorització per fer aquesta operació.",
     "INACTIVECONTRACT": "El contracte a modificar no està donat d'alta.",
