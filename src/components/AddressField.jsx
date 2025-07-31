@@ -11,6 +11,7 @@ import {
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField'
+import StateCity from './StateCity'
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -23,7 +24,8 @@ const updateAddressValues = async (
   values,
   setValues,
   addressFieldName,
-  sessionTokenRef
+  sessionTokenRef,
+  onChangeStateCity
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
@@ -170,6 +172,11 @@ const AddressField = ({
   const handleChange = useHandleChange(setFieldValue)
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
+  const handleChangeStateAndCity = async (value) => {
+    await setFieldValue(`${addressFieldName}.city`,value?.city)
+    setFieldValue(`${addressFieldName}.state`,value?.state)
+  }
+
   return (
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>
@@ -181,7 +188,7 @@ const AddressField = ({
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
           error={
             touched[addressFieldName]?.street &&
-            errors[addressFieldName]?.street
+              errors[addressFieldName]?.street
               ? errors[addressFieldName].street
               : false
           }
@@ -203,11 +210,23 @@ const AddressField = ({
           value={postalCodeValue}
           error={
             touched[addressFieldName]?.postal_code &&
-            errors[addressFieldName]?.postal_code
+              errors[addressFieldName]?.postal_code
               ? t(errors[addressFieldName].postal_code)
               : ''
           }
           required
+        />
+      </Grid>
+
+      <Grid item container spacing={2}>
+        <StateCity
+          stateId="supply_point_state"
+          stateName={`${addressFieldName}.state`}
+          state={values[addressFieldName]?.state}
+          cityId="supply_point_city"
+          cityName={`${addressFieldName}.city`}
+          city={values[addressFieldName]?.city}
+          onChange={(value) => handleChangeStateAndCity(value)}
         />
       </Grid>
 
@@ -222,7 +241,7 @@ const AddressField = ({
           value={numberValue}
           error={
             touched[addressFieldName]?.number &&
-            errors[addressFieldName]?.number
+              errors[addressFieldName]?.number
               ? t(errors[addressFieldName].number)
               : ''
           }

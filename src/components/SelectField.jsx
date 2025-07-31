@@ -16,6 +16,7 @@ const SelectField = (props) => {
     errors,
     touched,
     setFieldValue,
+    onChange,
     setFieldError,
     setFieldTouched,
     setErrors,
@@ -23,7 +24,12 @@ const SelectField = (props) => {
   } = props
 
   const handleChange = (event) => {
-    setFieldValue(fieldName, event.target.value)
+    if(setFieldValue){
+      setFieldValue(fieldName, event.target.value)
+    }
+    else{
+      onChange(event)
+    }
   }
 
   return (
