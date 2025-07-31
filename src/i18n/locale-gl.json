@@ -70,10 +70,10 @@
     "ERROR_POST_MODIFY": "Detectouse un erro",
     "MODIFY_POTTAR_UNEXPECTED": "Produciuse un erro inesperado",
     "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Ponte en contacto con modifica@somenergia.coop para que che poidamos botar unha man. Para identificarte precisaremos o teu NIF e o número do contrato que queres modificar.",
-    "INSTALL_TYPE_ATTACHMENTS_INFO": "Formatos permitidos: pdf, jpg, jpeg. Tamaño máximo permitido: 5 MB.",
+    "INSTALL_TYPE_ATTACHMENTS_INFO": "Formatos permitidos: pdf, jpg, jpeg, txt. Tamaño máximo permitido: 5 MB.",
     "UNEXPECTED": "Produciuse un erro inesperado",
     "UNEXPECTED_ERROR": "Produciuse un erro inesperado",
-    "INVALID_FILETYPE": "Formato de ficheiro non permitido. Formatos permitidos: pdf, jpg, jpeg.",
+    "INVALID_FILETYPE": "Formato de ficheiro non permitido. Formatos permitidos: pdf, jpg, jpeg, txt.",
     "NO_ATTACHMENTS": "Non achegaches a documentación requirida",
     "STATE": "Provincia",
     "STATE_HELP": "Provincia",
@@ -916,5 +916,7 @@
     "ERROR_INVALID_FIELD": "Campo incorrecto",
     "GURB_VOLUNTARY_DONATION_HELPER": "Sempre poderás activar ou desactivar esta opción na área de clientes",
     "ERROR_FIELD_TOO_LONG": "Campo demasiado longo",
-    "ERROR_FIELD_TOO_SHORT": "Campo demasiado curto"
+    "ERROR_FIELD_TOO_SHORT": "Campo demasiado curto",
+    "MEMBER_DOCUMENTATION_UPLOAD": "Adxunta a documentación para o alta de subministración",
+    "ERROR_FIELD_LENGTH": "Lonxitude do campo incorrecta"
 }
