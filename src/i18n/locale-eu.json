@@ -763,7 +763,7 @@
     "AUTOCOMPLETE_LOADING_TEXT": "Kargatzen...",
     "GURB_CADASTRAL_REFERENCE_HELPER": "Katastroko erreferentzia aurkitzeko, jo erregistrora edo Laguntza Gunera.",
     "REQUIRED_CNAE": "EJSN kodea zehaztu behar da",
-    "ELECTRIC_BILL_UPLOAD": "Kontratatu beharreko hornidura-puntuaren faktura bat elektrikoa erantsi du.",
+    "ELECTRIC_BILL_UPLOAD": "Kontratatu beharreko hornidura-puntuaren faktura bat elektrikoa erantsi du",
     "INCORRECT_CNAE": "EJSN kode hau ez da aurkitu",
     "AUTOCOMPLETE_WITHOUT_OPTIONS": "Ez da emaitzarik aurkitu",
     "GURB_CLICK_HERE": "Egin klik igotzeko",
