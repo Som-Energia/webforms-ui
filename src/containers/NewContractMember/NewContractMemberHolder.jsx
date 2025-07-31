@@ -59,17 +59,21 @@ const newContractMemberHolder = (props) => {
       <Grid item xs={12}>
         <Typography variant="headline4.regular">{t('HOLDER_IDENTIFIER_TITLE')}</Typography>
       </Grid>
-      <Grid item xs={12}>
-        <InputTitle text={t('PREVIUOS_HOLDER_TITLE')} required={true} />
-      </Grid>
-      <Grid item xs={12}>
-        <Chooser
-          name="holder-question"
-          options={options}
-          value={values.previous_holder}
-          handleChange={handleHolderQuestion}
-        />
-      </Grid>
+      {values?.has_light === 'light-on' && (
+        <>
+          <Grid item xs={12}>
+            <InputTitle text={t('PREVIUOS_HOLDER_TITLE')} required={true} />
+          </Grid>
+          <Grid item xs={12}>
+            <Chooser
+              name="holder-question"
+              options={options}
+              value={values.previous_holder}
+              handleChange={handleHolderQuestion}
+            />
+          </Grid>
+        </>
+      )}
       {values?.has_member === 'member-on' && (
         <>
           <Grid item xs={12}>

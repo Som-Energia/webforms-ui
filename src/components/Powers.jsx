@@ -38,14 +38,23 @@ const Powers = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="body.md.medium">
-          {t('POWER_TO_CONTRACT')}{' '}
+          {values?.has_light == 'light-on'
+            ? t('POWER_TO_CONTRACT')
+            : t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')
+          }{' '}
           <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>
             *
           </span>
         </Typography>
         <Typography
-          sx={{ typography: 'body.md.regular', color: 'secondary.extraDark' }}>
-          {t('POWER_HELPER')}
+          sx={{ typography: 'body.md.regular', color: 'secondary.extraDark' }}
+          dangerouslySetInnerHTML={{
+            __html: values?.has_light == 'light-on'
+              ? t('POWER_HELPER')
+              : t('WHICH_POWER_HELPER', {
+                url: t('WHICH_POWER_HELPER_URL')
+              })
+          }} >
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -81,6 +90,7 @@ const Powers = (props) => {
                 numInputs={2}
                 {...props}
                 values={values?.contract?.power}
+                has_light={values?.has_light}
                 errors={errors?.contract?.power}
                 touched={touched?.contract}
               />
@@ -113,6 +123,7 @@ const Powers = (props) => {
                 numInputs={6}
                 {...props}
                 values={values?.contract?.power}
+                has_light={values?.has_light}
                 errors={errors?.contract?.power}
                 touched={touched?.contract}
               />

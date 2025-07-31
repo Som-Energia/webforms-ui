@@ -40,6 +40,7 @@ const LegalMemberPersonalData = (props) => {
   }, [i18n.language, setFieldValue])
 
   const referral_source_options = {
+    '': t('SELECT_OPTION'),
     O1_SOM_SERVEIS: t('HOW_MEET_US_OPTION_1'),
     O2_ALTRES_COOPS: t('HOW_MEET_US_OPTION_2'),
     O3_OPCIONS: t('HOW_MEET_US_OPTION_3'),
