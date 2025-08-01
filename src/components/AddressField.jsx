@@ -219,7 +219,7 @@ const AddressField = ({
           textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
           handleChange={handleChangeNumber}
           touched={touched[addressFieldName]?.number}
-          value={numberValue}
+          value={values[addressFieldName]?.number}
           error={
             touched[addressFieldName]?.number &&
             errors[addressFieldName]?.number

@@ -5,11 +5,16 @@ import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
+import ArticleIcon from '@mui/icons-material/Article'
+import { iconRequirements } from '../../themes/commonStyles'
+import { iconOffRequirements } from '../../themes/commonStyles'
 
 import InputField from '../../components/InputField'
 import AddressField from '../../components/AddressField'
 import SelectField from '../../components/SelectField'
 import PhoneField from '../../components/PhoneField'
+import Chooser from '../../components/NewChooser'
+
 import { useHandleChange } from '../../hooks/useHandleChange'
 import { useHandleBlur } from '../../hooks/useHandleBlur'
 
@@ -61,6 +66,44 @@ const LegalMemberPersonalData = (props) => {
     setFieldTouched('new_member.legal_person_accepted', true)
   }
 
+  const handleHolderAddressQuestion = (value) => {
+    setFieldValue('new_member.has_different_address', value)
+    if (value === 'supplypoint-tax-address-same'){
+      for (var key in values.supply_point_address){
+        setFieldValue('address.'+ key, values.supply_point_address[key])
+      }
+    } else {
+      if (
+        values.address.street === values.supply_point_address.street &&
+        values.address.number === values.supply_point_address.number &&
+        values.address.floor === values.supply_point_address.floor &&
+        values.address.door === values.supply_point_address.door &&
+        values.address.stairs === values.supply_point_address.stairs &&
+        values.address.bloc === values.supply_point_address.bloc
+        )
+      {
+        for (var key in values.address){
+          setFieldValue('address.'+ key, '')
+        }
+      }
+    }
+  }
+
+  const options = [
+    {
+      id: 'supplypoint-tax-address-same',
+      icon: <ArticleIcon sx={iconRequirements} />,
+      textHeader: t('GURB_SAME_SUPPLYPOINT_TAX_ADDRESS_HEADER'),
+      textBody: t('GURB_SAME_SUPPLYPOINT_TAX_ADDRESS_BODY')
+    },
+    {
+      id: 'supplypoint-tax-address-different',
+      icon: <ArticleIcon sx={iconOffRequirements} />,
+      textHeader: t('GURB_DIFFERENT_SUPPLYPOINT_TAX_ADDRESS_HEADER'),
+      textBody: t('GURB_DIFFERENT_SUPPLYPOINT_TAX_ADDRESS_BODY')
+    }
+  ]
+
   return (
     <Grid container spacing={4}>
       {title && (
@@ -70,6 +113,19 @@ const LegalMemberPersonalData = (props) => {
           </Typography>
         </Grid>
       )}
+      <Grid item xs={12}>
+        <Typography  variant="body.md.medium">
+          {t('GURB_HOLDER_ADDRESS_QUESTION_HELPER')}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Chooser
+          name="sameDirection"
+          options={options}
+          value={values.new_member.has_different_address}
+          handleChange={handleHolderAddressQuestion}
+        />
+      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
