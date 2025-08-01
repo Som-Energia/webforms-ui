@@ -121,8 +121,8 @@ const NewContractMemberForm = (props) => {
       stairs: '',
       bloc: '',
       postal_code: '',
-      state: undefined,
-      city: undefined,
+      state:{id:'', name: ''},
+      city: {id:'', name: ''},
       lat: undefined,
       long: undefined
     },
