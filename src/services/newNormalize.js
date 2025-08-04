@@ -138,7 +138,7 @@ export const newNormalizeContract = (data) => {
     finalContract['comercial_info_accepted'] = data.comercial_info_accepted
   }
 
-  if (data.supply_point.attachments) {
+  if (data.supply_point.attachments && data.supply_point.attachments.length > 0) {
     // TODO: selfconsumption attachments must be inside attachment!!
     finalContract['attachments'] = []
     data.supply_point.attachments.forEach(attachment => {
