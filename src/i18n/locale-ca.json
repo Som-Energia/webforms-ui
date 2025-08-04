@@ -61,7 +61,7 @@
     "INCORRECT_PHONE": "El telèfon no és correcte",
     "MODIFY_POTTAR": "Petició de canvi de tarifa i/o potència",
     "POWER": "Potència",
-    "POWER_SUMMARY": "Potència:",
+    "POWER_SUMMARY": "Potència (kw):",
     "FARE": "Tarifa:",
     "FARE_SUMMARY": "Tarifa:",
     "CONTACT_PHONE": "Telèfon de contacte per accedir al comptador",
@@ -1040,5 +1040,7 @@
     "WHICH_POWER_HELPER_URL": "https://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito",
     "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentació per l'alta de subministrament",
     "ERROR_FIELD_LENGTH": "Longitud del camp incorrecta",
-    "NEW_CONTRACT_SUCCESS_DESC": "Rebràs un correu amb tota la informació sobre el teu nou contracte."
+    "NEW_CONTRACT_SUCCESS_DESC": "Rebràs un correu amb tota la informació sobre el teu nou contracte.",
+    "PURPOSE_MEMBER_ON": "FINALITATS: Gestionar la contractació del servei de la llum i les tasques administratives que se'n deriven; informar dels nostres productes i serveis energètics, inclús per mitjans electrònics.",
+    "RIGHTS_MEMBER_ON": "DRETS:  Pots oposar-te als nostres enviaments comercials i exercir el teu dret d'accés, rectificació, supressió, portabilitat de les teves dades i la limitació o oposició en el correu electrònic <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Més informació en la <a target=\"_blank\" href=\"https://www.somenergia.coop/ca/politica-de-privacitat\">Política de Privacitat</a>."
 }

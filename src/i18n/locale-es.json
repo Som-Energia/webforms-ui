@@ -71,7 +71,7 @@
     "INCORRECT_PHONE": "El teléfono no es correcto",
     "MODIFY_POTTAR": "Petición de cambio de tarifa y/o potencia",
     "POWER": "Potencia",
-    "POWER_SUMMARY": "Potencia:",
+    "POWER_SUMMARY": "Potencia (kw):",
     "FARE": "Tarifa",
     "FARE_SUMMARY": "Tarifa:",
     "CONTACT_PHONE": "Teléfono de contacto para acceder al contador",
@@ -925,5 +925,7 @@
     "WHICH_POWER_HELPER_URL": "https://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
     "UNKNOWN_DISTRI": "La distribuidora es desconocida enviar un correo a <a target=\"_blank\" href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a>.",
     "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentación para el alta de suministro",
-    "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato."
+    "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
+    "PURPOSE_MEMBER_ON": "FINALIDADES: Gestionar la contratación del servicio de la luz y las tareas administrativas que se derivan; informar de nuestros productos y servicios energéticos, incluso por medios electrónicos.",
+    "RIGHTS_MEMBER_ON": "DERECHOS:  Puede oponerse a nuestros envíos comerciales y ejercer su derecho de acceso, rectificación, supresión, portabilidad de sus datos y la limitación u oposición en el correo electrónico <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Más información en la <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Política de Privacidad.</a>"
 }

@@ -236,11 +236,13 @@ const MemberSummary = (props) => {
         <ReviewTable tableFields={reviewFields} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular" color="secondary.extraDark">
-          {t('PURPOSE_MEMBER')}
-          <br />
-          {t('RIGHTS_MEMBER')}
-        </Typography>
+        <Typography
+          variant="body.sm.regular"
+          color="secondary.extraDark"
+          dangerouslySetInnerHTML={{
+            __html: t('PURPOSE_MEMBER').concat('<br />' ,t('RIGHTS_MEMBER'))
+          }}
+        />
       </Grid>
 
       <Grid item xs={12}>

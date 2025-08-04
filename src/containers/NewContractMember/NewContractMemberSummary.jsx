@@ -438,6 +438,8 @@ const NewContractMemberSummary = (props) => {
     setFieldTouched(fieldName, true)
   }
  
+  console.log("values",values)
+
   return loading ? (
     <NewLoading />
   ) : (
@@ -525,11 +527,21 @@ const NewContractMemberSummary = (props) => {
         <Divider sx={{ my: 2 }} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular">
-          {t('PURPOSE')}
-          <br />
-          {t('RIGHTS')}
-        </Typography>
+        { values?.has_member == 'member-off'
+        ?
+          <Typography
+          variant="body.sm.regular"
+          dangerouslySetInnerHTML={{
+            __html: t('PURPOSE').concat('<br />' ,t('RIGHTS'))
+          }}
+          />
+        : <Typography
+          variant="body.sm.regular"
+          dangerouslySetInnerHTML={{
+            __html: t('PURPOSE_MEMBER_ON').concat('<br />' ,t('RIGHTS_MEMBER_ON'))
+          }}
+          />
+        }
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
