@@ -1,6 +1,6 @@
 {
   "name": "webforms-ui",
-  "version": "5.0.14",
+  "version": "5.0.15",
   "private": false,
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",

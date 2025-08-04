@@ -1,5 +1,9 @@
 # Change Log
 
+## 5.0.15 2025-08-04
+
+- Fixed attachments
+
 ## 5.0.14 2025-07-31
 
 - CUPS unknown distri error
