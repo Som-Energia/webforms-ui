@@ -500,7 +500,9 @@ const NewContractMemberForm = (props) => {
                           sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
                           dangerouslySetInnerHTML={{
                             __html: !error
-                              ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                              ? formikProps.values.has_member === 'member-on'
+                              ? t('NEW_CONTRACT_SUCCESS_DESC')
+                              : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
                               : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
                           }}
                         />

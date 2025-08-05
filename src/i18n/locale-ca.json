@@ -1039,5 +1039,6 @@
     "WHICH_POWER_HELPER": "Si no saps quina potència contractar revisa el següent <a target=\"_blank\" href={{url}}>article</a>.",
     "WHICH_POWER_HELPER_URL": "https://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito",
     "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentació per l'alta de subministrament",
-    "ERROR_FIELD_LENGTH": "Longitud del camp incorrecta"
+    "ERROR_FIELD_LENGTH": "Longitud del camp incorrecta",
+    "NEW_CONTRACT_SUCCESS_DESC": "Rebràs un correu amb tota la informació sobre el teu nou contracte."
 }
