@@ -134,7 +134,7 @@ export const newNormalizeContract = (data) => {
     finalContract['new_member_info']['address'] = normalizeAddress(data.address)
   }
 
-  if (data.has_light === 'light_off'){
+  if (data.has_light === 'light-off'){
     finalContract['contract_info']['phase'] = data.contract.phase === 'mono' ? '230':'3x230/400'
   }
 
