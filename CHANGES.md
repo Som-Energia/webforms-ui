@@ -3,6 +3,7 @@
 ## unreleased
 
 - Add state and city fields
+- Add new message when only contract
 
 ## 5.0.15 2025-08-04
 
