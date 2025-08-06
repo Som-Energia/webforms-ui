@@ -438,8 +438,6 @@ const NewContractMemberSummary = (props) => {
     setFieldTouched(fieldName, true)
   }
  
-  console.log("values",values)
-
   return loading ? (
     <NewLoading />
   ) : (
