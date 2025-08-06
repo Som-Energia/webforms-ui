@@ -71,7 +71,7 @@
     "INCORRECT_PHONE": "El teléfono no es correcto",
     "MODIFY_POTTAR": "Petición de cambio de tarifa y/o potencia",
     "POWER": "Potencia",
-    "POWER_SUMMARY": "Potencia (kw):",
+    "POWER_SUMMARY": "Potencia (kW):",
     "FARE": "Tarifa",
     "FARE_SUMMARY": "Tarifa:",
     "CONTACT_PHONE": "Teléfono de contacto para acceder al contador",
