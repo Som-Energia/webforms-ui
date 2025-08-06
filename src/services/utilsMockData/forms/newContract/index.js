@@ -28,7 +28,8 @@ const contract_info_a3_indexed = {
   is_indexed: true,
   powers: ['2100', '2500'],
   process: 'A3',
-  tariff: '2.0TD'
+  tariff: '2.0TD',
+  phase: "230"
 }
 
 const contract_info_c2_30TD = {
@@ -237,7 +238,8 @@ const A3_indexed = {
       power: {
         power1: '2.1',
         power2: '2.5'
-      }
+      },
+      phase: 'mono'
     },
     has_selfconsumption: 'selfconsumption-off',
     self_consumption: selfconsumption.empty,
