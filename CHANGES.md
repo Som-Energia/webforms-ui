@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Add state and city fields
+
 ## 5.0.15 2025-08-04
 
 - Fixed attachments

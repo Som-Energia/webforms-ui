@@ -76,7 +76,7 @@ const NewContractMemberSupplyPointData = (props) => {
       </Grid>
       <Grid item xs={12}>
         <DragDrop
-          fieldName={ values?.has_light === 'light-on'
+          fieldName={values?.has_light === 'light-on'
             ? t('ELECTRIC_BILL_UPLOAD')
             : t('MEMBER_DOCUMENTATION_UPLOAD')
           }

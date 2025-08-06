@@ -1,47 +1,68 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
-import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
-import InputAdornment from '@mui/material/InputAdornment'
-
+import SelectField from './SelectField'
 import { getProvincies, getMunicipis } from '../services/api'
 
-const StateCity = (props) => {
+
+const StateCityForm = (props) => {
   const { t } = useTranslation()
   const {
     stateName,
-    stateId,
-    stateInitial,
+    state,
     cityName,
-    cityId,
-    cityInitial,
-    stateError,
-    stateHelperText = '',
-    cityError,
-    cityHelperText = '',
-    onChange,
-    onBlur
+    city,
+    cities,
+    states,
+    handleStateChange,
+    handleCityChange,
   } = props
 
-  const [state, setState] = useState(stateInitial)
+  return (
+    <>
+      <Grid item xs={12} sm={6}>
+        <SelectField
+          label={t('STATE')}
+          value={state?.id}
+          fieldName={stateName}
+          options={states}
+          required={true}
+          disabled={!Object.keys(states).length}
+          onChange={handleStateChange}          
+         />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <SelectField
+          label={t('CITY')}
+          value={city?.id}
+          fieldName={cityName}
+          options={cities}
+          required={true}
+          disabled={!Object.keys(cities).length}
+          onChange={handleCityChange}  
+        />
+      </Grid>
+    </>
+  )
+
+}
+
+
+
+
+
+const StateCity = (props) => {
+
+  const {
+    state,
+    onChange,
+  } = props
+
+
   const [states, setStates] = useState([])
-  const [isLoadingStates, setIsLoadingStates] = useState(false)
-
-  const [city, setCity] = useState(cityInitial)
   const [cities, setCities] = useState([])
-  const [citiesNames, setCitiesNames] = useState([])
-  const [isLoadingCities, setIsLoadingCities] = useState(false)
 
   useEffect(() => {
-    setState(stateInitial)
-    setCity(cityInitial)
-  }, [stateInitial, cityInitial])
-
-  useEffect(() => {
-    setIsLoadingStates(true)
     getProvincies()
       .then((response) => {
         const provincies = {}
@@ -50,31 +71,25 @@ const StateCity = (props) => {
             provincies[id] = name
           })
         setStates(provincies)
-        setIsLoadingStates(false)
       })
       .catch((error) => {
         console.error(error)
-        setIsLoadingStates(false)
       })
   }, [])
 
   useEffect(() => {
     if (state && state?.id !== '') {
-      setIsLoadingCities(true)
       getMunicipis(state.id)
         .then((response) => {
-          const municipisNames = {}
+          const municipis = {}
           response?.data?.municipis &&
             response.data.municipis.forEach(({ id, name }) => {
-              municipisNames[id] = name
+              municipis[id] = name
             })
-          setCities(response?.data?.municipis)
-          setCitiesNames(municipisNames)
-          setIsLoadingCities(false)
+          setCities(municipis)
         })
         .catch((error) => {
           console.error(error)
-          setIsLoadingCities(false)
         })
     }
   }, [state])
@@ -85,11 +100,9 @@ const StateCity = (props) => {
       id: event.target.value,
       name: states[event.target.value]
     }
-    setState(newState)
-    setCity({ id: '' })
     onChange({
       state: newState,
-      city: { id: '' }
+      city: { id: '', name: '' }
     })
   }
 
@@ -97,82 +110,20 @@ const StateCity = (props) => {
     event.preventDefault()
     const newCity = {
       id: event.target.value,
-      name: citiesNames[event.target.value]
+      name: cities[event.target.value]
     }
-    setCity(newCity)
     onChange({
       state: state,
       city: newCity
     })
   }
 
+  const fullProps = {
+    ...props, states, cities, handleStateChange, handleCityChange
+  }
+
   return (
-    <>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          select
-          id={stateId}
-          name={stateName}
-          label={t('STATE')}
-          variant="outlined"
-          onChange={handleStateChange}
-          onBlur={onBlur}
-          required
-          fullWidth
-          disabled={!Object.keys(states).length}
-          value={state?.id}
-          error={!!stateError}
-          helperText={stateHelperText}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {isLoadingStates && <CircularProgress size={24} />}
-              </InputAdornment>
-            )
-          }}>
-          <MenuItem key="0" value="">
-            {t('STATE')}
-          </MenuItem>
-          {Object.keys(states).map((id) => (
-            <MenuItem key={id} value={id}>
-              {states[id]}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          select
-          id={cityId}
-          name={cityName}
-          label={t('CITY')}
-          variant="outlined"
-          onChange={handleCityChange}
-          onBlur={onBlur}
-          required
-          fullWidth
-          disabled={!Object.keys(cities).length}
-          value={city?.id}
-          error={!!cityError}
-          helperText={cityHelperText}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {isLoadingCities && <CircularProgress size={24} />}
-              </InputAdornment>
-            )
-          }}>
-          <MenuItem key="0" value="">
-            {t('CITY')}
-          </MenuItem>
-          {cities.map(({ id, name }) => (
-            <MenuItem key={id} value={id}>
-              {name}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-    </>
+    <StateCityForm {...fullProps} />
   )
 }
 
