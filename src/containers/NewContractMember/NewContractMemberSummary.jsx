@@ -276,6 +276,55 @@ const NewContractMemberSummary = (props) => {
     ]
   }
 
+  const powersDetailHigher = Object.values(values?.contract?.power).map((value, index) => {
+      return `P${index + 1}(${value})`
+    })
+
+  const powersDetail = values?.contract?.power_type === 'power-higher-15kw'
+    ? powersDetailHigher.join(',')
+    : `${t('PEAK')}(${values?.contract?.power['power1']}),${t('VALLEY')}(${values?.contract?.power['power2']})`
+
+  const technicalData = values?.has_light === 'light-on'
+    ? [
+        {
+          reviewLabel: t('TOLL_SUMMARY'),
+          reviewValue: t('CURRENT')
+        },
+        {
+          reviewLabel: t('FARE'),
+          reviewValue: isTariffIndexed
+            ? t('FARE_INDEXED')
+            : values?.contract?.power_type === 'power-higher-15kw'
+              ? t('FARE_PERIODS').concat(' ', '3.0TD')
+              : t('FARE_PERIODS').concat(' ', '2.0TD')
+        },
+        {
+          reviewLabel: t('POWER_SUMMARY'),
+          reviewValue: isTariffIndexed
+            ? t('CURRENT')
+            : powersDetail
+        },
+        {
+          reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
+        }
+      ]
+    : [
+        {
+          reviewLabel: t('FARE'),
+          reviewValue: isTariffIndexed
+            ? t('FARE_INDEXED')
+            : values?.contract?.power_type === 'power-higher-15kw'
+              ? t('FARE_PERIODS').concat(' ', '3.0TD')
+              : t('FARE_PERIODS').concat(' ', '2.0TD')
+        },
+        {
+          reviewLabel: t('POWER_SUMMARY'),
+          reviewValue: isTariffIndexed
+            ? t('CURRENT')
+            : powersDetail
+        }
+      ]
+
   const reviewFields = [
     [processType, reviewHolderData],
     [
@@ -312,27 +361,7 @@ const NewContractMemberSummary = (props) => {
       {
         icon: <ConfigIcon />,
         title: t('TECHNICAL_DATA_SUMMARY'),
-        field: [
-          {
-            reviewLabel: t('TOLL_SUMMARY'),
-            reviewValue: t('CURRENT')
-          },
-          {
-            reviewLabel: t('FARE'),
-            reviewValue: isTariffIndexed
-              ? t('FARE_INDEXED')
-              : values.contract.power_type === 'power-higher-15kw'
-                ? t('FARE_PERIODS').concat(' ', '3.0TD')
-                : t('FARE_PERIODS').concat(' ', '2.0TD')
-          },
-          {
-            reviewLabel: t('POWER_SUMMARY'),
-            reviewValue: t('CURRENT')
-          },
-          {
-            reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
-          }
-        ]
+        field: technicalData
       }
     ],
     [
@@ -496,11 +525,21 @@ const NewContractMemberSummary = (props) => {
         <Divider sx={{ my: 2 }} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body.sm.regular">
-          {t('PURPOSE')}
-          <br />
-          {t('RIGHTS')}
-        </Typography>
+        { values?.has_member == 'member-off'
+        ?
+          <Typography
+          variant="body.sm.regular"
+          dangerouslySetInnerHTML={{
+            __html: t('PURPOSE').concat('<br />' ,t('RIGHTS'))
+          }}
+          />
+        : <Typography
+          variant="body.sm.regular"
+          dangerouslySetInnerHTML={{
+            __html: t('PURPOSE_MEMBER_ON').concat('<br />' ,t('RIGHTS_MEMBER_ON'))
+          }}
+          />
+        }
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
