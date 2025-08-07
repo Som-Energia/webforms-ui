@@ -817,8 +817,8 @@
     "CURRENT": "Actual",
     "REVIEW_HOLDER_TITLE": "Titular",
     "NEW_MEMBER_SUMMARY_PROCESS": "Alta de persoa socia nova",
-    "PURPOSE": "FINALIDADE: Xestionar a contratación do servizo da luz e as tarefas administrativas que derivan dela; informar dos nosos produtos e servizos enerxéticos, incluído por medios electrónicos.",
-    "RIGHTS": "DEREITOS: Podes oporte aos nosos envíos comerciais e exercitar o teu dereito de acceso, rectificación, supresión e portabilidade dos datos, así como de limitación ou oposición, no correo electrónico somenergia@delegado.datos.com. Para máis información, consulta a política de privacidade.",
+    "PURPOSE": "FINALIDADES: Xestionar a alta como persoa socia da cooperativa e as tarefas administrativas que derivan dela; remitirlle comunicacións informativas relacionadas co noso ámbito (a título informativo e non limitado ás comunicacións relativas á Asemblea Xeral); xestionar a contratación da subministración da luz e as tarefas administrativas que dela deriven; informar dos nosos produtos e servizos enerxéticos, incluído por medios electrónicos.",
+    "RIGHTS": "DEREITOS: Pode oporse aos nosos envíos comerciais e exercitar o seu dereito de acceso, rectificación, supresión e portabilidade dos datos, así como de limitación ou oposición, no correo electrónico <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Para máis información, consulte a <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Política de Privacidade.</a>.",
     "REVIEW_PRICES_NOTICE_INDEXED": "Podes consultar o método de cálculo da tarifa indexada e todas as súas variábeis nesta <a target='_blank' href=\"{{url}\">ligazón</a>.",
     "REVIEW_PRICES_NOTICE_INDEXED_URL": "https://gl.support.somenergia.coop/article/1274-as-tarifas-indexadas",
     "NEW_GENERAL_TERMS": "Lin e acepto as condicións de contratación de Som Energia e, coa súa aceptación, comprométome ao pagamento do consumo ao prezo que resulte de aplicar a tarifa contratada.",
@@ -875,8 +875,8 @@
     "LIGHT_OFF_TERMS": "Custos para tramitar a alta da luz",
     "CONTRACTUAL_PACKAGE": "Paquete contractual",
     "SUMMARY_OTHER_CONCEPTS_BODY": "<li>Exceso de potencia ou enerxía reactiva: en determinadas condicións, segundo a normativa, a estes prezos haberá que lles aplicar unha recarga.</li><li>Alugueiro do contador: depende de cada caso, en función do que estabeleza a normativa.</li>",
-    "RIGHTS_MEMBER": "DEREITOS: Podes acceder, rectificar e suprimir os teus datos e exercitar outros dereitos escribindo a somenergia@delegado-datos.com.",
-    "PURPOSE_MEMBER": "FINALIDADE: Formalizar a túa alta como persoa socia e remitirche comunicacións informativas relacionadas co noso ámbito.",
+    "RIGHTS_MEMBER": "DEREITOS: Pode oporse aos nosos envíos comerciais e exercitar o seu dereito de acceso, rectificación, supresión e portabilidade dos seus datos, así como de limitación ou oposición, no correo electrónico <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Para máis información, consulte a <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Política de Privacidade.</a>",
+    "PURPOSE_MEMBER": "FINALIDADES: Xestionar a alta como persoa socia da cooperativa e as tarefas administrativas que derivan dela; remitirlle comunicacións informativas relacionadas co noso ámbito (a título informativo e non limitado ás comunicacións relativas á Asemblea Xeral) e informacións comerciais sobre os nosos produtos e servizos, incluído por medios electrónicos.",
     "EDIT_DATA": "Editar os datos",
     "HOLDER_CASE_PRESENTATION": "HOLDER_CASE_PRESENTATION",
     "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "GURB_CHECK_SPECIFIC_CONDITIONS_URL",
@@ -919,5 +919,7 @@
     "ERROR_FIELD_TOO_SHORT": "Campo demasiado curto",
     "MEMBER_DOCUMENTATION_UPLOAD": "Adxunta a documentación para o alta de subministración",
     "ERROR_FIELD_LENGTH": "Lonxitude do campo incorrecta",
-    "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda a información sobre o teu novo contrato."
+    "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda a información sobre o teu novo contrato.",
+    "PURPOSE_MEMBER_ON": "FINALIDADES: Xestionar a contratación do servizo da luz e as tarefas administrativas que derivan dela; informar dos nosos produtos e servizos enerxéticos, incluído por medios electrónicos.",
+    "RIGHTS_MEMBER_ON": "DEREITOS: Pode oporse aos nosos envíos comerciais e exercitar o seu dereito de acceso, rectificación, supresión e portabilidade dos seus datos, así como de limitación ou oposición, a través do enderezo electrónico <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Para máis información, consulte a <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Política de Privacidade.</a>"
 }
