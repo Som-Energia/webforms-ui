@@ -1,22 +1,11 @@
 import { useTranslation } from 'react-i18next'
-
-import { useContext, useEffect } from 'react'
-
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 import NifCif from '../../components/NifCif'
 
 const MemberIdentifier = (props) => {
-  const {
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    setFieldError,
-    setErrors,
-    setFieldTouched
-  } = props
+  
   const { t } = useTranslation()
 
   return (
