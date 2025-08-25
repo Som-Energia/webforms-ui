@@ -8,7 +8,7 @@ const newContractMemberSupplyPointValidations = Yup.object().shape({
   new_contract: Yup.boolean()
     .oneOf([true], 'CUPS_IN_PROCESS'),
   knowledge_of_distri: Yup.boolean()
-    .oneOf([true], 'UNKNOWN_DISTRI'),
+    .oneOf([true], 'UNKNOWN_DISTRIBUTOR'),
   has_light: Yup.string()
     .required('REQUIRED_FIELD')
     .oneOf(['light-on', 'light-off'])

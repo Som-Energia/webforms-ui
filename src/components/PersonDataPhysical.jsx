@@ -1,32 +1,27 @@
 import { useTranslation } from 'react-i18next'
 import { useRef, useEffect } from 'react'
-
 import Grid from '@mui/material/Grid'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
 
-import InputField from '../../components/InputField'
-import AddressField from '../../components/AddressField'
-import SelectField from '../../components/SelectField'
-import PhoneField from '../../components/PhoneField'
-import { useHandleChange } from '../../hooks/useHandleChange'
-import { useHandleBlur } from '../../hooks/useHandleBlur'
+import InputField from './InputField'
+import AddressField from './AddressField'
+import SelectField from './SelectField'
+import PhoneField from './PhoneField'
+import CalendarField from './CalendarField'
+import { useHandleChange } from '../hooks/useHandleChange'
+import { useHandleBlur } from '../hooks/useHandleBlur'
 
-const languages = {
-  es_ES: 'Español',
-  ca_ES: 'Català'
-}
-
-const LegalMemberPersonalData = (props) => {
+const PersonDataPhysical = (props) => {
   const {
+    entity = 'person',
     title = true,
     values,
     errors,
     touched,
     setFieldValue,
-    setFieldTouched,
+    setFieldTouched
   } = props
+
   const { i18n, t } = useTranslation()
 
   const didSetInitialLanguage = useRef(false)
@@ -34,10 +29,18 @@ const LegalMemberPersonalData = (props) => {
   useEffect(() => {
     if (!didSetInitialLanguage.current) {
       const newLanguage = `${i18n.language}_ES`
-      setFieldValue('new_member.language', newLanguage)
+      setFieldValue(`${entity}.language`, newLanguage)
       didSetInitialLanguage.current = true
     }
   }, [i18n.language, setFieldValue])
+
+  const handleChange = useHandleChange(setFieldValue)
+  const handleBlur = useHandleBlur(setFieldTouched)
+
+  const languages = {
+    es_ES: 'Español',
+    ca_ES: 'Català'
+  }
 
   const referral_source_options = {
     '': t('SELECT_OPTION'),
@@ -52,13 +55,18 @@ const LegalMemberPersonalData = (props) => {
     O9_ALTRES: t('HOW_MEET_US_OPTION_9')
   }
 
-  const handleChange = useHandleChange(setFieldValue)
-  const handleBlur = useHandleBlur(setFieldTouched)
+  const gender_options = {
+    '': t('SELECT_OPTION'),
+    female: t('GENDER_WOMAN'),
+    male: t('GENDER_MAN'),
+    gender_fluid: t('GENDER_FLUID'),
+    non_binary: t('GENDER_NON_BINARY'),
+    other: t('GENDER_OTHERS'),
+    prefer_not_to_say: t('GENDER_NOT_SAY')
+  }
 
-  const handleCheckboxLegalPerson = (event) => {
-    let value = event.target.checked
-    setFieldValue('new_member.legal_person_accepted', value)
-    setFieldTouched('new_member.legal_person_accepted', true)
+  function handleChangeBirthdate(value) {
+    setFieldValue(`${entity}.birthdate`, value)
   }
 
   return (
@@ -74,38 +82,53 @@ const LegalMemberPersonalData = (props) => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <InputField
-              name={'new_member.name'}
-              textFieldName={t('BUSINESS_NAME')}
+              name={`${entity}.name`}
+              textFieldName={t('NAME')}
               handleChange={handleChange}
               handleBlur={handleBlur}
-              touched={touched?.new_member?.name}
-              value={values?.new_member.name}
-              error={errors?.new_member?.name}
+              touched={touched[entity]?.name}
+              value={values[entity].name}
+              error={errors[entity]?.name}
               required={true}
             />
           </Grid>
           <Grid item xs={12} sm={4}>
             <InputField
-              name={'new_member.proxyname'}
-              textFieldName={t('PROXY_NAME')}
+              name={`${entity}.surname1`}
+              textFieldName={t('HOLDER_SURNAME1')}
               handleChange={handleChange}
               handleBlur={handleBlur}
-              touched={touched?.new_member?.proxyname}
-              value={values?.new_member.proxyname}
-              error={errors?.new_member?.proxyname}
+              touched={touched[entity]?.surname1}
+              value={values[entity]?.surname1}
+              error={errors[entity]?.surname1}
               required={true}
             />
           </Grid>
           <Grid item xs={12} sm={4}>
             <InputField
-              name={'new_member.proxynif'}
-              textFieldName={t('PROXY_NIF')}
+              name={`${entity}.surname2`}
+              textFieldName={t('HOLDER_SURNAME2')}
               handleChange={handleChange}
               handleBlur={handleBlur}
-              touched={touched?.new_member?.proxynif}
-              value={values?.new_member.proxynif}
-              error={errors?.new_member?.proxynif}
-              required={true}
+              touched={touched[entity]?.surname2}
+              value={values[entity]?.surname2}
+              error={errors[entity]?.surname2}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SelectField
+              label={t('GENDER')}
+              value={values[entity]?.gender}
+              fieldName={`${entity}.gender`}
+              options={gender_options}
+              {...props}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <CalendarField
+              textFieldName={t('BIRTHDATE')}
+              handleChange={handleChangeBirthdate}
+              value={values[entity]?.birthdate}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -117,32 +140,32 @@ const LegalMemberPersonalData = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
-              name="new_member.email"
+              name={`${entity}.email`}
               textFieldName={t('EMAIL')}
               handleChange={handleChange}
               handleBlur={handleBlur}
-              touched={touched?.new_member?.email}
-              value={values?.new_member.email}
-              error={errors?.new_member?.email}
+              touched={touched[entity]?.email}
+              value={values[entity]?.email}
+              error={errors[entity]?.email}
               required={true}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
-              name="new_member.email2"
+              name={`${entity}.email2`}
               textFieldName={t('HOLDER_EMAIL_2')}
               handleChange={handleChange}
               handleBlur={handleBlur}
-              touched={touched?.new_member?.email2}
-              value={values?.new_member.email2}
-              error={errors?.new_member?.email2}
+              touched={touched[entity]?.email2}
+              value={values[entity]?.email2}
+              error={errors[entity]?.email2}
               required={true}
               onPaste={(e) => e.preventDefault()}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <PhoneField
-              name={'new_member.phone'}
+              name={`${entity}.phone`}
               textFieldName={t('MEMBER_PHONE_LABEL')}
               values={values}
               errors={errors}
@@ -155,8 +178,8 @@ const LegalMemberPersonalData = (props) => {
           <Grid item xs={12} sm={6}>
             <SelectField
               label={t('HOW_MEET_US')}
-              value={values?.new_member?.referral_source}
-              fieldName="new_member.referral_source"
+              value={values[entity]?.referral_source}
+              fieldName={`${entity}.referral_source`}
               options={referral_source_options}
               {...props}
             />
@@ -165,35 +188,16 @@ const LegalMemberPersonalData = (props) => {
             <SelectField
               required={true}
               label={t('GURB_LANGUAGE_FIELD')}
-              value={values?.new_member?.language}
-              fieldName="new_member.language"
+              value={values[entity]?.language}
+              fieldName={`${entity}.language`}
               options={languages}
               {...props}
             />
           </Grid>
         </Grid>
-        
-      </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              data-cy="legal_person"
-              checked={values?.new_member.legal_person_accepted}
-              onChange={handleCheckboxLegalPerson}
-            />
-          }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('LEGAL_PERSON_TITLE_LABEL')
-              }}
-            />
-          }
-        />
       </Grid>
     </Grid>
   )
 }
 
-export default LegalMemberPersonalData
+export default PersonDataPhysical

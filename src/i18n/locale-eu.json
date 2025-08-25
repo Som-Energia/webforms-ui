@@ -923,6 +923,5 @@
     "WHICH_PEAK": "Adierazi puntako unerako zenbateko potentzia kontratatu nahi duzun",
     "WHICH_VALLEY": "Adierazi sakonunerako zenbateko potentzia kontratatu nahi duzun",
     "WHICH_POWER_HELPER": "Ez badakizu zenbateko potentzia kontratatu, kontsultatu <a target=\"_blank\" href={{url}}>artikulu hau</a>.",
-    "WHICH_POWER_HELPER_URL": "https://eu.support.somenergia.coop/article/368-nola-jakin-zein-potentzia-behar-dudan?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
-    "UNKNOWN_DISTRI": "Banatzailea ezezaguna da. Bidali mezu bat <a target=\"_blank\" href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> helbidera."
+    "WHICH_POWER_HELPER_URL": "https://eu.support.somenergia.coop/article/368-nola-jakin-zein-potentzia-behar-dudan?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara"
 }

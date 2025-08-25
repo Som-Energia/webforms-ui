@@ -923,7 +923,6 @@
     "WHICH_POWER": "Indica que potencia quieres contratar",
     "WHICH_POWER_HELPER": "Si no sabes qué potencia contratar revisa el siguiente <a target=\"_blank\" href={{url}}>artículo</a>.",
     "WHICH_POWER_HELPER_URL": "https://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
-    "UNKNOWN_DISTRI": "La distribuidora es desconocida enviar un correo a <a target=\"_blank\" href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a>.",
     "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentación para el alta de suministro",
     "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
     "PURPOSE_MEMBER_ON": "FINALIDADES: Gestionar la contratación del servicio de la luz y las tareas administrativas que se derivan; informar de nuestros productos y servicios energéticos, incluso por medios electrónicos.",
