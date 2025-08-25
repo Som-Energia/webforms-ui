@@ -17,7 +17,6 @@ const ApadrinatingDetails = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setErrors,
     setFieldTouched
   } = props
 

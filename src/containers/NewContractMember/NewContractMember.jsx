@@ -109,9 +109,7 @@ const NewContractMemberForm = (props) => {
       bloc: '',
       postal_code: '',
       state: {id:'', name: ''},
-      city: {id:'', name: ''},
-      lat: undefined,
-      long: undefined
+      city: {id:'', name: ''}
     },
     address: {
       street: '',
@@ -122,9 +120,7 @@ const NewContractMemberForm = (props) => {
       bloc: '',
       postal_code: '',
       state:{id:'', name: ''},
-      city: {id:'', name: ''},
-      lat: undefined,
-      long: undefined
+      city: {id:'', name: ''}
     },
     member: {
       number: '',
@@ -132,9 +128,7 @@ const NewContractMemberForm = (props) => {
     },
     new_member: {
       nif: '',
-      become_member: false,
       person_type: '',
-      proxynif_valid: false,
       proxynif: '',
       proxyname: '',
       name: '',
