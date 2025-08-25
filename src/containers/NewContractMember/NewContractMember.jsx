@@ -79,6 +79,19 @@ const NewContractMemberForm = (props) => {
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
+  const openPopup = () => {
+    alert("This is a popup 🤙")
+  }
+
+  // Notes: we could add a counter and a conditional to trigger this
+  // only a certain number of times.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      openPopup() // TODO: change this for the right popup
+    }, 60000) // ms
+    return () => clearTimeout(timer)
+  }, [activeStep])
+
   useEffect(() => {
     if (language && i18n.language !== language) {
       i18n.changeLanguage(language)
