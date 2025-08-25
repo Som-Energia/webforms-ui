@@ -1,8 +1,11 @@
 # Change Log
 
-## Unreleased
+## 5.0.18 2025-08-25
 
 - Generalize NifCif component
+- Generalitze Juridic and Physic PersonalData screens
+- Clean new member and new contract initValues
+- Clean more unused code
 
 ## 5.0.16 2025-08-07
 
