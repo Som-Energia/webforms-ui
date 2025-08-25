@@ -57,7 +57,6 @@ const NewMemberForm = (props) => {
   }, [language, i18n])
 
   const initialValues = {
-    is_client: undefined,
     address: {
       street: '',
       number: '',
@@ -67,14 +66,11 @@ const NewMemberForm = (props) => {
       bloc: '',
       postal_code: '',
       state:{id:'', name: ''},
-      city: {id:'', name: ''},
-      lat: undefined,
-      long: undefined
+      city: {id:'', name: ''}
     },
     new_member: {
       nif: '',
-      become_member: false,
-      is_physical: undefined,
+      person_type: '',
       proxynif_valid: false,
       proxynif: '',
       proxyname: '',
@@ -236,7 +232,6 @@ const NewMemberForm = (props) => {
                           }}
                         />
                       </Result>
-
                     ) : (
                       getStep(formikProps)
                     )}

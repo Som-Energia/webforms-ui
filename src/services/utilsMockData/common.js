@@ -62,7 +62,6 @@ export const selfconsumption = {
     installation_type: '01',
     aux_services: true,
     technology: 'b11'
-    // attachments: [] // TODO: check this
   },
   empty: {
     cau_error: false,
