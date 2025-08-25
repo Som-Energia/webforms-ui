@@ -27,7 +27,7 @@ const MemberIdentifier = (props) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <NifCif {...props} />
+        <NifCif entity="new_member" {...props} />
       </Grid>
       <Grid item xs={12}>
         <Typography
