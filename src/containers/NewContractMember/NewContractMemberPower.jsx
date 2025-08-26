@@ -34,7 +34,7 @@ const NewContractMemberPower = (props) => {
             </Typography>
         </Grid>
         { values?.has_light === 'light-off' && (
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <SelectField
               label={t('TIPUS_INSTALLACIO_CONTRACTACIO')}
               value={values?.contract?.phase}
