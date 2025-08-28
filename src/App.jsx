@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useMemo, useEffect } from 'react'
+import React, { lazy, Suspense, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { ThemeProvider } from '@mui/material/styles'

@@ -54,8 +54,13 @@ import NewLoading from '../../components/NewLoading'
 
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
+import { useSearchParams } from 'react-router-dom'
 
 const NewContractMemberForm = (props) => {
+  
+  const [ searchParams ] = useSearchParams()
+  const utm = searchParams.get("utm");
+
   const { i18n, t } = useTranslation()
   const { language} = useParams()
   const [url, setUrl] = useState('')
@@ -309,7 +314,9 @@ const NewContractMemberForm = (props) => {
   }
 
   const trackSucces = () => {
-    trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    const successName = 'send-new-contract-member-ok'
+    const name  = utm ? successName + '-' + utm :  successName
+    trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: name })
   }
 
   const handlePost = async (values) => {
@@ -345,7 +352,7 @@ const NewContractMemberForm = (props) => {
   const getStep = (props, sendTrackEvent) => {
     const { values } = props
 
-    const trackProps = {...props,sendTrackEvent}
+    const trackProps = {...props,sendTrackEvent,utm}
 
     if (values?.has_member == 'member-off') {
       if (activeStep === 1) {
@@ -467,6 +474,7 @@ const NewContractMemberForm = (props) => {
               {activeStep == 0 ? (
                 <NewContractMemberQuestion
                   formikProps={formikProps}
+                  utm={utm}
                   sendTrackEvent={sendTrackEvent}
                   nextStep={nextStep}
                   setValidationSchemaAndSteps={setValidationSchemaAndSteps}

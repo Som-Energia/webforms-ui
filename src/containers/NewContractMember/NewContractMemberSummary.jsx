@@ -43,7 +43,8 @@ const NewContractMemberSummary = (props) => {
     values,
     setFieldValue,
     setFieldTouched,
-    sendTrackEvent
+    sendTrackEvent,
+    utm
   } = props
 
   const { t } = useTranslation()
