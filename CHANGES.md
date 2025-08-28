@@ -1,5 +1,9 @@
 # Change Log
 
+## 5.0.19 2025-08-28
+
+- Add phase field for new contracts
+
 ## 5.0.18 2025-08-25
 
 - Generalize NifCif component
