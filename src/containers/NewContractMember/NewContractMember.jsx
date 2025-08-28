@@ -158,7 +158,8 @@ const NewContractMemberForm = (props) => {
         power4: '',
         power5: '',
         power6: ''
-      }
+      },
+      phase: 'mono'
     },
     has_selfconsumption: undefined,
     self_consumption: {
@@ -348,6 +349,7 @@ const NewContractMemberForm = (props) => {
     const trackProps = {...props,sendTrackEvent}
 
     if (values?.has_member == 'member-off') {
+
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -378,6 +380,7 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSummary {...trackProps} />
       }
     } else {
+
       if (activeStep === 1) {
         setHasAlert(false)
         return <ApadrinatingDetails {...props} />
