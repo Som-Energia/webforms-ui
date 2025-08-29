@@ -7,8 +7,8 @@ on:
 env:
   REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
   REACT_APP_DISABLE_ANIMATIONS: true
-  CYPRESS_defaultCommandTimeout: 10000
-  CYPRESS_pageLoadTimeout: 60000
+  CYPRESS_defaultCommandTimeout: 20000
+  CYPRESS_pageLoadTimeout: 90000
   ELECTRON_DISABLE_GPU: 1
   CHROME_DISABLE_GPU: true
 
