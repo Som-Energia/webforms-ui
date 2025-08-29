@@ -46,7 +46,10 @@ jobs:
           wait-on-timeout: 60
           browser: chrome
           headed: true
-          config: baseUrl=http://localhost:3000
+          working-directory: ./
+          config:
+            baseUrl=http://localhost:3000
+
 
       - name: Notify
         uses: Som-Energia/ghactions-notify@main
