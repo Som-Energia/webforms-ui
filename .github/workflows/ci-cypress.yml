@@ -44,7 +44,7 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           browser: chrome
-          headless: true
+          headed: false
           config: baseUrl=http://localhost:3000
 
       - name: Notify
