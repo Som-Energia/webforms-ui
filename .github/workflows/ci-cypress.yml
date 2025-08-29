@@ -9,12 +9,12 @@ env:
   REACT_APP_DISABLE_ANIMATIONS: true
   CYPRESS_defaultCommandTimeout: 10000
   CYPRESS_pageLoadTimeout: 60000
+  ELECTRON_DISABLE_GPU: 1
+  CHROME_DISABLE_GPU: true
 
 jobs:
   cypress-tests:
     runs-on: ubuntu-latest
-    container:
-      image: cypress/included:12.17.4
     strategy:
       matrix:
         node-version:
@@ -32,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install NPM dependencies
-        run: npm install && npm install coveralls --save-dev
+        run: npm ci && npm install coveralls --save-dev
 
       - name: Mark repo as safe
         run: git config --global --add safe.directory $GITHUB_WORKSPACE
