@@ -29,10 +29,13 @@ jobs:
       - name: Install NPM dependencies
         run: npm install && npm install coveralls --save-dev
 
+      - name: Mark repo as safe
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm start
+          start: npm start-ci
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 10
           command: npm run cypress-ci
