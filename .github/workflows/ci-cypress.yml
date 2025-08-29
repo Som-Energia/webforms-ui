@@ -3,7 +3,7 @@ name: CI - Cypress tests
 
 on:
   push:
-  pull_request:
+
 env:
   REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 
