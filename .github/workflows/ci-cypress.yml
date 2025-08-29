@@ -46,7 +46,7 @@ jobs:
           browser: chrome
           parallel: true
           record: false
-          command: npm run cypress-ci
+          headless: true
           config: baseUrl=http://localhost:3000
 
       - name: Notify
