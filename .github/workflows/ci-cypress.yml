@@ -30,7 +30,12 @@ jobs:
         run: npm install && npm install coveralls --save-dev
 
       - name: Run Cypress tests
-        run: npm run cypress-ci
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 10
+          command: npm run cypress-ci
 
       - name: Notify
         uses: Som-Energia/ghactions-notify@main
