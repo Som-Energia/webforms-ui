@@ -41,6 +41,7 @@ jobs:
           start: npm run start-ci
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
+          browser: chrome
           command: npm run cypress-ci
 
       - name: Notify
