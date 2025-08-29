@@ -1,0 +1,39 @@
+# .github/workflows/ci-cypress.yml
+name: CI - Cypress tests
+
+on:
+  push:
+  pull_request:
+env:
+  REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/included:12.17.4
+    strategy:
+      matrix:
+        node-version:
+          - '20'
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install NPM dependencies
+        run: npm install && npm install coveralls --save-dev
+
+      - name: Run Cypress tests
+        run: npm run cypress-ci
+
+      - name: Notify
+        uses: Som-Energia/ghactions-notify@main
+        if: always()
+        with:
+          webhook: ${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
