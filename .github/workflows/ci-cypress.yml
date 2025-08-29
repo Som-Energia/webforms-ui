@@ -44,7 +44,10 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           browser: chrome
+          parallel: true
+          record: false
           command: npm run cypress-ci
+          config: baseUrl=http://localhost:3000
 
       - name: Notify
         uses: Som-Energia/ghactions-notify@main
