@@ -4,6 +4,7 @@
   "private": false,
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
+    "start-ci": "export VITE_APP_VERSION=$(git describe --tags) && vite --host",
     "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov && ./scripts/rename-assets-ov.sh",
     "build:wp": "npm run build -- --mode=wp",
