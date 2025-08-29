@@ -14,7 +14,7 @@
     "test-ci": "TZ=Europe/Madrid vitest run",
     "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
     "cypress": "TZ=Europe/Madrid cypress open",
-    "cypress-ci": "TZ=Europe/Madrid cypress run --browser electron --headless",
+    "cypress-ci": "TZ=Europe/Madrid cypress run --browser chrome --headless",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
     "i18n-lint": "./scripts/lint-i18n.sh",
