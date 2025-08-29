@@ -33,13 +33,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
-          #make ui-deploy
           npm install
           npm install coveralls --save-dev
 
       - name: Unit tests
         run: |
-          #make testsa
           npm run test
 
       - name: Notify
