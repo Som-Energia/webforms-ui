@@ -44,8 +44,6 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           browser: chrome
-          parallel: true
-          record: false
           headless: true
           config: baseUrl=http://localhost:3000
 
