@@ -6,6 +6,7 @@ on:
 
 env:
   REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+  REACT_APP_DISABLE_ANIMATIONS: true
 
 jobs:
   cypress-tests:
@@ -20,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -37,7 +40,7 @@ jobs:
         with:
           start: npm run start-ci
           wait-on: 'http://localhost:3000'
-          wait-on-timeout: 10
+          wait-on-timeout: 60
           command: npm run cypress-ci
 
       - name: Notify
