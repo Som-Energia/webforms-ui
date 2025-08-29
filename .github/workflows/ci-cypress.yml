@@ -37,6 +37,11 @@ jobs:
       - name: Mark repo as safe
         run: git config --global --add safe.directory $GITHUB_WORKSPACE
 
+      - name: List Cypress fixtures
+        run: |
+          echo "Listing fixtures:"
+          ls -lR cypress/fixtures
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
