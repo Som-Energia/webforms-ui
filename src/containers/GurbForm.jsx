@@ -233,24 +233,6 @@ const GurbForm = (props) => {
           stepperActiveStep={GURB_REQUIREMENTS_STEP}
         />
       )
-    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
-      return (
-        <NewMember
-          {...props}
-          activeStep={NEW_MEMBER_STEP.indexOf(activeStep)}
-          stepperSteps={GURB_FORM_STEPS}
-          stepperActiveStep={GURB_NEW_MEMBER_STEP}
-        />
-      )
-    } else if (CONTRACT_STEPS.includes(activeStep)) {
-      return (
-        <Contract
-          {...props}
-          activeStep={CONTRACT_STEPS.indexOf(activeStep)}
-          stepperSteps={GURB_FORM_STEPS}
-          stepperActiveStep={GURB_NEW_MEMBER_STEP}
-        />
-      )
     } else if (GURB_STEPS.includes(activeStep)) {
       return (
         <Gurb
