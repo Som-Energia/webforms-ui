@@ -8,8 +8,6 @@ import Grid from '@mui/material/Grid'
 
 import SupplyPoint from './Gurb/SupplyPoint'
 import Requirements from './Gurb/Requirements'
-import NewMember from './Gurb/NewMember'
-import Contract from './Gurb/Contract'
 import Gurb from './Gurb/Gurb'
 
 import PrevButton from '../components/NewButtons/PrevButton'
@@ -52,11 +50,11 @@ import {
   GURB_REQUIREMENTS_STEP,
 } from '../services/steps'
 
-const MAX_STEP_NUMBER = 19
+const MAX_STEP_NUMBER = 7
 const REQUIREMENTS_STEPS = [1, 2, 3, 4]
-const NEW_MEMBER_STEP = [5, 6, 7]
-const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
-const GURB_STEPS = [17, 18, 19]
+//const NEW_MEMBER_STEP = [5, 6, 7]
+// const CONTRACT_STEPS = [8, 9, 10, 11, 12, 13, 14, 15, 16]
+const GURB_STEPS = [5, 6, 7]
 const NEW_MEMBER_COST = 100
 
 const GurbForm = (props) => {
@@ -191,8 +189,6 @@ const GurbForm = (props) => {
       } else if (formikProps.values.has_member === 'apadrinating') {
         next = activeStep + 3
       }
-    } else if (NEW_MEMBER_STEP.includes(activeStep)) {
-      next = 8
     }
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
