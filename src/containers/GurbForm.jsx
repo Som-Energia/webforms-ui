@@ -277,11 +277,13 @@ const GurbForm = (props) => {
   }, [url])
 
   return (
+    console.log('activeStep:', activeStep),
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        validationSchema={validationSchemas[activeStep]}
+        // validationSchema={validationSchemas[activeStep]}
+        validationSchmema={null}
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) => {
