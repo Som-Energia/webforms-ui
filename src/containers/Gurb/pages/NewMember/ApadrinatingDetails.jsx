@@ -60,7 +60,9 @@ const ApadrinatingDetails = (props) => {
 
   const handleInputMemberNumber = (event) => {
     let match = event.target.value.replace(/[^0-9]/g, '')
-    setFieldValue('member.number', match)
+    if (values.member.number !== match) {
+      setFieldValue('member.number', match)
+    }
   }
   const handleInputMemberNumberBlur = () => {
     setFieldTouched('member.number', true)

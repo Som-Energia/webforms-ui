@@ -8,7 +8,7 @@ const linkMemberValidations = Yup.object().shape({
       .matches(/^([0-9]{8}[A-Z])|([A-Z][0-9]{7}[A-Z])|([A-Z][0-9]{8})$/, 'INVALID_NIF'),
     number: Yup.string()
       .required('ERROR_REQUIRED_FIELD')
-      .matches(/(^[0-9])/, 'INVALID_NUMBER')
+      .matches(/(^[0-9]+$)/, 'INVALID_NUMBER')
   })
 })
 
