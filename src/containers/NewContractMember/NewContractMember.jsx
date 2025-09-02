@@ -80,7 +80,16 @@ const NewContractMemberForm = (props) => {
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
   const openPopup = () => {
-    alert("This is a popup 🤙")
+    const root = document.getElementById("root")
+    const fnString = root.getAttribute("data-popup-function")
+    if (fnString) {
+      try {
+        const fn = eval(fnString)
+        fn()
+      } catch (err) {
+        console.error("Error ejecutando función de data-function:", err)
+      }
+    }
   }
 
   // Notes: we could add a counter and a conditional to trigger this
