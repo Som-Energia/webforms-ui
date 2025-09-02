@@ -12,23 +12,39 @@ const SelectField = (props) => {
     fieldName,
     value,
     options,
-    values,
-    errors,
-    touched,
     setFieldValue,
     onChange,
-    setFieldError,
-    setFieldTouched,
-    setErrors,
     disabled = false
   } = props
 
   const handleChange = (event) => {
-    if(setFieldValue){
+    if (setFieldValue) {
       setFieldValue(fieldName, event.target.value)
     }
-    else{
+    else {
       onChange(event)
+    }
+  }
+
+  const getSelectData = () => {
+    if (Array.isArray(options)) {
+      return (
+        options.map((option) => {
+          return (
+          <MenuItem id={`${fieldName}-${option.id}`} key={option.id} value={option.id}>
+            {option.name}
+          </MenuItem>
+        )})
+      )
+    }
+    else {
+      return (
+        Object.keys(options).map((id) => (
+          <MenuItem id={`${fieldName}-${id}`} key={id} value={id}>
+            {options[id]}
+          </MenuItem>
+        ))
+      )
     }
   }
 
@@ -59,11 +75,7 @@ const SelectField = (props) => {
           }}
           onChange={handleChange}>
           <MenuItem sx={{ display: 'none' }} label="None" value="" />
-          {Object.keys(options).map((id) => (
-            <MenuItem id={`${fieldName}-${id}`} key={id} value={id}>
-              {options[id]}
-            </MenuItem>
-          ))}
+          {getSelectData()}
         </Select>
       </Grid>
     </Grid>

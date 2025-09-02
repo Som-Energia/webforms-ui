@@ -28,8 +28,8 @@ const StateCityForm = (props) => {
           options={states}
           required={true}
           disabled={!Object.keys(states).length}
-          onChange={handleStateChange}          
-         />
+          onChange={handleStateChange}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <SelectField
@@ -39,16 +39,13 @@ const StateCityForm = (props) => {
           options={cities}
           required={true}
           disabled={!Object.keys(cities).length}
-          onChange={handleCityChange}  
+          onChange={handleCityChange}
         />
       </Grid>
     </>
   )
 
 }
-
-
-
 
 
 const StateCity = (props) => {
@@ -62,15 +59,22 @@ const StateCity = (props) => {
   const [states, setStates] = useState([])
   const [cities, setCities] = useState([])
 
+  const sortData = (a,b) => {
+   if( a.name < b.name ) return -1;
+   if( a.name > b.name ) return 1;
+   return 0;
+  }
+
+
   useEffect(() => {
     getProvincies()
       .then((response) => {
-        const provincies = {}
+        const provincies = []
         response?.data?.provincies &&
           response.data.provincies.forEach(({ id, name }) => {
-            provincies[id] = name
+            provincies.push({ id: id, name: name })
           })
-        setStates(provincies)
+        setStates(provincies.sort(sortData))
       })
       .catch((error) => {
         console.error(error)
@@ -81,12 +85,12 @@ const StateCity = (props) => {
     if (state && state?.id !== '') {
       getMunicipis(state.id)
         .then((response) => {
-          const municipis = {}
+          const municipis = []
           response?.data?.municipis &&
             response.data.municipis.forEach(({ id, name }) => {
-              municipis[id] = name
+              municipis.push({ id: id, name: name })
             })
-          setCities(municipis)
+          setCities(municipis.sort(sortData))
         })
         .catch((error) => {
           console.error(error)
