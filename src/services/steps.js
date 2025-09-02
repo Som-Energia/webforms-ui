@@ -15,6 +15,11 @@ export const GURB_FORM_REQUIREMENTS_STEPS = [
   GURB_REQUIREMENTS_STEP
 ]
 
+// GURB form join steps
+export const GURB_FORM_JOIN_STEPS = [
+  GURB_FINAL_STEP
+]
+
 // New Contract with Member form steps
 export const CONTRACT_MEMBER_FORM_STEPS = [
   NEW_MEMBER_STEP,

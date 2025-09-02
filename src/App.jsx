@@ -47,6 +47,7 @@ const App = (props) => {
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
   const GurbFormValidations = lazy(() => import('./containers/GurbFormValidations'))
+  const GurbFormJoin = lazy(() => import('./containers/GurbFormJoin'))
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
@@ -461,7 +462,7 @@ const App = (props) => {
                           <GurbErrorContextProvider>
                             <GurbLoadingContextProvider>
                               <SummaryContextProvider>
-                                <GurbForm {...props} />
+                                <GurbFormJoin {...props} />
                               </SummaryContextProvider>
                             </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
