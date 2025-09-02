@@ -93,7 +93,7 @@ export const newNormalizeContract = (data) => {
       tariff:
         data.contract.power_type == 'power-lower-15kw' ? '2.0TD' : '3.0TD',
       is_indexed: data.contract.tariff_mode == 'indexed',
-      powers: powers.map((power) => (+power * 1000).toString()),
+      powers: powers.map((power) => String(Math.round(power * 1000))),
       cups_address: normalizeAddress(data.supply_point_address),
       cnae: data.supply_point.cnae.toString(),
       process: process
