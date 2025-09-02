@@ -38,12 +38,13 @@ const Contract = (props) => {
     else if (activeStep === 1) {
       return <ContractReview {...props} />
     }
-    else {
+    else if (activeStep === 2) {
       return <Payment {...props} />
     }
   }
 
   return (
+    console.log('Active Step in gurb:', activeStep),
     <>
       <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
       <SomGurbStepper steps={stepperSteps} activeStep={stepperActiveStep} />

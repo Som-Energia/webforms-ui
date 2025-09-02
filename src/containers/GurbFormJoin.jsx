@@ -6,8 +6,6 @@ import { Formik } from 'formik'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
-import SupplyPoint from './Gurb/SupplyPoint'
-import Requirements from './Gurb/Requirements'
 import Gurb from './Gurb/Gurb'
 
 import PrevButton from '../components/NewButtons/PrevButton'
@@ -45,16 +43,13 @@ import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
 import {
   GURB_FINAL_STEP,
-  GURB_FORM_STEPS,
-  GURB_REQUIREMENTS_STEP,
+  GURB_FORM_JOIN_STEPS,
 } from '../services/steps'
 
-const MAX_STEP_NUMBER = 7
-const REQUIREMENTS_STEPS = [1, 2, 3, 4]
-const GURB_STEPS = [5, 6, 7]
+const MAX_STEP_NUMBER = 2
 const NEW_MEMBER_COST = 100
 
-const GurbForm = (props) => {
+const GurbFormJoin = (props) => {
   const { i18n, t } = useTranslation()
   const { language, id } = useParams()
   const [url, setUrl] = useState('')
@@ -213,52 +208,19 @@ const GurbForm = (props) => {
       })
   }
   const getStep = (props) => {
-    if (activeStep === 0) {
-      return <SupplyPoint {...props} />
-    } else if (REQUIREMENTS_STEPS.includes(activeStep)) {
-      return (
-        <Requirements
-          {...props}
-          activeStep={REQUIREMENTS_STEPS.indexOf(activeStep)}
-          stepperSteps={GURB_FORM_STEPS}
-          stepperActiveStep={GURB_REQUIREMENTS_STEP}
-        />
-      )
-    } else if (GURB_STEPS.includes(activeStep)) {
       return (
         <Gurb
           {...props}
-          activeStep={GURB_STEPS.indexOf(activeStep)}
-          stepperSteps={GURB_FORM_STEPS}
+          activeStep={activeStep}
+          stepperSteps={GURB_FORM_JOIN_STEPS}
           stepperActiveStep={GURB_FINAL_STEP}
         />
       )
-    } else {
-      return <></>
-    }
-  }
-
-  const NewMemberResult = (props) => {
-    if (formikRef.current.values.new_member.become_member) {
-      setError(true)
-      setErrorInfo({
-        main_text: t('GURB_WELCOME_NEW_MEMBER_MAIN_TEXT'),
-        seconday_text: t('GURB_WELCOME_NEW_MEMBER_SECONDARY_TEXT'),
-        link_text: t('GURB_WELCOME_NEW_MEMBER_LINK_TEXT'),
-        error_type: 'success',
-        clean_field: () => {
-          activeStep
-        }
-      })
-    }
   }
 
   const formikRef = useRef(null)
   useEffect(() => {
     formikRef.current.validateForm()
-    if (activeStep === 8) {
-      NewMemberResult()
-    }
   }, [activeStep])
 
   useEffect(() => {
@@ -268,6 +230,7 @@ const GurbForm = (props) => {
   }, [url])
 
   return (
+    console.log('Active Step:', activeStep),
     <Container maxWidth="md" disableGutters={true} sx={{ padding: '1rem' }}>
       <Formik
         innerRef={formikRef}
@@ -347,4 +310,4 @@ const GurbForm = (props) => {
   )
 }
 
-export default GurbForm
+export default GurbFormJoin
