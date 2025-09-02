@@ -46,6 +46,7 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
+  const GurbFormValidations = lazy(() => import('./containers/GurbFormValidations'))
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
@@ -427,7 +428,35 @@ const App = (props) => {
                     />
                     {props?.isGurbEnabled && (
                       <Route
+                        path="/:language/gurb/:id/deprecated/"
+                        element={
+                          <GurbErrorContextProvider>
+                            <GurbLoadingContextProvider>
+                              <SummaryContextProvider>
+                                <GurbForm {...props} />
+                              </SummaryContextProvider>
+                            </GurbLoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        }
+                      />
+                    )}
+                    {props?.isGurbEnabled && (
+                      <Route
                         path="/:language/gurb/:id/validations/"
+                        element={
+                          <GurbErrorContextProvider>
+                            <GurbLoadingContextProvider>
+                              <SummaryContextProvider>
+                                <GurbFormValidations {...props} />
+                              </SummaryContextProvider>
+                            </GurbLoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        }
+                      />
+                    )}
+                    {props?.isGurbEnabled && (
+                      <Route
+                        path="/:language/gurb/:id/join/"
                         element={
                           <GurbErrorContextProvider>
                             <GurbLoadingContextProvider>
