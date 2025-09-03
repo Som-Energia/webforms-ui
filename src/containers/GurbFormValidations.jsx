@@ -47,8 +47,8 @@ import {
   GURB_REQUIREMENTS_STEP,
 } from '../services/steps'
 
-const MAX_STEP_NUMBER = 4
-const REQUIREMENTS_STEPS = [1, 2, 3, 4]
+const MAX_STEP_NUMBER = 3
+const REQUIREMENTS_STEPS = [1, 2, 3]
 
 const GurbFormValidations = (props) => {
   const { i18n, t } = useTranslation()
@@ -197,20 +197,14 @@ const GurbFormValidations = (props) => {
   }
 
   const getStep = (props) => {
-    if (activeStep === 0) {
-      return <SupplyPoint {...props} />
-    } else if (REQUIREMENTS_STEPS.includes(activeStep)) {
-      return (
-        <Requirements
-          {...props}
-          activeStep={REQUIREMENTS_STEPS.indexOf(activeStep)}
-          stepperSteps={GURB_FORM_REQUIREMENTS_STEPS}
-          stepperActiveStep={GURB_REQUIREMENTS_STEP}
-        />
-      )
-    } else {
-      return <></>
-    }
+    return (
+      <Requirements
+        {...props}
+        activeStep={activeStep}
+        stepperSteps={GURB_REQUIREMENTS_STEP}
+        stepperActiveStep={GURB_REQUIREMENTS_STEP}
+      />
+    )
   }
 
   const formikRef = useRef(null)
