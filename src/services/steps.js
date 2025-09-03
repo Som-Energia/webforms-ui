@@ -28,10 +28,10 @@ export const CONTRACT_MEMBER_FORM_STEPS = [
 
 // Substeps
 export const GURB_REQUIREMENTS_SUBSTEPS = {
-  SUPPLY_POINT: 0,
-  SUPPLY_ADDRESS: 1,
-  LIGHT_QUESTION: 2,
-  SELFCONSUMPTION: 3,
+  CUPS: 0,
+  Adreça: 1,
+  'Alta LLum': 2,
+  Autoconsum: 3,
 }
 
 export const GURB_FORM_SUBSTEPS = {
