@@ -46,7 +46,7 @@ import {
   GURB_FORM_JOIN_STEPS,
 } from '../services/steps'
 
-const MAX_STEP_NUMBER = 2
+const MAX_STEP_NUMBER = 4
 const NEW_MEMBER_COST = 100
 
 const GurbFormJoin = (props) => {
