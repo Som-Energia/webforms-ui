@@ -45,7 +45,7 @@ const Requirements = (props) => {
           <SomStepper
             activeStep={activeStep}
             steps={GURB_REQUIREMENTS_SUBSTEPS}
-            showNames={false}
+            showNames={true}
           />
         )}
       </Grid>
