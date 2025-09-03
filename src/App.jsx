@@ -22,6 +22,7 @@ import { AvailabilityContextProvider } from './context/AvailabilityContext'
 import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
+import UnifiedContractForm from './containers/UnifiedContractForm'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
@@ -532,6 +533,21 @@ const App = (props) => {
                                 {...props}
                                 tariff={'indexed'}
                               />
+                            </SummaryContextProvider>
+                          </GurbLoadingContextProvider>
+                        }
+                      />
+                    ))}
+
+                    {[
+                      '/:language/test-unified-contract-form'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <GurbLoadingContextProvider>
+                            <SummaryContextProvider>
+                              <UnifiedContractForm {...props} />
                             </SummaryContextProvider>
                           </GurbLoadingContextProvider>
                         }
