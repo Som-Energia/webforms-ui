@@ -9,6 +9,7 @@ import { textBody3, textSubtitle } from './gurbTheme'
 import GurbErrorContext from '../../context/GurbErrorContext'
 import useCheckMobileScreen from '../../services/checkMobileScreen'
 import { GURB_REQUIREMENTS_SUBSTEPS } from '../../services/steps'
+import SupplyPoint from './SupplyPoint'
 import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
 import SelfConsumption from './pages/Requirements/SelfConsumption'
@@ -25,10 +26,12 @@ const Requirements = (props) => {
 
   const getStep = () => {
     if (activeStep === 0) {
-      return <LightQuestion {...props} />
+      return <SupplyPoint {...props} />
     } else if (activeStep === 1) {
       return <Address {...props} />
     } else if (activeStep === 2) {
+      return <LightQuestion {...props} />
+    } else if (activeStep === 3) {
       return <SelfConsumption {...props} />
     } else {
       return <MemberQuestion {...props} />

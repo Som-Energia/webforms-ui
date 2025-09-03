@@ -38,37 +38,30 @@ const SelfConsumption = (props) => {
     {
       id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('SELFCONSUMPTION_YES_HEADER'),
-      textBody: t('SELFCONSUMPTION_YES_BODY')
+      textHeader: t('GURB_SELFCONSUMPTION_YES_HEADER'),
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('SELFCONSUMPTION_NO_HEADER'),
-      textBody: t('SELFCONSUMPTION_NO_BODY')
+      textHeader: t('GURB_SELFCONSUMPTION_NO_HEADER'),
     }
   ]
 
   return (
     <Grid container spacing={2}>
-      <Grid item>
+      <Grid item xs={12}>
         <TextRecomendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
+          text={t('GURB_SELFCONSUMPTION_HELPER')}
           required={true}
         />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Chooser
           name="selfconsumption-question"
           options={options}
           value={values.has_selfconsumption}
           handleChange={handleSelfconsumptionQuestion}
-        />
-      </Grid>
-      <Grid item>
-        <HelperText
-          helperText={t('GURB_SELFCONSUMPTION_HELPER')}
-          iconHelper={true}
         />
       </Grid>
     </Grid>
