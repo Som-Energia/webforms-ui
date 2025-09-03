@@ -38,20 +38,6 @@ const Requirements = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography sx={textSubtitle}>{t('GURB_FORM_TITLE')}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <SomGurbStepper steps={stepperSteps} activeStep={stepperActiveStep} />
-      </Grid>
-      <Grid item xs={12}>
-        <Header title={t('GURB_REQUIREMENTS_TITLE')} />
-      </Grid>
-      <Grid item xs={12}>
-        <Typography sx={textBody3}>
-          {t('GURB_REQUIREMENTS_SUBTITLE')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
         {!isMobile && (
           <SomStepper
             activeStep={activeStep}
