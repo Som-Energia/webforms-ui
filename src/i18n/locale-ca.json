@@ -918,10 +918,10 @@
     "GURB_PARTICIPATION_KW_INPUT_TEXT": "Quina participació del GURB en KW vols contractar?",
     "GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY": "La participació equival a la teva part de producció que generi la planta GURB.",
     "GURB_HELP_ANNUAL_CONSUMPTION": "<a href='' >Com puc saber si el meu consum de KW/any?</a>",
-    "GURB_PAYMENT_REVIEW_TITLE_CUSTOMER_COST": "Cost d'alta com a sòcia de Som Energia",
-    "GURB_PAYMENT_REVIEW_TEXT_CUSTOMER_COST": "És una aportació al capital social, un pagament únic, que es retorna en el cas que qualsevol dia vulguis donar-te de baixa",
+    "GURB_PAYMENT_REVIEW_TITLE_CUSTOMER_COST": "Cost d'adhesió al GURB",
+    "GURB_PAYMENT_REVIEW_TEXT_CUSTOMER_COST": "Potència contractada de 0.5KW amb IVA inclòs. La quota del GURB es cobrarà mensualment a través de domiciliació bancària.",
     "GURB_PAYMENT_REVIEW_TITLE_GURB_COST": "Cost d'adhesió al GURB",
-    "GURB_PAYMENT_REVIEW_TEXT_GURB_COST": "Potència contractada de 0.5KW amb IVA innclòs. La quota del GURB es cobrarà mensualment a travées de domiciliació bancària.",
+    "GURB_PAYMENT_REVIEW_TEXT_GURB_COST": "Potència contractada de 0.5KW amb IVA innclòs. La quota del GURB es cobrarà mensualment a través de domiciliació bancària.",
     "GURB_PAYMENT_SUBMIT": "Finalitzar",
     "BIRTHDATE": "Data de naixement (opcional)",
     "SELECT_OPTION": "-- Selecciona una opció --",
@@ -1049,5 +1049,13 @@
     "GURB_SUPPLY_INFO": "CUPS",
     "GURB_SUPPLY_ADDRESS": "Adreça",
     "GURB_LIGHT_QUESTION": "Alta llum",
-    "GURB_SELFCONSUMPTION": "Autoconsum"
+    "GURB_SELFCONSUMPTION": "Autoconsum",
+    "GURB_IDENTIFICATION": "Identificació",
+    "GURB_PARTICIPATION": "Participació GURB",
+    "CONTRACT_SUMMARY": "Resum contractació",
+    "GURB_SIGNATURE": "Signatura",
+    "GURB_PAYMENT": "Pagament",
+    "GURB_PAYMENT_METHOD_CHOOSER_TITLE": "Escull el mètode de pagament",
+    "GURB_TRANSFER_PAYMENT_METHOD": "Transferència Bancària",
+    "GURB_TPV_PAYMENT_METHOD": "Targeta de crèdit/dèbit"
 }

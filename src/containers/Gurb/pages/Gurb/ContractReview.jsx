@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
-import { textHeader4 } from '../../gurbTheme'
+import { textHeader4, textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import ReviewField from '../../../../components/review/ReviewField'
@@ -45,6 +45,8 @@ const ContractReview = (props) => {
 
   return (
     <>
+      <Typography sx={{ ...textHeader2, mb: 8 }}>{t('CONTRACT_SUMMARY')}</Typography>
+
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', width: "100%", marginBottom: "30px" }}>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <DescriptionOutlinedIcon />
