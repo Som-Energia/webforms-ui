@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.0.20 2025-09-04
+
+- Fixed normalize powers
+- Sorted cities alphabetically
+- Fixed check of partner's number
+
 ## 5.0.19 2025-08-28
 
 - Add phase field for new contracts
