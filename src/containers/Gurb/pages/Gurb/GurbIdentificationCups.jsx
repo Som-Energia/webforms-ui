@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+
+import Grid from '@mui/material/Grid'
+
 import { useTranslation } from 'react-i18next'
-import Typography from '@mui/material/Typography'
-import { textHeader2 } from '../../gurbTheme'
-import Box from '@mui/material/Box'
+
+import CUPS from '../../../../components/CUPS'
 
 const GurbIdentificationCups = (props) => {
 
@@ -11,11 +13,9 @@ const GurbIdentificationCups = (props) => {
 
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      <Typography sx={{ ...textHeader2, mb: 5 }}>{t('GURB_IDENTIFICATION')}</Typography>
-
-      TODO Identification Cups
-    </Box>
+    <Grid item xs={12}>
+      <CUPS {...props} />
+    </Grid>
   )
 }
 
