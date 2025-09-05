@@ -1,10 +1,7 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-
-import { textBody3, textSubtitle } from './gurbTheme'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
 import useCheckMobileScreen from '../../services/checkMobileScreen'
@@ -15,8 +12,6 @@ import Address from './pages/Requirements/Address'
 import SelfConsumption from './pages/Requirements/SelfConsumption'
 import MemberQuestion from './pages/Requirements/MemberQuestion'
 import SomStepper from '../../components/SomStepper'
-import SomGurbStepper from './components/SomGurbStepper'
-import Header from './components/Header'
 
 const Requirements = (props) => {
   const { values, activeStep, stepperActiveStep, stepperSteps } = props
