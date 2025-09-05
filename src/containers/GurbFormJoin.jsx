@@ -11,28 +11,6 @@ import Gurb from './Gurb/Gurb'
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
-import supplyPointValidations from './Gurb/supplyPointValidations'
-import {
-  addressValidations,
-  lightValidations,
-  memberQuestionValidations,
-  selfConsumptionValidations
-} from './Gurb/requirementsValidations'
-import {
-  newMemberValidations,
-  alreadyMemberValidations,
-  apadrinatingValidations
-} from './Gurb/newMemberValidations'
-import {
-  holderIbanValidations,
-  holderIdentificationValidations,
-  holderPersonalDataValidations,
-  holderTaxAddressValidations,
-  supplyPointDataValidations,
-  holderVoluntaryDonationValidations,
-  powerValidations,
-  tariffModeValidations
-} from './Gurb/contractValidations'
 
 import noValidation from '../formValidations/noValidation'
 
@@ -79,14 +57,6 @@ const GurbFormJoin = (props) => {
       lat: undefined,
       long: undefined
     },
-    tax_address: {
-      has_different_address: undefined,
-      street: '',
-      number: undefined,
-      postal_code: undefined,
-      state: undefined,
-      city: undefined
-    },
     has_selfconsumption: undefined,
     has_member: undefined,
     member: {
@@ -94,38 +64,6 @@ const GurbFormJoin = (props) => {
       nif: '',
       is_member: false,
       link_member: false
-    },
-    new_member: {
-      nif: '',
-      become_member: false,
-      isphisical: true,
-      proxynif_valid: false,
-      proxynif: '',
-      proxyname: '',
-      name: undefined,
-      surname1: undefined,
-      surname2: undefined,
-      email: undefined,
-      email2: undefined,
-      phone1: undefined,
-      phone2: undefined,
-      language: `${i18n.language}_ES`,
-      privacy_policy_accepted: false
-    },
-    holder: {
-      nif: '',
-      has_holder: undefined,
-      name: undefined,
-      surname1: undefined,
-      surname2: undefined,
-      email: undefined,
-      email2: undefined,
-      phone1: undefined,
-      phone2: undefined,
-      voluntary_donation: undefined,
-      iban: '',
-      iban_valid: false,
-      direct_debit_accepted: false
     },
     cadastral_reference: '',
     cadastral_reference_valid: true,
@@ -152,22 +90,6 @@ const GurbFormJoin = (props) => {
   }
 
   const validationSchemas = [
-    supplyPointValidations,
-    lightValidations,
-    addressValidations,
-    selfConsumptionValidations,
-    memberQuestionValidations,
-    alreadyMemberValidations,
-    newMemberValidations,
-    apadrinatingValidations,
-    holderIdentificationValidations,
-    holderPersonalDataValidations,
-    holderTaxAddressValidations,
-    supplyPointDataValidations,
-    powerValidations,
-    tariffModeValidations,
-    holderVoluntaryDonationValidations,
-    holderIbanValidations,
     noValidation,
     gurbPowerOptions,
     gurbPolicyChecks
@@ -175,26 +97,12 @@ const GurbFormJoin = (props) => {
 
   const nextStep = (formikProps) => {
     let next = activeStep + 1
-    if (activeStep === 4) {
-      if (formikProps.values.has_member === 'member-off') {
-        next = activeStep + 2
-      } else if (formikProps.values.has_member === 'apadrinating') {
-        next = activeStep + 3
-      }
-    }
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
-    if (activeStep === 8) {
-      if (formikProps.values.has_member === 'member-off') {
-        prev = activeStep - 2
-      } else if (formikProps.values.has_member === 'member-on') {
-        prev = activeStep - 3
-      }
-    }
     setActiveStep(Math.max(0, prev))
   }
   const handlePost = async (values) => {
