@@ -46,7 +46,7 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
-  const GurbFormValidations = lazy(() => import('./containers/GurbFormValidations'))
+  const GurbFormValidations = lazy(() => import('./containers/GurbFormRequirements'))
   const GurbFormJoin = lazy(() => import('./containers/GurbFormJoin'))
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
