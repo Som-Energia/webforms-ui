@@ -35,8 +35,8 @@ const options = [
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
   { title: 'Generation kwh - Form', href: `${language}/servicios/produccion/generation-kwh-aportaciones` },
   { title: 'Gurb - Form Deprecated', href: `${language}/gurb/${gurbId}/deprecated/`},
-  { title: 'Gurb - Form Validations', href: `${language}/gurb/${gurbId}/validations/`},
-  { title: 'Gurb - Form Join', href: `${language}/gurb/${gurbId}/join/`},
+  { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbId}/requirements/`},
+  { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbId}/join/`},
   { title: 'Pagament OK', href: `${language}/pagament-realitzat`},
   { title: 'Pagament KO', href: `${language}/pagament-cancellat`}
 

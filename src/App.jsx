@@ -46,7 +46,7 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
-  const GurbFormValidations = lazy(() => import('./containers/GurbFormRequirements'))
+  const GurbFormRequirements = lazy(() => import('./containers/GurbFormRequirements'))
   const GurbFormJoin = lazy(() => import('./containers/GurbFormJoin'))
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
@@ -443,12 +443,12 @@ const App = (props) => {
                     )}
                     {props?.isGurbEnabled && (
                       <Route
-                        path="/:language/gurb/:id/validations/"
+                        path="/:language/gurb/:id/requirements/"
                         element={
                           <GurbErrorContextProvider>
                             <GurbLoadingContextProvider>
                               <SummaryContextProvider>
-                                <GurbFormValidations {...props} />
+                                <GurbFormRequirements {...props} />
                               </SummaryContextProvider>
                             </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
