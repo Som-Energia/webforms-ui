@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import GurbIdentification from './pages/Gurb/GurbIdentification'
+import GurbIdentification from './pages/Gurb/GurbIdentificationMember'
 import GurbSignature from './pages/Gurb/GurbSignature'
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbErrorContext from '../../context/GurbErrorContext'

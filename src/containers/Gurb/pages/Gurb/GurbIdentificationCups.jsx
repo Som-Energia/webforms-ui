@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import { textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 
-const GurbIdentification = (props) => {
+const GurbIdentificationCups = (props) => {
 
   const { values, setFieldValue } = props
   const { t } = useTranslation()
@@ -14,9 +14,9 @@ const GurbIdentification = (props) => {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       <Typography sx={{ ...textHeader2, mb: 5 }}>{t('GURB_IDENTIFICATION')}</Typography>
 
-      TODO Identification
+      TODO Identification Cups
     </Box>
   )
 }
 
-export default GurbIdentification
+export default GurbIdentificationCups

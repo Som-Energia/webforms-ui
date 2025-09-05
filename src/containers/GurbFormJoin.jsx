@@ -25,13 +25,15 @@ import {
 import SomStepper from '../components/SomStepper'
 
 // Step components
-import GurbIdentification from './Gurb/pages/Gurb/GurbIdentification'
+import GurbIdentification from './Gurb/pages/Gurb/GurbIdentificationMember'
 import GurbParticipation from './Gurb/pages/Gurb/GurbParticipation'
 import ContractReview from './Gurb/pages/Gurb/ContractReview'
 import GurbSignature from './Gurb/pages/Gurb/GurbSignature'
 import Payment from './Gurb/pages/Gurb/Payment'
+import GurbIdentificationCups from './Gurb/pages/Gurb/GurbIdentificationCups'
+import GurbIdentificationMember from './Gurb/pages/Gurb/GurbIdentificationMember'
 
-const MAX_STEP_NUMBER = 4
+const MAX_STEP_NUMBER = 5
 const NEW_MEMBER_COST = 100
 
 const GurbFormJoin = (props) => {
@@ -130,12 +132,14 @@ const GurbFormJoin = (props) => {
   // Inlined Participation logic
   const renderStepContent = (formikProps) => {
     if (activeStep === 0) {
-      return <GurbIdentification {...formikProps} activeStep={activeStep} />
+      return <GurbIdentificationMember {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 1) {
-      return <GurbParticipation {...formikProps} activeStep={activeStep} />
+      return <GurbIdentificationCups {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 2) {
-      return <ContractReview {...formikProps} activeStep={activeStep} />
+      return <GurbParticipation {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 3) {
+      return <ContractReview {...formikProps} activeStep={activeStep} />
+    } else if (activeStep === 4) {
       return <GurbSignature {...formikProps} activeStep={activeStep} />
     } else {
       return <Payment {...formikProps} activeStep={activeStep} />
