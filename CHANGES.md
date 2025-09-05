@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Remove _WM endpoint
+
 ## 5.0.20 2025-09-04
 
 - Fixed normalize powers
