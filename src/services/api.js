@@ -281,20 +281,10 @@ export const getPrices = async ({
   })
 }
 
-export const contract = async (data) => {
-  return axios({
-    method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/contract`,
-    data: data
-  }).then((response) => {
-    return response?.data
-  })
-}
-
 export const newContract = async (data) => {
   return axios({
     method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/contract__WM`,
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
     data: data
   }).then((response) => {
     return response?.data
