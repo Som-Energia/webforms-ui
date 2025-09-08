@@ -1,24 +1,25 @@
-name: Check for Outdated NPM Dependencies
+name: CI - Check for Outdated NPM Dependencies
 on: [push]
 
 jobs:
   check-outdated:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20.11.0'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install npm 10.3.0
-        run: npm install -g npm@10.3.0
+      - name: Install npm 10.9.3
+        run: npm install -g npm@10.9.3
 
       # Optional: Clear npm cache to prevent cache-related issues
       - name: Clear npm cache
