@@ -7,9 +7,10 @@ import InputField from '../../../../components/InputField'
 import { useTranslation } from 'react-i18next'
 
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
+import CUPS from '../../../../components/CUPS'
 
 
-const GurbIdentificationMember = (props) => {
+const GurbIdentification = (props) => {
   const { values, setFieldValue, touched, setFieldTouched,errors } = props
   const { t } = useTranslation()
 
@@ -34,12 +35,18 @@ const GurbIdentificationMember = (props) => {
   }
 
   return (
-        <Grid container spacing={2}>
+    <Grid container spacing={2}>
+
       <Grid item xs={12}>
         <Typography variant="headline4.regular">
           {t('LINK_MEMBER_TITLE')}
         </Typography>
       </Grid>
+
+      <Grid item xs={12}>
+        <CUPS {...props} />
+      </Grid>
+
       <Grid item xs={12}>
         <InputField
           name="vat"
@@ -71,4 +78,4 @@ const GurbIdentificationMember = (props) => {
   )
 }
 
-export default GurbIdentificationMember
+export default GurbIdentification
