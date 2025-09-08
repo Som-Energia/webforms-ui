@@ -18,7 +18,7 @@ import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
 import { GURB_FORM_SUBSTEPS } from '../services/steps'
 
-import SomStepper from '../components/SomStepper'
+import SomStepper from '../components/NewSomStepper'
 
 // Step components
 import GurbIdentification from './Gurb/pages/Gurb/GurbIdentification'
@@ -153,7 +153,6 @@ const GurbFormJoin = (props) => {
             <SomStepper
               activeStep={activeStep}
               steps={GURB_FORM_SUBSTEPS}
-              showNames
             />
             {error ? getStepResult(errorInfo) : renderStepContent(formikProps)}
 
