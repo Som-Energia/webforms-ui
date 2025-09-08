@@ -4,17 +4,11 @@ name: CI - Cypress tests
 on:
   push:
 
-env:
-  REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
-  REACT_APP_DISABLE_ANIMATIONS: true
-  CYPRESS_defaultCommandTimeout: 20000
-  CYPRESS_pageLoadTimeout: 90000
-  ELECTRON_DISABLE_GPU: 1
-  CHROME_DISABLE_GPU: true
-
 jobs:
   cypress-tests:
     runs-on: ubuntu-latest
+    container:
+      image: cypress/included:12.17.4
     strategy:
       matrix:
         node-version:
@@ -34,21 +28,9 @@ jobs:
       - name: Install NPM dependencies
         run: npm install
 
-      - name: Mark repo as safe
-        run: git config --global --add safe.directory $GITHUB_WORKSPACE
-
-      - name: List Cypress fixtures
-        run: |
-          echo "Listing fixtures:"
-          ls -lR cypress/fixtures
-
-      - name: Clear Cypress cache
-        run: npx cypress cache clear
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
           start: npm run start-ci
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
@@ -58,6 +40,25 @@ jobs:
           config:
             baseUrl=http://localhost:3000
 
+        env:
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+          VITE_WEBFORMS_API_URL: ${{ secrets.VITE_WEBFORMS_API_URL }}
+          VITE_PLAUSIBLE_TRACK_DOMAIN: ${{ secrets.VITE_PLAUSIBLE_TRACK_DOMAIN }}
+          VITE_PLAUSIBLE_APIHOST_URL: ${{ secrets.VITE_PLAUSIBLE_APIHOST_URL }}
+          VITE_CONTRACT_JSON_DATA: ${{ secrets.VITE_CONTRACT_JSON_DATA }}
+          VITE_GENERATION_INVESTMENTS_JSON_DATA: ${{ secrets.VITE_GENERATION_INVESTMENTS_JSON_DATA }}
+          VITE_GENERATION_ASSIGNMENTS_JSON_DATA: ${{ secrets.VITE_GENERATION_ASSIGNMENTS_JSON_DATA }}
+          VITE_GENERATION_OUTSIDE_ASSIGNMENTS: ${{ secrets.VITE_GENERATION_OUTSIDE_ASSIGNMENTS }}
+          VITE_FEATURE_FLAGS: ${{ secrets.VITE_FEATURE_FLAGS }}
+          VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER: ${{ secrets.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER }}
+          VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY }}
+          VITE_GENERATE_SOURCEMAP: ${{ secrets.VITE_GENERATE_SOURCEMAP }}
+          VITE_MATOMO_URL: ${{ secrets.VITE_MATOMO_URL }}
+          VITE_MATOMO_SITE_ID: ${{ secrets.VITE_MATOMO_SITE_ID }}
+          REACT_APP_DISABLE_ANIMATIONS: true
+          CYPRESS_pageLoadTimeout: 6000
+          ELECTRON_DISABLE_GPU: 1
+          CHROME_DISABLE_GPU: true
 
       - name: Notify
         uses: Som-Energia/ghactions-notify@main
