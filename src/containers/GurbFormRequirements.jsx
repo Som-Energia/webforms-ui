@@ -28,7 +28,7 @@ import SupplyPoint from './Gurb/SupplyPoint'
 import LightQuestion from './Gurb/pages/Requirements/LightQuestion'
 import Address from './Gurb/pages/Requirements/Address'
 import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
-import SomStepper from '../components/SomStepper'
+import SomStepper from '../components/NewSomStepper'
 
 const MAX_STEP_NUMBER = 3
 
@@ -120,7 +120,6 @@ const GurbFormRequirements = (props) => {
                   <SomStepper
                     activeStep={activeStep}
                     steps={GURB_REQUIREMENTS_SUBSTEPS}
-                    showNames
                   />
                 )}
               </Grid>
