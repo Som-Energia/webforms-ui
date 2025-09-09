@@ -1042,5 +1042,6 @@
     "ERROR_FIELD_LENGTH": "Longitud del camp incorrecta",
     "NEW_CONTRACT_SUCCESS_DESC": "Rebràs un correu amb tota la informació sobre el teu nou contracte.",
     "PURPOSE_MEMBER_ON": "FINALITATS: Gestionar la contractació del servei de la llum i les tasques administratives que se'n deriven; informar dels nostres productes i serveis energètics, inclús per mitjans electrònics.",
-    "RIGHTS_MEMBER_ON": "DRETS:  Pots oposar-te als nostres enviaments comercials i exercir el teu dret d'accés, rectificació, supressió, portabilitat de les teves dades i la limitació o oposició en el correu electrònic <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Més informació en la <a target=\"_blank\" href=\"https://www.somenergia.coop/ca/politica-de-privacitat\">Política de Privacitat</a>."
+    "RIGHTS_MEMBER_ON": "DRETS:  Pots oposar-te als nostres enviaments comercials i exercir el teu dret d'accés, rectificació, supressió, portabilitat de les teves dades i la limitació o oposició en el correu electrònic <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Més informació en la <a target=\"_blank\" href=\"https://www.somenergia.coop/ca/politica-de-privacitat\">Política de Privacitat</a>.",
+    "INSTALLATION_POWER_EXCEDED": "La potència de la instal·lació no pot ser superior a 100 kW"
 }

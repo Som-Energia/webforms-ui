@@ -14,9 +14,9 @@ const newContractMemberSelfConsumptionDataValidations = Yup.object().shape({
         collective_installation: Yup.string()
             .required('FILL_SELFCONSUMPTION_COLLECTIVE_INSTALLATION')
             .oneOf(['individual', 'collective']),
-        installation_power: Yup.number().required(
-            'FILL_SELFCONSUMPTION_INSTALLATION_POWER'
-        ),
+        installation_power: Yup.number()
+            .required('FILL_SELFCONSUMPTION_INSTALLATION_POWER')
+            .max(100, 'INSTALLATION_POWER_EXCEDED'),
         installation_type: Yup.string().required(
             'FILL_SELFCONSUMPTION_INSTALLATION_SITUATION'
         ),

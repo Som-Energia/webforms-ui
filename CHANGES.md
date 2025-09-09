@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Add limit to selfconsumption power
+
 ## 5.0.20 2025-09-04
 
 - Fixed normalize powers
