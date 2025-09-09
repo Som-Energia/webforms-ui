@@ -18,7 +18,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined'
 
 import StepHeader from '../../components/StepHeader'
-import StateCity from '../../components/StateCity'
+import OVStateCity from '../../components/OVStateCity'
 import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
 
@@ -349,7 +349,7 @@ function PersonalData(props) {
 
           <Grid item xs={12} sm={9}>
             <Grid container spacing={3}>
-              <StateCity
+              <OVStateCity
                 stateId={`${entity}_state`}
                 stateName={`${entity}.state`}
                 stateInitial={values[entity]?.state}
