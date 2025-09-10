@@ -217,7 +217,7 @@ const Address = ({ values, errors, touched, setFieldValue, setValues }) => {
         <InputField
           name="address.door"
           textFieldName={t('DOOR')}
-          handleChange={handleChangeInteger}
+          handleChange={handleChange}
           touched={touched?.address?.door}
           value={values?.address?.door}
           error={errors?.address?.door}
