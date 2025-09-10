@@ -28,7 +28,8 @@ import LightQuestion from './Gurb/pages/Requirements/LightQuestion'
 import Address from './Gurb/pages/Requirements/Address'
 import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
 import SomStepper from '../components/NewSomStepper'
-import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsFinishWithoutContract'
+import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsWithoutContractTariffSelection'
+import GurbRequirementsResult from './Gurb/pages/Gurb/GurbRequirementsResult'
 
 
 const MAX_STEP_NUMBER = 5
@@ -96,6 +97,7 @@ const GurbFormRequirements = (props) => {
 
   const getStep = (formikProps) => {
     const { values } = formikProps
+
     if (activeStep === 0) {
       return <SupplyPoint {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 1) {
@@ -163,7 +165,9 @@ const GurbFormRequirements = (props) => {
                     title="NEXT"
                   />
                 ) : (
-                  <>redirect component</>
+                  <>
+                    <GurbRequirementsResult {...formikProps} />
+                  </>
                 )}
               </Grid>
             </Grid>
