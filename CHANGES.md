@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Remove _WM endpoint
+
 ## 5.0.21 2025-09-09
 
 - Add limit to selfconsumption power

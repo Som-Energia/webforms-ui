@@ -147,7 +147,7 @@ Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif, has_member=
 })
 
 Cypress.Commands.add('acceptTermsAndsubmitNewContract', (status, error=false) => {
-  cy.intercept('POST', '/procedures/contract__WM', {
+  cy.intercept('POST', '/procedures/contract', {
     statusCode: !error ? 200 : 500,
     body: {
       state: status
