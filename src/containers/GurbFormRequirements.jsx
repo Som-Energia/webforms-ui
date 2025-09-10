@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef, useContext, act } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid'
 
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
-import SubmitButton from '../components/NewButtons/SubmitButton'
 
 import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
@@ -29,8 +28,11 @@ import LightQuestion from './Gurb/pages/Requirements/LightQuestion'
 import Address from './Gurb/pages/Requirements/Address'
 import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
 import SomStepper from '../components/NewSomStepper'
+import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsWithoutContractTariffSelection'
+import GurbRequirementsResult from './Gurb/pages/Gurb/GurbRequirementsResult'
 
-const MAX_STEP_NUMBER = 3
+
+const MAX_STEP_NUMBER = 5
 
 const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
@@ -63,7 +65,8 @@ const GurbFormRequirements = (props) => {
       long: undefined
     },
     has_selfconsumption: undefined,
-    has_member: undefined
+    has_member: undefined,
+    redirectUrl: undefined
   }
 
   const validationSchemas = [
@@ -73,32 +76,40 @@ const GurbFormRequirements = (props) => {
     selfConsumptionValidations
   ]
 
-  const nextStep = () => {
-    setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
+  const formikRef = useRef(null)
+  useEffect(() => {
+    formikRef.current.validateForm()
+  }, [activeStep])
+
+  const nextStep = (formikProps) => {
+    const { values } = formikProps
+    setActiveStep((prev) => {
+      if (prev === 3 && values.new_contract === false) {
+        return MAX_STEP_NUMBER
+      }
+      return Math.min(prev + 1, MAX_STEP_NUMBER)
+    })
   }
 
   const prevStep = () => {
     setActiveStep((prev) => Math.max(0, prev - 1))
   }
 
-  const formikRef = useRef(null)
-  useEffect(() => {
-    formikRef.current.validateForm()
-    if (activeStep === 8) {
-      NewMemberResult()
-    }
-  }, [activeStep])
+  const getStep = (formikProps) => {
+    const { values } = formikProps
 
-  // Inlined Requirements logic
-  const renderStepContent = (formikProps) => {
     if (activeStep === 0) {
       return <SupplyPoint {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 1) {
       return <Address {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 2) {
       return <LightQuestion {...formikProps} activeStep={activeStep} />
-    } else {
+    } else if (activeStep === 3) {
       return <SelfConsumption {...formikProps} activeStep={activeStep} />
+    } else if (activeStep === 4) {
+      if (values.new_contract !== false) {
+        return <GurbRequirementsFinishWithoutContract {...formikProps} />
+      }
     }
   }
 
@@ -107,7 +118,7 @@ const GurbFormRequirements = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        // validationSchema={validationSchemas[activeStep]}
+        //validationSchema={validationSchemas[activeStep]}
         validationSchema={null}
         validateOnChange
         validateOnBlur={false}
@@ -116,7 +127,7 @@ const GurbFormRequirements = (props) => {
           <>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                {!isMobile && (
+                {!isMobile && activeStep !== MAX_STEP_NUMBER && (
                   <SomStepper
                     activeStep={activeStep}
                     steps={GURB_REQUIREMENTS_SUBSTEPS}
@@ -124,47 +135,47 @@ const GurbFormRequirements = (props) => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                {error ? getStepResult(errorInfo) : renderStepContent(formikProps)}
+                {error ? getStepResult(errorInfo) : getStep(formikProps)}
               </Grid>
             </Grid>
 
             {!error && (
-              <Grid
-                container
-                direction="row-reverse"
-                rowSpacing={2}
-                sx={{
-                  marginTop: '2rem',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}
-              >
-                {activeStep !== 0 && (
-                  <Grid item sm={2} xs={12}>
-                    <PrevButton onClick={() => prevStep(formikProps)} title="PREV" />
-                  </Grid>
-                )}
-                <Grid item sm={2} xs={12} order={-1}>
-                  {activeStep !== MAX_STEP_NUMBER ? (
-                    <NextButton
-                      disabled={loading || !formikProps.isValid || activeStep === MAX_STEP_NUMBER}
-                      onClick={() => nextStep(formikProps)}
-                      title="NEXT"
-                    />
-                  ) : (
-                    <SubmitButton
-                      disabled={loading || !formikProps.isValid}
-                      onClick={() => {
-                        window.location.href = 'http://gurb-join.example'
-                      }}
-                    />
-                  )}
+
+            <Grid
+              container
+              direction={activeStep === MAX_STEP_NUMBER ? "row" : "row-reverse"}
+              rowSpacing={2}
+              sx={{
+                marginTop: '2rem',
+                justifyContent: activeStep === MAX_STEP_NUMBER ? 'center' : 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              {activeStep !== 0 && activeStep < MAX_STEP_NUMBER && (
+                <Grid item sm={2} xs={12}>
+                  <PrevButton onClick={() => prevStep(formikProps)} title="PREV" />
                 </Grid>
+              )}
+
+              <Grid item sm={2} xs={12} order={-1}>
+                {activeStep !== MAX_STEP_NUMBER ? (
+                  <NextButton
+                    disabled={loading || !formikProps.isValid || activeStep === MAX_STEP_NUMBER}
+                    onClick={() => nextStep(formikProps)}
+                    title="NEXT"
+                  />
+                ) : (
+                  <>
+                    <GurbRequirementsResult {...formikProps} />
+                  </>
+                )}
               </Grid>
-            )}
-          </>
-        )}
-      </Formik>
+            </Grid>
+
+          )}
+        </>
+      )}
+    </Formik>
     </Container>
   )
 }

@@ -93,14 +93,6 @@ const GurbFormJoin = (props) => {
 
   const validationSchemas = [noValidation, gurbPowerOptions, gurbPolicyChecks]
 
-  const nextStep = () => {
-    setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
-  }
-
-  const prevStep = () => {
-    setActiveStep((prev) => Math.max(0, prev - 1))
-  }
-
   const handlePost = async (values) => {
     await addGurb(values)
       .then((response) => {
@@ -123,8 +115,15 @@ const GurbFormJoin = (props) => {
     }
   }, [url])
 
-  // Inlined Participation logic
-  const renderStepContent = (formikProps) => {
+  const nextStep = () => {
+    setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
+  }
+
+  const prevStep = () => {
+    setActiveStep((prev) => Math.max(0, prev - 1))
+  }
+
+  const getStep = (formikProps) => {
     if (activeStep === 0) {
       return <GurbIdentification {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 1) {
@@ -154,7 +153,7 @@ const GurbFormJoin = (props) => {
               activeStep={activeStep}
               steps={GURB_FORM_SUBSTEPS}
             />
-            {error ? getStepResult(errorInfo) : renderStepContent(formikProps)}
+            {error ? getStepResult(errorInfo) : getStep(formikProps)}
 
             {!error && (
               <Grid
