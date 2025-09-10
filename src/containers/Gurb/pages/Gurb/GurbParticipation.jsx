@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
-import { textHeader4, textField, textHeader5 } from '../../gurbTheme'
+import { textHeader4, textField, textHeader5, textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Select from '../../components/Select'
 import Alert from '@mui/material/Alert'
@@ -36,6 +36,7 @@ const Contract = (props) => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <Typography sx={{ ...textHeader2, mb: 5 }}>{t('GURB_PARTICIPATION')}</Typography>
       <Typography sx={textHeader4}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT')}</Typography>
       <Typography sx={textHeader5}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}</Typography>
       <Select

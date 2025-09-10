@@ -38,22 +38,21 @@ const LightQuestion = (props) => {
       id: 'light-on',
       icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
       textHeader: t('GURB_HAS_LIGHT_HEADER'),
-      textBody: t('GURB_HAS_LIGHT_BODY')
     },
     {
       id: 'light-off',
       icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
       textHeader: t('GURB_HAS_NO_LIGHT_HEADER'),
-      textBody: t('GURB_HAS_NO_LIGHT_BODY')
+
     }
   ]
 
   return (
       <Grid container spacing={2}>
-      <Grid item>
+      <Grid item xs={12}>
         <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} required={true} />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Chooser
           name="light-question"
           options={options}

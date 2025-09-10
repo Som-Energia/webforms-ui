@@ -46,6 +46,8 @@ const App = (props) => {
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
   const GurbForm = lazy(() => import('./containers/GurbForm'))
+  const GurbFormRequirements = lazy(() => import('./containers/GurbFormRequirements'))
+  const GurbFormJoin = lazy(() => import('./containers/GurbFormJoin'))
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
@@ -427,12 +429,40 @@ const App = (props) => {
                     />
                     {props?.isGurbEnabled && (
                       <Route
-                        path="/:language/gurb/:id/validations/"
+                        path="/:language/gurb/:id/deprecated/"
                         element={
                           <GurbErrorContextProvider>
                             <GurbLoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbForm {...props} />
+                              </SummaryContextProvider>
+                            </GurbLoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        }
+                      />
+                    )}
+                    {props?.isGurbEnabled && (
+                      <Route
+                        path="/:language/gurb/:id/requirements/"
+                        element={
+                          <GurbErrorContextProvider>
+                            <GurbLoadingContextProvider>
+                              <SummaryContextProvider>
+                                <GurbFormRequirements {...props} />
+                              </SummaryContextProvider>
+                            </GurbLoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        }
+                      />
+                    )}
+                    {props?.isGurbEnabled && (
+                      <Route
+                        path="/:language/gurb/:id/join/"
+                        element={
+                          <GurbErrorContextProvider>
+                            <GurbLoadingContextProvider>
+                              <SummaryContextProvider>
+                                <GurbFormJoin {...props} />
                               </SummaryContextProvider>
                             </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>

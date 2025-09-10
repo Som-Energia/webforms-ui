@@ -36,12 +36,6 @@ const SupplyPoint = (props) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Header title={`${t('GURB_SUPPLY_POINT_TITLE')} ${gurbData.name}`} />
-      </Grid>
-      <Grid item xs={12}>
-        <ProgressWarning completed={gurbData.completedPercentage} />
-      </Grid>
-      <Grid item xs={12}>
         <TextRecomendation
           title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
           text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
