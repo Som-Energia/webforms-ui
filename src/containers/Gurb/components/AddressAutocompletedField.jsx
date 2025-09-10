@@ -134,7 +134,14 @@ export default function LocationInput({
               onBlur={(e) => {
                 setIsFocused(false)
                 if (onBlur) onBlur(e)
-                onChange({ id: null, street: e.target.value })
+
+                // Only reset id if the input string does not match the current value
+                if (!value || e.target.value !== value.street) {
+                  onChange({ id: null, street: e.target.value })
+                } else {
+                  // Keep the selected address object intact
+                  onChange(value)
+                }
               }}
               error={Boolean(touched && error)}
             />

@@ -1057,5 +1057,15 @@
     "GURB_PAYMENT": "Pagament",
     "GURB_PAYMENT_METHOD_CHOOSER_TITLE": "Escull el mètode de pagament",
     "GURB_TRANSFER_PAYMENT_METHOD": "Transferència Bancària",
-    "GURB_TPV_PAYMENT_METHOD": "Targeta de crèdit/dèbit"
+    "GURB_TPV_PAYMENT_METHOD": "Targeta de crèdit/dèbit",
+    "GURB_REQUIREMENTS_FORM_FINISH_TITLE": "Ja quasi ho tens...",
+    "GURB_REQUIREMENTS_FORM_FINISH_DESCRIPTION": "Compleixes tots els requisits per contractar GURB. Pots completar el procés de contractació fent click en el següent botó:",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF": "Tarifa Períodes",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF": "Tarifa Indexada",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF_BODY": "Opció més estable. El preu de l'electricitat és fix i es divideix en 3 franges horàries (vall, pla i punta). Cada franja té un cost diferent i pots estalviar si organitzes el consum a les hores més econòmiques.",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF_BODY": "Opció més variable. El preu canvia cada hora segons el mercat majorista. A les 15h es publiquen els preus del dia següent, cosa que permet planificar els consums a les hores més barates.",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT": "<a target=\"_blank\" href=\"{{tariffs_info_url}}\">Veure més informació sobre les tarifes</a>",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT_URL": "https://www.somenergia.coop/ca/tarifes-llum/domestic-periodes/",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY": "Només necessites tenir un contracte amb SomEnergia per poder participar a GURB",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE": "Escull quina tarifa vols contractar:"
 }

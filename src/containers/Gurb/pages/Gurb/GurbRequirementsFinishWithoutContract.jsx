@@ -1,0 +1,73 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+
+import TextRecomendation from '../../components/TextRecomendation'
+import Chooser from '../../../../components/NewChooser'
+import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
+
+const GurbRequirementsFinishWithoutContract = (props) => {
+  const { i18n } = useTranslation()
+  const { language } = useParams()
+  const { t } = useTranslation()
+  const { values, setFieldValue } = props
+  const [selectedOption, setSelectedOption] = useState(null)
+
+  const options = [
+    {
+      id: 'periods-tariff',
+      icon: <HandshakeIcon />,
+      textHeader: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF'),
+      textBody: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF_BODY')
+    },
+    {
+      id: 'indexed-tariff',
+      icon: <CommunityIcon />,
+      textHeader: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF'),
+      textBody: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF_BODY')
+    }
+  ]
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [language, i18n])
+
+  const handleTariffQuestion = (optionId) => {
+    setSelectedOption(optionId)
+
+    const baseUrl = 'https://baseUrl.com/'
+    const redirectUrl = optionId === 'periods-tariff'
+      ? baseUrl + 'p'
+      : baseUrl + 'i'
+    setFieldValue('redirectUrl', redirectUrl)
+  }
+
+  return (
+    <Grid item>
+        <TextRecomendation title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')} />
+        <TextRecomendation title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')} />
+
+      <Chooser
+        name="tariff-question"
+        options={options}
+        value={selectedOption} // Pass the selected option ID, not the URL
+        handleChange={handleTariffQuestion}
+        maxWidth="18rem"
+      />
+
+      <Typography
+        sx={{ mt: 2 }}
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT', {
+            tariffs_info_url: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT_URL'),
+          })
+        }}
+      />
+    </Grid>
+  )
+}
+export default GurbRequirementsFinishWithoutContract
