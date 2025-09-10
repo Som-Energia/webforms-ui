@@ -28,9 +28,10 @@ import LightQuestion from './Gurb/pages/Requirements/LightQuestion'
 import Address from './Gurb/pages/Requirements/Address'
 import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
 import SomStepper from '../components/NewSomStepper'
-import GurbRequirementsFinish from './Gurb/pages/Gurb/GurbRequirementsFinish'
+import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsFinishWithoutContract'
 
-const MAX_STEP_NUMBER = 4
+
+const MAX_STEP_NUMBER = 5
 
 const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
@@ -79,16 +80,22 @@ const GurbFormRequirements = (props) => {
     formikRef.current.validateForm()
   }, [activeStep])
 
-  const nextStep = () => {
-    setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
+  const nextStep = (formikProps) => {
+    const { values } = formikProps
+    setActiveStep((prev) => {
+      if (prev === 3 && values.new_contract === false) {
+        return MAX_STEP_NUMBER
+      }
+      return Math.min(prev + 1, MAX_STEP_NUMBER)
+    })
   }
 
   const prevStep = () => {
     setActiveStep((prev) => Math.max(0, prev - 1))
   }
 
-  // Inlined Requirements logic
   const getStep = (formikProps) => {
+    const { values } = formikProps
     if (activeStep === 0) {
       return <SupplyPoint {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 1) {
@@ -97,9 +104,10 @@ const GurbFormRequirements = (props) => {
       return <LightQuestion {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 3) {
       return <SelfConsumption {...formikProps} activeStep={activeStep} />
-    }
-    else {
-      return <GurbRequirementsFinish {...formikProps} />
+    } else if (activeStep === 4) {
+      if (values.new_contract !== false) {
+        return <GurbRequirementsFinishWithoutContract {...formikProps} />
+      }
     }
   }
 
@@ -108,8 +116,8 @@ const GurbFormRequirements = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        validationSchema={validationSchemas[activeStep]}
-        // validationSchema={null}
+        //validationSchema={validationSchemas[activeStep]}
+        validationSchema={null}
         validateOnChange
         validateOnBlur={false}
       >
