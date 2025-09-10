@@ -1067,5 +1067,11 @@
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT": "<a target=\"_blank\" href=\"{{tariffs_info_url}}\">Veure més informació sobre les tarifes</a>",
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT_URL": "https://www.somenergia.coop/ca/tarifes-llum/domestic-periodes/",
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY": "Només necessites tenir un contracte amb SomEnergia per poder participar a GURB",
-    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE": "Escull quina tarifa vols contractar:"
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE": "Escull quina tarifa vols contractar:",
+    "GURB_REQUIREMENTS_RESULT_TITLE_NEW_MEMBER": "Ja quasi ho tens...",
+    "GURB_REQUIREMENTS_RESULT_TITLE_EXISTING_MEMBER": "Ja quasi ho tens...",
+    "GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER": "Contexte abans de redireccionar al formulari de participació",
+    "GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER": "Per contractar GURB has de tenir un contracte a Som Energia. Pots completar el procés d'alta fent click en el següent botó:",
+    "GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER": "Vull contractar la llum amb Som Energia",
+    "GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_EXISTING_MEMBER": "Vull participar a GURB"
 }
