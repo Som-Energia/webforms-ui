@@ -74,6 +74,11 @@ const GurbFormRequirements = (props) => {
     selfConsumptionValidations
   ]
 
+  const formikRef = useRef(null)
+  useEffect(() => {
+    formikRef.current.validateForm()
+  }, [activeStep])
+
   const nextStep = () => {
     setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
   }
@@ -82,13 +87,8 @@ const GurbFormRequirements = (props) => {
     setActiveStep((prev) => Math.max(0, prev - 1))
   }
 
-  const formikRef = useRef(null)
-  useEffect(() => {
-    formikRef.current.validateForm()
-  }, [activeStep])
-
   // Inlined Requirements logic
-  const renderStepContent = (formikProps) => {
+  const getStep = (formikProps) => {
     if (activeStep === 0) {
       return <SupplyPoint {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 1) {
@@ -125,7 +125,7 @@ const GurbFormRequirements = (props) => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                {error ? getStepResult(errorInfo) : renderStepContent(formikProps)}
+                {error ? getStepResult(errorInfo) : getStep(formikProps)}
               </Grid>
             </Grid>
 
