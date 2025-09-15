@@ -4,6 +4,8 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
+import { buttonGurbDark } from '../../../containers/Gurb/gurbTheme'
+
 const RedirectUrl = ({
   title = 'somenergia redirect url component',
   description = 'a naive url redirect component',
@@ -38,15 +40,15 @@ const RedirectUrl = ({
 
       <Grid item>
         <Button
-          component="a"
+          type="button"
           href={url}
           variant="contained"
           color="primary"
           sx={{
-            borderRadius: '2rem',
-            px: '2rem',
-            textTransform: 'none',
-            color: 'white',
+            ...buttonGurbDark,
+            boxSizing: 'border-box',
+            lineHeight: 1,
+            textTransform: 'none'
           }}
         >
           {buttonText}
