@@ -28,6 +28,13 @@ jobs:
       - name: Install NPM dependencies
         run: npm install
 
+      - name: Write holder data fixture
+        run: |
+          echo "$CYPRESS_HOLDER_CHANGE_PERSONALDATA_JSON" > cypress/fixtures/holderChangePersonaldata.json
+        shell: bash
+        env:
+          CYPRESS_HOLDER_CHANGE_PERSONALDATA_JSON: ${{ secrets.CYPRESS_HOLDER_CHANGE_PERSONALDATA_JSON }}
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
@@ -59,6 +66,10 @@ jobs:
           CYPRESS_pageLoadTimeout: 6000
           ELECTRON_DISABLE_GPU: 1
           CHROME_DISABLE_GPU: true
+
+      - name: Clean up fixture
+        if: always()
+        run: rm -f cypress/fixtures/holderChangePersonaldata.json
 
       - name: Notify
         uses: Som-Energia/ghactions-notify@main
