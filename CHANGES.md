@@ -1,8 +1,9 @@
 # Change Log
 
-## unreleased
+## 6.0.0
 
 - Remove _WM endpoint
+- Remove old gurb form
 
 ## 5.0.21 2025-09-09
 
