@@ -25,6 +25,7 @@ export const getGurbData = async (gurbId) => {
 // }
 
 export const checkGurbDistance = async (gurbId, lat, long) => {
+  return new Promise((resolve) => { resolve({ data: null }) })
   return axios({
     method: 'GET',
     url: `${WEBFORMS_API_URL}/check/gurb/${gurbId}?lat=${lat}&long=${long}`,
