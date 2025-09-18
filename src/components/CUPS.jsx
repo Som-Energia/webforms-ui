@@ -7,7 +7,7 @@ import Link from '@mui/material/Link'
 import InputField from './InputField'
 
 import { checkCups } from '../services/api'
-import GurbLoadingContext from '../context/GurbLoadingContext'
+import GurbLoadingContext from '../context/GurbLoadingContext'  // TODO: review specific context in a reusable component
 
 const CUPS = (props) => {
   const {
