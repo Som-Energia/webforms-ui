@@ -21,16 +21,29 @@ export default function LocationInput({
   error = false,
   helperText = '',
   touched = false,
-  onBlur = () => {}
+  onBlur = () => { }
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
 
   const [suggestions, setSuggestions] = useState([])
-  const [inputValue, setInputValue] = useState(value?.street || '')
+
+  // normalize incoming `value` whether it's a string or object
+  const normalizeValue = (v) =>
+    v && typeof v === 'object'
+      ? { id: v.id ?? null, street: v.street ?? v.text ?? '' }
+      : { id: null, street: v ?? '' }
+
+  const [inputValue, setInputValue] = useState(() => normalizeValue(value).street)
   const [loadingResults, setLoadingResults] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
 
+  // keep local inputValue in sync when the parent/form value changes
+  useEffect(() => {
+    setInputValue(normalizeValue(value).street)
+  }, [value])
+
+  // search suggestions
   useEffect(() => {
     if (!inputValue || inputValue.trim().length <= 3) {
       setSuggestions([])
@@ -47,8 +60,9 @@ export default function LocationInput({
         setSuggestions(placesSuggestions)
       } catch (e) {
         setSuggestions([])
+      } finally {
+        setLoadingResults(false)
       }
-      setLoadingResults(false)
     }, 350)
   }, [inputValue, sessionTokenRef])
 
@@ -64,21 +78,20 @@ export default function LocationInput({
       onChange({ id: null, street: newValue })
       setInputValue(newValue)
     } else {
-      const selected = {
-        ...newValue,
-        street: newValue.street || newValue.text || ''
-      }
+      const selected = { ...newValue, street: newValue.street || newValue.text || '' }
       onChange(selected)
       setInputValue(selected.street)
     }
     setSuggestions([])
   }
 
+  const normalizedValue = normalizeValue(value)
+
   return (
     <Autocomplete
       freeSolo
       data-cy={id}
-      value={value || { id: null, street: '' }}
+      value={normalizedValue}
       inputValue={inputValue}
       options={suggestions}
       filterOptions={(option) => option}
@@ -97,17 +110,17 @@ export default function LocationInput({
           onChange(null)
         }
       }}
-      isOptionEqualToValue={(option, value) =>
-        option?.id === value?.id && option?.street === value?.street
-      }
+      isOptionEqualToValue={(option, v) => {
+        const optStreet = typeof option === 'string' ? option : option.street || option.text || ''
+        const valStreet = typeof v === 'string' ? v : v?.street || v?.text || ''
+        const optId = option?.id ?? null
+        const valId = v?.id ?? null
+        return optId === valId && optStreet === valStreet
+      }}
       renderInput={(params) => (
         <Grid container spacing={1}>
           <Grid item xs={12} sx={{ mb: '6px' }}>
-            <InputTitle
-              text={textFieldName}
-              textStyle={textHeader4}
-              required={required}
-            />
+            <InputTitle text={textFieldName} textStyle={textHeader4} required={required} />
           </Grid>
 
           <Grid item xs={12}>
@@ -120,11 +133,7 @@ export default function LocationInput({
                   paddingY: '0px'
                 }
               }}
-              label={
-                !value?.street && !inputValue && !isFocused
-                  ? textFieldLabel
-                  : ''
-              }
+              label={!normalizedValue.street && !inputValue && !isFocused ? textFieldLabel : ''}
               InputLabelProps={{ shrink: false }}
               onFocus={() => setIsFocused(true)}
               onBlur={(e) => {
@@ -132,14 +141,14 @@ export default function LocationInput({
                 if (onBlur) onBlur(e)
 
                 // Only reset id if the input string does not match the current value
-                if (!value || e.target.value !== value.street) {
+                if (!normalizedValue.street || e.target.value !== normalizedValue.street) {
                   onChange({ id: null, street: e.target.value })
                 } else {
-                  // Keep the selected address object intact
-                  onChange(value)
+                  onChange(normalizedValue)
                 }
               }}
               error={Boolean(touched && error)}
+              helperText={helperText}
             />
           </Grid>
 
