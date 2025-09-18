@@ -430,13 +430,15 @@ const App = (props) => {
                       <Route
                         path="/:language/gurb/:id/requirements/"
                         element={
-                          <GurbErrorContextProvider>
-                            <GurbLoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbFormRequirements {...props} />
-                              </SummaryContextProvider>
-                            </GurbLoadingContextProvider>
-                          </GurbErrorContextProvider>
+                          <PopUpContextProvider>
+                            <GurbErrorContextProvider>
+                              <GurbLoadingContextProvider>
+                                <SummaryContextProvider>
+                                  <GurbFormRequirements {...props} />
+                                </SummaryContextProvider>
+                              </GurbLoadingContextProvider>
+                            </GurbErrorContextProvider>
+                          </PopUpContextProvider>
                         }
                       />
                     )}

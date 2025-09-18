@@ -31,6 +31,7 @@ import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
 import SomStepper from '../components/NewSomStepper'
 import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsWithoutContractTariffSelection'
 import GurbRequirementsResult from './Gurb/pages/Gurb/GurbRequirementsResult'
+import PopUpContext from '../context/PopUpContext'
 
 
 const MAX_STEP_NUMBER = 5
@@ -41,6 +42,9 @@ const GurbFormRequirements = (props) => {
 
   const { error, setError, errorInfo, setErrorInfo, getStepResult } =
     useContext(GurbErrorContext)
+
+  const { setContent } = useContext(PopUpContext)
+
 
   const { loading } = useContext(GurbLoadingContext)
 
@@ -62,8 +66,8 @@ const GurbFormRequirements = (props) => {
       street: '',
       number: undefined,
       postal_code: undefined,
-      state: undefined,
-      city: undefined,
+      state: { id: '', name: '' },
+      city: { id: '', name: '' },
       lat: undefined,
       long: undefined
     },
