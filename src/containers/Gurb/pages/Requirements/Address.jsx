@@ -36,18 +36,18 @@ const handleCheckGurbDistance = async (lat, long) => {
 }
 
 const getLatLongWithFullAddress = async (
-  setValues,
+  setFieldValue,
   values,
   addressID,
   addressFieldName,
-  sessionTokenRef
+  sessionTokenRef,
+  currentNumber
 ) => {
-
   try {
     if (
       values[addressFieldName]?.street &&
       values[addressFieldName]?.postal_code &&
-      values[addressFieldName]?.number &&
+      currentNumber &&
       values[addressFieldName]?.state &&
       values[addressFieldName]?.city
     ) {
@@ -66,14 +66,9 @@ const getLatLongWithFullAddress = async (
 
       if (suggestions.length > 0) {
         const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
-        await setValues(({
-          ...values,
-          [addressFieldName]: {
-            ...values[addressFieldName],
-            lat: suggestedPlace.location.lat(),
-            long: suggestedPlace.location.lng()
-          }
-        }))
+
+        await setFieldValue(`${addressFieldName}.lat`, suggestedPlace.location.lat())
+        await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
 
         await handleCheckGurbDistance(suggestedPlace.location.lat(), suggestedPlace.location.lng())
       }
@@ -126,7 +121,7 @@ const AddressField = ({
       )
 
       await UpdateStateCityByPostalCode(postalCodeComponent?.longText || '')
-      getLatLongWithFullAddress(setValues, values, addressID, addressFieldName, sessionTokenRef)
+      getLatLongWithFullAddress(setFieldValue, values, addressID, addressFieldName, sessionTokenRef)
 
     } catch (error) {
       console.error('Error fetching place details:', error)
@@ -168,17 +163,26 @@ const AddressField = ({
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
     await UpdateStateCityByPostalCode(value)
-    getLatLongWithFullAddress(setValues, values, addressID, addressFieldName, sessionTokenRef)
+    getLatLongWithFullAddress(setFieldValue, values, addressID, addressFieldName, sessionTokenRef)
   }
 
   const handleChangeNumber = async (event) => {
     const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
+
     await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
+
     if (cleanedNumber) {
-      await getLatLongWithFullAddress(setValues, values, addressID, addressFieldName, sessionTokenRef)
-    } else if (!cleanedNumber) {
+      getLatLongWithFullAddress(
+        setFieldValue,
+        values,
+        addressID,
+        addressFieldName,
+        sessionTokenRef,
+        cleanedNumber
+      )
+    } else {
       await setFieldValue(`${addressFieldName}.lat`, undefined)
-      setFieldValue(`${addressFieldName}.long`, undefined)
+      await setFieldValue(`${addressFieldName}.long`, undefined)
     }
   }
 
@@ -189,7 +193,7 @@ const AddressField = ({
   const handleChangeStateAndCity = async (value) => {
     await setFieldValue(`${addressFieldName}.city`, value?.city)
     await setFieldValue(`${addressFieldName}.state`, value?.state)
-    await getLatLongWithFullAddress(setValues, values, addressID, addressFieldName, sessionTokenRef)
+    await getLatLongWithFullAddress(setFieldValue, values, addressID, addressFieldName, sessionTokenRef)
   }
 
   return (
