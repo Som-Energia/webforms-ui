@@ -38,41 +38,54 @@ const handleCheckGurbDistance = async (lat, long) => {
 const getLatLongWithFullAddress = async (
   setFieldValue,
   values,
-  addressID,
   addressFieldName,
   sessionTokenRef,
   currentNumber
 ) => {
   try {
+    const address = values[addressFieldName]
+
+    // Guard: need id, street, postal_code, state, city, and number
     if (
-      values[addressFieldName]?.street &&
-      values[addressFieldName]?.postal_code &&
-      currentNumber &&
-      values[addressFieldName]?.state &&
-      values[addressFieldName]?.city
+      !address?.id ||
+      !address?.street ||
+      !address?.postal_code ||
+      !currentNumber ||
+      !address?.state ||
+      !address?.city
     ) {
-      const place = await getPlaceDetails(addressID, sessionTokenRef)
-
-      const postalCodeComp = place.addressComponents.find((c) =>
-        c.types.includes('postal_code')
-      )
-
-      const streetComp = place.addressComponents.find((c) =>
-        c.types.includes('route')
-      )
-
-      const fullAddress = `${streetComp?.longText || ''} ${values[addressFieldName].number}, ${postalCodeComp?.longText || ''}`
-      const suggestions = await searchPlace(fullAddress, sessionTokenRef)
-
-      if (suggestions.length > 0) {
-        const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
-
-        await setFieldValue(`${addressFieldName}.lat`, suggestedPlace.location.lat())
-        await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
-
-        await handleCheckGurbDistance(suggestedPlace.location.lat(), suggestedPlace.location.lng())
-      }
+      return
     }
+
+    // 1. Get place details using the persistent ID
+    const place = await getPlaceDetails(address.id, sessionTokenRef)
+
+    const postalCodeComp = place.addressComponents.find((c) =>
+      c.types.includes('postal_code')
+    )
+    const streetComp = place.addressComponents.find((c) =>
+      c.types.includes('route')
+    )
+
+    // 2. Build full address string
+    const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''}`
+
+    // 3. Search for that address
+    const suggestions = await searchPlace(fullAddress, sessionTokenRef)
+    if (suggestions.length === 0) return
+
+    // 4. Get suggested place details
+    const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
+
+    // 5. Update Formik with lat/long
+    await setFieldValue(`${addressFieldName}.lat`, suggestedPlace.location.lat())
+    await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
+
+    // 6. Check Gurb distance
+    await handleCheckGurbDistance(
+      suggestedPlace.location.lat(),
+      suggestedPlace.location.lng()
+    )
   } catch (error) {
     console.error('Error updating address values:', error)
   }
@@ -90,7 +103,6 @@ const AddressField = ({
 }) => {
   const { t } = useTranslation()
   const sessionTokenRef = useRef()
-  const [addressID, setAddressID] = useState('')
 
   const handleChangeStreet = async (addressValue) => {
     if (!addressValue || !addressValue.id) {
@@ -102,7 +114,8 @@ const AddressField = ({
     }
 
     try {
-      setAddressID(addressValue.id)
+      // setAddressID(addressValue.id)
+      await setFieldValue(`${addressFieldName}.id`, addressValue.id || '')
       const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
       const streetComponent = place.addressComponents.find((c) =>
         c.types.includes('route')
@@ -121,7 +134,7 @@ const AddressField = ({
       )
 
       await UpdateStateCityByPostalCode(postalCodeComponent?.longText || '')
-      getLatLongWithFullAddress(setFieldValue, values, addressID, addressFieldName, sessionTokenRef)
+      getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
 
     } catch (error) {
       console.error('Error fetching place details:', error)
@@ -163,7 +176,7 @@ const AddressField = ({
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
     await UpdateStateCityByPostalCode(value)
-    getLatLongWithFullAddress(setFieldValue, values, addressID, addressFieldName, sessionTokenRef)
+    getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
   }
 
   const handleChangeNumber = async (event) => {
@@ -175,7 +188,6 @@ const AddressField = ({
       getLatLongWithFullAddress(
         setFieldValue,
         values,
-        addressID,
         addressFieldName,
         sessionTokenRef,
         cleanedNumber
@@ -193,7 +205,7 @@ const AddressField = ({
   const handleChangeStateAndCity = async (value) => {
     await setFieldValue(`${addressFieldName}.city`, value?.city)
     await setFieldValue(`${addressFieldName}.state`, value?.state)
-    await getLatLongWithFullAddress(setFieldValue, values, addressID, addressFieldName, sessionTokenRef)
+    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef)
   }
 
   return (
