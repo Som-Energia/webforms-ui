@@ -39,23 +39,12 @@ const MAX_STEP_NUMBER = 5
 const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
   const { language } = useParams()
-
-  const { error, setError, errorInfo, setErrorInfo, getStepResult } =
-    useContext(GurbErrorContext)
-
-  const { setContent } = useContext(PopUpContext)
-
-
   const { loading } = useContext(GurbLoadingContext)
-
   const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState(false)
-
   const isMobile = useCheckMobileScreen()
-
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  const { error, setError, errorInfo, setErrorInfo, getStepResult } =
+    useContext(GurbErrorContext)
 
   const initialValues = {
     is_client: undefined,
@@ -86,9 +75,14 @@ const GurbFormRequirements = (props) => {
   ]
 
   const formikRef = useRef(null)
+
   useEffect(() => {
     formikRef.current.validateForm()
   }, [activeStep])
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [language, i18n])
 
   const nextStep = (formikProps) => {
     const { values } = formikProps
@@ -110,20 +104,24 @@ const GurbFormRequirements = (props) => {
   }
 
   const getStep = (formikProps) => {
-    const { values } = formikProps
+    const { values } = formikProps;
 
-    if (activeStep === 0) {
-      return <SupplyPoint {...formikProps} activeStep={activeStep} />
-    } else if (activeStep === 1) {
-      return <Address {...formikProps} activeStep={activeStep} />
-    } else if (activeStep === 2) {
-      return <LightQuestion {...formikProps} activeStep={activeStep} />
-    } else if (activeStep === 3) {
-      return <SelfConsumption {...formikProps} activeStep={activeStep} />
-    } else if (activeStep === 4) {
-      if (values.new_contract !== false) {
-        return <GurbRequirementsFinishWithoutContract {...formikProps} />
-      }
+    switch (activeStep) {
+      case 0:
+        return <SupplyPoint {...formikProps} activeStep={activeStep} />
+      case 1:
+        return <Address {...formikProps} activeStep={activeStep} />
+      case 2:
+        return <LightQuestion {...formikProps} activeStep={activeStep} />
+      case 3:
+        return <SelfConsumption {...formikProps} activeStep={activeStep} />
+      case 4:
+        if (values.new_contract !== false) {
+          return <GurbRequirementsFinishWithoutContract {...formikProps} />
+        }
+        return null
+      default:
+        return null
     }
   }
 
