@@ -7,7 +7,7 @@ import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
-import SimpleDialog from '../../../../components/SimpleDialog'
+import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../gurbTheme'
@@ -27,7 +27,7 @@ const SelfConsumption = (props) => {
     if (value === 'selfconsumption-on') {
       setError(true)
       setContent(
-        <SimpleDialog
+        <SimpleGurbDialog
           text={
             <Typography
               dangerouslySetInnerHTML={{
@@ -35,7 +35,7 @@ const SelfConsumption = (props) => {
               }}
             />
           }
-          acceptFunction={() => setContent(undefined)}
+          closeFunction={() => setContent(undefined)}
         />
       )
     }

@@ -14,7 +14,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import PopUpContext from '../../../../context/PopUpContext'
-import SimpleDialog from '../../../../components/SimpleDialog'
+import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
@@ -28,15 +28,15 @@ const LightQuestion = (props) => {
     if (value === 'light-off') {
       setError(true)
       setContent(
-        <SimpleDialog
-          text={
+        <SimpleGurbDialog
+          title={
             <Typography
               dangerouslySetInnerHTML={{
                 __html: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
               }}
             />
           }
-          acceptFunction={() => setContent(undefined)}
+          closeFunction={() => setContent(undefined)}
         />
       )
     } else {

@@ -19,7 +19,7 @@ import {
 import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
 import InputField from '../../../../components/InputField'
 import StateCity from '../../../../components/StateCity'
-import SimpleDialog from '../../../../components/SimpleDialog'
+import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
 import { searchPlace, getPlaceDetails } from '../../../../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../../../../services/api'
@@ -222,18 +222,6 @@ const AddressField = ({
     await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
   }
 
-  const initializeAddress = async () => {
-    await setFieldValue(`${addressFieldName}.id`, '')
-    await setFieldValue(`${addressFieldName}.street`, '')
-    await setFieldValue(`${addressFieldName}.number`, undefined)
-    await setFieldValue(`${addressFieldName}.postal_code`, undefined)
-    await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
-    await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
-    await setFieldValue(`${addressFieldName}.lat`, undefined)
-    await setFieldValue(`${addressFieldName}.long`, undefined)
-    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-  }
-
   const handleClick = async () => {
 
     try {
@@ -265,9 +253,8 @@ const AddressField = ({
       else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
-          <SimpleDialog text={<Typography dangerouslySetInnerHTML={{ __html: t('ERROR_ADDRESS_OUT_OF_GURB_PERIMETER') }} />}
-            acceptFunction={async () => {
-              // initializeAddress()
+          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('ERROR_ADDRESS_OUT_OF_GURB_PERIMETER') }} />}
+            closeFunction={async () => {
               setContent(undefined)
             }}
           />
@@ -278,9 +265,8 @@ const AddressField = ({
       else {
         console.error('Error validating perimeter address:', err)
         setContent(
-          <SimpleDialog text={<Typography dangerouslySetInnerHTML={{ __html: 'ERROR_CHECKING_GURB_DISTANCE' }} />}
-            acceptFunction={async () => {
-              // initializeAddress()
+          <SimpleGurbDialog text={<Typography dangerouslySetInnerHTML={{ __html: 'ERROR_CHECKING_GURB_DISTANCE' }} />}
+            closeFunction={async () => {
               setContent(undefined)
             }}
           />
