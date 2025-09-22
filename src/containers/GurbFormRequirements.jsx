@@ -177,6 +177,7 @@ const GurbFormRequirements = (props) => {
                       disabled={
                         loading ||
                         !formikProps.isValid || (activeStep === 1 && !formikProps.values.address.inside_perimeter) ||
+                        (activeStep === 2 && formikProps.values.has_light !== 'light-on') ||
                         activeStep === MAX_STEP_NUMBER
                       }
                       onClick={() => nextStep(formikProps)}
