@@ -70,9 +70,9 @@ const GurbFormRequirements = (props) => {
       state: { id: '', name: '' },
       city: { id: '', name: '' },
       lat: undefined,
-      long: undefined
+      long: undefined,
+      inside_perimeter: false
     },
-    gurb_enable: false,
     has_selfconsumption: undefined,
     has_member: undefined,
     redirectUrl: undefined
@@ -176,7 +176,7 @@ const GurbFormRequirements = (props) => {
                     <NextButton
                       disabled={
                         loading ||
-                        !formikProps.isValid ||
+                        !formikProps.isValid || (activeStep === 1 && !formikProps.values.address.inside_perimeter) ||
                         activeStep === MAX_STEP_NUMBER
                       }
                       onClick={() => nextStep(formikProps)}

@@ -21,7 +21,7 @@ import { addressValidations } from '../../../../containers/Gurb/requirementsVali
 import CircularProgress from '@mui/material/CircularProgress';
 import MapIcon from '@mui/icons-material/Map';
 import VerifiedIcon from '@mui/icons-material/Verified';
-
+import * as Yup from 'yup'
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -29,20 +29,16 @@ const normalizePlace = (place) => ({
 })
 
 // Handle Gurb distance
-const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue) => {
-  if (!lat || !long)
+const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addressFieldName) => {
+  if (!lat || !long) {
+    console.error('Lat and Long are required to check Gurb distance')
     throw new Error('Lat and Long are required to check Gurb distance')
-
-  try {
-    const { data } = await checkGurbDistance(gurbCode, lat, long)
-    if (!data) {
-      console.log('pop up must to be open')
-    }
-    else {
-      setFieldValue('gurb_enable', true)
-    }
-  } catch (error) {
-    console.error('Error checking Gurb distance:', error)
+  }
+  const { data } = await checkGurbDistance(gurbCode, lat, long)
+  if (!data) {
+    throw new Error('The address is out of the allowed range for this GURB')
+  } else {
+    setFieldValue(`${addressFieldName}.inside_perimeter`, true)
   }
 }
 
@@ -224,13 +220,14 @@ const AddressField = ({
         gurbCode,
         values[addressFieldName]?.lat,
         values[addressFieldName]?.long,
-        setFieldValue
+        setFieldValue,
+        addressFieldName
       )
-      setLoading(false)
     }
     catch (err) {
-      console.log("error inner", err)
-      if (err.inner) {
+      console.log(err)
+      // Handle Yup validation errors
+      if (err instanceof Yup.ValidationError) {
         const updates = { address: {} }
         await err.inner.forEach(async (e) => {
           if (e.path) {
@@ -241,6 +238,16 @@ const AddressField = ({
         })
         await setTouched(updates)
       }
+      else {
+        // Show popup for:
+        // 1. API error
+        // 2. Address out of gurb code perimeter
+        setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+        console.error('Error validating perimeter address or checking Gurb distance:', err)
+      }
+    }
+    finally {
+      setLoading(false)
     }
   }
 
@@ -364,7 +371,7 @@ const AddressField = ({
           endIcon={
             loading
               ? <CircularProgress size='20px' />
-              : values.gurb_enable
+              : values.address.inside_perimeter
                 ? <VerifiedIcon sx={{ fontSize: 20 }} />
                 : <MapIcon sx={{ fontSize: 20 }} />
           }
