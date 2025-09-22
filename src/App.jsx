@@ -429,7 +429,7 @@ const App = (props) => {
                     />
                     {props?.isGurbEnabled && (
                       <Route
-                        path="/:language/gurb/:id/requirements/"
+                        path="/:language/gurb/:gurbCode/requirements/"
                         element={
                           <PopUpContextProvider>
                             <GurbErrorContextProvider>

@@ -63,6 +63,7 @@ const GurbFormRequirements = (props) => {
     cups: '',
     has_light: undefined,
     address: {
+      id: '',
       street: '',
       number: undefined,
       postal_code: undefined,
@@ -71,6 +72,7 @@ const GurbFormRequirements = (props) => {
       lat: undefined,
       long: undefined
     },
+    gurb_enable: false,
     has_selfconsumption: undefined,
     has_member: undefined,
     redirectUrl: undefined
@@ -130,8 +132,7 @@ const GurbFormRequirements = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        //validationSchema={validationSchemas[activeStep]}
-        validationSchema={null}
+        validationSchema={validationSchemas[activeStep]}
         validateOnChange
         validateOnBlur={false}
       >

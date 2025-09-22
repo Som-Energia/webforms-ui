@@ -1,7 +1,10 @@
-import { useEffect, useState, useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from "react-router-dom";
+
 
 import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
 import {
   useHandleChange,
@@ -14,6 +17,11 @@ import InputField from '../../../../components/InputField'
 import StateCity from '../../../../components/StateCity'
 import { searchPlace } from '../../../../services/googleApiClient'
 import { checkGurbDistance } from '../../../../services/apiGurb'
+import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
+import CircularProgress from '@mui/material/CircularProgress';
+import MapIcon from '@mui/icons-material/Map';
+import VerifiedIcon from '@mui/icons-material/Verified';
+
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -21,14 +29,17 @@ const normalizePlace = (place) => ({
 })
 
 // Handle Gurb distance
-const handleCheckGurbDistance = async (lat, long) => {
-  if (!lat || !long) return
-  const gurbId = 2
+const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue) => {
+  if (!lat || !long)
+    throw new Error('Lat and Long are required to check Gurb distance')
+
   try {
-    const { data } = await checkGurbDistance(gurbId, lat, long)
-    console.log({ data })
+    const { data } = await checkGurbDistance(gurbCode, lat, long)
     if (!data) {
       console.log('pop up must to be open')
+    }
+    else {
+      setFieldValue('gurb_enable', true)
     }
   } catch (error) {
     console.error('Error checking Gurb distance:', error)
@@ -81,28 +92,26 @@ const getLatLongWithFullAddress = async (
     await setFieldValue(`${addressFieldName}.lat`, suggestedPlace.location.lat())
     await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
 
-    // 6. Check Gurb distance
-    await handleCheckGurbDistance(
-      suggestedPlace.location.lat(),
-      suggestedPlace.location.lng()
-    )
   } catch (error) {
+
     console.error('Error updating address values:', error)
   }
 }
 
 const AddressField = ({
   addressFieldName = 'address',
-  addressLabel,
   values,
   errors,
+  setFieldError,
   touched,
   setFieldValue,
   setFieldTouched,
-  setValues
+  setTouched
 }) => {
   const { t } = useTranslation()
   const sessionTokenRef = useRef()
+  const [loading, setLoading] = useState(false)
+  const { gurbCode } = useParams()
 
   const handleChangeStreet = async (addressValue) => {
     if (!addressValue || !addressValue.id) {
@@ -114,7 +123,6 @@ const AddressField = ({
     }
 
     try {
-      // setAddressID(addressValue.id)
       await setFieldValue(`${addressFieldName}.id`, addressValue.id || '')
       const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
       const streetComponent = place.addressComponents.find((c) =>
@@ -134,7 +142,7 @@ const AddressField = ({
       )
 
       await UpdateStateCityByPostalCode(postalCodeComponent?.longText || '')
-      getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+      await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
 
     } catch (error) {
       console.error('Error fetching place details:', error)
@@ -176,14 +184,12 @@ const AddressField = ({
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
     await UpdateStateCityByPostalCode(value)
-    getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
   }
 
   const handleChangeNumber = async (event) => {
     const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
-
     await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
-
     if (cleanedNumber) {
       getLatLongWithFullAddress(
         setFieldValue,
@@ -205,7 +211,37 @@ const AddressField = ({
   const handleChangeStateAndCity = async (value) => {
     await setFieldValue(`${addressFieldName}.city`, value?.city)
     await setFieldValue(`${addressFieldName}.state`, value?.state)
-    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef)
+
+    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+  }
+
+  const handleClick = async () => {
+
+    try {
+      await addressValidations.validate(values, { abortEarly: false })
+      setLoading(true)
+      await handleCheckGurbDistance(
+        gurbCode,
+        values[addressFieldName]?.lat,
+        values[addressFieldName]?.long,
+        setFieldValue
+      )
+      setLoading(false)
+    }
+    catch (err) {
+      console.log("error inner", err)
+      if (err.inner) {
+        const updates = { address: {} }
+        await err.inner.forEach(async (e) => {
+          if (e.path) {
+            await setFieldError(e.path, e.message)
+            let keyPattern = e.path.split('.')[1]
+            updates.address[keyPattern] = true
+          }
+        })
+        await setTouched(updates)
+      }
+    }
   }
 
   return (
@@ -323,6 +359,21 @@ const AddressField = ({
           error={errors[addressFieldName]?.bloc}
         />
       </Grid>
+      <Grid item xs={12}>
+        <Button
+          endIcon={
+            loading
+              ? <CircularProgress size='20px' />
+              : values.gurb_enable
+                ? <VerifiedIcon sx={{ fontSize: 20 }} />
+                : <MapIcon sx={{ fontSize: 20 }} />
+          }
+          disabled={loading} onClick={handleClick}
+        >
+          VALIDAR
+        </Button>
+      </Grid>
+
     </Grid>
   )
 }
