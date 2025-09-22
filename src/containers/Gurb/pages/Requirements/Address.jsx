@@ -5,27 +5,27 @@ import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
+import CircularProgress from '@mui/material/CircularProgress'
+import MapIcon from '@mui/icons-material/Map'
+import VerifiedIcon from '@mui/icons-material/Verified'
+
+import * as Yup from 'yup'
+
 import {
   useHandleChange,
   useHandleChangeInteger
 } from '../../../../hooks/useHandleChange'
 
-import { getPlaceDetails } from '../../../../services/googleApiClient'
-import { getMunicipisByPostalCode } from '../../../../services/api'
+import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
 import InputField from '../../../../components/InputField'
 import StateCity from '../../../../components/StateCity'
-import { searchPlace } from '../../../../services/googleApiClient'
+import SimpleDialog from '../../../../components/SimpleDialog'
+import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
+import { searchPlace, getPlaceDetails } from '../../../../services/googleApiClient'
+import { getMunicipisByPostalCode } from '../../../../services/api'
 import { checkGurbDistance } from '../../../../services/apiGurb'
-import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
-import CircularProgress from '@mui/material/CircularProgress'
-import MapIcon from '@mui/icons-material/Map'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import * as Yup from 'yup'
 
 import PopUpContext from '../../../../context/PopUpContext'
-import SimpleDialog from '../../../../components/SimpleDialog'
-
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -93,7 +93,6 @@ const getLatLongWithFullAddress = async (
     await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
 
   } catch (error) {
-
     console.error('Error updating address values:', error)
   }
 }
@@ -104,7 +103,6 @@ class GurbOutOfPerimeterError extends Error {
     this.name = "GurbOutOfPerimeterError";
   }
 }
-
 
 const AddressField = ({
   addressFieldName = 'address',
