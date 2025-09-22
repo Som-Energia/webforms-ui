@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext, act } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -14,7 +14,7 @@ import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
   addressValidations,
   lightValidations,
-  selfConsumptionValidations
+  selfConsumptionValidations,
 } from './Gurb/requirementsValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
@@ -31,20 +31,17 @@ import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
 import SomStepper from '../components/NewSomStepper'
 import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsWithoutContractTariffSelection'
 import GurbRequirementsResult from './Gurb/pages/Gurb/GurbRequirementsResult'
-import PopUpContext from '../context/PopUpContext'
-
 
 const MAX_STEP_NUMBER = 5
 
-const GurbFormRequirements = (props) => {
+const GurbFormRequirements = () => {
   const { i18n } = useTranslation()
   const { language } = useParams()
   const { loading } = useContext(GurbLoadingContext)
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(1)
   const [completed, setCompleted] = useState(false)
   const isMobile = useCheckMobileScreen()
-  const { error, setError, errorInfo, setErrorInfo, getStepResult } =
-    useContext(GurbErrorContext)
+  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const initialValues = {
     is_client: undefined,
@@ -60,24 +57,24 @@ const GurbFormRequirements = (props) => {
       city: { id: '', name: '' },
       lat: undefined,
       long: undefined,
-      inside_perimeter: false
+      inside_perimeter: false,
     },
     has_selfconsumption: undefined,
     has_member: undefined,
-    redirectUrl: undefined
+    redirectUrl: undefined,
   }
 
   const validationSchemas = [
     supplyPointValidations,
     addressValidations,
     lightValidations,
-    selfConsumptionValidations
+    selfConsumptionValidations,
   ]
 
   const formikRef = useRef(null)
 
   useEffect(() => {
-    formikRef.current.validateForm()
+    formikRef.current?.validateForm()
   }, [activeStep])
 
   useEffect(() => {
@@ -87,10 +84,13 @@ const GurbFormRequirements = (props) => {
   const nextStep = (formikProps) => {
     const { values } = formikProps
 
-    if (activeStep === 4) { setCompleted(true) }
+    if (activeStep === 4) {
+      setCompleted(true)
+    }
     if (activeStep === 3 && values.already_contract === true) {
       setCompleted(true)
     }
+
     setActiveStep((prev) => {
       if (prev === 3 && values.already_contract === true) {
         return MAX_STEP_NUMBER
@@ -100,22 +100,22 @@ const GurbFormRequirements = (props) => {
   }
 
   const prevStep = () => {
-    setActiveStep((prev) => Math.max(0, prev - 1))
+    setActiveStep((prev) => Math.max(1, prev - 1))
   }
 
   const getStep = (formikProps) => {
-    const { values } = formikProps;
+    const { values } = formikProps
 
     switch (activeStep) {
-      case 0:
-        return <SupplyPoint {...formikProps} activeStep={activeStep} />
       case 1:
-        return <Address {...formikProps} activeStep={activeStep} />
+        return <SupplyPoint {...formikProps} activeStep={activeStep} />
       case 2:
-        return <LightQuestion {...formikProps} activeStep={activeStep} />
+        return <Address {...formikProps} activeStep={activeStep} />
       case 3:
-        return <SelfConsumption {...formikProps} activeStep={activeStep} />
+        return <LightQuestion {...formikProps} activeStep={activeStep} />
       case 4:
+        return <SelfConsumption {...formikProps} activeStep={activeStep} />
+      case 5:
         if (values.new_contract !== false) {
           return <GurbRequirementsFinishWithoutContract {...formikProps} />
         }
@@ -130,7 +130,7 @@ const GurbFormRequirements = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        validationSchema={validationSchemas[activeStep]}
+        validationSchema={validationSchemas[activeStep - 1]}
         validateOnChange
         validateOnBlur={false}
       >
@@ -139,7 +139,7 @@ const GurbFormRequirements = (props) => {
             {!completed && (
               <Box sx={{ marginBottom: '65px' }}>
                 <SomStepper
-                  activeStep={activeStep - 1} // because step 0 does not count
+                  activeStep={activeStep - 1}
                   steps={GURB_REQUIREMENTS_SUBSTEPS}
                 />
               </Box>
@@ -159,14 +159,12 @@ const GurbFormRequirements = (props) => {
                 sx={{
                   marginTop: '2rem',
                   justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                {activeStep !== 0 && (
+                  alignItems: 'center',
+                }}
+              >
+                {activeStep > 1 && (
                   <Grid item sm={2} xs={12}>
-                    <PrevButton
-                      onClick={() => prevStep(formikProps)}
-                      title={'PREV'}
-                    />
+                    <PrevButton onClick={prevStep} title="PREV" />
                   </Grid>
                 )}
                 <Grid item sm={2} xs={12} order={-1}>
@@ -174,13 +172,17 @@ const GurbFormRequirements = (props) => {
                     <NextButton
                       disabled={
                         loading ||
-                        !formikProps.isValid || (activeStep === 1 && !formikProps.values.address.inside_perimeter) ||
-                        (activeStep === 2 && formikProps.values.has_light !== 'light-on') ||
-                        (activeStep === 3 && formikProps.values.has_selfconsumption !== 'selfconsumption-off') ||
-                        activeStep === MAX_STEP_NUMBER
+                        !formikProps.isValid ||
+                        (activeStep === 2 &&
+                          !formikProps.values.address.inside_perimeter) ||
+                        (activeStep === 3 &&
+                          formikProps.values.has_light !== 'light-on') ||
+                        (activeStep === 4 &&
+                          formikProps.values.has_selfconsumption !==
+                            'selfconsumption-off')
                       }
                       onClick={() => nextStep(formikProps)}
-                      title={'NEXT'}
+                      title="NEXT"
                     />
                   )}
                 </Grid>
