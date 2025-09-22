@@ -6,7 +6,7 @@ const WEBFORMS_API_URL = document.getElementById('root')?.dataset?.webformsApiUr
 export const checkGurbDistance = async (gurbId, lat, long) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ data: true })
+      resolve({ data: false })
     }, "5000");
   })
   return axios({

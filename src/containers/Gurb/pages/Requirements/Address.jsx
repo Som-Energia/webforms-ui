@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from "react-router-dom";
 
-
+import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
@@ -18,10 +18,14 @@ import StateCity from '../../../../components/StateCity'
 import { searchPlace } from '../../../../services/googleApiClient'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
-import CircularProgress from '@mui/material/CircularProgress';
-import MapIcon from '@mui/icons-material/Map';
-import VerifiedIcon from '@mui/icons-material/Verified';
+import CircularProgress from '@mui/material/CircularProgress'
+import MapIcon from '@mui/icons-material/Map'
+import VerifiedIcon from '@mui/icons-material/Verified'
 import * as Yup from 'yup'
+
+import PopUpContext from '../../../../context/PopUpContext'
+import SimpleDialog from '../../../../components/SimpleDialog'
+
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -36,7 +40,7 @@ const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addre
   }
   const { data } = await checkGurbDistance(gurbCode, lat, long)
   if (!data) {
-    throw new Error('The address is out of the allowed range for this GURB')
+    throw new GurbOutOfPerimeterError('The address is out of the allowed range for this GURB')
   } else {
     setFieldValue(`${addressFieldName}.inside_perimeter`, true)
   }
@@ -94,6 +98,14 @@ const getLatLongWithFullAddress = async (
   }
 }
 
+class GurbOutOfPerimeterError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "GurbOutOfPerimeterError";
+  }
+}
+
+
 const AddressField = ({
   addressFieldName = 'address',
   values,
@@ -108,6 +120,7 @@ const AddressField = ({
   const sessionTokenRef = useRef()
   const [loading, setLoading] = useState(false)
   const { gurbCode } = useParams()
+  const { setContent } = useContext(PopUpContext)
 
   const handleChangeStreet = async (addressValue) => {
     if (!addressValue || !addressValue.id) {
@@ -211,6 +224,18 @@ const AddressField = ({
     await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
   }
 
+  const initializeAddress = async () => {
+    await setFieldValue(`${addressFieldName}.id`, '')
+    await setFieldValue(`${addressFieldName}.street`, '')
+    await setFieldValue(`${addressFieldName}.number`, undefined)
+    await setFieldValue(`${addressFieldName}.postal_code`, undefined)
+    await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
+    await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
+    await setFieldValue(`${addressFieldName}.lat`, undefined)
+    await setFieldValue(`${addressFieldName}.long`, undefined)
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+  }
+
   const handleClick = async () => {
 
     try {
@@ -225,7 +250,6 @@ const AddressField = ({
       )
     }
     catch (err) {
-      console.log(err)
       // Handle Yup validation errors
       if (err instanceof Yup.ValidationError) {
         const updates = { address: {} }
@@ -238,15 +262,34 @@ const AddressField = ({
         })
         await setTouched(updates)
       }
-      else {
-        // Show popup for:
-        // 1. API error
-        // 2. Address out of gurb code perimeter
+
+      // Handle Gurb out of perimeter error
+      else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-        console.error('Error validating perimeter address or checking Gurb distance:', err)
+        setContent(
+          <SimpleDialog text={<Typography dangerouslySetInnerHTML={{ __html: t('ERROR_ADDRESS_OUT_OF_GURB_PERIMETER') }} />}
+            acceptFunction={async () => {
+              // initializeAddress()
+              setContent(undefined)
+            }}
+          />
+        )
       }
-    }
-    finally {
+
+      // Handle other errors
+      else {
+        console.error('Error validating perimeter address:', err)
+        setContent(
+          <SimpleDialog text={<Typography dangerouslySetInnerHTML={{ __html: 'ERROR_CHECKING_GURB_DISTANCE' }} />}
+            acceptFunction={async () => {
+              // initializeAddress()
+              setContent(undefined)
+            }}
+          />
+        )
+      }
+
+    } finally {
       setLoading(false)
     }
   }
