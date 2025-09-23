@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 import CUPS from '../../../../components/CUPS'
+import { checkMember } from '../../../../services/api'
 
 
 const GurbIdentification = (props) => {
@@ -15,6 +16,32 @@ const GurbIdentification = (props) => {
   const { t } = useTranslation()
 
   const { loading, setLoading } = useContext(GurbLoadingContext)
+
+  const handleCheckMemberResponse = async () => {
+    let status = undefined
+    await checkMember(values.member.number, values.member.nif)
+      .then((response) => {
+        status = response?.data
+      })
+      .catch(() => {
+        status = false
+      })
+    if (status === true) {
+      await setFieldValue('member.link_member', true)
+    } else {
+      await setFieldValue('member.link_member', false)
+      await setFieldError('link_member', t('SOCIA_NO_TROBADA'))
+      setFieldTouched('member.number', true)
+    }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    if (values?.member?.nif && values?.member?.number) {
+      handleCheckMemberResponse()
+    }
+  }, [values.member.number, values.member.nif])
+
 
   const handleInputNif = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)

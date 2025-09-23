@@ -1,5 +1,25 @@
 import * as Yup from 'yup'
 
+
+export const identifierValidations = Yup.object().shape({
+  member: Yup.object().shape({  // TODO: Don't repeat code 👀
+    nif: Yup.string()
+      .required('ERROR_REQUIRED_FIELD')
+      .matches(/(^[A-GI-Z0-9])/, 'CIF_COMMUNITY_OWNERS')
+      .matches(/^([0-9]{8}[A-Z])|([A-Z][0-9]{7}[A-Z])|([A-Z][0-9]{8})$/, 'INVALID_NIF'),
+    number: Yup.string()
+      .required('ERROR_REQUIRED_FIELD')
+      .matches(/(^[0-9]+$)/, 'INVALID_NUMBER')
+  }),
+  cups: Yup.string()
+    .min(20, 'ERROR_FIELD_TOO_SHORT')
+    .max(22, 'ERROR_FIELD_TOO_LONG')
+    .required('ERROR_REQUIRED_FIELD'),
+  new_contract: Yup.string()
+    .required(t('CUPS_SHOULD_BE_ACTIVE'))
+    .oneOf(['busy', 'active'], t('CUPS_SHOULD_BE_ACTIVE')),
+})
+
 export const gurbPowerOptions = Yup.object().shape({
     contract: Yup.object().shape({
         gurb_power: Yup.string()
