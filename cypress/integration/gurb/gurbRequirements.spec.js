@@ -31,40 +31,11 @@ describe('Requirements', () => {
                 this.googlePlaceResponse
             )
 
-            /*
-            cy.lightQuestion()
+            cy.lightQuestion(true)
 
             cy.selfconsumptionQuestion(false)
 
-            cy.memberQuestion('member-off')
-
-            cy.personalDataMember(this.data.personalData)
-
-            cy.get('[data-cy="success_link"]').click()
-
-            cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
-
-            cy.personalDataHolder(this.data.personalData)
-
-            cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
-
-            cy.supplyPointData()
-
-            cy.choosePower({ powers: [2, 3] })
-
-            cy.chooseTariffGURB()
-
-            cy.donationQuestion()
-
-            cy.paymentData(this.data.randomIban)
-
-            cy.checkReviewContractStep(this.personaldata.vat)
-
-            cy.interceptAvailablePowers()
-
-            cy.powerChoice('0_5_kwh')
-
-            cy.acceptAllTerms() */
+            cy.resultExistingMember(this.data.gurbCode)
         })
     })
 })

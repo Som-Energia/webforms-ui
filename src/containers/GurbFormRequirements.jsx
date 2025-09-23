@@ -35,7 +35,7 @@ export const MAX_STEPS_NUMBER = { MAX_STEP_NUMBER_DEFAULT: 5, MAX_STEP_NUMBER_NE
 
 const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
-  const { language } = useParams()
+  const { language, gurbCode } = useParams()
   const { loading } = useContext(GurbLoadingContext)
   const [maxStepNum, setMaxStepNum] = useState(MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT)
   const [activeStep, setActiveStep] = useState(1)
@@ -151,7 +151,7 @@ const GurbFormRequirements = (props) => {
               )}
               {completed ? (
                 <Box sx={{ mt: 2 }}>
-                  <GurbRequirementsResult {...formikProps} />
+                  <GurbRequirementsResult {...formikProps} gurbCode={gurbCode} />
                 </Box>
               ) : (
                 getStep(formikProps)

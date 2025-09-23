@@ -7,7 +7,7 @@ export const checkGurbDistance = async (gurbId, lat, long) => {
   // return new Promise((resolve) => {
   //   setTimeout(() => {
   //     resolve({ data: true })
-  //   }, "5000");
+  //   }, "2000");
   // })
   return axios({
     method: 'GET',

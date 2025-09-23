@@ -41,6 +41,8 @@ Cypress.Commands.add('fillGurbAddress', (aValidGurbCode, street, lat, long, stat
 
   cy.get('[data-cy="street"]').type(street.input)
   cy.wait('@googleAutocomplete')
+  cy.wait(1000)
+
   cy.contains(street.value).click()
   cy.wait('@googleGetPlace')
 
@@ -71,6 +73,13 @@ Cypress.Commands.add('selfconsumptionQuestion', (selfconsumption = true) => {
     .click()
 
   cy.get('[data-cy=next]').click()
+})
+
+Cypress.Commands.add('resultExistingMember', (gurbCode) => {
+  cy.get('[data-cy="redirect-button"]').should('exist')
+  cy.get('[data-cy="redirect-button"]')
+    .invoke('attr', 'href')
+    .should('include', `/ca/gurb/${gurbCode}/join/`)
 })
 
 Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {

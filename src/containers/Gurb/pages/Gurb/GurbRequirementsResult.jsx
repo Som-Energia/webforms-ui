@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import RedirectUrl from '../../../../containers/Gurb/components/RedirectUrl'
 
-const GurbRequirementsResult = ({ values }) => {
+const GurbRequirementsResult = ({ values, gurbCode }) => {
   const { t } = useTranslation()
   const { new_contract, redirectUrl } = values
 
@@ -17,7 +17,7 @@ const GurbRequirementsResult = ({ values }) => {
     ? t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER')
     : t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER')
 
-  const resultRedirectUrl = redirectUrl ?? 'http://localhost:3000/ca/gurb/2/join/'
+  const resultRedirectUrl = redirectUrl ?? `http://localhost:3000/ca/gurb/${gurbCode}/join/`
 
   const resultButtonText = new_contract
     ? t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER')
