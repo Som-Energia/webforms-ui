@@ -10,7 +10,6 @@ import { textHeader4, textField } from '../gurbTheme'
 import InputTitle from '../../../components/InputTitle'
 
 export default function LocationInput({
-  id,
   textFieldLabel,
   textFieldName,
   textFieldHelper,
@@ -90,7 +89,7 @@ export default function LocationInput({
   return (
     <Autocomplete
       freeSolo
-      data-cy={id}
+      data-cy={"street"}
       value={normalizedValue}
       inputValue={inputValue}
       options={suggestions}

@@ -4,11 +4,11 @@ const WEBFORMS_API_URL = document.getElementById('root')?.dataset?.webformsApiUr
   ?? import.meta.env.VITE_WEBFORMS_API_URL ?? null // For tests
 
 export const checkGurbDistance = async (gurbId, lat, long) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ data: true })
-    }, "5000");
-  })
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve({ data: true })
+  //   }, "5000");
+  // })
   return axios({
     method: 'GET',
     url: `${WEBFORMS_API_URL}/check/gurb/${gurbId}?lat=${lat}&long=${long}`,

@@ -282,7 +282,6 @@ const AddressField = ({
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>
         <LocationInput
-          id={addressFieldName}
           textFieldName={t('ADDRESS')}
           value={values[addressFieldName]?.street}
           onChange={handleChangeStreet}
@@ -301,7 +300,7 @@ const AddressField = ({
 
       <Grid item sm={4} xs={12}>
         <InputField
-          name={`${addressFieldName}.postal_code`}
+          name={'postal_code'}
           handleBlur={() =>
             setFieldTouched(`${addressFieldName}.postal_code`, true)
           }
@@ -333,7 +332,7 @@ const AddressField = ({
 
       <Grid item sm={4} xs={12}>
         <InputField
-          name={`${addressFieldName}.number`}
+          name={'number'}
           handleBlur={() => setFieldTouched(`${addressFieldName}.number`, true)}
           textFieldName={t('NUMBER')}
           textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
@@ -352,7 +351,7 @@ const AddressField = ({
 
       <Grid item sm={2} xs={6}>
         <InputField
-          name={`${addressFieldName}.floor`}
+          name={'floor'}
           textFieldName={t('FLOOR')}
           handleChange={handleChangeInteger}
           touched={touched[addressFieldName]?.floor}
@@ -363,7 +362,7 @@ const AddressField = ({
 
       <Grid item sm={2} xs={6}>
         <InputField
-          name={`${addressFieldName}.door`}
+          name={'door'}
           textFieldName={t('DOOR')}
           handleChange={handleChange}
           touched={touched[addressFieldName]?.door}
@@ -374,7 +373,7 @@ const AddressField = ({
 
       <Grid item sm={2} xs={6}>
         <InputField
-          name={`${addressFieldName}.stairs`}
+          name={'stairs'}
           textFieldName={t('STAIRS')}
           handleChange={handleChange}
           touched={touched[addressFieldName]?.stairs}
@@ -385,7 +384,7 @@ const AddressField = ({
 
       <Grid item sm={2} xs={6}>
         <InputField
-          name={`${addressFieldName}.bloc`}
+          name={'bloc'}
           textFieldName={t('BLOCK')}
           handleChange={handleChange}
           touched={touched[addressFieldName]?.bloc}
@@ -403,6 +402,7 @@ const AddressField = ({
                 : <MapIcon sx={{ fontSize: 20 }} />
           }
           disabled={loading} onClick={handleClick}
+          data-cy={'validate-address'}
         >
           VALIDAR
         </Button>

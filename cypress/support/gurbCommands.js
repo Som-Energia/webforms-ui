@@ -1,12 +1,15 @@
-Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
+Cypress.Commands.add('identifySupplyPointGURB', (cups, cupsStatus, statusCode = 200,) => {
   //Intercept call to check CUPS
   cy.intercept('GET', '/check/cups/status/*', {
     statusCode: statusCode,
     body: {
       data: {
+        address: "Rue del percebe 13",
         cups: cups,
-        status: 'new',
-        tariff_type: null
+        knowledge_of_distri: true,
+        status: cupsStatus,
+        tariff_type: null,
+        tariff_name: '2.0TD'
       },
       state: statusCode === 200,
       status: 'ONLINE'
@@ -25,17 +28,38 @@ Cypress.Commands.add('lightQuestion', (lightOn = true) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('gurbAddress', (street) => {
-  cy.get('[data-cy="address-street"]').type(street.input)
+Cypress.Commands.add('fillGurbAddress', (aValidGurbCode, street, lat, long, statusCode, getAutocompleteResponse, getPlaceResponse) => {
+  cy.intercept('POST', 'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/AutocompletePlaces', {
+    statusCode: statusCode,
+    body: getAutocompleteResponse
+  }).as('googleAutocomplete')
+
+  cy.intercept('POST', 'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace', {
+    statusCode: statusCode,
+    body: getPlaceResponse
+  }).as('googleGetPlace')
+
+  cy.get('[data-cy="street"]').type(street.input)
+  cy.wait('@googleAutocomplete')
   cy.contains(street.value).click()
+  cy.wait('@googleGetPlace')
 
-  cy.get('[data-cy="address.number"]').type('2')
-  cy.get('[data-cy="address.floor"]').type('1')
-  cy.get('[data-cy="address.door"]').type('3')
-  cy.get('[data-cy="address.stairs"]').type('B')
-  cy.get('[data-cy="address.bloc"]').type('Omega')
 
-  cy.get('[data-cy=next]').click()
+  cy.get('[data-cy="number"]').type('2')
+
+  cy.intercept('GET', `/check/gurb/${aValidGurbCode}?lat=${lat}&long=${long}`, {
+    statusCode: statusCode,
+    body: {
+      data: true,
+      state: statusCode === 200,
+      status: 'ONLINE'
+    }
+  }).as('checkGurb')
+
+  cy.get('[data-cy=validate-address]').click()
+  cy.wait('@checkGurb')
+
+  cy.get('[data-cy=next]').should('not.be.disabled').click()
 })
 
 Cypress.Commands.add('selfconsumptionQuestion', (selfconsumption = true) => {
