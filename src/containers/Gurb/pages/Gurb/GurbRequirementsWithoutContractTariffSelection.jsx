@@ -38,10 +38,10 @@ const GurbRequirementsWithoutContractTariffSelection = (props) => {
   const handleTariffQuestion = (optionId) => {
     setSelectedOption(optionId)
 
-    const baseUrl = 'https://baseUrl.com/'
+    const baseUrl = 'https://somenergia.coop/'
     const redirectUrl = optionId === 'periods-tariff'
-      ? baseUrl + 'p'
-      : baseUrl + 'i'
+      ? baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF')
+      : baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF')
     setFieldValue('redirectUrl', redirectUrl)
   }
 
