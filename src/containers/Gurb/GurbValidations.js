@@ -16,8 +16,8 @@ export const identifierValidations = Yup.object().shape({
     .max(22, 'ERROR_FIELD_TOO_LONG')
     .required('ERROR_REQUIRED_FIELD'),
   new_contract: Yup.string()
-    .required(t('CUPS_SHOULD_BE_ACTIVE'))
-    .oneOf(['busy', 'active'], t('CUPS_SHOULD_BE_ACTIVE')),
+    .required('CUPS_SHOULD_BE_ACTIVE')
+    .oneOf(['busy', 'active'], 'CUPS_SHOULD_BE_ACTIVE'),
 })
 
 export const gurbPowerOptions = Yup.object().shape({
