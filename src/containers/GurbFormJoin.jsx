@@ -10,8 +10,7 @@ import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
 
-import noValidation from '../formValidations/noValidation'
-import { gurbPowerOptions, gurbPolicyChecks } from './Gurb/GurbValidations'
+import { identifierValidations, gurbPowerOptions, gurbPolicyChecks } from './Gurb/GurbValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
@@ -47,25 +46,25 @@ const GurbFormJoin = (props) => {
   }, [language, i18n])
 
   const initialValues = {
-    is_client: undefined,
+    new_contract: undefined,
     cups: '',
-    has_light: undefined,
-    address: {
-      street: '',
-      number: undefined,
-      postal_code: undefined,
-      state: undefined,
-      city: undefined,
-      lat: undefined,
-      long: undefined
-    },
-    has_selfconsumption: undefined,
-    has_member: undefined,
+    // has_light: undefined,
+    // address: {
+    //   street: '',
+    //   number: undefined,
+    //   postal_code: undefined,
+    //   state: undefined,
+    //   city: undefined,
+    //   lat: undefined,
+    //   long: undefined
+    // },
+    // has_selfconsumption: undefined,
+    // has_member: undefined,
     member: {
       number: '',
       nif: '',
-      is_member: false,
-      link_member: false
+      // is_member: false,
+      // link_member: false
     },
     cadastral_reference: '',
     cadastral_reference_valid: true,
@@ -91,7 +90,7 @@ const GurbFormJoin = (props) => {
     gurb_adhesion_payment_accepted: false
   }
 
-  const validationSchemas = [noValidation, gurbPowerOptions, gurbPolicyChecks]
+  const validationSchemas = [identifierValidations, gurbPowerOptions, gurbPolicyChecks]
 
   const handlePost = async (values) => {
     await addGurb(values)
@@ -142,8 +141,7 @@ const GurbFormJoin = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        // validationSchema={validationSchemas[activeStep]}
-        validationSchema={null}
+        validationSchema={validationSchemas[activeStep]}
         validateOnChange
         validateOnBlur={false}
       >
