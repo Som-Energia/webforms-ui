@@ -28,7 +28,7 @@ const SelfConsumption = (props) => {
       setError(true)
       setContent(
         <SimpleGurbDialog
-          text={
+          title={
             <Typography
               dangerouslySetInnerHTML={{
                 __html: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
