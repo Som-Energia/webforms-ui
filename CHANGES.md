@@ -1,5 +1,8 @@
 # Change Log
 
+## 6.1.0
+- Added urls for unified form for landing page
+
 ## 6.0.0
 
 - Remove _WM endpoint
