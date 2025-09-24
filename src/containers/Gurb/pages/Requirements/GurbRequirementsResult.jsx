@@ -3,7 +3,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
-import RedirectUrl from '../../../../containers/Gurb/components/RedirectUrl'
+import RedirectUrl from '../../components/RedirectUrl'
 
 const GurbRequirementsResult = ({ values, gurbCode }) => {
   const { t } = useTranslation()
