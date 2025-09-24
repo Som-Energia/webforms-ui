@@ -38,4 +38,30 @@ describe('Requirements', () => {
             cy.resultExistingMember(this.data.gurbCode)
         })
     })
+
+    describe('Gurb Requirements', function () {
+        it('Contract NOT exist', function () {
+            cy.identifySupplyPointGURB(this.data.supplyPoint.new_cups, 'new', 200)
+
+            cy.fillGurbAddress(
+                this.data.gurbCode,
+                this.data.personalData.googleAutoCompleteStreet,
+                this.data.addressData.lat,
+                this.data.addressData.long,
+                200,
+                this.googleAutocompleteResponse,
+                this.googlePlaceResponse
+            )
+
+            cy.lightQuestion(true)
+
+            cy.selfconsumptionQuestion(false)
+
+            const selectedTariff = "periods"
+
+            cy.choiceNewContractTariff(selectedTariff)
+
+            cy.resultNotExistingMember(selectedTariff)
+        })
+    })
 })

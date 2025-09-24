@@ -75,11 +75,29 @@ Cypress.Commands.add('selfconsumptionQuestion', (selfconsumption = true) => {
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('choiceNewContractTariff', (selectedTariff) => {
+  cy.get(`[data-cy="indexed-tariff"]`).should('exist')
+  cy.get('[data-cy="periods-tariff"]').should('exist')
+
+  cy.get(`[data-cy="${selectedTariff}-tariff"]`).should('exist').click()
+
+  cy.get('[data-cy=next]').click()
+})
+
 Cypress.Commands.add('resultExistingMember', (gurbCode) => {
   cy.get('[data-cy="redirect-button"]').should('exist')
   cy.get('[data-cy="redirect-button"]')
     .invoke('attr', 'href')
     .should('include', `/ca/gurb/${gurbCode}/join/`)
+})
+
+Cypress.Commands.add('resultNotExistingMember', (selectedTariff) => {
+  const assertTariff = selectedTariff === "periods" ? "periodes" : "indexada"
+
+  cy.get('[data-cy="redirect-button"]').should('exist')
+  cy.get('[data-cy="redirect-button"]')
+    .invoke('attr', 'href')
+    .should('include', `${assertTariff}`)
 })
 
 Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {

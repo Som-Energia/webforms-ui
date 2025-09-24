@@ -52,6 +52,7 @@ const GurbRequirementsWithoutContractTariffSelection = (props) => {
 
       <Chooser
         name="tariff-question"
+        data-cy='tariff-chooser'
         options={options}
         value={selectedOption} // Pass the selected option ID, not the URL
         handleChange={handleTariffQuestion}
