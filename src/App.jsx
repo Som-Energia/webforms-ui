@@ -540,7 +540,8 @@ const App = (props) => {
                     ))}
 
                     {[
-                      '/:language/test-unified-contract-form'
+                      '/:language/landing/captacio-domestic',
+                      '/:language/landing/captacio-empreses'
                     ].map((path) => (
                       <Route
                         path={path}
