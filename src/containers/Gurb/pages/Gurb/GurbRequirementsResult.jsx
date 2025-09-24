@@ -17,7 +17,7 @@ const GurbRequirementsResult = ({ values, gurbCode }) => {
     ? t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER')
     : t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER')
 
-  const resultRedirectUrl = redirectUrl ?? `http://localhost:3000/ca/gurb/${gurbCode}/join/`
+  const resultRedirectUrl = redirectUrl ?? t('GURB_REDIRECT_JOIN_FORM_URL', { gurbCode: gurbCode })
 
   const resultButtonText = new_contract
     ? t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER')

@@ -253,7 +253,7 @@ const AddressField = ({
       else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
-          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('ERROR_ADDRESS_OUT_OF_GURB_PERIMETER') }} />}
+          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_ADDRESS_OUT_OF_PERIMETER') }} />}
             closeFunction={async () => {
               setContent(undefined)
             }}
@@ -265,7 +265,7 @@ const AddressField = ({
       else {
         console.error('Error validating perimeter address:', err)
         setContent(
-          <SimpleGurbDialog text={<Typography dangerouslySetInnerHTML={{ __html: 'ERROR_CHECKING_GURB_DISTANCE' }} />}
+          <SimpleGurbDialog text={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_CHECKING_DISTANCE') }} />}
             closeFunction={async () => {
               setContent(undefined)
             }}
