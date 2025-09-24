@@ -28,7 +28,7 @@ import LightQuestion from './Gurb/pages/Requirements/LightQuestion'
 import Address from './Gurb/pages/Requirements/Address'
 import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
 import SomStepper from '../components/NewSomStepper'
-import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsWithoutContractTariffSelection'
+import GurbRequirementsFinishWithoutContract from './Gurb/pages/Gurb/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './Gurb/pages/Gurb/GurbRequirementsResult'
 
 export const MAX_STEPS_NUMBER = { MAX_STEP_NUMBER_DEFAULT: 5, MAX_STEP_NUMBER_NEW_CONTRACT: 6 }

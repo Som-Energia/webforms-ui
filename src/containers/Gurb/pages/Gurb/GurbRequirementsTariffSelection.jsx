@@ -9,7 +9,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
-const GurbRequirementsWithoutContractTariffSelection = (props) => {
+const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()
   const { language } = useParams()
   const { t } = useTranslation()
@@ -71,4 +71,4 @@ const GurbRequirementsWithoutContractTariffSelection = (props) => {
     </Grid>
   )
 }
-export default GurbRequirementsWithoutContractTariffSelection
+export default GurbRequirementsTariffSelection
