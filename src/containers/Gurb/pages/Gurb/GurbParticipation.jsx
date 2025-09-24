@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert'
 import { getPowers } from '../../../../services/api'
 
 const Contract = (props) => {
-  const [powers, setPowers] = useState([])
+  const [gurbDetails, setGurbDetails] = useState({})
 
   const cost = {
     "1 KWh": 180,
@@ -16,8 +16,17 @@ const Contract = (props) => {
   }
 
   const getAvailablePowers = () => {
-    getPowers(1)
-      .then(response => setPowers(response.data))
+    getPowers('G003', '2.0TD')
+      .then((response) => {
+        setGurbDetails({
+          ...response.data,
+          available_betas: response.data.available_betas.map((item, index) => ({
+            id: index + 1,
+            value: item,
+            text: `${item} kW`
+          }))
+        })
+      })
       .catch(error => console.log(error))
   }
 
@@ -40,7 +49,7 @@ const Contract = (props) => {
       <Typography sx={textHeader4}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT')}</Typography>
       <Typography sx={textHeader5}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}</Typography>
       <Select
-        options={powers}
+        options={gurbDetails.available_betas ?? []}
         value={values.contract.gurb_power}
         handleChange={(value) => onChangePower(value)}
         style={textField}
@@ -55,11 +64,11 @@ const Contract = (props) => {
         }
       />
       <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
-        __html: t('GURB_PARTICIPATION_TEXT_1')
+        __html: t('GURB_PARTICIPATION_TEXT_1', {initial_quota: gurbDetails.initial_quota})
       }} /> </Alert>
-      <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
+      {gurbDetails.surplus_compensation && <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
         __html: t('GURB_PARTICIPATION_TEXT_2')
-      }} /> </Alert>
+      }} /> </Alert>}
     </Box>
   )
 }

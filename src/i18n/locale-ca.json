@@ -910,7 +910,7 @@
     "GURB_TARIFFMODE_INDEXED_BODY": "El precio de la energía en el mercado mayorista diario se traslada directamente a las personas y empresas consumidoras. Las variaciones de precio se repercuten en tiempo real a los usuarios, por lo que el precio cambia cada día y cada hora según las fluctuaciones del mercado diario.",
     "GURB_TARIFFMODE_TITLE": "Tarifes",
     "GURB_TARIFFMODE_QUESTION": "Quina tarifa vols contractar?",
-    "GURB_PARTICIPATION_TEXT_1": "<ul><li>Una participació de <strong>0,5KWh</strong> equival a un <strong> cost d'adhesió de 90 €</strong></li><li>Una participació de <strong>1KWh</strong> equival a un <strong> cost d'adhesió de 180 €</strong></li></ul>",
+    "GURB_PARTICIPATION_TEXT_1": "El <strong>cost d'adhesió és de {{initial_quota}}€</strong>",
     "GURB_PARTICIPATION_TEXT_2": "Si consumeixes energia durant les hores de generació de la planta GURB (hores solars), et beneficies d'un autoconsum directe, estalviant aproximadament uns 0,20€/kWh. L'energia que et sobri, és a dir, aquella que generis però no gastis, es pagarà aproximadament a 0,05 €/kWh. D'aquesta forma sempre hi ha estalvi, però és més rendible autoconsumir en temps real.",
     "GURB_PARTICIPATION_TITLE_1_STEP": "1. Participació a GURB",
     "GURB_PARTICIPATION_TITLE_2_STEP": "2. Resum contractació",
