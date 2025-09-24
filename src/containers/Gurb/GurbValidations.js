@@ -15,9 +15,9 @@ export const identifierValidations = Yup.object().shape({
     .min(20, 'ERROR_FIELD_TOO_SHORT')
     .max(22, 'ERROR_FIELD_TOO_LONG')
     .required('ERROR_REQUIRED_FIELD'),
-  new_contract: Yup.string()
+  new_contract: Yup.boolean()
     .required('CUPS_SHOULD_BE_ACTIVE')
-    .oneOf(['busy', 'active'], 'CUPS_SHOULD_BE_ACTIVE'),
+    .oneOf([false], 'CUPS_SHOULD_BE_ACTIVE'),
 })
 
 export const gurbPowerOptions = Yup.object().shape({
