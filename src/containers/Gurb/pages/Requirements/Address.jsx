@@ -39,6 +39,12 @@ const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addre
     throw new Error('Lat and Long are required to check Gurb distance')
   }
   const { data } = await checkGurbDistance(gurbCode, lat, long)
+
+  if (data?.error) {
+    console.error('Error checking distance to Gurb:', data.error)
+    throw new Error(data.error)
+  }
+
   if (!data) {
     throw new GurbOutOfPerimeterError('The address is out of the allowed range for this GURB')
   } else {
