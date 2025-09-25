@@ -31,7 +31,7 @@ const NEW_MEMBER_COST = 100
 
 const GurbFormJoin = (props) => {
   const { i18n } = useTranslation()
-  const { language } = useParams()
+  const { language, code } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -47,6 +47,7 @@ const GurbFormJoin = (props) => {
 
   const initialValues = {
     new_contract: undefined,
+    tariff_name: '',
     cups: '',
     // has_light: undefined,
     // address: {
@@ -124,9 +125,9 @@ const GurbFormJoin = (props) => {
 
   const getStep = (formikProps) => {
     if (activeStep === 0) {
-      return <GurbIdentification {...formikProps} activeStep={activeStep} />
+      return <GurbIdentification {...formikProps} />
     } else if (activeStep === 1) {
-      return <GurbParticipation {...formikProps} activeStep={activeStep} />
+      return <GurbParticipation {...formikProps} gurbCode={code}/>
     } else if (activeStep === 2) {
       return <ContractReview {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 3) {

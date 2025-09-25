@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
@@ -22,7 +22,7 @@ const CUPS = (props) => {
     setMaxStepNum
   } = props
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const [ loading, setLoading ] = useState(false)
 
   useEffect(() => {
     const cups = values.cups
@@ -36,7 +36,9 @@ const CUPS = (props) => {
               new_contract:
                 response?.data?.status === 'new' ||
                 response?.data?.status === 'inactive',
-              knowledge_of_distri: response?.data?.knowledge_of_distri
+              knowledge_of_distri: response?.data?.knowledge_of_distri,
+              // tariff_name: response?.data?.tariff_name
+              tariff_name: '2.0TD'
             }
           })
           setMaxStepNum(

@@ -7,16 +7,13 @@ import Select from '../../components/Select'
 import Alert from '@mui/material/Alert'
 import { getPowers } from '../../../../services/api'
 
-const Contract = (props) => {
+const GurbParticipation = (props) => {
+  const { values, setFieldValue, gurbCode } = props
+  const { t } = useTranslation()
   const [gurbDetails, setGurbDetails] = useState({})
 
-  const cost = {
-    "1 KWh": 180,
-    "0.5 KWh": 90
-  }
-
   const getAvailablePowers = () => {
-    getPowers('G003', '2.0TD')
+    getPowers(gurbCode, values.tariff_name)
       .then((response) => {
         setGurbDetails({
           ...response.data,
@@ -34,8 +31,6 @@ const Contract = (props) => {
     getAvailablePowers()
   }, [])
 
-  const { values, setFieldValue } = props
-  const { t } = useTranslation()
 
 
   const onChangePower = async (value) => {
@@ -73,4 +68,4 @@ const Contract = (props) => {
   )
 }
 
-export default Contract
+export default GurbParticipation
