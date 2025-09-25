@@ -442,7 +442,7 @@ const App = (props) => {
                     )}
                     {props?.isGurbEnabled && (
                       <Route
-                        path="/:language/gurb/:id/join/"
+                        path="/:language/gurb/:code/join/"
                         element={
                           <GurbErrorContextProvider>
                             <GurbLoadingContextProvider>

@@ -17,7 +17,7 @@ const GurbRequirementsResult = ({ values }) => {
     ? t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER')
     : t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER')
 
-  const resultRedirectUrl = redirectUrl ?? 'http://localhost:3000/ca/gurb/2/join/'
+  const resultRedirectUrl = redirectUrl ?? 'http://localhost:3000/ca/gurb/G003/join/'
 
   const resultButtonText = new_member
     ? t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER')

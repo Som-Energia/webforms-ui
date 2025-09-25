@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -6,19 +6,19 @@ import InputField from '../../../../components/InputField'
 
 import { useTranslation } from 'react-i18next'
 
-import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 import CUPS from '../../../../components/CUPS'
 import { checkMember } from '../../../../services/api'
 
 
 const GurbIdentification = (props) => {
-  const { values, setFieldValue, touched, setFieldTouched,errors } = props
+  const { values, setFieldValue, touched, setFieldTouched, errors } = props
   const { t } = useTranslation()
 
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const [ loading, setLoading ] = useState(false)
 
   const handleCheckMemberResponse = async () => {
     let status = undefined
+    setLoading(true)
     await checkMember(values.member.number, values.member.nif)
       .then((response) => {
         status = response?.data
