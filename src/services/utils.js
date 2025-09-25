@@ -403,7 +403,7 @@ export const newNormalizeMember = (data) => {
 
   finalMember.nom = data.new_member.name
   finalMember.dni = data.new_member.nif
-  finalMember.tel = data.new_member.phone
+  finalMember.tel = `${data.new_member.phone_code} ${data.new_member.phone}`
   finalMember.email = data.new_member.email
   finalMember.cp = data.address.postal_code
   finalMember.provincia = data.address.state.id
