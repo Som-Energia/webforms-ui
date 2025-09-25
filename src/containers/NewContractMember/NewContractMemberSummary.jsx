@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import ReviewTable from '../../components/review/ReviewTable'
 import ReviewPricesTable from '../../components/review/ReviewPrices'
 
@@ -47,8 +46,7 @@ const NewContractMemberSummary = (props) => {
   } = props
 
   const { t } = useTranslation()
-  const { tariff } = useParams()
-  const isTariffIndexed = tariff === TARIFF_INDEXED
+  const isTariffIndexed = values?.contract?.tariff_mode === TARIFF_INDEXED
   const trackID = 'contract-summary'
 
   const [loading, setLoading] = useState(false)
@@ -300,9 +298,7 @@ const NewContractMemberSummary = (props) => {
         },
         {
           reviewLabel: t('POWER_SUMMARY'),
-          reviewValue: isTariffIndexed
-            ? t('CURRENT')
-            : powersDetail
+          reviewValue: powersDetail
         },
         {
           reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
@@ -319,9 +315,7 @@ const NewContractMemberSummary = (props) => {
         },
         {
           reviewLabel: t('POWER_SUMMARY'),
-          reviewValue: isTariffIndexed
-            ? t('CURRENT')
-            : powersDetail
+          reviewValue: powersDetail
         }
       ]
 

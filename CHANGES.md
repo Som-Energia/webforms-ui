@@ -1,9 +1,12 @@
 # Change Log
 
 ## Unreleased
+
 - Fix: Add phone_code when new member
+- FIX: summary when indexed tariff
 
 ## 6.1.0
+
 - Added urls for unified form for landing page
 
 ## 6.0.0
