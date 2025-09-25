@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 6.1.1
 
 - Fix: Add phone_code when new member
 - FIX: summary when indexed tariff
