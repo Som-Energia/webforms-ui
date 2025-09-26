@@ -127,8 +127,10 @@ const AddressField = ({
   const { setContent } = useContext(PopUpContext)
 
   const handleChangeStreet = async (addressValue) => {
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+
     if (!addressValue || !addressValue.id) {
-      setFieldValue(
+      await setFieldValue(
         `${addressFieldName}.street`,
         addressValue?.street || addressValue?.text || ''
       )
@@ -145,27 +147,42 @@ const AddressField = ({
         c.types.includes('postal_code')
       )
 
-      await setFieldValue(
-        `${addressFieldName}.street`,
-        streetComponent?.longText || ''
-      )
-      await setFieldValue(
-        `${addressFieldName}.postal_code`,
-        postalCodeComponent?.longText || ''
-      )
+      const newStreet = streetComponent?.longText || ''
+      const newPostalCode = postalCodeComponent?.longText || ''
 
-      await UpdateStateCityByPostalCode(postalCodeComponent?.longText || '')
-      await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+      await setFieldValue(`${addressFieldName}.street`, newStreet)
+      await setFieldValue(`${addressFieldName}.postal_code`, newPostalCode)
+
+      await UpdateStateCityByPostalCode(newPostalCode)
+
+      const freshAddress = {
+        ...values[addressFieldName],
+        id: addressValue.id,
+        street: newStreet,
+        postal_code: newPostalCode,
+        number: values[addressFieldName]?.number,
+        city: values[addressFieldName]?.city,
+        state: values[addressFieldName]?.state,
+      }
+
+      await getLatLongWithFullAddress(
+        setFieldValue,
+        { [addressFieldName]: freshAddress },
+        addressFieldName,
+        sessionTokenRef,
+        freshAddress.number
+      )
 
     } catch (error) {
       console.error('Error fetching place details:', error)
-      setFieldValue(
+      await setFieldValue(
         `${addressFieldName}.street`,
         addressValue.text || addressValue.street || ''
       )
-      setFieldValue(`${addressFieldName}.postal_code`, '')
+      await setFieldValue(`${addressFieldName}.postal_code`, '')
     }
   }
+
 
   const UpdateStateCityByPostalCode = async (postalCodeValue) => {
     try {
@@ -197,6 +214,7 @@ const AddressField = ({
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
     await UpdateStateCityByPostalCode(value)
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
   }
 
@@ -204,6 +222,7 @@ const AddressField = ({
     const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
     await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
     if (cleanedNumber) {
+      await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
       getLatLongWithFullAddress(
         setFieldValue,
         values,
