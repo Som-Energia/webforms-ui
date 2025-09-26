@@ -1,23 +1,3 @@
-Cypress.Commands.add('identifySupplyPointGURB', (cups, statusCode = 200) => {
-  //Intercept call to check CUPS
-  cy.intercept('GET', '/check/cups/status/*', {
-    statusCode: statusCode,
-    body: {
-      data: {
-        cups: cups,
-        status: 'new',
-        tariff_type: null
-      },
-      state: statusCode === 200,
-      status: 'ONLINE'
-    }
-  }).as('checkCUPS')
-
-  cy.get('[data-cy="cups"]').type(cups)
-
-  cy.get('[data-cy=next]').click()
-})
-
 Cypress.Commands.add('gurbAddress', (street) => {
   cy.get('[data-cy="address"]').type(street.input)
   cy.contains(street.value).click()

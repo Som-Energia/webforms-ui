@@ -3,23 +3,23 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
-import RedirectUrl from '../../../../containers/Gurb/components/RedirectUrl'
+import RedirectUrl from '../../components/RedirectUrl'
 
-const GurbRequirementsResult = ({ values }) => {
+const GurbRequirementsResult = ({ values, gurbCode }) => {
   const { t } = useTranslation()
-  const { new_member, redirectUrl } = values
+  const { new_contract, redirectUrl } = values
 
-  const resultTitle = new_member
+  const resultTitle = new_contract
     ? t('GURB_REQUIREMENTS_RESULT_TITLE_NEW_MEMBER')
     : t('GURB_REQUIREMENTS_RESULT_TITLE_EXISTING_MEMBER')
 
-  const resultDescription = new_member
+  const resultDescription = new_contract
     ? t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER')
     : t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER')
 
-  const resultRedirectUrl = redirectUrl ?? 'http://localhost:3000/ca/gurb/2/join/'
+  const resultRedirectUrl = redirectUrl ?? t('GURB_REDIRECT_JOIN_FORM_URL', { gurbCode: gurbCode })
 
-  const resultButtonText = new_member
+  const resultButtonText = new_contract
     ? t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER')
     : t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_EXISTING_MEMBER')
 
@@ -50,7 +50,7 @@ const GurbRequirementsResult = ({ values }) => {
 
 GurbRequirementsResult.propTypes = {
   values: PropTypes.shape({
-    new_member: PropTypes.bool.isRequired,
+    new_contract: PropTypes.bool.isRequired,
     redirectUrl: PropTypes.string,
   }).isRequired,
 }

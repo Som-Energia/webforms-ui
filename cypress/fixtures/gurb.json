@@ -1,6 +1,8 @@
 {
+  "gurbCode": "g001",
   "supplyPoint": {
-    "cups": "ES0122449351050857YA"
+    "existing_cups": "ES0031408174563001KT0F",
+    "new_cups": "ES0022116965909796YD"
   },
   "personalData": {
     "vat": "16220119J",
@@ -9,7 +11,16 @@
     "surname2": "Luffy",
     "email": "kaizokuounioreesnaru@onepiece.freedom",
     "repeat_email": "kaizokuounioreesnaru@onepiece.freedom",
-    "phone1": "560000000"
+    "phone1": "560000000",
+    "googleAutoCompleteStreet": {
+      "input": "Carrer Tetuan",
+      "value": "Carrer Tetuan"
+    }
+  },
+  "addressData":{
+    "postal_code": 17001,
+    "lat": 41.5394143,
+    "long": 2.4372461
   },
   "randomIban": "ES4600763612815691358826"
 }

@@ -3,10 +3,10 @@ import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 
 const SomStepper = (props) => {
-  const { activeStep, steps } = props
+  const { activeStep, steps, stepsNum } = props
   const { t } = useTranslation()
 
-  const numberSteps = Object.keys(steps).length
+  const numberSteps = stepsNum || Object.keys(steps).length
   const currentStep = activeStep + 1
 
   return (

@@ -2,36 +2,42 @@ import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
-import { HelperText } from '../../../../components/InputField'
-
-import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
+import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../gurbTheme'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
+import PopUpContext from '../../../../context/PopUpContext'
+
 
 const SelfConsumption = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
+  const { setContent } = useContext(PopUpContext)
 
   const handleSelfconsumptionQuestion = (value) => {
     setFieldValue('has_selfconsumption', value)
     if (value === 'selfconsumption-on') {
       setError(true)
-      setErrorInfo({
-        main_text: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
-        seconday_text: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT'),
-        link_text: t('GURB_SELFCONSUMPTION_ERROR_LINK_TEXT'),
-        error_type: 'error',
-        clean_field: () => {
-          setFieldValue('has_selfconsumption', undefined)
-        }
-      })
+      setContent(
+        <SimpleGurbDialog
+          title={
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
+              }}
+            />
+          }
+          closeFunction={() => setContent(undefined)}
+        />
+      )
     }
   }
   const options = [

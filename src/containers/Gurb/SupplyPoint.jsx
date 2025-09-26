@@ -7,28 +7,6 @@ import CUPS from '../../components/CUPS'
 
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
-  //const [gurbData, setGurbData] = useState({})
-
-  // const handleGurbData = async () => {
-  //   // TODO: gurb id from where?
-  //   const gurbId = 2
-  //   await getGurbData(gurbId)
-  //     .then(({ data }) => {
-  //       setGurbData({
-  //         name: data?.name,
-  //         state: data?.state,
-  //         completedPercentage: data?.completed_percentage
-  //       })
-  //     })
-  //     .catch((error) => {
-  //       // TODO: handle errors
-  //       console.log('ERROR:', error)
-  //     })
-  // }
-
-  // useEffect(() => {
-  //   handleGurbData()
-  // }, [])
 
   return (
     <Grid container spacing={3}>
@@ -44,4 +22,5 @@ const SupplyPoint = (props) => {
     </Grid>
   )
 }
+
 export default SupplyPoint
