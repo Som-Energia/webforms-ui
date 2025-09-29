@@ -18,7 +18,7 @@ const availableLanguages = Object.keys(i18n?.options?.resources)
 if (!availableLanguages.includes(language)) {
   language = 'ca'
 }
-let gurbId = 2  // TODO: move to env?
+let gurbCode = 'G001'  // TODO: move to env?
 
 const options = [
   { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos`},
@@ -34,9 +34,9 @@ const options = [
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
   { title: 'Generation kwh - Form', href: `${language}/servicios/produccion/generation-kwh-aportaciones` },
-  { title: 'Gurb - Form Deprecated', href: `${language}/gurb/${gurbId}/deprecated/`},
-  { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbId}/requirements/`},
-  { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbId}/join/`},
+  { title: 'Gurb - Form Deprecated', href: `${language}/gurb/${gurbCode}/deprecated/`},
+  { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbCode}/requirements/`},
+  { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbCode}/join/`},
   { title: 'Pagament OK', href: `${language}/pagament-realitzat`},
   { title: 'Pagament KO', href: `${language}/pagament-cancellat`}
 
