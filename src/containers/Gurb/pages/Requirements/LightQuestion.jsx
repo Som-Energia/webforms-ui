@@ -11,27 +11,39 @@ import { iconOffRequirements } from '../../gurbTheme'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+
+import PopUpContext from '../../../../context/PopUpContext'
+import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
+  const { setContent } = useContext(PopUpContext)
 
   const handleLightQuestion = (value) => {
     setFieldValue('has_light', value)
+
     if (value === 'light-off') {
       setError(true)
-      setErrorInfo({
-        main_text: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
-        seconday_text: t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT'),
-        link_text: t('GURB_LIGHT_QUESTION_ERROR_LINK_TEXT'),
-        error_type: 'alert',
-        clean_field: () => {
-          setFieldValue('has_light', undefined)
-        }
-      })
+      setContent(
+        <SimpleGurbDialog
+          title={
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
+              }}
+            />
+          }
+          closeFunction={() => setContent(undefined)}
+        />
+      )
+    } else {
+      setError(false)
     }
   }
+
 
   const options = [
     {

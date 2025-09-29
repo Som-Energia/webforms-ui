@@ -9,7 +9,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
-const GurbRequirementsWithoutContractTariffSelection = (props) => {
+const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()
   const { language } = useParams()
   const { t } = useTranslation()
@@ -38,10 +38,10 @@ const GurbRequirementsWithoutContractTariffSelection = (props) => {
   const handleTariffQuestion = (optionId) => {
     setSelectedOption(optionId)
 
-    const baseUrl = 'https://baseUrl.com/'
+    const baseUrl = 'https://somenergia.coop/'
     const redirectUrl = optionId === 'periods-tariff'
-      ? baseUrl + 'p'
-      : baseUrl + 'i'
+      ? baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF')
+      : baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF')
     setFieldValue('redirectUrl', redirectUrl)
   }
 
@@ -52,6 +52,7 @@ const GurbRequirementsWithoutContractTariffSelection = (props) => {
 
       <Chooser
         name="tariff-question"
+        data-cy='tariff-chooser'
         options={options}
         value={selectedOption} // Pass the selected option ID, not the URL
         handleChange={handleTariffQuestion}
@@ -70,4 +71,4 @@ const GurbRequirementsWithoutContractTariffSelection = (props) => {
     </Grid>
   )
 }
-export default GurbRequirementsWithoutContractTariffSelection
+export default GurbRequirementsTariffSelection

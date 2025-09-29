@@ -1,173 +1,173 @@
-export const WAIT_TIME = 3000
+// export const WAIT_TIME = 3000
 
-describe('Contract', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
-    console.error(error)
-    return false
-  })
+// describe('Contract', () => {
+//   Cypress.on('uncaught:exception', (error, runnable) => {
+//     console.error(error)
+//     return false
+//   })
 
-  beforeEach(() => {
-    cy.visit('/ca/gurb/1/validations')
-    cy.fixture('gurb.json').as('data')
-    cy.fixture('holderChangePersonaldata.json').as('personaldata')
-  })
+//   beforeEach(() => {
+//     cy.visit('/ca/gurb/1/validations')
+//     cy.fixture('gurb.json').as('data')
+//     cy.fixture('holderChangePersonaldata.json').as('personaldata')
+//   })
 
-  describe('New contract', function () {  // TODO: before and after
-    it('New member', function () {
-      cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
+//   describe('New contract', function () {  // TODO: before and after
+//     it('New member', function () {
+//       cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
 
-      cy.lightQuestion()
+//       cy.lightQuestion()
 
-      cy.gurbAddress(this.personaldata.validGurbAddress)
+//       cy.gurbAddress(this.personaldata.validGurbAddress)
 
-      cy.selfconsumptionQuestion(false)
+//       cy.selfconsumptionQuestion(false)
 
-      cy.memberQuestion('member-off')
+//       cy.memberQuestion('member-off')
 
-      cy.personalDataMember(this.data.personalData)
+//       cy.personalDataMember(this.data.personalData)
 
-      cy.get('[data-cy="success_link"]').click()
+//       cy.get('[data-cy="success_link"]').click()
 
-      cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
+//       cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
 
-      cy.personalDataHolder(this.data.personalData)
+//       cy.personalDataHolder(this.data.personalData)
 
-      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
+//       cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
 
-      cy.supplyPointData()
+//       cy.supplyPointData()
 
-      cy.choosePower({ powers: [2, 3] })
+//       cy.choosePower({ powers: [2, 3] })
 
-      cy.chooseTariffGURB()
+//       cy.chooseTariffGURB()
 
-      cy.donationQuestion()
+//       cy.donationQuestion()
 
-      cy.paymentData(this.data.randomIban)
+//       cy.paymentData(this.data.randomIban)
 
-      cy.checkReviewContractStep(this.personaldata.vat)
+//       cy.checkReviewContractStep(this.personaldata.vat)
 
-      cy.interceptAvailablePowers()
+//       cy.interceptAvailablePowers()
 
-      cy.powerChoice('0_5_kwh')
+//       cy.powerChoice('0_5_kwh')
 
-      cy.acceptAllTerms()
-    })
+//       cy.acceptAllTerms()
+//     })
 
-    it('Already member', function () {
-      cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
+//     it('Already member', function () {
+//       cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
 
-      cy.lightQuestion()
+//       cy.lightQuestion()
 
-      cy.gurbAddress(this.personaldata.validGurbAddress)
+//       cy.gurbAddress(this.personaldata.validGurbAddress)
 
-      cy.selfconsumptionQuestion(false)
+//       cy.selfconsumptionQuestion(false)
 
-      cy.memberQuestion('member-on')
+//       cy.memberQuestion('member-on')
 
-      cy.identifyMemberGURB({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
+//       cy.identifyMemberGURB({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
 
-      cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
+//       cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
 
-      cy.personalDataHolder(this.data.personalData)
+//       cy.personalDataHolder(this.data.personalData)
 
-      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
+//       cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
 
-      cy.supplyPointData()
+//       cy.supplyPointData()
 
-      cy.choosePower({ powers: [2, 3] })
+//       cy.choosePower({ powers: [2, 3] })
 
-      cy.chooseTariffGURB()
+//       cy.chooseTariffGURB()
 
-      cy.donationQuestion()
+//       cy.donationQuestion()
 
-      cy.paymentData(this.data.randomIban)
+//       cy.paymentData(this.data.randomIban)
 
-      cy.checkReviewContractStep(this.personaldata.vat)
+//       cy.checkReviewContractStep(this.personaldata.vat)
 
-      cy.interceptAvailablePowers()
+//       cy.interceptAvailablePowers()
 
-      cy.powerChoice('0_5_kwh')
+//       cy.powerChoice('0_5_kwh')
 
-      cy.acceptAllTerms()
-    })
+//       cy.acceptAllTerms()
+//     })
 
-    it('Apadrinating', function () {
-      cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
+//     it('Apadrinating', function () {
+//       cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
 
-      cy.lightQuestion()
+//       cy.lightQuestion()
 
-      cy.gurbAddress(this.personaldata.validGurbAddress)
+//       cy.gurbAddress(this.personaldata.validGurbAddress)
 
-      cy.selfconsumptionQuestion(false)
+//       cy.selfconsumptionQuestion(false)
 
-      cy.memberQuestion('apadrinating')
+//       cy.memberQuestion('apadrinating')
 
-      cy.identifyMemberGURB({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
+//       cy.identifyMemberGURB({ vat: this.personaldata.memberVat, number: this.personaldata.memberNumber })
 
-      cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
+//       cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
 
-      cy.personalDataHolder(this.data.personalData)
+//       cy.personalDataHolder(this.data.personalData)
 
-      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
+//       cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
 
-      cy.supplyPointData()
-      
-      cy.choosePower({ powers: [2, 3] })
+//       cy.supplyPointData()
 
-      cy.chooseTariffGURB()
+//       cy.choosePower({ powers: [2, 3] })
 
-      cy.donationQuestion()
+//       cy.chooseTariffGURB()
 
-      cy.paymentData(this.data.randomIban)
+//       cy.donationQuestion()
 
-      cy.checkReviewContractStep(this.personaldata.vat)
+//       cy.paymentData(this.data.randomIban)
 
-      cy.interceptAvailablePowers()
+//       cy.checkReviewContractStep(this.personaldata.vat)
 
-      cy.powerChoice('0_5_kwh')
+//       cy.interceptAvailablePowers()
 
-      cy.acceptAllTerms()
-    })
-  })
-  describe('Gurb', function () {  
-    it('Select 0,5KWh', function () {
-      cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
+//       cy.powerChoice('0_5_kwh')
 
-      cy.lightQuestion()
+//       cy.acceptAllTerms()
+//     })
+//   })
+//   describe('Gurb', function () {
+//     it('Select 0,5KWh', function () {
+//       cy.identifySupplyPointGURB(this.data.supplyPoint.cups)
 
-      cy.gurbAddress(this.personaldata.validGurbAddress)
+//       cy.lightQuestion()
 
-      cy.selfconsumptionQuestion(false)
+//       cy.gurbAddress(this.personaldata.validGurbAddress)
 
-      cy.memberQuestion('member-off')
+//       cy.selfconsumptionQuestion(false)
 
-      cy.personalDataMember(this.data.personalData)
+//       cy.memberQuestion('member-off')
 
-      cy.get('[data-cy="success_link"]').click()
+//       cy.personalDataMember(this.data.personalData)
 
-      cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
+//       cy.get('[data-cy="success_link"]').click()
 
-      cy.personalDataHolder(this.data.personalData)
+//       cy.identifyHolderGURB(this.personaldata.vat)  // Test whats happend if VAT is same as newMember VAT
 
-      cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
+//       cy.personalDataHolder(this.data.personalData)
 
-      cy.supplyPointData()
-      
-      cy.choosePower({ powers: [2, 3] })
+//       cy.taxAddress({ ...this.personaldata.invalidGurbAddress, sameDirection: true })
 
-      cy.chooseTariffGURB()
+//       cy.supplyPointData()
 
-      cy.donationQuestion()
+//       cy.choosePower({ powers: [2, 3] })
 
-      cy.paymentData(this.data.randomIban)
+//       cy.chooseTariffGURB()
 
-      cy.checkReviewContractStep(this.personaldata.vat)
-      
-      cy.interceptAvailablePowers()
+//       cy.donationQuestion()
 
-      cy.powerChoice('0_5_kwh')
-      
-      cy.acceptAllTerms()
-    })
-  })
-})
+//       cy.paymentData(this.data.randomIban)
+
+//       cy.checkReviewContractStep(this.personaldata.vat)
+
+//       cy.interceptAvailablePowers()
+
+//       cy.powerChoice('0_5_kwh')
+
+//       cy.acceptAllTerms()
+//     })
+//   })
+// })

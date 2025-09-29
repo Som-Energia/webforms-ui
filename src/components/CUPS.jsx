@@ -8,6 +8,7 @@ import InputField from './InputField'
 
 import { checkCups } from '../services/api'
 import GurbLoadingContext from '../context/GurbLoadingContext'  // TODO: review specific context in a reusable component
+import { MAX_STEPS_NUMBER } from '../containers/GurbFormRequirements'
 
 const CUPS = (props) => {
   const {
@@ -17,7 +18,8 @@ const CUPS = (props) => {
     setValues,
     setFieldValue,
     setFieldError,
-    setFieldTouched
+    setFieldTouched,
+    setMaxStepNum
   } = props
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(GurbLoadingContext)
@@ -37,6 +39,11 @@ const CUPS = (props) => {
               knowledge_of_distri: response?.data?.knowledge_of_distri
             }
           })
+          setMaxStepNum(
+            response?.data?.status === 'new' || response?.data?.status === 'inactive'
+              ? MAX_STEPS_NUMBER["MAX_STEP_NUMBER_NEW_CONTRACT"]
+              : MAX_STEPS_NUMBER["MAX_STEP_NUMBER_DEFAULT"]
+          )
           setLoading(false)
         })
         .catch(({ response }) => {

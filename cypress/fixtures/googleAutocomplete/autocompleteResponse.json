@@ -1,0 +1,37 @@
+[
+  [
+    [
+      [
+        "places/EhZDYXJyZXIgVGV0dWFuLCBNYXRhcsOzIi4qLAoUChIJt1At6B61pBIR_8CF0xybm5YSFAoSCXHcrdcYtaQSERhZKzcvk2sN",
+        "EhZDYXJyZXIgVGV0dWFuLCBNYXRhcsOzIi4qLAoUChIJt1At6B61pBIR_8CF0xybm5YSFAoSCXHcrdcYtaQSERhZKzcvk2sN",
+        [
+          "Carrer Tetuan, Mataró",
+          [
+            [
+              null,
+              13
+            ]
+          ]
+        ],
+        [
+          [
+            "Carrer Tetuan",
+            [
+              [
+                null,
+                13
+              ]
+            ]
+          ],
+          [
+            "Mataró"
+          ]
+        ],
+        [
+          "geocode",
+          "route"
+        ]
+      ]
+    ]
+  ]
+]

@@ -40,6 +40,7 @@ const RedirectUrl = ({
 
       <Grid item>
         <Button
+          data-cy="redirect-button"
           type="button"
           href={url}
           variant="contained"

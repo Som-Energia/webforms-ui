@@ -429,15 +429,17 @@ const App = (props) => {
                     />
                     {props?.isGurbEnabled && (
                       <Route
-                        path="/:language/gurb/:id/requirements/"
+                        path="/:language/gurb/:gurbCode/requirements/"
                         element={
-                          <GurbErrorContextProvider>
-                            <GurbLoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbFormRequirements {...props} />
-                              </SummaryContextProvider>
-                            </GurbLoadingContextProvider>
-                          </GurbErrorContextProvider>
+                          <PopUpContextProvider>
+                            <GurbErrorContextProvider>
+                              <GurbLoadingContextProvider>
+                                <SummaryContextProvider>
+                                  <GurbFormRequirements {...props} />
+                                </SummaryContextProvider>
+                              </GurbLoadingContextProvider>
+                            </GurbErrorContextProvider>
+                          </PopUpContextProvider>
                         }
                       />
                     )}

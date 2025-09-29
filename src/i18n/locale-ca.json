@@ -1073,5 +1073,10 @@
     "GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER": "Contexte abans de redireccionar al formulari de participació",
     "GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER": "Per contractar GURB has de tenir un contracte a Som Energia. Pots completar el procés d'alta fent click en el següent botó:",
     "GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER": "Vull contractar la llum amb Som Energia",
-    "GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_EXISTING_MEMBER": "Vull participar a GURB"
+    "GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_EXISTING_MEMBER": "Vull participar a GURB",
+    "GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF": "/ca/formulari-contractacio-indexada",
+    "GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF": "/ca/formulari-contractacio-periodes",
+    "GURB_ERROR_ADDRESS_OUT_OF_PERIMETER": "L'adreça introduïda no es troba dins del perímetre de GURB.",
+    "GURB_ERROR_CHECKING_DISTANCE": "Error en comprovar la distància a GURB.",
+    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/ca/gurb/{{gurbCode}}/join/"
 }
