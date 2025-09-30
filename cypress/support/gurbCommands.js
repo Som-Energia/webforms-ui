@@ -21,6 +21,39 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, cupsStatus, statusCode = 
   cy.get('[data-cy=next]').click()
 })
 
+Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, code, statusCode = 200) => {
+  //Intercept call to check CUPS
+  cy.intercept('GET', '/check/cups/status/*', {
+    statusCode: statusCode,
+    body: {
+      data: {
+        cups: cups,
+        status: 'new',
+        tariff_type: null
+      },
+      state: statusCode === 200,
+      status: 'ONLINE'
+    }
+  }).as('checkCUPS')
+
+ cy.intercept('GET', '/check/soci/**', {
+    statusCode: statusCode,
+    body: {
+      data: true,
+      state: true,
+      status: 'ONLINE'
+    }
+  }).as('checkMember')
+
+
+  cy.get('[data-cy="cups"]').type(cups)
+  cy.wait('@checkCUPS')
+  cy.get('[data-cy=vat]').type(vat)
+  cy.wait('@checkMermber')
+  cy.get('[data-cy=next]').click()
+
+})
+
 Cypress.Commands.add('lightQuestion', (lightOn = true) => {
   const optionValue = lightOn ? 'light-on' : 'light-off'
   cy.get('[data-cy="light-question"]').get(`[data-cy="${optionValue}"]`).click()

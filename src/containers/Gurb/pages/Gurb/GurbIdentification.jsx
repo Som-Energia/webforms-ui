@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -11,12 +11,12 @@ import { checkMember } from '../../../../services/api'
 
 
 const GurbIdentification = (props) => {
-  const { values, setFieldValue, touched, setFieldTouched, errors } = props
+  const { values, setFieldValue, touched, setFieldTouched, setFieldError, errors } = props
   const { t } = useTranslation()
 
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleCheckMemberResponse = async () => {
+  const handleCheckMemberResponse = useCallback(async () => {
     let status = undefined
     setLoading(true)
     await checkMember(values.member.number, values.member.nif)
@@ -34,7 +34,7 @@ const GurbIdentification = (props) => {
       setFieldTouched('member.number', true)
     }
     setLoading(false)
-  }
+  }, [values.member, setFieldValue, setFieldError, setFieldTouched, t])
 
   useEffect(() => {
     if (values?.member?.nif && values?.member?.number) {
@@ -43,23 +43,24 @@ const GurbIdentification = (props) => {
   }, [values.member.number, values.member.nif])
 
 
-  const handleInputNif = (event) => {
+  const handleInputNif = useCallback((event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
     setFieldValue('member.nif', value)
-  }
+  }, [setFieldValue])
 
-  const handleInputNifBlur = () => {
+  const handleInputNifBlur = useCallback(() => {
     setFieldTouched('member.nif', true)
-  }
+  }, [setFieldTouched])
 
-  const handleInputMemberNumber = (event) => {
+  const handleInputMemberNumber = useCallback((event) => {
     let match = event.target.value.replace(/[^0-9]/g, '')
     setFieldValue('member.number', match)
-  }
-  const handleInputMemberNumberBlur = () => {
+  }, [setFieldValue])
+
+  const handleInputMemberNumberBlur = useCallback(() => {
     setFieldTouched('member.number', true)
-  }
+  }, [setFieldTouched])
 
   return (
     <Grid container spacing={2}>

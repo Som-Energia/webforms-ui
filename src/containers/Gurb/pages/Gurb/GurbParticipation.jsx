@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { textHeader4, textField, textHeader5, textHeader2 } from '../../gurbTheme'
@@ -12,7 +12,7 @@ const GurbParticipation = (props) => {
   const { t } = useTranslation()
   const [gurbDetails, setGurbDetails] = useState({})
 
-  const getAvailablePowers = () => {
+  const getAvailablePowers = useCallback(() => {
     getPowers(gurbCode, values.tariff_name)
       .then((response) => {
         setGurbDetails({
@@ -23,20 +23,21 @@ const GurbParticipation = (props) => {
             text: `${item} kW`
           }))
         })
+        setFieldValue('gurb.join_cost', response.data.initial_quota)
       })
       .catch(error => console.log(error))
-  }
+  }, [gurbCode, values.tariff_name])
 
   useEffect(() => {
     getAvailablePowers()
-  }, [])
+  }, [getAvailablePowers])
 
 
+  const onChangePower = useCallback(async (value) => {
+    await setFieldValue('gurb.power', value)
+    await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * value))
+  }, [setFieldValue, gurbDetails])
 
-  const onChangePower = async (value) => {
-    await setFieldValue('contract.gurb_power', value)
-    await setFieldValue('contract.gurb_power_cost', cost[value])
-  }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -45,7 +46,7 @@ const GurbParticipation = (props) => {
       <Typography sx={textHeader5}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}</Typography>
       <Select
         options={gurbDetails.available_betas ?? []}
-        value={values.contract.gurb_power}
+        value={values.gurb.power}
         handleChange={(value) => onChangePower(value)}
         style={textField}
         helperText={
@@ -59,7 +60,7 @@ const GurbParticipation = (props) => {
         }
       />
       <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
-        __html: t('GURB_PARTICIPATION_TEXT_1', {initial_quota: gurbDetails.initial_quota})
+        __html: t('GURB_PARTICIPATION_TEXT_1', { initial_quota: gurbDetails.initial_quota })
       }} /> </Alert>
       {gurbDetails.surplus_compensation && <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
         __html: t('GURB_PARTICIPATION_TEXT_2')
