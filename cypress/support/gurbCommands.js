@@ -21,14 +21,14 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, cupsStatus, statusCode = 
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, code, statusCode = 200) => {
+Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, memberCode, status, statusCode = 200) => {
   //Intercept call to check CUPS
   cy.intercept('GET', '/check/cups/status/*', {
     statusCode: statusCode,
     body: {
       data: {
         cups: cups,
-        status: 'new',
+        status: status,
         tariff_type: null
       },
       state: statusCode === 200,
@@ -36,7 +36,7 @@ Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, code, statusCode =
     }
   }).as('checkCUPS')
 
- cy.intercept('GET', '/check/soci/**', {
+  cy.intercept('GET', '/check/soci/**', {
     statusCode: statusCode,
     body: {
       data: true,
@@ -49,8 +49,35 @@ Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, code, statusCode =
   cy.get('[data-cy="cups"]').type(cups)
   cy.wait('@checkCUPS')
   cy.get('[data-cy=vat]').type(vat)
-  cy.wait('@checkMermber')
+  cy.get('[data-cy=code]').type(memberCode)
+  cy.wait('@checkMember')
   cy.get('[data-cy=next]').click()
+
+})
+
+Cypress.Commands.add('selectParticipationOnGurb', (cups, vat, memberCode, status, statusCode = 200) => {
+  //Intercept call to check CUPS
+  cy.intercept('GET', '/data/gurb/**', {
+    statusCode: statusCode,
+    body: {
+      data: {
+        available_betas: [
+          0.5, 1
+        ],
+        initial_quota: 41.32,
+        quota: 0.361644,
+        surplus_compensation: false,
+        state: statusCode === 200,
+        status: 'ONLINE'
+      }
+    }
+  }).as('getPowers')
+
+  cy.wait('@getPowers')
+  cy.get('[data-cy="select_component"]').click()
+  cy.get('[data-cy="1"]').click()
+  cy.get('[data-cy=next]').should('not.be.disabled')
+  
 
 })
 
