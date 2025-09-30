@@ -901,7 +901,7 @@
     "MAINTENANCE_TEXT1": "Estem realitzant tasques de manteniment",
     "MAINTENANCE_TEXT2": "Tornem aviat",
     "AUTOCOMPLETE_LOADING_TEXT": "Carregant...",
-    "INCORRECT_CNAE": "No s'ha trobat aquest CNAE",
+    "INCORRECT_CNAE": "És necessari indicar un CNAE 2025 vàlid",
     "REQUIRED_CNAE": "No s'ha especificat un CNAE",
     "AUTOCOMPLETE_WITHOUT_OPTIONS": "No s'han trobat resultat",
     "GURB_TARIFFMODE_PERIODS_HEADER": "Tarifa Periodes",
