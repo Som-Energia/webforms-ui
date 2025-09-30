@@ -764,7 +764,7 @@
     "MAINTENANCE_TEXT1": "Estamos realizando tareas de mantenimiento",
     "MAINTENANCE_TEXT2": "Volvemos pronto",
     "AUTOCOMPLETE_LOADING_TEXT": "Cargando...",
-    "INCORRECT_CNAE": "No se ha encontrado este CNAE",
+    "INCORRECT_CNAE": "Es necesario indicar un CNAE 2025 válido",
     "REQUIRED_CNAE": "No se ha especificado un CNAE",
     "AUTOCOMPLETE_WITHOUT_OPTIONS": "No se han encontrado resultados",
     "CADASTRAL_REFERENCE_HELPER": "Si no sabes dónde encontrar la referencia catastral, puedes buscarla en el registro o ir al",
