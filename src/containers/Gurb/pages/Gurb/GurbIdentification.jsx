@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -6,33 +6,61 @@ import InputField from '../../../../components/InputField'
 
 import { useTranslation } from 'react-i18next'
 
-import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 import CUPS from '../../../../components/CUPS'
+import { checkMember } from '../../../../services/api'
 
 
 const GurbIdentification = (props) => {
-  const { values, setFieldValue, touched, setFieldTouched,errors } = props
+  const { values, setFieldValue, touched, setFieldTouched, setFieldError, errors } = props
   const { t } = useTranslation()
 
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const [loading, setLoading] = useState(false)
 
-  const handleInputNif = (event) => {
+  const handleCheckMemberResponse = useCallback(async () => {
+    let status = undefined
+    setLoading(true)
+    await checkMember(values.member.number, values.member.nif)
+      .then((response) => {
+        status = response?.data
+      })
+      .catch(() => {
+        status = false
+      })
+    if (status === true) {
+      await setFieldValue('member.link_member', true)
+    } else {
+      await setFieldValue('member.link_member', false)
+      await setFieldError('link_member', t('SOCIA_NO_TROBADA'))
+      setFieldTouched('member.number', true)
+    }
+    setLoading(false)
+  }, [values.member, setFieldValue, setFieldError, setFieldTouched, t])
+
+  useEffect(() => {
+    if (values?.member?.nif && values?.member?.number) {
+      handleCheckMemberResponse()
+    }
+  }, [values.member.number, values.member.nif])
+
+
+  const handleInputNif = useCallback((event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
     setFieldValue('member.nif', value)
-  }
+  }, [setFieldValue])
 
-  const handleInputNifBlur = () => {
+  const handleInputNifBlur = useCallback(() => {
     setFieldTouched('member.nif', true)
-  }
+  }, [setFieldTouched])
 
-  const handleInputMemberNumber = (event) => {
+  const handleInputMemberNumber = useCallback((event) => {
     let match = event.target.value.replace(/[^0-9]/g, '')
     setFieldValue('member.number', match)
-  }
-  const handleInputMemberNumberBlur = () => {
+  }, [setFieldValue])
+
+  const handleInputMemberNumberBlur = useCallback(() => {
     setFieldTouched('member.number', true)
-  }
+  }, [setFieldTouched])
 
   return (
     <Grid container spacing={2}>

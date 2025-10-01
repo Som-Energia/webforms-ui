@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useRef, useContext, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -10,8 +10,7 @@ import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
 
-import noValidation from '../formValidations/noValidation'
-import { gurbPowerOptions, gurbPolicyChecks } from './Gurb/GurbValidations'
+import { identifierValidations, gurbPowerOptions, gurbPolicyChecks } from './Gurb/GurbValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
@@ -32,7 +31,7 @@ const NEW_MEMBER_COST = 100
 
 const GurbFormJoin = (props) => {
   const { i18n } = useTranslation()
-  const { language } = useParams()
+  const { language, code } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -46,54 +45,28 @@ const GurbFormJoin = (props) => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  const initialValues = {
-    is_client: undefined,
+  const initialValues = useMemo(() => ({
+    new_contract: undefined,
+    tariff_name: '',
     cups: '',
-    has_light: undefined,
-    address: {
-      street: '',
-      number: undefined,
-      postal_code: undefined,
-      state: undefined,
-      city: undefined,
-      lat: undefined,
-      long: undefined
-    },
-    has_selfconsumption: undefined,
-    has_member: undefined,
     member: {
       number: '',
       nif: '',
-      is_member: false,
-      link_member: false
     },
-    cadastral_reference: '',
-    cadastral_reference_valid: true,
-    supply_point: {
-      is_housing: undefined,
-      cnae: undefined,
-      supply_point_accepted: false
-    },
-    contract: {
-      tariff_mode: undefined,
-      power_type: undefined,
-      power: {
-        power1: undefined,
-        power2: undefined,
-        power3: undefined
-      },
-      gurb_power: '',
-      gurb_power_cost: ''
+    gurb: {
+      power: '',
+      daily_cost: '',
+      join_cost: ''
     },
     privacy_policy_accepted: false,
     generic_especific_conditons_accepted: false,
     tariff_payment_accepted: false,
     gurb_adhesion_payment_accepted: false
-  }
+  }), [])
 
-  const validationSchemas = [noValidation, gurbPowerOptions, gurbPolicyChecks]
+  const validationSchemas = useMemo(() => [identifierValidations, gurbPowerOptions, gurbPolicyChecks], [])
 
-  const handlePost = async (values) => {
+  const handlePost = useCallback(async (values) => {
     await addGurb(values)
       .then((response) => {
         setData(response?.data)
@@ -102,7 +75,7 @@ const GurbFormJoin = (props) => {
       .catch((error) => {
         console.log(error)
       })
-  }
+  }, [])
 
   const formikRef = useRef(null)
   useEffect(() => {
@@ -115,19 +88,19 @@ const GurbFormJoin = (props) => {
     }
   }, [url])
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
-  }
+  }, [])
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     setActiveStep((prev) => Math.max(0, prev - 1))
-  }
+  }, [])
 
   const getStep = (formikProps) => {
     if (activeStep === 0) {
-      return <GurbIdentification {...formikProps} activeStep={activeStep} />
+      return <GurbIdentification {...formikProps} />
     } else if (activeStep === 1) {
-      return <GurbParticipation {...formikProps} activeStep={activeStep} />
+      return <GurbParticipation {...formikProps} gurbCode={code} />
     } else if (activeStep === 2) {
       return <ContractReview {...formikProps} activeStep={activeStep} />
     } else if (activeStep === 3) {
@@ -142,8 +115,7 @@ const GurbFormJoin = (props) => {
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        // validationSchema={validationSchemas[activeStep]}
-        validationSchema={null}
+        validationSchema={validationSchemas[activeStep]}
         validateOnChange
         validateOnBlur={false}
       >
