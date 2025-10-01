@@ -23,7 +23,6 @@ export const identifierValidations = Yup.object().shape({
 export const gurbPowerOptions = Yup.object().shape({
   gurb: Yup.object().shape({
     power: Yup.string()
-      .oneOf(["1", "0.5"])
       .required()
   })
 })
