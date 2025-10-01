@@ -739,7 +739,7 @@
     "POWER_HELPER": "Para evitar problemas de tramitación, pon a mesma potencia que figura na factura actual. Poderás solicitar cambios de potencia así que o contrato estea activado con Som Energia.",
     "VOLUNTARY_DONATION_HOW_INFO": "Como persoa socia podes facer unha <strong>doazón voluntaria</strong> de 0,01 € por cada kWh. Por un consumo medio dunha unidade doméstica (aprox. 300 kW/h ao mes), <strong>isto supón uns 3 € ao mes</strong>.",
     "VOLUNTARY_DONATION_WHY_INFO": "Apoiarás actividades clave como a escola de Som Energia e iniciativas contra a vulnerabilidade enerxética e o fomento da autoprodución. <strong>Fai a túa enerxía máis poderosa!</strong>",
-    "INCORRECT_CNAE": "Non se atopou este CNAE",
+    "INCORRECT_CNAE": "É necesario indicar un CNAE 2025 válido",
     "REQUIRED_CNAE": "Non se especificou o CNAE",
     "AUTOCOMPLETE_WITHOUT_OPTIONS": "Non se atoparon resultados",
     "GURB_CADASTRAL_REFERENCE_HELPER": "Se aínda non sabes onde atopar a referencia catastral, búscaa no rexistro ou vai ao Centro de Axuda.",
