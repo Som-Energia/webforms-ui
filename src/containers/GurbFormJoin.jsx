@@ -15,7 +15,6 @@ import { identifierValidations, gurbPowerOptions, gurbPolicyChecks } from './Gur
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import { addGurb } from '../services/api'
-import { GURB_FORM_SUBSTEPS } from '../services/steps'
 
 import SomStepper from '../components/NewSomStepper'
 
@@ -24,16 +23,16 @@ import GurbIdentification from './Gurb/pages/Gurb/GurbIdentification'
 import GurbParticipation from './Gurb/pages/Gurb/GurbParticipation'
 import ContractReview from './Gurb/pages/Gurb/ContractReview'
 import GurbSignature from './Gurb/pages/Gurb/GurbSignature'
-import Payment from './Gurb/pages/Gurb/Payment'
 
-const MAX_STEP_NUMBER = 4
-const NEW_MEMBER_COST = 100
+
+const MAX_STEPS_NUMBER = 4
 
 const GurbFormJoin = (props) => {
   const { i18n } = useTranslation()
   const { language, code } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
+  const [validSignature, setValidSignature] = useState(false)
   const formTPV = useRef(null)
 
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
@@ -89,7 +88,7 @@ const GurbFormJoin = (props) => {
   }, [url])
 
   const nextStep = useCallback(() => {
-    setActiveStep((prev) => Math.min(prev + 1, MAX_STEP_NUMBER))
+    setActiveStep((prev) => Math.min(prev + 1, MAX_STEPS_NUMBER))
   }, [])
 
   const prevStep = useCallback(() => {
@@ -97,16 +96,17 @@ const GurbFormJoin = (props) => {
   }, [])
 
   const getStep = (formikProps) => {
-    if (activeStep === 0) {
-      return <GurbIdentification {...formikProps} />
-    } else if (activeStep === 1) {
-      return <GurbParticipation {...formikProps} gurbCode={code} />
-    } else if (activeStep === 2) {
-      return <ContractReview {...formikProps} activeStep={activeStep} />
-    } else if (activeStep === 3) {
-      return <GurbSignature {...formikProps} activeStep={activeStep} />
-    } else {
-      return <Payment {...formikProps} activeStep={activeStep} />
+    switch (activeStep) {
+      case 0:
+        return <GurbIdentification {...formikProps} />
+      case 1:
+        return <GurbParticipation {...formikProps} gurbCode={code} />
+      case 2:
+        return <ContractReview {...formikProps} activeStep={activeStep} />
+      case 3:
+        return <GurbSignature {...formikProps} setValidSignature={setValidSignature} />
+      default:
+        return null
     }
   }
 
@@ -123,7 +123,7 @@ const GurbFormJoin = (props) => {
           <>
             <SomStepper
               activeStep={activeStep}
-              steps={GURB_FORM_SUBSTEPS}
+              steps={[...Array(MAX_STEPS_NUMBER).keys()]}
             />
             {error ? getStepResult(errorInfo) : getStep(formikProps)}
 
@@ -143,27 +143,28 @@ const GurbFormJoin = (props) => {
                     <PrevButton onClick={() => prevStep(formikProps)} title="PREV" />
                   </Grid>
                 )}
+
                 <Grid item sm={2} xs={12} order={-1}>
-                  {activeStep !== MAX_STEP_NUMBER ? (
-                    <NextButton
-                      disabled={loading || !formikProps.isValid || activeStep === MAX_STEP_NUMBER}
-                      onClick={() => nextStep(formikProps)}
-                      title="NEXT"
-                    />
-                  ) : (
+                  {activeStep === 3 ? (
                     <SubmitButton
-                      disabled={loading || !formikProps.isValid}
+                      text="GURB_NEXT_PAYMENT"
+                      disabled={loading || !formikProps.isValid || !validSignature}
                       onClick={() =>
                         handlePost({
-                          soci: 'Eustaquio',
-                          cost:
-                            NEW_MEMBER_COST +
-                            formikProps.values.contract.gurb_power_cost
+                          soci: "Eustaquio",
+                          cost: 'cost',
                         })
                       }
                     />
+                  ) : (
+                    <NextButton
+                      disabled={loading || !formikProps.isValid}
+                      onClick={() => nextStep(formikProps)}
+                      title="NEXT"
+                    />
                   )}
                 </Grid>
+
               </Grid>
             )}
           </>
