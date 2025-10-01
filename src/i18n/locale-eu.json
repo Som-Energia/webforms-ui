@@ -764,7 +764,7 @@
     "GURB_CADASTRAL_REFERENCE_HELPER": "Katastroko erreferentzia aurkitzeko, jo erregistrora edo Laguntza Gunera.",
     "REQUIRED_CNAE": "EJSN kodea zehaztu behar da",
     "ELECTRIC_BILL_UPLOAD": "Kontratatu beharreko hornidura-puntuaren faktura bat elektrikoa erantsi du",
-    "INCORRECT_CNAE": "EJSN kode hau ez da aurkitu",
+    "INCORRECT_CNAE": "Baliozko EJSN kode bat adierazi behar duzu",
     "AUTOCOMPLETE_WITHOUT_OPTIONS": "Ez da emaitzarik aurkitu",
     "GURB_CLICK_HERE": "Egin klik igotzeko",
     "GURB_DRAG_AND_DROP_HERE": "edo arrastatu eta askatu hemen",
@@ -927,5 +927,6 @@
     "NEW_CONTRACT_SUCCESS_DESC": "Mezu bat jasoko duzu kontratu berriari buruzko informazio guztiarekin.",
     "PURPOSE_MEMBER_ON": "XEDEAK: elektrizitate-zerbitzuaren kontratazioa kudeatzea eta ondoriozko zeregin administratiboak; gure energia-produktuei eta -zerbitzuei buruz informatzea, baita euskarri elektronikoen bidez ere.",
     "RIGHTS_MEMBER_ON": "ESKUBIDEAK: gure mezu komertzialak jasotzeari uko egin diezaiokezu. Zure datuetan sartzeko, datuak zuzentzeko, ezabatzeko, beste norabait eramateko, eta datuen tratamenduari aurka egiteko eta tratamendua mugatzeko eskubidea baliatzeko, idatzi <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a> helbidera. Informazio gehiago aurkituko duzu <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Pribatutasun-politikan.</a>",
-    "INSTALLATION_POWER_EXCEDED": "Instalazioaren gehieneko potentzia 100 kW da"
+    "INSTALLATION_POWER_EXCEDED": "Instalazioaren gehieneko potentzia 100 kW da",
+    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/"
 }
