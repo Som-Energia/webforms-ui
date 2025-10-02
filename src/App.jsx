@@ -53,6 +53,7 @@ const App = (props) => {
   )
   const NewMemberForm = lazy(() => import('./containers/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
+  const GurbContractPaymentSuccessful = lazy(() => import('./containers/GurbContractPaymentSuccessful'))
 
   const loadContractData = () => {
     const contractData =
@@ -451,6 +452,20 @@ const App = (props) => {
                             <GurbLoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbFormJoin {...props} />
+                              </SummaryContextProvider>
+                            </GurbLoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        }
+                      />
+                    )}
+                    {props?.isGurbEnabled && (
+                      <Route
+                        path="/:language/gurb/gurb_url_ok"
+                        element={
+                          <GurbErrorContextProvider>
+                            <GurbLoadingContextProvider>
+                              <SummaryContextProvider>
+                                <GurbContractPaymentSuccessful {...props} />
                               </SummaryContextProvider>
                             </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
