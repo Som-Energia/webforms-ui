@@ -303,7 +303,7 @@
     "PREVIOUS_HOLDER_YES_LABEL": "Bai, titularra nintzen",
     "PREVIOUS_HOLDER_NO_LABEL": "Ez, ez nintzen titularra",
     "PREVIOUS_HOLDER_YES_DESC": "Aurreko merkaturatze-konpainian kontratuaren titularra nintzen",
-    "PREVIOUS_HOLDER_NO_DESC": "Aurreko merkaturatze-konpainian ez nintzen kontratuaren titularra",
+    "PREVIOUS_HOLDER_NO_DESC": "",
     "ALTA": "Hornidurarik gabeko puntu baten alta",
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Merkaturatze-konpainia eta titularra aldatzea",
     "CANVI_DE_COMERCIALITZADORA": "Merkaturatze-konpainia aldatzea baina titularra mantentzea",
