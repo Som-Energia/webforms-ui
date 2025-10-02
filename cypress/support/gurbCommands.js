@@ -36,21 +36,8 @@ Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, memberCode, status
     }
   }).as('checkCUPS')
 
-  cy.intercept('GET', '/check/soci/**', {
-    statusCode: statusCode,
-    body: {
-      data: true,
-      state: true,
-      status: 'ONLINE'
-    }
-  }).as('checkMember')
-
-
   cy.get('[data-cy="cups"]').type(cups)
   cy.wait('@checkCUPS')
-  cy.get('[data-cy=vat]').type(vat)
-  cy.get('[data-cy=code]').type(memberCode)
-  cy.wait('@checkMember')
   cy.get('[data-cy=next]').click()
 
 })
