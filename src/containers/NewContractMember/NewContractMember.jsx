@@ -321,7 +321,7 @@ const NewContractMemberForm = (props) => {
   const handlePost = async (values) => {
     trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
     setSending(true)
-    const data = newNormalizeContract(values)
+    const data = newNormalizeContract(values, initialGurbCode)
     await newContract(data)
       .then((response) => {
         if (response?.state === true) {
