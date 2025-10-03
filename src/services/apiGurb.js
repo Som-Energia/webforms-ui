@@ -16,3 +16,40 @@ export const checkGurbDistance = async (gurbId, lat, long) => {
     return response?.data
   })
 }
+
+// // CUPS from Som?
+// export const checkGurbCups = async (data, token) => {
+//   return axios({
+//     method: 'GET',
+//     url: `${WEBFORMS_API_URL}/gurb/`,
+//     headers: {
+//       Authorization: token
+//     },
+//     data: data
+//   }).then((response) => {
+//     return response?.data
+//   })
+// }
+
+export const createGurbSignature = async (data) => {
+  return new Promise(async (resolve) => {
+    setTimeout(() => {
+      resolve({
+        data: {
+          signaturit: {
+            url: 'https://replace-me-with-a-test-signaturit.url',
+          },
+          mandate_name: 'mock-mandate-name'
+        }
+      });
+    }, 2000)
+  })
+
+  // return axios({
+  //   method: 'POST',
+  //   url: `${WEBFORMS_API_URL}/form/create_gurb_signature`,
+  //   data: data
+  // }).then((response) => {
+  //   return response?.data
+  // })
+}
