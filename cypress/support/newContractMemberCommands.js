@@ -157,3 +157,20 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContract', (status, error=false) =>
   let icon = status ? "success-icon" : "error-icon"
   cy.get('[data-cy='+icon+']').should('exist')
 })
+
+Cypress.Commands.add('acceptTermsAndsubmitNewContractWithGurbCode', (status, error=false) => {
+  cy.intercept('POST', '/procedures/contract', {
+    statusCode: !error ? 200 : 500,
+    body: {
+      state: status
+    }
+  })
+  cy.get('[data-cy="next"]').click()
+})
+
+Cypress.Commands.add('resultRedirectComponent', (gurbCode = '1234') => {
+  cy.get('[data-cy="redirect-button"]')
+    .should('exist')
+    .invoke('attr', 'href')
+    .should('include', gurbCode)
+})
