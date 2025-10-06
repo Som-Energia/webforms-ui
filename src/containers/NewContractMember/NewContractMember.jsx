@@ -56,6 +56,8 @@ import RedirectUrl from '../Gurb/components/RedirectUrl'
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
+import { usePixelEvent } from "../../hooks/usePixelEvent"
+
 const NewContractMemberForm = (props) => {
   const [searchParams] = useSearchParams()
   const { i18n, t } = useTranslation()
@@ -64,7 +66,7 @@ const NewContractMemberForm = (props) => {
   const [data, setData] = useState()
   const formTPV = useRef(null)
   const { tariff } = props
-  
+
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
@@ -316,6 +318,7 @@ const NewContractMemberForm = (props) => {
 
   const trackSucces = () => {
     trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    usePixelEvent("FormularioCompletado", { status: "ok" })
   }
 
   const handlePost = async (values) => {
