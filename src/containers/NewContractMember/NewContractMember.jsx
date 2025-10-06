@@ -55,14 +55,16 @@ import NewLoading from '../../components/NewLoading'
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
+import { usePixelEvent } from "../../hooks/usePixelEvent"
+
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
-  const { language} = useParams()
+  const { language } = useParams()
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
   const { tariff } = props
-  
+
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
@@ -108,8 +110,8 @@ const NewContractMemberForm = (props) => {
       stairs: '',
       bloc: '',
       postal_code: '',
-      state: {id:'', name: ''},
-      city: {id:'', name: ''}
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
     },
     address: {
       street: '',
@@ -119,8 +121,8 @@ const NewContractMemberForm = (props) => {
       stairs: '',
       bloc: '',
       postal_code: '',
-      state:{id:'', name: ''},
-      city: {id:'', name: ''}
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
     },
     member: {
       number: '',
@@ -311,6 +313,7 @@ const NewContractMemberForm = (props) => {
 
   const trackSucces = () => {
     trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    usePixelEvent("FormularioCompletado", { status: "ok" })
   }
 
   const handlePost = async (values) => {
@@ -346,7 +349,7 @@ const NewContractMemberForm = (props) => {
   const getStep = (props, sendTrackEvent) => {
     const { values } = props
 
-    const trackProps = {...props,sendTrackEvent}
+    const trackProps = { ...props, sendTrackEvent }
 
     if (values?.has_member == 'member-off') {
 
@@ -431,12 +434,12 @@ const NewContractMemberForm = (props) => {
     }
   }, [summaryField])
 
-  useEffect(()=> {
+  useEffect(() => {
     trackEvent({
-       category: 'NewContractMember',
-       action: 'setNewContractMemberStep',
-       name: `new-contract-member-step-${activeStep}`
-     })
+      category: 'NewContractMember',
+      action: 'setNewContractMemberStep',
+      name: `new-contract-member-step-${activeStep}`
+    })
   }, [activeStep])
 
   const sendTrackEvent = (id) => {
@@ -478,10 +481,10 @@ const NewContractMemberForm = (props) => {
                 <>
                   {!completed && (
                     <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
-                    <SomStepper
-                      activeStep={activeStep - 1} // because step 0 does not count
-                      steps={formSteps}
-                    />
+                      <SomStepper
+                        activeStep={activeStep - 1} // because step 0 does not count
+                        steps={formSteps}
+                      />
                     </Box>
                   )}
                   {completed ? (
@@ -498,15 +501,15 @@ const NewContractMemberForm = (props) => {
                           dangerouslySetInnerHTML={{
                             __html: !error
                               ? formikProps.values.has_member === 'member-on'
-                              ? t('NEW_CONTRACT_SUCCESS_DESC')
-                              : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                                ? t('NEW_CONTRACT_SUCCESS_DESC')
+                                : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
                               : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
                           }}
                         />
                       </Result>
                     </Box>
                   ) : (
-                    getStep(formikProps,sendTrackEvent)
+                    getStep(formikProps, sendTrackEvent)
                   )}
                   {!completed && (
                     <Grid
