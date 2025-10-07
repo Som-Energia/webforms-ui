@@ -1088,5 +1088,6 @@
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE": "Ja gairabé ho tens!",
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION": "Ja has contractat la llum amb Som Energia!<br/><b>Ara ja pots seguir amb la contractació de GURB!</b><br/>Clica el botó que et durà al formulari, on podràs finalitzar la contractació del servei.",
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT": "Contractar GURB",
-    "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "https://somenergia.coop/{{language}}/gurb/{{gurbCode}}/join/"
+    "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "https://somenergia.coop/{{language}}/gurb/{{gurbCode}}/join/",
+    "STEP_TITLE": "Pas"
 }

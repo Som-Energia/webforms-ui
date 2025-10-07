@@ -146,6 +146,7 @@ const GurbFormRequirements = (props) => {
                   <SomStepper
                     activeStep={activeStep - 1}
                     stepsNum={maxStepNum}
+                    showStepTitle={true}
                   />
                 </Box>
               )}

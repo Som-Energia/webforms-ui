@@ -1072,5 +1072,6 @@
     "GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION": "La Quota de GURB de {{power}} kW té un cost diari de {{daily_cost}}€ euros. Això equival a uns {{monthly_cost}} euros al mes, aproximadament.",
     "GURB_CONTRACT_SUMMARY_JOIN_COST": "Cost d'adhesió",
     "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION": "",
-    "GURB_CONTRACT_REVIEW_INFO": "La quota de GURB es carregarà mensualment a la teva factura, mitjançant domiciliació bancària. El cost d’adhesió es cobrarà en finalitzar el formulari, amb un pagament a través de targeta bancària."
+    "GURB_CONTRACT_REVIEW_INFO": "La quota de GURB es carregarà mensualment a la teva factura, mitjançant domiciliació bancària. El cost d’adhesió es cobrarà en finalitzar el formulari, amb un pagament a través de targeta bancària.",
+    "STEP_TITLE": "Paso"
 }
