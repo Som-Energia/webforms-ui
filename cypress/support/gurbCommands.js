@@ -21,7 +21,7 @@ Cypress.Commands.add('identifySupplyPointGURB', (cups, cupsStatus, statusCode = 
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, vat, memberCode, status, statusCode = 200) => {
+Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, status, statusCode = 200) => {
   //Intercept call to check CUPS
   cy.intercept('GET', '/check/cups/status/*', {
     statusCode: statusCode,
@@ -63,10 +63,22 @@ Cypress.Commands.add('selectParticipationOnGurb', (cups, vat, memberCode, status
   cy.wait('@getPowers')
   cy.get('[data-cy="select_component"]').click()
   cy.get('[data-cy="1"]').click()
-  cy.get('[data-cy=next]').should('not.be.disabled')
+  cy.get('[data-cy=next]').should('not.be.disabled').click()
   
 
 })
+
+Cypress.Commands.add('acceptAllConditionsOnGurb', () => {
+
+  cy.get('[data-cy="generic_especific_conditons_checkbox"]').click()
+  cy.get('[data-cy="privacy_policy_checkbox"]').click()
+  cy.get('[data-cy="tariff_payment_checkbox"]').click()
+  cy.get('[data-cy="gurb_adhesion_payment_checkbox"]').click()
+  cy.get('[data-cy=next]').should('not.be.disabled').click()
+
+})
+
+
 
 Cypress.Commands.add('lightQuestion', (lightOn = true) => {
   const optionValue = lightOn ? 'light-on' : 'light-off'

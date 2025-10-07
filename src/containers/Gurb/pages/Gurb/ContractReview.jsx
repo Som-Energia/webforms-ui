@@ -4,13 +4,13 @@ import Typography from '@mui/material/Typography'
 import { textHeader4, textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import ReviewField from '../../../../components/review/ReviewField'
-import PersonIcon from '@mui/icons-material/Person';
-import Divider from '@mui/material/Divider'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import CheckBox from '@mui/material/Checkbox'
-import BoltIcon from '@mui/icons-material/Bolt';
+import Alert from '@mui/material/Alert'
+
+import { LightningIcon, EuroIcon } from '../../../../data/icons/Icons'
+
 
 const CustomCheckBox = (props) => {
   const { name, onClick, text, checked, dataCy } = props
@@ -49,39 +49,41 @@ const ContractReview = (props) => {
 
       <Grid container>
         <Grid container item xs={6} sx={{ display: 'flex', gap: 2, mb : 3 }}>
-          <BoltIcon />
+          <LightningIcon />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography sx={textHeader4}>{"Participació GURB en KWh"}</Typography>
+            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_KWH")}</Typography>
             <ReviewField value={values.gurb.power + " KWh"} />
           </Box>
         </Grid>
         <Grid container item xs={6} sx={{ display: 'flex', gap: 2, mb : 3 }}>
-          <BoltIcon />
+          <LightningIcon />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography sx={textHeader4}>{"Beta en percentatge"}</Typography>
+            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_BETA")}</Typography>
             <ReviewField value={values.gurb.power + " %"} />
           </Box>
         </Grid>
       </Grid>
       <Grid container>
         <Grid container xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <DescriptionOutlinedIcon />
+          <EuroIcon />
           <Grid xs={6}>
-            <Typography sx={textHeader4}>{"Quota de GURB"}</Typography>
-            <ReviewField value={"Quota de GURB de 0,5kW té un cost diari de 0,00€. Això equival a uns XX euros al mes."} />
+            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_QUOTA")}</Typography>
+            <ReviewField value={t("GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION")} />
           </Grid>
         </Grid>
         <Grid container xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <PersonIcon />
+          <EuroIcon />
           <Grid xs={6}>
-            <Typography sx={textHeader4}>{"Cost d'adhesió"}</Typography>
-            <ReviewField value={"Pagament únic de 50€"} />
+            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_JOIN_COST")}</Typography>
+            <ReviewField value={t("GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION")} />
           </Grid>
         </Grid>
       </Grid >
 
-      <Divider />
-
+      <Alert severity="warning" sx={{ mt: 4, mb: 4 }}>
+        <Typography>{t('GURB_CONTRACT_REVIEW_INFO')}</Typography>
+      </Alert>
+      
       <CustomCheckBox name="generic_especific_conditons_accepted"
         dataCy="generic_especific_conditons_checkbox"
         onClick={() => setFieldValue("generic_especific_conditons_accepted", !values.generic_especific_conditons_accepted)} text={{
