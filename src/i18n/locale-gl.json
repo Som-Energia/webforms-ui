@@ -297,7 +297,7 @@
     "FILL_PREVIOUS_HOLDER": "Non indicaches se eras titular coa comercializadora anterior",
     "PREVIOUS_HOLDER_YES_LABEL": "Si, era a persoa titular",
     "PREVIOUS_HOLDER_NO_LABEL": "Non, non era a persoa titular",
-    "PREVIOUS_HOLDER_YES_DESC": "Era a persoa titular do contrato coa comercializadora anterior",
+    "PREVIOUS_HOLDER_YES_DESC": "",
     "PREVIOUS_HOLDER_NO_DESC": "",
     "ALTA": "Alta dun punto sen subministración",
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Cambio de comercializadora modificando a persoa titular",
