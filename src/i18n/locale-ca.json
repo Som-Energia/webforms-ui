@@ -315,7 +315,7 @@
     "FILL_PREVIOUS_HOLDER": "No has introduït si eres titular amb la comercialitzadora anterior",
     "PREVIOUS_HOLDER_YES_LABEL": "Sí, soc la persona titular del contracte de llum.",
     "PREVIOUS_HOLDER_NO_LABEL": "No, no soc la persona titular del contracte de llum.",
-    "PREVIOUS_HOLDER_YES_DESC": "¿Actualment ets la persona titular del contracte de llum?",
+    "PREVIOUS_HOLDER_YES_DESC": "",
     "PREVIOUS_HOLDER_NO_DESC": "",
     "ALTA": "Alta d'un punt sense subministrament",
     "CANVI_DE_COMERCIALITZADORA_I_TITULAR": "Canvi de comercialitzadora modificant la persona titular",
