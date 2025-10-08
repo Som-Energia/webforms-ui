@@ -1,8 +1,6 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import PopUpContext from '../context/PopUpContext';
-import { add } from '@dnd-kit/utilities';
-
 
 
 const customStyles = (withBackground, additionalStyles = {}) => ({
