@@ -277,7 +277,39 @@ const AddressField = ({
       else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
-          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_ADDRESS_OUT_OF_PERIMETER') }} />}
+          <SimpleGurbDialog
+            severity={'error'}
+            title={
+              <Typography
+                dangerouslySetInnerHTML={{ __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT') }} />
+            }
+            text1={
+              <Typography
+                sx={{
+                  fontSize: 14,
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
+                }}
+              />
+            }
+            text2={
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  'a':
+                  {
+                    textDecoration: 'none',
+                    color: 'black',
+                    fontWeight: 'bold',
+                    textDecoration: 'underline'
+                  }
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT'),
+                }}
+              />
+            }
             closeFunction={async () => {
               setContent(undefined)
             }}

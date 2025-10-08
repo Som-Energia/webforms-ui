@@ -1,18 +1,20 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import PopUpContext from '../context/PopUpContext';
+import { add } from '@dnd-kit/utilities';
 
 
 
-const customStyles = (withBackground) => ({
+const customStyles = (withBackground, additionalStyles = {}) => ({
   sx: {
   position: 'absolute',
   top: 0,
   backgroundColor: withBackground ? 'white' : 'transparent',
+  ...additionalStyles,
   //boxShadow: withBackground ? '0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)' : 'none'
 }})
 
-function CustomDialog({ children, withBackground, blockHandleClose }) {
+function CustomDialog({ children, withBackground, blockHandleClose, paperStyles }) {
 
   const { setContent } = React.useContext(PopUpContext)
 
@@ -26,7 +28,7 @@ function CustomDialog({ children, withBackground, blockHandleClose }) {
     <Dialog
       onClose={handleClose}
       open={children === undefined ? false : true}
-      PaperProps={customStyles(withBackground)}
+      PaperProps={customStyles(withBackground, paperStyles)}
       slotProps={{
         backdrop: {
           sx: {backgroundColor: 'rgba(12, 76, 39, 0.5)'}

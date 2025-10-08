@@ -29,10 +29,31 @@ const LightQuestion = (props) => {
       setError(true)
       setContent(
         <SimpleGurbDialog
-          title={
+          severity={'warning'}
+          text1={
             <Typography
+              sx={{
+                fontSize: 14,
+              }}
               dangerouslySetInnerHTML={{
                 __html: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
+              }}
+            />
+          }
+          text2={
+            <Typography
+              sx={{
+                fontSize: 14,
+                'a':
+                {
+                  textDecoration: 'none',
+                  color: 'black',
+                  fontWeight: 'bold',
+                  textDecoration: 'underline'
+                }
+              }}
+              dangerouslySetInnerHTML={{
+                __html: t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT'),
               }}
             />
           }
@@ -60,7 +81,7 @@ const LightQuestion = (props) => {
   ]
 
   return (
-      <Grid container spacing={2}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} required={true} />
       </Grid>
