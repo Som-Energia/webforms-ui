@@ -32,11 +32,6 @@ const GurbRequirementsResult = ({ values, gurbCode }) => {
         alignItems: 'center',
       }}
     >
-      <CheckCircleIcon
-        data-cy="success-icon"
-        fontSize="large"
-        sx={{ mb: 3, color: 'primary.extraLight' }}
-      />
 
       <RedirectUrl
         title={resultTitle}
