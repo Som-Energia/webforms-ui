@@ -7,6 +7,8 @@ import Select from '../../components/Select'
 import Alert from '@mui/material/Alert'
 import { getPowers } from '../../../../services/api'
 
+const TWENTY_TD_TARIFF = "2.0 TD"
+
 const GurbParticipation = (props) => {
   const { values, setFieldValue, gurbCode } = props
   const { t } = useTranslation()
@@ -59,12 +61,13 @@ const GurbParticipation = (props) => {
           />
         }
       />
-      <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
-        __html: t('GURB_PARTICIPATION_TEXT_1', { initial_quota: gurbDetails.initial_quota })
-      }} /> </Alert>
-      {gurbDetails.surplus_compensation && <Alert severity='info'><Typography variant='body2' align='justify' dangerouslySetInnerHTML={{
-        __html: t('GURB_PARTICIPATION_TEXT_2')
-      }} /> </Alert>}
+      {values.tariff_name === TWENTY_TD_TARIFF ?
+        <Alert severity='warning'>
+          <Typography color="inherit" align='justify' dangerouslySetInnerHTML={{
+            __html: t('GURB_PARTICIPATION_TEXT_1')
+          }} />
+        </Alert>
+        : null}
     </Box>
   )
 }

@@ -1078,5 +1078,12 @@
     "GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF": "/ca/formulari-contractacio-periodes",
     "GURB_ERROR_ADDRESS_OUT_OF_PERIMETER": "L'adreça introduïda no es troba dins del perímetre de GURB.",
     "GURB_ERROR_CHECKING_DISTANCE": "Error en comprovar la distància a GURB.",
-    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/ca/gurb/{{gurbCode}}/join/"
+    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/ca/gurb/{{gurbCode}}/join/",
+    "GURB_CONTRACT_SUMMARY_KWH":"",
+    "GURB_CONTRACT_SUMMARY_BETA":"",
+    "GURB_CONTRACT_SUMMARY_QUOTA":"",
+    "GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION":"",
+    "GURB_CONTRACT_SUMMARY_JOIN_COST":"",
+    "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION":"",
+    "GURB_CONTRACT_REVIEW_INFO":""    
 }
