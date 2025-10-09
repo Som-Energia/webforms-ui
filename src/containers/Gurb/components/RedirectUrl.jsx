@@ -15,7 +15,11 @@ const RedirectUrl = ({
   return (
     <Grid container spacing={2} direction="column" alignItems="center">
       <Grid item>
-        <Typography variant="h5" sx={{ textAlign: 'center' }}>
+        <Typography
+          variant="h5"
+          sx={{
+            textAlign: 'center'
+          }}>
           {title}
         </Typography>
       </Grid>
@@ -25,7 +29,7 @@ const RedirectUrl = ({
           component="div"
           variant="body1"
           sx={{
-            mt: 2,
+            mt: 0,
             fontWeight: 400,
             fontSize: '1rem',
             lineHeight: 1.75,
@@ -49,7 +53,8 @@ const RedirectUrl = ({
             ...buttonGurbDark,
             boxSizing: 'border-box',
             lineHeight: 1,
-            textTransform: 'none'
+            textTransform: 'none',
+            p: 1.5
           }}
         >
           {buttonText}

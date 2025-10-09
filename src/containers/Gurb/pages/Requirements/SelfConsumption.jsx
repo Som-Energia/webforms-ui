@@ -45,7 +45,6 @@ const SelfConsumption = (props) => {
                 fontSize: 14,
                 'a':
                   {
-                    textDecoration: 'none',
                     color:'black',
                     fontWeight: 'bold',
                     textDecoration: 'underline'
@@ -80,7 +79,6 @@ const SelfConsumption = (props) => {
         <TextRecomendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
           text={t('GURB_SELFCONSUMPTION_HELPER')}
-          required={true}
         />
       </Grid>
       <Grid item xs={12}>
