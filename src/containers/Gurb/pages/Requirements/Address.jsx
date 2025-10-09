@@ -480,7 +480,7 @@ const AddressField = ({
             alignSelf: 'center',
           }}
           variant="contained"
-          disabled={loading}
+          disabled={loading || values[addressFieldName]?.inside_perimeter}
           onClick={handleClick}
           data-cy="validate-address"
         >
