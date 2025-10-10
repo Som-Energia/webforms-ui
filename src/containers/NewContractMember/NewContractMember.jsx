@@ -81,7 +81,7 @@ const NewContractMemberForm = (props) => {
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
-  const [initialGurbCode] = useState(() => searchParams.get("gurb-code"));
+  const [gurbCode] = useState(() => searchParams.get("gurb-code"));
 
 
   useEffect(() => {
@@ -321,7 +321,7 @@ const NewContractMemberForm = (props) => {
   const handlePost = async (values) => {
     trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
     setSending(true)
-    const data = newNormalizeContract(values, initialGurbCode)
+    const data = newNormalizeContract(values, gurbCode)
     await newContract(data)
       .then((response) => {
         if (response?.state === true) {
@@ -492,14 +492,22 @@ const NewContractMemberForm = (props) => {
                   {completed ? (
                     <Box sx={{ mt: 2 }}>
 
-                      {!initialGurbCode ? (
+                      {gurbCode && !error ? (
+                        <RedirectUrl
+                          title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
+                          description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
+                          url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', { gurbCode, language: i18n.language })}
+                          buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
+                        />
+                      ) : (
                         <Result
                           mode={!error ? 'success' : 'failure'}
                           title={
                             !error
                               ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
                               : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
-                          }>
+                          }
+                        >
                           <Typography
                             sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
                             dangerouslySetInnerHTML={{
@@ -507,42 +515,10 @@ const NewContractMemberForm = (props) => {
                                 ? formikProps.values.has_member === 'member-on'
                                   ? t('NEW_CONTRACT_SUCCESS_DESC')
                                   : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
-                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC'),
                             }}
                           />
                         </Result>
-                      ) : (
-                        <>
-                          {error && (
-                            <Result
-                              mode={!error ? 'success' : 'failure'}
-                              title={
-                                !error
-                                  ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
-                                  : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
-                              }>
-                              <Typography
-                                sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
-                                dangerouslySetInnerHTML={{
-                                  __html: !error
-                                    ? formikProps.values.has_member === 'member-on'
-                                      ? t('NEW_CONTRACT_SUCCESS_DESC')
-                                      : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
-                                    : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
-                                }}
-                              />
-                            </Result>
-                          )}
-
-                          {!error && (
-                            <RedirectUrl
-                              title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
-                              description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
-                              url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', { gurbCode: initialGurbCode, language: i18n.language })}
-                              buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
-                            />
-                          )}
-                        </>
                       )}
 
                     </Box>
