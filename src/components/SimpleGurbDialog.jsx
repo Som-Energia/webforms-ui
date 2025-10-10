@@ -18,7 +18,7 @@ export default function SimpleDialog({ title, text1, text2, closeFunction, sever
       paperStyles={{
         width: '448px',
         maxWidth: '90vw',
-        height: '272px',
+        height: '300px',
         maxHeight: '80vh',
         margin: '20px',
       }}
@@ -29,7 +29,8 @@ export default function SimpleDialog({ title, text1, text2, closeFunction, sever
           <WarningRounded
           sx={{
             fontSize: 44,
-            color: 'warning.light'
+            color: 'warning.light',
+            mt: 4
           }}
 
           />
