@@ -9,9 +9,11 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
+import { textBody1 } from '../../gurbTheme'
+
 const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()
-  const { language } = useParams()
+  const { language, gurbCode } = useParams()
   const { t } = useTranslation()
   const { values, setFieldValue } = props
   const [selectedOption, setSelectedOption] = useState(null)
@@ -40,21 +42,31 @@ const GurbRequirementsTariffSelection = (props) => {
 
     const baseUrl = 'https://somenergia.coop/'
     const redirectUrl = optionId === 'periods-tariff'
-      ? baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF')
-      : baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF')
+      ? baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', { gurbCode: gurbCode })
+      : baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', { gurbCode: gurbCode })
     setFieldValue('redirectUrl', redirectUrl)
   }
 
   return (
     <Grid item>
-        <TextRecomendation title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')} />
-        <TextRecomendation title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')} />
+        <TextRecomendation
+          title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
+        />
+
+        <Typography
+          sx={textBody1}>
+          {t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')}
+        </Typography>
+
+        <Typography
+          sx={{ mt: 4, mb: 2 }}
+          >{t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')}</Typography>
 
       <Chooser
         name="tariff-question"
         data-cy='tariff-chooser'
         options={options}
-        value={selectedOption} // Pass the selected option ID, not the URL
+        value={selectedOption}
         handleChange={handleTariffQuestion}
         maxWidth="18rem"
       />

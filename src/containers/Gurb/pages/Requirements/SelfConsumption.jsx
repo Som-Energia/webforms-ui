@@ -28,10 +28,30 @@ const SelfConsumption = (props) => {
       setError(true)
       setContent(
         <SimpleGurbDialog
-          title={
+          severity={'warning'}
+          text1={
             <Typography
+              sx={{
+                fontSize: 14,
+              }}
               dangerouslySetInnerHTML={{
                 __html: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
+              }}
+            />
+          }
+          text2={
+            <Typography
+              sx={{
+                fontSize: 14,
+                'a':
+                  {
+                    color:'black',
+                    fontWeight: 'bold',
+                    textDecoration: 'underline'
+                  }
+              }}
+              dangerouslySetInnerHTML={{
+                __html: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT'),
               }}
             />
           }
@@ -59,7 +79,6 @@ const SelfConsumption = (props) => {
         <TextRecomendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
           text={t('GURB_SELFCONSUMPTION_HELPER')}
-          required={true}
         />
       </Grid>
       <Grid item xs={12}>

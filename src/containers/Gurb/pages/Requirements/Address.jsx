@@ -5,9 +5,7 @@ import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import MapIcon from '@mui/icons-material/Map'
-import VerifiedIcon from '@mui/icons-material/Verified'
+import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
 
 import * as Yup from 'yup'
 
@@ -26,6 +24,7 @@ import { getMunicipisByPostalCode } from '../../../../services/api'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 
 import PopUpContext from '../../../../context/PopUpContext'
+import TextRecomendation from '../../components/TextRecomendation'
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -278,7 +277,39 @@ const AddressField = ({
       else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
-          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_ADDRESS_OUT_OF_PERIMETER') }} />}
+          <SimpleGurbDialog
+            severity={'error'}
+            title={
+              <Typography
+                dangerouslySetInnerHTML={{ __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT') }} />
+            }
+            text1={
+              <Typography
+                sx={{
+                  fontSize: 14,
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
+                }}
+              />
+            }
+            text2={
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  'a':
+                  {
+                    textDecoration: 'none',
+                    color: 'black',
+                    fontWeight: 'bold',
+                    textDecoration: 'underline'
+                  }
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT'),
+                }}
+              />
+            }
             closeFunction={async () => {
               setContent(undefined)
             }}
@@ -305,6 +336,13 @@ const AddressField = ({
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextRecomendation
+          title={t('GURB_ADDRESS_TITLE')}
+          text={t('GURB_ADDRESS_TITLE_HELPER')}
+        />
+      </Grid>
+
       <Grid item sm={8} xs={12}>
         <LocationInput
           textFieldName={t('ADDRESS')}
@@ -417,22 +455,38 @@ const AddressField = ({
           error={errors[addressFieldName]?.bloc}
         />
       </Grid>
-      <Grid item xs={12}>
+
+      <Grid
+        item
+        sm={12}
+        xs={12}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
         <Button
-          endIcon={
-            loading
-              ? <CircularProgress size='20px' />
-              : values.address.inside_perimeter
-                ? <VerifiedIcon sx={{ fontSize: 20 }} />
-                : <MapIcon sx={{ fontSize: 20 }} />
-          }
-          disabled={loading} onClick={handleClick}
-          data-cy={'validate-address'}
+          tabIndex={0}
+          sx={{
+            ...buttonGurbDark,
+            height: '40px',
+            padding: '13px 18px',
+            boxSizing: 'border-box',
+            lineHeight: 1,
+            textTransform: 'none',
+            width: 'auto',
+            alignSelf: 'center',
+          }}
+          variant="contained"
+          disabled={loading || values[addressFieldName]?.inside_perimeter}
+          onClick={handleClick}
+          data-cy="validate-address"
         >
-          VALIDAR
+          {t('GURB_ADDRESS_VALIDATION_BUTTON_TEXT')}
         </Button>
       </Grid>
-
     </Grid>
   )
 }

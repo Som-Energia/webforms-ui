@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 
 const SomStepper = (props) => {
-  const { activeStep, steps, stepsNum } = props
+  const { activeStep, steps, stepsNum, showStepTitle = false } = props
   const { t } = useTranslation()
 
   const numberSteps = stepsNum || Object.keys(steps).length
@@ -12,7 +12,7 @@ const SomStepper = (props) => {
   return (
     <>
       <Typography color="secondary">
-        {currentStep + '/' + numberSteps}
+        {showStepTitle && t('STEP_TITLE')} {currentStep + '/' + numberSteps}
       </Typography>
       <LinearProgress
         variant="determinate"
