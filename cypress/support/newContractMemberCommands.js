@@ -69,7 +69,7 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
   cy.contains(data.supplyPointData.street).click()
   cy.wait(1000)
 
-  cy.get('[data-cy="supply_point_address.number"]').type('2')
+  cy.get('[data-cy="supply_point_address.number"]').clear().type(22, { delay: 100 })
 
   cy.get('[data-cy=select_component]').click()
   cy.get(`[data-cy="${house}"]`).click()
@@ -156,4 +156,21 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContract', (status, error=false) =>
   cy.get('[data-cy="next"]').click()
   let icon = status ? "success-icon" : "error-icon"
   cy.get('[data-cy='+icon+']').should('exist')
+})
+
+Cypress.Commands.add('acceptTermsAndsubmitNewContractWithGurbCode', (status, error=false) => {
+  cy.intercept('POST', '/procedures/contract', {
+    statusCode: !error ? 200 : 500,
+    body: {
+      state: status
+    }
+  })
+  cy.get('[data-cy="next"]').click()
+})
+
+Cypress.Commands.add('resultRedirectComponent', (gurbCode = '1234') => {
+  cy.get('[data-cy="redirect-button"]')
+    .should('exist')
+    .invoke('attr', 'href')
+    .should('include', gurbCode)
 })

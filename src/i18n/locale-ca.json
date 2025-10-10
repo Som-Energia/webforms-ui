@@ -1085,5 +1085,9 @@
     "GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION": "",
     "GURB_CONTRACT_SUMMARY_JOIN_COST": "",
     "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION": "",
-    "GURB_CONTRACT_REVIEW_INFO": ""
+    "GURB_CONTRACT_REVIEW_INFO": "",
+    "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE": "Ja gairabé ho tens!",
+    "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION": "Ja has contractat la llum amb Som Energia!<br/><b>Ara ja pots seguir amb la contractació de GURB!</b><br/>Clica el botó que et durà al formulari, on podràs finalitzar la contractació del servei.",
+    "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT": "Contractar GURB",
+    "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "https://somenergia.coop/{{language}}/gurb/{{gurbCode}}/join/"
 }
