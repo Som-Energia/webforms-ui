@@ -246,11 +246,41 @@ const AddressField = ({
     await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
   }
 
-  const handleClick = async () => {
+  const buildGurbDialog = ({ severity, titleKey, text1Key, text2Key }) => (
+    <SimpleGurbDialog
+      severity={severity}
+      title={<Typography dangerouslySetInnerHTML={{ __html: t(titleKey) }} />}
+      text1={
+        text1Key ? (
+          <Typography
+            sx={{ fontSize: 14 }}
+            dangerouslySetInnerHTML={{ __html: t(text1Key) }}
+          />
+        ) : null
+      }
+      text2={
+        text2Key ? (
+          <Typography
+            sx={{
+              fontSize: 14,
+              a: {
+                color: 'black',
+                fontWeight: severity === 'warning' ? 'bold' : 'normal',
+                textDecoration: severity === 'warning' ? 'underline' : 'none'
+              },
+            }}
+            dangerouslySetInnerHTML={{ __html: t(text2Key) }}
+          />
+        ) : null
+      }
+      closeFunction={async () => setContent(undefined)}
+    />
+  )
 
+  const handleClick = async () => {
     try {
-      await addressValidations.validate(values, { abortEarly: false })
-      setLoading(true)
+      await addressValidations.validate(values, { abortEarly: false });
+      setLoading(true);
       await handleCheckGurbDistance(
         gurbCode,
         values[addressFieldName]?.lat,
@@ -258,99 +288,59 @@ const AddressField = ({
         setFieldValue,
         addressFieldName
       )
-    }
-    catch (err) {
-      // Handle Yup validation errors
+    } catch (err) {
+      // Handle YUP validation errors
       if (err instanceof Yup.ValidationError) {
         const updates = { address: {} }
-        await err.inner.forEach(async (e) => {
+        err.inner.forEach((e) => {
           if (e.path) {
-            await setFieldError(e.path, e.message)
-            let keyPattern = e.path.split('.')[1]
+            setFieldError(e.path, e.message)
+            const keyPattern = e.path.split('.')[1]
             updates.address[keyPattern] = true
           }
         })
-        await setTouched(updates)
-      }
 
-      // Handle Gurb out of perimeter error
-      else if (err instanceof GurbOutOfPerimeterError) {
+        setTouched(updates)
+
+        // Handle lat/long missing errors
+        if (updates?.address?.lat || updates?.address?.long) {
+          updates.address.inside_perimeter = false
+          setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+          setContent(
+            buildGurbDialog({
+              severity: 'error',
+              titleKey: 'GURB_ADDRESS_ERROR_UNEXPECTED',
+              text1Key: 'GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT',
+            })
+          )
+        }
+
+      } else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
-          <SimpleGurbDialog
-            severity={'error'}
-            title={
-              <Typography
-                dangerouslySetInnerHTML={{ __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT') }} />
-            }
-            text1={
-              <Typography
-                sx={{
-                  fontSize: 14,
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
-                }}
-              />
-            }
-            text2={
-              <Typography
-                sx={{
-                  fontSize: 14,
-                  'a':
-                  {
-                    textDecoration: 'none',
-                    color: 'black',
-                    fontWeight: 'bold',
-                    textDecoration: 'underline'
-                  }
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT'),
-                }}
-              />
-            }
-            closeFunction={async () => {
-              setContent(undefined)
-            }}
-          />
+          buildGurbDialog({
+            severity: 'error',
+            titleKey: 'GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT',
+            text1Key: 'GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT',
+            text2Key: 'GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT',
+          })
         )
-      }
-
-      // Handle other errors
-      else {
+      } else {
         console.error('Error validating perimeter address:', err)
         setContent(
-          <SimpleGurbDialog
-            severity={'error'}
-            title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ADDRESS_ERROR_UNEXPECTED') }} />}
-            text1={
-              <Typography
-                sx={{
-                  fontSize: 14,
-                  'a':
-                  {
-                    textDecoration: 'none',
-                    color: 'black',
-                    textDecoration: 'underline'
-                  }
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT'),
-                }}
-              />
-            }
-            closeFunction={async () => {
-              setContent(undefined)
-            }}
-          />
+          buildGurbDialog({
+            severity: 'error',
+            titleKey: 'GURB_ADDRESS_ERROR_UNEXPECTED',
+            text1Key: 'GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT',
+          })
         )
       }
-
     } finally {
       setLoading(false)
     }
   }
+
+
 
   return (
     <Grid container spacing={2}>
