@@ -321,7 +321,25 @@ const AddressField = ({
       else {
         console.error('Error validating perimeter address:', err)
         setContent(
-          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_CHECKING_DISTANCE') }} />}
+          <SimpleGurbDialog
+            severity={'error'}
+            title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ADDRESS_ERROR_UNEXPECTED') }} />}
+            text1={
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  'a':
+                  {
+                    textDecoration: 'none',
+                    color: 'black',
+                    textDecoration: 'underline'
+                  }
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT'),
+                }}
+              />
+            }
             closeFunction={async () => {
               setContent(undefined)
             }}

@@ -1066,7 +1066,7 @@
     "GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF": "es/formulario-contratacion-periodos/?gurb-code={{gurbCode}}",
     "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT": "<b>Lo sentimos! No podrás participar en este GURB</b>",
     "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT": "El punto de suministro que has indicado no está dentro de los 2 km del radio de la instalación, por tanto no puede participar en este GURB.",
-    "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT": "Puedes ver <a target='_blank' href='https://somenergia.coop'>más información aquí</a> o volver a introducir la dirección.",
+    "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT": "Vuelve a introducir la dirección o ponte en contacto con nosotros a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
     "GURB_ERROR_CHECKING_DISTANCE": "",
     "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/",
     "GURB_CONTRACT_SUMMARY_KWH": "Participació GURB en kW",
@@ -1076,5 +1076,7 @@
     "GURB_CONTRACT_SUMMARY_JOIN_COST": "Cost d'adhesió",
     "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION": "",
     "GURB_CONTRACT_REVIEW_INFO": "La quota de GURB es carregarà mensualment a la teva factura, mitjançant domiciliació bancària. El cost d’adhesió es cobrarà en finalitzar el formulari, amb un pagament a través de targeta bancària.",
-    "STEP_TITLE": "Paso"
+    "STEP_TITLE": "Paso",
+    "GURB_ADDRESS_ERROR_UNEXPECTED": "<b>Se ha producido un error</b>",
+    "GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT": "Ha habido un error validando la dirección. Por favor, inténtalo de nuevo más tarde o contáctanos para obtener ayuda a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>"
 }
