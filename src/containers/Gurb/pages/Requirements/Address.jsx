@@ -363,7 +363,7 @@ const AddressField = ({
 
       <Grid item sm={8} xs={12}>
         <LocationInput
-          textFieldName={t('ADDRESS')}
+          textFieldName={t('GURB_ADDRESS_STREET')}
           value={values[addressFieldName]?.street}
           onChange={handleChangeStreet}
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
