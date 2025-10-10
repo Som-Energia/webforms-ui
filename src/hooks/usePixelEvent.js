@@ -1,8 +1,7 @@
-import { useCallback } from "react";
 import ReactPixel from "react-facebook-pixel";
 
-export function usePixelEvent(eventName, pixelData = {}, iframeUrl = null) {
-  const triggerEvent = useCallback(() => {
+export function usePixelEvent(eventName, pixelData = {}) {
+  const triggerEvent = () => {
     
     ReactPixel.trackCustom(eventName, pixelData);
     const iframeUrl = process.env.VITE_PIXEL_URL;
@@ -19,7 +18,7 @@ export function usePixelEvent(eventName, pixelData = {}, iframeUrl = null) {
 
       document.body.appendChild(iframe);
     }
-  }, [eventName, pixelData, iframeUrl]);
+  }
 
   return triggerEvent;
 }
