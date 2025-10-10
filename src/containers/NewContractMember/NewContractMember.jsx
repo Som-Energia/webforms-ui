@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { Formik } from 'formik'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
@@ -60,6 +60,9 @@ import { usePixelEvent } from "../../hooks/usePixelEvent"
 const NewContractMemberForm = (props) => {
   const { i18n, t } = useTranslation()
   const { language } = useParams()
+  const [searchParams] = useSearchParams()
+  const mtm_cid = searchParams.get("mtm_cid")
+  const mtm_source = searchParams.get("mtm_source")
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -313,6 +316,9 @@ const NewContractMemberForm = (props) => {
 
   const trackSucces = () => {
     trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    if (mtm_cid && mtm_source && language) {
+      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}` })
+    }
     usePixelEvent("FormularioCompletado", { status: "ok" })
   }
 
