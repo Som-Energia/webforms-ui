@@ -1078,5 +1078,6 @@
     "GURB_CONTRACT_REVIEW_INFO": "La quota de GURB es carregarà mensualment a la teva factura, mitjançant domiciliació bancària. El cost d’adhesió es cobrarà en finalitzar el formulari, amb un pagament a través de targeta bancària.",
     "STEP_TITLE": "Paso",
     "GURB_ADDRESS_ERROR_UNEXPECTED": "<b>Se ha producido un error</b>",
-    "GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT": "Ha habido un error validando la dirección. Por favor, inténtalo de nuevo más tarde o contáctanos para obtener ayuda a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>"
+    "GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT": "Ha habido un error validando la dirección. Por favor, inténtalo de nuevo más tarde o contáctanos para obtener ayuda a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
+    "GURB_ADDRESS_STREET": "Calle"
 }
