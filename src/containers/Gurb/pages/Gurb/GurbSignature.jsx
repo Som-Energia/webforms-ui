@@ -1,22 +1,79 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+
+import { createGurbSignature } from '../../../../services/apiGurb'
+
+let signaturitHook = () => undefined
+
+window.addEventListener('message', function (e) {
+  signaturitHook(e)
+})
 
 const GurbSignature = (props) => {
 
-  const { values, setFieldValue } = props
+  const { values, setFieldValue, setValidSignature, submit } = props
   const { t } = useTranslation()
+  const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
+  const [loading, setLoading] = useState(true)
+  const { i18n } = useTranslation()
 
+  signaturitHook = useCallback(
+    (e) => {
+      if (e?.data?.event === 'completed') {
+        setValidSignature(true)
+        console.log('Signaturit has been completed', e)
+      }
+
+    },
+    [values, submit]
+  )
+
+  const getSignaturit = useCallback(() => {
+    createGurbSignature({
+      language: i18n.language,
+    })
+      .then((response) => {
+        setFieldValue('signaturit', response?.data?.signaturit)
+        setFieldValue('mandate_name', response?.data?.mandate_name)
+        setSignaturitResponseUrl(response?.data?.signaturit?.url)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [i18n, values, setFieldValue])
+
+  useEffect(() => {
+    getSignaturit()
+  }, [])
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+    <>
       <Typography sx={{ ...textHeader2, mb: 8 }}>{t('GURB_SIGNATURE')}</Typography>
 
-      TODO Signature
-    </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', width: "100%", marginBottom: "30px" }}>
+        {loading ? (
+          <>
+            <CircularProgress color="secondary" />
+          </>
+        ) : (
+          <iframe
+            title="signaturit_iframe"
+            id="iframe_signaturit"
+            src={signaturitResponseUrl}
+            style={{ height: '700px', width: '100%' }}
+          />
+        )}
+      </Box>
+    </>
   )
+
 }
 
 export default GurbSignature
