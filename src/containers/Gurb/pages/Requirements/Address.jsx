@@ -1,11 +1,13 @@
 import { useRef, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
+import { getProvincies, getMunicipis } from '../../../../services/api'
+
 
 import * as Yup from 'yup'
 
@@ -61,18 +63,6 @@ const getLatLongWithFullAddress = async (
   try {
     const address = values[addressFieldName]
 
-    // Guard: need id, street, postal_code, state, city, and number
-    if (
-      !address?.id ||
-      !address?.street ||
-      !address?.postal_code ||
-      !currentNumber ||
-      !address?.state ||
-      !address?.city
-    ) {
-      return
-    }
-
     // 1. Get place details using the persistent ID
     const place = await getPlaceDetails(address.id, sessionTokenRef)
 
@@ -84,7 +74,8 @@ const getLatLongWithFullAddress = async (
     )
 
     // 2. Build full address string
-    const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''}`
+    // const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''}` // TODO: add city and state
+    const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''} ${address?.city.name || ''}, ${address?.state.name || ''}`
 
     // 3. Search for that address
     const suggestions = await searchPlace(fullAddress, sessionTokenRef)
@@ -104,8 +95,8 @@ const getLatLongWithFullAddress = async (
 
 class GurbOutOfPerimeterError extends Error {
   constructor(message) {
-    super(message);
-    this.name = "GurbOutOfPerimeterError";
+    super(message)
+    this.name = "GurbOutOfPerimeterError"
   }
 }
 
@@ -239,11 +230,95 @@ const AddressField = ({
 
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
+  const provincesCacheRef = useRef(null)
+  const municipisCacheRef = useRef({})
   const handleChangeStateAndCity = async (value) => {
-    await setFieldValue(`${addressFieldName}.city`, value?.city)
-    await setFieldValue(`${addressFieldName}.state`, value?.state)
+    // Normalize incoming ids to strings (safe compare)
+    const incomingStateId = value?.state?.id != null ? String(value.state.id) : ''
+    const incomingCityId = value?.city?.id != null ? String(value.city.id) : ''
 
-    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+    // Helper to flatten potential nested name object -> string
+    const flattenName = (maybeName) => {
+      if (maybeName == null) return ''
+      if (typeof maybeName === 'string') return maybeName
+      if (typeof maybeName === 'number') return String(maybeName)
+      if (typeof maybeName === 'object') {
+        // try common fields
+        return maybeName.name || maybeName.longText || maybeName.long_name || ''
+      }
+      return ''
+    }
+
+    // --- Load provinces (cache once) ---
+    if (!provincesCacheRef.current) {
+      try {
+        const res = await getProvincies()
+        const rawList = res?.data?.provincies || []
+        const normalized = rawList.map(p => ({
+          id: String(p.id),
+          raw: p,
+          name: flattenName(p.name)
+        }))
+        provincesCacheRef.current = normalized
+      } catch (err) {
+        console.error('ERROR fetching provinces:', err)
+        provincesCacheRef.current = []
+      }
+    } else {
+      console.log('provinces cache hit:', provincesCacheRef.current.length, 'items')
+    }
+
+    // Find province by id
+    const foundState = provincesCacheRef.current.find(p => p.id === incomingStateId)
+
+    const normalizedState = foundState
+      ? { id: foundState.id, name: foundState.name }
+      : (incomingStateId ? { id: incomingStateId, name: '' } : { id: '', name: '' })
+
+    // --- Load municipis for province (if needed) ---
+    let normalizedCity = { id: '', name: '' }
+
+    if (incomingCityId) {
+      // ensure municipis cache list exists for province id
+      if (!municipisCacheRef.current[incomingStateId]) {
+        try {
+          const res = await getMunicipis(incomingStateId)
+          const rawMunList = res?.data?.municipis || []
+          const normalizedMun = rawMunList.map(m => ({
+            id: String(m.id),
+            raw: m,
+            name: flattenName(m.name)
+          }))
+          municipisCacheRef.current[incomingStateId] = normalizedMun
+        } catch (err) {
+          console.error('ERROR fetching municipis for', incomingStateId, err)
+          municipisCacheRef.current[incomingStateId] = []
+        }
+      } else {
+        console.log('municipis cache hit for', incomingStateId, ':', (municipisCacheRef.current[incomingStateId] || []).length, 'items')
+      }
+
+      const foundCity = (municipisCacheRef.current[incomingStateId] || []).find(m => m.id === incomingCityId)
+      normalizedCity = foundCity
+        ? { id: foundCity.id, name: foundCity.name }
+        : { id: incomingCityId, name: '' }
+    } else {
+      // no city id -> clear city
+      normalizedCity = { id: '', name: '' }
+    }
+
+    // Persist normalized values to Formik
+    setFieldValue(`${addressFieldName}.state`, normalizedState)
+    setFieldValue(`${addressFieldName}.city`, normalizedCity)
+
+    // Get LongLat
+    await getLatLongWithFullAddress(
+      setFieldValue,
+      values,
+      addressFieldName,
+      sessionTokenRef,
+      values[addressFieldName]?.number
+    )
   }
 
   const buildGurbDialog = ({ severity, titleKey, text1Key, text2Key }) => (
@@ -278,9 +353,10 @@ const AddressField = ({
   )
 
   const handleClick = async () => {
+    const updates = { address: {} }
     try {
-      await addressValidations.validate(values, { abortEarly: false });
-      setLoading(true);
+      await addressValidations.validate(values, { abortEarly: false })
+      setLoading(true)
       await handleCheckGurbDistance(
         gurbCode,
         values[addressFieldName]?.lat,
@@ -291,16 +367,37 @@ const AddressField = ({
     } catch (err) {
       // Handle YUP validation errors
       if (err instanceof Yup.ValidationError) {
-        const updates = { address: {} }
         err.inner.forEach((e) => {
-          if (e.path) {
-            setFieldError(e.path, e.message)
-            const keyPattern = e.path.split('.')[1]
-            updates.address[keyPattern] = true
-          }
+          if (!e.path) return
+
+          // Set Formik error at full path
+          setFieldError(e.path, e.message)
+
+          // Split path and remove top-level 'address'
+          const keys = e.path.split('.')
+          if (keys[0] === 'address') keys.shift()
+
+          // Build nested touched object
+          let obj = updates.address
+          keys.forEach((key, index) => {
+            if (index === keys.length - 1) {
+              obj[key] = true
+            } else {
+              if (!obj[key]) obj[key] = {}
+              obj = obj[key]
+            }
+          })
         })
 
+        // For state and city, ensure `.id` is touched even if error is nested
+        if (!updates.address.state) updates.address.state = {}
+        if (!updates.address.state.id) updates.address.state.id = true
+        if (!updates.address.city) updates.address.city = {}
+        if (!updates.address.city.id) updates.address.city.id = true
+
+        // Set touched for Formik
         setTouched(updates)
+
 
         // Handle lat/long missing errors
         if (updates?.address?.lat || updates?.address?.long) {
@@ -339,8 +436,6 @@ const AddressField = ({
       setLoading(false)
     }
   }
-
-
 
   return (
     <Grid container spacing={2}>
@@ -392,11 +487,13 @@ const AddressField = ({
       <Grid item container spacing={2}>
         <StateCity
           stateId="supply_point_state"
-          stateName={`${addressFieldName}.state`}
+          stateName={`${addressFieldName}.state.name`}
           state={values[addressFieldName]?.state}
+          stateError={errors?.address?.state && touched?.address?.state}
           cityId="supply_point_city"
-          cityName={`${addressFieldName}.city`}
+          cityName={`${addressFieldName}.city.name`}
           city={values[addressFieldName]?.city}
+          cityError={errors?.address?.city && touched?.address?.city}
           onChange={(value) => handleChangeStateAndCity(value)}
         />
       </Grid>
