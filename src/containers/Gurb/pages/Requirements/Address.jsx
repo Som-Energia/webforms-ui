@@ -74,8 +74,7 @@ const getLatLongWithFullAddress = async (
     )
 
     // 2. Build full address string
-    // const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''}` // TODO: add city and state
-    const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''} ${address?.city.name || ''}, ${address?.state.name || ''}`
+    const fullAddress = `${streetComp?.longText || ''} ${currentNumber || ''}, ${postalCodeComp?.longText || ''}`
 
     // 3. Search for that address
     const suggestions = await searchPlace(fullAddress, sessionTokenRef)
