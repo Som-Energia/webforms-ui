@@ -1,6 +1,6 @@
 import { useRef, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from "react-router-dom"
+import { useParams } from 'react-router-dom'
 
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -18,7 +18,10 @@ import { addressValidations } from '../../../../containers/Gurb/requirementsVali
 import InputField from '../../../../components/InputField'
 import StateCity from '../../../../components/StateCity'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
-import { searchPlace, getPlaceDetails } from '../../../../services/googleApiClient'
+import {
+  searchPlace,
+  getPlaceDetails
+} from '../../../../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../../../../services/api'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 
@@ -33,7 +36,13 @@ const normalizePlace = (place) => ({
 })
 
 // Handle Gurb distance
-const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addressFieldName) => {
+const handleCheckGurbDistance = async (
+  gurbCode,
+  lat,
+  long,
+  setFieldValue,
+  addressFieldName
+) => {
   if (!lat || !long) {
     console.error('Lat and Long are required to check Gurb distance')
     throw new Error('Lat and Long are required to check Gurb distance')
@@ -46,7 +55,9 @@ const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addre
   }
 
   if (!data) {
-    throw new GurbOutOfPerimeterError('The address is out of the allowed range for this GURB')
+    throw new GurbOutOfPerimeterError(
+      'The address is out of the allowed range for this GURB'
+    )
   } else {
     setFieldValue(`${addressFieldName}.inside_perimeter`, true)
   }
@@ -73,19 +84,29 @@ const getLatLongWithFullAddress = async (
     )
 
     // 2. Build full address string
-    const fullAddress = `${streetComp?.longText || ''} ${currentNumber || ''}, ${postalCodeComp?.longText || ''}`
+    const fullAddress = `${streetComp?.longText || ''} ${
+      currentNumber || ''
+    }, ${postalCodeComp?.longText || ''}`
 
     // 3. Search for that address
     const suggestions = await searchPlace(fullAddress, sessionTokenRef)
     if (suggestions.length === 0) return
 
     // 4. Get suggested place details
-    const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
+    const suggestedPlace = await getPlaceDetails(
+      suggestions[0].id,
+      sessionTokenRef
+    )
 
     // 5. Update Formik with lat/long
-    await setFieldValue(`${addressFieldName}.lat`, suggestedPlace.location.lat())
-    await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
-
+    await setFieldValue(
+      `${addressFieldName}.lat`,
+      suggestedPlace.location.lat()
+    )
+    await setFieldValue(
+      `${addressFieldName}.long`,
+      suggestedPlace.location.lng()
+    )
   } catch (error) {
     console.error('Error updating address values:', error)
   }
@@ -94,7 +115,7 @@ const getLatLongWithFullAddress = async (
 class GurbOutOfPerimeterError extends Error {
   constructor(message) {
     super(message)
-    this.name = "GurbOutOfPerimeterError"
+    this.name = 'GurbOutOfPerimeterError'
   }
 }
 
@@ -150,7 +171,7 @@ const AddressField = ({
         postal_code: newPostalCode,
         number: values[addressFieldName]?.number,
         city: values[addressFieldName]?.city,
-        state: values[addressFieldName]?.state,
+        state: values[addressFieldName]?.state
       }
 
       await getLatLongWithFullAddress(
@@ -160,7 +181,6 @@ const AddressField = ({
         sessionTokenRef,
         freshAddress.number
       )
-
     } catch (error) {
       console.error('Error fetching place details:', error)
       await setFieldValue(
@@ -170,7 +190,6 @@ const AddressField = ({
       await setFieldValue(`${addressFieldName}.postal_code`, '')
     }
   }
-
 
   const UpdateStateCityByPostalCode = async (postalCodeValue) => {
     try {
@@ -185,13 +204,11 @@ const AddressField = ({
 
         await setFieldValue(`${addressFieldName}.city`, city)
         await setFieldValue(`${addressFieldName}.state`, state)
-      }
-      else {
+      } else {
         await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
         await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error getting municipis by postal code:', error)
       await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
       await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
@@ -203,7 +220,13 @@ const AddressField = ({
     await setFieldValue(`${addressFieldName}.postal_code`, value)
     await UpdateStateCityByPostalCode(value)
     await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+    await getLatLongWithFullAddress(
+      setFieldValue,
+      values,
+      addressFieldName,
+      sessionTokenRef,
+      values[addressFieldName]?.number
+    )
   }
 
   const handleChangeNumber = async (event) => {
@@ -232,7 +255,8 @@ const AddressField = ({
   const municipisCacheRef = useRef({})
   const handleChangeStateAndCity = async (value) => {
     // Normalize incoming ids to strings (safe compare)
-    const incomingStateId = value?.state?.id != null ? String(value.state.id) : ''
+    const incomingStateId =
+      value?.state?.id != null ? String(value.state.id) : ''
     const incomingCityId = value?.city?.id != null ? String(value.city.id) : ''
 
     // Helper to flatten potential nested name object -> string
@@ -252,7 +276,7 @@ const AddressField = ({
       try {
         const res = await getProvincies()
         const rawList = res?.data?.provincies || []
-        const normalized = rawList.map(p => ({
+        const normalized = rawList.map((p) => ({
           id: String(p.id),
           raw: p,
           name: flattenName(p.name)
@@ -263,15 +287,23 @@ const AddressField = ({
         provincesCacheRef.current = []
       }
     } else {
-      console.log('provinces cache hit:', provincesCacheRef.current.length, 'items')
+      console.log(
+        'provinces cache hit:',
+        provincesCacheRef.current.length,
+        'items'
+      )
     }
 
     // Find province by id
-    const foundState = provincesCacheRef.current.find(p => p.id === incomingStateId)
+    const foundState = provincesCacheRef.current.find(
+      (p) => p.id === incomingStateId
+    )
 
     const normalizedState = foundState
       ? { id: foundState.id, name: foundState.name }
-      : (incomingStateId ? { id: incomingStateId, name: '' } : { id: '', name: '' })
+      : incomingStateId
+      ? { id: incomingStateId, name: '' }
+      : { id: '', name: '' }
 
     // --- Load municipis for province (if needed) ---
     let normalizedCity = { id: '', name: '' }
@@ -282,7 +314,7 @@ const AddressField = ({
         try {
           const res = await getMunicipis(incomingStateId)
           const rawMunList = res?.data?.municipis || []
-          const normalizedMun = rawMunList.map(m => ({
+          const normalizedMun = rawMunList.map((m) => ({
             id: String(m.id),
             raw: m,
             name: flattenName(m.name)
@@ -293,10 +325,18 @@ const AddressField = ({
           municipisCacheRef.current[incomingStateId] = []
         }
       } else {
-        console.log('municipis cache hit for', incomingStateId, ':', (municipisCacheRef.current[incomingStateId] || []).length, 'items')
+        console.log(
+          'municipis cache hit for',
+          incomingStateId,
+          ':',
+          (municipisCacheRef.current[incomingStateId] || []).length,
+          'items'
+        )
       }
 
-      const foundCity = (municipisCacheRef.current[incomingStateId] || []).find(m => m.id === incomingCityId)
+      const foundCity = (municipisCacheRef.current[incomingStateId] || []).find(
+        (m) => m.id === incomingCityId
+      )
       normalizedCity = foundCity
         ? { id: foundCity.id, name: foundCity.name }
         : { id: incomingCityId, name: '' }
@@ -365,7 +405,6 @@ const AddressField = ({
         // Set touched for Formik
         setTouched(updates)
 
-
         // Handle lat/long missing errors
         if (updates?.address?.lat || updates?.address?.long) {
           updates.address.inside_perimeter = false
@@ -375,11 +414,10 @@ const AddressField = ({
               severity: 'error',
               setContent: setContent,
               titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-              text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT'),
+              text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')
             })
           )
         }
-
       } else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
@@ -388,7 +426,7 @@ const AddressField = ({
             setContent: setContent,
             titleKey: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT'),
             text1Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
-            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT'),
+            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT')
           })
         )
       } else {
@@ -398,7 +436,7 @@ const AddressField = ({
             severity: 'error',
             setContent: setContent,
             titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT'),
+            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT')
           })
         )
       }
@@ -424,7 +462,7 @@ const AddressField = ({
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
           error={
             touched[addressFieldName]?.street &&
-              errors[addressFieldName]?.street
+            errors[addressFieldName]?.street
               ? errors[addressFieldName].street
               : false
           }
@@ -446,7 +484,7 @@ const AddressField = ({
           value={values[addressFieldName].postal_code}
           error={
             touched[addressFieldName]?.postal_code &&
-              errors[addressFieldName]?.postal_code
+            errors[addressFieldName]?.postal_code
               ? t(errors[addressFieldName].postal_code)
               : ''
           }
@@ -479,7 +517,7 @@ const AddressField = ({
           value={values[addressFieldName]?.number}
           error={
             touched[addressFieldName]?.number &&
-              errors[addressFieldName]?.number
+            errors[addressFieldName]?.number
               ? t(errors[addressFieldName].number)
               : ''
           }
@@ -539,9 +577,8 @@ const AddressField = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '100%',
-        }}
-      >
+          width: '100%'
+        }}>
         <Button
           tabIndex={0}
           sx={{
@@ -552,13 +589,12 @@ const AddressField = ({
             lineHeight: 1,
             textTransform: 'none',
             width: 'auto',
-            alignSelf: 'center',
+            alignSelf: 'center'
           }}
           variant="contained"
           disabled={loading || values[addressFieldName]?.inside_perimeter}
           onClick={handleClick}
-          data-cy="validate-address"
-        >
+          data-cy="validate-address">
           {t('GURB_ADDRESS_VALIDATION_BUTTON_TEXT')}
         </Button>
       </Grid>
