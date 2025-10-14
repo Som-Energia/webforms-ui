@@ -2,12 +2,11 @@ import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
-import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
+import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../gurbTheme'
@@ -27,39 +26,16 @@ const SelfConsumption = (props) => {
     if (value === 'selfconsumption-on') {
       setError(true)
       setContent(
-        <SimpleGurbDialog
-          severity={'warning'}
-          text1={
-            <Typography
-              sx={{
-                fontSize: 14,
-              }}
-              dangerouslySetInnerHTML={{
-                __html: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
-              }}
-            />
-          }
-          text2={
-            <Typography
-              sx={{
-                fontSize: 14,
-                'a':
-                  {
-                    color:'black',
-                    fontWeight: 'bold',
-                    textDecoration: 'underline'
-                  }
-              }}
-              dangerouslySetInnerHTML={{
-                __html: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT'),
-              }}
-            />
-          }
-          closeFunction={() => setContent(undefined)}
-        />
+        buildGurbDialog({
+          severity: 'warning',
+          setContent: setContent,
+          text1Key: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
+          text2Key: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT'),
+        })
       )
     }
   }
+
   const options = [
     {
       id: 'selfconsumption-on',
