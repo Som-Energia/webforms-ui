@@ -405,19 +405,18 @@ const AddressField = ({
         // Set touched for Formik
         setTouched(updates)
 
-        // Handle lat/long missing errors
-        if (updates?.address?.lat || updates?.address?.long) {
-          updates.address.inside_perimeter = false
-          setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-          setContent(
-            buildGurbDialog({
-              severity: 'error',
-              setContent: setContent,
-              titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-              text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')
-            })
-          )
-        }
+      // Handle lat/long missing errors
+      } else if (updates?.address?.lat || updates?.address?.long) {
+        updates.address.inside_perimeter = false
+        setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+        setContent(
+          buildGurbDialog({
+            severity: 'error',
+            setContent: setContent,
+            titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
+            text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')
+          })
+        )
       } else if (err instanceof GurbOutOfPerimeterError) {
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
