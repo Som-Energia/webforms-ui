@@ -48,42 +48,38 @@ const ContractReview = (props) => {
       <Typography sx={{ ...textHeader2, mb: 8 }}>{t('CONTRACT_SUMMARY')}</Typography>
 
       <Grid container>
-        <Grid container item xs={6} sx={{ display: 'flex', gap: 2, mb : 3 }}>
+        <Grid container item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <LightningIcon />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_KWH")}</Typography>
-            <ReviewField value={values.gurb.power + " KWh"} />
+            <ReviewField value={`${values.gurb.power} KWh`} />
           </Box>
-        </Grid>
-        <Grid container item xs={6} sx={{ display: 'flex', gap: 2, mb : 3 }}>
-          <LightningIcon />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_BETA")}</Typography>
-            <ReviewField value={values.gurb.power + " %"} />
-          </Box>
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid container xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <EuroIcon />
-          <Grid xs={6}>
-            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_QUOTA")}</Typography>
-            <ReviewField value={t("GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION")} />
-          </Grid>
         </Grid>
         <Grid container xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <EuroIcon />
           <Grid xs={6}>
             <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_JOIN_COST")}</Typography>
-            <ReviewField value={t("GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION")} />
+            <ReviewField value={`${values?.gurb?.join_cost} €`} />
           </Grid>
+        </Grid>
+      </Grid>
+      <Grid container sx={{ display: 'flex', gap: 2, mb: 3 }}>
+        <EuroIcon />
+        <Grid xs={6}>
+          <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_QUOTA")}</Typography>
+          <ReviewField value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
+            power: values?.gurb?.power,
+            daily_cost: values?.gurb?.daily_cost * values?.gurb?.power,
+            monthly_cost: (values?.gurb?.daily_cost || 0) * 30
+          })
+          } />
         </Grid>
       </Grid >
 
       <Alert severity="warning" sx={{ mt: 4, mb: 4 }}>
         <Typography>{t('GURB_CONTRACT_REVIEW_INFO')}</Typography>
       </Alert>
-      
+
       <CustomCheckBox name="generic_especific_conditons_accepted"
         dataCy="generic_especific_conditons_checkbox"
         onClick={() => setFieldValue("generic_especific_conditons_accepted", !values.generic_especific_conditons_accepted)} text={{
