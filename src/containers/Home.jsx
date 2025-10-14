@@ -18,7 +18,7 @@ const availableLanguages = Object.keys(i18n?.options?.resources)
 if (!availableLanguages.includes(language)) {
   language = 'ca'
 }
-let gurbCode = 'G001'  // TODO: move to env?
+let gurbCode = import.meta.env.VITE_GURB_CODE
 
 const options = [
   { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos`},
