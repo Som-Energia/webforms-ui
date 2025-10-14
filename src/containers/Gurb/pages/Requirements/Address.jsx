@@ -2,12 +2,10 @@ import { useRef, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from "react-router-dom"
 
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
 import { getProvincies, getMunicipis } from '../../../../services/api'
-
 
 import * as Yup from 'yup'
 
@@ -19,7 +17,6 @@ import {
 import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
 import InputField from '../../../../components/InputField'
 import StateCity from '../../../../components/StateCity'
-import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
 import { searchPlace, getPlaceDetails } from '../../../../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../../../../services/api'
@@ -27,6 +24,8 @@ import { checkGurbDistance } from '../../../../services/apiGurb'
 
 import PopUpContext from '../../../../context/PopUpContext'
 import TextRecomendation from '../../components/TextRecomendation'
+
+import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
 
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
@@ -320,37 +319,6 @@ const AddressField = ({
     )
   }
 
-  const buildGurbDialog = ({ severity, titleKey, text1Key, text2Key }) => (
-    <SimpleGurbDialog
-      severity={severity}
-      title={<Typography dangerouslySetInnerHTML={{ __html: t(titleKey) }} />}
-      text1={
-        text1Key ? (
-          <Typography
-            sx={{ fontSize: 14 }}
-            dangerouslySetInnerHTML={{ __html: t(text1Key) }}
-          />
-        ) : null
-      }
-      text2={
-        text2Key ? (
-          <Typography
-            sx={{
-              fontSize: 14,
-              a: {
-                color: 'black',
-                fontWeight: severity === 'warning' ? 'bold' : 'normal',
-                textDecoration: severity === 'warning' ? 'underline' : 'none'
-              },
-            }}
-            dangerouslySetInnerHTML={{ __html: t(text2Key) }}
-          />
-        ) : null
-      }
-      closeFunction={async () => setContent(undefined)}
-    />
-  )
-
   const handleClick = async () => {
     const updates = { address: {} }
     try {
@@ -405,8 +373,9 @@ const AddressField = ({
           setContent(
             buildGurbDialog({
               severity: 'error',
-              titleKey: 'GURB_ADDRESS_ERROR_UNEXPECTED',
-              text1Key: 'GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT',
+              setContent: setContent,
+              titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
+              text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT'),
             })
           )
         }
@@ -416,9 +385,10 @@ const AddressField = ({
         setContent(
           buildGurbDialog({
             severity: 'error',
-            titleKey: 'GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT',
-            text1Key: 'GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT',
-            text2Key: 'GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT',
+            setContent: setContent,
+            titleKey: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT'),
+            text1Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
+            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT'),
           })
         )
       } else {
@@ -426,8 +396,9 @@ const AddressField = ({
         setContent(
           buildGurbDialog({
             severity: 'error',
-            titleKey: 'GURB_ADDRESS_ERROR_UNEXPECTED',
-            text1Key: 'GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT',
+            setContent: setContent,
+            titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
+            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT'),
           })
         )
       }
