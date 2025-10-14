@@ -11,7 +11,7 @@ export const buildGurbDialog = ({
 }) => (
   <SimpleGurbDialog
     severity={severity}
-    title={<Typography dangerouslySetInnerHTML={{ __html: titleKey }} />}
+    title={titleKey && <Typography dangerouslySetInnerHTML={{ __html: titleKey }} />}
     text1={
       text1Key ? (
         <Typography
