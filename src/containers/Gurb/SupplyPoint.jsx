@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid'
 import TextRecomendation from './components/TextRecomendation'
 import CUPS from '../../components/CUPS'
 
-
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
 
