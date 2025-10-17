@@ -15,7 +15,14 @@ export const buildGurbDialog = ({
     text1={
       text1Key ? (
         <Typography
-          sx={{ fontSize: 14 }}
+          sx={{
+            fontSize: 14,
+            a: {
+              color: 'black',
+              fontWeight: severity === 'warning' ? 'bold' : 'normal',
+              textDecoration: 'underline'
+            }
+          }}
           dangerouslySetInnerHTML={{ __html: text1Key }}
         />
       ) : null
