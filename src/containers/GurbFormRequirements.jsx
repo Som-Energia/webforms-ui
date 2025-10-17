@@ -192,7 +192,9 @@ const GurbFormRequirements = (props) => {
                             formikProps.values.has_light !== 'light-on') ||
                           (activeStep === 4 &&
                             formikProps.values.has_selfconsumption !==
-                              'selfconsumption-off')
+                              'selfconsumption-off') ||
+                          (activeStep === 5 &&
+                            formikProps.values.redirectUrl === undefined)
                         }
                         onClick={() => nextStep(formikProps)}
                         title="NEXT"
