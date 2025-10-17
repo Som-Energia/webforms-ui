@@ -196,9 +196,9 @@ const AddressField = ({
   const handleChangeNumber = async (event) => {
     const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
     await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     if (cleanedNumber) {
-      await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-      getLatLongWithFullAddress(
+      await getLatLongWithFullAddress(
         setFieldValue,
         values,
         addressFieldName,
@@ -215,7 +215,8 @@ const AddressField = ({
 
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
-  const handleClick = async () => {
+  const handleAddressValidation = async () => {
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     const updates = { address: {} }
     try {
       await addressValidations.validate(values, { abortEarly: false })
@@ -241,8 +242,6 @@ const AddressField = ({
       // Handle lat/long missing errors
       if (updates?.address?.lat || updates?.address?.long) {
         console.error('Lat and Long are required to check Gurb distance')
-        updates.address.inside_perimeter = false
-        setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
           buildGurbDialog({
             severity: 'error',
@@ -252,7 +251,6 @@ const AddressField = ({
           })
         )
       } else if (err instanceof GurbOutOfPerimeterError) {
-        setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
           buildGurbDialog({
             severity: 'error',
@@ -412,7 +410,7 @@ const AddressField = ({
           }}
           variant="contained"
           disabled={loading || values[addressFieldName]?.inside_perimeter}
-          onClick={handleClick}
+          onClick={handleAddressValidation}
           data-cy="validate-address">
           {t('GURB_ADDRESS_VALIDATION_BUTTON_TEXT')}
         </Button>
