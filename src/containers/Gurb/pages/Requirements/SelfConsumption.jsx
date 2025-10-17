@@ -14,7 +14,6 @@ import { iconOffRequirements } from '../../gurbTheme'
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import PopUpContext from '../../../../context/PopUpContext'
 
-
 const SelfConsumption = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
@@ -30,7 +29,7 @@ const SelfConsumption = (props) => {
           severity: 'warning',
           setContent: setContent,
           text1Key: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
-          text2Key: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT'),
+          text2Key: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT')
         })
       )
     }
@@ -40,12 +39,12 @@ const SelfConsumption = (props) => {
     {
       id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_SELFCONSUMPTION_YES_HEADER'),
+      textHeader: t('GURB_SELFCONSUMPTION_YES_HEADER')
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_SELFCONSUMPTION_NO_HEADER'),
+      textHeader: t('GURB_SELFCONSUMPTION_NO_HEADER')
     }
   ]
 
