@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
-import { getProvincies, getMunicipis } from '../../../../services/api'
 
 import * as Yup from 'yup'
 
@@ -16,13 +15,11 @@ import {
 
 import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
 import InputField from '../../../../components/InputField'
-import StateCity from '../../../../components/StateCity'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
 import {
   searchPlace,
   getPlaceDetails
 } from '../../../../services/googleApiClient'
-import { getMunicipisByPostalCode } from '../../../../services/api'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 
 import PopUpContext from '../../../../context/PopUpContext'
@@ -235,35 +232,21 @@ const AddressField = ({
         addressFieldName
       )
     } catch (err) {
+      console.log('Validation error:', err)
       // Handle YUP validation errors
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((e) => {
           if (!e.path) return
-
-          // Set Formik error at full path
           setFieldError(e.path, e.message)
-
-          // Split path and remove top-level 'address'
-          const keys = e.path.split('.')
-          if (keys[0] === 'address') keys.shift()
-
-          // Build nested touched object
-          let obj = updates.address
-          keys.forEach((key, index) => {
-            if (index === keys.length - 1) {
-              obj[key] = true
-            } else {
-              if (!obj[key]) obj[key] = {}
-              obj = obj[key]
-            }
-          })
+          const keyPattern = e.path.split('.')[1]
+          updates.address[keyPattern] = true
         })
-
         // Set touched for Formik
+        console.log('Updates for touched:', updates)
         setTouched(updates)
-
+      }
       // Handle lat/long missing errors
-      } else if (updates?.address?.lat || updates?.address?.long) {
+      if (updates?.address?.lat || updates?.address?.long) {
         updates.address.inside_perimeter = false
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
