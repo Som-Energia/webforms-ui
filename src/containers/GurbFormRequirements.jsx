@@ -44,8 +44,6 @@ const GurbFormRequirements = (props) => {
   const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const initialValues = {
-    is_client: undefined,
-    already_contract: false,
     cups: '',
     has_light: undefined,
     address: {
@@ -53,14 +51,11 @@ const GurbFormRequirements = (props) => {
       street: '',
       number: undefined,
       postal_code: undefined,
-      state: { id: '', name: '' },
-      city: { id: '', name: '' },
       lat: undefined,
       long: undefined,
       inside_perimeter: false,
     },
     has_selfconsumption: undefined,
-    has_member: undefined,
     new_contract: undefined,
     redirectUrl: undefined,
   }
