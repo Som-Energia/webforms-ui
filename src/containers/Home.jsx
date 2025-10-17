@@ -37,6 +37,7 @@ const options = [
   { title: 'Gurb - Form Deprecated', href: `${language}/gurb/${gurbCode}/deprecated/`},
   { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbCode}/requirements/`},
   { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbCode}/join/`},
+  { title: 'Gurb - Pagament contractació social tpv OK', href: `${language}/gurb/gurb_url_ok?gurbCode=${gurbCode}`},
   { title: 'Pagament OK', href: `${language}/pagament-realitzat`},
   { title: 'Pagament KO', href: `${language}/pagament-cancellat`}
 

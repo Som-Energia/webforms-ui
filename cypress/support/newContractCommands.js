@@ -2,7 +2,7 @@ Cypress.Commands.add('gurbAddress', (street) => {
   cy.get('[data-cy="address"]').type(street.input)
   cy.contains(street.value).click()
 
-  cy.get('[data-cy="address.number"]').type('2')
+  cy.get('[data-cy="address.number"]').clear().type(22, { delay: 100 })
   cy.get('[data-cy="address.floor"]').type('1')
   cy.get('[data-cy="address.door"]').type('3')
   cy.get('[data-cy="address.stairs"]').type('B')
@@ -76,7 +76,7 @@ Cypress.Commands.add('taxAddress', ({ sameDirection = true, input, value }) => {
     cy.get('[data-cy="tax_address-street"]').type(input)
     cy.contains(value).click()
 
-    cy.get('[data-cy="tax_address.number"]').type('24')
+    cy.get('[data-cy="tax_address.number"]').clear().type(22, { delay: 100 })
     cy.get('[data-cy="tax_address.floor"]').type('6')
     cy.get('[data-cy="tax_address.door"]').type('2')
   }
