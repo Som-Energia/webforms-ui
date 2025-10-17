@@ -17,10 +17,7 @@ import {
   selfConsumptionValidations
 } from './Gurb/requirementsValidations'
 
-import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
-
-import useCheckMobileScreen from '../services/checkMobileScreen'
 
 // Step components
 import SupplyPoint from './Gurb/SupplyPoint'
@@ -45,8 +42,6 @@ const GurbFormRequirements = (props) => {
   )
   const [activeStep, setActiveStep] = useState(1)
   const [completed, setCompleted] = useState(false)
-  const isMobile = useCheckMobileScreen()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const initialValues = {
     cups: '',
@@ -147,7 +142,13 @@ const GurbFormRequirements = (props) => {
           return (
             <>
               {!completed && (
-                <Box sx={{ marginBottom: '65px' }}>
+                <Box
+                  sx={{
+                    marginBottom: {
+                      xs: '30px',
+                      sm: '40px'
+                    }
+                  }}>
                   <SomStepper
                     activeStep={activeStep - 1}
                     stepsNum={maxStepNum}
