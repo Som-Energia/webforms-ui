@@ -162,16 +162,12 @@ const AddressField = ({
       await setFieldValue(`${addressFieldName}.street`, newStreet)
       await setFieldValue(`${addressFieldName}.postal_code`, newPostalCode)
 
-      await UpdateStateCityByPostalCode(newPostalCode)
-
       const freshAddress = {
         ...values[addressFieldName],
         id: addressValue.id,
         street: newStreet,
         postal_code: newPostalCode,
-        number: values[addressFieldName]?.number,
-        city: values[addressFieldName]?.city,
-        state: values[addressFieldName]?.state
+        number: values[addressFieldName]?.number
       }
 
       await getLatLongWithFullAddress(
@@ -191,34 +187,9 @@ const AddressField = ({
     }
   }
 
-  const UpdateStateCityByPostalCode = async (postalCodeValue) => {
-    try {
-      if (postalCodeValue.length >= 5) {
-        const municipis = await getMunicipisByPostalCode(postalCodeValue)
-
-        const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
-        const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
-
-        const city = normalizePlace(cityRaw)
-        const state = normalizePlace(stateRaw)
-
-        await setFieldValue(`${addressFieldName}.city`, city)
-        await setFieldValue(`${addressFieldName}.state`, state)
-      } else {
-        await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
-        await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
-      }
-    } catch (error) {
-      console.error('Error getting municipis by postal code:', error)
-      await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
-      await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
-    }
-  }
-
   const handleChangePostalCode = async (event) => {
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
-    await UpdateStateCityByPostalCode(value)
     await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     await getLatLongWithFullAddress(
       setFieldValue,
@@ -250,114 +221,6 @@ const AddressField = ({
   const handleChange = useHandleChange(setFieldValue)
 
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
-
-  const provincesCacheRef = useRef(null)
-  const municipisCacheRef = useRef({})
-  const handleChangeStateAndCity = async (value) => {
-    // Normalize incoming ids to strings (safe compare)
-    const incomingStateId =
-      value?.state?.id != null ? String(value.state.id) : ''
-    const incomingCityId = value?.city?.id != null ? String(value.city.id) : ''
-
-    // Helper to flatten potential nested name object -> string
-    const flattenName = (maybeName) => {
-      if (maybeName == null) return ''
-      if (typeof maybeName === 'string') return maybeName
-      if (typeof maybeName === 'number') return String(maybeName)
-      if (typeof maybeName === 'object') {
-        // try common fields
-        return maybeName.name || maybeName.longText || maybeName.long_name || ''
-      }
-      return ''
-    }
-
-    // --- Load provinces (cache once) ---
-    if (!provincesCacheRef.current) {
-      try {
-        const res = await getProvincies()
-        const rawList = res?.data?.provincies || []
-        const normalized = rawList.map((p) => ({
-          id: String(p.id),
-          raw: p,
-          name: flattenName(p.name)
-        }))
-        provincesCacheRef.current = normalized
-      } catch (err) {
-        console.error('ERROR fetching provinces:', err)
-        provincesCacheRef.current = []
-      }
-    } else {
-      console.log(
-        'provinces cache hit:',
-        provincesCacheRef.current.length,
-        'items'
-      )
-    }
-
-    // Find province by id
-    const foundState = provincesCacheRef.current.find(
-      (p) => p.id === incomingStateId
-    )
-
-    const normalizedState = foundState
-      ? { id: foundState.id, name: foundState.name }
-      : incomingStateId
-      ? { id: incomingStateId, name: '' }
-      : { id: '', name: '' }
-
-    // --- Load municipis for province (if needed) ---
-    let normalizedCity = { id: '', name: '' }
-
-    if (incomingCityId) {
-      // ensure municipis cache list exists for province id
-      if (!municipisCacheRef.current[incomingStateId]) {
-        try {
-          const res = await getMunicipis(incomingStateId)
-          const rawMunList = res?.data?.municipis || []
-          const normalizedMun = rawMunList.map((m) => ({
-            id: String(m.id),
-            raw: m,
-            name: flattenName(m.name)
-          }))
-          municipisCacheRef.current[incomingStateId] = normalizedMun
-        } catch (err) {
-          console.error('ERROR fetching municipis for', incomingStateId, err)
-          municipisCacheRef.current[incomingStateId] = []
-        }
-      } else {
-        console.log(
-          'municipis cache hit for',
-          incomingStateId,
-          ':',
-          (municipisCacheRef.current[incomingStateId] || []).length,
-          'items'
-        )
-      }
-
-      const foundCity = (municipisCacheRef.current[incomingStateId] || []).find(
-        (m) => m.id === incomingCityId
-      )
-      normalizedCity = foundCity
-        ? { id: foundCity.id, name: foundCity.name }
-        : { id: incomingCityId, name: '' }
-    } else {
-      // no city id -> clear city
-      normalizedCity = { id: '', name: '' }
-    }
-
-    // Persist normalized values to Formik
-    setFieldValue(`${addressFieldName}.state`, normalizedState)
-    setFieldValue(`${addressFieldName}.city`, normalizedCity)
-
-    // Get LongLat
-    await getLatLongWithFullAddress(
-      setFieldValue,
-      values,
-      addressFieldName,
-      sessionTokenRef,
-      values[addressFieldName]?.number
-    )
-  }
 
   const handleClick = async () => {
     const updates = { address: {} }
@@ -395,12 +258,6 @@ const AddressField = ({
             }
           })
         })
-
-        // For state and city, ensure `.id` is touched even if error is nested
-        if (!updates.address.state) updates.address.state = {}
-        if (!updates.address.state.id) updates.address.state.id = true
-        if (!updates.address.city) updates.address.city = {}
-        if (!updates.address.city.id) updates.address.city.id = true
 
         // Set touched for Formik
         setTouched(updates)
@@ -488,20 +345,6 @@ const AddressField = ({
               : ''
           }
           required
-        />
-      </Grid>
-
-      <Grid item container spacing={2}>
-        <StateCity
-          stateId="supply_point_state"
-          stateName={`${addressFieldName}.state.name`}
-          state={values[addressFieldName]?.state}
-          stateError={errors?.address?.state && touched?.address?.state}
-          cityId="supply_point_city"
-          cityName={`${addressFieldName}.city.name`}
-          city={values[addressFieldName]?.city}
-          cityError={errors?.address?.city && touched?.address?.city}
-          onChange={(value) => handleChangeStateAndCity(value)}
         />
       </Grid>
 
