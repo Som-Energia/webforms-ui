@@ -48,7 +48,7 @@ const GurbRequirementsTariffSelection = (props) => {
   const handleTariffQuestion = (optionId) => {
     setSelectedOption(optionId)
 
-    const baseUrl = 'https://somenergia.coop/'
+    const baseUrl = t('SOMENERGIA_BASE_URL')
     const redirectUrl =
       optionId === 'periods-tariff'
         ? baseUrl +
