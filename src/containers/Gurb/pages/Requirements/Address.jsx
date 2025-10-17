@@ -40,10 +40,6 @@ const handleCheckGurbDistance = async (
   setFieldValue,
   addressFieldName
 ) => {
-  if (!lat || !long) {
-    console.error('Lat and Long are required to check Gurb distance')
-    throw new Error('Lat and Long are required to check Gurb distance')
-  }
   const { data } = await checkGurbDistance(gurbCode, lat, long)
 
   if (data?.error) {
@@ -55,9 +51,9 @@ const handleCheckGurbDistance = async (
     throw new GurbOutOfPerimeterError(
       'The address is out of the allowed range for this GURB'
     )
-  } else {
-    setFieldValue(`${addressFieldName}.inside_perimeter`, true)
   }
+
+  setFieldValue(`${addressFieldName}.inside_perimeter`, true)
 }
 
 const getLatLongWithFullAddress = async (
@@ -232,7 +228,6 @@ const AddressField = ({
         addressFieldName
       )
     } catch (err) {
-      console.log('Validation error:', err)
       // Handle YUP validation errors
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((e) => {
@@ -241,12 +236,11 @@ const AddressField = ({
           const keyPattern = e.path.split('.')[1]
           updates.address[keyPattern] = true
         })
-        // Set touched for Formik
-        console.log('Updates for touched:', updates)
         setTouched(updates)
       }
       // Handle lat/long missing errors
       if (updates?.address?.lat || updates?.address?.long) {
+        console.error('Lat and Long are required to check Gurb distance')
         updates.address.inside_perimeter = false
         setFieldValue(`${addressFieldName}.inside_perimeter`, false)
         setContent(
