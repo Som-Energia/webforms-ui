@@ -1080,5 +1080,8 @@
     "GURB_ADDRESS_ERROR_UNEXPECTED": "<b>Se ha producido un error</b>",
     "GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT": "Ha habido un error validando la dirección. Por favor, inténtalo de nuevo más tarde o contáctanos para obtener ayuda a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
     "GURB_ADDRESS_STREET": "Calle",
-    "SOMENERGIA_BASE_URL": "https://somenergia.coop/"
+    "SOMENERGIA_BASE_URL": "https://somenergia.coop/",
+    "GURB_NO_ADDRESS_STREET": "Has de indicar el nombre de la calle",
+    "GURB_NO_ADDRESS_NUMBER": "Has de indicar el número de la calle",
+    "GURB_NO_ADDRESS_POSTAL_CODE": "Has de indicar el código postal"
 }

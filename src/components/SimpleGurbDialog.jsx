@@ -10,7 +10,11 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 import CustomDialog from './CustomDialog'
 
+import useCheckMobileScreen from '../services/checkMobileScreen'
+
 export default function SimpleDialog({ title, text1, text2, closeFunction, severity }) {
+  const isMobile = useCheckMobileScreen()
+
   return (
     <CustomDialog
       data-testid="simple-dialog"
@@ -18,7 +22,7 @@ export default function SimpleDialog({ title, text1, text2, closeFunction, sever
       paperStyles={{
         width: '448px',
         maxWidth: '90vw',
-        height: '300px',
+        height: isMobile && severity === 'error' ? '360px' : '300px',
         maxHeight: '80vh',
         margin: '20px',
       }}

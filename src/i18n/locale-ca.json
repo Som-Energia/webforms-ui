@@ -1097,5 +1097,8 @@
     "STEP_TITLE": "Pas",
     "GURB_ADDRESS_VALIDATION_BUTTON_TEXT": "Validar l'adreça",
     "GURB_ADDRESS_STREET": "Carrer",
-    "SOMENERGIA_BASE_URL": "https://somenergia.coop/"
+    "SOMENERGIA_BASE_URL": "https://somenergia.coop/",
+    "GURB_NO_ADDRESS_STREET": "Has d'indicar el carrer",
+    "GURB_NO_ADDRESS_NUMBER": "Has d'indicar el número del carrer",
+    "GURB_NO_ADDRESS_POSTAL_CODE": "Has d'indicar el codi postal"
 }
