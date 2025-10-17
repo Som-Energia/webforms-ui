@@ -28,7 +28,7 @@ export const buildGurbDialog = ({
             a: {
               color: 'black',
               fontWeight: severity === 'warning' ? 'bold' : 'normal',
-              textDecoration: severity === 'warning' ? 'underline' : 'none'
+              textDecoration: 'underline'
             }
           }}
           dangerouslySetInnerHTML={{ __html: text2Key }}
