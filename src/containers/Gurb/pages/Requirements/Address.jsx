@@ -27,6 +27,8 @@ import TextRecomendation from '../../components/TextRecomendation'
 
 import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
 
+import GurbOutOfPerimeterError from '../../GurbErrors'
+
 const normalizePlace = (place) => ({
   id: place?.id?.toString() || '',
   name: place?.name || ''
@@ -102,13 +104,6 @@ const getLatLongWithFullAddress = async (
     )
   } catch (error) {
     console.error('Error updating address values:', error)
-  }
-}
-
-class GurbOutOfPerimeterError extends Error {
-  constructor(message) {
-    super(message)
-    this.name = 'GurbOutOfPerimeterError'
   }
 }
 
