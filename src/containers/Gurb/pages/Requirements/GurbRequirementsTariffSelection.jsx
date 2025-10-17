@@ -22,14 +22,22 @@ const GurbRequirementsTariffSelection = (props) => {
     {
       id: 'periods-tariff',
       icon: <HandshakeIcon />,
-      textHeader: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF'),
-      textBody: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF_BODY')
+      textHeader: t(
+        'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF'
+      ),
+      textBody: t(
+        'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_PERIODS_TARIFF_BODY'
+      )
     },
     {
       id: 'indexed-tariff',
       icon: <CommunityIcon />,
-      textHeader: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF'),
-      textBody: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF_BODY')
+      textHeader: t(
+        'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF'
+      ),
+      textBody: t(
+        'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF_BODY'
+      )
     }
   ]
 
@@ -41,30 +49,38 @@ const GurbRequirementsTariffSelection = (props) => {
     setSelectedOption(optionId)
 
     const baseUrl = 'https://somenergia.coop/'
-    const redirectUrl = optionId === 'periods-tariff'
-      ? baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', { gurbCode: gurbCode })
-      : baseUrl + t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', { gurbCode: gurbCode })
+    const redirectUrl =
+      optionId === 'periods-tariff'
+        ? baseUrl +
+          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
+            gurbCode: gurbCode
+          })
+        : baseUrl +
+          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
+            gurbCode: gurbCode
+          })
     setFieldValue('redirectUrl', redirectUrl)
   }
 
   return (
     <Grid item>
-        <TextRecomendation
-          title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
-        />
+      <TextRecomendation
+        title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
+      />
 
-        <Typography
-          sx={textBody1}>
-          {t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')}
-        </Typography>
+      <Typography sx={textBody1}>
+        {t(
+          'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY'
+        )}
+      </Typography>
 
-        <Typography
-          sx={{ mt: 4, mb: 2 }}
-          >{t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')}</Typography>
+      <Typography sx={{ mt: 4, mb: 2 }}>
+        {t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')}
+      </Typography>
 
       <Chooser
         name="tariff-question"
-        data-cy='tariff-chooser'
+        data-cy="tariff-chooser"
         options={options}
         value={selectedOption}
         handleChange={handleTariffQuestion}
@@ -75,9 +91,14 @@ const GurbRequirementsTariffSelection = (props) => {
         sx={{ mt: 2 }}
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT', {
-            tariffs_info_url: t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT_URL'),
-          })
+          __html: t(
+            'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT',
+            {
+              tariffs_info_url: t(
+                'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT_URL'
+              )
+            }
+          )
         }}
       />
     </Grid>
