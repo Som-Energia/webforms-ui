@@ -1,13 +1,10 @@
 import { useRef, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import MapIcon from '@mui/icons-material/Map'
-import VerifiedIcon from '@mui/icons-material/Verified'
+import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
 
 import * as Yup from 'yup'
 
@@ -18,26 +15,28 @@ import {
 
 import { addressValidations } from '../../../../containers/Gurb/requirementsValidations'
 import InputField from '../../../../components/InputField'
-import StateCity from '../../../../components/StateCity'
-import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
-import { searchPlace, getPlaceDetails } from '../../../../services/googleApiClient'
-import { getMunicipisByPostalCode } from '../../../../services/api'
+import {
+  searchPlace,
+  getPlaceDetails
+} from '../../../../services/googleApiClient'
 import { checkGurbDistance } from '../../../../services/apiGurb'
 
 import PopUpContext from '../../../../context/PopUpContext'
+import TextRecomendation from '../../components/TextRecomendation'
 
-const normalizePlace = (place) => ({
-  id: place?.id?.toString() || '',
-  name: place?.name || ''
-})
+import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
+
+import GurbOutOfPerimeterError from '../../GurbErrors'
 
 // Handle Gurb distance
-const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addressFieldName) => {
-  if (!lat || !long) {
-    console.error('Lat and Long are required to check Gurb distance')
-    throw new Error('Lat and Long are required to check Gurb distance')
-  }
+const handleCheckGurbDistance = async (
+  gurbCode,
+  lat,
+  long,
+  setFieldValue,
+  addressFieldName
+) => {
   const { data } = await checkGurbDistance(gurbCode, lat, long)
 
   if (data?.error) {
@@ -46,10 +45,12 @@ const handleCheckGurbDistance = async (gurbCode, lat, long, setFieldValue, addre
   }
 
   if (!data) {
-    throw new GurbOutOfPerimeterError('The address is out of the allowed range for this GURB')
-  } else {
-    setFieldValue(`${addressFieldName}.inside_perimeter`, true)
+    throw new GurbOutOfPerimeterError(
+      'The address is out of the allowed range for this GURB'
+    )
   }
+
+  setFieldValue(`${addressFieldName}.inside_perimeter`, true)
 }
 
 const getLatLongWithFullAddress = async (
@@ -62,18 +63,6 @@ const getLatLongWithFullAddress = async (
   try {
     const address = values[addressFieldName]
 
-    // Guard: need id, street, postal_code, state, city, and number
-    if (
-      !address?.id ||
-      !address?.street ||
-      !address?.postal_code ||
-      !currentNumber ||
-      !address?.state ||
-      !address?.city
-    ) {
-      return
-    }
-
     // 1. Get place details using the persistent ID
     const place = await getPlaceDetails(address.id, sessionTokenRef)
 
@@ -85,28 +74,31 @@ const getLatLongWithFullAddress = async (
     )
 
     // 2. Build full address string
-    const fullAddress = `${streetComp?.longText || ''} ${address.number}, ${postalCodeComp?.longText || ''}`
+    const fullAddress = `${streetComp?.longText || ''} ${
+      currentNumber || ''
+    }, ${postalCodeComp?.longText || ''}`
 
     // 3. Search for that address
     const suggestions = await searchPlace(fullAddress, sessionTokenRef)
     if (suggestions.length === 0) return
 
     // 4. Get suggested place details
-    const suggestedPlace = await getPlaceDetails(suggestions[0].id, sessionTokenRef)
+    const suggestedPlace = await getPlaceDetails(
+      suggestions[0].id,
+      sessionTokenRef
+    )
 
     // 5. Update Formik with lat/long
-    await setFieldValue(`${addressFieldName}.lat`, suggestedPlace.location.lat())
-    await setFieldValue(`${addressFieldName}.long`, suggestedPlace.location.lng())
-
+    await setFieldValue(
+      `${addressFieldName}.lat`,
+      suggestedPlace.location.lat()
+    )
+    await setFieldValue(
+      `${addressFieldName}.long`,
+      suggestedPlace.location.lng()
+    )
   } catch (error) {
     console.error('Error updating address values:', error)
-  }
-}
-
-class GurbOutOfPerimeterError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "GurbOutOfPerimeterError";
   }
 }
 
@@ -153,16 +145,12 @@ const AddressField = ({
       await setFieldValue(`${addressFieldName}.street`, newStreet)
       await setFieldValue(`${addressFieldName}.postal_code`, newPostalCode)
 
-      await UpdateStateCityByPostalCode(newPostalCode)
-
       const freshAddress = {
         ...values[addressFieldName],
         id: addressValue.id,
         street: newStreet,
         postal_code: newPostalCode,
-        number: values[addressFieldName]?.number,
-        city: values[addressFieldName]?.city,
-        state: values[addressFieldName]?.state,
+        number: values[addressFieldName]?.number
       }
 
       await getLatLongWithFullAddress(
@@ -172,7 +160,6 @@ const AddressField = ({
         sessionTokenRef,
         freshAddress.number
       )
-
     } catch (error) {
       console.error('Error fetching place details:', error)
       await setFieldValue(
@@ -183,47 +170,25 @@ const AddressField = ({
     }
   }
 
-
-  const UpdateStateCityByPostalCode = async (postalCodeValue) => {
-    try {
-      if (postalCodeValue.length >= 5) {
-        const municipis = await getMunicipisByPostalCode(postalCodeValue)
-
-        const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
-        const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
-
-        const city = normalizePlace(cityRaw)
-        const state = normalizePlace(stateRaw)
-
-        await setFieldValue(`${addressFieldName}.city`, city)
-        await setFieldValue(`${addressFieldName}.state`, state)
-      }
-      else {
-        await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
-        await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
-      }
-    }
-    catch (error) {
-      console.error('Error getting municipis by postal code:', error)
-      await setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
-      await setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
-    }
-  }
-
   const handleChangePostalCode = async (event) => {
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
-    await UpdateStateCityByPostalCode(value)
     await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
+    await getLatLongWithFullAddress(
+      setFieldValue,
+      values,
+      addressFieldName,
+      sessionTokenRef,
+      values[addressFieldName]?.number
+    )
   }
 
   const handleChangeNumber = async (event) => {
     const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
     await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     if (cleanedNumber) {
-      await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
-      getLatLongWithFullAddress(
+      await getLatLongWithFullAddress(
         setFieldValue,
         values,
         addressFieldName,
@@ -240,15 +205,9 @@ const AddressField = ({
 
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
-  const handleChangeStateAndCity = async (value) => {
-    await setFieldValue(`${addressFieldName}.city`, value?.city)
-    await setFieldValue(`${addressFieldName}.state`, value?.state)
-
-    await getLatLongWithFullAddress(setFieldValue, values, addressFieldName, sessionTokenRef, values[addressFieldName]?.number)
-  }
-
-  const handleClick = async () => {
-
+  const handleAddressValidation = async () => {
+    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+    const updates = { address: {} }
     try {
       await addressValidations.validate(values, { abortEarly: false })
       setLoading(true)
@@ -259,45 +218,49 @@ const AddressField = ({
         setFieldValue,
         addressFieldName
       )
-    }
-    catch (err) {
-      // Handle Yup validation errors
+    } catch (err) {
+      // Handle YUP validation errors
       if (err instanceof Yup.ValidationError) {
-        const updates = { address: {} }
-        await err.inner.forEach(async (e) => {
-          if (e.path) {
-            await setFieldError(e.path, e.message)
-            let keyPattern = e.path.split('.')[1]
-            updates.address[keyPattern] = true
-          }
+        err.inner.forEach((e) => {
+          if (!e.path) return
+          setFieldError(e.path, e.message)
+          const keyPattern = e.path.split('.')[1]
+          updates.address[keyPattern] = true
         })
-        await setTouched(updates)
+        setTouched(updates)
       }
-
-      // Handle Gurb out of perimeter error
-      else if (err instanceof GurbOutOfPerimeterError) {
-        setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+      // Handle lat/long missing errors
+      if (updates?.address?.lat || updates?.address?.long) {
+        console.error('Lat and Long are required to check Gurb distance')
         setContent(
-          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_ADDRESS_OUT_OF_PERIMETER') }} />}
-            closeFunction={async () => {
-              setContent(undefined)
-            }}
-          />
+          buildGurbDialog({
+            severity: 'error',
+            setContent: setContent,
+            titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
+            text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')
+          })
         )
-      }
-
-      // Handle other errors
-      else {
+      } else if (err instanceof GurbOutOfPerimeterError) {
+        setContent(
+          buildGurbDialog({
+            severity: 'error',
+            setContent: setContent,
+            titleKey: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT'),
+            text1Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
+            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT')
+          })
+        )
+      } else {
         console.error('Error validating perimeter address:', err)
         setContent(
-          <SimpleGurbDialog title={<Typography dangerouslySetInnerHTML={{ __html: t('GURB_ERROR_CHECKING_DISTANCE') }} />}
-            closeFunction={async () => {
-              setContent(undefined)
-            }}
-          />
+          buildGurbDialog({
+            severity: 'error',
+            setContent: setContent,
+            titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
+            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT')
+          })
         )
       }
-
     } finally {
       setLoading(false)
     }
@@ -305,15 +268,22 @@ const AddressField = ({
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextRecomendation
+          title={t('GURB_ADDRESS_TITLE')}
+          text={t('GURB_ADDRESS_TITLE_HELPER')}
+        />
+      </Grid>
+
       <Grid item sm={8} xs={12}>
         <LocationInput
-          textFieldName={t('ADDRESS')}
+          textFieldName={t('GURB_ADDRESS_STREET')}
           value={values[addressFieldName]?.street}
           onChange={handleChangeStreet}
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
           error={
             touched[addressFieldName]?.street &&
-              errors[addressFieldName]?.street
+            errors[addressFieldName]?.street
               ? errors[addressFieldName].street
               : false
           }
@@ -335,23 +305,11 @@ const AddressField = ({
           value={values[addressFieldName].postal_code}
           error={
             touched[addressFieldName]?.postal_code &&
-              errors[addressFieldName]?.postal_code
+            errors[addressFieldName]?.postal_code
               ? t(errors[addressFieldName].postal_code)
               : ''
           }
           required
-        />
-      </Grid>
-
-      <Grid item container spacing={2}>
-        <StateCity
-          stateId="supply_point_state"
-          stateName={`${addressFieldName}.state`}
-          state={values[addressFieldName]?.state}
-          cityId="supply_point_city"
-          cityName={`${addressFieldName}.city`}
-          city={values[addressFieldName]?.city}
-          onChange={(value) => handleChangeStateAndCity(value)}
         />
       </Grid>
 
@@ -366,7 +324,7 @@ const AddressField = ({
           value={values[addressFieldName]?.number}
           error={
             touched[addressFieldName]?.number &&
-              errors[addressFieldName]?.number
+            errors[addressFieldName]?.number
               ? t(errors[addressFieldName].number)
               : ''
           }
@@ -417,22 +375,36 @@ const AddressField = ({
           error={errors[addressFieldName]?.bloc}
         />
       </Grid>
-      <Grid item xs={12}>
+
+      <Grid
+        item
+        sm={12}
+        xs={12}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%'
+        }}>
         <Button
-          endIcon={
-            loading
-              ? <CircularProgress size='20px' />
-              : values.address.inside_perimeter
-                ? <VerifiedIcon sx={{ fontSize: 20 }} />
-                : <MapIcon sx={{ fontSize: 20 }} />
-          }
-          disabled={loading} onClick={handleClick}
-          data-cy={'validate-address'}
-        >
-          VALIDAR
+          tabIndex={0}
+          sx={{
+            ...buttonGurbDark,
+            height: '40px',
+            padding: '13px 18px',
+            boxSizing: 'border-box',
+            lineHeight: 1,
+            textTransform: 'none',
+            width: 'auto',
+            alignSelf: 'center'
+          }}
+          variant="contained"
+          disabled={loading || values[addressFieldName]?.inside_perimeter}
+          onClick={handleAddressValidation}
+          data-cy="validate-address">
+          {t('GURB_ADDRESS_VALIDATION_BUTTON_TEXT')}
         </Button>
       </Grid>
-
     </Grid>
   )
 }
