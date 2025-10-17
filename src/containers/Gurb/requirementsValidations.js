@@ -21,9 +21,3 @@ export const selfConsumptionValidations = Yup.object().shape({
     .required('REQUIRED_FIELD')
     .oneOf(['selfconsumption-on', 'selfconsumption-off'])
 })
-
-export const memberQuestionValidations = Yup.object().shape({  // TODO: review deprecation
-  has_member: Yup.string()
-    .required('REQUIRED_FIELD')
-    .oneOf(['member-on', 'member-off', 'apadrinating'])
-})
