@@ -25,7 +25,7 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   cy.contains(personalData.street).click()
   cy.wait(1000)
 
-  cy.get('[data-cy="address.number"]').type('2')
+  cy.get('[data-cy="address.number"]').clear().type(22, { delay: 100 })
   cy.get('[data-cy="address.floor"]').type('1')
   cy.get('[data-cy="address.door"]').type('3')
   cy.get('[data-cy="address.stairs"]').type('B')
@@ -57,7 +57,7 @@ Cypress.Commands.add(
     cy.contains(personalData.street).click()
     cy.wait(1000)
 
-    cy.get('[data-cy="address.number"]').type('2')
+    cy.get('[data-cy="address.number"]').clear().type(22, { delay: 100 })
     cy.get('[data-cy="address.floor"]').type('1')
     cy.get('[data-cy="address.door"]').type('3')
     cy.get('[data-cy="address.stairs"]').type('B')
