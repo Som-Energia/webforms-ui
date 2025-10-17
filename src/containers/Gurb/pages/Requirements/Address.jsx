@@ -29,11 +29,6 @@ import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDial
 
 import GurbOutOfPerimeterError from '../../GurbErrors'
 
-const normalizePlace = (place) => ({
-  id: place?.id?.toString() || '',
-  name: place?.name || ''
-})
-
 // Handle Gurb distance
 const handleCheckGurbDistance = async (
   gurbCode,
