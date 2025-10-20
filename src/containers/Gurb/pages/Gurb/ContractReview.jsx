@@ -69,7 +69,7 @@ const ContractReview = (props) => {
           <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_QUOTA")}</Typography>
           <ReviewField value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
             power: values?.gurb?.power,
-            daily_cost: values?.gurb?.daily_cost * values?.gurb?.power,
+            daily_cost: values?.gurb?.daily_cost,
             monthly_cost: (values?.gurb?.daily_cost || 0) * 30
           })
           } />
