@@ -48,16 +48,16 @@ const ContractReview = (props) => {
       <Typography sx={{ ...textHeader2, mb: 8 }}>{t('CONTRACT_SUMMARY')}</Typography>
 
       <Grid container>
-        <Grid container item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
+        <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <LightningIcon />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_KWH")}</Typography>
             <ReviewField value={`${values.gurb.power} KWh`} />
           </Box>
         </Grid>
-        <Grid container xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
+        <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <EuroIcon />
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_JOIN_COST")}</Typography>
             <ReviewField value={`${values?.gurb?.join_cost} €`} />
           </Grid>
@@ -65,7 +65,7 @@ const ContractReview = (props) => {
       </Grid>
       <Grid container sx={{ display: 'flex', gap: 2, mb: 3 }}>
         <EuroIcon />
-        <Grid xs={6}>
+        <Grid item xs={6}>
           <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_QUOTA")}</Typography>
           <ReviewField value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
             power: values?.gurb?.power,

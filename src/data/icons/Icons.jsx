@@ -252,8 +252,8 @@ export const LightningIcon = (props) => {
   return (
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="22" height="22" viewBox="-2 -2 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_2574_8850)">
-          <path d="M8.25 1.375L9.625 8.25L4.125 10.3125L13.75 20.625L12.375 13.75L17.875 11.6875L8.25 1.375Z" stroke="#0B2E34" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+        <g clipPath="url(#clip0_2574_8850)">
+          <path d="M8.25 1.375L9.625 8.25L4.125 10.3125L13.75 20.625L12.375 13.75L17.875 11.6875L8.25 1.375Z" stroke="#0B2E34" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
         </g>
         <defs>
           <clipPath id="clip0_2574_8850">
@@ -272,10 +272,10 @@ export const EuroIcon = (props) => {
   return (
     <SvgIcon sx={on ? iconRequirements : iconOffRequirements}>
       <svg width="18" height="18" viewBox="-2 -2 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_2574_5494)">
-          <path d="M2.8125 7.875H9.5625" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M2.8125 10.125H8.4375" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M12.9375 13.899C12.2091 14.5505 11.3076 14.9773 10.342 15.1278C9.37631 15.2782 8.38774 15.146 7.4956 14.747C6.60346 14.348 5.84589 13.6992 5.31432 12.8791C4.78276 12.059 4.49994 11.1026 4.5 10.1253V7.87531C4.49994 6.89801 4.78276 5.94158 5.31432 5.12148C5.84589 4.30138 6.60346 3.65267 7.4956 3.25366C8.38774 2.85465 9.37631 2.7224 10.342 2.87287C11.3076 3.02334 12.2091 3.4501 12.9375 4.10164" stroke="#0B2E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <g clipPath="url(#clip0_2574_5494)">
+          <path d="M2.8125 7.875H9.5625" stroke="#0B2E34" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M2.8125 10.125H8.4375" stroke="#0B2E34" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12.9375 13.899C12.2091 14.5505 11.3076 14.9773 10.342 15.1278C9.37631 15.2782 8.38774 15.146 7.4956 14.747C6.60346 14.348 5.84589 13.6992 5.31432 12.8791C4.78276 12.059 4.49994 11.1026 4.5 10.1253V7.87531C4.49994 6.89801 4.78276 5.94158 5.31432 5.12148C5.84589 4.30138 6.60346 3.65267 7.4956 3.25366C8.38774 2.85465 9.37631 2.7224 10.342 2.87287C11.3076 3.02334 12.2091 3.4501 12.9375 4.10164" stroke="#0B2E34" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </g>
         <defs>
           <clipPath id="clip0_2574_5494">
