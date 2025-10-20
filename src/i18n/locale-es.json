@@ -1068,6 +1068,7 @@
     "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT": "El punto de suministro que has indicado no está dentro de los 2 km del radio de la instalación, por tanto no puede participar en este GURB.",
     "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT": "Vuelve a introducir la dirección o ponte en contacto con nosotros a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
     "GURB_ERROR_CHECKING_DISTANCE": "",
+    "GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT": "Ha habido un error validando la dirección. Por favor, rectifica la dirección si es necesario o ponte en contacto con nosotros para obtener ayuda a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
     "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/",
     "GURB_CONTRACT_SUMMARY_KWH": "Participació GURB en kW",
     "GURB_CONTRACT_SUMMARY_BETA": "",
