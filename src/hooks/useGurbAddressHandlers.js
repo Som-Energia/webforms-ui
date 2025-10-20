@@ -31,9 +31,9 @@ const getLatLongWithFullAddress = async (
     const streetComp = place.addressComponents.find((c) =>
       c.types.includes('route')
     )
-    const fullAddress = `${streetComp?.longText || ''} ${currentNumber || ''}, ${
-      postalCodeComp?.longText || ''
-    }`
+    const fullAddress = `${streetComp?.longText || ''} ${
+      currentNumber || ''
+    }, ${postalCodeComp?.longText || ''}`
 
     const suggestions = await searchPlace(fullAddress, sessionTokenRef)
     if (suggestions.length === 0) return
@@ -91,7 +91,7 @@ export const useAddressHandlers = ({
   values,
   t,
   sessionTokenRef,
-  gurbCode,
+  gurbCode
 }) => {
   const { setContent } = useContext(PopUpContext)
   const [loading, setLoading] = useState(false)
@@ -130,7 +130,7 @@ export const useAddressHandlers = ({
           id: addressValue.id,
           street: newStreet,
           postal_code: newPostalCode,
-          number: values[addressFieldName]?.number,
+          number: values[addressFieldName]?.number
         }
 
         await getLatLongWithFullAddress(
@@ -220,7 +220,7 @@ export const useAddressHandlers = ({
             severity: 'error',
             setContent: setContent,
             titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-            text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT'),
+            text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')
           })
         )
       } else if (err instanceof GurbOutOfPerimeterError) {
@@ -230,7 +230,7 @@ export const useAddressHandlers = ({
             setContent: setContent,
             titleKey: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT'),
             text1Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
-            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT'),
+            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT')
           })
         )
       } else {
@@ -239,7 +239,7 @@ export const useAddressHandlers = ({
             severity: 'error',
             setContent: setContent,
             titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT'),
+            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT')
           })
         )
       }
@@ -254,7 +254,7 @@ export const useAddressHandlers = ({
     setFieldError,
     setTouched,
     t,
-    setContent,
+    setContent
   ])
 
   return {
@@ -262,6 +262,6 @@ export const useAddressHandlers = ({
     handleChangeStreet,
     handleChangePostalCode,
     handleChangeNumber,
-    handleAddressValidation,
+    handleAddressValidation
   }
 }
