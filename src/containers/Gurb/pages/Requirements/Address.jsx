@@ -118,8 +118,14 @@ const AddressField = ({
   const { gurbCode } = useParams()
   const { setContent } = useContext(PopUpContext)
 
+  const clearAddressGeoFields = (setFieldValue, addressFieldName) => {
+    setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+    setFieldValue(`${addressFieldName}.lat`, undefined)
+    setFieldValue(`${addressFieldName}.long`, undefined)
+  }
+
   const handleChangeStreet = async (addressValue) => {
-    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+    clearAddressGeoFields(setFieldValue, addressFieldName)
 
     if (!addressValue || !addressValue.id) {
       await setFieldValue(
@@ -173,7 +179,8 @@ const AddressField = ({
   const handleChangePostalCode = async (event) => {
     const value = event.target.value
     await setFieldValue(`${addressFieldName}.postal_code`, value)
-    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+    clearAddressGeoFields(setFieldValue, addressFieldName)
+
     await getLatLongWithFullAddress(
       setFieldValue,
       values,
@@ -186,7 +193,8 @@ const AddressField = ({
   const handleChangeNumber = async (event) => {
     const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
     await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
-    await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
+    clearAddressGeoFields(setFieldValue, addressFieldName)
+
     if (cleanedNumber) {
       await getLatLongWithFullAddress(
         setFieldValue,
@@ -195,9 +203,6 @@ const AddressField = ({
         sessionTokenRef,
         cleanedNumber
       )
-    } else {
-      await setFieldValue(`${addressFieldName}.lat`, undefined)
-      await setFieldValue(`${addressFieldName}.long`, undefined)
     }
   }
 
