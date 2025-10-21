@@ -62,7 +62,7 @@ const AddressField = ({
       </Grid>
 
       {/* Street Input */}
-      <Grid item sm={8} xs={12}>
+      <Grid item xs={12}>
         <LocationInput
           textFieldName={t('GURB_ADDRESS_STREET')}
           value={values[addressFieldName]?.street}
@@ -80,93 +80,51 @@ const AddressField = ({
         />
       </Grid>
 
-      {/* Postal Code Input */}
-      <Grid item sm={4} xs={12}>
-        <InputField
-          name="postal_code"
-          handleBlur={() =>
-            setFieldTouched(`${addressFieldName}.postal_code`, true)
-          }
-          textFieldName={t('POSTAL_CODE')}
-          handleChange={handleChangePostalCode}
-          touched={touched[addressFieldName]?.postal_code}
-          value={values[addressFieldName].postal_code}
-          error={
-            touched[addressFieldName]?.postal_code &&
-            errors[addressFieldName]?.postal_code
-              ? t(errors[addressFieldName].postal_code)
-              : ''
-          }
-          required
-        />
-      </Grid>
+      <Grid item xs={12}>
+        <Grid container spacing={2}>
+          {/* Postal Code Input */}
+          <Grid item sm={6} xs={12}>
+            <InputField
+              name="postal_code"
+              handleBlur={() =>
+                setFieldTouched(`${addressFieldName}.postal_code`, true)
+              }
+              textFieldName={t('POSTAL_CODE')}
+              handleChange={handleChangePostalCode}
+              touched={touched[addressFieldName]?.postal_code}
+              value={values[addressFieldName].postal_code}
+              error={
+                touched[addressFieldName]?.postal_code &&
+                errors[addressFieldName]?.postal_code
+                  ? t(errors[addressFieldName].postal_code)
+                  : ''
+              }
+              required
+            />
+          </Grid>
 
-      {/* Number Input */}
-      <Grid item sm={4} xs={12}>
-        <InputField
-          name="number"
-          handleBlur={() => setFieldTouched(`${addressFieldName}.number`, true)}
-          textFieldName={t('NUMBER')}
-          textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
-          handleChange={handleChangeNumber}
-          touched={touched[addressFieldName]?.number}
-          value={values[addressFieldName]?.number}
-          error={
-            touched[addressFieldName]?.number &&
-            errors[addressFieldName]?.number
-              ? t(errors[addressFieldName].number)
-              : ''
-          }
-          required
-        />
-      </Grid>
-
-      {/* Floor Input */}
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.floor`}
-          textFieldName={t('FLOOR')}
-          handleChange={handleChangeInteger}
-          touched={touched[addressFieldName]?.floor}
-          value={values[addressFieldName]?.floor}
-          error={errors[addressFieldName]?.floor}
-        />
-      </Grid>
-
-      {/* Door Input */}
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.door`}
-          textFieldName={t('DOOR')}
-          handleChange={handleChange}
-          touched={touched[addressFieldName]?.door}
-          value={values[addressFieldName]?.door}
-          error={errors[addressFieldName]?.door}
-        />
-      </Grid>
-
-      {/* Stairs Input */}
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.stairs`}
-          textFieldName={t('STAIRS')}
-          handleChange={handleChange}
-          touched={touched[addressFieldName]?.stairs}
-          value={values[addressFieldName]?.stairs}
-          error={errors[addressFieldName]?.stairs}
-        />
-      </Grid>
-
-      {/* Block Input */}
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.bloc`}
-          textFieldName={t('BLOCK')}
-          handleChange={handleChange}
-          touched={touched[addressFieldName]?.bloc}
-          value={values[addressFieldName]?.bloc}
-          error={errors[addressFieldName]?.bloc}
-        />
+          {/* Number Input */}
+          <Grid item sm={6} xs={12}>
+            <InputField
+              name="number"
+              handleBlur={() =>
+                setFieldTouched(`${addressFieldName}.number`, true)
+              }
+              textFieldName={t('NUMBER')}
+              textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
+              handleChange={handleChangeNumber}
+              touched={touched[addressFieldName]?.number}
+              value={values[addressFieldName]?.number}
+              error={
+                touched[addressFieldName]?.number &&
+                errors[addressFieldName]?.number
+                  ? t(errors[addressFieldName].number)
+                  : ''
+              }
+              required
+            />
+          </Grid>
+        </Grid>
       </Grid>
 
       {/* Validate Button */}
