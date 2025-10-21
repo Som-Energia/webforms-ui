@@ -143,12 +143,16 @@ const AddressField = ({
           sx={{
             ...buttonGurbDark,
             height: '40px',
-            padding: '13px 18px',
+            padding: '10px 48px',
             boxSizing: 'border-box',
             lineHeight: 1,
             textTransform: 'none',
             width: 'auto',
-            alignSelf: 'center'
+            alignSelf: 'center',
+            marginTop: {
+              xs: '1rem',
+              sm: '2rem'
+            }
           }}
           variant="contained"
           disabled={loading || values[addressFieldName]?.inside_perimeter}
