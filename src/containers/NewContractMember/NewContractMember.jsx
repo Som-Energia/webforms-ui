@@ -62,7 +62,6 @@ const NewContractMemberForm = (props) => {
   const [searchParams] = useSearchParams()
   const { i18n, t } = useTranslation()
   const { language } = useParams()
-  const [searchParams] = useSearchParams()
   const mtm_cid = searchParams.get("mtm_cid")
   const mtm_source = searchParams.get("mtm_source")
   const [url, setUrl] = useState('')
