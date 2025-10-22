@@ -15,9 +15,9 @@ describe('Gurb Participation', () => {
 
   describe('Gurb Joining', function () {  // TODO: before and after
     it('New member', function () {
-      console.log(this.data)
-      cy.identifyPartnerToJoinGurb(this.data.supplyPoint.existing_cups, this.personaldata.vat, this.personaldata.memberNumber, STATUS_ACTIVE)
+      cy.identifyPartnerToJoinGurb(this.data.supplyPoint.existing_cups, STATUS_ACTIVE)
       cy.selectParticipationOnGurb()
+      cy.acceptAllConditionsOnGurb()
     })
   })
 })

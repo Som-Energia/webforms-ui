@@ -48,10 +48,6 @@ const GurbFormJoin = (props) => {
     new_contract: undefined,
     tariff_name: '',
     cups: '',
-    member: {
-      number: '',
-      nif: '',
-    },
     gurb: {
       power: '',
       daily_cost: '',
