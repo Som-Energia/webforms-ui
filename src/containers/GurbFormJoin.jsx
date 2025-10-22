@@ -1,4 +1,11 @@
-import { useState, useEffect, useRef, useContext, useMemo, useCallback } from 'react'
+import {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useMemo,
+  useCallback
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -9,14 +16,16 @@ import Grid from '@mui/material/Grid'
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
 import SubmitButton from '../components/NewButtons/SubmitButton'
+import SomStepper from '../components/NewSomStepper'
 
-import { identifierValidations, gurbPowerOptions, gurbPolicyChecks } from './Gurb/GurbValidations'
+import {
+  identifierValidations,
+  gurbPowerOptions,
+  gurbPolicyChecks
+} from './Gurb/GurbValidations'
 
 import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
-import { addGurb } from '../services/api'
-
-import SomStepper from '../components/NewSomStepper'
 
 // Step components
 import GurbIdentification from './Gurb/pages/Gurb/GurbIdentification'
@@ -24,53 +33,25 @@ import GurbParticipation from './Gurb/pages/Gurb/GurbParticipation'
 import ContractReview from './Gurb/pages/Gurb/ContractReview'
 import GurbSignature from './Gurb/pages/Gurb/GurbSignature'
 
-
 const MAX_STEPS_NUMBER = 4
 
 const GurbFormJoin = (props) => {
   const { i18n } = useTranslation()
   const { language, code } = useParams()
-  const [url, setUrl] = useState('')
-  const [data, setData] = useState()
+
+  const [redsysData, setRedsysData] = useState()
   const [validSignature, setValidSignature] = useState(false)
+  const [activeStep, setActiveStep] = useState(0)
+  const [submitAction, setSubmitAction] = useState(false)
+
   const formTPV = useRef(null)
 
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
   const { loading } = useContext(GurbLoadingContext)
 
-  const [activeStep, setActiveStep] = useState(0)
-
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
-
-  const initialValues = useMemo(() => ({
-    new_contract: undefined,
-    tariff_name: '',
-    cups: '',
-    gurb: {
-      power: '',
-      daily_cost: '',
-      join_cost: ''
-    },
-    privacy_policy_accepted: false,
-    generic_especific_conditons_accepted: false,
-    tariff_payment_accepted: false,
-    gurb_adhesion_payment_accepted: false
-  }), [])
-
-  const validationSchemas = useMemo(() => [identifierValidations, gurbPowerOptions, gurbPolicyChecks], [])
-
-  const handlePost = useCallback(async (values) => {
-    await addGurb(values)
-      .then((response) => {
-        setData(response?.data)
-        setUrl(response.data.endpoint)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
 
   const formikRef = useRef(null)
   useEffect(() => {
@@ -78,10 +59,34 @@ const GurbFormJoin = (props) => {
   }, [activeStep])
 
   useEffect(() => {
-    if (url !== '') {
+    if (redsysData && validSignature && formTPV.current) {
       formTPV.current.submit()
     }
-  }, [url])
+  }, [redsysData, validSignature, submitAction])
+
+  const initialValues = useMemo(
+    () => ({
+      new_contract: undefined,
+      tariff_name: '',
+      cups: '',
+      gurb: {
+        power: '',
+        daily_cost: '',
+        join_cost: ''
+      },
+      privacy_policy_accepted: false,
+      generic_especific_conditons_accepted: false,
+      tariff_payment_accepted: false,
+      gurb_adhesion_payment_accepted: false,
+      payment_data: undefined
+    }),
+    []
+  )
+
+  const validationSchemas = useMemo(
+    () => [identifierValidations, gurbPowerOptions, gurbPolicyChecks],
+    []
+  )
 
   const nextStep = useCallback(() => {
     setActiveStep((prev) => Math.min(prev + 1, MAX_STEPS_NUMBER))
@@ -100,7 +105,14 @@ const GurbFormJoin = (props) => {
       case 2:
         return <ContractReview {...formikProps} activeStep={activeStep} />
       case 3:
-        return <GurbSignature {...formikProps} setValidSignature={setValidSignature} gurbCode={code} />
+        return (
+          <GurbSignature
+            {...formikProps}
+            setValidSignature={setValidSignature}
+            gurbCode={code}
+            setRedsysData={setRedsysData}
+          />
+        )
       default:
         return null
     }
@@ -113,8 +125,7 @@ const GurbFormJoin = (props) => {
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
         validateOnChange
-        validateOnBlur={false}
-      >
+        validateOnBlur={false}>
         {(formikProps) => (
           <>
             <SomStepper
@@ -132,8 +143,7 @@ const GurbFormJoin = (props) => {
                   marginTop: '2rem',
                   justifyContent: 'space-between',
                   alignItems: 'center'
-                }}
-              >
+                }}>
                 {activeStep !== 0 && (
                   <Grid item sm={2} xs={12}>
                     <PrevButton
@@ -148,13 +158,10 @@ const GurbFormJoin = (props) => {
                   {activeStep === 3 ? (
                     <SubmitButton
                       text="GURB_NEXT_PAYMENT"
-                      disabled={loading || !formikProps.isValid || !validSignature}
-                      onClick={() =>
-                        handlePost({
-                          soci: "Eustaquio",
-                          cost: 'cost',
-                        })
+                      disabled={
+                        loading || !formikProps.isValid || !validSignature
                       }
+                      onClick={() => setSubmitAction(true)}
                     />
                   ) : (
                     <NextButton
@@ -164,21 +171,20 @@ const GurbFormJoin = (props) => {
                     />
                   )}
                 </Grid>
-
               </Grid>
             )}
           </>
         )}
       </Formik>
 
-      {data?.payment_data && (
-        <form ref={formTPV} action={data.endpoint} method="POST">
-          {Object.keys(data.payment_data).map((key) => (
+      {redsysData && validSignature && submitAction && (
+        <form ref={formTPV} action={redsysData.redsys_endpoint} method="POST">
+          {Object.keys(redsysData.payment_data).map((key) => (
             <input
               key={key}
               type="hidden"
               name={key}
-              value={data.payment_data[key]}
+              value={redsysData.payment_data[key]}
             />
           ))}
         </form>

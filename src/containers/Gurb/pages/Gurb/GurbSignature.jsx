@@ -15,7 +15,7 @@ window.addEventListener('message', function (e) {
 
 const GurbSignature = (props) => {
 
-  const { values, setFieldValue, setValidSignature, submit, gurbCode } = props
+  const { values, setFieldValue, setValidSignature, submit, gurbCode, setRedsysData } = props
   const { t } = useTranslation()
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
@@ -27,7 +27,6 @@ const GurbSignature = (props) => {
         setValidSignature(true)
         console.log('Signaturit has been completed', e)
       }
-
     },
     [values, submit]
   )
@@ -41,10 +40,7 @@ const GurbSignature = (props) => {
       cups: values?.cups,
     })
       .then((response) => {
-        console.log(response?.data)
-        setFieldValue('signaturit', response?.data?.signaturit_url)
-        setFieldValue('payment_data', response?.data?.redsys_data)
-        // setFieldValue('mandate_name', response?.data?.mandate_name)
+        setRedsysData(response?.data?.redsys_data)
         setSignaturitResponseUrl(response?.data?.signaturit_url)
       })
       .catch((err) => {
@@ -79,7 +75,6 @@ const GurbSignature = (props) => {
       </Box>
     </>
   )
-
 }
 
 export default GurbSignature
