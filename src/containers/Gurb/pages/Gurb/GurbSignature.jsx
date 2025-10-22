@@ -14,8 +14,14 @@ window.addEventListener('message', function (e) {
 })
 
 const GurbSignature = (props) => {
-
-  const { values, setFieldValue, setValidSignature, submit, gurbCode, setRedsysData } = props
+  const {
+    values,
+    setFieldValue,
+    setValidSignature,
+    submit,
+    gurbCode,
+    setRedsysData
+  } = props
   const { t } = useTranslation()
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
@@ -37,7 +43,7 @@ const GurbSignature = (props) => {
       gurb_code: gurbCode,
       access_tariff: values?.tariff_name,
       beta: values?.gurb?.power,
-      cups: values?.cups,
+      cups: values?.cups
     })
       .then((response) => {
         setRedsysData(response?.data?.redsys_data)
@@ -57,9 +63,18 @@ const GurbSignature = (props) => {
 
   return (
     <>
-      <Typography sx={{ ...textHeader2, mb: 8 }}>{t('GURB_SIGNATURE')}</Typography>
+      <Typography sx={{ ...textHeader2, mb: 8 }}>
+        {t('GURB_SIGNATURE')}
+      </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', width: "100%", marginBottom: "30px" }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+          width: '100%',
+          marginBottom: '30px'
+        }}>
         {loading ? (
           <>
             <CircularProgress color="secondary" />
