@@ -104,7 +104,7 @@ const GurbFormJoin = (props) => {
       case 2:
         return <ContractReview {...formikProps} activeStep={activeStep} />
       case 3:
-        return <GurbSignature {...formikProps} setValidSignature={setValidSignature} />
+        return <GurbSignature {...formikProps} setValidSignature={setValidSignature} gurbCode={code} />
       default:
         return null
     }

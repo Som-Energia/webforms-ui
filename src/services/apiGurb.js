@@ -32,24 +32,11 @@ export const checkGurbDistance = async (gurbId, lat, long) => {
 // }
 
 export const createGurbSignature = async (data) => {
-  return new Promise(async (resolve) => {
-    setTimeout(() => {
-      resolve({
-        data: {
-          signaturit: {
-            url: 'https://replace-me-with-a-test-signaturit.url',
-          },
-          mandate_name: 'mock-mandate-name'
-        }
-      });
-    }, 2000)
+    return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/gurb/join`,
+    data: data,
+  }).then((response) => {
+    return response?.data
   })
-
-  // return axios({
-  //   method: 'POST',
-  //   url: `${WEBFORMS_API_URL}/form/create_gurb_signature`,
-  //   data: data
-  // }).then((response) => {
-  //   return response?.data
-  // })
 }

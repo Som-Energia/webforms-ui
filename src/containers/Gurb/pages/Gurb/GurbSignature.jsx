@@ -15,7 +15,7 @@ window.addEventListener('message', function (e) {
 
 const GurbSignature = (props) => {
 
-  const { values, setFieldValue, setValidSignature, submit } = props
+  const { values, setFieldValue, setValidSignature, submit, gurbCode } = props
   const { t } = useTranslation()
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
@@ -34,12 +34,18 @@ const GurbSignature = (props) => {
 
   const getSignaturit = useCallback(() => {
     createGurbSignature({
-      language: i18n.language,
+      lang: `${i18n.language}_ES`,
+      gurb_code: gurbCode,
+      access_tariff: values?.tariff_name,
+      beta: values?.gurb?.power,
+      cups: values?.cups,
     })
       .then((response) => {
-        setFieldValue('signaturit', response?.data?.signaturit)
-        setFieldValue('mandate_name', response?.data?.mandate_name)
-        setSignaturitResponseUrl(response?.data?.signaturit?.url)
+        console.log(response?.data)
+        setFieldValue('signaturit', response?.data?.signaturit_url)
+        setFieldValue('payment_data', response?.data?.redsys_data)
+        // setFieldValue('mandate_name', response?.data?.mandate_name)
+        setSignaturitResponseUrl(response?.data?.signaturit_url)
       })
       .catch((err) => {
         console.log(err)
