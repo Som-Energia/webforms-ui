@@ -1,5 +1,12 @@
 # Change Log
 
+## 6.1.2
+
+- Contract: Read GURB code query param
+- GURB: Requerimerents form
+- GURB: Join form
+- Improvments trackers
+
 ## 6.1.1
 
 - Fix: Add phone_code when new member
