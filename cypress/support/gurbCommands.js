@@ -64,8 +64,6 @@ Cypress.Commands.add('selectParticipationOnGurb', (cups, vat, memberCode, status
   cy.get('[data-cy="select_component"]').click()
   cy.get('[data-cy="1"]').click()
   cy.get('[data-cy=next]').should('not.be.disabled').click()
-  
-
 })
 
 Cypress.Commands.add('acceptAllConditionsOnGurb', () => {
@@ -153,10 +151,20 @@ Cypress.Commands.add('resultExistingMember', (gurbCode) => {
 Cypress.Commands.add('resultNotExistingMember', (selectedTariff) => {
   const assertTariff = selectedTariff === "periods" ? "periodes" : "indexada"
 
-  cy.get('[data-cy="redirect-button"]').should('exist')
   cy.get('[data-cy="redirect-button"]')
+    .should('exist')
     .invoke('attr', 'href')
-    .should('include', `${assertTariff}`)
+    .then((href) => {
+      // Assert that the tariff type is in the href
+      expect(href).to.include(assertTariff)
+
+      // Parse query params from href
+      const url = new URL(href, window.location.origin)
+      const gurbCode = url.searchParams.get('gurb-code')
+
+      // Assert gurb-code
+      expect(gurbCode).to.equal('G001')
+    })
 })
 
 Cypress.Commands.add('memberQuestion', (optionValue = 'member-on') => {

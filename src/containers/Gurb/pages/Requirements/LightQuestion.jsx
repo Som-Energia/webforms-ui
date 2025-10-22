@@ -11,10 +11,9 @@ import { iconOffRequirements } from '../../gurbTheme'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
 
 import PopUpContext from '../../../../context/PopUpContext'
-import SimpleGurbDialog from '../../../../components/SimpleGurbDialog'
+import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
@@ -28,41 +27,35 @@ const LightQuestion = (props) => {
     if (value === 'light-off') {
       setError(true)
       setContent(
-        <SimpleGurbDialog
-          title={
-            <Typography
-              dangerouslySetInnerHTML={{
-                __html: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
-              }}
-            />
-          }
-          closeFunction={() => setContent(undefined)}
-        />
+        buildGurbDialog({
+          severity: 'warning',
+          setContent: setContent,
+          text1Key: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
+          text2Key: t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')
+        })
       )
     } else {
       setError(false)
     }
   }
 
-
   const options = [
     {
       id: 'light-on',
       icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_HAS_LIGHT_HEADER'),
+      textHeader: t('GURB_HAS_LIGHT_HEADER')
     },
     {
       id: 'light-off',
       icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_HAS_NO_LIGHT_HEADER'),
-
+      textHeader: t('GURB_HAS_NO_LIGHT_HEADER')
     }
   ]
 
   return (
-      <Grid container spacing={2}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} required={true} />
+        <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} />
       </Grid>
       <Grid item xs={12}>
         <Chooser
