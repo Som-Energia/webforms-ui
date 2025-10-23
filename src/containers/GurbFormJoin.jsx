@@ -145,12 +145,11 @@ const GurbFormJoin = (props) => {
                   justifyContent: 'space-between',
                   alignItems: 'center'
                 }}>
-                {activeStep !== 0 && (
+                {activeStep !== 0 && activeStep !==3 && (
                   <Grid item sm={2} xs={12}>
                     <PrevButton
                       onClick={() => prevStep(formikProps)}
                       title="PREV"
-                      disabled={activeStep === 3 && validSignature}
                     />
                   </Grid>
                 )}
