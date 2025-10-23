@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
-import { textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
+import Alert from '@mui/material/Alert'
+import { textHeader2 } from '../../gurbTheme'
+
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { createGurbSignature } from '../../../../services/apiGurb'
@@ -64,10 +66,13 @@ const GurbSignature = (props) => {
 
   return (
     <>
-      <Typography sx={{ ...textHeader2, mb: 8 }}>
+      <Typography sx={{ ...textHeader2}}>
         {t('GURB_SIGNATURE')}
       </Typography>
 
+      <Alert icon={false} severity="warning" sx={{ mt: 4, mb: 4 }}>
+        <Typography>{t('GURB_SIGNATURE_INFO')}</Typography>
+      </Alert>
       <Box
         sx={{
           display: 'flex',

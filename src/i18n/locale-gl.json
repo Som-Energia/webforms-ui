@@ -922,5 +922,6 @@
     "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda a información sobre o teu novo contrato.",
     "PURPOSE_MEMBER_ON": "FINALIDADES: Xestionar a contratación do servizo da luz e as tarefas administrativas que derivan dela; informar dos nosos produtos e servizos enerxéticos, incluído por medios electrónicos.",
     "RIGHTS_MEMBER_ON": "DEREITOS: Pode oporse aos nosos envíos comerciais e exercitar o seu dereito de acceso, rectificación, supresión e portabilidade dos datos, así como de limitación ou oposición, no enderezo electrónico <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a>. Para máis información, consulte a <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Política de Privacidade.</a>",
-    "INSTALLATION_POWER_EXCEDED": "A potencia da instalación non pode ser superior a 100 kW"
+    "INSTALLATION_POWER_EXCEDED": "A potencia da instalación non pode ser superior a 100 kW",
+    "GURB_SIGNATURE_INFO": ""
 }
