@@ -17,6 +17,7 @@ const GurbSignature = (props) => {
   const {
     values,
     setFieldValue,
+    validSignature,
     setValidSignature,
     submit,
     gurbCode,
@@ -79,13 +80,15 @@ const GurbSignature = (props) => {
           <>
             <CircularProgress color="secondary" />
           </>
-        ) : (
+        ) : (validSignature ? (<>Molt bé!</>) : (
+
           <iframe
             title="signaturit_iframe"
             id="iframe_signaturit"
             src={signaturitResponseUrl}
             style={{ height: '700px', width: '100%' }}
           />
+        )
         )}
       </Box>
     </>

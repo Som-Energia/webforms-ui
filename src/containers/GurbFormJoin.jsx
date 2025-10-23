@@ -108,6 +108,7 @@ const GurbFormJoin = (props) => {
         return (
           <GurbSignature
             {...formikProps}
+            validSignature={validSignature}
             setValidSignature={setValidSignature}
             gurbCode={code}
             setRedsysData={setRedsysData}
