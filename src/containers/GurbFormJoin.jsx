@@ -136,42 +136,45 @@ const GurbFormJoin = (props) => {
             {error ? getStepResult(errorInfo) : getStep(formikProps)}
 
             {!error && (
-              <Grid
-                container
-                direction="row-reverse"
-                rowSpacing={2}
-                sx={{
-                  marginTop: '2rem',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                {activeStep !== 0 && activeStep !==3 && (
-                  <Grid item sm={2} xs={12}>
-                    <PrevButton
-                      onClick={() => prevStep(formikProps)}
-                      title="PREV"
-                    />
-                  </Grid>
-                )}
-
-                <Grid item sm={2} xs={12} order={-1}>
-                  {activeStep === 3 ? (
-                    <SubmitButton
-                      text="GURB_NEXT_PAYMENT"
-                      disabled={
-                        loading || !formikProps.isValid || !validSignature
-                      }
-                      onClick={() => setSubmitAction(true)}
-                    />
+              <>
+                <Grid
+                  container
+                  direction="row-reverse"
+                  rowSpacing={2}
+                  sx={{
+                    marginTop: '2rem',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                  {activeStep !== 0 && activeStep !== 3 && (
+                    <Grid item sm={2} xs={12}>
+                      <PrevButton
+                        onClick={() => prevStep(formikProps)}
+                        title="PREV"
+                      />
+                    </Grid>
+                  )}
+                  {activeStep !== 3 ? (
+                    <Grid item sm={2} xs={12} order={-1}>
+                      <NextButton
+                        disabled={loading || !formikProps.isValid}
+                        onClick={() => nextStep(formikProps)}
+                        title="NEXT"
+                      />
+                    </Grid>
                   ) : (
-                    <NextButton
-                      disabled={loading || !formikProps.isValid}
-                      onClick={() => nextStep(formikProps)}
-                      title="NEXT"
-                    />
+                    <Grid item sm={4} xs={12}>
+                      <SubmitButton
+                        text="GURB_NEXT_PAYMENT"
+                        disabled={
+                          loading || !formikProps.isValid || !validSignature
+                        }
+                        onClick={() => setSubmitAction(true)}
+                      />
+                    </Grid>
                   )}
                 </Grid>
-              </Grid>
+              </>
             )}
           </>
         )}

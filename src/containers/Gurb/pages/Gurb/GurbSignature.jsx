@@ -1,12 +1,12 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Alert from '@mui/material/Alert'
-import { textHeader2 } from '../../gurbTheme'
-
 import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
 
+import AlertBox from '../../../../components/AlertBox'
+import { textHeader2 } from '../../gurbTheme'
 import { createGurbSignature } from '../../../../services/apiGurb'
 
 let signaturitHook = () => undefined
@@ -65,38 +65,33 @@ const GurbSignature = (props) => {
   }, [])
 
   return (
-    <>
-      <Typography sx={{ ...textHeader2}}>
-        {t('GURB_SIGNATURE')}
-      </Typography>
-
-      <Alert icon={false} severity="warning" sx={{ mt: 4, mb: 4 }}>
-        <Typography>{t('GURB_SIGNATURE_INFO')}</Typography>
-      </Alert>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          width: '100%',
-          marginBottom: '30px'
-        }}>
+    <Grid container spacing={4}>
+      <Grid item xs={12}>
+        <Typography sx={{ ...textHeader2 }}>{t('GURB_SIGNATURE')}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <AlertBox
+          id="percent_value_error"
+          description={t('GURB_SIGNATURE_INFO')}
+          severity={'warning'}
+          variant={'body2'}
+        />
+      </Grid>
+      <Grid item xs={12} style={{ textAlign: 'center', width: '100%' }}>
         {loading ? (
-          <>
-            <CircularProgress color="secondary" />
-          </>
-        ) : (validSignature ? (<>Molt bé!</>) : (
-
+          <CircularProgress color="secondary" />
+        ) : validSignature ? (
+          <>Molt bé!</>
+        ) : (
           <iframe
             title="signaturit_iframe"
             id="iframe_signaturit"
             src={signaturitResponseUrl}
             style={{ height: '700px', width: '100%' }}
           />
-        )
         )}
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   )
 }
 
