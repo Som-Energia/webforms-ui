@@ -1,6 +1,6 @@
 {
   "name": "webforms-ui",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "private": false,
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
@@ -47,6 +47,7 @@
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
+    "react-facebook-pixel": "^1.0.4",
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.2.2",

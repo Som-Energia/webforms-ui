@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { Formik } from 'formik'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
@@ -51,18 +51,24 @@ import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
 import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
 import NewLoading from '../../components/NewLoading'
+import RedirectUrl from '../Gurb/components/RedirectUrl'
 
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
+import { usePixelEvent } from "../../hooks/usePixelEvent"
+
 const NewContractMemberForm = (props) => {
+  const [searchParams] = useSearchParams()
   const { i18n, t } = useTranslation()
-  const { language} = useParams()
+  const { language } = useParams()
+  const mtm_cid = searchParams.get("mtm_cid")
+  const mtm_source = searchParams.get("mtm_source")
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
   const { tariff } = props
-  
+
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
@@ -78,6 +84,9 @@ const NewContractMemberForm = (props) => {
   ])
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
+
+  const [gurbCode] = useState(() => searchParams.get("gurb-code"));
+
 
   useEffect(() => {
     if (language && i18n.language !== language) {
@@ -108,8 +117,8 @@ const NewContractMemberForm = (props) => {
       stairs: '',
       bloc: '',
       postal_code: '',
-      state: {id:'', name: ''},
-      city: {id:'', name: ''}
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
     },
     address: {
       street: '',
@@ -119,8 +128,8 @@ const NewContractMemberForm = (props) => {
       stairs: '',
       bloc: '',
       postal_code: '',
-      state:{id:'', name: ''},
-      city: {id:'', name: ''}
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
     },
     member: {
       number: '',
@@ -311,12 +320,16 @@ const NewContractMemberForm = (props) => {
 
   const trackSucces = () => {
     trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    if (mtm_cid && mtm_source && language) {
+      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}` })
+    }
+    usePixelEvent("FormularioCompletado", { status: "ok" })
   }
 
   const handlePost = async (values) => {
     trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
     setSending(true)
-    const data = newNormalizeContract(values)
+    const data = newNormalizeContract(values, gurbCode)
     await newContract(data)
       .then((response) => {
         if (response?.state === true) {
@@ -346,7 +359,7 @@ const NewContractMemberForm = (props) => {
   const getStep = (props, sendTrackEvent) => {
     const { values } = props
 
-    const trackProps = {...props,sendTrackEvent}
+    const trackProps = { ...props, sendTrackEvent }
 
     if (values?.has_member == 'member-off') {
 
@@ -431,12 +444,12 @@ const NewContractMemberForm = (props) => {
     }
   }, [summaryField])
 
-  useEffect(()=> {
+  useEffect(() => {
     trackEvent({
-       category: 'NewContractMember',
-       action: 'setNewContractMemberStep',
-       name: `new-contract-member-step-${activeStep}`
-     })
+      category: 'NewContractMember',
+      action: 'setNewContractMemberStep',
+      name: `new-contract-member-step-${activeStep}`
+    })
   }, [activeStep])
 
   const sendTrackEvent = (id) => {
@@ -478,35 +491,47 @@ const NewContractMemberForm = (props) => {
                 <>
                   {!completed && (
                     <Box sx={{ marginBottom: hasAlert ? '25px' : '65px' }}>
-                    <SomStepper
-                      activeStep={activeStep - 1} // because step 0 does not count
-                      steps={formSteps}
-                    />
+                      <SomStepper
+                        activeStep={activeStep - 1} // because step 0 does not count
+                        steps={formSteps}
+                      />
                     </Box>
                   )}
                   {completed ? (
                     <Box sx={{ mt: 2 }}>
-                      <Result
-                        mode={!error ? 'success' : 'failure'}
-                        title={
-                          !error
-                            ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
-                            : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
-                        }>
-                        <Typography
-                          sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
-                          dangerouslySetInnerHTML={{
-                            __html: !error
-                              ? formikProps.values.has_member === 'member-on'
-                              ? t('NEW_CONTRACT_SUCCESS_DESC')
-                              : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
-                              : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
-                          }}
+
+                      {gurbCode && !error ? (
+                        <RedirectUrl
+                          title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
+                          description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
+                          url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', { gurbCode, language: i18n.language })}
+                          buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
                         />
-                      </Result>
+                      ) : (
+                        <Result
+                          mode={!error ? 'success' : 'failure'}
+                          title={
+                            !error
+                              ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
+                              : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
+                          }
+                        >
+                          <Typography
+                            sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
+                            dangerouslySetInnerHTML={{
+                              __html: !error
+                                ? formikProps.values.has_member === 'member-on'
+                                  ? t('NEW_CONTRACT_SUCCESS_DESC')
+                                  : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC'),
+                            }}
+                          />
+                        </Result>
+                      )}
+
                     </Box>
                   ) : (
-                    getStep(formikProps,sendTrackEvent)
+                    getStep(formikProps, sendTrackEvent)
                   )}
                   {!completed && (
                     <Grid
@@ -547,24 +572,27 @@ const NewContractMemberForm = (props) => {
                     </Grid>
                   )}
                 </>
-              )}
+              )
+              }
             </>
           )
         }}
       </Formik>
-      {data?.payment_data && (
-        <form ref={formTPV} action={data.redsys_endpoint} method="POST">
-          {Object.keys(data.payment_data).map((key) => (
-            <input
-              key={key}
-              type="hidden"
-              name={key}
-              value={data.payment_data[key]}
-            />
-          ))}
-        </form>
-      )}
-    </Container>
+      {
+        data?.payment_data && (
+          <form ref={formTPV} action={data.redsys_endpoint} method="POST">
+            {Object.keys(data.payment_data).map((key) => (
+              <input
+                key={key}
+                type="hidden"
+                name={key}
+                value={data.payment_data[key]}
+              />
+            ))}
+          </form>
+        )
+      }
+    </Container >
   )
 }
 
