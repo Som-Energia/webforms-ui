@@ -104,7 +104,7 @@ export const checkPhisicalVAT = (vat) => {
   return '0123456789KLMXYZ'.indexOf(firstchar) !== -1
 }
 
-export const normalizeHolderChange = (contract) => {
+export const normalizeHolderChange = (contract, isMemberMandatoryForHolderchange) => {
   const normalContract = JSON.parse(JSON.stringify(contract))
 
   if (normalContract?.supply_point?.verified !== undefined) {
@@ -193,14 +193,17 @@ export const normalizeHolderChange = (contract) => {
   }
   else if (isHomeOwnerCommunityNif(normalContract?.holder?.vat)) {
     normalContract.member.become_member = false
-    normalContract.member.link_member = true
+    if (isMemberMandatoryForHolderchange)
+      normalContract.member.link_member = true
+    else
+      normalContract.member.link_member = false
   }
 
   if (normalContract?.holder && 'ismember' in normalContract.holder) {
     delete normalContract.holder.ismember
   }
 
-  if (!normalContract?.member?.link_member) {
+  if (!normalContract?.member?.link_member && !isMemberMandatoryForHolderchange) {
     if (normalContract?.member) {
       if ('vat' in normalContract.member) {
         delete normalContract.member.vat
@@ -210,7 +213,6 @@ export const normalizeHolderChange = (contract) => {
         delete normalContract.member.number
       }
     }
-  }
 
   if (normalContract?.member?.checked !== undefined) {
     delete normalContract?.member?.checked
@@ -267,6 +269,7 @@ export const normalizeHolderChange = (contract) => {
       }
     }
   }
+
   return normalContract
 }
 
