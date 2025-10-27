@@ -19,11 +19,6 @@ function HolderCase(props) {
     <>
       <StepHeader title={ t('HOLDER_CASE_TITLE')} />
       <Box className="step-body">
-        <Typography
-          variant="body1"
-          dangerouslySetInnerHTML={{ __html: t('HOLDER_CASE_PRESENTATION') }}
-          variantMapping={{ body1: 'div' }}
-        />
         <Box mt={3} mb={4}>
           <Chooser
             onChange={handleChange}

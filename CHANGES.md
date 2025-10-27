@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- IMP: remove unnecessary subtitle
+
 ## 6.1.2
 
 - Contract: Read GURB code query param
