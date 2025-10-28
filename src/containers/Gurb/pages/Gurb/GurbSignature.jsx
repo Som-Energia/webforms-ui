@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid'
 import AlertBox from '../../../../components/AlertBox'
 import { textHeader2 } from '../../gurbTheme'
 import { createGurbSignature } from '../../../../services/apiGurb'
+import Result from '../../../../containers/Result'
 
 let signaturitHook = () => undefined
 
@@ -81,7 +82,11 @@ const GurbSignature = (props) => {
         {loading ? (
           <CircularProgress color="secondary" />
         ) : validSignature ? (
-          <>Molt bé!</>
+          <Result
+            mode='success'
+            title={t('SIGNATURIT_COMPLETE_TITLE')}
+            description={t('SIGNATURIT_COMPLETE_DESCRIPTION')}
+          />
         ) : (
           <iframe
             title="signaturit_iframe"

@@ -1091,5 +1091,7 @@
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION": "Ja has contractat la llum amb Som Energia!<br/><b>Ara ja pots seguir amb la contractació de GURB!</b><br/>Clica el botó que et durà al formulari, on podràs finalitzar la contractació del servei.",
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT": "Contractar GURB",
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "https://somenergia.coop/{{language}}/gurb/{{gurbCode}}/join/",
-    "GURB_SIGNATURE_INFO": "A continuació pots signar la contractació de Gurb, i posteriorment t'apareixerà la pantalla per fer el pagament del cost d'adhesió. Si, pel que sigui, <strong>el pagament no es fa efectiu en les pròximes 3 hores, aquest contracte no tindrà validesa</strong>."
+    "GURB_SIGNATURE_INFO": "A continuació pots signar la contractació de Gurb, i posteriorment t'apareixerà la pantalla per fer el pagament del cost d'adhesió. Si, pel que sigui, <strong>el pagament no es fa efectiu en les pròximes 3 hores, aquest contracte no tindrà validesa</strong>.",
+    "SIGNATURIT_COMPLETE_TITLE": "Has signat el  contracte correctament",
+    "SIGNATURIT_COMPLETE_DESCRIPTION": "Segueix amb el pagament per finalitzar la contractació"
 }

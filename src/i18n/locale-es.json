@@ -1073,5 +1073,7 @@
     "GURB_CONTRACT_SUMMARY_JOIN_COST": "",
     "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION": "",
     "GURB_CONTRACT_REVIEW_INFO": "",
-    "GURB_SIGNATURE_INFO": ""
+    "GURB_SIGNATURE_INFO": "",
+    "SIGNATURIT_COMPLETE_TITLE": "Has signat el  contracte correctament",
+    "SIGNATURIT_COMPLETE_DESCRIPTION": "Segueix amb el pagament per finalitzar la contractació"
 }
