@@ -3,10 +3,16 @@ import { useTranslation } from 'react-i18next'
 import InputField from './InputField'
 import Grid from '@mui/material/Grid'
 
-const handleChangePower = (event, setFieldValue) => {
+const handleChangePower = (
+  event,
+  setFieldValue,
+  { moreThanOneDecimal = false }
+) => {
+  const regexOneDecimal = /^\d*([.,'])?\d{0,1}/g
   const regexThreeDecimal = /^\d*([.,'])?\d{0,3}/g
-  const match = regexThreeDecimal.exec(event.target.value)
+  const regex = moreThanOneDecimal ? regexThreeDecimal : regexOneDecimal
 
+  const match = regex.exec(event.target.value)
   let result = match[0].replace(',', '.')
   result = result.replace("'", '.')
 
@@ -54,7 +60,9 @@ const PowerInputs = (props) => {
               }
               numInputs={numInputs}
               handleChange={(event) =>
-                handleChangePower(event, setFieldValue)
+                handleChangePower(event, setFieldValue, {
+                  moreThanOneDecimal: has_light == 'light-on' || moreThan15Kw
+                })
               }
               handleBlur={handleBlur}
               touched={touched?.power[attr]}
