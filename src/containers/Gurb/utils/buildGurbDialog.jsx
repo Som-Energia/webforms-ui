@@ -1,6 +1,7 @@
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import SimpleGurbDialog from '../../../components/SimpleGurbDialog'
+import { dialogText } from '../gurbTheme'
 
 export const buildGurbDialog = ({
   severity,
@@ -15,14 +16,7 @@ export const buildGurbDialog = ({
     text1={
       text1Key ? (
         <Typography
-          sx={{
-            fontSize: 14,
-            a: {
-              color: 'black',
-              fontWeight: severity === 'warning' ? 'bold' : 'normal',
-              textDecoration: 'underline'
-            }
-          }}
+          sx={dialogText(severity)}
           dangerouslySetInnerHTML={{ __html: text1Key }}
         />
       ) : null
@@ -30,14 +24,7 @@ export const buildGurbDialog = ({
     text2={
       text2Key ? (
         <Typography
-          sx={{
-            fontSize: 14,
-            a: {
-              color: 'black',
-              fontWeight: severity === 'warning' ? 'bold' : 'normal',
-              textDecoration: 'underline'
-            }
-          }}
+          sx={dialogText(severity)}
           dangerouslySetInnerHTML={{ __html: text2Key }}
         />
       ) : null

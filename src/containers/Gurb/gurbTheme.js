@@ -248,3 +248,13 @@ export const dialogContentStack = {
   alignItems: 'center',
   textAlign: 'center'
 }
+
+export const dialogText = (severity) => ({
+  fontSize: 14,
+  a: {
+    color: 'black',
+    fontWeight: severity === 'warning' ? 'bold' : 'normal',
+    textDecoration: 'underline'
+  }
+})
+
