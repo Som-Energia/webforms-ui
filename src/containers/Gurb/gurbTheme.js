@@ -217,3 +217,34 @@ export const textCheckbox = {
     fontWeight: '600'
   }
 }
+
+export const dialogWarningRounded = {
+  fontSize: 44,
+  color: 'warning.light',
+  mt: 4
+}
+
+export const dialogCancelIcon = {
+  fontSize: 40,
+  color: 'error.light'
+}
+
+export const dialogTitle = {
+  textAlign: 'center',
+  fontSize: 18,
+  fontWeight: 'bold',
+  mb: -2
+}
+
+export const dialogIconButton = {
+  position: 'absolute',
+  right: 18,
+  top: 18,
+  color: 'black'
+}
+
+export const dialogContentStack = {
+  spacing: 2,
+  alignItems: 'center',
+  textAlign: 'center'
+}

@@ -6,13 +6,26 @@ import Box from '@mui/material/Box'
 import CloseIcon from '@mui/icons-material/Close'
 import WarningRounded from '@mui/icons-material/WarningRounded'
 import Stack from '@mui/material/Stack'
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from '@mui/icons-material/Cancel'
 
 import CustomDialog from './CustomDialog'
 
 import useCheckMobileScreen from '../services/checkMobileScreen'
+import {
+  dialogCancelIcon,
+  dialogWarningRounded,
+  dialogTitle,
+  dialogIconButton,
+  dialogContentStack
+} from '../containers/Gurb/gurbTheme'
 
-export default function SimpleDialog({ title, text1, text2, closeFunction, severity }) {
+export default function SimpleDialog({
+  title,
+  text1,
+  text2,
+  closeFunction,
+  severity
+}) {
   const isMobile = useCheckMobileScreen()
 
   return (
@@ -24,71 +37,30 @@ export default function SimpleDialog({ title, text1, text2, closeFunction, sever
         maxWidth: '90vw',
         height: isMobile && severity === 'error' ? '360px' : '300px',
         maxHeight: '80vh',
-        margin: '20px',
-      }}
-    >
-
+        margin: '20px'
+      }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
-        {severity === 'warning' &&
-          <WarningRounded
-          sx={{
-            fontSize: 44,
-            color: 'warning.light',
-            mt: 4
-          }}
-
-          />
-        }
-        {severity === 'error' &&
-          <CancelIcon
-            sx={{
-              fontSize: 40,
-              color: 'error.light'
-            }}
-          />
-        }
+        {severity === 'warning' && <WarningRounded sx={dialogWarningRounded} />}
+        {severity === 'error' && <CancelIcon sx={dialogCancelIcon} />}
       </Box>
 
       {title && (
-        <DialogTitle id="simple-dialog-title"
-          sx={{
-            textAlign: 'center',
-            fontSize: 18,
-            fontWeight: 'bold',
-            mb: -2,
-          }}
-        >
-          <Box>
-            {title}
-          </Box>
+        <DialogTitle id="simple-dialog-title" sx={dialogTitle}>
+          <Box>{title}</Box>
         </DialogTitle>
       )}
 
       <IconButton
         aria-label="close"
         onClick={closeFunction}
-        sx={(theme) => ({
-          position: 'absolute',
-          right: 18,
-          top: 18,
-          color: 'black'
-        })}
-      >
+        sx={dialogIconButton}>
         <CloseIcon />
       </IconButton>
 
       <DialogContent>
-        <Stack
-          spacing={2}
-          alignItems="center"
-          textAlign="center"
-        >
-          <Box>
-            {text1}
-          </Box>
-          <Box>
-            {text2}
-          </Box>
+        <Stack sx={dialogContentStack}>
+          <Box>{text1}</Box>
+          <Box>{text2}</Box>
         </Stack>
       </DialogContent>
     </CustomDialog>
