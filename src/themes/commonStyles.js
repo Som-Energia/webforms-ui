@@ -65,3 +65,24 @@ export const iconOffRequirements = ({ padding = '8px' }) => ({
   backgroundRepeat: 'no-repeat',
   backgroundOrigin: 'content-box'
 })
+
+// RedirectUrl component
+export const redirectUrlTitle = {
+  textAlign: 'center'
+}
+
+export const redirectUrlDescription = {
+  mt: 0,
+  fontWeight: 400,
+  fontSize: '1rem',
+  lineHeight: 1.75,
+  textAlign: 'center',
+  color: 'secondary.extraDark'
+}
+
+export const redirectUrlButton = {
+  boxSizing: 'border-box',
+  lineHeight: 1,
+  textTransform: 'none',
+  p: 1.5
+}

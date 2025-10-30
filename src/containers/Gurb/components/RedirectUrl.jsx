@@ -5,21 +5,22 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 import { buttonGurbDark } from '../../../containers/Gurb/gurbTheme'
+import {
+  redirectUrlDescription,
+  redirectUrlTitle,
+  redirectUrlButton
+} from '../../../themes/commonStyles'
 
 const RedirectUrl = ({
   title = 'somenergia redirect url component',
   description = 'a naive url redirect component',
   buttonText = 'Ves-hi!',
-  url = 'https://somenergia.coop',
+  url = 'https://somenergia.coop'
 }) => {
   return (
     <Grid container spacing={2} direction="column" alignItems="center">
       <Grid item>
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: 'center'
-          }}>
+        <Typography variant="h5" sx={redirectUrlTitle}>
           {title}
         </Typography>
       </Grid>
@@ -28,14 +29,7 @@ const RedirectUrl = ({
         <Typography
           component="div"
           variant="body1"
-          sx={{
-            mt: 0,
-            fontWeight: 400,
-            fontSize: '1rem',
-            lineHeight: 1.75,
-            textAlign: 'center',
-            color: 'secondary.extraDark',
-          }}
+          sx={redirectUrlDescription}
           {...(description
             ? { dangerouslySetInnerHTML: { __html: description } }
             : {})}
@@ -51,12 +45,8 @@ const RedirectUrl = ({
           color="primary"
           sx={{
             ...buttonGurbDark,
-            boxSizing: 'border-box',
-            lineHeight: 1,
-            textTransform: 'none',
-            p: 1.5
-          }}
-        >
+            ...redirectUrlButton
+          }}>
           {buttonText}
         </Button>
       </Grid>
@@ -68,7 +58,7 @@ RedirectUrl.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   buttonText: PropTypes.string,
-  url: PropTypes.string,
+  url: PropTypes.string
 }
 
 export default RedirectUrl
