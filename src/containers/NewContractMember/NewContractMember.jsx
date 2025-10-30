@@ -59,6 +59,8 @@ import { newContract } from '../../services/api'
 import { usePixelEvent } from "../../hooks/usePixelEvent"
 
 const NewContractMemberForm = (props) => {
+
+  const { triggerEvent } = usePixelEvent()
   const [searchParams] = useSearchParams()
   const { i18n, t } = useTranslation()
   const { language } = useParams()
@@ -323,7 +325,7 @@ const NewContractMemberForm = (props) => {
     if (mtm_cid && mtm_source && language) {
       trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}` })
     }
-    usePixelEvent("FormularioCompletado", { status: "ok" })
+    triggerEvent("FormularioCompletado", { status: "ok" })
   }
 
   const handlePost = async (values) => {
