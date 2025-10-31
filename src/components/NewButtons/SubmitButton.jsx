@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { buttonGurbDark } from '../../containers/Gurb/gurbTheme'
 
 function SubmitButton(props) {
-  const { onClick, disabled, sending, text='GURB_PAYMENT_SUBMIT' } = props
+  const { onClick, disabled, sending, text='FINISH' } = props
 
   const { t } = useTranslation()
 

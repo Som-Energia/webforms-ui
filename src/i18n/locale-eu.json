@@ -900,7 +900,7 @@
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "Errore bat gertatu da eta ezin izan da gauzatu eskatutako eragiketa.",
     "NEW_CONTRACT_SUBMIT_LOADING": "Eskaera kudeatzen ari gara",
-    "GURB_PAYMENT_SUBMIT": "Amaitu",
+    "FINISH": "Amaitu",
     "NEW_HOLDER_TITLE": "Kontratuaren titularra bazkidea da?",
     "NEW_HOLDER_SAME_HELPER": "",
     "NEW_HOLDER_DIFFERENT_TITLE": "Ez, gonbidatu naute; ni elektrizitate-kontratuaren titularra besterik ez naiz.",

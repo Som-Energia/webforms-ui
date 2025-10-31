@@ -921,7 +921,7 @@
     "GURB_PAYMENT_REVIEW_TEXT_CUSTOMER_COST": "Potència contractada de 0.5KW amb IVA inclòs. La quota del GURB es cobrarà mensualment a través de domiciliació bancària.",
     "GURB_PAYMENT_REVIEW_TITLE_GURB_COST": "Cost d'adhesió al GURB",
     "GURB_PAYMENT_REVIEW_TEXT_GURB_COST": "Potència contractada de 0.5KW amb IVA innclòs. La quota del GURB es cobrarà mensualment a través de domiciliació bancària.",
-    "GURB_PAYMENT_SUBMIT": "Finalitzar",
+    "FINISH": "Finalitzar",
     "BIRTHDATE": "Data de naixement (opcional)",
     "SELECT_OPTION": "-- Selecciona una opció --",
     "GENDER": "Gènere (opcional)",

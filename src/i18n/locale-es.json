@@ -900,7 +900,7 @@
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Recibirás un correo con tu número de persona socia y con toda la información sobre tu nuevo contrato.",
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "¡Hay un error y no se ha podido realizar la operación solicitada!",
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Por favor, intentalo otra vez más tarde. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisamos la situación. Disculpa las molestias.",
-    "GURB_PAYMENT_SUBMIT": "Finalizar",
+    "FINISH": "Finalizar",
     "ERROR_REQUIRED_FIELD": "Campo requerido",
     "NEW_HOLDER_TITLE": "¿La persona socia y la persona titular del contrato son la misma?",
     "NEW_HOLDER_SAME_HELPER": "",
