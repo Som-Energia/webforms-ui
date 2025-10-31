@@ -1,11 +1,11 @@
 import ReactPixel from "react-facebook-pixel";
 
-export function usePixelEvent(eventName, pixelData = {}) {
-  const triggerEvent = () => {
-    
-    ReactPixel.trackCustom(eventName, pixelData);
-    const iframeUrl = process.env.VITE_PIXEL_URL;
+export const  usePixelEvent = ()  => {
 
+  const triggerEvent = (eventName, pixelData = {}) => {
+    ReactPixel.trackCustom(eventName, pixelData);
+    const iframeUrl = import.meta.env.VITE_PIXEL_URL;
+    
     if (iframeUrl) {
       const ftRandom = Math.random() * 1000000;
       const iframe = document.createElement("iframe");
@@ -20,5 +20,5 @@ export function usePixelEvent(eventName, pixelData = {}) {
     }
   }
 
-  return triggerEvent;
+  return {triggerEvent};
 }

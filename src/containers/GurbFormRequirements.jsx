@@ -14,13 +14,10 @@ import supplyPointValidations from './Gurb/supplyPointValidations'
 import {
   addressValidations,
   lightValidations,
-  selfConsumptionValidations,
+  selfConsumptionValidations
 } from './Gurb/requirementsValidations'
 
-import GurbErrorContext from '../context/GurbErrorContext'
 import GurbLoadingContext from '../context/GurbLoadingContext'
-
-import useCheckMobileScreen from '../services/checkMobileScreen'
 
 // Step components
 import SupplyPoint from './Gurb/SupplyPoint'
@@ -31,21 +28,22 @@ import SomStepper from '../components/NewSomStepper'
 import GurbRequirementsTariffSelection from './Gurb/pages/Requirements/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './Gurb/pages/Requirements/GurbRequirementsResult'
 
-export const MAX_STEPS_NUMBER = { MAX_STEP_NUMBER_DEFAULT: 5, MAX_STEP_NUMBER_NEW_CONTRACT: 6 }
+export const MAX_STEPS_NUMBER = {
+  MAX_STEP_NUMBER_DEFAULT: 5,
+  MAX_STEP_NUMBER_NEW_CONTRACT: 6
+}
 
 const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
   const { language, gurbCode } = useParams()
   const { loading } = useContext(GurbLoadingContext)
-  const [maxStepNum, setMaxStepNum] = useState(MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT)
+  const [maxStepNum, setMaxStepNum] = useState(
+    MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
+  )
   const [activeStep, setActiveStep] = useState(1)
   const [completed, setCompleted] = useState(false)
-  const isMobile = useCheckMobileScreen()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
 
   const initialValues = {
-    is_client: undefined,
-    already_contract: false,
     cups: '',
     has_light: undefined,
     address: {
@@ -53,23 +51,20 @@ const GurbFormRequirements = (props) => {
       street: '',
       number: undefined,
       postal_code: undefined,
-      state: { id: '', name: '' },
-      city: { id: '', name: '' },
       lat: undefined,
       long: undefined,
-      inside_perimeter: false,
+      inside_perimeter: false
     },
     has_selfconsumption: undefined,
-    has_member: undefined,
     new_contract: undefined,
-    redirectUrl: undefined,
+    redirectUrl: undefined
   }
 
   const validationSchemas = [
     supplyPointValidations,
     addressValidations,
     lightValidations,
-    selfConsumptionValidations,
+    selfConsumptionValidations
   ]
 
   const formikRef = useRef(null)
@@ -112,7 +107,13 @@ const GurbFormRequirements = (props) => {
 
     switch (activeStep) {
       case 1:
-        return <SupplyPoint {...formikProps} activeStep={activeStep} setMaxStepNum={setMaxStepNum} />
+        return (
+          <SupplyPoint
+            {...formikProps}
+            activeStep={activeStep}
+            setMaxStepNum={setMaxStepNum}
+          />
+        )
       case 2:
         return <Address {...formikProps} activeStep={activeStep} />
       case 3:
@@ -136,22 +137,31 @@ const GurbFormRequirements = (props) => {
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep - 1]}
         validateOnChange
-        validateOnBlur={false}
-      >
+        validateOnBlur={false}>
         {(formikProps) => {
           return (
             <>
               {!completed && (
-                <Box sx={{ marginBottom: '65px' }}>
+                <Box
+                  sx={{
+                    marginBottom: {
+                      xs: '30px',
+                      sm: '40px'
+                    }
+                  }}>
                   <SomStepper
                     activeStep={activeStep - 1}
                     stepsNum={maxStepNum}
+                    showStepTitle={true}
                   />
                 </Box>
               )}
               {completed ? (
                 <Box sx={{ mt: 2 }}>
-                  <GurbRequirementsResult {...formikProps} gurbCode={gurbCode} />
+                  <GurbRequirementsResult
+                    {...formikProps}
+                    gurbCode={gurbCode}
+                  />
                 </Box>
               ) : (
                 getStep(formikProps)
@@ -164,9 +174,8 @@ const GurbFormRequirements = (props) => {
                   sx={{
                     marginTop: '2rem',
                     justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
+                    alignItems: 'center'
+                  }}>
                   {activeStep > 1 && (
                     <Grid item sm={2} xs={12}>
                       <PrevButton onClick={prevStep} title="PREV" />
@@ -184,7 +193,9 @@ const GurbFormRequirements = (props) => {
                             formikProps.values.has_light !== 'light-on') ||
                           (activeStep === 4 &&
                             formikProps.values.has_selfconsumption !==
-                            'selfconsumption-off')
+                              'selfconsumption-off') ||
+                          (activeStep === 5 &&
+                            formikProps.values.redirectUrl === undefined)
                         }
                         onClick={() => nextStep(formikProps)}
                         title="NEXT"

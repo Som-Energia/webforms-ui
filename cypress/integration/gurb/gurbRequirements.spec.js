@@ -13,7 +13,6 @@ describe('Requirements', () => {
     })
 
     beforeEach(function () {
-        // There is g001 as a gurbCode
         cy.visit(`/ca/gurb/${this.data.gurbCode}/requirements`)
     })
 
