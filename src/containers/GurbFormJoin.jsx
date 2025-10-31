@@ -44,8 +44,6 @@ const GurbFormJoin = (props) => {
   const [activeStep, setActiveStep] = useState(0)
   const [submitAction, setSubmitAction] = useState(false)
 
-  const formTPV = useRef(null)
-
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
   const { loading } = useContext(GurbLoadingContext)
 
@@ -58,11 +56,11 @@ const GurbFormJoin = (props) => {
     formikRef.current.validateForm()
   }, [activeStep])
 
-  useEffect(() => {
-    if (redsysData && validSignature && formTPV.current) {
-      formTPV.current.submit()
+  const handleRef = useCallback((ref) => {
+    if (ref !== null) {
+      ref.submit()
     }
-  }, [redsysData, validSignature, submitAction])
+  }, [])
 
   const initialValues = useMemo(
     () => ({
@@ -181,7 +179,7 @@ const GurbFormJoin = (props) => {
       </Formik>
 
       {redsysData && validSignature && submitAction && (
-        <form ref={formTPV} action={redsysData.redsys_endpoint} method="POST">
+        <form ref={handleRef} action={redsysData.redsys_endpoint} method="POST">
           {Object.keys(redsysData.payment_data).map((key) => (
             <input
               key={key}
