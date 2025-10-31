@@ -900,7 +900,7 @@
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "Errore bat gertatu da eta ezin izan da gauzatu eskatutako eragiketa.",
     "NEW_CONTRACT_SUBMIT_LOADING": "Eskaera kudeatzen ari gara",
-    "GURB_PAYMENT_SUBMIT": "Amaitu",
+    "FINISH": "Amaitu",
     "NEW_HOLDER_TITLE": "Kontratuaren titularra bazkidea da?",
     "NEW_HOLDER_SAME_HELPER": "",
     "NEW_HOLDER_DIFFERENT_TITLE": "Ez, gonbidatu naute; ni elektrizitate-kontratuaren titularra besterik ez naiz.",
@@ -927,5 +927,6 @@
     "PURPOSE_MEMBER_ON": "XEDEAK: elektrizitate-zerbitzuaren kontratazioa kudeatzea eta ondoriozko zeregin administratiboak; gure energia-produktuei eta -zerbitzuei buruz informatzea, baita euskarri elektronikoen bidez ere.",
     "RIGHTS_MEMBER_ON": "ESKUBIDEAK: gure mezu komertzialak jasotzeari uko egin diezaiokezu. Zure datuetan sartzeko, datuak zuzentzeko, ezabatzeko, beste norabait eramateko, eta datuen tratamenduari aurka egiteko eta tratamendua mugatzeko eskubidea baliatzeko, idatzi <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a> helbidera. Informazio gehiago aurkituko duzu <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Pribatutasun-politikan.</a>",
     "INSTALLATION_POWER_EXCEDED": "Instalazioaren gehieneko potentzia 100 kW da",
-    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/"
+    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/",
+    "GURB_SIGNATURE_INFO": ""
 }

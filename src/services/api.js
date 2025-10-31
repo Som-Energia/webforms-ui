@@ -544,13 +544,3 @@ export const getPowers = async (gurb_code, tarif_name) => {
     return response?.data
   })
 }
-
-export const addGurb = async (data) => {
-  return axios({
-    method: 'POST',
-    url: `${WEBFORMS_API_URL}/form/gurb/payment`,
-    data: data
-  }).then((response) => {
-    return response?.data
-  })
-}

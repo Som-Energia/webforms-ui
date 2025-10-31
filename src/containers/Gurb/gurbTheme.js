@@ -159,7 +159,7 @@ export const chooserGurbSelected = {
 
 export const buttonGurbDark = {
   ...textBody1,
-  textTransform: 'capitalize',
+  textTransform: 'none',
   borderRadius: '2rem',
   border: '1px solid transparent',
   backgroundColor: '#C5F47C',
@@ -172,6 +172,9 @@ export const buttonGurbDark = {
     color: 'primary.main',
     boxShadow: 'none',
     border: '1px solid transparent'
+  },
+  '&::first-letter': {
+    textTransform: 'uppercase'
   },
   width: '100%'
 }
