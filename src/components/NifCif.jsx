@@ -18,6 +18,7 @@ const NifCif = (props) => {
     errors,
     touched,
     setFieldValue,
+    setValues,
     setFieldError,
     setFieldTouched,
     entity = "" // where we are saving nifcif info
@@ -49,8 +50,6 @@ const NifCif = (props) => {
   const handleNifValidations = async () => {
     try {
       setLoading(true)
-      const validationObj = checkVatFormat(values[entity]?.nif)
-      await setFieldValue(`${entity}.nif_valid`, validationObj.isValid)
       if (!holder) {
         await handleCheckNifResponse()
       }
@@ -60,15 +59,20 @@ const NifCif = (props) => {
       setLoading(false)
     }
   }
-
+  
   useEffect(() => {
     if (values[entity]?.nif && values[entity]?.nif.length >= 9) {
-      handleNifValidations()
+      const validationObj = checkVatFormat(values[entity]?.nif)
       let is_physical = checkPhisicalVAT(values[entity]?.nif)
-      setFieldValue(
-        `${entity}.person_type`,
-        is_physical ? 'physic-person' : 'legal-person'
-      )
+      setValues({
+        ...values,
+        [entity]: {
+          ...values[entity],
+          person_type: is_physical ? 'physic-person' : 'legal-person',
+          nif_valid: validationObj.isValid
+        }
+      })
+      handleNifValidations()
     }
   }, [values[entity]?.nif])
 
