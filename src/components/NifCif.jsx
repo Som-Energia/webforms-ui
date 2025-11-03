@@ -59,7 +59,7 @@ const NifCif = (props) => {
       setLoading(false)
     }
   }
-  
+
   useEffect(() => {
     if (values[entity]?.nif && values[entity]?.nif.length >= 9) {
       const validationObj = checkVatFormat(values[entity]?.nif)
