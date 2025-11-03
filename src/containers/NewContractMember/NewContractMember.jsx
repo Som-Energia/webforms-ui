@@ -139,6 +139,7 @@ const NewContractMemberForm = (props) => {
     },
     new_member: {
       nif: '',
+      nif_valid: false,
       person_type: '',
       proxynif: '',
       proxyname: '',

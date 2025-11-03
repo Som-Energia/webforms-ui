@@ -3,12 +3,11 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import { checkPhisicalVAT } from '../services/utils'
+import { checkPhisicalVAT, checkVatFormat } from '../services/utils'
 import { checkVat } from '../services/api'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
 import InputField from './InputField'
-import { handleCheckNifFormat } from '../utils/commonHandles'
 import { useHandleChangeNif } from '../hooks/useHandleChange'
 import { useHandleBlur } from '../hooks/useHandleBlur'
 
@@ -50,11 +49,8 @@ const NifCif = (props) => {
   const handleNifValidations = async () => {
     try {
       setLoading(true)
-      await handleCheckNifFormat(
-        values[entity]?.nif,
-        setFieldError,
-        `${entity}.nif`
-      )
+      const validationObj = checkVatFormat(values[entity]?.nif)
+      await setFieldValue(`${entity}.nif_valid`, validationObj.isValid)
       if (!holder) {
         await handleCheckNifResponse()
       }
@@ -88,7 +84,7 @@ const NifCif = (props) => {
           handleBlur={handleBlur}
           touched={touched[entity]?.nif}
           value={values[entity]?.nif}
-          error={errors[entity]?.nif}
+          error={errors[entity]?.nif || errors[entity]?.nif_valid}
           required={true}
           customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />

@@ -70,6 +70,7 @@ const NewMemberForm = (props) => {
     },
     new_member: {
       nif: '',
+      nif_valid: false,
       person_type: '',
       proxynif_valid: false,
       proxynif: '',
