@@ -1,0 +1,78 @@
+# .github/workflows/ci-cypress.yml
+name: CI - Cypress tests
+
+on:
+  push:
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/included:12.17.4
+    strategy:
+      matrix:
+        node-version:
+          - '20'
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Write holder data fixture
+        run: |
+          echo "$CYPRESS_HOLDER_CHANGE_PERSONALDATA_JSON" > cypress/fixtures/holderChangePersonaldata.json
+        shell: bash
+        env:
+          CYPRESS_HOLDER_CHANGE_PERSONALDATA_JSON: ${{ secrets.CYPRESS_HOLDER_CHANGE_PERSONALDATA_JSON }}
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run start-ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+          browser: chrome
+          headed: false
+          working-directory: ./
+          config:
+            baseUrl=http://localhost:3000
+
+        env:
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+          VITE_WEBFORMS_API_URL: ${{ secrets.VITE_WEBFORMS_API_URL }}
+          VITE_PLAUSIBLE_TRACK_DOMAIN: ${{ secrets.VITE_PLAUSIBLE_TRACK_DOMAIN }}
+          VITE_PLAUSIBLE_APIHOST_URL: ${{ secrets.VITE_PLAUSIBLE_APIHOST_URL }}
+          VITE_CONTRACT_JSON_DATA: ${{ secrets.VITE_CONTRACT_JSON_DATA }}
+          VITE_GENERATION_INVESTMENTS_JSON_DATA: ${{ secrets.VITE_GENERATION_INVESTMENTS_JSON_DATA }}
+          VITE_GENERATION_ASSIGNMENTS_JSON_DATA: ${{ secrets.VITE_GENERATION_ASSIGNMENTS_JSON_DATA }}
+          VITE_GENERATION_OUTSIDE_ASSIGNMENTS: ${{ secrets.VITE_GENERATION_OUTSIDE_ASSIGNMENTS }}
+          VITE_FEATURE_FLAGS: ${{ secrets.VITE_FEATURE_FLAGS }}
+          VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER: ${{ secrets.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER }}
+          VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY }}
+          VITE_GENERATE_SOURCEMAP: ${{ secrets.VITE_GENERATE_SOURCEMAP }}
+          VITE_MATOMO_URL: ${{ secrets.VITE_MATOMO_URL }}
+          VITE_MATOMO_SITE_ID: ${{ secrets.VITE_MATOMO_SITE_ID }}
+          REACT_APP_DISABLE_ANIMATIONS: true
+          CYPRESS_pageLoadTimeout: 6000
+          ELECTRON_DISABLE_GPU: 1
+          CHROME_DISABLE_GPU: true
+
+      - name: Clean up fixture
+        if: always()
+        run: rm -f cypress/fixtures/holderChangePersonaldata.json
+
+      - name: Notify
+        uses: Som-Energia/ghactions-notify@main
+        if: always()
+        with:
+          webhook: ${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
