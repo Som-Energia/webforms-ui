@@ -1026,9 +1026,9 @@
     "GURB_PARTICIPATION_TITLE_1_STEP": "",
     "GURB_PARTICIPATION_TITLE_2_STEP": "",
     "GURB_PARTICIPATION_TITLE_3_STEP": "",
-    "GURB_PARTICIPATION_KW_INPUT_TEXT": "",
-    "GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY": "",
-    "GURB_HELP_ANNUAL_CONSUMPTION": "",
+    "GURB_PARTICIPATION_KW_INPUT_TEXT": "¿Cuántos kW de potencia de GURB quieres contratar?",
+    "GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY": "Los kW de potencia marcarán tu participación en la instalación. Es como si eligieses tener un panel, o tener dos: cuando la planta genere energía, a tu casa llegará la parte proporcional.",
+    "GURB_HELP_ANNUAL_CONSUMPTION": "<a href='https://es.support.somenergia.coop/article/946-como-puedo-saber-mi-uso-anual-de-electricidad' target='_blank'>¿Como puedo saber mi consumo KW/año?</a>",
     "GURB_PAYMENT_REVIEW_TITLE_CUSTOMER_COST": "",
     "GURB_PAYMENT_REVIEW_TEXT_CUSTOMER_COST": "",
     "GURB_PAYMENT_REVIEW_TITLE_GURB_COST": "",
@@ -1087,5 +1087,8 @@
     "SOMENERGIA_BASE_URL": "https://somenergia.coop/",
     "GURB_NO_ADDRESS_STREET": "Has de indicar el nombre de la calle",
     "GURB_NO_ADDRESS_NUMBER": "Has de indicar el número de la calle",
-    "GURB_NO_ADDRESS_POSTAL_CODE": "Has de indicar el código postal"
+    "GURB_NO_ADDRESS_POSTAL_CODE": "Has de indicar el código postal",
+    "GURB_MEMBER_TITLE": "Identificación",
+    "GURB_PARTICIPATION_TEXT_20": "A continuación recomendamos qué potencia GURB contratar según tu consumo. Si tu consumo anual de electricidad es:<ul><li>De entre 1.000 kWh y 2.500 kWh → contrata <b>0,5 kW</b></li><li>Superior a 2.500 kWh → contrata <b>1 kW</b></li></ul>En caso de querer una participación más elevada puedes escribir un correo a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> y valoraremos tu petición en función de tu consumo anual y la disponibilidad de plazas que haya.<br /><br /><b>Puedes encontrar tu consumo anual en cualquier factura de electricidad.</b>",
+    "GURB_PARTICIPATION_TEXT_30": "La potencia de GURB más óptima para contratar, variará en función de diversos factores como el consumo anual, pero también las horas en que se produzca el consumo. A continuación te proponemos unos valores estimados de potencia GURB a contratar en base al consumo. Puedes encontrar tu consumo anual en cualquier factura de electricidad. Si tu consumo anual de electricidad es: <ul><li>Hasta 4.000 kWh → contrata <b>1 kW</b></li><li>Entre 4.000 kWh y 6.000 kWh → contrata <b>1,5 kW</b></li><li>Entre 6.000 kWh y 8.000 kWh → contrata  <b>2 kW</b></li><li>Entre 8.000 kWh y 10.000 kWh → contrata  <b>3 kW</b></li><li>Entre 10.000 kWh y 12.500 kWh → contrata  <b>4 kW</b><li>Entre 12.500 kWh y 15.000 kWh → contrata  <b>5 kW</b></li></ul><b>Si tu consumo es superior a 15.000 kWh anuales, puedes escribir un correo a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> y valoraremos tu petición en función de tu consumo anual y la disponibilidad de plazas que haya.</b>"
 }
