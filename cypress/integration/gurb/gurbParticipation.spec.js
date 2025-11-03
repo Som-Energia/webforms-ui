@@ -13,9 +13,14 @@ describe('Gurb Participation', () => {
     cy.fixture('holderChangePersonaldata.json').as('personaldata')
   })
 
-  describe('Gurb Joining', function () {  // TODO: before and after
+  describe('Gurb Joining', function () {
+    // TODO: before and after
     it('New member', function () {
-      cy.identifyPartnerToJoinGurb(this.data.supplyPoint.existing_cups, STATUS_ACTIVE)
+      cy.identifyPartnerToJoinGurb(
+        this.data.supplyPoint.existing_cups,
+        this.data.personalData.vat,
+        STATUS_ACTIVE
+      )
       cy.selectParticipationOnGurb()
       cy.acceptAllConditionsOnGurb()
     })

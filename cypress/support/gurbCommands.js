@@ -1,82 +1,85 @@
-Cypress.Commands.add('identifySupplyPointGURB', (cups, cupsStatus, statusCode = 200,) => {
-  //Intercept call to check CUPS
-  cy.intercept('GET', '/check/cups/status/*', {
-    statusCode: statusCode,
-    body: {
-      data: {
-        address: "Rue del percebe 13",
-        cups: cups,
-        knowledge_of_distri: true,
-        status: cupsStatus,
-        tariff_type: null,
-        tariff_name: '2.0TD'
-      },
-      state: statusCode === 200,
-      status: 'ONLINE'
-    }
-  }).as('checkCUPS')
-
-  cy.get('[data-cy="cups"]').type(cups)
-
-  cy.get('[data-cy=next]').click()
-})
-
-Cypress.Commands.add('identifyPartnerToJoinGurb', (cups, status, statusCode = 200) => {
-  //Intercept call to check CUPS
-  cy.intercept('GET', '/check/cups/status/*', {
-    statusCode: statusCode,
-    body: {
-      data: {
-        cups: cups,
-        status: status,
-        tariff_type: null
-      },
-      state: statusCode === 200,
-      status: 'ONLINE'
-    }
-  }).as('checkCUPS')
-
-  cy.get('[data-cy="cups"]').type(cups)
-  cy.wait('@checkCUPS')
-  cy.get('[data-cy=next]').click()
-
-})
-
-Cypress.Commands.add('selectParticipationOnGurb', (cups, vat, memberCode, status, statusCode = 200) => {
-  //Intercept call to check CUPS
-  cy.intercept('GET', '/data/gurb/**', {
-    statusCode: statusCode,
-    body: {
-      data: {
-        available_betas: [
-          0.5, 1
-        ],
-        initial_quota: 41.32,
-        quota: 0.361644,
-        surplus_compensation: false,
+Cypress.Commands.add(
+  'identifySupplyPointGURB',
+  (cups, cupsStatus, statusCode = 200) => {
+    //Intercept call to check CUPS
+    cy.intercept('GET', '/check/cups/status/*', {
+      statusCode: statusCode,
+      body: {
+        data: {
+          address: 'Rue del percebe 13',
+          cups: cups,
+          knowledge_of_distri: true,
+          status: cupsStatus,
+          tariff_type: null,
+          tariff_name: '2.0TD'
+        },
         state: statusCode === 200,
         status: 'ONLINE'
       }
-    }
-  }).as('getPowers')
+    }).as('checkCUPS')
 
-  cy.wait('@getPowers')
-  cy.get('[data-cy="select_component"]').click()
-  cy.get('[data-cy="1"]').click()
-  cy.get('[data-cy=next]').should('not.be.disabled').click()
-})
+    cy.get('[data-cy="cups"]').type(cups)
+
+    cy.get('[data-cy=next]').click()
+  }
+)
+
+Cypress.Commands.add(
+  'identifyPartnerToJoinGurb',
+  (cups, vat, status, statusCode = 200) => {
+    //Intercept call to check CUPS
+    cy.intercept('GET', '/check/cups/status/*', {
+      statusCode: statusCode,
+      body: {
+        data: {
+          cups: cups,
+          status: status,
+          tariff_type: null
+        },
+        state: statusCode === 200,
+        status: 'ONLINE'
+      }
+    }).as('checkCUPS')
+
+    cy.get('[data-cy="cups"]').type(cups)
+    cy.wait('@checkCUPS')
+    cy.get('[data-cy="owner.nif"]').type(vat)
+    cy.get('[data-cy=next]').click()
+  }
+)
+
+Cypress.Commands.add(
+  'selectParticipationOnGurb',
+  (cups, vat, memberCode, status, statusCode = 200) => {
+    //Intercept call to check CUPS
+    cy.intercept('GET', '/data/gurb/**', {
+      statusCode: statusCode,
+      body: {
+        data: {
+          available_betas: [0.5, 1],
+          initial_quota: 41.32,
+          quota: 0.361644,
+          surplus_compensation: false,
+          state: statusCode === 200,
+          status: 'ONLINE'
+        }
+      }
+    }).as('getPowers')
+
+    cy.wait('@getPowers')
+    cy.get('[data-cy="select_component"]').click()
+    cy.get('[data-cy="1"]').click()
+    cy.get('[data-cy=next]').should('not.be.disabled').click()
+  }
+)
 
 Cypress.Commands.add('acceptAllConditionsOnGurb', () => {
-
   cy.get('[data-cy="generic_especific_conditons_checkbox"]').click()
   cy.get('[data-cy="privacy_policy_checkbox"]').click()
   cy.get('[data-cy="tariff_payment_checkbox"]').click()
   cy.get('[data-cy="gurb_adhesion_payment_checkbox"]').click()
   cy.get('[data-cy=next]').should('not.be.disabled').click()
-
 })
-
-
 
 Cypress.Commands.add('lightQuestion', (lightOn = true) => {
   const optionValue = lightOn ? 'light-on' : 'light-off'
