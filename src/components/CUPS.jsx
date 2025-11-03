@@ -7,7 +7,6 @@ import Link from '@mui/material/Link'
 import InputField from './InputField'
 
 import { checkCups } from '../services/api'
-import GurbLoadingContext from '../context/GurbLoadingContext'  // TODO: review specific context in a reusable component
 import { MAX_STEPS_NUMBER } from '../containers/GurbFormRequirements'
 
 const CUPS = (props) => {
@@ -37,8 +36,7 @@ const CUPS = (props) => {
                 response?.data?.status === 'new' ||
                 response?.data?.status === 'inactive',
               knowledge_of_distri: response?.data?.knowledge_of_distri,
-              // tariff_name: response?.data?.tariff_name
-              tariff_name: '2.0TD'
+              tariff_name: response?.data?.tariff_name
             }
           })
           setMaxStepNum(
