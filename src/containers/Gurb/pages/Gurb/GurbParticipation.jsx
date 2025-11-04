@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import {
   textField,
   textHeader5,
+  participationTypography
 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Select from '../../components/Select'
@@ -68,13 +69,7 @@ const GurbParticipation = (props) => {
       />
 
       <Typography
-        sx={{
-          '& a, & a:link, & a:visited, & a:active': {
-            fontFamily: 'Inter',
-            color: '#919191 !important',
-            fontSize: '14px'
-          }
-        }}>
+        sx={participationTypography}>
         {
           <span
             dangerouslySetInnerHTML={{

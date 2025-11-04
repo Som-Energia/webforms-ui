@@ -286,3 +286,11 @@ export const alertParticipationTypography = {
     textDecoration: 'underline'
   }
 }
+
+export const participationTypography = {
+  '& a, & a:link, & a:visited, & a:active': {
+    fontFamily: 'Inter',
+    color: '#919191 !important',
+    fontSize: '14px'
+  }
+}
