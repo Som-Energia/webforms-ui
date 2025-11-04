@@ -7,7 +7,7 @@ import {
 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Select from '../../components/Select'
-import Alert from '@mui/material/Alert'
+import AlertParticipation from '../../components/AlertParticipation'
 import { getPowers } from '../../../../services/api'
 
 const GurbParticipation = (props) => {
@@ -85,31 +85,10 @@ const GurbParticipation = (props) => {
         }
       </Typography>
 
-      <Alert
+      <AlertParticipation
         severity="info"
-        sx={{
-          mt: 4,
-          mb: 4,
-          color: '#ed6c02',
-          backgroundColor: 'rgb(255, 244, 229)',
-          '& .MuiAlert-icon': {
-            color: '#ed6c02',
-            mt: '0.3em'
-          }
-        }}>
-        <Typography
-          sx={{
-            color: '#ed6c02',
-            '& a, & a:link, & a:visited, & a:active': {
-              color: '#ed6c02 !important',
-              textDecoration: 'underline'
-            }
-          }}
-          dangerouslySetInnerHTML={{
-            __html: t(informationTextKey)
-          }}
-        />
-      </Alert>
+        informationText={t(informationTextKey)}
+      />
 
     </Box>
   )

@@ -267,3 +267,22 @@ export const somStepperBox = {
     sm: '40px'
   }
 }
+
+export const alertParticipation = {
+  mt: 4,
+  mb: 4,
+  color: '#ed6c02',
+  backgroundColor: 'rgb(255, 244, 229)',
+  '& .MuiAlert-icon': {
+    color: '#ed6c02',
+    mt: '0.3em'
+  }
+}
+
+export const alertParticipationTypography = {
+  color: '#ed6c02',
+  '& a, & a:link, & a:visited, & a:active': {
+    color: '#ed6c02 !important',
+    textDecoration: 'underline'
+  }
+}
