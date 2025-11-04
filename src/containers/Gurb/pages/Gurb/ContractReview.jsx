@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid'
 import ReviewField from '../../../../components/review/ReviewField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import CheckBox from '@mui/material/Checkbox'
-import Alert from '@mui/material/Alert'
+import AlertParticipation from '../../components/AlertParticipation'
 
 import { LightningIcon, EuroIcon } from '../../../../data/icons/Icons'
 
@@ -76,9 +76,10 @@ const ContractReview = (props) => {
         </Grid>
       </Grid >
 
-      <Alert severity="warning" sx={{ mt: 4, mb: 4 }}>
-        <Typography>{t('GURB_CONTRACT_REVIEW_INFO')}</Typography>
-      </Alert>
+      <AlertParticipation
+        severity="info"
+        informationText={t('GURB_CONTRACT_REVIEW_INFO')}
+      />
 
       <CustomCheckBox name="generic_especific_conditons_accepted"
         dataCy="generic_especific_conditons_checkbox"
