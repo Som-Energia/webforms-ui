@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 
 import AlertBox from '../../../../components/AlertBox'
-import { textHeader2 } from '../../gurbTheme'
+import { participationAlertBox, textHeader2 } from '../../gurbTheme'
 import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 
@@ -73,6 +73,7 @@ const GurbSignature = (props) => {
       </Grid>
       <Grid item xs={12}>
         <AlertBox
+          typographySx={participationAlertBox}
           id="percent_value_error"
           description={t('GURB_SIGNATURE_INFO')}
           severity={'warning'}

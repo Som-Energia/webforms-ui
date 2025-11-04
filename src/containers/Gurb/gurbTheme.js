@@ -294,3 +294,8 @@ export const participationTypography = {
     fontSize: '14px'
   }
 }
+
+export const participationAlertBox = {
+  textAlign: 'left',
+  padding: '0 20px'
+}

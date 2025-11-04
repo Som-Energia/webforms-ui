@@ -14,7 +14,8 @@ const AlertBox = ({
   description,
   children,
   variant,
-  icon
+  icon,
+  typographySx = {}
 }) => {
   const theme = useTheme()
 
@@ -27,6 +28,7 @@ const AlertBox = ({
         {description && (
           <Typography
             variant={variant || 'body1'}
+            sx={typographySx}
             dangerouslySetInnerHTML={{
               __html: description
             }}
