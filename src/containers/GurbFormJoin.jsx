@@ -172,7 +172,7 @@ const GurbFormJoin = (props) => {
                       />
                     </Grid>
                   ) : (
-                    <Grid item sm={4} xs={12}>
+                    <Grid item sm={4} xs={12} sx={{ mx: 'auto' }}>
                       <SubmitButton
                         text="GURB_NEXT_PAYMENT"
                         disabled={
