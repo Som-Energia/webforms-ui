@@ -12,6 +12,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
@@ -131,10 +132,19 @@ const GurbFormJoin = (props) => {
         validateOnBlur={false}>
         {(formikProps) => (
           <>
-            <SomStepper
-              activeStep={activeStep}
-              steps={[...Array(MAX_STEPS_NUMBER).keys()]}
-            />
+            <Box
+              sx={{
+                marginBottom: {
+                  xs: '30px',
+                  sm: '40px'
+                }
+              }}>
+              <SomStepper
+                activeStep={activeStep}
+                steps={[...Array(MAX_STEPS_NUMBER).keys()]}
+              />
+            </Box>
+
             {error ? getStepResult(errorInfo) : getStep(formikProps)}
 
             {!error && (
