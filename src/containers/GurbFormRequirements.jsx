@@ -28,6 +28,8 @@ import SomStepper from '../components/NewSomStepper'
 import GurbRequirementsTariffSelection from './Gurb/pages/Requirements/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './Gurb/pages/Requirements/GurbRequirementsResult'
 
+import { somStepperBox } from './Gurb/gurbTheme'
+
 export const MAX_STEPS_NUMBER = {
   MAX_STEP_NUMBER_DEFAULT: 5,
   MAX_STEP_NUMBER_NEW_CONTRACT: 6
@@ -143,12 +145,7 @@ const GurbFormRequirements = (props) => {
             <>
               {!completed && (
                 <Box
-                  sx={{
-                    marginBottom: {
-                      xs: '30px',
-                      sm: '40px'
-                    }
-                  }}>
+                  sx={somStepperBox}>
                   <SomStepper
                     activeStep={activeStep - 1}
                     stepsNum={maxStepNum}

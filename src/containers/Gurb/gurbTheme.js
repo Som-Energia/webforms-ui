@@ -261,3 +261,9 @@ export const dialogText = (severity) => ({
   }
 })
 
+export const somStepperBox = {
+  marginBottom: {
+    xs: '30px',
+    sm: '40px'
+  }
+}
