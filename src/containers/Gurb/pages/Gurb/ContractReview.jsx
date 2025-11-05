@@ -13,7 +13,6 @@ import TextRecomendation from '../../components/TextRecomendation'
 
 import {
   textHeader4,
-  textHeader2,
   participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../gurbTheme'
@@ -56,41 +55,49 @@ const ContractReview = (props) => {
           <TextRecomendation title={t('CONTRACT_SUMMARY')} />
         </Grid>
 
-        <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <LightningIcon />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography sx={textHeader4}>
-              {t('GURB_CONTRACT_SUMMARY_KWH')}
-            </Typography>
-            <ReviewField value={`${values.gurb.power} KWh`} />
+        {/* KWH Section */}
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <LightningIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_KWH')}
+              </Typography>
+              <ReviewField value={`${values.gurb.power} KWh`} />
+            </Box>
           </Box>
         </Grid>
 
-        <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <EuroIcon />
-          <Grid item xs={6}>
-            <Typography sx={textHeader4}>
-              {t('GURB_CONTRACT_SUMMARY_JOIN_COST')}
-            </Typography>
-            <ReviewField value={`${values?.gurb?.join_cost} €`} />
-          </Grid>
+        {/* Join Cost Section */}
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <EuroIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_JOIN_COST')}
+              </Typography>
+              <ReviewField value={`${values?.gurb?.join_cost} €`} />
+            </Box>
+          </Box>
         </Grid>
 
-      </Grid>
-
-      <Grid container sx={{ display: 'flex', gap: 2, mb: 3 }}>
-        <EuroIcon />
-        <Grid item xs={6}>
-          <Typography sx={textHeader4}>
-            {t('GURB_CONTRACT_SUMMARY_QUOTA')}
-          </Typography>
-          <ReviewField
-            value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
-              power: values?.gurb?.power,
-              daily_cost: values?.gurb?.daily_cost,
-              monthly_cost: (values?.gurb?.daily_cost || 0) * 30
-            })}
-          />
+        {/* Quota Section */}
+        <Grid item xs={12} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <EuroIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_QUOTA')}
+              </Typography>
+              <ReviewField
+                value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
+                  power: values?.gurb?.power,
+                  daily_cost: values?.gurb?.daily_cost,
+                  monthly_cost: (values?.gurb?.daily_cost || 0) * 30
+                })}
+              />
+            </Box>
+          </Box>
         </Grid>
       </Grid>
 
