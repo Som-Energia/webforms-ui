@@ -3,12 +3,11 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import { checkPhisicalVAT } from '../services/utils'
+import { checkPhisicalVAT, checkVatFormat } from '../services/utils'
 import { checkVat } from '../services/api'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 
 import InputField from './InputField'
-import { handleCheckNifFormat } from '../utils/commonHandles'
 import { useHandleChangeNif } from '../hooks/useHandleChange'
 import { useHandleBlur } from '../hooks/useHandleBlur'
 
@@ -19,6 +18,7 @@ const NifCif = (props) => {
     errors,
     touched,
     setFieldValue,
+    setValues,
     setFieldError,
     setFieldTouched,
     entity = "" // where we are saving nifcif info
@@ -50,11 +50,6 @@ const NifCif = (props) => {
   const handleNifValidations = async () => {
     try {
       setLoading(true)
-      await handleCheckNifFormat(
-        values[entity]?.nif,
-        setFieldError,
-        `${entity}.nif`
-      )
       if (!holder) {
         await handleCheckNifResponse()
       }
@@ -67,12 +62,17 @@ const NifCif = (props) => {
 
   useEffect(() => {
     if (values[entity]?.nif && values[entity]?.nif.length >= 9) {
-      handleNifValidations()
+      const validationObj = checkVatFormat(values[entity]?.nif)
       let is_physical = checkPhisicalVAT(values[entity]?.nif)
-      setFieldValue(
-        `${entity}.person_type`,
-        is_physical ? 'physic-person' : 'legal-person'
-      )
+      setValues({
+        ...values,
+        [entity]: {
+          ...values[entity],
+          person_type: is_physical ? 'physic-person' : 'legal-person',
+          nif_valid: validationObj.isValid
+        }
+      })
+      handleNifValidations()
     }
   }, [values[entity]?.nif])
 
@@ -88,7 +88,7 @@ const NifCif = (props) => {
           handleBlur={handleBlur}
           touched={touched[entity]?.nif}
           value={values[entity]?.nif}
-          error={errors[entity]?.nif}
+          error={errors[entity]?.nif || errors[entity]?.nif_valid}
           required={true}
           customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />

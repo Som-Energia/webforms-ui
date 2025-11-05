@@ -66,6 +66,10 @@ const GurbFormJoin = (props) => {
     () => ({
       new_contract: undefined,
       tariff_name: '',
+      owner: {
+        nif: '',
+        nif_valid: false
+      },
       cups: '',
       gurb: {
         power: '',

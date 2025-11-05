@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid'
 import { useTranslation } from 'react-i18next'
 
 import CUPS from '../../../../components/CUPS'
+import NifCif from '../../../../components/NifCif'
 
 
 const GurbIdentification = (props) => {
@@ -21,6 +22,7 @@ const GurbIdentification = (props) => {
 
       <Grid item xs={12}>
         <CUPS {...props} />
+        <NifCif {...props} entity="owner" holder={true}/>
       </Grid>
 
     </Grid>

@@ -3,6 +3,7 @@
 ## unreleased
 
 - IMP: remove unnecessary subtitle
+- FIX: Fixed asyncronims of setFields
 
 ## 6.1.2
 

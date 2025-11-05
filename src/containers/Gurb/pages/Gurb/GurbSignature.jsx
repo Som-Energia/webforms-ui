@@ -47,7 +47,8 @@ const GurbSignature = (props) => {
       gurb_code: gurbCode,
       access_tariff: values?.tariff_name,
       beta: values?.gurb?.power,
-      cups: values?.cups
+      cups: values?.cups,
+      vat: values?.owner?.nif
     })
       .then((response) => {
         setRedsysData(response?.data?.redsys_data)
