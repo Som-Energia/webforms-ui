@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 
 import ReviewField from '../../../../components/review/ReviewField'
 import AlertBox from '../../../../components/AlertBox'
+import TextRecomendation from '../../components/TextRecomendation'
 
 import {
   textHeader4,
@@ -50,11 +51,11 @@ const ContractReview = (props) => {
 
   return (
     <>
-      <Typography sx={{ ...textHeader2, mb: 4 }}>
-        {t('CONTRACT_SUMMARY')}
-      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sx={{ mb: 2 }}>
+          <TextRecomendation title={t('CONTRACT_SUMMARY')} />
+        </Grid>
 
-      <Grid container>
         <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <LightningIcon />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -64,6 +65,7 @@ const ContractReview = (props) => {
             <ReviewField value={`${values.gurb.power} KWh`} />
           </Box>
         </Grid>
+
         <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <EuroIcon />
           <Grid item xs={6}>
@@ -73,7 +75,9 @@ const ContractReview = (props) => {
             <ReviewField value={`${values?.gurb?.join_cost} €`} />
           </Grid>
         </Grid>
+
       </Grid>
+
       <Grid container sx={{ display: 'flex', gap: 2, mb: 3 }}>
         <EuroIcon />
         <Grid item xs={6}>

@@ -289,7 +289,7 @@ export const alertParticipationTypography = {
 
 export const participationTypography = {
   '& a, & a:link, & a:visited, & a:active': {
-    fontFamily: 'Inter',
+    fontFamily: 'Outfit',
     color: '#919191 !important',
     fontSize: '14px'
   }

@@ -1,14 +1,16 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 
 import AlertBox from '../../../../components/AlertBox'
-import { participationAlertBoxTypography, textHeader2 } from '../../gurbTheme'
 import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
+import TextRecomendation from '../../components/TextRecomendation'
+
+import { participationAlertBoxTypography } from '../../gurbTheme'
+
 
 let signaturitHook = () => undefined
 
@@ -69,8 +71,9 @@ const GurbSignature = (props) => {
   return (
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography sx={{ ...textHeader2 }}>{t('GURB_SIGNATURE')}</Typography>
+        <TextRecomendation title={t('GURB_SIGNATURE')} />
       </Grid>
+
       <Grid item xs={12}>
         <AlertBox
           typographySx={participationAlertBoxTypography}
@@ -85,7 +88,7 @@ const GurbSignature = (props) => {
           <CircularProgress color="secondary" />
         ) : validSignature ? (
           <Result
-            mode='success'
+            mode="success"
             title={t('SIGNATURIT_COMPLETE_TITLE')}
             description={t('SIGNATURIT_COMPLETE_DESCRIPTION')}
           />

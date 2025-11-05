@@ -1,6 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+
+import Select from '../../components/Select'
+import AlertBox from '../../../../components/AlertBox'
+import { getPowers } from '../../../../services/api'
+import TextRecomendation from '../../components/TextRecomendation'
+
 import {
   textField,
   textHeader5,
@@ -8,10 +16,6 @@ import {
   participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../gurbTheme'
-import Box from '@mui/material/Box'
-import Select from '../../components/Select'
-import AlertBox from '../../../../components/AlertBox'
-import { getPowers } from '../../../../services/api'
 
 
 const GurbParticipation = (props) => {
@@ -56,13 +60,10 @@ const GurbParticipation = (props) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
 
-      <Typography variant="headline4.regular">
-        {t('GURB_PARTICIPATION_KW_INPUT_TEXT')}
-      </Typography>
-
-      <Typography sx={textHeader5}>
-        {t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}
-      </Typography>
+      <TextRecomendation
+        title={t('GURB_PARTICIPATION_KW_INPUT_TEXT')}
+        text={t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}
+      />
 
       <Select
         options={gurbDetails.available_betas ?? []}

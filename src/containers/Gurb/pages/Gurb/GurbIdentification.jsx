@@ -8,14 +8,17 @@ import { useTranslation } from 'react-i18next'
 import CUPS from '../../../../components/CUPS'
 import NifCif from '../../../../components/NifCif'
 
+import TextRecomendation from '../../components/TextRecomendation'
+import { textHeader2 } from '../../gurbTheme'
+
 const GurbIdentification = (props) => {
   const { t } = useTranslation()
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Typography variant="headline4.regular">
-          {t('GURB_MEMBER_TITLE')}
-        </Typography>
+        <TextRecomendation
+          title={t('GURB_MEMBER_TITLE')}
+        />
       </Grid>
 
       <Grid item xs={12}>
