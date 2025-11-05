@@ -295,7 +295,17 @@ export const participationTypography = {
   }
 }
 
-export const participationAlertBox = {
+export const participationAlertBoxTypography = {
   textAlign: 'left',
-  padding: '0 20px'
+  fontSize: '14px',
+  mt: '2px'
+}
+
+export const participationAlertBoxIcon = {
+  alignItems: 'flex-start',
+  '& .MuiAlert-icon': {
+    display: 'flex',
+    alignItems: 'flex-start',
+    mt: '0.35em'
+  }
 }

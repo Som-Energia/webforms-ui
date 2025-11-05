@@ -4,12 +4,15 @@ import Typography from '@mui/material/Typography'
 import {
   textField,
   textHeader5,
-  participationTypography
+  participationTypography,
+  participationAlertBoxTypography,
+  participationAlertBoxIcon
 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Select from '../../components/Select'
-import AlertParticipation from '../../components/AlertParticipation'
+import AlertBox from '../../../../components/AlertBox'
 import { getPowers } from '../../../../services/api'
+
 
 const GurbParticipation = (props) => {
   const { values, setFieldValue, gurbCode } = props
@@ -80,11 +83,18 @@ const GurbParticipation = (props) => {
         }
       </Typography>
 
-      <AlertParticipation
-        severity="info"
-        informationText={t(informationTextKey)}
-      />
-
+      <Box sx ={{ mt: 4 }}>
+        <AlertBox
+          customTypographyStyle={participationAlertBoxTypography}
+          customIconStyle={participationAlertBoxIcon}
+          id="percent_value_error"
+          description={t(informationTextKey)}
+          severity={'warning'}
+          iconCustom={true}
+          iconCustomSeverity="info"
+          variant={'body2'}
+        />
+      </Box>
     </Box>
   )
 }
