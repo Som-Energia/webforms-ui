@@ -9,6 +9,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
+import MatomoContext from '../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
@@ -46,6 +47,8 @@ const GurbFormJoin = (props) => {
 
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
   const { loading } = useContext(GurbLoadingContext)
+
+  const { trackEvent } = useContext(MatomoContext)
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -121,6 +124,23 @@ const GurbFormJoin = (props) => {
     }
   }
 
+  const handleSubmit = () => {
+    setSubmitAction(true)
+    trackEvent({
+      category: 'GurbFormJoin',
+      action: 'setGurbFormJoinStep',
+      name: `gurb-join-signed-${code}`
+    })
+  }
+
+  useEffect(() => {
+    trackEvent({
+      category: 'GurbFormJoin',
+      action: 'setGurbFormJoinStep',
+      name: `gurb-join-step-${activeStep}-${code}`
+    })
+  }, [activeStep])
+
   return (
     <Container maxWidth="md" disableGutters sx={{ padding: '1rem' }}>
       <Formik
@@ -171,7 +191,7 @@ const GurbFormJoin = (props) => {
                         disabled={
                           loading || !formikProps.isValid || !validSignature
                         }
-                        onClick={() => setSubmitAction(true)}
+                        onClick={() => handleSubmit()}
                       />
                     </Grid>
                   )}
