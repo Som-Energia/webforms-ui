@@ -67,8 +67,8 @@ const GurbSignature = (props) => {
   }, [])
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12}>
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography sx={{ ...textHeader2 }}>{t('GURB_SIGNATURE')}</Typography>
       </Grid>
       <Grid item xs={12}>

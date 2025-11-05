@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+
 import Typography from '@mui/material/Typography'
-import { textHeader4, textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import ReviewField from '../../../../components/review/ReviewField'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import CheckBox from '@mui/material/Checkbox'
-import AlertParticipation from '../../components/AlertParticipation'
+import FormControlLabel from '@mui/material/FormControlLabel'
 
+import ReviewField from '../../../../components/review/ReviewField'
+import AlertBox from '../../../../components/AlertBox'
+
+import {
+  textHeader4,
+  textHeader2,
+  participationAlertBoxTypography,
+  participationAlertBoxIcon
+} from '../../gurbTheme'
 import { LightningIcon, EuroIcon } from '../../../../data/icons/Icons'
-
 
 const CustomCheckBox = (props) => {
   const { name, onClick, text, checked, dataCy } = props
@@ -39,26 +45,31 @@ const CustomCheckBox = (props) => {
 }
 
 const ContractReview = (props) => {
-
   const { t } = useTranslation()
   const { values, setFieldValue } = props
 
   return (
     <>
-      <Typography sx={{ ...textHeader2, mb: 8 }}>{t('CONTRACT_SUMMARY')}</Typography>
+      <Typography sx={{ ...textHeader2, mb: 4 }}>
+        {t('CONTRACT_SUMMARY')}
+      </Typography>
 
       <Grid container>
         <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <LightningIcon />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_KWH")}</Typography>
+            <Typography sx={textHeader4}>
+              {t('GURB_CONTRACT_SUMMARY_KWH')}
+            </Typography>
             <ReviewField value={`${values.gurb.power} KWh`} />
           </Box>
         </Grid>
         <Grid item xs={6} sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <EuroIcon />
           <Grid item xs={6}>
-            <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_JOIN_COST")}</Typography>
+            <Typography sx={textHeader4}>
+              {t('GURB_CONTRACT_SUMMARY_JOIN_COST')}
+            </Typography>
             <ReviewField value={`${values?.gurb?.join_cost} €`} />
           </Grid>
         </Grid>
@@ -66,51 +77,91 @@ const ContractReview = (props) => {
       <Grid container sx={{ display: 'flex', gap: 2, mb: 3 }}>
         <EuroIcon />
         <Grid item xs={6}>
-          <Typography sx={textHeader4}>{t("GURB_CONTRACT_SUMMARY_QUOTA")}</Typography>
-          <ReviewField value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
-            power: values?.gurb?.power,
-            daily_cost: values?.gurb?.daily_cost,
-            monthly_cost: (values?.gurb?.daily_cost || 0) * 30
-          })
-          } />
+          <Typography sx={textHeader4}>
+            {t('GURB_CONTRACT_SUMMARY_QUOTA')}
+          </Typography>
+          <ReviewField
+            value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
+              power: values?.gurb?.power,
+              daily_cost: values?.gurb?.daily_cost,
+              monthly_cost: (values?.gurb?.daily_cost || 0) * 30
+            })}
+          />
         </Grid>
-      </Grid >
+      </Grid>
 
-      <AlertParticipation
-        severity="info"
-        informationText={t('GURB_CONTRACT_REVIEW_INFO')}
-      />
+      <Box sx={{ mt: 4 }}>
+        <AlertBox
+          customTypographyStyle={participationAlertBoxTypography}
+          customIconStyle={participationAlertBoxIcon}
+          id="contract_review_info_alert"
+          description={t('GURB_CONTRACT_REVIEW_INFO')}
+          severity={'warning'}
+          iconCustom={true}
+          iconCustomSeverity="info"
+          variant={'body2'}
+        />
+      </Box>
 
-      <CustomCheckBox name="generic_especific_conditons_accepted"
+      <CustomCheckBox
+        name="generic_especific_conditons_accepted"
         dataCy="generic_especific_conditons_checkbox"
-        onClick={() => setFieldValue("generic_especific_conditons_accepted", !values.generic_especific_conditons_accepted)} text={{
+        onClick={() =>
+          setFieldValue(
+            'generic_especific_conditons_accepted',
+            !values.generic_especific_conditons_accepted
+          )
+        }
+        text={{
           __html: t('GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS', {
             generic_conditions_url: t('GENERIC_CONDITIONS_URL'),
             specific_conditions_url: t('GURB_CHECK_SPEECIFIC_CONDITIONS_URL')
           })
-        }} checked={values.generic_especific_conditons_accepted} />
+        }}
+        checked={values.generic_especific_conditons_accepted}
+      />
 
-      <CustomCheckBox name="privacy_policy_accepted"
+      <CustomCheckBox
+        name="privacy_policy_accepted"
         dataCy="privacy_policy_checkbox"
-        onClick={() => setFieldValue("privacy_policy_accepted", !values.privacy_policy_accepted)} text={{
+        onClick={() =>
+          setFieldValue(
+            'privacy_policy_accepted',
+            !values.privacy_policy_accepted
+          )
+        }
+        text={{
           __html: t('CONTRACT_PRIVACY_POLICY_TERMS', {
             generic_conditions_url: t('GENERIC_CONDITIONS_URL')
           })
-        }} checked={values.privacy_policy_accepted} />
+        }}
+        checked={values.privacy_policy_accepted}
+      />
 
-      <CustomCheckBox name="tariff_payment_accepted"
+      <CustomCheckBox
+        name="tariff_payment_accepted"
         dataCy="tariff_payment_checkbox"
-        onClick={() => setFieldValue("tariff_payment_accepted", !values.tariff_payment_accepted)}
-        text={{ __html: t("GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED") }}
+        onClick={() =>
+          setFieldValue(
+            'tariff_payment_accepted',
+            !values.tariff_payment_accepted
+          )
+        }
+        text={{ __html: t('GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED') }}
         checked={values.tariff_payment_accepted}
       />
-      <CustomCheckBox name="gurb_adhesion_payment_accepted"
+      <CustomCheckBox
+        name="gurb_adhesion_payment_accepted"
         dataCy="gurb_adhesion_payment_checkbox"
-        onClick={() => setFieldValue("gurb_adhesion_payment_accepted", !values.gurb_adhesion_payment_accepted)}
-        text={{ __html: t("GURB_CHECK_ADHESION_PAYMENT_ACCEPTED") }}
+        onClick={() =>
+          setFieldValue(
+            'gurb_adhesion_payment_accepted',
+            !values.gurb_adhesion_payment_accepted
+          )
+        }
+        text={{ __html: t('GURB_CHECK_ADHESION_PAYMENT_ACCEPTED') }}
         checked={values.gurb_adhesion_payment_accepted}
       />
-
     </>
   )
 }

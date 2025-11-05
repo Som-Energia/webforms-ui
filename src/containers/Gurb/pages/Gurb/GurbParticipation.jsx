@@ -87,7 +87,7 @@ const GurbParticipation = (props) => {
         <AlertBox
           customTypographyStyle={participationAlertBoxTypography}
           customIconStyle={participationAlertBoxIcon}
-          id="percent_value_error"
+          id="gurb_participation_info_alert"
           description={t(informationTextKey)}
           severity={'warning'}
           iconCustom={true}
