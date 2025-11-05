@@ -309,3 +309,10 @@ export const participationAlertBoxIcon = {
     mt: '0.35em'
   }
 }
+
+export const forceAlignLeft = {
+  '& .MuiAlert-root': {
+    justifyContent: 'flex-start !important',
+    textAlign: 'left !important'
+  }
+}

@@ -9,8 +9,7 @@ import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import { participationAlertBoxTypography } from '../../gurbTheme'
-
+import { participationAlertBoxTypography, forceAlignLeft } from '../../gurbTheme'
 
 let signaturitHook = () => undefined
 
@@ -74,15 +73,16 @@ const GurbSignature = (props) => {
         <TextRecomendation title={t('GURB_SIGNATURE')} />
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={forceAlignLeft}>
         <AlertBox
           typographySx={participationAlertBoxTypography}
-          id="percent_value_error"
+          id="gurb_signature_info_alert"
           description={t('GURB_SIGNATURE_INFO')}
           severity={'warning'}
           variant={'body2'}
         />
       </Grid>
+
       <Grid item xs={12} style={{ textAlign: 'center', width: '100%' }}>
         {loading ? (
           <CircularProgress color="secondary" />
@@ -95,7 +95,7 @@ const GurbSignature = (props) => {
         ) : (
           <iframe
             title="signaturit_iframe"
-            id="iframe_signaturit"
+            id="signature"
             src={signaturitResponseUrl}
             style={{ height: '700px', width: '100%' }}
           />
