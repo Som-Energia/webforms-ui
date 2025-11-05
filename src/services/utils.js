@@ -105,6 +105,7 @@ export const checkPhisicalVAT = (vat) => {
 }
 
 export const normalizeHolderChange = (contract, isMemberMandatoryForHolderchange) => {
+
   const normalContract = JSON.parse(JSON.stringify(contract))
 
   if (normalContract?.supply_point?.verified !== undefined) {
@@ -195,8 +196,6 @@ export const normalizeHolderChange = (contract, isMemberMandatoryForHolderchange
     normalContract.member.become_member = false
     if (isMemberMandatoryForHolderchange)
       normalContract.member.link_member = true
-    else
-      normalContract.member.link_member = false
   }
   'ismember' in normalContract?.holder && delete normalContract.holder.ismember
 
