@@ -75,7 +75,7 @@ const GurbSignature = (props) => {
 
       <Grid item xs={12} sx={forceAlignLeft}>
         <AlertBox
-          typographySx={participationAlertBoxTypography}
+          customTypographyStyle={participationAlertBoxTypography}
           id="gurb_signature_info_alert"
           description={t('GURB_SIGNATURE_INFO')}
           severity={'warning'}
