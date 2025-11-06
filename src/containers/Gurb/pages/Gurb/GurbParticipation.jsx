@@ -61,6 +61,8 @@ const GurbParticipation = (props) => {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
 
       <TextRecomendation
+        required={true}
+        isHeader={true}
         title={t('GURB_PARTICIPATION_KW_INPUT_TEXT')}
         text={t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}
       />

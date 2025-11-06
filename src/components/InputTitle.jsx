@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-const InputTitle = ({ text, description, required }) => {
+const InputTitle = ({ text, description, required, isHeader }) => {
   return (
     <>
     <Box
@@ -11,7 +11,7 @@ const InputTitle = ({ text, description, required }) => {
         flexDirection: 'row',
         gap: 1
       }}>
-      <Typography variant="input.label" color="primary.main">
+      <Typography variant={isHeader ? "headline4.regular" : "input.label"} color="primary.main">
         {text}
       </Typography>
       {required && (
