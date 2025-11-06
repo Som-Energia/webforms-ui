@@ -137,6 +137,7 @@ const GurbFormJoin = (props) => {
             <Box
               sx={somStepperBox}>
               <SomStepper
+                showStepTitle={true}
                 activeStep={activeStep}
                 steps={[...Array(MAX_STEPS_NUMBER).keys()]}
               />
