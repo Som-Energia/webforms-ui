@@ -1,13 +1,22 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import Typography from '@mui/material/Typography'
-import { textHeader4, textField, textHeader5, textHeader2 } from '../../gurbTheme'
-import Box from '@mui/material/Box'
-import Select from '../../components/Select'
-import Alert from '@mui/material/Alert'
-import { getPowers } from '../../../../services/api'
 
-const TWENTY_TD_TARIFF = "2.0 TD"
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+
+import Select from '../../components/Select'
+import AlertBox from '../../../../components/AlertBox'
+import { getPowers } from '../../../../services/api'
+import TextRecomendation from '../../components/TextRecomendation'
+
+import {
+  textField,
+  textHeader5,
+  participationTypography,
+  participationAlertBoxTypography,
+  participationAlertBoxIcon
+} from '../../gurbTheme'
+
 
 const GurbParticipation = (props) => {
   const { values, setFieldValue, gurbCode } = props
@@ -27,47 +36,68 @@ const GurbParticipation = (props) => {
         })
         setFieldValue('gurb.join_cost', response.data.initial_quota)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
   }, [gurbCode, values.tariff_name])
 
   useEffect(() => {
     getAvailablePowers()
   }, [getAvailablePowers])
 
+  const onChangePower = useCallback(
+    async (value) => {
+      await setFieldValue('gurb.power', value)
+      await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * value))
+    },
+    [setFieldValue, gurbDetails]
+  )
 
-  const onChangePower = useCallback(async (value) => {
-    await setFieldValue('gurb.power', value)
-    await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * value))
-  }, [setFieldValue, gurbDetails])
-
+  const TWENTY_TD_TARIFF = '2.0TD'
+  const informationTextKey =
+    values.tariff_name === TWENTY_TD_TARIFF
+      ? 'GURB_PARTICIPATION_TEXT_20'
+      : 'GURB_PARTICIPATION_TEXT_30'
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      <Typography sx={{ ...textHeader2, mb: 5 }}>{t('GURB_PARTICIPATION')}</Typography>
-      <Typography sx={textHeader4}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT')}</Typography>
-      <Typography sx={textHeader5}>{t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}</Typography>
+
+      <TextRecomendation
+        required={true}
+        isHeader={true}
+        title={t('GURB_PARTICIPATION_KW_INPUT_TEXT')}
+        text={t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}
+      />
+
       <Select
         options={gurbDetails.available_betas ?? []}
         value={values.gurb.power}
         handleChange={(value) => onChangePower(value)}
         style={textField}
-        helperText={
+      />
+
+      <Typography
+        sx={participationTypography}>
+        {
           <span
             dangerouslySetInnerHTML={{
               __html: t('GURB_HELP_ANNUAL_CONSUMPTION', {
                 url: t('GURB_HELP_ANNUAL_CONSUMPTION_URL')
               })
-            }}
-          />
+            }}></span>
         }
-      />
-      {values.tariff_name === TWENTY_TD_TARIFF ?
-        <Alert severity='warning'>
-          <Typography color="inherit" align='justify' dangerouslySetInnerHTML={{
-            __html: t('GURB_PARTICIPATION_TEXT_1')
-          }} />
-        </Alert>
-        : null}
+      </Typography>
+
+      <Box sx ={{ mt: 4 }}>
+        <AlertBox
+          customTypographyStyle={participationAlertBoxTypography}
+          customIconStyle={participationAlertBoxIcon}
+          id="gurb_participation_info_alert"
+          description={t(informationTextKey)}
+          severity={'warning'}
+          iconCustom={true}
+          iconCustomSeverity="info"
+          variant={'body2'}
+        />
+      </Box>
     </Box>
   )
 }

@@ -21,7 +21,9 @@ const NifCif = (props) => {
     setValues,
     setFieldError,
     setFieldTouched,
-    entity = "" // where we are saving nifcif info
+    entity = "", // where we are saving nifcif info
+    textFieldNameKey,
+    helperText = true
   } = props
   const { t } = useTranslation()
   const { setLoading } = useContext(GurbLoadingContext)
@@ -82,8 +84,8 @@ const NifCif = (props) => {
         <InputField
           data-cy={`${entity}.nif`}
           name={`${entity}.nif`}
-          textFieldName={t('NIF_FIELD')}
-          textFieldHelper={t('MEMBER_NIF_HELPER')}
+          textFieldName={t(textFieldNameKey) || t('NIF_FIELD')}
+          textFieldHelper={helperText && t('MEMBER_NIF_HELPER')}
           handleChange={handleChangeNif}
           handleBlur={handleBlur}
           touched={touched[entity]?.nif}

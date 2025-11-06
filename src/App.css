@@ -118,3 +118,6 @@ StepHeader Component
   margin: 3px 0px 0px;
 }
 
+#root b {
+  font-weight: 700;
+}

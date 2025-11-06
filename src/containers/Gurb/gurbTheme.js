@@ -261,3 +261,58 @@ export const dialogText = (severity) => ({
   }
 })
 
+export const somStepperBox = {
+  marginBottom: {
+    xs: '30px',
+    sm: '40px'
+  }
+}
+
+export const alertParticipation = {
+  mt: 4,
+  mb: 4,
+  color: '#ed6c02',
+  backgroundColor: 'rgb(255, 244, 229)',
+  '& .MuiAlert-icon': {
+    color: '#ed6c02',
+    mt: '0.3em'
+  }
+}
+
+export const alertParticipationTypography = {
+  color: '#ed6c02',
+  '& a, & a:link, & a:visited, & a:active': {
+    color: '#ed6c02 !important',
+    textDecoration: 'underline'
+  }
+}
+
+export const participationTypography = {
+  '& a, & a:link, & a:visited, & a:active': {
+    fontFamily: 'Outfit',
+    color: '#919191 !important',
+    fontSize: '14px'
+  }
+}
+
+export const participationAlertBoxTypography = {
+  textAlign: 'left',
+  fontSize: '16px',
+  mt: '2px'
+}
+
+export const participationAlertBoxIcon = {
+  alignItems: 'flex-start',
+  '& .MuiAlert-icon': {
+    display: 'flex',
+    alignItems: 'flex-start',
+    mt: '0.35em'
+  }
+}
+
+export const forceAlignLeft = {
+  '& .MuiAlert-root': {
+    justifyContent: 'flex-start !important',
+    textAlign: 'left !important'
+  }
+}

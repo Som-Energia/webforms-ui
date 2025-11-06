@@ -12,6 +12,7 @@ import { Formik } from 'formik'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
 import PrevButton from '../components/NewButtons/PrevButton'
 import NextButton from '../components/NewButtons/NextButton'
@@ -32,6 +33,8 @@ import GurbIdentification from './Gurb/pages/Gurb/GurbIdentification'
 import GurbParticipation from './Gurb/pages/Gurb/GurbParticipation'
 import ContractReview from './Gurb/pages/Gurb/ContractReview'
 import GurbSignature from './Gurb/pages/Gurb/GurbSignature'
+
+import { somStepperBox } from './Gurb/gurbTheme'
 
 const MAX_STEPS_NUMBER = 4
 
@@ -131,10 +134,15 @@ const GurbFormJoin = (props) => {
         validateOnBlur={false}>
         {(formikProps) => (
           <>
-            <SomStepper
-              activeStep={activeStep}
-              steps={[...Array(MAX_STEPS_NUMBER).keys()]}
-            />
+            <Box
+              sx={somStepperBox}>
+              <SomStepper
+                showStepTitle={true}
+                activeStep={activeStep}
+                steps={[...Array(MAX_STEPS_NUMBER).keys()]}
+              />
+            </Box>
+
             {error ? getStepResult(errorInfo) : getStep(formikProps)}
 
             {!error && (
@@ -165,7 +173,7 @@ const GurbFormJoin = (props) => {
                       />
                     </Grid>
                   ) : (
-                    <Grid item sm={4} xs={12}>
+                    <Grid item sm={4} xs={12} sx={{ mx: 'auto' }}>
                       <SubmitButton
                         text="GURB_NEXT_PAYMENT"
                         disabled={
