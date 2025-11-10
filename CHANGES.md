@@ -4,6 +4,7 @@
 
 - IMP: remove unnecessary subtitle
 - FIX: Fixed asyncronims of setFields
+- FIX: one power decimal when light off
 
 ## 6.1.2
 
