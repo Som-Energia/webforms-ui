@@ -6,7 +6,7 @@
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
     "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov && ./scripts/rename-assets-ov.sh",
-    "build:wp": "npm run build -- --mode=wp",
+    "build:prod": "npm run build -- --mode=prod",
     "build:pre": "npm run build -- --mode=pre",
     "build:vercel": "npm run build -- --mode=vercel",
     "test": "TZ=Europe/Madrid vitest",
