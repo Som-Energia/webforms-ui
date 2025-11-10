@@ -5,6 +5,7 @@
 - IMP: remove unnecessary subtitle
 - FIX: Fixed asyncronims of setFields
 - FIX: one power decimal when light off
+- FIX: use old StateCity component in holderchange
 
 ## 6.1.2
 
