@@ -18,7 +18,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined'
 
 import StepHeader from '../../components/StepHeader'
-import StateCity from '../../components/StateCity'
+import StateCity from './StateCity'
 import TermsDialog from '../../components/TermsDialog'
 import VATField from '../../components/VATField'
 
