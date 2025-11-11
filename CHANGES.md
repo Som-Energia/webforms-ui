@@ -1,5 +1,9 @@
 # Change Log
 
+## 6.2.1
+
+- New script deploy
+
 ## 6.2.0
 
 - IMP: remove unnecessary subtitle
