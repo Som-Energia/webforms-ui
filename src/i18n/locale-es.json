@@ -949,7 +949,7 @@
     "GURB_SELFCONSUMPTION_YES_HEADER": "Sí, tengo autoconsumo",
     "GURB_SELFCONSUMPTION_NO_HEADER": "No tengo autoconsumo",
     "GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT": "Puesto que ya tienes una modalidad de autoconsumo, ahora mismo no puedes formar parte del proyecto GURB. ¡Muchas gracias por tu interés!",
-    "GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT": "Puedes ver más información haciendo <a target='_blank' href='https://ca.support.somenergia.coop/'>click aquí</a>.",
+    "GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT": "Puedes ver más información haciendo <a target='_blank' href='https://es.support.somenergia.coop/article/1443-que-es-gurb-y-como-te-puedes-adherir#no_compatible'>click aquí</a>.",
     "GURB_SELFCONSUMPTION_ERROR_LINK_TEXT": "",
     "GURB_HAS_MEMBER_TITLE": "",
     "GURB_APADRINATING_HELPER": "",

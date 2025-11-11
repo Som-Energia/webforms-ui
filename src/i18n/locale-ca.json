@@ -767,7 +767,7 @@
     "SELFCONSUMPTION_NO_HEADER": "No tinc autoconsum",
     "SELFCONSUMPTION_NO_BODY": "Actualment no disposo de cap modalitat d'autoconsum",
     "GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT": "Com que ja tens una modalitat d'autoconsum, ara mateix no pots formar part del projecte GURB. Moltes gràcies pel teu interès!",
-    "GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT": "Pots veure més informació fent <a target='_blank' href='https://ca.support.somenergia.coop/'>click aquí</a>.",
+    "GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT": "Pots veure més informació fent <a target='_blank' href='https://ca.support.somenergia.coop/article/1437-que-es-gurb-i-com-t-hi-pots-adherir#no_compatible'>click aquí</a>.",
     "GURB_SELFCONSUMPTION_ERROR_LINK_TEXT": "No tinc cap modalitat d’autoconsum activa",
     "GURB_HAS_MEMBER_TITLE": "4. Ets soci/a de Som Energia o coneixes a algú que ho és i pot apadrinar-te?",
     "GURB_APADRINATING_HELPER": "Com em poden apadrinar?",
