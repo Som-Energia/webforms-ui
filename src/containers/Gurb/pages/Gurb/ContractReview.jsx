@@ -16,7 +16,15 @@ import {
   participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../gurbTheme'
-import { LightningIcon, EuroIcon } from '../../../../data/icons/Icons'
+import {
+  LightningIcon,
+  EuroIcon,
+  PlaceMapIcon,
+  SolarpanelIcon,
+  CreditCardIcon,
+  ReceiptIcon,
+  PhoneIcon
+} from '../../../../data/icons/Icons'
 
 const CustomCheckBox = (props) => {
   const { name, onClick, text, checked, dataCy } = props
@@ -52,7 +60,7 @@ const ContractReview = (props) => {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12} sx={{ mb: 2 }}>
-          <TextRecomendation title={t('CONTRACT_SUMMARY')} />
+          <TextRecomendation title={t('CONTRACT_SUMMARY')} isHeader={true} />
         </Grid>
 
         {/* KWH Section */}
@@ -82,9 +90,9 @@ const ContractReview = (props) => {
         </Grid>
 
         {/* Quota Section */}
-        <Grid item xs={12} sx={{ mb: 3 }}>
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
-            <EuroIcon />
+            <ReceiptIcon />
             <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <Typography sx={textHeader4}>
                 {t('GURB_CONTRACT_SUMMARY_QUOTA')}
@@ -95,6 +103,66 @@ const ContractReview = (props) => {
                   daily_cost: values?.gurb?.daily_cost,
                   monthly_cost: (values?.gurb?.daily_cost || 0) * 30
                 })}
+              />
+            </Box>
+          </Box>
+        </Grid>
+
+        {/* Gurb Type Section */}
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <SolarpanelIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_GURB_TYPE')}
+              </Typography>
+              <ReviewField
+                value={t('GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION')}
+              />
+            </Box>
+          </Box>
+        </Grid>
+
+        {/* Supplypoint Section*/}
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <PlaceMapIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_SUPPLYPOINT')}
+              </Typography>
+              <ReviewField
+                value={t('GURB_CONTRACT_SUMMARY_SUPPLYPOINT_DESCRIPTION')}
+              />
+            </Box>
+          </Box>
+        </Grid>
+
+        {/* Payment Section */}
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <CreditCardIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_PAYMENT')}
+              </Typography>
+              <ReviewField
+                value={t('GURB_CONTRACT_SUMMARY_PAYMENT_DESCRIPTION')}
+              />
+            </Box>
+          </Box>
+        </Grid>
+
+        {/* Contact Section */}
+        <Grid item xs={12} md={6} sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <PhoneIcon />
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <Typography sx={textHeader4}>
+                {t('GURB_CONTRACT_SUMMARY_CONTACT')}
+              </Typography>
+              <ReviewField
+                value={t('GURB_CONTRACT_SUMMARY_CONTACT_DESCRIPTION')}
               />
             </Box>
           </Box>
