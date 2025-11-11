@@ -83,7 +83,7 @@ function upload () {
     export RSYNC_RSH
     log_message "INFO" "Uploading build build_$today to $deploy_server:$port"
     script_path=$(dirname $0)
-    rsync -avz $script_path/../build/* $user@$deploy_server:$dest_dir
+    rsync -avz $script_path/../forms/* $user@$deploy_server:$dest_dir
     if [ $? != 0 ]
     then
         log_message "ERROR" "An error ocurred uploading code: $?"
