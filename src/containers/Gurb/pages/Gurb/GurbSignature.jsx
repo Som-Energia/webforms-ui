@@ -31,7 +31,7 @@ const GurbSignature = (props) => {
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
   const { i18n } = useTranslation()
-  const [erpError, setErpError] = useState('')
+  const [erpError, setErpError] = useState(false)
 
   signaturitHook = useCallback(
     (e) => {
@@ -57,7 +57,7 @@ const GurbSignature = (props) => {
         setSignaturitResponseUrl(response?.data?.signaturit_url)
       })
       .catch((err) => {
-        setErpError(err)
+        setErpError(true)
         console.log(err)
       })
       .finally(() => {
