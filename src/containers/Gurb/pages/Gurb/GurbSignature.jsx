@@ -31,6 +31,7 @@ const GurbSignature = (props) => {
   const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
   const [loading, setLoading] = useState(true)
   const { i18n } = useTranslation()
+  const [erpError, setErpError] = useState(false)
 
   signaturitHook = useCallback(
     (e) => {
@@ -56,6 +57,7 @@ const GurbSignature = (props) => {
         setSignaturitResponseUrl(response?.data?.signaturit_url)
       })
       .catch((err) => {
+        setErpError(true)
         console.log(err)
       })
       .finally(() => {
@@ -68,40 +70,52 @@ const GurbSignature = (props) => {
   }, [])
 
   return (
-    <Grid container>
-      <Grid item xs={12} sx={{ mb: 2 }}>
-        <TextRecomendation title={t('GURB_SIGNATURE')} />
-      </Grid>
-
-      <Grid item xs={12} sx={forceAlignLeft}>
-        <AlertBox
-          customTypographyStyle={participationAlertBoxTypography}
-          id="gurb_signature_info_alert"
-          description={t('GURB_SIGNATURE_INFO')}
-          severity={'warning'}
-          variant={'body2'}
-        />
-      </Grid>
-
-      <Grid item xs={12} style={{ textAlign: 'center', width: '100%' }}>
-        {loading ? (
+    <>
+      {loading ? (
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent:'center'}}>
           <CircularProgress color="secondary" />
-        ) : validSignature ? (
-          <Result
-            mode="success"
-            title={t('SIGNATURIT_COMPLETE_TITLE')}
-            description={t('SIGNATURIT_COMPLETE_DESCRIPTION')}
-          />
-        ) : (
-          <iframe
-            title="signaturit_iframe"
-            id="signature"
-            src={signaturitResponseUrl}
-            style={{ height: '700px', width: '100%' }}
-          />
-        )}
-      </Grid>
-    </Grid>
+        </Grid>
+      ) : erpError ? (
+        <Result
+          mode="failure"
+          title={t('GURB_ERROR_TITLE')}
+          description={t('GURB_ERROR_DESCRIPTION')}
+        />
+      ) : (
+        <Grid container>
+          <Grid item xs={12} sx={{ mb: 2 }}>
+            <TextRecomendation title={t('GURB_SIGNATURE')} />
+          </Grid>
+
+          <Grid item xs={12} sx={forceAlignLeft}>
+            <AlertBox
+              customTypographyStyle={participationAlertBoxTypography}
+              id="gurb_signature_info_alert"
+              description={t('GURB_SIGNATURE_INFO')}
+              severity={'warning'}
+              variant={'body2'}
+            />
+          </Grid>
+
+          <Grid item xs={12} sx={{ textAlign: 'center', width: '100%' }}>
+            {validSignature ? (
+              <Result
+                mode="success"
+                title={t('SIGNATURIT_COMPLETE_TITLE')}
+                description={t('SIGNATURIT_COMPLETE_DESCRIPTION')}
+              />
+            ) : (
+              <iframe
+                title="signaturit_iframe"
+                id="signature"
+                src={signaturitResponseUrl}
+                style={{ height: '700px', width: '100%' }}
+              />
+            )}
+          </Grid>
+        </Grid>
+      )}
+    </>
   )
 }
 
