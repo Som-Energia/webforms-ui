@@ -142,9 +142,7 @@ export default function LocationInput({
                 // Only reset id if the input string does not match the current value
                 if (!normalizedValue.street || e.target.value !== normalizedValue.street) {
                   onChange({ id: null, street: e.target.value })
-                } else {
-                  onChange(normalizedValue)
-                }
+                } 
               }}
               error={Boolean(touched && error)}
               helperText={helperText}
