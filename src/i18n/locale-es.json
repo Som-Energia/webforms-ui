@@ -773,14 +773,15 @@
     "GURB_DRAG_AND_DROP_HERE": "o arrastra y suelta aquí",
     "GURB_TYPE_OF_FILES": "PDF, JPG, JPEG (máx. 5MB)",
     "GURB_CHECK_TARIFF_PAYMENNT_ACCEPTED": "La aceptación de estas condiciones particulares obliga al pago del consumo al precio que resulte de la aplicación de la tarifa contratada.",
-    "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED": "Con la contratación del servicio GURB me obligo a pagar coste de adhesión único, una vez verificada mi plaza en GURB Mataró, y la cuota GURB, que se aplicará a partir del primer día posterior a la fecha de activación.",
-    "GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS": "He leído las <a href=\"{{generic_conditions_url}}\" >condiciones generales de contratación </a> y las <a href=\"{{specific_conditions_url}}\" >condiciones específicas del servicio GURB</a> de Som Energia.",
-    "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "GURB_CHECK_SPECIFIC_CONDITIONS_URL",
+    "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED": "Con la contratación del servicio GURB me obligo al pago del coste de Adhesión único una vez verificada mi plaza en GURB y de la Cuota GURB que será de aplicación a partir del primer día posterior a la fecha de activación.",
+    "GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS": "He leído las <a target='_blank' href=\"{{generic_conditions_url}}\" >condiciones generales de contractación </a> de Som Energia, las <a target='_blank' href=\"{{gurb_specific_conditions_url}}\" >condiciones específicas del servicio GURB</a> y tus <a target='_blank' href=\"{{contract_specific_conditions_url}}\" >condiciones particulares de contractación </a>.",
+    "GENERIC_CONDITIONS_URL": "https://back.somenergia.coop/storage/app/media/DOCS/Condiciones-generales-contrato-suministro-energia-electrica-SomEnergia.pdf",
+    "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "https://back.somenergia.coop/storage/app/media/DOCS/Condiciones_especificas_GURB.pdf",
+    "CONTRACT_CHECK_SPECIFIC_CONDITIONS_URL": "https://ca.support.somenergia.coop/",
     "SELFCONSUMPTION_YES_HEADER": "Sí tengo autoconsumo",
     "SELFCONSUMPTION_YES_BODY": "Cualquier proyecto que sea de generación energética",
     "SELFCONSUMPTION_NO_HEADER": "No tengo autoconsumo",
     "SELFCONSUMPTION_NO_BODY": "Actualmente no dispongo de ninguna modalidad de autoconsumo",
-    "GENERIC_CONDITIONS_URL": "GENERIC_CONDITIONS_URL",
     "GURB_LANGUAGE_FIELD": "Idioma de la comunicación con Som Energia",
     "GURB_ADDRESS_LABEL": "GURB_ADDRESS_LABEL",
     "NEXT": "Siguiente",
@@ -1091,5 +1092,6 @@
     "GURB_MEMBER_TITLE": "Identificación",
     "GURB_PARTICIPATION_TEXT_20": "A continuación recomendamos qué potencia GURB contratar según tu consumo. Si tu consumo anual de electricidad es:<ul><li>De entre 1.000 kWh y 2.500 kWh → contrata <b>0,5 kW</b></li><li>Superior a 2.500 kWh → contrata <b>1 kW</b></li></ul>En caso de querer una participación más elevada puedes escribir un correo a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> y valoraremos tu petición en función de tu consumo anual y la disponibilidad de plazas que haya.<br /><br /><b>Puedes encontrar tu consumo anual en cualquier factura de electricidad.</b>",
     "GURB_PARTICIPATION_TEXT_30": "La potencia de GURB más óptima para contratar, variará en función de diversos factores como el consumo anual, pero también las horas en que se produzca el consumo. A continuación te proponemos unos valores estimados de potencia GURB a contratar en base al consumo. Puedes encontrar tu consumo anual en cualquier factura de electricidad. Si tu consumo anual de electricidad es: <ul><li>Hasta 4.000 kWh → contrata <b>1 kW</b></li><li>Entre 4.000 kWh y 6.000 kWh → contrata <b>1,5 kW</b></li><li>Entre 6.000 kWh y 8.000 kWh → contrata  <b>2 kW</b></li><li>Entre 8.000 kWh y 10.000 kWh → contrata  <b>3 kW</b></li><li>Entre 10.000 kWh y 12.500 kWh → contrata  <b>4 kW</b><li>Entre 12.500 kWh y 15.000 kWh → contrata  <b>5 kW</b></li></ul><b>Si tu consumo es superior a 15.000 kWh anuales, puedes escribir un correo a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> y valoraremos tu petición en función de tu consumo anual y la disponibilidad de plazas que haya.</b>",
-    "GURB_PARTICIPATION_NIF_TITLE": "Indica el DNI de la persona titular del contrato"
+    "GURB_PARTICIPATION_NIF_TITLE": "Indica el DNI de la persona titular del contrato",
+    "GURB_PURPOSE": ""
 }
