@@ -750,7 +750,7 @@
     "GURB_HAS_NO_LIGHT_HEADER": "No, no hi ha llum",
     "GURB_HAS_NO_LIGHT_BODY": "No tinc donada d'alta la llum amb cap comercialitzadora.",
     "GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT": "Per participar al projecte de GURB <b>primer has de donar d'alta el subministrament elèctric.</b>",
-    "GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT": "<b>Pots fer-ho emplenant <a target='_blank' href=https://somenergia.coop/>aquest formulari</a>.</b>",
+    "GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT": "<b>Pots fer-ho emplenant <a target='_blank' href=https://www.somenergia.coop/ca/contracta-la-llum-domestic/>aquest formulari</a>.</b>",
     "GURB_LIGHT_QUESTION_ERROR_LINK_TEXT": "Sí que tinc llum a casa",
     "GURB_ADDRESS_TITLE": "2. Indica l'adreça de subministrament",
     "GURB_ADDRESS_TITLE_HELPER": "La ubicació on es realitza el consum d'energia. Hem de verificar que l'adreça estigui dins els 2 km de radi de la instal·lació.",

@@ -938,7 +938,7 @@
     "GURB_HAS_NO_LIGHT_HEADER": "No, no hay luz",
     "GURB_HAS_NO_LIGHT_BODY": "",
     "GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT": "Para participar en el proyecto de GURB <b>primero has de dar de alta el suministro eléctrico.</b>",
-    "GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT": "<b>Puedes hacerlo rellenando <a target='_blank' href=https://somenergia.coop/>este formulario</a>.</b>",
+    "GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT": "<b>Puedes hacerlo rellenando <a target='_blank' href=https://www.somenergia.coop/es/contrata-la-luz-domestico/>este formulario</a>.</b>",
     "GURB_LIGHT_QUESTION_ERROR_LINK_TEXT": "",
     "GURB_ADDRESS_TITLE": "2. Indica la dirección del suministro",
     "GURB_ADDRESS_TITLE_HELPER": "La ubicación en la que se realiza el consumo de energía. Debemos verificar que la dirección esté dentro de los 2 km de radio de la instalación.",
