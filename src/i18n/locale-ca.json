@@ -767,7 +767,7 @@
     "SELFCONSUMPTION_NO_HEADER": "No tinc autoconsum",
     "SELFCONSUMPTION_NO_BODY": "Actualment no disposo de cap modalitat d'autoconsum",
     "GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT": "Com que ja tens una modalitat d'autoconsum, ara mateix no pots formar part del projecte GURB. Moltes gràcies pel teu interès!",
-    "GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT": "Pots veure més informació fent <a target='_blank' href='https://ca.support.somenergia.coop/'>click aquí</a>.",
+    "GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT": "Pots veure més informació fent <a target='_blank' href='https://ca.support.somenergia.coop/article/1437-que-es-gurb-i-com-t-hi-pots-adherir#no_compatible'>click aquí</a>.",
     "GURB_SELFCONSUMPTION_ERROR_LINK_TEXT": "No tinc cap modalitat d’autoconsum activa",
     "GURB_HAS_MEMBER_TITLE": "4. Ets soci/a de Som Energia o coneixes a algú que ho és i pot apadrinar-te?",
     "GURB_APADRINATING_HELPER": "Com em poden apadrinar?",
@@ -1108,5 +1108,7 @@
     "GURB_MEMBER_TITLE": "Identificació",
     "GURB_PARTICIPATION_TEXT_20": "A continuació recomanem quina potència GURB contractar en segons el teu consum. Si el teu consum anual d'electricitat és:<ul><li>D'entre 1.000 kWh i 2.500 kWh → contracta <b>0,5 kW</b></li><li>Superior a 2.500 kWh → contracta <b>1 kW</b></li></ul>En cas de voler una participació més elevada pots escriure un correu a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> i valorarem la teva petició en funció del teu consum anual i la disponibilitat de places que hi hagi.<br /><br /><b>Pots trobar el teu consum anual a qualsevol factura d'electricitat.</b>",
     "GURB_PARTICIPATION_TEXT_30": "La potència de GURB més òptima per a contractar, variarà en funció de diversos factors com consum anual, però també les hores en què es produeixi el consum. A continuació et proposem uns valors estimats de potència GURB a contractar en base al consum. Pots trobar el teu consum anual a qualsevol factura d'electricitat. Si el teu consum anual d'electricitat és: <ul><li>Fins a 4.000 kWh → contracta <b>1 kW</b></li><li>Entre 4.000 kWh i 6.000 kWh → contracta <b>1,5 kW</b></li><li>Entre 6.000 kWh i 8.000 kWh → contracta  <b>2 kW</b></li><li>Entre 8.000 kWh i 10.000 kWh → contracta  <b>3 kW</b></li><li>Entre 10.000 kWh i 12.500 kWh → contracta  <b>4 kW</b><li>Entre 12.500 kWh i 15.000 kWh → contracta  <b>5 kW<b></li></ul><b>Si el teu consum és superior a 15.000 kWh anuals, pots escriure un correu a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> i valorarem la teva petició en funció del teu consum anual i la disponibilitat de places que hi hagi.</b>",
-    "GURB_PARTICIPATION_NIF_TITLE": "Indica el DNI de la persona titular del contracte"
+    "GURB_PARTICIPATION_NIF_TITLE": "Indica el DNI de la persona titular del contracte",
+    "GURB_ERROR_TITLE": "Hi ha un error i no s'ha pogut completar el procés.",
+    "GURB_ERROR_DESCRIPTION": "Si us plau, intenta-ho de nou en una estona. Si el problema persisteix, ens pots escriure a gurb@somenergia.coop o trucar-nos al 900 103 605 per tal que revisem la situació. Disculpa les molèsties."
 }
