@@ -1077,6 +1077,14 @@
     "GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION": "La Quota de GURB de {{power}} kW té un cost diari de {{daily_cost}}€ euros. Això equival a uns {{monthly_cost}} euros al mes, aproximadament.",
     "GURB_CONTRACT_SUMMARY_JOIN_COST": "Cost d'adhesió",
     "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION": "",
+    "GURB_CONTRACT_SUMMARY_GURB_TYPE": "Tipus de GURB",
+    "GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION": "El GURB que estás contratando és con modalidad SIN compensación de excedentes. <a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/1451-gurb-tipologia-de-autoconsumo-y-flux-solar?utm_source=linkidiomes&utm_medium=cda&utm_campaign=castellano\">Más información aquí.</a>",
+    "GURB_CONTRACT_SUMMARY_SUPPLYPOINT": "Punt de subministrament",
+    "GURB_CONTRACT_SUMMARY_SUPPLYPOINT_DESCRIPTION": "Segons les dades que tinguis a <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/es/\">l'Oficina Virtual.</a>",
+    "GURB_CONTRACT_SUMMARY_PAYMENT": "Dades de pagament",
+    "GURB_CONTRACT_SUMMARY_PAYMENT_DESCRIPTION": "Segons les dades que tinguis a <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/es/\">l'Oficina Virtual.</a>",
+    "GURB_CONTRACT_SUMMARY_CONTACT": "Informació de contacte",
+    "GURB_CONTRACT_SUMMARY_CONTACT_DESCRIPTION": "Segons les dades que tinguis a <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/es/\">l'Oficina Virtual.</a>",
     "GURB_SIGNATURE_INFO": "",
     "SIGNATURIT_COMPLETE_TITLE": "Has signat el  contracte correctament",
     "SIGNATURIT_COMPLETE_DESCRIPTION": "Segueix amb el pagament per finalitzar la contractació",
@@ -1093,7 +1101,8 @@
     "GURB_PARTICIPATION_TEXT_20": "A continuación recomendamos qué potencia GURB contratar según tu consumo. Si tu consumo anual de electricidad es:<ul><li>De entre 1.000 kWh y 2.500 kWh → contrata <b>0,5 kW</b></li><li>Superior a 2.500 kWh → contrata <b>1 kW</b></li></ul>En caso de querer una participación más elevada puedes escribir un correo a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> y valoraremos tu petición en función de tu consumo anual y la disponibilidad de plazas que haya.<br /><br /><b>Puedes encontrar tu consumo anual en cualquier factura de electricidad.</b>",
     "GURB_PARTICIPATION_TEXT_30": "La potencia de GURB más óptima para contratar, variará en función de diversos factores como el consumo anual, pero también las horas en que se produzca el consumo. A continuación te proponemos unos valores estimados de potencia GURB a contratar en base al consumo. Puedes encontrar tu consumo anual en cualquier factura de electricidad. Si tu consumo anual de electricidad es: <ul><li>Hasta 4.000 kWh → contrata <b>1 kW</b></li><li>Entre 4.000 kWh y 6.000 kWh → contrata <b>1,5 kW</b></li><li>Entre 6.000 kWh y 8.000 kWh → contrata  <b>2 kW</b></li><li>Entre 8.000 kWh y 10.000 kWh → contrata  <b>3 kW</b></li><li>Entre 10.000 kWh y 12.500 kWh → contrata  <b>4 kW</b><li>Entre 12.500 kWh y 15.000 kWh → contrata  <b>5 kW</b></li></ul><b>Si tu consumo es superior a 15.000 kWh anuales, puedes escribir un correo a <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a> y valoraremos tu petición en función de tu consumo anual y la disponibilidad de plazas que haya.</b>",
     "GURB_PARTICIPATION_NIF_TITLE": "Indica el DNI de la persona titular del contrato",
-    "GURB_PURPOSE": "",
+    "GURB_PURPOSE": "FINALIDAD:",
     "GURB_ERROR_TITLE": "Hi ha un error i no s'ha pogut completar el procés.",
-    "GURB_ERROR_DESCRIPTION": "Si us plau, intenta-ho de nou en una estona. Si el problema persisteix, ens pots escriure a gurb@somenergia.coop o trucar-nos al 900 103 605 per tal que revisem la situació. Disculpa les molèsties."
+    "GURB_ERROR_DESCRIPTION": "Si us plau, intenta-ho de nou en una estona. Si el problema persisteix, ens pots escriure a gurb@somenergia.coop o trucar-nos al 900 103 605 per tal que revisem la situació. Disculpa les molèsties.",
+    "GURB_NEXT_PAYMENT": "Seguir amb pagament"
 }

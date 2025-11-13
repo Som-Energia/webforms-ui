@@ -1092,7 +1092,7 @@
     "GURB_CONTRACT_SUMMARY_JOIN_COST": "Cost d'adhesió",
     "GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION": "Pagament únic de {{join_cost}}€ (IVA inclós)",
     "GURB_CONTRACT_SUMMARY_GURB_TYPE": "Tipus de GURB",
-    "GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION": "El GURB que estàs contractant és amb modalitat SENSE compensació d'excedents. <a target=\"_blank\" href=\"https://ca.support.somenergia.coop\">Més informació aquí.</a>",
+    "GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION": "El GURB que estàs contractant és amb modalitat SENSE compensació d'excedents. <a target=\"_blank\" href=\"https://ca.support.somenergia.coop/article/1439-gurb-tipologia-d-autoconsum-i-flux-solar\">Més informació aquí.</a>",
     "GURB_CONTRACT_SUMMARY_SUPPLYPOINT": "Punt de subministrament",
     "GURB_CONTRACT_SUMMARY_SUPPLYPOINT_DESCRIPTION": "Segons les dades que tinguis a <a target=\"_blank\" href=\"https://oficinavirtual.somenergia.coop/ca/\">l'Oficina Virtual.</a>",
     "GURB_CONTRACT_SUMMARY_PAYMENT": "Dades de pagament",
