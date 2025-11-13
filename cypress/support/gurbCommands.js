@@ -34,7 +34,8 @@ Cypress.Commands.add(
         data: {
           cups: cups,
           status: status,
-          tariff_type: null
+          tariff_type: 'null',
+          tariff_name: '2.0TD'
         },
         state: statusCode === 200,
         status: 'ONLINE'
@@ -74,11 +75,10 @@ Cypress.Commands.add(
 )
 
 Cypress.Commands.add('acceptAllConditionsOnGurb', () => {
-  cy.get('[data-cy="generic_especific_conditons_checkbox"]').click()
   cy.get('[data-cy="privacy_policy_checkbox"]').click()
-  cy.get('[data-cy="tariff_payment_checkbox"]').click()
+  cy.get('[data-cy="generic_especific_conditons_checkbox"]').click()
   cy.get('[data-cy="gurb_adhesion_payment_checkbox"]').click()
-  cy.get('[data-cy=next]').should('not.be.disabled').click()
+  cy.get('[data-cy=next]').should('not.be.disabled')
 })
 
 Cypress.Commands.add('lightQuestion', (lightOn = true) => {

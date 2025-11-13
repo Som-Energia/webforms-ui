@@ -10,15 +10,15 @@ describe('Gurb Participation', () => {
   beforeEach(() => {
     cy.visit('/ca/gurb/g003/join')
     cy.fixture('gurb.json').as('data')
-    cy.fixture('holderChangePersonaldata.json').as('personaldata')
+    cy.fixture('gurbPersonaldata.json').as('personalData')
   })
 
   describe('Gurb Joining', function () {
     // TODO: before and after
     it('New member', function () {
       cy.identifyPartnerToJoinGurb(
-        this.data.supplyPoint.existing_cups,
-        this.data.personalData.vat,
+        this.personalData.cups,
+        this.personalData.vat,
         STATUS_ACTIVE
       )
       cy.selectParticipationOnGurb()
