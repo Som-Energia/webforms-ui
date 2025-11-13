@@ -81,7 +81,6 @@ const GurbFormJoin = (props) => {
       },
       privacy_policy_accepted: false,
       generic_especific_conditons_accepted: false,
-      tariff_payment_accepted: false,
       gurb_adhesion_payment_accepted: false,
       payment_data: undefined
     }),
