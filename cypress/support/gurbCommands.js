@@ -88,41 +88,63 @@ Cypress.Commands.add('lightQuestion', (lightOn = true) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('fillGurbAddress', (aValidGurbCode, street, lat, long, statusCode, getAutocompleteResponse, getPlaceResponse) => {
-  cy.intercept('POST', 'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/AutocompletePlaces', {
-    statusCode: statusCode,
-    body: getAutocompleteResponse
-  }).as('googleAutocomplete')
+Cypress.Commands.add(
+  'fillGurbAddress',
+  (
+    aValidGurbCode,
+    street,
+    lat,
+    long,
+    statusCode,
+    getAutocompleteResponse,
+    getPlaceResponse
+  ) => {
+    cy.intercept(
+      'POST',
+      'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/AutocompletePlaces',
+      {
+        statusCode: statusCode,
+        body: getAutocompleteResponse
+      }
+    ).as('googleAutocomplete')
 
-  cy.intercept('POST', 'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace', {
-    statusCode: statusCode,
-    body: getPlaceResponse
-  }).as('googleGetPlace')
+    cy.intercept(
+      'POST',
+      'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace',
+      {
+        statusCode: statusCode,
+        body: getPlaceResponse
+      }
+    ).as('googleGetPlace')
 
-  cy.get('[data-cy="street"]').type(street.input)
-  cy.wait('@googleAutocomplete')
-  cy.wait(1000)
+    cy.get('[data-cy="street"]').type(street.input)
+    cy.wait('@googleAutocomplete')
+    cy.wait(1000)
 
-  cy.contains(street.value).click()
-  cy.wait('@googleGetPlace')
+    cy.contains(street.value).click()
+    cy.wait('@googleGetPlace')
 
+    cy.get('[data-cy="number"]').type('2')
 
-  cy.get('[data-cy="number"]').type('2')
+    cy.intercept(
+      'GET',
+      `/check/gurb/${aValidGurbCode}?lat=${lat}&long=${long}`,
+      {
+        statusCode: statusCode,
+        body: {
+          data: true,
+          state: statusCode === 200,
+          status: 'ONLINE'
+        }
+      }
+    ).as('checkGurb')
 
-  cy.intercept('GET', `/check/gurb/${aValidGurbCode}?lat=${lat}&long=${long}`, {
-    statusCode: statusCode,
-    body: {
-      data: true,
-      state: statusCode === 200,
-      status: 'ONLINE'
-    }
-  }).as('checkGurb')
+    cy.get('[data-cy=validate-address]').click()
+    cy.wait('@checkGurb')
 
-  cy.get('[data-cy=validate-address]').click()
-  cy.wait('@checkGurb')
-
-  cy.get('[data-cy=next]').should('not.be.disabled').click()
-})
+    cy.get('[data-cy=next]').should('not.be.disabled').click()
+  }
+)
 
 Cypress.Commands.add('selfconsumptionQuestion', (selfconsumption = true) => {
   const optionValue = selfconsumption
@@ -152,7 +174,7 @@ Cypress.Commands.add('resultExistingMember', (gurbCode) => {
 })
 
 Cypress.Commands.add('resultNotExistingMember', (selectedTariff) => {
-  const assertTariff = selectedTariff === "periods" ? "periodes" : "indexada"
+  const assertTariff = selectedTariff === 'periods' ? 'periodes' : 'indexada'
 
   cy.get('[data-cy="redirect-button"]')
     .should('exist')
