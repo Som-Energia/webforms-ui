@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useRef, useContext, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -66,6 +66,7 @@ const NewContractMemberForm = (props) => {
   const { language } = useParams()
   const mtm_cid = searchParams.get("mtm_cid")
   const mtm_source = searchParams.get("mtm_source")
+  const gurb_id = searchParams.get("gurb_id")
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -322,7 +323,11 @@ const NewContractMemberForm = (props) => {
   }
 
   const trackSucces = () => {
+
     trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    if (gurb_id) {
+      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `send-new-contract-member-ok-gurb-${gurb_id}` })
+    }
     if (mtm_cid && mtm_source && language) {
       trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}` })
     }
@@ -463,6 +468,16 @@ const NewContractMemberForm = (props) => {
     })
   }
 
+  const sendTrackInitEvent = useCallback((id) => {
+    const track_id = gurb_id ? `${id}-gurb-${gurb_id}` : id
+    trackEvent({
+      category: 'NewContractMember',
+      action: 'setNewContractMemberStep',
+      name: `new-contract-member-step-${track_id}`
+    })
+  },[gurb_id])
+
+
   return (
     <Container
       maxWidth="md"
@@ -486,7 +501,7 @@ const NewContractMemberForm = (props) => {
               {activeStep == 0 ? (
                 <NewContractMemberQuestion
                   formikProps={formikProps}
-                  sendTrackEvent={sendTrackEvent}
+                  sendTrackEvent={sendTrackInitEvent}
                   nextStep={nextStep}
                   setValidationSchemaAndSteps={setValidationSchemaAndSteps}
                 />

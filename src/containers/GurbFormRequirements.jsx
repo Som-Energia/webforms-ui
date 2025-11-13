@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
+import MatomoContext from '../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
@@ -39,6 +40,8 @@ const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
   const { language, gurbCode } = useParams()
   const { loading } = useContext(GurbLoadingContext)
+  const { trackEvent } = useContext(MatomoContext)
+
   const [maxStepNum, setMaxStepNum] = useState(
     MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
   )
@@ -78,6 +81,16 @@ const GurbFormRequirements = (props) => {
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language, i18n])
+
+  useEffect(() => {
+    if (activeStep !== 5) {
+      trackEvent({
+        category: 'GurbRequirements',
+        action: 'setGurbRequirementsStep',
+        name: `gurb-requirements-step-${activeStep}-${gurbCode}`
+      })
+    }
+  }, [activeStep])
 
   const nextStep = (formikProps) => {
     const { values } = formikProps
