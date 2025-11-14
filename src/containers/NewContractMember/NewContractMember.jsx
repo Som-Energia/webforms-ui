@@ -95,6 +95,28 @@ const NewContractMemberForm = (props) => {
     }
   }, [language, i18n])
 
+
+  const openPopUp = () => {
+    const root = document.getElementById('root')
+    const fnString = root.getAttribute("data-popup-function")
+    if (fnString) {
+      try {
+        const fn = eval(fnString)
+        fn()
+      } catch (err){
+        console.error("Error calling function from data-function (popup)",err)
+      }
+    }
+  }
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      openPopUp()
+    }, 60000) 
+    return () => clearTimeout(timer)
+  }, [activeStep])
+
   const initialValues = {
     cups: '',
     has_member: undefined,
