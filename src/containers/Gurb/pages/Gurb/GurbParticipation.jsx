@@ -47,6 +47,7 @@ const GurbParticipation = (props) => {
     async (value) => {
       await setFieldValue('gurb.power', value)
       await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * value))
+      await setFieldValue('gurb.surplus_compensation', gurbDetails.surplus_compensation)
     },
     [setFieldValue, gurbDetails]
   )
