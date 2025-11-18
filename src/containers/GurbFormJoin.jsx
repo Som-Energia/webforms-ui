@@ -80,7 +80,8 @@ const GurbFormJoin = (props) => {
       gurb: {
         power: '',
         daily_cost: '',
-        join_cost: ''
+        join_cost: '',
+        surplus_compensation: ''
       },
       privacy_policy_accepted: false,
       generic_especific_conditons_accepted: false,

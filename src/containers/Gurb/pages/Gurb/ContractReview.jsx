@@ -120,7 +120,15 @@ const ContractReview = (props) => {
                 {t('GURB_CONTRACT_SUMMARY_GURB_TYPE')}
               </Typography>
               <ReviewField
-                value={t('GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION')}
+                value={
+                  values?.gurb?.surplus_compensation
+                    ? t(
+                        'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION'
+                      )
+                    : t(
+                        'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION'
+                      )
+                }
               />
             </Grid>
           </Grid>
