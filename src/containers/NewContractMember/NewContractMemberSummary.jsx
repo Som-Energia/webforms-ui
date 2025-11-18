@@ -57,10 +57,9 @@ const NewContractMemberSummary = (props) => {
   const formSteps =
     values?.has_member == 'member-off'
       ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-      : values?.has_member == 'member-on'
-        ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-        : undefined
-
+      : values?.has_member == 'member-on' || values?.has_member == 'member-link'
+      ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+      : undefined
 
   useEffect(() => {
     sendTrackEvent(trackID)
@@ -203,7 +202,7 @@ const NewContractMemberSummary = (props) => {
         step: showReviewLinks ? formSteps['DONATION'] : null
       }
     ]
-    if (values?.has_member === 'member-on') {
+    if (values?.has_member === 'member-on' || values?.has_member === 'member-link') {
       paymentFields.shift()
     }
     return paymentFields

@@ -226,7 +226,7 @@ const NewContractMemberForm = (props) => {
       setValidationSteps(validationSchemasNewMember)
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member == 'member-on') {
+    } else if (has_member == 'member-on' || has_member == 'member-link') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(

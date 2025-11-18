@@ -39,21 +39,22 @@ const newContractMemberHolder = (props) => {
           {t('HOLDER_IDENTIFIER_TITLE')}
         </Typography>
       </Grid>
-      {values?.has_member === 'member-on' && (
-        <>
-          <Grid item xs={12}>
-            <InputTitle text={t('NEW_HOLDER_TITLE')} required={true} />
-          </Grid>
-          <Grid item xs={12}>
-            <Chooser
-              name="holder-member-question"
-              options={holder_member_options}
-              value={values.member_is_holder}
-              handleChange={handleMemberIsHolderQuestion}
-            />
-          </Grid>
-        </>
-      )}
+      {values?.has_member === 'member-on' ||
+        (values?.has_member === 'member-link' && (
+          <>
+            <Grid item xs={12}>
+              <InputTitle text={t('NEW_HOLDER_TITLE')} required={true} />
+            </Grid>
+            <Grid item xs={12}>
+              <Chooser
+                name="holder-member-question"
+                options={holder_member_options}
+                value={values.member_is_holder}
+                handleChange={handleMemberIsHolderQuestion}
+              />
+            </Grid>
+          </>
+        ))}
     </Grid>
   )
 }

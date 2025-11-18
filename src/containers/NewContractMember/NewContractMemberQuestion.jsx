@@ -27,20 +27,24 @@ const NewContractMemberQuestion = ({
 
   useEffect(() => {
     sendTrackEvent(trackID)
-  },[])
-
-
+  }, [])
 
   const options = [
     {
       id: 'member-on',
-      icon: <HandshakeIcon />,
+      icon: <CommunityIcon />,
       textHeader: t('HAS_MEMBER'),
       textBody: t('HAS_MEMBER_BODY')
     },
     {
+      id: 'member-link',
+      icon: <HandshakeIcon />,
+      textHeader: t('LINK_MEMBER'),
+      textBody: t('LINK_MEMBER_BODY')
+    },
+    {
       id: 'member-off',
-      icon: <CommunityIcon />,
+      icon: <CommunityIcon on={false} />,
       textHeader: t('HAS_NO_MEMBER'),
       textBody: t('HAS_NO_MEMBER_BODY')
     }
