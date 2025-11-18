@@ -58,17 +58,16 @@ import RedirectUrl from '../Gurb/components/RedirectUrl'
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
-import { usePixelEvent } from "../../hooks/usePixelEvent"
+import { usePixelEvent } from '../../hooks/usePixelEvent'
 
 const NewContractMemberForm = (props) => {
-
   const { triggerEvent } = usePixelEvent()
   const [searchParams] = useSearchParams()
   const { i18n, t } = useTranslation()
   const { language } = useParams()
-  const mtm_cid = searchParams.get("mtm_cid")
-  const mtm_source = searchParams.get("mtm_source")
-  const gurb_id = searchParams.get("gurb_id")
+  const mtm_cid = searchParams.get('mtm_cid')
+  const mtm_source = searchParams.get('mtm_source')
+  const gurb_id = searchParams.get('gurb_id')
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -90,8 +89,7 @@ const NewContractMemberForm = (props) => {
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
-  const [gurbCode] = useState(() => searchParams.get("gurb-code"));
-
+  const [gurbCode] = useState(() => searchParams.get('gurb-code'))
 
   useEffect(() => {
     if (language && i18n.language !== language) {
@@ -325,19 +323,34 @@ const NewContractMemberForm = (props) => {
   }
 
   const trackSucces = () => {
-
-    trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    trackEvent({
+      category: 'NewContractMember',
+      action: 'newContractMemberFormOk',
+      name: 'send-new-contract-member-ok'
+    })
     if (gurb_id) {
-      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `send-new-contract-member-ok-gurb-${gurb_id}` })
+      trackEvent({
+        category: 'NewContractMember',
+        action: 'newContractMemberFormOk',
+        name: `send-new-contract-member-ok-gurb-${gurb_id}`
+      })
     }
     if (mtm_cid && mtm_source && language) {
-      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}` })
+      trackEvent({
+        category: 'NewContractMember',
+        action: 'newContractMemberFormOk',
+        name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}`
+      })
     }
-    triggerEvent("FormularioCompletado", { status: "ok" })
+    triggerEvent('FormularioCompletado', { status: 'ok' })
   }
 
   const handlePost = async (values) => {
-    trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
+    trackEvent({
+      category: 'Send',
+      action: 'sendNewContractMemberClick',
+      name: 'send-new-contract-member'
+    })
     setSending(true)
     const data = newNormalizeContract(values, gurbCode)
     await newContract(data)
@@ -521,13 +534,19 @@ const NewContractMemberForm = (props) => {
                   )}
                   {completed ? (
                     <Box sx={{ mt: 2 }}>
-
                       {gurbCode && !error ? (
                         <RedirectUrl
                           title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
-                          description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
-                          url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', { gurbCode, language: i18n.language })}
-                          buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
+                          description={t(
+                            'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION'
+                          )}
+                          url={t(
+                            'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL',
+                            { gurbCode, language: i18n.language }
+                          )}
+                          buttonText={t(
+                            'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT'
+                          )}
                         />
                       ) : (
                         <Result
@@ -536,21 +555,22 @@ const NewContractMemberForm = (props) => {
                             !error
                               ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
                               : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
-                          }
-                        >
+                          }>
                           <Typography
-                            sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
+                            sx={{
+                              color: 'secondary.extraDark',
+                              textAlign: 'center'
+                            }}
                             dangerouslySetInnerHTML={{
                               __html: !error
                                 ? formikProps.values.has_member === 'member-on'
                                   ? t('NEW_CONTRACT_SUCCESS_DESC')
                                   : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
-                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC'),
+                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
                             }}
                           />
                         </Result>
                       )}
-
                     </Box>
                   ) : (
                     getStep(formikProps, sendTrackEvent)
@@ -594,27 +614,24 @@ const NewContractMemberForm = (props) => {
                     </Grid>
                   )}
                 </>
-              )
-              }
+              )}
             </>
           )
         }}
       </Formik>
-      {
-        data?.payment_data && (
-          <form ref={formTPV} action={data.redsys_endpoint} method="POST">
-            {Object.keys(data.payment_data).map((key) => (
-              <input
-                key={key}
-                type="hidden"
-                name={key}
-                value={data.payment_data[key]}
-              />
-            ))}
-          </form>
-        )
-      }
-    </Container >
+      {data?.payment_data && (
+        <form ref={formTPV} action={data.redsys_endpoint} method="POST">
+          {Object.keys(data.payment_data).map((key) => (
+            <input
+              key={key}
+              type="hidden"
+              name={key}
+              value={data.payment_data[key]}
+            />
+          ))}
+        </form>
+      )}
+    </Container>
   )
 }
 

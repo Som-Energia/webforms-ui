@@ -183,9 +183,8 @@ const NewContractMemberSummary = (props) => {
     values?.member_is_holder == 'holder-member-yes'
       ? oldHolderFields
       : values?.new_member?.person_type == 'legal-person'
-        ? legalReviewFields
-        : physicalReviewFields
-
+      ? legalReviewFields
+      : physicalReviewFields
 
   const getPaymentField = () => {
     let paymentFields = [
@@ -213,42 +212,42 @@ const NewContractMemberSummary = (props) => {
   const contactInfo =
     values?.member_is_holder == 'holder-member-yes'
       ? {
-        icon: <PhoneIcon />,
-        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-        field: [
-          {
-            reviewValue: t('DATA_AS_IN_OV'),
-            step: null
-          }
-        ]
-      }
+          icon: <PhoneIcon />,
+          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+          field: [
+            {
+              reviewValue: t('DATA_AS_IN_OV'),
+              step: null
+            }
+          ]
+        }
       : {
-        icon: <PhoneIcon />,
-        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-        field: [
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-            reviewValue: values?.new_member?.email,
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
-              : null
-          },
-          {
-            reviewLabel: t('LANGUAGE_SUMMARY'),
-            reviewValue: languages[values?.new_member?.language],
-            step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
-              : null
-          }
-        ]
-      }
+          icon: <PhoneIcon />,
+          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+          field: [
+            {
+              reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+              reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+              step: showReviewLinks
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+                : null
+            },
+            {
+              reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+              reviewValue: values?.new_member?.email,
+              step: showReviewLinks
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+                : null
+            },
+            {
+              reviewLabel: t('LANGUAGE_SUMMARY'),
+              reviewValue: languages[values?.new_member?.language],
+              step: showReviewLinks
+                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+                : null
+            }
+          ]
+        }
 
   const process = contractProcess(
     values?.has_light == 'light-on',
@@ -263,10 +262,10 @@ const NewContractMemberSummary = (props) => {
           process == 'A3'
             ? t('ALTA')
             : process == 'C1'
-              ? t('CANVI_DE_COMERCIALITZADORA')
-              : process == 'C2'
-                ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
-                : null
+            ? t('CANVI_DE_COMERCIALITZADORA')
+            : process == 'C2'
+            ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
+            : null
       },
       values?.has_member == 'member-off' && {
         reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
@@ -274,50 +273,56 @@ const NewContractMemberSummary = (props) => {
     ]
   }
 
-  const powersDetailHigher = Object.values(values?.contract?.power).map((value, index) => {
+  const powersDetailHigher = Object.values(values?.contract?.power).map(
+    (value, index) => {
       return `P${index + 1}(${value})`
-    })
+    }
+  )
 
-  const powersDetail = values?.contract?.power_type === 'power-higher-15kw'
-    ? powersDetailHigher.join(',')
-    : `${t('PEAK')}(${values?.contract?.power['power1']}),${t('VALLEY')}(${values?.contract?.power['power2']})`
+  const powersDetail =
+    values?.contract?.power_type === 'power-higher-15kw'
+      ? powersDetailHigher.join(',')
+      : `${t('PEAK')}(${values?.contract?.power['power1']}),${t('VALLEY')}(${
+          values?.contract?.power['power2']
+        })`
 
-  const technicalData = values?.has_light === 'light-on'
-    ? [
-        {
-          reviewLabel: t('TOLL_SUMMARY'),
-          reviewValue: t('CURRENT')
-        },
-        {
-          reviewLabel: t('FARE'),
-          reviewValue: isTariffIndexed
-            ? t('FARE_INDEXED')
-            : values?.contract?.power_type === 'power-higher-15kw'
+  const technicalData =
+    values?.has_light === 'light-on'
+      ? [
+          {
+            reviewLabel: t('TOLL_SUMMARY'),
+            reviewValue: t('CURRENT')
+          },
+          {
+            reviewLabel: t('FARE'),
+            reviewValue: isTariffIndexed
+              ? t('FARE_INDEXED')
+              : values?.contract?.power_type === 'power-higher-15kw'
               ? t('FARE_PERIODS').concat(' ', '3.0TD')
               : t('FARE_PERIODS').concat(' ', '2.0TD')
-        },
-        {
-          reviewLabel: t('POWER_SUMMARY'),
-          reviewValue: powersDetail
-        },
-        {
-          reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
-        }
-      ]
-    : [
-        {
-          reviewLabel: t('FARE'),
-          reviewValue: isTariffIndexed
-            ? t('FARE_INDEXED')
-            : values?.contract?.power_type === 'power-higher-15kw'
+          },
+          {
+            reviewLabel: t('POWER_SUMMARY'),
+            reviewValue: powersDetail
+          },
+          {
+            reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
+          }
+        ]
+      : [
+          {
+            reviewLabel: t('FARE'),
+            reviewValue: isTariffIndexed
+              ? t('FARE_INDEXED')
+              : values?.contract?.power_type === 'power-higher-15kw'
               ? t('FARE_PERIODS').concat(' ', '3.0TD')
               : t('FARE_PERIODS').concat(' ', '2.0TD')
-        },
-        {
-          reviewLabel: t('POWER_SUMMARY'),
-          reviewValue: powersDetail
-        }
-      ]
+          },
+          {
+            reviewLabel: t('POWER_SUMMARY'),
+            reviewValue: powersDetail
+          }
+        ]
 
   const reviewFields = [
     [processType, reviewHolderData],
@@ -346,7 +351,7 @@ const NewContractMemberSummary = (props) => {
             reviewValue: values?.supply_point.cnae,
             step:
               showReviewLinks &&
-                values?.new_member?.person_type === 'legal-person'
+              values?.new_member?.person_type === 'legal-person'
                 ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
                 : null
           }
@@ -519,21 +524,24 @@ const NewContractMemberSummary = (props) => {
         <Divider sx={{ my: 2 }} />
       </Grid>
       <Grid item xs={12}>
-        { values?.has_member == 'member-off'
-        ?
+        {values?.has_member == 'member-off' ? (
           <Typography
-          variant="body.sm.regular"
-          dangerouslySetInnerHTML={{
-            __html: t('PURPOSE').concat('<br />' ,t('RIGHTS'))
-          }}
+            variant="body.sm.regular"
+            dangerouslySetInnerHTML={{
+              __html: t('PURPOSE').concat('<br />', t('RIGHTS'))
+            }}
           />
-        : <Typography
-          variant="body.sm.regular"
-          dangerouslySetInnerHTML={{
-            __html: t('PURPOSE_MEMBER_ON').concat('<br />' ,t('RIGHTS_MEMBER_ON'))
-          }}
+        ) : (
+          <Typography
+            variant="body.sm.regular"
+            dangerouslySetInnerHTML={{
+              __html: t('PURPOSE_MEMBER_ON').concat(
+                '<br />',
+                t('RIGHTS_MEMBER_ON')
+              )
+            }}
           />
-        }
+        )}
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
@@ -633,9 +641,8 @@ const NewContractMemberSummary = (props) => {
           />
         </TermsDialog>
       </Grid>
-      {values?.has_member == 'member-off' ?
+      {values?.has_member == 'member-off' ? (
         <Grid item xs={12}>
-
           <FormControlLabel
             sx={{
               '& .MuiFormControlLabel-label a': {
@@ -675,8 +682,7 @@ const NewContractMemberSummary = (props) => {
             }
           />
         </Grid>
-        :
-        null}
+      ) : null}
       {values?.new_member?.person_type == 'legal-person' && (
         <Grid item xs={12}>
           <Typography variant="headline4">
