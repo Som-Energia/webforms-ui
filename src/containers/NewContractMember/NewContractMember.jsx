@@ -394,7 +394,7 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 8) {
         setHasAlert(false)
-        return <NewContractMemberHolder {...props} />
+        return <NewContractHolder {...props} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
