@@ -30,6 +30,7 @@ import NewContractMemberPower from './NewContractMemberPower'
 import NewContractMemberSelfConsumptionChooser from './NewContractMemberSelfConsumptionChooser'
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
 import NewContractMemberHolder from './NewContractMemberHolder'
+import NewContractHolder from './NewContractHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import NewContractMemberPayment from './NewContractMemberPayment'
 import NewContractMemberSummary from './NewContractMemberSummary'
@@ -44,6 +45,7 @@ import newContractMemberPowerValidations from './newContractMemberPowerValidatio
 import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
 import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
 import newContractMemberHolderValidations from './newContractMemberHolderValidations'
+import newContractHolderValidations from './newContractHolderValidations'
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
@@ -198,6 +200,7 @@ const NewContractMemberForm = (props) => {
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
+    newContractHolderValidations,
     newContractMemberHolderValidations,
     identifyMemberPersonalDataValidations,
     newContractMemberVoluntaryDonationValidations,
@@ -274,12 +277,11 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
-      activeStep === formSteps['HOLDER_INFO'] &&
+      activeStep === formSteps['HOLDER_MEMBER_INFO'] &&
       formikProps.values.member_is_holder === 'holder-member-yes'
     ) {
       next = next + 1
     }
-
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -289,7 +291,7 @@ const NewContractMemberForm = (props) => {
     let prev = activeStep - 1
 
     if (
-      activeStep === formSteps['HOLDER_INFO'] &&
+      activeStep === formSteps['HOLDER_MEMBER_INFO'] &&
       formikProps.values.has_light === 'light-on' &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
@@ -297,7 +299,7 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
-      activeStep === formSteps['HOLDER_INFO'] &&
+      activeStep === formSteps['HOLDER_MEMBER_INFO'] &&
       formikProps.values.has_light === 'light-off' &&
       formikProps.values.has_member === 'member-on'
     ) {
@@ -421,12 +423,14 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 7) {
         setHasAlert(false)
-        return <NewContractMemberHolder {...props} />
+        return <NewContractHolder {...props} />
       } else if (activeStep === 8) {
-        return <IdentifyMemberPersonalData {...props} holder={true} />
+        return <NewContractMemberHolder {...props} />
       } else if (activeStep === 9) {
-        return <NewContractMemberVoluntaryDonation {...trackProps} />
+        return <IdentifyMemberPersonalData {...props} holder={true} />
       } else if (activeStep === 10) {
+        return <NewContractMemberVoluntaryDonation {...trackProps} />
+      } else if (activeStep === 11) {
         return <NewContractMemberPayment {...trackProps} />
       } else {
         return <NewContractMemberSummary {...trackProps} />
