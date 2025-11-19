@@ -199,7 +199,6 @@ const NewContractMemberForm = (props) => {
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
     newContractHolderValidations,
-    newContractMemberHolderValidations,
     identifyMemberPersonalDataValidations,
     newContractMemberVoluntaryDonationValidations,
     newContractMemberPaymentValidations,
@@ -215,7 +214,7 @@ const NewContractMemberForm = (props) => {
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
-    newContractMemberHolderValidations,
+    newContractHolderValidations,
     newContractMemberVoluntaryDonationValidations,
     newContractMemberPaymentValidations,
     newContractMemberSummaryValidations
@@ -254,7 +253,7 @@ const NewContractMemberForm = (props) => {
     if (
       activeStep === formSteps['POWER'] &&
       formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-on'
+      formikProps.values.has_member !== 'member-off'
     ) {
       next = next + 2
     }
@@ -275,8 +274,8 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
-      activeStep === formSteps['HOLDER_MEMBER_INFO'] &&
-      formikProps.values.member_is_holder === 'holder-member-yes'
+      activeStep === formSteps['HOLDER_INFO'] &&
+      formikProps.values.has_member === 'member-on'
     ) {
       next = next + 1
     }
@@ -289,7 +288,7 @@ const NewContractMemberForm = (props) => {
     let prev = activeStep - 1
 
     if (
-      activeStep === formSteps['HOLDER_MEMBER_INFO'] &&
+      activeStep === formSteps['HOLDER_INFO'] &&
       formikProps.values.has_light === 'light-on' &&
       formikProps.values.has_selfconsumption === 'selfconsumption-off'
     ) {
@@ -297,9 +296,9 @@ const NewContractMemberForm = (props) => {
     }
 
     if (
-      activeStep === formSteps['HOLDER_MEMBER_INFO'] &&
+      activeStep === formSteps['HOLDER_INFO'] &&
       formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-on'
+      formikProps.values.has_member !== 'member-off'
     ) {
       prev = prev - 2
     }
@@ -314,7 +313,7 @@ const NewContractMemberForm = (props) => {
 
     if (
       activeStep === formSteps['DONATION'] &&
-      formikProps.values.member_is_holder === 'holder-member-yes'
+      formikProps.values.has_member === 'member-on'
     ) {
       prev = prev - 1
     }
@@ -385,7 +384,6 @@ const NewContractMemberForm = (props) => {
     const trackProps = { ...props, sendTrackEvent }
 
     if (values?.has_member == 'member-off') {
-
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -416,7 +414,6 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSummary {...trackProps} />
       }
     } else {
-
       if (activeStep === 1) {
         setHasAlert(false)
         return <ApadrinatingDetails {...props} />
@@ -438,12 +435,10 @@ const NewContractMemberForm = (props) => {
         setHasAlert(false)
         return <NewContractHolder {...props} />
       } else if (activeStep === 8) {
-        return <NewContractMemberHolder {...props} />
-      } else if (activeStep === 9) {
         return <IdentifyMemberPersonalData {...props} holder={true} />
-      } else if (activeStep === 10) {
+      } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
-      } else if (activeStep === 11) {
+      } else if (activeStep === 10) {
         return <NewContractMemberPayment {...trackProps} />
       } else {
         return <NewContractMemberSummary {...trackProps} />

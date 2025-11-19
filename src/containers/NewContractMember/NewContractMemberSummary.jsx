@@ -179,7 +179,7 @@ const NewContractMemberSummary = (props) => {
   }
 
   const reviewHolderData =
-    values?.member_is_holder == 'holder-member-yes'
+    values?.has_member === 'member-on'
       ? oldHolderFields
       : values?.new_member?.person_type == 'legal-person'
       ? legalReviewFields
@@ -209,7 +209,7 @@ const NewContractMemberSummary = (props) => {
   }
 
   const contactInfo =
-    values?.member_is_holder == 'holder-member-yes'
+    values?.has_member === 'member-on'
       ? {
           icon: <PhoneIcon />,
           title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
