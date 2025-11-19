@@ -39,8 +39,8 @@ const NewContractMemberQuestion = ({
     {
       id: 'member-link',
       icon: <HandshakeIcon />,
-      textHeader: t('LINK_MEMBER'),
-      textBody: t('LINK_MEMBER_BODY')
+      textHeader: t('HAS_LINK_MEMBER'),
+      textBody: t('HAS_LINK_MEMBER_BODY')
     },
     {
       id: 'member-off',
