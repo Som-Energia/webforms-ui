@@ -57,6 +57,8 @@ import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
 import { usePixelEvent } from "../../hooks/usePixelEvent"
+import { isCompanyVat } from '../../services/utils'
+
 
 const NewContractMemberForm = (props) => {
 
@@ -89,6 +91,10 @@ const NewContractMemberForm = (props) => {
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
   const [gurbCode] = useState(() => searchParams.get("gurb-code"));
+  const POP_UP_TIME = 180000
+  const ENTERPRISE = 'enterprise'
+  const DOMESTIC = 'domestic'
+
 
 
   useEffect(() => {
@@ -98,24 +104,29 @@ const NewContractMemberForm = (props) => {
   }, [language, i18n])
 
 
-  const openPopUp = () => {
+  const openPopUp = (values) => {
     const root = document.getElementById('root')
     const fnString = root.getAttribute("data-popup-function")
     if (fnString) {
       try {
         const fn = eval(fnString)
-        fn()
-      } catch (err){
-        console.error("Error calling function from data-function (popup)",err)
+        const vat = values.member_is_holder === 'holder-member-no' ? values.new_member.nif : values.member.nif
+        const isCompany = vat ? isCompanyVat(vat) : false
+        fn(isCompany ? ENTERPRISE : DOMESTIC)
+      } catch (err) {
+        console.error("Error calling function from data-function (popup)", err)
       }
     }
   }
 
+  const formikRef = useRef(null)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      openPopUp()
-    }, 60000) 
+      if (formikRef.current) {
+        openPopUp(formikRef.current.values)
+      }
+    }, POP_UP_TIME)
     return () => clearTimeout(timer)
   }, [activeStep])
 
@@ -456,7 +467,7 @@ const NewContractMemberForm = (props) => {
     }
   }
 
-  const formikRef = useRef(null)
+
 
   useEffect(() => {
     formikRef.current.validateForm()
@@ -497,8 +508,7 @@ const NewContractMemberForm = (props) => {
       action: 'setNewContractMemberStep',
       name: `new-contract-member-step-${track_id}`
     })
-  },[gurb_id])
-
+  }, [gurb_id])
 
   return (
     <Container
