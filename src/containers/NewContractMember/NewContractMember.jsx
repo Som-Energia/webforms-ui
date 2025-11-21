@@ -29,7 +29,6 @@ import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData
 import NewContractMemberPower from './NewContractMemberPower'
 import NewContractMemberSelfConsumptionChooser from './NewContractMemberSelfConsumptionChooser'
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
-import NewContractMemberHolder from './NewContractMemberHolder'
 import NewContractHolder from './NewContractHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import NewContractMemberPayment from './NewContractMemberPayment'
@@ -44,7 +43,6 @@ import newContractMemberSupplyPointDataValidations from './newContractMemberSupp
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
 import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
 import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
-import newContractMemberHolderValidations from './newContractMemberHolderValidations'
 import newContractHolderValidations from './newContractHolderValidations'
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
@@ -250,34 +248,68 @@ const NewContractMemberForm = (props) => {
       next = activeStep + 1
     }
 
-    if (
-      activeStep === formSteps['POWER'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member !== 'member-off'
-    ) {
-      next = next + 2
+    if (formikProps.values.has_member === 'member-on')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['POWER']) {
+          next = next + 4
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['SELFCONSUMPTION'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          next = next + 1
+        }
+
+        if (activeStep === formSteps['HOLDER_INFO'])
+        {
+          next = next + 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['POWER'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-off'
-    ) {
-      next = next + 3
+    if ( formikProps.values.has_member === 'member-off')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['POWER']) {
+          next = next + 3
+        }
+      }
+
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['SELFCONSUMPTION'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          next = next + 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['SELFCONSUMPTION'] &&
-      formikProps.values.has_selfconsumption === 'selfconsumption-off'
-    ) {
-      next = next + 1
-    }
-
-    if (
-      activeStep === formSteps['HOLDER_INFO'] &&
-      formikProps.values.has_member === 'member-on'
-    ) {
-      next = next + 1
+    if (formikProps.values.has_member === 'member-link')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['POWER'])
+        {
+          next = next + 3
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['SELFCONSUMPTION'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          next = next + 1
+        }
+      }
     }
 
     const last = MAX_STEP_NUMBER
@@ -287,35 +319,68 @@ const NewContractMemberForm = (props) => {
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
 
-    if (
-      activeStep === formSteps['HOLDER_INFO'] &&
-      formikProps.values.has_light === 'light-on' &&
-      formikProps.values.has_selfconsumption === 'selfconsumption-off'
-    ) {
-      prev = prev - 1
+    if (formikProps.values.has_member === 'member-on')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['DONATION']) {
+          prev = prev - 4
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['HOLDER_INFO'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          prev = prev - 1
+        }
+
+        if (activeStep === formSteps['DONATION'])
+        {
+          prev = prev - 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['HOLDER_INFO'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member !== 'member-off'
-    ) {
-      prev = prev - 2
+    if ( formikProps.values.has_member === 'member-off')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['DONATION']) {
+          prev = prev - 3
+        }
+      }
+
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['HOLDER_INFO'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          prev = prev - 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['DONATION'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-off'
-    ) {
-      prev = prev - 3
-    }
-
-    if (
-      activeStep === formSteps['DONATION'] &&
-      formikProps.values.has_member === 'member-on'
-    ) {
-      prev = prev - 1
+    if (formikProps.values.has_member === 'member-link')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['MEMBER_INFO'])
+        {
+          prev = prev - 3
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['HOLDER_INFO'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          prev = prev - 1
+        }
+      }
     }
 
     setActiveStep(Math.max(0, prev))
@@ -583,6 +648,11 @@ const NewContractMemberForm = (props) => {
                       {activeStep !== 0 && (
                         <Grid item sm={2} xs={12}>
                           <PrevButton
+                            disabled={
+                              loading ||
+                              !formikProps.isValid ||
+                              summaryField !== undefined
+                            }
                             onClick={() => prevStep(formikProps)}
                             title={'PREV'}
                           />

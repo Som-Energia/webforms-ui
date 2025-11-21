@@ -16,7 +16,6 @@ const newContractHolder = (props) => {
   const handleHolderQuestion = (value) => {
     setFieldValue('previous_holder', value)
   }
-  console.log('previous_holder', values.previous_holder)
   const options = [
     {
       id: 'previous-holder-yes',
@@ -39,7 +38,6 @@ const newContractHolder = (props) => {
           {t('HOLDER_IDENTIFIER_TITLE')}
         </Typography>
       </Grid>
-      {values?.has_light === 'light-on' && (
         <>
           <Grid item xs={12}>
             <InputTitle text={t('PREVIUOS_HOLDER_TITLE')} required={true} />
@@ -53,7 +51,6 @@ const newContractHolder = (props) => {
             />
           </Grid>
         </>
-      )}
     </Grid>
   )
 }
