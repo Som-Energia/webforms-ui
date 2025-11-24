@@ -1,5 +1,14 @@
 # Change Log
 
+## 6.2.2 2025-11-24
+
+- FIX: GURB: Signature errors
+- IMP: GURB: New Review page
+- FIX: GURB: Allow retry address when first failed
+- IMP: GURB: Added Matomo
+- FIX: GURB: Added cypress test in GURB Join form
+- FIX: GURB: Contract surplus compensation in Review page
+
 ## 6.2.1
 
 - New script deploy
