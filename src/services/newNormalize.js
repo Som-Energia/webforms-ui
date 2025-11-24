@@ -82,9 +82,10 @@ export const newNormalizeContract = (data, gurbCode) => {
         data.has_light == 'light-on',
         data.previous_holder == 'previous-holder-yes'
       )
+
   const finalContract = {
     linked_member: data.member.link_member
-      ? data.member_is_holder == 'holder-member-yes'
+      ? data.has_member == 'member-on'
         ? 'already_member'
         : 'sponsored'
       : 'new_member',
@@ -119,7 +120,7 @@ export const newNormalizeContract = (data, gurbCode) => {
       data.cadastral_reference.replace(/\s/g, '')
   }
 
-  if (data.member_is_holder != 'holder-member-yes' && data.member.link_member) {
+  if (data.has_member != 'member-on' && data.member.link_member) {
     finalContract['contract_owner'] = normalizeClient(data.new_member) // TODO: change where this is saved! (new_member warning)
     finalContract['contract_owner']['address'] = normalizeAddress(data.address)
   }
