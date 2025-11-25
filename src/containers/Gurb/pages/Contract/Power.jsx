@@ -6,7 +6,6 @@ import RequiredTitle from '../../../../components/InputTitle'
 
 import Grid from '@mui/material/Grid'
 
-import { textHeader4 } from '../../gurbTheme'
 
 const Power = (props) => {
   const {
@@ -27,7 +26,6 @@ const Power = (props) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_POWER_QUESTION')}
-          textStyle={textHeader4}
           required={true}
         />
       </Grid>

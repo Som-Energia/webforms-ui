@@ -9,7 +9,6 @@ import { HelperText } from '../../../../components/InputField'
 import RequiredTitle from '../../../../components/InputTitle'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
-import { textHeader4, textHeader5 } from '../../gurbTheme'
 import Grid from '@mui/material/Grid'
 
 const TariffMode = (props) => {
@@ -50,7 +49,6 @@ const TariffMode = (props) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_TARIFFMODE_QUESTION')}
-          textStyle={textHeader4}
           required={true}
         />
       </Grid>
