@@ -1070,7 +1070,7 @@
     "GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT": "Vuelve a introducir la dirección o ponte en contacto con nosotros a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
     "GURB_ERROR_CHECKING_DISTANCE": "",
     "GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT": "Ha habido un error validando la dirección. Por favor, rectifica la dirección si es necesario o ponte en contacto con nosotros para obtener ayuda a través de <a href='mailto:gurb@somenergia.coop'>gurb@somenergia.coop</a>",
-    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/",
+    "GURB_REDIRECT_JOIN_FORM_URL": "https://www.somenergia.coop/es/gurb/{{gurbCode}}/join/",
     "GURB_CONTRACT_SUMMARY_KWH": "Participació GURB en kW",
     "GURB_CONTRACT_SUMMARY_BETA": "",
     "GURB_CONTRACT_SUMMARY_QUOTA": "Quota de GURB",

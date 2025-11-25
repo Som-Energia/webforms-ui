@@ -927,6 +927,6 @@
     "PURPOSE_MEMBER_ON": "XEDEAK: elektrizitate-zerbitzuaren kontratazioa kudeatzea eta ondoriozko zeregin administratiboak; gure energia-produktuei eta -zerbitzuei buruz informatzea, baita euskarri elektronikoen bidez ere.",
     "RIGHTS_MEMBER_ON": "ESKUBIDEAK: gure mezu komertzialak jasotzeari uko egin diezaiokezu. Zure datuetan sartzeko, datuak zuzentzeko, ezabatzeko, beste norabait eramateko, eta datuen tratamenduari aurka egiteko eta tratamendua mugatzeko eskubidea baliatzeko, idatzi <a target=\"_blank\" href=\"mailto:somenergia@delegado-datos.com\">somenergia@delegado-datos.com</a> helbidera. Informazio gehiago aurkituko duzu <a target=\"_blank\" href=\"https://www.somenergia.coop/es/politica-de-privacidad\">Pribatutasun-politikan.</a>",
     "INSTALLATION_POWER_EXCEDED": "Instalazioaren gehieneko potentzia 100 kW da",
-    "GURB_REDIRECT_JOIN_FORM_URL": "http://localhost:3000/es/gurb/{{gurbCode}}/join/",
+    "GURB_REDIRECT_JOIN_FORM_URL": "https://www.somenergia.coop/es/gurb/{{gurbCode}}/join/",
     "GURB_SIGNATURE_INFO": ""
 }
