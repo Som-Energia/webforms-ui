@@ -108,7 +108,7 @@ const Chooser = (props) => {
       direction="row"
       justifyContent="center">
       {options.map((option, index) => (
-        <Grid key={index} item sm={4} md={4} lg={12}>
+        <Grid key={index} item sm={12} md={8} lg={4}>
           <Option
             isSelected={option?.id === value}
             setSelected={setOptionSelection}
