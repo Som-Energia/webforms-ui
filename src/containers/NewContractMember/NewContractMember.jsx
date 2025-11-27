@@ -649,8 +649,6 @@ const NewContractMemberForm = (props) => {
                         <Grid item sm={2} xs={12}>
                           <PrevButton
                             disabled={
-                              loading ||
-                              !formikProps.isValid ||
                               summaryField !== undefined
                             }
                             onClick={() => prevStep(formikProps)}
