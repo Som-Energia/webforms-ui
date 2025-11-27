@@ -220,8 +220,8 @@ const NewMemberForm = (props) => {
                       steps={NEW_MEMBER_FORM_SUBSTEPS}
                     />
                   </Box>
-                  {
-                    completed ? (
+                  {completed ? (
+                    <Box sx={{ mt: 2 }}>
                       <Result
                         mode={!error ? 'success' : 'failure'}
                         title={!error ? t('NEW_MEMBER_SUCCESS_TITLE') : t('NEW_MEMBER_ERROR_TITLE')}
@@ -233,48 +233,51 @@ const NewMemberForm = (props) => {
                           }}
                         />
                       </Result>
-                    ) : (
-                      getStep(formikProps)
-                    )}
-                  <Grid
-                    container
-                    direction="row-reverse"
-                    rowSpacing={2}
-                    sx={{
-                      marginTop: '2rem',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}>
-                    {activeStep !== 0 && (
-                      <Grid item sm={2} xs={12}>
-                        <PrevButton
-                          disabled={sending}
-                          onClick={() => prevStep(formikProps)}
-                          title={'PREV'}
-                        />
-                      </Grid>
-                    )}
-                    <Grid item sm={2} xs={12} order={-1}>
-                      {activeStep !== MAX_STEP_NUMBER ? (
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
-                        />
-                      ) : (
-                        <SubmitButton
-                          disabled={!formikProps.isValid || completed}
-                          onClick={() => handlePost(formikProps.values)}
-                        />
+                    </Box>
+                  ) : (
+                    getStep(formikProps)
+                  )}
+                  {!completed && (
+                    <Grid
+                      container
+                      direction="row-reverse"
+                      rowSpacing={2}
+                      sx={{
+                        marginTop: '2rem',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                      }}>
+                      {activeStep !== 0 && (
+                        <Grid item sm={2} xs={12}>
+                          <PrevButton
+                            disabled={sending}
+                            onClick={() => prevStep(formikProps)}
+                            title={'PREV'}
+                          />
+                        </Grid>
                       )}
+                      <Grid item sm={2} xs={12} order={-1}>
+                        {activeStep !== MAX_STEP_NUMBER ? (
+                          <NextButton
+                            disabled={
+                              loading ||
+                              !formikProps.isValid ||
+                              activeStep === MAX_STEP_NUMBER
+                            }
+                            onClick={() => nextStep(formikProps)}
+                            title={'NEXT'}
+                          />
+                        ) : (
+                          <SubmitButton
+                            disabled={!formikProps.isValid || completed}
+                            onClick={() => handlePost(formikProps.values)}
+                          />
+                        )}
+                      </Grid>
                     </Grid>
-                  </Grid>
+                  )}
                 </>
-              }
+              )}
             </>
           )
         }}
