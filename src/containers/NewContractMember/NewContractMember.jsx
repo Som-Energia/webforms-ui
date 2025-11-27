@@ -110,8 +110,9 @@ const NewContractMemberForm = (props) => {
       try {
         const fn = eval(fnString)
         const vat = values.member_is_holder === 'holder-member-no' ? values.new_member.nif : values.member.nif
-        const isCompany = vat ? isCompanyVat(vat) : false
-        fn(isCompany ? ENTERPRISE : DOMESTIC)
+        const isCompany = vat ? isCompanyVat(vat) : null
+        const param = isCompany === null ? '' : isCompany ? ENTERPRISE : DOMESTIC
+        fn(param)
       } catch (err) {
         console.error("Error calling function from data-function (popup)", err)
       }
