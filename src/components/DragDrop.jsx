@@ -17,7 +17,7 @@ import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
-const DragDrop = ({ fieldName, textStyle, required, values, onChange }) => {
+const DragDrop = ({ fieldName, required, values, onChange }) => {
   const { t } = useTranslation()
 
   const [drag, setDrag] = useState(false)
@@ -138,7 +138,6 @@ const DragDrop = ({ fieldName, textStyle, required, values, onChange }) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={fieldName}
-          textStyle={{ ...textStyle }}
           required={required}
         />
       </Grid>

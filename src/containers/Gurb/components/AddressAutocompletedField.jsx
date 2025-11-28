@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { textHeader4, textField } from '../gurbTheme'
+import textField from '../gurbTheme'
 import InputTitle from '../../../components/InputTitle'
 
 export default function LocationInput({
@@ -109,7 +109,6 @@ export default function LocationInput({
           <Grid item xs={12} sx={{ mb: '6px' }}>
             <InputTitle
               text={textFieldName}
-              textStyle={textHeader4}
               required={required}
             />
           </Grid>

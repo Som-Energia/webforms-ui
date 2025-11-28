@@ -7,7 +7,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-import { textCheckbox, textHeader4 } from '../../gurbTheme'
+import textCheckbox from '../../gurbTheme'
 
 import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../../../components/DragDrop'
@@ -54,7 +54,6 @@ const SupplyPointData = (props) => {
       <Grid item xs={12}>
         <DragDrop
           fieldName={t('ELECTRIC_BILL_UPLOAD')}
-          textStyle={textHeader4}
           required={false}
         />
       </Grid>

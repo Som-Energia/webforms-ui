@@ -15,7 +15,6 @@ import { getMunicipisByPostalCode } from '../../../../services/api'
 import { iconRequirements } from '../../../../themes/commonStyles'
 import {
   iconOffRequirements,
-  textHeader4,
   textHeader5
 } from '../../gurbTheme'
 
@@ -137,7 +136,6 @@ const TaxAddress = (props) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_HOLDER_ADDRESS_QUESTION')}
-          textStyle={textHeader4}
           required={true}
         />
       </Grid>

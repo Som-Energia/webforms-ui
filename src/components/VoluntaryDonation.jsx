@@ -11,8 +11,7 @@ import Grid from '@mui/material/Grid'
 import { iconRequirements } from '../themes/commonStyles'
 import {
   iconOffRequirements,
-  textBody1,
-  textHeader4
+  textBody1
 } from '../containers/Gurb/gurbTheme'
 
 const HolderVoluntaryDonation = (props) => {
@@ -69,7 +68,6 @@ const HolderVoluntaryDonation = (props) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={t('VOLUNTARY_DONATION_QUESTION')}
-          textStyle={textHeader4}
           required={true}
         />
       </Grid>

@@ -9,10 +9,7 @@ import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
 import Grid from '@mui/material/Grid'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
-import {
-  iconOffRequirements,
-  textHeader4
-} from '../../gurbTheme'
+import iconOffRequirements  from '../../gurbTheme'
 import { checkVatFormat } from '../../../../services/utils'
 
 const HolderIdentification = (props) => {
@@ -93,7 +90,6 @@ const HolderIdentification = (props) => {
       <Grid item xs={12}>
         <RequiredTitle
           text={t('GURB_HOLDER_QUESTION')}
-          textStyle={textHeader4}
           required={true}
         />
       </Grid>
