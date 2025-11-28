@@ -29,7 +29,7 @@ import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData
 import NewContractMemberPower from './NewContractMemberPower'
 import NewContractMemberSelfConsumptionChooser from './NewContractMemberSelfConsumptionChooser'
 import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
-import NewContractMemberHolder from './NewContractMemberHolder'
+import NewContractHolder from './NewContractHolder'
 import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
 import NewContractMemberPayment from './NewContractMemberPayment'
 import NewContractMemberSummary from './NewContractMemberSummary'
@@ -43,7 +43,7 @@ import newContractMemberSupplyPointDataValidations from './newContractMemberSupp
 import newContractMemberPowerValidations from './newContractMemberPowerValidations'
 import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
 import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
-import newContractMemberHolderValidations from './newContractMemberHolderValidations'
+import newContractHolderValidations from './newContractHolderValidations'
 import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
 import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
@@ -56,17 +56,16 @@ import RedirectUrl from '../Gurb/components/RedirectUrl'
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
-import { usePixelEvent } from "../../hooks/usePixelEvent"
+import { usePixelEvent } from '../../hooks/usePixelEvent'
 
 const NewContractMemberForm = (props) => {
-
   const { triggerEvent } = usePixelEvent()
   const [searchParams] = useSearchParams()
   const { i18n, t } = useTranslation()
   const { language } = useParams()
-  const mtm_cid = searchParams.get("mtm_cid")
-  const mtm_source = searchParams.get("mtm_source")
-  const gurb_id = searchParams.get("gurb_id")
+  const mtm_cid = searchParams.get('mtm_cid')
+  const mtm_source = searchParams.get('mtm_source')
+  const gurb_id = searchParams.get('gurb_id')
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
@@ -88,8 +87,7 @@ const NewContractMemberForm = (props) => {
   const [formSteps, setFormSteps] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
 
-  const [gurbCode] = useState(() => searchParams.get("gurb-code"));
-
+  const [gurbCode] = useState(() => searchParams.get('gurb-code'))
 
   useEffect(() => {
     if (language && i18n.language !== language) {
@@ -198,7 +196,7 @@ const NewContractMemberForm = (props) => {
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
-    newContractMemberHolderValidations,
+    newContractHolderValidations,
     identifyMemberPersonalDataValidations,
     newContractMemberVoluntaryDonationValidations,
     newContractMemberPaymentValidations,
@@ -214,7 +212,7 @@ const NewContractMemberForm = (props) => {
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
     newContractMemberSelfConsumptionDataValidations,
-    newContractMemberHolderValidations,
+    newContractHolderValidations,
     newContractMemberVoluntaryDonationValidations,
     newContractMemberPaymentValidations,
     newContractMemberSummaryValidations
@@ -225,7 +223,7 @@ const NewContractMemberForm = (props) => {
       setValidationSteps(validationSchemasNewMember)
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member == 'member-on') {
+    } else if (has_member == 'member-on' || has_member == 'member-link') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setMAX_STEP_NUMBER(
@@ -250,36 +248,69 @@ const NewContractMemberForm = (props) => {
       next = activeStep + 1
     }
 
-    if (
-      activeStep === formSteps['POWER'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-on'
-    ) {
-      next = next + 2
+    if (formikProps.values.has_member === 'member-on')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['POWER']) {
+          next = next + 4
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['SELFCONSUMPTION'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          next = next + 1
+        }
+
+        if (activeStep === formSteps['HOLDER_INFO'])
+        {
+          next = next + 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['POWER'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-off'
-    ) {
-      next = next + 3
+    if ( formikProps.values.has_member === 'member-off')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['POWER']) {
+          next = next + 3
+        }
+      }
+
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['SELFCONSUMPTION'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          next = next + 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['SELFCONSUMPTION'] &&
-      formikProps.values.has_selfconsumption === 'selfconsumption-off'
-    ) {
-      next = next + 1
+    if (formikProps.values.has_member === 'member-link')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['POWER'])
+        {
+          next = next + 3
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['SELFCONSUMPTION'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          next = next + 1
+        }
+      }
     }
-
-    if (
-      activeStep === formSteps['HOLDER_INFO'] &&
-      formikProps.values.member_is_holder === 'holder-member-yes'
-    ) {
-      next = next + 1
-    }
-
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
@@ -288,54 +319,102 @@ const NewContractMemberForm = (props) => {
   const prevStep = (formikProps) => {
     let prev = activeStep - 1
 
-    if (
-      activeStep === formSteps['HOLDER_INFO'] &&
-      formikProps.values.has_light === 'light-on' &&
-      formikProps.values.has_selfconsumption === 'selfconsumption-off'
-    ) {
-      prev = prev - 1
+    if (formikProps.values.has_member === 'member-on')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['DONATION']) {
+          prev = prev - 4
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['HOLDER_INFO'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          prev = prev - 1
+        }
+
+        if (activeStep === formSteps['DONATION'])
+        {
+          prev = prev - 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['HOLDER_INFO'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-on'
-    ) {
-      prev = prev - 2
+    if ( formikProps.values.has_member === 'member-off')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['DONATION']) {
+          prev = prev - 3
+        }
+      }
+
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['HOLDER_INFO'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          prev = prev - 1
+        }
+      }
     }
 
-    if (
-      activeStep === formSteps['DONATION'] &&
-      formikProps.values.has_light === 'light-off' &&
-      formikProps.values.has_member === 'member-off'
-    ) {
-      prev = prev - 3
-    }
-
-    if (
-      activeStep === formSteps['DONATION'] &&
-      formikProps.values.member_is_holder === 'holder-member-yes'
-    ) {
-      prev = prev - 1
+    if (formikProps.values.has_member === 'member-link')
+    {
+      if (formikProps.values.has_light === 'light-off')
+      {
+        if (activeStep === formSteps['MEMBER_INFO'])
+        {
+          prev = prev - 3
+        }
+      }
+      if (formikProps.values.has_light === 'light-on')
+      {
+        if (
+          activeStep === formSteps['HOLDER_INFO'] &&
+          formikProps.values.has_selfconsumption === 'selfconsumption-off'
+        ) {
+          prev = prev - 1
+        }
+      }
     }
 
     setActiveStep(Math.max(0, prev))
   }
 
   const trackSucces = () => {
-
-    trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: 'send-new-contract-member-ok' })
+    trackEvent({
+      category: 'NewContractMember',
+      action: 'newContractMemberFormOk',
+      name: 'send-new-contract-member-ok'
+    })
     if (gurb_id) {
-      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `send-new-contract-member-ok-gurb-${gurb_id}` })
+      trackEvent({
+        category: 'NewContractMember',
+        action: 'newContractMemberFormOk',
+        name: `send-new-contract-member-ok-gurb-${gurb_id}`
+      })
     }
     if (mtm_cid && mtm_source && language) {
-      trackEvent({ category: 'NewContractMember', action: 'newContractMemberFormOk', name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}` })
+      trackEvent({
+        category: 'NewContractMember',
+        action: 'newContractMemberFormOk',
+        name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}`
+      })
     }
-    triggerEvent("FormularioCompletado", { status: "ok" })
+    triggerEvent('FormularioCompletado', { status: 'ok' })
   }
 
   const handlePost = async (values) => {
-    trackEvent({ category: 'Send', action: 'sendNewContractMemberClick', name: 'send-new-contract-member' })
+    trackEvent({
+      category: 'Send',
+      action: 'sendNewContractMemberClick',
+      name: 'send-new-contract-member'
+    })
     setSending(true)
     const data = newNormalizeContract(values, gurbCode)
     await newContract(data)
@@ -370,7 +449,6 @@ const NewContractMemberForm = (props) => {
     const trackProps = { ...props, sendTrackEvent }
 
     if (values?.has_member == 'member-off') {
-
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -392,7 +470,7 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 8) {
         setHasAlert(false)
-        return <NewContractMemberHolder {...props} />
+        return <NewContractHolder {...props} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
@@ -401,7 +479,6 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSummary {...trackProps} />
       }
     } else {
-
       if (activeStep === 1) {
         setHasAlert(false)
         return <ApadrinatingDetails {...props} />
@@ -421,7 +498,7 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 7) {
         setHasAlert(false)
-        return <NewContractMemberHolder {...props} />
+        return <NewContractHolder {...props} />
       } else if (activeStep === 8) {
         return <IdentifyMemberPersonalData {...props} holder={true} />
       } else if (activeStep === 9) {
@@ -517,13 +594,19 @@ const NewContractMemberForm = (props) => {
                   )}
                   {completed ? (
                     <Box sx={{ mt: 2 }}>
-
                       {gurbCode && !error ? (
                         <RedirectUrl
                           title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
-                          description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
-                          url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', { gurbCode, language: i18n.language })}
-                          buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
+                          description={t(
+                            'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION'
+                          )}
+                          url={t(
+                            'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL',
+                            { gurbCode, language: i18n.language }
+                          )}
+                          buttonText={t(
+                            'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT'
+                          )}
                         />
                       ) : (
                         <Result
@@ -532,21 +615,22 @@ const NewContractMemberForm = (props) => {
                             !error
                               ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
                               : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
-                          }
-                        >
+                          }>
                           <Typography
-                            sx={{ color: 'secondary.extraDark', textAlign: 'center' }}
+                            sx={{
+                              color: 'secondary.extraDark',
+                              textAlign: 'center'
+                            }}
                             dangerouslySetInnerHTML={{
                               __html: !error
                                 ? formikProps.values.has_member === 'member-on'
                                   ? t('NEW_CONTRACT_SUCCESS_DESC')
                                   : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
-                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC'),
+                                : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
                             }}
                           />
                         </Result>
                       )}
-
                     </Box>
                   ) : (
                     getStep(formikProps, sendTrackEvent)
@@ -564,6 +648,9 @@ const NewContractMemberForm = (props) => {
                       {activeStep !== 0 && (
                         <Grid item sm={2} xs={12}>
                           <PrevButton
+                            disabled={
+                              summaryField !== undefined
+                            }
                             onClick={() => prevStep(formikProps)}
                             title={'PREV'}
                           />
@@ -590,27 +677,24 @@ const NewContractMemberForm = (props) => {
                     </Grid>
                   )}
                 </>
-              )
-              }
+              )}
             </>
           )
         }}
       </Formik>
-      {
-        data?.payment_data && (
-          <form ref={formTPV} action={data.redsys_endpoint} method="POST">
-            {Object.keys(data.payment_data).map((key) => (
-              <input
-                key={key}
-                type="hidden"
-                name={key}
-                value={data.payment_data[key]}
-              />
-            ))}
-          </form>
-        )
-      }
-    </Container >
+      {data?.payment_data && (
+        <form ref={formTPV} action={data.redsys_endpoint} method="POST">
+          {Object.keys(data.payment_data).map((key) => (
+            <input
+              key={key}
+              type="hidden"
+              name={key}
+              value={data.payment_data[key]}
+            />
+          ))}
+        </form>
+      )}
+    </Container>
   )
 }
 

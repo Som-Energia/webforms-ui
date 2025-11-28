@@ -80,6 +80,40 @@ Cypress.Commands.add(
   }
 )
 
+Cypress.Commands.add(
+  'nifAndPersonalLegalDataMember',
+  (nif, personalData, validAddress, optionalData = false) => {
+    cy.get('[data-cy="new_member.nif"]').type(nif)
+    cy.get('[data-cy="new_member.name"]').type(personalData.name)
+    cy.get('[data-cy="new_member.proxyname"]').type(personalData.proxyname)
+    cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
+    cy.get('[data-cy="address"]').type(validAddress.input)
+    cy.contains(personalData.street).click()
+    cy.wait(1000)
+
+    cy.get('[data-cy="address.number"]').clear().type(22, { delay: 100 })
+    cy.get('[data-cy="address.floor"]').type('1')
+    cy.get('[data-cy="address.door"]').type('3')
+    cy.get('[data-cy="address.stairs"]').type('B')
+    cy.get('[data-cy="address.bloc"]').type('Omega')
+    cy.get('[data-cy="new_member.email"]').type(personalData.email)
+    cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
+    cy.get('[data-cy="new_member.phone"]')
+      .type(personalData.phone)
+      .focused()
+      .blur()
+
+    if (optionalData) {
+      cy.get('[id="new_member.referral_source"]').click()
+      cy.get('[id="new_member.referral_source-O1_SOM_SERVEIS"]').click()
+    }
+
+    cy.get('[data-cy="legal_person"]').click()
+
+    cy.get('[data-cy=next]').click()
+  }
+)
+
 Cypress.Commands.add('choosePaymentMethod', (creditCard = false) => {
   const optionValue = creditCard ? 'credit-card' : 'iban'
   cy.get('[data-cy="method-payment-question"]')

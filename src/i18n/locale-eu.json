@@ -873,6 +873,8 @@
     "CURRENT": "Orain",
     "HAS_MEMBER": "Bazkidea naiz edo gonbidatzen naute",
     "HAS_MEMBER_BODY": "Jada bazkidea bazara edo gonbidatuko zaituen norbait ezagutzen baduzu",
+    "HAS_LINK_MEMBER": "Em conviden",
+    "HAS_LINK_MEMBER_BODY": "Conec una persona sòcia i puc fer servir el seu número per contractar.",
     "HAS_NO_MEMBER": "Bazkidetu eta argia kontratatu nahi dut",
     "HAS_NO_MEMBER_BODY": "Egin bat Kooperatibarekin eta kontratatu argia",
     "PURPOSE_MEMBER": "XEDEA: Kooperatibako bazkide gisa alta kudeatzea eta ondoriozko zeregin administratiboak; gure eremuari lotutako informazio-mezuak bidaltzea (informazio-ondoreetarako eta ez bakarrik batzar nagusiarekin zerikusia duten mezuak) eta gure energia-produktuei eta -zerbitzuei buruzko informazio komertzialak, baita euskarri elektronikoen bidez ere.",

@@ -9,7 +9,12 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import { CommunityIcon, HandshakeIcon } from '../../data/icons/Icons'
 
-const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaAndSteps, sendTrackEvent }) => {
+const NewContractMemberQuestion = ({
+  formikProps,
+  nextStep,
+  setValidationSchemaAndSteps,
+  sendTrackEvent
+}) => {
   const { values, setFieldValue } = formikProps
   const { t } = useTranslation()
   const trackID = 'member-question'
@@ -22,20 +27,24 @@ const NewContractMemberQuestion = ({ formikProps, nextStep, setValidationSchemaA
 
   useEffect(() => {
     sendTrackEvent(trackID)
-  },[])
-
-
+  }, [])
 
   const options = [
     {
       id: 'member-on',
-      icon: <HandshakeIcon />,
+      icon: <CommunityIcon />,
       textHeader: t('HAS_MEMBER'),
       textBody: t('HAS_MEMBER_BODY')
     },
     {
+      id: 'member-link',
+      icon: <HandshakeIcon />,
+      textHeader: t('HAS_LINK_MEMBER'),
+      textBody: t('HAS_LINK_MEMBER_BODY')
+    },
+    {
       id: 'member-off',
-      icon: <CommunityIcon />,
+      icon: <CommunityIcon on={false} />,
       textHeader: t('HAS_NO_MEMBER'),
       textBody: t('HAS_NO_MEMBER_BODY')
     }

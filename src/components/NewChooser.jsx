@@ -96,6 +96,11 @@ const Option = ({
 const Chooser = (props) => {
   const { options, value, handleChange, name, maxWidth } = props
 
+  const xsSize = options.length == 2? 12 : 12
+  const smSize = options.length == 2? 6 : 12
+  const mdSize = options.length == 2? 6 : 8
+  const lgSize = options.length == 2? 6 : 4
+
   const setOptionSelection = (option) => {
     handleChange(option)
   }
@@ -108,7 +113,7 @@ const Chooser = (props) => {
       direction="row"
       justifyContent="center">
       {options.map((option, index) => (
-        <Grid key={index} item sm={6} xs={12}>
+        <Grid key={index} item xs={xsSize} sm={smSize} md={mdSize} lg={lgSize}>
           <Option
             isSelected={option?.id === value}
             setSelected={setOptionSelection}

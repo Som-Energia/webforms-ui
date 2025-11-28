@@ -48,7 +48,6 @@ const alreadyMember = {
   entryValues: {
     cups: random_cups,
     has_member: 'member-on',
-    member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,
@@ -102,8 +101,7 @@ const alreadyMember = {
 const sponsored = {
   entryValues: {
     cups: random_cups,
-    has_member: 'member-on',
-    member_is_holder: 'holder-member-no',
+    has_member: 'member-link',
     has_light: 'light-on',
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,
@@ -214,7 +212,6 @@ const A3_indexed = {
   entryValues: {
     cups: random_cups,
     has_member: 'member-on',
-    member_is_holder: 'holder-member-yes',
     has_light: 'light-off',
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
@@ -270,7 +267,6 @@ const C2_30TD = {
   entryValues: {
     cups: random_cups,
     has_member: 'member-on',
-    member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
     previous_holder: 'previous-holder-no',
     voluntary_donation: true,
@@ -329,7 +325,6 @@ const withSelfconsumption = {
   entryValues: {
     cups: random_cups,
     has_member: 'member-on',
-    member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
@@ -386,7 +381,6 @@ const cadastralReference = {
   entryValues: {
     cups: random_cups,
     has_member: 'member-on',
-    member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
     previous_holder: 'previous-holder-yes',
     voluntary_donation: true,
@@ -445,7 +439,6 @@ const paymentTPV = {
   entryValues: {
     cups: random_cups,
     has_member: 'member-on',
-    member_is_holder: 'holder-member-yes',
     has_light: 'light-on',
     previous_holder: 'previous-holder-yes',
     voluntary_donation: false,

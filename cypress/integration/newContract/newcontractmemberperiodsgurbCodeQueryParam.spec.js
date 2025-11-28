@@ -16,7 +16,7 @@ describe('New Contract: results with gurbCode query param', () => {
 
   describe('New contract ok with gurb code', function () {
     it('renders the redirect component', function () {
-      cy.contractMemberQuestion()
+      cy.contractMemberQuestion('member-off')
       cy.identifyNewMember(this.data.personalPhysicalData.nif)
       cy.personalPhysicalDataMember(
         this.data.personalPhysicalData,
