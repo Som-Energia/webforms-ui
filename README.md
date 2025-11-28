@@ -4,47 +4,33 @@
 [![cypress webforms-ui](https://github.com/Som-Energia/webforms-ui/actions/workflows/cypress.yml/badge.svg)](https://github.com/Som-Energia/webforms-ui/actions/workflows/cypress.yml)
 
 
-### Som Energia WebForms UI
+<!-- [DOC-DEV-HOW-TO] -->
 
 ## Installation 🔧
 
 1. Install NPM packages
 
 ```sh
-  npm install
+npm install
 ```
 
-## Run the app 🚀
+2. Download [deployment-configurations repo](https://gitlab.somenergia.coop/IT/deployment-configurations) following this structure:
 
-Run the app on dev mode
+```
+/whatever-you-want
+ |--/webforms-ui
+ |--/deployment-configurations
+```
+
+
+<!-- [DOC-DEPLOY-HOW-TO] -->
+
+
+## Deploy 🚀
+
+With `deployment-configurations` updated with remote changes, run `./scripts/deploy.sh` deployment script with environmnet (`testing`, `pre`, `production`) as a param like:
 
 ```sh
-  npm start
+./scripts/deploy.sh pre
 ```
 
-## Testing ⚙️
-
-Launches the Jest test runner in the interactive watch mode.
-
-```sh
-npm test
-```
-
-Launches the Cypress test runner. Cypress requires you to run `npm start` in parallel.
-
-```sh
-npm run cypress
-```
-
-To get `holderChangePersonaldata.js`:
-
-```sh
-cd cypress/fixtures/
-ln -s ../../../testdata/b2bs/holderChangePersonaldata.json .
-```
-
-To get  `.env.development`:
-```sh
-ln -s $myit-docs_dir/it-docs/conf/webforms-ui/.env.development
-```
-We should have testdata repo!
