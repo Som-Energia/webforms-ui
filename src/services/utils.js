@@ -720,8 +720,3 @@ export const checkIbanFormat = (iban) => {
   const formattedIban = electronicFormatIBAN(iban)
   return isValidIBAN(formattedIban)
 }
-
-export const isCompanyVat = (vat) => {
-  const info = stdnum.ES.cif.validate(vat)
-  return info.isValid && info?.isCompany;
-}
