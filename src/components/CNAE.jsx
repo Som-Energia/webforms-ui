@@ -9,7 +9,7 @@ import GurbLoadingContext from '../context/GurbLoadingContext'
 import InputField from './InputField'
 import Select from '../containers/Gurb/components/Select'
 import InputTitle from './InputTitle'
-import textField from '../containers/Gurb/gurbTheme'
+import { textField } from '../containers/Gurb/gurbTheme'
 
 const CnaeField = (props) => {
   const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =

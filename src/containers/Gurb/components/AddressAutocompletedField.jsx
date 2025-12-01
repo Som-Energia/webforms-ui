@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import textField from '../gurbTheme'
+import { textField } from '../gurbTheme'
 import InputTitle from '../../../components/InputTitle'
 
 export default function LocationInput({
