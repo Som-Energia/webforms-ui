@@ -107,10 +107,7 @@ export default function LocationInput({
       renderInput={(params) => (
         <Grid container spacing={1}>
           <Grid item xs={12} sx={{ mb: '6px' }}>
-            <InputTitle
-              text={textFieldName}
-              required={required}
-            />
+            <InputTitle text={textFieldName} required={required} />
           </Grid>
 
           <Grid item xs={12}>
