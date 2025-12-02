@@ -4,8 +4,6 @@
 [![cypress webforms-ui](https://github.com/Som-Energia/webforms-ui/actions/workflows/cypress.yml/badge.svg)](https://github.com/Som-Energia/webforms-ui/actions/workflows/cypress.yml)
 
 
-<!-- [DOC-DEV-HOW-TO] -->
-
 ## Installation 🔧
 
 1. Install NPM packages
@@ -21,10 +19,6 @@ npm install
  |--/webforms-ui
  |--/deployment-configurations
 ```
-
-
-<!-- [DOC-DEPLOY-HOW-TO] -->
-
 
 ## Deploy 🚀
 
