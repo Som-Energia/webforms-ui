@@ -1,5 +1,12 @@
 # Change Log
 
+## 6.3.0 2025-12-02
+
+- FIX: import styles
+- FIX: Buttons in final page (holderchange && new member)
+- REF: Remove unused prop (textStyle)
+- IMP: Split new contract and member holder question
+
 ## 6.2.2 2025-11-24
 
 - FIX: GURB: Signature errors
