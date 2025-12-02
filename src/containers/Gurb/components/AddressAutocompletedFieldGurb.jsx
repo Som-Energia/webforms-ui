@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import textField from '../gurbTheme'
+import { textField } from '../gurbTheme'
 import InputTitle from '../../../components/InputTitle'
 
 export default function LocationInput({
@@ -20,7 +20,7 @@ export default function LocationInput({
   error = false,
   helperText = '',
   touched = false,
-  onBlur = () => { }
+  onBlur = () => {}
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
@@ -33,7 +33,9 @@ export default function LocationInput({
       ? { id: v.id ?? null, street: v.street ?? v.text ?? '' }
       : { id: null, street: v ?? '' }
 
-  const [inputValue, setInputValue] = useState(() => normalizeValue(value).street)
+  const [inputValue, setInputValue] = useState(
+    () => normalizeValue(value).street
+  )
   const [loadingResults, setLoadingResults] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
 
@@ -77,7 +79,10 @@ export default function LocationInput({
       onChange({ id: null, street: newValue })
       setInputValue(newValue)
     } else {
-      const selected = { ...newValue, street: newValue.street || newValue.text || '' }
+      const selected = {
+        ...newValue,
+        street: newValue.street || newValue.text || ''
+      }
       onChange(selected)
       setInputValue(selected.street)
     }
@@ -89,7 +94,7 @@ export default function LocationInput({
   return (
     <Autocomplete
       freeSolo
-      data-cy={"street"}
+      data-cy={'street'}
       value={normalizedValue}
       inputValue={inputValue}
       options={suggestions}
@@ -110,7 +115,10 @@ export default function LocationInput({
         }
       }}
       isOptionEqualToValue={(option, v) => {
-        const optStreet = typeof option === 'string' ? option : option.street || option.text || ''
+        const optStreet =
+          typeof option === 'string'
+            ? option
+            : option.street || option.text || ''
         const valStreet = typeof v === 'string' ? v : v?.street || v?.text || ''
         const optId = option?.id ?? null
         const valId = v?.id ?? null
@@ -132,7 +140,11 @@ export default function LocationInput({
                   paddingY: '0px'
                 }
               }}
-              label={!normalizedValue.street && !inputValue && !isFocused ? textFieldLabel : ''}
+              label={
+                !normalizedValue.street && !inputValue && !isFocused
+                  ? textFieldLabel
+                  : ''
+              }
               InputLabelProps={{ shrink: false }}
               onFocus={() => setIsFocused(true)}
               onBlur={(e) => {
@@ -140,9 +152,12 @@ export default function LocationInput({
                 if (onBlur) onBlur(e)
 
                 // Only reset id if the input string does not match the current value
-                if (!normalizedValue.street || e.target.value !== normalizedValue.street) {
+                if (
+                  !normalizedValue.street ||
+                  e.target.value !== normalizedValue.street
+                ) {
                   onChange({ id: null, street: e.target.value })
-                } 
+                }
               }}
               error={Boolean(touched && error)}
               helperText={helperText}

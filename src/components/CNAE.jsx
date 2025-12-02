@@ -9,7 +9,7 @@ import GurbLoadingContext from '../context/GurbLoadingContext'
 import InputField from './InputField'
 import Select from '../containers/Gurb/components/Select'
 import InputTitle from './InputTitle'
-import textField from '../containers/Gurb/gurbTheme'
+import { textField } from '../containers/Gurb/gurbTheme'
 
 const CnaeField = (props) => {
   const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
@@ -74,10 +74,7 @@ const CnaeField = (props) => {
       <Grid item xs={12} sm={6}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <InputTitle
-              text={t('ES_UN_HABITATGE')}
-              required={true}
-            />
+            <InputTitle text={t('ES_UN_HABITATGE')} required={true} />
           </Grid>
           <Grid item xs={12}>
             <Select
@@ -101,11 +98,12 @@ const CnaeField = (props) => {
           error={errors?.supply_point?.cnae || errors?.supply_point?.cnae_valid}
           textFieldHelper={
             <Typography
-              variant="body.sm.regular" color="secondary.extraDark"
+              variant="body.sm.regular"
+              color="secondary.extraDark"
               dangerouslySetInnerHTML={{
                 __html: values?.supply_point?.is_housing
-                ? t('CNAE_HELPER')
-                : t('HELP_POPOVER_CNAE')
+                  ? t('CNAE_HELPER')
+                  : t('HELP_POPOVER_CNAE')
               }}
             />
           }

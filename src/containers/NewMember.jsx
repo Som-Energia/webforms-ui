@@ -65,8 +65,8 @@ const NewMemberForm = (props) => {
       stairs: '',
       bloc: '',
       postal_code: '',
-      state:{id:'', name: ''},
-      city: {id:'', name: ''}
+      state: { id: '', name: '' },
+      city: { id: '', name: '' }
     },
     new_member: {
       nif: '',
@@ -108,7 +108,11 @@ const NewMemberForm = (props) => {
   ]
 
   useEffect(() => {
-    trackEvent({ category: 'NewMember', action: 'setNewMemberStep', name: `new-member-step-${activeStep}` })
+    trackEvent({
+      category: 'NewMember',
+      action: 'setNewMemberStep',
+      name: `new-member-step-${activeStep}`
+    })
   }, [activeStep])
 
   const nextStep = (formikProps) => {
@@ -132,12 +136,20 @@ const NewMemberForm = (props) => {
   }
 
   const trackSucces = () => {
-    trackEvent({ category: 'NewMember', action: 'newMemberFormOk', name: 'send-new-member-ok' })
+    trackEvent({
+      category: 'NewMember',
+      action: 'newMemberFormOk',
+      name: 'send-new-member-ok'
+    })
   }
 
   const handlePost = async (values) => {
     setSending(true)
-    trackEvent({ category: 'Send', action: 'sendNewMemberClick', name: 'send-new-member' })
+    trackEvent({
+      category: 'Send',
+      action: 'sendNewMemberClick',
+      name: 'send-new-member'
+    })
 
     const data = newNormalizeMember(values)
     await member(data)
@@ -211,89 +223,96 @@ const NewMemberForm = (props) => {
         {(formikProps) => {
           return (
             <>
-              {sending
-                ? <NewLoading description={t("NEW_MEMBER_SUBMIT_LOADING")} />
-                : <>
-                  <Box sx={{ marginBottom:'65px' }}>
+              {sending ? (
+                <NewLoading description={t('NEW_MEMBER_SUBMIT_LOADING')} />
+              ) : (
+                <>
+                  <Box sx={{ marginBottom: '65px' }}>
                     <SomStepper
                       activeStep={activeStep}
                       steps={NEW_MEMBER_FORM_SUBSTEPS}
                     />
                   </Box>
-                  {
-                    completed ? (
+                  {completed ? (
+                    <Box sx={{ mt: 2 }}>
                       <Result
                         mode={!error ? 'success' : 'failure'}
-                        title={!error ? t('NEW_MEMBER_SUCCESS_TITLE') : t('NEW_MEMBER_ERROR_TITLE')}
-                      >
+                        title={
+                          !error
+                            ? t('NEW_MEMBER_SUCCESS_TITLE')
+                            : t('NEW_MEMBER_ERROR_TITLE')
+                        }>
                         <Typography
-                          sx={{ color: "secondary.dark" }}
+                          sx={{ color: 'secondary.dark' }}
                           dangerouslySetInnerHTML={{
-                            __html: !error ? t('NEW_MEMBER_SUCCESS_DESC') : t('NEW_MEMBER_ERROR_DESC')
+                            __html: !error
+                              ? t('NEW_MEMBER_SUCCESS_DESC')
+                              : t('NEW_MEMBER_ERROR_DESC')
                           }}
                         />
                       </Result>
-                    ) : (
-                      getStep(formikProps)
-                    )}
-                  <Grid
-                    container
-                    direction="row-reverse"
-                    rowSpacing={2}
-                    sx={{
-                      marginTop: '2rem',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}>
-                    {activeStep !== 0 && (
-                      <Grid item sm={2} xs={12}>
-                        <PrevButton
-                          disabled={sending}
-                          onClick={() => prevStep(formikProps)}
-                          title={'PREV'}
-                        />
+                    </Box>
+                  ) : (
+                    <>
+                      {getStep(formikProps)}
+                      <Grid
+                        container
+                        direction="row-reverse"
+                        rowSpacing={2}
+                        sx={{
+                          marginTop: '2rem',
+                          justifyContent: 'space-between',
+                          alignItems: 'center'
+                        }}>
+                        {activeStep !== 0 && (
+                          <Grid item sm={2} xs={12}>
+                            <PrevButton
+                              disabled={sending}
+                              onClick={() => prevStep(formikProps)}
+                              title={'PREV'}
+                            />
+                          </Grid>
+                        )}
+                        <Grid item sm={2} xs={12} order={-1}>
+                          {activeStep !== MAX_STEP_NUMBER ? (
+                            <NextButton
+                              disabled={
+                                loading ||
+                                !formikProps.isValid ||
+                                activeStep === MAX_STEP_NUMBER
+                              }
+                              onClick={() => nextStep(formikProps)}
+                              title={'NEXT'}
+                            />
+                          ) : (
+                            <SubmitButton
+                              disabled={!formikProps.isValid || completed}
+                              onClick={() => handlePost(formikProps.values)}
+                            />
+                          )}
+                        </Grid>
                       </Grid>
-                    )}
-                    <Grid item sm={2} xs={12} order={-1}>
-                      {activeStep !== MAX_STEP_NUMBER ? (
-                        <NextButton
-                          disabled={
-                            loading ||
-                            !formikProps.isValid ||
-                            activeStep === MAX_STEP_NUMBER
-                          }
-                          onClick={() => nextStep(formikProps)}
-                          title={'NEXT'}
-                        />
-                      ) : (
-                        <SubmitButton
-                          disabled={!formikProps.isValid || completed}
-                          onClick={() => handlePost(formikProps.values)}
-                        />
-                      )}
-                    </Grid>
-                  </Grid>
+                    </>
+                  )}
                 </>
-              }
+              )}
             </>
           )
         }}
       </Formik>
-      {
-        data?.payment_data && (
-          <form ref={formTPV} action={data.endpoint} method="POST">
-            {Object.keys(data.payment_data).map((key) => (
-              <input
-                key={key}
-                type="hidden"
-                name={key}
-                value={data.payment_data[key]}
-              />
-            ))}
-          </form>
-        )
-      }
-    </Container >
+      {data?.payment_data && (
+        <form ref={formTPV} action={data.endpoint} method="POST">
+          {Object.keys(data.payment_data).map((key) => (
+            <input
+              key={key}
+              type="hidden"
+              name={key}
+              value={data.payment_data[key]}
+            />
+          ))}
+        </form>
+      )}
+    </Container>
   )
 }
 
