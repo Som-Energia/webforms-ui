@@ -109,7 +109,8 @@ const NewContractMemberForm = (props) => {
     if (fnString) {
       try {
         const fn = eval(fnString)
-        const vat = values.member_is_holder === 'holder-member-no' ? values.new_member.nif : values.member.nif
+        const vat = values.has_member === 'member-on' ? values.member.nif : values.new_member.nif
+        //TODO: check logic when change var naming
         const isCompany = vat ? isCompanyVat(vat) : null
         const param = isCompany === null ? '' : isCompany ? ENTERPRISE : DOMESTIC
         fn(param)
