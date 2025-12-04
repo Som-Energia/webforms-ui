@@ -19,6 +19,8 @@ import {
   NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
   NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
 } from '../../services/steps'
+import Stack from '../../services/Stack'
+import { NextStep, keyByValue, valueByKey } from '../../services/NextStep'
 import SummaryContext from '../../context/SummaryContext'
 import GurbLoadingContext from '../../context/GurbLoadingContext'
 import MemberIdentifier from '../NewMember/MemberIdentifier'
@@ -87,7 +89,9 @@ const NewContractMemberForm = (props) => {
     newContractMemberQuestionValidations
   ])
   const [formSteps, setFormSteps] = useState({})
+  const [formStepsName, setFormStepsName] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
+  const [prevSteps, setPrevSteps] = useState(new Stack())
 
   const [gurbCode] = useState(() => searchParams.get("gurb-code"));
   const POP_UP_TIME = 180000
@@ -258,10 +262,12 @@ const NewContractMemberForm = (props) => {
     if (has_member == 'member-off') {
       setValidationSteps(validationSchemasNewMember)
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
+      setFormStepsName('NEW_MEMBER_CONTRACT_FORM_SUBSTEPS')
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
     } else if (has_member == 'member-on' || has_member == 'member-link') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
+      setFormStepsName('NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS')
       setMAX_STEP_NUMBER(
         Object.keys(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS).length
       )
@@ -274,151 +280,29 @@ const NewContractMemberForm = (props) => {
 
   const nextStep = (formikProps) => {
     let next
-    if (
-      summaryField !== undefined &&
-      activeStep !== formSteps['IDENTIFY_MEMBER']
-    ) {
-      next = MAX_STEP_NUMBER
-      setSummaryField(undefined)
+    if ( summaryField !== undefined) {
+      if (activeStep === formSteps['IDENTIFY_MEMBER']) {
+        next = activeStep + 1
+      } else {
+        next = MAX_STEP_NUMBER
+        setSummaryField(undefined)
+      }
     } else {
-      next = activeStep + 1
-    }
-
-    if (formikProps.values.has_member === 'member-on')
-    {
-      if (formikProps.values.has_light === 'light-off')
-      {
-        if (activeStep === formSteps['POWER']) {
-          next = next + 4
-        }
+      if (activeStep > 0) {
+        let stepValue = NextStep[formStepsName][keyByValue(formSteps, activeStep)]
+        next = valueByKey(formSteps, stepValue, formikProps.values)
+      } else {
+        next = 1
       }
-      if (formikProps.values.has_light === 'light-on')
-      {
-        if (
-          activeStep === formSteps['SELFCONSUMPTION'] &&
-          formikProps.values.has_selfconsumption === 'selfconsumption-off'
-        ) {
-          next = next + 1
-        }
-
-        if (activeStep === formSteps['HOLDER_INFO'])
-        {
-          next = next + 1
-        }
-      }
-    }
-
-    if ( formikProps.values.has_member === 'member-off')
-    {
-      if (formikProps.values.has_light === 'light-off')
-      {
-        if (activeStep === formSteps['POWER']) {
-          next = next + 3
-        }
-      }
-
-      if (formikProps.values.has_light === 'light-on')
-      {
-        if (
-          activeStep === formSteps['SELFCONSUMPTION'] &&
-          formikProps.values.has_selfconsumption === 'selfconsumption-off'
-        ) {
-          next = next + 1
-        }
-      }
-    }
-
-    if (formikProps.values.has_member === 'member-link')
-    {
-      if (formikProps.values.has_light === 'light-off')
-      {
-        if (activeStep === formSteps['POWER'])
-        {
-          next = next + 3
-        }
-      }
-      if (formikProps.values.has_light === 'light-on')
-      {
-        if (
-          activeStep === formSteps['SELFCONSUMPTION'] &&
-          formikProps.values.has_selfconsumption === 'selfconsumption-off'
-        ) {
-          next = next + 1
-        }
-      }
+      prevSteps.push(activeStep)
     }
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
-  const prevStep = (formikProps) => {
-    let prev = activeStep - 1
-
-    if (formikProps.values.has_member === 'member-on')
-    {
-      if (formikProps.values.has_light === 'light-off')
-      {
-        if (activeStep === formSteps['DONATION']) {
-          prev = prev - 4
-        }
-      }
-      if (formikProps.values.has_light === 'light-on')
-      {
-        if (
-          activeStep === formSteps['HOLDER_INFO'] &&
-          formikProps.values.has_selfconsumption === 'selfconsumption-off'
-        ) {
-          prev = prev - 1
-        }
-
-        if (activeStep === formSteps['DONATION'])
-        {
-          prev = prev - 1
-        }
-      }
-    }
-
-    if ( formikProps.values.has_member === 'member-off')
-    {
-      if (formikProps.values.has_light === 'light-off')
-      {
-        if (activeStep === formSteps['DONATION']) {
-          prev = prev - 3
-        }
-      }
-
-      if (formikProps.values.has_light === 'light-on')
-      {
-        if (
-          activeStep === formSteps['HOLDER_INFO'] &&
-          formikProps.values.has_selfconsumption === 'selfconsumption-off'
-        ) {
-          prev = prev - 1
-        }
-      }
-    }
-
-    if (formikProps.values.has_member === 'member-link')
-    {
-      if (formikProps.values.has_light === 'light-off')
-      {
-        if (activeStep === formSteps['MEMBER_INFO'])
-        {
-          prev = prev - 3
-        }
-      }
-      if (formikProps.values.has_light === 'light-on')
-      {
-        if (
-          activeStep === formSteps['HOLDER_INFO'] &&
-          formikProps.values.has_selfconsumption === 'selfconsumption-off'
-        ) {
-          prev = prev - 1
-        }
-      }
-    }
-
+  const prevStep = () => {
+    let prev = prevSteps.pop()
     setActiveStep(Math.max(0, prev))
   }
 
@@ -686,7 +570,7 @@ const NewContractMemberForm = (props) => {
                             disabled={
                               summaryField !== undefined
                             }
-                            onClick={() => prevStep(formikProps)}
+                            onClick={() => prevStep()}
                             title={'PREV'}
                           />
                         </Grid>
