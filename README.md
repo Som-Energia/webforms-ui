@@ -48,3 +48,40 @@ To get  `.env.development`:
 ln -s $myit-docs_dir/it-docs/conf/webforms-ui/.env.development
 ```
 We should have testdata repo!
+
+
+## Deployment
+
+To deploy we have to use deploy.sh
+```
+scripts/deploy.sh [env]
+```
+
+### Testing
+
+If you want to deploy to the web:
+```
+scripts/deploy.sh pre
+```
+This command uses deploy-pre.conf. It is now defined with the test web configuration.
+
+
+If you want to deploy to the OV:
+```
+scripts/deploy.sh ovtest [vassal number]
+```
+This command uses deploy-ovtest.conf. It is now defined with the test OV configuration.
+
+### Production
+
+If you want to deploy to the web:
+```
+scripts/deploy.sh production
+```
+This command uses deploy-production.conf. It is now defined with the production web configuration.
+
+
+If you want to deploy to the OV:
+```
+TODO
+```
