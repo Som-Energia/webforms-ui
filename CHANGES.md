@@ -1,5 +1,10 @@
 # Change Log
 
+## 6.3.1 2025-10-05
+
+- NEW: Add popup in Contract Form
+- FIX: Translate in first step of Contract Form
+
 ## 6.3.0 2025-12-02
 
 - FIX: import styles
