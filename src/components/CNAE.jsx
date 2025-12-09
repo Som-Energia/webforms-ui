@@ -65,7 +65,7 @@ const CnaeField = (props) => {
   }
 
   const options = [
-    { id: 'yes', value: true, text: t('SI') },
+    { id: 'yes', value: true, text: t('YES') },
     { id: 'no', value: false, text: t('NO') }
   ]
 
