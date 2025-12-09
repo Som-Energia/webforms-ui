@@ -28,7 +28,7 @@
     "POWER_TO_CONTRACT": "Zenbateko potentzia duzu kontratatuta orain?",
     "HELP_POWER": "<a target=\"_blank\" href=\"{{url}}\">Nola jakin zenbateko potentzia behar dudan?</a>",
     "HELP_POWER_URL": "https://eu.support.somenergia.coop/article/368-nola-jakin-zein-potentzia-behar-dudan?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
-    "LA_TEVA_TARIFA_ES": "Zure tarifa hau izango da",
+    "CONTRACTED_FARE": "Zure tarifa hau izango da",
     "NO_MONOPHASE_CHOICE": "Ez duzu zehaztu instalazioa monofasikoa edo trifasikoa den",
     "NO_FARE_CHOSEN": "Ez duzu tarifa adierazi",
     "NO_POWER_CHOSEN": "Ez duzu potentzia adierazi",
