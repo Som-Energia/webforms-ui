@@ -430,7 +430,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               <Box mx={1} mt={1} mb={3}>
                 <FormHelperText
                   dangerouslySetInnerHTML={{
-                    __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') })
+                    __html: t('HELP_POWER', { url: t('HELP_POWER_URL') })
                   }}></FormHelperText>
               </Box>
 
