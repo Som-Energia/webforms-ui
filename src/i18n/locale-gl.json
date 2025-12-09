@@ -23,7 +23,7 @@
     "POWER_TO_CONTRACT": "Que potencia tes contratada actualmente?",
     "HELP_POWER": "<a target=\"_blank\" href=\"{{url}}\">Como averiguar a potencia que preciso</a>",
     "HELP_POWER_URL": "https://gl.support.somenergia.coop/article/399-como-podo-saber-a-potencia-que-preciso",
-    "LA_TEVA_TARIFA_ES": "A túa tarifa será",
+    "CONTRACTED_FARE": "A túa tarifa será",
     "NO_MONOPHASE_CHOICE": "Non especificaches se a instalación é de tipo monofásico ou trifásico",
     "NO_FARE_CHOSEN": "Non introduciches a tarifa",
     "NO_POWER_CHOSEN": "Non introduciches a potencia",

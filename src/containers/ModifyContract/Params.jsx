@@ -415,7 +415,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               {values.changePower && values.power && (
                 <Box mx={1} mb={3}>
                   <Grid container spacing={4}>
-                    <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
+                    <Grid item>{t('CONTRACTED_FARE')}</Grid>
                     <Grid item>
                       &nbsp;
                       <Badge
