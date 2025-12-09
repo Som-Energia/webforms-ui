@@ -1,7 +1,6 @@
 {
     "NO": "No",
     "CONTRACT": "Contracte",
-    "CONTRACT_MODIFICATION_FORM": "Modificacions de potència i/o tarifa",
     "MODIFY_POTTAR_INTRO_TITLE": "Avís important",
     "MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE": "Avís important per a empreses i persones d'alta al Règim Especial de Treballadors Autònoms",
     "MODIFY_POTTAR_BANER": "<p> Segons <a target=\"_blank\" href=\"{{baner_boe_url}}\">l'RDL 18/2022</a>, per a les empreses i les persones donades d'alta al Règim Especial de Treballadors Autònoms, el canvi de potència pot implicar costos a abonar a la distribuïdora, però <b>no hauran de pagar els drets de connexió</b> per a les modificacions de potència que hagin estat sol·licitades abans del 27/12/2024. Sí que hauran de pagar els drets de connexió en cas que calgui fer alguna actuació en l'equip de mesura o comptador.</p>\n<p>Per acollir-se a aquesta mesura cal adjuntar la documentació següent (a través d'aquest mateix formulari):</p>\n<ul>\n<li>Les persones donades d'alta al <b>Règim Especial de Treballadors Autònoms o assimilable</b> ens heu d'adjuntar l'alta al RETA o documentació assimilable.</li>\n<li>Les <b>empreses</b> ens heu d'adjuntar el <a target=\"_blank\" href=\"{{baner_document_url}}\">següent document signat</a>. Per a contractes 3.0TD i alta tensió, heu de tenir en compte que la modificació ha de complir les condicions descrites a l'RDL 18/2022, que us resumim en aquest <a target=\"_blank\" href=\"{{baner_help_url}}\">article del Centre d'Ajuda</a>.</li>\n</ul>",
