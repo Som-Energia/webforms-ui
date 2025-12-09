@@ -19,7 +19,7 @@
     "MODIFY_ANSWER_POWER": "Modificar la potència",
     "DATA_REVISION_CONFIRMATION": "Revisió i confirmació de les dades",
     "PHASE_CHANGE": "Quin canvi vols fer?",
-    "INSTALL_TYPE": "Canvi d'instal·lació",
+    "PHASE_TYPE_CHANGE": "Canvi d'instal·lació",
     "MONOFASICA_NORMAL": "Trifàsica a monofàsica",
     "TRIFASICA": "Monofàsica a trifàsica",
     "INSTALL_TYPE_ATTACHMENTS": "La distribuïdora elèctrica sol·licita obligatòriament la presentació del butlletí elèctric on consti el canvi de tensió efectuat",

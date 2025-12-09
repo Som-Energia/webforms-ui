@@ -63,7 +63,7 @@ export default function ModifyResume({
             sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
-            {t('INSTALL_TYPE')}
+            {t('PHASE_TYPE_CHANGE')}
           </Typography>
           <Typography
             data-cy={params.modify?.phases}

@@ -14,7 +14,7 @@
     "HELP_CONTACT_INFO_URL": "https://gl.support.somenergia.coop/article/658-las-distribuidoras-de-electricidad",
     "DATA_REVISION_CONFIRMATION": "Revisión e confirmación dos datos",
     "PHASE_CHANGE": "Que cambio queres facer?",
-    "INSTALL_TYPE": "Cambio de instalación",
+    "PHASE_TYPE_CHANGE": "Cambio de instalación",
     "MONOFASICA_NORMAL": "Trifásica a monofásica",
     "TRIFASICA": "Monofásica a trifásica",
     "INSTALL_TYPE_ATTACHMENTS": "A distribuidora eléctrica solicita obrigatoriamente a presentación do boletín eléctrico no que conste a mudanza de tensión efectuada",
