@@ -30,7 +30,6 @@
     "HELP_POWER_URL": "https://ca.support.somenergia.coop/article/269-com-puc-saber-la-potencia-que-necessito",
     "CONTRACTED_FARE": "La teva tarifa serà",
     "NO_MONOPHASE_CHOICE": "No has especificat si la instal·lació és de tipus monofàsic o trifàsic",
-    "NO_FARE_CHOSEN": "No has introduït la tarifa",
     "NO_POWER_CHOSEN": "No has introduït la potència",
     "NO_POWER_CHOSEN_PX": "No has introduït la potència per al període",
     "INVALID_POWER_30": "Almenys un període ha de tenir una potència superior o igual a 15 kW",
