@@ -25,7 +25,6 @@
     "HELP_POWER_URL": "https://gl.support.somenergia.coop/article/399-como-podo-saber-a-potencia-que-preciso",
     "CONTRACTED_FARE": "A túa tarifa será",
     "NO_MONOPHASE_CHOICE": "Non especificaches se a instalación é de tipo monofásico ou trifásico",
-    "NO_FARE_CHOSEN": "Non introduciches a tarifa",
     "NO_POWER_CHOSEN": "Non introduciches a potencia",
     "NO_POWER_CHOSEN_PX": "Non introduciches a potencia para o período",
     "INVALID_POWER_30": "Cando menos un período debe ter unha potencia superior ou igual a 15 kW",
