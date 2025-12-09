@@ -301,7 +301,7 @@ const GenerationContribution = (props) => {
           title={
             activeStep === 3
               ? t('GENERATION_FORM_SIGN_BUTTON')
-              : t('SEGUENT_PAS')
+              : t('NEXT')
           }
         />
       ) : (
@@ -447,7 +447,7 @@ const GenerationContribution = (props) => {
                     <PrevButton
                       disabled={activeStep === 0 || sending}
                       onClick={() => prevStep(formikProps)}
-                      title={t('PAS_ANTERIOR')}
+                      title={t('PREV')}
                     />
                   ) : null}
                   {activeStep < MAX_STEP_NUMBER - 1

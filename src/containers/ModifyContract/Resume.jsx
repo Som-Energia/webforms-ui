@@ -176,7 +176,7 @@ export default function ModifyResume({
 
       <Box sx={{ marginTop: '1rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
         {prevStep && (
-          <PrevButton onClick={prevStep} title={t('PAS_ANTERIOR')} />
+          <PrevButton onClick={prevStep} title={t('PREV')} />
         )}
         {
           <>

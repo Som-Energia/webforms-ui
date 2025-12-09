@@ -213,14 +213,14 @@ const Cancellation = (props) => {
                             <PrevButton
                               disabled={activeStep === 0 || sending}
                               onClick={() => prevStep(formikProps)}
-                              title={t('PAS_ANTERIOR')}
+                              title={t('PREV')}
                             />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
                             <NextButton
                               disabled={!formikProps.isValid}
                               onClick={() => nextStep(formikProps)}
-                              title={t('SEGUENT_PAS')}
+                              title={t('NEXT')}
                             />
                           ) : (
                             !completed && (

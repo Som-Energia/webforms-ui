@@ -251,7 +251,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                       variant="contained"
                       disabled={!isValid}
                       endIcon={<ArrowForwardIosIcon />}>
-                      {t('SEGUENT_PAS')}
+                      {t('NEXT')}
                     </Button>
                   }
                 </Box>

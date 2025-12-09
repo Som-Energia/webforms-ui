@@ -526,7 +526,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 {prevStep && (
                   <PrevButton
                     onClick={prevStep}
-                    title={t('PAS_ANTERIOR')}
+                    title={t('PREV')}
                   />
                 )}
                 {nextStep && (
@@ -537,7 +537,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       (!values.changePhases && !values.changePower) ||
                       isSubmitting
                     }
-                    title={t('SEGUENT_PAS')}
+                    title={t('NEXT')}
                     sx={{
                       backgroundColor: 'primary.extraLight',
                       color: 'primary.main',
