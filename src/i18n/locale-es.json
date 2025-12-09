@@ -41,7 +41,6 @@
     "CONTRACTED_FARE": "Tu tarifa será",
     "NO_MONOPHASE_CHOICE": "No has especificado si la instalación es de tipo monofásico o trifásico",
     "NO_POWER_CHOSEN_PX": "No has introducido la potencia para el periodo",
-    "MES_GRAN_DE_15KW": "Superior a 15 kW",
     "NO_MORE_THAN_15KW_FOR_MONO": "La potencia no puede ser superior a 15 kW",
     "POWER_ATTACHMENTS": "Documentación adicional",
     "NAME": "Nombre",
