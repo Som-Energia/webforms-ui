@@ -196,7 +196,7 @@ export default function ModifyResume({
               variant="contained"
               endIcon={sending ? <CircularProgress size={24} /> : <SendIcon />}
               disabled={sending}>
-              {t('ENVIAR')}
+              {t('SEND')}
             </Button>
           </>
         }

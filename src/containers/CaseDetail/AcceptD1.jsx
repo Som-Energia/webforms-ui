@@ -172,7 +172,7 @@ function AcceptD1({
                       <ArrowForwardIosIcon />
                     )
                   }>
-                  {(values?.m1 === false && t('ENVIAR')) || t('NEXT')}
+                  {(values?.m1 === false && t('SEND')) || t('NEXT')}
                 </Button>
               }
             </Box>
