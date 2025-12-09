@@ -62,7 +62,7 @@ function D1Detail(props) {
   const steps = [
     t('DETAIL_D1_TITLE'),
     t('ACCEPT_OR_REFUSE_TITLE'),
-    t('REVISIO_CONFIRMACIO_DADES'),
+    t('DATA_REVISION_CONFIRMATION'),
   ]
 
   const getStepContent = (step) => {

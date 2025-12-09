@@ -47,7 +47,7 @@ function ModifyContract(props) {
     t('MODIFY_POTTAR_INTRO_TITLE'),
     t('MODIFY_POTTAR_SELECT_TITLE'),
     t('MODIFY_POTTAR_CONTACT_TITLE'),
-    t('REVISIO_CONFIRMACIO_DADES'),
+    t('DATA_REVISION_CONFIRMATION'),
   ]
 
   const d1Steps = [
