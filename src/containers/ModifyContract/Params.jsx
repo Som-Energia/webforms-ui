@@ -476,7 +476,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       select
                       id="phases"
                       name="phases"
-                      label={t('TIPUS_INSTALLACIO')}
+                      label={t('PHASE_CHANGE')}
                       variant="outlined"
                       fullWidth
                       onChange={handleChange}
