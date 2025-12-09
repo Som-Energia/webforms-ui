@@ -142,7 +142,7 @@ function RefuseD1({
                       endIcon={
                         sending ? <CircularProgress size={24} /> : <SendIcon />
                       }>
-                      {t('ENVIAR')}
+                      {t('SEND')}
                     </Button>
                   </>
                 }
