@@ -41,7 +41,6 @@
     "CONTRACTED_FARE": "Tu tarifa será",
     "NO_MONOPHASE_CHOICE": "No has especificado si la instalación es de tipo monofásico o trifásico",
     "NO_POWER_CHOSEN_PX": "No has introducido la potencia para el periodo",
-    "INVALID_POWER_30": "Al menos un periodo debe tener una potencia superior o igual a 15 kW",
     "ALGUN_DELS_TRES_PERIODES_MAJOR_QUE_15": "Alguno de los tres periodos debe tener más de 15 kW",
     "NO_HOURLY_DISCRIMINATION_CHOSEN": "No has especificado si quieres discriminación horaria",
     "MES_GRAN_DE_15KW": "Superior a 15 kW",
