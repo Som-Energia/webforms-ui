@@ -419,14 +419,14 @@ const Indexada = (props) => {
                                   <PrevButton
                                     disabled={activeStep === 0 || loading}
                                     onClick={() => prevStep(formikProps)}
-                                    title={t('PAS_ANTERIOR')}
+                                    title={t('PREV')}
                                   />
                                 )}
                                 {activeStep < MAX_STEP_NUMBER - 1 ? (
                                   <NextButton
                                     disabled={error}
                                     onClick={() => nextStep(formikProps)}
-                                    title={t('SEGUENT_PAS')}
+                                    title={t('NEXT')}
                                   />
                                 ) : (
                                   !completed && (

@@ -117,14 +117,14 @@ export default function Contact({
               {prevStep && (
                 <PrevButton
                   onClick={prevStep}
-                  title={t('PAS_ANTERIOR')}
+                  title={t('PREV')}
                 />
               )}
               {nextStep && (
                 <NextButton
                   type="submit"
                   onClick={nextStep}
-                  title={t('SEGUENT_PAS')}
+                  title={t('NEXT')}
                   sx={{
                     backgroundColor: 'primary.extraLight',
                     color: 'primary.main',

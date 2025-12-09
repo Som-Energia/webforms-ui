@@ -120,7 +120,7 @@ function RefuseD1({
                   <PrevButton
                     disabled={params?.sending}
                     onClick={() => prevStep(params)}
-                    title={t('PAS_ANTERIOR')}
+                    title={t('PREV')}
                   />
                 }
                 {

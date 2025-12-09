@@ -40,13 +40,13 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
           {prevStep && (
             <PrevButton
               onClick={(event) => onPrevStep(event)}
-              title={t('PAS_ANTERIOR')}
+              title={t('PREV')}
             />
           )}
           {nextStep && (
             <NextButton
               onClick={(event) => onNextStep(event)}
-              title={t('SEGUENT_PAS')}
+              title={t('NEXT')}
             />
           )}
         </Box>

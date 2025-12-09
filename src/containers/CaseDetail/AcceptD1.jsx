@@ -147,7 +147,7 @@ function AcceptD1({
                 <PrevButton
                   disabled={sending}
                   onClick={() => prevStep(params)}
-                  title={t('PAS_ANTERIOR')}
+                  title={t('PREV')}
                 />
               }
               {
@@ -172,7 +172,7 @@ function AcceptD1({
                       <ArrowForwardIosIcon />
                     )
                   }>
-                  {(values?.m1 === false && t('ENVIAR')) || t('SEGUENT_PAS')}
+                  {(values?.m1 === false && t('ENVIAR')) || t('NEXT')}
                 </Button>
               }
             </Box>
