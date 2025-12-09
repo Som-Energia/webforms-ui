@@ -19,7 +19,7 @@
     "MODIFY_ANSWER_POWER": "Potentzia aldatzea",
     "DATA_REVISION_CONFIRMATION": "Datuak berrikustea eta berrestea",
     "PHASE_CHANGE": "Zer aldatu nahi duzu?",
-    "INSTALL_TYPE": "Instalazioa aldatu",
+    "PHASE_TYPE_CHANGE": "Instalazioa aldatu",
     "MONOFASICA_NORMAL": "Trifasikotik monofasikora",
     "TRIFASICA": "Monofasikotik trifasikora",
     "INSTALL_TYPE_ATTACHMENTS": "Nahitaezkoa da tentsio-aldaketa erakusten duen buletin elektrikoa elektrizitatea banatzen duen enpresari aurkeztea",
