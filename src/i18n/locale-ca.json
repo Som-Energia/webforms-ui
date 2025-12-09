@@ -31,7 +31,6 @@
     "CONTRACTED_FARE": "La teva tarifa serà",
     "NO_MONOPHASE_CHOICE": "No has especificat si la instal·lació és de tipus monofàsic o trifàsic",
     "NO_POWER_CHOSEN_PX": "No has introduït la potència per al període",
-    "NO_HOURLY_DISCRIMINATION_CHOSEN": "No has especificat si vols discriminació horària",
     "MES_GRAN_DE_15KW": "Superior a 15 kW",
     "NO_MORE_THAN_15KW_FOR_MONO": "La potència no pot ser superior a 15 kW",
     "POWER_ATTACHMENTS": "Documentació addicional",
