@@ -134,7 +134,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                       data-cy="collective"
                       variant="body1"
                       gutterBottom>
-                      {values?.collective ? t('SI') : t('NO')}
+                      {values?.collective ? t('YES') : t('NO')}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -178,7 +178,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                       {t('SSAA')}
                     </Typography>
                     <Typography data-cy="ssaa" variant="body1" gutterBottom>
-                      {values?.ssaa ? t('SI') : t('NO')}
+                      {values?.ssaa ? t('YES') : t('NO')}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>

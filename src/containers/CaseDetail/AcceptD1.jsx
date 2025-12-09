@@ -124,7 +124,7 @@ function AcceptD1({
                   options={[
                     {
                       value: true,
-                      label: t('SI'),
+                      label: t('YES'),
                       description: t('AVIS_APROFITAR_M1')
                     },
                     {
