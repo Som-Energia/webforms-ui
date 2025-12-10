@@ -97,7 +97,7 @@ const MemberIdentifierFields = (props) => {
           required
           id="memberNumber"
           name="member.number"
-          label={t('NUMERO_SOCI')}
+          label={t('MEMBER_NUMBER')}
           onChange={handleChangeMemberNumber}
           onBlur={handleBlur}
           value={values.member.number}

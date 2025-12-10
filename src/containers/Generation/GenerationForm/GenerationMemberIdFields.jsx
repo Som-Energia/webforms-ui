@@ -151,7 +151,7 @@ const GenerationMemberIdFields = (props) => {
           required
           id="memberNumber"
           name="member.partner_number"
-          label={t('NUMERO_SOCI')}
+          label={t('MEMBER_NUMBER')}
           onChange={handleChangeMemberNumber}
           onBlur={handleBlur}
           value={values.member.partner_number}
