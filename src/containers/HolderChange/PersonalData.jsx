@@ -378,7 +378,7 @@ function PersonalData(props) {
                   color: 'secondary.dark'
                 }
               }}
-              label={t('HOLDER_EMAIL')}
+              label={t('EMAIL')}
               variant="outlined"
               InputProps={{
                 startAdornment: (
