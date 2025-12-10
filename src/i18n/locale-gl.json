@@ -88,7 +88,6 @@
     "PROXY_NAME": "Nome do representante legal",
     "PROXY_NIF": "NIF do representante legal",
     "PROXY_NIF_PHISICAL": "O representante legal debe ser unha persoa física",
-    "HOLDER_EMAIL": "Correo electrónico",
     "HOLDER_EMAIL_2": "Repite o correo electrónico",
     "HOLDER_PHONE": "Teléfono",
     "HOLDER_PHONE_2": "Teléfono alternativo",
