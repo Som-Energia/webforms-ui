@@ -147,7 +147,7 @@ const SupplyPoint = (props) => {
             <TextField
               id="supply_point_address"
               name="supply_point.address"
-              label={t('HOLDER_ADDRESS')}
+              label={t('ADDRESS')}
               required
               variant="outlined"
               fullWidth
