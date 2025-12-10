@@ -67,7 +67,6 @@
     "FILL_VAT": "<p>Aquest formulari permet fer un canvi de titularitat d’un contracte actiu amb Som Energia.</p><p><b>Indica el NIF de la persona o entitat jurídica que serà la nova titular del contracte:</b></p>",
     "VAT_LABEL": "Número d'identificació fiscal (NIF)",
     "VAT_HOLDERCHANGE_LABEL": "NIF de la nova titular",
-    "VAT_HELP": "I si no disposo d'un NIF?",
     "NO_VAT_HELP": "Si només disposes de passaport, ens pots enviar un correu a <a target=\"_blank\" href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> per fer la gestió.",
     "CIF_COMMUNITY_OWNERS": "Malauradament, per llei, les comunitats veïnals no es poden fer sòcies de cooperatives. Et convidem que sigui un membre de la comunitat veïnal, o bé la persona administradora de finques, qui es faci sòcia de Som Energia. Per a més informació, podeu consultar el <a target=\"_blank\" href=\"https://ca.support.somenergia.coop\">Centre d’Ajuda</a>.",
     "CUPS_TITLE": "Identifica el punt de subministrament",

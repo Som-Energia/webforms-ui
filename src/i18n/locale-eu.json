@@ -63,7 +63,6 @@
     "FILL_VAT": "<p>Inprimaki honek Som Energiaren kontratuen titularra aldatzeko balio du.</p><p><b>Adierazi kontratuaren titular berria izango den pertsona edo entitate juridikoaren IFZ:</b></p>",
     "VAT_LABEL": "Identifikazio fiskaleko zenbakia (IFZ)",
     "VAT_HOLDERCHANGE_LABEL": "Titular berriaren IFZ",
-    "VAT_HELP": "Eta ez badut IFZrik?",
     "NO_VAT_HELP": "Ez baduzu AIZrik, baina pasaportea duzu, bidali mezua <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> helbidera. Mezuan, honako hauek bidali behar dituzu: aldatu nahi duzun hornidura-puntuaren datuak (kontratu-zenbakia eta CUPS), titular berriaren datuak (izen-abizenak, pasaportearen kopia, helbide elektronikoa eta harremanetarako telefonoa) eta ordainketa egiteko IBAN datuak.",
     "CIF_COMMUNITY_OWNERS": "Tamalez, legeak ez du onartzen jabeen erkidegoak kooperatibetako bazkide izatea. Hala ere, jabeen erkidegoetako kideak edo finka-administratzaileak Som Energiako bazkide izan daitezke. Informazio gehiago jasotzeko, kontsultatu <a target=\"_blank\" href=\"https://eu.support.somenergia.coop\">Laguntza Gunean</a>.",
     "CUPS_TITLE": "Identifikatu hornidura-puntua",
