@@ -50,7 +50,6 @@
     "NO_SURNAME": "No has introducido los apellidos",
     "NO_PHONE": "No has introducido el teléfono",
     "INCORRECT_PHONE": "El teléfono no es correcto",
-    "MODIFY_POTTAR": "Petición de cambio de tarifa y/o potencia",
     "POWER": "Potencia",
     "POWER_SUMMARY": "Potencia (kW):",
     "FARE": "Tarifa:",
