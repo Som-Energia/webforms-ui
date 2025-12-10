@@ -113,7 +113,6 @@
     "PROXY_NIF": "NIF del representante legal",
     "PROXY_NIF_PHISICAL": "El representante legal debe ser una persona física",
     "HOLDER_EMAIL_2": "Repite el correo electrónico",
-    "HOLDER_PHONE": "Teléfono",
     "HOLDER_PHONE_2": "Teléfono alternativo",
     "HOLDER_LANGUAGE_HELP": "Idioma de la comunicación con Som Energia",
     "DATA_PROTECTION_HOLDERCHANGE_URL": "https://www.somenergia.coop/es/politica-de-privacidad/#formulario-de-cambio-de-titular",
