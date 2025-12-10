@@ -56,6 +56,7 @@ import RedirectUrl from '../Gurb/components/RedirectUrl'
 import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 import { usePixelEvent } from "../../hooks/usePixelEvent"
+import { isCompanyVat } from '../../services/utils'
 
 
 const NewContractMemberForm = (props) => {
