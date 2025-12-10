@@ -63,7 +63,6 @@
     "MODIFY_POTTAR_SUCCESS_MESSAGE": "Enviaremos tu solicitud a la distribuidora de tu zona, que se encargará de validarla y hacerla efectiva. Si es necesario, envíanos la documentación relacionada con este trámite adjuntándola a la respuesta del correo de confirmación que recibirás en pocos minutos.",
     "ERROR_POST_MODIFY": "Se ha detectado un error",
     "MODIFY_POTTAR_UNEXPECTED": "Se ha producido un error inesperado",
-    "MODIFY_POTTAR_UNEXPECTED_DETAILS": "Ponte en contacto con modifica@somenergia.coop para que te podamos echar una mano. Para identificarte necesitaremos tu NIF y el número del contrato que quieres modificar.",
     "INSTALL_TYPE_ATTACHMENTS_INFO": "Formatos permitidos: pdf, jpg, jpeg, txt. Tamaño máximo: 5 MB.",
     "UNEXPECTED": "Se ha producido un error inesperado",
     "UNEXPECTED_ERROR": "Se ha producido un error inesperado",
