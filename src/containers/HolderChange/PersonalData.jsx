@@ -432,7 +432,7 @@ function PersonalData(props) {
                   color: 'secondary.dark'
                 }
               }}
-              label={t('HOLDER_PHONE')}
+              label={t('PHONE')}
               variant="outlined"
               InputProps={{
                 startAdornment: (
