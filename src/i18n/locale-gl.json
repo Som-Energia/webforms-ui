@@ -58,7 +58,6 @@
     "FILL_VAT": "<p>Este formulario permite facer un cambio de titularidade dun contrato activo con Som Energia.</p><p><b>Indica o NIF da persoa ou entidade xurídica que será a nova titular do contrato:</b></p>",
     "VAT_LABEL": "Número de identificación fiscal (NIF)",
     "VAT_HOLDERCHANGE_LABEL": "NIF da nova titular",
-    "VAT_HELP": "E se non dispoño de NIF?",
     "NO_VAT_HELP": "Se non dispós de NIE e tes pasaporte, podes enviarnos un correo a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> cos datos do punto de subministración que queres cambiar (número de contrato e CUPS) e os datos da nova persoa titular (nome, apelidos, pasaporte adxunto, correo electrónico e teléfono de contacto) e datos de IBAN de pagamento.",
     "CIF_COMMUNITY_OWNERS": "Lamentabelmente, por lei, as comunidades de veciños non poden facerse socias de cooperativas. Convidámoste a que sexa un membro da comunidade veciñal, ou ben a persoa administradora de fincas, quen se faga socia de Som Energia. Para máis información, podes consultar o <a target=\"_blank\" href=\"https://gl.support.somenergia.coop\">Centro de Axuda</a>.",
     "CUPS_TITLE": "Identifica o punto de subministración",
