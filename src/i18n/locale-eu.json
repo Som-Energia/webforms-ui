@@ -45,7 +45,6 @@
     "REVIEW_DATA_AND_CONFIRM": "Oso gutxi falta da! Berrikusi adierazitako datuak, eta sakatu \"Bidali\" botoia.",
     "INVALID_FIELD": "\"{{field_name}}\" eremuaren balioa ez da zuzena",
     "UNKNOWN_DISTRIBUTOR": "Adierazi duzun CUPS kodea baliozkotu behar dugun banaketa elektrikoko enpresa bati dagokio. Kontratazioarekin jarraitu ahal izateko, bidali mezu elektroniko bat <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a>, duela gutxiko faktura bat erantsita",
-    "BADTOKEN": "Saioa iraungi da. Gomendatzen dizugu kontratu-zerrendatik sartzea eta berriz ere saiatzea.",
     "NOTALLOWED": "Ez duzu baimenik eragiketa hau egiteko.",
     "INACTIVECONTRACT": "Aldatu nahi duzun kontratua ez dago alta eginda.",
     "ONGOINGPROCESS": "Kontratu honek ebatzi beharreko beste prozesu bat du.",
