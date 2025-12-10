@@ -36,7 +36,7 @@ const MemberDetails = (props) => {
       await setFieldValue('member.is_member', true)
     } else {
       await setFieldValue('member.is_member', false)
-      await setFieldError('is_member', t('SOCIA_NO_TROBADA'))
+      await setFieldError('is_member', t('MEMBER_NOT_FOUND'))
       setFieldTouched('member.number', true)
     }
     setLoading(false)
