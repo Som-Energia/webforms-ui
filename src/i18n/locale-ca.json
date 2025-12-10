@@ -48,7 +48,6 @@
     "REVIEW_DATA_AND_CONFIRM": "Ja gairebé ho tenim! Revisa les dades introduïdes i clica el botó d'enviar.",
     "INVALID_FIELD": "El camp \"{{field_name}}\" té un valor incorrecte",
     "UNKNOWN_DISTRIBUTOR": "El codi CUPS que has indicat correspon a una empresa de distribució elèctrica que ens cal validar. Per tal que puguem seguir amb la contractació, envia un correu electrònic a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> adjuntant una factura recent",
-    "INACTIVECONTRACT": "El contracte a modificar no està donat d'alta.",
     "ONGOINGPROCESS": "Aquest contracte té un altre procés pendent de resoldre.",
     "NO_CHANGES": "La condició que estàs sol·licitant és igual a l'actual.",
     "MODIFY_POTTAR_SUCCESS_TITTLE": "Enhorabona. Aviat rebràs un correu electrònic amb les dades de la teva sol·licitud.",
