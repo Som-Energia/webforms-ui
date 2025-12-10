@@ -257,7 +257,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_address`}
               name={`${entity}.address`}
-              label={t('HOLDER_ADDRESS')}
+              label={t('ADDRESS')}
               sx={{
                 '& path': {
                   color: 'secondary.dark'
