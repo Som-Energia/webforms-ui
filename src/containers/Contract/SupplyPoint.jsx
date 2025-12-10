@@ -261,7 +261,7 @@ const SupplyPoint = (props) => {
               select
               id="supply_point_is_housing"
               name="supply_point.is_housing"
-              label={t('ES_UN_HABITATGE')}
+              label={t('IS_HOUSING')}
               required
               variant="outlined"
               fullWidth
@@ -330,9 +330,9 @@ const SupplyPoint = (props) => {
           ) : null}
           <Grid item xs={12} sx={{ pt: 0 }}>
             {values?.contract?.has_service ? (
-              <Typography>{t('ADJUNTAR_ULTIMA_FACTURA')}</Typography>
+              <Typography>{t('ATTACH_LAST_INVOICE')}</Typography>
             ) : (
-              <Typography>{t('ADJUNTAR_DOCUMENTACIO')}</Typography>
+              <Typography>{t('ATTACH_DOCUMENTATION')}</Typography>
             )}
             <Box mt={1} mb={1}>
               <Uploader

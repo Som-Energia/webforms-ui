@@ -259,11 +259,11 @@ const NewContractMemberSummary = (props) => {
       {
         reviewValue:
           process == 'A3'
-            ? t('ALTA')
+            ? t('NEW_SUPPLY_POINT')
             : process == 'C1'
-            ? t('CANVI_DE_COMERCIALITZADORA')
+            ? t('CHANGE_SUPPLIER')
             : process == 'C2'
-            ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
+            ? t('CHANGE_SUPPLIER_AND_HOLDER')
             : null
       },
       values?.has_member == 'member-off' && {

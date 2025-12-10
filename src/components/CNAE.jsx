@@ -74,7 +74,7 @@ const CnaeField = (props) => {
       <Grid item xs={12} sm={6}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <InputTitle text={t('ES_UN_HABITATGE')} required={true} />
+            <InputTitle text={t('IS_HOUSING')} required={true} />
           </Grid>
           <Grid item xs={12}>
             <Select

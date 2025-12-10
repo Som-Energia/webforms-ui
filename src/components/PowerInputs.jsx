@@ -41,7 +41,7 @@ const PowerInputs = (props) => {
     const name = `${namePrefix ? namePrefix + '.' : ''}${attr}`
     const label = !values?.has_service
       ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')
-      : t('QUINA_POTENCIA_TENS_CONTRACTADA')
+      : t('CURRENT_CONTRACTED_POWER')
 
     return (
       <TextField
