@@ -205,7 +205,7 @@ const GenerationMemberIdFields = (props) => {
           required
           id="vat"
           name="member.vat"
-          label={t('VAT')}
+          label={t('NIF_LABEL')}
           onChange={handleChangeVat}
           onBlur={handleBlur}
           value={values.member.vat}

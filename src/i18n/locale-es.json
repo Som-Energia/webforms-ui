@@ -212,7 +212,6 @@
     "SUCCESS_TEXT": "Hemos tramitado con éxito tu solicitud",
     "SUCCESS_NOTE": "El nuevo contrato tendrá el número {{contract_number}}.<br> Te informaremos por correo electrónico cuando el trámite sea efectivo.",
     "MEMBER_NUMBER": "Número de socio/a",
-    "VAT": "NIF",
     "HELP_POPOVER_SOCIA": "<a target=\"_blank\" href=\"//ca.support.somenergia.coop/article/864-com-puc-saber-el-meu-numero-de-soci-a\"><a target=\"_blank\" href=\"https://es.support.somenergia.coop/article/865-como-puedo-saber-mi-numero-de-socio-a\">¿No recuerdas tu número de socio/a?</a>.",
     "HELP_POPOVER_NIF": "Ejemplo: 12345678P (con letra final)",
     "SOCIA_TROBADA": "¡Socio/a encontrado!",
