@@ -222,7 +222,7 @@ const SupplyPoint = (props) => {
             <TextField
               id="supply_point_postal_code"
               name="supply_point.postal_code"
-              label={t('HOLDER_POSTALCODE')}
+              label={t('POSTAL_CODE')}
               variant="outlined"
               required
               fullWidth

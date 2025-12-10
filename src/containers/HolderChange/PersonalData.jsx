@@ -331,7 +331,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_postalcode`}
               name={`${entity}.postal_code`}
-              label={t('HOLDER_POSTALCODE')}
+              label={t('POSTAL_CODE')}
               variant="outlined"
               required
               fullWidth

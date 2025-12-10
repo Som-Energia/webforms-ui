@@ -122,7 +122,7 @@ const GenerationNoMemberIdFields = (props) => {
           <TextField
             id={'input_postalcode'}
             name={'member.postal_code'}
-            label={t('HOLDER_POSTALCODE')}
+            label={t('POSTAL_CODE')}
             variant="outlined"
             required
             fullWidth
