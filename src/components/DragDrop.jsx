@@ -186,7 +186,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
           )}
           <Typography variant='body.md.regular' sx={{ display: 'flex', alignItems: 'center', padding: 0, margin: 0, gap: 1 }}>
             <Link component="button" overlay onClick={handleLinkClick}>
-              {t('GURB_CLICK_HERE')}
+              {t('CLICK_HERE')}
             </Link>
             <input
               type="file"
@@ -194,9 +194,9 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
               style={{ display: 'none' }}
               onChange={handleFileChange}
             />{' '}
-            {t('GURB_DRAG_AND_DROP_HERE')}
+            {t('DRAG_AND_DROP_HERE')}
           </Typography>
-          <Typography variant='body.xs.regular'>{t('GURB_TYPE_OF_FILES')}</Typography>
+          <Typography variant='body.xs.regular'>{t('TYPE_OF_FILES')}</Typography>
         </Card>
       </Grid>
     </Grid>

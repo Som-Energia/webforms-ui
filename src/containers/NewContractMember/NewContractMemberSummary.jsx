@@ -328,7 +328,7 @@ const NewContractMemberSummary = (props) => {
     [
       {
         icon: <PlaceMapIcon />,
-        title: t('SUPPLY'),
+        title: t('SUPPLYPOINT'),
         field: [
           {
             reviewLabel: t('CUPS_LABEL'),

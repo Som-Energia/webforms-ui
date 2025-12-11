@@ -43,12 +43,12 @@ const LightQuestion = (props) => {
     {
       id: 'light-on',
       icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_HAS_LIGHT_HEADER')
+      textHeader: t('LIGHT_YES')
     },
     {
       id: 'light-off',
       icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_HAS_NO_LIGHT_HEADER')
+      textHeader: t('LIGHT_NO')
     }
   ]
 

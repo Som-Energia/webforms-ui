@@ -92,7 +92,7 @@ const IndexedReviewData = (props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('SUPPLY')}
+            {t('SUPPLYPOINT')}
           </Typography>
           <IndexedReviewField
             label={t('CUPS_LABEL')}

@@ -81,7 +81,7 @@ const HolderVoluntaryDonation = (props) => {
       </Grid>
       <Grid item xs={12}>
         <HelperText
-          helperText={t('GURB_VOLUNTARY_DONATION_HELPER')}
+          helperText={t('VOLUNTARY_DONATION_HELPER')}
           iconHelper={false}
           justifyContent={'center'}
         />

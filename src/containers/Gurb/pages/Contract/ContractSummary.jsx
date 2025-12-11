@@ -144,7 +144,7 @@ const ContractSummary = (props) => {
             step: CONTRACT_FORM_SUBSTEPS['IBAN']
           },
           {
-            reviewLabel: t('GURB_REVIEW_PAYMENT_DATA_LABEL_VOLUNTARY_DONATION'),
+            reviewLabel: t('VOLUNTARY_CENT_SUMMARY'),
             reviewValue: values?.holder?.voluntary_donation,
             step: CONTRACT_FORM_SUBSTEPS['DONATION']
           }
