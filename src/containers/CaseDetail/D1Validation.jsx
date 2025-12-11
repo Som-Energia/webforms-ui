@@ -83,7 +83,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   mb: 2
                 }}
                 variant="h6">
-                {t('DATOS_AUTOCONSUMO')}
+                {t('SELFCONSUMPTION_DATA')}
               </Typography>
 
               <Box mb={0}>
@@ -147,13 +147,13 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   mb: 2
                 }}
                 variant="h6">
-                {t('DATOS_GENERADORES')}
+                {t('GENERATORS_DATA')}
               </Typography>
               <Box mb={0}>
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('INSTALLATION_TYPE')}
+                      {t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
                     </Typography>
                     <Typography
                       data-cy="installation_type"
@@ -175,7 +175,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('SSAA')}
+                      {t('SELFCONSUMPTION_AUXILIARY_SERVICE')}
                     </Typography>
                     <Typography data-cy="ssaa" variant="body1" gutterBottom>
                       {values?.ssaa ? t('YES') : t('NO')}
@@ -211,7 +211,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   }}>
                   <Chooser
                     canBeEmpty={false}
-                    question={t('ACCEPTACIO_AUTO')}
+                    question={t('SELFCONSUMPTION_ACCEPT_REFUSE')}
                     onChange={(option) =>
                       handleValidateD1(setFieldValue, errors, option?.option)
                     }
@@ -219,11 +219,11 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     options={[
                       {
                         value: true,
-                        label: t('AVIS_ACCEPTACIO_AUTO')
+                        label: t('SELFCONSUMPTION_ACCEPT')
                       },
                       {
                         value: false,
-                        label: t('AVIS_REBUIG_AUTO')
+                        label: t('SELFCONSUMPTION_REFUSE')
                       }
                     ]}
                   />

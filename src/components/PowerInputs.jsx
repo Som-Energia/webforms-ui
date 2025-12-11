@@ -40,7 +40,7 @@ const PowerInputs = (props) => {
     const attr = inputNum === 0 ? 'power' : `power${inputNum + 1}`
     const name = `${namePrefix ? namePrefix + '.' : ''}${attr}`
     const label = !values?.has_service
-      ? t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')
+      ? t('POWER_TO_CONTRACT')
       : t('CURRENT_CONTRACTED_POWER')
 
     return (

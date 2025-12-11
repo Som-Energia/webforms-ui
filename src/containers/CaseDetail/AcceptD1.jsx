@@ -118,19 +118,19 @@ function AcceptD1({
                   }
                 }}>
                 <Chooser
-                  question={t('APROFITAR_LA_MODIFICACIO')}
+                  question={t('ANOTHER_CONTRACT_MODIFICATION')}
                   onChange={(option) => setFieldValue('m1', option.option)}
                   value={values.m1}
                   options={[
                     {
                       value: true,
                       label: t('YES'),
-                      description: t('AVIS_APROFITAR_M1')
+                      description: t('ANOTHER_CONTRACT_M1')
                     },
                     {
                       value: false,
                       label: t('NO'),
-                      description: t('AVIS_NO_APROFITAR_M1')
+                      description: t('NO_ANOTHER_CONTRACT_M1')
                     }
                   ]}
                 />
