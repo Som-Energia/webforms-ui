@@ -245,7 +245,7 @@ const Cancellation = (props) => {
                                 }
                                 disabled={sending || !formikProps.isValid}
                                 onClick={() => handlePost(formikProps.values)}>
-                                {t('TRAMITAR_BAJA')}
+                                {t('PROCESS_CANCELLATION')}
                               </Button>
                             )
                           )}

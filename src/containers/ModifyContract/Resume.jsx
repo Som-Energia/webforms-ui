@@ -45,7 +45,7 @@ export default function ModifyResume({
             sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
-            {t('SUBSECTION_AUTO')}
+            {t('SELFCONSUMPTION_SUBSECTION')}
           </Typography>
           <Grid container spacing={2}>
             <Grid item>

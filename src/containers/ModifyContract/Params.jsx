@@ -331,7 +331,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   <Chooser
                     name="moreThan15Kw"
                     condensed
-                    question={t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')}
+                    question={t('POWER_TO_CONTRACT')}
                     onChange={(event) =>
                       handleChangeMoreThan15(values, setFieldValue)
                     }
@@ -340,12 +340,12 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       {
                         id: 'lesser-power',
                         value: false,
-                        label: t('MENOR_IGUAL_A_15KW_CONTRACTACIO')
+                        label: t('CONTRACT_LOWER_THAN_15KW')
                       },
                       {
                         id: 'greater-power',
                         value: true,
-                        label: t('MES_GRAN_DE_15KW_CONTRACTACIO')
+                        label: t('CONTRACT_GREATER_THAN_15KW')
                       }
                     ]}
                   />

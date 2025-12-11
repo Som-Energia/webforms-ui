@@ -39,8 +39,8 @@ const Powers = (props) => {
       <Grid item xs={12}>
         <Typography variant="body.md.medium">
           {values?.has_light == 'light-on'
-            ? t('POWER_TO_CONTRACT')
-            : t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')
+            ? t('CURRENT_CONTRACTED_POWER')
+            : t('POWER_TO_CONTRACT')
           }{' '}
           <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>
             *

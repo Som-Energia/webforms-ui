@@ -36,7 +36,7 @@ const NewContractMemberPower = (props) => {
         { values?.has_light === 'light-off' && (
           <Grid item xs={12} sm={12}>
             <SelectField
-              label={t('TIPUS_INSTALLACIO_CONTRACTACIO')}
+              label={t('CURRENT_INSTALLATION_TYPE')}
               value={values?.contract?.phase}
               fieldName="contract.phase"
               options={phase_options}
