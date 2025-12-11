@@ -127,7 +127,7 @@ const TaxAddress = (props) => {
       <Grid item xs={12}>
         <InputField
           name="supplypointAddress"
-          textFieldName={t('GURB_ADDRESS_FIELD')}
+          textFieldName={t('SUPPLY_POINT_ADDRESS')}
           textFieldNameHelper={t('GURB_HOLDER_ADDRESS_FIELD_HELPER')}
           value={supplypointAddress}
           readonlyField={true}

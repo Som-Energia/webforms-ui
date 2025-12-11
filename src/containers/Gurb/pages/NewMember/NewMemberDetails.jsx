@@ -237,7 +237,7 @@ const NewMemberDetails = (props) => {
         </Grid>
         {/* TO DO: make a component? */}
         <Box sx={{ marginTop: '2rem' }}>
-          <Typography sx={textHeader4}>{t('GURB_LANGUAGE_FIELD')}</Typography>
+          <Typography sx={textHeader4}>{t('LANGUAGE_FIELD')}</Typography>
           <TextField
             sx={textField}
             required

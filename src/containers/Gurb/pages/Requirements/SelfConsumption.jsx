@@ -39,12 +39,12 @@ const SelfConsumption = (props) => {
     {
       id: 'selfconsumption-on',
       icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
-      textHeader: t('GURB_SELFCONSUMPTION_YES_HEADER')
+      textHeader: t('SELFCONSUMPTION_YES_HEADER')
     },
     {
       id: 'selfconsumption-off',
       icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
-      textHeader: t('GURB_SELFCONSUMPTION_NO_HEADER')
+      textHeader: t('SELFCONSUMPTION_NO_HEADER')
     }
   ]
 

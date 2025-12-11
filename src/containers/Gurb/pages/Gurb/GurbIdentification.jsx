@@ -15,7 +15,7 @@ const GurbIdentification = (props) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <Typography variant="headline4.regular">
-          {t('GURB_MEMBER_TITLE')}
+          {t('IDENTIFY_MEMBER')}
         </Typography>
       </Grid>
 

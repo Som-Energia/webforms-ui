@@ -136,7 +136,7 @@ const SupplyPoint = (props) => {
   }
   return (
     <>
-      <StepHeader title={t('SUPPLY')} />
+      <StepHeader title={t('SUPPLYPOINT')} />
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('FILL_SUPPLY_POINT') }}
