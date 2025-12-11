@@ -872,7 +872,7 @@
     "MEMBER_PAYMENT_INFO": "Pero si quieres asociarte tendrás que hacer un pago único de 100€, que puede ser retornable si algún día marchas de la cooperativa.",
     "CONTRACT_QUESTION": "Elige tu opción para empezar",
     "HAS_MEMBER": "Soy persona socia",
-    "HAS_MEMBER_BODY": "Si ya eres persona socia",
+    "HAS_MEMBER_BODY": "Indica tu número de persona socia y continua con la contratación",
     "HAS_LINK_MEMBER": "Me invitan",
     "HAS_LINK_MEMBER_BODY": "Conozco una persona socia y puedo utilizar su número para contratar.",
     "HAS_NO_MEMBER": "Quiero asociarme y contratar la luz",
