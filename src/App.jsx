@@ -51,7 +51,7 @@ const App = (props) => {
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
-  const NewMemberForm = lazy(() => import('./containers/NewMember'))
+  const NewMemberForm = lazy(() => import('./containers/NewMember/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
   const GurbContractPaymentSuccessful = lazy(() => import('./containers/GurbContractPaymentSuccessful'))
 
