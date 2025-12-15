@@ -1,23 +1,23 @@
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
-import ReviewTable from '../../components/review/ReviewTable'
-import InputTitle from '../../components/InputTitle'
+import ReviewTable from '../../../components/review/ReviewTable'
+import InputTitle from '../../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
-import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
+import { buttonGurbLight } from '../../Gurb/gurbTheme'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
-import { iconRequirements } from '../../themes/commonStyles'
-import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
-import { PersonalIcon, PhoneIcon, CreditCardIcon } from '../../data/icons/Icons'
+import { iconRequirements } from '../../../themes/commonStyles'
+import { NEW_MEMBER_FORM_SUBSTEPS } from '../../../services/steps'
+import { PersonalIcon, PhoneIcon, CreditCardIcon } from '../../../data/icons/Icons'
 
-import NewLoading from '../../components/NewLoading'
+import NewLoading from '../../../components/NewLoading'
 
 const MemberSummary = (props) => {
   const {
