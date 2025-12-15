@@ -7,13 +7,13 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { InvoiceIcon, CreditCardIcon } from '../../data/icons/Icons'
-import { checkIbanFormat } from '../../services/utils'
+import { InvoiceIcon, CreditCardIcon } from '../../../data/icons/Icons'
+import { checkIbanFormat } from '../../../services/utils'
 
-import Chooser from '../../components/NewChooser'
-import InputTitle from '../../components/InputTitle'
-import InputField from '../../components/InputField'
-import TermsDialog from '../../components/TermsDialog'
+import Chooser from '../../../components/NewChooser'
+import InputTitle from '../../../components/InputTitle'
+import InputField from '../../../components/InputField'
+import TermsDialog from '../../../components/TermsDialog'
 
 const PaymentMethod = (props) => {
   const {

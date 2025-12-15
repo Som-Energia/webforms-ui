@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
-import TermsDialog from '../../components/TermsDialog'
+import TermsDialog from '../../../components/TermsDialog'
 
-import Chooser from '../../components/NewChooser'
-import InputTitle from '../../components/InputTitle'
-import CUPS from '../../components/CUPS'
-import AlertBox from '../../components/AlertBox'
+import Chooser from '../../../components/NewChooser'
+import InputTitle from '../../../components/InputTitle'
+import CUPS from '../../../components/CUPS'
+import AlertBox from '../../../components/AlertBox'
 
-import { LightbulbIcon } from '../../data/icons/Icons'
+import { LightbulbIcon } from '../../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 

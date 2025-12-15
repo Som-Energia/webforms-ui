@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Chooser from '../../components/NewChooser'
-import InputTitle from '../../components/InputTitle'
+import Chooser from '../../../components/NewChooser'
+import InputTitle from '../../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'
 
 import Grid from '@mui/material/Grid'
-import { CommunityIcon, HandshakeIcon } from '../../data/icons/Icons'
+import { CommunityIcon, HandshakeIcon } from '../../../data/icons/Icons'
 
 const NewContractMemberQuestion = ({
   formikProps,
