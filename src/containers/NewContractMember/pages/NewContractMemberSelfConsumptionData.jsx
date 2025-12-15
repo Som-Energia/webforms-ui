@@ -9,19 +9,19 @@ import {
   BatteryIcon,
   CommunityIcon,
   PersonalIcon
-} from '../../data/icons/Icons'
-import CAUField from '../../components/NewCAUField'
-import Chooser from '../../components/NewChooser'
-import InputField from '../../components/InputField'
-import SelectField from '../../components/SelectField'
-import InputTitle from '../../components/InputTitle'
-import AlertBox from '../../components/AlertBox'
-import { HelperText } from '../../components/InputField'
+} from '../../../data/icons/Icons'
+import CAUField from '../../../components/NewCAUField'
+import Chooser from '../../../components/NewChooser'
+import InputField from '../../../components/InputField'
+import SelectField from '../../../components/SelectField'
+import InputTitle from '../../../components/InputTitle'
+import AlertBox from '../../../components/AlertBox'
+import { HelperText } from '../../../components/InputField'
 
 import {
   getSelfConsumptionSituations,
   getSelfConsumptionTechnologies
-} from '../../services/api'
+} from '../../../services/api'
 
 const INDIVIDUAL_INSTALLATION = '01'
 

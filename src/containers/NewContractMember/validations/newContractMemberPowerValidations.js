@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
-import { newTestPowerForPeriods } from '../../services/utils'
-import { getNewRates } from '../../services/api'
+import { newTestPowerForPeriods } from '../../../services/utils'
+import { getNewRates } from '../../../services/api'
 
 const rates = getNewRates()
 
