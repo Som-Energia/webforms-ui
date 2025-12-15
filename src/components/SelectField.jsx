@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import Select from '@mui/material/Select'
@@ -17,6 +18,8 @@ const SelectField = (props) => {
     disabled = false
   } = props
 
+  const { t } = useTranslation()
+
   const handleChange = (event) => {
     if (setFieldValue) {
       setFieldValue(fieldName, event.target.value)
@@ -32,7 +35,7 @@ const SelectField = (props) => {
         options.map((option) => {
           return (
           <MenuItem id={`${fieldName}-${option.id}`} key={option.id} value={option.id}>
-            {option.name}
+            {t(option.name)}
           </MenuItem>
         )})
       )
@@ -41,7 +44,7 @@ const SelectField = (props) => {
       return (
         Object.keys(options).map((id) => (
           <MenuItem id={`${fieldName}-${id}`} key={id} value={id}>
-            {options[id]}
+            {t(options[id])}
           </MenuItem>
         ))
       )
