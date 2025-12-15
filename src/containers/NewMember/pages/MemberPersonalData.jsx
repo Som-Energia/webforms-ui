@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid'
 
-import PersonDataPhysical from '../../components/PersonDataPhysical'
-import PersonDataJuridical from '../../components/PersonDataJuridical'
+import PersonDataPhysical from '../../../components/PersonDataPhysical'
+import PersonDataJuridical from '../../../components/PersonDataJuridical'
 
 const MemberPersonalData = (props) => {
   const { values } = props
