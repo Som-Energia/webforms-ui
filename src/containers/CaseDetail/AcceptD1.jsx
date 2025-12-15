@@ -118,19 +118,19 @@ function AcceptD1({
                   }
                 }}>
                 <Chooser
-                  question={t('APROFITAR_LA_MODIFICACIO')}
+                  question={t('ANOTHER_CONTRACT_MODIFICATION')}
                   onChange={(option) => setFieldValue('m1', option.option)}
                   value={values.m1}
                   options={[
                     {
                       value: true,
-                      label: t('SI'),
-                      description: t('AVIS_APROFITAR_M1')
+                      label: t('YES'),
+                      description: t('ANOTHER_CONTRACT_M1')
                     },
                     {
                       value: false,
                       label: t('NO'),
-                      description: t('AVIS_NO_APROFITAR_M1')
+                      description: t('NO_ANOTHER_CONTRACT_M1')
                     }
                   ]}
                 />
@@ -147,7 +147,7 @@ function AcceptD1({
                 <PrevButton
                   disabled={sending}
                   onClick={() => prevStep(params)}
-                  title={t('PAS_ANTERIOR')}
+                  title={t('PREV')}
                 />
               }
               {
@@ -172,7 +172,7 @@ function AcceptD1({
                       <ArrowForwardIosIcon />
                     )
                   }>
-                  {(values?.m1 === false && t('ENVIAR')) || t('SEGUENT_PAS')}
+                  {(values?.m1 === false && t('SEND')) || t('NEXT')}
                 </Button>
               }
             </Box>

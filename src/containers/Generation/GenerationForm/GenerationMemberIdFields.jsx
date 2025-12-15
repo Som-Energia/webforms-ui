@@ -151,7 +151,7 @@ const GenerationMemberIdFields = (props) => {
           required
           id="memberNumber"
           name="member.partner_number"
-          label={t('NUMERO_SOCI')}
+          label={t('MEMBER_NUMBER')}
           onChange={handleChangeMemberNumber}
           onBlur={handleBlur}
           value={values.member.partner_number}
@@ -179,13 +179,13 @@ const GenerationMemberIdFields = (props) => {
               error ? (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: t('SOCIA_NO_TROBADA')
+                    __html: t('MEMBER_NOT_FOUND')
                   }}
                 />
               ) : (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: t('HELP_POPOVER_SOCIA')
+                    __html: t('HELP_POPOVER_MEMBER')
                   }}
                 />
               )
@@ -194,7 +194,7 @@ const GenerationMemberIdFields = (props) => {
                 fontWeight: 500,
                 color: 'primary.main'
               }} >
-                {t('SOCIA_TROBADA')}
+                {t('MEMBER_FOUND')}
               </Typography>
             ))
           }
@@ -205,7 +205,7 @@ const GenerationMemberIdFields = (props) => {
           required
           id="vat"
           name="member.vat"
-          label={t('VAT')}
+          label={t('NIF_LABEL')}
           onChange={handleChangeVat}
           onBlur={handleBlur}
           value={values.member.vat}

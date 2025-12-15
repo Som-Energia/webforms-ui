@@ -140,7 +140,7 @@ const ContractReview = (props) => {
             <PlaceMapIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <Typography sx={textHeader4}>
-                {t('GURB_CONTRACT_SUMMARY_SUPPLYPOINT')}
+                {t('SUPPLYPOINT')}
               </Typography>
               <ReviewField
                 value={t('GURB_CONTRACT_SUMMARY_SUPPLYPOINT_DESCRIPTION')}
@@ -155,7 +155,7 @@ const ContractReview = (props) => {
             <CreditCardIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <Typography sx={textHeader4}>
-                {t('GURB_CONTRACT_SUMMARY_PAYMENT')}
+                {t('PAYMENT_TITLE')}
               </Typography>
               <ReviewField
                 value={t('GURB_CONTRACT_SUMMARY_PAYMENT_DESCRIPTION')}
@@ -170,7 +170,7 @@ const ContractReview = (props) => {
             <PhoneIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <Typography sx={textHeader4}>
-                {t('GURB_CONTRACT_SUMMARY_CONTACT')}
+                {t('CONTACT')}
               </Typography>
               <ReviewField
                 value={t('GURB_CONTRACT_SUMMARY_CONTACT_DESCRIPTION')}

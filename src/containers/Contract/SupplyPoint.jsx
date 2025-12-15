@@ -136,7 +136,7 @@ const SupplyPoint = (props) => {
   }
   return (
     <>
-      <StepHeader title={t('SUPPLY')} />
+      <StepHeader title={t('SUPPLYPOINT')} />
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{ __html: t('FILL_SUPPLY_POINT') }}
@@ -147,7 +147,7 @@ const SupplyPoint = (props) => {
             <TextField
               id="supply_point_address"
               name="supply_point.address"
-              label={t('HOLDER_ADDRESS')}
+              label={t('ADDRESS')}
               required
               variant="outlined"
               fullWidth
@@ -222,7 +222,7 @@ const SupplyPoint = (props) => {
             <TextField
               id="supply_point_postal_code"
               name="supply_point.postal_code"
-              label={t('HOLDER_POSTALCODE')}
+              label={t('POSTAL_CODE')}
               variant="outlined"
               required
               fullWidth
@@ -261,7 +261,7 @@ const SupplyPoint = (props) => {
               select
               id="supply_point_is_housing"
               name="supply_point.is_housing"
-              label={t('ES_UN_HABITATGE')}
+              label={t('IS_HOUSING')}
               required
               variant="outlined"
               fullWidth
@@ -330,9 +330,9 @@ const SupplyPoint = (props) => {
           ) : null}
           <Grid item xs={12} sx={{ pt: 0 }}>
             {values?.contract?.has_service ? (
-              <Typography>{t('ADJUNTAR_ULTIMA_FACTURA')}</Typography>
+              <Typography>{t('ATTACH_LAST_INVOICE')}</Typography>
             ) : (
-              <Typography>{t('ADJUNTAR_DOCUMENTACIO')}</Typography>
+              <Typography>{t('ATTACH_DOCUMENTATION')}</Typography>
             )}
             <Box mt={1} mb={1}>
               <Uploader

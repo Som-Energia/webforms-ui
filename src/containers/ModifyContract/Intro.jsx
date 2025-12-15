@@ -38,7 +38,7 @@ export default function ModifyIntro({ nextStep, prevStep }) {
                <NextButton
                 onClick={nextStep}
                 disabled={isSubmitting}
-                title={t('SEGUENT_PAS')}
+                title={t('NEXT')}
                 sx={{
                   backgroundColor: 'primary.extraLight',
                   color: 'primary.main',

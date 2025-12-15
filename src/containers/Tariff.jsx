@@ -43,13 +43,13 @@ const Tariff = (props) => {
     fontSize: '1em'
   }
   const powerPeriodNames = {
-    '2.0TD_P1': t('TERME_POTENCIA_20TD_P1'),
-    '2.0TD_P2': t('TERME_POTENCIA_20TD_P2')
+    '2.0TD_P1': t('POWER_TERM_20TD_P1'),
+    '2.0TD_P2': t('POWER_TERM_20TD_P2')
   }
   const energyPeriodNames = {
-    '2.0TD_P1': t('TERME_ENERGIA_20TD_P1'),
-    '2.0TD_P2': t('TERME_ENERGIA_20TD_P2'),
-    '2.0TD_P3': t('TERME_ENERGIA_20TD_P3')
+    '2.0TD_P1': t('ENERGY_TERM_20TD_P1'),
+    '2.0TD_P2': t('ENERGY_TERM_20TD_P2'),
+    '2.0TD_P3': t('ENERGY_TERM_20TD_P3')
   }
 
   return (
@@ -79,7 +79,7 @@ const Tariff = (props) => {
             </div>
           )}
           <div className="tp">
-            <h4>{t('TERME_POTENCIA')}</h4>
+            <h4>{t('POWER_TERM')}</h4>
             <p className="titol">
               {prices?.potencia &&
                 Object.keys(prices?.potencia)
@@ -94,7 +94,7 @@ const Tariff = (props) => {
             </p>
           </div>
           <div className="te">
-            <h4>{t('TERME_ENERGIA')}</h4>
+            <h4>{t('ENERGY_TERM')}</h4>
             <p className="titol">
               {prices?.energia &&
                 Object.keys(prices?.energia)
@@ -111,7 +111,7 @@ const Tariff = (props) => {
           <div className="te-generation">
             <h4
               dangerouslySetInnerHTML={{
-                __html: t('TERME_ENERGIA_GENERATIONKWH', {
+                __html: t('ENERGY_TERM_GENERATIONKWH', {
                   url: t('GENERATION_URL')
                 })
               }}></h4>
@@ -131,8 +131,8 @@ const Tariff = (props) => {
           <div className="autoproduction">
             <h4
               dangerouslySetInnerHTML={{
-                __html: t('AUTOCONSUM_WITH_FAQ', {
-                  url: t('FAQ_AUTOCONSUM_URL')
+                __html: t('SELFCONSUMPTION_WITH_FAQ', {
+                  url: t('FAQ_SELFCONSUMPTION_URL')
                 })
               }}></h4>
             <p className="titol">

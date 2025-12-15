@@ -259,11 +259,11 @@ const NewContractMemberSummary = (props) => {
       {
         reviewValue:
           process == 'A3'
-            ? t('ALTA')
+            ? t('NEW_SUPPLY_POINT')
             : process == 'C1'
-            ? t('CANVI_DE_COMERCIALITZADORA')
+            ? t('CHANGE_SUPPLIER')
             : process == 'C2'
-            ? t('CANVI_DE_COMERCIALITZADORA_I_TITULAR')
+            ? t('CHANGE_SUPPLIER_AND_HOLDER')
             : null
       },
       values?.has_member == 'member-off' && {
@@ -328,7 +328,7 @@ const NewContractMemberSummary = (props) => {
     [
       {
         icon: <PlaceMapIcon />,
-        title: t('SUPPLY'),
+        title: t('SUPPLYPOINT'),
         field: [
           {
             reviewLabel: t('CUPS_LABEL'),
@@ -385,7 +385,7 @@ const NewContractMemberSummary = (props) => {
       title: t('REVIEW_PRICES_POWER_TITLE'),
       field: 'potencia'
     },
-    { title: t('AUTOCONSUM'), field: 'energia_autoconsumida' }
+    { title: t('SELFCONSUMPTION'), field: 'energia_autoconsumida' }
   ]
 
   useEffect(() => {

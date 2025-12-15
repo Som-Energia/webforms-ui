@@ -120,7 +120,7 @@ function RefuseD1({
                   <PrevButton
                     disabled={params?.sending}
                     onClick={() => prevStep(params)}
-                    title={t('PAS_ANTERIOR')}
+                    title={t('PREV')}
                   />
                 }
                 {
@@ -142,7 +142,7 @@ function RefuseD1({
                       endIcon={
                         sending ? <CircularProgress size={24} /> : <SendIcon />
                       }>
-                      {t('ENVIAR')}
+                      {t('SEND')}
                     </Button>
                   </>
                 }

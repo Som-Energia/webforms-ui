@@ -45,7 +45,7 @@ export default function ModifyResume({
             sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
-            {t('SUBSECTION_AUTO')}
+            {t('SELFCONSUMPTION_SUBSECTION')}
           </Typography>
           <Grid container spacing={2}>
             <Grid item>
@@ -63,7 +63,7 @@ export default function ModifyResume({
             sx={{ textTransform: 'uppercase' }}
             variant="subtitle2"
             gutterBottom>
-            {t('INSTALL_TYPE')}
+            {t('PHASE_TYPE_CHANGE')}
           </Typography>
           <Typography
             data-cy={params.modify?.phases}
@@ -176,7 +176,7 @@ export default function ModifyResume({
 
       <Box sx={{ marginTop: '1rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
         {prevStep && (
-          <PrevButton onClick={prevStep} title={t('PAS_ANTERIOR')} />
+          <PrevButton onClick={prevStep} title={t('PREV')} />
         )}
         {
           <>
@@ -196,7 +196,7 @@ export default function ModifyResume({
               variant="contained"
               endIcon={sending ? <CircularProgress size={24} /> : <SendIcon />}
               disabled={sending}>
-              {t('ENVIAR')}
+              {t('SEND')}
             </Button>
           </>
         }

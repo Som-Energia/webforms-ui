@@ -331,7 +331,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   <Chooser
                     name="moreThan15Kw"
                     condensed
-                    question={t('POTENCIA_A_CONTRACTAR_CONTRACTACIO')}
+                    question={t('POWER_TO_CONTRACT')}
                     onChange={(event) =>
                       handleChangeMoreThan15(values, setFieldValue)
                     }
@@ -340,12 +340,12 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       {
                         id: 'lesser-power',
                         value: false,
-                        label: t('MENOR_IGUAL_A_15KW_CONTRACTACIO')
+                        label: t('CONTRACT_LOWER_THAN_15KW')
                       },
                       {
                         id: 'greater-power',
                         value: true,
-                        label: t('MES_GRAN_DE_15KW_CONTRACTACIO')
+                        label: t('CONTRACT_GREATER_THAN_15KW')
                       }
                     ]}
                   />
@@ -415,7 +415,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               {values.changePower && values.power && (
                 <Box mx={1} mb={3}>
                   <Grid container spacing={4}>
-                    <Grid item>{t('LA_TEVA_TARIFA_ES')}</Grid>
+                    <Grid item>{t('CONTRACTED_FARE')}</Grid>
                     <Grid item>
                       &nbsp;
                       <Badge
@@ -430,7 +430,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               <Box mx={1} mt={1} mb={3}>
                 <FormHelperText
                   dangerouslySetInnerHTML={{
-                    __html: t('HELP_POTENCIA', { url: t('HELP_POTENCIA_URL') })
+                    __html: t('HELP_POWER', { url: t('HELP_POWER_URL') })
                   }}></FormHelperText>
               </Box>
 
@@ -476,7 +476,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       select
                       id="phases"
                       name="phases"
-                      label={t('TIPUS_INSTALLACIO')}
+                      label={t('PHASE_CHANGE')}
                       variant="outlined"
                       fullWidth
                       onChange={handleChange}
@@ -526,7 +526,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 {prevStep && (
                   <PrevButton
                     onClick={prevStep}
-                    title={t('PAS_ANTERIOR')}
+                    title={t('PREV')}
                   />
                 )}
                 {nextStep && (
@@ -537,7 +537,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       (!values.changePhases && !values.changePower) ||
                       isSubmitting
                     }
-                    title={t('SEGUENT_PAS')}
+                    title={t('NEXT')}
                     sx={{
                       backgroundColor: 'primary.extraLight',
                       color: 'primary.main',

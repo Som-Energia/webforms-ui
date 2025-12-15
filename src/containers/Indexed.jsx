@@ -99,10 +99,10 @@ const Indexada = (props) => {
 
     sectionsJson.push(
       {
-        title: t('DURADA'),
-        text: t('DURADA_TEXT', { tariff: targetTariff })
+        title: t('CONTRACT_DURATION'),
+        text: t('CONTRACT_DURATION_TEXT', { tariff: targetTariff })
       },
-      { title: t('DESESTIMENT'), text: t('DESESTIMENT_TEXT') },
+      { title: t('DISMISSAL'), text: t('DISMISSAL_TEXT') },
       {
         title: t('PERSONAL_DATA_PROTECTION'),
         text: t('PERSONAL_DATA_PROTECTION_TEXT')
@@ -419,14 +419,14 @@ const Indexada = (props) => {
                                   <PrevButton
                                     disabled={activeStep === 0 || loading}
                                     onClick={() => prevStep(formikProps)}
-                                    title={t('PAS_ANTERIOR')}
+                                    title={t('PREV')}
                                   />
                                 )}
                                 {activeStep < MAX_STEP_NUMBER - 1 ? (
                                   <NextButton
                                     disabled={error}
                                     onClick={() => nextStep(formikProps)}
-                                    title={t('SEGUENT_PAS')}
+                                    title={t('NEXT')}
                                   />
                                 ) : (
                                   !completed && (

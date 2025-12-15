@@ -257,7 +257,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_address`}
               name={`${entity}.address`}
-              label={t('HOLDER_ADDRESS')}
+              label={t('ADDRESS')}
               sx={{
                 '& path': {
                   color: 'secondary.dark'
@@ -331,7 +331,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_postalcode`}
               name={`${entity}.postal_code`}
-              label={t('HOLDER_POSTALCODE')}
+              label={t('POSTAL_CODE')}
               variant="outlined"
               required
               fullWidth
@@ -378,7 +378,7 @@ function PersonalData(props) {
                   color: 'secondary.dark'
                 }
               }}
-              label={t('HOLDER_EMAIL')}
+              label={t('EMAIL')}
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -432,7 +432,7 @@ function PersonalData(props) {
                   color: 'secondary.dark'
                 }
               }}
-              label={t('HOLDER_PHONE')}
+              label={t('PHONE')}
               variant="outlined"
               InputProps={{
                 startAdornment: (

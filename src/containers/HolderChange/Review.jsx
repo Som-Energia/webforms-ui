@@ -114,7 +114,7 @@ const Review = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('SUPPLY')}
+              {t('SUPPLYPOINT')}
             </Typography>
             <ReviewField
               label={t('CUPS_LABEL')}

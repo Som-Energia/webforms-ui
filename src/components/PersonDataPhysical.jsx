@@ -187,7 +187,7 @@ const PersonDataPhysical = (props) => {
           <Grid item xs={12} sm={12}>
             <SelectField
               required={true}
-              label={t('GURB_LANGUAGE_FIELD')}
+              label={t('LANGUAGE_FIELD')}
               value={values[entity]?.language}
               fieldName={`${entity}.language`}
               options={languages}

@@ -547,7 +547,7 @@ function HolderChange(props) {
                                     )
                                   )
                                 }
-                                title={t('PAS_ANTERIOR')}
+                                title={t('PREV')}
                               />
                             )}
                             {!completed && !isLastStep ? (
@@ -558,7 +558,7 @@ function HolderChange(props) {
                                   )
                                 }
                                 disabled={sending || !isValid}
-                                title={t('SEGUENT_PAS')}
+                                title={t('NEXT')}
                               />
                             ) : null}
                             {!completed && isLastStep ? (

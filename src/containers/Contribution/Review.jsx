@@ -69,7 +69,7 @@ const Review = (props) => {
           {values?.member?.is_member && (
             <>
               <ReviewField
-                label={t('NUMERO_SOCI')}
+                label={t('MEMBER_NUMBER')}
                 value={`${values?.member?.number}`}
               />
             </>

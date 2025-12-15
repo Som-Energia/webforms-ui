@@ -28,7 +28,7 @@ const Payment = (props) => {
     {
       id: 'tpv',
       icon: <CreditCardIcon sx={iconRequirements} />,
-      textHeader: t('GURB_TPV_PAYMENT_METHOD'),
+      textHeader: t('PAYMENT_METHOD_CCARD'),
     }
   ]
 
