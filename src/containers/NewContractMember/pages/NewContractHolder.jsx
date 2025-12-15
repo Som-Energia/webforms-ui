@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 
-import Chooser from '../../components/NewChooser'
-import InputTitle from '../../components/InputTitle'
+import Chooser from '../../../components/NewChooser'
+import InputTitle from '../../../components/InputTitle'
 
-import { ReceiptIcon } from '../../data/icons/Icons'
+import { ReceiptIcon } from '../../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 

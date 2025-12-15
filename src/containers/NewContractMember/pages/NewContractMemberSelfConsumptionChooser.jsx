@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import Chooser from '../../components/NewChooser'
+import Chooser from '../../../components/NewChooser'
 import Typography from '@mui/material/Typography'
-import InputTitle from '../../components/InputTitle'
+import InputTitle from '../../../components/InputTitle'
 
-import { SolarpanelIcon } from '../../data/icons/Icons'
+import { SolarpanelIcon } from '../../../data/icons/Icons'
 
 const NewContractMemberSelfConsumptionChooser = (props) => {
   const { values, setFieldValue, sendTrackEvent } = props

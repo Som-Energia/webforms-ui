@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
-import ReviewTable from '../../components/review/ReviewTable'
-import ReviewPricesTable from '../../components/review/ReviewPrices'
+import ReviewTable from '../../../components/review/ReviewTable'
+import ReviewPricesTable from '../../../components/review/ReviewPrices'
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
+import { buttonGurbLight } from '../../Gurb/gurbTheme'
 import Button from '@mui/material/Button'
 
 import Typography from '@mui/material/Typography'
@@ -13,18 +13,18 @@ import Divider from '@mui/material/Divider'
 
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import TermsDialog from '../../components/TermsDialog'
-import LegalText from '../../components/LegalText'
+import TermsDialog from '../../../components/TermsDialog'
+import LegalText from '../../../components/LegalText'
 
-import { getPrices } from '../../services/api'
-import { contractProcess } from '../../services/newNormalize'
-import { THOUSANDS_CONVERSION_FACTOR } from '../../services/utils'
+import { getPrices } from '../../../services/api'
+import { contractProcess } from '../../../services/newNormalize'
+import { THOUSANDS_CONVERSION_FACTOR } from '../../../services/utils'
 
 import {
   NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
   NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-} from '../../services/steps'
-import NewLoading from '../../components/NewLoading'
+} from '../../../services/steps'
+import NewLoading from '../../../components/NewLoading'
 import {
   InvoiceIcon,
   PersonalIcon,
@@ -33,7 +33,7 @@ import {
   PhoneIcon,
   CreditCardIcon,
   PricetagIcon
-} from '../../data/icons/Icons'
+} from '../../../data/icons/Icons'
 
 const TARIFF_INDEXED = 'indexed'
 

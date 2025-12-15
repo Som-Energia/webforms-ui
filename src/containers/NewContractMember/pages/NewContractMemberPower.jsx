@@ -1,8 +1,8 @@
 import {useEffect} from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Powers from '../../components/Powers'
-import SelectField from '../../components/SelectField'
+import Powers from '../../../components/Powers'
+import SelectField from '../../../components/SelectField'
 
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'

@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import NifCif from '../../components/NifCif'
-import PersonDataPhysical from '../../components/PersonDataPhysical'
-import PersonDataJuridical from '../../components/PersonDataJuridical'
+import NifCif from '../../../components/NifCif'
+import PersonDataPhysical from '../../../components/PersonDataPhysical'
+import PersonDataJuridical from '../../../components/PersonDataJuridical'
 
 const IdentifyMemberPersonalData = (props) => {
   const { values, holder = false } = props

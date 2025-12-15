@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import VoluntaryDonation from '../../components/NewVoluntaryDonation'
+import VoluntaryDonation from '../../../components/NewVoluntaryDonation'
 
 const newContractMemberVoluntaryDonation = (props) => {
   const { sendTrackEvent } = props
