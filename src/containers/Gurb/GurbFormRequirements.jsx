@@ -29,7 +29,7 @@ import SelfConsumption from './pages/Requirements/SelfConsumption'
 import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
 
-import { somStepperBox } from './gurbTheme'
+import { somStepperBox } from '../../themes/gurbTheme'
 
 export const MAX_STEPS_NUMBER = {
   MAX_STEP_NUMBER_DEFAULT: 5,

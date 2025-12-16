@@ -9,7 +9,7 @@ import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import { participationAlertBoxTypography, forceAlignLeft } from '../../gurbTheme'
+import { participationAlertBoxTypography, forceAlignLeft } from '../../../../themes/gurbTheme'
 
 let signaturitHook = () => undefined
 

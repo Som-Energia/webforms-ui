@@ -16,7 +16,7 @@ import { iconRequirements } from '../../../../themes/commonStyles'
 import {
   iconOffRequirements,
   textHeader5
-} from '../../gurbTheme'
+} from '../../../../themes/gurbTheme'
 
 const TaxAddress = (props) => {
   const {

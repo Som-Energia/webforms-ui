@@ -12,7 +12,7 @@ import { iconRequirements } from '../themes/commonStyles'
 import {
   iconOffRequirements,
   textBody1
-} from '../containers/Gurb/gurbTheme'
+} from '../themes/gurbTheme'
 
 const HolderVoluntaryDonation = (props) => {
   const {
