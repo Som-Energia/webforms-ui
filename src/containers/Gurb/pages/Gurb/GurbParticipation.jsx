@@ -15,7 +15,7 @@ import {
   participationTypography,
   participationAlertBoxTypography,
   participationAlertBoxIcon
-} from '../../gurbTheme'
+} from '../../../../themes/gurbTheme'
 
 
 const GurbParticipation = (props) => {

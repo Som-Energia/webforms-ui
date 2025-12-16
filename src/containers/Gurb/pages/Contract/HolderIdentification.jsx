@@ -9,7 +9,7 @@ import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined'
 import Grid from '@mui/material/Grid'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
-import iconOffRequirements  from '../../gurbTheme'
+import iconOffRequirements  from '../../../../themes/gurbTheme'
 import { checkVatFormat } from '../../../../services/utils'
 
 const HolderIdentification = (props) => {

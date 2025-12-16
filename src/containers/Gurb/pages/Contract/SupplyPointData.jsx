@@ -7,7 +7,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Grid from '@mui/material/Grid'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-import textCheckbox from '../../gurbTheme'
+import textCheckbox from '../../../../themes/gurbTheme'
 
 import TermsDialog from '../../components/TermsDialog'
 import DragDrop from '../../../../components/DragDrop'

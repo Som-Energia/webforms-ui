@@ -4,7 +4,7 @@ import ReviewTable from '../../../components/review/ReviewTable'
 import ReviewPricesTable from '../../../components/review/ReviewPrices'
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { buttonGurbLight } from '../../Gurb/gurbTheme'
+import { buttonGurbLight } from '../../../themes/gurbTheme'
 import Button from '@mui/material/Button'
 
 import Typography from '@mui/material/Typography'

@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox'
 import { checkIbanFormat } from '../../../../services/utils'
 import GurbLoadingContext from '../../../../context/GurbLoadingContext'
 
-import { textCheckbox } from '../../gurbTheme'
+import { textCheckbox } from '../../../../themes/gurbTheme'
 import Grid from '@mui/material/Grid'
 
 const HolderIban = (props) => {

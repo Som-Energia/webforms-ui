@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
-import { buttonGurbDark } from '../../containers/Gurb/gurbTheme'
+import { buttonGurbDark } from '../../themes/gurbTheme'
 
 function SubmitButton(props) {
   const { onClick, disabled, sending, text='FINISH' } = props

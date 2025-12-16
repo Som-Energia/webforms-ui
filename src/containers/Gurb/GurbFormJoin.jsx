@@ -35,7 +35,7 @@ import GurbParticipation from './pages/Gurb/GurbParticipation'
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbSignature from './pages/Gurb/GurbSignature'
 
-import { somStepperBox } from './gurbTheme'
+import { somStepperBox } from '../../themes/gurbTheme'
 
 const MAX_STEPS_NUMBER = 4
 

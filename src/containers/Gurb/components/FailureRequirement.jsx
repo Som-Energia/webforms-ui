@@ -3,7 +3,7 @@ import Link from '@mui/material/Link'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
 import ResultRequirement from './ResultRequirement'
 import GurbErrorContext from '../../../context/GurbErrorContext'
-import { link } from '../gurbTheme'
+import { link } from '../../../themes/gurbTheme'
 
 const FailureRequirement = ({
   textHeader,

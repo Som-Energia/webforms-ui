@@ -11,7 +11,7 @@ import {
   buttonGurbLight,
   textBody4,
   textHeader6
-} from '../gurbTheme'
+} from '../../../themes/gurbTheme'
 
 const TermsDialog = (props) => {
   const { t } = useTranslation()
