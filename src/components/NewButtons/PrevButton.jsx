@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import ArrowBack from '@mui/icons-material/ArrowBack'
 import Box from '@mui/material/Box'
 
-import { buttonGurbLight } from '../../containers/Gurb/gurbTheme'
+import { buttonGurbLight } from '../../themes/gurbTheme'
 
 function PrevButton(props) {
   const { onClick, disabled, title = 'PREV' } = props

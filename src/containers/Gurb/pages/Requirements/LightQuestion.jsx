@@ -7,7 +7,7 @@ import Chooser from '../../../../components/NewChooser'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
-import { iconOffRequirements } from '../../gurbTheme'
+import { iconOffRequirements } from '../../../../themes/gurbTheme'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'

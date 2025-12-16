@@ -16,7 +16,7 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
-import { textBody1, textHeader4 } from '../../gurbTheme'
+import { textBody1, textHeader4 } from '../../../../themes/gurbTheme'
 import { getPrices } from '../../../../services/api'
 import { THOUSANDS_CONVERSION_FACTOR } from '../../../../services/utils'
 import { CONTRACT_FORM_SUBSTEPS, NEW_MEMBER_FORM_SUBSTEPS} from '../../../../services/steps'

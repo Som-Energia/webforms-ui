@@ -17,7 +17,7 @@ import {
   dialogTitle,
   dialogIconButton,
   dialogContentStack
-} from '../containers/Gurb/gurbTheme'
+} from '../themes/gurbTheme'
 
 export default function SimpleDialog({
   title,

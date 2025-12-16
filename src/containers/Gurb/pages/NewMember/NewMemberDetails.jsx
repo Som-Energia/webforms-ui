@@ -6,7 +6,7 @@ import {
   textSubtitle2,
   textCheckbox,
   textField
-} from '../../gurbTheme'
+} from '../../../../themes/gurbTheme'
 import InputField from '../../../../components/InputField'
 import TextRecomendation from '../../components/TextRecomendation'
 

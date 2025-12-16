@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack'
 
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
 
-import { textHeader3, textBody2, containerSpacing } from '../gurbTheme'
+import { textHeader3, textBody2, containerSpacing } from '../../../themes/gurbTheme'
 
 const ProgressWarning = ({ completed }) => {
   const { t } = useTranslation()

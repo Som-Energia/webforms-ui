@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 
-import { textHeader1 } from '../gurbTheme'
+import { textHeader1 } from '../../../themes/gurbTheme'
 
 const Header = ({ title }) => {
 
