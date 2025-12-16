@@ -49,8 +49,8 @@ import newContractHolderValidations from './validations/newContractHolderValidat
 import newContractMemberVoluntaryDonationValidations from './validations/newContractMemberVoluntaryDonationValidations'
 import newContractMemberPaymentValidations from './validations/newContractMemberPaymentValidations'
 import newContractMemberSummaryValidations from './validations/newContractMemberSummaryValidations'
-import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
-import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
+import LinkMemberDetails from './pages/LinkMemberDetails'
+import linkMemberValidations from './validations/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './validations/identifyMemberPersonalDataValidations'
 import NewLoading from '../../components/NewLoading'
 import RedirectUrl from '../Gurb/components/RedirectUrl'
@@ -401,7 +401,7 @@ const NewContractMemberForm = (props) => {
     } else {
       if (activeStep === 1) {
         setHasAlert(false)
-        return <ApadrinatingDetails {...props} />
+        return <LinkMemberDetails {...props} />
       } else if (activeStep === 2) {
         setHasAlert(true)
         return <NewContractMemberSupplyPoint {...trackProps} />

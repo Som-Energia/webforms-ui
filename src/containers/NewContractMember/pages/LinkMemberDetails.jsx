@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import InputField from '../../../../components/InputField'
+import InputField from '../../../components/InputField'
 
-import { checkMember } from '../../../../services/api'
-import GurbLoadingContext from '../../../../context/GurbLoadingContext'
+import { checkMember } from '../../../services/api'
+import GurbLoadingContext from '../../../context/GurbLoadingContext'
 
 // TODO: generalize in common pages
-const ApadrinatingDetails = (props) => {
+const LinkMemberDetails = (props) => {
   const {
     values,
     errors,
@@ -105,4 +105,4 @@ const ApadrinatingDetails = (props) => {
     </Grid>
   )
 }
-export default ApadrinatingDetails
+export default LinkMemberDetails
