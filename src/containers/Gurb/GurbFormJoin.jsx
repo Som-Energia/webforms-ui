@@ -9,33 +9,33 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
-import MatomoContext from '../trackers/matomo/MatomoProvider'
+import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import PrevButton from '../components/NewButtons/PrevButton'
-import NextButton from '../components/NewButtons/NextButton'
-import SubmitButton from '../components/NewButtons/SubmitButton'
-import SomStepper from '../components/NewSomStepper'
+import PrevButton from '../../components/NewButtons/PrevButton'
+import NextButton from '../../components/NewButtons/NextButton'
+import SubmitButton from '../../components/NewButtons/SubmitButton'
+import SomStepper from '../../components/NewSomStepper'
 
 import {
   identifierValidations,
   gurbPowerOptions,
   gurbPolicyChecks
-} from './Gurb/GurbValidations'
+} from './validations/GurbValidations'
 
-import GurbErrorContext from '../context/GurbErrorContext'
-import GurbLoadingContext from '../context/GurbLoadingContext'
+import GurbErrorContext from '../../context/GurbErrorContext'
+import GurbLoadingContext from '../../context/GurbLoadingContext'
 
 // Step components
-import GurbIdentification from './Gurb/pages/Gurb/GurbIdentification'
-import GurbParticipation from './Gurb/pages/Gurb/GurbParticipation'
-import ContractReview from './Gurb/pages/Gurb/ContractReview'
-import GurbSignature from './Gurb/pages/Gurb/GurbSignature'
+import GurbIdentification from './pages/Gurb/GurbIdentification'
+import GurbParticipation from './pages/Gurb/GurbParticipation'
+import ContractReview from './pages/Gurb/ContractReview'
+import GurbSignature from './pages/Gurb/GurbSignature'
 
-import { somStepperBox } from './Gurb/gurbTheme'
+import { somStepperBox } from './gurbTheme'
 
 const MAX_STEPS_NUMBER = 4
 
