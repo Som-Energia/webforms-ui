@@ -4,8 +4,8 @@ import PopUpContext from '../context/PopUpContext'
 import { getPlaceDetails, searchPlace } from '../services/googleApiClient'
 import { checkGurbDistance } from '../services/apiGurb'
 import GurbOutOfPerimeterError from '../containers/Gurb/GurbErrors'
-import { addressValidations } from '../containers/Gurb/requirementsValidations'
-import { buildGurbDialog } from '../containers/Gurb/utils/buildGurbDialog'
+import { addressValidations } from '../containers/Gurb/validations/requirementsValidations'
+import { buildGurbDialog } from '../containers/Gurb/components/buildGurbDialog'
 
 /** Resets geo-related fields */
 const clearAddressGeoFields = (setFieldValue, addressFieldName) => {

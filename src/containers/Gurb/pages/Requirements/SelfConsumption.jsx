@@ -6,7 +6,7 @@ import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/NewChooser'
-import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
+import { buildGurbDialog } from '../../components/buildGurbDialog'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../gurbTheme'
