@@ -2,34 +2,34 @@ import React, { useState, useEffect, useRef, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
-import MatomoContext from '../trackers/matomo/MatomoProvider'
+import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import PrevButton from '../components/NewButtons/PrevButton'
-import NextButton from '../components/NewButtons/NextButton'
+import PrevButton from '../../components/NewButtons/PrevButton'
+import NextButton from '../../components/NewButtons/NextButton'
 
-import supplyPointValidations from './Gurb/supplyPointValidations'
+import supplyPointValidations from './supplyPointValidations'
 import {
   addressValidations,
   lightValidations,
   selfConsumptionValidations
-} from './Gurb/requirementsValidations'
+} from './validations/requirementsValidations'
 
-import GurbLoadingContext from '../context/GurbLoadingContext'
+import GurbLoadingContext from '../../context/GurbLoadingContext'
 
 // Step components
-import SupplyPoint from './Gurb/SupplyPoint'
-import LightQuestion from './Gurb/pages/Requirements/LightQuestion'
-import Address from './Gurb/pages/Requirements/Address'
-import SelfConsumption from './Gurb/pages/Requirements/SelfConsumption'
-import SomStepper from '../components/NewSomStepper'
-import GurbRequirementsTariffSelection from './Gurb/pages/Requirements/GurbRequirementsTariffSelection'
-import GurbRequirementsResult from './Gurb/pages/Requirements/GurbRequirementsResult'
+import SomStepper from '../../components/NewSomStepper'
+import SupplyPoint from './SupplyPoint'
+import LightQuestion from './pages/Requirements/LightQuestion'
+import Address from './pages/Requirements/Address'
+import SelfConsumption from './pages/Requirements/SelfConsumption'
+import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
+import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
 
-import { somStepperBox } from './Gurb/gurbTheme'
+import { somStepperBox } from './gurbTheme'
 
 export const MAX_STEPS_NUMBER = {
   MAX_STEP_NUMBER_DEFAULT: 5,
