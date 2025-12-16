@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 import { textField } from '../../../themes/gurbTheme'
 import InputTitle from '../../../components/InputTitle'
 
-export default function LocationInput({
+export default function AddressAutocompletedFieldGurb({
   textFieldLabel,
   textFieldName,
   textFieldHelper,
