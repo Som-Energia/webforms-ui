@@ -208,8 +208,8 @@ const NewMemberDetails = (props) => {
           <Grid item xs={12} sm={6}>
             <InputField
               name={'new_member.phone1'}
-              textFieldLabel={t('GURB_PHONE1_LABEL')}
-              textFieldName={t('GURB_PHONE1_LABEL')}
+              textFieldLabel={t('PHONE1_LABEL')}
+              textFieldName={t('PHONE1_LABEL')}
               handleChange={handleChangePhone}
               handleBlur={() => {
                 setFieldTouched('new_member.phone1', true)
