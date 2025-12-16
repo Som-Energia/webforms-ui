@@ -11,7 +11,7 @@ import Box from '@mui/material/Box'
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
 
-import supplyPointValidations from './supplyPointValidations'
+import supplyPointValidations from './validations/supplyPointValidations'
 import {
   addressValidations,
   lightValidations,
@@ -22,7 +22,7 @@ import GurbLoadingContext from '../../context/GurbLoadingContext'
 
 // Step components
 import SomStepper from '../../components/NewSomStepper'
-import SupplyPoint from './SupplyPoint'
+import SupplyPoint from './pages/Requirements/SupplyPoint'
 import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
 import SelfConsumption from './pages/Requirements/SelfConsumption'
