@@ -39,7 +39,7 @@ available_deploys() {
 environment="$1"
 environment_file="$SCRIPTPATH/deploy-$environment.conf"
 
-if [[ "$1" == "" || ( "$1" == "ovtest" && "$2" == "" ) ]]; then
+if [[ "$1" == "" || ( "$1" == "ovtest" && !("$2" =~ ^[0-2]$ )) ]]; then
     usage "$@"
 fi
         
