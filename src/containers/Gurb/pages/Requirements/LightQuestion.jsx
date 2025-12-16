@@ -13,7 +13,7 @@ import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
 
 import PopUpContext from '../../../../context/PopUpContext'
-import { buildGurbDialog } from '../../../../containers/Gurb/utils/buildGurbDialog'
+import { buildGurbDialog } from '../../components/buildGurbDialog'
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
