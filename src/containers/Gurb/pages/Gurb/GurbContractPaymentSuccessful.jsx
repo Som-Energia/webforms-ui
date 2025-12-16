@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
-import RedirectUrl from '../containers/Gurb/components/RedirectUrl'
+import RedirectUrl from '../../components/RedirectUrl'
 
 const GurbContractPaymentSuccessful = ({ props }) => {
   const { i18n, t } = useTranslation()
