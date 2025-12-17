@@ -10,7 +10,7 @@ import {
   CommunityIcon,
   PersonalIcon
 } from '../../../data/icons/Icons'
-import CAUField from '../../../components/NewCAUField'
+import CAUField from '../../../components/CAUField'
 import Chooser from '../../../components/NewChooser'
 import InputField from '../../../components/InputField'
 import SelectField from '../../../components/SelectField'
