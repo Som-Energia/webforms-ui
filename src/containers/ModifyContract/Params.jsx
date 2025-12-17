@@ -21,7 +21,7 @@ import Typography from '@mui/material/Typography'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import Uploader from '../../components/Uploader'
-import PowerInputs from '../../components/PowerInputs'
+import PowerInputs from './PowerInputs'
 import Chooser from '../../components/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
