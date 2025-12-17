@@ -18,7 +18,7 @@ const SelectField = (props) => {
   } = props
 
   const handleChange = (event) => {
-    if (setFieldValue) {
+    if (setFieldValue && onChange === undefined) {
       setFieldValue(fieldName, event.target.value)
     }
     else {

@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import { checkCnae } from '../services/api'
 import GurbLoadingContext from '../context/GurbLoadingContext'
 import InputField from './InputField'
-import Select from '../containers/Gurb/components/Select'
+import SelectField from './SelectField'
 import InputTitle from './InputTitle'
 import { textField } from '../themes/gurbTheme'
 
@@ -51,8 +51,8 @@ const CnaeField = (props) => {
     setFieldTouched('supply_point.cnae', true)
   }
 
-  const handleIsHousing = (value) => {
-    const isHousing = value
+  const handleIsHousing = (event) => {
+    const isHousing = event.target.value
     setValues({
       ...values,
       supply_point: {
@@ -65,8 +65,8 @@ const CnaeField = (props) => {
   }
 
   const options = [
-    { id: 'yes', value: true, text: t('YES') },
-    { id: 'no', value: false, text: t('NO') }
+    { id: true, name: t('YES') },
+    { id: false, name: t('NO') }
   ]
 
   return (
@@ -74,14 +74,14 @@ const CnaeField = (props) => {
       <Grid item xs={12} sm={6}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <InputTitle text={t('IS_HOUSING')} required={true} />
-          </Grid>
-          <Grid item xs={12}>
-            <Select
-              options={options}
+            <SelectField
+              label={t('IS_HOUSING')}
               value={values?.supply_point?.is_housing ?? ''}
-              handleChange={handleIsHousing}
-              style={textField}
+              fieldName={"supply_point.is_housing"}
+              onChange={handleIsHousing}
+              options={options}
+              required={true}
+              {...props}
             />
           </Grid>
         </Grid>
