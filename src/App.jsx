@@ -16,7 +16,7 @@ import { GenerationContextProvider } from './containers/Generation/context/Gener
 import { PopUpContextProvider } from './context/PopUpContext'
 import { MatomoProvider } from './trackers/matomo/MatomoProvider'
 import { GurbErrorContextProvider } from './context/GurbErrorContext'
-import { GurbLoadingContextProvider } from './context/LoadingContext'
+import { LoadingContextProvider } from './context/LoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
 import { useTranslation } from 'react-i18next'
@@ -434,11 +434,11 @@ const App = (props) => {
                         element={
                           <PopUpContextProvider>
                             <GurbErrorContextProvider>
-                              <GurbLoadingContextProvider>
+                              <LoadingContextProvider>
                                 <SummaryContextProvider>
                                   <GurbFormRequirements {...props} />
                                 </SummaryContextProvider>
-                              </GurbLoadingContextProvider>
+                              </LoadingContextProvider>
                             </GurbErrorContextProvider>
                           </PopUpContextProvider>
                         }
@@ -449,11 +449,11 @@ const App = (props) => {
                         path="/:language/gurb/:code/join/"
                         element={
                           <GurbErrorContextProvider>
-                            <GurbLoadingContextProvider>
+                            <LoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbFormJoin {...props} />
                               </SummaryContextProvider>
-                            </GurbLoadingContextProvider>
+                            </LoadingContextProvider>
                           </GurbErrorContextProvider>
                         }
                       />
@@ -463,11 +463,11 @@ const App = (props) => {
                         path="/:language/gurb/gurb_url_ok"
                         element={
                           <GurbErrorContextProvider>
-                            <GurbLoadingContextProvider>
+                            <LoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbContractPaymentSuccessful {...props} />
                               </SummaryContextProvider>
-                            </GurbLoadingContextProvider>
+                            </LoadingContextProvider>
                           </GurbErrorContextProvider>
                         }
                       />
@@ -524,14 +524,14 @@ const App = (props) => {
                       <Route
                         path={path}
                         element={
-                          <GurbLoadingContextProvider>
+                          <LoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm
                                 {...props}
                                 tariff={'periods'}
                               />
                             </SummaryContextProvider>
-                          </GurbLoadingContextProvider>
+                          </LoadingContextProvider>
                         }
                       />
                     ))}
@@ -544,14 +544,14 @@ const App = (props) => {
                       <Route
                         path={path}
                         element={
-                          <GurbLoadingContextProvider>
+                          <LoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm
                                 {...props}
                                 tariff={'indexed'}
                               />
                             </SummaryContextProvider>
-                          </GurbLoadingContextProvider>
+                          </LoadingContextProvider>
                         }
                       />
                     ))}
@@ -563,11 +563,11 @@ const App = (props) => {
                       <Route
                         path={path}
                         element={
-                          <GurbLoadingContextProvider>
+                          <LoadingContextProvider>
                             <SummaryContextProvider>
                               <UnifiedContractForm {...props} />
                             </SummaryContextProvider>
-                          </GurbLoadingContextProvider>
+                          </LoadingContextProvider>
                         }
                       />
                     ))}
@@ -581,11 +581,11 @@ const App = (props) => {
                         path={path}
                         element={
                           <GurbErrorContextProvider>
-                            <GurbLoadingContextProvider>
+                            <LoadingContextProvider>
                               <SummaryContextProvider>
                                 <NewMemberForm {...props} />
                               </SummaryContextProvider>
-                            </GurbLoadingContextProvider>
+                            </LoadingContextProvider>
                           </GurbErrorContextProvider>
                         }
                       />
