@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid'
 
 import { HeartIcon } from '../data/icons/Icons'
 
-const HolderVoluntaryDonation = (props) => {
+const VoluntaryDonation = (props) => {
   const { values, setFieldValue } = props
 
   const { t } = useTranslation()
@@ -68,4 +68,4 @@ const HolderVoluntaryDonation = (props) => {
     </Grid>
   )
 }
-export default HolderVoluntaryDonation
+export default VoluntaryDonation
