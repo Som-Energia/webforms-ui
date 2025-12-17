@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import InputField from './InputField'
 
 import { checkCadastralReference } from '../services/api'
-import GurbLoadingContext from '../context/GurbLoadingContext'
+import LoadingContext from '../context/LoadingContext'
 import { useTheme } from '@mui/material/styles'
 
 const CadastralReference = (props) => {
@@ -19,7 +19,7 @@ const CadastralReference = (props) => {
 
   const theme = useTheme()
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const { loading, setLoading } = useContext(LoadingContext)
 
   const handleCheckCadastralReferenceResponse = async () => {
     let status = undefined

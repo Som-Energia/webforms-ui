@@ -27,7 +27,7 @@ import {
 } from './validations/GurbValidations'
 
 import GurbErrorContext from '../../context/GurbErrorContext'
-import GurbLoadingContext from '../../context/GurbLoadingContext'
+import LoadingContext from '../../context/LoadingContext'
 
 // Step components
 import GurbIdentification from './pages/Gurb/GurbIdentification'
@@ -49,7 +49,7 @@ const GurbFormJoin = (props) => {
   const [submitAction, setSubmitAction] = useState(false)
 
   const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
-  const { loading } = useContext(GurbLoadingContext)
+  const { loading } = useContext(LoadingContext)
 
   const { trackEvent } = useContext(MatomoContext)
 

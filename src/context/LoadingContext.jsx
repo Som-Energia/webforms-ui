@@ -1,19 +1,19 @@
 import React, { useState, createContext } from 'react'
 
-const GurbLoadingContext = createContext()
+const LoadingContext = createContext()
 
-export const GurbLoadingContextProvider = ({ children }) => {
+export const LoadingContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(undefined)
 
   return (
-    <GurbLoadingContext.Provider
+    <LoadingContext.Provider
       value={{
         loading: loading,
         setLoading: setLoading,
       }}>
       {children}
-    </GurbLoadingContext.Provider>
+    </LoadingContext.Provider>
   )
 }
 
-export default GurbLoadingContext
+export default LoadingContext

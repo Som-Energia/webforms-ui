@@ -22,7 +22,7 @@ import {
 import Stack from '../../services/Stack'
 import { NextStep, keyByValue, valueByKey } from '../../services/NextStep'
 import SummaryContext from '../../context/SummaryContext'
-import GurbLoadingContext from '../../context/GurbLoadingContext'
+import LoadingContext from '../../context/LoadingContext'
 import MemberIdentifier from '../NewMember/pages/MemberIdentifier'
 import MemberPersonalData from '../NewMember/pages/MemberPersonalData'
 import NewContractMemberQuestion from './pages/NewContractMemberQuestion'
@@ -79,7 +79,7 @@ const NewContractMemberForm = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
 
-  const { loading } = useContext(GurbLoadingContext)
+  const { loading } = useContext(LoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
   const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)

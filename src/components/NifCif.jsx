@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 
 import { checkPhisicalVAT, checkVatFormat } from '../services/utils'
 import { checkVat } from '../services/api'
-import GurbLoadingContext from '../context/GurbLoadingContext'
+import LoadingContext from '../context/LoadingContext'
 
 import InputField from './InputField'
 import { useHandleChangeNif } from '../hooks/useHandleChange'
@@ -26,7 +26,7 @@ const NifCif = (props) => {
     helperText = true
   } = props
   const { t } = useTranslation()
-  const { setLoading } = useContext(GurbLoadingContext)
+  const { setLoading } = useContext(LoadingContext)
   const MAXINDENTIFIERLENGTH = 9;
   const handleChangeNif = useHandleChangeNif(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)

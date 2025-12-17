@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import { checkCnae } from '../services/api'
-import GurbLoadingContext from '../context/GurbLoadingContext'
+import LoadingContext from '../context/LoadingContext'
 import InputField from './InputField'
 import SelectField from './SelectField'
 import InputTitle from './InputTitle'
@@ -16,7 +16,7 @@ const CnaeField = (props) => {
     props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const { loading, setLoading } = useContext(LoadingContext)
   const [cnaeDescription, setCnaeDescription] = useState(false) // TODO: Remove it?
 
   const updateCNAE = async () => {
