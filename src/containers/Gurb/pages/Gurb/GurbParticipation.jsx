@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import Select from '../../components/Select'
+import SelectField from '../../../../components/SelectField'
 import AlertBox from '../../../../components/AlertBox'
 import { getPowers } from '../../../../services/api'
 import TextRecomendation from '../../components/TextRecomendation'
@@ -29,9 +29,8 @@ const GurbParticipation = (props) => {
         setGurbDetails({
           ...response.data,
           available_betas: response.data.available_betas.map((item, index) => ({
-            id: index + 1,
-            value: item,
-            text: `${item} kW`
+            id: item,
+            name: `${item} kW`
           }))
         })
         setFieldValue('gurb.join_cost', response.data.initial_quota)
@@ -44,9 +43,9 @@ const GurbParticipation = (props) => {
   }, [getAvailablePowers])
 
   const onChangePower = useCallback(
-    async (value) => {
-      await setFieldValue('gurb.power', value)
-      await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * value))
+    async (event) => {
+      await setFieldValue('gurb.power', event.target.value)
+      await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * event.target.value))
       await setFieldValue('gurb.surplus_compensation', gurbDetails.surplus_compensation)
     },
     [setFieldValue, gurbDetails]
@@ -67,12 +66,11 @@ const GurbParticipation = (props) => {
         title={t('GURB_PARTICIPATION_KW_INPUT_TEXT')}
         text={t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}
       />
-
-      <Select
+      <SelectField
         options={gurbDetails.available_betas ?? []}
         value={values.gurb.power}
-        handleChange={(value) => onChangePower(value)}
-        style={textField}
+        fieldName={"values.gurb.power"}
+        onChange={onChangePower}
       />
 
       <Typography
