@@ -18,7 +18,7 @@ import {
   selfConsumptionValidations
 } from './validations/requirementsValidations'
 
-import GurbLoadingContext from '../../context/GurbLoadingContext'
+import LoadingContext from '../../context/LoadingContext'
 
 // Step components
 import SomStepper from '../../components/NewSomStepper'
@@ -39,7 +39,7 @@ export const MAX_STEPS_NUMBER = {
 const GurbFormRequirements = (props) => {
   const { i18n } = useTranslation()
   const { language, gurbCode } = useParams()
-  const { loading } = useContext(GurbLoadingContext)
+  const { loading } = useContext(LoadingContext)
   const { trackEvent } = useContext(MatomoContext)
 
   const [maxStepNum, setMaxStepNum] = useState(

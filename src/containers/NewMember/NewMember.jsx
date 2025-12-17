@@ -17,7 +17,7 @@ import { newNormalizeMember } from '../../services/utils'
 import { member } from '../../services/api'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
-import GurbLoadingContext from '../../context/GurbLoadingContext'
+import LoadingContext from '../../context/LoadingContext'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
 import MemberIdentifier from './pages/MemberIdentifier'
 import MemberPersonalData from './pages/MemberPersonalData'
@@ -44,7 +44,7 @@ const NewMemberForm = (props) => {
   const [error, setError] = useState(false)
   const formTPV = useRef(null)
 
-  const { loading } = useContext(GurbLoadingContext)
+  const { loading } = useContext(LoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
   const { trackEvent } = useContext(MatomoContext)
 

@@ -16,7 +16,7 @@ import { GenerationContextProvider } from './containers/Generation/context/Gener
 import { PopUpContextProvider } from './context/PopUpContext'
 import { MatomoProvider } from './trackers/matomo/MatomoProvider'
 import { GurbErrorContextProvider } from './context/GurbErrorContext'
-import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
+import { GurbLoadingContextProvider } from './context/LoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
 import { useTranslation } from 'react-i18next'

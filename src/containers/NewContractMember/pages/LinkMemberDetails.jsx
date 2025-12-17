@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import InputField from '../../../components/InputField'
 
 import { checkMember } from '../../../services/api'
-import GurbLoadingContext from '../../../context/GurbLoadingContext'
+import LoadingContext from '../../../context/LoadingContext'
 
 // TODO: generalize in common pages
 const LinkMemberDetails = (props) => {
@@ -21,7 +21,7 @@ const LinkMemberDetails = (props) => {
   } = props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(GurbLoadingContext)
+  const { loading, setLoading } = useContext(LoadingContext)
 
   const handleCheckMemberResponse = async () => {
     let status = undefined
