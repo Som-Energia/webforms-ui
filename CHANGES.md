@@ -3,6 +3,7 @@
 ## unreleased
 
 - IMP: clean translation keys
+- REF: next prev steps
 
 ## 6.3.1 2025-10-05
 
