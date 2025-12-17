@@ -6,7 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 
 import SomEnergiaTheme from './components/SomenergiaTheme'
 import WebFormsTheme from './themes/webforms'
-import { Example as ComponentTest } from './components/ApiValidatedField.example'
 import Loading from './components/NewLoading'
 import ApiStatus from './components/ApiStatus'
 
@@ -121,12 +120,6 @@ const App = (props) => {
                   <CssBaseline />
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
-
-                    <Route
-                      exact
-                      path="/:language/component-testing"
-                      element={<ComponentTest {...props} />}
-                    />
 
                     <Route
                       exact
