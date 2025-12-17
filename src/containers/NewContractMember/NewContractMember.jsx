@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 import PrevButton from '../../components/NewButtons/PrevButton'
 import NextButton from '../../components/NewButtons/NextButton'
 import SubmitButton from '../../components/NewButtons/SubmitButton'
-import SomStepper from '../../components/NewSomStepper'
+import SomStepper from '../../components/SomStepper'
 import Result from '../../containers/Result'
 
 import {
