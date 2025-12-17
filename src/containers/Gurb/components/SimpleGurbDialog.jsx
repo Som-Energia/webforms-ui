@@ -8,16 +8,16 @@ import WarningRounded from '@mui/icons-material/WarningRounded'
 import Stack from '@mui/material/Stack'
 import CancelIcon from '@mui/icons-material/Cancel'
 
-import CustomDialog from './CustomDialog'
+import CustomDialog from '../../../components/CustomDialog'
 
-import useCheckMobileScreen from '../services/checkMobileScreen'
+import useCheckMobileScreen from '../../../services/checkMobileScreen'
 import {
   dialogCancelIcon,
   dialogWarningRounded,
   dialogTitle,
   dialogIconButton,
   dialogContentStack
-} from '../themes/gurbTheme'
+} from '../../../themes/gurbTheme'
 
 export default function SimpleDialog({
   title,
