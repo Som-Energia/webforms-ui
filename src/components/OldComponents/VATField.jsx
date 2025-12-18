@@ -6,8 +6,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import CheckIcon from '@mui/icons-material/Check'
 
-import { checkVat } from '../services/api'
-import { checkPhisicalVAT } from '../services/utils'
+import { checkVat } from '../../services/api'
+import { checkPhisicalVAT } from '../../services/utils'
 
 const VATField = (props) => {
   const {

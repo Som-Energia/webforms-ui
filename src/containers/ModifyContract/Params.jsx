@@ -20,7 +20,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-import Uploader from '../../components/Uploader'
+import Uploader from '../../components/OldComponents/Uploader'
 import PowerInputs from './PowerInputs'
 import Chooser from '../../components/OldComponents/Chooser'
 

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 
 import Chooser from '../../components/OldComponents/Chooser'
 import FormHelperText from '@mui/material/FormHelperText'
-import StepHeader from '../../components/StepHeader'
+import StepHeader from '../../components/OldComponents/StepHeader'
 
 function BecomeMember(props) {
   const { t } = useTranslation()

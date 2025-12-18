@@ -13,7 +13,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SendIcon from '@mui/icons-material/Send'
 
 import Chooser from '../../components/OldComponents/Chooser'
-import Uploader from '../../components/Uploader'
+import Uploader from '../../components/OldComponents/Uploader'
 import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =

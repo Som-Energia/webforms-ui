@@ -13,7 +13,7 @@ import GenerationContext from '../context/GenerationContext'
 import PopUpContext from '../../../context/PopUpContext'
 import GenerationFailure from './GenerationFailure'
 import ContractList from '../../../components/OldComponents/ClickableList';
-import SimpleDialog from '../../../components/SimpleDialog';
+import SimpleDialog from '../../../components/OldComponents/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
 import Loading from '../../../components/Loading'
 import CustomDialog from '../../../components/CustomDialog'
