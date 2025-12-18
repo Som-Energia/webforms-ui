@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import TermsDialog from '../../../components/TermsDialog'
 
-import Chooser from '../../../components/NewChooser'
+import Chooser from '../../../components/Chooser'
 import InputTitle from '../../../components/InputTitle'
 import CUPS from '../../../components/CUPS'
 import AlertBox from '../../../components/AlertBox'

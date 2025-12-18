@@ -11,7 +11,7 @@ import {
   PersonalIcon
 } from '../../../data/icons/Icons'
 import CAUField from '../../../components/CAUField'
-import Chooser from '../../../components/NewChooser'
+import Chooser from '../../../components/Chooser'
 import InputField from '../../../components/InputField'
 import SelectField from '../../../components/SelectField'
 import InputTitle from '../../../components/InputTitle'
