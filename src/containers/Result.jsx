@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import StepHeader from '../components/StepHeader'
+import StepHeader from '../components/OldComponents/StepHeader'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 

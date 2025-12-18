@@ -6,10 +6,10 @@ import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import StepHeader from '../../components/StepHeader'
+import StepHeader from '../../components/OldComponents/StepHeader'
 import Chooser from '../../components/OldComponents/Chooser'
-import MemberIdentifierFields from '../../components/MemberIdentifierFields'
-import VATField from '../../components/VATField'
+import MemberIdentifierFields from '../../components/OldComponents/MemberIdentifierFields'
+import VATField from '../../components/OldComponents/VATField'
 
 const MemberIdentifier = (props) => {
   const { t } = useTranslation()

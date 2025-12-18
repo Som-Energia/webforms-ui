@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography'
 
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
-import { checkMember } from '../services/api'
-import { checkVatFormat } from '../services/utils'
+import { checkMember } from '../../services/api'
+import { checkVatFormat } from '../../services/utils'
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search)

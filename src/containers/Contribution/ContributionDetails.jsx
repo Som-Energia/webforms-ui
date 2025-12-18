@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import StepHeader from '../../components/StepHeader'
+import StepHeader from '../../components/OldComponents/StepHeader'
 import IBANField from '../../components/OldComponents/IBANField'
 
 import Box from '@mui/material/Box'

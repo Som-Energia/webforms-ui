@@ -18,7 +18,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-import { uploadFile } from '../services/api'
+import { uploadFile } from '../../services/api'
 
 const Uploader = (props) => {
 

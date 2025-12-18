@@ -12,7 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
 import SendIcon from '@mui/icons-material/Send'
 
-import Uploader from '../../components/Uploader'
+import Uploader from '../../components/OldComponents/Uploader'
 
 import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 

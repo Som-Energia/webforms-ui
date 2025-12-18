@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
-import StepHeader from '../components/StepHeader'
+import StepHeader from '../components/OldComponents/StepHeader'
 
 const Success = (props) => {
   const { result, description, title, showHeader, subtitle } = props
