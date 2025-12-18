@@ -12,7 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SendIcon from '@mui/icons-material/Send'
 
-import Chooser from '../../components/Chooser'
+import Chooser from '../../components/OldComponents/Chooser'
 import Uploader from '../../components/Uploader'
 import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 
