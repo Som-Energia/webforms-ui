@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import Chooser from './NewChooser'
+import Chooser from './Chooser'
 import RequiredTitle from './InputTitle'
 
 import Typography from '@mui/material/Typography'

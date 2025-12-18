@@ -9,7 +9,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { iconRequirements } from '../../../../themes/commonStyles'
 import Grid from '@mui/material/Grid'
 import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../../../components/NewChooser'
+import Chooser from '../../../../components/Chooser'
 import { useState } from 'react'
 
 const Payment = (props) => {
