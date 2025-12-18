@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography'
 import { ReceiptIcon, CreditCardIcon } from '../../../data/icons/Icons'
 import { checkIbanFormat } from '../../../services/utils'
 
-import Chooser from '../../../components/NewChooser'
+import Chooser from '../../../components/Chooser'
 import InputTitle from '../../../components/InputTitle'
 import InputField from '../../../components/InputField'
 

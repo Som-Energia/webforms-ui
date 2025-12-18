@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import { HelperText } from './InputField'
-import Chooser from './NewChooser'
+import Chooser from './Chooser'
 import PowerInputs from './PowerInputs'
 
 import Typography from '@mui/material/Typography'
