@@ -8,9 +8,9 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import PrevButton from '../../components/NewButtons/PrevButton'
-import NextButton from '../../components/NewButtons/NextButton'
-import SubmitButton from '../../components/NewButtons/SubmitButton'
+import PrevButton from '../../components/Buttons/PrevButton'
+import NextButton from '../../components/Buttons/NextButton'
+import SubmitButton from '../../components/Buttons/SubmitButton'
 import SomStepper from '../../components/SomStepper'
 
 import { newNormalizeMember } from '../../services/utils'

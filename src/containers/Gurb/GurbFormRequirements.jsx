@@ -8,8 +8,8 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import PrevButton from '../../components/NewButtons/PrevButton'
-import NextButton from '../../components/NewButtons/NextButton'
+import PrevButton from '../../components/Buttons/PrevButton'
+import NextButton from '../../components/Buttons/NextButton'
 
 import supplyPointValidations from './validations/supplyPointValidations'
 import {
