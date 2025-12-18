@@ -24,7 +24,7 @@ import {
   NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
   NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
 } from '../../../services/steps'
-import NewLoading from '../../../components/NewLoading'
+import Loading from '../../../components/Loading'
 import {
   InvoiceIcon,
   PersonalIcon,
@@ -437,7 +437,7 @@ const NewContractMemberSummary = (props) => {
   }
  
   return loading ? (
-    <NewLoading />
+    <Loading />
   ) : (
     <Grid container spacing={4}>
       <Grid
