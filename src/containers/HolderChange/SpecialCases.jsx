@@ -9,8 +9,8 @@ import FormGroup from '@mui/material/FormGroup'
 import FormHelperText from '@mui/material/FormHelperText';
 import Typography from '@mui/material/Typography'
 
-import StepHeader from '../../components/StepHeader'
-import Uploader from '../../components/Uploader'
+import StepHeader from '../../components/OldComponents/StepHeader'
+import Uploader from '../../components/OldComponents/Uploader'
 
 const SpecialCases = (props) => {
   const { t } = useTranslation()
