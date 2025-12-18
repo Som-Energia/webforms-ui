@@ -12,7 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 
-import DisplayFormikState from '../components/DisplayFormikState'
+import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 
 import SendIcon from '@mui/icons-material/Send'
 
