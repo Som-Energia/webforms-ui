@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import Chooser from '../../components/Chooser'
+import Chooser from '../../components/OldComponents/Chooser'
 import StepHeader from '../../components/StepHeader'
 
 function VoluntaryCent(props) {

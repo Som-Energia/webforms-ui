@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-import Chooser from '../../components/Chooser'
+import Chooser from '../../components/OldComponents/Chooser'
 
 const label = {
   textTransform: 'uppercase',

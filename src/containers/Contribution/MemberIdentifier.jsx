@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import StepHeader from '../../components/StepHeader'
-import Chooser from '../../components/Chooser'
+import Chooser from '../../components/OldComponents/Chooser'
 import MemberIdentifierFields from '../../components/MemberIdentifierFields'
 import VATField from '../../components/VATField'
 
