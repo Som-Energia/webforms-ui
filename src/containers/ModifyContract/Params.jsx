@@ -22,7 +22,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import Uploader from '../../components/Uploader'
 import PowerInputs from './PowerInputs'
-import Chooser from '../../components/Chooser'
+import Chooser from '../../components/OldComponents/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
 import { getRates } from '../../services/api'
