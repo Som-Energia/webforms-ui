@@ -23,7 +23,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
 
-import DisplayFormikState from '../components/DisplayFormikState'
+import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 
 import ContractDetails from './Cancellation/ContractDetails'
 import CancellationWarning from './Cancellation/CancellationWarning'

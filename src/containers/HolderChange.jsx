@@ -29,7 +29,7 @@ import Failure from './Failure'
 
 import data from '../data/HolderChange/data.json'
 
-import DisplayFormikState from '../components/DisplayFormikState'
+import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 
 import { holderChange } from '../services/api'
 import {
