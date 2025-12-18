@@ -15,7 +15,7 @@ import GenerationFailure from './GenerationFailure'
 import ContractList from '../../../components/OldComponents/ClickableList';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
-import Loading from '../../../components/NewLoading'
+import Loading from '../../../components/Loading'
 import CustomDialog from '../../../components/CustomDialog'
 import GenerationTable from './GenerationTable'
 

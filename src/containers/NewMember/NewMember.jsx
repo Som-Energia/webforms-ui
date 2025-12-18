@@ -29,7 +29,7 @@ import memberIdentifierValidations from './validations/memberIdentifierValidatio
 import memberPersonalDataValidations from './validations/memberPersonalDataValidations'
 import memberPaymentMethodValidations from './validations/paymentMethodValidations'
 import memberSummaryValidations from './validations/memberSummaryValidations'
-import NewLoading from '../../components/NewLoading'
+import Loading from '../../components/Loading'
 
 const MAX_STEP_NUMBER = 3
 const NEW_MEMBER_COST = 100
@@ -224,7 +224,7 @@ const NewMemberForm = (props) => {
           return (
             <>
               {sending ? (
-                <NewLoading description={t('NEW_MEMBER_SUBMIT_LOADING')} />
+                <Loading description={t('NEW_MEMBER_SUBMIT_LOADING')} />
               ) : (
                 <>
                   <Box sx={{ marginBottom: '65px' }}>

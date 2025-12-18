@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 
-const NewLoading = (props) => {
+const Loading = (props) => {
     const { t } = useTranslation()
     const { description } = props
     return (
@@ -27,4 +27,4 @@ const NewLoading = (props) => {
     )
 }
 
-export default NewLoading
+export default Loading

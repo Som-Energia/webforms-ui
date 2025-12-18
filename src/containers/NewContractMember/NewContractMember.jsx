@@ -52,7 +52,7 @@ import newContractMemberSummaryValidations from './validations/newContractMember
 import LinkMemberDetails from './pages/LinkMemberDetails'
 import linkMemberValidations from './validations/linkMemberDetailsValidations'
 import identifyMemberPersonalDataValidations from './validations/identifyMemberPersonalDataValidations'
-import NewLoading from '../../components/NewLoading'
+import Loading from '../../components/Loading'
 import RedirectUrl from '../Gurb/components/RedirectUrl'
 
 import { newNormalizeContract } from '../../services/newNormalize'
@@ -491,7 +491,7 @@ const NewContractMemberForm = (props) => {
         validateOnBlur={false}>
         {(formikProps) => {
           return sending ? (
-            <NewLoading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
+            <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
           ) : (
             <>
               {activeStep == 0 ? (
