@@ -4,6 +4,11 @@
 
 - IMP: clean translation keys
 - REF: next prev steps
+- REF: Change containers structure: pages, validations, components (specific components) main pages
+- REF: Move old components to new folder OldComponents
+- REF: Rename new components as stadard components
+- REF: Remove unused components
+- REF: Cleanup translation keys
 
 ## 6.3.1 2025-10-05
 
