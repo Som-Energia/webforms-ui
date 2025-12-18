@@ -32,7 +32,7 @@ import Failure from './Indexed/IndexedFailure'
 import Success from './Success'
 import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 import DropDownMenu from '../components/OldComponents/DropDownMenu'
-import Loading from '../components/NewLoading'
+import Loading from '../components/Loading'
 import PrevButton from '../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../components/OldComponents/Buttons/NextButton'
 
