@@ -12,7 +12,7 @@ import GenerationInvestmentSection from './GenerationInvestmentSection'
 import GenerationContext from '../context/GenerationContext'
 import PopUpContext from '../../../context/PopUpContext'
 import GenerationFailure from './GenerationFailure'
-import ContractList from '../../../components/ClickableList';
+import ContractList from '../../../components/OldComponents/ClickableList';
 import SimpleDialog from '../../../components/SimpleDialog';
 import { addContractsToAssignments } from '../../../services/api'
 import Loading from '../../../components/NewLoading'
