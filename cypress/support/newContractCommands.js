@@ -96,7 +96,7 @@ Cypress.Commands.add('choosePower', ({ moreThan15Kw = false, powers }) => {
 })
 
 Cypress.Commands.add('supplyPointData', () => {
-  cy.get('[data-cy=select_component]').click()
+  cy.get('[data-cy="supply_point.is_housing"]').click()
   cy.get('[data-cy=yes]').click()
 
   cy.get('[data-cy="supply_point_accepted"]').click()
