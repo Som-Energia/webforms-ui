@@ -14,7 +14,7 @@ import SendIcon from '@mui/icons-material/Send'
 
 import Chooser from '../../components/Chooser'
 import Uploader from '../../components/Uploader'
-import PrevButton from '../../components/Buttons/PrevButton'
+import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =
   import.meta.env.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'

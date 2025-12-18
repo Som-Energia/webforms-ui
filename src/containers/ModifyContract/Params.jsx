@@ -26,8 +26,8 @@ import Chooser from '../../components/Chooser'
 
 import { calculateTariff, testPowerForPeriods } from '../../services/utils'
 import { getRates } from '../../services/api'
-import PrevButton from '../../components/Buttons/PrevButton'
-import NextButton from '../../components/Buttons/NextButton'
+import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
+import NextButton from '../../components/OldComponents/Buttons/NextButton'
 
 const handleChangeModify = (event, setFieldValue, values) => {
   if (event.target.name === 'changePhases' && values.changePhases) {

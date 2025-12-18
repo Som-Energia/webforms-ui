@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import NextButton from '../../components/Buttons/NextButton'
+import NextButton from '../../components/OldComponents/Buttons/NextButton'
 
 export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()

@@ -21,9 +21,9 @@ import {
   normalizeMember
 } from '../../../services/utils'
 import { generationkWhContribution, member } from '../../../services/api'
-import PrevButton from '../../../components/Buttons/PrevButton'
-import NextButton from '../../../components/Buttons/NextButton'
-import ExitButton from '../../../components/Buttons/ExitButton'
+import PrevButton from '../../../components/OldComponents/Buttons/PrevButton'
+import NextButton from '../../../components/OldComponents/Buttons/NextButton'
+import ExitButton from '../../../components/OldComponents/Buttons/ExitButton'
 import PersonalData from '../../HolderChange/PersonalData'
 import GenerationSignaturit from './GenerationSignaturit'
 

@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import SendIcon from '@mui/icons-material/Send'
-import PrevButton from '../../components/Buttons/PrevButton'
+import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 
 export default function ModifyResume({
   prevStep,
