@@ -14,7 +14,7 @@ import SendIcon from '@mui/icons-material/Send'
 
 import Uploader from '../../components/Uploader'
 
-import PrevButton from '../../components/Buttons/PrevButton'
+import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 
 function RefuseD1({
   prevStep,

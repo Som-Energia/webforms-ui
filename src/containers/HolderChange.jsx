@@ -36,9 +36,9 @@ import {
   normalizeHolderChange,
   isHomeOwnerCommunityNif
 } from '../services/utils'
-import PrevButton from '../components/Buttons/PrevButton'
-import NextButton from '../components/Buttons/NextButton'
-import SubmitButton from '../components/Buttons/SubmitButton'
+import PrevButton from '../components/OldComponents/Buttons/PrevButton'
+import NextButton from '../components/OldComponents/Buttons/NextButton'
+import SubmitButton from '../components/OldComponents/Buttons/SubmitButton'
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
