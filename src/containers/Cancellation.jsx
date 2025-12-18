@@ -34,8 +34,8 @@ import Failure from './Failure'
 import Success from './Success'
 
 import { cancelContract } from '../services/api'
-import PrevButton from '../components/Buttons/PrevButton'
-import NextButton from '../components/Buttons/NextButton'
+import PrevButton from '../components/OldComponents/Buttons/PrevButton'
+import NextButton from '../components/OldComponents/Buttons/NextButton'
 
 const MAX_STEP_NUMBER = 2
 
