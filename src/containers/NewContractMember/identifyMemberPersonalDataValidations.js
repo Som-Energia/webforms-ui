@@ -5,6 +5,9 @@ const identifyMemberPersonalDataValidations = Yup.object().shape({
     nif: Yup.string()
     .required('ERROR_REQUIRED_FIELD')
     .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF'),
+    nif_valid: Yup.boolean()
+      .required('ERROR_REQUIRED_FIELD')
+      .oneOf([true], 'FILL_NIF'),
     person_type: Yup.string().oneOf(['legal-person', 'physic-person']),
     name: Yup.string().required('NO_NAME'),
     surname1: Yup.string().when('person_type', {
