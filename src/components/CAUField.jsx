@@ -36,29 +36,29 @@ export function CAUField({
   }, [isValid])
 
   useEffect(() => {
-    const cleaned_cau = values?.self_consumption?.cau?.replace(/ /g, '')
+    const cleaned_cau = (values?.self_consumption?.cau ?? '').replace(/ /g, '')
+
     if (values?.self_consumption?.collective_installation == 'individual') {
       setIsValid(isMatchingCUPSandCAU(cleaned_cau, values?.cups))
+    } else if (cleaned_cau.length == 26) {
+      setIsLoading(true)
+      checkCups(cleaned_cau.slice(0, 20))
+        .then((response) => {
+          setIsValid(response?.state === true)
+          setIsLoading(false)
+        })
+        .catch((error) => {
+          console.error(error)
+          setIsValid(false)
+          setIsLoading(false)
+        })
+    } else {
+      setIsValid(false)
     }
-    else {
-      if (cleaned_cau.length == 26) {
-        setIsLoading(true)
-        checkCups(cleaned_cau.slice(0, 20))
-          .then((response) => {
-            setIsValid(response?.state === true)
-            setIsLoading(false)
-          })
-          .catch((error) => {
-            console.error(error)
-            setIsValid(false)
-            setIsLoading(false)
-          })
-      }
-      else {
-        setIsValid(false)
-      }
-    }
-  }, [values.self_consumption.cau, values.self_consumption.collective_installation])
+  }, [
+    values.self_consumption.cau,
+    values.self_consumption.collective_installation
+  ])
 
   return (
     <InputField
