@@ -55,8 +55,8 @@ const PowerInputs = (props) => {
                 moreThan15Kw
                   ? `P${inputNum + 1}`
                   : inputNum === 0
-                    ? t('PEAK')
-                    : t('VALLEY')
+                  ? t('PEAK')
+                  : t('VALLEY')
               }
               numInputs={numInputs}
               handleChange={(event) =>
@@ -69,7 +69,7 @@ const PowerInputs = (props) => {
               value={values[attr]}
               error={errors?.[attr]}
               //textFieldHelper={
-                //t('HELP_POPOVER_POWER')
+              //t('HELP_POPOVER_POWER')
               //}
             />
           </Grid>

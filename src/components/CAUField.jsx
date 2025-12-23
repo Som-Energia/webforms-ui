@@ -16,7 +16,7 @@ export function CAUField({
   error,
   required,
   setFieldValue,
-  helperText,
+  helperText
 }) {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +24,7 @@ export function CAUField({
 
   const handleChange = async (event) => {
     const cau = prettyCAU(event.target.value)
-    setFieldValue("self_consumption.cau", cau)
+    setFieldValue('self_consumption.cau', cau)
   }
 
   useEffect(() => {
@@ -32,9 +32,9 @@ export function CAUField({
   }, [values.self_consumption.cau_valid])
 
   useEffect(() => {
-    setFieldValue("self_consumption.cau_valid", isValid)
+    setFieldValue('self_consumption.cau_valid', isValid)
   }, [isValid])
-  
+
   useEffect(() => {
     const cleaned_cau = values?.self_consumption?.cau?.replace(/ /g, '')
     if (values?.self_consumption?.collective_installation == 'individual') {
@@ -73,9 +73,7 @@ export function CAUField({
       touched={touched}
       error={!isLoading ? error : ''}
       textFieldHelper={
-        isLoading
-          ? t('API_VALIDATED_FIELD_CHECKING')
-          : helperText
+        isLoading ? t('API_VALIDATED_FIELD_CHECKING') : helperText
       }
     />
   )
