@@ -34,7 +34,6 @@ const options = [
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
   { title: 'Generation kwh - Form', href: `${language}/servicios/produccion/generation-kwh-aportaciones` },
-  { title: 'Gurb - Form Deprecated', href: `${language}/gurb/${gurbCode}/deprecated/`},
   { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbCode}/requirements/`},
   { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbCode}/join/`},
   { title: 'Gurb - Pagament contractació social tpv OK', href: `${language}/gurb/gurb_url_ok?gurbCode=${gurbCode}`},

@@ -1,31 +1,29 @@
-import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
+import { buttonGurbDark } from '../../themes/gurbTheme'
 
 function SubmitButton(props) {
-  const {startIcon, disabled, title, loading} = props
-  
+  const { onClick, disabled, sending, text='FINISH' } = props
+
+  const { t } = useTranslation()
+
   return (
     <Button
-      type="submit"
-      data-cy="submit"
+      tabIndex={0}
+      sx={{ ...buttonGurbDark }}
+      type="button"
+      data-cy="next"
       variant="contained"
-      color="primary"
-      sx={{
-        backgroundColor: 'primary.extraLight',
-        color: 'primary.main',
-        '&:hover': {
-          color: 'primary.extraLight',
-          backgroundColor: 'primary.main'
-        }
-      }}
-      startIcon={loading ? (
-          <CircularProgress size={24} />
-        ) : (
-          startIcon
-        )}
-      disabled={disabled}>
-      {title}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {sending ? (
+        <CircularProgress size={24} sx={{ color: 'white' }} />
+      ) : (
+        t(text)
+      )}
     </Button>
   )
 }

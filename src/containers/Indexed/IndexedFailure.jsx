@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 
 import CloseIcon from '@mui/icons-material/Close'
 
-import StepHeader from '../../components/StepHeader'
+import StepHeader from '../../components/OldComponents/StepHeader'
 import indexedErrorText from './IndexedError'
 import Result from '../Result'
 

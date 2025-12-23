@@ -9,10 +9,10 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import PrevButton from '../../components/NewButtons/PrevButton'
-import NextButton from '../../components/NewButtons/NextButton'
-import SubmitButton from '../../components/NewButtons/SubmitButton'
-import SomStepper from '../../components/NewSomStepper'
+import PrevButton from '../../components/Buttons/PrevButton'
+import NextButton from '../../components/Buttons/NextButton'
+import SubmitButton from '../../components/Buttons/SubmitButton'
+import SomStepper from '../../components/SomStepper'
 import Result from '../../containers/Result'
 
 import {
@@ -22,37 +22,37 @@ import {
 import Stack from '../../services/Stack'
 import { NextStep, keyByValue, valueByKey } from '../../services/NextStep'
 import SummaryContext from '../../context/SummaryContext'
-import GurbLoadingContext from '../../context/GurbLoadingContext'
-import MemberIdentifier from '../NewMember/MemberIdentifier'
-import MemberPersonalData from '../NewMember/MemberPersonalData'
-import NewContractMemberQuestion from './NewContractMemberQuestion'
-import NewContractMemberSupplyPoint from './NewContractMemberSupplyPoint'
-import NewContractMemberSupplyPointData from './NewContractMemberSupplyPointData'
-import NewContractMemberPower from './NewContractMemberPower'
-import NewContractMemberSelfConsumptionChooser from './NewContractMemberSelfConsumptionChooser'
-import NewContractMemberSelfConsumptionData from './NewContractMemberSelfConsumptionData'
-import NewContractHolder from './NewContractHolder'
-import NewContractMemberVoluntaryDonation from './NewContractMemberVoluntaryDonation'
-import NewContractMemberPayment from './NewContractMemberPayment'
-import NewContractMemberSummary from './NewContractMemberSummary'
-import IdentifyMemberPersonalData from './IdentifyMemberPersonalData'
+import LoadingContext from '../../context/LoadingContext'
+import MemberIdentifier from '../NewMember/pages/MemberIdentifier'
+import MemberPersonalData from '../NewMember/pages/MemberPersonalData'
+import NewContractMemberQuestion from './pages/NewContractMemberQuestion'
+import NewContractMemberSupplyPoint from './pages/NewContractMemberSupplyPoint'
+import NewContractMemberSupplyPointData from './pages/NewContractMemberSupplyPointData'
+import NewContractMemberPower from './pages/NewContractMemberPower'
+import NewContractMemberSelfConsumptionChooser from './pages/NewContractMemberSelfConsumptionChooser'
+import NewContractMemberSelfConsumptionData from './pages/NewContractMemberSelfConsumptionData'
+import NewContractHolder from './pages/NewContractHolder'
+import NewContractMemberVoluntaryDonation from './pages/NewContractMemberVoluntaryDonation'
+import NewContractMemberPayment from './pages/NewContractMemberPayment'
+import NewContractMemberSummary from './pages/NewContractMemberSummary'
+import IdentifyMemberPersonalData from './pages/IdentifyMemberPersonalData'
 
-import memberIdentifierValidations from '../NewMember/memberIdentifierValidations'
-import memberPersonalDataValidations from '../NewMember/memberPersonalDataValidations'
-import newContractMemberQuestionValidations from './newContractMemberQuestionValidations'
-import newContractMemberSupplyPointValidations from './newContractMemberSupplyPointValidations'
-import newContractMemberSupplyPointDataValidations from './newContractMemberSupplyPointDataValidations'
-import newContractMemberPowerValidations from './newContractMemberPowerValidations'
-import newContractMemberSelfConsumptionValidations from './newContractMemberSelfConsumptionValidations'
-import newContractMemberSelfConsumptionDataValidations from './newContractMemberSelfConsumptionDataValidations'
-import newContractHolderValidations from './newContractHolderValidations'
-import newContractMemberVoluntaryDonationValidations from './newContractMemberVoluntaryDonationValidations'
-import newContractMemberPaymentValidations from './newContractMemberPaymentValidations'
-import newContractMemberSummaryValidations from './newContractMemberSummaryValidations'
-import ApadrinatingDetails from '../Gurb/pages/NewMember/ApadrinatingDetails'
-import linkMemberValidations from '../Gurb/pages/NewMember/linkMemberDetailsValidations'
-import identifyMemberPersonalDataValidations from './identifyMemberPersonalDataValidations'
-import NewLoading from '../../components/NewLoading'
+import memberIdentifierValidations from '../NewMember/validations/memberIdentifierValidations'
+import memberPersonalDataValidations from '../NewMember/validations/memberPersonalDataValidations'
+import newContractMemberQuestionValidations from './validations/newContractMemberQuestionValidations'
+import newContractMemberSupplyPointValidations from './validations/newContractMemberSupplyPointValidations'
+import newContractMemberSupplyPointDataValidations from './validations/newContractMemberSupplyPointDataValidations'
+import newContractMemberPowerValidations from './validations/newContractMemberPowerValidations'
+import newContractMemberSelfConsumptionValidations from './validations/newContractMemberSelfConsumptionValidations'
+import newContractMemberSelfConsumptionDataValidations from './validations/newContractMemberSelfConsumptionDataValidations'
+import newContractHolderValidations from './validations/newContractHolderValidations'
+import newContractMemberVoluntaryDonationValidations from './validations/newContractMemberVoluntaryDonationValidations'
+import newContractMemberPaymentValidations from './validations/newContractMemberPaymentValidations'
+import newContractMemberSummaryValidations from './validations/newContractMemberSummaryValidations'
+import LinkMemberDetails from './pages/LinkMemberDetails'
+import linkMemberValidations from './validations/linkMemberDetailsValidations'
+import identifyMemberPersonalDataValidations from './validations/identifyMemberPersonalDataValidations'
+import Loading from '../../components/Loading'
 import RedirectUrl from '../Gurb/components/RedirectUrl'
 
 import { newNormalizeContract } from '../../services/newNormalize'
@@ -79,7 +79,7 @@ const NewContractMemberForm = (props) => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
 
-  const { loading } = useContext(GurbLoadingContext)
+  const { loading } = useContext(LoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
   const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
@@ -401,7 +401,7 @@ const NewContractMemberForm = (props) => {
     } else {
       if (activeStep === 1) {
         setHasAlert(false)
-        return <ApadrinatingDetails {...props} />
+        return <LinkMemberDetails {...props} />
       } else if (activeStep === 2) {
         setHasAlert(true)
         return <NewContractMemberSupplyPoint {...trackProps} />
@@ -491,7 +491,7 @@ const NewContractMemberForm = (props) => {
         validateOnBlur={false}>
         {(formikProps) => {
           return sending ? (
-            <NewLoading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
+            <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
           ) : (
             <>
               {activeStep == 0 ? (

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
-import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
+import LocationInput from './AddressAutocompletedField'
 import {
   useHandleChange,
   useHandleChangeInteger
