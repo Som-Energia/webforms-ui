@@ -35,9 +35,9 @@ const PowerInputs = (props) => {
   return (
     <Grid container spacing={2}>
       {Array.from(Array(numInputs).keys()).map((inputNum) => {
-        const attr = inputNum === 0 ? 'power1' : `power${inputNum + 1}`
-        const moreThan15Kw = numInputs === 2 ? false : true
-        const textPower = has_light == 'light-on' ? 'CURRENT':'WHICH'
+        const attr = `power${inputNum + 1}`
+        const moreThan15Kw = numInputs !== 2
+        const textPower = has_light == 'light-on' ? 'CURRENT' : 'WHICH'
         return (
           <Grid key={attr} item xs={12}>
             <InputField
@@ -45,8 +45,8 @@ const PowerInputs = (props) => {
               required={true}
               textFieldName={
                 moreThan15Kw
-                ? t(textPower + '_POWER')
-                : inputNum === 0
+                  ? t(textPower + '_POWER')
+                  : inputNum === 0
                   ? t(textPower + '_PEAK')
                   : t(textPower + '_VALLEY')
               }
