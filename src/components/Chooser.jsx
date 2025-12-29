@@ -16,7 +16,7 @@ const Option = ({
   maxWidth
 }) => {
 
-  const chooser = {
+  const chooserStyles = {
     paddingTop: '1.5rem',
     paddingBottom: '2rem',
     paddingLeft: '1.625rem',
@@ -26,8 +26,8 @@ const Option = ({
     cursor: 'pointer'
   }
 
-  const chooserSelected = {
-    ...chooser,
+  const chooserSelectedStyles = {
+    ...chooserStyles,
     backgroundColor: 'secondary.extraLight'
   }
 
@@ -35,7 +35,7 @@ const Option = ({
     <Box
       data-cy={optionId}
       sx={{
-        ...(isSelected ? chooserSelected : chooser),
+        ...(isSelected ? chooserSelectedStyles : chooserStyles),
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
