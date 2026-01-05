@@ -164,7 +164,8 @@ const CancellationDetails = (props) => {
           component="span"
           sx={{
             pt: '4px',
-            mb: '-0.25rem !important'
+            mb: '-0.25rem !important',
+            color: '#c8071e'
           }}
           dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
         />
