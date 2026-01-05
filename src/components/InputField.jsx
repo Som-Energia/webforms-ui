@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -29,8 +28,7 @@ export const HelperText = ({ helperText, iconHelper }) => {
   )
 }
 
-const InputField = React.memo(
-  ({
+const InputFieldComponent = ({
     textFieldLabel,
     textFieldName,
     textFieldNameHelper,
@@ -50,10 +48,7 @@ const InputField = React.memo(
     name = '',
     onPaste = undefined,
     customInputProps = {}
-
   }) => {
-    const { t } = useTranslation()
-
     return (
       <Grid container spacing={1}>
         <Grid item xs={12} sx={{ mb: '6px' }}>
@@ -86,15 +81,16 @@ const InputField = React.memo(
                     {<CircularProgress size={24} />}
                   </InputAdornment>
                 )) ||
-                endAdornmentText,
-
+                endAdornmentText
             }}
             inputProps={customInputProps}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
             value={value ?? ''}
-            error={touched && typeof error === 'string' && error.trim().length > 0}
+            error={
+              touched && typeof error === 'string' && error.trim().length > 0
+            }
           />
         </Grid>
         <Grid item>
@@ -120,5 +116,5 @@ const InputField = React.memo(
       </Grid>
     )
   }
-)
-export default InputField
+
+export default React.memo(InputFieldComponent)

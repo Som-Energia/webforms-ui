@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import LocationInput from '../containers/Gurb/components/AddressAutocompletedField'
 import {
   useHandleChange,
-  useHandleChangeInteger
+  useHandleChangeInteger,
 } from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
@@ -25,7 +25,6 @@ const updateAddressValues = async (
   setValues,
   addressFieldName,
   sessionTokenRef,
-  onChangeStateCity
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
@@ -173,8 +172,8 @@ const AddressField = ({
   const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
   const handleChangeStateAndCity = async (value) => {
-    await setFieldValue(`${addressFieldName}.city`,value?.city)
-    setFieldValue(`${addressFieldName}.state`,value?.state)
+    await setFieldValue(`${addressFieldName}.city`, value?.city)
+    setFieldValue(`${addressFieldName}.state`, value?.state)
   }
 
   return (
@@ -188,7 +187,7 @@ const AddressField = ({
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
           error={
             touched[addressFieldName]?.street &&
-              errors[addressFieldName]?.street
+            errors[addressFieldName]?.street
               ? errors[addressFieldName].street
               : false
           }
@@ -210,7 +209,7 @@ const AddressField = ({
           value={postalCodeValue}
           error={
             touched[addressFieldName]?.postal_code &&
-              errors[addressFieldName]?.postal_code
+            errors[addressFieldName]?.postal_code
               ? t(errors[addressFieldName].postal_code)
               : ''
           }
@@ -241,11 +240,33 @@ const AddressField = ({
           value={numberValue}
           error={
             touched[addressFieldName]?.number &&
-              errors[addressFieldName]?.number
+            errors[addressFieldName]?.number
               ? t(errors[addressFieldName].number)
               : ''
           }
           required
+        />
+      </Grid>
+
+      <Grid item sm={2} xs={6}>
+        <InputField
+          name={`${addressFieldName}.bloc`}
+          textFieldName={t('BLOCK')}
+          handleChange={handleChange}
+          touched={touched[addressFieldName]?.bloc}
+          value={values[addressFieldName]?.bloc}
+          error={errors[addressFieldName]?.bloc}
+        />
+      </Grid>
+
+      <Grid item sm={2} xs={6}>
+        <InputField
+          name={`${addressFieldName}.stairs`}
+          textFieldName={t('STAIRS')}
+          handleChange={handleChange}
+          touched={touched[addressFieldName]?.stairs}
+          value={values[addressFieldName]?.stairs}
+          error={errors[addressFieldName]?.stairs}
         />
       </Grid>
 
@@ -268,28 +289,6 @@ const AddressField = ({
           touched={touched[addressFieldName]?.door}
           value={values[addressFieldName]?.door}
           error={errors[addressFieldName]?.door}
-        />
-      </Grid>
-
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.stairs`}
-          textFieldName={t('STAIRS')}
-          handleChange={handleChange}
-          touched={touched[addressFieldName]?.stairs}
-          value={values[addressFieldName]?.stairs}
-          error={errors[addressFieldName]?.stairs}
-        />
-      </Grid>
-
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.bloc`}
-          textFieldName={t('BLOCK')}
-          handleChange={handleChange}
-          touched={touched[addressFieldName]?.bloc}
-          value={values[addressFieldName]?.bloc}
-          error={errors[addressFieldName]?.bloc}
         />
       </Grid>
     </Grid>
