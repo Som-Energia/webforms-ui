@@ -542,9 +542,9 @@ const NewContractMemberForm = (props) => {
                             }}
                             dangerouslySetInnerHTML={{
                               __html: !error
-                                ? formikProps.values.has_member === 'member-on'
-                                  ? t('NEW_CONTRACT_SUCCESS_DESC')
-                                  : t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                                ? formikProps.values.has_member == 'member-off'
+                                  ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
+                                  : t('NEW_CONTRACT_SUCCESS_DESC')
                                 : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
                             }}
                           />
