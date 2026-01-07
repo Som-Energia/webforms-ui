@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 6.4.0 2026-01-07
 
 - IMP: clean translation keys
 - REF: next prev steps
@@ -9,6 +9,9 @@
 - REF: Rename new components as stadard components
 - REF: Remove unused components
 - REF: Cleanup translation keys
+- FIX: NIF validation
+- FIX: Succes message when is sponsored
+- REF: Message color in cancellation form
 
 ## 6.3.1 2025-10-05
 
