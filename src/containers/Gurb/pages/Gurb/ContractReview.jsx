@@ -14,7 +14,7 @@ import {
   textHeader4,
   participationAlertBoxTypography,
   participationAlertBoxIcon
-} from '../../../../themes/gurbTheme'
+} from '../../gurbTheme'
 import {
   LightningIcon,
   EuroIcon,

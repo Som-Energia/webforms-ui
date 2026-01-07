@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { textField } from '../../../themes/gurbTheme'
+import { textField } from '../gurbTheme'
 import InputTitle from '../../../components/InputTitle'
 
-export default function AddressAutocompletedFieldGurb({
+export default function LocationInput({
   textFieldLabel,
   textFieldName,
   textFieldHelper,

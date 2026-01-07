@@ -3,7 +3,7 @@ import Link from '@mui/material/Link'
 import ReportProblemRoundedIcon from '@mui/icons-material/ReportProblemRounded'
 import ResultRequirement from './ResultRequirement'
 import GurbErrorContext from '../../../context/GurbErrorContext'
-import { link } from '../../../themes/gurbTheme'
+import { link } from '../gurbTheme'
 
 const AlertRequirement = ({
   textHeader,

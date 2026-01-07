@@ -68,8 +68,8 @@ Cypress.Commands.add(
     }).as('getPowers')
 
     cy.wait('@getPowers')
-    cy.get('[id="values.gurb.power"]').click()
-    cy.get('[id="values.gurb.power-1"]').click()
+    cy.get('[data-cy="select_component"]').click()
+    cy.get('[data-cy="1"]').click()
     cy.get('[data-cy=next]').should('not.be.disabled').click()
   }
 )
@@ -285,7 +285,7 @@ Cypress.Commands.add('choosePower', ({ moreThan15Kw = false, powers }) => {
 })
 
 Cypress.Commands.add('supplyPointData', () => {
-  cy.get('[data-cy="supply_point.is_housing"]').click()
+  cy.get('[data-cy=select_component]').click()
   cy.get('[data-cy=yes]').click()
 
   cy.get('[data-cy="supply_point_accepted"]').click()
@@ -318,8 +318,8 @@ Cypress.Commands.add('checkReviewContractStep', (vat) => {
 })
 
 Cypress.Commands.add('powerChoice', (choice) => {
-  cy.get('[id="values.gurb.power"]').click()
-  cy.get(`[id="values.gurb.power-${choice}"]`).click()
+  cy.get('[data-cy="select_component"]').click()
+  cy.get(`[data-cy="${choice}"]`).click()
   cy.get('[data-cy=next]').click()
 })
 

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
-import OptionSwitch from '../components/oficinavirtual/OptionSwitch'
+import OptionSwitch from '../components/OptionSwitch'
 import Box from '@mui/material/Box'
 
 const defaultLists = [

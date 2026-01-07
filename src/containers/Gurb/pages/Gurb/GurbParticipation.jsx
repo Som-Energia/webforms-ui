@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import SelectField from '../../../../components/SelectField'
+import Select from '../../components/Select'
 import AlertBox from '../../../../components/AlertBox'
 import { getPowers } from '../../../../services/api'
 import TextRecomendation from '../../components/TextRecomendation'
@@ -15,7 +15,7 @@ import {
   participationTypography,
   participationAlertBoxTypography,
   participationAlertBoxIcon
-} from '../../../../themes/gurbTheme'
+} from '../../gurbTheme'
 
 
 const GurbParticipation = (props) => {
@@ -29,8 +29,9 @@ const GurbParticipation = (props) => {
         setGurbDetails({
           ...response.data,
           available_betas: response.data.available_betas.map((item, index) => ({
-            id: item,
-            name: `${item} kW`
+            id: index + 1,
+            value: item,
+            text: `${item} kW`
           }))
         })
         setFieldValue('gurb.join_cost', response.data.initial_quota)
@@ -43,9 +44,9 @@ const GurbParticipation = (props) => {
   }, [getAvailablePowers])
 
   const onChangePower = useCallback(
-    async (event) => {
-      await setFieldValue('gurb.power', event.target.value)
-      await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * event.target.value))
+    async (value) => {
+      await setFieldValue('gurb.power', value)
+      await setFieldValue('gurb.daily_cost', Number(gurbDetails.quota * value))
       await setFieldValue('gurb.surplus_compensation', gurbDetails.surplus_compensation)
     },
     [setFieldValue, gurbDetails]
@@ -66,11 +67,12 @@ const GurbParticipation = (props) => {
         title={t('GURB_PARTICIPATION_KW_INPUT_TEXT')}
         text={t('GURB_PARTICIPATION_KW_INPUT_TEXT_SECONDARY')}
       />
-      <SelectField
+
+      <Select
         options={gurbDetails.available_betas ?? []}
         value={values.gurb.power}
-        fieldName={"values.gurb.power"}
-        onChange={onChangePower}
+        handleChange={(value) => onChangePower(value)}
+        style={textField}
       />
 
       <Typography

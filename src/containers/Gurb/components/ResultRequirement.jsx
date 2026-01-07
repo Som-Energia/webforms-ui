@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography'
-import { textHeader4, textBody1 } from '../../../themes/gurbTheme'
+import { textHeader4, textBody1 } from '../gurbTheme'
 import Grid from '@mui/material/Grid'
 
 const ResultRequirement = ({

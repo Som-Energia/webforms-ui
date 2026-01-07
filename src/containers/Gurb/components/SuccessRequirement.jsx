@@ -3,7 +3,7 @@ import Link from '@mui/material/Link'
 import ResultRequirement from './ResultRequirement'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import GurbErrorContext from '../../../context/GurbErrorContext'
-import { link } from '../../../themes/gurbTheme'
+import { link } from '../gurbTheme'
 
 const SuccessRequirement = ({
   textHeader,

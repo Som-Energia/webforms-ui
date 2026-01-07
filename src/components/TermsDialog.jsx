@@ -6,7 +6,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { buttonGurbDark, buttonGurbLight } from '../themes/gurbTheme'
+import { buttonGurbDark, buttonGurbLight } from '../containers/Gurb/gurbTheme'
 
 const TermsDialog = ({
   open,

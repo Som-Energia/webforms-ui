@@ -23,7 +23,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ca'
 import 'dayjs/locale/es'
 
-import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
+import DisplayFormikState from '../components/DisplayFormikState'
 
 import ContractDetails from './Cancellation/ContractDetails'
 import CancellationWarning from './Cancellation/CancellationWarning'
@@ -34,8 +34,8 @@ import Failure from './Failure'
 import Success from './Success'
 
 import { cancelContract } from '../services/api'
-import PrevButton from '../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../components/OldComponents/Buttons/NextButton'
+import PrevButton from '../components/Buttons/PrevButton'
+import NextButton from '../components/Buttons/NextButton'
 
 const MAX_STEP_NUMBER = 2
 

@@ -64,13 +64,8 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
 
   cy.get('[data-cy="supply_point_address.number"]').clear().type(22, { delay: 100 })
 
-  cy.get('[id="supply_point.is_housing"]').click()
-
-  if (house == "no"){
-    cy.get(`[id="supply_point.is_housing-false"]`).click()
-  } else {
-    cy.get(`[id="supply_point.is_housing-true"]`).click()
-  }
+  cy.get('[data-cy=select_component]').click()
+  cy.get(`[data-cy="${house}"]`).click()
 
   cy.get(`[data-cy="cnae"]`).find('input').then(($ele) => {
     console.log('ele', $ele)

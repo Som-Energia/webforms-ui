@@ -7,7 +7,7 @@ import Link from '@mui/material/Link'
 import InputField from './InputField'
 
 import { checkCups } from '../services/api'
-import { MAX_STEPS_NUMBER } from '../containers/Gurb/GurbFormRequirements'
+import { MAX_STEPS_NUMBER } from '../containers/GurbFormRequirements'
 
 const CUPS = (props) => {
   const {

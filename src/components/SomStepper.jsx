@@ -1,33 +1,62 @@
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 
 const SomStepper = (props) => {
-  const { activeStep, steps, stepsNum, showStepTitle = false } = props
+  const { activeStep, steps, showNames = true } = props
   const { t } = useTranslation()
 
-  const numberSteps = stepsNum || Object.keys(steps).length
-  const currentStep = activeStep + 1
-
   return (
-    <>
-      <Typography color="secondary">
-        {showStepTitle && t('STEP_TITLE')} {currentStep + '/' + numberSteps}
-      </Typography>
-      <LinearProgress
-        variant="determinate"
-        value={(currentStep / numberSteps) * 100}
-        color="secondary"
-        sx={{
-          height: 6,
-          borderRadius: '100px',
-          backgroundColor: 'secondary.extraDark',
-          '& .MuiLinearProgress-bar': {
-            backgroundColor: 'primary2.main'
-          }
-        }}
-      />
-    </>
+    <Stack
+      direction="row"
+      spacing={2}
+      sx={{
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: '2rem',
+        marginBottom: '3rem'
+      }}>
+      {Object.entries(steps).map(([stepName, stepNumber], index) => {
+        return (
+          <Box
+            key={`container-${index}`}
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <Box
+              key={`step-${index}`}
+              sx={{
+                width: `100%`,
+                height: '6px',
+                backgroundColor:
+                  activeStep >= index ? 'primary.main' : 'secondary.extraDark',
+                borderRadius: '12px'
+              }}
+            />
+            {showNames && (
+              <Box
+                key={`name-${index}`}
+                sx={{
+                  marginTop: '6px'
+                }}>
+                <Typography
+                  key={index}
+                  color={
+                    activeStep >= index ? 'primary.main' : 'secondary.extraDark'
+                  }>
+                  {t(stepName)}
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        )
+      })}
+    </Stack>
   )
 }
 export default SomStepper

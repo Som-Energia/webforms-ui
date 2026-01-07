@@ -7,7 +7,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import { useTranslation } from 'react-i18next'
-import VATField from '../../../components/OldComponents/VATField'
+import VATField from '../../../components/VATField'
 import { checkIsPostalCodeFromGenerationEnabledZone } from '../../../services/api'
 
 const customStyles = {

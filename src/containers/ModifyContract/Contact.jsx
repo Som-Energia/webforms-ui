@@ -11,8 +11,8 @@ import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../../components/OldComponents/Buttons/NextButton'
+import PrevButton from '../../components/Buttons/PrevButton'
+import NextButton from '../../components/Buttons/NextButton'
 
 export default function Contact({
   nextStep,

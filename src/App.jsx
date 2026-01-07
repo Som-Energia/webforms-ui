@@ -4,9 +4,10 @@ import Box from '@mui/material/Box'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
-import SomEnergiaTheme from './themes/SomenergiaTheme'
+import SomEnergiaTheme from './components/SomenergiaTheme'
 import WebFormsTheme from './themes/webforms'
-import Loading from './components/Loading'
+import { Example as ComponentTest } from './components/ApiValidatedField.example'
+import Loading from './components/NewLoading'
 import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
@@ -15,7 +16,7 @@ import { GenerationContextProvider } from './containers/Generation/context/Gener
 import { PopUpContextProvider } from './context/PopUpContext'
 import { MatomoProvider } from './trackers/matomo/MatomoProvider'
 import { GurbErrorContextProvider } from './context/GurbErrorContext'
-import { LoadingContextProvider } from './context/LoadingContext'
+import { GurbLoadingContextProvider } from './context/GurbLoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
 import { useTranslation } from 'react-i18next'
@@ -45,14 +46,14 @@ const App = (props) => {
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
   )
-  const GurbFormRequirements = lazy(() => import('./containers/Gurb/GurbFormRequirements'))
-  const GurbFormJoin = lazy(() => import('./containers/Gurb/GurbFormJoin'))
+  const GurbFormRequirements = lazy(() => import('./containers/GurbFormRequirements'))
+  const GurbFormJoin = lazy(() => import('./containers/GurbFormJoin'))
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
-  const NewMemberForm = lazy(() => import('./containers/NewMember/NewMember'))
+  const NewMemberForm = lazy(() => import('./containers/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
-  const GurbContractPaymentSuccessful = lazy(() => import('./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful'))
+  const GurbContractPaymentSuccessful = lazy(() => import('./containers/GurbContractPaymentSuccessful'))
 
   const loadContractData = () => {
     const contractData =
@@ -120,6 +121,12 @@ const App = (props) => {
                   <CssBaseline />
                   <Routes>
                     <Route exact path="/" element={<Home {...props} />} />
+
+                    <Route
+                      exact
+                      path="/:language/component-testing"
+                      element={<ComponentTest {...props} />}
+                    />
 
                     <Route
                       exact
@@ -427,11 +434,11 @@ const App = (props) => {
                         element={
                           <PopUpContextProvider>
                             <GurbErrorContextProvider>
-                              <LoadingContextProvider>
+                              <GurbLoadingContextProvider>
                                 <SummaryContextProvider>
                                   <GurbFormRequirements {...props} />
                                 </SummaryContextProvider>
-                              </LoadingContextProvider>
+                              </GurbLoadingContextProvider>
                             </GurbErrorContextProvider>
                           </PopUpContextProvider>
                         }
@@ -442,11 +449,11 @@ const App = (props) => {
                         path="/:language/gurb/:code/join/"
                         element={
                           <GurbErrorContextProvider>
-                            <LoadingContextProvider>
+                            <GurbLoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbFormJoin {...props} />
                               </SummaryContextProvider>
-                            </LoadingContextProvider>
+                            </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
                         }
                       />
@@ -456,11 +463,11 @@ const App = (props) => {
                         path="/:language/gurb/gurb_url_ok"
                         element={
                           <GurbErrorContextProvider>
-                            <LoadingContextProvider>
+                            <GurbLoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbContractPaymentSuccessful {...props} />
                               </SummaryContextProvider>
-                            </LoadingContextProvider>
+                            </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
                         }
                       />
@@ -517,14 +524,14 @@ const App = (props) => {
                       <Route
                         path={path}
                         element={
-                          <LoadingContextProvider>
+                          <GurbLoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm
                                 {...props}
                                 tariff={'periods'}
                               />
                             </SummaryContextProvider>
-                          </LoadingContextProvider>
+                          </GurbLoadingContextProvider>
                         }
                       />
                     ))}
@@ -537,14 +544,14 @@ const App = (props) => {
                       <Route
                         path={path}
                         element={
-                          <LoadingContextProvider>
+                          <GurbLoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm
                                 {...props}
                                 tariff={'indexed'}
                               />
                             </SummaryContextProvider>
-                          </LoadingContextProvider>
+                          </GurbLoadingContextProvider>
                         }
                       />
                     ))}
@@ -556,11 +563,11 @@ const App = (props) => {
                       <Route
                         path={path}
                         element={
-                          <LoadingContextProvider>
+                          <GurbLoadingContextProvider>
                             <SummaryContextProvider>
                               <UnifiedContractForm {...props} />
                             </SummaryContextProvider>
-                          </LoadingContextProvider>
+                          </GurbLoadingContextProvider>
                         }
                       />
                     ))}
@@ -574,11 +581,11 @@ const App = (props) => {
                         path={path}
                         element={
                           <GurbErrorContextProvider>
-                            <LoadingContextProvider>
+                            <GurbLoadingContextProvider>
                               <SummaryContextProvider>
                                 <NewMemberForm {...props} />
                               </SummaryContextProvider>
-                            </LoadingContextProvider>
+                            </GurbLoadingContextProvider>
                           </GurbErrorContextProvider>
                         }
                       />

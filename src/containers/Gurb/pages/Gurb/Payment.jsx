@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
-import { textHeader3, textHeader4, textBody1, textHeader2 } from '../../../../themes/gurbTheme'
+import { textHeader3, textHeader4, textBody1, textHeader2 } from '../../gurbTheme'
 import Box from '@mui/material/Box'
 import InputField from '../../../../components/InputField'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
@@ -9,7 +9,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { iconRequirements } from '../../../../themes/commonStyles'
 import Grid from '@mui/material/Grid'
 import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../../../components/Chooser'
+import Chooser from '../../../../components/NewChooser'
 import { useState } from 'react'
 
 const Payment = (props) => {

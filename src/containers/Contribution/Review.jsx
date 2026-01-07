@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import StepHeader from '../../components/OldComponents/StepHeader'
+import StepHeader from '../../components/StepHeader'
 
 import { languages, NEW_MEMBER_CONTRIB_AMOUNT } from '../../services/utils'
 

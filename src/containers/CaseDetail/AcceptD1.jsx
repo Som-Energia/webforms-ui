@@ -12,9 +12,9 @@ import CircularProgress from '@mui/material/CircularProgress'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SendIcon from '@mui/icons-material/Send'
 
-import Chooser from '../../components/OldComponents/Chooser'
-import Uploader from '../../components/OldComponents/Uploader'
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
+import Chooser from '../../components/Chooser'
+import Uploader from '../../components/Uploader'
+import PrevButton from '../../components/Buttons/PrevButton'
 
 const showD1PowerModificationChooser =
   import.meta.env.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'

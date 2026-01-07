@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 
 import { checkCups } from '../../services/api'
-import StepHeader from '../../components/OldComponents/StepHeader'
+import StepHeader from '../../components/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
 
 function CUPS(props) {

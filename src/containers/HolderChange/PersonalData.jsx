@@ -17,10 +17,10 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined'
 
-import StepHeader from '../../components/OldComponents/StepHeader'
+import StepHeader from '../../components/StepHeader'
 import StateCity from './StateCity'
 import TermsDialog from '../../components/TermsDialog'
-import VATField from '../../components/OldComponents/VATField'
+import VATField from '../../components/VATField'
 
 import { languages } from '../../services/utils'
 import { getMunicipisByPostalCode } from '../../services/api'

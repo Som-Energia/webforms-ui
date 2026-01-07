@@ -5,18 +5,18 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import { checkCnae } from '../services/api'
-import LoadingContext from '../context/LoadingContext'
+import GurbLoadingContext from '../context/GurbLoadingContext'
 import InputField from './InputField'
-import SelectField from './SelectField'
+import Select from '../containers/Gurb/components/Select'
 import InputTitle from './InputTitle'
-import { textField } from '../themes/gurbTheme'
+import { textField } from '../containers/Gurb/gurbTheme'
 
 const CnaeField = (props) => {
   const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
     props
 
   const { t } = useTranslation()
-  const { loading, setLoading } = useContext(LoadingContext)
+  const { loading, setLoading } = useContext(GurbLoadingContext)
   const [cnaeDescription, setCnaeDescription] = useState(false) // TODO: Remove it?
 
   const updateCNAE = async () => {
@@ -51,8 +51,8 @@ const CnaeField = (props) => {
     setFieldTouched('supply_point.cnae', true)
   }
 
-  const handleIsHousing = (event) => {
-    const isHousing = event.target.value
+  const handleIsHousing = (value) => {
+    const isHousing = value
     setValues({
       ...values,
       supply_point: {
@@ -65,8 +65,8 @@ const CnaeField = (props) => {
   }
 
   const options = [
-    { id: true, name: t('YES') },
-    { id: false, name: t('NO') }
+    { id: 'yes', value: true, text: t('YES') },
+    { id: 'no', value: false, text: t('NO') }
   ]
 
   return (
@@ -74,14 +74,14 @@ const CnaeField = (props) => {
       <Grid item xs={12} sm={6}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <SelectField
-              label={t('IS_HOUSING')}
-              value={values?.supply_point?.is_housing ?? ''}
-              fieldName={"supply_point.is_housing"}
-              onChange={handleIsHousing}
+            <InputTitle text={t('IS_HOUSING')} required={true} />
+          </Grid>
+          <Grid item xs={12}>
+            <Select
               options={options}
-              required={true}
-              {...props}
+              value={values?.supply_point?.is_housing ?? ''}
+              handleChange={handleIsHousing}
+              style={textField}
             />
           </Grid>
         </Grid>
