@@ -1,26 +1,33 @@
-import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 import Button from '@mui/material/Button'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import ArrowBack from '@mui/icons-material/ArrowBack'
+import Box from '@mui/material/Box'
+
+import { buttonGurbLight } from '../../themes/gurbTheme'
 
 function PrevButton(props) {
-  const { title, onClick, disabled, sx={} } = props
+  const { onClick, disabled, title = 'PREV' } = props
+  const { t } = useTranslation()
 
   return (
     <Button
+      tabIndex={0}
       sx={{
-        backgroundColor: "secondary.light",
-        color: "primary.main",
-        '&:hover': {
-          color: "primary.main",
-          backgroundColor: "secondary.light",
-        }
+        ...buttonGurbLight,
+        height: '40px',
+        padding: '13px 18px',
+        boxSizing: 'border-box'
       }}
       data-cy="prev"
-      startIcon={<ArrowBackIosIcon/>}
+      startIcon={
+        <Box sx={{ width: 20, height: 20, display: 'flex', alignItems: 'center' }}>
+          <ArrowBack style={{ width: '100%', height: '100%' }} />
+        </Box>
+      }
       disabled={disabled}
-      onClick={onClick}
-      >
-      {title}
+      onClick={onClick}>
+      {t(title)}
     </Button>
   )
 }

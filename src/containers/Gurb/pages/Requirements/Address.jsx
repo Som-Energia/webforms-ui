@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
+import { buttonGurbDark } from '../../../../themes/gurbTheme'
 
 import InputField from '../../../../components/InputField'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'

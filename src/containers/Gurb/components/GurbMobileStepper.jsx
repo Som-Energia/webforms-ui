@@ -8,7 +8,7 @@ import StepConnector, {
 } from '@mui/material/StepConnector'
 
 import Box from '@mui/material/Box'
-import { NEXT_COLOR, PREV_COLOR } from '../gurbTheme'
+import { NEXT_COLOR, PREV_COLOR } from '../../../themes/gurbTheme'
 
 const GurbMobileStepper = ({ steps, activeStep }) => {
   const { t } = useTranslation()

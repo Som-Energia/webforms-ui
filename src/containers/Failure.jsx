@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 
 import CancelIcon from '@mui/icons-material/Cancel'
 
-import StepHeader from '../components/StepHeader'
+import StepHeader from '../components/OldComponents/StepHeader'
 
 function Failure(props) {
   const { language } = useParams()

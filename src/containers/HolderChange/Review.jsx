@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import FormHelperText from '@mui/material/FormHelperText'
 
-import StepHeader from '../../components/StepHeader'
+import StepHeader from '../../components/OldComponents/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
 import LegalText from '../../components/LegalText'
 import { languages } from '../../services/utils'

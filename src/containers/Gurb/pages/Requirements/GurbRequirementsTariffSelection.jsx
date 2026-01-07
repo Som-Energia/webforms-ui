@@ -6,10 +6,10 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../../../components/NewChooser'
+import Chooser from '../../../../components/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
-import { textBody1 } from '../../gurbTheme'
+import { textBody1 } from '../../../../themes/gurbTheme'
 
 const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()

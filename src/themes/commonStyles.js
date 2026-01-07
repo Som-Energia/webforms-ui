@@ -29,7 +29,7 @@ export const getAlertBoxStyles = (theme, severity) => {
   return {}
 }
 
-export const chooser = {
+export const chooserStyles = {
   paddingTop: '1.5rem',
   paddingBottom: '2rem',
   paddingLeft: '1.625rem',
@@ -39,8 +39,8 @@ export const chooser = {
   cursor: 'pointer'
 }
 
-export const chooserSelected = {
-  ...chooser,
+export const chooserSelectedStyles = {
+  ...chooserStyles,
   backgroundColor: '#FAFAFA'
 }
 

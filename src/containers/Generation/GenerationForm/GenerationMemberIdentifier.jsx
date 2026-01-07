@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
-import Chooser from '../../../components/Chooser'
+import Chooser from '../../../components/OldComponents/Chooser'
 import GenerationMemberIdFields from './GenerationMemberIdFields'
 import GenerationNoMemberIdFields from './GenerationNoMemberIdFields'
 
