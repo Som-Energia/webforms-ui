@@ -7,9 +7,14 @@ ORANGE="\033[33m"
 NC="\033[0m"
 
 usage () {
-    echo "Usage: $0 <environment>" 1>&2
-    echo "$(available_deploys)" >&2
-    exit 1
+    if [ "$1" == "ovtest" ]; then
+      echo "If use ovtest as environment, please indicate the vasal (0,1,2)" 1>&2
+      exit 1
+    else
+      echo "Usage: $0 <environment>" 1>&2
+      echo "$(available_deploys)" >&2
+      exit 1
+    fi
 }
 
 die() {
@@ -33,10 +38,10 @@ available_deploys() {
 
 environment="$1"
 environment_file="$SCRIPTPATH/deploy-$environment.conf"
-    
-[ "$1" == "" ]  && {
-    usage
-}       
+
+if [[ "$1" == "" || ( "$1" == "ovtest" && !("$2" =~ ^[0-2]$ )) ]]; then
+    usage "$@"
+fi
         
 [ -f "$environment_file" ] || {
     die "Environment '$environment' not available since '$environment_file' does not exist. Read the README for more info"
@@ -56,6 +61,7 @@ done
 build=build
 [ -z "$DEPLOYMENT_BUILD" ] || build="build:$DEPLOYMENT_BUILD"
 deploy_server=$DEPLOYMENT_HOST
+
 deploy_path=$DEPLOYMENT_PATH
 port="$DEPLOYMENT_PORT"
 user="$DEPLOYMENT_USER"
@@ -66,6 +72,11 @@ today=$(date +"%Y-%m-%d_%H%M%S")
 version_dir="$deploy_prefix-$today"
 dest_dir="$deploy_path/$version_dir"
 app_dir="$deploy_path/$deploy_softlink"
+
+if [ "$1" == "ovtest" ]; then
+  dest_dir="${dest_dir/\[\]/$2}"
+  app_dir="${app_dir/\[\]/$2}"
+fi
 
 function build () {
     log_message "INFO" "Building project $build"
@@ -83,7 +94,9 @@ function upload () {
     export RSYNC_RSH
     log_message "INFO" "Uploading build build_$today to $deploy_server:$port"
     script_path=$(dirname $0)
+
     rsync -avz $script_path/../forms/* $user@$deploy_server:$dest_dir
+
     if [ $? != 0 ]
     then
         log_message "ERROR" "An error ocurred uploading code: $?"
@@ -99,14 +112,17 @@ function upload () {
     fi
     unset RSYNC_RSH
 }
-
 log_message "INFO" "Build with env: $build"
 
 build
 upload
 [ -z "$DEPLOYMENT_URL" ] || {
-  log_message "INFO" "Opening browser at $DEPLOYMENT_URL"
-  open "$DEPLOYMENT_URL"
+  DEP_WEB_URL=$DEPLOYMENT_URL
+  if [ "$1" == "ovtest" ]; then
+    DEP_WEB_URL="${DEPLOYMENT_URL/\[\]/$2}"
+  fi
+  log_message "INFO" "Opening browser at $DEP_WEB_URL"
+  open "$DEP_WEB_URL"
 }
 log_message "INFO" "Build finished, I did well my job!!"
 log_message "INFO" "REMIND TO CLEAR THE WORDPRESS CACHE! "

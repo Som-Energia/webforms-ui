@@ -5,7 +5,7 @@
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
     "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
-    "build:ov": "npm run build -- --mode=ov && ./scripts/rename-assets-ov.sh",
+    "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
     "build:pre": "npm run build -- --mode=pre",
     "build:vercel": "npm run build -- --mode=vercel",
