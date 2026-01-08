@@ -1,5 +1,9 @@
 # Change Log
 
+## 6.5.0 2026-01-08
+
+- IMP: New deployment
+
 ## 6.4.0 2026-01-07
 
 - IMP: clean translation keys
