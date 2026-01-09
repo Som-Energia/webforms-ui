@@ -273,14 +273,17 @@ const AddressField = ({
       </Grid>
 
       <Grid item sm={4} xs={12}>
-        <SomAutocompleteFloorInput
-          fieldName={`${addressFieldName}.floor`}
-          title={t('FLOOR')}
-          helper={t('FLOOR_HELPER')}
-          options={floorOptions}
-          value={values[addressFieldName]?.floor}
-          error={errors[addressFieldName]?.floor}
-          onChangeHandler={handleChangeFloor}></SomAutocompleteFloorInput>
+        <InputField
+          textFieldName={t('FLOOR')}
+          textFieldNameHelper={t('FLOOR_HELPER')}
+          textFieldNameHelperInline>
+          <SomAutocompleteFloorInput
+            fieldName={`${addressFieldName}.floor`}
+            options={floorOptions}
+            value={values[addressFieldName]?.floor}
+            error={errors[addressFieldName]?.floor}
+            onChangeHandler={handleChangeFloor}></SomAutocompleteFloorInput>
+        </InputField>
       </Grid>
 
       <Grid item sm={2} xs={6}>

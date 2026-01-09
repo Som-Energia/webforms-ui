@@ -1,25 +1,20 @@
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import InputTitle from '../InputTitle'
 
 import './AutocompleteFloorInput.css'
 
 export default function SomAutocompleteFloorInput({
   fieldName,
-  title,
-  helper,
   value = '',
   options = [],
   onChangeHandler = () => {}
 }) {
   if (!fieldName) {
-    console.error('[fieldName] property is required')
+    console.warn('[fieldName] property is required')
   }
   if (!options?.length) {
-    console.error('[options] property is rquired')
+    console.warn('[options] property is required')
   }
 
   const autocompleteOptions = options.map((item) => item.translation)
