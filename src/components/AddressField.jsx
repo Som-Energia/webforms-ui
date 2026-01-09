@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import floorTypes from '../data/floor-types.json'
+import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloorInput'
 import Grid from '@mui/material/Grid'
 import LocationInput from './AddressAutocompletedField'
-import {
-  useHandleChange,
-  useHandleChangeInteger,
-} from '../hooks/useHandleChange'
+import { useHandleChange } from '../hooks/useHandleChange'
+import { useHandleBlurValueIsNumberOrOption } from '../hooks/useHandleBlur'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
@@ -24,7 +24,7 @@ const updateAddressValues = async (
   values,
   setValues,
   addressFieldName,
-  sessionTokenRef,
+  sessionTokenRef
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
@@ -168,8 +168,12 @@ const AddressField = ({
     setFieldValue(`${addressFieldName}.number`, cleanedValue)
   }
 
+  const floorOptions = (floorTypes || []).map((item) => t(item.translationKey))
   const handleChange = useHandleChange(setFieldValue)
-  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
+  const handleChangeFloor = useHandleBlurValueIsNumberOrOption(
+    setFieldValue,
+    floorOptions
+  )
 
   const handleChangeStateAndCity = async (value) => {
     await setFieldValue(`${addressFieldName}.city`, value?.city)
@@ -229,7 +233,7 @@ const AddressField = ({
         />
       </Grid>
 
-      <Grid item sm={4} xs={12}>
+      <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.number`}
           handleBlur={() => setFieldTouched(`${addressFieldName}.number`, true)}
@@ -270,15 +274,26 @@ const AddressField = ({
         />
       </Grid>
 
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.floor`}
-          textFieldName={t('FLOOR')}
-          handleChange={handleChangeInteger}
-          touched={touched[addressFieldName]?.floor}
-          value={values[addressFieldName]?.floor}
-          error={errors[addressFieldName]?.floor}
-        />
+      <Grid item sm={4} xs={12}>
+        <SomAutocompleteFloorInput
+          fieldName={`${addressFieldName}.floorTemp`}
+          title={t('FLOOR')}
+          helper={t('FLOOR_HELPER')}
+          options={floorOptions}
+          value={values[addressFieldName]?.floorTemp}
+          error={errors[addressFieldName]?.floorTemp}
+          onBlurHandler={handleChangeFloor}></SomAutocompleteFloorInput>
+
+        <input
+          type="hidden"
+          value={
+            // gets the code from autocomplete
+            floorTypes.find(
+              ({ translationKey }) =>
+                t(translationKey) === t(values[addressFieldName]?.floorTemp)
+            )?.code || values[addressFieldName]?.floorTemp
+          }
+          name={`${addressFieldName}.floor`}></input>
       </Grid>
 
       <Grid item sm={2} xs={6}>
