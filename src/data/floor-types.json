@@ -1,0 +1,26 @@
+[
+  {
+    "code": "BJ",
+    "translationKey": "GROUND_FLOOR"
+  },
+  {
+    "code": "EN",
+    "translationKey": "MEZZANINE"
+  },
+  {
+    "code": "AT",
+    "translationKey": "PENTHOUSE"
+  },
+  {
+    "code": "SO",
+    "translationKey": "BASEMENT"
+  },
+  {
+    "code": "SS",
+    "translationKey": "SEMI_BASEMENT"
+  },
+  {
+    "code": "PR",
+    "translationKey": "PRINCIPAL_FLOOR"
+  }
+]

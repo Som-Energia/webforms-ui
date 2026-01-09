@@ -10,17 +10,6 @@ export const useHandleChange = (setFieldValue) => {
   )
 }
 
-export const useHandleChangeInteger = (setFieldValue) => {
-  return useCallback(
-    (event) => {
-      const { name, value } = event.target
-      let cleanedValue = value.replace(/[^0-9]/g, '')
-      setFieldValue(name, cleanedValue)
-    },
-    [setFieldValue]
-  )
-}
-
 export const useHandleChangeNif = (setFieldValue) => {
   return useCallback(
     (event) => {
