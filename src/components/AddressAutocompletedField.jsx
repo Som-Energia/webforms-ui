@@ -1,25 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { searchPlace } from '../../../services/googleApiClient'
+import { useEffect, useRef, useState } from 'react'
+import { searchPlace } from '../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { textField } from '../../../themes/gurbTheme'
-import InputTitle from '../../../components/InputTitle'
+import { textField } from '../themes/gurbTheme'
+import InputTitle from './InputTitle'
 
-export default function LocationInput({
+export default function AddressAutocompletedField({
   id,
   textFieldLabel,
   textFieldName,
-  textFieldHelper,
   value,
   onChange,
   sessionTokenRef,
   required = false,
   error = false,
-  helperText = '',
   touched = false,
   onBlur = () => {}
 }) {
