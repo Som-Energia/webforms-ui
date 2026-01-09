@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import Typography from '@mui/material/Typography'
@@ -10,18 +11,37 @@ export default function SomAutocompleteFloorInput({
   fieldName,
   title,
   helper,
-  error,
   value = '',
   options = [],
-  onChangeHandler = () => {},
-  onBlurHandler = () => {}
+  onChangeHandler = () => {}
 }) {
   if (!fieldName) {
     console.error('[fieldName] property is required')
   }
-
   if (!options?.length) {
     console.error('[options] property is rquired')
+  }
+
+  const autocompleteOptions = options.map((item) => item.translation)
+  const defaultOptionValue = options.find(({ code }) => code === value) || value
+  const [optionValue, setOptionValue] = useState(defaultOptionValue)
+
+  const handleAutocompleteBlur = (event) => {
+    const { value } = event.target
+
+    const finalValue = options.some((item) => item.translation === value)
+      ? value
+      : value.replace(/[^0-9-]/g, '')
+
+    setOptionValue(finalValue)
+    fireChangeHandlerWithCode(finalValue)
+  }
+
+  const fireChangeHandlerWithCode = (value) => {
+    const finalCodeValue =
+      options.find(({ translation }) => translation === value)?.code || value
+
+    onChangeHandler({ target: { name: fieldName, value: finalCodeValue } })
   }
 
   return (
@@ -45,18 +65,12 @@ export default function SomAutocompleteFloorInput({
             freeSolo
             disableClearable
             clearOnBlur
-            onChange={onChangeHandler}
-            onBlur={onBlurHandler}
-            value={value}
-            error={error}
-            options={options}
-            defaultValue={''}
-            isOgtionEqualToValue={(option, value) =>
-              // Accepts numbers and an option from list
-              Number.isInteger(Number(value)) || option === value
-            }
+            onBlur={handleAutocompleteBlur}
+            value={optionValue}
+            options={autocompleteOptions}
             renderInput={(params) => <TextField {...params} name={fieldName} />}
           />
+          <input type="hidden" value={value} name={fieldName}></input>
         </Grid>
       </Grid>
     </>

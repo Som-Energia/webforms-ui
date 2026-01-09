@@ -6,7 +6,6 @@ import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloo
 import Grid from '@mui/material/Grid'
 import LocationInput from './AddressAutocompletedField'
 import { useHandleChange } from '../hooks/useHandleChange'
-import { useHandleBlurValueIsNumberOrOption } from '../hooks/useHandleBlur'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
@@ -167,13 +166,12 @@ const AddressField = ({
     setNumberValue(cleanedValue)
     setFieldValue(`${addressFieldName}.number`, cleanedValue)
   }
-
-  const floorOptions = (floorTypes || []).map((item) => t(item.translationKey))
   const handleChange = useHandleChange(setFieldValue)
-  const handleChangeFloor = useHandleBlurValueIsNumberOrOption(
-    setFieldValue,
-    floorOptions
-  )
+  const handleChangeFloor = useHandleChange(setFieldValue)
+  const floorOptions = (floorTypes || []).map((item) => ({
+    code: item.code,
+    translation: t(item.translationKey)
+  }))
 
   const handleChangeStateAndCity = async (value) => {
     await setFieldValue(`${addressFieldName}.city`, value?.city)
@@ -276,24 +274,13 @@ const AddressField = ({
 
       <Grid item sm={4} xs={12}>
         <SomAutocompleteFloorInput
-          fieldName={`${addressFieldName}.floorTemp`}
+          fieldName={`${addressFieldName}.floor`}
           title={t('FLOOR')}
           helper={t('FLOOR_HELPER')}
           options={floorOptions}
-          value={values[addressFieldName]?.floorTemp}
-          error={errors[addressFieldName]?.floorTemp}
-          onBlurHandler={handleChangeFloor}></SomAutocompleteFloorInput>
-
-        <input
-          type="hidden"
-          value={
-            // gets the code from autocomplete
-            floorTypes.find(
-              ({ translationKey }) =>
-                t(translationKey) === t(values[addressFieldName]?.floorTemp)
-            )?.code || values[addressFieldName]?.floorTemp
-          }
-          name={`${addressFieldName}.floor`}></input>
+          value={values[addressFieldName]?.floor}
+          error={errors[addressFieldName]?.floor}
+          onChangeHandler={handleChangeFloor}></SomAutocompleteFloorInput>
       </Grid>
 
       <Grid item sm={2} xs={6}>
