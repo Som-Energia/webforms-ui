@@ -1,0 +1,4 @@
+.somAutocompleteInput .MuiAutocomplete-inputRoot {
+    max-height: 56px !important;
+    border-radius: 8px;
+}
