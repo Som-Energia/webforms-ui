@@ -24,5 +24,3 @@ export const useHandleBlurValueIsNumberOrOption = (setFieldValue, options) => {
     [setFieldValue, options]
   )
 }
-
-

@@ -9,11 +9,6 @@ import { buttonGurbDark } from '../../../../containers/Gurb/gurbTheme'
 import InputField from '../../../../components/InputField'
 import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
 import TextRecomendation from '../../components/TextRecomendation'
-
-import {
-  useHandleChange,
-  useHandleChangeInteger
-} from '../../../../hooks/useHandleChange'
 import { useAddressHandlers } from '../../../../hooks/useGurbAddressHandlers'
 
 const AddressField = ({
@@ -47,10 +42,6 @@ const AddressField = ({
     sessionTokenRef,
     gurbCode
   })
-
-  // Local generic change handlers
-  const handleChange = useHandleChange(setFieldValue)
-  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
 
   return (
     <Grid container spacing={2}>
