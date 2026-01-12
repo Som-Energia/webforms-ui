@@ -49,7 +49,7 @@ export default function SomAutocompleteFloorInput({
         onBlur={handleAutocompleteBlur}
         value={optionValue}
         options={autocompleteOptions}
-        renderInput={(params) => <TextField {...params} name={fieldName} />}
+        renderInput={(params) => <TextField {...params} />}
       />
       <input type="hidden" value={value} name={fieldName}></input>
     </>
