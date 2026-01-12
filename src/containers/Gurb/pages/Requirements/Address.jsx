@@ -7,7 +7,7 @@ import Button from '@mui/material/Button'
 import { buttonGurbDark } from '../../../../themes/gurbTheme'
 
 import InputField from '../../../../components/InputField'
-import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
+import LocationInput from '../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb'
 import TextRecomendation from '../../components/TextRecomendation'
 import { useAddressHandlers } from '../../../../hooks/useGurbAddressHandlers'
 
