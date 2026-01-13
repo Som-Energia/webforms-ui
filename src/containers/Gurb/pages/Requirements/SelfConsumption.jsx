@@ -6,7 +6,7 @@ import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
 import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/Chooser'
-import { buildGurbDialog } from '../../components/buildGurbDialog'
+import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../../../themes/gurbTheme'
@@ -17,7 +17,7 @@ import PopUpContext from '../../../../context/PopUpContext'
 const SelfConsumption = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
+  const { setError } = useContext(GurbErrorContext)
   const { setContent } = useContext(PopUpContext)
 
   const handleSelfconsumptionQuestion = (value) => {
@@ -25,12 +25,12 @@ const SelfConsumption = (props) => {
     if (value === 'selfconsumption-on') {
       setError(true)
       setContent(
-        buildGurbDialog({
-          severity: 'warning',
-          setContent: setContent,
-          text1Key: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
-          text2Key: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT')
-        })
+        <SimpleGurbDialog
+          severity="warning"
+          setContent={setContent}
+          text1={t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT')}
+          text2={t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT')}
+        />
       )
     }
   }
