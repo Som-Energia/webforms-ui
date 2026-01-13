@@ -1,4 +1,3 @@
-import React from 'react'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import IconButton from '@mui/material/IconButton'
@@ -7,30 +6,33 @@ import CloseIcon from '@mui/icons-material/Close'
 import WarningRounded from '@mui/icons-material/WarningRounded'
 import Stack from '@mui/material/Stack'
 import CancelIcon from '@mui/icons-material/Cancel'
+import Typography from '@mui/material/Typography'
+import CustomDialog from '../../../../components/CustomDialog'
 
-import CustomDialog from '../../../components/CustomDialog'
-
-import useCheckMobileScreen from '../../../services/checkMobileScreen'
+import useCheckMobileScreen from '../../../../services/checkMobileScreen'
 import {
   dialogCancelIcon,
   dialogWarningRounded,
   dialogTitle,
+  dialogText,
   dialogIconButton,
   dialogContentStack
-} from '../../../themes/gurbTheme'
+} from '../../../../themes/gurbTheme'
 
-export default function SimpleDialog({
+
+const SimpleGurbDialog = ({
   title,
   text1,
   text2,
-  closeFunction,
+  setContent,
   severity
-}) {
+}) => {
+
   const isMobile = useCheckMobileScreen()
 
   return (
     <CustomDialog
-      data-testid="simple-dialog"
+      data-cy="simple-gurb-dialog"
       withBackground={true}
       paperStyles={{
         width: '448px',
@@ -46,23 +48,40 @@ export default function SimpleDialog({
 
       {title && (
         <DialogTitle id="simple-dialog-title" sx={dialogTitle}>
-          <Box>{title}</Box>
+          <Box>{title && <Typography dangerouslySetInnerHTML={{ __html: title }} />}</Box>
         </DialogTitle>
       )}
 
       <IconButton
+        data-testid="simple-gurb-dialog-close-button"
         aria-label="close"
-        onClick={closeFunction}
+        onClick={async () => setContent(undefined) }
         sx={dialogIconButton}>
         <CloseIcon />
       </IconButton>
 
       <DialogContent>
         <Stack sx={dialogContentStack}>
-          <Box>{text1}</Box>
-          <Box>{text2}</Box>
+          <Box>
+            {text1 && (
+              <Typography
+                sx={dialogText(severity)}
+                dangerouslySetInnerHTML={{ __html: text1 }}
+              />
+            )}
+          </Box>
+          <Box>
+            {text2 && (
+              <Typography
+                sx={dialogText(severity)}
+                dangerouslySetInnerHTML={{ __html: text2 }}
+              />
+            )}
+          </Box>
         </Stack>
       </DialogContent>
     </CustomDialog>
   )
 }
+
+export default SimpleGurbDialog

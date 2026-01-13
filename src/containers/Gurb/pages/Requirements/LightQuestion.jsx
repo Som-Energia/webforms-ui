@@ -13,12 +13,12 @@ import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
 
 import PopUpContext from '../../../../context/PopUpContext'
-import { buildGurbDialog } from '../../components/buildGurbDialog'
+import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
+  const { setError } = useContext(GurbErrorContext)
   const { setContent } = useContext(PopUpContext)
 
   const handleLightQuestion = (value) => {
@@ -27,12 +27,12 @@ const LightQuestion = (props) => {
     if (value === 'light-off') {
       setError(true)
       setContent(
-        buildGurbDialog({
-          severity: 'warning',
-          setContent: setContent,
-          text1Key: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
-          text2Key: t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')
-        })
+        <SimpleGurbDialog
+          severity="warning"
+          setContent={setContent}
+          text1={t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT')}
+          text2={t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')}
+        />
       )
     } else {
       setError(false)
