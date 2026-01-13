@@ -18,7 +18,8 @@ export default function SomAutocompleteFloorInput({
   }
 
   const autocompleteOptions = options.map((item) => item.translation)
-  const defaultOptionValue = options.find(({ code }) => code === value) || value
+  const defaultOptionValue =
+    options.find(({ code }) => code === value)?.translation || value || ''
   const [optionValue, setOptionValue] = useState(defaultOptionValue)
 
   const handleAutocompleteBlur = (event) => {
