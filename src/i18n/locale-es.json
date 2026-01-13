@@ -334,7 +334,7 @@
     "ATR_CASE": "No hemos podido generar el caso ATR, este contrato ya tiene un proceso en curso",
     "OPEN_CASES": "Este contrato ya tiene un proceso en curso",
     "PENDING_CONTRACT_MODIFICATION": "Este contrato tiene modificaciones pendientes de aplicar",
-    "INDEXED_CUSTOM_TARIFF_ERROR_TXT": "El contracto tiene una tarifa personalizada. Contacta con nosotras para cambiarla.",
+    "INDEXED_CUSTOM_TARIFF_ERROR_TXT": "El contrato tiene una tarifa personalizada. Contacta con nosotras para cambiarla.",
     "ATTACHMENT_ERROR": "No hemos podido cargar los archivos adjuntos",
     "STATE_CONFLICT": "Este contrato no permite realizar modificaciones contractuales",
     "UNAVAILABLE": "No disponible",
