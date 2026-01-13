@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 import Chooser from '../../../../components/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
@@ -64,7 +64,7 @@ const GurbRequirementsTariffSelection = (props) => {
 
   return (
     <Grid item>
-      <TextRecomendation
+      <TextRecommendation
         title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
       />
 

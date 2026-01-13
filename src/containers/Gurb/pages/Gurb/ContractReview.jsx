@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 
 import ReviewField from '../../../../components/review/ReviewField'
 import AlertBox from '../../../../components/AlertBox'
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import {
   textHeader4,
@@ -59,7 +59,7 @@ const ContractReview = (props) => {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12} sx={{ mb: 2 }}>
-          <TextRecomendation title={t('CONTRACT_SUMMARY')} isHeader={true} />
+          <TextRecommendation title={t('CONTRACT_SUMMARY')} isHeader={true} />
         </Grid>
 
         {/* KWH Section */}

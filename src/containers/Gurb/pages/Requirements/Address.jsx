@@ -8,7 +8,8 @@ import { buttonGurbDark } from '../../../../themes/gurbTheme'
 
 import InputField from '../../../../components/InputField'
 import LocationInput from '../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb'
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
+
 import { useAddressHandlers } from '../../../../hooks/useGurbAddressHandlers'
 
 const AddressField = ({
@@ -46,7 +47,7 @@ const AddressField = ({
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation
+        <TextRecommendation
           title={t('GURB_ADDRESS_TITLE')}
           text={t('GURB_ADDRESS_TITLE_HELPER')}
         />

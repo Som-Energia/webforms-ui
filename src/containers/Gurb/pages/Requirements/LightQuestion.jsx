@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 
 import Chooser from '../../../../components/Chooser'
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../../../themes/gurbTheme'
@@ -55,7 +55,7 @@ const LightQuestion = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation title={t('GURB_HAS_LIGHT_TITLE')} />
+        <TextRecommendation title={t('GURB_HAS_LIGHT_TITLE')} />
       </Grid>
       <Grid item xs={12}>
         <Chooser
