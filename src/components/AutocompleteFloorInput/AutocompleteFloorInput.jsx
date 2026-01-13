@@ -10,13 +10,6 @@ export default function SomAutocompleteFloorInput({
   options = [],
   onChangeHandler = () => {}
 }) {
-  if (!fieldName) {
-    console.warn('[fieldName] property is required')
-  }
-  if (!options?.length) {
-    console.warn('[options] property is required')
-  }
-
   const autocompleteOptions = options.map((item) => item.translation)
   const defaultOptionValue =
     options.find(({ code }) => code === value)?.translation || value || ''
