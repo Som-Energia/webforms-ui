@@ -8,7 +8,7 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { iconRequirements } from '../../../../themes/commonStyles'
 import Grid from '@mui/material/Grid'
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 import Chooser from '../../../../components/Chooser'
 import { useState } from 'react'
 
@@ -60,7 +60,7 @@ const Payment = (props) => {
       </Box>
 
       <Grid item xs={12} sx={{ mt: 6 }}>
-        <TextRecomendation sx={textBody1} title={t('GURB_PAYMENT_METHOD_CHOOSER_TITLE')} required={true} />
+        <TextRecommendation sx={textBody1} title={t('GURB_PAYMENT_METHOD_CHOOSER_TITLE')} required={true} />
         <Box>
           <Chooser
             name="payment-method"

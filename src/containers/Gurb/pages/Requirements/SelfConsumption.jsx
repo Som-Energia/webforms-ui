@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 import Chooser from '../../../../components/Chooser'
 import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
@@ -51,7 +51,7 @@ const SelfConsumption = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation
+        <TextRecommendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
           text={t('GURB_SELFCONSUMPTION_HELPER')}
         />
