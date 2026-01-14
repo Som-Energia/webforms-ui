@@ -11,7 +11,6 @@ import TextRecomendation from '../../components/TextRecomendation'
 
 import {
   textField,
-  textHeader5,
   participationTypography,
   participationAlertBoxTypography,
   participationAlertBoxIcon

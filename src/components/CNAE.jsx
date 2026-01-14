@@ -8,8 +8,7 @@ import { checkCnae } from '../services/api'
 import LoadingContext from '../context/LoadingContext'
 import InputField from './InputField'
 import SelectField from './SelectField'
-import InputTitle from './InputTitle'
-import { textField } from '../themes/gurbTheme'
+
 
 const CnaeField = (props) => {
   const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
