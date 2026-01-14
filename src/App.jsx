@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
-import SomEnergiaTheme from './themes/SomenergiaTheme'
 import WebFormsTheme from './themes/webforms'
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
