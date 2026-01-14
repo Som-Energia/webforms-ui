@@ -21,12 +21,15 @@ export default function WebFormsTheme() {
         dark: '#8C8C8C',
         light: '#D9D9D9',
         extraDark: '#636363',
-        extraLight: '#FAFAFA'
+        extraLight: '#FAFAFA',
+        white: '#FFFFFF'
       },
       background: {
         first: '#CED5D0',
         second: '#E2E8DE',
-        third: '#F0F3EC'
+        third: '#F0F3EC',
+        button: '#C5F47C',
+        hoverButton: '#B6E471',
       },
       error: {
         main: '#D33C3C'
