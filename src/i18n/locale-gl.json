@@ -191,6 +191,7 @@
     "INVALID_NIF": "O formato do NIF debería ser: 12345678P o X1234567Y",
     "NUMBER": "Número",
     "FLOOR": "Andar",
+    "FLOOR_HELPER": "",
     "DOOR": "Porta",
     "NO_NUMBER": "Non introduciches o número",
     "IS_HOUSING": "É unha vivenda?",

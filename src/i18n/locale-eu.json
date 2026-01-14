@@ -196,6 +196,7 @@
     "INVALID_NIF": "NIF formatuak horrelakoa izan behar du: 12345678P edo X1234567Y",
     "NUMBER": "Zenbakia",
     "FLOOR": "Solairua",
+    "FLOOR_HELPER": "",
     "DOOR": "Atea",
     "NO_NUMBER": "Ez duzu zenbakia adierazi",
     "IS_HOUSING": "Etxebizitza bat da?",
