@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
+import OldWebFormsTheme from './themes/webforms_old'
 import WebFormsTheme from './themes/webforms'
 import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
@@ -106,6 +107,7 @@ const App = (props) => {
     return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
   }, [])
 
+  const oldWebFormsTheme = React.useMemo(() => OldWebFormsTheme(), [])
   const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
 
   return (
@@ -113,7 +115,7 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-            <ThemeProvider theme={webFormsTheme}>
+            <ThemeProvider theme={oldWebFormsTheme}>
               <Suspense fallback={<Loading />}>
                 <Router>
                   <CssBaseline />
@@ -164,34 +166,6 @@ const App = (props) => {
                       element={
                         <D1Detail {...props} templateProps={loadD1Data} />
                       }
-                    />
-
-                    <Route
-                      path="/:language/pagament-realitzat"
-                      element={
-                        <Success
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/pago-realizado"
-                      element={
-                        <Success
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
-
-                    <Route
-                      path="/:language/pagament-cancellat"
-                      element={<Failure {...props} />}
-                    />
-                    <Route
-                      path="/:language/pago-cancelado"
-                      element={<Failure {...props} />}
                     />
 
                     <Route
@@ -264,27 +238,6 @@ const App = (props) => {
                         element={<Contribution {...props} />}
                       />))}
 
-                    <Route
-                      exact
-                      path="/tariff"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/tarifes-d-electricitat"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/tarifas-de-electricidad"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/elektrizitate-tarifak"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/tarifas-de-electricidade"
-                      element={<Tariff {...props} />}
-                    />
                     <Route
                       path="/:language/invoices/:invoice_id/payment_ko"
                       element={
@@ -420,6 +373,97 @@ const App = (props) => {
                         <GenerationContribution {...props} token={token} />
                       }
                     />
+                  </Routes>
+                </Router>
+              </Suspense>
+            </ThemeProvider>
+            <ThemeProvider theme={webFormsTheme}>
+              <Suspense fallback={<Loading />}>
+                <Router>
+                  <CssBaseline />
+                  <Routes>
+                    {[
+                      '/:language/pagament-realitzat',
+                      '/:language/pago-realizado'
+                    ].map((path) => (
+                      <Route
+                        key={path}
+                        path={path}
+                        element={
+                          <Result
+                            mode={'success'}
+                            {...props}
+                            title={t('SUCCESS_TEXT')}
+                            description={t('NEWMEMBER_OK_DESCRIPTION')}
+                          />
+                        }
+                      />
+                    ))}
+
+                    {[
+                      '/:language/pagament-cancellat',
+                      '/:language/pago-cancelado'
+                    ].map((path) => (
+                      <Route
+                        key={path}
+                        path={path}
+                        element={
+                          <Result
+                            mode="failure"
+                            title={t('FAILURE_TEXT')}
+                            {...props}>
+                            <Typography
+                              sx={{ color: 'secondary.extraDark' }}
+                              dangerouslySetInnerHTML={{
+                                __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                                  url: t('CONTACT_HELP_URL')
+                                })
+                              }}
+                            />
+                          </Result>
+                        }
+                      />
+                    ))}
+                    {[
+                      '/:language/formulario-contratacion-periodos',
+                      '/:language/formulari-contractacio-periodes',
+                      '/:language/formulario-contrato-periodos',
+                      '/:language/kontratazio-formularioa-ordutegitarteak'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                tariff={'periods'}
+                              />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                        }
+                      />
+                    ))}
+                    {[
+                      '/:language/formulario-contratacion-indexada',
+                      '/:language/formulari-contractacio-indexada',
+                      '/:language/formulario-contrato-indexada',
+                      '/:language/kontratazio-formularioa-indexatua'
+                    ].map((path) => (
+                      <Route
+                        path={path}
+                        element={
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                tariff={'indexed'}
+                              />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                        }
+                      />
+                    ))}
                     {props?.isGurbEnabled && (
                       <Route
                         path="/:language/gurb/:gurbCode/requirements/"
@@ -464,90 +508,6 @@ const App = (props) => {
                         }
                       />
                     )}
-                    {[
-                      '/:language/new-pagament-realitzat',
-                      '/:language/new-pago-realizado'
-                    ].map((path) => (
-                      <Route
-                        key={path}
-                        path={path}
-                        element={
-                          <Result
-                            mode={'success'}
-                            {...props}
-                            title={t('SUCCESS_TEXT')}
-                            description={t('NEWMEMBER_OK_DESCRIPTION')}
-                          />
-                        }
-                      />
-                    ))}
-
-                    {[
-                      '/:language/new-pagament-cancellat',
-                      '/:language/new-pago-cancelado'
-                    ].map((path) => (
-                      <Route
-                        key={path}
-                        path={path}
-                        element={
-                          <Result
-                            mode="failure"
-                            title={t('FAILURE_TEXT')}
-                            {...props}>
-                            <Typography
-                              sx={{ color: 'secondary.extraDark' }}
-                              dangerouslySetInnerHTML={{
-                                __html: t('NEWMEMBER_KO_DESCRIPTION', {
-                                  url: t('CONTACT_HELP_URL')
-                                })
-                              }}
-                            />
-                          </Result>
-                        }
-                      />
-                    ))}
-
-                    {[
-                      '/:language/formulario-contratacion-periodos',
-                      '/:language/formulari-contractacio-periodes',
-                      '/:language/formulario-contrato-periodos',
-                      '/:language/kontratazio-formularioa-ordutegitarteak'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm
-                                {...props}
-                                tariff={'periods'}
-                              />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-                    {[
-                      '/:language/formulario-contratacion-indexada',
-                      '/:language/formulari-contractacio-indexada',
-                      '/:language/formulario-contrato-indexada',
-                      '/:language/kontratazio-formularioa-indexatua'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm
-                                {...props}
-                                tariff={'indexed'}
-                              />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-
                     {[
                       '/:language/landing/captacio-domestic',
                       '/:language/landing/captacio-empreses'
