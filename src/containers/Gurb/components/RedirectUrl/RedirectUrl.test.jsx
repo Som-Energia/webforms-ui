@@ -1,26 +1,31 @@
-import AddressAutocompletedFieldGurb from './AddressAutocompletedFieldGurb'
+
+import RedirectUrl from './RedirectUrl.jsx'
 import {
   render,
   queryByAttribute,
-  fireEvent,
-  screen,
-  waitFor
 } from '@testing-library/react'
-import { vi } from 'vitest';
 
-test('AddressAutocompletedFieldGurb renders without crashing', () => {
+test('RedirectUrl renders without crashing', () => {
   const dom = render(
-    <AddressAutocompletedFieldGurb
-      value="Montilivi"
-    />
+    <RedirectUrl />
   )
 
   const getByDataCy = queryByAttribute.bind(null, 'data-cy')
-  const input = getByDataCy(dom.container, 'street')
+  const input = getByDataCy(dom.container, 'redirect-button')
   expect(input).toBeInTheDocument()
 })
 
+test('RedirectUrl has correct href attribute', () => {
+  const dom = render(
+    <RedirectUrl url="https://example.com" />
+  )
 
+  const getByDataCy = queryByAttribute.bind(null, 'data-cy')
+  const button = getByDataCy(dom.container, 'redirect-button')
+  expect(button).toHaveAttribute('href', 'https://example.com')
+})
+
+/*
 test('AddressAutocompletedFieldGurb calls onChange with correct code on blur', async () => {
   const mockOnChange = vi.fn()
 
@@ -43,3 +48,4 @@ test('AddressAutocompletedFieldGurb calls onChange with correct code on blur', a
     )
   })
 })
+*/
