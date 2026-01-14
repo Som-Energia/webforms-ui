@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 
-import './AutocompleteFloorInput.css'
+import somAutocompleteInputStyles from './AutocompleteFloorInput.style.js'
 
 export default function SomAutocompleteFloorInput({
   fieldName,
@@ -36,7 +36,7 @@ export default function SomAutocompleteFloorInput({
   return (
     <>
       <Autocomplete
-        className={'somAutocompleteInput'}
+        sx={somAutocompleteInputStyles}
         freeSolo
         disableClearable
         clearOnBlur

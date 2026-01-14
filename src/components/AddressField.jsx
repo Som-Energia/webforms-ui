@@ -275,8 +275,7 @@ const AddressField = ({
       <Grid item sm={4} xs={12}>
         <InputField
           textFieldName={t('FLOOR')}
-          textFieldNameHelper={t('FLOOR_HELPER')}
-          textFieldNameHelperInline>
+          textFieldHelper={t('FLOOR_HELPER')}>
           <SomAutocompleteFloorInput
             fieldName={`${addressFieldName}.floor`}
             options={floorOptions}

@@ -32,7 +32,6 @@ const InputFieldComponent = ({
   textFieldLabel,
   textFieldName,
   textFieldNameHelper,
-  textFieldNameHelperInline = false,
   textFieldHelper,
   iconHelper = false,
   handleChange,
@@ -53,11 +52,11 @@ const InputFieldComponent = ({
 }) => {
   return (
     <Grid container spacing={1}>
-      <Grid item xs={textFieldNameHelperInline ? 6 : 12} sx={{ mb: '6px' }}>
+      <Grid item xs={12} sx={{ mb: '6px' }}>
         <InputTitle text={textFieldName} required={required} />
       </Grid>
       {textFieldNameHelper && (
-        <Grid item xs={textFieldNameHelperInline ? 6 : 12}>
+        <Grid item xs={12}>
           <Typography variant="body.sm.regular" color="secondary.extraDark">
             {textFieldNameHelper}
           </Typography>
