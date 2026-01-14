@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
-
 import Grid from '@mui/material/Grid'
-import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
 import InputTitle from './InputTitle'
 
 const SelectField = (props) => {
@@ -20,31 +18,29 @@ const SelectField = (props) => {
   const handleChange = (event) => {
     if (setFieldValue && onChange === undefined) {
       setFieldValue(fieldName, event.target.value)
-    }
-    else {
+    } else {
       onChange(event)
     }
   }
 
   const getSelectData = () => {
     if (Array.isArray(options)) {
-      return (
-        options.map((option) => {
-          return (
-          <MenuItem id={`${fieldName}-${option.id}`} key={option.id} value={option.id}>
+      return options.map((option) => {
+        return (
+          <MenuItem
+            id={`${fieldName}-${option.id}`}
+            key={option.id}
+            value={option.id}>
             {option.name}
           </MenuItem>
-        )})
-      )
-    }
-    else {
-      return (
-        Object.keys(options).map((id) => (
-          <MenuItem id={`${fieldName}-${id}`} key={id} value={id}>
-            {options[id]}
-          </MenuItem>
-        ))
-      )
+        )
+      })
+    } else {
+      return Object.keys(options).map((id) => (
+        <MenuItem id={`${fieldName}-${id}`} key={id} value={id}>
+          {options[id]}
+        </MenuItem>
+      ))
     }
   }
 
@@ -63,6 +59,7 @@ const SelectField = (props) => {
           }
         }}>
         <Select
+          data-testid="select-field"
           disabled={disabled}
           fullWidth
           id={`${fieldName}`}
