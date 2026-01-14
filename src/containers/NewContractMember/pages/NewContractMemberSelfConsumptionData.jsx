@@ -15,7 +15,7 @@ import Chooser from '../../../components/Chooser'
 import InputField from '../../../components/InputField'
 import SelectField from '../../../components/SelectField'
 import InputTitle from '../../../components/InputTitle'
-import AlertBox from '../../../components/AlertBox'
+import AlertBox from '../../../components/AlertBox/AlertBox'
 import { HelperText } from '../../../components/InputField'
 
 import {
