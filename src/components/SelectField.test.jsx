@@ -49,7 +49,6 @@ test('SelectField renders and empty object of options', async () => {
 
 test('SelectField renders and show the correct options', () => {
   const optionValues = getSelectValues(renderWithArray(mockOptionsArray))
-  console.log(optionValues)
   const mockOptionsIds = mockOptionsArray.map((item) => item.id)
   expect(optionValues).toEqual(mockOptionsIds)
 })
