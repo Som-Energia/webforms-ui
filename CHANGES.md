@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- IMP: Add autocomplete floor input component
+
 ## 6.5.0 2026-01-08
 
 - IMP: New deployment
@@ -214,7 +218,7 @@
 ## 2.6.0 2025-01-22
 
 - Added VITE_GENERATION_OUTSIDE_ASSIGNMENTS as env varible
-- Added outside assignments in generationkwh section 
+- Added outside assignments in generationkwh section
 
 ## 2.5.0 2025-01-14
 
@@ -246,7 +250,7 @@
 
 ## 2.3.17 2024-11-05
 
-- New entry points for the renamed new-member form urls 
+- New entry points for the renamed new-member form urls
 
 ## 2.3.16 2024-11-04
 
@@ -287,7 +291,7 @@
 
 ## 2.3.11 2024-10-17
 
-- Refactor and encapsulate matomo 
+- Refactor and encapsulate matomo
 
 ## 2.3.10 2024-10-03
 
@@ -339,7 +343,7 @@
 ## 2.3.2 2024-08-06
 
 - Fix tariff names
-	
+
 ## 2.3.1 2024-07-30
 
 - Fixed some bugs:
@@ -363,7 +367,7 @@
 
 ## 2.1.0 2024-07-16
 
-- Migrated from cra to vite 
+- Migrated from cra to vite
 - Remove warning on autonomous workers and related translations
 - Upgrade notes:
     - Install from scratch since the build system has change
@@ -388,9 +392,9 @@
 
 ## 1.11.1 2024-06-13
 
-- Remove maj warning: "mecanisme d'ajust al gas" 
+- Remove maj warning: "mecanisme d'ajust al gas"
 
-## 1.11.0 2024-04-23 
+## 1.11.0 2024-04-23
 
 - Add functionality: Add and remove contracts in generationkwh assignments
 
