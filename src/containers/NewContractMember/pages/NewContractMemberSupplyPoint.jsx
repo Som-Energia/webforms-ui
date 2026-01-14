@@ -7,7 +7,7 @@ import TermsDialog from '../../../components/TermsDialog'
 import Chooser from '../../../components/Chooser'
 import InputTitle from '../../../components/InputTitle'
 import CUPS from '../../../components/CUPS'
-import AlertBox from '../../../components/AlertBox'
+import AlertBox from '../../../components/AlertBox/AlertBox'
 
 import { LightbulbIcon } from '../../../data/icons/Icons'
 

@@ -7,7 +7,7 @@ import CheckBox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
 import ReviewField from '../../../../components/review/ReviewField'
-import AlertBox from '../../../../components/AlertBox'
+import AlertBox from '../../../../components/AlertBox/AlertBox'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import {

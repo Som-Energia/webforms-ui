@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 
-import AlertBox from '../../../../components/AlertBox'
+import AlertBox from '../../../../components/AlertBox/AlertBox'
 import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
