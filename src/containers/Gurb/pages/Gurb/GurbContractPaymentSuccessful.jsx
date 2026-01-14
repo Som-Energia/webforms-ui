@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
-import RedirectUrl from '../../components/RedirectUrl'
+import RedirectUrl from '../../components/RedirectUrl/RedirectUrl'
 
-const GurbContractPaymentSuccessful = ({ props }) => {
+const GurbContractPaymentSuccessful = () => {
   const { i18n, t } = useTranslation()
   const { language } = useParams()
   const [searchParams] = useSearchParams()
