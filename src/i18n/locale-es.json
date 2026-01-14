@@ -219,7 +219,7 @@
     "INVALID_NIF": "El formato NIF debería ser: 12345678P o X1234567Y",
     "NUMBER": "Número",
     "FLOOR": "Piso o Planta",
-    "FLOOR_HELPER": "",
+    "FLOOR_HELPER": "Puedes añadir el número de planta o seleccionar una opción del desplegable",
     "GROUND_FLOOR": "Planta baixa",
     "MEZZANINE": "Entresol",
     "PENTHOUSE": "Àtic",
