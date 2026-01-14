@@ -1,8 +1,6 @@
-import React, { useState, createContext } from 'react'
+import { useState, createContext } from 'react'
 
-import AlertRequirement from '../containers/Gurb/components/AlertRequirement'
-import FailureRequirement from '../containers/Gurb/components/FailureRequirement'
-import SuccessRequirement from '../containers/Gurb/components/SuccessRequirement'
+import AlertRequirement from '../containers/Gurb/components/AlertRequirement/AlertRequirement'
 
 const GurbErrorContext = createContext()
 
@@ -11,37 +9,19 @@ export const GurbErrorContextProvider = ({ children }) => {
   const [errorInfo, setErrorInfo] = useState({})
 
   const getStepResult = (errorInfo) => {
-    switch (errorInfo.error_type) {
-      case 'error':
-        return (
-          <FailureRequirement
-            textHeader={errorInfo?.main_text}
-            textBody={errorInfo?.seconday_text}
-            textHelper={errorInfo?.link_text}
-            textHelperAction={errorInfo?.clean_field}
-          />
-        )
-      case 'alert':
-        return (
+    return (
+      <>
+        {errorInfo?.error_type && (
           <AlertRequirement
+            severity={errorInfo.error_type}
             textHeader={errorInfo?.main_text}
             textBody={errorInfo?.seconday_text}
             textHelper={errorInfo?.link_text}
             textHelperAction={errorInfo?.clean_field}
           />
-        )
-      case 'success':
-        return (
-          <SuccessRequirement
-            textHeader={errorInfo?.main_text}
-            textBody={errorInfo?.seconday_text}
-            textHelper={errorInfo?.link_text}
-            textHelperAction={errorInfo?.clean_field}
-          />
-        )
-      default:
-        return
-    }
+        )}
+      </>
+    )
   }
 
   return (
