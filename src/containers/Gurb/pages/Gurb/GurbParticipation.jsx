@@ -11,7 +11,6 @@ import { getPowers } from '../../../../services/api'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import {
-  participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../../../themes/gurbTheme'
 
@@ -88,14 +87,14 @@ const GurbParticipation = (props) => {
       </Typography>
       <Box sx={{ mt: 4 }}>
         <AlertBox
-          customTypographyStyle={participationAlertBoxTypography}
+          textAlign={'left'}
           customIconStyle={participationAlertBoxIcon}
           id="gurb_participation_info_alert"
           description={t(informationTextKey)}
           severity={'warning'}
           iconCustom={true}
           iconCustomSeverity="info"
-          variant={'body2'}
+          variant={'body.md.regular'}
         />
       </Box>
     </Box>

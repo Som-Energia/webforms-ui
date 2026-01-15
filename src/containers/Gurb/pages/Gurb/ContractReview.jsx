@@ -11,7 +11,6 @@ import AlertBox from '../../../../components/AlertBox'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import {
-  participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../../../themes/gurbTheme'
 import {
@@ -122,11 +121,11 @@ const ContractReview = (props) => {
                 value={
                   values?.gurb?.surplus_compensation
                     ? t(
-                        'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION'
-                      )
+                      'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION'
+                    )
                     : t(
-                        'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION'
-                      )
+                      'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION'
+                    )
                 }
               />
             </Grid>
@@ -180,14 +179,14 @@ const ContractReview = (props) => {
 
         <Grid item xs={12} md={12}>
           <AlertBox
-            customTypographyStyle={participationAlertBoxTypography}
+            textAlign='left'
             customIconStyle={participationAlertBoxIcon}
             id="contract_review_info_alert"
             description={t('GURB_CONTRACT_REVIEW_INFO')}
             severity={'warning'}
             iconCustom={true}
             iconCustomSeverity="info"
-            variant={'body2'}
+            variant={'body.md.regular'}
           />
         </Grid>
         <Grid item xs={12} md={12} sx={{ mb: 2 }}>

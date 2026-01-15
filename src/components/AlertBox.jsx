@@ -23,7 +23,7 @@ const AlertBox = ({
   icon,
   iconCustom = false,
   iconCustomSeverity = '',
-  customTypographyStyle = {},
+  textAlign = 'center',
   customIconStyle = {}
 }) => {
   const theme = useTheme()
@@ -53,13 +53,13 @@ const AlertBox = ({
         icon={iconCustom ? renderCustomIcon() : icon ?? false}
         sx={{
           ...customSx,
-          ...customIconStyle
+          ...customIconStyle,
+           textAlign: textAlign
         }}>
         <AlertTitle>{title}</AlertTitle>
         {description && (
           <Typography
             variant={variant || 'body1'}
-            sx={customTypographyStyle}
             dangerouslySetInnerHTML={{
               __html: description
             }}

@@ -91,12 +91,6 @@ export const link = {  //TODO: Remove it after rebasing with ...
   fontSize: '14px'
 }
 
-export const participationAlertBoxTypography = {
-  textAlign: 'left',
-  fontSize: '16px',
-  mt: '2px'
-}
-
 export const participationAlertBoxIcon = {
   alignItems: 'flex-start',
   '& .MuiAlert-icon': {

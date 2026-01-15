@@ -9,7 +9,7 @@ import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import { participationAlertBoxTypography, forceAlignLeft } from '../../../../themes/gurbTheme'
+import { forceAlignLeft } from '../../../../themes/gurbTheme'
 
 let signaturitHook = () => undefined
 
@@ -91,11 +91,11 @@ const GurbSignature = (props) => {
 
           <Grid item xs={12} sx={forceAlignLeft}>
             <AlertBox
-              customTypographyStyle={participationAlertBoxTypography}
+              textAlign='left'
               id="gurb_signature_info_alert"
               description={t('GURB_SIGNATURE_INFO')}
               severity={'warning'}
-              variant={'body2'}
+              variant={'body.md.regular'}
             />
           </Grid>
 

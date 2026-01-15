@@ -129,7 +129,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
               id="percent_value_error"
               description={t('SELFCONSUMPTION_RECOMMENDATION_TEXT')}
               severity={'warning'}
-              variant={'body2'}
+              variant={'body.md.regular'}
             />
             <Grid item xs={12}>
               <Typography variant="headline4.regular">
