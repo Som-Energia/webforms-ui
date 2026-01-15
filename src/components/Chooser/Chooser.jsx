@@ -33,6 +33,7 @@ const Option = ({
 
   return (
     <Box
+      role="button"
       data-cy={optionId}
       sx={{
         ...(isSelected ? chooserSelectedStyles : chooserStyles),

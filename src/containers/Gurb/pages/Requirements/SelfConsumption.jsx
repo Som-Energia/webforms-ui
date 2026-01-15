@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-import Chooser from '../../../../components/Chooser'
+import Chooser from '../../../../components/Chooser/Chooser'
 import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
 import { iconRequirements } from '../../../../themes/commonStyles'

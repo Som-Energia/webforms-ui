@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 
-import Chooser from '../../../components/Chooser'
+import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
 
 import { ReceiptIcon } from '../../../data/icons/Icons'

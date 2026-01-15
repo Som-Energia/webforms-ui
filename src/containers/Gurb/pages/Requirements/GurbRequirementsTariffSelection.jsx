@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-import Chooser from '../../../../components/Chooser'
+import Chooser from '../../../../components/Chooser/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
 import { textBody1 } from '../../../../themes/gurbTheme'
