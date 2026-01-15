@@ -9,7 +9,6 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
-import { textBody1 } from '../../../../themes/gurbTheme'
 
 const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()
@@ -66,14 +65,9 @@ const GurbRequirementsTariffSelection = (props) => {
     <Grid item>
       <TextRecomendation
         title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
+        text={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')}
         isHeader
       />
-
-      <Typography sx={textBody1}>
-        {t(
-          'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY'
-        )}
-      </Typography>
 
       <Typography sx={{ mt: 4, mb: 2 }}>
         {t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')}

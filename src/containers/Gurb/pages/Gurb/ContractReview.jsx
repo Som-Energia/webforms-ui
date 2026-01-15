@@ -11,7 +11,6 @@ import AlertBox from '../../../../components/AlertBox'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import {
-  textHeader4,
   participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../../../themes/gurbTheme'
@@ -67,7 +66,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <LightningIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('GURB_CONTRACT_SUMMARY_KWH')}
               </Typography>
               <ReviewField value={`${values.gurb.power} KWh`} />
@@ -80,7 +79,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <EuroIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('GURB_CONTRACT_SUMMARY_JOIN_COST')}
               </Typography>
               <ReviewField
@@ -97,7 +96,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <ReceiptIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('GURB_CONTRACT_SUMMARY_QUOTA')}
               </Typography>
               <ReviewField
@@ -116,7 +115,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <SolarpanelIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('GURB_CONTRACT_SUMMARY_GURB_TYPE')}
               </Typography>
               <ReviewField
@@ -139,7 +138,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <PlaceMapIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('SUPPLYPOINT')}
               </Typography>
               <ReviewField
@@ -154,7 +153,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <CreditCardIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('PAYMENT_TITLE')}
               </Typography>
               <ReviewField
@@ -169,7 +168,7 @@ const ContractReview = (props) => {
           <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <PhoneIcon />
             <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-              <Typography sx={textHeader4}>
+              <Typography variant="body.sm.regular" color="primary.dark">
                 {t('CONTACT')}
               </Typography>
               <ReviewField
@@ -194,6 +193,7 @@ const ContractReview = (props) => {
         <Grid item xs={12} md={12} sx={{ mb: 2 }}>
           <Typography
             variant="body.sm.regular"
+            color="primary.dark"
             dangerouslySetInnerHTML={{
               __html: t('GURB_PURPOSE').concat('<br />', t('RIGHTS'))
             }}

@@ -10,7 +10,6 @@ import { getPowers } from '../../../../services/api'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import {
-  textField,
   participationTypography,
   participationAlertBoxTypography,
   participationAlertBoxIcon

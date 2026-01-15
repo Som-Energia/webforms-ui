@@ -2,30 +2,23 @@ export const PREV_COLOR = 'background.button'
 export const NEXT_COLOR = 'secondary.light'
 
 
-export const textHeader3 = {
-  fontFamily: 'Inter',
-  color: 'primary.dark',
-  fontSize: '16px',
-  textTransform: 'uppercase',
-  fontWeight: '600'
-}
-
-export const textHeader4 = {
-  fontFamily: 'Inter',
+export const textHeader4 = {  //TODO: Remove it after rebasing with ...
+  fontFamily: 'Outfit',
   color: 'primary.dark',
   fontSize: '16px',
   fontWeight: '500'
 }
 
-export const textBody1 = {
+export const textBody1 = {  //TODO: Remove it after rebasing with ...
   fontFamily: 'Outfit',
   color: 'secondary.dark',
   fontSize: '16px'
 }
 
-export const textField = {
+export const autocompleteAddressInput = {
   '& .MuiFormHelperText-root': { color: 'secondary.main' },
   '& .MuiInputLabel-root': { color: 'secondary.main' },
+  '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
 }
 
 export const iconOffRequirements = {

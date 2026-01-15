@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { textField } from '../themes/gurbTheme'
+import { autocompleteAddressInput } from '../themes/gurbTheme'
 import InputTitle from './InputTitle'
 
 export default function AddressAutocompletedField({
@@ -113,13 +113,7 @@ export default function AddressAutocompletedField({
           <Grid item xs={12}>
             <TextField
               {...params}
-              sx={{
-                ...textField,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '8px',
-                  paddingY: '0px'
-                }
-              }}
+              sx={autocompleteAddressInput}
               label={
                 !value?.street && !inputValue && !isFocused
                   ? textFieldLabel
