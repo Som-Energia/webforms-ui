@@ -1,7 +1,15 @@
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import SimpleGurbDialog from './SimpleGurbDialog'
-import { dialogText } from '../../../themes/gurbTheme'
+
+export const dialogText = (severity) => ({
+  fontSize: 14,
+  a: {
+    color: 'black',
+    fontWeight: severity === 'warning' ? 'bold' : 'normal',
+    textDecoration: 'underline'
+  }
+})
 
 export const buildGurbDialog = ({
   severity,

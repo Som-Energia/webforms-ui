@@ -11,13 +11,7 @@ import CancelIcon from '@mui/icons-material/Cancel'
 import CustomDialog from '../../../components/CustomDialog'
 
 import useCheckMobileScreen from '../../../services/checkMobileScreen'
-import {
-  dialogCancelIcon,
-  dialogWarningRounded,
-  dialogTitle,
-  dialogIconButton,
-  dialogContentStack
-} from '../../../themes/gurbTheme'
+
 
 export default function SimpleDialog({
   title,
@@ -40,12 +34,24 @@ export default function SimpleDialog({
         margin: '20px'
       }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
-        {severity === 'warning' && <WarningRounded sx={dialogWarningRounded} />}
-        {severity === 'error' && <CancelIcon sx={dialogCancelIcon} />}
+        {severity === 'warning' && <WarningRounded sx={{
+          fontSize: 44,
+          color: 'warning.light',
+          mt: 4
+        }} />}
+        {severity === 'error' && <CancelIcon sx={{
+          fontSize: 40,
+          color: 'error.light'
+        }} />}
       </Box>
 
       {title && (
-        <DialogTitle id="simple-dialog-title" sx={dialogTitle}>
+        <DialogTitle id="simple-dialog-title" sx={{
+          textAlign: 'center',
+          fontSize: 18,
+          fontWeight: 'bold',
+          mb: -2
+        }}>
           <Box>{title}</Box>
         </DialogTitle>
       )}
@@ -53,12 +59,21 @@ export default function SimpleDialog({
       <IconButton
         aria-label="close"
         onClick={closeFunction}
-        sx={dialogIconButton}>
+        sx={{
+          position: 'absolute',
+          right: 18,
+          top: 18,
+          color: 'black'
+        }}>
         <CloseIcon />
       </IconButton>
 
       <DialogContent>
-        <Stack sx={dialogContentStack}>
+        <Stack sx={{
+          spacing: 2,
+          alignItems: 'center',
+          textAlign: 'center'
+        }}>
           <Box>{text1}</Box>
           <Box>{text2}</Box>
         </Stack>
