@@ -35,7 +35,6 @@ import GurbParticipation from './pages/Gurb/GurbParticipation'
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbSignature from './pages/Gurb/GurbSignature'
 
-import { somStepperBox } from '../../themes/gurbTheme'
 
 const MAX_STEPS_NUMBER = 4
 
@@ -155,7 +154,7 @@ const GurbFormJoin = (props) => {
         {(formikProps) => (
           <>
             <Box
-              sx={somStepperBox}>
+               sx={{ marginBottom: '65px' }}>
               <SomStepper
                 showStepTitle={true}
                 activeStep={activeStep}

@@ -91,13 +91,6 @@ export const link = {  //TODO: Remove it after rebasing with ...
   fontSize: '14px'
 }
 
-export const somStepperBox = {
-  marginBottom: {
-    xs: '30px',
-    sm: '40px'
-  }
-}
-
 export const participationTypography = {
   '& a, & a:link, & a:visited, & a:active': {
     fontFamily: 'Outfit',
