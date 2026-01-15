@@ -115,35 +115,70 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-            <ThemeProvider theme={oldWebFormsTheme}>
-              <Suspense fallback={<Loading />}>
-                <Router>
-                  <CssBaseline />
-                  <Routes>
-                    <Route exact path="/" element={<Home {...props} />} />
+            <Router>
+              <Routes>
+                <Route exact path="/" element={
+                  <ThemeProvider theme={oldWebFormsTheme}>
+                    <CssBaseline />
+                    <Suspense fallback={<Loading />}>
+                      <Home {...props} />
+                    </Suspense>
+                  </ThemeProvider>
+                } />
 
-                    <Route
-                      exact
-                      path="/modify-contract"
-                      element={<ModifyContract {...props} token={token} />}
-                    />
-                    <Route
-                      path="/:language/contract/modification/"
-                      element={<ModifyContract {...props} token={token} />}
-                    />
+                <Route
+                  exact
+                  path="/modify-contract"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
+                        <ModifyContract {...props} token={token} />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/contract/modification/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
+                        <ModifyContract {...props} token={token} />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/holder-change"
-                      element={<HolderChange {...props} />}
-                    />
-                    <Route
-                      path="/:language/change-ownership/"
-                      element={<HolderChange {...props} />}
-                    />
+                <Route
+                  path="/holder-change"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
+                        <HolderChange {...props} />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/change-ownership/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
+                        <HolderChange {...props} />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/:language/investments/investments-kwh/"
-                      element={
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <PopUpContextProvider>
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
@@ -152,115 +187,177 @@ const App = (props) => {
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/d1-detail"
-                      element={
+                <Route
+                  path="/d1-detail"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <D1Detail {...props} templateProps={loadD1Data} />
-                      }
-                    />
-                    <Route
-                      path="/:language/d1-detail"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/d1-detail"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <D1Detail {...props} templateProps={loadD1Data} />
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/:language/mail-subscriptions"
-                      element={
+                <Route
+                  path="/:language/mail-subscriptions"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <MailSubscriptions
                           {...props}
                           mailLists={loadMailLists}
                         />
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/cancellation"
-                      element={
+                <Route
+                  path="/cancellation"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Cancellation
                           {...props}
                           contract={loadContractData()}
                         />
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/:language/cancellation"
-                      element={
+                <Route
+                  path="/:language/cancellation"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Cancellation
                           {...props}
                           contract={loadContractData()}
                         />
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/cancellation/confirm"
-                      element={
+                <Route
+                  path="/cancellation/confirm"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <CancellationConfirm
                           {...props}
                           contract={loadContractData()}
                         />
-                      }
-                    />
-                    <Route
-                      path="/:language/contract/:contract_id/confirm_cancellation/:token"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/contract/:contract_id/confirm_cancellation/:token"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <CancellationConfirm
                           {...props}
                           contract={loadContractData()}
                         />
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/:language/contract/:contract_id/cancel"
-                      element={
+                <Route
+                  path="/:language/contract/:contract_id/cancel"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Cancellation
                           {...props}
                           contract={loadContractData()}
                         />
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    {[
-                      "/:language/aportaciones-capital-social/formulario",
-                      "/:language/aportacions-capital-social/formulari",
-                      "/:language/achegar-ao-capital-social/formulario",
-                      "/:language/kapital-sozialerako-ekarpenak/formularioa"
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={<Contribution {...props} />}
-                      />))}
+                {[
+                  "/:language/aportaciones-capital-social/formulario",
+                  "/:language/aportacions-capital-social/formulari",
+                  "/:language/achegar-ao-capital-social/formulario",
+                  "/:language/kapital-sozialerako-ekarpenak/formularioa"
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeProvider theme={oldWebFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
+                          <Contribution {...props} />
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />))}
 
-                    <Route
-                      path="/:language/invoices/:invoice_id/payment_ko"
-                      element={
+                <Route
+                  path="/:language/invoices/:invoice_id/payment_ko"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Failure
                           showHeader={false}
                           {...props}
                           error={loadInvoicePaymentData()}
                         />
-                      }
-                    />
-                    <Route
-                      path="/:language/invoices/:invoice_id/payment_ok"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/invoices/:invoice_id/payment_ok"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Success
                           showHeader={false}
                           {...props}
                           {...loadInvoicePaymentData()}
                         />
-                      }
-                    />
-                    <Route
-                      path="/:language/contract/indexed"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/contract/indexed"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Indexed
                           {...props}
                           contract={loadContractData()}
@@ -268,11 +365,16 @@ const App = (props) => {
                             isIndexedPilotOngoing !== undefined
                           }
                         />
-                      }
-                    />
-                    <Route
-                      path="/contract/indexed"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/contract/indexed"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <Indexed
                           {...props}
                           contract={loadContractData()}
@@ -281,11 +383,16 @@ const App = (props) => {
                           }
                           checkEnabled={false}
                         />
-                      }
-                    />
-                    <Route
-                      path="/:language/investments/investments-kwh/"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <PopUpContextProvider>
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
@@ -294,11 +401,16 @@ const App = (props) => {
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
-                      }
-                    />
-                    <Route
-                      path="/investments/investments-kwh/"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/investments/investments-kwh/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <PopUpContextProvider>
                           <GenerationContextProvider
                             assignmentsJSON={assignmentsJSON}
@@ -307,132 +419,163 @@ const App = (props) => {
                             <Generation {...props} token={token} />
                           </GenerationContextProvider>
                         </PopUpContextProvider>
-                      }
-                    />
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
 
-                    <Route
-                      path="/:language/servicios/produccion/generation-kwh-aportaciones/"
-                      element={
+                <Route
+                  path="/:language/servicios/produccion/generation-kwh-aportaciones/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <GenerationContribution
                           {...props}
                           limitAmount={true}
                           token={token}
                         />
-                      }
-                    />
-                    <Route
-                      path="/participar/"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/participar/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <GenerationContribution
                           {...props}
                           limitAmount={true}
                           token={token}
                         />
-                      }
-                    />
-                    {[
-                      '/:language/serveis/produccio/generation-kwh-aportacions',
-                      '/:language/servicios/produccion/generation-kwh-aportaciones',
-                      '/:language/servizos/producion/generation-kwh-achegar',
-                      '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                {[
+                  '/:language/serveis/produccio/generation-kwh-aportacions',
+                  '/:language/servicios/produccion/generation-kwh-aportaciones',
+                  '/:language/servizos/producion/generation-kwh-achegar',
+                  '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeProvider theme={oldWebFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <GenerationContribution
                             {...props}
                             limitAmount={true}
                             token={token}
                           />
-                        }
-                      />
-                    ))}
-                    <Route
-                      path="/participar-no-limit/"
-                      element={
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                ))}
+                <Route
+                  path="/participar-no-limit/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <GenerationContribution
                           {...props}
                           limitAmount={false}
                           token={token}
                         />
-                      }
-                    />
-                    <Route
-                      path="/:language/participar-no-limit/"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/:language/participar-no-limit/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <GenerationContribution
                           {...props}
                           limitAmount={false}
                           token={token}
                         />
-                      }
-                    />
-                    <Route
-                      path="/generationkwh/contribution/"
-                      element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                <Route
+                  path="/generationkwh/contribution/"
+                  element={
+                    <ThemeProvider theme={oldWebFormsTheme}>
+                      <CssBaseline />
+                      <Suspense fallback={<Loading />}>
                         <GenerationContribution {...props} token={token} />
-                      }
-                    />
-                  </Routes>
-                </Router>
-              </Suspense>
-            </ThemeProvider>
-            <ThemeProvider theme={webFormsTheme}>
-              <Suspense fallback={<Loading />}>
-                <Router>
-                  <CssBaseline />
-                  <Routes>
-                    {[
-                      '/:language/pagament-realitzat',
-                      '/:language/pago-realizado'
-                    ].map((path) => (
-                      <Route
-                        key={path}
-                        path={path}
-                        element={
+                      </Suspense>
+                    </ThemeProvider>
+                  }
+                />
+                {[
+                  '/:language/pagament-realitzat',
+                  '/:language/pago-realizado'
+                ].map((path) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <Result
                             mode={'success'}
                             {...props}
                             title={t('SUCCESS_TEXT')}
                             description={t('NEWMEMBER_OK_DESCRIPTION')}
                           />
-                        }
-                      />
-                    ))}
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                ))}
 
-                    {[
-                      '/:language/pagament-cancellat',
-                      '/:language/pago-cancelado'
-                    ].map((path) => (
-                      <Route
-                        key={path}
-                        path={path}
-                        element={
-                          <Result
-                            mode="failure"
-                            title={t('FAILURE_TEXT')}
-                            {...props}>
-                            <Typography
-                              sx={{ color: 'secondary.extraDark' }}
-                              dangerouslySetInnerHTML={{
-                                __html: t('NEWMEMBER_KO_DESCRIPTION', {
-                                  url: t('CONTACT_HELP_URL')
-                                })
-                              }}
-                            />
-                          </Result>
-                        }
-                      />
-                    ))}
-                    {[
-                      '/:language/formulario-contratacion-periodos',
-                      '/:language/formulari-contractacio-periodes',
-                      '/:language/formulario-contrato-periodos',
-                      '/:language/kontratazio-formularioa-ordutegitarteak'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
+                {[
+                  '/:language/pagament-cancellat',
+                  '/:language/pago-cancelado'
+                ].map((path) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                      <Result
+                        mode="failure"
+                        title={t('FAILURE_TEXT')}
+                        {...props}>
+                        <Typography
+                          sx={{ color: 'secondary.extraDark' }}
+                          dangerouslySetInnerHTML={{
+                            __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                              url: t('CONTACT_HELP_URL')
+                            })
+                          }}
+                        />
+                      </Result>
+                    }
+                  />
+                ))}
+                {[
+                  '/:language/formulario-contratacion-periodos',
+                  '/:language/formulari-contractacio-periodes',
+                  '/:language/formulario-contrato-periodos',
+                  '/:language/kontratazio-formularioa-ordutegitarteak'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <LoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm
@@ -441,18 +584,23 @@ const App = (props) => {
                               />
                             </SummaryContextProvider>
                           </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-                    {[
-                      '/:language/formulario-contratacion-indexada',
-                      '/:language/formulari-contractacio-indexada',
-                      '/:language/formulario-contrato-indexada',
-                      '/:language/kontratazio-formularioa-indexatua'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                ))}
+                {[
+                  '/:language/formulario-contratacion-indexada',
+                  '/:language/formulari-contractacio-indexada',
+                  '/:language/formulario-contrato-indexada',
+                  '/:language/kontratazio-formularioa-indexatua'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <LoadingContextProvider>
                             <SummaryContextProvider>
                               <NewContractMemberForm
@@ -461,13 +609,18 @@ const App = (props) => {
                               />
                             </SummaryContextProvider>
                           </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-                    {props?.isGurbEnabled && (
-                      <Route
-                        path="/:language/gurb/:gurbCode/requirements/"
-                        element={
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                ))}
+                {props?.isGurbEnabled && (
+                  <Route
+                    path="/:language/gurb/:gurbCode/requirements/"
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <PopUpContextProvider>
                             <GurbErrorContextProvider>
                               <LoadingContextProvider>
@@ -477,13 +630,18 @@ const App = (props) => {
                               </LoadingContextProvider>
                             </GurbErrorContextProvider>
                           </PopUpContextProvider>
-                        }
-                      />
-                    )}
-                    {props?.isGurbEnabled && (
-                      <Route
-                        path="/:language/gurb/:code/join/"
-                        element={
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                )}
+                {props?.isGurbEnabled && (
+                  <Route
+                    path="/:language/gurb/:code/join/"
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <GurbErrorContextProvider>
                             <LoadingContextProvider>
                               <SummaryContextProvider>
@@ -491,13 +649,18 @@ const App = (props) => {
                               </SummaryContextProvider>
                             </LoadingContextProvider>
                           </GurbErrorContextProvider>
-                        }
-                      />
-                    )}
-                    {props?.isGurbEnabled && (
-                      <Route
-                        path="/:language/gurb/gurb_url_ok"
-                        element={
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                )}
+                {props?.isGurbEnabled && (
+                  <Route
+                    path="/:language/gurb/gurb_url_ok"
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <GurbErrorContextProvider>
                             <LoadingContextProvider>
                               <SummaryContextProvider>
@@ -505,33 +668,43 @@ const App = (props) => {
                               </SummaryContextProvider>
                             </LoadingContextProvider>
                           </GurbErrorContextProvider>
-                        }
-                      />
-                    )}
-                    {[
-                      '/:language/landing/captacio-domestic',
-                      '/:language/landing/captacio-empreses'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                )}
+                {[
+                  '/:language/landing/captacio-domestic',
+                  '/:language/landing/captacio-empreses'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <LoadingContextProvider>
                             <SummaryContextProvider>
                               <UnifiedContractForm {...props} />
                             </SummaryContextProvider>
                           </LoadingContextProvider>
-                        }
-                      />
-                    ))}
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                ))}
 
-                    {[
-                      '/:language/cooperativa/formulari-associar-se',
-                      '/:language/cooperativa/formulario-asociarse',
-                      '/:language/kooperatiba/bazkidetu-formularioa'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
+                {[
+                  '/:language/cooperativa/formulari-associar-se',
+                  '/:language/cooperativa/formulario-asociarse',
+                  '/:language/kooperatiba/bazkidetu-formularioa'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeProvider theme={webFormsTheme}>
+                        <CssBaseline />
+                        <Suspense fallback={<Loading />}>
                           <GurbErrorContextProvider>
                             <LoadingContextProvider>
                               <SummaryContextProvider>
@@ -539,17 +712,17 @@ const App = (props) => {
                               </SummaryContextProvider>
                             </LoadingContextProvider>
                           </GurbErrorContextProvider>
-                        }
-                      />
-                    ))}
-                  </Routes>
-                </Router>
-              </Suspense>
-            </ThemeProvider>
+                        </Suspense>
+                      </ThemeProvider>
+                    }
+                  />
+                ))}
+              </Routes>
+            </Router>
             <ApiStatus />
           </Box>
         </MatomoProvider>
-      </AvailabilityContextProvider>
+      </AvailabilityContextProvider >
     </>
   )
 }
