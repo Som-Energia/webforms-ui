@@ -91,14 +91,6 @@ export const link = {  //TODO: Remove it after rebasing with ...
   fontSize: '14px'
 }
 
-export const participationTypography = {
-  '& a, & a:link, & a:visited, & a:active': {
-    fontFamily: 'Outfit',
-    color: 'secondary.dark !important',
-    fontSize: '14px'
-  }
-}
-
 export const participationAlertBoxTypography = {
   textAlign: 'left',
   fontSize: '16px',

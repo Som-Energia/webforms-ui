@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Link from '@mui/material/Link'
+import Typography from '@mui/material/Typography'
 
 import SelectField from '../../../../components/SelectField'
 import AlertBox from '../../../../components/AlertBox'
@@ -10,7 +11,6 @@ import { getPowers } from '../../../../services/api'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import {
-  participationTypography,
   participationAlertBoxTypography,
   participationAlertBoxIcon
 } from '../../../../themes/gurbTheme'
@@ -70,20 +70,23 @@ const GurbParticipation = (props) => {
         fieldName={"values.gurb.power"}
         onChange={onChangePower}
       />
-
-      <Typography
-        sx={participationTypography}>
-        {
-          <span
-            dangerouslySetInnerHTML={{
-              __html: t('GURB_HELP_ANNUAL_CONSUMPTION', {
-                url: t('GURB_HELP_ANNUAL_CONSUMPTION_URL')
-              })
-            }}></span>
-        }
+      <Typography  //TODO: Extract as component (Same as GurbParticipation)
+        sx={{
+          fontSize: '14px',
+          fontWeight: 400,
+          letterSpacing: 0,
+          color: 'secondary.extraDark'
+        }}>
+        {''}
+        <Link
+          href={t('GURB_HELP_ANNUAL_CONSUMPTION_URL')}
+          target="_blank"
+          rel="noopener noreferrer"
+          color="link.main">
+          {t('GURB_HELP_ANNUAL_CONSUMPTION')}
+        </Link>
       </Typography>
-
-      <Box sx ={{ mt: 4 }}>
+      <Box sx={{ mt: 4 }}>
         <AlertBox
           customTypographyStyle={participationAlertBoxTypography}
           customIconStyle={participationAlertBoxIcon}
