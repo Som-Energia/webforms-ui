@@ -1,6 +1,5 @@
-export const PREV_COLOR = '#96b633'
-export const NEXT_COLOR = '#E6E6E6'
-
+export const PREV_COLOR = 'background.button'
+export const NEXT_COLOR = 'secondary.light'
 
 export const textHeader2 = {
   fontFamily: 'Inter',
@@ -11,7 +10,7 @@ export const textHeader2 = {
 
 export const textHeader3 = {
   fontFamily: 'Inter',
-  color: '#000000',
+  color: 'primary.dark',
   fontSize: '16px',
   textTransform: 'uppercase',
   fontWeight: '600'
@@ -26,13 +25,13 @@ export const textHeader4 = {
 
 export const textBody1 = {
   fontFamily: 'Outfit',
-  color: '#919191',
+  color: 'secondary.dark',
   fontSize: '16px'
 }
 
 export const textField = {
-  '& .MuiFormHelperText-root': { color: '#B3B3B3' },
-  '& .MuiInputLabel-root': { color: '#B3B3B3' },
+  '& .MuiFormHelperText-root': { color: 'secondary.main' },
+  '& .MuiInputLabel-root': { color: 'secondary.main' },
 }
 
 export const iconOffRequirements = {
@@ -155,7 +154,7 @@ export const somStepperBox = {
 export const participationTypography = {
   '& a, & a:link, & a:visited, & a:active': {
     fontFamily: 'Outfit',
-    color: '#919191 !important',
+    color: 'secondary.dark !important',
     fontSize: '14px'
   }
 }
