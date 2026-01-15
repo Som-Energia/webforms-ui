@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Chooser from '../../../components/Chooser'
+import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'

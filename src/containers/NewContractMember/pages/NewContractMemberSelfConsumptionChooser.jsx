@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import Chooser from '../../../components/Chooser'
+import Chooser from '../../../components/Chooser/Chooser'
 import Typography from '@mui/material/Typography'
 import InputTitle from '../../../components/InputTitle'
 

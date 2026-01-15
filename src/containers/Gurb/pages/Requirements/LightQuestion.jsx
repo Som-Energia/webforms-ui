@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 
-import Chooser from '../../../../components/Chooser'
+import Chooser from '../../../../components/Chooser/Chooser'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import { iconRequirements } from '../../../../themes/commonStyles'
