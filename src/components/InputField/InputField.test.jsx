@@ -1,9 +1,7 @@
-import React from 'react'
-import InputField from './InputField'
-import { render, screen, queryByAttribute } from '@testing-library/react'
-import { useTranslation } from 'react-i18next'
+import { queryByAttribute, render, screen } from '@testing-library/react'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
+import InputField from './InputField'
 
 test('InputField renders without crashing and label', async () => {
   const dom = render(<InputField name="NAME" />)
@@ -34,9 +32,9 @@ test('InputField renders text error', async () => {
     fallbackLng: 'en',
     defaultNS: 'translationsNS',
     resources: {
-      en: { translationsNS: { ERROR: 'Error translation' } },
+      en: { translationsNS: { ERROR: 'Error translation' } }
     },
-    debug: false,
+    debug: false
   })
 
   render(<InputField name="NAME" error="ERROR" touched={true} />)
@@ -48,7 +46,7 @@ test('InputField renders text error', async () => {
 test('InputField renders children node', async () => {
   const { getByTestId } = render(
     <InputField name="NAME" label="LABEL">
-      <div data-testid='children1'>CHILDREN NODE</div>
+      <div data-testid="children1">CHILDREN NODE</div>
     </InputField>
   )
 
