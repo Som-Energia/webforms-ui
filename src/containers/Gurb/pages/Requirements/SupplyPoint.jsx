@@ -13,6 +13,7 @@ const SupplyPoint = (props) => {
         <TextRecomendation
           title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
           text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
+          isHeader
         />
       </Grid>
       <Grid item xs={12}>

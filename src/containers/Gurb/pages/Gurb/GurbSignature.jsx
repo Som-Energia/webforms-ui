@@ -72,7 +72,7 @@ const GurbSignature = (props) => {
   return (
     <>
       {loading ? (
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent:'center'}}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <CircularProgress color="secondary" />
         </Grid>
       ) : erpError ? (
@@ -84,7 +84,9 @@ const GurbSignature = (props) => {
       ) : (
         <Grid container>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <TextRecomendation title={t('GURB_SIGNATURE')} />
+            <TextRecomendation title={t('GURB_SIGNATURE')}
+              isHeader
+            />
           </Grid>
 
           <Grid item xs={12} sx={forceAlignLeft}>

@@ -52,13 +52,13 @@ const GurbRequirementsTariffSelection = (props) => {
     const redirectUrl =
       optionId === 'periods-tariff'
         ? baseUrl +
-          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
-            gurbCode: gurbCode
-          })
+        t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
+          gurbCode: gurbCode
+        })
         : baseUrl +
-          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
-            gurbCode: gurbCode
-          })
+        t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
+          gurbCode: gurbCode
+        })
     setFieldValue('redirectUrl', redirectUrl)
   }
 
@@ -66,6 +66,7 @@ const GurbRequirementsTariffSelection = (props) => {
     <Grid item>
       <TextRecomendation
         title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
+        isHeader
       />
 
       <Typography sx={textBody1}>

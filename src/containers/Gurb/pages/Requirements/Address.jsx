@@ -58,6 +58,7 @@ const AddressField = ({
         <TextRecomendation
           title={t('GURB_ADDRESS_TITLE')}
           text={t('GURB_ADDRESS_TITLE_HELPER')}
+          isHeader
         />
       </Grid>
 

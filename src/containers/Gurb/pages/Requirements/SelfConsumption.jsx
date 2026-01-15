@@ -54,6 +54,7 @@ const SelfConsumption = (props) => {
         <TextRecomendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
           text={t('GURB_SELFCONSUMPTION_HELPER')}
+          isHeader
         />
       </Grid>
       <Grid item xs={12}>

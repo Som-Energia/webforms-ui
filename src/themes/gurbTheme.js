@@ -1,12 +1,6 @@
 export const PREV_COLOR = 'background.button'
 export const NEXT_COLOR = 'secondary.light'
 
-export const textHeader2 = {
-  fontFamily: 'Inter',
-  color: 'primary.dark',
-  fontSize: '18px',
-  fontWeight: '700'
-}
 
 export const textHeader3 = {
   fontFamily: 'Inter',
