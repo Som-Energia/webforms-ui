@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
-import InputTitle from './InputTitle'
+import InputTitle from '../InputTitle'
 
 const SelectField = (props) => {
   const {

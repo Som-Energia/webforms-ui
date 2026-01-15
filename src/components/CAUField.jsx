@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { checkCups } from '../services/api'
 import { useTranslation } from 'react-i18next'
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 import { isMatchingCUPSandCAU, prettyCAU } from '../services/utils'
 
 export function CAUField({

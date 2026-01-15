@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { textHeader3, textHeader4, textBody1, textHeader2 } from '../../../../themes/gurbTheme'
 import Box from '@mui/material/Box'
-import InputField from '../../../../components/InputField'
+import InputField from '../../../../components/InputField/InputField'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { iconRequirements } from '../../../../themes/commonStyles'

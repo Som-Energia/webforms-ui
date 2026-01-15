@@ -12,11 +12,11 @@ import {
 } from '../../../data/icons/Icons'
 import CAUField from '../../../components/CAUField'
 import Chooser from '../../../components/Chooser'
-import InputField from '../../../components/InputField'
-import SelectField from '../../../components/SelectField'
+import InputField from '../../../components/InputField/InputField'
+import SelectField from '../../../components/SelectField/SelectField'
 import InputTitle from '../../../components/InputTitle'
 import AlertBox from '../../../components/AlertBox/AlertBox'
-import { HelperText } from '../../../components/InputField'
+import { HelperText } from '../../../components/InputField/InputField'
 
 import {
   getSelfConsumptionSituations,

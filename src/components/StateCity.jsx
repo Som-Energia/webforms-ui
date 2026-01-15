@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
-import SelectField from './SelectField'
+import SelectField from './SelectField/SelectField'
 import { getProvincies, getMunicipis } from '../services/api'
 
 
