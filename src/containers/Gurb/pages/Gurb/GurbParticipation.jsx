@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import SelectField from '../../../../components/SelectField'
+import SelectField from '../../../../components/SelectField/SelectField'
 import AlertBox from '../../../../components/AlertBox/AlertBox'
 import { getPowers } from '../../../../services/api'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'

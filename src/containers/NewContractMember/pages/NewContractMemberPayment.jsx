@@ -12,7 +12,7 @@ import { checkIbanFormat } from '../../../services/utils'
 
 import Chooser from '../../../components/Chooser'
 import InputTitle from '../../../components/InputTitle'
-import InputField from '../../../components/InputField'
+import InputField from '../../../components/InputField/InputField'
 import TermsDialog from '../../../components/TermsDialog'
 
 const PaymentMethod = (props) => {

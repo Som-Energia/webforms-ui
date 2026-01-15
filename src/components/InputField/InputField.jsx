@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid'
 
 import { Trans } from 'react-i18next'
 
-import InputTitle from './InputTitle'
+import InputTitle from '../InputTitle'
 
 export const HelperText = ({ helperText, iconHelper }) => {
   return (
@@ -85,7 +85,7 @@ const InputFieldComponent = ({
                 )) ||
                 endAdornmentText
             }}
-            inputProps={customInputProps}
+            inputProps={{...customInputProps, 'data-cy': `${name}-input`}}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}

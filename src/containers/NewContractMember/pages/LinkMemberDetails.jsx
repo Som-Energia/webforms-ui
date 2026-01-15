@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import InputField from '../../../components/InputField'
+import InputField from '../../../components/InputField/InputField'
 
 import { checkMember } from '../../../services/api'
 import LoadingContext from '../../../context/LoadingContext'

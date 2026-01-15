@@ -7,7 +7,7 @@ import { checkPhisicalVAT, checkVatFormat } from '../services/utils'
 import { checkVat } from '../services/api'
 import LoadingContext from '../context/LoadingContext'
 
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 import { useHandleChangeNif } from '../hooks/useHandleChange'
 import { useHandleBlur } from '../hooks/useHandleBlur'
 

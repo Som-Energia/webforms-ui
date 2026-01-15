@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 
 import { checkCups } from '../services/api'
 import { MAX_STEPS_NUMBER } from '../containers/Gurb/GurbFormRequirements'

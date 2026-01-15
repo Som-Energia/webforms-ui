@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { buttonGurbDark } from '../../../../themes/gurbTheme'
 
-import InputField from '../../../../components/InputField'
+import InputField from '../../../../components/InputField/InputField'
 import LocationInput from '../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
