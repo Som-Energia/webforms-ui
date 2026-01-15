@@ -23,6 +23,19 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 
+
+const ThemeWrapper = ({ children, theme: customTheme }) => {
+  return (
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <Suspense fallback={<Loading />}>
+        {children}
+      </Suspense>
+    </ThemeProvider>
+  )
+}
+
+
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
   const { t } = useTranslation()
@@ -118,189 +131,147 @@ const App = (props) => {
             <Router>
               <Routes>
                 <Route exact path="/" element={
-                  <ThemeProvider theme={oldWebFormsTheme}>
-                    <CssBaseline />
-                    <Suspense fallback={<Loading />}>
-                      <Home {...props} />
-                    </Suspense>
-                  </ThemeProvider>
+                  <ThemeWrapper theme={oldWebFormsTheme}>
+                    <Home {...props} />
+                  </ThemeWrapper>
                 } />
 
                 <Route
                   exact
                   path="/modify-contract"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <ModifyContract {...props} token={token} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <ModifyContract {...props} token={token} />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/contract/modification/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <ModifyContract {...props} token={token} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <ModifyContract {...props} token={token} />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/holder-change"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <HolderChange {...props} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <HolderChange {...props} />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/change-ownership/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <HolderChange {...props} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <HolderChange {...props} />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/:language/investments/investments-kwh/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <PopUpContextProvider>
-                          <GenerationContextProvider
-                            assignmentsJSON={assignmentsJSON}
-                            investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
-                            <Generation {...props} token={token} />
-                          </GenerationContextProvider>
-                        </PopUpContextProvider>
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <PopUpContextProvider>
+                        <GenerationContextProvider
+                          assignmentsJSON={assignmentsJSON}
+                          investmentsJSON={investmentsJSON}
+                          outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                          <Generation {...props} token={token} />
+                        </GenerationContextProvider>
+                      </PopUpContextProvider>
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/d1-detail"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <D1Detail {...props} templateProps={loadD1Data} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <D1Detail {...props} templateProps={loadD1Data} />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/d1-detail"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <D1Detail {...props} templateProps={loadD1Data} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <D1Detail {...props} templateProps={loadD1Data} />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/:language/mail-subscriptions"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <MailSubscriptions
-                          {...props}
-                          mailLists={loadMailLists}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <MailSubscriptions
+                        {...props}
+                        mailLists={loadMailLists}
+                      />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/cancellation"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Cancellation
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Cancellation
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/:language/cancellation"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Cancellation
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Cancellation
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/cancellation/confirm"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <CancellationConfirm
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <CancellationConfirm
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/contract/:contract_id/confirm_cancellation/:token"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <CancellationConfirm
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <CancellationConfirm
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/:language/contract/:contract_id/cancel"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Cancellation
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Cancellation
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
 
@@ -313,145 +284,118 @@ const App = (props) => {
                   <Route
                     path={path}
                     element={
-                      <ThemeProvider theme={oldWebFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <Contribution {...props} />
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={oldWebFormsTheme}>
+                        <Contribution {...props} />
+                      </ThemeWrapper>
                     }
                   />))}
 
                 <Route
                   path="/:language/invoices/:invoice_id/payment_ko"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Failure
-                          showHeader={false}
-                          {...props}
-                          error={loadInvoicePaymentData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Failure
+                        showHeader={false}
+                        {...props}
+                        error={loadInvoicePaymentData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/invoices/:invoice_id/payment_ok"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Success
-                          showHeader={false}
-                          {...props}
-                          {...loadInvoicePaymentData()}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Success
+                        showHeader={false}
+                        {...props}
+                        {...loadInvoicePaymentData()}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/contract/indexed"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Indexed
-                          {...props}
-                          contract={loadContractData()}
-                          isIndexedPilotOngoing={
-                            isIndexedPilotOngoing !== undefined
-                          }
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Indexed
+                        {...props}
+                        contract={loadContractData()}
+                        isIndexedPilotOngoing={
+                          isIndexedPilotOngoing !== undefined
+                        }
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/contract/indexed"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <Indexed
-                          {...props}
-                          contract={loadContractData()}
-                          isIndexedPilotOngoing={
-                            isIndexedPilotOngoing !== undefined
-                          }
-                          checkEnabled={false}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Indexed
+                        {...props}
+                        contract={loadContractData()}
+                        isIndexedPilotOngoing={
+                          isIndexedPilotOngoing !== undefined
+                        }
+                        checkEnabled={false}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/investments/investments-kwh/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <PopUpContextProvider>
-                          <GenerationContextProvider
-                            assignmentsJSON={assignmentsJSON}
-                            investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
-                            <Generation {...props} token={token} />
-                          </GenerationContextProvider>
-                        </PopUpContextProvider>
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <PopUpContextProvider>
+                        <GenerationContextProvider
+                          assignmentsJSON={assignmentsJSON}
+                          investmentsJSON={investmentsJSON}
+                          outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                          <Generation {...props} token={token} />
+                        </GenerationContextProvider>
+                      </PopUpContextProvider>
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/investments/investments-kwh/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <PopUpContextProvider>
-                          <GenerationContextProvider
-                            assignmentsJSON={assignmentsJSON}
-                            investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
-                            <Generation {...props} token={token} />
-                          </GenerationContextProvider>
-                        </PopUpContextProvider>
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <PopUpContextProvider>
+                        <GenerationContextProvider
+                          assignmentsJSON={assignmentsJSON}
+                          investmentsJSON={investmentsJSON}
+                          outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                          <Generation {...props} token={token} />
+                        </GenerationContextProvider>
+                      </PopUpContextProvider>
+                    </ThemeWrapper>
                   }
                 />
 
                 <Route
                   path="/:language/servicios/produccion/generation-kwh-aportaciones/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={true}
-                          token={token}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={true}
+                        token={token}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/participar/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={true}
-                          token={token}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={true}
+                        token={token}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 {[
@@ -463,58 +407,46 @@ const App = (props) => {
                   <Route
                     path={path}
                     element={
-                      <ThemeProvider theme={oldWebFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <GenerationContribution
-                            {...props}
-                            limitAmount={true}
-                            token={token}
-                          />
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={oldWebFormsTheme}>
+                        <GenerationContribution
+                          {...props}
+                          limitAmount={true}
+                          token={token}
+                        />
+                      </ThemeWrapper>
                     }
                   />
                 ))}
                 <Route
                   path="/participar-no-limit/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={false}
-                          token={token}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={false}
+                        token={token}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/:language/participar-no-limit/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={false}
-                          token={token}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={false}
+                        token={token}
+                      />
+                    </ThemeWrapper>
                   }
                 />
                 <Route
                   path="/generationkwh/contribution/"
                   element={
-                    <ThemeProvider theme={oldWebFormsTheme}>
-                      <CssBaseline />
-                      <Suspense fallback={<Loading />}>
-                        <GenerationContribution {...props} token={token} />
-                      </Suspense>
-                    </ThemeProvider>
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution {...props} token={token} />
+                    </ThemeWrapper>
                   }
                 />
                 {[
@@ -525,17 +457,14 @@ const App = (props) => {
                     key={path}
                     path={path}
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <Result
-                            mode={'success'}
-                            {...props}
-                            title={t('SUCCESS_TEXT')}
-                            description={t('NEWMEMBER_OK_DESCRIPTION')}
-                          />
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <Result
+                          mode={'success'}
+                          {...props}
+                          title={t('SUCCESS_TEXT')}
+                          description={t('NEWMEMBER_OK_DESCRIPTION')}
+                        />
+                      </ThemeWrapper>
                     }
                   />
                 ))}
@@ -548,19 +477,21 @@ const App = (props) => {
                     key={path}
                     path={path}
                     element={
-                      <Result
-                        mode="failure"
-                        title={t('FAILURE_TEXT')}
-                        {...props}>
-                        <Typography
-                          sx={{ color: 'secondary.extraDark' }}
-                          dangerouslySetInnerHTML={{
-                            __html: t('NEWMEMBER_KO_DESCRIPTION', {
-                              url: t('CONTACT_HELP_URL')
-                            })
-                          }}
-                        />
-                      </Result>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <Result
+                          mode="failure"
+                          title={t('FAILURE_TEXT')}
+                          {...props}>
+                          <Typography
+                            sx={{ color: 'secondary.extraDark' }}
+                            dangerouslySetInnerHTML={{
+                              __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                                url: t('CONTACT_HELP_URL')
+                              })
+                            }}
+                          />
+                        </Result>
+                      </ThemeWrapper>
                     }
                   />
                 ))}
@@ -573,19 +504,16 @@ const App = (props) => {
                   <Route
                     path={path}
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm
-                                {...props}
-                                tariff={'periods'}
-                              />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              tariff={'periods'}
+                            />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 ))}
@@ -598,19 +526,16 @@ const App = (props) => {
                   <Route
                     path={path}
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm
-                                {...props}
-                                tariff={'indexed'}
-                              />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              tariff={'indexed'}
+                            />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 ))}
@@ -618,20 +543,17 @@ const App = (props) => {
                   <Route
                     path="/:language/gurb/:gurbCode/requirements/"
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <PopUpContextProvider>
-                            <GurbErrorContextProvider>
-                              <LoadingContextProvider>
-                                <SummaryContextProvider>
-                                  <GurbFormRequirements {...props} />
-                                </SummaryContextProvider>
-                              </LoadingContextProvider>
-                            </GurbErrorContextProvider>
-                          </PopUpContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <PopUpContextProvider>
+                          <GurbErrorContextProvider>
+                            <LoadingContextProvider>
+                              <SummaryContextProvider>
+                                <GurbFormRequirements {...props} />
+                              </SummaryContextProvider>
+                            </LoadingContextProvider>
+                          </GurbErrorContextProvider>
+                        </PopUpContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 )}
@@ -639,18 +561,15 @@ const App = (props) => {
                   <Route
                     path="/:language/gurb/:code/join/"
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <GurbErrorContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbFormJoin {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
-                          </GurbErrorContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <GurbErrorContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <GurbFormJoin {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                        </GurbErrorContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 )}
@@ -658,18 +577,15 @@ const App = (props) => {
                   <Route
                     path="/:language/gurb/gurb_url_ok"
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <GurbErrorContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbContractPaymentSuccessful {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
-                          </GurbErrorContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <GurbErrorContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <GurbContractPaymentSuccessful {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                        </GurbErrorContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 )}
@@ -680,16 +596,13 @@ const App = (props) => {
                   <Route
                     path={path}
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <UnifiedContractForm {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <UnifiedContractForm {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 ))}
@@ -702,18 +615,15 @@ const App = (props) => {
                   <Route
                     path={path}
                     element={
-                      <ThemeProvider theme={webFormsTheme}>
-                        <CssBaseline />
-                        <Suspense fallback={<Loading />}>
-                          <GurbErrorContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <NewMemberForm {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
-                          </GurbErrorContextProvider>
-                        </Suspense>
-                      </ThemeProvider>
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <GurbErrorContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewMemberForm {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                        </GurbErrorContextProvider>
+                      </ThemeWrapper>
                     }
                   />
                 ))}
