@@ -1,12 +1,9 @@
-import React, { lazy, Suspense, useMemo, useEffect } from 'react'
+import React, { lazy, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
 
 import OldWebFormsTheme from './themes/webforms_old'
 import WebFormsTheme from './themes/webforms'
-import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
@@ -22,18 +19,7 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
-
-
-const ThemeWrapper = ({ children, theme: customTheme }) => {
-  return (
-    <ThemeProvider theme={customTheme}>
-      <CssBaseline />
-      <Suspense fallback={<Loading />}>
-        {children}
-      </Suspense>
-    </ThemeProvider>
-  )
-}
+import ThemeWrapper from './themes/ThemeWrapper'
 
 
 const App = (props) => {
