@@ -11,19 +11,16 @@ import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../../../themes/gurbTheme'
 
-import GurbErrorContext from '../../../../context/GurbErrorContext'
 import PopUpContext from '../../../../context/PopUpContext'
 
 const SelfConsumption = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError } = useContext(GurbErrorContext)
   const { setContent } = useContext(PopUpContext)
 
   const handleSelfconsumptionQuestion = (value) => {
     setFieldValue('has_selfconsumption', value)
     if (value === 'selfconsumption-on') {
-      setError(true)
       setContent(
         <SimpleGurbDialog
           severity="warning"
