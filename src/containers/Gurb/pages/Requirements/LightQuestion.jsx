@@ -9,7 +9,6 @@ import TextRecommendation from '../../components/TextRecommendation/TextRecommen
 import { iconRequirements } from '../../../../themes/commonStyles'
 import { iconOffRequirements } from '../../../../themes/gurbTheme'
 
-import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
 
 import PopUpContext from '../../../../context/PopUpContext'
@@ -18,14 +17,12 @@ import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError } = useContext(GurbErrorContext)
   const { setContent } = useContext(PopUpContext)
 
   const handleLightQuestion = (value) => {
     setFieldValue('has_light', value)
 
     if (value === 'light-off') {
-      setError(true)
       setContent(
         <SimpleGurbDialog
           severity="warning"
@@ -34,8 +31,6 @@ const LightQuestion = (props) => {
           text2={t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')}
         />
       )
-    } else {
-      setError(false)
     }
   }
 
