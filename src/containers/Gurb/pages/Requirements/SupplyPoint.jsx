@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-import CUPS from '../../../../components/CUPS'
+import CUPS from '../../../../components/Cups/CUPS'
 
 const SupplyPoint = (props) => {
   const { t } = useTranslation()

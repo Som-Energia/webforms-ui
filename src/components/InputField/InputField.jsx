@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -85,7 +85,7 @@ const InputFieldComponent = ({
                 )) ||
                 endAdornmentText
             }}
-            inputProps={{...customInputProps, 'data-cy': `${name}-input`}}
+            inputProps={{ ...customInputProps, 'data-cy': `${name}-input` }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
