@@ -3,6 +3,7 @@ import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import Chooser from './Chooser'
+import { vi } from 'vitest'
 
 const icon1 = <LightbulbOutlinedIcon />
 const icon2 = <CheckCircleIcon />
