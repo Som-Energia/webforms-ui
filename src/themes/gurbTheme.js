@@ -90,10 +90,3 @@ export const link = {  //TODO: Remove it after rebasing with ...
   color: '#000000',
   fontSize: '14px'
 }
-
-export const forceAlignLeft = {
-  '& .MuiAlert-root': {
-    justifyContent: 'flex-start !important',
-    textAlign: 'left !important'
-  }
-}

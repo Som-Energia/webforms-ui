@@ -9,7 +9,6 @@ import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import { forceAlignLeft } from '../../../../themes/gurbTheme'
 
 let signaturitHook = () => undefined
 
@@ -89,7 +88,7 @@ const GurbSignature = (props) => {
             />
           </Grid>
 
-          <Grid item xs={12} sx={forceAlignLeft}>
+          <Grid item xs={12}>
             <AlertBox
               textAlign='left'
               id="gurb_signature_info_alert"
