@@ -11,9 +11,6 @@ import AlertBox from '../../../../components/AlertBox'
 import TextRecomendation from '../../components/TextRecomendation'
 
 import {
-  participationAlertBoxIcon
-} from '../../../../themes/gurbTheme'
-import {
   LightningIcon,
   EuroIcon,
   PlaceMapIcon,
@@ -180,7 +177,6 @@ const ContractReview = (props) => {
         <Grid item xs={12} md={12}>
           <AlertBox
             textAlign='left'
-            customIconStyle={participationAlertBoxIcon}
             id="contract_review_info_alert"
             description={t('GURB_CONTRACT_REVIEW_INFO')}
             severity={'warning'}

@@ -10,10 +10,6 @@ import AlertBox from '../../../../components/AlertBox'
 import { getPowers } from '../../../../services/api'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import {
-  participationAlertBoxIcon
-} from '../../../../themes/gurbTheme'
-
 
 const GurbParticipation = (props) => {
   const { values, setFieldValue, gurbCode } = props
@@ -88,7 +84,6 @@ const GurbParticipation = (props) => {
       <Box sx={{ mt: 4 }}>
         <AlertBox
           textAlign={'left'}
-          customIconStyle={participationAlertBoxIcon}
           id="gurb_participation_info_alert"
           description={t(informationTextKey)}
           severity={'warning'}

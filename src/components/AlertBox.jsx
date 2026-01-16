@@ -24,7 +24,6 @@ const AlertBox = ({
   iconCustom = false,
   iconCustomSeverity = '',
   textAlign = 'center',
-  customIconStyle = {}
 }) => {
   const theme = useTheme()
 
@@ -53,8 +52,13 @@ const AlertBox = ({
         icon={iconCustom ? renderCustomIcon() : icon ?? false}
         sx={{
           ...customSx,
-          ...customIconStyle,
-           textAlign: textAlign
+          textAlign: textAlign,
+          alignItems: 'flex-start',
+          '& .MuiAlert-icon': {
+            display: 'flex',
+            alignItems: 'flex-start',
+            mt: '0.35em'
+          }
         }}>
         <AlertTitle>{title}</AlertTitle>
         {description && (

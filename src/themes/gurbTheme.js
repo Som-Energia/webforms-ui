@@ -91,15 +91,6 @@ export const link = {  //TODO: Remove it after rebasing with ...
   fontSize: '14px'
 }
 
-export const participationAlertBoxIcon = {
-  alignItems: 'flex-start',
-  '& .MuiAlert-icon': {
-    display: 'flex',
-    alignItems: 'flex-start',
-    mt: '0.35em'
-  }
-}
-
 export const forceAlignLeft = {
   '& .MuiAlert-root': {
     justifyContent: 'flex-start !important',
