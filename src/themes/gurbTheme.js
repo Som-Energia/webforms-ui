@@ -21,19 +21,6 @@ export const autocompleteAddressInput = {
   '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
 }
 
-export const iconOffRequirements = {
-  borderRadius: '8px',
-  border: '1px solid secondary.light',
-  color: 'primary.dark',
-  fontSize: '3rem',
-  padding: '8px',
-  backgroundColor: 'secondary.white',
-  background:
-    'linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 1.5px), rgba(0,0,0,1) calc(50% - 1.4px), rgba(0,0,0,1) 50%, rgba(0,0,0,1) calc(50% + 1.4px), rgba(0,0,0,0) calc(50% + 1.5px), rgba(0,0,0,0) 100%)',
-  backgroundRepeat: 'no-repeat',
-  backgroundOrigin: 'content-box'
-}
-
 export const buttonGurbDark = {
   ...textBody1,
   textTransform: 'none',

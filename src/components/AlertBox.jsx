@@ -12,7 +12,6 @@ import WarningIcon from '@mui/icons-material/WarningAmberOutlined'
 import ErrorIcon from '@mui/icons-material/ErrorOutline'
 import CheckCircleIcon from '@mui/icons-material/CheckCircleOutline'
 
-import { getAlertBoxStyles } from '../themes/commonStyles'
 
 const AlertBox = ({
   severity,
@@ -21,27 +20,21 @@ const AlertBox = ({
   children,
   variant,
   icon,
-  iconCustom = false,
-  iconCustomSeverity = '',
   textAlign = 'center',
 }) => {
   const theme = useTheme()
 
-  const customSx = getAlertBoxStyles(theme, severity)
-
   const renderCustomIcon = () => {
-    const chosenSeverity = iconCustomSeverity || severity
-
-    switch (chosenSeverity) {
+    switch (icon) {
       case 'warning':
-        return <WarningIcon color="warning" />
+        return <WarningIcon color={severity} />
       case 'error':
-        return <ErrorIcon color="error" />
+        return <ErrorIcon color={severity} />
       case 'success':
-        return <CheckCircleIcon color="success" />
+        return <CheckCircleIcon color={severity} />
       case 'info':
       default:
-        return <InfoIcon color="info" />
+        return <InfoIcon color={severity} />
     }
   }
 
@@ -49,17 +42,31 @@ const AlertBox = ({
     <Box sx={{ mt: '0', mb: '30px !important' }}>
       <Alert
         severity={severity}
-        icon={iconCustom ? renderCustomIcon() : icon ?? false}
+        icon={icon ? renderCustomIcon() : false}
         sx={{
-          ...customSx,
+          backgroundColor: 'background.alertBox',
+          color: 'primary2.main',
+          '& .MuiAlertTitle-root': {
+            color: 'primary2.main'
+          },
+          '& .MuiTypography-root': {
+            color: 'primary2.main',
+            fontSize: 'body.md.regular'
+          },
+          '& a': theme => ({
+            color: `${theme.palette.primary2.main} !important`
+          }),
           textAlign: textAlign,
+          display: 'flex',
+          justifyContent: 'center',
           alignItems: 'flex-start',
           '& .MuiAlert-icon': {
             display: 'flex',
             alignItems: 'flex-start',
             mt: '0.35em'
           }
-        }}>
+        }
+        } >
         <AlertTitle>{title}</AlertTitle>
         {description && (
           <Typography
@@ -71,7 +78,7 @@ const AlertBox = ({
         )}
         {children}
       </Alert>
-    </Box>
+    </Box >
   )
 }
 export default AlertBox

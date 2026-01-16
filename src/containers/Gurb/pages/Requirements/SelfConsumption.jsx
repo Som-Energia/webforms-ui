@@ -8,8 +8,7 @@ import TextRecomendation from '../../components/TextRecomendation'
 import Chooser from '../../../../components/Chooser'
 import { buildGurbDialog } from '../../components/buildGurbDialog'
 
-import { iconRequirements } from '../../../../themes/commonStyles'
-import { iconOffRequirements } from '../../../../themes/gurbTheme'
+import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import PopUpContext from '../../../../context/PopUpContext'

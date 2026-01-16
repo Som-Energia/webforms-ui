@@ -30,6 +30,7 @@ export default function WebFormsTheme() {
         third: '#F0F3EC',
         button: '#C5F47C',
         hoverButton: '#B6E471',
+        alertBox: '#ffcdb580' // 50% opacidad primary2.main
       },
       error: {
         main: '#D33C3C'

@@ -180,8 +180,7 @@ const ContractReview = (props) => {
             id="contract_review_info_alert"
             description={t('GURB_CONTRACT_REVIEW_INFO')}
             severity={'warning'}
-            iconCustom={true}
-            iconCustomSeverity="info"
+            icon='info'
             variant={'body.md.regular'}
           />
         </Grid>

@@ -87,8 +87,7 @@ const GurbParticipation = (props) => {
           id="gurb_participation_info_alert"
           description={t(informationTextKey)}
           severity={'warning'}
-          iconCustom={true}
-          iconCustomSeverity="info"
+          icon="info"
           variant={'body.md.regular'}
         />
       </Box>

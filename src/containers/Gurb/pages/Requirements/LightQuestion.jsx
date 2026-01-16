@@ -6,8 +6,7 @@ import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 import Chooser from '../../../../components/Chooser'
 import TextRecomendation from '../../components/TextRecomendation'
 
-import { iconRequirements } from '../../../../themes/commonStyles'
-import { iconOffRequirements } from '../../../../themes/gurbTheme'
+import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
 
 import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
