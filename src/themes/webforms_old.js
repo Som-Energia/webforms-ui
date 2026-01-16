@@ -26,7 +26,8 @@ export default function OldWebFormsTheme() {
       background: {
         first: '#CED5D0',
         second: '#E2E8DE',
-        third: '#F0F3EC'
+        third: '#F0F3EC',
+        alertBox: '#ffcdb580' // 50% opacidad primary2.main
       },
       error: {
         main: '#D33C3C'
