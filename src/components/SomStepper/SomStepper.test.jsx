@@ -1,8 +1,10 @@
 import { render } from '@testing-library/react'
 import SomStepper from './SomStepper'
 
+const steps = { STEP1: 1, STEP2: 2, STEP3: 3 }
+
 test('SomStepper with steps renders without crashing', () => {
-  const { getByRole } = render(<SomStepper steps={['STEP1']} activeStep={1} />)
+  const { getByRole } = render(<SomStepper steps={steps} activeStep={1} />)
 
   expect(getByRole('progressbar')).toBeInTheDocument()
 })
@@ -14,9 +16,7 @@ test('SomStepper with stepsNum renders without crashing', () => {
 })
 
 test('SomStepper with steps renders exact number of steps', () => {
-  const { getByText } = render(
-    <SomStepper steps={['STEP1', 'STEP2', 'STEP3']} activeStep={1} />
-  )
+  const { getByText } = render(<SomStepper steps={steps} activeStep={1} />)
 
   expect(getByText('2/3')).toBeInTheDocument()
 })
@@ -33,8 +33,31 @@ test('SomStepper without steps renders without crashing', () => {
 
 test('SomStepper with step title renders without crashing', () => {
   const { getByText } = render(
-    <SomStepper steps={['STEP1', 'STEP2']} activeStep={1} showStepTitle={'STEP_TITLE'} />
+    <SomStepper steps={steps} activeStep={1} showStepTitle={'STEP_TITLE'} />
   )
 
-  expect(getByText('STEP_TITLE 2/2', { trim: false, collapseWhitespace: false })).toBeInTheDocument()
+  const expectedStepTitle = `STEP_TITLE 2/${Object.keys(steps).length}`
+  expect(
+    getByText(expectedStepTitle, { trim: false, collapseWhitespace: false })
+  ).toBeInTheDocument()
+})
+
+test('SomStepper render with progressbar', () => {
+  const activeStep = 1
+  const { getByRole } = render(
+    <SomStepper steps={steps} activeStep={activeStep} />
+  )
+
+  // Calculate the progress
+  // activeStep starts at 0
+  const internalActiveStep = activeStep + 1
+  const numSteps = Object.keys(steps).length
+  // Component calculate percent with Math.ceil
+  const expectedValue = Math.ceil((internalActiveStep / numSteps) * 100)
+
+  // Rendered progress value
+  const progressValue = Number(
+    getByRole('progressbar').getAttribute('aria-valuenow')
+  )
+  expect(expectedValue).toBe(progressValue)
 })
