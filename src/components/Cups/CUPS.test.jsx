@@ -5,13 +5,12 @@ import {
   screen,
   waitFor
 } from '@testing-library/react'
-import i18n from 'i18next'
 import { useState } from 'react'
-import { initReactI18next } from 'react-i18next'
 import { vi } from 'vitest'
 import { checkCups } from '../../services/api'
 import WebFormsTheme from '../../themes/webforms'
 import Cups from './CUPS'
+import { initI18n } from '../../tests/i18n.mock'
 
 // Mock the checkCups function
 vi.mock('../../services/api', () => ({
@@ -19,24 +18,9 @@ vi.mock('../../services/api', () => ({
 }))
 
 const webFormsTheme = WebFormsTheme()
-const initI18n = async () => {
-  // Initialize i18n for the test
-  return i18n.use(initReactI18next).init({
-    lng: 'en',
-    defaultNS: 'translationsNS',
-    resources: {
-      en: {
-        translationsNS: {
-          ERROR_INVALID_FIELD: 'Invalid field'
-        }
-      }
-    },
-    debug: false
-  })
-}
 
 const renderComponent = async (cupsNumber) => {
-  await initI18n()
+  await initI18n({ ERROR_INVALID_FIELD: 'Invalid field' })
 
   return render(<CupsWrapperComponent cupsNumber={cupsNumber} />)
 }

@@ -5,14 +5,13 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react'
-import i18n from 'i18next'
 import { useState, useEffect } from 'react'
-import { initReactI18next } from 'react-i18next'
 import { vi } from 'vitest'
 import { checkVat } from '../../services/api'
 import WebFormsTheme from '../../themes/webforms'
 import NifCif from './NifCif'
 import { LoadingContextProvider } from '../../context/LoadingContext'
+import { initI18n } from '../../tests/i18n.mock'
 
 // Mock the checkVat function
 vi.mock('../../services/api', () => ({
@@ -20,28 +19,20 @@ vi.mock('../../services/api', () => ({
 }))
 
 const webFormsTheme = WebFormsTheme()
-const initI18n = async () => {
-  // Initialize i18n for the test
-  return i18n.use(initReactI18next).init({
-    lng: 'en',
-    defaultNS: 'translationsNS',
-    resources: {
-      en: {
-        translationsNS: {
-          DNI_EXIST: 'DNI exists',
-          FILL_NIF: 'NIF is invalid',
-          INVALID_FORMAT: 'Invalid format',
-        },
-      },
-    },
-    debug: false,
-  })
-}
 
 const renderComponent = async (nifCifNumber, useEffectHandler) => {
-  await initI18n()
+  await initI18n({
+    DNI_EXIST: 'DNI exists',
+    FILL_NIF: 'NIF is invalid',
+    INVALID_FORMAT: 'Invalid format',
+  })
 
-  return render(<NifCifWrapperComponent nifCifNumber={nifCifNumber} useEffectHandler={useEffectHandler} />)
+  return render(
+    <NifCifWrapperComponent
+      nifCifNumber={nifCifNumber}
+      useEffectHandler={useEffectHandler}
+    />
+  )
 }
 
 const NifCifWrapperComponent = ({ nifCifNumber, useEffectHandler }) => {
