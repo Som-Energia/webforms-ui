@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import NifCif from '../../../components/NifCif'
+import NifCif from '../../../components/NifCif/NifCif'
 import PersonDataPhysical from '../../../components/PersonDataPhysical'
 import PersonDataJuridical from '../../../components/PersonDataJuridical'
 
