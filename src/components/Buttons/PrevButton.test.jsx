@@ -1,23 +1,30 @@
 import { render, queryByAttribute, screen } from '@testing-library/react'
 import PrevButton from './PrevButton'
+import { initI18n } from '../../tests/i18n.mock'
 
-test('PrevButton renders without crashing', () => {
-  const dom = render(<PrevButton/>)
+describe('PrevButton component ', async () => {
 
-  const getByDataCy = queryByAttribute.bind(null, 'data-cy')
-  const button = getByDataCy(dom.container, 'prev')
-  expect(button).toBeInTheDocument()
-})
+  // avoid warnings
+  await initI18n()
 
-test('PrevButton renders and title is shown', async () => {
-  render(<PrevButton title={'PREV'} />)
+  test('PrevButton renders without crashing', () => {
+    const dom = render(<PrevButton />)
 
-  const error = await screen.findByText('PREV')
-  expect(error).toBeInTheDocument()
-})
+    const getByDataCy = queryByAttribute.bind(null, 'data-cy')
+    const button = getByDataCy(dom.container, 'prev')
+    expect(button).toBeInTheDocument()
+  })
 
-test('PrevButton renders disabled', async () => {
-  const {getByText} = render(<PrevButton title={'PREV'} disabled={true}/>)
+  test('PrevButton renders and title is shown', async () => {
+    render(<PrevButton title={'PREV'} />)
 
-  expect(getByText('PREV')).toHaveAttribute('disabled')
+    const error = await screen.findByText('PREV')
+    expect(error).toBeInTheDocument()
+  })
+
+  test('PrevButton renders disabled', async () => {
+    const { getByText } = render(<PrevButton title={'PREV'} disabled={true} />)
+
+    expect(getByText('PREV')).toHaveAttribute('disabled')
+  })
 })

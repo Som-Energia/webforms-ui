@@ -1,29 +1,39 @@
 import { render, queryByAttribute, screen } from '@testing-library/react'
 import SubmitButton from './SubmitButton'
+import { initI18n } from '../../tests/i18n.mock'
 
-test('SubmitButton renders without crashing', () => {
-  const dom = render(<SubmitButton />)
+describe('SumitButton component ', async () => {
+  // avoid warnings
+  await initI18n()
 
-  const getByDataCy = queryByAttribute.bind(null, 'data-cy')
-  const button = getByDataCy(dom.container, 'next')
-  expect(button).toBeInTheDocument()
-})
+  test('SubmitButton renders without crashing', () => {
+    const dom = render(<SubmitButton />)
 
-test('SubmitButton renders and text is shown', async () => {
-  render(<SubmitButton text={'FINISH'} />)
+    const getByDataCy = queryByAttribute.bind(null, 'data-cy')
+    const button = getByDataCy(dom.container, 'next')
+    expect(button).toBeInTheDocument()
+  })
 
-  const error = await screen.findByText('FINISH')
-  expect(error).toBeInTheDocument()
-})
+  test('SubmitButton renders and text is shown', async () => {
+    render(<SubmitButton text={'FINISH'} />)
 
-test('SubmitButton renders disabled', async () => {
-  const { getByText } = render(<SubmitButton text={'FINISH'} disabled={true} />)
+    const error = await screen.findByText('FINISH')
+    expect(error).toBeInTheDocument()
+  })
 
-  expect(getByText('FINISH')).toHaveAttribute('disabled')
-})
+  test('SubmitButton renders disabled', async () => {
+    const { getByText } = render(
+      <SubmitButton text={'FINISH'} disabled={true} />
+    )
 
-test('SubmitButton renders sending', async () => {
-  const { getByRole } = render(<SubmitButton text={'FINISH'} sending={true} />)
+    expect(getByText('FINISH')).toHaveAttribute('disabled')
+  })
 
-  expect(getByRole('progressbar')).toBeInTheDocument()
+  test('SubmitButton renders sending', async () => {
+    const { getByRole } = render(
+      <SubmitButton text={'FINISH'} sending={true} />
+    )
+
+    expect(getByRole('progressbar')).toBeInTheDocument()
+  })
 })

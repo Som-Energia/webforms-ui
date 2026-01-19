@@ -42,7 +42,7 @@ const AlertRequirement = ({
   const icon = icons[severity] || icons.alert
 
   return (
-    <Grid data-testId={`alert-${severity}`} container spacing={2} align={'center'}>
+    <Grid data-testid={`alert-${severity}`} container spacing={2} align={'center'}>
       <Grid item xs={12}>
         <Grid align={'center'} container rowSpacing={1} sx={containerStyles}>
           <Grid item xs={12}>

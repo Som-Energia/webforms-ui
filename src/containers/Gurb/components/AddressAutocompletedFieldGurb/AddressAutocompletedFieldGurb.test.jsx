@@ -4,42 +4,47 @@ import {
   queryByAttribute,
   fireEvent,
   screen,
-  waitFor
+  waitFor,
 } from '@testing-library/react'
-import { vi } from 'vitest';
+import { vi } from 'vitest'
+import { initI18n } from '../../../../tests/i18n.mock'
 
-test('AddressAutocompletedFieldGurb renders without crashing', () => {
-  const dom = render(
-    <AddressAutocompletedFieldGurb
-      value="Montilivi"
-    />
-  )
+describe('AddressAutocompletedFieldGurb component ', async () => {
 
-  const getByDataCy = queryByAttribute.bind(null, 'data-cy')
-  const input = getByDataCy(dom.container, 'street')
-  expect(input).toBeInTheDocument()
-})
+  // avoid warnings
+  await initI18n()
 
+  test('AddressAutocompletedFieldGurb renders without crashing', () => {
+    const dom = render(<AddressAutocompletedFieldGurb value="Montilivi" />)
 
-test('AddressAutocompletedFieldGurb calls onChange with correct code on blur', async () => {
-  const mockOnChange = vi.fn()
+    const getByDataCy = queryByAttribute.bind(null, 'data-cy')
+    const input = getByDataCy(dom.container, 'street')
+    expect(input).toBeInTheDocument()
+  })
 
-  render(
-    <AddressAutocompletedFieldGurb
-      value="Montilivi"
-      onChange={mockOnChange}
-    />
-  )
+  test('AddressAutocompletedFieldGurb calls onChange with correct code on blur', async () => {
+    const mockOnChange = vi.fn()
 
-  const combobox = screen.getByRole('combobox')
-
-  // Simulate user changing the input value
-  fireEvent.change(combobox, { target: { value: 'Avinguda de Montilivi, Girona' } })
-  fireEvent.blur(combobox)
-
-  await waitFor(() => {
-    expect(mockOnChange).toHaveBeenCalledWith(
-      { id: null, street: 'Avinguda de Montilivi, Girona' }
+    render(
+      <AddressAutocompletedFieldGurb
+        value="Montilivi"
+        onChange={mockOnChange}
+      />
     )
+
+    const combobox = screen.getByRole('combobox')
+
+    // Simulate user changing the input value
+    fireEvent.change(combobox, {
+      target: { value: 'Avinguda de Montilivi, Girona' },
+    })
+    fireEvent.blur(combobox)
+
+    await waitFor(() => {
+      expect(mockOnChange).toHaveBeenCalledWith({
+        id: null,
+        street: 'Avinguda de Montilivi, Girona',
+      })
+    })
   })
 })

@@ -3,12 +3,12 @@ import SelectField from './SelectField'
 
 const mockOptionsArray = [
   { id: '1', name: 'OPTION1' },
-  { id: '2', name: 'OPTION2' }
+  { id: '2', name: 'OPTION2' },
 ]
 
 const mockOptionsObject = {
   3: 'OPTION1',
-  4: 'OPTION2'
+  4: 'OPTION2',
 }
 
 const renderWithArray = (options) => {
@@ -33,29 +33,31 @@ const getSelectValues = (renderResult) => {
   return options.map((li) => li.getAttribute('data-value'))
 }
 
-test('SelectField renders and empty arrays of options', async () => {
-  renderWithArray([])
+describe('SelectField component ', () => {
+  test('SelectField renders and empty arrays of options', async () => {
+    renderWithArray([])
 
-  const label = await screen.findByText('LABEL')
-  expect(label).toBeInTheDocument()
-})
+    const label = await screen.findByText('LABEL')
+    expect(label).toBeInTheDocument()
+  })
 
-test('SelectField renders and empty object of options', async () => {
-  renderWithObject({})
+  test('SelectField renders and empty object of options', async () => {
+    renderWithObject({})
 
-  const label = await screen.findByText('LABEL')
-  expect(label).toBeInTheDocument()
-})
+    const label = await screen.findByText('LABEL')
+    expect(label).toBeInTheDocument()
+  })
 
-test('SelectField renders and show the correct options', () => {
-  const optionValues = getSelectValues(renderWithArray(mockOptionsArray))
-  const mockOptionsIds = mockOptionsArray.map((item) => item.id)
-  expect(optionValues).toEqual(mockOptionsIds)
-})
+  test('SelectField renders and show the correct options', () => {
+    const optionValues = getSelectValues(renderWithArray(mockOptionsArray))
+    const mockOptionsIds = mockOptionsArray.map((item) => item.id)
+    expect(optionValues).toEqual(mockOptionsIds)
+  })
 
-test('SelectField renders and object of options', async () => {
-  const optionValues = getSelectValues(renderWithObject(mockOptionsObject))
+  test('SelectField renders and object of options', async () => {
+    const optionValues = getSelectValues(renderWithObject(mockOptionsObject))
 
-  const mockOptionsIds = Object.keys(mockOptionsObject)
-  expect(mockOptionsIds).toEqual(optionValues)
+    const mockOptionsIds = Object.keys(mockOptionsObject)
+    expect(mockOptionsIds).toEqual(optionValues)
+  })
 })
