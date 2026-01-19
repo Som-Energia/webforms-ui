@@ -95,8 +95,6 @@ const NifCif = (props) => {
           required={true}
           customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />
-        <div>VALUES: <pre>{ JSON.stringify(values || {}) }</pre></div>
-        <div>ERROR: <pre>{ JSON.stringify(errors || {})}</pre></div>
       </Grid>
     </>
   )
