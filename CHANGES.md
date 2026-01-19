@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- NEW: jest unit tests
+
 ## 6.6.0 2026-01-15
 
 - IMP: Add autocomplete floor input component
