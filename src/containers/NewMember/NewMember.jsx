@@ -49,12 +49,8 @@ const NewMemberForm = (props) => {
   const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
-
-  useEffect(() => {
-    if (language && i18n.language !== language) {
-      i18n.changeLanguage(language)
-    }
-  }, [language, i18n])
+ 
+  useSyncLanguage(language)
 
   const initialValues = {
     address: {
