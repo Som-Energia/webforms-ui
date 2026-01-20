@@ -8,7 +8,7 @@ const SelectField = (props) => {
     required = false,
     label,
     fieldName,
-    value,
+    value = '',
     options,
     setFieldValue,
     onChange,
