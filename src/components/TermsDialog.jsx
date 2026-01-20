@@ -6,7 +6,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { buttonGurbDark, buttonGurbLight } from './Buttons/buttonStyles'
+import { buttonDark, buttonLight } from './Buttons/buttonStyles'
 
 const TermsDialog = ({
   open,
@@ -40,7 +40,7 @@ const TermsDialog = ({
         {onClose && (
           <Button
             sx={{
-              ...buttonGurbLight,
+              ...buttonLight,
               color: 'secondary',
               height: '40px',
               padding: '13px 18px',
@@ -54,7 +54,7 @@ const TermsDialog = ({
         )}
         <Button
           sx={{
-            ...buttonGurbDark,
+            ...buttonDark,
             height: '40px',
             padding: '13px 18px',
             boxSizing: 'border-box'

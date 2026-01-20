@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import { buttonGurbDark } from '../../../../components/Buttons/buttonStyles'
+import { buttonDark } from '../../../../components/Buttons/buttonStyles'
 
 import InputField from '../../../../components/InputField/InputField'
 import LocationInput from '../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb'
@@ -134,7 +134,7 @@ const AddressField = ({
         <Button
           tabIndex={0}
           sx={{
-            ...buttonGurbDark,
+            ...buttonDark,
             height: '40px',
             padding: '10px 48px',
             boxSizing: 'border-box',

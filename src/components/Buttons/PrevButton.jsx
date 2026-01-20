@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import ArrowBack from '@mui/icons-material/ArrowBack'
 import Box from '@mui/material/Box'
 
-import { buttonGurbLight } from './buttonStyles'
+import { buttonLight } from './buttonStyles'
 
 function PrevButton(props) {
   const { onClick, disabled, title = 'PREV' } = props
@@ -14,7 +14,7 @@ function PrevButton(props) {
     <Button
       tabIndex={0}
       sx={{
-        ...buttonGurbLight,
+        ...buttonLight,
         height: '40px',
         padding: '13px 18px',
         boxSizing: 'border-box'

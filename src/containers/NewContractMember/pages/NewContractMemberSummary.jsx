@@ -4,7 +4,7 @@ import ReviewTable from '../../../components/review/ReviewTable'
 import ReviewPricesTable from '../../../components/review/ReviewPrices'
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { buttonGurbLight } from '../../../components/Buttons/buttonStyles'
+import { buttonLight } from '../../../components/Buttons/buttonStyles'
 import Button from '@mui/material/Button'
 
 import Typography from '@mui/material/Typography'
@@ -457,7 +457,7 @@ const NewContractMemberSummary = (props) => {
             id="edit_button"
             size="small"
             sx={{
-              ...buttonGurbLight,
+              ...buttonLight,
               minWidth: 'auto',
               width: 'auto',
               // padding: '6px 15px',

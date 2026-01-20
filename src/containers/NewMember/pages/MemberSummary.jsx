@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
-import { buttonGurbLight } from '../../../components/Buttons/buttonStyles'
+import { buttonLight } from '../../../components/Buttons/buttonStyles'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
@@ -213,7 +213,7 @@ const MemberSummary = (props) => {
             id="edit_button"
             size="small"
             sx={{
-              ...buttonGurbLight,
+              ...buttonLight,
               minWidth: 'auto',
               width: 'auto',
               fontSize: '0.90rem',

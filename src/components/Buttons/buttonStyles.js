@@ -4,7 +4,7 @@ export const textBody1 = {
   fontSize: '16px'
 }
 
-export const buttonGurbDark = {
+export const buttonDark = {
   ...textBody1,
   textTransform: 'none',
   borderRadius: '2rem',
@@ -26,7 +26,7 @@ export const buttonGurbDark = {
   width: '100%'
 }
 
-export const buttonGurbLight = {
+export const buttonLight = {
   ...textBody1,
   textTransform: 'capitalize',
   border: '1px solid secondary.light',
