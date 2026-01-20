@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
 import ArrowForward from '@mui/icons-material/ArrowForward'
-import { buttonGurbDark } from '../../themes/gurbTheme'
+import { buttonGurbDark } from './buttonStyles'
 
 function NextButton(props) {
   const { onClick, disabled, title = "NEXT" } = props

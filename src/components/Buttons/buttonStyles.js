@@ -1,7 +1,3 @@
-export const PREV_COLOR = 'background.button'
-export const NEXT_COLOR = 'secondary.light'
-
-
 export const textBody1 = {
   fontFamily: 'Outfit',
   color: 'secondary.dark',
@@ -57,10 +53,4 @@ export const buttonGurbLight = {
     }
   },
   width: '100%'
-}
-
-export const link = {  //TODO: Remove it after rebasing with ...
-  fontFamily: 'Inter',
-  color: '#000000',
-  fontSize: '14px'
 }
