@@ -8,13 +8,7 @@ import Stack from '@mui/material/Stack'
 import CancelIcon from '@mui/icons-material/Cancel'
 import Typography from '@mui/material/Typography'
 import CustomDialog from '../../../../components/CustomDialog'
-
-import CustomDialog from '../../../components/CustomDialog'
-
-import useCheckMobileScreen from '../../../services/checkMobileScreen'
-
 import useCheckMobileScreen from '../../../../services/checkMobileScreen'
-import { dialogText } from '../../../../themes/gurbTheme'
 
 
 const SimpleGurbDialog = ({

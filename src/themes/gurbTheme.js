@@ -2,13 +2,6 @@ export const PREV_COLOR = 'background.button'
 export const NEXT_COLOR = 'secondary.light'
 
 
-export const textHeader4 = {  //TODO: Remove it after rebasing with ...
-  fontFamily: 'Outfit',
-  color: 'primary.dark',
-  fontSize: '16px',
-  fontWeight: '500'
-}
-
 export const textBody1 = {
   fontFamily: 'Outfit',
   color: 'secondary.dark',

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
+import { autocompleteAddressInput } from '../../../../themes/commonStyles'
 import InputTitle from '../../../../components/InputTitle'
 
 export default function AddressAutocompletedFieldGurb({
