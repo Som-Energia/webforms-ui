@@ -531,13 +531,11 @@ const App = (props) => {
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
                         <PopUpContextProvider>
-                          <GurbErrorContextProvider>
                             <LoadingContextProvider>
                               <SummaryContextProvider>
                                 <GurbFormRequirements {...props} />
                               </SummaryContextProvider>
                             </LoadingContextProvider>
-                          </GurbErrorContextProvider>
                         </PopUpContextProvider>
                       </ThemeWrapper>
                     }
@@ -548,13 +546,11 @@ const App = (props) => {
                     path="/:language/gurb/:code/join/"
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                        <GurbErrorContextProvider>
                           <LoadingContextProvider>
                             <SummaryContextProvider>
                               <GurbFormJoin {...props} />
                             </SummaryContextProvider>
                           </LoadingContextProvider>
-                        </GurbErrorContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -564,13 +560,11 @@ const App = (props) => {
                     path="/:language/gurb/gurb_url_ok"
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                        <GurbErrorContextProvider>
                           <LoadingContextProvider>
                             <SummaryContextProvider>
                               <GurbContractPaymentSuccessful {...props} />
                             </SummaryContextProvider>
                           </LoadingContextProvider>
-                        </GurbErrorContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -602,13 +596,11 @@ const App = (props) => {
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                        <GurbErrorContextProvider>
                           <LoadingContextProvider>
                             <SummaryContextProvider>
                               <NewMemberForm {...props} />
                             </SummaryContextProvider>
                           </LoadingContextProvider>
-                        </GurbErrorContextProvider>
                       </ThemeWrapper>
                     }
                   />
