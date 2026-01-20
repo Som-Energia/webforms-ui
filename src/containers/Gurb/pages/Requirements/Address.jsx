@@ -6,14 +6,10 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { buttonGurbDark } from '../../../../themes/gurbTheme'
 
-import InputField from '../../../../components/InputField'
-import LocationInput from '../../../../containers/Gurb/components/AddressAutocompletedFieldGurb'
-import TextRecomendation from '../../components/TextRecomendation'
+import InputField from '../../../../components/InputField/InputField'
+import LocationInput from '../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
-import {
-  useHandleChange,
-  useHandleChangeInteger
-} from '../../../../hooks/useHandleChange'
 import { useAddressHandlers } from '../../../../hooks/useGurbAddressHandlers'
 
 const AddressField = ({
@@ -48,14 +44,10 @@ const AddressField = ({
     gurbCode
   })
 
-  // Local generic change handlers
-  const handleChange = useHandleChange(setFieldValue)
-  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation
+        <TextRecommendation
           title={t('GURB_ADDRESS_TITLE')}
           text={t('GURB_ADDRESS_TITLE_HELPER')}
           isHeader

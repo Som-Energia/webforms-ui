@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 
-import { checkPhisicalVAT, checkVatFormat } from '../services/utils'
-import { checkVat } from '../services/api'
-import LoadingContext from '../context/LoadingContext'
+import { checkPhisicalVAT, checkVatFormat } from '../../services/utils'
+import { checkVat } from '../../services/api'
+import LoadingContext from '../../context/LoadingContext'
 
-import InputField from './InputField'
-import { useHandleChangeNif } from '../hooks/useHandleChange'
-import { useHandleBlur } from '../hooks/useHandleBlur'
+import InputField from '../InputField/InputField'
+import { useHandleChangeNif } from '../../hooks/useHandleChange'
+import { useHandleBlur } from '../../hooks/useHandleBlur'
 
 const NifCif = (props) => {
   const {
@@ -32,13 +32,13 @@ const NifCif = (props) => {
   const handleBlur = useHandleBlur(setFieldTouched)
 
   const handleCheckNifResponse = async () => {
-    let nif_info = undefined
+    let nif_info
     await checkVat(values[entity]?.nif)
       .then((response) => {
         nif_info = response?.data
       })
-      .catch(() => {
-        console.error('UNEXPECTED')
+      .catch((e) => {
+        console.error('UNEXPECTED', e)
       })
     setFieldError(`${entity}.nif`, undefined)
     if (nif_info?.is_member === true) {
@@ -74,6 +74,7 @@ const NifCif = (props) => {
           nif_valid: validationObj.isValid
         }
       })
+
       handleNifValidations()
     }
   }, [values[entity]?.nif])
@@ -90,7 +91,7 @@ const NifCif = (props) => {
           handleBlur={handleBlur}
           touched={touched[entity]?.nif}
           value={values[entity]?.nif}
-          error={errors[entity]?.nif || errors[entity]?.nif_valid}
+          error={errors[entity]?.nif }
           required={true}
           customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />

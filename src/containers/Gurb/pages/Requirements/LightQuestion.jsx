@@ -3,38 +3,33 @@ import { useTranslation } from 'react-i18next'
 
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 
-import Chooser from '../../../../components/Chooser'
-import TextRecomendation from '../../components/TextRecomendation'
+import Chooser from '../../../../components/Chooser/Chooser'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
 
-import GurbErrorContext from '../../../../context/GurbErrorContext'
 import Grid from '@mui/material/Grid'
 
 import PopUpContext from '../../../../context/PopUpContext'
-import { buildGurbDialog } from '../../components/buildGurbDialog'
+import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
   const { setContent } = useContext(PopUpContext)
 
   const handleLightQuestion = (value) => {
     setFieldValue('has_light', value)
 
     if (value === 'light-off') {
-      setError(true)
       setContent(
-        buildGurbDialog({
-          severity: 'warning',
-          setContent: setContent,
-          text1Key: t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT'),
-          text2Key: t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')
-        })
+        <SimpleGurbDialog
+          severity="warning"
+          setContent={setContent}
+          text1={t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT')}
+          text2={t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')}
+        />
       )
-    } else {
-      setError(false)
     }
   }
 

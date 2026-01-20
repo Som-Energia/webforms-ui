@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 
 import { checkCadastralReference } from '../services/api'
 import LoadingContext from '../context/LoadingContext'

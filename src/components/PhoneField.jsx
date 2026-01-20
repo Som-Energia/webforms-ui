@@ -11,7 +11,7 @@ import { getCountryCallingCode, getCountries } from 'libphonenumber-js/core'
 import { isValidPhoneNumber } from 'libphonenumber-js'
 
 import InputTitle from './InputTitle'
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 
 const SelectCountry = ({ code, handleChange, codes }) => {
   return (

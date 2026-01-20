@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import InputTitle from '../../../components/InputTitle'
+import InputTitle from '../../../../components/InputTitle'
 
-const TextRecomendation = ({ title, text, required, isHeader }) => {
+const TextRecommendation = ({ title, text, required, isHeader }) => {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -23,4 +23,4 @@ const TextRecomendation = ({ title, text, required, isHeader }) => {
     </Grid>
   )
 }
-export default TextRecomendation
+export default TextRecommendation

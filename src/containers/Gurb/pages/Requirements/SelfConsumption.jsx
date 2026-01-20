@@ -4,32 +4,29 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
-import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../../../components/Chooser'
-import { buildGurbDialog } from '../../components/buildGurbDialog'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
+import Chooser from '../../../../components/Chooser/Chooser'
+import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
 import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
 
-import GurbErrorContext from '../../../../context/GurbErrorContext'
 import PopUpContext from '../../../../context/PopUpContext'
 
 const SelfConsumption = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
-  const { setError, setErrorInfo } = useContext(GurbErrorContext)
   const { setContent } = useContext(PopUpContext)
 
   const handleSelfconsumptionQuestion = (value) => {
     setFieldValue('has_selfconsumption', value)
     if (value === 'selfconsumption-on') {
-      setError(true)
       setContent(
-        buildGurbDialog({
-          severity: 'warning',
-          setContent: setContent,
-          text1Key: t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT'),
-          text2Key: t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT')
-        })
+        <SimpleGurbDialog
+          severity="warning"
+          setContent={setContent}
+          text1={t('GURB_SELFCONSUMPTION_ERROR_MAIN_TEXT')}
+          text2={t('GURB_SELFCONSUMPTION_ERROR_SECONDARY_TEXT')}
+        />
       )
     }
   }
@@ -50,7 +47,7 @@ const SelfConsumption = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecomendation
+        <TextRecommendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
           text={t('GURB_SELFCONSUMPTION_HELPER')}
           isHeader

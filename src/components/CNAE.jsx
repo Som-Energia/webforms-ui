@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography'
 
 import { checkCnae } from '../services/api'
 import LoadingContext from '../context/LoadingContext'
-import InputField from './InputField'
-import SelectField from './SelectField'
+
+import InputField from './InputField/InputField'
+import SelectField from './SelectField/SelectField'
 
 
 const CnaeField = (props) => {

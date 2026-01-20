@@ -5,7 +5,7 @@ import { getPlaceDetails, searchPlace } from '../services/googleApiClient'
 import { checkGurbDistance } from '../services/apiGurb'
 import GurbOutOfPerimeterError from '../containers/Gurb/validations/GurbErrors'
 import { addressValidations } from '../containers/Gurb/validations/requirementsValidations'
-import { buildGurbDialog } from '../containers/Gurb/components/buildGurbDialog'
+import SimpleGurbDialog from '../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
 
 /** Resets geo-related fields */
 const clearAddressGeoFields = (setFieldValue, addressFieldName) => {
@@ -216,31 +216,31 @@ export const useAddressHandlers = ({
       }
       if (updates?.address?.lat || updates?.address?.long) {
         setContent(
-          buildGurbDialog({
-            severity: 'error',
-            setContent: setContent,
-            titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-            text1Key: t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')
-          })
+          <SimpleGurbDialog
+            severity="error"
+            setContent={setContent}
+            title={t('GURB_ADDRESS_ERROR_UNEXPECTED')}
+            text1={t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')}
+          />
         )
       } else if (err instanceof GurbOutOfPerimeterError) {
         setContent(
-          buildGurbDialog({
-            severity: 'error',
-            setContent: setContent,
-            titleKey: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT'),
-            text1Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT'),
-            text2Key: t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT')
-          })
+          <SimpleGurbDialog
+            severity="error"
+            setContent={setContent}
+            title={t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT')}
+            text1={t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT')}
+            text2={t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT')}
+          />
         )
       } else {
         setContent(
-          buildGurbDialog({
-            severity: 'error',
-            setContent: setContent,
-            titleKey: t('GURB_ADDRESS_ERROR_UNEXPECTED'),
-            text1Key: t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT')
-          })
+          <SimpleGurbDialog
+            severity="error"
+            setContent={setContent}
+            title={t('GURB_ADDRESS_ERROR_UNEXPECTED')}
+            text1={t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT')}
+          />
         )
       }
     } finally {

@@ -11,7 +11,7 @@ import Box from '@mui/material/Box'
 import PrevButton from '../../components/Buttons/PrevButton'
 import NextButton from '../../components/Buttons/NextButton'
 import SubmitButton from '../../components/Buttons/SubmitButton'
-import SomStepper from '../../components/SomStepper'
+import SomStepper from '../../components/SomStepper/SomStepper'
 
 import { newNormalizeMember } from '../../services/utils'
 import { member } from '../../services/api'

@@ -1,16 +1,15 @@
 import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import floorTypes from '../data/floor-types.json'
+import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloorInput'
 import Grid from '@mui/material/Grid'
 import LocationInput from './AddressAutocompletedField'
-import {
-  useHandleChange,
-  useHandleChangeInteger
-} from '../hooks/useHandleChange'
+import { useHandleChange } from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 import StateCity from './StateCity'
 
 const normalizePlace = (place) => ({
@@ -24,8 +23,7 @@ const updateAddressValues = async (
   values,
   setValues,
   addressFieldName,
-  sessionTokenRef,
-  onChangeStateCity
+  sessionTokenRef
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
@@ -168,13 +166,16 @@ const AddressField = ({
     setNumberValue(cleanedValue)
     setFieldValue(`${addressFieldName}.number`, cleanedValue)
   }
-
   const handleChange = useHandleChange(setFieldValue)
-  const handleChangeInteger = useHandleChangeInteger(setFieldValue)
+  const handleChangeFloor = useHandleChange(setFieldValue)
+  const floorOptions = (floorTypes || []).map((item) => ({
+    code: item.code,
+    translation: t(item.translationKey)
+  }))
 
   const handleChangeStateAndCity = async (value) => {
-    await setFieldValue(`${addressFieldName}.city`,value?.city)
-    setFieldValue(`${addressFieldName}.state`,value?.state)
+    await setFieldValue(`${addressFieldName}.city`, value?.city)
+    setFieldValue(`${addressFieldName}.state`, value?.state)
   }
 
   return (
@@ -188,7 +189,7 @@ const AddressField = ({
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
           error={
             touched[addressFieldName]?.street &&
-              errors[addressFieldName]?.street
+            errors[addressFieldName]?.street
               ? errors[addressFieldName].street
               : false
           }
@@ -210,7 +211,7 @@ const AddressField = ({
           value={postalCodeValue}
           error={
             touched[addressFieldName]?.postal_code &&
-              errors[addressFieldName]?.postal_code
+            errors[addressFieldName]?.postal_code
               ? t(errors[addressFieldName].postal_code)
               : ''
           }
@@ -230,7 +231,7 @@ const AddressField = ({
         />
       </Grid>
 
-      <Grid item sm={4} xs={12}>
+      <Grid item sm={2} xs={6}>
         <InputField
           name={`${addressFieldName}.number`}
           handleBlur={() => setFieldTouched(`${addressFieldName}.number`, true)}
@@ -241,7 +242,7 @@ const AddressField = ({
           value={numberValue}
           error={
             touched[addressFieldName]?.number &&
-              errors[addressFieldName]?.number
+            errors[addressFieldName]?.number
               ? t(errors[addressFieldName].number)
               : ''
           }
@@ -251,23 +252,12 @@ const AddressField = ({
 
       <Grid item sm={2} xs={6}>
         <InputField
-          name={`${addressFieldName}.floor`}
-          textFieldName={t('FLOOR')}
-          handleChange={handleChangeInteger}
-          touched={touched[addressFieldName]?.floor}
-          value={values[addressFieldName]?.floor}
-          error={errors[addressFieldName]?.floor}
-        />
-      </Grid>
-
-      <Grid item sm={2} xs={6}>
-        <InputField
-          name={`${addressFieldName}.door`}
-          textFieldName={t('DOOR')}
+          name={`${addressFieldName}.bloc`}
+          textFieldName={t('BLOCK')}
           handleChange={handleChange}
-          touched={touched[addressFieldName]?.door}
-          value={values[addressFieldName]?.door}
-          error={errors[addressFieldName]?.door}
+          touched={touched[addressFieldName]?.bloc}
+          value={values[addressFieldName]?.bloc}
+          error={errors[addressFieldName]?.bloc}
         />
       </Grid>
 
@@ -282,14 +272,27 @@ const AddressField = ({
         />
       </Grid>
 
+      <Grid item sm={4} xs={12}>
+        <InputField
+          textFieldName={t('FLOOR')}
+          textFieldHelper={t('FLOOR_HELPER')}>
+          <SomAutocompleteFloorInput
+            fieldName={`${addressFieldName}.floor`}
+            options={floorOptions}
+            value={values[addressFieldName]?.floor}
+            error={errors[addressFieldName]?.floor}
+            onChangeHandler={handleChangeFloor}></SomAutocompleteFloorInput>
+        </InputField>
+      </Grid>
+
       <Grid item sm={2} xs={6}>
         <InputField
-          name={`${addressFieldName}.bloc`}
-          textFieldName={t('BLOCK')}
+          name={`${addressFieldName}.door`}
+          textFieldName={t('DOOR')}
           handleChange={handleChange}
-          touched={touched[addressFieldName]?.bloc}
-          value={values[addressFieldName]?.bloc}
-          error={errors[addressFieldName]?.bloc}
+          touched={touched[addressFieldName]?.door}
+          value={values[addressFieldName]?.door}
+          error={errors[addressFieldName]?.door}
         />
       </Grid>
     </Grid>

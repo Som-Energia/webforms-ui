@@ -1,15 +1,14 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
-import { buttonGurbDark } from '../../../themes/gurbTheme'
+import { buttonGurbDark } from '../../../../themes/gurbTheme'
 import {
   redirectUrlDescription,
   redirectUrlTitle,
   redirectUrlButton
-} from '../../../themes/commonStyles'
+} from '../../../../themes/commonStyles'
 
 const RedirectUrl = ({
   title = 'somenergia redirect url component',

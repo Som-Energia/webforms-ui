@@ -27,7 +27,7 @@ import Contact from './ModifyContract/Contact'
 import Resume from './ModifyContract/Resume'
 
 import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
-import AlertBox from '../components/AlertBox'
+import AlertBox from '../components/AlertBox/AlertBox'
 
 const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'

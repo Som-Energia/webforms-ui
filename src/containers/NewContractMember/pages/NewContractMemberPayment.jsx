@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography'
 import { InvoiceIcon, CreditCardIcon } from '../../../data/icons/Icons'
 import { checkIbanFormat } from '../../../services/utils'
 
-import Chooser from '../../../components/Chooser'
+import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
-import InputField from '../../../components/InputField'
+import InputField from '../../../components/InputField/InputField'
 import TermsDialog from '../../../components/TermsDialog'
 
 const PaymentMethod = (props) => {
