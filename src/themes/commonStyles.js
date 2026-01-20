@@ -56,3 +56,9 @@ export const redirectUrlButton = {
   textTransform: 'none',
   p: 1.5
 }
+
+export const autocompleteAddressInput = {
+  '& .MuiFormHelperText-root': { color: 'secondary.main' },
+  '& .MuiInputLabel-root': { color: 'secondary.main' },
+  '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
+}

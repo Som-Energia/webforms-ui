@@ -9,16 +9,10 @@ export const textHeader4 = {  //TODO: Remove it after rebasing with ...
   fontWeight: '500'
 }
 
-export const textBody1 = {  //TODO: Remove it after rebasing with ...
+export const textBody1 = {
   fontFamily: 'Outfit',
   color: 'secondary.dark',
   fontSize: '16px'
-}
-
-export const autocompleteAddressInput = {
-  '& .MuiFormHelperText-root': { color: 'secondary.main' },
-  '& .MuiInputLabel-root': { color: 'secondary.main' },
-  '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
 }
 
 export const buttonGurbDark = {
