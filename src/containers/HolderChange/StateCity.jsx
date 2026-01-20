@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useTransition } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CircularProgress from '@mui/material/CircularProgress'
@@ -28,12 +28,12 @@ const StateCity = (props) => {
 
   const [state, setState] = useState(stateInitial)
   const [states, setStates] = useState([])
-  const [isLoadingStates, setIsLoadingStates] = useState(false)
+  const [isPendingStates, startStatesTransition] = useTransition()
+  const [isPendingCities, startCitiesTransition] = useTransition()
 
   const [city, setCity] = useState(cityInitial)
   const [cities, setCities] = useState([])
   const [citiesNames, setCitiesNames] = useState([])
-  const [isLoadingCities, setIsLoadingCities] = useState(false)
 
   useEffect(() => {
     setState(stateInitial)
@@ -41,41 +41,40 @@ const StateCity = (props) => {
   }, [stateInitial, cityInitial])
 
   useEffect(() => {
-    setIsLoadingStates(true)
-    getProvincies()
-      .then((response) => {
-        const provincies = {}
-        response?.data?.provincies &&
-          response.data.provincies.forEach(({ id, name }) => {
-            provincies[id] = name
-          })
-        setStates(provincies)
-        setIsLoadingStates(false)
-      })
-      .catch((error) => {
-        console.error(error)
-        setIsLoadingStates(false)
-      })
+    startStatesTransition(() => {
+      getProvincies()
+        .then((response) => {
+          const provincies = {}
+          response?.data?.provincies &&
+            response.data.provincies.forEach(({ id, name }) => {
+              provincies[id] = name
+            })
+          setStates(provincies)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    })
   }, [])
 
   useEffect(() => {
     if (state && state?.id !== '') {
-      setIsLoadingCities(true)
-      getMunicipis(state.id)
-        .then((response) => {
-          const municipisNames = {}
-          response?.data?.municipis &&
-            response.data.municipis.forEach(({ id, name }) => {
-              municipisNames[id] = name
-            })
-          setCities(response?.data?.municipis)
-          setCitiesNames(municipisNames)
-          setIsLoadingCities(false)
-        })
-        .catch((error) => {
-          console.error(error)
-          setIsLoadingCities(false)
-        })
+      startCitiesTransition(() => {
+        getMunicipis(state.id)
+          .then((response) => {
+            const municipisNames = {}
+            response?.data?.municipis &&
+              response.data.municipis.forEach(({ id, name }) => {
+                municipisNames[id] = name
+              })
+            setCities(response?.data?.municipis)
+            setCitiesNames(municipisNames)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      })
+
     }
   }, [state])
 
@@ -126,7 +125,7 @@ const StateCity = (props) => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                {isLoadingStates && <CircularProgress size={24} />}
+                {isPendingStates && <CircularProgress size={24} />}
               </InputAdornment>
             )
           }}>
@@ -158,7 +157,7 @@ const StateCity = (props) => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                {isLoadingCities && <CircularProgress size={24} />}
+                {isPendingCities && <CircularProgress size={24} />}
               </InputAdornment>
             )
           }}>
