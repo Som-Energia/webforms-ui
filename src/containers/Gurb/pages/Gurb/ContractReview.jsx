@@ -51,9 +51,17 @@ const CustomCheckBox = (props) => {
   )
 }
 
+
+
 const ContractReview = (props) => {
   const { t } = useTranslation()
   const { values, setFieldValue } = props
+
+  const formatGurbCost = () => {
+    const value = values?.gurb?.join_cost
+    return typeof value !== 'number' || Number.isNaN(value) ? Number.parseFloat(value)?.toFixed(2) : value.toFixed(2);
+  }
+
 
   return (
     <>
@@ -85,7 +93,7 @@ const ContractReview = (props) => {
               </Typography>
               <ReviewField
                 value={t('GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION', {
-                  join_cost: values?.gurb?.join_cost
+                  join_cost: formatGurbCost(values?.gurb?.join_cost)
                 })}
               />
             </Grid>
@@ -123,11 +131,11 @@ const ContractReview = (props) => {
                 value={
                   values?.gurb?.surplus_compensation
                     ? t(
-                        'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION'
-                      )
+                      'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION'
+                    )
                     : t(
-                        'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION'
-                      )
+                      'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION'
+                    )
                 }
               />
             </Grid>
