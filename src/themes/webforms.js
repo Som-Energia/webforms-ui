@@ -1,7 +1,6 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
-export const BUTTON_BG = '#ffcdb5'
-export const SECONDARY_LIGHT = 'D9D9D9'
+export const SECONDARY_LIGHT = '#D9D9D9'
 
 export default function WebFormsTheme() {
   const theme = createTheme({
@@ -16,7 +15,7 @@ export default function WebFormsTheme() {
       },
       primary2: {
         main: '#ff632b',
-        light: BUTTON_BG,
+        light: '#ffcdb5',
         alt: '#afb5e8'
       },
       secondary: {

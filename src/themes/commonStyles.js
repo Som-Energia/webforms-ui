@@ -1,31 +1,15 @@
-
-export const chooserStyles = {
-  paddingTop: '1.5rem',
-  paddingBottom: '2rem',
-  paddingLeft: '1.625rem',
-  paddingRight: '1.625rem',
+export const iconRequirements = ({ theme, padding = '8px' }) => ({
   borderRadius: '8px',
-  border: '1px solid secondary.light',
-  cursor: 'pointer'
-}
-
-export const chooserSelectedStyles = {
-  ...chooserStyles,
-  backgroundColor: 'secondary.extraLight'
-}
-
-export const iconRequirements = ({ padding = '8px' }) => ({
-  borderRadius: '8px',
-  border: '1px solid secondary.light',
+  border: `1px solid ${theme.palette.secondary.light}`,
   color: 'primary.dark',
   fontSize: '3rem',
   padding: padding,
   backgroundColor: 'secondary.white'
 })
 
-export const iconOffRequirements = ({ padding = '8px' }) => ({
+export const iconOffRequirements = ({ theme, padding = '8px' }) => ({
   borderRadius: '8px',
-  border: '1px solid secondary.light',
+  border: `1px solid ${theme.palette.secondary.light}`,
   color: 'primary.dark',
   fontSize: '3rem',
   padding: padding,

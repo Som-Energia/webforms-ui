@@ -1,4 +1,4 @@
-import { BUTTON_BG } from '../../themes/webforms'
+import { SECONDARY_LIGHT } from '../../themes/webforms'
 
 
 export const textBody1 = {
@@ -32,7 +32,7 @@ export const buttonDark = {
 export const buttonLight = {
   ...textBody1,
   textTransform: 'capitalize',
-  border: `1px solid ${BUTTON_BG}`,
+  border: `1px solid ${SECONDARY_LIGHT}`,
   borderRadius: '2rem',
   color: 'primary.dark',
   paddingLeft: '1rem',

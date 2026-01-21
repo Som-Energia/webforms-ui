@@ -480,7 +480,7 @@ const NewContractMemberForm = (props) => {
       disableGutters={true}
       sx={{
         padding: '2rem',
-        backgroundColor: '#fff',
+        backgroundColor: 'secondary.white',
         borderRadius: '10px'
       }}>
       <Formik

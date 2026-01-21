@@ -151,9 +151,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
             borderRadius: '8px',
             border: drag
               ? '2px dashed black'
-              : uploads
-                ? `2px dashed ${theme.palette.primary.extraLight}`
-                : `2px dashed ${theme.palette.secondary.light}`,
+              : `2px dashed ${theme.palette.secondary.light}`,
             boxShadow: 'none',
             display: 'flex',
             flexDirection: 'column',
