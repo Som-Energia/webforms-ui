@@ -460,10 +460,8 @@ const NewContractMemberSummary = (props) => {
               ...buttonLight,
               minWidth: 'auto',
               width: 'auto',
-              // padding: '6px 15px',
               fontSize: '0.90rem',
               textTransform: 'none'
-              // height: 36
             }}
             startIcon={<EditOutlinedIcon fontSize="medium" />}
             onClick={() => setShowReviewLinks(true)}>
@@ -568,7 +566,7 @@ const NewContractMemberSummary = (props) => {
               />
               <span
                 style={{
-                  color: '#ff632b',
+                  color: 'primary2.main',
                   marginLeft: 2,
                   fontWeight: 'bold'
                 }}>
@@ -606,7 +604,7 @@ const NewContractMemberSummary = (props) => {
               />
               <span
                 style={{
-                  color: '#ff632b',
+                  color: 'primary2.main',
                   marginLeft: 2,
                   fontWeight: 'bold'
                 }}>
@@ -622,7 +620,7 @@ const NewContractMemberSummary = (props) => {
             <span>
               {t('CONTRACTUAL_PACKAGE')}
               <span
-                style={{ color: '#ff632b', marginLeft: 4, fontWeight: 'bold' }}>
+                style={{ color: 'primary2.main', marginLeft: 4, fontWeight: 'bold' }}>
                 *
               </span>
             </span>
@@ -671,7 +669,7 @@ const NewContractMemberSummary = (props) => {
                 />
                 <span
                   style={{
-                    color: '#ff632b',
+                    color: 'primary2.main',
                     marginLeft: 2,
                     fontWeight: 'bold'
                   }}>
