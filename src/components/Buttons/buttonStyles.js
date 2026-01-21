@@ -1,3 +1,6 @@
+import { BUTTON_BG } from '../../themes/webforms'
+
+
 export const textBody1 = {
   fontFamily: 'Outfit',
   color: 'secondary.dark',
@@ -29,7 +32,7 @@ export const buttonDark = {
 export const buttonLight = {
   ...textBody1,
   textTransform: 'capitalize',
-  border: '1px solid secondary.light',
+  border: `1px solid ${BUTTON_BG}`,
   borderRadius: '2rem',
   color: 'primary.dark',
   paddingLeft: '1rem',
