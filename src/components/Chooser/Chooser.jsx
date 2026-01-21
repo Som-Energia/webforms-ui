@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid'
 
 import Checkbox from '@mui/material/Checkbox'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { chooserStyles, chooserSelectedStyles } from './chooserStyles'
 
 
 const Option = ({
@@ -15,21 +16,6 @@ const Option = ({
   textBody,
   maxWidth
 }) => {
-
-  const chooserStyles = {
-    paddingTop: '1.5rem',
-    paddingBottom: '2rem',
-    paddingLeft: '1.625rem',
-    paddingRight: '1.625rem',
-    borderRadius: '8px',
-    border: '1px solid #D9D9D9',
-    cursor: 'pointer'
-  }
-
-  const chooserSelectedStyles = {
-    ...chooserStyles,
-    backgroundColor: 'secondary.extraLight'
-  }
 
   return (
     <Box
@@ -72,10 +58,10 @@ const Option = ({
                 textAlign: 'center',
                 whiteSpace: 'normal',
                 wordBreak: 'break-word',
-                maxWidth: {maxWidth},
+                maxWidth: { maxWidth },
                 display: 'inline-block',
               }}
-              >
+            >
               {textHeader}
             </Typography>
           </Box>
@@ -97,10 +83,10 @@ const Option = ({
 const Chooser = (props) => {
   const { options, value, handleChange, name, maxWidth } = props
 
-  const xsSize = options.length == 2? 12 : 12
-  const smSize = options.length == 2? 6 : 12
-  const mdSize = options.length == 2? 6 : 8
-  const lgSize = options.length == 2? 6 : 4
+  const xsSize = options.length == 2 ? 12 : 12
+  const smSize = options.length == 2 ? 6 : 12
+  const mdSize = options.length == 2 ? 6 : 8
+  const lgSize = options.length == 2 ? 6 : 4
 
   const setOptionSelection = (option) => {
     handleChange(option)
