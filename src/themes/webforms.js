@@ -144,6 +144,16 @@ export default function WebFormsTheme() {
           }
         }
       },
+      MuiCssBaseline: {
+        styleOverrides: {
+          '.Mui-error a': {
+            color: '#D33C3C',
+          },
+          a: {
+            color: '#0c4c27',
+          },
+        },
+      },
     },
 
   })
