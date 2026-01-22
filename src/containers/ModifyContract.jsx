@@ -175,7 +175,7 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Box sx={{ width: '100%', backgroundColor: 'background.third' }}>
-        {noticeAutonomous ? (
+        {noticeAutonomous ? (  // TODO: Deprecated??
           <AlertBox
             severity={'warning'}
             variant={'body.md.regular'}
