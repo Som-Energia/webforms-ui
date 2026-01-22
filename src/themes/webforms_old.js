@@ -33,9 +33,6 @@ export default function OldWebFormsTheme() {
       },
       error: {
         main: '#D33C3C'
-      },
-      link: {
-        main: '#0c4c27'
       }
     },
     typography: {
@@ -149,6 +146,12 @@ export default function OldWebFormsTheme() {
           a: {
             color: '#0c4c27',
           },
+        },
+      },
+      MuiLink: {
+        defaultProps: {
+          color: '#0c4c27',
+          textDecoration: 'underline',
         },
       },
     },

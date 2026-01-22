@@ -74,10 +74,6 @@ const Powers = (props) => {
                   <a
                     href={t('POWER_LOWER_15_HELPER_URL')}
                     target="_blank"
-                    style={{
-                      color: theme.palette.link.main,
-                      textDecoration: 'underline'
-                    }}
                     rel="noopener noreferrer">
                     {t('POWER_LOWER_15_HELPER')}
                   </a>
@@ -107,10 +103,6 @@ const Powers = (props) => {
                   <a
                     href={t('POWER_HIGHER_15_HELPER_URL')}
                     target="_blank"
-                    style={{
-                      color: theme.palette.link.main,
-                      textDecoration: 'underline'
-                    }}
                     rel="noopener noreferrer">
                     {t('POWER_HIGHER_15_HELPER')}
                   </a>

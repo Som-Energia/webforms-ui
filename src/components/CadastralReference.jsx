@@ -82,7 +82,7 @@ const CadastralReference = (props) => {
             href={t('HELP_CADASTRAL_REFERENCE_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            style={{color: theme.palette.link.main, textDecoration: 'underline' }}>
+          >
             {t('CADASTRAL_REFERENCE_LINK')}
           </a>
           </span>

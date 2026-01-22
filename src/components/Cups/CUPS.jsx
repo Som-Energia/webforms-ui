@@ -81,7 +81,7 @@ const CUPS = (props) => {
             href={t('CUPS_HELPER_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            color="link.main">
+          >
             {t('CUPS_HELPER_LINK')}
           </Link>
         </Typography>

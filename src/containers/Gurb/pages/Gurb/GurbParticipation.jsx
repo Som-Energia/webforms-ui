@@ -77,7 +77,7 @@ const GurbParticipation = (props) => {
           href={t('GURB_HELP_ANNUAL_CONSUMPTION_URL')}
           target="_blank"
           rel="noopener noreferrer"
-          color="link.main">
+        >
           {t('GURB_HELP_ANNUAL_CONSUMPTION')}
         </Link>
       </Typography>
