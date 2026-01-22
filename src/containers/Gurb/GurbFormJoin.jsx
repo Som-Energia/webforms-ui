@@ -26,7 +26,6 @@ import {
   gurbPolicyChecks
 } from './validations/GurbValidations'
 
-import GurbErrorContext from '../../context/GurbErrorContext'
 import LoadingContext from '../../context/LoadingContext'
 
 // Step components
@@ -47,7 +46,6 @@ const GurbFormJoin = (props) => {
   const [activeStep, setActiveStep] = useState(0)
   const [submitAction, setSubmitAction] = useState(false)
 
-  const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
   const { loading } = useContext(LoadingContext)
 
   const { trackEvent } = useContext(MatomoContext)
@@ -162,9 +160,9 @@ const GurbFormJoin = (props) => {
               />
             </Box>
 
-            {error ? getStepResult(errorInfo) : getStep(formikProps)}
+            {getStep(formikProps)}
 
-            {!error && (
+            {(
               <>
                 <Grid
                   container
