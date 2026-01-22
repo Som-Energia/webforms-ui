@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.6.1 2026-01-22
+
+- FIX: skip cypress in github actions 
+- FIX: gurb cost in review page
+- FIX: use gurb-url-ok instead gurb_url_ok
+
 ## 6.6.0 2026-01-15
 
 - IMP: Add autocomplete floor input component
