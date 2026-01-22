@@ -149,6 +149,15 @@ export default function WebFormsTheme() {
           a: {
             color: '#0c4c27',
           },
+          '#root': {
+            background: 'transparent',
+            color: '#1E1E1E',
+            fontSize: '16px',
+            fontFamily: 'Outfit',
+          },
+          '#root b': {
+            fontWeight: 500,
+          },
         },
       },
       MuiLink: {
