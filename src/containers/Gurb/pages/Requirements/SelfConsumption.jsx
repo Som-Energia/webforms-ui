@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { useTheme } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
@@ -13,6 +14,7 @@ import { iconRequirements, iconOffRequirements } from '../../../../themes/common
 import PopUpContext from '../../../../context/PopUpContext'
 
 const SelfConsumption = (props) => {
+  const theme = useTheme()
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const { setContent } = useContext(PopUpContext)
@@ -34,12 +36,12 @@ const SelfConsumption = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
+      icon: <SolarPowerOutlinedIcon sx={iconRequirements({theme: theme})} />,
       textHeader: t('SELFCONSUMPTION_YES_HEADER')
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
+      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements({theme: theme})} />,
       textHeader: t('SELFCONSUMPTION_NO_HEADER')
     }
   ]

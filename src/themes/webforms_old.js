@@ -29,7 +29,8 @@ export default function OldWebFormsTheme() {
         third: '#F0F3EC',
         button: '#C5F47C',
         hoverButton: '#B6E471',
-        alertBox: '#ffcdb580' // 50% opacidad primary2.main
+        alertBox: '#ffcdb580', // 50% opacidad primary2.main
+        customDialog: '#0C4C2780'
       },
       error: {
         main: '#D33C3C'

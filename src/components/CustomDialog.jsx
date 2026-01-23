@@ -5,11 +5,12 @@ import PopUpContext from '../context/PopUpContext';
 
 const customStyles = (withBackground, additionalStyles = {}) => ({
   sx: {
-  position: 'absolute',
-  top: 0,
-  backgroundColor: withBackground ? 'white' : 'transparent',
-  ...additionalStyles,
-}})
+    position: 'absolute',
+    top: 0,
+    backgroundColor: withBackground ? 'white' : 'transparent',
+    ...additionalStyles,
+  }
+})
 
 function CustomDialog({ children, withBackground, blockHandleClose, paperStyles }) {
 
@@ -28,7 +29,9 @@ function CustomDialog({ children, withBackground, blockHandleClose, paperStyles 
       PaperProps={customStyles(withBackground, paperStyles)}
       slotProps={{
         backdrop: {
-          sx: {backgroundColor: 'primary.light'}
+          sx: {
+            backgroundColor: 'background.customDialog',
+          }
         }
       }}
       id='custom-dialog'
