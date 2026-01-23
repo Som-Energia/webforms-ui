@@ -1,15 +1,18 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import floorTypes from '../data/floor-types.json'
-import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloorInput'
 import Grid from '@mui/material/Grid'
-import LocationInput from './AddressAutocompletedField'
+import floorTypes from '../data/floor-types.json'
 import { useHandleChange } from '../hooks/useHandleChange'
+import AddressAutocompletedField from './AddressAutocompletedField'
+import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloorInput'
 
-import { getPlaceDetails } from '../services/googleApiClient'
+import streetTypes from '../data/street-types.json'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField/InputField'
+import { getPlaceDetails } from '../services/googleApiClient'
+import { ArrayUtils } from '../utils/array.utils'
+import { StringUtils } from '../utils/string.utils'
 import StateCity from './StateCity'
 
 const normalizePlace = (place) => ({
@@ -31,7 +34,7 @@ const updateAddressValues = async (
     const postalCodeComponent = place.addressComponents.find((c) =>
       c.types.includes('postal_code')
     )
-    const municipis = await getMunicipisByPostalCode(
+    const municipalities = await getMunicipisByPostalCode(
       postalCodeComponent?.longText
     )
 
@@ -39,8 +42,18 @@ const updateAddressValues = async (
       c.types.includes('route')
     )
 
-    const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
-    const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
+    const [streetPartial] = streetComponent?.longText?.split(' ') || []
+    const cadastralItem = streetTypes.find((item) =>
+      ArrayUtils.hasStringValue(item.values, streetPartial)
+    )
+
+    const cadastralStreetCode = cadastralItem?.code || 'CL' // Street is code by default
+    const cadastralStreet = StringUtils.normalize(
+      (streetComponent?.longText || '').replace(`${streetPartial} `, '')
+    )
+
+    const cityRaw = municipalities?.[0]?.[0]?.municipi || { id: '', name: '' }
+    const stateRaw = municipalities?.[0]?.[0]?.provincia || { id: '', name: '' }
 
     const city = normalizePlace(cityRaw)
     const state = normalizePlace(stateRaw)
@@ -55,6 +68,8 @@ const updateAddressValues = async (
         postal_code: postalCodeComponent?.longText || '',
         street: streetComponent?.longText || '',
         state,
+        cadas_tv: cadastralStreetCode,
+        cadas_street: cadastralStreet,
         city
       }
     })
@@ -99,25 +114,28 @@ const AddressField = ({
 
     try {
       const place = await getPlaceDetails(value.id, sessionTokenRef)
-      const streetComponent = place.addressComponents.find((c) =>
+      const addressComponents = place.addressComponents
+      const streetName = addressComponents.find((c) =>
         c.types.includes('route')
-      )
-      const postalCodeComponent = place.addressComponents.find((c) =>
+      )?.longText
+      const postalCode = addressComponents.find((c) =>
         c.types.includes('postal_code')
-      )
+      )?.longText
+      const streetNumber = addressComponents.find((c) =>
+        c.types.includes('street_number')
+      )?.longText
 
+      setFieldValue(`${addressFieldName}.street`, streetName || '')
+      setFieldValue(`${addressFieldName}.postal_code`, postalCode || '')
+      setNumberValue(streetNumber || numberValue || '')
       setFieldValue(
-        `${addressFieldName}.street`,
-        streetComponent?.longText || ''
-      )
-      setFieldValue(
-        `${addressFieldName}.postal_code`,
-        postalCodeComponent?.longText || ''
+        `${addressFieldName}.number`,
+        streetNumber || numberValue || ''
       )
 
       await updateAddressValues(
         value,
-        numberValue,
+        streetNumber || numberValue,
         values,
         setValues,
         addressFieldName,
@@ -140,10 +158,16 @@ const AddressField = ({
 
     if (value.length >= 5) {
       try {
-        const municipis = await getMunicipisByPostalCode(value)
+        const municipalities = await getMunicipisByPostalCode(value)
 
-        const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
-        const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
+        const cityRaw = municipalities?.[0]?.[0]?.municipi || {
+          id: '',
+          name: ''
+        }
+        const stateRaw = municipalities?.[0]?.[0]?.provincia || {
+          id: '',
+          name: ''
+        }
 
         const city = normalizePlace(cityRaw)
         const state = normalizePlace(stateRaw)
@@ -151,7 +175,7 @@ const AddressField = ({
         setFieldValue(`${addressFieldName}.city`, city)
         setFieldValue(`${addressFieldName}.state`, state)
       } catch (error) {
-        console.error('Error getting municipis by postal code:', error)
+        console.error('Error getting municipalities by postal code:', error)
         setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
         setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
       }
@@ -181,7 +205,7 @@ const AddressField = ({
   return (
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>
-        <LocationInput
+        <AddressAutocompletedField
           id={addressFieldName}
           textFieldName={addressLabel}
           value={values[addressFieldName]}

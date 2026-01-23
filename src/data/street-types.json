@@ -1,0 +1,419 @@
+[
+  {
+    "code": "AC",
+    "values": ["Acceso", "Acc.", "Accs.", "Accés", "Sarbidea"]
+  },
+  {
+    "code": "AG",
+    "values": ["Agregado", "Agrupación", "Agrup.", "Agrupació", "Elkargunea"]
+  },
+  {
+    "code": "AL",
+    "values": ["Aldea", "Alameda", "Alda.", "Alam"]
+  },
+  {
+    "code": "AN",
+    "values": ["Andador", "And.", "Passadís", "Oinezkoentzako bidea"]
+  },
+  {
+    "code": "AR",
+    "values": ["Area", "Arrabal", "Arr.", "Raval", "Arrabala"]
+  },
+  {
+    "code": "AU",
+    "values": ["Autopista", "Aut.", "Autobidea", "Autoestrada"]
+  },
+  {
+    "code": "AV",
+    "values": ["Avenida", "Av.", "Avda.", "Aven.", "Avinguda", "Etorbidea"]
+  },
+  {
+    "code": "AY",
+    "values": ["Arroyo"]
+  },
+  {
+    "code": "BJ",
+    "values": ["Bajada", "Bda.", "Baixada", "Beherakada", "Baixada"]
+  },
+  {
+    "code": "BL",
+    "values": [
+      "Bloque",
+      "Bloc",
+      "Bulevar",
+      "Blvr.",
+      "Bulev.",
+      "Bulevard",
+      "Bulebarra"
+    ]
+  },
+  {
+    "code": "BO",
+    "values": ["Barrio", "Bº", "Bar.", "Barri", "Auzoa"]
+  },
+  {
+    "code": "BQ",
+    "values": ["Barranquil"]
+  },
+  {
+    "code": "BR",
+    "values": ["Barranco", "Bco.", "Barranc", "Amildegia"]
+  },
+  {
+    "code": "CA",
+    "values": ["Cañada", "Cda.", "Cañ.", "Canyada", "Ardibidea"]
+  },
+  {
+    "code": "CG",
+    "values": ["Colegio", "Col.", "Col·legi", "Ikastetxea", "Colexio"]
+  },
+  {
+    "code": "CH",
+    "values": ["Chalet", "Chal.", "Xalet", "Txaleta", "Chalé"]
+  },
+  {
+    "code": "CI",
+    "values": ["Cinturón", "Ctur.", "Cinturó", "Gerrikoa", "Cinto"]
+  },
+  {
+    "code": "CJ",
+    "values": [
+      "Calleja",
+      "Callejón",
+      "Cjón.",
+      "Cjon.",
+      "Carreró",
+      "Kalezuloa",
+      "Calexón"
+    ]
+  },
+  {
+    "code": "CL",
+    "values": ["Calle", "C/", "C.", "Call.", "Carrer", "Kalea", "Rúa"]
+  },
+  {
+    "code": "CM",
+    "values": ["Camino", "Cno.", "Camin.", "Camí", "Bidea", "Camiño", "Carmen"]
+  },
+  {
+    "code": "CN",
+    "values": ["Colonia", "Col.", "Colo.", "Colònia", "Kolonia", "Colonia"]
+  },
+  {
+    "code": "CO",
+    "values": ["Concejo", "Con.", "Concejo", "Kongreso"]
+  },
+  {
+    "code": "CP",
+    "values": ["Campa", "Cmp.", "Landa", "Campo"]
+  },
+  {
+    "code": "CR",
+    "values": ["Carrera", "Cra.", "Carr.", "Lasterketa", "Carreira"]
+  },
+  {
+    "code": "CS",
+    "values": ["Caserio", "Caserío"]
+  },
+  {
+    "code": "CT",
+    "values": ["Cuesta", "Csta.", "Cues.", "Pujada", "Aldapa", "Costa"]
+  },
+  {
+    "code": "CU",
+    "values": ["Conjunto", "Conj.", "Conjunt.", "Conjunt", "Kongreso"]
+  },
+  {
+    "code": "CY",
+    "values": ["Caleya", "Cly.", "Carril", "Bide estua", "Caleira"]
+  },
+  {
+    "code": "CZ",
+    "values": ["Callizo", "Callejón"]
+  },
+  {
+    "code": "DE",
+    "values": ["Detrás", "Dtr.", "Darrere", "Atzean"]
+  },
+  {
+    "code": "DP",
+    "values": ["Diputación", "Dip.", "Diputació", "Aldundia", "Deputación"]
+  },
+  {
+    "code": "DS",
+    "values": ["Diseminado", "Disem.", "Dism.", "Disseminat", "Sakabanatua"]
+  },
+  {
+    "code": "ED",
+    "values": ["Edificio", "Edif.", "Edifici", "Eraikina"]
+  },
+  {
+    "code": "EM",
+    "values": ["Extramuros", "Extr.", "Kanpoaldea"]
+  },
+  {
+    "code": "EN",
+    "values": ["Ensanche", "Ens.", "Eixample", "Zabalgunea", "Entrada"]
+  },
+  {
+    "code": "EP",
+    "values": ["Explanada", "Expl.", "Esplanada", "Zabalgunea", "Chaira"]
+  },
+  {
+    "code": "ER",
+    "values": ["Extrarradio", "Ext.", "Extraradi", "Kanpoaldea"]
+  },
+  {
+    "code": "ES",
+    "values": ["Escalinata", "Esc.", "Escalinata", "Eskailerak"]
+  },
+  {
+    "code": "EX",
+    "values": [
+      "Explanada",
+      "Expl.",
+      "Exp.",
+      "Esplanada",
+      "Zabalgunea",
+      "Chaira"
+    ]
+  },
+  {
+    "code": "FC",
+    "values": ["Ferrocarril", "F.C.", "Trenbidea"]
+  },
+  {
+    "code": "FN",
+    "values": ["Finca", "Fca.", "Finka", "Leira"]
+  },
+  {
+    "code": "GL",
+    "values": [
+      "Glorieta",
+      "Gta.",
+      "Glor.",
+      "Biribilgunea"
+    ]
+  },
+  {
+    "code": "GR",
+    "values": ["Grupo", "Grup.", "Grp."]
+  },
+  {
+    "code": "GV",
+    "values": ["Gran Vía", "G.V.", "Kale Nagusia"]
+  },
+  {
+    "code": "HT",
+    "values": ["Huerta", "Hta.", "Horta", "Baratza"]
+  },
+  {
+    "code": "JR",
+    "values": ["Jardines", "Jard.", "Jardins", "Lorategiak", "Xardíns"]
+  },
+  {
+    "code": "LA",
+    "values": ["Lago", "Lg.", "Aintzira", "Laku", "Lagoa"]
+  },
+  {
+    "code": "LD",
+    "values": [
+      "Lado",
+      "Ld.",
+      "Costat",
+      "Aldea",
+      "Ladera",
+      "Vessant",
+      "Aldapa",
+      "Ladeira"
+    ]
+  },
+  {
+    "code": "LG",
+    "values": ["Lugar", "Lg.", "Lloc", "Lekua"]
+  },
+  {
+    "code": "MA",
+    "values": ["Malecon"]
+  },
+  {
+    "code": "MC",
+    "values": ["Mercado", "Mdo.", "Mercat", "Merkatua"]
+  },
+  {
+    "code": "ML",
+    "values": ["Muelle", "Mlle.", "Mll.", "Moll", "Kaia", "Peirao"]
+  },
+  {
+    "code": "MN",
+    "values": ["Municipio", "Mun.", "Udalerria"]
+  },
+  {
+    "code": "MS",
+    "values": ["Masía", "Msía.", "Masia", "Baserria"]
+  },
+  {
+    "code": "MT",
+    "values": ["Monte", "Mte.", "Muntanya", "Mendia", "Mont"]
+  },
+  {
+    "code": "MZ",
+    "values": ["Manzana", "Mza.", "Illa", "Blokea", "Mazá"]
+  },
+  {
+    "code": "PB",
+    "values": ["Poblado", "Pbl.", "Poblat", "Herria", "Poboado"]
+  },
+  {
+    "code": "PC",
+    "values": ["Placeta", "Parcela", "Pcla.", "Parcel·la", "Lursaila"]
+  },
+  {
+    "code": "PD",
+    "values": ["Partida", "Ptd."]
+  },
+  {
+    "code": "PI",
+    "values": ["Pista", "Pta."]
+  },
+  {
+    "code": "PJ",
+    "values": [
+      "Pasaje",
+      "Pasadizo",
+      "Pje.",
+      "Pasj.",
+      "Passatge",
+      "Pasaia",
+      "Pasaxe"
+    ]
+  },
+  {
+    "code": "PL",
+    "values": ["Poligono"]
+  },
+  {
+    "code": "PM",
+    "values": ["Páramo", "Pmo.", "Ermot", "Mendi-lautada"]
+  },
+  {
+    "code": "PQ",
+    "values": ["Parque", "Pq.", "Parq.", "Parc", "Parkea", "Parroquia"]
+  },
+  {
+    "code": "PR",
+    "values": ["Prolongación"]
+  },
+  {
+    "code": "PS",
+    "values": ["Paseo", "Pº", "Pso.", "Passeig", "Pasealekua"]
+  },
+  {
+    "code": "PT",
+    "values": ["Puente", "Pte.", "Pont", "Zubia", "Ponte"]
+  },
+  {
+    "code": "PU",
+    "values": ["Pasadizo", "Passadís", "Pas."]
+  },
+  {
+    "code": "PZ",
+    "values": ["Plaza", "Pza.", "Plz.", "Plaça", "Praza"]
+  },
+  {
+    "code": "QT",
+    "values": ["Quinta", "Qta."]
+  },
+  {
+    "code": "RA",
+    "values": ["Raconada"]
+  },
+  {
+    "code": "RB",
+    "values": ["Rambla", "Rbla.", "Ramb."]
+  },
+  {
+    "code": "RC",
+    "values": ["Rincón", "Rcn.", "Racó", "Txokoa", "Recanto"]
+  },
+  {
+    "code": "RD",
+    "values": ["Ronda", "Rda.", "Rond.", "Erronda"]
+  },
+  {
+    "code": "RM",
+    "values": ["Ramal"]
+  },
+  {
+    "code": "RP",
+    "values": ["Rampa", "Rpa.", "Arrapala"]
+  },
+  {
+    "code": "RR",
+    "values": ["Riera", "Rra.", "Erreka", "Ribeira"]
+  },
+  {
+    "code": "RU",
+    "values": ["Rua"]
+  },
+  {
+    "code": "SA",
+    "values": ["Salida", "Sld.", "Sortida", "Irteera", "Saída"]
+  },
+  {
+    "code": "SC",
+    "values": ["Sector", "Sect.", "Sector", "Sektorea"]
+  },
+  {
+    "code": "SD",
+    "values": ["Senda", "Sda.", "Sender", "Bidezidorra", "Senda"]
+  },
+  {
+    "code": "SL",
+    "values": ["Solar", "Sol.", "Lursaila"]
+  },
+  {
+    "code": "SN",
+    "values": ["Salón", "Sln.", "Saló", "Aretoa"]
+  },
+  {
+    "code": "SU",
+    "values": ["Subida", "Sda.", "Sub.", "Pujada", "Igoera"]
+  },
+  {
+    "code": "TN",
+    "values": ["Terrenos", "Terrenys", "Terreno", "Terreny", "Ter."]
+  },
+  {
+    "code": "TO",
+    "values": ["Torrente", "Tnte.", "Torrent"]
+  },
+  {
+    "code": "TR",
+    "values": ["Travesía", "Trv.", "Trav.", "Travessera", "Zeharkalea"]
+  },
+  {
+    "code": "UR",
+    "values": ["Urbanización", "Urb.", "Urban.", "Urbanització", "Urbanizazioa"]
+  },
+  {
+    "code": "VA",
+    "values": ["Valle", "Vall", "Haran", "Ibar"]
+  },
+  {
+    "code": "VD",
+    "values": ["Viaducto", "Vdto.", "Viaducte", "Bidezubia", "Viaduto"]
+  },
+  {
+    "code": "VI",
+    "values": ["Vía", "Vi.", "Via", "Bidea"]
+  },
+  {
+    "code": "VL",
+    "values": ["Vial", "Vl.", "Vial", "Bidea"]
+  },
+  {
+    "code": "VR",
+    "values": ["Vereda", "Vda.", "Ver.", "Bidezidorra"]
+  }
+]
