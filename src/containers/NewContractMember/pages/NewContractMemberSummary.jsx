@@ -562,7 +562,7 @@ const NewContractMemberSummary = (props) => {
               />
               <span
                 style={{
-                  color: theme.palette.primary2.main,
+                  color: theme.palette.primary.mainOrange,
                   marginLeft: 4
                 }}>
                 *
@@ -599,7 +599,7 @@ const NewContractMemberSummary = (props) => {
               />
               <span
                 style={{
-                  color: theme.palette.primary2.main,
+                  color: theme.palette.primary.mainOrange,
                   marginLeft: 4
                 }}>
                 *
@@ -615,7 +615,7 @@ const NewContractMemberSummary = (props) => {
               {t('CONTRACTUAL_PACKAGE')}
               <span
                 style={{
-                  color: theme.palette.primary2.main,
+                  color: theme.palette.primary.mainOrange,
                   marginLeft: 4
                 }}>
                 *
@@ -661,7 +661,7 @@ const NewContractMemberSummary = (props) => {
                 />
                 <span
                   style={{
-                    color: theme.palette.primary2.main,
+                    color: theme.palette.primary.mainOrange,
                     marginLeft: 4
                   }}>
                   *

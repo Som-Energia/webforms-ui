@@ -17,7 +17,7 @@ const Loading = (props) => {
             minHeight: '33vh'
         }} >
 
-            <CircularProgress sx={{ color: 'primary2.main' }} />
+            <CircularProgress sx={{ color: 'primary.mainOrange' }} />
 
             <Typography variant="pagesubtitle">
                 {t(description)}

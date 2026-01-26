@@ -42,7 +42,7 @@ const Powers = (props) => {
             ? t('CURRENT_CONTRACTED_POWER')
             : t('POWER_TO_CONTRACT')
           }{' '}
-          <span style={{ color: theme.palette.primary2.main, marginLeft: 4 }}>
+          <span style={{ color: theme.palette.primary.mainOrange, marginLeft: 4 }}>
             *
           </span>
         </Typography>

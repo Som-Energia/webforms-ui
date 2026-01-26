@@ -43,16 +43,16 @@ const AlertBox = ({
         icon={icon ? renderCustomIcon() : false}
         sx={{
           backgroundColor: 'background.alertBox',
-          color: 'primary2.main',
+          color: 'primary.mainOrange',
           '& .MuiAlertTitle-root': {
-            color: 'primary2.main'
+            color: 'primary.mainOrange'
           },
           '& .MuiTypography-root': {
-            color: 'primary2.main',
+            color: 'primary.mainOrange',
             fontSize: 'body.md.regular'
           },
           '& a': theme => ({
-            color: `${theme.palette.primary2.main} !important`
+            color: `${theme.palette.primary.mainOrange} !important`
           }),
           textAlign: textAlign,
           display: 'flex',

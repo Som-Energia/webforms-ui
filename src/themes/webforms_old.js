@@ -9,11 +9,9 @@ export default function OldWebFormsTheme() {
         main: '#0B2E34',
         light: '#0c4c27',
         extraLight: '#CDFF80',
-        dark: '#1E1E1E'
-      },
-      primary2: {
-        main: '#ff632b',
-        light: '#ffcdb5',
+        dark: '#1E1E1E',
+        mainOrange: '#ff632b',
+        lightOrange: '#ffcdb5',
         alt: '#afb5e8'
       },
       secondary: {
@@ -29,7 +27,7 @@ export default function OldWebFormsTheme() {
         third: '#F0F3EC',
         button: '#C5F47C',
         hoverButton: '#B6E471',
-        alertBox: '#ffcdb580', // 50% opacidad primary2.main
+        alertBox: '#ffcdb580', // 50% opacidad primary.mainOrange
         customDialog: '#0C4C2780'
       },
       error: {

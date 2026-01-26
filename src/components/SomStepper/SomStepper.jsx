@@ -24,7 +24,7 @@ const SomStepper = (props) => {
             borderRadius: '100px',
             backgroundColor: 'secondary.extraDark',
             '& .MuiLinearProgress-bar': {
-              backgroundColor: 'primary2.main',
+              backgroundColor: 'primary.mainOrange',
             },
           }}
         />
