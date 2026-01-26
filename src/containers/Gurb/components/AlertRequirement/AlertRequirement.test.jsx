@@ -2,8 +2,8 @@ import AlertRequirement from './AlertRequirement'
 import { GurbErrorContextProvider } from '../../../../context/GurbErrorContext'
 import { render, queryByAttribute } from '@testing-library/react'
 
-describe('AlertRequirement component ', () => {
-  test('AlertRequirement with severity="alert" renders without crashing', () => {
+describe('AlertRequirement component', () => {
+  test('AlertRequirement with severity="alert"', () => {
     const dom = render(
       <GurbErrorContextProvider>
         <AlertRequirement
@@ -19,7 +19,7 @@ describe('AlertRequirement component ', () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('AlertRequirement with severity="success" renders without crashing', () => {
+  test('AlertRequirement with severity="success"', () => {
     const dom = render(
       <GurbErrorContextProvider>
         <AlertRequirement
@@ -35,7 +35,7 @@ describe('AlertRequirement component ', () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('AlertRequirement with severity="error" renders without crashing', () => {
+  test('AlertRequirement with severity="error"', () => {
     const dom = render(
       <GurbErrorContextProvider>
         <AlertRequirement

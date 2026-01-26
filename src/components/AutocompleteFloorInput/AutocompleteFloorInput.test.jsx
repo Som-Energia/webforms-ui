@@ -31,7 +31,7 @@ describe('AutocompleteFloorInput component ', () => {
     expect(input.value).toBe('GF')
   })
 
-  test('AutocompleteFloorInput calls onChangeHandler with correct code on blur', async () => {
+  test('AutocompleteFloorInput calls onChangeHandler with correct code when blur event fired', async () => {
     const mockOnChangeHandler = vi.fn()
 
     render(
@@ -81,7 +81,7 @@ describe('AutocompleteFloorInput component ', () => {
     })
   })
 
-  test('AutocompleteFloorInput handles non acceptable text input correctly', async () => {
+  test('AutocompleteFloorInput handles non acceptable input value correctly', async () => {
     const mockOnChangeHandler = vi.fn()
 
     render(

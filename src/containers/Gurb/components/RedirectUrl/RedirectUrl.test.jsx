@@ -1,7 +1,7 @@
 import RedirectUrl from './RedirectUrl.jsx'
 import { render, queryByAttribute } from '@testing-library/react'
 
-describe('RedirectUrl component ', () => {
+describe('RedirectUrl component', () => {
   test('RedirectUrl renders without crashing', () => {
     const dom = render(<RedirectUrl />)
 

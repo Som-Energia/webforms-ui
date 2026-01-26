@@ -11,11 +11,7 @@ const mockOptionsObject = {
   4: 'OPTION2',
 }
 
-const renderWithArray = (options) => {
-  return render(<SelectField label="LABEL" options={options} />)
-}
-
-const renderWithObject = (object) => {
+const renderComponent = (object) => {
   return render(<SelectField label="LABEL" options={object} />)
 }
 
@@ -34,28 +30,28 @@ const getSelectValues = (renderResult) => {
 }
 
 describe('SelectField component ', () => {
-  test('SelectField renders and empty arrays of options', async () => {
-    renderWithArray([])
+  test('SelectField renders with empty array of options', async () => {
+    renderComponent([])
 
     const label = await screen.findByText('LABEL')
     expect(label).toBeInTheDocument()
   })
 
-  test('SelectField renders and empty object of options', async () => {
-    renderWithObject({})
+  test('SelectField renders with empty object of options', async () => {
+    renderComponent({})
 
     const label = await screen.findByText('LABEL')
     expect(label).toBeInTheDocument()
   })
 
-  test('SelectField renders and show the correct options', () => {
-    const optionValues = getSelectValues(renderWithArray(mockOptionsArray))
+  test('SelectField renders and showing the correct array options', () => {
+    const optionValues = getSelectValues(renderComponent(mockOptionsArray))
     const mockOptionsIds = mockOptionsArray.map((item) => item.id)
     expect(optionValues).toEqual(mockOptionsIds)
   })
 
-  test('SelectField renders and object of options', async () => {
-    const optionValues = getSelectValues(renderWithObject(mockOptionsObject))
+  test('SelectField renders with object options and select', async () => {
+    const optionValues = getSelectValues(renderComponent(mockOptionsObject))
 
     const mockOptionsIds = Object.keys(mockOptionsObject)
     expect(mockOptionsIds).toEqual(optionValues)

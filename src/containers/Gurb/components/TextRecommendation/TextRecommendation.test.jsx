@@ -2,8 +2,8 @@ import React from 'react'
 import TextRecommendation from './TextRecommendation'
 import { render, screen } from '@testing-library/react'
 
-describe('TextRecommendation component ', () => {
-  test('TextRecommendation renders without crashing and title and text', async () => {
+describe('TextRecommendation component', () => {
+  test('TextRecommendation renders without crashing with title and text', async () => {
     render(<TextRecommendation title="TITLE" text="TEXT" />)
 
     const title = await screen.findByText('TITLE')
@@ -12,7 +12,7 @@ describe('TextRecommendation component ', () => {
     expect(text).toBeInTheDocument()
   })
 
-  test('TextRecommendation renders required title', async () => {
+  test('TextRecommendation renders with required character in title', async () => {
     render(<TextRecommendation title="TITLE" required={true} />)
 
     const title = await screen.findByText('TITLE')

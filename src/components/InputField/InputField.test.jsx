@@ -2,8 +2,8 @@ import { queryByAttribute, render, screen } from '@testing-library/react'
 import InputField from './InputField'
 import { initI18n } from '../../tests/i18n.mock'
 
-describe('InputField component ', () => {
-  test('InputField renders without crashing and label', async () => {
+describe('InputField component', () => {
+  test('InputField renders without crashing and showing label', async () => {
     const dom = render(<InputField name="NAME" />)
 
     const getByDataCy = queryByAttribute.bind(null, 'data-cy')
@@ -11,21 +11,21 @@ describe('InputField component ', () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('InputField renders required field', async () => {
+  test('InputField renders with required field character', async () => {
     render(<InputField required={true} />)
 
     const asterisk = await screen.findByText('*')
     expect(asterisk).toBeInTheDocument()
   })
 
-  test('InputField renders text helper', async () => {
+  test('InputField renders with text helper', async () => {
     render(<InputField textFieldHelper="TEXTFIELDHELPER" />)
 
     const asterisk = await screen.findByText('TEXTFIELDHELPER')
     expect(asterisk).toBeInTheDocument()
   })
 
-  test('InputField renders text error', async () => {
+  test('InputField renders with text error', async () => {
     // Initialize i18n for the test
     await initI18n({
       ERROR: 'Error translation',
@@ -37,7 +37,7 @@ describe('InputField component ', () => {
     expect(error).toBeInTheDocument()
   })
 
-  test('InputField renders children node', async () => {
+  test('InputField renders and showing children node', async () => {
     const { getByTestId } = render(
       <InputField name="NAME" label="LABEL">
         <div data-testid="children1">CHILDREN NODE</div>
