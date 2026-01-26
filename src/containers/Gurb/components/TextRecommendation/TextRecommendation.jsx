@@ -15,7 +15,7 @@ const TextRecommendation = ({ title, text, required, isHeader }) => {
       </Grid>
       <Grid item xs={12}>
         <Typography
-          variant="body.sm.regular"
+          variant="body.md.regular"
           color="secondary.extraDark">
           {text}
         </Typography>
