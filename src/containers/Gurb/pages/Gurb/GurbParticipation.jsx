@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import SelectField from '../../../../components/SelectField'
-import AlertBox from '../../../../components/AlertBox'
+import SelectField from '../../../../components/SelectField/SelectField'
+import AlertBox from '../../../../components/AlertBox/AlertBox'
 import { getPowers } from '../../../../services/api'
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import {
   textField,
@@ -60,7 +60,7 @@ const GurbParticipation = (props) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
 
-      <TextRecomendation
+      <TextRecommendation
         required={true}
         isHeader={true}
         title={t('GURB_PARTICIPATION_KW_INPUT_TEXT')}

@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 
-import AlertBox from '../../../../components/AlertBox'
+import AlertBox from '../../../../components/AlertBox/AlertBox'
 import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
-import TextRecomendation from '../../components/TextRecomendation'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
 import { participationAlertBoxTypography, forceAlignLeft } from '../../../../themes/gurbTheme'
 
@@ -84,7 +84,7 @@ const GurbSignature = (props) => {
       ) : (
         <Grid container>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <TextRecomendation title={t('GURB_SIGNATURE')} />
+            <TextRecommendation title={t('GURB_SIGNATURE')} />
           </Grid>
 
           <Grid item xs={12} sx={forceAlignLeft}>

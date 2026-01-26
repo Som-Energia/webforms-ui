@@ -1,9 +1,8 @@
 import Box from '@mui/material/Box'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
-import RedirectUrl from '../../components/RedirectUrl'
+import RedirectUrl from '../../components/RedirectUrl/RedirectUrl'
 
 const GurbRequirementsResult = ({ values, gurbCode }) => {
   const { t } = useTranslation()

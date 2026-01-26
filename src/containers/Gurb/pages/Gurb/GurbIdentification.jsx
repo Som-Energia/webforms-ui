@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography'
 
 import { useTranslation } from 'react-i18next'
 
-import CUPS from '../../../../components/CUPS'
-import NifCif from '../../../../components/NifCif'
+import CUPS from '../../../../components/Cups/CUPS'
+import NifCif from '../../../../components/NifCif/NifCif'
 
 
 const GurbIdentification = (props) => {

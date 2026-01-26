@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- NEW: jest unit tests
+
 ## 6.6.1 2026-01-22
 
 - FIX: skip cypress in github actions 

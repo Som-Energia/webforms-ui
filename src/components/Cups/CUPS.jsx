@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
+import Typography from '@mui/material/Typography'
 
-import InputField from './InputField'
+import InputField from '../InputField/InputField'
 
-import { checkCups } from '../services/api'
-import { MAX_STEPS_NUMBER } from '../containers/Gurb/GurbFormRequirements'
+import { MAX_STEPS_NUMBER } from '../../containers/Gurb/GurbFormRequirements'
+import { checkCups } from '../../services/api'
 
 const CUPS = (props) => {
   const {
@@ -21,7 +21,7 @@ const CUPS = (props) => {
     setMaxStepNum
   } = props
   const { t } = useTranslation()
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const cups = values.cups
@@ -40,13 +40,14 @@ const CUPS = (props) => {
             }
           })
           setMaxStepNum(
-            response?.data?.status === 'new' || response?.data?.status === 'inactive'
-              ? MAX_STEPS_NUMBER["MAX_STEP_NUMBER_NEW_CONTRACT"]
-              : MAX_STEPS_NUMBER["MAX_STEP_NUMBER_DEFAULT"]
+            response?.data?.status === 'new' ||
+              response?.data?.status === 'inactive'
+              ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
+              : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
           )
           setLoading(false)
         })
-        .catch(({ response }) => {
+        .catch(() => {
           setFieldError('cups', t('ERROR_INVALID_FIELD'))
           setLoading(false)
         })
@@ -89,7 +90,9 @@ const CUPS = (props) => {
       handleBlur={handleInputCupsBlur}
       touched={touched?.cups}
       value={values?.cups}
-      error={errors?.cups || errors?.new_contract || errors?.knowledge_of_distri}
+      error={
+        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri
+      }
       isLoading={loading}
       required={true}
     />

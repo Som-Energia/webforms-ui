@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { textHeader3, textHeader4, textBody1, textHeader2 } from '../../../../themes/gurbTheme'
 import Box from '@mui/material/Box'
-import InputField from '../../../../components/InputField'
+import InputField from '../../../../components/InputField/InputField'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { iconRequirements } from '../../../../themes/commonStyles'
 import Grid from '@mui/material/Grid'
-import TextRecomendation from '../../components/TextRecomendation'
-import Chooser from '../../../../components/Chooser'
+import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
+import Chooser from '../../../../components/Chooser/Chooser'
 import { useState } from 'react'
 
 const Payment = (props) => {
@@ -60,7 +60,7 @@ const Payment = (props) => {
       </Box>
 
       <Grid item xs={12} sx={{ mt: 6 }}>
-        <TextRecomendation sx={textBody1} title={t('GURB_PAYMENT_METHOD_CHOOSER_TITLE')} required={true} />
+        <TextRecommendation sx={textBody1} title={t('GURB_PAYMENT_METHOD_CHOOSER_TITLE')} required={true} />
         <Box>
           <Chooser
             name="payment-method"

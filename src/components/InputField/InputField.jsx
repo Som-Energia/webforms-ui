@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid'
 
 import { Trans } from 'react-i18next'
 
-import InputTitle from './InputTitle'
+import InputTitle from '../InputTitle'
 
 export const HelperText = ({ helperText, iconHelper }) => {
   return (
@@ -85,7 +85,7 @@ const InputFieldComponent = ({
                 )) ||
                 endAdornmentText
             }}
-            inputProps={customInputProps}
+            inputProps={{ ...customInputProps, 'data-cy': `${name}-input` }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}

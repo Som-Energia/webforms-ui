@@ -9,7 +9,7 @@ import { useHandleChange } from '../hooks/useHandleChange'
 
 import { getPlaceDetails } from '../services/googleApiClient'
 import { getMunicipisByPostalCode } from '../services/api'
-import InputField from './InputField'
+import InputField from './InputField/InputField'
 import StateCity from './StateCity'
 
 const normalizePlace = (place) => ({

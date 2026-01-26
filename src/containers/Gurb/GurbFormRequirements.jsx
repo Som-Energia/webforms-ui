@@ -21,7 +21,7 @@ import {
 import LoadingContext from '../../context/LoadingContext'
 
 // Step components
-import SomStepper from '../../components/SomStepper'
+import SomStepper from '../../components/SomStepper/SomStepper'
 import SupplyPoint from './pages/Requirements/SupplyPoint'
 import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
