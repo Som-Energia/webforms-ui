@@ -84,7 +84,7 @@ const CadastralReference = (props) => {
           >
             {t('CADASTRAL_REFERENCE_LINK')}
           </a>
-          </span>
+        </span>
       }
       handleChange={handleInputCadastralReference}
       handleBlur={handleInputCadastralReferenceBlur}

@@ -32,7 +32,7 @@ const SimpleGurbDialog = ({
         maxHeight: '80vh',
         margin: '20px'
       }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6}}>
         {severity === 'warning' && <WarningRounded sx={{
           fontSize: 44,
           color: 'warning.light',

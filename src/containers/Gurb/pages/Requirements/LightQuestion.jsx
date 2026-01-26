@@ -38,12 +38,12 @@ const LightQuestion = (props) => {
   const options = [
     {
       id: 'light-on',
-      icon: <LightbulbOutlinedIcon sx={iconRequirements({theme: theme})} />,
+      icon: <LightbulbOutlinedIcon sx={iconRequirements({ theme: theme })} />,
       textHeader: t('LIGHT_YES')
     },
     {
       id: 'light-off',
-      icon: <LightbulbOutlinedIcon sx={iconOffRequirements({theme: theme})} />,
+      icon: <LightbulbOutlinedIcon sx={iconOffRequirements({ theme: theme })} />,
       textHeader: t('LIGHT_NO')
     }
   ]

@@ -19,7 +19,7 @@ export default function AddressAutocompletedFieldGurb({
   error = false,
   helperText = '',
   touched = false,
-  onBlur = () => {}
+  onBlur = () => { }
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
