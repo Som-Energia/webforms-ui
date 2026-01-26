@@ -2,7 +2,6 @@ import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
 
 // Icons
 import CheckCircleIcon from '@mui/icons-material/CheckCircleOutline'
@@ -20,7 +19,6 @@ const AlertBox = ({
   icon,
   textAlign = 'center',
 }) => {
-  const theme = useTheme()
 
   const renderCustomIcon = () => {
     switch (icon) {
