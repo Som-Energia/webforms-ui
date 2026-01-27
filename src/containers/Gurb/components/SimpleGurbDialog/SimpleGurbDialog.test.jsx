@@ -27,7 +27,7 @@ const MockWrapperComponentWithDialog = () => {
   )
 }
 
-describe('SimpleGurbDialog component ', () => {
+describe('SimpleGurbDialog component', () => {
   test('SimpleGurbDialog renders without crashing', async () => {
     const dom = render(
       <PopUpContextProvider>
@@ -48,7 +48,7 @@ describe('SimpleGurbDialog component ', () => {
     expect(contentElementA).toBeInTheDocument()
   })
 
-  test('SimpleGurbDialog close button click', async () => {
+  test('SimpleGurbDialog simulate close button click remove element from dom', async () => {
     const dom = render(
       <PopUpContextProvider>
         <MockWrapperComponentWithDialog />

@@ -29,7 +29,7 @@ describe('SumitButton component ', async () => {
     expect(getByText('FINISH')).toHaveAttribute('disabled')
   })
 
-  test('SubmitButton renders sending', async () => {
+  test('SubmitButton renders showing sending progressbar', async () => {
     const { getByRole } = render(
       <SubmitButton text={'FINISH'} sending={true} />
     )

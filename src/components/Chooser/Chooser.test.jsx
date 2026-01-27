@@ -30,7 +30,7 @@ const chooserOptionsWithoutBodyText = [
 ]
 
 describe('Chooser component ', () => {
-  test('Chooser renders and empty arrays of options', () => {
+  test('Chooser renders with empty arrays of options', () => {
     render(<Chooser name="chooser-name" value={'a'} options={[]} />)
 
     let buttons = []
@@ -56,7 +56,7 @@ describe('Chooser component ', () => {
     expect(optionB.getByText('This is option B')).toBeInTheDocument()
   })
 
-  test('Chooser renders and show options without bodytext', () => {
+  test('Chooser renders and show options without textBody', () => {
     render(
       <Chooser
         name="chooser-name"
@@ -75,7 +75,7 @@ describe('Chooser component ', () => {
     expect(optionB.getByText('Option B')).toBeInTheDocument()
   })
 
-  test('Chooser renders and selected option', () => {
+  test('Chooser renders with selected option', () => {
     const setSelectedSpy = vi.fn()
 
     render(

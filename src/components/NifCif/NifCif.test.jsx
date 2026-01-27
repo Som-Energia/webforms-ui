@@ -84,7 +84,7 @@ describe('NifCif component ', () => {
       })
     })
 
-    test('Nif renders with DNI is not valid error', async () => {
+    test('Nif renders with is not valid error', async () => {
       vi.mocked(checkVat).mockResolvedValue({
         data: { valid: false },
       })
@@ -95,7 +95,7 @@ describe('NifCif component ', () => {
       expect(errorMessage).toBeInTheDocument()
     })
 
-    test('Nif renders with value exists error', async () => {
+    test('Nif renders with exists error', async () => {
       vi.mocked(checkVat).mockResolvedValue({
         data: { is_member: true },
       })
@@ -106,7 +106,7 @@ describe('NifCif component ', () => {
       expect(errorMessage).toBeInTheDocument()
     })
 
-    test('Nif renders with person_type check to physic-person', async () => {
+    test('Nif renders with person_type equals "physic-person"', async () => {
       vi.mocked(checkVat).mockResolvedValue({})
       const setValuesSpy = vi.fn()
 
@@ -125,7 +125,27 @@ describe('NifCif component ', () => {
       })
     })
 
-    test('Nif renders with person_type check to legal-person', async () => {
+    test('Nif renders and checkVat resolves a nif invalid response value', async () => {
+      vi.mocked(checkVat).mockResolvedValue({})
+      const setValuesSpy = vi.fn()
+
+      const validNif = '12345678XX'
+      await renderComponent(validNif, setValuesSpy)
+      await waitFor(() => {
+        expect(setValuesSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({
+            owner: {
+              nif: '12345678XX',
+              nif_valid: false, // Component not throw error and set nif_valid to false
+              person_type: 'physic-person',
+            },
+          })
+        )
+      })
+    })
+  })
+  describe('Cif tests', () => {
+    test('Cif renders and set person_type equals "legal-person"', async () => {
       vi.mocked(checkVat).mockResolvedValue({})
       const setValuesSpy = vi.fn()
 
@@ -138,25 +158,6 @@ describe('NifCif component ', () => {
               nif: 'P7784683J',
               nif_valid: true,
               person_type: 'legal-person',
-            },
-          })
-        )
-      })
-    })
-
-    test('Nif renders with nif invalid format', async () => {
-      vi.mocked(checkVat).mockResolvedValue({})
-      const setValuesSpy = vi.fn()
-
-      const validNif = '12345678XX'
-      await renderComponent(validNif, setValuesSpy)
-      await waitFor(() => {
-        expect(setValuesSpy).toHaveBeenLastCalledWith(
-          expect.objectContaining({
-            owner: {
-              nif: '12345678XX',
-              nif_valid: false,
-              person_type: 'physic-person',
             },
           })
         )

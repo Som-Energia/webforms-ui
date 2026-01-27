@@ -1,5 +1,5 @@
 name: cypress webforms-ui
-on: [push]
+# on: [push]
 env:
   REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
 jobs:

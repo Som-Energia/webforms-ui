@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CircularProgress from '@mui/material/CircularProgress'
@@ -83,7 +83,7 @@ const GurbSignature = (props) => {
       ) : (
         <Grid container>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <TextRecomendation title={t('GURB_SIGNATURE')}
+            <TextRecommendation title={t('GURB_SIGNATURE')}
               isHeader
             />
           </Grid>

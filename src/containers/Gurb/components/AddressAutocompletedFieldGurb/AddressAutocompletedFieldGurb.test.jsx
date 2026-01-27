@@ -22,7 +22,7 @@ describe('AddressAutocompletedFieldGurb component ', async () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('AddressAutocompletedFieldGurb calls onChange with correct code on blur', async () => {
+  test('AddressAutocompletedFieldGurb calls onChange handler with correct code when blur event fired', async () => {
     const mockOnChange = vi.fn()
 
     render(

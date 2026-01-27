@@ -2,7 +2,7 @@ import AlertBox from './AlertBox'
 import { render, queryByAttribute } from '@testing-library/react'
 
 describe('AlertBox component ', () => {
-  test('AlertBox with severity="warning" renders without crashing', () => {
+  test('AlertBox render with severity="warning"', () => {
     const dom = render(
       <AlertBox
         severity="warning"
@@ -16,7 +16,7 @@ describe('AlertBox component ', () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('AlertBox with severity="success" renders without crashing', () => {
+  test('AlertBox render with severity="success"', () => {
     const dom = render(
       <AlertBox
         severity="success"
@@ -30,7 +30,7 @@ describe('AlertBox component ', () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('AlertBox with severity="error" renders without crashing', () => {
+  test('AlertBox render with severity="error"', () => {
     const dom = render(
       <AlertBox severity="error" title="Test Header" description="Test Body" />
     )
@@ -40,7 +40,7 @@ describe('AlertBox component ', () => {
     expect(input).toBeInTheDocument()
   })
 
-  test('AlertBox with severity="info" renders without crashing', () => {
+  test('AlertBox render with severity="info"', () => {
     const dom = render(
       <AlertBox severity="info" title="Test Header" description="Test Body" />
     )
