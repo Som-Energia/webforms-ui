@@ -47,7 +47,7 @@ const Home = (props) => {
   const navigate = useNavigate()
 
   return (
-    <Box sx={{ display: 'flex', backgroundColor: '#f2f2f2' }}>
+    <Box sx={{ display: 'flex', backgroundColor: 'secondary.light' }}>
       <AppBar position="fixed" color="inherit">
         <Toolbar>
           <Typography variant="h6">
