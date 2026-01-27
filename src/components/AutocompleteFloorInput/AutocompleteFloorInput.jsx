@@ -8,7 +8,7 @@ export default function SomAutocompleteFloorInput({
   fieldName,
   value = '',
   options = [],
-  onChangeHandler = () => {}
+  onChangeHandler = () => { }
 }) {
   const autocompleteOptions = options.map((item) => item.translation)
   const defaultOptionValue =
@@ -37,6 +37,7 @@ export default function SomAutocompleteFloorInput({
     <>
       <Autocomplete
         sx={somAutocompleteInputStyles}
+        data-cy={fieldName}
         freeSolo
         disableClearable
         clearOnBlur

@@ -3,7 +3,7 @@ Cypress.Commands.add('identifyNewMember', (nif) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error=false) => {
+Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error = false) => {
   cy.get('[data-cy="privacy_policy"]').click()
   cy.get('[data-cy="statutes"]').click()
   cy.intercept('POST', '/form/soci/alta', {
@@ -14,7 +14,7 @@ Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error=false) => {
   })
   cy.get('[data-cy="next"]').click()
   let icon = status ? "success-icon" : "error-icon"
-  cy.get('[data-cy='+icon+']').should('exist')
+  cy.get('[data-cy=' + icon + ']').should('exist')
 })
 
 Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, optionalData = false) => {
@@ -23,19 +23,20 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
   cy.get('[data-cy="address"]').type(validAddress.input)
   cy.contains(personalData.street).click()
-  cy.wait(1000)
+  cy.wait(1000) // eslint-disable-line
 
-  cy.get('[data-cy="address.number"]').clear().type(22, { delay: 100 })
+  cy.get('[data-cy="address.number"]').clear()
+  cy.get('[data-cy="address.number"]').type(22, { delay: 200 })
+  cy.get('[data-cy="address.bloc"]').type('Omega')
+  cy.get('[data-cy="address.stairs"]').type('B')
   cy.get('[data-cy="address.floor"]').type('1')
   cy.get('[data-cy="address.door"]').type('3')
-  cy.get('[data-cy="address.stairs"]').type('B')
-  cy.get('[data-cy="address.bloc"]').type('Omega')
   cy.get('[data-cy="new_member.email"]').type(personalData.email)
   cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
-  cy.get('[data-cy="new_member.phone"]').type(personalData.phone).focused().blur()
+  cy.get('[data-cy="new_member.phone"]').type(personalData.phone)
+  cy.get('[data-cy="new_member.phone"]').focused().blur()
 
-  if (optionalData)
-  {
+  if (optionalData) {
     cy.get('[id="new_member.gender"]').click()
     cy.get('[id="new_member.gender-female"]').click()
     cy.get('[placeholder="DD/MM/YYYY"').type(personalData.birthdate)
@@ -55,20 +56,18 @@ Cypress.Commands.add(
     cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
     cy.get('[data-cy="address"]').type(validAddress.input)
     cy.contains(personalData.street).click()
-    cy.wait(1000)
+    cy.wait(1000) // eslint-disable-line
 
     cy.get('[data-cy="address.number"]').clear()
-    cy.get('[data-cy="address.number"]').type(22, { delay: 100 })
+    cy.get('[data-cy="address.number"]').type(22, { delay: 200 })
+    cy.get('[data-cy="address.bloc"]').type('Omega')
+    cy.get('[data-cy="address.stairs"]').type('B')
     cy.get('[data-cy="address.floor"]').type('1')
     cy.get('[data-cy="address.door"]').type('3')
-    cy.get('[data-cy="address.stairs"]').type('B')
-    cy.get('[data-cy="address.bloc"]').type('Omega')
     cy.get('[data-cy="new_member.email"]').type(personalData.email)
     cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
-    cy.get('[data-cy="new_member.phone"]')
-      .type(personalData.phone)
-      .focused()
-      .blur()
+    cy.get('[data-cy="new_member.phone"]').type(personalData.phone)
+    cy.get('[data-cy="new_member.phone"]').focused().blur()
 
     if (optionalData) {
       cy.get('[id="new_member.referral_source"]').click()
@@ -90,19 +89,18 @@ Cypress.Commands.add(
     cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
     cy.get('[data-cy="address"]').type(validAddress.input)
     cy.contains(personalData.street).click()
-    cy.wait(1000)
+    cy.wait(1000) // eslint-disable-line
 
-    cy.get('[data-cy="address.number"]').clear().type(22, { delay: 100 })
+    cy.get('[data-cy="address.number"]').clear()
+    cy.get('[data-cy="address.number"]').type(22, { delay: 200 })
+    cy.get('[data-cy="address.bloc"]').type('Omega')
+    cy.get('[data-cy="address.stairs"]').type('B')
     cy.get('[data-cy="address.floor"]').type('1')
     cy.get('[data-cy="address.door"]').type('3')
-    cy.get('[data-cy="address.stairs"]').type('B')
-    cy.get('[data-cy="address.bloc"]').type('Omega')
     cy.get('[data-cy="new_member.email"]').type(personalData.email)
     cy.get('[data-cy="new_member.email2"]').type(personalData.email2)
-    cy.get('[data-cy="new_member.phone"]')
-      .type(personalData.phone)
-      .focused()
-      .blur()
+    cy.get('[data-cy="new_member.phone"]').type(personalData.phone)
+    cy.get('[data-cy="new_member.phone"]').focused().blur()
 
     if (optionalData) {
       cy.get('[id="new_member.referral_source"]').click()
