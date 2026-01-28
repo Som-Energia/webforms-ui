@@ -55,7 +55,7 @@ const Result = (props) => {
             }}>
 
                 {mode === 'success' ? <CheckCircleIcon data-cy='success-icon' fontSize="large" sx={{ color: 'primary.extraLight' }} /> : null}
-                {mode === 'failure' ? <CancelIcon data-cy='error-icon' fontSize="large" sx={{ color: 'primary2.main' }} /> : null}
+                {mode === 'failure' ? <CancelIcon data-cy='error-icon' fontSize="large" sx={{ color: 'primary.mainOrange' }} /> : null}
 
                 <Title title={title} mode={mode} />
 

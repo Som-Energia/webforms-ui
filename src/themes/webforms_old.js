@@ -1,8 +1,6 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
-export const SECONDARY_LIGHT = '#D9D9D9'
-
-export default function WebFormsTheme() {
+export default function OldWebFormsTheme() {
   const theme = createTheme({
     palette: {
       //contrastThreshold: 2, // From webforms-ui
@@ -19,10 +17,14 @@ export default function WebFormsTheme() {
       secondary: {
         main: '#C4C4C4',
         dark: '#8C8C8C',
-        light: SECONDARY_LIGHT,
+        light: '#D9D9D9',
         extraDark: '#636363',
-        extraLight: '#FAFAFA',
-        white: '#FFFFFF'
+        extraLight: '#FAFAFA'
+      },
+      holderChangeProgress: { //needed for LinearProgress from mui
+        main: '#ff632b',
+        light: '#ffcdb5',
+        alt: '#afb5e8'
       },
       background: {
         first: '#CED5D0',

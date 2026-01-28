@@ -5,7 +5,7 @@ import InputField from './InputField/InputField'
 
 import { checkCadastralReference } from '../services/api'
 import LoadingContext from '../context/LoadingContext'
-import { useTheme } from '@mui/material/styles'
+
 
 const CadastralReference = (props) => {
   const {
@@ -17,7 +17,6 @@ const CadastralReference = (props) => {
     setFieldTouched
   } = props
 
-  const theme = useTheme()
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(LoadingContext)
 
@@ -82,10 +81,10 @@ const CadastralReference = (props) => {
             href={t('HELP_CADASTRAL_REFERENCE_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            style={{color: theme.palette.link.main, textDecoration: 'underline' }}>
+          >
             {t('CADASTRAL_REFERENCE_LINK')}
           </a>
-          </span>
+        </span>
       }
       handleChange={handleInputCadastralReference}
       handleBlur={handleInputCadastralReferenceBlur}

@@ -175,10 +175,10 @@ function ModifyContract(props) {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Box sx={{ width: '100%', backgroundColor: 'background.third' }}>
-        {noticeAutonomous ? (
+        {noticeAutonomous ? (  // TODO: Deprecated??
           <AlertBox
             severity={'warning'}
-            variant={'body2'}
+            variant={'body.md.regular'}
             title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')}
             description={t('MODIFY_POTTAR_BANER', {
               baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),

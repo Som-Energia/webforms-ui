@@ -127,7 +127,7 @@ const GenerationContributionForm = (props) => {
             id="percent_value_error"
             description={t('GENERATION_PERCENT_ERROR_DESC')}
             severity={'warning'}
-            variant={'body2'}
+            variant={'body.md.regular'}
           />
         )}
       </Box>

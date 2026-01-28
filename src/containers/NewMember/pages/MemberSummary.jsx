@@ -3,15 +3,15 @@ import { useState } from 'react'
 
 import ReviewTable from '../../../components/review/ReviewTable'
 import InputTitle from '../../../components/InputTitle'
+import { buttonLight } from '../../../components/Buttons/buttonStyles'
 
-import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-
-import { buttonGurbLight } from '../../../themes/gurbTheme'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import Typography from '@mui/material/Typography'
 
 import { iconRequirements } from '../../../themes/commonStyles'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../../services/steps'
@@ -26,6 +26,7 @@ const MemberSummary = (props) => {
     setFieldTouched
   } = props
 
+  const theme = useTheme()
   const { t } = useTranslation()
 
   const [loading, setLoading] = useState(false)
@@ -51,7 +52,7 @@ const MemberSummary = (props) => {
   }
 
   const legalReviewFields = {
-    icon: <PersonalIcon sx={iconRequirements} />,
+    icon: <PersonalIcon sx={iconRequirements({theme: theme})} />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
@@ -93,7 +94,7 @@ const MemberSummary = (props) => {
   }
 
   const physicalReviewFields = {
-    icon: <PersonalIcon sx={iconRequirements} />,
+    icon: <PersonalIcon sx={iconRequirements({theme: theme})} />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
@@ -133,7 +134,7 @@ const MemberSummary = (props) => {
         ? physicalReviewFields
         : legalReviewFields,
       {
-        icon: <PhoneIcon sx={iconRequirements} />,
+        icon: <PhoneIcon sx={iconRequirements({theme: theme})} />,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
@@ -162,7 +163,7 @@ const MemberSummary = (props) => {
     ],
     [
       {
-        icon: <CreditCardIcon sx={iconRequirements} />,
+        icon: <CreditCardIcon sx={iconRequirements({theme: theme})} />,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {
@@ -213,7 +214,7 @@ const MemberSummary = (props) => {
             id="edit_button"
             size="small"
             sx={{
-              ...buttonGurbLight,
+              ...buttonLight,
               minWidth: 'auto',
               width: 'auto',
               fontSize: '0.90rem',
@@ -233,18 +234,13 @@ const MemberSummary = (props) => {
           variant="body.sm.regular"
           color="secondary.extraDark"
           dangerouslySetInnerHTML={{
-            __html: t('PURPOSE_MEMBER').concat('<br />' ,t('RIGHTS_MEMBER'))
+            __html: t('PURPOSE_MEMBER').concat('<br />', t('RIGHTS_MEMBER'))
           }}
         />
       </Grid>
 
       <Grid item xs={12}>
         <FormControlLabel
-          sx={{
-            '& .MuiFormControlLabel-label a': {
-              color: 'link.main'
-            },
-          }}
           control={
             <Checkbox
               data-cy="privacy_policy"
@@ -266,11 +262,6 @@ const MemberSummary = (props) => {
 
       <Grid item xs={12}>
         <FormControlLabel
-          sx={{
-            '& .MuiFormControlLabel-label a': {
-              color: 'link.main'
-            },
-          }}
           control={
             <Checkbox
               data-cy="statutes"

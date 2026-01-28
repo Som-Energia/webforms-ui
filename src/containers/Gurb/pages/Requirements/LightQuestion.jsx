@@ -1,13 +1,13 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { useTheme } from '@mui/material/styles'
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 
 import Chooser from '../../../../components/Chooser/Chooser'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
-import { iconRequirements } from '../../../../themes/commonStyles'
-import { iconOffRequirements } from '../../../../themes/gurbTheme'
+import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
 
 import Grid from '@mui/material/Grid'
 
@@ -15,6 +15,7 @@ import PopUpContext from '../../../../context/PopUpContext'
 import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
 const LightQuestion = (props) => {
+  const theme = useTheme()
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const { setContent } = useContext(PopUpContext)
@@ -37,12 +38,12 @@ const LightQuestion = (props) => {
   const options = [
     {
       id: 'light-on',
-      icon: <LightbulbOutlinedIcon sx={iconRequirements} />,
+      icon: <LightbulbOutlinedIcon sx={iconRequirements({ theme: theme })} />,
       textHeader: t('LIGHT_YES')
     },
     {
       id: 'light-off',
-      icon: <LightbulbOutlinedIcon sx={iconOffRequirements} />,
+      icon: <LightbulbOutlinedIcon sx={iconOffRequirements({ theme: theme })} />,
       textHeader: t('LIGHT_NO')
     }
   ]
@@ -50,7 +51,7 @@ const LightQuestion = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecommendation title={t('GURB_HAS_LIGHT_TITLE')} />
+        <TextRecommendation title={t('GURB_HAS_LIGHT_TITLE')} isHeader />
       </Grid>
       <Grid item xs={12}>
         <Chooser

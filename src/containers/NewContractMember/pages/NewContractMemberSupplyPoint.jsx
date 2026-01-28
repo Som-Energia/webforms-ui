@@ -57,7 +57,7 @@ const newContractMemberSupplyPoint = ({ ...props }) => {
           id="percent_value_error"
           description={t('RECOMMENDATION_SUBTITLE')}
           severity={'warning'}
-          variant={'body2'}
+          variant={'body.md.regular'}
         />
       </Grid>
       <Grid item xs={12}>

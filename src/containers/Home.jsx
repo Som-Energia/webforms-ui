@@ -26,7 +26,7 @@ const options = [
   { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse`},
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Component Testing', href: `/${language}/component-testing` },
-  { title: 'Aportació al capital social', href: `${language}/cooperativa/aportaciones-capital-social/formulario` },
+  { title: 'Aportació al capital social', href: `${language}/aportaciones-capital-social/formulario` },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
   { title: 'Confirmament de baixa', href: '/cancellation/confirm' },
   { title: 'Canvi de titular', href: '/holder-change' },
@@ -47,7 +47,7 @@ const Home = (props) => {
   const navigate = useNavigate()
 
   return (
-    <Box sx={{ display: 'flex', backgroundColor: '#f2f2f2' }}>
+    <Box sx={{ display: 'flex', backgroundColor: 'secondary.light' }}>
       <AppBar position="fixed" color="inherit">
         <Toolbar>
           <Typography variant="h6">

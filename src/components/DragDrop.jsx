@@ -16,8 +16,10 @@ import { uploadFile } from '../services/api'
 import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import { useTheme } from '@mui/material/styles'
 
 const DragDrop = ({ fieldName, required, values, onChange }) => {
+  const theme = useTheme()
   const { t } = useTranslation()
 
   const [drag, setDrag] = useState(false)
@@ -149,9 +151,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
             borderRadius: '8px',
             border: drag
               ? '2px dashed black'
-              : uploads
-                ? '2px dashed #96B633'
-                : '2px dashed #D9D9D9',
+              : `2px dashed ${theme.palette.secondary.light}`,
             boxShadow: 'none',
             display: 'flex',
             flexDirection: 'column',
