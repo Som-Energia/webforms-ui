@@ -21,6 +21,11 @@ export default function OldWebFormsTheme() {
         extraDark: '#636363',
         extraLight: '#FAFAFA'
       },
+      holderChangeProgress: { //needed for LinearProgress from mui
+        main: '#ff632b',
+        light: '#ffcdb5',
+        alt: '#afb5e8'
+      },
       background: {
         first: '#CED5D0',
         second: '#E2E8DE',

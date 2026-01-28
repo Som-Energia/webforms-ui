@@ -3,15 +3,15 @@ import { useState } from 'react'
 
 import ReviewTable from '../../../components/review/ReviewTable'
 import InputTitle from '../../../components/InputTitle'
+import { buttonLight } from '../../../components/Buttons/buttonStyles'
 
 import { useTheme } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-
-import { buttonLight } from '../../../components/Buttons/buttonStyles'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import Typography from '@mui/material/Typography'
 
 import { iconRequirements } from '../../../themes/commonStyles'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../../services/steps'
