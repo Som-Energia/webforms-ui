@@ -30,6 +30,7 @@ import memberPersonalDataValidations from './validations/memberPersonalDataValid
 import memberPaymentMethodValidations from './validations/paymentMethodValidations'
 import memberSummaryValidations from './validations/memberSummaryValidations'
 import Loading from '../../components/Loading'
+import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 const MAX_STEP_NUMBER = 3
 
@@ -48,7 +49,7 @@ const NewMemberForm = () => {
   const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
- 
+
   useSyncLanguage(language)
 
   const initialValues = {
