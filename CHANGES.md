@@ -3,6 +3,7 @@
 ## unreleased
 
 - NEW: jest unit tests
+- FIX: cost url info for modify-contract
 
 ## 6.6.1 2026-01-22
 
