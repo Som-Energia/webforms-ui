@@ -14,7 +14,6 @@ import { iconRequirements, iconOffRequirements } from '../../../../themes/common
 import PopUpContext from '../../../../context/PopUpContext'
 
 const SelfConsumption = (props) => {
-  const theme = useTheme()
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const { setContent } = useContext(PopUpContext)
@@ -36,12 +35,12 @@ const SelfConsumption = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarPowerOutlinedIcon sx={iconRequirements({theme: theme})} />,
+      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
       textHeader: t('SELFCONSUMPTION_YES_HEADER')
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements({theme: theme})} />,
+      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
       textHeader: t('SELFCONSUMPTION_NO_HEADER')
     }
   ]

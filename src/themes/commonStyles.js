@@ -1,15 +1,17 @@
-export const iconRequirements = ({ theme, padding = '8px' }) => ({
+export const iconRequirements = ({ padding = '8px' }) => ({
   borderRadius: '8px',
-  border: `1px solid ${theme.palette.secondary.light}`,
+  border: '1px solid',
+  borderColor: 'secondary.light',
   color: 'primary.dark',
   fontSize: '3rem',
   padding: padding,
   backgroundColor: 'secondary.white'
 })
 
-export const iconOffRequirements = ({ theme, padding = '8px' }) => ({
+export const iconOffRequirements = ({ padding = '8px' }) => ({
   borderRadius: '8px',
-  border: `1px solid ${theme.palette.secondary.light}`,
+  border: '1px solid',
+  borderColor: 'secondary.light',
   color: 'primary.dark',
   fontSize: '3rem',
   padding: padding,
