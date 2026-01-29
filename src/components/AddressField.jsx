@@ -11,14 +11,10 @@ import streetTypes from '../data/street-types.json'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField/InputField'
 import { getPlaceDetails } from '../services/googleApiClient'
+import { AddressUtils } from '../utils/adress.utils'
 import { ArrayUtils } from '../utils/array.utils'
 import { StringUtils } from '../utils/string.utils'
 import StateCity from './StateCity'
-
-const normalizePlace = (place) => ({
-  id: place?.id?.toString() || '',
-  name: place?.name || ''
-})
 
 const updateAddressValues = async (
   addressValue,
@@ -26,37 +22,30 @@ const updateAddressValues = async (
   values,
   setValues,
   addressFieldName,
-  sessionTokenRef
+  sessionTokenRef,
+  language = 'ca'
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
 
-    const postalCodeComponent = place.addressComponents.find((c) =>
-      c.types.includes('postal_code')
-    )
-    const municipalities = await getMunicipisByPostalCode(
-      postalCodeComponent?.longText
-    )
+    const { postal_code: postalCode, route: streetName } =
+      AddressUtils.parsePlace(place, ['postal_code', 'route'])
 
-    const streetComponent = place.addressComponents.find((c) =>
-      c.types.includes('route')
-    )
+    const municipalities = await getMunicipisByPostalCode(postalCode)
+    const cityRaw = municipalities?.[0]?.[0]?.municipi
+    const stateRaw = municipalities?.[0]?.[0]?.provincia
+    const city = AddressUtils.sanitizePlace(cityRaw)
+    const state = AddressUtils.sanitizePlace(stateRaw)
 
-    const [streetPartial] = streetComponent?.longText?.split(' ') || []
+    const [streetPartial] = streetName.split(' ') || []
     const cadastralItem = streetTypes.find((item) =>
       ArrayUtils.hasStringValue(item.values, streetPartial)
     )
 
     const cadastralStreetCode = cadastralItem?.code || 'CL' // Street is code by default
-    const cadastralStreet = StringUtils.normalize(
-      (streetComponent?.longText || '').replace(`${streetPartial} `, '')
-    )
-
-    const cityRaw = municipalities?.[0]?.[0]?.municipi || { id: '', name: '' }
-    const stateRaw = municipalities?.[0]?.[0]?.provincia || { id: '', name: '' }
-
-    const city = normalizePlace(cityRaw)
-    const state = normalizePlace(stateRaw)
+    const cadastralStreet = StringUtils.normalize(streetName)
+    // WARN: The language code differs from the one used by Google Place Autocomplete (user's browser lang).
+    const { segments } = AddressUtils.segmentStreet(cadastralStreet, language)
 
     setValues({
       ...values,
@@ -65,11 +54,11 @@ const updateAddressValues = async (
         id: addressValue.id,
         text: addressValue.text,
         number: numberValue,
-        postal_code: postalCodeComponent?.longText || '',
-        street: streetComponent?.longText || '',
+        postal_code: postalCode || '',
+        street: streetName || '',
         state,
         cadas_tv: cadastralStreetCode,
-        cadas_street: cadastralStreet,
+        cadas_street: segments?.length ? segments : [cadastralStreet],
         city
       }
     })
@@ -88,7 +77,8 @@ const AddressField = ({
   setFieldTouched,
   setValues
 }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const lang = i18n.language
   const sessionTokenRef = useRef()
 
   const [numberValue, setNumberValue] = useState(
@@ -114,16 +104,15 @@ const AddressField = ({
 
     try {
       const place = await getPlaceDetails(value.id, sessionTokenRef)
-      const addressComponents = place.addressComponents
-      const streetName = addressComponents.find((c) =>
-        c.types.includes('route')
-      )?.longText
-      const postalCode = addressComponents.find((c) =>
-        c.types.includes('postal_code')
-      )?.longText
-      const streetNumber = addressComponents.find((c) =>
-        c.types.includes('street_number')
-      )?.longText
+      const {
+        route: streetName,
+        postal_code: postalCode,
+        street_number: streetNumber
+      } = AddressUtils.parsePlace(place, [
+        'route',
+        'postal_code',
+        'street_numer'
+      ])
 
       setFieldValue(`${addressFieldName}.street`, streetName || '')
       setFieldValue(`${addressFieldName}.postal_code`, postalCode || '')
@@ -139,7 +128,8 @@ const AddressField = ({
         values,
         setValues,
         addressFieldName,
-        sessionTokenRef
+        sessionTokenRef,
+        lang
       )
     } catch (error) {
       console.error('Error fetching place details:', error)
@@ -159,18 +149,11 @@ const AddressField = ({
     if (value.length >= 5) {
       try {
         const municipalities = await getMunicipisByPostalCode(value)
+        const cityRaw = municipalities?.[0]?.[0]?.municipi
+        const stateRaw = municipalities?.[0]?.[0]?.provincia
 
-        const cityRaw = municipalities?.[0]?.[0]?.municipi || {
-          id: '',
-          name: ''
-        }
-        const stateRaw = municipalities?.[0]?.[0]?.provincia || {
-          id: '',
-          name: ''
-        }
-
-        const city = normalizePlace(cityRaw)
-        const state = normalizePlace(stateRaw)
+        const city = AddressUtils.sanitizePlace(cityRaw)
+        const state = AddressUtils.sanitizePlace(stateRaw)
 
         setFieldValue(`${addressFieldName}.city`, city)
         setFieldValue(`${addressFieldName}.state`, state)

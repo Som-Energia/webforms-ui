@@ -109,7 +109,14 @@
   },
   {
     "code": "CR",
-    "values": ["Carrera", "Cra.", "Carr.", "Lasterketa", "Carreira"]
+    "values": [
+      "Carrera",
+      "Cra.",
+      "Carr.",
+      "Lasterketa",
+      "Carreira",
+      "Carretera"
+    ]
   },
   {
     "code": "CS",
@@ -188,12 +195,7 @@
   },
   {
     "code": "GL",
-    "values": [
-      "Glorieta",
-      "Gta.",
-      "Glor.",
-      "Biribilgunea"
-    ]
+    "values": ["Glorieta", "Gta.", "Glor.", "Biribilgunea"]
   },
   {
     "code": "GR",
