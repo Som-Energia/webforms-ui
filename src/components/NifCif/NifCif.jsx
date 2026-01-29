@@ -91,7 +91,7 @@ const NifCif = (props) => {
           handleBlur={handleBlur}
           touched={touched[entity]?.nif}
           value={values[entity]?.nif}
-          error={errors[entity]?.nif }
+          error={errors[entity]?.nif || errors[entity]?.nif_valid}
           required={true}
           customInputProps={{ maxLength: MAXINDENTIFIERLENGTH }}
         />
