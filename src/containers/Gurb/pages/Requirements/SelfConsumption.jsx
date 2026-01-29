@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useTheme } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
 import SolarPowerOutlinedIcon from '@mui/icons-material/SolarPowerOutlined'
 
@@ -9,7 +8,7 @@ import TextRecommendation from '../../components/TextRecommendation/TextRecommen
 import Chooser from '../../../../components/Chooser/Chooser'
 import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
-import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
+import { iconRequirementsStyles, iconOffRequirementsStyles } from '../../../../themes/commonStyles'
 
 import PopUpContext from '../../../../context/PopUpContext'
 
@@ -35,12 +34,12 @@ const SelfConsumption = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
+      icon: <SolarPowerOutlinedIcon sx={iconRequirementsStyles} />,
       textHeader: t('SELFCONSUMPTION_YES_HEADER')
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
+      icon: <SolarPowerOutlinedIcon sx={iconOffRequirementsStyles} />,
       textHeader: t('SELFCONSUMPTION_NO_HEADER')
     }
   ]

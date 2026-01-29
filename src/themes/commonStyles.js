@@ -1,4 +1,4 @@
-export const iconRequirements = ({ padding = '8px' }) => ({
+export const iconRequirementsStyles = ({ padding = '8px' }) => ({
   borderRadius: '8px',
   border: '1px solid',
   borderColor: 'secondary.light',
@@ -8,7 +8,7 @@ export const iconRequirements = ({ padding = '8px' }) => ({
   backgroundColor: 'secondary.white'
 })
 
-export const iconOffRequirements = ({ padding = '8px' }) => ({
+export const iconOffRequirementsStyles = ({ padding = '8px' }) => ({
   borderRadius: '8px',
   border: '1px solid',
   borderColor: 'secondary.light',

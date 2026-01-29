@@ -12,7 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
 
-import { iconRequirements } from '../../../themes/commonStyles'
+import { iconRequirementsStyles } from '../../../themes/commonStyles'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../../services/steps'
 import { PersonalIcon, PhoneIcon, CreditCardIcon } from '../../../data/icons/Icons'
 
@@ -50,7 +50,7 @@ const MemberSummary = (props) => {
   }
 
   const legalReviewFields = {
-    icon: <PersonalIcon sx={iconRequirements} />,
+    icon: <PersonalIcon sx={iconRequirementsStyles} />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
@@ -92,7 +92,7 @@ const MemberSummary = (props) => {
   }
 
   const physicalReviewFields = {
-    icon: <PersonalIcon sx={iconRequirements} />,
+    icon: <PersonalIcon sx={iconRequirementsStyles} />,
     title: t('REVIEW_HOLDER_TITLE'),
     field: [
       {
@@ -132,7 +132,7 @@ const MemberSummary = (props) => {
         ? physicalReviewFields
         : legalReviewFields,
       {
-        icon: <PhoneIcon sx={iconRequirements} />,
+        icon: <PhoneIcon sx={iconRequirementsStyles} />,
         title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
         field: [
           {
@@ -161,7 +161,7 @@ const MemberSummary = (props) => {
     ],
     [
       {
-        icon: <CreditCardIcon sx={iconRequirements} />,
+        icon: <CreditCardIcon sx={iconRequirementsStyles} />,
         title: t('REVIEW_PAYMENT_DATA_TITLE'),
         field: [
           {

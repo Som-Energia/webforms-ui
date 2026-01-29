@@ -1,21 +1,19 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useTheme } from '@mui/material/styles'
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
+import Grid from '@mui/material/Grid'
 
 import Chooser from '../../../../components/Chooser/Chooser'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-
-import { iconRequirements, iconOffRequirements } from '../../../../themes/commonStyles'
-
-import Grid from '@mui/material/Grid'
-
-import PopUpContext from '../../../../context/PopUpContext'
 import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
+import PopUpContext from '../../../../context/PopUpContext'
+
+import { iconRequirementsStyles, iconOffRequirementsStyles } from '../../../../themes/commonStyles'
+
+
 const LightQuestion = (props) => {
-  const theme = useTheme()
   const { values, setFieldValue } = props
   const { t } = useTranslation()
   const { setContent } = useContext(PopUpContext)
@@ -38,12 +36,12 @@ const LightQuestion = (props) => {
   const options = [
     {
       id: 'light-on',
-      icon: <LightbulbOutlinedIcon sx={iconRequirements({ theme: theme })} />,
+      icon: <LightbulbOutlinedIcon sx={iconRequirementsStyles} />,
       textHeader: t('LIGHT_YES')
     },
     {
       id: 'light-off',
-      icon: <LightbulbOutlinedIcon sx={iconOffRequirements({ theme: theme })} />,
+      icon: <LightbulbOutlinedIcon sx={iconOffRequirementsStyles} />,
       textHeader: t('LIGHT_NO')
     }
   ]
