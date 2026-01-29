@@ -12,6 +12,13 @@ step() {
 	echo -e $BLUE"$*"$NC >&2
 }
 
+if [ "$(dirname $0)" != "." ]; then
+    echo "You must run the program from the scripts directory."
+    exit -1
+fi
+
+
+
 SCRIPTPATH=$(dirname $0)
 REPOPATH=$(dirname $0)/..
 BUILD=${REPOPATH}/forms/
@@ -29,12 +36,12 @@ else
 fi
 
 function build () {
-    log_message "INFO" "Building project $build"
+    step "INFO" "Building project $build"
     npm run $build
 
     if [ $? != 0 ]
     then
-        log_message "ERROR" "An error ocurred building app $?"
+        echo "ERROR" "An error ocurred building app $?"
         exit -1
     fi
 }
@@ -69,16 +76,20 @@ function updateCurrentLink () {
 }
 
 function createStaticLink () {
+	
 	if [ -L "$DEPLOYMENT_STATIC_PATH" ]; then
 		echo "$DEPLOYMENT_STATIC_PATH already exists"
-	else
-        step "Creating soft link from static to current version"
-        echo "$DEPLOYMENT_STATIC_PATH -> $DEPLOYMENT_CURRENT_PATH/current_forms"
-        ln -s $DEPLOYMENT_CURRENT_PATH/current_forms $DEPLOYMENT_STATIC_PATH
+		rm -f $DEPLOYMENT_STATIC_PATH
 	fi
+    
+	step "Creating soft link from static to current version"
+    echo "$DEPLOYMENT_STATIC_PATH -> $DEPLOYMENT_CURRENT_PATH/current_forms"
+    ln -s $DEPLOYMENT_CURRENT_PATH/current_forms $DEPLOYMENT_STATIC_PATH
 }
 
 echo "Let's go! Deploying local OV instance..."
+
+
 build
 checkOV
 copyBuildToDest
