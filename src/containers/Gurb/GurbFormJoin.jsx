@@ -26,7 +26,6 @@ import {
   gurbPolicyChecks
 } from './validations/GurbValidations'
 
-import GurbErrorContext from '../../context/GurbErrorContext'
 import LoadingContext from '../../context/LoadingContext'
 
 // Step components
@@ -35,7 +34,6 @@ import GurbParticipation from './pages/Gurb/GurbParticipation'
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbSignature from './pages/Gurb/GurbSignature'
 
-import { somStepperBox } from '../../themes/gurbTheme'
 
 const MAX_STEPS_NUMBER = 4
 
@@ -48,7 +46,6 @@ const GurbFormJoin = (props) => {
   const [activeStep, setActiveStep] = useState(0)
   const [submitAction, setSubmitAction] = useState(false)
 
-  const { error, errorInfo, getStepResult } = useContext(GurbErrorContext)
   const { loading } = useContext(LoadingContext)
 
   const { trackEvent } = useContext(MatomoContext)
@@ -155,7 +152,7 @@ const GurbFormJoin = (props) => {
         {(formikProps) => (
           <>
             <Box
-              sx={somStepperBox}>
+               sx={{ marginBottom: '65px' }}>
               <SomStepper
                 showStepTitle={true}
                 activeStep={activeStep}
@@ -163,9 +160,9 @@ const GurbFormJoin = (props) => {
               />
             </Box>
 
-            {error ? getStepResult(errorInfo) : getStep(formikProps)}
+            {getStep(formikProps)}
 
-            {!error && (
+            {(
               <>
                 <Grid
                   container

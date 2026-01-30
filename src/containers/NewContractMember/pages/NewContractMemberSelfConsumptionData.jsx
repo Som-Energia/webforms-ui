@@ -129,7 +129,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
               id="percent_value_error"
               description={t('SELFCONSUMPTION_RECOMMENDATION_TEXT')}
               severity={'warning'}
-              variant={'body2'}
+              variant={'body.md.regular'}
             />
             <Grid item xs={12}>
               <Typography variant="headline4.regular">
@@ -157,7 +157,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
             <a
               href={t('SELFCONSUMPTION_CAU_HELP_URL')}
               target="_blank"
-              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              style={{ color: 'secondary.dark', textDecoration: 'underline' }}
               rel="noopener noreferrer">
               {t('SELFCONSUMPTION_CAU_HELP')}
             </a>
@@ -236,7 +236,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
             <a
               href={t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP_URL')}
               target="_blank"
-              style={{ color: '#8C8C8C', textDecoration: 'underline' }}
+              style={{ color: 'secondary.dark', textDecoration: 'underline' }}
               rel="noopener noreferrer">
               {t('SELFCONSUMPTION_AUXILIARY_SERVICE_HELP')}
             </a>

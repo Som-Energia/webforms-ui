@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
-import { buttonGurbDark } from '../../themes/gurbTheme'
+import { buttonDark } from './buttonStyles'
 
 function SubmitButton(props) {
   const { onClick, disabled, sending, text='FINISH' } = props
@@ -12,7 +12,7 @@ function SubmitButton(props) {
   return (
     <Button
       tabIndex={0}
-      sx={{ ...buttonGurbDark }}
+      sx={{ ...buttonDark }}
       type="button"
       data-cy="next"
       variant="contained"

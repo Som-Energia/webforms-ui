@@ -4,9 +4,10 @@ import ReviewTable from '../../../components/review/ReviewTable'
 import ReviewPricesTable from '../../../components/review/ReviewPrices'
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { buttonGurbLight } from '../../../themes/gurbTheme'
+import { buttonLight } from '../../../components/Buttons/buttonStyles'
 import Button from '@mui/material/Button'
 
+import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
@@ -46,6 +47,7 @@ const NewContractMemberSummary = (props) => {
   } = props
 
   const { t } = useTranslation()
+  const theme = useTheme()
   const isTariffIndexed = values?.contract?.tariff_mode === TARIFF_INDEXED
   const trackID = 'contract-summary'
 
@@ -58,8 +60,8 @@ const NewContractMemberSummary = (props) => {
     values?.has_member == 'member-off'
       ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
       : values?.has_member == 'member-on' || values?.has_member == 'member-link'
-      ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-      : undefined
+        ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
+        : undefined
 
   useEffect(() => {
     sendTrackEvent(trackID)
@@ -182,8 +184,8 @@ const NewContractMemberSummary = (props) => {
     values?.has_member === 'member-on'
       ? oldHolderFields
       : values?.new_member?.person_type == 'legal-person'
-      ? legalReviewFields
-      : physicalReviewFields
+        ? legalReviewFields
+        : physicalReviewFields
 
   const getPaymentField = () => {
     let paymentFields = [
@@ -211,42 +213,42 @@ const NewContractMemberSummary = (props) => {
   const contactInfo =
     values?.has_member === 'member-on'
       ? {
-          icon: <PhoneIcon />,
-          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-          field: [
-            {
-              reviewValue: t('DATA_AS_IN_OV'),
-              step: null
-            }
-          ]
-        }
+        icon: <PhoneIcon />,
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+        field: [
+          {
+            reviewValue: t('DATA_AS_IN_OV'),
+            step: null
+          }
+        ]
+      }
       : {
-          icon: <PhoneIcon />,
-          title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
-          field: [
-            {
-              reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
-              reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
-              step: showReviewLinks
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
-                : null
-            },
-            {
-              reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
-              reviewValue: values?.new_member?.email,
-              step: showReviewLinks
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
-                : null
-            },
-            {
-              reviewLabel: t('LANGUAGE_SUMMARY'),
-              reviewValue: languages[values?.new_member?.language],
-              step: showReviewLinks
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
-                : null
-            }
-          ]
-        }
+        icon: <PhoneIcon />,
+        title: t('REVIEW_CONTACT_INFORMATION_TITLE'),
+        field: [
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
+            reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
+            reviewValue: values?.new_member?.email,
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+              : null
+          },
+          {
+            reviewLabel: t('LANGUAGE_SUMMARY'),
+            reviewValue: languages[values?.new_member?.language],
+            step: showReviewLinks
+              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+              : null
+          }
+        ]
+      }
 
   const process = contractProcess(
     values?.has_light == 'light-on',
@@ -261,10 +263,10 @@ const NewContractMemberSummary = (props) => {
           process == 'A3'
             ? t('NEW_SUPPLY_POINT')
             : process == 'C1'
-            ? t('CHANGE_SUPPLIER')
-            : process == 'C2'
-            ? t('CHANGE_SUPPLIER_AND_HOLDER')
-            : null
+              ? t('CHANGE_SUPPLIER')
+              : process == 'C2'
+                ? t('CHANGE_SUPPLIER_AND_HOLDER')
+                : null
       },
       values?.has_member == 'member-off' && {
         reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
@@ -281,47 +283,46 @@ const NewContractMemberSummary = (props) => {
   const powersDetail =
     values?.contract?.power_type === 'power-higher-15kw'
       ? powersDetailHigher.join(',')
-      : `${t('PEAK')}(${values?.contract?.power['power1']}),${t('VALLEY')}(${
-          values?.contract?.power['power2']
-        })`
+      : `${t('PEAK')}(${values?.contract?.power['power1']}),${t('VALLEY')}(${values?.contract?.power['power2']
+      })`
 
   const technicalData =
     values?.has_light === 'light-on'
       ? [
-          {
-            reviewLabel: t('TOLL_SUMMARY'),
-            reviewValue: t('CURRENT')
-          },
-          {
-            reviewLabel: t('FARE'),
-            reviewValue: isTariffIndexed
-              ? t('FARE_INDEXED')
-              : values?.contract?.power_type === 'power-higher-15kw'
+        {
+          reviewLabel: t('TOLL_SUMMARY'),
+          reviewValue: t('CURRENT')
+        },
+        {
+          reviewLabel: t('FARE'),
+          reviewValue: isTariffIndexed
+            ? t('FARE_INDEXED')
+            : values?.contract?.power_type === 'power-higher-15kw'
               ? t('FARE_PERIODS').concat(' ', '3.0TD')
               : t('FARE_PERIODS').concat(' ', '2.0TD')
-          },
-          {
-            reviewLabel: t('POWER_SUMMARY'),
-            reviewValue: powersDetail
-          },
-          {
-            reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
-          }
-        ]
+        },
+        {
+          reviewLabel: t('POWER_SUMMARY'),
+          reviewValue: powersDetail
+        },
+        {
+          reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
+        }
+      ]
       : [
-          {
-            reviewLabel: t('FARE'),
-            reviewValue: isTariffIndexed
-              ? t('FARE_INDEXED')
-              : values?.contract?.power_type === 'power-higher-15kw'
+        {
+          reviewLabel: t('FARE'),
+          reviewValue: isTariffIndexed
+            ? t('FARE_INDEXED')
+            : values?.contract?.power_type === 'power-higher-15kw'
               ? t('FARE_PERIODS').concat(' ', '3.0TD')
               : t('FARE_PERIODS').concat(' ', '2.0TD')
-          },
-          {
-            reviewLabel: t('POWER_SUMMARY'),
-            reviewValue: powersDetail
-          }
-        ]
+        },
+        {
+          reviewLabel: t('POWER_SUMMARY'),
+          reviewValue: powersDetail
+        }
+      ]
 
   const reviewFields = [
     [processType, reviewHolderData],
@@ -350,7 +351,7 @@ const NewContractMemberSummary = (props) => {
             reviewValue: values?.supply_point.cnae,
             step:
               showReviewLinks &&
-              values?.new_member?.person_type === 'legal-person'
+                values?.new_member?.person_type === 'legal-person'
                 ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
                 : null
           }
@@ -435,7 +436,7 @@ const NewContractMemberSummary = (props) => {
     await setFieldValue(fieldName, value)
     setFieldTouched(fieldName, true)
   }
- 
+
   return loading ? (
     <Loading />
   ) : (
@@ -457,13 +458,11 @@ const NewContractMemberSummary = (props) => {
             id="edit_button"
             size="small"
             sx={{
-              ...buttonGurbLight,
+              ...buttonLight,
               minWidth: 'auto',
               width: 'auto',
-              // padding: '6px 15px',
               fontSize: '0.90rem',
               textTransform: 'none'
-              // height: 36
             }}
             startIcon={<EditOutlinedIcon fontSize="medium" />}
             onClick={() => setShowReviewLinks(true)}>
@@ -544,11 +543,6 @@ const NewContractMemberSummary = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
-          sx={{
-            '& .MuiFormControlLabel-label a': {
-              color: 'link.main'
-            }
-          }}
           control={
             <Checkbox
               data-cy="privacy_policy"
@@ -568,9 +562,8 @@ const NewContractMemberSummary = (props) => {
               />
               <span
                 style={{
-                  color: '#ff632b',
-                  marginLeft: 2,
-                  fontWeight: 'bold'
+                  color: theme.palette.primary.mainOrange,
+                  marginLeft: 4
                 }}>
                 *
               </span>
@@ -606,9 +599,8 @@ const NewContractMemberSummary = (props) => {
               />
               <span
                 style={{
-                  color: '#ff632b',
-                  marginLeft: 2,
-                  fontWeight: 'bold'
+                  color: theme.palette.primary.mainOrange,
+                  marginLeft: 4
                 }}>
                 *
               </span>
@@ -622,7 +614,10 @@ const NewContractMemberSummary = (props) => {
             <span>
               {t('CONTRACTUAL_PACKAGE')}
               <span
-                style={{ color: '#ff632b', marginLeft: 4, fontWeight: 'bold' }}>
+                style={{
+                  color: theme.palette.primary.mainOrange,
+                  marginLeft: 4
+                }}>
                 *
               </span>
             </span>
@@ -643,11 +638,6 @@ const NewContractMemberSummary = (props) => {
       {values?.has_member == 'member-off' ? (
         <Grid item xs={12}>
           <FormControlLabel
-            sx={{
-              '& .MuiFormControlLabel-label a': {
-                color: 'link.main'
-              }
-            }}
             control={
               <Checkbox
                 data-cy="statutes"
@@ -658,7 +648,7 @@ const NewContractMemberSummary = (props) => {
             label={
               <span
                 style={{
-                  position: 'relattiene que tener: ive',
+                  position: 'relative',
                   display: 'inline-block'
                 }}>
                 <label
@@ -671,9 +661,8 @@ const NewContractMemberSummary = (props) => {
                 />
                 <span
                   style={{
-                    color: '#ff632b',
-                    marginLeft: 2,
-                    fontWeight: 'bold'
+                    color: theme.palette.primary.mainOrange,
+                    marginLeft: 4
                   }}>
                   *
                 </span>

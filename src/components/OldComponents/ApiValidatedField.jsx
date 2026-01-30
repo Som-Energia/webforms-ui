@@ -104,7 +104,7 @@ export function ApiValidatedField({
         InputProps={{
           startAdornment: LeadingIcon && (
             <InputAdornment sx={{
-              '& path': { color: 'rgba(0, 0, 0, 0.54)' }
+              '& path': { color: 'primary.dark' }
             }} position="start">
               <LeadingIcon />
             </InputAdornment>

@@ -1,65 +1,21 @@
-// AlertBox Custom Style
-
-export const getAlertBoxStyles = (theme, severity) => {
-  const primary = theme.palette?.primary2?.main
-
-  if (severity === 'warning') {
-    return {
-      textAlign: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#ffcdb580', // 50% opacidad
-      border: 'none',
-      borderRadius: '8px',
-      color: primary,
-      '& .MuiAlertTitle-root': {
-        color: primary
-      },
-      '& .MuiTypography-root': {
-        color: primary,
-        fontSize: 'body.md.regular'
-      },
-      '& *': {
-        color: `${primary} !important`
-      }
-    }
-  }
-
-  return {}
-}
-
-export const chooserStyles = {
-  paddingTop: '1.5rem',
-  paddingBottom: '2rem',
-  paddingLeft: '1.625rem',
-  paddingRight: '1.625rem',
+export const iconRequirementsStyles = ({ padding = '8px' }) => ({
   borderRadius: '8px',
-  border: '1px solid #D9D9D9',
-  cursor: 'pointer'
-}
-
-export const chooserSelectedStyles = {
-  ...chooserStyles,
-  backgroundColor: '#FAFAFA'
-}
-
-export const iconRequirements = ({ padding = '8px' }) => ({
-  borderRadius: '8px',
-  border: '1px solid #D9D9D9',
-  color: '#1E1E1E',
+  border: '1px solid',
+  borderColor: 'secondary.light',
+  color: 'primary.dark',
   fontSize: '3rem',
   padding: padding,
-  backgroundColor: '#fff'
+  backgroundColor: 'secondary.white'
 })
 
-export const iconOffRequirements = ({ padding = '8px' }) => ({
+export const iconOffRequirementsStyles = ({ padding = '8px' }) => ({
   borderRadius: '8px',
-  border: '1px solid #D9D9D9',
-  color: '#1E1E1E',
+  border: '1px solid',
+  borderColor: 'secondary.light',
+  color: 'primary.dark',
   fontSize: '3rem',
   padding: padding,
-  backgroundColor: '#fff',
+  backgroundColor: 'secondary.white',
   background:
     'linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 1.5px), rgba(0,0,0,1) calc(50% - 1.4px), rgba(0,0,0,1) 50%, rgba(0,0,0,1) calc(50% + 1.4px), rgba(0,0,0,0) calc(50% + 1.5px), rgba(0,0,0,0) 100%)',
   backgroundRepeat: 'no-repeat',
@@ -85,4 +41,10 @@ export const redirectUrlButton = {
   lineHeight: 1,
   textTransform: 'none',
   p: 1.5
+}
+
+export const autocompleteAddressInputStyles = {
+  '& .MuiFormHelperText-root': { color: 'secondary.main' },
+  '& .MuiInputLabel-root': { color: 'secondary.main' },
+  '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
 }
