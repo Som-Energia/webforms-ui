@@ -43,7 +43,7 @@ export const redirectUrlButton = {
   p: 1.5
 }
 
-export const autocompleteAddressInput = {
+export const autocompleteAddressInputStyles = {
   '& .MuiFormHelperText-root': { color: 'secondary.main' },
   '& .MuiInputLabel-root': { color: 'secondary.main' },
   '& .MuiOutlinedInput-root': { borderRadius: '8px', paddingY: '0px' }
