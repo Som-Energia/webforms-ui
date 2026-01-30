@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- FIX: VatField error when touched
+
 ## 6.6.2 2026-01-28
 
 - NEW: jest unit tests
