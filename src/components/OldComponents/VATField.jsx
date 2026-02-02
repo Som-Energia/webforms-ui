@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import CheckIcon from '@mui/icons-material/Check'
+import ClearIcon from '@mui/icons-material/Clear';
 
 import { checkVat } from '../../services/api'
 import { checkPhisicalVAT } from '../../services/utils'
@@ -67,12 +68,12 @@ const VATField = (props) => {
   const handleChange = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
-    if(!isVatTouched){
-      setFieldTouched(name,true)  
+    if (!isVatTouched) {
+      setFieldTouched(name, true)
     }
     setValueVAT(value)
   }
-  
+
   return (
     <>
       <TextField
@@ -85,15 +86,16 @@ const VATField = (props) => {
         autoFocus={autoFocus}
         value={value}
         onChange={handleChange}
-        error={!isLoading && !isValidVAT && error}
+        error={error || (!isLoading && !isValidVAT && isVatTouched)}
         helperText={!isLoading && helperText}
         InputProps={{
-          endAdornment: (
+          endAdornment: isVatTouched && (
             <InputAdornment position="end">
-              {isLoading && <CircularProgress size={24} />}
-              {!isLoading && isValidVAT && (
-                <CheckIcon color={error ? 'error' : 'primary'} />
-              )}
+              {
+                isLoading
+                  ? <CircularProgress size={24} />
+                  : !isValidVAT || error ? <ClearIcon color={'error'} /> : <CheckIcon color={'primary'} />
+              }
             </InputAdornment>
           )
         }}

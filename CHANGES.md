@@ -1,8 +1,13 @@
 # Change Log
 
-## unreleased
+## Unreleased
+
+- FIX: VatField error when touched
+
+## 6.6.2 2026-01-28
 
 - NEW: jest unit tests
+- FIX: cost url info for modify-contract
 
 ## 6.6.1 2026-01-22
 
