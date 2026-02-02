@@ -1,8 +1,9 @@
 # Change Log
 
-## Unreleased
+## 6.6.3 2026-02-02
 
 - FIX: VatField error when touched
+- Unify styles to webforms theme
 
 ## 6.6.2 2026-01-28
 
