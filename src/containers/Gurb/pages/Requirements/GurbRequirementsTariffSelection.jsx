@@ -9,7 +9,6 @@ import TextRecommendation from '../../components/TextRecommendation/TextRecommen
 import Chooser from '../../../../components/Chooser/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 
-import { textBody1 } from '../../../../themes/gurbTheme'
 
 const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()
@@ -52,13 +51,13 @@ const GurbRequirementsTariffSelection = (props) => {
     const redirectUrl =
       optionId === 'periods-tariff'
         ? baseUrl +
-          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
-            gurbCode: gurbCode
-          })
+        t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
+          gurbCode: gurbCode
+        })
         : baseUrl +
-          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
-            gurbCode: gurbCode
-          })
+        t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
+          gurbCode: gurbCode
+        })
     setFieldValue('redirectUrl', redirectUrl)
   }
 
@@ -66,13 +65,9 @@ const GurbRequirementsTariffSelection = (props) => {
     <Grid item>
       <TextRecommendation
         title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
+        text={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')}
+        isHeader
       />
-
-      <Typography sx={textBody1}>
-        {t(
-          'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY'
-        )}
-      </Typography>
 
       <Typography sx={{ mt: 4, mb: 2 }}>
         {t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')}

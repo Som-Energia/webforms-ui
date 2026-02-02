@@ -38,7 +38,7 @@ function Failure(props) {
         <CancelIcon
           data-cy="error-icon"
           fontSize="large"
-          sx={{ mb: 3, color: 'primary2.main' }}
+          sx={{ mb: 3, color: 'primary.mainOrange' }}
         />
         <Typography
           sx={{ textAlign: 'center', fontSize: '1.15rem' }}

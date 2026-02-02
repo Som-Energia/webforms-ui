@@ -1,12 +1,9 @@
-import React, { lazy, Suspense, useMemo, useEffect } from 'react'
+import React, { lazy, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
 
-import SomEnergiaTheme from './themes/SomenergiaTheme'
+import OldWebFormsTheme from './themes/webforms_old'
 import WebFormsTheme from './themes/webforms'
-import Loading from './components/Loading'
 import ApiStatus from './components/ApiStatus'
 
 import './i18n/i18n'
@@ -14,7 +11,6 @@ import './App.css'
 import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
 import { PopUpContextProvider } from './context/PopUpContext'
 import { MatomoProvider } from './trackers/matomo/MatomoProvider'
-import { GurbErrorContextProvider } from './context/GurbErrorContext'
 import { LoadingContextProvider } from './context/LoadingContext'
 import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
@@ -22,6 +18,8 @@ import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
+import ThemeWrapper from './themes/ThemeWrapper'
+
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
@@ -107,6 +105,7 @@ const App = (props) => {
     return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
   }, [])
 
+  const oldWebFormsTheme = React.useMemo(() => OldWebFormsTheme(), [])
   const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
 
   return (
@@ -114,483 +113,503 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-            <ThemeProvider theme={webFormsTheme}>
-              <Suspense fallback={<Loading />}>
-                <Router>
-                  <CssBaseline />
-                  <Routes>
-                    <Route exact path="/" element={<Home {...props} />} />
+            <Router>
+              <Routes>
+                <Route exact path="/" element={
+                  <ThemeWrapper theme={oldWebFormsTheme}>
+                    <Home {...props} />
+                  </ThemeWrapper>
+                } />
 
-                    <Route
-                      exact
-                      path="/modify-contract"
-                      element={<ModifyContract {...props} token={token} />}
-                    />
-                    <Route
-                      path="/:language/contract/modification/"
-                      element={<ModifyContract {...props} token={token} />}
-                    />
+                <Route
+                  exact
+                  path="/modify-contract"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <ModifyContract {...props} token={token} />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/contract/modification/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <ModifyContract {...props} token={token} />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/holder-change"
-                      element={<HolderChange {...props} />}
-                    />
-                    <Route
-                      path="/:language/change-ownership/"
-                      element={<HolderChange {...props} />}
-                    />
+                <Route
+                  path="/holder-change"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <HolderChange {...props} />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/change-ownership/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <HolderChange {...props} />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/:language/investments/investments-kwh/"
-                      element={
-                        <PopUpContextProvider>
-                          <GenerationContextProvider
-                            assignmentsJSON={assignmentsJSON}
-                            investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
-                            <Generation {...props} token={token} />
-                          </GenerationContextProvider>
-                        </PopUpContextProvider>
-                      }
-                    />
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <PopUpContextProvider>
+                        <GenerationContextProvider
+                          assignmentsJSON={assignmentsJSON}
+                          investmentsJSON={investmentsJSON}
+                          outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                          <Generation {...props} token={token} />
+                        </GenerationContextProvider>
+                      </PopUpContextProvider>
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/d1-detail"
-                      element={
-                        <D1Detail {...props} templateProps={loadD1Data} />
-                      }
-                    />
-                    <Route
-                      path="/:language/d1-detail"
-                      element={
-                        <D1Detail {...props} templateProps={loadD1Data} />
-                      }
-                    />
+                <Route
+                  path="/d1-detail"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <D1Detail {...props} templateProps={loadD1Data} />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/d1-detail"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <D1Detail {...props} templateProps={loadD1Data} />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/:language/pagament-realitzat"
-                      element={
-                        <Success
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/pago-realizado"
-                      element={
-                        <Success
-                          {...props}
-                          description={'NEWMEMBER_OK_DESCRIPTION'}
-                        />
-                      }
-                    />
+                <Route
+                  path="/:language/mail-subscriptions"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <MailSubscriptions
+                        {...props}
+                        mailLists={loadMailLists}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/:language/pagament-cancellat"
-                      element={<Failure {...props} />}
-                    />
-                    <Route
-                      path="/:language/pago-cancelado"
-                      element={<Failure {...props} />}
-                    />
+                <Route
+                  path="/cancellation"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Cancellation
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/:language/mail-subscriptions"
-                      element={
-                        <MailSubscriptions
-                          {...props}
-                          mailLists={loadMailLists}
-                        />
-                      }
-                    />
+                <Route
+                  path="/:language/cancellation"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Cancellation
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/cancellation"
-                      element={
-                        <Cancellation
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      }
-                    />
+                <Route
+                  path="/cancellation/confirm"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <CancellationConfirm
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/contract/:contract_id/confirm_cancellation/:token"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <CancellationConfirm
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/:language/cancellation"
-                      element={
-                        <Cancellation
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      }
-                    />
+                <Route
+                  path="/:language/contract/:contract_id/cancel"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Cancellation
+                        {...props}
+                        contract={loadContractData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
 
-                    <Route
-                      path="/cancellation/confirm"
-                      element={
-                        <CancellationConfirm
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/contract/:contract_id/confirm_cancellation/:token"
-                      element={
-                        <CancellationConfirm
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      }
-                    />
+                {[
+                  "/:language/aportaciones-capital-social/formulario",
+                  "/:language/aportacions-capital-social/formulari",
+                  "/:language/achegar-ao-capital-social/formulario",
+                  "/:language/kapital-sozialerako-ekarpenak/formularioa"
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={oldWebFormsTheme}>
+                        <Contribution {...props} />
+                      </ThemeWrapper>
+                    }
+                  />))}
 
-                    <Route
-                      path="/:language/contract/:contract_id/cancel"
-                      element={
-                        <Cancellation
-                          {...props}
-                          contract={loadContractData()}
-                        />
-                      }
-                    />
+                <Route
+                  path="/:language/invoices/:invoice_id/payment_ko"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Failure
+                        showHeader={false}
+                        {...props}
+                        error={loadInvoicePaymentData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/invoices/:invoice_id/payment_ok"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Success
+                        showHeader={false}
+                        {...props}
+                        {...loadInvoicePaymentData()}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/contract/indexed"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Indexed
+                        {...props}
+                        contract={loadContractData()}
+                        isIndexedPilotOngoing={
+                          isIndexedPilotOngoing !== undefined
+                        }
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/contract/indexed"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Indexed
+                        {...props}
+                        contract={loadContractData()}
+                        isIndexedPilotOngoing={
+                          isIndexedPilotOngoing !== undefined
+                        }
+                        checkEnabled={false}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/investments/investments-kwh/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <PopUpContextProvider>
+                        <GenerationContextProvider
+                          assignmentsJSON={assignmentsJSON}
+                          investmentsJSON={investmentsJSON}
+                          outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                          <Generation {...props} token={token} />
+                        </GenerationContextProvider>
+                      </PopUpContextProvider>
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/investments/investments-kwh/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <PopUpContextProvider>
+                        <GenerationContextProvider
+                          assignmentsJSON={assignmentsJSON}
+                          investmentsJSON={investmentsJSON}
+                          outsideAssignmentsJSON={outsideAssignmentsJSON}>
+                          <Generation {...props} token={token} />
+                        </GenerationContextProvider>
+                      </PopUpContextProvider>
+                    </ThemeWrapper>
+                  }
+                />
 
-                    {[
-                      "/:language/aportaciones-capital-social/formulario",
-                      "/:language/aportacions-capital-social/formulari",
-                      "/:language/achegar-ao-capital-social/formulario",
-                      "/:language/kapital-sozialerako-ekarpenak/formularioa"
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={<Contribution {...props} />}
-                      />))}
-
-                    <Route
-                      exact
-                      path="/tariff"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/tarifes-d-electricitat"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/tarifas-de-electricidad"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/elektrizitate-tarifak"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/tarifas-de-electricidade"
-                      element={<Tariff {...props} />}
-                    />
-                    <Route
-                      path="/:language/invoices/:invoice_id/payment_ko"
-                      element={
-                        <Failure
-                          showHeader={false}
-                          {...props}
-                          error={loadInvoicePaymentData()}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/invoices/:invoice_id/payment_ok"
-                      element={
-                        <Success
-                          showHeader={false}
-                          {...props}
-                          {...loadInvoicePaymentData()}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/contract/indexed"
-                      element={
-                        <Indexed
-                          {...props}
-                          contract={loadContractData()}
-                          isIndexedPilotOngoing={
-                            isIndexedPilotOngoing !== undefined
-                          }
-                        />
-                      }
-                    />
-                    <Route
-                      path="/contract/indexed"
-                      element={
-                        <Indexed
-                          {...props}
-                          contract={loadContractData()}
-                          isIndexedPilotOngoing={
-                            isIndexedPilotOngoing !== undefined
-                          }
-                          checkEnabled={false}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/investments/investments-kwh/"
-                      element={
-                        <PopUpContextProvider>
-                          <GenerationContextProvider
-                            assignmentsJSON={assignmentsJSON}
-                            investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
-                            <Generation {...props} token={token} />
-                          </GenerationContextProvider>
-                        </PopUpContextProvider>
-                      }
-                    />
-                    <Route
-                      path="/investments/investments-kwh/"
-                      element={
-                        <PopUpContextProvider>
-                          <GenerationContextProvider
-                            assignmentsJSON={assignmentsJSON}
-                            investmentsJSON={investmentsJSON}
-                            outsideAssignmentsJSON={outsideAssignmentsJSON}>
-                            <Generation {...props} token={token} />
-                          </GenerationContextProvider>
-                        </PopUpContextProvider>
-                      }
-                    />
-
-                    <Route
-                      path="/:language/servicios/produccion/generation-kwh-aportaciones/"
-                      element={
+                <Route
+                  path="/:language/servicios/produccion/generation-kwh-aportaciones/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={true}
+                        token={token}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/participar/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={true}
+                        token={token}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                {[
+                  '/:language/serveis/produccio/generation-kwh-aportacions',
+                  '/:language/servicios/produccion/generation-kwh-aportaciones',
+                  '/:language/servizos/producion/generation-kwh-achegar',
+                  '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={oldWebFormsTheme}>
                         <GenerationContribution
                           {...props}
                           limitAmount={true}
                           token={token}
                         />
-                      }
-                    />
-                    <Route
-                      path="/participar/"
-                      element={
-                        <GenerationContribution
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+                <Route
+                  path="/participar-no-limit/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={false}
+                        token={token}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/participar-no-limit/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution
+                        {...props}
+                        limitAmount={false}
+                        token={token}
+                      />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/generationkwh/contribution/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <GenerationContribution {...props} token={token} />
+                    </ThemeWrapper>
+                  }
+                />
+                {[
+                  '/:language/pagament-realitzat',
+                  '/:language/pago-realizado'
+                ].map((path) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <Result
+                          mode={'success'}
                           {...props}
-                          limitAmount={true}
-                          token={token}
+                          title={t('SUCCESS_TEXT')}
+                          description={t('NEWMEMBER_OK_DESCRIPTION')}
                         />
-                      }
-                    />
-                    {[
-                      '/:language/serveis/produccio/generation-kwh-aportacions',
-                      '/:language/servicios/produccion/generation-kwh-aportaciones',
-                      '/:language/servizos/producion/generation-kwh-achegar',
-                      '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <GenerationContribution
-                            {...props}
-                            limitAmount={true}
-                            token={token}
-                          />
-                        }
-                      />
-                    ))}
-                    <Route
-                      path="/participar-no-limit/"
-                      element={
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={false}
-                          token={token}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/:language/participar-no-limit/"
-                      element={
-                        <GenerationContribution
-                          {...props}
-                          limitAmount={false}
-                          token={token}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/generationkwh/contribution/"
-                      element={
-                        <GenerationContribution {...props} token={token} />
-                      }
-                    />
-                    {props?.isGurbEnabled && (
-                      <Route
-                        path="/:language/gurb/:gurbCode/requirements/"
-                        element={
-                          <PopUpContextProvider>
-                            <GurbErrorContextProvider>
-                              <LoadingContextProvider>
-                                <SummaryContextProvider>
-                                  <GurbFormRequirements {...props} />
-                                </SummaryContextProvider>
-                              </LoadingContextProvider>
-                            </GurbErrorContextProvider>
-                          </PopUpContextProvider>
-                        }
-                      />
-                    )}
-                    {props?.isGurbEnabled && (
-                      <Route
-                        path="/:language/gurb/:code/join/"
-                        element={
-                          <GurbErrorContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbFormJoin {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
-                          </GurbErrorContextProvider>
-                        }
-                      />
-                    )}
-                    {props?.isGurbEnabled && (
-                      <Route
-                        path="/:language/gurb/gurb-url-ok"
-                        element={
-                          <GurbErrorContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbContractPaymentSuccessful {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
-                          </GurbErrorContextProvider>
-                        }
-                      />
-                    )}
-                    {[
-                      '/:language/new-pagament-realitzat',
-                      '/:language/new-pago-realizado'
-                    ].map((path) => (
-                      <Route
-                        key={path}
-                        path={path}
-                        element={
-                          <Result
-                            mode={'success'}
-                            {...props}
-                            title={t('SUCCESS_TEXT')}
-                            description={t('NEWMEMBER_OK_DESCRIPTION')}
-                          />
-                        }
-                      />
-                    ))}
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
 
-                    {[
-                      '/:language/new-pagament-cancellat',
-                      '/:language/new-pago-cancelado'
-                    ].map((path) => (
-                      <Route
-                        key={path}
-                        path={path}
-                        element={
-                          <Result
-                            mode="failure"
-                            title={t('FAILURE_TEXT')}
-                            {...props}>
-                            <Typography
-                              sx={{ color: 'secondary.extraDark' }}
-                              dangerouslySetInnerHTML={{
-                                __html: t('NEWMEMBER_KO_DESCRIPTION', {
-                                  url: t('CONTACT_HELP_URL')
-                                })
-                              }}
+                {[
+                  '/:language/pagament-cancellat',
+                  '/:language/pago-cancelado'
+                ].map((path) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <Result
+                          mode="failure"
+                          title={t('FAILURE_TEXT')}
+                          {...props}>
+                          <Typography
+                            sx={{ color: 'secondary.extraDark' }}
+                            dangerouslySetInnerHTML={{
+                              __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                                url: t('CONTACT_HELP_URL')
+                              })
+                            }}
+                          />
+                        </Result>
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+                {[
+                  '/:language/formulario-contratacion-periodos',
+                  '/:language/formulari-contractacio-periodes',
+                  '/:language/formulario-contrato-periodos',
+                  '/:language/kontratazio-formularioa-ordutegitarteak'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              tariff={'periods'}
                             />
-                          </Result>
-                        }
-                      />
-                    ))}
-
-                    {[
-                      '/:language/formulario-contratacion-periodos',
-                      '/:language/formulari-contractacio-periodes',
-                      '/:language/formulario-contrato-periodos',
-                      '/:language/kontratazio-formularioa-ordutegitarteak'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm
-                                {...props}
-                                tariff={'periods'}
-                              />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-                    {[
-                      '/:language/formulario-contratacion-indexada',
-                      '/:language/formulari-contractacio-indexada',
-                      '/:language/formulario-contrato-indexada',
-                      '/:language/kontratazio-formularioa-indexatua'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewContractMemberForm
-                                {...props}
-                                tariff={'indexed'}
-                              />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-
-                    {[
-                      '/:language/landing/captacio-domestic',
-                      '/:language/landing/captacio-empreses'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <UnifiedContractForm {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
-                        }
-                      />
-                    ))}
-
-                    {[
-                      '/:language/cooperativa/formulari-associar-se',
-                      '/:language/cooperativa/formulario-asociarse',
-                      '/:language/kooperatiba/bazkidetu-formularioa'
-                    ].map((path) => (
-                      <Route
-                        path={path}
-                        element={
-                          <GurbErrorContextProvider>
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+                {[
+                  '/:language/formulario-contratacion-indexada',
+                  '/:language/formulari-contractacio-indexada',
+                  '/:language/formulario-contrato-indexada',
+                  '/:language/kontratazio-formularioa-indexatua'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              tariff={'indexed'}
+                            />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+                {props?.isGurbEnabled && (
+                  <Route
+                    path="/:language/gurb/:gurbCode/requirements/"
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <PopUpContextProvider>
                             <LoadingContextProvider>
                               <SummaryContextProvider>
-                                <NewMemberForm {...props} />
+                                <GurbFormRequirements {...props} />
                               </SummaryContextProvider>
                             </LoadingContextProvider>
-                          </GurbErrorContextProvider>
-                        }
-                      />
-                    ))}
-                  </Routes>
-                </Router>
-              </Suspense>
-            </ThemeProvider>
+                        </PopUpContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                )}
+                {props?.isGurbEnabled && (
+                  <Route
+                    path="/:language/gurb/:code/join/"
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <GurbFormJoin {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                )}
+                {props?.isGurbEnabled && (
+                  <Route
+                    path="/:language/gurb/gurb_url_ok"
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <GurbContractPaymentSuccessful {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                )}
+                {[
+                  '/:language/landing/captacio-domestic',
+                  '/:language/landing/captacio-empreses'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <UnifiedContractForm {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+
+                {[
+                  '/:language/cooperativa/formulari-associar-se',
+                  '/:language/cooperativa/formulario-asociarse',
+                  '/:language/kooperatiba/bazkidetu-formularioa'
+                ].map((path) => (
+                  <Route
+                    path={path}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewMemberForm {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+              </Routes>
+            </Router>
             <ApiStatus />
           </Box>
         </MatomoProvider>
-      </AvailabilityContextProvider>
+      </AvailabilityContextProvider >
     </>
   )
 }

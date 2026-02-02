@@ -69,7 +69,7 @@ const CUPS = (props) => {
       name="cups"
       textFieldName={t('CUPS_FIELD')}
       textFieldHelper={
-        <Typography
+        <Typography  //TODO: Extract as component (Same as GurbParticipation)
           sx={{
             fontSize: '14px',
             fontWeight: 400,
@@ -81,7 +81,7 @@ const CUPS = (props) => {
             href={t('CUPS_HELPER_URL')}
             target="_blank"
             rel="noopener noreferrer"
-            color="link.main">
+          >
             {t('CUPS_HELPER_LINK')}
           </Link>
         </Typography>

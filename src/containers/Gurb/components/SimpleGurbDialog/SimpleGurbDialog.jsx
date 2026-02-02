@@ -8,16 +8,7 @@ import Stack from '@mui/material/Stack'
 import CancelIcon from '@mui/icons-material/Cancel'
 import Typography from '@mui/material/Typography'
 import CustomDialog from '../../../../components/CustomDialog'
-
 import useCheckMobileScreen from '../../../../services/checkMobileScreen'
-import {
-  dialogCancelIcon,
-  dialogWarningRounded,
-  dialogTitle,
-  dialogText,
-  dialogIconButton,
-  dialogContentStack
-} from '../../../../themes/gurbTheme'
 
 
 const SimpleGurbDialog = ({
@@ -41,13 +32,25 @@ const SimpleGurbDialog = ({
         maxHeight: '80vh',
         margin: '20px'
       }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
-        {severity === 'warning' && <WarningRounded sx={dialogWarningRounded} />}
-        {severity === 'error' && <CancelIcon sx={dialogCancelIcon} />}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6}}>
+        {severity === 'warning' && <WarningRounded sx={{
+          fontSize: 44,
+          color: 'warning.light',
+          mt: 4
+        }} />}
+        {severity === 'error' && <CancelIcon sx={{
+          fontSize: 40,
+          color: 'error.light'
+        }} />}
       </Box>
 
       {title && (
-        <DialogTitle id="simple-dialog-title" sx={dialogTitle}>
+        <DialogTitle id="simple-dialog-title" sx={{
+          textAlign: 'center',
+          fontSize: 18,
+          fontWeight: 'bold',
+          mb: -2
+        }}>
           <Box>{title && <Typography dangerouslySetInnerHTML={{ __html: title }} />}</Box>
         </DialogTitle>
       )}
@@ -55,17 +58,33 @@ const SimpleGurbDialog = ({
       <IconButton
         data-testid="simple-gurb-dialog-close-button"
         aria-label="close"
-        onClick={async () => setContent(undefined) }
-        sx={dialogIconButton}>
+        onClick={async () => setContent(undefined)}
+        sx={{
+          position: 'absolute',
+          right: 18,
+          top: 18,
+          color: 'black'
+        }}>
         <CloseIcon />
       </IconButton>
 
       <DialogContent>
-        <Stack sx={dialogContentStack}>
+        <Stack sx={{
+          spacing: 2,
+          alignItems: 'center',
+          textAlign: 'center'
+        }}>
           <Box>
             {text1 && (
               <Typography
-                sx={dialogText(severity)}
+                sx={{
+                  fontSize: 14,
+                  a: {
+                    color: 'black',
+                    fontWeight: severity === 'warning' ? 'bold' : 'normal',
+                    textDecoration: 'underline'
+                  }
+                }}
                 dangerouslySetInnerHTML={{ __html: text1 }}
               />
             )}
@@ -73,7 +92,14 @@ const SimpleGurbDialog = ({
           <Box>
             {text2 && (
               <Typography
-                sx={dialogText(severity)}
+                sx={{
+                  fontSize: 14,
+                  a: {
+                    color: 'black',
+                    fontWeight: severity === 'warning' ? 'bold' : 'normal',
+                    textDecoration: 'underline'
+                  }
+                }}
                 dangerouslySetInnerHTML={{ __html: text2 }}
               />
             )}

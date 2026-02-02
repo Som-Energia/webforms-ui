@@ -22,12 +22,6 @@ const MemberIdentifier = (props) => {
         <Typography
           variant="body.xs.regular"
           color="secondary.extraDark"
-          sx={{
-            [`& a[href='${t('NEW_MEMBER_NO_VAT_HELP_URL')}']`]: {
-              color: "link.main",
-              textDecoration: 'underline'
-            }
-          }}
           dangerouslySetInnerHTML={{
             __html: t('NEW_MEMBER_NO_VAT_HELP', {
               url: t('NEW_MEMBER_NO_VAT_HELP_URL'),

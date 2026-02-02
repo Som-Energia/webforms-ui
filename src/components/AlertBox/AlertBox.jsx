@@ -2,7 +2,6 @@ import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
 
 // Icons
 import CheckCircleIcon from '@mui/icons-material/CheckCircleOutline'
@@ -10,7 +9,8 @@ import ErrorIcon from '@mui/icons-material/ErrorOutline'
 import InfoIcon from '@mui/icons-material/InfoOutlined'
 import WarningIcon from '@mui/icons-material/WarningAmberOutlined'
 
-import { getAlertBoxStyles } from '../../themes/commonStyles'
+import { alertBoxStyles } from './alertBoxStyles'
+
 
 const AlertBox = ({
   severity,
@@ -19,28 +19,20 @@ const AlertBox = ({
   children,
   variant,
   icon,
-  iconCustom = false,
-  iconCustomSeverity = '',
-  customTypographyStyle = {},
-  customIconStyle = {}
+  textAlign = 'center',
 }) => {
-  const theme = useTheme()
-
-  const customSx = getAlertBoxStyles(theme, severity)
 
   const renderCustomIcon = () => {
-    const chosenSeverity = iconCustomSeverity || severity
-
-    switch (chosenSeverity) {
+    switch (icon) {
       case 'warning':
-        return <WarningIcon color="warning" />
+        return <WarningIcon color={severity} />
       case 'error':
-        return <ErrorIcon color="error" />
+        return <ErrorIcon color={severity} />
       case 'success':
-        return <CheckCircleIcon color="success" />
+        return <CheckCircleIcon color={severity} />
       case 'info':
       default:
-        return <InfoIcon color="info" />
+        return <InfoIcon color={severity} />
     }
   }
 
@@ -50,16 +42,15 @@ const AlertBox = ({
       sx={{ mt: '0', mb: '30px !important' }}>
       <Alert
         severity={severity}
-        icon={iconCustom ? renderCustomIcon() : icon ?? false}
+        icon={icon ? renderCustomIcon() : false}
         sx={{
-          ...customSx,
-          ...customIconStyle
-        }}>
+          ...alertBoxStyles,
+          textAlign: textAlign,
+        }} >
         <AlertTitle>{title}</AlertTitle>
         {description && (
           <Typography
             variant={variant || 'body1'}
-            sx={customTypographyStyle}
             dangerouslySetInnerHTML={{
               __html: description
             }}
@@ -67,7 +58,7 @@ const AlertBox = ({
         )}
         {children}
       </Alert>
-    </Box>
+    </Box >
   )
 }
 export default AlertBox

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { searchPlace } from '../../../../services/googleApiClient'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -6,13 +6,12 @@ import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { textField } from '../../../../themes/gurbTheme'
+import { autocompleteAddressInputStyles } from '../../../../themes/commonStyles'
 import InputTitle from '../../../../components/InputTitle'
 
 export default function AddressAutocompletedFieldGurb({
   textFieldLabel,
   textFieldName,
-  textFieldHelper,
   value,
   onChange,
   sessionTokenRef,
@@ -20,7 +19,7 @@ export default function AddressAutocompletedFieldGurb({
   error = false,
   helperText = '',
   touched = false,
-  onBlur = () => {}
+  onBlur = () => { }
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
@@ -133,13 +132,7 @@ export default function AddressAutocompletedFieldGurb({
           <Grid item xs={12}>
             <TextField
               {...params}
-              sx={{
-                ...textField,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '8px',
-                  paddingY: '0px'
-                }
-              }}
+              sx={autocompleteAddressInputStyles}
               label={
                 !normalizedValue.street && !inputValue && !isFocused
                   ? textFieldLabel

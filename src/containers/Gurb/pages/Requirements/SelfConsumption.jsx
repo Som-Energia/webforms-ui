@@ -8,8 +8,7 @@ import TextRecommendation from '../../components/TextRecommendation/TextRecommen
 import Chooser from '../../../../components/Chooser/Chooser'
 import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
 
-import { iconRequirements } from '../../../../themes/commonStyles'
-import { iconOffRequirements } from '../../../../themes/gurbTheme'
+import { iconRequirementsStyles, iconOffRequirementsStyles } from '../../../../themes/commonStyles'
 
 import PopUpContext from '../../../../context/PopUpContext'
 
@@ -35,12 +34,12 @@ const SelfConsumption = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarPowerOutlinedIcon sx={iconRequirements} />,
+      icon: <SolarPowerOutlinedIcon sx={iconRequirementsStyles} />,
       textHeader: t('SELFCONSUMPTION_YES_HEADER')
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarPowerOutlinedIcon sx={iconOffRequirements} />,
+      icon: <SolarPowerOutlinedIcon sx={iconOffRequirementsStyles} />,
       textHeader: t('SELFCONSUMPTION_NO_HEADER')
     }
   ]
@@ -51,6 +50,7 @@ const SelfConsumption = (props) => {
         <TextRecommendation
           title={t('GURB_SELFCONSUMPTION_TITLE')}
           text={t('GURB_SELFCONSUMPTION_HELPER')}
+          isHeader
         />
       </Grid>
       <Grid item xs={12}>

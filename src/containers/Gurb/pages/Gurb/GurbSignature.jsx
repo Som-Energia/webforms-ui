@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CircularProgress from '@mui/material/CircularProgress'
@@ -9,7 +9,6 @@ import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 
-import { participationAlertBoxTypography, forceAlignLeft } from '../../../../themes/gurbTheme'
 
 let signaturitHook = () => undefined
 
@@ -72,7 +71,7 @@ const GurbSignature = (props) => {
   return (
     <>
       {loading ? (
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent:'center'}}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <CircularProgress color="secondary" />
         </Grid>
       ) : erpError ? (
@@ -84,16 +83,18 @@ const GurbSignature = (props) => {
       ) : (
         <Grid container>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <TextRecommendation title={t('GURB_SIGNATURE')} />
+            <TextRecommendation title={t('GURB_SIGNATURE')}
+              isHeader
+            />
           </Grid>
 
-          <Grid item xs={12} sx={forceAlignLeft}>
+          <Grid item xs={12}>
             <AlertBox
-              customTypographyStyle={participationAlertBoxTypography}
+              textAlign='left'
               id="gurb_signature_info_alert"
               description={t('GURB_SIGNATURE_INFO')}
               severity={'warning'}
-              variant={'body2'}
+              variant={'body.md.regular'}
             />
           </Grid>
 

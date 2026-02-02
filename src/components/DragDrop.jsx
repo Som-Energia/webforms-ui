@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
+
 const DragDrop = ({ fieldName, required, values, onChange }) => {
   const { t } = useTranslation()
 
@@ -43,7 +44,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
       .then((response) => {
         if (response?.data?.code === 'UPLOAD_OK') {
           const fileHash = response?.data?.file_hash
-          setUploads([...uploads, {"filename":name, "filehash": fileHash}])
+          setUploads([...uploads, { "filename": name, "filehash": fileHash }])
         } else {
           const errorMsg = getErrorMessage(response?.data?.code)
           setError(errorMsg)
@@ -131,7 +132,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
     setUploads([...uploadsToDelete])
   }
 
-  const onDrop = () => {}
+  const onDrop = () => { }
 
   return (
     <Grid container spacing={2}>
@@ -147,11 +148,10 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
           sx={{
             padding: '2rem',
             borderRadius: '8px',
-            border: drag
-              ? '2px dashed black'
-              : uploads
-                ? '2px dashed #96B633'
-                : '2px dashed #D9D9D9',
+            border: '2px dashed',
+            borderColor: drag
+              ? 'black'
+              : 'secondary.light',
             boxShadow: 'none',
             display: 'flex',
             flexDirection: 'column',
@@ -167,18 +167,18 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
           ) : uploads && !drag ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <List>
-              {uploads.map((upload, index) => (
-                <ListItem>
-                  <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
-                    {upload.filename}
-                  </Typography>
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => handleDelete(index)}>
-                    <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
-                  </IconButton>
-                </ListItem>
-              ))}
+                {uploads.map((upload, index) => (
+                  <ListItem>
+                    <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
+                      {upload.filename}
+                    </Typography>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => handleDelete(index)}>
+                      <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
+                    </IconButton>
+                  </ListItem>
+                ))}
               </List>
             </Box>
           ) : (

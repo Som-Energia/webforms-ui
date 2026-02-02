@@ -1,7 +1,7 @@
 import React from 'react'
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined'
 import { useTranslation } from 'react-i18next'
-import ApiValidatedField from '../ApiValidatedField'
+import ApiValidatedField from './ApiValidatedField'
 import { checkIbanFormat } from '../../services/utils'
 
 export function IBANField(props) {
