@@ -9,6 +9,8 @@ import ErrorIcon from '@mui/icons-material/ErrorOutline'
 import InfoIcon from '@mui/icons-material/InfoOutlined'
 import WarningIcon from '@mui/icons-material/WarningAmberOutlined'
 
+import { alertBoxStyles } from './alertBoxStyles'
+
 
 const AlertBox = ({
   severity,
@@ -42,29 +44,9 @@ const AlertBox = ({
         severity={severity}
         icon={icon ? renderCustomIcon() : false}
         sx={{
-          backgroundColor: 'background.alertBox',
-          color: 'primary.mainOrange',
-          '& .MuiAlertTitle-root': {
-            color: 'primary.mainOrange'
-          },
-          '& .MuiTypography-root': {
-            color: 'primary.mainOrange',
-            fontSize: 'body.md.regular'
-          },
-          '& a': theme => ({
-            color: `${theme.palette.primary.mainOrange} !important`
-          }),
+          ...alertBoxStyles,
           textAlign: textAlign,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          '& .MuiAlert-icon': {
-            display: 'flex',
-            alignItems: 'flex-start',
-            mt: '0.35em'
-          }
-        }
-        } >
+        }} >
         <AlertTitle>{title}</AlertTitle>
         {description && (
           <Typography

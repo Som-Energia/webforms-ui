@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
 
 import SelectField from '../../../../components/SelectField/SelectField'
 import AlertBox from '../../../../components/AlertBox/AlertBox'
@@ -65,7 +65,8 @@ const GurbParticipation = (props) => {
         fieldName={"values.gurb.power"}
         onChange={onChangePower}
       />
-      <Typography  //TODO: Extract as component (Same as GurbParticipation)
+
+      <Typography //TODO: Extract as component (Same as GurbParticipation)
         sx={{
           fontSize: '14px',
           fontWeight: 400,
