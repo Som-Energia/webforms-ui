@@ -23,7 +23,6 @@ const updateAddressValues = async (
   setValues,
   addressFieldName,
   sessionTokenRef,
-  language = 'ca'
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
@@ -44,8 +43,7 @@ const updateAddressValues = async (
 
     const cadastralStreetCode = cadastralItem?.code || 'CL' // Street is code by default
     const cadastralStreet = StringUtils.normalize(streetName)
-    // WARN: The language code differs from the one used by Google Place Autocomplete (user's browser lang).
-    const { segments } = AddressUtils.segmentStreet(cadastralStreet, language)
+    const { segments } = AddressUtils.segmentStreet(cadastralStreet)
 
     setValues({
       ...values,
@@ -77,8 +75,7 @@ const AddressField = ({
   setFieldTouched,
   setValues
 }) => {
-  const { t, i18n } = useTranslation()
-  const lang = i18n.language
+  const { t } = useTranslation()
   const sessionTokenRef = useRef()
 
   const [numberValue, setNumberValue] = useState(
@@ -129,7 +126,6 @@ const AddressField = ({
         setValues,
         addressFieldName,
         sessionTokenRef,
-        lang
       )
     } catch (error) {
       console.error('Error fetching place details:', error)

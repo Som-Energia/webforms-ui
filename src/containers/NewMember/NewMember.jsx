@@ -32,9 +32,8 @@ import memberSummaryValidations from './validations/memberSummaryValidations'
 import Loading from '../../components/Loading'
 
 const MAX_STEP_NUMBER = 3
-const NEW_MEMBER_COST = 100
 
-const NewMemberForm = (props) => {
+const NewMemberForm = () => {
   const { i18n, t } = useTranslation()
   const { language } = useParams()
   const [url, setUrl] = useState('')
@@ -115,7 +114,7 @@ const NewMemberForm = (props) => {
     })
   }, [activeStep])
 
-  const nextStep = (formikProps) => {
+  const nextStep = () => {
     let next
     if (
       summaryField !== undefined &&
@@ -130,12 +129,12 @@ const NewMemberForm = (props) => {
     setActiveStep(Math.min(next, last))
   }
 
-  const prevStep = (formikProps) => {
+  const prevStep = () => {
     let prev = activeStep - 1
     setActiveStep(Math.max(0, prev))
   }
 
-  const trackSucces = () => {
+  const trackSuccess = () => {
     trackEvent({
       category: 'NewMember',
       action: 'newMemberFormOk',
@@ -156,7 +155,7 @@ const NewMemberForm = (props) => {
       .then((response) => {
         if (response?.state === true) {
           setError(false)
-          trackSucces()
+          trackSuccess()
           if (response?.data?.endpoint) {
             setData(response?.data)
             setUrl(response.data.endpoint)
@@ -168,7 +167,7 @@ const NewMemberForm = (props) => {
           setError(true)
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setCompleted(true)
         setError(true)
       })

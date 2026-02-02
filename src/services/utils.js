@@ -172,19 +172,19 @@ export const normalizeHolderChange = (contract) => {
   }
 
   // delete member fields
-  if ('name' in normalContract?.member) {
-    delete normalContract?.member?.name
-    delete normalContract?.member?.address
-    delete normalContract?.member?.postal_code
-    delete normalContract?.member?.state
-    delete normalContract?.member?.city
-    delete normalContract?.member?.surname1
-    delete normalContract?.member?.email
-    delete normalContract?.member?.phone1
-    delete normalContract?.member?.phone2
-    delete normalContract?.member?.language
-    delete normalContract?.member?.checked
-    delete normalContract?.member?.full_name
+  if (normalContract && 'name' in normalContract.member) {
+    delete normalContract.member?.name
+    delete normalContract.member?.address
+    delete normalContract.member?.postal_code
+    delete normalContract.member?.state
+    delete normalContract.member?.city
+    delete normalContract.member?.surname1
+    delete normalContract.member?.email
+    delete normalContract.member?.phone1
+    delete normalContract.member?.phone2
+    delete normalContract.member?.language
+    delete normalContract.member?.checked
+    delete normalContract.member?.full_name
   }
 
   if (normalContract?.holder?.ismember) {
@@ -195,11 +195,21 @@ export const normalizeHolderChange = (contract) => {
     normalContract.member.become_member = false
     normalContract.member.link_member = true
   }
-  'ismember' in normalContract?.holder && delete normalContract.holder.ismember
+
+  if (normalContract?.holder && 'ismember' in normalContract.holder) {
+    delete normalContract.holder.ismember
+  }
 
   if (!normalContract?.member?.link_member) {
-    'vat' in normalContract?.member && delete normalContract.member.vat
-    'number' in normalContract?.member && delete normalContract.member.number
+    if (normalContract?.member) {
+      if ('vat' in normalContract.member) {
+        delete normalContract.member.vat
+      }
+    
+      if ('number' in normalContract.member) {
+        delete normalContract.member.number
+      }
+    }
   }
 
   if (normalContract?.member?.checked !== undefined) {
@@ -408,6 +418,8 @@ export const newNormalizeMember = (data) => {
   finalMember.cp = data.address.postal_code
   finalMember.provincia = data.address.state.id
   finalMember.adreca = `${data.address.street}, ${data.address.number} ${data.address.bloc} ${data.address.floor} ${data.address.door}`.trim()
+  finalMember.cadas_street = data.address.cadas_street
+  finalMember.cadas_tv = data.address.cadas_tv
   finalMember.municipi = data.address.city.id
   finalMember.idioma = data.new_member.language
 
@@ -456,6 +468,8 @@ export const normalizeMember = (data) => {
   finalMember.provincia = data.member.state.id
   finalMember.adreca =
     `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
+  finalMember.cadas_street = data.member.cadas_street
+  finalMember.cadas_tv = data.member.cadas_tv
   finalMember.municipi = data.member.city.id
   finalMember.idioma = data.member.language
 
@@ -471,8 +485,8 @@ export const normalizeMember = (data) => {
   finalMember.urlko = data.urlko
 
   if (data.member.isphisical) {
-    const cognoms = `${data.member.surname1} ${data.member.surname2}`
-    finalMember.cognom = cognoms.trim()
+    const surnames = `${data.member.surname1} ${data.member.surname2}`
+    finalMember.cognom = surnames.trim()
   } else {
     finalMember.representant_nom = data.member.proxyname
     finalMember.representant_dni = data.member.proxynif
@@ -702,12 +716,12 @@ export const setMunicipisWithPostalCode = async (
   fieldName,
   values
 ) => {
-  const municipis = await getMunicipisByPostalCode(postalCode)
-  if (municipis?.length > 0) {
+  const municipalities = await getMunicipisByPostalCode(postalCode)
+  if (municipalities?.length > 0) {
     setFieldValue(fieldName, {
       ...values[fieldName],
-      state: municipis[0][0]?.provincia,
-      city: municipis[0][0]?.municipi
+      state: municipalities[0][0]?.provincia,
+      city: municipalities[0][0]?.municipi
     })
   }
 }

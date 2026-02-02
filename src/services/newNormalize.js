@@ -8,7 +8,9 @@ export const normalizeAddress = (address) => {
     floor: address.floor,
     stair: address.stairs,
     door: address.door,
-    block: address.bloc
+    block: address.bloc,
+    cadas_tv: address.cadas_tv,
+    cadas_street: address.cadas_street,
   }
 }
 

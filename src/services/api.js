@@ -171,7 +171,6 @@ export const checkCadastralReference = async (cadastralReference) => {
   })
 }
 
-
 export const holderChange = async (data) => {
   return axios({
     method: 'POST',
@@ -182,7 +181,7 @@ export const holderChange = async (data) => {
   })
 }
 
-export const getRates = (data) => {
+export const getRates = () => {
   const rates = {
     '2.0TD': {
       num_power_periods: 2,
@@ -201,7 +200,7 @@ export const getRates = (data) => {
   return rates
 }
 
-export const getNewRates = (data) => {
+export const getNewRates = () => {
   const rates = {
     'power-lower-15kw': {
       num_power_periods: 2,
@@ -274,7 +273,7 @@ export const getPrices = async ({
       max_power,
       vat,
       cnae,
-      city_id,
+      city_id
     }
   }).then((response) => {
     return response?.data
@@ -430,7 +429,7 @@ export const checkIsFromGenerationEnabledZone = async (data) => {
 }
 
 export const checkIsPostalCodeFromGenerationEnabledZone = async (data) => {
-  const {postalCode} = data
+  const { postalCode } = data
   return axios({
     method: 'GET',
     url: `${WEBFORMS_API_URL}/data/generationkwh/can_join/${postalCode}`

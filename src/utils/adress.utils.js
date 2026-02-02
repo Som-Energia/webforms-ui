@@ -36,31 +36,26 @@ export class AddressUtils {
 
   /**
    * Parse full address string and decompose it into connectors and real words.
+   * Compatible with next languages: ca, es, eu, gl
    *
    * @param {string} value Full address
-   * @param {string} language Language key: 'ca', 'es', 'gl', 'eu'
    * @param {{ avoidStreetType: boolean }} options Avoid street type. `Default: true`
    *
    * @example
    * ```js
-   * AddressUtils.segmentStreet('Plaça de la Reina Maria Cristina', 'ca')
+   * AddressUtils.segmentStreet('Plaça de la Reina Maria Cristina')
    * // => { streetName: 'Reina Maria Cristina' segments: ['de', 'la', 'Reina Maria Cristina'] }
    * ```
    *
    * @returns {{ streetName: string[], segments: string[] }}
    */
-  static segmentStreet(value, language, opts = { avoidStreetType: true }) {
+  static segmentStreet(value, opts = { avoidStreetType: true }) {
     const connectors = []
     const streetNames = []
-    const particlesRegex = {
-      es: /\b(de|del|la|las|el|los|al)\b/i,
-      ca: /\b(de|del|dels|la|les|el|els|al|als|en|na)\b|\b(d|l|n|s)'/i,
-      gl: /\b(de|do|da|dos|das|o|a|os|as|e|ao|aos|á|ás)\b/i,
-      eu: /\b(eta|ta)\b/i
-    }
+    const particlesRegex = /\b(de|do|da|dos|das|o|a|os|as|e|ao|aos|á|ás|del|dels|la|las|les|el|els|los|al|als|en|na|eta|ta)\b|\b(d|l|n|s)'/i
 
     value.split(/\s+/).forEach((word, index) => {
-      if (particlesRegex[language]?.test(word)) {
+      if (particlesRegex.test(word)) {
         connectors.push(word)
       } else if (opts.avoidStreetType && index > 0) {
         streetNames.push(word)
