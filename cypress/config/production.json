@@ -1,0 +1,19 @@
+{
+    "projectId": "6y5vbm",
+    "baseUrl": "https://www.somenergia.coop",
+    "viewportWidth": 1200,
+    "viewportHeight": 960,
+    "specPattern": "./cypress/smoke/*.spec.js",
+    "supportFile": "./cypress/support/index.js",
+    "experimentalRunAllSpecs": true,
+     "env": {
+      "disableGpu": true,
+      "FEATURE_FLAGS": {
+        "isCadastralReference": true,
+        "isIndexedContractEnabled": true,
+        "isGurbEnabled": true,
+        "isMemberMandatoryForHolderchange": false
+      }
+    },
+    "chromeWebSecurity": false 
+}

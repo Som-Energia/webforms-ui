@@ -1,0 +1,19 @@
+{
+    "projectId": "6y5vbm",
+    "baseUrl": "http://localhost:3000",
+    "viewportWidth": 1200,
+    "viewportHeight": 960,
+    "specPattern": "./cypress/integration/**/*.spec.js",
+    "supportFile": "./cypress/support/index.js",
+    "experimentalRunAllSpecs": true,
+     "env": {
+      "disableGpu": true,
+      "FEATURE_FLAGS": {
+        "isCadastralReference": true,
+        "isIndexedContractEnabled": true,
+        "isGurbEnabled": true,
+        "isMemberMandatoryForHolderchange": false
+      }
+    },
+    "chromeWebSecurity": false 
+}
