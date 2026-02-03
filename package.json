@@ -12,6 +12,7 @@
     "test": "TZ=Europe/Madrid vitest",
     "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
     "cypress": "TZ=Europe/Madrid cypress open",
+    "cypress-prod": "cypress open --env configFile=production",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
     "i18n-lint": "./scripts/lint-i18n.sh",
