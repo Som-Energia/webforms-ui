@@ -1,3 +1,11 @@
+describe('Sanity check for API', () => {
+    it('Webforms api should work', () => {
+        cy.request('https://api.somenergia.coop/ping').its('body').should(
+            'deep.equal',
+            { "state": true, "status": "ONLINE" })
+    })
+})
+
 describe('Sanity check for contract form', () => {
     it('Button to go to contract main page should work', () => {
         cy.request('/ca/contracta-la-llum-domestic/').its('status').should('eq', 200)
