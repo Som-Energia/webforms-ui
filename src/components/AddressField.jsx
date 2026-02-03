@@ -104,24 +104,17 @@ const AddressField = ({
       const {
         route: streetName,
         postal_code: postalCode,
-        street_number: streetNumber
       } = AddressUtils.parsePlace(place, [
         'route',
         'postal_code',
-        'street_numer'
       ])
 
       setFieldValue(`${addressFieldName}.street`, streetName || '')
       setFieldValue(`${addressFieldName}.postal_code`, postalCode || '')
-      setNumberValue(streetNumber || numberValue || '')
-      setFieldValue(
-        `${addressFieldName}.number`,
-        streetNumber || numberValue || ''
-      )
 
       await updateAddressValues(
         value,
-        streetNumber || numberValue,
+        numberValue,
         values,
         setValues,
         addressFieldName,
