@@ -267,6 +267,7 @@ const App = (props) => {
                   "/:language/kapital-sozialerako-ekarpenak/formularioa"
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={oldWebFormsTheme}>
@@ -390,6 +391,7 @@ const App = (props) => {
                   '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={oldWebFormsTheme}>
@@ -487,6 +489,7 @@ const App = (props) => {
                   '/:language/kontratazio-formularioa-ordutegitarteak'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
@@ -509,6 +512,7 @@ const App = (props) => {
                   '/:language/kontratazio-formularioa-indexatua'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
@@ -573,6 +577,7 @@ const App = (props) => {
                   '/:language/landing/captacio-empreses'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
@@ -592,6 +597,7 @@ const App = (props) => {
                   '/:language/kooperatiba/bazkidetu-formularioa'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
