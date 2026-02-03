@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -33,6 +33,7 @@ import { contribution, member } from '../services/api'
 
 import PrevButton from '../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../components/OldComponents/Buttons/NextButton'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 const MAX_STEP_NUMBER = 4
 
@@ -52,9 +53,7 @@ const Contribution = (props) => {
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const handlers = {
     SHOW_INSPECTOR: () => {

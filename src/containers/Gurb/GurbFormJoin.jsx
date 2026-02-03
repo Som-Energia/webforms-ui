@@ -33,6 +33,7 @@ import GurbIdentification from './pages/Gurb/GurbIdentification'
 import GurbParticipation from './pages/Gurb/GurbParticipation'
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbSignature from './pages/Gurb/GurbSignature'
+import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 
 const MAX_STEPS_NUMBER = 4
@@ -50,9 +51,7 @@ const GurbFormJoin = (props) => {
 
   const { trackEvent } = useContext(MatomoContext)
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const formikRef = useRef(null)
   useEffect(() => {

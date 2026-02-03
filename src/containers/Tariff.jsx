@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { getPrices } from '../services/api'
 import Loading from '../components/Loading'
+import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 const Tariff = (props) => {
   const { tariff, maxPower, taxes = true, taxValue = 21 } = props
@@ -13,9 +14,7 @@ const Tariff = (props) => {
   const [prices, setPrices] = useState()
   const [taxType, setTaxType] = useState(taxValue)
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   useEffect(() => {
     const CITY_TAX_21 = 20

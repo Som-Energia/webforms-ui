@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 import RedirectUrl from '../../components/RedirectUrl/RedirectUrl'
+import { useSyncLanguage } from '../../../../hooks/useTranslateOptions'
 
 const GurbContractPaymentSuccessful = () => {
   const { i18n, t } = useTranslation()
@@ -12,9 +12,7 @@ const GurbContractPaymentSuccessful = () => {
   const [searchParams] = useSearchParams()
   const gurbCode = searchParams.get('gurbCode')
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   return (
     <Box

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -8,17 +8,14 @@ import Typography from '@mui/material/Typography'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 import StepHeader from '../components/OldComponents/StepHeader'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 const Success = (props) => {
   const { result, description, title, showHeader, subtitle } = props
   const { language } = useParams()
   const { t, i18n } = useTranslation()
 
-  useEffect(() => {
-    if (language && i18n.language !== language) {
-      i18n.changeLanguage(language)
-    }
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   return (
     <>

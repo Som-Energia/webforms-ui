@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
 import Chooser from '../../../../components/Chooser/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
+import { useSyncLanguage } from '../../../../hooks/useTranslateOptions'
 
 
 const GurbRequirementsTariffSelection = (props) => {
@@ -17,6 +18,7 @@ const GurbRequirementsTariffSelection = (props) => {
   const { values, setFieldValue } = props
   const [selectedOption, setSelectedOption] = useState(null)
 
+  
   const options = [
     {
       id: 'periods-tariff',
@@ -40,9 +42,7 @@ const GurbRequirementsTariffSelection = (props) => {
     }
   ]
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const handleTariffQuestion = (optionId) => {
     setSelectedOption(optionId)

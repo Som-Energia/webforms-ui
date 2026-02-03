@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Container from '@mui/material/Container'
-
 import { useTranslation } from 'react-i18next'
 
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 import manteniment from '../images/tasques-manteniment-web.svg'
 
 const Maintenance = () => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
-  useEffect(() => {
-    const language = window.location.pathname.split('/')[1]
-    if (['ca', 'es', 'eu', 'gl'].includes(language)) {
-      i18n.changeLanguage(language)
-    }
-  }, [])
+  let language =  window.location.pathname.split('/')[1]
+  language = ['ca', 'es', 'eu', 'gl'].includes(language)? language:'es'
+
+  useSyncLanguage(language)
 
   return (
     <Container sx={{ flexGrow: 1, padding: 12 }}>
