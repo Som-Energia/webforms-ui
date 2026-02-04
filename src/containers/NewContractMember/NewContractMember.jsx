@@ -280,7 +280,7 @@ const NewContractMemberForm = (props) => {
 
   const nextStep = (formikProps) => {
     let next
-    if ( summaryField !== undefined) {
+    if (summaryField !== undefined) {
       if (activeStep === formSteps['IDENTIFY_MEMBER']) {
         next = activeStep + 1
       } else {
