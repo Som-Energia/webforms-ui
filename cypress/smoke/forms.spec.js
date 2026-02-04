@@ -1,4 +1,4 @@
-describe('Sanity check for API', () => {
+describe('Smoke check for API', () => {
     it('Webforms api should work', () => {
         cy.request('https://api.somenergia.coop/ping').its('body').should(
             'deep.equal',
@@ -6,7 +6,7 @@ describe('Sanity check for API', () => {
     })
 })
 
-describe('Sanity check for contract form', () => {
+describe('Smoke check for contract form', () => {
     it('Button to go to contract main page should work', () => {
         cy.request('/ca/contracta-la-llum-domestic/').its('status').should('eq', 200)
     })
@@ -22,7 +22,7 @@ describe('Sanity check for contract form', () => {
 
 })
 
-describe('Sanity check for new member form', () => {
+describe('Smoke check for new member form', () => {
     it('Button to go to new member main page should work', () => {
         cy.request('/ca/cooperativa/associar-se').its('status').should('eq', 200)
     })
@@ -31,7 +31,7 @@ describe('Sanity check for new member form', () => {
     })
 })
 
-describe('Sanity check for gurb form', () => {
+describe('Smoke check for gurb form', () => {
     it('Button to go to gurb main page should work', () => {
         cy.request('ca/serveis/generacio-urbana/').its('status').should('eq', 200)
     })
