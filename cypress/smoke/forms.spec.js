@@ -8,26 +8,41 @@ describe('Smoke check for API', () => {
 
 describe('Smoke check for contract form', () => {
     it('Button to go to contract main page should work', () => {
-        cy.request('/ca/contracta-la-llum-domestic/').its('status').should('eq', 200)
+        cy.request('/ca/contracta-la-llum-domestic').its('status').should('eq', 200)
+        cy.request('/es/contrata-la-luz-domestico').its('status').should('eq', 200)
+        cy.request('/gl/contrata-la-luz-domestico').its('status').should('eq', 200)
+        cy.request('/eu/kontrata-argia-etxea').its('status').should('eq', 200)
     })
-    it('Button to go to contract 20TD form should work', () => {
-        cy.request('/ca/formulari-contractacio-periodes/?form_type=domestic').its('status').should('eq', 200)
+    it('Button to go to contract periods form should work', () => {
+        cy.request('/ca/formulari-contractacio-periodes').its('status').should('eq', 200)
+        cy.request('/es/formulario-contratacion-periodos').its('status').should('eq', 200)
+        cy.request('/gl/formulario-contrato-periodos').its('status').should('eq', 200)
+        cy.request('/eu/kontratazio-formularioa-ordutegitarteak').its('status').should('eq', 200)
     })
     it('Button to go to contract indexed form should work', () => {
-        cy.request('/ca/formulari-contractacio-indexada/?form_type=domestic').its('status').should('eq', 200)
+        cy.request('/ca/formulari-contractacio-indexada').its('status').should('eq', 200)
+        cy.request('/es/formulario-contratacion-indexada').its('status').should('eq', 200)
+        cy.request('/gl/formulario-contrato-indexada').its('status').should('eq', 200)
+        cy.request('/eu/kontratazio-formularioa-indexatua').its('status').should('eq', 200)
     })
     it('Button to go to enterprise contract 20TD form should work', () => {
         cy.request('/ca/formulari-contractacio-periodes/?form_type=enterprise').its('status').should('eq', 200)
     })
-
 })
 
 describe('Smoke check for new member form', () => {
     it('Button to go to new member main page should work', () => {
         cy.request('/ca/cooperativa/associar-se').its('status').should('eq', 200)
+        cy.request('/es/cooperativa/asociarse').its('status').should('eq', 200)
+        cy.request('/gl/cooperativa/asociarse').its('status').should('eq', 200)
+        cy.request('/eu/kooperatiba/bazkidetu').its('status').should('eq', 200)
     })
     it('Button to go to new member form should work', () => {
         cy.request('/ca/cooperativa/formulari-associar-se').its('status').should('eq', 200)
+        cy.request('/es/cooperativa/formulario-asociarse').its('status').should('eq', 200)
+        cy.request('/gl/cooperativa/formulario-asociarse').its('status').should('eq', 200)
+        cy.request('/eu/kooperatiba/bazkidetu-formularioa').its('status').should('eq', 200)
+
     })
 })
 
