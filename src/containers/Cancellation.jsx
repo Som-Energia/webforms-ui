@@ -19,10 +19,6 @@ import SendIcon from '@mui/icons-material/Send'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
-import dayjs from 'dayjs'
-import 'dayjs/locale/ca'
-import 'dayjs/locale/es'
-
 import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 
 import ContractDetails from './Cancellation/ContractDetails'
@@ -36,6 +32,7 @@ import Success from './Success'
 import { cancelContract } from '../services/api'
 import PrevButton from '../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../components/OldComponents/Buttons/NextButton'
+import { useSyncLanguage, useSyncDayjsLanguage } from '../hooks/useTranslateOptions'
 
 const MAX_STEP_NUMBER = 2
 
@@ -127,10 +124,9 @@ const Cancellation = (props) => {
       })
   }
 
-  useEffect(() => {
-    language && i18n.changeLanguage(language)
-    language ? dayjs.locale(language) : dayjs.locale('es')
-  }, [language, i18n])
+  useSyncLanguage(language)
+
+  useSyncDayjsLanguage(language)
 
   const validationSchemas = [
     Yup.object().shape({}),
