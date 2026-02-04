@@ -207,6 +207,8 @@ const NewMemberForm = (props) => {
 
   return (
     <Container
+      data-cy='member-form'
+      aria-label='member-form'
       maxWidth="md"
       disableGutters={true}
       sx={{

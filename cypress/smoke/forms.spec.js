@@ -25,8 +25,10 @@ describe('Smoke check for contract form', () => {
         cy.request('/gl/formulario-contrato-indexada').its('status').should('eq', 200)
         cy.request('/eu/kontratazio-formularioa-indexatua').its('status').should('eq', 200)
     })
-    it('Button to go to enterprise contract 20TD form should work', () => {
-        cy.request('/ca/formulari-contractacio-periodes/?form_type=enterprise').its('status').should('eq', 200)
+    it('Form should be embedded in webpage', () => {
+        cy.visit('/es/formulario-contratacion-periodos')
+        cy.get('[data-cy="contract-form"]')
+            .should('have.attr', 'aria-label', 'contract-form')
     })
 })
 
@@ -44,10 +46,26 @@ describe('Smoke check for new member form', () => {
         cy.request('/eu/kooperatiba/bazkidetu-formularioa').its('status').should('eq', 200)
 
     })
+    it('Form should be embedded in webpage', () => {
+        cy.visit('/es/cooperativa/formulario-asociarse')
+        cy.get('[data-cy="member-form"]')
+            .should('have.attr', 'aria-label', 'member-form')
+    })
 })
 
 describe('Smoke check for gurb form', () => {
     it('Button to go to gurb main page should work', () => {
         cy.request('ca/serveis/generacio-urbana/').its('status').should('eq', 200)
     })
+    it('Gurb requirements form should be embedded in webpage', () => {
+        cy.visit('/es/gurb/G001/requirements')
+        cy.get('[data-cy="gurb-requirements-form"]')
+            .should('have.attr', 'aria-label', 'gurb-requirements-form')
+    })
+    it('Gurb join form should be embedded in webpage', () => {
+        cy.visit('/es/gurb/G001/join')
+        cy.get('[data-cy="gurb-join-form"]')
+            .should('have.attr', 'aria-label', 'gurb-join-form')
+    })
 })
+
