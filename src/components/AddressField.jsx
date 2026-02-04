@@ -11,10 +11,23 @@ import streetTypes from '../data/street-types.json'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField/InputField'
 import { getPlaceDetails } from '../services/googleApiClient'
-import { AddressUtils } from '../utils/adress.utils'
+import { AddressUtils } from '../utils/address.utils'
 import { ArrayUtils } from '../utils/array.utils'
 import { StringUtils } from '../utils/string.utils'
 import StateCity from './StateCity'
+
+const getCityAndStateFromPostalCode = async (postalCode) => {
+  if (!postalCode) {
+    return { city: '', state: '' }
+  }
+
+  const municipalities = await getMunicipisByPostalCode(postalCode)
+  const cityRaw = municipalities?.[0]?.[0]?.municipi
+  const stateRaw = municipalities?.[0]?.[0]?.provincia
+  const city = AddressUtils.sanitizePlace(cityRaw)
+  const state = AddressUtils.sanitizePlace(stateRaw)
+  return { city, state }
+}
 
 const updateAddressValues = async (
   addressValue,
@@ -30,11 +43,7 @@ const updateAddressValues = async (
     const { postal_code: postalCode, route: streetName } =
       AddressUtils.parsePlace(place, ['postal_code', 'route'])
 
-    const municipalities = await getMunicipisByPostalCode(postalCode)
-    const cityRaw = municipalities?.[0]?.[0]?.municipi
-    const stateRaw = municipalities?.[0]?.[0]?.provincia
-    const city = AddressUtils.sanitizePlace(cityRaw)
-    const state = AddressUtils.sanitizePlace(stateRaw)
+    const { city, state } = await getCityAndStateFromPostalCode(postalCode)
 
     const [streetPartial] = streetName.split(' ') || []
     const cadastralItem = streetTypes.find((item) =>
@@ -137,12 +146,7 @@ const AddressField = ({
 
     if (value.length >= 5) {
       try {
-        const municipalities = await getMunicipisByPostalCode(value)
-        const cityRaw = municipalities?.[0]?.[0]?.municipi
-        const stateRaw = municipalities?.[0]?.[0]?.provincia
-
-        const city = AddressUtils.sanitizePlace(cityRaw)
-        const state = AddressUtils.sanitizePlace(stateRaw)
+        const { city, state } = await getCityAndStateFromPostalCode(value)
 
         setFieldValue(`${addressFieldName}.city`, city)
         setFieldValue(`${addressFieldName}.state`, state)

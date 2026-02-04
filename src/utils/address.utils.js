@@ -43,8 +43,8 @@ export class AddressUtils {
    *
    * @example
    * ```js
-   * AddressUtils.segmentStreet('Plaça de la Reina Maria Cristina')
-   * // => { streetName: 'Reina Maria Cristina' segments: ['de', 'la', 'Reina Maria Cristina'] }
+   * AddressUtils.segmentStreet('Avinguda de la Verge de Montserrat')
+   * // => { streetName: 'Verge de Montserrat' segments: ['de', 'la', 'Verge de Montserrat'] }
    * ```
    *
    * @returns {{ streetName: string[], segments: string[] }}
@@ -55,7 +55,7 @@ export class AddressUtils {
     const particlesRegex = /\b(de|do|da|dos|das|o|a|os|as|e|ao|aos|á|ás|del|dels|la|las|les|el|els|los|al|als|en|na|eta|ta)\b|\b(d|l|n|s)'/i
 
     value.split(/\s+/).forEach((word, index) => {
-      if (particlesRegex.test(word)) {
+      if (particlesRegex.test(word) && !streetNames.length) {
         connectors.push(word)
       } else if (opts.avoidStreetType && index > 0) {
         streetNames.push(word)

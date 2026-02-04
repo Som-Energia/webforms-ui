@@ -113,7 +113,9 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-            <Router>
+            <Router future={{
+                v7_startTransition: true,
+              }}>
               <Routes>
                 <Route exact path="/" element={
                   <ThemeWrapper theme={oldWebFormsTheme}>

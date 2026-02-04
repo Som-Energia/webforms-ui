@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- NEW: Add cadastral information to address field
+
 ## 6.6.4 2026-02-05
 
 - Add smoke tests to main forms
@@ -16,7 +20,7 @@
 
 ## 6.6.1 2026-01-22
 
-- FIX: skip cypress in github actions 
+- FIX: skip cypress in github actions
 - FIX: gurb cost in review page
 - FIX: use gurb-url-ok instead gurb_url_ok
 
@@ -91,7 +95,7 @@
 
 ## 6.0.0
 
-- Remove _WM endpoint
+- Remove \_WM endpoint
 - Remove old gurb form
 
 ## 5.0.21 2025-09-09
@@ -298,14 +302,14 @@
 ## 2.3.12 2024-10-17
 
 - Fix: CAU code validation
-    - TDD rewritten code (inspired on the old one but adding it progressively to fail every test)
-    - Fix: Partial match now complaints on length not on unmatching cups
-    - Fix: Now verifies locally that 18 numbers follow after 'ES'
-    - Complaints on bad partially written border points and installation
-    - Corrects spurious spaces from user
-    - Corrects lowercases into upper cases from user
+  - TDD rewritten code (inspired on the old one but adding it progressively to fail every test)
+  - Fix: Partial match now complaints on length not on unmatching cups
+  - Fix: Now verifies locally that 18 numbers follow after 'ES'
+  - Complaints on bad partially written border points and installation
+  - Corrects spurious spaces from user
+  - Corrects lowercases into upper cases from user
 - Usability: filter out unaccepted chars in member number from input
-    - Avoids among other problems, the one produced when pasting
+  - Avoids among other problems, the one produced when pasting
     numbers from comunications with milliard dots like 99.999,
     trailing spaces and the 'S' character.
 
@@ -327,7 +331,7 @@
   - When feature flag is disabled, member is not required (trial period)
   - Behaviour does not change if the feature flag is enabled
 - Upgrade notes:
-    - isMemberMandatoryForHolderchange in VITE_FEATURE_FLAGS in `.env.*`
+  - isMemberMandatoryForHolderchange in VITE_FEATURE_FLAGS in `.env.*`
 
 ## 2.3.8 2024-07-27
 
@@ -350,7 +354,7 @@
 
 - Matomo funnels tracking for Contract and NewMember forms
 - Upgrade notes:
-    - VITE_MATOMO_URL in `.env.*`
+  - VITE_MATOMO_URL in `.env.*`
 
 ## 2.3.4 2024-08-21
 
@@ -382,18 +386,18 @@
 - Moved translation literals inside t() (wip)
 - Include jsx files in i18n-lint
 - Upgrade notes:
-    - webforms-config.js obsolete
-    - VITE_API_BASE_URL -> VITE_WEBFORMS_API_URL
+  - webforms-config.js obsolete
+  - VITE_API_BASE_URL -> VITE_WEBFORMS_API_URL
 
 ## 2.1.0 2024-07-16
 
 - Migrated from cra to vite
 - Remove warning on autonomous workers and related translations
 - Upgrade notes:
-    - Install from scratch since the build system has change
-        - Remove node_modules and package-lock before installing
-    - All environment variables changed prefix to VITE_
-    - PUBLIC_URL has changed to BASE_URL and requires final slash
+  - Install from scratch since the build system has change
+    - Remove node_modules and package-lock before installing
+  - All environment variables changed prefix to VITE\_
+  - PUBLIC_URL has changed to BASE_URL and requires final slash
 
 ## 2.0.0 2024-07-04
 
@@ -486,7 +490,7 @@
 
 - Update cancellation terms
 - HolderChange: Add link to support center
-at `CIF_COMMUNITY_OWNERS` html message.
+  at `CIF_COMMUNITY_OWNERS` html message.
 
 ## 1.9.4 2023-09-22
 
