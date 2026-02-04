@@ -1,3 +1,7 @@
+const checkStatus = (url, status = 200) => {
+    cy.request(url).its('status').should('eq', status)
+}
+
 describe('Smoke check for API', () => {
     it('Webforms api should work', () => {
         cy.request('https://api.somenergia.coop/ping').its('body').should(
@@ -8,22 +12,39 @@ describe('Smoke check for API', () => {
 
 describe('Smoke check for contract form', () => {
     it('Button to go to contract main page should work', () => {
-        cy.request('/ca/contracta-la-llum-domestic').its('status').should('eq', 200)
-        cy.request('/es/contrata-la-luz-domestico').its('status').should('eq', 200)
-        cy.request('/gl/contrata-la-luz-domestico').its('status').should('eq', 200)
-        cy.request('/eu/kontrata-argia-etxea').its('status').should('eq', 200)
+        const paths = [
+            '/ca/contracta-la-llum-domestic',
+            '/es/contrata-la-luz-domestico',
+            '/gl/contrata-la-luz-domestico',
+            '/eu/kontrata-argia-etxea'
+        ]
+
+        paths.forEach((path) => {
+            checkStatus(path)
+        })
     })
     it('Button to go to contract periods form should work', () => {
-        cy.request('/ca/formulari-contractacio-periodes').its('status').should('eq', 200)
-        cy.request('/es/formulario-contratacion-periodos').its('status').should('eq', 200)
-        cy.request('/gl/formulario-contrato-periodos').its('status').should('eq', 200)
-        cy.request('/eu/kontratazio-formularioa-ordutegitarteak').its('status').should('eq', 200)
+        const paths = [
+            '/ca/formulari-contractacio-periodes',
+            '/es/formulario-contratacion-periodos',
+            '/gl/formulario-contrato-periodos',
+            '/eu/kontratazio-formularioa-ordutegitarteak'
+        ]
+
+        paths.forEach((path) => {
+            checkStatus(path)
+        })
     })
     it('Button to go to contract indexed form should work', () => {
-        cy.request('/ca/formulari-contractacio-indexada').its('status').should('eq', 200)
-        cy.request('/es/formulario-contratacion-indexada').its('status').should('eq', 200)
-        cy.request('/gl/formulario-contrato-indexada').its('status').should('eq', 200)
-        cy.request('/eu/kontratazio-formularioa-indexatua').its('status').should('eq', 200)
+        const paths = [
+            '/ca/formulari-contractacio-indexada',
+            '/es/formulario-contratacion-indexada',
+            '/gl/formulario-contrato-indexada',
+            '/eu/kontratazio-formularioa-indexatua'
+        ]
+        paths.forEach((path) => {
+            checkStatus(path)
+        })
     })
     it('Form should be embedded in webpage', () => {
         cy.visit('/es/formulario-contratacion-periodos')
@@ -34,17 +55,26 @@ describe('Smoke check for contract form', () => {
 
 describe('Smoke check for new member form', () => {
     it('Button to go to new member main page should work', () => {
-        cy.request('/ca/cooperativa/associar-se').its('status').should('eq', 200)
-        cy.request('/es/cooperativa/asociarse').its('status').should('eq', 200)
-        cy.request('/gl/cooperativa/asociarse').its('status').should('eq', 200)
-        cy.request('/eu/kooperatiba/bazkidetu').its('status').should('eq', 200)
+        const paths = [
+            '/ca/cooperativa/associar-se',
+            '/es/cooperativa/asociarse',
+            '/gl/cooperativa/asociarse',
+            '/eu/kooperatiba/bazkidetu'
+        ]
+        paths.forEach((path) => {
+            checkStatus(path)
+        })
     })
     it('Button to go to new member form should work', () => {
-        cy.request('/ca/cooperativa/formulari-associar-se').its('status').should('eq', 200)
-        cy.request('/es/cooperativa/formulario-asociarse').its('status').should('eq', 200)
-        cy.request('/gl/cooperativa/formulario-asociarse').its('status').should('eq', 200)
-        cy.request('/eu/kooperatiba/bazkidetu-formularioa').its('status').should('eq', 200)
-
+        const paths = [
+            '/ca/cooperativa/formulari-associar-se',
+            '/es/cooperativa/formulario-asociarse',
+            '/gl/cooperativa/formulario-asociarse',
+            '/eu/kooperatiba/bazkidetu-formularioa'
+        ]
+        paths.forEach((path) => {
+            checkStatus(path)
+        })
     })
     it('Form should be embedded in webpage', () => {
         cy.visit('/es/cooperativa/formulario-asociarse')
@@ -55,11 +85,15 @@ describe('Smoke check for new member form', () => {
 
 describe('Smoke check for gurb form', () => {
     it('Button to go to gurb main page should work', () => {
-        cy.request('/ca/serveis/generacio-urbana').its('status').should('eq', 200)
-        cy.request('/es/servicios/generacion-urbana').its('status').should('eq', 200)
-        cy.request('/gl/servicios/generacion-urbana').its('status').should('eq', 200)
-        cy.request('/eu/zerbitzuak/hiri-sorkuntza').its('status').should('eq', 200)
-
+        const paths = [
+            '/ca/serveis/generacio-urbana',
+            '/es/servicios/generacion-urbana',
+            '/gl/servicios/generacion-urbana',
+            '/eu/zerbitzuak/hiri-sorkuntza'
+        ]
+        paths.forEach((path) => {
+            checkStatus(path)
+        })
     })
     it('Access to gurb requirements form should work', () => {
         cy.request('/ca/gurb/G001/requirements').its('status').should('eq', 200)
