@@ -55,7 +55,17 @@ describe('Smoke check for new member form', () => {
 
 describe('Smoke check for gurb form', () => {
     it('Button to go to gurb main page should work', () => {
-        cy.request('ca/serveis/generacio-urbana/').its('status').should('eq', 200)
+        cy.request('/ca/serveis/generacio-urbana').its('status').should('eq', 200)
+        cy.request('/es/servicios/generacion-urbana').its('status').should('eq', 200)
+        cy.request('/gl/servicios/generacion-urbana').its('status').should('eq', 200)
+        cy.request('/eu/zerbitzuak/hiri-sorkuntza').its('status').should('eq', 200)
+
+    })
+    it('Access to gurb requirements form should work', () => {
+        cy.request('/ca/gurb/G001/requirements').its('status').should('eq', 200)
+    })
+    it('Access to gurb join form should work', () => {
+        cy.request('/ca/gurb/G001/join').its('status').should('eq', 200)
     })
     it('Gurb requirements form should be embedded in webpage', () => {
         cy.visit('/es/gurb/G001/requirements')
