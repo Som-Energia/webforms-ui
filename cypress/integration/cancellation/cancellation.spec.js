@@ -78,3 +78,88 @@ describe('Cancellation', () => {
     cy.get('[data-cy=submit]').should('have.not.class', 'Mui-disabled').click()
   })
 })
+
+describe('Language', () => {
+  it('is set for "ca"', function () {
+    cy.visit('/ca/cancellation')
+    cy.contains('La baixa de subministrament elèctric implica el tall de servei', {
+      matchCase: false
+    })
+  })
+  it('is set for "es"', function () {
+    cy.visit('/es/cancellation')
+    cy.contains('La baja de suministro eléctrico implica cortar el servicio', {
+      matchCase: false
+    })
+  })
+  it('is set for "gl"', function () {
+    cy.visit('/gl/cancellation')
+    cy.contains('A baixa de subministración eléctrica implica cortar o servizo', {
+      matchCase: false
+    })
+  })
+  it('is set for "eu"', function () {
+    cy.visit('/eu/cancellation')
+    cy.contains('Horniduran baja emanez gero', {
+      matchCase: false
+  })
+  })
+})
+
+describe('Calendar language', () => {
+  beforeEach(() => {
+    cy.fixture('cancellation.json').as('data')
+  })
+
+  it('is set for "ca"', function () {
+    cy.visit('/ca/cancellation')
+
+    cy.get('[data-cy=next]').click()
+
+    cy.get('[placeholder="DD/MM/YYYY"').type('01/01/2026', { delay: 500 })
+
+    cy.wait(1000) // eslint-disable-line
+
+    cy.get('[aria-label="Choose date, selected date is 1 Gen. 2026"]').click()
+    cy.contains('Gener', {
+      matchCase: false
+    })
+  })
+  it('is set for "es"', function () {
+    cy.visit('/es/cancellation')
+
+    cy.get('[data-cy=next]').click()
+
+    cy.get('[placeholder="DD/MM/YYYY"').type('01/01/2026', { delay: 500 })
+
+    cy.get('[aria-label="Choose date, selected date is 1 de ene de 2026"]').click()
+    cy.contains('Enero', {
+      matchCase: false
+    })
+  })
+  it('is set for "gl"', function () {
+    cy.visit('/gl/cancellation')
+
+    cy.get('[data-cy=next]').click()
+
+    cy.get('[placeholder="DD/MM/YYYY"').type('01/01/2026', { delay: 500 })
+
+    cy.get('[aria-label="Choose date, selected date is 1 de xan. de 2026"]').click()
+    cy.contains('xaneiro', {
+      matchCase: false
+    })
+  })
+  it('is set for "eu"', function () {
+    cy.visit('/eu/cancellation')
+
+    cy.get('[data-cy=next]').click()
+
+    cy.get('[placeholder="DD/MM/YYYY"').type('01/01/2026', { delay: 500 })
+
+    cy.get('[aria-label="Choose date, selected date is 2026ko urt. 1a"]').click()
+    cy.contains('Urtarrila', {
+      matchCase: false
+    })
+  })
+})
+
