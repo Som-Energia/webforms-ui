@@ -111,5 +111,9 @@ describe('Smoke check for gurb form', () => {
         cy.get('[data-cy="gurb-join-form"]')
             .should('have.attr', 'aria-label', 'gurb-join-form')
     })
+    it('Gurb url-ok form should be embedded in webpage', () => {
+        cy.visit('/ca/gurb/gurb-url-ok')
+        cy.get('[data-cy="gurb-url-ok-form"]')
+            .should('have.attr', 'aria-label', 'gurb-url-ok-form')
+    })
 })
-

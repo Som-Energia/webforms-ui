@@ -18,6 +18,8 @@ const GurbContractPaymentSuccessful = () => {
 
   return (
     <Box
+      data-cy='gurb-url-ok-form'
+      aria-label='gurb-url-ok-form'
       sx={{
         pt: 4,
         display: 'flex',
