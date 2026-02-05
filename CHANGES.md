@@ -1,5 +1,9 @@
 # Change Log
 
+## 6.6.4 2026-02-05
+
+- Add smoke tests to main forms
+
 ## 6.6.3 2026-02-02
 
 - FIX: VatField error when touched
