@@ -145,7 +145,12 @@ const GurbFormRequirements = (props) => {
   }
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ padding: '1rem' }}>
+    <Container
+      data-cy='gurb-requirements-form'
+      aria-label='gurb-requirements-form'
+      maxWidth="md"
+      disableGutters
+      sx={{ padding: '1rem' }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -202,7 +207,7 @@ const GurbFormRequirements = (props) => {
                             formikProps.values.has_light !== 'light-on') ||
                           (activeStep === 4 &&
                             formikProps.values.has_selfconsumption !==
-                              'selfconsumption-off') ||
+                            'selfconsumption-off') ||
                           (activeStep === 5 &&
                             formikProps.values.redirectUrl === undefined)
                         }

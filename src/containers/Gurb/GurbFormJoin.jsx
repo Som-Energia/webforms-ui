@@ -142,7 +142,12 @@ const GurbFormJoin = (props) => {
   }, [activeStep])
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ padding: '1rem' }}>
+    <Container
+      data-cy='gurb-join-form'
+      aria-label='gurb-join-form'
+      maxWidth="md"
+      disableGutters
+      sx={{ padding: '1rem' }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -152,7 +157,7 @@ const GurbFormJoin = (props) => {
         {(formikProps) => (
           <>
             <Box
-               sx={{ marginBottom: '65px' }}>
+              sx={{ marginBottom: '65px' }}>
               <SomStepper
                 showStepTitle={true}
                 activeStep={activeStep}
