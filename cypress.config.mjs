@@ -14,6 +14,7 @@ export default defineConfig({
       return getConfigurationByFile(file)
     },
     supportFile: false,
-    video: false
+    video: false,
+    screenshotOnRunFailure: false
   }
 })
