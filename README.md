@@ -36,6 +36,11 @@ Launches the Cypress test runner. Cypress requires you to run `npm start` in par
 npm run cypress
 ```
 
+Launches the Cypress smoke tests:
+```sh
+npm run cypress:smoke
+```
+
 To get `holderChangePersonaldata.js`:
 
 ```sh
