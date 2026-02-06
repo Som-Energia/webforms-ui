@@ -842,5 +842,17 @@
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "",
     "GURB_ADDRESS_VALIDATION_BUTTON_TEXT": "Validar la dirección",
     "CADASTRAL_REFERENCE_ERROR": "",
-    "UNACCEPTED_FAIR_TITLE": ""
+    "UNACCEPTED_FAIR_TITLE": "",
+    "TARIFF_SELECTOR_SURPLUS_COMPENSATION": "Compensación de excedentes",
+    "TARIFF_SELECTOR_TARIFF_61TD": "6.1TD indexada",
+    "TARIFF_SELECTOR_TARIFF_30TD": "3.0TD indexada",
+    "TARIFF_SELECTOR_TARIFF_20TD": "2.0TD indexada",
+    "CHART_DAILY_AVERAGE_LEGEND": "Promedio del dia",
+    "CHART_WEEKLY_AVERAGE_LEGEND": "Promedio de los últimos {{ base_days_computation }} días",
+    "SUMPRICESDISPLAY_TOTAL_MIN": "PRECIO MÍNIMO",
+    "SUMPRICESDISPLAY_TOTAL_MAX": "PRECIO MÁXIMO",
+    "SUMPRICESDISPLAY_TOTAL_AVERAGE": "PROMEDIO DEL DIA",
+    "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "PROMEDIO DE LOS ÚLTIMOS {{ base_days_computation }} DÍAS",
+    "PRICES_ERROR_MISSING_DATA": "No hay datos disponibles para esta fecha. ¡Disculpa las molestias!",
+    "API_ERROR_FETCHING_DATA": "Lamentablemente, no podemos mostrar ahora la previsión de precios, a causa de una incidencia. Esperamos que se pueda resolver en seguida y poder mostrarla lo más pronto posible. ¡Disculpa las molestias!"
 }

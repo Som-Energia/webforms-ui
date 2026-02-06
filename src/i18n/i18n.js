@@ -1,5 +1,6 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
+import { registerSomEnergiaI18n } from '@somenergia/somenergia-ui';
 
 import LOCALE_CA from './locale-ca.json'
 import LOCALE_ES from './locale-es.json'
@@ -21,6 +22,8 @@ const resources = {
   }
 }
 
+// FIXME: Each import of this file init the global i18next.
+//        Can be convert to initI18n() and export to init only one time.
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
@@ -32,5 +35,8 @@ i18n
       escapeValue: false // react already safes from xss
     }
   })
+
+// Register all somenergia-ui lib translations to the project i18n instance
+registerSomEnergiaI18n(i18n);
 
 export default i18n

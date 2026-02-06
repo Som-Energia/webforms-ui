@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 import ThemeWrapper from './themes/ThemeWrapper'
+import { TariffNameContextProvider } from './components/TariffNameContextProvider'
 
 
 const App = (props) => {
@@ -39,6 +40,7 @@ const App = (props) => {
   const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
   const Indexed = lazy(() => import('./containers/Indexed'))
+  const IndexedDailyPrices = lazy(() => import('./containers/IndexedDailyPrices'))
   const Generation = lazy(() => import('./containers/Generation'))
   const GenerationContribution = lazy(() =>
     import('./containers/Generation/GenerationForm/GenerationForm')
@@ -156,6 +158,17 @@ const App = (props) => {
                   element={
                     <ThemeWrapper theme={oldWebFormsTheme}>
                       <HolderChange {...props} />
+                    </ThemeWrapper>
+                  }
+                />
+
+                <Route
+                  path="/:language/tariffs/indexed-today"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <TariffNameContextProvider>
+                        <IndexedDailyPrices />
+                      </TariffNameContextProvider>
                     </ThemeWrapper>
                   }
                 />

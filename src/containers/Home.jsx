@@ -6,9 +6,9 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
+// Initialize i18n translations
 import i18n from '../i18n/i18n'
 
 
@@ -23,6 +23,7 @@ const options = [
   { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos` },
   { title: 'New Contract - Indexed', href: `${language}/formulario-contratacion-indexada` },
   { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse` },
+  { title: 'Preus indexats diaris', href: `${language}/tariffs/indexed-today` },
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Aportació al capital social', href: `${language}/aportaciones-capital-social/formulario` },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
@@ -38,7 +39,6 @@ const options = [
   { title: 'Pagament OK', href: `${language}/pagament-realitzat` },
   { title: 'Pagament KO', href: `${language}/pagament-cancellat` },
   { title: 'Test de preus de tarifa', href: `/tariff` },
-
 ]
 
 const Home = (props) => {

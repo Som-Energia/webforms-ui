@@ -842,5 +842,17 @@
     "GURB_ERROR_TITLE": "Hi ha un error i no s'ha pogut completar el procés.",
     "GURB_ERROR_DESCRIPTION": "Si us plau, torna a intentar-ho en una estona. Si el problema persisteix, ens pots escriure a gurb@somenergia.coop o trucar-nos al 900 103 605 per tal que revisem la situació. Disculpa les molèsties.",
     "CADASTRAL_REFERENCE_ERROR": "",
-    "UNACCEPTED_FAIR_TITLE": ""
+    "UNACCEPTED_FAIR_TITLE": "",
+    "TARIFF_SELECTOR_SURPLUS_COMPENSATION": "Compensació d'excedents",
+    "TARIFF_SELECTOR_TARIFF_61TD": "6.1TD indexada",
+    "TARIFF_SELECTOR_TARIFF_30TD": "3.0TD indexada",
+    "TARIFF_SELECTOR_TARIFF_20TD": "2.0TD indexada",
+    "CHART_DAILY_AVERAGE_LEGEND": "Mitjana del dia",
+    "CHART_WEEKLY_AVERAGE_LEGEND": "Mitjana dels últims {{ base_days_computation }} dies",
+    "SUMPRICESDISPLAY_TOTAL_MIN": "PREU MÍNIM",
+    "SUMPRICESDISPLAY_TOTAL_MAX": "PREU MÀXIM",
+    "SUMPRICESDISPLAY_TOTAL_AVERAGE": "MITJANA DEL DIA",
+    "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "MITJANA DELS ÚLTIMS {{ base_days_computation }} DIES",
+    "PRICES_ERROR_MISSING_DATA": "No hi ha dades disponibles per a aquesta data. Disculpa les molèsties!",
+    "API_ERROR_FETCHING_DATA": "Malauradament, no podem mostrar ara la previsió de preus, a causa d’una incidència. Esperem que es pugui resoldre de seguida i poder mostrar-la al més aviat possible. Disculpa les molèsties!"
 }
