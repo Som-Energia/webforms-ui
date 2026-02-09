@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import TariffNameContext from './TariffNameContextProvider'
-import { Tariffs } from '../data/tariff'
+import TariffNameContext from '../../context/TariffNameContext'
+import { Tariffs } from '../../data/tariff'
 import { useTranslation } from 'react-i18next'
-import { plausible } from '../trackers/plausible'
+import { plausible } from '../../trackers/plausible'
 
 function TariffSelector() {
   const { t } = useTranslation()

@@ -13,8 +13,8 @@ import {
   computeMaxYAxisValue,
   computeMinYAxisValue,
 } from '../../services/indexedTariffs.utils'
-import TariffSelector from '../../components/TariffSelector'
-import TariffNameContext from '../../components/TariffNameContextProvider'
+import TariffSelector from '../../components/TariffSelector/TariffSelector'
+import TariffNameContext from '../../context/TariffNameContext'
 
 const IndexedDailyPrices = () => {
   const { language } = useParams()

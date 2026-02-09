@@ -19,7 +19,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 import ThemeWrapper from './themes/ThemeWrapper'
-import { TariffNameContextProvider } from './components/TariffNameContextProvider'
+import { TariffNameContextProvider } from './context/TariffNameContext'
 
 
 const App = (props) => {
