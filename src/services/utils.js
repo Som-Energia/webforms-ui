@@ -468,8 +468,6 @@ export const normalizeMember = (data) => {
   finalMember.provincia = data.member.state.id
   finalMember.adreca =
     `${data.member?.address}, ${data.member?.number} ${data.member?.floor} ${data.member?.door}`.trim()
-  finalMember.cadas_street = data.member.cadas_street
-  finalMember.cadas_tv = data.member.cadas_tv
   finalMember.municipi = data.member.city.id
   finalMember.idioma = data.member.language
 
