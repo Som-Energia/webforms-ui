@@ -162,16 +162,26 @@ const App = (props) => {
                   }
                 />
 
-                <Route
-                  path="/:language/tariffs/indexed-today"
-                  element={
-                    <ThemeWrapper theme={webFormsTheme}>
-                      <TariffNameContextProvider>
-                        <IndexedDailyPrices />
-                      </TariffNameContextProvider>
-                    </ThemeWrapper>
-                  }
-                />
+                {
+                  [
+                    "/:language/servicios/tendencia-dels-preus",
+                    "/:language/servicios/tendencia-de-los-precios",
+                    "/:language/zerbitzuak/prezioen-joera",
+                  ].map((url) =>
+                    <Route
+                      key={url}
+                      path={url}
+                      element={
+                        <ThemeWrapper theme={webFormsTheme}>
+                          <TariffNameContextProvider>
+                            <IndexedDailyPrices />
+                          </TariffNameContextProvider>
+                        </ThemeWrapper>
+                      }
+                    />
+                  )
+                }
+
 
                 <Route
                   path="/:language/investments/investments-kwh/"
