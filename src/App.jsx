@@ -164,7 +164,7 @@ const App = (props) => {
 
                 {
                   [
-                    "/:language/servicios/tendencia-dels-preus",
+                    "/:language/serveis/tendencia-dels-preus",
                     "/:language/servicios/tendencia-de-los-precios",
                     "/:language/zerbitzuak/prezioen-joera",
                   ].map((url) =>
