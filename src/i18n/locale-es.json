@@ -735,7 +735,7 @@
     "NEW_MEMBER_SUCCESS_DESC": "Recibirás un correo con tu número de socia una vez acabe todo el proceso",
     "NEW_MEMBER_ERROR_DESC": "Por favor, inténtalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisaremos la situación. Disculpa las molestias.",
     "NEW_MEMBER_SUBMIT_LOADING": "Estamos dando de alta a la nueva persona socia",
-    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos gestionando la petición",
+    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos gestionando tu solicitud; esto puede tardar unos minutos.",
     "POSTAL_CODE": "Código postal",
     "HELPER_NUMBER_ADDRESS": "",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "¡Ya eres de Som Energia!",
