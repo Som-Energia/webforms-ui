@@ -745,7 +745,7 @@
     "FINISH": "Finalizar",
     "ERROR_REQUIRED_FIELD": "Campo requirido",
     "LINK_MEMBER_NIF_HELPER": "O formato do NIF só pode conter números e letras, sen guións nin puntos (por exemplo: 12345678P ou X1234567Y)",
-    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos a xestionar a petición",
+    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos a xestionar a túa solicitude; pode levar uns minutos.",
     "LINK_MEMBER_TITLE": "Identificación da persoa socia",
     "LINK_MEMBER_NIF_TITLE": "Indica o NIF da persoa socia",
     "ERROR_INVALID_FIELD": "Campo incorrecto",
