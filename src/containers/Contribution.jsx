@@ -170,7 +170,7 @@ const Contribution = (props) => {
           }
         ),
         phone1: Yup.string().matches(/^\d{9}$/, t('INCORRECT_PHONE')).required(t('NO_PHONE')),
-        phone1: Yup.string().matches(/^\d{9}$/, t('INCORRECT_PHONE')),
+        phone2: Yup.string().matches(/^\d{9}$/, t('INCORRECT_PHONE')),
         language: Yup.string().required(t('NO_LANGUAGE'))
       }),
       legal_person_accepted: Yup.bool().test({
