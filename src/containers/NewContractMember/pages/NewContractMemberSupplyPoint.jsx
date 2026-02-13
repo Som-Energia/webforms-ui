@@ -13,7 +13,7 @@ import { LightbulbIcon } from '../../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 
-const newContractMemberSupplyPoint = ({ ...props }) => {
+const NewContractMemberSupplyPoint = ({ ...props }) => {
   const trackID = 'supply-point'
   
   const { values, setFieldValue, sendTrackEvent } = props
@@ -103,4 +103,4 @@ const newContractMemberSupplyPoint = ({ ...props }) => {
   )
 }
 
-export default newContractMemberSupplyPoint
+export default NewContractMemberSupplyPoint

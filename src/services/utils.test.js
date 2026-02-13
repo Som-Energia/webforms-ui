@@ -1,9 +1,6 @@
-import React from 'react';
-import { render } from '@testing-library/react';
 import { 
     checkIsTariff20,
     normalizeContract, 
-    normalizeContribution, 
     normalizeD1ConfirmationData, 
     normalizeHolderChange, 
     normalizeMember,
@@ -142,7 +139,7 @@ describe("Check Member new Form (normalize function)", () => {
 
   test("Normalize Member data (juridical)", () => {
     expect(newNormalizeMember(memberCases.newNewMemberJuridical.entryValues)).toStrictEqual(memberCases.newNewMemberJuridical.normalizedData)
-})
+  })
 })
 
 describe("Check Holder Change Form (normalize function)", () => {

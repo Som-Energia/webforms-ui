@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid'
 
 import VoluntaryDonation from '../../../components/VoluntaryDonation'
 
-const newContractMemberVoluntaryDonation = (props) => {
+const NewContractMemberVoluntaryDonation = (props) => {
   const { sendTrackEvent } = props
   const { t } = useTranslation()
 
@@ -31,4 +31,4 @@ const newContractMemberVoluntaryDonation = (props) => {
   )
 }
 
-export default newContractMemberVoluntaryDonation
+export default NewContractMemberVoluntaryDonation

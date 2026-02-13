@@ -6,6 +6,8 @@ export const random_iban = 'ES12 3456 7891 2345 6789 1234'
 export const address = {
   entryValues: {
     street: 'Calle Test',
+    cadas_tv: 'CL',
+    cadas_street: ['Test'],
     number: '13',
     floor: '2',
     door: '',
@@ -32,7 +34,9 @@ export const address = {
     floor: '2',
     stair: '',
     door: '',
-    block: ''
+    block: '',
+    cadas_tv: 'CL',
+    cadas_street: ['Test']
   },
   empty: {
     street: '',

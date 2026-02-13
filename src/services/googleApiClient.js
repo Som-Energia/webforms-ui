@@ -48,6 +48,7 @@ export async function searchPlace(string, sessionTokenRef) {
     sessionTokenRef.current = new places.AutocompleteSessionToken()
   }
 
+  // NOTE: the language to show suggestions result not provided
   let request = {
     region: 'es',
     sessionToken: sessionTokenRef.current,
@@ -57,7 +58,7 @@ export async function searchPlace(string, sessionTokenRef) {
   }
   const result = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
   let placesSuggestions = []
-  for (let suggestion of result?.suggestions) {
+  for (let suggestion of result?.suggestions || []) {
     const placePrediction = suggestion.placePrediction
     placesSuggestions.push({
       id: placePrediction.placeId.toString(),

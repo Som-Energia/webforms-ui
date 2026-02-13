@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import AppBar from '@mui/material/AppBar'
@@ -21,11 +20,10 @@ if (!availableLanguages.includes(language)) {
 let gurbCode = import.meta.env.VITE_GURB_CODE
 
 const options = [
-  { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos`},
-  { title: 'New Contract - Indexed' , href: `${language}/formulario-contratacion-indexada`},
-  { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse`},
+  { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos` },
+  { title: 'New Contract - Indexed', href: `${language}/formulario-contratacion-indexada` },
+  { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse` },
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
-  { title: 'Component Testing', href: `/${language}/component-testing` },
   { title: 'Aportació al capital social', href: `${language}/aportaciones-capital-social/formulario` },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
   { title: 'Confirmament de baixa', href: '/cancellation/confirm' },
@@ -34,11 +32,12 @@ const options = [
   { title: 'Modificació Tarifa Indexada', href: '/contract/indexed' },
   { title: 'Generation kwh', href: '/investments/investments-kwh' },
   { title: 'Generation kwh - Form', href: `${language}/servicios/produccion/generation-kwh-aportaciones` },
-  { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbCode}/requirements/`},
-  { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbCode}/join/`},
-  { title: 'Gurb - Pagament contractació social tpv OK', href: `${language}/gurb/gurb-url-ok?gurbCode=${gurbCode}`},
-  { title: 'Pagament OK', href: `${language}/pagament-realitzat`},
-  { title: 'Pagament KO', href: `${language}/pagament-cancellat`}
+  { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbCode}/requirements/` },
+  { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbCode}/join/` },
+  { title: 'Gurb - Pagament contractació social tpv OK', href: `${language}/gurb/gurb-url-ok?gurbCode=${gurbCode}` },
+  { title: 'Pagament OK', href: `${language}/pagament-realitzat` },
+  { title: 'Pagament KO', href: `${language}/pagament-cancellat` },
+  { title: 'Test de preus de tarifa', href: `/tariff` },
 
 ]
 

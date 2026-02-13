@@ -113,13 +113,17 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-            <Router>
+            <Router future={{
+              v7_startTransition: true,
+            }}>
               <Routes>
                 <Route exact path="/" element={
                   <ThemeWrapper theme={oldWebFormsTheme}>
                     <Home {...props} />
                   </ThemeWrapper>
                 } />
+
+                <Route exact path="/tariff" element={<Tariff {...props} />} />
 
                 <Route
                   exact
@@ -267,6 +271,7 @@ const App = (props) => {
                   "/:language/kapital-sozialerako-ekarpenak/formularioa"
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={oldWebFormsTheme}>
@@ -390,6 +395,7 @@ const App = (props) => {
                   '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={oldWebFormsTheme}>
@@ -487,6 +493,7 @@ const App = (props) => {
                   '/:language/kontratazio-formularioa-ordutegitarteak'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
@@ -509,6 +516,7 @@ const App = (props) => {
                   '/:language/kontratazio-formularioa-indexatua'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
@@ -530,11 +538,11 @@ const App = (props) => {
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
                         <PopUpContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbFormRequirements {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <GurbFormRequirements {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
                         </PopUpContextProvider>
                       </ThemeWrapper>
                     }
@@ -545,11 +553,11 @@ const App = (props) => {
                     path="/:language/gurb/:code/join/"
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <GurbFormJoin {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <GurbFormJoin {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -559,11 +567,11 @@ const App = (props) => {
                     path="/:language/gurb/gurb-url-ok"
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <GurbContractPaymentSuccessful {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <GurbContractPaymentSuccessful {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -573,6 +581,7 @@ const App = (props) => {
                   '/:language/landing/captacio-empreses'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
@@ -592,14 +601,15 @@ const App = (props) => {
                   '/:language/kooperatiba/bazkidetu-formularioa'
                 ].map((path) => (
                   <Route
+                    key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewMemberForm {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewMemberForm {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
                       </ThemeWrapper>
                     }
                   />

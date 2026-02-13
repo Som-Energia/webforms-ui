@@ -20,9 +20,9 @@ export const languages = {
 }
 
 export const contributionParams = {
-  generationMinAnnualUse:1,
-  generationMinNumActions:1,
-  generationMaxNumActions:49,
+  generationMinAnnualUse: 1,
+  generationMinNumActions: 1,
+  generationMaxNumActions: 49,
   minContribution: 100,
   maxContribution: 100000,
   contributionStep: 100,
@@ -45,7 +45,7 @@ const normalizeCommonModifyData = (params) => {
 
   const data = {
     phase: modify?.phases,
-    attachments: [...(modify?.attachments??[]), ...(modify?.power_attachments??[])],
+    attachments: [...(modify?.attachments ?? []), ...(modify?.power_attachments ?? [])],
     power_p1: modify?.changePower
       ? Math.round(modify?.power * THOUSANDS_CONVERSION_FACTOR)
       : undefined,
@@ -172,19 +172,19 @@ export const normalizeHolderChange = (contract) => {
   }
 
   // delete member fields
-  if ('name' in normalContract?.member) {
-    delete normalContract?.member?.name
-    delete normalContract?.member?.address
-    delete normalContract?.member?.postal_code
-    delete normalContract?.member?.state
-    delete normalContract?.member?.city
-    delete normalContract?.member?.surname1
-    delete normalContract?.member?.email
-    delete normalContract?.member?.phone1
-    delete normalContract?.member?.phone2
-    delete normalContract?.member?.language
-    delete normalContract?.member?.checked
-    delete normalContract?.member?.full_name
+  if (normalContract?.member && 'name' in normalContract.member) {
+    delete normalContract.member.name
+    delete normalContract.member.address
+    delete normalContract.member.postal_code
+    delete normalContract.member.state
+    delete normalContract.member.city
+    delete normalContract.member.surname1
+    delete normalContract.member.email
+    delete normalContract.member.phone1
+    delete normalContract.member.phone2
+    delete normalContract.member.language
+    delete normalContract.member.checked
+    delete normalContract.member.full_name
   }
 
   if (normalContract?.holder?.ismember) {
@@ -195,11 +195,21 @@ export const normalizeHolderChange = (contract) => {
     normalContract.member.become_member = false
     normalContract.member.link_member = true
   }
-  'ismember' in normalContract?.holder && delete normalContract.holder.ismember
+
+  if (normalContract?.holder && 'ismember' in normalContract.holder) {
+    delete normalContract.holder.ismember
+  }
 
   if (!normalContract?.member?.link_member) {
-    'vat' in normalContract?.member && delete normalContract.member.vat
-    'number' in normalContract?.member && delete normalContract.member.number
+    if (normalContract?.member) {
+      if ('vat' in normalContract.member) {
+        delete normalContract.member.vat
+      }
+
+      if ('number' in normalContract.member) {
+        delete normalContract.member.number
+      }
+    }
   }
 
   if (normalContract?.member?.checked !== undefined) {
@@ -319,7 +329,7 @@ export const normalizeContract = (contract) => {
 
     finalContract.contract_owner.address =
       contract.holder.vat === contract.member.vat &&
-      contract.holder.isphisical === true
+        contract.holder.isphisical === true
         ? contract.member.address
         : `${contract.holder?.address}, ${contract.holder?.number} ${contract.holder?.floor} ${contract.holder?.door}`.trim()
 
@@ -374,7 +384,7 @@ export const normalizeContract = (contract) => {
 
     finalContract.self_consumption.installation_power = Math.round(
       contract?.self_consumption?.installation_power *
-        THOUSANDS_CONVERSION_FACTOR
+      THOUSANDS_CONVERSION_FACTOR
     ).toString()
 
     finalContract.self_consumption.installation_type =
@@ -408,6 +418,8 @@ export const newNormalizeMember = (data) => {
   finalMember.cp = data.address.postal_code
   finalMember.provincia = data.address.state.id
   finalMember.adreca = `${data.address.street}, ${data.address.number} ${data.address.bloc} ${data.address.floor} ${data.address.door}`.trim()
+  finalMember.cadas_street = data.address.cadas_street
+  finalMember.cadas_tv = data.address.cadas_tv
   finalMember.municipi = data.address.city.id
   finalMember.idioma = data.new_member.language
 
@@ -463,16 +475,16 @@ export const normalizeMember = (data) => {
     data.payment.payment_method === 'iban'
       ? PAYMENT_METHOD_PAYMENT_ORDER
       : data.payment.payment_method === 'credit_card'
-      ? PAYMENT_METHOD_CREDIT_CARD
-      : PAYMENT_METHOD_PAYMENT_ORDER
+        ? PAYMENT_METHOD_CREDIT_CARD
+        : PAYMENT_METHOD_PAYMENT_ORDER
 
   finalMember.payment_iban = data.payment.iban
   finalMember.urlok = data.urlok
   finalMember.urlko = data.urlko
 
   if (data.member.isphisical) {
-    const cognoms = `${data.member.surname1} ${data.member.surname2}`
-    finalMember.cognom = cognoms.trim()
+    const surnames = `${data.member.surname1} ${data.member.surname2}`
+    finalMember.cognom = surnames.trim()
   } else {
     finalMember.representant_nom = data.member.proxyname
     finalMember.representant_dni = data.member.proxynif
@@ -509,7 +521,7 @@ export const testPowerForPeriods = (
     const attr = i === 1 ? 'power' : `power${i}`
 
     if (limit.match('min')) {
-     inLimit = values[attr] >= rates[rate][limit]?.power
+      inLimit = values[attr] >= rates[rate][limit]?.power
     } else {
       inLimit = rate == '2.0TD'
         ? values[attr] <= rates[rate][limit]?.power
@@ -528,8 +540,8 @@ export const testPowerForPeriods = (
   const message = !limit.match('min')
     ? ('POWER_NO_MORE_THAN', { value })
     : rates[rate]?.num_power_periods > rates[rate][limit]?.num_periods_apply
-    ? t('SOME_PERIOD_MORE_THAN', { value })
-    : t('POWER_NO_LESS_THAN', { value })
+      ? t('SOME_PERIOD_MORE_THAN', { value })
+      : t('POWER_NO_LESS_THAN', { value })
 
   return createError({ message })
 }
@@ -551,7 +563,7 @@ export const newTestPowerForPeriods = (
     const attr = `power${i}`
 
     if (limit.match('min')) {
-     inLimit = values[attr] >= newRates[rate][limit]?.power
+      inLimit = values[attr] >= newRates[rate][limit]?.power
     } else {
       inLimit = rate == 'power-lower-15kw'
         ? values[attr] <= newRates[rate][limit]?.power
@@ -570,8 +582,8 @@ export const newTestPowerForPeriods = (
   const message = !limit.match('min')
     ? `POWER_NO_MORE_THAN${value}`
     : newRates[rate]?.num_power_periods > newRates[rate][limit]?.num_periods_apply
-    ? `SOME_PERIOD_MORE_THAN${value}`
-    : `POWER_NO_LESS_THAN${value}`
+      ? `SOME_PERIOD_MORE_THAN${value}`
+      : `POWER_NO_LESS_THAN${value}`
 
   return createError({ message })
 }
@@ -598,14 +610,14 @@ export const normalizeContribution = (data, signaturitData) => {
   contribution.dni = data?.member?.vat
   contribution.accountbankiban = data?.payment?.iban
   contribution.amount = parseInt(data?.payment?.amount)
-  if(signaturitData){
+  if (signaturitData) {
     contribution.socinumber = data?.member?.partner_number
     contribution.signaturit = data?.signaturit
     contribution.mandate_name = data?.mandate_name
     contribution.acceptaccountowner = "1"
   }
-  else{
-    contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0  
+  else {
+    contribution.acceptaccountowner = data?.payment?.sepa_accepted ? 1 : 0
   }
   return contribution
 }
@@ -614,7 +626,7 @@ export const getNextNBussinesDays = (day, n, marketHolidays) => {
   dayjs.extend(isoWeek)
   const today = dayjs(day)
   var result = []
-  for (var i=1; result.length<n; i++) {
+  for (var i = 1; result.length < n; i++) {
     var consideredDay = today.add(i, 'day')
     const weekday = consideredDay.isoWeekday()
     if (weekday === 6) continue // saturday
@@ -645,7 +657,7 @@ export const isHomeOwnerCommunityNif = (nif) => {
 
 export const checkCAUWhileTyping = (value, t, matchingCups) => {
   function error(message) {
-    return {value, valid: false, error: message}
+    return { value, valid: false, error: message }
   }
   value = value.replaceAll(' ', '').toUpperCase()
 
@@ -653,14 +665,14 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   if (!value)
     return error()
 
-  if (value.slice(0,2) !== "ES".slice(0, value.length))
+  if (value.slice(0, 2) !== "ES".slice(0, value.length))
     return error(t('CAU_INVALID_PREFIX'))
 
-  const numbers = value.slice(2,18)
+  const numbers = value.slice(2, 18)
   if (!/^\d{0,16}$/.test(numbers))
     return error(t('CAU_INVALID_AFTER_ES_SHOULD_BE_NUMBERS'))
 
-  const redundancyDigits = value.slice(18,20)
+  const redundancyDigits = value.slice(18, 20)
   if (!/^[A-Z]{0,2}$/.test(redundancyDigits))
     return error(t('CAU_INVALID_REDUNDANCY_CONTROL_SHOULD_BE_LETTERS'))
 
@@ -680,7 +692,7 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   if (value.length !== 26)
     return error(t("CAU_INVALID_LENGTH"))
 
-  return {value, valid: true}
+  return { value, valid: true }
 }
 
 export const isMatchingCUPSandCAU = (cau, cups) => {
@@ -702,12 +714,12 @@ export const setMunicipisWithPostalCode = async (
   fieldName,
   values
 ) => {
-  const municipis = await getMunicipisByPostalCode(postalCode)
-  if (municipis?.length > 0) {
+  const municipalities = await getMunicipisByPostalCode(postalCode)
+  if (municipalities?.length > 0) {
     setFieldValue(fieldName, {
       ...values[fieldName],
-      state: municipis[0][0]?.provincia,
-      city: municipis[0][0]?.municipi
+      state: municipalities[0][0]?.provincia,
+      city: municipalities[0][0]?.municipi
     })
   }
 }

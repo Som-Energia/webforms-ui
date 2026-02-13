@@ -91,7 +91,7 @@ const NewContractMemberForm = (props) => {
   const [formSteps, setFormSteps] = useState({})
   const [formStepsName, setFormStepsName] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
-  const [prevSteps, setPrevSteps] = useState(new Stack())
+  const [prevSteps] = useState(new Stack())
 
   const [gurbCode] = useState(() => searchParams.get("gurb-code"));
   const POP_UP_TIME = 180000

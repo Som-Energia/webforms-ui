@@ -1,21 +1,33 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import floorTypes from '../data/floor-types.json'
-import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloorInput'
 import Grid from '@mui/material/Grid'
-import LocationInput from './AddressAutocompletedField'
+import floorTypes from '../data/floor-types.json'
 import { useHandleChange } from '../hooks/useHandleChange'
+import AddressAutocompletedField from './AddressAutocompletedField'
+import SomAutocompleteFloorInput from './AutocompleteFloorInput/AutocompleteFloorInput'
 
-import { getPlaceDetails } from '../services/googleApiClient'
+import streetTypes from '../data/street-types.json'
 import { getMunicipisByPostalCode } from '../services/api'
 import InputField from './InputField/InputField'
+import { getPlaceDetails } from '../services/googleApiClient'
+import { AddressUtils } from '../utils/address.utils'
+import { ArrayUtils } from '../utils/array.utils'
+import { StringUtils } from '../utils/string.utils'
 import StateCity from './StateCity'
 
-const normalizePlace = (place) => ({
-  id: place?.id?.toString() || '',
-  name: place?.name || ''
-})
+const getCityAndStateFromPostalCode = async (postalCode) => {
+  if (!postalCode) {
+    return { city: '', state: '' }
+  }
+
+  const municipalities = await getMunicipisByPostalCode(postalCode)
+  const cityRaw = municipalities?.[0]?.[0]?.municipi
+  const stateRaw = municipalities?.[0]?.[0]?.provincia
+  const city = AddressUtils.sanitizePlace(cityRaw)
+  const state = AddressUtils.sanitizePlace(stateRaw)
+  return { city, state }
+}
 
 const updateAddressValues = async (
   addressValue,
@@ -23,27 +35,24 @@ const updateAddressValues = async (
   values,
   setValues,
   addressFieldName,
-  sessionTokenRef
+  sessionTokenRef,
 ) => {
   try {
     const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
 
-    const postalCodeComponent = place.addressComponents.find((c) =>
-      c.types.includes('postal_code')
-    )
-    const municipis = await getMunicipisByPostalCode(
-      postalCodeComponent?.longText
+    const { postal_code: postalCode, route: streetName } =
+      AddressUtils.parsePlace(place, ['postal_code', 'route'])
+
+    const { city, state } = await getCityAndStateFromPostalCode(postalCode)
+
+    const [streetPartial] = streetName.split(' ') || []
+    const cadastralItem = streetTypes.find((item) =>
+      ArrayUtils.hasStringValue(item.values, streetPartial)
     )
 
-    const streetComponent = place.addressComponents.find((c) =>
-      c.types.includes('route')
-    )
-
-    const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
-    const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
-
-    const city = normalizePlace(cityRaw)
-    const state = normalizePlace(stateRaw)
+    const cadastralStreetCode = cadastralItem?.code || 'CL' // Street is code by default
+    const cadastralStreet = StringUtils.normalize(streetName)
+    const { segments } = AddressUtils.segmentStreet(cadastralStreet)
 
     setValues({
       ...values,
@@ -52,9 +61,11 @@ const updateAddressValues = async (
         id: addressValue.id,
         text: addressValue.text,
         number: numberValue,
-        postal_code: postalCodeComponent?.longText || '',
-        street: streetComponent?.longText || '',
+        postal_code: postalCode || '',
+        street: streetName || '',
         state,
+        cadas_tv: cadastralStreetCode,
+        cadas_street: segments?.length ? segments : [cadastralStreet],
         city
       }
     })
@@ -99,21 +110,16 @@ const AddressField = ({
 
     try {
       const place = await getPlaceDetails(value.id, sessionTokenRef)
-      const streetComponent = place.addressComponents.find((c) =>
-        c.types.includes('route')
-      )
-      const postalCodeComponent = place.addressComponents.find((c) =>
-        c.types.includes('postal_code')
-      )
+      const {
+        route: streetName,
+        postal_code: postalCode,
+      } = AddressUtils.parsePlace(place, [
+        'route',
+        'postal_code',
+      ])
 
-      setFieldValue(
-        `${addressFieldName}.street`,
-        streetComponent?.longText || ''
-      )
-      setFieldValue(
-        `${addressFieldName}.postal_code`,
-        postalCodeComponent?.longText || ''
-      )
+      setFieldValue(`${addressFieldName}.street`, streetName || '')
+      setFieldValue(`${addressFieldName}.postal_code`, postalCode || '')
 
       await updateAddressValues(
         value,
@@ -121,7 +127,7 @@ const AddressField = ({
         values,
         setValues,
         addressFieldName,
-        sessionTokenRef
+        sessionTokenRef,
       )
     } catch (error) {
       console.error('Error fetching place details:', error)
@@ -140,18 +146,12 @@ const AddressField = ({
 
     if (value.length >= 5) {
       try {
-        const municipis = await getMunicipisByPostalCode(value)
-
-        const cityRaw = municipis?.[0]?.[0]?.municipi || { id: '', name: '' }
-        const stateRaw = municipis?.[0]?.[0]?.provincia || { id: '', name: '' }
-
-        const city = normalizePlace(cityRaw)
-        const state = normalizePlace(stateRaw)
+        const { city, state } = await getCityAndStateFromPostalCode(value)
 
         setFieldValue(`${addressFieldName}.city`, city)
         setFieldValue(`${addressFieldName}.state`, state)
       } catch (error) {
-        console.error('Error getting municipis by postal code:', error)
+        console.error('Error getting municipalities by postal code:', error)
         setFieldValue(`${addressFieldName}.city`, { id: '', name: '' })
         setFieldValue(`${addressFieldName}.state`, { id: '', name: '' })
       }
@@ -181,7 +181,7 @@ const AddressField = ({
   return (
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>
-        <LocationInput
+        <AddressAutocompletedField
           id={addressFieldName}
           textFieldName={addressLabel}
           value={values[addressFieldName]}
