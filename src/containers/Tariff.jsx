@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
 import { getPrices } from '../services/api'
+import Loading from '../components/Loading'
 
 const Tariff = (props) => {
-  const { tariff, taxes = true, taxValue = 21 } = props
+  const { tariff, maxPower, taxes = true, taxValue = 21 } = props
   const { language } = useParams()
   const { t, i18n } = useTranslation()
   const [loading, setLoading] = useState()
@@ -16,13 +17,14 @@ const Tariff = (props) => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
- useEffect(() => {
+  useEffect(() => {
     const CITY_TAX_21 = 20
     const CITY_TAX_10 = 37
 
     setLoading(true)
     getPrices({
       tariff,
+      max_power: maxPower,
       city_id: taxType === 21 ? CITY_TAX_21 : CITY_TAX_10
     })
       .then((response) => {
@@ -34,7 +36,7 @@ const Tariff = (props) => {
         setLoading(false)
         console.error(error)
       })
-  }, [taxType, tariff])
+  }, [taxType, tariff, maxPower])
 
   const btnTaxStyle = {
     width: '120px',
@@ -55,7 +57,7 @@ const Tariff = (props) => {
   return (
     <div className="tariff-table">
       {loading ? (
-        ''
+        <Loading />
       ) : (
         <>
           {taxes && (
@@ -65,14 +67,14 @@ const Tariff = (props) => {
                   id="tab_deu"
                   className={taxType === 10 ? 'deu_triat' : 'deu_notriat'}
                   style={{ ...btnTaxStyle }}
-                  onClick={(event) => setTaxType(10)}>
+                  onClick={() => setTaxType(10)}>
                   10% IVA
                 </li>
                 <li
                   id="tab_vintiu"
                   className={taxType === 21 ? 'vintiu_triat' : 'vintiu_notriat'}
                   style={{ ...btnTaxStyle }}
-                  onClick={(event) => setTaxType(21)}>
+                  onClick={() => setTaxType(21)}>
                   21% IVA
                 </li>
               </ul>

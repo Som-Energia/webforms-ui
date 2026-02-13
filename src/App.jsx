@@ -114,14 +114,16 @@ const App = (props) => {
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
             <Router future={{
-                v7_startTransition: true,
-              }}>
+              v7_startTransition: true,
+            }}>
               <Routes>
                 <Route exact path="/" element={
                   <ThemeWrapper theme={oldWebFormsTheme}>
                     <Home {...props} />
                   </ThemeWrapper>
                 } />
+
+                <Route exact path="/tariff" element={<Tariff {...props} />} />
 
                 <Route
                   exact
@@ -536,11 +538,11 @@ const App = (props) => {
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
                         <PopUpContextProvider>
-                            <LoadingContextProvider>
-                              <SummaryContextProvider>
-                                <GurbFormRequirements {...props} />
-                              </SummaryContextProvider>
-                            </LoadingContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <GurbFormRequirements {...props} />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
                         </PopUpContextProvider>
                       </ThemeWrapper>
                     }
@@ -551,11 +553,11 @@ const App = (props) => {
                     path="/:language/gurb/:code/join/"
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <GurbFormJoin {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <GurbFormJoin {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -565,11 +567,11 @@ const App = (props) => {
                     path="/:language/gurb/gurb-url-ok"
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <GurbContractPaymentSuccessful {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <GurbContractPaymentSuccessful {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -603,11 +605,11 @@ const App = (props) => {
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                          <LoadingContextProvider>
-                            <SummaryContextProvider>
-                              <NewMemberForm {...props} />
-                            </SummaryContextProvider>
-                          </LoadingContextProvider>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewMemberForm {...props} />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
                       </ThemeWrapper>
                     }
                   />
