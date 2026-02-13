@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 6.7.0 2026-02-13
 
 - NEW: Add cadastral information to address field
 
