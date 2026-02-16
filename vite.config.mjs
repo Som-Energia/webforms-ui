@@ -1,4 +1,7 @@
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
+import svgr from 'vite-plugin-svgr'
+// Uncomment the following line to enable eslint plugin, but first fix the issues in the codebase
+//import eslint from 'vite-plugin-eslint'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import pkg from './package.json'
 
@@ -38,7 +41,8 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      splitVendorChunkPlugin()
+      splitVendorChunkPlugin(),
+      svgr()
       // TODO: to be activated after fixing the issues
       // eslint()
     ],
