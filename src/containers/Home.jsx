@@ -23,7 +23,7 @@ const options = [
   { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos` },
   { title: 'New Contract - Indexed', href: `${language}/formulario-contratacion-indexada` },
   { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse` },
-  { title: 'Preus indexats diaris', href: `${language}/servicios/tendencia-dels-preus` },
+  { title: 'Preus indexats diaris', href: `${language}/servicios/tendencia-de-los-precios` },
   { title: 'Acceptació/Rebuig D1', href: '/d1-detail' },
   { title: 'Aportació al capital social', href: `${language}/aportaciones-capital-social/formulario` },
   { title: 'Baixa punt de suministrament', href: '/cancellation' },
