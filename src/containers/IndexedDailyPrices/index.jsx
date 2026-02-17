@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
-import { Chart, SumPricesDisplay, Loading, SomDatePicker, DizzyError } from '@somenergia/somenergia-ui'
+import { SummaryPeriodChart, SummaryPricesDisplay, Loading, SomDatePicker, DizzyError } from '@somenergia/somenergia-ui'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { getCompensationIndexedPrices, getIndexedTariffPrices } from '../../services/api'
@@ -156,10 +156,9 @@ const IndexedDailyPrices = () => {
         <Loading />
       ) : !dayIsMissing(indexedTariffPrices.periods) ? (
         <>
-          <Chart
+          <SummaryPeriodChart
             data={indexedTariffPrices}
             period="DAILY"
-            type="BAR"
             Ylegend={'€/kWh'}
             legend={true}
             showTooltipKeys={false}
@@ -169,7 +168,7 @@ const IndexedDailyPrices = () => {
             minYAxisValue={computeMinYAxisValue(totalPrices, tickCountValue)}
           />
           <Box sx={{ marginTop: '40px' }}>
-            <SumPricesDisplay totalPrices={totalPricesData} />
+            <SummaryPricesDisplay totalPrices={totalPricesData} />
           </Box>
         </>
       ) : (
