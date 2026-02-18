@@ -1,5 +1,9 @@
 # Change Log
 
+## 6.8.0 2026-02-16
+
+- NEW: Added new captacio form
+
 ## 6.7.0 2026-02-13
 
 - NEW: Add cadastral information to address field

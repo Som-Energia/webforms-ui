@@ -577,8 +577,8 @@ const App = (props) => {
                   />
                 )}
                 {[
-                  '/:language/landing/captacio-domestic',
-                  '/:language/landing/captacio-empreses'
+                  '/:language/landing/captacio',
+                  '/:language/landing/captacion'
                 ].map((path) => (
                   <Route
                     key={path}
