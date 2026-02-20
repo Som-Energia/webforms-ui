@@ -39,6 +39,7 @@ import {
 import PrevButton from '../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../components/OldComponents/Buttons/NextButton'
 import SubmitButton from '../components/OldComponents/Buttons/SubmitButton'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
@@ -308,9 +309,7 @@ function HolderChange(props) {
     )
   }
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   /// True if the step has to be skipped according to the values
   function skipStep(step, values, isBackwards = false) {

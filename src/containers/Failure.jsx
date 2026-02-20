@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import CancelIcon from '@mui/icons-material/Cancel'
 
 import StepHeader from '../components/OldComponents/StepHeader'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 function Failure(props) {
   const { language } = useParams()
@@ -19,11 +20,7 @@ function Failure(props) {
     showHeader
   } = props
 
-  useEffect(() => {
-    if (language && i18n.language !== language) {
-      i18n.changeLanguage(language)
-    }
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   return (
     <>

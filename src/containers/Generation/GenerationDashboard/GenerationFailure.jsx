@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import CloseIcon from '@mui/icons-material/Close'
 import Result from '../../Result'
+import { useSyncLanguage } from '../../../hooks/useTranslateOptions'
 
 const customStyles ={
   container: {
@@ -48,10 +49,7 @@ function GenerationFailure(props) {
   const { language } = useParams()
   const { t, i18n } = useTranslation()
   
-
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   return (
     <>

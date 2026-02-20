@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
@@ -24,6 +24,7 @@ import Success from './Success'
 
 import { confirmCancelContract } from '../services/api'
 import PrevButton from '../components/OldComponents/Buttons/PrevButton'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 const CancellationConfirm = (props) => {
   const { language, contract_id, token } = useParams()
@@ -37,9 +38,7 @@ const CancellationConfirm = (props) => {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    language && i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const handleSubmit = (event) => {
     event.preventDefault()

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { styled } from '@mui/system'
@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import StepHeader from '../../components/OldComponents/StepHeader'
 import indexedErrorText from './IndexedError'
 import Result from '../Result'
+import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 const StyledImg = styled('img')({
   width: '220px',
@@ -19,12 +20,10 @@ const StyledImg = styled('img')({
 
 function Failure(props) {
   const { language } = useParams()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { error = false, showHeader = true } = props
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   return (
     <>

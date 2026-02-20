@@ -1,12 +1,17 @@
 import React from 'react'
 import GenerationDashboard from './GenerationDashboard'
-import { render, queryByAttribute, screen, within, fireEvent, waitFor } from '@testing-library/react'
+import { render, queryByAttribute, screen, within, fireEvent, waitFor, getByText } from '@testing-library/react'
 import { GenerationContextProvider } from '../context/GenerationContext'
 import { PopUpContextProvider } from '../../../context/PopUpContext'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest';
 import * as myApi from '../../../services/api'
-
+import { useSyncDayjsLanguage } from '../../../hooks/useTranslateOptions'
+import dayjs from 'dayjs'
+import 'dayjs/locale/es'
+import 'dayjs/locale/ca'
+import 'dayjs/locale/eu'
+import 'dayjs/locale/gl'
 
 vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 vi.mock('axios', async (importActual) => {
@@ -26,6 +31,12 @@ vi.mock('axios', async (importActual) => {
 
   return mockAxios;
 });
+
+// Mock the useSyncDayjsLanguage function
+vi.mock('../../../hooks/useTranslateOptions', () => ({
+  useSyncDayjsLanguage: vi.fn(),
+  useSyncLanguage: vi.fn(),
+}))
 
 describe('Generation Dashboard', () => {
   const getById = queryByAttribute.bind(null, 'id')
@@ -285,5 +296,68 @@ describe('Generation Dashboard', () => {
     const infoMessage = screen.getByText('GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT')
     expect(infoMessage).toBeInTheDocument()
 
+  })
+
+  test('The component dates properly render when dayjs "es"', () => {
+
+    vi.mocked(useSyncDayjsLanguage).mockResolvedValue({
+      dayjs: dayjs.locale('es')
+    })
+
+    const dom = render(
+      <PopUpContextProvider>
+        <GenerationContextProvider
+          assignmentsJSON={mockAssignmentRows}
+          investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
+          contractNoAssignmentsJSON={[]}
+          testMode={true}>
+          <GenerationDashboard validationConfirm={mockValidationConfirm} />
+        </GenerationContextProvider>
+      </PopUpContextProvider>
+    )
+
+    const investmentTable = getById(dom.container, 'investment-table')
+    expect(investmentTable).toBeInTheDocument()
+
+    const purchase_date = getByText(dom.container,'01/01/2020')
+    expect(purchase_date).toBeInTheDocument()
+
+    const first_effective_date = getByText(dom.container,'01/01/2021')
+    expect(first_effective_date).toBeInTheDocument()
+
+    const last_effective_date = getByText(dom.container,'01/01/2045')
+    expect(last_effective_date).toBeInTheDocument()
+  })
+
+  test('The component dates properly render when dayjs "eu"', () => {
+
+    vi.mocked(useSyncDayjsLanguage).mockResolvedValue({
+      dayjs: dayjs.locale('eu')
+    })
+
+    const dom = render(
+      <PopUpContextProvider>
+        <GenerationContextProvider
+          assignmentsJSON={mockAssignmentRows}
+          investmentsJSON={mockInvestmentRows}
+          outsideAssignmentsJSON={mockOutsideAssignmentRows}
+          testMode={true}>
+          <GenerationDashboard validationConfirm={mockValidationConfirm} />
+        </GenerationContextProvider>
+      </PopUpContextProvider>
+    )
+
+    const investmentTable = getById(dom.container, 'investment-table')
+    expect(investmentTable).toBeInTheDocument()
+
+    const purchase_date = getByText(dom.container,'01/01/2020')
+    expect(purchase_date).toBeInTheDocument()
+
+    const first_effective_date = getByText(dom.container,'01/01/2021')
+    expect(first_effective_date).toBeInTheDocument()
+
+    const last_effective_date = getByText(dom.container,'01/01/2045')
+    expect(last_effective_date).toBeInTheDocument()
   })
 })

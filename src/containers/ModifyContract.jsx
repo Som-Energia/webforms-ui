@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -28,6 +28,7 @@ import Resume from './ModifyContract/Resume'
 
 import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 import AlertBox from '../components/AlertBox/AlertBox'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
@@ -61,10 +62,7 @@ function ModifyContract(props) {
     }
   }
 
-  useEffect(() => {
-    const language = params.language
-    i18n.changeLanguage(language)
-  }, [params.language, i18n])
+  useSyncLanguage(params.language)
 
   const [showInspector, setShowInspector] = useState(false)
   const [activeStep, setActiveStep] = useState(0)

@@ -1,4 +1,4 @@
-import React,  { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -6,6 +6,8 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import StepHeader from '../components/OldComponents/StepHeader'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
+
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -35,13 +37,7 @@ const Result = (props) => {
     const { language } = useParams()
     const { t, i18n } = useTranslation()
 
-
-    useEffect(() => {
-       if (language && i18n.language !== language) {
-            i18n.changeLanguage(language)
-       }
-    }, [language, i18n])
-
+    useSyncLanguage(language)
 
     return (
         <>

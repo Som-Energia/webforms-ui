@@ -30,6 +30,7 @@ import memberPersonalDataValidations from './validations/memberPersonalDataValid
 import memberPaymentMethodValidations from './validations/paymentMethodValidations'
 import memberSummaryValidations from './validations/memberSummaryValidations'
 import Loading from '../../components/Loading'
+import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 const MAX_STEP_NUMBER = 3
 
@@ -49,11 +50,7 @@ const NewMemberForm = () => {
 
   const [activeStep, setActiveStep] = useState(0)
 
-  useEffect(() => {
-    if (language && i18n.language !== language) {
-      i18n.changeLanguage(language)
-    }
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const initialValues = {
     address: {

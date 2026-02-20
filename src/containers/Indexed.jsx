@@ -18,10 +18,6 @@ import Grid from '@mui/material/Grid'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import dayjs from 'dayjs'
-import 'dayjs/locale/ca'
-import 'dayjs/locale/es'
-
 import SendIcon from '@mui/icons-material/Send'
 
 import IndexedContractDetails from './Indexed/IndexedContractDetails'
@@ -39,6 +35,7 @@ import NextButton from '../components/OldComponents/Buttons/NextButton'
 import { checkIsTariff20, checkIsTariff30 } from '../services/utils'
 import { checkIsTariffIndexed } from '../services/utils'
 import { modify_tariff, can_modify_tariff } from '../services/api'
+import { useSyncLanguage, useSyncDayjsLanguage } from '../hooks/useTranslateOptions'
 
 const contractJSON = JSON.parse(
   document.getElementById('contract-data').textContent
@@ -232,10 +229,9 @@ const Indexada = (props) => {
     checkEnabled && checkCanModifyTariff()
   }, [])
 
-  useEffect(() => {
-    language && i18n.changeLanguage(language)
-    language ? dayjs.locale(language) : dayjs.locale('es')
-  }, [language, i18n])
+  useSyncLanguage(language)
+
+  useSyncDayjsLanguage(language)
 
   const validationSchemas = [
     Yup.object().shape({}),
