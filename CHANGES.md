@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 6.8.1 2026-02-23:x
 
 - FIX: validation phone number old forms
 - REF: Add useTranslateOptions
