@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { getPrices } from '../services/api'
 import Loading from '../components/Loading'
-import { useSyncLanguage } from '../../hooks/useTranslateOptions'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 const Tariff = (props) => {
   const { tariff, maxPower, taxes = true, taxValue = 21 } = props
