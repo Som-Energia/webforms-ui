@@ -1,22 +1,18 @@
-import { useContext } from 'react'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import TariffNameContext from '../../context/TariffNameContext'
-import { Tariffs } from '../../data/tariff'
+import { DefaultTariff, Tariffs } from '../../data/tariff'
 import { useTranslation } from 'react-i18next'
 import { plausible } from '../../trackers/plausible'
 
-function TariffSelector() {
+function TariffSelector({ tariff, onSelectTariff = () => { } }) {
   const { t } = useTranslation()
-  const { tariffName, setTariffName } = useContext(TariffNameContext)
 
   const handleClick = (tariffName) => {
-    setTariffName(tariffName)
+    onSelectTariff(tariffName)
     plausible.trackEvent('IndexedTariffSelectorButton-' + tariffName)
   }
 
-  const selectedTariff = tariffName
-
+  const selectedTariff = tariff ?? DefaultTariff
   return (
     <Stack
       direction={{ xs: 'column', sm: 'row' }}
