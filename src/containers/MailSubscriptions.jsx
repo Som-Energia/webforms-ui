@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -7,6 +7,8 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
 import OptionSwitch from '../components/oficinavirtual/OptionSwitch'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
+
 import Box from '@mui/material/Box'
 
 const defaultLists = [
@@ -33,9 +35,7 @@ const MailSubscriptions = (props) => {
   const { mailLists = defaultLists } = props
   const { language } = useParams()
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   return (
     <Box sx={{ width: '100%', backgroundColor: '#f2f2f2' }}>

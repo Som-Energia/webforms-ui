@@ -4,10 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { generationChangeContractPriority } from '../services/api'
 import GenerationDashboard from './Generation/GenerationDashboard/GenerationDashboard'
-
-import dayjs from 'dayjs'
-import 'dayjs/locale/ca'
-import 'dayjs/locale/es'
+import { useSyncLanguage, useSyncDayjsLanguage } from '../hooks/useTranslateOptions'
 
 function Generation(props) {
   const [validationConfirm, setValidationConfirm] = useState({finished:false,completed:false})
@@ -32,10 +29,9 @@ function Generation(props) {
     }
   }, [assignments, setEditingPriority])
 
-  useEffect(() => {
-    language && i18n.changeLanguage(language)
-    language ? dayjs.locale(language) : dayjs.locale('es')
-  }, [language, i18n])
+  useSyncLanguage(language)
+
+  useSyncDayjsLanguage(language)
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Formik, Form } from 'formik'
@@ -26,6 +26,7 @@ import NextButton from '../../../components/OldComponents/Buttons/NextButton'
 import ExitButton from '../../../components/OldComponents/Buttons/ExitButton'
 import PersonalData from '../../HolderChange/PersonalData'
 import GenerationSignaturit from './GenerationSignaturit'
+import { useSyncLanguage } from '../../../hooks/useTranslateOptions'
 
 const MAX_STEP_NUMBER = 5
 
@@ -40,9 +41,7 @@ const GenerationContribution = (props) => {
   const [error, setError] = useState(false)
   const [result, setResult] = useState({})
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const initialValues = {
     member: {

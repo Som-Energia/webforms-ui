@@ -28,6 +28,7 @@ import Address from './pages/Requirements/Address'
 import SelfConsumption from './pages/Requirements/SelfConsumption'
 import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
+import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 
 export const MAX_STEPS_NUMBER = {
@@ -77,9 +78,7 @@ const GurbFormRequirements = (props) => {
     formikRef.current?.validateForm()
   }, [activeStep])
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   useEffect(() => {
     if (activeStep !== 5) {

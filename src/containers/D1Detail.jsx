@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { normalizeD1ConfirmationData, templateData } from '../services/utils'
@@ -19,17 +19,16 @@ import Typography from '@mui/material/Typography'
 import D1Validation from './CaseDetail/D1Validation'
 import RefuseD1 from './CaseDetail/RefuseD1'
 import AcceptD1 from './CaseDetail/AcceptD1'
+import { useSyncLanguage } from '../hooks/useTranslateOptions'
 
 function D1Detail(props) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { language } = useParams()
   const { state } = useLocation()
 
   const { templateProps = templateData } = props
 
-  useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [language, i18n])
+  useSyncLanguage(language)
 
   const [activeStep, setActiveStep] = useState(state?.d1CaseData ? 1 : 0)
   const [data, setData] = useState(state?.d1CaseData || templateProps)

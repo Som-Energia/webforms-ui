@@ -1,5 +1,10 @@
 # Change Log
 
+## unreleased
+
+- FIX: validation phone number old forms
+- REF: Add useTranslateOptions
+
 ## 6.8.0 2026-02-16
 
 - NEW: Added new captacio form
