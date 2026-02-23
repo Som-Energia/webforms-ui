@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +14,7 @@ import {
   computeMinYAxisValue,
 } from '../../services/indexedTariffs.utils'
 import TariffSelector from '../../components/TariffSelector/TariffSelector'
-import TariffNameContext from '../../context/TariffNameContext'
+import { DefaultTariff, Tariffs } from '../../data/tariff'
 
 const IndexedDailyPrices = () => {
   const { language } = useParams()
@@ -24,7 +24,7 @@ const IndexedDailyPrices = () => {
     i18n.changeLanguage(language)
   }, [language, i18n])
 
-  const { tariffName } = useContext(TariffNameContext)
+  const [tariff, setTariff] = useState(DefaultTariff)
   const [firstDate, setFirstDate] = useState(null)
   const [prices, setPrices] = useState(null)
   const [calendarDay, setCalendarDay] = useState(dayjs().startOf('day'))
@@ -93,7 +93,7 @@ const IndexedDailyPrices = () => {
   useEffect(() => {
     const getPrices = async (tariffName) => {
       setError(false)
-      if (tariffName === 'surplusCompensation') {
+      if (tariffName === Tariffs.SURPLUS_COMPENSATION) {
         const data = await getCompensationIndexedPrices({
           geoZone: 'PENINSULA',
         })
@@ -112,8 +112,8 @@ const IndexedDailyPrices = () => {
         }
       }
     }
-    getPrices(tariffName)
-  }, [tariffName])
+    getPrices(tariff)
+  }, [tariff])
 
   const ErrorBox = ({ message }) => (
     <Box sx={{ textAlign: 'center' }}>
@@ -128,9 +128,13 @@ const IndexedDailyPrices = () => {
     </Box>
   )
 
+  const changeTariff = (selectedTariff) => {
+    setTariff(selectedTariff)
+  }
+
   return (
     <>
-      <TariffSelector />
+      <TariffSelector tariff={tariff} onSelectTariff={changeTariff} />
       <Box margin={8} display="flex" justifyContent="center" alignItems="center">
         <SomDatePicker
           firstDate={dayjs().subtract(7, 'day').startOf('day')}

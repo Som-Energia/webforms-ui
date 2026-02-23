@@ -19,8 +19,6 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 import ThemeWrapper from './themes/ThemeWrapper'
-import { TariffNameContextProvider } from './context/TariffNameContext'
-
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
@@ -173,9 +171,7 @@ const App = (props) => {
                       path={url}
                       element={
                         <ThemeWrapper theme={webFormsTheme}>
-                          <TariffNameContextProvider>
-                            <IndexedDailyPrices />
-                          </TariffNameContextProvider>
+                          <IndexedDailyPrices />
                         </ThemeWrapper>
                       }
                     />

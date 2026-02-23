@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import { beforeAll } from 'vitest'
 import { render, queryByAttribute, fireEvent, screen } from '@testing-library/react'
-import TariffNameContext, { TariffNameContextProvider } from '../../context/TariffNameContext'
 import TariffSelector from './TariffSelector'
 import { initI18n } from '../../tests/i18n.mock'
-import { Tariffs } from '../../data/tariff'
+import { DefaultTariff, Tariffs } from '../../data/tariff'
 
 describe('TariffSelector component', () => {
 
@@ -11,22 +11,23 @@ describe('TariffSelector component', () => {
     await initI18n()
   })
 
-  // Dummy component to debug context changes!
-  const ContextDebugger = () => {
+  const TariffSelectorWrapper = () => {
+    const [tariff, setTariff] = useState(DefaultTariff)
+
+    const onChangeTariff = (tariff) => {
+      setTariff(tariff)
+    }
+
     return (
-      <TariffNameContext.Consumer>
-        {(value) => <div data-testid="current-tariff">{value.tariffName}</div>}
-      </TariffNameContext.Consumer>
+      <div>
+        <div data-testid="current-tariff">{tariff}</div>
+        <TariffSelector tariff={tariff} onSelectTariff={onChangeTariff} />
+      </div>
     )
   }
 
   const renderComponent = () => {
-    return render(
-      <TariffNameContextProvider>
-        <ContextDebugger />
-        <TariffSelector />
-      </TariffNameContextProvider>
-    )
+    return render(<TariffSelectorWrapper />)
   }
 
   test('TariffSelector renders correctly with available tariffs', () => {
@@ -40,7 +41,7 @@ describe('TariffSelector component', () => {
 
   describe('TariffSelector available tariffs', () => {
     Object.values(Tariffs).forEach(async (tariffName) => {
-      test(`Check context when click ${tariffName}`, async () => {
+      test(`Check value is ${tariffName} when click ${tariffName}`, async () => {
         const dom = renderComponent()
         const getByDataCy = queryByAttribute.bind(null, 'data-cy')
         const button = getByDataCy(dom.container, `button-${tariffName}`)
