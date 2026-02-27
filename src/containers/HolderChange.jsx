@@ -40,6 +40,7 @@ import PrevButton from '../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../components/OldComponents/Buttons/NextButton'
 import SubmitButton from '../components/OldComponents/Buttons/SubmitButton'
 import { useSyncLanguage } from '../hooks/useTranslateOptions'
+import Loading from '@somenergia/somenergia-ui/Loading'
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
@@ -516,9 +517,15 @@ function HolderChange(props) {
                           value={(activeStep / MAX_STEP_NUMBER) * 100}
                         />
                         <>
-                          {completed ? (
+                          {completed || sending ? (
                             <Box className="step-body">
-                              {error ? (
+                              {sending ? (
+                                <Box sx={{ mt: '50px'}}>
+                                  <Loading
+                                    description={t('WAITING_PROCESS')}
+                                  />
+                                </Box>
+                              ) : error ? (
                                 <Failure error={error} />
                               ) : (
                                 <Success result={result} />
