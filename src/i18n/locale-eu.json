@@ -842,5 +842,17 @@
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "",
     "GURB_ADDRESS_VALIDATION_BUTTON_TEXT": "Helbidea baliozkotzea",
     "CADASTRAL_REFERENCE_ERROR": "",
-    "UNACCEPTED_FAIR_TITLE": ""
+    "UNACCEPTED_FAIR_TITLE": "",
+    "TARIFF_SELECTOR_SURPLUS_COMPENSATION": "Soberakinen konpentsazioa",
+    "TARIFF_SELECTOR_TARIFF_61TD": "6.1TD indexada",
+    "TARIFF_SELECTOR_TARIFF_30TD": "3.0TD indexada",
+    "TARIFF_SELECTOR_TARIFF_20TD": "2.0TD indexada",
+    "CHART_DAILY_AVERAGE_LEGEND": "Eguneko batezbestekoa",
+    "CHART_WEEKLY_AVERAGE_LEGEND": "Azken {{ base_days_computation }} egunetako batezbestekoa",
+    "SUMPRICESDISPLAY_TOTAL_MIN": "GUTXIENEKO PREZIOA",
+    "SUMPRICESDISPLAY_TOTAL_MAX": "GEHIENEKO PREZIOA",
+    "SUMPRICESDISPLAY_TOTAL_AVERAGE": "EGUNEKO BATEZBESTEKOA",
+    "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "AZKEN {{ base_days_computation }} EGUNETAKO BATEZBESTEKOA",
+    "PRICES_ERROR_MISSING_DATA": "Ez dago egun honetako daturik. Barkatu eragozpenak!",
+    "API_ERROR_FETCHING_DATA": "Tamalez, intzidentzia bat dela eta, une honetan ezin dugu erakutsi prezio-iragarpena. Espero dugu berehala konpontzea eta iragarpena lehenbailehen erakutsi ahal izatea. Barkatu eragozpenak!"
 }

@@ -419,7 +419,7 @@ export const contribution = async (data) => {
 }
 
 export const checkIsFromGenerationEnabledZone = async (data) => {
-  const {memberNumber,memberVat} = data
+  const { memberNumber, memberVat } = data
   return axios({
     method: 'GET',
     url: `${WEBFORMS_API_URL}/data/generationkwh/can_join/${memberNumber}/${memberVat}`
@@ -489,13 +489,13 @@ export const confirmCancelContract = async (data) => {
 }
 
 export const generationChangeContractPriority = async (data) => {
-    return axios({
-      method: 'PUT',
-      url: `/api/investments/change-assignment-order/`,
-      data: data
-    }).then((response) => {
-      return response?.data
-    })
+  return axios({
+    method: 'PUT',
+    url: `/api/investments/change-assignment-order/`,
+    data: data
+  }).then((response) => {
+    return response?.data
+  })
 }
 
 export const getNoAssignmentContracts = async () => {
@@ -542,4 +542,45 @@ export const getPowers = async (gurb_code, tarif_name) => {
   }).then((response) => {
     return response?.data
   })
+}
+
+export const getIndexedTariffPrices = async ({ tariff, geoZone }) => {
+  return axios({
+    method: 'GET',
+    url: `${WEBFORMS_API_URL}/data/indexed_prices`,
+    withCredentials: false,
+    params: {
+      tariff: tariff,
+      geo_zone: geoZone,
+    },
+  })
+    .catch((error) => {
+      throw error
+    })
+    .then((response) => {
+      if (response.error !== undefined) {
+        throw response
+      }
+      return response?.data?.data
+    })
+}
+
+export const getCompensationIndexedPrices = async ({ geoZone }) => {
+  return axios({
+    method: 'GET',
+    url: `${WEBFORMS_API_URL}/data/compensation_indexed_prices`,
+    withCredentials: false,
+    params: {
+      geo_zone: geoZone,
+    },
+  })
+    .catch((error) => {
+      throw error
+    })
+    .then((response) => {
+      if (response.error !== undefined) {
+        throw response
+      }
+      return response?.data?.data
+    })
 }
