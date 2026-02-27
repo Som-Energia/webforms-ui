@@ -58,7 +58,13 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       open: true,
-      port: 3000
+      port: 3000,
+      deps: {
+        inline: [
+          '@emotion/styled',
+          '@emotion/react'
+        ],
+      },
     },
     test: {
       globals: true,
