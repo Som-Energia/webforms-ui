@@ -357,6 +357,51 @@ describe('Holder Change', () => {
           matchCase: false
         })
       })
+
+      it('Review holder change data: sending data', function () {
+        cy.oldIdentifyHolder(this.personaldata.memberVat)
+        cy.get('[data-cy=next]').click()
+
+        cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
+        cy.get('[data-cy=next]').click()
+
+        cy.holderChangePersonalData(this.data)
+        cy.get('[data-cy=next]').click()
+
+        cy.enterVoluntaryCent(this.data.voluntaryCent)
+
+        cy.get('[data-cy=next]').click()
+
+        cy.enterPaymentData(this.data.iban)
+
+        // Review page
+        cy.contains('revisa y confirma el contrato', { matchCase: false })
+        cy.contains(this.personaldata.memberVat, { matchCase: false })
+
+        cy.contains(
+          'ofrecemos la posibilidad de contratar durante un año el suministro eléctrico',
+          { matchCase: false }
+        ).should('not.exist')
+        cy.contains('socio o socia vinculado', { matchCase: false })
+
+        cy.get('[data-cy=submit]').should('have.class', 'Mui-disabled')
+
+        cy.contains('acepto las condiciones', { matchCase: false }).click()
+        cy.contains('condiciones generales', { matchCase: false })
+        cy.get('[data-cy=accept]').click()
+
+        cy.get('[data-cy=submit]').should('not.have.class', 'Mui-disabled')
+
+        cy.intercept('POST', '/form/holderchange', {
+          delay: 1000, // milliseconds
+        }).as('holderChangePost')
+
+        cy.get('[data-cy=submit]').click()
+
+        cy.contains('Este proceso puede tardar unos minutos', {
+          matchCase: false
+        })
+      })
     })
   })
 })

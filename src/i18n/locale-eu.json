@@ -842,5 +842,6 @@
     "GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL": "",
     "GURB_ADDRESS_VALIDATION_BUTTON_TEXT": "Helbidea baliozkotzea",
     "CADASTRAL_REFERENCE_ERROR": "",
-    "UNACCEPTED_FAIR_TITLE": ""
+    "UNACCEPTED_FAIR_TITLE": "",
+    "WAITING_PROCESS": "Este proceso puede tardar unos minutos"
 }
