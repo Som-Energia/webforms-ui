@@ -517,15 +517,17 @@ function HolderChange(props) {
                           value={(activeStep / MAX_STEP_NUMBER) * 100}
                         />
                         <>
-                          {completed || sending ? (
+                          {sending? (
                             <Box className="step-body">
-                              {sending ? (
                                 <Box sx={{ mt: '50px'}}>
                                   <Loading
                                     description={t('WAITING_PROCESS')}
                                   />
                                 </Box>
-                              ) : error ? (
+                            </Box>
+                          ) : completed ? (
+                            <Box className="step-body">
+                              { error ? (
                                 <Failure error={error} />
                               ) : (
                                 <Success result={result} />
