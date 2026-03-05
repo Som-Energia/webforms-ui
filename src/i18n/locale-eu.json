@@ -665,7 +665,7 @@
     "NEW_MEMBER_ERROR_TITLE": "Errore bat gertatu da eta ezin izan dugu alta tramitatu.",
     "NEW_MEMBER_SUCCESS_DESC": "Prozesua amaitzean, mezu bat jasoko duzu zure bazkide-zenbakiarekin",
     "NEW_MEMBER_ERROR_DESC": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
-    "NEW_MEMBER_SUBMIT_LOADING": "Bazkide berri baten alta tramitatzen ari gara",
+    "NEW_MEMBER_SUBMIT_LOADING": "Zure eskaera kudeatzen ari gara; minutu batzuk beharko ditugu.",
     "REVIEW_PRICES_NOTICE_INDEXED": "Tarifa indexatua kalkulatzeko metodoa eta aldagai guztiak kontsultagai daude <a target='_blank' href=\"{{url}}\">}\">esteka honetan</a>.",
     "LIGHT_MARKETER_YES": "Beste merkaturatzaile batekin eta Som Energiara aldatu nahi dut.",
     "GENDER_OTHERS": "Beste batzuk",
@@ -843,5 +843,5 @@
     "GURB_ADDRESS_VALIDATION_BUTTON_TEXT": "Helbidea baliozkotzea",
     "CADASTRAL_REFERENCE_ERROR": "",
     "UNACCEPTED_FAIR_TITLE": "",
-    "WAITING_PROCESS": "Este proceso puede tardar unos minutos"
+    "WAITING_PROCESS": "Zure eskaera kudeatzen ari gara; minutu batzuk beharko ditugu."
 }
