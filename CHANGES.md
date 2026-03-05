@@ -1,8 +1,9 @@
 # Change Log
 
-## unreleased
+## 6.9.0 2026-03-05
 
 - NEW: warning message when slow post
+- Upgrade somenergia-ui to 0.6.0 (using Loading component)
 
 ## 6.8.1 2026-02-23
 
