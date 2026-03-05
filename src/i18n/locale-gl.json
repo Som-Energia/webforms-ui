@@ -682,7 +682,7 @@
     "NEW_MEMBER_SUCCESS_TITLE": "Xa te asociaches a Som Energia!",
     "NEW_MEMBER_ERROR_TITLE": "Hai un erro e non se puido realizar a alta de socia!",
     "NEW_MEMBER_ERROR_DESC": "Téntao de novo máis tarde. Se o problema continúa, pódesnos escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> e revisaremos a situación. Desculpa as molestias",
-    "NEW_MEMBER_SUBMIT_LOADING": "Estamos a dar de alta a nova persoa socia",
+    "NEW_MEMBER_SUBMIT_LOADING": "Estamos a xestionar a túa solicitude; pode levar uns minutos.",
     "ACCEPT_STATUTES": "Lin e acepto os <a target=\"_blank\" href={{url}}> Estatutos</a> de Som Energia e, coa súa aceptación, comprométome ao pagamento dos cen euros (100,00 €) correspondentes á achega social obrigatoria ao capital de Som Energia.",
     "ACCEPT_STATUTES_URL": "https://www.somenergia.coop/estatuts/Estatutos_GAL.pdf",
     "NEW_MEMBER_SUCCESS_DESC": "Recibirás un correo co teu número de persoa socia así que remate todo o proceso",
@@ -842,5 +842,5 @@
     "GURB_ADDRESS_VALIDATION_BUTTON_TEXT": "",
     "CADASTRAL_REFERENCE_ERROR": "",
     "UNACCEPTED_FAIR_TITLE": "",
-    "WAITING_PROCESS": "Este proceso puede tardar unos minutos"
+    "WAITING_PROCESS": "Estamos a xestionar a túa solicitude; pode levar uns minutos."
 }
