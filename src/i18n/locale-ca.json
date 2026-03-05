@@ -747,7 +747,7 @@
     "NEW_MEMBER_ERROR_TITLE": "Hi ha un error i no s'ha pogut realitzar l'alta de sòcia!",
     "NEW_MEMBER_SUCCESS_DESC": "Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés",
     "NEW_MEMBER_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisarem la situació. Disculpa les molèsties.",
-    "NEW_MEMBER_SUBMIT_LOADING": "Estem donant d'alta a la nova persona sòcia",
+    "NEW_MEMBER_SUBMIT_LOADING": "Estem gestionant la teva sol·licitud; això pot trigar uns minuts.",
     "NEW_CONTRACT_SUBMIT_LOADING": "Estem gestionant la teva sol·licitud; això pot trigar uns minuts.",
     "LINK_MEMBER_TITLE": "Identificació de la persona sòcia",
     "LINK_MEMBER_NIF_TITLE": "Indica el NIF de la persona sòcia",
@@ -843,5 +843,5 @@
     "GURB_ERROR_DESCRIPTION": "Si us plau, torna a intentar-ho en una estona. Si el problema persisteix, ens pots escriure a gurb@somenergia.coop o trucar-nos al 900 103 605 per tal que revisem la situació. Disculpa les molèsties.",
     "CADASTRAL_REFERENCE_ERROR": "",
     "UNACCEPTED_FAIR_TITLE": "",
-    "WAITING_PROCESS": "Aquest procés pot trigar uns minuts"
+    "WAITING_PROCESS": "Estem gestionant la teva sol·licitud; això pot trigar uns minuts."
 }
