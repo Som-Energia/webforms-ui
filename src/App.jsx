@@ -1,6 +1,5 @@
 import React, { lazy, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Box from '@mui/material/Box'
 
 import OldWebFormsTheme from './themes/webforms_old'
 import WebFormsTheme from './themes/webforms'
@@ -16,6 +15,7 @@ import { SummaryContextProvider } from './context/SummaryContext'
 import { AvailabilityContextProvider } from './context/AvailabilityContext'
 import { useTranslation } from 'react-i18next'
 
+import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 import ThemeWrapper from './themes/ThemeWrapper'

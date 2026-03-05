@@ -842,5 +842,6 @@
     "GURB_ERROR_TITLE": "Hi ha un error i no s'ha pogut completar el procés.",
     "GURB_ERROR_DESCRIPTION": "Si us plau, torna a intentar-ho en una estona. Si el problema persisteix, ens pots escriure a gurb@somenergia.coop o trucar-nos al 900 103 605 per tal que revisem la situació. Disculpa les molèsties.",
     "CADASTRAL_REFERENCE_ERROR": "",
-    "UNACCEPTED_FAIR_TITLE": ""
+    "UNACCEPTED_FAIR_TITLE": "",
+    "WAITING_PROCESS": "Aquest procés pot trigar uns minuts"
 }

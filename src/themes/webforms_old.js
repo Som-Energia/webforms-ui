@@ -37,6 +37,9 @@ export default function OldWebFormsTheme() {
       },
       error: {
         main: '#D33C3C'
+      },
+      primary2: {
+        main: '#ff632b',
       }
     },
     typography: {

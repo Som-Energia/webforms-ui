@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- NEW: warning message when slow post
+
 ## 6.8.1 2026-02-23
 
 - FIX: validation phone number old forms
