@@ -88,5 +88,21 @@ This command uses deploy-production.conf. It is now defined with the production 
 
 If you want to deploy to the OV:
 ```
-TODO
+scripts/deploy.sh ovprod
 ```
+This command uses deploy-ovprod.conf. It is now defined with the production OV configuration.
+
+
+### Local
+
+For the first time you should create the folder builds at the root of the projects.
+
+If you want to deploy local:
+```
+scripts/deploy-local.sh 
+```
+This command uses deploy-ovlocal.conf. It is now defined with the local OV configuration.
+
+Thing to keep in mind:
+- Follow the setup to create the necessary directories
+- This script must be run from its directory
