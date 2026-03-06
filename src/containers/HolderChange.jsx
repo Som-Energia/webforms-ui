@@ -40,7 +40,7 @@ import PrevButton from '../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../components/OldComponents/Buttons/NextButton'
 import SubmitButton from '../components/OldComponents/Buttons/SubmitButton'
 import { useSyncLanguage } from '../hooks/useTranslateOptions'
-import Loading from '@somenergia/somenergia-ui/Loading'
+import { Loading } from '@somenergia/somenergia-ui'
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
