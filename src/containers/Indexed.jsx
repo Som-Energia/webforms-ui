@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -356,12 +356,12 @@ const Indexada = (props) => {
                       method="POST"
                       noValidate
                       autoComplete="off">
-                      <Container 
-                      sx={{
-                        backgroundColor: 'background.third',
-                        color: 'primary',
-                      }}
-                      maxWidth="lg" disableGutters={true}>
+                      <Container
+                        sx={{
+                          backgroundColor: 'background.third',
+                          color: 'primary',
+                        }}
+                        maxWidth="lg" disableGutters={true}>
                         {!completed && (
                           <>
                             {activeStep !== 2 ? (
@@ -504,7 +504,7 @@ const Indexada = (props) => {
                 sections={sectionsJson}
               />
             </Grid>
-            </Grid>
+          </Grid>
         </LocalizationProvider >
       </GlobalHotKeys >
     </>
