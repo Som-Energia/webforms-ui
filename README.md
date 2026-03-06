@@ -95,6 +95,8 @@ This command uses deploy-ovprod.conf. It is now defined with the production OV c
 
 ### Local
 
+For the first time you should create the folder builds at the root of the projects.
+
 If you want to deploy local:
 ```
 scripts/deploy-local.sh 
