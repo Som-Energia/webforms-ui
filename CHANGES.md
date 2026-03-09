@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 7.0.0 2026-03-09
 
 - NEW: Mirate indexed prices components
 - Upgrade somenergia-ui to break version
