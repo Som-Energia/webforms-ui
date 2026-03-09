@@ -1,5 +1,10 @@
 # Change Log
 
+## unreleased
+
+- NEW: Mirate indexed prices components
+- Upgrade somenergia-ui to break version
+
 ## 6.9.0 2026-03-05
 
 - NEW: warning message when slow post
