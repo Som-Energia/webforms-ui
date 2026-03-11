@@ -52,6 +52,8 @@ const App = (props) => {
   const Result = lazy(() => import('./containers/Result'))
   const GurbContractPaymentSuccessful = lazy(() => import('./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful'))
 
+  const Maintenance = lazy(() => import('./components/Maintenance'))
+
   const loadContractData = () => {
     const contractData =
       typeof props.contract === 'string' && props.contract !== ''
@@ -633,6 +635,16 @@ const App = (props) => {
                     }
                   />
                 ))}
+
+                <Route
+                  path="/:language/maintenance"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <Maintenance {...props} />
+                    </ThemeWrapper>
+                  }
+                />
+
               </Routes>
             </Router>
             <ApiStatus />
