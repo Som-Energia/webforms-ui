@@ -14,21 +14,22 @@ const Maintenance = () => {
   useSyncLanguage(language)
 
   return (
-    <Container sx={{ flexGrow: 1, padding: 12 }}>
+    <Container sx={{ flexGrow: 1, padding: 2 }}>
       <div
         style={{
-          display: 'block',
-          textAlign: 'center',
-          alignItems: 'center'
+          display: 'flex',
+          justifyContent: 'center'
         }}>
-        <img src={manteniment} alt="Estem en mode manteniment" />
+        <img style={{width: '65vw'}} src={manteniment} alt="Estem en mode manteniment" />
       </div>
       <div
         style={{
+          display:'flex',
+          justifyContent:'center',
           marginTop: '15px',
           color: 'primary.main',
           fontFamily: 'Outfit, sans-serif',
-          fontSize: '4em',
+          fontSize: '3rem',
           fontWeight: 'bold',
           textAlign: 'center'
         }}>
@@ -36,10 +37,12 @@ const Maintenance = () => {
       </div>
       <div
         style={{
+          display:'flex',
+          justifyContent:'center',
           marginTop: '15px',
           color: 'primary.light',
           fontFamily: 'Outfit, sans-serif',
-          fontSize: '5em',
+          fontSize: '2rem',
           fontWeight: 'bold',
           textAlign: 'center'
         }}>
