@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.0.2 2026-03-11
+
+- NEW: Added maintenance url in App.js
+
 ## 7.0.1 2026-03-10
 
 - IMP: deployment in local
