@@ -287,6 +287,9 @@ const NewContractMemberForm = (props) => {
         next = valueByKey(formSteps, stepValue, formikProps.values)
       } else {
         next = 1
+        if (formikProps.values.has_member == "campaign-offer") {
+          next = 2
+        }
       }
       prevSteps.push(activeStep)
     }
