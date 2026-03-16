@@ -644,7 +644,7 @@
     "REVIEW_PAYMENT_DATA_TITLE": "Dades de pagament",
     "REVIEW_PRICES_ENERGY_TITLE": "Terme de d'energia",
     "REVIEW_PRICES_TITLE": "Preus amb impostos",
-    "REVIEW_PRICES_POWER_TITLE": "Término de potència",
+    "REVIEW_PRICES_POWER_TITLE": "Terme de potència",
     "SUMMARY_OTHER_CONCEPTS_TITLE": "A aquests preus s'han de sumar els següents conceptes:",
     "SUMMARY_OTHER_CONCEPTS_BODY": "<li>Excés de potència i/o energia reactiva: En determinades condicions, segons la normativa, a aquests preus cal afegir un recàrrec.</li><li>Lloguer del comptador: depèn de cada cas, en funció del que estableixi la normativa.</li>",
     "ERROR_FIELD_TOO_SHORT": "Camp massa curt",
