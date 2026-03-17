@@ -258,7 +258,7 @@ const NewContractMemberForm = (props) => {
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setFormStepsName('NEW_MEMBER_CONTRACT_FORM_SUBSTEPS')
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member == 'member-on' || has_member == 'member-link') {
+    } else if (has_member == 'member-on' || has_member == 'member-link' || has_member == 'campaign-offer') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setFormStepsName('NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS')

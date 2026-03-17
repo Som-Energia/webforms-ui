@@ -27,7 +27,6 @@ const TemporalOption = ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        mt: 4
       }}
       tabIndex={0}
       onClick={() => {

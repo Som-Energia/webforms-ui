@@ -27,7 +27,7 @@ const NewContractMemberQuestion = ({
       setCampaignOffer(true)
       setValues({
         ...values,
-        has_member: 'campaign-offer',  // TODO: Change it in normalize
+        has_member: 'campaign-offer',
         member: {
           number: 1,
           nif: '11111111H'
@@ -109,20 +109,22 @@ const NewContractMemberQuestion = ({
           maxWidth="18rem"
         />
         <Grid
+          container
+          direction="row"
+          mt={4}
           justifyContent="center">
-          <Grid item direction="row" justifyContent="center" xs={12} sm={12} md={8} lg={12}>
+          <Grid item justifyContent="center" xs={12} sm={12} md={8} lg={12}>
             <TemporalOption
               optionId="campaign-offer"
               icon={<EuroIcon />}
-              isSelected={campaignOffer}
+              isSelected={values?.has_member == "campaign-offer"}
               setSelected={handleMemberQuestion}
               textHeader={t('15YEARS_CAMPAIGN')}
               textBody={t('15YEARS_DESCRIPTION')}
               maxWidth="18rem"
             />
           </Grid>
-      </Grid>
-
+        </Grid>
       </Grid>
     </Grid>
   )
