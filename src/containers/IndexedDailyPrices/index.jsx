@@ -134,50 +134,52 @@ const IndexedDailyPrices = () => {
 
   return (
     <>
-      <TariffSelector tariff={tariff} onSelectTariff={changeTariff} />
-      <Box margin={8} display="flex" justifyContent="center" alignItems="center">
-        <SomDatePicker
-          firstDate={dayjs().subtract(7, 'day').startOf('day')}
-          lastDate={dayjs().add(1, 'day').endOf('day')}
-          period="DAILY"
-          currentTime={calendarDay}
-          setCurrentTime={setCalendarDay}
-          styles={{
-            datePicker: {
-              minWidth: '110px',
-              textAlign: 'center',
-              input: {
-                textAlign: 'center',
-              },
-            },
-          }}
-        />
-      </Box>
-
-      {error ? (
-        <ErrorBox message={t('API_ERROR_FETCHING_DATA')} />
-      ) : !indexedTariffPrices ? (
-        <Loading />
-      ) : !dayIsMissing(indexedTariffPrices.periods) ? (
-        <>
-          <SummaryPeriodChart
-            data={indexedTariffPrices}
+      <Box padding={4}>
+        <TariffSelector tariff={tariff} onSelectTariff={changeTariff} />
+        <Box margin={8} display="flex" justifyContent="center" alignItems="center">
+          <SomDatePicker
+            firstDate={dayjs().subtract(7, 'day').startOf('day')}
+            lastDate={dayjs().add(1, 'day').endOf('day')}
             period="DAILY"
-            Ylegend={'€/kWh'}
-            legend={true}
-            showTooltipKeys={false}
-            referenceLineData={referenceLineData}
-            tickCount={tickCountValue}
-            maxYAxisValue={computeMaxYAxisValue(totalPrices, tickCountValue)}
-            minYAxisValue={computeMinYAxisValue(totalPrices, tickCountValue)}
+            currentTime={calendarDay}
+            setCurrentTime={setCalendarDay}
+            styles={{
+              datePicker: {
+                minWidth: '110px',
+                textAlign: 'center',
+                input: {
+                  textAlign: 'center',
+                },
+              },
+            }}
           />
-          <Box sx={{ marginTop: '40px' }}>
-            <SummaryPricesDisplay totalPrices={totalPricesData} />
-          </Box>
-        </>
-      ) : (
-        <ErrorDataAvailabilityBox message={t('PRICES_ERROR_MISSING_DATA')} />
-      )}
+        </Box>
+
+        {error ? (
+          <ErrorBox message={t('API_ERROR_FETCHING_DATA')} />
+        ) : !indexedTariffPrices ? (
+          <Loading />
+        ) : !dayIsMissing(indexedTariffPrices.periods) ? (
+          <>
+            <SummaryPeriodChart
+              data={indexedTariffPrices}
+              period="DAILY"
+              Ylegend={'€/kWh'}
+              legend={true}
+              showTooltipKeys={false}
+              referenceLineData={referenceLineData}
+              tickCount={tickCountValue}
+              maxYAxisValue={computeMaxYAxisValue(totalPrices, tickCountValue)}
+              minYAxisValue={computeMinYAxisValue(totalPrices, tickCountValue)}
+            />
+            <Box sx={{ marginTop: '40px' }}>
+              <SummaryPricesDisplay totalPrices={totalPricesData} />
+            </Box>
+          </>
+        ) : (
+          <ErrorDataAvailabilityBox message={t('PRICES_ERROR_MISSING_DATA')} />
+        )}
+      </Box>
     </>
   )
 }

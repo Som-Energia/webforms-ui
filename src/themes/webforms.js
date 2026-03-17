@@ -12,7 +12,8 @@ export default function WebFormsTheme() {
         dark: '#1E1E1E',
         mainOrange: '#ff632b',
         lightOrange: '#ffcdb5',
-        alt: '#afb5e8'
+        alt: '#afb5e8',
+        contrastText: '#fff'
       },
       secondary: {
         main: '#C4C4C4',
@@ -154,6 +155,9 @@ export default function WebFormsTheme() {
           },
           '#root b': {
             fontWeight: 500,
+          },
+          '.MuiDatePickerToolbar-title': {
+            color: 'white !important', // FIXME: workaround
           },
         },
       },
