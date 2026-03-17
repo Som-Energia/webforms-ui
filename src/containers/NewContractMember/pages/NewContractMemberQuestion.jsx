@@ -8,7 +8,7 @@ import InputTitle from '../../../components/InputTitle'
 import Typography from '@mui/material/Typography'
 
 import Grid from '@mui/material/Grid'
-import { CommunityIcon, HandshakeIcon, EuroIcon } from '../../../data/icons/Icons'
+import { CommunityIcon, HandshakeIcon, GiftIcon } from '../../../data/icons/Icons'
 
 const NewContractMemberQuestion = ({
   formikProps,
@@ -116,7 +116,7 @@ const NewContractMemberQuestion = ({
           <Grid item justifyContent="center" xs={12} sm={12} md={8} lg={12}>
             <TemporalOption
               optionId="campaign-offer"
-              icon={<EuroIcon />}
+              icon={<GiftIcon />}
               isSelected={values?.has_member == "campaign-offer"}
               setSelected={handleMemberQuestion}
               textHeader={t('15YEARS_CAMPAIGN')}
