@@ -22,6 +22,8 @@ const NewContractMemberQuestion = ({
   const [campaignOffer, setCampaignOffer] = useState(false)
   const [hasMember, setHasMember] = useState(false)
   const CampaignIsEnabled = JSON.parse(import.meta.env.VITE_FEATURE_FLAGS)?.is15CampaignEnabled;
+  const CampaignVAT = import.meta.env.VITE_CAMPAIGN_VAT;
+  const CampaignNumMember = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER;
 
   const handleMemberQuestion = (value) => {
     if (value == "campaign-offer") {
@@ -30,8 +32,8 @@ const NewContractMemberQuestion = ({
         ...values,
         has_member: 'campaign-offer',
         member: {
-          number: 1,
-          nif: '11111111H'
+          number: CampaignNumMember,
+          nif: CampaignVAT
         }
       })
     }
