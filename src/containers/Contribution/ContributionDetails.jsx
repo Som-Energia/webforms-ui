@@ -144,7 +144,7 @@ const ContributionDetails = (props) => {
               value={true}
             />
           }
-          label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
+          label={t('IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION')}
         />
       </Box>
     </>
