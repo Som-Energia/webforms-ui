@@ -59,7 +59,7 @@ const NewContractMemberSummary = (props) => {
   const formSteps =
     values?.has_member == 'member-off'
       ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-      : values?.has_member == 'member-on' || values?.has_member == 'member-link'
+      : values?.has_member == 'member-on' || values?.has_member == 'member-link' || values?.has_member == 'campaign-offer'
         ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
         : undefined
 
