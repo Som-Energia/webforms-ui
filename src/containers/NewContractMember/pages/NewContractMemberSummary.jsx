@@ -230,21 +230,21 @@ const NewContractMemberSummary = (props) => {
             reviewLabel: t('REVIEW_HOLDER_LABEL_PHONE'),
             reviewValue: `(${values?.new_member?.phone_code}) ${values?.new_member?.phone}`,
             step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+              ? formSteps['MEMBER_INFO']
               : null
           },
           {
             reviewLabel: t('REVIEW_HOLDER_LABEL_EMAIL'),
             reviewValue: values?.new_member?.email,
             step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+              ? formSteps['MEMBER_INFO']
               : null
           },
           {
             reviewLabel: t('LANGUAGE_SUMMARY'),
             reviewValue: languages[values?.new_member?.language],
             step: showReviewLinks
-              ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['HOLDER_INFO']
+              ? formSteps['MEMBER_INFO']
               : null
           }
         ]
@@ -352,7 +352,7 @@ const NewContractMemberSummary = (props) => {
             step:
               showReviewLinks &&
                 values?.new_member?.person_type === 'legal-person'
-                ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS['SUPPLY_INFO']
+                ? formSteps['SUPPLY_INFO']
                 : null
           }
         ]
