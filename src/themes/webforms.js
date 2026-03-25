@@ -3,7 +3,6 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 export default function WebFormsTheme() {
   const theme = createTheme({
     palette: {
-      //contrastThreshold: 2, // From webforms-ui
       contrastThreshold: 4.5, // Recommended by WCAG 2.1 Rule 1.4.3
       primary: {
         main: '#0B2E34',
@@ -13,7 +12,7 @@ export default function WebFormsTheme() {
         mainOrange: '#ff632b',
         lightOrange: '#ffcdb5',
         alt: '#afb5e8',
-        contrastText: '#fff'
+        contrastText: '#fff',
       },
       secondary: {
         main: '#C4C4C4',
@@ -29,7 +28,7 @@ export default function WebFormsTheme() {
         third: '#F0F3EC',
         button: '#C5F47C',
         hoverButton: '#B6E471',
-        alertBox: '#ffcdb580', // 50% opacidad primary.mainOrange
+        alertBox: '#ffcdb580', // 50% primary.mainOrange opacity
         customDialog: '#0C4C2780'
       },
       error: {
@@ -116,8 +115,8 @@ export default function WebFormsTheme() {
     components: {
       MuiTypography: {
         defaultProps: {
+          color: 'inherit',
           fontFamily: 'Outfit',
-          color: '#0B2E34',
           variantMapping: {
             display1: 'h1',
             display2: 'h2',
@@ -137,7 +136,7 @@ export default function WebFormsTheme() {
             'button.md': 'button',
             'button.sm': 'button'
           }
-        }
+        },
       },
       MuiCssBaseline: {
         styleOverrides: {
@@ -148,16 +147,11 @@ export default function WebFormsTheme() {
             color: '#0c4c27',
           },
           '#root': {
-            background: 'transparent',
-            color: '#1E1E1E',
             fontSize: '16px',
             fontFamily: 'Outfit',
           },
           '#root b': {
             fontWeight: 500,
-          },
-          '.MuiDatePickerToolbar-title': {
-            color: 'white !important', // FIXME: workaround
           },
         },
       },
