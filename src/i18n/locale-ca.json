@@ -141,6 +141,7 @@
     "IBAN_LABEL": "IBAN (compte bancari)",
     "IBAN_HELP": "Exemple: ES11 2222 3333 4444 5555 6666",
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular del compte bancari, sigui jo mateixa o una altra, autoritza la domiciliació de les factures d'electricitat.",
+    "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION":"Declaro que la persona titular del compte bancari, jo mateixa o una tercera persona, ha atorgat el seu consentiment exprés per a la domiciliació bancària corresponent a l'aportació voluntària al capital social de la cooperativa, autoritzant el càrrec de l'import corresponent en el compte indicat",
     "IBAN_ERROR": "IBAN incorrecte",
     "API_VALIDATED_FIELD_CHECKING": "Validant…",
     "REVIEW_TITLE": "Revisa el contracte i confirma'l",
