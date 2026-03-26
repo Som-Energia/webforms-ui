@@ -645,6 +645,29 @@ const App = (props) => {
                   }
                 />
 
+                {[
+                  '/:language/landing/15-aniversari',
+                  '/:language/landing/15-aniversario'
+                ].map((path) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                       <ThemeWrapper theme={webFormsTheme}>
+                        <LoadingContextProvider>
+                          <SummaryContextProvider>
+                            <NewContractMemberForm
+                              {...props}
+                              specialCampaign={'15YEARS_CAMPAIGN'}
+                              initStep={2}
+                            />
+                          </SummaryContextProvider>
+                        </LoadingContextProvider>
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
+
               </Routes>
             </Router>
             <ApiStatus />

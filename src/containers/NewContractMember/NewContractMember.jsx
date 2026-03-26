@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext, useCallback } from 'react'
+import { useState, useEffect, useRef, useContext, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { Formik } from 'formik'
@@ -74,7 +74,7 @@ const NewContractMemberForm = (props) => {
   const [url, setUrl] = useState('')
   const [data, setData] = useState()
   const formTPV = useRef(null)
-  const { tariff } = props
+  const { tariff, specialCampaign, initStep } = props
 
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -85,7 +85,7 @@ const NewContractMemberForm = (props) => {
   const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(initStep ? parseInt(initStep) : 0)
   const [validationSteps, setValidationSteps] = useState([
     newContractMemberQuestionValidations
   ])
@@ -471,6 +471,20 @@ const NewContractMemberForm = (props) => {
     })
   }, [gurb_id])
 
+  const customInitialValues = useMemo(() => {
+    if (specialCampaign !== '15YEARS_CAMPAIGN') {
+      return {
+        ...initialValues,
+        has_member: 'campaign-offer'
+      }
+    }
+    return initialValues
+  }, [initialValues, specialCampaign])
+
+  if(Object.keys(formSteps).length === 0 && specialCampaign === '15YEARS_CAMPAIGN') {
+    setValidationSchemaAndSteps('campaign-offer')
+  }
+
   return (
     <Container
       data-cy='contract-form'
@@ -484,7 +498,7 @@ const NewContractMemberForm = (props) => {
       }}>
       <Formik
         innerRef={formikRef}
-        initialValues={initialValues}
+        initialValues={customInitialValues}
         validationSchema={validationSteps[activeStep]}
         validateOnChange={true}
         validateOnBlur={false}>
@@ -563,7 +577,7 @@ const NewContractMemberForm = (props) => {
                         justifyContent: 'space-between',
                         alignItems: 'center'
                       }}>
-                      {activeStep !== 0 && (
+                      {activeStep !== initStep && (
                         <Grid item sm={2} xs={12}>
                           <PrevButton
                             disabled={
