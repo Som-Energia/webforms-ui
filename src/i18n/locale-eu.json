@@ -855,5 +855,7 @@
     "SUMPRICESDISPLAY_TOTAL_AVERAGE": "EGUNEKO BATEZBESTEKOA",
     "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "AZKEN {{ base_days_computation }} EGUNETAKO BATEZBESTEKOA",
     "PRICES_ERROR_MISSING_DATA": "Ez dago egun honetako daturik. Barkatu eragozpenak!",
-    "API_ERROR_FETCHING_DATA": "Tamalez, intzidentzia bat dela eta, une honetan ezin dugu erakutsi prezio-iragarpena. Espero dugu berehala konpontzea eta iragarpena lehenbailehen erakutsi ahal izatea. Barkatu eragozpenak!"
+    "API_ERROR_FETCHING_DATA": "Tamalez, intzidentzia bat dela eta, une honetan ezin dugu erakutsi prezio-iragarpena. Espero dugu berehala konpontzea eta iragarpena lehenbailehen erakutsi ahal izatea. Barkatu eragozpenak!",
+    "15YEARS_CAMPAIGN": "",
+    "15YEARS_DESCRIPTION": ""
 }
