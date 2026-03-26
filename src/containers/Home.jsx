@@ -20,6 +20,7 @@ if (!availableLanguages.includes(language)) {
 let gurbCode = import.meta.env.VITE_GURB_CODE
 
 const options = [
+  { title: 'New Contract - ANIVERSARI 15 ANYS', href: `${language}/landing/15-aniversari` },
   { title: 'New Contract - Periods', href: `${language}/formulario-contratacion-periodos` },
   { title: 'New Contract - Indexed', href: `${language}/formulario-contratacion-indexada` },
   { title: 'New Member - Form', href: `${language}/cooperativa/formulario-asociarse` },
