@@ -50,7 +50,7 @@ ln -s ../../../testdata/b2bs/holderChangePersonaldata.json .
 
 To get  `.env.development`:
 ```sh
-ln -s $myit-docs_dir/it-docs/conf/webforms-ui/.env.development
+ln -s $myit-docs_dir/deployment-configurations/webforms-ui/.env.development
 ```
 We should have testdata repo!
 
