@@ -86,7 +86,7 @@ export const newNormalizeContract = (data, gurbCode) => {
       )
 
   const finalContract = {
-    linked_member: data.member.link_member
+    linked_member: data.member.link_member || data.has_member == 'campaign-offer'
       ? data.has_member == 'member-on'
         ? 'already_member'
         : 'sponsored'
