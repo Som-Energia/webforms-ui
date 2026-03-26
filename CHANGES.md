@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.0.3 2026-03-26
+
+- REF: Change text of Contribution form
+
 ## 7.0.2 2026-03-11
 
 - NEW: Added maintenance url in App.js
