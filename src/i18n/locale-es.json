@@ -856,5 +856,7 @@
     "SUMPRICESDISPLAY_TOTAL_AVERAGE": "PROMEDIO DEL DIA",
     "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "PROMEDIO DE LOS ÚLTIMOS {{ base_days_computation }} DÍAS",
     "PRICES_ERROR_MISSING_DATA": "No hay datos disponibles para esta fecha. ¡Disculpa las molestias!",
-    "API_ERROR_FETCHING_DATA": "Lamentablemente, no podemos mostrar ahora la previsión de precios, a causa de una incidencia. Esperamos que se pueda resolver en seguida y poder mostrarla lo más pronto posible. ¡Disculpa las molestias!"
+    "API_ERROR_FETCHING_DATA": "Lamentablemente, no podemos mostrar ahora la previsión de precios, a causa de una incidencia. Esperamos que se pueda resolver en seguida y poder mostrarla lo más pronto posible. ¡Disculpa las molestias!",
+    "15YEARS_CAMPAIGN": "",
+    "15YEARS_DESCRIPTION": ""
 }

@@ -493,6 +493,7 @@ const newContractCases = {
   // Member cases
   alreadyMember: alreadyMember,
   sponsored: sponsored,
+  campaign: {...sponsored, entryValues: {...sponsored.entryValues, has_member: 'campaign-offer'}},
   newMember: newMember,
   // Contract cases
   // C1_20TD: base case for member cases
