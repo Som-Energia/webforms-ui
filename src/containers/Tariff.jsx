@@ -9,7 +9,7 @@ import { useSyncLanguage } from '../hooks/useTranslateOptions'
 const Tariff = (props) => {
   const { tariff, maxPower, taxes = true, taxValue = 21 } = props
   const { language } = useParams()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const [loading, setLoading] = useState()
   const [prices, setPrices] = useState()
   const [taxType, setTaxType] = useState(taxValue)

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import { useState, createContext } from 'react'
 import Maintenance from '../components/Maintenance'
 
 const AvailabilityContext = createContext()

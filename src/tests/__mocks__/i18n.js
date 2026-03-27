@@ -5,7 +5,7 @@ module.exports = {
   useTranslation: () => ({
     t: (key) => key,
     i18n: {
-      changeLanguage: () => new Promise(() => {}),
+      changeLanguage: () => new Promise(() => { }),
     },
   }),
   Trans: ({ children }) => children,

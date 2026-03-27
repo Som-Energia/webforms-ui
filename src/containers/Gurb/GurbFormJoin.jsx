@@ -6,7 +6,6 @@ import {
   useMemo,
   useCallback
 } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
@@ -38,8 +37,7 @@ import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 
 const MAX_STEPS_NUMBER = 4
 
-const GurbFormJoin = (props) => {
-  const { i18n } = useTranslation()
+const GurbFormJoin = () => {
   const { language, code } = useParams()
 
   const [redsysData, setRedsysData] = useState()

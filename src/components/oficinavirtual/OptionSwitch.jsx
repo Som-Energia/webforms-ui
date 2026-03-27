@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import Paper from '@mui/material/Paper'
 import Switch from '@mui/material/Switch'
@@ -13,7 +13,7 @@ const customStyles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     borderLeft: '4px solid gray',
-    borderColor:'secondary.main'
+    borderColor: 'secondary.main'
   },
   active: {
     borderColor: 'primary.main'

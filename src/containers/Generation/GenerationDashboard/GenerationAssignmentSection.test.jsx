@@ -3,11 +3,18 @@ import GenerationAssignmentSection from './GenerationAssignmentSection'
 import { render, screen, queryByAttribute, fireEvent, waitFor } from '@testing-library/react'
 import GenerationContext from '../context/GenerationContext'
 import PopUpContext, { PopUpContextProvider } from '../../../context/PopUpContext'
-import SimpleDialog from '../../../components/OldComponents/SimpleDialog'
 import * as myApi from '../../../services/api'
 import { vi } from 'vitest'
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+vi.mock('react-i18next', async () => {
+  const i18n = await import('../../../tests/__mocks__/i18n')
+  return i18n.default
+});
+
+const mocks = {
+  get: vi.fn(),
+  post: vi.fn(),
+}
 
 vi.mock('axios', async (importActual) => {
   const actual = await importActual();
@@ -38,11 +45,6 @@ describe('Generation Assignment Section', () => {
   const setContent = vi.fn()
   const getAssingments = vi.fn()
   const getContractsToAssign = vi.fn()
-  const setContentSimpleDialog = () => <SimpleDialog
-    title={'TITLE'}
-    text={'TEXT'}
-    acceptFunction={() => vi.fn()}
-    cancelFunction={() => vi.fn()} />
 
   const contextValue = {
     assignments,

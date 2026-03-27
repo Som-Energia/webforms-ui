@@ -101,7 +101,7 @@ function computeBaseValues(fromDate, selectedDate, prices) {
       lastWeekPrices.push(data)
       baseDaysComputation += 1
     }
-    if (currentDateDay == selectedDay.getDate()) {
+    if (currentDateDay === selectedDay.getDate()) {
       dayPrices.push(data)
     }
   })

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Checkbox from '@mui/material/Checkbox'
@@ -15,7 +14,7 @@ import LegalText from '../../components/LegalText'
 import IndexedReviewField from './IndexedReviewField'
 import Box from '@mui/material/Box'
 
-const customStyles ={
+const customStyles = {
   root: {
     backgroundColor: 'white',
     padding: '24px'
@@ -29,7 +28,7 @@ const customStyles ={
     textTransform: 'uppercase',
     mt: 3,
     mb: 1.2,
-    color:'#0B2E34'
+    color: '#0B2E34'
   },
   divider: {
     mt: '12px',
@@ -53,7 +52,7 @@ const customStyles ={
 }
 
 const IndexedReviewData = (props) => {
-  
+
   const { t } = useTranslation()
 
   let {

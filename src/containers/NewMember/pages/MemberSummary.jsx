@@ -27,7 +27,7 @@ const MemberSummary = (props) => {
 
   const { t } = useTranslation()
 
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
   const handleChangePrivacyPolicy = (event) => {
@@ -128,7 +128,7 @@ const MemberSummary = (props) => {
 
   const reviewFields = [
     [
-      values?.new_member?.person_type == 'physic-person'
+      values?.new_member?.person_type === 'physic-person'
         ? physicalReviewFields
         : legalReviewFields,
       {
@@ -177,7 +177,7 @@ const MemberSummary = (props) => {
             step: showReviewLinks
               ? NEW_MEMBER_FORM_SUBSTEPS['PAYMENT_INFO']
               : null,
-            hide: values?.new_member?.payment_method != 'iban'
+            hide: values?.new_member?.payment_method !== 'iban'
           }
         ]
       }

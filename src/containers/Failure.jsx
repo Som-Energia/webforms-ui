@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -60,14 +59,14 @@ function Failure(props) {
               error?.code === undefined
                 ? t(description, { url: t('CONTACT_HELP_URL') })
                 : error?.code === 'INVALID_FIELD' && error?.data?.[0]?.field
-                ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
-                  ? t(error?.data?.[0]?.field.toUpperCase())
-                  : t('INVALID_FIELD', { field_name: error?.data?.[0]?.field })
-                : error?.code === 'INVOICE_ERROR'
-                ? error?.error
-                : t('UNEXPECTED_POSTERROR', {
-                    error_message: error?.code ? t(error?.code) : error?.error
-                  })
+                  ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
+                    ? t(error?.data?.[0]?.field.toUpperCase())
+                    : t('INVALID_FIELD', { field_name: error?.data?.[0]?.field })
+                  : error?.code === 'INVOICE_ERROR'
+                    ? error?.error
+                    : t('UNEXPECTED_POSTERROR', {
+                      error_message: error?.code ? t(error?.code) : error?.error
+                    })
           }}
         />
       </Box>

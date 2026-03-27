@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
@@ -24,12 +24,12 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
   const options = [
     {
       id: 'selfconsumption-on',
-      icon: <SolarpanelIcon/>,
+      icon: <SolarpanelIcon />,
       textHeader: t('SELFCONSUMPTION_YES_HEADER'),
     },
     {
       id: 'selfconsumption-off',
-      icon: <SolarpanelIcon on={false}/>,
+      icon: <SolarpanelIcon on={false} />,
       textHeader: t('SELFCONSUMPTION_NO_HEADER'),
     }
   ]
@@ -57,8 +57,8 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
             required={true}
           />
           <Typography variant="body.md.regular" color="secondary.extraDark">
-          {t('SELFCONSUMPTION_HELPER')}
-        </Typography>
+            {t('SELFCONSUMPTION_HELPER')}
+          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12} sx={{ mt: 1 }}>

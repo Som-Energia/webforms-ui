@@ -1,15 +1,13 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import GenerationContext from './Generation/context/GenerationContext'
-import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { generationChangeContractPriority } from '../services/api'
 import GenerationDashboard from './Generation/GenerationDashboard/GenerationDashboard'
 import { useSyncLanguage, useSyncDayjsLanguage } from '../hooks/useTranslateOptions'
 
-function Generation(props) {
-  const [validationConfirm, setValidationConfirm] = useState({finished:false,completed:false})
+function Generation() {
+  const [validationConfirm, setValidationConfirm] = useState({ finished: false, completed: false })
   const { language } = useParams()
-  const { i18n } = useTranslation()
   const { assignments, resetAssignments, setEditingPriority } =
     useContext(GenerationContext)
 
@@ -22,10 +20,10 @@ function Generation(props) {
     try {
       const newAssignments = assignments.map((assignment) => assignment.id)
       await generationChangeContractPriority(newAssignments)
-      setValidationConfirm({finished:true, completed:true})
+      setValidationConfirm({ finished: true, completed: true })
     } catch (error) {
       console.error('ERROR', error)
-      setValidationConfirm({finished:true, completed:false})
+      setValidationConfirm({ finished: true, completed: false })
     }
   }, [assignments, setEditingPriority])
 

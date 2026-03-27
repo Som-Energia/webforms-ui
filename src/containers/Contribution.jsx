@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -42,7 +42,7 @@ const keyMap = {
   SHOW_INSPECTOR: 'ctrl+shift+d'
 }
 
-const Contribution = (props) => {
+const Contribution = () => {
   const { t, i18n } = useTranslation()
   const { language } = useParams()
 
@@ -320,7 +320,7 @@ const Contribution = (props) => {
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
       <Formik
-        onSubmit={() => {}}
+        onSubmit={() => { }}
         enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchemas[activeStep]}
