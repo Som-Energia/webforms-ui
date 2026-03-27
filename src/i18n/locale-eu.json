@@ -729,6 +729,8 @@
     "LANGUAGE_SUMMARY": "Hizkuntza:",
     "VOLUNTARY_CENT_SUMMARY": "Borondatezko dohaina:",
     "NO_POSTAL_CODE": "Ez duzu posta-kodea adierazi",
+    "POSTAL_CODE_INVALID_LENGTH": "",
+    "POSTAL_CODE_INVALID": "",
     "CNAE_HELPER": "Etxebizitza bat bada, ez duzu eremu hau bete behar",
     "TOLL_SUMMARY": "Garraio- eta banaketa-bidesaria:",
     "CADASTRAL_REFERENCE_LINK": "Laguntza Gunera",

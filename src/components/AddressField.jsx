@@ -189,7 +189,7 @@ const AddressField = ({
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
           error={
             touched[addressFieldName]?.street &&
-            errors[addressFieldName]?.street
+              errors[addressFieldName]?.street
               ? errors[addressFieldName].street
               : false
           }
@@ -211,8 +211,8 @@ const AddressField = ({
           value={postalCodeValue}
           error={
             touched[addressFieldName]?.postal_code &&
-            errors[addressFieldName]?.postal_code
-              ? t(errors[addressFieldName].postal_code)
+              (errors[addressFieldName]?.postal_code || errors[addressFieldName]?.state?.id)
+              ? (t(errors[addressFieldName].postal_code) || errors[addressFieldName]?.state?.id)
               : ''
           }
           required
@@ -242,7 +242,7 @@ const AddressField = ({
           value={numberValue}
           error={
             touched[addressFieldName]?.number &&
-            errors[addressFieldName]?.number
+              errors[addressFieldName]?.number
               ? t(errors[addressFieldName].number)
               : ''
           }
