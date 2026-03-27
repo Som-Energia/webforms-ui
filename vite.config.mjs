@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react-swc'
 import svgr from 'vite-plugin-svgr'
 // Uncomment the following line to enable eslint plugin, but first fix the issues in the codebase
-//import eslint from 'vite-plugin-eslint'
+import eslint from 'vite-plugin-eslint'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import pkg from './package.json'
 
@@ -15,23 +15,23 @@ export default defineConfig(({ mode }) => {
   const ovOptions =
     mode === 'ov'
       ? {
-          entryFileNames: 'assets/main.js',
-          chunkFileNames: (fileInfo) => {
-            if (fileInfo.name.includes('vendor')) {
-              return 'assets/vendor.js' // Explicitly name the entry JS file
-            }
-            return 'assets/[name]-[hash].js'
-          },
-          assetFileNames: (assetInfo) => {
-            if (
-              assetInfo.name.endsWith('.css') &&
-              assetInfo.name.includes('index')
-            ) {
-              return 'assets/index.css' // Explicitly name the CSS file
-            }
-            return 'assets/[name]-[hash].[ext]'
+        entryFileNames: 'assets/main.js',
+        chunkFileNames: (fileInfo) => {
+          if (fileInfo.name.includes('vendor')) {
+            return 'assets/vendor.js' // Explicitly name the entry JS file
           }
+          return 'assets/[name]-[hash].js'
+        },
+        assetFileNames: (assetInfo) => {
+          if (
+            assetInfo.name.endsWith('.css') &&
+            assetInfo.name.includes('index')
+          ) {
+            return 'assets/index.css' // Explicitly name the CSS file
+          }
+          return 'assets/[name]-[hash].[ext]'
         }
+      }
       : {}
 
   return {
@@ -42,9 +42,8 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       splitVendorChunkPlugin(),
-      svgr()
-      // TODO: to be activated after fixing the issues
-      // eslint()
+      svgr(),
+      eslint()
     ],
     build: {
       outDir: 'forms',
