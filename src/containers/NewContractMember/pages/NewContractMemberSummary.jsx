@@ -204,7 +204,7 @@ const NewContractMemberSummary = (props) => {
         step: showReviewLinks ? formSteps['DONATION'] : null
       }
     ]
-    if (values?.has_member === 'member-on' || values?.has_member === 'member-link') {
+    if (values?.has_member === 'member-on' || values?.has_member === 'member-link' || values?.has_member === 'campaign-offer') {
       paymentFields.shift()
     }
     return paymentFields
