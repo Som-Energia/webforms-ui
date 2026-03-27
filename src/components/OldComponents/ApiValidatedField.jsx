@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -63,7 +63,7 @@ export function ApiValidatedField({
       return
     }
     const compactValue = result.value
-    onChange({ value: compactValue, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
+    onChange({ value: compactValue, valid: false, error: t('API_VALIDATED_FIELD_CHECKING') })
     setIsLoading(true)
     remoteCheck(compactValue).then((result) => {
       setIsLoading(false)
@@ -77,7 +77,7 @@ export function ApiValidatedField({
     checkValue(formattedValue)
   }
 
-  const prettyValue = inputFilter? inputFilter(value) : value
+  const prettyValue = inputFilter ? inputFilter(value) : value
   if (prettyValue !== formerValue) {
     checkValue(prettyValue)
   }

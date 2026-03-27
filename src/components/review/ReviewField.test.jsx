@@ -28,7 +28,7 @@ describe('ReviewField component ', () => {
     // Use try catch to avoid test failing if element is not found
     try {
       // https://testing-library.com/docs/queries/about/#screen
-      closeDialogButton2 = await screen.findByText('LABEL')
+      await screen.findByText('LABEL')
     } catch (e) {
       // all fine
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
@@ -17,7 +17,7 @@ const CnaeField = (props) => {
 
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(LoadingContext)
-  const [cnaeDescription, setCnaeDescription] = useState(false) // TODO: Remove it?
+  const [setCnaeDescription] = useState(false) // TODO: Remove it?
 
   const updateCNAE = async () => {
     setCnaeDescription(false)

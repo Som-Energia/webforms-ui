@@ -168,7 +168,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <List>
                 {uploads.map((upload, index) => (
-                  <ListItem>
+                  <ListItem key={index}>
                     <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
                       {upload.filename}
                     </Typography>

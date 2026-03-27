@@ -12,7 +12,7 @@ const GenerationContext = createContext({
   modifyContract: () => { }
 })
 
-export const GenerationContextProvider = ({testMode=false, children, assignmentsJSON, investmentsJSON, outsideAssignmentsJSON, propEditingPriority, contractNoAssignmentsJSON=[] }) => {
+export const GenerationContextProvider = ({ testMode = false, children, assignmentsJSON, investmentsJSON, outsideAssignmentsJSON, propEditingPriority, contractNoAssignmentsJSON = [] }) => {
   const { t } = useTranslation()
   const { language } = useParams()
 
@@ -33,7 +33,7 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
 
   const [editingPriority, setEditingPriority] = useState(propEditingPriority)
   const [assignments, setAssignments] = useState(assignmentsJSONSorted)
-  const [outsideAssignments, setOutsideAssignments] = useState(outsideAssignmentsJSONSorted)
+  const [outsideAssignments] = useState(outsideAssignmentsJSONSorted)
   const [contractNoAssignments, setContractNoAssignments] = useState(contractNoAssignmentsJSON)
   const [investments] = useState(investmentsJSON)
 
@@ -77,7 +77,7 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
   )
 
   const getPriority = useCallback((index) => {
-    
+
     const priorities = assignments.map((value, index) => {
       return index === 0
         ? { active: true, value: t('GENERATION_MAIN_PRIORITY'), index: index }
@@ -97,7 +97,7 @@ export const GenerationContextProvider = ({testMode=false, children, assignments
 
   const getContractsToAssign = async () => {
     try {
-      if(!testMode){
+      if (!testMode) {
         const noContractAssignments = await getNoAssignmentContracts()
         setContractNoAssignments(noContractAssignments?.data)
       }

@@ -9,7 +9,7 @@ const ReviewField = ({ label, value, step }) => {
   const { setSummaryField } = useContext(SummaryContext)
 
   function htmlValue(value) {
-    return {__html: value};
+    return { __html: value };
   }
 
   function htmlField(value) {
@@ -43,7 +43,7 @@ const ReviewField = ({ label, value, step }) => {
           variant="body.sm.regular"
           color="secondary.dark"
         >
-          {step != undefined ? (
+          {step !== undefined ? (
             <Link
               data-testid='change-value-field'
               component="button"

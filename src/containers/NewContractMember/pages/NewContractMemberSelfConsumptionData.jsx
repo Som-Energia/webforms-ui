@@ -58,7 +58,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
   const [technologies, setTechnologies] = useState([])
 
   useEffect(() => {
-    if (values?.self_consumption?.collective_installation == 'individual') {
+    if (values?.self_consumption?.collective_installation === 'individual') {
       setFieldValue(
         'self_consumption.installation_type',
         INDIVIDUAL_INSTALLATION
@@ -199,7 +199,7 @@ const NewContractMemberSelfConsumptionData = (props) => {
           options={situations}
           required={true}
           disabled={
-            values?.self_consumption?.collective_installation == 'individual'
+            values?.self_consumption?.collective_installation === 'individual'
           }
           {...props}
         />

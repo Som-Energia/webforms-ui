@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react'
-
-
-const StepHeader = ({title}) => {
+const StepHeader = ({ title }) => {
 
   return (
     <div className="header">

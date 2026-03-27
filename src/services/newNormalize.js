@@ -18,7 +18,7 @@ export const normalizeClient = (client) => {
   let data = {
     vat: client.nif,
     name: client.name,
-    is_juridic: client.person_type == 'physic-person' ? false : true,
+    is_juridic: client.person_type === 'physic-person' ? false : true,
     email: client.email,
     phone: `${client.phone_code} ${client.phone}`,
     lang: client.language
@@ -46,11 +46,11 @@ export const normalizeSelfconsumption = (selfconsumption) => {
   let data = {
     cau: selfconsumption.cau,
     collective_installation:
-      selfconsumption.collective_installation == 'collective' ? true : false,
+      selfconsumption.collective_installation === 'collective' ? true : false,
     installation_power: String(Math.round(selfconsumption.installation_power * 1000)),
     installation_type: selfconsumption.installation_type,
     aux_services:
-      selfconsumption.aux_services == 'auxiliary-service-yes' ? true : false,
+      selfconsumption.aux_services === 'auxiliary-service-yes' ? true : false,
     technology: selfconsumption.technology
   }
   return data
@@ -69,33 +69,33 @@ export const contractProcess = (has_light, same_holder) => {
 export const normalizeAttachments = (supply_point_attachment, process) => {
   let data = {
     filename: supply_point_attachment,
-    category: process == 'A3' ? "new_contract" : "invoice"
+    category: process === 'A3' ? "new_contract" : "invoice"
   }
   return data
 }
 
 export const newNormalizeContract = (data, gurbCode) => {
   const powers = []
-  const powers_max = data.contract.power_type == 'power-lower-15kw' ? 2 : 6
+  const powers_max = data.contract.power_type === 'power-lower-15kw' ? 2 : 6
   for (var i = 1; i <= powers_max; i++) {
     powers.push(data.contract.power[`power${i}`])
   }
   const process = contractProcess(
-        data.has_light == 'light-on',
-        data.previous_holder == 'previous-holder-yes'
-      )
+    data.has_light === 'light-on',
+    data.previous_holder === 'previous-holder-yes'
+  )
 
   const finalContract = {
     linked_member: data.member.link_member
-      ? data.has_member == 'member-on'
+      ? data.has_member === 'member-on'
         ? 'already_member'
         : 'sponsored'
       : 'new_member',
     contract_info: {
       cups: data.cups,
       tariff:
-        data.contract.power_type == 'power-lower-15kw' ? '2.0TD' : '3.0TD',
-      is_indexed: data.contract.tariff_mode == 'indexed',
+        data.contract.power_type === 'power-lower-15kw' ? '2.0TD' : '3.0TD',
+      is_indexed: data.contract.tariff_mode === 'indexed',
       powers: powers.map((power) => String(Math.round(power * 1000))),
       cups_address: normalizeAddress(data.supply_point_address),
       cnae: data.supply_point.cnae.toString(),
@@ -104,14 +104,14 @@ export const newNormalizeContract = (data, gurbCode) => {
     iban: data.new_member.iban, // TODO: new_member warning!
     sepa_accepted: data.new_member.sepa_accepted, // TODO: new_member warning!
     member_payment_type:
-      data.new_member.payment_method == 'credit_card' ? 'tpv' : 'remesa', // TODO: new_member warning!
+      data.new_member.payment_method === 'credit_card' ? 'tpv' : 'remesa', // TODO: new_member warning!
     donation: data.voluntary_donation,
     privacy_conditions: data.privacy_policy_accepted,
     general_contract_terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted
   }
 
-  if (data.has_selfconsumption == 'selfconsumption-on') {
+  if (data.has_selfconsumption === 'selfconsumption-on') {
     finalContract['self_consumption'] = normalizeSelfconsumption(
       data.self_consumption
     )
@@ -122,7 +122,7 @@ export const newNormalizeContract = (data, gurbCode) => {
       data.cadastral_reference.replace(/\s/g, '')
   }
 
-  if (data.has_member != 'member-on' && data.member.link_member) {
+  if (data.has_member !== 'member-on' && data.member.link_member) {
     finalContract['contract_owner'] = normalizeClient(data.new_member) // TODO: change where this is saved! (new_member warning)
     finalContract['contract_owner']['address'] = normalizeAddress(data.address)
   }
@@ -137,8 +137,8 @@ export const newNormalizeContract = (data, gurbCode) => {
     finalContract['new_member_info']['address'] = normalizeAddress(data.address)
   }
 
-  if (data.has_light === 'light-off'){
-    finalContract['contract_info']['phase'] = data.contract.phase === 'mono' ? '230':'3x230/400'
+  if (data.has_light === 'light-off') {
+    finalContract['contract_info']['phase'] = data.contract.phase === 'mono' ? '230' : '3x230/400'
   }
 
   if (data.comercial_info_accepted) {

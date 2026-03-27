@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import Grid from '@mui/material/Grid'
 import Select from '@mui/material/Select'
@@ -51,7 +50,6 @@ const PhoneField = (props) => {
     setFieldTouched,
     required = false
   } = props
-  const { t } = useTranslation()
 
   const codes = getCountryDialCodesMap()
 

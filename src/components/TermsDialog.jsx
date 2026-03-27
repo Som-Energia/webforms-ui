@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Button from '@mui/material/Button'
@@ -18,7 +17,7 @@ const TermsDialog = ({
   maxWidth = 'sm'
 }) => {
   const { t } = useTranslation()
-  
+
   return (
     <Dialog
       open={open}

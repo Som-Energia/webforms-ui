@@ -1,9 +1,6 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
-
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-
 import StepHeader from '../../components/OldComponents/StepHeader'
 import MemberIdentifierFields from '../../components/OldComponents/MemberIdentifierFields'
 

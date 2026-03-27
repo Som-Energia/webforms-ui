@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { normalizeD1ConfirmationData, templateData } from '../services/utils'
@@ -179,12 +179,12 @@ function D1Detail(props) {
           )}
         </>
       )) || (
-        <D1Validation
-          nextStep={() => nextStep(1)}
-          handleStepChanges={handleStepChanges}
-          params={data}
-        />
-      )}
+          <D1Validation
+            nextStep={() => nextStep(1)}
+            handleStepChanges={handleStepChanges}
+            params={data}
+          />
+        )}
     </Box>
   )
 }

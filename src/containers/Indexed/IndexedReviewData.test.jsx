@@ -9,7 +9,10 @@ import {
 
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
+vi.mock('react-i18next', async () => {
+  const i18n = await import('../../tests/__mocks__/i18n')
+  return i18n.default
+});
 
 describe('Test that it correctly renders', () => {
   const getById = queryByAttribute.bind(null, 'id')
@@ -96,7 +99,7 @@ describe('Test that it correctly renders', () => {
     const addressElement = screen.getByText(mockContractValues.address)
     const vatElement = screen.getByText(mockContractValues.owner_vat)
     const tariffElement = screen.getByText(mockTargetTariff)
-    const { getByText } = within(
+    within(
       getById(dom.container, 'VOLUNTARY_CENT__value')
     )
 

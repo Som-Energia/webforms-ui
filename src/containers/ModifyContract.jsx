@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { Navigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -42,7 +42,7 @@ function ModifyContract(props) {
   const d1CaseData = state?.d1CaseData
   const { noticeAutonomous } = props
 
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const steps = [
     t('MODIFY_POTTAR_INTRO_TITLE'),

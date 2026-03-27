@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -8,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Result from '../../Result'
 import { useSyncLanguage } from '../../../hooks/useTranslateOptions'
 
-const customStyles ={
+const customStyles = {
   container: {
     pt: 0,
     display: 'flex',
@@ -47,8 +46,8 @@ const customStyles ={
 
 function GenerationFailure(props) {
   const { language } = useParams()
-  const { t, i18n } = useTranslation()
-  
+  const { t } = useTranslation()
+
   useSyncLanguage(language)
 
   return (

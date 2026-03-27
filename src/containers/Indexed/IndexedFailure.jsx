@@ -1,7 +1,5 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { styled } from '@mui/system'
 
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
@@ -12,11 +10,6 @@ import StepHeader from '../../components/OldComponents/StepHeader'
 import indexedErrorText from './IndexedError'
 import Result from '../Result'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-
-const StyledImg = styled('img')({
-  width: '220px',
-  m: 2
-})
 
 function Failure(props) {
   const { language } = useParams()

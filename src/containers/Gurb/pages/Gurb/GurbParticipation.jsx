@@ -21,7 +21,7 @@ const GurbParticipation = (props) => {
       .then((response) => {
         setGurbDetails({
           ...response.data,
-          available_betas: response.data.available_betas.map((item, index) => ({
+          available_betas: response.data.available_betas.map((item) => ({
             id: item,
             name: `${item} kW`
           }))

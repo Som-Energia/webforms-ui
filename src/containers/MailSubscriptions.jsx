@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -31,7 +30,7 @@ const defaultLists = [
 ]
 
 const MailSubscriptions = (props) => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { mailLists = defaultLists } = props
   const { language } = useParams()
 

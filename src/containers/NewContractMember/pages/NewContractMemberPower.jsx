@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Powers from '../../../components/Powers'
@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 const NewContractMemberPower = (props) => {
-  const {sendTrackEvent, values} = props
+  const { sendTrackEvent, values } = props
 
   const { t } = useTranslation()
   const trackID = 'power'
@@ -26,14 +26,14 @@ const NewContractMemberPower = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-            <Typography variant="headline4.regular">
-              { values?.has_light === 'light-on'
-                ? t('POWER_TITLE')
-                : t('TENSION_AND_POWER')
-              }
-            </Typography>
+          <Typography variant="headline4.regular">
+            {values?.has_light === 'light-on'
+              ? t('POWER_TITLE')
+              : t('TENSION_AND_POWER')
+            }
+          </Typography>
         </Grid>
-        { values?.has_light === 'light-off' && (
+        {values?.has_light === 'light-off' && (
           <Grid item xs={12} sm={12}>
             <SelectField
               label={t('CURRENT_INSTALLATION_TYPE')}
@@ -43,15 +43,15 @@ const NewContractMemberPower = (props) => {
               {...props}
             />
           </Grid>
-          )
+        )
         }
         <Grid item xs={12}>
-            <Typography variant="body.sm.regular" color="secondary.extraDark">
-              { values?.has_light === 'light-on'
-                ? t('RECOMMENDATION_SUBTITLE')
-                : ''
-              }
-            </Typography>
+          <Typography variant="body.sm.regular" color="secondary.extraDark">
+            {values?.has_light === 'light-on'
+              ? t('RECOMMENDATION_SUBTITLE')
+              : ''
+            }
+          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12}>

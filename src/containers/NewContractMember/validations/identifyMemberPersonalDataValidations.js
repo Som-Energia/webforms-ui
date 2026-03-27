@@ -3,8 +3,8 @@ import * as Yup from 'yup'
 const identifyMemberPersonalDataValidations = Yup.object().shape({
   new_member: Yup.object().shape({
     nif: Yup.string()
-    .required('ERROR_REQUIRED_FIELD')
-    .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF'),
+      .required('ERROR_REQUIRED_FIELD')
+      .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, 'INVALID_NIF'),
     nif_valid: Yup.boolean()
       .required('ERROR_REQUIRED_FIELD')
       .oneOf([true], 'FILL_NIF'),
@@ -36,10 +36,10 @@ const identifyMemberPersonalDataValidations = Yup.object().shape({
     legal_person_accepted: Yup.bool().when(
       'person_type',
       (person_type, schema) => {
-        return person_type == 'legal-person'
+        return person_type === 'legal-person'
           ? schema
-              .required('ACCEPT_LEGAL_PERSON')
-              .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+            .required('ACCEPT_LEGAL_PERSON')
+            .oneOf([true], 'ACCEPT_LEGAL_PERSON')
           : schema
       }
     )

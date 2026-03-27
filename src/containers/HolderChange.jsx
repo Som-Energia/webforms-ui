@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { Formik, Form } from 'formik'
@@ -26,8 +26,6 @@ import Review from './HolderChange/Review'
 import MemberIdentifier from './HolderChange/MemberIdentifier'
 import Success from './Success'
 import Failure from './Failure'
-
-import data from '../data/HolderChange/data.json'
 
 import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
 
@@ -61,9 +59,7 @@ function HolderChange(props) {
   }
 
   const handlers = {
-    SAMPLE_DATA: () => {
-      const values = { ...initialValues, ...data }
-    },
+    SAMPLE_DATA: () => { },
     SHOW_INSPECTOR: () => {
       setShowInspector(true)
     }
@@ -313,7 +309,7 @@ function HolderChange(props) {
   useSyncLanguage(language)
 
   /// True if the step has to be skipped according to the values
-  function skipStep(step, values, isBackwards = false) {
+  function skipStep(step, values) {
     // TODO: backwards ismember was checked with "=== true", check it still works
     // without
     switch (step) {
@@ -477,7 +473,7 @@ function HolderChange(props) {
       .then(() => {
         setIsValid(true)
       })
-      .catch((e) => {
+      .catch(() => {
         setIsValid(false)
       })
   }
@@ -517,17 +513,17 @@ function HolderChange(props) {
                           value={(activeStep / MAX_STEP_NUMBER) * 100}
                         />
                         <>
-                          {sending? (
+                          {sending ? (
                             <Box className="step-body">
-                                <Box sx={{ mt: '50px'}}>
-                                  <Loading
-                                    description={t('WAITING_PROCESS')}
-                                  />
-                                </Box>
+                              <Box sx={{ mt: '50px' }}>
+                                <Loading
+                                  description={t('WAITING_PROCESS')}
+                                />
+                              </Box>
                             </Box>
                           ) : completed ? (
                             <Box className="step-body">
-                              { error ? (
+                              {error ? (
                                 <Failure error={error} />
                               ) : (
                                 <Success result={result} />

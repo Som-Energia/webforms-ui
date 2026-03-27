@@ -57,9 +57,9 @@ const NewContractMemberSummary = (props) => {
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
   const formSteps =
-    values?.has_member == 'member-off'
+    values?.has_member === 'member-off'
       ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-      : values?.has_member == 'member-on' || values?.has_member == 'member-link'
+      : values?.has_member === 'member-on' || values?.has_member === 'member-link'
         ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
         : undefined
 
@@ -109,7 +109,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('CIF'),
         reviewValue: values?.new_member?.nif,
         step: showReviewLinks
-          ? values?.has_member == 'member-off'
+          ? values?.has_member === 'member-off'
             ? formSteps['IDENTIFY_MEMBER']
             : formSteps['MEMBER_INFO']
           : null
@@ -145,7 +145,7 @@ const NewContractMemberSummary = (props) => {
         reviewLabel: t('REVIEW_HOLDER_LABEL_NIF'),
         reviewValue: values?.new_member?.nif,
         step: showReviewLinks
-          ? values?.has_member == 'member-off'
+          ? values?.has_member === 'member-off'
             ? formSteps['IDENTIFY_MEMBER']
             : formSteps['MEMBER_INFO']
           : null
@@ -183,7 +183,7 @@ const NewContractMemberSummary = (props) => {
   const reviewHolderData =
     values?.has_member === 'member-on'
       ? oldHolderFields
-      : values?.new_member?.person_type == 'legal-person'
+      : values?.new_member?.person_type === 'legal-person'
         ? legalReviewFields
         : physicalReviewFields
 
@@ -251,8 +251,8 @@ const NewContractMemberSummary = (props) => {
       }
 
   const process = contractProcess(
-    values?.has_light == 'light-on',
-    values?.previous_holder == 'previous-holder-yes'
+    values?.has_light === 'light-on',
+    values?.previous_holder === 'previous-holder-yes'
   )
   const processType = {
     icon: <InvoiceIcon />,
@@ -260,15 +260,15 @@ const NewContractMemberSummary = (props) => {
     field: [
       {
         reviewValue:
-          process == 'A3'
+          process === 'A3'
             ? t('NEW_SUPPLY_POINT')
-            : process == 'C1'
+            : process === 'C1'
               ? t('CHANGE_SUPPLIER')
-              : process == 'C2'
+              : process === 'C2'
                 ? t('CHANGE_SUPPLIER_AND_HOLDER')
                 : null
       },
-      values?.has_member == 'member-off' && {
+      values?.has_member === 'member-off' && {
         reviewValue: t('NEW_MEMBER_SUMMARY_PROCESS')
       }
     ]
@@ -522,7 +522,7 @@ const NewContractMemberSummary = (props) => {
         <Divider sx={{ my: 2 }} />
       </Grid>
       <Grid item xs={12}>
-        {values?.has_member == 'member-off' ? (
+        {values?.has_member === 'member-off' ? (
           <Typography
             variant="body.sm.regular"
             dangerouslySetInnerHTML={{
@@ -635,7 +635,7 @@ const NewContractMemberSummary = (props) => {
           />
         </TermsDialog>
       </Grid>
-      {values?.has_member == 'member-off' ? (
+      {values?.has_member === 'member-off' ? (
         <Grid item xs={12}>
           <FormControlLabel
             control={
@@ -671,14 +671,14 @@ const NewContractMemberSummary = (props) => {
           />
         </Grid>
       ) : null}
-      {values?.new_member?.person_type == 'legal-person' && (
+      {values?.new_member?.person_type === 'legal-person' && (
         <Grid item xs={12}>
           <Typography variant="headline4">
             {t('SOM_SERVEIS_INFO_TITLE')}
           </Typography>
         </Grid>
       )}
-      {values?.new_member?.person_type == 'legal-person' && (
+      {values?.new_member?.person_type === 'legal-person' && (
         <Grid item xs={12}>
           <FormControlLabel
             control={

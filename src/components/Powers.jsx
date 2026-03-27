@@ -24,12 +24,12 @@ const Powers = (props) => {
   const options = [
     {
       id: 'power-lower-15kw',
-      icon: <PowerIcon/>,
+      icon: <PowerIcon />,
       textHeader: t('POWER_LOWER_15_HEADER')
     },
     {
       id: 'power-higher-15kw',
-      icon:<PowerIcon/>,
+      icon: <PowerIcon />,
       textHeader: t('POWER_HIGHER_15_HEADER')
     }
   ]
@@ -38,7 +38,7 @@ const Powers = (props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="body.md.medium">
-          {values?.has_light == 'light-on'
+          {values?.has_light === 'light-on'
             ? t('CURRENT_CONTRACTED_POWER')
             : t('POWER_TO_CONTRACT')
           }{' '}
@@ -49,7 +49,7 @@ const Powers = (props) => {
         <Typography
           sx={{ typography: 'body.md.regular', color: 'secondary.extraDark' }}
           dangerouslySetInnerHTML={{
-            __html: values?.has_light == 'light-on'
+            __html: values?.has_light === 'light-on'
               ? t('POWER_HELPER')
               : t('WHICH_POWER_HELPER', {
                 url: t('WHICH_POWER_HELPER_URL')

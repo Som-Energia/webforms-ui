@@ -22,9 +22,9 @@ const IdentifyMemberPersonalData = (props) => {
         <NifCif entity="new_member" {...props} holder={true} />
       </Grid>
       <Grid item xs={12}>
-        {values?.new_member?.person_type == 'physic-person' ? (
+        {values?.new_member?.person_type === 'physic-person' ? (
           <PersonDataPhysical {...props} title={false} entity="new_member" />
-        ) : values?.new_member?.person_type == 'legal-person' ? (
+        ) : values?.new_member?.person_type === 'legal-person' ? (
           <PersonDataJuridical {...props} title={false} entity="new_member" />
         ) : null}
       </Grid>

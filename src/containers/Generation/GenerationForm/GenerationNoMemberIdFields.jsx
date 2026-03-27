@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -58,7 +58,7 @@ const GenerationNoMemberIdFields = (props) => {
         ...values.member,
         isphisical: isPhisical,
         vatvalid: valid,
-        exists:isMember,
+        exists: isMember,
         vat: vat
       }
     }
@@ -84,7 +84,7 @@ const GenerationNoMemberIdFields = (props) => {
           ...values.member,
           generation_zone_checked: true,
           has_generation_enabled_zone: result.data,
-          postal_code_checked:true
+          postal_code_checked: true
         }
       }
       setValues(tmpValues)
@@ -183,9 +183,9 @@ const GenerationNoMemberIdFields = (props) => {
                   (touched?.member?.vat && values?.member?.exists === true)
                 }
                 helperText={
-                  (touched?.member?.vat && errors?.member?.vat ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vat }} /> : '' ) ||
-                  (touched?.member?.vat && errors?.member?.vatvalid ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vatvalid }} /> : '' ) ||
-                  (touched?.member?.vat && errors?.member?.exists ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.exists }} /> : '' )
+                  (touched?.member?.vat && errors?.member?.vat ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vat }} /> : '') ||
+                  (touched?.member?.vat && errors?.member?.vatvalid ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vatvalid }} /> : '') ||
+                  (touched?.member?.vat && errors?.member?.exists ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.exists }} /> : '')
                 }
               />
             </Box>

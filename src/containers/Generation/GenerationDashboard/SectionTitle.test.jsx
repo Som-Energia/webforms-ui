@@ -1,4 +1,3 @@
-import React from 'react'
 import SectionTitle from './SectionTitle'
 import { render, screen } from '@testing-library/react'
 
@@ -12,7 +11,7 @@ describe('Section Title', () => {
   })
 
   test('The component render properly the prop text', () => {
-    render(<SectionTitle  />)
+    render(<SectionTitle />)
     const textElement = screen.queryByText(mockText)
     expect(textElement).toBeNull()
   })

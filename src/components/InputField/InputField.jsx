@@ -1,5 +1,4 @@
-import React from 'react'
-
+import { memo } from 'react'
 import Box from '@mui/material/Box'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
@@ -117,4 +116,4 @@ const InputFieldComponent = ({
   )
 }
 
-export default React.memo(InputFieldComponent)
+export default memo(InputFieldComponent)

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
@@ -36,8 +35,7 @@ export const MAX_STEPS_NUMBER = {
   MAX_STEP_NUMBER_NEW_CONTRACT: 6
 }
 
-const GurbFormRequirements = (props) => {
-  const { i18n } = useTranslation()
+const GurbFormRequirements = () => {
   const { language, gurbCode } = useParams()
   const { loading } = useContext(LoadingContext)
   const { trackEvent } = useContext(MatomoContext)

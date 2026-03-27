@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -7,14 +6,14 @@ import CustomDialog from '../CustomDialog';
 import { useTranslation } from 'react-i18next';
 
 export default function SimpleDialog({ title, text, acceptFunction, cancelFunction }) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   return (
 
     <CustomDialog data-testid="simple-dialog" withBackground={true}>
       <DialogTitle id="simple-dialog-title">{title}</DialogTitle>
       <DialogContent>
-          {text}
+        {text}
       </DialogContent>
       <DialogActions>
         {cancelFunction

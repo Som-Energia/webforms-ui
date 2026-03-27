@@ -5,15 +5,15 @@ import {
   queryByAttribute,
   fireEvent
 } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
-
-
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+vi.mock('react-i18next', async () => {
+  const i18n = await import('../../../tests/__mocks__/i18n')
+  return i18n.default
+});
 
 describe('Generation Form Review', () => {
-  
+
   const mockValuesPostalCode = {
     member: {
       is_member: true,
@@ -48,30 +48,30 @@ describe('Generation Form Review', () => {
   const mocksetFieldTouched = vi.fn()
   const mockSetValues = vi.fn()
 
-   test('Should call setFieldValue when change postal code', async () => {
-     
- 
-     const dom = render(
-       <GenerationNoMemberIdFields
-         resetForm={vi.fn()}
-         values={mockValuesPostalCode}
-         setFieldValue={mockSetFieldValue}
-         setFieldTouched={mocksetFieldTouched}
-         setErrors={vi.fn()}
-         isTesting={true}
-       />
-     )
- 
-     const postalCodeTextField = getById(dom.container, 'input_postalcode')
-     React.act(() => {
-       fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
-     })
- 
-     expect(mockSetFieldValue).toHaveBeenCalledWith(
-       'member.postal_code',
-       POSTAL_CODE
-     )
-   })
+  test('Should call setFieldValue when change postal code', async () => {
+
+
+    const dom = render(
+      <GenerationNoMemberIdFields
+        resetForm={vi.fn()}
+        values={mockValuesPostalCode}
+        setFieldValue={mockSetFieldValue}
+        setFieldTouched={mocksetFieldTouched}
+        setErrors={vi.fn()}
+        isTesting={true}
+      />
+    )
+
+    const postalCodeTextField = getById(dom.container, 'input_postalcode')
+    React.act(() => {
+      fireEvent.change(postalCodeTextField, { target: { value: POSTAL_CODE } })
+    })
+
+    expect(mockSetFieldValue).toHaveBeenCalledWith(
+      'member.postal_code',
+      POSTAL_CODE
+    )
+  })
 
   test('Should call setFieldValue when change vat', async () => {
 

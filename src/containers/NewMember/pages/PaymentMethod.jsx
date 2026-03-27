@@ -103,7 +103,7 @@ const PaymentMethod = (props) => {
           handleChange={handleMethodPaymentQuestion}
         />
       </Grid>
-      {values?.new_member?.payment_method == 'iban' && (
+      {values?.new_member?.payment_method === 'iban' && (
         <>
           <Grid item xs={12}>
             <InputField

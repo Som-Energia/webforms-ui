@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Formik, Form } from 'formik'
@@ -361,7 +361,7 @@ const GenerationContribution = (props) => {
 
   return (
     <Formik
-      onSubmit={() => {}}
+      onSubmit={() => { }}
       enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchemas[activeStep]}
@@ -451,10 +451,10 @@ const GenerationContribution = (props) => {
                   ) : null}
                   {activeStep < MAX_STEP_NUMBER - 1
                     ? getNextButton(
-                        formikProps.values.member.generation_zone_checked,
-                        formikProps.values.member.has_generation_enabled_zone,
-                        formikProps
-                      )
+                      formikProps.values.member.generation_zone_checked,
+                      formikProps.values.member.has_generation_enabled_zone,
+                      formikProps
+                    )
                     : null}
                 </Box>
               </Box>

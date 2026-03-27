@@ -1,4 +1,3 @@
-import React from 'react'
 import TextRecommendation from './TextRecommendation'
 import { render, screen } from '@testing-library/react'
 

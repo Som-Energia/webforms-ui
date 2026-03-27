@@ -276,7 +276,7 @@ const Indexada = (props) => {
   ]
 
   if (checkEnabled && !targetTariff)
-    if (activeStep != 0 || !lesserErrors.includes(error?.code))
+    if (activeStep !== 0 || !lesserErrors.includes(error?.code))
       return (
         <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
           <Failure error={error} showHeader={false} />

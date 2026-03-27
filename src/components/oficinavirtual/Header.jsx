@@ -1,7 +1,6 @@
-import React from 'react'
 import Typography from '@mui/material/Typography'
 
-const Header = ({ variant = 'h1', children }) => {
+const Header = ({ children }) => {
 
   return <Typography component='h3' sx={{
     width: '100%',
