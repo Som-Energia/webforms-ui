@@ -83,10 +83,10 @@ const Option = ({
 const Chooser = (props) => {
   const { options, value, handleChange, name, maxWidth } = props
 
-  const xsSize = options.length == 2 ? 12 : 12
-  const smSize = options.length == 2 ? 6 : 12
-  const mdSize = options.length == 2 ? 6 : 8
-  const lgSize = options.length == 2 ? 6 : 4
+  const xsSize = 12
+  const smSize = options.length === 2 ? 6 : 12
+  const mdSize = options.length === 2 ? 6 : 8
+  const lgSize = options.length === 2 ? 6 : 4
 
   const setOptionSelection = (option) => {
     handleChange(option)

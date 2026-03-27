@@ -1,15 +1,13 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
 import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 import NextButton from '../../components/OldComponents/Buttons/NextButton'
 
-export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
+export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()
 
   const onNextStep = (event) => {

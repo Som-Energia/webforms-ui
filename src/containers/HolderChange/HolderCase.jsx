@@ -1,9 +1,5 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
-
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-
 import Chooser from '../../components/OldComponents/Chooser'
 import StepHeader from '../../components/OldComponents/StepHeader'
 
@@ -17,7 +13,7 @@ function HolderCase(props) {
 
   return (
     <>
-      <StepHeader title={ t('HOLDER_CASE_TITLE')} />
+      <StepHeader title={t('HOLDER_CASE_TITLE')} />
       <Box className="step-body">
         <Box mt={3} mb={4}>
           <Chooser

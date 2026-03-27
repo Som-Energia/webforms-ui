@@ -37,7 +37,7 @@ const PowerInputs = (props) => {
       {Array.from(Array(numInputs).keys()).map((inputNum) => {
         const attr = `power${inputNum + 1}`
         const moreThan15Kw = numInputs !== 2
-        const textPower = has_light == 'light-on' ? 'CURRENT' : 'WHICH'
+        const textPower = has_light === 'light-on' ? 'CURRENT' : 'WHICH'
         return (
           <Grid key={attr} item xs={12}>
             <InputField
@@ -47,30 +47,30 @@ const PowerInputs = (props) => {
                 moreThan15Kw
                   ? t(textPower + '_POWER')
                   : inputNum === 0
-                  ? t(textPower + '_PEAK')
-                  : t(textPower + '_VALLEY')
+                    ? t(textPower + '_PEAK')
+                    : t(textPower + '_VALLEY')
               }
               endAdornmentText={'kW'}
               startAdornmentText={
                 moreThan15Kw
                   ? `P${inputNum + 1}`
                   : inputNum === 0
-                  ? t('PEAK')
-                  : t('VALLEY')
+                    ? t('PEAK')
+                    : t('VALLEY')
               }
               numInputs={numInputs}
               handleChange={(event) =>
                 handleChangePower(event, setFieldValue, {
-                  moreThanOneDecimal: has_light == 'light-on' || moreThan15Kw
+                  moreThanOneDecimal: has_light === 'light-on' || moreThan15Kw
                 })
               }
               handleBlur={handleBlur}
               touched={touched?.power[attr]}
               value={values[attr]}
               error={errors?.[attr]}
-              //textFieldHelper={
-              //t('HELP_POPOVER_POWER')
-              //}
+            //textFieldHelper={
+            //t('HELP_POPOVER_POWER')
+            //}
             />
           </Grid>
         )

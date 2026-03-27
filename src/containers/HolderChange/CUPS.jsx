@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -78,7 +78,7 @@ function CUPS(props) {
             }
             setValues(tmpValues)
           }
-          setFieldValue('supply_point.status', status, true)          
+          setFieldValue('supply_point.status', status, true)
           setIsLoading(false)
         })
         .catch((error) => {

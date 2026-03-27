@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 
 import NextButton from '../../components/OldComponents/Buttons/NextButton'
 
-export default function ModifyIntro({ nextStep, prevStep }) {
+export default function ModifyIntro({ nextStep }) {
   const { t } = useTranslation()
   const [isSubmitting, setSubmitting] = useState(false)
 
@@ -35,7 +35,7 @@ export default function ModifyIntro({ nextStep, prevStep }) {
           />
           <Box sx={{ mb: 1, display: 'flex', justifyContent: 'flex-end' }}>
             {nextStep && (
-               <NextButton
+              <NextButton
                 onClick={nextStep}
                 disabled={isSubmitting}
                 title={t('NEXT')}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -20,7 +20,7 @@ function IBAN(props) {
   const { t } = useTranslation()
   const { values, handleBlur, setFieldValue, errors, touched } = props
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const [open, setOpen] = useState(false)
 
   const handleClick = (event) => {

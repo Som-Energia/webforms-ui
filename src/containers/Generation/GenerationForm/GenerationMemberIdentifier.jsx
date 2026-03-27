@@ -1,4 +1,3 @@
-import React from 'react'
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import Grid from '@mui/material/Grid'
@@ -9,10 +8,9 @@ import Chooser from '../../../components/OldComponents/Chooser'
 import GenerationMemberIdFields from './GenerationMemberIdFields'
 import GenerationNoMemberIdFields from './GenerationNoMemberIdFields'
 
-
 const GenerationMemberIdentifier = (props) => {
   const { t } = useTranslation()
-  
+
   const {
     values,
     errors,
@@ -34,7 +32,7 @@ const GenerationMemberIdentifier = (props) => {
       >
         {title}
       </Typography>
-      
+
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{

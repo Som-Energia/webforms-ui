@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -181,12 +181,12 @@ const Cancellation = (props) => {
                 method="POST"
                 noValidate
                 autoComplete="off">
-                <Container 
-                sx={{
-                  backgroundColor: 'background.third',
-                  color: 'primary',
-                }} 
-                maxWidth="lg" disableGutters={true}>
+                <Container
+                  sx={{
+                    backgroundColor: 'background.third',
+                    color: 'primary',
+                  }}
+                  maxWidth="lg" disableGutters={true}>
                   {!completed && (
                     <>
                       <ContractDetails {...formikProps.values} />

@@ -13,7 +13,17 @@ import 'dayjs/locale/ca'
 import 'dayjs/locale/eu'
 import 'dayjs/locale/gl'
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+vi.mock('react-i18next', async () => {
+  const i18n = await import('../../../tests/__mocks__/i18n')
+  return i18n.default
+});
+
+const mocks = {
+  get: vi.fn(),
+  post: vi.fn(),
+  delete: vi.fn()
+}
+
 vi.mock('axios', async (importActual) => {
   const actual = await importActual();
 
@@ -61,12 +71,12 @@ describe('Generation Dashboard', () => {
   const mockValidateChanges = vi.fn()
   const mockSetValidationConfirm = vi.fn()
 
-  vi.spyOn(myApi,'addContractsToAssignments').mockImplementation(()=>{
-    return Promise.resolve({data:"OK"})
+  vi.spyOn(myApi, 'addContractsToAssignments').mockImplementation(() => {
+    return Promise.resolve({ data: "OK" })
   })
 
-  vi.spyOn(myApi,'getAssignmentContracts').mockImplementation(()=>{
-    return Promise.resolve({data:[]})
+  vi.spyOn(myApi, 'getAssignmentContracts').mockImplementation(() => {
+    return Promise.resolve({ data: [] })
   })
 
   test('The component render properly the prop data', () => {
@@ -292,7 +302,7 @@ describe('Generation Dashboard', () => {
     )
     const addButton = getById(dom.container, 'generationkwh-id-add-assignment')
     await userEvent.click(addButton)
-       
+
     const infoMessage = screen.getByText('GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT')
     expect(infoMessage).toBeInTheDocument()
 
@@ -320,13 +330,13 @@ describe('Generation Dashboard', () => {
     const investmentTable = getById(dom.container, 'investment-table')
     expect(investmentTable).toBeInTheDocument()
 
-    const purchase_date = getByText(dom.container,'01/01/2020')
+    const purchase_date = getByText(dom.container, '01/01/2020')
     expect(purchase_date).toBeInTheDocument()
 
-    const first_effective_date = getByText(dom.container,'01/01/2021')
+    const first_effective_date = getByText(dom.container, '01/01/2021')
     expect(first_effective_date).toBeInTheDocument()
 
-    const last_effective_date = getByText(dom.container,'01/01/2045')
+    const last_effective_date = getByText(dom.container, '01/01/2045')
     expect(last_effective_date).toBeInTheDocument()
   })
 
@@ -351,13 +361,13 @@ describe('Generation Dashboard', () => {
     const investmentTable = getById(dom.container, 'investment-table')
     expect(investmentTable).toBeInTheDocument()
 
-    const purchase_date = getByText(dom.container,'01/01/2020')
+    const purchase_date = getByText(dom.container, '01/01/2020')
     expect(purchase_date).toBeInTheDocument()
 
-    const first_effective_date = getByText(dom.container,'01/01/2021')
+    const first_effective_date = getByText(dom.container, '01/01/2021')
     expect(first_effective_date).toBeInTheDocument()
 
-    const last_effective_date = getByText(dom.container,'01/01/2045')
+    const last_effective_date = getByText(dom.container, '01/01/2045')
     expect(last_effective_date).toBeInTheDocument()
   })
 })

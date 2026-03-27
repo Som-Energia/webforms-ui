@@ -9,7 +9,6 @@ import {
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { vi } from 'vitest';
 
-
 vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
 describe('Member Identifier', () => {
@@ -224,7 +223,7 @@ describe('Member Identifier', () => {
   test('Should show error if vat is not valid', async () => {
 
     const mockValuesNoMemberVatNoValid = JSON.parse(JSON.stringify(mockValuesNoMember))
-    mockValuesNoMemberVatNoValid.member.vatvalid=false
+    mockValuesNoMemberVatNoValid.member.vatvalid = false
 
     const dom = render(
       <Router>
@@ -289,5 +288,5 @@ describe('Member Identifier', () => {
       getByText(newMemberVatInputBox, mockErrorsMemberExists.member.exists)
     ).toBeInTheDocument()
   })
-  
+
 })

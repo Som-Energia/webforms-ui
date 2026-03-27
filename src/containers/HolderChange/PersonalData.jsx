@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -49,14 +49,14 @@ function PersonalData(props) {
     !values?.member?.become_member
 
   const onChangeProxyVAT = ({ vat, isPhisical, valid }) => {
-    const tmpValues = {...values}
+    const tmpValues = { ...values }
     tmpValues[entity] = {
-        ...values[entity],
-        proxynif: vat,
-        proxynif_valid: valid,
-        proxynif_phisical: isPhisical
-      }
-    
+      ...values[entity],
+      proxynif: vat,
+      proxynif_valid: valid,
+      proxynif_phisical: isPhisical
+    }
+
     setValues(tmpValues)
   }
 
@@ -548,7 +548,7 @@ function PersonalData(props) {
             {skipPrivacyPolicy ? null : (
               <FormGroup row>
                 <FormControlLabel
-                  sx={{m:0}}
+                  sx={{ m: 0 }}
                   control={
                     <Checkbox
                       id="privacy_policy_accepted"

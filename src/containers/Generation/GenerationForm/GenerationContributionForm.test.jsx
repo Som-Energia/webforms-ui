@@ -6,11 +6,12 @@ import {
   fireEvent,
   getByText
 } from '@testing-library/react'
-
-
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+vi.mock('react-i18next', async () => {
+  const i18n = await import('../../../tests/__mocks__/i18n')
+  return i18n.default
+});
 
 describe('Generation Form Contribution', () => {
   const mockSetFieldValue = vi.fn()
@@ -182,7 +183,7 @@ describe('Generation Form Contribution', () => {
   })
 
   test('Should show IBAN helper text', () => {
-    
+
     const dom = render(
       <GenerationContributionForm
         values={mockValues}
@@ -203,7 +204,7 @@ describe('Generation Form Contribution', () => {
       <GenerationContributionForm
         values={mockValues}
         errors={mockErrors}
-        touched={{payment:{iban:true}}}
+        touched={{ payment: { iban: true } }}
         setFieldValue={mockSetFieldValue}
       />
     )
@@ -221,7 +222,7 @@ describe('Generation Form Contribution', () => {
       <GenerationContributionForm
         values={mockValues}
         errors={mockErrors}
-        touched={{payment:{iban:true}}}
+        touched={{ payment: { iban: true } }}
         setFieldValue={mockSetFieldValue}
       />
     )
@@ -238,7 +239,7 @@ describe('Generation Form Contribution', () => {
       <GenerationContributionForm
         values={mockValues}
         errors={mockErrors}
-        touched={{annual_use:true}}
+        touched={{ annual_use: true }}
         setFieldValue={mockSetFieldValue}
       />
     )

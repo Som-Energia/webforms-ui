@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import GenerationTable from './GenerationTable'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'

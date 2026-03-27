@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import GenerationContext from '../context/GenerationContext'
 import PopUpContext from '../../../context/PopUpContext'

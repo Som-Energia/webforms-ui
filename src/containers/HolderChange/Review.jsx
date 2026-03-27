@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -70,8 +70,8 @@ const Review = (props) => {
   const member = values?.member?.become_member
     ? `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`
     : values?.holder?.ismember
-    ? values?.holder.vat
-    : values?.member?.vat
+      ? values?.holder.vat
+      : values?.member?.vat
 
   return (
     <>
@@ -201,7 +201,7 @@ const Review = (props) => {
           sx={{ mt: '24px', ml: 0, mr: '32px', mb: '24px' }}
         />
 
-        { member === undefined && (
+        {member === undefined && (
           <FormHelperText
             dangerouslySetInnerHTML={{
               __html: t('HOLDERCHANGE_REVIEW_TEXT')

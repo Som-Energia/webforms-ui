@@ -9,7 +9,7 @@ const MemberPersonalData = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        {values?.new_member?.person_type == 'physic-person' ? (
+        {values?.new_member?.person_type === 'physic-person' ? (
           <PersonDataPhysical {...props} entity="new_member" />
         ) : (
           <PersonDataJuridical {...props} entity="new_member" />
