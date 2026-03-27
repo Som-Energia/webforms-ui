@@ -122,12 +122,12 @@ export const newNormalizeContract = (data, gurbCode) => {
       data.cadastral_reference.replace(/\s/g, '')
   }
 
-  if (data.has_member != 'member-on' && data.member.link_member) {
+  if ((data.has_member != 'member-on' && data.member.link_member) || data.has_member == 'campaign-offer') {
     finalContract['contract_owner'] = normalizeClient(data.new_member) // TODO: change where this is saved! (new_member warning)
     finalContract['contract_owner']['address'] = normalizeAddress(data.address)
   }
 
-  if (data.member.link_member) {
+  if (data.member.link_member || data.has_member == 'campaign-offer') {
     finalContract['linked_member_info'] = {
       vat: data.member.nif,
       code: data.member.number

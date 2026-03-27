@@ -98,6 +98,8 @@ const NewContractMemberForm = (props) => {
   const POP_UP_TIME = 180000
   const ENTERPRISE = 'enterprise'
   const DOMESTIC = 'domestic'
+  const CampaignVAT = import.meta.env.VITE_CAMPAIGN_VAT;
+  const CampaignNumMember = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER;
 
   useSyncLanguage(language)
 
@@ -472,16 +474,20 @@ const NewContractMemberForm = (props) => {
   }, [gurb_id])
 
   const customInitialValues = useMemo(() => {
-    if (specialCampaign !== '15YEARS_CAMPAIGN') {
+    if (specialCampaign === '15YEARS_CAMPAIGN') {
       return {
         ...initialValues,
-        has_member: 'campaign-offer'
+        has_member: 'campaign-offer',
+        member: {
+          number: CampaignNumMember,
+          nif: CampaignVAT
+        }
       }
     }
     return initialValues
   }, [initialValues, specialCampaign])
 
-  if(Object.keys(formSteps).length === 0 && specialCampaign === '15YEARS_CAMPAIGN') {
+  if (Object.keys(formSteps).length === 0 && specialCampaign === '15YEARS_CAMPAIGN') {
     setValidationSchemaAndSteps('campaign-offer')
   }
 
