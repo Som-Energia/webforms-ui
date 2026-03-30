@@ -1,5 +1,10 @@
 # Change Log
 
+## 7.1.0 2026-03-30
+
+- IMP: New form with campaign 15 years
+- IMP: Added new option in member option screen (new contract)
+
 ## 7.0.3 2026-03-26
 
 - REF: Change text of Contribution form
