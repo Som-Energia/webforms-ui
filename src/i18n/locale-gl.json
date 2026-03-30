@@ -855,6 +855,6 @@
     "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "MEDIA DOS ÚLTIMOS {{ base_days_computation }} DÍAS",
     "PRICES_ERROR_MISSING_DATA": "Non hai datos dispoñibles para esta data. Desculpa as molestias!",
     "API_ERROR_FETCHING_DATA": "Lamentablemente, nestes intres non che podemos amosar a previsión de prezos debido a unha incidencia. Agardamos resolvelo axiña e poder amosala o antes posible. Desculpa as molestias!",
-    "15YEARS_CAMPAIGN": "¡Celebramos 15 años!",
-    "15YEARS_DESCRIPTION": "De 100 a 0 €: contrata la luz sin asociarte"
+    "15YEARS_CAMPAIGN": "Celebramos 15 anos!",
+    "15YEARS_DESCRIPTION": "De 100 a 0 €: contrata a luz sen te asociares"
 }
