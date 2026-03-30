@@ -856,5 +856,7 @@
     "SUMPRICESDISPLAY_TOTAL_AVERAGE": "MITJANA DEL DIA",
     "SUMPRICESDISPLAY_TOTAL_WEEKLY_AVERAGE": "MITJANA DELS ÚLTIMS {{ base_days_computation }} DIES",
     "PRICES_ERROR_MISSING_DATA": "No hi ha dades disponibles per a aquesta data. Disculpa les molèsties!",
-    "API_ERROR_FETCHING_DATA": "Malauradament, no podem mostrar ara la previsió de preus, a causa d’una incidència. Esperem que es pugui resoldre de seguida i poder mostrar-la al més aviat possible. Disculpa les molèsties!"
+    "API_ERROR_FETCHING_DATA": "Malauradament, no podem mostrar ara la previsió de preus, a causa d’una incidència. Esperem que es pugui resoldre de seguida i poder mostrar-la al més aviat possible. Disculpa les molèsties!",
+    "15YEARS_CAMPAIGN": "Celebrem 15 anys!",
+    "15YEARS_DESCRIPTION": "De 100 a 0 €: contracta la llum sense associar-te"
 }

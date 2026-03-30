@@ -1,13 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Chooser from '../../../components/Chooser/Chooser'
+import TemporalOption from '../../../components/Chooser/TemporalOption'
 import InputTitle from '../../../components/InputTitle'
 
 import Typography from '@mui/material/Typography'
 
 import Grid from '@mui/material/Grid'
-import { CommunityIcon, HandshakeIcon } from '../../../data/icons/Icons'
+import { CommunityIcon, HandshakeIcon, GiftIcon } from '../../../data/icons/Icons'
 
 const NewContractMemberQuestion = ({
   formikProps,
@@ -15,18 +16,50 @@ const NewContractMemberQuestion = ({
   setValidationSchemaAndSteps,
   sendTrackEvent
 }) => {
-  const { values, setFieldValue } = formikProps
+  const { values, setFieldValue, setValues } = formikProps
   const { t } = useTranslation()
   const trackID = 'member-question'
+  const [campaignOffer, setCampaignOffer] = useState(false)
+  const [hasMember, setHasMember] = useState(false)
+  const CampaignIsEnabled = JSON.parse(import.meta.env.VITE_FEATURE_FLAGS)?.is15CampaignEnabled;
+  const CampaignVAT = import.meta.env.VITE_CAMPAIGN_VAT;
+  const CampaignNumMember = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER;
 
   const handleMemberQuestion = (value) => {
-    setFieldValue('has_member', value)
-    nextStep(formikProps)
-    setValidationSchemaAndSteps(value)
+    if (value == "campaign-offer") {
+      setCampaignOffer(true)
+      setValues({
+        ...values,
+        has_member: 'campaign-offer',
+        member: {
+          number: CampaignNumMember,
+          nif: CampaignVAT
+        }
+      })
+    }
+    else {
+      setCampaignOffer(false)
+      setFieldValue('has_member', value)
+    }
+    setHasMember(value)
   }
 
   useEffect(() => {
+    if (hasMember) {
+      nextStep(formikProps)
+      setValidationSchemaAndSteps(hasMember)
+    }
+  }, [hasMember])
+
+  useEffect(() => {
     sendTrackEvent(trackID)
+    setValues({
+      ...values,
+      member: {
+        number: '',
+        nif: ''
+      }
+    })
   }, [])
 
   const options = [
@@ -78,6 +111,24 @@ const NewContractMemberQuestion = ({
           handleChange={handleMemberQuestion}
           maxWidth="18rem"
         />
+        {CampaignIsEnabled ? (
+          <Grid
+            container
+            direction="row"
+            mt={4}
+            justifyContent="center">
+            <Grid item justifyContent="center" xs={12} sm={12} md={8} lg={12}>
+              <TemporalOption
+                optionId="campaign-offer"
+                icon={<GiftIcon />}
+                isSelected={values?.has_member == "campaign-offer"}
+                setSelected={handleMemberQuestion}
+                textHeader={t('15YEARS_CAMPAIGN')}
+                textBody={t('15YEARS_DESCRIPTION')}
+                maxWidth="18rem"
+              />
+            </Grid>
+          </Grid>) : null}
       </Grid>
     </Grid>
   )
