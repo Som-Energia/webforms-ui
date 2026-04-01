@@ -34,8 +34,8 @@ const memberPersonalDataValidations = Yup.object().shape({
       (person_type, schema) => {
         return person_type == 'legal-person'
           ? schema
-              .required('ACCEPT_LEGAL_PERSON')
-              .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+            .required('ACCEPT_LEGAL_PERSON')
+            .oneOf([true], 'ACCEPT_LEGAL_PERSON')
           : schema
       }
     )
@@ -43,7 +43,11 @@ const memberPersonalDataValidations = Yup.object().shape({
   address: Yup.object().shape({
     street: Yup.string().required('NO_ADDRESS'),
     number: Yup.number().required('NO_NUMBER'),
-    postal_code: Yup.number().required('NO_POSTAL_CODE'),
+    postal_code: Yup.string().matches(/^[0-9]+$/).length(5, 'POSTAL_CODE_INVALID_LENGTH').required('NO_POSTAL_CODE'),
+    state: Yup.object().shape({
+      id: Yup.number().min(1).required('POSTAL_CODE_INVALID'),
+      name: Yup.string()
+    }),
   })
 })
 
