@@ -168,7 +168,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <List>
                 {uploads.map((upload, index) => (
-                  <ListItem>
+                  <ListItem key={index}>
                     <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
                       {upload.filename}
                     </Typography>
@@ -185,7 +185,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
             <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
           )}
           <Typography variant='body.md.regular' sx={{ display: 'flex', alignItems: 'center', padding: 0, margin: 0, gap: 1 }}>
-            <Link component="button" overlay onClick={handleLinkClick}>
+            <Link component="button" onClick={handleLinkClick}>
               {t('CLICK_HERE')}
             </Link>
             <input
