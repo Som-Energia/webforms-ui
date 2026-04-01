@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Formik broken validations
+- Add validations for postal code if not autocompleted
+
 ## 7.1.0 2026-03-30
 
 - IMP: New form with campaign 15 years
