@@ -765,6 +765,7 @@
     "NO_POSTAL_CODE": "No hi has posat el codi postal",
     "POSTAL_CODE_INVALID_LENGTH": "El codi postal ha de tenir 5 xifres",
     "POSTAL_CODE_INVALID": "Codi postal incorrecte",
+    "POSTAL_CODE_INVALID_FORMAT": "El codi postal ha de tenir xifres",
     "CADASTRAL_REFERENCE_LINK": "Centre d'Ajuda",
     "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED": "Amb la contractació del servei GURB m'obligo a pagar el cost d'adhesió únic, un cop verificada la meva plaça a GURB, i la quota GURB, que s'aplicarà a partir de l'endemà de la data d'activació.",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "Ja ets de Som Energia!",

@@ -46,7 +46,7 @@ const identifyMemberPersonalDataValidations = Yup.object().shape({
   }),
   address: Yup.object().shape({
     street: Yup.string().required('NO_ADDRESS'),
-    postal_code: Yup.string().matches(/^[0-9]+$/).length(5, 'POSTAL_CODE_INVALID_LENGTH').required('NO_POSTAL_CODE'),
+    postal_code: Yup.string().matches(/^[0-9]+$/, 'POSTAL_CODE_INVALID_FORMAT').length(5, 'POSTAL_CODE_INVALID_LENGTH').required('NO_POSTAL_CODE'),
     state: Yup.object().shape({
       id: Yup.number().min(1).required('POSTAL_CODE_INVALID'),
       name: Yup.string()

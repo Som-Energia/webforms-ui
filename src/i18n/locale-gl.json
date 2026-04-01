@@ -734,6 +734,7 @@
     "NO_POSTAL_CODE": "Non introduciches o código postal",
     "POSTAL_CODE_INVALID_LENGTH": "",
     "POSTAL_CODE_INVALID": "",
+    "POSTAL_CODE_INVALID_FORMAT": "",
     "CADASTRAL_REFERENCE_HELPER": "Se non sabes onde atopar a referencia catastral, podes buscala no rexistro ou ir ao",
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Por favor, intentalo outra vez máis tarde. Se o problema persiste, pódesnos escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> e revisamos a situación. Desculpa as molestias.",
     "INCORRECT_PHONE": "O teléfono non é correcto",
