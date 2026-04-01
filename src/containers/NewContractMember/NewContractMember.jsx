@@ -63,6 +63,12 @@ import { usePixelEvent } from "../../hooks/usePixelEvent"
 import { isCompanyVat } from '../../services/utils'
 
 
+const ALERT_STEPS = {
+  'member-off': [3, 7],
+  'member-on': [2, 6],
+  'member-link': [2, 6]
+}
+
 const NewContractMemberForm = (props) => {
   const { triggerEvent } = usePixelEvent()
   const [searchParams] = useSearchParams()
@@ -131,7 +137,7 @@ const NewContractMemberForm = (props) => {
     return () => clearTimeout(timer)
   }, [activeStep])
 
-  const initialValues = {
+  const initialValues = useMemo(() => ({
     cups: '',
     has_member: undefined,
     member_is_holder: undefined,
@@ -222,7 +228,7 @@ const NewContractMemberForm = (props) => {
     generic_conditions_accepted: false,
     statutes_accepted: false,
     comercial_info_accepted: false
-  }
+  }), [i18n.language, tariff])
 
   const validationSchemasLinkMember = [
     newContractMemberQuestionValidations,
@@ -362,6 +368,12 @@ const NewContractMemberForm = (props) => {
       })
   }
 
+  useEffect(() => {
+    const has_member = formikRef.current?.values?.has_member
+    const alertSteps = ALERT_STEPS[has_member] ?? []
+    setHasAlert(alertSteps.includes(activeStep))
+  }, [activeStep])
+
   const getStep = (props, sendTrackEvent) => {
     const { values } = props
 
@@ -371,24 +383,18 @@ const NewContractMemberForm = (props) => {
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
-        setHasAlert(false)
         return <MemberPersonalData {...props} />
       } else if (activeStep === 3) {
-        setHasAlert(true)
         return <NewContractMemberSupplyPoint {...trackProps} />
       } else if (activeStep === 4) {
-        setHasAlert(false)
         return <NewContractMemberSupplyPointData {...trackProps} />
       } else if (activeStep === 5) {
         return <NewContractMemberPower {...trackProps} />
       } else if (activeStep === 6) {
-        setHasAlert(false)
         return <NewContractMemberSelfConsumptionChooser {...trackProps} />
       } else if (activeStep === 7) {
-        setHasAlert(true)
         return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 8) {
-        setHasAlert(false)
         return <NewContractHolder {...props} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
@@ -399,24 +405,18 @@ const NewContractMemberForm = (props) => {
       }
     } else {
       if (activeStep === 1) {
-        setHasAlert(false)
         return <LinkMemberDetails {...props} />
       } else if (activeStep === 2) {
-        setHasAlert(true)
         return <NewContractMemberSupplyPoint {...trackProps} />
       } else if (activeStep === 3) {
-        setHasAlert(false)
         return <NewContractMemberSupplyPointData {...trackProps} />
       } else if (activeStep === 4) {
         return <NewContractMemberPower {...trackProps} />
       } else if (activeStep === 5) {
-        setHasAlert(false)
         return <NewContractMemberSelfConsumptionChooser {...trackProps} />
       } else if (activeStep === 6) {
-        setHasAlert(true)
         return <NewContractMemberSelfConsumptionData {...props} />
       } else if (activeStep === 7) {
-        setHasAlert(false)
         return <NewContractHolder {...props} />
       } else if (activeStep === 8) {
         return <IdentifyMemberPersonalData {...props} holder={true} />
