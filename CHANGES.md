@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 7.1.1 2026-04-02
 
 - Formik broken validations
 - Add validations for postal code if not autocompleted
