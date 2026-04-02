@@ -1,4 +1,5 @@
 import * as Yup from 'yup'
+import addressValidations from './addressValidations';
 
 const newContractMemberSupplyPointDataValidations = Yup.object().shape({
   cadastral_reference: Yup.string().length(23, 'INVALID_REF_CADASTRAL_LENGTH'),
@@ -14,10 +15,8 @@ const newContractMemberSupplyPointDataValidations = Yup.object().shape({
       .required('UNACCEPTED_FAIR_TITLE')
       .oneOf([true], 'UNACCEPTED_FAIR_TITLE'),
   }),
-  supply_point_address: Yup.object().shape({
-    street: Yup.string().required('NO_ADDRESS'),
-    number: Yup.number().required('NO_NUMBER')
-  }),
+  supply_point_address: addressValidations
+
 });
 
 export default newContractMemberSupplyPointDataValidations;

@@ -21,12 +21,11 @@ Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, 
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
   cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
   cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
-  cy.get('[data-cy="address"]').type(validAddress.input)
+  cy.get('[data-cy="address"]').type(validAddress.input, {delay: 500})
   cy.contains(personalData.street).click()
-  cy.wait(1000) // eslint-disable-line
 
   cy.get('[data-cy="address.number"]').clear()
-  cy.get('[data-cy="address.number"]').type(22, { delay: 200 })
+  cy.get('[data-cy="address.number"]').type(22, { delay: 500 })
   cy.get('[data-cy="address.bloc"]').type('Omega')
   cy.get('[data-cy="address.stairs"]').type('B')
   cy.get('[data-cy="address.floor"]').type('1')
@@ -54,12 +53,11 @@ Cypress.Commands.add(
     cy.get('[data-cy="new_member.name"]').type(personalData.name)
     cy.get('[data-cy="new_member.proxyname"]').type(personalData.proxyname)
     cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
-    cy.get('[data-cy="address"]').type(validAddress.input)
+    cy.get('[data-cy="address"]').type(validAddress.input, { delay: 500 })
     cy.contains(personalData.street).click()
-    cy.wait(1000) // eslint-disable-line
 
     cy.get('[data-cy="address.number"]').clear()
-    cy.get('[data-cy="address.number"]').type(22, { delay: 200 })
+    cy.get('[data-cy="address.number"]').type(22, { delay: 500 })
     cy.get('[data-cy="address.bloc"]').type('Omega')
     cy.get('[data-cy="address.stairs"]').type('B')
     cy.get('[data-cy="address.floor"]').type('1')
@@ -87,12 +85,11 @@ Cypress.Commands.add(
     cy.get('[data-cy="new_member.name"]').type(personalData.name)
     cy.get('[data-cy="new_member.proxyname"]').type(personalData.proxyname)
     cy.get('[data-cy="new_member.proxynif"]').type(personalData.proxynif)
-    cy.get('[data-cy="address"]').type(validAddress.input)
+    cy.get('[data-cy="address"]').type(validAddress.input, { delay: 500 })
     cy.contains(personalData.street).click()
-    cy.wait(1000) // eslint-disable-line
 
     cy.get('[data-cy="address.number"]').clear()
-    cy.get('[data-cy="address.number"]').type(22, { delay: 200 })
+    cy.get('[data-cy="address.number"]').type(22, { delay: 500 })
     cy.get('[data-cy="address.bloc"]').type('Omega')
     cy.get('[data-cy="address.stairs"]').type('B')
     cy.get('[data-cy="address.floor"]').type('1')

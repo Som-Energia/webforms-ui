@@ -62,7 +62,7 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
   cy.contains(data.supplyPointData.street).click()
   cy.wait(1000)
 
-  cy.get('[data-cy="supply_point_address.number"]').clear().type(22, { delay: 100 })
+  cy.get('[data-cy="supply_point_address.number"]').clear().type(22, { delay: 500 })
 
   cy.get('[id="supply_point.is_housing"]').click()
 
