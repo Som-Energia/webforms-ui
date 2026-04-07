@@ -175,6 +175,7 @@ function ModifyContract(props) {
       <Box sx={{ width: '100%', backgroundColor: 'background.third' }}>
         {noticeAutonomous ? (
           <AlertBox
+            textAlign={'left'}
             severity={'warning'}
             variant={'body.md.regular'}
             title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')}
