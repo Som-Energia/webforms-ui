@@ -28,10 +28,11 @@ const CUPS = (props) => {
     if (cups?.length >= 20 && cups?.length <= 22) {
       setLoading(true)
       checkCups(cups)
-        .then((response) => {
-          setValues({
+        .then(async (response) => {
+          await setValues({
             ...values,
             ...{
+              cups_valid: true,
               new_contract:
                 response?.data?.status === 'new' ||
                 response?.data?.status === 'inactive',
@@ -39,16 +40,22 @@ const CUPS = (props) => {
               tariff_name: response?.data?.tariff_name
             }
           })
-          setMaxStepNum(
-            response?.data?.status === 'new' ||
-              response?.data?.status === 'inactive'
-              ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
-              : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
-          )
+          if (setMaxStepNum) {
+            setMaxStepNum(
+              response?.data?.status === 'new' ||
+                response?.data?.status === 'inactive'
+                ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
+                : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
+            )
+          }
+
           setLoading(false)
         })
-        .catch(() => {
-          setFieldError('cups', t('ERROR_INVALID_FIELD'))
+        .catch(async () => {
+          await setFieldError('cups', t('ERROR_INVALID_FIELD'))
+          if (values.cups_valid) {
+            await setFieldValue('cups_valid', false)
+          }
           setLoading(false)
         })
     }
@@ -91,7 +98,7 @@ const CUPS = (props) => {
       touched={touched?.cups}
       value={values?.cups}
       error={
-        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri
+        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri || errors?.cups_valid
       }
       isLoading={loading}
       required={true}
