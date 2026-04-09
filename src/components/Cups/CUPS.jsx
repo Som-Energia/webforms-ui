@@ -29,8 +29,8 @@ const CUPS = (props) => {
       setLoading(true)
       setFieldValue('cups_valid', false)
       checkCups(cups)
-        .then(async (response) => {
-          await setValues({
+        .then((response) => {
+          setValues({
             ...values,
             ...{
               cups_valid: true,
@@ -52,10 +52,10 @@ const CUPS = (props) => {
 
           setLoading(false)
         })
-        .catch(async () => {
-          await setFieldError('cups', t('ERROR_INVALID_FIELD'))
+        .catch(() => {
+          setFieldError('cups', t('ERROR_INVALID_FIELD'))
           if (values.cups_valid) {
-            await setFieldValue('cups_valid', false)
+            setFieldValue('cups_valid', false)
           }
           setLoading(false)
         })
