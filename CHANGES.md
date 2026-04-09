@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- REF: Add inherit colors for typography
+
 ## 7.1.1 2026-04-02
 
 - Formik broken validations
