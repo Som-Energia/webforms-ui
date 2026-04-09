@@ -49,14 +49,14 @@ const CUPS = (props) => {
                 : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
             )
           }
-
-          setLoading(false)
         })
         .catch(() => {
           setFieldError('cups', t('ERROR_INVALID_FIELD'))
           if (values.cups_valid) {
             setFieldValue('cups_valid', false)
           }
+        })
+        .finally(() => {
           setLoading(false)
         })
     }
