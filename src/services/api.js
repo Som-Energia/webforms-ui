@@ -201,24 +201,6 @@ export const getNewRates = () => {
   return rates
 }
 
-let cancelTokenMemberVat
-
-export const checkMemberVat = async (vat) => {
-  if (typeof cancelTokenMemberVat !== typeof undefined) {
-    cancelTokenMemberVat.cancel('Operation canceled due to new request')
-  }
-
-  cancelTokenMemberVat = axios.CancelToken.source()
-
-  return axios({
-    method: 'GET',
-    url: `${WEBFORMS_API_URL}/check/vat/${vat}`,
-    cancelToken: cancelTokenMemberVat.token
-  }).then((response) => {
-    return response?.data
-  })
-}
-
 let cancelTokenMember
 
 export const checkMember = async (number, vat) => {
