@@ -27,6 +27,7 @@ const CUPS = (props) => {
     const cups = values.cups
     if (cups?.length >= 20 && cups?.length <= 22) {
       setLoading(true)
+      setFieldValue('cups_valid', false)
       checkCups(cups)
         .then(async (response) => {
           await setValues({
