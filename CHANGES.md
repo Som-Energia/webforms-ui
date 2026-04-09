@@ -3,6 +3,7 @@
 ## unreleased
 
 - REF: Add inherit colors for typography
+- FIX: add validation for proxynif
 
 ## 7.1.1 2026-04-02
 
