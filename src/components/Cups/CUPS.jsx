@@ -14,11 +14,11 @@ const CUPS = (props) => {
     values,
     errors,
     touched,
-    setValues,
-    setFieldValue,
-    setFieldError,
-    setFieldTouched,
-    setMaxStepNum
+    setValues = () => {},
+    setFieldValue = () => {},
+    setFieldError = () => {},
+    setFieldTouched = () => {},
+    setMaxStepNum = () => {}
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
@@ -30,21 +30,20 @@ const CUPS = (props) => {
       setFieldValue('cups_valid', false)
       checkCups(cups)
         .then((response) => {
+          const { status, knowledge_of_distri, tariff_name } = response?.data || {}
+          const new_contract = ['new', 'inactive'].includes(status)
           setValues({
             ...values,
             ...{
               cups_valid: true,
-              new_contract:
-                response?.data?.status === 'new' ||
-                response?.data?.status === 'inactive',
-              knowledge_of_distri: response?.data?.knowledge_of_distri,
-              tariff_name: response?.data?.tariff_name
+              new_contract,
+              knowledge_of_distri,
+              tariff_name
             }
           })
           if (setMaxStepNum) {
             setMaxStepNum(
-              response?.data?.status === 'new' ||
-                response?.data?.status === 'inactive'
+              new_contract
                 ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
                 : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
             )
@@ -52,9 +51,7 @@ const CUPS = (props) => {
         })
         .catch(() => {
           setFieldError('cups', t('ERROR_INVALID_FIELD'))
-          if (values.cups_valid) {
-            setFieldValue('cups_valid', false)
-          }
+          setFieldValue('cups_valid', false)
         })
         .finally(() => {
           setLoading(false)
