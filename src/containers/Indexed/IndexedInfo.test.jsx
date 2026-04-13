@@ -1,11 +1,12 @@
-import IndexedInfo from './IndexedInfo'
 import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest';
+import { vi } from 'vitest'
+
+import IndexedInfo from './IndexedInfo'
 
 vi.mock('react-i18next', async () => {
-  const i18n = await import('../../../tests/__mocks__/i18n')
+  const i18n = await import('../../tests/__mocks__/i18n')
   return i18n.default
-});
+})
 
 describe('Test the correctly render', () => {
   const mockTitle = 'MOCK TITLE'
