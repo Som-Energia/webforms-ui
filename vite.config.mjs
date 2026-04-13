@@ -16,6 +16,8 @@ const vendorChunks = [
       '/node_modules/react/',
       '/node_modules/react-dom/',
       '/node_modules/react-router',
+      '/node_modules/scheduler/',
+      '@remix-run',
     ],
   },
   {
@@ -82,7 +84,7 @@ export default defineConfig(({ mode, command }) => {
     plugins: [
       react(),
       svgr(),
-      command === 'build' && eslint({ emitWarning: false, failOnError: true }),
+      eslint({ build: true, emitWarning: false }),
     ],
     build: {
       outDir: 'forms',
