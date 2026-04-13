@@ -4,7 +4,7 @@ import eslint from 'vite-plugin-eslint'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import pkg from './package.json'
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
   // but, by default, it ignores that parameter from .env files
   // (not VITE_ prefixed).
@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
       react(),
       splitVendorChunkPlugin(),
       svgr(),
-      eslint({ emitWarning: false, failOnError: true })
+      command === 'build' && eslint({ emitWarning: false, failOnError: true }),
     ],
     build: {
       outDir: 'forms',
