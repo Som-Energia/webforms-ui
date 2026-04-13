@@ -14,6 +14,8 @@
     "cypress": "TZ=Europe/Madrid cypress open",
     "cypress:smoke": "TZ=Europe/Madrid cypress run --env configFile=production",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
     "i18n-lint": "./scripts/lint-i18n.sh",
     "preview": "vite preview"
@@ -82,6 +84,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "i18next-parser": "^9.3.0",
     "jsdom": "^24.0.0",
+    "prettier": "^2.8.8",
     "prettier-config-standard": "^5.0.0",
     "vite": "^5.2.11",
     "vite-plugin-environment": "^1.1.3",
