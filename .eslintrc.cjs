@@ -6,7 +6,8 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
-    'plugin:cypress/recommended'
+    'plugin:cypress/recommended',
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', 'forms', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
@@ -15,7 +16,7 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true }
+      { allowConstantExport: true },
     ],
     'react/prop-types': 'off',
     eqeqeq: ['error', 'always'],
@@ -35,9 +36,9 @@ module.exports = {
           // Externos (resto)
           ['^@?\\w'],
           // Internos
-          ['^\\.\\./', '^\\./', '^\\.']
-        ]
-      }
+          ['^\\.\\./', '^\\./', '^\\.'],
+        ],
+      },
     ],
     'simple-import-sort/exports': 'error',
     'no-unused-vars': 'off',
@@ -48,8 +49,8 @@ module.exports = {
         vars: 'all',
         varsIgnorePattern: '^_',
         args: 'after-used',
-        argsIgnorePattern: '^_'
-      }
-    ]
-  }
+        argsIgnorePattern: '^_',
+      },
+    ],
+  },
 }
