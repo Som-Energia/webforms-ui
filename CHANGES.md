@@ -1,9 +1,10 @@
 # Change Log
 
-## unreleased
+## 7.1.2 2026-04-13
 
 - REF: Add inherit colors for typography
 - FIX: add validation for proxynif
+- FIX: add flag for warning in modify contract form
 
 ## 7.1.1 2026-04-02
 
