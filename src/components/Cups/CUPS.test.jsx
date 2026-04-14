@@ -43,6 +43,7 @@ const CupsWrapperComponent = ({ cupsNumber, setValues }) => {
         values={{ cups: cupsNumber }}
         setValues={setValues}
         errors={errors}
+        setFieldValue={() => {}}
         touched={{ cups: true }}
         setFieldError={setFieldError}
       />

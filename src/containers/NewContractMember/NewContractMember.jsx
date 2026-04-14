@@ -139,6 +139,7 @@ const NewContractMemberForm = (props) => {
 
   const initialValues = useMemo(() => ({
     cups: '',
+    cups_valid: false,
     has_member: undefined,
     member_is_holder: undefined,
     has_light: undefined,

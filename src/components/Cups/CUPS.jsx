@@ -14,11 +14,11 @@ const CUPS = (props) => {
     values,
     errors,
     touched,
-    setValues,
-    setFieldValue,
-    setFieldError,
-    setFieldTouched,
-    setMaxStepNum
+    setValues = () => {},
+    setFieldValue = () => {},
+    setFieldError = () => {},
+    setFieldTouched = () => {},
+    setMaxStepNum = () => {}
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
@@ -27,28 +27,33 @@ const CUPS = (props) => {
     const cups = values.cups
     if (cups?.length >= 20 && cups?.length <= 22) {
       setLoading(true)
+      setFieldValue('cups_valid', false)
       checkCups(cups)
         .then((response) => {
+          const { status, knowledge_of_distri, tariff_name } = response?.data || {}
+          const new_contract = ['new', 'inactive'].includes(status)
           setValues({
             ...values,
             ...{
-              new_contract:
-                response?.data?.status === 'new' ||
-                response?.data?.status === 'inactive',
-              knowledge_of_distri: response?.data?.knowledge_of_distri,
-              tariff_name: response?.data?.tariff_name
+              cups_valid: true,
+              new_contract,
+              knowledge_of_distri,
+              tariff_name
             }
           })
-          setMaxStepNum(
-            response?.data?.status === 'new' ||
-              response?.data?.status === 'inactive'
-              ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
-              : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
-          )
-          setLoading(false)
+          if (setMaxStepNum) {
+            setMaxStepNum(
+              new_contract
+                ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
+                : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
+            )
+          }
         })
         .catch(() => {
           setFieldError('cups', t('ERROR_INVALID_FIELD'))
+          setFieldValue('cups_valid', false)
+        })
+        .finally(() => {
           setLoading(false)
         })
     }
@@ -91,7 +96,7 @@ const CUPS = (props) => {
       touched={touched?.cups}
       value={values?.cups}
       error={
-        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri
+        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri || errors?.cups_valid
       }
       isLoading={loading}
       required={true}
