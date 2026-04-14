@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
-    "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
+    "build": "npm run lint:todos; export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
     "build:pre": "npm run build -- --mode=pre",
@@ -14,6 +14,7 @@
     "cypress": "TZ=Europe/Madrid cypress open",
     "cypress:smoke": "TZ=Europe/Madrid cypress run --env configFile=production",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:todos": "./scripts/todos.sh",
     "lint:fix": "eslint . --ext js,jsx --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

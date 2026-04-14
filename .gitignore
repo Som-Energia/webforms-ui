@@ -39,3 +39,6 @@ gurbPersonaldata.json
 
 # bun
 bun*
+
+# ESLint cache
+.eslintcache
