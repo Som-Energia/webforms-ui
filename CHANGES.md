@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.1.3 2026-04-14
+
+- FIX: CUPS validation on Contract Form
+
 ## 7.1.2 2026-04-13
 
 - REF: Add inherit colors for typography
