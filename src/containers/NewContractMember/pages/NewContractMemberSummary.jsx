@@ -252,8 +252,8 @@ const NewContractMemberSummary = (props) => {
       }
 
   const process = contractProcess(
-    values?.has_light == 'light-on',
-    values?.previous_holder == 'previous-holder-yes'
+    values?.has_light === 'light-off',
+    values?.previous_holder === 'previous-holder-yes'
   )
   const processType = {
     icon: <InvoiceIcon />,

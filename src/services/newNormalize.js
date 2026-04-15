@@ -56,8 +56,8 @@ export const normalizeSelfconsumption = (selfconsumption) => {
   return data
 }
 
-export const contractProcess = (has_light, same_holder) => {
-  if (!has_light) {
+export const contractProcess = (light_off, same_holder) => {
+  if (light_off) {
     return 'A3'
   } else if (same_holder) {
     return 'C1'
@@ -81,8 +81,8 @@ export const newNormalizeContract = (data, gurbCode) => {
     powers.push(data.contract.power[`power${i}`])
   }
   const process = contractProcess(
-        data.has_light == 'light-on',
-        data.previous_holder == 'previous-holder-yes'
+        data.has_light === 'light-off',
+        data.previous_holder === 'previous-holder-yes'
       )
 
   const finalContract = {
