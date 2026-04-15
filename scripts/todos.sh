@@ -6,7 +6,14 @@ RED=$(printf '\033[0;31m')
 BOLD=$(printf '\033[1m')
 RESET=$(printf '\033[0m')
 
-results=$(grep -rn --include='*.js' --include='*.jsx' -E '(TODO|FIXME)' src)
+if [ -z "$1" ]; then
+  echo "Usage: $0 <directory>" >&2
+  exit 1
+fi
+
+DIR=$1
+
+results=$(grep -rn --include='*.js' --include='*.jsx' -E '(TODO|FIXME)' "$DIR")
 
 if [ -z "$results" ]; then
   echo -e "${CYAN}No TODO/FIXME comments found.${RESET}"
