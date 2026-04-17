@@ -1,113 +1,63 @@
 import react from '@vitejs/plugin-react-swc'
-import { defineConfig, loadEnv } from 'vite'
 import eslint from 'vite-plugin-eslint2'
 import svgr from 'vite-plugin-svgr'
+import {
+  createAppConfig,
+  createManualChunks,
+} from '@somenergia/frontend-config/vite'
 
 import pkg from './package.json'
 
-/**
- * Splitting vendor chunks manually
- */
-const vendorChunks = [
-  { chunk: 'vendor-mui', includes: ['@mui', '@emotion'] },
-  {
-    chunk: 'vendor-react',
-    includes: [
-      '/node_modules/react/',
-      '/node_modules/react-dom/',
-      '/node_modules/react-router',
-      '/node_modules/scheduler/',
-      '@remix-run',
-    ],
-  },
-  {
-    chunk: 'vendor-charts',
-    includes: [
-      '/recharts/',
-      '/d3-',
-      '/react-smooth/',
-      '/recharts-scale/',
-      '/decimal.js-light/',
-    ],
-  },
-  { chunk: 'vendor-phone', includes: ['libphonenumber-js'] },
-  { chunk: 'vendor-i18n', includes: ['i18next', 'react-i18next'] },
-  { chunk: 'vendor-forms', includes: ['formik', '/yup/'] },
-  { chunk: 'vendor-dnd', includes: ['@dnd-kit'] },
-  { chunk: 'vendor-lodash', includes: ['/lodash'] },
-  { chunk: 'vendor-stdnum', includes: ['stdnum'] },
-  { chunk: 'vendor-somenergia', includes: ['@somenergia'] },
-]
-
-function manualChunks(id) {
-  if (!id.includes('node_modules')) return
-  const match = vendorChunks.find(({ includes }) =>
-    includes.some((pkg) => id.includes(pkg)),
-  )
-  return match ? match.chunk : 'vendor'
-}
-
-export default defineConfig(({ mode, command }) => {
+export default createAppConfig((mode) => {
+  // export default defineConfig(({ mode, command }) => {
   // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
   // but, by default, it ignores that parameter from .env files
   // (not VITE_ prefixed).
   // Read it explicitly to have a mode dependant base.
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), 'BASE_URL') }
-
   const ovOptions =
     mode === 'ov'
       ? {
           entryFileNames: 'assets/main.js',
-          chunkFileNames: (fileInfo) => {
-            if (fileInfo.name.includes('vendor')) {
-              return 'assets/vendor.js' // Explicitly name the entry JS file
-            }
-            return 'assets/[name]-[hash].js'
+          chunkFileNames: ({ name }) => {
+            return name.includes('vendor')
+              ? 'assets/vendor.js' // Explicitly name the entry JS file
+              : 'assets/[name]-[hash].js'
           },
-          assetFileNames: (assetInfo) => {
-            if (
-              assetInfo.name.endsWith('.css') &&
-              assetInfo.name.includes('index')
-            ) {
-              return 'assets/index.css' // Explicitly name the CSS file
-            }
-            return 'assets/[name]-[hash].[ext]'
+          assetFileNames: ({ name }) => {
+            return name.endsWith('.css') && name.includes('index')
+              ? 'assets/index.css' // Explicitly name the CSS file
+              : 'assets/[name]-[hash].[ext]'
           },
         }
       : {}
 
   return {
-    base: process.env.BASE_URL,
     resolve: {
       dedupe: Object.keys(pkg.dependencies),
     },
-    plugins: [
-      react(),
-      svgr(),
-      eslint({ build: true, emitWarning: false }),
-    ],
+    plugins: [react(), svgr(), eslint({ build: true, emitWarning: false })],
     build: {
       outDir: 'forms',
       manifest: 'asset-manifest.json',
       rollupOptions: {
         output: {
           ...ovOptions,
-          manualChunks,
+          manualChunks: createManualChunks([
+            { chunk: 'vendor-phone', includes: ['libphonenumber-js'] },
+            { chunk: 'vendor-forms', includes: ['formik', '/yup/'] },
+            { chunk: 'vendor-dnd', includes: ['@dnd-kit'] },
+            { chunk: 'vendor-lodash', includes: ['/lodash'] },
+            { chunk: 'vendor-stdnum', includes: ['stdnum'] },
+          ]),
         },
       },
-      target: 'es2020',
     },
     server: {
-      open: true,
-      port: 3000,
       deps: {
         inline: ['@emotion/styled', '@emotion/react'],
       },
     },
     test: {
-      globals: true,
-      environment: 'jsdom',
-      css: true,
       setupFiles: './src/tests/setupTests.js',
       coverage: {
         reporter: ['text', 'json', 'html'],
