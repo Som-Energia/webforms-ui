@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react-swc'
-import eslint from 'vite-plugin-eslint2'
+// import eslint from 'vite-plugin-eslint2'
 import svgr from 'vite-plugin-svgr'
 import {
   createAppConfig,
@@ -35,7 +35,7 @@ export default createAppConfig((mode) => {
     resolve: {
       dedupe: Object.keys(pkg.dependencies),
     },
-    plugins: [react(), svgr(), eslint({ build: true, emitWarning: false })],
+    plugins: [react(), svgr() /*eslint({ build: true, emitWarning: false })*/],
     build: {
       outDir: 'forms',
       manifest: 'asset-manifest.json',
