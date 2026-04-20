@@ -58,6 +58,7 @@ export default createAppConfig((mode) => {
       },
     },
     test: {
+      exclude: ['**/node_modules/**', '**/cypress/**'],
       setupFiles: './src/tests/setupTests.js',
       coverage: {
         reporter: ['text', 'json', 'html'],
@@ -67,6 +68,7 @@ export default createAppConfig((mode) => {
           '**/coverage/**',
           '**/scripts/**',
           '**/public/**',
+          '**/cypress/**',
         ],
       },
     },
