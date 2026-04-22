@@ -1,6 +1,8 @@
+import React from 'react'
+
 import Box from '@mui/material/Box'
 
-const Card = ({ children, className, sx }) => {
+const Card = ({ variant = 'h1', children, className, sx }) => {
 
   return <Box sx={{
     ...sx,

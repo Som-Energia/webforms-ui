@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
@@ -19,6 +19,7 @@ import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 function RefuseD1({
   prevStep,
   handlePost,
+  handleRefuseClick,
   handleStepChanges,
   params
 }) {

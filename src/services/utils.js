@@ -32,8 +32,7 @@ export const contributionParams = {
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
     (key) =>
-      (data[key] === null ||
-        data[key] === undefined ||
+      (data[key] == null ||
         data[key] === '' ||
         (Array.isArray(data[key]) && !data[key].length)) &&
       delete data[key]
@@ -524,7 +523,7 @@ export const testPowerForPeriods = (
     if (limit.match('min')) {
       inLimit = values[attr] >= rates[rate][limit]?.power
     } else {
-      inLimit = rate === '2.0TD'
+      inLimit = rate == '2.0TD'
         ? values[attr] <= rates[rate][limit]?.power
         : true
     }
@@ -566,7 +565,7 @@ export const newTestPowerForPeriods = (
     if (limit.match('min')) {
       inLimit = values[attr] >= newRates[rate][limit]?.power
     } else {
-      inLimit = rate === 'power-lower-15kw'
+      inLimit = rate == 'power-lower-15kw'
         ? values[attr] <= newRates[rate][limit]?.power
         : true
     }
@@ -687,7 +686,6 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
     return error(t('CAU_INVALID_BORDER_POINT'))
 
   const installation = value.slice(22, 26)
-  // eslint-disable-next-line
   if (installation && !/^\A\d{0,3}$/.test(installation))
     return error(t('CAU_INVALID_INSTALLATION'))
 

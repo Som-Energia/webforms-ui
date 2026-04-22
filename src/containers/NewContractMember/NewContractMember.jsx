@@ -262,12 +262,12 @@ const NewContractMemberForm = (props) => {
   ]
 
   const setValidationSchemaAndSteps = (has_member) => {
-    if (has_member === 'member-off') {
+    if (has_member == 'member-off') {
       setValidationSteps(validationSchemasNewMember)
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setFormStepsName('NEW_MEMBER_CONTRACT_FORM_SUBSTEPS')
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member === 'member-on' || has_member === 'member-link' || has_member === 'campaign-offer') {
+    } else if (has_member == 'member-on' || has_member == 'member-link' || has_member == 'campaign-offer') {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setFormStepsName('NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS')
@@ -380,7 +380,7 @@ const NewContractMemberForm = (props) => {
 
     const trackProps = { ...props, sendTrackEvent }
 
-    if (values?.has_member === 'member-off') {
+    if (values?.has_member == 'member-off') {
       if (activeStep === 1) {
         return <MemberIdentifier {...props} />
       } else if (activeStep === 2) {
@@ -514,7 +514,7 @@ const NewContractMemberForm = (props) => {
             <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
           ) : (
             <>
-              {activeStep === 0 ? (
+              {activeStep == 0 ? (
                 <NewContractMemberQuestion
                   formikProps={formikProps}
                   sendTrackEvent={sendTrackInitEvent}
@@ -562,7 +562,7 @@ const NewContractMemberForm = (props) => {
                             }}
                             dangerouslySetInnerHTML={{
                               __html: !error
-                                ? formikProps.values.has_member === 'member-off'
+                                ? formikProps.values.has_member == 'member-off'
                                   ? t('NEW_MEMBER_CONTRACT_SUCCESS_DESC')
                                   : t('NEW_CONTRACT_SUCCESS_DESC')
                                 : t('NEW_MEMBER_CONTRACT_ERROR_DESC')

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
@@ -54,6 +55,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
         {({
           values,
           errors,
+          touched,
           isValid,
           handleSubmit,
           setFieldValue

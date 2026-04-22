@@ -19,7 +19,7 @@ export default function AddressAutocompletedField({
   required = false,
   error = false,
   touched = false,
-  onBlur = () => { }
+  onBlur = () => {}
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
@@ -54,7 +54,7 @@ export default function AddressAutocompletedField({
     }, 350)
   }, [inputValue, sessionTokenRef])
 
-  const handleSuggestionSelected = (_, newValue) => {
+  const handleSuggestionSelected = (event, newValue) => {
     if (!newValue) {
       onChange(null)
       setInputValue('')
@@ -91,7 +91,7 @@ export default function AddressAutocompletedField({
       loadingText={t('AUTOCOMPLETE_LOADING_TEXT')}
       noOptionsText={t('AUTOCOMPLETE_WITHOUT_OPTIONS')}
       onChange={handleSuggestionSelected}
-      onInputChange={(_, newInputValue, reason) => {
+      onInputChange={(event, newInputValue, reason) => {
         if (reason === 'input') {
           setInputValue(newInputValue)
         } else if (reason === 'clear') {

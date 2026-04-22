@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -12,12 +12,13 @@ import { useSyncLanguage } from '../../../../hooks/useTranslateOptions'
 
 
 const GurbRequirementsTariffSelection = (props) => {
+  const { i18n } = useTranslation()
   const { language, gurbCode } = useParams()
   const { t } = useTranslation()
-  const { setFieldValue } = props
+  const { values, setFieldValue } = props
   const [selectedOption, setSelectedOption] = useState(null)
 
-
+  
   const options = [
     {
       id: 'periods-tariff',

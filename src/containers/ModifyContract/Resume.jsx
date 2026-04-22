@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -15,6 +15,8 @@ import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
 
 export default function ModifyResume({
   prevStep,
+  nextStep,
+  handleStepChanges,
   postSubmit,
   params
 }) {
@@ -110,7 +112,7 @@ export default function ModifyResume({
                 {[...Array(4).keys()].map((item) => {
                   const num = item + 3
                   return (
-                    <Grid item key={num}>
+                    <Grid item>
                       <Typography
                         data-cy={`power${num}`}
                         variant="body1"

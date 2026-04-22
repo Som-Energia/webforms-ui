@@ -8,6 +8,7 @@ import AlertTitle from '@mui/material/AlertTitle'
 
 import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import FormHelperText from '@mui/material/FormHelperText'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -17,6 +18,7 @@ import Paper from '@mui/material/Paper'
 import Switch from '@mui/material/Switch'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import Uploader from '../../components/OldComponents/Uploader'
 import PowerInputs from './PowerInputs'
@@ -330,7 +332,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                     name="moreThan15Kw"
                     condensed
                     question={t('POWER_TO_CONTRACT')}
-                    onChange={() =>
+                    onChange={(event) =>
                       handleChangeMoreThan15(values, setFieldValue)
                     }
                     value={values.moreThan15Kw}

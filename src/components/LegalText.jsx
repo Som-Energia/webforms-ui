@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Typography from '@mui/material/Typography'
 
 import TextLoader from './TextLoader'

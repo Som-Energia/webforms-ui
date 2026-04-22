@@ -1,3 +1,4 @@
+import React from 'react'
 import GenerationMemberIdentifier from './GenerationMemberIdentifier'
 import {
   render,
@@ -6,12 +7,10 @@ import {
   getByText
 } from '@testing-library/react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', async () => {
-  const i18n = await import('../../../tests/__mocks__/i18n')
-  return i18n.default
-});
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
 
 describe('Generation Form Review', () => {
   const mockValues = {
