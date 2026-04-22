@@ -9,11 +9,6 @@ import {
 import pkg from './package.json'
 
 export default createAppConfig((mode) => {
-  // export default defineConfig(({ mode, command }) => {
-  // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
-  // but, by default, it ignores that parameter from .env files
-  // (not VITE_ prefixed).
-  // Read it explicitly to have a mode dependant base.
   const ovOptions =
     mode === 'ov'
       ? {
