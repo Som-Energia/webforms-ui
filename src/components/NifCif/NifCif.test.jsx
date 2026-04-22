@@ -20,7 +20,7 @@ vi.mock('../../services/api', () => ({
 
 const webFormsTheme = WebFormsTheme()
 
-const renderComponent = async (nifCifNumber, onChangeValueHandler) => {
+const renderComponent = async (nifCifNumber, useEffectHandler) => {
   await initI18n({
     DNI_EXIST: 'DNI exists',
     FILL_NIF: 'NIF is invalid',
@@ -30,12 +30,12 @@ const renderComponent = async (nifCifNumber, onChangeValueHandler) => {
   return render(
     <NifCifWrapperComponent
       nifCifNumber={nifCifNumber}
-      onChangeValue={onChangeValueHandler}
+      useEffectHandler={useEffectHandler}
     />
   )
 }
 
-const NifCifWrapperComponent = ({ nifCifNumber, onChangeValue }) => {
+const NifCifWrapperComponent = ({ nifCifNumber, useEffectHandler }) => {
   const [values, setValues] = useState({ owner: { nif: nifCifNumber } })
   const [errors, setError] = useState({ nifcif: null })
   const setFieldError = (fieldName, error) => {
@@ -47,10 +47,8 @@ const NifCifWrapperComponent = ({ nifCifNumber, onChangeValue }) => {
   }
 
   useEffect(() => {
-    if (onChangeValue) {
-      onChangeValue(values)
-    }
-  }, [values, onChangeValue])
+    useEffectHandler && useEffectHandler(values)
+  }, [values, useEffectHandler])
 
   return (
     <ThemeProvider theme={webFormsTheme}>

@@ -1,9 +1,12 @@
+import React from 'react'
+
 import { useTranslation } from 'react-i18next'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
@@ -39,7 +42,7 @@ export default function Contact({
           ...params
         }}
         validationSchema={ContactSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { setSubmitting }) => {
           handleStepChanges({ contact: values })
           nextStep()
         }}>
@@ -50,6 +53,7 @@ export default function Contact({
           handleChange,
           handleBlur,
           handleSubmit,
+          isSubmitting
         }) => (
           <form onSubmit={handleSubmit} noValidate>
             <Box mx={1} mt={1} mb={1}>

@@ -1,3 +1,4 @@
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
@@ -12,7 +13,7 @@ import { useSyncLanguage } from '../hooks/useTranslateOptions'
 const Success = (props) => {
   const { result, description, title, showHeader, subtitle } = props
   const { language } = useParams()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   useSyncLanguage(language)
 

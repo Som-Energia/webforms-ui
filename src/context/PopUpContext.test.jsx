@@ -22,10 +22,7 @@ const ContextConsumer = () => {
 
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', async () => {
-  const i18n = await import('../tests/__mocks__/i18n')
-  return i18n.default
-});
+vi.mock('react-i18next', () => require('../tests/__mocks__/i18n'));
 
 describe('PopUp Context', () => {
   const getById = queryByAttribute.bind(null, 'id')

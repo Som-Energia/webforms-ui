@@ -1,3 +1,4 @@
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -30,7 +31,7 @@ function BecomeMember(props) {
 
   return (
     <>
-      <StepHeader title={isMemberMandatoryForHolderchange ? t('BECOME_MEMBER_TITLE') : t('BECOME_MEMBER_QUESTION')} />
+      <StepHeader title={ isMemberMandatoryForHolderchange ? t('BECOME_MEMBER_TITLE') : t('BECOME_MEMBER_QUESTION')} />
       <Box className="step-body">
         <Typography
           variant="body1"
@@ -39,7 +40,7 @@ function BecomeMember(props) {
         />
         <Box mt={3} mb={4}>
           <Chooser
-            question={isMemberMandatoryForHolderchange ? t('BECOME_MEMBER_QUESTION') : ''}
+            question={ isMemberMandatoryForHolderchange ? t('BECOME_MEMBER_QUESTION') : ''}
             onChange={handleChange}
             value={props.values.member.become_member}
             options={[

@@ -1,11 +1,15 @@
 import { useTranslation } from 'react-i18next'
+
 import Typography from '@mui/material/Typography'
+
 import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
+
 import { ReceiptIcon } from '../../../data/icons/Icons'
+
 import Grid from '@mui/material/Grid'
 
-const NewContractHolder = (props) => {
+const newContractHolder = (props) => {
   const { values, setFieldValue } = props
   const { t } = useTranslation()
 
@@ -34,21 +38,21 @@ const NewContractHolder = (props) => {
           {t('HOLDER_IDENTIFIER_TITLE')}
         </Typography>
       </Grid>
-      <>
-        <Grid item xs={12}>
-          <InputTitle text={t('PREVIUOS_HOLDER_TITLE')} required={true} />
-        </Grid>
-        <Grid item xs={12}>
-          <Chooser
-            name="holder-question"
-            options={options}
-            value={values.previous_holder}
-            handleChange={handleHolderQuestion}
-          />
-        </Grid>
-      </>
+        <>
+          <Grid item xs={12}>
+            <InputTitle text={t('PREVIUOS_HOLDER_TITLE')} required={true} />
+          </Grid>
+          <Grid item xs={12}>
+            <Chooser
+              name="holder-question"
+              options={options}
+              value={values.previous_holder}
+              handleChange={handleHolderQuestion}
+            />
+          </Grid>
+        </>
     </Grid>
   )
 }
 
-export default NewContractHolder
+export default newContractHolder

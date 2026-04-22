@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
 
@@ -44,7 +44,10 @@ const CancellationDetails = (props) => {
         setAvailableDates(dates)
         setIsLoading(false)
       })
-      .catch(() => {
+      .catch((error) => {
+        const errorStatus = error?.response?.data?.state
+          ? error?.response?.data?.state
+          : false
         setAvailableDates([])
         setIsLoading(false)
       })

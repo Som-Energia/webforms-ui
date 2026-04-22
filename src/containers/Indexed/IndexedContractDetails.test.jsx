@@ -1,11 +1,9 @@
 import IndexedContractDetails from './IndexedContractDetails'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', async () => {
-  const i18n = await import('../../tests/__mocks__/i18n')
-  return i18n.default
-});
+vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
 
 describe('Test the correctly render', () => {
   const mockData = {

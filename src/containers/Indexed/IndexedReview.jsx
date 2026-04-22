@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import IndexedReviewData from './IndexedReviewData'
 
 const IndexedReview = (props) => {

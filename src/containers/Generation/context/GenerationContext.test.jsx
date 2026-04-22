@@ -2,18 +2,16 @@ import { screen, render, queryByAttribute } from '@testing-library/react'
 import GenerationContext, {
   GenerationContextProvider
 } from './GenerationContext'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import Button from '@mui/material/Button'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest';
 
-vi.mock('react-i18next', async () => {
-  const i18n = await import('../../../tests/__mocks__/i18n')
-  return i18n.default
-});
+vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+
 
 const ContextConsumer = () => {
-  const { assignments, investments, changeAssigmentPriority, resetAssignments, getPriority } = useContext(GenerationContext)
+  const { assignments, investments, changeAssigmentPriority, resetAssignments, getPriority  } = useContext(GenerationContext)
   return (
     <>
       {assignments.map((assignment) => (
@@ -24,11 +22,11 @@ const ContextConsumer = () => {
       ))}
 
       <p id={'first-priority'}>{getPriority(0).value}</p>
-
+      
       {/*CAHNGE 0 FOR 1 ASSIGNMENTS OF mockAssignmentRows*/}
-      <Button id={'change-priority-btn'} onClick={() => changeAssigmentPriority(assignments[0], assignments[1])} />
+      <Button id={'change-priority-btn'} onClick={() => changeAssigmentPriority(assignments[0],assignments[1])} />
       <Button id={'reset-priority-btn'} onClick={() => resetAssignments()} />
-
+      
     </>
   )
 }
@@ -52,8 +50,8 @@ describe('Generation Context', () => {
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}
         outsideAssignmentsJSON={mockOutsideAssignmentRows}>
-        <ContextConsumer />
-      </GenerationContextProvider>
+          <ContextConsumer />
+        </GenerationContextProvider>
     )
 
     const assignmentElement = getById(dom.container, mockAssignmentRows[0].contract)
@@ -67,14 +65,14 @@ describe('Generation Context', () => {
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}
         outsideAssignmentsJSON={mockOutsideAssignmentRows}>
-        <ContextConsumer />
-      </GenerationContextProvider>
+          <ContextConsumer />
+        </GenerationContextProvider>
     )
 
     const changeButton = getById(dom.container, "change-priority-btn")
     await userEvent.click(changeButton)
-    expect(screen.getByText(mockAssignmentRows[0].contract + " - " + mockAssignmentRows[1].priority)).toBeInTheDocument()
-    expect(screen.getByText(mockAssignmentRows[1].contract + " - " + mockAssignmentRows[0].priority)).toBeInTheDocument()
+    expect(screen.getByText(mockAssignmentRows[0].contract + " - " +  mockAssignmentRows[1].priority)).toBeInTheDocument()
+    expect(screen.getByText(mockAssignmentRows[1].contract + " - " +  mockAssignmentRows[0].priority)).toBeInTheDocument()
   })
 
   test('should change the priority of one assignment and then reset', async () => {
@@ -83,19 +81,19 @@ describe('Generation Context', () => {
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}
         outsideAssignmentsJSON={mockOutsideAssignmentRows}>
-        <ContextConsumer />
-      </GenerationContextProvider>
+          <ContextConsumer />
+        </GenerationContextProvider>
     )
 
     const changeButton = getById(dom.container, "change-priority-btn")
     await userEvent.click(changeButton)
-    expect(screen.getByText(mockAssignmentRows[0].contract + " - " + mockAssignmentRows[1].priority)).toBeInTheDocument()
-    expect(screen.getByText(mockAssignmentRows[1].contract + " - " + mockAssignmentRows[0].priority)).toBeInTheDocument()
+    expect(screen.getByText(mockAssignmentRows[0].contract + " - " +  mockAssignmentRows[1].priority)).toBeInTheDocument()
+    expect(screen.getByText(mockAssignmentRows[1].contract + " - " +  mockAssignmentRows[0].priority)).toBeInTheDocument()
 
     const resetButton = getById(dom.container, "reset-priority-btn")
     await userEvent.click(resetButton)
-    expect(screen.getByText(mockAssignmentRows[0].contract + " - " + mockAssignmentRows[0].priority)).toBeInTheDocument()
-    expect(screen.getByText(mockAssignmentRows[1].contract + " - " + mockAssignmentRows[1].priority)).toBeInTheDocument()
+    expect(screen.getByText(mockAssignmentRows[0].contract + " - " +  mockAssignmentRows[0].priority)).toBeInTheDocument()
+    expect(screen.getByText(mockAssignmentRows[1].contract + " - " +  mockAssignmentRows[1].priority)).toBeInTheDocument()
 
   })
 
@@ -105,8 +103,8 @@ describe('Generation Context', () => {
         assignmentsJSON={mockAssignmentRows}
         investmentsJSON={mockInvestmentRows}
         outsideAssignmentsJSON={mockOutsideAssignmentRows}>
-        <ContextConsumer />
-      </GenerationContextProvider>
+          <ContextConsumer />
+        </GenerationContextProvider>
     )
 
     expect(screen.getByText("GENERATION_MAIN_PRIORITY")).toBeInTheDocument()

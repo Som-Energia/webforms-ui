@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -106,8 +106,9 @@ const Review = (props) => {
               )}
               <ReviewField
                 label={t('ADDRESS')}
-                value={`${values?.member?.address}, ${values?.member?.number} ${values?.member?.floor || ''
-                  } ${values?.member?.door || ''}`}
+                value={`${values?.member?.address}, ${values?.member?.number} ${
+                  values?.member?.floor || ''
+                } ${values?.member?.door || ''}`}
               />
               <ReviewField
                 label={t('CITY')}
@@ -156,7 +157,7 @@ const Review = (props) => {
                 label={t('CONTRIBUTION_TOTAL_AMOUNT')}
                 value={`${new Intl.NumberFormat('ca').format(
                   parseInt(NEW_MEMBER_CONTRIB_AMOUNT) +
-                  parseInt(values?.payment?.amount)
+                    parseInt(values?.payment?.amount)
                 )} €`}
               />
             </>
