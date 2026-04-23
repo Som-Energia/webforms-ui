@@ -23,7 +23,6 @@ public/webforms-config.js
 
 yarn.lock
 
-package-lock.json
 dist
 
 # python
