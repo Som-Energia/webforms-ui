@@ -33,6 +33,7 @@ const Maintenance = () => {
               color: '#0B2E34',
               fontSize: '60px',
               fontWeight: 'bold',
+              lineHeight: '70px',
             }}>
             {t('MAINTENANCE_TEXT1')}
           </div>
