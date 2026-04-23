@@ -69,9 +69,6 @@ describe("Check the utils functions", () => {
 
 describe("Check Contract Form (normalize function)", () => {
   test("Normalize Contract data (base)", () => {
-    console.log("expected", contractCases.base.normalizedData)
-    console.log("actual", normalizeContract(contractCases.base.entryValues))
-
     expect(normalizeContract(contractCases.base.entryValues)).toStrictEqual(
       contractCases.base.normalizedData,
     )

@@ -37,7 +37,8 @@ export const contributionParams = {
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
     (key) =>
-      (!data[key] ||
+      (data[key] === undefined ||
+        data[key] === null ||
         data[key] === "" ||
         (Array.isArray(data[key]) && !data[key].length)) &&
       delete data[key],
@@ -673,7 +674,9 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   value = value.replaceAll(" ", "").toUpperCase()
 
   // When empty fail but do not show message yet
-  if (!value) return error()
+  if (!value) {
+    return error()
+  }
 
   if (value.slice(0, 2) !== "ES".slice(0, value.length))
     return error(t("CAU_INVALID_PREFIX"))
@@ -690,18 +693,22 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
   if (
     matchingCups &&
     matchingCups.slice(0, cupsWithoutBorder.length) !== cupsWithoutBorder
-  )
+  ) {
     return error(t("CAU_NOT_MATCHING_CUPS"))
+  }
 
   const borderPoint = value.slice(20, 22)
-  if (borderPoint && !/^\d[A-Za-z]{0,1}$/.test(borderPoint))
+  if (borderPoint && !/^\d[A-Z]{0,1}$/.test(borderPoint))
     return error(t("CAU_INVALID_BORDER_POINT"))
 
   const installation = value.slice(22, 26)
-  if (installation && !/^\d{0,3}$/.test(installation))
+  if (installation && !/^A\d{0,3}$/.test(installation)) {
     return error(t("CAU_INVALID_INSTALLATION"))
+  }
 
-  if (value.length !== 26) return error(t("CAU_INVALID_LENGTH"))
+  if (value.length !== 26) {
+    return error(t("CAU_INVALID_LENGTH"))
+  }
 
   return { value, valid: true }
 }
