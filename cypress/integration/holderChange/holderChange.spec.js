@@ -398,7 +398,7 @@ describe('Holder Change', () => {
 
         cy.get('[data-cy=submit]').click()
 
-        cy.contains('Este proceso puede tardar unos minutos', {
+        cy.contains('Estamos gestionando tu solicitud; esto puede tardar unos minutos.', {
           matchCase: false
         })
       })

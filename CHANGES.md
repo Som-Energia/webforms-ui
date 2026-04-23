@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.1.5 2026-04-21
+
+- Remove unused endpoints
+
 ## 7.1.4 2026-04-15
 
 - FIX: Url of contract form (eusk)
