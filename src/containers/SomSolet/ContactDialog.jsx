@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import TextField from '@mui/material/TextField'
-import MailOutlinedIcon from '@mui/icons-material/MailOutline';
+import MailOutlinedIcon from "@mui/icons-material/MailOutline"
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogTitle from "@mui/material/DialogTitle"
+import TextField from "@mui/material/TextField"
 
 const ContactDialog = (props) => {
   const { t } = useTranslation()
 
   const { open, handleClose, handleSend, isSending } = props
 
-  const [subject, setSubject] = useState('')
-  const [message, setMessage] = useState('')
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
 
   return (
     <Dialog
@@ -24,21 +24,21 @@ const ContactDialog = (props) => {
       aria-labelledby="form-dialog-contact">
       <DialogTitle
         sx={{
-          '& h2': {
-            fontWeight: '600',
-            display: 'flex',
-            alignContent: 'space-between',
-            alignItems: 'center'
-          }
+          "& h2": {
+            fontWeight: "600",
+            display: "flex",
+            alignContent: "space-between",
+            alignItems: "center",
+          },
         }}>
         <MailOutlinedIcon fontSize="normal" />
-        <span>&nbsp; {t('INSTALLER_CONTACT')} </span>
+        <span>&nbsp; {t("INSTALLER_CONTACT")} </span>
       </DialogTitle>
       <DialogContent>
         <TextField
           id="subject"
           margin="normal"
-          label={t('SUBJECT')}
+          label={t("SUBJECT")}
           type="text"
           variant="outlined"
           fullWidth
@@ -48,7 +48,7 @@ const ContactDialog = (props) => {
         <TextField
           margin="normal"
           id="message"
-          label={t('WRITE_MESSAGE')}
+          label={t("WRITE_MESSAGE")}
           type="text"
           multiline
           rows={8}
@@ -58,16 +58,16 @@ const ContactDialog = (props) => {
           onChange={(event) => setMessage(event.target.value)}
         />
       </DialogContent>
-      <DialogActions sx={{ margin: '16px' }}>
+      <DialogActions sx={{ margin: "16px" }}>
         <Button onClick={handleClose} variant="contained">
-          {t('CLOSE')}
+          {t("CLOSE")}
         </Button>
         <Button
           onClick={() => handleSend({ subject, message })}
           variant="contained"
           color="primary"
           disabled={isSending}>
-          {t('SEND')}
+          {t("SEND")}
         </Button>
       </DialogActions>
     </Dialog>

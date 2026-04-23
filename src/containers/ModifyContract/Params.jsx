@@ -1,63 +1,60 @@
-import React from 'react'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { useTranslation } from 'react-i18next'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
+import Alert from "@mui/material/Alert"
+import AlertTitle from "@mui/material/AlertTitle"
+import Badge from "@mui/material/Badge"
+import Box from "@mui/material/Box"
+import Divider from "@mui/material/Divider"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormHelperText from "@mui/material/FormHelperText"
+import Grid from "@mui/material/Grid"
+import MenuItem from "@mui/material/MenuItem"
+import Paper from "@mui/material/Paper"
+import Switch from "@mui/material/Switch"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
-import Badge from '@mui/material/Badge'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import FormHelperText from '@mui/material/FormHelperText'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@mui/material/Grid'
-import MenuItem from '@mui/material/MenuItem'
-import Paper from '@mui/material/Paper'
-import Switch from '@mui/material/Switch'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { Formik } from "formik"
+import * as Yup from "yup"
 
-import Uploader from '../../components/OldComponents/Uploader'
-import PowerInputs from './PowerInputs'
-import Chooser from '../../components/OldComponents/Chooser'
-
-import { calculateTariff, testPowerForPeriods } from '../../services/utils'
-import { getRates } from '../../services/api'
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../../components/OldComponents/Buttons/NextButton'
+import NextButton from "../../components/OldComponents/Buttons/NextButton"
+import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
+import Chooser from "../../components/OldComponents/Chooser"
+import Uploader from "../../components/OldComponents/Uploader"
+import { getRates } from "../../services/api"
+import { calculateTariff, testPowerForPeriods } from "../../services/utils"
+import PowerInputs from "./PowerInputs"
 
 const handleChangeModify = (event, setFieldValue, values) => {
-  if (event.target.name === 'changePhases' && values.changePhases) {
-    setFieldValue('phases', '', false)
-    setFieldValue('attachments', [], false)
-  } else if (event.target.name === 'changePower' && values.changePower) {
-    setFieldValue('power', '', false)
-    setFieldValue('power2', '', false)
-    setFieldValue('power3', '', false)
-    setFieldValue('power4', '', false)
-    setFieldValue('power5', '', false)
-    setFieldValue('power6', '', false)
-    setFieldValue('moreThan15Kw', false)
-    setFieldValue('tariff', '2.0TD', false)
+  if (event.target.name === "changePhases" && values.changePhases) {
+    setFieldValue("phases", "", false)
+    setFieldValue("attachments", [], false)
+  } else if (event.target.name === "changePower" && values.changePower) {
+    setFieldValue("power", "", false)
+    setFieldValue("power2", "", false)
+    setFieldValue("power3", "", false)
+    setFieldValue("power4", "", false)
+    setFieldValue("power5", "", false)
+    setFieldValue("power6", "", false)
+    setFieldValue("moreThan15Kw", false)
+    setFieldValue("tariff", "2.0TD", false)
   }
   setFieldValue(event.target.name, event.target.checked)
 }
 
 const handleChangeMoreThan15 = (values, setFieldValue) => {
   const tariff = calculateTariff({ moreThan15Kw: !values.moreThan15Kw })
-  setFieldValue('tariff', tariff, false)
+  setFieldValue("tariff", tariff, false)
 
-  setFieldValue('power', '', false)
-  setFieldValue('power2', '', false)
-  setFieldValue('power3', '', false)
-  setFieldValue('power4', '', false)
-  setFieldValue('power5', '', false)
-  setFieldValue('power6', '', false)
+  setFieldValue("power", "", false)
+  setFieldValue("power2", "", false)
+  setFieldValue("power3", "", false)
+  setFieldValue("power4", "", false)
+  setFieldValue("power5", "", false)
+  setFieldValue("power6", "", false)
 
-  setFieldValue('moreThan15Kw', !values.moreThan15Kw)
+  setFieldValue("moreThan15Kw", !values.moreThan15Kw)
 }
 
 const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
@@ -68,188 +65,188 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
     changePower: Yup.bool(),
     changePhases: Yup.bool(),
     phases: Yup.string()
-      .when('changePhases', {
+      .when("changePhases", {
         is: true,
-        then: Yup.string().required(t('NO_MONOPHASE_CHOICE'))
+        then: Yup.string().required(t("NO_MONOPHASE_CHOICE")),
       })
       .test(
-        'noMoreThan15KwForMono',
-        t('NO_MORE_THAN_15KW_FOR_MONO'),
+        "noMoreThan15KwForMono",
+        t("NO_MORE_THAN_15KW_FOR_MONO"),
         function () {
-          return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
-        }
+          return !(this.parent.phases === "mono" && this.parent.moreThan15Kw)
+        },
       ),
-    attachments: Yup.array().when('changePhases', {
+    attachments: Yup.array().when("changePhases", {
       is: true,
-      then: Yup.array().min(1, t('NO_ATTACHMENTS'))
+      then: Yup.array().min(1, t("NO_ATTACHMENTS")),
     }),
     moreThan15Kw: Yup.boolean().test(
-      'noMoreThan15KwForMono',
-      t('NO_MORE_THAN_15KW_FOR_MONO'),
+      "noMoreThan15KwForMono",
+      t("NO_MORE_THAN_15KW_FOR_MONO"),
       function () {
-        return !(this.parent.phases === 'mono' && this.parent.moreThan15Kw)
-      }
+        return !(this.parent.phases === "mono" && this.parent.moreThan15Kw)
+      },
     ),
     power: Yup.number()
-      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+      .test("required", t("NO_POWER_CHOSEN_PX"), function () {
         return this.parent.changePower ? this.parent.power : true
       })
       .test({
-        name: 'minPowerValue',
+        name: "minPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'min_power',
+            "min_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       })
       .test({
-        name: 'maxPowerValue',
+        name: "maxPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'max_power',
+            "max_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       }),
     power2: Yup.number()
-      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+      .test("required", t("NO_POWER_CHOSEN_PX"), function () {
         return this.parent.changePower &&
           rates[this.parent.tariff]?.num_power_periods >= 2
           ? this.parent.power2
           : true
       })
-      .test('increasing', t('NO_POWER_INCREASING'), function () {
+      .test("increasing", t("NO_POWER_INCREASING"), function () {
         return rates[this.parent.tariff]?.increasing
           ? parseFloat(this.parent.power2) >= parseFloat(this.parent.power)
           : true
       })
       .test({
-        name: 'minPowerValue',
+        name: "minPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'min_power',
+            "min_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       })
       .test({
-        name: 'maxPowerValue',
+        name: "maxPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'max_power',
+            "max_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       }),
     power3: Yup.number()
-      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+      .test("required", t("NO_POWER_CHOSEN_PX"), function () {
         return this.parent.changePower &&
           rates[this.parent.tariff]?.num_power_periods >= 3
           ? this.parent.power3
           : true
       })
-      .test('increasing', t('NO_POWER_INCREASING'), function () {
+      .test("increasing", t("NO_POWER_INCREASING"), function () {
         return rates[this.parent.tariff]?.increasing
           ? parseFloat(this.parent.power3) >= parseFloat(this.parent.power2)
           : true
       })
       .test({
-        name: 'minPowerValue',
+        name: "minPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'min_power',
+            "min_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       }),
     power4: Yup.number()
-      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+      .test("required", t("NO_POWER_CHOSEN_PX"), function () {
         return this.parent.changePower &&
           rates[this.parent.tariff]?.num_power_periods >= 4
           ? this.parent.power4
           : true
       })
-      .test('increasing', t('NO_POWER_INCREASING'), function () {
+      .test("increasing", t("NO_POWER_INCREASING"), function () {
         return rates[this.parent.tariff]?.increasing
           ? parseFloat(this.parent.power4) >= parseFloat(this.parent.power3)
           : true
       })
       .test({
-        name: 'minPowerValue',
+        name: "minPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'min_power',
+            "min_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       }),
     power5: Yup.number()
-      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+      .test("required", t("NO_POWER_CHOSEN_PX"), function () {
         return this.parent.changePower &&
           rates[this.parent.tariff]?.num_power_periods >= 5
           ? this.parent.power5
           : true
       })
-      .test('increasing', t('NO_POWER_INCREASING'), function () {
+      .test("increasing", t("NO_POWER_INCREASING"), function () {
         return rates[this.parent.tariff]?.increasing
           ? parseFloat(this.parent.power5) >= parseFloat(this.parent.power4)
           : true
       })
       .test({
-        name: 'minPowerValue',
+        name: "minPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'min_power',
+            "min_power",
             this.createError,
-            t
+            t,
           )
-        }
+        },
       }),
     power6: Yup.number()
-      .test('required', t('NO_POWER_CHOSEN_PX'), function () {
+      .test("required", t("NO_POWER_CHOSEN_PX"), function () {
         return this.parent.changePower &&
           rates[this.parent.tariff]?.num_power_periods >= 6
           ? this.parent.power6
           : true
       })
-      .test('increasing', t('NO_POWER_INCREASING'), function () {
+      .test("increasing", t("NO_POWER_INCREASING"), function () {
         return rates[this.parent.tariff]?.increasing
           ? parseFloat(this.parent.power6) >= parseFloat(this.parent.power5)
           : true
       })
       .test({
-        name: 'minPowerValue',
+        name: "minPowerValue",
         test: function () {
           return testPowerForPeriods(
             rates,
             this.parent,
-            'min_power',
+            "min_power",
             this.createError,
-            t
+            t,
           )
-        }
-      })
+        },
+      }),
   })
 
   return (
@@ -258,20 +255,20 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
         initialValues={{
           ...{
             changePhases: false,
-            phases: '',
+            phases: "",
             attachments: [],
             changePower: false,
-            power: '',
-            power2: '',
-            power3: '',
-            power4: '',
-            power5: '',
-            power6: '',
+            power: "",
+            power2: "",
+            power3: "",
+            power4: "",
+            power5: "",
+            power6: "",
             power_attachments: [],
             moreThan15Kw: false,
-            tariff: '2.0TD'
+            tariff: "2.0TD",
           },
-          ...params
+          ...params,
         }}
         validationSchema={ModifySchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -290,7 +287,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             handleBlur,
             handleSubmit,
             setFieldValue,
-            isSubmitting
+            isSubmitting,
           } = props
 
           return (
@@ -299,16 +296,16 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 <FormControlLabel
                   sx={{
                     ml: 0,
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    '&:hover': {
-                      textDecoration: 'underline'
-                    }
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
                   }}
                   label={
                     <Typography variant="pagetitle">
-                      {t('MODIFY_ANSWER_POWER')}
+                      {t("MODIFY_ANSWER_POWER")}
                     </Typography>
                   }
                   labelPlacement="start"
@@ -319,7 +316,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       onChange={(event) =>
                         handleChangeModify(event, setFieldValue, values)
                       }
-                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                      inputProps={{ "aria-label": "primary checkbox" }}
                       color="primary"
                       checked={values.changePower}
                     />
@@ -331,29 +328,29 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   <Chooser
                     name="moreThan15Kw"
                     condensed
-                    question={t('POWER_TO_CONTRACT')}
-                    onChange={(event) =>
+                    question={t("POWER_TO_CONTRACT")}
+                    onChange={() =>
                       handleChangeMoreThan15(values, setFieldValue)
                     }
                     value={values.moreThan15Kw}
                     options={[
                       {
-                        id: 'lesser-power',
+                        id: "lesser-power",
                         value: false,
-                        label: t('CONTRACT_LOWER_THAN_15KW')
+                        label: t("CONTRACT_LOWER_THAN_15KW"),
                       },
                       {
-                        id: 'greater-power',
+                        id: "greater-power",
                         value: true,
-                        label: t('CONTRACT_GREATER_THAN_15KW')
-                      }
+                        label: t("CONTRACT_GREATER_THAN_15KW"),
+                      },
                     ]}
                   />
 
                   {values.moreThan15Kw && (
                     <Box mt={2} mb={2}>
                       <Typography variant="body1">
-                        {t('MORE_THAN_15KW_ADVICE')}
+                        {t("MORE_THAN_15KW_ADVICE")}
                       </Typography>
                     </Box>
                   )}
@@ -361,15 +358,15 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                   <Box my={2}>
                     <FormHelperText
                       dangerouslySetInnerHTML={{
-                        __html: t('POWER_PERIODS_MORE_INFO', {
+                        __html: t("POWER_PERIODS_MORE_INFO", {
                           tariff: values?.tariff,
                           periods_url: values?.moreThan15Kw
-                            ? t('POWER_PERIODS_30TD_MORE_INFO_URL')
-                            : t('POWER_PERIODS_20TD_MORE_INFO_URL'),
+                            ? t("POWER_PERIODS_30TD_MORE_INFO_URL")
+                            : t("POWER_PERIODS_20TD_MORE_INFO_URL"),
                           indexed_url: values?.moreThan15Kw
-                            ? t('POWER_INDEXED_30TD_MORE_INFO_URL')
-                            : t('POWER_INDEXED_20TD_MORE_INFO_URL')
-                        })
+                            ? t("POWER_INDEXED_30TD_MORE_INFO_URL")
+                            : t("POWER_INDEXED_20TD_MORE_INFO_URL"),
+                        }),
                       }}></FormHelperText>
                   </Box>
 
@@ -385,15 +382,15 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       <Box mt={1}>
                         <Alert severity="warning">
                           <AlertTitle>
-                            {t('WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE')}
+                            {t("WARNING_POWER_VALLEY_SMALLER_THAN_PEAK_TITLE")}
                           </AlertTitle>
-                          {t('WARNING_POWER_VALLEY_SMALLER_THAN_PEAK')}
+                          {t("WARNING_POWER_VALLEY_SMALLER_THAN_PEAK")}
                         </Alert>
                       </Box>
                     )}
 
                   <Box mt={3} mb={1}>
-                    <Typography>{t('POWER_ATTACHMENTS')}</Typography>
+                    <Typography>{t("POWER_ATTACHMENTS")}</Typography>
                   </Box>
                   <Box mt={1} mb={2}>
                     <Uploader
@@ -403,7 +400,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                         errors.power_attachments
                       }
                       callbackFn={(values) => {
-                        setFieldValue('power_attachments', values)
+                        setFieldValue("power_attachments", values)
                       }}
                       values={values.power_attachments}
                       maxFiles={5}
@@ -415,7 +412,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               {values.changePower && values.power && (
                 <Box mx={1} mb={3}>
                   <Grid container spacing={4}>
-                    <Grid item>{t('CONTRACTED_FARE')}</Grid>
+                    <Grid item>{t("CONTRACTED_FARE")}</Grid>
                     <Grid item>
                       &nbsp;
                       <Badge
@@ -430,7 +427,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               <Box mx={1} mt={1} mb={3}>
                 <FormHelperText
                   dangerouslySetInnerHTML={{
-                    __html: t('HELP_POWER', { url: t('HELP_POWER_URL') })
+                    __html: t("HELP_POWER", { url: t("HELP_POWER_URL") }),
                   }}></FormHelperText>
               </Box>
 
@@ -442,16 +439,16 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 <FormControlLabel
                   sx={{
                     ml: 0,
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    '&:hover': {
-                      textDecoration: 'underline'
-                    }
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
                   }}
                   label={
                     <Typography variant="pagetitle">
-                      {t('MODIFY_ANSWER_INSTAL_TYPE')}
+                      {t("MODIFY_ANSWER_INSTAL_TYPE")}
                     </Typography>
                   }
                   labelPlacement="start"
@@ -462,7 +459,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       onChange={(event) =>
                         handleChangeModify(event, setFieldValue, values)
                       }
-                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                      inputProps={{ "aria-label": "primary checkbox" }}
                       color="primary"
                       checked={values.changePhases}
                     />
@@ -476,7 +473,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       select
                       id="phases"
                       name="phases"
-                      label={t('PHASE_CHANGE')}
+                      label={t("PHASE_CHANGE")}
                       variant="outlined"
                       fullWidth
                       onChange={handleChange}
@@ -484,13 +481,13 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       value={values.phases}
                       error={errors.phases && touched.phases}
                       helperText={touched.phases && errors.phases}>
-                      <MenuItem value="mono">{t('MONOFASICA_NORMAL')}</MenuItem>
-                      <MenuItem value="tri">{t('TRIFASICA')}</MenuItem>
+                      <MenuItem value="mono">{t("MONOFASICA_NORMAL")}</MenuItem>
+                      <MenuItem value="tri">{t("TRIFASICA")}</MenuItem>
                     </TextField>
                   </Box>
 
                   <Box mt={3} mx={1} mb={1}>
-                    <Typography>{t('INSTALL_TYPE_ATTACHMENTS')}</Typography>
+                    <Typography>{t("INSTALL_TYPE_ATTACHMENTS")}</Typography>
                   </Box>
                   <Box mx={1} mt={1} mb={2}>
                     <Uploader
@@ -500,7 +497,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                         errors.attachments
                       }
                       callbackFn={(attachments) =>
-                        setFieldValue('attachments', attachments)
+                        setFieldValue("attachments", attachments)
                       }
                       values={values.attachments}
                       maxFiles={5}
@@ -511,23 +508,20 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
               <Box mx={1} mt={1} mb={3}>
                 <FormHelperText
                   dangerouslySetInnerHTML={{
-                    __html: t('HELP_INSTALL_TYPE', {
-                      url: t('HELP_INSTALL_TYPE_URL')
-                    })
+                    __html: t("HELP_INSTALL_TYPE", {
+                      url: t("HELP_INSTALL_TYPE_URL"),
+                    }),
                   }}></FormHelperText>
               </Box>
 
               <Box
                 sx={{
                   mb: 1,
-                  display: 'flex',
-                  justifyContent: 'space-between'
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}>
                 {prevStep && (
-                  <PrevButton
-                    onClick={prevStep}
-                    title={t('PREV')}
-                  />
+                  <PrevButton onClick={prevStep} title={t("PREV")} />
                 )}
                 {nextStep && (
                   <NextButton
@@ -537,14 +531,14 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                       (!values.changePhases && !values.changePower) ||
                       isSubmitting
                     }
-                    title={t('NEXT')}
+                    title={t("NEXT")}
                     sx={{
-                      backgroundColor: 'primary.extraLight',
-                      color: 'primary.main',
-                      '&:hover': {
-                        color: 'primary.extraLight',
-                        backgroundColor: 'primary.main'
-                      }
+                      backgroundColor: "primary.extraLight",
+                      color: "primary.main",
+                      "&:hover": {
+                        color: "primary.extraLight",
+                        backgroundColor: "primary.main",
+                      },
                     }}
                   />
                 )}

@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import Checkbox from '@mui/material/Checkbox'
-import { useTranslation } from 'react-i18next'
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import Checkbox from "@mui/material/Checkbox"
+import Grid from "@mui/material/Grid"
+import List from "@mui/material/List"
+import ListItem from "@mui/material/ListItem"
+import ListItemIcon from "@mui/material/ListItemIcon"
+import ListItemText from "@mui/material/ListItemText"
+import Typography from "@mui/material/Typography"
 
 export default function SelectedListItem({
   data,
@@ -18,7 +17,7 @@ export default function SelectedListItem({
   acceptFunction,
   acceptButtonText,
   cancelFunction,
-  cancelButtonText
+  cancelButtonText,
 }) {
   const [checked, setChecked] = useState([])
   const { t } = useTranslation()
@@ -39,20 +38,20 @@ export default function SelectedListItem({
       <Grid
         container
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '15px',
-          flexDirection: 'column',
-          gap: '1rem'
+          display: "flex",
+          justifyContent: "center",
+          padding: "15px",
+          flexDirection: "column",
+          gap: "1rem",
         }}>
         <Grid
           container
           item
           sx={{
-            display: 'flex',
-            justifyContent: 'center'
+            display: "flex",
+            justifyContent: "center",
           }}>
-          <Typography sx={{ fontSize: '16px' }} variant="h6">
+          <Typography sx={{ fontSize: "16px" }} variant="h6">
             {title}
           </Typography>
         </Grid>
@@ -67,7 +66,7 @@ export default function SelectedListItem({
                   onClick={() => handleToggle(value.id)}>
                   <ListItemIcon>
                     <Checkbox
-                      data-testid={'checkbox-' + value.id}
+                      data-testid={"checkbox-" + value.id}
                       edge="start"
                       checked={checked.indexOf(value.id) !== -1}
                       tabIndex={-1}
@@ -88,7 +87,7 @@ export default function SelectedListItem({
           <Typography
             variant="body2"
             dangerouslySetInnerHTML={{
-              __html: t('GENERATION_ADD_ASSIGNMENTS_INFO_MSG')
+              __html: t("GENERATION_ADD_ASSIGNMENTS_INFO_MSG"),
             }}
           />
         </Grid>
@@ -96,13 +95,13 @@ export default function SelectedListItem({
           item
           container
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between'
+            display: "flex",
+            justifyContent: "space-between",
           }}>
           {acceptFunction ? (
             <Button
               color="primary"
-              data-testid={'list-accept-button'}
+              data-testid={"list-accept-button"}
               disabled={checked.length === 0}
               onClick={() => acceptFunction(checked)}>
               {acceptButtonText}
@@ -111,7 +110,7 @@ export default function SelectedListItem({
           {cancelFunction ? (
             <Button
               color="primary"
-              data-testid={'list-cancel-button'}
+              data-testid={"list-cancel-button"}
               onClick={cancelFunction}>
               {cancelButtonText}
             </Button>

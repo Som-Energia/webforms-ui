@@ -1,6 +1,6 @@
 
 describe('Requirements', () => {
-    Cypress.on('uncaught:exception', (error, runnable) => {
+    Cypress.on('uncaught:exception', (error) => {
         console.error(error)
         return false
     })

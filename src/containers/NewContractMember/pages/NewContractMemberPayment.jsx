@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import { InvoiceIcon, CreditCardIcon } from '../../../data/icons/Icons'
-import { checkIbanFormat } from '../../../services/utils'
-
-import Chooser from '../../../components/Chooser/Chooser'
-import InputTitle from '../../../components/InputTitle'
-import InputField from '../../../components/InputField/InputField'
-import TermsDialog from '../../../components/TermsDialog'
+import Chooser from "../../../components/Chooser/Chooser"
+import InputField from "../../../components/InputField/InputField"
+import InputTitle from "../../../components/InputTitle"
+import TermsDialog from "../../../components/TermsDialog"
+import { CreditCardIcon, InvoiceIcon } from "../../../data/icons/Icons"
+import { checkIbanFormat } from "../../../services/utils"
 
 const PaymentMethod = (props) => {
   const {
@@ -23,27 +22,27 @@ const PaymentMethod = (props) => {
     setFieldValue,
     setFieldError,
     setFieldTouched,
-    sendTrackEvent
+    sendTrackEvent,
   } = props
   const { t } = useTranslation()
-  const trackID = 'payment-method'
+  const trackID = "payment-method"
 
-   useEffect(() => {
+  useEffect(() => {
     sendTrackEvent(trackID)
   }, [])
 
   const handleMethodPaymentQuestion = (value) => {
-    setFieldValue('new_member.payment_method', value)
+    setFieldValue("new_member.payment_method", value)
   }
 
   const handleCheckIbanResponse = async () => {
     const valid = checkIbanFormat(values.new_member.iban)
     if (valid) {
-      await setFieldError('new_member.iban_valid', undefined)
-      setFieldValue('new_member.iban_valid', true)
+      await setFieldError("new_member.iban_valid", undefined)
+      setFieldValue("new_member.iban_valid", true)
     } else {
-      await setFieldError('new_member.iban_valid', t('INVALID_IBAN'))
-      setFieldValue('new_member.iban_valid', false)
+      await setFieldError("new_member.iban_valid", t("INVALID_IBAN"))
+      setFieldValue("new_member.iban_valid", false)
     }
   }
 
@@ -52,14 +51,14 @@ const PaymentMethod = (props) => {
     if (value) {
       value = value.match(/[\s0-9A-Za-z]{0,29}/)
       value = value[0].toUpperCase()
-      value = value.split(' ').join('')
-      value = value.match(/.{1,4}/g).join(' ')
+      value = value.split(" ").join("")
+      value = value.match(/.{1,4}/g).join(" ")
     }
-    setFieldValue('new_member.iban', value)
+    setFieldValue("new_member.iban", value)
   }
 
   const handleInputIbanBlur = () => {
-    setFieldTouched('new_member.iban', true)
+    setFieldTouched("new_member.iban", true)
   }
 
   const [open, setOpen] = useState(false)
@@ -71,12 +70,12 @@ const PaymentMethod = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('new_member.sepa_accepted', true)
+    setFieldValue("new_member.sepa_accepted", true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('new_member.sepa_accepted', false)
+    setFieldValue("new_member.sepa_accepted", false)
   }
 
   useEffect(() => {
@@ -87,30 +86,32 @@ const PaymentMethod = (props) => {
 
   const options = [
     {
-      id: 'iban',
+      id: "iban",
       icon: <InvoiceIcon />,
-      textHeader: t('IBAN_PAYMENT_QUESTION_OPTION'),
-      textBody: t('PAYMENT_METHOD_IBAN_DESC')
+      textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
+      textBody: t("PAYMENT_METHOD_IBAN_DESC"),
     },
     {
-      id: 'credit_card',
+      id: "credit_card",
       icon: <CreditCardIcon />,
-      textHeader: t('PAYMENT_METHOD_CCARD'),
-      textBody: t('PAYMENT_METHOD_CCARD_DESC')
-    }
+      textHeader: t("PAYMENT_METHOD_CCARD"),
+      textBody: t("PAYMENT_METHOD_CCARD_DESC"),
+    },
   ]
 
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Typography variant="headline4.regular">{t('MEMBER_PAGE_PAYMENT_METHOD')}</Typography>
+        <Typography variant="headline4.regular">
+          {t("MEMBER_PAGE_PAYMENT_METHOD")}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <InputField
           name="iban_number"
-          textFieldName={t('IBAN_FIELD')}
-          textFieldNameHelper={t('IBAN_EXPLANATION')}
-          textFieldHelper={t('IBAN_EXAMPLE')}
+          textFieldName={t("IBAN_FIELD")}
+          textFieldNameHelper={t("IBAN_EXPLANATION")}
+          textFieldHelper={t("IBAN_EXAMPLE")}
           handleChange={handleInputIban}
           handleBlur={handleInputIbanBlur}
           touched={touched?.new_member?.iban}
@@ -119,12 +120,12 @@ const PaymentMethod = (props) => {
           required={true}
         />
       </Grid>
-      {values?.has_member === 'member-off' ?
-        (<>
+      {values?.has_member === "member-off" ? (
+        <>
           <Grid item xs={12}>
             <InputTitle
-              text={t('PAYMENT_METHOD_QUESTION')}
-              description={t('MEMBER_PAYMENT_EXPLANATION')}
+              text={t("PAYMENT_METHOD_QUESTION")}
+              description={t("MEMBER_PAYMENT_EXPLANATION")}
               required={true}
             />
           </Grid>
@@ -136,9 +137,10 @@ const PaymentMethod = (props) => {
               handleChange={handleMethodPaymentQuestion}
             />
           </Grid>
-        </>) : null}
+        </>
+      ) : null}
       <Grid item xs={12}>
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: "flex" }}>
           <FormControlLabel
             control={
               <Checkbox
@@ -150,10 +152,10 @@ const PaymentMethod = (props) => {
             label={
               <>
                 <Typography variant="body.sm.regular" color="primary.dark">
-                  {t('IBAN_ACCEPT_DIRECT_DEBIT')}
+                  {t("IBAN_ACCEPT_DIRECT_DEBIT")}
                 </Typography>
                 <Typography variant="body.sm.bold" color="error">
-                  {'*'}
+                  {"*"}
                 </Typography>
               </>
             }
@@ -162,14 +164,12 @@ const PaymentMethod = (props) => {
       </Grid>
       <Grid item xs={12}>
         <TermsDialog
-          title={t('SEPA_TITLE')}
+          title={t("SEPA_TITLE")}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}
           maxWidth="sm">
-          <span
-            dangerouslySetInnerHTML={{ __html: t('SEPA') }}
-          />
+          <span dangerouslySetInnerHTML={{ __html: t("SEPA") }} />
         </TermsDialog>
       </Grid>
     </Grid>

@@ -1,27 +1,28 @@
-import React from 'react'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+import React from "react"
+
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 
 const ReviewField = ({ label, value }) => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         mb: 0.8,
-        '& .field__value': {
-          flexGrow: 1
-        }
+        "& .field__value": {
+          flexGrow: 1,
+        },
       }}>
       {label !== false && (
         <Box className="field__title">
           <Typography
             sx={{
-              textTransform: 'uppercase',
-              paddingRight: '12px',
-              fontSize: '13px',
+              textTransform: "uppercase",
+              paddingRight: "12px",
+              fontSize: "13px",
               fontWeight: 600,
-              color: 'primary.dark'
+              color: "primary.dark",
             }}
             variant="subtitle2">
             <>{label}</>
@@ -29,7 +30,7 @@ const ReviewField = ({ label, value }) => {
         </Box>
       )}
       <Box className="field__value">
-        <Typography id={label + '__value'} sx={{ fontSize: '13px' }}>
+        <Typography id={label + "__value"} sx={{ fontSize: "13px" }}>
           <>{value}</>
         </Typography>
       </Box>

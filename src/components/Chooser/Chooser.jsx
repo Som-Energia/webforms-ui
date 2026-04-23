@@ -1,11 +1,10 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import Checkbox from '@mui/material/Checkbox'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserStyles, chooserSelectedStyles } from './chooserStyles'
-
+import { chooserSelectedStyles, chooserStyles } from "./chooserStyles"
 
 const Option = ({
   isSelected,
@@ -14,23 +13,22 @@ const Option = ({
   icon,
   textHeader,
   textBody,
-  maxWidth
+  maxWidth,
 }) => {
-
   return (
     <Box
       role="button"
       data-cy={optionId}
       sx={{
         ...(isSelected ? chooserSelectedStyles : chooserStyles),
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
       tabIndex={0}
       onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
+        if (event.key === "Enter" || event.key === " ") {
           setSelected(optionId)
         }
       }}
@@ -40,28 +38,27 @@ const Option = ({
       <Box>
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '0.0rem',
-            justifyContent: 'space-between'
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "0.0rem",
+            justifyContent: "space-between",
           }}>
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem'
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
             }}>
             {icon}
             <Typography
               variant="body.md.medium"
               sx={{
-                textAlign: 'center',
-                whiteSpace: 'normal',
-                wordBreak: 'break-word',
+                textAlign: "center",
+                whiteSpace: "normal",
+                wordBreak: "break-word",
                 maxWidth: { maxWidth },
-                display: 'inline-block',
-              }}
-            >
+                display: "inline-block",
+              }}>
               {textHeader}
             </Typography>
           </Box>
@@ -74,7 +71,9 @@ const Option = ({
             />
           ) : null}
         </Box>
-        <Typography variant="body.sm.regular" color="secondary.extraDark">{textBody}</Typography>
+        <Typography variant="body.sm.regular" color="secondary.extraDark">
+          {textBody}
+        </Typography>
       </Box>
     </Box>
   )
@@ -83,10 +82,10 @@ const Option = ({
 const Chooser = (props) => {
   const { options, value, handleChange, name, maxWidth } = props
 
-  const xsSize = options.length == 2 ? 12 : 12
-  const smSize = options.length == 2 ? 6 : 12
-  const mdSize = options.length == 2 ? 6 : 8
-  const lgSize = options.length == 2 ? 6 : 4
+  const xsSize = options.length === 2 ? 12 : 12
+  const smSize = options.length === 2 ? 6 : 12
+  const mdSize = options.length === 2 ? 6 : 8
+  const lgSize = options.length === 2 ? 6 : 4
 
   const setOptionSelection = (option) => {
     handleChange(option)
@@ -113,8 +112,8 @@ const Chooser = (props) => {
           {option?.helper && (
             <Box
               sx={{
-                marginTop: '1rem',
-                justifyItems: 'center'
+                marginTop: "1rem",
+                justifyItems: "center",
               }}>
               {option?.helper}
             </Box>

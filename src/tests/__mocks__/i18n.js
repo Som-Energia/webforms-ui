@@ -1,4 +1,4 @@
-const reactI18next = require('react-i18next');
+const reactI18next = require("react-i18next")
 
 module.exports = {
   ...reactI18next,
@@ -10,4 +10,4 @@ module.exports = {
   }),
   Trans: ({ children }) => children,
   Translation: ({ children }) => children((key) => key, { i18n: {} }),
-};
+}

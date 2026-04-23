@@ -1,20 +1,21 @@
-import PropTypes from 'prop-types'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
+import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import { buttonDark } from '../../../../components/Buttons/buttonStyles'
+import PropTypes from "prop-types"
+
+import { buttonDark } from "../../../../components/Buttons/buttonStyles"
 import {
+  redirectUrlButton,
   redirectUrlDescription,
   redirectUrlTitle,
-  redirectUrlButton
-} from '../../../../themes/commonStyles'
+} from "../../../../themes/commonStyles"
 
 const RedirectUrl = ({
-  title = 'somenergia redirect url component',
-  description = 'a naive url redirect component',
-  buttonText = 'Ves-hi!',
-  url = 'https://somenergia.coop'
+  title = "somenergia redirect url component",
+  description = "a naive url redirect component",
+  buttonText = "Ves-hi!",
+  url = "https://somenergia.coop",
 }) => {
   return (
     <Grid container spacing={2} direction="column" alignItems="center">
@@ -44,7 +45,7 @@ const RedirectUrl = ({
           color="primary"
           sx={{
             ...buttonDark,
-            ...redirectUrlButton
+            ...redirectUrlButton,
           }}>
           {buttonText}
         </Button>
@@ -57,7 +58,7 @@ RedirectUrl.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   buttonText: PropTypes.string,
-  url: PropTypes.string
+  url: PropTypes.string,
 }
 
 export default RedirectUrl

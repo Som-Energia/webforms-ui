@@ -1,62 +1,68 @@
-import React, { lazy, useMemo } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import "./i18n/i18n"
+import "./App.css"
 
-import OldWebFormsTheme from './themes/webforms_old'
-import WebFormsTheme from './themes/webforms'
-import ApiStatus from './components/ApiStatus'
+import React, { lazy, useMemo } from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import './i18n/i18n'
-import './App.css'
-import { GenerationContextProvider } from './containers/Generation/context/GenerationContext'
-import { PopUpContextProvider } from './context/PopUpContext'
-import { MatomoProvider } from './trackers/matomo/MatomoProvider'
-import { LoadingContextProvider } from './context/LoadingContext'
-import { SummaryContextProvider } from './context/SummaryContext'
-import { AvailabilityContextProvider } from './context/AvailabilityContext'
-import { useTranslation } from 'react-i18next'
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import UnifiedContractForm from './containers/UnifiedContractForm'
-import ThemeWrapper from './themes/ThemeWrapper'
+import ApiStatus from "./components/ApiStatus"
+import { GenerationContextProvider } from "./containers/Generation/context/GenerationContext"
+import UnifiedContractForm from "./containers/UnifiedContractForm"
+import { AvailabilityContextProvider } from "./context/AvailabilityContext"
+import { LoadingContextProvider } from "./context/LoadingContext"
+import { PopUpContextProvider } from "./context/PopUpContext"
+import { SummaryContextProvider } from "./context/SummaryContext"
+import ThemeWrapper from "./themes/ThemeWrapper"
+import WebFormsTheme from "./themes/webforms"
+import OldWebFormsTheme from "./themes/webforms_old"
+import { MatomoProvider } from "./trackers/matomo/MatomoProvider"
 
 const App = (props) => {
-  const { token = '', isIndexedPilotOngoing = undefined } = props
+  const { token = "", isIndexedPilotOngoing = undefined } = props
   const { t } = useTranslation()
 
-  const Home = lazy(() => import('./containers/Home'))
-  const Contribution = lazy(() => import('./containers/Contribution'))
-  const Cancellation = lazy(() => import('./containers/Cancellation'))
-  const CancellationConfirm = lazy(() =>
-    import('./containers/CancellationConfirm')
+  const Home = lazy(() => import("./containers/Home"))
+  const Contribution = lazy(() => import("./containers/Contribution"))
+  const Cancellation = lazy(() => import("./containers/Cancellation"))
+  const CancellationConfirm = lazy(
+    () => import("./containers/CancellationConfirm"),
   )
-  const D1Detail = lazy(() => import('./containers/D1Detail'))
-  const HolderChange = lazy(() => import('./containers/HolderChange'))
-  const Failure = lazy(() => import('./containers/Failure'))
-  const Success = lazy(() => import('./containers/Success'))
-  const ModifyContract = lazy(() => import('./containers/ModifyContract'))
-  const Tariff = lazy(() => import('./containers/Tariff'))
-  const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
-  const Indexed = lazy(() => import('./containers/Indexed'))
-  const IndexedDailyPrices = lazy(() => import('./containers/IndexedDailyPrices'))
-  const Generation = lazy(() => import('./containers/Generation'))
-  const GenerationContribution = lazy(() =>
-    import('./containers/Generation/GenerationForm/GenerationForm')
+  const D1Detail = lazy(() => import("./containers/D1Detail"))
+  const HolderChange = lazy(() => import("./containers/HolderChange"))
+  const Failure = lazy(() => import("./containers/Failure"))
+  const Success = lazy(() => import("./containers/Success"))
+  const ModifyContract = lazy(() => import("./containers/ModifyContract"))
+  const Tariff = lazy(() => import("./containers/Tariff"))
+  const MailSubscriptions = lazy(() => import("./containers/MailSubscriptions"))
+  const Indexed = lazy(() => import("./containers/Indexed"))
+  const IndexedDailyPrices = lazy(
+    () => import("./containers/IndexedDailyPrices"),
   )
-  const GurbFormRequirements = lazy(() => import('./containers/Gurb/GurbFormRequirements'))
-  const GurbFormJoin = lazy(() => import('./containers/Gurb/GurbFormJoin'))
-  const NewContractMemberForm = lazy(() =>
-    import('./containers/NewContractMember/NewContractMember')
+  const Generation = lazy(() => import("./containers/Generation"))
+  const GenerationContribution = lazy(
+    () => import("./containers/Generation/GenerationForm/GenerationForm"),
   )
-  const NewMemberForm = lazy(() => import('./containers/NewMember/NewMember'))
-  const Result = lazy(() => import('./containers/Result'))
-  const GurbContractPaymentSuccessful = lazy(() => import('./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful'))
+  const GurbFormRequirements = lazy(
+    () => import("./containers/Gurb/GurbFormRequirements"),
+  )
+  const GurbFormJoin = lazy(() => import("./containers/Gurb/GurbFormJoin"))
+  const NewContractMemberForm = lazy(
+    () => import("./containers/NewContractMember/NewContractMember"),
+  )
+  const NewMemberForm = lazy(() => import("./containers/NewMember/NewMember"))
+  const Result = lazy(() => import("./containers/Result"))
+  const GurbContractPaymentSuccessful = lazy(
+    () => import("./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful"),
+  )
 
-  const Maintenance = lazy(() => import('./components/Maintenance'))
+  const Maintenance = lazy(() => import("./components/Maintenance"))
 
   const loadContractData = () => {
     const contractData =
-      typeof props.contract === 'string' && props.contract !== ''
+      typeof props.contract === "string" && props.contract !== ""
         ? JSON.parse(props.contract)
         : []
 
@@ -65,11 +71,11 @@ const App = (props) => {
 
   const loadD1Data = () => {
     const d1Data =
-      typeof props.d1 === 'string' && props.d1 !== ''
+      typeof props.d1 === "string" && props.d1 !== ""
         ? JSON.parse(props.d1)
         : {}
     const cupsData =
-      typeof props.cups === 'string' && props.cups !== ''
+      typeof props.cups === "string" && props.cups !== ""
         ? JSON.parse(props.cups)
         : {}
     return { ...d1Data, ...cupsData }
@@ -77,7 +83,7 @@ const App = (props) => {
 
   const loadMailLists = () => {
     const mailListsData =
-      typeof props.mailLists === 'string' && props.mailLists !== ''
+      typeof props.mailLists === "string" && props.mailLists !== ""
         ? JSON.parse(props.mailLists)
         : []
 
@@ -86,23 +92,23 @@ const App = (props) => {
 
   const loadInvoicePaymentData = () => {
     const data =
-      typeof props.invoicePayment === 'string' && props.invoicePayment !== ''
+      typeof props.invoicePayment === "string" && props.invoicePayment !== ""
         ? JSON.parse(props.invoicePayment)
         : {}
     return data
   }
 
   const assignmentsJSON = useMemo(() => {
-    const assignments = document.getElementById('generation-assignments-data')
+    const assignments = document.getElementById("generation-assignments-data")
     return assignments ? JSON.parse(assignments.textContent) : {}
   }, [])
   const investmentsJSON = useMemo(() => {
-    const investments = document.getElementById('generation-investments-data')
+    const investments = document.getElementById("generation-investments-data")
     return investments ? JSON.parse(investments.textContent) : {}
   }, [])
   const outsideAssignmentsJSON = useMemo(() => {
     const outsideAssignments = document.getElementById(
-      'outside-assignments-data'
+      "outside-assignments-data",
     )
     return outsideAssignments ? JSON.parse(outsideAssignments.textContent) : {}
   }, [])
@@ -115,15 +121,20 @@ const App = (props) => {
       <AvailabilityContextProvider>
         <MatomoProvider>
           <Box sx={{ flexGrow: 1 }}>
-            <Router future={{
-              v7_startTransition: true,
-            }}>
+            <Router
+              future={{
+                v7_startTransition: true,
+              }}>
               <Routes>
-                <Route exact path="/" element={
-                  <ThemeWrapper theme={oldWebFormsTheme}>
-                    <Home {...props} />
-                  </ThemeWrapper>
-                } />
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <ThemeWrapper theme={oldWebFormsTheme}>
+                      <Home {...props} />
+                    </ThemeWrapper>
+                  }
+                />
 
                 <Route exact path="/tariff" element={<Tariff {...props} />} />
 
@@ -162,24 +173,21 @@ const App = (props) => {
                   }
                 />
 
-                {
-                  [
-                    "/:language/serveis/tendencia-dels-preus",
-                    "/:language/servicios/tendencia-de-los-precios",
-                    "/:language/zerbitzuak/prezioen-joera",
-                  ].map((url) =>
-                    <Route
-                      key={url}
-                      path={url}
-                      element={
-                        <ThemeWrapper theme={webFormsTheme}>
-                          <IndexedDailyPrices />
-                        </ThemeWrapper>
-                      }
-                    />
-                  )
-                }
-
+                {[
+                  "/:language/serveis/tendencia-dels-preus",
+                  "/:language/servicios/tendencia-de-los-precios",
+                  "/:language/zerbitzuak/prezioen-joera",
+                ].map((url) => (
+                  <Route
+                    key={url}
+                    path={url}
+                    element={
+                      <ThemeWrapper theme={webFormsTheme}>
+                        <IndexedDailyPrices />
+                      </ThemeWrapper>
+                    }
+                  />
+                ))}
 
                 <Route
                   path="/:language/investments/investments-kwh/"
@@ -218,10 +226,7 @@ const App = (props) => {
                   path="/:language/mail-subscriptions"
                   element={
                     <ThemeWrapper theme={oldWebFormsTheme}>
-                      <MailSubscriptions
-                        {...props}
-                        mailLists={loadMailLists}
-                      />
+                      <MailSubscriptions {...props} mailLists={loadMailLists} />
                     </ThemeWrapper>
                   }
                 />
@@ -230,10 +235,7 @@ const App = (props) => {
                   path="/cancellation"
                   element={
                     <ThemeWrapper theme={oldWebFormsTheme}>
-                      <Cancellation
-                        {...props}
-                        contract={loadContractData()}
-                      />
+                      <Cancellation {...props} contract={loadContractData()} />
                     </ThemeWrapper>
                   }
                 />
@@ -242,10 +244,7 @@ const App = (props) => {
                   path="/:language/cancellation"
                   element={
                     <ThemeWrapper theme={oldWebFormsTheme}>
-                      <Cancellation
-                        {...props}
-                        contract={loadContractData()}
-                      />
+                      <Cancellation {...props} contract={loadContractData()} />
                     </ThemeWrapper>
                   }
                 />
@@ -277,10 +276,7 @@ const App = (props) => {
                   path="/:language/contract/:contract_id/cancel"
                   element={
                     <ThemeWrapper theme={oldWebFormsTheme}>
-                      <Cancellation
-                        {...props}
-                        contract={loadContractData()}
-                      />
+                      <Cancellation {...props} contract={loadContractData()} />
                     </ThemeWrapper>
                   }
                 />
@@ -289,7 +285,7 @@ const App = (props) => {
                   "/:language/aportaciones-capital-social/formulario",
                   "/:language/aportacions-capital-social/formulari",
                   "/:language/achegar-ao-capital-social/formulario",
-                  "/:language/kapital-sozialerako-ekarpenak/formularioa"
+                  "/:language/kapital-sozialerako-ekarpenak/formularioa",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -299,7 +295,8 @@ const App = (props) => {
                         <Contribution {...props} />
                       </ThemeWrapper>
                     }
-                  />))}
+                  />
+                ))}
 
                 <Route
                   path="/:language/invoices/:invoice_id/payment_ko"
@@ -410,10 +407,10 @@ const App = (props) => {
                   }
                 />
                 {[
-                  '/:language/serveis/produccio/generation-kwh-aportacions',
-                  '/:language/servicios/produccion/generation-kwh-aportaciones',
-                  '/:language/servizos/producion/generation-kwh-achegar',
-                  '/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa'
+                  "/:language/serveis/produccio/generation-kwh-aportacions",
+                  "/:language/servicios/produccion/generation-kwh-aportaciones",
+                  "/:language/servizos/producion/generation-kwh-achegar",
+                  "/:language/zerbitzuak/ekoizpena/generation-kwh-formularioa",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -462,8 +459,8 @@ const App = (props) => {
                   }
                 />
                 {[
-                  '/:language/pagament-realitzat',
-                  '/:language/pago-realizado'
+                  "/:language/pagament-realitzat",
+                  "/:language/pago-realizado",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -471,10 +468,10 @@ const App = (props) => {
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
                         <Result
-                          mode={'success'}
+                          mode={"success"}
                           {...props}
-                          title={t('SUCCESS_TEXT')}
-                          description={t('NEWMEMBER_OK_DESCRIPTION')}
+                          title={t("SUCCESS_TEXT")}
+                          description={t("NEWMEMBER_OK_DESCRIPTION")}
                         />
                       </ThemeWrapper>
                     }
@@ -482,8 +479,8 @@ const App = (props) => {
                 ))}
 
                 {[
-                  '/:language/pagament-cancellat',
-                  '/:language/pago-cancelado'
+                  "/:language/pagament-cancellat",
+                  "/:language/pago-cancelado",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -492,14 +489,14 @@ const App = (props) => {
                       <ThemeWrapper theme={webFormsTheme}>
                         <Result
                           mode="failure"
-                          title={t('FAILURE_TEXT')}
+                          title={t("FAILURE_TEXT")}
                           {...props}>
                           <Typography
-                            sx={{ color: 'secondary.extraDark' }}
+                            sx={{ color: "secondary.extraDark" }}
                             dangerouslySetInnerHTML={{
-                              __html: t('NEWMEMBER_KO_DESCRIPTION', {
-                                url: t('CONTACT_HELP_URL')
-                              })
+                              __html: t("NEWMEMBER_KO_DESCRIPTION", {
+                                url: t("CONTACT_HELP_URL"),
+                              }),
                             }}
                           />
                         </Result>
@@ -508,10 +505,10 @@ const App = (props) => {
                   />
                 ))}
                 {[
-                  '/:language/formulario-contratacion-periodos',
-                  '/:language/formulari-contractacio-periodes',
-                  '/:language/formulario-contrato-periodos',
-                  '/:language/kontratazio-formularioa-ordutarteak'
+                  "/:language/formulario-contratacion-periodos",
+                  "/:language/formulari-contractacio-periodes",
+                  "/:language/formulario-contrato-periodos",
+                  "/:language/kontratazio-formularioa-ordutarteak",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -522,7 +519,7 @@ const App = (props) => {
                           <SummaryContextProvider>
                             <NewContractMemberForm
                               {...props}
-                              tariff={'periods'}
+                              tariff={"periods"}
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
@@ -531,10 +528,10 @@ const App = (props) => {
                   />
                 ))}
                 {[
-                  '/:language/formulario-contratacion-indexada',
-                  '/:language/formulari-contractacio-indexada',
-                  '/:language/formulario-contrato-indexada',
-                  '/:language/kontratazio-formularioa-indexatua'
+                  "/:language/formulario-contratacion-indexada",
+                  "/:language/formulari-contractacio-indexada",
+                  "/:language/formulario-contrato-indexada",
+                  "/:language/kontratazio-formularioa-indexatua",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -545,7 +542,7 @@ const App = (props) => {
                           <SummaryContextProvider>
                             <NewContractMemberForm
                               {...props}
-                              tariff={'indexed'}
+                              tariff={"indexed"}
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
@@ -598,8 +595,8 @@ const App = (props) => {
                   />
                 )}
                 {[
-                  '/:language/landing/captacio',
-                  '/:language/landing/captacion'
+                  "/:language/landing/captacio",
+                  "/:language/landing/captacion",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -617,9 +614,9 @@ const App = (props) => {
                 ))}
 
                 {[
-                  '/:language/cooperativa/formulari-associar-se',
-                  '/:language/cooperativa/formulario-asociarse',
-                  '/:language/kooperatiba/bazkidetu-formularioa'
+                  "/:language/cooperativa/formulari-associar-se",
+                  "/:language/cooperativa/formulario-asociarse",
+                  "/:language/kooperatiba/bazkidetu-formularioa",
                 ].map((path) => (
                   <Route
                     key={path}
@@ -646,19 +643,19 @@ const App = (props) => {
                 />
 
                 {[
-                  '/:language/landing/15-aniversari',
-                  '/:language/landing/15-aniversario'
+                  "/:language/landing/15-aniversari",
+                  "/:language/landing/15-aniversario",
                 ].map((path) => (
                   <Route
                     key={path}
                     path={path}
                     element={
-                       <ThemeWrapper theme={webFormsTheme}>
+                      <ThemeWrapper theme={webFormsTheme}>
                         <LoadingContextProvider>
                           <SummaryContextProvider>
                             <NewContractMemberForm
                               {...props}
-                              specialCampaign={'15YEARS_CAMPAIGN'}
+                              specialCampaign={"15YEARS_CAMPAIGN"}
                               initStep={2}
                             />
                           </SummaryContextProvider>
@@ -667,13 +664,12 @@ const App = (props) => {
                     }
                   />
                 ))}
-
               </Routes>
             </Router>
             <ApiStatus />
           </Box>
         </MatomoProvider>
-      </AvailabilityContextProvider >
+      </AvailabilityContextProvider>
     </>
   )
 }

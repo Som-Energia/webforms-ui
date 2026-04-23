@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
-import Grid from '@mui/material/Grid'
+import Box from "@mui/material/Box"
+import Divider from "@mui/material/Divider"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import ReviewField from './ReviewField'
+import ReviewField from "./ReviewField"
 
-const ReviewDesktopTable = ({tableFields}) => {
+const ReviewDesktopTable = ({ tableFields }) => {
   return tableFields.map((rows, index) => {
     return (
       <React.Fragment key={index}>
@@ -39,14 +39,16 @@ const ReviewDesktopTable = ({tableFields}) => {
                             <Grid item xs={12}>
                               <Grid container>
                                 {details.field.map((detail, fieldIndex) => {
-                                  return !detail.hide && (
-                                    <Grid item key={fieldIndex} xs={12}>
-                                      <ReviewField
-                                        label={detail.reviewLabel}
-                                        value={detail.reviewValue}
-                                        step={detail.step}
-                                      />
-                                    </Grid>
+                                  return (
+                                    !detail.hide && (
+                                      <Grid item key={fieldIndex} xs={12}>
+                                        <ReviewField
+                                          label={detail.reviewLabel}
+                                          value={detail.reviewValue}
+                                          step={detail.step}
+                                        />
+                                      </Grid>
+                                    )
                                   )
                                 })}
                               </Grid>
@@ -68,7 +70,7 @@ const ReviewDesktopTable = ({tableFields}) => {
             )
           })}
         </Grid>
-        <Box sx={{ marginY: '2rem' }}>
+        <Box sx={{ marginY: "2rem" }}>
           <Divider />
         </Box>
       </React.Fragment>

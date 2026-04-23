@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import { checkCnae } from '../services/api'
-import LoadingContext from '../context/LoadingContext'
-
-import InputField from './InputField/InputField'
-import SelectField from './SelectField/SelectField'
-
+import LoadingContext from "../context/LoadingContext"
+import { checkCnae } from "../services/api"
+import InputField from "./InputField/InputField"
+import SelectField from "./SelectField/SelectField"
 
 const CnaeField = (props) => {
   const { values, errors, touched, setFieldValue, setFieldTouched, setValues } =
@@ -17,7 +15,7 @@ const CnaeField = (props) => {
 
   const { t } = useTranslation()
   const { loading, setLoading } = useContext(LoadingContext)
-  const [cnaeDescription, setCnaeDescription] = useState(false) // TODO: Remove it?
+  const [, setCnaeDescription] = useState(false) // TODO: Remove it?
 
   const updateCNAE = async () => {
     setCnaeDescription(false)
@@ -34,7 +32,7 @@ const CnaeField = (props) => {
           correctCNAE = false
         })
       setLoading(false)
-      setFieldValue('supply_point.cnae_valid', correctCNAE)
+      setFieldValue("supply_point.cnae_valid", correctCNAE)
     }
   }
 
@@ -43,12 +41,12 @@ const CnaeField = (props) => {
   }, [values.supply_point.cnae])
 
   const handleChangeCNAE = (event) => {
-    const value = event.target.value.replace(/[^0-9]/g, '')
-    setFieldValue('supply_point.cnae', value)
+    const value = event.target.value.replace(/[^0-9]/g, "")
+    setFieldValue("supply_point.cnae", value)
   }
 
   const handleBlurCNAE = () => {
-    setFieldTouched('supply_point.cnae', true)
+    setFieldTouched("supply_point.cnae", true)
   }
 
   const handleIsHousing = (event) => {
@@ -59,14 +57,14 @@ const CnaeField = (props) => {
         ...values.supply_point,
         is_housing: isHousing,
         cnae: isHousing ? 9820 : undefined,
-        cnae_valid: true
-      }
+        cnae_valid: true,
+      },
     })
   }
 
   const options = [
-    { id: true, name: t('YES') },
-    { id: false, name: t('NO') }
+    { id: true, name: t("YES") },
+    { id: false, name: t("NO") },
   ]
 
   return (
@@ -75,8 +73,8 @@ const CnaeField = (props) => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <SelectField
-              label={t('IS_HOUSING')}
-              value={values?.supply_point?.is_housing ?? ''}
+              label={t("IS_HOUSING")}
+              value={values?.supply_point?.is_housing ?? ""}
               fieldName={"supply_point.is_housing"}
               onChange={handleIsHousing}
               options={options}
@@ -89,7 +87,7 @@ const CnaeField = (props) => {
       <Grid item xs={12} sm={6}>
         <InputField
           name="cnae"
-          textFieldName={t('CNAE')}
+          textFieldName={t("CNAE")}
           readonlyField={values?.supply_point?.is_housing === true}
           value={values?.supply_point?.cnae}
           handleChange={handleChangeCNAE}
@@ -102,8 +100,8 @@ const CnaeField = (props) => {
               color="secondary.extraDark"
               dangerouslySetInnerHTML={{
                 __html: values?.supply_point?.is_housing
-                  ? t('CNAE_HELPER')
-                  : t('HELP_POPOVER_CNAE')
+                  ? t("CNAE_HELPER")
+                  : t("HELP_POPOVER_CNAE"),
               }}
             />
           }

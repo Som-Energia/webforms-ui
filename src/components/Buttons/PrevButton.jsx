@@ -1,13 +1,13 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Button from '@mui/material/Button'
-import ArrowBack from '@mui/icons-material/ArrowBack'
-import Box from '@mui/material/Box'
+import ArrowBack from "@mui/icons-material/ArrowBack"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
 
-import { buttonLight } from './buttonStyles'
+import { buttonLight } from "./buttonStyles"
 
 function PrevButton(props) {
-  const { onClick, disabled, title = 'PREV' } = props
+  const { onClick, disabled, title = "PREV" } = props
   const { t } = useTranslation()
 
   return (
@@ -15,14 +15,15 @@ function PrevButton(props) {
       tabIndex={0}
       sx={{
         ...buttonLight,
-        height: '40px',
-        padding: '13px 18px',
-        boxSizing: 'border-box'
+        height: "40px",
+        padding: "13px 18px",
+        boxSizing: "border-box",
       }}
       data-cy="prev"
       startIcon={
-        <Box sx={{ width: 20, height: 20, display: 'flex', alignItems: 'center' }}>
-          <ArrowBack style={{ width: '100%', height: '100%' }} />
+        <Box
+          sx={{ width: 20, height: 20, display: "flex", alignItems: "center" }}>
+          <ArrowBack style={{ width: "100%", height: "100%" }} />
         </Box>
       }
       disabled={disabled}

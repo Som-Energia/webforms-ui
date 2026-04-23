@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormHelperText from '@mui/material/FormHelperText'
-import Grid from '@mui/material/Grid'
-import InputAdornment from '@mui/material/InputAdornment'
-import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined"
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
+import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined"
+import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined"
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormGroup from "@mui/material/FormGroup"
+import FormHelperText from "@mui/material/FormHelperText"
+import Grid from "@mui/material/Grid"
+import InputAdornment from "@mui/material/InputAdornment"
+import MenuItem from "@mui/material/MenuItem"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined'
-
-import StepHeader from '../../components/OldComponents/StepHeader'
-import StateCity from './StateCity'
-import TermsDialog from '../../components/TermsDialog'
-import VATField from '../../components/OldComponents/VATField'
-
-import { languages } from '../../services/utils'
-import { getMunicipisByPostalCode } from '../../services/api'
+import StepHeader from "../../components/OldComponents/StepHeader"
+import VATField from "../../components/OldComponents/VATField"
+import TermsDialog from "../../components/TermsDialog"
+import { getMunicipisByPostalCode } from "../../services/api"
+import { languages } from "../../services/utils"
+import StateCity from "./StateCity"
 
 function PersonalData(props) {
   const { t } = useTranslation()
@@ -38,9 +36,9 @@ function PersonalData(props) {
     touched,
     skipPrivacyPolicy = false,
     title = false,
-    entity = 'holder',
+    entity = "holder",
     isMemberMandatoryForHolderchange = false,
-    form = undefined
+    form = undefined,
   } = props
   const [openLegal, setOpenLegal] = useState(false)
   const trialPeriod =
@@ -49,14 +47,14 @@ function PersonalData(props) {
     !values?.member?.become_member
 
   const onChangeProxyVAT = ({ vat, isPhisical, valid }) => {
-    const tmpValues = {...values}
+    const tmpValues = { ...values }
     tmpValues[entity] = {
-        ...values[entity],
-        proxynif: vat,
-        proxynif_valid: valid,
-        proxynif_phisical: isPhisical
-      }
-    
+      ...values[entity],
+      proxynif: vat,
+      proxynif_valid: valid,
+      proxynif_phisical: isPhisical,
+    }
+
     setValues(tmpValues)
   }
 
@@ -72,18 +70,18 @@ function PersonalData(props) {
 
   const handleAccept = () => {
     setOpenLegal(false)
-    setFieldValue('legal_person_accepted', true)
+    setFieldValue("legal_person_accepted", true)
   }
 
   const handleClose = () => {
     setOpenLegal(false)
-    setFieldValue('legal_person_accepted', false)
+    setFieldValue("legal_person_accepted", false)
   }
 
   const handleClick = (event) => {
     event.preventDefault()
     const privacyPolicyAccepted = values?.privacy_policy_accepted
-    setFieldValue('privacy_policy_accepted', !privacyPolicyAccepted)
+    setFieldValue("privacy_policy_accepted", !privacyPolicyAccepted)
   }
 
   const handleChangePhone = (event) => {
@@ -104,7 +102,7 @@ function PersonalData(props) {
     const postalCode = values[entity]?.postal_code
     if (
       postalCode?.length > 4 &&
-      (!values[entity]?.city?.id || values[entity]?.city?.id === '')
+      (!values[entity]?.city?.id || values[entity]?.city?.id === "")
     ) {
       setMunicipisWithPostalCode(postalCode)
     }
@@ -113,37 +111,42 @@ function PersonalData(props) {
   return (
     <>
       {title ? (
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          mb: 25
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            mb: 25,
+          }}>
           <Typography component="h1" variant="h3">
             {title}
           </Typography>
           <Typography component="h3" variant="h6">
-            {t('MEMBER_PERSONAL_DATA')}
+            {t("MEMBER_PERSONAL_DATA")}
           </Typography>
         </Box>
       ) : (
         <StepHeader
           title={
-            entity === 'holder'
-              ? form === 'holderchange' && !isMemberMandatoryForHolderchange && trialPeriod
-                ? t('HOLDER_PERSONAL_DATA_TRIAL_PERIOD')
-                : t('HOLDER_PERSONAL_DATA')
-              : t('MEMBER_PERSONAL_DATA')
+            entity === "holder"
+              ? form === "holderchange" &&
+                !isMemberMandatoryForHolderchange &&
+                trialPeriod
+                ? t("HOLDER_PERSONAL_DATA_TRIAL_PERIOD")
+                : t("HOLDER_PERSONAL_DATA")
+              : t("MEMBER_PERSONAL_DATA")
           }
         />
       )}
       <Box className="step-body">
-        {form === 'holderchange' && !isMemberMandatoryForHolderchange && trialPeriod && (
-          <Box sx={{ marginBottom: '1rem' }}>
-            <Typography sx={{ fontSize: '18px', fontWeight: '500' }}>
-              {t('HOLDER_PERSONAL_DATA')}
-            </Typography>
-          </Box>
-        )}
+        {form === "holderchange" &&
+          !isMemberMandatoryForHolderchange &&
+          trialPeriod && (
+            <Box sx={{ marginBottom: "1rem" }}>
+              <Typography sx={{ fontSize: "18px", fontWeight: "500" }}>
+                {t("HOLDER_PERSONAL_DATA")}
+              </Typography>
+            </Box>
+          )}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -151,8 +154,8 @@ function PersonalData(props) {
               name={`${entity}.name`}
               label={
                 values[entity]?.isphisical
-                  ? t('HOLDER_NAME')
-                  : t('BUSINESS_NAME')
+                  ? t("HOLDER_NAME")
+                  : t("BUSINESS_NAME")
               }
               variant="outlined"
               fullWidth
@@ -171,7 +174,7 @@ function PersonalData(props) {
                 <TextField
                   id={`${entity}_surname1`}
                   name={`${entity}.surname1`}
-                  label={t('HOLDER_SURNAME1')}
+                  label={t("HOLDER_SURNAME1")}
                   variant="outlined"
                   fullWidth
                   required
@@ -188,7 +191,7 @@ function PersonalData(props) {
                 <TextField
                   id={`${entity}_surname2`}
                   name={`${entity}.surname2`}
-                  label={t('HOLDER_SURNAME2')}
+                  label={t("HOLDER_SURNAME2")}
                   variant="outlined"
                   fullWidth
                   value={values[entity]?.surname2}
@@ -207,7 +210,7 @@ function PersonalData(props) {
                 <TextField
                   id="proxyname"
                   name={`${entity}.proxyname`}
-                  label={t('PROXY_NAME')}
+                  label={t("PROXY_NAME")}
                   required
                   value={values[entity]?.proxyname}
                   variant="outlined"
@@ -226,7 +229,7 @@ function PersonalData(props) {
                 <VATField
                   id="proxynif"
                   name={`${entity}.proxynif`}
-                  label={t('PROXY_NIF')}
+                  label={t("PROXY_NIF")}
                   variant="outlined"
                   fullWidth
                   isVatTouched={touched[entity]?.proxynif}
@@ -257,11 +260,11 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_address`}
               name={`${entity}.address`}
-              label={t('ADDRESS')}
+              label={t("ADDRESS")}
               sx={{
-                '& path': {
-                  color: 'secondary.dark'
-                }
+                "& path": {
+                  color: "secondary.dark",
+                },
               }}
               required
               variant="outlined"
@@ -270,7 +273,7 @@ function PersonalData(props) {
                   <InputAdornment position="start">
                     <HomeOutlinedIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               fullWidth
               value={values[entity]?.address}
@@ -285,7 +288,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_number`}
               name={`${entity}.number`}
-              label={t('NUMBER')}
+              label={t("NUMBER")}
               required
               variant="outlined"
               fullWidth
@@ -301,7 +304,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}floor`}
               name={`${entity}.floor`}
-              label={t('FLOOR')}
+              label={t("FLOOR")}
               variant="outlined"
               fullWidth
               value={values[entity].floor}
@@ -316,7 +319,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}door`}
               name={`${entity}.door`}
-              label={t('DOOR')}
+              label={t("DOOR")}
               variant="outlined"
               fullWidth
               value={values[entity]?.door}
@@ -331,7 +334,7 @@ function PersonalData(props) {
             <TextField
               id={`${entity}_postalcode`}
               name={`${entity}.postal_code`}
-              label={t('POSTAL_CODE')}
+              label={t("POSTAL_CODE")}
               variant="outlined"
               required
               fullWidth
@@ -374,18 +377,18 @@ function PersonalData(props) {
               id={`${entity}_email`}
               name={`${entity}.email`}
               sx={{
-                '& path': {
-                  color: 'secondary.dark'
-                }
+                "& path": {
+                  color: "secondary.dark",
+                },
               }}
-              label={t('EMAIL')}
+              label={t("EMAIL")}
               variant="outlined"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <EmailOutlinedIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               required
               fullWidth
@@ -401,18 +404,18 @@ function PersonalData(props) {
               id={`${entity}_email2`}
               name={`${entity}.email2`}
               sx={{
-                '& path': {
-                  color: 'secondary.dark'
-                }
+                "& path": {
+                  color: "secondary.dark",
+                },
               }}
-              label={t('HOLDER_EMAIL_2')}
+              label={t("HOLDER_EMAIL_2")}
               variant="outlined"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <EmailOutlinedIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               required
               fullWidth
@@ -428,18 +431,18 @@ function PersonalData(props) {
               id={`${entity}_phone`}
               name={`${entity}.phone1`}
               sx={{
-                '& path': {
-                  color: 'secondary.dark'
-                }
+                "& path": {
+                  color: "secondary.dark",
+                },
               }}
-              label={t('PHONE')}
+              label={t("PHONE")}
               variant="outlined"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <PhoneAndroidOutlinedIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               required
               fullWidth
@@ -455,18 +458,18 @@ function PersonalData(props) {
               id={`${entity}_phone2`}
               name={`${entity}.phone2`}
               sx={{
-                '& path': {
-                  color: 'secondary.dark'
-                }
+                "& path": {
+                  color: "secondary.dark",
+                },
               }}
-              label={t('HOLDER_PHONE_2')}
+              label={t("HOLDER_PHONE_2")}
               variant="outlined"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <PhoneAndroidOutlinedIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               fullWidth
               value={values[entity]?.phone2}
@@ -483,13 +486,13 @@ function PersonalData(props) {
               required
               fullWidth
               sx={{
-                '& path': {
-                  color: 'secondary.dark'
-                }
+                "& path": {
+                  color: "secondary.dark",
+                },
               }}
               id={`${entity}_lang`}
               name={`${entity}.language`}
-              label={t('LANGUAGE')}
+              label={t("LANGUAGE")}
               value={values[entity]?.language}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -497,14 +500,14 @@ function PersonalData(props) {
               helperText={
                 touched[entity]?.language && errors[entity]?.language
                   ? errors[entity]?.language
-                  : t('HOLDER_LANGUAGE_HELP')
+                  : t("HOLDER_LANGUAGE_HELP")
               }
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <LanguageOutlinedIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               variant="outlined">
               {Object.keys(languages).map((id) => (
@@ -520,23 +523,23 @@ function PersonalData(props) {
                 dangerouslySetInnerHTML={{
                   __html:
                     values?.contract?.has_service === undefined
-                      ? entity === 'holder'
-                        ? t('PRIVACY_POLICY_HOLDERCHANGE', {
-                          url: t('DATA_PROTECTION_HOLDERCHANGE_URL')
-                        })
-                        : t('PRIVACY_POLICY_NEWMEMBER', {
-                          url: t('DATA_PROTECTION_NEWMEMBER_URL')
-                        })
-                      : t('PRIVACY_POLICY_CONTRACT', {
-                        url: t('DATA_PROTECTION_CONTRACT_URL')
-                      })
+                      ? entity === "holder"
+                        ? t("PRIVACY_POLICY_HOLDERCHANGE", {
+                            url: t("DATA_PROTECTION_HOLDERCHANGE_URL"),
+                          })
+                        : t("PRIVACY_POLICY_NEWMEMBER", {
+                            url: t("DATA_PROTECTION_NEWMEMBER_URL"),
+                          })
+                      : t("PRIVACY_POLICY_CONTRACT", {
+                          url: t("DATA_PROTECTION_CONTRACT_URL"),
+                        }),
                 }}
               />
               {values?.contract?.has_service === undefined ? (
                 <FormHelperText
                   sx={{ mt: 2 }}
                   dangerouslySetInnerHTML={{
-                    __html: t('PRIVACY_POLICY_HOLDERCHANGE_NOTE')
+                    __html: t("PRIVACY_POLICY_HOLDERCHANGE_NOTE"),
                   }}
                 />
               ) : (
@@ -548,7 +551,7 @@ function PersonalData(props) {
             {skipPrivacyPolicy ? null : (
               <FormGroup row>
                 <FormControlLabel
-                  sx={{m:0}}
+                  sx={{ m: 0 }}
                   control={
                     <Checkbox
                       id="privacy_policy_accepted"
@@ -561,14 +564,14 @@ function PersonalData(props) {
                   label={
                     <label
                       dangerouslySetInnerHTML={{
-                        __html: t('ACCEPT_PRIVACY_POLICY', {
+                        __html: t("ACCEPT_PRIVACY_POLICY", {
                           url:
                             values?.contract?.has_service === undefined
-                              ? entity === 'holder'
-                                ? t('DATA_PROTECTION_HOLDERCHANGE_URL')
-                                : t('DATA_PROTECTION_NEWMEMBER_URL')
-                              : t('DATA_PROTECTION_CONTRACT_URL')
-                        })
+                              ? entity === "holder"
+                                ? t("DATA_PROTECTION_HOLDERCHANGE_URL")
+                                : t("DATA_PROTECTION_NEWMEMBER_URL")
+                              : t("DATA_PROTECTION_CONTRACT_URL"),
+                        }),
                       }}
                     />
                   }
@@ -590,12 +593,12 @@ function PersonalData(props) {
                         checked={values?.legal_person_accepted}
                       />
                     }
-                    label={t('LEGAL_PERSON_TITLE_LABEL')}
+                    label={t("LEGAL_PERSON_TITLE_LABEL")}
                   />
                 </FormGroup>
 
                 <TermsDialog
-                  title={t('LEGAL_PERSON_TITLE')}
+                  title={t("LEGAL_PERSON_TITLE")}
                   open={openLegal}
                   onAccept={handleAccept}
                   onClose={handleClose}
@@ -603,9 +606,9 @@ function PersonalData(props) {
                   <span
                     dangerouslySetInnerHTML={{
                       __html:
-                        entity === 'holder'
-                          ? t('PRIVACY_POLICY_LEGAL_PERSON')
-                          : t('PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER')
+                        entity === "holder"
+                          ? t("PRIVACY_POLICY_LEGAL_PERSON")
+                          : t("PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER"),
                     }}
                   />
                 </TermsDialog>

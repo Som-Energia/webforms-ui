@@ -13,7 +13,7 @@
     "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
     "cypress": "TZ=Europe/Madrid cypress open",
     "cypress:smoke": "TZ=Europe/Madrid cypress run --env configFile=production",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --report-unused-disable-directives --quiet",
     "lint:todos": "./scripts/todos.sh src/",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

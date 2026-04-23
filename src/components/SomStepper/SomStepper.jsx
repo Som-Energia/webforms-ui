@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next'
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
+import { useTranslation } from "react-i18next"
+
+import LinearProgress from "@mui/material/LinearProgress"
+import Typography from "@mui/material/Typography"
 
 const SomStepper = (props) => {
   const { activeStep = 0, steps = {}, stepsNum, showStepTitle = false } = props
@@ -12,7 +13,7 @@ const SomStepper = (props) => {
   return (
     <>
       <Typography color="secondary">
-        {showStepTitle && t('STEP_TITLE')} {currentStep + '/' + numberSteps}
+        {showStepTitle && t("STEP_TITLE")} {currentStep + "/" + numberSteps}
       </Typography>
       {numberSteps && (
         <LinearProgress
@@ -21,10 +22,10 @@ const SomStepper = (props) => {
           color="secondary"
           sx={{
             height: 6,
-            borderRadius: '100px',
-            backgroundColor: 'secondary.extraDark',
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: 'primary.mainOrange',
+            borderRadius: "100px",
+            backgroundColor: "secondary.extraDark",
+            "& .MuiLinearProgress-bar": {
+              backgroundColor: "primary.mainOrange",
             },
           }}
         />

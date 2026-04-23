@@ -1,26 +1,28 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
-import InputAdornment from '@mui/material/InputAdornment'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import { useTranslation } from 'react-i18next'
-import VATField from '../../../components/OldComponents/VATField'
-import { checkIsPostalCodeFromGenerationEnabledZone } from '../../../services/api'
+import React, { useCallback, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined"
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
+
+import VATField from "../../../components/OldComponents/VATField"
+import { checkIsPostalCodeFromGenerationEnabledZone } from "../../../services/api"
 
 const customStyles = {
   title: {
-    fontSize: '1rem',
-    marginTop: '16px',
-    fontWeight: 500
+    fontSize: "1rem",
+    marginTop: "16px",
+    fontWeight: 500,
   },
   titleWithMargin: {
-    mb: 1
+    mb: 1,
   },
   titleWithMarginPlus: {
-    mb: 3
+    mb: 3,
   },
   helperText: {
     color: "#f44336",
@@ -30,8 +32,8 @@ const customStyles = {
     textAlign: "left",
     lineHeight: "1.66",
     letterSpacing: "0.03333em",
-    fontWeight: 400
-  }
+    fontWeight: 400,
+  },
 }
 
 const GenerationNoMemberIdFields = (props) => {
@@ -47,7 +49,7 @@ const GenerationNoMemberIdFields = (props) => {
     setErrors,
     setValues,
     setFieldTouched,
-    isTesting = false
+    isTesting = false,
   } = props
 
   const onChangeVAT = (params) => {
@@ -58,25 +60,25 @@ const GenerationNoMemberIdFields = (props) => {
         ...values.member,
         isphisical: isPhisical,
         vatvalid: valid,
-        exists:isMember,
-        vat: vat
-      }
+        exists: isMember,
+        vat: vat,
+      },
     }
     setValues(tmpValues)
   }
 
   const onChangePostalCode = (event) => {
     if (values?.member?.postal_code_checked) {
-      setFieldValue('member.postal_code_checked', false)
+      setFieldValue("member.postal_code_checked", false)
     }
-    setFieldValue('member.postal_code', event.target.value)
+    setFieldValue("member.postal_code", event.target.value)
   }
 
   const checkPostalCode = useCallback(async () => {
     setIsLoading(true)
     try {
       let result = await checkIsPostalCodeFromGenerationEnabledZone({
-        postalCode: values?.member?.postal_code
+        postalCode: values?.member?.postal_code,
       })
       const tmpValues = {
         ...values,
@@ -84,19 +86,17 @@ const GenerationNoMemberIdFields = (props) => {
           ...values.member,
           generation_zone_checked: true,
           has_generation_enabled_zone: result.data,
-          postal_code_checked:true
-        }
+          postal_code_checked: true,
+        },
       }
       setValues(tmpValues)
 
       setIsLoading(false)
-    } catch (error) {
+    } catch {
       setErrors({
         member: {
-          postal_code: t(
-            'GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED'
-          )
-        }
+          postal_code: t("GENERATION_FORM_DATA_COULD_NOT_BE_VALIDATED"),
+        },
       })
       setIsLoading(false)
     }
@@ -115,14 +115,14 @@ const GenerationNoMemberIdFields = (props) => {
           variant="h6"
           sx={[customStyles.title, customStyles.titleWithMarginPlus]}
           dangerouslySetInnerHTML={{
-            __html: t('GENERATION_FORM_POSTAL_CODE')
+            __html: t("GENERATION_FORM_POSTAL_CODE"),
           }}
         />
         <Box id="box_no_member_vat_input" mt={2} mb={1}>
           <TextField
-            id={'input_postalcode'}
-            name={'member.postal_code'}
-            label={t('POSTAL_CODE')}
+            id={"input_postalcode"}
+            name={"member.postal_code"}
+            label={t("POSTAL_CODE")}
             variant="outlined"
             required
             fullWidth
@@ -131,13 +131,17 @@ const GenerationNoMemberIdFields = (props) => {
             onBlur={handleBlur}
             error={errors?.member?.postal_code && touched?.member?.postal_code}
             helperText={
-              touched?.member?.postal_code && errors?.member?.postal_code ? <Typography
-                variant="h6"
-                sx={customStyles.helperText}
-                dangerouslySetInnerHTML={{
-                  __html: errors?.member?.postal_code
-                }}
-              /> : ""
+              touched?.member?.postal_code && errors?.member?.postal_code ? (
+                <Typography
+                  variant="h6"
+                  sx={customStyles.helperText}
+                  dangerouslySetInnerHTML={{
+                    __html: errors?.member?.postal_code,
+                  }}
+                />
+              ) : (
+                ""
+              )
             }
             InputProps={{
               endAdornment: (
@@ -147,27 +151,27 @@ const GenerationNoMemberIdFields = (props) => {
                     <CheckOutlinedIcon color="primary" />
                   )}
                 </InputAdornment>
-              )
+              ),
             }}
           />
         </Box>
       </Box>
       {values?.member?.has_generation_enabled_zone &&
-        values.member.postal_code_checked ? (
+      values.member.postal_code_checked ? (
         <>
           <Box id="box_no_member_identifier" mt={0} mb={2}>
             <Typography
               variant="h6"
               sx={[customStyles.title, customStyles.titleWithMarginPlus]}
               dangerouslySetInnerHTML={{
-                __html: t('GENERATION_FORM_CONTRIBUTION_MEMBER_VAT')
+                __html: t("GENERATION_FORM_CONTRIBUTION_MEMBER_VAT"),
               }}
             />
             <Box id="box_no_member_vat_input" mt={2} mb={1}>
               <VATField
                 id="vat"
                 name="member.vat"
-                label={t('VAT_LABEL')}
+                label={t("VAT_LABEL")}
                 variant="outlined"
                 fullWidth
                 isVatTouched={touched?.member?.vat}
@@ -183,9 +187,31 @@ const GenerationNoMemberIdFields = (props) => {
                   (touched?.member?.vat && values?.member?.exists === true)
                 }
                 helperText={
-                  (touched?.member?.vat && errors?.member?.vat ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vat }} /> : '' ) ||
-                  (touched?.member?.vat && errors?.member?.vatvalid ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.vatvalid }} /> : '' ) ||
-                  (touched?.member?.vat && errors?.member?.exists ? <span dangerouslySetInnerHTML={{ __html: errors?.member?.exists }} /> : '' )
+                  (touched?.member?.vat && errors?.member?.vat ? (
+                    <span
+                      dangerouslySetInnerHTML={{ __html: errors?.member?.vat }}
+                    />
+                  ) : (
+                    ""
+                  )) ||
+                  (touched?.member?.vat && errors?.member?.vatvalid ? (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: errors?.member?.vatvalid,
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )) ||
+                  (touched?.member?.vat && errors?.member?.exists ? (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: errors?.member?.exists,
+                      }}
+                    />
+                  ) : (
+                    ""
+                  ))
                 }
               />
             </Box>
@@ -195,7 +221,7 @@ const GenerationNoMemberIdFields = (props) => {
               <Typography
                 variant="body1"
                 dangerouslySetInnerHTML={{
-                  __html: t('GENERATION_CONTRIBUTION_MEMBER_WARNING')
+                  __html: t("GENERATION_CONTRIBUTION_MEMBER_WARNING"),
                 }}
               />
             </Alert>

@@ -1,11 +1,12 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import GenerationContext from '../context/GenerationContext'
-import PopUpContext from '../../../context/PopUpContext'
-import { deleteContractsFromAssignments } from '../../../services/api'
-import CustomDialog from '../../../components/CustomDialog'
-import Loading from '../../../components/Loading'
-import AssignmentsTable from './AssignmentsTable'
+import React, { useCallback, useContext, useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
+
+import CustomDialog from "../../../components/CustomDialog"
+import Loading from "../../../components/Loading"
+import PopUpContext from "../../../context/PopUpContext"
+import { deleteContractsFromAssignments } from "../../../services/api"
+import GenerationContext from "../context/GenerationContext"
+import AssignmentsTable from "./AssignmentsTable"
 
 function createData(
   id,
@@ -14,7 +15,7 @@ function createData(
   contractTariff,
   priority,
   contractLastInvoiced,
-  annualUseKwh
+  annualUseKwh,
 ) {
   return {
     id,
@@ -23,7 +24,7 @@ function createData(
     contractTariff,
     priority,
     contractLastInvoiced,
-    annualUseKwh
+    annualUseKwh,
   }
 }
 
@@ -34,7 +35,7 @@ export default function GenerationAssigmentSection({ data }) {
     setEditingPriority,
     changeAssigmentPriority,
     getAssingments,
-    getContractsToAssign
+    getContractsToAssign,
   } = useContext(GenerationContext)
   const [loading, setLoading] = useState(false)
 
@@ -42,14 +43,14 @@ export default function GenerationAssigmentSection({ data }) {
 
   const columns = useMemo(
     () => [
-      t('GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY'),
-      t('GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT'),
-      t('ADDRESS'),
-      t('GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE'),
-      t('GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH'),
-      ''
+      t("GENERATION_ASSIGNMENTS_TABLE_TTILE_PRIORITY"),
+      t("GENERATION_ASSIGNMENTS_TABLE_TTILE_N_CONTRACT"),
+      t("ADDRESS"),
+      t("GENERATION_ASSIGNMENTS_TABLE_TTILE_LAST_DATE"),
+      t("GENERATION_ASSIGNMENTS_TABLE_TITLE_ANNUAL_USE_KWH"),
+      "",
     ],
-    [t]
+    [t],
   )
 
   const handleChangeSort = useCallback(
@@ -57,7 +58,7 @@ export default function GenerationAssigmentSection({ data }) {
       setEditingPriority(true)
       changeAssigmentPriority(rows[indexSource], rows[indexDest])
     },
-    [changeAssigmentPriority, rows, setEditingPriority]
+    [changeAssigmentPriority, rows, setEditingPriority],
   )
 
   const handleDelete = async (id) => {
@@ -66,7 +67,7 @@ export default function GenerationAssigmentSection({ data }) {
       setContent(
         <CustomDialog withBackground={false} blockHandleClose={true}>
           <Loading />
-        </CustomDialog>
+        </CustomDialog>,
       )
       await deleteContractsFromAssignments(id)
       await getContractsToAssign()

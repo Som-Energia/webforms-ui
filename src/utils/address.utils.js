@@ -14,7 +14,7 @@ export class AddressUtils {
     comps.forEach((item) => {
       result[item] =
         place.addressComponents.find((c) => c.types.includes(item))?.longText ||
-        ''
+        ""
     })
 
     return result
@@ -29,8 +29,8 @@ export class AddressUtils {
    */
   static sanitizePlace(place) {
     return {
-      id: String(place?.id || ''),
-      name: place?.name || ''
+      id: String(place?.id || ""),
+      name: place?.name || "",
     }
   }
 
@@ -52,7 +52,8 @@ export class AddressUtils {
   static segmentStreet(value, opts = { avoidStreetType: true }) {
     const connectors = []
     const streetNames = []
-    const particlesRegex = /\b(de|do|da|dos|das|o|a|os|as|e|ao|aos|á|ás|del|dels|la|las|les|el|els|los|al|als|en|na|eta|ta)\b|\b(d|l|n|s)'/i
+    const particlesRegex =
+      /\b(de|do|da|dos|das|o|a|os|as|e|ao|aos|á|ás|del|dels|la|las|les|el|els|los|al|als|en|na|eta|ta)\b|\b(d|l|n|s)'/i
 
     value.split(/\s+/).forEach((word, index) => {
       if (particlesRegex.test(word) && !streetNames.length) {
@@ -63,8 +64,8 @@ export class AddressUtils {
     })
 
     return {
-      streetName: streetNames.join(' '),
-      segments: connectors.concat(streetNames.join(' '))
+      streetName: streetNames.join(" "),
+      segments: connectors.concat(streetNames.join(" ")),
     }
   }
 }

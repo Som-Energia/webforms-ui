@@ -1,12 +1,12 @@
-import { defineConfig } from 'cypress'
-import fs from 'fs-extra'
-import path from 'path'
+import { defineConfig } from "cypress"
+import fs from "fs-extra"
+import path from "path"
 
 const getConfigurationByFile = (file) => {
   const pathToConfigFile = path.resolve(
-    './',
-    'cypress',
-    'config',
+    "./",
+    "cypress",
+    "config",
     `${file}.json`,
   )
   return fs.readJson(pathToConfigFile)
@@ -15,7 +15,7 @@ const getConfigurationByFile = (file) => {
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      const file = config.env.configFile || 'development'
+      const file = config.env.configFile || "development"
       return getConfigurationByFile(file)
     },
     supportFile: false,

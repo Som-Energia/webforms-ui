@@ -1,7 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import App from './App'
+import "./index.css"
+
+import React from "react"
+import ReactDOM from "react-dom/client"
+
+import App from "./App"
 // import * as serviceWorker from './serviceWorker'
 
 // const root = document.getElementById('root')
@@ -22,18 +24,16 @@ if (root) {
     Object.keys(featureFlags).forEach((flag) => {
       props[flag] = featureFlags[flag]
     })
-    
+
     console.log(
       `webforms-ui version: ${
         import.meta.env.VITE_APP_VERSION ||
         import.meta.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
-      }`
+      }`,
     )
 
-    console.log(
-      `webforms-ui flags:`, featureFlags
-    )
-   
+    console.log(`webforms-ui flags:`, featureFlags)
+
     ReactDOM.createRoot(document.querySelectorAll("[id='root']")[index]).render(
       <React.StrictMode>
         <App {...props} />

@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback } from "react"
 
 export const useHandleChange = (setFieldValue) => {
   return useCallback(
@@ -6,7 +6,7 @@ export const useHandleChange = (setFieldValue) => {
       const { name, value } = event.target
       setFieldValue(name, value)
     },
-    [setFieldValue]
+    [setFieldValue],
   )
 }
 
@@ -18,6 +18,6 @@ export const useHandleChangeNif = (setFieldValue) => {
       cleanedValue = cleanedValue[0].toUpperCase()
       setFieldValue(name, cleanedValue)
     },
-    [setFieldValue]
+    [setFieldValue],
   )
 }

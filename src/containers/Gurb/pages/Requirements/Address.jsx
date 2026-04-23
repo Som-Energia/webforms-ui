@@ -1,26 +1,25 @@
-import { useRef } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useRef } from "react"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
-import { buttonDark } from '../../../../components/Buttons/buttonStyles'
+import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
 
-import InputField from '../../../../components/InputField/InputField'
-import LocationInput from '../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb'
-import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-
-import { useAddressHandlers } from '../../../../hooks/useGurbAddressHandlers'
+import { buttonDark } from "../../../../components/Buttons/buttonStyles"
+import InputField from "../../../../components/InputField/InputField"
+import { useAddressHandlers } from "../../../../hooks/useGurbAddressHandlers"
+import LocationInput from "../../components/AddressAutocompletedFieldGurb/AddressAutocompletedFieldGurb"
+import TextRecommendation from "../../components/TextRecommendation/TextRecommendation"
 
 const AddressField = ({
-  addressFieldName = 'address',
+  addressFieldName = "address",
   values,
   errors,
   setFieldError,
   touched,
   setFieldValue,
   setFieldTouched,
-  setTouched
+  setTouched,
 }) => {
   const { t } = useTranslation()
   const { gurbCode } = useParams()
@@ -32,7 +31,7 @@ const AddressField = ({
     handleChangeStreet,
     handleChangePostalCode,
     handleChangeNumber,
-    handleAddressValidation
+    handleAddressValidation,
   } = useAddressHandlers({
     setFieldValue,
     setFieldError,
@@ -41,15 +40,15 @@ const AddressField = ({
     values,
     t,
     sessionTokenRef,
-    gurbCode
+    gurbCode,
   })
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <TextRecommendation
-          title={t('GURB_ADDRESS_TITLE')}
-          text={t('GURB_ADDRESS_TITLE_HELPER')}
+          title={t("GURB_ADDRESS_TITLE")}
+          text={t("GURB_ADDRESS_TITLE_HELPER")}
           isHeader
         />
       </Grid>
@@ -57,7 +56,7 @@ const AddressField = ({
       {/* Street Input */}
       <Grid item xs={12}>
         <LocationInput
-          textFieldName={t('GURB_ADDRESS_STREET')}
+          textFieldName={t("GURB_ADDRESS_STREET")}
           value={values[addressFieldName]?.street}
           onChange={handleChangeStreet}
           onBlur={() => setFieldTouched(`${addressFieldName}.street`, true)}
@@ -82,7 +81,7 @@ const AddressField = ({
               handleBlur={() =>
                 setFieldTouched(`${addressFieldName}.postal_code`, true)
               }
-              textFieldName={t('POSTAL_CODE')}
+              textFieldName={t("POSTAL_CODE")}
               handleChange={handleChangePostalCode}
               touched={touched[addressFieldName]?.postal_code}
               value={values[addressFieldName].postal_code}
@@ -90,7 +89,7 @@ const AddressField = ({
                 touched[addressFieldName]?.postal_code &&
                 errors[addressFieldName]?.postal_code
                   ? t(errors[addressFieldName].postal_code)
-                  : ''
+                  : ""
               }
               required
             />
@@ -103,8 +102,8 @@ const AddressField = ({
               handleBlur={() =>
                 setFieldTouched(`${addressFieldName}.number`, true)
               }
-              textFieldName={t('NUMBER')}
-              textFieldHelper={t('HELPER_NUMBER_ADDRESS')}
+              textFieldName={t("NUMBER")}
+              textFieldHelper={t("HELPER_NUMBER_ADDRESS")}
               handleChange={handleChangeNumber}
               touched={touched[addressFieldName]?.number}
               value={values[addressFieldName]?.number}
@@ -112,7 +111,7 @@ const AddressField = ({
                 touched[addressFieldName]?.number &&
                 errors[addressFieldName]?.number
                   ? t(errors[addressFieldName].number)
-                  : ''
+                  : ""
               }
               required
             />
@@ -126,32 +125,32 @@ const AddressField = ({
         sm={12}
         xs={12}
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%'
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
         }}>
         <Button
           tabIndex={0}
           sx={{
             ...buttonDark,
-            height: '40px',
-            padding: '10px 48px',
-            boxSizing: 'border-box',
+            height: "40px",
+            padding: "10px 48px",
+            boxSizing: "border-box",
             lineHeight: 1,
-            textTransform: 'none',
-            width: 'auto',
-            alignSelf: 'center',
+            textTransform: "none",
+            width: "auto",
+            alignSelf: "center",
             marginTop: {
-              xs: '1rem',
-              sm: '2rem'
-            }
+              xs: "1rem",
+              sm: "2rem",
+            },
           }}
           variant="contained"
           disabled={loading || values[addressFieldName]?.inside_perimeter}
           onClick={handleAddressValidation}
           data-cy="validate-address">
-          {t('GURB_ADDRESS_VALIDATION_BUTTON_TEXT')}
+          {t("GURB_ADDRESS_VALIDATION_BUTTON_TEXT")}
         </Button>
       </Grid>
     </Grid>

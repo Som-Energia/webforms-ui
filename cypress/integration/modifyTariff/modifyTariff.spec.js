@@ -4,7 +4,7 @@ const SUCCESS_TITLE = "Has sol·licitat la tarifa:"
 
 
 describe('Modify Tariff', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

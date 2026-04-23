@@ -2,7 +2,7 @@ export const WAIT_TIME = 3000
 const STATUS_ACTIVE = 'active'
 
 describe('Gurb Participation', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

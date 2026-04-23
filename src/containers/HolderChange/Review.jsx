@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import FormHelperText from '@mui/material/FormHelperText'
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import Divider from "@mui/material/Divider"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormHelperText from "@mui/material/FormHelperText"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import StepHeader from '../../components/OldComponents/StepHeader'
-import TermsDialog from '../../components/TermsDialog'
-import LegalText from '../../components/LegalText'
-import { languages } from '../../services/utils'
+import LegalText from "../../components/LegalText"
+import StepHeader from "../../components/OldComponents/StepHeader"
+import TermsDialog from "../../components/TermsDialog"
+import { languages } from "../../services/utils"
 
 const sectionTitleStyles = {
-  fontSize: '18px',
+  fontSize: "18px",
   fontWeight: 500,
-  textTransform: 'uppercase',
+  textTransform: "uppercase",
   mt: 2,
-  mb: 1.2
+  mb: 1.2,
 }
 
 const Review = (props) => {
@@ -35,32 +35,32 @@ const Review = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', true)
+    setFieldValue("terms_accepted", true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', false)
+    setFieldValue("terms_accepted", false)
   }
 
   const ReviewField = ({ label, value }) => {
     return (
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.8 }}>
+      <Box sx={{ display: "flex", alignItems: "center", mb: 0.8 }}>
         <Box className="field__title">
           <Typography
             sx={{
-              textTransform: 'uppercase',
-              paddingRight: '12px',
-              fontSize: '14px',
+              textTransform: "uppercase",
+              paddingRight: "12px",
+              fontSize: "14px",
               fontWeight: 400,
-              color: 'secondary.dark'
+              color: "secondary.dark",
             }}
             variant="subtitle2">
             {label}
           </Typography>
         </Box>
         <Box className="field__value">
-          <Typography sx={{ fontSize: '16px' }} variant="body2">
+          <Typography sx={{ fontSize: "16px" }} variant="body2">
             {value}
           </Typography>
         </Box>
@@ -70,156 +70,156 @@ const Review = (props) => {
   const member = values?.member?.become_member
     ? `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`
     : values?.holder?.ismember
-    ? values?.holder.vat
-    : values?.member?.vat
+      ? values?.holder.vat
+      : values?.member?.vat
 
   return (
     <>
-      <StepHeader title={t('REVIEW_TITLE')} />
+      <StepHeader title={t("REVIEW_TITLE")} />
       <Box className="step-body">
         <Typography
           variant="body1"
-          dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
+          dangerouslySetInnerHTML={{ __html: t("REVIEW_DESCRIPTION") }}
         />
         <Grid container>
           <Grid item xs={12} sm={6}>
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('SUMMARY_GROUP_PROCESS')}
+              {t("SUMMARY_GROUP_PROCESS")}
             </Typography>
             <ReviewField
-              label={t('PROCESS_TYPE')}
-              value={t('PROCESS_TYPE_HOLDER_CHANGE')}
+              label={t("PROCESS_TYPE")}
+              value={t("PROCESS_TYPE_HOLDER_CHANGE")}
             />
             {values?.especial_cases?.reason_death && (
               <ReviewField
-                label={t('SPECIAL_CASES_TITLE')}
-                value={t('SPECIAL_CASES_DEATH')}
+                label={t("SPECIAL_CASES_TITLE")}
+                value={t("SPECIAL_CASES_DEATH")}
               />
             )}
             {values?.especial_cases?.reason_merge && (
               <ReviewField
-                label={t('SPECIAL_CASES_TITLE')}
-                value={t('SPECIAL_CASES_MERGE')}
+                label={t("SPECIAL_CASES_TITLE")}
+                value={t("SPECIAL_CASES_MERGE")}
               />
             )}
             {values?.especial_cases?.reason_electrodep && (
               <ReviewField
-                label={t('SPECIAL_CASES_TITLE')}
-                value={t('SPECIAL_CASES_ELECTRODEP')}
+                label={t("SPECIAL_CASES_TITLE")}
+                value={t("SPECIAL_CASES_ELECTRODEP")}
               />
             )}
             {member !== undefined && (
-              <ReviewField label={t('RELATED_MEMBER')} value={member} />
+              <ReviewField label={t("RELATED_MEMBER")} value={member} />
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('SUPPLYPOINT')}
+              {t("SUPPLYPOINT")}
             </Typography>
             <ReviewField
-              label={t('CUPS_LABEL')}
+              label={t("CUPS_LABEL")}
               value={values?.supply_point?.cups}
             />
             <ReviewField
-              label={t('ADDRESS')}
+              label={t("ADDRESS")}
               value={values?.supply_point?.address}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Divider variant="middle" sx={{ mt: "12px", ml: 0, mr: "32px" }} />
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('HOLDER')}
+              {t("HOLDER")}
             </Typography>
-            <ReviewField label={'NIF'} value={values?.holder?.vat} />
+            <ReviewField label={"NIF"} value={values?.holder?.vat} />
             {values?.holder?.isphisical ? (
               <>
                 <ReviewField
-                  label={t('NAME')}
+                  label={t("NAME")}
                   value={`${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`}
                 />
               </>
             ) : (
               <>
                 <ReviewField
-                  label={t('LEGAL_NAME')}
+                  label={t("LEGAL_NAME")}
                   value={values?.holder?.name}
                 />
                 <ReviewField
-                  label={t('PROXY')}
+                  label={t("PROXY")}
                   value={`${values?.holder.proxyname}(${values?.holder?.proxynif})`}
                 />
               </>
             )}
             <ReviewField
-              label={t('ADDRESS')}
+              label={t("ADDRESS")}
               value={`${values?.holder?.address}, ${values?.holder?.number} ${values?.holder?.floor} ${values?.holder?.door}`}
             />
             <ReviewField
-              label={t('CITY')}
+              label={t("CITY")}
               value={`${values?.holder?.city.name} (${values?.holder?.postal_code}) ${values?.holder?.state.name}`}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Divider variant="middle" sx={{ mt: "12px", ml: 0, mr: "32px" }} />
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('CONTACT')}
+              {t("CONTACT")}
             </Typography>
-            <ReviewField label={t('PHONE')} value={values?.holder?.phone1} />
-            <ReviewField label={t('EMAIL')} value={values?.holder?.email} />
+            <ReviewField label={t("PHONE")} value={values?.holder?.phone1} />
+            <ReviewField label={t("EMAIL")} value={values?.holder?.email} />
             <ReviewField
-              label={t('LANGUAGE')}
+              label={t("LANGUAGE")}
               value={languages[values?.holder?.language]}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Divider variant="middle" sx={{ mt: "12px", ml: 0, mr: "32px" }} />
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('SUMMARY_GROUP_TECHNICAL')}
+              {t("SUMMARY_GROUP_TECHNICAL")}
             </Typography>
-            <ReviewField label={t('FARE')} value={t('FARE_SAME')} />
-            <ReviewField label={t('POWER')} value={t('POWER_SAME')} />
+            <ReviewField label={t("FARE")} value={t("FARE_SAME")} />
+            <ReviewField label={t("POWER")} value={t("POWER_SAME")} />
             <FormHelperText
               sx={{ mt: 1 }}
-              dangerouslySetInnerHTML={{ __html: t('FARE_POWER_CHANGE_NOTE') }}
+              dangerouslySetInnerHTML={{ __html: t("FARE_POWER_CHANGE_NOTE") }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Divider variant="middle" sx={{ mt: '12px', ml: 0, mr: '32px' }} />
+            <Divider variant="middle" sx={{ mt: "12px", ml: 0, mr: "32px" }} />
             <Typography sx={sectionTitleStyles} variant="h6">
-              {t('SUMMARY_GROUP_PAYMENT')}
+              {t("SUMMARY_GROUP_PAYMENT")}
             </Typography>
-            <ReviewField label={t('IBAN')} value={values?.payment?.iban} />
+            <ReviewField label={t("IBAN")} value={values?.payment?.iban} />
             <ReviewField
-              label={t('VOLUNTARY_CENT')}
-              value={values?.payment?.voluntary_cent ? t('YES') : t('NO')}
+              label={t("VOLUNTARY_CENT")}
+              value={values?.payment?.voluntary_cent ? t("YES") : t("NO")}
             />
           </Grid>
         </Grid>
 
         <Divider
           variant="middle"
-          sx={{ mt: '24px', ml: 0, mr: '32px', mb: '24px' }}
+          sx={{ mt: "24px", ml: 0, mr: "32px", mb: "24px" }}
         />
 
-        { member === undefined && (
+        {member === undefined && (
           <FormHelperText
             dangerouslySetInnerHTML={{
-              __html: t('HOLDERCHANGE_REVIEW_TEXT')
+              __html: t("HOLDERCHANGE_REVIEW_TEXT"),
             }}
           />
         )}
 
         <TermsDialog
-          title={t('GENERAL_TERMS')}
+          title={t("GENERAL_TERMS")}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
           <LegalText
             language={values?.holder?.language}
             documentName={
-              values?.supply_point?.tariff_type === 'index'
-                ? 'general-and-indexed-specific-terms'
-                : 'general-contract-terms'
+              values?.supply_point?.tariff_type === "index"
+                ? "general-and-indexed-specific-terms"
+                : "general-contract-terms"
             }></LegalText>
         </TermsDialog>
 
@@ -233,9 +233,9 @@ const Review = (props) => {
               />
             }
             label={
-              values?.supply_point?.tariff_type === 'index'
-                ? t('INDEXED_ACCEPT_CONDITIONS')
-                : t('PERIODS_ACCEPT_CONDITIONS')
+              values?.supply_point?.tariff_type === "index"
+                ? t("INDEXED_ACCEPT_CONDITIONS")
+                : t("PERIODS_ACCEPT_CONDITIONS")
             }
           />
         </Box>

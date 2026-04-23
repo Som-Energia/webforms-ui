@@ -1,1 +1,1 @@
-export { default } from '@somenergia/frontend-config/prettier'
+export { default } from "@somenergia/frontend-config/prettier"

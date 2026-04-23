@@ -1,50 +1,50 @@
-import React from 'react'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import Divider from "@mui/material/Divider"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import Paper from '@mui/material/Paper'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 
-import Chooser from '../../components/OldComponents/Chooser'
+import Chooser from "../../components/OldComponents/Chooser"
 
 const label = {
-  textTransform: 'uppercase',
-  paddingRight: '12px',
-  color: 'secondary.dark'
+  textTransform: "uppercase",
+  paddingRight: "12px",
+  color: "secondary.dark",
 }
 
 function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
   const { t } = useTranslation()
 
   const handleValidateD1 = (setFieldValue, errors, option) => {
-    setFieldValue('validate', option)
+    setFieldValue("validate", option)
   }
 
   const ValidationSchema = Yup.object().shape({
     validate: Yup.boolean()
-      .required(t('CHOOSER_REQUIRED'))
-      .oneOf([true, false], t('INVALID_CHOOSER_OPTION'))
+      .required(t("CHOOSER_REQUIRED"))
+      .oneOf([true, false], t("INVALID_CHOOSER_OPTION")),
   })
 
   return (
     <Paper
       sx={{
         mt: 2,
-        p: 2
+        p: 2,
       }}
       elevation={0}>
       <Formik
         enableReinitialize
         initialValues={{
-          validate: '',
-          ...params
+          validate: "",
+          ...params,
         }}
         validateOnMount={true}
         validationSchema={ValidationSchema}
@@ -52,21 +52,14 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
           handleStepChanges({ validate: values?.validate })
           handleAcceptClick()
         }}>
-        {({
-          values,
-          errors,
-          touched,
-          isValid,
-          handleSubmit,
-          setFieldValue
-        }) => (
+        {({ values, errors, isValid, handleSubmit, setFieldValue }) => (
           <Form onSubmit={handleSubmit} noValidate autoComplete="off">
             {values?.to_validate && (
               <>
                 <Box mt={1} mx={1} mb={2}>
                   <Typography
                     variant="body1"
-                    dangerouslySetInnerHTML={{ __html: t('REVIEW_DATA_D1') }}
+                    dangerouslySetInnerHTML={{ __html: t("REVIEW_DATA_D1") }}
                   />
                 </Box>
                 <Box mx={1} mb={3}>
@@ -78,19 +71,19 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
             <Box mx={1} mb={2}>
               <Typography
                 sx={{
-                  textTransform: 'uppercase',
+                  textTransform: "uppercase",
                   mt: 2,
-                  mb: 2
+                  mb: 2,
                 }}
                 variant="h6">
-                {t('SELFCONSUMPTION_DATA')}
+                {t("SELFCONSUMPTION_DATA")}
               </Typography>
 
               <Box mb={0}>
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('REGISTER_SECTION')}
+                      {t("REGISTER_SECTION")}
                     </Typography>
                     <Typography
                       data-cy="register_section"
@@ -101,7 +94,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('SUBSECTION')}
+                      {t("SUBSECTION")}
                     </Typography>
                     <Typography
                       data-cy="subsection"
@@ -112,7 +105,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('CIL')}
+                      {t("CIL")}
                     </Typography>
                     <Typography data-cy="cil" variant="body1" gutterBottom>
                       {values?.cil}
@@ -120,7 +113,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('CAU')}
+                      {t("CAU")}
                     </Typography>
                     <Typography data-cy="cau" variant="body1" gutterBottom>
                       {values?.cau}
@@ -128,13 +121,13 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('COLLECTIVE')}
+                      {t("COLLECTIVE")}
                     </Typography>
                     <Typography
                       data-cy="collective"
                       variant="body1"
                       gutterBottom>
-                      {values?.collective ? t('YES') : t('NO')}
+                      {values?.collective ? t("YES") : t("NO")}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -142,18 +135,18 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
 
               <Typography
                 sx={{
-                  textTransform: 'uppercase',
+                  textTransform: "uppercase",
                   mt: 2,
-                  mb: 2
+                  mb: 2,
                 }}
                 variant="h6">
-                {t('GENERATORS_DATA')}
+                {t("GENERATORS_DATA")}
               </Typography>
               <Box mb={0}>
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('SELFCONSUMPTION_TECHNOLOGY_QUESTION')}
+                      {t("SELFCONSUMPTION_TECHNOLOGY_QUESTION")}
                     </Typography>
                     <Typography
                       data-cy="installation_type"
@@ -164,7 +157,7 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('GENERATOR_TECHNOLOGY')}
+                      {t("GENERATOR_TECHNOLOGY")}
                     </Typography>
                     <Typography
                       data-cy="generator_technology"
@@ -175,15 +168,15 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('SELFCONSUMPTION_AUXILIARY_SERVICE')}
+                      {t("SELFCONSUMPTION_AUXILIARY_SERVICE")}
                     </Typography>
                     <Typography data-cy="ssaa" variant="body1" gutterBottom>
-                      {values?.ssaa ? t('YES') : t('NO')}
+                      {values?.ssaa ? t("YES") : t("NO")}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography sx={label} variant="subtitle2" gutterBottom>
-                      {t('INSTALLED_POWER')}
+                      {t("INSTALLED_POWER")}
                     </Typography>
                     <Typography
                       data-cy="installed_power"
@@ -205,13 +198,13 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                   mx={1}
                   mb={2}
                   sx={{
-                    '& label': {
-                      minHeight: 'auto'
-                    }
+                    "& label": {
+                      minHeight: "auto",
+                    },
                   }}>
                   <Chooser
                     canBeEmpty={false}
-                    question={t('SELFCONSUMPTION_ACCEPT_REFUSE')}
+                    question={t("SELFCONSUMPTION_ACCEPT_REFUSE")}
                     onChange={(option) =>
                       handleValidateD1(setFieldValue, errors, option?.option)
                     }
@@ -219,20 +212,20 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                     options={[
                       {
                         value: true,
-                        label: t('SELFCONSUMPTION_ACCEPT')
+                        label: t("SELFCONSUMPTION_ACCEPT"),
                       },
                       {
                         value: false,
-                        label: t('SELFCONSUMPTION_REFUSE')
-                      }
+                        label: t("SELFCONSUMPTION_REFUSE"),
+                      },
                     ]}
                   />
                 </Box>
                 <Box
                   sx={{
                     mb: 1,
-                    display: 'flex',
-                    justifyContent: 'flex-end'
+                    display: "flex",
+                    justifyContent: "flex-end",
                   }}>
                   {
                     <Button
@@ -241,17 +234,17 @@ function D1Validation({ handleAcceptClick, handleStepChanges, params }) {
                       sx={{
                         mt: 1,
                         mr: 1,
-                        backgroundColor: '#CDFF80',
-                        color: '#0B2E34',
-                        '&:hover': {
-                          color: '#CDFF80',
-                          backgroundColor: '#0B2E34'
-                        }
+                        backgroundColor: "#CDFF80",
+                        color: "#0B2E34",
+                        "&:hover": {
+                          color: "#CDFF80",
+                          backgroundColor: "#0B2E34",
+                        },
                       }}
                       variant="contained"
                       disabled={!isValid}
                       endIcon={<ArrowForwardIosIcon />}>
-                      {t('NEXT')}
+                      {t("NEXT")}
                     </Button>
                   }
                 </Box>

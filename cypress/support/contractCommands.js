@@ -58,7 +58,7 @@ Cypress.Commands.add('identifyGenerationCanJoin', (memberNumber, memberVat) => {
 })
 
 
-Cypress.Commands.add('typeIbanGenerationkwh', (iban, statusCode) => {
+Cypress.Commands.add('typeIbanGenerationkwh', (iban) => {
 
   cy.get('[name="payment.iban"]')
     .clear()

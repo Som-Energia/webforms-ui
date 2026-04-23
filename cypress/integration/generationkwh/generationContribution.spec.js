@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Generation Form', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })
@@ -67,39 +67,39 @@ describe('Generation Form', () => {
     context('Member - Success Tests', () => {
 
       it('Contribute with an action', function () {
-  
+
         //Member page
         cy.generationkwhIdentifyMember(this.data.member.number, this.data.member.vat, true)
         cy.get('[data-cy=next]').click()
-  
+
         //Contribution page
         cy.get('#annual_use')
           .clear()
           .type(this.data.annual_use.low)
           .should('have.value', this.data.annual_use.low)
-  
+
         for (let n = 0; n < this.data.number_of_action.normal; n++) {
           cy.get('#add_action').click()
         }
-  
+
         //Insert IBAN
         cy.typeIbanGenerationkwh(this.data.payment_data.iban,200)
-  
+
         cy.get('[data-cy=next]').click()
-  
+
         //Review page
         cy.get('#privacy_plicy_check').check()
       })
-  
+
       it('Try to contribute with out of zone member', function () {
         //Member page
         let memberNumber = this.data.member_out_first_fase_zone.number
         let memberVat = this.data.member_out_first_fase_zone.vat
-  
+
         cy.generationkwhIdentifyMember(memberNumber, memberVat, false)
-  
+
         cy.get('[data-cy=exit]').click()
-  
+
       })
     })
 

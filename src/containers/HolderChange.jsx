@@ -1,46 +1,44 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { GlobalHotKeys } from 'react-hotkeys'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
-import { useParams } from 'react-router-dom'
+import React, { useState } from "react"
+import { GlobalHotKeys } from "react-hotkeys"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import LinearProgress from '@mui/material/LinearProgress'
-import Paper from '@mui/material/Paper'
+import SendIcon from "@mui/icons-material/Send"
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import LinearProgress from "@mui/material/LinearProgress"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import SendIcon from '@mui/icons-material/Send'
-import Typography from '@mui/material/Typography'
-import Alert from '@mui/material/Alert'
+import { Loading } from "@somenergia/somenergia-ui"
 
-import VAT from './HolderChange/VAT'
-import CUPS from './HolderChange/CUPS'
-import PersonalData from './HolderChange/PersonalData'
-import BecomeMember from './HolderChange/BecomeMember'
-import HolderCase from './HolderChange/HolderCase'
-import VoluntaryCent from './HolderChange/VoluntaryCent'
-import SpecialCases from './HolderChange/SpecialCases'
-import IBAN from './HolderChange/IBAN'
-import Review from './HolderChange/Review'
-import MemberIdentifier from './HolderChange/MemberIdentifier'
-import Success from './Success'
-import Failure from './Failure'
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 
-import data from '../data/HolderChange/data.json'
-
-import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
-
-import { holderChange } from '../services/api'
+import NextButton from "../components/OldComponents/Buttons/NextButton"
+import PrevButton from "../components/OldComponents/Buttons/PrevButton"
+import SubmitButton from "../components/OldComponents/Buttons/SubmitButton"
+import DisplayFormikState from "../components/OldComponents/DisplayFormikState"
+import data from "../data/HolderChange/data.json"
+import { useSyncLanguage } from "../hooks/useTranslateOptions"
+import { holderChange } from "../services/api"
 import {
+  isHomeOwnerCommunityNif,
   normalizeHolderChange,
-  isHomeOwnerCommunityNif
-} from '../services/utils'
-import PrevButton from '../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../components/OldComponents/Buttons/NextButton'
-import SubmitButton from '../components/OldComponents/Buttons/SubmitButton'
-import { useSyncLanguage } from '../hooks/useTranslateOptions'
-import { Loading } from '@somenergia/somenergia-ui'
+} from "../services/utils"
+import Failure from "./Failure"
+import BecomeMember from "./HolderChange/BecomeMember"
+import CUPS from "./HolderChange/CUPS"
+import HolderCase from "./HolderChange/HolderCase"
+import IBAN from "./HolderChange/IBAN"
+import MemberIdentifier from "./HolderChange/MemberIdentifier"
+import PersonalData from "./HolderChange/PersonalData"
+import Review from "./HolderChange/Review"
+import SpecialCases from "./HolderChange/SpecialCases"
+import VAT from "./HolderChange/VAT"
+import VoluntaryCent from "./HolderChange/VoluntaryCent"
+import Success from "./Success"
 
 function HolderChange(props) {
   const { t, i18n } = useTranslation()
@@ -57,198 +55,200 @@ function HolderChange(props) {
   const [isValid, setIsValid] = useState(false)
 
   const keyMap = {
-    SHOW_INSPECTOR: 'ctrl+alt+shift+d'
+    SHOW_INSPECTOR: "ctrl+alt+shift+d",
   }
 
   const handlers = {
     SAMPLE_DATA: () => {
-      const values = { ...initialValues, ...data }
+      return { ...initialValues, ...data }
     },
     SHOW_INSPECTOR: () => {
       setShowInspector(true)
-    }
+    },
   }
 
   const validationSchemas = [
     Yup.object().shape({
       holder: Yup.object().shape({
         vat: Yup.string()
-          .required(t('FILL_NIF'))
-          .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, t('INVALID_NIF')),
+          .required(t("FILL_NIF"))
+          .matches(/^[0-9A-Z][0-9]{7}[0-9A-Z]\d*$/, t("INVALID_NIF")),
         vatvalid: Yup.bool()
-          .required(t('FILL_NIF'))
-          .oneOf([true], t('FILL_NIF'))
-      })
+          .required(t("FILL_NIF"))
+          .oneOf([true], t("FILL_NIF")),
+      }),
     }),
     Yup.object().shape({
       supply_point: Yup.object().shape({
         cups: Yup.string()
-          .required(t('CUPS_INVALID'))
-          .min(18, t('CUPS_INVALID'))
-          .test('statusError', t('CUPS_INVALID'), function () {
-            return !(this.parent.status === 'error')
+          .required(t("CUPS_INVALID"))
+          .min(18, t("CUPS_INVALID"))
+          .test("statusError", t("CUPS_INVALID"), function () {
+            return !(this.parent.status === "error")
           })
-          .test('statusBusy', t('CUPS_IN_PROCESS'), function () {
-            return !(this.parent.status === 'busy')
+          .test("statusBusy", t("CUPS_IN_PROCESS"), function () {
+            return !(this.parent.status === "busy")
           })
-          .test('statusNew', t('CUPS_SHOULD_BE_ACTIVE'), function () {
-            return !(this.parent.status === 'new')
+          .test("statusNew", t("CUPS_SHOULD_BE_ACTIVE"), function () {
+            return !(this.parent.status === "new")
           })
-          .test('statusInactive', t('CUPS_SHOULD_BE_ACTIVE'), function () {
-            return !(this.parent.status === 'inactive')
+          .test("statusInactive", t("CUPS_SHOULD_BE_ACTIVE"), function () {
+            return !(this.parent.status === "inactive")
           })
-          .test('statusInvalid', t('INVALID_SUPPLY_POINT_CUPS'), function () {
-            return !(this.parent.status === 'invalid')
+          .test("statusInvalid", t("INVALID_SUPPLY_POINT_CUPS"), function () {
+            return !(this.parent.status === "invalid")
           }),
         verified: Yup.bool()
-          .required(t('MARK_ADDRESS_CONFIRMATION_BOX'))
-          .oneOf([true], t('MARK_ADDRESS_CONFIRMATION_BOX')),
+          .required(t("MARK_ADDRESS_CONFIRMATION_BOX"))
+          .oneOf([true], t("MARK_ADDRESS_CONFIRMATION_BOX")),
         supply_point_accepted: Yup.bool()
-          .required(t('CUPS_VERIFY_LABEL'))
-          .oneOf([true], t('CUPS_VERIFY_LABEL'))
-      })
+          .required(t("CUPS_VERIFY_LABEL"))
+          .oneOf([true], t("CUPS_VERIFY_LABEL")),
+      }),
     }),
     Yup.object().shape({
       member: Yup.object().shape({
         become_member: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
+          .required(t("UNACCEPTED_PRIVACY_POLICY"))
+          .oneOf([true, false], t("UNACCEPTED_PRIVACY_POLICY")),
+      }),
     }),
     Yup.object().shape({
       member: Yup.object().shape({
         link_member: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
+          .required(t("UNACCEPTED_PRIVACY_POLICY"))
+          .oneOf([true, false], t("UNACCEPTED_PRIVACY_POLICY")),
+      }),
     }),
     Yup.object().shape({
       member: Yup.object().shape({
         checked: Yup.bool()
-          .required(t('UNACCEPTED_PRIVACY_POLICY'))
-          .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
-      })
+          .required(t("UNACCEPTED_PRIVACY_POLICY"))
+          .oneOf([true], t("UNACCEPTED_PRIVACY_POLICY")),
+      }),
     }),
     Yup.object().shape({
       holder: Yup.object().shape({
-        name: Yup.string().required(t('NO_NAME')),
-        surname1: Yup.string().when('isphisical', {
+        name: Yup.string().required(t("NO_NAME")),
+        surname1: Yup.string().when("isphisical", {
           is: true,
-          then: Yup.string().required(t('NO_SURNAME1'))
+          then: Yup.string().required(t("NO_SURNAME1")),
         }),
-        proxyname: Yup.string().when('isphisical', {
+        proxyname: Yup.string().when("isphisical", {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NAME'))
+          then: Yup.string().required(t("NO_PROXY_NAME")),
         }),
-        proxynif: Yup.string().when('isphisical', {
+        proxynif: Yup.string().when("isphisical", {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NIF'))
+          then: Yup.string().required(t("NO_PROXY_NIF")),
         }),
-        proxynif_valid: Yup.bool().when('isphisical', {
+        proxynif_valid: Yup.bool().when("isphisical", {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: Yup.bool().required(t("FILL_NIF")).oneOf([true], t("FILL_NIF")),
         }),
-        proxynif_phisical: Yup.bool().when('isphisical', {
+        proxynif_phisical: Yup.bool().when("isphisical", {
           is: false,
           then: Yup.bool()
-            .required(t('PROXY_NIF_PHISICAL'))
-            .oneOf([true], t('PROXY_NIF_PHISICAL'))
+            .required(t("PROXY_NIF_PHISICAL"))
+            .oneOf([true], t("PROXY_NIF_PHISICAL")),
         }),
-        address: Yup.string().required(t('NO_ADDRESS')),
-        number: Yup.string().required(t('NO_NUMBER')),
+        address: Yup.string().required(t("NO_ADDRESS")),
+        number: Yup.string().required(t("NO_NUMBER")),
         postal_code: Yup.string()
-          .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE'))
-          .min(5, t('NO_POSTALCODE'))
-          .max(5, t('NO_POSTALCODE')),
+          .matches(/^\d*$/, t("NO_POSTALCODE"))
+          .required(t("NO_POSTALCODE"))
+          .min(5, t("NO_POSTALCODE"))
+          .max(5, t("NO_POSTALCODE")),
         state: Yup.object().shape({
-          id: Yup.number().required(t('NO_STATE'))
+          id: Yup.number().required(t("NO_STATE")),
         }),
         city: Yup.object().shape({
-          id: Yup.number().required(t('NO_CITY'))
+          id: Yup.number().required(t("NO_CITY")),
         }),
-        email: Yup.string().required(t('NO_EMAIL')).email(t('NO_EMAIL')),
+        email: Yup.string().required(t("NO_EMAIL")).email(t("NO_EMAIL")),
         email2: Yup.string().test(
-          'repeatEmail',
-          t('NO_REPEATED_EMAIL'),
+          "repeatEmail",
+          t("NO_REPEATED_EMAIL"),
           function () {
             return this.parent.email === this.parent.email2
-          }
+          },
         ),
-        phone1: Yup.string().matches(/^\d{9}$/, t('INCORRECT_PHONE')).required(t('NO_PHONE')),
-        phone2: Yup.string().matches(/^(\s*|\d{9})$/, t('INCORRECT_PHONE')),
-        language: Yup.string().required(t('NO_LANGUAGE'))
+        phone1: Yup.string()
+          .matches(/^\d{9}$/, t("INCORRECT_PHONE"))
+          .required(t("NO_PHONE")),
+        phone2: Yup.string().matches(/^(\s*|\d{9})$/, t("INCORRECT_PHONE")),
+        language: Yup.string().required(t("NO_LANGUAGE")),
       }),
       legal_person_accepted: Yup.bool().test({
-        name: 'isTheMemberVat',
-        message: t('ACCEPT_LEGAL_PERSON'),
+        name: "isTheMemberVat",
+        message: t("ACCEPT_LEGAL_PERSON"),
         test: function () {
           return !(
             this.parent.holder.isphisical === false &&
             this.parent.legal_person_accepted !== true
           )
-        }
+        },
       }),
       privacy_policy_accepted: Yup.bool()
-        .required(t('UNACCEPTED_PRIVACY_POLICY'))
-        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+        .required(t("UNACCEPTED_PRIVACY_POLICY"))
+        .oneOf([true], t("UNACCEPTED_PRIVACY_POLICY")),
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
         voluntary_cent: Yup.bool()
-          .required(t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
-          .oneOf([false, true], t('NO_VOLUNTARY_DONATION_CHOICE_TAKEN'))
-      })
+          .required(t("NO_VOLUNTARY_DONATION_CHOICE_TAKEN"))
+          .oneOf([false, true], t("NO_VOLUNTARY_DONATION_CHOICE_TAKEN")),
+      }),
     }),
     Yup.object().shape({
       especial_cases: Yup.object()
         .shape({
           attachments: Yup.object()
-            .when('reason_death', {
+            .when("reason_death", {
               is: true,
               then: Yup.object().shape({
                 death: Yup.array()
-                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-              })
+                  .min(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .max(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .required(t("ELECTRODEP_ATTACH_REQUIRED")),
+              }),
             })
-            .when('reason_electrodep', {
+            .when("reason_electrodep", {
               is: true,
               then: Yup.object().shape({
                 medical: Yup.array()
-                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .required(t('ELECTRODEP_ATTACH_REQUIRED')),
+                  .min(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .max(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .required(t("ELECTRODEP_ATTACH_REQUIRED")),
                 resident: Yup.array()
-                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-              })
+                  .min(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .max(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .required(t("ELECTRODEP_ATTACH_REQUIRED")),
+              }),
             })
-            .when('reason_merge', {
+            .when("reason_merge", {
               is: true,
               then: Yup.object().shape({
                 merge: Yup.array()
-                  .min(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .max(1, t('ELECTRODEP_ATTACH_REQUIRED'))
-                  .required(t('ELECTRODEP_ATTACH_REQUIRED'))
-              })
+                  .min(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .max(1, t("ELECTRODEP_ATTACH_REQUIRED"))
+                  .required(t("ELECTRODEP_ATTACH_REQUIRED")),
+              }),
             }),
           reason_default: Yup.bool(),
           reason_death: Yup.bool(),
           reason_merge: Yup.bool(),
-          reason_electrodep: Yup.bool()
+          reason_electrodep: Yup.bool(),
         })
         .test(
-          'At least one checked',
-          t('AT_LEAST_ONE_CHANGE_REASON'),
+          "At least one checked",
+          t("AT_LEAST_ONE_CHANGE_REASON"),
           function () {
             const {
               reason_death,
               reason_default,
               reason_merge,
-              reason_electrodep
+              reason_electrodep,
             } = this.parent.especial_cases
             if (
               reason_death ||
@@ -257,31 +257,31 @@ function HolderChange(props) {
               reason_electrodep
             )
               return true
-          }
-        )
+          },
+        ),
     }),
     Yup.object().shape({
       payment: Yup.object().shape({
-        iban: Yup.string().required(t('IBAN_ERROR')),
+        iban: Yup.string().required(t("IBAN_ERROR")),
         iban_valid: Yup.bool()
-          .required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR')),
+          .required(t("IBAN_ERROR"))
+          .oneOf([true], t("IBAN_ERROR")),
         sepa_accepted: Yup.bool()
-          .required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR'))
-      })
+          .required(t("IBAN_ERROR"))
+          .oneOf([true], t("IBAN_ERROR")),
+      }),
     }),
     Yup.object().shape({
       terms_accepted: Yup.bool()
-        .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS'))
-    })
+        .required(t("UNACCEPTED_TERMS"))
+        .oneOf([true], t("UNACCEPTED_TERMS")),
+    }),
   ]
 
   const MAX_STEP_NUMBER = 10
 
   const getActiveStep = (props) => {
-    const url = t('DATA_PROTECTION_HOLDERCHANGE_URL')
+    const url = t("DATA_PROTECTION_HOLDERCHANGE_URL")
     return (
       <>
         {activeStep === 0 && <VAT {...props} />}
@@ -299,7 +299,7 @@ function HolderChange(props) {
             url={url}
             {...props}
             isMemberMandatoryForHolderchange={isMemberMandatoryForHolderchange}
-            form='holderchange'
+            form="holderchange"
           />
         )}
         {activeStep === 6 && <VoluntaryCent {...props} />}
@@ -313,7 +313,7 @@ function HolderChange(props) {
   useSyncLanguage(language)
 
   /// True if the step has to be skipped according to the values
-  function skipStep(step, values, isBackwards = false) {
+  function skipStep(step, values, _isBackwards = false) {
     // TODO: backwards ismember was checked with "=== true", check it still works
     // without
     switch (step) {
@@ -373,15 +373,15 @@ function HolderChange(props) {
   const isLastStep = activeStep >= MAX_STEP_NUMBER - 1
 
   const handleError = async (error) => {
-    let errorCode = error?.response?.data?.error?.code || 'UNEXPECTED'
+    let errorCode = error?.response?.data?.error?.code || "UNEXPECTED"
     const errorResp = error?.response?.data?.data || {}
 
     if (error?.response?.data?.data?.invalid_fields) {
       errorCode =
         Object.keys(
-          error?.response?.data?.data?.invalid_fields[0]
+          error?.response?.data?.data?.invalid_fields[0],
         )[0].toUpperCase() +
-        '_' +
+        "_" +
         errorCode
     }
 
@@ -415,58 +415,58 @@ function HolderChange(props) {
 
   const initialValues = {
     holder: {
-      vat: '',
+      vat: "",
       vatvalid: false,
       isphisical: true,
       proxynif_valid: false,
       proxynif_phisical: true,
-      state: { id: '' },
-      city: { id: '' },
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      address: '',
-      number: '',
-      floor: '',
-      door: '',
-      postal_code: '',
-      surname1: '',
-      surname2: '',
-      email: '',
-      email2: '',
-      phone1: '',
-      phone2: '',
-      language: `${i18n.language}_ES`
+      state: { id: "" },
+      city: { id: "" },
+      proxynif: "",
+      proxyname: "",
+      name: "",
+      address: "",
+      number: "",
+      floor: "",
+      door: "",
+      postal_code: "",
+      surname1: "",
+      surname2: "",
+      email: "",
+      email2: "",
+      phone1: "",
+      phone2: "",
+      language: `${i18n.language}_ES`,
     },
     supply_point: {
-      cups: '',
+      cups: "",
       status: false,
-      address: '',
+      address: "",
       verified: false,
       supply_point_accepted: false,
-      tariff_type: ''
+      tariff_type: "",
     },
     member: {
       become_member: undefined,
       link_member: undefined,
       invite_token: false,
-      checked: false
+      checked: false,
     },
     payment: {
-      iban: '',
+      iban: "",
       sepa_accepted: false,
-      voluntary_cent: undefined
+      voluntary_cent: undefined,
     },
     especial_cases: {
       reason_default: true,
       reason_death: false,
       reason_merge: false,
       reason_electrodep: false,
-      attachments: {}
+      attachments: {},
     },
     privacy_policy_accepted: false,
     terms_accepted: false,
-    legal_person_accepted: false
+    legal_person_accepted: false,
   }
 
   const validateStep = (values, step) => {
@@ -477,14 +477,14 @@ function HolderChange(props) {
       .then(() => {
         setIsValid(true)
       })
-      .catch((e) => {
+      .catch(() => {
         setIsValid(false)
       })
   }
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ backgroundColor: 'background.third', color: 'primary.main' }}>
+      <Box sx={{ backgroundColor: "background.third", color: "primary.main" }}>
         <Container maxWidth="md">
           <Formik
             enableReinitialize
@@ -497,7 +497,7 @@ function HolderChange(props) {
               <>
                 <Box className="ov-theme">
                   <Form
-                    sx={{ position: 'relative' }}
+                    sx={{ position: "relative" }}
                     noValidate
                     autoComplete="off">
                     {
@@ -506,28 +506,26 @@ function HolderChange(props) {
                         sx={{
                           mt: 4,
                           mb: 4,
-                          width: '100%',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          backgroundColor: 'transparent'
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          backgroundColor: "transparent",
                         }}>
                         <LinearProgress
-                          color='holderChangeProgress'
-                          variant={sending ? 'indeterminate' : 'determinate'}
+                          color="holderChangeProgress"
+                          variant={sending ? "indeterminate" : "determinate"}
                           value={(activeStep / MAX_STEP_NUMBER) * 100}
                         />
                         <>
-                          {sending? (
+                          {sending ? (
                             <Box className="step-body">
-                                <Box sx={{ mt: '50px'}}>
-                                  <Loading
-                                    description={t('WAITING_PROCESS')}
-                                  />
-                                </Box>
+                              <Box sx={{ mt: "50px" }}>
+                                <Loading description={t("WAITING_PROCESS")} />
+                              </Box>
                             </Box>
                           ) : completed ? (
                             <Box className="step-body">
-                              { error ? (
+                              {error ? (
                                 <Failure error={error} />
                               ) : (
                                 <Success result={result} />
@@ -540,8 +538,8 @@ function HolderChange(props) {
                         <Box mx={0} mt={2} mb={3}>
                           <Box
                             sx={{
-                              display: 'flex',
-                              justifyContent: 'space-between'
+                              display: "flex",
+                              justifyContent: "space-between",
                             }}>
                             {result?.contract_number === undefined && (
                               <PrevButton
@@ -551,29 +549,29 @@ function HolderChange(props) {
                                     validateStep(
                                       props.values,
                                       step,
-                                      props.setErrors
-                                    )
+                                      props.setErrors,
+                                    ),
                                   )
                                 }
-                                title={t('PREV')}
+                                title={t("PREV")}
                               />
                             )}
                             {!completed && !isLastStep ? (
                               <NextButton
                                 onClick={() =>
                                   nextStep(props.values, props, (step) =>
-                                    validateStep(props.values, step)
+                                    validateStep(props.values, step),
                                   )
                                 }
                                 disabled={sending || !isValid}
-                                title={t('NEXT')}
+                                title={t("NEXT")}
                               />
                             ) : null}
                             {!completed && isLastStep ? (
                               <SubmitButton
                                 loading={sending}
                                 startIcon={<SendIcon />}
-                                title={t('SEND')}
+                                title={t("SEND")}
                                 disabled={sending || !isValid}
                               />
                             ) : null}
@@ -582,12 +580,12 @@ function HolderChange(props) {
                         <Box mx={0} mt={2} mb={3}>
                           <Box
                             sx={{
-                              display: 'flex',
-                              justifyContent: 'space-between'
+                              display: "flex",
+                              justifyContent: "space-between",
                             }}>
                             {activeStep === 4 &&
                               isHomeOwnerCommunityNif(
-                                props.values?.holder?.vat
+                                props.values?.holder?.vat,
                               ) && (
                                 <>
                                   <Box mt={3}>
@@ -595,7 +593,7 @@ function HolderChange(props) {
                                       <Typography
                                         variant="body1"
                                         dangerouslySetInnerHTML={{
-                                          __html: t('CIF_COMMUNITY_OWNERS')
+                                          __html: t("CIF_COMMUNITY_OWNERS"),
                                         }}
                                       />
                                     </Alert>
