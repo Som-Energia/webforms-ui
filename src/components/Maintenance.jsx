@@ -12,7 +12,6 @@ const Maintenance = () => {
   language = ['ca', 'es', 'eu', 'gl'].includes(language) ? language : 'es'
 
   useSyncLanguage(language)
-
   return (
     <Container sx={{ flexGrow: 1, padding: 2 }}>
       <div
@@ -22,7 +21,7 @@ const Maintenance = () => {
           width: '100%',
           borderRadius: '10px',
           backgroundSize: 'cover',
-          backgroundImage: `url(${manteniment})`
+          backgroundImage: `url("${manteniment}")`
         }}>
         <div style={{  bottom: '2rem', padding: '3.5rem', gap: '22px', display: 'flex', flexDirection: 'column' }}>
           <div>
