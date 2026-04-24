@@ -13,6 +13,15 @@
 /forms
 /build
 
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
 # misc
 .DS_Store
 
