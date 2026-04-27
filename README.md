@@ -45,7 +45,8 @@ To get `holderChangePersonaldata.js`:
 
 ```sh
 cd cypress/fixtures/
-ln -s ../../../testdata/b2bs/holderChangePersonaldata.json .
+ln -s ../../../it-docs/b2bs/holderChangePersonaldata.json .
+ln -s ../../../it-docs/b2bs/gurbPersonaldata.json .
 ```
 
 To get `.env.development`:
