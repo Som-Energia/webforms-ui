@@ -12,6 +12,7 @@ import SelectField from './SelectField/SelectField'
 import PhoneField from './PhoneField'
 import { useHandleChange } from '../hooks/useHandleChange'
 import { useHandleBlur } from '../hooks/useHandleBlur'
+import { checkVatFormat } from '../services/utils'
 
 const PersonDataJuridical = (props) => {
   const {
@@ -21,6 +22,7 @@ const PersonDataJuridical = (props) => {
     errors,
     touched,
     setFieldValue,
+    setFieldError,
     setFieldTouched
   } = props
   const { i18n, t } = useTranslation()
@@ -37,6 +39,21 @@ const PersonDataJuridical = (props) => {
 
   const handleChange = useHandleChange(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
+
+  useEffect(() => {
+
+    setFieldError(`${entity}.proxynif`, false)
+
+    if (values[entity]?.proxynif && values[entity]?.proxynif.length >= 9) {
+      let valid = checkVatFormat(values[entity]?.proxynif)
+
+      if (!valid.isValid)
+      {
+        setFieldError(`${entity}.proxynif`, 'ERROR_INVALID_FIELD')
+      }
+    }
+  }, [values[entity]?.proxynif, errors[entity]?.proxynif])
+
 
   const languages = {
     es_ES: 'Español',
