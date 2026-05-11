@@ -9,6 +9,7 @@ describe('New Contract with New Member', () => {
   beforeEach(() => {
     cy.visit('/ca/formulario-contratacion-periodos')
     cy.fixture('newContractMember.json').as('data')
+    cy.interceptGooglePlaces(this.data.personalPhysicalData.street)
   })
 
   describe('New contract and physical member without optional data', function () {

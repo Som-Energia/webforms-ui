@@ -24,5 +24,6 @@ import './gurbCommands'
 import './newContractCommands'
 import './newMemberCommands'
 import './newContractMemberCommands'
+import './thirdParty/googlePlaces'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
