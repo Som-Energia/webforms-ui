@@ -1,5 +1,10 @@
 # Change Log
 
+
+## 7.1.6 2026-04-23
+
+- Add new Som Energia design to maintenance page
+
 ## 7.1.5 2026-04-21
 
 - Remove unused endpoints
