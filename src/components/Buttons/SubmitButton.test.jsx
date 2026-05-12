@@ -1,4 +1,4 @@
-import { render, queryByAttribute, screen } from '@testing-library/react'
+import { render, queryByAttribute } from '@testing-library/react'
 import SubmitButton from './SubmitButton'
 import { initI18n } from '../../tests/i18n.mock'
 
@@ -15,18 +15,21 @@ describe('SumitButton component ', async () => {
   })
 
   test('SubmitButton renders and text is shown', async () => {
-    render(<SubmitButton text={'FINISH'} />)
+    const { queryByText } = render(<SubmitButton text={'FINISH'} />)
+    expect(queryByText('FINISH')).toBeInTheDocument()
+  })
 
-    const error = await screen.findByText('FINISH')
-    expect(error).toBeInTheDocument()
+  test('SubmitButton renders and children elements is shown', async () => {
+    const { queryByText } = render(<SubmitButton>{'FINISH'}</SubmitButton>)
+    expect(queryByText('FINISH')).toBeInTheDocument()
   })
 
   test('SubmitButton renders disabled', async () => {
-    const { getByText } = render(
+    const { queryByText } = render(
       <SubmitButton text={'FINISH'} disabled={true} />
     )
 
-    expect(getByText('FINISH')).toHaveAttribute('disabled')
+    expect(queryByText('FINISH')).toHaveAttribute('disabled')
   })
 
   test('SubmitButton renders showing sending progressbar', async () => {

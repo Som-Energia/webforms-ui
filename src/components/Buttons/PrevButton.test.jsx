@@ -3,7 +3,6 @@ import PrevButton from './PrevButton'
 import { initI18n } from '../../tests/i18n.mock'
 
 describe('PrevButton component ', async () => {
-
   // avoid warnings
   await initI18n()
 
@@ -16,14 +15,16 @@ describe('PrevButton component ', async () => {
   })
 
   test('PrevButton renders and title is shown', async () => {
-    render(<PrevButton title={'PREV'} />)
+    render(<PrevButton>{'PREV'}</PrevButton>)
 
     const error = await screen.findByText('PREV')
     expect(error).toBeInTheDocument()
   })
 
   test('PrevButton renders disabled', async () => {
-    const { getByText } = render(<PrevButton title={'PREV'} disabled={true} />)
+    const { getByText } = render(
+      <PrevButton disabled={true}>{'PREV'}</PrevButton>
+    )
 
     expect(getByText('PREV')).toHaveAttribute('disabled')
   })
