@@ -80,7 +80,10 @@ const NewSomStepper = (props) => {
         )}
 
         {activeStep <= lastStepIndex && (
-          <Grid item size={{ sm: 2, xs: 12 }} order={-1}>
+          <Grid
+            item
+            size={{ sm: activeStep === lastStepIndex ? 3 : 2, xs: 12 }}
+            order={-1}>
             {nextButton || (
               <NextButton disabled={disableNext} onClick={() => nextStep()}>
                 {t('NEXT')}
