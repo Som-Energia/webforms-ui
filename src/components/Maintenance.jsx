@@ -38,7 +38,7 @@ const Maintenance = () => {
           </div>
           <div
             style={{
-              color: 'primary.main',
+              color: '#0B2E34',
               fontSize: '54px',
               lineHeight: '59px',
             }}>
