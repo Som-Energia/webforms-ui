@@ -203,8 +203,8 @@ const NewMemberForm = () => {
 
   return (
     <Container
-      data-cy='member-form'
-      aria-label='member-form'
+      data-cy="member-form"
+      aria-label="member-form"
       maxWidth="md"
       disableGutters={true}
       sx={{
@@ -266,9 +266,9 @@ const NewMemberForm = () => {
                           <Grid item sm={2} xs={12}>
                             <PrevButton
                               disabled={sending}
-                              onClick={() => prevStep(formikProps)}
-                              title={'PREV'}
-                            />
+                              onClick={() => prevStep(formikProps)}>
+                              {t('PREV')}
+                            </PrevButton>
                           </Grid>
                         )}
                         <Grid item sm={2} xs={12} order={-1}>
@@ -279,9 +279,9 @@ const NewMemberForm = () => {
                                 !formikProps.isValid ||
                                 activeStep === MAX_STEP_NUMBER
                               }
-                              onClick={() => nextStep(formikProps)}
-                              title={'NEXT'}
-                            />
+                              onClick={() => nextStep(formikProps)}>
+                              {t('NEXT')}
+                            </NextButton>
                           ) : (
                             <SubmitButton
                               disabled={!formikProps.isValid || completed}
