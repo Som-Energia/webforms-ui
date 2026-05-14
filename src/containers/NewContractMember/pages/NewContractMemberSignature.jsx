@@ -16,14 +16,12 @@ export const NewContractMemberSignature = (props = {}) => {
     [values, gurbCode]
   )
 
-  // FIXME: remove in production and use onCreate directly
   const onCreateSignatureHandler = (response) => {
     if (!response) {
       return
     }
 
     onCreate(response || {})
-    onSuccess()
   }
 
   return (
