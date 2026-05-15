@@ -19,65 +19,11 @@ Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error = false) =>
 
 Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, optionalData = false) => {
 
-  cy.intercept('POST', '**/google.maps.places.v1.Places/AutocompletePlaces', {
-    statusCode: 200,
-    body:
-
-      [
-        [
-          [
-            [
-              "places/Eh1BdmluZ3VkYSBkZSBNb250aWxpdmksIEdpcm9uYSIuKiwKFAoSCWlKhkzT5roSEYwIiZkve_kaEhQKEgmr_ciYJ-e6EhFvaimltkU4rw",
-              "Eh1BdmluZ3VkYSBkZSBNb250aWxpdmksIEdpcm9uYSIuKiwKFAoSCWlKhkzT5roSEYwIiZkve_kaEhQKEgmr_ciYJ-e6EhFvaimltkU4rw",
-              [
-                personalData.street,
-                [
-                  [
-                    12,
-                    21
-                  ]
-                ]
-              ],
-              [
-                "route",
-                "geocode"
-              ]
-            ]
-          ]
-        ]
-      ]
-
-  })
-
-  cy.intercept(
-  'POST',
-  '**/google.maps.places.v1.Places/GetPlace',
-  {
-    statusCode: 200,
-    body: {
-      id: 'abc123',
-      displayName: {
-        text: 'Barcelona'
-      },
-      formattedAddress: 'Barcelona, Spain',
-      location: {
-        latitude: 41.3874,
-        longitude: 2.1686
-      }
-    }
-  }
-).as('getPlace')
-
-
-
-
-
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
   cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
   cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
   cy.get('[data-cy="address"]').type(validAddress.input, { delay: 500 })
   cy.contains(personalData.street).click()
-
   cy.get('[data-cy="address.number"]').clear()
   cy.get('[data-cy="address.number"]').type(22, { delay: 500 })
   cy.get('[data-cy="address.bloc"]').type('Omega')
