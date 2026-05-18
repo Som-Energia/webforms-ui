@@ -6,9 +6,20 @@ describe('Member', () => {
     return false
   })
 
-  beforeEach(() => {
-    cy.visit('/ca/cooperativa/formulario-asociarse')
+  before(function (){
     cy.fixture('newMember.json').as('data')
+    cy.fixture('googleAutocomplete/autocompleteResponse.json').as('googleAutocompleteResponse')
+    cy.fixture('googleAutocomplete/getPlaceResponse.json').as('googlePlaceResponse')
+  })
+
+  beforeEach(function (){
+    cy.visit('/ca/cooperativa/formulario-asociarse')
+    cy.then(() => {
+      cy.interceptGooglePlaces(
+        this.googleAutocompleteResponse,
+        this.googlePlaceResponse
+      )
+    })
   })
 
   describe('Physical member without optional data', function () {

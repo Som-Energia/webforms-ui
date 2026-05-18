@@ -14,6 +14,12 @@ describe('Requirements', () => {
 
     beforeEach(function () {
         cy.visit(`/ca/gurb/${this.data.gurbCode}/requirements`)
+        cy.then(() => {
+          cy.interceptGooglePlaces(
+            this.googleAutocompleteResponse,
+            this.googlePlaceResponse
+          )
+        })
     })
 
     describe('Gurb Requirements', function () {
