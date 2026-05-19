@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
-    "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
+    "build": "npm run lint:todos; export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
     "build:pre": "npm run build -- --mode=pre",
@@ -13,7 +13,11 @@
     "test:coverage": "TZ=Europe/Madrid vitest run --coverage",
     "cypress": "TZ=Europe/Madrid cypress open",
     "cypress:smoke": "TZ=Europe/Madrid cypress run --env configFile=production",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "lint:todos": "./scripts/todos.sh src/",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
     "i18n-lint": "./scripts/lint-i18n.sh",
     "preview": "vite preview"
@@ -43,7 +47,6 @@
     "stdnum": "^1.11.7",
     "yup": "^0.32.11"
   },
-  "prettier": "prettier-config-standard",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -65,6 +68,7 @@
   "devDependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@somenergia/frontend-config": "github:Som-Energia/frontend-config#v1.0.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^15.0.7",
@@ -72,22 +76,18 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/coverage-v8": "^4.0.18",
     "cypress": "^12.17.4",
     "cypress-file-upload": "^5.0.8",
-    "eslint": "^8.57.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint": "^9.39.4",
+    "eslint-plugin-cypress": "^3.6.0",
     "i18next-parser": "^9.3.0",
     "jsdom": "^24.0.0",
-    "prettier-config-standard": "^5.0.0",
+    "prettier": "^3.8.3",
     "vite": "^5.2.11",
     "vite-plugin-environment": "^1.1.3",
-    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-eslint2": "^5.1.0",
     "vite-plugin-svgr": "^4.5.0",
-    "vitest": "^1.6.0"
+    "vitest": "^4.0.18"
   }
 }

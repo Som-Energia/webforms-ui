@@ -1,53 +1,57 @@
 import React from 'react'
-import MemberIdentifier from './MemberIdentifier'
-import {
-  render,
-  queryByAttribute,
-  fireEvent,
-  getByText
-} from '@testing-library/react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { vi } from 'vitest';
 
+import {
+  fireEvent,
+  getByText,
+  queryByAttribute,
+  render,
+} from '@testing-library/react'
+import { vi } from 'vitest'
 
-vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
+import MemberIdentifier from './MemberIdentifier'
+
+vi.mock('react-i18next', async () => {
+  const i18n = await import('../../tests/__mocks__/i18n')
+  return i18n.default
+})
 
 describe('Member Identifier', () => {
   const mockValues = {
     member: {
-      is_member: true
-    }
+      is_member: true,
+    },
   }
 
   const mockValuesNoMember = {
     member: {
       is_member: false,
-      vat: ''
-    }
+      vat: '',
+    },
   }
 
   const mockErrorsVat = {
     member: {
-      vat: "VAT_HAS_AN_ERROR"
-    }
+      vat: 'VAT_HAS_AN_ERROR',
+    },
   }
 
   const mockErrorsVatValid = {
     member: {
-      vatvalid: "VAT IS NOT VALID"
-    }
+      vatvalid: 'VAT IS NOT VALID',
+    },
   }
 
   const mockErrorsMemberExists = {
     member: {
-      exists: "MEMBER_ALREADY_EXISTS"
-    }
+      exists: 'MEMBER_ALREADY_EXISTS',
+    },
   }
 
   const mockTouched = {
     member: {
-      vat: true
-    }
+      vat: true,
+    },
   }
   const VAT = '40323835M'
   const getById = queryByAttribute.bind(null, 'id')
@@ -70,7 +74,7 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const memberButton = getById(dom.container, 'member-choose-yes')
@@ -94,7 +98,7 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const memberButton = getById(dom.container, 'member-choose-no')
@@ -109,16 +113,18 @@ describe('Member Identifier', () => {
           <Route
             exact
             path="/"
-            element={<MemberIdentifier
-              values={mockValuesNoMember}
-              resetForm={vi.fn()}
-              setFieldTouched={mocksetFieldTouched}
-              setFieldValue={mockSetFieldValue}
-              setValues={mockSetValues}
-            />}
+            element={
+              <MemberIdentifier
+                values={mockValuesNoMember}
+                resetForm={vi.fn()}
+                setFieldTouched={mocksetFieldTouched}
+                setFieldValue={mockSetFieldValue}
+                setValues={mockSetValues}
+              />
+            }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const vatTextField = getById(dom.container, 'vat')
@@ -145,20 +151,20 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const memberIdentifierInputBox = getById(
       dom.container,
-      'box_member_identifier'
+      'box_member_identifier',
     )
+
     expect(
-      getByText(memberIdentifierInputBox, 'CONTRIBUTION_MEMBER_INDENTIFIER')
+      getByText(memberIdentifierInputBox, 'CONTRIBUTION_MEMBER_INDENTIFIER'),
     ).toBeInTheDocument()
   })
 
   test('Should show the input to fill in the nif of the new person', async () => {
-
     const dom = render(
       <Router>
         <Routes>
@@ -176,20 +182,16 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
-    const newMemberInputBox = getById(
-      dom.container,
-      'box_no_member_identifier'
-    )
+    const newMemberInputBox = getById(dom.container, 'box_no_member_identifier')
     expect(
-      getByText(newMemberInputBox, 'CONTRIBUTION_MEMBER_VAT')
+      getByText(newMemberInputBox, 'CONTRIBUTION_MEMBER_VAT'),
     ).toBeInTheDocument()
   })
 
   test('Should show error if vat has an error', async () => {
-
     const dom = render(
       <Router>
         <Routes>
@@ -209,22 +211,23 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const newMemberVatInputBox = getById(
       dom.container,
-      'box_no_member_vat_input'
+      'box_no_member_vat_input',
     )
     expect(
-      getByText(newMemberVatInputBox, mockErrorsVat.member.vat)
+      getByText(newMemberVatInputBox, mockErrorsVat.member.vat),
     ).toBeInTheDocument()
   })
 
   test('Should show error if vat is not valid', async () => {
-
-    const mockValuesNoMemberVatNoValid = JSON.parse(JSON.stringify(mockValuesNoMember))
-    mockValuesNoMemberVatNoValid.member.vatvalid=false
+    const mockValuesNoMemberVatNoValid = JSON.parse(
+      JSON.stringify(mockValuesNoMember),
+    )
+    mockValuesNoMemberVatNoValid.member.vatvalid = false
 
     const dom = render(
       <Router>
@@ -245,20 +248,19 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const newMemberVatInputBox = getById(
       dom.container,
-      'box_no_member_vat_input'
+      'box_no_member_vat_input',
     )
     expect(
-      getByText(newMemberVatInputBox, mockErrorsVatValid.member.vatvalid)
+      getByText(newMemberVatInputBox, mockErrorsVatValid.member.vatvalid),
     ).toBeInTheDocument()
   })
 
   test('Should show error when member vat already exists', async () => {
-
     const dom = render(
       <Router>
         <Routes>
@@ -278,16 +280,15 @@ describe('Member Identifier', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
     const newMemberVatInputBox = getById(
       dom.container,
-      'box_no_member_vat_input'
+      'box_no_member_vat_input',
     )
     expect(
-      getByText(newMemberVatInputBox, mockErrorsMemberExists.member.exists)
+      getByText(newMemberVatInputBox, mockErrorsMemberExists.member.exists),
     ).toBeInTheDocument()
   })
-  
 })

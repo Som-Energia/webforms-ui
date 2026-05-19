@@ -1,75 +1,59 @@
 import react from '@vitejs/plugin-react-swc'
+// import eslint from 'vite-plugin-eslint2'
 import svgr from 'vite-plugin-svgr'
-// Uncomment the following line to enable eslint plugin, but first fix the issues in the codebase
-//import eslint from 'vite-plugin-eslint'
-import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
+import {
+  createAppConfig,
+  createManualChunks,
+} from '@somenergia/frontend-config/vite'
+
 import pkg from './package.json'
 
-export default defineConfig(({ mode }) => {
-  // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
-  // but, by default, it ignores that parameter from .env files
-  // (not VITE_ prefixed).
-  // Read it explicitly to have a mode dependant base.
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), 'BASE_URL') }
-
+export default createAppConfig((mode) => {
   const ovOptions =
     mode === 'ov'
       ? {
           entryFileNames: 'assets/main.js',
-          chunkFileNames: (fileInfo) => {
-            if (fileInfo.name.includes('vendor')) {
-              return 'assets/vendor.js' // Explicitly name the entry JS file
-            }
-            return 'assets/[name]-[hash].js'
+          chunkFileNames: ({ name }) => {
+            return name.includes('vendor')
+              ? 'assets/vendor.js' // Explicitly name the entry JS file
+              : 'assets/[name]-[hash].js'
           },
-          assetFileNames: (assetInfo) => {
-            if (
-              assetInfo.name.endsWith('.css') &&
-              assetInfo.name.includes('index')
-            ) {
-              return 'assets/index.css' // Explicitly name the CSS file
-            }
-            return 'assets/[name]-[hash].[ext]'
-          }
+          assetFileNames: ({ name }) => {
+            return name.endsWith('.css') && name.includes('index')
+              ? 'assets/index.css' // Explicitly name the CSS file
+              : 'assets/[name]-[hash].[ext]'
+          },
         }
       : {}
 
   return {
-    base: process.env.BASE_URL,
     resolve: {
-      dedupe: Object.keys(pkg.dependencies)
+      dedupe: Object.keys(pkg.dependencies),
     },
-    plugins: [
-      react(),
-      splitVendorChunkPlugin(),
-      svgr()
-      // TODO: to be activated after fixing the issues
-      // eslint()
-    ],
+    plugins: [react(), svgr() /*eslint({ build: true, emitWarning: false })*/],
     build: {
       outDir: 'forms',
       manifest: 'asset-manifest.json',
       rollupOptions: {
         output: {
-          ...ovOptions
-        }
+          ...ovOptions,
+          manualChunks: createManualChunks([
+            { chunk: 'vendor-phone', includes: ['libphonenumber-js'] },
+            { chunk: 'vendor-forms', includes: ['formik', '/yup/'] },
+            { chunk: 'vendor-dnd', includes: ['@dnd-kit'] },
+            { chunk: 'vendor-lodash', includes: ['/lodash'] },
+            { chunk: 'vendor-stdnum', includes: ['stdnum'] },
+          ]),
+        },
       },
-      target: 'es2020'
     },
     server: {
-      open: true,
-      port: 3000,
       deps: {
-        inline: [
-          '@emotion/styled',
-          '@emotion/react'
-        ],
+        inline: ['@emotion/styled', '@emotion/react'],
       },
     },
     test: {
-      globals: true,
-      environment: 'jsdom',
-      css: true,
+      exclude: ['**/node_modules/**', '**/cypress/**'],
       setupFiles: './src/tests/setupTests.js',
       coverage: {
         reporter: ['text', 'json', 'html'],
@@ -78,9 +62,10 @@ export default defineConfig(({ mode }) => {
           '**/forms/**',
           '**/coverage/**',
           '**/scripts/**',
-          '**/public/**'
-        ]
-      }
-    }
+          '**/public/**',
+          '**/cypress/**',
+        ],
+      },
+    },
   }
 })

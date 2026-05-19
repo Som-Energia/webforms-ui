@@ -3,7 +3,12 @@ import fs from 'fs-extra'
 import path from 'path'
 
 const getConfigurationByFile = (file) => {
-  const pathToConfigFile = path.resolve('./', 'cypress', 'config', `${file}.json`)
+  const pathToConfigFile = path.resolve(
+    './',
+    'cypress',
+    'config',
+    `${file}.json`,
+  )
   return fs.readJson(pathToConfigFile)
 }
 
@@ -15,6 +20,6 @@ export default defineConfig({
     },
     supportFile: false,
     video: false,
-    screenshotOnRunFailure: false
-  }
+    screenshotOnRunFailure: false,
+  },
 })
