@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Fix: Proxy vats validations
+
 ## 7.2.1 2026-05-26
 
 - REF: remove translations
