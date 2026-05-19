@@ -270,7 +270,7 @@
     "ATTACHMENTS_D1_INTRO_REFUSE": "<p>Kontuan izan, datuak onartzen ez badituzu, sorkuntza-instalazioa zure autonomia-erkidegoan berriz erregistratu beharko duzula. Zalantzarik baduzu, tramitearekin jarraitu aurretik, gomendatzen dizugu enpresa instalatzailearekin datuak berrikustea.</p><p>Jakin behar dugu zergatik ez zauden konforme haiek helarazi diguten informazioarekin. Erregistroan aurkeztu duzun dokumentazioa bidal diezagukezu, han jasota dauden datuak egiaztatzeko. </p>",
     "D1_ATTACHMENTS_REFUSE": "Instalazioa autonomia-erkidegoan erregistratu dela egiaztatzeko dokumentazioa",
     "REFUSE_REASON": "Azaldu labur zergatik ez zauden ados",
-    "ATTACHMENTS_D1_INTRO_ACCEPT": "Zure autokontsumo-instalaziori buruzko informazio onartutakoan, kontratua aldatu behar da banatzaileak aukeratutako modalitatea aplikatu dezan.\n <b>Sakatu «Bidali» botoia tramitea hasteko.</b>",
+    "ATTACHMENTS_D1_INTRO_ACCEPT": "Zure autokontsumo-instalaziori buruzko informazio onartutakoan, kontratua aldatu behar da banatzaileak aukeratutako modalitatea aplikatu dezan.<br><b>Sakatu «Bidali» botoia tramitea hasteko.</b>",
     "D1_ATTACHMENTS_ACCEPT": "Eta, <b>autoprodukzio kolektiboko instalazio</b> bat bada, <b>soberakinak banatzeko akordioa</b> eta <b>banaketa-koefizienteen fitxategia</b> ere erantsi beharko dituzu. Fitxategi hori prestatzeko jarraibideak esteka honetan aurkituko dituzu: <a href=\"https://www.boe.es/diario_boe/txt.php?lang=eu&id=BOE-A-2021-18706\" target=\"_blank\">TED 1247/2021</a>.</p>",
     "SELFCONSUMPTION_SUBSECTION": "Autokontsumo-modalitatea",
     "SELFCONSUMPTION_ACCEPT": "Bai, onartu tramitea",
