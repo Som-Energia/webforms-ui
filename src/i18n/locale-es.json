@@ -301,7 +301,7 @@
     "ATTACHMENTS_D1_INTRO_REFUSE": "<p>Ten en cuenta que, si rechazas los datos, deberás volver a registrar tu instalación generadora en tu comunidad autónoma. Si tienes alguna duda, antes de continuar con este trámite, te recomendamos que revises los datos con tu empresa instaladora.</p><p>Necesitamos que nos indiques cuál es el motivo por el que no estás conforme con la información que nos trasladan. Nos puedes facilitar la documentación presentada al registro para comprobar los datos que constan.</p>",
     "D1_ATTACHMENTS_REFUSE": "Documentación acreditativa de inscripción en el registro de la comunidad autónoma",
     "REFUSE_REASON": "Indica brevemente el motivo de disconformidad",
-    "ATTACHMENTS_D1_INTRO_ACCEPT": "Una vez aceptada la información relativa a tu instalación de autoconsumo, hay que modificar el contrato para que la distribuidora aplique la modalidad elegida.<br><b>Pulsa el botón «Enviar» para iniciar el trámite.</b>",
+    "ATTACHMENTS_D1_INTRO_ACCEPT": "Una vez aceptada la información relativa a tu instalación de autoconsumo, hay que modificar el contrato para que la distribuidora aplique la modalidad elegida.<br><br><b>Pulsa el botón «Enviar» para iniciar el trámite.</b>",
     "D1_ATTACHMENTS_ACCEPT": "Si se trata de una <b>modalidad de autoproducción colectiva</b>, también nos tendrás que adjuntar el <b>acuerdo de reparto</b> y el <b>Fichero de coeficientes</b>. Puedes consultar cómo elaborar este fichero en el siguiente enlace <a href=\"https://www.boe.es/diario_boe/txt.php?lang=ca&id=BOE-A-2021-18706\" target=\"_blank\">TED 1247/2021</a>.</p>",
     "SELFCONSUMPTION_SUBSECTION": "Modalidad de autoconsumo",
     "SELFCONSUMPTION_ACCEPT": "Sí, aceptar el trámite",
