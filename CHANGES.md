@@ -1,5 +1,8 @@
 # Change Log
 
+## 7.1.7 2026-05-20
+
+- FIX: maintenance page color and url
 
 ## 7.1.6 2026-04-23
 
