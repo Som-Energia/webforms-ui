@@ -348,7 +348,7 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberPayment {...trackProps} />
       } else if (activeStep === 11) {
         return <NewContractMemberSummary {...trackProps} />
-      } else {
+      } else if (activeStep === 12) {
         return (
           <NewContractMemberSignature
             {...props}
@@ -381,7 +381,7 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberPayment {...trackProps} />
       } else if (activeStep === 11) {
         return <NewContractMemberSummary {...trackProps} />
-      } else {
+      } else if (activeStep === 12) {
         return (
           <NewContractMemberSignature
             {...props}
