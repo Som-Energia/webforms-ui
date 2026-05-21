@@ -306,9 +306,6 @@ const NewContractMemberSummary = (props) => {
           reviewLabel: t('POWER_SUMMARY'),
           reviewValue: powersDetail
         },
-        {
-          reviewLabel: t('REVIEW_TECHNICAL_DETAILS_FOOTER')
-        }
       ]
       : [
         {

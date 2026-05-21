@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- REF: remove translations
+
 ## 7.2.0 2026-05-25
 
 - Mock calls to google places in cypress tests
