@@ -2,6 +2,10 @@
   "name": "webforms-ui",
   "version": "7.2.5",
   "private": false,
+  "engines": {
+    "npm": ">=10.0.0 <11.0.0",
+    "node": ">=20.0.0 <21.0.0"
+  },
   "scripts": {
     "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
     "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
