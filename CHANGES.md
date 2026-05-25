@@ -1,5 +1,10 @@
 # Change Log
 
+## unreleased
+
+- REF: Update deploy.sh to include npm ci command before build
+- NEW: Add .npmrc to lock package.json npm/node engine
+
 ## 7.2.3 2026-06-02
 
 - Fix: cau and cnae validations
