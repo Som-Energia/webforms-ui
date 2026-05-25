@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.2.0 2026-05-25
+
+- Mock calls to google places in cypress tests
+
 ## 7.1.7 2026-05-20
 
 - FIX: maintenance page color and url
