@@ -6,9 +6,21 @@ describe('New Contract with New Member', () => {
     return false
   })
 
-  beforeEach(() => {
-    cy.visit('/ca/formulario-contratacion-periodos')
+  before(function () {
     cy.fixture('newContractMember.json').as('data')
+    cy.fixture('googleAutocomplete/autocompleteResponse.json').as('googleAutocompleteResponse')
+    cy.fixture('googleAutocomplete/getPlaceResponse.json').as('googlePlaceResponse')
+  })
+
+  beforeEach(function () {
+    cy.visit('/ca/formulario-contratacion-periodos')
+    
+    cy.then(() => {
+      cy.interceptGooglePlaces(
+        this.googleAutocompleteResponse,
+        this.googlePlaceResponse
+      )
+    })
   })
 
   describe('New contract and physical member without optional data', function () {
@@ -174,69 +186,71 @@ describe('New Contract with New Member', () => {
       cy.contractMemberCheckReviewNewMemberStep(this.data.personalLegalData.nif)
     })
   })
-})
 
-describe('New Contract: results', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
-    console.error(error)
-    return false
-  })
+  describe('New Contract: results', () => {
+    Cypress.on('uncaught:exception', (error, runnable) => {
+      console.error(error)
+      return false
+    })
 
-  beforeEach(() => {
-    cy.visit('/ca/formulario-contratacion-periodos')
-    cy.fixture('newContractMember.json').as('data')
-  })
+    beforeEach(() => {
+      cy.visit('/ca/formulario-contratacion-periodos')
+      cy.fixture('newContractMember.json').as('data')
+    })
 
-  describe('New contract ok final screen', function () {
-    it('shows ok result', function () {
-      cy.contractMemberQuestion('member-off')
-      cy.identifyNewMember(this.data.personalPhysicalData.nif)
-      cy.personalPhysicalDataMember(
-        this.data.personalPhysicalData,
-        this.data.validAddress
-      )
-      cy.newContractIdentifySupplyPoint(
-        this.data.supplyPoint.cups,
-        this.data.supplyPoint.has_light
-      )
-      cy.newContractSupplyPointData(this.data)
-      cy.choosePower({ powers: [2, 3] })
-      cy.selfconsumptionQuestion(true)
-      cy.selfconsumptionData(this.data.selfConsumption)
-      cy.contractMemberHolderQuestion()
-      cy.contractMemberDonationQuestion()
-      cy.contractMemberPaymentData(this.data.paymentData)
-      cy.contractMemberCheckReviewNewMemberStep(
-        this.data.personalPhysicalData.nif
-      )
-      cy.acceptTermsAndsubmitNewContract(true)
+    describe('New contract ok final screen', function () {
+      it('shows ok result', function () {
+        cy.contractMemberQuestion('member-off')
+        cy.identifyNewMember(this.data.personalPhysicalData.nif)
+        cy.personalPhysicalDataMember(
+          this.data.personalPhysicalData,
+          this.data.validAddress
+        )
+        cy.newContractIdentifySupplyPoint(
+          this.data.supplyPoint.cups,
+          this.data.supplyPoint.has_light
+        )
+        cy.newContractSupplyPointData(this.data)
+        cy.choosePower({ powers: [2, 3] })
+        cy.selfconsumptionQuestion(true)
+        cy.selfconsumptionData(this.data.selfConsumption)
+        cy.contractMemberHolderQuestion()
+        cy.contractMemberDonationQuestion()
+        cy.contractMemberPaymentData(this.data.paymentData)
+        cy.contractMemberCheckReviewNewMemberStep(
+          this.data.personalPhysicalData.nif
+        )
+        cy.acceptTermsAndsubmitNewContract(true)
+      })
+    })
+
+    describe('New contract ko final screen', function () {
+      it('shows ko result', function () {
+        cy.contractMemberQuestion('member-off')
+        cy.identifyNewMember(this.data.personalPhysicalData.nif)
+        cy.personalPhysicalDataMember(
+          this.data.personalPhysicalData,
+          this.data.validAddress,
+          true
+        )
+        cy.newContractIdentifySupplyPoint(
+          this.data.supplyPoint.cups,
+          this.data.supplyPoint.has_light
+        )
+        cy.newContractSupplyPointData(this.data)
+        cy.choosePower({ powers: [2, 3] })
+        cy.selfconsumptionQuestion(true)
+        cy.selfconsumptionData(this.data.selfConsumption)
+        cy.contractMemberHolderQuestion()
+        cy.contractMemberDonationQuestion()
+        cy.contractMemberPaymentData(this.data.paymentData)
+        cy.contractMemberCheckReviewNewMemberStep(
+          this.data.personalPhysicalData.nif
+        )
+        cy.acceptTermsAndsubmitNewContract(false)
+      })
     })
   })
-
-  describe('New contract ko final screen', function () {
-    it('shows ko result', function () {
-      cy.contractMemberQuestion('member-off')
-      cy.identifyNewMember(this.data.personalPhysicalData.nif)
-      cy.personalPhysicalDataMember(
-        this.data.personalPhysicalData,
-        this.data.validAddress,
-        true
-      )
-      cy.newContractIdentifySupplyPoint(
-        this.data.supplyPoint.cups,
-        this.data.supplyPoint.has_light
-      )
-      cy.newContractSupplyPointData(this.data)
-      cy.choosePower({ powers: [2, 3] })
-      cy.selfconsumptionQuestion(true)
-      cy.selfconsumptionData(this.data.selfConsumption)
-      cy.contractMemberHolderQuestion()
-      cy.contractMemberDonationQuestion()
-      cy.contractMemberPaymentData(this.data.paymentData)
-      cy.contractMemberCheckReviewNewMemberStep(
-        this.data.personalPhysicalData.nif
-      )
-      cy.acceptTermsAndsubmitNewContract(false)
-    })
-  })
 })
+
+

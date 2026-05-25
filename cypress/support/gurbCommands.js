@@ -95,28 +95,9 @@ Cypress.Commands.add(
     street,
     lat,
     long,
-    statusCode,
-    getAutocompleteResponse,
-    getPlaceResponse
+    statusCode
   ) => {
-    cy.intercept(
-      'POST',
-      'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/AutocompletePlaces',
-      {
-        statusCode: statusCode,
-        body: getAutocompleteResponse
-      }
-    ).as('googleAutocomplete')
-
-    cy.intercept(
-      'POST',
-      'https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace',
-      {
-        statusCode: statusCode,
-        body: getPlaceResponse
-      }
-    ).as('googleGetPlace')
-
+    
     cy.get('[data-cy="street"]').type(street.input)
     cy.wait('@googleAutocomplete')
     cy.wait(1000)

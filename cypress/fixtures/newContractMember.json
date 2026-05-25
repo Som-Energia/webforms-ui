@@ -2,8 +2,8 @@
   "has_member": "member-on",
   "tariff": "periods",
   "validAddress": {
-    "input": "montilivi",
-    "value": "Avinguda de Montilivi"
+    "input": "Carrer Tetuan",
+    "value": "Carrer Tetuan"
   },
   "validPhone": {
     "code": "34",
@@ -21,7 +21,7 @@
     "surname2": "Trapella",
     "gender": "GENDER_NON_BYNARY",
     "birthdate": "10/10/2000",
-    "street": "Avinguda de Montilivi",
+    "street": "Carrer Tetuan",
     "number": "1",
     "email": "somhi@somenergia.coop",
     "email2": "somhi@somenergia.coop",
@@ -36,7 +36,7 @@
     "proxynif": "41025869X",
     "proxyname": "SomSL",
     "name": "Tea",
-    "street": "Avinguda de Montilivi",
+    "street": "Carrer Tetuan",
     "number": "1",
     "email": "somhi@somenergia.coop",
     "email2": "somhi@somenergia.coop",
@@ -70,7 +70,7 @@
     "sepa_accepted": "true"
   },
   "supplyPointData": {
-    "street": "Avinguda de Montilivi",
+    "street": "Carrer Tetuan",
     "number": "1",
     "floor": "1",
     "door": "A",

@@ -9,9 +9,21 @@ describe('New Contract: results with gurbCode query param', () => {
     return false
   })
 
-  beforeEach(() => {
-    cy.visit(`/ca/formulario-contratacion-periodos?gurb-code=${gurbCode}`)
+
+  before(function () {
     cy.fixture('newContractMember.json').as('data')
+    cy.fixture('googleAutocomplete/autocompleteResponse.json').as('googleAutocompleteResponse')
+    cy.fixture('googleAutocomplete/getPlaceResponse.json').as('googlePlaceResponse')
+  })
+
+  beforeEach(function () {
+    cy.visit(`/ca/formulario-contratacion-periodos?gurb-code=${gurbCode}`)
+    cy.then(() => {
+      cy.interceptGooglePlaces(
+        this.googleAutocompleteResponse,
+        this.googlePlaceResponse
+      )
+    })
   })
 
   describe('New contract ok with gurb code', function () {

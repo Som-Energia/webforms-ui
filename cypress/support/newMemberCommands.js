@@ -18,12 +18,12 @@ Cypress.Commands.add('acceptTermsAndsubmitNewMember', (status, error = false) =>
 })
 
 Cypress.Commands.add('personalPhysicalDataMember', (personalData, validAddress, optionalData = false) => {
+
   cy.get('[data-cy="new_member.name"]').type(personalData.name)
   cy.get('[data-cy="new_member.surname1"]').type(personalData.surname1)
   cy.get('[data-cy="new_member.surname2"]').type(personalData.surname2)
-  cy.get('[data-cy="address"]').type(validAddress.input, {delay: 500})
+  cy.get('[data-cy="address"]').type(validAddress.input, { delay: 500 })
   cy.contains(personalData.street).click()
-
   cy.get('[data-cy="address.number"]').clear()
   cy.get('[data-cy="address.number"]').type(22, { delay: 500 })
   cy.get('[data-cy="address.bloc"]').type('Omega')
