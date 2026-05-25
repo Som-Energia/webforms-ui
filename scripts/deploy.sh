@@ -78,15 +78,16 @@ if [ "$1" == "ovtest" ]; then
   app_dir="${app_dir/\[\]/$2}"
 fi
 
-function build () {
-    log_message "INFO" "Building project $build"
-    npm run $build
+function build() {
+  log_message "INFO" "Clean install dependencies $build"
+  npm ci
+  log_message "INFO" "Building project $build"
+  npm run $build
 
-    if [ $? != 0 ]
-    then
-        log_message "ERROR" "An error ocurred building app $?"
-        exit -1
-    fi
+  if [ $? != 0 ]; then
+    log_message "ERROR" "An error ocurred building app $?"
+    exit -1
+  fi
 }
 
 function upload () {
