@@ -42,8 +42,8 @@ const MemberIdentifierFields = (props) => {
   useEffect(() => {
     const checkIsMember = async () => {
       setLoading(true)
-      let valid = checkVatFormat(values.member.vat)  // TODO: Check if checkVatFormat returns objecto or bool 👀
-      if (!valid) {
+      const { isValid } = checkVatFormat(values.member.vat)
+      if (!isValid) {
         setError(true)
       } else {
         try {
