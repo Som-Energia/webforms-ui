@@ -64,8 +64,8 @@ const GenerationMemberIdFields = (props) => {
       }
       setValues(tmpValues)
       setLoading(true)
-      let valid = checkVatFormat(values.member.vat)
-      if (!valid) {
+      const { isValid } = checkVatFormat(values.member.vat)
+      if (!isValid) {
         setError(true)
       }
       try {

@@ -64,14 +64,14 @@ const NifCif = (props) => {
 
   useEffect(() => {
     if (values[entity]?.nif && values[entity]?.nif.length >= 9) {
-      const validationObj = checkVatFormat(values[entity]?.nif)
+      const { isValid } = checkVatFormat(values[entity]?.nif)
       let is_physical = checkPhisicalVAT(values[entity]?.nif)
       setValues({
         ...values,
         [entity]: {
           ...values[entity],
           person_type: is_physical ? 'physic-person' : 'legal-person',
-          nif_valid: validationObj.isValid
+          nif_valid: isValid
         }
       })
 
