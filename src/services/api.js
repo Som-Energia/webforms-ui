@@ -564,7 +564,6 @@ export const getCompensationIndexedPrices = async ({ geoZone }) => {
 }
 
 export const activateLead = async (leadId) => {
-  console.log('Activating lead with id', leadId)
   return axios({
     method: 'POST',
     url: `${WEBFORMS_API_URL}/procedures/leads/lead_contract/${leadId}/activate`

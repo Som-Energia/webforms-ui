@@ -17,8 +17,6 @@ const GurbRequirementsTariffSelection = (props) => {
   const { values, setFieldValue } = props
   const [selectedOption, setSelectedOption] = useState(null)
 
-  console.log(props)
-
   const options = [
     {
       id: 'periods-tariff',

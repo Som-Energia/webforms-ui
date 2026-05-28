@@ -14,8 +14,8 @@ const SignatureIframe = ({
   postData,
   textRecommendation,
   textInfo,
-  onSignaturitCompleted = () => {},
-  onCreateSignature = () => {}
+  onSignaturitCompleted = () => { },
+  onCreateSignature = () => { }
 }) => {
   const { t } = useTranslation()
   const [signaturitResponseURL, setSignaturitResponseURL] = useState('')
@@ -32,7 +32,6 @@ const SignatureIframe = ({
 
       onSignaturitCompleted()
       setValid(true)
-      console.log('Signaturit has been completed', event)
     },
     [onSignaturitCompleted]
   )

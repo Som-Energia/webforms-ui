@@ -334,12 +334,10 @@ const NewContractMemberForm = (props) => {
   }, [activeStep])
 
   const handleSignatureCreated = (response) => {
-    console.log('Signature created', response)
     signatureApiResponse.current = response || {}
   }
 
   const handleSignatureSuccess = () => {
-    console.log('Signature success response', signatureApiResponse.current)
     const { lead, payment } = signatureApiResponse.current || {}
     const { lead_id } = lead || {}
     const { redsys_endpoint, payment_data } = payment || {}
