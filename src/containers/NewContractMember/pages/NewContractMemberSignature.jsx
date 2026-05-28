@@ -1,40 +1,24 @@
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Grid2 as Grid } from '@mui/material'
 
 import SignatureIframe from '../../Signature'
-import { createSignature } from '../../../services/api'
-import { newNormalizeContract } from '../../../services/newNormalize'
+import { createContractSignature } from '../../../services/api'
 
 export const NewContractMemberSignature = (props = {}) => {
-  const { values, gurbCode, onCreate, onSuccess } = props
+  const { leadId, onSuccess } = props
   const { t } = useTranslation()
-
-  const postData = useMemo(
-    () => newNormalizeContract(values, gurbCode),
-    [values, gurbCode]
-  )
-
-  const onCreateSignatureHandler = (response) => {
-    if (!response) {
-      return
-    }
-
-    onCreate(response || {})
-  }
 
   return (
     <>
       <Grid container direction={'column'}>
         <Grid item size={12} sx={{ textAlign: 'center', width: '100%' }}>
           <SignatureIframe
-            apiFunction={createSignature}
-            postData={postData}
+            apiFunction={createContractSignature}
+            postData={leadId}
             textRecommendation={t('SIGNATURE')}
             textInfo={t('SIGNATURE_INFO')}
-            onSignaturitCompleted={onSuccess}
-            onCreateSignature={onCreateSignatureHandler}></SignatureIframe>
+            onSignaturitCompleted={onSuccess}></SignatureIframe>
         </Grid>
       </Grid>
     </>

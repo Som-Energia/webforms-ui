@@ -269,6 +269,21 @@ export const createSignature = async (data) => {
   }).then(({ data }) => data)
 }
 
+export const createContractLead = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
+    data
+  }).then(({ data }) => data)
+}
+
+export const createContractSignature = async (leadId) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/sign/contract/${leadId}`
+  }).then(({ data }) => data)
+}
+
 export const modify_tariff = async (data) => {
   return axios({
     method: 'POST',
@@ -566,7 +581,7 @@ export const getCompensationIndexedPrices = async ({ geoZone }) => {
 export const activateLead = async (leadId) => {
   return axios({
     method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/leads/lead_contract/${leadId}/activate`
+    url: `${WEBFORMS_API_URL}/procedures/activate/${leadId}`
   })
     .then((response) => {
       if (response.error !== undefined) {

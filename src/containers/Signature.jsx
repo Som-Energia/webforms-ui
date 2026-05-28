@@ -44,6 +44,10 @@ const SignatureIframe = ({
   }, [signaturitHook])
 
   useEffect(() => {
+    if (!postData) {
+      return
+    }
+
     apiFunction(postData)
       .then(({ data }) => {
         // TODO: only compatible with gurb. Refactor to unify with new contract
@@ -57,7 +61,7 @@ const SignatureIframe = ({
       .finally(() => {
         setLoading(false)
       })
-  }, [postData])
+  }, [apiFunction, onCreateSignature, postData])
 
   return (
     <>

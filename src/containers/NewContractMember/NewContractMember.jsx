@@ -63,7 +63,8 @@ import identifyMemberPersonalDataValidations from './validations/identifyMemberP
 import Loading from '../../components/Loading'
 import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-import { activateLead } from '../../services/api'
+import { newNormalizeContract } from '../../services/newNormalize'
+import { activateLead, createContractLead } from '../../services/api'
 
 import { usePixelEvent } from '../../hooks/usePixelEvent'
 import { isCompanyVat } from '../../services/utils'
@@ -96,6 +97,7 @@ const NewContractMemberForm = (props) => {
   const { summaryField, setSummaryField } = useContext(SummaryContext)
   const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
+  const [signatureCompleted, setSignatureCompleted] = useState(false)
 
   const [activeStep, setActiveStep] = useState(
     initStep ? parseInt(initStep) : 0
@@ -107,7 +109,6 @@ const NewContractMemberForm = (props) => {
   const [formStepsName, setFormStepsName] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
   const [prevSteps] = useState(new Stack())
-  const signatureApiResponse = useRef({})
   const [leadId, setLeadId] = useState()
 
   const [gurbCode] = useState(() => searchParams.get('gurb-code'))
@@ -266,16 +267,70 @@ const NewContractMemberForm = (props) => {
     triggerEvent('FormularioCompletado', { status: 'ok' })
   }
 
-  const handlePost = async () => {
+  const handleCreateContract = async (values) => {
     trackEvent({
       category: 'Send',
       action: 'sendNewContractMemberClick',
       name: 'send-new-contract-member'
     })
 
-    if (redsysURL) {
-      // TODO: WIP redsys flow
-      trackSuccess()
+    setSending(true)
+    setSignatureCompleted(false)
+
+    const data = newNormalizeContract(values, gurbCode)
+    await createContractLead(data)
+      .then((response) => {
+        if (response?.state === true) {
+          const { payment, lead } = response?.data || {}
+          const paymentData = payment?.payment_data
+          const redsysEndpoint = payment?.redsys_endpoint
+          const responseLeadId = lead?.lead_id
+
+          if (redsysEndpoint && paymentData) {
+            setRedsysData({
+              redsys_endpoint: redsysEndpoint,
+              payment_data: paymentData
+            })
+            setRedsysURL(redsysEndpoint)
+            trackSuccess()
+            setCompleted(true)
+            setError(false)
+          } else if (responseLeadId && formSteps['SIGNATURE']) {
+            setLeadId(responseLeadId)
+            nextStep({ values })
+            setError(false)
+          } else {
+            setCompleted(true)
+            setError(true)
+          }
+        } else {
+          setCompleted(true)
+          setError(true)
+        }
+        })
+      .catch((err) => {
+        setError(true)
+        console.log(err)
+      })
+      .finally(() => {
+        setSending(false)
+      })
+  }
+
+  useEffect(() => {
+    const has_member = formikRef.current?.values?.has_member
+    const alertSteps = ALERT_STEPS[has_member] ?? []
+    setHasAlert(alertSteps.includes(activeStep))
+  }, [activeStep])
+
+  const handleSignatureSuccess = () => {
+    if (!signatureCompleted) {
+      return
+    }
+
+    if (!leadId) {
+      setError(true)
+      setCompleted(true)
       return
     }
 
@@ -295,27 +350,8 @@ const NewContractMemberForm = (props) => {
       })
   }
 
-  useEffect(() => {
-    const has_member = formikRef.current?.values?.has_member
-    const alertSteps = ALERT_STEPS[has_member] ?? []
-    setHasAlert(alertSteps.includes(activeStep))
-  }, [activeStep])
-
-  const handleSignatureCreated = (response) => {
-    signatureApiResponse.current = response || {}
-  }
-
-  const handleSignatureSuccess = () => {
-    const { lead, payment } = signatureApiResponse.current || {}
-    const { lead_id } = lead || {}
-    const { redsys_endpoint, payment_data } = payment || {}
-
-    if (redsys_endpoint && payment_data) {
-      setRedsysData(payment_data)
-      setRedsysURL(redsys_endpoint)
-    } else {
-      setLeadId(lead_id)
-    }
+  const handleSignatureCompleted = () => {
+    setSignatureCompleted(true)
   }
 
   const getStep = (props, sendTrackEvent) => {
@@ -350,9 +386,8 @@ const NewContractMemberForm = (props) => {
         return (
           <NewContractMemberSignature
             {...props}
-            gurbCode={gurbCode}
-            onCreate={handleSignatureCreated}
-            onSuccess={handleSignatureSuccess}
+            leadId={leadId}
+            onSuccess={handleSignatureCompleted}
           />
         )
       }
@@ -383,9 +418,8 @@ const NewContractMemberForm = (props) => {
         return (
           <NewContractMemberSignature
             {...props}
-            gurbCode={gurbCode}
-            onCreate={handleSignatureCreated}
-            onSuccess={handleSignatureSuccess}
+            leadId={leadId}
+            onSuccess={handleSignatureCompleted}
           />
         )
       }
@@ -519,7 +553,19 @@ const NewContractMemberForm = (props) => {
                         </Grid>
                       )}
                       <Grid item size={{ sm: 2, xs: 12 }} order={-1}>
-                        {activeStep !== MAX_STEP_NUMBER ? (
+                        {activeStep === formSteps['SUMMARY'] ? (
+                          <SubmitButton
+                            disabled={loading || !formikProps.isValid}
+                            onClick={() => handleCreateContract(formikProps.values)}>
+                            {t('NEXT')}
+                          </SubmitButton>
+                        ) : activeStep === formSteps['SIGNATURE'] ? (
+                          <SubmitButton
+                            disabled={loading || !signatureCompleted}
+                            onClick={() => handleSignatureSuccess()}>
+                            {gurbCode ? t('GURB_NEXT_PAYMENT') : t('FINISH')}
+                          </SubmitButton>
+                        ) : (
                           <NextButton
                             disabled={
                               loading ||
@@ -529,12 +575,6 @@ const NewContractMemberForm = (props) => {
                             onClick={() => nextStep(formikProps)}>
                             {t('NEXT')}
                           </NextButton>
-                        ) : (
-                          <SubmitButton
-                            disabled={!formikProps.isValid}
-                            onClick={() => handlePost(formikProps.values)}>
-                            {redsysURL ? t('GURB_NEXT_PAYMENT') : t('FINISH')}
-                          </SubmitButton>
                         )}
                       </Grid>
                     </Grid>
