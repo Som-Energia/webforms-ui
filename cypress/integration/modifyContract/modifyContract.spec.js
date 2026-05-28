@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Modify Contract', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

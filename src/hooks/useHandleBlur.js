@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback } from "react"
 
 export const useHandleBlur = (setFieldTouched) => {
   return useCallback(
@@ -6,7 +6,7 @@ export const useHandleBlur = (setFieldTouched) => {
       const { name } = event.target
       setFieldTouched(name, true)
     },
-    [setFieldTouched]
+    [setFieldTouched],
   )
 }
 
@@ -17,10 +17,10 @@ export const useHandleBlurValueIsNumberOrOption = (setFieldValue, options) => {
 
       const finalValue = options.some((item) => item === value)
         ? value
-        : value.replace(/[^0-9-]/g, '')
+        : value.replace(/[^0-9-]/g, "")
 
       setFieldValue(name, finalValue)
     },
-    [setFieldValue, options]
+    [setFieldValue, options],
   )
 }

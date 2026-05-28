@@ -1,7 +1,7 @@
 export const WAIT_TIME = 3000
 
 describe('New Contract with New Member', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })
@@ -177,7 +177,7 @@ describe('New Contract with New Member', () => {
 })
 
 describe('New Contract: results', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import dayjs from 'dayjs'
-import { useTranslation } from 'react-i18next'
+import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import TextField from '@mui/material/TextField'
-import FormHelperText from '@mui/material/FormHelperText'
-import InputAdornment from '@mui/material/InputAdornment'
-import Box from '@mui/material/Box'
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined"
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormHelperText from "@mui/material/FormHelperText"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
+import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import dayjs from "dayjs"
 
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
-
-import Header from '../../components/oficinavirtual/Header'
-import Card from '../../components/oficinavirtual/Card'
-import LabelFieldRow from '../../components/oficinavirtual/LabelFieldRow'
-import TermsDialog from '../../components/TermsDialog'
-import LegalText from '../../components/LegalText'
-import Loading from '../../components/Loading'
-
-import { getNextNBussinesDays } from '../../services/utils'
-
-import { getNationalHolidays } from '../../services/api'
+import LegalText from "../../components/LegalText"
+import Loading from "../../components/Loading"
+import Card from "../../components/oficinavirtual/Card"
+import Header from "../../components/oficinavirtual/Header"
+import LabelFieldRow from "../../components/oficinavirtual/LabelFieldRow"
+import TermsDialog from "../../components/TermsDialog"
+import { getNationalHolidays } from "../../services/api"
+import { getNextNBussinesDays } from "../../services/utils"
 
 const CancellationDetails = (props) => {
   const { values, setFieldValue, handleChange, handleBlur, errors, touched } =
@@ -38,16 +35,13 @@ const CancellationDetails = (props) => {
   useEffect(() => {
     setIsLoading(true)
     const today = dayjs()
-    getNationalHolidays(today, today.add(30, 'days'))
+    getNationalHolidays(today, today.add(30, "days"))
       .then(({ data }) => {
         var dates = getNextNBussinesDays(today, 14, data)
         setAvailableDates(dates)
         setIsLoading(false)
       })
-      .catch((error) => {
-        const errorStatus = error?.response?.data?.state
-          ? error?.response?.data?.state
-          : false
+      .catch(() => {
         setAvailableDates([])
         setIsLoading(false)
       })
@@ -58,8 +52,8 @@ const CancellationDetails = (props) => {
       setFirstDate(availableDates[0])
       setLastDate(availableDates[availableDates.length - 1])
       setFieldValue(
-        'date_action',
-        dayjs(availableDates[0]).format('DD/MM/YYYY')
+        "date_action",
+        dayjs(availableDates[0]).format("DD/MM/YYYY"),
       )
     } else {
       setFirstDate(null)
@@ -68,7 +62,7 @@ const CancellationDetails = (props) => {
   }, [availableDates])
 
   const handleDateChange = (date) => {
-    setFieldValue('date_action', date.format('DD/MM/YYYY'))
+    setFieldValue("date_action", date.format("DD/MM/YYYY"))
   }
 
   const handleCheckBoxClick = (event) => {
@@ -78,37 +72,38 @@ const CancellationDetails = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', true)
+    setFieldValue("terms_accepted", true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', false)
+    setFieldValue("terms_accepted", false)
   }
 
   const handlePrivacyPolicy = () => {
-    setFieldValue('privacy_policy', !values?.privacy_policy)
+    setFieldValue("privacy_policy", !values?.privacy_policy)
   }
 
   const shouldDisableDate = (date) => {
     if (!availableDates) return true
-    var iso = date.format('YYYY-MM-DD')
+    var iso = date.format("YYYY-MM-DD")
     return !availableDates.includes(iso)
   }
 
   return isLoading ? (
     <Loading />
   ) : (
-    <Box sx={{
-      width: '100%',
-      mb: '0.5rem',
-      '#root & input[type="text"]': {
-        fontSize: '14px !important',
-        padding: '14px !important'
-      }
-    }}>
-      <Header>{t('CANCELLATION_DETAILS_TITLE')}</Header>
-      <LabelFieldRow label={t('CUPS')}>
+    <Box
+      sx={{
+        width: "100%",
+        mb: "0.5rem",
+        '#root & input[type="text"]': {
+          fontSize: "14px !important",
+          padding: "14px !important",
+        },
+      }}>
+      <Header>{t("CANCELLATION_DETAILS_TITLE")}</Header>
+      <LabelFieldRow label={t("CUPS")}>
         <TextField
           id="cups"
           name="cups"
@@ -124,30 +119,30 @@ const CancellationDetails = (props) => {
                   <CheckOutlinedIcon color="primary" />
                 )}
               </InputAdornment>
-            )
+            ),
           }}
           error={errors?.cups && touched?.cups}
           helperText={
             touched?.cups && (
               <span
                 dangerouslySetInnerHTML={{
-                  __html: errors?.cups
+                  __html: errors?.cups,
                 }}
               />
             )
           }
         />
       </LabelFieldRow>
-      <LabelFieldRow label={t('CANCELLATION_DATE')}>
+      <LabelFieldRow label={t("CANCELLATION_DATE")}>
         <DatePicker
-          value={dayjs(values.date_action, 'DD/MM/YYYY')}
+          value={dayjs(values.date_action, "DD/MM/YYYY")}
           onChange={handleDateChange}
           name="date_action"
           sx={{
-            width: '100%',
-            '& path': {
-              color: 'secondary.dark'
-            }
+            width: "100%",
+            "& path": {
+              color: "secondary.dark",
+            },
           }}
           inputVariant="outlined"
           variant="inline"
@@ -163,14 +158,14 @@ const CancellationDetails = (props) => {
         <FormHelperText
           component="span"
           sx={{
-            pt: '4px',
-            mb: '-0.25rem !important',
-            color: '#c8071e'
+            pt: "4px",
+            mb: "-0.25rem !important",
+            color: "#c8071e",
           }}
-          dangerouslySetInnerHTML={{ __html: t('CANCELLATION_DATE_HELPER') }}
+          dangerouslySetInnerHTML={{ __html: t("CANCELLATION_DATE_HELPER") }}
         />
-      </LabelFieldRow >
-      <LabelFieldRow label={t('PHONE')}>
+      </LabelFieldRow>
+      <LabelFieldRow label={t("PHONE")}>
         <TextField
           id="phone"
           name="phone"
@@ -185,39 +180,40 @@ const CancellationDetails = (props) => {
             (errors?.phone && touched?.phone && (
               <span
                 dangerouslySetInnerHTML={{
-                  __html: errors?.phone
+                  __html: errors?.phone,
                 }}
               />
             )) || (
               <FormHelperText
                 component="span"
                 sx={{
-                  pt: '4px',
-                  mb: '-0.25rem !important'
+                  pt: "4px",
+                  mb: "-0.25rem !important",
                 }}
                 dangerouslySetInnerHTML={{
-                  __html: t('CANCELLATION_PHONE_HELPER')
+                  __html: t("CANCELLATION_PHONE_HELPER"),
                 }}
               />
             )
           }
         />
       </LabelFieldRow>
-      <Card sx={{
-        mt: '4px',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '0.75rem 1.5rem',
-        '& .MuiFormControlLabel-label': {
-          fontSize: '14px'
-        }
-      }}>
+      <Card
+        sx={{
+          mt: "4px",
+          display: "flex",
+          flexDirection: "column",
+          padding: "0.75rem 1.5rem",
+          "& .MuiFormControlLabel-label": {
+            fontSize: "14px",
+          },
+        }}>
         <TermsDialog
-          title={t('CANCELLATION_TERMS_TITLE')}
+          title={t("CANCELLATION_TERMS_TITLE")}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
-          <LegalText documentName={'cancellation-terms'} />
+          <LegalText documentName={"cancellation-terms"} />
         </TermsDialog>
         <FormControlLabel
           control={
@@ -231,9 +227,9 @@ const CancellationDetails = (props) => {
           label={
             <label
               dangerouslySetInnerHTML={{
-                __html: t('ACCEPT_PRIVACY_POLICY', {
-                  url: t('ACCEPT_PRIVACY_POLICY_URL')
-                })
+                __html: t("ACCEPT_PRIVACY_POLICY", {
+                  url: t("ACCEPT_PRIVACY_POLICY_URL"),
+                }),
               }}
             />
           }
@@ -248,10 +244,10 @@ const CancellationDetails = (props) => {
               color="primary"
             />
           }
-          label={t('CANCELLATION_TERMS')}
+          label={t("CANCELLATION_TERMS")}
         />
       </Card>
-    </Box >
+    </Box>
   )
 }
 

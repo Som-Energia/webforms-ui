@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
-import { searchPlace } from '../../../../services/googleApiClient'
-import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete'
-import { useTranslation } from 'react-i18next'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { autocompleteAddressInputStyles } from '../../../../themes/commonStyles'
-import InputTitle from '../../../../components/InputTitle'
+import Autocomplete from "@mui/material/Autocomplete"
+import Grid from "@mui/material/Grid"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
+
+import InputTitle from "../../../../components/InputTitle"
+import { searchPlace } from "../../../../services/googleApiClient"
+import { autocompleteAddressInputStyles } from "../../../../themes/commonStyles"
 
 export default function AddressAutocompletedFieldGurb({
   textFieldLabel,
@@ -17,9 +18,9 @@ export default function AddressAutocompletedFieldGurb({
   sessionTokenRef,
   required = false,
   error = false,
-  helperText = '',
+  helperText = "",
   touched = false,
-  onBlur = () => { }
+  onBlur = () => {},
 }) {
   const { t } = useTranslation()
   const timeoutRef = useRef()
@@ -28,12 +29,12 @@ export default function AddressAutocompletedFieldGurb({
 
   // normalize incoming `value` whether it's a string or object
   const normalizeValue = (v) =>
-    v && typeof v === 'object'
-      ? { id: v.id ?? null, street: v.street ?? v.text ?? '' }
-      : { id: null, street: v ?? '' }
+    v && typeof v === "object"
+      ? { id: v.id ?? null, street: v.street ?? v.text ?? "" }
+      : { id: null, street: v ?? "" }
 
   const [inputValue, setInputValue] = useState(
-    () => normalizeValue(value).street
+    () => normalizeValue(value).street,
   )
   const [loadingResults, setLoadingResults] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
@@ -58,7 +59,7 @@ export default function AddressAutocompletedFieldGurb({
       try {
         const placesSuggestions = await searchPlace(inputValue, sessionTokenRef)
         setSuggestions(placesSuggestions)
-      } catch (e) {
+      } catch {
         setSuggestions([])
       } finally {
         setLoadingResults(false)
@@ -69,18 +70,18 @@ export default function AddressAutocompletedFieldGurb({
   const handleSuggestionSelected = (event, newValue) => {
     if (!newValue) {
       onChange(null)
-      setInputValue('')
+      setInputValue("")
       setSuggestions([])
       return
     }
 
-    if (typeof newValue === 'string') {
+    if (typeof newValue === "string") {
       onChange({ id: null, street: newValue })
       setInputValue(newValue)
     } else {
       const selected = {
         ...newValue,
-        street: newValue.street || newValue.text || ''
+        street: newValue.street || newValue.text || "",
       }
       onChange(selected)
       setInputValue(selected.street)
@@ -93,39 +94,39 @@ export default function AddressAutocompletedFieldGurb({
   return (
     <Autocomplete
       freeSolo
-      data-cy={'street'}
+      data-cy={"street"}
       value={normalizedValue}
       inputValue={inputValue}
       options={suggestions}
       filterOptions={(option) => option}
       getOptionLabel={(option) =>
-        typeof option === 'string' ? option : option.street || option.text || ''
+        typeof option === "string" ? option : option.street || option.text || ""
       }
       loading={loadingResults}
-      loadingText={t('AUTOCOMPLETE_LOADING_TEXT')}
-      noOptionsText={t('AUTOCOMPLETE_WITHOUT_OPTIONS')}
+      loadingText={t("AUTOCOMPLETE_LOADING_TEXT")}
+      noOptionsText={t("AUTOCOMPLETE_WITHOUT_OPTIONS")}
       onChange={handleSuggestionSelected}
       onInputChange={(event, newInputValue, reason) => {
-        if (reason === 'input') {
+        if (reason === "input") {
           setInputValue(newInputValue)
-        } else if (reason === 'clear') {
-          setInputValue('')
+        } else if (reason === "clear") {
+          setInputValue("")
           onChange(null)
         }
       }}
       isOptionEqualToValue={(option, v) => {
         const optStreet =
-          typeof option === 'string'
+          typeof option === "string"
             ? option
-            : option.street || option.text || ''
-        const valStreet = typeof v === 'string' ? v : v?.street || v?.text || ''
+            : option.street || option.text || ""
+        const valStreet = typeof v === "string" ? v : v?.street || v?.text || ""
         const optId = option?.id ?? null
         const valId = v?.id ?? null
         return optId === valId && optStreet === valStreet
       }}
       renderInput={(params) => (
         <Grid container spacing={1}>
-          <Grid item xs={12} sx={{ mb: '6px' }}>
+          <Grid item xs={12} sx={{ mb: "6px" }}>
             <InputTitle text={textFieldName} required={required} />
           </Grid>
 
@@ -136,7 +137,7 @@ export default function AddressAutocompletedFieldGurb({
               label={
                 !normalizedValue.street && !inputValue && !isFocused
                   ? textFieldLabel
-                  : ''
+                  : ""
               }
               InputLabelProps={{ shrink: false }}
               onFocus={() => setIsFocused(true)}

@@ -1,25 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import SendIcon from "@mui/icons-material/Send"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+import Divider from "@mui/material/Divider"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
-import CircularProgress from '@mui/material/CircularProgress'
+import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
 
-import SendIcon from '@mui/icons-material/Send'
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
-
-export default function ModifyResume({
-  prevStep,
-  nextStep,
-  handleStepChanges,
-  postSubmit,
-  params
-}) {
+export default function ModifyResume({ prevStep, postSubmit, params }) {
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
@@ -32,7 +25,7 @@ export default function ModifyResume({
   return (
     <Paper sx={{ mt: 2, padding: 2 }} elevation={0}>
       <Box mt={1} mx={1} mb={2}>
-        <Typography gutterBottom>{t('REVIEW_DATA_AND_CONFIRM')}</Typography>
+        <Typography gutterBottom>{t("REVIEW_DATA_AND_CONFIRM")}</Typography>
       </Box>
 
       <Box mx={1} mb={1}>
@@ -42,10 +35,10 @@ export default function ModifyResume({
       {params?.subsection && (
         <Box mt={2} mx={1}>
           <Typography
-            sx={{ textTransform: 'uppercase' }}
+            sx={{ textTransform: "uppercase" }}
             variant="subtitle2"
             gutterBottom>
-            {t('SELFCONSUMPTION_SUBSECTION')}
+            {t("SELFCONSUMPTION_SUBSECTION")}
           </Typography>
           <Grid container spacing={2}>
             <Grid item>
@@ -60,18 +53,18 @@ export default function ModifyResume({
       {params.modify?.phases && (
         <Box mt={2} mx={1}>
           <Typography
-            sx={{ textTransform: 'uppercase' }}
+            sx={{ textTransform: "uppercase" }}
             variant="subtitle2"
             gutterBottom>
-            {t('PHASE_TYPE_CHANGE')}
+            {t("PHASE_TYPE_CHANGE")}
           </Typography>
           <Typography
             data-cy={params.modify?.phases}
             variant="body1"
             gutterBottom>
-            {params.modify?.phases === 'mono'
-              ? t('MONOFASICA_NORMAL')
-              : t('TRIFASICA')}
+            {params.modify?.phases === "mono"
+              ? t("MONOFASICA_NORMAL")
+              : t("TRIFASICA")}
           </Typography>
         </Box>
       )}
@@ -79,10 +72,10 @@ export default function ModifyResume({
       {params.modify?.power && (
         <Box mt={2} mx={1}>
           <Typography
-            sx={{ textTransform: 'uppercase' }}
+            sx={{ textTransform: "uppercase" }}
             variant="subtitle2"
             gutterBottom>
-            {t('POWER')}
+            {t("POWER")}
           </Typography>
 
           <Grid container spacing={4}>
@@ -90,9 +83,9 @@ export default function ModifyResume({
               <Typography data-cy="power" variant="body1" gutterBottom>
                 <Typography
                   component="body1"
-                  sx={{ mr: 1, color: 'secondary.dark' }}>
-                  {params?.modify?.moreThan15Kw ? 'P1' : t('PEAK')}
-                </Typography>{' '}
+                  sx={{ mr: 1, color: "secondary.dark" }}>
+                  {params?.modify?.moreThan15Kw ? "P1" : t("PEAK")}
+                </Typography>{" "}
                 {params.modify?.power} kW
               </Typography>
             </Grid>
@@ -100,9 +93,9 @@ export default function ModifyResume({
               <Typography data-cy="power2" variant="body1" gutterBottom>
                 <Typography
                   component="body1"
-                  sx={{ mr: 1, color: 'secondary.dark' }}>
-                  {params?.modify?.moreThan15Kw ? 'P2' : t('VALLEY')}
-                </Typography>{' '}
+                  sx={{ mr: 1, color: "secondary.dark" }}>
+                  {params?.modify?.moreThan15Kw ? "P2" : t("VALLEY")}
+                </Typography>{" "}
                 {params.modify?.power2} kW
               </Typography>
             </Grid>
@@ -112,7 +105,7 @@ export default function ModifyResume({
                 {[...Array(4).keys()].map((item) => {
                   const num = item + 3
                   return (
-                    <Grid item>
+                    <Grid key={num} item>
                       <Typography
                         data-cy={`power${num}`}
                         variant="body1"
@@ -121,8 +114,8 @@ export default function ModifyResume({
                           component="body1"
                           sx={{
                             mr: 1,
-                            color: 'secondary.dark'
-                          }}>{`P${num}`}</Typography>{' '}
+                            color: "secondary.dark",
+                          }}>{`P${num}`}</Typography>{" "}
                         {params.modify?.[`power${num}`]} kW
                       </Typography>
                     </Grid>
@@ -136,10 +129,10 @@ export default function ModifyResume({
       {params.modify?.changePower && (
         <Box mt={2} mx={1}>
           <Typography
-            sx={{ textTransform: 'uppercase' }}
+            sx={{ textTransform: "uppercase" }}
             variant="subtitle2"
             gutterBottom>
-            {t('FARE')}
+            {t("FARE")}
           </Typography>
           <Grid container spacing={4}>
             {params.modify?.tariff && (
@@ -155,29 +148,33 @@ export default function ModifyResume({
 
       <Box mt={2} mb={3} mx={1}>
         <Typography
-          sx={{ textTransform: 'uppercase' }}
+          sx={{ textTransform: "uppercase" }}
           variant="subtitle2"
           gutterBottom>
-          {t('CONTACT_PHONE')}
+          {t("CONTACT_PHONE")}
         </Typography>
         <Typography data-cy="contact" variant="body1" gutterBottom>
-          {params.contact?.phone} ({params.contact?.contactName}{' '}
+          {params.contact?.phone} ({params.contact?.contactName}{" "}
           {params.contact?.contactSurname})
         </Typography>
       </Box>
 
       <Box mt={1} mx={1} mb={2}>
-        <Typography gutterBottom>{t('REVIEW_DATA_INFO')}</Typography>
+        <Typography gutterBottom>{t("REVIEW_DATA_INFO")}</Typography>
       </Box>
 
       <Box mx={1} mb={1}>
         <Divider />
       </Box>
 
-      <Box sx={{ marginTop: '1rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-        {prevStep && (
-          <PrevButton onClick={prevStep} title={t('PREV')} />
-        )}
+      <Box
+        sx={{
+          marginTop: "1rem",
+          marginBottom: "1rem",
+          display: "flex",
+          justifyContent: "space-between",
+        }}>
+        {prevStep && <PrevButton onClick={prevStep} title={t("PREV")} />}
         {
           <>
             <Button
@@ -185,18 +182,18 @@ export default function ModifyResume({
               onClick={handleSubmit}
               disableElevation={true}
               sx={{
-                backgroundColor: '#CDFF80',
-                color: '#0B2E34',
-                '&:hover': {
-                  color: '#CDFF80',
-                  backgroundColor: '#0B2E34'
-                }
+                backgroundColor: "#CDFF80",
+                color: "#0B2E34",
+                "&:hover": {
+                  color: "#CDFF80",
+                  backgroundColor: "#0B2E34",
+                },
               }}
               color="primary"
               variant="contained"
               endIcon={sending ? <CircularProgress size={24} /> : <SendIcon />}
               disabled={sending}>
-              {t('SEND')}
+              {t("SEND")}
             </Button>
           </>
         }

@@ -1,25 +1,23 @@
-import React, { useState, useCallback } from 'react'
-import { Navigate, useParams, useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { normalizeD1ConfirmationData, templateData } from '../services/utils'
-import { confirmD1Case } from '../services/api'
+import React, { useCallback, useState } from "react"
+import { Navigate, useLocation, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
+import Alert from "@mui/material/Alert"
+import AlertTitle from "@mui/material/AlertTitle"
+import Box from "@mui/material/Box"
+import Grow from "@mui/material/Grow"
+import Step from "@mui/material/Step"
+import StepContent from "@mui/material/StepContent"
+import StepLabel from "@mui/material/StepLabel"
+import Stepper from "@mui/material/Stepper"
+import Typography from "@mui/material/Typography"
 
-import Grow from '@mui/material/Grow'
-
-import Stepper from '@mui/material/Stepper'
-import Step from '@mui/material/Step'
-import StepLabel from '@mui/material/StepLabel'
-import StepContent from '@mui/material/StepContent'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-
-import D1Validation from './CaseDetail/D1Validation'
-import RefuseD1 from './CaseDetail/RefuseD1'
-import AcceptD1 from './CaseDetail/AcceptD1'
-import { useSyncLanguage } from '../hooks/useTranslateOptions'
+import { useSyncLanguage } from "../hooks/useTranslateOptions"
+import { confirmD1Case } from "../services/api"
+import { normalizeD1ConfirmationData, templateData } from "../services/utils"
+import AcceptD1 from "./CaseDetail/AcceptD1"
+import D1Validation from "./CaseDetail/D1Validation"
+import RefuseD1 from "./CaseDetail/RefuseD1"
 
 function D1Detail(props) {
   const { t } = useTranslation()
@@ -37,7 +35,7 @@ function D1Detail(props) {
     (params) => {
       setData({ ...data, ...params })
     },
-    [data]
+    [data],
   )
 
   const handlePost = async (values) => {
@@ -51,7 +49,7 @@ function D1Detail(props) {
         const errorObj = {
           error: error?.response?.data?.error
             ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+            : { code: "MODIFY_POTTAR_UNEXPECTED" },
         }
         handleStepChanges(errorObj)
         nextStep()
@@ -59,9 +57,9 @@ function D1Detail(props) {
   }
 
   const steps = [
-    t('DETAIL_D1_TITLE'),
-    t('ACCEPT_OR_REFUSE_TITLE'),
-    t('DATA_REVISION_CONFIRMATION'),
+    t("DETAIL_D1_TITLE"),
+    t("ACCEPT_OR_REFUSE_TITLE"),
+    t("DATA_REVISION_CONFIRMATION"),
   ]
 
   const getStepContent = (step) => {
@@ -99,7 +97,7 @@ function D1Detail(props) {
         return (
           <Navigate
             to={{
-              pathname: `/${language}/contract/modification`
+              pathname: `/${language}/contract/modification`,
             }}
             state={{ d1CaseData: data }}
           />
@@ -118,22 +116,22 @@ function D1Detail(props) {
   return (
     <Box
       sx={{
-        width: '100%',
-        backgroundColor: 'background.third'
+        width: "100%",
+        backgroundColor: "background.third",
       }}>
       {(data?.to_validate && (
         <>
           <Stepper
             sx={{
-              '& .MuiStepIcon-root.Mui-active': {
-                color: 'primary.main'
+              "& .MuiStepIcon-root.Mui-active": {
+                color: "primary.main",
               },
-              '& .MuiStepIcon-root.Mui-completed': {
-                color: 'primary.main'
+              "& .MuiStepIcon-root.Mui-completed": {
+                color: "primary.main",
               },
               pl: 1,
               pr: 1,
-              pb: 1
+              pb: 1,
             }}
             activeStep={activeStep}
             orientation="vertical">
@@ -143,7 +141,7 @@ function D1Detail(props) {
                   error={
                     index === steps.length - 1 && data?.error !== undefined
                   }>
-                  <Typography component="body1" sx={{ fontSize: '1.15rem' }}>
+                  <Typography component="body1" sx={{ fontSize: "1.15rem" }}>
                     {label}
                   </Typography>
                 </StepLabel>
@@ -159,7 +157,7 @@ function D1Detail(props) {
             <Grow in={data?.error !== undefined}>
               <Box sx={{ m: 1 }}>
                 <Alert severity="error">
-                  <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
+                  <AlertTitle>{t("ERROR_POST_MODIFY")}</AlertTitle>
                   {t(data?.error?.code)}
                 </Alert>
               </Box>
@@ -170,9 +168,9 @@ function D1Detail(props) {
               <Box sx={{ m: 1 }}>
                 <Alert severity="success">
                   {(data?.validate && (
-                    <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
-                  )) || <AlertTitle>{t('REFUSE_SUCCESS_TITTLE')}</AlertTitle>}
-                  {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
+                    <AlertTitle>{t("MODIFY_POTTAR_SUCCESS_TITTLE")}</AlertTitle>
+                  )) || <AlertTitle>{t("REFUSE_SUCCESS_TITTLE")}</AlertTitle>}
+                  {t("MODIFY_POTTAR_SUCCESS_MESSAGE")}
                 </Alert>
               </Box>
             </Grow>

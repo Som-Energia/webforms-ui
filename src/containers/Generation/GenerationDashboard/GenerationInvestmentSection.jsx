@@ -1,7 +1,9 @@
-import React, { useMemo } from 'react'
-import GenerationTable from './GenerationTable'
-import { useTranslation } from 'react-i18next'
-import dayjs from 'dayjs'
+import React, { useMemo } from "react"
+import { useTranslation } from "react-i18next"
+
+import dayjs from "dayjs"
+
+import GenerationTable from "./GenerationTable"
 
 function createData(
   name,
@@ -10,22 +12,22 @@ function createData(
   purchase_date,
   first_effective_date,
   amortized_amount,
-  last_effective_date
+  last_effective_date,
 ) {
   return {
     name,
-    nominal_amount: Number(nominal_amount).toLocaleString('es-ES') + '€',
+    nominal_amount: Number(nominal_amount).toLocaleString("es-ES") + "€",
     nshares,
     purchase_date: purchase_date
-      ? dayjs(purchase_date.replaceAll('"', '')).format('DD/MM/YYYY')
-      : '--',
+      ? dayjs(purchase_date.replaceAll('"', "")).format("DD/MM/YYYY")
+      : "--",
     first_effective_date: first_effective_date
-      ? dayjs(first_effective_date.replaceAll('"', '')).format('DD/MM/YYYY')
-      : '--',
-    amortized_amount: Number(amortized_amount).toLocaleString('es-ES') + '€',
+      ? dayjs(first_effective_date.replaceAll('"', "")).format("DD/MM/YYYY")
+      : "--",
+    amortized_amount: Number(amortized_amount).toLocaleString("es-ES") + "€",
     last_effective_date: last_effective_date
-      ? dayjs(last_effective_date.replaceAll('"', '')).format('DD/MM/YYYY')
-      : '--'
+      ? dayjs(last_effective_date.replaceAll('"', "")).format("DD/MM/YYYY")
+      : "--",
   }
 }
 
@@ -34,19 +36,19 @@ export default function GenerationInvestmentSection({ data }) {
 
   const rows = useMemo(
     () => data.map((element) => createData(...Object.values(element))),
-    [data]
+    [data],
   )
   const columns = useMemo(
     () => [
-      t('GENERATION_INVESTMENTS_TABLE_TTILE_N_INVESTMENT'),
-      t('GENERATION_INVESTMENTS_TABLE_TTILE_INVESTED_AMOUNT'),
-      t('GENERATION_INVESTMENTS_TABLE_TTILE_ENERGY_ACTIONS'),
-      t('GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE '),
-      t('GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE '),
-      t('GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT '),
-      t('GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE ')
+      t("GENERATION_INVESTMENTS_TABLE_TTILE_N_INVESTMENT"),
+      t("GENERATION_INVESTMENTS_TABLE_TTILE_INVESTED_AMOUNT"),
+      t("GENERATION_INVESTMENTS_TABLE_TTILE_ENERGY_ACTIONS"),
+      t("GENERATION_INVESTMENTS_TABLE_TITLE_PURCHASE_DATE "),
+      t("GENERATION_INVESTMENTS_TABLE_TITLE_ACTIVATION_DATE "),
+      t("GENERATION_INVESTMENTS_TABLE_TITLE_AMORTIZED_AMOUNT "),
+      t("GENERATION_INVESTMENTS_TABLE_TITLE_END_DATE "),
     ],
-    [t]
+    [t],
   )
 
   return <GenerationTable id="investment-table" columns={columns} rows={rows} />

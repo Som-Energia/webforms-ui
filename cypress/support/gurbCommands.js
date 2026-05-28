@@ -236,7 +236,7 @@ Cypress.Commands.add('personalDataMember', (personalData, statusCode = 200) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('identifyHolderGURB', (vat, statusCode = 200) => {
+Cypress.Commands.add('identifyHolderGURB', (vat) => {
   cy.get('[data-cy="holder_vat"]').type(vat)
 
   cy.get('[data-cy="has_holder"]').get('[data-cy="holder-same"]').click()
@@ -305,7 +305,7 @@ Cypress.Commands.add('donationQuestion', (donation = true) => {
   cy.get('[data-cy=next]').click()
 })
 
-Cypress.Commands.add('paymentData', (iban, statusCode = 200) => {
+Cypress.Commands.add('paymentData', (iban) => {
   cy.get('[data-cy="iban"]').type(iban)
 
   cy.get('[data-cy="iban_check"]').click()

@@ -1,21 +1,21 @@
 html,
 body {
-  font-family: 'Outfit';
+  font-family: "Outfit";
   background: transparent;
   color: #4d4d4d;
   font-size: 16px;
   height: 100%;
 }
 
-#root input[type='text'],
-#root input[type='password'],
-#root input[type='search'],
-#root input[type='email'],
-#root input[type='url'],
-#root input[type='tel'],
-#root input[type='number'],
-#root input[type='range'],
-#root input[type='date'],
+#root input[type="text"],
+#root input[type="password"],
+#root input[type="search"],
+#root input[type="email"],
+#root input[type="url"],
+#root input[type="tel"],
+#root input[type="number"],
+#root input[type="range"],
+#root input[type="date"],
 #root textarea {
   border: 0 !important;
   -webkit-border-radius: 3px;
@@ -65,13 +65,13 @@ StepHeader Component
 }
 
 .header__text {
-  color: #0B2E34;
+  color: #0b2e34;
   font-size: 21px;
   font-weight: 400;
 }
 
 .ov-theme {
-  background: #F0F3EC;
+  background: #f0f3ec;
   color: #aa6161;
 }
 
@@ -84,7 +84,7 @@ StepHeader Component
 }
 
 .ov-theme .header__text {
-  color: #0B2E34;
+  color: #0b2e34;
   font-size: 18px;
   font-weight: 700;
 }

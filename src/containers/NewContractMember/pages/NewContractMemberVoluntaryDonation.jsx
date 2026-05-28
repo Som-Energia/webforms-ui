@@ -1,31 +1,30 @@
-import {useEffect} from 'react'
-import { useTranslation } from 'react-i18next'
+import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import VoluntaryDonation from '../../../components/VoluntaryDonation'
+import VoluntaryDonation from "../../../components/VoluntaryDonation"
 
 const NewContractMemberVoluntaryDonation = (props) => {
   const { sendTrackEvent } = props
   const { t } = useTranslation()
 
-  const trackID = 'voluntary-donation'
+  const trackID = "voluntary-donation"
 
   useEffect(() => {
     sendTrackEvent(trackID)
   }, [])
 
   return (
-
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="headline4.regular">{t('VOLUNTARY_CENT_TITLE')}</Typography>
+        <Typography variant="headline4.regular">
+          {t("VOLUNTARY_CENT_TITLE")}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
-        <VoluntaryDonation
-          {...props}
-        />
+        <VoluntaryDonation {...props} />
       </Grid>
     </Grid>
   )

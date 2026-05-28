@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Button from '@mui/material/Button'
-import ArrowForward from '@mui/icons-material/ArrowForward'
-import { buttonDark } from './buttonStyles'
+import ArrowForward from "@mui/icons-material/ArrowForward"
+import Button from "@mui/material/Button"
+
+import { buttonDark } from "./buttonStyles"
 
 function NextButton(props) {
   const { onClick, disabled, title = "NEXT" } = props
@@ -13,11 +14,11 @@ function NextButton(props) {
       tabIndex={0}
       sx={{
         ...buttonDark,
-        height: '40px',
-        padding: '13px 18px',
-        boxSizing: 'border-box',
+        height: "40px",
+        padding: "13px 18px",
+        boxSizing: "border-box",
         lineHeight: 1,
-        textTransform: 'none'
+        textTransform: "none",
       }}
       type="button"
       data-cy="next"

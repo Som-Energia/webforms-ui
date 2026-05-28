@@ -1,33 +1,26 @@
-import React from 'react'
-import GenerationMemberIdFields from './GenerationMemberIdFields'
-import {
-  render,
-  queryByAttribute,
-  fireEvent,
-  getByText
-} from '@testing-library/react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import axios from 'axios'
+import React from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-import { vi } from 'vitest';
+import { fireEvent, queryByAttribute, render } from "@testing-library/react"
+import { vi } from "vitest"
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
+import GenerationMemberIdFields from "./GenerationMemberIdFields"
 
+vi.mock("react-i18next", () => require("../../../tests/__mocks__/i18n"))
 
-describe('Generation Form Review', () => {
-  
+describe("Generation Form Review", () => {
   const mockValues = {
     member: {
       number: 38434,
-      vat: '40323835M'
-    }
+      vat: "40323835M",
+    },
   }
 
-  const VAT = '21329935F'
+  const VAT = "21329935F"
   const mockSetFieldValue = vi.fn()
-  const getById = queryByAttribute.bind(null, 'id')
+  const getById = queryByAttribute.bind(null, "id")
 
-  test('Should call setFieldValue when change vat', async () => {
+  test("Should call setFieldValue when change vat", async () => {
     const dom = render(
       <Router>
         <Routes>
@@ -44,13 +37,13 @@ describe('Generation Form Review', () => {
             }
           />
         </Routes>
-      </Router>
+      </Router>,
     )
 
-    const vatTextField = getById(dom.container, 'vat')
+    const vatTextField = getById(dom.container, "vat")
     React.act(() => {
       fireEvent.change(vatTextField, { target: { value: VAT } })
     })
-    expect(mockSetFieldValue).toHaveBeenCalledWith('member.vat', VAT)
+    expect(mockSetFieldValue).toHaveBeenCalledWith("member.vat", VAT)
   })
 })

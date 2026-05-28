@@ -1,45 +1,40 @@
 import {
-  useState,
-  useEffect,
-  useRef,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
-  useCallback
-} from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { Formik } from 'formik'
-import MatomoContext from '../../trackers/matomo/MatomoProvider'
+  useRef,
+  useState,
+} from "react"
+import { useParams } from "react-router-dom"
 
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
-import PrevButton from '../../components/Buttons/PrevButton'
-import NextButton from '../../components/Buttons/NextButton'
-import SubmitButton from '../../components/Buttons/SubmitButton'
-import SomStepper from '../../components/SomStepper/SomStepper'
+import { Formik } from "formik"
 
-import {
-  identifierValidations,
-  gurbPowerOptions,
-  gurbPolicyChecks
-} from './validations/GurbValidations'
-
-import LoadingContext from '../../context/LoadingContext'
-
+import NextButton from "../../components/Buttons/NextButton"
+import PrevButton from "../../components/Buttons/PrevButton"
+import SubmitButton from "../../components/Buttons/SubmitButton"
+import SomStepper from "../../components/SomStepper/SomStepper"
+import LoadingContext from "../../context/LoadingContext"
+import { useSyncLanguage } from "../../hooks/useTranslateOptions"
+import MatomoContext from "../../trackers/matomo/MatomoProvider"
+import ContractReview from "./pages/Gurb/ContractReview"
 // Step components
-import GurbIdentification from './pages/Gurb/GurbIdentification'
-import GurbParticipation from './pages/Gurb/GurbParticipation'
-import ContractReview from './pages/Gurb/ContractReview'
-import GurbSignature from './pages/Gurb/GurbSignature'
-import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-
+import GurbIdentification from "./pages/Gurb/GurbIdentification"
+import GurbParticipation from "./pages/Gurb/GurbParticipation"
+import GurbSignature from "./pages/Gurb/GurbSignature"
+import {
+  gurbPolicyChecks,
+  gurbPowerOptions,
+  identifierValidations,
+} from "./validations/GurbValidations"
 
 const MAX_STEPS_NUMBER = 4
 
-const GurbFormJoin = (props) => {
-  const { i18n } = useTranslation()
+const GurbFormJoin = () => {
   const { language, code } = useParams()
 
   const [redsysData, setRedsysData] = useState()
@@ -67,29 +62,29 @@ const GurbFormJoin = (props) => {
   const initialValues = useMemo(
     () => ({
       new_contract: undefined,
-      tariff_name: '',
+      tariff_name: "",
       owner: {
-        nif: '',
-        nif_valid: false
+        nif: "",
+        nif_valid: false,
       },
-      cups: '',
+      cups: "",
       gurb: {
-        power: '',
-        daily_cost: '',
-        join_cost: '',
-        surplus_compensation: ''
+        power: "",
+        daily_cost: "",
+        join_cost: "",
+        surplus_compensation: "",
       },
       privacy_policy_accepted: false,
       generic_especific_conditons_accepted: false,
       gurb_adhesion_payment_accepted: false,
-      payment_data: undefined
+      payment_data: undefined,
     }),
-    []
+    [],
   )
 
   const validationSchemas = useMemo(
     () => [identifierValidations, gurbPowerOptions, gurbPolicyChecks],
-    []
+    [],
   )
 
   const nextStep = useCallback(() => {
@@ -126,27 +121,27 @@ const GurbFormJoin = (props) => {
   const handleSubmit = () => {
     setSubmitAction(true)
     trackEvent({
-      category: 'GurbFormJoin',
-      action: 'setGurbFormJoinStep',
-      name: `gurb-join-signed-${code}`
+      category: "GurbFormJoin",
+      action: "setGurbFormJoinStep",
+      name: `gurb-join-signed-${code}`,
     })
   }
 
   useEffect(() => {
     trackEvent({
-      category: 'GurbFormJoin',
-      action: 'setGurbFormJoinStep',
-      name: `gurb-join-step-${activeStep}-${code}`
+      category: "GurbFormJoin",
+      action: "setGurbFormJoinStep",
+      name: `gurb-join-step-${activeStep}-${code}`,
     })
   }, [activeStep])
 
   return (
     <Container
-      data-cy='gurb-join-form'
-      aria-label='gurb-join-form'
+      data-cy="gurb-join-form"
+      aria-label="gurb-join-form"
       maxWidth="md"
       disableGutters
-      sx={{ padding: '1rem' }}>
+      sx={{ padding: "1rem" }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -155,8 +150,7 @@ const GurbFormJoin = (props) => {
         validateOnBlur={false}>
         {(formikProps) => (
           <>
-            <Box
-              sx={{ marginBottom: '65px' }}>
+            <Box sx={{ marginBottom: "65px" }}>
               <SomStepper
                 showStepTitle={true}
                 activeStep={activeStep}
@@ -166,16 +160,16 @@ const GurbFormJoin = (props) => {
 
             {getStep(formikProps)}
 
-            {(
+            {
               <>
                 <Grid
                   container
                   direction="row-reverse"
                   rowSpacing={2}
                   sx={{
-                    marginTop: '2rem',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
+                    marginTop: "2rem",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                   }}>
                   {activeStep !== 0 && activeStep !== 3 && (
                     <Grid item sm={2} xs={12}>
@@ -194,7 +188,7 @@ const GurbFormJoin = (props) => {
                       />
                     </Grid>
                   ) : (
-                    <Grid item sm={4} xs={12} sx={{ mx: 'auto' }}>
+                    <Grid item sm={4} xs={12} sx={{ mx: "auto" }}>
                       <SubmitButton
                         text="GURB_NEXT_PAYMENT"
                         disabled={
@@ -206,7 +200,7 @@ const GurbFormJoin = (props) => {
                   )}
                 </Grid>
               </>
-            )}
+            }
           </>
         )}
       </Formik>

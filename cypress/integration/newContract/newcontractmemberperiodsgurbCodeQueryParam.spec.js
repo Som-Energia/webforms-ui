@@ -4,7 +4,7 @@ export const WAIT_TIME = 3000
 describe('New Contract: results with gurbCode query param', () => {
   const gurbCode = 'a_valid_gurb_code';
 
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

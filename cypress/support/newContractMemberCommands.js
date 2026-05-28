@@ -27,7 +27,7 @@ Cypress.Commands.add('contractMemberDonationQuestion', (donation = true) => {
   cy.get('[data-cy="donation_question"]')
     .get(`[data-cy="${donation}"]`)
     .click()
-  
+
   cy.get('[data-cy=next]').click()
 })
 
@@ -66,7 +66,7 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
 
   cy.get('[id="supply_point.is_housing"]').click()
 
-  if (house == "no"){
+  if (house === "no"){
     cy.get(`[id="supply_point.is_housing-false"]`).click()
   } else {
     cy.get(`[id="supply_point.is_housing-true"]`).click()
@@ -97,7 +97,7 @@ Cypress.Commands.add('selfconsumptionData', (selfConsumption) => {
     .click()
 
   cy.get('[data-cy="self_consumption.installation_power"]').type(selfConsumption.installation_power)
-  
+
   if (collectiveOptionValue !== 'individual') {
     cy.get('[id="self_consumption.installation_type"]').click()
     cy.get('[id="self_consumption.installation_type-01"]').click()
@@ -110,7 +110,7 @@ Cypress.Commands.add('selfconsumptionData', (selfConsumption) => {
   cy.get('[data-cy="aux_services_question"]')
     .get(`[data-cy="${auxserviceOptionValue}"]`)
     .click()
-    
+
   cy.get('[data-cy=next]').click()
 
 })

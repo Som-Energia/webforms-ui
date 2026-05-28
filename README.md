@@ -3,7 +3,6 @@
 [![CI](https://github.com/Som-Energia/webforms-ui/actions/workflows/main.yml/badge.svg)](https://github.com/Som-Energia/webforms-ui/actions/workflows/main.yml)
 [![cypress webforms-ui](https://github.com/Som-Energia/webforms-ui/actions/workflows/cypress.yml/badge.svg)](https://github.com/Som-Energia/webforms-ui/actions/workflows/cypress.yml)
 
-
 ### Som Energia WebForms UI
 
 ## Installation 🔧
@@ -37,6 +36,7 @@ npm run cypress
 ```
 
 Launches the Cypress smoke tests:
+
 ```sh
 npm run cypress:smoke
 ```
@@ -45,19 +45,22 @@ To get `holderChangePersonaldata.js`:
 
 ```sh
 cd cypress/fixtures/
-ln -s ../../../testdata/b2bs/holderChangePersonaldata.json .
+ln -s ../../../it-docs/b2bs/holderChangePersonaldata.json .
+ln -s ../../../it-docs/b2bs/gurbPersonaldata.json .
 ```
 
-To get  `.env.development`:
+To get `.env.development`:
+
 ```sh
 ln -s $myit-docs_dir/deployment-configurations/webforms-ui/.env.development
 ```
-We should have testdata repo!
 
+We should have testdata repo!
 
 ## Deployment
 
 To deploy we have to use deploy.sh
+
 ```
 scripts/deploy.sh [env]
 ```
@@ -65,44 +68,52 @@ scripts/deploy.sh [env]
 ### Testing
 
 If you want to deploy to the web:
+
 ```
 scripts/deploy.sh pre
 ```
+
 This command uses deploy-pre.conf. It is now defined with the test web configuration.
 
-
 If you want to deploy to the OV:
+
 ```
 scripts/deploy.sh ovtest [vassal number]
 ```
+
 This command uses deploy-ovtest.conf. It is now defined with the test OV configuration.
 
 ### Production
 
 If you want to deploy to the web:
+
 ```
 scripts/deploy.sh production
 ```
+
 This command uses deploy-production.conf. It is now defined with the production web configuration.
 
-
 If you want to deploy to the OV:
+
 ```
 scripts/deploy.sh ovprod
 ```
-This command uses deploy-ovprod.conf. It is now defined with the production OV configuration.
 
+This command uses deploy-ovprod.conf. It is now defined with the production OV configuration.
 
 ### Local
 
 For the first time you should create the folder builds at the root of the projects.
 
 If you want to deploy local:
+
 ```
-scripts/deploy-local.sh 
+scripts/deploy-local.sh
 ```
+
 This command uses deploy-ovlocal.conf. It is now defined with the local OV configuration.
 
 Thing to keep in mind:
+
 - Follow the setup to create the necessary directories
 - This script must be run from its directory

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react"
 
-import useCheckMobileScreen from '../../services/checkMobileScreen'
-import ReviewDesktopTable from './ReviewDesktopTable'
-import ReviewMobileTable from './ReviewMobileTable'
+import useCheckMobileScreen from "../../services/checkMobileScreen"
+import ReviewDesktopTable from "./ReviewDesktopTable"
+import ReviewMobileTable from "./ReviewMobileTable"
 
 const ReviewTable = ({ tableFields }) => {
   const isMobile = useCheckMobileScreen()

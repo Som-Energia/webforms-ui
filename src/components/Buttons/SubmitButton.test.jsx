@@ -1,39 +1,40 @@
-import { render, queryByAttribute, screen } from '@testing-library/react'
-import SubmitButton from './SubmitButton'
-import { initI18n } from '../../tests/i18n.mock'
+import { queryByAttribute, render, screen } from "@testing-library/react"
 
-describe('SumitButton component ', async () => {
+import { initI18n } from "../../tests/i18n.mock"
+import SubmitButton from "./SubmitButton"
+
+describe("SumitButton component ", async () => {
   // avoid warnings
   await initI18n()
 
-  test('SubmitButton renders without crashing', () => {
+  test("SubmitButton renders without crashing", () => {
     const dom = render(<SubmitButton />)
 
-    const getByDataCy = queryByAttribute.bind(null, 'data-cy')
-    const button = getByDataCy(dom.container, 'next')
+    const getByDataCy = queryByAttribute.bind(null, "data-cy")
+    const button = getByDataCy(dom.container, "next")
     expect(button).toBeInTheDocument()
   })
 
-  test('SubmitButton renders and text is shown', async () => {
-    render(<SubmitButton text={'FINISH'} />)
+  test("SubmitButton renders and text is shown", async () => {
+    render(<SubmitButton text={"FINISH"} />)
 
-    const error = await screen.findByText('FINISH')
+    const error = await screen.findByText("FINISH")
     expect(error).toBeInTheDocument()
   })
 
-  test('SubmitButton renders disabled', async () => {
+  test("SubmitButton renders disabled", async () => {
     const { getByText } = render(
-      <SubmitButton text={'FINISH'} disabled={true} />
+      <SubmitButton text={"FINISH"} disabled={true} />,
     )
 
-    expect(getByText('FINISH')).toHaveAttribute('disabled')
+    expect(getByText("FINISH")).toHaveAttribute("disabled")
   })
 
-  test('SubmitButton renders showing sending progressbar', async () => {
+  test("SubmitButton renders showing sending progressbar", async () => {
     const { getByRole } = render(
-      <SubmitButton text={'FINISH'} sending={true} />
+      <SubmitButton text={"FINISH"} sending={true} />,
     )
 
-    expect(getByRole('progressbar')).toBeInTheDocument()
+    expect(getByRole("progressbar")).toBeInTheDocument()
   })
 })

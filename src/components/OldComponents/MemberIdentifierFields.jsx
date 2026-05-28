@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined"
+import CircularProgress from "@mui/material/CircularProgress"
+import Grid from "@mui/material/Grid"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
-import CircularProgress from '@mui/material/CircularProgress'
-import Grid from '@mui/material/Grid'
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
-
-import { checkMember } from '../../services/api'
-import { checkVatFormat } from '../../services/utils'
+import { checkMember } from "../../services/api"
+import { checkVatFormat } from "../../services/utils"
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search)
@@ -31,32 +29,32 @@ const MemberIdentifierFields = (props) => {
   const handleChangeVat = (event) => {
     let match = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     let value = match[0].toUpperCase()
-    setFieldValue('member.vat', value)
+    setFieldValue("member.vat", value)
   }
 
   const handleChangeMemberNumber = (event) => {
-    let match = event.target.value.replace(/[^0-9]/g, '')
-    setFieldValue('member.number', match)
+    let match = event.target.value.replace(/[^0-9]/g, "")
+    setFieldValue("member.number", match)
   }
 
   useEffect(() => {
     const checkIsMember = async () => {
       setLoading(true)
-      let valid = checkVatFormat(values.member.vat)  // TODO: Check if checkVatFormat returns objecto or bool 👀
+      let valid = checkVatFormat(values.member.vat) // TODO: Check if checkVatFormat returns objecto or bool 👀
       if (!valid) {
         setError(true)
       } else {
         try {
           const response = await checkMember(
             values.member.number,
-            values.member.vat
+            values.member.vat,
           )
           if (response?.data === true) {
             setError(false)
-            setFieldValue('member.checked', true)
+            setFieldValue("member.checked", true)
           } else {
             setError(true)
-            setFieldValue('member.checked', false)
+            setFieldValue("member.checked", false)
           }
         } catch (error) {
           setError(error)
@@ -72,23 +70,23 @@ const MemberIdentifierFields = (props) => {
     ) {
       checkIsMember()
     } else {
-      setFieldValue('member.checked', false)
+      setFieldValue("member.checked", false)
     }
   }, [values.member.number, values.member.vat, setFieldValue])
 
   useEffect(() => {
-    let hash = query.get('h')
+    let hash = query.get("h")
     try {
-      hash = hash && atob(hash).split(';')
+      hash = hash && atob(hash).split(";")
       if (hash && hash.length > 1) {
-        setFieldValue('member.number', hash[0], false)
-        setFieldValue('member.vat', hash[1])
+        setFieldValue("member.number", hash[0], false)
+        setFieldValue("member.vat", hash[1])
         setDisabled(true)
       }
-    } catch (error) {
-      console.error('Invalid hash code')
+    } catch {
+      console.error("Invalid hash code")
     }
-  }, [query.get('h'), values, setFieldValue])
+  }, [query.get("h"), values, setFieldValue])
 
   return (
     <Grid container spacing={3}>
@@ -97,7 +95,7 @@ const MemberIdentifierFields = (props) => {
           required
           id="memberNumber"
           name="member.number"
-          label={t('MEMBER_NUMBER')}
+          label={t("MEMBER_NUMBER")}
           onChange={handleChangeMemberNumber}
           onBlur={handleBlur}
           value={values.member.number}
@@ -113,7 +111,7 @@ const MemberIdentifierFields = (props) => {
                   <CheckOutlinedIcon color="primary" />
                 )}
               </InputAdornment>
-            )
+            ),
           }}
           error={
             error !== false ||
@@ -125,13 +123,13 @@ const MemberIdentifierFields = (props) => {
               error ? (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: t('MEMBER_NOT_FOUND')
+                    __html: t("MEMBER_NOT_FOUND"),
                   }}
                 />
               ) : (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: t('HELP_POPOVER_MEMBER')
+                    __html: t("HELP_POPOVER_MEMBER"),
                   }}
                 />
               )
@@ -139,10 +137,10 @@ const MemberIdentifierFields = (props) => {
               <Typography
                 sx={{
                   fontWeight: 500,
-                  color: 'primary.main'
+                  color: "primary.main",
                 }}
                 variant="helpertext">
-                {t('MEMBER_FOUND')}
+                {t("MEMBER_FOUND")}
               </Typography>
             ))
           }
@@ -153,7 +151,7 @@ const MemberIdentifierFields = (props) => {
           required
           id="vat"
           name="member.vat"
-          label={t('NIF_LABEL')}
+          label={t("NIF_LABEL")}
           onChange={handleChangeVat}
           onBlur={handleBlur}
           value={values.member.vat}
@@ -164,7 +162,7 @@ const MemberIdentifierFields = (props) => {
           error={errors?.member?.vat && touched?.member?.vat}
           helperText={
             (touched?.member?.vat && errors?.member?.vat) ||
-            t('HELP_POPOVER_NIF')
+            t("HELP_POPOVER_NIF")
           }
         />
       </Grid>

@@ -1,54 +1,57 @@
-import * as Yup from 'yup'
+import * as Yup from "yup"
 
 const memberPersonalDataValidations = Yup.object().shape({
   new_member: Yup.object().shape({
-    person_type: Yup.string().oneOf(['legal-person', 'physic-person']),
-    name: Yup.string().required('NO_NAME'),
-    surname1: Yup.string().when('person_type', {
-      is: 'physic-person',
-      then: Yup.string().required('NO_SURNAME1')
+    person_type: Yup.string().oneOf(["legal-person", "physic-person"]),
+    name: Yup.string().required("NO_NAME"),
+    surname1: Yup.string().when("person_type", {
+      is: "physic-person",
+      then: Yup.string().required("NO_SURNAME1"),
     }),
     surname2: Yup.string(),
-    email: Yup.string().required('NO_EMAIL').email('NO_EMAIL'),
-    email2: Yup.string().test('repeatEmail', 'NO_REPEATED_EMAIL', function () {
+    email: Yup.string().required("NO_EMAIL").email("NO_EMAIL"),
+    email2: Yup.string().test("repeatEmail", "NO_REPEATED_EMAIL", function () {
       return this.parent.email === this.parent.email2
     }),
-    phone: Yup.string().required('NO_PHONE'),
-    phone_code: Yup.string().required('NO_PHONE'),
+    phone: Yup.string().required("NO_PHONE"),
+    phone_code: Yup.string().required("NO_PHONE"),
     phone_valid: Yup.bool()
-      .required('NO_PHONE')
-      .oneOf([true], 'INCORRECT_PHONE'),
-    language: Yup.string().required('NO_LANGUAGE'),
-    proxyname: Yup.string().when('person_type', {
-      is: 'legal-person',
-      then: Yup.string().required('NO_PROXY_NAME')
+      .required("NO_PHONE")
+      .oneOf([true], "INCORRECT_PHONE"),
+    language: Yup.string().required("NO_LANGUAGE"),
+    proxyname: Yup.string().when("person_type", {
+      is: "legal-person",
+      then: Yup.string().required("NO_PROXY_NAME"),
     }),
-    proxynif: Yup.string().when('person_type', {
-      is: 'legal-person',
+    proxynif: Yup.string().when("person_type", {
+      is: "legal-person",
       then: Yup.string()
-        .required('NO_PROXY_NIF')
-        .matches(/(^[0-9]{8}[A-Z]$|^[XYZ][0-9]{7}[A-Z]$)/, 'INVALID_NIF'),
+        .required("NO_PROXY_NIF")
+        .matches(/(^[0-9]{8}[A-Z]$|^[XYZ][0-9]{7}[A-Z]$)/, "INVALID_NIF"),
     }),
     legal_person_accepted: Yup.bool().when(
-      'person_type',
+      "person_type",
       (person_type, schema) => {
-        return person_type == 'legal-person'
+        return person_type === "legal-person"
           ? schema
-            .required('ACCEPT_LEGAL_PERSON')
-            .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+              .required("ACCEPT_LEGAL_PERSON")
+              .oneOf([true], "ACCEPT_LEGAL_PERSON")
           : schema
-      }
-    )
+      },
+    ),
   }),
   address: Yup.object().shape({
-    street: Yup.string().required('NO_ADDRESS'),
-    number: Yup.number().required('NO_NUMBER'),
-    postal_code: Yup.string().matches(/^[0-9]+$/, 'POSTAL_CODE_INVALID_FORMAT').length(5, 'POSTAL_CODE_INVALID_LENGTH').required('NO_POSTAL_CODE'),
+    street: Yup.string().required("NO_ADDRESS"),
+    number: Yup.number().required("NO_NUMBER"),
+    postal_code: Yup.string()
+      .matches(/^[0-9]+$/, "POSTAL_CODE_INVALID_FORMAT")
+      .length(5, "POSTAL_CODE_INVALID_LENGTH")
+      .required("NO_POSTAL_CODE"),
     state: Yup.object().shape({
-      id: Yup.number().min(1).required('POSTAL_CODE_INVALID'),
-      name: Yup.string()
+      id: Yup.number().min(1).required("POSTAL_CODE_INVALID"),
+      name: Yup.string(),
     }),
-  })
+  }),
 })
 
 export default memberPersonalDataValidations

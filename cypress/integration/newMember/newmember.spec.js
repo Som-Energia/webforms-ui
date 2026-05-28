@@ -1,7 +1,7 @@
 export const WAIT_TIME = 3000
 
 describe('Member', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

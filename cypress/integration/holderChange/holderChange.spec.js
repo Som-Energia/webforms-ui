@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Holder Change', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })

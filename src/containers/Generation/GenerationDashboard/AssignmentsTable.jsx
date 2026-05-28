@@ -1,101 +1,104 @@
-import { useContext } from 'react'
-import GenerationContext from '../context/GenerationContext'
-import GenerationTable from './GenerationTable'
-import TableRow from '@mui/material/TableRow'
-import TableCell from '@mui/material/TableCell'
-import TableBody from '@mui/material/TableBody'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
-import DeleteIcon from '@mui/icons-material/Delete'
-import dayjs from 'dayjs'
-import { styled } from '@mui/material/styles'
-import PopUpContext from '../../../context/PopUpContext'
-import SimpleDialog from '../../../components/OldComponents/SimpleDialog';
-import Alert from '@mui/material/Alert';
-import Typography from '@mui/material/Typography'
+import { useContext } from "react"
+import { useTranslation } from "react-i18next"
+
+import DeleteIcon from "@mui/icons-material/Delete"
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator"
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import IconButton from "@mui/material/IconButton"
+import { styled } from "@mui/material/styles"
+import TableBody from "@mui/material/TableBody"
+import TableCell from "@mui/material/TableCell"
+import TableRow from "@mui/material/TableRow"
+import Typography from "@mui/material/Typography"
+
 import {
-  DndContext,
   closestCenter,
+  DndContext,
+  PointerSensor,
   useSensor,
   useSensors,
-  PointerSensor
-} from '@dnd-kit/core'
+} from "@dnd-kit/core"
 import {
   SortableContext,
-  verticalListSortingStrategy,
   useSortable,
-} from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { useTranslation } from 'react-i18next'
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+import dayjs from "dayjs"
+
+import SimpleDialog from "../../../components/OldComponents/SimpleDialog"
+import PopUpContext from "../../../context/PopUpContext"
+import GenerationContext from "../context/GenerationContext"
+import GenerationTable from "./GenerationTable"
 
 const StyledTableCell = styled(TableCell)(() => ({
   body: {
-    fontSize: 14
-  }
+    fontSize: 14,
+  },
 }))
 
 const DraggableRow = ({ row, handleDelete, loading }) => {
   const { setContent } = useContext(PopUpContext)
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
-      id: row.contract
+      id: row.contract,
     })
 
   const { getPriority } = useContext(GenerationContext)
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition
+    transition,
   }
 
   return (
     <TableRow ref={setNodeRef} style={style} id={row.contract} {...attributes}>
       <StyledTableCell
-        className={row.contract + 'styled-cell'}
+        className={row.contract + "styled-cell"}
         size="small"
         {...listeners}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 15 }}>
           <DragIndicatorIcon />
           {getPriority(row.priority).value}
         </Box>
       </StyledTableCell>
-      <StyledTableCell className={row.contract + 'styled-cell'}>
+      <StyledTableCell className={row.contract + "styled-cell"}>
         {row.contract}
       </StyledTableCell>
-      <StyledTableCell className={row.contract + 'styled-cell'}>
+      <StyledTableCell className={row.contract + "styled-cell"}>
         {row.contractAddress}
       </StyledTableCell>
-      <StyledTableCell className={row.contract + 'styled-cell'}>
-        {dayjs(row.contractLastInvoiced.replaceAll('"', '')).format(
-          'DD/MM/YYYY'
+      <StyledTableCell className={row.contract + "styled-cell"}>
+        {dayjs(row.contractLastInvoiced.replaceAll('"', "")).format(
+          "DD/MM/YYYY",
         )}
       </StyledTableCell>
-      <StyledTableCell className={row.contract + 'styled-cell'}>
-        {Number(row.annualUseKwh).toLocaleString('es-ES', {
-          minimumFractionDigits: 2
+      <StyledTableCell className={row.contract + "styled-cell"}>
+        {Number(row.annualUseKwh).toLocaleString("es-ES", {
+          minimumFractionDigits: 2,
         })}
       </StyledTableCell>
-      <StyledTableCell className={row.contract + 'styled-cell'}>
+      <StyledTableCell className={row.contract + "styled-cell"}>
         <IconButton
           id={`delete-button-${row.id}`}
           disabled={loading}
           onClick={() =>
             setContent(
               <SimpleDialog
-                title={t('GENERATION_ASSIGNMENTS_CONFIRM_TITLE')}
+                title={t("GENERATION_ASSIGNMENTS_CONFIRM_TITLE")}
                 text={
                   <Alert severity="warning">
                     <Typography
                       dangerouslySetInnerHTML={{
-                        __html: t('GENERATION_REMOVE_ASSIGNMENTS_ALERT_MSG')
+                        __html: t("GENERATION_REMOVE_ASSIGNMENTS_ALERT_MSG"),
                       }}
                     />
                   </Alert>
                 }
                 acceptFunction={() => handleDelete(row.id)}
                 cancelFunction={() => setContent(undefined)}
-              />
+              />,
             )
           }>
           <DeleteIcon />
@@ -110,7 +113,7 @@ const DraggableTable = ({
   handleChangeSort,
   handleDelete,
   loading,
-  columns
+  columns,
 }) => {
   const sensors = useSensors(useSensor(PointerSensor))
 

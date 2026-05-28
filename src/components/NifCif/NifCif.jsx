@@ -1,15 +1,14 @@
-import { useContext, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useContext, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid"
 
-import { checkPhisicalVAT, checkVatFormat } from '../../services/utils'
-import { checkVat } from '../../services/api'
-import LoadingContext from '../../context/LoadingContext'
-
-import InputField from '../InputField/InputField'
-import { useHandleChangeNif } from '../../hooks/useHandleChange'
-import { useHandleBlur } from '../../hooks/useHandleBlur'
+import LoadingContext from "../../context/LoadingContext"
+import { useHandleBlur } from "../../hooks/useHandleBlur"
+import { useHandleChangeNif } from "../../hooks/useHandleChange"
+import { checkVat } from "../../services/api"
+import { checkPhisicalVAT, checkVatFormat } from "../../services/utils"
+import InputField from "../InputField/InputField"
 
 const NifCif = (props) => {
   const {
@@ -23,11 +22,11 @@ const NifCif = (props) => {
     setFieldTouched,
     entity = "", // where we are saving nifcif info
     textFieldNameKey,
-    helperText = true
+    helperText = true,
   } = props
   const { t } = useTranslation()
   const { setLoading } = useContext(LoadingContext)
-  const MAXINDENTIFIERLENGTH = 9;
+  const MAXINDENTIFIERLENGTH = 9
   const handleChangeNif = useHandleChangeNif(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
 
@@ -38,14 +37,14 @@ const NifCif = (props) => {
         nif_info = response?.data
       })
       .catch((e) => {
-        console.error('UNEXPECTED', e)
+        console.error("UNEXPECTED", e)
       })
     setFieldError(`${entity}.nif`, undefined)
     if (nif_info?.is_member === true) {
-      setFieldError(`${entity}.nif`, t('DNI_EXIST'))
+      setFieldError(`${entity}.nif`, t("DNI_EXIST"))
     }
     if (nif_info?.valid === false) {
-      setFieldError(`${entity}.nif`, t('FILL_NIF'))
+      setFieldError(`${entity}.nif`, t("FILL_NIF"))
     }
   }
 
@@ -56,7 +55,7 @@ const NifCif = (props) => {
         await handleCheckNifResponse()
       }
     } catch (error) {
-      console.error('Error validating nif:', error)
+      console.error("Error validating nif:", error)
     } finally {
       setLoading(false)
     }
@@ -70,9 +69,9 @@ const NifCif = (props) => {
         ...values,
         [entity]: {
           ...values[entity],
-          person_type: is_physical ? 'physic-person' : 'legal-person',
-          nif_valid: validationObj.isValid
-        }
+          person_type: is_physical ? "physic-person" : "legal-person",
+          nif_valid: validationObj.isValid,
+        },
       })
 
       handleNifValidations()
@@ -85,8 +84,8 @@ const NifCif = (props) => {
         <InputField
           data-cy={`${entity}.nif`}
           name={`${entity}.nif`}
-          textFieldName={t(textFieldNameKey) || t('NIF_FIELD')}
-          textFieldHelper={helperText && t('MEMBER_NIF_HELPER')}
+          textFieldName={t(textFieldNameKey) || t("NIF_FIELD")}
+          textFieldHelper={helperText && t("MEMBER_NIF_HELPER")}
           handleChange={handleChangeNif}
           handleBlur={handleBlur}
           touched={touched[entity]?.nif}

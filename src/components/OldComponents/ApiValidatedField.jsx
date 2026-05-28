@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import CircularProgress from '@mui/material/CircularProgress'
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
-
-import { useTranslation } from 'react-i18next'
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined"
+import CircularProgress from "@mui/material/CircularProgress"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
 
 /*
 TODO: known bugs
@@ -23,13 +22,12 @@ React's automatic cursor restoration thinks it is a full programmatic
 value replacement and moves the cursor at the end.
 */
 
-
 export function ApiValidatedField({
   name,
   id,
   label,
   variant,
-  value = '',
+  value = "",
   onChange,
   onBlur,
   error,
@@ -39,7 +37,7 @@ export function ApiValidatedField({
   remoteCheck = false,
   helperText,
   autoFocus = false,
-  leadingIcon
+  leadingIcon,
 }) {
   const [isLoading, setIsLoading] = useState(false)
   const [formerValue, setFormerValue] = useState(undefined)
@@ -63,7 +61,11 @@ export function ApiValidatedField({
       return
     }
     const compactValue = result.value
-    onChange({ value: compactValue, valid: false, error: t('API_VALIDATED_FIELD_CHECKING')  })
+    onChange({
+      value: compactValue,
+      valid: false,
+      error: t("API_VALIDATED_FIELD_CHECKING"),
+    })
     setIsLoading(true)
     remoteCheck(compactValue).then((result) => {
       setIsLoading(false)
@@ -77,7 +79,7 @@ export function ApiValidatedField({
     checkValue(formattedValue)
   }
 
-  const prettyValue = inputFilter? inputFilter(value) : value
+  const prettyValue = inputFilter ? inputFilter(value) : value
   if (prettyValue !== formerValue) {
     checkValue(prettyValue)
   }
@@ -96,28 +98,27 @@ export function ApiValidatedField({
         onChange={handleChange}
         onBlur={onBlur}
         error={!!error}
-        helperText={
-          isLoading
-            ? t('API_VALIDATED_FIELD_CHECKING')
-            : helperText
-        }
+        helperText={isLoading ? t("API_VALIDATED_FIELD_CHECKING") : helperText}
         InputProps={{
           startAdornment: LeadingIcon && (
-            <InputAdornment sx={{
-              '& path': { color: 'primary.dark' }
-            }} position="start">
+            <InputAdornment
+              sx={{
+                "& path": { color: "primary.dark" },
+              }}
+              position="start">
               <LeadingIcon />
             </InputAdornment>
           ),
-          endAdornment: isLoading || !error ? (
-            <InputAdornment position="end">
-              {isLoading ? (
-                <CircularProgress size={24} />
-              ) : value && !error ? (
-                <CheckOutlinedIcon color="primary" />
-              ) : null}
-            </InputAdornment>
-          ) : null
+          endAdornment:
+            isLoading || !error ? (
+              <InputAdornment position="end">
+                {isLoading ? (
+                  <CircularProgress size={24} />
+                ) : value && !error ? (
+                  <CheckOutlinedIcon color="primary" />
+                ) : null}
+              </InputAdornment>
+            ) : null,
         }}
       />
     </>

@@ -1,12 +1,11 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Chooser from './Chooser/Chooser'
-import RequiredTitle from './InputTitle'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-
-import { HeartIcon } from '../data/icons/Icons'
+import { HeartIcon } from "../data/icons/Icons"
+import Chooser from "./Chooser/Chooser"
+import RequiredTitle from "./InputTitle"
 
 const VoluntaryDonation = (props) => {
   const { values, setFieldValue } = props
@@ -14,20 +13,20 @@ const VoluntaryDonation = (props) => {
   const { t } = useTranslation()
 
   const handleVoluntaryDonationQuestion = (value) => {
-    setFieldValue('voluntary_donation', value)
+    setFieldValue("voluntary_donation", value)
   }
 
   const options = [
     {
       id: true,
-      icon: <HeartIcon/>,
-      textHeader: t('VOLUNTARY_DONATION_ON_HEADER')
+      icon: <HeartIcon />,
+      textHeader: t("VOLUNTARY_DONATION_ON_HEADER"),
     },
     {
       id: false,
       icon: <HeartIcon on={false} />,
-      textHeader: t('VOLUNTARY_DONATION_OFF_HEADER')
-    }
+      textHeader: t("VOLUNTARY_DONATION_OFF_HEADER"),
+    },
   ]
 
   return (
@@ -35,25 +34,25 @@ const VoluntaryDonation = (props) => {
       <Grid item xs={12}>
         <Typography
           variant="body.sm.regular"
-          color='secondary.extraDark'
+          color="secondary.extraDark"
           dangerouslySetInnerHTML={{
-            __html: t('VOLUNTARY_DONATION_HOW_INFO')
+            __html: t("VOLUNTARY_DONATION_HOW_INFO"),
           }}
         />
       </Grid>
       <Grid item xs={12}>
         <Typography
           variant="body.sm.regular"
-          color='secondary.extraDark'
+          color="secondary.extraDark"
           dangerouslySetInnerHTML={{
-            __html: t('VOLUNTARY_DONATION_WHY_INFO')
+            __html: t("VOLUNTARY_DONATION_WHY_INFO"),
           }}
         />
       </Grid>
       <Grid item xs={12}>
         <RequiredTitle
-          text={t('VOLUNTARY_DONATION_QUESTION')}
-          textStyle={'body.sm.regular'}
+          text={t("VOLUNTARY_DONATION_QUESTION")}
+          textStyle={"body.sm.regular"}
           required={true}
         />
       </Grid>

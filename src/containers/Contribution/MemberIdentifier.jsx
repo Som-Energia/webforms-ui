@@ -1,15 +1,14 @@
-import React from 'react'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 
-import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-
-import StepHeader from '../../components/OldComponents/StepHeader'
-import Chooser from '../../components/OldComponents/Chooser'
-import MemberIdentifierFields from '../../components/OldComponents/MemberIdentifierFields'
-import VATField from '../../components/OldComponents/VATField'
+import Chooser from "../../components/OldComponents/Chooser"
+import MemberIdentifierFields from "../../components/OldComponents/MemberIdentifierFields"
+import StepHeader from "../../components/OldComponents/StepHeader"
+import VATField from "../../components/OldComponents/VATField"
 
 const MemberIdentifier = (props) => {
   const { t } = useTranslation()
@@ -23,12 +22,12 @@ const MemberIdentifier = (props) => {
     setValues,
     setFieldTouched,
     resetForm,
-    title = t('CONTRIBUTION')
+    title = t("CONTRIBUTION"),
   } = props
 
   const handleChooser = (event) => {
     resetForm()
-    setFieldValue('member.is_member', !!event?.option)
+    setFieldValue("member.is_member", !!event?.option)
   }
 
   const onChangeVAT = (params) => {
@@ -40,8 +39,8 @@ const MemberIdentifier = (props) => {
         vat: vat,
         isphisical: isPhisical,
         vatvalid: valid,
-        exists: false
-      }
+        exists: false,
+      },
     }
     setValues(tmpValues)
   }
@@ -52,12 +51,12 @@ const MemberIdentifier = (props) => {
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: t('CONTRIBUTION_MEMBER_IDENTIFIER_DESC')
+          __html: t("CONTRIBUTION_MEMBER_IDENTIFIER_DESC"),
         }}
       />
       <Box pt={0} mb={1}>
         <Chooser
-          question={t('CONTRIBUTION_MEMBER_QUESTION')}
+          question={t("CONTRIBUTION_MEMBER_QUESTION")}
           onChange={handleChooser}
           condensed={true}
           value={values?.member?.is_member}
@@ -65,14 +64,14 @@ const MemberIdentifier = (props) => {
           options={[
             {
               value: true,
-              label: t('CONTRIBUTION_MEMBER_YES'),
-              id: 'member-choose-yes'
+              label: t("CONTRIBUTION_MEMBER_YES"),
+              id: "member-choose-yes",
             },
             {
               value: false,
-              label: t('CONTRIBUTION_MEMBER_NO'),
-              id: 'member-choose-no'
-            }
+              label: t("CONTRIBUTION_MEMBER_NO"),
+              id: "member-choose-no",
+            },
           ]}
         />
       </Box>
@@ -83,7 +82,7 @@ const MemberIdentifier = (props) => {
             variant="h6"
             sx={{ mt: 2, mb: 1 }}
             dangerouslySetInnerHTML={{
-              __html: t('CONTRIBUTION_MEMBER_INDENTIFIER')
+              __html: t("CONTRIBUTION_MEMBER_INDENTIFIER"),
             }}
           />
 
@@ -96,17 +95,17 @@ const MemberIdentifier = (props) => {
               variant="h6"
               sx={{
                 mt: 2,
-                mb: 3
+                mb: 3,
               }}
               dangerouslySetInnerHTML={{
-                __html: t('CONTRIBUTION_MEMBER_VAT')
+                __html: t("CONTRIBUTION_MEMBER_VAT"),
               }}
             />
             <Box id="box_no_member_vat_input" mt={2} mb={1}>
               <VATField
                 id="vat"
                 name="member.vat"
-                label={t('VAT_LABEL')}
+                label={t("VAT_LABEL")}
                 variant="outlined"
                 fullWidth
                 isVatTouched={touched?.member?.vat}
@@ -134,7 +133,7 @@ const MemberIdentifier = (props) => {
               <Typography
                 variant="body1"
                 dangerouslySetInnerHTML={{
-                  __html: t('CONTRIBUTION_MEMBER_WARNING')
+                  __html: t("CONTRIBUTION_MEMBER_WARNING"),
                 }}
               />
             </Alert>

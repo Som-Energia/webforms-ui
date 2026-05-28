@@ -1,26 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import Checkbox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Grid from "@mui/material/Grid"
+import { useTheme } from "@mui/material/styles"
+import Typography from "@mui/material/Typography"
 
-import CadastralReference from '../../../components/CadastralReference'
-import Checkbox from '@mui/material/Checkbox'
-import Grid from '@mui/material/Grid'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Typography from '@mui/material/Typography'
-
-import TermsDialog from '../../../components/TermsDialog'
-import DragDrop from '../../../components/DragDrop'
-import CNAE from '../../../components/CNAE'
-import AddressField from '../../../components/AddressField'
-import { useTheme } from '@mui/material/styles'
+import AddressField from "../../../components/AddressField"
+import CadastralReference from "../../../components/CadastralReference"
+import CNAE from "../../../components/CNAE"
+import DragDrop from "../../../components/DragDrop"
+import TermsDialog from "../../../components/TermsDialog"
 
 const NewContractMemberSupplyPointData = (props) => {
-  const trackID = 'supply-point-data'
-  const {
-    values,
-    setFieldValue,
-    sendTrackEvent
-  } = props
+  const trackID = "supply-point-data"
+  const { values, setFieldValue, sendTrackEvent } = props
 
   useEffect(() => {
     sendTrackEvent(trackID)
@@ -39,12 +34,12 @@ const NewContractMemberSupplyPointData = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('supply_point.supply_point_accepted', true)
+    setFieldValue("supply_point.supply_point_accepted", true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('supply_point.supply_point_accepted', false)
+    setFieldValue("supply_point.supply_point_accepted", false)
   }
 
   return (
@@ -52,19 +47,19 @@ const NewContractMemberSupplyPointData = (props) => {
       <Grid item xs={12}>
         <Grid item xs={12}>
           <Typography variant="headline4.regular">
-            {t('SUPPLY_POINT_DATA_TITLE')}
+            {t("SUPPLY_POINT_DATA_TITLE")}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body.sm.regular" color="secondary.extraDark">
-            {t('RECOMMENDATION_SUBTITLE')}
+            {t("RECOMMENDATION_SUBTITLE")}
           </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12}>
         <AddressField
           addressFieldName="supply_point_address"
-          addressLabel={t('ADDRESS')}
+          addressLabel={t("ADDRESS")}
           {...props}
         />
       </Grid>
@@ -76,15 +71,16 @@ const NewContractMemberSupplyPointData = (props) => {
       </Grid>
       <Grid item xs={12}>
         <DragDrop
-          fieldName={values?.has_light === 'light-on'
-            ? t('ELECTRIC_BILL_UPLOAD')
-            : t('MEMBER_DOCUMENTATION_UPLOAD')
+          fieldName={
+            values?.has_light === "light-on"
+              ? t("ELECTRIC_BILL_UPLOAD")
+              : t("MEMBER_DOCUMENTATION_UPLOAD")
           }
-          textStyle={'body.md.regular'}
+          textStyle={"body.md.regular"}
           required={false}
           values={values.supply_point.attachments}
           onChange={(fileHash) =>
-            setFieldValue('supply_point.attachments', fileHash)
+            setFieldValue("supply_point.attachments", fileHash)
           }
         />
       </Grid>
@@ -100,8 +96,14 @@ const NewContractMemberSupplyPointData = (props) => {
           }
           label={
             <span>
-              {t('FAIR_TITLE_LABEL')}
-              <span style={{ color: theme.palette.primary.mainOrange, marginLeft: 4 }}>*</span>
+              {t("FAIR_TITLE_LABEL")}
+              <span
+                style={{
+                  color: theme.palette.primary.mainOrange,
+                  marginLeft: 4,
+                }}>
+                *
+              </span>
             </span>
           }
         />
@@ -109,13 +111,13 @@ const NewContractMemberSupplyPointData = (props) => {
 
       <Grid item xs={12}>
         <TermsDialog
-          title={t('FAIR_TITLE')}
+          title={t("FAIR_TITLE")}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}
           maxWidth="sm">
           <span
-            dangerouslySetInnerHTML={{ __html: t('PRIVACY_POLICY_SUPLYPOINT') }}
+            dangerouslySetInnerHTML={{ __html: t("PRIVACY_POLICY_SUPLYPOINT") }}
           />
         </TermsDialog>
       </Grid>

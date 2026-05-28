@@ -1,9 +1,9 @@
-import React from 'react'
-import Button from '@mui/material/Button'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import React from "react"
 
-function NextButton({title, ...props}) {
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import Button from "@mui/material/Button"
 
+function NextButton({ title, ...props }) {
   return (
     <Button
       type="button"
@@ -12,16 +12,15 @@ function NextButton({title, ...props}) {
       color="primary"
       disableElevation={true}
       sx={{
-        backgroundColor: 'primary.extraLight',
-        color: 'primary.main',
-        '&:hover': {
-          color: 'primary.extraLight',
-          backgroundColor: 'primary.main'
-        }
+        backgroundColor: "primary.extraLight",
+        color: "primary.main",
+        "&:hover": {
+          color: "primary.extraLight",
+          backgroundColor: "primary.main",
+        },
       }}
       endIcon={<ArrowForwardIosIcon />}
-      {...props}
-    >
+      {...props}>
       {title}
     </Button>
   )

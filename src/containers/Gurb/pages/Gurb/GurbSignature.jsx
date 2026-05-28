@@ -1,18 +1,17 @@
-import { useEffect, useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useCallback, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import CircularProgress from '@mui/material/CircularProgress'
-import Grid from '@mui/material/Grid'
+import CircularProgress from "@mui/material/CircularProgress"
+import Grid from "@mui/material/Grid"
 
-import AlertBox from '../../../../components/AlertBox/AlertBox'
-import { createGurbSignature } from '../../../../services/apiGurb'
-import Result from '../../../../containers/Result'
-import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-
+import AlertBox from "../../../../components/AlertBox/AlertBox"
+import Result from "../../../../containers/Result"
+import { createGurbSignature } from "../../../../services/apiGurb"
+import TextRecommendation from "../../components/TextRecommendation/TextRecommendation"
 
 let signaturitHook = () => undefined
 
-window.addEventListener('message', function (e) {
+window.addEventListener("message", function (e) {
   signaturitHook(e)
 })
 
@@ -24,22 +23,22 @@ const GurbSignature = (props) => {
     setValidSignature,
     submit,
     gurbCode,
-    setRedsysData
+    setRedsysData,
   } = props
   const { t } = useTranslation()
-  const [signaturitResponseUrl, setSignaturitResponseUrl] = useState('')
+  const [signaturitResponseUrl, setSignaturitResponseUrl] = useState("")
   const [loading, setLoading] = useState(true)
   const { i18n } = useTranslation()
   const [erpError, setErpError] = useState(false)
 
   signaturitHook = useCallback(
     (e) => {
-      if (e?.data?.event === 'completed') {
+      if (e?.data?.event === "completed") {
         setValidSignature(true)
-        console.log('Signaturit has been completed', e)
+        console.log("Signaturit has been completed", e)
       }
     },
-    [values, submit]
+    [values, submit],
   )
 
   const getSignaturit = useCallback(() => {
@@ -49,7 +48,7 @@ const GurbSignature = (props) => {
       access_tariff: values?.tariff_name,
       beta: values?.gurb?.power,
       cups: values?.cups,
-      vat: values?.owner?.nif
+      vat: values?.owner?.nif,
     })
       .then((response) => {
         setRedsysData(response?.data?.redsys_data)
@@ -71,46 +70,44 @@ const GurbSignature = (props) => {
   return (
     <>
       {loading ? (
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
           <CircularProgress color="secondary" />
         </Grid>
       ) : erpError ? (
         <Result
           mode="failure"
-          title={t('GURB_ERROR_TITLE')}
-          description={t('GURB_ERROR_DESCRIPTION')}
+          title={t("GURB_ERROR_TITLE")}
+          description={t("GURB_ERROR_DESCRIPTION")}
         />
       ) : (
         <Grid container>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <TextRecommendation title={t('GURB_SIGNATURE')}
-              isHeader
-            />
+            <TextRecommendation title={t("GURB_SIGNATURE")} isHeader />
           </Grid>
 
           <Grid item xs={12}>
             <AlertBox
-              textAlign='left'
+              textAlign="left"
               id="gurb_signature_info_alert"
-              description={t('GURB_SIGNATURE_INFO')}
-              severity={'warning'}
-              variant={'body.md.regular'}
+              description={t("GURB_SIGNATURE_INFO")}
+              severity={"warning"}
+              variant={"body.md.regular"}
             />
           </Grid>
 
-          <Grid item xs={12} sx={{ textAlign: 'center', width: '100%' }}>
+          <Grid item xs={12} sx={{ textAlign: "center", width: "100%" }}>
             {validSignature ? (
               <Result
                 mode="success"
-                title={t('SIGNATURIT_COMPLETE_TITLE')}
-                description={t('SIGNATURIT_COMPLETE_DESCRIPTION')}
+                title={t("SIGNATURIT_COMPLETE_TITLE")}
+                description={t("SIGNATURIT_COMPLETE_DESCRIPTION")}
               />
             ) : (
               <iframe
                 title="signaturit_iframe"
                 id="signature"
                 src={signaturitResponseUrl}
-                style={{ height: '700px', width: '100%' }}
+                style={{ height: "700px", width: "100%" }}
               />
             )}
           </Grid>
