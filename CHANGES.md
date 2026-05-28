@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 7.2.2 2026-05-28
 
 - Fix: Proxy vats validations
 
