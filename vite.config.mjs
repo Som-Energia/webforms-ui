@@ -1,5 +1,5 @@
 import react from "@vitejs/plugin-react-swc"
-// import eslint from 'vite-plugin-eslint2'
+import eslint from 'vite-plugin-eslint2'
 import svgr from "vite-plugin-svgr"
 import {
   createAppConfig,
@@ -12,25 +12,25 @@ export default createAppConfig((mode) => {
   const ovOptions =
     mode === "ov"
       ? {
-          entryFileNames: "assets/main.js",
-          chunkFileNames: ({ name }) => {
-            return name.includes("vendor")
-              ? "assets/vendor.js" // Explicitly name the entry JS file
-              : "assets/[name]-[hash].js"
-          },
-          assetFileNames: ({ name }) => {
-            return name.endsWith(".css") && name.includes("index")
-              ? "assets/index.css" // Explicitly name the CSS file
-              : "assets/[name]-[hash].[ext]"
-          },
-        }
+        entryFileNames: "assets/main.js",
+        chunkFileNames: ({ name }) => {
+          return name.includes("vendor")
+            ? "assets/vendor.js" // Explicitly name the entry JS file
+            : "assets/[name]-[hash].js"
+        },
+        assetFileNames: ({ name }) => {
+          return name.endsWith(".css") && name.includes("index")
+            ? "assets/index.css" // Explicitly name the CSS file
+            : "assets/[name]-[hash].[ext]"
+        },
+      }
       : {}
 
   return {
     resolve: {
       dedupe: Object.keys(pkg.dependencies),
     },
-    plugins: [react(), svgr() /*eslint({ build: true, emitWarning: false })*/],
+    plugins: [react(), svgr(), eslint({ build: true, emitWarning: false })],
     build: {
       outDir: "forms",
       manifest: "asset-manifest.json",

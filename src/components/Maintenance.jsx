@@ -3,10 +3,9 @@ import { useTranslation } from "react-i18next"
 
 import Container from "@mui/material/Container"
 
+import { MaintenanceIcon } from "../data/icons/Icons"
 import { useSyncLanguage } from "../hooks/useTranslateOptions"
 import manteniment from "../images/tasques-manteniment-web.svg"
-
-import { MaintenanceIcon } from "../data/icons/Icons"
 
 const Maintenance = () => {
   const { t } = useTranslation()
@@ -24,11 +23,18 @@ const Maintenance = () => {
           width: "100%",
           borderRadius: "10px",
           backgroundSize: "cover",
-          backgroundImage: `url("${manteniment}")`
+          backgroundImage: `url("${manteniment}")`,
         }}>
-        <div style={{  bottom: "2rem", padding: "3.5rem", gap: "22px", display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            bottom: "2rem",
+            padding: "3.5rem",
+            gap: "22px",
+            display: "flex",
+            flexDirection: "column",
+          }}>
           <div>
-            <MaintenanceIcon/>
+            <MaintenanceIcon />
           </div>
           <div
             style={{
@@ -49,7 +55,6 @@ const Maintenance = () => {
           </div>
         </div>
       </div>
-
     </Container>
   )
 }
