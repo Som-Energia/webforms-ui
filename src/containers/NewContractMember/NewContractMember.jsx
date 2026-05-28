@@ -63,8 +63,6 @@ import identifyMemberPersonalDataValidations from './validations/identifyMemberP
 import Loading from '../../components/Loading'
 import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-import { newNormalizeContract } from '../../services/newNormalize'
-import { newContract } from '../../services/api'
 import { activateLead } from '../../services/api'
 
 import { usePixelEvent } from '../../hooks/usePixelEvent'
@@ -118,8 +116,6 @@ const NewContractMemberForm = (props) => {
   const DOMESTIC = 'domestic'
   const CampaignVAT = import.meta.env.VITE_CAMPAIGN_VAT
   const CampaignNumMember = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER
-
-  const SignaturitIsEnabled = JSON.parse(import.meta.env.VITE_FEATURE_FLAGS)?.isSignaturitEnabled
 
   useSyncLanguage(language)
 
@@ -270,7 +266,7 @@ const NewContractMemberForm = (props) => {
     triggerEvent('FormularioCompletado', { status: 'ok' })
   }
 
-  const handlePost = async (values) => {
+  const handlePost = async () => {
     trackEvent({
       category: 'Send',
       action: 'sendNewContractMemberClick',
@@ -278,13 +274,12 @@ const NewContractMemberForm = (props) => {
     })
 
     if (redsysURL) {
+      // TODO: WIP redsys flow
       trackSuccess()
       return
     }
 
     setSending(true)
-    if (SignaturitIsEnabled)
-    {
     activateLead(leadId)
       .then(() => {
         trackSuccess()
@@ -298,33 +293,6 @@ const NewContractMemberForm = (props) => {
         setCompleted(true)
         setSending(false)
       })
-    } else {
-    const data = newNormalizeContract(values, gurbCode)
-    await newContract(data)
-      .then((response) => {
-        if (response?.state === true) {
-          trackSuccess()
-          if (response?.data?.redsys_endpoint) {
-            setRedsysData(response?.data)
-            setRedsysURL(response.data.redsys_endpoint)
-          } else {
-            setCompleted(true)
-            setError(false)
-          }
-        } else {
-          setCompleted(true)
-          setError(true)
-        }
-        })
-      .catch((err) => {
-        setError(true)
-        console.log(err)
-      })
-      .finally(() => {
-        setCompleted(true)
-        setSending(false)
-      })
-    }
   }
 
   useEffect(() => {

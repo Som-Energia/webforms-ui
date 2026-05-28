@@ -76,7 +76,6 @@ export const normalizeAttachments = (supply_point_attachment, process) => {
 
 
 export const newNormalizeContract = (data, gurbCode) => {
-  const SignaturitIsEnabled = JSON.parse(import.meta.env.VITE_FEATURE_FLAGS)?.isSignaturitEnabled
 
   const powers = []
   const powers_max = data.contract.power_type == 'power-lower-15kw' ? 2 : 6
@@ -112,7 +111,8 @@ export const newNormalizeContract = (data, gurbCode) => {
     privacy_conditions: data.privacy_policy_accepted,
     general_contract_terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted,
-    signature: SignaturitIsEnabled
+    // TODO: remove when ERP merge this feature to main branch
+    signature: true // feature flag for ERP
   }
 
   if (data.has_selfconsumption == 'selfconsumption-on') {

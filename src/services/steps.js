@@ -34,8 +34,6 @@ export const NEW_MEMBER_FORM_SUBSTEPS = {
   SUMMARY: 3
 }
 
-const SignaturitIsEnabled = JSON.parse(import.meta.env.VITE_FEATURE_FLAGS)?.isSignaturitEnabled
-
 export const NEW_MEMBER_CONTRACT_FORM_SUBSTEPS = {
   IDENTIFY_MEMBER: 1,
   MEMBER_INFO: 2,
@@ -48,7 +46,7 @@ export const NEW_MEMBER_CONTRACT_FORM_SUBSTEPS = {
   DONATION: 9,
   PAYMENT_INFO: 10,
   SUMMARY: 11,
-  ...(SignaturitIsEnabled && { SIGNATURE: 12 })
+  SIGNATURE: 12,
 }
 
 export const NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS = {
@@ -63,6 +61,6 @@ export const NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS = {
   DONATION: 9,
   PAYMENT_INFO: 10,
   SUMMARY: 11,
-  ...(SignaturitIsEnabled && { SIGNATURE: 12 })
+  SIGNATURE: 12,
 }
 

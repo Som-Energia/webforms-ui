@@ -92,6 +92,7 @@ const alreadyMember = {
     iban: random_iban,
     member_payment_type: 'remesa',
     sepa_accepted: true,
+    signature: true,
     general_contract_terms_accepted: true,
     privacy_conditions: true,
     statutes_accepted: true
@@ -153,7 +154,8 @@ const sponsored = {
     sepa_accepted: true,
     general_contract_terms_accepted: true,
     privacy_conditions: true,
-    statutes_accepted: true
+    statutes_accepted: true,
+    signature: true
   }
 }
 
@@ -202,7 +204,8 @@ const newMember = {
     sepa_accepted: true,
     general_contract_terms_accepted: true,
     privacy_conditions: true,
-    statutes_accepted: true
+    statutes_accepted: true,
+    signature: true
   }
 }
 
@@ -259,6 +262,7 @@ const A3_indexed = {
     member_payment_type: 'remesa',
     privacy_conditions: true,
     sepa_accepted: true,
+    signature: true,
     statutes_accepted: true
   }
 }
@@ -309,6 +313,7 @@ const C2_30TD = {
     contract_info: contract_info_c2_30TD,
     iban: random_iban,
     sepa_accepted: true,
+    signature: true,
     member_payment_type: 'remesa',
     donation: true,
     privacy_conditions: true,
@@ -365,6 +370,7 @@ const withSelfconsumption = {
     member_payment_type: 'remesa',
     iban: random_iban,
     sepa_accepted: true,
+    signature: true,
     self_consumption: selfconsumption.normalizedData,
     linked_member_info: {
       vat: random_nif,
@@ -373,7 +379,7 @@ const withSelfconsumption = {
     privacy_conditions: true,
     general_contract_terms_accepted: true,
     statutes_accepted: true,
-    attachments: [{filename: 'road_poneglyph.jpg', category: 'invoice'}]
+    attachments: [{ filename: 'road_poneglyph.jpg', category: 'invoice' }]
   }
 }
 
@@ -423,6 +429,7 @@ const cadastralReference = {
     },
     iban: random_iban,
     sepa_accepted: true,
+    signature: true,
     member_payment_type: 'remesa',
     donation: true,
     privacy_conditions: true,
@@ -479,6 +486,7 @@ const paymentTPV = {
     donation: false,
     iban: random_iban,
     sepa_accepted: true,
+    signature: true,
     linked_member_info: {
       vat: random_nif,
       code: random_number
@@ -493,7 +501,7 @@ const newContractCases = {
   // Member cases
   alreadyMember: alreadyMember,
   sponsored: sponsored,
-  campaign: {...sponsored, entryValues: {...sponsored.entryValues, has_member: 'campaign-offer'}},
+  campaign: { ...sponsored, entryValues: { ...sponsored.entryValues, has_member: 'campaign-offer' } },
   newMember: newMember,
   // Contract cases
   // C1_20TD: base case for member cases
