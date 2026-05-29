@@ -281,10 +281,9 @@ const NewContractMemberForm = (props) => {
     await createContractLead(data)
       .then((response) => {
         if (response?.state === true) {
-          const { payment, lead } = response?.data || {}
-          const paymentData = payment?.payment_data
-          const redsysEndpoint = payment?.redsys_endpoint
-          const responseLeadId = lead?.lead_id
+          const { redsys_data, lead_id } = response?.data || {}
+          const paymentData = redsys_data?.payment_data
+          const redsysEndpoint = redsys_data?.redsys_endpoint
 
           if (redsysEndpoint && paymentData) {
             setRedsysData({
@@ -295,8 +294,8 @@ const NewContractMemberForm = (props) => {
             trackSuccess()
             setCompleted(true)
             setError(false)
-          } else if (responseLeadId && formSteps['SIGNATURE']) {
-            setLeadId(responseLeadId)
+          } else if (lead_id && formSteps['SIGNATURE']) {
+            setLeadId(lead_id)
             nextStep({ values })
             setError(false)
           } else {
