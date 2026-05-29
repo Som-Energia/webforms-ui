@@ -277,10 +277,13 @@ export const createContractLead = async (data) => {
   }).then(({ data }) => data)
 }
 
-export const createContractSignature = async (leadId) => {
+export const createContractSignature = async ({ leadId, cups }) => {
+  const query = new URLSearchParams({ cups })
+  const url = `${WEBFORMS_API_URL}/procedures/sign/contract/${leadId}?${query.toString()}`
+
   return axios({
     method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/sign/contract/${leadId}`
+    url
   }).then(({ data }) => data)
 }
 

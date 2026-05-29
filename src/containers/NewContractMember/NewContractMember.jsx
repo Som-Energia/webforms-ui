@@ -386,6 +386,7 @@ const NewContractMemberForm = (props) => {
           <NewContractMemberSignature
             {...props}
             leadId={leadId}
+            cups={values?.cups}
             onSuccess={handleSignatureCompleted}
           />
         )
@@ -418,6 +419,7 @@ const NewContractMemberForm = (props) => {
           <NewContractMemberSignature
             {...props}
             leadId={leadId}
+            cups={values?.cups}
             onSuccess={handleSignatureCompleted}
           />
         )

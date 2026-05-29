@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Container from '@mui/material/Container'
@@ -18,6 +18,8 @@ import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 const NewContractMemberSignatureStandalone = () => {
   const { t } = useTranslation()
   const { language, leadId } = useParams()
+  const [searchParams] = useSearchParams()
+  const cups = searchParams.get('cups')
 
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -96,7 +98,7 @@ const NewContractMemberSignatureStandalone = () => {
         <>
           <SignatureIframe
             apiFunction={createContractSignature}
-            postData={leadId}
+            postData={{ leadId, cups }}
             textRecommendation={t('SIGNATURE')}
             textInfo={t('SIGNATURE_INFO')}
             onSignaturitCompleted={handleSignatureCompleted}

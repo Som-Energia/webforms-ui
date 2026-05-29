@@ -6,7 +6,7 @@ import SignatureIframe from '../../Signature'
 import { createContractSignature } from '../../../services/api'
 
 export const NewContractMemberSignature = (props = {}) => {
-  const { leadId, onSuccess } = props
+  const { leadId, cups, onSuccess } = props
   const { t } = useTranslation()
 
   return (
@@ -15,10 +15,11 @@ export const NewContractMemberSignature = (props = {}) => {
         <Grid item size={12} sx={{ textAlign: 'center', width: '100%' }}>
           <SignatureIframe
             apiFunction={createContractSignature}
-            postData={leadId}
+            postData={{ leadId, cups }}
             textRecommendation={t('SIGNATURE')}
             textInfo={t('SIGNATURE_INFO')}
-            onSignaturitCompleted={onSuccess}></SignatureIframe>
+            onSignaturitCompleted={onSuccess}>
+          </SignatureIframe>
         </Grid>
       </Grid>
     </>
