@@ -59,7 +59,7 @@ const CnaeField = (props) => {
         ...values.supply_point,
         is_housing: isHousing,
         cnae: isHousing ? 9820 : undefined,
-        cnae_valid: true
+        cnae_valid: isHousing
       }
     })
   }
