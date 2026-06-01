@@ -32,6 +32,17 @@ const contract_info_a3_indexed = {
   phase: "230"
 }
 
+const contract_info_a3_periods = {
+  cnae: '9820',
+  cups: random_cups,
+  cups_address: address.normalizedData,
+  is_indexed: false,
+  powers: ['2100', '2500'],
+  process: 'A3',
+  tariff: '2.0TD',
+  phase: "230"
+}
+
 const contract_info_c2_30TD = {
   cnae: '9820',
   cups: random_cups,
@@ -248,6 +259,61 @@ const A3_indexed = {
   },
   normalizedData: {
     contract_info: contract_info_a3_indexed,
+    donation: true,
+    general_contract_terms_accepted: true,
+    iban: random_iban,
+    linked_member: 'already_member',
+    linked_member_info: {
+      code: random_number,
+      vat: random_nif
+    },
+    member_payment_type: 'remesa',
+    privacy_conditions: true,
+    sepa_accepted: true,
+    statutes_accepted: true
+  }
+}
+
+const A3_periods_has_light = {
+  entryValues: {
+    cups: random_cups,
+    has_member: 'member-on',
+    has_light: 'light-off',
+    previous_holder: 'previous-holder-yes',
+    voluntary_donation: true,
+    cadastral_reference_valid: true,
+    supply_point: supply_point.without_attachments.entryValues,
+    supply_point_address: address.entryValues,
+    address: address.empty,
+    member: {
+      number: random_number,
+      nif: random_nif,
+      link_member: true
+    },
+    new_member: {
+      ...client.empty,
+      ...iban_values,
+      payment_method: 'iban'
+    },
+    contract: {
+      tariff_mode: 'atr',
+      power_type: 'power-lower-15kw',
+      power: {
+        power1: '2.1',
+        power2: '2.5'
+      },
+      phase: 'mono'
+    },
+    has_selfconsumption: 'selfconsumption-off',
+    self_consumption: selfconsumption.empty,
+    privacy_policy_accepted: true,
+    generic_conditions_accepted: true,
+    statutes_accepted: true,
+    comercial_info_accepted: false,
+    is_client: false
+  },
+  normalizedData: {
+    contract_info: contract_info_a3_periods,
     donation: true,
     general_contract_terms_accepted: true,
     iban: random_iban,
@@ -498,6 +564,7 @@ const newContractCases = {
   // Contract cases
   // C1_20TD: base case for member cases
   A3_indexed: A3_indexed,
+  A3_periods_has_light: A3_periods_has_light,
   C2_30TD: C2_30TD,
   selfconsumption: withSelfconsumption,
   cadastraslReference: cadastralReference,
