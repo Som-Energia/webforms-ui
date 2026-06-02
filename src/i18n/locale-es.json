@@ -79,7 +79,7 @@
     "FILL_VAT": "<p>Este formulario permite realizar un cambio de titularidad de un contrato activo con Som Energia.</p><p><b>Introduce el NIF de la persona o entidad jurídica que será la nueva titular del contrato:</b></p>",
     "VAT_LABEL": "Número de identificación fiscal (NIF)",
     "VAT_HOLDERCHANGE_LABEL": "NIF de la nueva titular",
-    "NO_VAT_HELP": "<a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\"><a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">Si únicamente tienes pasaporte, puedes enviarnos un correo a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> para indicarte cómo proceder.",
+    "NO_VAT_HELP": "Si únicamente tienes pasaporte, puedes enviarnos un correo a <a target=\"_blank\" href=\"mailto:modifica@somenergia.coop\">modifica@somenergia.coop</a> para indicarte cómo proceder.",
     "CIF_COMMUNITY_OWNERS": "Lamentablemente, por ley, las comunidades de vecinos no pueden hacerse socias de cooperativas. Te invitamos a que sea un miembro de la comunidad vecinal, o bien la persona administradora de fincas, quien se haga socia de Som Energia. Para más información, puedes consultar el <a target=\"_blank\" href=\"https://es.support.somenergia.coop\">Centro de Ayuda</a>.",
     "CUPS_TITLE": "Identifica el punto de suministro",
     "CUPS_FIELD": "Indica el código CUPS",
