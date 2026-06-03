@@ -583,7 +583,7 @@
     "POWER_LOWER_15_HELPER_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "POWER_HIGHER_15_HELPER_URL": "https://eu.support.somenergia.coop/article/1110-ordutegi-tarteen-30td-tarifaren-eta-ordutegi-tarteen-goi-tentsioko-tarifen-ordutegiak",
     "CUPS_HELPER_URL": "https://eu.support.somenergia.coop/article/442-cups-hornidura-puntuaren-kode-bateratua",
-    "POWER_HELPER": "Tramitazio-arazoak saihesteko, jarri oraingo fakturan agertzen den potentzia berbera. Som Energiarekin kontratua aktibatuta duzunean potentzia aldatzea eskatu ahalko duzu.",
+    "POWER_HELPER": "Tramitea bizkortzeko, adierazi gaur egungo potentzia.<b>Merkaturatzailea eta potentzia aldi berean aldatu behar badituzu, idatzi comercializacion@somenergia.coop helbidera, baina kontuan izan konpainia-aldaketa atzeratu daitekeela. </b>\n",
     "CURRENT_POWER": "Idatzi ORAIN kontratatuta duzun potentzia",
     "POWER_LOWER_15_HEADER": "15 kW edo hortik behera",
     "POWER_LOWER_15_HELPER": "2.0TD tarifako potentzia-tarteei buruzko informazio gehiago.",
