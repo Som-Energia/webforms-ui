@@ -758,7 +758,7 @@
     "WHICH_PEAK": "Indica que potencia punta quieres contratar",
     "WHICH_VALLEY": "Indica que potencia valle quieres contratar",
     "WHICH_POWER": "Indica qué potencia quieres contratar",
-    "WHICH_POWER_HELPER": "Si no sabes qué potencia contratar revisa el siguiente <a target=\"_blank\" href={{url}}>artículo</a>.",
+    "WHICH_POWER_HELPER": "Si no sabes qué potencia contratar, revisa el siguiente <a target=\"_blank\" href={{url}}>artículo</a>.",
     "WHICH_POWER_HELPER_URL": "https://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
     "MEMBER_DOCUMENTATION_UPLOAD": "Adjunta la documentación para el alta de suministro",
     "NEW_CONTRACT_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
