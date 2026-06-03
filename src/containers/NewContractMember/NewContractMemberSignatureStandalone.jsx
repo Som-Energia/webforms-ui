@@ -9,6 +9,7 @@ import { Grid2 as Grid } from '@mui/material'
 
 import SignatureIframe from '../Signature'
 import Result from '../Result'
+import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
 import Loading from '../../components/Loading'
 import SubmitButton from '../../components/Buttons/SubmitButton'
 
@@ -20,6 +21,7 @@ const NewContractMemberSignatureStandalone = () => {
   const { language, leadId } = useParams()
   const [searchParams] = useSearchParams()
   const cups = searchParams.get('cups')
+  const gurbCode = searchParams.get('gurb-code')
 
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -74,25 +76,37 @@ const NewContractMemberSignatureStandalone = () => {
         <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
       ) : completed ? (
         <Box sx={{ mt: 2 }}>
-          <Result
-            mode={!error ? 'success' : 'failure'}
-            title={
-              !error
-                ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
-                : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
-            }>
-            <Typography
-              sx={{
-                color: 'secondary.extraDark',
-                textAlign: 'center'
-              }}
-              dangerouslySetInnerHTML={{
-                __html: !error
-                  ? t('NEW_CONTRACT_SUCCESS_DESC')
-                  : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
-              }}
+          {!error && gurbCode ? (
+            <RedirectUrl
+              title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
+              description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
+              url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', {
+                gurbCode,
+                language
+              })}
+              buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
             />
-          </Result>
+          ) : (
+            <Result
+              mode={!error ? 'success' : 'failure'}
+              title={
+                !error
+                  ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
+                  : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
+              }>
+              <Typography
+                sx={{
+                  color: 'secondary.extraDark',
+                  textAlign: 'center'
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: !error
+                    ? t('NEW_CONTRACT_SUCCESS_DESC')
+                    : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                }}
+              />
+            </Result>
+          )}
         </Box>
       ) : (
         <>
