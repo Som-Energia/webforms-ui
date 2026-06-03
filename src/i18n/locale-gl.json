@@ -583,7 +583,7 @@
     "POWER_LOWER_15_HELPER_URL": "https://gl.support.somenergia.coop/article/1006-a-tarifa-2-0td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego",
     "POWER_HIGHER_15_HELPER_URL": "https://gl.support.somenergia.coop/article/1109-horarios-e-periodos-da-tarifa-3-0td-e-as-tarifas-de-alta-tension-6-1td-6-2td-6-3td-e-6-4td?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego",
     "CUPS_HELPER_URL": "https://gl.support.somenergia.coop/article/417-que-e-o-cups?utm_source=linkidiomes&utm_medium=cda&utm_campaign=galego",
-    "POWER_HELPER": "Para evitar problemas de tramitación, pon a mesma potencia que figura na factura actual. Poderás solicitar cambios de potencia así que o contrato estea activado con Som Energia.",
+    "POWER_HELPER": "Para axilizares o trámite, indica a potencia actual. <b>Se precisas facer un cambio simultáneo de comercializadora e potencia, podes escribir a comercializacion@somenergia.coop, pero ten en conta que o cambio de compañía pode atrasarse.</b>\n",
     "VOLUNTARY_DONATION_HOW_INFO": "Como persoa socia podes facer unha <strong>doazón voluntaria</strong> de 0,01 € por cada kWh. Por un consumo medio dunha unidade doméstica (aprox. 300 kW/h ao mes), <strong>isto supón uns 3 € ao mes</strong>.",
     "VOLUNTARY_DONATION_WHY_INFO": "Apoiarás actividades clave como a escola de Som Energia e iniciativas contra a vulnerabilidade enerxética e o fomento da autoprodución. <strong>Fai a túa enerxía máis poderosa!</strong>",
     "INCORRECT_CNAE": "É necesario indicar un CNAE 2025 válido",
