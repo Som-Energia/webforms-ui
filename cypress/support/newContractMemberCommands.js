@@ -116,15 +116,17 @@ Cypress.Commands.add('selfconsumptionData', (selfConsumption) => {
 })
 
 Cypress.Commands.add('contractMemberPaymentData', (paymentdata, has_member='member-off') => {
-  cy.get('[data-cy="iban_number"]').type(paymentdata.iban)
+  const isCreditCard = paymentdata.paymentMethod === 'credit_card'
 
-  if (has_member === 'member-off'){
-    cy.choosePaymentMethod()
+  cy.choosePaymentMethod(isCreditCard)
+
+  if (!isCreditCard) {
+    cy.get('[data-cy="iban_number"]').type(paymentdata.iban)
+    cy.get('[data-cy="iban_check"]').click()
+    cy.get('[data-cy=accept]').click()
   }
 
-  cy.get('[data-cy="iban_check"]').click()
-  cy.get('[data-cy=accept]').click()
-
+  cy.get('[data-cy=next]').should('not.be.disabled')
   cy.get('[data-cy=next]').click()
 })
 
@@ -145,25 +147,75 @@ Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif, has_member=
 })
 
 Cypress.Commands.add('acceptTermsAndsubmitNewContract', (status, error=false) => {
-  cy.intercept('POST', '/procedures/contract', {
-    statusCode: !error ? 200 : 500,
-    body: {
-      state: status
-    }
-  })
-  cy.get('[data-cy="next"]').click()
-  let icon = status ? "success-icon" : "error-icon"
-  cy.get('[data-cy='+icon+']').should('exist')
+  throw new Error('Use acceptTermsAndsubmitNewContractFlow with explicit flow options')
 })
 
 Cypress.Commands.add('acceptTermsAndsubmitNewContractWithGurbCode', (status, error=false) => {
+  throw new Error('Use acceptTermsAndsubmitNewContractFlow with explicit flow options')
+})
+
+Cypress.Commands.add('acceptTermsAndsubmitNewContractFlow', ({
+  status = true,
+  error = false,
+  leadId = '1234',
+  cups,
+  gurbCode
+} = {}) => {
   cy.intercept('POST', '/procedures/contract', {
     statusCode: !error ? 200 : 500,
-    body: {
-      state: status
-    }
+    body: status
+      ? {
+          state: true,
+          data: {
+            lead_id: leadId
+          }
+        }
+      : {
+          state: false
+        }
   })
+
+  if (status && !error) {
+    cy.intercept('POST', `/procedures/sign/contract/${leadId}?cups=${encodeURIComponent(cups)}`, {
+      statusCode: 200,
+      body: {
+        data: {
+          signaturit_url: 'https://signaturit.example/sign'
+        }
+      }
+    })
+
+    cy.intercept('POST', `/procedures/activate/${leadId}`, {
+      statusCode: 200,
+      body: {
+        state: true
+      }
+    })
+  }
+
   cy.get('[data-cy="next"]').click()
+
+  if (!status || error) {
+    cy.get('[data-cy=error-icon]').should('exist')
+    return
+  }
+
+  cy.get('iframe[title="signaturit_iframe"]')
+    .should('exist')
+    .and('have.attr', 'src', 'https://signaturit.example/sign')
+
+  cy.window().then((win) => {
+    win.postMessage({ event: 'completed' }, '*')
+  })
+
+  cy.get('[data-cy="next"]').should('not.be.disabled').click()
+
+  if (gurbCode) {
+    cy.resultRedirectComponent(gurbCode)
+    return
+  }
+
+  cy.get('[data-cy=success-icon]').should('exist')
 })
 
 Cypress.Commands.add('resultRedirectComponent', (gurbCode = '1234') => {
