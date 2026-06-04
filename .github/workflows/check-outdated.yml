@@ -9,8 +9,8 @@ jobs:
       - name: Read versions from package.json
         id: pkg-versions
         run: |
-          echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_OUTPUT
-          echo "NPM_VERSION=$(jq -r '.engines.npm' package.json | grep -oP '\d+\.\d+\.\d+')" >> $GITHUB_OUTPUT
+          echo "NODE_VERSION=$(jq -r '.engines.node' package.json | grep -oP '\d+\.\d+\.\d+' | head -1)" >> $GITHUB_OUTPUT
+          echo "NPM_VERSION=$(jq -r '.engines.npm' package.json | grep -oP '\d+\.\d+\.\d+' | head -1)" >> $GITHUB_OUTPUT
 
       - uses: actions/setup-node@v4
         with:
