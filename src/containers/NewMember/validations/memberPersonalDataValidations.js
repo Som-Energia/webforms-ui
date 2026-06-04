@@ -1,3 +1,4 @@
+import { checkVatFormat } from '../../../services/utils'
 import * as Yup from 'yup'
 
 const memberPersonalDataValidations = Yup.object().shape({
@@ -27,15 +28,19 @@ const memberPersonalDataValidations = Yup.object().shape({
       is: 'legal-person',
       then: Yup.string()
         .required('NO_PROXY_NIF')
-        .matches(/(^[0-9]{8}[A-Z]$|^[XYZ][0-9]{7}[A-Z]$)/, 'INVALID_NIF'),
+        .test('valid-nif', 'INVALID_NIF', function (value) {
+          if (!value) return true
+          const { isValid, isCompany } = checkVatFormat(value)
+          return isValid && !isCompany
+        })
     }),
     legal_person_accepted: Yup.bool().when(
       'person_type',
       (person_type, schema) => {
         return person_type == 'legal-person'
           ? schema
-            .required('ACCEPT_LEGAL_PERSON')
-            .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+              .required('ACCEPT_LEGAL_PERSON')
+              .oneOf([true], 'ACCEPT_LEGAL_PERSON')
           : schema
       }
     )
@@ -43,11 +48,14 @@ const memberPersonalDataValidations = Yup.object().shape({
   address: Yup.object().shape({
     street: Yup.string().required('NO_ADDRESS'),
     number: Yup.number().required('NO_NUMBER'),
-    postal_code: Yup.string().matches(/^[0-9]+$/, 'POSTAL_CODE_INVALID_FORMAT').length(5, 'POSTAL_CODE_INVALID_LENGTH').required('NO_POSTAL_CODE'),
+    postal_code: Yup.string()
+      .matches(/^[0-9]+$/, 'POSTAL_CODE_INVALID_FORMAT')
+      .length(5, 'POSTAL_CODE_INVALID_LENGTH')
+      .required('NO_POSTAL_CODE'),
     state: Yup.object().shape({
       id: Yup.number().min(1).required('POSTAL_CODE_INVALID'),
       name: Yup.string()
-    }),
+    })
   })
 })
 

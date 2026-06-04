@@ -5,6 +5,7 @@ const newContractMemberSelfConsumptionDataValidations = Yup.object().shape({
         cau: Yup.string()
             .min(26, 'CAU_INVALID_LENGTH')
             .max(26, 'CAU_INVALID_LENGTH')
+            .matches(/^ES[0-9]{16}[0-9A-Z]{4}A[0-9]{3}$/, 'ERROR_INVALID_FIELD')
             .required('ERROR_REQUIRED_FIELD'),
         cau_valid: Yup.bool().when('collective_installation', {
             is: 'individual',

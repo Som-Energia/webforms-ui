@@ -1,5 +1,6 @@
 import * as Yup from 'yup'
 import addressValidations from './addressValidations'
+import { checkVatFormat } from '../../../services/utils'
 
 const identifyMemberPersonalDataValidations = Yup.object().shape({
   new_member: Yup.object().shape({
@@ -34,15 +35,19 @@ const identifyMemberPersonalDataValidations = Yup.object().shape({
       is: 'legal-person',
       then: Yup.string()
         .required('NO_PROXY_NIF')
-        .matches(/(^[0-9]{8}[A-Z]$|^[XYZ][0-9]{7}[A-Z]$)/, 'INVALID_NIF'),
+        .test('valid-nif', 'INVALID_NIF', function (value) {
+          if (!value) return true
+          const { isValid, isCompany } = checkVatFormat(value)
+          return isValid && !isCompany
+        })
     }),
     legal_person_accepted: Yup.bool().when(
       'person_type',
       (person_type, schema) => {
         return person_type == 'legal-person'
           ? schema
-            .required('ACCEPT_LEGAL_PERSON')
-            .oneOf([true], 'ACCEPT_LEGAL_PERSON')
+              .required('ACCEPT_LEGAL_PERSON')
+              .oneOf([true], 'ACCEPT_LEGAL_PERSON')
           : schema
       }
     )

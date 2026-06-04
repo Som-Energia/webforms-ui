@@ -214,7 +214,6 @@ describe('New Contract with New Member', () => {
       cy.get('[data-cy="privacy_policy"]').should('exist')
       cy.contains(this.data.personalPhysicalData.nif).should('exist')
     })
-  })
 
   describe('New Contract: results', () => {
     Cypress.on('uncaught:exception', (error, runnable) => {
@@ -284,3 +283,5 @@ describe('New Contract with New Member', () => {
     })
   })
 })
+
+
