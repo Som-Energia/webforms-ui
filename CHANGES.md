@@ -1,5 +1,19 @@
 # Change Log
 
+## 7.2.3 2026-06-02
+
+- Fix: cau and cnae validations
+- Fix: light-on/off errors
+- Add translations
+
+## 7.2.2 2026-05-28
+
+- Fix: Proxy vats validations
+
+## 7.2.1 2026-05-26
+
+- REF: remove translations
+
 ## 7.2.0 2026-05-25
 
 - Mock calls to google places in cypress tests
