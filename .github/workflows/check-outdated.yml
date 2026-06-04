@@ -1,32 +1,27 @@
 name: Check for Outdated NPM Dependencies
 on: [push]
-
 jobs:
   check-outdated:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Read versions from package.json
+        id: pkg-versions
+        run: |
+          echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_OUTPUT
+          echo "NPM_VERSION=$(jq -r '.engines.npm' package.json | grep -oP '\d+\.\d+\.\d+')" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20.18.1"
+          node-version: ${{ steps.pkg-versions.outputs.NODE_VERSION }}
+
+      - name: Install npm
+        run: npm install -g npm@${{ steps.pkg-versions.outputs.NPM_VERSION }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Install npm 10.3.0
-        run: npm install -g npm@10.3.0
-
-      # Optional: Clear npm cache to prevent cache-related issues
-      - name: Clear npm cache
-        run: npm cache clean --force
-
-      # Run npm outdated and handle failures
-      - name: List of outdated dependencies
-        run: |
-          echo Listing for updated dependencies
-          npm outdated || true
+      - name: List outdated dependencies
+        run: npm outdated || true
 
