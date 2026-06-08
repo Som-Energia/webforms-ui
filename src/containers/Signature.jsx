@@ -50,7 +50,6 @@ const SignatureIframe = ({
 
     apiFunction(postData)
       .then(({ data }) => {
-        // TODO: only compatible with gurb. Refactor to unify with new contract
         setSignaturitResponseURL(data?.signaturit_url)
         onCreateSignature(data)
       })

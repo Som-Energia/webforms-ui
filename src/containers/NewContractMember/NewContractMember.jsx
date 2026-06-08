@@ -286,6 +286,11 @@ const NewContractMemberForm = (props) => {
           const redsysEndpoint = redsys_data?.redsys_endpoint
 
           if (redsysEndpoint && paymentData) {
+            trackEvent({
+              category: 'NewContractMemberFunnel',
+              action: 'paymentRedirect',
+              name: 'new-contract-member-payment-redirect'
+            })
             setRedsysData({
               redsys_endpoint: redsysEndpoint,
               payment_data: paymentData
@@ -350,6 +355,11 @@ const NewContractMemberForm = (props) => {
   }
 
   const handleSignatureCompleted = () => {
+    trackEvent({
+      category: 'NewContractMemberFunnel',
+      action: 'signatureCompleted',
+      name: 'new-contract-member-signature-completed'
+    })
     setSignatureCompleted(true)
   }
 

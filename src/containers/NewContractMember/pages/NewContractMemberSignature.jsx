@@ -1,23 +1,39 @@
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Grid2 as Grid } from '@mui/material'
 
 import SignatureIframe from '../../Signature'
-import { createContractSignature } from '../../../services/api'
+import { getContractSignature } from '../../../services/api'
+import MatomoContext from '../../../trackers/matomo/MatomoProvider'
 
 export const NewContractMemberSignature = (props = {}) => {
   const { leadId, cups, onSuccess } = props
   const { t } = useTranslation()
+  const { trackEvent } = useContext(MatomoContext)
+
+  const handleCreateSignature = (data) => {
+    if (!data?.signaturit_url) {
+      return
+    }
+
+    trackEvent({
+      category: 'NewContractMemberFunnel',
+      action: 'signatureDocumentsViewed',
+      name: 'new-contract-member-signature-documents-viewed'
+    })
+  }
 
   return (
     <>
       <Grid container direction={'column'}>
         <Grid item size={12} sx={{ textAlign: 'center', width: '100%' }}>
           <SignatureIframe
-            apiFunction={createContractSignature}
+            apiFunction={getContractSignature}
             postData={{ leadId, cups }}
             textRecommendation={t('SIGNATURE')}
             textInfo={t('SIGNATURE_INFO')}
+            onCreateSignature={handleCreateSignature}
             onSignaturitCompleted={onSuccess}>
           </SignatureIframe>
         </Grid>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -13,8 +13,9 @@ import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
 import Loading from '../../components/Loading'
 import SubmitButton from '../../components/Buttons/SubmitButton'
 
-import { activateLead, createContractSignature } from '../../services/api'
+import { activateLead, getContractSignature } from '../../services/api'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
+import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 const NewContractMemberSignatureStandalone = () => {
   const { t } = useTranslation()
@@ -22,6 +23,7 @@ const NewContractMemberSignatureStandalone = () => {
   const [searchParams] = useSearchParams()
   const cups = searchParams.get('cups')
   const gurbCode = searchParams.get('gurb-code')
+  const { trackEvent } = useContext(MatomoContext)
 
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -29,6 +31,14 @@ const NewContractMemberSignatureStandalone = () => {
   const [signatureCompleted, setSignatureCompleted] = useState(false)
 
   useSyncLanguage(language)
+
+  useEffect(() => {
+    trackEvent({
+      category: 'NewContractMemberFunnel',
+      action: 'paymentReturn',
+      name: 'new-contract-member-payment-return-signature-standalone'
+    })
+  }, [trackEvent])
 
   const handleActivateLead = () => {
     if (!signatureCompleted) {
@@ -58,7 +68,24 @@ const NewContractMemberSignatureStandalone = () => {
   }
 
   const handleSignatureCompleted = () => {
+    trackEvent({
+      category: 'NewContractMemberFunnel',
+      action: 'signatureCompleted',
+      name: 'new-contract-member-signature-completed-standalone'
+    })
     setSignatureCompleted(true)
+  }
+
+  const handleCreateSignature = (data) => {
+    if (!data?.signaturit_url) {
+      return
+    }
+
+    trackEvent({
+      category: 'NewContractMemberFunnel',
+      action: 'signatureDocumentsViewed',
+      name: 'new-contract-member-signature-documents-viewed-standalone'
+    })
   }
 
   return (
@@ -111,10 +138,11 @@ const NewContractMemberSignatureStandalone = () => {
       ) : (
         <>
           <SignatureIframe
-            apiFunction={createContractSignature}
+            apiFunction={getContractSignature}
             postData={{ leadId, cups }}
             textRecommendation={t('SIGNATURE')}
             textInfo={t('SIGNATURE_INFO')}
+            onCreateSignature={handleCreateSignature}
             onSignaturitCompleted={handleSignatureCompleted}
           />
           <Grid

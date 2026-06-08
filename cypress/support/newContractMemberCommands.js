@@ -176,7 +176,7 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContractFlow', ({
   })
 
   if (status && !error) {
-    cy.intercept('POST', `/procedures/sign/contract/${leadId}?cups=${encodeURIComponent(cups)}`, {
+    cy.intercept('GET', `/procedures/sign/contract/${leadId}?cups=${encodeURIComponent(cups)}`, {
       statusCode: 200,
       body: {
         data: {
