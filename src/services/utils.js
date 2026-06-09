@@ -201,7 +201,6 @@ export const normalizeHolderChange = (contract, isMemberMandatoryForHolderchange
   if (normalContract?.holder && 'ismember' in normalContract.holder) {
     delete normalContract.holder.ismember
   }
-
   if (!normalContract?.member?.link_member && !isMemberMandatoryForHolderchange) {
     if (normalContract?.member) {
       if ('vat' in normalContract.member) {
@@ -212,6 +211,7 @@ export const normalizeHolderChange = (contract, isMemberMandatoryForHolderchange
         delete normalContract.member.number
       }
     }
+  }
 
   if (normalContract?.member?.checked !== undefined) {
     delete normalContract?.member?.checked
