@@ -9,7 +9,9 @@ import Button from '@mui/material/Button'
 
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -504,17 +506,42 @@ const NewContractMemberSummary = (props) => {
         <Divider sx={{ my: 2 }} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body2">
-          {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
-        </Typography>
+        <Stack spacing={2} sx={{
+          color: 'secondary.dark'
+        }}>
+          <Typography variant="body.xs.regular">
+            {t('SIMULATION_PRICES_TITLE')}
+          </Typography>
+          <Box
+            component="ul"
+            sx={theme.typography['body.xs.regular']}
+            dangerouslySetInnerHTML={{
+              __html: t('SIMULATION_PRICES_BODY', {
+                estimated_monthly_kwh: 456,
+                estimated_monthly_total_eur: 123,
+              })
+            }}>
+          </Box>
+        </Stack>
       </Grid>
       <Grid item xs={12}>
-        <Typography
-          variant="body2"
-          dangerouslySetInnerHTML={{
-            __html: t('SUMMARY_OTHER_CONCEPTS_BODY')
-          }}
-        />
+        <Divider sx={{ my: 2 }} />
+      </Grid>
+      <Grid item xs={12}>
+        <Stack spacing={2} sx={{
+          color: 'secondary.dark'
+        }}>
+          <Typography variant="body.xs.regular">
+            {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
+          </Typography>
+          <Box
+            component="ul"
+            sx={theme.typography['body.xs.regular']}
+            dangerouslySetInnerHTML={{
+              __html: t('SUMMARY_OTHER_CONCEPTS_BODY')
+            }}>
+          </Box>
+        </Stack>
       </Grid>
       <Grid item xs={12}>
         <Divider sx={{ my: 2 }} />
