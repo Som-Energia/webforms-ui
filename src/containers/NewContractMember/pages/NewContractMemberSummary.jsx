@@ -528,7 +528,6 @@ const NewContractMemberSummary = (props) => {
             {t('SIMULATION_PRICES_TITLE')}
           </Typography>
           <Box
-            component="ul"
             sx={theme.typography['body.xs.regular']}
             dangerouslySetInnerHTML={{
               __html: t('SIMULATION_PRICES_BODY', {
