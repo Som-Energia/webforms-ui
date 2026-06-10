@@ -14,13 +14,16 @@ const TextLoader = props => {
   const [text, setText] = React.useState()
 
   React.useEffect(() => {
-    const url = `${import.meta.env.BASE_URL}static/docs/${language.slice(0, 2)}/${documentName}.html`
+    //const url = `${import.meta.env.BASE_URL}static/docs/${language.slice(0, 2)}/${documentName}.html`
+    const url = 'https://back.somenergia.coop/storage/app/media/DOCS/Condicions-Generals-contracte-subministrament-energia-electrica-SomEnergia.pdf'
     setText(undefined)
     axios({
       method: 'GET',
       url: url,
+      responseType: "blob"
     }).then((response) => {
-      setText(response?.data)
+      const pdfUrl = URL.createObjectURL(response?.data);
+      setText(pdfUrl)
     }).catch((error) => {
       console.log(`Error retrieving text ${url}`)
     })
@@ -28,7 +31,17 @@ const TextLoader = props => {
 
   return text === undefined
     ? <Loading />
-    : <Typography component='div' variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }} dangerouslySetInnerHTML={{ __html: text }} />
+    : <div variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }}>
+        {text && (
+          <embed
+            src={text}
+            title="PDF"
+            width="100%"
+            height="100%"
+            style={{ border: "none" }}
+          />
+        )}
+      </div>
 }
 
 export const Test = () => {
