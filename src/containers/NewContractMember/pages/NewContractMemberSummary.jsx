@@ -55,6 +55,9 @@ const NewContractMemberSummary = (props) => {
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
+
+  const [estimatedMonthlykWh, setEstimatedMonthlykWh] = useState({})
+  const [estimatedMonthlyTotalEur, setEstimatedMonthlyTotalEur] = useState({})
   const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
@@ -405,6 +408,9 @@ const NewContractMemberSummary = (props) => {
     )
 
     const cityId = values?.supply_point_address?.city?.id || null
+    const powers = powerFields.map(
+      (power) => String(Math.round(Number(power) * THOUSANDS_CONVERSION_FACTOR))
+    )
 
     getPrices({
       tariff:
@@ -412,11 +418,18 @@ const NewContractMemberSummary = (props) => {
       max_power: maxPower,
       vat: values.new_member?.nif ? values.new_member.nif : values.member.nif,
       cnae: values.supply_point.cnae,
-      city_id: cityId
+      city_id: cityId,
+      powers: powers,
+      pricelist_type: isTariffIndexed ? 'index': 'periods'
     })
       .then((response) => {
         const tariffPrices = response?.data['current']
+        const estimatedMonthlykWh=response?.data['estimated_monthly_kwh']
+        const estimatedMonthlyTotalEur=response?.data['estimated_monthly_total_eur']
+
         setPrices(tariffPrices)
+        setEstimatedMonthlykWh(estimatedMonthlykWh)
+        setEstimatedMonthlyTotalEur(estimatedMonthlyTotalEur)
         setLoading(false)
       })
       .catch((error) => {
@@ -426,9 +439,11 @@ const NewContractMemberSummary = (props) => {
   }, [
     values.contract.power,
     values.contract.power_type,
-    values.new_member.nif,
+    values.new_member?.nif,
+    values.member?.nif,
     values.supply_point.cnae,
-    values?.supply_point_address?.city?.id
+    values?.supply_point_address?.city?.id,
+    isTariffIndexed
   ])
 
   const handleCheckboxChange = async (event, fieldName) => {
@@ -517,8 +532,8 @@ const NewContractMemberSummary = (props) => {
             sx={theme.typography['body.xs.regular']}
             dangerouslySetInnerHTML={{
               __html: t('SIMULATION_PRICES_BODY', {
-                estimated_monthly_kwh: 456,
-                estimated_monthly_total_eur: 123,
+                estimated_monthly_kwh: estimatedMonthlykWh,
+                estimated_monthly_total_eur: estimatedMonthlyTotalEur,
               })
             }}>
           </Box>
