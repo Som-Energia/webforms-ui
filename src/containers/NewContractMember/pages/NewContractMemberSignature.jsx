@@ -19,8 +19,8 @@ export const NewContractMemberSignature = (props = {}) => {
 
     trackEvent({
       category: 'NewContractMemberFunnel',
-      action: 'signatureDocumentsViewed',
-      name: 'new-contract-member-signature-documents-viewed'
+      action: 'signatureCreation',
+      name: 'new-contract-member-signature-creation'
     })
   }
 

@@ -288,8 +288,8 @@ const NewContractMemberForm = (props) => {
           if (redsysEndpoint && paymentData) {
             trackEvent({
               category: 'NewContractMemberFunnel',
-              action: 'paymentRedirect',
-              name: 'new-contract-member-payment-redirect'
+              action: 'paymentCreated',
+              name: 'new-contract-member-payment-created'
             })
             setRedsysData({
               redsys_endpoint: redsysEndpoint,
