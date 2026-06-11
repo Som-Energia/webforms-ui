@@ -18,6 +18,8 @@ if (!availableLanguages.includes(language)) {
   language = 'ca'
 }
 let gurbCode = import.meta.env.VITE_GURB_CODE
+const signatureLeadId = import.meta.env.VITE_SIGNATURE_LEAD_ID
+const signatureCups = import.meta.env.VITE_SIGNATURE_CUPS
 
 const options = [
   { title: 'New Contract - ANIVERSARI 15 ANYS', href: `${language}/landing/15-aniversari` },
@@ -37,6 +39,12 @@ const options = [
   { title: 'Gurb - Form Requeriments', href: `${language}/gurb/${gurbCode}/requirements/` },
   { title: 'Gurb - Form Participació', href: `${language}/gurb/${gurbCode}/join/` },
   { title: 'Gurb - Pagament contractació social tpv OK', href: `${language}/gurb/gurb-url-ok?gurbCode=${gurbCode}` },
+  ...(signatureLeadId && signatureCups
+    ? [{
+        title: 'Contract - Signaturit standalone',
+        href: `${language}/contract/sign/${signatureLeadId}?cups=${signatureCups}`
+      }]
+    : []),
   { title: 'Pagament OK', href: `${language}/pagament-realitzat` },
   { title: 'Pagament KO', href: `${language}/pagament-cancellat` },
   { title: 'Test de preus de tarifa', href: `/tariff` },

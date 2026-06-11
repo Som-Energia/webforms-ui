@@ -281,6 +281,7 @@
     "PAYMENT_METHOD_IBAN_DESC": "Sen custo para a cooperativa",
     "PAYMENT_METHOD_CCARD": "Tarxeta de crédito/débito",
     "PAYMENT_METHOD_CCARD_DESC": "Custo de 1,80 € para a cooperativa",
+    "PAYMENT_METHOD_CCARD_INFO": "Cando continúes, redirixirémoste á pasarela de pagamento para completar o pagamento con tarxeta.",
     "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/gl/pago-realizado/",
     "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/gl/pago-cancelado/",
     "CONTACT_HELP_URL": "https://gl.support.somenergia.coop/article/473-como-puedo-contactar-con-la-cooperativa-mail-telefono-etc",

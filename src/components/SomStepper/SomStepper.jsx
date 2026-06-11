@@ -2,6 +2,9 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 
+/**
+ * @deprecated use NewSomStepper insteadOf this
+ */
 const SomStepper = (props) => {
   const { activeStep = 0, steps = {}, stepsNum, showStepTitle = false } = props
   const { t } = useTranslation()
@@ -24,8 +27,8 @@ const SomStepper = (props) => {
             borderRadius: '100px',
             backgroundColor: 'secondary.extraDark',
             '& .MuiLinearProgress-bar': {
-              backgroundColor: 'primary.mainOrange',
-            },
+              backgroundColor: 'primary.mainOrange'
+            }
           }}
         />
       )}

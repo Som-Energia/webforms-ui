@@ -106,60 +106,68 @@ const PaymentMethod = (props) => {
         <Typography variant="headline4.regular">{t('MEMBER_PAGE_PAYMENT_METHOD')}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <InputField
-          name="iban_number"
-          textFieldName={t('IBAN_FIELD')}
-          textFieldNameHelper={t('IBAN_EXPLANATION')}
-          textFieldHelper={t('IBAN_EXAMPLE')}
-          handleChange={handleInputIban}
-          handleBlur={handleInputIbanBlur}
-          touched={touched?.new_member?.iban}
-          value={values?.new_member.iban}
-          error={errors?.new_member?.iban_valid || errors?.new_member?.iban}
+        <InputTitle
+          text={t('PAYMENT_METHOD_QUESTION')}
+          description={t('MEMBER_PAYMENT_EXPLANATION')}
           required={true}
         />
       </Grid>
-      {values?.has_member === 'member-off' ?
-        (<>
+      <Grid item xs={12}>
+        <Chooser
+          name="method-payment-question"
+          options={options}
+          value={values.new_member.payment_method}
+          handleChange={handleMethodPaymentQuestion}
+        />
+      </Grid>
+      {values?.new_member?.payment_method === 'iban' && (
+        <>
           <Grid item xs={12}>
-            <InputTitle
-              text={t('PAYMENT_METHOD_QUESTION')}
-              description={t('MEMBER_PAYMENT_EXPLANATION')}
+            <InputField
+              name="iban_number"
+              textFieldName={t('IBAN_FIELD')}
+              textFieldNameHelper={t('IBAN_EXPLANATION')}
+              textFieldHelper={t('IBAN_EXAMPLE')}
+              handleChange={handleInputIban}
+              handleBlur={handleInputIbanBlur}
+              touched={touched?.new_member?.iban}
+              value={values?.new_member.iban}
+              error={errors?.new_member?.iban_valid || errors?.new_member?.iban}
               required={true}
             />
           </Grid>
           <Grid item xs={12}>
-            <Chooser
-              name="method-payment-question"
-              options={options}
-              value={values.new_member.payment_method}
-              handleChange={handleMethodPaymentQuestion}
-            />
-          </Grid>
-        </>) : null}
-      <Grid item xs={12}>
-        <Box sx={{ display: 'flex' }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                data-cy="iban_check"
-                checked={values?.new_member?.sepa_accepted}
-                onClick={handleClick}
+            <Box sx={{ display: 'flex' }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    data-cy="iban_check"
+                    checked={values?.new_member?.sepa_accepted}
+                    onClick={handleClick}
+                  />
+                }
+                label={
+                  <>
+                    <Typography variant="body.sm.regular" color="primary.dark">
+                      {t('IBAN_ACCEPT_DIRECT_DEBIT')}
+                    </Typography>
+                    <Typography variant="body.sm.bold" color="error">
+                      {'*'}
+                    </Typography>
+                  </>
+                }
               />
-            }
-            label={
-              <>
-                <Typography variant="body.sm.regular" color="primary.dark">
-                  {t('IBAN_ACCEPT_DIRECT_DEBIT')}
-                </Typography>
-                <Typography variant="body.sm.bold" color="error">
-                  {'*'}
-                </Typography>
-              </>
-            }
-          />
-        </Box>
-      </Grid>
+            </Box>
+          </Grid>
+        </>
+      )}
+      {values?.new_member?.payment_method === 'credit_card' && (
+        <Grid item xs={12}>
+          <Typography variant="body.md.regular" color="primary.dark">
+            {t('PAYMENT_METHOD_CCARD_INFO')}
+          </Typography>
+        </Grid>
+      )}
       <Grid item xs={12}>
         <TermsDialog
           title={t('SEPA_TITLE')}

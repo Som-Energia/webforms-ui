@@ -2,8 +2,10 @@ import axios from 'axios'
 import postalCode2Ine from '../data/zip-ine.json'
 import dayjs from 'dayjs'
 
-const WEBFORMS_API_URL = document.getElementById('root')?.dataset?.webformsApiUrl
-  ?? import.meta.env.VITE_WEBFORMS_API_URL ?? null // For tests
+const WEBFORMS_API_URL =
+  document.getElementById('root')?.dataset?.webformsApiUrl ??
+  import.meta.env.VITE_WEBFORMS_API_URL ??
+  null // For tests
 
 export const modifyContract = async (data, token) => {
   return axios({
@@ -139,7 +141,9 @@ let cancelTokenCadastralReference
 
 export const checkCadastralReference = async (cadastralReference) => {
   if (typeof cancelTokenCadastralReference !== typeof undefined) {
-    cancelTokenCadastralReference.cancel('Operation canceled due to new request')
+    cancelTokenCadastralReference.cancel(
+      'Operation canceled due to new request'
+    )
   }
 
   cancelTokenCadastralReference = axios.CancelToken.source()
@@ -244,6 +248,9 @@ export const getPrices = async ({
   })
 }
 
+/**
+ * @deprecated
+ */
 export const newContract = async (data) => {
   return axios({
     method: 'POST',
@@ -252,6 +259,32 @@ export const newContract = async (data) => {
   }).then((response) => {
     return response?.data
   })
+}
+
+export const createSignature = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
+    data
+  }).then(({ data }) => data)
+}
+
+export const createContractLead = async (data) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
+    data
+  }).then(({ data }) => data)
+}
+
+export const getContractSignature = async ({ leadId, cups }) => {
+  const query = new URLSearchParams({ cups })
+  const url = `${WEBFORMS_API_URL}/procedures/sign/contract/${leadId}?${query.toString()}`
+
+  return axios({
+    method: 'GET',
+    url
+  }).then(({ data }) => data)
 }
 
 export const modify_tariff = async (data) => {
@@ -412,7 +445,6 @@ export const createGenerationkWhSignature = async (data) => {
   })
 }
 
-
 export const generationkWhContribution = async (data) => {
   return axios({
     method: 'POST',
@@ -465,7 +497,7 @@ export const generationChangeContractPriority = async (data) => {
 export const getNoAssignmentContracts = async () => {
   return axios({
     method: 'GET',
-    url: `/api/investments/unassigned-contracts`,
+    url: `/api/investments/unassigned-contracts`
   }).then((response) => {
     return response?.data
   })
@@ -474,7 +506,7 @@ export const getNoAssignmentContracts = async () => {
 export const getAssignmentContracts = async () => {
   return axios({
     method: 'GET',
-    url: `/api/investments/assignments/`,
+    url: `/api/investments/assignments/`
   }).then((response) => {
     return response?.data
   })
@@ -493,7 +525,7 @@ export const addContractsToAssignments = async (data) => {
 export const deleteContractsFromAssignments = async (id) => {
   return axios({
     method: 'DELETE',
-    url: `/api/investments/assignments/${id}`,
+    url: `/api/investments/assignments/${id}`
   }).then((response) => {
     return response?.data
   })
@@ -502,7 +534,7 @@ export const deleteContractsFromAssignments = async (id) => {
 export const getPowers = async (gurb_code, tarif_name) => {
   return axios({
     method: 'GET',
-    url: `${WEBFORMS_API_URL}/data/gurb/${gurb_code}/${tarif_name}`,
+    url: `${WEBFORMS_API_URL}/data/gurb/${gurb_code}/${tarif_name}`
   }).then((response) => {
     return response?.data
   })
@@ -515,8 +547,8 @@ export const getIndexedTariffPrices = async ({ tariff, geoZone }) => {
     withCredentials: false,
     params: {
       tariff: tariff,
-      geo_zone: geoZone,
-    },
+      geo_zone: geoZone
+    }
   })
     .catch((error) => {
       throw error
@@ -535,8 +567,8 @@ export const getCompensationIndexedPrices = async ({ geoZone }) => {
     url: `${WEBFORMS_API_URL}/data/compensation_indexed_prices`,
     withCredentials: false,
     params: {
-      geo_zone: geoZone,
-    },
+      geo_zone: geoZone
+    }
   })
     .catch((error) => {
       throw error
@@ -546,5 +578,21 @@ export const getCompensationIndexedPrices = async ({ geoZone }) => {
         throw response
       }
       return response?.data?.data
+    })
+}
+
+export const activateLead = async (leadId) => {
+  return axios({
+    method: 'POST',
+    url: `${WEBFORMS_API_URL}/procedures/activate/${leadId}`
+  })
+    .then((response) => {
+      if (response.error !== undefined) {
+        throw response
+      }
+      return response?.data
+    })
+    .catch((error) => {
+      throw error
     })
 }

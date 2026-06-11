@@ -1,11 +1,18 @@
-import { useState, useEffect, useRef, useContext, useCallback, useMemo } from 'react'
+import {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+  useMemo
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { Formik } from 'formik'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
+import { Grid2 as Grid } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
@@ -36,6 +43,7 @@ import NewContractMemberVoluntaryDonation from './pages/NewContractMemberVolunta
 import NewContractMemberPayment from './pages/NewContractMemberPayment'
 import NewContractMemberSummary from './pages/NewContractMemberSummary'
 import IdentifyMemberPersonalData from './pages/IdentifyMemberPersonalData'
+import { NewContractMemberSignature } from './pages/NewContractMemberSignature'
 
 import memberIdentifierValidations from '../NewMember/validations/memberIdentifierValidations'
 import memberPersonalDataValidations from '../NewMember/validations/memberPersonalDataValidations'
@@ -55,13 +63,12 @@ import identifyMemberPersonalDataValidations from './validations/identifyMemberP
 import Loading from '../../components/Loading'
 import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-
 import { newNormalizeContract } from '../../services/newNormalize'
-import { newContract } from '../../services/api'
+import { activateLead, createContractLead } from '../../services/api'
 
-import { usePixelEvent } from "../../hooks/usePixelEvent"
+import { usePixelEvent } from '../../hooks/usePixelEvent'
 import { isCompanyVat } from '../../services/utils'
-
+import { buildInitialValues } from './newContractMember.values'
 
 const ALERT_STEPS = {
   'member-off': [3, 7],
@@ -77,8 +84,8 @@ const NewContractMemberForm = (props) => {
   const mtm_cid = searchParams.get('mtm_cid')
   const mtm_source = searchParams.get('mtm_source')
   const gurb_id = searchParams.get('gurb_id')
-  const [url, setUrl] = useState('')
-  const [data, setData] = useState()
+  const [redsysURL, setRedsysURL] = useState('')
+  const [redsysData, setRedsysData] = useState()
   const formTPV = useRef(null)
   const { tariff, specialCampaign, initStep } = props
 
@@ -90,8 +97,11 @@ const NewContractMemberForm = (props) => {
   const { summaryField, setSummaryField } = useContext(SummaryContext)
   const { trackEvent } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
+  const [signatureCompleted, setSignatureCompleted] = useState(false)
 
-  const [activeStep, setActiveStep] = useState(initStep ? parseInt(initStep) : 0)
+  const [activeStep, setActiveStep] = useState(
+    initStep ? parseInt(initStep) : 0
+  )
   const [validationSteps, setValidationSteps] = useState([
     newContractMemberQuestionValidations
   ])
@@ -99,29 +109,34 @@ const NewContractMemberForm = (props) => {
   const [formStepsName, setFormStepsName] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
   const [prevSteps] = useState(new Stack())
+  const [leadId, setLeadId] = useState()
 
-  const [gurbCode] = useState(() => searchParams.get("gurb-code"));
+  const [gurbCode] = useState(() => searchParams.get('gurb-code'))
   const POP_UP_TIME = 180000
   const ENTERPRISE = 'enterprise'
   const DOMESTIC = 'domestic'
-  const CampaignVAT = import.meta.env.VITE_CAMPAIGN_VAT;
-  const CampaignNumMember = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER;
+  const CampaignVAT = import.meta.env.VITE_CAMPAIGN_VAT
+  const CampaignNumMember = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER
 
   useSyncLanguage(language)
 
   const openPopUp = (values) => {
     const root = document.getElementById('root')
-    const fnString = root.getAttribute("data-popup-function")
+    const fnString = root.getAttribute('data-popup-function')
     if (fnString) {
       try {
         const fn = eval(fnString)
-        const vat = values.has_member === 'member-on' ? values.member.nif : values.new_member.nif
+        const vat =
+          values.has_member === 'member-on'
+            ? values.member.nif
+            : values.new_member.nif
         //TODO: check logic when change var naming
         const isCompany = vat ? isCompanyVat(vat) : null
-        const param = isCompany === null ? '' : isCompany ? ENTERPRISE : DOMESTIC
+        const param =
+          isCompany === null ? '' : isCompany ? ENTERPRISE : DOMESTIC
         fn(param)
       } catch (err) {
-        console.error("Error calling function from data-function (popup)", err)
+        console.error('Error calling function from data-function (popup)', err)
       }
     }
   }
@@ -137,99 +152,10 @@ const NewContractMemberForm = (props) => {
     return () => clearTimeout(timer)
   }, [activeStep])
 
-  const initialValues = useMemo(() => ({
-    cups: '',
-    cups_valid: false,
-    has_member: undefined,
-    member_is_holder: undefined,
-    has_light: undefined,
-    previous_holder: undefined,
-    voluntary_donation: undefined,
-    cadastral_reference: undefined,
-    cadastral_reference_valid: true,
-    supply_point: {
-      cnae: '',
-      supply_point_accepted: false,
-      is_housing: '',
-      attachments: []
-    },
-    supply_point_address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: '',
-      state: { id: '', name: '' },
-      city: { id: '', name: '' }
-    },
-    address: {
-      street: '',
-      number: '',
-      floor: '',
-      door: '',
-      stairs: '',
-      bloc: '',
-      postal_code: '',
-      state: { id: '', name: '' },
-      city: { id: '', name: '' }
-    },
-    member: {
-      number: '',
-      nif: ''
-    },
-    new_member: {
-      nif: '',
-      nif_valid: false,
-      person_type: '',
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      surname1: '',
-      surname2: '',
-      gender: '',
-      birthdate: undefined,
-      email: '',
-      email2: '',
-      phone: '',
-      phone_code: '+34',
-      phone_valid: false,
-      language: `${i18n.language}_ES`,
-      referral_source: '',
-      payment_method: undefined,
-      sepa_accepted: false,
-      iban: undefined,
-      legal_person_accepted: false
-    },
-    contract: {
-      tariff_mode: tariff,
-      power_type: '',
-      power: {
-        power1: '',
-        power2: '',
-        power3: '',
-        power4: '',
-        power5: '',
-        power6: ''
-      },
-      phase: 'mono'
-    },
-    has_selfconsumption: undefined,
-    self_consumption: {
-      cau: '',
-      cau_valid: false,
-      collective_installation: undefined,
-      installation_type: '',
-      technology: 'b11',
-      aux_services: undefined,
-      installation_power: ''
-    },
-    privacy_policy_accepted: false,
-    generic_conditions_accepted: false,
-    statutes_accepted: false,
-    comercial_info_accepted: false
-  }), [i18n.language, tariff])
+  const initialValues = useMemo(
+    () => buildInitialValues(i18n.language, tariff),
+    [i18n.language, tariff]
+  )
 
   const validationSchemasLinkMember = [
     newContractMemberQuestionValidations,
@@ -267,7 +193,11 @@ const NewContractMemberForm = (props) => {
       setFormSteps(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setFormStepsName('NEW_MEMBER_CONTRACT_FORM_SUBSTEPS')
       setMAX_STEP_NUMBER(Object.keys(NEW_MEMBER_CONTRACT_FORM_SUBSTEPS).length)
-    } else if (has_member == 'member-on' || has_member == 'member-link' || has_member == 'campaign-offer') {
+    } else if (
+      has_member == 'member-on' ||
+      has_member == 'member-link' ||
+      has_member == 'campaign-offer'
+    ) {
       setValidationSteps(validationSchemasLinkMember)
       setFormSteps(NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS)
       setFormStepsName('NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS')
@@ -292,11 +222,12 @@ const NewContractMemberForm = (props) => {
       }
     } else {
       if (activeStep > 0) {
-        let stepValue = NextStep[formStepsName][keyByValue(formSteps, activeStep)]
+        const stepValue =
+          NextStep[formStepsName][keyByValue(formSteps, activeStep)]
         next = valueByKey(formSteps, stepValue, formikProps.values)
       } else {
         next = 1
-        if (formikProps.values.has_member == "campaign-offer") {
+        if (formikProps.values.has_member == 'campaign-offer') {
           next = 2
         }
       }
@@ -309,10 +240,11 @@ const NewContractMemberForm = (props) => {
 
   const prevStep = () => {
     let prev = prevSteps.pop()
+    setCompleted(false)
     setActiveStep(Math.max(0, prev))
   }
 
-  const trackSucces = () => {
+  const trackSuccess = () => {
     trackEvent({
       category: 'NewContractMember',
       action: 'newContractMemberFormOk',
@@ -335,34 +267,54 @@ const NewContractMemberForm = (props) => {
     triggerEvent('FormularioCompletado', { status: 'ok' })
   }
 
-  const handlePost = async (values) => {
+  const handleCreateContract = async (values) => {
     trackEvent({
       category: 'Send',
       action: 'sendNewContractMemberClick',
       name: 'send-new-contract-member'
     })
+
     setSending(true)
+    setSignatureCompleted(false)
+
     const data = newNormalizeContract(values, gurbCode)
-    await newContract(data)
+    await createContractLead(data)
       .then((response) => {
         if (response?.state === true) {
-          trackSucces()
-          if (response?.data?.redsys_endpoint) {
-            setData(response?.data)
-            setUrl(response.data.redsys_endpoint)
-          } else {
+          const { redsys_data, lead_id } = response?.data || {}
+          const paymentData = redsys_data?.payment_data
+          const redsysEndpoint = redsys_data?.redsys_endpoint
+
+          if (redsysEndpoint && paymentData) {
+            trackEvent({
+              category: 'NewContractMemberFunnel',
+              action: 'paymentCreated',
+              name: 'new-contract-member-payment-created'
+            })
+            setRedsysData({
+              redsys_endpoint: redsysEndpoint,
+              payment_data: paymentData
+            })
+            setRedsysURL(redsysEndpoint)
+            trackSuccess()
             setCompleted(true)
             setError(false)
+          } else if (lead_id && formSteps['SIGNATURE']) {
+            setLeadId(lead_id)
+            nextStep({ values })
+            setError(false)
+          } else {
+            setCompleted(true)
+            setError(true)
           }
         } else {
           setCompleted(true)
           setError(true)
         }
-      })
-      .catch((error) => {
-        setCompleted(true)
+        })
+      .catch((err) => {
         setError(true)
-        console.error(error)
+        console.log(err)
       })
       .finally(() => {
         setSending(false)
@@ -374,6 +326,42 @@ const NewContractMemberForm = (props) => {
     const alertSteps = ALERT_STEPS[has_member] ?? []
     setHasAlert(alertSteps.includes(activeStep))
   }, [activeStep])
+
+  const handleSignatureSuccess = () => {
+    if (!signatureCompleted) {
+      return
+    }
+
+    if (!leadId) {
+      setError(true)
+      setCompleted(true)
+      return
+    }
+
+    setSending(true)
+    activateLead(leadId)
+      .then(() => {
+        trackSuccess()
+        setError(false)
+      })
+      .catch((err) => {
+        setError(true)
+        console.log(err)
+      })
+      .finally(() => {
+        setCompleted(true)
+        setSending(false)
+      })
+  }
+
+  const handleSignatureCompleted = () => {
+    trackEvent({
+      category: 'NewContractMemberFunnel',
+      action: 'signatureCompleted',
+      name: 'new-contract-member-signature-completed'
+    })
+    setSignatureCompleted(true)
+  }
 
   const getStep = (props, sendTrackEvent) => {
     const { values } = props
@@ -401,8 +389,17 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
         return <NewContractMemberPayment {...trackProps} />
-      } else {
+      } else if (activeStep === 11) {
         return <NewContractMemberSummary {...trackProps} />
+      } else if (activeStep === 12) {
+        return (
+          <NewContractMemberSignature
+            {...props}
+            leadId={leadId}
+            cups={values?.cups}
+            onSuccess={handleSignatureCompleted}
+          />
+        )
       }
     } else {
       if (activeStep === 1) {
@@ -425,23 +422,30 @@ const NewContractMemberForm = (props) => {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
         return <NewContractMemberPayment {...trackProps} />
-      } else {
+      } else if (activeStep === 11) {
         return <NewContractMemberSummary {...trackProps} />
+      } else if (activeStep === 12) {
+        return (
+          <NewContractMemberSignature
+            {...props}
+            leadId={leadId}
+            cups={values?.cups}
+            onSuccess={handleSignatureCompleted}
+          />
+        )
       }
     }
   }
-
-
 
   useEffect(() => {
     formikRef.current.validateForm()
   }, [activeStep])
 
   useEffect(() => {
-    if (url !== '') {
+    if (completed && redsysURL !== '') {
       formTPV.current.submit()
     }
-  }, [url])
+  }, [completed])
 
   useEffect(() => {
     if (summaryField !== undefined) {
@@ -465,14 +469,17 @@ const NewContractMemberForm = (props) => {
     })
   }
 
-  const sendTrackInitEvent = useCallback((id) => {
-    const track_id = gurb_id ? `${id}-gurb-${gurb_id}` : id
-    trackEvent({
-      category: 'NewContractMember',
-      action: 'setNewContractMemberStep',
-      name: `new-contract-member-step-${track_id}`
-    })
-  }, [gurb_id])
+  const sendTrackInitEvent = useCallback(
+    (id) => {
+      const track_id = gurb_id ? `${id}-gurb-${gurb_id}` : id
+      trackEvent({
+        category: 'NewContractMember',
+        action: 'setNewContractMemberStep',
+        name: `new-contract-member-step-${track_id}`
+      })
+    },
+    [gurb_id]
+  )
 
   const customInitialValues = useMemo(() => {
     if (specialCampaign === '15YEARS_CAMPAIGN') {
@@ -488,14 +495,17 @@ const NewContractMemberForm = (props) => {
     return initialValues
   }, [initialValues, specialCampaign])
 
-  if (Object.keys(formSteps).length === 0 && specialCampaign === '15YEARS_CAMPAIGN') {
+  if (
+    Object.keys(formSteps).length === 0 &&
+    specialCampaign === '15YEARS_CAMPAIGN'
+  ) {
     setValidationSchemaAndSteps('campaign-offer')
   }
 
   return (
     <Container
-      data-cy='contract-form'
-      aria-label='contract-form'
+      data-cy="contract-form"
+      aria-label="contract-form"
       maxWidth="md"
       disableGutters={true}
       sx={{
@@ -509,12 +519,12 @@ const NewContractMemberForm = (props) => {
         validationSchema={validationSteps[activeStep]}
         validateOnChange={true}
         validateOnBlur={false}>
-        {(formikProps) => {
-          return sending ? (
+        {(formikProps) =>
+          sending ? (
             <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
           ) : (
             <>
-              {activeStep == 0 ? (
+              {activeStep === 0 ? (
                 <NewContractMemberQuestion
                   formikProps={formikProps}
                   sendTrackEvent={sendTrackInitEvent}
@@ -531,9 +541,59 @@ const NewContractMemberForm = (props) => {
                       />
                     </Box>
                   )}
-                  {completed ? (
+
+                  {!completed && getStep(formikProps, sendTrackEvent)}
+
+                  {!completed && (
+                    <Grid
+                      container
+                      direction="row-reverse"
+                      rowSpacing={2}
+                      sx={{
+                        marginTop: '2rem',
+                        justifyContent: redsysURL ? 'center' : 'space-between',
+                        alignItems: 'center'
+                      }}>
+                      {activeStep !== initStep && (
+                        <Grid item size={{ sm: 2, xs: 12 }}>
+                          <PrevButton
+                            disabled={summaryField !== undefined}
+                            onClick={() => prevStep()}>
+                            {t('PREV')}
+                          </PrevButton>
+                        </Grid>
+                      )}
+                      <Grid item size={{ sm: 2, xs: 12 }} order={-1}>
+                        {activeStep === formSteps['SUMMARY'] ? (
+                          <SubmitButton
+                            disabled={loading || !formikProps.isValid}
+                            onClick={() => handleCreateContract(formikProps.values)}>
+                            {t('NEXT')}
+                          </SubmitButton>
+                        ) : activeStep === formSteps['SIGNATURE'] ? (
+                          <SubmitButton
+                            disabled={loading || !signatureCompleted}
+                            onClick={() => handleSignatureSuccess()}>
+                            {gurbCode ? t('GURB_NEXT_PAYMENT') : t('FINISH')}
+                          </SubmitButton>
+                        ) : (
+                          <NextButton
+                            disabled={
+                              loading ||
+                              !formikProps.isValid ||
+                              activeStep === MAX_STEP_NUMBER
+                            }
+                            onClick={() => nextStep(formikProps)}>
+                            {t('NEXT')}
+                          </NextButton>
+                        )}
+                      </Grid>
+                    </Grid>
+                  )}
+
+                  {completed && (
                     <Box sx={{ mt: 2 }}>
-                      {gurbCode && !error ? (
+                      {gurbCode && !error && (
                         <RedirectUrl
                           title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
                           description={t(
@@ -547,7 +607,9 @@ const NewContractMemberForm = (props) => {
                             'GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT'
                           )}
                         />
-                      ) : (
+                      )}
+
+                      {!gurbCode && (
                         <Result
                           mode={!error ? 'success' : 'failure'}
                           title={
@@ -571,64 +633,22 @@ const NewContractMemberForm = (props) => {
                         </Result>
                       )}
                     </Box>
-                  ) : (
-                    getStep(formikProps, sendTrackEvent)
-                  )}
-                  {!completed && (
-                    <Grid
-                      container
-                      direction="row-reverse"
-                      rowSpacing={2}
-                      sx={{
-                        marginTop: '2rem',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                      }}>
-                      {activeStep !== initStep && (
-                        <Grid item sm={2} xs={12}>
-                          <PrevButton
-                            disabled={
-                              summaryField !== undefined
-                            }
-                            onClick={() => prevStep()}
-                            title={'PREV'}
-                          />
-                        </Grid>
-                      )}
-                      <Grid item sm={2} xs={12} order={-1}>
-                        {activeStep !== MAX_STEP_NUMBER ? (
-                          <NextButton
-                            disabled={
-                              loading ||
-                              !formikProps.isValid ||
-                              activeStep === MAX_STEP_NUMBER
-                            }
-                            onClick={() => nextStep(formikProps)}
-                            title={'NEXT'}
-                          />
-                        ) : (
-                          <SubmitButton
-                            disabled={!formikProps.isValid}
-                            onClick={() => handlePost(formikProps.values)}
-                          />
-                        )}
-                      </Grid>
-                    </Grid>
                   )}
                 </>
               )}
             </>
           )
-        }}
+        }
       </Formik>
-      {data?.payment_data && (
-        <form ref={formTPV} action={data.redsys_endpoint} method="POST">
-          {Object.keys(data.payment_data).map((key) => (
+
+      {redsysData && redsysData.redsys_endpoint && redsysData.payment_data && (
+        <form ref={formTPV} action={redsysData.redsys_endpoint} method="POST">
+          {Object.keys(redsysData.payment_data).map((key) => (
             <input
               key={key}
               type="hidden"
               name={key}
-              value={data.payment_data[key]}
+              value={redsysData.payment_data[key]}
             />
           ))}
         </form>

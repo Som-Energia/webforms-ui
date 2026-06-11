@@ -187,6 +187,34 @@ describe('New Contract with New Member', () => {
     })
   })
 
+  describe('New contract with credit card payment', function () {
+    it('reaches the summary screen before payment gateway', function () {
+      const creditCardPaymentData = {
+        paymentMethod: 'credit_card'
+      }
+
+      cy.contractMemberQuestion('member-off')
+      cy.identifyNewMember(this.data.personalPhysicalData.nif)
+      cy.personalPhysicalDataMember(
+        this.data.personalPhysicalData,
+        this.data.validAddress
+      )
+      cy.newContractIdentifySupplyPoint(
+        this.data.supplyPoint.cups,
+        this.data.supplyPoint.has_light
+      )
+      cy.newContractSupplyPointData(this.data)
+      cy.choosePower({ powers: [2, 3] })
+      cy.selfconsumptionQuestion(true)
+      cy.selfconsumptionData(this.data.selfConsumption)
+      cy.contractMemberHolderQuestion()
+      cy.contractMemberDonationQuestion()
+      cy.contractMemberPaymentData(creditCardPaymentData)
+
+      cy.get('[data-cy="privacy_policy"]').should('exist')
+      cy.contains(this.data.personalPhysicalData.nif).should('exist')
+    })
+
   describe('New Contract: results', () => {
     Cypress.on('uncaught:exception', (error, runnable) => {
       console.error(error)
@@ -220,7 +248,10 @@ describe('New Contract with New Member', () => {
         cy.contractMemberCheckReviewNewMemberStep(
           this.data.personalPhysicalData.nif
         )
-        cy.acceptTermsAndsubmitNewContract(true)
+        cy.acceptTermsAndsubmitNewContractFlow({
+          status: true,
+          cups: this.data.supplyPoint.cups
+        })
       })
     })
 
@@ -247,7 +278,7 @@ describe('New Contract with New Member', () => {
         cy.contractMemberCheckReviewNewMemberStep(
           this.data.personalPhysicalData.nif
         )
-        cy.acceptTermsAndsubmitNewContract(false)
+        cy.acceptTermsAndsubmitNewContractFlow({ status: false })
       })
     })
   })

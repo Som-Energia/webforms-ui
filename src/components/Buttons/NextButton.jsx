@@ -1,12 +1,14 @@
-import { useTranslation } from 'react-i18next'
-
 import Button from '@mui/material/Button'
 import ArrowForward from '@mui/icons-material/ArrowForward'
 import { buttonDark } from './buttonStyles'
 
 function NextButton(props) {
-  const { onClick, disabled, title = "NEXT" } = props
-  const { t } = useTranslation()
+  const {
+    onClick,
+    disabled,
+    endIcon = <ArrowForward sx={{ fontSize: 20 }} />,
+    children
+  } = props
 
   return (
     <Button
@@ -22,10 +24,10 @@ function NextButton(props) {
       type="button"
       data-cy="next"
       variant="contained"
-      endIcon={<ArrowForward sx={{ fontSize: 20 }} />}
+      endIcon={endIcon}
       disabled={disabled}
       onClick={onClick}>
-      {t(title)}
+      {children}
     </Button>
   )
 }

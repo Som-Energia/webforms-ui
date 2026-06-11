@@ -286,6 +286,7 @@
     "PAYMENT_METHOD_IBAN_DESC": "Kosturik gabe kooperatibarentzat",
     "PAYMENT_METHOD_CCARD": "Kreditu-/zordunketa-txartela",
     "PAYMENT_METHOD_CCARD_DESC": "1,80 €-ko kostua kooperatibarentzat",
+    "PAYMENT_METHOD_CCARD_INFO": "Jarraitu sakatzean, ordainketa-pasabidera eramango zaitugu txartel bidezko ordainketa osatzeko.",
     "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/eu/pago-realizado/",
     "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/eu/pago-cancelado/",
     "CONTACT_HELP_URL": "https://eu.support.somenergia.coop/article/472-kooperatibarekin-harremanetan-jartzea?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
