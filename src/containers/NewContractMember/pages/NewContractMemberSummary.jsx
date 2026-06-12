@@ -56,8 +56,8 @@ const NewContractMemberSummary = (props) => {
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
 
-  const [estimatedMonthlykWh, setEstimatedMonthlykWh] = useState({})
-  const [estimatedMonthlyTotalEur, setEstimatedMonthlyTotalEur] = useState({})
+  const [estimatedMonthlykWh, setEstimatedMonthlykWh] = useState(null)
+  const [estimatedMonthlyTotalEur, setEstimatedMonthlyTotalEur] = useState(null)
   const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
@@ -420,12 +420,12 @@ const NewContractMemberSummary = (props) => {
       cnae: values.supply_point.cnae,
       city_id: cityId,
       powers: powers,
-      pricelist_type: isTariffIndexed ? 'index': 'periods'
+      pricelist_type: isTariffIndexed ? 'index' : 'periods'
     })
       .then((response) => {
         const tariffPrices = response?.data['current']
-        const estimatedMonthlykWh=response?.data['estimated_monthly_kwh']
-        const estimatedMonthlyTotalEur=response?.data['estimated_monthly_total_eur']
+        const estimatedMonthlykWh = response?.data['estimated_monthly_kwh']
+        const estimatedMonthlyTotalEur = response?.data['estimated_monthly_total_eur']
 
         setPrices(tariffPrices)
         setEstimatedMonthlykWh(estimatedMonthlykWh)
@@ -517,27 +517,30 @@ const NewContractMemberSummary = (props) => {
           </Grid>
         </Grid>
       )}
-      <Grid item xs={12}>
-        <Divider sx={{ my: 2 }} />
-      </Grid>
-      <Grid item xs={12}>
-        <Stack spacing={2} sx={{
-          color: 'secondary.dark'
-        }}>
-          <Typography variant="body.xs.regular">
-            {t('SIMULATION_PRICES_TITLE')}
-          </Typography>
-          <Box
-            sx={theme.typography['body.xs.regular']}
-            dangerouslySetInnerHTML={{
-              __html: t('SIMULATION_PRICES_BODY', {
-                estimated_monthly_kwh: estimatedMonthlykWh,
-                estimated_monthly_total_eur: estimatedMonthlyTotalEur,
-              })
+      {estimatedMonthlykWh && (
+        <>
+          <Grid item xs={12}>
+            <Divider sx={{ my: 2 }} />
+          </Grid>
+          <Grid item xs={12}>
+            <Stack spacing={2} sx={{
+              color: 'secondary.dark'
             }}>
-          </Box>
-        </Stack>
-      </Grid>
+              <Typography variant="body.xs.regular">
+                {t('SIMULATION_PRICES_TITLE')}
+              </Typography>
+              <Box
+                sx={theme.typography['body.xs.regular']}
+                dangerouslySetInnerHTML={{
+                  __html: t('SIMULATION_PRICES_BODY', {
+                    estimated_monthly_kwh: estimatedMonthlykWh,
+                    estimated_monthly_total_eur: estimatedMonthlyTotalEur,
+                  })
+                }}>
+              </Box>
+            </Stack>
+          </Grid>
+        </>)}
       <Grid item xs={12}>
         <Divider sx={{ my: 2 }} />
       </Grid>
