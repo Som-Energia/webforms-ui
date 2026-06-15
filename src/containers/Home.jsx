@@ -39,7 +39,6 @@ const options = [
   { title: 'Gurb - Pagament contractació social tpv OK', href: `${language}/gurb/gurb-url-ok?gurbCode=${gurbCode}` },
   { title: 'Pagament OK', href: `${language}/pagament-realitzat` },
   { title: 'Pagament KO', href: `${language}/pagament-cancellat` },
-  { title: 'Test de preus de tarifa', href: `/tariff` },
 ]
 
 const Home = (props) => {

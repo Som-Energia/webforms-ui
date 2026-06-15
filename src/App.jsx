@@ -35,7 +35,6 @@ const App = (props) => {
   const Failure = lazy(() => import('./containers/Failure'))
   const Success = lazy(() => import('./containers/Success'))
   const ModifyContract = lazy(() => import('./containers/ModifyContract'))
-  const Tariff = lazy(() => import('./containers/Tariff'))
   const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
   const Indexed = lazy(() => import('./containers/Indexed'))
   const IndexedDailyPrices = lazy(() => import('./containers/IndexedDailyPrices'))
@@ -124,8 +123,6 @@ const App = (props) => {
                     <Home {...props} />
                   </ThemeWrapper>
                 } />
-
-                <Route exact path="/tariff" element={<Tariff {...props} />} />
 
                 <Route
                   exact
