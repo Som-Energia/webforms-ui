@@ -15,7 +15,8 @@ const TermsDialog = ({
   title,
   acceptText = 'I_ACCEPT',
   children,
-  maxWidth = 'lg'
+  maxWidth = 'sm',
+  sx = {}
 }) => {
   const { t } = useTranslation()
 
@@ -32,8 +33,11 @@ const TermsDialog = ({
       <DialogContent
         data-cy="generic_conditions_modal"
         dividers
-        sx={{ fontFamily: 'Outfit', height: "800vh", overflowY: 'auto' }}
-        >
+        sx={{
+          ...{ fontFamily: 'Outfit', overflowY: 'auto' },
+          ...sx
+        }}
+      >
         {children}
       </DialogContent>
       <DialogActions>
@@ -67,7 +71,7 @@ const TermsDialog = ({
           {t(acceptText)}
         </Button>
       </DialogActions>
-    </Dialog>
+    </Dialog >
   )
 }
 
