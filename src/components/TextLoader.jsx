@@ -31,17 +31,15 @@ const TextLoader = props => {
 
   return text === undefined
     ? <Loading />
-    : <div variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }}>
-        {text && (
-          <embed
-            src={text}
-            title="PDF"
-            width="100%"
-            height="100%"
-            style={{ border: "none" }}
-          />
-        )}
-      </div>
+    : <object
+        data={text}
+        title="PDF"
+        type="application/pdf"
+        width="100%"
+        height="100%"
+        style={{ border: "none" }}
+      />
+
 }
 
 export const Test = () => {

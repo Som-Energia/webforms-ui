@@ -10,7 +10,7 @@ import FormHelperText from '@mui/material/FormHelperText'
 
 import Header from '../../components/oficinavirtual/Header'
 import TermsDialog from '../../components/TermsDialog'
-import LegalText from '../../components/LegalText'
+import TextLoader from '../../components/TextLoader'
 
 import IndexedReviewField from './IndexedReviewField'
 import Box from '@mui/material/Box'
@@ -200,7 +200,7 @@ const IndexedReviewData = (props) => {
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}>
-          <LegalText
+          <TextLoader
             documentName={
               isTariffIndexed
                 ? 'general-contract-terms'
