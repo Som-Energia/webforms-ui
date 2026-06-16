@@ -25,7 +25,7 @@
     "INSTALL_TYPE_ATTACHMENTS": "La distribuidora eléctrica solicita obligatoriamente la presentación del boletín eléctrico en el que conste el cambio de tensión efectuado",
     "HELP_INSTALL_TYPE": "<a target=\"_blank\" href=\"{{url}}\">Cómo identificar si una instalación es trifásica o monofásica</a>",
     "HELP_INSTALL_TYPE_URL": "https://es.support.somenergia.coop/article/483-como-puedo-saber-si-tengo-una-instalacion-monofasica-o-trifasica",
-    "POWER_HELPER": "Para agilizar el trámite, indica la potencia actual.<b>Si necesitas hacer un cambio simultáneo de comercializadora y potencia, puedes escribir a comercializacion@somenergia.coop, pero ten en cuenta que se puede retrasar el cambio de compañía.</b>\n",
+    "POWER_HELPER": "Para agilizar el trámite, indica la potencia actual.<br>Si necesitas hacer un cambio simultáneo de comercializadora y potencia, puedes escribir a comercializacion@somenergia.coop, pero ten en cuenta que se puede retrasar el cambio de compañía.\n",
     "HELP_POWER": "<a target=\"_blank\" href=\"{{url}}\">Cómo averiguar la potencia que necesito</a>",
     "HELP_POWER_URL": "https://es.support.somenergia.coop/article/282-como-puedo-saber-la-potencia-que-necesito",
     "CURRENT_POWER": "Indica la potencia ACTUAL de tu contrato",
