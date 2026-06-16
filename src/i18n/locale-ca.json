@@ -622,7 +622,7 @@
     "CLICK_HERE": "Fes clic per pujar",
     "DRAG_AND_DROP_HERE": "o arrossega i deixar anar aquí",
     "TYPE_OF_FILES": "PDF, JPG, JPEG (max. 5MB)",
-    "POWER_HELPER": "Per agilitzar el tràmit, indica la teva potència actual.<b>Si necessites fer un canvi simultani de comercialitzadora i potència, pots escriure a comercialitzacio@somenergia.coop, però tingues en compte que es pot endarrerir el canvi de comercialitzadora.</b>\n",
+    "POWER_HELPER": "Per agilitzar el tràmit, indica la teva potència actual.<br>Si necessites fer un canvi simultani de comercialitzadora i potència, pots escriure a comercialitzacio@somenergia.coop, però tingues en compte que es pot endarrerir el canvi de comercialitzadora.</b>\n",
     "CURRENT_PEAK": "Indica la potència punta actual del teu contracte",
     "CURRENT_VALLEY": "Indica la potència vall actual del teu contracte",
     "CURRENT_POWER": "Indica la potència ACTUAL del teu contracte",
