@@ -32,3 +32,4 @@ Documents curts per carregar només el context necessari abans d'editar codi.
 
 - `README.md`: arrencada, scripts i notes generals.
 - `CHANGES.md`: historial funcional del producte.
+- `AGENTS.md`: convencions de git i normes de treball del projecte.
