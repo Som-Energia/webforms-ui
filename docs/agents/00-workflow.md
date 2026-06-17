@@ -19,6 +19,8 @@ Actuar amb context minim, llegint nomes el que cal per al canvi concret.
 - No assumeixis que un formulari es d'un sol pas: molts fluxos depenen d'`activeStep`, esquemes `Yup` i resum final.
 - No toquis operativa de deploy si no es demana explicitament.
 - Verifica sempre amb el test mes proper al canvi, no nomes amb lectura de codi.
+- Si un canvi deixa desalineat algun fitxer de `docs/agents/*`, actualitza'l dins la mateixa branca.
+- Si l'usuari et demana revisar la documentacio, contrasta els docs amb el codi actual i corregeix el que hagi quedat vell.
 
 ## Verificacio minima
 

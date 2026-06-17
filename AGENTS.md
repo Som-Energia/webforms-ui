@@ -62,3 +62,22 @@ Examples:
 - `🐛 fix: ignore local agent artifacts`
 - `✨ feat: add gurb join return flow`
 - `♻️ refactor: simplify contract step resolution`
+
+## Documentation Maintenance
+
+Update the project context docs proactively when a change makes them stale.
+
+When to update docs automatically:
+
+- A flow changes in a way that affects navigation, branching, submit behavior, or integrations.
+- A new branch/workflow/pattern becomes the preferred team approach.
+- A route, provider setup, theme split, or external integration changes the mental model of the project.
+- Git conventions or team working rules change.
+
+Minimum rule:
+
+- If a code or workflow change would mislead a future agent reading `docs/agents/*`, update the relevant docs in the same branch.
+
+On-demand review rule:
+
+- If the user asks to review documentation, inspect current code and context docs and update any stale sections found.
