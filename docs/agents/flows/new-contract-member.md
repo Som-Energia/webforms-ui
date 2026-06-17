@@ -31,11 +31,13 @@ pas 0: pregunta inicial (`has_member`)
         |   alta nou soci
         |   -> punt subministrament
         |   -> potencia
+        |   -> [si no te llum] donacio -> pagament -> resum
         |   -> [si te llum] autoconsum?
-        |   -> titular
-        |   -> donacio
-        |   -> pagament
-        |   -> resum
+        |        -> [si autoconsum on] detall autoconsum
+        |        -> titular
+        |        -> donacio
+        |        -> pagament
+        |        -> resum
         |
         +--> member-on
         |      |
@@ -43,11 +45,13 @@ pas 0: pregunta inicial (`has_member`)
         |   validar soci existent
         |   -> punt subministrament
         |   -> potencia
-        |   -> [si no te llum] pot saltar cap a donacio
-        |   -> [si te llum] pot passar per autoconsum
-        |   -> identificar dades membre/titular
-        |   -> pagament
-        |   -> resum
+        |   -> [si no te llum] donacio -> pagament -> resum
+        |   -> [si te llum] autoconsum?
+        |        -> [si autoconsum on] detall autoconsum
+        |        -> titular
+        |        -> donacio
+        |        -> pagament
+        |        -> resum
         |
         +--> member-link / campaign-offer
                |
@@ -56,11 +60,16 @@ pas 0: pregunta inicial (`has_member`)
             -> punt subministrament
             -> potencia
             -> [si no te llum] member info
-            -> [si te llum] autoconsum opcional
-            -> titular
-            -> member info
-            -> pagament
-            -> resum
+            |        -> donacio
+            |        -> pagament
+            |        -> resum
+            -> [si te llum] autoconsum?
+                     -> [si autoconsum on] detall autoconsum
+                     -> titular
+                     -> member info
+                     -> donacio
+                     -> pagament
+                     -> resum
 
 resum
   |
