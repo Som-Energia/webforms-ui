@@ -1,7 +1,8 @@
 # Change Log
 
-## unreleased
+## 7.2.6 2026-06-17
 
+- NEW: Add simulation prices section to summary page
 - REF: Update deploy.sh to include npm ci command before build
 - NEW: Add .npmrc to lock package.json npm/node engine
 
