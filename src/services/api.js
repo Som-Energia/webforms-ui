@@ -219,14 +219,11 @@ export const checkMember = async (number, vat) => {
   })
 }
 
-const VAT = '58291270R'
-const CNAE = '9820'
-
 export const getPrices = async ({
   tariff,
   max_power,
-  vat = VAT,
-  cnae = CNAE,
+  vat,
+  cnae,
   city_id
 }) => {
   return axios({
