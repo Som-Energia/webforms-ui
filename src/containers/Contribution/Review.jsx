@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Box from '@mui/material/Box'
@@ -9,6 +9,8 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import StepHeader from '../../components/OldComponents/StepHeader'
+import TermsDialog from '../../components/TermsDialog'
+import PDFLoader from '../../components/PDFLoader/PDFLoader'
 
 import { languages, NEW_MEMBER_CONTRIB_AMOUNT } from '../../services/utils'
 
@@ -24,9 +26,21 @@ const Review = (props) => {
   const { t } = useTranslation()
   const { values, setFieldValue } = props
 
+  const [open, setOpen] = useState(false)
+
   const handleClickTerms = (event) => {
     event.preventDefault()
-    setFieldValue('terms_accepted', !values?.terms_accepted)
+    setOpen(true)
+  }
+
+  const handleAccept = () => {
+    setOpen(false)
+    setFieldValue('terms_accepted', true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setFieldValue('terms_accepted', false)
   }
 
   const ReviewField = ({ label, value }) => {
@@ -161,6 +175,20 @@ const Review = (props) => {
         </Grid>
       </Grid>
 
+      <TermsDialog
+        title={t('GENERAL_TERMS')}
+        open={open}
+        onAccept={handleAccept}
+        onClose={handleClose}
+        maxWidth='lg'
+        sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}
+      >
+        <PDFLoader
+          language={values?.language}
+          documentName={'general-voluntari-contribution-contract-terms'}
+        />
+      </TermsDialog>
+
       <Box mt={2} mb={1}>
         <FormControlLabel
           control={
@@ -168,18 +196,9 @@ const Review = (props) => {
               checked={values?.terms_accepted}
               onClick={handleClickTerms}
               color="primary"
-              value={true}
             />
           }
-          label={
-            <label
-              dangerouslySetInnerHTML={{
-                __html: t('CONTRIBUTION_GENERAL_TERMS', {
-                  url: t('CONTRIBUTION_GENERAL_TERMS_URL')
-                })
-              }}
-            />
-          }
+          label={t('CONTRIBUTION_GENERAL_TERMS')}
         />
       </Box>
     </>
