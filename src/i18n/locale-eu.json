@@ -861,5 +861,5 @@
     "15YEARS_CAMPAIGN": "15 urte ospatzen ditugu!",
     "15YEARS_DESCRIPTION": "100 ordez 0 €: kontratatu argia bazkidetu gabe",
     "SIMULATION_PRICES_TITLE": "Prezio estimatua",
-    "SIMULATION_PRICES_BODY": ""
+    "SIMULATION_PRICES_BODY": "Zure potentzia berbera duen kontratu baten hileko batez besteko kontsumoa da {{ estimated_monthly_kwh }} kWh. Aukeratutako tarifa, aurreko hilabeteko batez besteko prezioa eta indarreko zergak kontuan hartuta, kostu estimatua izango litzateke {{ estimated_monthly_total_eur }} €. Honako hau zure hileko fakturaren gutxi gorabeherako estimazio bat da eta aldatu daiteke soberakinen konpentsazioaren, kontsumo-profilen eta beste aldagai batzuen arabera. Ez da Som Energiaren fakturaren azken zenbateko erreala. Zure azken kontsumoaren kalkulu konparatibo zehatzagoa egin nahi baduzu, idatzi <a target=\"_blank\" href=\"mailto:hola@somenergia.coop\">hola@somenergia.coop</a> helbidera eta atsegin handiz lagunduko dizugu."
 }
