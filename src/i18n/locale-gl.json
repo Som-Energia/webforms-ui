@@ -860,5 +860,5 @@
     "15YEARS_CAMPAIGN": "Celebramos 15 anos!",
     "15YEARS_DESCRIPTION": "De 100 a 0 €: contrata a luz sen te asociares",
     "SIMULATION_PRICES_TITLE": "",
-    "SIMULATION_PRICES_BODY": ""
+    "SIMULATION_PRICES_BODY": "O consumo mensual medio dun contrato coa túa potencia é de {{ estimated_monthly_kwh }} kWh. Tendo en conta a tarifa escollida, o prezo medio do mes pasado e os impostos vixentes, o custo estimado sería de {{ estimated_monthly_total_eur }} €. Este importe é unha estimación aproximada da túa facturación mensual e pode variar en función da compensación de excedentes, os perfís de consumo e outras variábeis. Non reflicte o importe real final da túa factura con Som Energia. Para unha comparativa máis axustada ao teu consumo final, escribe a <a target=\"_blank\" href=\"mailto:hola@somenergia.coop\">hola@somenergia.coop</a> e axudarémoste encantadas."
 }
