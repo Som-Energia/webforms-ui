@@ -6,14 +6,14 @@ import { useTranslation } from 'react-i18next'
 const PDFLoader = (props) => {
   const { i18n } = useTranslation()
   const {
+    folder,
     documentName,
     language = `${i18n.language}_ES`,
   } = props
   const [text, setText] = React.useState()
 
   React.useEffect(() => {
-    // TODO: upload file in each language folder ${import.meta.env.VITE_BACKOFFICE_URL}/storage/app/media/DOCS/${language.slice(0,2)}/${documentName}.pdf
-    const url = `${import.meta.env.VITE_BACKOFFICE_URL}/storage/app/media/DOCS/Condicions-Generals-contracte-subministrament-energia-electrica-SomEnergia.pdf`
+    const url = `${import.meta.env.VITE_BACKOFFICE_URL}/storage/app/media/DOCS/legal/${language.slice(0,2)}/${folder}/${documentName}.pdf`
     setText(undefined)
     axios({
       method: 'GET',

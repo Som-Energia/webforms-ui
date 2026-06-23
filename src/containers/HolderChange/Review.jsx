@@ -219,10 +219,15 @@ const Review = (props) => {
         >
           <PDFLoader
             language={values?.holder?.language}
+            folder={
+              values?.supply_point?.tariff_type === 'index'
+                ? 'CCGG_indexada'
+                : 'CCGG'
+            }
             documentName={
               values?.supply_point?.tariff_type === 'index'
-                ? 'general-and-indexed-specific-terms'
-                : 'general-contract-terms'
+                ? t('general-and-indexed-specific-terms')
+                : t('general-contract-terms')
             } />
         </TermsDialog>
 

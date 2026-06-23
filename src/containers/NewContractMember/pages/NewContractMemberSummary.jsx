@@ -670,10 +670,15 @@ const NewContractMemberSummary = (props) => {
           maxWidth="lg"
           sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}>
           <PDFLoader
+            folder={
+              isTariffIndexed
+                ? 'CCGG_indexada'
+                : 'CCGG'
+            }
             documentName={
               isTariffIndexed
-                ? 'general-and-indexed-specific-terms'
-                : 'general-contract-terms'
+                ? t('general-and-indexed-specific-terms')
+                : t('general-contract-terms')
             }
           />
         </TermsDialog>

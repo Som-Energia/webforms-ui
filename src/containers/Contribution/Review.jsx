@@ -185,7 +185,8 @@ const Review = (props) => {
       >
         <PDFLoader
           language={values?.language}
-          documentName={'general-voluntari-contribution-contract-terms'}
+          folder={'Capital_Social'}
+          documentName={t('general-voluntari-contribution-contract-terms')}
         />
       </TermsDialog>
 

@@ -202,10 +202,15 @@ const IndexedReviewData = (props) => {
           maxWidth='lg'
           sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}>
           <PDFLoader
+            folder={
+              isTariffIndexed
+                ? 'CCGG'
+                : 'CCGG_indexada'
+            }
             documentName={
               isTariffIndexed
-                ? 'general-contract-terms'
-                : 'general-and-indexed-specific-terms'
+                ? t('general-contract-terms')
+                : t('general-and-indexed-specific-terms')
             }
           />
         </TermsDialog>
