@@ -862,6 +862,6 @@
     "SIMULATION_PRICES_BODY": "O consumo mensual medio dun contrato coa túa potencia é de {{ estimated_monthly_kwh }} kWh. Tendo en conta a tarifa escollida, o prezo medio do mes pasado e os impostos vixentes, o custo estimado sería de {{ estimated_monthly_total_eur }} €. Este importe é unha estimación aproximada da túa facturación mensual e pode variar en función da compensación de excedentes, os perfís de consumo e outras variábeis. Non reflicte o importe real final da túa factura con Som Energia. Para unha comparativa máis axustada ao teu consumo final, escribe a <a target=\"_blank\" href=\"mailto:hola@somenergia.coop\">hola@somenergia.coop</a> e axudarémoste encantadas.",
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Declaro que a persoa titular da conta bancaria, eu mesma ou unha terceira persoa, outorgou o seu consentimento expreso para a domiciliación bancaria correspondente á achega voluntaria ao capital social da cooperativa, polo que autoriza o cargo do importe correspondente na conta indicada.",
     "general-voluntari-contribution-contract-terms":"Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
-    "general-and-indexed-specific-terms":"Condicions_especificas_da_tarifa_indexada_SomEnergia",
+    "general-and-indexed-specific-terms":"Condicions-Xerais-e-especificas-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condicions-Xerais-contrato-subministracion-enerxia-electrica-SomEnergia"
 }
