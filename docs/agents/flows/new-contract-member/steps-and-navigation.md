@@ -20,7 +20,7 @@ La complexitat real del flux és la navegació. No és un `activeStep + 1` norma
 
 ## Branques que realment salten passos
 
-- `campaign-offer` entra amb tractament especial i pot començar directament al pas 2.
+- `campaign-offer` nomes entra per la URL dedicada de campanya i comenca directament al pas 2.
 - `has_light === 'light-off'` pot saltar parts del flux i canvia el procés final.
 - `has_selfconsumption !== 'selfconsumption-on'` evita el pas de detall d'autoconsum.
 - a la família `member-on`, alguns camins van directament a `DONATION` i eviten `MEMBER_INFO`.

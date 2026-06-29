@@ -57,6 +57,8 @@ pas 0: pregunta inicial (`has_member`)
                |
                v
             validar soci patrocinador
+            (`campaign-offer` nomes entra des de la URL dedicada
+            de la campanya 15 anys)
             -> punt subministrament
             -> potencia
             -> [si no te llum] member info
