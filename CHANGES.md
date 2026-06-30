@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.2.7 2026-06-30
+
+- Removed 15 years campaing in base contract form
+
 ## 7.2.6 2026-06-17
 
 - NEW: Add simulation prices section to summary page
