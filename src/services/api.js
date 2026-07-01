@@ -584,7 +584,7 @@ export const getCompensationIndexedPrices = async ({ geoZone }) => {
 export const activateLead = async (leadId) => {
   return axios({
     method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/activate/${leadId}`
+    url: `${WEBFORMS_API_URL}/procedures/leads/${leadId}/activate`
   })
     .then((response) => {
       if (response.error !== undefined) {
