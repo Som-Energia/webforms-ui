@@ -296,8 +296,6 @@ const NewContractMemberForm = (props) => {
               payment_data: paymentData
             })
             setRedsysURL(redsysEndpoint)
-            trackSuccess()
-            setCompleted(true)
             setError(false)
           } else if (lead_id && formSteps['SIGNATURE']) {
             setLeadId(lead_id)
@@ -442,10 +440,10 @@ const NewContractMemberForm = (props) => {
   }, [activeStep])
 
   useEffect(() => {
-    if (completed && redsysURL !== '') {
+    if (redsysURL !== '' && redsysData && formTPV.current) {
       formTPV.current.submit()
     }
-  }, [completed])
+  }, [redsysData, redsysURL])
 
   useEffect(() => {
     if (summaryField !== undefined) {
@@ -520,7 +518,7 @@ const NewContractMemberForm = (props) => {
         validateOnChange={true}
         validateOnBlur={false}>
         {(formikProps) =>
-          sending ? (
+          sending || (redsysURL !== '' && !completed) ? (
             <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
           ) : (
             <>
