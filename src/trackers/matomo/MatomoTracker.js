@@ -37,6 +37,7 @@ class MatomoTracker {
   }
 
   pushTag({ event, componentName }) {
+    window._mtm = window._mtm || []
     window._mtm.push({
       event,
       componentName

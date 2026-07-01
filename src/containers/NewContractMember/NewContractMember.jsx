@@ -88,7 +88,7 @@ const NewContractMemberForm = (props) => {
 
   const { loading } = useContext(LoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
-  const { trackEvent } = useContext(MatomoContext)
+  const { trackEvent, pushTag } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
 
   const [activeStep, setActiveStep] = useState(initStep ? parseInt(initStep) : 0)
@@ -333,6 +333,10 @@ const NewContractMemberForm = (props) => {
       })
     }
     triggerEvent('FormularioCompletado', { status: 'ok' })
+    pushTag({
+      event: 'lead',
+      componentName: 'FormulariContractacio'
+    })
   }
 
   const handlePost = async (values) => {
@@ -448,6 +452,13 @@ const NewContractMemberForm = (props) => {
       setActiveStep(summaryField)
     }
   }, [summaryField])
+
+  useEffect(() => {
+    pushTag({
+      event: 'begin_checkout',
+      componentName: 'FormulariContractacio'
+    })
+  }, [])
 
   useEffect(() => {
     trackEvent({
