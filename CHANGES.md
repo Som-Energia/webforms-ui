@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
+
 ## 7.2.7 2026-06-30
 
 - Removed 15 years campaing in base contract form

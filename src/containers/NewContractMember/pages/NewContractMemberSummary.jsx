@@ -17,7 +17,7 @@ import Divider from '@mui/material/Divider'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import TermsDialog from '../../../components/TermsDialog'
-import LegalText from '../../../components/LegalText'
+import PDFLoader from '../../../components/PDFLoader/PDFLoader'
 
 import { getPrices } from '../../../services/api'
 import { contractProcess } from '../../../services/newNormalize'
@@ -210,7 +210,7 @@ const NewContractMemberSummary = (props) => {
       }
     ]
 
-    if (['member-on','member-link', 'campaign-offer'].includes(values.has_member)) {
+    if (['member-on', 'member-link', 'campaign-offer'].includes(values.has_member)) {
       paymentFields.shift()
     }
     return paymentFields
@@ -667,12 +667,18 @@ const NewContractMemberSummary = (props) => {
           open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
-          maxWidth="sm">
-          <LegalText
+          maxWidth="lg"
+          sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}>
+          <PDFLoader
+            folder={
+              isTariffIndexed
+                ? 'CCGG_indexada'
+                : 'CCGG'
+            }
             documentName={
               isTariffIndexed
-                ? 'general-and-indexed-specific-terms'
-                : 'general-contract-terms'
+                ? t('general-and-indexed-specific-terms')
+                : t('general-contract-terms')
             }
           />
         </TermsDialog>
