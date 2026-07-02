@@ -287,7 +287,7 @@ const NewContractMemberForm = (props) => {
 
           if (redsysEndpoint && paymentData) {
             trackEvent({
-              category: 'NewContractMemberFunnel',
+              category: 'NewContractMember',
               action: 'paymentCreated',
               name: 'new-contract-member-payment-created'
             })
@@ -354,7 +354,7 @@ const NewContractMemberForm = (props) => {
 
   const handleSignatureCompleted = () => {
     trackEvent({
-      category: 'NewContractMemberFunnel',
+      category: 'NewContractMember',
       action: 'signatureCompleted',
       name: 'new-contract-member-signature-completed'
     })

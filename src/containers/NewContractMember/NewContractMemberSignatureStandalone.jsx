@@ -34,7 +34,7 @@ const NewContractMemberSignatureStandalone = () => {
 
   useEffect(() => {
     trackEvent({
-      category: 'NewContractMemberFunnel',
+      category: 'NewContractMember',
       action: 'paymentCompleted',
       name: 'new-contract-member-payment-completed'
     })
@@ -69,7 +69,7 @@ const NewContractMemberSignatureStandalone = () => {
 
   const handleSignatureCompleted = () => {
     trackEvent({
-      category: 'NewContractMemberFunnel',
+      category: 'NewContractMember',
       action: 'signatureCompleted',
       name: 'new-contract-member-signature-completed'
     })
@@ -82,7 +82,7 @@ const NewContractMemberSignatureStandalone = () => {
     }
 
     trackEvent({
-      category: 'NewContractMemberFunnel',
+      category: 'NewContractMember',
       action: 'signatureCreation',
       name: 'new-contract-member-signature-creation'
     })
