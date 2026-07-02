@@ -1,8 +1,10 @@
 # Change Log
 
-## unreleased
+## 7.3.0 2026-07-02
 
-- Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
+- NEW: Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
+- NEW: Add Matomo Tag Manager trackers
+- REF: Update contract form component to render with new lading path for 'totquisqui' campaign
 
 ## 7.2.7 2026-06-30
 
