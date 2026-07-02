@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
+
 ## 7.2.7 2026-06-30
 
 - Removed 15 years campaing in base contract form
@@ -9,7 +13,6 @@
 - NEW: Add simulation prices section to summary page
 - REF: Update deploy.sh to include npm ci command before build
 - NEW: Add .npmrc to lock package.json npm/node engine
-- Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
 
 ## 7.2.3 2026-06-02
 
