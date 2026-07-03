@@ -864,5 +864,7 @@
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Adierazten dut banku-kontuaren titularrak, nik neuk edo hirugarren batek, bere esanbidezko adostasuna eman duela Kooperatibaren kapital sozialera borondatezko ekarpena bere banku-kontuan helbideratzeko, adierazitako kontuan dagokion zenbatekoa zorduntzea baimenduta.",
     "general-voluntari-contribution-contract-terms":"Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
     "general-and-indexed-specific-terms":"Tarifa-indexatuaren-berariazko-eta-orokorrak-baldintzak-SomEnergia",
-    "general-contract-terms": "Energia-elektrikoaren-hornidura-kontratuaren-Baldintza-Orokorrak-SomEnergia"
+    "general-contract-terms": "Energia-elektrikoaren-hornidura-kontratuaren-Baldintza-Orokorrak-SomEnergia",
+    "PAYMENT_OK_DESCRIPTION": "Gutxi barru, mezu elektroniko bat jasoko duzu adierazitako helbidean. Mezuan zure bazkide-zenbakia aurkituko duzu, eta ekarpena gauzatu dela konfirmatuko dizugu.",
+    "PAYMENT_KO_DESCRIPTION": "Une honetan, ez dago eskaerarik aribidean. Jar zaitez gurekin harremanetan <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Eskerrik aska."
 }
