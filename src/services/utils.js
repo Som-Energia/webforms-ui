@@ -430,9 +430,6 @@ export const newNormalizeMember = (data) => {
 
   finalMember.payment_iban = data.new_member.iban;
 
-  finalMember.urlok = data.urlok
-  finalMember.urlko = data.urlko
-
   if (data.new_member.person_type === 'physic-person') {
     finalMember.cognom = `${data.new_member.surname1} ${data.new_member.surname2}`.trim()
     finalMember.birthdate =
@@ -479,8 +476,6 @@ export const normalizeMember = (data) => {
         : PAYMENT_METHOD_PAYMENT_ORDER
 
   finalMember.payment_iban = data.payment.iban
-  finalMember.urlok = data.urlok
-  finalMember.urlko = data.urlko
 
   if (data.member.isphisical) {
     const surnames = `${data.member.surname1} ${data.member.surname2}`
