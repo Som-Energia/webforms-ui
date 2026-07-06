@@ -793,7 +793,7 @@
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_INDEXED_TARIFF_BODY": "Opción más variable. El precio cambia cada hora según el mercado mayorista. A las 15 h se publican los precios del día siguiente, lo que permite planificar los consumos a las horas más baratas.",
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT": "Ver más información sobre las tarifas",
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TARIFF_LINK_TEXT_URL": "",
-    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY": "Para poder contratar GURB, primero, tienes que contratar la luz con Som Energia. Escoge la tarifa que prefieras y completa el formulario que te aparecerá. Después, podrás acabar de hacer la contratación del servicio GURB.",
+    "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY": "Para poder contratar GURB, primero tienes que contratar la luz con Som Energia. Escoge la tarifa que prefieras y completa el formulario que te aparecerá. Después, podrás acabar de hacer la contratación del servicio GURB.",
     "GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE": "Escoge qué tarifa quieres contratar:",
     "GURB_REQUIREMENTS_RESULT_TITLE_NEW_MEMBER": "¡Ya has escogido tu tarifa!",
     "GURB_REQUIREMENTS_RESULT_TITLE_EXISTING_MEMBER": "¡Ya casi lo tienes!",
@@ -862,7 +862,7 @@
     "15YEARS_DESCRIPTION": "De 100 a 0 €: contrata la luz sin asociarte",
     "SIMULATION_PRICES_TITLE": "Precio estimado",
     "SIMULATION_PRICES_BODY": "El consumo mensual medio de un contrato con tu potencia es de {{ estimated_monthly_kwh }} kWh. Teniendo en cuenta la tarifa escogida, el precio medio del mes pasado y los impuestos vigentes, el coste estimado sería de {{ estimated_monthly_total_eur }} €. Este importe es una estimación orientativa de tu facturación mensual y puede variar según la compensación de excedentes, perfiles de consumo y otras variables. No refleja el importe real final de tu factura a Som Energia. Para una comparativa más ajustada a tu consumo final, escribe a <a target=\"_blank\" href=\"mailto:hola@somenergia.coop\">hola@somenergia.coop</a> y te ayudaremos encantadas.",
-    "general-voluntari-contribution-contract-terms":"Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
-    "general-and-indexed-specific-terms":"Condiciones-Generales-y-especificas-tarifa-indexada-SomEnergia",
+    "general-voluntari-contribution-contract-terms": "Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
+    "general-and-indexed-specific-terms": "Condiciones-Generales-y-especificas-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condiciones-Generales-contrato-suministro-energia-electrica-SomEnergia"
 }
