@@ -14,8 +14,8 @@ const SignatureIframe = ({
   postData,
   textRecommendation,
   textInfo,
-  onSignaturitCompleted = () => { },
-  onCreateSignature = () => { }
+  onSignaturitCompleted = () => {},
+  onCreateSignature = () => {}
 }) => {
   const { t } = useTranslation()
   const [signaturitResponseURL, setSignaturitResponseURL] = useState('')
@@ -43,24 +43,29 @@ const SignatureIframe = ({
     return () => window.removeEventListener('message', signaturitHook)
   }, [signaturitHook])
 
-  useEffect(() => {
-    if (!postData) {
-      return
-    }
+  useEffect(
+    () => {
+      if (!postData) {
+        return
+      }
 
-    apiFunction(postData)
-      .then(({ data }) => {
-        setSignaturitResponseURL(data?.signaturit_url)
-        onCreateSignature(data)
-      })
-      .catch((err) => {
-        setError(true)
-        console.log(err)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [postData])
+      apiFunction(postData)
+        .then(({ data }) => {
+          setSignaturitResponseURL(data?.signaturit_url)
+          onCreateSignature(data)
+        })
+        .catch((err) => {
+          setError(true)
+          console.log(err)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    },
+    [
+      /* empty prevents N re-renders calls */
+    ]
+  )
 
   return (
     <>
