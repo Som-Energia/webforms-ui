@@ -119,6 +119,11 @@ export const newNormalizeContract = (data, gurbCode) => {
     finalContract['sepa_accepted'] = data.new_member.sepa_accepted // TODO: new_member warning!
   }
 
+  if (paymentType === 'tpv') {
+    finalContract['payment_authorization_accepted'] =
+      data.new_member.payment_authorization_accepted
+  }
+
   if (data.has_selfconsumption == 'selfconsumption-on') {
     finalContract['self_consumption'] = normalizeSelfconsumption(
       data.self_consumption

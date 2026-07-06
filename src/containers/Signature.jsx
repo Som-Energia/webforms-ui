@@ -60,7 +60,7 @@ const SignatureIframe = ({
       .finally(() => {
         setLoading(false)
       })
-  }, [apiFunction, onCreateSignature, postData])
+  }, [postData])
 
   return (
     <>
