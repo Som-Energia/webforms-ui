@@ -326,9 +326,10 @@ const A3_periods_has_light = {
       code: random_number,
       vat: random_nif
     },
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     privacy_conditions: true,
     sepa_accepted: true,
+    signature: true,
     statutes_accepted: true
   }
 }
@@ -526,7 +527,8 @@ const paymentTPV = {
     },
     new_member: {
       ...client.empty,
-      payment_method: 'credit_card'
+      payment_method: 'credit_card',
+      payment_authorization_accepted: true
     },
     contract: {
       tariff_mode: 'periods',
@@ -548,6 +550,7 @@ const paymentTPV = {
     linked_member: 'already_member',
     contract_info: contract_info_c1_20TD,
     payment_type: 'tpv',
+    payment_authorization_accepted: true,
     donation: false,
     signature: true,
     linked_member_info: {
