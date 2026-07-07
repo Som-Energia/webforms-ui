@@ -689,7 +689,6 @@
     "IBAN_EXAMPLE": "Ejemplo: ES11 2222 3333 4444 5555 6666",
     "PAYMENT_METHOD_QUESTION": "Selecciona cómo quieres realizar el pago para asociarte",
     "IBAN_PAYMENT_QUESTION_OPTION": "Utiliza el IBAN indicado arriba",
-    "MEMBER_PAYMENT_EXPLANATION": "Para asociarte tienes que realizar un pago único de 100 €",
     "NEW_MEMBER_SUMMARY_PROCESS": "Alta de nueva persona socia",
     "TECHNICAL_DATA_SUMMARY": "Datos técnicos",
     "CURRENT": "Actual",

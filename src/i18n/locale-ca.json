@@ -715,7 +715,6 @@
     "IBAN_EXPLANATION": "Servirà per fer el cobrament de les factures del llum al teu compte.",
     "PAYMENT_METHOD_QUESTION": "Selecciona com vols fer el pagament per associar-te",
     "IBAN_PAYMENT_QUESTION_OPTION": "Utilitza l'IBAN indicat a dalt",
-    "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€",
     "NEW_MEMBER_SUMMARY_PROCESS": "Alta de nova persona sòcia",
     "TECHNICAL_DATA_SUMMARY": "Dades tècniques",
     "CURRENT": "Actual",

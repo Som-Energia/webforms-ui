@@ -651,7 +651,6 @@
     "IBAN_EXPLANATION": "Servirá para realizar o cobramento das facturas da luz na túa conta.",
     "PAYMENT_METHOD_QUESTION": "Selecciona como queres realizar o pagamento para te asociar",
     "IBAN_PAYMENT_QUESTION_OPTION": "Emprega o IBAN indicado arriba",
-    "MEMBER_PAYMENT_EXPLANATION": "Para te asociar, debes realizar un pagamento único de 100 €",
     "CIF": "CIF",
     "PAYMENT_INFO": "Pagamento",
     "SUMMARY": "Confirmar os datos",

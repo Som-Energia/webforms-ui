@@ -131,7 +131,6 @@ const PaymentMethod = (props) => {
       <Grid item xs={12}>
         <InputTitle
           text={t('PAYMENT_METHOD_QUESTION')}
-          description={t('MEMBER_PAYMENT_EXPLANATION')}
           required={true}
         />
       </Grid>
