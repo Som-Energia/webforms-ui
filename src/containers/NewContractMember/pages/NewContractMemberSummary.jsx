@@ -9,13 +9,15 @@ import Button from '@mui/material/Button'
 
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import TermsDialog from '../../../components/TermsDialog'
-import LegalText from '../../../components/LegalText'
+import PDFLoader from '../../../components/PDFLoader/PDFLoader'
 
 import { getPrices } from '../../../services/api'
 import { contractProcess } from '../../../services/newNormalize'
@@ -53,6 +55,9 @@ const NewContractMemberSummary = (props) => {
 
   const [loading, setLoading] = useState(false)
   const [prices, setPrices] = useState({})
+
+  const [estimatedMonthlykWh, setEstimatedMonthlykWh] = useState(null)
+  const [estimatedMonthlyTotalEur, setEstimatedMonthlyTotalEur] = useState(null)
   const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
@@ -210,7 +215,7 @@ const NewContractMemberSummary = (props) => {
       }
     ]
 
-    if (['member-on','member-link', 'campaign-offer'].includes(values.has_member)) {
+    if (['member-on', 'member-link', 'campaign-offer'].includes(values.has_member)) {
       paymentFields.shift()
     }
 
@@ -417,6 +422,9 @@ const NewContractMemberSummary = (props) => {
     )
 
     const cityId = values?.supply_point_address?.city?.id || null
+    const powers = powerFields.map(
+      (power) => String(Math.round(Number(power) * THOUSANDS_CONVERSION_FACTOR))
+    )
 
     getPrices({
       tariff:
@@ -424,11 +432,18 @@ const NewContractMemberSummary = (props) => {
       max_power: maxPower,
       vat: values.new_member?.nif ? values.new_member.nif : values.member.nif,
       cnae: values.supply_point.cnae,
-      city_id: cityId
+      city_id: cityId,
+      powers: powers,
+      pricelist_type: isTariffIndexed ? 'index' : 'periods'
     })
       .then((response) => {
         const tariffPrices = response?.data['current']
+        const estimatedMonthlykWh = response?.data['estimated_monthly_kwh']
+        const estimatedMonthlyTotalEur = response?.data['estimated_monthly_total_eur']
+
         setPrices(tariffPrices)
+        setEstimatedMonthlykWh(estimatedMonthlykWh)
+        setEstimatedMonthlyTotalEur(estimatedMonthlyTotalEur)
         setLoading(false)
       })
       .catch((error) => {
@@ -438,9 +453,11 @@ const NewContractMemberSummary = (props) => {
   }, [
     values.contract.power,
     values.contract.power_type,
-    values.new_member.nif,
+    values.new_member?.nif,
+    values.member?.nif,
     values.supply_point.cnae,
-    values?.supply_point_address?.city?.id
+    values?.supply_point_address?.city?.id,
+    isTariffIndexed
   ])
 
   const handleCheckboxChange = async (event, fieldName) => {
@@ -514,21 +531,48 @@ const NewContractMemberSummary = (props) => {
           </Grid>
         </Grid>
       )}
+      {estimatedMonthlykWh && (
+        <>
+          <Grid item xs={12}>
+            <Divider sx={{ my: 2 }} />
+          </Grid>
+          <Grid item xs={12}>
+            <Stack spacing={2} sx={{
+              color: 'secondary.dark'
+            }}>
+              <Typography variant="body.xs.regular">
+                {t('SIMULATION_PRICES_TITLE')}
+              </Typography>
+              <Box
+                sx={theme.typography['body.xs.regular']}
+                dangerouslySetInnerHTML={{
+                  __html: t('SIMULATION_PRICES_BODY', {
+                    estimated_monthly_kwh: estimatedMonthlykWh,
+                    estimated_monthly_total_eur: estimatedMonthlyTotalEur,
+                  })
+                }}>
+              </Box>
+            </Stack>
+          </Grid>
+        </>)}
       <Grid item xs={12}>
         <Divider sx={{ my: 2 }} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body2">
-          {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography
-          variant="body2"
-          dangerouslySetInnerHTML={{
-            __html: t('SUMMARY_OTHER_CONCEPTS_BODY')
-          }}
-        />
+        <Stack spacing={2} sx={{
+          color: 'secondary.dark'
+        }}>
+          <Typography variant="body.xs.regular">
+            {t('SUMMARY_OTHER_CONCEPTS_TITLE')}
+          </Typography>
+          <Box
+            component="ul"
+            sx={theme.typography['body.xs.regular']}
+            dangerouslySetInnerHTML={{
+              __html: t('SUMMARY_OTHER_CONCEPTS_BODY')
+            }}>
+          </Box>
+        </Stack>
       </Grid>
       <Grid item xs={12}>
         <Divider sx={{ my: 2 }} />
@@ -637,12 +681,18 @@ const NewContractMemberSummary = (props) => {
           open={openGeneralTermsDialog}
           onAccept={handleAcceptGeneralTerms}
           onClose={handleCloseGeneralTerms}
-          maxWidth="sm">
-          <LegalText
+          maxWidth="lg"
+          sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}>
+          <PDFLoader
+            folder={
+              isTariffIndexed
+                ? 'CCGG_indexada'
+                : 'CCGG'
+            }
             documentName={
               isTariffIndexed
-                ? 'general-and-indexed-specific-terms'
-                : 'general-contract-terms'
+                ? t('general-and-indexed-specific-terms')
+                : t('general-contract-terms')
             }
           />
         </TermsDialog>

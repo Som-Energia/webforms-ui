@@ -390,8 +390,7 @@
     "CONTRIBUTION_AMOUNT": "Ekarpena",
     "CONTRIBUTION_AMOUNT_HELPER": "Borondatezko ekarpena kapital sozialera",
     "CONTRIBUTION_IBAN_TITLE": "Zer banku-kontutik?",
-    "CONTRIBUTION_GENERAL_TERMS": "Onartzen ditut <a target=\"_blank\" href=\"{{url}}\">ekarpenen baldintza orokorrak</a>",
-    "CONTRIBUTION_GENERAL_TERMS_URL": "https://www.somenergia.coop/eu/kapital-sozialera-egindako-ekarpenen-baldintzen/",
+    "CONTRIBUTION_GENERAL_TERMS": "Onartzen ditut ekarpenen baldintza orokorrak",
     "CONTRIBUTION_REMEMBER": "Gogoratu bazkide bakoitzak gutxienez {{min}} € eta gehienez {{max}} € eman ditzakeela, {{step}} euroren multiploak diren zenbatekoetan.",
     "AMOUNT_HELPER_MIN": "Gutxieneko ekarpena: {{amount}} €",
     "AMOUNT_HELPER_MAX": "Gehienezko ekarpena: {{amount}} €",
@@ -586,7 +585,7 @@
     "POWER_LOWER_15_HELPER_URL": "https://eu.support.somenergia.coop/article/1005-2-0td-tarifa?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
     "POWER_HIGHER_15_HELPER_URL": "https://eu.support.somenergia.coop/article/1110-ordutegi-tarteen-30td-tarifaren-eta-ordutegi-tarteen-goi-tentsioko-tarifen-ordutegiak",
     "CUPS_HELPER_URL": "https://eu.support.somenergia.coop/article/442-cups-hornidura-puntuaren-kode-bateratua",
-    "POWER_HELPER": "Tramitea bizkortzeko, adierazi gaur egungo potentzia.<b>Merkaturatzailea eta potentzia aldi berean aldatu behar badituzu, idatzi comercializacion@somenergia.coop helbidera, baina kontuan izan konpainia-aldaketa atzeratu daitekeela. </b>\n",
+    "POWER_HELPER": "Tramitea bizkortzeko, adierazi gaur egungo potentzia.<br>Merkaturatzailea eta potentzia aldi berean aldatu behar badituzu, idatzi comercializacion@somenergia.coop helbidera, baina kontuan izan konpainia-aldaketa atzeratu daitekeela. </b>\n",
     "CURRENT_POWER": "Idatzi ORAIN kontratatuta duzun potentzia",
     "POWER_LOWER_15_HEADER": "15 kW edo hortik behera",
     "POWER_LOWER_15_HELPER": "2.0TD tarifako potentzia-tarteei buruzko informazio gehiago.",
@@ -861,5 +860,11 @@
     "PRICES_ERROR_MISSING_DATA": "Ez dago egun honetako daturik. Barkatu eragozpenak!",
     "API_ERROR_FETCHING_DATA": "Tamalez, intzidentzia bat dela eta, une honetan ezin dugu erakutsi prezio-iragarpena. Espero dugu berehala konpontzea eta iragarpena lehenbailehen erakutsi ahal izatea. Barkatu eragozpenak!",
     "15YEARS_CAMPAIGN": "15 urte ospatzen ditugu!",
-    "15YEARS_DESCRIPTION": "100 ordez 0 €: kontratatu argia bazkidetu gabe"
+    "15YEARS_DESCRIPTION": "100 ordez 0 €: kontratatu argia bazkidetu gabe",
+    "SIMULATION_PRICES_TITLE": "Prezio estimatua",
+    "SIMULATION_PRICES_BODY": "Zure potentzia berbera duen kontratu baten hileko batez besteko kontsumoa da {{ estimated_monthly_kwh }} kWh. Aukeratutako tarifa, aurreko hilabeteko batez besteko prezioa eta indarreko zergak kontuan hartuta, kostu estimatua izango litzateke {{ estimated_monthly_total_eur }} €. Honako hau zure hileko fakturaren gutxi gorabeherako estimazio bat da eta aldatu daiteke soberakinen konpentsazioaren, kontsumo-profilen eta beste aldagai batzuen arabera. Ez da Som Energiaren fakturaren azken zenbateko erreala. Zure azken kontsumoaren kalkulu konparatibo zehatzagoa egin nahi baduzu, idatzi <a target=\"_blank\" href=\"mailto:hola@somenergia.coop\">hola@somenergia.coop</a> helbidera eta atsegin handiz lagunduko dizugu.",
+    "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Adierazten dut banku-kontuaren titularrak, nik neuk edo hirugarren batek, bere esanbidezko adostasuna eman duela Kooperatibaren kapital sozialera borondatezko ekarpena bere banku-kontuan helbideratzeko, adierazitako kontuan dagokion zenbatekoa zorduntzea baimenduta.",
+    "general-voluntari-contribution-contract-terms": "Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
+    "general-and-indexed-specific-terms": "Tarifa-indexatuaren-berariazko-eta-orokorrak-baldintzak-SomEnergia",
+    "general-contract-terms": "Energia-elektrikoaren-hornidura-kontratuaren-Baldintza-Orokorrak-SomEnergia"
 }

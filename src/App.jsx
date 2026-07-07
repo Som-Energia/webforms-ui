@@ -516,7 +516,9 @@ const App = (props) => {
                   '/:language/formulario-contratacion-periodos',
                   '/:language/formulari-contractacio-periodes',
                   '/:language/formulario-contrato-periodos',
-                  '/:language/kontratazio-formularioa-ordutarteak'
+                  '/:language/kontratazio-formularioa-ordutarteak',
+                  '/:language/landing/totquisquicanvia',
+                  '/:language/landing/todoquisquicambia'
                 ].map((path) => (
                   <Route
                     key={path}
@@ -539,7 +541,9 @@ const App = (props) => {
                   '/:language/formulario-contratacion-indexada',
                   '/:language/formulari-contractacio-indexada',
                   '/:language/formulario-contrato-indexada',
-                  '/:language/kontratazio-formularioa-indexatua'
+                  '/:language/kontratazio-formularioa-indexatua',
+                  '/:language/landing/totquisquicanvia',
+                  '/:language/landing/todoquisquicambia'
                 ].map((path) => (
                   <Route
                     key={path}
@@ -680,7 +684,6 @@ const App = (props) => {
                     }
                   />
                 ))}
-
               </Routes>
             </Router>
             <ApiStatus />

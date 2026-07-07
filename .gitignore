@@ -23,7 +23,6 @@ public/webforms-config.js
 
 yarn.lock
 
-package-lock.json
 dist
 
 # python
@@ -39,3 +38,6 @@ gurbPersonaldata.json
 
 # bun
 bun*
+
+# local agent artifacts
+.atl/

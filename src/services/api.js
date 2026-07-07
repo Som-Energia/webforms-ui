@@ -231,21 +231,32 @@ export const getPrices = async ({
   max_power,
   vat = VAT,
   cnae = CNAE,
-  city_id
+  city_id,
+  powers,
+  pricelist_type,
 }) => {
+
+  const params = new URLSearchParams()
+
+  params.append('tariff', tariff)
+  params.append('max_power', max_power)
+  params.append('vat', vat)
+  params.append('cnae', cnae)
+  params.append('city_id', city_id)
+
+  powers?.forEach((power) => {
+    params.append('powers', power)
+  })
+
+  if (pricelist_type) {
+    params.append('pricelist_type', pricelist_type)
+  }
+
   return axios({
     method: 'GET',
     url: `${WEBFORMS_API_URL}/data/prices`,
-    params: {
-      tariff,
-      max_power,
-      vat,
-      cnae,
-      city_id
-    }
-  }).then((response) => {
-    return response?.data
-  })
+    params,
+  }).then((response) => response?.data)
 }
 
 /**

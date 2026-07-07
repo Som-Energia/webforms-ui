@@ -1,5 +1,21 @@
 # Change Log
 
+## 7.3.0 2026-07-02
+
+- NEW: Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
+- NEW: Add Matomo Tag Manager trackers
+- REF: Update contract form component to render with new lading path for 'totquisqui' campaign
+
+## 7.2.7 2026-06-30
+
+- Removed 15 years campaing in base contract form
+
+## 7.2.6 2026-06-17
+
+- NEW: Add simulation prices section to summary page
+- REF: Update deploy.sh to include npm ci command before build
+- NEW: Add .npmrc to lock package.json npm/node engine
+
 ## 7.2.3 2026-06-02
 
 - Fix: cau and cnae validations
