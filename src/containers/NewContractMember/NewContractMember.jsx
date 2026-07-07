@@ -60,7 +60,7 @@ import { newNormalizeContract } from '../../services/newNormalize'
 import { newContract } from '../../services/api'
 
 import { usePixelEvent } from "../../hooks/usePixelEvent"
-import { isCompanyVat } from '../../services/utils'
+import { getBrowserSessionLanguage, isCompanyVat } from '../../services/utils'
 
 
 const ALERT_STEPS = {
@@ -99,6 +99,7 @@ const NewContractMemberForm = (props) => {
   const [formStepsName, setFormStepsName] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
   const [prevSteps] = useState(new Stack())
+  const browserSessionLanguage = getBrowserSessionLanguage(language, i18n.language)
 
   const [gurbCode] = useState(() => searchParams.get("gurb-code"));
   const POP_UP_TIME = 180000
@@ -228,8 +229,9 @@ const NewContractMemberForm = (props) => {
     privacy_policy_accepted: false,
     generic_conditions_accepted: false,
     statutes_accepted: false,
-    comercial_info_accepted: false
-  }), [i18n.language, tariff])
+    comercial_info_accepted: false,
+    session_language: browserSessionLanguage,
+  }), [browserSessionLanguage, i18n.language, tariff])
 
   const validationSchemasLinkMember = [
     newContractMemberQuestionValidations,
@@ -346,6 +348,7 @@ const NewContractMemberForm = (props) => {
       name: 'send-new-contract-member'
     })
     setSending(true)
+    values.session_language = browserSessionLanguage
     const data = newNormalizeContract(values, gurbCode)
     await newContract(data)
       .then((response) => {

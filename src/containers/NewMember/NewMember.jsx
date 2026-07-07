@@ -13,7 +13,7 @@ import NextButton from '../../components/Buttons/NextButton'
 import SubmitButton from '../../components/Buttons/SubmitButton'
 import SomStepper from '../../components/SomStepper/SomStepper'
 
-import { newNormalizeMember } from '../../services/utils'
+import { getBrowserSessionLanguage, newNormalizeMember } from '../../services/utils'
 import { member } from '../../services/api'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
@@ -49,6 +49,7 @@ const NewMemberForm = () => {
   const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
+  const browserSessionLanguage = getBrowserSessionLanguage(language, i18n.language)
 
   useSyncLanguage(language)
 
@@ -92,6 +93,7 @@ const NewMemberForm = () => {
     statutes_accepted: false,
     comercial_info_accepted: false,
     generic_especific_conditons_accepted: false,
+    session_language: browserSessionLanguage
   }
 
   const validationSchemas = [
@@ -139,6 +141,7 @@ const NewMemberForm = () => {
 
   const handlePost = async (values) => {
     setSending(true)
+    values.session_language = browserSessionLanguage
     trackEvent({
       category: 'Send',
       action: 'sendNewMemberClick',

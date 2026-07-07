@@ -29,6 +29,26 @@ export const contributionParams = {
   maxPercentOverAnnualUse: 100
 }
 
+const SUPPORTED_LANGUAGES = ['ca', 'es', 'eu', 'gl']
+
+export const getBrowserSessionLanguage = (urlLanguage, fallbackLanguage) => {
+  if (SUPPORTED_LANGUAGES.includes(urlLanguage)) {
+    return `${urlLanguage}_ES`
+  }
+
+  if (typeof navigator === 'undefined') {
+    return `${fallbackLanguage}_ES`
+  }
+
+  const browserLanguage = navigator.languages?.[0] || navigator.language || ''
+  const normalizedLanguage = browserLanguage.toLowerCase().split('-')[0]
+  const sessionLanguage = SUPPORTED_LANGUAGES.includes(normalizedLanguage)
+    ? normalizedLanguage
+    : fallbackLanguage
+
+  return `${sessionLanguage}_ES`
+}
+
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
     (key) =>
@@ -422,6 +442,7 @@ export const newNormalizeMember = (data) => {
   finalMember.cadas_tv = data.address.cadas_tv
   finalMember.municipi = data.address.city.id
   finalMember.idioma = data.new_member.language
+  finalMember.session_language = data.session_language
 
   finalMember.payment_method =
     data.new_member.payment_method === 'iban'
