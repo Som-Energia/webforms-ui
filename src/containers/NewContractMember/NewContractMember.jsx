@@ -555,7 +555,10 @@ const NewContractMemberForm = (props) => {
                       {activeStep !== initStep && (
                         <Grid item size={{ sm: 2, xs: 12 }}>
                           <PrevButton
-                            disabled={summaryField !== undefined}
+                            disabled={
+                              summaryField !== undefined ||
+                              activeStep === formSteps['SIGNATURE']
+                            }
                             onClick={() => prevStep()}>
                             {t('PREV')}
                           </PrevButton>
