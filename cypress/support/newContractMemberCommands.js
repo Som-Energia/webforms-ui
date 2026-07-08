@@ -134,7 +134,7 @@ Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif, has_member=
   cy.get('[data-cy="privacy_policy"]').click()
 
   cy.get('[data-cy="generic_conditions_accepted"]').click()
-  cy.get('[data-cy="generic_conditions_modal"]').scrollTo('bottom')
+  cy.get('[data-cy="generic_conditions_modal"]')
   cy.get('[data-cy=accept]').click()
 
   if (has_member === 'member-off'){

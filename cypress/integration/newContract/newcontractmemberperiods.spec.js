@@ -283,5 +283,4 @@ describe('New Contract with New Member', () => {
     })
   })
 })
-
-
+})
