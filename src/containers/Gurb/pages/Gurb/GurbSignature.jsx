@@ -1,5 +1,6 @@
 import { useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
@@ -8,6 +9,7 @@ import AlertBox from '../../../../components/AlertBox/AlertBox'
 import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
+import { getBrowserSessionLanguage } from '../../../../services/utils'
 
 
 let signaturitHook = () => undefined
@@ -31,6 +33,7 @@ const GurbSignature = (props) => {
   const [loading, setLoading] = useState(true)
   const { i18n } = useTranslation()
   const [erpError, setErpError] = useState(false)
+  const { language } = useParams()
 
   signaturitHook = useCallback(
     (e) => {
@@ -42,6 +45,8 @@ const GurbSignature = (props) => {
     [values, submit]
   )
 
+  const browserSessionLanguage = getBrowserSessionLanguage(language, i18n.language)
+
   const getSignaturit = useCallback(() => {
     createGurbSignature({
       lang: `${i18n.language}_ES`,
@@ -49,7 +54,8 @@ const GurbSignature = (props) => {
       access_tariff: values?.tariff_name,
       beta: values?.gurb?.power,
       cups: values?.cups,
-      vat: values?.owner?.nif
+      vat: values?.owner?.nif,
+      session_language: browserSessionLanguage
     })
       .then((response) => {
         setRedsysData(response?.data?.redsys_data)
