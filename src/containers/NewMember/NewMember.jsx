@@ -93,7 +93,6 @@ const NewMemberForm = () => {
     statutes_accepted: false,
     comercial_info_accepted: false,
     generic_especific_conditons_accepted: false,
-    session_language: browserSessionLanguage
   }
 
   const validationSchemas = [

@@ -109,7 +109,6 @@ export const newNormalizeContract = (data, gurbCode) => {
     privacy_conditions: data.privacy_policy_accepted,
     general_contract_terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted,
-    session_language: data.session_language
   }
 
   if (data.has_selfconsumption == 'selfconsumption-on') {

@@ -442,7 +442,6 @@ export const newNormalizeMember = (data) => {
   finalMember.cadas_tv = data.address.cadas_tv
   finalMember.municipi = data.address.city.id
   finalMember.idioma = data.new_member.language
-  finalMember.session_language = data.session_language
 
   finalMember.payment_method =
     data.new_member.payment_method === 'iban'
