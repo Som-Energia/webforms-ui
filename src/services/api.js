@@ -259,27 +259,6 @@ export const getPrices = async ({
   }).then((response) => response?.data)
 }
 
-/**
- * @deprecated
- */
-export const newContract = async (data) => {
-  return axios({
-    method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/contract`,
-    data: data
-  }).then((response) => {
-    return response?.data
-  })
-}
-
-export const createSignature = async (data) => {
-  return axios({
-    method: 'POST',
-    url: `${WEBFORMS_API_URL}/procedures/contract`,
-    data
-  }).then(({ data }) => data)
-}
-
 export const createContractLead = async (data) => {
   return axios({
     method: 'POST',
