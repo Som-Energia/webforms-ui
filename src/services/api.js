@@ -577,7 +577,7 @@ export const activateLead = async (leadId) => {
     url: `${WEBFORMS_API_URL}/procedures/leads/${leadId}/activate`
   })
     .then((response) => {
-      if (response.error !== undefined) {
+      if (response.error) {
         throw response
       }
       return response?.data
