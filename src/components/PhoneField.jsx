@@ -84,19 +84,28 @@ const PhoneField = (props) => {
     if (countryFromCode) setCountry(countryFromCode)
   }
 
-  function validatePhoneFormat(numberParam = number, countryParam = country) {
-    const isValid = isValidPhoneNumber(numberParam, countryParam)
+  function sanitizePhoneNumber(input, selectedCode = code) {
+    const internationalPrefixRegex = /^(\+|00)+/
+
+    return input.trim().replace(internationalPrefixRegex, '')
+  }
+
+  function validatePhoneFormat(numberParam = number, codeParam = code) {
+    const sanitizedNumber = sanitizePhoneNumber(numberParam, codeParam)
+    const fullPhoneNumber = `${codeParam}${sanitizedNumber}`
+    const isValid =
+      sanitizedNumber.length > 0 && isValidPhoneNumber(fullPhoneNumber)
     setFieldValue(`${name}_valid`, isValid)
   }
 
   useEffect(() => {
     setFieldValue(name, number)
-    validatePhoneFormat(number, country)
+    validatePhoneFormat(number, code)
   }, [number])
 
   useEffect(() => {
     setFieldValue(`${name}_code`, code)
-    validatePhoneFormat(number, country)
+    validatePhoneFormat(number, code)
   }, [code, country])
 
   return (
@@ -109,14 +118,7 @@ const PhoneField = (props) => {
           name={name}
           value={number}
           handleChange={(event) => {
-            const input = event.target.value
-
-            // Regex to delete prefixes if they are written
-            const prefix = code.replace('+', '')
-            const regex = new RegExp(`^(\\+|00)?${prefix}`)
-            const cleaned = input.replace(regex, '')
-
-            setNumber(cleaned)
+            setNumber(sanitizePhoneNumber(event.target.value))
           }}
           handleBlur={() => {
             validatePhoneFormat()
