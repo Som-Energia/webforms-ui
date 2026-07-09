@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
@@ -13,6 +10,7 @@ import { checkIbanFormat } from '../../../services/utils'
 import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
 import InputField from '../../../components/InputField/InputField'
+import PaymentAuthorizationCheckbox from '../../../components/PaymentAuthorizationCheckbox/PaymentAuthorizationCheckbox'
 import TermsDialog from '../../../components/TermsDialog'
 
 const PaymentMethod = (props) => {
@@ -169,28 +167,13 @@ const PaymentMethod = (props) => {
       )}
       {showPaymentAuthorizationCheckbox && (
         <Grid item xs={12}>
-          <Box sx={{ display: 'flex' }}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  data-cy="iban_check"
-                  checked={paymentAuthorizationValue}
-                  onClick={isIbanPayment ? handleClick : undefined}
-                  onChange={isCreditCardPayment ? handleCheckboxChange : undefined}
-                />
-              }
-              label={
-                <>
-                  <Typography variant="body.sm.regular" color="primary.dark">
-                    {paymentAuthorizationLabel}
-                  </Typography>
-                  <Typography variant="body.sm.bold" color="error">
-                    {'*'}
-                  </Typography>
-                </>
-              }
-            />
-          </Box>
+          <PaymentAuthorizationCheckbox
+            dataCy="iban_check"
+            checked={paymentAuthorizationValue}
+            label={paymentAuthorizationLabel}
+            onClick={isIbanPayment ? handleClick : undefined}
+            onChange={isCreditCardPayment ? handleCheckboxChange : undefined}
+          />
         </Grid>
       )}
       {isIbanPayment && (
