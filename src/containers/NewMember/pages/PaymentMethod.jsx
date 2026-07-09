@@ -1,9 +1,6 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
@@ -13,6 +10,7 @@ import { checkIbanFormat } from '../../../services/utils'
 import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
 import InputField from '../../../components/InputField/InputField'
+import PaymentAuthorizationCheckbox from '../../../components/PaymentAuthorizationCheckbox/PaymentAuthorizationCheckbox'
 
 const PaymentMethod = (props) => {
   const {
@@ -119,27 +117,12 @@ const PaymentMethod = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Box sx={{ display: 'flex' }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    data-cy="iban_check"
-                    checked={values?.new_member?.sepa_accepted}
-                    onChange={handleCheckboxChange}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="body.sm.regular" color="primary.dark">
-                      {t('IBAN_ACCEPT_DIRECT_DEBIT')}
-                    </Typography>
-                    <Typography variant="body.sm.bold" color="error">
-                      {'*'}
-                    </Typography>
-                  </>
-                }
-              />
-            </Box>
+            <PaymentAuthorizationCheckbox
+              dataCy="iban_check"
+              checked={values?.new_member?.sepa_accepted}
+              label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
+              onChange={handleCheckboxChange}
+            />
           </Grid>
         </>
       )}
