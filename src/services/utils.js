@@ -31,7 +31,7 @@ export const contributionParams = {
 
 const SUPPORTED_LANGUAGES = ['ca', 'es', 'eu', 'gl']
 
-export const getBrowserSessionLanguage = (urlLanguage, fallbackLanguage) => {
+export const getUrlOrBrowserSessionLanguage = (urlLanguage, fallbackLanguage) => {
   if (SUPPORTED_LANGUAGES.includes(urlLanguage)) {
     return `${urlLanguage}_ES`
   }

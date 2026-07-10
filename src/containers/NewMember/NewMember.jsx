@@ -13,7 +13,7 @@ import NextButton from '../../components/Buttons/NextButton'
 import SubmitButton from '../../components/Buttons/SubmitButton'
 import SomStepper from '../../components/SomStepper/SomStepper'
 
-import { getBrowserSessionLanguage, newNormalizeMember } from '../../services/utils'
+import { getUrlOrBrowserSessionLanguage, newNormalizeMember } from '../../services/utils'
 import { member } from '../../services/api'
 import { NEW_MEMBER_FORM_SUBSTEPS } from '../../services/steps'
 import SummaryContext from '../../context/SummaryContext'
@@ -49,7 +49,7 @@ const NewMemberForm = () => {
   const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
-  const browserSessionLanguage = getBrowserSessionLanguage(language, i18n.language)
+  const urlOrBrowserSessionLanguage = getUrlOrBrowserSessionLanguage(language, i18n.language)
 
   useSyncLanguage(language)
 
@@ -140,7 +140,6 @@ const NewMemberForm = () => {
 
   const handlePost = async (values) => {
     setSending(true)
-    values.session_language = browserSessionLanguage
     trackEvent({
       category: 'Send',
       action: 'sendNewMemberClick',
@@ -148,6 +147,7 @@ const NewMemberForm = () => {
     })
 
     const data = newNormalizeMember(values)
+    data.session_language = urlOrBrowserSessionLanguage
     await member(data)
       .then((response) => {
         if (response?.state === true) {

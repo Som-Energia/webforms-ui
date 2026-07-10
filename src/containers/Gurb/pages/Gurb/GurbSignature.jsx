@@ -9,7 +9,7 @@ import AlertBox from '../../../../components/AlertBox/AlertBox'
 import { createGurbSignature } from '../../../../services/apiGurb'
 import Result from '../../../../containers/Result'
 import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-import { getBrowserSessionLanguage } from '../../../../services/utils'
+import { getUrlOrBrowserSessionLanguage } from '../../../../services/utils'
 
 
 let signaturitHook = () => undefined
@@ -45,7 +45,7 @@ const GurbSignature = (props) => {
     [values, submit]
   )
 
-  const browserSessionLanguage = getBrowserSessionLanguage(language, i18n.language)
+  const urlOrBrowserSessionLanguage = getUrlOrBrowserSessionLanguage(language, i18n.language)
 
   const getSignaturit = useCallback(() => {
     createGurbSignature({
@@ -55,7 +55,7 @@ const GurbSignature = (props) => {
       beta: values?.gurb?.power,
       cups: values?.cups,
       vat: values?.owner?.nif,
-      session_language: browserSessionLanguage
+      session_language: urlOrBrowserSessionLanguage
     })
       .then((response) => {
         setRedsysData(response?.data?.redsys_data)
