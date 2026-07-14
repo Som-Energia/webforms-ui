@@ -84,7 +84,7 @@ const PhoneField = (props) => {
     if (countryFromCode) setCountry(countryFromCode)
   }
 
-  function sanitizePhoneNumber(input, selectedCode = code) {
+  function sanitizePhoneNumber(input) {
     const internationalPrefixRegex = /^(\+|00)+/
 
     return input.trim().replace(internationalPrefixRegex, '')
@@ -106,7 +106,7 @@ const PhoneField = (props) => {
   useEffect(() => {
     setFieldValue(`${name}_code`, code)
     validatePhoneFormat(number, code)
-  }, [code, country])
+  }, [code])
 
   return (
     <Grid container>
