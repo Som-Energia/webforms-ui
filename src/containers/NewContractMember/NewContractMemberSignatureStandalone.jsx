@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams} from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Container from '@mui/material/Container'
@@ -24,6 +24,7 @@ const NewContractMemberSignatureStandalone = () => {
   const cups = searchParams.get('cups')
   const gurbCode = searchParams.get('gurb-code')
   const { trackEvent } = useContext(MatomoContext)
+  const navigate = useNavigate()
 
   const [sending, setSending] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -41,10 +42,6 @@ const NewContractMemberSignatureStandalone = () => {
   }, [trackEvent])
 
   const handleActivateLead = () => {
-    if (!signatureCompleted) {
-      return
-    }
-
     if (!leadId) {
       setError(true)
       setCompleted(true)
@@ -52,10 +49,10 @@ const NewContractMemberSignatureStandalone = () => {
     }
 
     setSending(true)
-
     activateLead(leadId)
       .then(() => {
         setError(false)
+        navigate(`/${language}/contract/${leadId}/success`)
       })
       .catch((err) => {
         setError(true)
@@ -74,6 +71,7 @@ const NewContractMemberSignatureStandalone = () => {
       name: 'new-contract-member-signature-completed'
     })
     setSignatureCompleted(true)
+    handleActivateLead()
   }
 
   const handleCreateSignature = (data) => {

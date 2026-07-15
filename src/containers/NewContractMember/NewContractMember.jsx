@@ -330,10 +330,6 @@ const NewContractMemberForm = (props) => {
   }, [activeStep])
 
   const handleSignatureSuccess = () => {
-    if (!signatureCompleted) {
-      return
-    }
-
     if (!leadId) {
       setError(true)
       setCompleted(true)
@@ -363,6 +359,8 @@ const NewContractMemberForm = (props) => {
       name: 'new-contract-member-signature-completed'
     })
     setSignatureCompleted(true)
+    handleSignatureSuccess()
+
   }
 
   const getStep = (props, sendTrackEvent) => {

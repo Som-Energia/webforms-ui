@@ -570,6 +570,17 @@ const App = (props) => {
                     </ThemeWrapper>
                   }
                 />
+                <Route
+                  path="/:language/contract/:leadId/success"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <Success
+                        title="NEW_MEMBER_CONTRACT_SUCCESS_TITLE"
+                        description="NEW_CONTRACT_SUCCESS_DESC"
+                      />
+                    </ThemeWrapper>
+                  }
+                />
                 {props?.isGurbEnabled && (
                   <Route
                     path="/:language/gurb/:gurbCode/requirements/"
