@@ -705,7 +705,7 @@
     "SOM_SERVEIS_INF0_ACCEPTED": "Informazio hau jasotzea onartzen baduzu, baimentzen duzu zure datuak Som Serveis (Som Connexió -www.somconnexio.coop-, Som Mobilitat -www.sommobilitat.coop- eta Som Energia) osatzen duten kooperatibei lagatzea, zurekin harremanetan jartzeko edota haien zerbitzuei buruzko informazio komertziala euskarri elektronikoen bidez bidaltzeko. Informazio gehiago Pribatutasun-politikan (3. Zure datuen hartzaileak).",
     "IBAN_FIELD": "Adierazi zure IBAN zenbakia (banku-kontua)",
     "IBAN_EXAMPLE": "Adibidea: ES11 2222 3333 4444 5555 6666",
-    "IBAN_PAYMENT_QUESTION_OPTION": "Erabili goian adierazitako IBAN zenbakia",
+    "IBAN_PAYMENT_QUESTION_OPTION": "IBAN/Banku kontua",
     "MEMBER_PAYMENT_EXPLANATION": "Bazkidetzeko 100 €-ko ordainketa bakarra egin behar duzu",
     "NEW_MEMBER_SUMMARY_PROCESS": "Bazkide berri baten alta",
     "TECHNICAL_DATA_SUMMARY": "Datu teknikoak",
