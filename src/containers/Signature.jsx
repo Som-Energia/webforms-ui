@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CircularProgress from '@mui/material/CircularProgress'
 import { Grid2 as Grid } from '@mui/material'
 
 import Result from './Result'
+import Loading from '../components/Loading'
 import TextRecommendation from '../components/TextRecommendation/TextRecommendation'
 
 import AlertBox from '../components/AlertBox/AlertBox'
@@ -70,8 +70,8 @@ const SignatureIframe = ({
   return (
     <>
       {loading && (
-        <Grid item size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress color="secondary" />
+        <Grid item size={12}>
+          <Loading description="NEW_CONTRACT_SUBMIT_LOADING" />
         </Grid>
       )}
 
