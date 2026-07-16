@@ -85,6 +85,7 @@ const NewMemberForm = () => {
       referral_source: '',
       payment_method: undefined,
       sepa_accepted: false,
+      payment_authorization_accepted: false,
       iban: undefined,
       legal_person_accepted: false
     },
