@@ -1,5 +1,10 @@
 # Change Log
 
+## 7.3.1 2026-07-15
+
+- FIX: Validate phone numbers with the selected country prefix and strip typed international prefixes
+- FIX: Prevent progressing through invalid modify contract steps
+
 ## 7.3.0 2026-07-02
 
 - NEW: Add new component PDFLoader to show CCGG: Applied to new contract, holderchange and contribution forms
