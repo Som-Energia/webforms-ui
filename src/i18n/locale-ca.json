@@ -709,7 +709,7 @@
     "SOM_SERVEIS_INF0_ACCEPTED": "Si acceptes rebre aquesta informació, consents que les teves dades siguin cedides a les cooperatives que formen part de Som Serveis (Som Connexió -www.somconnexio.coop-, Som Mobilitat -www.sommobilitat.coop- i Som Energia) perquè contactin amb tu i/o t'enviïn informació comercial dels seus serveis per mitjans electrònics. Més informació en la política de privacitat (3. Destinataris de les teves dades).",
     "PREVIUOS_HOLDER_TITLE": "Actualment, ets la persona titular del contracte de llum?",
     "IBAN_EXPLANATION": "Servirà per fer el cobrament de les factures del llum al teu compte.",
-    "PAYMENT_METHOD_QUESTION": "Selecciona com vols fer el pagament per associar-te",
+    "PAYMENT_METHOD_QUESTION": "Escull el mètode de pagament",
     "IBAN_PAYMENT_QUESTION_OPTION": "IBAN/Compte bancari",
     "MEMBER_PAYMENT_EXPLANATION": "Per associar-te has de fer un pagament únic de 100€",
     "NEW_MEMBER_SUMMARY_PROCESS": "Alta de nova persona sòcia",
