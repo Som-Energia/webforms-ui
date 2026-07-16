@@ -17,7 +17,6 @@ import { activateLead, getContractSignature } from '../../services/api'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 import useBackNavigationWarning from '../../hooks/useBackNavigationWarning'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
-import LeaveFormDialog from '../../components/LeaveFormDialog'
 
 const NewContractMemberSignatureStandalone = () => {
   const { t } = useTranslation()
@@ -32,7 +31,7 @@ const NewContractMemberSignatureStandalone = () => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [signatureCompleted, setSignatureCompleted] = useState(false)
-  const backNavigationWarning = useBackNavigationWarning(!completed)
+  useBackNavigationWarning(!completed, t('LEAVE_CONTRACT_FORM_DESCRIPTION'))
 
   useSyncLanguage(language)
 
@@ -100,11 +99,6 @@ const NewContractMemberSignatureStandalone = () => {
         backgroundColor: 'secondary.white',
         borderRadius: '10px'
       }}>
-      <LeaveFormDialog
-        open={backNavigationWarning.isDialogOpen}
-        onCancel={backNavigationWarning.cancelNavigation}
-        onConfirm={backNavigationWarning.confirmNavigation}
-      />
       {sending ? (
         <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
       ) : completed ? (

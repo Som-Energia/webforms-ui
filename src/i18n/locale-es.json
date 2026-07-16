@@ -872,8 +872,5 @@
     "general-voluntari-contribution-contract-terms": "Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
     "general-and-indexed-specific-terms": "Condiciones-Generales-y-especificas-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condiciones-Generales-contrato-suministro-energia-electrica-SomEnergia",
-    "LEAVE_CONTRACT_FORM_TITLE": "¿Quieres salir del formulario?",
-    "LEAVE_CONTRACT_FORM_DESCRIPTION": "Si vuelves atrás, perderás el progreso del formulario.",
-    "LEAVE_CONTRACT_FORM_CANCEL": "Continuar con el formulario",
-    "LEAVE_CONTRACT_FORM_CONFIRM": "Salir del formulario"
+    "LEAVE_CONTRACT_FORM_DESCRIPTION": "Si vuelves atrás, perderás el progreso del formulario."
 }

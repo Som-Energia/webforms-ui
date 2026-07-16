@@ -1,14 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
-const useBackNavigationWarning = (enabled) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+const useBackNavigationWarning = (enabled, message) => {
   const currentHistoryIndex = useRef()
-  const pendingSteps = useRef(0)
   const allowNavigation = useRef(false)
 
   useEffect(() => {
     if (!enabled) {
-      setIsDialogOpen(false)
       return
     }
 
@@ -27,14 +24,17 @@ const useBackNavigationWarning = (enabled) => {
       }
 
       event.stopImmediatePropagation()
-      pendingSteps.current = stepsBack
       window.history.go(stepsBack)
-      setIsDialogOpen(true)
+
+      if (window.confirm(message)) {
+        allowNavigation.current = true
+        window.setTimeout(() => window.history.go(-stepsBack), 0)
+      }
     }
 
     window.addEventListener('popstate', handlePopState, true)
     return () => window.removeEventListener('popstate', handlePopState, true)
-  }, [enabled])
+  }, [enabled, message])
 
   useEffect(() => {
     if (!enabled) {
@@ -50,17 +50,6 @@ const useBackNavigationWarning = (enabled) => {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [enabled])
 
-  const confirmNavigation = () => {
-    allowNavigation.current = true
-    setIsDialogOpen(false)
-    window.history.go(-pendingSteps.current)
-  }
-
-  return {
-    isDialogOpen,
-    cancelNavigation: () => setIsDialogOpen(false),
-    confirmNavigation
-  }
 }
 
 export default useBackNavigationWarning

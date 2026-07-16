@@ -70,7 +70,6 @@ import { usePixelEvent } from '../../hooks/usePixelEvent'
 import useBackNavigationWarning from '../../hooks/useBackNavigationWarning'
 import { isCompanyVat } from '../../services/utils'
 import { buildInitialValues } from './newContractMember.values'
-import LeaveFormDialog from '../../components/LeaveFormDialog'
 
 const ALERT_STEPS = {
   'member-off': [3, 7],
@@ -112,8 +111,9 @@ const NewContractMemberForm = (props) => {
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
   const [prevSteps] = useState(new Stack())
   const [leadId, setLeadId] = useState()
-  const backNavigationWarning = useBackNavigationWarning(
-    activeStep > 0 && !completed && redsysURL === ''
+  useBackNavigationWarning(
+    activeStep > 0 && !completed && redsysURL === '',
+    t('LEAVE_CONTRACT_FORM_DESCRIPTION')
   )
 
   const [gurbCode] = useState(() => searchParams.get('gurb-code'))
@@ -528,11 +528,6 @@ const NewContractMemberForm = (props) => {
         backgroundColor: 'secondary.white',
         borderRadius: '10px'
       }}>
-      <LeaveFormDialog
-        open={backNavigationWarning.isDialogOpen}
-        onCancel={backNavigationWarning.cancelNavigation}
-        onConfirm={backNavigationWarning.confirmNavigation}
-      />
       <Formik
         innerRef={formikRef}
         initialValues={customInitialValues}
