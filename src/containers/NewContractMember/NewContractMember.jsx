@@ -241,9 +241,6 @@ const NewContractMemberForm = (props) => {
 
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
-    if (activeStep === formSteps['SUMMARY']) {
-      window.scrollTo({ top: 0 })
-    }
   }
 
   const prevStep = () => {
@@ -286,6 +283,7 @@ const NewContractMemberForm = (props) => {
       name: 'send-new-contract-member'
     })
 
+    window.scrollTo({ top: 0 })
     setSending(true)
     setSignatureCompleted(false)
 
