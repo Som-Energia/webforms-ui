@@ -36,11 +36,13 @@ const CUPS = (props) => {
             ...values,
             ...{
               cups_valid: true,
+              social_tariff: true,
               new_contract,
               knowledge_of_distri,
               tariff_name
             }
-          })
+          },true)
+
           if (setMaxStepNum) {
             setMaxStepNum(
               new_contract

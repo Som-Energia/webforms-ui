@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Typography from '@mui/material/Typography'
@@ -12,9 +12,12 @@ import AlertBox from '../../../components/AlertBox/AlertBox'
 import { LightbulbIcon } from '../../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
+import PopUpContext from '../../../context/PopUpContext'
+import SimpleDialog from '../../../components/OldComponents/SimpleDialog'
 
 const NewContractMemberSupplyPoint = ({ ...props }) => {
   const trackID = 'supply-point'
+  const { setContent } = useContext(PopUpContext)
   
   const { values, setFieldValue, sendTrackEvent } = props
   const { t } = useTranslation()
@@ -34,6 +37,22 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
   useEffect(() => {
     sendTrackEvent(trackID)
   },[])
+
+
+  useEffect(() => {
+    if(values.social_tariff){
+      setContent(
+        <SimpleDialog
+          title={t('GENERATION_ASSIGNMENTS_CONFIRM_TITLE')}
+          text={
+            <Typography>{t("GENERATION_ASSIGNMENTS_CONFIRM_TITLE")}</Typography>
+          }
+          cancelFunction={() => setContent(undefined)}
+       />
+      )
+    }
+  },[values.social_tariff,setContent,t])
+
 
   const options = [
     {
