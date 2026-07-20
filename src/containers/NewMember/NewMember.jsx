@@ -158,17 +158,19 @@ const NewMemberForm = () => {
             setUrl(response.data.endpoint)
           } else {
             setCompleted(true)
+            setSending(false)
           }
         } else {
           setCompleted(true)
+          setSending(false)
           setError(true)
         }
       })
       .catch(() => {
         setCompleted(true)
+        setSending(false)
         setError(true)
       })
-    setSending(false)
   }
 
   const getStep = (props) => {
