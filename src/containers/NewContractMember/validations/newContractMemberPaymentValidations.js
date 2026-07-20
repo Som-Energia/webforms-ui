@@ -18,15 +18,15 @@ const newContractMemberValidations = Yup.object().shape({
     sepa_accepted: Yup.bool().when('payment_method', {
       is: 'iban',
       then: Yup.bool()
-        .required('UNACCEPTED_PAYMENT_AUTHORIZATION')
-        .oneOf([true], 'UNACCEPTED_PAYMENT_AUTHORIZATION'),
+        .required('REQUIRED_FIELD')
+        .oneOf([true], 'REQUIRED_FIELD'),
       otherwise: Yup.bool().notRequired()
     }),
     payment_authorization_accepted: Yup.bool().when('payment_method', {
       is: 'credit_card',
       then: Yup.bool()
-        .required('UNACCEPTED_PAYMENT_AUTHORIZATION')
-        .oneOf([true], 'UNACCEPTED_PAYMENT_AUTHORIZATION'),
+        .required('REQUIRED_FIELD')
+        .oneOf([true], 'REQUIRED_FIELD'),
       otherwise: Yup.bool().notRequired()
     })
   })

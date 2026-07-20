@@ -132,7 +132,6 @@
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que a persoa titular da conta bancaria, eu mesma ou unha terceira persoa, autoriza a domiciliación das facturas de electricidade.",
     "PAYMENT_METHOD_CCARD_ACCEPT": "Confirmo que a persoa titular da tarxeta, eu mesma ou unha terceira persoa, autoriza o cobramento correspondente a través deste método de pagamento.",
     "IBAN_ERROR": "IBAN incorrecto",
-    "UNACCEPTED_PAYMENT_AUTHORIZATION": "Tes que aceptar a autorización do método de pagamento",
     "SIGNATURE": "",
     "SIGNATURE_INFO": "",
     "GENERIC_ERROR_TITLE": "",

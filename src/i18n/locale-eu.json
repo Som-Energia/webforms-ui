@@ -137,7 +137,6 @@
     "IBAN_ACCEPT_DIRECT_DEBIT": "Berresten dut banku-kontuaren titularrak, nik neuk edo beste norbaitek, elektrizitate-fakturak helbideratzeko baimena ematen duela.",
     "PAYMENT_METHOD_CCARD_ACCEPT": "Berresten dut txartelaren titularrak, nik neuk edo beste norbaitek, ordainketa-metodo honen bidez dagokion kobrantza baimentzen duela.",
     "IBAN_ERROR": "IBAN okerra",
-    "UNACCEPTED_PAYMENT_AUTHORIZATION": "Ordainketa-metodoaren baimena onartu behar duzu",
     "SIGNATURE": "",
     "SIGNATURE_INFO": "",
     "GENERIC_ERROR_TITLE": "",
