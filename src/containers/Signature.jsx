@@ -14,6 +14,7 @@ const SignatureIframe = ({
   postData,
   textRecommendation,
   textInfo,
+  errorDescription,
   onSignaturitCompleted = () => {},
   onCreateSignature = () => {}
 }) => {
@@ -79,7 +80,7 @@ const SignatureIframe = ({
         <Result
           mode="failure"
           title={t('GENERIC_ERROR_TITLE')}
-          description={t('GENERIC_ERROR_DESCRIPTION')}
+          description={errorDescription}
         />
       )}
 
