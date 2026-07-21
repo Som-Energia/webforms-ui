@@ -141,8 +141,13 @@
     "IBAN_LABEL": "IBAN (compte bancari)",
     "IBAN_HELP": "Exemple: ES11 2222 3333 4444 5555 6666",
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular del compte bancari, sigui jo mateixa o una altra, autoritza la domiciliació de les factures d'electricitat.",
+    "PAYMENT_METHOD_CCARD_ACCEPT": "Confirmo que la persona titular de la targeta, sigui jo mateixa o una altra, autoritza el cobrament corresponent a través d'aquest mètode de pagament.",
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Declaro que la persona titular del compte bancari, jo mateixa o una tercera persona, ha atorgat el seu consentiment exprés per a la domiciliació bancària corresponent a l'aportació voluntària al capital social de la cooperativa, autoritzant el càrrec de l'import corresponent en el compte indicat.",
     "IBAN_ERROR": "IBAN incorrecte",
+    "SIGNATURE": "SIGNATURE",
+    "SIGNATURE_INFO": "SIGNATURE_INFO",
+    "GENERIC_ERROR_TITLE": "GENERIC_ERROR_TITLE",
+    "GENERIC_ERROR_DESCRIPTION": "GENERIC_ERROR_DESCRIPTION",
     "API_VALIDATED_FIELD_CHECKING": "Validant…",
     "REVIEW_TITLE": "Revisa el contracte i confirma'l",
     "REVIEW_DESCRIPTION": "Revisa les dades i, si són correctes, clica el botó enviar:",
@@ -298,6 +303,7 @@
     "PAYMENT_METHOD_IBAN_DESC": "No suposa cap cost per Som Energia",
     "PAYMENT_METHOD_CCARD": "Targeta de crèdit/dèbit",
     "PAYMENT_METHOD_CCARD_DESC": "Suposa un cost d’1,80 € per Som Energia",
+    "PAYMENT_METHOD_CCARD_INFO": "Quan continuis, et redirigirem a la passarel·la de pagament per completar el pagament amb targeta.",
     "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-realitzat",
     "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/ca/pagament-cancellat",
     "CONTACT_HELP_URL": "https://ca.support.somenergia.coop/article/470-com-puc-contactar-amb-la-cooperativa-mail-telefon-etc",
@@ -639,6 +645,7 @@
     "REVIEW_SUPPLY_POINT_LABEL_ADDRESS": "Direcció:",
     "REVIEW_SUPPLY_POINT_LABEL_CITY": "Municipi:",
     "REVIEW_PAYMENT_DATA_LABEL_IBAN": "IBAN:",
+    "REVIEW_PAYMENT_DATA_LABEL_METHOD": "REVIEW_PAYMENT_DATA_LABEL_METHOD",
     "REVIEW_CONTACT_INFORMATION_TITLE": "Informació de contacte",
     "REVIEW_PAYMENT_DATA_TITLE": "Dades de pagament",
     "REVIEW_PRICES_ENERGY_TITLE": "Terme d'energia",
@@ -864,5 +871,6 @@
     "SIMULATION_PRICES_BODY": "El consum mensual mitjà d'un contracte amb la teva potència és de {{ estimated_monthly_kwh }} kWh. Tenint en compte la tarifa escollida, el preu mitjà del mes passat i els impostos vigents, el cost estimat seria de {{ estimated_monthly_total_eur }} €. Aquest import és una estimació orientativa de la teva facturació mensual i pot variar segons la compensació d'excedents, perfils de consum i altres variables. No reflecteix l'import real final de la teva factura a Som Energia. Per a una comparativa més ajustada al teu consum final, escriu a <a target=\"_blank\" href=\"mailto:hola@somenergia.coop\">hola@somenergia.coop</a> i t'ajudarem encantades.",
     "general-voluntari-contribution-contract-terms": "Condicions_Generals_Aportacions_Voluntaries_Capital_Social_SomEnergia",
     "general-and-indexed-specific-terms": "Condicions-Generals-i-especifiques-tarifa-indexada-SomEnergia",
-    "general-contract-terms": "Condicions-Generals-contracte-subministrament-energia-electrica-SomEnergia"
+    "general-contract-terms": "Condicions-Generals-contracte-subministrament-energia-electrica-SomEnergia",
+    "LEAVE_CONTRACT_FORM_DESCRIPTION": "Si tornes enrere, perdràs el progrés del formulari."
 }

@@ -135,7 +135,12 @@
     "IBAN_LABEL": "IBAN (banku-kontua)",
     "IBAN_HELP": "Adibidez: ES11 2222 3333 4444 5555 6666",
     "IBAN_ACCEPT_DIRECT_DEBIT": "Berresten dut banku-kontuaren titularrak, nik neuk edo beste norbaitek, elektrizitate-fakturak helbideratzeko baimena ematen duela.",
+    "PAYMENT_METHOD_CCARD_ACCEPT": "Berresten dut txartelaren titularrak, nik neuk edo beste norbaitek, ordainketa-metodo honen bidez dagokion kobrantza baimentzen duela.",
     "IBAN_ERROR": "IBAN okerra",
+    "SIGNATURE": "",
+    "SIGNATURE_INFO": "",
+    "GENERIC_ERROR_TITLE": "",
+    "GENERIC_ERROR_DESCRIPTION": "",
     "API_VALIDATED_FIELD_CHECKING": "Baliozkotzen…",
     "REVIEW_TITLE": "Berrikusi eta berretsi kontratua",
     "REVIEW_DESCRIPTION": "Berrikusi datuak eta, zuzenak badira, sakatu bidali botoia:",
@@ -286,6 +291,7 @@
     "PAYMENT_METHOD_IBAN_DESC": "Kosturik gabe kooperatibarentzat",
     "PAYMENT_METHOD_CCARD": "Kreditu-/zordunketa-txartela",
     "PAYMENT_METHOD_CCARD_DESC": "1,80 €-ko kostua kooperatibarentzat",
+    "PAYMENT_METHOD_CCARD_INFO": "Jarraitu sakatzean, ordainketa-pasabidera eramango zaitugu txartel bidezko ordainketa osatzeko.",
     "NEWMEMBER_OK_REDIRECT_URL": "https://www.somenergia.coop/eu/pago-realizado",
     "NEWMEMBER_KO_REDIRECT_URL": "https://www.somenergia.coop/eu/pago-cancelado",
     "CONTACT_HELP_URL": "https://eu.support.somenergia.coop/article/472-kooperatibarekin-harremanetan-jartzea?utm_source=linkidiomes&utm_medium=cda&utm_campaign=euskara",
@@ -638,6 +644,7 @@
     "REVIEW_CONTACT_INFORMATION_TITLE": "Harremanetarako informazioa",
     "REVIEW_PAYMENT_DATA_TITLE": "Ordainketa-datuak",
     "REVIEW_PAYMENT_DATA_LABEL_IBAN": "IBAN:",
+    "REVIEW_PAYMENT_DATA_LABEL_METHOD": "",
     "REVIEW_PRICES_ENERGY_TITLE": "Energia-terminoa",
     "REVIEW_PRICES_POWER_TITLE": "Potentzia-terminoa",
     "REVIEW_PRICES_TITLE": "Prezioak (zergak barne)",
@@ -864,5 +871,6 @@
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Adierazten dut banku-kontuaren titularrak, nik neuk edo hirugarren batek, bere esanbidezko adostasuna eman duela Kooperatibaren kapital sozialera borondatezko ekarpena bere banku-kontuan helbideratzeko, adierazitako kontuan dagokion zenbatekoa zorduntzea baimenduta.",
     "general-voluntari-contribution-contract-terms": "Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
     "general-and-indexed-specific-terms": "Tarifa-indexatuaren-berariazko-eta-orokorrak-baldintzak-SomEnergia",
-    "general-contract-terms": "Energia-elektrikoaren-hornidura-kontratuaren-Baldintza-Orokorrak-SomEnergia"
+    "general-contract-terms": "Energia-elektrikoaren-hornidura-kontratuaren-Baldintza-Orokorrak-SomEnergia",
+    "LEAVE_CONTRACT_FORM_DESCRIPTION": "Atzera egiten baduzu, inprimakian egindako aurrerapena galduko duzu."
 }

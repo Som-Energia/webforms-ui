@@ -48,8 +48,11 @@ describe('New Contract: results with gurbCode query param', () => {
       cy.contractMemberCheckReviewNewMemberStep(
         this.data.personalPhysicalData.nif
       )
-      cy.acceptTermsAndsubmitNewContractWithGurbCode(true)
-      cy.resultRedirectComponent(gurbCode)
+      cy.acceptTermsAndsubmitNewContractFlow({
+        status: true,
+        cups: this.data.supplyPoint.cups,
+        gurbCode
+      })
     })
   })
 })

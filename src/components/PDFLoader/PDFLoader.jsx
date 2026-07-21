@@ -21,6 +21,7 @@ const PDFLoader = (props) => {
   return url === undefined
     ? <Loading />
     : <object
+        data-cy="generic_conditions_modal"
         data={url}
         title="PDF"
         type="application/pdf"

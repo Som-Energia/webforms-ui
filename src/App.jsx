@@ -48,6 +48,11 @@ const App = (props) => {
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
+  const NewContractMemberSignatureStandalone = lazy(() =>
+    import(
+      './containers/NewContractMember/NewContractMemberSignatureStandalone'
+    )
+  )
   const NewMemberForm = lazy(() => import('./containers/NewMember/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
   const GurbContractPaymentSuccessful = lazy(() => import('./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful'))
@@ -557,6 +562,25 @@ const App = (props) => {
                     }
                   />
                 ))}
+                <Route
+                  path="/:language/contract/sign/:leadId"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <NewContractMemberSignatureStandalone />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/contract/:leadId/success"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <Success
+                        title="NEW_MEMBER_CONTRACT_SUCCESS_TITLE"
+                        description="NEW_CONTRACT_SUCCESS_DESC"
+                      />
+                    </ThemeWrapper>
+                  }
+                />
                 {props?.isGurbEnabled && (
                   <Route
                     path="/:language/gurb/:gurbCode/requirements/"
