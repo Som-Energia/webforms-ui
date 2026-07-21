@@ -40,18 +40,20 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
 
 
   useEffect(() => {
-    if(values.social_tariff){
+    if(values.social_tariff && values.cups.length > 0){
       setContent(
         <SimpleDialog
-          title={t('GENERATION_ASSIGNMENTS_CONFIRM_TITLE')}
           text={
-            <Typography>{t("GENERATION_ASSIGNMENTS_CONFIRM_TITLE")}</Typography>
+            <Typography
+              dangerouslySetInnerHTML={{
+                          __html: t('POP_UP_SIPS_CUP')}}
+              />
           }
-          cancelFunction={() => setContent(undefined)}
+          acceptFunction={setContent}
        />
       )
     }
-  },[values.social_tariff,setContent,t])
+  },[values.social_tariff,values.cups,setContent,t])
 
 
   const options = [

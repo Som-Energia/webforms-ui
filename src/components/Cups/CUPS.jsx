@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Link from '@mui/material/Link'
@@ -7,59 +7,115 @@ import Typography from '@mui/material/Typography'
 import InputField from '../InputField/InputField'
 
 import { MAX_STEPS_NUMBER } from '../../containers/Gurb/GurbFormRequirements'
-import { checkCups } from '../../services/api'
+import { checkCups, /*checkSIPSCups*/ } from '../../services/api'
+
+const defaultFunc = () => {}
 
 const CUPS = (props) => {
   const {
     values,
     errors,
     touched,
-    setValues = () => {},
-    setFieldValue = () => {},
-    setFieldError = () => {},
-    setFieldTouched = () => {},
-    setMaxStepNum = () => {}
+    setValues = defaultFunc,
+    setFieldValue = defaultFunc,
+    setFieldError = defaultFunc,
+    setFieldTouched = defaultFunc,
+    setMaxStepNum = defaultFunc,
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
 
+  const validateCups = useCallback(async (cups) => {
+
+    const requestError = (source, error) => {
+      const requestError = new Error(`Error a ${source}`)
+      requestError.source = source
+      requestError.cause = error
+
+      return requestError
+    }
+
+    setLoading(true)
+    await setFieldValue('cups_valid', false, false)
+
+    try {
+
+     /*  let sipResponse;
+      try{
+        sipResponse = await checkSIPSCups(cups)
+      }
+      catch (error){
+          throw requestError("SIPS", error)
+      } */
+      
+      let cupsResponse
+      try{
+        cupsResponse = await checkCups(cups)
+      }
+      catch (error){
+        throw requestError("CUPS", error)
+      }
+        
+      const {
+        status,
+        knowledge_of_distri,
+        tariff_name,
+      } = cupsResponse?.data || {}
+
+      const new_contract = ['new', 'inactive'].includes(status)
+
+      setValues((currentValues) => ({
+          ...currentValues,
+          ...{
+            cups_valid: true,
+            social_tariff: true,
+            new_contract,
+            knowledge_of_distri,
+            tariff_name
+          }
+        }),true)
+
+      if (setMaxStepNum) {
+        setMaxStepNum(
+          new_contract
+            ? MAX_STEPS_NUMBER.MAX_STEP_NUMBER_NEW_CONTRACT
+            : MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
+        )
+      }
+    } catch (error) {
+      switch (error.source) {
+        case "SIPS":
+          //TODO: cridar el pop up
+          break
+        case "CUPS":
+          setFieldError('cups', t('ERROR_INVALID_FIELD'))
+          setValues((currentValues) => ({
+            ...currentValues,
+            ...{
+              cups_valid: false,
+              social_tariff: false,
+            }
+          }),true)
+          break
+      }      
+    } finally {
+      setLoading(false)
+    }
+  }, [
+    setFieldValue,
+    setFieldError,
+    setMaxStepNum,
+    setValues,
+    t,
+  ])
+
+
   useEffect(() => {
     const cups = values.cups
     if (cups?.length >= 20 && cups?.length <= 22) {
-      setLoading(true)
-      setFieldValue('cups_valid', false)
-      checkCups(cups)
-        .then((response) => {
-          const { status, knowledge_of_distri, tariff_name } = response?.data || {}
-          const new_contract = ['new', 'inactive'].includes(status)
-          setValues({
-            ...values,
-            ...{
-              cups_valid: true,
-              social_tariff: true,
-              new_contract,
-              knowledge_of_distri,
-              tariff_name
-            }
-          },true)
-
-          if (setMaxStepNum) {
-            setMaxStepNum(
-              new_contract
-                ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
-                : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
-            )
-          }
-        })
-        .catch(() => {
-          setFieldError('cups', t('ERROR_INVALID_FIELD'))
-          setFieldValue('cups_valid', false)
-        })
-        .finally(() => {
-          setLoading(false)
-        })
+      validateCups(cups)
     }
-  }, [values.cups])
+  }, [values.cups,validateCups])
 
   const handleInputCups = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]*/)
