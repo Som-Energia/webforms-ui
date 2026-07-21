@@ -154,7 +154,7 @@ const NewMemberForm = () => {
       setSending(false)
     }
     const data = newNormalizeMember(values)
-    await member(data)
+    member(data)
       .then((response) => {
         if (response?.state !== true) {
           finishSubmission({ hasError: true })
