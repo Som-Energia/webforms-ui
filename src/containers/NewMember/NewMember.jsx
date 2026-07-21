@@ -140,36 +140,38 @@ const NewMemberForm = () => {
   }
 
   const handlePost = async (values) => {
-    setSending(true)
     trackEvent({
       category: 'Send',
       action: 'sendNewMemberClick',
       name: 'send-new-member'
     })
 
+    setSending(true)
+
+    const finishSubmission = ({ hasError }) => {
+      setCompleted(true)
+      setError(hasError)
+      setSending(false)
+    }
     const data = newNormalizeMember(values)
     await member(data)
       .then((response) => {
-        if (response?.state === true) {
+        if (response?.state !== true) {
+          finishSubmission({ hasError: true })
+          return
+        }
+
+        trackSuccess()
+        if (response?.data?.endpoint) {
           setError(false)
-          trackSuccess()
-          if (response?.data?.endpoint) {
-            setData(response?.data)
-            setUrl(response.data.endpoint)
-          } else {
-            setCompleted(true)
-            setSending(false)
-          }
+          setData(response.data)
+          setUrl(response.data.endpoint)
         } else {
-          setCompleted(true)
-          setSending(false)
-          setError(true)
+          finishSubmission({ hasError: false })
         }
       })
       .catch(() => {
-        setCompleted(true)
-        setSending(false)
-        setError(true)
+        finishSubmission({ hasError: true })
       })
   }
 
