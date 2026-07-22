@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import InputField from '../InputField/InputField'
 
 import { MAX_STEPS_NUMBER } from '../../containers/Gurb/GurbFormRequirements'
-import { checkCups, /*checkSIPSCups*/ } from '../../services/api'
+import { checkCups } from '../../services/api'
 
 const defaultFunc = () => {}
 
@@ -20,102 +20,71 @@ const CUPS = (props) => {
     setFieldValue = defaultFunc,
     setFieldError = defaultFunc,
     setFieldTouched = defaultFunc,
-    setMaxStepNum = defaultFunc,
+    setMaxStepNum = defaultFunc
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
 
-  const validateCups = useCallback(async (cups) => {
+  const validateCups = useCallback(
+    async (cups) => {
+      setLoading(true)
+      await setFieldValue('cups_valid', false, false)
 
-    const requestError = (source, error) => {
-      const requestError = new Error(`Error a ${source}`)
-      requestError.source = source
-      requestError.cause = error
-
-      return requestError
-    }
-
-    setLoading(true)
-    await setFieldValue('cups_valid', false, false)
-
-    try {
-
-     /*  let sipResponse;
-      try{
-        sipResponse = await checkSIPSCups(cups)
-      }
-      catch (error){
-          throw requestError("SIPS", error)
-      } */
-      
       let cupsResponse
-      try{
+      try {
         cupsResponse = await checkCups(cups)
-      }
-      catch (error){
-        throw requestError("CUPS", error)
-      }
-        
-      const {
-        status,
-        knowledge_of_distri,
-        tariff_name,
-      } = cupsResponse?.data || {}
 
-      const new_contract = ['new', 'inactive'].includes(status)
+        const { status, knowledge_of_distri, tariff_name, sips } =
+          cupsResponse?.data || {}
 
-      setValues((currentValues) => ({
-          ...currentValues,
-          ...{
-            cups_valid: true,
-            social_tariff: true,
-            new_contract,
-            knowledge_of_distri,
-            tariff_name
-          }
-        }),true)
+        const new_contract = ['new', 'inactive'].includes(status)
 
-      if (setMaxStepNum) {
-        setMaxStepNum(
-          new_contract
-            ? MAX_STEPS_NUMBER.MAX_STEP_NUMBER_NEW_CONTRACT
-            : MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
+        setValues(
+          (currentValues) => ({
+            ...currentValues,
+            ...{
+              cups_valid: true,
+              social_tariff: sips,
+              new_contract,
+              knowledge_of_distri,
+              tariff_name
+            }
+          }),
+          true
         )
-      }
-    } catch (error) {
-      switch (error.source) {
-        case "SIPS":
-          //TODO: cridar el pop up
-          break
-        case "CUPS":
-          setFieldError('cups', t('ERROR_INVALID_FIELD'))
-          setValues((currentValues) => ({
+
+        if (setMaxStepNum) {
+          setMaxStepNum(
+            new_contract
+              ? MAX_STEPS_NUMBER.MAX_STEP_NUMBER_NEW_CONTRACT
+              : MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
+          )
+        }
+      } catch (error) {
+        setFieldError('cups', t('ERROR_INVALID_FIELD'))
+        setValues(
+          (currentValues) => ({
             ...currentValues,
             ...{
               cups_valid: false,
-              social_tariff: false,
+              social_tariff: false
             }
-          }),true)
-          break
-      }      
-    } finally {
-      setLoading(false)
-    }
-  }, [
-    setFieldValue,
-    setFieldError,
-    setMaxStepNum,
-    setValues,
-    t,
-  ])
-
+          }),
+          true
+        )
+      } finally {
+        setLoading(false)
+      }
+    },
+    [setFieldValue, setFieldError, setMaxStepNum, setValues, t]
+  )
 
   useEffect(() => {
     const cups = values.cups
     if (cups?.length >= 20 && cups?.length <= 22) {
       validateCups(cups)
     }
-  }, [values.cups,validateCups])
+  }, [values.cups, validateCups])
 
   const handleInputCups = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]*/)
@@ -154,7 +123,10 @@ const CUPS = (props) => {
       touched={touched?.cups}
       value={values?.cups}
       error={
-        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri || errors?.cups_valid
+        errors?.cups ||
+        errors?.new_contract ||
+        errors?.knowledge_of_distri ||
+        errors?.cups_valid
       }
       isLoading={loading}
       required={true}
