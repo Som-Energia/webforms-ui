@@ -290,6 +290,7 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
             handleBlur,
             handleSubmit,
             setFieldValue,
+            isValid,
             isSubmitting
           } = props
 
@@ -532,9 +533,9 @@ const ModifyParams = ({ nextStep, prevStep, handleStepChanges, params }) => {
                 {nextStep && (
                   <NextButton
                     type="submit"
-                    onClick={nextStep}
                     disabled={
                       (!values.changePhases && !values.changePower) ||
+                      !isValid ||
                       isSubmitting
                     }
                     title={t('NEXT')}

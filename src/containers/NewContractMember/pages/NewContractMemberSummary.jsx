@@ -193,14 +193,19 @@ const NewContractMemberSummary = (props) => {
         : physicalReviewFields
 
   const getPaymentField = () => {
+    const isIbanPayment = values?.new_member?.payment_method === 'iban'
+    const paymentMethodValue = values?.new_member?.payment_method === 'credit_card'
+      ? t('PAYMENT_METHOD_CCARD')
+      : t('PAYMENT_METHOD_IBAN')
+
     let paymentFields = [
       {
         reviewLabel: t('REVIEW_PAYMENT_DATA'),
         reviewValue: t('REVIEW_PAYMENT_DATA_QUANTITY')
       },
       {
-        reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
-        reviewValue: values?.new_member?.iban,
+        reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_METHOD'),
+        reviewValue: paymentMethodValue,
         step: showReviewLinks ? formSteps['PAYMENT_INFO'] : null
       },
       {
@@ -213,6 +218,15 @@ const NewContractMemberSummary = (props) => {
     if (['member-on', 'member-link', 'campaign-offer'].includes(values.has_member)) {
       paymentFields.shift()
     }
+
+    if (isIbanPayment) {
+      paymentFields.splice(2, 0, {
+        reviewLabel: t('REVIEW_PAYMENT_DATA_LABEL_IBAN'),
+        reviewValue: values?.new_member?.iban,
+        step: showReviewLinks ? formSteps['PAYMENT_INFO'] : null
+      })
+    }
+
     return paymentFields
   }
 
