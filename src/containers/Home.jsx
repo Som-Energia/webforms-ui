@@ -45,8 +45,8 @@ const options = [
         href: `${language}/contract/sign/${signatureLeadId}?cups=${signatureCups}`
       }]
     : []),
-  { title: 'Pagament OK', href: `${language}/pagament-realitzat` },
-  { title: 'Pagament KO', href: `${language}/pagament-cancellat` },
+  { title: 'Pagament OK', href: `${language}/pago-realizado` },
+  { title: 'Pagament KO', href: `${language}/pago-cancelado` },
   { title: 'Test de preus de tarifa', href: `/tariff` },
 ]
 
