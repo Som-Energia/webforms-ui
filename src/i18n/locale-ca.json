@@ -145,7 +145,7 @@
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Declaro que la persona titular del compte bancari, jo mateixa o una tercera persona, ha atorgat el seu consentiment exprés per a la domiciliació bancària corresponent a l'aportació voluntària al capital social de la cooperativa, autoritzant el càrrec de l'import corresponent en el compte indicat.",
     "IBAN_ERROR": "IBAN incorrecte",
     "SIGNATURE": "Signa el teu contracte",
-    "SIGNATURE_INFO": "A continuació revisa els documents, accepta les condicions contractuals i fes clic per signar el document.",
+    "SIGNATURE_INFO": "A continuació revisa la documentació, accepta les condicions contractuals i fes clic per signar el document.",
     "GENERIC_ERROR_TITLE": "Ho sentim, no ha estat possible dur a terme la teva sol·licitud",
     "CONTRACT_SIGNATURE_ERROR_DESCRIPTION": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> i revisarem la situació. Disculpa les molèsties.",
     "API_VALIDATED_FIELD_CHECKING": "Validant…",
