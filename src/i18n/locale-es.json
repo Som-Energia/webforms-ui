@@ -160,7 +160,7 @@
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Declaro que la persona titular de la cuenta bancaria, yo misma o una tercera persona, ha otorgado su consentimiento expreso para la domiciliación bancaria correspondiente a la aportación voluntaria al capital social de la cooperativa, autorizando el cargo del importe correspondiente en la cuenta indicada.",
     "IBAN_ERROR": "IBAN incorrecto",
     "SIGNATURE": "Firma tu contrato",
-    "SIGNATURE_INFO": "A continuación revisa los documentos, acepta las condiciones contractuales y haz clic para firmar el documento",
+    "SIGNATURE_INFO": "A continuación revisa los documentos, acepta las condiciones contractuales y haz clic para firmar el documento.",
     "GENERIC_ERROR_TITLE": "Lo sentimos, no ha sido posible realizar tu solicitud",
     "CONTRACT_SIGNATURE_ERROR_DESCRIPTION": "Por favor, inténtalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> y revisaremos la siituación.",
     "API_VALIDATED_FIELD_CHECKING": "Validando…",
