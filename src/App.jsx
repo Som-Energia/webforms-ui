@@ -525,6 +525,7 @@ const App = (props) => {
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
+                         <PopUpContextProvider>
                         <LoadingContextProvider>
                           <SummaryContextProvider>
                             <NewContractMemberForm
@@ -533,6 +534,7 @@ const App = (props) => {
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
+                        </PopUpContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -684,6 +686,7 @@ const App = (props) => {
                     path={path}
                     element={
                        <ThemeWrapper theme={webFormsTheme}>
+                        <PopUpContextProvider>
                         <LoadingContextProvider>
                           <SummaryContextProvider>
                             <NewContractMemberForm
@@ -693,6 +696,7 @@ const App = (props) => {
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
+                        </PopUpContextProvider>
                       </ThemeWrapper>
                     }
                   />
