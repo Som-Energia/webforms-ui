@@ -13,7 +13,7 @@ import { LightbulbIcon } from '../../../data/icons/Icons'
 
 import Grid from '@mui/material/Grid'
 import PopUpContext from '../../../context/PopUpContext'
-import SimpleDialog from '../../../components/OldComponents/SimpleDialog'
+import SimpleDialog from '../../../components/SimpleDialog'
 
 const NewContractMemberSupplyPoint = ({ ...props }) => {
   const trackID = 'supply-point'
@@ -40,7 +40,7 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
 
 
   useEffect(() => {
-    if(values.social_tariff && values.cups.length > 0){
+    if(values.social_tariff && values.cups_valid){
       setContent(
         <SimpleDialog
           text={
@@ -53,7 +53,7 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
        />
       )
     }
-  },[values.social_tariff,values.cups,setContent,t])
+  },[values.social_tariff,values.cups_valid,setContent,t])
 
 
   const options = [
