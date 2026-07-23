@@ -467,7 +467,6 @@ const App = (props) => {
                   }
                 />
                 {[
-                  '/:language/pagament-realitzat',
                   '/:language/pago-realizado'
                 ].map((path) => (
                   <Route
@@ -479,7 +478,7 @@ const App = (props) => {
                           mode={'success'}
                           {...props}
                           title={t('SUCCESS_TEXT')}
-                          description={t('NEWMEMBER_OK_DESCRIPTION')}
+                          description={t('PAYMENT_OK_DESCRIPTION')}
                         />
                       </ThemeWrapper>
                     }
@@ -487,7 +486,6 @@ const App = (props) => {
                 ))}
 
                 {[
-                  '/:language/pagament-cancellat',
                   '/:language/pago-cancelado'
                 ].map((path) => (
                   <Route
@@ -502,7 +500,7 @@ const App = (props) => {
                           <Typography
                             sx={{ color: 'secondary.extraDark' }}
                             dangerouslySetInnerHTML={{
-                              __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                              __html: t('PAYMENT_KO_DESCRIPTION', {
                                 url: t('CONTACT_HELP_URL')
                               })
                             }}

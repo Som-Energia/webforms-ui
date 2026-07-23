@@ -31,8 +31,6 @@ const base = {
     "privacy_policy_accepted": false,
     "terms_accepted": false,
     "legal_person_accepted": false,
-    "urlok": "NEWMEMBER_OK_REDIRECT_URL",
-    "urlko": "NEWMEMBER_KO_REDIRECT_URL"
   },
   normalizedData: {
     "tipuspersona": 'fisica',
@@ -48,8 +46,6 @@ const base = {
     "idioma": 'es_ES',
     "payment_method": 'remesa',
     "payment_iban": '',
-    "urlok": 'NEWMEMBER_OK_REDIRECT_URL',
-    "urlko": 'NEWMEMBER_KO_REDIRECT_URL',
     "cognom": ''
   }
 }
@@ -94,8 +90,6 @@ const newMember = {
     "privacy_policy_accepted": true,
     "terms_accepted": true,
     "legal_person_accepted": true,
-    "urlok": "https://www.somenergia.coop/es/pago-realizado/",
-    "urlko": "https://www.somenergia.coop/es/pago-cancelado/"
   },
   normalizedData: {
     "tipuspersona": "juridica",
@@ -111,8 +105,6 @@ const newMember = {
     "idioma": "ca_ES",
     "payment_method": "remesa",
     "payment_iban": "ES77 1234 1234 1612 3456 7890",
-    "urlok": "https://www.somenergia.coop/es/pago-realizado/",
-    "urlko": "https://www.somenergia.coop/es/pago-cancelado/",
     "representant_nom": "David Palomo",
     "representant_dni": "31959788T"
   }
@@ -164,8 +156,6 @@ const newNewMemberPhisical = {
       surname2: "Luffy",
       terms_accepted: true
     },
-    urlok: "https://www.somenergia.coop/es/4321/",
-    urlko: "https://www.somenergia.coop/es/1234/"
   },
   normalizedData: {
     tipuspersona: "fisica",
@@ -183,8 +173,6 @@ const newNewMemberPhisical = {
     idioma: "es_ES",
     payment_method: "remesa",
     payment_iban: "ES59 0128 8425 8177 2932 2853",
-    urlok: "https://www.somenergia.coop/es/4321/",
-    urlko: "https://www.somenergia.coop/es/1234/",
     referral_source: "O9",
     gender: "male",
     birthdate: "1994-08-31",
@@ -241,8 +229,6 @@ const newNewMemberJuridical = {
       surname2: "",
       terms_accepted: true,
     },
-    urlko: "https://www.somenergia.coop/es/4321/",
-    urlok: "https://www.somenergia.coop/es/1234/"
   },
   normalizedData: {
     tipuspersona: "juridica",
@@ -259,8 +245,6 @@ const newNewMemberJuridical = {
     idioma: "es_ES",
     payment_method: "remesa",
     payment_iban: "ES59 0128 8425 8177 2932 2853",
-    urlok: "https://www.somenergia.coop/es/1234/",
-    urlko: "https://www.somenergia.coop/es/4321/",
     representant_nom: "Benji",
     representant_dni: "11111111H",
     referral_source: "O9",

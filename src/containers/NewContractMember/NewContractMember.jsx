@@ -65,10 +65,9 @@ import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
 import { newNormalizeContract } from '../../services/newNormalize'
 import { activateLead, createContractLead } from '../../services/api'
-
+import { getUrlOrBrowserSessionLanguage, isCompanyVat } from '../../services/utils'
 import { usePixelEvent } from '../../hooks/usePixelEvent'
 import useBackNavigationWarning from '../../hooks/useBackNavigationWarning'
-import { isCompanyVat } from '../../services/utils'
 import { buildInitialValues } from './newContractMember.values'
 
 const ALERT_STEPS = {
@@ -110,6 +109,7 @@ const NewContractMemberForm = (props) => {
   const [formStepsName, setFormStepsName] = useState({})
   const [MAX_STEP_NUMBER, setMAX_STEP_NUMBER] = useState(11)
   const [prevSteps] = useState(new Stack())
+  const urlOrBrowserSessionLanguage = getUrlOrBrowserSessionLanguage(language, i18n.language)
   const [leadId, setLeadId] = useState()
   useBackNavigationWarning(
     activeStep > 0 && !completed && redsysURL === '',
@@ -288,6 +288,7 @@ const NewContractMemberForm = (props) => {
     setSignatureCompleted(false)
 
     const data = newNormalizeContract(values, gurbCode)
+    data.session_language = urlOrBrowserSessionLanguage
     await createContractLead(data)
       .then((response) => {
         if (response?.state === true) {
