@@ -29,10 +29,12 @@ export const contributionParams = {
   maxPercentOverAnnualUse: 100
 }
 
-const SUPPORTED_LANGUAGES = ['ca', 'es', 'eu', 'gl']
+const SUPPORTED_SESSION_LANGUAGES = ['ca', 'es', 'eu', 'gl']
 
-export const getUrlOrBrowserSessionLanguage = (urlLanguage, fallbackLanguage) => {
-  if (SUPPORTED_LANGUAGES.includes(urlLanguage)) {
+export const getUrlOrBrowserSessionLanguage = (pathname, fallbackLanguage) => {
+  const urlLanguage = pathname.split('/')[1] || ''
+
+  if (SUPPORTED_SESSION_LANGUAGES.includes(urlLanguage)) {
     return `${urlLanguage}_ES`
   }
 
@@ -42,7 +44,7 @@ export const getUrlOrBrowserSessionLanguage = (urlLanguage, fallbackLanguage) =>
 
   const browserLanguage = navigator.languages?.[0] || navigator.language || ''
   const normalizedLanguage = browserLanguage.toLowerCase().split('-')[0]
-  const sessionLanguage = SUPPORTED_LANGUAGES.includes(normalizedLanguage)
+  const sessionLanguage = SUPPORTED_SESSION_LANGUAGES.includes(normalizedLanguage)
     ? normalizedLanguage
     : fallbackLanguage
 

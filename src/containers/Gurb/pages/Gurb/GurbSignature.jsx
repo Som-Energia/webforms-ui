@@ -1,11 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-
 import { Grid2 as Grid } from '@mui/material'
 
 import SignatureIframe from '../../../Signature'
 import { createGurbSignature } from '../../../../services/apiGurb'
-import { getUrlOrBrowserSessionLanguage } from '../../../../services/utils'
 
 const GurbSignature = ({
   values,
@@ -15,8 +12,6 @@ const GurbSignature = ({
 }) => {
   const { t } = useTranslation()
   const { i18n } = useTranslation()
-  const { language } = useParams()
-  const urlOrBrowserSessionLanguage = getUrlOrBrowserSessionLanguage(language, i18n.language)
 
   const createSignatureHandler = (response) => {
     if (!response) {
@@ -39,7 +34,6 @@ const GurbSignature = ({
               beta: values?.gurb?.power,
               cups: values?.cups,
               vat: values?.owner?.nif,
-              session_language: urlOrBrowserSessionLanguage
             }}
             textRecommendation={t('SIGNATURE')}
             textInfo={t('GURB_SIGNATURE_INFO')}

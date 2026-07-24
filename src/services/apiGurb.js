@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './custom_axios'
 
 const WEBFORMS_API_URL =
   document.getElementById('root')?.dataset?.webformsApiUrl ??
