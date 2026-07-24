@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.0.0 2026-07-24
+
+- NEW: check SIPS in contract form
+
 ## 7.3.2 2026-07-21
 
 - FIX: Prevent summary page to pop up between loading and Redsys page
