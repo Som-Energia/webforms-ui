@@ -42,6 +42,7 @@ export default function Contact({
           ...params
         }}
         validationSchema={ContactSchema}
+        validateOnMount
         onSubmit={(values, { setSubmitting }) => {
           handleStepChanges({ contact: values })
           nextStep()

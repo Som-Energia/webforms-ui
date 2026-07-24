@@ -216,4 +216,30 @@ describe('Modify Contract', () => {
       .parent()
       .should('have.class', 'Mui-error')
   })
+
+  it('Contact submit is disabled until the contact details are valid', function () {
+    cy.get('[data-cy=next]').click()
+
+    cy.get('[name=changePower]').click()
+
+    cy.get('[name=power]').type(this.data.power)
+    cy.get('[name=power]').should('have.value', this.data.power)
+
+    cy.get('[name=power2]').type(this.data.power2)
+    cy.get('[name=power2]').should('have.value', this.data.power2)
+
+    cy.get('[type=submit]').click()
+
+    cy.get('[name=contactName]').closest('form').within(() => {
+      cy.get('[type=submit]').should('be.disabled')
+    })
+
+    cy.get('[name=contactName]').type(this.data.name)
+    cy.get('[name=contactSurname]').type(this.data.surname)
+    cy.get('[name=phone]').type(this.data.phone)
+
+    cy.get('[name=contactName]').closest('form').within(() => {
+      cy.get('[type=submit]').should('not.be.disabled')
+    })
+  })
 })
