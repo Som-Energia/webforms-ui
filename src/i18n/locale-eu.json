@@ -138,7 +138,7 @@
     "PAYMENT_METHOD_CCARD_ACCEPT": "Berresten dut txartelaren titularrak, nik neuk edo beste norbaitek, ordainketa-metodo honen bidez dagokion kobrantza baimentzen duela.",
     "IBAN_ERROR": "IBAN okerra",
     "SIGNATURE": "Sinatu zure kontratua",
-    "SIGNATURE_INFO": "",
+    "SIGNATURE_INFO": "Jarraian berrikusi dokumentazioa, onartu kontratu-baldintzak eta egin klik dokumentua sinatzeko.",
     "GENERIC_ERROR_TITLE": "Barkatu, ezin izan dugu zure eskaera bete",
     "CONTRACT_SIGNATURE_ERROR_DESCRIPTION": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
     "API_VALIDATED_FIELD_CHECKING": "Baliozkotzen…",
