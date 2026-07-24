@@ -133,7 +133,7 @@
     "PAYMENT_METHOD_CCARD_ACCEPT": "Confirmo que a persoa titular da tarxeta, eu mesma ou unha terceira persoa, autoriza o cobramento correspondente a través deste método de pagamento.",
     "IBAN_ERROR": "IBAN incorrecto",
     "SIGNATURE": "Firma o teu contrato",
-    "SIGNATURE_INFO": "",
+    "SIGNATURE_INFO": "A seguir, revisa a documentación, acepta as condicións contractuais e fai clic para asinares o documento.",
     "GENERIC_ERROR_TITLE": "Sentímolo, non foi posíbel realizar a túa solicitude",
     "CONTRACT_SIGNATURE_ERROR_DESCRIPTION": "Téntao de novo máis tarde. Se o problema continúa, pódesnos escribir a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a> e revisaremos a situación. Desculpa as molestias.",
     "API_VALIDATED_FIELD_CHECKING": "A validar…",
