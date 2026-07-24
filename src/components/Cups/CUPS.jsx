@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Link from '@mui/material/Link'
@@ -9,55 +9,82 @@ import InputField from '../InputField/InputField'
 import { MAX_STEPS_NUMBER } from '../../containers/Gurb/GurbFormRequirements'
 import { checkCups } from '../../services/api'
 
+const defaultFunc = () => {}
+
 const CUPS = (props) => {
   const {
     values,
     errors,
     touched,
-    setValues = () => {},
-    setFieldValue = () => {},
-    setFieldError = () => {},
-    setFieldTouched = () => {},
-    setMaxStepNum = () => {}
+    setValues = defaultFunc,
+    setFieldValue = defaultFunc,
+    setFieldError = defaultFunc,
+    setFieldTouched = defaultFunc,
+    setMaxStepNum = defaultFunc
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    const cups = values.cups
-    if (cups?.length >= 20 && cups?.length <= 22) {
+  const validateCups = useCallback(
+    async (cups) => {
       setLoading(true)
-      setFieldValue('cups_valid', false)
-      checkCups(cups)
-        .then((response) => {
-          const { status, knowledge_of_distri, tariff_name } = response?.data || {}
-          const new_contract = ['new', 'inactive'].includes(status)
-          setValues({
-            ...values,
+      await setFieldValue('cups_valid', false, false)
+
+      let cupsResponse
+      try {
+        cupsResponse = await checkCups(cups)
+
+        const { status, knowledge_of_distri, tariff_name, sips } =
+          cupsResponse?.data || {}
+
+        const new_contract = ['new', 'inactive'].includes(status)
+
+        setValues(
+          (currentValues) => ({
+            ...currentValues,
             ...{
               cups_valid: true,
+              social_tariff: sips,
               new_contract,
               knowledge_of_distri,
               tariff_name
             }
-          })
-          if (setMaxStepNum) {
-            setMaxStepNum(
-              new_contract
-                ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
-                : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
-            )
-          }
-        })
-        .catch(() => {
-          setFieldError('cups', t('ERROR_INVALID_FIELD'))
-          setFieldValue('cups_valid', false)
-        })
-        .finally(() => {
-          setLoading(false)
-        })
+          }),
+          true
+        )
+
+        if (setMaxStepNum) {
+          setMaxStepNum(
+            new_contract
+              ? MAX_STEPS_NUMBER.MAX_STEP_NUMBER_NEW_CONTRACT
+              : MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
+          )
+        }
+      } catch (error) {
+        setFieldError('cups', t('ERROR_INVALID_FIELD'))
+        setValues(
+          (currentValues) => ({
+            ...currentValues,
+            ...{
+              cups_valid: false,
+              social_tariff: false
+            }
+          }),
+          true
+        )
+      } finally {
+        setLoading(false)
+      }
+    },
+    [setFieldValue, setFieldError, setMaxStepNum, setValues, t]
+  )
+
+  useEffect(() => {
+    const cups = values.cups
+    if (cups?.length >= 20 && cups?.length <= 22) {
+      validateCups(cups)
     }
-  }, [values.cups])
+  }, [values.cups, validateCups])
 
   const handleInputCups = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]*/)
@@ -96,7 +123,10 @@ const CUPS = (props) => {
       touched={touched?.cups}
       value={values?.cups}
       error={
-        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri || errors?.cups_valid
+        errors?.cups ||
+        errors?.new_contract ||
+        errors?.knowledge_of_distri ||
+        errors?.cups_valid
       }
       isLoading={loading}
       required={true}

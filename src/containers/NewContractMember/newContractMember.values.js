@@ -1,6 +1,7 @@
 export const buildInitialValues = (language, tariff) => ({
   cups: '',
   cups_valid: false,
+  social_tariff: false,
   has_member: undefined,
   member_is_holder: undefined,
   has_light: undefined,

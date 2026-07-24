@@ -11,7 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import dayjs from 'dayjs'
 import { styled } from '@mui/material/styles'
 import PopUpContext from '../../../context/PopUpContext'
-import SimpleDialog from '../../../components/OldComponents/SimpleDialog';
+import SimpleDialog from '../../../components/SimpleDialog';
 import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography'
 import {
