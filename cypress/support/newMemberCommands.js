@@ -1,5 +1,21 @@
 Cypress.Commands.add('identifyNewMember', (nif) => {
+  cy.intercept('GET', '/check/vat/exists/*', {
+    statusCode: 200,
+    body: {
+      data: {
+        exists: false,
+        is_member: false,
+        is_selfconsumption_owner: false,
+        valid: true
+      },
+      state: true,
+      status: 'ONLINE'
+    }
+  }).as('checkVAT')
+
   cy.get('[data-cy="new_member.nif"]').type(nif)
+  cy.wait('@checkVAT')
+  cy.get('[data-cy=next]').should('not.be.disabled')
   cy.get('[data-cy=next]').click()
 })
 
@@ -111,7 +127,7 @@ Cypress.Commands.add(
 )
 
 Cypress.Commands.add('choosePaymentMethod', (creditCard = false) => {
-  const optionValue = creditCard ? 'credit-card' : 'iban'
+  const optionValue = creditCard ? 'credit_card' : 'iban'
   cy.get('[data-cy="method-payment-question"]')
     .get(`[data-cy="${optionValue}"]`)
     .click()

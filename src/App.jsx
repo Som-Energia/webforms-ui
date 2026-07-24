@@ -48,6 +48,11 @@ const App = (props) => {
   const NewContractMemberForm = lazy(() =>
     import('./containers/NewContractMember/NewContractMember')
   )
+  const NewContractMemberSignatureStandalone = lazy(() =>
+    import(
+      './containers/NewContractMember/NewContractMemberSignatureStandalone'
+    )
+  )
   const NewMemberForm = lazy(() => import('./containers/NewMember/NewMember'))
   const Result = lazy(() => import('./containers/Result'))
   const GurbContractPaymentSuccessful = lazy(() => import('./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful'))
@@ -511,13 +516,16 @@ const App = (props) => {
                   '/:language/formulario-contratacion-periodos',
                   '/:language/formulari-contractacio-periodes',
                   '/:language/formulario-contrato-periodos',
-                  '/:language/kontratazio-formularioa-ordutarteak'
+                  '/:language/kontratazio-formularioa-ordutarteak',
+                  '/:language/landing/totquisquicanvia',
+                  '/:language/landing/todoquisquicambia'
                 ].map((path) => (
                   <Route
                     key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
+                         <PopUpContextProvider>
                         <LoadingContextProvider>
                           <SummaryContextProvider>
                             <NewContractMemberForm
@@ -526,6 +534,7 @@ const App = (props) => {
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
+                        </PopUpContextProvider>
                       </ThemeWrapper>
                     }
                   />
@@ -534,13 +543,16 @@ const App = (props) => {
                   '/:language/formulario-contratacion-indexada',
                   '/:language/formulari-contractacio-indexada',
                   '/:language/formulario-contrato-indexada',
-                  '/:language/kontratazio-formularioa-indexatua'
+                  '/:language/kontratazio-formularioa-indexatua',
+                  '/:language/landing/totquisquicanvia',
+                  '/:language/landing/todoquisquicambia'
                 ].map((path) => (
                   <Route
                     key={path}
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
+                        <PopUpContextProvider>
                         <LoadingContextProvider>
                           <SummaryContextProvider>
                             <NewContractMemberForm
@@ -549,10 +561,30 @@ const App = (props) => {
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
+                        </PopUpContextProvider>
                       </ThemeWrapper>
                     }
                   />
                 ))}
+                <Route
+                  path="/:language/contract/sign/:leadId"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <NewContractMemberSignatureStandalone />
+                    </ThemeWrapper>
+                  }
+                />
+                <Route
+                  path="/:language/contract/:leadId/success"
+                  element={
+                    <ThemeWrapper theme={webFormsTheme}>
+                      <Success
+                        title="NEW_MEMBER_CONTRACT_SUCCESS_TITLE"
+                        description="NEW_CONTRACT_SUCCESS_DESC"
+                      />
+                    </ThemeWrapper>
+                  }
+                />
                 {props?.isGurbEnabled && (
                   <Route
                     path="/:language/gurb/:gurbCode/requirements/"
@@ -654,6 +686,7 @@ const App = (props) => {
                     path={path}
                     element={
                        <ThemeWrapper theme={webFormsTheme}>
+                        <PopUpContextProvider>
                         <LoadingContextProvider>
                           <SummaryContextProvider>
                             <NewContractMemberForm
@@ -663,11 +696,11 @@ const App = (props) => {
                             />
                           </SummaryContextProvider>
                         </LoadingContextProvider>
+                        </PopUpContextProvider>
                       </ThemeWrapper>
                     }
                   />
                 ))}
-
               </Routes>
             </Router>
             <ApiStatus />
