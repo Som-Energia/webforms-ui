@@ -18,6 +18,8 @@ Aquest subflux decideix si la persona pot continuar directament a `join` o si ab
 | Bloquejos | `inside_perimeter`, `has_light` i `redirectUrl` bloquegen el següent pas |
 | Tracking | event per `activeStep` amb `gurbCode` |
 
+Els índexs de la navegació estan centralitzats a `GURB_REQUIREMENTS_FORM_SUBSTEPS` dins de `src/services/steps.js`. El resultat es detecta dinàmicament amb `steps.length`, ja que la selecció de tarifa només existeix per a una nova contractació.
+
 ## Què passa si el CUPS no el tenim a Som
 
 El camí important no és només "no compleix". Si el flux determina `new_contract === true`, el resultat no envia a `join` directament, sinó a la contractació (`periods` o `indexed`) amb el `gurb-code` incrustat a la URL.

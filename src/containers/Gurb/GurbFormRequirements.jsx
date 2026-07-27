@@ -22,6 +22,7 @@ import Address from './pages/Requirements/Address'
 import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
+import { GURB_REQUIREMENTS_FORM_SUBSTEPS } from '../../services/steps'
 
 const GurbFormRequirements = () => {
   const { language, gurbCode } = useParams()
@@ -76,7 +77,10 @@ const GurbFormRequirements = () => {
     const { values } = formikRef.current
 
     // new contract
-    if (activeStep === 1 && values.new_contract) {
+    if (
+      activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.ADDRESS &&
+      values.new_contract
+    ) {
       setSteps(newContractSteps)
     }
   }, [activeStep])
@@ -84,14 +88,14 @@ const GurbFormRequirements = () => {
   useSyncLanguage(language)
 
   useEffect(() => {
-    if (activeStep !== 4) {
+    if (activeStep !== steps.length) {
       trackEvent({
         category: 'GurbRequirements',
         action: 'setGurbRequirementsStep',
         name: `gurb-requirements-step-${activeStep}-${gurbCode}`
       })
     }
-  }, [activeStep, gurbCode])
+  }, [activeStep, gurbCode, steps.length])
 
   const renderCurrentStep = (formikProps) => {
     return steps.at(activeStep)?.(formikProps)
@@ -105,9 +109,12 @@ const GurbFormRequirements = () => {
     const { address, has_light, redirectUrl } = formik.values || {}
 
     return (
-      (activeStep === 1 && !address.inside_perimeter) ||
-      (activeStep === 2 && has_light !== 'light-on') ||
-      (activeStep === 4 && !redirectUrl)
+      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.ADDRESS &&
+        !address.inside_perimeter) ||
+      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.LIGHT &&
+        has_light !== 'light-on') ||
+      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.TARIFF_SELECTION &&
+        !redirectUrl)
     )
   }
 
