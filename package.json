@@ -18,7 +18,7 @@
     "cypress": "TZ=Europe/Madrid cypress open",
     "cypress:smoke": "TZ=Europe/Madrid cypress run --env configFile=production",
     "lint": "eslint . --report-unused-disable-directives --quiet",
-    "lint:todos": "./scripts/todos.sh src/",
+    "lint:todos": "todos ./src",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
