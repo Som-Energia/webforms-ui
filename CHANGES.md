@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.0.1 2026-07-27
+
+- FIX: Require IBAN payment in the new contract form
+
 ## 8.0.0 2026-07-24
 
 - NEW: check SIPS in contract form
