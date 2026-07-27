@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography'
 
 import InputField from '../InputField/InputField'
 
-import { MAX_STEPS_NUMBER } from '../../containers/Gurb/GurbFormRequirements'
 import { checkCups } from '../../services/api'
 
 const defaultFunc = () => {}
@@ -19,8 +18,7 @@ const CUPS = (props) => {
     setValues = defaultFunc,
     setFieldValue = defaultFunc,
     setFieldError = defaultFunc,
-    setFieldTouched = defaultFunc,
-    setMaxStepNum = defaultFunc
+    setFieldTouched = defaultFunc
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
@@ -53,13 +51,6 @@ const CUPS = (props) => {
           true
         )
 
-        if (setMaxStepNum) {
-          setMaxStepNum(
-            new_contract
-              ? MAX_STEPS_NUMBER.MAX_STEP_NUMBER_NEW_CONTRACT
-              : MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT
-          )
-        }
       } catch (error) {
         setFieldError('cups', t('ERROR_INVALID_FIELD'))
         setValues(
@@ -76,7 +67,7 @@ const CUPS = (props) => {
         setLoading(false)
       }
     },
-    [setFieldValue, setFieldError, setMaxStepNum, setValues, t]
+    [setFieldValue, setFieldError, setValues, t]
   )
 
   useEffect(() => {
