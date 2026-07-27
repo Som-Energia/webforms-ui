@@ -1,11 +1,13 @@
-import { useCallback, useState, useContext } from 'react'
-import * as Yup from 'yup'
-import PopUpContext from '../context/PopUpContext'
-import { getPlaceDetails, searchPlace } from '../services/googleApiClient'
-import { checkGurbDistance } from '../services/apiGurb'
-import GurbOutOfPerimeterError from '../containers/Gurb/validations/GurbErrors'
-import { addressValidations } from '../containers/Gurb/validations/requirementsValidations'
-import SimpleGurbDialog from '../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
+import { useCallback, useContext, useState } from "react"
+
+import * as Yup from "yup"
+
+import SimpleGurbDialog from "../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
+import GurbOutOfPerimeterError from "../containers/Gurb/validations/GurbErrors"
+import { addressValidations } from "../containers/Gurb/validations/requirementsValidations"
+import PopUpContext from "../context/PopUpContext"
+import { checkGurbDistance } from "../services/apiGurb"
+import { getPlaceDetails, searchPlace } from "../services/googleApiClient"
 
 /** Resets geo-related fields */
 const clearAddressGeoFields = (setFieldValue, addressFieldName) => {
@@ -20,39 +22,39 @@ const getLatLongWithFullAddress = async (
   values,
   addressFieldName,
   sessionTokenRef,
-  currentNumber
+  currentNumber,
 ) => {
   try {
     const address = values[addressFieldName]
     const place = await getPlaceDetails(address.id, sessionTokenRef)
     const postalCodeComp = place.addressComponents.find((c) =>
-      c.types.includes('postal_code')
+      c.types.includes("postal_code"),
     )
     const streetComp = place.addressComponents.find((c) =>
-      c.types.includes('route')
+      c.types.includes("route"),
     )
-    const fullAddress = `${streetComp?.longText || ''} ${
-      currentNumber || ''
-    }, ${postalCodeComp?.longText || ''}`
+    const fullAddress = `${streetComp?.longText || ""} ${
+      currentNumber || ""
+    }, ${postalCodeComp?.longText || ""}`
 
     const suggestions = await searchPlace(fullAddress, sessionTokenRef)
     if (suggestions.length === 0) return
 
     const suggestedPlace = await getPlaceDetails(
       suggestions[0].id,
-      sessionTokenRef
+      sessionTokenRef,
     )
 
     await setFieldValue(
       `${addressFieldName}.lat`,
-      suggestedPlace.location.lat()
+      suggestedPlace.location.lat(),
     )
     await setFieldValue(
       `${addressFieldName}.long`,
-      suggestedPlace.location.lng()
+      suggestedPlace.location.lng(),
     )
   } catch (error) {
-    console.error('Error updating address values:', error)
+    console.error("Error updating address values:", error)
   }
 }
 
@@ -62,18 +64,18 @@ const handleCheckGurbDistance = async (
   lat,
   long,
   setFieldValue,
-  addressFieldName
+  addressFieldName,
 ) => {
   const { data } = await checkGurbDistance(gurbCode, lat, long)
 
   if (data?.error) {
-    console.error('Error checking distance to Gurb:', data.error)
+    console.error("Error checking distance to Gurb:", data.error)
     throw new Error(data.error)
   }
 
   if (!data) {
     throw new GurbOutOfPerimeterError(
-      'The address is out of the allowed range for this GURB'
+      "The address is out of the allowed range for this GURB",
     )
   }
 
@@ -91,7 +93,7 @@ export const useAddressHandlers = ({
   values,
   t,
   sessionTokenRef,
-  gurbCode
+  gurbCode,
 }) => {
   const { setContent } = useContext(PopUpContext)
   const [loading, setLoading] = useState(false)
@@ -104,23 +106,23 @@ export const useAddressHandlers = ({
       if (!addressValue || !addressValue.id) {
         await setFieldValue(
           `${addressFieldName}.street`,
-          addressValue?.street || addressValue?.text || ''
+          addressValue?.street || addressValue?.text || "",
         )
         return
       }
 
       try {
-        await setFieldValue(`${addressFieldName}.id`, addressValue.id || '')
+        await setFieldValue(`${addressFieldName}.id`, addressValue.id || "")
         const place = await getPlaceDetails(addressValue.id, sessionTokenRef)
         const streetComponent = place.addressComponents.find((c) =>
-          c.types.includes('route')
+          c.types.includes("route"),
         )
         const postalCodeComponent = place.addressComponents.find((c) =>
-          c.types.includes('postal_code')
+          c.types.includes("postal_code"),
         )
 
-        const newStreet = streetComponent?.longText || ''
-        const newPostalCode = postalCodeComponent?.longText || ''
+        const newStreet = streetComponent?.longText || ""
+        const newPostalCode = postalCodeComponent?.longText || ""
 
         await setFieldValue(`${addressFieldName}.street`, newStreet)
         await setFieldValue(`${addressFieldName}.postal_code`, newPostalCode)
@@ -130,7 +132,7 @@ export const useAddressHandlers = ({
           id: addressValue.id,
           street: newStreet,
           postal_code: newPostalCode,
-          number: values[addressFieldName]?.number
+          number: values[addressFieldName]?.number,
         }
 
         await getLatLongWithFullAddress(
@@ -138,18 +140,18 @@ export const useAddressHandlers = ({
           { [addressFieldName]: freshAddress },
           addressFieldName,
           sessionTokenRef,
-          freshAddress.number
+          freshAddress.number,
         )
       } catch (error) {
-        console.error('Error fetching place details:', error)
+        console.error("Error fetching place details:", error)
         await setFieldValue(
           `${addressFieldName}.street`,
-          addressValue.text || addressValue.street || ''
+          addressValue.text || addressValue.street || "",
         )
-        await setFieldValue(`${addressFieldName}.postal_code`, '')
+        await setFieldValue(`${addressFieldName}.postal_code`, "")
       }
     },
-    [setFieldValue, addressFieldName, values, sessionTokenRef]
+    [setFieldValue, addressFieldName, values, sessionTokenRef],
   )
 
   /** Handle postal code changes */
@@ -164,16 +166,16 @@ export const useAddressHandlers = ({
         values,
         addressFieldName,
         sessionTokenRef,
-        values[addressFieldName]?.number
+        values[addressFieldName]?.number,
       )
     },
-    [setFieldValue, addressFieldName, values, sessionTokenRef]
+    [setFieldValue, addressFieldName, values, sessionTokenRef],
   )
 
   /** Handle street number changes */
   const handleChangeNumber = useCallback(
     async (event) => {
-      const cleanedNumber = event.target.value.replace(/[^0-9]/g, '')
+      const cleanedNumber = event.target.value.replace(/[^0-9]/g, "")
       await setFieldValue(`${addressFieldName}.number`, cleanedNumber)
       clearAddressGeoFields(setFieldValue, addressFieldName)
 
@@ -183,11 +185,11 @@ export const useAddressHandlers = ({
           values,
           addressFieldName,
           sessionTokenRef,
-          cleanedNumber
+          cleanedNumber,
         )
       }
     },
-    [setFieldValue, addressFieldName, values, sessionTokenRef]
+    [setFieldValue, addressFieldName, values, sessionTokenRef],
   )
 
   /** Handle validation */
@@ -202,14 +204,14 @@ export const useAddressHandlers = ({
         values[addressFieldName]?.lat,
         values[addressFieldName]?.long,
         setFieldValue,
-        addressFieldName
+        addressFieldName,
       )
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((e) => {
           if (!e.path) return
           setFieldError(e.path, e.message)
-          const keyPattern = e.path.split('.')[1]
+          const keyPattern = e.path.split(".")[1]
           updates.address[keyPattern] = true
         })
         setTouched(updates)
@@ -219,28 +221,28 @@ export const useAddressHandlers = ({
           <SimpleGurbDialog
             severity="error"
             setContent={setContent}
-            title={t('GURB_ADDRESS_ERROR_UNEXPECTED')}
-            text1={t('GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT')}
-          />
+            title={t("GURB_ADDRESS_ERROR_UNEXPECTED")}
+            text1={t("GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT")}
+          />,
         )
       } else if (err instanceof GurbOutOfPerimeterError) {
         setContent(
           <SimpleGurbDialog
             severity="error"
             setContent={setContent}
-            title={t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT')}
-            text1={t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT')}
-            text2={t('GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT')}
-          />
+            title={t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT")}
+            text1={t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT")}
+            text2={t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT")}
+          />,
         )
       } else {
         setContent(
           <SimpleGurbDialog
             severity="error"
             setContent={setContent}
-            title={t('GURB_ADDRESS_ERROR_UNEXPECTED')}
-            text1={t('GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT')}
-          />
+            title={t("GURB_ADDRESS_ERROR_UNEXPECTED")}
+            text1={t("GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT")}
+          />,
         )
       }
     } finally {
@@ -254,7 +256,7 @@ export const useAddressHandlers = ({
     setFieldError,
     setTouched,
     t,
-    setContent
+    setContent,
   ])
 
   return {
@@ -262,6 +264,6 @@ export const useAddressHandlers = ({
     handleChangeStreet,
     handleChangePostalCode,
     handleChangeNumber,
-    handleAddressValidation
+    handleAddressValidation,
   }
 }

@@ -1,14 +1,16 @@
-import { useContext, act } from 'react'
+import { act, useContext } from "react"
+
 import {
-  render,
-  queryByAttribute,
   fireEvent,
+  queryByAttribute,
+  render,
   screen,
-} from '@testing-library/react'
-import SimpleGurbDialog from './SimpleGurbDialog'
+} from "@testing-library/react"
+
 import PopUpContext, {
   PopUpContextProvider,
-} from '../../../../context/PopUpContext'
+} from "../../../../context/PopUpContext"
+import SimpleGurbDialog from "./SimpleGurbDialog"
 
 // Mock component to use the SimpleGurbDialog within a PopUpContext
 const MockWrapperComponentWithDialog = () => {
@@ -19,47 +21,46 @@ const MockWrapperComponentWithDialog = () => {
         id="dummy-open-dialog"
         onClick={() =>
           setContent(<SimpleGurbDialog title="TEST" setContent={setContent} />)
-        }
-      >
+        }>
         Open Dialog
       </button>
     </>
   )
 }
 
-describe('SimpleGurbDialog component', () => {
-  test('SimpleGurbDialog renders without crashing', async () => {
+describe("SimpleGurbDialog component", () => {
+  test("SimpleGurbDialog renders without crashing", async () => {
     const dom = render(
       <PopUpContextProvider>
         <MockWrapperComponentWithDialog />
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const getById = queryByAttribute.bind(null, 'id')
-    const getByDataCy = queryByAttribute.bind(null, 'data-cy')
+    const getById = queryByAttribute.bind(null, "id")
+    const getByDataCy = queryByAttribute.bind(null, "data-cy")
 
-    const buttonElement = getById(dom.container, 'dummy-open-dialog')
-    const contentElement = getByDataCy(dom.container, 'simple-gurb-dialog')
+    const buttonElement = getById(dom.container, "dummy-open-dialog")
+    const contentElement = getByDataCy(dom.container, "simple-gurb-dialog")
     expect(contentElement).toBeNull()
     act(() => {
       fireEvent.click(buttonElement)
     })
-    const contentElementA = await screen.findByText('TEST')
+    const contentElementA = await screen.findByText("TEST")
     expect(contentElementA).toBeInTheDocument()
   })
 
-  test('SimpleGurbDialog simulate close button click remove element from dom', async () => {
+  test("SimpleGurbDialog simulate close button click remove element from dom", async () => {
     const dom = render(
       <PopUpContextProvider>
         <MockWrapperComponentWithDialog />
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const getById = queryByAttribute.bind(null, 'id')
-    const getByDataCy = queryByAttribute.bind(null, 'data-cy')
+    const getById = queryByAttribute.bind(null, "id")
+    const getByDataCy = queryByAttribute.bind(null, "data-cy")
 
-    const buttonElement = getById(dom.container, 'dummy-open-dialog')
-    const contentElement = getByDataCy(dom.container, 'simple-gurb-dialog')
+    const buttonElement = getById(dom.container, "dummy-open-dialog")
+    const contentElement = getByDataCy(dom.container, "simple-gurb-dialog")
     expect(contentElement).toBeNull()
     // Click on mockup component to open the dialog
     act(() => {
@@ -67,7 +68,7 @@ describe('SimpleGurbDialog component', () => {
     })
     // Check dialog is opened
     const closeDialogButton = await screen.findByTestId(
-      'simple-gurb-dialog-close-button'
+      "simple-gurb-dialog-close-button",
     )
     expect(closeDialogButton).toBeInTheDocument()
     // Click on close button in the dialog
@@ -80,9 +81,9 @@ describe('SimpleGurbDialog component', () => {
     try {
       // https://testing-library.com/docs/queries/about/#screen
       closeDialogButton2 = await screen.findByTestId(
-        'simple-gurb-dialog-close-button'
+        "simple-gurb-dialog-close-button",
       )
-    } catch (e) {
+    } catch {
       // all fine
     }
 

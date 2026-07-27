@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from "react"
 
-import Grid from '@mui/material/Grid'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import InputBase from '@mui/material/InputBase'
+import Grid from "@mui/material/Grid"
+import InputBase from "@mui/material/InputBase"
+import MenuItem from "@mui/material/MenuItem"
+import Select from "@mui/material/Select"
 
-import metadata from 'libphonenumber-js/metadata.full.json'
-import { getCountryCallingCode, getCountries } from 'libphonenumber-js/core'
-import { isValidPhoneNumber } from 'libphonenumber-js'
+import { isValidPhoneNumber } from "libphonenumber-js"
+import { getCountries, getCountryCallingCode } from "libphonenumber-js/core"
+import metadata from "libphonenumber-js/metadata.full.json"
 
-import InputTitle from './InputTitle'
-import InputField from './InputField/InputField'
+import InputField from "./InputField/InputField"
+import InputTitle from "./InputTitle"
 
 const SelectCountry = ({ code, handleChange, codes }) => {
   return (
@@ -23,14 +22,14 @@ const SelectCountry = ({ code, handleChange, codes }) => {
       variant="outlined"
       input={<InputBase />}
       sx={{
-        border: 'none',
-        borderRadius: '0px',
-        borderRight: '1px solid',
-        borderColor: 'secondary.light',
-        backgroundColor: 'transparent',
-        color: 'secondary.dark'
+        border: "none",
+        borderRadius: "0px",
+        borderRight: "1px solid",
+        borderColor: "secondary.light",
+        backgroundColor: "transparent",
+        color: "secondary.dark",
       }}>
-      <MenuItem sx={{ display: 'none' }} label="None" value="" />
+      <MenuItem sx={{ display: "none" }} label="None" value="" />
       {Object.keys(codes).map((countryCode) => (
         <MenuItem key={countryCode} value={codes[countryCode]}>
           {`${codes[countryCode]} (${countryCode})`}
@@ -49,19 +48,20 @@ const PhoneField = (props) => {
     touched,
     setFieldValue,
     setFieldTouched,
-    required = false
+    required = false,
   } = props
-  const { t } = useTranslation()
 
   const codes = getCountryDialCodesMap()
 
-  const initialCode = values.new_member.phone_code || '+34'
+  const initialCode = values.new_member.phone_code || "+34"
   const initialCountry =
-    Object.keys(codes).find((c) => codes[c] === initialCode) || 'ES'
+    Object.keys(codes).find((c) => codes[c] === initialCode) || "ES"
 
   const [code, setCode] = useState(initialCode)
+  // FIXME: ESLint country is not used by the component
+  // eslint-disable-next-line
   const [country, setCountry] = useState(initialCountry)
-  const [number, setNumber] = useState(values.new_member.phone || '')
+  const [number, setNumber] = useState(values.new_member.phone || "")
 
   function getCountryDialCodesMap() {
     const countries = getCountries(metadata)
@@ -87,7 +87,7 @@ const PhoneField = (props) => {
   function sanitizePhoneNumber(input) {
     const internationalPrefixRegex = /^(\+|00)+/
 
-    return input.trim().replace(internationalPrefixRegex, '')
+    return input.trim().replace(internationalPrefixRegex, "")
   }
 
   function validatePhoneFormat(numberParam = number, codeParam = code) {

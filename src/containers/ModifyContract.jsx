@@ -1,37 +1,34 @@
-import React, { useState, useCallback } from 'react'
-import { Navigate, useParams, useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { GlobalHotKeys } from 'react-hotkeys'
+import React, { useCallback, useState } from "react"
+import { GlobalHotKeys } from "react-hotkeys"
+import { Navigate, useLocation, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import { modifyContract, confirmD1Case } from '../services/api'
+import Alert from "@mui/material/Alert"
+import AlertTitle from "@mui/material/AlertTitle"
+import Box from "@mui/material/Box"
+import Grow from "@mui/material/Grow"
+import Step from "@mui/material/Step"
+import StepContent from "@mui/material/StepContent"
+import StepLabel from "@mui/material/StepLabel"
+import Stepper from "@mui/material/Stepper"
+import Typography from "@mui/material/Typography"
+
+import AlertBox from "../components/AlertBox/AlertBox"
+import DisplayFormikState from "../components/OldComponents/DisplayFormikState"
+import { useSyncLanguage } from "../hooks/useTranslateOptions"
+import { confirmD1Case, modifyContract } from "../services/api"
 import {
+  normalizeD1ConfirmationData,
   normalizeModifyData,
-  normalizeD1ConfirmationData
-} from '../services/utils'
-
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
-
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grow from '@mui/material/Grow'
-import Stepper from '@mui/material/Stepper'
-import Step from '@mui/material/Step'
-import StepLabel from '@mui/material/StepLabel'
-import StepContent from '@mui/material/StepContent'
-
-import Intro from './ModifyContract/Intro'
-import IntroFromD1 from './CaseDetail/Intro'
-import Params from './ModifyContract/Params'
-import Contact from './ModifyContract/Contact'
-import Resume from './ModifyContract/Resume'
-
-import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
-import AlertBox from '../components/AlertBox/AlertBox'
-import { useSyncLanguage } from '../hooks/useTranslateOptions'
+} from "../services/utils"
+import IntroFromD1 from "./CaseDetail/Intro"
+import Contact from "./ModifyContract/Contact"
+import Intro from "./ModifyContract/Intro"
+import Params from "./ModifyContract/Params"
+import Resume from "./ModifyContract/Resume"
 
 const keyMap = {
-  SHOW_INSPECTOR: 'ctrl+shift+d'
+  SHOW_INSPECTOR: "ctrl+shift+d",
 }
 
 function ModifyContract(props) {
@@ -42,24 +39,21 @@ function ModifyContract(props) {
   const d1CaseData = state?.d1CaseData
   const { noticeAutonomous } = props
 
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const steps = [
-    t('MODIFY_POTTAR_INTRO_TITLE'),
-    t('MODIFY_POTTAR_SELECT_TITLE'),
-    t('MODIFY_POTTAR_CONTACT_TITLE'),
-    t('DATA_REVISION_CONFIRMATION'),
+    t("MODIFY_POTTAR_INTRO_TITLE"),
+    t("MODIFY_POTTAR_SELECT_TITLE"),
+    t("MODIFY_POTTAR_CONTACT_TITLE"),
+    t("DATA_REVISION_CONFIRMATION"),
   ]
 
-  const d1Steps = [
-    t('ACCEPT_OR_REFUSE_TITLE'),
-    t('DETAIL_D1_TITLE'),
-  ]
+  const d1Steps = [t("ACCEPT_OR_REFUSE_TITLE"), t("DETAIL_D1_TITLE")]
 
   const handlers = {
     SHOW_INSPECTOR: () => {
       setShowInspector(!showInspector)
-    }
+    },
   }
 
   useSyncLanguage(params.language)
@@ -73,7 +67,7 @@ function ModifyContract(props) {
     (params) => {
       setData({ ...data, ...params })
     },
-    [data]
+    [data],
   )
 
   const handlePost = async (values) => {
@@ -88,7 +82,7 @@ function ModifyContract(props) {
         const errorObj = {
           error: error?.response?.data?.error
             ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+            : { code: "MODIFY_POTTAR_UNEXPECTED" },
         }
         handleStepChanges(errorObj)
         nextStep()
@@ -106,7 +100,7 @@ function ModifyContract(props) {
         const errorObj = {
           error: error?.response?.data?.error
             ? error.response.data.error
-            : { code: 'MODIFY_POTTAR_UNEXPECTED' }
+            : { code: "MODIFY_POTTAR_UNEXPECTED" },
         }
         handleStepChanges(errorObj)
         nextStep()
@@ -172,22 +166,22 @@ function ModifyContract(props) {
 
   return (
     <GlobalHotKeys handlers={handlers} keyMap={keyMap}>
-      <Box sx={{ width: '100%', backgroundColor: 'background.third' }}>
+      <Box sx={{ width: "100%", backgroundColor: "background.third" }}>
         {noticeAutonomous ? (
           <AlertBox
-            textAlign={'left'}
-            severity={'warning'}
-            variant={'body.md.regular'}
-            title={t('MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE')}
-            description={t('MODIFY_POTTAR_BANER', {
-              baner_boe_url: t('MODIFY_POTTAR_BANER_BOE_URL'),
-              baner_document_url: t('MODIFY_POTTAR_BANER_DOCUMENT_URL'),
-              baner_help_url: t('MODIFY_POTTAR_BANER_HELP_URL')
-            })}></AlertBox>) : null
-        }
+            textAlign={"left"}
+            severity={"warning"}
+            variant={"body.md.regular"}
+            title={t("MODIFY_POTTAR_AUTON_ENTERPRISE_INTRO_TITLE")}
+            description={t("MODIFY_POTTAR_BANER", {
+              baner_boe_url: t("MODIFY_POTTAR_BANER_BOE_URL"),
+              baner_document_url: t("MODIFY_POTTAR_BANER_DOCUMENT_URL"),
+              baner_help_url: t("MODIFY_POTTAR_BANER_HELP_URL"),
+            })}></AlertBox>
+        ) : null}
         {fromD1 && (
           <Stepper
-            sx={{ backgroundColor: 'background.third', pl: 1, pr: 1, pb: 1 }}
+            sx={{ backgroundColor: "background.third", pl: 1, pr: 1, pb: 1 }}
             activeStep={activeD1Step}
             orientation="vertical">
             {d1Steps.map((label, index) => (
@@ -198,7 +192,7 @@ function ModifyContract(props) {
                 <StepContent>
                   <Navigate
                     to={{
-                      pathname: `/${params.language}/d1-detail`
+                      pathname: `/${params.language}/d1-detail`,
                     }}
                     state={{ d1CaseData: d1CaseData }}
                   />
@@ -208,7 +202,7 @@ function ModifyContract(props) {
           </Stepper>
         )}
         <Stepper
-          sx={{ backgroundColor: 'background.third', pl: 1, pr: 1, pb: 1 }}
+          sx={{ backgroundColor: "background.third", pl: 1, pr: 1, pb: 1 }}
           activeStep={activeStep}
           orientation="vertical">
           {steps.map((label, index) => (
@@ -225,7 +219,7 @@ function ModifyContract(props) {
           <Grow in={data?.error !== undefined}>
             <Box sx={{ padding: 1 }}>
               <Alert severity="error">
-                <AlertTitle>{t('ERROR_POST_MODIFY')}</AlertTitle>
+                <AlertTitle>{t("ERROR_POST_MODIFY")}</AlertTitle>
                 {t(data?.error?.code)}
               </Alert>
             </Box>
@@ -235,8 +229,8 @@ function ModifyContract(props) {
           <Grow in={data?.response !== undefined}>
             <Box sx={{ padding: 1 }}>
               <Alert severity="success">
-                <AlertTitle>{t('MODIFY_POTTAR_SUCCESS_TITTLE')}</AlertTitle>
-                {t('MODIFY_POTTAR_SUCCESS_MESSAGE')}
+                <AlertTitle>{t("MODIFY_POTTAR_SUCCESS_TITTLE")}</AlertTitle>
+                {t("MODIFY_POTTAR_SUCCESS_MESSAGE")}
               </Alert>
             </Box>
           </Grow>

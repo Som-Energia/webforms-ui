@@ -1,6 +1,7 @@
-import React from 'react'
-import Button from '@mui/material/Button'
-import ExitToAppIcon from '@mui/icons-material/ExitToApp'
+import React from "react"
+
+import ExitToAppIcon from "@mui/icons-material/ExitToApp"
+import Button from "@mui/material/Button"
 
 function ExitButton(props) {
   const { title, onClick } = props

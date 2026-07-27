@@ -1,14 +1,13 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import { HelperText } from './InputField/InputField'
-import Chooser from './Chooser/Chooser'
-import PowerInputs from './PowerInputs'
+import Grid from "@mui/material/Grid"
+import { useTheme } from "@mui/material/styles"
+import Typography from "@mui/material/Typography"
 
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import { PowerIcon } from '../data/icons/Icons'
-
-import { useTheme } from '@mui/material/styles'
+import { PowerIcon } from "../data/icons/Icons"
+import Chooser from "./Chooser/Chooser"
+import { HelperText } from "./InputField/InputField"
+import PowerInputs from "./PowerInputs"
 
 const Powers = (props) => {
   const { values, errors, touched, setFieldValue } = props
@@ -17,45 +16,45 @@ const Powers = (props) => {
   const theme = useTheme()
 
   const handlePowerQuestion = async (value) => {
-    await setFieldValue('contract.power_type', value)
-    setFieldValue('contract.power', {})
+    await setFieldValue("contract.power_type", value)
+    setFieldValue("contract.power", {})
   }
 
   const options = [
     {
-      id: 'power-lower-15kw',
-      icon: <PowerIcon/>,
-      textHeader: t('POWER_LOWER_15_HEADER')
+      id: "power-lower-15kw",
+      icon: <PowerIcon />,
+      textHeader: t("POWER_LOWER_15_HEADER"),
     },
     {
-      id: 'power-higher-15kw',
-      icon:<PowerIcon/>,
-      textHeader: t('POWER_HIGHER_15_HEADER')
-    }
+      id: "power-higher-15kw",
+      icon: <PowerIcon />,
+      textHeader: t("POWER_HIGHER_15_HEADER"),
+    },
   ]
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="body.md.medium">
-          {values?.has_light == 'light-on'
-            ? t('CURRENT_CONTRACTED_POWER')
-            : t('POWER_TO_CONTRACT')
-          }{' '}
-          <span style={{ color: theme.palette.primary.mainOrange, marginLeft: 4 }}>
+          {values?.has_light === "light-on"
+            ? t("CURRENT_CONTRACTED_POWER")
+            : t("POWER_TO_CONTRACT")}{" "}
+          <span
+            style={{ color: theme.palette.primary.mainOrange, marginLeft: 4 }}>
             *
           </span>
         </Typography>
         <Typography
-          sx={{ typography: 'body.md.regular', color: 'secondary.extraDark' }}
+          sx={{ typography: "body.md.regular", color: "secondary.extraDark" }}
           dangerouslySetInnerHTML={{
-            __html: values?.has_light == 'light-on'
-              ? t('POWER_HELPER')
-              : t('WHICH_POWER_HELPER', {
-                url: t('WHICH_POWER_HELPER_URL')
-              })
-          }} >
-        </Typography>
+            __html:
+              values?.has_light === "light-on"
+                ? t("POWER_HELPER")
+                : t("WHICH_POWER_HELPER", {
+                    url: t("WHICH_POWER_HELPER_URL"),
+                  }),
+          }}></Typography>
       </Grid>
       <Grid item xs={12}>
         <Chooser
@@ -65,17 +64,17 @@ const Powers = (props) => {
           handleChange={handlePowerQuestion}
         />
       </Grid>
-      {values.contract.power_type === 'power-lower-15kw' ? (
+      {values.contract.power_type === "power-lower-15kw" ? (
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item>
               <HelperText
                 helperText={
                   <a
-                    href={t('POWER_LOWER_15_HELPER_URL')}
+                    href={t("POWER_LOWER_15_HELPER_URL")}
                     target="_blank"
                     rel="noopener noreferrer">
-                    {t('POWER_LOWER_15_HELPER')}
+                    {t("POWER_LOWER_15_HELPER")}
                   </a>
                 }
               />
@@ -94,17 +93,17 @@ const Powers = (props) => {
           </Grid>
         </Grid>
       ) : null}
-      {values.contract.power_type === 'power-higher-15kw' ? (
+      {values.contract.power_type === "power-higher-15kw" ? (
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item>
               <HelperText
                 helperText={
                   <a
-                    href={t('POWER_HIGHER_15_HELPER_URL')}
+                    href={t("POWER_HIGHER_15_HELPER_URL")}
                     target="_blank"
                     rel="noopener noreferrer">
-                    {t('POWER_HIGHER_15_HELPER')}
+                    {t("POWER_HIGHER_15_HELPER")}
                   </a>
                 }
               />

@@ -1,12 +1,12 @@
-import { useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useCallback } from "react"
+import { useTranslation } from "react-i18next"
 
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
-import { Grid2 as Grid } from '@mui/material'
+import { Grid2 as Grid } from "@mui/material"
+import LinearProgress from "@mui/material/LinearProgress"
+import Typography from "@mui/material/Typography"
 
-import PrevButton from '../Buttons/PrevButton'
-import NextButton from '../Buttons/NextButton'
+import NextButton from "../Buttons/NextButton"
+import PrevButton from "../Buttons/PrevButton"
 
 // TODO: move to Somenergia UI
 const NewSomStepper = (props) => {
@@ -14,12 +14,12 @@ const NewSomStepper = (props) => {
     activeStep = 0,
     setActiveStep,
     steps = [],
-    stepTitle = 'STEP_TITLE',
+    stepTitle = "STEP_TITLE",
     showStepProgress = true,
     showStepTitle = false,
     disableNext = true,
     nextButton,
-    children
+    children,
   } = props
   const { t } = useTranslation()
 
@@ -40,8 +40,8 @@ const NewSomStepper = (props) => {
     <>
       {showStepProgress && (
         <Typography color="secondary">
-          {showStepTitle && t(stepTitle)}{' '}
-          {steps.length && currentStepNum + '/' + maxStepsNum}
+          {showStepTitle && t(stepTitle)}{" "}
+          {steps.length && currentStepNum + "/" + maxStepsNum}
         </Typography>
       )}
       {steps.length && (
@@ -50,13 +50,13 @@ const NewSomStepper = (props) => {
           value={(currentStepNum / maxStepsNum) * 100}
           color="secondary"
           sx={{
-            marginBottom: '65px',
+            marginBottom: "65px",
             height: 6,
-            borderRadius: '100px',
-            backgroundColor: 'secondary.extraDark',
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: 'primary.mainOrange'
-            }
+            borderRadius: "100px",
+            backgroundColor: "secondary.extraDark",
+            "& .MuiLinearProgress-bar": {
+              backgroundColor: "primary.mainOrange",
+            },
           }}
         />
       )}
@@ -68,25 +68,24 @@ const NewSomStepper = (props) => {
         direction="row-reverse"
         rowSpacing={2}
         sx={{
-          marginTop: '2rem',
+          marginTop: "2rem",
           justifyContent:
-            activeStep === lastStepIndex ? 'center' : 'space-between',
-          alignItems: 'center'
+            activeStep === lastStepIndex ? "center" : "space-between",
+          alignItems: "center",
         }}>
         {activeStep > 0 && activeStep < lastStepIndex && (
-          <Grid item size={{ sm: 2, xs: 12 }}>
-            <PrevButton onClick={() => prevStep()}>{t('PREV')}</PrevButton>
+          <Grid size={{ sm: 2, xs: 12 }}>
+            <PrevButton onClick={() => prevStep()}>{t("PREV")}</PrevButton>
           </Grid>
         )}
 
         {activeStep <= lastStepIndex && (
           <Grid
-            item
             size={{ sm: activeStep === lastStepIndex ? 3 : 2, xs: 12 }}
             order={-1}>
             {nextButton || (
               <NextButton disabled={disableNext} onClick={() => nextStep()}>
-                {t('NEXT')}
+                {t("NEXT")}
               </NextButton>
             )}
           </Grid>

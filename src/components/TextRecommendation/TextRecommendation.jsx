@@ -1,7 +1,7 @@
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import InputTitle from '../InputTitle'
+import InputTitle from "../InputTitle"
 
 const TextRecommendation = ({ title, text, required, isHeader }) => {
   return (

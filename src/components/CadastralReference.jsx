@@ -1,11 +1,9 @@
-import { useContext, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useContext, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
-import InputField from './InputField/InputField'
-
-import { checkCadastralReference } from '../services/api'
-import LoadingContext from '../context/LoadingContext'
-
+import LoadingContext from "../context/LoadingContext"
+import { checkCadastralReference } from "../services/api"
+import InputField from "./InputField/InputField"
 
 const CadastralReference = (props) => {
   const {
@@ -14,7 +12,7 @@ const CadastralReference = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setFieldTouched
+    setFieldTouched,
   } = props
 
   const { t } = useTranslation()
@@ -31,21 +29,21 @@ const CadastralReference = (props) => {
         status = false
       })
     if (status === true) {
-      await setFieldError('cadastral_reference', undefined)
-      setFieldValue('cadastral_reference_valid', true)
+      await setFieldError("cadastral_reference", undefined)
+      setFieldValue("cadastral_reference_valid", true)
     } else {
       await setFieldError(
-        'cadastral_reference',
-        t('INVALID_REF_CADASTRAL_CONTROL_DIGIT')
+        "cadastral_reference",
+        t("INVALID_REF_CADASTRAL_CONTROL_DIGIT"),
       )
-      setFieldValue('cadastral_reference_valid', false)
+      setFieldValue("cadastral_reference_valid", false)
     }
     setLoading(false)
   }
 
   useEffect(() => {
     if (values?.cadastral_reference?.length < 1) {
-      setFieldValue('cadastral_reference_valid', true)
+      setFieldValue("cadastral_reference_valid", true)
     } else if (values?.cadastral_reference?.length > 19) {
       handleCheckCadastralReferenceResponse()
     }
@@ -53,36 +51,35 @@ const CadastralReference = (props) => {
 
   const handleInputCadastralReference = (event) => {
     let value = event.target.value
-    value = value.replace(/[^0-9A-Za-z]/g, '') // TODO: Do not cut chars after not matching one
+    value = value.replace(/[^0-9A-Za-z]/g, "") // TODO: Do not cut chars after not matching one
     // value = value.slice(0, 20)
     value = value.toUpperCase()
     value = [
       value.slice(0, 7), // Finca/Parcela
       value.slice(7, 14), // Hoja
       value.slice(14, 18), // Local/Piso
-      value.slice(18, 20) // Control
+      value.slice(18, 20), // Control
     ]
-      .join(' ')
+      .join(" ")
       .trim()
-    setFieldValue('cadastral_reference', value)
+    setFieldValue("cadastral_reference", value)
   }
 
   const handleInputCadastralReferenceBlur = () => {
-    setFieldTouched('cadastral_reference', true)
+    setFieldTouched("cadastral_reference", true)
   }
 
   return (
     <InputField
-      textFieldName={t('CADASTRAL_REFERENCE')}
+      textFieldName={t("CADASTRAL_REFERENCE")}
       textFieldHelper={
         <span>
-          {t('CADASTRAL_REFERENCE_HELPER')}{' '}
+          {t("CADASTRAL_REFERENCE_HELPER")}{" "}
           <a
-            href={t('HELP_CADASTRAL_REFERENCE_URL')}
+            href={t("HELP_CADASTRAL_REFERENCE_URL")}
             target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('CADASTRAL_REFERENCE_LINK')}
+            rel="noopener noreferrer">
+            {t("CADASTRAL_REFERENCE_LINK")}
           </a>
         </span>
       }

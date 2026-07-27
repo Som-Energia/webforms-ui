@@ -1,35 +1,28 @@
-import React, { useState } from 'react'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import SendIcon from "@mui/icons-material/Send"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+import Paper from "@mui/material/Paper"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
-import CircularProgress from '@mui/material/CircularProgress'
-import TextField from '@mui/material/TextField'
-import SendIcon from '@mui/icons-material/Send'
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 
-import Uploader from '../../components/OldComponents/Uploader'
+import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
+import Uploader from "../../components/OldComponents/Uploader"
 
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
-
-function RefuseD1({
-  prevStep,
-  handlePost,
-  handleRefuseClick,
-  handleStepChanges,
-  params
-}) {
+function RefuseD1({ prevStep, handlePost, handleStepChanges, params }) {
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
   const RefuseSchema = Yup.object().shape({
     refuseReason: Yup.string()
-      .required(t('NO_REFUSE_REASON'))
-      .max(500, t('REFUSE_REASON_TOO_LONG'))
+      .required(t("NO_REFUSE_REASON"))
+      .max(500, t("REFUSE_REASON_TOO_LONG")),
   })
 
   return (
@@ -37,14 +30,14 @@ function RefuseD1({
       <Formik
         initialValues={{
           d1Attachments: [],
-          refuseReason: '',
-          ...params
+          refuseReason: "",
+          ...params,
         }}
         validationSchema={RefuseSchema}
         onSubmit={async (values) => {
           await handleStepChanges({
             refuseReason: values?.refuseReason,
-            d1Attachments: values?.d1Attachments
+            d1Attachments: values?.d1Attachments,
           })
           setSending(true)
           await handlePost(values)
@@ -58,7 +51,7 @@ function RefuseD1({
           handleChange,
           handleBlur,
           handleSubmit,
-          setFieldValue
+          setFieldValue,
         }) => (
           <>
             <Form onSubmit={handleSubmit} noValidate>
@@ -67,7 +60,7 @@ function RefuseD1({
                   component="div"
                   variant="body1"
                   dangerouslySetInnerHTML={{
-                    __html: t('ATTACHMENTS_D1_INTRO_REFUSE')
+                    __html: t("ATTACHMENTS_D1_INTRO_REFUSE"),
                   }}
                 />
               </Box>
@@ -76,7 +69,7 @@ function RefuseD1({
                 <TextField
                   id="refuseReason"
                   name="refuseReason"
-                  label={t('REFUSE_REASON')}
+                  label={t("REFUSE_REASON")}
                   error={errors?.refuseReason && touched?.refuseReason}
                   helperText={touched?.refuseReason && errors?.refuseReason}
                   onChange={handleChange}
@@ -92,7 +85,7 @@ function RefuseD1({
 
               <Box mt={2} mb={1}>
                 <Box mt={3} mx={1} mb={1}>
-                  <Typography>{t('D1_ATTACHMENTS_REFUSE')}</Typography>
+                  <Typography>{t("D1_ATTACHMENTS_REFUSE")}</Typography>
                 </Box>
                 <Box mx={1} mt={1} mb={1}>
                   <Uploader
@@ -103,7 +96,7 @@ function RefuseD1({
                       errors?.d1Attachments
                     }
                     callbackFn={(d1Attachments) =>
-                      setFieldValue('d1Attachments', d1Attachments)
+                      setFieldValue("d1Attachments", d1Attachments)
                     }
                     values={values.d1Attachments}
                   />
@@ -113,14 +106,14 @@ function RefuseD1({
               <Box
                 sx={{
                   mb: 1,
-                  display: 'flex',
-                  justifyContent: 'space-between'
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}>
                 {
                   <PrevButton
                     disabled={params?.sending}
                     onClick={() => prevStep(params)}
-                    title={t('PREV')}
+                    title={t("PREV")}
                   />
                 }
                 {
@@ -129,12 +122,12 @@ function RefuseD1({
                       type="submit"
                       disableElevation={true}
                       sx={{
-                        backgroundColor: '#CDFF80',
-                        color: '#0B2E34',
-                        '&:hover': {
-                          color: '#CDFF80',
-                          backgroundColor: '#0B2E34'
-                        }
+                        backgroundColor: "#CDFF80",
+                        color: "#0B2E34",
+                        "&:hover": {
+                          color: "#CDFF80",
+                          backgroundColor: "#0B2E34",
+                        },
                       }}
                       color="primary"
                       variant="contained"
@@ -142,7 +135,7 @@ function RefuseD1({
                       endIcon={
                         sending ? <CircularProgress size={24} /> : <SendIcon />
                       }>
-                      {t('SEND')}
+                      {t("SEND")}
                     </Button>
                   </>
                 }

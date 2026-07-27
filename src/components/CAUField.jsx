@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { checkCups } from '../services/api'
-import { useTranslation } from 'react-i18next'
-import InputField from './InputField/InputField'
-import { isMatchingCUPSandCAU, prettyCAU } from '../services/utils'
+import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+
+import { checkCups } from "../services/api"
+import { isMatchingCUPSandCAU, prettyCAU } from "../services/utils"
+import InputField from "./InputField/InputField"
 
 export function CAUField({
   name,
@@ -16,7 +17,7 @@ export function CAUField({
   error,
   required,
   setFieldValue,
-  helperText
+  helperText,
 }) {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +25,7 @@ export function CAUField({
 
   const handleChange = async (event) => {
     const cau = prettyCAU(event.target.value)
-    setFieldValue('self_consumption.cau', cau)
+    setFieldValue("self_consumption.cau", cau)
   }
 
   useEffect(() => {
@@ -32,15 +33,15 @@ export function CAUField({
   }, [values.self_consumption.cau_valid])
 
   useEffect(() => {
-    setFieldValue('self_consumption.cau_valid', isValid)
+    setFieldValue("self_consumption.cau_valid", isValid)
   }, [isValid])
 
   useEffect(() => {
-    const cleaned_cau = (values?.self_consumption?.cau ?? '').replace(/ /g, '')
+    const cleaned_cau = (values?.self_consumption?.cau ?? "").replace(/ /g, "")
 
-    if (values?.self_consumption?.collective_installation == 'individual') {
+    if (values?.self_consumption?.collective_installation === "individual") {
       setIsValid(isMatchingCUPSandCAU(cleaned_cau, values?.cups))
-    } else if (cleaned_cau.length == 26) {
+    } else if (cleaned_cau.length === 26) {
       setIsLoading(true)
       checkCups(cleaned_cau.slice(0, 20))
         .then((response) => {
@@ -57,7 +58,7 @@ export function CAUField({
     }
   }, [
     values.self_consumption.cau,
-    values.self_consumption.collective_installation
+    values.self_consumption.collective_installation,
   ])
 
   return (
@@ -71,9 +72,9 @@ export function CAUField({
       handleChange={handleChange}
       handleBlur={onBlur}
       touched={touched}
-      error={!isLoading ? error : ''}
+      error={!isLoading ? error : ""}
       textFieldHelper={
-        isLoading ? t('API_VALIDATED_FIELD_CHECKING') : helperText
+        isLoading ? t("API_VALIDATED_FIELD_CHECKING") : helperText
       }
     />
   )

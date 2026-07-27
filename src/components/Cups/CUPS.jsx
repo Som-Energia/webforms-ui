@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
+import Link from "@mui/material/Link"
+import Typography from "@mui/material/Typography"
 
-import InputField from '../InputField/InputField'
-
-import { MAX_STEPS_NUMBER } from '../../containers/Gurb/GurbFormRequirements'
-import { checkCups } from '../../services/api'
+import { MAX_STEPS_NUMBER } from "../../containers/Gurb/GurbFormRequirements"
+import { checkCups } from "../../services/api"
+import InputField from "../InputField/InputField"
 
 const CUPS = (props) => {
   const {
@@ -18,7 +17,7 @@ const CUPS = (props) => {
     setFieldValue = () => {},
     setFieldError = () => {},
     setFieldTouched = () => {},
-    setMaxStepNum = () => {}
+    setMaxStepNum = () => {},
   } = props
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
@@ -27,31 +26,32 @@ const CUPS = (props) => {
     const cups = values.cups
     if (cups?.length >= 20 && cups?.length <= 22) {
       setLoading(true)
-      setFieldValue('cups_valid', false)
+      setFieldValue("cups_valid", false)
       checkCups(cups)
         .then((response) => {
-          const { status, knowledge_of_distri, tariff_name } = response?.data || {}
-          const new_contract = ['new', 'inactive'].includes(status)
+          const { status, knowledge_of_distri, tariff_name } =
+            response?.data || {}
+          const new_contract = ["new", "inactive"].includes(status)
           setValues({
             ...values,
             ...{
               cups_valid: true,
               new_contract,
               knowledge_of_distri,
-              tariff_name
-            }
+              tariff_name,
+            },
           })
           if (setMaxStepNum) {
             setMaxStepNum(
               new_contract
-                ? MAX_STEPS_NUMBER['MAX_STEP_NUMBER_NEW_CONTRACT']
-                : MAX_STEPS_NUMBER['MAX_STEP_NUMBER_DEFAULT']
+                ? MAX_STEPS_NUMBER["MAX_STEP_NUMBER_NEW_CONTRACT"]
+                : MAX_STEPS_NUMBER["MAX_STEP_NUMBER_DEFAULT"],
             )
           }
         })
         .catch(() => {
-          setFieldError('cups', t('ERROR_INVALID_FIELD'))
-          setFieldValue('cups_valid', false)
+          setFieldError("cups", t("ERROR_INVALID_FIELD"))
+          setFieldValue("cups_valid", false)
         })
         .finally(() => {
           setLoading(false)
@@ -62,32 +62,31 @@ const CUPS = (props) => {
   const handleInputCups = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]*/)
     value = value[0].toUpperCase()
-    setFieldValue('cups', value)
+    setFieldValue("cups", value)
   }
 
   const handleInputCupsBlur = () => {
-    setFieldTouched('cups', true)
+    setFieldTouched("cups", true)
   }
 
   return (
     <InputField
       name="cups"
-      textFieldName={t('CUPS_FIELD')}
+      textFieldName={t("CUPS_FIELD")}
       textFieldHelper={
-        <Typography  //TODO: Extract as component (Same as GurbParticipation)
+        <Typography //TODO: Extract as component (Same as GurbParticipation)
           sx={{
-            fontSize: '14px',
+            fontSize: "14px",
             fontWeight: 400,
             letterSpacing: 0,
-            color: 'secondary.extraDark'
+            color: "secondary.extraDark",
           }}>
-          {t('CUPS_HELPER_TEXT')}{' '}
+          {t("CUPS_HELPER_TEXT")}{" "}
           <Link
-            href={t('CUPS_HELPER_URL')}
+            href={t("CUPS_HELPER_URL")}
             target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('CUPS_HELPER_LINK')}
+            rel="noopener noreferrer">
+            {t("CUPS_HELPER_LINK")}
           </Link>
         </Typography>
       }
@@ -96,7 +95,10 @@ const CUPS = (props) => {
       touched={touched?.cups}
       value={values?.cups}
       error={
-        errors?.cups || errors?.new_contract || errors?.knowledge_of_distri || errors?.cups_valid
+        errors?.cups ||
+        errors?.new_contract ||
+        errors?.knowledge_of_distri ||
+        errors?.cups_valid
       }
       isLoading={loading}
       required={true}

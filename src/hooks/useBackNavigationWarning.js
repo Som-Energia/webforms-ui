@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react"
 
 const useBackNavigationWarning = (enabled, message) => {
   const currentHistoryIndex = useRef()
@@ -32,8 +32,8 @@ const useBackNavigationWarning = (enabled, message) => {
       }
     }
 
-    window.addEventListener('popstate', handlePopState, true)
-    return () => window.removeEventListener('popstate', handlePopState, true)
+    window.addEventListener("popstate", handlePopState, true)
+    return () => window.removeEventListener("popstate", handlePopState, true)
   }, [enabled, message])
 
   useEffect(() => {
@@ -43,13 +43,12 @@ const useBackNavigationWarning = (enabled, message) => {
 
     const handleBeforeUnload = (event) => {
       event.preventDefault()
-      event.returnValue = ''
+      event.returnValue = ""
     }
 
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload)
   }, [enabled])
-
 }
 
 export default useBackNavigationWarning
