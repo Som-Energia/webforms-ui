@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 
 import { InvoiceIcon, CreditCardIcon } from '../../../data/icons/Icons'
 import { checkIbanFormat } from '../../../services/utils'
+import { creditCardPaymentEnabled } from '../paymentMethods'
 
 import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
@@ -26,7 +27,7 @@ const PaymentMethod = (props) => {
   const { t } = useTranslation()
   const trackID = 'payment-method'
 
-   useEffect(() => {
+  useEffect(() => {
     sendTrackEvent(trackID)
   }, [])
 
@@ -92,12 +93,12 @@ const PaymentMethod = (props) => {
       textHeader: t('IBAN_PAYMENT_QUESTION_OPTION'),
       textBody: t('PAYMENT_METHOD_IBAN_DESC')
     },
-    {
+    ...(creditCardPaymentEnabled ? [{
       id: 'credit_card',
       icon: <CreditCardIcon />,
       textHeader: t('PAYMENT_METHOD_CCARD'),
       textBody: t('PAYMENT_METHOD_CCARD_DESC')
-    }
+    }] : [])
   ]
 
   const showPaymentAuthorizationCheckbox = ['iban', 'credit_card'].includes(
@@ -126,20 +127,24 @@ const PaymentMethod = (props) => {
       <Grid item xs={12}>
         <Typography variant="headline4.regular">{t('MEMBER_PAGE_PAYMENT_METHOD')}</Typography>
       </Grid>
-      <Grid item xs={12}>
-        <InputTitle
-          text={t('PAYMENT_METHOD_QUESTION')}
-          required={true}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Chooser
-          name="method-payment-question"
-          options={options}
-          value={values.new_member.payment_method}
-          handleChange={handleMethodPaymentQuestion}
-        />
-      </Grid>
+      {creditCardPaymentEnabled && (
+        <>
+          <Grid item xs={12}>
+            <InputTitle
+              text={t('PAYMENT_METHOD_QUESTION')}
+              required={true}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Chooser
+              name="method-payment-question"
+              options={options}
+              value={values.new_member.payment_method}
+              handleChange={handleMethodPaymentQuestion}
+            />
+          </Grid>
+        </>
+      )}
       {values?.new_member?.payment_method === 'iban' && (
         <>
           <Grid item xs={12}>

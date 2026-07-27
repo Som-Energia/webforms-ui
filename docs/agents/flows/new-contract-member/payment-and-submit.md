@@ -27,6 +27,10 @@ El submit final no només envia el formulari: pot acabar en resultat local o en 
 - `has_selfconsumption` decideix si s'envia `self_consumption`.
 - si hi ha adjunts al punt de subministrament, es converteixen a `attachments` amb categoria dependent del procés.
 
+## Hotfix de targeta
+
+La targeta està temporalment desactivada al formulari de contractació. `creditCardPaymentEnabled` a `src/containers/NewContractMember/paymentMethods.js` fixa el flux a IBAN, oculta el selector i limita la validació a aquest mètode. Canviar la constant a `true` restaura el comportament anterior.
+
 ## Checklist
 
 - [ ] Has comprovat tots dos camins d'èxit: amb Redsys i sense Redsys.
