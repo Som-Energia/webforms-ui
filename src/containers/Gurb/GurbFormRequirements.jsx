@@ -9,7 +9,9 @@ import Box from '@mui/material/Box'
 import supplyPointValidations from './validations/supplyPointValidations'
 import {
   addressValidations,
-  lightValidations
+  lightValidations,
+  selfConsumptionValidations,
+  tariffValidations
 } from './validations/requirementsValidations'
 
 import LoadingContext from '../../context/LoadingContext'
@@ -67,7 +69,9 @@ const GurbFormRequirements = () => {
   const validationSchemas = [
     supplyPointValidations,
     addressValidations,
-    lightValidations
+    lightValidations,
+    selfConsumptionValidations,
+    tariffValidations
   ]
 
   const formikRef = useRef(null)
@@ -101,23 +105,6 @@ const GurbFormRequirements = () => {
     return steps.at(activeStep)?.(formikProps)
   }
 
-  const isInvalidStep = (formik) => {
-    if (!formik?.isValid) {
-      return true
-    }
-
-    const { address, has_light, redirectUrl } = formik.values || {}
-
-    return (
-      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.ADDRESS &&
-        !address.inside_perimeter) ||
-      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.LIGHT &&
-        has_light !== 'light-on') ||
-      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.TARIFF_SELECTION &&
-        !redirectUrl)
-    )
-  }
-
   return (
     <Container
       data-cy="gurb-requirements-form"
@@ -140,7 +127,7 @@ const GurbFormRequirements = () => {
                     activeStep={activeStep}
                     setActiveStep={setActiveStep}
                     steps={steps}
-                    disableNext={loading || isInvalidStep(formikProps)}
+                    disableNext={loading || !formikProps.isValid}
                     showStepTitle={true}>
                     {renderCurrentStep(formikProps)}
                   </NewSomStepper>

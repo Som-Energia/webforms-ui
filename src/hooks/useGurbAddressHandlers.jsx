@@ -4,7 +4,7 @@ import PopUpContext from '../context/PopUpContext'
 import { getPlaceDetails, searchPlace } from '../services/googleApiClient'
 import { checkGurbDistance } from '../services/apiGurb'
 import GurbOutOfPerimeterError from '../containers/Gurb/validations/GurbErrors'
-import { addressValidations } from '../containers/Gurb/validations/requirementsValidations'
+import { addressFieldsValidations } from '../containers/Gurb/validations/requirementsValidations'
 import SimpleGurbDialog from '../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
 
 /** Resets geo-related fields */
@@ -195,7 +195,7 @@ export const useAddressHandlers = ({
     await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     const updates = { address: {} }
     try {
-      await addressValidations.validate(values, { abortEarly: false })
+      await addressFieldsValidations.validate(values, { abortEarly: false })
       setLoading(true)
       await handleCheckGurbDistance(
         gurbCode,
