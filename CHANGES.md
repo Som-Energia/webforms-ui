@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.0.3 2026-07-28
+
+- FIX: Restore credit card payment in the new contract form
+
 ## 8.0.2 2026-07-28
 
 - FIX: Remove the self-consumption requirement from the Gurb form
