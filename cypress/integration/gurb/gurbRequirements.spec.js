@@ -7,7 +7,6 @@ describe('Requirements', () => {
 
     before(() => {
         cy.fixture('gurb.json').as('data')
-        cy.fixture('gurbPersonaldata.json').as('personaldata')
         cy.fixture('googleAutocomplete/autocompleteResponse.json').as('googleAutocompleteResponse')
         cy.fixture('googleAutocomplete/getPlaceResponse.json').as('googlePlaceResponse')
     })
@@ -24,7 +23,7 @@ describe('Requirements', () => {
 
     describe('Gurb Requirements', function () {
         it('Contract exist', function () {
-            cy.identifySupplyPointGURB(this.personaldata.cups, 'active', 200)
+            cy.identifySupplyPointGURB(this.data.supplyPoint.active_cups, 'active', 200)
 
             cy.fillGurbAddress(
                 this.data.gurbCode,
@@ -37,8 +36,6 @@ describe('Requirements', () => {
             )
 
             cy.lightQuestion(true)
-
-            cy.selfconsumptionQuestion(false)
 
             cy.resultExistingMember(this.data.gurbCode)
         })
@@ -59,8 +56,6 @@ describe('Requirements', () => {
             )
 
             cy.lightQuestion(true)
-
-            cy.selfconsumptionQuestion(false)
 
             const selectedTariff = "periods"
 

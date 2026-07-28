@@ -9,8 +9,7 @@ import Box from '@mui/material/Box'
 import supplyPointValidations from './validations/supplyPointValidations'
 import {
   addressValidations,
-  lightValidations,
-  selfConsumptionValidations
+  lightValidations
 } from './validations/requirementsValidations'
 
 import LoadingContext from '../../context/LoadingContext'
@@ -20,22 +19,16 @@ import NewSomStepper from '../../components/NewSomStepper/NewSomStepper'
 import SupplyPoint from './pages/Requirements/SupplyPoint'
 import LightQuestion from './pages/Requirements/LightQuestion'
 import Address from './pages/Requirements/Address'
-import SelfConsumption from './pages/Requirements/SelfConsumption'
 import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
 import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-
-export const MAX_STEPS_NUMBER = {
-  MAX_STEP_NUMBER_DEFAULT: 5,
-  MAX_STEP_NUMBER_NEW_CONTRACT: 6
-}
+import { GURB_REQUIREMENTS_FORM_SUBSTEPS } from '../../services/steps'
 
 const GurbFormRequirements = () => {
   const { language, gurbCode } = useParams()
   const { loading } = useContext(LoadingContext)
   const { trackEvent } = useContext(MatomoContext)
 
-  const [, setMaxStepNum] = useState(MAX_STEPS_NUMBER.MAX_STEP_NUMBER_DEFAULT)
   const [activeStep, setActiveStep] = useState(0)
 
   const defaultSteps = [
@@ -43,14 +36,10 @@ const GurbFormRequirements = () => {
       <SupplyPoint
         {...formikProps}
         activeStep={activeStep}
-        setMaxStepNum={setMaxStepNum}
       />
     ),
     (formikProps) => <Address {...formikProps} activeStep={activeStep} />,
-    (formikProps) => <LightQuestion {...formikProps} activeStep={activeStep} />,
-    (formikProps) => (
-      <SelfConsumption {...formikProps} activeStep={activeStep} />
-    )
+    (formikProps) => <LightQuestion {...formikProps} activeStep={activeStep} />
   ]
 
   const [steps, setSteps] = useState(defaultSteps)
@@ -71,7 +60,6 @@ const GurbFormRequirements = () => {
       long: undefined,
       inside_perimeter: false
     },
-    has_selfconsumption: undefined,
     new_contract: undefined,
     redirectUrl: undefined
   }
@@ -79,8 +67,7 @@ const GurbFormRequirements = () => {
   const validationSchemas = [
     supplyPointValidations,
     addressValidations,
-    lightValidations,
-    selfConsumptionValidations
+    lightValidations
   ]
 
   const formikRef = useRef(null)
@@ -90,7 +77,10 @@ const GurbFormRequirements = () => {
     const { values } = formikRef.current
 
     // new contract
-    if (activeStep === 1 && values.new_contract) {
+    if (
+      activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.ADDRESS &&
+      values.new_contract
+    ) {
       setSteps(newContractSteps)
     }
   }, [activeStep])
@@ -98,14 +88,14 @@ const GurbFormRequirements = () => {
   useSyncLanguage(language)
 
   useEffect(() => {
-    if (activeStep !== 4) {
+    if (activeStep !== steps.length) {
       trackEvent({
         category: 'GurbRequirements',
         action: 'setGurbRequirementsStep',
         name: `gurb-requirements-step-${activeStep}-${gurbCode}`
       })
     }
-  }, [activeStep, gurbCode])
+  }, [activeStep, gurbCode, steps.length])
 
   const renderCurrentStep = (formikProps) => {
     return steps.at(activeStep)?.(formikProps)
@@ -116,14 +106,15 @@ const GurbFormRequirements = () => {
       return true
     }
 
-    const { address, has_light, has_selfconsumption, redirectUrl } =
-      formik.values || {}
+    const { address, has_light, redirectUrl } = formik.values || {}
 
     return (
-      (activeStep === 1 && !address.inside_perimeter) ||
-      (activeStep === 2 && has_light !== 'light-on') ||
-      (activeStep === 3 && has_selfconsumption !== 'selfconsumption-off') ||
-      (activeStep === 4 && !redirectUrl)
+      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.ADDRESS &&
+        !address.inside_perimeter) ||
+      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.LIGHT &&
+        has_light !== 'light-on') ||
+      (activeStep === GURB_REQUIREMENTS_FORM_SUBSTEPS.TARIFF_SELECTION &&
+        !redirectUrl)
     )
   }
 
