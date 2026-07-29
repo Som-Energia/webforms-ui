@@ -15,9 +15,3 @@ export const addressValidations = Yup.object().shape({
     postal_code: Yup.string().required('GURB_NO_ADDRESS_POSTAL_CODE')
   })
 })
-
-export const selfConsumptionValidations = Yup.object().shape({
-  has_selfconsumption: Yup.string()
-    .required('REQUIRED_FIELD')
-    .oneOf(['selfconsumption-on', 'selfconsumption-off'])
-})

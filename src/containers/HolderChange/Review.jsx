@@ -11,8 +11,8 @@ import FormHelperText from '@mui/material/FormHelperText'
 
 import StepHeader from '../../components/OldComponents/StepHeader'
 import TermsDialog from '../../components/TermsDialog'
-import LegalText from '../../components/LegalText'
 import { languages } from '../../services/utils'
+import PDFLoader from '../../components/PDFLoader/PDFLoader'
 
 const sectionTitleStyles = {
   fontSize: '18px',
@@ -70,8 +70,8 @@ const Review = (props) => {
   const member = values?.member?.become_member
     ? `${values?.holder?.name} ${values?.holder?.surname1} ${values?.holder?.surname2}`
     : values?.holder?.ismember
-    ? values?.holder.vat
-    : values?.member?.vat
+      ? values?.holder.vat
+      : values?.member?.vat
 
   return (
     <>
@@ -201,7 +201,7 @@ const Review = (props) => {
           sx={{ mt: '24px', ml: 0, mr: '32px', mb: '24px' }}
         />
 
-        { member === undefined && (
+        {member === undefined && (
           <FormHelperText
             dangerouslySetInnerHTML={{
               __html: t('HOLDERCHANGE_REVIEW_TEXT')
@@ -213,14 +213,22 @@ const Review = (props) => {
           title={t('GENERAL_TERMS')}
           open={open}
           onAccept={handleAccept}
-          onClose={handleClose}>
-          <LegalText
+          onClose={handleClose}
+          maxWidth='lg'
+          sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}
+        >
+          <PDFLoader
             language={values?.holder?.language}
+            folder={
+              values?.supply_point?.tariff_type === 'index'
+                ? 'CCGG_indexada'
+                : 'CCGG'
+            }
             documentName={
               values?.supply_point?.tariff_type === 'index'
-                ? 'general-and-indexed-specific-terms'
-                : 'general-contract-terms'
-            }></LegalText>
+                ? t('general-and-indexed-specific-terms')
+                : t('general-contract-terms')
+            } />
         </TermsDialog>
 
         <Box mt={2}>

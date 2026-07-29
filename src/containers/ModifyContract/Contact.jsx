@@ -53,6 +53,7 @@ export default function Contact({
           handleChange,
           handleBlur,
           handleSubmit,
+          isValid,
           isSubmitting
         }) => (
           <form onSubmit={handleSubmit} noValidate>
@@ -123,7 +124,7 @@ export default function Contact({
               {nextStep && (
                 <NextButton
                   type="submit"
-                  onClick={nextStep}
+                  disabled={!isValid || isSubmitting}
                   title={t('NEXT')}
                   sx={{
                     backgroundColor: 'primary.extraLight',

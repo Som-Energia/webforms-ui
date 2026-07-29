@@ -101,8 +101,9 @@ const alreadyMember = {
     contract_info: contract_info_c1_20TD,
     donation: false,
     iban: random_iban,
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     sepa_accepted: true,
+    signature: true,
     general_contract_terms_accepted: true,
     privacy_conditions: true,
     statutes_accepted: true
@@ -160,11 +161,12 @@ const sponsored = {
     },
     donation: false,
     iban: random_iban,
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     sepa_accepted: true,
     general_contract_terms_accepted: true,
     privacy_conditions: true,
-    statutes_accepted: true
+    statutes_accepted: true,
+    signature: true
   }
 }
 
@@ -209,11 +211,12 @@ const newMember = {
     },
     donation: true,
     iban: random_iban,
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     sepa_accepted: true,
     general_contract_terms_accepted: true,
     privacy_conditions: true,
-    statutes_accepted: true
+    statutes_accepted: true,
+    signature: true
   }
 }
 
@@ -267,9 +270,10 @@ const A3_indexed = {
       code: random_number,
       vat: random_nif
     },
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     privacy_conditions: true,
     sepa_accepted: true,
+    signature: true,
     statutes_accepted: true
   }
 }
@@ -322,9 +326,10 @@ const A3_periods_has_light = {
       code: random_number,
       vat: random_nif
     },
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     privacy_conditions: true,
     sepa_accepted: true,
+    signature: true,
     statutes_accepted: true
   }
 }
@@ -375,7 +380,8 @@ const C2_30TD = {
     contract_info: contract_info_c2_30TD,
     iban: random_iban,
     sepa_accepted: true,
-    member_payment_type: 'remesa',
+    signature: true,
+    payment_type: 'remesa',
     donation: true,
     privacy_conditions: true,
     general_contract_terms_accepted: true,
@@ -428,9 +434,10 @@ const withSelfconsumption = {
     linked_member: 'already_member',
     contract_info: contract_info_c1_20TD,
     donation: true,
-    member_payment_type: 'remesa',
+    payment_type: 'remesa',
     iban: random_iban,
     sepa_accepted: true,
+    signature: true,
     self_consumption: selfconsumption.normalizedData,
     linked_member_info: {
       vat: random_nif,
@@ -439,7 +446,7 @@ const withSelfconsumption = {
     privacy_conditions: true,
     general_contract_terms_accepted: true,
     statutes_accepted: true,
-    attachments: [{filename: 'road_poneglyph.jpg', category: 'invoice'}]
+    attachments: [{ filename: 'road_poneglyph.jpg', category: 'invoice' }]
   }
 }
 
@@ -489,7 +496,8 @@ const cadastralReference = {
     },
     iban: random_iban,
     sepa_accepted: true,
-    member_payment_type: 'remesa',
+    signature: true,
+    payment_type: 'remesa',
     donation: true,
     privacy_conditions: true,
     general_contract_terms_accepted: true,
@@ -519,8 +527,8 @@ const paymentTPV = {
     },
     new_member: {
       ...client.empty,
-      ...iban_values,
-      payment_method: 'credit_card'
+      payment_method: 'credit_card',
+      payment_authorization_accepted: true
     },
     contract: {
       tariff_mode: 'periods',
@@ -541,10 +549,10 @@ const paymentTPV = {
   normalizedData: {
     linked_member: 'already_member',
     contract_info: contract_info_c1_20TD,
-    member_payment_type: 'tpv',
+    payment_type: 'tpv',
+    payment_authorization_accepted: true,
     donation: false,
-    iban: random_iban,
-    sepa_accepted: true,
+    signature: true,
     linked_member_info: {
       vat: random_nif,
       code: random_number
@@ -559,7 +567,7 @@ const newContractCases = {
   // Member cases
   alreadyMember: alreadyMember,
   sponsored: sponsored,
-  campaign: {...sponsored, entryValues: {...sponsored.entryValues, has_member: 'campaign-offer'}},
+  campaign: { ...sponsored, entryValues: { ...sponsored.entryValues, has_member: 'campaign-offer' } },
   newMember: newMember,
   // Contract cases
   // C1_20TD: base case for member cases

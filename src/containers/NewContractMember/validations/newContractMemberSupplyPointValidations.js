@@ -7,6 +7,8 @@ const newContractMemberSupplyPointValidations = Yup.object().shape({
     .required('ERROR_REQUIRED_FIELD'),
   cups_valid: Yup.boolean()
     .oneOf([true], 'ERROR_INVALID_FIELD'),
+  social_tariff: Yup.boolean()
+    .oneOf([false], 'ERROR_SOCIAL_TARIFF'),
   new_contract: Yup.boolean()
     .oneOf([true], 'CUPS_IN_PROCESS'),
   knowledge_of_distri: Yup.boolean()

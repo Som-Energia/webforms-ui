@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { buttonDark } from './buttonStyles'
 
 function SubmitButton(props) {
-  const { onClick, disabled, sending, text='FINISH' } = props
+  const { onClick, disabled, sending, text = 'FINISH', children } = props
 
   const { t } = useTranslation()
 
@@ -17,13 +17,10 @@ function SubmitButton(props) {
       data-cy="next"
       variant="contained"
       disabled={disabled}
-      onClick={onClick}
-    >
-      {sending ? (
-        <CircularProgress size={24} sx={{ color: 'white' }} />
-      ) : (
-        t(text)
-      )}
+      onClick={onClick}>
+      {sending && <CircularProgress size={24} sx={{ color: 'white' }} />}
+
+      {!sending && (children || t(text))}
     </Button>
   )
 }

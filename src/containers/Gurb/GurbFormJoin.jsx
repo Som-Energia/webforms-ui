@@ -6,19 +6,15 @@ import {
   useMemo,
   useCallback
 } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Formik } from 'formik'
 import MatomoContext from '../../trackers/matomo/MatomoProvider'
 
 import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import PrevButton from '../../components/Buttons/PrevButton'
-import NextButton from '../../components/Buttons/NextButton'
 import SubmitButton from '../../components/Buttons/SubmitButton'
-import SomStepper from '../../components/SomStepper/SomStepper'
+import NewSomStepper from '../../components/NewSomStepper/NewSomStepper'
 
 import {
   identifierValidations,
@@ -34,13 +30,11 @@ import GurbParticipation from './pages/Gurb/GurbParticipation'
 import ContractReview from './pages/Gurb/ContractReview'
 import GurbSignature from './pages/Gurb/GurbSignature'
 import { useSyncLanguage } from '../../hooks/useTranslateOptions'
+import { useTranslation } from 'react-i18next'
 
-
-const MAX_STEPS_NUMBER = 4
-
-const GurbFormJoin = (props) => {
-  const { i18n } = useTranslation()
+const GurbFormJoin = () => {
   const { language, code } = useParams()
+  const { t } = useTranslation()
 
   const [redsysData, setRedsysData] = useState()
   const [validSignature, setValidSignature] = useState(false)
@@ -58,8 +52,8 @@ const GurbFormJoin = (props) => {
     formikRef.current.validateForm()
   }, [activeStep])
 
-  const handleRef = useCallback((ref) => {
-    if (ref !== null) {
+  const handleFormRef = useCallback((ref) => {
+    if (ref) {
       ref.submit()
     }
   }, [])
@@ -92,35 +86,24 @@ const GurbFormJoin = (props) => {
     []
   )
 
-  const nextStep = useCallback(() => {
-    setActiveStep((prev) => Math.min(prev + 1, MAX_STEPS_NUMBER))
-  }, [])
+  const steps = [
+    (formikProps) => <GurbIdentification {...formikProps} />,
+    (formikProps) => <GurbParticipation {...formikProps} gurbCode={code} />,
+    (formikProps) => (
+      <ContractReview {...formikProps} activeStep={activeStep} />
+    ),
+    (formikProps) => (
+      <GurbSignature
+        {...formikProps}
+        gurbCode={code}
+        setRedsysData={setRedsysData}
+        onSuccess={() => setValidSignature(true)}
+      />
+    )
+  ]
 
-  const prevStep = useCallback(() => {
-    setActiveStep((prev) => Math.max(0, prev - 1))
-  }, [])
-
-  const getStep = (formikProps) => {
-    switch (activeStep) {
-      case 0:
-        return <GurbIdentification {...formikProps} />
-      case 1:
-        return <GurbParticipation {...formikProps} gurbCode={code} />
-      case 2:
-        return <ContractReview {...formikProps} activeStep={activeStep} />
-      case 3:
-        return (
-          <GurbSignature
-            {...formikProps}
-            validSignature={validSignature}
-            setValidSignature={setValidSignature}
-            gurbCode={code}
-            setRedsysData={setRedsysData}
-          />
-        )
-      default:
-        return null
-    }
+  const renderCurrentStep = (formikProps) => {
+    return steps.at(activeStep)?.(formikProps) ?? null
   }
 
   const handleSubmit = () => {
@@ -138,12 +121,12 @@ const GurbFormJoin = (props) => {
       action: 'setGurbFormJoinStep',
       name: `gurb-join-step-${activeStep}-${code}`
     })
-  }, [activeStep])
+  }, [activeStep, code])
 
   return (
     <Container
-      data-cy='gurb-join-form'
-      aria-label='gurb-join-form'
+      data-cy="gurb-join-form"
+      aria-label="gurb-join-form"
       maxWidth="md"
       disableGutters
       sx={{ padding: '1rem' }}>
@@ -155,64 +138,36 @@ const GurbFormJoin = (props) => {
         validateOnBlur={false}>
         {(formikProps) => (
           <>
-            <Box
-              sx={{ marginBottom: '65px' }}>
-              <SomStepper
+            <Box sx={{ marginBottom: '65px' }}>
+              <NewSomStepper
                 showStepTitle={true}
                 activeStep={activeStep}
-                steps={[...Array(MAX_STEPS_NUMBER).keys()]}
-              />
+                setActiveStep={setActiveStep}
+                disableNext={loading || !formikProps.isValid}
+                steps={steps}
+                nextButton={
+                  activeStep === steps.length - 1 && (
+                    <SubmitButton
+                      disabled={
+                        loading || !formikProps.isValid || !validSignature
+                      }
+                      onClick={() => handleSubmit()}>
+                      {t('GURB_NEXT_PAYMENT')}
+                    </SubmitButton>
+                  )
+                }>
+                {renderCurrentStep(formikProps)}
+              </NewSomStepper>
             </Box>
-
-            {getStep(formikProps)}
-
-            {(
-              <>
-                <Grid
-                  container
-                  direction="row-reverse"
-                  rowSpacing={2}
-                  sx={{
-                    marginTop: '2rem',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}>
-                  {activeStep !== 0 && activeStep !== 3 && (
-                    <Grid item sm={2} xs={12}>
-                      <PrevButton
-                        onClick={() => prevStep(formikProps)}
-                        title="PREV"
-                      />
-                    </Grid>
-                  )}
-                  {activeStep !== 3 ? (
-                    <Grid item sm={2} xs={12} order={-1}>
-                      <NextButton
-                        disabled={loading || !formikProps.isValid}
-                        onClick={() => nextStep(formikProps)}
-                        title="NEXT"
-                      />
-                    </Grid>
-                  ) : (
-                    <Grid item sm={4} xs={12} sx={{ mx: 'auto' }}>
-                      <SubmitButton
-                        text="GURB_NEXT_PAYMENT"
-                        disabled={
-                          loading || !formikProps.isValid || !validSignature
-                        }
-                        onClick={() => handleSubmit()}
-                      />
-                    </Grid>
-                  )}
-                </Grid>
-              </>
-            )}
           </>
         )}
       </Formik>
 
       {redsysData && validSignature && submitAction && (
-        <form ref={handleRef} action={redsysData.redsys_endpoint} method="POST">
+        <form
+          ref={handleFormRef}
+          action={redsysData.redsys_endpoint}
+          method="POST">
           {Object.keys(redsysData.payment_data).map((key) => (
             <input
               key={key}

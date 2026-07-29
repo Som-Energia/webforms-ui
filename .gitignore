@@ -38,3 +38,6 @@ gurbPersonaldata.json
 
 # bun
 bun*
+
+# local agent artifacts
+.atl/

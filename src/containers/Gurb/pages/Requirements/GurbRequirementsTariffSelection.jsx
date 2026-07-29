@@ -10,7 +10,6 @@ import Chooser from '../../../../components/Chooser/Chooser'
 import { CommunityIcon, HandshakeIcon } from '../../../../data/icons/Icons'
 import { useSyncLanguage } from '../../../../hooks/useTranslateOptions'
 
-
 const GurbRequirementsTariffSelection = (props) => {
   const { i18n } = useTranslation()
   const { language, gurbCode } = useParams()
@@ -18,7 +17,6 @@ const GurbRequirementsTariffSelection = (props) => {
   const { values, setFieldValue } = props
   const [selectedOption, setSelectedOption] = useState(null)
 
-  
   const options = [
     {
       id: 'periods-tariff',
@@ -51,13 +49,13 @@ const GurbRequirementsTariffSelection = (props) => {
     const redirectUrl =
       optionId === 'periods-tariff'
         ? baseUrl +
-        t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
-          gurbCode: gurbCode
-        })
+          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_PERIODS_TARIFF', {
+            gurbCode: gurbCode
+          })
         : baseUrl +
-        t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
-          gurbCode: gurbCode
-        })
+          t('GURB_REQUIREMENTS_RESULT_BUTTON_LINK_INDEXED_TARIFF', {
+            gurbCode: gurbCode
+          })
     setFieldValue('redirectUrl', redirectUrl)
   }
 
@@ -65,14 +63,14 @@ const GurbRequirementsTariffSelection = (props) => {
     <Grid item>
       <TextRecommendation
         title={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_TITLE')}
-        text={t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY')}
+        text={t(
+          'GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_CONTEXT_BODY'
+        )}
         isHeader
       />
-
       <Typography sx={{ mt: 4, mb: 2 }}>
         {t('GURB_REQUIREMENTS_FORM_FINISH_WITHOUT_CONTRACT_ACTION_TITLE')}
       </Typography>
-
       <Chooser
         name="tariff-question"
         data-cy="tariff-chooser"
@@ -81,7 +79,6 @@ const GurbRequirementsTariffSelection = (props) => {
         handleChange={handleTariffQuestion}
         maxWidth="18rem"
       />
-
       <Typography
         sx={{ mt: 2 }}
         variant="body1"

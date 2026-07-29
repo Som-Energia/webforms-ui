@@ -1,9 +1,6 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
@@ -13,6 +10,7 @@ import { checkIbanFormat } from '../../../services/utils'
 import Chooser from '../../../components/Chooser/Chooser'
 import InputTitle from '../../../components/InputTitle'
 import InputField from '../../../components/InputField/InputField'
+import PaymentAuthorizationCheckbox from '../../../components/PaymentAuthorizationCheckbox/PaymentAuthorizationCheckbox'
 
 const PaymentMethod = (props) => {
   const {
@@ -56,9 +54,12 @@ const PaymentMethod = (props) => {
   }
 
   const handleCheckboxChange = async (event) => {
-    let value = event.target.checked
-    await setFieldValue('new_member.sepa_accepted', value)
-    setFieldTouched('new_member.sepa_accepted', true)
+    const fieldName = isCreditCardPayment
+      ? 'new_member.payment_authorization_accepted'
+      : 'new_member.sepa_accepted'
+
+    await setFieldValue(fieldName, event.target.checked)
+    setFieldTouched(fieldName, true)
   }
 
   useEffect(() => {
@@ -81,6 +82,16 @@ const PaymentMethod = (props) => {
       textBody: t('PAYMENT_METHOD_CCARD_DESC')
     }
   ]
+  const showPaymentAuthorizationCheckbox = ['iban', 'credit_card'].includes(
+    values?.new_member?.payment_method
+  )
+  const isCreditCardPayment = values?.new_member?.payment_method === 'credit_card'
+  const paymentAuthorizationLabel = isCreditCardPayment
+    ? t('PAYMENT_METHOD_CCARD_ACCEPT')
+    : t('IBAN_ACCEPT_DIRECT_DEBIT')
+  const paymentAuthorizationValue = isCreditCardPayment
+    ? values?.new_member?.payment_authorization_accepted
+    : values?.new_member?.sepa_accepted
 
   return (
     <Grid container spacing={4}>
@@ -118,30 +129,17 @@ const PaymentMethod = (props) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Box sx={{ display: 'flex' }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    data-cy="iban_check"
-                    checked={values?.new_member?.sepa_accepted}
-                    onChange={handleCheckboxChange}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="body.sm.regular" color="primary.dark">
-                      {t('IBAN_ACCEPT_DIRECT_DEBIT')}
-                    </Typography>
-                    <Typography variant="body.sm.bold" color="error">
-                      {'*'}
-                    </Typography>
-                  </>
-                }
-              />
-            </Box>
-          </Grid>
         </>
+      )}
+      {showPaymentAuthorizationCheckbox && (
+        <Grid item xs={12}>
+          <PaymentAuthorizationCheckbox
+            dataCy="iban_check"
+            checked={paymentAuthorizationValue}
+            label={paymentAuthorizationLabel}
+            onChange={handleCheckboxChange}
+          />
+        </Grid>
       )}
     </Grid>
   )

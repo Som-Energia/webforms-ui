@@ -15,14 +15,16 @@ describe('NextButton component ', async () => {
   })
 
   test('NextButton renders and title is shown', async () => {
-    render(<NextButton title={'NEXT'} />)
+    render(<NextButton>{'NEXT'}</NextButton>)
 
     const error = await screen.findByText('NEXT')
     expect(error).toBeInTheDocument()
   })
 
   test('NextButton renders disabled', async () => {
-    const { getByText } = render(<NextButton title={'NEXT'} disabled={true} />)
+    const { getByText } = render(
+      <NextButton disabled={true}>{'NEXT'}</NextButton>
+    )
 
     expect(getByText('NEXT')).toHaveAttribute('disabled')
   })

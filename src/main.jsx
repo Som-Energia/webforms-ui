@@ -17,27 +17,36 @@ if (root) {
 
     props.version = import.meta.env.VITE_APP_VERSION
 
-    const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
+    const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || '{}')
 
     Object.keys(featureFlags).forEach((flag) => {
       props[flag] = featureFlags[flag]
     })
-    
+
+    const logAppNameStyle =
+      'background:#3b82f6;color:#fff;padding:2px 6px;border-radius:4px 0 0 4px;font-weight:bold'
+    const logAppInfoStyle =
+      'background:#1e3a5f;color:#93c5fd;padding:2px 6px;border-radius:0 4px 4px 0'
+
     console.log(
-      `webforms-ui version: ${
-        import.meta.env.VITE_APP_VERSION ||
-        import.meta.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
-      }`
+      '%c webforms-ui %c version %s \xb7 hash %s ',
+      logAppNameStyle,
+      logAppInfoStyle,
+      import.meta.env.VITE_APP_VERSION,
+      import.meta.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || '--'
     )
 
     console.log(
-      `webforms-ui flags:`, featureFlags
+      '%c webforms-ui %c flags',
+      logAppNameStyle,
+      logAppInfoStyle,
+      featureFlags
     )
-   
+
     ReactDOM.createRoot(document.querySelectorAll("[id='root']")[index]).render(
       <React.StrictMode>
         <App {...props} />
-      </React.StrictMode>,
+      </React.StrictMode>
     )
   })
 }

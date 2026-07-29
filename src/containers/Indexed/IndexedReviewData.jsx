@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Checkbox from '@mui/material/Checkbox'
@@ -10,12 +9,12 @@ import FormHelperText from '@mui/material/FormHelperText'
 
 import Header from '../../components/oficinavirtual/Header'
 import TermsDialog from '../../components/TermsDialog'
-import LegalText from '../../components/LegalText'
+import PDFLoader from '../../components/PDFLoader/PDFLoader'
 
 import IndexedReviewField from './IndexedReviewField'
 import Box from '@mui/material/Box'
 
-const customStyles ={
+const customStyles = {
   root: {
     backgroundColor: 'white',
     padding: '24px'
@@ -29,7 +28,7 @@ const customStyles ={
     textTransform: 'uppercase',
     mt: 3,
     mb: 1.2,
-    color:'#0B2E34'
+    color: '#0B2E34'
   },
   divider: {
     mt: '12px',
@@ -53,7 +52,7 @@ const customStyles ={
 }
 
 const IndexedReviewData = (props) => {
-  
+
   const { t } = useTranslation()
 
   let {
@@ -199,12 +198,19 @@ const IndexedReviewData = (props) => {
           title={t('GENERAL_TERMS')}
           open={open}
           onAccept={handleAccept}
-          onClose={handleClose}>
-          <LegalText
+          onClose={handleClose}
+          maxWidth='lg'
+          sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}>
+          <PDFLoader
+            folder={
+              isTariffIndexed
+                ? 'CCGG'
+                : 'CCGG_indexada'
+            }
             documentName={
               isTariffIndexed
-                ? 'general-contract-terms'
-                : 'general-and-indexed-specific-terms'
+                ? t('general-contract-terms')
+                : t('general-and-indexed-specific-terms')
             }
           />
         </TermsDialog>

@@ -22,13 +22,13 @@ const TextLoader = props => {
     }).then((response) => {
       setText(response?.data)
     }).catch((error) => {
-      console.log(`Error retrieving text ${url}`)
+      console.log(`Error retrieving text ${url}`, error)
     })
   }, [documentName, language])
 
   return text === undefined
     ? <Loading />
-    : <Typography component='div' variant="body1" sx={{ 'a': { textDecoration: 'none', color:'secondary.dark' } }} dangerouslySetInnerHTML={{ __html: text }} />
+    : <Typography component='div' variant="body1" sx={{ 'a': { textDecoration: 'none', color: 'secondary.dark' } }} dangerouslySetInnerHTML={{ __html: text }} />
 }
 
 export const Test = () => {
