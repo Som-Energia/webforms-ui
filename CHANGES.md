@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.0.4 2026-07-29
+
+- FIX: Allow a comunity to change contract ownership without member
+
 ## 8.0.3 2026-07-28
 
 - FIX: Restore credit card payment in the new contract form
