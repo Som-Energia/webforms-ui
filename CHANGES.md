@@ -1,5 +1,10 @@
 # Change Log
 
+## 8.0.5 2026-07-29
+
+- FIX: Contact fields validation in modify power form
+- REF: remove unused code
+
 ## 8.0.4 2026-07-29
 
 - FIX: Allow a comunity to change contract ownership without member
