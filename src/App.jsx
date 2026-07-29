@@ -19,7 +19,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 import ThemeWrapper from './themes/ThemeWrapper'
-import customAxios from './services/custom_axios'
+import { addLanguageHeader } from './services/customAxios'
 import { getUrlOrBrowserSessionLanguage } from './services/utils'
 
 const App = (props) => {
@@ -126,10 +126,9 @@ const App = (props) => {
     )
 
     useEffect(() => {
-      customAxios.defaults.headers.common['X-Language'] = sessionLanguage
+      addLanguageHeader(sessionLanguage)
     }, [sessionLanguage])
 
-    console.log('customAxios', customAxios.defaults.headers.common['X-Language'])
     return (
       <Routes>
                 <Route exact path="/" element={

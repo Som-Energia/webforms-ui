@@ -1,4 +1,4 @@
-import axios from './custom_axios'
+import axios from './customAxios'
 import postalCode2Ine from '../data/zip-ine.json'
 import dayjs from 'dayjs'
 

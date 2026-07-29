@@ -13,8 +13,11 @@ api.defaults.headers = api.defaults.headers || {}
 api.defaults.headers.common = api.defaults.headers.common || {}
 api.defaults.headers.common['X-Language'] = 'es_ES'
 
+export const addLanguageHeader = (language) => {
+  api.defaults.headers.common['X-Language'] = language || 'es_ES'
+}
+
 api.CancelToken = axios.CancelToken
 api.all = axios.all
-api.isCancel = axios.isCancel
 
 export default api
