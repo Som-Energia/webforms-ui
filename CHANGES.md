@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.0.6 2026-07-30
+
+- NEW: change contract options order
+
 ## 8.0.5 2026-07-29
 
 - FIX: Contact fields validation in modify power form
