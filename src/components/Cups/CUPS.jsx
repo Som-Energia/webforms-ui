@@ -32,7 +32,7 @@ const CUPS = (props) => {
       try {
         cupsResponse = await checkCups(cups)
 
-        const { status, knowledge_of_distri, tariff_name, sips } =
+        const { status, knowledge_of_distri, tariff_name, has_social_tariff } =
           cupsResponse?.data || {}
 
         const new_contract = ['new', 'inactive'].includes(status)
@@ -42,7 +42,7 @@ const CUPS = (props) => {
             ...currentValues,
             ...{
               cups_valid: true,
-              social_tariff: sips,
+              social_tariff: has_social_tariff,
               new_contract,
               knowledge_of_distri,
               tariff_name
