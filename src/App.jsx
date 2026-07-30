@@ -1,5 +1,5 @@
-import React, { lazy, useMemo } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import React, { lazy, useEffect, useMemo } from 'react'
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
 
 import OldWebFormsTheme from './themes/webforms_old'
 import WebFormsTheme from './themes/webforms'
@@ -19,10 +19,12 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import UnifiedContractForm from './containers/UnifiedContractForm'
 import ThemeWrapper from './themes/ThemeWrapper'
+import { addLanguageHeader } from './services/customAxios'
+import { getUrlOrBrowserSessionLanguage } from './services/utils'
 
 const App = (props) => {
   const { token = '', isIndexedPilotOngoing = undefined } = props
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   const Home = lazy(() => import('./containers/Home'))
   const Contribution = lazy(() => import('./containers/Contribution'))
@@ -113,16 +115,21 @@ const App = (props) => {
 
   const oldWebFormsTheme = React.useMemo(() => OldWebFormsTheme(), [])
   const webFormsTheme = React.useMemo(() => WebFormsTheme(), [])
+  const fallbackLanguage = i18n.resolvedLanguage || i18n.language
 
-  return (
-    <>
-      <AvailabilityContextProvider>
-        <MatomoProvider>
-          <Box sx={{ flexGrow: 1 }}>
-            <Router future={{
-              v7_startTransition: true,
-            }}>
-              <Routes>
+  const AppRoutes = () => {
+    const location = useLocation()
+    const sessionLanguage = getUrlOrBrowserSessionLanguage(
+      location.pathname,
+      fallbackLanguage
+    )
+
+    useEffect(() => {
+      addLanguageHeader(sessionLanguage)
+    }, [sessionLanguage])
+
+    return (
+      <Routes>
                 <Route exact path="/" element={
                   <ThemeWrapper theme={oldWebFormsTheme}>
                     <Home {...props} />
@@ -464,7 +471,6 @@ const App = (props) => {
                   }
                 />
                 {[
-                  '/:language/pagament-realitzat',
                   '/:language/pago-realizado'
                 ].map((path) => (
                   <Route
@@ -476,7 +482,7 @@ const App = (props) => {
                           mode={'success'}
                           {...props}
                           title={t('SUCCESS_TEXT')}
-                          description={t('NEWMEMBER_OK_DESCRIPTION')}
+                          description={t('PAYMENT_OK_DESCRIPTION')}
                         />
                       </ThemeWrapper>
                     }
@@ -484,7 +490,6 @@ const App = (props) => {
                 ))}
 
                 {[
-                  '/:language/pagament-cancellat',
                   '/:language/pago-cancelado'
                 ].map((path) => (
                   <Route
@@ -499,7 +504,7 @@ const App = (props) => {
                           <Typography
                             sx={{ color: 'secondary.extraDark' }}
                             dangerouslySetInnerHTML={{
-                              __html: t('NEWMEMBER_KO_DESCRIPTION', {
+                              __html: t('PAYMENT_KO_DESCRIPTION', {
                                 url: t('CONTACT_HELP_URL')
                               })
                             }}
@@ -698,12 +703,22 @@ const App = (props) => {
                     }
                   />
                 ))}
-              </Routes>
+      </Routes>
+    )
+  }
+
+  return (
+    <>
+      <AvailabilityContextProvider>
+        <MatomoProvider>
+          <Box sx={{ flexGrow: 1 }}>
+            <Router future={{ v7_startTransition: true }}>
+              <AppRoutes />
             </Router>
             <ApiStatus />
           </Box>
         </MatomoProvider>
-      </AvailabilityContextProvider >
+      </AvailabilityContextProvider>
     </>
   )
 }
