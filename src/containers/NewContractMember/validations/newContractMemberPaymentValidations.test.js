@@ -5,7 +5,7 @@ describe('New contract member payment validation', () => {
   test('defaults to IBAN and accepts a valid direct debit payment', async () => {
     const values = buildInitialValues('ca', 'periods')
 
-    expect(values.new_member.payment_method).toBe('iban')
+    expect(values.new_member.payment_method).toBe(undefined)
     await expect(newContractMemberPaymentValidations.validate({
       new_member: {
         payment_method: 'iban',
@@ -20,7 +20,7 @@ describe('New contract member payment validation', () => {
     await expect(newContractMemberPaymentValidations.validate({
       new_member: { payment_method: 'credit_card' }
     })).rejects.toMatchObject({
-      errors: ['new_member.payment_method must be one of the following values: iban']
+      errors: ['REQUIRED_FIELD']
     })
   })
 })

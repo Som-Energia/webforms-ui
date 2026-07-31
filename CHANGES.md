@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- FIX: Gurb Requirements tests and Payment method validations
+- REF: Yup validations of GurbRequirements Form
+- REF: use has_social_tariff instead sips in checkCUPS
+
 ## 8.0.6 2026-07-30
 
 - NEW: change contract options order
