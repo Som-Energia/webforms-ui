@@ -77,7 +77,7 @@ describe('Cups component', () => {
         status: 'inactive',
         knowledge_of_distri: true,
         tariff_name: '2.0TD',
-        sips: false
+        has_social_tariff: false
       }
     })
     const cups = 'ES0021911991898060KS'
@@ -110,7 +110,7 @@ describe('Cups component', () => {
         status: 'new',
         knowledge_of_distri: true,
         tariff_name: '2.0TD',
-        sips: false
+        has_social_tariff: false
       }
     })
     const cups = 'ES0021911991898060KS'
@@ -130,7 +130,8 @@ describe('Cups component', () => {
         expect.objectContaining({
           new_contract: true,
           knowledge_of_distri: true,
-          tariff_name: '2.0TD'
+          tariff_name: '2.0TD',
+          social_tariff: false
         })
       )
     })
