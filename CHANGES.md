@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.0.7 2026-08-03
 
 - FIX: Gurb Requirements tests and Payment method validations
 - REF: Yup validations of GurbRequirements Form
