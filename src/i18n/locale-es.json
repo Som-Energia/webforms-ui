@@ -744,7 +744,7 @@
     "NEW_MEMBER_SUCCESS_DESC": "Recibirás un correo con tu número de socia una vez acabe todo el proceso",
     "NEW_MEMBER_ERROR_DESC": "Por favor, inténtalo otra vez más adelante. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisaremos la situación. Disculpa las molestias.",
     "NEW_MEMBER_SUBMIT_LOADING": "Estamos gestionando tu solicitud; esto puede tardar unos minutos.",
-    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos gestionando tu solicitud; esto puede tardar unos minutos.",
+    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos gestionando tu solicitud; esto puede tardar unos minutos.<br>Recibirás un correo de confirmación en breve, si en una hora no lo has recibido escribe a comercializacion@somenergia.coop\n",
     "POSTAL_CODE": "Código postal",
     "HELPER_NUMBER_ADDRESS": "",
     "NEW_MEMBER_CONTRACT_SUCCESS_TITLE": "¡Ya eres de Som Energia!",
@@ -874,5 +874,5 @@
     "general-and-indexed-specific-terms": "Condiciones-Generales-y-especificas-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condiciones-Generales-contrato-suministro-energia-electrica-SomEnergia",
     "LEAVE_CONTRACT_FORM_DESCRIPTION": "Si vuelves atrás, perderás el progreso del formulario.",
-    "POP_UP_SIPS_CUP": "La distribuidora de tu zona nos comunica que el CUPS está acogido al bono social. Por ley,  Som Energia no puede ofrecer este bono, por lo tanto, si cambias a la cooperativa perderás esta bonificación. Si, aun así, quieres continuar con la contratación, escribe un correo a <a href='mailto:hola@somenergia.coop'>hola@somenergia.coop</a>"
+    "POP_UP_SIPS_CUP": "La distribuidora de tu zona nos comunica que el CUPS está acogido al bono social. Por ley,  Som Energia no puede ofrecer este bono, por lo tanto, si cambias a la cooperativa perderás esta bonificación. Si, aun así, quieres continuar con la contratación, escribe un correo a <a href='mailto:comercialitzacio@somenergia.coop'>comercialitzacio@somenergia.coop</a>"
 }
