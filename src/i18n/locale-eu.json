@@ -748,7 +748,7 @@
     "NEW_MEMBER_CONTRACT_SUCCESS_DESC": "Mezu bat jasoko duzu zure bazkide-zenbakiarekin eta kontratu berriari buruzko informazio guztiarekin.",
     "NEW_MEMBER_CONTRACT_ERROR_DESC": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
     "NEW_MEMBER_CONTRACT_ERROR_TITLE": "Errore bat gertatu da eta ezin izan da gauzatu eskatutako eragiketa.",
-    "NEW_CONTRACT_SUBMIT_LOADING": "Zure eskaera kudeatzen ari gara; minutu batzuk beharko ditugu.",
+    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos a xestionar a túa solicitude; pode levar uns minutos.<br>Recibirás un correo de confirmación en breve, se nunha hora non o recibiches escribe a comercializacion@somenergia.coop\n",
     "FINISH": "Amaitu",
     "LINK_MEMBER_NIF_HELPER": "IFZ formatuak zenbakiak eta letrak onartzen ditu, gidoi edota punturik gabe (adibidez: 12345678P edo X1234567Y)",
     "LINK_MEMBER_NUMBER_HELPER": "Bulego Birtualean edo bazkidetzean bidali genizun ongietorri-mezuan aurkituko duzu",
