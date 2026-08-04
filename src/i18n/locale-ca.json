@@ -754,7 +754,7 @@
     "NEW_MEMBER_SUCCESS_DESC": "Rebràs un correu amb el teu número de sòcia un cop acabis tot el procés",
     "NEW_MEMBER_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisarem la situació. Disculpa les molèsties.",
     "NEW_MEMBER_SUBMIT_LOADING": "Estem gestionant la teva sol·licitud; això pot trigar uns minuts.",
-    "NEW_CONTRACT_SUBMIT_LOADING": "Estem gestionant la teva sol·licitud; això pot trigar uns minuts.",
+    "NEW_CONTRACT_SUBMIT_LOADING": "Estem gestionant la teva sol·licitud; això pot trigar uns minuts.<br>Rebràs un correu de confirmació aviat, si en una hora no l'has rebut escriu a comercialitzacio@somenergia.coop\n",
     "LINK_MEMBER_TITLE": "Identificació de la persona sòcia",
     "LINK_MEMBER_NIF_TITLE": "Indica el NIF de la persona sòcia",
     "LINK_MEMBER_NIF_HELPER": "El format del NIF ha de contenir números i lletres, sense guions ni punts (Per exemple: 12345678P o X1234567Y)",
@@ -874,5 +874,5 @@
     "general-and-indexed-specific-terms": "Condicions-Generals-i-especifiques-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condicions-Generals-contracte-subministrament-energia-electrica-SomEnergia",
     "LEAVE_CONTRACT_FORM_DESCRIPTION": "Si tornes enrere, perdràs el progrés del formulari.",
-    "POP_UP_SIPS_CUP": "La distribuïdora de la teva zona ens comunica que el CUPS està acollit al bo social. Per llei, Som Energia no pot oferir aquest descompte, per tant, si canvies a la cooperativa perdràs  aquesta bonificació actual. Si, tot i això, vols continuar amb la contractació escriu un correu a <a href='mailto:hola@somenergia.coop'>hola@somenergia.coop</a>"
+    "POP_UP_SIPS_CUP": "La distribuïdora de la teva zona ens comunica que el CUPS està acollit al bo social. Per llei, Som Energia no pot oferir aquest descompte, per tant, si canvies a la cooperativa perdràs  aquesta bonificació actual. Si, tot i això, vols continuar amb la contractació escriu un correu a <a href='mailto:comercialitzacio@somenergia.coop'>comercialitzacio@somenergia.coop</a>"
 }
