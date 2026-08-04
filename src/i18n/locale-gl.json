@@ -753,7 +753,7 @@
     "FINISH": "Finalizar",
     "ERROR_REQUIRED_FIELD": "Campo requirido",
     "LINK_MEMBER_NIF_HELPER": "O formato do NIF só pode conter números e letras, sen guións nin puntos (por exemplo: 12345678P ou X1234567Y)",
-    "NEW_CONTRACT_SUBMIT_LOADING": "Estamos a xestionar a túa solicitude; pode levar uns minutos.",
+    "NEW_CONTRACT_SUBMIT_LOADING": "Zure eskaera kudeatzen ari gara; minutu batzuk beharko ditugu.<br>Berrespen-mezu bat jasoko duzu laster; ordubetean jaso ez baduzu, idatzi comercializacion@somenergia.coop helbidera\n",
     "LINK_MEMBER_TITLE": "Identificación da persoa socia",
     "LINK_MEMBER_NIF_TITLE": "Indica o NIF da persoa socia",
     "ERROR_INVALID_FIELD": "Campo incorrecto",
@@ -872,5 +872,6 @@
     "general-voluntari-contribution-contract-terms": "Condiciones_Generales_Aportaciones_Voluntarias_Capital_Social_SomEnergia",
     "general-and-indexed-specific-terms": "Condicions-Xerais-e-especificas-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condicions-Xerais-contrato-subministracion-enerxia-electrica-SomEnergia",
-    "LEAVE_CONTRACT_FORM_DESCRIPTION": "Se volves atrás, perderás o progreso do formulario."
+    "LEAVE_CONTRACT_FORM_DESCRIPTION": "Se volves atrás, perderás o progreso do formulario.",
+    "POP_UP_SIPS_CUP": "A distribuidora da túa zona comunícanos que o CUPS está acollido ao bono social. Por lei,  Som Energia non pode ofrecer este bono, por tanto, se cambias á cooperativa perderás esta bonificación. Se, aínda así, queres continuar coa contratación, escribe un correo a <a href='mailto:comercialitzacio@somenergia.coop'>comercialitzacio@somenergia.coop</a>"
 }
