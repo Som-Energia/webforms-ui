@@ -34,6 +34,28 @@ export const contributionParams = {
   maxPercentOverAnnualUse: 100,
 }
 
+const SUPPORTED_SESSION_LANGUAGES = ['ca', 'es', 'eu', 'gl']
+
+export const getUrlOrBrowserSessionLanguage = (pathname, fallbackLanguage) => {
+  const urlLanguage = pathname.split('/')[1] || ''
+
+  if (SUPPORTED_SESSION_LANGUAGES.includes(urlLanguage)) {
+    return `${urlLanguage}_ES`
+  }
+
+  if (typeof navigator === 'undefined') {
+    return `${fallbackLanguage}_ES`
+  }
+
+  const browserLanguage = navigator.languages?.[0] || navigator.language || ''
+  const normalizedLanguage = browserLanguage.toLowerCase().split('-')[0]
+  const sessionLanguage = SUPPORTED_SESSION_LANGUAGES.includes(normalizedLanguage)
+    ? normalizedLanguage
+    : fallbackLanguage
+
+  return `${sessionLanguage}_ES`
+}
+
 const sanitizeData = (data) => {
   Object.keys(data).forEach(
     (key) =>

@@ -76,8 +76,8 @@ const options = [
         },
       ]
     : []),
-  { title: "Pagament OK", href: `${language}/pagament-realitzat` },
-  { title: "Pagament KO", href: `${language}/pagament-cancellat` },
+  { title: "Pagament OK", href: `${language}/pago-realizado` },
+  { title: "Pagament KO", href: `${language}/pago-cancelado` },
 ]
 
 const Home = (props) => {
