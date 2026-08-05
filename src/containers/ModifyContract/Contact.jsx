@@ -41,10 +41,10 @@ export default function Contact({
         }}
         validationSchema={ContactSchema}
         validateOnMount
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting: _setSubmitting }) => {
           handleStepChanges({ contact: values })
           nextStep()
-          // FIXME: setSubmitting not used, still needed?
+          // FIXME: ESLint - setSubmitting not used, still needed?
         }}>
         {({
           values,

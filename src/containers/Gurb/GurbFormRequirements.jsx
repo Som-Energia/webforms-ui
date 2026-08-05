@@ -10,31 +10,18 @@ import { Formik } from "formik"
 import NewSomStepper from "../../components/NewSomStepper/NewSomStepper"
 import LoadingContext from "../../context/LoadingContext"
 import { useSyncLanguage } from "../../hooks/useTranslateOptions"
+import { GURB_REQUIREMENTS_FORM_SUBSTEPS } from "../../services/steps"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
 import Address from "./pages/Requirements/Address"
 import GurbRequirementsResult from "./pages/Requirements/GurbRequirementsResult"
 import GurbRequirementsTariffSelection from "./pages/Requirements/GurbRequirementsTariffSelection"
 import LightQuestion from "./pages/Requirements/LightQuestion"
-import SelfConsumption from "./pages/Requirements/SelfConsumption"
 import SupplyPoint from "./pages/Requirements/SupplyPoint"
 import {
   addressValidations,
   lightValidations,
-  selfConsumptionValidations,
-  tariffValidations
-} from './validations/requirementsValidations'
-
-import LoadingContext from '../../context/LoadingContext'
-
-// Step components
-import NewSomStepper from '../../components/NewSomStepper/NewSomStepper'
-import SupplyPoint from './pages/Requirements/SupplyPoint'
-import LightQuestion from './pages/Requirements/LightQuestion'
-import Address from './pages/Requirements/Address'
-import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
-import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
-import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-import { GURB_REQUIREMENTS_FORM_SUBSTEPS } from '../../services/steps'
+} from "./validations/requirementsValidations"
+import supplyPointValidations from "./validations/supplyPointValidations"
 
 const GurbFormRequirements = () => {
   const { language, gurbCode } = useParams()
@@ -44,14 +31,9 @@ const GurbFormRequirements = () => {
   const [activeStep, setActiveStep] = useState(0)
 
   const defaultSteps = [
-    (formikProps) => (
-      <SupplyPoint
-        {...formikProps}
-        activeStep={activeStep}
-      />
-    ),
+    (formikProps) => <SupplyPoint {...formikProps} activeStep={activeStep} />,
     (formikProps) => <Address {...formikProps} activeStep={activeStep} />,
-    (formikProps) => <LightQuestion {...formikProps} activeStep={activeStep} />
+    (formikProps) => <LightQuestion {...formikProps} activeStep={activeStep} />,
   ]
 
   const [steps, setSteps] = useState(defaultSteps)
@@ -80,8 +62,6 @@ const GurbFormRequirements = () => {
     supplyPointValidations,
     addressValidations,
     lightValidations,
-    selfConsumptionValidations,
-    tariffValidations
   ]
 
   const formikRef = useRef(null)

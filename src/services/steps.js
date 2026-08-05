@@ -16,7 +16,7 @@ export const GURB_REQUIREMENTS_FORM_SUBSTEPS = {
   SUPPLY_POINT: 0,
   ADDRESS: 1,
   LIGHT: 2,
-  TARIFF_SELECTION: 3
+  TARIFF_SELECTION: 3,
 }
 
 // New Contract with Member form steps

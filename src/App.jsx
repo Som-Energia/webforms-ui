@@ -32,17 +32,15 @@ const App = (props) => {
   const CancellationConfirm = lazy(
     () => import("./containers/CancellationConfirm"),
   )
-  const D1Detail = lazy(() => import('./containers/D1Detail'))
-  const HolderChange = lazy(() => import('./containers/HolderChange'))
-  const Failure = lazy(() => import('./containers/Failure'))
-  const Success = lazy(() => import('./containers/Success'))
-  const ModifyContract = lazy(() => import('./containers/ModifyContract'))
-  const MailSubscriptions = lazy(() => import('./containers/MailSubscriptions'))
-  const Indexed = lazy(() => import('./containers/Indexed'))
-  const IndexedDailyPrices = lazy(() => import('./containers/IndexedDailyPrices'))
-  const Generation = lazy(() => import('./containers/Generation'))
-  const GenerationContribution = lazy(() =>
-    import('./containers/Generation/GenerationForm/GenerationForm')
+  const D1Detail = lazy(() => import("./containers/D1Detail"))
+  const HolderChange = lazy(() => import("./containers/HolderChange"))
+  const Failure = lazy(() => import("./containers/Failure"))
+  const Success = lazy(() => import("./containers/Success"))
+  const ModifyContract = lazy(() => import("./containers/ModifyContract"))
+  const MailSubscriptions = lazy(() => import("./containers/MailSubscriptions"))
+  const Indexed = lazy(() => import("./containers/Indexed"))
+  const IndexedDailyPrices = lazy(
+    () => import("./containers/IndexedDailyPrices"),
   )
   const Generation = lazy(() => import("./containers/Generation"))
   const GenerationContribution = lazy(
@@ -519,15 +517,15 @@ const App = (props) => {
                     path={path}
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
-                         <PopUpContextProvider>
-                        <LoadingContextProvider>
-                          <SummaryContextProvider>
-                            <NewContractMemberForm
-                              {...props}
-                              tariff={"periods"}
-                            />
-                          </SummaryContextProvider>
-                        </LoadingContextProvider>
+                        <PopUpContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                tariff={"periods"}
+                              />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
                         </PopUpContextProvider>
                       </ThemeWrapper>
                     }
@@ -547,14 +545,14 @@ const App = (props) => {
                     element={
                       <ThemeWrapper theme={webFormsTheme}>
                         <PopUpContextProvider>
-                        <LoadingContextProvider>
-                          <SummaryContextProvider>
-                            <NewContractMemberForm
-                              {...props}
-                              tariff={"indexed"}
-                            />
-                          </SummaryContextProvider>
-                        </LoadingContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                tariff={"indexed"}
+                              />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
                         </PopUpContextProvider>
                       </ThemeWrapper>
                     }
@@ -679,17 +677,17 @@ const App = (props) => {
                     key={path}
                     path={path}
                     element={
-                       <ThemeWrapper theme={webFormsTheme}>
+                      <ThemeWrapper theme={webFormsTheme}>
                         <PopUpContextProvider>
-                        <LoadingContextProvider>
-                          <SummaryContextProvider>
-                            <NewContractMemberForm
-                              {...props}
-                              specialCampaign={"15YEARS_CAMPAIGN"}
-                              initStep={2}
-                            />
-                          </SummaryContextProvider>
-                        </LoadingContextProvider>
+                          <LoadingContextProvider>
+                            <SummaryContextProvider>
+                              <NewContractMemberForm
+                                {...props}
+                                specialCampaign={"15YEARS_CAMPAIGN"}
+                                initStep={2}
+                              />
+                            </SummaryContextProvider>
+                          </LoadingContextProvider>
                         </PopUpContextProvider>
                       </ThemeWrapper>
                     }

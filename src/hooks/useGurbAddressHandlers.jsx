@@ -1,11 +1,13 @@
-import { useCallback, useState, useContext } from 'react'
-import * as Yup from 'yup'
-import PopUpContext from '../context/PopUpContext'
-import { getPlaceDetails, searchPlace } from '../services/googleApiClient'
-import { checkGurbDistance } from '../services/apiGurb'
-import GurbOutOfPerimeterError from '../containers/Gurb/validations/GurbErrors'
-import { addressFieldsValidations } from '../containers/Gurb/validations/requirementsValidations'
-import SimpleGurbDialog from '../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
+import { useCallback, useContext, useState } from "react"
+
+import * as Yup from "yup"
+
+import SimpleGurbDialog from "../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
+import GurbOutOfPerimeterError from "../containers/Gurb/validations/GurbErrors"
+import { addressFieldsValidations } from "../containers/Gurb/validations/requirementsValidations"
+import PopUpContext from "../context/PopUpContext"
+import { checkGurbDistance } from "../services/apiGurb"
+import { getPlaceDetails, searchPlace } from "../services/googleApiClient"
 
 /** Resets geo-related fields */
 const clearAddressGeoFields = (setFieldValue, addressFieldName) => {

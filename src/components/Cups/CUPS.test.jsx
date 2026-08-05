@@ -6,18 +6,18 @@ import {
   queryByAttribute,
   render,
   screen,
-  waitFor
-} from '@testing-library/react'
-import { useState } from 'react'
-import { vi } from 'vitest'
-import { checkCups } from '../../services/api'
-import WebFormsTheme from '../../themes/webforms'
-import Cups from './CUPS'
-import { initI18n } from '../../tests/i18n.mock'
+  waitFor,
+} from "@testing-library/react"
+import { vi } from "vitest"
+
+import { checkCups } from "../../services/api"
+import { initI18n } from "../../tests/i18n.mock"
+import WebFormsTheme from "../../themes/webforms"
+import Cups from "./CUPS"
 
 // Mock the checkCups function
-vi.mock('../../services/api', () => ({
-  checkCups: vi.fn()
+vi.mock("../../services/api", () => ({
+  checkCups: vi.fn(),
 }))
 
 const webFormsTheme = WebFormsTheme()
@@ -26,7 +26,7 @@ const renderComponent = async (cupsNumber, setValues = () => {}) => {
   await initI18n({ ERROR_INVALID_FIELD: "Invalid field" })
 
   return render(
-    <CupsWrapperComponent cupsNumber={cupsNumber} setValues={setValues} />
+    <CupsWrapperComponent cupsNumber={cupsNumber} setValues={setValues} />,
   )
 }
 
@@ -79,9 +79,9 @@ describe("Cups component", () => {
       data: {
         status: "inactive",
         knowledge_of_distri: true,
-        tariff_name: '2.0TD',
-        has_social_tariff: false
-      }
+        tariff_name: "2.0TD",
+        has_social_tariff: false,
+      },
     })
     const cups = "ES0021911991898060KS"
     const setValuesSpy = vi.fn()
@@ -100,9 +100,9 @@ describe("Cups component", () => {
         expect.objectContaining({
           new_contract: true,
           knowledge_of_distri: true,
-          tariff_name: '2.0TD',
-          social_tariff: false
-        })
+          tariff_name: "2.0TD",
+          social_tariff: false,
+        }),
       )
     })
   })
@@ -112,9 +112,9 @@ describe("Cups component", () => {
       data: {
         status: "new",
         knowledge_of_distri: true,
-        tariff_name: '2.0TD',
-        has_social_tariff: false
-      }
+        tariff_name: "2.0TD",
+        has_social_tariff: false,
+      },
     })
     const cups = "ES0021911991898060KS"
     const setValuesSpy = vi.fn()
@@ -127,15 +127,15 @@ describe("Cups component", () => {
     })
 
     const [updater] = setValuesSpy.mock.lastCall
-    
+
     await waitFor(() => {
       expect(updater(currentValues)).toEqual(
         expect.objectContaining({
           new_contract: true,
           knowledge_of_distri: true,
-          tariff_name: '2.0TD',
-          social_tariff: false
-        })
+          tariff_name: "2.0TD",
+          social_tariff: false,
+        }),
       )
     })
   })

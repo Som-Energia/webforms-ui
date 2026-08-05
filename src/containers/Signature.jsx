@@ -76,7 +76,7 @@ const SignatureIframe = ({
       {error && (
         <Result
           mode="failure"
-          title={t('GENERIC_ERROR_TITLE')}
+          title={t("GENERIC_ERROR_TITLE")}
           description={errorDescription}
         />
       )}

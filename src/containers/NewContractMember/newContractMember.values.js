@@ -1,4 +1,4 @@
-import { creditCardPaymentEnabled } from './paymentMethods'
+import { creditCardPaymentEnabled } from "./paymentMethods"
 
 export const buildInitialValues = (language, tariff) => ({
   cups: "",
@@ -60,8 +60,8 @@ export const buildInitialValues = (language, tariff) => ({
     phone_code: "+34",
     phone_valid: false,
     language: `${language}_ES`,
-    referral_source: '',
-    payment_method: creditCardPaymentEnabled ? undefined : 'iban',
+    referral_source: "",
+    payment_method: creditCardPaymentEnabled ? undefined : "iban",
     sepa_accepted: false,
     payment_authorization_accepted: false,
     iban: undefined,

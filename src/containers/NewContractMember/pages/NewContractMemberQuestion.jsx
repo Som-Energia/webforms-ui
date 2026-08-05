@@ -44,7 +44,7 @@ const NewContractMemberQuestion = ({
 
   const options = [
     {
-      id: 'member-link',
+      id: "member-link",
       icon: <HandshakeIcon />,
       textHeader: t("HAS_LINK_MEMBER"),
       textBody: t("HAS_LINK_MEMBER_BODY"),
@@ -52,15 +52,15 @@ const NewContractMemberQuestion = ({
     {
       id: "member-off",
       icon: <CommunityIcon on={false} />,
-      textHeader: t('HAS_NO_MEMBER'),
-      textBody: t('HAS_NO_MEMBER_BODY')
+      textHeader: t("HAS_NO_MEMBER"),
+      textBody: t("HAS_NO_MEMBER_BODY"),
     },
     {
-      id: 'member-on',
+      id: "member-on",
       icon: <CommunityIcon />,
-      textHeader: t('HAS_MEMBER'),
-      textBody: t('HAS_MEMBER_BODY')
-    }
+      textHeader: t("HAS_MEMBER"),
+      textBody: t("HAS_MEMBER_BODY"),
+    },
   ]
 
   return (
