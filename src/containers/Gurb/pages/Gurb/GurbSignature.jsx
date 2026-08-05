@@ -12,7 +12,6 @@ const GurbSignature = ({
   onSuccess = () => {},
 }) => {
   const { t } = useTranslation()
-  const { i18n } = useTranslation()
 
   const createSignatureHandler = (response) => {
     if (!response) {
