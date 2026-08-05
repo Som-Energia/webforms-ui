@@ -34,22 +34,24 @@ export const contributionParams = {
   maxPercentOverAnnualUse: 100,
 }
 
-const SUPPORTED_SESSION_LANGUAGES = ['ca', 'es', 'eu', 'gl']
+const SUPPORTED_SESSION_LANGUAGES = ["ca", "es", "eu", "gl"]
 
 export const getUrlOrBrowserSessionLanguage = (pathname, fallbackLanguage) => {
-  const urlLanguage = pathname.split('/')[1] || ''
+  const urlLanguage = pathname.split("/")[1] || ""
 
   if (SUPPORTED_SESSION_LANGUAGES.includes(urlLanguage)) {
     return `${urlLanguage}_ES`
   }
 
-  if (typeof navigator === 'undefined') {
+  if (typeof navigator === "undefined") {
     return `${fallbackLanguage}_ES`
   }
 
-  const browserLanguage = navigator.languages?.[0] || navigator.language || ''
-  const normalizedLanguage = browserLanguage.toLowerCase().split('-')[0]
-  const sessionLanguage = SUPPORTED_SESSION_LANGUAGES.includes(normalizedLanguage)
+  const browserLanguage = navigator.languages?.[0] || navigator.language || ""
+  const normalizedLanguage = browserLanguage.toLowerCase().split("-")[0]
+  const sessionLanguage = SUPPORTED_SESSION_LANGUAGES.includes(
+    normalizedLanguage,
+  )
     ? normalizedLanguage
     : fallbackLanguage
 
@@ -472,9 +474,6 @@ export const newNormalizeMember = (data) => {
 
   finalMember.payment_iban = data.new_member.iban
 
-  finalMember.urlok = data.urlok
-  finalMember.urlko = data.urlko
-
   if (data.new_member.person_type === "physic-person") {
     finalMember.cognom =
       `${data.new_member.surname1} ${data.new_member.surname2}`.trim()
@@ -521,8 +520,6 @@ export const normalizeMember = (data) => {
         : PAYMENT_METHOD_PAYMENT_ORDER
 
   finalMember.payment_iban = data.payment.iban
-  finalMember.urlok = data.urlok
-  finalMember.urlko = data.urlko
 
   if (data.member.isphisical) {
     const surnames = `${data.member.surname1} ${data.member.surname2}`
