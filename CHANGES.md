@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.1.0 2026-08-05
+
+- NEW: Use header request session or url language in contract, new member and gurb request
+
 ## 8.0.7 2026-08-03
 
 - FIX: Gurb Requirements tests and Payment method validations
