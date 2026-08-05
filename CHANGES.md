@@ -1,5 +1,40 @@
 # Change Log
 
+## 8.0.7 2026-08-03
+
+- FIX: Gurb Requirements tests and Payment method validations
+- REF: Yup validations of GurbRequirements Form
+- REF: use has_social_tariff instead sips in checkCUPS
+
+## 8.0.6 2026-07-30
+
+- NEW: change contract options order
+
+## 8.0.5 2026-07-29
+
+- FIX: Contact fields validation in modify power form
+- REF: remove unused code
+
+## 8.0.4 2026-07-29
+
+- FIX: Allow a comunity to change contract ownership without member
+
+## 8.0.3 2026-07-28
+
+- FIX: Restore credit card payment in the new contract form
+
+## 8.0.2 2026-07-28
+
+- FIX: Remove the self-consumption requirement from the Gurb form
+
+## 8.0.1 2026-07-27
+
+- FIX: Require IBAN payment in the new contract form
+
+## 8.0.0 2026-07-24
+
+- NEW: check SIPS in contract form
+
 ## 7.3.2 2026-07-21
 
 - FIX: Prevent summary page to pop up between loading and Redsys page

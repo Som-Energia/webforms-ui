@@ -1,5 +1,23 @@
-import React from "react"
-import { useTranslation } from "react-i18next"
+import React from 'react'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next'
+import SectionTitle from './SectionTitle'
+import GenerationAssigmentSection from './GenerationAssignmentSection'
+import GenerationInvestmentSection from './GenerationInvestmentSection'
+import GenerationContext from '../context/GenerationContext'
+import PopUpContext from '../../../context/PopUpContext'
+import GenerationFailure from './GenerationFailure'
+import ContractList from '../../../components/OldComponents/ClickableList';
+import SimpleDialog from '../../../components/SimpleDialog';
+import { addContractsToAssignments } from '../../../services/api'
+import Loading from '../../../components/Loading'
+import CustomDialog from '../../../components/CustomDialog'
+import GenerationTable from './GenerationTable'
 
 import AddIcon from "@mui/icons-material/Add"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"

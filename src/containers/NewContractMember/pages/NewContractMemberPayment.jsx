@@ -4,13 +4,15 @@ import { useTranslation } from "react-i18next"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 
-import Chooser from "../../../components/Chooser/Chooser"
-import InputField from "../../../components/InputField/InputField"
-import InputTitle from "../../../components/InputTitle"
-import PaymentAuthorizationCheckbox from "../../../components/PaymentAuthorizationCheckbox/PaymentAuthorizationCheckbox"
-import TermsDialog from "../../../components/TermsDialog"
-import { CreditCardIcon, InvoiceIcon } from "../../../data/icons/Icons"
-import { checkIbanFormat } from "../../../services/utils"
+import { InvoiceIcon, CreditCardIcon } from '../../../data/icons/Icons'
+import { checkIbanFormat } from '../../../services/utils'
+import { creditCardPaymentEnabled } from '../paymentMethods'
+
+import Chooser from '../../../components/Chooser/Chooser'
+import InputTitle from '../../../components/InputTitle'
+import InputField from '../../../components/InputField/InputField'
+import PaymentAuthorizationCheckbox from '../../../components/PaymentAuthorizationCheckbox/PaymentAuthorizationCheckbox'
+import TermsDialog from '../../../components/TermsDialog'
 
 const PaymentMethod = (props) => {
   const {
@@ -91,12 +93,12 @@ const PaymentMethod = (props) => {
       textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
       textBody: t("PAYMENT_METHOD_IBAN_DESC"),
     },
-    {
-      id: "credit_card",
+    ...(creditCardPaymentEnabled ? [{
+      id: 'credit_card',
       icon: <CreditCardIcon />,
-      textHeader: t("PAYMENT_METHOD_CCARD"),
-      textBody: t("PAYMENT_METHOD_CCARD_DESC"),
-    },
+      textHeader: t('PAYMENT_METHOD_CCARD'),
+      textBody: t('PAYMENT_METHOD_CCARD_DESC')
+    }] : [])
   ]
 
   const showPaymentAuthorizationCheckbox = ["iban", "credit_card"].includes(
@@ -128,18 +130,25 @@ const PaymentMethod = (props) => {
           {t("MEMBER_PAGE_PAYMENT_METHOD")}
         </Typography>
       </Grid>
-      <Grid item xs={12}>
-        <InputTitle text={t("PAYMENT_METHOD_QUESTION")} required={true} />
-      </Grid>
-      <Grid item xs={12}>
-        <Chooser
-          name="method-payment-question"
-          options={options}
-          value={values.new_member.payment_method}
-          handleChange={handleMethodPaymentQuestion}
-        />
-      </Grid>
-      {values?.new_member?.payment_method === "iban" && (
+      {creditCardPaymentEnabled && (
+        <>
+          <Grid item xs={12}>
+            <InputTitle
+              text={t('PAYMENT_METHOD_QUESTION')}
+              required={true}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Chooser
+              name="method-payment-question"
+              options={options}
+              value={values.new_member.payment_method}
+              handleChange={handleMethodPaymentQuestion}
+            />
+          </Grid>
+        </>
+      )}
+      {values?.new_member?.payment_method === 'iban' && (
         <>
           <Grid item xs={12}>
             <InputField

@@ -1,13 +1,11 @@
-import { useCallback, useContext, useState } from "react"
-
-import * as Yup from "yup"
-
-import SimpleGurbDialog from "../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
-import GurbOutOfPerimeterError from "../containers/Gurb/validations/GurbErrors"
-import { addressValidations } from "../containers/Gurb/validations/requirementsValidations"
-import PopUpContext from "../context/PopUpContext"
-import { checkGurbDistance } from "../services/apiGurb"
-import { getPlaceDetails, searchPlace } from "../services/googleApiClient"
+import { useCallback, useState, useContext } from 'react'
+import * as Yup from 'yup'
+import PopUpContext from '../context/PopUpContext'
+import { getPlaceDetails, searchPlace } from '../services/googleApiClient'
+import { checkGurbDistance } from '../services/apiGurb'
+import GurbOutOfPerimeterError from '../containers/Gurb/validations/GurbErrors'
+import { addressFieldsValidations } from '../containers/Gurb/validations/requirementsValidations'
+import SimpleGurbDialog from '../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
 
 /** Resets geo-related fields */
 const clearAddressGeoFields = (setFieldValue, addressFieldName) => {
@@ -197,7 +195,7 @@ export const useAddressHandlers = ({
     await setFieldValue(`${addressFieldName}.inside_perimeter`, false)
     const updates = { address: {} }
     try {
-      await addressValidations.validate(values, { abortEarly: false })
+      await addressFieldsValidations.validate(values, { abortEarly: false })
       setLoading(true)
       await handleCheckGurbDistance(
         gurbCode,

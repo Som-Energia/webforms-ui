@@ -1,5 +1,7 @@
 import * as Yup from "yup"
 
+import { creditCardPaymentEnabled } from '../paymentMethods'
+
 const newContractMemberValidations = Yup.object().shape({
   new_member: Yup.object().shape({
     iban: Yup.string().when("payment_method", {
@@ -13,10 +15,10 @@ const newContractMemberValidations = Yup.object().shape({
       otherwise: Yup.bool().notRequired(),
     }),
     payment_method: Yup.string()
-      .required("REQUIRED_FIELD")
-      .oneOf(["iban", "credit_card"]),
-    sepa_accepted: Yup.bool().when("payment_method", {
-      is: "iban",
+      .required('REQUIRED_FIELD')
+      .oneOf(creditCardPaymentEnabled ? ['iban', 'credit_card'] : ['iban']),
+    sepa_accepted: Yup.bool().when('payment_method', {
+      is: 'iban',
       then: Yup.bool()
         .required("REQUIRED_FIELD")
         .oneOf([true], "REQUIRED_FIELD"),

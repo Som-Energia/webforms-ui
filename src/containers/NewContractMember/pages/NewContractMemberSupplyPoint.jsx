@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useState, useEffect, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 
-import AlertBox from "../../../components/AlertBox/AlertBox"
-import Chooser from "../../../components/Chooser/Chooser"
-import CUPS from "../../../components/Cups/CUPS"
-import InputTitle from "../../../components/InputTitle"
-import TermsDialog from "../../../components/TermsDialog"
-import { LightbulbIcon } from "../../../data/icons/Icons"
+import Chooser from '../../../components/Chooser/Chooser'
+import InputTitle from '../../../components/InputTitle'
+import CUPS from '../../../components/Cups/CUPS'
+import AlertBox from '../../../components/AlertBox/AlertBox'
+
+import { LightbulbIcon } from '../../../data/icons/Icons'
+
+import Grid from '@mui/material/Grid'
+import PopUpContext from '../../../context/PopUpContext'
+import SimpleGurbDialog from '../../../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
 
 const NewContractMemberSupplyPoint = ({ ...props }) => {
-  const trackID = "supply-point"
-
+  const trackID = 'supply-point'
+  const { setContent } = useContext(PopUpContext)
+  
   const { values, setFieldValue, sendTrackEvent } = props
   const { t } = useTranslation()
   const [openLightOffDialog, setOpenLightOffDialog] = useState(false)
@@ -32,6 +37,20 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
   useEffect(() => {
     sendTrackEvent(trackID)
   }, [])
+
+
+  useEffect(() => {
+    if(values.social_tariff && values.cups_valid){
+      setContent(
+        <SimpleGurbDialog
+          severity="error"
+          text1={t('POP_UP_SIPS_CUP')}
+          setContent={setContent}
+       />
+      )
+    }
+  },[values.social_tariff,values.cups_valid,setContent,t])
+
 
   const options = [
     {

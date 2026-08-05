@@ -1,17 +1,19 @@
-import { useContext } from "react"
-import { useTranslation } from "react-i18next"
-
-import DeleteIcon from "@mui/icons-material/Delete"
-import DragIndicatorIcon from "@mui/icons-material/DragIndicator"
-import Alert from "@mui/material/Alert"
-import Box from "@mui/material/Box"
-import IconButton from "@mui/material/IconButton"
-import { styled } from "@mui/material/styles"
-import TableBody from "@mui/material/TableBody"
-import TableCell from "@mui/material/TableCell"
-import TableRow from "@mui/material/TableRow"
-import Typography from "@mui/material/Typography"
-
+import { useContext } from 'react'
+import GenerationContext from '../context/GenerationContext'
+import GenerationTable from './GenerationTable'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
+import TableBody from '@mui/material/TableBody'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
+import DeleteIcon from '@mui/icons-material/Delete'
+import dayjs from 'dayjs'
+import { styled } from '@mui/material/styles'
+import PopUpContext from '../../../context/PopUpContext'
+import SimpleDialog from '../../../components/SimpleDialog';
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography'
 import {
   closestCenter,
   DndContext,

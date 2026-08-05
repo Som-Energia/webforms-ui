@@ -394,7 +394,7 @@ function HolderChange(props) {
 
   const handlePost = async (values) => {
     setSending(true)
-    const data = normalizeHolderChange(values)
+    const data = normalizeHolderChange(values, isMemberMandatoryForHolderchange)
     await holderChange(data)
       .then((response) => {
         const responseData = response?.data ? response.data : {}

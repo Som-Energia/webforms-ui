@@ -1,4 +1,11 @@
-import React from "react"
+import React from 'react'
+import GenerationAssignmentSection from './GenerationAssignmentSection'
+import { render, screen, queryByAttribute, fireEvent, waitFor } from '@testing-library/react'
+import GenerationContext from '../context/GenerationContext'
+import PopUpContext, { PopUpContextProvider } from '../../../context/PopUpContext'
+import SimpleDialog from '../../../components/SimpleDialog'
+import * as myApi from '../../../services/api'
+import { vi } from 'vitest'
 
 import {
   fireEvent,

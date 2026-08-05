@@ -6,6 +6,7 @@ import Button from "@mui/material/Button"
 function NextButton({ title, ...props }) {
   return (
     <Button
+      id="nextButton"
       type="button"
       data-cy="next"
       variant="contained"

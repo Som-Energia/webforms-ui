@@ -216,4 +216,5 @@ describe('Modify Contract', () => {
       .parent()
       .should('have.class', 'Mui-error')
   })
+
 })

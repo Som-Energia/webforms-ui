@@ -106,6 +106,7 @@ Cypress.Commands.add(
     cy.wait('@googleGetPlace')
 
     cy.get('[data-cy="number"]').type('2')
+    cy.wait(1000)
 
     cy.intercept(
       'GET',

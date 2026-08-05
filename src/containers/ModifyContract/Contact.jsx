@@ -40,7 +40,8 @@ export default function Contact({
           ...params,
         }}
         validationSchema={ContactSchema}
-        onSubmit={(values /*, { setSubmitting }*/) => {
+        validateOnMount
+        onSubmit={(values, { setSubmitting }) => {
           handleStepChanges({ contact: values })
           nextStep()
           // FIXME: setSubmitting not used, still needed?

@@ -36,8 +36,9 @@ const GurbSignature = ({
               cups: values?.cups,
               vat: values?.owner?.nif,
             }}
-            textRecommendation={t("SIGNATURE")}
-            textInfo={t("GURB_SIGNATURE_INFO")}
+            textRecommendation={t('SIGNATURE')}
+            textInfo={t('GURB_SIGNATURE_INFO')}
+            errorDescription={t('GURB_SIGNATURE_ERROR_DESCRIPTION')}
             onCreateSignature={createSignatureHandler}
             onSignaturitCompleted={onSuccess}></SignatureIframe>
         </Grid>

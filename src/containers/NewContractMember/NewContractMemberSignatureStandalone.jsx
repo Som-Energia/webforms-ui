@@ -139,8 +139,9 @@ const NewContractMemberSignatureStandalone = () => {
           <SignatureIframe
             apiFunction={getContractSignature}
             postData={{ leadId, cups }}
-            textRecommendation={t("SIGNATURE")}
-            textInfo={t("SIGNATURE_INFO")}
+            textRecommendation={t('SIGNATURE')}
+            textInfo={t('SIGNATURE_INFO')}
+            errorDescription={t('CONTRACT_SIGNATURE_ERROR_DESCRIPTION')}
             onCreateSignature={handleCreateSignature}
             onSignaturitCompleted={handleSignatureCompleted}
           />
