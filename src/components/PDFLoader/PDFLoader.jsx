@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React from 'react'
 import Loading from '../Loading'
 import { useTranslation } from 'react-i18next'

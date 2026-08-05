@@ -29,7 +29,6 @@ const GurbSignature = ({
           <SignatureIframe
             apiFunction={createGurbSignature}
             postData={{
-              lang: `${i18n.language}_ES`,
               gurb_code: gurbCode,
               access_tariff: values?.tariff_name,
               beta: values?.gurb?.power,
