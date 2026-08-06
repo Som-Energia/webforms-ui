@@ -215,7 +215,6 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContractFlow', ({
 
 
   if (gurbCode) {
-  cy.get('[data-cy="next"]').should('not.be.disabled').click()
     cy.resultRedirectComponent(gurbCode)
     return
   }
