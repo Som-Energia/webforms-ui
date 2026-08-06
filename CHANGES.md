@@ -1,5 +1,10 @@
 # Change Log
 
+## 8.1.1 2026-08-06
+
+- FIX: Enable html text in loading component
+- FIX: Remove email white spaces in holderchange form
+
 ## 8.1.0 2026-08-05
 
 - NEW: Use header request session or url language in contract, new member and gurb request
