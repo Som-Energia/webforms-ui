@@ -72,7 +72,7 @@ const SignatureIframe = ({
     <>
       {loading && (
         <Grid item size={12}>
-          <Loading description="NEW_CONTRACT_SUBMIT_LOADING" />
+          <Loading description={t("NEW_CONTRACT_SUBMIT_LOADING")} />
         </Grid>
       )}
 
