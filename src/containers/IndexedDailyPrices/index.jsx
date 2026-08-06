@@ -21,7 +21,9 @@ const IndexedDailyPrices = () => {
   const { t, i18n } = useTranslation()
 
   useEffect(() => {
-    i18n.changeLanguage(language)
+    if (language && i18n.language !== language) {
+      i18n.changeLanguage(language)
+    }
   }, [language, i18n])
 
   const [tariff, setTariff] = useState(DefaultTariff)
