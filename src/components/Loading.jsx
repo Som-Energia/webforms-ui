@@ -2,10 +2,8 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography'
-import { useTranslation } from 'react-i18next'
 
 const Loading = (props) => {
-    const { t } = useTranslation()
     const { description } = props
     return (
         <Box data-testid={'loading-component'} sx={{
@@ -19,10 +17,11 @@ const Loading = (props) => {
 
             <CircularProgress sx={{ color: 'primary.mainOrange' }} />
 
-            <Typography variant="pagesubtitle">
-                {t(description)}
-            </Typography>
-
+            <Typography variant="pagesubtitle"
+                dangerouslySetInnerHTML={{
+                    __html: description
+                }}
+            />
         </Box>
     )
 }
