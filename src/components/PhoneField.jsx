@@ -54,13 +54,8 @@ const PhoneField = (props) => {
   const codes = getCountryDialCodesMap()
 
   const initialCode = values.new_member.phone_code || "+34"
-  const initialCountry =
-    Object.keys(codes).find((c) => codes[c] === initialCode) || "ES"
 
   const [code, setCode] = useState(initialCode)
-  // FIXME: ESLint country is not used by the component
-  // eslint-disable-next-line
-  const [country, setCountry] = useState(initialCountry)
   const [number, setNumber] = useState(values.new_member.phone || "")
 
   function getCountryDialCodesMap() {
@@ -73,15 +68,9 @@ const PhoneField = (props) => {
     return result
   }
 
-  function getCountryFromCode(code) {
-    return Object.keys(codes).find((country) => codes[country] === code)
-  }
-
   const handleChangeCountry = (event) => {
     const selectedCode = event.target.value
     setCode(selectedCode)
-    const countryFromCode = getCountryFromCode(selectedCode)
-    if (countryFromCode) setCountry(countryFromCode)
   }
 
   function sanitizePhoneNumber(input) {

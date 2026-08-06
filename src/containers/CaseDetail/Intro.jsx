@@ -8,9 +8,7 @@ import Typography from "@mui/material/Typography"
 import NextButton from "../../components/OldComponents/Buttons/NextButton"
 import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
 
-// FIXME: ESLint handleStepChanges used externally but not present inside component
-// eslint-disable-next-line
-export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
+export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()
 
   const onNextStep = (event) => {

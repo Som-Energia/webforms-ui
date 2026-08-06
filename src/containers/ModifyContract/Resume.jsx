@@ -12,16 +12,7 @@ import Typography from "@mui/material/Typography"
 
 import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
 
-// FIXME: ESLint - handleStepChanges and nextStep not working
-export default function ModifyResume({
-  prevStep,
-  // eslint-disable-next-line
-  nextStep,
-  // eslint-disable-next-line
-  handleStepChanges,
-  postSubmit,
-  params,
-}) {
+export default function ModifyResume({ prevStep, postSubmit, params }) {
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 

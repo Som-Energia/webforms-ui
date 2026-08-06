@@ -726,9 +726,7 @@ export const checkCAUWhileTyping = (value, t, matchingCups) => {
     return error(t("CAU_INVALID_BORDER_POINT"))
 
   const installation = value.slice(22, 26)
-  // FIXME: ESLint check regex needs \A
-  // eslint-disable-next-line no-useless-escape
-  if (installation && !/^\A\d{0,3}$/.test(installation)) {
+  if (installation && !/^A\d{0,3}$/.test(installation)) {
     return error(t("CAU_INVALID_INSTALLATION"))
   }
 

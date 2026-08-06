@@ -114,13 +114,9 @@ function ModifyContract(props) {
           <IntroFromD1
             nextStep={() => nextStep(1)}
             prevStep={() => prevStep()}
-            handleStepChanges={handleStepChanges}
           />
         ) : (
-          <Intro
-            nextStep={() => nextStep(1)}
-            handleStepChanges={handleStepChanges}
-          />
+          <Intro nextStep={() => nextStep(1)} />
         )
       case 1:
         return (
@@ -143,9 +139,7 @@ function ModifyContract(props) {
       default:
         return (
           <Resume
-            nextStep={() => nextStep()}
             prevStep={prevStep}
-            handleStepChanges={handleStepChanges}
             postSubmit={fromD1 ? handleD1Post : handlePost}
             params={fromD1 ? { ...data, ...d1CaseData } : data}
           />
