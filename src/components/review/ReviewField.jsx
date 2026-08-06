@@ -39,7 +39,7 @@ const ReviewField = ({ label, value, step }) => {
       )}
       <Box>
         <Typography variant="body.sm.regular" color="secondary.dark">
-          {step && (
+          {step !== undefined && step !== null ? (
             <Link
               data-testid="change-value-field"
               component="button"
@@ -48,9 +48,9 @@ const ReviewField = ({ label, value, step }) => {
               }}>
               {value}
             </Link>
+          ) : (
+            htmlField(value)
           )}
-
-          {!step && htmlField(value)}
         </Typography>
       </Box>
     </Box>
