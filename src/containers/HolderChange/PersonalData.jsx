@@ -93,6 +93,10 @@ function PersonalData(props) {
     setFieldValue(event.target.name, value)
   }
 
+  const handleChangeEmail = (event) => {
+    setFieldValue(event.target.name, event.target.value.trim())
+  }
+
   useEffect(() => {
     const setMunicipisWithPostalCode = async (postalCode) => {
       const municipis = await getMunicipisByPostalCode(postalCode)
@@ -390,7 +394,7 @@ function PersonalData(props) {
               required
               fullWidth
               value={values[entity]?.email}
-              onChange={handleChange}
+              onChange={handleChangeEmail}
               onBlur={handleBlur}
               error={errors[entity]?.email && touched[entity]?.email}
               helperText={touched[entity]?.email && errors[entity]?.email}
@@ -417,7 +421,7 @@ function PersonalData(props) {
               required
               fullWidth
               value={values[entity]?.email2}
-              onChange={handleChange}
+              onChange={handleChangeEmail}
               onBlur={handleBlur}
               error={errors[entity]?.email2 && touched[entity]?.email2}
               helperText={touched[entity]?.email2 && errors[entity]?.email2}
