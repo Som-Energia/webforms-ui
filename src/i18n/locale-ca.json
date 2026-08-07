@@ -870,7 +870,7 @@
     "general-and-indexed-specific-terms": "Condicions-Generals-i-especifiques-tarifa-indexada-SomEnergia",
     "general-contract-terms": "Condicions-Generals-contracte-subministrament-energia-electrica-SomEnergia",
     "LEAVE_CONTRACT_FORM_DESCRIPTION": "Si tornes enrere, perdràs el progrés del formulari.",
-    "POP_UP_SIPS_CUP": "La distribuïdora de la teva zona ens comunica que el CUPS està acollit al bo social. Per llei, Som Energia no pot oferir aquest descompte, per tant, si canvies a la cooperativa perdràs  aquesta bonificació actual. Si, tot i això, vols continuar amb la contractació escriu un correu a <a href='mailto:hola@somenergia.coop'>hola@somenergia.coop</a>",
+    "POP_UP_SIPS_CUP": "La distribuïdora de la teva zona ens comunica que el CUPS està acollit al bo social. Per llei, Som Energia no pot oferir aquest descompte, per tant, si canvies a la cooperativa perdràs  aquesta bonificació actual. Si, tot i això, vols continuar amb la contractació escriu un correu a <a href='mailto:comercialitzacio@somenergia.coop'>comercialitzacio@somenergia.coop</a>",
     "PAYMENT_OK_DESCRIPTION": "En breu rebràs un correu amb tota la informació al correu que ens has proporcionat",
     "PAYMENT_KO_DESCRIPTION": "Actualment, ja hi ha una sol·licitud en tràmit. Contacta amb nosaltres a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Gràcies."
 }
