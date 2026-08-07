@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete'
+import { useState } from "react"
 
-import somAutocompleteInputStyles from './AutocompleteFloorInput.style.js'
+import Autocomplete from "@mui/material/Autocomplete"
+import TextField from "@mui/material/TextField"
+
+import somAutocompleteInputStyles from "./AutocompleteFloorInput.style.js"
 
 export default function SomAutocompleteFloorInput({
   fieldName,
-  value = '',
+  value = "",
   options = [],
-  onChangeHandler = () => { }
+  onChangeHandler = () => {},
 }) {
   const autocompleteOptions = options.map((item) => item.translation)
   const defaultOptionValue =
-    options.find(({ code }) => code === value)?.translation || value || ''
+    options.find(({ code }) => code === value)?.translation || value || ""
   const [optionValue, setOptionValue] = useState(defaultOptionValue)
 
   const handleAutocompleteBlur = (event) => {
@@ -20,7 +21,7 @@ export default function SomAutocompleteFloorInput({
 
     const finalValue = options.some((item) => item.translation === value)
       ? value
-      : value.replace(/[^0-9-]/g, '')
+      : value.replace(/[^0-9-]/g, "")
 
     setOptionValue(finalValue)
     fireChangeHandlerWithCode(finalValue)

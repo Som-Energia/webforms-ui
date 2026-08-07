@@ -1,30 +1,27 @@
-import { useState, useEffect, useRef, useContext } from 'react'
-import { useParams } from 'react-router-dom'
-import { Formik } from 'formik'
-import MatomoContext from '../../trackers/matomo/MatomoProvider'
+import { useContext, useEffect, useRef, useState } from "react"
+import { useParams } from "react-router-dom"
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
 
-import supplyPointValidations from './validations/supplyPointValidations'
+import { Formik } from "formik"
+
+// Step components
+import NewSomStepper from "../../components/NewSomStepper/NewSomStepper"
+import LoadingContext from "../../context/LoadingContext"
+import { useSyncLanguage } from "../../hooks/useTranslateOptions"
+import { GURB_REQUIREMENTS_FORM_SUBSTEPS } from "../../services/steps"
+import MatomoContext from "../../trackers/matomo/MatomoProvider"
+import Address from "./pages/Requirements/Address"
+import GurbRequirementsResult from "./pages/Requirements/GurbRequirementsResult"
+import GurbRequirementsTariffSelection from "./pages/Requirements/GurbRequirementsTariffSelection"
+import LightQuestion from "./pages/Requirements/LightQuestion"
+import SupplyPoint from "./pages/Requirements/SupplyPoint"
 import {
   addressValidations,
   lightValidations,
-  selfConsumptionValidations,
-  tariffValidations
-} from './validations/requirementsValidations'
-
-import LoadingContext from '../../context/LoadingContext'
-
-// Step components
-import NewSomStepper from '../../components/NewSomStepper/NewSomStepper'
-import SupplyPoint from './pages/Requirements/SupplyPoint'
-import LightQuestion from './pages/Requirements/LightQuestion'
-import Address from './pages/Requirements/Address'
-import GurbRequirementsTariffSelection from './pages/Requirements/GurbRequirementsTariffSelection'
-import GurbRequirementsResult from './pages/Requirements/GurbRequirementsResult'
-import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-import { GURB_REQUIREMENTS_FORM_SUBSTEPS } from '../../services/steps'
+} from "./validations/requirementsValidations"
+import supplyPointValidations from "./validations/supplyPointValidations"
 
 const GurbFormRequirements = () => {
   const { language, gurbCode } = useParams()
@@ -34,44 +31,37 @@ const GurbFormRequirements = () => {
   const [activeStep, setActiveStep] = useState(0)
 
   const defaultSteps = [
-    (formikProps) => (
-      <SupplyPoint
-        {...formikProps}
-        activeStep={activeStep}
-      />
-    ),
+    (formikProps) => <SupplyPoint {...formikProps} activeStep={activeStep} />,
     (formikProps) => <Address {...formikProps} activeStep={activeStep} />,
-    (formikProps) => <LightQuestion {...formikProps} activeStep={activeStep} />
+    (formikProps) => <LightQuestion {...formikProps} activeStep={activeStep} />,
   ]
 
   const [steps, setSteps] = useState(defaultSteps)
   const newContractSteps = [
     ...defaultSteps,
-    (formikProps) => <GurbRequirementsTariffSelection {...formikProps} />
+    (formikProps) => <GurbRequirementsTariffSelection {...formikProps} />,
   ]
 
   const initialValues = {
-    cups: '',
+    cups: "",
     has_light: undefined,
     address: {
-      id: '',
-      street: '',
+      id: "",
+      street: "",
       number: undefined,
       postal_code: undefined,
       lat: undefined,
       long: undefined,
-      inside_perimeter: false
+      inside_perimeter: false,
     },
     new_contract: undefined,
-    redirectUrl: undefined
+    redirectUrl: undefined,
   }
 
   const validationSchemas = [
     supplyPointValidations,
     addressValidations,
     lightValidations,
-    selfConsumptionValidations,
-    tariffValidations
   ]
 
   const formikRef = useRef(null)
@@ -94,9 +84,9 @@ const GurbFormRequirements = () => {
   useEffect(() => {
     if (activeStep !== steps.length) {
       trackEvent({
-        category: 'GurbRequirements',
-        action: 'setGurbRequirementsStep',
-        name: `gurb-requirements-step-${activeStep}-${gurbCode}`
+        category: "GurbRequirements",
+        action: "setGurbRequirementsStep",
+        name: `gurb-requirements-step-${activeStep}-${gurbCode}`,
       })
     }
   }, [activeStep, gurbCode, steps.length])
@@ -111,7 +101,7 @@ const GurbFormRequirements = () => {
       aria-label="gurb-requirements-form"
       maxWidth="md"
       disableGutters
-      sx={{ padding: '1rem' }}>
+      sx={{ padding: "1rem" }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -122,7 +112,7 @@ const GurbFormRequirements = () => {
           return (
             <>
               {activeStep < steps.length && (
-                <Box sx={{ marginBottom: '65px' }}>
+                <Box sx={{ marginBottom: "65px" }}>
                   <NewSomStepper
                     activeStep={activeStep}
                     setActiveStep={setActiveStep}

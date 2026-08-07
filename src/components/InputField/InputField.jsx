@@ -1,24 +1,22 @@
-import React from 'react'
+import React from "react"
+import { Trans } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress"
+import Grid from "@mui/material/Grid"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import CircularProgress from '@mui/material/CircularProgress'
-import Grid from '@mui/material/Grid'
-
-import { Trans } from 'react-i18next'
-
-import InputTitle from '../InputTitle'
+import InputTitle from "../InputTitle"
 
 export const HelperText = ({ helperText, iconHelper }) => {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'stretch' }}>
+    <Box sx={{ display: "flex", alignItems: "stretch" }}>
       {iconHelper && (
         <InfoOutlinedIcon
-          sx={{ color: 'secondary.extraDark', fontSize: '14px', margin: '2px' }}
+          sx={{ color: "secondary.extraDark", fontSize: "14px", margin: "2px" }}
         />
       )}
       <Typography color="secondary.extraDark" variant="body.xs.regular">
@@ -45,14 +43,14 @@ const InputFieldComponent = ({
   endAdornmentText = false,
   startAdornmentText = false,
   numInputs = false,
-  name = '',
+  name = "",
   onPaste = undefined,
   customInputProps = {},
-  children
+  children,
 }) => {
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12} sx={{ mb: '6px' }}>
+      <Grid item xs={12} sx={{ mb: "6px" }}>
         <InputTitle text={textFieldName} required={required} />
       </Grid>
       {textFieldNameHelper && (
@@ -70,7 +68,7 @@ const InputFieldComponent = ({
             disabled={readonlyField}
             fullWidth
             InputProps={{
-              sx: { borderRadius: '8px' },
+              sx: { borderRadius: "8px" },
               onBlur: handleBlur,
               startAdornment: startAdornmentText && numInputs > 1 && (
                 <InputAdornment position="start">
@@ -83,15 +81,15 @@ const InputFieldComponent = ({
                     {<CircularProgress size={24} />}
                   </InputAdornment>
                 )) ||
-                endAdornmentText
+                endAdornmentText,
             }}
-            inputProps={{ ...customInputProps, 'data-cy': `${name}-input` }}
+            inputProps={{ ...customInputProps, "data-cy": `${name}-input` }}
             label={value ? undefined : textFieldLabel}
             onChange={handleChange}
             onPaste={onPaste}
-            value={value ?? ''}
+            value={value ?? ""}
             error={
-              touched && typeof error === 'string' && error.trim().length > 0
+              touched && typeof error === "string" && error.trim().length > 0
             }
           />
         )}

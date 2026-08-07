@@ -48,7 +48,7 @@ describe('Maintenance Screen', () => {
     it('is set for "gl"', function () {
       cy.visit('/gl/contract-20')
       cy.statusCode500()
-      cy.contains('Voltamos axiña', {
+      cy.contains('Volvemos axiña', {
         matchCase: false
       })
     })

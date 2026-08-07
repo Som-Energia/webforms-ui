@@ -1,20 +1,23 @@
-import IndexedContractDetails from './IndexedContractDetails'
-import { render, screen } from '@testing-library/react'
+import { render } from "@testing-library/react"
+import { vi } from "vitest"
 
-import { vi } from 'vitest';
+import IndexedContractDetails from "./IndexedContractDetails"
 
-vi.mock('react-i18next', () => require('../../tests/__mocks__/i18n'));
+vi.mock("react-i18next", () => require("../../tests/__mocks__/i18n"))
 
-describe('Test the correctly render', () => {
+describe("Test the correctly render", () => {
   const mockData = {
-    name: 'mockName',
-    tariff: 'mockTariff'
+    name: "mockName",
+    tariff: "mockTariff",
   }
-  const mockTargetTariff = 'mockTargetTariff'
+  const mockTargetTariff = "mockTargetTariff"
 
-  test('The component render properly all texts', () => {
+  test("The component render properly all texts", () => {
     render(
-      <IndexedContractDetails data={mockData} targetTariff={mockTargetTariff} />
+      <IndexedContractDetails
+        data={mockData}
+        targetTariff={mockTargetTariff}
+      />,
     )
     /* const contractElement = screen.getByText(mockData.name)
     const currentTariffElement = screen.getByText(mockData.tariff)

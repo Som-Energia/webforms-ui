@@ -1,58 +1,56 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import FormHelperText from '@mui/material/FormHelperText'
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import Divider from "@mui/material/Divider"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormHelperText from "@mui/material/FormHelperText"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import Header from '../../components/oficinavirtual/Header'
-import TermsDialog from '../../components/TermsDialog'
-import PDFLoader from '../../components/PDFLoader/PDFLoader'
-
-import IndexedReviewField from './IndexedReviewField'
-import Box from '@mui/material/Box'
+import Header from "../../components/oficinavirtual/Header"
+import PDFLoader from "../../components/PDFLoader/PDFLoader"
+import TermsDialog from "../../components/TermsDialog"
+import IndexedReviewField from "./IndexedReviewField"
 
 const customStyles = {
   root: {
-    backgroundColor: 'white',
-    padding: '24px'
+    backgroundColor: "white",
+    padding: "24px",
   },
   withoutLabel: {
-    mt: 1
+    mt: 1,
   },
   sectionTitle: {
-    fontSize: '16px',
+    fontSize: "16px",
     fontWeight: 500,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     mt: 3,
     mb: 1.2,
-    color: '#0B2E34'
+    color: "#0B2E34",
   },
   divider: {
-    mt: '12px',
+    mt: "12px",
     ml: 0,
-    mr: '32px'
+    mr: "32px",
   },
   dividerBottom: {
-    mt: '10px',
-    mb: '10px',
+    mt: "10px",
+    mb: "10px",
     ml: 0,
-    mr: '32px'
+    mr: "32px",
   },
   prices: {
-    mb: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    '& span': {
-      pr: '16px'
-    }
-  }
+    mb: "10px",
+    display: "flex",
+    flexDirection: "column",
+    "& span": {
+      pr: "16px",
+    },
+  },
 }
 
 const IndexedReviewData = (props) => {
-
   const { t } = useTranslation()
 
   let {
@@ -69,36 +67,36 @@ const IndexedReviewData = (props) => {
     targetTariff,
     isTariff20,
     isTariffIndexed,
-    isIndexedPilotOngoing
+    isIndexedPilotOngoing,
   } = props
   const powers = JSON.parse(contractValues.powers)
 
   return (
     <>
-      <Header>{t('REVIEW_TITLE')}</Header>
+      <Header>{t("REVIEW_TITLE")}</Header>
       <Grid container sx={customStyles.root}>
         <Grid item xs={12}>
           <Typography
             variant="subtitle1"
-            dangerouslySetInnerHTML={{ __html: t('REVIEW_DESCRIPTION') }}
+            dangerouslySetInnerHTML={{ __html: t("REVIEW_DESCRIPTION") }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('SUMMARY_GROUP_PROCESS')}
+            {t("SUMMARY_GROUP_PROCESS")}
           </Typography>
-          <IndexedReviewField value={t('PROCESS_TYPE_TARIFF_CHANGE')} />
+          <IndexedReviewField value={t("PROCESS_TYPE_TARIFF_CHANGE")} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('SUPPLYPOINT')}
+            {t("SUPPLYPOINT")}
           </Typography>
           <IndexedReviewField
-            label={t('CUPS_LABEL')}
+            label={t("CUPS_LABEL")}
             value={contractValues?.cups}
           />
           <IndexedReviewField
-            label={t('ADDRESS')}
+            label={t("ADDRESS")}
             value={contractValues?.address}
           />
         </Grid>
@@ -106,11 +104,11 @@ const IndexedReviewData = (props) => {
         <Grid item xs={12} sm={6}>
           <Divider variant="middle" sx={customStyles.divider} />
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('HOLDER')}
+            {t("HOLDER")}
           </Typography>
-          <IndexedReviewField label={'NIF'} value={contractValues?.owner_vat} />
+          <IndexedReviewField label={"NIF"} value={contractValues?.owner_vat} />
           <IndexedReviewField
-            label={t('NAME')}
+            label={t("NAME")}
             value={contractValues?.owner_name}
           />
         </Grid>
@@ -119,20 +117,20 @@ const IndexedReviewData = (props) => {
           <Divider variant="middle" sx={customStyles.divider} />
 
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('CONTACT')}
+            {t("CONTACT")}
           </Typography>
 
           <>
             <IndexedReviewField
-              label={t('PHONE')}
+              label={t("PHONE")}
               value={contractValues?.owner_phone}
             />
             <IndexedReviewField
-              label={t('EMAIL')}
+              label={t("EMAIL")}
               value={contractValues?.owner_email}
             />
             <IndexedReviewField
-              label={t('LANGUAGE')}
+              label={t("LANGUAGE")}
               value={contractValues?.language}
             />
           </>
@@ -140,19 +138,19 @@ const IndexedReviewData = (props) => {
         <Grid item xs={12} sm={6}>
           <Divider variant="middle" sx={customStyles.divider} />
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('SUMMARY_GROUP_TECHNICAL')}
+            {t("SUMMARY_GROUP_TECHNICAL")}
           </Typography>
-          <IndexedReviewField label={t('FARE')} value={targetTariff} />
+          <IndexedReviewField label={t("FARE")} value={targetTariff} />
           <Box id="tarif_powers">
             {isTariff20 ? (
               <>
                 <IndexedReviewField
-                  label={t('PEAK')}
-                  value={powers[0].power.replaceAll('"', '')}
+                  label={t("PEAK")}
+                  value={powers[0].power.replaceAll('"', "")}
                 />
                 <IndexedReviewField
-                  label={t('VALLEY')}
-                  value={powers[1].power.replaceAll('"', '')}
+                  label={t("VALLEY")}
+                  value={powers[1].power.replaceAll('"', "")}
                 />
               </>
             ) : (
@@ -162,7 +160,7 @@ const IndexedReviewData = (props) => {
                     <IndexedReviewField
                       key={element.value}
                       label={element.value}
-                      value={element.power.replaceAll('"', '')}
+                      value={element.power.replaceAll('"', "")}
                     />
                   )
                 })}
@@ -175,12 +173,12 @@ const IndexedReviewData = (props) => {
           <Divider variant="middle" sx={customStyles.divider} />
 
           <Typography sx={customStyles.sectionTitle} variant="h6">
-            {t('SUMMARY_GROUP_PAYMENT')}
+            {t("SUMMARY_GROUP_PAYMENT")}
           </Typography>
-          <IndexedReviewField label={t('IBAN')} value={contractValues?.iban} />
+          <IndexedReviewField label={t("IBAN")} value={contractValues?.iban} />
           <IndexedReviewField
-            label={t('VOLUNTARY_CENT')}
-            value={contractValues?.donation ? 'Sí' : 'No'}
+            label={t("VOLUNTARY_CENT")}
+            value={contractValues?.donation ? "Sí" : "No"}
           />
         </Grid>
 
@@ -188,29 +186,25 @@ const IndexedReviewData = (props) => {
           <FormHelperText
             sx={customStyles.withoutLabel}
             dangerouslySetInnerHTML={{
-              __html: t('HELPER_TEXT_MODIFY_DATA')
+              __html: t("HELPER_TEXT_MODIFY_DATA"),
             }}
           />
         </Grid>
       </Grid>
       <Grid container sx={customStyles.root}>
         <TermsDialog
-          title={t('GENERAL_TERMS')}
+          title={t("GENERAL_TERMS")}
           open={open}
           onAccept={handleAccept}
           onClose={handleClose}
-          maxWidth='lg'
-          sx={{ height: "100dvh", overflowY: 'hidden', padding: 0 }}>
+          maxWidth="lg"
+          sx={{ height: "100dvh", overflowY: "hidden", padding: 0 }}>
           <PDFLoader
-            folder={
-              isTariffIndexed
-                ? 'CCGG'
-                : 'CCGG_indexada'
-            }
+            folder={isTariffIndexed ? "CCGG" : "CCGG_indexada"}
             documentName={
               isTariffIndexed
-                ? t('general-contract-terms')
-                : t('general-and-indexed-specific-terms')
+                ? t("general-contract-terms")
+                : t("general-and-indexed-specific-terms")
             }
           />
         </TermsDialog>
@@ -231,8 +225,8 @@ const IndexedReviewData = (props) => {
                 variant="body2"
                 dangerouslySetInnerHTML={{
                   __html: isTariffIndexed
-                    ? t('PERIODS_ACCEPT_CONDITIONS')
-                    : t('INDEXED_ACCEPT_CONDITIONS')
+                    ? t("PERIODS_ACCEPT_CONDITIONS")
+                    : t("INDEXED_ACCEPT_CONDITIONS"),
                 }}
               />
             }
@@ -257,8 +251,8 @@ const IndexedReviewData = (props) => {
                 variant="body2"
                 dangerouslySetInnerHTML={{
                   __html: isTariffIndexed
-                    ? t('PERIODS_ACCEPT_TERMS')
-                    : t('INDEXED_ACCEPT_TERMS')
+                    ? t("PERIODS_ACCEPT_TERMS")
+                    : t("INDEXED_ACCEPT_TERMS"),
                 }}
               />
             }
@@ -274,7 +268,7 @@ const IndexedReviewData = (props) => {
                   name="legal_terms_accepted"
                   onClick={() =>
                     handleIndexadaLegalTermsAccepted(
-                      !indexadaLegalTermsAccepted
+                      !indexadaLegalTermsAccepted,
                     )
                   }
                   checked={values.indexed_legal_terms_accepted}
@@ -285,11 +279,11 @@ const IndexedReviewData = (props) => {
                 <Typography
                   variant="body2"
                   dangerouslySetInnerHTML={{
-                    __html: t('INDEXED_ACCEPT_LEGAL_TERMS', {
+                    __html: t("INDEXED_ACCEPT_LEGAL_TERMS", {
                       inscription_conditions_url: t(
-                        'TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL'
-                      )
-                    })
+                        "TARIFF_INDEXADA_INSCRIPTION_CONDITIONS_URL",
+                      ),
+                    }),
                   }}
                 />
               }

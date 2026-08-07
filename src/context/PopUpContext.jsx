@@ -1,13 +1,12 @@
-import React, { useState, createContext } from 'react'
+import React, { createContext, useState } from "react"
 
-const PopUpContext = createContext();
+const PopUpContext = createContext()
 
 export const PopUpContextProvider = ({ children }) => {
-
-const [content, setContent] = useState(undefined);
+  const [content, setContent] = useState(undefined)
 
   return (
-    <PopUpContext.Provider value={{ setContent:setContent }}>
+    <PopUpContext.Provider value={{ setContent: setContent }}>
       <React.Fragment>{content}</React.Fragment>
       {children}
     </PopUpContext.Provider>
