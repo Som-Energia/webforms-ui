@@ -64,6 +64,9 @@ export default defineConfig(({ mode }) => {
         inline: ['@emotion/styled', '@emotion/react']
       }
     },
+    preview: {
+      open: false
+    },
     test: {
       globals: true,
       environment: 'jsdom',
