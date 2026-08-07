@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "export VITE_APP_VERSION=$(git describe --tags) && vite",
-    "start": "serve -s dist -l $PORT",
+    "start": "vite preview --host 0.0.0.0 --port $PORT",
     "build": "export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
@@ -45,7 +45,6 @@
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.2.2",
-    "serve": "^14.2.6",
     "stdnum": "^1.11.7",
     "yup": "^0.32.11"
   },
