@@ -14,7 +14,6 @@ import StepHeader from "../../components/OldComponents/StepHeader"
 import TermsDialog from "../../components/TermsDialog"
 import { checkIbanFormat } from "../../services/utils"
 
-// TODO: Use IBANField
 function IBAN(props) {
   const { t } = useTranslation()
   const { values, handleBlur, setFieldValue, errors, touched } = props

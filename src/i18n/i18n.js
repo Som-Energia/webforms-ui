@@ -24,8 +24,6 @@ const resources = {
   },
 }
 
-// FIXME: Each import of this file init the global i18next.
-//        Can be convert to initI18n() and export to init only one time.
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({

@@ -51,7 +51,7 @@ const CadastralReference = (props) => {
 
   const handleInputCadastralReference = (event) => {
     let value = event.target.value
-    value = value.replace(/[^0-9A-Za-z]/g, "") // TODO: Do not cut chars after not matching one
+    value = value.replace(/[^0-9A-Za-z]/g, "")
     // value = value.slice(0, 20)
     value = value.toUpperCase()
     value = [

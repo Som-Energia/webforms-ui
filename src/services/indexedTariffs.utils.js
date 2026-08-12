@@ -149,7 +149,6 @@ export function transformIndexedTariffPrices(fromDate, selectedDate, prices) {
     }
     periods.push(data)
   })
-  // TODO: check where to define these colors
   return {
     fills: {
       low: "#cbdc49",

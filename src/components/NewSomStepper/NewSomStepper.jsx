@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography"
 import NextButton from "../Buttons/NextButton"
 import PrevButton from "../Buttons/PrevButton"
 
-// TODO: move to Somenergia UI
 const NewSomStepper = (props) => {
   const {
     activeStep = 0,

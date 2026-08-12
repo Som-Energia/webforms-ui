@@ -90,7 +90,7 @@ const CUPS = (props) => {
       name="cups"
       textFieldName={t("CUPS_FIELD")}
       textFieldHelper={
-        <Typography //TODO: Extract as component (Same as GurbParticipation)
+        <Typography
           sx={{
             fontSize: "14px",
             fontWeight: 400,

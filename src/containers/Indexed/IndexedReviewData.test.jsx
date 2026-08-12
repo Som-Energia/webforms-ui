@@ -140,7 +140,6 @@ describe("Test that it correctly renders", () => {
   })
 
   test("Should call the handleIndexadaLegalTermsAccepted function", () => {
-    //TODO: click the check to accept the legal terms
     const dom = render(
       <IndexedReviewData
         open={false}

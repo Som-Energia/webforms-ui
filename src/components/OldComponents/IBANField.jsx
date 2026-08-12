@@ -9,7 +9,7 @@ export function IBANField(props) {
   const { onChange, ...others } = props
   function inputFilter(value) {
     if (!value) return value
-    value = value.replace(/[^0-9A-Za-z]/g, "") // TODO: Do not cut chars after not matching one
+    value = value.replace(/[^0-9A-Za-z]/g, "")
     value = value.slice(0, 24)
     value = value.toUpperCase()
     value = value.split(" ").join("")
@@ -29,7 +29,6 @@ export function IBANField(props) {
       onChange={(newValue) => {
         return onChange({
           ...newValue,
-          // TODO: deprecated API, remove when unused
           IBAN: newValue.value,
           IBANValid: newValue.valid,
         })

@@ -14,7 +14,6 @@ describe('Gurb Participation', () => {
   })
 
   describe('Gurb Joining', function () {
-    // TODO: before and after
     it('New member', function () {
       cy.identifyPartnerToJoinGurb(
         this.personalData.cups,

@@ -125,7 +125,6 @@ Cypress.Commands.add('contractMemberPaymentData', (paymentdata) => {
     cy.get('[data-cy="iban_check"]').click()
     cy.get('[data-cy=accept]').click()
   } else {
-    // TODO: use 'payment_legal_check' key instead of iban_check
     //       At this moment is used by iban and credit_card
     cy.get('[data-cy="iban_check"]').click()
   }

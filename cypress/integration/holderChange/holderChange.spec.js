@@ -115,7 +115,6 @@ describe('Holder Change', () => {
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
         cy.get('[data-cy=next]').click()
 
-        // TODO: create a cy.function for this
         cy.get(`[data-value="${this.data.noBecomeMember}"]`).click()
         cy.get('[data-cy=next]').click()
       })
@@ -147,11 +146,9 @@ describe('Holder Change', () => {
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
         cy.get('[data-cy=next]').click()
 
-        // TODO: create a cy.function for this
         cy.get(`[data-value="${this.data.noBecomeMember}"]`).click()
         cy.get('[data-cy=next]').click()
 
-        // TODO: create a cy.function for this
         cy.get(`[data-value="${this.data.linkMember}"]`).click()
         cy.get('[data-cy=next]').click()
       })
@@ -279,11 +276,9 @@ describe('Holder Change', () => {
         cy.holderChangeIdentSupplyPoint(this.personaldata.cups)
         cy.get('[data-cy=next]').click()
 
-        // TODO: create a cy.function for this
         cy.get(`[data-value="${this.data.noBecomeMember}"]`).click()
         cy.get('[data-cy=next]').click()
 
-        // TODO: create a cy.function for this
         cy.get(`[data-value="${this.data.noLinkMember}"]`).click()
         cy.get('[data-cy=next]').click()
 
