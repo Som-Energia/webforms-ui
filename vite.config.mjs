@@ -8,18 +8,18 @@ import {
 
 import pkg from "./package.json"
 
-export default createAppConfig((mode) => {
+export default createAppConfig(({ mode }) => {
   const ovOptions =
     mode === "ov"
       ? {
           entryFileNames: "assets/main.js",
           chunkFileNames: ({ name }) => {
             return name.includes("vendor")
-              ? "assets/vendor.js" // Explicitly name the entry JS file
+              ? "assets/[name].js"
               : "assets/[name]-[hash].js"
           },
           assetFileNames: ({ name }) => {
-            return name.endsWith(".css") && name.includes("index")
+            return name.endsWith(".css")
               ? "assets/index.css" // Explicitly name the CSS file
               : "assets/[name]-[hash].[ext]"
           },
