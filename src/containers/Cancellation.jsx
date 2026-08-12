@@ -1,44 +1,42 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from "react"
+import { GlobalHotKeys } from "react-hotkeys"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
-import { GlobalHotKeys } from 'react-hotkeys'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
-import { useParams } from 'react-router-dom'
+import SendIcon from "@mui/icons-material/Send"
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+import Container from "@mui/material/Container"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 
-import Alert from '@mui/material/Alert'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
-import Container from '@mui/material/Container'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 
-import SendIcon from '@mui/icons-material/Send'
-
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-
-import DisplayFormikState from '../components/OldComponents/DisplayFormikState'
-
-import ContractDetails from './Cancellation/ContractDetails'
-import CancellationWarning from './Cancellation/CancellationWarning'
-import CancellationIntro from './Cancellation/CancellationIntro'
-import CancellationDetails from './Cancellation/CancellationDetails'
-
-import Failure from './Failure'
-import Success from './Success'
-
-import { cancelContract } from '../services/api'
-import PrevButton from '../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../components/OldComponents/Buttons/NextButton'
-import { useSyncLanguage, useSyncDayjsLanguage } from '../hooks/useTranslateOptions'
+import NextButton from "../components/OldComponents/Buttons/NextButton"
+import PrevButton from "../components/OldComponents/Buttons/PrevButton"
+import DisplayFormikState from "../components/OldComponents/DisplayFormikState"
+import {
+  useSyncDayjsLanguage,
+  useSyncLanguage,
+} from "../hooks/useTranslateOptions"
+import { cancelContract } from "../services/api"
+import CancellationDetails from "./Cancellation/CancellationDetails"
+import CancellationIntro from "./Cancellation/CancellationIntro"
+import CancellationWarning from "./Cancellation/CancellationWarning"
+import ContractDetails from "./Cancellation/ContractDetails"
+import Failure from "./Failure"
+import Success from "./Success"
 
 const MAX_STEP_NUMBER = 2
 
 const keyMap = {
-  SAMPLE_DATA: 'ctrl+shift+1',
-  SHOW_INSPECTOR: 'ctrl+shift+d'
+  SAMPLE_DATA: "ctrl+shift+1",
+  SHOW_INSPECTOR: "ctrl+shift+d",
 }
 
 const Cancellation = (props) => {
@@ -57,7 +55,7 @@ const Cancellation = (props) => {
   const handlers = {
     SHOW_INSPECTOR: () => {
       setShowInspector(!showInspector)
-    }
+    },
   }
 
   const initialValues = {
@@ -65,12 +63,12 @@ const Cancellation = (props) => {
     contract_number: contract.number,
     contract_cups: contract.cups,
     cups_address: contract.address,
-    cups: '',
+    cups: "",
     privacy_policy: false,
     terms_accepted: false,
-    phone: '',
-    validation_cups: '',
-    date_action: null
+    phone: "",
+    validation_cups: "",
+    date_action: null,
   }
 
   const nextStep = (props) => {
@@ -102,7 +100,7 @@ const Cancellation = (props) => {
   const handlePost = (values) => {
     setSending(true)
     const csrfInput = document.querySelector(
-      "input[name='csrfmiddlewaretoken']"
+      "input[name='csrfmiddlewaretoken']",
     )
 
     const params = { ...values, csrfToken: csrfInput?.value }
@@ -119,7 +117,7 @@ const Cancellation = (props) => {
         console.error(error)
         const errorResp = error?.response?.data?.error
           ? error?.response?.data?.error
-          : { code: 'UNEXPECTED' }
+          : { code: "UNEXPECTED" }
         setError(errorResp)
       })
   }
@@ -132,22 +130,22 @@ const Cancellation = (props) => {
     Yup.object().shape({}),
     Yup.object().shape({
       cups: Yup.string()
-        .required(t('CUPS_INVALID'))
-        .min(18, t('CUPS_INVALID'))
-        .test('sameCups', t('NOT_MATCH'), function () {
+        .required(t("CUPS_INVALID"))
+        .min(18, t("CUPS_INVALID"))
+        .test("sameCups", t("NOT_MATCH"), function () {
           return !(this.parent.contract_cups !== this.parent.cups)
         }),
       phone: Yup.string()
-        .required(t('NO_PHONE'))
-        .min(9, t('NO_PHONE'))
-        .max(9, t('NO_PHONE')),
+        .required(t("NO_PHONE"))
+        .min(9, t("NO_PHONE"))
+        .max(9, t("NO_PHONE")),
       privacy_policy: Yup.bool()
-        .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS')),
+        .required(t("UNACCEPTED_TERMS"))
+        .oneOf([true], t("UNACCEPTED_TERMS")),
       terms_accepted: Yup.bool()
-        .required(t('UNACCEPTED_TERMS'))
-        .oneOf([true], t('UNACCEPTED_TERMS'))
-    })
+        .required(t("UNACCEPTED_TERMS"))
+        .oneOf([true], t("UNACCEPTED_TERMS")),
+    }),
   ]
 
   if (!contract.id || !contract.number || !contract.cups) {
@@ -156,7 +154,7 @@ const Cancellation = (props) => {
         <Typography
           variant="pagesubtitle"
           dangerouslySetInnerHTML={{
-            __html: t('CANCELLATION_NO_AVAILABLE')
+            __html: t("CANCELLATION_NO_AVAILABLE"),
           }}
         />
       </Alert>
@@ -169,24 +167,21 @@ const Cancellation = (props) => {
         dateAdapter={AdapterDayjs}
         adapterLocale={i18n.language}>
         <Formik
-          onSubmit={() => { }}
+          onSubmit={() => {}}
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchemas[activeStep]}
           validateOnMount={true}>
           {(formikProps) => (
             <>
-              <Form
-                id="cancelForm"
-                method="POST"
-                noValidate
-                autoComplete="off">
-                <Container 
-                sx={{
-                  backgroundColor: 'background.third',
-                  color: 'primary',
-                }} 
-                maxWidth="lg" disableGutters={true}>
+              <Form id="cancelForm" method="POST" noValidate autoComplete="off">
+                <Container
+                  sx={{
+                    backgroundColor: "background.third",
+                    color: "primary",
+                  }}
+                  maxWidth="lg"
+                  disableGutters={true}>
                   {!completed && (
                     <>
                       <ContractDetails {...formikProps.values} />
@@ -201,22 +196,22 @@ const Cancellation = (props) => {
                       <Box mx={0} mt={2} mb={3}>
                         <Box
                           sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            pt: '0.25rem'
+                            display: "flex",
+                            justifyContent: "space-between",
+                            pt: "0.25rem",
                           }}>
                           {result?.contract_number === undefined && (
                             <PrevButton
                               disabled={activeStep === 0 || sending}
                               onClick={() => prevStep(formikProps)}
-                              title={t('PREV')}
+                              title={t("PREV")}
                             />
                           )}
                           {activeStep < MAX_STEP_NUMBER - 1 ? (
                             <NextButton
                               disabled={!formikProps.isValid}
                               onClick={() => nextStep(formikProps)}
-                              title={t('NEXT')}
+                              title={t("NEXT")}
                             />
                           ) : (
                             !completed && (
@@ -225,12 +220,12 @@ const Cancellation = (props) => {
                                 variant="contained"
                                 disableElevation={true}
                                 sx={{
-                                  backgroundColor: 'primary.extraLight',
-                                  color: 'primary.main',
-                                  '&:hover': {
-                                    color: 'primary.extraLight',
-                                    backgroundColor: 'primary.main'
-                                  }
+                                  backgroundColor: "primary.extraLight",
+                                  color: "primary.main",
+                                  "&:hover": {
+                                    color: "primary.extraLight",
+                                    backgroundColor: "primary.main",
+                                  },
                                 }}
                                 endIcon={
                                   sending ? (
@@ -241,7 +236,7 @@ const Cancellation = (props) => {
                                 }
                                 disabled={sending || !formikProps.isValid}
                                 onClick={() => handlePost(formikProps.values)}>
-                                {t('PROCESS_CANCELLATION')}
+                                {t("PROCESS_CANCELLATION")}
                               </Button>
                             )
                           )}
@@ -254,19 +249,19 @@ const Cancellation = (props) => {
                     <Paper
                       elevation={0}
                       sx={{
-                        padding: '4rem',
+                        padding: "4rem",
                         mt: 0,
                         mb: 4,
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        backgroundColor: 'background.default'
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "background.default",
                       }}>
                       {result ? (
                         <Success
                           showHeader={false}
-                          title={t('CANCELLATION_SUCCESS_TITLE')}
-                          description={t('CANCELLATION_SUCCESS_DESC')}
+                          title={t("CANCELLATION_SUCCESS_TITLE")}
+                          description={t("CANCELLATION_SUCCESS_DESC")}
                         />
                       ) : (
                         <Failure error={error} showHeader={false} />

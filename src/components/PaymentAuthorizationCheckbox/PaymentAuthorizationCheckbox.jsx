@@ -1,17 +1,17 @@
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Typography from "@mui/material/Typography"
 
 const PaymentAuthorizationCheckbox = ({
   checked,
   label,
   dataCy,
   onClick,
-  onChange
+  onChange,
 }) => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <FormControlLabel
         control={
           <Checkbox
@@ -27,7 +27,7 @@ const PaymentAuthorizationCheckbox = ({
               {label}
             </Typography>
             <Typography variant="body.sm.bold" color="error">
-              {'*'}
+              {"*"}
             </Typography>
           </>
         }

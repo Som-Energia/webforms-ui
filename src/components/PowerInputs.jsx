@@ -1,20 +1,21 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import InputField from './InputField/InputField'
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid"
+
+import InputField from "./InputField/InputField"
 
 const handleChangePower = (
   event,
   setFieldValue,
-  { moreThanOneDecimal = false }
+  { moreThanOneDecimal = false },
 ) => {
   const regexOneDecimal = /^\d*([.,'])?\d{0,1}/g
   const regexThreeDecimal = /^\d*([.,'])?\d{0,3}/g
   const regex = moreThanOneDecimal ? regexThreeDecimal : regexOneDecimal
 
   const match = regex.exec(event.target.value)
-  let result = match[0].replace(',', '.')
-  result = result.replace("'", '.')
+  let result = match[0].replace(",", ".")
+  result = result.replace("'", ".")
 
   setFieldValue(event.target.name, result)
 }
@@ -29,7 +30,7 @@ const PowerInputs = (props) => {
     touched,
     numInputs = 2,
     setFieldValue,
-    has_light
+    has_light,
   } = props
 
   return (
@@ -37,7 +38,7 @@ const PowerInputs = (props) => {
       {Array.from(Array(numInputs).keys()).map((inputNum) => {
         const attr = `power${inputNum + 1}`
         const moreThan15Kw = numInputs !== 2
-        const textPower = has_light == 'light-on' ? 'CURRENT' : 'WHICH'
+        const textPower = has_light === "light-on" ? "CURRENT" : "WHICH"
         return (
           <Grid key={attr} item xs={12}>
             <InputField
@@ -45,23 +46,23 @@ const PowerInputs = (props) => {
               required={true}
               textFieldName={
                 moreThan15Kw
-                  ? t(textPower + '_POWER')
+                  ? t(textPower + "_POWER")
                   : inputNum === 0
-                  ? t(textPower + '_PEAK')
-                  : t(textPower + '_VALLEY')
+                    ? t(textPower + "_PEAK")
+                    : t(textPower + "_VALLEY")
               }
-              endAdornmentText={'kW'}
+              endAdornmentText={"kW"}
               startAdornmentText={
                 moreThan15Kw
                   ? `P${inputNum + 1}`
                   : inputNum === 0
-                  ? t('PEAK')
-                  : t('VALLEY')
+                    ? t("PEAK")
+                    : t("VALLEY")
               }
               numInputs={numInputs}
               handleChange={(event) =>
                 handleChangePower(event, setFieldValue, {
-                  moreThanOneDecimal: has_light == 'light-on' || moreThan15Kw
+                  moreThanOneDecimal: has_light === "light-on" || moreThan15Kw,
                 })
               }
               handleBlur={handleBlur}

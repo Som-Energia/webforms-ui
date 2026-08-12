@@ -1,16 +1,16 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControl from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormGroup from '@mui/material/FormGroup'
-import FormHelperText from '@mui/material/FormHelperText';
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import FormControl from "@mui/material/FormControl"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormGroup from "@mui/material/FormGroup"
+import FormHelperText from "@mui/material/FormHelperText"
+import Typography from "@mui/material/Typography"
 
-import StepHeader from '../../components/OldComponents/StepHeader'
-import Uploader from '../../components/OldComponents/Uploader'
+import StepHeader from "../../components/OldComponents/StepHeader"
+import Uploader from "../../components/OldComponents/Uploader"
 
 const SpecialCases = (props) => {
   const { t } = useTranslation()
@@ -19,35 +19,35 @@ const SpecialCases = (props) => {
   const getChooserStyles = (selected) => {
     const customChooserStyles = {
       chooserItem: {
-        display: 'block',
-        cursor: 'pointer',
+        display: "block",
+        cursor: "pointer",
         pt: 2,
         pb: 2,
         pr: 3,
         pl: 3,
-        margin: '1px 1px 9px 1px',
-        border: '1px solid rgba(0, 0, 0, 0.12)',
-        '&:not(.Mui-disabled):hover': {
-          border: '1px solid rgba(0, 0, 0, 0.87)',
-          backgroundColor: 'rgba(0, 0, 0, 0.03)'
+        margin: "1px 1px 9px 1px",
+        border: "1px solid rgba(0, 0, 0, 0.12)",
+        "&:not(.Mui-disabled):hover": {
+          border: "1px solid rgba(0, 0, 0, 0.87)",
+          backgroundColor: "rgba(0, 0, 0, 0.03)",
         },
-        height: '100%'
+        height: "100%",
       },
       chooserItemSelected: {
-        border: '2px solid',
-        borderColor: 'primary.main',
-        backgroundColor: 'primary.megaLight',
-        margin: '0 0 8px 0',
-        '&:not(.Mui-disabled):hover': {
-          border: '2px solid',
-          borderColor: 'primary.main',
-          backgroundColor: 'primary.megaLight'
+        border: "2px solid",
+        borderColor: "primary.main",
+        backgroundColor: "primary.megaLight",
+        margin: "0 0 8px 0",
+        "&:not(.Mui-disabled):hover": {
+          border: "2px solid",
+          borderColor: "primary.main",
+          backgroundColor: "primary.megaLight",
         },
-        '& span:last-child': {
-          fontWeight: 'bold',
-          opacity: '0.75'
-        }
-      }
+        "& span:last-child": {
+          fontWeight: "bold",
+          opacity: "0.75",
+        },
+      },
     }
 
     let customChooserStylesArray = []
@@ -58,44 +58,44 @@ const SpecialCases = (props) => {
   }
 
   const specialHandleChange = (event) => {
-    if (event.target.name === 'especial_cases.reason_death') {
-      setFieldValue('especial_cases.reason_default', false, false)
+    if (event.target.name === "especial_cases.reason_death") {
+      setFieldValue("especial_cases.reason_default", false, false)
       if (values.especial_cases.reason_death === true) {
-        setFieldValue('especial_cases.attachments.death', [], false)
+        setFieldValue("especial_cases.attachments.death", [], false)
       }
       if (values.especial_cases.reason_merge === true) {
-        setFieldValue('especial_cases.reason_merge', false, false)
+        setFieldValue("especial_cases.reason_merge", false, false)
       }
       setFieldValue(
-        'especial_cases.reason_death',
+        "especial_cases.reason_death",
         !values.especial_cases.reason_death,
-        true
+        true,
       )
-    } else if (event.target.name === 'especial_cases.reason_merge') {
-      setFieldValue('especial_cases.reason_default', false, false)
-      setFieldValue('especial_cases.reason_electrodep', false, false)
+    } else if (event.target.name === "especial_cases.reason_merge") {
+      setFieldValue("especial_cases.reason_default", false, false)
+      setFieldValue("especial_cases.reason_electrodep", false, false)
       if (values.especial_cases.reason_death === true) {
-        setFieldValue('especial_cases.reason_death', false, false)
-        setFieldValue('especial_cases.attachments.death', [], false)
+        setFieldValue("especial_cases.reason_death", false, false)
+        setFieldValue("especial_cases.attachments.death", [], false)
       }
       setFieldValue(
-        'especial_cases.reason_merge',
+        "especial_cases.reason_merge",
         !values.especial_cases.reason_merge,
-        true
+        true,
       )
-    } else if (event.target.name === 'especial_cases.reason_electrodep') {
-      setFieldValue('especial_cases.reason_default', false, false)
+    } else if (event.target.name === "especial_cases.reason_electrodep") {
+      setFieldValue("especial_cases.reason_default", false, false)
       if (values.especial_cases.reason_electrodep === true) {
-        setFieldValue('especial_cases.attachments.medical', [], false)
-        setFieldValue('especial_cases.attachments.resident', [], false)
+        setFieldValue("especial_cases.attachments.medical", [], false)
+        setFieldValue("especial_cases.attachments.resident", [], false)
       }
       setFieldValue(
-        'especial_cases.reason_electrodep',
+        "especial_cases.reason_electrodep",
         !values.especial_cases.reason_electrodep,
-        true
+        true,
       )
     } else {
-      setFieldValue('especial_cases', {
+      setFieldValue("especial_cases", {
         ...values.especial_cases,
         reason_default: !values.especial_cases.reason_default,
         reason_death: false,
@@ -105,20 +105,24 @@ const SpecialCases = (props) => {
           death: [],
           merge: [],
           medical: [],
-          resident: []
-        }
+          resident: [],
+        },
       })
     }
   }
 
   return (
     <>
-      <StepHeader title={t('SPECIAL_CASES_TITLE')} />
+      <StepHeader title={t("SPECIAL_CASES_TITLE")} />
       <Box className="step-body">
-        <FormControl component="fieldset" sx={{ width: '100%' }}>
+        <FormControl component="fieldset" sx={{ width: "100%" }}>
           <FormGroup>
             <FormControlLabel
-              disabled={values.especial_cases?.reason_merge || values.especial_cases?.reason_death || values.especial_cases?.reason_electrodep}
+              disabled={
+                values.especial_cases?.reason_merge ||
+                values.especial_cases?.reason_death ||
+                values.especial_cases?.reason_electrodep
+              }
               control={
                 <Checkbox
                   checked={values.especial_cases?.reason_default}
@@ -127,14 +131,14 @@ const SpecialCases = (props) => {
                   color="primary"
                 />
               }
-              label={t('SPECIAL_CASES_REASON_DEFAULT')}
+              label={t("SPECIAL_CASES_REASON_DEFAULT")}
               sx={getChooserStyles(values.especial_cases?.reason_default)}
             />
             <Box mt={1} mb={3}>
               <Typography
                 variant="body1"
                 dangerouslySetInnerHTML={{
-                  __html: t('SPECIAL_CASES_QUESTION')
+                  __html: t("SPECIAL_CASES_QUESTION"),
                 }}
               />
             </Box>
@@ -148,12 +152,12 @@ const SpecialCases = (props) => {
                   color="primary"
                 />
               }
-              label={t('SPECIAL_CASES_REASON_DEATH')}
+              label={t("SPECIAL_CASES_REASON_DEATH")}
               sx={getChooserStyles(values.especial_cases?.reason_death)}
             />
             {values.especial_cases?.reason_death && (
               <>
-                <Typography sx={{ pl: 1 }}>{t('CERT_ATTACH_DEATH')}</Typography>
+                <Typography sx={{ pl: 1 }}>{t("CERT_ATTACH_DEATH")}</Typography>
                 <Box mt={1} mb={2}>
                   <Uploader
                     fieldError={
@@ -163,8 +167,8 @@ const SpecialCases = (props) => {
                     }
                     callbackFn={(attachments) =>
                       setFieldValue(
-                        'especial_cases.attachments.death',
-                        attachments
+                        "especial_cases.attachments.death",
+                        attachments,
                       )
                     }
                     values={values.especial_cases.attachments?.death}
@@ -173,7 +177,10 @@ const SpecialCases = (props) => {
               </>
             )}
             <FormControlLabel
-              disabled={values.especial_cases?.reason_death || values.especial_cases?.reason_electrodep}
+              disabled={
+                values.especial_cases?.reason_death ||
+                values.especial_cases?.reason_electrodep
+              }
               control={
                 <Checkbox
                   checked={values.especial_cases?.reason_merge}
@@ -182,12 +189,12 @@ const SpecialCases = (props) => {
                   color="primary"
                 />
               }
-              label={t('SPECIAL_CASES_REASON_MERGE')}
+              label={t("SPECIAL_CASES_REASON_MERGE")}
               sx={getChooserStyles(values.especial_cases?.reason_merge)}
             />
             {values.especial_cases?.reason_merge && (
               <>
-                <Typography sx={{ pl: 1 }}>{t('CERT_ATTACH_MERGE')}</Typography>
+                <Typography sx={{ pl: 1 }}>{t("CERT_ATTACH_MERGE")}</Typography>
                 <Box mt={1} mb={2}>
                   <Uploader
                     fieldError={
@@ -197,8 +204,8 @@ const SpecialCases = (props) => {
                     }
                     callbackFn={(attachments) =>
                       setFieldValue(
-                        'especial_cases.attachments.merge',
-                        attachments
+                        "especial_cases.attachments.merge",
+                        attachments,
                       )
                     }
                     values={values.especial_cases.attachments?.merge}
@@ -216,13 +223,13 @@ const SpecialCases = (props) => {
                   color="primary"
                 />
               }
-              label={t('SPECIAL_CASES_REASON_ELECTRODEP')}
+              label={t("SPECIAL_CASES_REASON_ELECTRODEP")}
               sx={getChooserStyles(values.especial_cases?.reason_electrodep)}
             />
             {values.especial_cases?.reason_electrodep && (
               <>
                 <Typography sx={{ pl: 1 }}>
-                  {t('ELECTRODEP_ATTACH_MEDICAL')}
+                  {t("ELECTRODEP_ATTACH_MEDICAL")}
                 </Typography>
                 <Box mt={1} mb={1}>
                   <Uploader
@@ -233,15 +240,15 @@ const SpecialCases = (props) => {
                     }
                     callbackFn={(attachments) =>
                       setFieldValue(
-                        'especial_cases.attachments.medical',
-                        attachments
+                        "especial_cases.attachments.medical",
+                        attachments,
                       )
                     }
                     values={values.especial_cases.attachments?.medical}
                   />
                 </Box>
                 <Typography sx={{ pl: 1 }}>
-                  {t('ELECTRODEP_ATTACH_RESIDENT')}
+                  {t("ELECTRODEP_ATTACH_RESIDENT")}
                 </Typography>
                 <Box mt={1} mb={0}>
                   <Uploader
@@ -252,8 +259,8 @@ const SpecialCases = (props) => {
                     }
                     callbackFn={(attachments) =>
                       setFieldValue(
-                        'especial_cases.attachments.resident',
-                        attachments
+                        "especial_cases.attachments.resident",
+                        attachments,
                       )
                     }
                     values={values.especial_cases.attachments?.resident}

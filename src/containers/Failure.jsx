@@ -1,14 +1,13 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import React from "react"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import CancelIcon from "@mui/icons-material/Cancel"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 
-import CancelIcon from '@mui/icons-material/Cancel'
-
-import StepHeader from '../components/OldComponents/StepHeader'
-import { useSyncLanguage } from '../hooks/useTranslateOptions'
+import StepHeader from "../components/OldComponents/StepHeader"
+import { useSyncLanguage } from "../hooks/useTranslateOptions"
 
 function Failure(props) {
   const { language } = useParams()
@@ -16,58 +15,62 @@ function Failure(props) {
 
   const {
     error = false,
-    description = 'NEWMEMBER_KO_DESCRIPTION',
-    showHeader
+    description = "NEWMEMBER_KO_DESCRIPTION",
+    showHeader,
   } = props
 
   useSyncLanguage(language)
 
   return (
     <>
-      {showHeader && <StepHeader title={t('FAILURE_TITLE')} />}
+      {showHeader && <StepHeader title={t("FAILURE_TITLE")} />}
       <Box
         sx={{
           pt: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}>
         <CancelIcon
           data-cy="error-icon"
           fontSize="large"
-          sx={{ mb: 3, color: 'primary.mainOrange' }}
+          sx={{ mb: 3, color: "primary.mainOrange" }}
         />
         <Typography
-          sx={{ textAlign: 'center', fontSize: '1.15rem' }}
+          sx={{ textAlign: "center", fontSize: "1.15rem" }}
           variant="h6">
-          {t('FAILURE_TEXT')}
+          {t("FAILURE_TEXT")}
         </Typography>
         <Typography
           sx={{
             mt: 2,
-            fontWeight: '400',
-            fontSize: '1rem',
-            lineHeight: '1.75',
-            textAlign: 'center',
-            color: 'secondary.extraDark',
-            '& a': {
-              color: 'failure.primary !important'
-            }
+            fontWeight: "400",
+            fontSize: "1rem",
+            lineHeight: "1.75",
+            textAlign: "center",
+            color: "secondary.extraDark",
+            "& a": {
+              color: "failure.primary !important",
+            },
           }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html:
               error?.code === undefined
-                ? t(description, { url: t('CONTACT_HELP_URL') })
-                : error?.code === 'INVALID_FIELD' && error?.data?.[0]?.field
-                ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
-                  ? t(error?.data?.[0]?.field.toUpperCase())
-                  : t('INVALID_FIELD', { field_name: error?.data?.[0]?.field })
-                : error?.code === 'INVOICE_ERROR'
-                ? error?.error
-                : t('UNEXPECTED_POSTERROR', {
-                    error_message: error?.code ? t(error?.code) : error?.error
-                  })
+                ? t(description, { url: t("CONTACT_HELP_URL") })
+                : error?.code === "INVALID_FIELD" && error?.data?.[0]?.field
+                  ? i18n.exists(error?.data?.[0]?.field.toUpperCase())
+                    ? t(error?.data?.[0]?.field.toUpperCase())
+                    : t("INVALID_FIELD", {
+                        field_name: error?.data?.[0]?.field,
+                      })
+                  : error?.code === "INVOICE_ERROR"
+                    ? error?.error
+                    : t("UNEXPECTED_POSTERROR", {
+                        error_message: error?.code
+                          ? t(error?.code)
+                          : error?.error,
+                      }),
           }}
         />
       </Box>

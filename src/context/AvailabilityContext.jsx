@@ -1,5 +1,6 @@
-import React, { useState, createContext } from 'react'
-import Maintenance from '../components/Maintenance'
+import React, { createContext, useState } from "react"
+
+import Maintenance from "../components/Maintenance"
 
 const AvailabilityContext = createContext()
 
@@ -10,7 +11,7 @@ export const AvailabilityContextProvider = ({ children }) => {
     <AvailabilityContext.Provider
       value={{
         availability: availability,
-        setAvailability: setAvailability
+        setAvailability: setAvailability,
       }}>
       {availability ? children : <Maintenance />}
     </AvailabilityContext.Provider>

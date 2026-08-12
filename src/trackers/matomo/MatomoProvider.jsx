@@ -1,9 +1,10 @@
-import { createContext, useState, useCallback, useMemo } from 'react'
-import MatomoTracker from './MatomoTracker'
+import { createContext, useCallback, useMemo, useState } from "react"
+
+import MatomoTracker from "./MatomoTracker"
 
 export const MatomoContext = createContext({
   trackEvent: () => {},
-  pushTag: () => {}
+  pushTag: () => {},
 })
 
 export const MatomoProvider = ({ children }) => {
@@ -11,17 +12,17 @@ export const MatomoProvider = ({ children }) => {
 
   const trackEvent = useCallback(
     (params) => MatomoInstance?.trackEvent(params),
-    [MatomoInstance]
+    [MatomoInstance],
   )
 
   const pushTag = useCallback(
     (params) => MatomoInstance?.pushTag(params),
-    [MatomoInstance]
+    [MatomoInstance],
   )
 
   const contextValue = useMemo(
     () => ({ trackEvent, pushTag }),
-    [trackEvent, pushTag]
+    [trackEvent, pushTag],
   )
   return (
     <MatomoContext.Provider value={contextValue}>

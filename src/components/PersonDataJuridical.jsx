@@ -1,27 +1,27 @@
-import { useTranslation } from 'react-i18next'
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from "react"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import Typography from '@mui/material/Typography'
+import Checkbox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import InputField from './InputField/InputField'
-import AddressField from './AddressField'
-import SelectField from './SelectField/SelectField'
-import PhoneField from './PhoneField'
-import { useHandleChange } from '../hooks/useHandleChange'
-import { useHandleBlur } from '../hooks/useHandleBlur'
+import { useHandleBlur } from "../hooks/useHandleBlur"
+import { useHandleChange } from "../hooks/useHandleChange"
+import AddressField from "./AddressField"
+import InputField from "./InputField/InputField"
+import PhoneField from "./PhoneField"
+import SelectField from "./SelectField/SelectField"
 
 const PersonDataJuridical = (props) => {
   const {
-    entity = 'person',
+    entity = "person",
     title = true,
     values,
     errors,
     touched,
     setFieldValue,
-    setFieldTouched
+    setFieldTouched,
   } = props
   const { i18n, t } = useTranslation()
 
@@ -39,21 +39,21 @@ const PersonDataJuridical = (props) => {
   const handleBlur = useHandleBlur(setFieldTouched)
 
   const languages = {
-    es_ES: 'Español',
-    ca_ES: 'Català'
+    es_ES: "Español",
+    ca_ES: "Català",
   }
 
   const referral_source_options = {
-    '': t('SELECT_OPTION'),
-    O1_SOM_SERVEIS: t('HOW_MEET_US_OPTION_1'),
-    O2_ALTRES_COOPS: t('HOW_MEET_US_OPTION_2'),
-    O3_OPCIONS: t('HOW_MEET_US_OPTION_3'),
-    O4_ABACUS: t('HOW_MEET_US_OPTION_4'),
-    O5_RECOMANAT: t('HOW_MEET_US_OPTION_5'),
-    O6_JA_CONTRACTAT: t('HOW_MEET_US_OPTION_6'),
-    O7_PUBLICITAT: t('HOW_MEET_US_OPTION_7'),
-    O8_XARXES_SOCIALS: t('HOW_MEET_US_OPTION_8'),
-    O9_ALTRES: t('HOW_MEET_US_OPTION_9')
+    "": t("SELECT_OPTION"),
+    O1_SOM_SERVEIS: t("HOW_MEET_US_OPTION_1"),
+    O2_ALTRES_COOPS: t("HOW_MEET_US_OPTION_2"),
+    O3_OPCIONS: t("HOW_MEET_US_OPTION_3"),
+    O4_ABACUS: t("HOW_MEET_US_OPTION_4"),
+    O5_RECOMANAT: t("HOW_MEET_US_OPTION_5"),
+    O6_JA_CONTRACTAT: t("HOW_MEET_US_OPTION_6"),
+    O7_PUBLICITAT: t("HOW_MEET_US_OPTION_7"),
+    O8_XARXES_SOCIALS: t("HOW_MEET_US_OPTION_8"),
+    O9_ALTRES: t("HOW_MEET_US_OPTION_9"),
   }
 
   const handleCheckboxLegalPerson = (event) => {
@@ -67,7 +67,7 @@ const PersonDataJuridical = (props) => {
       {title && (
         <Grid item xs={12}>
           <Typography variant="headline4.regular">
-            {t('MEMBER_PAGE_PERSONAL_DATA')}
+            {t("MEMBER_PAGE_PERSONAL_DATA")}
           </Typography>
         </Grid>
       )}
@@ -76,7 +76,7 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={4}>
             <InputField
               name={`${entity}.name`}
-              textFieldName={t('BUSINESS_NAME')}
+              textFieldName={t("BUSINESS_NAME")}
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched[entity]?.name}
@@ -88,7 +88,7 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={4}>
             <InputField
               name={`${entity}.proxyname`}
-              textFieldName={t('PROXY_NAME')}
+              textFieldName={t("PROXY_NAME")}
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched[entity]?.proxyname}
@@ -100,7 +100,7 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={4}>
             <InputField
               name={`${entity}.proxynif`}
-              textFieldName={t('PROXY_NIF')}
+              textFieldName={t("PROXY_NIF")}
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched[entity]?.proxynif}
@@ -112,14 +112,14 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={12}>
             <AddressField
               addressFieldName="address"
-              addressLabel={t('ADDRESS')}
+              addressLabel={t("ADDRESS")}
               {...props}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputField
               name={`${entity}.email`}
-              textFieldName={t('EMAIL')}
+              textFieldName={t("EMAIL")}
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched[entity]?.email}
@@ -131,7 +131,7 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={6}>
             <InputField
               name={`${entity}.email2`}
-              textFieldName={t('HOLDER_EMAIL_2')}
+              textFieldName={t("HOLDER_EMAIL_2")}
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched[entity]?.email2}
@@ -144,7 +144,7 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={6}>
             <PhoneField
               name={`${entity}.phone`}
-              textFieldName={t('MEMBER_PHONE_LABEL')}
+              textFieldName={t("MEMBER_PHONE_LABEL")}
               values={values}
               errors={errors}
               touched={touched}
@@ -155,7 +155,7 @@ const PersonDataJuridical = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <SelectField
-              label={t('HOW_MEET_US')}
+              label={t("HOW_MEET_US")}
               value={values[entity]?.referral_source}
               fieldName={`${entity}.referral_source`}
               options={referral_source_options}
@@ -165,7 +165,7 @@ const PersonDataJuridical = (props) => {
           <Grid item xs={12} sm={12}>
             <SelectField
               required={true}
-              label={t('LANGUAGE_FIELD')}
+              label={t("LANGUAGE_FIELD")}
               value={values[entity]?.language}
               fieldName={`${entity}.language`}
               options={languages}
@@ -186,7 +186,7 @@ const PersonDataJuridical = (props) => {
           label={
             <label
               dangerouslySetInnerHTML={{
-                __html: t('LEGAL_PERSON_TITLE_LABEL')
+                __html: t("LEGAL_PERSON_TITLE_LABEL"),
               }}
             />
           }

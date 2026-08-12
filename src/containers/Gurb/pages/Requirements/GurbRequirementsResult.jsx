@@ -1,37 +1,38 @@
-import Box from '@mui/material/Box'
-import { useTranslation } from 'react-i18next'
-import PropTypes from 'prop-types'
+import { useTranslation } from "react-i18next"
 
-import RedirectUrl from '../../components/RedirectUrl/RedirectUrl'
+import Box from "@mui/material/Box"
+
+import PropTypes from "prop-types"
+
+import RedirectUrl from "../../components/RedirectUrl/RedirectUrl"
 
 const GurbRequirementsResult = ({ values, gurbCode }) => {
   const { t } = useTranslation()
   const { new_contract, redirectUrl } = values
 
   const resultTitle = new_contract
-    ? t('GURB_REQUIREMENTS_RESULT_TITLE_NEW_MEMBER')
-    : t('GURB_REQUIREMENTS_RESULT_TITLE_EXISTING_MEMBER')
+    ? t("GURB_REQUIREMENTS_RESULT_TITLE_NEW_MEMBER")
+    : t("GURB_REQUIREMENTS_RESULT_TITLE_EXISTING_MEMBER")
 
   const resultDescription = new_contract
-    ? t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER')
-    : t('GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER')
+    ? t("GURB_REQUIREMENTS_RESULT_DESCRIPTION_NEW_MEMBER")
+    : t("GURB_REQUIREMENTS_RESULT_DESCRIPTION_EXISTING_MEMBER")
 
-  const resultRedirectUrl = redirectUrl ?? t('GURB_REDIRECT_JOIN_FORM_URL', { gurbCode: gurbCode })
+  const resultRedirectUrl =
+    redirectUrl ?? t("GURB_REDIRECT_JOIN_FORM_URL", { gurbCode: gurbCode })
 
   const resultButtonText = new_contract
-    ? t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER')
-    : t('GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_EXISTING_MEMBER')
+    ? t("GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_NEW_MEMBER")
+    : t("GURB_REQUIREMENTS_RESULT_BUTTON_TEXT_EXISTING_MEMBER")
 
   return (
     <Box
       sx={{
         pt: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}>
       <RedirectUrl
         title={resultTitle}
         description={resultDescription}

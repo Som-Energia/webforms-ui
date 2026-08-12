@@ -1,33 +1,31 @@
-import React from 'react'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import Box from "@mui/material/Box"
+import Paper from "@mui/material/Paper"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
-import { Formik } from 'formik'
-import * as Yup from 'yup'
+import { Formik } from "formik"
+import * as Yup from "yup"
 
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../../components/OldComponents/Buttons/NextButton'
+import NextButton from "../../components/OldComponents/Buttons/NextButton"
+import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
 
 export default function Contact({
   nextStep,
   prevStep,
   handleStepChanges,
-  params
+  params,
 }) {
   const { t } = useTranslation()
 
   const ContactSchema = Yup.object().shape({
-    contactName: Yup.string().required(t('NO_NAME')),
-    contactSurname: Yup.string().required(t('NO_SURNAME')),
+    contactName: Yup.string().required(t("NO_NAME")),
+    contactSurname: Yup.string().required(t("NO_SURNAME")),
     phone: Yup.string()
-      .matches(/^\d{9}$/, t('NO_PHONE'))
-      .required(t('NO_PHONE'))
+      .matches(/^\d{9}$/, t("NO_PHONE"))
+      .required(t("NO_PHONE")),
   })
 
   return (
@@ -35,15 +33,15 @@ export default function Contact({
       <Formik
         initialValues={{
           ...{
-            contactName: '',
-            contactSurname: '',
-            phone: ''
+            contactName: "",
+            contactSurname: "",
+            phone: "",
           },
-          ...params
+          ...params,
         }}
         validationSchema={ContactSchema}
         validateOnMount
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           handleStepChanges({ contact: values })
           nextStep()
         }}>
@@ -55,15 +53,15 @@ export default function Contact({
           handleBlur,
           handleSubmit,
           isValid,
-          isSubmitting
+          isSubmitting,
         }) => (
           <form onSubmit={handleSubmit} noValidate>
             <Box mx={1} mt={1} mb={1}>
               <Typography
                 dangerouslySetInnerHTML={{
-                  __html: t('HELP_CONTACT_INFO', {
-                    url: t('HELP_CONTACT_INFO_URL')
-                  })
+                  __html: t("HELP_CONTACT_INFO", {
+                    url: t("HELP_CONTACT_INFO_URL"),
+                  }),
                 }}
               />
             </Box>
@@ -71,7 +69,7 @@ export default function Contact({
               <TextField
                 id="contactName"
                 name="contactName"
-                label={t('NAME')}
+                label={t("NAME")}
                 error={errors.contactName && touched.contactName}
                 helperText={touched.contactName && errors.contactName}
                 onChange={handleChange}
@@ -86,7 +84,7 @@ export default function Contact({
               <TextField
                 id="contactSurname"
                 name="contactSurname"
-                label={t('SURNAME')}
+                label={t("SURNAME")}
                 error={errors.contactSurname && touched.contactSurname}
                 helperText={touched.contactSurname && errors.contactSurname}
                 onChange={handleChange}
@@ -101,7 +99,7 @@ export default function Contact({
                 id="phone"
                 name="phone"
                 type="tel"
-                label={t('PHONE')}
+                label={t("PHONE")}
                 error={errors.phone && touched.phone}
                 helperText={touched.phone && errors.phone}
                 onChange={handleChange}
@@ -115,25 +113,20 @@ export default function Contact({
             </Box>
 
             <Box
-              sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
-              {prevStep && (
-                <PrevButton
-                  onClick={prevStep}
-                  title={t('PREV')}
-                />
-              )}
+              sx={{ mb: 1, display: "flex", justifyContent: "space-between" }}>
+              {prevStep && <PrevButton onClick={prevStep} title={t("PREV")} />}
               {nextStep && (
                 <NextButton
                   type="submit"
                   disabled={!isValid || isSubmitting}
-                  title={t('NEXT')}
+                  title={t("NEXT")}
                   sx={{
-                    backgroundColor: 'primary.extraLight',
-                    color: 'primary.main',
-                    '&:hover': {
-                      color: 'primary.extraLight',
-                      backgroundColor: 'primary.main'
-                    }
+                    backgroundColor: "primary.extraLight",
+                    color: "primary.main",
+                    "&:hover": {
+                      color: "primary.extraLight",
+                      backgroundColor: "primary.main",
+                    },
                   }}
                 />
               )}
@@ -141,6 +134,6 @@ export default function Contact({
           </form>
         )}
       </Formik>
-    </Paper >
+    </Paper>
   )
 }

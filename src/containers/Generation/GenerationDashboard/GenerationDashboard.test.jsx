@@ -1,59 +1,73 @@
-import React from 'react'
-import GenerationDashboard from './GenerationDashboard'
-import { render, queryByAttribute, screen, within, fireEvent, waitFor, getByText } from '@testing-library/react'
-import { GenerationContextProvider } from '../context/GenerationContext'
-import { PopUpContextProvider } from '../../../context/PopUpContext'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest';
-import * as myApi from '../../../services/api'
-import { useSyncDayjsLanguage } from '../../../hooks/useTranslateOptions'
-import dayjs from 'dayjs'
-import 'dayjs/locale/es'
-import 'dayjs/locale/ca'
-import 'dayjs/locale/eu'
-import 'dayjs/locale/gl'
+import "dayjs/locale/es"
+import "dayjs/locale/ca"
+import "dayjs/locale/eu"
+import "dayjs/locale/gl"
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
-vi.mock('axios', async (importActual) => {
-  const actual = await importActual();
+import React from "react"
+
+import {
+  fireEvent,
+  getByText,
+  queryByAttribute,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import dayjs from "dayjs"
+import { vi } from "vitest"
+
+import { PopUpContextProvider } from "../../../context/PopUpContext"
+import { useSyncDayjsLanguage } from "../../../hooks/useTranslateOptions"
+import * as myApi from "../../../services/api"
+import { GenerationContextProvider } from "../context/GenerationContext"
+import GenerationDashboard from "./GenerationDashboard"
+
+vi.mock("react-i18next", () => require("../../../tests/__mocks__/i18n"))
+vi.mock("axios", async (importActual) => {
+  const actual = await importActual()
 
   const mockAxios = {
     default: {
       ...actual.default,
       create: vi.fn(() => ({
         ...actual.default.create(),
-        get: mocks.get,
-        post: mocks.post,
-        delete: mocks.delete
+        get: () => {},
+        post: () => {},
+        delete: () => {},
       })),
     },
-  };
+  }
 
-  return mockAxios;
-});
+  return mockAxios
+})
 
 // Mock the useSyncDayjsLanguage function
-vi.mock('../../../hooks/useTranslateOptions', () => ({
+vi.mock("../../../hooks/useTranslateOptions", () => ({
   useSyncDayjsLanguage: vi.fn(),
   useSyncLanguage: vi.fn(),
 }))
 
-describe('Generation Dashboard', () => {
-  const getById = queryByAttribute.bind(null, 'id')
+describe("Generation Dashboard", () => {
+  const getById = queryByAttribute.bind(null, "id")
   const mockValidationConfirm = { finished: false, completed: false }
   const mockValidationConfirmSuccess = { finished: true, completed: true }
   const mockValidationConfirmFailure = { finished: true, completed: false }
-  const mockAssignmentRows = JSON.parse('[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)", "contract_tariff":"2.0","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","contract_tariff":"2.0","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
+  const mockAssignmentRows = JSON.parse(
+    '[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)", "contract_tariff":"2.0","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","contract_tariff":"2.0","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]',
   )
 
-  const mockOutsideAssignmentRows = JSON.parse('[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)", "contract_tariff":"2.0","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","contract_tariff":"2.0","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
+  const mockOutsideAssignmentRows = JSON.parse(
+    '[{"id":"00001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)", "contract_tariff":"2.0","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"00002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","contract_tariff":"2.0","priority": 1,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]',
   )
 
-  const mockContractNoAssignmentRows = JSON.parse('[{"id":"00003","contract": "ES0031405524755001WN8H - 0010243","contract_address": "Carrer Petit, 21, 2º 08880 (Sant Carles de la Ràpita)", "contract_tariff":"2.0","priority": 3,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"}]'
+  const mockContractNoAssignmentRows = JSON.parse(
+    '[{"id":"00003","contract": "ES0031405524755001WN8H - 0010243","contract_address": "Carrer Petit, 21, 2º 08880 (Sant Carles de la Ràpita)", "contract_tariff":"2.0","priority": 3,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"}]',
   )
 
   const mockInvestmentRows = JSON.parse(
-    '[{"name": "GKWH05844","nominal_amount": "2000.0","nshares": 20,"purchase_date": "2020-01-01","first_effective_date": "2021-01-01","amortized_amount": "160.0","last_effective_date": "2045-01-01"}]'
+    '[{"name": "GKWH05844","nominal_amount": "2000.0","nshares": 20,"purchase_date": "2020-01-01","first_effective_date": "2021-01-01","amortized_amount": "160.0","last_effective_date": "2045-01-01"}]',
   )
 
   const mockHandleCancelButtonClick = vi.fn()
@@ -61,15 +75,15 @@ describe('Generation Dashboard', () => {
   const mockValidateChanges = vi.fn()
   const mockSetValidationConfirm = vi.fn()
 
-  vi.spyOn(myApi,'addContractsToAssignments').mockImplementation(()=>{
-    return Promise.resolve({data:"OK"})
+  vi.spyOn(myApi, "addContractsToAssignments").mockImplementation(() => {
+    return Promise.resolve({ data: "OK" })
   })
 
-  vi.spyOn(myApi,'getAssignmentContracts').mockImplementation(()=>{
-    return Promise.resolve({data:[]})
+  vi.spyOn(myApi, "getAssignmentContracts").mockImplementation(() => {
+    return Promise.resolve({ data: [] })
   })
 
-  test('The component render properly the prop data', () => {
+  test("The component render properly the prop data", () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -79,22 +93,23 @@ describe('Generation Dashboard', () => {
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const assignmentTable = getById(dom.container, 'assignment-table')
+    const assignmentTable = getById(dom.container, "assignment-table")
     expect(assignmentTable).toBeInTheDocument()
 
-    const investmentTable = getById(dom.container, 'investment-table')
+    const investmentTable = getById(dom.container, "investment-table")
     expect(investmentTable).toBeInTheDocument()
 
-    const outsideAssignmentsTable = getById(dom.container, 'outside-assignments-table')
+    const outsideAssignmentsTable = getById(
+      dom.container,
+      "outside-assignments-table",
+    )
     expect(outsideAssignmentsTable).toBeInTheDocument()
-
   })
 
-
-  test('should show cancel and validate button when editing', async () => {
+  test("should show cancel and validate button when editing", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -102,20 +117,22 @@ describe('Generation Dashboard', () => {
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
-          testMode={true}
-        >
-          <GenerationDashboard handleClick={mockhandleClick} validationConfirm={mockValidationConfirm} />
+          testMode={true}>
+          <GenerationDashboard
+            handleClick={mockhandleClick}
+            validationConfirm={mockValidationConfirm}
+          />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const cancelButton = getById(dom.container, 'cancel-action-btn')
-    const validateButton = getById(dom.container, 'validation-action-btn')
+    const cancelButton = getById(dom.container, "cancel-action-btn")
+    const validateButton = getById(dom.container, "validation-action-btn")
     expect(cancelButton).toBeInTheDocument()
     expect(validateButton).toBeInTheDocument()
   })
 
-  test('should call cancel function when click cancel button', async () => {
+  test("should call cancel function when click cancel button", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -123,19 +140,21 @@ describe('Generation Dashboard', () => {
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
-          testMode={true}
-        >
-          <GenerationDashboard handleCancelButtonClick={mockHandleCancelButtonClick} validationConfirm={mockValidationConfirm} />
+          testMode={true}>
+          <GenerationDashboard
+            handleCancelButtonClick={mockHandleCancelButtonClick}
+            validationConfirm={mockValidationConfirm}
+          />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const cancelButton = getById(dom.container, 'cancel-action-btn')
+    const cancelButton = getById(dom.container, "cancel-action-btn")
     await userEvent.click(cancelButton)
     expect(mockHandleCancelButtonClick).toHaveBeenCalled()
   })
 
-  test('should call validate function when click validate button', async () => {
+  test("should call validate function when click validate button", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -143,21 +162,22 @@ describe('Generation Dashboard', () => {
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
-          testMode={true}
-        >
-          <GenerationDashboard validateChanges={mockValidateChanges} validationConfirm={mockValidationConfirm} />
+          testMode={true}>
+          <GenerationDashboard
+            validateChanges={mockValidateChanges}
+            validationConfirm={mockValidationConfirm}
+          />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const validateButton = getById(dom.container, 'validation-action-btn')
+    const validateButton = getById(dom.container, "validation-action-btn")
     await userEvent.click(validateButton)
     expect(mockValidateChanges).toHaveBeenCalled()
   })
 
-  test('should show the info text', async () => {
-
+  test("should show the info text", async () => {
     const mockAssignmentSamePriorityRows = JSON.parse(
-      '[{"id":"0001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"0002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]'
+      '[{"id":"0001","contract": "ES0031405524755001RN0F - 0010777","contract_address": "Major, 22, 3º 08970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-08","annual_use_kwh": "7105.0"},{"id":"0002","contract": "ES0031405524910014WM0F - 0013117","contract_address": ". Jacint Verdaguer, 42, 3er 1a 8970 (Sant Joan Despí)","priority": 0,"contract_last_invoiced": "2023-01-04","annual_use_kwh": "115.0"}]',
     )
     const dom = render(
       <PopUpContextProvider>
@@ -166,18 +186,16 @@ describe('Generation Dashboard', () => {
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
           propEditingPriority={true}
-          testMode={true}
-        >
+          testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const infoText = getById(dom.container, 'info-text-section')
+    const infoText = getById(dom.container, "info-text-section")
     expect(infoText).toBeInTheDocument()
   })
 
-  test('should show the text that shows you have no generation', async () => {
-
+  test("should show the text that shows you have no generation", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -185,72 +203,77 @@ describe('Generation Dashboard', () => {
           investmentsJSON={[]}
           outsideAssignmentsJSON={[]}
           propEditingPriority={true}
-          testMode={true}
-        >
+          testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const infoText = getById(dom.container, 'not-has-invoices-text')
+    const infoText = getById(dom.container, "not-has-invoices-text")
     expect(infoText).toBeInTheDocument()
   })
 
-  test('should show the success text', async () => {
+  test("should show the success text", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
-          testMode={true}
-        >
-          <GenerationDashboard validationConfirm={mockValidationConfirmSuccess} />
+          testMode={true}>
+          <GenerationDashboard
+            validationConfirm={mockValidationConfirmSuccess}
+          />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const alertComponent = getById(dom.container, 'alert-success-message')
+    const alertComponent = getById(dom.container, "alert-success-message")
     expect(alertComponent).toBeInTheDocument()
-    expect(screen.getByText("GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS")).toBeInTheDocument()
+    expect(
+      screen.getByText("GENERATION_INVESTMENTS_ASSIGNMENT_VALIDATION_SUCCESS"),
+    ).toBeInTheDocument()
   })
 
-  test('should call the function to close the success message', async () => {
+  test("should call the function to close the success message", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
-          testMode={true}
-        >
-          <GenerationDashboard validationConfirm={mockValidationConfirmSuccess} setValidationConfirm={mockSetValidationConfirm} />
+          testMode={true}>
+          <GenerationDashboard
+            validationConfirm={mockValidationConfirmSuccess}
+            setValidationConfirm={mockSetValidationConfirm}
+          />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const alertComponent = getById(dom.container, 'alert-success-message')
-    const closeBtn = within(alertComponent).getByRole('button')
+    const alertComponent = getById(dom.container, "alert-success-message")
+    const closeBtn = within(alertComponent).getByRole("button")
     expect(alertComponent).toBeInTheDocument()
     expect(closeBtn).toBeInTheDocument()
     await userEvent.click(closeBtn)
     expect(mockSetValidationConfirm).toHaveBeenCalledWith(false)
   })
 
-  test('should show the failure component', async () => {
+  test("should show the failure component", async () => {
     render(
       <PopUpContextProvider>
         <GenerationContextProvider
           assignmentsJSON={mockAssignmentRows}
           investmentsJSON={mockInvestmentRows}
           outsideAssignmentsJSON={mockOutsideAssignmentRows}
-          testMode={true}
-        >
-          <GenerationDashboard validationConfirm={mockValidationConfirmFailure} />
+          testMode={true}>
+          <GenerationDashboard
+            validationConfirm={mockValidationConfirmFailure}
+          />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
     expect(screen.getByText("FAILURE_TEXT")).toBeInTheDocument()
   })
 
-  test('Should call the add contract function', async () => {
+  test("Should call the add contract function", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -261,23 +284,25 @@ describe('Generation Dashboard', () => {
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const addButton = getById(dom.container, 'generationkwh-id-add-assignment')
+    const addButton = getById(dom.container, "generationkwh-id-add-assignment")
     await userEvent.click(addButton)
 
-    const checkbox = screen.getByTestId('checkbox-00003')
+    const checkbox = screen.getByTestId("checkbox-00003")
     await userEvent.click(checkbox)
 
     React.act(() => {
-      const acceptButton = screen.getByTestId('list-accept-button')
+      const acceptButton = screen.getByTestId("list-accept-button")
       fireEvent.click(acceptButton)
     })
 
-    await waitFor(() => expect(screen.getByTestId('loading-component')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByTestId("loading-component")).toBeInTheDocument(),
+    )
   })
 
-  test('Should show info message when you can\'t add more contracts', async () => {
+  test("Should show info message when you can't add more contracts", async () => {
     const dom = render(
       <PopUpContextProvider>
         <GenerationContextProvider
@@ -288,20 +313,20 @@ describe('Generation Dashboard', () => {
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
-    const addButton = getById(dom.container, 'generationkwh-id-add-assignment')
+    const addButton = getById(dom.container, "generationkwh-id-add-assignment")
     await userEvent.click(addButton)
-       
-    const infoMessage = screen.getByText('GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT')
-    expect(infoMessage).toBeInTheDocument()
 
+    const infoMessage = screen.getByText(
+      "GENERATION_ADD_ASSIGNMENTS_INFO_NO_CONTRACTS_TEXT",
+    )
+    expect(infoMessage).toBeInTheDocument()
   })
 
   test('The component dates properly render when dayjs "es"', () => {
-
     vi.mocked(useSyncDayjsLanguage).mockResolvedValue({
-      dayjs: dayjs.locale('es')
+      dayjs: dayjs.locale("es"),
     })
 
     const dom = render(
@@ -314,26 +339,25 @@ describe('Generation Dashboard', () => {
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const investmentTable = getById(dom.container, 'investment-table')
+    const investmentTable = getById(dom.container, "investment-table")
     expect(investmentTable).toBeInTheDocument()
 
-    const purchase_date = getByText(dom.container,'01/01/2020')
+    const purchase_date = getByText(dom.container, "01/01/2020")
     expect(purchase_date).toBeInTheDocument()
 
-    const first_effective_date = getByText(dom.container,'01/01/2021')
+    const first_effective_date = getByText(dom.container, "01/01/2021")
     expect(first_effective_date).toBeInTheDocument()
 
-    const last_effective_date = getByText(dom.container,'01/01/2045')
+    const last_effective_date = getByText(dom.container, "01/01/2045")
     expect(last_effective_date).toBeInTheDocument()
   })
 
   test('The component dates properly render when dayjs "eu"', () => {
-
     vi.mocked(useSyncDayjsLanguage).mockResolvedValue({
-      dayjs: dayjs.locale('eu')
+      dayjs: dayjs.locale("eu"),
     })
 
     const dom = render(
@@ -345,19 +369,19 @@ describe('Generation Dashboard', () => {
           testMode={true}>
           <GenerationDashboard validationConfirm={mockValidationConfirm} />
         </GenerationContextProvider>
-      </PopUpContextProvider>
+      </PopUpContextProvider>,
     )
 
-    const investmentTable = getById(dom.container, 'investment-table')
+    const investmentTable = getById(dom.container, "investment-table")
     expect(investmentTable).toBeInTheDocument()
 
-    const purchase_date = getByText(dom.container,'01/01/2020')
+    const purchase_date = getByText(dom.container, "01/01/2020")
     expect(purchase_date).toBeInTheDocument()
 
-    const first_effective_date = getByText(dom.container,'01/01/2021')
+    const first_effective_date = getByText(dom.container, "01/01/2021")
     expect(first_effective_date).toBeInTheDocument()
 
-    const last_effective_date = getByText(dom.container,'01/01/2045')
+    const last_effective_date = getByText(dom.container, "01/01/2045")
     expect(last_effective_date).toBeInTheDocument()
   })
 })

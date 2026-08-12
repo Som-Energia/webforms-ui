@@ -1,2 +1,9 @@
 public/static/**/*.html
 .env*
+node_modules/
+dist/
+coverage/
+cypress/
+forms/
+.github/
+.vscode/
