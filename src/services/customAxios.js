@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 
 let api = axios
 
@@ -11,10 +11,10 @@ try {
 api.defaults = api.defaults || {}
 api.defaults.headers = api.defaults.headers || {}
 api.defaults.headers.common = api.defaults.headers.common || {}
-api.defaults.headers.common['X-Language'] = 'es_ES'
+api.defaults.headers.common["X-Language"] = "es_ES"
 
 export const addLanguageHeader = (language) => {
-  api.defaults.headers.common['X-Language'] = language || 'es_ES'
+  api.defaults.headers.common["X-Language"] = language || "es_ES"
 }
 
 api.CancelToken = axios.CancelToken
