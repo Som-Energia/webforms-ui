@@ -1,5 +1,12 @@
 # Change Log
 
+## 8.1.2 2026-08-17
+
+- FIX: Restore OV asset output
+- IMP: Update ESLint configuration and Node requirements
+- STYLE: Adjust address autocomplete field padding
+- I18N: Update Catalan, Spanish and Basque translations
+
 ## 8.1.1 2026-08-06
 
 - FIX: Enable html text in loading component
