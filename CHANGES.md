@@ -1,5 +1,10 @@
 # Change Log
 
+## 8.1.3 2026-08-17
+
+- STYLE: Format project files
+- REF: Ignore i18n files to avoid conflicts with translators
+
 ## 8.1.2 2026-08-17
 
 - FIX: Restore OV asset output
