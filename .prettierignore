@@ -7,3 +7,4 @@ cypress/
 forms/
 .github/
 .vscode/
+src/i18n/*.json
