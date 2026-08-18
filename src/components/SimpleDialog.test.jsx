@@ -22,35 +22,39 @@ describe("SimpleDialog", () => {
     })
   })
 
-  test("renders the dialog title and text", () => {
+  test("renders the dialog title and text", async () => {
     renderDialog({ title: "Dialog title", text: "Dialog body" })
 
-    expect(screen.getByRole("dialog")).toBeInTheDocument()
-    expect(screen.getByText("Dialog title")).toBeInTheDocument()
-    expect(screen.getByText("Dialog body")).toBeInTheDocument()
+    expect(await screen.findByRole("dialog")).toBeInTheDocument()
+    expect(await screen.findByText("Dialog title")).toBeInTheDocument()
+    expect(await screen.findByText("Dialog body")).toBeInTheDocument()
   })
 
-  test("renders only the accept button when only acceptFunction is provided", () => {
+  test("renders only the accept button when only acceptFunction is provided", async () => {
     renderDialog({
       title: "Dialog title",
       text: "Dialog body",
       acceptFunction: vi.fn(),
     })
 
-    expect(screen.getByRole("button", { name: "Accept" })).toBeInTheDocument()
+    expect(
+      await screen.findByRole("button", { name: "Accept" }),
+    ).toBeInTheDocument()
     expect(
       screen.queryByRole("button", { name: "Cancel" }),
     ).not.toBeInTheDocument()
   })
 
-  test("renders only the cancel button when only cancelFunction is provided", () => {
+  test("renders only the cancel button when only cancelFunction is provided", async () => {
     renderDialog({
       title: "Dialog title",
       text: "Dialog body",
       cancelFunction: vi.fn(),
     })
 
-    expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument()
+    expect(
+      await screen.findByRole("button", { name: "Cancel" }),
+    ).toBeInTheDocument()
     expect(
       screen.queryByRole("button", { name: "Accept" }),
     ).not.toBeInTheDocument()
@@ -86,7 +90,7 @@ describe("SimpleDialog", () => {
     expect(cancelFunction).toHaveBeenCalledTimes(1)
   })
 
-  test("renders both action buttons when both callbacks are provided", () => {
+  test("renders both action buttons when both callbacks are provided", async () => {
     renderDialog({
       title: "Dialog title",
       text: "Dialog body",
@@ -94,7 +98,11 @@ describe("SimpleDialog", () => {
       cancelFunction: vi.fn(),
     })
 
-    expect(screen.getByRole("button", { name: "Accept" })).toBeInTheDocument()
-    expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument()
+    expect(
+      await screen.findByRole("button", { name: "Accept" }),
+    ).toBeInTheDocument()
+    expect(
+      await screen.findByRole("button", { name: "Cancel" }),
+    ).toBeInTheDocument()
   })
 })
