@@ -8,11 +8,11 @@
 - `npm run lint`: `eslint` sobre `js` i `jsx`.
 - `npm run cypress`: obre Cypress.
 - `npm run cypress:smoke`: smoke contra config de produccio.
-- `npm run build`: build Vite cap a `forms/`.
+- `npm run build`: executa `lint:todos`, injecta `VITE_APP_VERSION` i fa el build Vite cap a `forms/`.
 
 ## Entorn
 
-- Node requerit: `>=20.18.1 <21.0.0`
+- Node requerit: `>=20.20.2 <21.0.0`
 - npm requerit: `>=10 <11`
 
 ## Peculiaritats del repo
@@ -20,7 +20,7 @@
 - El build escriu a `forms/`, no a `dist/`.
 - `vite.config.mjs` carrega `BASE_URL` segons `mode`.
 - Hi ha modes extra com `ov`, `prod`, `pre` i `vercel`.
-- El plugin d'`eslint` a Vite esta desactivat expressament; no comptis amb lint en calent.
+- El plugin d'`eslint` a Vite esta actiu i linta `src/**/*.{js,jsx}` a l'arrencada i al build.
 
 ## Criteri practic
 
