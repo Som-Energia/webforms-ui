@@ -10,13 +10,13 @@ La complexitat real del flux és la navegació. No és un `activeStep + 1` norma
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Inici | `activeStep` comença a 0 i el pas 0 és una pregunta inicial, no un pas del `SomStepper` |
+| Tema        | Context                                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Inici       | `activeStep` comença a 0 i el pas 0 és una pregunta inicial, no un pas del `SomStepper`                                          |
 | Pas següent | es calcula amb `NextStep`, `keyByValue` i `valueByKey` segons respostes (`has_light`, `has_selfconsumption`, `has_member`, etc.) |
-| Historial | `prevSteps` guarda la navegació real per poder tornar enrere |
-| Resum | `summaryField` pot reobrir un pas i després reenviar al resum final |
-| Render | `getStep()` canvia completament segons variant i `activeStep` |
+| Historial   | `prevSteps` guarda la navegació real per poder tornar enrere                                                                     |
+| Resum       | `summaryField` pot reobrir un pas i després reenviar al resum final                                                              |
+| Render      | `getStep()` canvia completament segons variant i `activeStep`                                                                    |
 
 ## Branques que realment salten passos
 

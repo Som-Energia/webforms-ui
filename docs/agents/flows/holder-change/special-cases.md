@@ -10,12 +10,12 @@ Els casos especials són on més fàcilment es trenquen validacions perquè comb
 
 ## Detalls
 
-| Motiu | Requisit |
-|---|---|
-| `reason_death` | adjunt `death` obligatori |
-| `reason_merge` | adjunt `merge` obligatori |
+| Motiu               | Requisit                                   |
+| ------------------- | ------------------------------------------ |
+| `reason_death`      | adjunt `death` obligatori                  |
+| `reason_merge`      | adjunt `merge` obligatori                  |
 | `reason_electrodep` | adjunts `medical` i `resident` obligatoris |
-| conjunt de motius | almenys un motiu ha d'estar marcat |
+| conjunt de motius   | almenys un motiu ha d'estar marcat         |
 
 ## Checklist
 

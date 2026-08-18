@@ -10,16 +10,16 @@ Alta de soci en 4 passos, relativament lineal i amb menys branques que la contra
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Container arrel | `src/containers/NewMember/NewMember.jsx` |
-| Pasos | `MemberIdentifier`, `MemberPersonalData`, `PaymentMethod`, `MemberSummary` |
-| Navegació | `activeStep` de 0 a 3 i `NEW_MEMBER_FORM_SUBSTEPS` |
-| Navegació especial | `summaryField` pot reobrir un pas des del resum i tornar després al final |
-| Submit | normalitza amb `newNormalizeMember(values)` i envia a `member()` |
-| Pagament | si la resposta conté `endpoint` i `payment_data`, fa `POST` amb un formulari ocult |
-| Tracking | events Matomo per canvi de pas i enviament |
-| Idioma | `useSyncLanguage(language)` i camps inicials dependents d'`i18n.language` |
+| Tema               | Context                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| Container arrel    | `src/containers/NewMember/NewMember.jsx`                                           |
+| Pasos              | `MemberIdentifier`, `MemberPersonalData`, `PaymentMethod`, `MemberSummary`         |
+| Navegació          | `activeStep` de 0 a 3 i `NEW_MEMBER_FORM_SUBSTEPS`                                 |
+| Navegació especial | `summaryField` pot reobrir un pas des del resum i tornar després al final          |
+| Submit             | normalitza amb `newNormalizeMember(values)` i envia a `member()`                   |
+| Pagament           | si la resposta conté `endpoint` i `payment_data`, fa `POST` amb un formulari ocult |
+| Tracking           | events Matomo per canvi de pas i enviament                                         |
+| Idioma             | `useSyncLanguage(language)` i camps inicials dependents d'`i18n.language`          |
 
 ## Checklist
 

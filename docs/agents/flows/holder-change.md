@@ -10,14 +10,14 @@ Flux llarg i antic, amb molta validació embeguda, casos especials i dependènci
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Container arrel | `src/containers/HolderChange.jsx` |
-| Flux | multi-step llarg amb components sota `src/containers/HolderChange/*` |
-| Validació | gran part de l'schema `Yup` està embegut al mateix container |
-| Casos especials | morts, fusions, electrodependència i adjunts obligatoris |
-| Eines ocultes | hi ha inspector activable per hotkeys (`ctrl+alt+shift+d`) |
-| Submit | normalitza amb `normalizeHolderChange()` i envia a `holderChange()` |
+| Tema            | Context                                                              |
+| --------------- | -------------------------------------------------------------------- |
+| Container arrel | `src/containers/HolderChange.jsx`                                    |
+| Flux            | multi-step llarg amb components sota `src/containers/HolderChange/*` |
+| Validació       | gran part de l'schema `Yup` està embegut al mateix container         |
+| Casos especials | morts, fusions, electrodependència i adjunts obligatoris             |
+| Eines ocultes   | hi ha inspector activable per hotkeys (`ctrl+alt+shift+d`)           |
+| Submit          | normalitza amb `normalizeHolderChange()` i envia a `holderChange()`  |
 
 ## Diagrama ràpid
 
