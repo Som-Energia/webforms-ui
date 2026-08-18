@@ -16,17 +16,17 @@ Documents curts per carregar només el context necessari abans d'editar codi.
 
 ## Index
 
-| Fitxer | Quan llegir-lo |
-|---|---|
-| `00-workflow.md` | Sempre, abans d'editar |
-| `01-arquitectura.md` | Quan necessites orientació del repo |
-| `02-formularis-i-validacio.md` | Quan toques formularis o passos |
-| `03-testing.md` | Quan has d'afegir o revisar proves |
-| `04-i18n.md` | Quan canvies textos o llengua |
-| `05-build-i-execucio.md` | Quan has d'arrencar, lintar o construir |
-| `06-integracions.md` | Quan toques serveis externs |
-| `07-formularis-nous.md` | Quan toques els formularis nous alineats amb el patró actual de l'equip |
-| `flows/README.md` | Quan vols context específic d'un flux funcional |
+| Fitxer                         | Quan llegir-lo                                                          |
+| ------------------------------ | ----------------------------------------------------------------------- |
+| `00-workflow.md`               | Sempre, abans d'editar                                                  |
+| `01-arquitectura.md`           | Quan necessites orientació del repo                                     |
+| `02-formularis-i-validacio.md` | Quan toques formularis o passos                                         |
+| `03-testing.md`                | Quan has d'afegir o revisar proves                                      |
+| `04-i18n.md`                   | Quan canvies textos o llengua                                           |
+| `05-build-i-execucio.md`       | Quan has d'arrencar, lintar o construir                                 |
+| `06-integracions.md`           | Quan toques serveis externs                                             |
+| `07-formularis-nous.md`        | Quan toques els formularis nous alineats amb el patró actual de l'equip |
+| `flows/README.md`              | Quan vols context específic d'un flux funcional                         |
 
 ## Referencies base
 

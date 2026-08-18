@@ -10,14 +10,14 @@ El submit final no només envia el formulari: pot acabar en resultat local o en 
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Tracking d'enviament | event `sendNewContractMemberClick` abans de submit |
-| Payload | normalització amb `gurbCode` com a context addicional i selecció entre `linked_member_info`, `new_member_info` i `contract_owner` |
-| Resposta èxit | si hi ha `redsys_endpoint`, prepara formulari i envia cap a pagament |
-| Resposta èxit sense pagament | marca `completed` i mostra resultat final |
-| Context extra | pot disparar trackers específics per `gurb_id`, `mtm_cid`, `mtm_source` i `language` |
-| Resultat Gurb | si hi ha `gurbCode` i no hi ha error, mostra `RedirectUrl` en lloc del resultat estàndard |
+| Tema                         | Context                                                                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Tracking d'enviament         | event `sendNewContractMemberClick` abans de submit                                                                                |
+| Payload                      | normalització amb `gurbCode` com a context addicional i selecció entre `linked_member_info`, `new_member_info` i `contract_owner` |
+| Resposta èxit                | si hi ha `redsys_endpoint`, prepara formulari i envia cap a pagament                                                              |
+| Resposta èxit sense pagament | marca `completed` i mostra resultat final                                                                                         |
+| Context extra                | pot disparar trackers específics per `gurb_id`, `mtm_cid`, `mtm_source` i `language`                                              |
+| Resultat Gurb                | si hi ha `gurbCode` i no hi ha error, mostra `RedirectUrl` en lloc del resultat estàndard                                         |
 
 ## Decisions de payload que solen passar desapercebudes
 

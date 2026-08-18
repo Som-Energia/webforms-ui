@@ -10,12 +10,12 @@ La part final d'aquest flux no és només enviar: també construeix errors semà
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Payload | es prepara amb `normalizeHolderChange(values)` |
-| Submit | es fa via `holderChange(data)` |
+| Tema          | Context                                                                                   |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| Payload       | es prepara amb `normalizeHolderChange(values)`                                            |
+| Submit        | es fa via `holderChange(data)`                                                            |
 | Error mapping | `handleError()` combina `error.code` i `invalid_fields` per generar un codi més específic |
-| UI final | mostra `Success` o `Failure` segons estat |
+| UI final      | mostra `Success` o `Failure` segons estat                                                 |
 
 ## Checklist
 

@@ -4,11 +4,11 @@ Aquest flux és massa llarg per carregar-lo sencer si només toques una branca c
 
 ## Ruta ràpida
 
-| Si toques | Llegeix això |
-|---|---|
-| Salts entre passos o passos visibles | `navigation.md` |
-| Motius especials i adjunts | `special-cases.md` |
-| Submit, payload o errors | `submit-and-errors.md` |
+| Si toques                            | Llegeix això           |
+| ------------------------------------ | ---------------------- |
+| Salts entre passos o passos visibles | `navigation.md`        |
+| Motius especials i adjunts           | `special-cases.md`     |
+| Submit, payload o errors             | `submit-and-errors.md` |
 
 ## Ús recomanat
 

@@ -47,11 +47,11 @@
 
 ## On començar segons el canvi
 
-| Tipus de canvi | Primer lloc a mirar |
-|---|---|
-| Nova ruta o canvi de flux | `src/App.jsx` |
-| Flags, dades injectades o bootstrapping | `src/main.jsx` |
-| Pas d'un formulari | `src/containers/<Flow>/...` |
-| Validacions | `src/containers/**/validations/*` |
-| UI compartida | `src/components/*` |
-| Crides HTTP | `src/services/api.js` |
+| Tipus de canvi                          | Primer lloc a mirar               |
+| --------------------------------------- | --------------------------------- |
+| Nova ruta o canvi de flux               | `src/App.jsx`                     |
+| Flags, dades injectades o bootstrapping | `src/main.jsx`                    |
+| Pas d'un formulari                      | `src/containers/<Flow>/...`       |
+| Validacions                             | `src/containers/**/validations/*` |
+| UI compartida                           | `src/components/*`                |
+| Crides HTTP                             | `src/services/api.js`             |

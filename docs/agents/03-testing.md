@@ -14,11 +14,11 @@
 
 ## Quan usar cada tipus
 
-| Cas | Prova recomanada |
-|---|---|
-| Component o validacio local | `Vitest` |
-| Ruta, integracio de formulari o smoke | `Cypress` |
-| Text amb traduccio | test unitari amb `i18n.mock` o smoke si afecta rutes |
+| Cas                                   | Prova recomanada                                     |
+| ------------------------------------- | ---------------------------------------------------- |
+| Component o validacio local           | `Vitest`                                             |
+| Ruta, integracio de formulari o smoke | `Cypress`                                            |
+| Text amb traduccio                    | test unitari amb `i18n.mock` o smoke si afecta rutes |
 
 ## Senyals del repo
 
@@ -83,14 +83,14 @@ Exemple amb provider:
 render(
   <GenerationContextProvider assignmentsJSON={mockAssignmentRows}>
     <GenerationDashboard validationConfirm={mockValidationConfirm} />
-  </GenerationContextProvider>
+  </GenerationContextProvider>,
 )
 ```
 
 Exemple de mock d'i18n:
 
 ```js
-vi.mock('react-i18next', () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key) => key,
   }),
@@ -110,7 +110,7 @@ Validacions habituals:
 ```js
 expect(mockFunc).toHaveBeenCalled()
 expect(mockFunc).toHaveBeenCalledTimes(1)
-expect(mockFunc).toHaveBeenCalledWith('actionTest')
+expect(mockFunc).toHaveBeenCalledWith("actionTest")
 ```
 
 No prioritzis mocks si pots provar el mateix comportament via DOM o interaccio.
@@ -129,7 +129,7 @@ Prioritat recomanada:
 Usa `getBy*` quan l'element ha d'existir en el render actual.
 
 ```js
-const button = screen.getByRole('button', { name: /submit/i })
+const button = screen.getByRole("button", { name: /submit/i })
 expect(button).toBeInTheDocument()
 ```
 
@@ -138,7 +138,7 @@ expect(button).toBeInTheDocument()
 Usa `queryBy*` per comprovar que un element no existeix.
 
 ```js
-expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+expect(screen.queryByRole("alert")).not.toBeInTheDocument()
 ```
 
 ### `findBy*`
@@ -146,18 +146,18 @@ expect(screen.queryByRole('alert')).not.toBeInTheDocument()
 Usa `findBy*` quan l'element apareix de forma asincrona.
 
 ```js
-const firstUser = await screen.findByText('Anna Garcia')
+const firstUser = await screen.findByText("Anna Garcia")
 expect(firstUser).toBeInTheDocument()
 ```
 
 ## Regla rapida de queries
 
-| Situacio | Query recomanada |
-|---|---|
-| Element present al render inicial | `getBy*` |
-| Element que no ha d'existir | `queryBy*` |
-| Element que apareix despres d'una operacio async | `findBy*` |
-| Multiples elements | `getAllBy*` o `findAllBy*` |
+| Situacio                                         | Query recomanada           |
+| ------------------------------------------------ | -------------------------- |
+| Element present al render inicial                | `getBy*`                   |
+| Element que no ha d'existir                      | `queryBy*`                 |
+| Element que apareix despres d'una operacio async | `findBy*`                  |
+| Multiples elements                               | `getAllBy*` o `findAllBy*` |
 
 ## Asincronia
 
@@ -167,7 +167,7 @@ Usa `waitFor` quan el canvi no es immediat i s'ha de reintentar una comprovacio.
 
 ```js
 await waitFor(() => {
-  expect(screen.getByText('Loaded')).toBeInTheDocument()
+  expect(screen.getByText("Loaded")).toBeInTheDocument()
 })
 ```
 

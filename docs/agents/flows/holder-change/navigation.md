@@ -10,11 +10,11 @@ Aquí la clau és `skipStep()`. Molts errors venen de tocar un pas sense entendr
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
+| Tema             | Context                                                                                                                            |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | Render de passos | `VAT`, `CUPS`, `BecomeMember`, `HolderCase`, `MemberIdentifier`, `PersonalData`, `VoluntaryCent`, `SpecialCases`, `IBAN`, `Review` |
-| Salts | `skipStep()` pot ometre sobretot els passos 2, 3 i 4 |
-| Condicions clau | `holder.ismember`, `member.become_member`, `member.link_member`, `isMemberMandatoryForHolderchange`, i comunitat de propietaris |
+| Salts            | `skipStep()` pot ometre sobretot els passos 2, 3 i 4                                                                               |
+| Condicions clau  | `holder.ismember`, `member.become_member`, `member.link_member`, `isMemberMandatoryForHolderchange`, i comunitat de propietaris    |
 
 ## Checklist
 
