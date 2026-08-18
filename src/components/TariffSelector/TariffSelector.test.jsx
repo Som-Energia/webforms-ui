@@ -45,6 +45,15 @@ describe("TariffSelector component", () => {
     })
   })
 
+  test("uses the default tariff when no tariff prop is provided", () => {
+    const dom = render(<TariffSelector />)
+    const getByDataCy = queryByAttribute.bind(null, "data-cy")
+
+    expect(
+      getByDataCy(dom.container, `button-${DefaultTariff}`),
+    ).toBeInTheDocument()
+  })
+
   describe("TariffSelector available tariffs", () => {
     Object.values(Tariffs).forEach(async (tariffName) => {
       test(`Check value is ${tariffName} when click ${tariffName}`, async () => {
