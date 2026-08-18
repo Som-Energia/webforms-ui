@@ -34,6 +34,7 @@
 3. Si el canvi afecta un flux complet, una ruta o navegacio multi-step, revisa si cal `Cypress`.
 4. Prefereix demostrar comportament observable abans que detalls interns d'implementacio.
 5. Si el component depen de `i18n`, `context`, `theme` o props obligatories, munta el setup minim equivalent al real.
+6. Sempre que sigui possible, intenta deixar el coverage del fitxer o component tocat al `100%`.
 
 ## Estructura minima d'un test
 
@@ -238,3 +239,4 @@ afterAll(() => {
 1. Prova unitària propera si el canvi es local.
 2. Spec Cypress rellevant si el canvi toca un flux sencer.
 3. No assumeixis cobertura existent: hi ha zones antigues i heterogenies.
+4. Si estas ampliant o afegint tests, comprova si pots tancar el fitxer tocat a `100%` de statements, branches, functions i lines sense inflar el spec artificialment.
