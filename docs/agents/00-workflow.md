@@ -22,6 +22,7 @@ Actuar amb context minim, llegint nomes el que cal per al canvi concret.
 - Despres d'escriure o editar codi, passa format abans d'acabar.
 - El script real `npm run format -- <ruta-del-fitxer>` executa `prettier --write .` i recorre tot el repo, no nomes el fitxer indicat.
 - Si nomes vols formatar un fitxer concret, usa `npx prettier --write <ruta-del-fitxer>`.
+- Sempre que sigui viable i el cost es mantingui raonable, porta el coverage del fitxer o unitat tocada al `100%`.
 - Si un canvi deixa desalineat algun fitxer de `docs/agents/*`, actualitza'l dins la mateixa branca.
 - Si l'usuari et demana revisar la documentacio, contrasta els docs amb el codi actual i corregeix el que hagi quedat vell.
 
