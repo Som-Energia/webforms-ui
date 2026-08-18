@@ -69,7 +69,9 @@ describe("AlertBox", () => {
   ])("renders the %s custom icon", (icon, expectedTestId) => {
     renderAlert({ icon })
 
-    expect(within(screen.getByRole("alert")).getByTestId(expectedTestId)).toBeInTheDocument()
+    expect(
+      within(screen.getByRole("alert")).getByTestId(expectedTestId),
+    ).toBeInTheDocument()
   })
 
   test("applies the provided text alignment", () => {
