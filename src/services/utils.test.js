@@ -1,5 +1,10 @@
 import {
+  checkIsTariffIndexed,
+  checkIsTariff30,
   checkCAUWhileTyping,
+  checkPhisicalVAT,
+  getUrlOrBrowserSessionLanguage,
+  isMatchingCUPSandCAU,
   checkIsTariff20,
   newNormalizeMember,
   normalizeContract,
@@ -7,6 +12,7 @@ import {
   normalizeHolderChange,
   normalizeMember,
   normalizeModifyData,
+  prettyCAU,
 } from "./utils"
 import contractCases from "./utilsMockData/forms/contract"
 import d1Cases from "./utilsMockData/forms/d1"
@@ -64,6 +70,114 @@ describe("Check the utils functions", () => {
 
   test("Should return true with tariff20tdIndexadaSom", () => {
     expect(checkIsTariff20(tariff20tdIndexadaSom)).toBeTruthy()
+  })
+
+  test("Should return true with tariff30td", () => {
+    expect(checkIsTariff30(tariff30td)).toBeTruthy()
+  })
+
+  test("Should return false with tariff20td for tariff30 checker", () => {
+    expect(checkIsTariff30(tariff20td)).toBeFalsy()
+  })
+
+  test("Should return truthy when tariff is indexed", () => {
+    expect(checkIsTariffIndexed(tariff20tdIndexada)).toBeTruthy()
+  })
+
+  test("Should return falsy when tariff is not indexed", () => {
+    expect(checkIsTariffIndexed(tariff20td)).toBeFalsy()
+  })
+})
+
+describe("getUrlOrBrowserSessionLanguage", () => {
+  test("uses the supported language from the URL when present", () => {
+    expect(getUrlOrBrowserSessionLanguage("/ca/contract", "es")).toBe("ca_ES")
+    expect(getUrlOrBrowserSessionLanguage("/gl/foo", "es")).toBe("gl_ES")
+  })
+
+  test("falls back to the browser session language when URL has no supported language", () => {
+    const originalLanguages = navigator.languages
+    const originalLanguage = navigator.language
+
+    Object.defineProperty(navigator, "languages", {
+      configurable: true,
+      value: ["eu-ES"],
+    })
+    Object.defineProperty(navigator, "language", {
+      configurable: true,
+      value: "eu-ES",
+    })
+
+    expect(getUrlOrBrowserSessionLanguage("/contract", "es")).toBe("eu_ES")
+
+    Object.defineProperty(navigator, "languages", {
+      configurable: true,
+      value: originalLanguages,
+    })
+    Object.defineProperty(navigator, "language", {
+      configurable: true,
+      value: originalLanguage,
+    })
+  })
+
+  test("uses the fallback language when browser language is unsupported", () => {
+    const originalLanguages = navigator.languages
+    const originalLanguage = navigator.language
+
+    Object.defineProperty(navigator, "languages", {
+      configurable: true,
+      value: ["en-US"],
+    })
+    Object.defineProperty(navigator, "language", {
+      configurable: true,
+      value: "en-US",
+    })
+
+    expect(getUrlOrBrowserSessionLanguage("/contract", "ca")).toBe("ca_ES")
+
+    Object.defineProperty(navigator, "languages", {
+      configurable: true,
+      value: originalLanguages,
+    })
+    Object.defineProperty(navigator, "language", {
+      configurable: true,
+      value: originalLanguage,
+    })
+  })
+})
+
+describe("small utility helpers", () => {
+  test("checkPhisicalVAT returns undefined for undefined VAT", () => {
+    expect(checkPhisicalVAT(undefined)).toBeUndefined()
+  })
+
+  test("checkPhisicalVAT detects physical and non physical VAT prefixes", () => {
+    expect(checkPhisicalVAT("12345678Z")).toBeTruthy()
+    expect(checkPhisicalVAT("X1234567L")).toBeTruthy()
+    expect(checkPhisicalVAT("B12345678")).toBeFalsy()
+  })
+
+  test("isMatchingCUPSandCAU compares the CAU prefix with the CUPS", () => {
+    expect(
+      isMatchingCUPSandCAU(
+        "ES1234567890123456AA1FA001",
+        "ES1234567890123456AA1F",
+      ),
+    ).toBeTruthy()
+    expect(
+      isMatchingCUPSandCAU(
+        "ES1234567890123456AA1FA001",
+        "ES9999567890123456AA1F",
+      ),
+    ).toBeFalsy()
+  })
+
+  test("prettyCAU strips invalid chars, uppercases and truncates to 26 chars", () => {
+    expect(prettyCAU("es12 34-56aa1fa001")).toBe("ES123456AA1FA001")
+    expect(prettyCAU("es1234567890123456aa1fa001999")).toBe(
+      "ES1234567890123456AA1FA001",
+    )
+    expect(prettyCAU("")).toBe("")
   })
 })
 
