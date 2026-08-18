@@ -10,6 +10,10 @@ import { vi } from "vitest"
 import { initI18n } from "../../../../tests/i18n.mock"
 import AddressAutocompletedFieldGurb from "./AddressAutocompletedFieldGurb"
 
+vi.mock("../../../../services/googleApiClient", () => ({
+  searchPlace: vi.fn().mockResolvedValue([]),
+}))
+
 describe("AddressAutocompletedFieldGurb component ", async () => {
   // avoid warnings
   await initI18n()
