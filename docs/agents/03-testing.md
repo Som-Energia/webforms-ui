@@ -53,6 +53,12 @@ Regla practica: intenta que cada test validi un sol comportament important.
 - `it` o `test` per descriure el comportament esperat.
 - `beforeEach` i `afterEach` nomes si realment ajuden a aillar estat o reduir duplicacio.
 
+## Convencio de noms
+
+- Usa `*.test.js` o `*.test.jsx` per unitaris, components i integracio dins de `src/`.
+- Reserva `*.spec.js` per Cypress o proves de tipus E2E/smoke.
+- Mantingues aquesta separacio encara que l'eina pugui acceptar els dos sufixos.
+
 ## Render del component
 
 ### Render simple
