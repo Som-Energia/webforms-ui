@@ -1,7 +1,8 @@
 import { useState } from "react"
 
-import { fireEvent, render, screen } from "@testing-library/react"
-import { expect, vi } from "vitest"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { beforeAll, vi } from "vitest"
 
 import { initI18n } from "../../tests/i18n.mock"
 import NewSomStepper from "./NewSomStepper"
@@ -26,9 +27,10 @@ const StepperWrapper = ({ initialStep = 0, ...props }) => {
   )
 }
 
-describe("SomStepper component ", async () => {
-  // avoid warnings
-  await initI18n()
+describe("NewSomStepper", () => {
+  beforeAll(async () => {
+    await initI18n()
+  })
 
   const renderStepper = (props = {}) => {
     const setActiveStep = props.setActiveStep ?? vi.fn()
@@ -46,28 +48,28 @@ describe("SomStepper component ", async () => {
     }
   }
 
-  describe("SomStepper with steps", () => {
-    test("SomStepper renders", () => {
+  describe("with steps", () => {
+    test("renders the progress bar", () => {
       renderStepper()
 
       expect(screen.getByRole("progressbar")).toBeInTheDocument()
     })
 
-    test("SomStepper renders exact number of steps", () => {
+    test("renders the current step count", () => {
       renderStepper({ activeStep: 1 })
 
       const expectedText = `2/${steps.length}`
       expect(screen.getByText(expectedText)).toBeInTheDocument()
     })
 
-    test("SomStepper limit the max steps number when overflow activeStep", () => {
+    test("caps the visible step count when activeStep overflows", () => {
       renderStepper({ activeStep: 99 })
 
       const expectedText = `${steps.length}/${steps.length}`
       expect(screen.getByText(expectedText)).toBeInTheDocument()
     })
 
-    test("SomStepper renders the step title when enabled", () => {
+    test("renders the step title when enabled", () => {
       renderStepper({ activeStep: 1, showStepTitle: true })
 
       const expectedStepTitle = `STEP_TITLE 2/${steps.length}`
@@ -79,7 +81,7 @@ describe("SomStepper component ", async () => {
       ).toBeInTheDocument()
     })
 
-    test("SomStepper renders a custom step title key when provided", () => {
+    test("renders a custom step title key when provided", () => {
       renderStepper({
         activeStep: 1,
         showStepTitle: true,
@@ -94,14 +96,14 @@ describe("SomStepper component ", async () => {
       ).toBeInTheDocument()
     })
 
-    test("SomStepper does not render the step title when disabled", () => {
+    test("does not render the step title when disabled", () => {
       renderStepper({ activeStep: 1, showStepTitle: false })
 
       expect(screen.queryByText("STEP_TITLE")).not.toBeInTheDocument()
       expect(screen.getByText(`2/${steps.length}`)).toBeInTheDocument()
     })
 
-    test("SomStepper renders with progressbar", () => {
+    test("renders the expected progress value", () => {
       const activeStep = 1
       renderStepper({ activeStep })
 
@@ -119,37 +121,41 @@ describe("SomStepper component ", async () => {
       expect(expectedValue).toBe(progressValue)
     })
 
-    test("SomStepper renders the active step content by default", () => {
+    test("renders the active step content by default", () => {
       renderStepper({ activeStep: 1 })
 
       expect(screen.getByText("DARLING")).toBeInTheDocument()
       expect(screen.queryByText("HELLO")).not.toBeInTheDocument()
     })
 
-    test("SomStepper gives priority to children over the step content", () => {
+    test("gives priority to children over the step content", () => {
       renderStepper({ activeStep: 1, children: <div>OVERRIDE CONTENT</div> })
 
       expect(screen.getByText("OVERRIDE CONTENT")).toBeInTheDocument()
       expect(screen.queryByText("DARLING")).not.toBeInTheDocument()
     })
 
-    test("SomStepper advances to the next step when clicking next", () => {
+    test("advances to the next step when clicking next", async () => {
+      const user = userEvent.setup()
+
       render(<StepperWrapper initialStep={0} />)
 
-      fireEvent.click(screen.getByRole("button", { name: "NEXT" }))
+      await user.click(screen.getByRole("button", { name: "NEXT" }))
 
       expect(screen.getByText("DARLING")).toBeInTheDocument()
     })
 
-    test("SomStepper goes back to the previous step when clicking prev", () => {
+    test("goes back to the previous step when clicking prev", async () => {
+      const user = userEvent.setup()
+
       render(<StepperWrapper initialStep={1} />)
 
-      fireEvent.click(screen.getByRole("button", { name: "PREV" }))
+      await user.click(screen.getByRole("button", { name: "PREV" }))
 
       expect(screen.getByText("HELLO")).toBeInTheDocument()
     })
 
-    test("SomStepper shows only the next button on the first step", () => {
+    test("shows only the next button on the first step", () => {
       renderStepper({ activeStep: 0, disableNext: false })
 
       expect(
@@ -158,14 +164,14 @@ describe("SomStepper component ", async () => {
       expect(screen.getByRole("button", { name: "NEXT" })).toBeInTheDocument()
     })
 
-    test("SomStepper shows prev and next buttons on intermediate steps", () => {
+    test("shows prev and next buttons on intermediate steps", () => {
       renderStepper({ activeStep: 1, disableNext: false })
 
       expect(screen.getByRole("button", { name: "PREV" })).toBeInTheDocument()
       expect(screen.getByRole("button", { name: "NEXT" })).toBeInTheDocument()
     })
 
-    test("SomStepper hides prev and keeps next on the last step", () => {
+    test("hides prev and keeps next on the last step", () => {
       renderStepper({ activeStep: steps.length - 1, disableNext: false })
 
       expect(
@@ -174,7 +180,7 @@ describe("SomStepper component ", async () => {
       expect(screen.getByRole("button", { name: "NEXT" })).toBeInTheDocument()
     })
 
-    test("SomStepper hides the next button after the last step", () => {
+    test("hides the next button after the last step", () => {
       renderStepper({ activeStep: steps.length })
 
       expect(
@@ -182,13 +188,13 @@ describe("SomStepper component ", async () => {
       ).not.toBeInTheDocument()
     })
 
-    test("SomStepper disables the default next button when requested", () => {
+    test("disables the default next button when requested", () => {
       renderStepper({ disableNext: true })
 
       expect(screen.getByRole("button", { name: "NEXT" })).toBeDisabled()
     })
 
-    test("SomStepper renders a custom next button instead of the default one", () => {
+    test("renders a custom next button instead of the default one", () => {
       renderStepper({
         nextButton: <button type="button">CUSTOM NEXT</button>,
       })
@@ -201,7 +207,7 @@ describe("SomStepper component ", async () => {
       ).not.toBeInTheDocument()
     })
 
-    test("SomStepper hides the progress header when disabled", () => {
+    test("hides the progress header when disabled", () => {
       renderStepper({ showStepProgress: false, showStepTitle: true })
 
       expect(screen.queryByText(/STEP_TITLE/)).not.toBeInTheDocument()
@@ -209,19 +215,19 @@ describe("SomStepper component ", async () => {
     })
   })
 
-  describe("SomStepper without steps", () => {
-    test("SomStepper renders", () => {
+  describe("without steps", () => {
+    test("does not render the progress bar", () => {
       render(<NewSomStepper />)
       expect(screen.queryByRole("progressbar")).not.toBeInTheDocument()
     })
 
-    test("SomStepper without the steps progressbar header", () => {
+    test("does not render the progress header when disabled", () => {
       render(<NewSomStepper showStepProgress={false}>Content</NewSomStepper>)
 
       expect(screen.queryByText("STEP_TITLE")).not.toBeInTheDocument()
     })
 
-    test("SomStepper renders children without steps", () => {
+    test("renders children without steps", () => {
       render(<NewSomStepper>Content</NewSomStepper>)
 
       expect(screen.getByText("Content")).toBeInTheDocument()
