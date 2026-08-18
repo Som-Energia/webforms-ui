@@ -6,7 +6,8 @@
 - `npm test`: executa `vitest`.
 - `npm run test:coverage`: cobertura.
 - `npm run lint`: `eslint` sobre `js` i `jsx`.
-- `npm run format -- <ruta-del-fitxer>`: formata nomes els fitxers editats.
+- `npm run format`: executa `prettier --write .` sobre tot el repo.
+- `npx prettier --write <ruta-del-fitxer>`: formata nomes els fitxers editats.
 - `npm run cypress`: obre Cypress.
 - `npm run cypress:smoke`: smoke contra config de produccio.
 - `npm run build`: executa `lint:todos`, injecta `VITE_APP_VERSION` i fa el build Vite cap a `forms/`.
@@ -27,5 +28,6 @@
 
 - Si el canvi es de codi pur, comenca per `npm test`.
 - Si has tocat imports, rutes o build-time env, afegeix `npm run build`.
-- Si has tocat fitxers de codi, passa `npm run format -- <ruta-del-fitxer>` abans de tancar el canvi.
+- Si has tocat fitxers de codi, passa format abans de tancar el canvi.
+- Si nomes vols tocar els fitxers editats, prefereix `npx prettier --write <ruta-del-fitxer>`.
 - Si has tocat UX d'un formulari principal, considera Cypress a mes del test unitari.
