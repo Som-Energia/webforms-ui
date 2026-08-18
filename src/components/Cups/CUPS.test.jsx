@@ -99,9 +99,20 @@ describe("Cups component", () => {
   test("Cups renders showing invalid error message through checkCups rejection", async () => {
     vi.mocked(checkCups).mockRejectedValue({})
     const invalidCups = "ES0000000000000000000"
-    await renderComponent({ cupsNumber: invalidCups })
+    const setValuesSpy = vi.fn()
+    await renderComponent({ cupsNumber: invalidCups, setValues: setValuesSpy })
     const errorMessage = await screen.findByText("Invalid field")
     expect(errorMessage).toBeInTheDocument()
+
+    const [updater] = setValuesSpy.mock.lastCall
+
+    expect(updater({ existing: true })).toEqual(
+      expect.objectContaining({
+        existing: true,
+        cups_valid: false,
+        social_tariff: false,
+      }),
+    )
   })
 
   test("CheckCups with resolved inactive contract response", async () => {
