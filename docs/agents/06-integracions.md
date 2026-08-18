@@ -11,6 +11,7 @@
 
 - `src/trackers/matomo/MatomoProvider.jsx` exposa `trackEvent()` via context.
 - Alguns fluxos, com `NewMember` i `NewContractMember`, emeten events de pas i enviament.
+- Hi ha tambe tracking puntual amb `Plausible`, per exemple des de `src/trackers/plausible/index.js` i components com `TariffSelector`.
 - Tambe hi ha rastreig pixel en alguns formularis nous.
 
 ## Pagament i signatura
