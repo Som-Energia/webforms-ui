@@ -1,7 +1,7 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined"
 
-import { render, screen, within } from "@testing-library/react"
+import { fireEvent, render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
 
@@ -114,8 +114,7 @@ describe("Chooser", () => {
     expect(handleChange).toHaveBeenCalledWith("b")
   })
 
-  test("allows selecting an option with Space", async () => {
-    const user = userEvent.setup()
+  test("allows selecting an option with the literal space key", () => {
     const handleChange = vi.fn()
 
     render(
@@ -130,9 +129,28 @@ describe("Chooser", () => {
     const buttons = screen.getAllByRole("button")
     buttons[1].focus()
 
-    await user.keyboard(" ")
+    fireEvent.keyDown(buttons[1], { key: " " })
 
     expect(handleChange).toHaveBeenCalledWith("b")
+  })
+
+  test("does not select an option for unrelated keys", () => {
+    const handleChange = vi.fn()
+
+    render(
+      <Chooser
+        name="chooser-name"
+        value={"a"}
+        options={chooserOptions}
+        handleChange={handleChange}
+      />,
+    )
+
+    const buttons = screen.getAllByRole("button")
+
+    fireEvent.keyDown(buttons[1], { key: "Escape" })
+
+    expect(handleChange).not.toHaveBeenCalled()
   })
 
   test("renders the selected indicator only for the selected option", () => {
