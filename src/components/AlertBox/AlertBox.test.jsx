@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 
 import AlertBox from "./AlertBox"
 
-describe("AlertBox component ", () => {
+describe("AlertBox", () => {
   const renderAlert = (props = {}) =>
     render(
       <AlertBox
@@ -14,11 +14,12 @@ describe("AlertBox component ", () => {
     )
 
   test.each(["warning", "success", "error", "info"])(
-    'AlertBox render with severity="%s"',
+    'renders an alert with severity "%s"',
     (severity) => {
       renderAlert({ severity })
 
-      expect(screen.getByTestId(`alert-${severity}`)).toBeInTheDocument()
+      expect(screen.getByRole("alert")).toBeInTheDocument()
+      expect(screen.getByText("Test Header")).toBeInTheDocument()
     },
   )
 
@@ -53,9 +54,10 @@ describe("AlertBox component ", () => {
   })
 
   test("does not render an icon when icon prop is not provided", () => {
-    const { container } = renderAlert()
+    renderAlert()
+    const alert = screen.getByRole("alert")
 
-    expect(container.querySelector("svg")).not.toBeInTheDocument()
+    expect(alert.querySelector("svg")).not.toBeInTheDocument()
   })
 
   test.each([
@@ -64,10 +66,10 @@ describe("AlertBox component ", () => {
     ["success", "CheckCircleOutlineIcon"],
     ["info", "InfoOutlinedIcon"],
     ["unexpected-value", "InfoOutlinedIcon"],
-  ])("renders %s custom icon correctly", (icon, expectedTestId) => {
+  ])("renders the %s custom icon", (icon, expectedTestId) => {
     renderAlert({ icon })
 
-    expect(screen.getByTestId(expectedTestId)).toBeInTheDocument()
+    expect(within(screen.getByRole("alert")).getByTestId(expectedTestId)).toBeInTheDocument()
   })
 
   test("applies the provided text alignment", () => {
