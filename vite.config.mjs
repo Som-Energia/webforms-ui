@@ -62,6 +62,9 @@ export default createAppConfig(({ mode }) => {
         inline: ["@emotion/styled", "@emotion/react"],
       },
     },
+    preview: {
+      open: false
+    },
     test: {
       exclude: ["**/node_modules/**", "**/cypress/**"],
       setupFiles: "./src/tests/setupTests.js",
