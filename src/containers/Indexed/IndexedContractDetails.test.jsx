@@ -3,7 +3,7 @@ import { vi } from "vitest"
 
 import IndexedContractDetails from "./IndexedContractDetails"
 
-vi.mock("react-i18next", () => require("../../tests/__mocks__/i18n"))
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
 describe("Test the correctly render", () => {
   const mockData = {
