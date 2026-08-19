@@ -33,13 +33,14 @@ export default createAppConfig(({ mode }) => {
     plugins: [
       react(),
       svgr(),
-      eslint({
-        build: true,
-        lintOnStart: true,
-        emitWarning: false,
-        cache: false,
-        include: ["src/**/*.{js,jsx}"],
-      }),
+      mode !== "test" &&
+        eslint({
+          build: true,
+          lintOnStart: true,
+          emitWarning: false,
+          cache: false,
+          include: ["src/**/*.{js,jsx}"],
+        }),
     ],
     build: {
       outDir: "forms",
@@ -67,7 +68,7 @@ export default createAppConfig(({ mode }) => {
       allowedHosts: [".up.railway.app"],
     },
     test: {
-      exclude: ["**/node_modules/**", "**/cypress/**"],
+      exclude: ["**/node_modules/**", "**/cypress/**", "**/tests/**"],
       setupFiles: "./src/tests/setupTests.js",
       coverage: {
         reporter: ["text", "json", "html"],
@@ -78,6 +79,7 @@ export default createAppConfig(({ mode }) => {
           "**/scripts/**",
           "**/public/**",
           "**/cypress/**",
+          "**/tests/**",
         ],
       },
     },
