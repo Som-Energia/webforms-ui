@@ -10,7 +10,7 @@ import GenerationContext, {
   GenerationContextProvider,
 } from "./GenerationContext"
 
-vi.mock("react-i18next", () => require("../../../tests/__mocks__/i18n"))
+vi.mock("react-i18next", async () => import("../../../tests/__mocks__/i18n.js"))
 
 const ContextConsumer = () => {
   const {
