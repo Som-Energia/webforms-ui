@@ -1,16 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import { beforeAll, vi } from "vitest"
+import { vi } from "vitest"
 
-import { initI18n } from "../../tests/i18n.mock"
 import InputField from "./InputField"
 
-describe("InputField component", () => {
-  beforeAll(async () => {
-    await initI18n({
-      ERROR: "Error translation",
-    })
-  })
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
+describe("InputField component", () => {
   test("renders the input using the provided name", () => {
     render(<InputField name="NAME" />)
 
@@ -40,14 +35,14 @@ describe("InputField component", () => {
   test("renders the translated error when touched", async () => {
     render(<InputField name="NAME" error="ERROR" touched={true} />)
 
-    const error = await screen.findByText("Error translation")
+    const error = await screen.findByText("ERROR")
     expect(error).toBeInTheDocument()
   })
 
   test("does not render the error when not touched", () => {
     render(<InputField name="NAME" error="ERROR" touched={false} />)
 
-    expect(screen.queryByText("Error translation")).not.toBeInTheDocument()
+    expect(screen.queryByText("ERROR")).not.toBeInTheDocument()
   })
 
   test("renders the info helper icon when requested", () => {

@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { beforeAll, describe, expect, test, vi } from "vitest"
+import { describe, expect, test, vi } from "vitest"
 
 import PopUpContext from "../context/PopUpContext"
-import { initI18n } from "../tests/i18n.mock"
 import SimpleDialog from "./SimpleDialog"
+
+vi.mock("react-i18next", async () => import("../tests/__mocks__/i18n.js"))
 
 const renderDialog = (props = {}) => {
   return render(
@@ -15,13 +16,6 @@ const renderDialog = (props = {}) => {
 }
 
 describe("SimpleDialog", () => {
-  beforeAll(async () => {
-    await initI18n({
-      GENERATION_ADD_CONTRACT_LIST_CANCEL: "Cancel",
-      GENERATION_ADD_CONTRACT_LIST_ACCEPT: "Accept",
-    })
-  })
-
   test("renders the dialog title and text", async () => {
     renderDialog({ title: "Dialog title", text: "Dialog body" })
 
@@ -38,10 +32,14 @@ describe("SimpleDialog", () => {
     })
 
     expect(
-      await screen.findByRole("button", { name: "Accept" }),
+      await screen.findByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_ACCEPT",
+      }),
     ).toBeInTheDocument()
     expect(
-      screen.queryByRole("button", { name: "Cancel" }),
+      screen.queryByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_CANCEL",
+      }),
     ).not.toBeInTheDocument()
   })
 
@@ -53,10 +51,14 @@ describe("SimpleDialog", () => {
     })
 
     expect(
-      await screen.findByRole("button", { name: "Cancel" }),
+      await screen.findByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_CANCEL",
+      }),
     ).toBeInTheDocument()
     expect(
-      screen.queryByRole("button", { name: "Accept" }),
+      screen.queryByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_ACCEPT",
+      }),
     ).not.toBeInTheDocument()
   })
 
@@ -70,7 +72,11 @@ describe("SimpleDialog", () => {
       acceptFunction,
     })
 
-    await user.click(screen.getByRole("button", { name: "Accept" }))
+    await user.click(
+      screen.getByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_ACCEPT",
+      }),
+    )
 
     expect(acceptFunction).toHaveBeenCalledTimes(1)
   })
@@ -85,7 +91,11 @@ describe("SimpleDialog", () => {
       cancelFunction,
     })
 
-    await user.click(screen.getByRole("button", { name: "Cancel" }))
+    await user.click(
+      screen.getByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_CANCEL",
+      }),
+    )
 
     expect(cancelFunction).toHaveBeenCalledTimes(1)
   })
@@ -99,10 +109,14 @@ describe("SimpleDialog", () => {
     })
 
     expect(
-      await screen.findByRole("button", { name: "Accept" }),
+      await screen.findByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_ACCEPT",
+      }),
     ).toBeInTheDocument()
     expect(
-      await screen.findByRole("button", { name: "Cancel" }),
+      await screen.findByRole("button", {
+        name: "GENERATION_ADD_CONTRACT_LIST_CANCEL",
+      }),
     ).toBeInTheDocument()
   })
 })

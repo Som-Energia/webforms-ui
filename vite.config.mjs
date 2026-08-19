@@ -68,6 +68,7 @@ export default createAppConfig(({ mode }) => {
       allowedHosts: [".up.railway.app"],
     },
     test: {
+      css: false,
       exclude: ["**/node_modules/**", "**/cypress/**", "**/tests/**"],
       setupFiles: "./src/tests/setupTests.js",
       coverage: {
