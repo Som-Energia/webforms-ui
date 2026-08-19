@@ -8,7 +8,6 @@ import InputField from "../../../components/InputField/InputField"
 import LoadingContext from "../../../context/LoadingContext"
 import { checkMember } from "../../../services/api"
 
-// TODO: generalize in common pages
 const LinkMemberDetails = (props) => {
   const {
     values,

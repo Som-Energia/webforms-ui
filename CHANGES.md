@@ -453,7 +453,7 @@
 - Fix: Infinite loop on remote CAU validation
 - Fix: Recovered pretty format on CAU, IBAN and Cadaster
 - Fix: Recovered the Checking... message and spiner in CAU, IBAN, Cadaster
-- CI for the unit test (TODO: ci for cypress)
+- CI for the unit test
 - CI activated chat notifications
 
 ## 2.3.15 2024-10-22
