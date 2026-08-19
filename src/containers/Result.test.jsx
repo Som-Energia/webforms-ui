@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react"
-import { beforeAll, beforeEach, describe, expect, test, vi } from "vitest"
+import { beforeEach, describe, expect, test, vi } from "vitest"
 
-import { initI18n } from "../tests/i18n.mock"
 import Result from "./Result"
+
+vi.mock("react-i18next", async () => import("../tests/__mocks__/i18n.js"))
 
 const { mockUseParams, mockUseSyncLanguage } = vi.hoisted(() => ({
   mockUseParams: vi.fn(),
@@ -28,15 +29,6 @@ vi.mock("../hooks/useTranslateOptions", async () => {
 })
 
 describe("Result", () => {
-  beforeAll(async () => {
-    await initI18n({
-      SUCCESS_TITLE: "Success title",
-      SUCCESS_TEXT: "Success text",
-      FAILURE_TEXT: "Failure text",
-      CUSTOM_TITLE: "Custom translated title",
-    })
-  })
-
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseParams.mockReturnValue({ language: "ca" })
@@ -46,8 +38,8 @@ describe("Result", () => {
     render(<Result mode="success" showHeader />)
 
     expect(mockUseSyncLanguage).toHaveBeenCalledWith("ca")
-    expect(screen.getByText("Success title")).toBeInTheDocument()
-    expect(screen.getByText("Success text")).toBeInTheDocument()
+    expect(screen.getByText("SUCCESS_TITLE")).toBeInTheDocument()
+    expect(screen.getByText("SUCCESS_TEXT")).toBeInTheDocument()
     expect(screen.getByTestId("CheckCircleIcon")).toBeInTheDocument()
     expect(screen.queryByTestId("CancelIcon")).not.toBeInTheDocument()
   })
@@ -55,10 +47,10 @@ describe("Result", () => {
   test("renders the failure state with default failure title and no header", () => {
     render(<Result mode="failure" showHeader={false} />)
 
-    expect(screen.getByText("Failure text")).toBeInTheDocument()
+    expect(screen.getByText("FAILURE_TEXT")).toBeInTheDocument()
     expect(screen.getByTestId("CancelIcon")).toBeInTheDocument()
     expect(screen.queryByTestId("CheckCircleIcon")).not.toBeInTheDocument()
-    expect(screen.queryByText("Success title")).not.toBeInTheDocument()
+    expect(screen.queryByText("SUCCESS_TITLE")).not.toBeInTheDocument()
   })
 
   test("renders custom title, subtitle, description and children", () => {
@@ -72,7 +64,7 @@ describe("Result", () => {
       </Result>,
     )
 
-    expect(screen.getByText("Custom translated title")).toBeInTheDocument()
+    expect(screen.getByText("CUSTOM_TITLE")).toBeInTheDocument()
     expect(screen.getByText("Custom subtitle")).toBeInTheDocument()
     expect(screen.getByText("Custom description")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Continue" })).toBeInTheDocument()
@@ -81,7 +73,7 @@ describe("Result", () => {
   test("falls back to failure title when mode is not success and no custom title is provided", () => {
     render(<Result mode="unknown" />)
 
-    expect(screen.getByText("Failure text")).toBeInTheDocument()
+    expect(screen.getByText("FAILURE_TEXT")).toBeInTheDocument()
     expect(screen.queryByTestId("CheckCircleIcon")).not.toBeInTheDocument()
     expect(screen.queryByTestId("CancelIcon")).not.toBeInTheDocument()
   })

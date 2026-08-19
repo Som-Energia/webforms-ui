@@ -12,9 +12,10 @@ import {
 import { beforeEach, vi } from "vitest"
 
 import { checkCups } from "../../services/api"
-import { initI18n } from "../../tests/i18n.mock"
 import WebFormsTheme from "../../themes/webforms"
 import Cups from "./CUPS"
+
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
 // Mock the checkCups function
 vi.mock("../../services/api", () => ({
@@ -30,14 +31,6 @@ const renderComponent = async ({
   setFieldTouched = () => {},
   touched = { cups: true },
 } = {}) => {
-  await initI18n({
-    ERROR_INVALID_FIELD: "Invalid field",
-    CUPS_FIELD: "CUPS",
-    CUPS_HELPER_TEXT: "Helper text",
-    CUPS_HELPER_LINK: "Helper link",
-    CUPS_HELPER_URL: "https://example.com/cups",
-  })
-
   return render(
     <CupsWrapperComponent
       cupsNumber={cupsNumber}
@@ -101,7 +94,7 @@ describe("Cups component", () => {
     const invalidCups = "ES0000000000000000000"
     const setValuesSpy = vi.fn()
     await renderComponent({ cupsNumber: invalidCups, setValues: setValuesSpy })
-    const errorMessage = await screen.findByText("Invalid field")
+    const errorMessage = await screen.findByText("ERROR_INVALID_FIELD")
     expect(errorMessage).toBeInTheDocument()
 
     const [updater] = setValuesSpy.mock.lastCall

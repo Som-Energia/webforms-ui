@@ -64,6 +64,7 @@ export default createAppConfig(({ mode }) => {
       },
     },
     test: {
+      css: false,
       exclude: ["**/node_modules/**", "**/cypress/**", "**/tests/**"],
       setupFiles: "./src/tests/setupTests.js",
       coverage: {

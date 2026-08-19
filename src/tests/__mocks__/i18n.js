@@ -6,7 +6,7 @@ export const useTranslation = () => ({
   },
 })
 
-export const Trans = ({ children }) => children
+export const Trans = ({ children, i18nKey }) => children ?? i18nKey
 
 export const Translation = ({ children }) =>
   children((key) => key, { i18n: {} })
