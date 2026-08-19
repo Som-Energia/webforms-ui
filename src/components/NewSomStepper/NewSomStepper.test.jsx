@@ -2,10 +2,11 @@ import { useState } from "react"
 
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { beforeAll, vi } from "vitest"
+import { vi } from "vitest"
 
-import { initI18n } from "../../tests/i18n.mock"
 import NewSomStepper from "./NewSomStepper"
+
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
 const steps = [
   <div key={0}>HELLO</div>,
@@ -28,10 +29,6 @@ const StepperWrapper = ({ initialStep = 0, ...props }) => {
 }
 
 describe("NewSomStepper", () => {
-  beforeAll(async () => {
-    await initI18n()
-  })
-
   const renderStepper = (props = {}) => {
     const setActiveStep = props.setActiveStep ?? vi.fn()
 

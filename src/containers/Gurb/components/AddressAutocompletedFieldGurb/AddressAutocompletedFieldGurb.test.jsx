@@ -7,17 +7,18 @@ import {
 } from "@testing-library/react"
 import { vi } from "vitest"
 
-import { initI18n } from "../../../../tests/i18n.mock"
 import AddressAutocompletedFieldGurb from "./AddressAutocompletedFieldGurb"
+
+vi.mock(
+  "react-i18next",
+  async () => import("../../../../tests/__mocks__/i18n.js"),
+)
 
 vi.mock("../../../../services/googleApiClient", () => ({
   searchPlace: vi.fn().mockResolvedValue([]),
 }))
 
-describe("AddressAutocompletedFieldGurb component ", async () => {
-  // avoid warnings
-  await initI18n()
-
+describe("AddressAutocompletedFieldGurb component ", () => {
   test("AddressAutocompletedFieldGurb renders without crashing", () => {
     const dom = render(<AddressAutocompletedFieldGurb value="Montilivi" />)
 
