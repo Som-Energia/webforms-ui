@@ -1,14 +1,13 @@
 import { render } from "@testing-library/react"
+import { vi } from "vitest"
 
-import { initI18n } from "../../tests/i18n.mock"
 import SomStepper from "./SomStepper"
+
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
 const steps = { STEP1: 1, STEP2: 2, STEP3: 3 }
 
-describe("SomStepper component ", async () => {
-  // avoid warnings
-  await initI18n()
-
+describe("SomStepper component ", () => {
   describe("SomStepper with steps object", () => {
     test("SomStepper renders without crashing", () => {
       const { getByRole } = render(<SomStepper steps={steps} activeStep={1} />)

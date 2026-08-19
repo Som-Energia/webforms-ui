@@ -6,17 +6,14 @@ import {
   render,
   screen,
 } from "@testing-library/react"
-import { beforeAll } from "vitest"
+import { vi } from "vitest"
 
 import { DefaultTariff, Tariffs } from "../../data/tariff"
-import { initI18n } from "../../tests/i18n.mock"
 import TariffSelector from "./TariffSelector"
 
-describe("TariffSelector component", () => {
-  beforeAll(async () => {
-    await initI18n()
-  })
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
+describe("TariffSelector component", () => {
   const TariffSelectorWrapper = () => {
     const [tariff, setTariff] = useState(DefaultTariff)
 

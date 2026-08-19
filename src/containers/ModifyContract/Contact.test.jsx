@@ -2,8 +2,9 @@ import { queryByAttribute, render, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
 
-import { initI18n } from "../../tests/i18n.mock"
 import Contact from "./Contact"
+
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
 const renderContact = () =>
   render(
@@ -14,9 +15,7 @@ const renderContact = () =>
     />,
   )
 
-describe("Contact", async () => {
-  await initI18n()
-
+describe("Contact", () => {
   const getById = queryByAttribute.bind(null, "id")
 
   test("keeps submit disabled until the contact details are valid", async () => {

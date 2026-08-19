@@ -1,12 +1,11 @@
 import { queryByAttribute, render, screen } from "@testing-library/react"
+import { vi } from "vitest"
 
-import { initI18n } from "../../tests/i18n.mock"
 import PrevButton from "./PrevButton"
 
-describe("PrevButton component ", async () => {
-  // avoid warnings
-  await initI18n()
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
+describe("PrevButton component ", () => {
   test("PrevButton renders without crashing", () => {
     const dom = render(<PrevButton />)
 
