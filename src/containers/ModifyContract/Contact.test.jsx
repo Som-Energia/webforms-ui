@@ -27,11 +27,11 @@ describe("Contact", () => {
 
     const inputName = getById(dom.container, "contactName")
     await user.type(inputName, "Aitor")
-    await waitFor(() => expect(submitButton).toBeDisabled())
+    expect(submitButton).toBeDisabled()
 
     const inputSurname = getById(dom.container, "contactSurname")
     await user.type(inputSurname, "Menta")
-    await waitFor(() => expect(submitButton).toBeDisabled())
+    expect(submitButton).toBeDisabled()
 
     const inputPhone = getById(dom.container, "phone")
     await user.type(inputPhone, "666666666")
