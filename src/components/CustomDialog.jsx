@@ -1,26 +1,31 @@
-import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import PopUpContext from '../context/PopUpContext';
+import React from "react"
 
+import Dialog from "@mui/material/Dialog"
+
+import PopUpContext from "../context/PopUpContext"
 
 const customStyles = (withBackground, additionalStyles = {}) => ({
   sx: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    backgroundColor: withBackground ? 'white' : 'transparent',
+    backgroundColor: withBackground ? "white" : "transparent",
     ...additionalStyles,
-  }
+  },
 })
 
-function CustomDialog({ children, withBackground, blockHandleClose, paperStyles }) {
-
+function CustomDialog({
+  children,
+  withBackground,
+  blockHandleClose,
+  paperStyles,
+}) {
   const { setContent } = React.useContext(PopUpContext)
 
   const handleClose = () => {
     if (!blockHandleClose) {
-      setContent(undefined);
+      setContent(undefined)
     }
-  };
+  }
 
   return (
     <Dialog
@@ -30,15 +35,14 @@ function CustomDialog({ children, withBackground, blockHandleClose, paperStyles 
       slotProps={{
         backdrop: {
           sx: {
-            backgroundColor: 'background.customDialog',
-          }
-        }
+            backgroundColor: "background.customDialog",
+          },
+        },
       }}
-      id='custom-dialog'
-    >
+      id="custom-dialog">
       {children}
     </Dialog>
-  );
+  )
 }
 
 export default CustomDialog

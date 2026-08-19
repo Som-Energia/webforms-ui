@@ -1,23 +1,22 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
 
-import Chooser from '../../components/OldComponents/Chooser'
-import StepHeader from '../../components/OldComponents/StepHeader'
+import Chooser from "../../components/OldComponents/Chooser"
+import StepHeader from "../../components/OldComponents/StepHeader"
 
 function HolderCase(props) {
   const { t } = useTranslation()
   const { setFieldValue } = props
 
   const handleChange = ({ option }) => {
-    setFieldValue('member.link_member', option)
+    setFieldValue("member.link_member", option)
   }
 
   return (
     <>
-      <StepHeader title={ t('HOLDER_CASE_TITLE')} />
+      <StepHeader title={t("HOLDER_CASE_TITLE")} />
       <Box className="step-body">
         <Box mt={3} mb={4}>
           <Chooser
@@ -25,15 +24,15 @@ function HolderCase(props) {
             value={props.values.member.link_member}
             options={[
               {
-                id: 'holder-case-link-member',
+                id: "holder-case-link-member",
                 value: true,
-                label: t('HOLDER_CASE_YES_LABEL'),
+                label: t("HOLDER_CASE_YES_LABEL"),
               },
               {
-                id: 'holder-case-pass',
+                id: "holder-case-pass",
                 value: false,
-                label: t('HOLDER_CASE_NO_LABEL'),
-              }
+                label: t("HOLDER_CASE_NO_LABEL"),
+              },
             ]}
             canBeEmpty={false}
           />

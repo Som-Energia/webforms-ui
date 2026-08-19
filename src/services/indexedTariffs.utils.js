@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs from "dayjs"
 
 // Percentage for color gradient according to the mean price for the last 7 days
 const PERCENTAGE_MEAN = 20 / 100 // 20%
@@ -18,7 +18,7 @@ function validateParameters(fromDate, selectedDate, prices) {
   selectedDay.setHours(0)
 
   // Check for empty dates or empty prices array
-  if (fromDate === '' || selectedDate === '' || prices.length === 0) {
+  if (fromDate === "" || selectedDate === "" || prices.length === 0) {
     return true // Parameters are invalid
   }
 
@@ -39,11 +39,11 @@ function validateParameters(fromDate, selectedDate, prices) {
  */
 export function computeTotals(fromDate, selectedDate, prices) {
   let totalPrices = {
-    MIN: '0',
-    MAX: '0',
-    AVERAGE: '0',
-    WEEKLY_AVERAGE: '0',
-    BASE_DAYS_COMPUTATION: '0',
+    MIN: "0",
+    MAX: "0",
+    AVERAGE: "0",
+    WEEKLY_AVERAGE: "0",
+    BASE_DAYS_COMPUTATION: "0",
   }
 
   if (validateParameters(fromDate, selectedDate, prices)) {
@@ -57,16 +57,24 @@ export function computeTotals(fromDate, selectedDate, prices) {
   )
 
   if (acumWeek > 0) {
-    totalPrices['WEEKLY_AVERAGE'] = String((acumWeek / baseDaysComputation).toFixed(6)).replace('.', ',')
-    totalPrices['BASE_DAYS_COMPUTATION'] = baseDaysComputation / 24
+    totalPrices["WEEKLY_AVERAGE"] = String(
+      (acumWeek / baseDaysComputation).toFixed(6),
+    ).replace(".", ",")
+    totalPrices["BASE_DAYS_COMPUTATION"] = baseDaysComputation / 24
   }
   if (acumDay > 0) {
-    totalPrices['AVERAGE'] = String((acumDay / dayPrices.length).toFixed(6)).replace('.', ',')
-    totalPrices['MAX'] = String(
-      Math.max(...dayPrices.map((item) => item.value)).toFixed(6).replace('.', ','),
+    totalPrices["AVERAGE"] = String(
+      (acumDay / dayPrices.length).toFixed(6),
+    ).replace(".", ",")
+    totalPrices["MAX"] = String(
+      Math.max(...dayPrices.map((item) => item.value))
+        .toFixed(6)
+        .replace(".", ","),
     )
-    totalPrices['MIN'] = String(
-      Math.min(...dayPrices.map((item) => item.value)).toFixed(6).replace('.', ','),
+    totalPrices["MIN"] = String(
+      Math.min(...dayPrices.map((item) => item.value))
+        .toFixed(6)
+        .replace(".", ","),
     )
   }
 
@@ -101,7 +109,7 @@ function computeBaseValues(fromDate, selectedDate, prices) {
       lastWeekPrices.push(data)
       baseDaysComputation += 1
     }
-    if (currentDateDay == selectedDay.getDate()) {
+    if (currentDateDay === selectedDay.getDate()) {
       dayPrices.push(data)
     }
   })
@@ -130,7 +138,7 @@ export function transformIndexedTariffPrices(fromDate, selectedDate, prices) {
   // build the periods array of dicts
   let periods = []
   dayPrices.forEach((data) => {
-    const pre = today <= data?.date ? '' : 'past_'
+    const pre = today <= data?.date ? "" : "past_"
     // choose the "number" we need
     if (data.value + day_average * PERCENTAGE_MEAN < day_average) {
       data[`${pre}low`] = data.value
@@ -144,14 +152,14 @@ export function transformIndexedTariffPrices(fromDate, selectedDate, prices) {
   // TODO: check where to define these colors
   return {
     fills: {
-      low: '#cbdc49',
-      average: '#71a150',
-      up: '#778462',
-      past_low: '#cbdc4980',
-      past_average: '#71a15080',
-      past_up: '#77846280',
+      low: "#cbdc49",
+      average: "#71a150",
+      up: "#778462",
+      past_low: "#cbdc4980",
+      past_average: "#71a15080",
+      past_up: "#77846280",
     },
-    keys: ['low', 'average', 'up', 'past_low', 'past_average', 'past_up'],
+    keys: ["low", "average", "up", "past_low", "past_average", "past_up"],
     periods: periods,
     week_average: week_average,
     day_average: day_average,
@@ -179,10 +187,16 @@ export function time2index(referenceTimestamp, timestamp) {
 }
 
 export function index2time(referenceTimestamp, index) {
-  return new Date(new Date(referenceTimestamp).getTime() + index * 60 * 60 * 1000)
+  return new Date(
+    new Date(referenceTimestamp).getTime() + index * 60 * 60 * 1000,
+  )
 }
 
-export function array2datapoints(first_timestamp, values, step_ms = 60 * 60 * 1000) {
+export function array2datapoints(
+  first_timestamp,
+  values,
+  step_ms = 60 * 60 * 1000,
+) {
   const base = first_timestamp.getTime()
   return values.map((value, i) => {
     return {
@@ -195,7 +209,10 @@ export function array2datapoints(first_timestamp, values, step_ms = 60 * 60 * 10
 export function sliceTimeRange(timeOffset, values, indexStart, indexEnd) {
   var adjustedIndexStart = Math.max(0, indexStart)
   const newTimeOffset = index2time(timeOffset, adjustedIndexStart)
-  return array2datapoints(newTimeOffset, values.slice(adjustedIndexStart, indexEnd))
+  return array2datapoints(
+    newTimeOffset,
+    values.slice(adjustedIndexStart, indexEnd),
+  )
 }
 
 export function getSliceIndexes(offsetDate, currentTime) {
@@ -227,19 +244,27 @@ export function dayIsMissing(periods) {
 }
 
 export function computeMaxYAxisValue(totalPrices, tickCount = 7) {
-  let maxYAxisValue = totalPrices['MAX']
-  let weekly_average_price = parseFloat(totalPrices['WEEKLY_AVERAGE'].replace(',', '.'))
-  let max_price = parseFloat(totalPrices['MAX'].replace(',', '.'))
+  let maxYAxisValue = totalPrices["MAX"]
+  let weekly_average_price = parseFloat(
+    totalPrices["WEEKLY_AVERAGE"].replace(",", "."),
+  )
+  let max_price = parseFloat(totalPrices["MAX"].replace(",", "."))
   if (weekly_average_price > max_price)
-    maxYAxisValue = parseFloat(weekly_average_price + weekly_average_price / tickCount).toFixed(2)
-  return maxYAxisValue.replace(',', '.')
+    maxYAxisValue = parseFloat(
+      weekly_average_price + weekly_average_price / tickCount,
+    ).toFixed(2)
+  return maxYAxisValue.replace(",", ".")
 }
 
 export function computeMinYAxisValue(totalPrices, tickCount = 7) {
-  let minYAxisValue = '0,00'
-  let min_price = parseFloat(totalPrices['MIN'].replace(',', '.'))
-  let weekly_average_price = parseFloat(totalPrices['WEEKLY_AVERAGE'].replace(',', '.'))
+  let minYAxisValue = "0,00"
+  let min_price = parseFloat(totalPrices["MIN"].replace(",", "."))
+  let weekly_average_price = parseFloat(
+    totalPrices["WEEKLY_AVERAGE"].replace(",", "."),
+  )
   if (min_price < 0)
-    minYAxisValue = parseFloat(min_price - weekly_average_price / tickCount).toFixed(3)
-  return minYAxisValue.replace(',', '.')
+    minYAxisValue = parseFloat(
+      min_price - weekly_average_price / tickCount,
+    ).toFixed(3)
+  return minYAxisValue.replace(",", ".")
 }

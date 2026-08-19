@@ -1,13 +1,12 @@
-import { useContext, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useContext, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import InputField from '../../../components/InputField/InputField'
-
-import { checkMember } from '../../../services/api'
-import LoadingContext from '../../../context/LoadingContext'
+import InputField from "../../../components/InputField/InputField"
+import LoadingContext from "../../../context/LoadingContext"
+import { checkMember } from "../../../services/api"
 
 // TODO: generalize in common pages
 const LinkMemberDetails = (props) => {
@@ -17,7 +16,7 @@ const LinkMemberDetails = (props) => {
     touched,
     setFieldValue,
     setFieldError,
-    setFieldTouched
+    setFieldTouched,
   } = props
 
   const { t } = useTranslation()
@@ -33,11 +32,11 @@ const LinkMemberDetails = (props) => {
         status = false
       })
     if (status === true) {
-      await setFieldValue('member.link_member', true)
+      await setFieldValue("member.link_member", true)
     } else {
-      await setFieldValue('member.link_member', false)
-      await setFieldError('link_member', t('MEMBER_NOT_FOUND'))
-      setFieldTouched('member.number', true)
+      await setFieldValue("member.link_member", false)
+      await setFieldError("link_member", t("MEMBER_NOT_FOUND"))
+      setFieldTouched("member.number", true)
     }
     setLoading(false)
   }
@@ -51,35 +50,35 @@ const LinkMemberDetails = (props) => {
   const handleInputNif = (event) => {
     let value = event.target.value.match(/[0-9A-Za-z]{0,12}/)
     value = value[0].toUpperCase()
-    setFieldValue('member.nif', value)
+    setFieldValue("member.nif", value)
   }
 
   const handleInputNifBlur = () => {
-    setFieldTouched('member.nif', true)
+    setFieldTouched("member.nif", true)
   }
 
   const handleInputMemberNumber = (event) => {
-    let match = event.target.value.replace(/[^0-9]/g, '')
+    let match = event.target.value.replace(/[^0-9]/g, "")
     if (values.member.number !== match) {
-      setFieldValue('member.number', match)
+      setFieldValue("member.number", match)
     }
   }
   const handleInputMemberNumberBlur = () => {
-    setFieldTouched('member.number', true)
+    setFieldTouched("member.number", true)
   }
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="headline4.regular">
-          {t('LINK_MEMBER_TITLE')}
+          {t("LINK_MEMBER_TITLE")}
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <InputField
           name="vat"
-          textFieldName={t('LINK_MEMBER_NIF_TITLE')}
-          textFieldHelper={t('LINK_MEMBER_NIF_HELPER')}
+          textFieldName={t("LINK_MEMBER_NIF_TITLE")}
+          textFieldHelper={t("LINK_MEMBER_NIF_HELPER")}
           handleChange={handleInputNif}
           handleBlur={handleInputNifBlur}
           touched={touched?.member?.nif}
@@ -91,8 +90,8 @@ const LinkMemberDetails = (props) => {
       <Grid item xs={12}>
         <InputField
           name="code"
-          textFieldName={t('LINK_MEMBER_NUMBER_TITLE')}
-          textFieldHelper={t('LINK_MEMBER_NUMBER_HELPER')}
+          textFieldName={t("LINK_MEMBER_NUMBER_TITLE")}
+          textFieldHelper={t("LINK_MEMBER_NUMBER_HELPER")}
           handleChange={handleInputMemberNumber}
           handleBlur={handleInputMemberNumberBlur}
           touched={touched?.member?.number}

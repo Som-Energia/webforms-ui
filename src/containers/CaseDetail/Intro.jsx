@@ -1,15 +1,14 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../../components/OldComponents/Buttons/NextButton'
+import NextButton from "../../components/OldComponents/Buttons/NextButton"
+import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
 
-export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
+export default function ModifyIntro({ nextStep, prevStep }) {
   const { t } = useTranslation()
 
   const onNextStep = (event) => {
@@ -29,24 +28,24 @@ export default function ModifyIntro({ nextStep, prevStep, handleStepChanges }) {
           variant="body1"
           component="div"
           dangerouslySetInnerHTML={{
-            __html: t('MODIFY_POTTAR_INTRO', {
-              url: t('MODIFY_POTTAR_INTRO_URL'),
-              costs_url: t('MODIFY_POTTAR_INTRO_COSTS_URL'),
-              potinfo_url: t('MODIFY_POTTAR_INTRO_POTINFO_URL')
-            })
+            __html: t("MODIFY_POTTAR_INTRO", {
+              url: t("MODIFY_POTTAR_INTRO_URL"),
+              costs_url: t("MODIFY_POTTAR_INTRO_COSTS_URL"),
+              potinfo_url: t("MODIFY_POTTAR_INTRO_POTINFO_URL"),
+            }),
           }}
         />
-        <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ mb: 1, display: "flex", justifyContent: "space-between" }}>
           {prevStep && (
             <PrevButton
               onClick={(event) => onPrevStep(event)}
-              title={t('PREV')}
+              title={t("PREV")}
             />
           )}
           {nextStep && (
             <NextButton
               onClick={(event) => onNextStep(event)}
-              title={t('NEXT')}
+              title={t("NEXT")}
             />
           )}
         </Box>

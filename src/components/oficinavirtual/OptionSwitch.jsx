@@ -1,42 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import Paper from '@mui/material/Paper'
-import Switch from '@mui/material/Switch'
-import Box from '@mui/material/Box'
-
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
+import Paper from "@mui/material/Paper"
+import Switch from "@mui/material/Switch"
+import Typography from "@mui/material/Typography"
 
 const customStyles = {
   subsPaper: {
-    padding: '16px 32px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderLeft: '4px solid gray',
-    borderColor:'secondary.main'
+    padding: "16px 32px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderLeft: "4px solid gray",
+    borderColor: "secondary.main",
   },
   active: {
-    borderColor: 'primary.main'
+    borderColor: "primary.main",
   },
   optionContainer: {
-    paddingRight: '32px'
+    paddingRight: "32px",
   },
   switchContainer: {
-    paddingLeft: '32px'
+    paddingLeft: "32px",
   },
   title: {
-    cursor: 'pointer',
-    fontSize: '1rem',
+    cursor: "pointer",
+    fontSize: "1rem",
     fontWeight: 700,
-    paddingBottom: '8px'
+    paddingBottom: "8px",
   },
   description: {
-    fontSize: '1rem'
-  }
+    fontSize: "1rem",
+  },
 }
 
 const OptionSwitch = (props) => {
-  const { title = '', description = '', value = false } = props
+  const { title = "", description = "", value = false } = props
   const [state, setState] = useState(value)
 
   return (
@@ -59,7 +58,7 @@ const OptionSwitch = (props) => {
           checked={state}
           onChange={(event) => setState(event.target.checked)}
           color="primary"
-          inputProps={{ 'aria-label': `subscription ${title} switcher` }}
+          inputProps={{ "aria-label": `subscription ${title} switcher` }}
         />
       </Box>
     </Paper>

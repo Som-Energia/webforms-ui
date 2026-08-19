@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
-import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-import CUPS from '../../../../components/Cups/CUPS'
+import Grid from "@mui/material/Grid"
+
+import CUPS from "../../../../components/Cups/CUPS"
+import TextRecommendation from "../../components/TextRecommendation/TextRecommendation"
 
 const SupplyPoint = (props) => {
   const { t } = useTranslation()
@@ -11,8 +12,8 @@ const SupplyPoint = (props) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <TextRecommendation
-          title={t('GURB_SUPPLY_POINT_RECOMENDATION_TITLE')}
-          text={t('GURB_SUPPLY_POINT_RECOMENDATION_TEXT')}
+          title={t("GURB_SUPPLY_POINT_RECOMENDATION_TITLE")}
+          text={t("GURB_SUPPLY_POINT_RECOMENDATION_TEXT")}
           isHeader
         />
       </Grid>

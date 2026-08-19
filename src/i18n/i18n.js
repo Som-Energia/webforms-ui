@@ -1,25 +1,27 @@
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import { registerSomEnergiaI18n } from '@somenergia/somenergia-ui';
+import { initReactI18next } from "react-i18next"
 
-import LOCALE_CA from './locale-ca.json'
-import LOCALE_ES from './locale-es.json'
-import LOCALE_GL from './locale-gl.json'
-import LOCALE_EU from './locale-eu.json'
+import { registerSomEnergiaI18n } from "@somenergia/somenergia-ui"
+
+import i18n from "i18next"
+
+import LOCALE_CA from "./locale-ca.json"
+import LOCALE_ES from "./locale-es.json"
+import LOCALE_EU from "./locale-eu.json"
+import LOCALE_GL from "./locale-gl.json"
 
 const resources = {
   ca: {
-    translation: { ...LOCALE_CA }
+    translation: { ...LOCALE_CA },
   },
   es: {
-    translation: { ...LOCALE_ES }
+    translation: { ...LOCALE_ES },
   },
   gl: {
-    translation: { ...LOCALE_GL }
+    translation: { ...LOCALE_GL },
   },
   eu: {
-    translation: { ...LOCALE_EU }
-  }
+    translation: { ...LOCALE_EU },
+  },
 }
 
 // FIXME: Each import of this file init the global i18next.
@@ -28,15 +30,15 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    fallbackLng: 'es',
-    lng: 'es',
+    fallbackLng: "es",
+    lng: "es",
     keySeparator: false, // we do not use keys in form messages.welcome
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   })
 
 // Register all somenergia-ui lib translations to the project i18n instance
-registerSomEnergiaI18n(i18n);
+registerSomEnergiaI18n(i18n)
 
 export default i18n

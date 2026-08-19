@@ -1,29 +1,32 @@
-import { ThemeProvider } from '@mui/material/styles'
+import { useState } from "react"
+
+import { ThemeProvider } from "@mui/material/styles"
+
 import {
   queryByAttribute,
   render,
   screen,
-  waitFor
-} from '@testing-library/react'
-import { useState } from 'react'
-import { vi } from 'vitest'
-import { checkCups } from '../../services/api'
-import WebFormsTheme from '../../themes/webforms'
-import Cups from './CUPS'
-import { initI18n } from '../../tests/i18n.mock'
+  waitFor,
+} from "@testing-library/react"
+import { vi } from "vitest"
+
+import { checkCups } from "../../services/api"
+import { initI18n } from "../../tests/i18n.mock"
+import WebFormsTheme from "../../themes/webforms"
+import Cups from "./CUPS"
 
 // Mock the checkCups function
-vi.mock('../../services/api', () => ({
-  checkCups: vi.fn()
+vi.mock("../../services/api", () => ({
+  checkCups: vi.fn(),
 }))
 
 const webFormsTheme = WebFormsTheme()
 
 const renderComponent = async (cupsNumber, setValues = () => {}) => {
-  await initI18n({ ERROR_INVALID_FIELD: 'Invalid field' })
+  await initI18n({ ERROR_INVALID_FIELD: "Invalid field" })
 
   return render(
-    <CupsWrapperComponent cupsNumber={cupsNumber} setValues={setValues} />
+    <CupsWrapperComponent cupsNumber={cupsNumber} setValues={setValues} />,
   )
 }
 
@@ -48,39 +51,39 @@ const CupsWrapperComponent = ({ cupsNumber, setValues }) => {
   )
 }
 
-describe('Cups component', () => {
-  test('Cups renders without crashing', async () => {
+describe("Cups component", () => {
+  test("Cups renders without crashing", async () => {
     vi.mocked(checkCups).mockResolvedValue({})
 
-    const cups = 'ES0021911991898060KS'
+    const cups = "ES0021911991898060KS"
     const dom = await renderComponent(cups)
 
     await waitFor(() => {
-      const getByDataCy = queryByAttribute.bind(null, 'data-cy')
-      const input = getByDataCy(dom.container, 'cups-input')
+      const getByDataCy = queryByAttribute.bind(null, "data-cy")
+      const input = getByDataCy(dom.container, "cups-input")
       expect(input).toBeInTheDocument()
       expect(input).toHaveValue(cups)
     })
   })
 
-  test('Cups renders showing invalid error message through checkCups rejection', async () => {
+  test("Cups renders showing invalid error message through checkCups rejection", async () => {
     vi.mocked(checkCups).mockRejectedValue({})
-    const invalidCups = 'ES0000000000000000000'
+    const invalidCups = "ES0000000000000000000"
     await renderComponent(invalidCups)
-    const errorMessage = await screen.findByText('Invalid field')
+    const errorMessage = await screen.findByText("Invalid field")
     expect(errorMessage).toBeInTheDocument()
   })
 
-  test('CheckCups with resolved inactive contract response', async () => {
+  test("CheckCups with resolved inactive contract response", async () => {
     vi.mocked(checkCups).mockResolvedValue({
       data: {
-        status: 'inactive',
+        status: "inactive",
         knowledge_of_distri: true,
-        tariff_name: '2.0TD',
-        has_social_tariff: false
-      }
+        tariff_name: "2.0TD",
+        has_social_tariff: false,
+      },
     })
-    const cups = 'ES0021911991898060KS'
+    const cups = "ES0021911991898060KS"
     const setValuesSpy = vi.fn()
     await renderComponent(cups, setValuesSpy)
 
@@ -97,23 +100,23 @@ describe('Cups component', () => {
         expect.objectContaining({
           new_contract: true,
           knowledge_of_distri: true,
-          tariff_name: '2.0TD',
-          social_tariff: false
-        })
+          tariff_name: "2.0TD",
+          social_tariff: false,
+        }),
       )
     })
   })
 
-  test('CheckCups with resolved a new contract response', async () => {
+  test("CheckCups with resolved a new contract response", async () => {
     vi.mocked(checkCups).mockResolvedValue({
       data: {
-        status: 'new',
+        status: "new",
         knowledge_of_distri: true,
-        tariff_name: '2.0TD',
-        has_social_tariff: false
-      }
+        tariff_name: "2.0TD",
+        has_social_tariff: false,
+      },
     })
-    const cups = 'ES0021911991898060KS'
+    const cups = "ES0021911991898060KS"
     const setValuesSpy = vi.fn()
     await renderComponent(cups, setValuesSpy)
 
@@ -124,15 +127,15 @@ describe('Cups component', () => {
     })
 
     const [updater] = setValuesSpy.mock.lastCall
-    
+
     await waitFor(() => {
       expect(updater(currentValues)).toEqual(
         expect.objectContaining({
           new_contract: true,
           knowledge_of_distri: true,
-          tariff_name: '2.0TD',
-          social_tariff: false
-        })
+          tariff_name: "2.0TD",
+          social_tariff: false,
+        }),
       )
     })
   })

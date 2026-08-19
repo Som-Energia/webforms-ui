@@ -118,7 +118,7 @@ describe('Calendar language', () => {
 
     cy.get('[placeholder="DD/MM/YYYY"').type('01/01/2026', { delay: 500 })
 
-    cy.wait(1000) // eslint-disable-line
+    cy.wait(1000)  
 
     cy.get('[aria-label="Choose date, selected date is 1 Gen. 2026"]').click()
     cy.contains('Gener', {

@@ -1,37 +1,36 @@
-import {useEffect} from 'react'
-import { useTranslation } from 'react-i18next'
+import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import Chooser from '../../../components/Chooser/Chooser'
-import Typography from '@mui/material/Typography'
-import InputTitle from '../../../components/InputTitle'
-
-import { SolarpanelIcon } from '../../../data/icons/Icons'
+import Chooser from "../../../components/Chooser/Chooser"
+import InputTitle from "../../../components/InputTitle"
+import { SolarpanelIcon } from "../../../data/icons/Icons"
 
 const NewContractMemberSelfConsumptionChooser = (props) => {
   const { values, setFieldValue, sendTrackEvent } = props
   const { t } = useTranslation()
-  const trackID = 'self-consumption-chooser'
+  const trackID = "self-consumption-chooser"
 
   useEffect(() => {
     sendTrackEvent(trackID)
   }, [])
   const handleSelfconsumptionQuestion = (value) => {
-    setFieldValue('has_selfconsumption', value)
+    setFieldValue("has_selfconsumption", value)
   }
 
   const options = [
     {
-      id: 'selfconsumption-on',
-      icon: <SolarpanelIcon/>,
-      textHeader: t('SELFCONSUMPTION_YES_HEADER'),
+      id: "selfconsumption-on",
+      icon: <SolarpanelIcon />,
+      textHeader: t("SELFCONSUMPTION_YES_HEADER"),
     },
     {
-      id: 'selfconsumption-off',
-      icon: <SolarpanelIcon on={false}/>,
-      textHeader: t('SELFCONSUMPTION_NO_HEADER'),
-    }
+      id: "selfconsumption-off",
+      icon: <SolarpanelIcon on={false} />,
+      textHeader: t("SELFCONSUMPTION_NO_HEADER"),
+    },
   ]
 
   return (
@@ -39,12 +38,12 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
       <Grid item xs={12}>
         <Grid item xs={12}>
           <Typography variant="headline4.regular">
-            {t('SELFCONSUMPTION_TITLE')}
+            {t("SELFCONSUMPTION_TITLE")}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body.md.regular" color="secondary.extraDark">
-            {t('RECOMMENDATION_SUBTITLE')}
+            {t("RECOMMENDATION_SUBTITLE")}
           </Typography>
         </Grid>
       </Grid>
@@ -53,12 +52,12 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
         <Grid item xs={12} sx={{ mt: 1 }}>
           <InputTitle
             variant="subtitle4"
-            text={t('SELFCONSUMPTION_ACTIVE')}
+            text={t("SELFCONSUMPTION_ACTIVE")}
             required={true}
           />
           <Typography variant="body.md.regular" color="secondary.extraDark">
-          {t('SELFCONSUMPTION_HELPER')}
-        </Typography>
+            {t("SELFCONSUMPTION_HELPER")}
+          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12} sx={{ mt: 1 }}>
@@ -70,10 +69,10 @@ const NewContractMemberSelfConsumptionChooser = (props) => {
           maxWidth="12rem"
         />
       </Grid>
-      {values.has_selfconsumption === 'selfconsumption-on' && (
+      {values.has_selfconsumption === "selfconsumption-on" && (
         <Grid item xs={12}>
           <Typography variant="body.md.regular" color="secondary.extraDark">
-            {t('SELFCONSUMPTION_WARNING')}
+            {t("SELFCONSUMPTION_WARNING")}
           </Typography>
         </Grid>
       )}

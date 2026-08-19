@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react"
 
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
-import Grid from '@mui/material/Grid'
+import Box from "@mui/material/Box"
+import Divider from "@mui/material/Divider"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import ReviewField from './ReviewField'
+import ReviewField from "./ReviewField"
 
 const ReviewMobileTable = ({ tableFields }) => {
   return tableFields.map((rows, index) => {
@@ -63,7 +63,7 @@ const ReviewMobileTable = ({ tableFields }) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Box sx={{ marginY: '2rem' }}>
+                <Box sx={{ marginY: "2rem" }}>
                   <Divider />
                 </Box>
               </Grid>

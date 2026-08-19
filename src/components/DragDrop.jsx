@@ -1,22 +1,20 @@
-import { useRef, useState, createRef, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { createRef, useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
-import Card from '@mui/material/Card'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import Alert from '@mui/material/Alert'
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined"
+import UploadFileIcon from "@mui/icons-material/UploadFile"
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import Card from "@mui/material/Card"
+import Grid from "@mui/material/Grid"
+import IconButton from "@mui/material/IconButton"
+import Link from "@mui/material/Link"
+import List from "@mui/material/List"
+import ListItem from "@mui/material/ListItem"
+import Typography from "@mui/material/Typography"
 
-import UploadFileIcon from '@mui/icons-material/UploadFile'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-
-import RequiredTitle from './InputTitle'
-import { uploadFile } from '../services/api'
-import Grid from '@mui/material/Grid'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-
+import { uploadFile } from "../services/api"
+import RequiredTitle from "./InputTitle"
 
 const DragDrop = ({ fieldName, required, values, onChange }) => {
   const { t } = useTranslation()
@@ -30,8 +28,8 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
   const fileInputRef = useRef(null)
   const getErrorMessage = (code) => {
     switch (code) {
-      case 'INVALID_FILETYPE':
-        return t('INVALID_FILETYPE')
+      case "INVALID_FILETYPE":
+        return t("INVALID_FILETYPE")
     }
   }
 
@@ -40,20 +38,23 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
   }, [uploads])
 
   const upload = (name, file) => {
-    return uploadFile(name, file)
-      .then((response) => {
-        if (response?.data?.code === 'UPLOAD_OK') {
-          const fileHash = response?.data?.file_hash
-          setUploads([...uploads, { "filename": name, "filehash": fileHash }])
-        } else {
-          const errorMsg = getErrorMessage(response?.data?.code)
+    return (
+      uploadFile(name, file)
+        .then((response) => {
+          if (response?.data?.code === "UPLOAD_OK") {
+            const fileHash = response?.data?.file_hash
+            setUploads([...uploads, { filename: name, filehash: fileHash }])
+          } else {
+            const errorMsg = getErrorMessage(response?.data?.code)
+            setError(errorMsg)
+          }
+        })
+        .catch((error) => {
+          const errorMsg = getErrorMessage(error?.response?.data?.code)
           setError(errorMsg)
-        }
-      })
-      .catch((error) => {
-        const errorMsg = getErrorMessage(error?.response?.data?.code)
-        setError(errorMsg)
-      }), [uploads]
+        }),
+      [uploads]
+    )
   }
   const prevent = (e) => {
     e.preventDefault()
@@ -81,7 +82,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0]
       if (!validateFileType(file)) {
-        setError(t('INVALID_FILETYPE'))
+        setError(t("INVALID_FILETYPE"))
         return
       }
       onDrop(file)
@@ -90,21 +91,21 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
     }
   }
 
-  const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png']
+  const allowedTypes = ["application/pdf", "image/jpeg", "image/png"]
   const validateFileType = (file) => {
     return allowedTypes.includes(file.type)
   }
   useEffect(() => {
     let div = dropRef.current
-    div.addEventListener('dragenter', handleDragIn)
-    div.addEventListener('dragleave', handleDragOut)
-    div.addEventListener('dragover', handleDrag)
-    div.addEventListener('drop', handleDrop)
+    div.addEventListener("dragenter", handleDragIn)
+    div.addEventListener("dragleave", handleDragOut)
+    div.addEventListener("dragover", handleDrag)
+    div.addEventListener("drop", handleDrop)
     return () => {
-      div.removeEventListener('dragenter', handleDragIn)
-      div.removeEventListener('dragleave', handleDragOut)
-      div.removeEventListener('dragover', handleDrag)
-      div.removeEventListener('drop', handleDrop)
+      div.removeEventListener("dragenter", handleDragIn)
+      div.removeEventListener("dragleave", handleDragOut)
+      div.removeEventListener("dragover", handleDrag)
+      div.removeEventListener("drop", handleDrop)
     }
   })
 
@@ -117,7 +118,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
     const file = e.target.files[0]
     if (file) {
       if (!validateFileType(file)) {
-        setError(t('INVALID_FILETYPE'))
+        setError(t("INVALID_FILETYPE"))
         return
       }
       setError(false)
@@ -132,71 +133,78 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
     setUploads([...uploadsToDelete])
   }
 
-  const onDrop = () => { }
+  const onDrop = () => {}
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <RequiredTitle
-          text={fieldName}
-          required={required}
-        />
+        <RequiredTitle text={fieldName} required={required} />
       </Grid>
       <Grid item xs={12}>
         <Card
           ref={dropRef}
           sx={{
-            padding: '2rem',
-            borderRadius: '8px',
-            border: '2px dashed',
-            borderColor: drag
-              ? 'black'
-              : 'secondary.light',
-            boxShadow: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
+            padding: "2rem",
+            borderRadius: "8px",
+            border: "2px dashed",
+            borderColor: drag ? "black" : "secondary.light",
+            boxShadow: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
             flexGrow: 1,
-            gap: 1
+            gap: 1,
           }}>
           {error ? (
-            <Alert sx={{ borderRadius: '8px' }} severity="error">
+            <Alert sx={{ borderRadius: "8px" }} severity="error">
               {error}
             </Alert>
           ) : uploads && !drag ? (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
               <List>
                 {uploads.map((upload, index) => (
                   <ListItem key={index}>
-                    <Typography variant='body.md.regular' sx={{ marginRight: '1rem' }}>
+                    <Typography
+                      variant="body.md.regular"
+                      sx={{ marginRight: "1rem" }}>
                       {upload.filename}
                     </Typography>
                     <IconButton
                       aria-label="delete"
                       onClick={() => handleDelete(index)}>
-                      <DeleteOutlineOutlinedIcon sx={{ color: 'gray' }} />
+                      <DeleteOutlineOutlinedIcon sx={{ color: "gray" }} />
                     </IconButton>
                   </ListItem>
                 ))}
               </List>
             </Box>
           ) : (
-            <UploadFileIcon sx={{ marginBottom: '12px' }} color="primary" />
+            <UploadFileIcon sx={{ marginBottom: "12px" }} color="primary" />
           )}
-          <Typography variant='body.md.regular' sx={{ display: 'flex', alignItems: 'center', padding: 0, margin: 0, gap: 1 }}>
+          <Typography
+            variant="body.md.regular"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              padding: 0,
+              margin: 0,
+              gap: 1,
+            }}>
             <Link component="button" onClick={handleLinkClick}>
-              {t('CLICK_HERE')}
+              {t("CLICK_HERE")}
             </Link>
             <input
               type="file"
               ref={fileInputRef}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               onChange={handleFileChange}
-            />{' '}
-            {t('DRAG_AND_DROP_HERE')}
+            />{" "}
+            {t("DRAG_AND_DROP_HERE")}
           </Typography>
-          <Typography variant='body.xs.regular'>{t('TYPE_OF_FILES')}</Typography>
+          <Typography variant="body.xs.regular">
+            {t("TYPE_OF_FILES")}
+          </Typography>
         </Card>
       </Grid>
     </Grid>

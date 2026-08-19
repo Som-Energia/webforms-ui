@@ -66,7 +66,7 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
 
   cy.get('[id="supply_point.is_housing"]').click()
 
-  if (house == "no"){
+  if (house === "no"){
     cy.get(`[id="supply_point.is_housing-false"]`).click()
   } else {
     cy.get(`[id="supply_point.is_housing-true"]`).click()
@@ -115,7 +115,7 @@ Cypress.Commands.add('selfconsumptionData', (selfConsumption) => {
 
 })
 
-Cypress.Commands.add('contractMemberPaymentData', (paymentdata, has_member='member-off') => {
+Cypress.Commands.add('contractMemberPaymentData', (paymentdata) => {
   const isCreditCard = paymentdata.paymentMethod === 'credit_card'
 
   cy.choosePaymentMethod(isCreditCard)
@@ -124,13 +124,18 @@ Cypress.Commands.add('contractMemberPaymentData', (paymentdata, has_member='memb
     cy.get('[data-cy="iban_number"]').type(paymentdata.iban)
     cy.get('[data-cy="iban_check"]').click()
     cy.get('[data-cy=accept]').click()
+  } else {
+    // TODO: use 'payment_legal_check' key instead of iban_check
+    //       At this moment is used by iban and credit_card
+    cy.get('[data-cy="iban_check"]').click()
   }
-
   cy.get('[data-cy=next]').should('not.be.disabled')
   cy.get('[data-cy=next]').click()
 })
 
 Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif, has_member='member-off') => {
+  // Test API timeout... 
+  cy.wait(8000)
   cy.get('[data-cy="privacy_policy"]').click()
 
   cy.get('[data-cy="generic_conditions_accepted"]').click()
@@ -146,11 +151,11 @@ Cypress.Commands.add('contractMemberCheckReviewNewMemberStep', (nif, has_member=
   cy.get('button').contains(nif)
 })
 
-Cypress.Commands.add('acceptTermsAndsubmitNewContract', (status, error=false) => {
+Cypress.Commands.add('acceptTermsAndsubmitNewContract', () => {
   throw new Error('Use acceptTermsAndsubmitNewContractFlow with explicit flow options')
 })
 
-Cypress.Commands.add('acceptTermsAndsubmitNewContractWithGurbCode', (status, error=false) => {
+Cypress.Commands.add('acceptTermsAndsubmitNewContractWithGurbCode', () => {
   throw new Error('Use acceptTermsAndsubmitNewContractFlow with explicit flow options')
 })
 
@@ -208,7 +213,6 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContractFlow', ({
     win.postMessage({ event: 'completed' }, '*')
   })
 
-  cy.get('[data-cy="next"]').should('not.be.disabled').click()
 
   if (gurbCode) {
     cy.resultRedirectComponent(gurbCode)

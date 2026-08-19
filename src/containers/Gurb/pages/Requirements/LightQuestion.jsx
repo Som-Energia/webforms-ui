@@ -1,17 +1,17 @@
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useContext } from "react"
+import { useTranslation } from "react-i18next"
 
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
-import Grid from '@mui/material/Grid'
+import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined"
+import Grid from "@mui/material/Grid"
 
-import Chooser from '../../../../components/Chooser/Chooser'
-import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-import SimpleGurbDialog from '../../components/SimpleGurbDialog/SimpleGurbDialog'
-
-import PopUpContext from '../../../../context/PopUpContext'
-
-import { iconRequirementsStyles, iconOffRequirementsStyles } from '../../../../themes/commonStyles'
-
+import Chooser from "../../../../components/Chooser/Chooser"
+import PopUpContext from "../../../../context/PopUpContext"
+import {
+  iconOffRequirementsStyles,
+  iconRequirementsStyles,
+} from "../../../../themes/commonStyles"
+import SimpleGurbDialog from "../../components/SimpleGurbDialog/SimpleGurbDialog"
+import TextRecommendation from "../../components/TextRecommendation/TextRecommendation"
 
 const LightQuestion = (props) => {
   const { values, setFieldValue } = props
@@ -19,37 +19,37 @@ const LightQuestion = (props) => {
   const { setContent } = useContext(PopUpContext)
 
   const handleLightQuestion = (value) => {
-    setFieldValue('has_light', value)
+    setFieldValue("has_light", value)
 
-    if (value === 'light-off') {
+    if (value === "light-off") {
       setContent(
         <SimpleGurbDialog
           severity="warning"
           setContent={setContent}
-          text1={t('GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT')}
-          text2={t('GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT')}
-        />
+          text1={t("GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT")}
+          text2={t("GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT")}
+        />,
       )
     }
   }
 
   const options = [
     {
-      id: 'light-on',
+      id: "light-on",
       icon: <LightbulbOutlinedIcon sx={iconRequirementsStyles} />,
-      textHeader: t('LIGHT_YES')
+      textHeader: t("LIGHT_YES"),
     },
     {
-      id: 'light-off',
+      id: "light-off",
       icon: <LightbulbOutlinedIcon sx={iconOffRequirementsStyles} />,
-      textHeader: t('LIGHT_NO')
-    }
+      textHeader: t("LIGHT_NO"),
+    },
   ]
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextRecommendation title={t('GURB_HAS_LIGHT_TITLE')} isHeader />
+        <TextRecommendation title={t("GURB_HAS_LIGHT_TITLE")} isHeader />
       </Grid>
       <Grid item xs={12}>
         <Chooser

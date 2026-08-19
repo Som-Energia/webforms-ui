@@ -1,4 +1,4 @@
-import { Loader } from '@googlemaps/js-api-loader'
+import { Loader } from "@googlemaps/js-api-loader"
 
 /**
  * This is a wrapper around the Google Maps API client.
@@ -15,11 +15,10 @@ export default async function getGoogleMapsPlacesApiClient() {
 
   const loader = new Loader({
     apiKey: import.meta.env.VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY,
-    version: 'beta'
+    version: "beta",
   })
 
-
-  placesApiClient = await loader.importLibrary('places')
+  placesApiClient = await loader.importLibrary("places")
 
   return placesApiClient
 }
@@ -34,10 +33,10 @@ export async function getPlaceDetails(placeId, sessionTokenRef) {
   // @see https://developers.google.com/maps/documentation/javascript/place-details
   const place = new Place({
     id: placeId,
-    sessionToken,  // pass the session token so all autocomplete requests are counted as part of this places request
+    sessionToken, // pass the session token so all autocomplete requests are counted as part of this places request
   })
   await place.fetchFields({
-    fields: ["formattedAddress", "location", "addressComponents"]
+    fields: ["formattedAddress", "location", "addressComponents"],
   })
   return place
 }
@@ -50,19 +49,20 @@ export async function searchPlace(string, sessionTokenRef) {
 
   // NOTE: the language to show suggestions result not provided
   let request = {
-    region: 'es',
+    region: "es",
     sessionToken: sessionTokenRef.current,
     input: string,
-    includedPrimaryTypes: ['route'],
-    includedRegionCodes: ['es'],
+    includedPrimaryTypes: ["route"],
+    includedRegionCodes: ["es"],
   }
-  const result = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
+  const result =
+    await places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
   let placesSuggestions = []
   for (let suggestion of result?.suggestions || []) {
     const placePrediction = suggestion.placePrediction
     placesSuggestions.push({
       id: placePrediction.placeId.toString(),
-      text: placePrediction.text.toString()
+      text: placePrediction.text.toString(),
     })
   }
   return placesSuggestions

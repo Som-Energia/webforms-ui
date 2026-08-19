@@ -1,50 +1,49 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import React from "react"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-
-import StepHeader from '../components/OldComponents/StepHeader'
-import { useSyncLanguage } from '../hooks/useTranslateOptions'
+import StepHeader from "../components/OldComponents/StepHeader"
+import { useSyncLanguage } from "../hooks/useTranslateOptions"
 
 const Success = (props) => {
   const { result, description, title, showHeader, subtitle } = props
   const { language } = useParams()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   useSyncLanguage(language)
 
   return (
     <>
-      {showHeader && <StepHeader title={t('SUCCESS_TITLE')} />}
+      {showHeader && <StepHeader title={t("SUCCESS_TITLE")} />}
       <Box
         sx={{
           pt: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}>
         <CheckCircleIcon
           data-cy="success-icon"
           fontSize="large"
-          sx={{ mb: 3, color: 'primary.extraLight' }}
+          sx={{ mb: 3, color: "primary.extraLight" }}
         />
 
         <Typography
           id="success-page-title"
           sx={{
-            textAlign: 'center',
-            fontSize: '1.15rem'
+            textAlign: "center",
+            fontSize: "1.15rem",
           }}
           variant="h6">
-          {title ? t(title) : t('SUCCESS_TEXT')}
+          {title ? t(title) : t("SUCCESS_TEXT")}
         </Typography>
 
         {subtitle ? (
-          <Typography sx={{ fontWeight: 'bold' }} variant="h6">
+          <Typography sx={{ fontWeight: "bold" }} variant="h6">
             {t(subtitle)}
           </Typography>
         ) : null}
@@ -52,17 +51,17 @@ const Success = (props) => {
         <Typography
           sx={{
             mt: 2,
-            fontWeight: '400',
-            fontSize: '1rem',
-            lineHeight: '1.75',
-            textAlign: 'center',
-            color: 'secondary.extraDark'
+            fontWeight: "400",
+            fontSize: "1rem",
+            lineHeight: "1.75",
+            textAlign: "center",
+            color: "secondary.extraDark",
           }}
           variant="body1"
           dangerouslySetInnerHTML={{
             __html: description
               ? t(description, result)
-              : t('SUCCESS_NOTE', result)
+              : t("SUCCESS_NOTE", result),
           }}
         />
       </Box>

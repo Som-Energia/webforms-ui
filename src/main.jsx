@@ -1,7 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import App from './App'
+import "./index.css"
+
+import React from "react"
+import ReactDOM from "react-dom/client"
+
+import App from "./App"
 // import * as serviceWorker from './serviceWorker'
 
 // const root = document.getElementById('root')
@@ -17,36 +19,36 @@ if (root) {
 
     props.version = import.meta.env.VITE_APP_VERSION
 
-    const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || '{}')
+    const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
 
     Object.keys(featureFlags).forEach((flag) => {
       props[flag] = featureFlags[flag]
     })
 
     const logAppNameStyle =
-      'background:#3b82f6;color:#fff;padding:2px 6px;border-radius:4px 0 0 4px;font-weight:bold'
+      "background:#3b82f6;color:#fff;padding:2px 6px;border-radius:4px 0 0 4px;font-weight:bold"
     const logAppInfoStyle =
-      'background:#1e3a5f;color:#93c5fd;padding:2px 6px;border-radius:0 4px 4px 0'
+      "background:#1e3a5f;color:#93c5fd;padding:2px 6px;border-radius:0 4px 4px 0"
 
     console.log(
-      '%c webforms-ui %c version %s \xb7 hash %s ',
+      "%c webforms-ui %c version %s \xb7 hash %s ",
       logAppNameStyle,
       logAppInfoStyle,
       import.meta.env.VITE_APP_VERSION,
-      import.meta.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || '--'
+      import.meta.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "--",
     )
 
     console.log(
-      '%c webforms-ui %c flags',
+      "%c webforms-ui %c flags",
       logAppNameStyle,
       logAppInfoStyle,
-      featureFlags
+      featureFlags,
     )
 
     ReactDOM.createRoot(document.querySelectorAll("[id='root']")[index]).render(
       <React.StrictMode>
         <App {...props} />
-      </React.StrictMode>
+      </React.StrictMode>,
     )
   })
 }

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react"
 
-import Typography from '@mui/material/Typography'
+import Typography from "@mui/material/Typography"
 
-import TextLoader from './TextLoader'
+import TextLoader from "./TextLoader"
 
 // This component is a wrapper over TextLoader
 // adding nice styles for legal text.
@@ -11,21 +11,20 @@ const LegalText = (props) => {
   return (
     <Typography
       sx={{
-        '& a': {
-          color: 'primary.main'
+        "& a": {
+          color: "primary.main",
         },
-        '& h2': {
-          fontSize: '1.25rem'
+        "& h2": {
+          fontSize: "1.25rem",
         },
-        '& .pujar a': {
-          fontSize: '1rem'
+        "& .pujar a": {
+          fontSize: "1rem",
         },
-        '& .sagnia': {
-          pl: '1rem'
-        }
+        "& .sagnia": {
+          pl: "1rem",
+        },
       }}
-      component='div'
-    >
+      component="div">
       <TextLoader {...props} />
     </Typography>
   )

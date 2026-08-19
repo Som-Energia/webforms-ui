@@ -1,22 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import { buttonDark, buttonLight } from './Buttons/buttonStyles'
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogTitle from "@mui/material/DialogTitle"
+
+import { buttonDark, buttonLight } from "./Buttons/buttonStyles"
 
 const TermsDialog = ({
   open,
   onClose,
   onAccept,
   title,
-  acceptText = 'I_ACCEPT',
+  acceptText = "I_ACCEPT",
   children,
-  maxWidth = 'sm',
-  sx = {}
+  maxWidth = "sm",
+  sx = {},
 }) => {
   const { t } = useTranslation()
 
@@ -34,10 +35,9 @@ const TermsDialog = ({
         data-cy="generic_conditions_modal"
         dividers
         sx={{
-          ...{ fontFamily: 'Outfit', overflowY: 'auto' },
-          ...sx
-        }}
-      >
+          ...{ fontFamily: "Outfit", overflowY: "auto" },
+          ...sx,
+        }}>
         {children}
       </DialogContent>
       <DialogActions>
@@ -45,23 +45,23 @@ const TermsDialog = ({
           <Button
             sx={{
               ...buttonLight,
-              color: 'secondary',
-              height: '40px',
-              padding: '13px 18px',
-              boxSizing: 'border-box'
+              color: "secondary",
+              height: "40px",
+              padding: "13px 18px",
+              boxSizing: "border-box",
             }}
             data-cy="decline"
             onClick={onClose}
             id="terms-dialog-decline-btn">
-            {t('I_DECLINE')}
+            {t("I_DECLINE")}
           </Button>
         )}
         <Button
           sx={{
             ...buttonDark,
-            height: '40px',
-            padding: '13px 18px',
-            boxSizing: 'border-box'
+            height: "40px",
+            padding: "13px 18px",
+            boxSizing: "border-box",
           }}
           data-cy="accept"
           onClick={onAccept}
@@ -71,7 +71,7 @@ const TermsDialog = ({
           {t(acceptText)}
         </Button>
       </DialogActions>
-    </Dialog >
+    </Dialog>
   )
 }
 

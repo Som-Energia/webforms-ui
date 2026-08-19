@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import CircularProgress from '@mui/material/CircularProgress'
-import Grid from '@mui/material/Grid'
-import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
-import InputAdornment from '@mui/material/InputAdornment'
+import CircularProgress from "@mui/material/CircularProgress"
+import Grid from "@mui/material/Grid"
+import InputAdornment from "@mui/material/InputAdornment"
+import MenuItem from "@mui/material/MenuItem"
+import TextField from "@mui/material/TextField"
 
-import { getProvincies, getMunicipis } from '../../services/api'
+import { getMunicipis, getProvincies } from "../../services/api"
 
 const StateCity = (props) => {
   const { t } = useTranslation()
@@ -19,11 +19,11 @@ const StateCity = (props) => {
     cityId,
     cityInitial,
     stateError,
-    stateHelperText = '',
+    stateHelperText = "",
     cityError,
-    cityHelperText = '',
+    cityHelperText = "",
     onChange,
-    onBlur
+    onBlur,
   } = props
 
   const [state, setState] = useState(stateInitial)
@@ -59,7 +59,7 @@ const StateCity = (props) => {
   }, [])
 
   useEffect(() => {
-    if (state && state?.id !== '') {
+    if (state && state?.id !== "") {
       setIsLoadingCities(true)
       getMunicipis(state.id)
         .then((response) => {
@@ -83,13 +83,13 @@ const StateCity = (props) => {
     event.preventDefault()
     const newState = {
       id: event.target.value,
-      name: states[event.target.value]
+      name: states[event.target.value],
     }
     setState(newState)
-    setCity({ id: '' })
+    setCity({ id: "" })
     onChange({
       state: newState,
-      city: { id: '' }
+      city: { id: "" },
     })
   }
 
@@ -97,12 +97,12 @@ const StateCity = (props) => {
     event.preventDefault()
     const newCity = {
       id: event.target.value,
-      name: citiesNames[event.target.value]
+      name: citiesNames[event.target.value],
     }
     setCity(newCity)
     onChange({
       state: state,
-      city: newCity
+      city: newCity,
     })
   }
 
@@ -113,7 +113,7 @@ const StateCity = (props) => {
           select
           id={stateId}
           name={stateName}
-          label={t('STATE')}
+          label={t("STATE")}
           variant="outlined"
           onChange={handleStateChange}
           onBlur={onBlur}
@@ -128,10 +128,10 @@ const StateCity = (props) => {
               <InputAdornment position="end">
                 {isLoadingStates && <CircularProgress size={24} />}
               </InputAdornment>
-            )
+            ),
           }}>
           <MenuItem key="0" value="">
-            {t('STATE')}
+            {t("STATE")}
           </MenuItem>
           {Object.keys(states).map((id) => (
             <MenuItem key={id} value={id}>
@@ -145,7 +145,7 @@ const StateCity = (props) => {
           select
           id={cityId}
           name={cityName}
-          label={t('CITY')}
+          label={t("CITY")}
           variant="outlined"
           onChange={handleCityChange}
           onBlur={onBlur}
@@ -160,10 +160,10 @@ const StateCity = (props) => {
               <InputAdornment position="end">
                 {isLoadingCities && <CircularProgress size={24} />}
               </InputAdornment>
-            )
+            ),
           }}>
           <MenuItem key="0" value="">
-            {t('CITY')}
+            {t("CITY")}
           </MenuItem>
           {cities.map(({ id, name }) => (
             <MenuItem key={id} value={id}>

@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react'
+import { useContext, useEffect, useState } from "react"
 
-import { apiStatus } from '../services/api'
-import AvailabilityContext from '../context/AvailabilityContext'
+import AvailabilityContext from "../context/AvailabilityContext"
+import { apiStatus } from "../services/api"
 
 const ApiStatus = () => {
   const [apiOffline, setApiOffline] = useState(false)
@@ -11,17 +11,16 @@ const ApiStatus = () => {
   useEffect(() => {
     if (apiOffline || noConnection) {
       setAvailability(false)
-    }
-    else if (availability) {
+    } else if (availability) {
       setAvailability(true)
     }
-  },[apiOffline, noConnection])
+  }, [apiOffline, noConnection])
 
   const checkApiStatus = async () => {
     apiStatus()
       .then((response) => {
         response?.data?.status
-          ? response?.data?.status === 'OFFLINE'
+          ? response?.data?.status === "OFFLINE"
             ? setApiOffline(true)
             : setApiOffline(false) && setNoConnection(false)
           : setNoConnection(true)
@@ -37,7 +36,6 @@ const ApiStatus = () => {
     const interval = setInterval(() => checkApiStatus(), 1200000)
     return () => clearInterval(interval)
   }, [])
-
 }
 
 export default ApiStatus

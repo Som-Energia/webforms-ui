@@ -1,31 +1,29 @@
-import { useState, useEffect, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Typography from '@mui/material/Typography'
-import TermsDialog from '../../../components/TermsDialog'
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import Chooser from '../../../components/Chooser/Chooser'
-import InputTitle from '../../../components/InputTitle'
-import CUPS from '../../../components/Cups/CUPS'
-import AlertBox from '../../../components/AlertBox/AlertBox'
-
-import { LightbulbIcon } from '../../../data/icons/Icons'
-
-import Grid from '@mui/material/Grid'
-import PopUpContext from '../../../context/PopUpContext'
-import SimpleGurbDialog from '../../../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog'
+import AlertBox from "../../../components/AlertBox/AlertBox"
+import Chooser from "../../../components/Chooser/Chooser"
+import CUPS from "../../../components/Cups/CUPS"
+import InputTitle from "../../../components/InputTitle"
+import TermsDialog from "../../../components/TermsDialog"
+import SimpleGurbDialog from "../../../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
+import PopUpContext from "../../../context/PopUpContext"
+import { LightbulbIcon } from "../../../data/icons/Icons"
 
 const NewContractMemberSupplyPoint = ({ ...props }) => {
-  const trackID = 'supply-point'
+  const trackID = "supply-point"
   const { setContent } = useContext(PopUpContext)
-  
+
   const { values, setFieldValue, sendTrackEvent } = props
   const { t } = useTranslation()
   const [openLightOffDialog, setOpenLightOffDialog] = useState(false)
 
   const handleLightQuestion = (value) => {
-    setFieldValue('has_light', value)
-    if (value === 'light-off') {
+    setFieldValue("has_light", value)
+    if (value === "light-off") {
       setOpenLightOffDialog(true)
     }
   }
@@ -36,35 +34,33 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
 
   useEffect(() => {
     sendTrackEvent(trackID)
-  },[])
-
+  }, [])
 
   useEffect(() => {
-    if(values.social_tariff && values.cups_valid){
+    if (values.social_tariff && values.cups_valid) {
       setContent(
         <SimpleGurbDialog
           severity="error"
-          text1={t('POP_UP_SIPS_CUP')}
+          text1={t("POP_UP_SIPS_CUP")}
           setContent={setContent}
-       />
+        />,
       )
     }
-  },[values.social_tariff,values.cups_valid,setContent,t])
-
+  }, [values.social_tariff, values.cups_valid, setContent, t])
 
   const options = [
     {
-      id: 'light-on',
+      id: "light-on",
       icon: <LightbulbIcon />,
-      textHeader: t('LIGHT_YES'),
-      textBody: t('LIGHT_MARKETER_YES')
+      textHeader: t("LIGHT_YES"),
+      textBody: t("LIGHT_MARKETER_YES"),
     },
     {
-      id: 'light-off',
+      id: "light-off",
       icon: <LightbulbIcon on={false} />,
-      textHeader: t('LIGHT_NO'),
-      textBody: t('LIGHT_MARKETER_NO')
-    }
+      textHeader: t("LIGHT_NO"),
+      textBody: t("LIGHT_MARKETER_NO"),
+    },
   ]
 
   return (
@@ -72,27 +68,27 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
       <Grid item xs={12}>
         <AlertBox
           id="percent_value_error"
-          description={t('RECOMMENDATION_SUBTITLE')}
-          severity={'warning'}
-          variant={'body.md.regular'}
+          description={t("RECOMMENDATION_SUBTITLE")}
+          severity={"warning"}
+          variant={"body.md.regular"}
         />
       </Grid>
       <Grid item xs={12}>
         <Typography variant="headline4.regular" mb={2}>
-          {t('CUPS_TITLE')}
+          {t("CUPS_TITLE")}
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <CUPS {...props} />
       </Grid>
-      <Grid item xs={12} style={{ marginTop: '32px' }}>
+      <Grid item xs={12} style={{ marginTop: "32px" }}>
         <InputTitle
           variant="body.md.regular"
-          text={t('HAS_LIGHT_TITLE')}
+          text={t("HAS_LIGHT_TITLE")}
           required={true}
         />
       </Grid>
-      <Grid item style={{ marginTop: '16px' }}>
+      <Grid item style={{ marginTop: "16px" }}>
         <Chooser
           name="light-question"
           options={options}
@@ -102,16 +98,16 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
       </Grid>
       {openLightOffDialog && (
         <TermsDialog
-          title={t('LIGHT_OFF_TERMS')}
+          title={t("LIGHT_OFF_TERMS")}
           open={openLightOffDialog}
           onAccept={handleAcceptLightOffTerms}
-          acceptText={'I_AGREE'}
+          acceptText={"I_AGREE"}
           maxWidth="sm">
           <span
             dangerouslySetInnerHTML={{
-              __html: t('LIGHT_OFF_CONTRACT_TERMS', {
-                url: t('LIGHT_OFF_URL')
-              })
+              __html: t("LIGHT_OFF_CONTRACT_TERMS", {
+                url: t("LIGHT_OFF_URL"),
+              }),
             }}
           />
         </TermsDialog>

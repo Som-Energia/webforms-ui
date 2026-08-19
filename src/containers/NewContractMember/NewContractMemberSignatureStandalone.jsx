@@ -1,29 +1,28 @@
-import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams, useSearchParams} from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { useContext, useEffect, useState } from "react"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { Grid2 as Grid } from '@mui/material'
+import { Grid2 as Grid } from "@mui/material"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Typography from "@mui/material/Typography"
 
-import SignatureIframe from '../Signature'
-import Result from '../Result'
-import RedirectUrl from '../Gurb/components/RedirectUrl/RedirectUrl'
-import Loading from '../../components/Loading'
-import SubmitButton from '../../components/Buttons/SubmitButton'
-
-import { activateLead, getContractSignature } from '../../services/api'
-import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-import useBackNavigationWarning from '../../hooks/useBackNavigationWarning'
-import MatomoContext from '../../trackers/matomo/MatomoProvider'
+import SubmitButton from "../../components/Buttons/SubmitButton"
+import Loading from "../../components/Loading"
+import useBackNavigationWarning from "../../hooks/useBackNavigationWarning"
+import { useSyncLanguage } from "../../hooks/useTranslateOptions"
+import { activateLead, getContractSignature } from "../../services/api"
+import MatomoContext from "../../trackers/matomo/MatomoProvider"
+import RedirectUrl from "../Gurb/components/RedirectUrl/RedirectUrl"
+import Result from "../Result"
+import SignatureIframe from "../Signature"
 
 const NewContractMemberSignatureStandalone = () => {
   const { t } = useTranslation()
   const { language, leadId } = useParams()
   const [searchParams] = useSearchParams()
-  const cups = searchParams.get('cups')
-  const gurbCode = searchParams.get('gurb-code')
+  const cups = searchParams.get("cups")
+  const gurbCode = searchParams.get("gurb-code")
   const { trackEvent } = useContext(MatomoContext)
   const navigate = useNavigate()
 
@@ -31,15 +30,15 @@ const NewContractMemberSignatureStandalone = () => {
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
   const [signatureCompleted, setSignatureCompleted] = useState(false)
-  useBackNavigationWarning(!completed, t('LEAVE_CONTRACT_FORM_DESCRIPTION'))
+  useBackNavigationWarning(!completed, t("LEAVE_CONTRACT_FORM_DESCRIPTION"))
 
   useSyncLanguage(language)
 
   useEffect(() => {
     trackEvent({
-      category: 'NewContractMember',
-      action: 'paymentCompleted',
-      name: 'new-contract-member-payment-completed'
+      category: "NewContractMember",
+      action: "paymentCompleted",
+      name: "new-contract-member-payment-completed",
     })
   }, [trackEvent])
 
@@ -68,9 +67,9 @@ const NewContractMemberSignatureStandalone = () => {
 
   const handleSignatureCompleted = () => {
     trackEvent({
-      category: 'NewContractMember',
-      action: 'signatureCompleted',
-      name: 'new-contract-member-signature-completed'
+      category: "NewContractMember",
+      action: "signatureCompleted",
+      name: "new-contract-member-signature-completed",
     })
     setSignatureCompleted(true)
     handleActivateLead()
@@ -82,9 +81,9 @@ const NewContractMemberSignatureStandalone = () => {
     }
 
     trackEvent({
-      category: 'NewContractMember',
-      action: 'signatureCreation',
-      name: 'new-contract-member-signature-creation'
+      category: "NewContractMember",
+      action: "signatureCreation",
+      name: "new-contract-member-signature-creation",
     })
   }
 
@@ -95,41 +94,41 @@ const NewContractMemberSignatureStandalone = () => {
       maxWidth="md"
       disableGutters={true}
       sx={{
-        padding: '2rem',
-        backgroundColor: 'secondary.white',
-        borderRadius: '10px'
+        padding: "2rem",
+        backgroundColor: "secondary.white",
+        borderRadius: "10px",
       }}>
       {sending ? (
-        <Loading description={t('NEW_CONTRACT_SUBMIT_LOADING')} />
+        <Loading description={t("NEW_CONTRACT_SUBMIT_LOADING")} />
       ) : completed ? (
         <Box sx={{ mt: 2 }}>
           {!error && gurbCode ? (
             <RedirectUrl
-              title={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE')}
-              description={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION')}
-              url={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL', {
+              title={t("GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_TITLE")}
+              description={t("GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_DESCRIPTION")}
+              url={t("GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_URL", {
                 gurbCode,
-                language
+                language,
               })}
-              buttonText={t('GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT')}
+              buttonText={t("GURB_REDIRECT_WHEN_CONTRACT_SUCCESS_BUTTON_TEXT")}
             />
           ) : (
             <Result
-              mode={!error ? 'success' : 'failure'}
+              mode={!error ? "success" : "failure"}
               title={
                 !error
-                  ? t('NEW_MEMBER_CONTRACT_SUCCESS_TITLE')
-                  : t('NEW_MEMBER_CONTRACT_ERROR_TITLE')
+                  ? t("NEW_MEMBER_CONTRACT_SUCCESS_TITLE")
+                  : t("NEW_MEMBER_CONTRACT_ERROR_TITLE")
               }>
               <Typography
                 sx={{
-                  color: 'secondary.extraDark',
-                  textAlign: 'center'
+                  color: "secondary.extraDark",
+                  textAlign: "center",
                 }}
                 dangerouslySetInnerHTML={{
                   __html: !error
-                    ? t('NEW_CONTRACT_SUCCESS_DESC')
-                    : t('NEW_MEMBER_CONTRACT_ERROR_DESC')
+                    ? t("NEW_CONTRACT_SUCCESS_DESC")
+                    : t("NEW_MEMBER_CONTRACT_ERROR_DESC"),
                 }}
               />
             </Result>
@@ -140,9 +139,9 @@ const NewContractMemberSignatureStandalone = () => {
           <SignatureIframe
             apiFunction={getContractSignature}
             postData={{ leadId, cups }}
-            textRecommendation={t('SIGNATURE')}
-            textInfo={t('SIGNATURE_INFO')}
-            errorDescription={t('CONTRACT_SIGNATURE_ERROR_DESCRIPTION')}
+            textRecommendation={t("SIGNATURE")}
+            textInfo={t("SIGNATURE_INFO")}
+            errorDescription={t("CONTRACT_SIGNATURE_ERROR_DESCRIPTION")}
             onCreateSignature={handleCreateSignature}
             onSignaturitCompleted={handleSignatureCompleted}
           />
@@ -151,15 +150,15 @@ const NewContractMemberSignatureStandalone = () => {
             direction="row-reverse"
             rowSpacing={2}
             sx={{
-              marginTop: '2rem',
-              justifyContent: 'center',
-              alignItems: 'center'
+              marginTop: "2rem",
+              justifyContent: "center",
+              alignItems: "center",
             }}>
             <Grid item size={{ sm: 3, xs: 12 }}>
               <SubmitButton
                 disabled={!signatureCompleted}
                 onClick={() => handleActivateLead()}>
-                {t('FINISH')}
+                {t("FINISH")}
               </SubmitButton>
             </Grid>
           </Grid>

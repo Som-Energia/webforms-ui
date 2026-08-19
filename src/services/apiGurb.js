@@ -1,21 +1,21 @@
-import axios from './customAxios'
+import axios from "./customAxios"
 
 const WEBFORMS_API_URL =
-  document.getElementById('root')?.dataset?.webformsApiUrl ??
+  document.getElementById("root")?.dataset?.webformsApiUrl ??
   import.meta.env.VITE_WEBFORMS_API_URL ??
   null // For tests
 
 export const checkGurbDistance = async (gurbId, lat, long) => {
   return axios({
-    method: 'GET',
-    url: `${WEBFORMS_API_URL}/check/gurb/${gurbId}?lat=${lat}&long=${long}`
+    method: "GET",
+    url: `${WEBFORMS_API_URL}/check/gurb/${gurbId}?lat=${lat}&long=${long}`,
   }).then(({ data }) => data)
 }
 
 export const createGurbSignature = async (data) => {
   return axios({
-    method: 'POST',
+    method: "POST",
     url: `${WEBFORMS_API_URL}/procedures/gurb/join`,
-    data
+    data,
   }).then(({ data }) => data)
 }

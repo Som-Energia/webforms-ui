@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import CircularProgress from '@mui/material/CircularProgress'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined"
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined"
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import CircularProgress from "@mui/material/CircularProgress"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
 
-import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined'
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
-
-import StepHeader from '../../components/OldComponents/StepHeader'
-import TermsDialog from '../../components/TermsDialog'
-import { checkIbanFormat } from '../../services/utils'
+import StepHeader from "../../components/OldComponents/StepHeader"
+import TermsDialog from "../../components/TermsDialog"
+import { checkIbanFormat } from "../../services/utils"
 
 // TODO: Use IBANField
 function IBAN(props) {
   const { t } = useTranslation()
   const { values, handleBlur, setFieldValue, errors, touched } = props
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const [open, setOpen] = useState(false)
 
   const handleClick = (event) => {
@@ -30,12 +29,12 @@ function IBAN(props) {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('payment.sepa_accepted', true)
+    setFieldValue("payment.sepa_accepted", true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('payment.sepa_accepted', false)
+    setFieldValue("payment.sepa_accepted", false)
   }
 
   const handleInputChange = (event) => {
@@ -43,35 +42,35 @@ function IBAN(props) {
     if (value) {
       value = value.match(/[\s0-9A-Za-z]{0,29}/)
       value = value[0].toUpperCase()
-      value = value.split(' ').join('')
-      value = value.match(/.{1,4}/g).join(' ')
+      value = value.split(" ").join("")
+      value = value.match(/.{1,4}/g).join(" ")
     }
-    setFieldValue('payment.sepa_accepted', false, false)
-    setFieldValue('payment.iban', value)
+    setFieldValue("payment.sepa_accepted", false, false)
+    setFieldValue("payment.iban", value)
   }
 
   useEffect(() => {
     if (values.payment.iban.length > 27) {
       const valid = checkIbanFormat(values.payment.iban)
-      setFieldValue('payment.iban_valid', valid)
+      setFieldValue("payment.iban_valid", valid)
     } else {
-      setFieldValue('payment.iban_valid', false)
+      setFieldValue("payment.iban_valid", false)
     }
   }, [values.payment.iban, setFieldValue])
 
   return (
     <>
-      <StepHeader title={t('PAYMENT_TITLE')} />
+      <StepHeader title={t("PAYMENT_TITLE")} />
       <Box className="step-body">
         <Box mt={2} mb={0}>
           <TextField
             id="iban"
             sx={{
-              '& path': {
-                color: 'secondary.dark'
-              }
+              "& path": {
+                color: "secondary.dark",
+              },
             }}
-            label={t('IBAN_LABEL')}
+            label={t("IBAN_LABEL")}
             name="payment.iban"
             value={values.payment.iban}
             variant="outlined"
@@ -91,7 +90,7 @@ function IBAN(props) {
                     <CheckOutlinedIcon color="primary" />
                   )}
                 </InputAdornment>
-              )
+              ),
             }}
             onChange={handleInputChange}
             onBlur={handleBlur}
@@ -102,7 +101,7 @@ function IBAN(props) {
             helperText={
               (touched?.payment?.iban &&
                 (errors?.payment?.iban || errors?.payment?.iban_valid)) ||
-              t('IBAN_HELP')
+              t("IBAN_HELP")
             }
           />
         </Box>
@@ -118,17 +117,17 @@ function IBAN(props) {
                 value={true}
               />
             }
-            label={t('IBAN_ACCEPT_DIRECT_DEBIT')}
+            label={t("IBAN_ACCEPT_DIRECT_DEBIT")}
           />
         </Box>
       </Box>
 
       <TermsDialog
-        title={t('SEPA_TITLE')}
+        title={t("SEPA_TITLE")}
         open={open}
         onAccept={handleAccept}
         onClose={handleClose}>
-        <span dangerouslySetInnerHTML={{ __html: t('SEPA') }} />
+        <span dangerouslySetInnerHTML={{ __html: t("SEPA") }} />
       </TermsDialog>
     </>
   )

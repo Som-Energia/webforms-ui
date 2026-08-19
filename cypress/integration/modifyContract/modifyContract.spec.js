@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Modify Contract', () => {
-  Cypress.on('uncaught:exception', (error, runnable) => {
+  Cypress.on('uncaught:exception', (error) => {
     console.error(error)
     return false
   })
@@ -144,7 +144,7 @@ describe('Modify Contract', () => {
       .type(this.data.power2)
       .should('have.value', this.data.power2)
 
-    cy.get('[data-cy=next]').click()
+    cy.get('[data-cy=next]').should('be.disabled')
 
     cy.contains('Alguno de los periodos debe ser superior a 15.001 kW')
   })
@@ -156,7 +156,10 @@ describe('Modify Contract', () => {
 
     cy.wait(500)
 
-    cy.get('[type=submit]').click()
+    cy.get('[name=power]').focus()
+    cy.get('[name=power]').blur()
+
+    cy.get('[type=submit]').should('be.disabled')
 
     cy.contains('No has introducido la potencia para el periodo')
   })
@@ -168,7 +171,12 @@ describe('Modify Contract', () => {
 
     cy.get('[name=moreThan15Kw]').get('[data-value="true"]').click()
 
-    cy.get('[type=submit]').click()
+    cy.get('[type=submit]').should('be.disabled')
+
+    cy.get('[name=power]').focus()
+    cy.get('[name=power]').blur()
+
+    cy.get('[type=submit]').should('be.disabled')
 
     cy.contains('No has introducido la potencia para el periodo')
   })
@@ -181,9 +189,7 @@ describe('Modify Contract', () => {
     cy.get('#phases').click()
     cy.get(`[data-value=${this.data.phases}]`).click()
 
-    cy.get('[type=submit]').click()
-
-    cy.contains('No has adjuntado la documentación requerida')
+    cy.get('[type=submit]').should('be.disabled')
   })
 
   it('Incorrect phone number', function () {

@@ -7,10 +7,10 @@ export class StringUtils {
    */
   static normalize(value) {
     return (
-      (value || '')
+      (value || "")
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
-        .normalize('NFD')
-        .replace(/\p{Diacritic}/gu, '')
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
     )
   }
 }

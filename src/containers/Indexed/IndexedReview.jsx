@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import IndexedReviewData from './IndexedReviewData'
+import React, { useState } from "react"
+
+import IndexedReviewData from "./IndexedReviewData"
 
 const IndexedReview = (props) => {
   let {
@@ -9,7 +10,7 @@ const IndexedReview = (props) => {
     targetTariff,
     isTariff20,
     isTariffIndexed,
-    isIndexedPilotOngoing
+    isIndexedPilotOngoing,
   } = props
   const [open, setOpen] = useState(false)
   const [indexadaTermsAccepted, setIndexadaTermsAccepted] = useState(false)
@@ -23,22 +24,22 @@ const IndexedReview = (props) => {
 
   const handleAccept = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', true)
+    setFieldValue("terms_accepted", true)
   }
 
   const handleClose = () => {
     setOpen(false)
-    setFieldValue('terms_accepted', false)
+    setFieldValue("terms_accepted", false)
   }
 
   const handleIndexadaTermsAccepted = (data) => {
     setIndexadaTermsAccepted(data)
-    setFieldValue('particular_contract_terms_accepted', data)
+    setFieldValue("particular_contract_terms_accepted", data)
   }
 
   const handleIndexadaLegalTermsAccepted = (data) => {
     setIndexadaLegalTermsAccepted(data)
-    setFieldValue('indexed_legal_terms_accepted', data)
+    setFieldValue("indexed_legal_terms_accepted", data)
   }
 
   return (

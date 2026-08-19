@@ -1,23 +1,22 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import CheckBox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
+import CheckBox from "@mui/material/Checkbox"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
-import ReviewField from '../../../../components/review/ReviewField'
-import AlertBox from '../../../../components/AlertBox/AlertBox'
-import TextRecommendation from '../../components/TextRecommendation/TextRecommendation'
-
+import AlertBox from "../../../../components/AlertBox/AlertBox"
+import ReviewField from "../../../../components/review/ReviewField"
 import {
-  LightningIcon,
-  EuroIcon,
-  PlaceMapIcon,
-  SolarpanelIcon,
   CreditCardIcon,
+  EuroIcon,
+  LightningIcon,
+  PhoneIcon,
+  PlaceMapIcon,
   ReceiptIcon,
-  PhoneIcon
-} from '../../../../data/icons/Icons'
+  SolarpanelIcon,
+} from "../../../../data/icons/Icons"
+import TextRecommendation from "../../components/TextRecommendation/TextRecommendation"
 
 const CustomCheckBox = (props) => {
   const { name, onClick, text, checked, dataCy } = props
@@ -25,7 +24,7 @@ const CustomCheckBox = (props) => {
   return (
     <Grid mt={2}>
       <FormControlLabel
-        sx={{ display: 'flex', gap: 2, color: 'black', fontWeight: 700 }}
+        sx={{ display: "flex", gap: 2, color: "black", fontWeight: 700 }}
         control={
           <CheckBox
             data-cy={dataCy}
@@ -45,32 +44,31 @@ const CustomCheckBox = (props) => {
   )
 }
 
-
-
 const ContractReview = (props) => {
   const { t } = useTranslation()
   const { values, setFieldValue } = props
 
   const formatGurbCost = () => {
     const value = values?.gurb?.join_cost
-    return typeof value !== 'number' || Number.isNaN(value) ? Number.parseFloat(value)?.toFixed(2) : value.toFixed(2);
+    return typeof value !== "number" || Number.isNaN(value)
+      ? Number.parseFloat(value)?.toFixed(2)
+      : value.toFixed(2)
   }
-
 
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={12} sx={{ mb: 2 }}>
-          <TextRecommendation title={t('CONTRACT_SUMMARY')} isHeader={true} />
+          <TextRecommendation title={t("CONTRACT_SUMMARY")} isHeader={true} />
         </Grid>
 
         {/* KWH Section */}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <LightningIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('GURB_CONTRACT_SUMMARY_KWH')}
+                {t("GURB_CONTRACT_SUMMARY_KWH")}
               </Typography>
               <ReviewField value={`${values.gurb.power} KWh`} />
             </Grid>
@@ -79,15 +77,15 @@ const ContractReview = (props) => {
 
         {/* Join Cost Section */}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <EuroIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('GURB_CONTRACT_SUMMARY_JOIN_COST')}
+                {t("GURB_CONTRACT_SUMMARY_JOIN_COST")}
               </Typography>
               <ReviewField
-                value={t('GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION', {
-                  join_cost: formatGurbCost(values?.gurb?.join_cost)
+                value={t("GURB_CONTRACT_SUMMARY_JOIN_COST_DESCRIPTION", {
+                  join_cost: formatGurbCost(values?.gurb?.join_cost),
                 })}
               />
             </Grid>
@@ -96,17 +94,17 @@ const ContractReview = (props) => {
 
         {/* Quota Section */}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <ReceiptIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('GURB_CONTRACT_SUMMARY_QUOTA')}
+                {t("GURB_CONTRACT_SUMMARY_QUOTA")}
               </Typography>
               <ReviewField
-                value={t('GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION', {
+                value={t("GURB_CONTRACT_SUMMARY_QUOTA_DESCRIPTION", {
                   power: values?.gurb?.power,
                   daily_cost: values?.gurb?.daily_cost,
-                  monthly_cost: (values?.gurb?.daily_cost || 0) * 30
+                  monthly_cost: (values?.gurb?.daily_cost || 0) * 30,
                 })}
               />
             </Grid>
@@ -115,21 +113,21 @@ const ContractReview = (props) => {
 
         {/* Gurb Type Section */}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <SolarpanelIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('GURB_CONTRACT_SUMMARY_GURB_TYPE')}
+                {t("GURB_CONTRACT_SUMMARY_GURB_TYPE")}
               </Typography>
               <ReviewField
                 value={
                   values?.gurb?.surplus_compensation
                     ? t(
-                      'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION'
-                    )
+                        "GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITH_SURPLUS_COMPENSATION",
+                      )
                     : t(
-                      'GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION'
-                    )
+                        "GURB_CONTRACT_SUMMARY_GURB_TYPE_DESCRIPTION_WITHOUT_SURPLUS_COMPENSATION",
+                      )
                 }
               />
             </Grid>
@@ -138,14 +136,14 @@ const ContractReview = (props) => {
 
         {/* Supplypoint Section*/}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <PlaceMapIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('SUPPLYPOINT')}
+                {t("SUPPLYPOINT")}
               </Typography>
               <ReviewField
-                value={t('GURB_CONTRACT_SUMMARY_SUPPLYPOINT_DESCRIPTION')}
+                value={t("GURB_CONTRACT_SUMMARY_SUPPLYPOINT_DESCRIPTION")}
               />
             </Grid>
           </Grid>
@@ -153,14 +151,14 @@ const ContractReview = (props) => {
 
         {/* Payment Section */}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <CreditCardIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('PAYMENT_TITLE')}
+                {t("PAYMENT_TITLE")}
               </Typography>
               <ReviewField
-                value={t('GURB_CONTRACT_SUMMARY_PAYMENT_DESCRIPTION')}
+                value={t("GURB_CONTRACT_SUMMARY_PAYMENT_DESCRIPTION")}
               />
             </Grid>
           </Grid>
@@ -168,14 +166,14 @@ const ContractReview = (props) => {
 
         {/* Contact Section */}
         <Grid item xs={12} md={6} sx={{ mb: 3 }}>
-          <Grid sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+          <Grid sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
             <PhoneIcon />
-            <Grid sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <Grid sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Typography variant="body.sm.regular" color="primary.dark">
-                {t('CONTACT')}
+                {t("CONTACT")}
               </Typography>
               <ReviewField
-                value={t('GURB_CONTRACT_SUMMARY_CONTACT_DESCRIPTION')}
+                value={t("GURB_CONTRACT_SUMMARY_CONTACT_DESCRIPTION")}
               />
             </Grid>
           </Grid>
@@ -183,12 +181,12 @@ const ContractReview = (props) => {
 
         <Grid item xs={12} md={12}>
           <AlertBox
-            textAlign='left'
+            textAlign="left"
             id="contract_review_info_alert"
-            description={t('GURB_CONTRACT_REVIEW_INFO')}
-            severity={'warning'}
-            icon='info'
-            variant={'body.md.regular'}
+            description={t("GURB_CONTRACT_REVIEW_INFO")}
+            severity={"warning"}
+            icon="info"
+            variant={"body.md.regular"}
           />
         </Grid>
         <Grid item xs={12} md={12} sx={{ mb: 2 }}>
@@ -196,7 +194,7 @@ const ContractReview = (props) => {
             variant="body.sm.regular"
             color="primary.dark"
             dangerouslySetInnerHTML={{
-              __html: t('GURB_PURPOSE').concat('<br />', t('RIGHTS'))
+              __html: t("GURB_PURPOSE").concat("<br />", t("RIGHTS")),
             }}
           />
         </Grid>
@@ -206,14 +204,14 @@ const ContractReview = (props) => {
         dataCy="privacy_policy_checkbox"
         onClick={() =>
           setFieldValue(
-            'privacy_policy_accepted',
-            !values.privacy_policy_accepted
+            "privacy_policy_accepted",
+            !values.privacy_policy_accepted,
           )
         }
         text={{
-          __html: t('CONTRACT_PRIVACY_POLICY_TERMS', {
-            url: t('CONTRACT_PRIVACY_POLICY_TERMS_URL')
-          })
+          __html: t("CONTRACT_PRIVACY_POLICY_TERMS", {
+            url: t("CONTRACT_PRIVACY_POLICY_TERMS_URL"),
+          }),
         }}
         checked={values.privacy_policy_accepted}
       />
@@ -223,20 +221,20 @@ const ContractReview = (props) => {
         dataCy="generic_especific_conditons_checkbox"
         onClick={() =>
           setFieldValue(
-            'generic_especific_conditons_accepted',
-            !values.generic_especific_conditons_accepted
+            "generic_especific_conditons_accepted",
+            !values.generic_especific_conditons_accepted,
           )
         }
         text={{
-          __html: t('GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS', {
-            generic_conditions_url: t('GENERIC_CONDITIONS_URL'),
+          __html: t("GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS", {
+            generic_conditions_url: t("GENERIC_CONDITIONS_URL"),
             gurb_specific_conditions_url: t(
-              'GURB_CHECK_SPECIFIC_CONDITIONS_URL'
+              "GURB_CHECK_SPECIFIC_CONDITIONS_URL",
             ),
             contract_specific_conditions_url: t(
-              'CONTRACT_CHECK_SPECIFIC_CONDITIONS_URL'
-            )
-          })
+              "CONTRACT_CHECK_SPECIFIC_CONDITIONS_URL",
+            ),
+          }),
         }}
         checked={values.generic_especific_conditons_accepted}
       />
@@ -246,11 +244,11 @@ const ContractReview = (props) => {
         dataCy="gurb_adhesion_payment_checkbox"
         onClick={() =>
           setFieldValue(
-            'gurb_adhesion_payment_accepted',
-            !values.gurb_adhesion_payment_accepted
+            "gurb_adhesion_payment_accepted",
+            !values.gurb_adhesion_payment_accepted,
           )
         }
-        text={{ __html: t('GURB_CHECK_ADHESION_PAYMENT_ACCEPTED') }}
+        text={{ __html: t("GURB_CHECK_ADHESION_PAYMENT_ACCEPTED") }}
         checked={values.gurb_adhesion_payment_accepted}
       />
     </>

@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from "react"
 
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
-import CircularProgress from '@mui/material/CircularProgress'
+import CheckIcon from "@mui/icons-material/Check"
+import ClearIcon from "@mui/icons-material/Clear"
+import CircularProgress from "@mui/material/CircularProgress"
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
 
-import CheckIcon from '@mui/icons-material/Check'
-import ClearIcon from '@mui/icons-material/Clear';
-
-import { checkVat } from '../../services/api'
-import { checkPhisicalVAT } from '../../services/utils'
+import { checkVat } from "../../services/api"
+import { checkPhisicalVAT } from "../../services/utils"
 
 const VATField = (props) => {
   const {
@@ -22,7 +21,7 @@ const VATField = (props) => {
     error,
     helperText,
     setFieldTouched,
-    autoFocus = false
+    autoFocus = false,
   } = props
 
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +46,7 @@ const VATField = (props) => {
             isPhisical: phisicalVAT,
             isMember: response?.data?.is_member,
             valid: validVat,
-            exists: response?.data?.exists
+            exists: response?.data?.exists,
           })
         })
         .catch((error) => {
@@ -59,7 +58,7 @@ const VATField = (props) => {
           onChange({
             vat: valueVAT,
             isPhisical: isPhisicalVAT,
-            valid: isValidVAT
+            valid: isValidVAT,
           })
         })
     }
@@ -91,13 +90,15 @@ const VATField = (props) => {
         InputProps={{
           endAdornment: isVatTouched && (
             <InputAdornment position="end">
-              {
-                isLoading
-                  ? <CircularProgress size={24} />
-                  : !isValidVAT || error ? <ClearIcon color={'error'} /> : <CheckIcon color={'primary'} />
-              }
+              {isLoading ? (
+                <CircularProgress size={24} />
+              ) : !isValidVAT || error ? (
+                <ClearIcon color={"error"} />
+              ) : (
+                <CheckIcon color={"primary"} />
+              )}
             </InputAdornment>
-          )
+          ),
         }}
       />
     </>

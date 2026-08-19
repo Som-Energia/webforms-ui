@@ -1,51 +1,51 @@
-import React from 'react'
-import GenerationContributionForm from './GenerationContributionForm'
+import React from "react"
+
 import {
-  render,
-  queryByAttribute,
   fireEvent,
-  getByText
-} from '@testing-library/react'
+  getByText,
+  queryByAttribute,
+  render,
+} from "@testing-library/react"
+import { vi } from "vitest"
 
+import GenerationContributionForm from "./GenerationContributionForm"
 
-import { vi } from 'vitest';
+vi.mock("react-i18next", () => require("../../../tests/__mocks__/i18n"))
 
-vi.mock('react-i18next', () => require('../../../tests/__mocks__/i18n'));
-
-describe('Generation Form Contribution', () => {
+describe("Generation Form Contribution", () => {
   const mockSetFieldValue = vi.fn()
   const valueStructure = {
     member: {
       is_member: true,
-      number: '',
-      vat: '',
+      number: "",
+      vat: "",
       checked: false,
-      full_name: '',
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      address: '',
-      postal_code: '',
-      state: { id: '' },
-      city: { id: '' },
-      surname1: '',
-      surname2: '',
-      email: '',
-      email2: '',
-      phone1: '',
-      phone2: '',
-      language: 'ca'
+      full_name: "",
+      proxynif: "",
+      proxyname: "",
+      name: "",
+      address: "",
+      postal_code: "",
+      state: { id: "" },
+      city: { id: "" },
+      surname1: "",
+      surname2: "",
+      email: "",
+      email2: "",
+      phone1: "",
+      phone2: "",
+      language: "ca",
     },
     payment: {
-      amount: '',
-      iban: '',
-      payment_method: 'iban',
-      sepa_accepted: false
+      amount: "",
+      iban: "",
+      payment_method: "iban",
+      sepa_accepted: false,
     },
     number_of_actions: 0,
     annual_use: 0,
     privacy_policy_accepted: false,
-    percent_over_annual_use: 0
+    percent_over_annual_use: 0,
   }
 
   const errorStructure = {
@@ -68,53 +68,53 @@ describe('Generation Form Contribution', () => {
       email2: false,
       phone1: false,
       phone2: false,
-      language: false
+      language: false,
     },
     payment: {
       amount: false,
       iban: false,
       payment_method: false,
-      sepa_accepted: false
+      sepa_accepted: false,
     },
     number_of_actions: false,
     annual_use: false,
     privacy_policy_accepted: false,
-    percent_over_annual_use: false
+    percent_over_annual_use: false,
   }
 
   const errors = JSON.parse(JSON.stringify(errorStructure))
   const mockValues = JSON.parse(JSON.stringify(valueStructure))
-  const getById = queryByAttribute.bind(null, 'id')
+  const getById = queryByAttribute.bind(null, "id")
 
-  test('Should call setFieldValue when ad annual use', () => {
+  test("Should call setFieldValue when ad annual use", () => {
     const dom = render(
       <GenerationContributionForm
         values={mockValues}
         errors={errors}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const annualUseTextField = getById(dom.container, 'annual_use')
+    const annualUseTextField = getById(dom.container, "annual_use")
     fireEvent.change(annualUseTextField, { target: { value: 2500 } })
-    expect(mockSetFieldValue).toHaveBeenCalledWith('annual_use', '2500')
+    expect(mockSetFieldValue).toHaveBeenCalledWith("annual_use", "2500")
   })
 
-  test('Should add action when click the button to add an action', () => {
+  test("Should add action when click the button to add an action", () => {
     const dom = render(
       <GenerationContributionForm
         values={mockValues}
         errors={errors}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const addActionButton = getById(dom.container, 'add_action')
+    const addActionButton = getById(dom.container, "add_action")
     fireEvent.click(addActionButton)
-    expect(mockSetFieldValue).toHaveBeenCalledWith('number_of_actions', 1)
+    expect(mockSetFieldValue).toHaveBeenCalledWith("number_of_actions", 1)
   })
 
-  test('Should remove action when click the button to remove an action', () => {
+  test("Should remove action when click the button to remove an action", () => {
     const mockWithActions = JSON.parse(JSON.stringify(mockValues))
     mockWithActions.number_of_actions = 3
     const dom = render(
@@ -122,15 +122,15 @@ describe('Generation Form Contribution', () => {
         values={mockWithActions}
         errors={errors}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const removeActionButton = getById(dom.container, 'remove_action')
+    const removeActionButton = getById(dom.container, "remove_action")
     fireEvent.click(removeActionButton)
-    expect(mockSetFieldValue).toHaveBeenCalledWith('number_of_actions', 2)
+    expect(mockSetFieldValue).toHaveBeenCalledWith("number_of_actions", 2)
   })
 
-  test('Should not allow to add an action when click the button to add an action and there is the maximum number of actions', () => {
+  test("Should not allow to add an action when click the button to add an action and there is the maximum number of actions", () => {
     const mockWithActions = JSON.parse(JSON.stringify(mockValues))
     mockWithActions.number_of_actions = 49
     const dom = render(
@@ -139,15 +139,15 @@ describe('Generation Form Contribution', () => {
         errors={errors}
         setFieldValue={mockSetFieldValue}
         limitAmount={true}
-      />
+      />,
     )
 
-    const addActionButton = getById(dom.container, 'add_action')
+    const addActionButton = getById(dom.container, "add_action")
     fireEvent.click(addActionButton)
-    expect(mockSetFieldValue).not.toHaveBeenCalledWith('number_of_actions', 50)
+    expect(mockSetFieldValue).not.toHaveBeenCalledWith("number_of_actions", 50)
   })
 
-  test('Should not allow to remove an action when click the button to remove an action and there is the minimum number of actions', () => {
+  test("Should not allow to remove an action when click the button to remove an action and there is the minimum number of actions", () => {
     const mockWithActions = JSON.parse(JSON.stringify(mockValues))
     mockWithActions.number_of_actions = 1
     const dom = render(
@@ -155,15 +155,15 @@ describe('Generation Form Contribution', () => {
         values={mockWithActions}
         errors={errors}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const removeActionButton = getById(dom.container, 'remove_action')
+    const removeActionButton = getById(dom.container, "remove_action")
     fireEvent.click(removeActionButton)
-    expect(mockSetFieldValue).not.toHaveBeenCalledWith('number_of_actions', 0)
+    expect(mockSetFieldValue).not.toHaveBeenCalledWith("number_of_actions", 0)
   })
 
-  test('Should change IBAN', () => {
+  test("Should change IBAN", () => {
     const mockWithActions = JSON.parse(JSON.stringify(mockValues))
     mockWithActions.number_of_actions = 3
     const dom = render(
@@ -171,31 +171,30 @@ describe('Generation Form Contribution', () => {
         values={mockWithActions}
         errors={errors}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
-    const IBAN = 'ES18 9999 0000 9999 0000 9999'
-    const ibanTextField = getById(dom.container, 'iban')
+    const IBAN = "ES18 9999 0000 9999 0000 9999"
+    const ibanTextField = getById(dom.container, "iban")
     React.act(() => {
       fireEvent.change(ibanTextField, { target: { value: IBAN } })
     })
-    expect(mockSetFieldValue).toHaveBeenCalledWith('payment.iban', IBAN, false)
+    expect(mockSetFieldValue).toHaveBeenCalledWith("payment.iban", IBAN, false)
   })
 
-  test('Should show IBAN helper text', () => {
-    
+  test("Should show IBAN helper text", () => {
     const dom = render(
       <GenerationContributionForm
         values={mockValues}
         errors={errors}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const ibanTextField = getById(dom.container, 'box_iban_input')
-    expect(getByText(ibanTextField, 'IBAN_HELP')).toBeInTheDocument()
+    const ibanTextField = getById(dom.container, "box_iban_input")
+    expect(getByText(ibanTextField, "IBAN_HELP")).toBeInTheDocument()
   })
 
-  test('Should show IBAN error text, when Iban is touched and has an error', () => {
+  test("Should show IBAN error text, when Iban is touched and has an error", () => {
     const mockErrMsg = "IBAN has an error"
     const mockErrors = JSON.parse(JSON.stringify(errors))
     mockErrors.payment.iban = mockErrMsg
@@ -203,17 +202,16 @@ describe('Generation Form Contribution', () => {
       <GenerationContributionForm
         values={mockValues}
         errors={mockErrors}
-        touched={{payment:{iban:true}}}
+        touched={{ payment: { iban: true } }}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const ibanTextField = getById(dom.container, 'box_iban_input')
+    const ibanTextField = getById(dom.container, "box_iban_input")
     expect(getByText(ibanTextField, mockErrMsg)).toBeInTheDocument()
   })
 
-
-  test('Should show IBAN error text, when Iban is not valid', () => {
+  test("Should show IBAN error text, when Iban is not valid", () => {
     const mockErrMsg = "IBAN is not valid"
     const mockErrors = JSON.parse(JSON.stringify(errors))
     mockErrors.payment.iban_valid = mockErrMsg
@@ -221,16 +219,16 @@ describe('Generation Form Contribution', () => {
       <GenerationContributionForm
         values={mockValues}
         errors={mockErrors}
-        touched={{payment:{iban:true}}}
+        touched={{ payment: { iban: true } }}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const ibanTextField = getById(dom.container, 'box_iban_input')
+    const ibanTextField = getById(dom.container, "box_iban_input")
     expect(getByText(ibanTextField, mockErrMsg)).toBeInTheDocument()
   })
 
-  test('Should show annual use error text, when has an error', () => {
+  test("Should show annual use error text, when has an error", () => {
     const mockErrMsg = "annual use is not valid"
     const mockErrors = JSON.parse(JSON.stringify(errors))
     mockErrors.annual_use = mockErrMsg
@@ -238,13 +236,12 @@ describe('Generation Form Contribution', () => {
       <GenerationContributionForm
         values={mockValues}
         errors={mockErrors}
-        touched={{annual_use:true}}
+        touched={{ annual_use: true }}
         setFieldValue={mockSetFieldValue}
-      />
+      />,
     )
 
-    const ibanTextField = getById(dom.container, 'box_annual_use')
+    const ibanTextField = getById(dom.container, "box_annual_use")
     expect(getByText(ibanTextField, mockErrMsg)).toBeInTheDocument()
   })
-
 })

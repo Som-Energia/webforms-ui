@@ -1,87 +1,84 @@
-import react from '@vitejs/plugin-react-swc'
-import svgr from 'vite-plugin-svgr'
-// Uncomment the following line to enable eslint plugin, but first fix the issues in the codebase
-//import eslint from 'vite-plugin-eslint'
-import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
-import pkg from './package.json'
+import react from "@vitejs/plugin-react-swc"
+import eslint from "vite-plugin-eslint2"
+import svgr from "vite-plugin-svgr"
+import {
+  createAppConfig,
+  createManualChunks,
+} from "@somenergia/frontend-config/vite"
 
-export default defineConfig(({ mode }) => {
-  // Vite provides import.meta.env.BASE_URL from its 'base' parameter,
-  // but, by default, it ignores that parameter from .env files
-  // (not VITE_ prefixed).
-  // Read it explicitly to have a mode dependant base.
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), 'BASE_URL') }
+import pkg from "./package.json"
 
+export default createAppConfig(({ mode }) => {
   const ovOptions =
-    mode === 'ov'
+    mode === "ov"
       ? {
-          entryFileNames: 'assets/main.js',
-          chunkFileNames: (fileInfo) => {
-            if (fileInfo.name.includes('vendor')) {
-              return 'assets/vendor.js' // Explicitly name the entry JS file
-            }
-            return 'assets/[name]-[hash].js'
+          entryFileNames: "assets/main.js",
+          chunkFileNames: ({ name }) => {
+            return name.includes("vendor")
+              ? "assets/[name].js"
+              : "assets/[name]-[hash].js"
           },
-          assetFileNames: (assetInfo) => {
-            if (
-              assetInfo.name.endsWith('.css') &&
-              assetInfo.name.includes('index')
-            ) {
-              return 'assets/index.css' // Explicitly name the CSS file
-            }
-            return 'assets/[name]-[hash].[ext]'
-          }
+          assetFileNames: ({ name }) => {
+            return name.endsWith(".css")
+              ? "assets/index.css" // Explicitly name the CSS file
+              : "assets/[name]-[hash].[ext]"
+          },
         }
       : {}
 
   return {
-    base: process.env.BASE_URL,
     resolve: {
-      dedupe: Object.keys(pkg.dependencies)
+      dedupe: Object.keys(pkg.dependencies),
     },
     plugins: [
       react(),
-      splitVendorChunkPlugin(),
-      svgr()
-      // TODO: to be activated after fixing the issues
-      // eslint()
+      svgr(),
+      eslint({
+        build: true,
+        lintOnStart: true,
+        emitWarning: false,
+        cache: false,
+        include: ["src/**/*.{js,jsx}"],
+      }),
     ],
     build: {
-      outDir: 'forms',
-      manifest: 'asset-manifest.json',
+      outDir: "forms",
+      manifest: "asset-manifest.json",
       rollupOptions: {
         output: {
-          ...ovOptions
-        }
+          ...ovOptions,
+          manualChunks: createManualChunks([
+            { chunk: "vendor-phone", includes: ["libphonenumber-js"] },
+            { chunk: "vendor-forms", includes: ["formik", "/yup/"] },
+            { chunk: "vendor-dnd", includes: ["@dnd-kit"] },
+            { chunk: "vendor-lodash", includes: ["/lodash"] },
+            { chunk: "vendor-stdnum", includes: ["stdnum"] },
+          ]),
+        },
       },
-      target: 'es2020'
     },
     server: {
-      open: true,
-      port: 3000,
-      allowedHosts: true,
       deps: {
-        inline: ['@emotion/styled', '@emotion/react']
-      }
+        inline: ["@emotion/styled", "@emotion/react"],
+      },
     },
     preview: {
       open: false
     },
     test: {
-      globals: true,
-      environment: 'jsdom',
-      css: true,
-      setupFiles: './src/tests/setupTests.js',
+      exclude: ["**/node_modules/**", "**/cypress/**"],
+      setupFiles: "./src/tests/setupTests.js",
       coverage: {
-        reporter: ['text', 'json', 'html'],
+        reporter: ["text", "json", "html"],
         exclude: [
-          '**/node_modules/**',
-          '**/forms/**',
-          '**/coverage/**',
-          '**/scripts/**',
-          '**/public/**'
-        ]
-      }
-    }
+          "**/node_modules/**",
+          "**/forms/**",
+          "**/coverage/**",
+          "**/scripts/**",
+          "**/public/**",
+          "**/cypress/**",
+        ],
+      },
+    },
   }
 })

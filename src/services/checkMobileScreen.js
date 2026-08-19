@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 const useCheckMobileScreen = () => {
   const [width, setWidth] = useState(window.innerWidth)
@@ -7,9 +7,9 @@ const useCheckMobileScreen = () => {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange)
+    window.addEventListener("resize", handleWindowSizeChange)
     return () => {
-      window.removeEventListener('resize', handleWindowSizeChange)
+      window.removeEventListener("resize", handleWindowSizeChange)
     }
   }, [])
 

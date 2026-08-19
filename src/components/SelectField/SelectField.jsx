@@ -1,18 +1,19 @@
-import Grid from '@mui/material/Grid'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
-import InputTitle from '../InputTitle'
+import Grid from "@mui/material/Grid"
+import MenuItem from "@mui/material/MenuItem"
+import Select from "@mui/material/Select"
+
+import InputTitle from "../InputTitle"
 
 const SelectField = (props) => {
   const {
     required = false,
     label,
     fieldName,
-    value = '',
+    value = "",
     options,
     setFieldValue,
     onChange,
-    disabled = false
+    disabled = false,
   } = props
 
   const handleChange = (event) => {
@@ -54,9 +55,9 @@ const SelectField = (props) => {
         xs={12}
         sm={6}
         sx={{
-          '&.MuiGrid-item': {
-            maxWidth: '100%'
-          }
+          "&.MuiGrid-item": {
+            maxWidth: "100%",
+          },
         }}>
         <Select
           data-testid="select-field"
@@ -65,13 +66,13 @@ const SelectField = (props) => {
           id={`${fieldName}`}
           value={value}
           sx={{
-            borderRadius: '8px'
+            borderRadius: "8px",
           }}
           inputProps={{
-            'aria-label': 'Without label'
+            "aria-label": "Without label",
           }}
           onChange={handleChange}>
-          <MenuItem sx={{ display: 'none' }} label="None" value="" />
+          <MenuItem sx={{ display: "none" }} label="None" value="" />
           {getSelectData()}
         </Select>
       </Grid>

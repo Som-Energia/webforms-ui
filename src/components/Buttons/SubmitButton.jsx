@@ -1,11 +1,12 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import { buttonDark } from './buttonStyles'
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+
+import { buttonDark } from "./buttonStyles"
 
 function SubmitButton(props) {
-  const { onClick, disabled, sending, text = 'FINISH', children } = props
+  const { onClick, disabled, sending, text = "FINISH", children } = props
 
   const { t } = useTranslation()
 
@@ -18,7 +19,7 @@ function SubmitButton(props) {
       variant="contained"
       disabled={disabled}
       onClick={onClick}>
-      {sending && <CircularProgress size={24} sx={{ color: 'white' }} />}
+      {sending && <CircularProgress size={24} sx={{ color: "white" }} />}
 
       {!sending && (children || t(text))}
     </Button>

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
+import Box from "@mui/material/Box"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import NextButton from '../../components/OldComponents/Buttons/NextButton'
+import NextButton from "../../components/OldComponents/Buttons/NextButton"
 
-export default function ModifyIntro({ nextStep, prevStep }) {
+export default function ModifyIntro({ nextStep }) {
   const { t } = useTranslation()
   const [isSubmitting, setSubmitting] = useState(false)
 
@@ -26,26 +26,26 @@ export default function ModifyIntro({ nextStep, prevStep }) {
           <Typography
             variant="body1"
             dangerouslySetInnerHTML={{
-              __html: t('MODIFY_POTTAR_INTRO', {
-                url: t('MODIFY_POTTAR_INTRO_URL'),
-                costs_url: t('MODIFY_POTTAR_INTRO_COSTS_URL'),
-                potinfo_url: t('MODIFY_POTTAR_INTRO_POTINFO_URL')
-              })
+              __html: t("MODIFY_POTTAR_INTRO", {
+                url: t("MODIFY_POTTAR_INTRO_URL"),
+                costs_url: t("MODIFY_POTTAR_INTRO_COSTS_URL"),
+                potinfo_url: t("MODIFY_POTTAR_INTRO_POTINFO_URL"),
+              }),
             }}
           />
-          <Box sx={{ mb: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <Box sx={{ mb: 1, display: "flex", justifyContent: "flex-end" }}>
             {nextStep && (
-               <NextButton
+              <NextButton
                 onClick={nextStep}
                 disabled={isSubmitting}
-                title={t('NEXT')}
+                title={t("NEXT")}
                 sx={{
-                  backgroundColor: 'primary.extraLight',
-                  color: 'primary.main',
-                  '&:hover': {
-                    color: 'primary.extraLight',
-                    backgroundColor: 'primary.main'
-                  }
+                  backgroundColor: "primary.extraLight",
+                  color: "primary.main",
+                  "&:hover": {
+                    color: "primary.extraLight",
+                    backgroundColor: "primary.main",
+                  },
                 }}
               />
             )}

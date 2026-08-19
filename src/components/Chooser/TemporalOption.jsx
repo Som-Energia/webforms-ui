@@ -1,11 +1,9 @@
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import Typography from "@mui/material/Typography"
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-
-import Checkbox from '@mui/material/Checkbox'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { chooserStyles, chooserSelectedStyles } from './chooserStyles'
-
+import { chooserSelectedStyles, chooserStyles } from "./chooserStyles"
 
 const TemporalOption = ({
   isSelected,
@@ -14,19 +12,18 @@ const TemporalOption = ({
   icon,
   textHeader,
   textBody,
-  maxWidth
+  maxWidth,
 }) => {
-
   return (
     <Box
       role="button"
       data-cy={optionId}
       sx={{
         ...(isSelected ? chooserSelectedStyles : chooserStyles),
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
       tabIndex={0}
       onClick={() => {
@@ -35,28 +32,27 @@ const TemporalOption = ({
       <Box>
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '0.0rem',
-            justifyContent: 'space-between'
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "0.0rem",
+            justifyContent: "space-between",
           }}>
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem'
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
             }}>
             {icon}
             <Typography
               variant="body.md.medium"
               sx={{
-                textAlign: 'center',
-                whiteSpace: 'normal',
-                wordBreak: 'break-word',
+                textAlign: "center",
+                whiteSpace: "normal",
+                wordBreak: "break-word",
                 maxWidth: { maxWidth },
-                display: 'inline-block',
-              }}
-            >
+                display: "inline-block",
+              }}>
               {textHeader}
             </Typography>
           </Box>
@@ -69,7 +65,9 @@ const TemporalOption = ({
             />
           ) : null}
         </Box>
-        <Typography variant="body.sm.regular" color="secondary.extraDark">{textBody}</Typography>
+        <Typography variant="body.sm.regular" color="secondary.extraDark">
+          {textBody}
+        </Typography>
       </Box>
     </Box>
   )

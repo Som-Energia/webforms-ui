@@ -1,59 +1,59 @@
-import React, { useState } from 'react'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import SendIcon from "@mui/icons-material/Send"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
-import CircularProgress from '@mui/material/CircularProgress'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import SendIcon from '@mui/icons-material/Send'
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 
-import Chooser from '../../components/OldComponents/Chooser'
-import Uploader from '../../components/OldComponents/Uploader'
-import PrevButton from '../../components/OldComponents/Buttons/PrevButton'
+import PrevButton from "../../components/OldComponents/Buttons/PrevButton"
+import Chooser from "../../components/OldComponents/Chooser"
+import Uploader from "../../components/OldComponents/Uploader"
 
 const showD1PowerModificationChooser =
-  import.meta.env.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER === 'true'
+  import.meta.env.VITE_SHOW_D1_POWER_MODIFICATION_CHOOSER === "true"
 
 function AcceptD1({
   prevStep,
   handlePost,
   handleStepChanges,
   nextStep,
-  params
+  params,
 }) {
   const { t } = useTranslation()
   const [sending, setSending] = useState(false)
 
   const AcceptD1Schema = Yup.object().shape({
     m1: Yup.bool()
-      .required(t('UNACCEPTED_PRIVACY_POLICY'))
-      .oneOf([true, false], t('UNACCEPTED_PRIVACY_POLICY'))
+      .required(t("UNACCEPTED_PRIVACY_POLICY"))
+      .oneOf([true, false], t("UNACCEPTED_PRIVACY_POLICY")),
   })
 
   return (
     <Paper
       sx={{
         mt: 2,
-        p: 2
+        p: 2,
       }}>
       <Formik
         initialValues={{
           ...{
             d1Attachments: [],
-            m1: showD1PowerModificationChooser ? '' : false
+            m1: showD1PowerModificationChooser ? "" : false,
           },
-          ...params
+          ...params,
         }}
         validationSchema={AcceptD1Schema}
         onSubmit={async (values) => {
           handleStepChanges({
             d1Attachments: values?.d1Attachments,
-            m1: values?.m1
+            m1: values?.m1,
           })
           if (values?.m1) {
             nextStep()
@@ -69,14 +69,14 @@ function AcceptD1({
           touched,
           isValid,
           handleSubmit,
-          setFieldValue
+          setFieldValue,
         }) => (
           <Form onSubmit={handleSubmit} noValidate>
             <Box mt={1} mx={1} mb={2}>
               <Typography
                 variant="body1"
                 dangerouslySetInnerHTML={{
-                  __html: t('ATTACHMENTS_D1_INTRO_ACCEPT')
+                  __html: t("ATTACHMENTS_D1_INTRO_ACCEPT"),
                 }}
               />
             </Box>
@@ -87,7 +87,7 @@ function AcceptD1({
                   variant="body1"
                   component="div"
                   dangerouslySetInnerHTML={{
-                    __html: t('D1_ATTACHMENTS_ACCEPT')
+                    __html: t("D1_ATTACHMENTS_ACCEPT"),
                   }}
                 />
               </Box>
@@ -96,11 +96,11 @@ function AcceptD1({
                   maxFiles={5}
                   fieldError={
                     errors?.d1Attachments &&
-                    (touched?.d1Attachments || values?.m1 !== '') &&
+                    (touched?.d1Attachments || values?.m1 !== "") &&
                     errors?.d1Attachments
                   }
                   callbackFn={(d1Attachments) =>
-                    setFieldValue('d1Attachments', d1Attachments)
+                    setFieldValue("d1Attachments", d1Attachments)
                   }
                   values={values.d1Attachments}
                 />
@@ -113,25 +113,25 @@ function AcceptD1({
                 mt={1}
                 mb={2}
                 sx={{
-                  '& label': {
-                    minHeight: '110px'
-                  }
+                  "& label": {
+                    minHeight: "110px",
+                  },
                 }}>
                 <Chooser
-                  question={t('ANOTHER_CONTRACT_MODIFICATION')}
-                  onChange={(option) => setFieldValue('m1', option.option)}
+                  question={t("ANOTHER_CONTRACT_MODIFICATION")}
+                  onChange={(option) => setFieldValue("m1", option.option)}
                   value={values.m1}
                   options={[
                     {
                       value: true,
-                      label: t('YES'),
-                      description: t('ANOTHER_CONTRACT_M1')
+                      label: t("YES"),
+                      description: t("ANOTHER_CONTRACT_M1"),
                     },
                     {
                       value: false,
-                      label: t('NO'),
-                      description: t('NO_ANOTHER_CONTRACT_M1')
-                    }
+                      label: t("NO"),
+                      description: t("NO_ANOTHER_CONTRACT_M1"),
+                    },
                   ]}
                 />
               </Box>
@@ -140,14 +140,14 @@ function AcceptD1({
             <Box
               sx={{
                 mb: 1,
-                display: 'flex',
-                justifyContent: 'space-between',
+                display: "flex",
+                justifyContent: "space-between",
               }}>
               {
                 <PrevButton
                   disabled={sending}
                   onClick={() => prevStep(params)}
-                  title={t('PREV')}
+                  title={t("PREV")}
                 />
               }
               {
@@ -155,12 +155,12 @@ function AcceptD1({
                   type="submit"
                   disableElevation={true}
                   sx={{
-                    backgroundColor: '#CDFF80',
-                    color: '#0B2E34',
-                    '&:hover': {
-                      color: '#CDFF80',
-                      backgroundColor: '#0B2E34'
-                    }
+                    backgroundColor: "#CDFF80",
+                    color: "#0B2E34",
+                    "&:hover": {
+                      color: "#CDFF80",
+                      backgroundColor: "#0B2E34",
+                    },
                   }}
                   variant="contained"
                   disabled={
@@ -172,7 +172,7 @@ function AcceptD1({
                       <ArrowForwardIosIcon />
                     )
                   }>
-                  {(values?.m1 === false && t('SEND')) || t('NEXT')}
+                  {(values?.m1 === false && t("SEND")) || t("NEXT")}
                 </Button>
               }
             </Box>

@@ -1,32 +1,31 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from "react"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
-import { useParams } from 'react-router-dom'
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Paper from "@mui/material/Paper"
 
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import Paper from '@mui/material/Paper'
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 
-import GenerationMemberIdentifier from './GenerationMemberIdentifier'
-import GenerationContributionForm from './GenerationContributionForm'
-import GenerationReview from './GenerationReview'
-
-import Failure from '../../Failure'
-import Success from '../../Success'
+import ExitButton from "../../../components/OldComponents/Buttons/ExitButton"
+import NextButton from "../../../components/OldComponents/Buttons/NextButton"
+import PrevButton from "../../../components/OldComponents/Buttons/PrevButton"
+import { useSyncLanguage } from "../../../hooks/useTranslateOptions"
+import { generationkWhContribution, member } from "../../../services/api"
 import {
   contributionParams,
   normalizeContribution,
-  normalizeMember
-} from '../../../services/utils'
-import { generationkWhContribution, member } from '../../../services/api'
-import PrevButton from '../../../components/OldComponents/Buttons/PrevButton'
-import NextButton from '../../../components/OldComponents/Buttons/NextButton'
-import ExitButton from '../../../components/OldComponents/Buttons/ExitButton'
-import PersonalData from '../../HolderChange/PersonalData'
-import GenerationSignaturit from './GenerationSignaturit'
-import { useSyncLanguage } from '../../../hooks/useTranslateOptions'
+  normalizeMember,
+} from "../../../services/utils"
+import Failure from "../../Failure"
+import PersonalData from "../../HolderChange/PersonalData"
+import Success from "../../Success"
+import GenerationContributionForm from "./GenerationContributionForm"
+import GenerationMemberIdentifier from "./GenerationMemberIdentifier"
+import GenerationReview from "./GenerationReview"
+import GenerationSignaturit from "./GenerationSignaturit"
 
 const MAX_STEP_NUMBER = 5
 
@@ -45,35 +44,35 @@ const GenerationContribution = (props) => {
 
   const initialValues = {
     member: {
-      partner_number: '',
+      partner_number: "",
       is_member: true,
-      number: '',
-      vat: '',
+      number: "",
+      vat: "",
       checked: false,
-      full_name: '',
-      proxynif: '',
-      proxyname: '',
-      name: '',
-      address: '',
-      postal_code: '',
-      state: { id: '' },
-      city: { id: '' },
-      surname1: '',
-      surname2: '',
-      email: '',
-      email2: '',
-      phone1: '',
-      phone2: '',
+      full_name: "",
+      proxynif: "",
+      proxyname: "",
+      name: "",
+      address: "",
+      postal_code: "",
+      state: { id: "" },
+      city: { id: "" },
+      surname1: "",
+      surname2: "",
+      email: "",
+      email2: "",
+      phone1: "",
+      phone2: "",
       language: `${i18n.language}_ES`,
       has_generation_enabled_zone: true,
       postal_code_checked: false,
-      generation_zone_checked: false
+      generation_zone_checked: false,
     },
     payment: {
-      amount: '',
-      iban: '',
-      payment_method: 'iban',
-      sepa_accepted: true
+      amount: "",
+      iban: "",
+      payment_method: "iban",
+      sepa_accepted: true,
     },
     number_of_actions: 0,
     annual_use: 5000,
@@ -81,169 +80,171 @@ const GenerationContribution = (props) => {
     privacy_policy_accepted_responsible_declaration: false,
     percent_over_annual_use: 0,
     signaturit: {},
-    mandate_name: ''
+    mandate_name: "",
   }
 
   const validationSchemas = [
     Yup.object().shape({
-      is_member: Yup.bool().oneOf([true, false], t('NO_IS_MEMBER')),
+      is_member: Yup.bool().oneOf([true, false], t("NO_IS_MEMBER")),
       member: Yup.object().shape({
-        partner_number: Yup.string().when('is_member', {
+        partner_number: Yup.string().when("is_member", {
           is: true,
-          then: Yup.string().required(t('NO_MEMBER_NUMBER'))
+          then: Yup.string().required(t("NO_MEMBER_NUMBER")),
         }),
         vat: Yup.string()
-          .required(t('NO_MEMBER_VAT'))
-          .when('is_member', {
+          .required(t("NO_MEMBER_VAT"))
+          .when("is_member", {
             is: false,
             then: Yup.string().matches(
               /(^[A-GI-Z0-9])/,
-              t('CIF_COMMUNITY_OWNERS')
-            )
+              t("CIF_COMMUNITY_OWNERS"),
+            ),
           }),
-        vatvalid: Yup.bool().when('is_member', {
+        vatvalid: Yup.bool().when("is_member", {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: Yup.bool().required(t("FILL_NIF")).oneOf([true], t("FILL_NIF")),
         }),
-        checked: Yup.bool().when('is_member', {
+        checked: Yup.bool().when("is_member", {
           is: true,
           then: Yup.bool()
-            .required(t('NO_MEMBER_MATCH'))
-            .oneOf([true], t('NO_MEMBER_MATCH'))
+            .required(t("NO_MEMBER_MATCH"))
+            .oneOf([true], t("NO_MEMBER_MATCH")),
         }),
-        exists: Yup.bool().when('is_member', {
+        exists: Yup.bool().when("is_member", {
           is: false,
           then: Yup.bool()
-            .required(t('DNI_EXIST'))
-            .oneOf([false], t('DNI_EXIST'))
-        })
-      })
+            .required(t("DNI_EXIST"))
+            .oneOf([false], t("DNI_EXIST")),
+        }),
+      }),
     }),
     Yup.object().shape({
       member: Yup.object().shape({
-        name: Yup.string().required(t('NO_NAME')),
-        surname1: Yup.string().when('isphisical', {
+        name: Yup.string().required(t("NO_NAME")),
+        surname1: Yup.string().when("isphisical", {
           is: true,
-          then: Yup.string().required(t('NO_SURNAME1'))
+          then: Yup.string().required(t("NO_SURNAME1")),
         }),
-        proxyname: Yup.string().when('isphisical', {
+        proxyname: Yup.string().when("isphisical", {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NAME'))
+          then: Yup.string().required(t("NO_PROXY_NAME")),
         }),
-        proxynif: Yup.string().when('isphisical', {
+        proxynif: Yup.string().when("isphisical", {
           is: false,
-          then: Yup.string().required(t('NO_PROXY_NIF'))
+          then: Yup.string().required(t("NO_PROXY_NIF")),
         }),
-        proxynif_valid: Yup.bool().when('isphisical', {
+        proxynif_valid: Yup.bool().when("isphisical", {
           is: false,
-          then: Yup.bool().required(t('FILL_NIF')).oneOf([true], t('FILL_NIF'))
+          then: Yup.bool().required(t("FILL_NIF")).oneOf([true], t("FILL_NIF")),
         }),
-        address: Yup.string().required(t('NO_ADDRESS')),
+        address: Yup.string().required(t("NO_ADDRESS")),
         postal_code: Yup.string()
-          .matches(/^\d*$/, t('NO_POSTALCODE'))
-          .required(t('NO_POSTALCODE'))
-          .min(5, t('NO_POSTALCODE'))
-          .max(5, t('NO_POSTALCODE')),
+          .matches(/^\d*$/, t("NO_POSTALCODE"))
+          .required(t("NO_POSTALCODE"))
+          .min(5, t("NO_POSTALCODE"))
+          .max(5, t("NO_POSTALCODE")),
         state: Yup.object().shape({
-          id: Yup.number().required(t('NO_STATE'))
+          id: Yup.number().required(t("NO_STATE")),
         }),
         city: Yup.object().shape({
-          id: Yup.number().required(t('NO_CITY'))
+          id: Yup.number().required(t("NO_CITY")),
         }),
-        email: Yup.string().required(t('NO_EMAIL')).email(t('NO_EMAIL')),
+        email: Yup.string().required(t("NO_EMAIL")).email(t("NO_EMAIL")),
         email2: Yup.string().test(
-          'repeatEmail',
-          t('NO_REPEATED_EMAIL'),
+          "repeatEmail",
+          t("NO_REPEATED_EMAIL"),
           function () {
             return this.parent.email === this.parent.email2
-          }
+          },
         ),
-        phone1: Yup.string().matches(/^\d{9}$/, t('INCORRECT_PHONE')).required(t('NO_PHONE')),
-        phone2: Yup.string().matches(/^(\s*|\d{9})$/, t('INCORRECT_PHONE')),
-        language: Yup.string().required(t('NO_LANGUAGE'))
+        phone1: Yup.string()
+          .matches(/^\d{9}$/, t("INCORRECT_PHONE"))
+          .required(t("NO_PHONE")),
+        phone2: Yup.string().matches(/^(\s*|\d{9})$/, t("INCORRECT_PHONE")),
+        language: Yup.string().required(t("NO_LANGUAGE")),
       }),
       legal_person_accepted: Yup.bool().test({
-        name: 'isTheMemberVat',
-        message: t('ACCEPT_LEGAL_PERSON'),
+        name: "isTheMemberVat",
+        message: t("ACCEPT_LEGAL_PERSON"),
         test: function () {
           return !(
             this.parent.member.isphisical === false &&
             this.parent.legal_person_accepted !== true
           )
-        }
+        },
       }),
       privacy_policy_accepted: Yup.bool()
-        .required(t('UNACCEPTED_PRIVACY_POLICY'))
-        .oneOf([true], t('UNACCEPTED_PRIVACY_POLICY'))
+        .required(t("UNACCEPTED_PRIVACY_POLICY"))
+        .oneOf([true], t("UNACCEPTED_PRIVACY_POLICY")),
     }),
     Yup.object().shape({
       annual_use: Yup.number()
         .required(
-          t('GENERATION_ANNUAL_USE_MIN', {
-            generationMinAnnualUse: new Intl.NumberFormat('ca').format(
-              contributionParams?.generationMinAnnualUse
-            )
-          })
+          t("GENERATION_ANNUAL_USE_MIN", {
+            generationMinAnnualUse: new Intl.NumberFormat("ca").format(
+              contributionParams?.generationMinAnnualUse,
+            ),
+          }),
         )
         .min(
           contributionParams?.generationMinAnnualUse,
-          t('GENERATION_ANNUAL_USE_MIN', {
-            generationMinNumActions: new Intl.NumberFormat('ca').format(
-              contributionParams?.generationMinAnnualUse
-            )
-          })
+          t("GENERATION_ANNUAL_USE_MIN", {
+            generationMinNumActions: new Intl.NumberFormat("ca").format(
+              contributionParams?.generationMinAnnualUse,
+            ),
+          }),
         )
         .typeError("El valor de l'ús anual no és vàlid!"),
       number_of_actions: Yup.number().required(
-        t('GENERATION_ACTIONS_HELPER_MIN', {
-          generationMinNumActions: new Intl.NumberFormat('ca').format(
-            contributionParams?.generationMinNumActions
-          )
-        })
+        t("GENERATION_ACTIONS_HELPER_MIN", {
+          generationMinNumActions: new Intl.NumberFormat("ca").format(
+            contributionParams?.generationMinNumActions,
+          ),
+        }),
       ),
       payment: Yup.object().shape({
         amount: Yup.number()
           .required(
-            t('AMOUNT_HELPER_MIN', {
-              amount: new Intl.NumberFormat('ca').format(
-                contributionParams?.minContribution
-              )
-            })
+            t("AMOUNT_HELPER_MIN", {
+              amount: new Intl.NumberFormat("ca").format(
+                contributionParams?.minContribution,
+              ),
+            }),
           )
           .min(
             contributionParams?.minContribution,
-            t('AMOUNT_HELPER_MIN', {
-              amount: new Intl.NumberFormat('ca').format(
-                contributionParams?.minContribution
-              )
-            })
+            t("AMOUNT_HELPER_MIN", {
+              amount: new Intl.NumberFormat("ca").format(
+                contributionParams?.minContribution,
+              ),
+            }),
           )
           .max(
             contributionParams?.maxContribution,
-            t('AMOUNT_HELPER_MAX', {
-              amount: new Intl.NumberFormat('ca').format(
-                contributionParams?.maxContribution
-              )
-            })
+            t("AMOUNT_HELPER_MAX", {
+              amount: new Intl.NumberFormat("ca").format(
+                contributionParams?.maxContribution,
+              ),
+            }),
           )
           .test(
-            'amountStep',
-            t('AMOUNT_HELPER_STEP', {
-              amount: contributionParams?.contributionStep
+            "amountStep",
+            t("AMOUNT_HELPER_STEP", {
+              amount: contributionParams?.contributionStep,
             }),
-            (value) => value % contributionParams?.contributionStep === 0
+            (value) => value % contributionParams?.contributionStep === 0,
           ),
-        iban: Yup.string().required(t('IBAN_ERROR')),
+        iban: Yup.string().required(t("IBAN_ERROR")),
         iban_valid: Yup.bool()
-          .required(t('IBAN_ERROR'))
-          .oneOf([true], t('IBAN_ERROR'))
-      })
+          .required(t("IBAN_ERROR"))
+          .oneOf([true], t("IBAN_ERROR")),
+      }),
     }),
     Yup.object().shape({
       privacy_policy_accepted_responsible_declaration: Yup.bool()
-        .required(t('HAY QUE ACEPTAR LA POLÍTICA DE PRIVACIDAD'))
-        .oneOf([true], t('PRIVATE_POLICY'))
-    })
+        .required(t("HAY QUE ACEPTAR LA POLÍTICA DE PRIVACIDAD"))
+        .oneOf([true], t("PRIVATE_POLICY")),
+    }),
   ]
 
   const nextStep = useCallback(
@@ -264,7 +265,7 @@ const GenerationContribution = (props) => {
         }
       })
     },
-    [activeStep]
+    [activeStep],
   )
 
   const prevStep = useCallback(
@@ -284,7 +285,7 @@ const GenerationContribution = (props) => {
         props.setTouched({})
       })
     },
-    [activeStep, completed]
+    [activeStep, completed],
   )
 
   const getNextButton = useCallback(
@@ -298,20 +299,18 @@ const GenerationContribution = (props) => {
           }
           onClick={() => nextStep(formikProps)}
           title={
-            activeStep === 3
-              ? t('GENERATION_FORM_SIGN_BUTTON')
-              : t('NEXT')
+            activeStep === 3 ? t("GENERATION_FORM_SIGN_BUTTON") : t("NEXT")
           }
         />
       ) : (
         <ExitButton
           disabled={!formikProps.isValid}
-          onClick={() => (window.location.href = '/')}
-          title={t('EXIT')}
+          onClick={() => (window.location.href = "/")}
+          title={t("EXIT")}
         />
       )
     },
-    [nextStep, t, activeStep]
+    [nextStep, t, activeStep],
   )
 
   const handlePost = async (values) => {
@@ -332,7 +331,7 @@ const GenerationContribution = (props) => {
           console.error(error)
           const errorResp = error?.response?.data?.error
             ? error?.response?.data?.error
-            : { code: 'UNEXPECTED' }
+            : { code: "UNEXPECTED" }
           setError(errorResp)
         })
     }
@@ -351,7 +350,7 @@ const GenerationContribution = (props) => {
         console.error(error?.response?.data)
         const errorResp = error?.response?.data?.data
           ? error?.response?.data?.data
-          : { code: 'UNEXPECTED' }
+          : { code: "UNEXPECTED" }
         setError(errorResp)
       })
     setSending(false)
@@ -369,8 +368,8 @@ const GenerationContribution = (props) => {
       {(formikProps) => (
         <Form
           sx={{
-            position: 'relative',
-            color: 'text.primary'
+            position: "relative",
+            color: "text.primary",
           }}
           noValidate
           autoComplete="off">
@@ -380,22 +379,22 @@ const GenerationContribution = (props) => {
               sx={{
                 mt: 0,
                 mb: 4,
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: 'background.default',
-                padding: '2rem',
-                borderRadius: '10px'
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "background.default",
+                padding: "2rem",
+                borderRadius: "10px",
               }}>
               {activeStep === 0 && (
                 <GenerationMemberIdentifier
                   {...formikProps}
-                  title={t('GENERATION_FORM_TITLE')}
+                  title={t("GENERATION_FORM_TITLE")}
                 />
               )}
               {activeStep === 1 && (
                 <PersonalData
-                  title={t('GENERATION_FORM_PERSONAL_DATA_TITLE')}
+                  title={t("GENERATION_FORM_PERSONAL_DATA_TITLE")}
                   {...formikProps}
                   entity="member"
                 />
@@ -403,20 +402,20 @@ const GenerationContribution = (props) => {
               {activeStep === 2 && (
                 <GenerationContributionForm
                   limitAmount={limitAmount}
-                  title={t('GENERATION_FORM_TITLE')}
+                  title={t("GENERATION_FORM_TITLE")}
                   {...formikProps}
                 />
               )}
               {activeStep === 3 && (
                 <GenerationReview
-                  title={t('GENERATION_FORM_TITLE')}
+                  title={t("GENERATION_FORM_TITLE")}
                   {...formikProps}
                 />
               )}
               {activeStep === 4 && (
                 <GenerationSignaturit
                   limitAmount={limitAmount}
-                  title={t('GENERATION_FORM_TITLE')}
+                  title={t("GENERATION_FORM_TITLE")}
                   submit={handlePost}
                   {...formikProps}
                 />
@@ -428,8 +427,8 @@ const GenerationContribution = (props) => {
                     <Failure error={error} />
                   ) : (
                     <Success
-                      title={t('GENERATION_FORM_SUCCESS_TITLE')}
-                      description={t('GENERATION_FORM_SUCCESS_DESCRIPTION')}
+                      title={t("GENERATION_FORM_SUCCESS_TITLE")}
+                      description={t("GENERATION_FORM_SUCCESS_DESCRIPTION")}
                       result={result}
                     />
                   )}
@@ -439,21 +438,21 @@ const GenerationContribution = (props) => {
               <Box mx={0} mt={2} mb={3}>
                 <Box
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between'
+                    display: "flex",
+                    justifyContent: "space-between",
                   }}>
                   {result?.investment === undefined && !completed ? (
                     <PrevButton
                       disabled={activeStep === 0 || sending}
                       onClick={() => prevStep(formikProps)}
-                      title={t('PREV')}
+                      title={t("PREV")}
                     />
                   ) : null}
                   {activeStep < MAX_STEP_NUMBER - 1
                     ? getNextButton(
                         formikProps.values.member.generation_zone_checked,
                         formikProps.values.member.has_generation_enabled_zone,
-                        formikProps
+                        formikProps,
                       )
                     : null}
                 </Box>

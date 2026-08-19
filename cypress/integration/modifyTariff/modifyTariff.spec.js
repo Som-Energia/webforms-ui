@@ -56,9 +56,8 @@ describe('Modify Tariff', () => {
 
       cy.get('[id=change-tarif-terms-check]').click()
 
-      cy.wait('@generalTerms')
-        .its('response.statusCode')
-        .should('be.oneOf', [200, 304])
+      // dialog with conditions
+      cy.get('[data-cy="accept"]').click()
 
       cy.get('[id=terms-dialog-accept-btn]').click()
 

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import { useTranslation } from 'react-i18next'
-import Box from '@mui/material/Box'
-import Alert from '@mui/material/Alert'
-import Typography from '@mui/material/Typography'
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 
 const CancellationWarning = () => {
   const { t } = useTranslation()
@@ -13,11 +13,11 @@ const CancellationWarning = () => {
       <Alert icon={false} severity="warning">
         <Typography
           sx={{
-            textTransform: 'uppercase'
+            textTransform: "uppercase",
           }}
           variant="pagesubtitle"
           dangerouslySetInnerHTML={{
-            __html: t('CANCELLATION_DISCLAIMER')
+            __html: t("CANCELLATION_DISCLAIMER"),
           }}
         />
       </Alert>

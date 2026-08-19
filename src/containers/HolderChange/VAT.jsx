@@ -1,22 +1,15 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import React from "react"
+import { useTranslation } from "react-i18next"
 
-import Box from '@mui/material/Box'
-import FormHelperText from '@mui/material/FormHelperText'
+import Box from "@mui/material/Box"
+import FormHelperText from "@mui/material/FormHelperText"
 
-import StepHeader from '../../components/OldComponents/StepHeader'
-import VATField from '../../components/OldComponents/VATField'
+import StepHeader from "../../components/OldComponents/StepHeader"
+import VATField from "../../components/OldComponents/VATField"
 
 function VAT(props) {
-  const {
-    values,
-    setValues,
-    touched,
-    setFieldTouched,
-    errors
-  } = props
+  const { values, setValues, touched, setFieldTouched, errors } = props
   const { t } = useTranslation()
-
 
   const onChangeVAT = ({ vat, isPhisical, valid, isMember }) => {
     const tmpValues = {
@@ -26,22 +19,22 @@ function VAT(props) {
         vat: vat,
         isphisical: isPhisical,
         vatvalid: valid,
-        ismember: isMember
-      }
+        ismember: isMember,
+      },
     }
     setValues(tmpValues)
   }
 
   return (
     <>
-      <StepHeader title={t('HOLDER_CHANGE')} />
+      <StepHeader title={t("HOLDER_CHANGE")} />
       <Box className="step-body">
-        <Box dangerouslySetInnerHTML={{ __html: t('FILL_VAT') }} />
+        <Box dangerouslySetInnerHTML={{ __html: t("FILL_VAT") }} />
         <Box mt={3} mb={1}>
           <VATField
             id="vat"
             name="holder.vat"
-            label={t('VAT_HOLDERCHANGE_LABEL')}
+            label={t("VAT_HOLDERCHANGE_LABEL")}
             variant="outlined"
             fullWidth
             required
@@ -64,7 +57,7 @@ function VAT(props) {
         <Box mt={4} mb={3}>
           <FormHelperText
             dangerouslySetInnerHTML={{
-              __html: t('NO_VAT_HELP')
+              __html: t("NO_VAT_HELP"),
             }}></FormHelperText>
         </Box>
       </Box>

@@ -1,36 +1,34 @@
 import {
-  useState,
-  useEffect,
-  useRef,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
-  useCallback
-} from 'react'
-import { useParams } from 'react-router-dom'
-import { Formik } from 'formik'
-import MatomoContext from '../../trackers/matomo/MatomoProvider'
+  useRef,
+  useState,
+} from "react"
+import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
 
-import SubmitButton from '../../components/Buttons/SubmitButton'
-import NewSomStepper from '../../components/NewSomStepper/NewSomStepper'
+import { Formik } from "formik"
 
-import {
-  identifierValidations,
-  gurbPowerOptions,
-  gurbPolicyChecks
-} from './validations/GurbValidations'
-
-import LoadingContext from '../../context/LoadingContext'
-
+import SubmitButton from "../../components/Buttons/SubmitButton"
+import NewSomStepper from "../../components/NewSomStepper/NewSomStepper"
+import LoadingContext from "../../context/LoadingContext"
+import { useSyncLanguage } from "../../hooks/useTranslateOptions"
+import MatomoContext from "../../trackers/matomo/MatomoProvider"
+import ContractReview from "./pages/Gurb/ContractReview"
 // Step components
-import GurbIdentification from './pages/Gurb/GurbIdentification'
-import GurbParticipation from './pages/Gurb/GurbParticipation'
-import ContractReview from './pages/Gurb/ContractReview'
-import GurbSignature from './pages/Gurb/GurbSignature'
-import { useSyncLanguage } from '../../hooks/useTranslateOptions'
-import { useTranslation } from 'react-i18next'
+import GurbIdentification from "./pages/Gurb/GurbIdentification"
+import GurbParticipation from "./pages/Gurb/GurbParticipation"
+import GurbSignature from "./pages/Gurb/GurbSignature"
+import {
+  gurbPolicyChecks,
+  gurbPowerOptions,
+  identifierValidations,
+} from "./validations/GurbValidations"
 
 const GurbFormJoin = () => {
   const { language, code } = useParams()
@@ -61,29 +59,29 @@ const GurbFormJoin = () => {
   const initialValues = useMemo(
     () => ({
       new_contract: undefined,
-      tariff_name: '',
+      tariff_name: "",
       owner: {
-        nif: '',
-        nif_valid: false
+        nif: "",
+        nif_valid: false,
       },
-      cups: '',
+      cups: "",
       gurb: {
-        power: '',
-        daily_cost: '',
-        join_cost: '',
-        surplus_compensation: ''
+        power: "",
+        daily_cost: "",
+        join_cost: "",
+        surplus_compensation: "",
       },
       privacy_policy_accepted: false,
       generic_especific_conditons_accepted: false,
       gurb_adhesion_payment_accepted: false,
-      payment_data: undefined
+      payment_data: undefined,
     }),
-    []
+    [],
   )
 
   const validationSchemas = useMemo(
     () => [identifierValidations, gurbPowerOptions, gurbPolicyChecks],
-    []
+    [],
   )
 
   const steps = [
@@ -99,7 +97,7 @@ const GurbFormJoin = () => {
         setRedsysData={setRedsysData}
         onSuccess={() => setValidSignature(true)}
       />
-    )
+    ),
   ]
 
   const renderCurrentStep = (formikProps) => {
@@ -109,17 +107,17 @@ const GurbFormJoin = () => {
   const handleSubmit = () => {
     setSubmitAction(true)
     trackEvent({
-      category: 'GurbFormJoin',
-      action: 'setGurbFormJoinStep',
-      name: `gurb-join-signed-${code}`
+      category: "GurbFormJoin",
+      action: "setGurbFormJoinStep",
+      name: `gurb-join-signed-${code}`,
     })
   }
 
   useEffect(() => {
     trackEvent({
-      category: 'GurbFormJoin',
-      action: 'setGurbFormJoinStep',
-      name: `gurb-join-step-${activeStep}-${code}`
+      category: "GurbFormJoin",
+      action: "setGurbFormJoinStep",
+      name: `gurb-join-step-${activeStep}-${code}`,
     })
   }, [activeStep, code])
 
@@ -129,7 +127,7 @@ const GurbFormJoin = () => {
       aria-label="gurb-join-form"
       maxWidth="md"
       disableGutters
-      sx={{ padding: '1rem' }}>
+      sx={{ padding: "1rem" }}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -138,7 +136,7 @@ const GurbFormJoin = () => {
         validateOnBlur={false}>
         {(formikProps) => (
           <>
-            <Box sx={{ marginBottom: '65px' }}>
+            <Box sx={{ marginBottom: "65px" }}>
               <NewSomStepper
                 showStepTitle={true}
                 activeStep={activeStep}
@@ -152,7 +150,7 @@ const GurbFormJoin = () => {
                         loading || !formikProps.isValid || !validSignature
                       }
                       onClick={() => handleSubmit()}>
-                      {t('GURB_NEXT_PAYMENT')}
+                      {t("GURB_NEXT_PAYMENT")}
                     </SubmitButton>
                   )
                 }>

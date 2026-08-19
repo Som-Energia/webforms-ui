@@ -1,5 +1,21 @@
 # Change Log
 
+## 8.1.4 2026-08-18
+
+- FIX: Use customAxios in api.js
+
+## 8.1.3 2026-08-17
+
+- STYLE: Format project files
+- REF: Ignore i18n files to avoid conflicts with translators
+
+## 8.1.2 2026-08-17
+
+- FIX: Restore OV asset output
+- IMP: Update ESLint configuration and Node requirements
+- STYLE: Adjust address autocomplete field padding
+- I18N: Update Catalan, Spanish and Basque translations
+
 ## 8.1.1 2026-08-06
 
 - FIX: Enable html text in loading component
