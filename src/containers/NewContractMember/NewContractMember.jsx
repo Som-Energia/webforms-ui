@@ -86,6 +86,7 @@ const NewContractMemberForm = (props) => {
   const [redsysURL, setRedsysURL] = useState("")
   const [redsysData, setRedsysData] = useState()
   const formTPV = useRef(null)
+  const formContainer = useRef(null)
   const { tariff, specialCampaign, initStep } = props
 
   const [hasAlert, setHasAlert] = useState(false)
@@ -281,7 +282,10 @@ const NewContractMemberForm = (props) => {
       name: "send-new-contract-member",
     })
 
-    window.scrollTo({ top: 0 })
+    formContainer.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
     setSending(true)
     setSignatureCompleted(false)
 
@@ -514,6 +518,7 @@ const NewContractMemberForm = (props) => {
 
   return (
     <Container
+      ref={formContainer}
       data-cy="contract-form"
       aria-label="contract-form"
       maxWidth="md"
