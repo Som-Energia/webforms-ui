@@ -107,18 +107,17 @@ export const newNormalizeContract = (data, gurbCode) => {
       cnae: data.supply_point.cnae.toString(),
       process: process,
     },
-    payment_type: paymentType, // TODO: new_member warning!
+    payment_type: paymentType,
     donation: data.voluntary_donation,
     privacy_conditions: data.privacy_policy_accepted,
     general_contract_terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted,
-    // TODO: remove when ERP merge this feature to main branch
     signature: true, // feature flag for ERP
   }
 
   if (paymentType === "remesa") {
-    finalContract["iban"] = data.new_member.iban // TODO: new_member warning!
-    finalContract["sepa_accepted"] = data.new_member.sepa_accepted // TODO: new_member warning!
+    finalContract["iban"] = data.new_member.iban
+    finalContract["sepa_accepted"] = data.new_member.sepa_accepted
   }
 
   if (paymentType === "tpv") {
@@ -141,7 +140,7 @@ export const newNormalizeContract = (data, gurbCode) => {
     (data.has_member !== "member-on" && data.member.link_member) ||
     data.has_member === "campaign-offer"
   ) {
-    finalContract["contract_owner"] = normalizeClient(data.new_member) // TODO: change where this is saved! (new_member warning)
+    finalContract["contract_owner"] = normalizeClient(data.new_member)
     finalContract["contract_owner"]["address"] = normalizeAddress(data.address)
   }
 
@@ -168,7 +167,6 @@ export const newNormalizeContract = (data, gurbCode) => {
     data.supply_point.attachments &&
     data.supply_point.attachments.length > 0
   ) {
-    // TODO: selfconsumption attachments must be inside attachment!!
     finalContract["attachments"] = []
     data.supply_point.attachments.forEach((attachment) => {
       finalContract["attachments"].push(

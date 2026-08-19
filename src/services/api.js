@@ -1,7 +1,7 @@
-import axios from "axios"
 import dayjs from "dayjs"
 
 import postalCode2Ine from "../data/zip-ine.json"
+import axios from "./customAxios"
 
 const WEBFORMS_API_URL =
   document.getElementById("root")?.dataset?.webformsApiUrl ??

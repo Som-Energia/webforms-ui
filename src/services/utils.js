@@ -742,7 +742,7 @@ export const isMatchingCUPSandCAU = (cau, cups) => {
 
 export const prettyCAU = (value) => {
   if (!value) return value
-  value = value.replace(/[^0-9A-Za-z]/g, "") // TODO: Do not cut chars after not matching one
+  value = value.replace(/[^0-9A-Za-z]/g, "")
   value = value.slice(0, 26)
   value = value.toUpperCase()
   return value
