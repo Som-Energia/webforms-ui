@@ -13,19 +13,9 @@ import {
 } from "../../../services/api"
 import { checkVatFormat } from "../../../services/utils"
 
-const stableT = (key) => key
-const stableI18n = {
-  changeLanguage: () => new Promise(() => {}),
-}
-
-vi.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: stableT,
-    i18n: stableI18n,
-  }),
-  Trans: ({ children, i18nKey }) => children ?? i18nKey,
-  Translation: ({ children }) => children(stableT, { i18n: stableI18n }),
-}))
+vi.mock("react-i18next", async () =>
+  import("../../../tests/__mocks__/i18n.js"),
+)
 
 vi.mock("../../../services/api", () => ({
   checkIsFromGenerationEnabledZone: vi.fn(),
