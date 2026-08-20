@@ -3,9 +3,11 @@ import { afterEach, describe, expect, test, vi } from "vitest"
 const WEBFORMS_API_URL = "https://api.test"
 const ORIGINAL_ENV_API_URL = import.meta.env.VITE_WEBFORMS_API_URL
 
-const setApiRootDataset = (rootElement = {
-  dataset: { webformsApiUrl: WEBFORMS_API_URL },
-}) => {
+const setApiRootDataset = (
+  rootElement = {
+    dataset: { webformsApiUrl: WEBFORMS_API_URL },
+  },
+) => {
   global.document = {
     getElementById: vi.fn(() => rootElement),
   }
@@ -77,7 +79,10 @@ describe("api", () => {
       token: "token-2",
       cancel: vi.fn(),
     }
-    const source = vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource)
+    const source = vi
+      .fn()
+      .mockReturnValueOnce(firstSource)
+      .mockReturnValueOnce(secondSource)
     const axios = vi.fn().mockResolvedValue({ data: { ok: true } })
     axios.CancelToken = { source }
     axios.all = vi.fn()
@@ -227,10 +232,16 @@ describe("api", () => {
 
     const { api } = await loadApiModule({
       axiosImpl: axios,
-      postalCodeData: [{ "08001": "INE001" }, { "08001": "INE002" }, { "99999": "OTHER" }],
+      postalCodeData: [
+        { "08001": "INE001" },
+        { "08001": "INE002" },
+        { 99999: "OTHER" },
+      ],
     })
 
-    await expect(api.getMunicipisByPostalCode("08001")).resolves.toEqual([{ id: 1 }])
+    await expect(api.getMunicipisByPostalCode("08001")).resolves.toEqual([
+      { id: 1 },
+    ])
 
     expect(axios).toHaveBeenNthCalledWith(1, {
       method: "GET",
@@ -259,7 +270,10 @@ describe("api", () => {
       .mockResolvedValueOnce({ data: { state: true, data: { id: "first" } } })
       .mockResolvedValueOnce({ data: { state: true, data: { id: "second" } } })
     axios.CancelToken = {
-      source: vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource),
+      source: vi
+        .fn()
+        .mockReturnValueOnce(firstSource)
+        .mockReturnValueOnce(secondSource),
     }
     axios.all = vi.fn((requests) => Promise.all(requests))
 
@@ -268,8 +282,12 @@ describe("api", () => {
       postalCodeData: [{ "08001": "INE001" }],
     })
 
-    await expect(api.getMunicipisByPostalCode("08001")).resolves.toEqual([{ id: "first" }])
-    await expect(api.getMunicipisByPostalCode("08001")).resolves.toEqual([{ id: "second" }])
+    await expect(api.getMunicipisByPostalCode("08001")).resolves.toEqual([
+      { id: "first" },
+    ])
+    await expect(api.getMunicipisByPostalCode("08001")).resolves.toEqual([
+      { id: "second" },
+    ])
 
     expect(axios).toHaveBeenNthCalledWith(1, {
       method: "GET",
@@ -426,7 +444,10 @@ describe("api", () => {
     const { api } = await loadApiModule({ axiosImpl: axios })
 
     await expect(
-      api.checkIsFromGenerationEnabledZone({ memberNumber: "0042", memberVat: "ES123" }),
+      api.checkIsFromGenerationEnabledZone({
+        memberNumber: "0042",
+        memberVat: "ES123",
+      }),
     ).resolves.toEqual({ canJoin: true })
     await expect(
       api.checkIsPostalCodeFromGenerationEnabledZone({ postalCode: "08001" }),
@@ -454,10 +475,14 @@ describe("api", () => {
     const signaturePayload = { lead_id: "lead-77", shares: 5 }
     const contributionPayload = { member_id: "42", project_code: "GKWH-1" }
 
-    await expect(api.createGenerationkWhSignature(signaturePayload)).resolves.toEqual({
+    await expect(
+      api.createGenerationkWhSignature(signaturePayload),
+    ).resolves.toEqual({
       signatureId: "sig-1",
     })
-    await expect(api.generationkWhContribution(contributionPayload)).resolves.toEqual({
+    await expect(
+      api.generationkWhContribution(contributionPayload),
+    ).resolves.toEqual({
       created: true,
     })
 
@@ -484,7 +509,10 @@ describe("api", () => {
     }
     const axios = vi.fn().mockResolvedValue({ data: { exists: true } })
     axios.CancelToken = {
-      source: vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource),
+      source: vi
+        .fn()
+        .mockReturnValueOnce(firstSource)
+        .mockReturnValueOnce(secondSource),
     }
     axios.all = vi.fn()
 
@@ -519,7 +547,10 @@ describe("api", () => {
     }
     const axios = vi.fn().mockResolvedValue({ data: { member: true } })
     axios.CancelToken = {
-      source: vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource),
+      source: vi
+        .fn()
+        .mockReturnValueOnce(firstSource)
+        .mockReturnValueOnce(secondSource),
     }
     axios.all = vi.fn()
 
@@ -554,7 +585,10 @@ describe("api", () => {
     }
     const axios = vi.fn().mockResolvedValue({ data: { active: true } })
     axios.CancelToken = {
-      source: vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource),
+      source: vi
+        .fn()
+        .mockReturnValueOnce(firstSource)
+        .mockReturnValueOnce(secondSource),
     }
     axios.all = vi.fn()
 
@@ -589,7 +623,10 @@ describe("api", () => {
     }
     const axios = vi.fn().mockResolvedValue({ data: { valid: true } })
     axios.CancelToken = {
-      source: vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource),
+      source: vi
+        .fn()
+        .mockReturnValueOnce(firstSource)
+        .mockReturnValueOnce(secondSource),
     }
     axios.all = vi.fn()
 
@@ -641,7 +678,10 @@ describe("api", () => {
     }
     const axios = vi.fn().mockResolvedValue({ data: { exists: true } })
     axios.CancelToken = {
-      source: vi.fn().mockReturnValueOnce(firstSource).mockReturnValueOnce(secondSource),
+      source: vi
+        .fn()
+        .mockReturnValueOnce(firstSource)
+        .mockReturnValueOnce(secondSource),
     }
     axios.all = vi.fn()
 
@@ -682,7 +722,9 @@ describe("api", () => {
     const { api } = await loadApiModule({ axiosImpl: axios })
     const file = { name: "invoice.pdf", size: 128 }
 
-    await expect(api.uploadFile("attachment", file)).resolves.toEqual({ uploaded: true })
+    await expect(api.uploadFile("attachment", file)).resolves.toEqual({
+      uploaded: true,
+    })
 
     expect(global.FormData).toHaveBeenCalledTimes(1)
     expect(appendedEntries).toEqual([
@@ -721,8 +763,12 @@ describe("api", () => {
 
     await expect(api.getProvincies()).resolves.toEqual([{ id: "BCN" }])
     await expect(api.getMunicipis("08")).resolves.toEqual([{ id: "08019" }])
-    await expect(api.getSelfConsumptionSituations()).resolves.toEqual([{ id: "roof" }])
-    await expect(api.getSelfConsumptionTechnologies()).resolves.toEqual([{ id: "solar" }])
+    await expect(api.getSelfConsumptionSituations()).resolves.toEqual([
+      { id: "roof" },
+    ])
+    await expect(api.getSelfConsumptionTechnologies()).resolves.toEqual([
+      { id: "solar" },
+    ])
 
     expect(axios).toHaveBeenNthCalledWith(1, {
       method: "GET",
@@ -772,11 +818,17 @@ describe("api", () => {
     const modificationPayload = { field: "value" }
     const d1Payload = { accepted: true }
 
-    await expect(api.createContractLead(leadPayload)).resolves.toEqual({ id: "lead-99" })
-    await expect(api.modifyContract(modificationPayload, "Bearer mod-token")).resolves.toEqual({
+    await expect(api.createContractLead(leadPayload)).resolves.toEqual({
+      id: "lead-99",
+    })
+    await expect(
+      api.modifyContract(modificationPayload, "Bearer mod-token"),
+    ).resolves.toEqual({
       modified: true,
     })
-    await expect(api.confirmD1Case(d1Payload, "case-7", "Bearer d1-token")).resolves.toEqual({
+    await expect(
+      api.confirmD1Case(d1Payload, "case-7", "Bearer d1-token"),
+    ).resolves.toEqual({
       confirmed: true,
     })
 
@@ -809,10 +861,17 @@ describe("api", () => {
 
     const { api } = await loadApiModule({ axiosImpl: axios })
     const holderChangePayload = { contract_id: 10, holder_name: "Ada Lovelace" }
-    const modifyTariffPayload = { token: "Bearer indexed-token", tariff: "2.0TD" }
+    const modifyTariffPayload = {
+      token: "Bearer indexed-token",
+      tariff: "2.0TD",
+    }
 
-    await expect(api.holderChange(holderChangePayload)).resolves.toEqual({ changed: true })
-    await expect(api.modify_tariff(modifyTariffPayload)).resolves.toEqual({ indexed: true })
+    await expect(api.holderChange(holderChangePayload)).resolves.toEqual({
+      changed: true,
+    })
+    await expect(api.modify_tariff(modifyTariffPayload)).resolves.toEqual({
+      indexed: true,
+    })
 
     expect(axios).toHaveBeenNthCalledWith(1, {
       method: "POST",
@@ -908,9 +967,9 @@ describe("api", () => {
 
     const { api } = await loadApiModule({ axiosImpl: axios })
 
-    await expect(api.getCompensationIndexedPrices({ geoZone: "PENINSULA" })).rejects.toBe(
-      response,
-    )
+    await expect(
+      api.getCompensationIndexedPrices({ geoZone: "PENINSULA" }),
+    ).rejects.toBe(response)
   })
 
   test("getCompensationIndexedPrices rethrows rejected axios errors", async () => {
@@ -921,9 +980,9 @@ describe("api", () => {
 
     const { api } = await loadApiModule({ axiosImpl: axios })
 
-    await expect(api.getCompensationIndexedPrices({ geoZone: "BALEARS" })).rejects.toBe(
-      error,
-    )
+    await expect(
+      api.getCompensationIndexedPrices({ geoZone: "BALEARS" }),
+    ).rejects.toBe(error)
   })
 
   test("can_modify_tariff sends the authorization header on the indexed eligibility endpoint", async () => {
@@ -933,7 +992,9 @@ describe("api", () => {
 
     const { api } = await loadApiModule({ axiosImpl: axios })
 
-    await expect(api.can_modify_tariff("Bearer abc")).resolves.toEqual({ allowed: true })
+    await expect(api.can_modify_tariff("Bearer abc")).resolves.toEqual({
+      allowed: true,
+    })
 
     expect(axios).toHaveBeenCalledWith({
       method: "GET",
@@ -948,9 +1009,15 @@ describe("api", () => {
     axios.all = vi.fn()
 
     const { api } = await loadApiModule({ axiosImpl: axios })
-    const payload = { contract_id: 77, csrfToken: "csrf-123", reason: "user-request" }
+    const payload = {
+      contract_id: 77,
+      csrfToken: "csrf-123",
+      reason: "user-request",
+    }
 
-    await expect(api.cancelContract(payload)).resolves.toEqual({ cancelled: true })
+    await expect(api.cancelContract(payload)).resolves.toEqual({
+      cancelled: true,
+    })
 
     expect(axios).toHaveBeenCalledWith({
       method: "POST",
@@ -994,7 +1061,9 @@ describe("api", () => {
     const { api } = await loadApiModule({ axiosImpl: axios })
     const payload = { assignment_id: 9, contract_ids: [3, 1, 2] }
 
-    await expect(api.generationChangeContractPriority(payload)).resolves.toEqual({
+    await expect(
+      api.generationChangeContractPriority(payload),
+    ).resolves.toEqual({
       reordered: true,
     })
 
@@ -1018,10 +1087,18 @@ describe("api", () => {
     const { api } = await loadApiModule({ axiosImpl: axios })
     const addPayload = { assignment_id: 4, contract_ids: [11, 12] }
 
-    await expect(api.getNoAssignmentContracts()).resolves.toEqual([{ id: "unassigned-1" }])
-    await expect(api.getAssignmentContracts()).resolves.toEqual([{ id: "assignment-1" }])
-    await expect(api.addContractsToAssignments(addPayload)).resolves.toEqual({ created: 2 })
-    await expect(api.deleteContractsFromAssignments(12)).resolves.toEqual({ deleted: true })
+    await expect(api.getNoAssignmentContracts()).resolves.toEqual([
+      { id: "unassigned-1" },
+    ])
+    await expect(api.getAssignmentContracts()).resolves.toEqual([
+      { id: "assignment-1" },
+    ])
+    await expect(api.addContractsToAssignments(addPayload)).resolves.toEqual({
+      created: 2,
+    })
+    await expect(api.deleteContractsFromAssignments(12)).resolves.toEqual({
+      deleted: true,
+    })
 
     expect(axios).toHaveBeenNthCalledWith(1, {
       method: "GET",
@@ -1049,7 +1126,10 @@ describe("api", () => {
 
     const { api } = await loadApiModule({ axiosImpl: axios })
 
-    await expect(api.getPowers("GKWH-001", "2.0TD")).resolves.toEqual({ p1: 5.75, p2: 4.6 })
+    await expect(api.getPowers("GKWH-001", "2.0TD")).resolves.toEqual({
+      p1: 5.75,
+      p2: 4.6,
+    })
 
     expect(axios).toHaveBeenCalledWith({
       method: "GET",
@@ -1067,7 +1147,9 @@ describe("api", () => {
 
     const { api } = await loadApiModule({ axiosImpl: axios })
 
-    await expect(api.activateLead("lead-1")).resolves.toEqual({ activated: true })
+    await expect(api.activateLead("lead-1")).resolves.toEqual({
+      activated: true,
+    })
     await expect(api.activateLead("lead-2")).rejects.toThrow("network down")
 
     expect(axios).toHaveBeenNthCalledWith(1, {
