@@ -5,17 +5,14 @@ import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
 
-import GenerationMemberIdFields from "./GenerationMemberIdFields"
-
 import {
   checkIsFromGenerationEnabledZone,
   checkMember,
 } from "../../../services/api"
 import { checkVatFormat } from "../../../services/utils"
+import GenerationMemberIdFields from "./GenerationMemberIdFields"
 
-vi.mock("react-i18next", async () =>
-  import("../../../tests/__mocks__/i18n.js"),
-)
+vi.mock("react-i18next", async () => import("../../../tests/__mocks__/i18n.js"))
 
 vi.mock("../../../services/api", () => ({
   checkIsFromGenerationEnabledZone: vi.fn(),

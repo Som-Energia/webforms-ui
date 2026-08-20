@@ -5,10 +5,9 @@ import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
 
-import MemberIdentifierFields from "./MemberIdentifierFields"
-
 import { checkMember } from "../../services/api"
 import { checkVatFormat } from "../../services/utils"
+import MemberIdentifierFields from "./MemberIdentifierFields"
 
 vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 

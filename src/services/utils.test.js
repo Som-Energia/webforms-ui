@@ -10,10 +10,10 @@ import {
   checkIsTariffIndexed,
   checkPhisicalVAT,
   checkVatFormat,
-  getUrlOrBrowserSessionLanguage,
   getNextNBussinesDays,
-  isMatchingCUPSandCAU,
+  getUrlOrBrowserSessionLanguage,
   isCompanyVat,
+  isMatchingCUPSandCAU,
   newNormalizeMember,
   newTestPowerForPeriods,
   normalizeContract,
@@ -253,12 +253,8 @@ describe("small utility helpers", () => {
   })
 
   test("specialCaseType returns the first matching special case key", () => {
-    expect(specialCaseType({ reason_death: true })).toBe(
-      "SPECIAL_CASES_DEATH",
-    )
-    expect(specialCaseType({ reason_merge: true })).toBe(
-      "SPECIAL_CASES_MERGE",
-    )
+    expect(specialCaseType({ reason_death: true })).toBe("SPECIAL_CASES_DEATH")
+    expect(specialCaseType({ reason_merge: true })).toBe("SPECIAL_CASES_MERGE")
     expect(specialCaseType({ reason_electrodep: true })).toBe(
       "SPECIAL_CASES_ELECTRODEP",
     )
@@ -366,12 +362,7 @@ describe("small utility helpers", () => {
       },
     }
 
-    await setMunicipisWithPostalCode(
-      "17800",
-      setFieldValue,
-      "holder",
-      values,
-    )
+    await setMunicipisWithPostalCode("17800", setFieldValue, "holder", values)
 
     expect(getMunicipisByPostalCode).toHaveBeenCalledWith("17800")
     expect(setFieldValue).toHaveBeenCalledWith("holder", {
@@ -716,9 +707,15 @@ describe("Check Contract Form (normalize function)", () => {
       },
     })
 
-    expect(normalizeContract(values).contract_owner).not.toHaveProperty("proxy_vat")
-    expect(normalizeContract(values).contract_owner).not.toHaveProperty("proxy_name")
-    expect(normalizeContract(values).contract_owner).not.toHaveProperty("phone2")
+    expect(normalizeContract(values).contract_owner).not.toHaveProperty(
+      "proxy_vat",
+    )
+    expect(normalizeContract(values).contract_owner).not.toHaveProperty(
+      "proxy_name",
+    )
+    expect(normalizeContract(values).contract_owner).not.toHaveProperty(
+      "phone2",
+    )
   })
 
   test("Normalize Contract data builds a juridic contract owner and includes indexed terms acceptance", () => {

@@ -7,8 +7,8 @@ import {
 } from "@testing-library/react"
 import { vi } from "vitest"
 
-import AddressAutocompletedFieldGurb from "./AddressAutocompletedFieldGurb"
 import { searchPlace } from "../../../../services/googleApiClient"
+import AddressAutocompletedFieldGurb from "./AddressAutocompletedFieldGurb"
 
 vi.mock(
   "react-i18next",
