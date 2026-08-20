@@ -43,8 +43,14 @@ describe("ApiValidatedField", () => {
   })
 
   test("applies inputFilter and short-circuits empty values", () => {
-    const inputFilter = vi.fn((value) => value.replace(/[^a-z]/gi, "").toUpperCase())
-    const localCheck = vi.fn((value) => ({ value, valid: true, error: undefined }))
+    const inputFilter = vi.fn((value) =>
+      value.replace(/[^a-z]/gi, "").toUpperCase(),
+    )
+    const localCheck = vi.fn((value) => ({
+      value,
+      valid: true,
+      error: undefined,
+    }))
     const onChange = vi.fn()
 
     renderField({ inputFilter, localCheck, onChange })
@@ -82,9 +88,12 @@ describe("ApiValidatedField", () => {
 
     renderField({ localCheck, remoteCheck, onChange })
 
-    fireEvent.change(screen.getByRole("textbox", { name: "API validated field" }), {
-      target: { value: "bad" },
-    })
+    fireEvent.change(
+      screen.getByRole("textbox", { name: "API validated field" }),
+      {
+        target: { value: "bad" },
+      },
+    )
 
     expect(remoteCheck).not.toHaveBeenCalled()
     expect(onChange).toHaveBeenNthCalledWith(2, {
@@ -101,9 +110,12 @@ describe("ApiValidatedField", () => {
 
     renderField({ remoteCheck, onChange })
 
-    fireEvent.change(screen.getByRole("textbox", { name: "API validated field" }), {
-      target: { value: "abc" },
-    })
+    fireEvent.change(
+      screen.getByRole("textbox", { name: "API validated field" }),
+      {
+        target: { value: "abc" },
+      },
+    )
 
     expect(remoteCheck).toHaveBeenCalledWith("abc")
     expect(onChange).toHaveBeenNthCalledWith(2, {
@@ -156,7 +168,11 @@ describe("ApiValidatedField", () => {
 
   test("re-validates when a new formatted prop value differs from the last checked value", () => {
     const inputFilter = vi.fn((value) => value.toUpperCase())
-    const localCheck = vi.fn((value) => ({ value, valid: true, error: undefined }))
+    const localCheck = vi.fn((value) => ({
+      value,
+      valid: true,
+      error: undefined,
+    }))
 
     const { rerender } = render(
       <ApiValidatedField
