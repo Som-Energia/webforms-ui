@@ -9,6 +9,7 @@ import { vi } from "vitest"
 
 import { searchPlace } from "../../../../services/googleApiClient"
 import AddressAutocompletedFieldGurb from "./AddressAutocompletedFieldGurb"
+import { searchPlace } from "../../../../services/googleApiClient"
 
 vi.mock(
   "react-i18next",
