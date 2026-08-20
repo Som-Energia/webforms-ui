@@ -1,7 +1,7 @@
 import React from "react"
+import { act } from "react"
 
 import { fireEvent, render, screen } from "@testing-library/react"
-import { act } from "react"
 import { vi } from "vitest"
 
 import { PopUpContextProvider } from "../../../context/PopUpContext"
