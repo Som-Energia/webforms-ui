@@ -51,6 +51,11 @@ const GenerationMemberIdFields = (props) => {
   }
 
   useEffect(() => {
+    // FIXME: This validation effect depends on callback props like
+    // `setFieldValue`/`setErrors` while also mutating form state, so unstable
+    // parent callback identities can re-trigger validation and cause loops.
+    // Refactor it to depend on stable state transitions instead of callback
+    // prop identity.
     const checkIsMember = async () => {
       const tmpValues = {
         ...values,
@@ -133,6 +138,9 @@ const GenerationMemberIdFields = (props) => {
     try {
       hash = hash && atob(hash).split(";")
       if (hash && hash.length > 1) {
+        // FIXME: This effect depends on `values` but also calls `setValues`, so
+        // the hash prefill can re-trigger itself and loop when the incoming
+        // values are equivalent to the current state.
         const tmpValues = {
           ...values,
           member: {
