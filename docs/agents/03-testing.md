@@ -34,7 +34,8 @@
 3. Si el canvi afecta un flux complet, una ruta o navegacio multi-step, revisa si cal `Cypress`.
 4. Prefereix demostrar comportament observable abans que detalls interns d'implementacio.
 5. Si el component depen de `i18n`, `context`, `theme` o props obligatories, munta el setup minim equivalent al real.
-6. Sempre que sigui possible, intenta deixar el coverage del fitxer o component tocat al `100%`.
+6. No facis mocks d'altres components del repo o de UI real si no es demana explicitament: mantingues els components reals muntats i mockeja nomes APIs, serveis o altres bordes externs estrets.
+7. Sempre que sigui possible, intenta deixar el coverage del fitxer o component tocat al `100%`.
 
 ## Estructura minima d'un test
 
@@ -107,6 +108,11 @@ vi.mock("react-i18next", () => ({
 ## Mocks
 
 Quan cal comprovar crides, usa `vi.fn()` o `vi.mocked(...)`.
+
+Prioritat del repo:
+
+- Mockeja APIs, serveis i dependències externes amb IO o side effects.
+- No mockegis components reals del repo o de la UI per simplificar el test, excepte si l'usuari ho demana explicitament.
 
 ```js
 const mockFunc = vi.fn()
