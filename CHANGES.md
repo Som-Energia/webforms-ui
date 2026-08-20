@@ -1,5 +1,11 @@
 # Change Log
 
+## 8.1.5 2026-08-20
+
+- FIX: Scroll to contract form on submit
+- REF: Deprecate legacy IBAN component and remove stale TODO and FIXME comments
+- I18N: Update Catalan, Spanish, Basque and Galician translations
+
 ## 8.1.4 2026-08-18
 
 - FIX: Use customAxios in api.js
