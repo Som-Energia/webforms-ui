@@ -132,6 +132,12 @@ const GenerationNoMemberIdFields = (props) => {
             error={errors?.member?.postal_code && touched?.member?.postal_code}
             helperText={
               touched?.member?.postal_code && errors?.member?.postal_code ? (
+                // FIXME: MUI renders TextField helperText inside FormHelperText
+                // (`<p>` by default), so using `Typography` with `variant="h6"`
+                // here creates invalid DOM nesting (`<h6>` inside `<p>`) and
+                // triggers a React warning in tests. Replace this with inline
+                // content such as `Typography component="span"` or another
+                // non-heading element styled like helper text.
                 <Typography
                   variant="h6"
                   sx={customStyles.helperText}
