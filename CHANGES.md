@@ -8,6 +8,12 @@
 - REF: Make the shared fast `react-i18next` test mock stable across renders in `src/tests/__mocks__/i18n.js`
 - DOC: Add FIXME notes for known production issues found during coverage work, including generation member validation loops and invalid helper-text DOM nesting in `GenerationNoMemberIdFields`
 
+## 8.1.5 2026-08-20
+
+- FIX: Scroll to contract form on submit
+- REF: Deprecate legacy IBAN component and remove stale TODO and FIXME comments
+- I18N: Update Catalan, Spanish, Basque and Galician translations
+
 ## 8.1.4 2026-08-18
 
 - FIX: Use customAxios in api.js
