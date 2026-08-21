@@ -21,34 +21,37 @@ vi.mock("../../services/api", () => ({
 }))
 
 describe("PersonalData", () => {
+  const buildEntityValues = (overrides = {}) => ({
+    address: "",
+    city: { id: "", name: "" },
+    door: "",
+    email: "",
+    email2: "",
+    floor: "",
+    ismember: false,
+    isphisical: true,
+    language: "es_ES",
+    name: "Alice",
+    number: "12",
+    phone1: "",
+    phone2: "",
+    postal_code: "",
+    proxyname: "",
+    proxynif: "",
+    proxynif_valid: false,
+    proxynif_phisical: false,
+    state: { id: "", name: "" },
+    surname1: "Holder",
+    surname2: "Change",
+    vatvalid: false,
+    ...overrides,
+  })
+
   const buildValues = (overrides = {}) => ({
     ...overrides,
-    holder: {
-      address: "",
-      city: { id: "", name: "" },
-      door: "",
-      email: "",
-      email2: "",
-      floor: "",
-      ismember: false,
-      isphisical: true,
-      language: "es_ES",
-      name: "Alice",
-      number: "12",
-      phone1: "",
-      phone2: "",
-      postal_code: "",
-      proxyname: "",
-      proxynif: "",
-      proxynif_valid: false,
-      proxynif_phisical: false,
-      state: { id: "", name: "" },
-      surname1: "Holder",
-      surname2: "Change",
-      vatvalid: false,
-      ...overrides.holder,
-    },
+    holder: buildEntityValues(overrides.holder),
     member: {
+      ...buildEntityValues(),
       become_member: false,
       link_member: false,
       ...overrides.member,
@@ -116,9 +119,9 @@ describe("PersonalData", () => {
   test("limits phone input to the first 14 digits", async () => {
     const { container, setFieldValue } = await renderPersonalData()
 
-  fireEvent.change(container.querySelector("#holder_phone"), {
-    target: { name: "holder.phone1", value: "1234567890123456" },
-  })
+    fireEvent.change(container.querySelector("#holder_phone"), {
+      target: { name: "holder.phone1", value: "1234567890123456" },
+    })
 
     expect(setFieldValue).toHaveBeenCalledWith(
       "holder.phone1",
@@ -189,5 +192,52 @@ describe("PersonalData", () => {
         name: "Barcelona",
       })
     })
+  })
+
+  test("does not look up postal code data when the city is already selected", async () => {
+    const { setFieldValue } = await renderPersonalData({
+      holder: {
+        postal_code: "08001",
+        city: { id: "080", name: "Barcelona" },
+        state: { id: "08", name: "Barcelona" },
+      },
+    })
+
+    await waitFor(() => {
+      expect(apiMocks.getMunicipisByPostalCode).not.toHaveBeenCalled()
+    })
+    expect(setFieldValue).not.toHaveBeenCalledWith(
+      "holder.state",
+      expect.anything(),
+    )
+    expect(setFieldValue).not.toHaveBeenCalledWith(
+      "holder.city",
+      expect.anything(),
+    )
+  })
+
+  test("uses contract privacy copy without the holderchange note when the flow has a service", async () => {
+    await renderPersonalData({ contract: { has_service: true } })
+
+    expect(screen.getByText("PRIVACY_POLICY_CONTRACT")).toBeInTheDocument()
+    expect(
+      screen.queryByText("PRIVACY_POLICY_HOLDERCHANGE_NOTE"),
+    ).not.toBeInTheDocument()
+  })
+
+  test("renders the member legal person dialog copy", async () => {
+    const user = userEvent.setup()
+    const { container } = await renderPersonalData(
+      {
+        member: { isphisical: false, vatvalid: true },
+      },
+      { entity: "member" },
+    )
+
+    await user.click(container.querySelector("#legal_person_accepted"))
+
+    expect(
+      screen.getByText("PRIVACY_POLICY_LEGAL_PERSON_NEW_MEMBER"),
+    ).toBeInTheDocument()
   })
 })
