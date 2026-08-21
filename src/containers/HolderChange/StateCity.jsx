@@ -106,6 +106,9 @@ const StateCity = (props) => {
     })
   }
 
+  const selectedStateId = state?.id && states[state.id] ? state.id : ""
+  const selectedCityId = city?.id && citiesNames[city.id] ? city.id : ""
+
   return (
     <>
       <Grid item xs={12} sm={6}>
@@ -120,7 +123,7 @@ const StateCity = (props) => {
           required
           fullWidth
           disabled={!Object.keys(states).length}
-          value={state?.id}
+          value={selectedStateId}
           error={!!stateError}
           helperText={stateHelperText}
           InputProps={{
@@ -152,7 +155,7 @@ const StateCity = (props) => {
           required
           fullWidth
           disabled={!Object.keys(cities).length}
-          value={city?.id}
+          value={selectedCityId}
           error={!!cityError}
           helperText={cityHelperText}
           InputProps={{
