@@ -57,7 +57,7 @@ describe("PersonalData", () => {
     legal_person_accepted: false,
   })
 
-  const renderPersonalData = (overrides = {}, propsOverrides = {}) => {
+  const renderPersonalData = async (overrides = {}, propsOverrides = {}) => {
     const setFieldValue = vi.fn()
     const setValues = vi.fn()
 
@@ -75,6 +75,10 @@ describe("PersonalData", () => {
       />,
     )
 
+    await waitFor(() => {
+      expect(apiMocks.getProvincies).toHaveBeenCalled()
+    })
+
     return { ...result, setFieldValue, setValues }
   }
 
@@ -90,7 +94,7 @@ describe("PersonalData", () => {
   })
 
   test("trims leading and trailing spaces from both email fields", async () => {
-    const { container, setFieldValue } = renderPersonalData()
+    const { container, setFieldValue } = await renderPersonalData()
 
     fireEvent.change(container.querySelector("#holder_email"), {
       target: { name: "holder.email", value: " alice@example.org " },
@@ -110,11 +114,11 @@ describe("PersonalData", () => {
   })
 
   test("limits phone input to the first 14 digits", async () => {
-    const { container, setFieldValue } = renderPersonalData()
+    const { container, setFieldValue } = await renderPersonalData()
 
-    fireEvent.change(container.querySelector("#holder_phone"), {
-      target: { name: "holder.phone1", value: "1234567890123456" },
-    })
+  fireEvent.change(container.querySelector("#holder_phone"), {
+    target: { name: "holder.phone1", value: "1234567890123456" },
+  })
 
     expect(setFieldValue).toHaveBeenCalledWith(
       "holder.phone1",
@@ -124,7 +128,7 @@ describe("PersonalData", () => {
 
   test("toggles privacy policy acceptance through the real checkbox", async () => {
     const user = userEvent.setup()
-    const { container, setFieldValue } = renderPersonalData()
+    const { container, setFieldValue } = await renderPersonalData()
 
     await user.click(container.querySelector("#privacy_policy_accepted"))
 
@@ -133,7 +137,7 @@ describe("PersonalData", () => {
 
   test("accepts the legal person dialog and stores the confirmation", async () => {
     const user = userEvent.setup()
-    const { container, setFieldValue } = renderPersonalData({
+    const { container, setFieldValue } = await renderPersonalData({
       holder: { isphisical: false, vatvalid: true },
     })
 
@@ -145,7 +149,7 @@ describe("PersonalData", () => {
 
   test("declines the legal person dialog and clears the confirmation", async () => {
     const user = userEvent.setup()
-    const { container, setFieldValue } = renderPersonalData({
+    const { container, setFieldValue } = await renderPersonalData({
       holder: { isphisical: false, vatvalid: true },
     })
 
@@ -165,7 +169,7 @@ describe("PersonalData", () => {
       ],
     ])
 
-    const { setFieldValue } = renderPersonalData({
+    const { setFieldValue } = await renderPersonalData({
       holder: {
         postal_code: "08001",
       },
