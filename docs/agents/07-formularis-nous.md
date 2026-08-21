@@ -10,14 +10,14 @@ Quan toques `Gurb` o `NewContractMember`, assumeix primer que ets dins dels form
 
 ## Senyals Dels Formularis Nous
 
-| Senyal | Què indica |
-|---|---|
-| `ThemeWrapper theme={webFormsTheme}` | flux de la capa visual nova |
-| `LoadingContextProvider` + `SummaryContextProvider` | patró dels formularis nous amb estat transversal de càrrega i resum |
-| `components/Buttons/PrevButton|NextButton|SubmitButton` | ús de botons nous, no `OldComponents` |
-| `SomStepper` | stepper compartit dels formularis nous |
-| `useSyncLanguage(language)` | sincronització d'idioma integrada al flux |
-| containers com `NewContractMember`, `Gurb`, `NewMember` | família de formularis més alineada amb el patró actual |
+| Senyal                                                  | Què indica                                                          |
+| ------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ThemeWrapper theme={webFormsTheme}`                    | flux de la capa visual nova                                         |
+| `LoadingContextProvider` + `SummaryContextProvider`     | patró dels formularis nous amb estat transversal de càrrega i resum |
+| `components/Buttons/PrevButton                          | NextButton                                                          | SubmitButton` | ús de botons nous, no `OldComponents` |
+| `SomStepper`                                            | stepper compartit dels formularis nous                              |
+| `useSyncLanguage(language)`                             | sincronització d'idioma integrada al flux                           |
+| containers com `NewContractMember`, `Gurb`, `NewMember` | família de formularis més alineada amb el patró actual              |
 
 ## Fluxos que avui encaixen millor aquí
 

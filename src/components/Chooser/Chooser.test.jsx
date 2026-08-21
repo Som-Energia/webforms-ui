@@ -2,6 +2,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined"
 
 import { fireEvent, render, screen, within } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
 
 import Chooser from "./Chooser"
@@ -31,19 +32,14 @@ const chooserOptionsWithoutBodyText = [
   { id: "b", textHeader: "Option B" },
 ]
 
-describe("Chooser component ", () => {
-  test("Chooser renders with empty arrays of options", () => {
+describe("Chooser", () => {
+  test("renders without options", () => {
     render(<Chooser name="chooser-name" value={"a"} options={[]} />)
 
-    let buttons = []
-    try {
-      buttons = screen.getAllByRole("button")
-    } catch {
-      expect(buttons).toHaveLength(0)
-    }
+    expect(screen.queryAllByRole("button")).toHaveLength(0)
   })
 
-  test("Chooser renders and show the correct options", () => {
+  test("renders the expected options", () => {
     render(<Chooser name="chooser-name" value={"a"} options={chooserOptions} />)
 
     const buttons = screen.getAllByRole("button")
@@ -58,7 +54,7 @@ describe("Chooser component ", () => {
     expect(optionB.getByText("This is option B")).toBeInTheDocument()
   })
 
-  test("Chooser renders and show options without textBody", () => {
+  test("renders options without textBody", () => {
     render(
       <Chooser
         name="chooser-name"
@@ -77,26 +73,98 @@ describe("Chooser component ", () => {
     expect(optionB.getByText("Option B")).toBeInTheDocument()
   })
 
-  test("Chooser renders with selected option", () => {
-    const setSelectedSpy = vi.fn()
+  test("calls handleChange with the clicked option id", async () => {
+    const user = userEvent.setup()
+    const handleChange = vi.fn()
 
     render(
       <Chooser
         name="chooser-name"
         value={"a"}
         options={chooserOptions}
-        handleChange={setSelectedSpy}
+        handleChange={handleChange}
       />,
     )
 
     const buttons = screen.getAllByRole("button")
-    expect(buttons).toHaveLength(2)
 
-    fireEvent.click(buttons[0])
-    expect(setSelectedSpy).toHaveBeenCalled()
+    await user.click(buttons[1])
+
+    expect(handleChange).toHaveBeenCalledWith("b")
   })
 
-  test("Chooser render options with helpers", async () => {
+  test("allows selecting an option with Enter", async () => {
+    const user = userEvent.setup()
+    const handleChange = vi.fn()
+
+    render(
+      <Chooser
+        name="chooser-name"
+        value={"a"}
+        options={chooserOptions}
+        handleChange={handleChange}
+      />,
+    )
+
+    const buttons = screen.getAllByRole("button")
+    buttons[1].focus()
+
+    await user.keyboard("{Enter}")
+
+    expect(handleChange).toHaveBeenCalledWith("b")
+  })
+
+  test("allows selecting an option with the literal space key", () => {
+    const handleChange = vi.fn()
+
+    render(
+      <Chooser
+        name="chooser-name"
+        value={"a"}
+        options={chooserOptions}
+        handleChange={handleChange}
+      />,
+    )
+
+    const buttons = screen.getAllByRole("button")
+    buttons[1].focus()
+
+    fireEvent.keyDown(buttons[1], { key: " " })
+
+    expect(handleChange).toHaveBeenCalledWith("b")
+  })
+
+  test("does not select an option for unrelated keys", () => {
+    const handleChange = vi.fn()
+
+    render(
+      <Chooser
+        name="chooser-name"
+        value={"a"}
+        options={chooserOptions}
+        handleChange={handleChange}
+      />,
+    )
+
+    const buttons = screen.getAllByRole("button")
+
+    fireEvent.keyDown(buttons[1], { key: "Escape" })
+
+    expect(handleChange).not.toHaveBeenCalled()
+  })
+
+  test("renders the selected indicator only for the selected option", () => {
+    render(<Chooser name="chooser-name" value={"a"} options={chooserOptions} />)
+
+    const [selectedOption, unselectedOption] = screen.getAllByRole("button")
+
+    expect(within(selectedOption).getByRole("checkbox")).toBeChecked()
+    expect(
+      within(unselectedOption).queryByRole("checkbox"),
+    ).not.toBeInTheDocument()
+  })
+
+  test("renders option helpers", async () => {
     render(<Chooser name="chooser-name" value={"a"} options={chooserOptions} />)
 
     const items = screen.getAllByRole("button")
@@ -109,7 +177,7 @@ describe("Chooser component ", () => {
     expect(helperB).toBeInTheDocument()
   })
 
-  test("Chooser render with icons", async () => {
+  test("renders option icons", () => {
     render(<Chooser name="chooser-name" value={"a"} options={chooserOptions} />)
 
     const items = screen.getAllByRole("button")

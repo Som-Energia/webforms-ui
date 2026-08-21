@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+
+- TEST: Increase focused coverage for generation form containers, including `GenerationMemberIdFields`, `GenerationNoMemberIdFields`, and generation dashboard assignments table interactions
+- TEST: Stabilize coverage-only flaky tests by using a stable shared i18n mock and tightening async test flows in `Contact.test.jsx`
+- TEST: Expand coverage for service helpers in `utils.js`, `customAxios.js`, and `api.js` up to full focused coverage on `customAxios.js` and `api.js`
+- REF: Make the shared fast `react-i18next` test mock stable across renders in `src/tests/__mocks__/i18n.js`
+- DOC: Add FIXME notes for known production issues found during coverage work, including generation member validation loops and invalid helper-text DOM nesting in `GenerationNoMemberIdFields`
+
 ## 8.1.5 2026-08-20
 
 - FIX: Scroll to contract form on submit

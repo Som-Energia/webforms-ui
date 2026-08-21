@@ -1,7 +1,22 @@
-import { queryByAttribute, render, screen } from "@testing-library/react"
+import React from "react"
 
-import { SummaryContextProvider } from "../../context/SummaryContext"
+import {
+  fireEvent,
+  queryByAttribute,
+  render,
+  screen,
+} from "@testing-library/react"
+
+import SummaryContext, {
+  SummaryContextProvider,
+} from "../../context/SummaryContext"
 import ReviewField from "./ReviewField"
+
+const SummaryFieldObserver = () => {
+  const { summaryField } = React.useContext(SummaryContext)
+
+  return <span data-testid="summary-field-value">{summaryField ?? ""}</span>
+}
 
 describe("ReviewField component ", () => {
   test("ReviewField renders without crashing and label and text", async () => {
@@ -39,6 +54,7 @@ describe("ReviewField component ", () => {
     const dom = render(
       <SummaryContextProvider>
         <ReviewField label="LABEL" value="TEXT" step="STEP" />
+        <SummaryFieldObserver />
       </SummaryContextProvider>,
     )
 
@@ -49,5 +65,9 @@ describe("ReviewField component ", () => {
     const getByDataTestId = queryByAttribute.bind(null, "data-testid")
     const input = getByDataTestId(dom.container, "change-value-field")
     expect(input).toBeInTheDocument()
+
+    fireEvent.click(input)
+
+    expect(screen.getByTestId("summary-field-value")).toHaveTextContent("STEP")
   })
 })

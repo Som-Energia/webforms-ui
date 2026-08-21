@@ -11,7 +11,7 @@ const Chooser = (props) => {
   const {
     question,
     options,
-    onChange = (event) => console.log("change", event.value),
+    onChange = () => {},
     value,
     disabled,
     name,
