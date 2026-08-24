@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.2.0 2026-08-24
+
+- NEW: Add Toda la Penya hiring landing routes
+
 ## 8.1.5 2026-08-20
 
 - FIX: Scroll to contract form on submit
