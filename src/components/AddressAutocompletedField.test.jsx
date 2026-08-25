@@ -51,7 +51,7 @@ describe("AddressAutocompletedField component", () => {
     expect(screen.getByLabelText("Street label")).toBeInTheDocument()
   })
 
-  test("syncs the input when the parent value changes to a text fallback", async () => {
+  test("syncs the input when the parent value changes through street", async () => {
     const { rerender } = render(
       <AddressAutocompletedField
         {...defaultProps}
@@ -62,7 +62,7 @@ describe("AddressAutocompletedField component", () => {
     rerender(
       <AddressAutocompletedField
         {...defaultProps}
-        value={{ id: "text-id", text: "Txt" }}
+        value={{ id: "next-id", street: "Txt" }}
       />,
     )
 
