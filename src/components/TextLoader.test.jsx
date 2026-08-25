@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, test, vi } from "vitest"
 import { render, screen, waitFor } from "@testing-library/react"
+import { afterEach, describe, expect, test, vi } from "vitest"
 
 const BASE_URL = import.meta.env.BASE_URL
 

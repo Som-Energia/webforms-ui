@@ -1,7 +1,8 @@
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
-import { render, screen, waitFor } from "@testing-library/react"
 import { I18nextProvider } from "react-i18next"
+
+import { render, screen, waitFor } from "@testing-library/react"
 import i18n from "i18next"
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 import { initI18n } from "../../tests/i18n.mock"
 import PDFLoader from "./PDFLoader"

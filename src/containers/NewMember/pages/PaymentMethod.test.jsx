@@ -14,7 +14,6 @@ vi.mock("../../../services/utils", async () => {
 })
 
 import { checkIbanFormat } from "../../../services/utils"
-
 import PaymentMethod from "./PaymentMethod"
 
 const defaultValues = {

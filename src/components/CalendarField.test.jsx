@@ -1,6 +1,7 @@
+import { useState } from "react"
+
 import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import dayjs from "dayjs"
-import { useState } from "react"
 import { vi } from "vitest"
 
 import CalendarField from "./CalendarField"

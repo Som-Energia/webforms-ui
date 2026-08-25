@@ -232,7 +232,7 @@ describe("AddressField component", () => {
 
   test("selects an address suggestion and populates normalized address data", async () => {
     const setValuesSpy = vi.fn()
-    const { container } = renderComponent({
+    renderComponent({
       initialValues: {
         address: {
           street: "",
