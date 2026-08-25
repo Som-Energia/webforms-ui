@@ -26,7 +26,9 @@ describe("VoluntaryDonation", () => {
     const options = screen.getAllByRole("button")
     expect(options).toHaveLength(2)
     expect(screen.getByText("VOLUNTARY_DONATION_ON_HEADER")).toBeInTheDocument()
-    expect(screen.getByText("VOLUNTARY_DONATION_OFF_HEADER")).toBeInTheDocument()
+    expect(
+      screen.getByText("VOLUNTARY_DONATION_OFF_HEADER"),
+    ).toBeInTheDocument()
   })
 
   test.each([
@@ -49,7 +51,9 @@ describe("VoluntaryDonation", () => {
         .closest('[role="button"]')
 
       expect(within(selectedOption).getByRole("checkbox")).toBeChecked()
-      expect(within(unselectedOption).queryByRole("checkbox")).not.toBeInTheDocument()
+      expect(
+        within(unselectedOption).queryByRole("checkbox"),
+      ).not.toBeInTheDocument()
     },
   )
 
@@ -59,10 +63,18 @@ describe("VoluntaryDonation", () => {
 
     render(<VoluntaryDonation {...buildProps({ setFieldValue })} />)
 
-    await user.click(screen.getByText("VOLUNTARY_DONATION_ON_HEADER").closest('[role="button"]'))
+    await user.click(
+      screen
+        .getByText("VOLUNTARY_DONATION_ON_HEADER")
+        .closest('[role="button"]'),
+    )
     expect(setFieldValue).toHaveBeenCalledWith("voluntary_donation", true)
 
-    await user.click(screen.getByText("VOLUNTARY_DONATION_OFF_HEADER").closest('[role="button"]'))
+    await user.click(
+      screen
+        .getByText("VOLUNTARY_DONATION_OFF_HEADER")
+        .closest('[role="button"]'),
+    )
     expect(setFieldValue).toHaveBeenCalledWith("voluntary_donation", false)
   })
 })

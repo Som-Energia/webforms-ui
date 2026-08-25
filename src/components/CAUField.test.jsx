@@ -65,7 +65,8 @@ const renderCAUField = (overrides = {}) => {
   }
 }
 
-const getInput = () => document.querySelector('[data-cy="self_consumption.cau-input"]')
+const getInput = () =>
+  document.querySelector('[data-cy="self_consumption.cau-input"]')
 const remoteCAU = "ES12345678901234567890ABCD"
 const remoteCupsPrefix = remoteCAU.slice(0, 20)
 
@@ -125,7 +126,10 @@ describe("CAUField", () => {
     )
 
     await waitFor(() => {
-      expect(setFieldValue).toHaveBeenCalledWith("self_consumption.cau_valid", true)
+      expect(setFieldValue).toHaveBeenCalledWith(
+        "self_consumption.cau_valid",
+        true,
+      )
     })
 
     expect(cauMocks.checkCups).not.toHaveBeenCalled()
@@ -160,7 +164,10 @@ describe("CAUField", () => {
     deferred.resolve({ state: true })
 
     await waitFor(() => {
-      expect(setFieldValue).toHaveBeenCalledWith("self_consumption.cau_valid", true)
+      expect(setFieldValue).toHaveBeenCalledWith(
+        "self_consumption.cau_valid",
+        true,
+      )
     })
 
     await waitFor(() => {
@@ -192,7 +199,9 @@ describe("CAUField", () => {
     })
 
     await waitFor(() => {
-      expect(screen.getByText("API_VALIDATED_FIELD_CHECKING")).toBeInTheDocument()
+      expect(
+        screen.getByText("API_VALIDATED_FIELD_CHECKING"),
+      ).toBeInTheDocument()
     })
 
     deferred.reject(error)
@@ -202,7 +211,10 @@ describe("CAUField", () => {
     })
 
     await waitFor(() => {
-      expect(setFieldValue).toHaveBeenCalledWith("self_consumption.cau_valid", false)
+      expect(setFieldValue).toHaveBeenCalledWith(
+        "self_consumption.cau_valid",
+        false,
+      )
     })
 
     await waitFor(() => {

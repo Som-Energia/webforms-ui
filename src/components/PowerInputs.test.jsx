@@ -79,7 +79,10 @@ describe("PowerInputs", () => {
       target: { value: "12'3456" },
     })
 
-    expect(setFieldValue).toHaveBeenCalledWith("contract.power.power1", "12.345")
+    expect(setFieldValue).toHaveBeenCalledWith(
+      "contract.power.power1",
+      "12.345",
+    )
   })
 
   test("sanitizes to three decimals when there are more than two inputs", () => {

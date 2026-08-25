@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react"
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
 
@@ -136,7 +142,9 @@ describe("PhoneField", () => {
 
     await user.click(getCountryCodeSelect())
 
-    const listbox = within(screen.getByRole("presentation")).getByRole("listbox")
+    const listbox = within(screen.getByRole("presentation")).getByRole(
+      "listbox",
+    )
     await user.click(within(listbox).getByRole("option", { name: "+33 (FR)" }))
 
     await waitFor(() => {

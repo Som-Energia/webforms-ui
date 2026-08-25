@@ -84,7 +84,9 @@ describe("components/StateCity", () => {
     expect(
       within(listbox).getByRole("option", { name: "Barcelona" }),
     ).toBeVisible()
-    expect(within(listbox).getByRole("option", { name: "Girona" })).toBeVisible()
+    expect(
+      within(listbox).getByRole("option", { name: "Girona" }),
+    ).toBeVisible()
   })
 
   test("fetches municipalities when an initial state with a non-empty id is provided", async () => {
@@ -107,7 +109,9 @@ describe("components/StateCity", () => {
 
     const { listbox } = await openSelect("CITY")
 
-    expect(within(listbox).getByRole("option", { name: "Girona" })).toBeVisible()
+    expect(
+      within(listbox).getByRole("option", { name: "Girona" }),
+    ).toBeVisible()
     expect(within(listbox).getByRole("option", { name: "Salt" })).toBeVisible()
   })
 

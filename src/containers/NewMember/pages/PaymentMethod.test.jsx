@@ -66,7 +66,9 @@ describe("PaymentMethod", () => {
     const user = userEvent.setup()
     const { props } = renderPaymentMethod()
 
-    await user.click(screen.getByText("PAYMENT_METHOD_IBAN").closest("[role='button']"))
+    await user.click(
+      screen.getByText("PAYMENT_METHOD_IBAN").closest("[role='button']"),
+    )
 
     expect(props.setFieldValue).toHaveBeenCalledWith(
       "new_member.payment_method",
