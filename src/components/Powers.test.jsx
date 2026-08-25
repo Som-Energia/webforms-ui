@@ -23,7 +23,16 @@ const buildProps = (overrides = {}) => ({
 
 describe("Powers", () => {
   test("renders the current contracted power title and helper when has_light is light-on", () => {
-    render(<Powers {...buildProps({ values: { has_light: "light-on", contract: { power_type: "", power: {} } } })} />)
+    render(
+      <Powers
+        {...buildProps({
+          values: {
+            has_light: "light-on",
+            contract: { power_type: "", power: {} },
+          },
+        })}
+      />,
+    )
 
     expect(screen.getByText("CURRENT_CONTRACTED_POWER")).toBeInTheDocument()
     expect(screen.getByText("POWER_HELPER")).toBeInTheDocument()
@@ -77,7 +86,9 @@ describe("Powers", () => {
       />,
     )
 
-    const lowerLink = screen.getByRole("link", { name: "POWER_LOWER_15_HELPER" })
+    const lowerLink = screen.getByRole("link", {
+      name: "POWER_LOWER_15_HELPER",
+    })
     expect(lowerLink).toHaveAttribute("href", "POWER_LOWER_15_HELPER_URL")
 
     expect(screen.getByText("WHICH_PEAK")).toBeInTheDocument()
@@ -98,7 +109,9 @@ describe("Powers", () => {
       />,
     )
 
-    const higherLink = screen.getByRole("link", { name: "POWER_HIGHER_15_HELPER" })
+    const higherLink = screen.getByRole("link", {
+      name: "POWER_HIGHER_15_HELPER",
+    })
     expect(higherLink).toHaveAttribute("href", "POWER_HIGHER_15_HELPER_URL")
 
     expect(screen.getAllByText("WHICH_POWER")).toHaveLength(6)
@@ -106,7 +119,9 @@ describe("Powers", () => {
     expect(screen.queryByText("WHICH_PEAK")).not.toBeInTheDocument()
     expect(screen.queryByText("WHICH_VALLEY")).not.toBeInTheDocument()
 
-    const chooser = screen.getByText("POWER_HIGHER_15_HEADER").closest('[role="button"]')
+    const chooser = screen
+      .getByText("POWER_HIGHER_15_HEADER")
+      .closest('[role="button"]')
     expect(within(chooser).getByRole("checkbox")).toBeChecked()
   })
 })

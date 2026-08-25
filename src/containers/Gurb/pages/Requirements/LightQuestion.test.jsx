@@ -7,7 +7,10 @@ import { vi } from "vitest"
 import PopUpContext from "../../../../context/PopUpContext"
 import LightQuestion from "./LightQuestion"
 
-vi.mock("react-i18next", async () => import("../../../../tests/__mocks__/i18n.js"))
+vi.mock(
+  "react-i18next",
+  async () => import("../../../../tests/__mocks__/i18n.js"),
+)
 
 const renderLightQuestion = ({ values = { has_light: undefined } } = {}) => {
   const setFieldValue = vi.fn()
@@ -22,7 +25,8 @@ const renderLightQuestion = ({ values = { has_light: undefined } } = {}) => {
   return { setFieldValue, setContent }
 }
 
-const getOptionButton = (label) => screen.getByText(label).closest('[role="button"]')
+const getOptionButton = (label) =>
+  screen.getByText(label).closest('[role="button"]')
 
 describe("LightQuestion", () => {
   test("renders the title and both chooser options", () => {
@@ -73,6 +77,8 @@ describe("LightQuestion", () => {
     expect(selectedOption).not.toBeNull()
     expect(unselectedOption).not.toBeNull()
     expect(within(selectedOption).getByRole("checkbox")).toBeChecked()
-    expect(within(unselectedOption).queryByRole("checkbox")).not.toBeInTheDocument()
+    expect(
+      within(unselectedOption).queryByRole("checkbox"),
+    ).not.toBeInTheDocument()
   })
 })
