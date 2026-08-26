@@ -70,7 +70,7 @@ const GurbParticipation = (props) => {
         onChange={onChangePower}
       />
 
-      <Typography //TODO: Extract as component (Same as GurbParticipation)
+      <Typography
         sx={{
           fontSize: "14px",
           fontWeight: 400,

@@ -157,7 +157,7 @@ describe("Normalize holderChange function for all member options", () => {
       member: {
         become_member: true,
         invite_token: false,
-        link_member: "", // TODO: what?
+        link_member: "",
       },
       payment: {
         iban: "ES00000I00AM00ANIBAN1234",

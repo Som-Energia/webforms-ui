@@ -77,9 +77,6 @@ describe('Modify Contract', () => {
     cy.get('[type=submit]').click()
     cy.wait('@secondClick')
 
-    // TODO: parametritzar be els params de la URL de intercept
-    // TODO: revisart el color de background del numero
-    // TODO: lo d'aqui sota és necessari?
     // cy.get('[name=changePower]').click()
     // cy.get('[name=power]')
     //   .type(this.data.power)

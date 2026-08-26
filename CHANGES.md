@@ -1,5 +1,15 @@
 # Change Log
 
+## 8.2.0 2026-08-24
+
+- NEW: Add Toda la Penya hiring landing routes
+
+## 8.1.5 2026-08-20
+
+- FIX: Scroll to contract form on submit
+- REF: Deprecate legacy IBAN component and remove stale TODO and FIXME comments
+- I18N: Update Catalan, Spanish, Basque and Galician translations
+
 ## 8.1.4 2026-08-18
 
 - FIX: Use customAxios in api.js
@@ -453,7 +463,7 @@
 - Fix: Infinite loop on remote CAU validation
 - Fix: Recovered pretty format on CAU, IBAN and Cadaster
 - Fix: Recovered the Checking... message and spiner in CAU, IBAN, Cadaster
-- CI for the unit test (TODO: ci for cypress)
+- CI for the unit test
 - CI activated chat notifications
 
 ## 2.3.15 2024-10-22
