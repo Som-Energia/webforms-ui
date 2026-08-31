@@ -36,6 +36,9 @@ dist
 holderChangePersonaldata.json
 gurbPersonaldata.json
 
+# Environment variables
+.env
+
 # bun
 bun*
 
