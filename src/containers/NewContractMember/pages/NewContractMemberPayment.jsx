@@ -183,7 +183,7 @@ const PaymentMethod = (props) => {
 
           <Grid item xs={12}>
             <PaymentAuthorizationCheckbox
-              dataCy="iban_check"
+              dataCy="payment_auth_check"
               checked={paymentAuthorizationValue}
               label={t(activePayment.acceptLabel)}
               onClick={openPaymentDialog}
