@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+
+- IMP: Split local development and preview startup commands
+- NEW: Add `.env.example` with the required runtime and feature-flag variables
+- FIX: Ignore local `.env` files to avoid committing environment-specific config
+- FIX: Allow Vite preview to work on Railway preview hosts
+- IMP: Document the local Railway-style preview workflow
+
 ## 8.2.0 2026-08-24
 
 - NEW: Add Toda la Penya hiring landing routes
