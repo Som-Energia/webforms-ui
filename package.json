@@ -7,7 +7,8 @@
     "node": ">=20.20.2 <21.0.0"
   },
   "scripts": {
-    "start": "export VITE_APP_VERSION=$(git describe --tags) && vite",
+    "dev": "export VITE_APP_VERSION=$(git describe --tags) && vite",
+    "start": "vite preview --host 0.0.0.0 --port $PORT",
     "build": "npm run lint:todos; export VITE_APP_VERSION=$(git describe --tags) && vite build",
     "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
@@ -23,8 +24,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
-    "i18n-lint": "./scripts/lint-i18n.sh",
-    "preview": "vite preview"
+    "i18n-lint": "./scripts/lint-i18n.sh"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
