@@ -695,6 +695,7 @@ const App = (props) => {
                   oldWebFormsTheme,
                   webFormsTheme,
                   fallbackLanguage,
+                  ...props,
                 }}
               />
             </Router>
