@@ -169,6 +169,7 @@ describe("api", () => {
 
     const { api } = await loadApiModule({
       axiosImpl: axios,
+      envApiUrl: WEBFORMS_API_URL,
       rootElement: null,
     })
 
@@ -177,17 +178,18 @@ describe("api", () => {
     expect(global.document.getElementById).toHaveBeenCalledWith("root")
     expect(axios).toHaveBeenCalledWith({
       method: "GET",
-      url: "/data/provincies",
+      url: `${WEBFORMS_API_URL}/data/provincies`,
     })
   })
 
-  test("API calls also fall back when the root element exists but has no webformsApiUrl dataset", async () => {
+  test("API calls also fall back to the env-derived base URL when the root element exists but has no webformsApiUrl dataset", async () => {
     const axios = vi.fn().mockResolvedValue({ data: { ok: true } })
     axios.CancelToken = { source: vi.fn() }
     axios.all = vi.fn()
 
     const { api } = await loadApiModule({
       axiosImpl: axios,
+      envApiUrl: WEBFORMS_API_URL,
       rootElement: {},
     })
 
@@ -195,7 +197,7 @@ describe("api", () => {
 
     expect(axios).toHaveBeenCalledWith({
       method: "GET",
-      url: "/data/provincies",
+      url: `${WEBFORMS_API_URL}/data/provincies`,
     })
   })
 
