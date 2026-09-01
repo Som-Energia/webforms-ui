@@ -1,9 +1,11 @@
 # Change Log
 
-## 8.3.0 2026-09-01
+## Unreleased
 
 - NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
 - FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
+
+## 8.3.0 2026-09-01
 
 - IMP: Split local development and preview startup commands
 - NEW: Add `.env.example` with the required runtime and feature-flag variables
