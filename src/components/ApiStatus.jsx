@@ -8,6 +8,10 @@ const ApiStatus = () => {
   const [noConnection, setNoConnection] = useState(false)
   const { availability, setAvailability } = useContext(AvailabilityContext)
 
+  // FIXME: Once availability becomes false, the app can get stuck in Maintenance.
+  // This component is mounted inside AvailabilityContext's children subtree, so it
+  // stops polling after the subtree is replaced. The ONLINE branch also does not
+  // reliably clear both outage flags (`setApiOffline(false) && setNoConnection(false)`).
   useEffect(() => {
     if (apiOffline || noConnection) {
       setAvailability(false)
