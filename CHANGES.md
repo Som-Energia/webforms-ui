@@ -1,12 +1,13 @@
 # Change Log
 
-## Unreleased
+## 8.3.0 2026-09-01
 
 - IMP: Split local development and preview startup commands
 - NEW: Add `.env.example` with the required runtime and feature-flag variables
 - FIX: Ignore local `.env` files to avoid committing environment-specific config
 - FIX: Allow Vite preview to work on Railway preview hosts
 - IMP: Document the local Railway-style preview workflow
+- IMP: App structure
 
 ## 8.2.0 2026-08-24
 
