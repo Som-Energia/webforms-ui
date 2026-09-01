@@ -63,6 +63,10 @@ export default createAppConfig(({ mode }) => {
         inline: ["@emotion/styled", "@emotion/react"],
       },
     },
+    preview: {
+      open: false,
+      allowedHosts: [".up.railway.app"],
+    },
     test: {
       css: false,
       exclude: [

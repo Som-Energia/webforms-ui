@@ -18,7 +18,31 @@
 Run the app on dev mode
 
 ```sh
-  npm start
+  npm run dev
+```
+
+## Preview 👀
+
+To reproduce the Railway preview locally, use the project `.env` file.
+
+The preview server exposes the built app, so you must build the project before starting the preview.
+
+If you do not have it yet, create it from the example file:
+
+```sh
+cp .env.example .env
+```
+
+Build the app:
+
+```sh
+npm run build
+```
+
+Then start the app in preview mode with the same local port used for Railway testing:
+
+```sh
+PORT=3000 npm run start
 ```
 
 ## Testing ⚙️
