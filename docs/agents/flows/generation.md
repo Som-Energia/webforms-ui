@@ -10,16 +10,16 @@ Flux d'aportació a generació kWh, amb identificació, possible alta de soci, a
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Container arrel | `src/containers/Generation/GenerationForm/GenerationForm.jsx` |
-| Flux | identificació, dades personals opcionals, aportació, revisió i `GenerationSignaturit` abans del submit real |
-| Validació | gran part de les `Yup` schemas viuen dins del mateix fitxer |
-| Navegació | si `member.is_member` és `true`, es salta el pas de dades personals tant endavant com enrere |
-| Gating | `has_generation_enabled_zone` i `generation_zone_checked` poden bloquejar o substituir el botó següent per un `ExitButton` |
-| Submit | si no és sòcia, primer crea membre via `member()`, després envia `generationkWhContribution()` |
-| Idioma | `useSyncLanguage(language)` i valor inicial de `member.language` |
-| Dependències | reaprofita peces de `HolderChange` per dades personals |
+| Tema            | Context                                                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Container arrel | `src/containers/Generation/GenerationForm/GenerationForm.jsx`                                                              |
+| Flux            | identificació, dades personals opcionals, aportació, revisió i `GenerationSignaturit` abans del submit real                |
+| Validació       | gran part de les `Yup` schemas viuen dins del mateix fitxer                                                                |
+| Navegació       | si `member.is_member` és `true`, es salta el pas de dades personals tant endavant com enrere                               |
+| Gating          | `has_generation_enabled_zone` i `generation_zone_checked` poden bloquejar o substituir el botó següent per un `ExitButton` |
+| Submit          | si no és sòcia, primer crea membre via `member()`, després envia `generationkWhContribution()`                             |
+| Idioma          | `useSyncLanguage(language)` i valor inicial de `member.language`                                                           |
+| Dependències    | reaprofita peces de `HolderChange` per dades personals                                                                     |
 
 ## Riscos reals
 

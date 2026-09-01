@@ -6,17 +6,14 @@ import {
   render,
   screen,
 } from "@testing-library/react"
-import { beforeAll } from "vitest"
+import { vi } from "vitest"
 
 import { DefaultTariff, Tariffs } from "../../data/tariff"
-import { initI18n } from "../../tests/i18n.mock"
 import TariffSelector from "./TariffSelector"
 
-describe("TariffSelector component", () => {
-  beforeAll(async () => {
-    await initI18n()
-  })
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
+describe("TariffSelector component", () => {
   const TariffSelectorWrapper = () => {
     const [tariff, setTariff] = useState(DefaultTariff)
 
@@ -43,6 +40,15 @@ describe("TariffSelector component", () => {
       const button = getByDataCy(dom.container, `button-${tariffName}`)
       expect(button).toBeInTheDocument()
     })
+  })
+
+  test("uses the default tariff when no tariff prop is provided", () => {
+    const dom = render(<TariffSelector />)
+    const getByDataCy = queryByAttribute.bind(null, "data-cy")
+
+    expect(
+      getByDataCy(dom.container, `button-${DefaultTariff}`),
+    ).toBeInTheDocument()
   })
 
   describe("TariffSelector available tariffs", () => {

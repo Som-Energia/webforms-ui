@@ -40,10 +40,10 @@ const NewSomStepper = (props) => {
       {showStepProgress && (
         <Typography color="secondary">
           {showStepTitle && t(stepTitle)}{" "}
-          {steps.length && currentStepNum + "/" + maxStepsNum}
+          {steps.length > 0 && currentStepNum + "/" + maxStepsNum}
         </Typography>
       )}
-      {steps.length && (
+      {steps.length > 0 && (
         <LinearProgress
           variant="determinate"
           value={(currentStepNum / maxStepsNum) * 100}

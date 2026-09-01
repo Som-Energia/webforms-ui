@@ -10,16 +10,16 @@ Flux de canvi a tarifa indexada, amb dependència forta de dades injectades del 
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Dada base | llegeix `contract-data` directament del DOM |
-| Precheck | `checkCanModifyTariff()` consulta backend i determina tarifa objectiu i coeficient |
+| Tema          | Context                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| Dada base     | llegeix `contract-data` directament del DOM                                                      |
+| Precheck      | `checkCanModifyTariff()` consulta backend i determina tarifa objectiu i coeficient               |
 | Short-circuit | pot tallar el flux amb `Loading`, `Alert`, `Failure` o errors menors abans del formulari complet |
-| Flux | dues pantalles d'informació i una revisió final de termes |
-| Validació | schemas molt simples però condicionals segons `isTariffIndexed` i `isIndexedPilotOngoing` |
-| Idioma/data | sincronitza `i18n` i també `dayjs` |
-| UI lateral | hi ha `DropDownMenu` amb seccions legals construïdes dinàmicament |
-| Submit | envia acceptacions a `modify_tariff()` amb `token` |
+| Flux          | dues pantalles d'informació i una revisió final de termes                                        |
+| Validació     | schemas molt simples però condicionals segons `isTariffIndexed` i `isIndexedPilotOngoing`        |
+| Idioma/data   | sincronitza `i18n` i també `dayjs`                                                               |
+| UI lateral    | hi ha `DropDownMenu` amb seccions legals construïdes dinàmicament                                |
+| Submit        | envia acceptacions a `modify_tariff()` amb `token`                                               |
 
 ## Riscos reals
 

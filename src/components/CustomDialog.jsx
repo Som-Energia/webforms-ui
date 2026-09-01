@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog"
 
 import PopUpContext from "../context/PopUpContext"
 
-const customStyles = (withBackground, additionalStyles = {}) => ({
+export const customStyles = (withBackground, additionalStyles = {}) => ({
   sx: {
     position: "absolute",
     top: 0,
