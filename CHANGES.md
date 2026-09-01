@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.3.0 2026-09-01
 
 - NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
 - FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
@@ -10,6 +10,7 @@
 - FIX: Ignore local `.env` files to avoid committing environment-specific config
 - FIX: Allow Vite preview to work on Railway preview hosts
 - IMP: Document the local Railway-style preview workflow
+- IMP: App structure
 
 ## 8.2.0 2026-08-24
 
