@@ -17,7 +17,7 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
   const trackID = "supply-point"
   const { setContent } = useContext(PopUpContext)
 
-  const { values, setFieldValue, sendTrackEvent } = props
+  const { values, setFieldValue, sendTrackEvent, socialTariffByPass } = props
   const { t } = useTranslation()
   const [openLightOffDialog, setOpenLightOffDialog] = useState(false)
 
@@ -37,7 +37,7 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
   }, [])
 
   useEffect(() => {
-    if (values.social_tariff && values.cups_valid) {
+    if (values.social_tariff && values.cups_valid && !socialTariffByPass) {
       setContent(
         <SimpleGurbDialog
           severity="error"
