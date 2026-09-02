@@ -49,6 +49,7 @@
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.2.2",
+    "semver": "^7.8.5",
     "stdnum": "^1.11.7",
     "yup": "^0.32.11"
   },
