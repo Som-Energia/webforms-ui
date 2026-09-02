@@ -76,6 +76,7 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
     console.log('ele', $ele)
     if ($ele.is(":enabled")) {
       cy.get(`[name="cnae"]`).type(data.supplyPoint.cnae_no_house)
+      cy.wait(500)
     }
     if ($ele.is(":disabled")) {
       cy.get(`[name="cnae"]`).type(data.supplyPoint.cnae_house, {force:true})
