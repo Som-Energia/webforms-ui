@@ -13,6 +13,22 @@ import { CreditCardIcon, InvoiceIcon } from "../../../data/icons/Icons"
 import { checkIbanFormat } from "../../../services/utils"
 import { creditCardPaymentEnabled } from "../paymentMethods"
 
+const paymentMethods = [
+  {
+    method: "iban",
+    fieldName: "sepa_accepted",
+    description: "SEPA",
+    acceptLabel: "IBAN_ACCEPT_DIRECT_DEBIT",
+  },
+  {
+    method: "credit_card",
+    fieldName: "payment_authorization_accepted",
+    description: "PAYMENT_CCARD_TERMS",
+    acceptLabel: "PAYMENT_METHOD_CCARD_ACCEPT",
+    info: "PAYMENT_METHOD_CCARD_INFO",
+  },
+]
+
 const PaymentMethod = (props) => {
   const {
     values,
@@ -102,22 +118,6 @@ const PaymentMethod = (props) => {
           },
         ]
       : []),
-  ]
-
-  const paymentMethods = [
-    {
-      method: "iban",
-      fieldName: "sepa_accepted",
-      description: "SEPA",
-      acceptLabel: "IBAN_ACCEPT_DIRECT_DEBIT",
-    },
-    {
-      method: "credit_card",
-      fieldName: "payment_authorization_accepted",
-      description: "PAYMENT_CCARD_TERMS",
-      acceptLabel: "PAYMENT_METHOD_CCARD_ACCEPT",
-      info: "PAYMENT_METHOD_CCARD_INFO",
-    },
   ]
 
   const activePayment = paymentMethods.find(
