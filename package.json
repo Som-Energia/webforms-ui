@@ -8,9 +8,9 @@
     "node": ">=20.20.2 <21.0.0"
   },
   "scripts": {
-    "dev": "export VITE_APP_VERSION=$(git describe --tags) && vite",
-    "start": "export VITE_APP_VERSION=$(git describe --tags) && vite preview --host 0.0.0.0 --port $PORT",
-    "build": "npm run lint:todos; export VITE_APP_VERSION=$(git describe --tags) && vite build",
+    "dev": "export VITE_APP_COMMIT_SHA=$(git rev-parse --short HEAD) && vite",
+    "start": "vite preview --host 0.0.0.0 --port $PORT",
+    "build": "npm run lint:todos; export VITE_APP_COMMIT_SHA=$(git rev-parse --short HEAD) && vite build",
     "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
     "build:pre": "npm run build -- --mode=pre",

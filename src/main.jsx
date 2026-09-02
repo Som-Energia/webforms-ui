@@ -17,7 +17,7 @@ if (roots.length) {
     })
 
     props.supportedApiVersion = import.meta.env.VITE_API_VERSION
-    props.version = import.meta.env.VITE_APP_VERSION
+    props.version = `${import.meta.env.VITE_APP_VERSION}-${import.meta.env.VITE_APP_COMMIT_SHA}`
 
     const root = document.querySelectorAll("[id='root']")[index]
     try {
