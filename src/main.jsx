@@ -52,10 +52,9 @@ if (roots.length) {
 async function buildFeatureFlags() {
   const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
   const params = new URLSearchParams(document.location.search)
-  // TODO: decidir quina fem servir!
+  // TODO: choice one of them
   if (params.has("f")) {
-    const ff = params.getAll("f") || []
-    const exp = params.get("e") || 0
+    const { ff, exp } = JSON.parse(atob(params.get("f") || "{}"))
     if (!exp || Date.now() > Number(exp)) {
       throw new Error("Invalid form params")
     }
