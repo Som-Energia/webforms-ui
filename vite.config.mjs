@@ -32,6 +32,9 @@ export default createAppConfig(({ mode }) => {
     },
     define: {
       "import.meta.env.VITE_API_VERSION": JSON.stringify(pkg.apiVersion),
+      "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkg.version),
+      "import.meta.env.VITE_APP_COMMIT_SHA":
+        '"' + process.env.VITE_APP_COMMIT_SHA + '"' || "'-'",
     },
     plugins: [
       react(),
@@ -68,9 +71,6 @@ export default createAppConfig(({ mode }) => {
     preview: {
       open: false,
       allowedHosts: [".up.railway.app"],
-      define: {
-        "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkg.version),
-      },
     },
     test: {
       exclude: ["**/node_modules/**", "**/cypress/**"],
