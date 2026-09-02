@@ -16,13 +16,13 @@ if (roots.length) {
       props[name] = item.dataset[name]
     })
 
-    props.apiVersion = import.meta.env.VITE_API_VERSION
+    props.supportedApiVersion = import.meta.env.VITE_API_VERSION
     props.version = import.meta.env.VITE_APP_VERSION
 
     const root = document.querySelectorAll("[id='root']")[index]
     try {
       const ff = await buildFeatureFlags()
-      initDevTools(props.version, props.apiVersion, ff)
+      initDevTools(props.version, props.supportedApiVersion, ff)
       Object.entries(ff).forEach(([flag, value]) => {
         props[flag] = value
       })
