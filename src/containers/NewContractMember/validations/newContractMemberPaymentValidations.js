@@ -9,9 +9,11 @@ const newContractMemberValidations = Yup.object().shape({
       then: Yup.string().required("REQUIRED_FIELD"),
       otherwise: Yup.string().notRequired(),
     }),
-    iban_valid: Yup.bool().when("payment_method", {
-      is: "iban",
-      then: Yup.bool().required("IBAN_ERROR").oneOf([true], "IBAN_ERROR"),
+    iban_valid: Yup.bool().when(["payment_method","iban"], {
+      is: (paymentMethod, iban) => {
+        return paymentMethod === "iban" && Boolean(iban)
+      },
+      then: Yup.bool().oneOf([true], "IBAN_ERROR"),
       otherwise: Yup.bool().notRequired(),
     }),
     payment_method: Yup.string()
