@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- FIX: Render HTML descriptions correctly in shared result screens
+- I18N: Fix typo in Spanish contract signature error message
+
 ## 8.3.1 2026-09-03
 
 - FIX: Fixed IBAN validation in Contract form
