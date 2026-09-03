@@ -3,8 +3,8 @@
   "version": "8.1.3",
   "private": false,
   "engines": {
-    "npm": ">=10.0.0 <11.0.0",
-    "node": ">=20.20.2 <21.0.0"
+    "npm": ">=11.0.0 <12.0.0",
+    "node": ">=24.0.0 <25.0.0"
   },
   "scripts": {
     "dev": "export VITE_APP_VERSION=$(git describe --tags) && vite",
@@ -23,7 +23,7 @@
     "lint:fix": "eslint ./src --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "i18n-extract": "./node_modules/.bin/i18next src/**/*.js* -o src/i18n/locale-xx.json -s",
+    "i18n-extract": "i18next-cli -c ./i18next-cli.config.mjs extract",
     "i18n-lint": "./scripts/lint-i18n.sh"
   },
   "dependencies": {
@@ -85,7 +85,7 @@
     "cypress-file-upload": "^5.0.8",
     "eslint": "^9.39.4",
     "eslint-plugin-cypress": "^3.6.0",
-    "i18next-parser": "^9.3.0",
+    "i18next-cli": "^1.72.4",
     "jsdom": "^24.0.0",
     "prettier": "^3.8.3",
     "vite": "^5.2.11",
