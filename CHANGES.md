@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.3.1 2026-09-03
+
+- FIX: Fixed IBAN validation in Contract form
+
 ## 8.3.0 2026-09-01
 
 - IMP: Split local development and preview startup commands
