@@ -80,10 +80,14 @@ const PaymentMethod = (props) => {
   }
 
   useEffect(() => {
-    if (values?.new_member?.iban && values?.new_member?.iban.length > 27) {
+    const iban = values?.new_member?.iban
+    if (iban) {
       handleCheckIbanResponse()
+    } else {
+      setFieldValue("new_member.iban_valid", false)
+      setFieldError("new_member.iban_valid", t("REQUIRED_FIELD"))
     }
-  }, [values.new_member.iban])
+  }, [values?.new_member?.iban])
 
   const options = [
     {
