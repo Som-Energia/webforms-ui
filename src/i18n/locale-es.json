@@ -157,6 +157,7 @@
     "IBAN_HELP": "Ejemplo: ES11 2222 3333 4444 5555 6666",
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular de la cuenta bancaria autoriza la domiciliación de las facturas de electricidad.",
     "PAYMENT_METHOD_CCARD_ACCEPT": "Confirmo que la persona titular de la tarjeta autoriza el cobro correspondiente a través de este método de pago.",
+    "PAYMENT_CCARD_TERMS": "El pago de las facturas se efectuará mediante tarjeta de crédito/débito que designe la contratante en el formulario de contratación. Este pago deberá poderse hacer efectivo a partir de los 7 días posteriores a la fecha de la factura. La contratante declara y garantiza haber realizado los trámites necesarios, con el objetivo de que las presentes condiciones de pago sean efectivas durante el periodo íntegro de vigencia del presente contrato.",
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Declaro que la persona titular de la cuenta bancaria, yo misma o una tercera persona, ha otorgado su consentimiento expreso para la domiciliación bancaria correspondiente a la aportación voluntaria al capital social de la cooperativa, autorizando el cargo del importe correspondiente en la cuenta indicada.",
     "IBAN_ERROR": "IBAN incorrecto",
     "SIGNATURE": "Firma tu contrato",
