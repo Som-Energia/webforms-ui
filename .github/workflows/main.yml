@@ -20,22 +20,22 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - '20.20.2'
+          - '24'
 
-    name: Node ${{ matrix.node-version }}
+    name: CI tests (Node ${{ matrix.node-version }})
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
       - name: Install dependencies
         run: |
           #make ui-deploy
-          npm install
-          npm install coveralls --save-dev
+          npm ci
 
       - name: Unit tests
         run: |
@@ -47,4 +47,3 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
-

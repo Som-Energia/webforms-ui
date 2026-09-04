@@ -4,15 +4,15 @@ jobs:
   check-outdated:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Read versions from package.json
         id: pkg-versions
         run: |
-          echo "NODE_VERSION=$(jq -r '.engines.node' package.json | grep -oP '\d+\.\d+\.\d+' | head -1)" >> $GITHUB_OUTPUT
-          echo "NPM_VERSION=$(jq -r '.engines.npm' package.json | grep -oP '\d+\.\d+\.\d+' | head -1)" >> $GITHUB_OUTPUT
+          echo "NODE_VERSION=$(jq -r '.engines.node' package.json | grep -oP '\d+' | head -1)" >> $GITHUB_OUTPUT
+          echo "NPM_VERSION=$(jq -r '.engines.npm' package.json | grep -oP '\d+' | head -1)" >> $GITHUB_OUTPUT
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ steps.pkg-versions.outputs.NODE_VERSION }}
 
@@ -24,4 +24,3 @@ jobs:
 
       - name: List outdated dependencies
         run: npm outdated || true
-
