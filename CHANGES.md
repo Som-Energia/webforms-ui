@@ -6,6 +6,10 @@
 - FIX: Replace `i18next-parser` with `i18next-cli` because the previous extractor was not compatible with Node 24
 - IMP: Add `i18next-cli.config.mjs` to keep the existing i18n extraction output format
 - IMP: Regenerate `package-lock.json` and verify install, i18n extraction, lint, tests, and build under Node 24
+- NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
+- FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
+- FIX: Render HTML descriptions correctly in shared result screens
+- I18N: Fix typo in Spanish contract signature error message
 
 ## 8.3.1 2026-09-03
 

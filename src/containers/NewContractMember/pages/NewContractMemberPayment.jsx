@@ -13,6 +13,22 @@ import { CreditCardIcon, InvoiceIcon } from "../../../data/icons/Icons"
 import { checkIbanFormat } from "../../../services/utils"
 import { creditCardPaymentEnabled } from "../paymentMethods"
 
+const paymentMethods = [
+  {
+    method: "iban",
+    fieldName: "sepa_accepted",
+    description: "SEPA",
+    acceptLabel: "IBAN_ACCEPT_DIRECT_DEBIT",
+  },
+  {
+    method: "credit_card",
+    fieldName: "payment_authorization_accepted",
+    description: "PAYMENT_CCARD_TERMS",
+    acceptLabel: "PAYMENT_METHOD_CCARD_ACCEPT",
+    info: "PAYMENT_METHOD_CCARD_INFO",
+  },
+]
+
 const PaymentMethod = (props) => {
   const {
     values,
@@ -62,21 +78,21 @@ const PaymentMethod = (props) => {
 
   const [open, setOpen] = useState(false)
 
-  const handleClick = (event) => {
+  const openPaymentDialog = (event) => {
     event.preventDefault()
     setOpen(true)
   }
 
-  const handleAccept = () => {
+  const handleAccept = (fieldName) => () => {
     setOpen(false)
-    setFieldValue("new_member.sepa_accepted", true)
-    setFieldTouched("new_member.sepa_accepted", true)
+    setFieldValue(fieldName, true)
+    setFieldTouched(fieldName, true)
   }
 
-  const handleClose = () => {
+  const handleClose = (fieldName) => () => {
     setOpen(false)
-    setFieldValue("new_member.sepa_accepted", false)
-    setFieldTouched("new_member.sepa_accepted", true)
+    setFieldValue(fieldName, false)
+    setFieldTouched(fieldName, true)
   }
 
   useEffect(() => {
@@ -108,27 +124,12 @@ const PaymentMethod = (props) => {
       : []),
   ]
 
-  const showPaymentAuthorizationCheckbox = ["iban", "credit_card"].includes(
-    values?.new_member?.payment_method,
+  const activePayment = paymentMethods.find(
+    (item) => item.method === values?.new_member?.payment_method,
   )
-  const isIbanPayment = values?.new_member?.payment_method === "iban"
-  const isCreditCardPayment =
-    values?.new_member?.payment_method === "credit_card"
-  const paymentAuthorizationLabel = isCreditCardPayment
-    ? t("PAYMENT_METHOD_CCARD_ACCEPT")
-    : t("IBAN_ACCEPT_DIRECT_DEBIT")
-  const paymentAuthorizationValue = isCreditCardPayment
-    ? values?.new_member?.payment_authorization_accepted
-    : values?.new_member?.sepa_accepted
 
-  const handleCheckboxChange = (event) => {
-    const fieldName = isCreditCardPayment
-      ? "new_member.payment_authorization_accepted"
-      : "new_member.sepa_accepted"
-
-    setFieldValue(fieldName, event.target.checked)
-    setFieldTouched(fieldName, true)
-  }
+  const paymentAuthorizationValue =
+    values?.new_member?.[activePayment?.fieldName]
 
   return (
     <Grid container spacing={4}>
@@ -152,53 +153,61 @@ const PaymentMethod = (props) => {
           </Grid>
         </>
       )}
-      {values?.new_member?.payment_method === "iban" && (
+      {activePayment && (
         <>
+          {activePayment?.method === "iban" && (
+            <>
+              <Grid item xs={12}>
+                <InputField
+                  name="iban_number"
+                  textFieldName={t("IBAN_FIELD")}
+                  textFieldNameHelper={t("IBAN_EXPLANATION")}
+                  textFieldHelper={t("IBAN_EXAMPLE")}
+                  handleChange={handleInputIban}
+                  handleBlur={handleInputIbanBlur}
+                  touched={touched?.new_member?.iban}
+                  value={values?.new_member.iban}
+                  error={
+                    errors?.new_member?.iban_valid || errors?.new_member?.iban
+                  }
+                  required={true}
+                />
+              </Grid>
+            </>
+          )}
+          {activePayment?.info && (
+            <>
+              <Grid item xs={12}>
+                <Typography variant="body.md.regular" color="primary.dark">
+                  {t(activePayment.info)}
+                </Typography>
+              </Grid>
+            </>
+          )}
+
           <Grid item xs={12}>
-            <InputField
-              name="iban_number"
-              textFieldName={t("IBAN_FIELD")}
-              textFieldNameHelper={t("IBAN_EXPLANATION")}
-              textFieldHelper={t("IBAN_EXAMPLE")}
-              handleChange={handleInputIban}
-              handleBlur={handleInputIbanBlur}
-              touched={touched?.new_member?.iban}
-              value={values?.new_member.iban}
-              error={errors?.new_member?.iban_valid || errors?.new_member?.iban}
-              required={true}
+            <PaymentAuthorizationCheckbox
+              dataCy="payment_auth_check"
+              checked={paymentAuthorizationValue}
+              label={t(activePayment.acceptLabel)}
+              onClick={openPaymentDialog}
             />
           </Grid>
+          <Grid item xs={12}>
+            <TermsDialog
+              title={t("SEPA_TITLE")}
+              open={open}
+              onAccept={handleAccept(`new_member.${activePayment.fieldName}`)}
+              onClose={handleClose(`new_member.${activePayment.fieldName}`)}
+              maxWidth="sm">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: t(activePayment.description),
+                }}
+              />
+            </TermsDialog>
+          </Grid>
         </>
-      )}
-      {isCreditCardPayment && (
-        <Grid item xs={12}>
-          <Typography variant="body.md.regular" color="primary.dark">
-            {t("PAYMENT_METHOD_CCARD_INFO")}
-          </Typography>
-        </Grid>
-      )}
-      {showPaymentAuthorizationCheckbox && (
-        <Grid item xs={12}>
-          <PaymentAuthorizationCheckbox
-            dataCy="iban_check"
-            checked={paymentAuthorizationValue}
-            label={paymentAuthorizationLabel}
-            onClick={isIbanPayment ? handleClick : undefined}
-            onChange={isCreditCardPayment ? handleCheckboxChange : undefined}
-          />
-        </Grid>
-      )}
-      {isIbanPayment && (
-        <Grid item xs={12}>
-          <TermsDialog
-            title={t("SEPA_TITLE")}
-            open={open}
-            onAccept={handleAccept}
-            onClose={handleClose}
-            maxWidth="sm">
-            <span dangerouslySetInnerHTML={{ __html: t("SEPA") }} />
-          </TermsDialog>
-        </Grid>
       )}
     </Grid>
   )

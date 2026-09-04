@@ -142,6 +142,7 @@
     "IBAN_HELP": "Exemple: ES11 2222 3333 4444 5555 6666",
     "IBAN_ACCEPT_DIRECT_DEBIT": "Confirmo que la persona titular del compte bancari autoritza la domiciliació de les factures d'electricitat.",
     "PAYMENT_METHOD_CCARD_ACCEPT": "Confirmo que la persona titular de la targeta autoritza el cobrament corresponent a través d'aquest mètode de pagament.",
+    "PAYMENT_CCARD_TERMS": "El pagament de les factures s'efectuarà mitjançant targeta de crèdit/dèbit que designe la contractant en el formulari de contractació. Aquest pagament haurà de poder-se fer efectiu a partir dels 7 dies posteriors a la data de la factura. La contractant declara i garanteix haver realitzat els tràmits necessaris, amb l'objectiu que les presents condicions de pagament siguen efectives durant el període íntegre de vigència del contracte actual.",
     "IBAN_ACCEPT_DIRECT_DEBIT_SOCIAL_CONTRIBUTION": "Declaro que la persona titular del compte bancari, jo mateixa o una tercera persona, ha atorgat el seu consentiment exprés per a la domiciliació bancària corresponent a l'aportació voluntària al capital social de la cooperativa, autoritzant el càrrec de l'import corresponent en el compte indicat.",
     "IBAN_ERROR": "IBAN incorrecte",
     "SIGNATURE": "Signa el teu contracte",
