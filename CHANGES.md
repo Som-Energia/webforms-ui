@@ -4,6 +4,8 @@
 
 - NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
 - FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
+- FIX: Render HTML descriptions correctly in shared result screens
+- I18N: Fix typo in Spanish contract signature error message
 
 ## 8.3.1 2026-09-03
 
