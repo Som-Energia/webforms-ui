@@ -1,15 +1,16 @@
 {
   "name": "webforms-ui",
   "version": "8.1.3",
+  "apiVersion": "^7.1.1",
   "private": false,
   "engines": {
     "npm": ">=10.0.0 <11.0.0",
     "node": ">=20.20.2 <21.0.0"
   },
   "scripts": {
-    "dev": "export VITE_APP_VERSION=$(git describe --tags) && vite",
+    "dev": "export VITE_APP_COMMIT_SHA=$(git rev-parse --short HEAD) && vite",
     "start": "vite preview --host 0.0.0.0 --port $PORT",
-    "build": "npm run lint:todos; export VITE_APP_VERSION=$(git describe --tags) && vite build",
+    "build": "npm run lint:todos; export VITE_APP_COMMIT_SHA=$(git rev-parse --short HEAD) && vite build",
     "build:ov": "npm run build -- --mode=ov",
     "build:prod": "npm run build -- --mode=prod",
     "build:pre": "npm run build -- --mode=pre",
@@ -48,6 +49,7 @@
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.2.2",
+    "semver": "^7.8.5",
     "stdnum": "^1.11.7",
     "yup": "^0.32.11"
   },
