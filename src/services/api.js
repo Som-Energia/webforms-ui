@@ -264,6 +264,14 @@ export const createContractLead = async (data) => {
   }).then(({ data }) => data)
 }
 
+export const createHolderChangetLead = async (data) => {
+  return axios({
+    method: "POST",
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
+    data,
+  }).then(({ data }) => data)
+}
+
 export const getContractSignature = async ({ leadId, cups }) => {
   const query = new URLSearchParams({ cups })
   const url = `${WEBFORMS_API_URL}/procedures/sign/contract/${leadId}?${query.toString()}`
