@@ -310,6 +310,178 @@ export const normalizeHolderChange = (
   return normalContract
 }
 
+export const newNormalizeHolderChange = (
+  contract,
+  isMemberMandatoryForHolderchange,
+) => {
+  const normalContract = JSON.parse(JSON.stringify(contract))
+
+  if (normalContract?.supply_point?.verified !== undefined) {
+    delete normalContract.supply_point.verified
+  }
+
+  if (normalContract?.supply_point?.supply_point_accepted !== undefined) {
+    delete normalContract.supply_point.supply_point_accepted
+  }
+
+  if (normalContract?.supply_point?.status !== undefined) {
+    delete normalContract.supply_point.status
+  }
+
+  if (normalContract?.holder?.language?.code !== undefined) {
+    normalContract.holder.language = normalContract.holder.language.code
+  }
+
+  if (normalContract?.holder?.state?.id !== undefined) {
+    normalContract.holder.state = parseInt(normalContract.holder.state.id)
+  }
+
+  if (normalContract?.holder?.city?.id !== undefined) {
+    normalContract.holder.city = parseInt(normalContract.holder.city.id)
+  }
+
+  if (normalContract?.holder?.vatexists !== undefined) {
+    delete normalContract.holder.vatexists
+  }
+
+  if (normalContract?.holder?.vatvalid !== undefined) {
+    delete normalContract.holder.vatvalid
+  }
+
+  if (normalContract?.holder?.isphisical !== undefined) {
+    if (normalContract?.holder?.isphisical === true) {
+      delete normalContract.holder.proxynif
+      delete normalContract.holder.proxyname
+    } else {
+      delete normalContract.holder.surname1
+      delete normalContract.holder.surname2
+    }
+    delete normalContract.holder.isphisical
+    delete normalContract.holder.proxynif_phisical
+  }
+
+  normalContract.holder.address =
+    `${normalContract.holder?.address}, ${normalContract.holder?.number} ${normalContract.holder?.floor} ${normalContract.holder?.door}`.trim()
+
+  normalContract.holder?.number !== undefined &&
+    delete normalContract.holder?.number
+
+  normalContract.holder?.floor !== undefined &&
+    delete normalContract.holder?.floor
+
+  normalContract.holder?.door !== undefined &&
+    delete normalContract.holder?.door
+
+  if (normalContract?.holder?.phone2 === "") {
+    delete normalContract.holder.phone2
+  }
+
+  if (normalContract?.holder?.proxynif_valid !== undefined) {
+    delete normalContract.holder.proxynif_valid
+  }
+
+  // delete member fields
+  if (normalContract?.member && "name" in normalContract.member) {
+    delete normalContract.member.name
+    delete normalContract.member.address
+    delete normalContract.member.postal_code
+    delete normalContract.member.state
+    delete normalContract.member.city
+    delete normalContract.member.surname1
+    delete normalContract.member.email
+    delete normalContract.member.phone1
+    delete normalContract.member.phone2
+    delete normalContract.member.language
+    delete normalContract.member.checked
+    delete normalContract.member.full_name
+  }
+
+  if (normalContract?.holder?.ismember) {
+    normalContract.member.become_member = false
+    normalContract.member.link_member = false
+  } else if (isHomeOwnerCommunityNif(normalContract?.holder?.vat)) {
+    normalContract.member.become_member = false
+    if (isMemberMandatoryForHolderchange)
+      normalContract.member.link_member = true
+  }
+
+  if (normalContract?.holder && "ismember" in normalContract.holder) {
+    delete normalContract.holder.ismember
+  }
+  if (
+    !normalContract?.member?.link_member &&
+    !isMemberMandatoryForHolderchange
+  ) {
+    if (normalContract?.member) {
+      if ("vat" in normalContract.member) {
+        delete normalContract.member.vat
+      }
+
+      if ("number" in normalContract.member) {
+        delete normalContract.member.number
+      }
+    }
+  }
+
+  if (normalContract?.member?.checked !== undefined) {
+    delete normalContract?.member?.checked
+  }
+
+  if (normalContract?.legal_person_accepted !== undefined) {
+    delete normalContract.legal_person_accepted
+  }
+
+  if (normalContract?.payment?.iban) {
+    normalContract.payment.iban = normalContract.payment.iban
+      .split(" ")
+      .join("")
+  }
+
+  if (normalContract?.payment?.iban_valid !== undefined) {
+    delete normalContract.payment.iban_valid
+  }
+
+  if (
+    normalContract?.especial_cases &&
+    normalContract?.especial_cases?.attachments
+  ) {
+    delete normalContract.especial_cases.reason_default
+    const hasSpecialCases = Object.keys(normalContract.especial_cases)
+      .map(
+        (prop) =>
+          prop.indexOf("reason") === 0 &&
+          normalContract.especial_cases[prop] === true,
+      )
+      .reduce((prev, current) => (!prev ? current : prev))
+
+    if (!hasSpecialCases) {
+      delete normalContract.especial_cases.attachments
+    } else {
+      if (normalContract?.especial_cases?.attachments?.death) {
+        normalContract.especial_cases.attachments.death =
+          normalContract?.especial_cases?.attachments?.death[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.medical) {
+        normalContract.especial_cases.attachments.medical =
+          normalContract?.especial_cases?.attachments?.medical[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.resident) {
+        normalContract.especial_cases.attachments.resident =
+          normalContract?.especial_cases?.attachments?.resident[0]
+      }
+
+      if (normalContract?.especial_cases?.attachments?.merge) {
+        normalContract.especial_cases.attachments.merge =
+          normalContract?.especial_cases?.attachments?.merge[0]
+      }
+    }
+  }
+
+  return normalContract
+}
+
 export const normalizeContract = (contract) => {
   const finalContract = {}
 
