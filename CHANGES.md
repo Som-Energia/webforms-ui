@@ -6,6 +6,7 @@
 - FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
 - FIX: Render HTML descriptions correctly in shared result screens
 - I18N: Fix typo in Spanish contract signature error message
+- REF: Change icon of associar-me in contract form
 
 ## 8.3.1 2026-09-03
 
