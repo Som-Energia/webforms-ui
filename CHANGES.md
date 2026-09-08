@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.4.0 2026-09-08
 
 - NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
 - FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
