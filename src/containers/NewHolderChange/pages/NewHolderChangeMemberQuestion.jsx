@@ -1,35 +1,21 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
-import Grid from "@mui/material/Grid"
+import { Grid2 as Grid } from "@mui/material"
 import Typography from "@mui/material/Typography"
 
 import Chooser from "../../../components/Chooser/Chooser"
 import InputTitle from "../../../components/InputTitle"
-import { CommunityIcon, HandshakeIcon } from "../../../data/icons/Icons"
+import { CommunityIcon, HandshakeIcon, HeartIcon } from "../../../data/icons/Icons"
 
-const NewHolderChangeMemberQuestion = ({
-  formikProps,
-  nextStep,
-  setValidationSchemaAndSteps,
-  sendTrackEvent,
-}) => {
-  const { values, setFieldValue, setValues } = formikProps
+const NewHolderChangeMemberQuestion = ({ ...props }) => {
+  const { values, setFieldValue, setValues, sendTrackEvent } = props
   const { t } = useTranslation()
   const trackID = "member-question"
-  const [hasMember, setHasMember] = useState(false)
 
   const handleMemberQuestion = (value) => {
     setFieldValue("has_member", value)
-    setHasMember(value)
   }
-
-  useEffect(() => {
-    if (hasMember) {
-      nextStep(formikProps)
-      setValidationSchemaAndSteps(hasMember)
-    }
-  }, [hasMember])
 
   useEffect(() => {
     sendTrackEvent(trackID)
@@ -51,7 +37,7 @@ const NewHolderChangeMemberQuestion = ({
     },
     {
       id: "member-off",
-      icon: <CommunityIcon on={false} />,
+      icon: <HeartIcon />,
       textHeader: t("HAS_NO_MEMBER"),
       textBody: t("HAS_NO_MEMBER_BODY"),
     },
@@ -60,6 +46,12 @@ const NewHolderChangeMemberQuestion = ({
       icon: <CommunityIcon />,
       textHeader: t("HAS_MEMBER"),
       textBody: t("HAS_MEMBER_BODY"),
+    },
+    {
+      id: "no-member",
+      icon: <HeartIcon on={false} />,
+      textHeader: t("NO_MEMBER"),
+      textBody: t("NO_MEMBER_BODY"),
     },
   ]
 

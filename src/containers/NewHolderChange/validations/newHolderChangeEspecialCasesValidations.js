@@ -1,9 +1,14 @@
 import * as Yup from "yup"
 
-const newContractMemberQuestionValidations = Yup.object().shape({
-  has_member: Yup.string()
+const newHolderChangeEspecialCasesValidations = Yup.object().shape({
+  especial_cases: Yup.string()
     .required("REQUIRED_FIELD")
-    .oneOf(["member-on", "member-off", "member-link"]),
+    .oneOf([
+      "reason_holder_change",
+      "reason_death",
+      "reason_merge",
+      "reason_electrodep",
+    ]),
 })
 
-export default newContractMemberQuestionValidations
+export default newHolderChangeEspecialCasesValidations
