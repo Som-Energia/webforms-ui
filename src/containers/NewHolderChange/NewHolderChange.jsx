@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
@@ -22,23 +22,25 @@ import { activateLead, createHolderChangeLead } from "../../services/api"
 import { NEW_HOLDER_CHANGE_FORM_SUBSTEPS } from "../../services/steps"
 import { newNormalizeHolderChange } from "../../services/utils"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
-import NewContractMemberSupplyPoint from "../NewContractMember/pages/NewContractMemberSupplyPoint"
+import NewContractMemberPayment from "../NewContractMember/pages/NewContractMemberPayment"
+import { NewContractMemberSignature } from "../NewContractMember/pages/NewContractMemberSignature"
 import NewContractMemberVoluntaryDonation from "../NewContractMember/pages/NewContractMemberVoluntaryDonation"
-import MemberIdentifier from "../NewMember/pages/MemberIdentifier"
+import newContractMemberPaymentValidations from "../NewContractMember/validations/newContractMemberPaymentValidations"
+import newContractMemberVoluntaryDonationValidations from "../NewContractMember/validations/newContractMemberVoluntaryDonationValidations"
 import MemberPersonalData from "../NewMember/pages/MemberPersonalData"
-import memberIdentifierValidations from "../NewMember/validations/memberIdentifierValidations"
 import memberPersonalDataValidations from "../NewMember/validations/memberPersonalDataValidations"
 import Result from "../Result"
-import newHolderChangeEspecialCasesValidations from "../validations/newHolderChangeEspecialCasesValidations"
-import newHolderChangeMemberInfoValidations from "../validations/newHolderChangeMemberInfoValidations"
-import newHolderChangePaymentValidations from "../validations/newHolderChangePaymentValidations"
-import newHolderChangeSummaryValidations from "../validations/newHolderChangeSummaryValidations"
-import newHolderChangeSupplyPointValidations from "../validations/newHolderChangeSupplyPointValidations"
-import newHolderChangeVoluntaryDonationValidations from "../validations/newHolderChangeVoluntaryDonationValidations"
-import { NewContractMemberSignature } from "./pages/NewContractMemberSignature"
+import { buildInitialValues } from "./newHolderChange.values"
+import HolderIdentifier from "./pages/HolderIdentifier"
+import NewHolderChangeEspecialCases from "./pages/NewHolderChangeEspecialCases"
 import NewHolderChangeMemberQuestion from "./pages/NewHolderChangeMemberQuestion"
 import NewHolderChangeSummary from "./pages/NewHolderChangeSummary"
-import PaymentMethod from "./pages/PaymentMethod"
+import NewHolderChangeSupplyPoint from "./pages/NewHolderChangeSupplyPoint"
+import holderIdentifierValidations from "./validations/holderIdentifierValidations"
+import newHolderChangeEspecialCasesValidations from "./validations/newHolderChangeEspecialCasesValidations"
+import newHolderChangeMemberQuestionValidations from "./validations/newHolderChangeMemberQuestionValidations"
+import newHolderChangeSummaryValidations from "./validations/newHolderChangeSummaryValidations"
+import newHolderChangeSupplyPointValidations from "./validations/newHolderChangeSupplyPointValidations"
 
 
 const MAX_STEP_NUMBER = 9
@@ -54,71 +56,33 @@ const NewHolderChangeForm = () => {
   const formTPV = useRef(null)
   const formContainer = useRef(null)
   const [leadId, setLeadId] = useState()
-  useBackNavigationWarning(
-    activeStep > 0 && !completed && redsysURL === "",
-    t("LEAVE_CONTRACT_FORM_DESCRIPTION"),
-  )
-
   const { loading } = useContext(LoadingContext)
-  const [ signatureCompleted, setSignatureCompleted] = useState(false)
+  const [signatureCompleted, setSignatureCompleted] = useState(false)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
   const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
 
+  useBackNavigationWarning(
+    activeStep > 0 && !completed && redsysURL === "",
+    t("LEAVE_CONTRACT_FORM_DESCRIPTION"),
+  )
+
   useSyncLanguage(language)
 
-  const initialValues = {
-    address: {
-      street: "",
-      number: "",
-      floor: "",
-      door: "",
-      stairs: "",
-      bloc: "",
-      postal_code: "",
-      state: { id: "", name: "" },
-      city: { id: "", name: "" },
-    },
-    new_member: {
-      nif: "",
-      nif_valid: false,
-      person_type: "",
-      proxynif_valid: false,
-      proxynif: "",
-      proxyname: "",
-      name: "",
-      surname1: "",
-      surname2: "",
-      gender: "",
-      birthdate: undefined,
-      email: "",
-      email2: "",
-      phone: "",
-      phone_code: "+34",
-      phone_valid: false,
-      language: `${i18n.language}_ES`,
-      referral_source: "",
-      payment_method: undefined,
-      sepa_accepted: false,
-      payment_authorization_accepted: false,
-      iban: undefined,
-      legal_person_accepted: false,
-    },
-    privacy_policy_accepted: false,
-    statutes_accepted: false,
-    comercial_info_accepted: false,
-    generic_especific_conditons_accepted: false,
-  }
+  const initialValues = useMemo(
+    () => buildInitialValues(i18n.language),
+    [i18n.language],
+  )
 
   const validationSchemas = [
     newHolderChangeSupplyPointValidations,
-    memberIdentifierValidations,
+    newHolderChangeMemberQuestionValidations,
+    holderIdentifierValidations,
     memberPersonalDataValidations,
-    newHolderChangeMemberInfoValidations,
     newHolderChangeEspecialCasesValidations,
-    newHolderChangeVoluntaryDonationValidations,
-    newHolderChangePaymentValidations,
+    newContractMemberVoluntaryDonationValidations,
+    newContractMemberPaymentValidations,
     newHolderChangeSummaryValidations,
   ]
 
@@ -130,11 +94,19 @@ const NewHolderChangeForm = () => {
     })
   }
 
+  const sendTrackEvent = (id) => {
+    trackEvent({
+      category: "NewHolderChange",
+      action: "setNewHolderChangeStep",
+      name: `new-holder-change-step-${id}`,
+    })
+  }
+
   const nextStep = () => {
     let next
     if (
       summaryField !== undefined &&
-      activeStep !== NEW_HOLDER_CHANGE_FORM_SUBSTEPS["IDENTIFY_HOLDER"]
+      activeStep !== NEW_HOLDER_CHANGE_FORM_SUBSTEPS["IDENTIFY_MEMBER"]
     ) {
       next = MAX_STEP_NUMBER
       setSummaryField(undefined)
@@ -238,22 +210,27 @@ const NewHolderChangeForm = () => {
       })
   }
 
-  const getStep = (props) => {
+  const getStep = (props, sendTrackEvent) => {
+    const trackProps = { ...props, sendTrackEvent }
+
+    console.log("trackProps", trackProps)
     if (activeStep === 0) {
-      return <NewContractMemberSupplyPoint {...props} />
+      return <NewHolderChangeSupplyPoint {...trackProps} />
     } else if (activeStep === 1) {
-      return <MemberIdentifier {...props} />
+      return <NewHolderChangeMemberQuestion {...trackProps} />
     } else if (activeStep === 2) {
-      return <MemberPersonalData {...props} />
+      return <HolderIdentifier {...props} />
     } else if (activeStep === 3) {
-      return <NewHolderChangeMemberQuestion {...props} />
+      return <MemberPersonalData {...trackProps} />
     } else if (activeStep === 4) {
-      return <NewContractMemberVoluntaryDonation {...props} />
+      return <NewHolderChangeEspecialCases {...trackProps} />
     } else if (activeStep === 5) {
-      return <PaymentMethod {...props} />
+      return <NewContractMemberVoluntaryDonation {...trackProps} />
     } else if (activeStep === 6) {
-      return <NewHolderChangeSummary {...props} />
+      return <NewContractMemberPayment {...trackProps} />
     } else if (activeStep === 7) {
+      return <NewHolderChangeSummary {...trackProps} />
+    } else if (activeStep === 8) {
       return (
         <NewContractMemberSignature
           {...props}
@@ -334,7 +311,7 @@ const NewHolderChangeForm = () => {
                     </Box>
                   ) : (
                     <>
-                      {getStep(formikProps)}
+                      {getStep(formikProps, sendTrackEvent)}
                       <Grid
                         container
                         direction="row-reverse"
