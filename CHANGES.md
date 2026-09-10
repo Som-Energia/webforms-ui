@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.4.1 2026-09-10
+
+- FIX: Add totalapenya (has been deleted in 8.3.0 accidently)
+
 ## 8.4.0 2026-09-08
 
 - NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
