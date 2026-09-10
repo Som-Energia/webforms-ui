@@ -22,13 +22,13 @@ import { activateLead, createHolderChangeLead } from "../../services/api"
 import { NEW_HOLDER_CHANGE_FORM_SUBSTEPS } from "../../services/steps"
 import { newNormalizeHolderChange } from "../../services/utils"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
+import IdentifyMemberPersonalData from "../NewContractMember/pages/IdentifyMemberPersonalData"
 import NewContractMemberPayment from "../NewContractMember/pages/NewContractMemberPayment"
 import { NewContractMemberSignature } from "../NewContractMember/pages/NewContractMemberSignature"
 import NewContractMemberVoluntaryDonation from "../NewContractMember/pages/NewContractMemberVoluntaryDonation"
+import identifyMemberPersonalDataValidations from "../NewContractMember/validations/identifyMemberPersonalDataValidations"
 import newContractMemberPaymentValidations from "../NewContractMember/validations/newContractMemberPaymentValidations"
 import newContractMemberVoluntaryDonationValidations from "../NewContractMember/validations/newContractMemberVoluntaryDonationValidations"
-import MemberPersonalData from "../NewMember/pages/MemberPersonalData"
-import memberPersonalDataValidations from "../NewMember/validations/memberPersonalDataValidations"
 import Result from "../Result"
 import { buildInitialValues } from "./newHolderChange.values"
 import HolderIdentifier from "./pages/HolderIdentifier"
@@ -79,7 +79,7 @@ const NewHolderChangeForm = () => {
     newHolderChangeSupplyPointValidations,
     newHolderChangeMemberQuestionValidations,
     holderIdentifierValidations,
-    memberPersonalDataValidations,
+    identifyMemberPersonalDataValidations,
     newHolderChangeEspecialCasesValidations,
     newContractMemberVoluntaryDonationValidations,
     newContractMemberPaymentValidations,
@@ -104,11 +104,8 @@ const NewHolderChangeForm = () => {
 
   const nextStep = () => {
     let next
-    if (
-      summaryField !== undefined &&
-      activeStep !== NEW_HOLDER_CHANGE_FORM_SUBSTEPS["IDENTIFY_MEMBER"]
-    ) {
-      next = MAX_STEP_NUMBER
+    if (summaryField !== undefined) {
+      next = NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SUMMARY"]
       setSummaryField(undefined)
     } else {
       next = activeStep + 1
@@ -213,7 +210,6 @@ const NewHolderChangeForm = () => {
   const getStep = (props, sendTrackEvent) => {
     const trackProps = { ...props, sendTrackEvent }
 
-    console.log("trackProps", trackProps)
     if (activeStep === 0) {
       return <NewHolderChangeSupplyPoint {...trackProps} />
     } else if (activeStep === 1) {
@@ -221,7 +217,7 @@ const NewHolderChangeForm = () => {
     } else if (activeStep === 2) {
       return <HolderIdentifier {...props} />
     } else if (activeStep === 3) {
-      return <MemberPersonalData {...trackProps} />
+      return <IdentifyMemberPersonalData {...props} holder={true} />
     } else if (activeStep === 4) {
       return <NewHolderChangeEspecialCases {...trackProps} />
     } else if (activeStep === 5) {

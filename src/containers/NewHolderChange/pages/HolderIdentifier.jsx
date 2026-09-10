@@ -21,16 +21,11 @@ const HolderIdentifier = (props) => {
       <Grid item xs={12}>
         {values?.has_member === "member-off" ? (
           <MemberIdentifier {...props} title={false} entity="new_member" />
-        ) : values?.has_member === "member-on" ? (
+        ) : values?.has_member === "member-on" || values?.has_member === "member-link" ? (
           <LinkMemberDetails {...props} title={false} entity="new_member" />
         ) : values?.has_member === "no-member" ? (
           <NifCif entity="new_member" {...props} holder={true} />
-        ) : (
-          <>
-            <NifCif entity="new_member" {...props} holder={true} />
-            <LinkMemberDetails {...props} title={false} entity="new_member" />
-          </>
-        )}
+        ) : null}
       </Grid>
     </Grid>
   )
