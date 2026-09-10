@@ -94,50 +94,56 @@ const NewHolderChangeEspecialCases = ({ ...props }) => {
         />
       </Grid>
       {values?.especial_cases === "reason_death" ? (
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }} textAlign={"center"}>
           <DragDrop
             fieldName={t("CERT_ATTACH_DEATH")}
             textStyle={"body.md.regular"}
             required={false}
-            values={values.supply_point.attachments}
+            values={values.supply_point.attachments_reason_death}
             onChange={(fileHash) =>
-              setFieldValue("supply_point.attachments", fileHash)
+              setFieldValue("supply_point.attachments_reason_death", fileHash)
             }
           />
         </Grid>
       ) : values?.especial_cases === "reason_merge" ? (
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }} textAlign={"center"}>
           <DragDrop
             fieldName={t("CERT_ATTACH_MERGE")}
             textStyle={"body.md.regular"}
             required={false}
-            values={values.supply_point.attachments}
+            values={values.supply_point.attachments_reason_merge}
             onChange={(fileHash) =>
-              setFieldValue("supply_point.attachments", fileHash)
+              setFieldValue("supply_point.attachments_reason_merge", fileHash)
             }
           />
         </Grid>
       ) : values?.especial_cases === "reason_electrodep" ? (
         <>
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }} textAlign={"center"}>
             <DragDrop
               fieldName={t("ELECTRODEP_ATTACH_MEDICAL")}
               textStyle={"body.md.regular"}
               required={false}
-              values={values.supply_point.attachments}
+              values={values.supply_point.attachments_reason_electrodep}
               onChange={(fileHash) =>
-                setFieldValue("supply_point.attachments", fileHash)
+                setFieldValue(
+                  "supply_point.attachments_reason_electrodep",
+                  fileHash,
+                )
               }
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }} textAlign={"center"}>
             <DragDrop
               fieldName={t("ELECTRODEP_ATTACH_RESIDENT")}
               textStyle={"body.md.regular"}
               required={false}
-              values={values.supply_point.attachments}
+              values={values.supply_point.attachments_reason_electrodep_census}
               onChange={(fileHash) =>
-                setFieldValue("supply_point.attachments", fileHash)
+                setFieldValue(
+                  "supply_point.attachments_reason_electrodep_census",
+                  fileHash,
+                )
               }
             />
           </Grid>

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
+import { Grid2 as Grid } from "@mui/material"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Checkbox from "@mui/material/Checkbox"
 import Divider from "@mui/material/Divider"
 import FormControlLabel from "@mui/material/FormControlLabel"
-import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import { useTheme } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
@@ -28,14 +28,10 @@ import {
   PricetagIcon,
 } from "../../../data/icons/Icons"
 import { getPrices } from "../../../services/api"
-import { contractProcess } from "../../../services/newNormalize"
-import {
-  NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS,
-  NEW_MEMBER_CONTRACT_FORM_SUBSTEPS,
-} from "../../../services/steps"
+import { NEW_HOLDER_CHANGE_FORM_SUBSTEPS } from "../../../services/steps"
 import { THOUSANDS_CONVERSION_FACTOR } from "../../../services/utils"
 
-const TARIFF_INDEXED = "indexed"
+const TARIFF_INDEXED = "index"
 
 const NewHolderChangeSummary = ({ ...props }) => {
   const { values, setFieldValue, setFieldTouched, sendTrackEvent } = props
@@ -53,14 +49,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
   const [openGeneralTermsDialog, setOpenGeneralTermsDialog] = useState(false)
   const [showReviewLinks, setShowReviewLinks] = useState(false)
 
-  const formSteps =
-    values?.has_member === "member-off"
-      ? NEW_MEMBER_CONTRACT_FORM_SUBSTEPS
-      : values?.has_member === "member-on" ||
-          values?.has_member === "member-link" ||
-          values?.has_member === "campaign-offer"
-        ? NEW_LINK_MEMBER_CONTRACT_FORM_SUBSTEPS
-        : undefined
+  const formSteps = NEW_HOLDER_CHANGE_FORM_SUBSTEPS
 
   useEffect(() => {
     sendTrackEvent(trackID)
@@ -261,29 +250,31 @@ const NewHolderChangeSummary = ({ ...props }) => {
           ],
         }
 
-  const process = contractProcess(
-    values?.has_light === "light-off",
-    values?.previous_holder === "previous-holder-yes",
-  )
   const processType = {
     icon: <InvoiceIcon />,
     title: t("REVIEW_PROCESS_TITLE"),
     field: [
       {
-        reviewValue:
-          process === "A3"
-            ? t("NEW_SUPPLY_POINT")
-            : process === "C1"
-              ? t("CHANGE_SUPPLIER")
-              : process === "C2"
-                ? t("CHANGE_SUPPLIER_AND_HOLDER")
-                : null,
+        reviewValue: t("CHANGE_HOLDER_PROCESS")
       },
       values?.has_member === "member-off" && {
         reviewValue: t("NEW_MEMBER_SUMMARY_PROCESS"),
       },
     ],
   }
+
+  const powersDetailHigher = Object.values(values?.contract?.power).map(
+    (value, index) => {
+      return `P${index + 1}(${value})`
+    },
+  )
+
+  const powersDetail =
+    values?.tariff_name !== "2.0TD"
+      ? powersDetailHigher.join(",")
+      : `${t("PEAK")}(${values?.contract?.power["power1"]}),${t("VALLEY")}(${
+          values?.contract?.power["power2"]
+        })`
 
   const technicalData = [
     {
@@ -292,13 +283,13 @@ const NewHolderChangeSummary = ({ ...props }) => {
     },
     {
       reviewLabel: t("FARE"),
-      reviewValue: values?.tariff_type === "indexed"
+      reviewValue: values?.tariff_type === "index"
         ? t("FARE_INDEXED")
         : t("FARE_PERIODS").concat(" ", values?.tariff_name),
     },
     {
       reviewLabel: t("POWER_SUMMARY"),
-      reviewValue: t("CURRENT"),
+      reviewValue: powersDetail,
     },
     values?.especial_cases === "reason_holder_change"
       ? {
@@ -306,7 +297,6 @@ const NewHolderChangeSummary = ({ ...props }) => {
         }
       : {},
   ]
-  console.log("technicalData", technicalData)
 
   const reviewFields = [
     [processType, reviewHolderData],
@@ -322,12 +312,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
           },
           {
             reviewLabel: t("REVIEW_SUPPLY_POINT_LABEL_ADDRESS"),
-            reviewValue: `${values?.supply_point_address?.street} ${values?.supply_point_address?.number}`,
-            step: showReviewLinks ? formSteps["SUPPLY_INFO"] : null,
-          },
-          {
-            reviewLabel: t("REVIEW_SUPPLY_POINT_LABEL_CITY"),
-            reviewValue: values?.supply_point_address?.city?.name,
+            reviewValue: values?.supply_point_address,
             step: showReviewLinks ? formSteps["SUPPLY_INFO"] : null,
           },
         ],
@@ -392,6 +377,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
       city_id: cityId,
       powers: powers,
       pricelist_type: isTariffIndexed ? "index" : "periods",
+      cups: values.CUPS,
     })
       .then((response) => {
         const tariffPrices = response?.data["current"]
@@ -416,6 +402,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
     values.supply_point.cnae,
     values?.supply_point_address?.city?.id,
     isTariffIndexed,
+    values.CUPS,
   ])
 
   const handleCheckboxChange = async (event, fieldName) => {
