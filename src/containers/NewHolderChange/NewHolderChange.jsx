@@ -42,7 +42,6 @@ import newHolderChangeMemberQuestionValidations from "./validations/newHolderCha
 import newHolderChangeSummaryValidations from "./validations/newHolderChangeSummaryValidations"
 import newHolderChangeSupplyPointValidations from "./validations/newHolderChangeSupplyPointValidations"
 
-
 const MAX_STEP_NUMBER = 9
 
 const NewHolderChangeForm = () => {
@@ -327,7 +326,8 @@ const NewHolderChangeForm = () => {
                           </Grid>
                         )}
                         <Grid item size={{ sm: 2, xs: 12 }} order={-1}>
-                          {activeStep === NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SUMMARY"] ? (
+                          {activeStep ===
+                          NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SUMMARY"] ? (
                             <SubmitButton
                               disabled={loading || !formikProps.isValid}
                               onClick={() =>
@@ -335,7 +335,8 @@ const NewHolderChangeForm = () => {
                               }>
                               {t("NEXT")}
                             </SubmitButton>
-                          ) : activeStep === NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"] ? (
+                          ) : activeStep ===
+                            NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"] ? (
                             <SubmitButton
                               disabled={loading || !signatureCompleted}
                               onClick={() => handleSignatureSuccess()}>

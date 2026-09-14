@@ -27,9 +27,8 @@ import {
   PlaceMapIcon,
   PricetagIcon,
 } from "../../../data/icons/Icons"
-import { getPrices } from "../../../services/api"
+import { getPricesByCups } from "../../../services/api"
 import { NEW_HOLDER_CHANGE_FORM_SUBSTEPS } from "../../../services/steps"
-import { THOUSANDS_CONVERSION_FACTOR } from "../../../services/utils"
 
 const TARIFF_INDEXED = "index"
 
@@ -255,26 +254,13 @@ const NewHolderChangeSummary = ({ ...props }) => {
     title: t("REVIEW_PROCESS_TITLE"),
     field: [
       {
-        reviewValue: t("CHANGE_HOLDER_PROCESS")
+        reviewValue: t("CHANGE_HOLDER_PROCESS"),
       },
       values?.has_member === "member-off" && {
         reviewValue: t("NEW_MEMBER_SUMMARY_PROCESS"),
       },
     ],
   }
-
-  const powersDetailHigher = Object.values(values?.contract?.power).map(
-    (value, index) => {
-      return `P${index + 1}(${value})`
-    },
-  )
-
-  const powersDetail =
-    values?.tariff_name !== "2.0TD"
-      ? powersDetailHigher.join(",")
-      : `${t("PEAK")}(${values?.contract?.power["power1"]}),${t("VALLEY")}(${
-          values?.contract?.power["power2"]
-        })`
 
   const technicalData = [
     {
@@ -283,13 +269,14 @@ const NewHolderChangeSummary = ({ ...props }) => {
     },
     {
       reviewLabel: t("FARE"),
-      reviewValue: values?.tariff_type === "index"
-        ? t("FARE_INDEXED")
-        : t("FARE_PERIODS").concat(" ", values?.tariff_name),
+      reviewValue:
+        values?.tariff_type === "index"
+          ? t("FARE_INDEXED")
+          : t("FARE_PERIODS").concat(" ", values?.tariff_name),
     },
     {
       reviewLabel: t("POWER_SUMMARY"),
-      reviewValue: powersDetail,
+      reviewValue: t("CURRENT"),
     },
     values?.especial_cases === "reason_holder_change"
       ? {
@@ -352,35 +339,9 @@ const NewHolderChangeSummary = ({ ...props }) => {
   useEffect(() => {
     setLoading(true)
 
-    let powerFields = Object.values(
-      Object.fromEntries(
-        Object.entries(values.contract.power).filter(([key]) =>
-          key.startsWith("power"),
-        ),
-      ),
-    )
-
-    let maxPower = Math.round(
-      Math.max(...powerFields) * THOUSANDS_CONVERSION_FACTOR,
-    )
-
-    const cityId = values?.supply_point_address?.city?.id || null
-    const powers = powerFields.map((power) =>
-      String(Math.round(Number(power) * THOUSANDS_CONVERSION_FACTOR)),
-    )
-
-    getPrices({
-      tariff: values.tariff_name,
-      max_power: maxPower,
-      vat: values.new_member?.nif ? values.new_member.nif : values.member.nif,
-      cnae: values.supply_point.cnae,
-      city_id: cityId,
-      powers: powers,
-      pricelist_type: isTariffIndexed ? "index" : "periods",
-      cups: values.CUPS,
-    })
+    getPricesByCups(values.cups)
       .then((response) => {
-        const tariffPrices = response?.data["current"]
+        const tariffPrices = response?.data["breakdown"]
         const estimatedMonthlykWh = response?.data["estimated_monthly_kwh"]
         const estimatedMonthlyTotalEur =
           response?.data["estimated_monthly_total_eur"]
@@ -394,16 +355,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
         setLoading(false)
         console.error(error)
       })
-  }, [
-    values.contract.power,
-    values.tariff_name,
-    values.new_member?.nif,
-    values.member?.nif,
-    values.supply_point.cnae,
-    values?.supply_point_address?.city?.id,
-    isTariffIndexed,
-    values.CUPS,
-  ])
+  }, [values.cups])
 
   const handleCheckboxChange = async (event, fieldName) => {
     let value = event.target.checked
