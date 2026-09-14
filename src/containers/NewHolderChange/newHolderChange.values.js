@@ -60,17 +60,6 @@ export const buildInitialValues = (language) => ({
     iban: undefined,
     legal_person_accepted: false,
   },
-  contract: {
-    power: {
-      power1: "1",
-      power2: "2",
-      power3: "3",
-      power4: "",
-      power5: "",
-      power6: "",
-    },
-    phase: "mono",
-  },
   privacy_policy_accepted: false,
   generic_conditions_accepted: false,
   statutes_accepted: false,
