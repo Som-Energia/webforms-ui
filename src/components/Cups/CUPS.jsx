@@ -52,7 +52,7 @@ const CUPS = (props) => {
               knowledge_of_distri,
               tariff_name,
               tariff_type,
-              supply_point_address: address,
+              supply_point_address: address.replace(/\d/g, "*"),
             },
           }),
           true,
