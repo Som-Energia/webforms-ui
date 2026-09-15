@@ -341,8 +341,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
 
     getPricesByCups(values.cups)
       .then((response) => {
-        const tariffPricesItem = Object.values(response?.data)[0]
-        const tariffPrices = tariffPricesItem.current
+        const tariffPrices = response?.data["current"]
         const estimatedMonthlykWh = response?.data["estimated_monthly_kwh"]
         const estimatedMonthlyTotalEur =
           response?.data["estimated_monthly_total_eur"]
