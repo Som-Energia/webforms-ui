@@ -260,7 +260,7 @@ export const getPricesByCups = async (cups) => {
   return axios({
     method: "GET",
     url: `${WEBFORMS_API_URL}/data/prices/${cups}`,
-  }).then((res) => res?.data)
+  }).then((response) => response?.data)
 }
 
 export const createContractLead = async (data) => {
