@@ -52,23 +52,11 @@ if (roots.length) {
 async function buildFeatureFlags() {
   const featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
   const params = new URLSearchParams(document.location.search)
-  // TODO: choice one of them
-  if (params.has("f")) {
-    const { ff, exp } = JSON.parse(atob(params.get("f") || "{}"))
-    if (!exp || Date.now() > Number(exp)) {
-      throw new Error("Invalid form params")
-    }
-
-    ff.forEach((key) => {
-      featureFlags[key] = true
-    })
-  } else if (params.has("token")) {
-    // secured
+  if (params.has("token")) {
     const token = params.get("token")
     try {
-      // TODO: use VITE_WEBFORMS_API_URL
       const response = await fetch(
-        `https://function-bun-production-4dcc1.up.railway.app/api/token/validate?token=${token}`,
+        `${import.meta.env?.VITE_WEBFORMS_API_URL}/data/token/validate?token=${token}`,
       )
 
       if (!response.ok) {
@@ -76,12 +64,12 @@ async function buildFeatureFlags() {
       }
 
       const json = await response.json()
-      const ff = json.ff
+      const { ff } = json.data
       ff.forEach((key) => {
         featureFlags[key] = true
       })
-    } catch {
-      throw new Error("Invalid token")
+    } catch (e) {
+      throw new Error("Invalid token", e)
     }
   }
   return featureFlags
