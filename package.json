@@ -47,7 +47,7 @@
     "react-facebook-pixel": "^1.0.4",
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^14.0.0",
-    "react-router-dom": "^6.2.2",
+    "react-router-dom": "^6.30.6",
     "stdnum": "^1.11.7",
     "yup": "^0.32.11"
   },
