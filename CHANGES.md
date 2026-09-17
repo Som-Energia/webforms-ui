@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased
+
+- IMP: remove payment description from options when memeber-on
+
 ## 8.5.0 2026-09-17
 
 - IMP: Upgrade the project engines to Node 24 LTS and npm 11
