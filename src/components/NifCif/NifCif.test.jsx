@@ -12,9 +12,10 @@ import { vi } from "vitest"
 
 import { LoadingContextProvider } from "../../context/LoadingContext"
 import { checkVat } from "../../services/api"
-import { initI18n } from "../../tests/i18n.mock"
 import WebFormsTheme from "../../themes/webforms"
 import NifCif from "./NifCif"
+
+vi.mock("react-i18next", async () => import("../../tests/__mocks__/i18n.js"))
 
 // Mock the checkVat function
 vi.mock("../../services/api", () => ({
@@ -24,12 +25,6 @@ vi.mock("../../services/api", () => ({
 const webFormsTheme = WebFormsTheme()
 
 const renderComponent = async (nifCifNumber, useEffectHandler) => {
-  await initI18n({
-    DNI_EXIST: "DNI exists",
-    FILL_NIF: "NIF is invalid",
-    INVALID_FORMAT: "Invalid format",
-  })
-
   return render(
     <NifCifWrapperComponent
       nifCifNumber={nifCifNumber}
@@ -94,7 +89,7 @@ describe("NifCif component ", () => {
 
       const invalidNif = "12345678Z"
       await renderComponent(invalidNif)
-      const errorMessage = await screen.findByText("NIF is invalid")
+      const errorMessage = await screen.findByText("FILL_NIF")
       expect(errorMessage).toBeInTheDocument()
     })
 
@@ -105,7 +100,7 @@ describe("NifCif component ", () => {
 
       const invalidNif = "12345678Z"
       await renderComponent(invalidNif)
-      const errorMessage = await screen.findByText("DNI exists")
+      const errorMessage = await screen.findByText("DNI_EXIST")
       expect(errorMessage).toBeInTheDocument()
     })
 

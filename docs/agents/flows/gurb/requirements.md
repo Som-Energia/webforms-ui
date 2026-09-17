@@ -10,13 +10,13 @@ Aquest subflux decideix si la persona pot continuar directament a `join` o si ab
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Pasos | `SupplyPoint`, `Address`, `LightQuestion` i, opcionalment, `GurbRequirementsTariffSelection` |
-| Finalització | pot acabar al pas 3 sense nova contractació o al 4 si `new_contract === true` |
+| Tema                   | Context                                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- |
+| Pasos                  | `SupplyPoint`, `Address`, `LightQuestion` i, opcionalment, `GurbRequirementsTariffSelection`            |
+| Finalització           | pot acabar al pas 3 sense nova contractació o al 4 si `new_contract === true`                           |
 | Sortida a contractació | `GurbRequirementsTariffSelection` construeix la URL final de contractació amb `?gurb-code={{gurbCode}}` |
-| Bloquejos | `inside_perimeter`, `has_light` i `redirectUrl` bloquegen el següent pas |
-| Tracking | event per `activeStep` amb `gurbCode` |
+| Bloquejos              | `inside_perimeter`, `has_light` i `redirectUrl` bloquegen el següent pas                                |
+| Tracking               | event per `activeStep` amb `gurbCode`                                                                   |
 
 Els índexs de la navegació estan centralitzats a `GURB_REQUIREMENTS_FORM_SUBSTEPS` dins de `src/services/steps.js`. El resultat es detecta dinàmicament amb `steps.length`, ja que la selecció de tarifa només existeix per a una nova contractació.
 

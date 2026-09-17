@@ -10,16 +10,16 @@ Flux d'aportació genèrica, semblant a Generation però més simple i sense la 
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Container arrel | `src/containers/Contribution.jsx` |
-| Flux | identificació, dades personals opcionals, aportació, revisió i resultat |
-| Validació | `Yup` embegut al mateix container |
-| Navegació | si `member.is_member` és `true`, es salta el pas de dades personals tant endavant com enrere |
-| Lògica econòmica | usa `contributionParams` per mínims, màxims i salts |
-| Submit | si no és sòcia, primer crea membre via `member()`, després envia `contribution()` |
-| Idioma | `useSyncLanguage(language)` i `member.language` inicial |
-| UI antiga | encara reutilitza `OldComponents` en diversos punts |
+| Tema             | Context                                                                                      |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| Container arrel  | `src/containers/Contribution.jsx`                                                            |
+| Flux             | identificació, dades personals opcionals, aportació, revisió i resultat                      |
+| Validació        | `Yup` embegut al mateix container                                                            |
+| Navegació        | si `member.is_member` és `true`, es salta el pas de dades personals tant endavant com enrere |
+| Lògica econòmica | usa `contributionParams` per mínims, màxims i salts                                          |
+| Submit           | si no és sòcia, primer crea membre via `member()`, després envia `contribution()`            |
+| Idioma           | `useSyncLanguage(language)` i `member.language` inicial                                      |
+| UI antiga        | encara reutilitza `OldComponents` en diversos punts                                          |
 
 ## Riscos reals
 

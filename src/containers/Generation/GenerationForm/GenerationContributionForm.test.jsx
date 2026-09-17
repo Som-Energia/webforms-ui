@@ -10,7 +10,7 @@ import { vi } from "vitest"
 
 import GenerationContributionForm from "./GenerationContributionForm"
 
-vi.mock("react-i18next", () => require("../../../tests/__mocks__/i18n"))
+vi.mock("react-i18next", async () => import("../../../tests/__mocks__/i18n.js"))
 
 describe("Generation Form Contribution", () => {
   const mockSetFieldValue = vi.fn()

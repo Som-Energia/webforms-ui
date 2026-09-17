@@ -10,15 +10,15 @@
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Container arrel | `src/containers/NewContractMember/NewContractMember.jsx` |
-| Variants | flux diferent per `member-on`, `member-off` i `member-link` |
-| Pasos | lògica repartida entre `pages/*` i arrays de `validationSchemas` |
-| Branques | depèn de `gurb-code`, `mtm_*`, `initStep`, `tariff` i flags injectats |
-| Submit | normalitza amb `newNormalizeContract(values, gurbCode)` i envia a `newContract()` |
-| Tracking | molts events Matomo i pixel al llarg del flux |
-| UI | `data-cy='contract-form'`, `SomStepper`, resum i passos condicionals |
+| Tema            | Context                                                                           |
+| --------------- | --------------------------------------------------------------------------------- |
+| Container arrel | `src/containers/NewContractMember/NewContractMember.jsx`                          |
+| Variants        | flux diferent per `member-on`, `member-off` i `member-link`                       |
+| Pasos           | lògica repartida entre `pages/*` i arrays de `validationSchemas`                  |
+| Branques        | depèn de `gurb-code`, `mtm_*`, `initStep`, `tariff` i flags injectats             |
+| Submit          | normalitza amb `newNormalizeContract(values, gurbCode)` i envia a `newContract()` |
+| Tracking        | molts events Matomo i pixel al llarg del flux                                     |
+| UI              | `data-cy='contract-form'`, `SomStepper`, resum i passos condicionals              |
 
 ## Diagrama ràpid
 
