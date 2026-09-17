@@ -2,7 +2,7 @@
 
 ## unreleased
 
-- IMP: remove payment description from options when memeber-on
+- IMP: remove payment description from options when memeber-on or member-link
 
 ## 8.5.0 2026-09-17
 

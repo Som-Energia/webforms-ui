@@ -113,7 +113,8 @@ const PaymentMethod = (props) => {
             icon: <InvoiceIcon />,
             textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
             textBody:
-              values?.has_member !== "member-on"
+              values?.has_member !== "member-on" &&
+              values?.has_member !== "member-link"
                 ? t("PAYMENT_METHOD_IBAN_DESC")
                 : null,
           },
@@ -122,7 +123,8 @@ const PaymentMethod = (props) => {
             icon: <CreditCardIcon />,
             textHeader: t("PAYMENT_METHOD_CCARD"),
             textBody:
-              values?.has_member !== "member-on"
+              values?.has_member !== "member-on" &&
+              values?.has_member !== "member-link"
                 ? t("PAYMENT_METHOD_CCARD_DESC")
                 : null,
           },
