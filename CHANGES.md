@@ -1,11 +1,12 @@
 # Change Log
 
-## Unreleased
+## 8.5.0 2026-09-17
 
 - IMP: Upgrade the project engines to Node 24 LTS and npm 11
 - FIX: Replace `i18next-parser` with `i18next-cli` because the previous extractor was not compatible with Node 24
 - IMP: Add `i18next-cli.config.mjs` to keep the existing i18n extraction output format
 - IMP: Regenerate `package-lock.json` and verify install, i18n extraction, lint, tests, and build under Node 24
+- REF: Add allow post-script packages
 
 ## 8.4.1 2026-09-10
 
