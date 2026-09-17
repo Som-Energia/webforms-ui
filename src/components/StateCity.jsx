@@ -93,6 +93,9 @@ const StateCity = (props) => {
 
   const handleStateChange = (event) => {
     event.preventDefault()
+    // FIXME: event.target.value is the selected option id, but states is an array.
+    // Looking up states[event.target.value] returns undefined for normal string ids,
+    // so the emitted state.name is currently wrong after selection.
     const newState = {
       id: event.target.value,
       name: states[event.target.value],
@@ -105,6 +108,9 @@ const StateCity = (props) => {
 
   const handleCityChange = (event) => {
     event.preventDefault()
+    // FIXME: event.target.value is the selected option id, but cities is an array.
+    // Looking up cities[event.target.value] returns undefined for normal string ids,
+    // so the emitted city.name is currently wrong after selection.
     const newCity = {
       id: event.target.value,
       name: cities[event.target.value],
