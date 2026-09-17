@@ -164,7 +164,7 @@ const NewContractMemberForm = (props) => {
   const validationSchemasLinkMember = [
     newContractMemberQuestionValidations,
     linkMemberValidations,
-    newContractMemberSupplyPointValidations,
+    newContractMemberSupplyPointValidations(props.socialTariffByPass),
     newContractMemberSupplyPointDataValidations,
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
@@ -180,7 +180,7 @@ const NewContractMemberForm = (props) => {
     newContractMemberQuestionValidations,
     memberIdentifierValidations,
     memberPersonalDataValidations,
-    newContractMemberSupplyPointValidations,
+    newContractMemberSupplyPointValidations(props.socialTariffByPass),
     newContractMemberSupplyPointDataValidations,
     newContractMemberPowerValidations,
     newContractMemberSelfConsumptionValidations,
@@ -370,18 +370,23 @@ const NewContractMemberForm = (props) => {
     handleSignatureSuccess()
   }
 
-  const getStep = (props, sendTrackEvent) => {
-    const { values } = props
+  const getStep = (formikProps, sendTrackEvent) => {
+    const { values } = formikProps
 
-    const trackProps = { ...props, sendTrackEvent }
+    const trackProps = { ...formikProps, sendTrackEvent }
 
     if (values?.has_member === "member-off") {
       if (activeStep === 1) {
-        return <MemberIdentifier {...props} />
+        return <MemberIdentifier {...formikProps} />
       } else if (activeStep === 2) {
-        return <MemberPersonalData {...props} />
+        return <MemberPersonalData {...formikProps} />
       } else if (activeStep === 3) {
-        return <NewContractMemberSupplyPoint {...trackProps} />
+        return (
+          <NewContractMemberSupplyPoint
+            socialTariffByPass={props.socialTariffByPass}
+            {...trackProps}
+          />
+        )
       } else if (activeStep === 4) {
         return <NewContractMemberSupplyPointData {...trackProps} />
       } else if (activeStep === 5) {
@@ -389,9 +394,9 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 6) {
         return <NewContractMemberSelfConsumptionChooser {...trackProps} />
       } else if (activeStep === 7) {
-        return <NewContractMemberSelfConsumptionData {...props} />
+        return <NewContractMemberSelfConsumptionData {...formikProps} />
       } else if (activeStep === 8) {
-        return <NewContractHolder {...props} />
+        return <NewContractHolder {...formikProps} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
@@ -401,7 +406,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 12) {
         return (
           <NewContractMemberSignature
-            {...props}
+            {...formikProps}
             leadId={leadId}
             cups={values?.cups}
             onSuccess={handleSignatureCompleted}
@@ -410,9 +415,14 @@ const NewContractMemberForm = (props) => {
       }
     } else {
       if (activeStep === 1) {
-        return <LinkMemberDetails {...props} />
+        return <LinkMemberDetails {...formikProps} />
       } else if (activeStep === 2) {
-        return <NewContractMemberSupplyPoint {...trackProps} />
+        return (
+          <NewContractMemberSupplyPoint
+            socialTariffByPass={props.socialTariffByPass}
+            {...trackProps}
+          />
+        )
       } else if (activeStep === 3) {
         return <NewContractMemberSupplyPointData {...trackProps} />
       } else if (activeStep === 4) {
@@ -420,11 +430,11 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 5) {
         return <NewContractMemberSelfConsumptionChooser {...trackProps} />
       } else if (activeStep === 6) {
-        return <NewContractMemberSelfConsumptionData {...props} />
+        return <NewContractMemberSelfConsumptionData {...formikProps} />
       } else if (activeStep === 7) {
-        return <NewContractHolder {...props} />
+        return <NewContractHolder {...formikProps} />
       } else if (activeStep === 8) {
-        return <IdentifyMemberPersonalData {...props} holder={true} />
+        return <IdentifyMemberPersonalData {...formikProps} holder={true} />
       } else if (activeStep === 9) {
         return <NewContractMemberVoluntaryDonation {...trackProps} />
       } else if (activeStep === 10) {
@@ -434,7 +444,7 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 12) {
         return (
           <NewContractMemberSignature
-            {...props}
+            {...formikProps}
             leadId={leadId}
             cups={values?.cups}
             onSuccess={handleSignatureCompleted}
