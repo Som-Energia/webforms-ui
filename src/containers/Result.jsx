@@ -75,9 +75,10 @@ const Result = (props) => {
               lineHeight: "1.75",
               textAlign: "center",
               color: "secondary.dark",
-            }}>
-            {description}
-          </Typography>
+            }}
+            dangerouslySetInnerHTML={{
+              __html: description,
+            }}></Typography>
         ) : null}
         <Box mt={1} mb={1}>
           {children}

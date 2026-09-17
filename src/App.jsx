@@ -498,6 +498,8 @@ const AppRoutes = (props) => {
         "/:language/kontratazio-formularioa-ordutarteak",
         "/:language/landing/totquisquicanvia",
         "/:language/landing/todoquisquicambia",
+        "/:language/landing/todalapenya",
+        "/:language/landing/totalapenya",
       ].map((path) => (
         <Route
           key={path}
@@ -522,6 +524,8 @@ const AppRoutes = (props) => {
         "/:language/kontratazio-formularioa-indexatua",
         "/:language/landing/totquisquicanvia",
         "/:language/landing/todoquisquicambia",
+        "/:language/landing/todalapenya",
+        "/:language/landing/totalapenya",
       ].map((path) => (
         <Route
           key={path}

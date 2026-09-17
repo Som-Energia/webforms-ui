@@ -76,6 +76,7 @@ Cypress.Commands.add('newContractSupplyPointData', (data, house = 'no') => {
     console.log('ele', $ele)
     if ($ele.is(":enabled")) {
       cy.get(`[name="cnae"]`).type(data.supplyPoint.cnae_no_house)
+      cy.wait(500)
     }
     if ($ele.is(":disabled")) {
       cy.get(`[name="cnae"]`).type(data.supplyPoint.cnae_house, {force:true})
@@ -122,12 +123,10 @@ Cypress.Commands.add('contractMemberPaymentData', (paymentdata) => {
 
   if (!isCreditCard) {
     cy.get('[data-cy="iban_number"]').type(paymentdata.iban)
-    cy.get('[data-cy="iban_check"]').click()
-    cy.get('[data-cy=accept]').click()
-  } else {
-    //       At this moment is used by iban and credit_card
-    cy.get('[data-cy="iban_check"]').click()
   }
+  cy.get('[data-cy="payment_auth_check"]').click()
+  cy.get('[data-cy=accept]').click()
+
   cy.get('[data-cy=next]').should('not.be.disabled')
   cy.get('[data-cy=next]').click()
 })
