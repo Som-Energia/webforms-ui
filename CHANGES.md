@@ -9,6 +9,30 @@
 - REF: Make the shared fast `react-i18next` test mock stable across renders in `src/tests/__mocks__/i18n.js`
 - DOC: Add FIXME notes for known production issues found during coverage work, including generation member validation loops and invalid helper-text DOM nesting in `GenerationNoMemberIdFields`
 
+## 8.5.0 2026-09-17
+
+- IMP: Upgrade the project engines to Node 24 LTS and npm 11
+- FIX: Replace `i18next-parser` with `i18next-cli` because the previous extractor was not compatible with Node 24
+- IMP: Add `i18next-cli.config.mjs` to keep the existing i18n extraction output format
+- IMP: Regenerate `package-lock.json` and verify install, i18n extraction, lint, tests, and build under Node 24
+- REF: Add allow post-script packages
+
+## 8.4.1 2026-09-10
+
+- FIX: Add totalapenya (has been deleted in 8.3.0 accidently)
+
+## 8.4.0 2026-09-08
+
+- NEW: Add a payment authorization dialog for credit card payments in the new contract/member flow
+- FIX: Align the Cypress payment flow with the new payment authorization checkbox and dialog
+- FIX: Render HTML descriptions correctly in shared result screens
+- I18N: Fix typo in Spanish contract signature error message
+- REF: Change icon of associar-me in contract form
+
+## 8.3.1 2026-09-03
+
+- FIX: Fixed IBAN validation in Contract form
+
 ## 8.3.0 2026-09-01
 
 - IMP: Split local development and preview startup commands
