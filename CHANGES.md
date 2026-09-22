@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 8.5.1 2026-09-22
 
 - IMP: remove payment description from options when memeber-on or member-link
 
