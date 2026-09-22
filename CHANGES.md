@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.5.2 2026-09-22
+
+- FIX: refactor tracker initialization avoid external duplicity load
+
 ## 8.5.1 2026-09-22
 
 - IMP: remove payment description from options when memeber-on or member-link
