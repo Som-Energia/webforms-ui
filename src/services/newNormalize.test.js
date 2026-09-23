@@ -123,4 +123,15 @@ describe("Check Contract new Form (normalize function)", () => {
       newNormalizeContract(newContractCases.paymentTPV.entryValues),
     ).toStrictEqual(newContractCases.paymentTPV.normalizedData)
   })
+
+  test("Normalize Contract data (uid)", () => {
+    const normalizedContract = newNormalizeContract(
+      newContractCases.newMember.entryValues,
+      undefined,
+      "uuid",
+    )
+    expect(normalizedContract).toMatchObject({
+      uid: "uuid",
+    })
+  })
 })
