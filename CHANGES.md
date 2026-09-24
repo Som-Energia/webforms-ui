@@ -8,6 +8,14 @@
 - REF: Make the shared fast `react-i18next` test mock stable across renders in `src/tests/__mocks__/i18n.js`
 - DOC: Add FIXME notes for known production issues found during coverage work, including generation member validation loops and invalid helper-text DOM nesting in `GenerationNoMemberIdFields`
 
+## 8.5.2 2026-09-22
+
+- FIX: refactor tracker initialization avoid external duplicity load
+
+## 8.5.1 2026-09-22
+
+- IMP: remove payment description from options when memeber-on or member-link
+
 ## 8.5.0 2026-09-17
 
 - IMP: Upgrade the project engines to Node 24 LTS and npm 11

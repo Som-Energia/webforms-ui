@@ -626,7 +626,7 @@
     "GURB_CHECK_ADHESION_PAYMENT_ACCEPTED": "Con la contratación del servicio GURB me obligo al pago del coste de adhesión único una vez verificada mi plaza en GURB y de la cuota GURB que será de aplicación a partir del primer día posterior a la fecha de activación.",
     "GURB_CHECK_GENERIC_AND_SPECIFIC_GURB_CONDITIONS": "He leído las <a target='_blank' href=\"{{generic_conditions_url}}\" >condiciones generales de contratación </a> de Som Energia y las <a target='_blank' href=\"{{gurb_specific_conditions_url}}\" >condiciones específicas del servicio GURB</a> .",
     "GENERIC_CONDITIONS_URL": "https://back.somenergia.coop/storage/app/media/DOCS/Condiciones-generales-contrato-suministro-energia-electrica-SomEnergia.pdf",
-    "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "https://back.somenergia.coop/storage/app/media/DOCS/Condiciones_especificas_GURB.pdf",
+    "GURB_CHECK_SPECIFIC_CONDITIONS_URL": "https://back.somenergia.coop/storage/app/media/DOCS/legal/es/CCEE/Condiciones_especificas_GURB_SomEnergia.pdf",
     "CONTRACT_CHECK_SPECIFIC_CONDITIONS_URL": "https://ca.support.somenergia.coop/",
     "SELFCONSUMPTION_YES_HEADER": "Sí tengo autoconsumo",
     "SELFCONSUMPTION_NO_HEADER": "No tengo autoconsumo",
