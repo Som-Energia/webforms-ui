@@ -4,7 +4,8 @@ class MatomoTracker {
   }
 
   initialize() {
-    if (document.getElementById("matomo_tracker") === null) {
+    if (!window._paq) {
+      console.warn("Tracker not initialized - Initializing window._paq")
       var _paq = (window._paq = window._paq || [])
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
       _paq.push(["trackPageView"])
@@ -21,7 +22,10 @@ class MatomoTracker {
         g.src = u + "matomo.js"
         s.parentNode.insertBefore(g, s)
       })()
+    }
 
+    if (!window._mtm) {
+      console.warn("Tracker not initialized - Initializing window._mtm")
       // Matomo Tag Manager
       const _mtm = (window._mtm = window._mtm || [])
       _mtm.push({ "mtm.startTime": new Date().getTime(), event: "mtm.Start" })

@@ -106,22 +106,37 @@ const PaymentMethod = (props) => {
   }, [values?.new_member?.iban])
 
   const options = [
-    {
-      id: "iban",
-      icon: <InvoiceIcon />,
-      textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
-      textBody: t("PAYMENT_METHOD_IBAN_DESC"),
-    },
     ...(creditCardPaymentEnabled
       ? [
+          {
+            id: "iban",
+            icon: <InvoiceIcon />,
+            textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
+            textBody:
+              values?.has_member !== "member-on" &&
+              values?.has_member !== "member-link"
+                ? t("PAYMENT_METHOD_IBAN_DESC")
+                : null,
+          },
           {
             id: "credit_card",
             icon: <CreditCardIcon />,
             textHeader: t("PAYMENT_METHOD_CCARD"),
-            textBody: t("PAYMENT_METHOD_CCARD_DESC"),
+            textBody:
+              values?.has_member !== "member-on" &&
+              values?.has_member !== "member-link"
+                ? t("PAYMENT_METHOD_CCARD_DESC")
+                : null,
           },
         ]
-      : []),
+      : [
+          {
+            id: "iban",
+            icon: <InvoiceIcon />,
+            textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
+            textBody: t("PAYMENT_METHOD_IBAN_DESC"),
+          },
+        ]),
   ]
 
   const activePayment = paymentMethods.find(
