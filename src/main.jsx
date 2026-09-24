@@ -56,7 +56,14 @@ async function buildFeatureFlags() {
     const token = params.get("token")
     try {
       const response = await fetch(
-        `${import.meta.env?.VITE_WEBFORMS_API_URL}/data/token/validate?token=${token}`,
+        `${import.meta.env?.VITE_WEBFORMS_API_URL}/data/feature-flag-token/validate`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        },
       )
 
       if (!response.ok) {
