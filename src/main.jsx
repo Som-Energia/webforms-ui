@@ -4,6 +4,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 
 import App from "./App"
+import AppError from "./AppError"
 import { initDevTools } from "./devTools"
 // import * as serviceWorker from './serviceWorker'
 
@@ -33,18 +34,7 @@ if (roots.length) {
       )
     } catch (err) {
       console.error(err)
-      ReactDOM.createRoot(root).render(
-        <div
-          style={{
-            backgroundColor: "#f8d7da",
-            padding: "10rem",
-            fontSize: "2rem",
-            textAlign: "center",
-            color: "#721c24",
-          }}>
-          😢 Invalid form
-        </div>,
-      )
+      ReactDOM.createRoot(root).render(<AppError />)
     }
   })
 }
