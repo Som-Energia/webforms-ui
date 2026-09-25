@@ -48,7 +48,7 @@ describe("ReviewMobileTable", () => {
     expect(screen.getByText("ES123")).toBeInTheDocument()
   })
 
-  test("renders every field entry through ReviewField and preserves current hidden and step behavior", () => {
+  test("renders every field entry through ReviewField and preserves current hidden behavior", () => {
     renderReviewMobileTable([
       [
         {
@@ -64,7 +64,6 @@ describe("ReviewMobileTable", () => {
             {
               reviewLabel: "Editable field",
               reviewValue: "Change me",
-              step: "edit-step",
             },
           ],
         },
