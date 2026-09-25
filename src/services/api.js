@@ -256,10 +256,16 @@ export const getPrices = async ({
   }).then((response) => response?.data)
 }
 
-export const getPricesByCups = async (cups) => {
+export const getPricesByCups = async ({ cups, taxes }) => {
+  const params = new URLSearchParams()
+
+  params.append("cups", cups)
+  params.append("taxes", taxes)
+
   return axios({
     method: "GET",
-    url: `${WEBFORMS_API_URL}/data/prices/${cups}`,
+    url: `${WEBFORMS_API_URL}/data/prices_by_cups`,
+    params,
   }).then((response) => response?.data)
 }
 
