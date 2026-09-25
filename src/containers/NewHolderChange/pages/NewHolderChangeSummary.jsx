@@ -339,7 +339,10 @@ const NewHolderChangeSummary = ({ ...props }) => {
   useEffect(() => {
     setLoading(true)
 
-    getPricesByCups(values.cups)
+    getPricesByCups({
+      cups: values.cups,
+      taxes: true,
+    })
       .then((response) => {
         const tariffPrices = response?.data["current"]
         const estimatedMonthlykWh = response?.data["estimated_monthly_kwh"]
