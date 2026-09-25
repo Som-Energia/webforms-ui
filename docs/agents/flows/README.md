@@ -4,15 +4,15 @@ Carrega només el document del flux que tocaràs. Aquests fitxers complementen e
 
 ## Ruta ràpida
 
-| Flux | Llegeix això |
-|---|---|
-| Alta de soci | `new-member.md` |
+| Flux                               | Llegeix això             |
+| ---------------------------------- | ------------------------ |
+| Alta de soci                       | `new-member.md`          |
 | Contractació amb alta o vinculació | `new-contract-member.md` |
-| Gurb requisits i adhesió | `gurb.md` |
-| Aportacions generació kWh | `generation.md` |
-| Canvi de titular | `holder-change.md` |
-| Tarifa indexada | `indexed.md` |
-| Aportació genèrica | `contribution.md` |
+| Gurb requisits i adhesió           | `gurb.md`                |
+| Aportacions generació kWh          | `generation.md`          |
+| Canvi de titular                   | `holder-change.md`       |
+| Tarifa indexada                    | `indexed.md`             |
+| Aportació genèrica                 | `contribution.md`        |
 
 ## Fluxos amb tercer nivell
 

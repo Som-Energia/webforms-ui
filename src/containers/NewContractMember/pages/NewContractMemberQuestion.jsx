@@ -6,7 +6,11 @@ import Typography from "@mui/material/Typography"
 
 import Chooser from "../../../components/Chooser/Chooser"
 import InputTitle from "../../../components/InputTitle"
-import { CommunityIcon, HandshakeIcon, HeartIcon } from "../../../data/icons/Icons"
+import {
+  CommunityIcon,
+  HandshakeIcon,
+  HeartIcon,
+} from "../../../data/icons/Icons"
 
 const NewContractMemberQuestion = ({
   formikProps,

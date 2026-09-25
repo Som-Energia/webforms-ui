@@ -16,7 +16,7 @@ const mockOptions = [
 ]
 
 describe("AutocompleteFloorInput component ", () => {
-  test("AutocompleteFloorInput renders without crashing", () => {
+  test("renders the hidden input with the provided field name and value", () => {
     const dom = render(
       <SomAutocompleteFloorInput
         fieldName="floor"
@@ -32,7 +32,31 @@ describe("AutocompleteFloorInput component ", () => {
     expect(input.value).toBe("GF")
   })
 
-  test("AutocompleteFloorInput calls onChangeHandler with correct code when blur event fired", async () => {
+  test("shows the translated option label when the value matches a known code", () => {
+    render(
+      <SomAutocompleteFloorInput
+        fieldName="floor"
+        value="GF"
+        options={mockOptions}
+      />,
+    )
+
+    expect(screen.getByRole("combobox")).toHaveValue("Ground Floor")
+  })
+
+  test("keeps the raw value when the initial code has no matching option", () => {
+    render(
+      <SomAutocompleteFloorInput
+        fieldName="floor"
+        value="3-B"
+        options={mockOptions}
+      />,
+    )
+
+    expect(screen.getByRole("combobox")).toHaveValue("3-B")
+  })
+
+  test("calls onChangeHandler with the matching option code on blur", async () => {
     const mockOnChangeHandler = vi.fn()
 
     render(
@@ -46,7 +70,6 @@ describe("AutocompleteFloorInput component ", () => {
 
     const combobox = screen.getByRole("combobox")
 
-    // Simulate user changing the input value
     fireEvent.change(combobox, { target: { value: "Second Floor" } })
     fireEvent.blur(combobox)
 
@@ -57,7 +80,7 @@ describe("AutocompleteFloorInput component ", () => {
     })
   })
 
-  test("AutocompleteFloorInput handles free text input correctly", async () => {
+  test("forwards free text input when it is already acceptable", async () => {
     const mockOnChangeHandler = vi.fn()
 
     render(
@@ -71,7 +94,6 @@ describe("AutocompleteFloorInput component ", () => {
 
     const input = screen.getByRole("combobox")
 
-    // Simulate user entering a free text value
     fireEvent.change(input, { target: { value: "3" } })
     fireEvent.blur(input)
 
@@ -82,7 +104,7 @@ describe("AutocompleteFloorInput component ", () => {
     })
   })
 
-  test("AutocompleteFloorInput handles non acceptable input value correctly", async () => {
+  test("sanitizes unsupported free text input before forwarding it", async () => {
     const mockOnChangeHandler = vi.fn()
 
     render(
@@ -96,7 +118,6 @@ describe("AutocompleteFloorInput component ", () => {
 
     const input = screen.getByRole("combobox")
 
-    // Simulate user entering a free text value
     fireEvent.change(input, { target: { value: "non_acceptable_text" } })
     fireEvent.blur(input)
 
@@ -104,6 +125,51 @@ describe("AutocompleteFloorInput component ", () => {
       expect(mockOnChangeHandler).toHaveBeenCalledWith({
         target: { name: "floor", value: "" },
       })
+    })
+  })
+
+  test("preserves only numbers and hyphens from free text input", async () => {
+    const mockOnChangeHandler = vi.fn()
+
+    render(
+      <SomAutocompleteFloorInput
+        fieldName="floor"
+        value=""
+        options={mockOptions}
+        onChangeHandler={mockOnChangeHandler}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+
+    fireEvent.change(input, { target: { value: "3-B attic" } })
+    fireEvent.blur(input)
+
+    await waitFor(() => {
+      expect(mockOnChangeHandler).toHaveBeenCalledWith({
+        target: { name: "floor", value: "3-" },
+      })
+    })
+
+    expect(input).toHaveValue("3-")
+  })
+
+  test("does not fail when blur fires without an explicit onChangeHandler", async () => {
+    render(
+      <SomAutocompleteFloorInput
+        fieldName="floor"
+        value="GF"
+        options={mockOptions}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+
+    fireEvent.change(input, { target: { value: "Ground Floor" } })
+    fireEvent.blur(input)
+
+    await waitFor(() => {
+      expect(input).toHaveValue("Ground Floor")
     })
   })
 })
