@@ -15,7 +15,7 @@ Aquí hi havia massa simplificació. `has_member` és només la primera partici�
 | Família grossa: `member-off`     | alta de nou soci                                 | usa `validationSchemasNewMember` i `NEW_MEMBER_CONTRACT_FORM_SUBSTEPS`                     |
 | Família grossa: `member-on`      | soci existent                                    | usa la família link-member i pot saltar passos segons llum/titularitat                     |
 | Família grossa: `member-link`    | soci apadrinador o vinculat                      | usa la família link-member i introdueix `linked_member_info` al payload                    |
-| Família grossa: `campaign-offer` | campanya sense alta de soci                      | entra des de la quarta opció, si `VITE_FEATURE_FLAGS.isNonMemberCampaignEnabled` està activat, o des de la URL dedicada; preomple soci i força una entrada especial |
+| Família grossa: `campaign-offer` | campanya sense alta de soci                      | entra des de la quarta opció, si `VITE_FEATURE_FLAGS.isNonMemberCampaignEnabled` està activat, o des de les URLs dedicades `/:language/100parati` i `/:language/100peratu`; preomple soci i força una entrada especial |
 | Llum existent o no               | `has_light === 'light-on'/'light-off'`           | canvia la navegació, el `process` final (`A3/C1/C2`) i pot saltar autoconsum o member info |
 | Autoconsum                       | `has_selfconsumption`                            | decideix si hi ha pas `SELFCONSUMPTION_INFO` i afegeix `self_consumption` al payload       |
 | Titularitat prèvia               | `previous_holder === 'previous-holder-yes'`      | canvia el `process` final via `contractProcess()`                                          |

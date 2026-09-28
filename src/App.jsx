@@ -653,6 +653,8 @@ const AppRoutes = (props) => {
       {[
         "/:language/landing/15-aniversari",
         "/:language/landing/15-aniversario",
+        "/:language/100parati",
+        "/:language/100peratu",
       ].map((path) => (
         <Route
           key={path}
