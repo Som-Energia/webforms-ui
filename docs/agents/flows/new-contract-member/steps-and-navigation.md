@@ -20,7 +20,7 @@ La complexitat real del flux és la navegació. No és un `activeStep + 1` norma
 
 ## Branques que realment salten passos
 
-- `campaign-offer` nomes entra per la URL dedicada de campanya i comenca directament al pas 2.
+- `campaign-offer` pot entrar des de la quarta opció de la pregunta inicial quan `VITE_FEATURE_FLAGS.isNonMemberCampaignEnabled` està activat, o per les URLs dedicades `/:language/100parati` i `/:language/100peratu`; després comença al pas 2.
 - `has_light === 'light-off'` pot saltar parts del flux i canvia el procés final.
 - `has_selfconsumption !== 'selfconsumption-on'` evita el pas de detall d'autoconsum.
 - a la família `member-on`, alguns camins van directament a `DONATION` i eviten `MEMBER_INFO`.
