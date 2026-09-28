@@ -77,6 +77,8 @@ export default createAppConfig(({ mode }) => {
       ],
       setupFiles: "./src/tests/setupTests.js",
       coverage: {
+        all: true,
+        include: ["src/**/*.{js,jsx}"],
         reporter: ["text", "json", "html"],
         exclude: [
           "**/node_modules/**",
