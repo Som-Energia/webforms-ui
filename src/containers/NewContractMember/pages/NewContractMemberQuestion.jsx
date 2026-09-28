@@ -26,7 +26,7 @@ const NewContractMemberQuestion = ({
   const [hasMember, setHasMember] = useState(false)
   const campaignIsEnabled = JSON.parse(
     import.meta.env.VITE_FEATURE_FLAGS || "{}",
-  ).is15CampaignEnabled
+  ).isNonMemberCampaignEnabled
   const campaignVat = import.meta.env.VITE_CAMPAIGN_VAT
   const campaignMemberNumber = import.meta.env.VITE_CAMPAIGN_MEMBER_NUMBER
 
@@ -121,8 +121,8 @@ const NewContractMemberQuestion = ({
                 icon={<GiftIcon />}
                 isSelected={values?.has_member === "campaign-offer"}
                 setSelected={handleMemberQuestion}
-                textHeader={t("15YEARS_CAMPAIGN")}
-                textBody={t("15YEARS_DESCRIPTION")}
+                textHeader={t("NON_MEMBER_CAMPAIGN")}
+                textBody={t("NON_MEMBER_CAMPAIGN_DESCRIPTION")}
                 maxWidth="18rem"
               />
             </Grid>
