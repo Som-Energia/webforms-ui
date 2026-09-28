@@ -15,7 +15,7 @@ Aquí hi havia massa simplificació. `has_member` és només la primera partici�
 | Família grossa: `member-off` | alta de nou soci | usa `validationSchemasNewMember` i `NEW_MEMBER_CONTRACT_FORM_SUBSTEPS` |
 | Família grossa: `member-on` | soci existent | usa la família link-member i pot saltar passos segons llum/titularitat |
 | Família grossa: `member-link` | soci apadrinador o vinculat | usa la família link-member i introdueix `linked_member_info` al payload |
-| Família grossa: `campaign-offer` | campanya 15 anys | entra nomes per la URL dedicada, preomple soci i força una entrada especial |
+| Família grossa: `campaign-offer` | campanya 15 anys | entra des de la quarta opció, si `VITE_FEATURE_FLAGS.is15CampaignEnabled` està activat, o des de la URL dedicada; preomple soci i força una entrada especial |
 | Llum existent o no | `has_light === 'light-on'/'light-off'` | canvia la navegació, el `process` final (`A3/C1/C2`) i pot saltar autoconsum o member info |
 | Autoconsum | `has_selfconsumption` | decideix si hi ha pas `SELFCONSUMPTION_INFO` i afegeix `self_consumption` al payload |
 | Titularitat prèvia | `previous_holder === 'previous-holder-yes'` | canvia el `process` final via `contractProcess()` |
@@ -32,7 +32,7 @@ Aquí hi havia massa simplificació. `has_member` és només la primera partici�
 | Es fa soci nou mentre contracta | acaba generant `new_member_info` |
 | Ja és soci | pot acabar com `linked_member: 'already_member'` |
 | El patrocinen / l'apadrinen | es tracta com `linked_member: 'sponsored'` |
-| És campanya | es comporta com patrocinat pero amb soci preinjectat (`campaign-offer`) i accés exclusiu per URL |
+| És campanya | es comporta com patrocinat pero amb soci preinjectat (`campaign-offer`); s'hi accedeix des de la quarta opció activada per flag o la URL dedicada |
 | Té autoconsum i té llum | s'obre la branca de dades d'autoconsum |
 | No té llum | el procés final és `A3` i la navegació canvia |
 | Les dades del soci venen validades per backend | `LinkMemberDetails` usa `checkMember(number, nif)` per marcar `member.link_member` |
@@ -51,4 +51,4 @@ Això vol dir que el frontend pren decisions segons dades verificades pel backen
 
 - [ ] Has confirmat `has_member`, però també `has_light`, `has_selfconsumption`, `previous_holder` i si hi ha `gurbCode`.
 - [ ] Has comprovat si el canvi impacta `checkMember()` o la generació de `linked_member_info/new_member_info/contract_owner`.
-- [ ] Si hi ha campanya, has revisat `customInitialValues`, `campaign-offer`, la ruta dedicada i els flags d'entorn.
+- [ ] Si hi ha campanya, has revisat `customInitialValues`, `campaign-offer`, la quarta opció, la ruta dedicada i els flags d'entorn.
