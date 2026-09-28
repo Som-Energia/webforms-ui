@@ -664,7 +664,7 @@ const AppRoutes = (props) => {
                   <SummaryContextProvider>
                     <NewContractMemberForm
                       {...props}
-                      specialCampaign={"15YEARS_CAMPAIGN"}
+                      specialCampaign={"NON_MEMBER_CAMPAIGN"}
                       initStep={2}
                     />
                   </SummaryContextProvider>
