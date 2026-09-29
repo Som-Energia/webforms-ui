@@ -16,12 +16,6 @@ import {
 import { checkPhisicalVAT } from "../../../services/utils"
 import GenerationNoMemberIdFields from "./GenerationNoMemberIdFields"
 
-import {
-  checkIsPostalCodeFromGenerationEnabledZone,
-  checkVat,
-} from "../../../services/api"
-import { checkPhisicalVAT } from "../../../services/utils"
-
 vi.mock("react-i18next", async () => import("../../../tests/__mocks__/i18n.js"))
 
 vi.mock("../../../services/api", () => ({
