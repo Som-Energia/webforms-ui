@@ -30,6 +30,15 @@ export default createAppConfig(({ mode }) => {
     resolve: {
       dedupe: Object.keys(pkg.dependencies),
     },
+    define: {
+      "import.meta.env.VITE_API_VERSION": JSON.stringify(pkg.apiVersion),
+      "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkg.version),
+      "import.meta.env.VITE_APP_COMMIT_SHA": JSON.stringify(
+        process.env.VITE_APP_COMMIT_SHA ||
+          process.env.RAILWAY_GIT_COMMIT_SHA ||
+          "",
+      ),
+    },
     plugins: [
       react(),
       svgr(),
