@@ -875,5 +875,5 @@
     "PAYMENT_OK_DESCRIPTION": "En breve recibirás un correo con toda la información en la dirección que nos has proporcionado",
     "PAYMENT_KO_DESCRIPTION": "Lo sentimos, no ha sido posible llevar a cabo tu solicitud. Actualmente, ya hay una solicitud en trámite. Contacta con nosotros en <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Gracias.",
     "TOKEN_FORM_ERROR": "Este formulario ya no es válido",
-    "TOKEN_FORM_ERROR_DESCRIPTION": "Este formulario ha caducado o no es válido. Por favor, ponte en contacto con nosootros en <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisaremos la situación. Disculpa las molestias."
+    "TOKEN_FORM_ERROR_DESCRIPTION": "Este formulario ha caducado o no es válido. Por favor, ponte en contacto con nosotros en <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisaremos la situación. Disculpa las molestias."
 }
