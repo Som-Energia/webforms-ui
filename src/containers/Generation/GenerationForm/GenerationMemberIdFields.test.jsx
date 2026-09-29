@@ -12,8 +12,6 @@ import {
 import { checkVatFormat } from "../../../services/utils"
 import GenerationMemberIdFields from "./GenerationMemberIdFields"
 
-vi.mock("react-i18next", async () => import("../../../tests/__mocks__/i18n.js"))
-
 vi.mock("../../../services/api", () => ({
   checkIsFromGenerationEnabledZone: vi.fn(),
   checkMember: vi.fn(),
