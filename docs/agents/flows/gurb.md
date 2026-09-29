@@ -10,14 +10,14 @@ Gurb no és només dos formularis separats. És un flux compost amb possible buc
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Requisits | flux de 4-5 passos amb resultat final i possible redirecció a nova contractació |
-| Adhesió | flux de 4 passos amb identificació, participació, revisió i signatura |
-| Params | usa `language`, `gurbCode` o `code` segons la ruta |
+| Tema      | Context                                                                                |
+| --------- | -------------------------------------------------------------------------------------- |
+| Requisits | flux de 4-5 passos amb resultat final i possible redirecció a nova contractació        |
+| Adhesió   | flux de 4 passos amb identificació, participació, revisió i signatura                  |
+| Params    | usa `language`, `gurbCode` o `code` segons la ruta                                     |
 | Validació | schemas propis a `validations/GurbValidations` i `validations/requirementsValidations` |
-| Tracking | Matomo per passos de requisits i adhesió |
-| Pagament | adhesió acaba enviant un formulari ocult a Redsys després de signatura vàlida |
+| Tracking  | Matomo per passos de requisits i adhesió                                               |
+| Pagament  | adhesió acaba enviant un formulari ocult a Redsys després de signatura vàlida          |
 
 ## Bucle important
 

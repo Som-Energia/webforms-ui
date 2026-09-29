@@ -16,7 +16,7 @@ import * as myApi from "../../../services/api"
 import GenerationContext from "../context/GenerationContext"
 import GenerationAssignmentSection from "./GenerationAssignmentSection"
 
-vi.mock("react-i18next", () => require("../../../tests/__mocks__/i18n"))
+vi.mock("react-i18next", async () => import("../../../tests/__mocks__/i18n.js"))
 
 vi.mock("axios", async (importActual) => {
   const actual = await importActual()

@@ -10,12 +10,12 @@ Aquest subflux és l'últim tram de Gurb, però pot ser reprès després d'una s
 
 ## Detalls
 
-| Tema | Context |
-|---|---|
-| Pasos | `GurbIdentification`, `GurbParticipation`, `ContractReview`, `GurbSignature` |
-| Submit visible | el botó final només habilita quan `validSignature` és `true` |
-| Tracking | event per pas i event específic `gurb-join-signed-${code}` |
-| Pagament real | quan hi ha `redsysData && validSignature && submitAction`, es fa `POST` a Redsys |
+| Tema                       | Context                                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Pasos                      | `GurbIdentification`, `GurbParticipation`, `ContractReview`, `GurbSignature`                                              |
+| Submit visible             | el botó final només habilita quan `validSignature` és `true`                                                              |
+| Tracking                   | event per pas i event específic `gurb-join-signed-${code}`                                                                |
+| Pagament real              | quan hi ha `redsysData && validSignature && submitAction`, es fa `POST` a Redsys                                          |
 | Retorn des de contractació | la ruta `/:language/gurb/gurb-url-ok?gurbCode=...` mostra un èxit i enllaça de nou a `/:language/gurb/{{gurbCode}}/join/` |
 
 ## Bucle amb contractació

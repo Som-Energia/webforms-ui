@@ -4,10 +4,10 @@ Gurb ja està dividit conceptualment en dos subfluxos. Aquí els separes també 
 
 ## Ruta ràpida
 
-| Si toques | Llegeix això |
-|---|---|
+| Si toques                                         | Llegeix això      |
+| ------------------------------------------------- | ----------------- |
 | Elegibilitat, resultat o transició a contractació | `requirements.md` |
-| Adhesió, signatura o pagament | `join.md` |
+| Adhesió, signatura o pagament                     | `join.md`         |
 
 ## Ús recomanat
 

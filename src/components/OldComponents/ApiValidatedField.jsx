@@ -6,7 +6,6 @@ import CircularProgress from "@mui/material/CircularProgress"
 import InputAdornment from "@mui/material/InputAdornment"
 import TextField from "@mui/material/TextField"
 
-
 export function ApiValidatedField({
   name,
   id,

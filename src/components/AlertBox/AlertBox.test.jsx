@@ -1,53 +1,82 @@
-import { queryByAttribute, render } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 
 import AlertBox from "./AlertBox"
 
-describe("AlertBox component ", () => {
-  test('AlertBox render with severity="warning"', () => {
-    const dom = render(
+describe("AlertBox", () => {
+  const renderAlert = (props = {}) =>
+    render(
       <AlertBox
         severity="warning"
         title="Test Header"
         description="Test Body"
+        {...props}
       />,
     )
 
-    const getByDataTestId = queryByAttribute.bind(null, "data-testid")
-    const input = getByDataTestId(dom.container, "alert-warning")
-    expect(input).toBeInTheDocument()
+  test.each(["warning", "success", "error", "info"])(
+    'renders an alert with severity "%s"',
+    (severity) => {
+      renderAlert({ severity })
+
+      expect(screen.getByRole("alert")).toBeInTheDocument()
+      expect(screen.getByText("Test Header")).toBeInTheDocument()
+    },
+  )
+
+  test("renders title, description HTML and children", () => {
+    renderAlert({
+      description: "Test <strong>Body</strong>",
+      children: <button type="button">Action</button>,
+    })
+
+    expect(screen.getByText("Test Header")).toBeInTheDocument()
+    expect(screen.getByText("Body")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Action" })).toBeInTheDocument()
   })
 
-  test('AlertBox render with severity="success"', () => {
-    const dom = render(
-      <AlertBox
-        severity="success"
-        title="Test Header"
-        description="Test Body"
-      />,
-    )
+  test("does not render description when it is not provided", () => {
+    renderAlert({ description: undefined })
 
-    const getByDataTestId = queryByAttribute.bind(null, "data-testid")
-    const input = getByDataTestId(dom.container, "alert-success")
-    expect(input).toBeInTheDocument()
+    expect(screen.getByText("Test Header")).toBeInTheDocument()
+    expect(screen.queryByText("Test Body")).not.toBeInTheDocument()
   })
 
-  test('AlertBox render with severity="error"', () => {
-    const dom = render(
-      <AlertBox severity="error" title="Test Header" description="Test Body" />,
-    )
+  test("uses body1 as the default description variant", () => {
+    renderAlert()
 
-    const getByDataTestId = queryByAttribute.bind(null, "data-testid")
-    const input = getByDataTestId(dom.container, "alert-error")
-    expect(input).toBeInTheDocument()
+    expect(screen.getByText("Test Body")).toHaveClass("MuiTypography-body1")
   })
 
-  test('AlertBox render with severity="info"', () => {
-    const dom = render(
-      <AlertBox severity="info" title="Test Header" description="Test Body" />,
-    )
+  test("uses the provided description variant", () => {
+    renderAlert({ variant: "subtitle2" })
 
-    const getByDataTestId = queryByAttribute.bind(null, "data-testid")
-    const input = getByDataTestId(dom.container, "alert-info")
-    expect(input).toBeInTheDocument()
+    expect(screen.getByText("Test Body")).toHaveClass("MuiTypography-subtitle2")
+  })
+
+  test("does not render an icon when icon prop is not provided", () => {
+    renderAlert()
+    const alert = screen.getByRole("alert")
+
+    expect(alert.querySelector("svg")).not.toBeInTheDocument()
+  })
+
+  test.each([
+    ["warning", "WarningAmberOutlinedIcon"],
+    ["error", "ErrorOutlineIcon"],
+    ["success", "CheckCircleOutlineIcon"],
+    ["info", "InfoOutlinedIcon"],
+    ["unexpected-value", "InfoOutlinedIcon"],
+  ])("renders the %s custom icon", (icon, expectedTestId) => {
+    renderAlert({ icon })
+
+    expect(
+      within(screen.getByRole("alert")).getByTestId(expectedTestId),
+    ).toBeInTheDocument()
+  })
+
+  test("applies the provided text alignment", () => {
+    renderAlert({ textAlign: "left" })
+
+    expect(screen.getByRole("alert")).toHaveStyle({ textAlign: "left" })
   })
 })

@@ -19,6 +19,10 @@ Actuar amb context minim, llegint nomes el que cal per al canvi concret.
 - No assumeixis que un formulari es d'un sol pas: molts fluxos depenen d'`activeStep`, esquemes `Yup` i resum final.
 - No toquis operativa de deploy si no es demana explicitament.
 - Verifica sempre amb el test mes proper al canvi, no nomes amb lectura de codi.
+- Despres d'escriure o editar codi, passa format abans d'acabar.
+- El script real `npm run format -- <ruta-del-fitxer>` executa `prettier --write .` i recorre tot el repo, no nomes el fitxer indicat.
+- Si nomes vols formatar un fitxer concret, usa `npx prettier --write <ruta-del-fitxer>`.
+- Sempre que sigui viable i el cost es mantingui raonable, porta el coverage del fitxer o unitat tocada al `100%`.
 - Si un canvi deixa desalineat algun fitxer de `docs/agents/*`, actualitza'l dins la mateixa branca.
 - Si l'usuari et demana revisar la documentacio, contrasta els docs amb el codi actual i corregeix el que hagi quedat vell.
 
@@ -26,4 +30,5 @@ Actuar amb context minim, llegint nomes el que cal per al canvi concret.
 
 1. `npm test` si el canvi afecta logica o components amb proves.
 2. `npm run lint` si has introduit o reestructurat codi.
-3. `npm run cypress:smoke` o l'spec rellevant si el canvi afecta rutes o formularis principals.
+3. `npx prettier --write <ruta-del-fitxer>` sobre cada fitxer de codi editat si vols format acotat.
+4. `npm run cypress:smoke` o l'spec rellevant si el canvi afecta rutes o formularis principals.
