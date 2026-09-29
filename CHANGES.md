@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.5.3 2026-09-29
 
 - TEST: Increase focused coverage for generation form containers, including `GenerationMemberIdFields`, `GenerationNoMemberIdFields`, and generation dashboard assignments table interactions
 - TEST: Stabilize coverage-only flaky tests by using a stable shared i18n mock and tightening async test flows in `Contact.test.jsx`
