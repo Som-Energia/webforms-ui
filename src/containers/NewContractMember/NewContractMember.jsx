@@ -83,7 +83,9 @@ const NewContractMemberForm = (props) => {
   const mtm_cid = searchParams.get("mtm_cid")
   const mtm_source = searchParams.get("mtm_source")
   const gurb_id = searchParams.get("gurb_id")
-  const uid = searchParams.get("uid")
+  const owner = searchParams.get("owner")
+  const lead_tag = searchParams.get("lead_tag")
+
   const [redsysURL, setRedsysURL] = useState("")
   const [redsysData, setRedsysData] = useState()
   const formTPV = useRef(null)
@@ -290,7 +292,7 @@ const NewContractMemberForm = (props) => {
     setSending(true)
     setSignatureCompleted(false)
 
-    const data = newNormalizeContract(values, gurbCode, uid)
+    const data = newNormalizeContract(values, gurbCode, owner, lead_tag)
     await createContractLead(data)
       .then((response) => {
         if (response?.state === true) {
