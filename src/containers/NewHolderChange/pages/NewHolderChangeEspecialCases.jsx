@@ -26,10 +26,6 @@ const NewHolderChangeEspecialCases = ({ ...props }) => {
     sendTrackEvent(trackID)
     setValues({
       ...values,
-      member: {
-        number: "",
-        nif: "",
-      },
     })
   }, [])
 

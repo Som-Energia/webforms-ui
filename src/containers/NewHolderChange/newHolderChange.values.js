@@ -7,8 +7,6 @@ export const buildInitialValues = (language) => ({
   tariff_name: "",
   tariff_type: "",
   has_member: "",
-  member_is_holder: undefined,
-  previous_holder: undefined,
   voluntary_donation: undefined,
   especial_cases: undefined,
   supply_point: {
