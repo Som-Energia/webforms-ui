@@ -18,9 +18,9 @@ import LoadingContext from "../../context/LoadingContext"
 import SummaryContext from "../../context/SummaryContext"
 import useBackNavigationWarning from "../../hooks/useBackNavigationWarning"
 import { useSyncLanguage } from "../../hooks/useTranslateOptions"
-import { activateLead, createHolderChangeLead } from "../../services/api"
+import { createHolderChangeRequest, executeRequest } from "../../services/api"
+import { newNormalizeHolderChange } from "../../services/newNormalize"
 import { NEW_HOLDER_CHANGE_FORM_SUBSTEPS } from "../../services/steps"
-import { newNormalizeHolderChange } from "../../services/utils"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
 import IdentifyMemberPersonalData from "../NewContractMember/pages/IdentifyMemberPersonalData"
 import NewContractMemberPayment from "../NewContractMember/pages/NewContractMemberPayment"
@@ -54,7 +54,7 @@ const NewHolderChangeForm = () => {
   const [redsysData, setRedsysData] = useState()
   const formTPV = useRef(null)
   const formContainer = useRef(null)
-  const [leadId, setLeadId] = useState()
+  const [requestId, setRequestId] = useState()
   const { loading } = useContext(LoadingContext)
   const [signatureCompleted, setSignatureCompleted] = useState(false)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
@@ -119,14 +119,14 @@ const NewHolderChangeForm = () => {
   }
 
   const handleSignatureSuccess = () => {
-    if (!leadId) {
+    if (!requestId) {
       setError(true)
       setCompleted(true)
       return
     }
 
     setSending(true)
-    activateLead(leadId)
+    executeRequest(requestId)
       .then(() => {
         trackSuccess()
         setError(false)
@@ -165,10 +165,11 @@ const NewHolderChangeForm = () => {
     setSignatureCompleted(false)
 
     const data = newNormalizeHolderChange(values)
-    await createHolderChangeLead(data)
+    await createHolderChangeRequest(data)
       .then((response) => {
+        console.log("response", response)
         if (response?.state === true) {
-          const { redsys_data, lead_id } = response?.data || {}
+          const { redsys_data, request_id } = response?.data || {}
           const paymentData = redsys_data?.payment_data
           const redsysEndpoint = redsys_data?.redsys_endpoint
 
@@ -184,8 +185,11 @@ const NewHolderChangeForm = () => {
             })
             setRedsysURL(redsysEndpoint)
             setError(false)
-          } else if (lead_id && NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"]) {
-            setLeadId(lead_id)
+          } else if (
+            request_id &&
+            NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"]
+          ) {
+            setRequestId(request_id)
             nextStep({ values })
             setError(false)
           } else {
@@ -214,9 +218,9 @@ const NewHolderChangeForm = () => {
     } else if (activeStep === 1) {
       return <NewHolderChangeMemberQuestion {...trackProps} />
     } else if (activeStep === 2) {
-      return <HolderIdentifier {...props} />
+      return <HolderIdentifier {...trackProps} />
     } else if (activeStep === 3) {
-      return <IdentifyMemberPersonalData {...props} holder={true} />
+      return <IdentifyMemberPersonalData {...trackProps} holder={true} />
     } else if (activeStep === 4) {
       return <NewHolderChangeEspecialCases {...trackProps} />
     } else if (activeStep === 5) {
@@ -229,7 +233,7 @@ const NewHolderChangeForm = () => {
       return (
         <NewContractMemberSignature
           {...props}
-          leadId={leadId}
+          requestId={requestId}
           cups={props?.cups}
           onSuccess={handleSignatureCompleted}
         />
