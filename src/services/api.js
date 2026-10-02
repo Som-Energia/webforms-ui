@@ -277,10 +277,10 @@ export const createContractLead = async (data) => {
   }).then(({ data }) => data)
 }
 
-export const createHolderChangeLead = async (data) => {
+export const createHolderChangeRequest = async (data) => {
   return axios({
     method: "POST",
-    url: `${WEBFORMS_API_URL}/procedures/contract`,
+    url: `${WEBFORMS_API_URL}/procedures/holder_change`,
     data,
   }).then(({ data }) => data)
 }
@@ -593,6 +593,22 @@ export const activateLead = async (leadId) => {
   return axios({
     method: "POST",
     url: `${WEBFORMS_API_URL}/procedures/leads/${leadId}/activate`,
+  })
+    .then((response) => {
+      if (response.error) {
+        throw response
+      }
+      return response?.data
+    })
+    .catch((error) => {
+      throw error
+    })
+}
+
+export const executeRequest = async (requestId) => {
+  return axios({
+    method: "POST",
+    url: `${WEBFORMS_API_URL}/procedures/request/${requestId}/execurte`,
   })
     .then((response) => {
       if (response.error) {

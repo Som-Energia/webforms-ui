@@ -23,7 +23,7 @@ const HolderIdentifier = (props) => {
           <MemberIdentifier {...props} title={false} entity="new_member" />
         ) : values?.has_member === "member-on" ||
           values?.has_member === "member-link" ? (
-          <LinkMemberDetails {...props} title={false} entity="new_member" />
+          <LinkMemberDetails {...props} title={false} />
         ) : values?.has_member === "no-member" ? (
           <NifCif entity="new_member" {...props} holder={true} />
         ) : null}
