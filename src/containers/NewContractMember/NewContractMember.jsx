@@ -83,6 +83,9 @@ const NewContractMemberForm = (props) => {
   const mtm_cid = searchParams.get("mtm_cid")
   const mtm_source = searchParams.get("mtm_source")
   const gurb_id = searchParams.get("gurb_id")
+  const owner = searchParams.get("owner")
+  const lead_tag = searchParams.get("lead_tag")
+
   const [redsysURL, setRedsysURL] = useState("")
   const [redsysData, setRedsysData] = useState()
   const formTPV = useRef(null)
@@ -95,7 +98,7 @@ const NewContractMemberForm = (props) => {
 
   const { loading } = useContext(LoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
-  const { trackEvent, pushTag } = useContext(MatomoContext)
+  const { trackEvent: trackMatomoEvent, pushTag } = useContext(MatomoContext)
   const [sending, setSending] = useState(false)
   const [signatureCompleted, setSignatureCompleted] = useState(false)
 
@@ -248,21 +251,34 @@ const NewContractMemberForm = (props) => {
     setActiveStep(Math.max(0, prev))
   }
 
+  const trackEvent = useCallback(
+    (event) => {
+      if (!owner) {
+        trackMatomoEvent(event)
+      }
+    },
+    [owner, trackMatomoEvent],
+  )
+
   const trackSuccess = () => {
-    trackEvent({
+    trackMatomoEvent({
       category: "NewContractMember",
       action: "newContractMemberFormOk",
-      name: "send-new-contract-member-ok",
+      name: owner
+        ? "send-new-contract-member-ok"
+        : "send-new-contract-member-ok-owner",
     })
     if (gurb_id) {
-      trackEvent({
+      trackMatomoEvent({
         category: "NewContractMember",
         action: "newContractMemberFormOk",
-        name: `send-new-contract-member-ok-gurb-${gurb_id}`,
+        name: owner
+          ? `send-new-contract-member-ok-gurb-${gurb_id}`
+          : `send-new-contract-member-ok-gurb-${gurb_id}-owner`,
       })
     }
     if (mtm_cid && mtm_source && language) {
-      trackEvent({
+      trackMatomoEvent({
         category: "NewContractMember",
         action: "newContractMemberFormOk",
         name: `success-${language.toUpperCase()}-${mtm_cid}-${mtm_source}`,
@@ -289,7 +305,7 @@ const NewContractMemberForm = (props) => {
     setSending(true)
     setSignatureCompleted(false)
 
-    const data = newNormalizeContract(values, gurbCode)
+    const data = newNormalizeContract(values, gurbCode, owner, lead_tag)
     await createContractLead(data)
       .then((response) => {
         if (response?.state === true) {
@@ -473,7 +489,7 @@ const NewContractMemberForm = (props) => {
       action: "setNewContractMemberStep",
       name: `new-contract-member-step-${activeStep}`,
     })
-  }, [activeStep])
+  }, [activeStep, trackEvent])
 
   const sendTrackEvent = (id) => {
     trackEvent({
@@ -492,7 +508,7 @@ const NewContractMemberForm = (props) => {
         name: `new-contract-member-step-${track_id}`,
       })
     },
-    [gurb_id],
+    [gurb_id, trackEvent],
   )
 
   const customInitialValues = useMemo(() => {
@@ -507,7 +523,7 @@ const NewContractMemberForm = (props) => {
       }
     }
     return initialValues
-  }, [initialValues, specialCampaign])
+  }, [CampaignNumMember, CampaignVAT, initialValues, specialCampaign])
 
   if (
     Object.keys(formSteps).length === 0 &&

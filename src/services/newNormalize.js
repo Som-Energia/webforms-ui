@@ -76,7 +76,7 @@ export const normalizeAttachments = (supply_point_attachment, process) => {
   return data
 }
 
-export const newNormalizeContract = (data, gurbCode) => {
+export const newNormalizeContract = (data, gurbCode, owner, lead_tag) => {
   const powers = []
   const powers_max = data.contract.power_type === "power-lower-15kw" ? 2 : 6
   for (var i = 1; i <= powers_max; i++) {
@@ -177,6 +177,12 @@ export const newNormalizeContract = (data, gurbCode) => {
 
   if (gurbCode) {
     finalContract["gurb_code"] = gurbCode
+  }
+  if (owner) {
+    finalContract["owner"] = owner
+  }
+  if (lead_tag) {
+    finalContract["lead_tag"] = lead_tag
   }
 
   return finalContract
