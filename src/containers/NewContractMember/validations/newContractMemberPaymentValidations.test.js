@@ -3,7 +3,7 @@ import newContractMemberPaymentValidations from "./newContractMemberPaymentValid
 
 describe("New contract member payment validation", () => {
   test("defaults to IBAN and accepts a valid direct debit payment", async () => {
-    const values = buildInitialValues("ca", "periods")
+    const values = buildInitialValues("ca", { tariff_mode: "periods" })
 
     expect(values.new_member.payment_method).toBe(undefined)
     await expect(
