@@ -42,38 +42,6 @@ export const normalizeClient = (client) => {
   return data
 }
 
-export const normalizeHolderChangeClient = (client, address) => {
-  let data = {
-    vat: client.nif,
-    name: client.name,
-    email: client.email,
-    phone1: `${client.phone_code} ${client.phone}`,
-    language: client.language,
-    state: parseInt(address.state.id),
-    city: parseInt(address.city.id),
-    postal_code: address.postal_code,
-    address:
-      `${address.street} ${address.number} ${address.floor} ${address.stairs} ${address.door} ${address.bloc}`.trim(),
-  }
-  if (data.is_juridic) {
-    data["proxy_name"] = client.proxyname
-    data["proxy_vat"] = client.proxynif
-    data["legal_person_accepted"] = client.legal_person_accepted
-  } else {
-    data["surname1"] = client.surname1
-    data["surname2"] = client.surname2
-  }
-  if (client.gender) {
-    data["gender"] = client.gender
-  }
-  if (client.birthdate) {
-    data["birthdate"] = client.birthdate.toISOString().split("T")[0]
-  }
-  if (client.referral_source) {
-    data["referral_source"] = client.referral_source
-  }
-  return data
-}
 export const normalizeSelfconsumption = (selfconsumption) => {
   let data = {
     cau: selfconsumption.cau,
@@ -216,59 +184,46 @@ export const newNormalizeContract = (data, gurbCode) => {
 
 export const newNormalizeHolderChange = (data) => {
   const paymentType =
-    data.new_member.payment_method === "credit_card" ? "card" : "bank"
+    data.new_member.payment_type === "credit_card" ? "tpv" : "remesa"
 
   const finalHolderChange = {
-    supply_point: {
+    linked_member: data.member.link_member
+      ? data.has_member === "member-on"
+        ? "already_member"
+        : "sponsored"
+      : data.has_member === "member-off"
+        ? "new-member"
+        : "without-member",
+    contract_info: {
       cups: data.cups,
-      address: data.supply_point_address,
     },
-    payment_method: paymentType,
+    payment_type: paymentType,
+    donation: data.voluntary_donation,
     privacy_policy_accepted: data.privacy_policy_accepted,
     terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted,
     signature: true, // feature flag for ERP
   }
 
-  if (paymentType === "bank") {
-    finalHolderChange["payment"] = {
-      iban: data.new_member.iban.replace(/\s+/g, ""),
-      sepa_accepted: data.new_member.sepa_accepted,
-      voluntary_cent: data.voluntary_donation,
-    }
+  if (paymentType === "remesa") {
+    finalHolderChange["iban"] = data.new_member.iban.replace(/\s+/g, "")
+    finalHolderChange["sepa_accepted"] = data.new_member.sepa_accepted
   }
 
-  if (paymentType === "card") {
+  if (paymentType === "tpv") {
     finalHolderChange["payment_authorization_accepted"] =
       data.new_member.payment_authorization_accepted
   }
 
-  finalHolderChange["holder"] = normalizeHolderChangeClient(
-    data.new_member,
+  finalHolderChange["contract_owner"] = normalizeClient(data.new_member)
+  finalHolderChange["contract_owner"]["address"] = normalizeAddress(
     data.address,
   )
 
-  if (data.member.link_member || data.has_member === "member-on") {
-    finalHolderChange["member"] = {
+  if (data.member.link_member) {
+    finalHolderChange["linked_member_info"] = {
       vat: data.member.nif,
       number: data.member.number,
-      link_member: true,
-      become_member: false,
-      invite_token: false,
-    }
-  } else if (data.has_member === "member-off") {
-    finalHolderChange["member"] = {
-      become_member: true,
-      link_member: false,
-      invite_token: false,
-    }
-  } else {
-    finalHolderChange["member"] = {
-      vat: data.member.nif,
-      number: data.member.number,
-      invite_token: true,
-      link_member: false,
-      become_member: false,
     }
   }
 
