@@ -52,7 +52,7 @@ const NewHolderChangeMemberQuestion = ({ ...props }) => {
       textBody: t("HAS_MEMBER_BODY"),
     },
     {
-      id: "no-member",
+      id: "without-member",
       icon: <HeartIcon on={false} />,
       textHeader: t("NO_MEMBER"),
       textBody: t("NO_MEMBER_BODY"),
