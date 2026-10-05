@@ -256,10 +256,31 @@ export const getPrices = async ({
   }).then((response) => response?.data)
 }
 
+export const getPricesByCups = async ({ cups, taxes }) => {
+  const params = new URLSearchParams()
+
+  params.append("cups", cups)
+  params.append("taxes", taxes)
+
+  return axios({
+    method: "GET",
+    url: `${WEBFORMS_API_URL}/data/prices_by_cups`,
+    params,
+  }).then((response) => response?.data)
+}
+
 export const createContractLead = async (data) => {
   return axios({
     method: "POST",
     url: `${WEBFORMS_API_URL}/procedures/contract`,
+    data,
+  }).then(({ data }) => data)
+}
+
+export const createHolderChangeRequest = async (data) => {
+  return axios({
+    method: "POST",
+    url: `${WEBFORMS_API_URL}/procedures/holder_change`,
     data,
   }).then(({ data }) => data)
 }
@@ -572,6 +593,22 @@ export const activateLead = async (leadId) => {
   return axios({
     method: "POST",
     url: `${WEBFORMS_API_URL}/procedures/leads/${leadId}/activate`,
+  })
+    .then((response) => {
+      if (response.error) {
+        throw response
+      }
+      return response?.data
+    })
+    .catch((error) => {
+      throw error
+    })
+}
+
+export const executeRequest = async (requestId) => {
+  return axios({
+    method: "POST",
+    url: `${WEBFORMS_API_URL}/procedures/request/${requestId}/execurte`,
   })
     .then((response) => {
       if (response.error) {

@@ -181,3 +181,89 @@ export const newNormalizeContract = (data, gurbCode) => {
 
   return finalContract
 }
+
+export const newNormalizeHolderChange = (data) => {
+  const paymentType =
+    data.new_member.payment_type === "credit_card" ? "tpv" : "remesa"
+
+  const finalHolderChange = {
+    linked_member: data.member.link_member
+      ? data.has_member === "member-on"
+        ? "already_member"
+        : "sponsored"
+      : data.has_member === "member-off"
+        ? "new-member"
+        : "without-member",
+    contract_info: {
+      cups: data.cups,
+    },
+    payment_type: paymentType,
+    donation: data.voluntary_donation,
+    privacy_policy_accepted: data.privacy_policy_accepted,
+    terms_accepted: data.generic_conditions_accepted,
+    statutes_accepted: data.statutes_accepted,
+    signature: true, // feature flag for ERP
+  }
+
+  if (paymentType === "remesa") {
+    finalHolderChange["iban"] = data.new_member.iban.replace(/\s+/g, "")
+    finalHolderChange["sepa_accepted"] = data.new_member.sepa_accepted
+  }
+
+  if (paymentType === "tpv") {
+    finalHolderChange["payment_authorization_accepted"] =
+      data.new_member.payment_authorization_accepted
+  }
+
+  finalHolderChange["contract_owner"] = normalizeClient(data.new_member)
+  finalHolderChange["contract_owner"]["address"] = normalizeAddress(
+    data.address,
+  )
+
+  if (data.member.link_member) {
+    finalHolderChange["linked_member_info"] = {
+      vat: data.member.nif,
+      number: data.member.number,
+    }
+  }
+
+  if (data.comercial_info_accepted) {
+    finalHolderChange["comercial_info_accepted"] = data.comercial_info_accepted
+  }
+
+  finalHolderChange["especial_cases"] = {
+    reason_death: false,
+    reason_merge: false,
+    reason_electrodep: false,
+  }
+
+  if (data.especial_cases === "reason_death")
+    finalHolderChange["especial_cases"]["reason_death"] = true
+
+  if (data.especial_cases === "reason_merge")
+    finalHolderChange["especial_cases"]["reason_merge"] = true
+
+  if (data.especial_cases === "reason_electrodep")
+    finalHolderChange["especial_cases"]["reason_electrodep"] = true
+
+  const attachments = []
+  if (data.supply_point.attachments_reason_death > 0)
+    attachments.append(data.supply_point.attachments_reason_death)
+  if (data.supply_point.attachments_reason_merge > 0)
+    attachments.append(data.supply_point.attachments_reason_merge)
+  if (data.supply_point.attachments_reason_electrodep > 0)
+    attachments.append(data.supply_point.attachments_reason_electrodep)
+  if (data.supply_point.attachments_reason_electrodep_census > 0)
+    attachments.append(data.supply_point.attachments_reason_electrodep_census)
+
+  if (attachments && attachments.length > 0) {
+    finalHolderChange["attachments"] = []
+    data.supply_point.attachments.forEach((attachment) => {
+      finalHolderChange["attachments"].push(
+        normalizeAttachments(attachment["filehash"], process),
+      )
+    })
+  }
+  console.log("finalHolderChange", finalHolderChange)
+  return finalHolderChange
+}

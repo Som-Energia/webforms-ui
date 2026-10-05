@@ -38,6 +38,10 @@ const options = [
     href: `${language}/cooperativa/formulario-asociarse`,
   },
   {
+    title: "New Holder Change",
+    href: `${language}/formuario-cambio-titular`,
+  },
+  {
     title: "Preus indexats diaris",
     href: `${language}/servicios/tendencia-de-los-precios`,
   },
