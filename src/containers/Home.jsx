@@ -23,7 +23,7 @@ const signatureCups = import.meta.env.VITE_SIGNATURE_CUPS
 const options = [
   {
     title: "New Contract - Non-member campaign",
-    href: `${language}/100parati`,
+    href: `${language}/landing/100parati`,
   },
   {
     title: "New Contract - Periods",
