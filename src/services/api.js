@@ -285,9 +285,9 @@ export const createHolderChangeRequest = async (data) => {
   }).then(({ data }) => data)
 }
 
-export const getContractSignature = async ({ leadId, cups }) => {
+export const getContractSignature = async ({ leadId, cups, service }) => {
   const query = new URLSearchParams({ cups })
-  const url = `${WEBFORMS_API_URL}/procedures/sign/contract/${leadId}?${query.toString()}`
+  const url = `${WEBFORMS_API_URL}/procedures/sign/${service}/${leadId}?${query.toString()}`
 
   return axios({
     method: "GET",
