@@ -123,4 +123,27 @@ describe("Check Contract new Form (normalize function)", () => {
       newNormalizeContract(newContractCases.paymentTPV.entryValues),
     ).toStrictEqual(newContractCases.paymentTPV.normalizedData)
   })
+
+  test("Normalize Contract data (owner)", () => {
+    const normalizedContract = newNormalizeContract(
+      newContractCases.newMember.entryValues,
+      undefined,
+      "owner",
+    )
+    expect(normalizedContract).toMatchObject({
+      owner: "owner",
+    })
+  })
+
+  test("Normalize Contract data (lead_tag)", () => {
+    const normalizedContract = newNormalizeContract(
+      newContractCases.newMember.entryValues,
+      undefined,
+      undefined,
+      "lead_tag",
+    )
+    expect(normalizedContract).toMatchObject({
+      lead_tag: "lead_tag",
+    })
+  })
 })
