@@ -653,6 +653,8 @@ const AppRoutes = (props) => {
       {[
         "/:language/landing/15-aniversari",
         "/:language/landing/15-aniversario",
+        "/:language/100parati",
+        "/:language/100peratu",
       ].map((path) => (
         <Route
           key={path}
@@ -664,7 +666,7 @@ const AppRoutes = (props) => {
                   <SummaryContextProvider>
                     <NewContractMemberForm
                       {...props}
-                      specialCampaign={"15YEARS_CAMPAIGN"}
+                      specialCampaign={"NON_MEMBER_CAMPAIGN"}
                       initStep={2}
                     />
                   </SummaryContextProvider>

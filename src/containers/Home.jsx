@@ -22,8 +22,8 @@ const signatureCups = import.meta.env.VITE_SIGNATURE_CUPS
 
 const options = [
   {
-    title: "New Contract - ANIVERSARI 15 ANYS",
-    href: `${language}/landing/15-aniversari`,
+    title: "New Contract - Non-member campaign",
+    href: `${language}/100parati`,
   },
   {
     title: "New Contract - Periods",

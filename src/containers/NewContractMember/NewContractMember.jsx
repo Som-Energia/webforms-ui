@@ -506,7 +506,7 @@ const NewContractMemberForm = (props) => {
   )
 
   const customInitialValues = useMemo(() => {
-    if (specialCampaign === "15YEARS_CAMPAIGN") {
+    if (specialCampaign === "NON_MEMBER_CAMPAIGN") {
       return {
         ...initialValues,
         has_member: "campaign-offer",
@@ -521,7 +521,7 @@ const NewContractMemberForm = (props) => {
 
   if (
     Object.keys(formSteps).length === 0 &&
-    specialCampaign === "15YEARS_CAMPAIGN"
+    specialCampaign === "NON_MEMBER_CAMPAIGN"
   ) {
     setValidationSchemaAndSteps("campaign-offer")
   }

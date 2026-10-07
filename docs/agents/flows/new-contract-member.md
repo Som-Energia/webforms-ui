@@ -57,8 +57,10 @@ pas 0: pregunta inicial (`has_member`)
                |
                v
             validar soci patrocinador
-            (`campaign-offer` nomes entra des de la URL dedicada
-            de la campanya 15 anys)
+            (`campaign-offer` entra des de l'opcio inicial, si
+            `VITE_FEATURE_FLAGS.isNonMemberCampaignEnabled` esta activat,
+            o des de les URLs dedicades `/:language/100parati` i
+            `/:language/100peratu`)
             -> punt subministrament
             -> potencia
             -> [si no te llum] member info
