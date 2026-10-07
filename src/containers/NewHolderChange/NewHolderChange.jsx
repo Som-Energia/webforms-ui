@@ -202,6 +202,7 @@ const NewHolderChangeForm = () => {
         }
       })
       .catch((err) => {
+        setCompleted(true)
         setError(true)
         console.log(err)
       })
@@ -233,8 +234,9 @@ const NewHolderChangeForm = () => {
       return (
         <NewContractMemberSignature
           {...props}
-          requestId={requestId}
-          cups={props?.cups}
+          leadId={requestId}
+          cups={values?.cups}
+          service="holder_change"
           onSuccess={handleSignatureCompleted}
         />
       )

@@ -199,8 +199,8 @@ export const newNormalizeHolderChange = (data) => {
     },
     payment_type: paymentType,
     donation: data.voluntary_donation,
-    privacy_policy_accepted: data.privacy_policy_accepted,
-    terms_accepted: data.generic_conditions_accepted,
+    privacy_conditions: data.privacy_policy_accepted,
+    general_contract_terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted,
     signature: true, // feature flag for ERP
   }
@@ -223,7 +223,7 @@ export const newNormalizeHolderChange = (data) => {
   if (data.member.link_member) {
     finalHolderChange["linked_member_info"] = {
       vat: data.member.nif,
-      number: data.member.number,
+      code: data.member.number,
     }
   }
 
