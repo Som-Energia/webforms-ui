@@ -8,7 +8,7 @@ import MatomoContext from "../../../trackers/matomo/MatomoProvider"
 import SignatureIframe from "../../Signature"
 
 export const NewContractMemberSignature = (props = {}) => {
-  const { leadId, cups, onSuccess } = props
+  const { leadId, cups, service, onSuccess } = props
   const { t } = useTranslation()
   const { trackEvent } = useContext(MatomoContext)
 
@@ -30,7 +30,7 @@ export const NewContractMemberSignature = (props = {}) => {
         <Grid item size={12} sx={{ textAlign: "center", width: "100%" }}>
           <SignatureIframe
             apiFunction={getContractSignature}
-            postData={{ leadId, cups }}
+            postData={{ leadId, cups, service }}
             textRecommendation={t("SIGNATURE")}
             textInfo={t("SIGNATURE_INFO")}
             errorDescription={t("CONTRACT_SIGNATURE_ERROR_DESCRIPTION")}
