@@ -1,5 +1,15 @@
 # Change Log
 
+## 8.6.0 2026-10-07
+
+- NEW: Add direct non-member landing routes for autumn and campaign variants
+- NEW: Read `owner` and `lead_tag` query parameters in the new contract/member flow and send `uid` with contract data
+- NEW: Add API version compatibility checks, development diagnostics, and query or token feature flags, including the social tariff validation bypass
+- FIX: Display an alert for invalid session tokens and correct non-member campaign home URLs
+- IMP: Include app version and commit hash metadata in Vite and Railway preview builds
+- REF: Use `VITE_WEBFORMS_API_URL` for the feature flag API and derive tracking events from the owner value
+- I18N: Update campaign translations
+
 ## 8.5.3 2026-09-29
 
 - TEST: Increase focused coverage for generation form containers, including `GenerationMemberIdFields`, `GenerationNoMemberIdFields`, and generation dashboard assignments table interactions
