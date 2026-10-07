@@ -650,32 +650,29 @@ const AppRoutes = (props) => {
           </ThemeWrapper>
         }
       />
-      {[
-        "/:language/landing/15-aniversari",
-        "/:language/landing/15-aniversario",
-        "/:language/100parati",
-        "/:language/100peratu",
-      ].map((path) => (
-        <Route
-          key={path}
-          path={path}
-          element={
-            <ThemeWrapper theme={webFormsTheme}>
-              <PopUpContextProvider>
-                <LoadingContextProvider>
-                  <SummaryContextProvider>
-                    <NewContractMemberForm
-                      {...props}
-                      specialCampaign={"NON_MEMBER_CAMPAIGN"}
-                      initStep={2}
-                    />
-                  </SummaryContextProvider>
-                </LoadingContextProvider>
-              </PopUpContextProvider>
-            </ThemeWrapper>
-          }
-        />
-      ))}
+      {["/:language/landing/100parati", "/:language/landing/100peratu"].map(
+        (path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <ThemeWrapper theme={webFormsTheme}>
+                <PopUpContextProvider>
+                  <LoadingContextProvider>
+                    <SummaryContextProvider>
+                      <NewContractMemberForm
+                        {...props}
+                        specialCampaign={"NON_MEMBER_CAMPAIGN"}
+                        initStep={2}
+                      />
+                    </SummaryContextProvider>
+                  </LoadingContextProvider>
+                </PopUpContextProvider>
+              </ThemeWrapper>
+            }
+          />
+        ),
+      )}
     </Routes>
   )
 }
