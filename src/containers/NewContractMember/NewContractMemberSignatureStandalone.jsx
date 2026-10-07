@@ -19,7 +19,7 @@ import SignatureIframe from "../Signature"
 
 const NewContractMemberSignatureStandalone = () => {
   const { t } = useTranslation()
-  const { language, leadId } = useParams()
+  const { language, leadId, service } = useParams()
   const [searchParams] = useSearchParams()
   const cups = searchParams.get("cups")
   const gurbCode = searchParams.get("gurb-code")
@@ -53,7 +53,7 @@ const NewContractMemberSignatureStandalone = () => {
     activateLead(leadId)
       .then(() => {
         setError(false)
-        navigate(`/${language}/contract/${leadId}/success`)
+        navigate(`/${language}/${service}/${leadId}/success`)
       })
       .catch((err) => {
         setError(true)
@@ -138,7 +138,7 @@ const NewContractMemberSignatureStandalone = () => {
         <>
           <SignatureIframe
             apiFunction={getContractSignature}
-            postData={{ leadId, cups }}
+            postData={{ leadId, cups, service }}
             textRecommendation={t("SIGNATURE")}
             textInfo={t("SIGNATURE_INFO")}
             errorDescription={t("CONTRACT_SIGNATURE_ERROR_DESCRIPTION")}
