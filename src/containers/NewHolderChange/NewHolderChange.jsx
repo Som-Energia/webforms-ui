@@ -118,7 +118,7 @@ const NewHolderChangeForm = () => {
     setActiveStep(Math.max(0, prev))
   }
 
-  const handleSignatureSuccess = () => {
+  const handleSignatureSuccess = async (cups) => {
     if (!requestId) {
       setError(true)
       setCompleted(true)
@@ -126,7 +126,8 @@ const NewHolderChangeForm = () => {
     }
 
     setSending(true)
-    executeRequest(requestId)
+    await new Promise((resolve) => setTimeout(resolve, 5000))
+    executeRequest(requestId, cups)
       .then(() => {
         trackSuccess()
         setError(false)
@@ -140,14 +141,14 @@ const NewHolderChangeForm = () => {
         setSending(false)
       })
   }
-  const handleSignatureCompleted = () => {
+  const handleSignatureCompleted = (cups) => {
     trackEvent({
       category: "NewHolderChange",
       action: "signatureCompleted",
       name: "new-holder-change-signature-completed",
     })
     setSignatureCompleted(true)
-    handleSignatureSuccess()
+    handleSignatureSuccess(cups)
   }
 
   const handleCreateContract = async (values) => {
@@ -212,6 +213,8 @@ const NewHolderChangeForm = () => {
   }
 
   const getStep = (props, sendTrackEvent) => {
+    const { values } = props
+
     const trackProps = { ...props, sendTrackEvent }
 
     if (activeStep === 0) {
@@ -237,7 +240,7 @@ const NewHolderChangeForm = () => {
           leadId={requestId}
           cups={values?.cups}
           service="holder_change"
-          onSuccess={handleSignatureCompleted}
+          onSuccess={() => handleSignatureCompleted(values?.cups)}
         />
       )
     }
@@ -345,7 +348,9 @@ const NewHolderChangeForm = () => {
                             NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"] ? (
                             <SubmitButton
                               disabled={loading || !signatureCompleted}
-                              onClick={() => handleSignatureSuccess()}>
+                              onClick={() =>
+                                handleSignatureSuccess(formikProps.values.cups)
+                              }>
                               {t("FINISH")}
                             </SubmitButton>
                           ) : (
