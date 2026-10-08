@@ -605,10 +605,10 @@ export const activateLead = async (leadId) => {
     })
 }
 
-export const executeRequest = async (requestId) => {
+export const executeRequest = async (requestId, cups) => {
   return axios({
     method: "POST",
-    url: `${WEBFORMS_API_URL}/procedures/request/${requestId}/execurte`,
+    url: `${WEBFORMS_API_URL}/procedures/request/${requestId}/${cups}/execute`,
   })
     .then((response) => {
       if (response.error) {
