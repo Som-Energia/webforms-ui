@@ -90,7 +90,7 @@ const NewContractMemberForm = (props) => {
   const [redsysData, setRedsysData] = useState()
   const formTPV = useRef(null)
   const formContainer = useRef(null)
-  const { tariff, specialCampaign, initStep } = props
+  const { tariff, specialCampaign, initStep, sendSignaturit } = props
 
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -160,7 +160,7 @@ const NewContractMemberForm = (props) => {
   }, [activeStep])
 
   const initialValues = useMemo(
-    () => buildInitialValues(i18n.language, tariff),
+    () => buildInitialValues(i18n.language, { tariff_mode: tariff }),
     [i18n.language, tariff],
   )
 
@@ -418,7 +418,12 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 10) {
         return <NewContractMemberPayment {...trackProps} />
       } else if (activeStep === 11) {
-        return <NewContractMemberSummary {...trackProps} />
+        return (
+          <NewContractMemberSummary
+            enableSendMailCheckbox={sendSignaturit}
+            {...trackProps}
+          />
+        )
       } else if (activeStep === 12) {
         return (
           <NewContractMemberSignature
@@ -456,7 +461,12 @@ const NewContractMemberForm = (props) => {
       } else if (activeStep === 10) {
         return <NewContractMemberPayment {...trackProps} />
       } else if (activeStep === 11) {
-        return <NewContractMemberSummary {...trackProps} />
+        return (
+          <NewContractMemberSummary
+            enableSendMailCheckbox={sendSignaturit}
+            {...trackProps}
+          />
+        )
       } else if (activeStep === 12) {
         return (
           <NewContractMemberSignature
@@ -532,8 +542,22 @@ const NewContractMemberForm = (props) => {
         },
       }
     }
+
+    if (sendSignaturit) {
+      return {
+        ...initialValues,
+        send_email: true,
+      }
+    }
+
     return initialValues
-  }, [CampaignNumMember, CampaignVAT, initialValues, specialCampaign])
+  }, [
+    CampaignNumMember,
+    CampaignVAT,
+    initialValues,
+    specialCampaign,
+    sendSignaturit,
+  ])
 
   if (
     Object.keys(formSteps).length === 0 &&
