@@ -134,7 +134,7 @@ const PaymentMethod = (props) => {
             id: "iban",
             icon: <InvoiceIcon />,
             textHeader: t("IBAN_PAYMENT_QUESTION_OPTION"),
-            textBody: t("PAYMENT_METHOD_IBAN_DESC")
+            textBody: t("PAYMENT_METHOD_IBAN_DESC"),
           },
         ]),
   ]
