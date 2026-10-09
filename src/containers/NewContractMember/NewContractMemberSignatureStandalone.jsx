@@ -19,9 +19,10 @@ import SignatureIframe from "../Signature"
 
 const NewContractMemberSignatureStandalone = () => {
   const { t } = useTranslation()
-  const { language, leadId, service } = useParams()
+  const { language, leadId } = useParams()
   const [searchParams] = useSearchParams()
   const cups = searchParams.get("cups")
+  const service = searchParams.get("service")
   const gurbCode = searchParams.get("gurb-code")
   const { trackEvent } = useContext(MatomoContext)
   const navigate = useNavigate()

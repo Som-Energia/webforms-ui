@@ -76,6 +76,17 @@ export const normalizeAttachments = (supply_point_attachment, process) => {
   return data
 }
 
+export const normalizeHolderChangeAttachments = (
+  supply_point_attachment,
+  category,
+) => {
+  let data = {
+    filename: supply_point_attachment,
+    category: category,
+  }
+  return data
+}
+
 export const newNormalizeContract = (data, gurbCode) => {
   const powers = []
   const powers_max = data.contract.power_type === "power-lower-15kw" ? 2 : 6
@@ -184,7 +195,7 @@ export const newNormalizeContract = (data, gurbCode) => {
 
 export const newNormalizeHolderChange = (data) => {
   const paymentType =
-    data.new_member.payment_type === "credit_card" ? "tpv" : "remesa"
+    data.new_member.payment_method === "credit_card" ? "tpv" : "remesa"
 
   const finalHolderChange = {
     linked_member: data.member.link_member
@@ -206,7 +217,7 @@ export const newNormalizeHolderChange = (data) => {
   }
 
   if (paymentType === "remesa") {
-    finalHolderChange["iban"] = data.new_member.iban.replace(/\s+/g, "")
+    finalHolderChange["iban"] = data.new_member.iban
     finalHolderChange["sepa_accepted"] = data.new_member.sepa_accepted
   }
 
@@ -246,23 +257,19 @@ export const newNormalizeHolderChange = (data) => {
   if (data.especial_cases === "reason_electrodep")
     finalHolderChange["especial_cases"]["reason_electrodep"] = true
 
-  const attachments = []
-  if (data.supply_point.attachments_reason_death > 0)
-    attachments.append(data.supply_point.attachments_reason_death)
-  if (data.supply_point.attachments_reason_merge > 0)
-    attachments.append(data.supply_point.attachments_reason_merge)
-  if (data.supply_point.attachments_reason_electrodep > 0)
-    attachments.append(data.supply_point.attachments_reason_electrodep)
-  if (data.supply_point.attachments_reason_electrodep_census > 0)
-    attachments.append(data.supply_point.attachments_reason_electrodep_census)
+  const attachments = [
+    ["attachments_reason_death", "holder_change_death"],
+    ["attachments_reason_merge", "holder_change_merge"],
+    ["attachments_reason_electrodep", "holder_change_medical"],
+    ["attachments_reason_electrodep_census", "holder_change_medical"],
+  ].flatMap(([field, category]) =>
+    data.supply_point[field].map((attachment) =>
+      normalizeHolderChangeAttachments(attachment.filehash, category),
+    ),
+  )
 
-  if (attachments && attachments.length > 0) {
-    finalHolderChange["attachments"] = []
-    data.supply_point.attachments.forEach((attachment) => {
-      finalHolderChange["attachments"].push(
-        normalizeAttachments(attachment["filehash"], process),
-      )
-    })
+  if (attachments.length > 0) {
+    finalHolderChange["attachments"] = attachments
   }
   console.log("finalHolderChange", finalHolderChange)
   return finalHolderChange
