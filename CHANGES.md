@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.6.1 2026-10-09
+
+- DEP: Update dependencies with dependbot
+
 ## 8.6.0 2026-10-07
 
 - NEW: Add direct non-member landing routes for autumn and campaign variants
