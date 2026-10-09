@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- FIX: Use more strict phone number validation with the same lib
+
 ## 8.6.0 2026-10-07
 
 - NEW: Add direct non-member landing routes for autumn and campaign variants
