@@ -5,8 +5,8 @@ import InputBase from "@mui/material/InputBase"
 import MenuItem from "@mui/material/MenuItem"
 import Select from "@mui/material/Select"
 
-import { isValidPhoneNumber } from "libphonenumber-js"
 import { getCountries, getCountryCallingCode } from "libphonenumber-js/core"
+import parsePhoneNumber from "libphonenumber-js/max"
 import metadata from "libphonenumber-js/metadata.full.json"
 
 import InputField from "./InputField/InputField"
@@ -82,8 +82,8 @@ const PhoneField = (props) => {
   function validatePhoneFormat(numberParam = number, codeParam = code) {
     const sanitizedNumber = sanitizePhoneNumber(numberParam, codeParam)
     const fullPhoneNumber = `${codeParam}${sanitizedNumber}`
-    const isValid =
-      sanitizedNumber.length > 0 && isValidPhoneNumber(fullPhoneNumber)
+    const phoneNumber = parsePhoneNumber(fullPhoneNumber)
+    const isValid = sanitizedNumber.length > 0 && phoneNumber?.isValid()
     setFieldValue(`${name}_valid`, isValid)
   }
 
