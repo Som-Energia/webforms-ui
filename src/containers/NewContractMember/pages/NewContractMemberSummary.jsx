@@ -12,6 +12,7 @@ import Stack from "@mui/material/Stack"
 import { useTheme } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
 
+import AlertBox from "../../../components/AlertBox/AlertBox"
 import { buttonLight } from "../../../components/Buttons/buttonStyles"
 import Loading from "../../../components/Loading"
 import PDFLoader from "../../../components/PDFLoader/PDFLoader"
@@ -38,7 +39,13 @@ import { THOUSANDS_CONVERSION_FACTOR } from "../../../services/utils"
 const TARIFF_INDEXED = "indexed"
 
 const NewContractMemberSummary = (props) => {
-  const { values, setFieldValue, setFieldTouched, sendTrackEvent } = props
+  const {
+    values,
+    setFieldValue,
+    setFieldTouched,
+    sendTrackEvent,
+    enableSendMailCheckbox,
+  } = props
 
   const { t } = useTranslation()
   const theme = useTheme()
@@ -492,6 +499,39 @@ const NewContractMemberSummary = (props) => {
           </Button>
         )}
       </Grid>
+
+      {enableSendMailCheckbox && (
+        <Grid item xs={12}>
+          <AlertBox
+            textAlign="left"
+            id="signature_info_alert"
+            severity={"warning"}
+            variant={"body.md.regular"}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  data-cy="sendSignaturit"
+                  checked={values?.send_email ?? true}
+                  onChange={(event) => {
+                    handleCheckboxChange(event, "send_email")
+                  }}
+                />
+              }
+              label={
+                <span style={{ display: "inline-block" }}>
+                  <label
+                    style={{ display: "inline" }}
+                    dangerouslySetInnerHTML={{
+                      __html: t("SEND_SIGNATURIT"),
+                    }}
+                  />
+                </span>
+              }
+            />
+          </AlertBox>
+        </Grid>
+      )}
+
       <Grid item xs={12}>
         <ReviewTable tableFields={reviewFields} />
       </Grid>

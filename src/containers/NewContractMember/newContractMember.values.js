@@ -1,6 +1,6 @@
 import { creditCardPaymentEnabled } from "./paymentMethods"
 
-export const buildInitialValues = (language, tariff) => ({
+export const buildInitialValues = (language, { tariff_mode }) => ({
   cups: "",
   cups_valid: false,
   social_tariff: false,
@@ -68,7 +68,7 @@ export const buildInitialValues = (language, tariff) => ({
     legal_person_accepted: false,
   },
   contract: {
-    tariff_mode: tariff,
+    tariff_mode,
     power_type: "",
     power: {
       power1: "",
@@ -93,5 +93,6 @@ export const buildInitialValues = (language, tariff) => ({
   privacy_policy_accepted: false,
   generic_conditions_accepted: false,
   statutes_accepted: false,
+  send_email: false,
   comercial_info_accepted: false,
 })

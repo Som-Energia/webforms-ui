@@ -112,6 +112,7 @@ export const newNormalizeContract = (data, gurbCode, owner, lead_tag) => {
     privacy_conditions: data.privacy_policy_accepted,
     general_contract_terms_accepted: data.generic_conditions_accepted,
     statutes_accepted: data.statutes_accepted,
+    send_email: Boolean(data.send_email),
   }
 
   if (paymentType === "remesa") {
