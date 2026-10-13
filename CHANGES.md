@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- FIX: Use more strict phone number validation with the same lib
+
 ## 8.6.1 2026-10-09
 
 - DEP: Update dependencies with dependbot
