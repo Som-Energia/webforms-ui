@@ -2,7 +2,7 @@ import { useCallback, useContext, useState } from "react"
 
 import * as Yup from "yup"
 
-import SimpleGurbDialog from "../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
+import ErrorDialog from "../components/ErrorDialog/ErrorDialog"
 import GurbOutOfPerimeterError from "../containers/Gurb/validations/GurbErrors"
 import { addressFieldsValidations } from "../containers/Gurb/validations/requirementsValidations"
 import PopUpContext from "../context/PopUpContext"
@@ -218,30 +218,32 @@ export const useAddressHandlers = ({
       }
       if (updates?.address?.lat || updates?.address?.long) {
         setContent(
-          <SimpleGurbDialog
+          <ErrorDialog
             severity="error"
-            setContent={setContent}
+            onClose={setContent}
             title={t("GURB_ADDRESS_ERROR_UNEXPECTED")}
-            text1={t("GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT")}
+            descriptions={[t("GURB_ADDRESS_ERROR_MISSING_LONGLAT_MAIN_TEXT")]}
           />,
         )
       } else if (err instanceof GurbOutOfPerimeterError) {
         setContent(
-          <SimpleGurbDialog
+          <ErrorDialog
             severity="error"
-            setContent={setContent}
+            onClose={setContent}
             title={t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_TITLE_TEXT")}
-            text1={t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT")}
-            text2={t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT")}
+            descriptions={[
+              t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_MAIN_TEXT"),
+              t("GURB_ADDRESS_ERROR_OUT_OF_PERIMETER_SECONDARY_TEXT"),
+            ]}
           />,
         )
       } else {
         setContent(
-          <SimpleGurbDialog
+          <ErrorDialog
             severity="error"
-            setContent={setContent}
+            onClose={setContent}
             title={t("GURB_ADDRESS_ERROR_UNEXPECTED")}
-            text1={t("GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT")}
+            descriptions={[t("GURB_ADDRESS_ERROR_UNEXPECTED_MAIN_TEXT")]}
           />,
         )
       }
