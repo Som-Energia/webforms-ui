@@ -21,6 +21,7 @@ import PrevButton from "../../components/Buttons/PrevButton"
 import SubmitButton from "../../components/Buttons/SubmitButton"
 import Loading from "../../components/Loading"
 import SomStepper from "../../components/SomStepper/SomStepper"
+import SimpleGurbDialog from "../../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
 import Result from "../../containers/Result"
 import LoadingContext from "../../context/LoadingContext"
 import SummaryContext from "../../context/SummaryContext"
@@ -635,6 +636,17 @@ const NewContractMemberForm = (props) => {
                         )}
                       </Grid>
                     </Grid>
+                  )}
+
+                  {error && (
+                    <>
+                      <SimpleGurbDialog
+                        severity="error"
+                        setContent={() => setError(null)}
+                        text1={t("NEW_MEMBER_CONTRACT_ERROR_TITLE")}
+                        text2={t("NEW_MEMBER_CONTRACT_ERROR_DESC")}
+                      />
+                    </>
                   )}
 
                   {completed && (
