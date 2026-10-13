@@ -96,6 +96,7 @@ const NewContractMemberForm = (props) => {
   const [hasAlert, setHasAlert] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [error, setError] = useState(false)
+  const [showCreateLeadError, setShowCreateLeadError] = useState(false)
 
   const { loading } = useContext(LoadingContext)
   const { summaryField, setSummaryField } = useContext(SummaryContext)
@@ -341,6 +342,7 @@ const NewContractMemberForm = (props) => {
       })
       .catch((err) => {
         setError(true)
+        setShowCreateLeadError(true)
         console.log(err)
       })
       .finally(() => {
@@ -638,11 +640,11 @@ const NewContractMemberForm = (props) => {
                     </Grid>
                   )}
 
-                  {error && (
+                  {showCreateLeadError && (
                     <>
                       <SimpleGurbDialog
                         severity="error"
-                        setContent={() => setError(null)}
+                        setContent={() => setShowCreateLeadError(false)}
                         text1={t("NEW_MEMBER_CONTRACT_ERROR_TITLE")}
                         text2={t("NEW_MEMBER_CONTRACT_ERROR_DESC")}
                       />
