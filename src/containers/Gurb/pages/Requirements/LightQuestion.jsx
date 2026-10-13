@@ -5,12 +5,12 @@ import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined"
 import Grid from "@mui/material/Grid"
 
 import Chooser from "../../../../components/Chooser/Chooser"
+import ErrorDialog from "../../../../components/ErrorDialog/ErrorDialog"
 import PopUpContext from "../../../../context/PopUpContext"
 import {
   iconOffRequirementsStyles,
   iconRequirementsStyles,
 } from "../../../../themes/commonStyles"
-import SimpleGurbDialog from "../../components/SimpleGurbDialog/SimpleGurbDialog"
 import TextRecommendation from "../../components/TextRecommendation/TextRecommendation"
 
 const LightQuestion = (props) => {
@@ -23,11 +23,13 @@ const LightQuestion = (props) => {
 
     if (value === "light-off") {
       setContent(
-        <SimpleGurbDialog
+        <ErrorDialog
           severity="warning"
-          setContent={setContent}
-          text1={t("GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT")}
-          text2={t("GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT")}
+          onClose={setContent}
+          descriptions={[
+            t("GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT"),
+            t("GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT"),
+          ]}
         />,
       )
     }

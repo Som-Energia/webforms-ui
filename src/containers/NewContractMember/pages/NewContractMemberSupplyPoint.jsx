@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography"
 import AlertBox from "../../../components/AlertBox/AlertBox"
 import Chooser from "../../../components/Chooser/Chooser"
 import CUPS from "../../../components/Cups/CUPS"
+import ErrorDialog from "../../../components/ErrorDialog/ErrorDialog"
 import InputTitle from "../../../components/InputTitle"
 import TermsDialog from "../../../components/TermsDialog"
-import SimpleGurbDialog from "../../../containers/Gurb/components/SimpleGurbDialog/SimpleGurbDialog"
 import PopUpContext from "../../../context/PopUpContext"
 import { LightbulbIcon } from "../../../data/icons/Icons"
 
@@ -39,10 +39,10 @@ const NewContractMemberSupplyPoint = ({ ...props }) => {
   useEffect(() => {
     if (values.social_tariff && values.cups_valid && !socialTariffByPass) {
       setContent(
-        <SimpleGurbDialog
+        <ErrorDialog
           severity="error"
-          text1={t("POP_UP_SIPS_CUP")}
-          setContent={setContent}
+          descriptions={[t("POP_UP_SIPS_CUP")]}
+          onClose={setContent}
         />,
       )
     }

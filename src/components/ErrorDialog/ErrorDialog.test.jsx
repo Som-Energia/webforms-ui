@@ -7,10 +7,8 @@ import {
   screen,
 } from "@testing-library/react"
 
-import PopUpContext, {
-  PopUpContextProvider,
-} from "../../../../context/PopUpContext"
-import SimpleGurbDialog from "./SimpleGurbDialog"
+import PopUpContext, { PopUpContextProvider } from "../../context/PopUpContext"
+import ErrorDialog from "./ErrorDialog"
 
 // Mock component to use the SimpleGurbDialog within a PopUpContext
 const MockWrapperComponentWithDialog = () => {
@@ -20,7 +18,7 @@ const MockWrapperComponentWithDialog = () => {
       <button
         id="dummy-open-dialog"
         onClick={() =>
-          setContent(<SimpleGurbDialog title="TEST" setContent={setContent} />)
+          setContent(<ErrorDialog title="TEST" onClose={setContent} />)
         }>
         Open Dialog
       </button>
@@ -40,13 +38,27 @@ describe("SimpleGurbDialog component", () => {
     const getByDataCy = queryByAttribute.bind(null, "data-cy")
 
     const buttonElement = getById(dom.container, "dummy-open-dialog")
-    const contentElement = getByDataCy(dom.container, "simple-gurb-dialog")
+    const contentElement = getByDataCy(dom.container, "error-dialog")
     expect(contentElement).toBeNull()
     act(() => {
       fireEvent.click(buttonElement)
     })
     const contentElementA = await screen.findByText("TEST")
     expect(contentElementA).toBeInTheDocument()
+  })
+
+  test("ErrorDialog renders custom nested content supplied as children", async () => {
+    render(
+      <PopUpContextProvider>
+        <ErrorDialog title="TEST" onClose={() => {}}>
+          <div>
+            <p>Custom error details</p>
+          </div>
+        </ErrorDialog>
+      </PopUpContextProvider>,
+    )
+
+    expect(await screen.findByText("Custom error details")).toBeVisible()
   })
 
   test("SimpleGurbDialog simulate close button click remove element from dom", async () => {
@@ -60,7 +72,7 @@ describe("SimpleGurbDialog component", () => {
     const getByDataCy = queryByAttribute.bind(null, "data-cy")
 
     const buttonElement = getById(dom.container, "dummy-open-dialog")
-    const contentElement = getByDataCy(dom.container, "simple-gurb-dialog")
+    const contentElement = getByDataCy(dom.container, "error-dialog")
     expect(contentElement).toBeNull()
     // Click on mockup component to open the dialog
     act(() => {
@@ -68,7 +80,7 @@ describe("SimpleGurbDialog component", () => {
     })
     // Check dialog is opened
     const closeDialogButton = await screen.findByTestId(
-      "simple-gurb-dialog-close-button",
+      "error-dialog-close-button",
     )
     expect(closeDialogButton).toBeInTheDocument()
     // Click on close button in the dialog
@@ -81,7 +93,7 @@ describe("SimpleGurbDialog component", () => {
     try {
       // https://testing-library.com/docs/queries/about/#screen
       closeDialogButton2 = await screen.findByTestId(
-        "simple-gurb-dialog-close-button",
+        "error-dialog-close-button",
       )
     } catch {
       // all fine

@@ -62,9 +62,11 @@ describe("LightQuestion", () => {
     expect(isValidElement(dialogElement)).toBe(true)
     expect(dialogElement.props).toMatchObject({
       severity: "warning",
-      setContent,
-      text1: "GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT",
-      text2: "GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT",
+      onClose: setContent,
+      descriptions: [
+        "GURB_LIGHT_QUESTION_ERROR_MAIN_TEXT",
+        "GURB_LIGHT_QUESTION_ERROR_SECONDARY_TEXT",
+      ],
     })
   })
 
