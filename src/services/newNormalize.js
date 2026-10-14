@@ -273,10 +273,9 @@ export const newNormalizeHolderChange = (data) => {
       normalizeHolderChangeAttachments(attachment.filehash, category),
     ),
   )
-
   if (attachments.length > 0) {
     finalHolderChange["attachments"] = attachments
   }
-  console.log("finalHolderChange", finalHolderChange)
+  finalHolderChange["service"] = "holder_change"
   return finalHolderChange
 }
