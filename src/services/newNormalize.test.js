@@ -40,6 +40,7 @@ describe("Normalize new holder-change form", () => {
       statutes_accepted: true,
       comercial_info_accepted: false,
       especial_cases: undefined,
+      service: "holder_change",
       supply_point: {
         attachments_reason_death: [],
         attachments_reason_merge: [],
@@ -70,6 +71,7 @@ describe("Normalize new holder-change form", () => {
         ...client.physical.normalizedData,
         address: address.normalizedData,
       },
+      service: "holder_change",
       especial_cases: {
         reason_death: false,
         reason_merge: false,
