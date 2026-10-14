@@ -280,7 +280,7 @@ export const createContractLead = async (data) => {
 export const createHolderChangeRequest = async (data) => {
   return axios({
     method: "POST",
-    url: `${WEBFORMS_API_URL}/procedures/holder_change`,
+    url: `${WEBFORMS_API_URL}/procedures/contract`,
     data,
   }).then(({ data }) => data)
 }

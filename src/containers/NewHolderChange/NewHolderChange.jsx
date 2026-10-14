@@ -168,9 +168,8 @@ const NewHolderChangeForm = () => {
     const data = newNormalizeHolderChange(values)
     await createHolderChangeRequest(data)
       .then((response) => {
-        console.log("response", response)
         if (response?.state === true) {
-          const { redsys_data, request_id } = response?.data || {}
+          const { redsys_data, lead_id } = response?.data || {}
           const paymentData = redsys_data?.payment_data
           const redsysEndpoint = redsys_data?.redsys_endpoint
 
@@ -186,11 +185,8 @@ const NewHolderChangeForm = () => {
             })
             setRedsysURL(redsysEndpoint)
             setError(false)
-          } else if (
-            request_id &&
-            NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"]
-          ) {
-            setRequestId(request_id)
+          } else if (lead_id && NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SIGNATURE"]) {
+            setRequestId(lead_id)
             nextStep({ values })
             setError(false)
           } else {
