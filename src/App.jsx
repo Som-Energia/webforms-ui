@@ -547,7 +547,7 @@ const AppRoutes = (props) => {
         />
       ))}
       <Route
-        path="/:language/:service/sign/:leadId"
+        path="/:language/contract/sign/:leadId"
         element={
           <ThemeWrapper theme={webFormsTheme}>
             <NewContractMemberSignatureStandalone />
