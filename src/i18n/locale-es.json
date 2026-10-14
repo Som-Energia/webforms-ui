@@ -333,7 +333,7 @@
     "LEGAL_PERSON_TITLE_LABEL": "Declaración responsable de la representante de la persona jurídica",
     "LEGAL_PERSON_TITLE": "Declaración responsable de la representante de la persona jurídica",
     "ACCEPT_LEGAL_PERSON": "No has aceptado la declaración",
-    "DNI_EXIST": "Ya existe un socio/a con este NIF/CIF",
+    "DNI_EXIST": "Ya existe una persona socia con este NIF/CIF",
     "SAME_OWNER": "El NIF del nuevo titular no puede ser el mismo que el del actual",
     "CONTRACT_LOWER_THAN_15KW": "Potencia inferior o igual a 15 kW",
     "NO_POWER_INCREASING": "La potencia de este periodo no puede ser inferior al anterior",
