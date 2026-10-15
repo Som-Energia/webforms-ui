@@ -3,6 +3,8 @@
 ## Unreleased
 
 - FIX: Use more strict phone number validation with the same lib
+- NEW: Show an error on summary step with a dialog
+- REF: Move SimpleGurbDialog to ErrorDialog
 
 ## 8.6.1 2026-10-09
 
