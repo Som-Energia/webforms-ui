@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.6.2 2026-10-15
 
 - FIX: Use more strict phone number validation with the same lib
 - NEW: Show an error on summary step with a dialog
