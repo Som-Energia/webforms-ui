@@ -11,7 +11,11 @@ import SubmitButton from "../../components/Buttons/SubmitButton"
 import Loading from "../../components/Loading"
 import useBackNavigationWarning from "../../hooks/useBackNavigationWarning"
 import { useSyncLanguage } from "../../hooks/useTranslateOptions"
-import { activateLead, getContractSignature } from "../../services/api"
+import {
+  activateLead,
+  executeRequest,
+  getContractSignature,
+} from "../../services/api"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
 import RedirectUrl from "../Gurb/components/RedirectUrl/RedirectUrl"
 import Result from "../Result"
@@ -51,19 +55,35 @@ const NewContractMemberSignatureStandalone = () => {
     }
 
     setSending(true)
-    activateLead(leadId)
-      .then(() => {
-        setError(false)
-        navigate(`/${language}/${service}/${leadId}/success`)
-      })
-      .catch((err) => {
-        setError(true)
-        console.log(err)
-      })
-      .finally(() => {
-        setCompleted(true)
-        setSending(false)
-      })
+    if (service === "holder_change") {
+      executeRequest(leadId)
+        .then(() => {
+          setError(false)
+          navigate(`/${language}/contract/${leadId}/success`)
+        })
+        .catch((err) => {
+          setError(true)
+          console.log(err)
+        })
+        .finally(() => {
+          setCompleted(true)
+          setSending(false)
+        })
+    } else {
+      activateLead(leadId)
+        .then(() => {
+          setError(false)
+          navigate(`/${language}/contract/${leadId}/success`)
+        })
+        .catch((err) => {
+          setError(true)
+          console.log(err)
+        })
+        .finally(() => {
+          setCompleted(true)
+          setSending(false)
+        })
+    }
   }
 
   const handleSignatureCompleted = () => {
