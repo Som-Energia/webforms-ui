@@ -76,6 +76,17 @@ export const normalizeAttachments = (supply_point_attachment, process) => {
   return data
 }
 
+export const normalizeHolderChangeAttachments = (
+  supply_point_attachment,
+  category,
+) => {
+  let data = {
+    filename: supply_point_attachment,
+    category: category,
+  }
+  return data
+}
+
 export const newNormalizeContract = (data, gurbCode, owner, lead_tag) => {
   const powers = []
   const powers_max = data.contract.power_type === "power-lower-15kw" ? 2 : 6
@@ -186,4 +197,85 @@ export const newNormalizeContract = (data, gurbCode, owner, lead_tag) => {
   }
 
   return finalContract
+}
+
+export const newNormalizeHolderChange = (data) => {
+  const paymentType =
+    data.new_member.payment_method === "credit_card" ? "tpv" : "remesa"
+
+  const finalHolderChange = {
+    linked_member: data.member.link_member
+      ? data.has_member === "member-on"
+        ? "already_member"
+        : "sponsored"
+      : data.has_member === "member-off"
+        ? "new-member"
+        : "without-member",
+    contract_info: {
+      cups: data.cups,
+    },
+    payment_type: paymentType,
+    donation: data.voluntary_donation,
+    privacy_conditions: data.privacy_policy_accepted,
+    general_contract_terms_accepted: data.generic_conditions_accepted,
+    statutes_accepted: data.statutes_accepted,
+    signature: true, // feature flag for ERP
+  }
+
+  if (paymentType === "remesa") {
+    finalHolderChange["iban"] = data.new_member.iban
+    finalHolderChange["sepa_accepted"] = data.new_member.sepa_accepted
+  }
+
+  if (paymentType === "tpv") {
+    finalHolderChange["payment_authorization_accepted"] =
+      data.new_member.payment_authorization_accepted
+  }
+
+  finalHolderChange["contract_owner"] = normalizeClient(data.new_member)
+  finalHolderChange["contract_owner"]["address"] = normalizeAddress(
+    data.address,
+  )
+
+  if (data.member.link_member) {
+    finalHolderChange["linked_member_info"] = {
+      vat: data.member.nif,
+      code: data.member.number,
+    }
+  }
+
+  if (data.comercial_info_accepted) {
+    finalHolderChange["comercial_info_accepted"] = data.comercial_info_accepted
+  }
+
+  finalHolderChange["especial_cases"] = {
+    reason_death: false,
+    reason_merge: false,
+    reason_electrodep: false,
+  }
+
+  if (data.especial_cases === "reason_death")
+    finalHolderChange["especial_cases"]["reason_death"] = true
+
+  if (data.especial_cases === "reason_merge")
+    finalHolderChange["especial_cases"]["reason_merge"] = true
+
+  if (data.especial_cases === "reason_electrodep")
+    finalHolderChange["especial_cases"]["reason_electrodep"] = true
+
+  const attachments = [
+    ["attachments_reason_death", "holder_change_death"],
+    ["attachments_reason_merge", "holder_change_merge"],
+    ["attachments_reason_electrodep", "holder_change_medical"],
+    ["attachments_reason_electrodep_census", "holder_change_medical"],
+  ].flatMap(([field, category]) =>
+    data.supply_point[field].map((attachment) =>
+      normalizeHolderChangeAttachments(attachment.filehash, category),
+    ),
+  )
+  if (attachments.length > 0) {
+    finalHolderChange["attachments"] = attachments
+  }
+  finalHolderChange["service"] = "holder_change"
+  return finalHolderChange
 }

@@ -875,5 +875,6 @@
     "PAYMENT_OK_DESCRIPTION": "En breu rebràs un correu amb tota la informació al correu que ens has proporcionat",
     "PAYMENT_KO_DESCRIPTION": "Actualment, ja hi ha una sol·licitud en tràmit. Contacta amb nosaltres a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Gràcies.",
     "TOKEN_FORM_ERROR_DESCRIPTION": "Aquest formulari ha caducat o no és vàlid. Si us plau, posa't en contacte amb nosaltres a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisarem la situació. Disculpa las molèsties.",
-    "TOKEN_FORM_ERROR": "Aquest formular ja no és vàlid."
+    "TOKEN_FORM_ERROR": "Aquest formular ja no és vàlid.",
+    "TARIFF_POWER_MODIF_INFO": "Per agilitzar el tràmit, farem la gestió amb la potència i tarifa actual. Si necessites fer un canvi de potència o tarifam pots escriure a modifica@somenergia.coop però tingues en compte que es pot endarrerir el canvi de titular."
 }

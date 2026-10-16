@@ -31,8 +31,14 @@ const CUPS = (props) => {
       try {
         cupsResponse = await checkCups(cups)
 
-        const { status, knowledge_of_distri, tariff_name, has_social_tariff } =
-          cupsResponse?.data || {}
+        const {
+          status,
+          knowledge_of_distri,
+          tariff_name,
+          tariff_type,
+          has_social_tariff,
+          address,
+        } = cupsResponse?.data || {}
 
         const new_contract = ["new", "inactive"].includes(status)
 
@@ -42,9 +48,12 @@ const CUPS = (props) => {
             ...{
               cups_valid: true,
               social_tariff: has_social_tariff,
-              new_contract,
-              knowledge_of_distri,
-              tariff_name,
+              new_contract: new_contract,
+              status: status,
+              knowledge_of_distri: knowledge_of_distri,
+              tariff_name: tariff_name,
+              tariff_type: tariff_type,
+              supply_point_address: address?.replace(/\d/g, "*"),
             },
           }),
           true,
