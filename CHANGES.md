@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.6.3 2026-10-19
 
 - NEW: Add send_email feature flag compatibility
 

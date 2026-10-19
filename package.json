@@ -1,7 +1,7 @@
 {
   "name": "webforms-ui",
-  "version": "8.6.2",
-  "apiVersion": "7.2.0",
+  "version": "8.6.3",
+  "apiVersion": "7.2.1",
   "private": false,
   "engines": {
     "npm": ">=11.0.0 <12.0.0",
