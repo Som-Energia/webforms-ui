@@ -56,8 +56,6 @@ const NewContractMemberSignatureStandalone = () => {
 
     setSending(true)
 
-    new Promise((resolve) => setTimeout(resolve, 5000))
-
     if (service === "holder_change") {
       executeRequest(leadId, cups)
         .then(() => {
