@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- NEW: Add send_email feature flag compatibility
+
 ## 8.6.2 2026-10-15
 
 - FIX: Use more strict phone number validation with the same lib
