@@ -126,7 +126,7 @@ const NewHolderChangeForm = () => {
     }
 
     setSending(true)
-    await new Promise((resolve) => setTimeout(resolve, 5000))
+
     executeRequest(requestId, cups)
       .then(() => {
         trackSuccess()
