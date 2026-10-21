@@ -264,7 +264,7 @@ export const createContractLead = async (data) => {
   }).then(({ data }) => data)
 }
 
-export const createHolderChangetLead = async (data) => {
+export const createHolderChangeLead = async (data) => {
   return axios({
     method: "POST",
     url: `${WEBFORMS_API_URL}/procedures/contract`,

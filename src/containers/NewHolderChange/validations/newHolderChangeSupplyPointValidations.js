@@ -7,11 +7,18 @@ const newHolderChangeSupplyPointValidations = Yup.object().shape({
     .required("ERROR_REQUIRED_FIELD"),
   cups_valid: Yup.boolean().oneOf([true], "ERROR_INVALID_FIELD"),
   social_tariff: Yup.boolean().oneOf([false], "ERROR_SOCIAL_TARIFF"),
-  new_contract: Yup.boolean().oneOf([true], "CUPS_IN_PROCESS"),
+  new_contract: Yup.boolean()
+    .required("CUPS_SHOULD_BE_ACTIVE")
+    .oneOf([false], "CUPS_SHOULD_BE_ACTIVE"),
   knowledge_of_distri: Yup.boolean().oneOf([true], "UNKNOWN_DISTRIBUTOR"),
-  has_light: Yup.string()
-    .required("REQUIRED_FIELD")
-    .oneOf(["light-on", "light-off"]),
+  supply_point: Yup.object().shape({
+    verified: Yup.bool()
+      .required("MARK_ADDRESS_CONFIRMATION_BOX")
+      .oneOf([true], "MARK_ADDRESS_CONFIRMATION_BOX"),
+    supply_point_accepted: Yup.bool()
+      .required("UNACCEPTED_FAIR_TITLE")
+      .oneOf([true], "UNACCEPTED_FAIR_TITLE"),
+  }),
 })
 
 export default newHolderChangeSupplyPointValidations
