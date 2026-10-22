@@ -12,6 +12,7 @@ import {
   HeartIcon,
   PersonalIcon,
 } from "../../../data/icons/Icons"
+import { creditCardPaymentEnabled } from "../../NewContractMember/paymentMethods"
 
 const NewHolderChangeEspecialCases = ({ ...props }) => {
   const { values, setFieldValue, setValues, sendTrackEvent } = props
@@ -19,6 +20,17 @@ const NewHolderChangeEspecialCases = ({ ...props }) => {
   const trackID = "especial-cases-question"
 
   const handleEspecialCasesQuestion = (value) => {
+    if (value !== "reason_holder_change") {
+      setFieldValue("supply_point.attachments_reason_merge", [])
+      setFieldValue("supply_point.attachments_reason_death", [])
+      setFieldValue("supply_point.attachments_reason_electrodep", [])
+      setFieldValue("supply_point.attachments_reason_electrodep_census", [])
+    }
+    if (value === "reason_holder_change" && creditCardPaymentEnabled) {
+      setFieldValue("new_member.payment_method", "")
+    } else {
+      setFieldValue("new_member.payment_method", "iban")
+    }
     setFieldValue("especial_cases", value)
   }
 
