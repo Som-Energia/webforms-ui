@@ -19,5 +19,6 @@
   "becomeMember": true,
   "noBecomeMember": false,
   "linkMember": true,
-  "noLinkMember": false
+  "noLinkMember": false,
+  "attachment": "pdf-1.pdf"
 }
