@@ -105,18 +105,10 @@ const PaymentMethod = (props) => {
     }
   }, [values?.new_member?.iban])
 
-  useEffect(() => {
-    if (values.especial_cases !== "reason_holder_change") {
-      setFieldValue("new_member.payment_method", "iban")
-    }
-  }, [values?.especial_cases])
-
   const enablesCreditCardPayment =
-    !creditCardPaymentEnabled ||
-    (values?.especial_cases !== undefined &&
-      values.especial_cases !== "reason_holder_change")
-      ? false
-      : true
+    (creditCardPaymentEnabled && values?.especial_cases === undefined) ||
+    (creditCardPaymentEnabled &&
+      values?.especial_cases === "reason_holder_change")
 
   const options = [
     ...(enablesCreditCardPayment
@@ -166,7 +158,7 @@ const PaymentMethod = (props) => {
           {t("MEMBER_PAGE_PAYMENT_METHOD")}
         </Typography>
       </Grid>
-      {enablesCreditCardPayment && (
+      {options.length > 1 && (
         <>
           <Grid item xs={12}>
             <InputTitle text={t("PAYMENT_METHOD_QUESTION")} required={true} />
