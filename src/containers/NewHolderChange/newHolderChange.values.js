@@ -8,7 +8,7 @@ export const buildInitialValues = (language) => ({
   tariff_type: "",
   has_member: "",
   voluntary_donation: undefined,
-  especial_cases: undefined,
+  especial_cases: "reason_holder_change",
   supply_point: {
     cnae: "9820",
     supply_point_accepted: false,

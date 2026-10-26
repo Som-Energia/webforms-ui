@@ -20,18 +20,27 @@ const NewHolderChangeEspecialCases = ({ ...props }) => {
   const trackID = "especial-cases-question"
 
   const handleEspecialCasesQuestion = (value) => {
-    if (value !== "reason_holder_change") {
-      setFieldValue("supply_point.attachments_reason_merge", [])
-      setFieldValue("supply_point.attachments_reason_death", [])
-      setFieldValue("supply_point.attachments_reason_electrodep", [])
-      setFieldValue("supply_point.attachments_reason_electrodep_census", [])
-    }
-    if (value === "reason_holder_change" && creditCardPaymentEnabled) {
-      setFieldValue("new_member.payment_method", "")
-    } else {
-      setFieldValue("new_member.payment_method", "iban")
-    }
-    setFieldValue("especial_cases", value)
+    setValues((previousValues) => ({
+      ...previousValues,
+      especial_cases: value,
+      supply_point:
+        value !== "reason_holder_change"
+          ? {
+              ...previousValues.supply_point,
+              attachments_reason_merge: [],
+              attachments_reason_death: [],
+              attachments_reason_electrodep: [],
+              attachments_reason_electrodep_census: [],
+            }
+          : previousValues.supply_point,
+      new_member: {
+        ...previousValues.new_member,
+        payment_method:
+          value === "reason_holder_change" && creditCardPaymentEnabled
+            ? ""
+            : "iban",
+      },
+    }))
   }
 
   useEffect(() => {
@@ -46,7 +55,7 @@ const NewHolderChangeEspecialCases = ({ ...props }) => {
       id: "reason_holder_change",
       icon: <CommunityIcon />,
       textHeader: t("SPECIAL_CASES_HOLDER_CHANGE"),
-      textBody: t("SPECIAL_CASES_REASON_DEFAULT"),
+      textBody: t("SPECIAL_CASES_REASON_HOLDER_CHANGE"),
     },
   ]
 
