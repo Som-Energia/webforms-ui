@@ -69,6 +69,7 @@ const NewHolderChangeSupplyPoint = ({ ...props }) => {
           textFieldName={t("ADDRESS")}
           value={values?.supply_point_address}
           readonlyField
+          textFieldHelper={t("CUPS_PARTIAL_ADDRESS_NOTICE")}
         />
       </Grid>
       <Grid item xs={12}>

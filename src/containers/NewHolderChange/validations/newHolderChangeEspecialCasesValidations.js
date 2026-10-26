@@ -31,7 +31,7 @@ const newHolderChangeEspecialCasesValidations = Yup.object().shape({
           attachments_reason_electrodep_census: requiredAttachments,
         })
 
-      default:
+      case "reason_holder_change":
         return schema.notRequired()
     }
   }),

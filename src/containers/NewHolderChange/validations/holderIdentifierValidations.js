@@ -2,7 +2,7 @@ import * as Yup from "yup"
 
 const holderIdentifierValidations = Yup.object().shape({
   new_member: Yup.object().when("has_member", {
-    is: (value) => ["member-off", "no-member"].includes(value),
+    is: (value) => ["member-off", "without-member"].includes(value),
     then: (schema) =>
       schema.shape({
         nif: Yup.string()
