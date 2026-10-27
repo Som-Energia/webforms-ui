@@ -13,23 +13,37 @@ import {
 } from "../../../data/icons/Icons"
 
 const NewHolderChangeMemberQuestion = ({ ...props }) => {
-  const { values, setFieldValue, setValues, sendTrackEvent } = props
+  const { values, setValues, sendTrackEvent } = props
   const { t } = useTranslation()
   const trackID = "member-question"
 
+  const CTSSVAT = import.meta.env.VITE_HOLDERCHANGE_TRIAL_PERIOD_MEMBER_VAT
+  const CTSSNUMBER = import.meta.env.VITE_HOLDERCHANGE_TRIAL_PERIOD_MEMBER_NUMBER
+  const memberMandatoryEnabled = JSON.parse(
+    import.meta.env.VITE_FEATURE_FLAGS || "{}",
+  ).isMemberMandatoryForHolderchange
+
   const handleMemberQuestion = (value) => {
-    setFieldValue("has_member", value)
+    setValues((values) => ({
+      ...values,
+      has_member: value,
+      member:
+        value === "without-member"
+          ? {
+              number: CTSSNUMBER,
+              vat: CTSSVAT,
+              link_member: true,
+            }
+          : {
+              number: "",
+              vat: "",
+              link_member: false,
+            },
+    }))
   }
 
   useEffect(() => {
     sendTrackEvent(trackID)
-    setValues({
-      ...values,
-      member: {
-        number: "",
-        nif: "",
-      },
-    })
   }, [])
 
   const options = [
@@ -51,12 +65,16 @@ const NewHolderChangeMemberQuestion = ({ ...props }) => {
       textHeader: t("HAS_MEMBER"),
       textBody: t("HAS_MEMBER_BODY"),
     },
-    {
-      id: "without-member",
-      icon: <HeartIcon on={false} />,
-      textHeader: t("NO_MEMBER"),
-      textBody: t("NO_MEMBER_BODY"),
-    },
+    ...(!memberMandatoryEnabled
+      ? [
+          {
+            id: "without-member",
+            icon: <HeartIcon on={false} />,
+            textHeader: t("NO_MEMBER"),
+            textBody: t("NO_MEMBER_BODY"),
+          },
+        ]
+      : []),
   ]
 
   return (
