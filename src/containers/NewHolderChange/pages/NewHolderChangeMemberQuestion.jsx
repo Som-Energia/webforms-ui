@@ -31,12 +31,12 @@ const NewHolderChangeMemberQuestion = ({ ...props }) => {
         value === "without-member"
           ? {
               number: CTSSNUMBER,
-              vat: CTSSVAT,
+              nif: CTSSVAT,
               link_member: true,
             }
           : {
               number: "",
-              vat: "",
+              nif: "",
               link_member: false,
             },
     }))
