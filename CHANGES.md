@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- NEW: Add method to open external help dialog when api is down
+
 ## 8.6.3 2026-10-19
 
 - NEW: Add send_email feature flag compatibility
