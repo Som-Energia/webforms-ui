@@ -150,29 +150,10 @@ const NewHolderChangeSummary = ({ ...props }) => {
     ],
   }
 
-  const oldHolderFields = {
-    icon: <PersonalIcon />,
-    title: t("REVIEW_HOLDER_TITLE"),
-    field: [
-      {
-        reviewLabel: `${t("NUMBER")}:`,
-        reviewValue: values?.member?.number,
-        step: showReviewLinks ? formSteps["LINK_MEMBER"] : null,
-      },
-      {
-        reviewLabel: t("REVIEW_HOLDER_LABEL_NIF"),
-        reviewValue: values?.member?.nif,
-        step: showReviewLinks ? formSteps["LINK_MEMBER"] : null,
-      },
-    ],
-  }
-
   const reviewHolderData =
-    values?.has_member === "member-on"
-      ? oldHolderFields
-      : values?.new_member?.person_type === "legal-person"
-        ? legalReviewFields
-        : physicalReviewFields
+    values?.new_member?.person_type === "legal-person"
+      ? legalReviewFields
+      : physicalReviewFields
 
   const getPaymentField = () => {
     const isIbanPayment = values?.new_member?.payment_method === "iban"
