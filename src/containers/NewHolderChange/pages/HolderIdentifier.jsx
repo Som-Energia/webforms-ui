@@ -10,14 +10,15 @@ const HolderIdentifier = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        {values?.has_member === "member-off" ? (
+        {values?.has_member === "member-off" && (
           <MemberIdentifier {...props} title={false} entity="new_member" />
-        ) : values?.has_member === "member-on" ||
-          values?.has_member === "member-link" ? (
+        )}
+        {["member-on", "member-link"].includes(values?.has_member) && (
           <LinkMemberDetails {...props} title={false} />
-        ) : values?.has_member === "without-member" ? (
+        )}
+        {values?.has_member === "without-member" && (
           <NifCif entity="new_member" {...props} />
-        ) : null}
+        )}
       </Grid>
     </Grid>
   )

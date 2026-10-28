@@ -56,35 +56,24 @@ const NewContractMemberSignatureStandalone = () => {
 
     setSending(true)
 
-    if (service === "holder_change") {
-      executeRequest(leadId, cups)
-        .then(() => {
-          setError(false)
-          navigate(`/${language}/contract/${leadId}/success`)
-        })
-        .catch((err) => {
-          setError(true)
-          console.log(err)
-        })
-        .finally(() => {
-          setCompleted(true)
-          setSending(false)
-        })
-    } else {
-      activateLead(leadId)
-        .then(() => {
-          setError(false)
-          navigate(`/${language}/contract/${leadId}/success`)
-        })
-        .catch((err) => {
-          setError(true)
-          console.log(err)
-        })
-        .finally(() => {
-          setCompleted(true)
-          setSending(false)
-        })
-    }
+    const requestPromise =
+      service === "holder_change"
+        ? executeRequest(leadId, cups)
+        : activateLead(leadId)
+
+    requestPromise
+      .then(() => {
+        setError(false)
+        navigate(`/${language}/contract/${leadId}/success`)
+      })
+      .catch((err) => {
+        setError(true)
+        console.log(err)
+      })
+      .finally(() => {
+        setCompleted(true)
+        setSending(false)
+      })
   }
 
   const handleSignatureCompleted = () => {

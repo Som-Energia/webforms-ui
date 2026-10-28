@@ -110,62 +110,68 @@ const NewHolderChangeEspecialCases = ({ ...props }) => {
           maxWidth="18rem"
         />
       </Grid>
-      {values?.especial_cases === "reason_death" ? (
-        <Grid size={{ xs: 12 }} textAlign={"center"}>
-          <DragDrop
-            fieldName={t("CERT_ATTACH_DEATH")}
-            textStyle={"body.md.regular"}
-            required={false}
-            values={values.supply_point.attachments_reason_death}
-            onChange={(fileHash) =>
-              setFieldValue("supply_point.attachments_reason_death", fileHash)
-            }
-          />
-        </Grid>
-      ) : values?.especial_cases === "reason_merge" ? (
-        <Grid size={{ xs: 12 }} textAlign={"center"}>
-          <DragDrop
-            fieldName={t("CERT_ATTACH_MERGE")}
-            textStyle={"body.md.regular"}
-            required={false}
-            values={values.supply_point.attachments_reason_merge}
-            onChange={(fileHash) =>
-              setFieldValue("supply_point.attachments_reason_merge", fileHash)
-            }
-          />
-        </Grid>
-      ) : values?.especial_cases === "reason_electrodep" ? (
-        <>
+      <>
+        {values?.especial_cases === "reason_death" && (
           <Grid size={{ xs: 12 }} textAlign={"center"}>
             <DragDrop
-              fieldName={t("ELECTRODEP_ATTACH_MEDICAL")}
+              fieldName={t("CERT_ATTACH_DEATH")}
               textStyle={"body.md.regular"}
               required={false}
-              values={values.supply_point.attachments_reason_electrodep}
+              values={values.supply_point.attachments_reason_death}
               onChange={(fileHash) =>
-                setFieldValue(
-                  "supply_point.attachments_reason_electrodep",
-                  fileHash,
-                )
+                setFieldValue("supply_point.attachments_reason_death", fileHash)
               }
             />
           </Grid>
+        )}
+        {values?.especial_cases === "reason_merge" && (
           <Grid size={{ xs: 12 }} textAlign={"center"}>
             <DragDrop
-              fieldName={t("ELECTRODEP_ATTACH_RESIDENT")}
+              fieldName={t("CERT_ATTACH_MERGE")}
               textStyle={"body.md.regular"}
               required={false}
-              values={values.supply_point.attachments_reason_electrodep_census}
+              values={values.supply_point.attachments_reason_merge}
               onChange={(fileHash) =>
-                setFieldValue(
-                  "supply_point.attachments_reason_electrodep_census",
-                  fileHash,
-                )
+                setFieldValue("supply_point.attachments_reason_merge", fileHash)
               }
             />
           </Grid>
-        </>
-      ) : null}
+        )}
+        {values?.especial_cases === "reason_electrodep" && (
+          <>
+            <Grid size={{ xs: 12 }} textAlign={"center"}>
+              <DragDrop
+                fieldName={t("ELECTRODEP_ATTACH_MEDICAL")}
+                textStyle={"body.md.regular"}
+                required={false}
+                values={values.supply_point.attachments_reason_electrodep}
+                onChange={(fileHash) =>
+                  setFieldValue(
+                    "supply_point.attachments_reason_electrodep",
+                    fileHash,
+                  )
+                }
+              />
+            </Grid>
+            <Grid size={{ xs: 12 }} textAlign={"center"}>
+              <DragDrop
+                fieldName={t("ELECTRODEP_ATTACH_RESIDENT")}
+                textStyle={"body.md.regular"}
+                required={false}
+                values={
+                  values.supply_point.attachments_reason_electrodep_census
+                }
+                onChange={(fileHash) =>
+                  setFieldValue(
+                    "supply_point.attachments_reason_electrodep_census",
+                    fileHash,
+                  )
+                }
+              />
+            </Grid>
+          </>
+        )}
+      </>
     </Grid>
   )
 }
