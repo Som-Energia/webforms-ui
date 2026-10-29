@@ -1,20 +1,21 @@
 # Holder Change: Navegació
 
-Aquí la clau és `skipStep()`. Molts errors venen de tocar un pas sense entendre quan es mostra o s'amaga.
+El flux actiu avança per passos numerats; no utilitza el `skipStep()` del container antic, que s'ha eliminat.
 
 ## Quick path
 
-1. Comença a `getActiveStep()` i `skipStep()` dins `src/containers/HolderChange.jsx`.
-2. Revisa `nextStep()` i `prevStep()`.
-3. Verifica el comportament per membre existent, alta nova i comunitat de propietaris.
+1. Comença a `getStep()`, `nextStep()` i `prevStep()` a `src/containers/NewHolderChange/NewHolderChange.jsx`.
+2. Revisa `NEW_HOLDER_CHANGE_FORM_SUBSTEPS` i les validacions per pas.
+3. Comprova l'entrada al resum des de `summaryField` i el pas de signatura després de crear la sol·licitud.
 
 ## Detalls
 
-| Tema             | Context                                                                                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Render de passos | `VAT`, `CUPS`, `BecomeMember`, `HolderCase`, `MemberIdentifier`, `PersonalData`, `VoluntaryCent`, `SpecialCases`, `IBAN`, `Review` |
-| Salts            | `skipStep()` pot ometre sobretot els passos 2, 3 i 4                                                                               |
-| Condicions clau  | `holder.ismember`, `member.become_member`, `member.link_member`, `isMemberMandatoryForHolderchange`, i comunitat de propietaris    |
+| Tema             | Context                                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| Render de passos | Punt de subministrament, soci, titular, dades personals, casos especials, donació, pagament, resum i signatura |
+| Navegació        | `nextStep()` i `prevStep()` mouen l'índex; `summaryField` pot saltar directament a un camp del resum           |
+| Validació        | `validationSchemas` està alineat amb els passos al container arrel                                             |
+| Finalització     | El resum crea la sol·licitud; la resposta decideix entre pagament, signatura o resultat                        |
 
 ## Checklist
 

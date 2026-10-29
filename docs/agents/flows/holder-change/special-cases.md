@@ -4,7 +4,7 @@ Els casos especials són on més fàcilment es trenquen validacions perquè comb
 
 ## Quick path
 
-1. Revisa l'schema `Yup` de `especial_cases` a `src/containers/HolderChange.jsx`.
+1. Revisa `newHolderChangeEspecialCasesValidations` i `NewHolderChangeEspecialCases` a `src/containers/NewHolderChange/`.
 2. Localitza els motius: `reason_default`, `reason_death`, `reason_merge`, `reason_electrodep`.
 3. Si canvies adjunts, revisa `attachments` per cada branca.
 
