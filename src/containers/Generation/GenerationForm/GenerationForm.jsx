@@ -20,7 +20,7 @@ import {
   normalizeMember,
 } from "../../../services/utils"
 import Failure from "../../Failure"
-import PersonalData from "../../HolderChange/PersonalData"
+import PersonalData from "../../shared/PersonalData"
 import Success from "../../Success"
 import GenerationContributionForm from "./GenerationContributionForm"
 import GenerationMemberIdentifier from "./GenerationMemberIdentifier"

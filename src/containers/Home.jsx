@@ -38,7 +38,7 @@ const options = [
     href: `${language}/cooperativa/formulario-asociarse`,
   },
   {
-    title: "New Holder Change",
+    title: "Holder Change",
     href: `${language}/formuario-cambio-titular`,
   },
   {
@@ -52,7 +52,6 @@ const options = [
   },
   { title: "Baixa punt de suministrament", href: "/cancellation" },
   { title: "Confirmament de baixa", href: "/cancellation/confirm" },
-  { title: "Canvi de titular", href: "/holder-change" },
   { title: "Modificació contractual", href: "/modify-contract" },
   { title: "Modificació Tarifa Indexada", href: "/contract/indexed" },
   { title: "Generation kwh", href: "/investments/investments-kwh" },
