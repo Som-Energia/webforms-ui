@@ -38,6 +38,7 @@ import {
 } from "../../services/steps"
 import { isCompanyVat } from "../../services/utils"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
+import { AppUtils } from "../../utils/app.utils"
 import RedirectUrl from "../Gurb/components/RedirectUrl/RedirectUrl"
 import MemberIdentifier from "../NewMember/pages/MemberIdentifier"
 import MemberPersonalData from "../NewMember/pages/MemberPersonalData"
@@ -129,25 +130,16 @@ const NewContractMemberForm = (props) => {
 
   useSyncLanguage(language)
   const openPopUp = (values) => {
-    const root = document.getElementById("root")
-    const fnName = root.getAttribute("data-popup-function")
-    if (fnName) {
-      try {
-        const fn = window[fnName]
-        if (typeof fn !== "function") {
-          throw new Error(`"${fnName}" is not a function on window`)
-        }
-        const vat =
-          values.has_member === "member-on"
-            ? values.member.nif
-            : values.new_member.nif
-        const isCompany = vat ? isCompanyVat(vat) : null
-        const param =
-          isCompany === null ? "" : isCompany ? ENTERPRISE : DOMESTIC
-        fn(param)
-      } catch (err) {
-        console.error("Error calling function from data-function (popup)", err)
-      }
+    try {
+      const vat =
+        values.has_member === "member-on"
+          ? values.member.nif
+          : values.new_member.nif
+      const isCompany = vat ? isCompanyVat(vat) : null
+      const param = isCompany === null ? "" : isCompany ? ENTERPRISE : DOMESTIC
+      AppUtils.openExternalPopup(param)
+    } catch (err) {
+      console.error("Error calling function from data-function (popup)", err)
     }
   }
   const formikRef = useRef(null)
