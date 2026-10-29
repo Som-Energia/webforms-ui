@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react"
 
 import Maintenance from "../components/Maintenance"
+import { AppUtils } from "../utils/app.utils"
 
 const AvailabilityContext = createContext()
 
@@ -9,8 +10,11 @@ export const AvailabilityContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (!availability) {
-      // Open an external help dialog when api is down
-      window.openForm?.()
+      try {
+        AppUtils.openExternalPopup()
+      } catch (err) {
+        console.error(err)
+      }
     }
   }, [availability])
 
