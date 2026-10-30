@@ -15,7 +15,7 @@ Molts fluxos usen `Formik` al container arrel i renderitzen un pas diferent sego
 
 - `NewMember` i `NewContractMember`: patró bastant net de `pages/*` + array de schemas.
 - `Gurb`: patró semblant, però separat en dos subfluxos.
-- `HolderChange`, `Contribution`, `Generation`, `Indexed`: molta lògica i `Yup` embeguda directament al container.
+- `NewHolderChange`, `Contribution`, `Generation`, `Indexed`: els containers d'aquests fluxos governen els passos; `NewHolderChange` manté els schemas separats per pas.
 - Alguns fluxos tenen `SomStepper`; d'altres no, o usen botons/components antics.
 
 ## Lectura Recomanada Si Es Un Formulari Nou
@@ -56,7 +56,7 @@ I abans d'assumir el patró, comprova dues coses més:
 - `src/containers/NewMember/*`
 - `src/containers/NewContractMember/*`
 - `src/containers/Gurb/*`
-- `src/containers/HolderChange.jsx`
+- `src/containers/NewHolderChange/NewHolderChange.jsx`
 - `src/containers/Contribution.jsx`
 - `src/containers/Generation/GenerationForm/GenerationForm.jsx`
 - `src/containers/Indexed.jsx`
