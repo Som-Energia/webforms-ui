@@ -11,7 +11,11 @@ import SubmitButton from "../../components/Buttons/SubmitButton"
 import Loading from "../../components/Loading"
 import useBackNavigationWarning from "../../hooks/useBackNavigationWarning"
 import { useSyncLanguage } from "../../hooks/useTranslateOptions"
-import { activateLead, getContractSignature } from "../../services/api"
+import {
+  activateLead,
+  executeRequest,
+  getContractSignature,
+} from "../../services/api"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
 import RedirectUrl from "../Gurb/components/RedirectUrl/RedirectUrl"
 import Result from "../Result"
@@ -22,6 +26,7 @@ const NewContractMemberSignatureStandalone = () => {
   const { language, leadId } = useParams()
   const [searchParams] = useSearchParams()
   const cups = searchParams.get("cups")
+  const service = searchParams.get("service")
   const gurbCode = searchParams.get("gurb-code")
   const { trackEvent } = useContext(MatomoContext)
   const navigate = useNavigate()
@@ -50,7 +55,13 @@ const NewContractMemberSignatureStandalone = () => {
     }
 
     setSending(true)
-    activateLead(leadId)
+
+    const requestPromise =
+      service === "holder_change"
+        ? executeRequest(leadId, cups)
+        : activateLead(leadId)
+
+    requestPromise
       .then(() => {
         setError(false)
         navigate(`/${language}/contract/${leadId}/success`)
@@ -138,7 +149,7 @@ const NewContractMemberSignatureStandalone = () => {
         <>
           <SignatureIframe
             apiFunction={getContractSignature}
-            postData={{ leadId, cups }}
+            postData={{ leadId, cups, service }}
             textRecommendation={t("SIGNATURE")}
             textInfo={t("SIGNATURE_INFO")}
             errorDescription={t("CONTRACT_SIGNATURE_ERROR_DESCRIPTION")}

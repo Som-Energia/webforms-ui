@@ -105,8 +105,13 @@ const PaymentMethod = (props) => {
     }
   }, [values?.new_member?.iban])
 
+  const enablesCreditCardPayment =
+    (creditCardPaymentEnabled && values?.especial_cases === undefined) ||
+    (creditCardPaymentEnabled &&
+      values?.especial_cases === "reason_holder_change")
+
   const options = [
-    ...(creditCardPaymentEnabled
+    ...(enablesCreditCardPayment
       ? [
           {
             id: "iban",
@@ -153,7 +158,7 @@ const PaymentMethod = (props) => {
           {t("MEMBER_PAGE_PAYMENT_METHOD")}
         </Typography>
       </Grid>
-      {creditCardPaymentEnabled && (
+      {options.length > 1 && (
         <>
           <Grid item xs={12}>
             <InputTitle text={t("PAYMENT_METHOD_QUESTION")} required={true} />

@@ -433,6 +433,7 @@ const NewContractMemberForm = (props) => {
             {...formikProps}
             leadId={leadId}
             cups={values?.cups}
+            service="contract"
             onSuccess={handleSignatureCompleted}
           />
         )
@@ -476,6 +477,7 @@ const NewContractMemberForm = (props) => {
             {...formikProps}
             leadId={leadId}
             cups={values?.cups}
+            service="contract"
             onSuccess={handleSignatureCompleted}
           />
         )

@@ -62,6 +62,9 @@ const NewMemberForm = lazy(() => import("./containers/NewMember/NewMember"))
 const GurbContractPaymentSuccessful = lazy(
   () => import("./containers/Gurb/pages/Gurb/GurbContractPaymentSuccessful"),
 )
+const NewHolderChangeForm = lazy(
+  () => import("./containers/NewHolderChange/NewHolderChange"),
+)
 
 const AppRoutes = (props) => {
   const { t } = useTranslation()
@@ -673,6 +676,27 @@ const AppRoutes = (props) => {
           />
         ),
       )}
+      {[
+        "/:language/tramits/canvi-titular",
+        "/:language/tramites/cambio-titular",
+        "/:language/tramiteak/titularra-aldatzea",
+      ].map((path) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            <ThemeWrapper theme={webFormsTheme}>
+              <PopUpContextProvider>
+                <LoadingContextProvider>
+                  <SummaryContextProvider>
+                    <NewHolderChangeForm {...props} />
+                  </SummaryContextProvider>
+                </LoadingContextProvider>
+              </PopUpContextProvider>
+            </ThemeWrapper>
+          }
+        />
+      ))}
     </Routes>
   )
 }

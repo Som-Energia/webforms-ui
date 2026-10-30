@@ -115,6 +115,7 @@ describe("Cups component", () => {
         knowledge_of_distri: true,
         tariff_name: "2.0TD",
         has_social_tariff: false,
+        address: "Main Street 123, 2A",
       },
     })
     const cups = "ES0021911991898060KS"
@@ -136,6 +137,7 @@ describe("Cups component", () => {
           knowledge_of_distri: true,
           tariff_name: "2.0TD",
           social_tariff: false,
+          supply_point_address: "Main Street ***, *A",
         }),
       )
     })
@@ -148,6 +150,7 @@ describe("Cups component", () => {
         knowledge_of_distri: true,
         tariff_name: "2.0TD",
         has_social_tariff: false,
+        address: "Main Street 123, 2A",
       },
     })
     const cups = "ES0021911991898060KS"
@@ -169,6 +172,7 @@ describe("Cups component", () => {
           knowledge_of_distri: true,
           tariff_name: "2.0TD",
           social_tariff: false,
+          supply_point_address: "Main Street ***, *A",
         }),
       )
     })

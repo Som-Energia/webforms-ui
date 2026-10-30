@@ -876,5 +876,14 @@
     "PAYMENT_KO_DESCRIPTION": "Actualment, ja hi ha una sol·licitud en tràmit. Contacta amb nosaltres a <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Gràcies.",
     "TOKEN_FORM_ERROR_DESCRIPTION": "Aquest formulari ha caducat o no és vàlid. Si us plau, posa't en contacte amb nosaltres a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisarem la situació. Disculpa las molèsties.",
     "TOKEN_FORM_ERROR": "Aquest formular ja no és vàlid.",
-    "SEND_SIGNATURIT": "Enviar per correu electrònic la firma de la documentació contractual."
+    "SEND_SIGNATURIT": "Enviar per correu electrònic la firma de la documentació contractual.",
+    "TARIFF_POWER_MODIF_INFO": "Per agilitzar el tràmit, farem la gestió amb la potència i tarifa actual. Si necessites fer un canvi de potència o tarifam pots escriure a modifica@somenergia.coop però tingues en compte que es pot endarrerir el canvi de titular.",
+    "NO_MEMBER":" No em conviden ni em vull associar",
+    "NO_MEMBER_BODY":"De moment no m’associaré ni conec a cap persona sòcia",
+    "HOLDER_CHANGE_SUCCESS_TITLE": "Ja ets de Som Energia!",
+    "HOLDER_CHANGE_SUCCESS_DESC": "Rebràs un correu amb el teu número de persona sòcia i amb tota la informació sobre el teu nou contracte.",
+    "HOLDER_CHANGE_ERROR_TITLE": "Hi ha un error i no s'ha pogut realitzar l'operació sol·licitada!",
+    "HOLDER_CHANGE_ERROR_DESC": "Si us plau, intenta-ho una altra vegada d'aquí una estona. Si el problema persisteix, ens pots escriure a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> i revisarem la situació. Disculpa les molèsties-",
+    "SPECIAL_CASES_HOLDER_CHANGE": "Canvi del titular del contracte",
+    "SPECIAL_CASES_REASON_HOLDER_CHANGE": "L’opció més habitual. Per a casos com un canvi d’habitatge"
 }
