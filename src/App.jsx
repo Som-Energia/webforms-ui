@@ -659,8 +659,9 @@ const AppRoutes = (props) => {
         ),
       )}
       {[
-        "/:language/formuario-cambio-titular",
-        "/:language/formulari-canvi-titular",
+        "/:language/tramits/canvi-titular",
+        "/:language/tramites/cambio-titular",
+        "/:language/tramiteak/titularra-aldatzea",
       ].map((path) => (
         <Route
           key={path}
