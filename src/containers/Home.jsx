@@ -39,7 +39,7 @@ const options = [
   },
   {
     title: "New Holder Change",
-    href: `${language}/formuario-cambio-titular`,
+    href: `${language}/tramits/canvi-titular`,
   },
   {
     title: "Preus indexats diaris",
