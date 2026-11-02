@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react"
 
 import Maintenance from "../components/Maintenance"
-import { AppUtils } from "../utils/app.utils"
+import { openExternalPopup } from "../utils/app.utils"
 
 const AvailabilityContext = createContext()
 
@@ -11,7 +11,7 @@ export const AvailabilityContextProvider = ({ children }) => {
   useEffect(() => {
     if (!availability) {
       try {
-        AppUtils.openExternalPopup()
+        openExternalPopup()
       } catch (err) {
         console.error(err)
       }

@@ -38,7 +38,7 @@ import {
 } from "../../services/steps"
 import { isCompanyVat } from "../../services/utils"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
-import { AppUtils } from "../../utils/app.utils"
+import { openExternalPopup } from "../../utils/app.utils"
 import RedirectUrl from "../Gurb/components/RedirectUrl/RedirectUrl"
 import MemberIdentifier from "../NewMember/pages/MemberIdentifier"
 import MemberPersonalData from "../NewMember/pages/MemberPersonalData"
@@ -137,7 +137,7 @@ const NewContractMemberForm = (props) => {
           : values.new_member.nif
       const isCompany = vat ? isCompanyVat(vat) : null
       const param = isCompany === null ? "" : isCompany ? ENTERPRISE : DOMESTIC
-      AppUtils.openExternalPopup(param)
+      openExternalPopup(param)
     } catch (err) {
       console.error("Error calling function from data-function (popup)", err)
     }
