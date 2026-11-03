@@ -179,7 +179,11 @@ const NewHolderChangeSummary = ({ ...props }) => {
       },
     ]
 
-    if (["member-on", "member-link"].includes(values.has_member)) {
+    if (
+      ["member-on", "member-link", "sponsored", "without-member"].includes(
+        values.has_member,
+      )
+    ) {
       paymentFields.shift()
     }
 
