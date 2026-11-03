@@ -20,6 +20,8 @@ import useBackNavigationWarning from "../../hooks/useBackNavigationWarning"
 import { useSyncLanguage } from "../../hooks/useTranslateOptions"
 import { createHolderChangeRequest, executeRequest } from "../../services/api"
 import { newNormalizeHolderChange } from "../../services/newNormalize"
+import { keyByValue, NextStep, valueByKey } from "../../services/NextStep"
+import Stack from "../../services/Stack"
 import { NEW_HOLDER_CHANGE_FORM_SUBSTEPS } from "../../services/steps"
 import MatomoContext from "../../trackers/matomo/MatomoProvider"
 import IdentifyMemberPersonalData from "../NewContractMember/pages/IdentifyMemberPersonalData"
@@ -42,7 +44,7 @@ import newHolderChangeMemberQuestionValidations from "./validations/newHolderCha
 import newHolderChangeSummaryValidations from "./validations/newHolderChangeSummaryValidations"
 import newHolderChangeSupplyPointValidations from "./validations/newHolderChangeSupplyPointValidations"
 
-const MAX_STEP_NUMBER = 9
+const MAX_STEP_NUMBER = Object.keys(NEW_HOLDER_CHANGE_FORM_SUBSTEPS).length - 1
 
 const NewHolderChangeForm = () => {
   const { i18n, t } = useTranslation()
@@ -61,6 +63,7 @@ const NewHolderChangeForm = () => {
   const { trackEvent } = useContext(MatomoContext)
 
   const [activeStep, setActiveStep] = useState(0)
+  const [prevSteps] = useState(new Stack())
 
   useBackNavigationWarning(
     activeStep > 0 && !completed && redsysURL === "",
@@ -101,20 +104,29 @@ const NewHolderChangeForm = () => {
     })
   }
 
-  const nextStep = () => {
+  const nextStep = (formikProps) => {
     let next
     if (summaryField !== undefined) {
       next = NEW_HOLDER_CHANGE_FORM_SUBSTEPS["SUMMARY"]
       setSummaryField(undefined)
     } else {
-      next = activeStep + 1
+      const stepValue =
+        NextStep.NEW_HOLDER_CHANGE_FORM_SUBSTEPS[
+          keyByValue(NEW_HOLDER_CHANGE_FORM_SUBSTEPS, activeStep)
+        ]
+      next = valueByKey(
+        NEW_HOLDER_CHANGE_FORM_SUBSTEPS,
+        stepValue,
+        formikProps.values,
+      )
+      prevSteps.push(activeStep)
     }
     const last = MAX_STEP_NUMBER
     setActiveStep(Math.min(next, last))
   }
 
   const prevStep = () => {
-    let prev = activeStep - 1
+    const prev = prevSteps.pop()
     setActiveStep(Math.max(0, prev))
   }
 
