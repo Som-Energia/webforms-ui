@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 8.6.4 2026-11-03
 
 - NEW: Add method to open external help dialog when api is down
 
