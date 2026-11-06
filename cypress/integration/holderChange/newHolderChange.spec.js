@@ -9,7 +9,7 @@ describe('Holder Change', () => {
 
   beforeEach(() => {
     cy.wait(2000) // Avoid pre-api maintance dialog
-    cy.visit('/es/formuario-cambio-titular')
+    cy.visit('/es/tramits/canvi-titular')
     cy.fixture('holderChange.json').as('data')
     cy.fixture('holderChangePersonaldata.json').as('personaldata')
     cy.fixture('contract.json').as('dataContract')
@@ -51,7 +51,9 @@ describe('Holder Change', () => {
   }
 
   const completeStep3 = (vat) => {
-    cy.identifyNewMember(vat)
+    cy.get('[data-cy="new_member.nif-input"]')
+      .type(vat)
+      .should('have.value', vat)
   }
 
   const completeStep4 = ({ personalPhysicalData, validAddress }) => {
