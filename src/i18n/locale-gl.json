@@ -871,5 +871,15 @@
     "LEAVE_CONTRACT_FORM_DESCRIPTION": "Se volves atrás, perderás o progreso do formulario.",
     "POP_UP_SIPS_CUP": "A distribuidora da túa zona comunícanos que o CUPS está acollido ao bono social. Por lei,  Som Energia non pode ofrecer este bono, por tanto, se cambias á cooperativa perderás esta bonificación. Se, aínda así, queres continuar coa contratación, escribe un correo a <a href='mailto:comercialitzacio@somenergia.coop'>comercialitzacio@somenergia.coop</a>",
     "PAYMENT_OK_DESCRIPTION": "En breve recibirás un correo con toda a información na dirección que nos proporcionaches",
-    "PAYMENT_KO_DESCRIPTION": "Sentímolo, non foi posible levar a cabo a túa solicitude. Actualmente, xa hai unha solicitude en trámite. Contacta connosco en <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Grazas."
+    "PAYMENT_KO_DESCRIPTION": "Sentímolo, non foi posible levar a cabo a túa solicitude. Actualmente, xa hai unha solicitude en trámite. Contacta connosco en <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Grazas.",
+    "NO_MEMBER":" No me conviden ni quiero asociarme",
+    "NO_MEMBER_BODY":"De momento no me asociaré ni conozco a ningunapersona socia",
+    "HOLDER_CHANGE_SUCCESS_TITLE": "Xa es de Som Energia!",
+    "HOLDER_CHANGE_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
+    "HOLDER_CHANGE_ERROR_TITLE": "Hai un erro e non se puido realizar a operación solicitada!",
+    "HOLDER_CHANGE_ERROR_DESC": "Por favor, intentalo outra vez máis tarde. Se o problema persiste, pódesnos escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> e revisamos a situación. Desculpa as molestias.",
+    "SPECIAL_CASES_HOLDER_CHANGE": "Cambio del titular del contrato",
+    "SPECIAL_CASES_REASON_HOLDER_CHANGE": "La opción més habitual. Para casos como un cambio de vivienda",
+    "CHANGE_HOLDER_PROCESS": "Cambio de titularidade",
+    "SELFCONSUMPTION_HOLDERCHANGE": "Compensación por autoproducción (en caso de tener contratada la modalidad de autoconsumo con compensación de excedentes)"
 }

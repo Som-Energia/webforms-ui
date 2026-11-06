@@ -53,4 +53,18 @@ export const NextStep = {
     PAYMENT_INFO: () => "SUMMARY",
     SUMMARY: () => "SIGNATURE",
   },
+  NEW_HOLDER_CHANGE_FORM_SUBSTEPS: {
+    SUPPLY_POINT: () => "MEMBER_QUESTION",
+    MEMBER_QUESTION: (values) =>
+      values.has_member === "member-link" || values.has_member === "member-on"
+        ? "IDENTIFY_MEMBER"
+        : "MEMBER_INFO",
+    IDENTIFY_MEMBER: (values) =>
+      values.has_member === "member-on" ? "ESPECIAL_CASES" : "MEMBER_INFO",
+    MEMBER_INFO: () => "ESPECIAL_CASES",
+    ESPECIAL_CASES: () => "DONATION",
+    DONATION: () => "PAYMENT_INFO",
+    PAYMENT_INFO: () => "SUMMARY",
+    SUMMARY: () => "SIGNATURE",
+  },
 }

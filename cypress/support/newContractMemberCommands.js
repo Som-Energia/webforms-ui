@@ -119,11 +119,19 @@ Cypress.Commands.add('selfconsumptionData', (selfConsumption) => {
 Cypress.Commands.add('contractMemberPaymentData', (paymentdata) => {
   const isCreditCard = paymentdata.paymentMethod === 'credit_card'
 
-  cy.choosePaymentMethod(isCreditCard)
+  // Payment Chooser maybe not exists in DOM
+  cy.get('body').then(($body) => {
+    const $question = $body.find('[data-cy="method-payment-question"]')
+    if ($question.length > 0 &&
+        $question.find('div[role="button"]').length === 2) {
+      cy.choosePaymentMethod(isCreditCard)
+    }
+  })
 
   if (!isCreditCard) {
     cy.get('[data-cy="iban_number"]').type(paymentdata.iban)
   }
+
   cy.get('[data-cy="payment_auth_check"]').click()
   cy.get('[data-cy=accept]').click()
 
@@ -157,12 +165,20 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContractWithGurbCode', () => {
   throw new Error('Use acceptTermsAndsubmitNewContractFlow with explicit flow options')
 })
 
+Cypress.Commands.add('acceptTermsAndsubmitNewContractWithHolderChangeService', ({ status = true, error = false, cups, leadId = '1234' }) => {
+  cy.intercept('post', `/procedures/request/${leadId}/${cups}/execute`, {
+    statusCode: 200,
+    body: {}
+  })
+  cy.acceptTermsAndsubmitNewContractFlow({ status, leadId, error, cups })
+})
+
 Cypress.Commands.add('acceptTermsAndsubmitNewContractFlow', ({
   status = true,
   error = false,
   leadId = '1234',
   cups,
-  gurbCode
+  gurbCode,
 } = {}) => {
   cy.intercept('POST', '/procedures/contract', {
     statusCode: !error ? 200 : 500,
@@ -179,7 +195,7 @@ Cypress.Commands.add('acceptTermsAndsubmitNewContractFlow', ({
   })
 
   if (status && !error) {
-    cy.intercept('GET', `/procedures/sign/contract/${leadId}?cups=${encodeURIComponent(cups)}`, {
+    cy.intercept('GET', `/procedures/sign/contract/${leadId}?cups=${encodeURIComponent(cups)}&service=*` , {
       statusCode: 200,
       body: {
         data: {
