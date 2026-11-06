@@ -881,5 +881,6 @@
     "HOLDER_CHANGE_ERROR_DESC": "Errore bat gertatu da eta ezin izan da gauzatu eskatutako eragiketa.",
     "SPECIAL_CASES_HOLDER_CHANGE": "Cambio del titular del contrato",
     "SPECIAL_CASES_REASON_HOLDER_CHANGE": "La opción més habitual. Para casos como un cambio de vivienda",
-    "CHANGE_HOLDER_PROCESS": "Titularra aldatzea"
+    "CHANGE_HOLDER_PROCESS": "Titularra aldatzea",
+    "SELFCONSUMPTION_HOLDERCHANGE": "Compensación por autoproducción (en caso de tener contratada la modalidad de autoconsumo con compensación de excedentes)"
 }

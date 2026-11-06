@@ -880,5 +880,6 @@
     "HOLDER_CHANGE_ERROR_DESC": "Por favor, intentalo outra vez máis tarde. Se o problema persiste, pódesnos escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> e revisamos a situación. Desculpa as molestias.",
     "SPECIAL_CASES_HOLDER_CHANGE": "Cambio del titular del contrato",
     "SPECIAL_CASES_REASON_HOLDER_CHANGE": "La opción més habitual. Para casos como un cambio de vivienda",
-    "CHANGE_HOLDER_PROCESS": "Cambio de titularidade"
+    "CHANGE_HOLDER_PROCESS": "Cambio de titularidade",
+    "SELFCONSUMPTION_HOLDERCHANGE": "Compensación por autoproducción (en caso de tener contratada la modalidad de autoconsumo con compensación de excedentes)"
 }

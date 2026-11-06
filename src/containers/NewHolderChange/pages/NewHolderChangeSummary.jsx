@@ -316,6 +316,10 @@ const NewHolderChangeSummary = ({ ...props }) => {
       title: t("REVIEW_PRICES_POWER_TITLE"),
       field: "potencia",
     },
+    {
+      title: t("SELFCONSUMPTION_HOLDERCHNAGE"),
+      field: "excedent_autoconsum",
+    },
   ]
 
   useEffect(() => {
