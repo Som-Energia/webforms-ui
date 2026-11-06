@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- REF: clean all old and unused files about holder change
+
 ## 8.6.4 2026-11-03
 
 - NEW: Add method to open external help dialog when api is down
