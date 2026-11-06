@@ -317,7 +317,7 @@ const NewHolderChangeSummary = ({ ...props }) => {
       field: "potencia",
     },
     {
-      title: t("SELFCONSUMPTION_HOLDERCHNAGE"),
+      title: t("SELFCONSUMPTION_HOLDERCHANGE"),
       field: "excedent_autoconsum",
     },
   ]
