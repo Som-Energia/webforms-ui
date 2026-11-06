@@ -36,7 +36,6 @@ const CancellationConfirm = lazy(
   () => import("./containers/CancellationConfirm"),
 )
 const D1Detail = lazy(() => import("./containers/D1Detail"))
-const HolderChange = lazy(() => import("./containers/HolderChange"))
 const Failure = lazy(() => import("./containers/Failure"))
 const Success = lazy(() => import("./containers/Success"))
 const ModifyContract = lazy(() => import("./containers/ModifyContract"))
@@ -168,23 +167,6 @@ const AppRoutes = (props) => {
           </ThemeWrapper>
         }
       />
-      <Route
-        path="/holder-change"
-        element={
-          <ThemeWrapper theme={oldWebFormsTheme}>
-            <HolderChange {...props} />
-          </ThemeWrapper>
-        }
-      />
-      <Route
-        path="/:language/change-ownership/"
-        element={
-          <ThemeWrapper theme={oldWebFormsTheme}>
-            <HolderChange {...props} />
-          </ThemeWrapper>
-        }
-      />
-
       {[
         "/:language/serveis/tendencia-dels-preus",
         "/:language/servicios/tendencia-de-los-precios",
