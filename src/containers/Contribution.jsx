@@ -27,7 +27,7 @@ import ContributionDetails from "./Contribution/ContributionDetails"
 import MemberIdentifier from "./Contribution/MemberIdentifier"
 import Review from "./Contribution/Review"
 import Failure from "./Failure"
-import PersonalData from "./HolderChange/PersonalData"
+import PersonalData from "./shared/PersonalData"
 import Success from "./Success"
 
 const MAX_STEP_NUMBER = 4
