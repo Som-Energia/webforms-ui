@@ -875,7 +875,7 @@
     "NO_MEMBER":" No me conviden ni quiero asociarme",
     "NO_MEMBER_BODY":"De momento no me asociaré ni conozco a ningunapersona socia",
     "HOLDER_CHANGE_SUCCESS_TITLE": "Xa es de Som Energia!",
-    "HOLDER_CHANGE_SUCCESS_DESC": "Recibirás un correo co teu número de persoa socia e con toda a información sobre o teu novo contrato.",
+    "HOLDER_CHANGE_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
     "HOLDER_CHANGE_ERROR_TITLE": "Hai un erro e non se puido realizar a operación solicitada!",
     "HOLDER_CHANGE_ERROR_DESC": "Por favor, intentalo outra vez máis tarde. Se o problema persiste, pódesnos escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> e revisamos a situación. Desculpa as molestias.",
     "SPECIAL_CASES_HOLDER_CHANGE": "Cambio del titular del contrato",

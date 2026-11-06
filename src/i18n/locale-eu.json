@@ -876,7 +876,7 @@
     "NO_MEMBER":" No me conviden ni quiero asociarme",
     "NO_MEMBER_BODY":"De momento no me asociaré ni conozco a ningunapersona socia",
     "HOLDER_CHANGE_SUCCESS_TITLE": "Som Energiaren bazkidea zara jada!",
-    "HOLDER_CHANGE_SUCCESS_DESC": "Mezu bat jasoko duzu zure bazkide-zenbakiarekin eta kontratu berriari buruzko informazio guztiarekin.",
+    "HOLDER_CHANGE_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
     "HOLDER_CHANGE_ERROR_TITLE": "Mesedez, saiatu berriro geroago. Arazoa konpontzen ez bada, idatzi <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> helbidera eta egoera aztertuko dugu. Barkatu eragozpenak.",
     "HOLDER_CHANGE_ERROR_DESC": "Errore bat gertatu da eta ezin izan da gauzatu eskatutako eragiketa.",
     "SPECIAL_CASES_HOLDER_CHANGE": "Cambio del titular del contrato",
