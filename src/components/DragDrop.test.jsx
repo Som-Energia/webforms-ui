@@ -107,6 +107,29 @@ describe("DragDrop", () => {
     ])
   })
 
+  test("uploads the same file again after it is removed", async () => {
+    apiMocks.uploadFile.mockResolvedValue({
+      data: { code: "UPLOAD_OK", file_hash: "hash-2" },
+    })
+    const user = userEvent.setup()
+    const file = new File(["pdf"], "invoice.pdf", { type: "application/pdf" })
+    const { container, onChange } = renderComponent()
+    const input = container.querySelector('input[type="file"]')
+
+    await user.upload(input, file)
+    expect(await screen.findByText("invoice.pdf")).toBeInTheDocument()
+    await user.click(screen.getByRole("button", { name: "delete" }))
+    expect(onChange).toHaveBeenLastCalledWith([])
+
+    await user.upload(input, file)
+
+    expect(apiMocks.uploadFile).toHaveBeenCalledTimes(2)
+    expect(await screen.findByText("invoice.pdf")).toBeInTheDocument()
+    expect(onChange).toHaveBeenLastCalledWith([
+      { filename: "invoice.pdf", filehash: "hash-2" },
+    ])
+  })
+
   test("shows an error and skips upload for an invalid selected file type", () => {
     const file = new File(["text"], "notes.txt", { type: "text/plain" })
     const { container, onChange } = renderComponent()

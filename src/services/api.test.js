@@ -660,12 +660,16 @@ describe("api", () => {
     const { api } = await loadApiModule({ axiosImpl: axios })
 
     await expect(
-      api.getContractSignature({ leadId: "lead-42", cups: "ES 123/ABC" }),
+      api.getContractSignature({
+        leadId: "lead-42",
+        cups: "ES 123/ABC",
+        service: "contract",
+      }),
     ).resolves.toEqual({ url: "signed" })
 
     expect(axios).toHaveBeenCalledWith({
       method: "GET",
-      url: `${WEBFORMS_API_URL}/procedures/sign/contract/lead-42?cups=ES+123%2FABC`,
+      url: `${WEBFORMS_API_URL}/procedures/sign/contract/lead-42?cups=ES+123%2FABC&service=contract`,
     })
   })
 

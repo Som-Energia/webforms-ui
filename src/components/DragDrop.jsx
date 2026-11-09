@@ -116,6 +116,7 @@ const DragDrop = ({ fieldName, required, values, onChange }) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
+    e.target.value = ""
     if (file) {
       if (!validateFileType(file)) {
         setError(t("INVALID_FILETYPE"))

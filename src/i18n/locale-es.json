@@ -876,5 +876,15 @@
     "PAYMENT_KO_DESCRIPTION": "Lo sentimos, no ha sido posible llevar a cabo tu solicitud. Actualmente, ya hay una solicitud en trámite. Contacta con nosotros en <a href=\"mailto:comercialitzacio@somenergia.coop\">comercialitzacio@somenergia.coop</a><br>Gracias.",
     "TOKEN_FORM_ERROR": "Este formulario ya no es válido.",
     "TOKEN_FORM_ERROR_DESCRIPTION": "Este formulario ha caducado o no es válido. Por favor, ponte en contacto con nosotros en <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisaremos la situación. Disculpa las molestias.",
-    "SEND_SIGNATURIT": "Enviar al correo electrónico del cliente la firma de la documentación del contrato."
+    "SEND_SIGNATURIT": "Enviar al correo electrónico del cliente la firma de la documentación del contrato.",
+    "NO_MEMBER":" No me conviden ni quiero asociarme",
+    "NO_MEMBER_BODY":"De momento no me asociaré ni conozco a ningunapersona socia",
+    "HOLDER_CHANGE_SUCCESS_TITLE": "¡Ya eres de Som Energia!",
+    "HOLDER_CHANGE_SUCCESS_DESC": "Recibirás un correo con toda la información sobre tu nuevo contrato.",
+    "HOLDER_CHANGE_ERROR_TITLE": "¡Hay un error y no se ha podido realizar la operación solicitada!",
+    "HOLDER_CHANGE_ERROR_DESC": "Por favor, inténtalo otra vez más tarde. Si el problema persiste, nos puedes escribir a <a href=\"mailto:info@somenergia.coop\">info@somenergia.coop</a> y revisaremos la situación. Disculpa las molestias.",
+    "SPECIAL_CASES_HOLDER_CHANGE": "Cambio del titular del contrato",
+    "SPECIAL_CASES_REASON_HOLDER_CHANGE": "La opción més habitual. Para casos como un cambio de vivienda",
+    "CHANGE_HOLDER_PROCESS": "Cambio de titular",
+    "SELFCONSUMPTION_HOLDERCHANGE": "Compensación por autoproducción (en caso de tener contratada la modalidad de autoconsumo con compensación de excedentes)"
 }
