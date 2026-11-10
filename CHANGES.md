@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.6.5 2026-11-10
+
+- HOTFIX: Remove Valencia error in zip-ine file
+
 ## 8.6.4 2026-11-03
 
 - NEW: Add method to open external help dialog when api is down
