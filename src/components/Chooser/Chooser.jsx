@@ -101,7 +101,11 @@ const Chooser = (props) => {
       {options.map((option, index) => (
         <Grid key={index} item xs={xsSize} sm={smSize} md={mdSize} lg={lgSize}>
           <Option
-            isSelected={option?.id === value}
+            isSelected={
+              Array.isArray(value)
+                ? value.includes(option?.id)
+                : option?.id === value
+            }
             setSelected={setOptionSelection}
             optionId={option?.id}
             icon={option?.icon}

@@ -171,6 +171,28 @@ describe("Normalize new holder-change form", () => {
     },
   )
 
+  test("enables death and electrodependency together with their uploads", () => {
+    data.especial_cases = "reason_death_electrodep"
+    data.supply_point.attachments_reason_death = [{ filehash: "death" }]
+    data.supply_point.attachments_reason_electrodep = [{ filehash: "medical" }]
+    data.supply_point.attachments_reason_electrodep_census = [
+      { filehash: "census" },
+    ]
+
+    const result = newNormalizeHolderChange(data)
+
+    expect(result.especial_cases).toStrictEqual({
+      reason_death: true,
+      reason_merge: false,
+      reason_electrodep: true,
+    })
+    expect(result.attachments).toStrictEqual([
+      { filename: "death", category: "holder_change_death" },
+      { filename: "medical", category: "holder_change_medical" },
+      { filename: "census", category: "holder_change_medical" },
+    ])
+  })
+
   test("omits attachments when all upload lists are empty", () => {
     expect(newNormalizeHolderChange(data)).not.toHaveProperty("attachments")
   })

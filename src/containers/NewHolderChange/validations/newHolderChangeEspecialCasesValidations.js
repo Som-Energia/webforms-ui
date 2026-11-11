@@ -12,9 +12,17 @@ const newHolderChangeEspecialCasesValidations = Yup.object().shape({
       "reason_death",
       "reason_merge",
       "reason_electrodep",
+      "reason_death_electrodep",
     ]),
   supply_point: Yup.object().when("especial_cases", (value, schema) => {
     switch (value) {
+      case "reason_death_electrodep":
+        return schema.shape({
+          attachments_reason_death: requiredAttachments,
+          attachments_reason_electrodep: requiredAttachments,
+          attachments_reason_electrodep_census: requiredAttachments,
+        })
+
       case "reason_death":
         return schema.shape({
           attachments_reason_death: requiredAttachments,

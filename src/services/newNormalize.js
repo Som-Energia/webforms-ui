@@ -254,13 +254,19 @@ export const newNormalizeHolderChange = (data) => {
     reason_electrodep: false,
   }
 
-  if (data.especial_cases === "reason_death")
+  if (
+    data.especial_cases === "reason_death" ||
+    data.especial_cases === "reason_death_electrodep"
+  )
     finalHolderChange["especial_cases"]["reason_death"] = true
 
   if (data.especial_cases === "reason_merge")
     finalHolderChange["especial_cases"]["reason_merge"] = true
 
-  if (data.especial_cases === "reason_electrodep")
+  if (
+    data.especial_cases === "reason_electrodep" ||
+    data.especial_cases === "reason_death_electrodep"
+  )
     finalHolderChange["especial_cases"]["reason_electrodep"] = true
 
   const attachments = [

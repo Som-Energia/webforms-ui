@@ -19,6 +19,12 @@ Els casos especials són on més fàcilment es trenquen validacions perquè comb
 
 ## Payload NewHolderChange
 
+`NewHolderChangeEspecialCases` permet seleccionar `reason_death` i `reason_electrodep` per separat o alhora (`reason_death_electrodep`). Tornar a seleccionar un motiu el desmarca; si no en queda cap, torna a `reason_holder_change`. `reason_merge` i `reason_holder_change` son exclusius.
+
+La combinacio exigeix els tres adjunts: defuncio, certificat medic i cens. En afegir o treure un motiu es conserven els adjunts dels motius que continuen seleccionats i es buiden els altres. Seleccionar `reason_holder_change` conserva les llistes existents, com abans. Qualsevol cas especial fixa el pagament a IBAN.
+
+La validacio es a `src/containers/NewHolderChange/validations/newHolderChangeEspecialCasesValidations.js`. El payload de `reason_death_electrodep` activa `reason_death` i `reason_electrodep`, pero no `reason_merge`.
+
 Al formulari `NewHolderChange`, `newNormalizeHolderChange` combina les quatre llistes d'adjunts en un sol array del payload. Cada `filehash` es transforma en `filename`, amb la categoria determinada pel camp d'origen:
 
 | Camp                                   | Categoria               |
