@@ -402,7 +402,7 @@ const NewContractMemberSummary = (props) => {
       title: t("REVIEW_PRICES_POWER_TITLE"),
       field: "potencia",
     },
-    { title: t("SELFCONSUMPTION"), field: "energia_autoconsumida" },
+    { title: t("SELFCONSUMPTION"), field: "excedent_autoconsum" },
   ]
 
   useEffect(() => {
