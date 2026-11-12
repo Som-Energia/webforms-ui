@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.6.6 2026-11-12
+
+- FIX: Use the correct ERP self-consumption field in the contract summary
+
 ## 8.6.5 2026-11-10
 
 - HOTFIX: Remove Valencia error in zip-ine file
