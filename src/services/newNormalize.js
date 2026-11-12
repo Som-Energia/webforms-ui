@@ -232,10 +232,12 @@ export const newNormalizeHolderChange = (data) => {
       data.new_member.payment_authorization_accepted
   }
 
-  finalHolderChange["contract_owner"] = normalizeClient(data.new_member)
-  finalHolderChange["contract_owner"]["address"] = normalizeAddress(
-    data.address,
-  )
+  if (data.has_member !== "member-on") {
+    finalHolderChange["contract_owner"] = normalizeClient(data.new_member)
+    finalHolderChange["contract_owner"]["address"] = normalizeAddress(
+      data.address,
+    )
+  }
 
   if (data.member.link_member) {
     finalHolderChange["linked_member_info"] = {
