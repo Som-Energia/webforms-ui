@@ -47,6 +47,7 @@ export default class QueryParamsUtils {
   }
 
   validateToken() {
+    // TODO: ADD STATUS IN FEATURE FLAGS
     let status = LOADING
     if (!this.token) {
       status = VALID
