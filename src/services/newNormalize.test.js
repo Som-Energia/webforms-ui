@@ -57,7 +57,7 @@ describe("Normalize new holder-change form", () => {
 
   test("normalizes the complete direct-debit payload", () => {
     expect(newNormalizeHolderChange(data)).toStrictEqual({
-      linked_member: "new-member",
+      linked_member: "new_member",
       contract_info: { cups: data.cups },
       payment_type: "remesa",
       iban: client.physical.entryValues.iban,
@@ -83,8 +83,8 @@ describe("Normalize new holder-change form", () => {
   test.each([
     ["member-on", true, "already_member"],
     ["member-off", true, "sponsored"],
-    ["member-off", false, "new-member"],
-    ["member-on", false, "without-member"],
+    ["member-off", false, "new_member"],
+    ["member-on", false, "without_member"],
   ])("maps %s with link_member=%s to %s", (hasMember, linkMember, expected) => {
     data.has_member = hasMember
     data.member.link_member = linkMember

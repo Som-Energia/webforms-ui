@@ -209,8 +209,8 @@ export const newNormalizeHolderChange = (data) => {
         ? "already_member"
         : "sponsored"
       : data.has_member === "member-off"
-        ? "new-member"
-        : "without-member",
+        ? "new_member"
+        : "without_member",
     contract_info: {
       cups: data.cups,
     },
