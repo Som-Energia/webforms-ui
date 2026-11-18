@@ -17,8 +17,6 @@ const NewHolderChangeMemberQuestion = ({ ...props }) => {
   const { t } = useTranslation()
   const trackID = "member-question"
 
-  const CTSSVAT = import.meta.env.VITE_HOLDERCHANGE_TRIAL_PERIOD_MEMBER_VAT
-  const CTSSNUMBER = import.meta.env.VITE_HOLDERCHANGE_TRIAL_PERIOD_MEMBER_NUMBER
   const memberMandatoryEnabled = JSON.parse(
     import.meta.env.VITE_FEATURE_FLAGS || "{}",
   ).isMemberMandatoryForHolderchange
@@ -27,18 +25,11 @@ const NewHolderChangeMemberQuestion = ({ ...props }) => {
     setValues((values) => ({
       ...values,
       has_member: value,
-      member:
-        value === "without-member"
-          ? {
-              number: CTSSNUMBER,
-              nif: CTSSVAT,
-              link_member: true,
-            }
-          : {
-              number: "",
-              nif: "",
-              link_member: false,
-            },
+      member: {
+        number: "",
+        nif: "",
+        link_member: false,
+      },
     }))
   }
 
