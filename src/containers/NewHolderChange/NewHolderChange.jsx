@@ -90,17 +90,17 @@ const NewHolderChangeForm = () => {
 
   const trackSuccess = () => {
     trackEvent({
-      category: "NewHolderChange",
-      action: "newHolderChangeFormOk",
-      name: "send-new-holder-change-ok",
+      category: "holderChange",
+      action: "holderChangeFormOk",
+      name: "send-holder-change-ok",
     })
   }
 
   const sendTrackEvent = (id) => {
     trackEvent({
-      category: "NewHolderChange",
-      action: "setNewHolderChangeStep",
-      name: `new-holder-change-step-${id}`,
+      category: "holderChange",
+      action: "setHolderChangeStep",
+      name: `holder-change-step-${id}`,
     })
   }
 
@@ -155,9 +155,9 @@ const NewHolderChangeForm = () => {
   }
   const handleSignatureCompleted = (cups) => {
     trackEvent({
-      category: "NewHolderChange",
+      category: "HolderChange",
       action: "signatureCompleted",
-      name: "new-holder-change-signature-completed",
+      name: "holder-change-signature-completed",
     })
     setSignatureCompleted(true)
     handleSignatureSuccess(cups)
@@ -166,8 +166,8 @@ const NewHolderChangeForm = () => {
   const handleCreateContract = async (values) => {
     trackEvent({
       category: "Send",
-      action: "sendNewContractMemberClick",
-      name: "send-new-contract-member",
+      action: "sendHolderChangeClick",
+      name: "send-holder-change",
     })
 
     formContainer.current?.scrollIntoView({
@@ -187,9 +187,9 @@ const NewHolderChangeForm = () => {
 
           if (redsysEndpoint && paymentData) {
             trackEvent({
-              category: "NewHolderChange",
+              category: "holderChange",
               action: "paymentCreated",
-              name: "new-holder-change-payment-created",
+              name: "holder-change-payment-created",
             })
             setRedsysData({
               redsys_endpoint: redsysEndpoint,
