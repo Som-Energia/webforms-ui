@@ -11,7 +11,7 @@ const WEBFORMS_API_URL =
 export const validateMgmToken = async (token) => {
   return axios({
     method: "POST",
-    url: `{$WEBFORMS_API_URL}/procedures/sponsored-contract/token/validate`,
+    url: `${WEBFORMS_API_URL}/procedures/sponsored-contract/token/validate`,
     data: { token },
   }).then((response) => {
     return response.data

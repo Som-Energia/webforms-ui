@@ -24,15 +24,19 @@ if (roots.length) {
     const root = document.querySelectorAll("[id='root']")[index]
     try {
       const params = new URLSearchParams(document.location.search)
-      const featureFlags = JSON.parse(
-        import.meta.env?.VITE_FEATURE_FLAGS || "{}",
-      )
+      let featureFlags = JSON.parse(import.meta.env?.VITE_FEATURE_FLAGS || "{}")
       let queryParamsUtils = undefined;
       if (params.has("token") && params.has("tt")) {
         const token = params.get("token")
         const tt = params.get("tt")
-        queryParamsUtils = new QueryParamsUtils(token, tt)
-        queryParamsUtils.processToken(featureFlags)
+        queryParamsUtils = new QueryParamsUtils(token, tt, featureFlags)
+        await queryParamsUtils.buildFeatureFlagsFromToken()
+        console.log(queryParamsUtils.ff)
+        featureFlags = queryParamsUtils.ff
+      } else if (params.has("token") || params.has("tt")) {
+        throw new Error(
+          "Invalid form format, It is necessary for both values ​​to be present (token, tt)",
+        )
       }
 
       initDevTools(props.version, props.supportedApiVersion, featureFlags)
@@ -47,6 +51,7 @@ if (roots.length) {
       )
     } catch (err) {
       console.error(err)
+      //TODO: ARA QUE HI HA EL CODI D'ERROR PELS DIFERENTS CASOS, POTSER CAL PENSAR EN UN MISSATGE CONCRET PER L'USUARI A APPERROR
       ReactDOM.createRoot(root).render(<AppError />)
     }
   })
