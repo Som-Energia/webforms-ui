@@ -1,6 +1,7 @@
 import { creditCardPaymentEnabled } from "./paymentMethods"
 
-export const buildInitialValues = (language, { tariff_mode }) => ({
+export const buildInitialValues = (language, { tariff_mode, token }) => ({
+  ...(token ? { token } : {}),
   cups: "",
   cups_valid: false,
   social_tariff: false,

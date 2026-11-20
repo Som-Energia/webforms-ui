@@ -87,6 +87,8 @@ const NewContractMemberForm = (props) => {
   const gurb_id = searchParams.get("gurb_id")
   const owner = searchParams.get("owner")
   const lead_tag = searchParams.get("lead_tag")
+  const token = searchParams.get("token")
+  const tt = searchParams.get("tt")
 
   const [redsysURL, setRedsysURL] = useState("")
   const [redsysData, setRedsysData] = useState()
@@ -154,8 +156,12 @@ const NewContractMemberForm = (props) => {
   }, [activeStep])
 
   const initialValues = useMemo(
-    () => buildInitialValues(i18n.language, { tariff_mode: tariff }),
-    [i18n.language, tariff],
+    () =>
+      buildInitialValues(i18n.language, {
+        tariff_mode: tariff,
+        token: tt === "sponsoredContract" ? token : undefined,
+      }),
+    [i18n.language, tariff, token, tt],
   )
 
   const validationSchemasLinkMember = [

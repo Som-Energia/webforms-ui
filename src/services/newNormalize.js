@@ -184,6 +184,9 @@ export const newNormalizeContract = (data, gurbCode, owner, lead_tag) => {
   if (lead_tag) {
     finalContract["lead_tag"] = lead_tag
   }
+  if (data.token) {
+    finalContract["token"] = data.token
+  }
 
   return finalContract
 }
