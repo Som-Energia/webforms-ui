@@ -31,7 +31,6 @@ if (roots.length) {
         const tt = params.get("tt")
         queryParamsUtils = new QueryParamsUtils(token, tt, featureFlags)
         await queryParamsUtils.buildFeatureFlagsFromToken()
-        console.log(queryParamsUtils.ff)
         featureFlags = queryParamsUtils.ff
       } else if (params.has("token") || params.has("tt")) {
         throw new Error(

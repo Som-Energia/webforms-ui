@@ -82,7 +82,12 @@ const validateAndDecodeSponsoredToken = async (token) => {
     )
   }
 
-  if (typeof response?.status !== "string") {
+  if (
+    !response?.data ||
+    typeof response.data !== "object" ||
+    !response.data.expires_at ||
+    response.data.result
+  ) {
     throw new TokenValidationError(
       TOKEN_ERROR.INVALID_RESPONSE,
       "Sponsored token validation returned an unexpected response",
