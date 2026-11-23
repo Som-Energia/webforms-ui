@@ -85,8 +85,8 @@ const validateAndDecodeSponsoredToken = async (token) => {
   if (
     !response?.data ||
     typeof response.data !== "object" ||
-    !response.data.expires_at ||
-    response.data.result
+    !response.data.result ||
+    (response.data.result === "ok" && !response.data.expires_at)
   ) {
     throw new TokenValidationError(
       TOKEN_ERROR.INVALID_RESPONSE,
@@ -94,7 +94,7 @@ const validateAndDecodeSponsoredToken = async (token) => {
     )
   }
 
-  if (response.status !== "ok") {
+  if (response.data.result !== "ok") {
     throw new TokenValidationError(
       TOKEN_ERROR.INVALID_TOKEN,
       "Sponsored token is invalid",
