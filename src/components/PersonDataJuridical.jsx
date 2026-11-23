@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 
-import { useHandleBlur } from "../hooks/useHandleBlur"
+import { useHandleBlur, useHandleBlurEmail } from "../hooks/useHandleBlur"
 import { useHandleChange } from "../hooks/useHandleChange"
 import AddressField from "./AddressField"
 import InputField from "./InputField/InputField"
@@ -37,6 +37,7 @@ const PersonDataJuridical = (props) => {
 
   const handleChange = useHandleChange(setFieldValue)
   const handleBlur = useHandleBlur(setFieldTouched)
+  const handleBlurEmail = useHandleBlurEmail(setFieldValue, setFieldTouched)
 
   const languages = {
     es_ES: "Español",
@@ -121,7 +122,7 @@ const PersonDataJuridical = (props) => {
               name={`${entity}.email`}
               textFieldName={t("EMAIL")}
               handleChange={handleChange}
-              handleBlur={handleBlur}
+              handleBlur={handleBlurEmail}
               touched={touched[entity]?.email}
               value={values[entity]?.email}
               error={errors[entity]?.email}
@@ -133,7 +134,7 @@ const PersonDataJuridical = (props) => {
               name={`${entity}.email2`}
               textFieldName={t("HOLDER_EMAIL_2")}
               handleChange={handleChange}
-              handleBlur={handleBlur}
+              handleBlur={handleBlurEmail}
               touched={touched[entity]?.email2}
               value={values[entity]?.email2}
               error={errors[entity]?.email2}
