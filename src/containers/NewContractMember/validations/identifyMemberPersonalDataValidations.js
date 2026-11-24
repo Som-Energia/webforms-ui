@@ -20,7 +20,9 @@ const identifyMemberPersonalDataValidations = Yup.object().shape({
     surname2: Yup.string(),
     email: Yup.string().required("NO_EMAIL").email("NO_EMAIL"),
     email2: Yup.string().test("repeatEmail", "NO_REPEATED_EMAIL", function () {
-      return this.parent.email === this.parent.email2
+      return (
+        this.parent.email?.toLowerCase() === this.parent.email2?.toLowerCase()
+      )
     }),
     phone: Yup.string().required("NO_PHONE"),
     phone_code: Yup.string().required("NO_PHONE"),

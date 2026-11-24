@@ -3,7 +3,6 @@ import { describe, expect, test, vi } from "vitest"
 
 import {
   useHandleBlur,
-  useHandleBlurEmail,
   useHandleBlurValueIsNumberOrOption,
 } from "./useHandleBlur"
 
@@ -15,27 +14,6 @@ describe("useHandleBlur", () => {
     result.current({ target: { name: "holder.vat" } })
 
     expect(setFieldTouched).toHaveBeenCalledWith("holder.vat", true)
-  })
-})
-
-describe("useHandleBlurEmail", () => {
-  test("validates the normalized value and marks the field as touched without revalidation", () => {
-    const setFieldValue = vi.fn()
-    const setFieldTouched = vi.fn()
-    const { result } = renderHook(() =>
-      useHandleBlurEmail(setFieldValue, setFieldTouched),
-    )
-
-    result.current({
-      target: { name: "holder.email", value: "Nom@EXEMPLE.CAT" },
-    })
-
-    expect(setFieldValue).toHaveBeenCalledWith(
-      "holder.email",
-      "nom@exemple.cat",
-      true,
-    )
-    expect(setFieldTouched).toHaveBeenCalledWith("holder.email", true, false)
   })
 })
 

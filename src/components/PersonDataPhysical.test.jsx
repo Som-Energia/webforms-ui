@@ -286,7 +286,7 @@ describe("PersonDataPhysical", () => {
   })
 
   test.each(["email", "email2"])(
-    "normalizes %s on blur and marks it as touched",
+    "preserves the original casing of %s on blur and marks it as touched",
     async (field) => {
       const props = buildRenderProps()
       render(<ControlledPersonDataPhysical {...props} />)
@@ -296,7 +296,7 @@ describe("PersonDataPhysical", () => {
       fireEvent.blur(input)
 
       await waitFor(() => {
-        expect(input).toHaveValue("nom.cognom@exemple.cat")
+        expect(input).toHaveValue("Nom.Cognom@EXEMPLE.CAT")
         expect(props.setFieldTouchedSpy).toHaveBeenCalledWith(
           `new_member.${field}`,
           true,

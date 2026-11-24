@@ -1,16 +1,5 @@
 import { useCallback } from "react"
 
-export const useHandleBlurEmail = (setFieldValue, setFieldTouched) => {
-  return useCallback(
-    (event) => {
-      const { name, value } = event.target
-      setFieldValue(name, value.toLowerCase(), true)
-      setFieldTouched(name, true, false)
-    },
-    [setFieldValue, setFieldTouched],
-  )
-}
-
 export const useHandleBlur = (setFieldTouched) => {
   return useCallback(
     (event) => {
