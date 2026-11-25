@@ -74,15 +74,17 @@ describe("Check Contract new Form (normalize function)", () => {
     ).toStrictEqual(newContractCases.alreadyMember.normalizedData)
   })
 
-  test("Normalize Contract data (sponsored)", () => {
-    const values = structuredClone(newContractCases.sponsored.entryValues)
-    values.new_member.email = values.new_member.email.toUpperCase()
-    const original = structuredClone(values)
+  test("sends the sponsored holder email in lowercase without changing the form values", () => {
+    const { entryValues, normalizedData } = newContractCases.sponsored
 
-    expect(newNormalizeContract(values)).toStrictEqual(
-      newContractCases.sponsored.normalizedData,
-    )
-    expect(values).toStrictEqual(original)
+    const formValues = structuredClone(entryValues)
+    formValues.new_member.email = formValues.new_member.email.toUpperCase()
+    const formValuesBeforeNormalization = structuredClone(formValues)
+
+    const normalizedContract = newNormalizeContract(formValues)
+
+    expect(normalizedContract).toStrictEqual(normalizedData)
+    expect(formValues).toStrictEqual(formValuesBeforeNormalization)
   })
 
   test("Normalize Contract data (campaign-offer)", () => {
@@ -91,15 +93,17 @@ describe("Check Contract new Form (normalize function)", () => {
     ).toStrictEqual(newContractCases.campaign.normalizedData)
   })
 
-  test("Normalize Contract data (newMember)", () => {
-    const values = structuredClone(newContractCases.newMember.entryValues)
-    values.new_member.email = values.new_member.email.toUpperCase()
-    const original = structuredClone(values)
+  test("sends the new member email in lowercase without changing the form values", () => {
+    const { entryValues, normalizedData } = newContractCases.newMember
 
-    expect(newNormalizeContract(values)).toStrictEqual(
-      newContractCases.newMember.normalizedData,
-    )
-    expect(values).toStrictEqual(original)
+    const formValues = structuredClone(entryValues)
+    formValues.new_member.email = formValues.new_member.email.toUpperCase()
+    const formValuesBeforeNormalization = structuredClone(formValues)
+
+    const normalizedContract = newNormalizeContract(formValues)
+
+    expect(normalizedContract).toStrictEqual(normalizedData)
+    expect(formValues).toStrictEqual(formValuesBeforeNormalization)
   })
 
   test("Normalize Contract data (A3 indexed)", () => {
