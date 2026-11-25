@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.6.7 2026-11-25
+
+- FIX: Normalize email addresses to lowercase before submission new forms while preserving the original input
+
 ## 8.6.6 2026-11-12
 
 - FIX: Use the correct ERP self-consumption field in the contract summary
