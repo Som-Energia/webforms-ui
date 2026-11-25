@@ -285,6 +285,26 @@ describe("PersonDataPhysical", () => {
     expect(screen.getByText("NAME_REQUIRED")).toBeInTheDocument()
   })
 
+  test.each(["email", "email2"])(
+    "preserves the original casing of %s on blur and marks it as touched",
+    async (field) => {
+      const props = buildRenderProps()
+      render(<ControlledPersonDataPhysical {...props} />)
+      const input = getInput(`new_member.${field}`)
+
+      fireEvent.change(input, { target: { value: "Nom.Cognom@EXEMPLE.CAT" } })
+      fireEvent.blur(input)
+
+      await waitFor(() => {
+        expect(input).toHaveValue("Nom.Cognom@EXEMPLE.CAT")
+        expect(props.setFieldTouchedSpy).toHaveBeenCalledWith(
+          `new_member.${field}`,
+          true,
+        )
+      })
+    },
+  )
+
   test("prevents pasting into the email confirmation field", () => {
     renderComponent()
 

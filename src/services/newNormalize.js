@@ -19,7 +19,7 @@ export const normalizeClient = (client) => {
     vat: client.nif,
     name: client.name,
     is_juridic: client.person_type === "physic-person" ? false : true,
-    email: client.email,
+    email: client.email?.toLowerCase(),
     phone: `${client.phone_code} ${client.phone}`,
     lang: client.language,
   }

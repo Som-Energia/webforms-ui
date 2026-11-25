@@ -806,17 +806,19 @@ describe("Check Member Form (normalize function)", () => {
 })
 
 describe("Check Member new Form (normalize function)", () => {
-  test("Normalize Member data (phisical)", () => {
-    expect(
-      newNormalizeMember(memberCases.newNewMemberPhisical.entryValues),
-    ).toStrictEqual(memberCases.newNewMemberPhisical.normalizedData)
-  })
+  test.each(["newNewMemberPhisical", "newNewMemberJuridical"])(
+    "normalizes the email in %s without changing the original values",
+    (memberType) => {
+      const values = structuredClone(memberCases[memberType].entryValues)
+      values.new_member.email = values.new_member.email.toUpperCase()
+      const original = structuredClone(values)
 
-  test("Normalize Member data (juridical)", () => {
-    expect(
-      newNormalizeMember(memberCases.newNewMemberJuridical.entryValues),
-    ).toStrictEqual(memberCases.newNewMemberJuridical.normalizedData)
-  })
+      expect(newNormalizeMember(values)).toStrictEqual(
+        memberCases[memberType].normalizedData,
+      )
+      expect(values).toStrictEqual(original)
+    },
+  )
 
   test("Normalize Member data maps credit-card payments and empty physical birthdates", () => {
     expect(
