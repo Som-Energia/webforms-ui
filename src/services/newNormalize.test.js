@@ -74,36 +74,26 @@ describe("Check Contract new Form (normalize function)", () => {
     ).toStrictEqual(newContractCases.alreadyMember.normalizedData)
   })
 
-  test("sends the sponsored holder email in lowercase without changing the form values", () => {
-    const { entryValues, normalizedData } = newContractCases.sponsored
+  test.each(["sponsored", "newMember"])(
+    "normalizes the email for %s without changing the form values",
+    (contractCase) => {
+      const { entryValues, normalizedData } = newContractCases[contractCase]
 
-    const formValues = structuredClone(entryValues)
-    formValues.new_member.email = formValues.new_member.email.toUpperCase()
-    const formValuesBeforeNormalization = structuredClone(formValues)
+      const formValues = structuredClone(entryValues)
+      formValues.new_member.email = formValues.new_member.email.toUpperCase()
+      const formValuesBeforeNormalization = structuredClone(formValues)
 
-    const normalizedContract = newNormalizeContract(formValues)
+      const normalizedContract = newNormalizeContract(formValues)
 
-    expect(normalizedContract).toStrictEqual(normalizedData)
-    expect(formValues).toStrictEqual(formValuesBeforeNormalization)
-  })
+      expect(normalizedContract).toStrictEqual(normalizedData)
+      expect(formValues).toStrictEqual(formValuesBeforeNormalization)
+    },
+  )
 
   test("Normalize Contract data (campaign-offer)", () => {
     expect(
       newNormalizeContract(newContractCases.campaign.entryValues),
     ).toStrictEqual(newContractCases.campaign.normalizedData)
-  })
-
-  test("sends the new member email in lowercase without changing the form values", () => {
-    const { entryValues, normalizedData } = newContractCases.newMember
-
-    const formValues = structuredClone(entryValues)
-    formValues.new_member.email = formValues.new_member.email.toUpperCase()
-    const formValuesBeforeNormalization = structuredClone(formValues)
-
-    const normalizedContract = newNormalizeContract(formValues)
-
-    expect(normalizedContract).toStrictEqual(normalizedData)
-    expect(formValues).toStrictEqual(formValuesBeforeNormalization)
   })
 
   test("Normalize Contract data (A3 indexed)", () => {
