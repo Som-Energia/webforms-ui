@@ -1,3 +1,4 @@
+import { buildInitialValues } from "../containers/NewContractMember/newContractMember.values"
 import {
   newNormalizeContract,
   normalizeAddress,
@@ -68,6 +69,23 @@ describe("Check Attachments (normalize function)", () => {
 })
 
 describe("Check Contract new Form (normalize function)", () => {
+  test("includes the sponsored token from initial values in the payload", () => {
+    const { token } = buildInitialValues("ca", {
+      tariff_mode: "periods",
+      token: "example-token",
+    })
+    const values = { ...newContractCases.sponsored.entryValues, token }
+
+    expect(newNormalizeContract(values).token).toBe("example-token")
+  })
+
+  test("omits the token when it is not provided", () => {
+    const values = buildInitialValues("ca", { tariff_mode: "periods" })
+    expect(values).not.toHaveProperty("token")
+    expect(
+      newNormalizeContract(newContractCases.sponsored.entryValues),
+    ).not.toHaveProperty("token")
+  })
   test("Normalize Contract data (alreadyMember)", () => {
     expect(
       newNormalizeContract(newContractCases.alreadyMember.entryValues),

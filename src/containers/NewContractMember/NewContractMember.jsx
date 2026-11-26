@@ -87,6 +87,8 @@ const NewContractMemberForm = (props) => {
   const gurb_id = searchParams.get("gurb_id")
   const owner = searchParams.get("owner")
   const lead_tag = searchParams.get("lead_tag")
+  const token = searchParams.get("token")
+  const tt = searchParams.get("tt")
 
   const [redsysURL, setRedsysURL] = useState("")
   const [redsysData, setRedsysData] = useState()
@@ -105,9 +107,14 @@ const NewContractMemberForm = (props) => {
   const [sending, setSending] = useState(false)
   const [signatureCompleted, setSignatureCompleted] = useState(false)
 
-  const [activeStep, setActiveStep] = useState(
-    initStep ? parseInt(initStep) : 0,
+  const [initialStep] = useState(() =>
+    initStep !== undefined && initStep !== null
+      ? Number(initStep)
+      : tt === "sponsoredContract"
+        ? 2
+        : 0,
   )
+  const [activeStep, setActiveStep] = useState(initialStep)
   const [validationSteps, setValidationSteps] = useState([
     newContractMemberQuestionValidations,
   ])
@@ -154,8 +161,12 @@ const NewContractMemberForm = (props) => {
   }, [activeStep])
 
   const initialValues = useMemo(
-    () => buildInitialValues(i18n.language, { tariff_mode: tariff }),
-    [i18n.language, tariff],
+    () =>
+      buildInitialValues(i18n.language, {
+        tariff_mode: tariff,
+        token: tt === "sponsoredContract" ? token : undefined,
+      }),
+    [i18n.language, tariff, token, tt],
   )
 
   const validationSchemasLinkMember = [
@@ -538,6 +549,14 @@ const NewContractMemberForm = (props) => {
       }
     }
 
+    if (tt === "sponsoredContract" && initialStep === 2) {
+      return {
+        ...initialValues,
+        has_member: "member-link",
+        ...(sendSignaturit ? { send_email: true } : {}),
+      }
+    }
+
     if (sendSignaturit) {
       return {
         ...initialValues,
@@ -550,8 +569,10 @@ const NewContractMemberForm = (props) => {
     CampaignNumMember,
     CampaignVAT,
     initialValues,
+    initialStep,
     specialCampaign,
     sendSignaturit,
+    tt,
   ])
 
   if (
@@ -559,6 +580,12 @@ const NewContractMemberForm = (props) => {
     specialCampaign === "NON_MEMBER_CAMPAIGN"
   ) {
     setValidationSchemaAndSteps("campaign-offer")
+  } else if (
+    Object.keys(formSteps).length === 0 &&
+    tt === "sponsoredContract" &&
+    initialStep === 2
+  ) {
+    setValidationSchemaAndSteps("member-link")
   }
 
   return (
@@ -614,7 +641,7 @@ const NewContractMemberForm = (props) => {
                         justifyContent: redsysURL ? "center" : "space-between",
                         alignItems: "center",
                       }}>
-                      {activeStep !== initStep && (
+                      {activeStep !== initialStep && (
                         <Grid item size={{ sm: 2, xs: 12 }}>
                           <PrevButton
                             disabled={

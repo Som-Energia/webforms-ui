@@ -23,6 +23,7 @@ El submit final no només envia el formulari: pot acabar en resultat local o en 
 
 - `linked_member` pot acabar sent `already_member`, `sponsored` o `new_member`.
 - `campaign-offer` es normalitza com a cas patrocinat.
+- Si la URL inclou `tt=sponsoredContract` i un `token`, el formulari conserva el token als valors inicials i l'envia com a camp `token` del payload final.
 - `has_light` i `previous_holder` determinen el `process` (`A3`, `C1`, `C2`).
 - `has_selfconsumption` decideix si s'envia `self_consumption`.
 - si hi ha adjunts al punt de subministrament, es converteixen a `attachments` amb categoria dependent del procés.
